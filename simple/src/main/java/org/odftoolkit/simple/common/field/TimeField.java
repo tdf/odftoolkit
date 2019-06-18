@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -38,7 +38,7 @@ import org.odftoolkit.simple.Component;
 
 /**
  * TimeField displays a time, by default this is the current time.
- * 
+ *
  * @since 0.5
  */
 public class TimeField extends Field {
@@ -79,7 +79,7 @@ public class TimeField extends Field {
 	/**
 	 * Set the format of this time field. Time format pattern is the same as
 	 * {@link java.text.SimpleDateFormat SimpleDateFormat}.
-	 * 
+	 *
 	 * @param formatString
 	 *            the format string of this time.
 	 * @see java.text.SimpleDateFormat
@@ -107,7 +107,7 @@ public class TimeField extends Field {
 
 	/**
 	 * Set whether the time value of this field is fixed.
-	 * 
+	 *
 	 * @param isFixed
 	 *            if <code>true</code>, the time value shall be preserved,
 	 *            otherwise it may be replaced with a new value in future edits.
@@ -119,7 +119,7 @@ public class TimeField extends Field {
 	/**
 	 * Return an instance of <code>TextTimeElement</code> which represents this
 	 * feature.
-	 * 
+	 *
 	 * @return an instance of <code>TextTimeElement</code>
 	 */
 	public TextTimeElement getOdfElement() {

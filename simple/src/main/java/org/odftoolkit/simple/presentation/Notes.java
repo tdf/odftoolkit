@@ -44,7 +44,7 @@ import org.w3c.dom.NodeList;
  * <code>Notes</code> represents the presentation notes feature of the ODF
  * document. <code>Notes</code> provides methods to creates notes, add content,
  * add list, etc.
- * 
+ *
  */
 public class Notes extends Component implements ListContainer {
 
@@ -56,7 +56,7 @@ public class Notes extends Component implements ListContainer {
 	 * <p>
 	 * The end user isn't allowed to create it directly, otherwise an
 	 * <code>IllegalStateException</code> will be thrown.
-	 * 
+	 *
 	 *@since 0.3.5
 	 */
 	public static class NotesBuilder {
@@ -69,7 +69,7 @@ public class Notes extends Component implements ListContainer {
 		 * PresentationDocument} constructor. The end user isn't allowed to call
 		 * it directly, otherwise an <code>IllegalStateException</code> will be
 		 * thrown.
-		 * 
+		 *
 		 * @param doc
 		 *            the owner <code>PresentationDocument</code>.
 		 * @throws IllegalStateException
@@ -86,7 +86,7 @@ public class Notes extends Component implements ListContainer {
 		/**
 		 * Get a presentation notes page instance by an instance of
 		 * <code>PresentationNotesElement</code>.
-		 * 
+		 *
 		 * @param noteElement
 		 *            an instance of <code>PresentationNotesElement</code>
 		 * @return an instance of <code>Notes</code> that can represent
@@ -110,7 +110,7 @@ public class Notes extends Component implements ListContainer {
 	/**
 	 * Get a presentation notes page instance by an instance of
 	 * <code>PresentationNotesElement</code>.
-	 * 
+	 *
 	 * @param noteElement
 	 *            an instance of <code>PresentationNotesElement</code>
 	 * @return an instance of <code>Notes</code> that can represent
@@ -126,7 +126,7 @@ public class Notes extends Component implements ListContainer {
 	/**
 	 * Return an instance of <code>PresentationNotesElement</code> which
 	 * represents presentation notes page feature.
-	 * 
+	 *
 	 * @return an instance of <code>PresentationNotesElement</code>
 	 */
 	public PresentationNotesElement getOdfElement() {
@@ -135,7 +135,7 @@ public class Notes extends Component implements ListContainer {
 
 	/**
 	 * insert some text to the notes page
-	 * 
+	 *
 	 * @param text
 	 *            the text that need to insert in the notes page
 	 */

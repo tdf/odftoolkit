@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -43,12 +43,12 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.WritingMode;
 /**
  * This class represents the master page style settings. It provides methods to
  * access page layout styles. More functions will be added latter.
- * 
+ *
  * <p>
  * This class is a corresponding high level class for element
  * "style:master-page". It provides methods to access the attributes and
  * children of "style:master-page".
- * 
+ *
  * @since 0.8
  */
 public class MasterPage {
@@ -58,7 +58,7 @@ public class MasterPage {
 	 * get the readable element and the writable element of a page layout style.
 	 * It also provides method to get the readable element and the writable
 	 * element of page layout properties .
-	 * 
+	 *
 	 */
 	class StyleHandlerImpl {
 
@@ -71,10 +71,10 @@ public class MasterPage {
 
 		/**
 		 * Constructor of StyleHandlerImpl
-		 * 
+		 *
 		 * @param element
 		 *            - the instance of master page element in an ODF document
-		 * 
+		 *
 		 */
 		public StyleHandlerImpl(OdfStylableElement element) {
 			mOdfElement = element;
@@ -93,7 +93,7 @@ public class MasterPage {
 		 * <p>
 		 * Note if you try to write style properties to the returned object,
 		 * errors will be met with.
-		 * 
+		 *
 		 * @return the page layout properties definition for this component,
 		 *         only for read function
 		 */
@@ -133,7 +133,7 @@ public class MasterPage {
 		 * <p>
 		 * An empty page layout properties definition will be created if there
 		 * is no explicit page layout properties definition.
-		 * 
+		 *
 		 * @return the page layout properties definition for this component, for
 		 *         read and write function
 		 * @throws Exception
@@ -159,7 +159,7 @@ public class MasterPage {
 		 * <p>
 		 * Note if you try to write style properties to the returned object,
 		 * errors will be met with.
-		 * 
+		 *
 		 * @return the style element
 		 * @see #getUsedPageLayoutStyleName()
 		 */
@@ -180,7 +180,7 @@ public class MasterPage {
 		 * <p>
 		 * An empty style definition will be created if there is no style
 		 * definition.
-		 * 
+		 *
 		 * @return the style element
 		 * @throws Exception
 		 *             if the corresponding <code>StylePageLayoutElement</code>
@@ -202,7 +202,7 @@ public class MasterPage {
 		 * Return a readable style element by style name.
 		 * <p>
 		 * If the style name is null, the default style will be returned.
-		 * 
+		 *
 		 * @param styleName
 		 *            - the style name
 		 * @return a readable style element
@@ -225,7 +225,7 @@ public class MasterPage {
 		 * If the style is shared, a copied style element would be returned.
 		 * <p>
 		 * If the style name is null, the default style will be copied.
-		 * 
+		 *
 		 * @param styleName
 		 *            - the style name
 		 * @return a writable style element
@@ -288,7 +288,7 @@ public class MasterPage {
 
 		/**
 		 * Return the referenced style name by this master page.
-		 * 
+		 *
 		 * @return - the referenced style name by this master page.
 		 */
 		public String getUsedPageLayoutStyleName() {
@@ -303,7 +303,7 @@ public class MasterPage {
 
 	/**
 	 * Constructor of MasterPage
-	 * 
+	 *
 	 * @param styleMasterPageElement
 	 *            - the instance of style:master-page element in an ODF document
 	 */
@@ -316,7 +316,7 @@ public class MasterPage {
 	 * <p>
 	 * If there is no existing master page defined by this name in the document,
 	 * a new master with this name will be created and returned.
-	 * 
+	 *
 	 * @param doc
 	 *            - the document to which the master page belongs.
 	 * @param name
@@ -342,7 +342,7 @@ public class MasterPage {
 	 * Get the style handler of this master page.
 	 * <p>
 	 * The style handler is an instance of StyleHandlerImpl
-	 * 
+	 *
 	 * @return an instance of StyleHandlerImpl
 	 * @see StyleHandlerImpl
 	 */
@@ -361,7 +361,7 @@ public class MasterPage {
 	 * <p>
 	 * This represents the attribute <code>style:name</code> of
 	 * <code>style:master-page</code>.
-	 * 
+	 *
 	 * @return the style name of this master page.
 	 */
 	public String getName() {
@@ -371,7 +371,7 @@ public class MasterPage {
 	/**
 	 * Get the top margin of the <code>PageLayoutProperties</code> referenced by
 	 * this master page.
-	 * 
+	 *
 	 * @return the top margin (in Millimeter)
 	 */
 	public double getMarginTop() {
@@ -383,7 +383,7 @@ public class MasterPage {
 	/**
 	 * Get the right margin of the <code>PageLayoutProperties</code> referenced
 	 * by this master page.
-	 * 
+	 *
 	 * @return the right margin (in Millimeter)
 	 */
 	public double getMarginRight() {
@@ -395,7 +395,7 @@ public class MasterPage {
 	/**
 	 * Get the left margin of the <code>PageLayoutProperties</code> referenced
 	 * by this master page.
-	 * 
+	 *
 	 * @return the left margin (in Millimeter)
 	 */
 	public double getMarginLeft() {
@@ -407,7 +407,7 @@ public class MasterPage {
 	/**
 	 * Get the bottom margin of the <code>PageLayoutProperties</code> referenced
 	 * by this master page.
-	 * 
+	 *
 	 * @return the bottom margin (in Millimeter)
 	 */
 	public double getMarginBottom() {
@@ -422,7 +422,7 @@ public class MasterPage {
 	 * <p>
 	 * If the margin size is set to zero, the corresponding margin definition
 	 * will be removed.
-	 * 
+	 *
 	 * @param marginTop
 	 *            the size of the top margin (in Millimeter)
 	 * @param marginBottom
@@ -434,7 +434,7 @@ public class MasterPage {
 	 * @throws Exception
 	 *             if the corresponding <code>StylePageLayoutElement</code>
 	 *             cannot be accessed for write.
-	 * 
+	 *
 	 */
 	public void setMargins(double marginTop, double marginBottom,
 			double marginLeft, double marginRight) throws Exception {
@@ -449,7 +449,7 @@ public class MasterPage {
 	/**
 	 * Get the page width of the the <code>PageLayoutProperties</code>
 	 * referenced by this master page.
-	 * 
+	 *
 	 * @return the size of page width (in Millimeter)
 	 */
 	public double getPageWidth() {
@@ -463,7 +463,7 @@ public class MasterPage {
 	 * this master page.
 	 * <p>
 	 * If the size is set to zero, the page width definition will be removed.
-	 * 
+	 *
 	 * @param pageWidth
 	 *            the size of the page width (in Millimeter)
 	 * @throws Exception
@@ -479,7 +479,7 @@ public class MasterPage {
 	/**
 	 * Get the page height of the the <code>PageLayoutProperties</code>
 	 * referenced by this master page.
-	 * 
+	 *
 	 * @return the size of page height (in Millimeter)
 	 */
 	public double getPageHeight() {
@@ -493,7 +493,7 @@ public class MasterPage {
 	 * by this master page.
 	 * <p>
 	 * If the size is set to zero, the page height definition will be removed.
-	 * 
+	 *
 	 * @param pageHeight
 	 *            the size of the page height (in Millimeter)
 	 * @throws Exception
@@ -509,7 +509,7 @@ public class MasterPage {
 	/**
 	 * Get the number format of the the <code>PageLayoutProperties</code>
 	 * referenced by this master page.
-	 * 
+	 *
 	 * @return the value of number format
 	 */
 	public String getNumberFormat() {
@@ -521,7 +521,7 @@ public class MasterPage {
 	/**
 	 * Set the number format of the <code>PageLayoutProperties</code> referenced
 	 * by this master page.
-	 * 
+	 *
 	 * @param format
 	 *            specify the number format. The values of the style:num-format
 	 *            attribute are 1, i, I, string, an empty string, a or A.
@@ -538,7 +538,7 @@ public class MasterPage {
 	/**
 	 * Get the print orientation of the the <code>PageLayoutProperties</code>
 	 * referenced by this master page.
-	 * 
+	 *
 	 * @return the value of print orientation
 	 */
 	public String getPrintOrientation() {
@@ -553,7 +553,7 @@ public class MasterPage {
 	 * <p>
 	 * If the parameter <code>orientation</code> is null, the print orientation
 	 * definition will be removed.
-	 * 
+	 *
 	 * @param orientation
 	 *            - the print orientation
 	 * @throws Exception
@@ -570,7 +570,7 @@ public class MasterPage {
 	/**
 	 * Get the writing mode of the the <code>PageLayoutProperties</code>
 	 * referenced by this master page.
-	 * 
+	 *
 	 * @return the value of writing mode
 	 */
 	public String getWritingMode() {
@@ -582,7 +582,7 @@ public class MasterPage {
 	/**
 	 * Set the writing mode of the <code>PageLayoutProperties</code> referenced
 	 * by this master page.
-	 * 
+	 *
 	 * @param mode
 	 *            - writing mode
 	 * @throws Exception
@@ -598,7 +598,7 @@ public class MasterPage {
 	/**
 	 * Get the footnote max height of the the <code>PageLayoutProperties</code>
 	 * referenced by this master page.
-	 * 
+	 *
 	 * @return the value of footnote max height
 	 */
 	public double getFootnoteMaxHeight() {
@@ -610,7 +610,7 @@ public class MasterPage {
 	/**
 	 * Set the footnote max height of the <code>PageLayoutProperties</code>
 	 * referenced by this master page.
-	 * 
+	 *
 	 * @param height
 	 *            - the max height of a footnote area
 	 *@throws Exception
@@ -627,7 +627,7 @@ public class MasterPage {
 	 * Get the way in which a footnote separator line aligned to a page, which
 	 * is set by the <code>PageLayoutProperties</code> referenced by this master
 	 * page.
-	 * 
+	 *
 	 * @return the adjustment of a footnote separator line
 	 */
 	public String getFootnoteSepAdjustment() {
@@ -639,7 +639,7 @@ public class MasterPage {
 	/**
 	 * Get the color of a footnote separator which is set by the
 	 * <code>PageLayoutProperties</code> referenced by this master page.
-	 * 
+	 *
 	 * @return the color of a footnote separator line
 	 */
 	public String getFootnoteSepColor() {
@@ -652,7 +652,7 @@ public class MasterPage {
 	 * Get the distance between a footnote separator and the footnote area,
 	 * which is set by the <code>PageLayoutProperties</code> referenced by this
 	 * master page.
-	 * 
+	 *
 	 * @return the distance after a footnote separator line
 	 */
 	public double getFootnoteSepDistanceAfterSep() {
@@ -665,7 +665,7 @@ public class MasterPage {
 	 * Get the distance between the text area and the footnote separator, which
 	 * is set by the <code>PageLayoutProperties</code> referenced by this master
 	 * page.
-	 * 
+	 *
 	 * @return the distance before a footnote separator line
 	 */
 	public double getFootnoteSepDistanceBeforeSep() {
@@ -677,7 +677,7 @@ public class MasterPage {
 	/**
 	 * Get the line style of a footnote separator which is set by the
 	 * <code>PageLayoutProperties</code> referenced by this master page.
-	 * 
+	 *
 	 * @return the line style of a footnote separator line
 	 */
 	public String getFootnoteSepLineStyle() {
@@ -689,7 +689,7 @@ public class MasterPage {
 	/**
 	 * Get the real width of a footnote separator which is set by the
 	 * <code>PageLayoutProperties</code> referenced by this master page.
-	 * 
+	 *
 	 * @return the real width of a footnote separator line
 	 */
 	public double getFootnoteSepWidth() {
@@ -701,7 +701,7 @@ public class MasterPage {
 	/**
 	 * Get the thickness of a footnote separator which is set by the
 	 * <code>PageLayoutProperties</code> referenced by this master page.
-	 * 
+	 *
 	 * @return the thickness of a footnote separator line
 	 */
 	public double getFootnoteSepThickness() {
@@ -713,13 +713,13 @@ public class MasterPage {
 	/**
 	 * Set the foot note separator properties of the
 	 * <code>PageLayoutProperties</code> referenced by this master page.
-	 * 
+	 *
 	 * @throws Exception
 	 *             if the corresponding <code>StylePageLayoutElement</code>
 	 *             cannot be accessed for write.
 	 * @see PageLayoutProperties#setFootnoteSepProperties(AdjustmentStyle,
 	 *      Color, double, double, LineStyle, Percent, double)
-	 * 
+	 *
 	 */
 	public void setFootnoteSepProperties(AdjustmentStyle adjustment,
 			Color color, double distanceAfterSep, double distanceBeforeSep,

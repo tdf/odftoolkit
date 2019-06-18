@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -21,17 +21,17 @@ package org.odftoolkit.simple.style;
 
 /**
  * A <tt>NumberFormat</tt> specifies a numbering sequence.
- * 
+ *
  * @since 0.5
  */
 public enum NumberFormat {
 
-	HINDU_ARABIC_NUMBER("1"), 
-	LOWERCASE_LATIN_ALPHABET("a"), 
+	HINDU_ARABIC_NUMBER("1"),
+	LOWERCASE_LATIN_ALPHABET("a"),
 	UPPERCASE_LATIN_ALPHABET("A"),
 	LOWERCASE_ROMAN_NUMBER("i"),
 	UPPERCASE_ROMAN_NUMBER("I");
-	
+
 	private final String numberFormat;
 
 	NumberFormat(String format) {

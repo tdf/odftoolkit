@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -91,10 +91,10 @@ public class JarManifest {
 	/**
 	 * The main method is meant to be called when the JAR is being executed,
 	 * e.g. "java -jar simple-odf.jar" and provides version information:
-	 * 
+	 *
 	 * simple-odf 0.3 (build 20110201-1729) from http://odftoolkit.org
 	 * supporting ODF 1.2
-	 * 
+	 *
 	 * Allowing version access from the JAR without the need to unzip the JAR
 	 * nor naming the JAR (requiring the change of class path for every version
 	 * due to JAR naming change).
@@ -108,7 +108,7 @@ public class JarManifest {
 
 	/**
 	 * Return the name of Simple ODF;
-	 * 
+	 *
 	 * @return the Simple ODF library name
 	 */
 	public static String getSimpleOdfName() {
@@ -117,7 +117,7 @@ public class JarManifest {
 
 	/**
 	 * Returns the Simple ODF library title
-	 * 
+	 *
 	 * @return A string containing both the name and the version of the Simple
 	 *         ODF library.
 	 */
@@ -127,7 +127,7 @@ public class JarManifest {
 
 	/**
 	 * Return the version of the Simple ODF library (ie. simple-odf.jar)
-	 * 
+	 *
 	 * @return the Simple ODF library version
 	 */
 	public static String getSimpleOdfVersion() {
@@ -136,7 +136,7 @@ public class JarManifest {
 
 	/**
 	 * Return the website of the Simple ODF library (ie. simple-odf.jar)
-	 * 
+	 *
 	 * @return the Simple ODF library website
 	 */
 	public static String getSimpleOdfWebsite() {
@@ -146,7 +146,7 @@ public class JarManifest {
 	/**
 	 * Return the name of the one building the Simple ODF library (ie.
 	 * simple-odf.jar)
-	 * 
+	 *
 	 * @return the name of the Simple ODF library builder
 	 */
 	public static String getSimpleOdfBuildResponsible() {
@@ -155,7 +155,7 @@ public class JarManifest {
 
 	/**
 	 * Return the date when Simple ODF had been build
-	 * 
+	 *
 	 * @return the date of the build
 	 */
 	public static String getSimpleOdfBuildDate() {
@@ -165,7 +165,7 @@ public class JarManifest {
 	/**
 	 * Returns the version of the OpenDocument specification covered by the
 	 * Simple ODF library (ie. simple-odf.jar)
-	 * 
+	 *
 	 * @return the supported ODF version number
 	 */
 	public static String getSimpleOdfSupportedOdfVersion() {

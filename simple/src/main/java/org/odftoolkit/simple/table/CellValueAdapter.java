@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -28,22 +28,22 @@ package org.odftoolkit.simple.table;
  * type can be adapted to "float" automatically with the help of
  * <code>CellValueAdapter</code>. </br>
  * Different adapter realizations have different adaptive rules.
- * 
+ *
  * @see org.odftoolkit.simple.table.Cell#setDisplayText
  * @see org.odftoolkit.simple.common.navigation.CellSelection
- * 
+ *
  * @since 0.3
  */
 public interface CellValueAdapter {
-	
+
 	/**
 	 * The default cell value adapter.
 	 */
 	public static final CellValueAdapter DEFAULT_VALUE_ADAPTER = new DefaultCellValueAdapter();
-	
+
 	/**
 	 * Adapt string content to a more proper cell value type as need.
-	 * 
+	 *
 	 * @param cell  the cell need to value adapt.
 	 * @param value the value to be adapted.
 	 */

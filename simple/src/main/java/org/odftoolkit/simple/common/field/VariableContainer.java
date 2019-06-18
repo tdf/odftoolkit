@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -25,12 +25,12 @@ import org.odftoolkit.simple.common.field.VariableField.VariableType;
 /**
  * VariableContainer is a container which maintains the declared variables.
  * Variable(s) can be added in this container.
- * 
+ *
  * @see VariableField
  * @see org.odftoolkit.simple.TextDocument
  * @see org.odftoolkit.simple.text.Header
  * @see org.odftoolkit.simple.text.Footer
- * 
+ *
  * @since 0.5
  */
 public interface VariableContainer {
@@ -42,26 +42,26 @@ public interface VariableContainer {
 	 * <p>
 	 * The variable declare section may be <text:variable-decls>,
 	 * <text:user-field-decls> or <text:sequence-decls>.
-	 * 
+	 *
 	 * @return container element which can hold variable declare section.
 	 */
 	public OdfElement getVariableContainerElement();
 
 	/**
 	 * Declare a new variable field to this container.
-	 * 
+	 *
 	 * @param name
 	 *            the unique name of this variable field.
 	 * @param type
 	 *            the type of this variable field.
-	 * 
+	 *
 	 * @return declared variable field.
 	 */
 	public VariableField declareVariable(String name, VariableType type);
 
 	/**
 	 * Return the declared variable by name.
-	 * 
+	 *
 	 * @param name
 	 *            the unique name of this variable field.
 	 * @return the declared variable.

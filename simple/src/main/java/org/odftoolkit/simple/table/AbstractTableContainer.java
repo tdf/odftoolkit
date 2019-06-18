@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -36,7 +36,7 @@ import org.w3c.dom.NodeList;
  * interface, with a default implementation for every method defined in
  * TableContainer , except getTableContainerElement(). Each subclass must
  * implement the abstract method getTableContainerElement().
- * 
+ *
  * @since 0.4.5
  */
 public abstract class AbstractTableContainer implements TableContainer {
@@ -46,16 +46,16 @@ public abstract class AbstractTableContainer implements TableContainer {
 	protected AbstractTableContainer() {
 		tableBuilder = new Table.TableBuilder(this);
 	}
-	
+
 	/**
 	 * Add a new Table to this container.
-	 * 
+	 *
 	 * @return added table.
 	 */
 	public Table addTable() {
 		return Table.newTable(this);
 	}
-	
+
 	/**
 	 * Add a new Table to this container with a specified row number and column
 	 * number.
@@ -63,7 +63,7 @@ public abstract class AbstractTableContainer implements TableContainer {
 	 * The table will be inserted at the end of the tableContainer. An unique
 	 * table name will be given, you may set a custom table name using the
 	 * <code>setTableName</code> method.
-	 * 
+	 *
 	 * @param numRows
 	 *            the row number
 	 * @param numCols
@@ -73,10 +73,10 @@ public abstract class AbstractTableContainer implements TableContainer {
 	public Table addTable(int numRows, int numCols) {
 		return Table.newTable(this, numRows, numCols);
 	}
-	
+
 	/**
 	 * Return an instance of table feature with the specific table name.
-	 * 
+	 *
 	 * @param name
 	 *            of the table beeing searched for.
 	 * @return an instance of table feature with the specific table name.
@@ -99,7 +99,7 @@ public abstract class AbstractTableContainer implements TableContainer {
 
 	/**
 	 * Return a list of table features in this container.
-	 * 
+	 *
 	 * @return a list of table features in this container.
 	 */
 	public List<Table> getTableList() {
@@ -120,7 +120,7 @@ public abstract class AbstractTableContainer implements TableContainer {
 	 * Return the table builder of this container. Every container has a table
 	 * builder, which supplies all of the table creation realization, for
 	 * example newTable().
-	 * 
+	 *
 	 * @return the table builder of this container.
 	 * @since 0.3.5
 	 */

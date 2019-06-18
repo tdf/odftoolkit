@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -37,7 +37,7 @@ public class PatternField extends Field {
 	 * Get an instance of pattern field by an instance of FormFormattedTextElement,
 	 * while searching the document content to make a bind with the DrawControl
 	 * which already reference to this pattern field.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of FormFormattedTextElement
 	 * @return an instance of pattern field

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -21,7 +21,7 @@ package org.odftoolkit.simple.form;
 
 /**
  * This class defines the common used constants in form handling methods.
- * 
+ *
  * @since 0.8
  */
 public class FormTypeDefinition {
@@ -30,7 +30,7 @@ public class FormTypeDefinition {
 	 * <p>
 	 * This attibute specifies the location of an image relative to the text of
 	 * a control.
-	 * 
+	 *
 	 */
 	public static enum FormImageLocation {
 		BOTTOM("bottom"), CENTER("center"), END("end"), START("start"), TOP(

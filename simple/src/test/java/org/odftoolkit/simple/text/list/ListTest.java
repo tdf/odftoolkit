@@ -526,8 +526,8 @@ public class ListTest {
 			}
 		}
 	}
-	
-    
+
+
 	@Test
 	public void testInsertListBefore() {
 		TextDocument doc;
@@ -548,5 +548,5 @@ public class ListTest {
 	private TextDocument readListTestDocument() throws Exception {
 		return (TextDocument) TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("ListTest.odt"));
 	}
-	
+
 }

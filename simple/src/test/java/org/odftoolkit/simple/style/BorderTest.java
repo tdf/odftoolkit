@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -86,8 +86,8 @@ public class BorderTest {
 		}
 
 	}
-	
-	
+
+
 	@Test
 	public void testSetWidth() {
 		Border borderbase = new Border(new Color("#00ccff"), 0.0701, 0.0008, 0.0346, SupportedLinearMeasure.IN);
@@ -97,7 +97,7 @@ public class BorderTest {
 			Table table = doc.getTableByName("A");
 			//setWidth
 			borderbase.setWidth(0.056);
-			
+
 			Cell cell = table.getCellByPosition("A14");
 			cell.setBorders(CellBordersType.LEFT, borderbase);
 			cell.setBorders(CellBordersType.TOP, borderbase);
@@ -115,8 +115,8 @@ public class BorderTest {
 		}
 
 	}
-	
-	
+
+
 	@Test
 	public void testSGetInnerLineWidth() {
 		Border borderbase = new Border(new Color("#00ccff"), 0.0701, 0.0008, 0.0346, SupportedLinearMeasure.IN);
@@ -126,7 +126,7 @@ public class BorderTest {
 			Table table = doc.getTableByName("A");
 			//setWidth
 			borderbase.setInnerLineWidth(0.0156);
-			
+
 			Cell cell = table.getCellByPosition("A14");
 			cell.setBorders(CellBordersType.LEFT, borderbase);
 			cell.setBorders(CellBordersType.TOP, borderbase);
@@ -144,8 +144,8 @@ public class BorderTest {
 		}
 
 	}
-	
-	
+
+
 	@Test
 	public void testSGetDistance() {
 		Border borderbase = new Border(new Color("#00ccff"), 0.0701, 0.0008, 0.0346, SupportedLinearMeasure.IN);
@@ -156,7 +156,7 @@ public class BorderTest {
 			//setWidth
 		//	borderbase.setInnerLineWidth(0.0156);
 			borderbase.setDistance(0.123);
-			
+
 			Cell cell = table.getCellByPosition("A14");
 			cell.setBorders(CellBordersType.LEFT, borderbase);
 			cell.setBorders(CellBordersType.TOP, borderbase);
@@ -174,8 +174,8 @@ public class BorderTest {
 		}
 
 	}
-	
-	
+
+
 	@Test
 	public void testSGetOuterLineWidth() {
 		Border borderbase = new Border(new Color("#00ccff"), 0.0701, 0.0008, 0.0346, SupportedLinearMeasure.IN);
@@ -183,11 +183,11 @@ public class BorderTest {
 			SpreadsheetDocument doc = SpreadsheetDocument.loadDocument(ResourceUtilities
 					.getTestResourceAsStream(filename));
 			Table table = doc.getTableByName("A");
-			
+
 			System.out.println(borderbase.getOuterLineWidth());
 			borderbase.setOuterLineWidth(0.125);
-			System.out.println(borderbase.getOuterLineWidth());			
-			
+			System.out.println(borderbase.getOuterLineWidth());
+
 			Cell cell = table.getCellByPosition("A14");
 			cell.setBorders(CellBordersType.LEFT, borderbase);
 			cell.setBorders(CellBordersType.TOP, borderbase);
@@ -204,8 +204,8 @@ public class BorderTest {
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testSGetLinearMeasure() {
 		Border borderbase = new Border(new Color("#00ccff"), 0.0701, 0.0008, 0.0346, SupportedLinearMeasure.IN);
@@ -213,9 +213,9 @@ public class BorderTest {
 			SpreadsheetDocument doc = SpreadsheetDocument.loadDocument(ResourceUtilities
 					.getTestResourceAsStream(filename));
 			Table table = doc.getTableByName("A");
-			
+
 			borderbase.setLinearMeasure(StyleTypeDefinitions.SupportedLinearMeasure.CM);
-			
+
 			Cell cell = table.getCellByPosition("A14");
 			cell.setBorders(CellBordersType.LEFT, borderbase);
 			cell.setBorders(CellBordersType.TOP, borderbase);
@@ -232,5 +232,5 @@ public class BorderTest {
 			Assert.fail();
 		}
 	}
-	
+
 }

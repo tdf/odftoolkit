@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -37,7 +37,7 @@ import org.w3c.dom.Node;
 /**
  * This is a decorator class of TextSelection, which help user replace a text
  * content with field.
- * 
+ *
  * @see org.odftoolkit.simple.common.field.Fields
  * @see org.odftoolkit.simple.common.field.AuthorField
  * @see org.odftoolkit.simple.common.field.ChapterField
@@ -50,7 +50,7 @@ import org.w3c.dom.Node;
  * @see org.odftoolkit.simple.common.field.TimeField
  * @see org.odftoolkit.simple.common.field.TitleField
  * @see org.odftoolkit.simple.common.field.VariableField
- * 
+ *
  * @since 0.5
  */
 public class FieldSelection extends Selection {
@@ -62,7 +62,7 @@ public class FieldSelection extends Selection {
 	/**
 	 * Replace the content with a simple field, such as author field, page
 	 * number field, date field and so on.
-	 * 
+	 *
 	 * @param fieldType
 	 *            the simple field type to replace.
 	 */
@@ -127,7 +127,7 @@ public class FieldSelection extends Selection {
 
 	/**
 	 * Replace the content with a reference field.
-	 * 
+	 *
 	 * @param field
 	 *            the reference field to replace.
 	 */
@@ -144,7 +144,7 @@ public class FieldSelection extends Selection {
 
 	/**
 	 * Replace the content with a variable field.
-	 * 
+	 *
 	 * @param field
 	 *            the variable field to replace.
 	 */
@@ -161,7 +161,7 @@ public class FieldSelection extends Selection {
 
 	/**
 	 * Replace the content with a condition field.
-	 * 
+	 *
 	 * @param condition
 	 *            the condition that determines which of the two text strings is
 	 *            displayed.
@@ -185,7 +185,7 @@ public class FieldSelection extends Selection {
 
 	/**
 	 * Replace the content with a hidden text field.
-	 * 
+	 *
 	 * @param condition
 	 *            the condition that determines whether the text string is
 	 *            displayed or not.
@@ -206,7 +206,7 @@ public class FieldSelection extends Selection {
 	/**
 	 * Apply a style to the selection so that the text style of this selection
 	 * will append the specified style.
-	 * 
+	 *
 	 * @param style
 	 *            the style can be from the current document or user defined
 	 * @throws InvalidNavigationException
@@ -223,7 +223,7 @@ public class FieldSelection extends Selection {
 	/**
 	 * Construct a FieldSelection with TextSelection. Then user can replace text
 	 * content with fields.
-	 * 
+	 *
 	 * @param selection
 	 *            the TextSelection to be decorated.
 	 */
@@ -237,7 +237,7 @@ public class FieldSelection extends Selection {
 	 * same container element will be updated automatically because the start
 	 * index of the following selections will be changed when the previous
 	 * selection has been deleted.
-	 * 
+	 *
 	 * @throws InvalidNavigationException
 	 *             if the selection is unavailable.
 	 */
@@ -248,7 +248,7 @@ public class FieldSelection extends Selection {
 
 	/**
 	 * Replace the text content of selection with a new string.
-	 * 
+	 *
 	 * @param newText
 	 *            the replace text String
 	 * @throws InvalidNavigationException
@@ -260,7 +260,7 @@ public class FieldSelection extends Selection {
 
 	/**
 	 * Paste this selection just after a specific selection.
-	 * 
+	 *
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException
@@ -273,7 +273,7 @@ public class FieldSelection extends Selection {
 
 	/**
 	 * Paste this selection just before a specific selection.
-	 * 
+	 *
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -57,7 +57,7 @@ public class TableSelectionTest {
 		try {
 			doc = (TextDocument) Document.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_FILE));
 			sourcedoc=TextDocument.newTextDocument();
-			
+
 			String tablename = "Table1";
 			int rowcount = 7, columncount = 5;
 			String[][] data = new String[rowcount][columncount];
@@ -78,8 +78,8 @@ public class TableSelectionTest {
 			}
 			Table table = Table.newTable(sourcedoc, rowlabels, columnlabels, data);
 			table.setTableName(tablename);
-			
-			
+
+
 			String tablename2 = "Table2";
 			int rowcount2 = 10, columncount2 = 4;
 			double[][] data2 = new double[rowcount2][columncount2];
@@ -101,7 +101,7 @@ public class TableSelectionTest {
 
 			Table table2 = Table.newTable(sourcedoc, rowlabels2, columnlabels2, data2);
 			table2.setTableName(tablename2);
-			
+
 			String tablename3 = "Table3";
 			int rownumber3 = 5;
 			int clmnumber3 = 3;
@@ -127,7 +127,7 @@ public class TableSelectionTest {
 		search = null;
 		//6 Simple, at the middle of original Paragraph, split original Paragraph, insert before the second Paragraph.
 		search = new TextNavigation("SIMPLE", doc);
-		
+
 		while (search.hasNext()) {
 				TextSelection item = (TextSelection) search.nextSelection();
 				TableSelection nextTableSelection=new TableSelection(item);
@@ -143,11 +143,11 @@ public class TableSelectionTest {
 				cell = newtable.getCellByPosition(1, 1);
 				Assert.assertEquals("string", cell.getValueType());
 		}
-	
-		
-		//2 Task1, #1 at the start of original Paragraph, #2 replace original Paragraph  
+
+
+		//2 Task1, #1 at the start of original Paragraph, #2 replace original Paragraph
 				search = new TextNavigation("Task1", doc);
-				 
+
 				while (search.hasNext()) {
 						TextSelection item = (TextSelection) search.nextSelection();
 						TableSelection nextTableSelection=new TableSelection(item);
@@ -160,11 +160,11 @@ public class TableSelectionTest {
 						Assert.assertEquals(1, newtable.getHeaderRowCount());
 						Assert.assertEquals(10 + 1, newtable.getRowCount());
 						Assert.assertEquals(4 + 1, newtable.getColumnCount());
-						
+
 						cell = newtable.getCellByPosition(1, 1);
 						Assert.assertEquals("float", cell.getValueType());
-				}		
-				//1 RESS%>, #1 at the end of original Paragraph, 
+				}
+				//1 RESS%>, #1 at the end of original Paragraph,
 				search = new TextNavigation("RESS%>", doc);
 
 				while (search.hasNext()) {
@@ -178,8 +178,8 @@ public class TableSelectionTest {
 						Assert.assertEquals(5, newtable.getRowCount());
 						Assert.assertEquals(3, newtable.getColumnCount());
 
-				}				
-				
+				}
+
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile("TestTableSelectionResult.odt"));
 		} catch (Exception e) {

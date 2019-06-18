@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -32,7 +32,7 @@ import org.odftoolkit.simple.Component;
  * <p>
  * NOTE: Before the document is opened in any editor, the value of this field is
  * invalid.
- * 
+ *
  * @since 0.5
  */
 public class AuthorField extends Field {
@@ -62,7 +62,7 @@ public class AuthorField extends Field {
 	 * feature. If this is an initial author field, an instance of
 	 * <code>TextAuthorInitialsElement</code> is returned, otherwise an instance
 	 * of <code>TextAuthorNameElement</code> is returned.
-	 * 
+	 *
 	 * @return an instance of <code>OdfElement</code>
 	 */
 	public OdfElement getOdfElement() {

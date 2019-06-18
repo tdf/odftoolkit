@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -43,7 +43,7 @@ import org.w3c.dom.NodeList;
  * label. The data may be a 2 dimensional double array, or a cell range address
  * of a sheet in Spreadsheet document. DataSet provides some convenient methods
  * for users to manipulate specific data series in the chart data.
- * 
+ *
  * @since 0.6
  */
 
@@ -77,7 +77,7 @@ public class DataSet {
 
 	/**
 	 * Creates a new DataSet.
-	 * 
+	 *
 	 * @param labels
 	 *            the label strings of this DataSet.
 	 * @param legends
@@ -100,7 +100,7 @@ public class DataSet {
 
 	/**
 	 * Creates a new DataSet.
-	 * 
+	 *
 	 * @param cellRangeAddress
 	 *            the cell range address, which is used as the data source.
 	 * @param spreadsheet
@@ -127,7 +127,7 @@ public class DataSet {
 	// return legend cell ranges
 	/**
 	 * Gets the local table cell range.
-	 * 
+	 *
 	 * @return the local table cell range,
 	 */
 	public String getLocalTableCellRanges(int seriesCount, int labelLength, Vector<String> seriesCellRange,
@@ -139,7 +139,7 @@ public class DataSet {
 
 	/**
 	 * Gets the cell range address list.
-	 * 
+	 *
 	 * @return the cell range address list.
 	 */
 	public CellRangeAddressList getCellRangeAddress() {
@@ -148,7 +148,7 @@ public class DataSet {
 
 	/**
 	 * Adds a data series at the end of current data set.
-	 * 
+	 *
 	 * @param legend
 	 *            legend for the data series.
 	 * @param values
@@ -168,7 +168,7 @@ public class DataSet {
 
 	/**
 	 * Adds a data series at the index in current data set.
-	 * 
+	 *
 	 * @param index
 	 *            the index the added data series will be located.
 	 * @param legend
@@ -189,7 +189,7 @@ public class DataSet {
 
 	/**
 	 * Updates the data series values according to the index of the data series.
-	 * 
+	 *
 	 * @param index
 	 *            the index of the data series in the data set.
 	 * @param values
@@ -207,7 +207,7 @@ public class DataSet {
 	/**
 	 * Updates the data series values according to the legend of the data
 	 * series.
-	 * 
+	 *
 	 * @param legend
 	 *            the chart legend of the data series.
 	 * @param values
@@ -224,7 +224,7 @@ public class DataSet {
 
 	/**
 	 * Removes a data series by the index of the data series in the data set.
-	 * 
+	 *
 	 * @param index
 	 *            index of the data series in the data set.
 	 */
@@ -235,7 +235,7 @@ public class DataSet {
 
 	/**
 	 * Remove a data series by the legend of the data series.
-	 * 
+	 *
 	 * @param legend
 	 *            the legend of the data series.
 	 */
@@ -246,7 +246,7 @@ public class DataSet {
 
 	/**
 	 * Gets the index of the data series by its legend.
-	 * 
+	 *
 	 * @param legend
 	 *            the legend of the data series.
 	 * @return index of the data series in the data set.
@@ -257,7 +257,7 @@ public class DataSet {
 
 	/**
 	 * Gets the legend of the data series by its index in the data set.
-	 * 
+	 *
 	 * @param index
 	 *            index of the data series in the data set.
 	 * @return the legend of the data series.
@@ -269,7 +269,7 @@ public class DataSet {
 	/**
 	 * Sets or change the legend of the data series by its index in the data
 	 * set.
-	 * 
+	 *
 	 * @param index
 	 *            index of the data series in the data set.
 	 * @param legend
@@ -281,7 +281,7 @@ public class DataSet {
 
 	/**
 	 * Gets the legend of the data series by its index in the data set.
-	 * 
+	 *
 	 * @param index
 	 *            index of the data series in the data set.
 	 * @return the label of the data series.
@@ -293,7 +293,7 @@ public class DataSet {
 	/**
 	 * Sets or change the legend of the data series by its index in the data
 	 * set.
-	 * 
+	 *
 	 * @param index
 	 *            index of the data series in the data set.
 	 * @param label
@@ -305,7 +305,7 @@ public class DataSet {
 
 	/**
 	 * Gets the string array of labels.
-	 * 
+	 *
 	 * @return the string array of labels.
 	 */
 	public String[] getLabels() {
@@ -314,7 +314,7 @@ public class DataSet {
 
 	/**
 	 * Gets the string array of legends.
-	 * 
+	 *
 	 * @return the string array of legends.
 	 */
 	public String[] getLegends() {
@@ -323,7 +323,7 @@ public class DataSet {
 
 	/**
 	 * Gets whether this data set uses first row as chart label.
-	 * 
+	 *
 	 * @return if return <code>true</code>, this data set uses first row as
 	 *         chart label.
 	 */
@@ -333,7 +333,7 @@ public class DataSet {
 
 	/**
 	 * Gets whether this data set uses first column as chart label.
-	 * 
+	 *
 	 * @return if return <code>true</code>, this data set uses first row as
 	 *         chart label.
 	 */
@@ -343,7 +343,7 @@ public class DataSet {
 
 	/**
 	 * Gets whether this data set uses row as data series.
-	 * 
+	 *
 	 * @return if return <code>true</code>, this data set uses row as data
 	 *         series.
 	 */
@@ -353,7 +353,7 @@ public class DataSet {
 
 	/**
 	 * Gets whether this data set uses local table.
-	 * 
+	 *
 	 * @return if return <code>true</code>, this data set uses uses local table.
 	 */
 	public boolean isLocalTable() {
@@ -362,7 +362,7 @@ public class DataSet {
 
 	/**
 	 * Sets this data set uses local table or not.
-	 * 
+	 *
 	 * @param isLocalTable
 	 *            if the value is <code>true</code>, this data set uses uses
 	 *            local table.
@@ -373,7 +373,7 @@ public class DataSet {
 
 	/**
 	 * Gets the values of a data series by its index in the data set.
-	 * 
+	 *
 	 * @param index
 	 *            index of the data series in the data set.
 	 * @return the values of the data series.
@@ -392,7 +392,7 @@ public class DataSet {
 	 * have duplicated legends, return the values of the first matched data
 	 * series. we do not recommend the duplicated legends, but practically, some
 	 * ODF editors allow users to do that.
-	 * 
+	 *
 	 * @param legend
 	 *            the legend of the data series
 	 * @return the values of the data series
@@ -408,7 +408,7 @@ public class DataSet {
 
 	/**
 	 * Gets the values of a data set as a double dimension array.
-	 * 
+	 *
 	 * @return the values of the whole data set.
 	 */
 	public Double[][] getLocalTableData() {
@@ -439,7 +439,7 @@ public class DataSet {
 
 	/**
 	 * Gets the first row labels of the local table.
-	 * 
+	 *
 	 * @return the first row labels of the local table.
 	 */
 	public String[] getLocalTableFirstRow() {
@@ -451,7 +451,7 @@ public class DataSet {
 
 	/**
 	 * Gets the first column labels of the local table.
-	 * 
+	 *
 	 * @return the first column labels of the local table.
 	 */
 	public String[] getLocalTableFirstColumn() {
@@ -463,7 +463,7 @@ public class DataSet {
 
 	/**
 	 * Gets the data item count of the data series given by the index.
-	 * 
+	 *
 	 * @param index
 	 *            index of the data series in the data set
 	 * @return the data item count of the data series
@@ -480,7 +480,7 @@ public class DataSet {
 
 	/**
 	 * Gets the data item count of the data series given by the label.
-	 * 
+	 *
 	 * @param legend
 	 *            the legend of the data series
 	 * @return the data item count of the data series
@@ -492,7 +492,7 @@ public class DataSet {
 
 	/**
 	 * Gets the maximal data item count
-	 * 
+	 *
 	 * @return the maximal data item count
 	 */
 	public int getMaxLengthOfDataSeries() {
@@ -507,7 +507,7 @@ public class DataSet {
 
 	/**
 	 * Gets the count of data series in the data set.
-	 * 
+	 *
 	 * @return the count of data series
 	 */
 	public int getDataSeriesCount() {
@@ -518,7 +518,7 @@ public class DataSet {
 	 * Sets or updates data for the data set with 2 dimensional double array,
 	 * the first dimension represents the index of data series, the second
 	 * dimension represents the index of data item in each data series.
-	 * 
+	 *
 	 * @param labels
 	 *            the chart labels, which is corresponding to the first
 	 *            dimension of data array.
@@ -557,7 +557,7 @@ public class DataSet {
 	/**
 	 * Sets data for the data set with cell range address of sheet in
 	 * spreadsheet document or internal chart table in other chart containers.
-	 * 
+	 *
 	 * @param cellRangeAddress
 	 *            cell range address of sheet or table.
 	 * @param spreadsheet

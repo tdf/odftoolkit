@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -64,7 +64,7 @@ public class HeaderTest {
 			table = header.addTable();
 			table.setTableName("headerHTable");
 			doc.save(ResourceUtilities.newTestOutputFile(headerDocumentPath));
-			
+
 			// load the document again.
 			doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(headerDocumentPath));
 			header = doc.getHeader();
@@ -75,7 +75,7 @@ public class HeaderTest {
 			cell = table.getCellByPosition(4, 0);
 			Assert.assertEquals(34, cell.getBufferedImage().getHeight(null));
 			table.getColumnByIndex(4).setWidth(15);
-			
+
 			header = doc.getHeader(true);
 			table = header.getTableByName("headerHTable");
 			Assert.assertNotNull(table);
@@ -99,7 +99,7 @@ public class HeaderTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testGetOdfElement() {
 		try {
@@ -116,15 +116,15 @@ public class HeaderTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetTableList() {
 		try {
 			TextDocument doc = TextDocument.newTextDocument();
 			Header header = doc.getHeader();
 			Table tab = header.addTable();
-			
+
 			//validate
 			List<Table> listTab = header.getTableList();
 			Table tab1 = listTab.get(0);
@@ -138,20 +138,20 @@ public class HeaderTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetTableBuilder() {
 		try {
 			TextDocument doc = TextDocument.newTextDocument();
 			Header header = doc.getHeader();
-			
+
 			TableBuilder tabBuilder = header.getTableBuilder();
 			Table tab = tabBuilder.newTable();
 			Assert.assertNotNull(tab);
 			Assert.assertTrue(2 == tab.getRowCount());
 			Assert.assertTrue(5 == tab.getColumnCount());
-			
+
 			//validate
 			List<Table> listTab = header.getTableList();
 			Table tab1 = listTab.get(0);
@@ -165,23 +165,23 @@ public class HeaderTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetVariableContainerElement() {
 		try {
 			TextDocument doc = TextDocument.newTextDocument();
 			Header header = doc.getHeader();
-			
+
 			OdfElement odfEle = header.getVariableContainerElement();
-			
+
 			TableBuilder tb = header.getTableBuilder();
 			Table tab = tb.newTable();
-			
+
 			Assert.assertNotNull(tab);
 			Assert.assertTrue(2 == tab.getRowCount());
 			Assert.assertTrue(5 == tab.getColumnCount());
-			
+
 			Node nod = odfEle.getFirstChild();
 			Assert.assertEquals("table:table", nod.getNodeName());
 
@@ -192,16 +192,16 @@ public class HeaderTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testDeclareVariable() {
 		try {
 			TextDocument doc = TextDocument.newTextDocument();
 			Header header = doc.getHeader();
-			
+
 			header.declareVariable("headername", VariableType.USER);
-			
+
 			//validate
 			StyleHeaderElement styleHeader = header.getOdfElement();
 			Node nod = styleHeader.getFirstChild().getFirstChild();
@@ -216,18 +216,18 @@ public class HeaderTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetVariableFieldByName() {
 		try {
 			TextDocument doc = TextDocument.newTextDocument();
 			Header header = doc.getHeader();
-			
+
 			header.declareVariable("headername", VariableType.USER);
 			VariableField vField = header.getVariableFieldByName("headername");
 			String vName = vField.getVariableName();
-			
+
 			//validate
 			StyleHeaderElement styleHead = header.getOdfElement();
 			Node nod = styleHead.getFirstChild().getFirstChild();

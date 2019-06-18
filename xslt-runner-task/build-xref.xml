@@ -270,10 +270,10 @@
 
     <target name="create-v12-html-zip" depends="init"
             description="Create XHTML versions of all ODF 1.2 parts and zip them.">
-		<antcall target="create-v12-part0-html"/>
-		<antcall target="create-v12-part1-html"/>
-		<antcall target="create-v12-part2-html"/>
-		<antcall target="create-v12-part3-html"/>
+        <antcall target="create-v12-part0-html"/>
+        <antcall target="create-v12-part1-html"/>
+        <antcall target="create-v12-part2-html"/>
+        <antcall target="create-v12-part3-html"/>
         <zip destfile="${dist.dir}/OpenDocument-v1.2${opendocument.v12.part0.state.target}.html.zip">
             <zipfileset dir="${dist.dir}/html${opendocument.v12.part0.state.target}"/>
         </zip>
@@ -340,7 +340,7 @@
                  in="${html-source}"
                  outfile="${html-target}"
                  force="${force}">
-                 <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+            <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         </odfxslt-saxon>
     </target>
 
@@ -349,11 +349,11 @@
                  in="${build.dir}/html${state.target}/OpenDocument-v1.2${state.target}${part}.html"
                  out="${dist.dir}/html${state.target}/OpenDocument-v1.2${state.target}${part}.html"
                  force="false">
-          <xmlcatalog>
+            <xmlcatalog>
                 <dtd
                     publicId="-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
                     location="${project.odfxsltrunner}/sample_xslt/dummy.dtd"/>
-           </xmlcatalog>
+            </xmlcatalog>
         </xslt>
     </target>
 
@@ -366,7 +366,7 @@
                 <dtd
                     publicId="-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
                     location="${project.odfxsltrunner}/sample_xslt/dummy.dtd"/>
-           </xmlcatalog>
+            </xmlcatalog>
         </xslt>
 
         <unzip src="${html-source}" dest="${dist.dir}/html${state.target}">
@@ -470,7 +470,7 @@
     </target>
 
     <target name="-create-v12-xref-schema" depends="init">
-        <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl" 
+        <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl"
                     in="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}"
                     out="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"
                     force="false">
@@ -499,10 +499,10 @@
                 <uptodate srcfile="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}" targetfile="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}"/>
             </not>
         </condition>
-        <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl" 
+        <xslt style="${project.odfxsltrunner}/sample_xslt/create-flat-schema.xsl"
                     in="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}"
                     out="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}"
-                    force="${force}">  
+                    force="${force}">
             <param name="incl-conditions" expression="false"/>
             <param name="incl-default-values" expression="true"/>
             <param name="incl-types" expression="true"/>

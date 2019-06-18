@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -67,13 +67,13 @@ public class ImageSelectionTest {
 			Image image = Image.newImage(para, ResourceUtilities.getURI("image_list_item.png"));
 			image.setName("this image 1");
 			image.setHyperlink(new URI("http://odftoolkit.org"));
-			
+
 			Paragraph para2 = sourcedoc.addParagraph("helloImage2");
 			image2 = Image.newImage(para2, ResourceUtilities.getURI("testA.jpg"));
 			image2.setName("this image 2");
 			image2.setHyperlink(new URI("http://odftoolkit.org"));
-			
-			
+
+
 		} catch (Exception e) {
 			Logger.getLogger(ImageSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");

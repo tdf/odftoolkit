@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -119,7 +119,7 @@ public class TextSelectionTest {
 		Assert.assertTrue(search.hasNext());
 	}
 
-	
+
 	/**
 	 * Test pasteAtFrontOf method of
 	 * org.odftoolkit.simple.common.navigation.TextSelection copy the first
@@ -294,7 +294,7 @@ public class TextSelectionTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 	/**
 	 * Test addComment method of
 	 * org.odftoolkit.simple.common.navigation.TextSelection add comment
@@ -319,7 +319,7 @@ public class TextSelectionTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 	/**
 	 * Test addHref method of
 	 * org.odftoolkit.simple.common.navigation.TextSelection add href
@@ -420,7 +420,7 @@ public class TextSelectionTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 	@Test
 	public void testGetContainerElement() throws Exception {
 		search = new TextNavigation("TextSelectionContainer", doc);
@@ -428,10 +428,10 @@ public class TextSelectionTest {
 			TextSelection item = (TextSelection) search.nextSelection();
 			URL url = new URL("http://www.IBM.com");
 			item.addHref(url);
-			
+
 			//save
 			//doc.save(ResourceUtilities.getAbsolutePath(TEXT_FILE));
-			
+
 			//validate
 			OdfElement parentElement = item.getContainerElement();
 			Node node = parentElement.getFirstChild().getFirstChild().getNextSibling();
@@ -440,13 +440,13 @@ public class TextSelectionTest {
 			System.out.println(textAele.getXlinkHrefAttribute());
 			Assert.assertEquals("simple", textAele.getXlinkTypeAttribute());
 			Assert.assertEquals("http://www.IBM.com", textAele.getXlinkHrefAttribute());
-			
+
 		} else {
 			Assert.fail("Navigation search nothing.");
 		}
-		
+
 	}
-	
+
 	/**
 	 * Test replaceWith method of
 	 * org.odftoolkit.simple.common.navigation.TextSelection
@@ -463,19 +463,19 @@ public class TextSelectionTest {
 				data[i][j] = "string" + (i * columncount + j);
 			}
 		}
-		
+
 		String[] rowlabels = new String[rowcount];
 		for (int i = 0; i < rowcount; i++) {
 			rowlabels[i] = "RowHeader" + i;
 		}
-		
+
 		String[] columnlabels = new String[columncount];
 		for (int i = 0; i < columncount; i++) {
 			columnlabels[i] = "ColumnHeader" + i;
 		}
 		Table table = Table.newTable(sourcedoc, rowlabels, columnlabels, data);
 		table.setTableName(tablename);
-		
+
 		String tablename2 = "Table2";
 		int rowcount2 = 10, columncount2 = 4;
 		double[][] data2 = new double[rowcount2][columncount2];
@@ -484,17 +484,17 @@ public class TextSelectionTest {
 				data2[i][j] = Math.random();
 			}
 		}
-		
+
 		String[] rowlabels2 = new String[rowcount2];
 		for (int i = 0; i < rowcount2; i++) {
 			rowlabels2[i] = "RowHeader" + i;
 		}
-		
+
 		String[] columnlabels2 = new String[columncount2];
 		for (int i = 0; i < columncount2; i++) {
 			columnlabels2[i] = "ColumnHeader" + i;
 		}
-		
+
 		Table table2 = Table.newTable(sourcedoc, rowlabels2, columnlabels2, data2);
 		table2.setTableName(tablename2);
 		String tablename3 = "Table3";
@@ -534,13 +534,13 @@ public class TextSelectionTest {
 			Assert.assertEquals(1, newtable.getHeaderRowCount());
 			Assert.assertEquals(10 + 1, newtable.getRowCount());
 			Assert.assertEquals(4 + 1, newtable.getColumnCount());
-			
+
 			cell = newtable.getCellByPosition(1, 1);
 			Assert.assertEquals("float", cell.getValueType());
 		}
 		// 1 RESS%>, #1 at the end of original Paragraph,
 		search = new TextNavigation("RESS%>", doc);
-		
+
 		while (search.hasNext()) {
 			TextSelection item = (TextSelection) search.nextSelection();
 			table = sourcedoc.getTableByName("Table3");
@@ -585,7 +585,7 @@ public class TextSelectionTest {
 					+ e.getMessage() + "'");
 		}
 	}
-	
+
 	/**
 	 * Test replaceWith method of
 	 * org.odftoolkit.simple.common.navigation.TextSelection
@@ -713,7 +713,7 @@ public class TextSelectionTest {
 					+ e.getMessage() + "'");
 		}
 	}
-	
+
 	/**
 	 * Test replaceWith method of
 	 * org.odftoolkit.simple.common.navigation.TextSelection
@@ -725,7 +725,7 @@ public class TextSelectionTest {
 		sourcedoc.addParagraph("Hello1 from SIMPLE source document!");
 		sourcedoc.addParagraph("Hello2 from source document!");
 		sourcedoc.addParagraph("Hello3 from source document!");
-		
+
 		search = null;
 		// 6 Simple, at the middle of original Paragraph, split original
 		// Paragraph, insert before the second Paragraph.
@@ -745,14 +745,14 @@ public class TextSelectionTest {
 			j++;
 		}
 		Assert.assertTrue(i == j);
-		
+
 		// 2 Task1, #1 at the start of original Paragraph, #2 replace original
 		// Paragraph
 		search = new TextNavigation("Task1", doc);
 		i = 0;
 		while (search.hasNext()) {
 			item = (TextSelection) search.nextSelection();
-			
+
 			Paragraph paragraph = sourcedoc.getParagraphByIndex(1, true);
 			item.replaceWith(paragraph);
 			i++;
@@ -764,7 +764,7 @@ public class TextSelectionTest {
 			j++;
 		}
 		Assert.assertTrue(i == j);
-		
+
 		// 1 Container, #1 at the end of original Paragraph,
 		search = new TextNavigation("Container", doc);
 		i = 0;
@@ -878,7 +878,7 @@ public class TextSelectionTest {
 			}
 			nextTextSelection = (TextSelection) search.nextSelection();
 			if (currtenTextSelection != null) {
-				
+
 				try {
 					currtenTextSelection.replaceWith(sourcedoc);
 					i++;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
        Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
        distributed with this work for additional information
@@ -29,35 +29,35 @@
     <artifactId>xslt-runner</artifactId>
     <name>ODF XSLT-Runner</name>
     <version>0.9.0-SNAPSHOT</version>
-  
+
     <organization>
         <name>The Document Foundation</name>
         <url>https://www.documentfoundation.org/</url>
     </organization>
-  
-  <dependencies>
-	<dependency>
-      <groupId>${project.groupId}</groupId>
-	  <artifactId>odfdom-java</artifactId>
-      <version>0.9.0-SNAPSHOT</version>
-	</dependency>
-    <dependency>
-        <groupId>xml-apis</groupId>
-        <artifactId>xml-apis</artifactId>
-		<version>1.4.01</version>
-    </dependency>	
-  </dependencies>
-  <properties>
-	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
-  </properties> 
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>odfdom-java</artifactId>
+            <version>0.9.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+        </dependency>
+    </dependencies>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
+    </properties>
 
     <!-- Build Settings -->
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>        
+                <version>3.6.1</version>
                 <configuration>
                     <!-- defined in the parent pom.xml -->
                     <source>${jdk.version}</source>

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -56,7 +56,7 @@ import org.w3c.dom.NodeList;
 /**
  * This class represents header definition in text document. It provides methods
  * to manipulate header in text document, such as, set text, add table.
- * 
+ *
  * @since 0.4.5
  */
 public class Header extends Component implements TableContainer, VariableContainer {
@@ -67,7 +67,7 @@ public class Header extends Component implements TableContainer, VariableContain
 
 	/**
 	 * Create a header instance by an object of <code>StyleHeaderElement</code>.
-	 * 
+	 *
 	 * @param element
 	 *            - an object of <code>StyleHeaderElement</code>
 	 */
@@ -78,7 +78,7 @@ public class Header extends Component implements TableContainer, VariableContain
 	/**
 	 * Return an instance of <code>StyleHeaderElement</code> which represents
 	 * this feature.
-	 * 
+	 *
 	 * @return an instance of <code>StyleHeaderElement</code>
 	 */
 	public StyleHeaderElement getOdfElement() {
@@ -87,7 +87,7 @@ public class Header extends Component implements TableContainer, VariableContain
 
 	/**
 	 * Get this header is visible or not.
-	 * 
+	 *
 	 * @return If this header is visible return <code>true</code>, otherwise
 	 *         return <code>false</code>.
 	 * @since 0.5.5
@@ -99,7 +99,7 @@ public class Header extends Component implements TableContainer, VariableContain
 
 	/**
 	 * Set this header visible or not.
-	 * 
+	 *
 	 * @param isVisible
 	 *            If <code>isVisible</code> is true, the header of this document
 	 *            is visible, otherwise is invisible.
@@ -243,7 +243,7 @@ public class Header extends Component implements TableContainer, VariableContain
 
 	/**
 	 * Create an empty section and append it at the end of the footer.
-	 * 
+	 *
 	 * @param name
 	 *            - specify the section name
 	 * @return an instance of the section

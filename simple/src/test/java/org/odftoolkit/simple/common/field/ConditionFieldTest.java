@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -34,7 +34,7 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 public class ConditionFieldTest {
 
 	private static String TEST_DOCUMENT = "TextFieldSampleDocument.odt";
-	
+
 	@Test
 	public void testUpdateCondition() {
 		try {
@@ -60,7 +60,7 @@ public class ConditionFieldTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testUpdateTrueText() {
 		try {
@@ -77,12 +77,12 @@ public class ConditionFieldTest {
 					"trueText", "falseText");
 			Assert.assertNotNull(conditionField);
 			conditionField.updateTrueText("trueTextUpdate");
-			
+
 			//validate
 			TextConditionalTextElement conditionalTextElement = (TextConditionalTextElement) conditionField.getOdfElement();
 			conditionalTextElement.getTextStringValueIfTrueAttribute();
 			Assert.assertEquals("trueTextUpdate", conditionalTextElement.getTextStringValueIfTrueAttribute());
-			
+
 			//save
 			//doc.save(ResourceUtilities.getAbsolutePath(TEST_DOCUMENT));
 		} catch (Exception e) {
@@ -90,7 +90,7 @@ public class ConditionFieldTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testUpdateFalseText() {
 		try {
@@ -106,7 +106,7 @@ public class ConditionFieldTest {
 			ConditionField conditionField = Fields.createConditionField(newParagraph.getOdfElement(), "test_con_variable == \"true\"",
 					"trueText", "falseText");
 			Assert.assertNotNull(conditionField);
-			
+
 			conditionField.updateCondition("test_con_variable == \"false\"");
 			conditionField.updateFalseText("falseTextUpdate");
 
@@ -119,7 +119,7 @@ public class ConditionFieldTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testGetOdfElement() {
 		try {
@@ -140,13 +140,13 @@ public class ConditionFieldTest {
 			TextConditionalTextElement conditionalTextElement = (TextConditionalTextElement) conditionField.getOdfElement();
 			conditionalTextElement.getTextStringValueIfFalseAttribute();
 			Assert.assertEquals("falseText", conditionalTextElement.getTextStringValueIfFalseAttribute());
-			
+
 		} catch (Exception e) {
 			Logger.getLogger(ConditionFieldTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testFieldType() {
 		try {
@@ -162,7 +162,7 @@ public class ConditionFieldTest {
 			ConditionField conditionField = Fields.createConditionField(newParagraph.getOdfElement(), "test_con_variable == \"true\"",
 					"trueText", "falseText");
 			Assert.assertNotNull(conditionField);
-			
+
 			FieldType fieldType = conditionField.getFieldType();
 			Assert.assertEquals(FieldType.CONDITION_FIELD, fieldType);
 

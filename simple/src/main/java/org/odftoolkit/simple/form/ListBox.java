@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -37,7 +37,7 @@ import org.w3c.dom.NodeList;
 /**
  * This class represents the form control of List Box, provides methods to
  * get/set the form properties and the style formatting of this control.
- * 
+ *
  * @since 0.8
  */
 public class ListBox extends FormControl {
@@ -53,7 +53,7 @@ public class ListBox extends FormControl {
 	 * Get an instance of list box by an instance of FormListboxElement, while
 	 * searching the document content to make a bind with the DrawControl which
 	 * already reference to this list box.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of FormComboboxElement
 	 * @return an instance of list box
@@ -106,7 +106,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Set if the list box support multi-selection
-	 * 
+	 *
 	 * @param isMultiSelection
 	 *            - specify if the list box supports multi-selection
 	 */
@@ -117,7 +117,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Get if the list box support multi-selection
-	 * 
+	 *
 	 * @return true if the list box supports multi-selection; false if not.
 	 */
 	public boolean getFormMultiSelection() {
@@ -126,7 +126,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Set the visibility of the drop-down list
-	 * 
+	 *
 	 * @param isDropDown
 	 *            - specify if the drop-down list is visible
 	 */
@@ -136,7 +136,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Get the visibility of the drop-down list
-	 * 
+	 *
 	 * @return true if the drop-down list is visible; false if not.
 	 */
 	public boolean getFormDropdown() {
@@ -145,7 +145,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Add a list item to this list box.
-	 * 
+	 *
 	 * @param item
 	 *            - a list item
 	 */
@@ -161,7 +161,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Get the list entries if they are initiated through a list of string.
-	 * 
+	 *
 	 * @return the list entries
 	 */
 	public ArrayList<String> getEntries() {
@@ -182,7 +182,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Add a group of list items to this list box
-	 * 
+	 *
 	 * @param items
 	 *            -a group of list items
 	 */
@@ -196,7 +196,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Set the source type of the data list.
-	 * 
+	 *
 	 * @param type
 	 *            - the source type of this list
 	 */
@@ -207,7 +207,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Get the source type of the data list.
-	 * 
+	 *
 	 * @return the source type of this list
 	 */
 	public FormListSourceType getListSourceType() {
@@ -218,7 +218,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Set the source of this data list.
-	 * 
+	 *
 	 * @param listSource
 	 *            - the source of this data list.
 	 */
@@ -228,7 +228,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Get the source of this data list.
-	 * 
+	 *
 	 * @return the source of this data list.
 	 */
 	public String getListSource() {
@@ -237,7 +237,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Set the data field referenced by this combo box
-	 * 
+	 *
 	 * @param dataField
 	 *            - the data field referenced by this combo box
 	 */
@@ -247,7 +247,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Get the data field referenced by this combo box
-	 * 
+	 *
 	 * @return the data field
 	 */
 	public String getDataField() {
@@ -256,7 +256,7 @@ public class ListBox extends FormControl {
 
 	/**
 	 * Get a simple iterator for list boxes.
-	 * 
+	 *
 	 * @param container
 	 *            - an instance of form where to traverse the list boxes
 	 */

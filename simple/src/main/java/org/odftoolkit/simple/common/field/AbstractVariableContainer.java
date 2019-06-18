@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -31,7 +31,7 @@ import org.odftoolkit.simple.common.field.VariableField.VariableType;
  * VariableContainer interface, with a default implementation for every method
  * defined in VariableContainer , except getVariableContainerElement(). A
  * subclass must implement the abstract method getVariableContainerElement().
- * 
+ *
  * @since 0.5
  */
 public abstract class AbstractVariableContainer implements VariableContainer {

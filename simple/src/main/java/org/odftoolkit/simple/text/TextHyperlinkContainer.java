@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -25,9 +25,9 @@ import java.util.Iterator;
 /**
  * TextHyperlinkContainer is a container which maintains text hyperlinks.
  * Hyperlinks can be added and removed in this container.
- * 
+ *
  * @see TextHyperlink
- * 
+ *
  * @since 0.6.5
  */
 
@@ -35,7 +35,7 @@ public interface TextHyperlinkContainer {
 
 	/**
 	 * Add a hypertext reference to this hyperlink container.
-	 * 
+	 *
 	 * @param linkto
 	 *            the hyperlink
 	 * @return an instance of TextHyperlink
@@ -49,7 +49,7 @@ public interface TextHyperlinkContainer {
 
 	/**
 	 * Append a hyperlink at the end of the container
-	 * 
+	 *
 	 * @param text
 	 *            - the text content
 	 * @param linkto
@@ -60,7 +60,7 @@ public interface TextHyperlinkContainer {
 
 	/**
 	 * Get the iterator of hyperlinks within this container element
-	 * 
+	 *
 	 * @return the iterator of hyperlinks within this container element
 	 */
 	public Iterator<TextHyperlink> getHyperlinkIterator();

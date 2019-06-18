@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -83,7 +83,7 @@ import org.w3c.dom.NodeList;
  * Table represents the table feature in ODF spreadsheet and text documents.
  * <p>
  * Table provides methods to get/add/delete/modify table column/row/cell.
- * 
+ *
  */
 public class Table extends Component {
 
@@ -112,7 +112,7 @@ public class Table extends Component {
 	 * <p>
 	 * The end user isn't allowed to create it directly, otherwise an
 	 * <code>IllegalStateException</code> will be thrown.
-	 * 
+	 *
 	 *@since 0.3.5
 	 */
 	public static class TableBuilder {
@@ -127,7 +127,7 @@ public class Table extends Component {
 		 * TableContainer} constructor. The end user isn't allowed to call it
 		 * directly, otherwise an <code>IllegalStateException</code> will be
 		 * thrown.
-		 * 
+		 *
 		 * @param container
 		 *            the owner <code>TableContainer</code>.
 		 * @throws IllegalStateException
@@ -145,7 +145,7 @@ public class Table extends Component {
 		/**
 		 * Get a table feature instance by an instance of
 		 * <code>TableTableElement</code>.
-		 * 
+		 *
 		 * @param odfElement
 		 *            an instance of <code>TableTableElement</code>
 		 * @return an instance of <code>Table</code> that can represent
@@ -171,7 +171,7 @@ public class Table extends Component {
 		 * <p>
 		 * If the container is a text document, cell borders will be created by
 		 * default.
-		 * 
+		 *
 		 * @return the created <code>Table</code> feature instance
 		 */
 		public Table newTable() {
@@ -188,7 +188,7 @@ public class Table extends Component {
 		 * <p>
 		 * If the container is a text document, cell borders will be created by
 		 * default.
-		 * 
+		 *
 		 * @param numRows
 		 *            the row number
 		 * @param numCols
@@ -212,7 +212,7 @@ public class Table extends Component {
 			}
 			return null;
 		}
-		
+
 		/**
 		 * Construct the <code>Table</code> feature with a specified row number,
 		 * column number, header row number, header column number, left margin
@@ -224,7 +224,7 @@ public class Table extends Component {
 		 * <p>
 		 * If the container is a text document, cell borders will be created by
 		 * default.
-		 * 
+		 *
 		 * @param numRows
 		 *            the row number
 		 * @param numCols
@@ -239,9 +239,9 @@ public class Table extends Component {
 		 * @param marginRight
 		 *            the right table margin in centimeter(cm), between the
 		 *            right margin of table container and the table
-		 * 
+		 *
 		 * @return a new instance of <code>Table</code>
-		 * 
+		 *
 		 * @since 0.5.5
 		 * */
 		public Table newTable(int numRows, int numCols, int headerRowNumber, int headerColumnNumber, double marginLeft,
@@ -267,7 +267,7 @@ public class Table extends Component {
 		 * <p>
 		 * If the container is a text document, cell borders will be created by
 		 * default.
-		 * 
+		 *
 		 * @param numRows
 		 *            the row number
 		 * @param numCols
@@ -288,7 +288,7 @@ public class Table extends Component {
 		 * <p>
 		 * If the container is a text document, cell borders will be created by
 		 * default.
-		 * 
+		 *
 		 * @param rowLabel
 		 *            set as the header row, it can be null if no header row
 		 *            needed
@@ -374,7 +374,7 @@ public class Table extends Component {
 		 * <p>
 		 * If the container is a text document, cell borders will be created by
 		 * default.
-		 * 
+		 *
 		 * @param rowLabel
 		 *            set as the header row, it can be null if no header row
 		 *            needed
@@ -471,7 +471,7 @@ public class Table extends Component {
 	/**
 	 * Get a table feature instance by an instance of
 	 * <code>TableTableElement</code>.
-	 * 
+	 *
 	 * @param element
 	 *            an instance of <code>TableTableElement</code>
 	 * @return an instance of <code>Table</code> that can represent
@@ -492,7 +492,7 @@ public class Table extends Component {
 	 * <p>
 	 * If the <code>tableContainer</code> is a text document, cell borders will
 	 * be created by default.
-	 * 
+	 *
 	 * @param tableContainer
 	 *            the table container that contains this table
 	 * @return the created <code>Table</code> feature instance
@@ -511,7 +511,7 @@ public class Table extends Component {
 	 * <p>
 	 * If the <code>tableContainer</code> is a text document, cell borders will
 	 * be created by default.
-	 * 
+	 *
 	 * @param tableContainer
 	 *            the table container that contains this table
 	 * @param numRows
@@ -523,7 +523,7 @@ public class Table extends Component {
 	public static Table newTable(TableContainer tableContainer, int numRows, int numCols) {
 		return tableContainer.getTableBuilder().newTable(numRows, numCols);
 	}
-	
+
 	/**
 	 * Construct the <code>Table</code> feature with a specified row number and
 	 * column number.
@@ -534,7 +534,7 @@ public class Table extends Component {
 	 * <p>
 	 * If the <code>tableContainer</code> is a text document, cell borders will
 	 * be created by default.
-	 * 
+	 *
 	 * @param tableContainer
 	 *            the table container that contains this table
 	 * @param numRows
@@ -547,7 +547,7 @@ public class Table extends Component {
 	 * 			  <I>the right table margin in cm (between the right margin of document and the table)</I>
 	 * @return a new instance of <code>Table</code>
 	 */
-	public static Table newTable(TableContainer tableContainer, int numRows, int numCols, 
+	public static Table newTable(TableContainer tableContainer, int numRows, int numCols,
 			double marginLeft, double marginRight) {
 		return tableContainer.getTableBuilder().newTable(numRows, numCols, 0, 0, marginLeft, marginRight);
 	}
@@ -562,7 +562,7 @@ public class Table extends Component {
 	 * <p>
 	 * If the <code>tableContainer</code> is a text document, cell borders will
 	 * be created by default.
-	 * 
+	 *
 	 * @param tableContainer
 	 *            the ODF document that contains this feature
 	 * @param numRows
@@ -579,8 +579,8 @@ public class Table extends Component {
 			int headerColumnNumber) {
 		return tableContainer.getTableBuilder().newTable(numRows, numCols, headerRowNumber, headerColumnNumber);
 	}
-	
-	
+
+
 
 	/**
 	 * Construct the Table feature with a specified 2 dimension array as the
@@ -592,7 +592,7 @@ public class Table extends Component {
 	 * <p>
 	 * If the <code>tableContainer</code> is a text document, cell borders will
 	 * be created by default.
-	 * 
+	 *
 	 * @param tableContainer
 	 *            the table container that contains this table
 	 * @param rowLabel
@@ -618,7 +618,7 @@ public class Table extends Component {
 	 * <p>
 	 * If the <code>tableContainer</code> is a text document, cell borders will
 	 * be created by default.
-	 * 
+	 *
 	 * @param tableContainer
 	 *            the table container that contains this table
 	 * @param rowLabel
@@ -773,7 +773,7 @@ public class Table extends Component {
 	 * Throw an UnsupportedOperationException if the table is one sheet of a
 	 * spreadsheet document. because the sheet doesn't have an attribute of
 	 * table width.
-	 * 
+	 *
 	 * @return the width of the current table (in Millimeter).
 	 *         <p>
 	 *         An UnsupportedOperationException will be thrown if the table is
@@ -804,7 +804,7 @@ public class Table extends Component {
 	 * Throw an UnsupportedOperationException if the table is part of a
 	 * spreadsheet document that does not allow to change the table size,
 	 * because spreadsheet is not allow user to set the table size.
-	 * 
+	 *
 	 * @param width
 	 *            the width that need to set (in Millimeter).
 	 *            <p>
@@ -858,7 +858,7 @@ public class Table extends Component {
 		style.setProperty(StyleTableCellPropertiesElement.BorderTop, "none");
 		style.setProperty(StyleTableCellPropertiesElement.BorderBottom, "0.0007in solid #000000");
 	}
-	
+
 	private static TableTableElement createTable(TableContainer container, int numRows, int numCols,
 			int headerRowNumber, int headerColumnNumber) throws Exception {
 		return createTable(container, numRows, numCols, headerRowNumber, headerColumnNumber, 0, 0);
@@ -1029,7 +1029,7 @@ public class Table extends Component {
 	 * If one style in the template is null, the style of corresponding cells
 	 * will be removed. An empty template can be used to remove all the styles
 	 * in a table.
-	 * 
+	 *
 	 * @param template
 	 * @throws IllegalArgumentException
 	 *             if the given template is null
@@ -1241,7 +1241,7 @@ public class Table extends Component {
 
 	/**
 	 * Get the row count of this table.
-	 * 
+	 *
 	 * @return total count of rows
 	 */
 	public int getRowCount() {
@@ -1266,7 +1266,7 @@ public class Table extends Component {
 
 	/**
 	 * Get the column count of this table.
-	 * 
+	 *
 	 * @return total count of columns
 	 */
 	public int getColumnCount() {
@@ -1351,7 +1351,7 @@ public class Table extends Component {
 	 * the current table is addressed the table is instantly expanded. Method
 	 * <code>getCellByPosition</code> can randomly access any cell, no matter it
 	 * in or out of the table original range.
-	 * 
+	 *
 	 * @return a new appended row
 	 * @see #appendRows(int)
 	 * @see #getRowByIndex(int)
@@ -1585,7 +1585,7 @@ public class Table extends Component {
 	 * the current table is addressed the table is instantly expanded. Method
 	 * <code>getCellByPosition</code> can randomly access any cell, no matter it
 	 * in or out of the table original range.
-	 * 
+	 *
 	 * @param rowCount
 	 *            is the number of rows to be appended.
 	 * @return a list of new appended rows
@@ -1642,7 +1642,7 @@ public class Table extends Component {
 	 * the current table is addressed the table is instantly expanded. Method
 	 * <code>getCellByPosition</code> can randomly access any cell, no matter it
 	 * in or out of the table original range.
-	 * 
+	 *
 	 * @return a new appended column
 	 * @see #appendColumns(int)
 	 * @see #getColumnByIndex(int)
@@ -1702,7 +1702,7 @@ public class Table extends Component {
 	 * the current table is addressed the table is instantly expanded. Method
 	 * <code>getCellByPosition</code> can randomly access any cell, no matter it
 	 * in or out of the table original range.
-	 * 
+	 *
 	 * @param columnCount
 	 *            is the number of columns to be appended.
 	 * @return a list of new appended columns
@@ -1869,7 +1869,7 @@ public class Table extends Component {
 	/**
 	 * Return an instance of <code>TableTableElement</code> which represents
 	 * this feature.
-	 * 
+	 *
 	 * @return an instance of <code>TableTableElement</code>
 	 */
 	public TableTableElement getOdfElement() {
@@ -1879,7 +1879,7 @@ public class Table extends Component {
 	/**
 	 * Insert a specific number of columns before the column whose index is
 	 * <code>index</code>.
-	 * 
+	 *
 	 * @param index
 	 *            is the index of the column to insert before.
 	 * @param columnCount
@@ -2016,7 +2016,7 @@ public class Table extends Component {
 	/**
 	 * Remove a specific number of columns, starting from the column at
 	 * <code>index</code>.
-	 * 
+	 *
 	 * @param startIndex
 	 *            is the index of the first column to delete.
 	 * @param deleteColCount
@@ -2066,11 +2066,11 @@ public class Table extends Component {
 		}
 
 	}
-	
+
 	/**
 	 * Calculates the width between the left and right margins of the table
 	 * container.
-	 * 
+	 *
 	 * @param container
 	 *            TableContainer
 	 * @param marginLeft
@@ -2160,7 +2160,7 @@ public class Table extends Component {
 
 	/**
 	 * Insert a specific number of rows before the row at <code>index</code>.
-	 * 
+	 *
 	 * @param index
 	 *            is the index of the row to insert before.
 	 * @param rowCount
@@ -2217,7 +2217,7 @@ public class Table extends Component {
 
 	/**
 	 * Return a list of columns in the current table.
-	 * 
+	 *
 	 * @return a list of table columns
 	 */
 	public List<Column> getColumnList() {
@@ -2246,22 +2246,22 @@ public class Table extends Component {
 		}
 		return list;
 	}
-	
+
 	/**
 	 * Return an Iterator of the column in this table.
-	 * 
+	 *
 	 * @return an Iterator of the column in this table.
 	 * @see java.util.Iterator
-	 * 
+	 *
 	 * @since 0.5.5
 	 */
 	public Iterator<Column> getColumnIterator(){
 		return new SimpleColumnIterator(this);
 	}
-	
+
 	/**
 	 * Return a list of table rows in the current table.
-	 * 
+	 *
 	 * @return a list of table rows
 	 */
 	public List<Row> getRowList() {
@@ -2288,23 +2288,23 @@ public class Table extends Component {
 		}
 		return list;
 	}
-	
+
 	/**
 	 * Return an Iterator of the row in this table.
-	 * 
+	 *
 	 * @return an Iterator of the row in this table.
 	 * @see java.util.Iterator
-	 * 
+	 *
 	 * @since 0.5.5
 	 */
 	public Iterator<Row> getRowIterator(){
 		return new SimpleRowIterator(this);
 	}
-	
+
 	/**
 	 * Get the column at the specified index. The table will be automatically
 	 * expanded, when the given index is outside of the original table.
-	 * 
+	 *
 	 * @param index
 	 *            the zero-based index of the column.
 	 * @return the column at the specified index
@@ -2373,7 +2373,7 @@ public class Table extends Component {
 	/**
 	 * Get the row at the specified index. The table will be automatically
 	 * expanded, when the given index is outside of the original table.
-	 * 
+	 *
 	 * @param index
 	 *            the zero-based index of the row.
 	 * @return the row at the specified index
@@ -2422,7 +2422,7 @@ public class Table extends Component {
 	/**
 	 * Remove the specific number of rows, starting from the row at
 	 * <code>index</code>.
-	 * 
+	 *
 	 * @param startIndex
 	 *            is the zero-based index of the first row to delete.
 	 * @param deleteRowCount
@@ -2496,7 +2496,7 @@ public class Table extends Component {
 
 	/**
 	 * Return the number of header rows in this table.
-	 * 
+	 *
 	 * @return the number of header rows.
 	 */
 	public int getHeaderRowCount() {
@@ -2528,7 +2528,7 @@ public class Table extends Component {
 
 	/**
 	 * Return the number of header columns in the table.
-	 * 
+	 *
 	 * @return the number of header columns.
 	 */
 	public int getHeaderColumnCount() {
@@ -2539,7 +2539,7 @@ public class Table extends Component {
 
 	/**
 	 * Return the table name.
-	 * 
+	 *
 	 * @return the table name
 	 */
 	public String getTableName() {
@@ -2548,7 +2548,7 @@ public class Table extends Component {
 
 	/**
 	 * Set the table name.
-	 * 
+	 *
 	 * @param tableName
 	 *            the table name
 	 * @throws IllegalArgumentException
@@ -2572,7 +2572,7 @@ public class Table extends Component {
 
 	/**
 	 * Return true if the table is protected.
-	 * 
+	 *
 	 * @return true if the table is protected
 	 */
 	public boolean isProtected() {
@@ -2585,7 +2585,7 @@ public class Table extends Component {
 
 	/**
 	 * Set if the table is protected.
-	 * 
+	 *
 	 * @param isProtected
 	 *            the protected attribute of the table to be set
 	 */
@@ -2612,10 +2612,10 @@ public class Table extends Component {
 	 * <code>getRowByIndex()</code> and <code>getColumnByIndex()</code>, if need
 	 * automatically expand cells, it will return empty cell(s) without any
 	 * style settings. So inheritance setting have no effect on them.
-	 * 
+	 *
 	 * @return true if cell style is inherited when a new cell is added to the
 	 *         table.
-	 * 
+	 *
 	 * @see #setCellStyleInheritance(boolean)
 	 * @see #appendColumn()
 	 * @see #appendColumns(int)
@@ -2630,7 +2630,7 @@ public class Table extends Component {
 	 * @see #getCellRangeByName(String)
 	 * @see #getColumnByIndex(int)
 	 * @see #getRowByIndex(int)
-	 * 
+	 *
 	 * @since 0.4.5
 	 */
 	public boolean isCellStyleInheritance() {
@@ -2654,11 +2654,11 @@ public class Table extends Component {
 	 * <code>getRowByIndex()</code> and <code>getColumnByIndex()</code>, if need
 	 * automatically expand cells, it will return empty cell(s) without any
 	 * style settings. So inheritance setting have no effect on them.
-	 * 
+	 *
 	 * @param isEnabled
 	 *            if<code>isEnabled</code> is true, cell style will be inherited
 	 *            by new cell.
-	 * 
+	 *
 	 * @see #isCellStyleInheritance()
 	 * @see #appendColumn()
 	 * @see #appendColumns(int)
@@ -2673,7 +2673,7 @@ public class Table extends Component {
 	 * @see #getCellRangeByName(String)
 	 * @see #getColumnByIndex(int)
 	 * @see #getRowByIndex(int)
-	 * 
+	 *
 	 * @since 0.4.5
 	 */
 	public void setCellStyleInheritance(boolean isEnabled) {
@@ -2693,10 +2693,10 @@ public class Table extends Component {
 	 * <code>insertColumnsBefore()</code>, <code>getCellByPosition()</code>,
 	 * <code>getCellRangeByPosition()</code>, <code>getCellRangeByName()</code>,
 	 * <code>getRowByIndex()</code> and <code>getColumnByIndex()</code>.
-	 * 
+	 *
 	 * @return true if the new created columns/rows/cells are described by a
 	 *         single element when it's possible.
-	 * 
+	 *
 	 * @see #setUseRepeat(boolean)
 	 * @see #appendColumns(int)
 	 * @see #appendRows(int)
@@ -2709,7 +2709,7 @@ public class Table extends Component {
 	 * @see #getCellRangeByName(String)
 	 * @see #getColumnByIndex(int)
 	 * @see #getRowByIndex(int)
-	 * 
+	 *
 	 * @since 0.4.5
 	 */
 	public boolean isUseRepeat() {
@@ -2736,12 +2736,12 @@ public class Table extends Component {
 	 * <code>insertColumnsBefore()</code>, <code>getCellByPosition()</code>,
 	 * <code>getCellRangeByPosition()</code>, <code>getCellRangeByName()</code>,
 	 * <code>getRowByIndex()</code> and <code>getColumnByIndex()</code>.
-	 * 
+	 *
 	 * @param isSingle
 	 *            if<code>isSingle</code> is true, the new created
 	 *            columns/rows/cells are described by a single element, if
 	 *            possible.
-	 * 
+	 *
 	 * @see #isUseRepeat()
 	 * @see #appendColumns(int)
 	 * @see #appendRows(int)
@@ -2754,7 +2754,7 @@ public class Table extends Component {
 	 * @see #getCellRangeByName(String)
 	 * @see #getColumnByIndex(int)
 	 * @see #getRowByIndex(int)
-	 * 
+	 *
 	 * @since 0.4.5
 	 */
 	public void setUseRepeat(boolean isSingle) {
@@ -2765,7 +2765,7 @@ public class Table extends Component {
 	/**
 	 * Return a range of cells within the specified range. The table will be
 	 * automatically expanded as need.
-	 * 
+	 *
 	 * @param startCol
 	 *            the column index of the first cell inside the range.
 	 * @param startRow
@@ -2793,7 +2793,7 @@ public class Table extends Component {
 	 * alphabetic value representing the column, and a numeric value
 	 * representing the row. The table name can be omitted. For example:
 	 * "$Sheet1.A1", "Sheet1.A1" and "A1" are all valid cell address.
-	 * 
+	 *
 	 * @param startAddress
 	 *            the cell address of the first cell inside the range.
 	 * @param endAddress
@@ -2814,7 +2814,7 @@ public class Table extends Component {
 	 * <code>setCellRangeName<code> in class <code>CellRange</code>. Then you
 	 * will get a <b>named range</b> which can be represented by name. This
 	 * method can be used to get a named range.
-	 * 
+	 *
 	 * @param name
 	 *            the name of the specified named range
 	 * @return the specified cell range.
@@ -2841,7 +2841,7 @@ public class Table extends Component {
 	/**
 	 * Return a single cell that is positioned at the specified column and row.
 	 * The table will be automatically expanded as need.
-	 * 
+	 *
 	 * @param colIndex
 	 *            the column index of the cell.
 	 * @param rowIndex
@@ -2914,7 +2914,7 @@ public class Table extends Component {
 	 * alphabetic value representing the column, and a numeric value
 	 * representing the row. The table name can be omitted. For example:
 	 * "$Sheet1.A1", "Sheet1.A1" and "A1" are all valid cell address.
-	 * 
+	 *
 	 * @param address
 	 *            the cell address of the cell.
 	 * @return the cell at the specified position.
@@ -2922,15 +2922,15 @@ public class Table extends Component {
 	public Cell getCellByPosition(String address) {
 		return getCellByPosition(getColIndexFromCellAddress(address), getRowIndexFromCellAddress(address));
 	}
-	
+
 	/**
 	 * Modifies the margin above and below the table.
-	 * 
+	 *
 	 * @param spaceTop
 	 *            space above the table in centimeter(cm), ex. 1.25 cm
 	 * @param spaceBottom
 	 *            spacing below the table in centimeter(cm), ex. 0.7 cm
-	 *            
+	 *
 	 * @since 0.5.5
 	 */
 	public void setVerticalMargin(double spaceTop, double spaceBottom) {
@@ -3270,7 +3270,7 @@ public class Table extends Component {
 			}
 		}
 	}
-	
+
 	public DefaultStyleHandler getStyleHandler() {
 		if (mStyleHandler == null)
 			mStyleHandler = new DefaultStyleHandler(this.getOdfElement());
@@ -3370,10 +3370,10 @@ public class Table extends Component {
 			return tempColumnElement;
 		}
 	}
-	
+
 	// default iterator to iterate row item.
 	private class SimpleRowIterator implements Iterator<Row> {
-		
+
 		private Table ownerTable;
 		private TableTableRowElement nextRowElement;
 		private TableTableRowElement tempRowElement;

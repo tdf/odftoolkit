@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -40,7 +40,7 @@ public class WhitespaceProcessor {
 	/**
 	 * Add given text content to an element, handling multiple blanks, tabs, and
 	 * newlines properly.
-	 * 
+	 *
 	 * @param element
 	 *            the element to which content is being added
 	 * @param content
@@ -83,14 +83,14 @@ public class WhitespaceProcessor {
 	 * text nodes, expanding whitespace where necessary. Ignores any elements
 	 * except <code>&lt;text:s&gt;</code>, <code>&lt;text:line-break&gt;</code>
 	 * and <code>&lt;text:tab&gt</code>.
-	 * 
+	 *
 	 * @param element
 	 *            an element whose text you want to retrieve
 	 * @return the element's text content, with whitespace expanded
-	 * 
+	 *
 	 * @deprecated As of Simple version 0.3.5, replaced by
 	 *             <code>TextExtractor.getText(OdfElement)</code>
-	 * 
+	 *
 	 * @see TextExtractor#getText(OdfElement)
 	 */
 	public String getText(Node element) {
@@ -129,7 +129,7 @@ public class WhitespaceProcessor {
 	 * Append text content to a given element, handling whitespace properly.
 	 * This is a static method that creates its own WhitespaceProcessor, so that
 	 * you don't have to.
-	 * 
+	 *
 	 * @param element
 	 *            the element to which content is being added
 	 * @param content

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -31,7 +31,7 @@ import org.odftoolkit.simple.Component;
  * <p>
  * NOTE: Before the document is opened in any editor, the value of this field
  * maybe invalid.
- * 
+ *
  * @since 0.5
  */
 public class ChapterField extends Field {
@@ -41,15 +41,15 @@ public class ChapterField extends Field {
 	/**
 	 * A <tt>DisplayType</tt> specifies the information that a chapter field
 	 * should display.
-	 * 
+	 *
 	 * @since 0.5
 	 */
 	public static enum DisplayType {
 
-		NAME("name"), 
-		NUMBER("number"), 
-		NUMBER_AND_NAME("number-and-name"), 
-		PLAIN_NUMBER("plain-number"), 
+		NAME("name"),
+		NUMBER("number"),
+		NUMBER_AND_NAME("number-and-name"),
+		PLAIN_NUMBER("plain-number"),
 		PLAIN_NUMBER_AND_NAME("plain-number-and-name");
 
 		private final String displayType;
@@ -75,7 +75,7 @@ public class ChapterField extends Field {
 
 	/**
 	 * Specifies the information that a chapter field should display.
-	 * 
+	 *
 	 * @param type
 	 *            the display type which is predefined in
 	 *            {@link ChapterField.DisplayType DisplayType}.
@@ -86,7 +86,7 @@ public class ChapterField extends Field {
 
 	/**
 	 * Specifies the outline level to be displayed.
-	 * 
+	 *
 	 * @param level
 	 *            the outline level to be displayed.
 	 */
@@ -97,7 +97,7 @@ public class ChapterField extends Field {
 	/**
 	 * Return an instance of <code>TextChapterElement</code> which represents
 	 * this feature.
-	 * 
+	 *
 	 * @return an instance of <code>TextChapterElement</code>
 	 */
 	public TextChapterElement getOdfElement() {

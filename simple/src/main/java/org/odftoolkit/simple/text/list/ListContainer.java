@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -37,11 +37,11 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
  * <draw:frame> can have child element <draw:text-box>. <text:list> is usable
  * with the <draw:text-box> element. Notes is an indirectly ListContainer which
  * let user operate List easily.
- * 
+ *
  * @see List
  * @see org.odftoolkit.simple.TextDocument
  * @see org.odftoolkit.simple.presentation.Notes
- * 
+ *
  * @since 0.4
  */
 public interface ListContainer {
@@ -54,21 +54,21 @@ public interface ListContainer {
 	 * OfficeTextElement. While Presentation Notes is an indirectly
 	 * ListContainer, which holds List with the help of its grand-child element
 	 * <draw:text-box>, so for Notes, DrawTextBoxElement should be return.
-	 * 
+	 *
 	 * @return container element which can hold <text:list>.
 	 */
 	public OdfElement getListContainerElement();
 
 	/**
 	 * Add a new List to this container.
-	 * 
+	 *
 	 * @return added list.
 	 */
 	public List addList();
 
 	/**
 	 * Add a List with specified ListDecorator to this container.
-	 * 
+	 *
 	 * @param decorator
 	 *            the specified ListDecorator
 	 * @return added list.
@@ -77,7 +77,7 @@ public interface ListContainer {
 
 	/**
 	 * Remove the existing List from this container.
-	 * 
+	 *
 	 * @return true, if the container contains this List.
 	 */
 	public boolean removeList(List list);
@@ -90,9 +90,9 @@ public interface ListContainer {
 	/**
 	 * Return an Iterator of the Lists in this ListContainer. The Lists are
 	 * iterated in the same order that they occur in the ListContainer.
-	 * 
+	 *
 	 * @return an Iterator of the Lists in this ListContainer
-	 * 
+	 *
 	 * @see java.util.Iterator
 	 */
 	public Iterator<List> getListIterator();

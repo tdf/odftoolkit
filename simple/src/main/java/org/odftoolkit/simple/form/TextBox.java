@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -37,7 +37,7 @@ import org.w3c.dom.Node;
 /**
  * This class represents the form control of Text Box, provides methods to
  * get/set the form properties and the style formatting of this control.
- * 
+ *
  * @since 0.8
  */
 public class TextBox extends FormControl {
@@ -57,7 +57,7 @@ public class TextBox extends FormControl {
 	 * Get an instance of text box by an instance of OdfElement, while searching
 	 * the document content to make a bind with the DrawControl which already
 	 * reference to this text box.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of OdfElement
 	 * @return an instance of text box
@@ -143,7 +143,7 @@ public class TextBox extends FormControl {
 	/**
 	 * Set the default value of this control, it will be override by current
 	 * value.
-	 * 
+	 *
 	 * @param value
 	 *            - default value
 	 */
@@ -158,7 +158,7 @@ public class TextBox extends FormControl {
 
 	/**
 	 * Get the default value of this control
-	 * 
+	 *
 	 * @return default value
 	 */
 	public String getValue() {
@@ -171,7 +171,7 @@ public class TextBox extends FormControl {
 
 	/**
 	 * Set the current value of this control, it override the default value.
-	 * 
+	 *
 	 * @param currentValue
 	 *            - current value
 	 */
@@ -187,7 +187,7 @@ public class TextBox extends FormControl {
 
 	/**
 	 * Get the current value of this control
-	 * 
+	 *
 	 * @return current value
 	 */
 	public String getCurrentValue() {
@@ -201,7 +201,7 @@ public class TextBox extends FormControl {
 
 	/**
 	 * Get a simple iterator for text boxes.
-	 * 
+	 *
 	 * @param container
 	 *            - an instance of form where to traverse the text boxes
 	 */

@@ -29,14 +29,14 @@ import javax.xml.transform.TransformerException;
  * logger.
  */
 class TransformerErrorListener implements javax.xml.transform.ErrorListener {
-    
+
     private Logger m_aLogger;
 
     /** Creates a new instance of TransforemerErrorListener */
     TransformerErrorListener(Logger aLogger ) {
         m_aLogger = aLogger;
     }
-    
+
     public void warning(TransformerException e) throws TransformerException {
         m_aLogger.logWarning(  e );
     }
@@ -51,5 +51,5 @@ class TransformerErrorListener implements javax.xml.transform.ErrorListener {
 
     public void fatalErrorNoException(TransformerException e) {
         m_aLogger.logFatalError(  e );
-    }    
+    }
 }

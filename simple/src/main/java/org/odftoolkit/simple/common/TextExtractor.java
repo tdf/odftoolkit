@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -49,7 +49,7 @@ import org.w3c.dom.Node;
  * functions. They are text:p, text:h, text:s, text:tab and text:linebreak,
  * which <code>visit()</code> are override to process white space, according to
  * ODF specification.
- * 
+ *
  * @see org.odftoolkit.odfdom.pkg.OdfElement
  */
 public class TextExtractor extends DefaultElementVisitor {
@@ -58,11 +58,11 @@ public class TextExtractor extends DefaultElementVisitor {
 	protected static final char TabChar = '\t';
 	protected final ExtractorStringBuilder mTextBuilder;
 	OdfElement mElement;
-	
+
 	/**
 	 * This class is used to provide the string builder functions to extractor.
 	 * It will automatically process the last NewLineChar.
-	 * 
+	 *
 	 * @since 0.3.5
 	 */
 	protected static class ExtractorStringBuilder {
@@ -76,7 +76,7 @@ public class TextExtractor extends DefaultElementVisitor {
 
 		/**
 		 * Append a string
-		 * 
+		 *
 		 * @param str
 		 *            - the string
 		 */
@@ -86,7 +86,7 @@ public class TextExtractor extends DefaultElementVisitor {
 
 		/**
 		 * Append a character
-		 * 
+		 *
 		 * @param ch
 		 *            - the character
 		 */
@@ -118,7 +118,7 @@ public class TextExtractor extends DefaultElementVisitor {
 
 	/**
 	 * Return the text content of a element as String
-	 * 
+	 *
 	 * @param ele
 	 *            the ODF element
 	 * @return the text content of the element
@@ -131,7 +131,7 @@ public class TextExtractor extends DefaultElementVisitor {
 	/**
 	 * Create a TextExtractor instance using specified ODF element, which text
 	 * content can be extracted by <code>getText()</code>.
-	 * 
+	 *
 	 * @param element
 	 *            the ODF element whose text will be extracted.
 	 * @return an instance of TextExtractor
@@ -142,7 +142,7 @@ public class TextExtractor extends DefaultElementVisitor {
 
 	/**
 	 * Return the text content of specified ODF element as a string.
-	 * 
+	 *
 	 * @return the text content as a string
 	 */
 	public String getText() {
@@ -159,7 +159,7 @@ public class TextExtractor extends DefaultElementVisitor {
 
 	/**
 	 * Constructor with an ODF element as parameter
-	 * 
+	 *
 	 * @param element
 	 *            the ODF element whose text would be extracted.
 	 */
@@ -171,7 +171,7 @@ public class TextExtractor extends DefaultElementVisitor {
 	/**
 	 * The end users needn't to care of this method, if you don't want to
 	 * override the text content handling strategy of <code>OdfElement</code>.
-	 * 
+	 *
 	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.pkg.OdfElement)
 	 */
 	@Override
@@ -186,7 +186,7 @@ public class TextExtractor extends DefaultElementVisitor {
 	/**
 	 * The end users needn't to care of this method, if you don't want to
 	 * override the text content handling strategy of text:p.
-	 * 
+	 *
 	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextPElement)
 	 */
 	@Override
@@ -198,7 +198,7 @@ public class TextExtractor extends DefaultElementVisitor {
 	/**
 	 * The end users needn't to care of this method, if you don't want to
 	 * override the text content handling strategy of text:h.
-	 * 
+	 *
 	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextHElement)
 	 */
 	@Override
@@ -210,7 +210,7 @@ public class TextExtractor extends DefaultElementVisitor {
 	/**
 	 * The end users needn't to care of this method, if you don't want to
 	 * override the text content handling strategy of text:s.
-	 * 
+	 *
 	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextSElement)
 	 */
 	@Override
@@ -227,7 +227,7 @@ public class TextExtractor extends DefaultElementVisitor {
 	/**
 	 * The end users needn't to care of this method, if you don't want to
 	 * override the text content handling strategy of text:tab.
-	 * 
+	 *
 	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextTabElement)
 	 */
 	@Override
@@ -238,7 +238,7 @@ public class TextExtractor extends DefaultElementVisitor {
 	/**
 	 * The end users needn't to care of this method, if you don't want to
 	 * override the text content handling strategy of text:linebreak.
-	 * 
+	 *
 	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextLineBreakElement)
 	 */
 	@Override
@@ -248,7 +248,7 @@ public class TextExtractor extends DefaultElementVisitor {
 
 	/**
 	 * Append the text content of this element to string buffer.
-	 * 
+	 *
 	 * @param ele
 	 *            the ODF element whose text will be appended.
 	 */

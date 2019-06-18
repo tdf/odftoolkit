@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -68,7 +68,7 @@ public class CellSelectionTest {
 		typeProperties.put("Date", "date");
 		typeProperties.put("Time", "time");
 		typeProperties.put("Status", "boolean");
-		
+
 		// simple text replace
 		for (String key : valueProperties.keySet()) {
 			String value = valueProperties.get(key);

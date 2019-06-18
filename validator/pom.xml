@@ -242,36 +242,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.ec4j.maven</groupId>
-                <artifactId>editorconfig-maven-plugin</artifactId>
-                <version>0.0.10</version>
-                <executions>
-                    <execution>
-                        <id>check</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <excludes>
-                        <!-- +++++++++++ https://ec4j.github.io/editorconfig-maven-plugin/ +++++++++++-->
-                        <!-- Note that maven submodule directories and many non-source file patterns are excluded by default -->
-                        <!--     see https://github.com/ec4j/editorconfig-maven-plugin/blob/master/ec4j-lint-api/src/main/java/org/ec4j/maven/lint/api/Constants.java#L37 -->
-                        <!--      See https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties -->
-                        <!--      !!! 'mvn editorconfig:format' fixes format via command line!!! -->
-
-                        <!-- You can exclude further files from processing: -->
-                        <!--<exclude>src/main/**/*.whatever</exclude>-->
-                    </excludes>
-                    <!-- All files are included by default: -->
-                    <includes>
-                        <include>**</include>
-                    </includes>>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
     <reporting>

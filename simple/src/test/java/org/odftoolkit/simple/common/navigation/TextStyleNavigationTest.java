@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -37,7 +37,7 @@ import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 /**
- * Test the method of class org.odftoolkit.simple.common.navigation.TextStyleNavigation 
+ * Test the method of class org.odftoolkit.simple.common.navigation.TextStyleNavigation
  */
 public class TextStyleNavigationTest {
 

@@ -57,36 +57,36 @@ public class ODFXSLTRunner {
      * Input file is a plain XML file.
      */
     public static final int INPUT_MODE_FILE = 0;
-    
+
     /**
      * Input file is an ODF package. The style sheet is applied to the
      * specified sub file.
      */
     public static final int INPUT_MODE_PACKAGE = 1;
-    
+
     /**
      * Output file is a plain XML or text file.
      */
     public static final int OUTPUT_MODE_FILE = 0;
-    
+
     /**
      * Output is stdout.
      */
     public static final int OUTPUT_MODE_STDOUT = 1;
-    
+
     /**
      * The transformation replaces the specified path within
      * the input file.
      */
     public static final int OUTPUT_MODE_REPLACE_INPUT_PACKAGE = 2;
-    
+
     /**
      * The input package is copied and the result of the transformation
      * is stored in the specified path within the copied package.
      */
     public static final int OUTPUT_MODE_COPY_INPUT_PACKAGE = 3;
-    
-    /** 
+
+    /**
      * The result of the transformation is stored in the specified path within
      * the output package.
      */
@@ -100,10 +100,10 @@ public class ODFXSLTRunner {
     public ODFXSLTRunner()
     {
     }
-    
+
     /**
      * Apply a style sheeet.
-     * 
+     *
      * @param aStyleSheet Path of the style sheet
      * @param aParams Parameters that are passed to the XSLT processor
      * @param aInputFile Path of the input file
@@ -114,14 +114,14 @@ public class ODFXSLTRunner {
      * @param aExtractFileNames A list of files or directory that shell be extracted from the package
      * @param aPathInPackage Path within the package. Default is "content.xml"
      * @param aLogger Logger object
-     * 
+     *
      * @return true if an error occured.
      */
     public boolean runXSLT( String aStyleSheet, List<XSLTParameter> aParams,
                      String aInputFile, int aInputMode,
                      String aOutputFile, int aOutputMode,
                      String aPathInPackage,
-                     String aTransformerFactoryClassName, 
+                     String aTransformerFactoryClassName,
                      List<String> aExtractFileNames,
                      Logger aLogger )
     {
@@ -131,11 +131,11 @@ public class ODFXSLTRunner {
                         aPathInPackage, aTransformerFactoryClassName,
                         aExtractFileNames, aLogger );
     }
-    
-    
+
+
     /**
      * Apply a style sheeet.
-     * 
+     *
      * @param aStyleSheetFile Style sheet
      * @param aParams Parameters that are passed to the XSLT processor
      * @param aInputFile Input file
@@ -153,7 +153,7 @@ public class ODFXSLTRunner {
                      File aInputFile, int aInputMode,
                      File aOutputFile, int aOutputMode,
                      String aPathInPackage,
-                     String aTransformerFactoryClassName, 
+                     String aTransformerFactoryClassName,
                      List<String> aExtractFileNames,
                      Logger aLogger )
     {
@@ -220,8 +220,8 @@ public class ODFXSLTRunner {
             }
             if( aOutputResult == null )
             {
-                aLogger.setName( aOutputFile.getAbsolutePath(), aPathInPackage );                
-                aOutputStream = 
+                aLogger.setName( aOutputFile.getAbsolutePath(), aPathInPackage );
+                aOutputStream =
                     aOutputPkg.insertOutputStream(aPathInPackage, aMediaType );
                 aOutputResult = new StreamResult( aOutputStream );
             }
@@ -243,11 +243,11 @@ public class ODFXSLTRunner {
 
         aLogger.setName( aStyleSheetFile.getAbsolutePath() );
         aLogger.logInfo( "Applying stylesheet to '" + aInputName + "'");
-        bError = runXSLT( aStyleSheetFile, aParams, aInputSource, aOutputResult, 
+        bError = runXSLT( aStyleSheetFile, aParams, aInputSource, aOutputResult,
                           aTransformerFactoryClassName, aURIResolver, aLogger );
         if( bError )
             return true;
-        
+
         aLogger.setName( aOutputFile != null ? aOutputFile.getAbsolutePath() : "(none)" );
         try
         {
@@ -267,12 +267,12 @@ public class ODFXSLTRunner {
             aLogger.logFatalError(e.getMessage());
             return true;
         }
-        
+
         return false;
     }
-    
-    
-    private boolean runXSLT( File aStyleSheetFile, 
+
+
+    private boolean runXSLT( File aStyleSheetFile,
                      List<XSLTParameter> aParams,
                      InputSource aInputInputSource, Result aOutputTarget,
                      String aTransformerFactoryClassName,
@@ -292,7 +292,7 @@ public class ODFXSLTRunner {
 
         InputSource aStyleSheetInputSource = new InputSource(aStyleSheetInputStream);
         aStyleSheetInputSource.setSystemId(aStyleSheetFile.getAbsolutePath());
-        
+
         XMLReader aStyleSheetXMLReader = null;
         XMLReader aInputXMLReader = null;
         try
@@ -303,13 +303,13 @@ public class ODFXSLTRunner {
         catch( SAXException e )
         {
             aLogger.logFatalError(e.getMessage());
-            return true;            
+            return true;
         }
-        
+
         aStyleSheetXMLReader.setErrorHandler(new SAXErrorHandler(aLogger));
         aInputXMLReader.setErrorHandler(new SAXErrorHandler(aLogger));
         aInputXMLReader.setEntityResolver(new ODFEntityResolver(aLogger));
-        
+
         Source aStyleSheetSource = new SAXSource( aStyleSheetXMLReader, aStyleSheetInputSource );
         Source aInputSource = new SAXSource( aInputXMLReader, aInputInputSource );
 
@@ -333,27 +333,27 @@ public class ODFXSLTRunner {
 		  catch( ClassNotFoundException ce )
           {
             aLogger.logFatalError(ce.getMessage());
-            return true;            
+            return true;
           }
 		  catch( InstantiationException ie )
           {
             aLogger.logFatalError(ie.getMessage());
-            return true;            
+            return true;
           }
 		  catch( IllegalAccessException ile )
           {
             aLogger.logFatalError(ile.getMessage());
-            return true;            
+            return true;
           }
 		}
         ErrorListener aErrorListener = new TransformerErrorListener( aLogger );
         aLogger.logInfo( "Using transformer factory class: " + aFactory.getClass().getName() );
         aFactory.setErrorListener(aErrorListener);
-        
+
         try
         {
             Transformer aTransformer = aFactory.newTransformer(aStyleSheetSource);
-            
+
             if( aParams != null )
             {
                 Iterator<XSLTParameter> aIter = aParams.iterator();

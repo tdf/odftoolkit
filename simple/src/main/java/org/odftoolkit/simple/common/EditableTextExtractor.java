@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -43,11 +43,11 @@ import org.w3c.dom.NodeList;
  * <code>getText()</code> to return all the text that the user can typically
  * edit in a document, including text in cotent.xml, header and footer in
  * styles.xml, meta data in meta.xml.
- * 
+ *
  * <p>
  * This function can be used by search engine, and text analytic operations.
  * </p>
- * 
+ *
  * @see org.odftoolkit.odfdom.pkg.OdfElement
  * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor
  */
@@ -59,7 +59,7 @@ public class EditableTextExtractor extends TextExtractor {
 	/**
 	 * An instance of EditableTextExtractor will be created to extract the
 	 * editable text content in specified document.
-	 * 
+	 *
 	 * @param doc
 	 *            the document whose text will be extracted.
 	 * @return An instance of EditableTextExtractor
@@ -71,7 +71,7 @@ public class EditableTextExtractor extends TextExtractor {
 	/**
 	 * An instance of EditableTextExtractor will be created to extract the
 	 * editable text content of an ODF element.
-	 * 
+	 *
 	 * @param element
 	 *            the ODF element whose text will be extracted.
 	 * @return An instance of EditableTextExtractor
@@ -82,7 +82,7 @@ public class EditableTextExtractor extends TextExtractor {
 
 	/**
 	 * Return the text content of a element as String
-	 * 
+	 *
 	 * @param ele
 	 *            the ODF element
 	 * @return the text content of the element
@@ -94,7 +94,7 @@ public class EditableTextExtractor extends TextExtractor {
 
 	/**
 	 * Return the text content of document as String
-	 * 
+	 *
 	 * @param doc
 	 *            the document
 	 * @return the text content of the document
@@ -106,7 +106,7 @@ public class EditableTextExtractor extends TextExtractor {
 
 	/**
 	 * Return the editable text content as a string
-	 * 
+	 *
 	 * @return the editable text content as a string
 	 */
 	@Override
@@ -121,7 +121,7 @@ public class EditableTextExtractor extends TextExtractor {
 
 	/**
 	 * Constructor with a document as parameter
-	 * 
+	 *
 	 * @param doc
 	 *            the document whose editable text would be extracted.
 	 */
@@ -133,7 +133,7 @@ public class EditableTextExtractor extends TextExtractor {
 
 	/**
 	 * Constructor with an ODF element as parameter
-	 * 
+	 *
 	 * @param element
 	 *            the ODF element whose editable text would be extracted.
 	 */
@@ -145,7 +145,7 @@ public class EditableTextExtractor extends TextExtractor {
 	/**
 	 * The end users needn't to care of this method, if you don't want to
 	 * override the text content handling strategy of draw:object.
-	 * 
+	 *
 	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.draw.DrawObjectElement)
 	 */
 	@Override
@@ -165,7 +165,7 @@ public class EditableTextExtractor extends TextExtractor {
 	/**
 	 * The end users needn't to care of this method, if you don't want to
 	 * override the text content handling strategy of text:tracked-changes.
-	 * 
+	 *
 	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextTrackedChangesElement)
 	 */
 	@Override
@@ -176,7 +176,7 @@ public class EditableTextExtractor extends TextExtractor {
 	/**
 	 * The end users needn't to care of this method, if you don't want to
 	 * override the text content handling strategy of text:a.
-	 * 
+	 *
 	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextAElement)
 	 */
 	@Override
@@ -189,7 +189,7 @@ public class EditableTextExtractor extends TextExtractor {
 	/**
 	 * The end users needn't to care of this method, if you don't want to
 	 * override the text content handling strategy of table:table.
-	 * 
+	 *
 	 * @see org.odftoolkit.odfdom.dom.DefaultElementVisitor#visit(org.odftoolkit.odfdom.dom.element.text.TextTabElement)
 	 */
 	@Override

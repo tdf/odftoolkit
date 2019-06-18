@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -29,14 +29,14 @@ import org.odftoolkit.simple.form.FormTypeDefinition.FormCommandType;
  * properties, content, layout and styles. A form is a container to hold
  * controls like buttons, combo boxes, labels, fields, check boxes, radio
  * buttons, text boxes, list boxes and etc.
- * 
+ *
  * @since 0.8
  */
 public interface Form {
 
 	/**
 	 * Create a button control in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -45,7 +45,7 @@ public interface Form {
 	 *            - the name of the control
 	 * @param label
 	 *            - the text label of the button
-	 * 
+	 *
 	 * @return an instance of button
 	 */
 	public FormControl createButton(ControlContainer parent,
@@ -53,7 +53,7 @@ public interface Form {
 
 	/**
 	 * Create a label control in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -62,7 +62,7 @@ public interface Form {
 	 *            - the name of the control
 	 * @param text
 	 *            -default text of the label
-	 * 
+	 *
 	 * @return an instance of label
 	 */
 	public FormControl createLabel(ControlContainer parent,
@@ -70,7 +70,7 @@ public interface Form {
 
 	/**
 	 * Create a textbox in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -81,7 +81,7 @@ public interface Form {
 	 *            -default text of the textbox
 	 * @param isMultipleLine
 	 *            - if this textbox supports multiple lines input
-	 * 
+	 *
 	 * @return an instance of text box
 	 */
 	public FormControl createTextBox(ControlContainer parent,
@@ -90,7 +90,7 @@ public interface Form {
 
 	/**
 	 * Create a list box in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -101,7 +101,7 @@ public interface Form {
 	 *            - support multi-selection or not
 	 * @param isDropDown
 	 *            - the drop-down list is visible or not
-	 * 
+	 *
 	 * @return an instance of list box
 	 */
 	public FormControl createListBox(ControlContainer parent,
@@ -110,7 +110,7 @@ public interface Form {
 
 	/**
 	 * Create a combo box in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -121,7 +121,7 @@ public interface Form {
 	 *            - the default text of combobox
 	 * @param isDropDown
 	 *            - the drop-down list is visible or not
-	 * 
+	 *
 	 * @return an instance of combo box
 	 */
 	public FormControl createComboBox(ControlContainer parent,
@@ -130,7 +130,7 @@ public interface Form {
 
 	/**
 	 * Create a radio button in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -141,7 +141,7 @@ public interface Form {
 	 *            - the label of this radio button
 	 * @param value
 	 *            - the value assign to this option
-	 * 
+	 *
 	 * @return an instance of radio button
 	 */
 	public FormControl createRadioButton(ControlContainer parent,
@@ -149,7 +149,7 @@ public interface Form {
 
 	/**
 	 * Create a check box in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -160,7 +160,7 @@ public interface Form {
 	 *            - the label of this check box
 	 * @param value
 	 *            - the value assign to this option
-	 * 
+	 *
 	 * @return an instance of check box
 	 */
 	public FormControl createCheckBox(ControlContainer parent,
@@ -168,7 +168,7 @@ public interface Form {
 
 	/**
 	 * Create a date field in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -177,7 +177,7 @@ public interface Form {
 	 *            - the name of the control
 	 * @param defaultValue
 	 *            - the default value of this input field
-	 * 
+	 *
 	 * @return an instance of date field
 	 */
 	public FormControl createDateField(ControlContainer parent,
@@ -185,7 +185,7 @@ public interface Form {
 
 	/**
 	 * Create a time field in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -194,7 +194,7 @@ public interface Form {
 	 *            - the name of the control
 	 * @param defaultValue
 	 *            - the default value of this input field
-	 * 
+	 *
 	 * @return an instance of time field
 	 */
 	public FormControl createTimeField(ControlContainer parent,
@@ -202,7 +202,7 @@ public interface Form {
 
 	/**
 	 * Create a numeric field in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -211,7 +211,7 @@ public interface Form {
 	 *            - the name of the control
 	 * @param defaultValue
 	 *            - the default value of this input field
-	 * 
+	 *
 	 * @return an instance of numeric field
 	 */
 	public FormControl createNumericField(ControlContainer parent,
@@ -219,7 +219,7 @@ public interface Form {
 
 	/**
 	 * Create a pattern field in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -228,7 +228,7 @@ public interface Form {
 	 *            - the name of the control
 	 * @param defaultValue
 	 *            - the default value of this input field
-	 * 
+	 *
 	 * @return an instance of pattern field
 	 */
 	public FormControl createPatternField(ControlContainer parent,
@@ -236,7 +236,7 @@ public interface Form {
 
 	/**
 	 * Create a currency field in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -245,7 +245,7 @@ public interface Form {
 	 *            - the name of the control
 	 * @param defaultValue
 	 *            - the default value of this input field
-	 * 
+	 *
 	 * @return an instance of currency field
 	 */
 	public FormControl createCurrencyField(ControlContainer parent,
@@ -253,7 +253,7 @@ public interface Form {
 
 	/**
 	 * Set the name of this form
-	 * 
+	 *
 	 * @param name
 	 *            - the form name
 	 */
@@ -261,14 +261,14 @@ public interface Form {
 
 	/**
 	 * Get the form name
-	 * 
+	 *
 	 * @return the form name
 	 */
 	public String getFormName();
 
 	/**
 	 * Set the implementation of the created control
-	 * 
+	 *
 	 * @param controlImpl
 	 *            - implementation of control
 	 */
@@ -276,14 +276,14 @@ public interface Form {
 
 	/**
 	 * Get the implementation of the created control
-	 * 
+	 *
 	 * @return a control implementation
 	 */
 	public String getControlImplementation();
 
 	/**
 	 * Set the data source to be used by the form
-	 * 
+	 *
 	 * @param dataSource
 	 *            - name of data source
 	 */
@@ -291,14 +291,14 @@ public interface Form {
 
 	/**
 	 * Get the name of data source
-	 * 
+	 *
 	 * @return the name of data source used by the form
 	 */
 	public String getDataSource();
 
 	/**
 	 * Set the type of command to execute on a data source.
-	 * 
+	 *
 	 * @param commandType
 	 *            the command type
 	 */
@@ -306,29 +306,29 @@ public interface Form {
 
 	/**
 	 * Get the type of command to execute on a data source
-	 * 
+	 *
 	 * @return the command type
 	 */
 	public FormCommandType getCommandType();
 
 	/**
 	 * Set a command to execute on a data source
-	 * 
+	 *
 	 * @param command
-	 * 
+	 *
 	 */
 	public void setCommand(String command);
 
 	/**
 	 * Get the command to execute on a data source
-	 * 
+	 *
 	 * @return the command
 	 */
 	public String getCommand();
 
 	/**
 	 * Get the instance of <code>FormFormElemnt</code> element.
-	 * 
+	 *
 	 * @return the instance of <code>FormFormElemnt</code>
 	 */
 	public FormFormElement getOdfElement();

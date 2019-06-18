@@ -1,5 +1,5 @@
- 
-<!-- 
+
+<!--
 	   Licensed to the Apache Software Foundation (ASF) under one
 	   or more contributor license agreements.  See the NOTICE file
 	   distributed with this work for additional information
@@ -18,63 +18,63 @@
 	   under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.odftoolkit</groupId>
-		<artifactId>odftoolkit</artifactId>
-		<version>0.9.0-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>org.odftoolkit</groupId>
+        <artifactId>odftoolkit</artifactId>
+        <version>0.9.0-SNAPSHOT</version>
+    </parent>
 
-	<artifactId>xslt-runner-task</artifactId>
-	<name>ODF XSLT-Runner Ant Task</name>
-	<version>0.9.0-SNAPSHOT</version>
-  
-	<organization>
-		<name>The Document Foundation</name>
-		<url>https://www.documentfoundation.org/</url>
-	</organization>
-	<dependencies>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>xslt-runner</artifactId>
-			<version>0.9.0-SNAPSHOT</version>
-		</dependency>	
-		<dependency>
-			<groupId>org.apache.ant</groupId>
-			<artifactId>ant</artifactId>
-		</dependency>
-	</dependencies>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
-	</properties>
+    <artifactId>xslt-runner-task</artifactId>
+    <name>ODF XSLT-Runner Ant Task</name>
+    <version>0.9.0-SNAPSHOT</version>
+
+    <organization>
+        <name>The Document Foundation</name>
+        <url>https://www.documentfoundation.org/</url>
+    </organization>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>xslt-runner</artifactId>
+            <version>0.9.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+        </dependency>
+    </dependencies>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
+    </properties>
 
 
 	<!-- Build Settings -->
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
-				<configuration>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
 					<!-- defined in the parent pom.xml -->
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-					<meminitial>512m</meminitial>
-					<maxmem>1024m</maxmem>
-					<showDeprecation>true</showDeprecation>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.rat</groupId>
-				<artifactId>apache-rat-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>nbproject/**</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <meminitial>512m</meminitial>
+                    <maxmem>1024m</maxmem>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>nbproject/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -41,7 +41,7 @@ import org.w3c.dom.NodeList;
  *This class represents the form control, which provides the methods to get/set
  * the control properties and style and layout properties of its binding drawing
  * shape.
- * 
+ *
  * @since 0.8
  */
 public abstract class FormControl extends Component {
@@ -54,7 +54,7 @@ public abstract class FormControl extends Component {
 	/**
 	 * Create an instance of a drawing shape(<code>DrawControlElement</code>) as
 	 * an visual representation of this form control.
-	 * 
+	 *
 	 * @param parent
 	 *            - the container where this drawing shape is contained.
 	 * @return an instance of drawing shape
@@ -69,9 +69,9 @@ public abstract class FormControl extends Component {
 	 * Remove the form control from the container.
 	 * <p>
 	 * The resource is removed if it's only used by this object.
-	 * 
+	 *
 	 * @see Control#remove()
-	 * 
+	 *
 	 * @return true if the form control is successfully removed; false if
 	 *         otherwise.
 	 */
@@ -95,7 +95,7 @@ public abstract class FormControl extends Component {
 	/**
 	 * Load an instance of drawing shape by searching the DrawControlElement
 	 * which contains a reference to this control.
-	 * 
+	 *
 	 * @param root
 	 *            - root element where to search the DrawControlElement
 	 * @return true if an element is found; false no element is found.
@@ -120,7 +120,7 @@ public abstract class FormControl extends Component {
 
 	/**
 	 * Get the OdfElement which represents this control
-	 * 
+	 *
 	 * @return the OdfElement which represents this control
 	 */
 	public OdfElement getOdfElement() {
@@ -129,7 +129,7 @@ public abstract class FormControl extends Component {
 
 	/**
 	 * Get the drawing shape binding to this control
-	 * 
+	 *
 	 * @return the drawing shape binding to this control
 	 */
 	public Control getDrawControl() {
@@ -138,7 +138,7 @@ public abstract class FormControl extends Component {
 
 	/**
 	 * Set the control id.
-	 * 
+	 *
 	 * @param id
 	 *            -the control id.
 	 */
@@ -146,14 +146,14 @@ public abstract class FormControl extends Component {
 
 	/**
 	 * Get the control id.
-	 * 
+	 *
 	 * @return the control id.
 	 */
 	public abstract String getId();
 
 	/**
 	 * Set the control name.
-	 * 
+	 *
 	 * @param name
 	 *            - the control name.
 	 */
@@ -161,14 +161,14 @@ public abstract class FormControl extends Component {
 
 	/**
 	 * Get the control name.
-	 * 
+	 *
 	 * @return the control name.
 	 */
 	public abstract String getName();
 
 	/**
 	 * Set the implementation of this control.
-	 * 
+	 *
 	 * @param controlImpl
 	 *            - the implementation description of this control
 	 */
@@ -177,7 +177,7 @@ public abstract class FormControl extends Component {
 	/**
 	 * Set the anchor position how this form control is bound to a text
 	 * document.
-	 * 
+	 *
 	 * @param anchorType
 	 *            - the anchor position
 	 */
@@ -190,7 +190,7 @@ public abstract class FormControl extends Component {
 
 	/**
 	 * Return the rectangle used as the bounding box of this form control
-	 * 
+	 *
 	 * @return - the rectangle
 	 */
 	public FrameRectangle getRectangle() {
@@ -199,7 +199,7 @@ public abstract class FormControl extends Component {
 
 	/**
 	 * Set the rectangle used as the bounding box of this form control
-	 * 
+	 *
 	 * @param rectangle
 	 *            - the rectangle
 	 */
@@ -212,7 +212,7 @@ public abstract class FormControl extends Component {
 	 * Get the <code>FormPropertiesElement</code> of this control, which is used
 	 * to set the implementation-independent properties. If there's no such
 	 * element, create a new one for this control.
-	 * 
+	 *
 	 * @return an instance of the <code>FormPropertiesElement</code>
 	 */
 	abstract FormPropertiesElement getFormPropertiesElementForWrite();
@@ -221,7 +221,7 @@ public abstract class FormControl extends Component {
 	 * Get the <code>FormPropertiesElement</code> of this control, which is used
 	 * to set the implementation-independent properties. If there's no such
 	 * element, null will be returned.
-	 * 
+	 *
 	 * @return an instance of the <code>FormPropertiesElement</code>
 	 */
 	FormPropertiesElement getFormPropertiesElementForRead() {

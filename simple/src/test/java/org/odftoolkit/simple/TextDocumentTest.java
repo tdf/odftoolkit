@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -63,10 +63,10 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Node;
 
 public class TextDocumentTest {
-	
+
 	private static final Logger LOG = Logger.getLogger(TextDocumentTest.class.getName());
 	private static final String EMPTY_TEXT_DOCUMENT_PATH = "TextFieldSampleDocument.odt";
-	
+
 	@Test
 	public void testAddPageBreak() {
 		try {
@@ -90,13 +90,13 @@ public class TextDocumentTest {
 			existDoc.addPageBreak(refParagraph);
 			validPageBreakExist(existDoc, refParagraph);
 			existDoc.save(ResourceUtilities.newTestOutputFile("test2Out.odt"));
-			
+
 		} catch (Exception e) {
 			Logger.getLogger(TextDocumentTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail();
 		}
 	}
-	
+
 	@Test
 	public void testAddPagebreakWithMasterPage() {
 		try {
@@ -260,7 +260,7 @@ public class TextDocumentTest {
 		try {
 			// test new creation document.
 			TextDocument newDoc = TextDocument.newTextDocument();
-			
+
 			Paragraph paragraph = newDoc.addParagraph("Paragraph1");
 			paragraph.addComment("This is a comment for Paragraph1", "Simple ODF");
 			Node firstChildNode = paragraph.getOdfElement().getFirstChild();
@@ -269,7 +269,7 @@ public class TextDocumentTest {
 			Assert.assertEquals("Simple ODF", comment.getFirstChild().getTextContent());
 			Assert.assertEquals("This is a comment for Paragraph1", comment.getLastChild().getTextContent());
 			Assert.assertTrue(firstChildNode instanceof OfficeAnnotationElement);
-			
+
 			paragraph = newDoc.addParagraph("Paragraph2");
 			paragraph.addComment("This is a comment for Paragraph2", null);
 			firstChildNode = paragraph.getOdfElement().getFirstChild();
@@ -277,14 +277,14 @@ public class TextDocumentTest {
 			comment = (OfficeAnnotationElement) firstChildNode;
 			Assert.assertEquals(System.getProperty("user.name"), comment.getFirstChild().getTextContent());
 			Assert.assertEquals("This is a comment for Paragraph2", comment.getLastChild().getTextContent());
-			
+
 			newDoc.save(ResourceUtilities.newTestOutputFile("AddCommentOutput.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TextDocumentTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail();
 		}
 	}
-	
+
 	private void validPageBreakExist(TextDocument newDoc, Paragraph paragraph) throws Exception {
 		Node paragraphNode = paragraph.getOdfElement().getNextSibling();
 		Assert.assertTrue(paragraphNode instanceof TextPElement);
@@ -297,14 +297,14 @@ public class TextDocumentTest {
 		Assert.assertEquals(((StyleParagraphPropertiesElement) paragraphPropertiesNode).getFoBreakBeforeAttribute(),
 				"page");
 	}
-	
+
 
 	@Test
 	public void testGetMediaTypeString() throws Exception {
 		try {
 			TextDocument tdoc = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath(EMPTY_TEXT_DOCUMENT_PATH));
 			Assert.assertNotNull(tdoc);
-			
+
 			OdfMediaType odfMedia = tdoc.getOdfMediaType();
 			String mediaType = odfMedia.getMediaTypeString();
 			Assert.assertEquals("application/vnd.oasis.opendocument.text", mediaType);
@@ -312,9 +312,9 @@ public class TextDocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testNewTextDocument() throws Exception {
 		try {
@@ -331,9 +331,9 @@ public class TextDocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testLoadDocumentResource() throws Exception {
 		try {
@@ -345,9 +345,9 @@ public class TextDocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testLoadDocumentFile() throws Exception {
 		try {
@@ -361,9 +361,9 @@ public class TextDocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testGetTableContainerElement() throws Exception {
 		try {
@@ -371,7 +371,7 @@ public class TextDocumentTest {
 			File file = new File(filePath);
 			TextDocument tdocument = TextDocument.loadDocument(file);
 			Assert.assertNotNull(tdocument);
-			
+
 			TableContainer tablecon = tdocument.getTableContainerImpl();
 			OdfElement odfeleA = tablecon.getTableContainerElement();
 			OdfElement odfeleB = tdocument.getTableContainerElement();
@@ -380,9 +380,9 @@ public class TextDocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testAddText() throws Exception {
 		try {
@@ -392,14 +392,14 @@ public class TextDocumentTest {
 			Assert.assertNotNull(tdocument);
 			//Paragraph textParagraph1 = tdocument.addParagraph("Paragraph1");
 			OdfTextParagraph textParagraph = tdocument.addText("text1");
-			
+
 			Assert.assertEquals("text1", textParagraph.getTextContent());
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testRemoveParagraph() throws Exception {
 		try {
@@ -407,7 +407,7 @@ public class TextDocumentTest {
 			File file = new File(filePath);
 			TextDocument tdoc = TextDocument.loadDocument(file);
 			Assert.assertNotNull(tdoc);
-			
+
 			Paragraph para = tdoc.addParagraph("paragraph1");
 			Assert.assertEquals("paragraph1", para.getTextContent());
 			boolean flag = tdoc.removeParagraph(para);
@@ -418,29 +418,29 @@ public class TextDocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testDeclareVariable() throws Exception {
 		try {
 			TextDocument tdoc = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("headerFooterHidden.odt"));
 			Assert.assertNotNull(tdoc);
-			
+
 			VariableField vField = tdoc.declareVariable("variable1", VariableField.VariableType.SIMPLE);
 			Assert.assertEquals("variable1", vField.getVariableName());
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testGetVariableFieldByName() throws Exception {
-		
+
 		try {
 			TextDocument tdoc = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("headerFooterHidden.odt"));
 			Assert.assertNotNull(tdoc);
-			
+
 			VariableField vFieldA = tdoc.declareVariable("variable1", VariableField.VariableType.SIMPLE);
 			vFieldA.getVariableName();
 			System.out.println(vFieldA.getVariableName());
@@ -450,7 +450,7 @@ public class TextDocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testCreateChart() throws Exception {
 		TextDocument tdoc = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("headerFooterHidden.odt"));
@@ -465,11 +465,11 @@ public class TextDocumentTest {
 		Assert.assertEquals(ChartType.AREA, chart.getChartType());
 		Assert.assertEquals("title_name", chart.getChartTitle());
 		Assert.assertEquals(dataset, chart.getChartData());
-		
+
 		//save
 		tdoc.save(ResourceUtilities.getAbsolutePath("headerFooterHidden.odt"));
 	}
-	
+
 	@Test
 	public void testGetChartCount() throws Exception {
 		TextDocument tdoc = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("headerFooterHidden.odt"));
@@ -485,14 +485,14 @@ public class TextDocumentTest {
 		Assert.assertEquals(ChartType.AREA, chart.getChartType());
 		Assert.assertEquals("title_name", chart.getChartTitle());
 		Assert.assertEquals(dataset, chart.getChartData());
-		
+
 		int count = tdoc.getChartCount();
 		Assert.assertEquals(chartA.size(), count);
-		
+
 		//save
 		//tdoc.save(ResourceUtilities.getAbsolutePath("headerFooterHidden.odt"));
 	}
-	
+
 	@Test
 	public void testinsertContentFromDocumentBefore() throws Exception {
 		TextDocument src1 = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestInsertDocument.odt"));
@@ -513,14 +513,14 @@ public class TextDocumentTest {
 				i++;
 				System.out.println(sname);
 			}
-		}	
+		}
 		Assert.assertEquals(6, i);
 		target1.save(ResourceUtilities.newTestOutputFile("TestInsertDocumentWithStyleBefore.odt"));
-		
+
 		target2 = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestInsertDocument.odt"));
 		Paragraph p2 = target2.getParagraphByIndex(2, true);
 		target2.insertContentFromDocumentBefore(src2, p2, false);
-		
+
 		Iterable<OdfStyle> pstyles2 = target2.getStylesDom().getOfficeStyles().getStylesForFamily(OdfStyleFamily.Paragraph);
 		Iterator<OdfStyle> ite2 = pstyles2.iterator();
 		i=0;
@@ -533,7 +533,7 @@ public class TextDocumentTest {
 				i++;
 				System.out.println(sname);
 			}
-		}	
+		}
 		Assert.assertEquals(3, i);
 		target2.save(ResourceUtilities.newTestOutputFile("TestInsertDocumentWithoutStyleBefore.odt"));
 	}
@@ -557,16 +557,16 @@ public class TextDocumentTest {
 				i++;
 				System.out.println(sname);
 			}
-		}	
+		}
 		Assert.assertEquals(6, i);
 		target1.save(ResourceUtilities.newTestOutputFile("TestInsertDocumentWithStyleAfter.odt"));
-		
-		
-		
+
+
+
 		target2 = TextDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestInsertDocument.odt"));
 		Paragraph p2 = target2.getParagraphByIndex(2, true);
 		target2.insertContentFromDocumentAfter(src2, p2, false);
-		
+
 		Iterable<OdfStyle> pstyles2 = target2.getStylesDom().getOfficeStyles().getStylesForFamily(OdfStyleFamily.Paragraph);
 		Iterator<OdfStyle> ite2 = pstyles2.iterator();
 		i=0;
@@ -579,7 +579,7 @@ public class TextDocumentTest {
 				i++;
 				System.out.println(sname);
 			}
-		}	
+		}
 		Assert.assertEquals(3, i);
 		target2.save(ResourceUtilities.newTestOutputFile("TestInsertDocumentWithoutStyleAfter.odt"));
 	}

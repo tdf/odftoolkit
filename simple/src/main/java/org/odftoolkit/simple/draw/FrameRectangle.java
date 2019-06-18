@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -32,9 +32,9 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.SupportedLinearMeasure;
  * A Rectangle specifies an area in a coordinate space that is enclosed by the
  * Rectangle object's top-left point (x, y) in the coordinate space, its width,
  * and its height.
- * 
+ *
  * @since 0.5
- * 
+ *
  */
 public class FrameRectangle {
 
@@ -143,7 +143,7 @@ public class FrameRectangle {
 	/**
 	 * Create an instance of FrameRectangle with the top-left point (x, y),
 	 * width, height and the measurement
-	 * 
+	 *
 	 * @param x
 	 *            - the x-axis coordinate
 	 * @param y
@@ -167,7 +167,7 @@ public class FrameRectangle {
 	/**
 	 * Create an instance of FrameRectangle with the descriptions of top-left
 	 * point (x, y), width and height.
-	 * 
+	 *
 	 * @param xDesc
 	 *            - the x-axis coordinate with measurement
 	 * @param yDesc
@@ -241,7 +241,7 @@ public class FrameRectangle {
 
 	/**
 	 * Return the x-axis coordinate with measurement
-	 * 
+	 *
 	 * @return the x-axis coordinate with measurement
 	 */
 	public String getXDesc() {
@@ -250,7 +250,7 @@ public class FrameRectangle {
 
 	/**
 	 * Return the y-axis coordinate with measurement
-	 * 
+	 *
 	 * @return the y-axis coordinate with measurement
 	 */
 	public String getYDesc() {
@@ -259,7 +259,7 @@ public class FrameRectangle {
 
 	/**
 	 * Return the width with measurement
-	 * 
+	 *
 	 * @return the width with measurement
 	 */
 	public String getWidthDesc() {
@@ -268,7 +268,7 @@ public class FrameRectangle {
 
 	/**
 	 * Return the height with measurement
-	 * 
+	 *
 	 * @return the height with measurement
 	 */
 	public String getHeigthDesc() {

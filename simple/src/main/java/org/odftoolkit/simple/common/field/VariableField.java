@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -35,7 +35,7 @@ import org.odftoolkit.simple.Component;
  * ODF document can contain variables, which are processed or displayed as
  * VariableFields. In an ODF file, variable declarations shall precede in
  * document order any use of those variable declarations.
- * 
+ *
  * @since 0.5
  */
 public class VariableField extends Field {
@@ -63,7 +63,7 @@ public class VariableField extends Field {
 	 * <li>SEQUENCE: Sequence variables are used to number items in an ODF text
 	 * document. NOTE: Simple Java API for ODF doesn't support this type now.
 	 * </ul>
-	 * 
+	 *
 	 * @since 0.5
 	 */
 	public static enum VariableType {
@@ -143,7 +143,7 @@ public class VariableField extends Field {
 	 * <p>
 	 * Note: For user variable, the value of all fields in the document that
 	 * display the user variable will be reset.
-	 * 
+	 *
 	 * @param value
 	 *            the new value of this variable field.
 	 * @param refElement
@@ -182,7 +182,7 @@ public class VariableField extends Field {
 
 	/**
 	 * Display this variable field after the reference OdfElement.
-	 * 
+	 *
 	 * @param refElement
 	 *            the reference OdfElement. The variable field will be appended
 	 *            after this element.
@@ -224,7 +224,7 @@ public class VariableField extends Field {
 
 	/**
 	 * Get the variable field name.
-	 * 
+	 *
 	 * @return the variable field name
 	 */
 	public String getVariableName() {

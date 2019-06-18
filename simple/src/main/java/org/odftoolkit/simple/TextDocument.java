@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -109,7 +109,7 @@ import org.w3c.dom.Text;
 
 /**
  * This class represents an empty ODF text document.
- * 
+ *
  */
 public class TextDocument extends Document implements ListContainer,
 		ParagraphContainer, VariableContainer, ChartContainer, FormContainer,
@@ -123,7 +123,7 @@ public class TextDocument extends Document implements ListContainer,
 	private VariableContainerImpl variableContainerImpl;
 	private ChartContainerImpl chartContainerImpl;
 	private FormContainerImpl formContainerImpl = null;
-	
+
 	private Header firstPageHeader;
 	private Header standardHeader;
 
@@ -159,7 +159,7 @@ public class TextDocument extends Document implements ListContainer,
 		}
 
 		/**
-		 * 
+		 *
 		 * @param mediaType
 		 *            string defining an ODF document
 		 * @return the according OdfMediatype encapuslating the given string and
@@ -172,7 +172,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Creates an empty text document.
-	 * 
+	 *
 	 * @return ODF text document based on a default template
 	 * @throws java.lang.Exception
 	 *             - if the document could not be created
@@ -183,7 +183,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Creates an empty text document.
-	 * 
+	 *
 	 * @return ODF text document based on a default template
 	 * @throws java.lang.Exception
 	 *             - if the document could not be created
@@ -194,7 +194,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Creates an empty text template.
-	 * 
+	 *
 	 * @return ODF text template based on a default
 	 * @throws java.lang.Exception
 	 *             - if the template could not be created
@@ -205,7 +205,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Creates an empty text master document.
-	 * 
+	 *
 	 * @return ODF text master based on a default
 	 * @throws java.lang.Exception
 	 *             - if the document could not be created
@@ -219,7 +219,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Creates an empty text web.
-	 * 
+	 *
 	 * @return ODF text web based on a default
 	 * @throws java.lang.Exception
 	 *             - if the document could not be created
@@ -234,7 +234,7 @@ public class TextDocument extends Document implements ListContainer,
 	/**
 	 * Creates an TextDocument from the OpenDocument provided by a resource
 	 * Stream.
-	 * 
+	 *
 	 * <p>
 	 * Since an InputStream does not provide the arbitrary (non sequentiell)
 	 * read access needed by TextDocument, the InputStream is cached. This
@@ -242,12 +242,12 @@ public class TextDocument extends Document implements ListContainer,
 	 * methods. An advantage of caching is that there are no problems
 	 * overwriting an input file.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If the resource stream is not a ODF text document, ClassCastException
 	 * might be thrown.
 	 * </p>
-	 * 
+	 *
 	 * @param inputStream
 	 *            - the InputStream of the ODF text document.
 	 * @return the text document created from the given InputStream
@@ -260,17 +260,17 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Loads an TextDocument from the provided path.
-	 * 
+	 *
 	 * <p>
 	 * TextDocument relies on the file being available for read access over the
 	 * whole lifecycle of TextDocument.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If the resource stream is not a ODF text document, ClassCastException
 	 * might be thrown.
 	 * </p>
-	 * 
+	 *
 	 * @param documentPath
 	 *            - the path from where the document can be loaded
 	 * @return the text document from the given path or NULL if the media type
@@ -284,17 +284,17 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Creates an TextDocument from the OpenDocument provided by a File.
-	 * 
+	 *
 	 * <p>
 	 * TextDocument relies on the file being available for read access over the
 	 * whole lifecycle of TextDocument.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If the resource stream is not a ODF text document, ClassCastException
 	 * might be thrown.
 	 * </p>
-	 * 
+	 *
 	 * @param file
 	 *            - a file representing the ODF text document.
 	 * @return the text document created from the given File
@@ -317,7 +317,7 @@ public class TextDocument extends Document implements ListContainer,
 	/**
 	 * Get the content root of a text document. Start here to get or create new
 	 * elements of a text document like paragraphs, headings, tables or lists.
-	 * 
+	 *
 	 * @return content root, representing the office:text tag
 	 * @throws Exception
 	 *             if the file DOM could not be created.
@@ -329,7 +329,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Creates a new paragraph and append text
-	 * 
+	 *
 	 * @param text
 	 * @return the new paragraph
 	 * @throws Exception
@@ -346,7 +346,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Creates a new paragraph
-	 * 
+	 *
 	 * @return The new paragraph
 	 * @throws Exception
 	 *             if the file DOM could not be created.
@@ -363,7 +363,7 @@ public class TextDocument extends Document implements ListContainer,
 	/**
 	 * Append text to the end of a text document. If there is no paragraph at
 	 * the end of a document, a new one will be created.
-	 * 
+	 *
 	 * @param text
 	 *            initial text for the paragraph.
 	 * @return The paragraph at the end of the text document, where the text has
@@ -393,7 +393,7 @@ public class TextDocument extends Document implements ListContainer,
 	/**
 	 * Changes the document to the given mediatype. This method can only be used
 	 * to convert a document to a related mediatype, e.g. template.
-	 * 
+	 *
 	 * @param mediaType
 	 *            the related ODF mimetype
 	 */
@@ -410,7 +410,7 @@ public class TextDocument extends Document implements ListContainer,
 	 * If the section contains a linked resource, <code>isResourceCopied</code>
 	 * would specify whether the linked resource would be copied or not, when
 	 * the copy and append happens within a same document.
-	 * 
+	 *
 	 * @param section
 	 *            - the section object
 	 * @param isResourceCopied
@@ -444,7 +444,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Create an empty section and append it at the end of the text document.
-	 * 
+	 *
 	 * @param name
 	 *            - specify the section name
 	 * @return an instance of the section
@@ -480,7 +480,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Get the Standard Page header of this text document.
-	 * 
+	 *
 	 * @return the Standard Page header of this text document.
 	 * @since 0.4.5
 	 */
@@ -490,11 +490,11 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Get the header of this text document.
-	 * 
+	 *
 	 * @param isFirstPage
 	 *            if <code>isFirstPage</code> is true, return the First Page
 	 *            header, otherwise return Standard Page header.
-	 * 
+	 *
 	 * @return the header of this text document.
 	 * @since 0.5
 	 */
@@ -523,7 +523,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Get the Standard Page footer of this text document.
-	 * 
+	 *
 	 * @return the Standard Page footer of this text document.
 	 * @since 0.4.5
 	 */
@@ -533,11 +533,11 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Get the footer of this text document.
-	 * 
+	 *
 	 * @param isFirstPage
 	 *            if <code>isFirstPage</code> is true, return the First Page
 	 *            footer, otherwise return Standard Page footer.
-	 * 
+	 *
 	 * @return the footer of this text document.
 	 * @since 0.5
 	 */
@@ -591,19 +591,19 @@ public class TextDocument extends Document implements ListContainer,
 	public boolean removeList(List list) {
 		return getListContainerImpl().removeList(list);
 	}
-	
+
 	/**
 	 * Appends a new page break to this document.
-	 * 
+	 *
 	 * @since 0.6.5
 	 */
 	public void addPageBreak() {
 		addPageOrColumnBreak(null, "page");
 	}
-	
+
 	/**
 	 * Appends a new page break to this document after the reference paragraph.
-	 * 
+	 *
 	 * @param refParagraph
 	 *            the reference paragraph after where the page break inserted.
 	 * @since 0.6.5
@@ -611,15 +611,15 @@ public class TextDocument extends Document implements ListContainer,
 	public void addPageBreak(Paragraph refParagraph) {
 		addPageOrColumnBreak(refParagraph, "page");
 	}
-	
-	/** 
+
+	/**
 	 * Defines several columns to the page whose style is specified.
-	 * 
+	 *
 	 * @param columnsNumber
 	 * 			the number of columns (are of width identical)
 	 * @param spacing
 	 * 			column spacing in cm (ex. 2.40 for 2,4 cm)
-	 * 
+	 *
 	 * @since 0.6.6
 	 */
 	public void setPageColumns(int columnsNumber, double spacing) {
@@ -635,7 +635,7 @@ public class TextDocument extends Document implements ListContainer,
 				// Get back the StylePageLayoutName
 				for (int i = 0; i < officeMasterStyles.getLength(); i++) {
 					StyleMasterPageElement syleMasterPage = (StyleMasterPageElement) officeMasterStyles.item(i);
-					if(syleMasterPage.getStyleNameAttribute().equals("Standard")){					
+					if(syleMasterPage.getStyleNameAttribute().equals("Standard")){
 						stylePageLayoutName = syleMasterPage.getStylePageLayoutNameAttribute();
 						break;
 					}
@@ -643,19 +643,19 @@ public class TextDocument extends Document implements ListContainer,
 				// Allows to know if StylePageLayoutName is unique
 				for (int i = 0; i < officeMasterStyles.getLength(); i++) {
 					StyleMasterPageElement syleMasterPage = (StyleMasterPageElement) officeMasterStyles.item(i);
-					if(syleMasterPage.getStylePageLayoutNameAttribute().equals(stylePageLayoutName)){					
+					if(syleMasterPage.getStylePageLayoutNameAttribute().equals(stylePageLayoutName)){
 						pageLayoutNameCount++;
 					}
 				}
 			}
-			
+
 			OdfOfficeAutomaticStyles autoStyles = getStylesDom().getAutomaticStyles();
-			int autoStylesCount = autoStyles.getLength();			
+			int autoStylesCount = autoStyles.getLength();
 			OdfStylePageLayout pageLayout = autoStyles.getPageLayout(stylePageLayoutName);
 			if(pageLayout != null) {
 				// Clone the OdfStylePageLayout if another master style possesses the same name before modifying its properties
 				if(pageLayoutNameCount > 1){
-					Node pageLayoutNew = pageLayout.cloneNode(true);					
+					Node pageLayoutNew = pageLayout.cloneNode(true);
 					// Rename the style of the clone before modifying its properties
 					String oldPageLayoutName = pageLayout.getStyleNameAttribute();
 					pageLayout.setStyleNameAttribute("Mpm" + (autoStylesCount+1));
@@ -665,7 +665,7 @@ public class TextDocument extends Document implements ListContainer,
 						for (int i = 0; i < masterpage.getLength(); i++) {
 							StyleMasterPageElement vSyleMasterPage = (StyleMasterPageElement) masterpage.item(i);
 							if(vSyleMasterPage.getStyleNameAttribute().equals("Standard")){
-								if(vSyleMasterPage.getStylePageLayoutNameAttribute().equals(oldPageLayoutName)){					
+								if(vSyleMasterPage.getStylePageLayoutNameAttribute().equals(oldPageLayoutName)){
 									vSyleMasterPage.setStylePageLayoutNameAttribute(pageLayout.getStyleNameAttribute());
 								}
 							}
@@ -681,21 +681,21 @@ public class TextDocument extends Document implements ListContainer,
 		} catch (Exception e) {
 			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
 			throw new RuntimeException("Page column sets failed.", e);
-		}		
+		}
 	}
-	
+
 	/**
 	 * Appends a new column break to this document.
-	 * 
+	 *
 	 * @since 0.6.6
 	 */
 	public void addColumnBreak() {
 		addPageOrColumnBreak(null, "column");
 	}
-	
+
 	/**
 	 * Appends a new column break to this document after the reference paragraph.
-	 * 
+	 *
 	 * @param refParagraph
 	 *            the reference paragraph after where the column break inserted.
 	 * @since 0.6.6
@@ -703,10 +703,10 @@ public class TextDocument extends Document implements ListContainer,
 	public void addColumnBreak(Paragraph refParagraph) {
 		addPageOrColumnBreak(refParagraph, "column");
 	}
-	
-	/** 
+
+	/**
 	 * Appends a new column or page break to this document.
-	 * 
+	 *
 	 * @param refParagraph
 	 * 			the reference paragraph after where the column break inserted.
 	 * @param breakAttribute
@@ -737,7 +737,7 @@ public class TextDocument extends Document implements ListContainer,
 	/**
 	 * Appends a new page break to this document after the reference paragraph,
 	 * and the master page style will be applied to the new page.
-	 * 
+	 *
 	 * @param refParagraph
 	 *            the reference paragraph after where the page break inserted.
 	 * @param master
@@ -773,7 +773,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Creates a new paragraph and append text.
-	 * 
+	 *
 	 * @param text
 	 *            the text content of this paragraph
 	 * @return the new paragraph
@@ -785,7 +785,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Remove paragraph from this document
-	 * 
+	 *
 	 * @param para
 	 *            the instance of paragraph
 	 * @return true if the paragraph is removed successfully, false if errors
@@ -822,7 +822,7 @@ public class TextDocument extends Document implements ListContainer,
 	public OdfElement getVariableContainerElement() {
 		return getVariableContainerImpl().getVariableContainerElement();
 	}
-	
+
 	public Chart createChart(String title, DataSet dataset, Rectangle rect) {
 		return getChartContainerImpl().createChart(title, dataset, rect);
 	}
@@ -856,7 +856,7 @@ public class TextDocument extends Document implements ListContainer,
 	public int getChartCount() {
 		return getChartContainerImpl().getChartCount();
 	}
-	
+
 	private ListContainerImpl getListContainerImpl() {
 		if (listContainerImpl == null) {
 			listContainerImpl = new ListContainerImpl();
@@ -942,14 +942,14 @@ public class TextDocument extends Document implements ListContainer,
 		}
 		return variableContainerImpl;
 	}
-	
+
 	private ChartContainerImpl getChartContainerImpl() {
 		if (chartContainerImpl == null) {
 			chartContainerImpl = new ChartContainerImpl(this);
 		}
 		return chartContainerImpl;
 	}
-	
+
 	private class ChartContainerImpl extends AbstractChartContainer {
 		TextDocument sdoc;
 
@@ -976,7 +976,7 @@ public class TextDocument extends Document implements ListContainer,
 	 * is on which page. So all the page numbers in TOC are be set value "1".
 	 * Please update the page numbers from AOO Menus: Tools->Update->All Indexes
 	 * and Tables
-	 * 
+	 *
 	 * @param refParagraph
 	 *            the reference paragraph where the TOC be inserted.
 	 * @param before
@@ -985,7 +985,7 @@ public class TextDocument extends Document implements ListContainer,
 	 * @since 0.8.6
 	 */
 	public TextTableOfContentElement createDefaultTOC(Paragraph refParagraph, boolean before) {
-		
+
 		TextTableOfContentElement textTableOfContent =null;
 		if(refParagraph==null){
 			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE,
@@ -993,7 +993,7 @@ public class TextDocument extends Document implements ListContainer,
 			throw new RuntimeException("Failed to create Default TOC, The refParagraph where the TOC be inserted is null");
 		}
 		Node refparagraphNode = refParagraph.getOdfElement();
-		Node rootNode = refparagraphNode.getParentNode();		
+		Node rootNode = refparagraphNode.getParentNode();
 		try {
 			OdfContentDom content = getContentDom();
 			textTableOfContent = content
@@ -1114,14 +1114,14 @@ public class TextDocument extends Document implements ListContainer,
 	 * is on which page. So all the page numbers in TOC are be set value "1".
 	 * Please update the page numbers from AOO Menus: Tools->Update->All Indexes
 	 * and Tables.  If additionalStyle is null then call createDefaultTOC().
-	 * 
+	 *
 	 * @param refParagraph
 	 *            the reference paragraph before where the TOC inserted.
 	 * @param additionalStyle
 	 *            the additional paragraph styles that you want to include in
 	 *            the TOC
 	 * @param before
-	 *            true:insert TOC before the reference paragraph. 
+	 *            true:insert TOC before the reference paragraph.
 	 *            false:insert TOC after the reference paragraph.
 	 * @since 0.8.6
 	 */
@@ -1297,25 +1297,25 @@ public class TextDocument extends Document implements ListContainer,
 				}
 			}
 			return textTableOfContent;
-			
+
 		} catch (Exception e) {
 			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE,
 					"Failed to create Default TOC", e);
 			throw new RuntimeException("Failed to create Default TOC", e);
 		}
 	}
-	
+
 	/**
 	 * Copy a Paragraph and insert it before or after the Reference Paragraph in the text document, whether the
 	 * Paragraph is in this document or in a different document.
-	 * 
+	 *
 	 * @param referenceParagraph
-	 *            - where the Paragraph be inserted 
+	 *            - where the Paragraph be inserted
 	 * @param sourceParagraph
 	 *            - the Paragraph which will be copied
 	 * @param before
-	 *            true:insert Paragraph before the reference paragraph. 
-	 *            false:insert Paragraph after the reference paragraph.       
+	 *            true:insert Paragraph before the reference paragraph.
+	 *            false:insert Paragraph after the reference paragraph.
 	 */
 	public Paragraph insertParagraph(Paragraph referenceParagraph, Paragraph sourceParagraph,boolean before) {
 		boolean isForeignNode = false;
@@ -1325,12 +1325,12 @@ public class TextDocument extends Document implements ListContainer,
 				isForeignNode = true;
 			 TextParagraphElementBase oldParagraphEle = sourceParagraph.getOdfElement();
 			 TextParagraphElementBase newParagraphEle = (TextParagraphElementBase) oldParagraphEle.cloneNode(true);
-			
+
 			if (isForeignNode)
 				copyForeignStyleRef(sourceParagraph.getOdfElement(), sourceParagraph.getOwnerDocument());
 			if (isForeignNode) // not in a same document
 				newParagraphEle = (TextParagraphElementBase) cloneForeignElement(newParagraphEle, getContentDom(), true);
-			
+
 			if (before) {
 				refparagraphNode.getParentNode().insertBefore(newParagraphEle, refparagraphNode);
 			} else {
@@ -1342,7 +1342,7 @@ public class TextDocument extends Document implements ListContainer,
 					refparagraphNode.getParentNode().insertBefore(newParagraphEle, refNextNode);
 				}
 			}
-			
+
 			return Paragraph.getInstanceof(newParagraphEle);
 		} catch (Exception e) {
 			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
@@ -1352,17 +1352,17 @@ public class TextDocument extends Document implements ListContainer,
 	/**
 	 * Copy a Table and insert it before or after the Reference Paragraph in the text document, whether the
 	 * Table is in this TextDocument or in a different Document.
-	 * 
+	 *
 	 * @param referenceParagraph
-	 *            - where the Paragraph be inserted 
+	 *            - where the Paragraph be inserted
 	 * @param sourceParagraph
 	 *            - the Paragraph which will be copied
 	 * @param before
-	 *            true:insert Paragraph before the reference paragraph. 
-	 *            false:insert Paragraph after the reference paragraph.       
+	 *            true:insert Paragraph before the reference paragraph.
+	 *            false:insert Paragraph after the reference paragraph.
 	 */
 	public Table insertTable(Paragraph referenceParagraph, Table sourceTable,boolean before) {
-		
+
 		Document ownDocument = sourceTable.getOwnerDocument();
 		TableTableElement newTEle = (TableTableElement)insertOdfElement(referenceParagraph.getOdfElement(),ownDocument,sourceTable.getOdfElement(),before);
 		Table table = Table.getInstance(newTEle);
@@ -1371,33 +1371,33 @@ public class TextDocument extends Document implements ListContainer,
 	/**
 	 * Copy a OdfElement and insert it before or after the Reference OdfElement in the TextDocument, whether the
 	 * OdfElement is in this TextDocument or in a different Document.
-	 * 
+	 *
 	 * @param referenceOdfElement
-	 *            - where the OdfElement be inserted 
+	 *            - where the OdfElement be inserted
 	 * @param sourceDocument
 	 *            - the source Document which contain the sourceOdfElement
 	 * @param sourceOdfElement
 	 *            - the OdfElement which will be copied
 	 * @param before
-	 *            true:insert OdfElement before the reference OdfElement. 
-	 *            false:insert OdfElement after the reference OdfElement.       
+	 *            true:insert OdfElement before the reference OdfElement.
+	 *            false:insert OdfElement after the reference OdfElement.
 	 */
 	public OdfElement insertOdfElement(OdfElement referenceOdfElement,Document sourceDocument ,OdfElement sourceOdfElement,boolean before) {
 		boolean isForeignNode = false;
 		try {
-			
+
 			if (sourceOdfElement.getOwnerDocument() != getContentDom())
 				isForeignNode = true;
-			 
+
 			OdfElement newOdfElement = (OdfElement) sourceOdfElement.cloneNode(true);
-			
+
 			if (isForeignNode) {
 				copyForeignStyleRef(newOdfElement, sourceDocument);
 				copyLinkedRef(newOdfElement);
 				newOdfElement = (OdfElement) cloneForeignElement(newOdfElement,
 						getContentDom(), true);
 			}
-			
+
 			if (before) {
 				referenceOdfElement.getParentNode().insertBefore(newOdfElement, referenceOdfElement);
 			} else {
@@ -1415,9 +1415,9 @@ public class TextDocument extends Document implements ListContainer,
 		}
 		return null;
 	}
-	
+
 	private OdfElement insertOdfElementwithoutstyle(OdfElement referenceOdfElement,Document sourceDocument ,OdfElement sourceOdfElement,boolean before) {
-		try {			 
+		try {
 			OdfElement newOdfElement = (OdfElement) sourceOdfElement.cloneNode(true);
 			newOdfElement = (OdfElement)  cloneForeignElement(newOdfElement, getContentDom(), true);
 			if (before) {
@@ -1437,18 +1437,18 @@ public class TextDocument extends Document implements ListContainer,
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Copy text content of the source TextDocument and insert it to the current TextDocument
 	 * after the reference Paragraph, with Styles or without Styles.
-	 * 
+	 *
 	 * @param sourceDocument
 	 *            the source TextDocument
 	 * @param referenceParagraph
-	 *  		  where the text content of the source TextDocument be inserted 
+	 *  		  where the text content of the source TextDocument be inserted
 	 * @param isCopyStyle
-	 *            true:copy the styles in source document to current TextDocment. 
-	 *            false:don't copy the styles in source document to current TextDocment. 
+	 *            true:copy the styles in source document to current TextDocment.
+	 *            false:don't copy the styles in source document to current TextDocment.
 	 */
 	public void insertContentFromDocumentAfter(TextDocument sourceDocument, Paragraph referenceParagraph, boolean isCopyStyle){
 		try {
@@ -1463,7 +1463,7 @@ public class TextDocument extends Document implements ListContainer,
 					insertOdfElementwithoutstyle(referenceParagraph.getOdfElement(), sourceDocument, node, false);
 				}
 			}
-			
+
 		} catch (Exception e) {
 			Logger.getLogger(TextDocument.class.getName()).log(Level.SEVERE, null, e);
 		}
@@ -1471,14 +1471,14 @@ public class TextDocument extends Document implements ListContainer,
 	/**
 	 * Copy text content of the source TextDocument and insert it to the current TextDocument
 	 * before the reference Paragraph, with Styles or without Styles.
-	 * 
+	 *
 	 * @param srcDoc
 	 *            the source TextDocument
 	 * @param referenceParagraph
-	 *  		  where the text content of the source TextDocument be inserted 
+	 *  		  where the text content of the source TextDocument be inserted
 	 * @param isCopyStyle
-	 *            true:copy the styles in source document to current TextDocment. 
-	 *            false:don't copy the styles in source document to current TextDocment. 
+	 *            true:copy the styles in source document to current TextDocment.
+	 *            false:don't copy the styles in source document to current TextDocment.
 	 */
 	public void insertContentFromDocumentBefore(TextDocument sourceDocument, Paragraph referenceParagraph, boolean isCopyStyle){
 		try {
@@ -1532,7 +1532,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Create a form with specified name in this text document.
-	 * 
+	 *
 	 * @see FormContainer#createForm(String)
 	 */
 	public Form createForm(String name) {
@@ -1541,7 +1541,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Get a form iterator to traverse all the forms in this document.
-	 * 
+	 *
 	 * @see FormContainer#getFormIterator()
 	 */
 	public Iterator<Form> getFormIterator() {
@@ -1550,7 +1550,7 @@ public class TextDocument extends Document implements ListContainer,
 
 	/**
 	 * Remove a form with the specified name in this document.
-	 * 
+	 *
 	 * @see FormContainer#removeForm(Form)
 	 */
 	public boolean removeForm(Form form) {

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -28,7 +28,7 @@ import org.odftoolkit.simple.Document;
  * with red color.
  * <p>
  * A NumberDecorator can be reused in the same Document.
- * 
+ *
  * @since 0.4
  */
 public class NumberedRomanLowerDecorator extends NumberDecoratorBase {

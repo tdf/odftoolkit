@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -33,7 +33,7 @@ import org.odftoolkit.simple.Document;
 /**
  * This class represents the form control of Label, provides methods to get/set
  * the form properties and the style formatting of this control.
- * 
+ *
  * @since 0.8
  */
 public class Label extends FormControl {
@@ -47,7 +47,7 @@ public class Label extends FormControl {
 	 * Get an instance of label by an instance of FormFixedTextElement, while
 	 * searching the document content to make a bind with the DrawControl which
 	 * already reference to this label.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of FormFixedTextElement
 	 * @return an instance of label
@@ -100,7 +100,7 @@ public class Label extends FormControl {
 
 	/**
 	 * Set the text content of this label
-	 * 
+	 *
 	 * @param label
 	 *            - the text content of this label
 	 */
@@ -110,7 +110,7 @@ public class Label extends FormControl {
 
 	/**
 	 * Get the text content of this label
-	 * 
+	 *
 	 * @return the text content of this label
 	 */
 	public String getLabel() {
@@ -119,7 +119,7 @@ public class Label extends FormControl {
 
 	/**
 	 * Get a simple iterator for labels.
-	 * 
+	 *
 	 * @param container
 	 *            - an instance of form where to traverse the labels
 	 */

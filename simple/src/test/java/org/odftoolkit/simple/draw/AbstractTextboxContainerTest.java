@@ -1,4 +1,4 @@
-/* 
+/*
   Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
        distributed with this work for additional information
@@ -48,13 +48,13 @@ public class AbstractTextboxContainerTest {
 			//titleBox.setImage(ResourceUtilities.getURI("image_list_item.png"));
 			titleBox.setName("title");
 			titleBox.setTextContent("this is title");
-			
+
 			//validate
 			Textbox tbox = slide.getTextboxByName("title");
 			Assert.assertEquals(titleBox, tbox);
-			
+
 			slide.removeTextbox(titleBox);
-			
+
 			Textbox tbox1 = slide.getTextboxByName("title");
 			Assert.assertNull(tbox1);
 
@@ -66,7 +66,7 @@ public class AbstractTextboxContainerTest {
 		}
 
 	}
-	
+
 	@Test
 	public void testAddTextbox() {
 		try {
@@ -75,12 +75,12 @@ public class AbstractTextboxContainerTest {
 			Textbox box1 = p.addTextbox();
 			box1.setTextContent("content XXXX");
 			textDoc.save(ResourceUtilities.newTestOutputFile("textsample.odt"));
-			
+
 		} catch (Exception e) {
 			Logger.getLogger(AbstractTextboxContainerTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail();
 		}
 
 	}
-	
+
 }

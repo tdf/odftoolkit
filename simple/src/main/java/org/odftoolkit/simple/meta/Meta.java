@@ -53,7 +53,7 @@ import org.odftoolkit.odfdom.type.Duration;
  * <code>Meta</code> represent the meta data feature in the ODF document.
  * <p>
  * It provides convenient method to get meta data info.
- * 
+ *
  */
 public class Meta {
 
@@ -61,7 +61,7 @@ public class Meta {
 
 	/**
 	 * Constructor of <code>Meta</code> feature.
-	 * 
+	 *
 	 * @param metaDom	the file DOM element of meta.xml
 	 */
 	public Meta(OdfFileDom metaDom) {
@@ -71,7 +71,7 @@ public class Meta {
 
 	/**
 	 * Get the instance of <code>OfficeMetaElement</code> which represents this feature.
-	 * 
+	 *
 	 * @return the instance of OfficeMetaElement
 	 */
 	public OfficeMetaElement getOfficeMetaElement() {
@@ -81,7 +81,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>MetaGeneratorElement</code>.
-	 * 
+	 *
 	 * @return the generator info of the current document.
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -100,7 +100,7 @@ public class Meta {
 	/**
 	 * Sets the value of the odf dom element representation
 	 * <code>MetaGeneratorElement</code>.
-	 * 
+	 *
 	 * @param generator	set the specified document generator.
 	 * @see org.odftoolkit.odfdom.dom.element.meta.MetaGeneratorElement.
 	 */
@@ -116,7 +116,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>DcTitleElement</code>.
-	 * 
+	 *
 	 * @return the title of the current document.
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -135,7 +135,7 @@ public class Meta {
 	/**
 	 * Sets the value of the odf dom element representation
 	 * <code>DcTitleElement</code>.
-	 * 
+	 *
 	 * @param title set the specified document title
 	 * @see org.odftoolkit.odfdom.dom.element.meta.DcTitleElement.
 	 */
@@ -151,7 +151,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>DcDescriptionElement</code>.
-	 * 
+	 *
 	 * @return the description of the current document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -170,7 +170,7 @@ public class Meta {
 	 * Sets the value of the odf dom element representation
 	 * <code>DcDescriptionElement</code>.
 	 *
-	 * @param description set the specified document description 
+	 * @param description set the specified document description
 	 * @see org.odftoolkit.odfdom.dom.element.meta.DcDescriptionElement.
 	 */
 	public void setDescription(String description) {
@@ -185,7 +185,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>DcSubjectElement</code>.
-	 * 
+	 *
 	 * @return the subject of the current document.
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -203,7 +203,7 @@ public class Meta {
 	/**
 	 * Sets the value of the odf dom element representation
 	 * <code>DcSubjectElement</code>.
-	 * 
+	 *
 	 * @param subject set the specified document subject.
 	 * @see org.odftoolkit.odfdom.dom.element.meta.DcSubjectElement.
 	 */
@@ -219,7 +219,7 @@ public class Meta {
 	/**
 	 * Receives the list value of the odf dom element representation
 	 * <code>MetaKeywordElement</code>.
-	 * 
+	 *
 	 * @return the keywords of the current document.
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -247,7 +247,7 @@ public class Meta {
 	/**
 	 * Sets the list value of the odf dom element representation
 	 * <code>MetaKeywordElement</code>.
-	 * 
+	 *
 	 * @param keyList set the specified list of keywords.
 	 * @see org.odftoolkit.odfdom.dom.element.meta.MetaKeywordElement.
 	 */
@@ -281,7 +281,7 @@ public class Meta {
 	/**
 	 * Add the keyword to the current document.
 	 * Create child element <code>MetaKeywordElement</code>.
-	 * 
+	 *
 	 * @param keyword	the value of child element <code>MetaKeywordElement</code>.
 	 * @see org.odftoolkit.odfdom.dom.element.meta.MetaKeywordElement.
 	 */
@@ -293,7 +293,7 @@ public class Meta {
 	/**
 	 * Receives the list value of the odf dom element representation
 	 * <code>MetaUserDefinedElement</code>.
-	 * 
+	 *
 	 * @return get the list of user-defined metadata names;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -323,7 +323,7 @@ public class Meta {
 	/**
 	 * Receives the odf dom element representation
 	 * <code>MetaUserDefinedElement</code> by attribute name.
-	 * 
+	 *
 	 * @param name	the name of the user-defined metadata
 	 * @return	the <code>MetaUserDefinedElement</code> which is identified by the specified name;
 	 * <p>
@@ -357,7 +357,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>MetaUserDefinedElement</code> by attribute name.
-	 * 
+	 *
 	 * @param name	the name of the user-defined metadata
 	 * @return the value of the user-defined metadata with the specified name;
 	 * <p>
@@ -375,7 +375,7 @@ public class Meta {
 	/**
 	 * Receives the data type of the odf dom element representation
 	 * <code>MetaUserDefinedElement</code> by attribute name.
-	 * 
+	 *
 	 * @param name	the name of the user-defined metadata
 	 * @return the data type of the user-defined metadata with the specified name;
 	 * <p>
@@ -393,7 +393,7 @@ public class Meta {
 	/**
 	 * Remove the odf dom element representation
 	 * <code>MetaUserDefinedElement</code> by attribute name.
-	 * 
+	 *
 	 * @param name	the name of the user-defined metadata
 	 * @see org.odftoolkit.odfdom.dom.element.meta.MetaUserDefinedElement.
 	 */
@@ -408,7 +408,7 @@ public class Meta {
 	/**
 	 * Sets the value of the odf dom element representation
 	 * <code>MetaUserDefinedElement</code> by attribute name.
-	 * 
+	 *
 	 * @param name	the name need to set for the user-defined metadata
 	 * @param value  the value need to set for the user-defined metadata
 	 * @see org.odftoolkit.odfdom.dom.element.meta.MetaUserDefinedElement.
@@ -424,7 +424,7 @@ public class Meta {
 	/**
 	 * Sets the data type of the odf dom element representation
 	 * <code>MetaUserDefinedElement</code> by attribute name.
-	 * 
+	 *
 	 * @param name	the name need to set for the user-defined metadata
 	 * @param value  the value need to set for the user-defined metadata
 	 * @see org.odftoolkit.odfdom.dom.element.meta.MetaUserDefinedElement.
@@ -442,7 +442,7 @@ public class Meta {
 	 * <code>MetaUserDefinedElement</code>, if the element with the attribute name exists,then
 	 * update;or create a new element if type or value is null,the original will
 	 * not be updated.
-	 * 
+	 *
 	 * @param name	the name need to set for the user-defined metadata
 	 * @param type	the data type need to set for the user-defined metadata
 	 * @param value	the value need to set for the user-defined metadata
@@ -472,7 +472,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>MetaInitialCreatorElement</code>.
-	 * 
+	 *
 	 * @return get the initial creator of the current document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -490,7 +490,7 @@ public class Meta {
 	/**
 	 * Sets the value of the odf dom element representation
 	 * <code>MetaInitialCreatorElement</code>.
-	 * 
+	 *
 	 * @param initialCreator set the specified initial creator
 	 * @see org.odftoolkit.odfdom.dom.element.meta.MetaInitialCreatorElement.
 	 */
@@ -506,7 +506,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>DcCreatorElement</code>.
-	 * 
+	 *
 	 * @return the creator of the current document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -524,7 +524,7 @@ public class Meta {
 	/**
 	 * Sets the value of the odf dom element representation
 	 * <code>DcCreatorElement</code>.
-	 * 
+	 *
 	 * @param creator set the specified creator
 	 * @see org.odftoolkit.odfdom.dom.element.meta.DcCreatorElement.
 	 */
@@ -540,7 +540,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>MetaPrintedByElement</code>
-	 * 
+	 *
 	 * @return the name of the last person who printed the current document;
 	 * <p>
 	 * <code>null</code>, if element is not set
@@ -558,7 +558,7 @@ public class Meta {
 	/**
 	 * Sets the value of the odf dom element representation
 	 * <code>MetaPrintedByElement</code>.
-	 * 
+	 *
 	 * @param printedBy	the name need to set for the last person who printed the current document
 	 * @see org.odftoolkit.odfdom.dom.element.meta.MetaPrintedByElement.
 	 */
@@ -574,7 +574,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>MetaCreationDateElement</code>
-	 * 
+	 *
 	 * @return the date and time when the document was created initially;
 	 * <p>
 	 * <code>null</code>, if element is not set
@@ -592,7 +592,7 @@ public class Meta {
 	/**
 	 * Sets the value of the odf dom element representation
 	 * <code>MetaCreationDateElement</code> .
-	 * 
+	 *
 	 * @param creationDate	the date and time need to set
 	 * @see org.odftoolkit.odfdom.dom.element.meta.MetaCreationDateElement.
 	 */
@@ -608,7 +608,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>DcDateElement</code>.
-	 * 
+	 *
 	 * @return the date and time when the document was last modified;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -626,7 +626,7 @@ public class Meta {
 	/**
 	 * Sets the value of the odf dom element representation
 	 * <code>DcDateElement</code>.
-	 * 
+	 *
 	 * @param dcdate	the date and time need to set
 	 * @see org.odftoolkit.odfdom.dom.element.meta.DcDateElement.
 	 */
@@ -642,7 +642,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>MetaPrintDateElement</code>.
-	 * 
+	 *
 	 * @return the date and time when the document was last printed;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -660,7 +660,7 @@ public class Meta {
 	/**
 	 * Sets the value of the odf dom element representation
 	 * <code>MetaPrintDateElement</code>.
-	 * 
+	 *
 	 * @param printDate	the date and time need to set
 	 * @see org.odftoolkit.odfdom.dom.element.meta.MetaPrintDateElement
 	 */
@@ -676,7 +676,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>DcLanguageElement</code>.
-	 * 
+	 *
 	 * @return the default language of the document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -694,7 +694,7 @@ public class Meta {
 	/**
 	 * Sets the value of the odf dom element representation
 	 * <code>DcLanguageElement</code>.
-	 * 
+	 *
 	 * @param language the default language need to set fo the current document
 	 * @see org.odftoolkit.odfdom.dom.element.meta.DcLanguageElement
 	 */
@@ -710,7 +710,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>MetaEditingCyclesElement</code> .
-	 * 
+	 *
 	 * @return the number of times that the document has been edited;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -728,7 +728,7 @@ public class Meta {
 	/**
 	 * Sets the value of the odf dom element representation
 	 * <code>MetaEditingCyclesElement</code> .
-	 * 
+	 *
 	 * @param editingCycles	set the specified edit times
 	 * @see org.odftoolkit.odfdom.dom.element.meta.MetaEditingCyclesElement
 	 */
@@ -744,7 +744,7 @@ public class Meta {
 	/**
 	 * Receives the value of the odf dom element representation
 	 * <code>MetaEditingDurationElement</code>.
-	 * 
+	 *
 	 * @return the total time spent editing the document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -762,7 +762,7 @@ public class Meta {
 	/**
 	 * Sets the value of the odf dom element representation
 	 * <code>MetaEditingDurationElement</code>.
-	 * 
+	 *
 	 * @param editingDuration the time need to set
 	 * @see org.odftoolkit.odfdom.dom.element.meta.MetaEditingDurationElement
 	 */
@@ -778,8 +778,8 @@ public class Meta {
 
 	/**
 	 * Receives the sub feature of DocumentStatistic.
-	 * 
-	 * @return the statistics about the document which can be represented by 
+	 *
+	 * @return the statistics about the document which can be represented by
 	 * <code>DocumentStatistic</code> feature;
 	 * <p>
 	 * <code>null</code>, if the feature is not exist.
@@ -793,7 +793,7 @@ public class Meta {
 			return null;
 		}
 	}
-	
+
 	private MetaDocumentStatisticElement getDocumentStatisticElement() {
 		return OdfElement.findFirstChildNode(
 				MetaDocumentStatisticElement.class, mOfficeMetaElement);
@@ -801,7 +801,7 @@ public class Meta {
 
 	/**
 	 * Change valid string of calendar to Calendar type.
-	 * 
+	 *
 	 * @param baseDate the string of a calender
 	 * @return the object of Calender
 	 */

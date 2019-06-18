@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -33,7 +33,7 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
  * Test class for template aspects of chart.
  */
 public class ChartTemplateTest {
-	
+
 	private static final Logger LOG = Logger.getLogger(ChartTemplateTest.class.getName());
 	private static final String TEST_CHART_TEMPLATE = "/chartTestTemplate.otc";
 
@@ -85,10 +85,10 @@ public class ChartTemplateTest {
 		document.changeMode(ChartDocument.OdfMediaType.CHART);
 		Assert.assertEquals(Document.OdfMediaType.CHART.getMediaTypeString(), document.getPackage().getMediaTypeString());
 	}
-	
+
 	@Test
 	public void testGetOdfMediaType() throws Exception {
-		
+
 		try {
 			Document.OdfMediaType chartType = ChartDocument.OdfMediaType.getOdfMediaType("CHART");
 			Assert.assertEquals("CHART", chartType.name());
@@ -100,7 +100,7 @@ public class ChartTemplateTest {
 		}
 
 	}
-	
+
 	@Test
 	public void testGetMediaTypeString() throws Exception {
 		try {
@@ -111,9 +111,9 @@ public class ChartTemplateTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testLoadDocumentInputStream() throws Exception {
 		try {
@@ -126,7 +126,7 @@ public class ChartTemplateTest {
 		}
 
 	}
-	
+
 	@Test
 	public void testLoadDocumentFilePath() throws Exception {
 		try {
@@ -137,9 +137,9 @@ public class ChartTemplateTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testLoadDocumentFile() throws Exception {
 		try {
@@ -152,6 +152,6 @@ public class ChartTemplateTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
 }

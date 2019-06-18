@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -28,21 +28,21 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 /**
  * This class is the parent of classes that present all kinds of document
  * structures.
- * 
+ *
  * @since 0.5
  */
 public abstract class Component {
 
 	/**
 	 * Return the instance of OdfElement which presents this structure.
-	 * 
+	 *
 	 * @return the instance of OdfElement
 	 */
 	public abstract OdfElement getOdfElement();
 
 	/**
 	 * Register component to the map repository
-	 * 
+	 *
 	 * @param component
 	 *            the component to be registered.
 	 * @param element
@@ -56,13 +56,13 @@ public abstract class Component {
 			repository.put(element, component);
 		}
 	}
-	
+
 	/**
 	 * Unregister component from the map repository
-	 * 
+	 *
 	 * @param element
 	 *            the instance of OdfElement which presents this component.
-	 * 
+	 *
 	 * @see Document#getComponentMap()
 	 * @since 0.6.5
 	 */
@@ -77,7 +77,7 @@ public abstract class Component {
 	/**
 	 * Get the component instance by the element instance. Return null if there
 	 * is no such element registered.
-	 * 
+	 *
 	 * @param element
 	 *            the instance of OdfElement which presents this component.
 	 * @return the component instance
@@ -90,7 +90,7 @@ public abstract class Component {
 
 	/**
 	 * Get the owner document of this component
-	 * 
+	 *
 	 * @return - the owner document
 	 */
 	public Document getOwnerDocument() {

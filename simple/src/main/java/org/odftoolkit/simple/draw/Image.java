@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -51,7 +51,7 @@ import org.w3c.dom.DOMException;
 
 /**
  * This class provides method to add/remove/get images.
- * 
+ *
  * @since 0.5.5
  */
 public class Image extends Component {
@@ -80,7 +80,7 @@ public class Image extends Component {
 
 	/**
 	 * Get a image instance by an instance of <code>DrawImageElement</code>.
-	 * 
+	 *
 	 * @param imageElement
 	 *            - the instance of DrawImageElement
 	 * @return an instance of image
@@ -99,32 +99,32 @@ public class Image extends Component {
 		return myImage;
 
 	}
-	
+
 	/**
 	 * Add a hypertext reference to this image.
-	 * 
+	 *
 	 * @param linkto
 	 *            the hyperlink
 	 * @since 0.6.5
-	 * 
+	 *
 	 */
 	public void setHyperlink(URI linkto) {
 		mFrame.setHyperlink(linkto);
-	}	
-	
+	}
+
 	/**
 	 * Return the URI of hypertext reference if exists, or else, return null.
-	 * 
+	 *
 	 * @return the URI of hyperlink if exists
 	 */
 	public URI getHyperlink() {
 		return mFrame.getHyperlink();
 	}
-	
+
 
 	/**
 	 * Get the owner document of this image
-	 * 
+	 *
 	 * @return the document who owns this image
 	 */
 	public Document getOwnerDocument() {
@@ -133,7 +133,7 @@ public class Image extends Component {
 
 	/**
 	 * Return style handler for this frame
-	 * 
+	 *
 	 * @return the style handler
 	 */
 	public FrameStyleHandler getStyleHandler() {
@@ -144,7 +144,7 @@ public class Image extends Component {
 
 	/**
 	 * Return the instance of "draw:image" element
-	 * 
+	 *
 	 * @return the instance of "draw:image" element
 	 */
 	public DrawImageElement getOdfElement() {
@@ -153,7 +153,7 @@ public class Image extends Component {
 
 	/**
 	 * Return the frame who contains this image.
-	 * 
+	 *
 	 * @return - the frame who contains this image
 	 */
 	public Frame getFrame() {
@@ -162,7 +162,7 @@ public class Image extends Component {
 
 	/**
 	 * Create an image and append it at the end of a container element.
-	 * 
+	 *
 	 * @param container
 	 *            - the frame container element
 	 * @param uri
@@ -205,7 +205,7 @@ public class Image extends Component {
 
 	/**
 	 * Create an image and add it to a frame.
-	 * 
+	 *
 	 * @param frame
 	 *            - the frame which contains this image
 	 * @param uri
@@ -295,7 +295,7 @@ public class Image extends Component {
 
 	/**
 	 * Return an iterator of image.
-	 * 
+	 *
 	 * @param container the frame container.
 	 * @return the image iterator.
 	 */
@@ -307,7 +307,7 @@ public class Image extends Component {
 	 * Remove the image from the document.
 	 * <p>
 	 * The resource is removed if it's only used by this object.
-	 * 
+	 *
 	 * @return true if the image object is successfully removed; false if
 	 *         otherwise.
 	 */
@@ -327,7 +327,7 @@ public class Image extends Component {
 
 	/**
 	 * Update the image file with another resource.
-	 * 
+	 *
 	 * @param imageUri
 	 *            - the URI of the new image resource
 	 */
@@ -347,7 +347,7 @@ public class Image extends Component {
 
 	/**
 	 * Get the image resource as an input stream.
-	 * 
+	 *
 	 * @return - the input stream of the image resource
 	 */
 	public InputStream getImageInputStream() {
@@ -357,7 +357,7 @@ public class Image extends Component {
 	/**
 	 * Get the internal path within the package of the image resource as a
 	 * string.
-	 * 
+	 *
 	 * @return - the internal path of the image resource
 	 */
 	public String getInternalPath() {
@@ -373,7 +373,7 @@ public class Image extends Component {
 
 	/**
 	 * Get the media type of the image resource
-	 * 
+	 *
 	 * @return - the media type of the image resource
 	 */
 	public String getMediaTypeString() {
@@ -433,7 +433,7 @@ public class Image extends Component {
 
 	/**
 	 * Set the name of this image.
-	 * 
+	 *
 	 * @param name
 	 *            - the name of the image
 	 */
@@ -443,7 +443,7 @@ public class Image extends Component {
 
 	/**
 	 * Get the name of this image.
-	 * 
+	 *
 	 * @return the name of the image
 	 */
 	public String getName() {
@@ -452,7 +452,7 @@ public class Image extends Component {
 
 	/**
 	 * Set the rectangle used by this image
-	 * 
+	 *
 	 * @param rectangle
 	 *            - the rectangle used by this image
 	 */
@@ -462,7 +462,7 @@ public class Image extends Component {
 
 	/**
 	 * Return the rectangle used by this image
-	 * 
+	 *
 	 * @return - the rectangle
 	 */
 	public FrameRectangle getRectangle() {
@@ -471,7 +471,7 @@ public class Image extends Component {
 
 	/**
 	 * Set the title of this image
-	 * 
+	 *
 	 * @param title
 	 *            - the title of this image
 	 */
@@ -481,7 +481,7 @@ public class Image extends Component {
 
 	/**
 	 * Get the title of this image
-	 * 
+	 *
 	 * @return - the title of this image
 	 */
 	public String getTitle() {
@@ -490,7 +490,7 @@ public class Image extends Component {
 
 	/**
 	 * Get the description of this image
-	 * 
+	 *
 	 * @return - the description of this image
 	 */
 	public String getDesciption() {
@@ -499,7 +499,7 @@ public class Image extends Component {
 
 	/**
 	 * Set the description of this image.
-	 * 
+	 *
 	 * @param description
 	 *            - the description of this image
 	 */
@@ -509,7 +509,7 @@ public class Image extends Component {
 
 	/**
 	 * Set the horizontal position
-	 * 
+	 *
 	 * @param horizontalPos
 	 *            - the horizontal position
 	 */
@@ -519,7 +519,7 @@ public class Image extends Component {
 
 	/**
 	 * Set the vertical position
-	 * 
+	 *
 	 * @param verticalPos
 	 *            - the vertical position
 	 */
@@ -529,7 +529,7 @@ public class Image extends Component {
 
 	/**
 	 * Return the horizontal position
-	 * 
+	 *
 	 * @return the horizontal position
 	 */
 	public FrameHorizontalPosition getHorizontalPosition() {
@@ -538,7 +538,7 @@ public class Image extends Component {
 
 	/**
 	 * Return the vertical position
-	 * 
+	 *
 	 * @return the vertical position
 	 */
 	public FrameVerticalPosition getVerticalPosition() {

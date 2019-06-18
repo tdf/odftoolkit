@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -46,7 +46,7 @@ import org.w3c.dom.NodeList;
  * <p>
  * TableTemplate provide method to get/set a set of references to table cell
  * styles that specify the formatting to be used on a table.
- * 
+ *
  */
 public class TableTemplate {
 
@@ -54,7 +54,7 @@ public class TableTemplate {
 
 	/**
 	 * Extended style types supported by table template.
-	 * 
+	 *
 	 */
 	public static enum ExtendedStyleType {
 		FIRSTROWSTARTCOLUM, FIRSTROWENDCOLUMN, LASTROWSTARTCOLUMN, LASTROWENDCOLUMN
@@ -72,7 +72,7 @@ public class TableTemplate {
 	/**
 	 * Create an instance of TableTemplate from an element
 	 * <table:table-template>
-	 * 
+	 *
 	 * @param tableTableTemplate
 	 *            - the element of table:table-template
 	 */
@@ -84,7 +84,7 @@ public class TableTemplate {
 	 * Return the name of table template.
 	 * <p>
 	 * Null will be returned if there is no table template name setting.
-	 * 
+	 *
 	 * @return the table template name.
 	 */
 	public String getTableName() {
@@ -96,7 +96,7 @@ public class TableTemplate {
 	 * <p>
 	 * If the parameter <code>tableNameValue</code> is null, the table template
 	 * name definition will be removed.
-	 * 
+	 *
 	 * @param tableNameValue
 	 *            - the table template name
 	 */
@@ -108,7 +108,7 @@ public class TableTemplate {
 	 * get the value of table style specified by type.
 	 * <p>
 	 * Null will be returned if there is no such extended style type setting.
-	 * 
+	 *
 	 * @param type
 	 *            - style type
 	 * @return the style name referenced by this style type
@@ -123,7 +123,7 @@ public class TableTemplate {
 	 * get the value of paragraph style specified by type.
 	 * <p>
 	 * Null will be returned if there is no such extended style type setting.
-	 * 
+	 *
 	 * @param type
 	 *            - extended style type
 	 * @return the style name referenced by this style type
@@ -136,7 +136,7 @@ public class TableTemplate {
 
 	/**
 	 * set the value of table style and paragraph style specified by type.
-	 * 
+	 *
 	 * @param type
 	 *            - extended style type
 	 * @param tableStyle
@@ -162,7 +162,7 @@ public class TableTemplate {
 	 * get the value of table style of body.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by table style of body.
 	 */
 	public String getTableBodyTableStyle() {
@@ -179,7 +179,7 @@ public class TableTemplate {
 	 * get the value of paragraph style of body.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by paragraph style of body.
 	 */
 	public String getTableBodyParagraphStyle() {
@@ -196,7 +196,7 @@ public class TableTemplate {
 	 * get the value of table style of even columns.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by table style of even columns.
 	 */
 	public String getTableEvenColumnsTableStyle() {
@@ -214,7 +214,7 @@ public class TableTemplate {
 	 * get the value of paragraph style of even columns.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by paragraph style of even columns.
 	 */
 	public String getTableEvenColumnsParagraphStyle() {
@@ -232,7 +232,7 @@ public class TableTemplate {
 	 * get the value of table style of even rows.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by table style of even rows.
 	 */
 	public String getTableEvenRowsTableStyle() {
@@ -250,7 +250,7 @@ public class TableTemplate {
 	 * get the value of paragraph style of even rows.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by paragraph style of even rows.
 	 */
 	public String getTableEvenRowsParagraphStyle() {
@@ -268,7 +268,7 @@ public class TableTemplate {
 	 * get the value of table style of first colum.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by table style of first column.
 	 */
 	public String getTableFirstColumnTableStyle() {
@@ -286,7 +286,7 @@ public class TableTemplate {
 	 * get the value of paragraph style of first column.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by paragraph style of first column.
 	 */
 	public String getTableFirstColumnParagraphStyle() {
@@ -304,7 +304,7 @@ public class TableTemplate {
 	 * get the value of table style of first row.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by table style of first row.
 	 */
 	public String getTableFirstRowTableStyle() {
@@ -322,7 +322,7 @@ public class TableTemplate {
 	 * get the value of paragraph style of first row.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by paragraph style of first row.
 	 */
 	public String getTableFirstRowParagraphStyle() {
@@ -340,7 +340,7 @@ public class TableTemplate {
 	 * get the value of table style of last column.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by table style of last column.
 	 */
 	public String getTableLastColumnTableStyle() {
@@ -358,7 +358,7 @@ public class TableTemplate {
 	 * get the value of paragraph style of last column.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by paragraph style of last column.
 	 */
 	public String getTableLastColumnParagraphStyle() {
@@ -376,7 +376,7 @@ public class TableTemplate {
 	 * get the value of table style of last row.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by table style of last row.
 	 */
 	public String getTableLastRowTableStyle() {
@@ -394,7 +394,7 @@ public class TableTemplate {
 	 * get the value of paragraph style of last row.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by paragraph style of last row.
 	 */
 	public String getTableLastRowParagraphStyle() {
@@ -412,7 +412,7 @@ public class TableTemplate {
 	 * get the value of table style of odd columns.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by table style of odd columns.
 	 */
 	public String getTableOddColumnsTableStyle() {
@@ -430,7 +430,7 @@ public class TableTemplate {
 	 * get the value of paragraph style of odd columns.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by paragraph style of odd columns.
 	 */
 	public String getTableOddColumnsParagraphStyle() {
@@ -448,7 +448,7 @@ public class TableTemplate {
 	 * get the value of table style of odd rows.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by table style of odd rows.
 	 */
 	public String getTableOddRowsTableStyle() {
@@ -466,7 +466,7 @@ public class TableTemplate {
 	 * get the value of paragraph style of odd rows.
 	 * <p>
 	 * Null will be returned if there is no such style setting.
-	 * 
+	 *
 	 * @return the style name referenced by paragraph style of odd rows.
 	 */
 	public String getTableOddRowsParagraphStyle() {
@@ -487,7 +487,7 @@ public class TableTemplate {
 	 * style name definition in body will be removed. If the parameter
 	 * <code>tableParagraphStyleNameValue</code> is null, the paragraph style
 	 * name definition in body will be removed.
-	 * 
+	 *
 	 * @param tableStyleNameValue
 	 *            - table style name referenced by body
 	 * @param tableParagraphStyleNameValue
@@ -517,7 +517,7 @@ public class TableTemplate {
 	 * style name definition in even columns will be removed. If the parameter
 	 * <code>tableParagraphStyleNameValue</code> is null, the paragraph style
 	 * name definition in even columns will be removed.
-	 * 
+	 *
 	 * @param tableStyleNameValue
 	 *            - table style name referenced by even columns
 	 * @param tableParagraphStyleNameValue
@@ -549,7 +549,7 @@ public class TableTemplate {
 	 * style name definition in even rows will be removed. If the parameter
 	 * <code>tableParagraphStyleNameValue</code> is null, the paragraph style
 	 * name definition in even rows will be removed.
-	 * 
+	 *
 	 * @param tableStyleNameValue
 	 *            - table style name referenced by even rows
 	 * @param tableParagraphStyleNameValue
@@ -580,7 +580,7 @@ public class TableTemplate {
 	 * style name definition in first column will be removed. If the parameter
 	 * <code>tableParagraphStyleNameValue</code> is null, the paragraph style
 	 * name definition in first column will be removed.
-	 * 
+	 *
 	 * @param tableStyleNameValue
 	 *            - table style name referenced by first column
 	 * @param tableParagraphStyleNameValue
@@ -612,7 +612,7 @@ public class TableTemplate {
 	 * style name definition in first row will be removed. If the parameter
 	 * <code>tableParagraphStyleNameValue</code> is null, the paragraph style
 	 * name definition in first row will be removed.
-	 * 
+	 *
 	 * @param tableStyleNameValue
 	 *            - table style name referenced by first row
 	 * @param tableParagraphStyleNameValue
@@ -643,7 +643,7 @@ public class TableTemplate {
 	 * style name definition in last column will be removed. If the parameter
 	 * <code>tableParagraphStyleNameValue</code> is null, the paragraph style
 	 * name definition in last column will be removed.
-	 * 
+	 *
 	 * @param tableStyleNameValue
 	 *            - table style name referenced by last column
 	 * @param tableParagraphStyleNameValue
@@ -675,7 +675,7 @@ public class TableTemplate {
 	 * style name definition in last row will be removed. If the parameter
 	 * <code>tableParagraphStyleNameValue</code> is null, the paragraph style
 	 * name definition in last row will be removed.
-	 * 
+	 *
 	 * @param tableStyleNameValue
 	 *            - table style name referenced by last row
 	 * @param tableParagraphStyleNameValue
@@ -706,7 +706,7 @@ public class TableTemplate {
 	 * style name definition in odd columns will be removed. If the parameter
 	 * <code>tableParagraphStyleNameValue</code> is null, the paragraph style
 	 * name definition in odd columns will be removed.
-	 * 
+	 *
 	 * @param tableStyleNameValue
 	 *            - table style name referenced by odd columns
 	 * @param tableParagraphStyleNameValue
@@ -738,7 +738,7 @@ public class TableTemplate {
 	 * style name definition in odd rows will be removed. If the parameter
 	 * <code>tableParagraphStyleNameValue</code> is null, the paragraph style
 	 * name definition in odd rows will be removed.
-	 * 
+	 *
 	 * @param tableStyleNameValue
 	 *            - table style name referenced by odd rows
 	 * @param tableParagraphStyleNameValue

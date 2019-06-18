@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -30,7 +30,7 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.SupportedLinearMeasure;
 /**
  * This class represents border style settings, including line style, color,
  * width, inner line width, outer line width and the distance.
- * 
+ *
  * @since 0.3
  */
 public class Border {
@@ -62,7 +62,7 @@ public class Border {
 
 	/**
 	 * Constructor to create a single line border
-	 * 
+	 *
 	 * @param aColor
 	 *            - the color of the border
 	 * @param width
@@ -94,7 +94,7 @@ public class Border {
 
 	/**
 	 * Constructor to create a double line border
-	 * 
+	 *
 	 * @param aColor
 	 *            - the color of the border
 	 * @param width
@@ -105,7 +105,7 @@ public class Border {
 	 *            - the outer line width of the border
 	 * @param linearMeasure
 	 *            - the linear measurement of the border width
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *             if the width is not bigger than the sum of inner line width
 	 *             and outer line width.
@@ -150,7 +150,7 @@ public class Border {
 	 * Return the line style of the border.
 	 * <p>
 	 * The possible return value are "SINGLE","DOUBLE", and "NONE";
-	 * 
+	 *
 	 * @return the line style of the border.
 	 */
 	public StyleTypeDefinitions.LineType getLineStyle() {
@@ -161,7 +161,7 @@ public class Border {
 	 * Set the line style of the border.
 	 * <p>
 	 * The valid parameter can be "SINGLE","DOUBLE", and "NONE";
-	 * 
+	 *
 	 * @param lineStyle
 	 *            - the line style of the border.
 	 */
@@ -173,7 +173,7 @@ public class Border {
 	 * Set border style by a description string. The description string includes
 	 * border width, line style and color. For example:
 	 * "0.0362in double #ff3333" is a valid description string.
-	 * 
+	 *
 	 * @param borderDesc
 	 *            - the description of border style
 	 */
@@ -202,7 +202,7 @@ public class Border {
 	 * Return the description string of border style. The description string
 	 * includes border width, line style and color. For example,
 	 * "0.0362in double #ff3333".
-	 * 
+	 *
 	 * @return the description string of border style
 	 */
 	protected String getBorderDescription() {
@@ -219,7 +219,7 @@ public class Border {
 
 	/**
 	 * Return the color of this border
-	 * 
+	 *
 	 * @return the color of this border
 	 */
 	public Color getColor() {
@@ -228,7 +228,7 @@ public class Border {
 
 	/**
 	 * Set the color of this border
-	 * 
+	 *
 	 * @param color
 	 *            - the color
 	 */
@@ -238,7 +238,7 @@ public class Border {
 
 	/**
 	 * Return the width of this border
-	 * 
+	 *
 	 * @return the width of this border
 	 */
 	public double getWidth() {
@@ -247,7 +247,7 @@ public class Border {
 
 	/**
 	 * Set the width of this border
-	 * 
+	 *
 	 * @param width
 	 *            - the width of this border
 	 */
@@ -259,7 +259,7 @@ public class Border {
 	 * Return a description string for border widths with double lines. The
 	 * description string includes inner line width, distance, and outline
 	 * width. For example, "0.0008in 0.0346in 0.0346in".
-	 * 
+	 *
 	 * @return - the description for border widths with double lines
 	 */
 	protected String getDoubleLineWidthDescription() {
@@ -274,7 +274,7 @@ public class Border {
 	 * Set the border widths with double lines by a description string. The
 	 * description string includes inner line width, distance, and outline
 	 * width. For example, "0.0008in 0.0346in 0.0346in".
-	 * 
+	 *
 	 * @param widthDesc
 	 *            - the description string
 	 */
@@ -293,7 +293,7 @@ public class Border {
 
 	/**
 	 * Return the inner line width of border with double lines
-	 * 
+	 *
 	 * @return - the inner line width
 	 */
 	public double getInnerLineWidth() {
@@ -308,7 +308,7 @@ public class Border {
 	/**
 	 * Set the inner line width of border with double lines If the line style is
 	 * not double, nothing will happen.
-	 * 
+	 *
 	 * @param innerWidth
 	 *            - the inner line width
 	 */
@@ -321,7 +321,7 @@ public class Border {
 	/**
 	 * Return the distance between inner line and outer line of border with
 	 * double lines
-	 * 
+	 *
 	 * @return - the distance between inner line and outer line.
 	 */
 	public double getDistance() {
@@ -336,7 +336,7 @@ public class Border {
 	/**
 	 * Set the distance between inner line and outer line of border with double
 	 * lines. If the line style is not double, nothing will happen.
-	 * 
+	 *
 	 * @param distance
 	 *            - the distance between inner line and outer line.
 	 */
@@ -350,7 +350,7 @@ public class Border {
 
 	/**
 	 * Return the outer line width of border with double lines
-	 * 
+	 *
 	 * @return - the outer line width.
 	 */
 	public double getOuterLineWidth() {
@@ -364,7 +364,7 @@ public class Border {
 	/**
 	 * Set the outer line width of border with double lines If the line style is
 	 * not double, nothing will happen.
-	 * 
+	 *
 	 * @param lineWidth
 	 *            - the outer line width
 	 */
@@ -408,7 +408,7 @@ public class Border {
 
 	/**
 	 * Return a border which is same but with a different line measurement
-	 * 
+	 *
 	 * @param newLineMeasure
 	 *            - the new measurement
 	 * @return the new border
@@ -471,7 +471,7 @@ public class Border {
 
 	/**
 	 * Return the linear measurement
-	 * 
+	 *
 	 * @return the the linear measurement
 	 */
 	public StyleTypeDefinitions.SupportedLinearMeasure getLinearMeasure() {
@@ -480,7 +480,7 @@ public class Border {
 
 	/**
 	 * Set linear measurement
-	 * 
+	 *
 	 * @param linearMeasure
 	 *            the linear measurement
 	 */

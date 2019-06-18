@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -56,7 +56,7 @@ import org.w3c.dom.NodeList;
 /**
  * This class represents footer definition in text document. It provides methods
  * to manipulate footer in text document, such as, set text, add table.
- * 
+ *
  * @since 0.4.5
  */
 public class Footer extends Component implements TableContainer, VariableContainer {
@@ -66,7 +66,7 @@ public class Footer extends Component implements TableContainer, VariableContain
 
 	/**
 	 * Create a footer instance by an object of <code>StyleFooterElement</code>.
-	 * 
+	 *
 	 * @param element
 	 *            - an object of <code>StyleFooterElement</code>
 	 */
@@ -77,16 +77,16 @@ public class Footer extends Component implements TableContainer, VariableContain
 	/**
 	 * Return an instance of <code>StyleFooterElement</code> which represents
 	 * this feature.
-	 * 
+	 *
 	 * @return an instance of <code>StyleFooterElement</code>
 	 */
 	public StyleFooterElement getOdfElement() {
 		return footerEle;
 	}
-	
+
 	/**
 	 * Get this footer is visible or not.
-	 * 
+	 *
 	 * @return If this footer is visible return <code>true</code>, otherwise
 	 *         return <code>false</code>.
 	 * @since 0.5.5
@@ -95,10 +95,10 @@ public class Footer extends Component implements TableContainer, VariableContain
 		boolean isVisible = footerEle.getStyleDisplayAttribute();
 		return isVisible;
 	}
-	
+
 	/**
 	 * Set this footer visible or not.
-	 * 
+	 *
 	 * @param isVisible
 	 *            If <code>isVisible</code> is true, the footer of this document
 	 *            is visible, otherwise is invisible.
@@ -121,7 +121,7 @@ public class Footer extends Component implements TableContainer, VariableContain
 			} else if (dom instanceof OdfStylesDom) {
 				styles = ((OdfStylesDom) dom).getAutomaticStyles();
 			}
-			
+
 			OdfStyle newStyle = styles.newStyle(OdfStyleFamily.Paragraph);
 			OdfStyle style = styles.getStyle(stylename, OdfStyleFamily.Paragraph);
 			if (style != null) {
@@ -141,7 +141,7 @@ public class Footer extends Component implements TableContainer, VariableContain
 			textEle.setStyleName(newStyle.getStyleNameAttribute());
 		}
 	}
-	
+
 	public Table addTable() {
 		Table table = getTableContainerImpl().addTable();
 		updateTableToNone(table);
@@ -242,7 +242,7 @@ public class Footer extends Component implements TableContainer, VariableContain
 
 	/**
 	 * Create an empty section and append it at the end of the footer.
-	 * 
+	 *
 	 * @param name
 	 *            - specify the section name
 	 * @return an instance of the section

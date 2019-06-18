@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -194,7 +194,7 @@ public class ListItemTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-    
+
     @Test
     public void testListIterator()  {
         try {
@@ -202,15 +202,15 @@ public class ListItemTest {
 			TextDocument odtdoc = TextDocument.loadDocument(ResourceUtilities
 					.getTestResourceAsStream(SAMPLE_LIST_DOCUMENT_2));
 			Iterator<List> listIterator = odtdoc.getListIterator();
-            
+
             final List bodyList = listIterator.next();
             Assert.assertEquals("body list should have 2 items", 2, bodyList.size());
-            
+
             Assert.assertTrue("iterator should have 1 more list (in the Section)", listIterator.hasNext());
-                        
+
             final List sectionList = listIterator.next();
             Assert.assertEquals("section list should have 3 items", 3, sectionList.size());
-            
+
             Assert.assertFalse("iterator should have no more lists", listIterator.hasNext());
         } catch (Exception e) {
             Logger.getLogger(ListItemTest.class.getName()).log(Level.SEVERE, null, e);

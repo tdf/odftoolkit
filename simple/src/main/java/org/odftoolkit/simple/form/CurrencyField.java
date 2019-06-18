@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -37,7 +37,7 @@ public class CurrencyField extends Field {
 	 * Get an instance of currency field by an instance of FormFormattedTextElement,
 	 * while searching the document content to make a bind with the DrawControl
 	 * which already reference to this currency field.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of FormFormattedTextElement
 	 * @return an instance of currency field
@@ -53,7 +53,7 @@ public class CurrencyField extends Field {
 		}
 		return field;
 	}
-	
+
 	public void setCurrencySymbol(String symbol) {
 		this.setFormProperty(OOFormProvider.FORM_PROPERTY_NAME_CURRENCYSYMBOL,
 				"string", symbol, null, null, null, null, null);

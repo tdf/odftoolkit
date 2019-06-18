@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -29,10 +29,10 @@ import org.odftoolkit.simple.table.CellValueAdapter;
  * This is a more complete realization than TextSelection for cell content
  * replacement, which keeps the synchronization among cell value, value type and
  * display text.
- * 
+ *
  * @see TextSelection
  * @see org.odftoolkit.simple.table.CellValueAdapter
- * 
+ *
  * @since 0.3
  */
 public class CellSelection extends TextSelection {
@@ -41,7 +41,7 @@ public class CellSelection extends TextSelection {
 
 	/**
 	 * Constructor of CellSelection.
-	 * 
+	 *
 	 * @param text
 	 *            the text content of this CellSelection
 	 * @param containerElement
@@ -63,7 +63,7 @@ public class CellSelection extends TextSelection {
 	 * and value type will be updated follow by the rules which are designed in
 	 * the {@link org.odftoolkit.simple.table.CellValueAdapter
 	 * <code>CellValueAdapter</code>}.
-	 * 
+	 *
 	 * @param newText
 	 *            the replace text String
 	 * @param adapter
@@ -71,7 +71,7 @@ public class CellSelection extends TextSelection {
 	 *            value type
 	 * @throws InvalidNavigationException
 	 *            if the selection is unavailable.
-	 * 
+	 *
 	 * @see #replaceWith(String)
 	 * @see org.odftoolkit.simple.table.CellValueAdapter
 	 */
@@ -89,12 +89,12 @@ public class CellSelection extends TextSelection {
 	 * and value type will be updated follow by the rules which are designed in
 	 * the {@link org.odftoolkit.simple.table.DefaultCellValueAdapter
 	 * <code>DefaultCellValueAdapter</code>}.
-	 * 
+	 *
 	 * @param newText
 	 *            the replace text String
 	 * @throws InvalidNavigationException
 	 *            if the selection is unavailable.
-	 * 
+	 *
 	 * @see org.odftoolkit.simple.table.DefaultCellValueAdapter
 	 */
 	public void advancedReplaceWith(String newText) throws InvalidNavigationException {
@@ -103,7 +103,7 @@ public class CellSelection extends TextSelection {
 
 	/**
 	 * Get the selected table cell.
-	 * 
+	 *
 	 * @return the selected table cell
 	 */
 	public Cell getCell() {

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -30,7 +30,7 @@ import org.odftoolkit.simple.meta.Meta;
 /**
  * A <tt>SubjectField</tt> displays the subject value contained by the document
  * meta data.
- * 
+ *
  * @since 0.5
  */
 public class SubjectField extends Field {
@@ -55,7 +55,7 @@ public class SubjectField extends Field {
 	/**
 	 * Return an instance of <code>TextSubjectElement</code> which represents
 	 * this feature.
-	 * 
+	 *
 	 * @return an instance of <code>TextSubjectElement</code>
 	 */
 	public TextSubjectElement getOdfElement() {

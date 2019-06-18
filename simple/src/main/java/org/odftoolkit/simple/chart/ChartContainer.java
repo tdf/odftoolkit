@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -28,20 +28,20 @@ import org.odftoolkit.simple.SpreadsheetDocument;
 /**
  * ChartContainer is a container which maintains Chart(s) as element(s).
  * Chart(s) can be added, removed and iterated in this container.
- * 
+ *
  * @see Chart
  * @see org.odftoolkit.simple.TextDocument
  * @see org.odftoolkit.simple.SpreadsheetDocument
  * @see org.odftoolkit.simple.PresentationDocument
  * @see org.odftoolkit.simple.presentation.Slide
- * 
+ *
  * @since 0.6
  */
 public interface ChartContainer {
 
 	/**
 	 * Creates a new Chart for this container.
-	 * 
+	 *
 	 * @param title
 	 *            chart title.
 	 * @param dataset
@@ -55,7 +55,7 @@ public interface ChartContainer {
 
 	/**
 	 * Creates a new Chart for this container.
-	 * 
+	 *
 	 * @param title
 	 *            chart title.
 	 * @param document
@@ -78,7 +78,7 @@ public interface ChartContainer {
 
 	/**
 	 * Creates a new Chart for this container.
-	 * 
+	 *
 	 * @param title
 	 *            chart rectangle.
 	 * @param labels
@@ -96,7 +96,7 @@ public interface ChartContainer {
 
 	/**
 	 * Deletes chart by chart id.
-	 * 
+	 *
 	 * @param chartId
 	 *            the id of specified chart.
 	 * @since 0.6
@@ -105,7 +105,7 @@ public interface ChartContainer {
 
 	/**
 	 * Deletes chart(s) by chart title.
-	 * 
+	 *
 	 * @param title
 	 *            the title of specified chart(s).
 	 * @since 0.6
@@ -114,7 +114,7 @@ public interface ChartContainer {
 
 	/**
 	 * Gets chart with specified id.
-	 * 
+	 *
 	 * @param chartId
 	 *            the id of this chart.
 	 * @return the chart with specified id.
@@ -124,7 +124,7 @@ public interface ChartContainer {
 
 	/**
 	 * Gets chart list with specified title.
-	 * 
+	 *
 	 * @param title
 	 *            the title of specified chart(s).
 	 * @return the chart(s) with specified title.
@@ -134,7 +134,7 @@ public interface ChartContainer {
 
 	/**
 	 * Returns the chart count of this container
-	 * 
+	 *
 	 * @return the chart count of this container
 	 * @since 0.6
 	 */

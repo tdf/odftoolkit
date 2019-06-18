@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -60,7 +60,7 @@ public class TextNavigation extends Navigation {
 	/**
 	 * Construct <code>TextNavigation</code> with matched condition and
 	 * navigation scope.
-	 * 
+	 *
 	 * @param pattern
 	 *            the matched pattern String
 	 * @param doc
@@ -79,7 +79,7 @@ public class TextNavigation extends Navigation {
 	/**
 	 * Construct <code>TextNavigation</code> with matched condition and
 	 * navigation scope.
-	 * 
+	 *
 	 * @param pattern
 	 *            the matched pattern String
 	 * @param element
@@ -98,7 +98,7 @@ public class TextNavigation extends Navigation {
 	/**
 	 * Check if has next <code>TextSelection</code> with satisfied content
 	 * pattern.
-	 * 
+	 *
 	 * @see org.odftoolkit.simple.common.navigation.Navigation#hasNext()
 	 */
 	@Override
@@ -115,7 +115,7 @@ public class TextNavigation extends Navigation {
 
 	/**
 	 * Get next <code>TextSelection</code>.
-	 * 
+	 *
 	 * @see org.odftoolkit.simple.common.navigation.Navigation#nextSelection()
 	 */
 	@Override
@@ -137,7 +137,7 @@ public class TextNavigation extends Navigation {
 	/**
 	 * Check if the text content of element match the specified matched
 	 * condition, which is stated when the <code>TextNavigation</code> created.
-	 * 
+	 *
 	 * @param element
 	 *            navigate this element
 	 * @return true if the text content of this element match this pattern;

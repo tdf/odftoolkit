@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -37,7 +37,7 @@ import org.w3c.dom.NodeList;
 /**
  * This class represents the form control of Combo Box, provides methods to
  * get/set the form properties and the style formatting of this control.
- * 
+ *
  * @since 0.8
  */
 public class ComboBox extends FormControl {
@@ -53,7 +53,7 @@ public class ComboBox extends FormControl {
 	 * Get an instance of combo box by an instance of FormComboboxElement, while
 	 * searching the document content to make a bind with the DrawControl which
 	 * already reference to this check box.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of FormComboboxElement
 	 * @return an instance of combo box
@@ -106,7 +106,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Set the visibility of the drop-down list
-	 * 
+	 *
 	 * @param isDropDown
 	 *            - specify if the drop-down list is visible
 	 */
@@ -116,7 +116,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Get the visibility of the drop-down list
-	 * 
+	 *
 	 * @return true means the drop-down list is visible; false means invisible
 	 */
 	public boolean getFormDropdown() {
@@ -125,7 +125,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Add a list item to this combo box.
-	 * 
+	 *
 	 * @param item
 	 *            - a list item
 	 */
@@ -141,7 +141,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Add a group of list items to this combo box
-	 * 
+	 *
 	 * @param items
 	 *            -a group of list items
 	 */
@@ -155,7 +155,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Get the list entries if they are initiated through a list of string.
-	 * 
+	 *
 	 * @return the list entries
 	 */
 	public ArrayList<String> getEntries() {
@@ -176,7 +176,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Set the source type of the data list.
-	 * 
+	 *
 	 * @param type
 	 *            - the source type of this list
 	 */
@@ -187,7 +187,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Get the source type of the data list.
-	 * 
+	 *
 	 * @return the source type of this list
 	 */
 	public FormListSourceType getListSourceType() {
@@ -198,7 +198,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Set the source of this data list.
-	 * 
+	 *
 	 * @param listSource
 	 *            - the source of this data list.
 	 */
@@ -208,7 +208,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Get the source of this data list.
-	 * 
+	 *
 	 * @return the source of this data list.
 	 */
 	public String getListSource() {
@@ -217,7 +217,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Set the data field referenced by this combo box
-	 * 
+	 *
 	 * @param dataField
 	 *            - the data field referenced by this combo box
 	 */
@@ -227,7 +227,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Get the data field referenced by this combo box
-	 * 
+	 *
 	 * @return the data field referenced by this combo box
 	 */
 	public String getDataField() {
@@ -237,7 +237,7 @@ public class ComboBox extends FormControl {
 	/**
 	 * Set the default value of this control, it will be override by current
 	 * value.
-	 * 
+	 *
 	 * @param value
 	 *            - default value
 	 */
@@ -247,7 +247,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Get the default value of this control.
-	 * 
+	 *
 	 * @return default value
 	 */
 	public String getValue() {
@@ -256,7 +256,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Set the current value of this control, it override the default value.
-	 * 
+	 *
 	 * @param currentValue
 	 *            - current value
 	 */
@@ -267,7 +267,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Get the current value of this control, it override the default value.
-	 * 
+	 *
 	 * @return current value
 	 */
 	public String getCurrentValue() {
@@ -276,7 +276,7 @@ public class ComboBox extends FormControl {
 
 	/**
 	 * Get a simple iterator for combo boxes.
-	 * 
+	 *
 	 * @param container
 	 *            - an instance of form where to traverse the combo boxes s
 	 */

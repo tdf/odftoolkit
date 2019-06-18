@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -42,7 +42,7 @@ import org.w3c.dom.DOMException;
  * This class represents control object, a shape that is linked to a control
  * inside an form. It provides methods to get/set control properties, content,
  * and styles.
- * 
+ *
  * @since 0.8
  */
 public class Control extends Component {
@@ -57,7 +57,7 @@ public class Control extends Component {
 
 	/**
 	 * Get the container element which contains this control.
-	 * 
+	 *
 	 * @return the container element.
 	 */
 	public OdfElement getContainerElement() {
@@ -66,7 +66,7 @@ public class Control extends Component {
 
 	/**
 	 * Get the instance of DrawControlElement which represents this control.
-	 * 
+	 *
 	 * @return the instance of DrawControlElement
 	 */
 	public DrawControlElement getOdfElement() {
@@ -76,7 +76,7 @@ public class Control extends Component {
 	/**
 	 * Create an instance of control and and append it at the end of a container
 	 * element.
-	 * 
+	 *
 	 * @param container
 	 *            - the container element
 	 * @return a control instance
@@ -94,7 +94,7 @@ public class Control extends Component {
 
 	/**
 	 * Get an instance of control according to a DrawControlElement.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of DrawControlElement
 	 * @return an instance of DrawControlElement
@@ -114,7 +114,7 @@ public class Control extends Component {
 	 * Remove the shape control from the container.
 	 * <p>
 	 * The resource is removed if it's only used by this object.
-	 * 
+	 *
 	 * @return true if the shape control is successfully removed; false if
 	 *         otherwise.
 	 */
@@ -134,7 +134,7 @@ public class Control extends Component {
 
 	/**
 	 * Return the style handler for this control
-	 * 
+	 *
 	 * @return the style handler
 	 */
 	public ControlStyleHandler getStyleHandler() {
@@ -146,7 +146,7 @@ public class Control extends Component {
 	/**
 	 * Set a control within a form that is linked to this control shape by its
 	 * ID.
-	 * 
+	 *
 	 * @param formControlId
 	 *            - id of a form control
 	 */
@@ -157,10 +157,10 @@ public class Control extends Component {
 	/**
 	 * Set how a form control is bound to a text document. Default position
 	 * relative and alignment will be set.
-	 * 
+	 *
 	 * <p>
 	 * If the document is not text document, nothing will happen.
-	 * 
+	 *
 	 * @param achorType
 	 *            - the point at which a form control is bound to a text
 	 *            document
@@ -171,7 +171,7 @@ public class Control extends Component {
 
 	/**
 	 * Set the rectangle used by this control
-	 * 
+	 *
 	 * @param rectangle
 	 *            - the rectangle used by this control
 	 */
@@ -188,7 +188,7 @@ public class Control extends Component {
 
 	/**
 	 * Return the rectangle used by this control
-	 * 
+	 *
 	 * @return - the rectangle used by this control
 	 */
 	public FrameRectangle getRectangle() {
@@ -216,7 +216,7 @@ public class Control extends Component {
 	 * <code>formatStr</code> must follow the encoding rule of
 	 * {@link java.text.SimpleDateFormat
 	 * <code>java.text.SimpleDateFormat</code>}.
-	 * 
+	 *
 	 * @param formatStr
 	 *            -the input need be formatted as this specified format string.
 	 * @param type

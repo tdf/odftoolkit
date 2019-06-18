@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -31,7 +31,7 @@ import org.w3c.dom.Node;
  * AbstractParagraphContainer is an abstract class to present paragraph
  * container. It contains the default implementation to add/get/remove
  * paragraph. Each subclass needs to implement getParagraphContainerElement().
- * 
+ *
  * @since 0.5
  */
 public abstract class AbstractParagraphContainer implements ParagraphContainer {
@@ -40,7 +40,7 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 
 	/**
 	 * Add paragraph at the end of the container with specified text content.
-	 * 
+	 *
 	 * @param textContent
 	 *            the text content
 	 * @return an instance of paragraph
@@ -53,7 +53,7 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 
 	/**
 	 * Remove paragraph from the container
-	 * 
+	 *
 	 * @param para
 	 *            the instance of paragraph
 	 * @return true if the paragraph is removed successfully, false if errors
@@ -71,7 +71,7 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 
 	/**
 	 * Return an Iterator of the paragraph in this container.
-	 * 
+	 *
 	 * @return an Iterator of the paragraph in this container
 	 */
 	public Iterator<Paragraph> getParagraphIterator() {
@@ -84,7 +84,7 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 	 * An index of zero represents the first paragraph.
 	 * <p>
 	 * If empty paragraph is skipped, the empty paragraph won't be counted.
-	 * 
+	 *
 	 * @param index
 	 *            the index started from 0.
 	 * @param isEmptyParagraphSkipped
@@ -115,7 +115,7 @@ public abstract class AbstractParagraphContainer implements ParagraphContainer {
 	 * An index of zero represents the last paragraph.
 	 * <p>
 	 * If empty paragraph is skipped, the empty paragraph won't be counted.
-	 * 
+	 *
 	 * @param reverseIndex
 	 *            the index started from 0 in reverse order.
 	 * @param isEmptyParagraphSkipped

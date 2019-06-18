@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -33,7 +33,7 @@ import org.odftoolkit.simple.PresentationDocument;
  * interface, with a default implementation for every method defined in
  * FrameContainer, except getFrameContainerElement(). A subclass must implement
  * the abstract method getFrameContainerElement().
- * 
+ *
  * @since 0.5
  */
 public abstract class AbstractFrameContainer implements FrameContainer {
@@ -42,7 +42,7 @@ public abstract class AbstractFrameContainer implements FrameContainer {
 
 	/**
 	 * Add a frame to the container
-	 * 
+	 *
 	 * @return the instance of DrawFrameElement
 	 */
 	public Frame addFrame() {
@@ -52,7 +52,7 @@ public abstract class AbstractFrameContainer implements FrameContainer {
 
 	/**
 	 * Add a frame with the specific position to the container
-	 * 
+	 *
 	 * @param rectangle
 	 *            - the rectangle (position and size) of this frame
 	 * @return an object of frame
@@ -65,7 +65,7 @@ public abstract class AbstractFrameContainer implements FrameContainer {
 
 	/**
 	 * Return a frame whose name (specified with "draw:name") is a given value.
-	 * 
+	 *
 	 * @param name
 	 *            - the name of this frame
 	 * @return a frame whose name is the given value
@@ -93,7 +93,7 @@ public abstract class AbstractFrameContainer implements FrameContainer {
 	 * <p>
 	 * Null will be returned if the owner document is not a presentation
 	 * document.
-	 * 
+	 *
 	 * @param usage
 	 *            - the usage value
 	 * @return a list of frame whose usage is a given value. Null will be

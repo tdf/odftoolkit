@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -25,7 +25,7 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeFormsElement;
 /**
  * This class provide method to create/get the form instance implemented in
  * Apache Open Office way.
- * 
+ *
  * @since 0.8
  */
 public class OOFormProvider implements FormProvider {
@@ -79,7 +79,7 @@ public class OOFormProvider implements FormProvider {
 
 	/**
 	 * Create a form in Apache Open Office way.
-	 * 
+	 *
 	 * @see FormProvider#createForm(String, OfficeFormsElement)
 	 */
 	public Form createForm(String name, OfficeFormsElement parent) {
@@ -89,7 +89,7 @@ public class OOFormProvider implements FormProvider {
 
 	/**
 	 * Get a form instance implemented in Apache Open Office way.
-	 * 
+	 *
 	 * @see FormProvider#getInstanceOf(FormFormElement)
 	 */
 	public Form getInstanceOf(FormFormElement element) {

@@ -53,11 +53,11 @@ public class ODFXSLTRunnerTask extends Task {
     private Factory m_aFactory = null;
     boolean m_bForce = false;
     boolean m_bTemplate = false;
-    
+
     /**
-     * Set input package. The specified path within the package is the source of 
+     * Set input package. The specified path within the package is the source of
      * the transformation.
-     * 
+     *
      * @param aIn Input package
      */
     public void setIn( File aIn )
@@ -66,9 +66,9 @@ public class ODFXSLTRunnerTask extends Task {
     }
 
     /**
-     * Set input file. This (XML) file is used directly as source of the 
+     * Set input file. This (XML) file is used directly as source of the
      * transformation.
-     * 
+     *
      * @param aInFile Input File
      */
     public void setInFile( File aInFile )
@@ -77,9 +77,9 @@ public class ODFXSLTRunnerTask extends Task {
     }
 
     /**
-     * Set output package. The source of the transformation is stored in a 
+     * Set output package. The source of the transformation is stored in a
      * package with this name.
-     * 
+     *
      * @param aOut
      */
     public void setOut( File aOut )
@@ -90,7 +90,7 @@ public class ODFXSLTRunnerTask extends Task {
     /**
      * Set output file. The source of the transformation is stored under this
      * name as plain (XML) file.
-     * 
+     *
      * @param aOutFile
      */
     public void setOutFile( File aOutFile )
@@ -100,7 +100,7 @@ public class ODFXSLTRunnerTask extends Task {
 
     /**
      * Set the style sheet to apply.
-     * 
+     *
      * @param aStyle
      */
     public void setStyle( File aStyle )
@@ -112,18 +112,18 @@ public class ODFXSLTRunnerTask extends Task {
      * Sets template mode. In template mode, the output package must exist,
      * and the specified path within the output file is replaced with the result
      * of the transformation
-     * 
+     *
      * @param bTemplate Template mode
      */
     public void setTemplate( boolean bTemplate )
     {
         m_bTemplate = bTemplate;
     }
-    
+
     /**
      * Set force mode. In this mode, the style sheet is applied even if the
      * output file or package is newer than the source and the style sheet.
-     * 
+     *
      * @param bForce
      */
     public void setForce( boolean bForce )
@@ -155,7 +155,7 @@ public class ODFXSLTRunnerTask extends Task {
 
         /**
          * Set parameter expression.
-         * 
+         *
          * @param aValue
          */
         public void setExpression( String aValue )
@@ -165,7 +165,7 @@ public class ODFXSLTRunnerTask extends Task {
 
         /**
          * Get paramter name.
-         * 
+         *
          * @return paramter name
          */
         public String getName()
@@ -173,9 +173,9 @@ public class ODFXSLTRunnerTask extends Task {
             return m_aName;
         }
 
-        /** 
+        /**
          * Get paramter value.
-         * 
+         *
          * @return paramter value.
          */
         public String getValue()
@@ -219,7 +219,7 @@ public class ODFXSLTRunnerTask extends Task {
 
     /**
      * Create a new paramter for a nested <param> element.
-     * 
+     *
      * @return new paramter.
      */
     public Param createParam()
@@ -241,10 +241,10 @@ public class ODFXSLTRunnerTask extends Task {
         m_aFactory = new Factory();
         return m_aFactory;
     }
-    
+
 
     public @Override void execute() throws BuildException {
-    
+
         if( m_aStyleSheet == null )
             throw new BuildException( "style attribute must be set", getLocation() );
         if( !m_aStyleSheet.exists() )
@@ -262,7 +262,7 @@ public class ODFXSLTRunnerTask extends Task {
         }
         if( !m_aInput.exists() )
             throw new BuildException( "input file " + m_aInput.getAbsolutePath() + " does not exist", getLocation() );
-        
+
         int m_aOutputMode = ODFXSLTRunner.OUTPUT_MODE_COPY_INPUT_PACKAGE;
         if( m_aOutput == null && m_aOutputFile == null )
             throw new BuildException( "out or outfile attribute must be set", getLocation() );
@@ -282,7 +282,7 @@ public class ODFXSLTRunnerTask extends Task {
             if( !m_aOutput.exists() )
                 throw new BuildException( "output file " + m_aStyleSheet.getAbsolutePath() + " does not exist", getLocation() );
         }
-        
+
         if( m_aParams != null )
         {
             Iterator<XSLTParameter> aIter = m_aParams.iterator();
@@ -304,8 +304,8 @@ public class ODFXSLTRunnerTask extends Task {
             if( aFactory == null )
                 throw new BuildException( "factory name attribute must be set", getLocation() );
         }
-        
-        if( !m_bForce && m_aOutput.exists() && 
+
+        if( !m_bForce && m_aOutput.exists() &&
             m_aOutput.lastModified() > m_aInput.lastModified() &&
             m_aOutput.lastModified() > m_aStyleSheet.lastModified())
             return;
@@ -322,7 +322,7 @@ public class ODFXSLTRunnerTask extends Task {
                 aMKDir.execute();
             }
         }
-        
+
         boolean bError = false;
         try
         {

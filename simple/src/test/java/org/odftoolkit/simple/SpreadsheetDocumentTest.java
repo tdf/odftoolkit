@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -38,10 +38,10 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 public class SpreadsheetDocumentTest {
 	private static final Logger LOG = Logger.getLogger(SpreadsheetDocumentTest.class.getName());
 	private static final String TEST_FILE = "spreadsheetTestTemplate.ots";
-	
+
 	@Test
 	public void testGetMediaTypeString() throws Exception{
-		
+
 		try {
 			String spreadDocPath = ResourceUtilities.getAbsolutePath(TEST_FILE);
 			SpreadsheetDocument spreadDoc = SpreadsheetDocument.loadDocument(spreadDocPath);
@@ -52,9 +52,9 @@ public class SpreadsheetDocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testGetSuffix() throws Exception{
 		try {
@@ -69,10 +69,10 @@ public class SpreadsheetDocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testGetOdfMediaType() throws Exception{
-		
+
 		try {
 			String spreadDocPath = ResourceUtilities.getAbsolutePath(TEST_FILE);
 			SpreadsheetDocument spreadDoc = SpreadsheetDocument.loadDocument(spreadDocPath);
@@ -84,7 +84,7 @@ public class SpreadsheetDocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testLoadDocument() throws Exception{
 		try {
@@ -97,10 +97,10 @@ public class SpreadsheetDocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testLoadDocumentFile() throws Exception{
-		
+
 		try {
 			String filePath = ResourceUtilities.getAbsolutePath(TEST_FILE);
 			File fileDoc = new File(filePath);
@@ -111,7 +111,7 @@ public class SpreadsheetDocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
 
 	@Test
@@ -138,7 +138,7 @@ public class SpreadsheetDocumentTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testCreateChart() throws Exception{
 		try {
@@ -158,19 +158,19 @@ public class SpreadsheetDocumentTest {
 			spChart.setChartType(ChartType.AREA);
 			//save
 			spDocument.save(ResourceUtilities.getTestOutput("Chart_"+TEST_FILE));
-			
+
 			Assert.assertEquals(dataset, spChart.getChartData());
 			Assert.assertEquals("XXXTitle", spChart.getChartTitle());
 			Assert.assertEquals(ChartType.AREA, spChart.getChartType());
-			
+
 			LOG.log(Level.INFO,"spChart--> " + spChart);
-			
+
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testGetSheetByIndex() throws Exception{
 		File file = new File(ResourceUtilities.getAbsolutePath("TestSpreadsheetTable.ods"));
@@ -178,7 +178,7 @@ public class SpreadsheetDocumentTest {
 		//index < 0 , Not expected, table ==null
 		Table tablenull = spDocument.getSheetByIndex(-1);
 		Assert.assertTrue((tablenull == null));
-		//index > 0 
+		//index > 0
 		//index = 0
 		Table tableSheet0 = spDocument.getSheetByIndex(0);
 		Assert.assertTrue((tableSheet0 != null));
@@ -190,7 +190,7 @@ public class SpreadsheetDocumentTest {
 		Assert.assertEquals("Sheet2", tableSheet1.getTableName());
 		Assert.assertEquals(1, tableSheet1.getColumnCount());
 	}
-	
+
 	@Test
 	public void testInsertSheet() throws Exception{
 		File file = new File(ResourceUtilities.getAbsolutePath(TEST_FILE));
@@ -201,7 +201,7 @@ public class SpreadsheetDocumentTest {
 		//index >= sheet count
 		Table tableb = spDocument.insertSheet(11);
 		Assert.assertNull(tableb);
-		
+
 		//index is within the law
 		Table tab = spDocument.getSheetByName("tabellDemo2");
 		if(tab != null){
@@ -218,9 +218,9 @@ public class SpreadsheetDocumentTest {
 		tablea.setTableName("tabellDemo2");
 		Assert.assertEquals("tabellDemo2", tablea.getTableName());
 		spDocument.save(ResourceUtilities.getAbsolutePath(TEST_FILE));
-		
+
 	}
-	
+
 	@Test
 	public void testRemoveSheet() throws Exception{
 		File file = new File(ResourceUtilities.getAbsolutePath(TEST_FILE));
@@ -231,7 +231,7 @@ public class SpreadsheetDocumentTest {
 		//index >= sheet count
 		Table tableb = spDocument.insertSheet(11);
 		Assert.assertNull(tableb);
-		
+
 		//index is within the law
 		Table tab = spDocument.getSheetByName("tabellDemo2");
 		if(tab != null){
@@ -250,10 +250,10 @@ public class SpreadsheetDocumentTest {
 		spDocument.removeSheet(0);
 		Table tablem = spDocument.getSheetByIndex(0);
 		Assert.assertNotSame(tablea, tablem);
-		
+
 		spDocument.save(ResourceUtilities.getAbsolutePath(TEST_FILE));
 	}
-	
+
 	@Test
 	public void testGetSheetByIndex2() throws Exception{
 		File file = new File(ResourceUtilities.getAbsolutePath(TEST_FILE));
@@ -264,21 +264,21 @@ public class SpreadsheetDocumentTest {
 		//index >= sheet count
 		Table tableb = spDocument.insertSheet(11);
 		Assert.assertNull(tableb);
-		
+
 		//index is within the law
 		Table tab = spDocument.getSheetByName("tabellDemo1");
 		if(tab != null)
 			tab.remove();
-		
+
 		Table taba = spDocument.getSheetByName("Tabelle1");
 		Table tablea = spDocument.insertSheet(taba,0);
 		tablea.setTableName("tabellDemo1");
 		Assert.assertEquals("tabellDemo1", tablea.getTableName());
 		Table tablem = spDocument.getSheetByIndex(0);
 		Assert.assertEquals(tablea, tablem);
-		
+
 		spDocument.save(ResourceUtilities.getAbsolutePath(TEST_FILE));
-		
+
 	}
-	
+
 }

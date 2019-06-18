@@ -1,4 +1,4 @@
-/* 
+/*
   Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
        distributed with this work for additional information
@@ -42,7 +42,7 @@ import org.w3c.dom.NodeList;
  * <p>
  * It provides convenient methods to create a span and manipulate attributes of
  * a span.
- * 
+ *
  * @since 0.5.5
  */
 public class Span extends Component implements TextHyperlinkContainer {
@@ -60,7 +60,7 @@ public class Span extends Component implements TextHyperlinkContainer {
 
 	/**
 	 * Get a span instance by an instance of <code>TextSpanElement</code>.
-	 * 
+	 *
 	 * @param sElement
 	 *            - the instance of TextSpanElement
 	 * @return an instance of span
@@ -81,7 +81,7 @@ public class Span extends Component implements TextHyperlinkContainer {
 
 	/**
 	 * Create a span instance with a text selection
-	 * 
+	 *
 	 * @param textSelection
 	 *            the TextSelection which the span is applied to.
 	 * @return an instance of span
@@ -101,7 +101,7 @@ public class Span extends Component implements TextHyperlinkContainer {
 	 * Get the style handler of this span.
 	 * <p>
 	 * The style handler is an instance of DefaultStyleHandler
-	 * 
+	 *
 	 * @return an instance of DefaultStyleHandler
 	 * @see org.odftoolkit.simple.style.DefaultStyleHandler
 	 */
@@ -116,7 +116,7 @@ public class Span extends Component implements TextHyperlinkContainer {
 
 	/**
 	 * Get the owner document of this span
-	 * 
+	 *
 	 * @return the document who owns this span
 	 */
 	public Document getOwnerDocument() {
@@ -125,7 +125,7 @@ public class Span extends Component implements TextHyperlinkContainer {
 
 	/**
 	 * Return the instance of "text:span" element
-	 * 
+	 *
 	 * @return the instance of "text:span" element
 	 */
 	@Override
@@ -135,7 +135,7 @@ public class Span extends Component implements TextHyperlinkContainer {
 
 	/**
 	 * Remove the text content of this span.
-	 * 
+	 *
 	 */
 	public void removeTextContent() {
 		Paragraph.removeTextContentImpl(getOdfElement());
@@ -157,7 +157,7 @@ public class Span extends Component implements TextHyperlinkContainer {
 	 * <p>
 	 * All the existing text content of this paragraph would be removed, and
 	 * then new text content would be set.
-	 * 
+	 *
 	 * @param content
 	 *            - the text content
 	 */
@@ -179,7 +179,7 @@ public class Span extends Component implements TextHyperlinkContainer {
 	 * Return the text content of this span.
 	 * <p>
 	 * The other child elements except text content will not be returned.
-	 * 
+	 *
 	 * @return - the text content of this span
 	 */
 	public String getTextContent() {
@@ -190,7 +190,7 @@ public class Span extends Component implements TextHyperlinkContainer {
 	 * Append the text content at the end of this span.
 	 * <p>
 	 * The appended text would follow the style of the last character.
-	 * 
+	 *
 	 * @param content
 	 *            - the text content
 	 */
@@ -204,7 +204,7 @@ public class Span extends Component implements TextHyperlinkContainer {
 	 * The appended text would follow the style of the last character if the
 	 * second parameter is set to true; Or else, the appended text would follow
 	 * the default style of this paragraph.
-	 * 
+	 *
 	 * @param content
 	 *            - the text content
 	 * @param isStyleInherited
@@ -238,7 +238,7 @@ public class Span extends Component implements TextHyperlinkContainer {
 	public void removeHyperlinks() {
 		getTextHyperlinkContainerImpl().removeHyperlinks();
 	}
-	
+
 	public TextHyperlink appendHyperlink(String text, URI linkto) {
 		return getTextHyperlinkContainerImpl().appendHyperlink(text, linkto);
 	}

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -23,7 +23,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 
 /**
  * FrameContainer is a container which maintains Frame(s) as element(s).
- * 
+ *
  * @since 0.5
  */
 public interface FrameContainer {
@@ -32,7 +32,7 @@ public interface FrameContainer {
 	 * Get the ODF element which can have <draw:frame> as child element directly
 	 * according to ODF specification. This Element will help to find the
 	 * position to insert a new draw:frame element.
-	 * 
+	 *
 	 * @return the parent of draw:frame
 	 */
 	OdfElement getFrameContainerElement();

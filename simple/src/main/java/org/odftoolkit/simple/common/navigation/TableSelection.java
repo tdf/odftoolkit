@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -48,19 +48,19 @@ import org.w3c.dom.NodeList;
 
 /**
  * This is a decorator class of TextSelection, which help user replace a text content with a Table.
- * 
+ *
  */
 public class TableSelection extends Selection {
 
 	private TextSelection textSelection;
 	private Table tableContainer;
 	private Table sourceTable;
-	
+
 	/**
 	 * Replace the content with a Table , the table can be in the same TextDocument or in a different Document.
-	 * 
+	 *
 	 * @param paragraph the reference table to replace.
-	 * 
+	 *
 	 * @return the new Table in the TextDocument
 	 */
 	public Table replaceWithTable(Table table) {
@@ -102,7 +102,7 @@ public class TableSelection extends Selection {
 	/**
 	 * Construct a TableSelection with TextSelection. Then user can replace text
 	 * content with {@link org.odftoolkit.simple.table.Table table}.
-	 * 
+	 *
 	 * @param selection
 	 *            the TextSelection to be decorated.
 	 */
@@ -117,7 +117,7 @@ public class TableSelection extends Selection {
 	 * same container element will be updated automatically because the start
 	 * index of the following selections will be changed when the previous
 	 * selection has been deleted.
-	 * 
+	 *
 	 * @throws InvalidNavigationException
 	 *             if the selection is unavailable.
 	 */
@@ -128,7 +128,7 @@ public class TableSelection extends Selection {
 
 	/**
 	 * Paste this selection just after a specific selection.
-	 * 
+	 *
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException
@@ -212,7 +212,7 @@ public class TableSelection extends Selection {
 
 	/**
 	 * Paste this selection just before a specific selection.
-	 * 
+	 *
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException
@@ -242,7 +242,7 @@ public class TableSelection extends Selection {
 			OdfElement rightparentElement = textSelection.getContainerElement();
 			int nodeLength = TextExtractor.getText(rightparentElement).length();
 			if(index==0){
-				
+
 				if(leftLength==nodeLength){
 					//Replace whole Paragraph
 					Paragraph orgparagraph = Paragraph

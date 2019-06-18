@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -65,12 +65,12 @@ public class PresentationDocument extends Document implements ChartContainer{
 	private final SlideBuilder slideBuilder;
 	private final NotesBuilder notesBuilder;
 	private ChartContainerImpl chartContainerImpl;
-	
+
 	/**
 	 * It represents the defined values of presentation:class. The
 	 * presentation:class attribute classifies presentation shapes by their
 	 * usage within a draw page.
-	 * 
+	 *
 	 * @since 0.5
 	 */
 	public static enum PresentationClass {
@@ -167,7 +167,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 			throw new RuntimeException("Unsupported Presentation Class!");
 		}
 	}
-	
+
 	/**
 	 * This enum contains all possible media types of PresentationDocument
 	 * documents.
@@ -204,7 +204,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 		}
 
 		/**
-		 * 
+		 *
 		 * @param mediaType
 		 *            string defining an ODF document
 		 * @return the according OdfMediatype encapuslating the given string and
@@ -217,7 +217,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 
 	/**
 	 * Creates an empty presentation document.
-	 * 
+	 *
 	 * @return ODF presentation document based on a default template
 	 * @throws java.lang.Exception
 	 *             - if the document could not be created
@@ -229,7 +229,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 
 	/**
 	 * Creates an empty presentation template.
-	 * 
+	 *
 	 * @return ODF presentation template based on a default
 	 * @throws Exception
 	 *             - if the template could not be created
@@ -255,7 +255,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 	/**
 	 * Creates an PresentationDocument from the OpenDocument provided by a
 	 * resource Stream.
-	 * 
+	 *
 	 * <p>
 	 * Since an InputStream does not provide the arbitrary (non sequentiell)
 	 * read access needed by PresentationDocument, the InputStream is cached.
@@ -263,12 +263,12 @@ public class PresentationDocument extends Document implements ChartContainer{
 	 * methods. An advantage of caching is that there are no problems
 	 * overwriting an input file.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If the resource stream is not a ODF presentation document,
 	 * ClassCastException might be thrown.
 	 * </p>
-	 * 
+	 *
 	 * @param inputStream
 	 *            - the InputStream of the ODF presentation document.
 	 * @return the presentation document created from the given InputStream
@@ -281,17 +281,17 @@ public class PresentationDocument extends Document implements ChartContainer{
 
 	/**
 	 * Loads an PresentationDocument from the provided path.
-	 * 
+	 *
 	 * <p>
 	 * PresentationDocument relies on the file being available for read access
 	 * over the whole lifecycle of PresentationDocument.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If the resource stream is not a ODF presentation document,
 	 * ClassCastException might be thrown.
 	 * </p>
-	 * 
+	 *
 	 * @param documentPath
 	 *            - the path from where the document can be loaded
 	 * @return the presentation document from the given path or NULL if the
@@ -305,17 +305,17 @@ public class PresentationDocument extends Document implements ChartContainer{
 
 	/**
 	 * Creates an PresentationDocument from the OpenDocument provided by a File.
-	 * 
+	 *
 	 * <p>
 	 * PresentationDocument relies on the file being available for read access
 	 * over the whole lifecycle of PresentationDocument.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If the resource stream is not a ODF presentation document,
 	 * ClassCastException might be thrown.
 	 * </p>
-	 * 
+	 *
 	 * @param file
 	 *            - a file representing the ODF presentation document.
 	 * @return the presentation document created from the given File
@@ -328,7 +328,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 
 	/**
 	 * Get the content root of a presentation document.
-	 * 
+	 *
 	 * @return content root, representing the office:presentation tag
 	 * @throws Exception
 	 *             if the file DOM could not be created.
@@ -342,7 +342,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 	 * Switches this instance to the given type. This method can be used to e.g.
 	 * convert a document instance to a template and vice versa. Changes take
 	 * affect in the package when saving the document.
-	 * 
+	 *
 	 * @param type
 	 *            the compatible ODF mediatype.
 	 */
@@ -355,7 +355,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 	/**
 	 * Return the slide builder of this document. Every presentation document
 	 * has a slide builder.
-	 * 
+	 *
 	 * @return the slide builder of this document.
 	 * @since 0.3.5
 	 */
@@ -366,7 +366,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 	/**
 	 * Return the notes builder of this document. Every presentation document
 	 * has a notes builder.
-	 * 
+	 *
 	 * @return the notes builder of this document.
 	 * @since 0.3.5
 	 */
@@ -377,7 +377,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 	/**
 	 * Return the slide at a specified position in this presentation. Return
 	 * null if the index is out of range.
-	 * 
+	 *
 	 * @param index
 	 *            the index of the slide to be returned
 	 * @return a draw slide at the specified position
@@ -401,7 +401,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 
 	/**
 	 * Get the number of the slides in this presentation.
-	 * 
+	 *
 	 * @return the number of slides
 	 */
 	public int getSlideCount() {
@@ -427,7 +427,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 	 * <p>
 	 * If the name is null, then return null because all the slide must has its
 	 * own unique name.
-	 * 
+	 *
 	 * @param name
 	 *            the specified slide name
 	 * @return the slide whose name equals to the specified name
@@ -485,7 +485,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 
 	/**
 	 * Return a list iterator containing all slides in this presentation.
-	 * 
+	 *
 	 * @return a list iterator containing all slides in this presentation
 	 */
 	public Iterator<Slide> getSlides() {
@@ -508,7 +508,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 
 	/**
 	 * Delete the slide at a specified position in this presentation.
-	 * 
+	 *
 	 * @param index
 	 *            the index of the slide that need to be delete
 	 *            <p>
@@ -550,7 +550,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 
 	/**
 	 * Delete all the slides with a specified name in this presentation.
-	 * 
+	 *
 	 * @param name
 	 *            the name of the slide that need to be delete
 	 * @return false if the operation was not successful
@@ -586,7 +586,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 	 * this presentation. The original slide which at the dest index and after
 	 * the dest index will move after.
 	 * <p>
-	 * 
+	 *
 	 * @param source
 	 *            the source position of the slide need to be copied
 	 * @param dest
@@ -635,7 +635,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 
 	/**
 	 * Move the slide at a specified position to the destination position.
-	 * 
+	 *
 	 * @param source
 	 *            the current index of the slide that need to be moved
 	 * @param dest
@@ -676,7 +676,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 	/**
 	 * Append all the slides of the specified presentation document to the
 	 * current document.
-	 * 
+	 *
 	 * @param srcDoc
 	 *            the specified <code>PresentationDocument</code> that need to
 	 *            be appended
@@ -720,7 +720,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 	 * source presentation document and insert it to the current presentation
 	 * document at the new position. The original slide which at the dest index
 	 * and after the dest index will move after.
-	 * 
+	 *
 	 * @param destIndex
 	 *            the new position of the copied slide in the current document
 	 * @param srcDoc
@@ -787,7 +787,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 	 * document.
 	 * <p>
 	 * The slide name can be null.
-	 * 
+	 *
 	 * @param index
 	 *            the new slide position
 	 * @param name
@@ -859,7 +859,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 		checkAllSlideName();
 		return Slide.getInstance(newSlideElement);
 	}
-	
+
 	public Chart createChart(String title, DataSet dataset, Rectangle rect) {
 		return getChartContainerImpl().createChart(title, dataset, rect);
 	}
@@ -893,7 +893,7 @@ public class PresentationDocument extends Document implements ChartContainer{
 	public int getChartCount() {
 		return getChartContainerImpl().getChartCount();
 	}
-	
+
 	// when insert a slide, the note page for this slide is also inserted.
 	// note page refer the slide index in order to show the corresponding slide
 	// notes view
@@ -935,14 +935,14 @@ public class PresentationDocument extends Document implements ChartContainer{
 	public OdfElement getTableContainerElement() {
 		throw new UnsupportedOperationException("Presentation document is not supported to hold table directly.");
 	}
-	
+
 	private ChartContainerImpl getChartContainerImpl() {
 		if (chartContainerImpl == null) {
 			chartContainerImpl = new ChartContainerImpl(this);
 		}
 		return chartContainerImpl;
 	}
-	
+
 	private class ChartContainerImpl extends AbstractChartContainer {
 		PresentationDocument sdoc;
 

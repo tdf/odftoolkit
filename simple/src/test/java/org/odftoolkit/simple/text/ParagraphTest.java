@@ -71,10 +71,10 @@ public class ParagraphTest {
         }
     }
 
-    
+
 	private class ParagraphContainerOfDocumentImpl extends AbstractParagraphContainer {
 		OdfElement containerElement;
-		
+
 		public ParagraphContainerOfDocumentImpl(Document doc) throws Exception
 		{
 			containerElement = doc.getContentRoot();
@@ -84,8 +84,8 @@ public class ParagraphTest {
 			return containerElement;
 		}
 	}
-    
-     
+
+
     @Test
     public void testInsertParagraphBefore() {
         TextDocument doc;
@@ -102,8 +102,8 @@ public class ParagraphTest {
             Assert.fail(e.getMessage());
         }
     }
-    
-    
+
+
     private TextDocument readParagraphDocument() throws Exception {
 			return (TextDocument) TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("Paragraph.odt"));
 	}
@@ -128,8 +128,8 @@ public class ParagraphTest {
         }
     }
 
-    
-    
+
+
     @Test
     public void testRemoveContent() {
         TextDocument doc;

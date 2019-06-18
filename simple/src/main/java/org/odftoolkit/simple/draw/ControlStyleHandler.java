@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -31,7 +31,7 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalRelative;
 
 /**
  * This class provides functions to handle the style of a form control.
- * 
+ *
  * @since 0.8
  */
 public class ControlStyleHandler extends DefaultStyleHandler {
@@ -46,10 +46,10 @@ public class ControlStyleHandler extends DefaultStyleHandler {
 	/**
 	 * Set how a form control is bound to a text document. Default position
 	 * relative and alignment will be set.
-	 * 
+	 *
 	 * <p>
 	 * If the document is not text document, nothing will happen.
-	 * 
+	 *
 	 * @param achorType
 	 *            - the point at which a form control is bound to a text
 	 *            document

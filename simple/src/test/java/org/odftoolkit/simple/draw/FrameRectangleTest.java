@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -43,7 +43,7 @@ public class FrameRectangleTest {
 			Assert.assertEquals("1.32cm", frameR.getYDesc());
 			Assert.assertEquals("4.41cm", frameR.getWidthDesc());
 			Assert.assertEquals("3.92cm", frameR.getHeigthDesc());
-			
+
 			Textbox box = p.addTextbox(frameR);
 			box.setName("tbox name");
 			box.setTextContent(content);
@@ -66,11 +66,11 @@ public class FrameRectangleTest {
 			Assert.assertEquals(3.22, frameR.getHeight());
 			frameR.setWidth(4.44);
 			Assert.assertEquals(4.44, frameR.getWidth());
-			
+
 			Assert.assertEquals(SupportedLinearMeasure.CM, frameR.getLinearMeasure());
 			frameR.setLinearMeasure(SupportedLinearMeasure.IN);
 			Assert.assertEquals(SupportedLinearMeasure.IN, frameR.getLinearMeasure());
-			
+
 			Textbox box = p.addTextbox(frameR);
 			box.setName("tbox name");
 			box.setTextContent(content);
@@ -82,6 +82,6 @@ public class FrameRectangleTest {
 		}
 	}
 
-	
+
 }
 

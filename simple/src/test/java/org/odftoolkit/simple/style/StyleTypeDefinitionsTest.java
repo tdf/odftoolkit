@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -48,29 +48,29 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 
 
 public class StyleTypeDefinitionsTest {
-	
+
 	private static final Logger LOGGER =  Logger.getLogger(StyleTypeDefinitionsTest.class.getName());
-	
+
 	@Test
 	public void testHorizontalAlignmentType() {
 		try {
-			
+
 			TextDocument doc = TextDocument.newTextDocument();
 			Paragraph paragraph1 = doc.addParagraph("paragraph text");
 
 			paragraph1.setHorizontalAlignment(HorizontalAlignmentType.DEFAULT);
 			HorizontalAlignmentType align = paragraph1.getHorizontalAlignment();
 			Assert.assertEquals(HorizontalAlignmentType.DEFAULT, align);
-			
+
 			HorizontalAlignmentType filled = HorizontalAlignmentType.enumValueOf("filled");
 			String start = filled.getAlignmentString();
 			Assert.assertEquals("start", start);
 			Assert.assertEquals("filled", filled.toString());
 			Assert.assertEquals(HorizontalAlignmentType.FILLED, filled);
-			
+
 			HorizontalAlignmentType testnull = HorizontalAlignmentType.enumValueOf("");
 			Assert.assertEquals(null, testnull);
-			
+
 			try {
 				HorizontalAlignmentType testa = HorizontalAlignmentType.enumValueOf("aaaa");
 				Assert.assertEquals("Unsupported Horizontal Alignment Type!", testa);
@@ -78,39 +78,39 @@ public class StyleTypeDefinitionsTest {
 				Assert.assertTrue(e instanceof RuntimeException);
 				Assert.assertEquals("Unsupported Horizontal Alignment Type!", e.getMessage());
 			}
-			
+
 			//save
 			//doc.save(ResourceUtilities.newTestOutputFile("testHorizontalAlignmentType.odt"));
-			
+
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 
 	@Test
 	public void testVerticalAlignmentType() throws Exception{
 		try {
 			SpreadsheetDocument odsdoc = SpreadsheetDocument.loadDocument(ResourceUtilities
 					.getTestResourceAsStream("TestSpreadsheetTable.ods"));
-		
+
 			int columnindex = 0, rowindex = 3;
 			Table table = odsdoc.getTableByName("Sheet1");
 			Cell fcell = table.getCellByPosition(columnindex, rowindex);
-	
+
 			System.out.println(fcell.getStringValue());
-			
+
 			StyleTypeDefinitions.VerticalAlignmentType align = fcell.getVerticalAlignmentType();
 			Assert.assertEquals(StyleTypeDefinitions.VerticalAlignmentType.TOP, align);
-			
+
 			VerticalAlignmentType vertType = VerticalAlignmentType.enumValueOf("top");
 			Assert.assertEquals(VerticalAlignmentType.TOP, vertType);
 			Assert.assertEquals("top", vertType.toString());
-			
+
 			VerticalAlignmentType testnull = VerticalAlignmentType.enumValueOf("");
 			Assert.assertEquals(null, testnull);
-			
+
 			try {
 				VerticalAlignmentType testa = VerticalAlignmentType.enumValueOf("aaaa");
 				Assert.assertEquals("Unsupported Vertical Alignment Type!", testa);
@@ -118,23 +118,23 @@ public class StyleTypeDefinitionsTest {
 				Assert.assertTrue(e instanceof RuntimeException);
 				Assert.assertEquals("Unsupported Vertical Alignment Type!", e.getMessage());
 			}
-			
+
 			//save
 			//odsdoc.save(ResourceUtilities.newTestOutputFile("TestSpreadsheetTableOutput.ods"));
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testSupportedLinearMeasure() throws Exception{
 		try {
 			Border borderbase = new Border(Color.LIME, 4.0701, 1.0008, 1.0346, SupportedLinearMeasure.CM);
 			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			Table table = doc.getTableByName("Sheet1");
-			
+
 			Cell cell = table.getCellByPosition(2, 2);
 			cell.setBorders(CellBordersType.TOP, borderbase);
 			cell.setBorders(CellBordersType.LEFT, borderbase);
@@ -143,7 +143,7 @@ public class StyleTypeDefinitionsTest {
 			Border base = cell.getBorder(CellBordersType.LEFT);
 			base = cell.getBorder(CellBordersType.TOP);
 			Assert.assertEquals(borderbase, base);
-			
+
 			//
 			double ins = SupportedLinearMeasure.PT.toINs(216.00);
 			Assert.assertTrue(3.0 == ins);
@@ -151,12 +151,12 @@ public class StyleTypeDefinitionsTest {
 			Assert.assertTrue(20.0 == cms);
 			double incms = SupportedLinearMeasure.IN.toCMs(11.0);
 			Assert.assertTrue(27.94 == incms);
-			
+
 			double cmins = SupportedLinearMeasure.CM.toINs(25.4);
 			Assert.assertTrue(10 == cmins);
 			double cmcms = SupportedLinearMeasure.CM.toCMs(11.0);
 			Assert.assertTrue(11.0 == cmcms);
-			
+
 			SupportedLinearMeasure suppMeasure = SupportedLinearMeasure.enumValueOf("pt");
 			Assert.assertEquals("pt", suppMeasure.toString());
 			SupportedLinearMeasure suppMeasure1 = SupportedLinearMeasure.enumValueOf("");
@@ -167,7 +167,7 @@ public class StyleTypeDefinitionsTest {
 				Assert.assertTrue(e instanceof RuntimeException);
 				Assert.assertEquals("Unsupported Linear Measure!", e.getMessage());
 			}
-			
+
 			//save
 			//doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
 
@@ -175,17 +175,17 @@ public class StyleTypeDefinitionsTest {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
-	
+
+
 	@Test
 	public void testCellBordersType() throws Exception{
 		try {
 			Border borderbase = new Border(Color.LIME, 4.0701, 1.0008, 1.0346, SupportedLinearMeasure.CM);
 			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			Table table = doc.getTableByName("Sheet1");
-			
+
 			Cell cell = table.getCellByPosition(2, 2);
 			cell.setBorders(CellBordersType.TOP, borderbase);
 			cell.setBorders(CellBordersType.LEFT, borderbase);
@@ -194,7 +194,7 @@ public class StyleTypeDefinitionsTest {
 			Border base = cell.getBorder(CellBordersType.LEFT);
 			base = cell.getBorder(CellBordersType.TOP);
 			Assert.assertEquals(borderbase, base);
-			
+
 			//
 			CellBordersType cellType = CellBordersType.enumValueOf("bottom");
 			Assert.assertEquals("bottom", cellType.toString());
@@ -206,7 +206,7 @@ public class StyleTypeDefinitionsTest {
 				Assert.assertTrue(e instanceof RuntimeException);
 				Assert.assertEquals("Unsupported Cell Borders Type!", e.getMessage());
 			}
-			
+
 			//save
 			//doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
 
@@ -214,10 +214,10 @@ public class StyleTypeDefinitionsTest {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
-	
+
+
 	@Test
 	public void testLineType() throws Exception{
 		try {
@@ -225,7 +225,7 @@ public class StyleTypeDefinitionsTest {
 			borderbase.setLineStyle(StyleTypeDefinitions.LineType.SINGLE);
 			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			Table table = doc.getTableByName("Sheet1");
-			
+
 			Cell cell = table.getCellByPosition(2, 2);
 			cell.setBorders(CellBordersType.TOP, borderbase);
 			cell.setBorders(CellBordersType.LEFT, borderbase);
@@ -242,7 +242,7 @@ public class StyleTypeDefinitionsTest {
 			Assert.assertEquals("none", lType1.toString());
 			StyleTypeDefinitions.LineType lType2 = StyleTypeDefinitions.LineType.enumValueOf("aaaa");
 			Assert.assertEquals("none", lType2.toString());
-			
+
 			//save
 			//doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
 
@@ -250,10 +250,10 @@ public class StyleTypeDefinitionsTest {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
-	
+
+
 	@Test
 	public void testAnchorType() throws Exception{
 	    String content = "XXXXX This is a text box XXXXX";
@@ -261,17 +261,17 @@ public class StyleTypeDefinitionsTest {
 			TextDocument textDoc = TextDocument.newTextDocument();
 			Paragraph p = textDoc.addParagraph("paragraph");
 			FrameRectangle frameR = new FrameRectangle(4.21, 1.32, 4.41, 3.92, SupportedLinearMeasure.CM);
-			
+
 			Textbox box = p.addTextbox(frameR);
 			box.setName("tbox name");
 			box.setTextContent(content);
-			
+
 			FrameStyleHandler frameStyleHandler = new FrameStyleHandler(box);
 			frameStyleHandler.setBackgroundColor(Color.BLUE);
-			
+
 			textDoc.changeMode(OdfMediaType.TEXT_TEMPLATE);
 			frameStyleHandler.setAchorType(StyleTypeDefinitions.AnchorType.TO_PAGE);
-			
+
 			//validate
 			GraphicProperties graphicPropertiesForWrite = frameStyleHandler.getGraphicPropertiesForWrite();
 			Assert.assertEquals(VerticalRelative.PAGE, graphicPropertiesForWrite.getVerticalRelative());
@@ -286,7 +286,7 @@ public class StyleTypeDefinitionsTest {
 			Assert.assertEquals(StyleTypeDefinitions.AnchorType.TO_CHARACTER, anchorType1);
 			StyleTypeDefinitions.AnchorType anchorType2 = StyleTypeDefinitions.AnchorType.enumValueOf("aaaa");
 			Assert.assertEquals(StyleTypeDefinitions.AnchorType.TO_PAGE, anchorType2);
-			
+
 			//save
 			textDoc.save(ResourceUtilities.newTestOutputFile("textsample.odt"));
 
@@ -294,10 +294,10 @@ public class StyleTypeDefinitionsTest {
 			Logger.getLogger(StyleTypeDefinitionsTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail();
 		}
-		
+
 	}
-	
-	
+
+
 	@Test
 	public void testVerticalRelative() throws Exception{
 	    String content = "This is a text box";
@@ -305,18 +305,18 @@ public class StyleTypeDefinitionsTest {
 			TextDocument textDoc = TextDocument.newTextDocument();
 			Paragraph p = textDoc.addParagraph("paragraph");
 			FrameRectangle frameR = new FrameRectangle(4.21, 1.32, 4.41, 3.92, SupportedLinearMeasure.IN);
-			
+
 			Textbox box = p.addTextbox(frameR);
 			box.setName("tbox name");
 			box.setTextContent(content);
-			
+
 			FrameStyleHandler frameStyleHandler = new FrameStyleHandler(box);
 			frameStyleHandler.setBackgroundColor(Color.YELLOW);
 			frameStyleHandler.setVerticalRelative(VerticalRelative.PARAGRAPH);
-			
+
 			//validate
 			Assert.assertEquals(VerticalRelative.PARAGRAPH, frameStyleHandler.getVerticalRelative());
-			
+
 			//
 			StyleTypeDefinitions.VerticalRelative vert = StyleTypeDefinitions.VerticalRelative.enumValueOf("");
 			Assert.assertEquals("page", vert.toString());
@@ -324,7 +324,7 @@ public class StyleTypeDefinitionsTest {
 			Assert.assertEquals("page", vert1.toString());
 			StyleTypeDefinitions.VerticalRelative vert2 = StyleTypeDefinitions.VerticalRelative.enumValueOf("frame");
 			Assert.assertEquals("frame", vert2.toString());
-			
+
 			//save
 			//textDoc.save(ResourceUtilities.newTestOutputFile("textsample.odt"));
 
@@ -332,10 +332,10 @@ public class StyleTypeDefinitionsTest {
 		    Logger.getLogger(StyleTypeDefinitionsTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail();
 		}
-		
+
 	}
-	
-	
+
+
 	@Test
 	public void testHorizontalRelative() throws Exception{
 	    String content = "This is a text box";
@@ -343,28 +343,28 @@ public class StyleTypeDefinitionsTest {
 			TextDocument textDoc = TextDocument.newTextDocument();
 			Paragraph p = textDoc.addParagraph("paragraph");
 			FrameRectangle frameR = new FrameRectangle(4.21, 1.32, 4.41, 3.92, SupportedLinearMeasure.IN);
-			
+
 			Textbox box = p.addTextbox(frameR);
 			box.setName("tbox name");
 			box.setTextContent(content);
-			
+
 			FrameStyleHandler frameStyleHandler = new FrameStyleHandler(box);
 			frameStyleHandler.setBackgroundColor(Color.YELLOW);
 			frameStyleHandler.setHorizontalRelative(HorizontalRelative.PARAGRAPH);
-			
+
 			//validate
 			Assert.assertEquals(HorizontalRelative.PARAGRAPH, frameStyleHandler.getHorizontalRelative());
-			
+
 			//
 			HorizontalRelative hor = HorizontalRelative.enumValueOf("");
 			Assert.assertEquals("page", hor.toString());
-			
+
 			HorizontalRelative hor1 = HorizontalRelative.enumValueOf("paragraph");
 			Assert.assertEquals("paragraph", hor1.toString());
-			
+
 			HorizontalRelative hor2 = HorizontalRelative.enumValueOf("aaa");
 			Assert.assertEquals("page", hor2.toString());
-			
+
 			//save
 			//textDoc.save(ResourceUtilities.newTestOutputFile("textsample.odt"));
 
@@ -372,10 +372,10 @@ public class StyleTypeDefinitionsTest {
 		    Logger.getLogger(StyleTypeDefinitionsTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail();
 		}
-		
+
 	}
-	
-	
+
+
 	@Test
 	public void testFrameVerticalPosition() throws Exception{
 	    try {
@@ -385,20 +385,20 @@ public class StyleTypeDefinitionsTest {
 		Cell cell1 = table1.getCellByPosition(0, 0);
 		Image image3 = cell1.setImage(ResourceUtilities.getURI("image_list_item.png"));
 		image3.setVerticalPosition(FrameVerticalPosition.BELOW);
-		
+
 		//validate
 		Assert.assertEquals(FrameVerticalPosition.BELOW, image3.getVerticalPosition());
-		
+
 		//
 		FrameVerticalPosition ver = FrameVerticalPosition.enumValueOf("");
 		Assert.assertEquals("middle", ver.toString());
-		
+
 		FrameVerticalPosition ver1 = FrameVerticalPosition.enumValueOf("below");
 		Assert.assertEquals("below", ver1.toString());
-		
+
 		FrameVerticalPosition ver2 = FrameVerticalPosition.enumValueOf("aaaa");
 		Assert.assertEquals("middle", ver2.toString());
-		
+
 		//save
 		//sDoc.save(ResourceUtilities.newTestOutputFile("imges.odt"));
 
@@ -406,10 +406,10 @@ public class StyleTypeDefinitionsTest {
 		Logger.getLogger(StyleTypeDefinitionsTest.class.getName()).log(Level.SEVERE, null, e);
 		Assert.fail();
 	    }
-		
+
 	}
-	
-	
+
+
 	@Test
 	public void testFrameHorizontalPosition() {
 		try {
@@ -420,7 +420,7 @@ public class StyleTypeDefinitionsTest {
 			Image image3 = cell1.setImage(ResourceUtilities.getURI("image_list_item.png"));
 			image3.setHorizontalPosition(FrameHorizontalPosition.LEFT);
 			Assert.assertEquals(FrameHorizontalPosition.LEFT, image3.getHorizontalPosition());
-			
+
 			//
 			FrameHorizontalPosition hor = FrameHorizontalPosition.enumValueOf("");
 			Assert.assertEquals("center", hor.toString());
@@ -428,7 +428,7 @@ public class StyleTypeDefinitionsTest {
 			Assert.assertEquals("inside", hor1.toString());
 			FrameHorizontalPosition hor2 = FrameHorizontalPosition.enumValueOf("aaaa");
 			Assert.assertEquals("center", hor2.toString());
-			
+
 			//save
 			sDoc.save(ResourceUtilities.newTestOutputFile("imges.odt"));
 
@@ -437,5 +437,5 @@ public class StyleTypeDefinitionsTest {
 			Assert.fail();
 		}
 	}
-	
+
 }

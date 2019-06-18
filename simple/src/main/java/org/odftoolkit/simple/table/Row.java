@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -76,7 +76,7 @@ public class Row extends Component {
 
 	/**
 	 * Construct the <code>Row</code> feature.
-	 * 
+	 *
 	 * @param rowElement
 	 *            the row element represent this row
 	 * @param repeatedIndex
@@ -94,7 +94,7 @@ public class Row extends Component {
 	 * <p>
 	 * Each <code>TableTableRowElement</code> instance has a one-to-one
 	 * relationship to a <code>Row</code> instance.
-	 * 
+	 *
 	 * @param rowElement
 	 *            the row element that need to get the corresponding
 	 *            <code>Row</code> instance
@@ -127,7 +127,7 @@ public class Row extends Component {
 
 	/**
 	 * Get the <code>TableTableElement</code> who contains this row.
-	 * 
+	 *
 	 * @return the table element that contains the row.
 	 */
 	private TableTableElement getTableElement() {
@@ -143,7 +143,7 @@ public class Row extends Component {
 
 	/**
 	 * Get owner table of the current row.
-	 * 
+	 *
 	 * @return the parent table of this row
 	 */
 	public Table getTable() {
@@ -158,7 +158,7 @@ public class Row extends Component {
 	 * Return the height of the row (in Millimeter).
 	 * <p>
 	 * Return the minimal height, if the row height is not set,
-	 * 
+	 *
 	 * @return the height of the current row (in Millimeter).
 	 */
 	public double getHeight() {
@@ -175,7 +175,7 @@ public class Row extends Component {
 	/**
 	 * Set the height/minimal height of the row (in Millimeter) according to the
 	 * second parameter.
-	 * 
+	 *
 	 * @param height
 	 *            the height/minimal height that will be set to the row (in
 	 *            Millimeter).
@@ -328,7 +328,7 @@ public class Row extends Component {
 
 	/**
 	 * Return if the row always keeps its optimal height.
-	 * 
+	 *
 	 * @return true if the row always keeps its optimal height; vice versa
 	 */
 	public boolean isOptimalHeight() {
@@ -337,7 +337,7 @@ public class Row extends Component {
 
 	/**
 	 * Set if the row always keeps its optimal height.
-	 * 
+	 *
 	 * @param isUseOptimalHeight
 	 *            the flag that indicate row should keep its optimal height or
 	 *            not
@@ -349,7 +349,7 @@ public class Row extends Component {
 	/**
 	 * Return an instance of <code>TableTableRowElement</code> which represents
 	 * this feature.
-	 * 
+	 *
 	 * @return an instance of <code>TableTableRowElement</code>
 	 */
 	public TableTableRowElement getOdfElement() {
@@ -359,7 +359,7 @@ public class Row extends Component {
 	/**
 	 * Get a cell with a specific index. The table will be automatically
 	 * expanded, when the given index is outside of the original table.
-	 * 
+	 *
 	 * @param index
 	 *            the cell index in this row
 	 * @return the cell object in the given cell index
@@ -400,7 +400,7 @@ public class Row extends Component {
 	 * <p>
 	 * Please note it might not equal to the column count of the owner table,
 	 * because some of them are the covered cells.
-	 * 
+	 *
 	 * @return the cell count
 	 */
 	public int getCellCount() {
@@ -418,7 +418,7 @@ public class Row extends Component {
 
 	/**
 	 * Return the previous row of the current row.
-	 * 
+	 *
 	 * @return the previous row before this row in the owner table
 	 */
 	public Row getPreviousRow() {
@@ -481,7 +481,7 @@ public class Row extends Component {
 
 	/**
 	 * Return the next row of the current row.
-	 * 
+	 *
 	 * @return the next row after this row in the owner table
 	 */
 	public Row getNextRow() {
@@ -541,7 +541,7 @@ public class Row extends Component {
 	 * Set the default cell style to this row.
 	 * <p>
 	 * The style should already exist in this document.
-	 * 
+	 *
 	 * @param style
 	 *            the cell style of the document
 	 */
@@ -560,7 +560,7 @@ public class Row extends Component {
 
 	/**
 	 * Get the default cell style of this row.
-	 * 
+	 *
 	 * @return the default cell style of this row
 	 */
 	public OdfStyle getDefaultCellStyle() {
@@ -575,7 +575,7 @@ public class Row extends Component {
 
 	/**
 	 * Return the index of this row in the owner table.
-	 * 
+	 *
 	 * @return the index of the row
 	 */
 	public int getRowIndex() {
@@ -667,7 +667,7 @@ public class Row extends Component {
 
 	/****************************
 	 * Moved from Table
-	 * 
+	 *
 	 */
 	private void insertCellElementBefore(OdfElement parentEle, TableTableCellElementBase positionEle,
 			TableTableCellElementBase cellEle, int count) {

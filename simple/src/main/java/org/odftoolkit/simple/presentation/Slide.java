@@ -75,13 +75,13 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 	private TableContainerImpl tableContainerImpl;
 	private TextboxContainerImpl mTextboxContainerImpl;
 	private ChartContainerImpl chartContainerImpl;
-	
+
 	/**
 	 * This is a tool class which supplies all of the slide creation detail.
 	 * <p>
 	 * The end user isn't allowed to create it directly, otherwise an
 	 * <code>IllegalStateException</code> will be thrown.
-	 * 
+	 *
 	 *@since 0.3.5
 	 */
 	public static class SlideBuilder {
@@ -94,7 +94,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 		 * PresentationDocument} constructor. The end user isn't allowed to call
 		 * it directly, otherwise an <code>IllegalStateException</code> will be
 		 * thrown.
-		 * 
+		 *
 		 * @param doc
 		 *            the owner <code>PresentationDocument</code>.
 		 * @throws IllegalStateException
@@ -111,7 +111,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 		/**
 		 * Get a presentation slide instance by an instance of
 		 * <code>DrawPageElement</code>.
-		 * 
+		 *
 		 * @param pageElement
 		 *            an instance of <code>DrawPageElement</code>
 		 * @return an instance of <code>Slide</code> that can represent
@@ -135,7 +135,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 	/**
 	 * Get a presentation slide instance by an instance of
 	 * <code>DrawPageElement</code>.
-	 * 
+	 *
 	 * @param pageElement
 	 *            an instance of <code>DrawPageElement</code>
 	 * @return an instance of <code>Slide</code> that can represent
@@ -150,7 +150,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 	/**
 	 * Return an instance of <code>DrawPageElement</code> which represents
 	 * presentation slide feature.
-	 * 
+	 *
 	 * @return an instance of <code>DrawPageElement</code>
 	 */
 	public DrawPageElement getOdfElement() {
@@ -159,7 +159,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 
 	/**
 	 * Get the current slide index in the owner document.
-	 * 
+	 *
 	 * @return the slide index in the owner document
 	 *         <p>
 	 *         -1, if the odf element which can represent this slide is not in
@@ -184,7 +184,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 	 * <p>
 	 * If the "draw:name" attribute is not present there, create an unique name
 	 * for this slide
-	 * 
+	 *
 	 * @return the name of the current slide
 	 */
 	public String getSlideName() {
@@ -202,7 +202,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 	 * It must be unique slide name in the current presentation. If not, an
 	 * IllegalArgumentException will be thrown. If the given name is null, an
 	 * IllegalArgumentException will also be thrown.
-	 * 
+	 *
 	 * @param name
 	 *            the new name of the current slide
 	 * @throws IllegalArgumentException
@@ -230,7 +230,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 
 	/**
 	 * Get the Notes page of this slide
-	 * 
+	 *
 	 * @return the instance of <code>Notes</code> which represent the notes page
 	 *         of the current slide
 	 */
@@ -252,7 +252,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 
 	/**
 	 * A slide layout is a slide with some predefine place holder.
-	 * 
+	 *
 	 * we define some template layout as below:
 	 * <ul>
 	 * <li>"BLANK" template is a slide without any filled element.</li>
@@ -282,7 +282,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 		 */
 		BLANK("blank") {
 			public void apply(DrawPageElement page) {
-				//do nothing.			
+				//do nothing.
 			}
 		},
 		/**
@@ -322,7 +322,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 		 * title_subtitle, the presentation with title and subtitle.
 		 */
 		TITLE_SUBTITLE("title_subtitle") {
-			
+
 			public void apply(DrawPageElement page) {
 				Document doc = (Document) ((OdfFileDom) page.getOwnerDocument()).getDocument();
 				OdfOfficeStyles styles = doc.getOrCreateDocumentStyles();
@@ -337,12 +337,12 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 					//String presentationObjectValue, String svgHeightValue, String svgWidthValue, String svgXValue, String svgYValue
 					layout.newPresentationPlaceholderElement("title", "3.507cm", "23.912cm", "2.058cm", "1.743cm");
 					layout.newPresentationPlaceholderElement("subtitle", "13.23cm", "23.912cm", "2.058cm", "5.838cm");
-					
+
 				} catch (Exception e1) {
 					Logger.getLogger(SlideLayout.class.getName()).log(Level.SEVERE, null, e1);
 				}
 				page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
-				
+
 				DrawFrameElement frame1 = page.newDrawFrameElement();
 				frame1.setPresentationStyleNameAttribute(frame1.getStyleName());
 				frame1.setDrawLayerAttribute("layout");
@@ -354,7 +354,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 				frame1.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.PAGE.toString());
 				frame1.setPresentationPlaceholderAttribute(true);
 				frame1.newDrawTextBoxElement();
-				
+
 				DrawFrameElement frame2 = page.newDrawFrameElement();
 				frame2.setPresentationStyleNameAttribute(frame2.getStyleName());
 				frame2.setDrawLayerAttribute("layout");
@@ -372,7 +372,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 		 * Title_outline, the presentation with outline
 		 */
 		TITLE_OUTLINE("title_outline") {
-			
+
 			public void apply(DrawPageElement page) {
 				Document doc = (Document) ((OdfFileDom) page.getOwnerDocument()).getDocument();
 				OdfOfficeStyles styles = doc.getOrCreateDocumentStyles();
@@ -428,7 +428,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 		 * Title_text, the presentation with title and one text block
 		 */
 		TITLE_PLUS_TEXT("title_text") {
-			
+
 			public void apply(DrawPageElement page) {
 				Document doc = (Document) ((OdfFileDom) page.getOwnerDocument()).getDocument();
 				OdfOfficeStyles styles = doc.getOrCreateDocumentStyles();
@@ -482,7 +482,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 		 * title_two_text_block, the presentation with title and two text blocks
 		 */
 		TITLE_PLUS_2_TEXT_BLOCK("title_two_text_block") {
-			
+
 			public void apply(DrawPageElement page) {
 				Document doc = (Document) ((OdfFileDom) page.getOwnerDocument()).getDocument();
 				OdfOfficeStyles styles = doc.getOrCreateDocumentStyles();
@@ -504,7 +504,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 					Logger.getLogger(SlideLayout.class.getName()).log(Level.SEVERE, null, e1);
 				}
 				page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
-				
+
 				DrawFrameElement frame1 = page.newDrawFrameElement();
 				frame1.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
 				frame1.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
@@ -517,7 +517,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 				frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
 				frame1.setPresentationPlaceholderAttribute(true);
 				frame1.newDrawTextBoxElement();
-				
+
 				DrawFrameElement frame2 = page.newDrawFrameElement();
 				frame2.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
 				frame2.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
@@ -530,7 +530,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 				frame2.setPresentationClassAttribute(PresentationClassAttribute.Value.OUTLINE.toString());
 				frame2.setPresentationPlaceholderAttribute(true);
 				frame2.newDrawTextBoxElement();
-				
+
 				DrawFrameElement frame3 = page.newDrawFrameElement();
 				frame3.setProperty(StyleGraphicPropertiesElement.AutoGrowHeight, "true");
 				frame3.setProperty(StyleGraphicPropertiesElement.MinHeight, "3.507");
@@ -549,7 +549,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 		 * title_three_objects, the presentation with title, chart and outline blocks.
 		 */
 		TITLE_LEFT_CHART_RIGHT_OUTLINE("title_left_chart_right_outline") {
-			
+
 			public void apply(DrawPageElement page) {
 				Document doc = (Document) ((OdfFileDom) page.getOwnerDocument()).getDocument();
 				OdfOfficeStyles styles = doc.getOrCreateDocumentStyles();
@@ -580,7 +580,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 				frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
 				frame1.setPresentationPlaceholderAttribute(true);
 				frame1.newDrawTextBoxElement();
-				
+
 				DrawFrameElement frame2 = page.newDrawFrameElement();
 				frame2.setDrawStyleNameAttribute(frame2.getStyleName());
 				frame2.setDrawLayerAttribute("layout");
@@ -609,7 +609,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 		 * title_plus_chart, the presentation with title and chart.
 		 */
 		TITLE_PLUS_CHART("title_plus_chart") {
-			
+
 			public void apply(DrawPageElement page) {
 				Document doc = (Document) ((OdfFileDom) page.getOwnerDocument()).getDocument();
 				OdfOfficeStyles styles = doc.getOrCreateDocumentStyles();
@@ -628,7 +628,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 					Logger.getLogger(SlideLayout.class.getName()).log(Level.SEVERE, null, e1);
 				}
 				page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
-				
+
 				DrawFrameElement frame1 = page.newDrawFrameElement();
 				frame1.setPresentationStyleNameAttribute(frame1.getStyleName());
 				frame1.setDrawLayerAttribute("layout");
@@ -639,7 +639,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 				frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
 				frame1.setPresentationPlaceholderAttribute(true);
 				frame1.newDrawTextBoxElement();
-				
+
 				DrawFrameElement frame2 = page.newDrawFrameElement();
 				frame2.setDrawStyleNameAttribute(frame2.getStyleName());
 				frame2.setDrawLayerAttribute("layout");
@@ -657,7 +657,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 		 * title_plus_two_chart, the presentation with title and two charts.
 		 */
 		TITLE_PLUS_2_CHART("title_plus_2_chart") {
-			
+
 			public void apply(DrawPageElement page) {
 				Document doc = (Document) ((OdfFileDom) page.getOwnerDocument()).getDocument();
 				OdfOfficeStyles styles = doc.getOrCreateDocumentStyles();
@@ -677,7 +677,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 					Logger.getLogger(SlideLayout.class.getName()).log(Level.SEVERE, null, e1);
 				}
 				page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
-				
+
 				DrawFrameElement frame1 = page.newDrawFrameElement();
 				frame1.setPresentationStyleNameAttribute(frame1.getStyleName());
 				frame1.setDrawLayerAttribute("layout");
@@ -688,7 +688,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 				frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
 				frame1.setPresentationPlaceholderAttribute(true);
 				frame1.newDrawTextBoxElement();
-				
+
 				DrawFrameElement frame2 = page.newDrawFrameElement();
 				frame2.setDrawStyleNameAttribute(frame2.getStyleName());
 				frame2.setDrawLayerAttribute("layout");
@@ -718,7 +718,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 		 * title_three_object, the presentation with title and three object blocks.
 		 */
 		TITLE_PLUS_3_OBJECT("title_plus_three_object") {
-			
+
 			public void apply(DrawPageElement page) {
 				Document doc = (Document) ((OdfFileDom) page.getOwnerDocument()).getDocument();
 				OdfOfficeStyles styles = doc.getOrCreateDocumentStyles();
@@ -739,7 +739,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 					Logger.getLogger(SlideLayout.class.getName()).log(Level.SEVERE, null, e1);
 				}
 				page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
-				
+
 				DrawFrameElement frame1 = page.newDrawFrameElement();
 				frame1.setPresentationStyleNameAttribute(frame1.getStyleName());
 				frame1.setDrawLayerAttribute("layout");
@@ -750,7 +750,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 				frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
 				frame1.setPresentationPlaceholderAttribute(true);
 				frame1.newDrawTextBoxElement();
-				
+
 				DrawFrameElement frame2 = page.newDrawFrameElement();
 				frame2.setDrawStyleNameAttribute(frame2.getStyleName());
 				frame2.setDrawLayerAttribute("layout");
@@ -774,7 +774,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 				frame3.setPresentationPlaceholderAttribute(true);
 				frame3.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.PAGE.toString());
 				frame3.newDrawTextBoxElement();
-				
+
 				DrawFrameElement frame4 = page.newDrawFrameElement();
 				frame4.setDrawStyleNameAttribute(frame4.getStyleName());
 				frame4.setDrawLayerAttribute("layout");
@@ -792,7 +792,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 		 * title_four_object, the presentation with title and four object blocks.
 		 */
 		TITLE_PLUS_4_OBJECT("title_four_object") {
-			
+
 			public void apply(DrawPageElement page) {
 				Document doc = (Document) ((OdfFileDom) page.getOwnerDocument()).getDocument();
 				OdfOfficeStyles styles = doc.getOrCreateDocumentStyles();
@@ -814,7 +814,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 					Logger.getLogger(SlideLayout.class.getName()).log(Level.SEVERE, null, e1);
 				}
 				page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
-				
+
 				DrawFrameElement frame1 = page.newDrawFrameElement();
 				frame1.setPresentationStyleNameAttribute(frame1.getStyleName());
 				frame1.setDrawLayerAttribute("layout");
@@ -825,7 +825,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 				frame1.setPresentationClassAttribute(PresentationClassAttribute.Value.TITLE.toString());
 				frame1.setPresentationPlaceholderAttribute(true);
 				frame1.newDrawTextBoxElement();
-				
+
 				DrawFrameElement frame2 = page.newDrawFrameElement();
 				frame2.setDrawStyleNameAttribute(frame2.getStyleName());
 				frame2.setDrawLayerAttribute("layout");
@@ -850,7 +850,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 				frame3.setPresentationUserTransformedAttribute(true);
 				frame3.setPresentationPlaceholderAttribute(true);
 				frame3.newDrawTextBoxElement();
-				
+
 				DrawFrameElement frame4 = page.newDrawFrameElement();
 				frame4.setDrawStyleNameAttribute(frame4.getStyleName());
 				frame4.setDrawLayerAttribute("layout");
@@ -862,7 +862,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 				frame4.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.PAGE.toString());
 				frame4.setPresentationPlaceholderAttribute(true);
 				frame4.newDrawObjectElement();
-				
+
 				DrawFrameElement frame5 = page.newDrawFrameElement();
 				frame5.setDrawStyleNameAttribute(frame5.getStyleName());
 				frame5.setDrawLayerAttribute("layout");
@@ -876,7 +876,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 				frame5.newDrawObjectElement();
 			}
 		};
-		
+
 		private String mValue;
 
 		SlideLayout(String aValue) {
@@ -885,16 +885,16 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 
 		/**
 		 * Applies this layout on a slide page.
-		 * 
+		 *
 		 * @param page
 		 *            the slide element which this layout is applied on.
 		 * @since 0.6
 		 */
 		public abstract void apply(DrawPageElement page);
-		
+
 		/**
 		 * Return the slide template type value.
-		 * 
+		 *
 		 * @return the template type value
 		 */
 		@Override
@@ -904,7 +904,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 
 		/**
 		 * Return the name of the template slide type.
-		 * 
+		 *
 		 * @param aEnum
 		 *            a <code>SlideLayout</code>
 		 * @return the name of slide template type
@@ -915,7 +915,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 
 		/**
 		 * Return a template slide type.
-		 * 
+		 *
 		 * @param aString
 		 *            the name of the slide template type
 		 * @return a <code>SlideLayout</code>
@@ -928,7 +928,7 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 			}
 			return null;
 		}
-		
+
 		//return an unique name.
 		private static String makeUniqueName() {
 			return String.format("a%06x", (int) (Math.random() * 0xffffff));
@@ -1136,14 +1136,14 @@ public class Slide extends Component implements ListContainer, TableContainer, T
 	public int getChartCount() {
 		return getChartContainerImpl().getChartCount();
 	}
-	
+
 	private ChartContainerImpl getChartContainerImpl() {
 		if (chartContainerImpl == null) {
 			chartContainerImpl = new ChartContainerImpl(getOwnerDocument(), this);
 		}
 		return chartContainerImpl;
 	}
-	
+
 	private class ChartContainerImpl extends AbstractChartContainer {
 		DrawPageElement slide;
 

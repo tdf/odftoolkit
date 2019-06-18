@@ -155,7 +155,7 @@ public class Paragraph extends Component implements TextboxContainer,
 		Component.registerComponent(para, pEle);
 		return para;
 	}
-	
+
 	/**
 	 * Set the text content of this paragraph.
 	 * <p>

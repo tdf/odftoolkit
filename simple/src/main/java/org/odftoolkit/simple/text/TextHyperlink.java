@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -36,7 +36,7 @@ import org.w3c.dom.Node;
 /**
  * This class represents a text hyperlink in ODF document. It provides
  * convenient methods to get/set/remove the URI of hyperlinks.
- * 
+ *
  * @since 0.6.5
  */
 public class TextHyperlink extends Component {
@@ -50,7 +50,7 @@ public class TextHyperlink extends Component {
 	/**
 	 * Gets a TextHyperlink instance by an instance of <code>TextAElement</code>
 	 * .
-	 * 
+	 *
 	 * @param aElement
 	 *            the instance of TextAElement.
 	 * @return an instance of Hyperlink.
@@ -77,7 +77,7 @@ public class TextHyperlink extends Component {
 
 	/**
 	 * Return the URI of this hyperlink
-	 * 
+	 *
 	 * @return the URI of this hyperlink
 	 * @throws URISyntaxException
 	 */
@@ -87,7 +87,7 @@ public class TextHyperlink extends Component {
 
 	/**
 	 * Set the value of URI for this hyperlink
-	 * 
+	 *
 	 * @param linkto
 	 *            - the URI of this hyperlink
 	 */
@@ -97,7 +97,7 @@ public class TextHyperlink extends Component {
 
 	/**
 	 * Get the text content of this hyperlink
-	 * 
+	 *
 	 * @return the text content of this hyperlink
 	 */
 	public String getTextContent() {
@@ -106,7 +106,7 @@ public class TextHyperlink extends Component {
 
 	/**
 	 * Set the text content of this hyperlink
-	 * 
+	 *
 	 * @param text
 	 *            - the text content to be set
 	 */
@@ -120,7 +120,7 @@ public class TextHyperlink extends Component {
 	 * Remove the text content of this hyperlink.
 	 * <p>
 	 * The other child elements except text content will not be removed.
-	 * 
+	 *
 	 */
 	public void removeTextContent() {
 		Paragraph.removeTextContentImpl(getOdfElement());

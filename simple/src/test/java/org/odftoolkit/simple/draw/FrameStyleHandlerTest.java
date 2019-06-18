@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -47,24 +47,24 @@ public class FrameStyleHandlerTest {
 			TextDocument textDoc = TextDocument.newTextDocument();
 			Paragraph p = textDoc.addParagraph("paragraph");
 			FrameRectangle frameR = new FrameRectangle(4.21, 1.32, 4.41, 3.92, SupportedLinearMeasure.CM);
-			
+
 			Textbox box = p.addTextbox(frameR);
 			box.setName("tbox name");
 			box.setTextContent(content);
-			
+
 			FrameStyleHandler frameStyleHandler = new FrameStyleHandler(box);
 			frameStyleHandler.setBackgroundColor(Color.YELLOW);
-			
+
 			textDoc.changeMode(OdfMediaType.TEXT_TEMPLATE);
 			frameStyleHandler.setAchorType(StyleTypeDefinitions.AnchorType.TO_CHARACTER);
-			
+
 			//validate
 			GraphicProperties graphicPropertiesForWrite = frameStyleHandler.getGraphicPropertiesForWrite();
 			Assert.assertEquals(VerticalRelative.PARAGRAPH, graphicPropertiesForWrite.getVerticalRelative());
 			Assert.assertEquals(FrameVerticalPosition.TOP, graphicPropertiesForWrite.getVerticalPosition());
 			Assert.assertEquals(HorizontalRelative.PARAGRAPH, graphicPropertiesForWrite.getHorizontalRelative());
 			Assert.assertEquals(FrameHorizontalPosition.CENTER, graphicPropertiesForWrite.getHorizontalPosition());
-			
+
 			//save
 			textDoc.save(ResourceUtilities.newTestOutputFile("textsample.odt"));
 
@@ -73,8 +73,8 @@ public class FrameStyleHandlerTest {
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testSetAchorTypeAs_character() {
 		String content = "This is a text box";
@@ -82,22 +82,22 @@ public class FrameStyleHandlerTest {
 			TextDocument textDoc = TextDocument.newTextDocument();
 			Paragraph p = textDoc.addParagraph("paragraph");
 			FrameRectangle frameR = new FrameRectangle(4.21, 1.32, 4.41, 3.92, SupportedLinearMeasure.CM);
-			
+
 			Textbox box = p.addTextbox(frameR);
 			box.setName("tbox name");
 			box.setTextContent(content);
-			
+
 			FrameStyleHandler frameStyleHandler = new FrameStyleHandler(box);
 			frameStyleHandler.setBackgroundColor(Color.YELLOW);
-			
+
 			textDoc.changeMode(OdfMediaType.TEXT_TEMPLATE);
 			frameStyleHandler.setAchorType(StyleTypeDefinitions.AnchorType.AS_CHARACTER);
-			
+
 			//validate
 			GraphicProperties graphicPropertiesForWrite = frameStyleHandler.getGraphicPropertiesForWrite();
 			Assert.assertEquals(VerticalRelative.BASELINE, graphicPropertiesForWrite.getVerticalRelative());
 			Assert.assertEquals(FrameVerticalPosition.TOP, graphicPropertiesForWrite.getVerticalPosition());
-			
+
 			//save
 			textDoc.save(ResourceUtilities.newTestOutputFile("textsample.odt"));
 
@@ -106,8 +106,8 @@ public class FrameStyleHandlerTest {
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testSetAchorTypeTo_page() {
 		String content = "This is a text box";
@@ -115,24 +115,24 @@ public class FrameStyleHandlerTest {
 			TextDocument textDoc = TextDocument.newTextDocument();
 			Paragraph p = textDoc.addParagraph("paragraph");
 			FrameRectangle frameR = new FrameRectangle(4.21, 1.32, 4.41, 3.92, SupportedLinearMeasure.IN);
-			
+
 			Textbox box = p.addTextbox(frameR);
 			box.setName("tbox name");
 			box.setTextContent(content);
-			
+
 			FrameStyleHandler frameStyleHandler = new FrameStyleHandler(box);
 			frameStyleHandler.setBackgroundColor(Color.YELLOW);
-			
+
 			textDoc.changeMode(OdfMediaType.TEXT_TEMPLATE);
 			frameStyleHandler.setAchorType(StyleTypeDefinitions.AnchorType.TO_PAGE);
-			
+
 			//validate
 			GraphicProperties graphicPropertiesForWrite = frameStyleHandler.getGraphicPropertiesForWrite();
 			Assert.assertEquals(VerticalRelative.PAGE, graphicPropertiesForWrite.getVerticalRelative());
 			Assert.assertEquals(FrameVerticalPosition.TOP, graphicPropertiesForWrite.getVerticalPosition());
 			Assert.assertEquals(HorizontalRelative.PAGE, graphicPropertiesForWrite.getHorizontalRelative());
 			Assert.assertEquals(FrameHorizontalPosition.CENTER, graphicPropertiesForWrite.getHorizontalPosition());
-			
+
 			//save
 			textDoc.save(ResourceUtilities.newTestOutputFile("textsample.odt"));
 
@@ -141,8 +141,8 @@ public class FrameStyleHandlerTest {
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testSetHorizontalPosition() {
 		String content = "This is a text box";
@@ -150,18 +150,18 @@ public class FrameStyleHandlerTest {
 			TextDocument textDoc = TextDocument.newTextDocument();
 			Paragraph p = textDoc.addParagraph("paragraph");
 			FrameRectangle frameR = new FrameRectangle(4.21, 1.32, 4.41, 3.92, SupportedLinearMeasure.IN);
-			
+
 			Textbox box = p.addTextbox(frameR);
 			box.setName("tbox name");
 			box.setTextContent(content);
-			
+
 			FrameStyleHandler frameStyleHandler = new FrameStyleHandler(box);
 			frameStyleHandler.setBackgroundColor(Color.YELLOW);
 			frameStyleHandler.setHorizontalPosition(FrameHorizontalPosition.RIGHT);
-			
+
 			//validate
 			Assert.assertEquals(FrameHorizontalPosition.RIGHT, frameStyleHandler.getHorizontalPosition());
-			
+
 			//save
 			textDoc.save(ResourceUtilities.newTestOutputFile("textsample.odt"));
 
@@ -171,7 +171,7 @@ public class FrameStyleHandlerTest {
 		}
 	}
 
-	
+
 	@Test
 	public void testSetVerticalRelative() {
 		String content = "This is a text box";
@@ -179,18 +179,18 @@ public class FrameStyleHandlerTest {
 			TextDocument textDoc = TextDocument.newTextDocument();
 			Paragraph p = textDoc.addParagraph("paragraph");
 			FrameRectangle frameR = new FrameRectangle(4.21, 1.32, 4.41, 3.92, SupportedLinearMeasure.IN);
-			
+
 			Textbox box = p.addTextbox(frameR);
 			box.setName("tbox name");
 			box.setTextContent(content);
-			
+
 			FrameStyleHandler frameStyleHandler = new FrameStyleHandler(box);
 			frameStyleHandler.setBackgroundColor(Color.YELLOW);
 			frameStyleHandler.setVerticalRelative(VerticalRelative.PARAGRAPH);
-			
+
 			//validate
 			Assert.assertEquals(VerticalRelative.PARAGRAPH, frameStyleHandler.getVerticalRelative());
-			
+
 			//save
 			textDoc.save(ResourceUtilities.newTestOutputFile("textsample.odt"));
 
@@ -199,8 +199,8 @@ public class FrameStyleHandlerTest {
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testSetHorizontalRelative() {
 		String content = "This is a text box";
@@ -208,18 +208,18 @@ public class FrameStyleHandlerTest {
 			TextDocument textDoc = TextDocument.newTextDocument();
 			Paragraph p = textDoc.addParagraph("paragraph");
 			FrameRectangle frameR = new FrameRectangle(4.21, 1.32, 4.41, 3.92, SupportedLinearMeasure.IN);
-			
+
 			Textbox box = p.addTextbox(frameR);
 			box.setName("tbox name");
 			box.setTextContent(content);
-			
+
 			FrameStyleHandler frameStyleHandler = new FrameStyleHandler(box);
 			frameStyleHandler.setBackgroundColor(Color.YELLOW);
 			frameStyleHandler.setHorizontalRelative(HorizontalRelative.PARAGRAPH);
-			
+
 			//validate
 			Assert.assertEquals(HorizontalRelative.PARAGRAPH, frameStyleHandler.getHorizontalRelative());
-			
+
 			//save
 			textDoc.save(ResourceUtilities.newTestOutputFile("textsample.odt"));
 
@@ -228,7 +228,7 @@ public class FrameStyleHandlerTest {
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 }
 

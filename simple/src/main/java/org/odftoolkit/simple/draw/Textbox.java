@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -42,7 +42,7 @@ import org.w3c.dom.NodeList;
 /**
  * This class provides method to set the content, properties and style of text
  * box.
- * 
+ *
  * @since 0.5
  */
 public class Textbox extends Frame implements ListContainer, ParagraphContainer {
@@ -58,10 +58,10 @@ public class Textbox extends Frame implements ListContainer, ParagraphContainer 
 	 * 5.1.2, <text:index-body> 8.2.2, <text:index-title> 8.2.3, <text:meta>
 	 * 6.1.9, <text:meta-field> 7.5.19, <text:note-body> 6.3.4, <text:ruby-base>
 	 * 6.4.2,and <text:span> 6.1.7.
-	 * 
+	 *
 	 * The <draw:text-box> element is usable within the following element:
 	 * <draw:frame> 10.4.2.
-	 * 
+	 *
 	 * <draw:text-box> element has following children: <dr3d:scene> 10.5.2,
 	 * <draw:a> 10.4.12, <draw:caption> 10.3.11, <draw:circle> 10.3.8,
 	 * <draw:connector> 10.3.10, <draw:control> 10.3.13, <draw:custom-shape>
@@ -89,7 +89,7 @@ public class Textbox extends Frame implements ListContainer, ParagraphContainer 
 	/**
 	 * Get a text box instance by an instance of <code>DrawTextBoxElement</code>
 	 * .
-	 * 
+	 *
 	 * @param element
 	 *            - the instance of DrawTextBoxElement
 	 * @return an instance of text box
@@ -112,7 +112,7 @@ public class Textbox extends Frame implements ListContainer, ParagraphContainer 
 	 * Create an instance of frame
 	 * <p>
 	 * The frame will be added at the end of this container.
-	 * 
+	 *
 	 * @param container
 	 *            - the frame container that contains this frame.
 	 */
@@ -141,7 +141,7 @@ public class Textbox extends Frame implements ListContainer, ParagraphContainer 
 	 * <p>
 	 * This method will clear the content at first, and then create a paragraph
 	 * with the given content.
-	 * 
+	 *
 	 * @param content
 	 *            - the text content
 	 * @see #clearContent()
@@ -167,7 +167,7 @@ public class Textbox extends Frame implements ListContainer, ParagraphContainer 
 
 	/**
 	 * Get the text content of this text box.
-	 * 
+	 *
 	 * @return - the text content
 	 * @see TextExtractor#getText(OdfElement)
 	 */
@@ -178,7 +178,7 @@ public class Textbox extends Frame implements ListContainer, ParagraphContainer 
 	/**
 	 * Get the instance of <code>DrawTextBoxElement</code> which represents this
 	 * frame.
-	 * 
+	 *
 	 * @return the instance of <code>DrawTextBoxElement</code>
 	 */
 	@Override

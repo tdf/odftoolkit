@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -53,7 +53,7 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalRelative;
  * This class is a corresponded high level class for element
  * "style:graphic-properties". It provides methods to access the attributes and
  * children of "style:graphic-properties".
- * 
+ *
  * @since 0.5
  */
 public class GraphicProperties {
@@ -64,7 +64,7 @@ public class GraphicProperties {
 	/**
 	 * Create a paragraph style setting object, which has the association with
 	 * an element "style:paragraph-properties".
-	 * 
+	 *
 	 * @param properties
 	 *            - the element "style:paragraph-properties"
 	 */
@@ -77,7 +77,7 @@ public class GraphicProperties {
 	 * Return an instance of
 	 * <code>GraphicProperties</p> to represent the "style:graphic-properties" in a style element.
 	 * <p>If there is no "style:graphic-properties" defined in the style element, a new "style:graphic-properties" element will be created.
-	 * 
+	 *
 	 * @param style
 	 *            - a style element
 	 * @return an instance of <code>GraphicProperties</p>
@@ -91,7 +91,7 @@ public class GraphicProperties {
 	 * Return an instance of
 	 * <code>GraphicProperties</p> to represent the "style:graphic-properties" in a style element.
 	 * <p>If there is no "style:graphic-properties" defined in the style element, null will be returned.
-	 * 
+	 *
 	 * @param style
 	 *            - a style element
 	 * @return an instance of <code>GraphicProperties</p>;Null if there is no
@@ -114,7 +114,7 @@ public class GraphicProperties {
 	 * <p>
 	 * The border style information will be removed if the parameter
 	 * <code>bordersType</code> is NONE.
-	 * 
+	 *
 	 * @param bordersType
 	 *            - the type of the borders
 	 * @param border
@@ -175,7 +175,7 @@ public class GraphicProperties {
 	 * Return the border setting for all four borders.
 	 * <p>
 	 * Null will be returned if there is no border setting for all four borders.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getBorder() {
@@ -186,7 +186,7 @@ public class GraphicProperties {
 	 * Return the border setting for the top border.
 	 * <p>
 	 * Null will be returned if there is no border setting for the top border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getTopBorder() {
@@ -197,7 +197,7 @@ public class GraphicProperties {
 	 * Return the border setting for the left border.
 	 * <p>
 	 * Null will be returned if there is no border setting for the left border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getLeftBorder() {
@@ -208,7 +208,7 @@ public class GraphicProperties {
 	 * Return the border setting for the right border.
 	 * <p>
 	 * Null will be returned if there is no border setting for the right border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getRightBorder() {
@@ -222,7 +222,7 @@ public class GraphicProperties {
 	 * <p>
 	 * Null will be returned if there is no border setting for the bottom
 	 * border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getBottomBorder() {
@@ -239,7 +239,7 @@ public class GraphicProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the bottom border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -257,7 +257,7 @@ public class GraphicProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the top border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -275,7 +275,7 @@ public class GraphicProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the left border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -293,7 +293,7 @@ public class GraphicProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the right border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -311,7 +311,7 @@ public class GraphicProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for all four borders will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -331,7 +331,7 @@ public class GraphicProperties {
 	 * <p>
 	 * If the stroke is DASH, there is dash line around the frame. color, width
 	 * and the style name of dash line need to be specified.
-	 * 
+	 *
 	 * @param stroke
 	 *            the stroke type
 	 * @param color
@@ -368,7 +368,7 @@ public class GraphicProperties {
 
 	/**
 	 * Set the fill style for a graphic object.
-	 * 
+	 *
 	 * <p>
 	 * This method supports 2 types of fill: none and solid.
 	 * <p>
@@ -376,7 +376,7 @@ public class GraphicProperties {
 	 * <p>
 	 * If the fill type is SOLID, the drawing object is filled with the color
 	 * specified by the second parameter.
-	 * 
+	 *
 	 * @param fillType
 	 *            the fill style type
 	 * @param color
@@ -402,7 +402,7 @@ public class GraphicProperties {
 	 * Set whether the content of a graphic object is displayed in the
 	 * background or foreground. If it's displayed in the background, the
 	 * content wouldn't be selected or moved.
-	 * 
+	 *
 	 * @param isBackgroundObject
 	 *            If <code>true</code>, the graphic object is displayed in the
 	 *            background.
@@ -418,7 +418,7 @@ public class GraphicProperties {
 
 	/**
 	 * Set the horizontal position
-	 * 
+	 *
 	 * @param horizontalPos
 	 *            the horizontal position
 	 * @since 0.5.5
@@ -429,7 +429,7 @@ public class GraphicProperties {
 
 	/**
 	 * Set the horizontal relative
-	 * 
+	 *
 	 * @param relative
 	 *            the horizontal relative
 	 * @since 0.5.5
@@ -440,7 +440,7 @@ public class GraphicProperties {
 
 	/**
 	 * Set the vertical relative
-	 * 
+	 *
 	 * @param relative
 	 *            the vertical relative
 	 * @since 0.5.5
@@ -451,7 +451,7 @@ public class GraphicProperties {
 
 	/**
 	 * Set the vertical position
-	 * 
+	 *
 	 * @param verticalPos
 	 *            the vertical position
 	 * @since 0.5.5
@@ -462,7 +462,7 @@ public class GraphicProperties {
 
 	/**
 	 * Return the horizontal position
-	 * 
+	 *
 	 * @return the horizontal position
 	 * @since 0.5.5
 	 */
@@ -472,7 +472,7 @@ public class GraphicProperties {
 
 	/**
 	 * Return the vertical position
-	 * 
+	 *
 	 * @return the vertical position
 	 * @since 0.5.5
 	 */
@@ -482,7 +482,7 @@ public class GraphicProperties {
 
 	/**
 	 * Return the vertical relative
-	 * 
+	 *
 	 * @return the vertical relative
 	 * @since 0.5.5
 	 */
@@ -492,9 +492,9 @@ public class GraphicProperties {
 
 	/**
 	 * Return the horizontal relative
-	 * 
+	 *
 	 * @return the horizontal relative
-	 * 
+	 *
 	 * @since 0.5.5
 	 */
 	public HorizontalRelative getHorizontalRelative() {

@@ -27,16 +27,16 @@ package org.odftoolkit.odfxsltrunner;
  */
 public interface XSLTParameter {
 
-    /** 
+    /**
      * Get parameter name.
-     * 
+     *
      * @return parameter name.
      */
     String getName();
 
     /**
      * Get parameter value.
-     * 
+     *
      * @return parameter value.
      */
     String getValue();

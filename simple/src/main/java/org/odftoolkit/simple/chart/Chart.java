@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -63,7 +63,7 @@ import org.w3c.dom.NodeList;
  * <code>Chart</code> represents the chart feature of the ODF document.
  * <code>Chart</code> provides methods to get/set chart title, get/set chart
  * data, etc.
- * 
+ *
  * @since 0.6
  */
 public class Chart {
@@ -204,7 +204,7 @@ public class Chart {
 
 	/**
 	 * 3D effect manipulation, get whether the chart apples 3D effect
-	 * 
+	 *
 	 * @return return true if the chart is applied 3D effect
 	 */
 	public boolean IsApply3DEffect() {
@@ -213,7 +213,7 @@ public class Chart {
 
 	/**
 	 * chart axis manipulation, temporarily only consider the axis title
-	 * 
+	 *
 	 * @param dimType
 	 *            the chart axis dimension, x, y or z
 	 * @return return axis title according to the given dimension,null if the
@@ -236,7 +236,7 @@ public class Chart {
 
 	/**
 	 * chart data manipulation, get the chart data
-	 * 
+	 *
 	 * @return return the chart data
 	 */
 	public DataSet getChartData() {
@@ -295,7 +295,7 @@ public class Chart {
 
 	/**
 	 * chart title manipulation, get the current chart title
-	 * 
+	 *
 	 * @return return the chart title
 	 */
 	public String getChartTitle() {
@@ -313,7 +313,7 @@ public class Chart {
 
 	/**
 	 * chart type manipulation, get the current chart type
-	 * 
+	 *
 	 * @return the chart type
 	 */
 	public ChartType getChartType() {
@@ -322,7 +322,7 @@ public class Chart {
 
 	/**
 	 * chart id manipulation, get the current chart id
-	 * 
+	 *
 	 * @return the chart id
 	 */
 	public String getChartID() {
@@ -331,7 +331,7 @@ public class Chart {
 
 	/**
 	 * chart legend manipulation
-	 * 
+	 *
 	 *@return returns true if it is using legend, otherwise returns false
 	 */
 	public boolean isUseLegend() {
@@ -340,7 +340,7 @@ public class Chart {
 
 	/**
 	 * 3D effect manipulation, set to apply 3D effect
-	 * 
+	 *
 	 * @param _3deffect
 	 *            a flag specifying whether or not apply a 3D effect
 	 */
@@ -508,7 +508,7 @@ public class Chart {
 	/**
 	 * chart axis manipulation, set the chart axis title according to the give
 	 * dimension
-	 * 
+	 *
 	 * @param dimType
 	 *            the chart axis dimension, x,y, or z
 	 * @param title
@@ -552,7 +552,7 @@ public class Chart {
 
 	/**
 	 * chart data manipulation, set chart data
-	 * 
+	 *
 	 * @param dataset
 	 *            the data set for the chart, which is a 2 dimensional data
 	 *            container
@@ -680,7 +680,7 @@ public class Chart {
 
 	/**
 	 * chart title manipulation, get the current chart title
-	 * 
+	 *
 	 * @return return the chart title
 	 */
 	public boolean setChartTitle(String title) {
@@ -711,7 +711,7 @@ public class Chart {
 	 * chart type manipulation, set a chart type when chart type is changed, all
 	 * the corresponding chart behaviors and properties should be changed
 	 * accordingly
-	 * 
+	 *
 	 * @param type
 	 *            the type of chart
 	 */
@@ -734,7 +734,7 @@ public class Chart {
 
 	/**
 	 * chart legend manipulation, get whether the chart use legend
-	 * 
+	 *
 	 * @param useLegend
 	 *            a flag specifying whether or not use legend
 	 */

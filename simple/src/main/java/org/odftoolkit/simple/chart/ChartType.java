@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -21,7 +21,7 @@ package org.odftoolkit.simple.chart;
 
 /**
  * The value set of chart type.
- * 
+ *
  * @since 0.6
  */
 public enum ChartType {
@@ -64,7 +64,7 @@ public enum ChartType {
 	private ChartType(String _aValue) {
 		m_aValue = _aValue;
 	}
-	
+
 
 	@Override
 	public String toString() {
@@ -73,7 +73,7 @@ public enum ChartType {
 
 	/**
 	 * Returns the enum of ChartType string.
-	 * 
+	 *
 	 * @param mString
 	 *            the string value
 	 * @return the enum of ChartType.
