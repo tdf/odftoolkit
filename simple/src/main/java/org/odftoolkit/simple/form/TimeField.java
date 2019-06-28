@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -44,7 +44,7 @@ public class TimeField extends Field {
 	 * Get an instance of time field by an instance of FormFormattedTextElement,
 	 * while searching the document content to make a bind with the DrawControl
 	 * which already reference to this time field.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of FormFormattedTextElement
 	 * @return an instance of time field
@@ -63,7 +63,7 @@ public class TimeField extends Field {
 
 	/**
 	 * Format the time value according to the appointed format and locale.
-	 * 
+	 *
 	 * @param formatStr
 	 *            - format code
 	 * @param locale
@@ -77,7 +77,7 @@ public class TimeField extends Field {
 	/**
 	 * Set the format of this time field. Time format pattern is the same as
 	 * {@link java.text.SimpleDateFormat SimpleDateFormat}.
-	 * 
+	 *
 	 * @param formatStr
 	 *            the format string of this date.
 	 * @see java.text.SimpleDateFormat
@@ -114,7 +114,7 @@ public class TimeField extends Field {
 
 	/**
 	 * Get the format code which is used to format the display value
-	 * 
+	 *
 	 * @return the format code
 	 */
 	public String getTimeFormat() {

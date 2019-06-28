@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -39,10 +39,10 @@ import org.w3c.dom.NodeList;
  * content with a TextDocument, all Styles be included.
  */
 public class TextDocumentSelection extends Selection {
-	
+
 	private TextSelection textSelection;
 	private TextDocument sourceDocument;
-	
+
 	/**
 	 * Replace the Searched Content with a TextDocument with Styles.
 	 * <p>
@@ -81,7 +81,7 @@ public class TextDocumentSelection extends Selection {
 	 * <p>			}</p>
 	 * <p>		}</p>
 	 * </Code>
-	 * 
+	 *
 	 * @param textDocument
 	 *            the reference TextDocument to replace.
 	 * @throws Exception
@@ -92,24 +92,24 @@ public class TextDocumentSelection extends Selection {
 		int index = textSelection.getIndex();
 		prepareParagraphContainer(leftLength, index);
 	}
-	
+
 	/**
 	 * Construct a TextDocumentSelection with TextSelection. Then user can
 	 * replace text content with a TextDocument.
-	 * 
+	 *
 	 * @param selection
 	 *            the TextSelection to be decorated.
 	 */
 	public TextDocumentSelection(TextSelection selection) {
 		textSelection = selection;
 	}
-	
+
 	/**
 	 * Delete the selection from the document the other matched selection in the
 	 * same container element will be updated automatically because the start
 	 * index of the following selections will be changed when the previous
 	 * selection has been deleted.
-	 * 
+	 *
 	 * @throws InvalidNavigationException
 	 *             if the selection is unavailable.
 	 */
@@ -117,10 +117,10 @@ public class TextDocumentSelection extends Selection {
 	public void cut() throws InvalidNavigationException {
 		textSelection.cut();
 	}
-	
+
 	/**
 	 * Paste this selection just after a specific selection.
-	 * 
+	 *
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException
@@ -130,7 +130,7 @@ public class TextDocumentSelection extends Selection {
 	public void pasteAtEndOf(Selection positionItem) throws InvalidNavigationException {
 		textSelection.pasteAtEndOf(positionItem);
 	}
-	
+
 	private void delete(int fromIndex, int leftLength, Node pNode) {
 		if ((fromIndex == 0) && (leftLength == 0)) {
 			return;
@@ -178,7 +178,7 @@ public class TextDocumentSelection extends Selection {
 						leftLength = endLength - value.length();
 					}
 					node.setNodeValue(buffer.toString());
-					
+
 				} else if (node.getNodeType() == Node.ELEMENT_NODE) {
 					// if text:s?????????
 					// text:s
@@ -201,10 +201,10 @@ public class TextDocumentSelection extends Selection {
 			node = node.getNextSibling();
 		}
 	}
-	
+
 	/**
 	 * Paste this selection just before a specific selection.
-	 * 
+	 *
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException
@@ -214,28 +214,28 @@ public class TextDocumentSelection extends Selection {
 	public void pasteAtFrontOf(Selection positionItem) throws InvalidNavigationException {
 		textSelection.pasteAtFrontOf(positionItem);
 	}
-	
+
 	protected void refresh(int offset) {
 		textSelection.refresh(offset);
 	}
-	
+
 	protected void refreshAfterFrontalDelete(Selection deletedItem) {
 		textSelection.refreshAfterFrontalDelete(deletedItem);
 	}
-	
+
 	protected void refreshAfterFrontalInsert(Selection insertedItem) {
 		textSelection.refreshAfterFrontalInsert(insertedItem);
 	}
-	
+
 	private void prepareParagraphContainer(int leftLength, int index) throws Exception {
 		OdfElement rightparentElement = textSelection.getContainerElement();
 		int nodeLength = TextExtractor.getText(rightparentElement).length();
 		Paragraph orgparagraph = Paragraph.getInstanceof((TextParagraphElementBase) rightparentElement);
-		
+
 		TextDocument document = (TextDocument) orgparagraph.getOwnerDocument();
 		OfficeTextElement sroot = sourceDocument.getContentRoot();
 		NodeList clist = sroot.getChildNodes();
-		
+
 		try {
 			OfficeTextElement documentRoot = document.getContentRoot();
 			Node rootNode = rightparentElement.getParentNode();
@@ -246,7 +246,7 @@ public class TextDocumentSelection extends Selection {
 		} catch (Exception e) {
 			Logger.getLogger(TextDocumentSelection.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
-		
+
 		if (index == 0) {
 			if (leftLength == nodeLength) {
 				// Replace whole Paragraph

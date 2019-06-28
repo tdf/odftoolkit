@@ -32,14 +32,14 @@ import org.xml.sax.SAXParseException;
  * logger.
  */
 class SAXErrorHandler implements ErrorHandler {
-    
+
     private Logger m_aLogger;
 
     /** Creates a new instance of TransforemerErrorListener */
     SAXErrorHandler(Logger aLogger ) {
         m_aLogger = aLogger;
     }
-    
+
     public void warning(SAXParseException e) throws SAXException {
         m_aLogger.logWarning( e );
     }

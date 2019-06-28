@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -46,11 +46,11 @@ class ContentFilter extends NamespaceFilter {
     private static final String POLYLINE = "polyline";
     private static final String POINTS = "points";
     private static final int MAX_POINTS_LEN = 2048;
-        
+
     private Logger m_aLogger;
     private String m_aLocalElementName;
     private boolean m_bRoot = true;
-    
+
     /** Creates a new instance of KnownIssueFilter */
     ContentFilter( Logger aLogger, String aLocalElementName ) {
         m_aLogger = aLogger;
@@ -64,14 +64,14 @@ class ContentFilter extends NamespaceFilter {
             aNewUri = SVG_NAMESPACE_URI;
         else if( aUri.equals(CD2_XSL_NAMESPACE_URI) )
              aNewUri = XSL_NAMESPACE_URI;
-        else if( aUri.equals(CD2_SMIL_NAMESPACE_URI) ) 
+        else if( aUri.equals(CD2_SMIL_NAMESPACE_URI) )
             aNewUri = SMIL_NAMESPACE_URI;
         else if( aUri.equals(BASE_OFFICE_NAMESPACE_URI) &&
                  (aPrefix == null || aPrefix.startsWith(BASE_OFFICE_NAMESPACE_PREFIX)) )
             aNewUri = OFFICE_NAMESPACE_URI;
         else if( aUri.equals(BASE_DB_NAMESPACE_URI) )
             aNewUri = DB_NAMESPACE_URI;
-        
+
         return aNewUri;
     }
 
@@ -85,7 +85,7 @@ class ContentFilter extends NamespaceFilter {
 
     @Override
     public void startElement(String aUri, String aLocalName, String aQName, Attributes aAtts) throws SAXException {
-        if( aUri.equals(DRAW_NAMESPACE_URI) && 
+        if( aUri.equals(DRAW_NAMESPACE_URI) &&
             (aLocalName.equals(POLYGON) || aLocalName.equals(POLYLINE) || aLocalName.equals(CONTOUR_POLYGON)) )
         {
             String aPointsValue = aAtts.getValue(DRAW_NAMESPACE_URI,POINTS);

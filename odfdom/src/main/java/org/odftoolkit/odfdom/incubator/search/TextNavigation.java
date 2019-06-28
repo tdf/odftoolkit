@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -35,7 +35,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * A derived Navigation class used for navigate the text content
- * it is used to search the document and find the matched text 
+ * it is used to search the document and find the matched text
  * and would return TextSelection instance
  *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.navigation.TextNavigation} in Simple API.
@@ -196,7 +196,7 @@ public class TextNavigation extends Navigation {
 	/**
 	 * check if the text content of element match the specified pattern string
 	 * @param element	navigate this element
-	 * @return true if the text content of this element match this pattern; 
+	 * @return true if the text content of this element match this pattern;
 	 * 		   false if not match
 	 */
 	@Override

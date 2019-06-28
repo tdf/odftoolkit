@@ -32,7 +32,7 @@ import org.w3c.dom.NodeList;
 /**
  * <code>OdfSlide</code> represents the presentation slide feature of the ODF document.
  * <code>OdfSlide</code> provides methods to get the slide index,get the content of the current slide, etc.
- * 
+ *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.presentation.Slide} in Simple API.
  */
 public class OdfSlide {
@@ -47,7 +47,7 @@ public class OdfSlide {
 
 	/**
 	 * Get a presentation slide instance by an instance of <code>DrawPageElement</code>.
-	 * 
+	 *
 	 * @param pageElement	an instance of <code>DrawPageElement</code>
 	 * @return an instance of <code>OdfSlide</code> that can represent <code>pageElement</code>
 	 */
@@ -63,7 +63,7 @@ public class OdfSlide {
 
 	/**
 	 * Return an instance of <code>DrawPageElement</code> which represents presentation slide feature.
-	 * 
+	 *
 	 * @return an instance of <code>DrawPageElement</code>
 	 */
 	public DrawPageElement getOdfElement() {
@@ -106,7 +106,7 @@ public class OdfSlide {
 	}
 
 	/**
-	 * Set the current slide name. 
+	 * Set the current slide name.
 	 * <p>
 	 * It must be unique slide name in the current presentation.
 	 * If not, an IllegalArgumentException will be thrown.
@@ -152,7 +152,7 @@ public class OdfSlide {
 		return slideName;
 	}
 
-	/** 
+	/**
 	 * A slide layout is a slide with some predefine placeholder.
 	 *
 	 * we define some template layout as below:

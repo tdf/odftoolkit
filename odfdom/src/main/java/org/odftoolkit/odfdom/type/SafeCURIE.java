@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -29,7 +29,7 @@ public class SafeCURIE implements OdfDataType {
 
 	private String mCURIE;
 	private static final Pattern safeCURIEPattern = Pattern.compile("^\\[(([\\i-[:]][\\c-[:]]*)?:)?.+\\]$");
-	
+
 	/**
 	 * Construct SafeCURIE by the parsing the given string
 	 *

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -61,7 +61,7 @@ public class TextStyleNavigation extends Navigation {
 	/**
 	 * Construct <code>TextStyleNavigation</code> with style properties condition and
 	 * navigation scope.
-	 * 
+	 *
 	 * @param props
 	 *            the matched style properties conditions
 	 * @param doc
@@ -76,7 +76,7 @@ public class TextStyleNavigation extends Navigation {
 
 	/**
 	 * Check if has next <code>TextSelection</code> with satisfied style.
-	 * 
+	 *
 	 * @see org.odftoolkit.simple.common.navigation.Navigation#hasNext()
 	 */
 	@Override
@@ -84,10 +84,10 @@ public class TextStyleNavigation extends Navigation {
 		mTempSelectedItem = findNext(mNextSelectedItem);
 		return (mTempSelectedItem != null);
 	}
-	
+
 	/**
 	 * Get next <code>TextSelection</code>.
-	 * 
+	 *
 	 * @see org.odftoolkit.simple.common.navigation.Navigation#nextSelection()
 	 */
 	@Override
@@ -109,7 +109,7 @@ public class TextStyleNavigation extends Navigation {
 	/**
 	 * Check if the element has specified style properties, which are stated
 	 * when the <code>TextStyleNavigation</code> created.
-	 * 
+	 *
 	 * @param element
 	 *            navigate this element
 	 * @return true if this element has the specified style properties false if

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -30,12 +30,12 @@ import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
  * This class represents the table style settings. It provides methods to access
  * or modify the formatting properties applied to tables. More functions will be
  * added latter.
- * 
+ *
  * <p>
  * This class is a corresponded high level class for element
  * "style:table-properties". It provides methods to access the attributes and
  * children of "style:table-properties".
- * 
+ *
  * @since 0.8
  */
 public class TableProperties {
@@ -50,7 +50,7 @@ public class TableProperties {
 	/**
 	 * Create an instance of TableProperties from an element
 	 * <style:table-properties>
-	 * 
+	 *
 	 * @param properties
 	 *            - the element of style:table-properties
 	 */
@@ -60,7 +60,7 @@ public class TableProperties {
 
 	/**
 	 * Set the break.
-	 * 
+	 *
 	 * @param breakPosition
 	 *            the position to insert a break (before or after)
 	 * @param breakAttribute
@@ -87,7 +87,7 @@ public class TableProperties {
 	 * Return the break property before the reference.
 	 * <p>
 	 * Null will be returned if there is no break setting before the reference.
-	 * 
+	 *
 	 * @return - the break property; null if there is no break setting.
 	 */
 	public String getBreakBefore() {
@@ -98,7 +98,7 @@ public class TableProperties {
 	 * Return the break property after the reference.
 	 * <p>
 	 * Null will be returned if there is no break setting after the reference.
-	 * 
+	 *
 	 * @return - the break property; null if there is no break setting.
 	 */
 	public String getBreakAfter() {
@@ -109,7 +109,7 @@ public class TableProperties {
 	 * Return the page number that is used for a new page with a master style.
 	 * <p>
 	 * If there is no valid page number, 0 will be returned;
-	 * 
+	 *
 	 * @return the page number
 	 */
 	public int getPageNumber() {
@@ -122,7 +122,7 @@ public class TableProperties {
 
 	/**
 	 * Set the page number for a new page with a master style.
-	 * 
+	 *
 	 * @param pageNumber
 	 *            the page number
 	 */
@@ -138,7 +138,7 @@ public class TableProperties {
 	 * Return an instance of
 	 * <code>TableProperties</p> to represent the "style:table-properties" in a style element.
 	 * <p>If there is no "style:table-properties" defined in the style element, a new "style:table-properties" element will be created.
-	 * 
+	 *
 	 * @param style
 	 *            - a style element
 	 * @return an instance of <code>TableProperties</p>
@@ -153,7 +153,7 @@ public class TableProperties {
 	 * Return an instance of
 	 * <code>TableProperties</p> to represent the "style:table-properties" in a style element.
 	 * <p>If there is no "style:table-properties" defined in the style element, null will be returned.
-	 * 
+	 *
 	 * @param style
 	 *            - a style element
 	 * @return an instance of <code>TableProperties</p>;Null if there is no

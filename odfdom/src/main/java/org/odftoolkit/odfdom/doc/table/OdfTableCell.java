@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -122,7 +122,7 @@ public class OdfTableCell {
 	 * Get the <code>OdfTableCell</code> instance from the <code>TableTableCellElementBase</code> instance.
 	 * <p>
 	 * Each <code>TableTableCellElementBase</code> instance has a one-to-one relationship to the a <code>OdfTableCell</code> instance.
-	 * 
+	 *
 	 * @param cellElement	the cell element that need to get the corresponding <code>OdfTableCell</code> instance
 	 * @return the <code>OdfTableCell</code> instance that represents a specified cell element
 	 */
@@ -162,8 +162,8 @@ public class OdfTableCell {
 	 * <p>
 	 * The returned value can be "center", "end", "justify", "left", "right", or "start".
 	 * If no horizontal alignment is set, null will be returned.
-	 * 
-	 * @return the horizontal alignment setting. 
+	 *
+	 * @return the horizontal alignment setting.
 	 */
 	public String getHorizontalAlignment() {
 		OdfStyleBase styleElement = getCellStyleElement();
@@ -181,7 +181,7 @@ public class OdfTableCell {
 	 * The parameter can be "center", "end", "justify", "left", "right", or "start".
 	 * Actually, "left" will be interpreted as "start", while "right" will be interpreted as "end".
 	 * If argument is null, the explicit horizontal alignment setting is removed.
-	 * 
+	 *
 	 * @param horizontalAlignment	the horizontal alignment setting.
 	 */
 	public void setHorizontalAlignment(String horizontalAlignment) {
@@ -208,8 +208,8 @@ public class OdfTableCell {
 	 * Return the vertical alignment setting of this cell.
 	 * <p>
 	 * The returned value can be "auto", "automatic", "baseline", "bottom", "middle", or "top".
-	 * 
-	 * @return the vertical alignment setting of this cell. 
+	 *
+	 * @return the vertical alignment setting of this cell.
 	 */
 	public String getVerticalAlignment() {
 		OdfStyleBase styleElement = getCellStyleElement();
@@ -226,7 +226,7 @@ public class OdfTableCell {
 	 * <p>
 	 * The parameter can be "auto", "automatic", "baseline", "bottom", "middle", or "top".
 	 * If argument is null, the explicit vertical alignment setting is removed.
-	 * 
+	 *
 	 * @param verticalAlignment	the vertical alignment setting.
 	 */
 	public void setVerticalAlignment(String verticalAlignment) {
@@ -245,7 +245,7 @@ public class OdfTableCell {
 
 	/**
 	 * Return the wrap option of this cell.
-	 * @return true if the cell content can be wrapped; 
+	 * @return true if the cell content can be wrapped;
 	 * <p>
 	 * false if the cell content cannot be wrapped.
 	 */
@@ -469,17 +469,17 @@ public class OdfTableCell {
 
 	/**
 	 * Get the instance of <code>TableTableCellElementBase</code> which represents this cell.
-	 * @return the instance of <code>TableTableCellElementBase</code> 
+	 * @return the instance of <code>TableTableCellElementBase</code>
 	 */
 	public TableTableCellElementBase getOdfElement() {
 		return mCellElement;
 	}
 
 	/**
-	 * Return the currency code of this cell, for example, "USD", "EUR", "CNY", and etc. 
+	 * Return the currency code of this cell, for example, "USD", "EUR", "CNY", and etc.
 	 * <p>
 	 * If the value type is not "currency", an IllegalArgumentException will be thrown.
-	 * 
+	 *
 	 * @return the currency code
 	 * <p>
 	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the value type is not "currency".
@@ -494,7 +494,7 @@ public class OdfTableCell {
 
 	/**
 	 * Set the currency code of this cell, for example, "USD", "EUR", "CNY", and etc.
-	 * 
+	 *
 	 * @param currency	the currency code that need to be set.
 	 * @throws IllegalArgumentException  If input <code>currency</code> is null, an IllegalArgumentException will be thrown.
 	 */
@@ -520,7 +520,7 @@ public class OdfTableCell {
 	 * The parameter can be "boolean", "currency", "date", "float", "percentage", "string" or "time".
 	 * <p>
 	 * If the parameter <code>type</code> is not a valid cell type, an IllegalArgumentException will be thrown.
-	 * 
+	 *
 	 * @param type	the type that need to be set
 	 * If input type is null, an IllegalArgumentException will be thrown.
 	 */
@@ -541,7 +541,7 @@ public class OdfTableCell {
 	 * Get the value type of this cell.
 	 * The returned value can be "boolean", "currency", "date", "float", "percentage", "string" or "time".
 	 * If no value type is set, null will be returned.
-	 * 
+	 *
 	 * @return the type of the cell
 	 */
 	public String getValueType() {
@@ -557,7 +557,7 @@ public class OdfTableCell {
 	 * Get the double value of this cell as Double object.
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "float".
-	 * 
+	 *
 	 * @return the double value of this cell as a Double object. If the cell value is empty, null will be returned.
 	 * <p>
 	 * An IllegalArgumentException will be thrown if the cell type is not "float".
@@ -574,7 +574,7 @@ public class OdfTableCell {
 	 * Get the currency value of this cell as Double object.
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "currency".
-	 * 
+	 *
 	 * @return the currency value of this cell as a Double object. If the cell value is empty, null will be returned.
 	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the cell type is not "currency".
 	 */
@@ -611,10 +611,10 @@ public class OdfTableCell {
 	}
 
 	/**
-	 * Set the value and currency of the cell, and set the value type as "currency". 
+	 * Set the value and currency of the cell, and set the value type as "currency".
 	 * If<code>value</value> is null, the cell value will be removed.
-	 * 
-	 * @param value  the value that will be set 
+	 *
+	 * @param value  the value that will be set
 	 * @param currency	the currency that will be set.
 	 * @throws IllegalArgumentException  If input currency is null, an IllegalArgumentException will be thrown.
 	 */
@@ -632,7 +632,7 @@ public class OdfTableCell {
 	 * Get the cell percentage value as Double object.
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "percentage".
-	 * 
+	 *
 	 * @return the percentage value of this cell as a Double object. If the cell value is empty, null will be returned.
 	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the cell type is not "percentage".
 	 */
@@ -647,7 +647,7 @@ public class OdfTableCell {
 	/**
 	 * Set the cell value as a percentage value and set the value type as percentage too.
 	 * If<code>value</value> is null, the cell value will be removed.
-	 * 
+	 *
 	 * @param value	the value that will be set
 	 */
 	public void setPercentageValue(Double value) {
@@ -658,7 +658,7 @@ public class OdfTableCell {
 
 	/**
 	 * Get the text displayed in this cell.
-	 * 
+	 *
 	 * @return the text displayed in this cell
 	 */
 	public String getDisplayText() {
@@ -672,10 +672,10 @@ public class OdfTableCell {
 	 * Set the text displayed in this cell.
 	 * <p>
 	 * Please note the displayed text in ODF viewer might be different with the value set by this method,
-	 * because the displayed text in ODF viewer is calculated and set by editor. 
-	 * 
-	 * @param content	the displayed text. 
-	 * If content is null, it will display the empty string instead. 
+	 * because the displayed text in ODF viewer is calculated and set by editor.
+	 *
+	 * @param content	the displayed text.
+	 * If content is null, it will display the empty string instead.
 	 */
 	public void setDisplayText(String content) {
 		if (content == null) {
@@ -694,9 +694,9 @@ public class OdfTableCell {
 	 * Set the text displayed in this cell, with a specified style name.
 	 * <p>
 	 * Please note the displayed text in ODF viewer might be different with the value set by this method,
-	 * because the displayed text in ODF viewer are calculated and set by editor. 
-	 * 
-	 * @param content    the displayed text. If content is null, it will display the empty string instead. 
+	 * because the displayed text in ODF viewer are calculated and set by editor.
+	 *
+	 * @param content    the displayed text. If content is null, it will display the empty string instead.
 	 * @param stylename  the style name. If stylename is null, the content will use the default paragraph style.
 	 */
 	public void setDisplayText(String content, String stylename) {
@@ -717,7 +717,7 @@ public class OdfTableCell {
 
 	/**
 	 * Set the cell value as a double and set the value type to be "float".
-	 * 
+	 *
 	 * @param value	the double value that will be set. If<code>value</value> is null, the cell value will be removed.
 	 */
 	public void setDoubleValue(Double value) {
@@ -731,7 +731,7 @@ public class OdfTableCell {
 	 * Get the cell boolean value as Boolean object.
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "boolean".
-	 * 
+	 *
 	 * @return the Boolean value of cell. If the cell value is empty, null will be returned.
 	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the cell type is not "boolean".
 	 */
@@ -745,7 +745,7 @@ public class OdfTableCell {
 
 	/**
 	 * Set the cell value as a boolean and set the value type to be boolean. If<code>value</value> is null, the cell value will be removed.
-	 * 
+	 *
 	 * @param value	the value of boolean type
 	 */
 	public void setBooleanValue(Boolean value) {
@@ -759,7 +759,7 @@ public class OdfTableCell {
 	 * Get the cell date value as Calendar.
 	 * <p>
 	 * Throw IllegalArgumentException if the cell type is not "date".
-	 * 
+	 *
 	 * @return the Calendar value of cell
 	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown, if the cell type is not "date".
 	 */
@@ -780,7 +780,7 @@ public class OdfTableCell {
 
 	/**
 	 * Set the cell value as a date, and set the value type to be "date".
-	 * 
+	 *
 	 * @param date	the value of {@link java.util.Calendar java.util.Calendar} type.
 	 */
 	public void setDateValue(Calendar date) {
@@ -797,8 +797,8 @@ public class OdfTableCell {
 
 	/**
 	 * Set the cell value as a string, and set the value type to be string.
-	 * 
-	 * @param str	the value of string type. 
+	 *
+	 * @param str	the value of string type.
 	 * If input string is null, an empty string will be set.
 	 */
 	public void setStringValue(String str) {
@@ -812,7 +812,7 @@ public class OdfTableCell {
 	}
 
 	//Note: if you want to change the cell
-	//splitRepeatedCells must be called first in order to 
+	//splitRepeatedCells must be called first in order to
 	//1. update parent row if the row is the repeated rows.
 	//2. update the cell itself if the cell is the column repeated cells.
 	void splitRepeatedCells() {
@@ -865,7 +865,7 @@ public class OdfTableCell {
 	 * Get the cell value as a string.
 	 * <p>
 	 * If the cell type is not string, the display text will be returned.
-	 * 
+	 *
 	 * @return the string value of this cell, or the display text
 	 */
 	public String getStringValue() {
@@ -876,7 +876,7 @@ public class OdfTableCell {
 	 * Get the cell value as {@link java.util.Calendar java.util.Calendar}.
 	 * <p>
 	 * Throw exception if the cell type is not "time".
-	 * 
+	 *
 	 * @return the Calendar value of cell
 	 * @throws IllegalArgumentException  an IllegalArgumentException will be thrown if the cell type is not time.
 	 */
@@ -900,7 +900,7 @@ public class OdfTableCell {
 
 	/**
 	 * Set the cell value as a time and set the value type to be "time" too.
-	 * 
+	 *
 	 * @param time  the value of {@link java.util.Calendar java.util.Calendar} type.
 	 * @throws IllegalArgumentException   If input time is null, an IllegalArgumentException exception will be thrown.
 	 */
@@ -932,8 +932,8 @@ public class OdfTableCell {
 	 * Get the background color of this cell.
 	 * <p>
 	 * If no background color is set, default background color "#FFFFFF" will be returned.
-	 * 
-	 * @return the background color of this cell 
+	 *
+	 * @return the background color of this cell
 	 */
 	public Color getCellBackgroundColor() {
 		Color color = Color.WHITE;
@@ -959,8 +959,8 @@ public class OdfTableCell {
 	 * Get the background color string of this cell.
 	 * <p>
 	 * If no background color is set, default background color "#FFFFFF" will be returned.
-	 * 
-	 * @return the background color of this cell 
+	 *
+	 * @return the background color of this cell
 	 */
 	public String getCellBackgroundColorString() {
 		String color = DEFAULT_BACKGROUND_COLOR;
@@ -978,9 +978,9 @@ public class OdfTableCell {
 
 	/**
 	 * Set the background color of this cell.
-	 * 
+	 *
 	 * @param cellBackgroundColor
-	 *            the background color that need to set. 
+	 *            the background color that need to set.
 	 *            If <code>cellBackgroundColor</code> is null, default background color <code>Color.WHITE</code> will be set.
 	 */
 	public void setCellBackgroundColor(Color cellBackgroundColor) {
@@ -997,11 +997,11 @@ public class OdfTableCell {
 	}
 
 	/**
-	 * Set the background color of this cell using string. The string must be a valid argument for 
-	 * constructing {@link org.odftoolkit.odfdom.type.Color <code>org.odftoolkit.odfdom.type.Color</code>}. 
-	 * 
+	 * Set the background color of this cell using string. The string must be a valid argument for
+	 * constructing {@link org.odftoolkit.odfdom.type.Color <code>org.odftoolkit.odfdom.type.Color</code>}.
+	 *
 	 * @param cellBackgroundColor
-	 *            the background color that need to set. 
+	 *            the background color that need to set.
 	 *            If cellBackgroundColor is null, default background color #FFFFFF will be set.
 	 * @see org.odftoolkit.odfdom.type.Color
 	 */
@@ -1021,7 +1021,7 @@ public class OdfTableCell {
 
 	/**
 	 * Get the column spanned number of this cell.
-	 * 
+	 *
 	 * @return the column spanned number
 	 */
 	int getColumnSpannedNumber() {
@@ -1037,7 +1037,7 @@ public class OdfTableCell {
 
 	/**
 	 * Get the column repeated number of this cell.
-	 * 
+	 *
 	 * @return the column repeated number
 	 */
 	int getColumnsRepeatedNumber() {
@@ -1050,7 +1050,7 @@ public class OdfTableCell {
 
 	/**
 	 * Get the row spanned number of this cell.
-	 * 
+	 *
 	 * @return the row spanned number
 	 */
 	int getRowSpannedNumber() {
@@ -1066,7 +1066,7 @@ public class OdfTableCell {
 
 	/**
 	 * Set the column spanned number.
-	 * 
+	 *
 	 * @param spannedNum
 	 *            the column spanned number to be set. If spannedNum is less than 1,
 	 *            default column spanned number 1 will be
@@ -1086,7 +1086,7 @@ public class OdfTableCell {
 
 	/**
 	 * Set the column repeated number.
-	 * 
+	 *
 	 * @param repeatedNum
 	 *            the column repeated number that need to be set. If repeatedNum
 	 *            is less than 1, default columns repeated number 1 will be set.
@@ -1100,8 +1100,8 @@ public class OdfTableCell {
 
 	/**
 	 * Set the row spanned number.
-	 * 
-	 * @param spannedNum	row spanned number that need to be set 
+	 *
+	 * @param spannedNum	row spanned number that need to be set
 	 *            the row spanned number that need to be set. If spannedNum is
 	 *            less than 1, default row spanned number 1 will be
 	 *            set.
@@ -1120,7 +1120,7 @@ public class OdfTableCell {
 
 	/**
 	 * Judge if the ODF DOM element of this cell is the covered cell element.
-	 * 
+	 *
 	 * @return true if the ODFDOM element is TableCoveredTableCellElement
 	 */
 	boolean isCoveredElement() {
@@ -1132,7 +1132,7 @@ public class OdfTableCell {
 
 	/**
 	 * Get the style name of this cell.
-	 * 
+	 *
 	 * @return the name of the style
 	 */
 	public String getStyleName() {
@@ -1143,13 +1143,13 @@ public class OdfTableCell {
 		return style.getStyleNameAttribute();
 	}
 
-	/** 
+	/**
 	 * Set a formula to the cell.
 	 * <p>
 	 * Please note, the parameter <code>formula</code> will not be checked and interpreted;
 	 * the cell value will not be calculated.
 	 * It's just simply set as a formula attribute. See {@odf.attribute table:formula}
-	 * 
+	 *
 	 * @param formula	the formula that need to be set.
 	 * @throws IllegalArgumentException  if formula is null, an IllegalArgumentException will be thrown.
 	 */
@@ -1163,11 +1163,11 @@ public class OdfTableCell {
 
 	/**
 	 * Get the formula string of the cell.
-	 * 
+	 *
 	 * @return the formula representation of the cell
 	 * <p>
 	 * If the cell does not contain a formula, null will be returned.
-	 * 
+	 *
 	 */
 	public String getFormula() {
 		return mCellElement.getTableFormulaAttribute();
@@ -1254,16 +1254,16 @@ public class OdfTableCell {
 	 * Set the format string of the cell.
 	 * <p>
 	 * This function only works for float, date, time and percentage, otherwise an
-	 * {@link java.lang.IllegalArgumentException} will be thrown. 
+	 * {@link java.lang.IllegalArgumentException} will be thrown.
 	 * <p>
-	 * For value type float and percentage, the <code>formatStr</code> must follow the encoding 
+	 * For value type float and percentage, the <code>formatStr</code> must follow the encoding
 	 * rule of {@link java.text.DecimalFormat <code>java.text.DecimalFormat</code>}.
-	 * For value type date and time, the <code>formatStr</code> must follow the encoding 
+	 * For value type date and time, the <code>formatStr</code> must follow the encoding
 	 * rule of {@link java.text.SimpleDateFormat <code>java.text.SimpleDateFormat</code>}.
 	 * <p>
 	 * Refer to {@link org.odftoolkit.odfdom.doc.table.OdfTableCell#setCurrencyFormat <code>setCurrencyFormat</code>} to set the format of currency.
 	 * <p>
-	 * If the cell value type is not set, the method will try to give it a value type, according 
+	 * If the cell value type is not set, the method will try to give it a value type, according
 	 * to common ordination. The adapt order is: percentage-> time-> date-> float.
 	 * <blockquote>
 	 * <table border=0 cellspacing=3 cellpadding=0 summary="Chart showing ValueType, Distinguish Symbol
@@ -1290,7 +1290,7 @@ public class OdfTableCell {
 	 *          <td>4
 	 * </table>
 	 * </blockquote>
-	 * The adapt result may be inaccurate, so you'd better set value type before call this method. 
+	 * The adapt result may be inaccurate, so you'd better set value type before call this method.
 	 * If adaptive failed, an {@link java.lang.UnsupportedOperationException} will be thrown.
 	 * <p>
 	 * @param formatStr	the cell need be formatted as this specified format string.
@@ -1521,7 +1521,7 @@ public class OdfTableCell {
 //			unique_name = String.format("a%06x", (int) (Math.random() * 0xffffff));
 //		} while (styles.getStyle(unique_name, OdfStyleFamily.TableCell) != null);
 //    	return unique_name;
-//    }	
+//    }
 	private String getUniqueCurrencyStyleName() {
 		String unique_name;
 		OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
@@ -1533,7 +1533,7 @@ public class OdfTableCell {
 
 	/**
 	 * Get the format string of the cell.
-	 * 
+	 *
 	 * @return the format string of the cell
 	 */
 	public String getFormatString() {
@@ -1629,7 +1629,7 @@ public class OdfTableCell {
 
 	/**
 	 * Append the content of another cell.
-	 * 
+	 *
 	 * @param fromCell	another cell whose content will be appended to this cell
 	 */
 	void appendContentFrom(OdfTableCell fromCell) {
@@ -1651,7 +1651,7 @@ public class OdfTableCell {
 
 	/*****************************************
 	 * Moved from OdfTable
-	 * 
+	 *
 	 *******************************************/
 	/**
 	 * This method is invoked by insertCellBefore and insertRowBefore
@@ -1685,7 +1685,7 @@ public class OdfTableCell {
 	/**
 	 * This method is invoked by getCoverCell.
 	 * It's to get the cell in a same row who covers this cell.
-	 * 
+	 *
 	 * @return the cell in a same row who covers this cell
 	 * <p>
 	 *         Null if there is no cell who covers this cell

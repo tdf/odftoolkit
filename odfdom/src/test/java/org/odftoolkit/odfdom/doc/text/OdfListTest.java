@@ -137,7 +137,7 @@ public class OdfListTest {
 		{
 			Assert.assertTrue("More nodes than expected",
 				position < expected.length);
-			
+
 			if (expected[position].startsWith("L"))
 			{
 				Assert.assertTrue("Not a list", node instanceof OdfTextList);

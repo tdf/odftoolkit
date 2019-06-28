@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -555,7 +555,7 @@ public class TableTest {
 					}
 				}
 			}
-			
+
 			for (int i = 1; i < columns.size(); i++) {
 				tmpColumn = columns.get(i);
 				// each column's first cell is the column header
@@ -563,7 +563,7 @@ public class TableTest {
 			}
 			Assert.assertEquals(columncount, columns.size() - 1);
 			Assert.assertEquals("", columns.get(0).getCellByIndex(0).getStringValue());
-			
+
 			//test table column iterator
 			Iterator<Column> columnIterator = table.getColumnIterator();
 			int columnNumber =0;
@@ -626,7 +626,7 @@ public class TableTest {
 			}
 			Assert.assertEquals(rowcount, rows.size() - 1);
 			Assert.assertEquals("", rows.get(0).getCellByIndex(0).getStringValue());
-			
+
 			//test table row iterator
 			Iterator<Row> rowIterator = table.getRowIterator();
 			int rowNumber =0;

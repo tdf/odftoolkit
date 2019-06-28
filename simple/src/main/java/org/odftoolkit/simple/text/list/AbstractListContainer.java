@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -35,7 +35,7 @@ import org.w3c.dom.NodeList;
  * interface, with a default implementation for every method defined in ListContainer
  * , except getListContainerElement(). A subclass must implement
  * the abstract method getListContainerElement().
- * 
+ *
  * @since 0.4
  */
 public abstract class AbstractListContainer implements ListContainer {
@@ -90,11 +90,11 @@ public abstract class AbstractListContainer implements ListContainer {
 
 	// default iterator to iterate list item.
 	private static class SimpleListIterator implements Iterator<List> {
-		
+
 		private java.util.List<List> allLists;
 		private int index;
 		private List currentList;
-		
+
 		public SimpleListIterator(ListContainer container) {
 			this.allLists = getLists(container.getListContainerElement().getChildNodes());
 		}
@@ -121,7 +121,7 @@ public abstract class AbstractListContainer implements ListContainer {
 				this.currentList = null;
 			}
 		}
-		
+
 		private java.util.List<List> getLists(NodeList nodes) {
 			java.util.List<List> lists = new LinkedList<List>();
 			int numberOfNodes = nodes.getLength();
@@ -131,7 +131,7 @@ public abstract class AbstractListContainer implements ListContainer {
 			}
 			return lists;
 		}
-		
+
 		private java.util.List<List> getLists(Node node) {
 			java.util.List<List> lists = new LinkedList<List>();
 			if (node instanceof TextListElement) {
@@ -144,7 +144,7 @@ public abstract class AbstractListContainer implements ListContainer {
 			}
 			return lists;
 		}
-		
+
 	}
-	
+
 }

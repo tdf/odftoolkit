@@ -42,7 +42,7 @@ public class OdfTemplateAPICoverageTest {
     @Test
     public void testOdfCoverage() {
         MethodSet methods;
-        
+
         methods = TemplateAPICoverageTest.getMethods(OdfModel.class);
         assertTrue(methods.contains("getDefaultAttributeValue", 2));
         assertTrue(methods.contains("getStyleFamilies", 0));

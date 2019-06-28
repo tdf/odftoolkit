@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -43,20 +43,20 @@ public class TableOfContentTest {
 		try {
 			TextDocument doc = buildSample();
 			Assert.assertNotNull(doc);
-			
+
 			Paragraph paragraph1 = doc.getParagraphByIndex(0, true);
 			TextTableOfContentElement textTableOfContentElement = doc.createDefaultTOC(paragraph1,false);
-			Assert.assertNotNull(textTableOfContentElement);	
-			
+			Assert.assertNotNull(textTableOfContentElement);
+
 			Node pnode = paragraph1.getOdfElement().getNextSibling();
-			
+
 			if (pnode.equals(textTableOfContentElement)) {
 				Assert.assertTrue(true);
 			} else {
 				Assert.fail();
 			}
-			
-			
+
+
 			try {
 				// Should throw error!
 				doc.createDefaultTOC(null, true);

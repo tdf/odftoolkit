@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -41,11 +41,11 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.TextLinePosition;
 
 /**
  * This class provides functions to handle the style of a paragraph.
- * 
+ *
  * <p>
  * This class provides functions to handle the font settings, text alignment
  * settings and so on.
- * 
+ *
  * @since 0.6.5
  */
 public class ParagraphStyleHandler extends DefaultStyleHandler {
@@ -73,7 +73,7 @@ public class ParagraphStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * Null will be returned if there is no country information for this script
 	 * type.
-	 * 
+	 *
 	 * @param type
 	 *            - script type
 	 * @return the country information for a specific script type
@@ -121,7 +121,7 @@ public class ParagraphStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * A default font definition will be returned if there is no font definition
 	 * for this script type at all.
-	 * 
+	 *
 	 * @param type
 	 *            - script type
 	 * @return the font definition for a specific script type
@@ -192,7 +192,7 @@ public class ParagraphStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * Null will be returned if there is no language information for this script
 	 * type at all.
-	 * 
+	 *
 	 * @param type
 	 *            - script type
 	 * @return the language information for a specific script type
@@ -238,7 +238,7 @@ public class ParagraphStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * If the parameter <code>country</code> is null, the country information
 	 * for this script type will be removed.
-	 * 
+	 *
 	 * @param country
 	 *            - the country information
 	 * @param type
@@ -255,7 +255,7 @@ public class ParagraphStyleHandler extends DefaultStyleHandler {
 	 * be used to justify the script type.
 	 * <p>
 	 * If the parameter <code>font</code> is null, nothing will be happened.
-	 * 
+	 *
 	 * @param font
 	 *            font definition
 	 */
@@ -268,7 +268,7 @@ public class ParagraphStyleHandler extends DefaultStyleHandler {
 	 * be used to justify the script type.
 	 * <p>
 	 * If the parameter <code>font</code> is null, nothing will be happened.
-	 * 
+	 *
 	 * @param font
 	 *            font definition
 	 */
@@ -281,7 +281,7 @@ public class ParagraphStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * If the parameter <code>language</code> is null, the language information
 	 * for this script type will be removed.
-	 * 
+	 *
 	 * @param language
 	 *            - the language information
 	 * @param type
@@ -296,7 +296,7 @@ public class ParagraphStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * If the parameter <code>alignType</code> is null, the horizontal alignment
 	 * setting will be removed.
-	 * 
+	 *
 	 * @param alignType
 	 *            the horizontal alignment
 	 */
@@ -312,7 +312,7 @@ public class ParagraphStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * HorizontalAlignmentType.DEFAULT will be returned if there is no
 	 * horizontal alignment setting.
-	 * 
+	 *
 	 * @return the horizontal alignment; null if there is no horizontal
 	 *         alignment setting.
 	 */

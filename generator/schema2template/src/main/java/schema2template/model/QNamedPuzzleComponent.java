@@ -30,9 +30,9 @@ package schema2template.model;
  * all definitions have to be equally named. Calling getQName(), toString(), getLocalName() or
  * getNamespace() on a Collection of differently named definitions will throw a
  * RuntimeException.
- * For example: 
+ * For example:
  * A multiple definition of an attribute is frequently used in an XML schema.
- * 
+ *
  *
  * </li>
  * </ul>
@@ -42,10 +42,10 @@ public interface QNamedPuzzleComponent extends QNamed, PuzzleComponent {
     /**
      * ELEMENT Definition only: Determine solely by child type and name
      * whether child is mandatory.
-     * 
+     *
      * <p>Here's why we're not using the child Definition object(s) for this:
      * An element often has a mandatory attribute, but two (or more) different content definitions
-     * for this attribute. This is done by defining this attribute twice and creating a 
+     * for this attribute. This is done by defining this attribute twice and creating a
      * CHOICE between both Definitions. If you'd ask whether one of these definitions is mandatory,
      * you'd always get false as answer as you have the choice between the two definitions.
      * Mostly this is not the answer you're looking for.</p>

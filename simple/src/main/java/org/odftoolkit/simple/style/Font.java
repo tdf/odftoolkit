@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -26,7 +26,7 @@ import org.odftoolkit.odfdom.type.Color;
 /**
  * This class represents the font style settings, including font family name,
  * font style, size, front color.
- * 
+ *
  * @since 0.3
  */
 public class Font {
@@ -42,7 +42,7 @@ public class Font {
 
 	/**
 	 * Create a font with specific family name, font style, and size.
-	 * 
+	 *
 	 * @param fontFamilyName
 	 *            - the family name
 	 * @param simpleFontStyle
@@ -59,7 +59,7 @@ public class Font {
 
 	/**
 	 * Create a font with specific family name, font style, size and line position.
-	 * 
+	 *
 	 * @param fontFamilyName
 	 *            - the family name
 	 * @param simpleFontStyle
@@ -78,7 +78,7 @@ public class Font {
 
 	/**
 	 * Create a font with specific family name, style, size, and front color.
-	 * 
+	 *
 	 * @param fontFamilyName
 	 *            - the family name
 	 * @param simpleFontStyle
@@ -98,7 +98,7 @@ public class Font {
 
 	/**
 	 * Create a font with specific family name, style, size, front color and line position
-	 * 
+	 *
 	 * @param fontFamilyName
 	 *            - the family name
 	 * @param simpleFontStyle
@@ -121,7 +121,7 @@ public class Font {
 	/**
 	 * Create a font with specific family name, style, size for a specific
 	 * character. For example, a font style setting for English character.
-	 * 
+	 *
 	 * @param fontFamilyName
 	 *            - the family name
 	 * @param simpleFontStyle
@@ -142,7 +142,7 @@ public class Font {
 	 * Create a font with specific family name, style, size, and color for a
 	 * specific character. For example, a font style setting for English
 	 * character.
-	 * 
+	 *
 	 * @param fontFamilyName
 	 *            - the family name
 	 * @param simpleFontStyle
@@ -161,12 +161,12 @@ public class Font {
 		this.size = fontSize;
 		this.color = color;
 	}
-	
+
 	/**
 	 * Create a font with specific family name, style, size, color, and line position for a
 	 * specific character. For example, a font style setting for English
 	 * character.
-	 * 
+	 *
 	 * @param fontFamilyName
 	 *            - the family name
 	 * @param simpleFontStyle
@@ -191,7 +191,7 @@ public class Font {
 
 	/**
 	 * Return the font family
-	 * 
+	 *
 	 * @return the font family
 	 */
 	public String getFamilyName() {
@@ -202,7 +202,7 @@ public class Font {
 	 * Set the font family.
 	 * <p>
 	 * Font family name is what you get from the font list in ODF editors.
-	 * 
+	 *
 	 * @param familyName
 	 *            - the font family name
 	 */
@@ -215,7 +215,7 @@ public class Font {
 	 * <p>
 	 * Note the font name might be different from font family name. A font
 	 * family may have different font name definitions.
-	 * 
+	 *
 	 * @return the font name
 	 */
 	protected String getFontName() {
@@ -227,7 +227,7 @@ public class Font {
 	 * <p>
 	 * Note the font name might be different from font family name. A font
 	 * family may have different font name definitions.
-	 * 
+	 *
 	 * @param fontName
 	 *            - the font name
 	 */
@@ -237,7 +237,7 @@ public class Font {
 
 	/**
 	 * Get the font style
-	 * 
+	 *
 	 * @return the font style
 	 */
 	public StyleTypeDefinitions.FontStyle getFontStyle() {
@@ -246,7 +246,7 @@ public class Font {
 
 	/**
 	 * Set the font style
-	 * 
+	 *
 	 * @param simpleFontStyle
 	 *            - the font style
 	 */
@@ -256,7 +256,7 @@ public class Font {
 
 	/**
 	 * Get the font text line position
-	 * 
+	 *
 	 * @return the font text line position
 	 */
 	public StyleTypeDefinitions.TextLinePosition getTextLinePosition() {
@@ -265,17 +265,17 @@ public class Font {
 
 	/**
 	 * Set the font text line position
-	 * 
+	 *
 	 * @param textLinePosition
 	 *            - the font text line position
 	 */
 	public void setTextLinePosition(StyleTypeDefinitions.TextLinePosition textLinePosition) {
 		this.textLinePosition = textLinePosition;
 	}
-	
+
 	/**
 	 * Return the font size in measurement point(PT).
-	 * 
+	 *
 	 * @return - the font size in measurement point(PT)
 	 */
 	public double getSize() {
@@ -284,7 +284,7 @@ public class Font {
 
 	/**
 	 * Set the font size. The font size is in measurement point(PT).
-	 * 
+	 *
 	 * @param size
 	 *            - the font size
 	 */
@@ -315,7 +315,7 @@ public class Font {
 
 	/**
 	 * Return the font color
-	 * 
+	 *
 	 * @return the font color
 	 */
 	public Color getColor() {
@@ -324,7 +324,7 @@ public class Font {
 
 	/**
 	 * Set the font color
-	 * 
+	 *
 	 * @param color
 	 *            - the font color
 	 */

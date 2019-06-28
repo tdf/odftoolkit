@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -25,14 +25,14 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeFormsElement;
 /**
  * FormProvider provides the methods to create and get form instance in a way
  * that is implementation-independent.
- * 
+ *
  * @since 0.8
  */
 public interface FormProvider {
 
 	/**
 	 * Create a form in a way that is implementation-independent.
-	 * 
+	 *
 	 * @param name
 	 *            -the form name
 	 * @param parent
@@ -43,7 +43,7 @@ public interface FormProvider {
 
 	/**
 	 * Get a form instance by a <code>FormFormElement</code>
-	 * 
+	 *
 	 * @param element
 	 *            - a <code>FormFormElement</code>
 	 * @return a form instance

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -73,7 +73,7 @@ public class TableRowColumnTest {
 			double inValue = Math.round(roundingFactor * oldHeight / Unit.INCH.unitInMillimiter()) / roundingFactor;
 			String sHeightIN = String.valueOf(inValue) + Unit.INCH.abbr();
 			double expectedHeight = PositiveLength.parseDouble(sHeightIN, Unit.MILLIMETER);
-			
+
 			row.setHeight(oldHeight, false);
 			Assert.assertEquals(expectedHeight, row.getHeight());
 		}
@@ -97,7 +97,7 @@ public class TableRowColumnTest {
 	/**
 	 * The DecimalFormat will create the depicted "000,8571" with the comma as
 	 * separator if used in a German Locale.
-	 * 
+	 *
 	 * Within org.odftoolkit.simple.table.Column.setWith(long) there is a
 	 * getWith() call which ultimately calls
 	 * org.odftoolkit.odfdom.type.Length.parseDouble(), where
@@ -119,7 +119,7 @@ public class TableRowColumnTest {
 			Locale.setDefault(oldLocale);
 		}
 	}
-	
+
 	/**
 	 * When a repeated column without width is split up, no width attribute should be set.
 	 */
@@ -314,14 +314,14 @@ public class TableRowColumnTest {
 			table = textDocument.getFooter().addTable(1, 8);
 			columnsWidth = new long[] { 5, 19, 11, 14, 27, 12, 75, 4 };
 			setColumnsWidth(table, columnsWidth);
-			
+
 			textDocument.save(ResourceUtilities.newTestOutputFile("testColumsWidth.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	private void setColumnsWidth(Table table, long[] columnsWidth){
 		List<Column> vListColumns = table.getColumnList();
 		for (int i = 0; i < columnsWidth.length; i++) {
@@ -331,7 +331,7 @@ public class TableRowColumnTest {
 			table.getCellByPosition(i, 0).setStringValue(columnsWidth[i] + "/" + vListColumns.get(i).getWidth());
 		}
 	}
-	
+
 	private void saveods(String name) {
 		try {
 			odsdoc.save(ResourceUtilities.newTestOutputFile(filename + name + ".ods"));
@@ -347,14 +347,14 @@ public class TableRowColumnTest {
 			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
-	
+
 	@Test
 	public void testGetInstanceColumn() {
 		try {
 			Table table2 = odtdoc.getTableByName("Table1");
 			Column col = Column.getInstance(table2.getColumnByIndex(0).getOdfElement());
 			Column col1 = table2.getColumnByIndex(0);
-			
+
 			Assert.assertEquals(col, col1);
 		} catch (Exception e) {
 			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -362,7 +362,7 @@ public class TableRowColumnTest {
 		}
 	}
 
-	
+
 	@Test
 	public void testGetColumnElementByIndex() {
 		try {
@@ -371,10 +371,10 @@ public class TableRowColumnTest {
 			//Cell cell = row.getCellByIndex(0);
 			row.setHeight(4.3, true);
 			row.setUseOptimalHeight(true);
-			
+
 			boolean flag = row.isOptimalHeight();
 			Assert.assertTrue(flag);
-			
+
 		} catch (Exception e) {
 			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail();

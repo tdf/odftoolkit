@@ -91,7 +91,7 @@ public class OdfSpanTest {
 		Assert.assertEquals(Node.TEXT_NODE, node.getNodeType());
 		Assert.assertEquals(content, node.getTextContent());
 	}
-    
+
 	/**
 	 * Test of addContent method, of class OdfSpan.
 	 */

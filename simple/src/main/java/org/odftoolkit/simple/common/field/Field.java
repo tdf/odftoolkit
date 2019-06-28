@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -23,16 +23,16 @@ import org.odftoolkit.simple.Component;
 
 /**
  * This is the abstract class of all kinds of fields.
- * 
+ *
  * @see org.odftoolkit.simple.common.navigation.FieldSelection
- * 
+ *
  * @since 0.5
  */
 public abstract class Field extends Component {
-	
+
 	/**
 	 * A <tt>FieldType</tt> specifies the type of a field.
-	 * 
+	 *
 	 * @since 0.5
 	 */
 	public static enum FieldType {
@@ -55,10 +55,10 @@ public abstract class Field extends Component {
 		CONDITION_FIELD,
 		HIDDEN_TEXT_FIELD;
 	}
-	
+
 	/**
 	 * Return the type of this field.
-	 * 
+	 *
 	 * @return the type of this field.
 	 */
 	public abstract FieldType getFieldType();

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -34,7 +34,7 @@ import org.w3c.dom.Node;
 /**
  * ListItem represents an item in a list. ListItem can have text content or sub
  * List.
- * 
+ *
  * @since 0.4
  */
 public class ListItem implements ListContainer {
@@ -46,7 +46,7 @@ public class ListItem implements ListContainer {
 
 	/**
 	 * Constructor with list item element only.
-	 * 
+	 *
 	 * @param element
 	 *            the list item odf element
 	 */
@@ -56,7 +56,7 @@ public class ListItem implements ListContainer {
 
 	/**
 	 * Constructor with item content set
-	 * 
+	 *
 	 * @param element
 	 *            the list item odf element
 	 * @param content
@@ -69,7 +69,7 @@ public class ListItem implements ListContainer {
 
 	/**
 	 * Get the instance of TextListItemElement which represents this list item.
-	 * 
+	 *
 	 * @return the instance of TextListItemElement
 	 */
 	public TextListItemElement getOdfElement() {
@@ -79,7 +79,7 @@ public class ListItem implements ListContainer {
 	/**
 	 * Get item text content. If this item has a List, its content is not
 	 * included.
-	 * 
+	 *
 	 * @return the text content of this item
 	 */
 	public String getTextContent() {
@@ -95,7 +95,7 @@ public class ListItem implements ListContainer {
 
 	/**
 	 * Set item text content.
-	 * 
+	 *
 	 * @param content
 	 *            item text content.
 	 */
@@ -176,7 +176,7 @@ public class ListItem implements ListContainer {
 	 * A value can be specified that restarts numbering of a list at the current
 	 * item. This feature can only be applied to items in a list with a
 	 * numbering list style.
-	 * 
+	 *
 	 * @return the start number of this item. If there is no start number
 	 *         setting on this item or the owner list is not a numbering list,
 	 *         <code>null</code> will be returned.
@@ -194,7 +194,7 @@ public class ListItem implements ListContainer {
 	 * A value can be specified that restarts numbering of a list at the current
 	 * item. This feature can only be applied to items in a list with a
 	 * numbering list style.
-	 * 
+	 *
 	 * @param number
 	 *            the start number to be set.
 	 * @throws IllegalArgumentException if <code>number < 0</code>.
@@ -236,7 +236,7 @@ public class ListItem implements ListContainer {
 	 * style specifies that the list label is a number. This text may be used by
 	 * consumers that do not support the automatic generation of numbering but
 	 * should be ignored by consumers that do support it.
-	 * 
+	 *
 	 * @param format
 	 *            the number format to be set.
 	 */
@@ -261,7 +261,7 @@ public class ListItem implements ListContainer {
 
 	/**
 	 * Answers the index of the item in its owner list.
-	 * 
+	 *
 	 * @return index of the item.
 	 */
 	public int getIndex() {
@@ -317,7 +317,7 @@ public class ListItem implements ListContainer {
 	public OdfElement getListContainerElement() {
 		return listContainerImpl.getListContainerElement();
 	}
-	
+
 	public List addList() {
 		return listContainerImpl.addList();
 	}
@@ -325,11 +325,11 @@ public class ListItem implements ListContainer {
 	public List addList(ListDecorator decorator) {
 		return listContainerImpl.addList(decorator);
 	}
-	
+
 	public void clearList() {
 		listContainerImpl.clearList();
 	}
-	
+
 	public Iterator<List> getListIterator() {
 		return listContainerImpl.getListIterator();
 	}

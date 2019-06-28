@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -36,7 +36,7 @@ public class NumericField extends Field {
 	 * Get an instance of numeric field by an instance of
 	 * FormFormattedTextElement, while searching the document content to make a
 	 * bind with the DrawControl which already reference to this numeric field.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of FormFormattedTextElement
 	 * @return an instance of numeric field
@@ -55,7 +55,7 @@ public class NumericField extends Field {
 
 	/**
 	 * Set the decimal accuracy of the input value
-	 * 
+	 *
 	 * @param value
 	 *            - specify how many digits will be kept after the decimal point
 	 */
@@ -66,7 +66,7 @@ public class NumericField extends Field {
 
 	/**
 	 * Set the step value for the spin button.
-	 * 
+	 *
 	 * @param value
 	 *            - the step value for the spin button.
 	 */

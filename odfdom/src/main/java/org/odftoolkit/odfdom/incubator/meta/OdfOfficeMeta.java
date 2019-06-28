@@ -56,7 +56,7 @@ import org.odftoolkit.odfdom.type.Duration;
  * <code>OdfOfficeMeta</code> represent the meta data feature in the ODF document.
  * <p>
  * It provides convenient method to get meta data info.
- * 
+ *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.meta.Meta} in Simple API.
  */
 public class OdfOfficeMeta {
@@ -76,7 +76,7 @@ public class OdfOfficeMeta {
 
 	/**
 	 * Get the instance of <code>OfficeMetaElement</code> which represents this feature.
-	 * 
+	 *
 	 * @return the instance of OfficeMetaElement
 	 */
 	public OfficeMetaElement getOfficeMetaElement() {
@@ -87,7 +87,7 @@ public class OdfOfficeMeta {
 	 * Receives the value of the ODFDOM element representation
 	 * <code>MetaGeneratorElement</code> , See {@odf.element
 	 * meta:generator}.
-	 * 
+	 *
 	 * @return the generator info of the current document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -106,7 +106,7 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>MetaGeneratorElement</code> , See {@odf.element
 	 * meta:generator}.
-	 * 
+	 *
 	 * @param generator	set the specified document generator. NULL will remove the element from the meta.xml.
 	 */
 	public void setGenerator(String generator) {
@@ -127,7 +127,7 @@ public class OdfOfficeMeta {
 	/**
 	 * Receives the value of the ODFDOM element representation
 	 * <code>DcTitleElement</code> , See {@odf.element dc:title}.
-	 * 
+	 *
 	 * @return the title of the current document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -145,7 +145,7 @@ public class OdfOfficeMeta {
 	/**
 	 * Sets the value of the ODFDOM element representation
 	 * <code>DcTitleElement</code> , See {@odf.element dc:title}.
-	 * 
+	 *
 	 * @param title set the specified document title. NULL will remove the element from the meta.xml.
 	 */
 	public void setTitle(String title) {
@@ -167,7 +167,7 @@ public class OdfOfficeMeta {
 	 * Receives the value of the ODFDOM element representation
 	 * <code>DcDescriptionElement</code> , See {@odf.element
 	 * dc:description}.
-	 * 
+	 *
 	 * @return the description of the current document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -185,7 +185,7 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>DcDescriptionElement</code> , See {@odf.element
 	 * dc:description}.
-	 * 
+	 *
 	 * @param description set the specified document description. NULL will remove the element from the meta.xml.
 	 */
 	public void setDescription(String description) {
@@ -207,7 +207,7 @@ public class OdfOfficeMeta {
 	 * Receives the value of the ODFDOM element representation
 	 * <code>DcSubjectElement</code> , See {@odf.element
 	 * dc:subject}.
-	 * 
+	 *
 	 * @return the subject of the current document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -225,7 +225,7 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>DcSubjectElement</code> , See {@odf.element
 	 * dc:subject}.
-	 * 
+	 *
 	 * @param subject set the specified document subject. NULL will remove the element from the meta.xml.
 	 */
 	public void setSubject(String subject) {
@@ -247,7 +247,7 @@ public class OdfOfficeMeta {
 	 * Receives the list value of the ODFDOM element representation
 	 * <code>MetaKeywordElement</code> , See {@odf.element
 	 * meta:keyword}.
-	 * 
+	 *
 	 * @return the keywords of the current document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -275,7 +275,7 @@ public class OdfOfficeMeta {
 	 * Sets the list value of the ODFDOM element representation
 	 * <code>MetaKeywordElement</code> , See {@odf.element
 	 * meta:keyword}.
-	 * 
+	 *
 	 * @param keyList set the specified list of keywords
 	 */
 	public void setKeywords(List<String> keyList) {
@@ -308,7 +308,7 @@ public class OdfOfficeMeta {
 	/**
 	 * Add the keyword to the current document.
 	 * Create child element {@odf.element meta:keyword}.
-	 * 
+	 *
 	 * @param keyword	the value of child element {@odf.element
 	 *            meta:keyword}.
 	 */
@@ -321,7 +321,7 @@ public class OdfOfficeMeta {
 	 * Receives the list value of the ODFDOM element representation
 	 * <code>MetaUserDefinedElement</code> , See {@odf.element
 	 * meta:user-defined}.
-	 * 
+	 *
 	 * @return get the list of user-defined metadata names;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -351,7 +351,7 @@ public class OdfOfficeMeta {
 	 * Receives the ODFDOM element representation
 	 * <code>MetaUserDefinedElement</code> by attribute name, See {@odf.element
 	 *  meta:user-defined}.
-	 * 
+	 *
 	 * @param name	the name of the user-defined metadata
 	 * @return	the <code>MetaUserDefinedElement</code> which is identified by the specified name;
 	 * <p>
@@ -385,7 +385,7 @@ public class OdfOfficeMeta {
 	 * Receives the value of the ODFDOM element representation
 	 * <code>MetaUserDefinedElement</code> by attribute name, See {@odf.element
 	 *  meta:user-defined}.
-	 * 
+	 *
 	 * @param name	the name of the user-defined metadata
 	 * @return the value of the user-defined metadata with the specified name;
 	 * <p>
@@ -403,7 +403,7 @@ public class OdfOfficeMeta {
 	 * Receives the data type of the ODFDOM element representation
 	 * <code>MetaUserDefinedElement</code> by attribute name, See {@odf.element
 	 *  meta:user-defined}.
-	 * 
+	 *
 	 * @param name	the name of the user-defined metadata
 	 * @return the data type of the user-defined metadata with the specified name;
 	 * <p>
@@ -421,7 +421,7 @@ public class OdfOfficeMeta {
 	 * Remove the ODFDOM element representation
 	 * <code>MetaUserDefinedElement</code> by attribute name, See {@odf.element
 	 *  meta:user-defined}.
-	 * 
+	 *
 	 * @param name	the name of the user-defined metadata
 	 */
 	public void removeUserDefinedDataByName(String name) {
@@ -436,7 +436,7 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>MetaUserDefinedElement</code> by attribute name, See {@odf.element
 	 *  meta:user-defined}.
-	 * 
+	 *
 	 * @param name	the name need to set for the user-defined metadata
 	 * @param value  the value need to set for the user-defined metadata
 	 */
@@ -451,7 +451,7 @@ public class OdfOfficeMeta {
 	 * Sets the data type of the ODFDOM element representation
 	 * <code>MetaUserDefinedElement</code> by attribute name, See {@odf.element
 	 *  meta:user-defined}.
-	 * 
+	 *
 	 * @param name	the name need to set for the user-defined metadata
 	 * @param value  the value need to set for the user-defined metadata
 	 */
@@ -469,7 +469,7 @@ public class OdfOfficeMeta {
 	 * meta:user-defined} if the element with the attribute name exists,then
 	 * update;or create a new element if type or value is null,the original will
 	 * not be updated.
-	 * 
+	 *
 	 * @param name	the name need to set for the user-defined metadata
 	 * @param type	the data type need to set for the user-defined metadata
 	 * @param value	the value need to set for the user-defined metadata
@@ -499,7 +499,7 @@ public class OdfOfficeMeta {
 	 * Receives the value of the ODFDOM element representation
 	 * <code>MetaInitialCreatorElement</code> , See {@odf.element
 	 * meta:initial-creator}.
-	 * 
+	 *
 	 * @return get the initial creator of the current document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -517,7 +517,7 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>MetaInitialCreatorElement</code> , See {@odf.element
 	 * meta:initial-creator}.
-	 * 
+	 *
 	 * @param initialCreator set the specified initial creator. NULL will remove the element from the meta.xml.
 	 */
 	public void setInitialCreator(String initialCreator) {
@@ -539,7 +539,7 @@ public class OdfOfficeMeta {
 	 * Receives the value of the ODFDOM element representation
 	 * <code>DcCreatorElement</code> , See {@odf.element
 	 * dc:creator}
-	 * 
+	 *
 	 * @return the creator of the current document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -557,7 +557,7 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>DcCreatorElement</code> , See {@odf.element
 	 * dc:creator}.
-	 * 
+	 *
 	 * @param creator set the specified creator. NULL will remove the element from the meta.xml.
 	 */
 	public void setCreator(String creator) {
@@ -579,7 +579,7 @@ public class OdfOfficeMeta {
 	 * Receives the value of the ODFDOM element representation
 	 * <code>MetaPrintedByElement</code> , See {@odf.element
 	 * meta:printed-by}
-	 * 
+	 *
 	 * @return the name of the last person who printed the current document;
 	 * <p>
 	 * <code>null</code>, if element is not set
@@ -597,7 +597,7 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>MetaPrintedByElement</code> , See {@odf.element
 	 * meta:printed-by}.
-	 * 
+	 *
 	 * @param printedBy	the name need to set for the last person who printed the current document. NULL will remove the element from the meta.xml.
 	 */
 	public void setPrintedBy(String printedBy) {
@@ -619,7 +619,7 @@ public class OdfOfficeMeta {
 	 * Receives the value of the ODFDOM element representation
 	 * <code>MetaCreationDateElement</code> , See {@odf.element
 	 * meta:creation-date}
-	 * 
+	 *
 	 * @return the date and time when the document was created initially;
 	 * <p>
 	 * <code>null</code>, if element is not set
@@ -637,7 +637,7 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>MetaCreationDateElement</code> , See {@odf.element
 	 * meta:creation-date}.
-	 * 
+	 *
 	 * @param creationDate	the date and time need to set. NULL will remove the element from the meta.xml.
 	 */
 	public void setCreationDate(Calendar creationDate) {
@@ -658,7 +658,7 @@ public class OdfOfficeMeta {
 	/**
 	 * Receives the value of the ODFDOM element representation
 	 * <code>DcDateElement</code> , See {@odf.element dc:date}.
-	 * 
+	 *
 	 * @return the date and time when the document was last modified;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -675,7 +675,7 @@ public class OdfOfficeMeta {
 	/**
 	 * Sets the value of the ODFDOM element representation
 	 * <code>DcDateElement</code> , See {@odf.element dc:date}.
-	 * 
+	 *
 	 * @param date	the date and time need to set. NULL will remove the element from the meta.xml.
 	 */
 	public void setDate(Calendar date) {
@@ -697,7 +697,7 @@ public class OdfOfficeMeta {
 	 * Receives the value of the ODFDOM element representation
 	 * <code>MetaPrintDateElement</code> , See {@odf.element
 	 * meta:print-date}.
-	 * 
+	 *
 	 * @return the date and time when the document was last printed;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -715,7 +715,7 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>MetaPrintDateElement</code> , See {@odf.element
 	 * meta:print-date}.
-	 * 
+	 *
 	 * @param printDate	the date and time need to set. NULL will remove the element from the meta.xml.
 	 */
 	public void setPrintDate(Calendar printDate) {
@@ -737,7 +737,7 @@ public class OdfOfficeMeta {
 	 * Receives the value of the ODFDOM element representation
 	 * <code>DcLanguageElement</code> , See {@odf.element
 	 * dc:language}.
-	 * 
+	 *
 	 * @return the default language of the document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -755,7 +755,7 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>DcLanguageElement</code> , See {@odf.element
 	 * dc:language}.
-	 * 
+	 *
 	 * @param language the default language need to set fo the current document. NULL will remove the element from the meta.xml.
 	 */
 	public void setLanguage(String language) {
@@ -777,7 +777,7 @@ public class OdfOfficeMeta {
 	 * Receives the value of the ODFDOM element representation
 	 * <code>MetaEditingCyclesElement</code> , See {@odf.element
 	 * meta:editing-cycles}.
-	 * 
+	 *
 	 * @return the number of times that the document has been edited;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -795,7 +795,7 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>MetaEditingCyclesElement</code> , See {@odf.element
 	 * meta:editing-cycles}.
-	 * 
+	 *
 	 * @param editingCycles	set the specified edit times. NULL will remove the element from the meta.xml.
 	 */
 	public void setEditingCycles(Integer editingCycles) {
@@ -817,7 +817,7 @@ public class OdfOfficeMeta {
 	 * Receives the value of the ODFDOM element representation
 	 * <code>MetaEditingDurationElement</code> , See {@odf.element
 	 *  meta:editing-duration}.
-	 * 
+	 *
 	 * @return the total time spent editing the document;
 	 * <p>
 	 * <code>null</code>, if the element is not set.
@@ -835,7 +835,7 @@ public class OdfOfficeMeta {
 	 * Sets the value of the ODFDOM element representation
 	 * <code>MetaEditingDurationElement</code> , See {@odf.element
 	 *  meta:editing-duration}.
-	 * 
+	 *
 	 * @param editingDuration the time need to set. NULL will remove the element from the meta.xml.
 	 */
 	public void setEditingDuration(Duration editingDuration) {
@@ -855,8 +855,8 @@ public class OdfOfficeMeta {
 
 	/**
 	 * Receives the sub feature of OdfMetaDocumentStatistic.
-	 * 
-	 * @return the statistics about the document which can be represented by 
+	 *
+	 * @return the statistics about the document which can be represented by
 	 * <code>OdfMetaDocumentStatistic</code> feature;
 	 * <p>
 	 * <code>null</code>, if the feature is not exist.
@@ -872,7 +872,7 @@ public class OdfOfficeMeta {
 
 	/**
 	 * Receives the OdfMetaHyperlinkBehaviour feature.
-	 * 
+	 *
 	 * @return the default behavior of hyperlinks in the current document
 	 * which can be represented by <code>OdfMetaHyperlinkBehaviour</code> feature;
 	 * <p>
@@ -889,7 +889,7 @@ public class OdfOfficeMeta {
 
 	/**
 	 * Receives the OdfMetaAutoReload feature.
-	 * 
+	 *
 	 * @return the information whether the document is reloaded or replaced by another document
 	 * after a certain period of time has elapsed.
 	 * <p>
@@ -908,7 +908,7 @@ public class OdfOfficeMeta {
 
 	/**
 	 * Receives the OdfMetaTemplate feature.
-	 * 
+	 *
 	 * @return the information specified the URL for the document that was used to create a document.
 	 * <p>
 	 * It can be represented by <code>OdfMetaTemplate</code> feature;
@@ -946,7 +946,7 @@ public class OdfOfficeMeta {
 
 	/**
 	 * Change valid string of calendar to Calendar type.
-	 * 
+	 *
 	 * @param baseDate the string of a calender
 	 * @return the object of Calender
 	 */

@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -44,7 +44,7 @@ public enum OdfPackageConstraint implements ValidationConstraint {
 	/** A file shall not be listed in the \"/META-INF/manifest.xml\" file as it does not exist in the ODF package. */
 	MANIFEST_LISTS_NONEXISTENT_FILE("The file '%2$s' shall not be listed in the '" + OdfFile.MANIFEST.getPath() + "' file as it does not exist in the ODF package%1$s!"),
 	/** A file shall be listed in the \"/META-INF/manifest.xml\" file as it exists in the ODF package. */
-	MANIFEST_DOES_NOT_LIST_FILE("The file '%2$s' shall be listed in the '" + OdfFile.MANIFEST.getPath() + "' file as it exists in the ODF package%1$s!"),	
+	MANIFEST_DOES_NOT_LIST_FILE("The file '%2$s' shall be listed in the '" + OdfFile.MANIFEST.getPath() + "' file as it exists in the ODF package%1$s!"),
 	/** The ODF package contains a \"mediatype\" file, which content differs from the mediatype of the root document!" */
 	MIMETYPE_DIFFERS_FROM_PACKAGE("The ODF package%1$s contains a '" + OdfFile.MEDIA_TYPE.getPath() + "' file containing '%2$s', which differs from the mediatype of the root document '%3$s'!"),
 	/** The ODF package contains a \"mediatype\" file, but no mediatype its root document in the \"/META-INF/manifest.xml\" file of ODF package! */

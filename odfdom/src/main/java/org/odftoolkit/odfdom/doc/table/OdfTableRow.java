@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -59,7 +59,7 @@ import org.w3c.dom.Node;
  * OdfTableRow represents table row feature in ODF document.
  * <p>
  * OdfTableRow provides methods to get table cells that belong to this table row.
- * 
+ *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.table.Row} in Simple API.
  */
 public class OdfTableRow {
@@ -86,7 +86,7 @@ public class OdfTableRow {
 	 * Get the <code>OdfTableRow</code> instance from the <code>TableTableRowElement</code> instance.
 	 * <p>
 	 * Each <code>TableTableRowElement</code> instance has a one-to-one relationship to a <code>OdfTableRow</code> instance.
-	 * 
+	 *
 	 * @param rowElement	the row element that need to get the corresponding <code>OdfTableRow</code> instance
 	 * @return the <code>OdfTableRow</code> instance represent the specified row element
 	 */
@@ -116,7 +116,7 @@ public class OdfTableRow {
 
 	/**
 	 * Get the <code>TableTableElement</code>  who contains this row.
-	 * 
+	 *
 	 * @return the table element that contains the row.
 	 */
 	private TableTableElement getTableElement() {
@@ -145,7 +145,7 @@ public class OdfTableRow {
 	/**
 	 * Return the height of the row (in Millimeter).
 	 * <p>
-	 * Return the minimal height, if the row height is not set, 
+	 * Return the minimal height, if the row height is not set,
 	 * @return the height of the current row (in Millimeter).
 	 */
 	public long getHeight() {
@@ -209,7 +209,7 @@ public class OdfTableRow {
 
 	/**
 	 * Return if the row always keeps its optimal height.
-	 * @return 
+	 * @return
 	 * 			true if the row always keeps its optimal height;
 	 * 			vice versa
 	 */
@@ -237,7 +237,7 @@ public class OdfTableRow {
 	/**
 	 * Get a cell with a specific index. The table will be automatically
 	 * expanded, when the given index is outside of the original table.
-	 * 
+	 *
 	 * @param index
 	 *            the cell index in this row
 	 * @return the cell object in the given cell index
@@ -367,7 +367,7 @@ public class OdfTableRow {
 		}
 
 		Node aNextNode = maRowElement.getNextSibling();
-		Node aCurNode = maRowElement;		
+		Node aCurNode = maRowElement;
 		TableTableRowElement firstRow;
 		while (true) {
 			if (aNextNode == null) {
@@ -445,7 +445,7 @@ public class OdfTableRow {
 
 	/**
 	 * Return the index of this row in the owner table.
-	 * 
+	 *
 	 * @return the index of the row
 	 */
 	public int getRowIndex() {
@@ -525,7 +525,7 @@ public class OdfTableRow {
 
 	/****************************
 	 * Moved from OdfTable
-	 * 
+	 *
 	 */
 	private void insertCellElementBefore(OdfElement parentEle, TableTableCellElementBase positionEle, TableTableCellElementBase cellEle, int count) {
 		if (positionEle == null) {
@@ -732,7 +732,7 @@ public class OdfTableRow {
 
 	private void reviseStyleFromLastColumnToMedium(OdfTableCell oldLastCell) {
 		if (getTable().mIsSpreadsheet) return;
-		
+
 		OdfStyle styleEle = oldLastCell.getCellStyleElementForWrite();
 		if (styleEle != null) {
 			if (oldLastCell.getRowIndex() == 0) {
@@ -745,7 +745,7 @@ public class OdfTableRow {
 
 	private void reviseStyleFromMediumColumnToLast(OdfTableCell newLastCell) {
 		if (getTable().mIsSpreadsheet) return;
-		
+
 		OdfStyle styleEle = newLastCell.getCellStyleElementForWrite();
 		if (styleEle != null) {
 			if (newLastCell.getRowIndex() == 0) {
@@ -758,8 +758,8 @@ public class OdfTableRow {
 
 	/**
 	 * This method is invoked by removeColumnByIndex
-	 * So we don't need to care about 
-	 * the covered and spanned cell in a same column 
+	 * So we don't need to care about
+	 * the covered and spanned cell in a same column
 	 */
 	void removeCellByIndex(int nStart, int nCount) {
 		splitRepeatedRows();

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -137,7 +137,7 @@ public class PageLayoutPropertiesTest {
 			Assert.fail();
 		}
 	}
-	
+
 	@Test
 	public void testGetSetMax() {
 		try {
@@ -172,7 +172,7 @@ public class PageLayoutPropertiesTest {
 			Assert.assertEquals(LineStyle.DASH_BOLD.toString(), master.getFootnoteSepLineStyle());
 			Assert.assertEquals(0.15, master.getFootnoteSepWidth());
 			Assert.assertEquals(9.9996, master.getFootnoteSepThickness());
-			
+
 			master.setFootnoteSepProperties(null, null, 0, 0, null, null, 0);
 			Assert.assertEquals(AdjustmentStyle.LEFT.toString(),master.getFootnoteSepAdjustment());
 			Assert.assertNull(master.getFootnoteSepColor());
@@ -181,7 +181,7 @@ public class PageLayoutPropertiesTest {
 			Assert.assertEquals(LineStyle.NONE.toString(),master.getFootnoteSepLineStyle());
 			Assert.assertEquals(0.0, master.getFootnoteSepWidth());
 			Assert.assertEquals(0.0,master.getFootnoteSepThickness());
-			
+
 
 		} catch (Exception e) {
 			Logger.getLogger(PageLayoutPropertiesTest.class.getName()).log(

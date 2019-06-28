@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -29,7 +29,7 @@ public class CURIE implements OdfDataType {
 
 	private String mCURIE;
 	private static final Pattern curiePattern = Pattern.compile("^(([\\i-[:]][\\c-[:]]*)?:)?.+$");
-	
+
 	/**
 	 * Construct CURIE by the parsing the given string
 	 *

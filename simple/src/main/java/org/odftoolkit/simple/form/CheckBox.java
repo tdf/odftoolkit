@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -34,7 +34,7 @@ import org.odftoolkit.simple.form.FormTypeDefinition.FormCheckboxState;
 /**
  * This class represents the form control of Check Box, provides methods to
  * get/set the form properties and the style formatting of this control.
- * 
+ *
  * @since 0.8
  */
 public class CheckBox extends FormControl {
@@ -48,7 +48,7 @@ public class CheckBox extends FormControl {
 	 * Get an instance of check box by an instance of FormCheckboxElement, while
 	 * searching the document content to make a bind with the DrawControl which
 	 * already reference to this check box.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of FormCheckboxElement
 	 * @return an instance of check box
@@ -91,7 +91,7 @@ public class CheckBox extends FormControl {
 
 	/**
 	 * Set the label content of this check box
-	 * 
+	 *
 	 * @param label
 	 *            - the label of this check box
 	 */
@@ -101,7 +101,7 @@ public class CheckBox extends FormControl {
 
 	/**
 	 * Get the label content of this check box
-	 * 
+	 *
 	 * @param label
 	 *            - the label of this check box
 	 */
@@ -122,7 +122,7 @@ public class CheckBox extends FormControl {
 	/**
 	 * Set the default value of this control, it will be override by current
 	 * value.
-	 * 
+	 *
 	 * @param value
 	 *            - the default value
 	 */
@@ -134,7 +134,7 @@ public class CheckBox extends FormControl {
 	/**
 	 * Get the default value of this control, it will be override by current
 	 * value.
-	 * 
+	 *
 	 * @return the default value
 	 */
 	public String getValue() {
@@ -144,7 +144,7 @@ public class CheckBox extends FormControl {
 
 	/**
 	 * Set the default state of this check box
-	 * 
+	 *
 	 * @param state
 	 *            - default state of this check box
 	 */
@@ -155,7 +155,7 @@ public class CheckBox extends FormControl {
 
 	/**
 	 * Get the default state of this check box
-	 * 
+	 *
 	 * @return default state of this check box
 	 */
 	public FormCheckboxState getDefaultState() {
@@ -165,7 +165,7 @@ public class CheckBox extends FormControl {
 
 	/**
 	 * Set current state of this check box
-	 * 
+	 *
 	 * @param state
 	 *            - current state of this check box
 	 */
@@ -176,7 +176,7 @@ public class CheckBox extends FormControl {
 
 	/**
 	 * Get current state of this check box
-	 * 
+	 *
 	 * @return current state of this check box
 	 */
 	public FormCheckboxState getCurrentState() {
@@ -187,7 +187,7 @@ public class CheckBox extends FormControl {
 
 	/**
 	 * Get a simple iterator for check boxes.
-	 * 
+	 *
 	 * @param container
 	 *            - an instance of form where to traverse the check boxes
 	 */

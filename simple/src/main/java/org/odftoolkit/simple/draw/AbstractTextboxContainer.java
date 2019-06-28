@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -37,7 +37,7 @@ import org.w3c.dom.DOMException;
  * TextboxContainer interface, with a default implementation for every method
  * defined in TextboxContainer, except getFrameContainerElement(). A subclass
  * must implement the abstract method getFrameContainerElement().
- * 
+ *
  * @since 0.5
  */
 public abstract class AbstractTextboxContainer extends AbstractFrameContainer implements TextboxContainer {
@@ -49,7 +49,7 @@ public abstract class AbstractTextboxContainer extends AbstractFrameContainer im
 
 	/**
 	 * Remove the text box.
-	 * 
+	 *
 	 * @param box
 	 *            - the text box to be removed
 	 * @return true if the text box is removed successfully, false if errors
@@ -81,7 +81,7 @@ public abstract class AbstractTextboxContainer extends AbstractFrameContainer im
 
 	/**
 	 * Return a text box whose name is a given value.
-	 * 
+	 *
 	 * @param name
 	 *            - the name of the text box
 	 * @return a text box whose name is a given value
@@ -106,7 +106,7 @@ public abstract class AbstractTextboxContainer extends AbstractFrameContainer im
 	 * <p>
 	 * This method will return a list of text boxs by the usage defined in
 	 * presentation slides.
-	 * 
+	 *
 	 * @param usage
 	 *            - the usage description
 	 * @return a list of text box Null will be returned if the owner document is

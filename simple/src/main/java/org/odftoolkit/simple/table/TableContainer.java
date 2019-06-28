@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -27,11 +27,11 @@ import org.odftoolkit.simple.table.Table.TableBuilder;
 /**
  * TableContainer is a container which maintains Table(s) as element(s).
  * Table(s) can be added, removed and iterated in this container.
- * 
+ *
  * @see Table
  * @see org.odftoolkit.simple.TextDocument
  * @see org.odftoolkit.simple.SpreadsheetDocument
- * 
+ *
  * @since 0.4.5
  */
 public interface TableContainer {
@@ -47,14 +47,14 @@ public interface TableContainer {
 	 * TableContainer, which holds Table with the help of its grand-child
 	 * element <draw:text-box>, so for Notes, DrawTextBoxElement should be
 	 * return.
-	 * 
+	 *
 	 * @return container element which can hold <text:table>.
 	 */
 	public OdfElement getTableContainerElement();
 
 	/**
 	 * Add a new Table to this container.
-	 * 
+	 *
 	 * @return added table.
 	 */
 	public Table addTable();
@@ -66,7 +66,7 @@ public interface TableContainer {
 	 * The table will be inserted at the end of the tableContainer. An unique
 	 * table name will be given, you may set a custom table name using the
 	 * <code>setTableName</code> method.
-	 * 
+	 *
 	 * @param numRows
 	 *            the row number
 	 * @param numCols
@@ -77,7 +77,7 @@ public interface TableContainer {
 
 	/**
 	 * Return an instance of table feature with the specific table name.
-	 * 
+	 *
 	 * @param name
 	 *            of the table being searched for.
 	 * @return an instance of table feature with the specific table name.
@@ -86,7 +86,7 @@ public interface TableContainer {
 
 	/**
 	 * Return a list of table features in this document.
-	 * 
+	 *
 	 * @return a list of table features in this document.
 	 */
 	public List<Table> getTableList();
@@ -95,7 +95,7 @@ public interface TableContainer {
 	 * Return the table builder of this document. Every document has a table
 	 * builder, which supplies all of the table creation realization, for
 	 * example newTable().
-	 * 
+	 *
 	 * @return the table builder of this document.
 	 */
 	public TableBuilder getTableBuilder();

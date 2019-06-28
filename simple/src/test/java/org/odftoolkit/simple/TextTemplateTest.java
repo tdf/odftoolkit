@@ -28,7 +28,7 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 
 /**
  * Test class for template aspects of calc documents.
- * 
+ *
  * @author <a href="mailto:fhopf@odftoolkit.org">Florian Hopf</a>
  */
 public class TextTemplateTest {

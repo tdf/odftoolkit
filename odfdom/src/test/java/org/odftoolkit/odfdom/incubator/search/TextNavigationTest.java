@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -36,7 +36,7 @@ import org.odftoolkit.odfdom.incubator.doc.text.OdfWhitespaceProcessor;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**
- * Test the method of class org.odftoolkit.odfdom.incubator.search.TextNavigation 
+ * Test the method of class org.odftoolkit.odfdom.incubator.search.TextNavigation
  */
 public class TextNavigationTest {
 

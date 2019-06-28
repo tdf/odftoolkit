@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -53,7 +53,7 @@ public class DataTypeTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 	@Test
 	public void testBase64() {
 		// Base64Binary
@@ -62,16 +62,16 @@ public class DataTypeTest {
 		LOG.info("bytes:" + bytes.length);
 		Assert.assertTrue(Base64Binary.isValid("KWy1spZbKcHOunnKMB6dVA=="));
 	}
-	
+
 	@Test
-	public void testCellAddress() {		
+	public void testCellAddress() {
 		// CellAddress
 		CellAddress cellAddress = new CellAddress("Sheet1.A3");
 		Assert.assertEquals(cellAddress.toString(), "Sheet1.A3");
 		Assert.assertFalse(CellAddress.isValid("33"));
 		Assert.assertTrue(CellAddress.isValid("$.$Z11"));
 	}
-	
+
 	@Test
 	public void testCellRangeAddress() {
 		// CellRangeAddress
@@ -80,7 +80,7 @@ public class DataTypeTest {
 				"$(first).8:$(second).19");
 		CellRangeAddress cellRangeAddress3 = new CellRangeAddress("$.$8:$.19");
 		Assert.assertTrue(CellRangeAddress.isValid("$Sheet1.B12:$Sheet1.E35"));
-		
+
 		// CellRangeAddressList
 		CellRangeAddressList addressList = CellRangeAddressList.valueOf(cellRangeAddress1.toString() + " " + cellRangeAddress2.toString());
 		Assert.assertEquals(addressList.getCellRangesAddressList().get(0).toString(), cellRangeAddress1.toString());
@@ -92,7 +92,7 @@ public class DataTypeTest {
 			Assert.assertNull(addressList2);
 		}
 	}
-	
+
 	@Test
 	public void testColor() {
 		// Color
@@ -129,7 +129,7 @@ public class DataTypeTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
-	
+
 	@Test
 	public void testDateTime() {
 		// DateOrDateTime
@@ -150,7 +150,7 @@ public class DataTypeTest {
 		DateOrDateTime time3 = new DateOrDateTime(aFactory.newXMLGregorianCalendar(calendar));
 		Assert.assertNotNull(time3.getXMLGregorianCalendar());
 	}
-	
+
 	@Test
 	public void testStyle() {
 		// StyleName,StyleNameRef,StyleNameList
@@ -174,7 +174,7 @@ public class DataTypeTest {
 		styleList = StyleNameRefs.valueOf("").getStyleNameRefList();
 		Assert.assertTrue(styleList.size() == 0);
 	}
-	
+
 	@Test
 	public void testItegerPercent() {
 		// Integer,Percent
@@ -185,7 +185,7 @@ public class DataTypeTest {
 		Percent percent1 = Percent.valueOf("30.0%");
 		Assert.assertTrue(percent1.doubleValue() == percent.doubleValue());
 	}
-	
+
 	@Test
 	public void testMeasurement() {
 		// Measurement
@@ -206,7 +206,7 @@ public class DataTypeTest {
 		} catch (NumberFormatException ex) {
 			Assert.assertNull(pixelLength1);
 		}
-		
+
 		// make sure Units are resolved correctly
 		Unit unit = Length.parseUnit("cm");
 		Assert.assertEquals(Unit.CENTIMETER, unit);

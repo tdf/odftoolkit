@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -25,7 +25,7 @@ import org.odftoolkit.simple.common.field.VariableField.VariableType;
 
 /**
  * This is a tool class to help the user creating all kinds of fields as needed.
- * 
+ *
  * @see org.odftoolkit.simple.common.navigation.FieldSelection
  * @since 0.5
  */
@@ -34,7 +34,7 @@ public class Fields {
 	/**
 	 * Create an automatically update date field for the specific OdfElement,
 	 * which displays current date.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @return the created date field.
@@ -48,7 +48,7 @@ public class Fields {
 	/**
 	 * Create a fixed date field for the specific OdfElement, which displays the
 	 * field created date.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @return the created date field.
@@ -60,7 +60,7 @@ public class Fields {
 	/**
 	 * Create an automatically update time field for the specific OdfElement,
 	 * which displays current time.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @return the created time field.
@@ -74,7 +74,7 @@ public class Fields {
 	/**
 	 * Create a fixed time field for the specific OdfElement, which displays the
 	 * field created time.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @return the created time field.
@@ -86,7 +86,7 @@ public class Fields {
 	/**
 	 * Create a page number field for the specific OdfElement, which displays
 	 * previous page number.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @return the created page number field.
@@ -100,7 +100,7 @@ public class Fields {
 	/**
 	 * Create a page number field for the specific OdfElement, which displays
 	 * current page number.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @return the created page number field.
@@ -112,7 +112,7 @@ public class Fields {
 	/**
 	 * Create a page number field for the specific OdfElement, which displays
 	 * next page number.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @return the created page number field.
@@ -126,7 +126,7 @@ public class Fields {
 	/**
 	 * Create a page count field for the specific OdfElement, which displays
 	 * page total count of this document.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @return the created page count field.
@@ -138,7 +138,7 @@ public class Fields {
 	/**
 	 * Create a title field for the specific OdfElement, which displays title
 	 * data of this document.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @return the created title field.
@@ -150,7 +150,7 @@ public class Fields {
 	/**
 	 * Create a subject field for the specific OdfElement, which displays the
 	 * subject data of this document.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @return the created author field.
@@ -162,7 +162,7 @@ public class Fields {
 	/**
 	 * Create an author field for the specific OdfElement, which displays author
 	 * full name of this document.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @return the created author field.
@@ -174,7 +174,7 @@ public class Fields {
 	/**
 	 * Create an author field for the specific OdfElement, which displays the
 	 * initials of the author of this document.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @return the created author field.
@@ -185,7 +185,7 @@ public class Fields {
 
 	/**
 	 * Create a chapter field for the specific OdfElement.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @return the created chapter field.
@@ -196,7 +196,7 @@ public class Fields {
 
 	/**
 	 * Create a ReferenceField for the specific OdfElement.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @param referenceName
@@ -213,7 +213,7 @@ public class Fields {
 	 * <p>
 	 * Simple variables can be used to display different text in recurring
 	 * elements, such as headers or footers.
-	 * 
+	 *
 	 * @param container
 	 *            the container which this variable field is contained.
 	 * @param name
@@ -229,7 +229,7 @@ public class Fields {
 	 * throughout a document. If a user variable is set anywhere within the
 	 * document, all fields in the document that display the user variable have
 	 * the same value.
-	 * 
+	 *
 	 * @param container
 	 *            the container which this variable field is contained.
 	 * @param name
@@ -249,7 +249,7 @@ public class Fields {
 	 * text string or another. If the condition is true, one of the text strings
 	 * is displayed. If the condition is false, the other text string is
 	 * displayed.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @param condition
@@ -271,7 +271,7 @@ public class Fields {
 	/**
 	 * Declare a hidden text field, which hides the text it contains when a
 	 * specified condition is true.
-	 * 
+	 *
 	 * @param odfElement
 	 *            the OdfElement which owns this field.
 	 * @param condition

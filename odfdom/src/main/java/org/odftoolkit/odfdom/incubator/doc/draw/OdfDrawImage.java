@@ -48,7 +48,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * Convenient functionalty for the parent ODF OpenDocument element
- * 
+ *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.draw.Image} in Simple API.
  */
 public class OdfDrawImage extends DrawImageElement {
@@ -90,7 +90,7 @@ public class OdfDrawImage extends DrawImageElement {
 	 * @param packagePath The relative path from the package root to the image
 	 */
 	public void setImagePath(String packagePath) {
-		try {			
+		try {
 			packagePath = packagePath.replaceFirst(mOdfSchemaDocument.getDocumentPath(), "");
 			URI uri = new URI(AnyURI.encodePath(packagePath).toString());
 			this.setXlinkHrefAttribute(AnyURI.decodePath(uri.toString()));
@@ -120,7 +120,7 @@ public class OdfDrawImage extends DrawImageElement {
 		OdfDrawFrame odfFrame = (OdfDrawFrame) this.getParentNode();
 		if (odfFrame != null) {
 			BufferedImage image = ImageIO.read(is);
-			// some image formats like SVG might not be understood by ImageIO			
+			// some image formats like SVG might not be understood by ImageIO
 			if (image != null)
 			{
 				int height = image.getHeight(null);

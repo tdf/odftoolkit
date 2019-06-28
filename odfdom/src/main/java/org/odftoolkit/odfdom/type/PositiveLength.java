@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
  */
 public class PositiveLength extends Length {
 	private static final Pattern positiveLengthPattern = Pattern.compile("^([0-9]*[1-9][0-9]*(\\.[0-9]*)?|0+\\.[0-9]*[1-9][0-9]*|\\.[0-9]*[1-9][0-9]*)((cm)|(mm)|(in)|(pt)|(pc)|(px))$");
-	
+
 	/**
 	 * Construct PositiveLength by the parsing the given string
 	 *

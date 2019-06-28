@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -29,7 +29,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
  * Abstract class Selection describe one of the matched results The selection
  * can be recognized by the container mElement, the start mIndex of the text
  * content of this mElement and the text content.
- * 
+ *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.navigation.Selection} in Simple API.
  */
 public abstract class Selection {
@@ -47,7 +47,7 @@ public abstract class Selection {
 
 	/**
 	 * get the start mIndex of the text content of the container mElement
-	 * this is only meaningful for TextSelection. other type Selection 
+	 * this is only meaningful for TextSelection. other type Selection
 	 * will return 0.
 	 * @return the start mIndex of the container mElement
 	 */
@@ -57,21 +57,21 @@ public abstract class Selection {
 
 	/**
 	 * cut the current selection
-	 * @throws InvalidNavigationException 
+	 * @throws InvalidNavigationException
 	 */
 	abstract public void cut() throws InvalidNavigationException;
 
 	/**
 	 * paste the current selection at front of the specified position selection
 	 * @param positionitem	the position selection
-	 * @throws InvalidNavigationException 
+	 * @throws InvalidNavigationException
 	 */
 	abstract public void pasteAtFrontOf(Selection positionitem) throws InvalidNavigationException;
 
 	/**
 	 * paste the current selection at end of the specified position selection
 	 * @param positionitem	the position selection
-	 * @throws InvalidNavigationException 
+	 * @throws InvalidNavigationException
 	 */
 	abstract public void pasteAtEndOf(Selection positionitem) throws InvalidNavigationException;
 

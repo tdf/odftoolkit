@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -109,7 +109,7 @@ public class TextBoxTest {
 		}
 
 	}
-	
+
 	private int countAllTextbox(TextDocument doc) {
 		int count = 0;
 		Iterator<Paragraph> pIter = doc.getParagraphIterator();
@@ -124,8 +124,8 @@ public class TextBoxTest {
 		}
 		return count;
 	}
-	
-	
+
+
 	@Test
 	public void testClearContent() {
 		String content = "welcome to text box";
@@ -144,8 +144,8 @@ public class TextBoxTest {
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testaddListListDecorator() {
 		try {
@@ -162,18 +162,18 @@ public class TextBoxTest {
 			List list1 = leftTextbox.addList();
 			list1.addItem("Test outline1");
 			list1.addItem("Test outline2");
-			
+
 			//
 			Textbox rightTextbox = boxList.get(1);
 			Assert.assertNotNull(rightTextbox);
-			
+
 			ListDecorator decorator = new NumberDecorator(presentDoc);
 			rightTextbox.setBackgroundColor(Color.RED);
 			List list2 = rightTextbox.addList(decorator);
 			list2.addItem("test one");
 			list2.addItem("test two");
 			list2.addItem("test three");
-			
+
 			//save
 			presentDoc.save(ResourceUtilities.newTestOutputFile("abc.odp"));
 		} catch (Exception e) {
@@ -181,8 +181,8 @@ public class TextBoxTest {
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testClearList() {
 		try {
@@ -206,7 +206,7 @@ public class TextBoxTest {
 			//
 			Textbox rightTextbox = boxList.get(1);
 			Assert.assertNotNull(rightTextbox);
-			
+
 			ListDecorator decorator = new NumberDecorator(presentDoc);
 			rightTextbox.setBackgroundColor(Color.RED);
 			List list2 = rightTextbox.addList(decorator);
@@ -216,7 +216,7 @@ public class TextBoxTest {
 			rightTextbox.clearList();
 			Iterator iterator = rightTextbox.getListIterator();
 			Assert.assertEquals(false, iterator.hasNext());
-			
+
 			//save
 			presentDoc.save(ResourceUtilities.newTestOutputFile("abc.odp"));
 		} catch (Exception e) {
@@ -224,8 +224,8 @@ public class TextBoxTest {
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetListContainerElement() {
 		try {
@@ -245,7 +245,7 @@ public class TextBoxTest {
 			//
 			Textbox rightTextbox = boxList.get(1);
 			Assert.assertNotNull(rightTextbox);
-			
+
 			ListDecorator decorator = new NumberDecorator(presentDoc);
 			rightTextbox.setBackgroundColor(Color.RED);
 			List list2 = rightTextbox.addList(decorator);
@@ -256,17 +256,17 @@ public class TextBoxTest {
 				Node node = nodes.item(i);
 				Assert.assertEquals("test AAA", node.getTextContent());
 			}
-			
+
 			//save
 			presentDoc.save(ResourceUtilities.newTestOutputFile("abc.odp"));
 		} catch (Exception e) {
 			Logger.getLogger(TextBoxTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail();
 		}
-		
+
 	}
-	
-	
+
+
 	@Test
 	public void testGetListIterator() {
 		try {
@@ -287,7 +287,7 @@ public class TextBoxTest {
 			//
 			Textbox rightTextbox = boxList.get(1);
 			Assert.assertNotNull(rightTextbox);
-			
+
 			ListDecorator decorator = new NumberDecorator(presentDoc);
 			rightTextbox.setBackgroundColor(Color.RED);
 			List list2 = rightTextbox.addList();
@@ -300,17 +300,17 @@ public class TextBoxTest {
 				Assert.assertEquals("test AAA", list.getItem(0).toString());
 				Assert.assertEquals("test BBB", list.getItem(1).toString());
 			}
-			
+
 			//save
 			presentDoc.save(ResourceUtilities.newTestOutputFile("abc.odp"));
 		} catch (Exception e) {
 			Logger.getLogger(TextBoxTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail();
 		}
-		
+
 	}
-	
-	
+
+
 	@Test
 	public void testRemoveList() {
 		try {
@@ -331,26 +331,26 @@ public class TextBoxTest {
 			//
 			Textbox rightTextbox = boxList.get(1);
 			Assert.assertNotNull(rightTextbox);
-			
+
 			ListDecorator decorator = new NumberDecorator(presentDoc);
 			rightTextbox.setBackgroundColor(Color.RED);
 			List list2 = rightTextbox.addList();
 			list2.addItem("test AAA");
 			list2.addItem("test BBB");
-			
+
 			rightTextbox.removeList(list2);
 			Iterator iterator = rightTextbox.getListIterator();
 			Assert.assertFalse(iterator.hasNext());
-			
+
 			//save
 			presentDoc.save(ResourceUtilities.newTestOutputFile("abc.odp"));
 		} catch (Exception e) {
 			Logger.getLogger(TextBoxTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail();
 		}
-		
+
 	}
-	
-	
+
+
 }
 

@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -29,7 +29,7 @@ public class Points implements OdfDataType {
 
 	private String mPoints;
 	private static final Pattern pointsPattern = Pattern.compile("^-?[0-9]+,-?[0-9]+([ ]+-?[0-9]+,-?[0-9]+)*$");
-	
+
 	/**
 	 * Construct Points by the parsing the given string
 	 *

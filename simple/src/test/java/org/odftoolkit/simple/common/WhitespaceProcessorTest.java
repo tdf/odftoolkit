@@ -3,7 +3,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -41,7 +41,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- * 
+ *
  * @author J David Eisenberg
  */
 public class WhitespaceProcessorTest {

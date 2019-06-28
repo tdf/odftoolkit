@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -44,7 +44,7 @@ import org.odftoolkit.simple.Document;
 /**
  * This class represents the form control of Field, provides methods to get/set
  * the form properties and the style formatting of this control.
- * 
+ *
  * @since 0.8
  */
 public class Field extends FormControl {
@@ -58,7 +58,7 @@ public class Field extends FormControl {
 	 * Get an instance of field by an instance of FormFormattedTextElement,
 	 * while searching the document content to make a bind with the DrawControl
 	 * which already reference to this field.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of FormFormattedTextElement
 	 * @return an instance of field
@@ -133,7 +133,7 @@ public class Field extends FormControl {
 	/**
 	 * Set the default value of this control, it will be override by current
 	 * value.
-	 * 
+	 *
 	 * @param value
 	 *            - default value
 	 */
@@ -144,7 +144,7 @@ public class Field extends FormControl {
 
 	/**
 	 * Get the default value of this control
-	 * 
+	 *
 	 * @return default value
 	 */
 	public String getValue() {
@@ -154,7 +154,7 @@ public class Field extends FormControl {
 
 	/**
 	 * Set the current value of this control, it override the default value.
-	 * 
+	 *
 	 * @param currentValue
 	 *            - current value
 	 */
@@ -165,7 +165,7 @@ public class Field extends FormControl {
 
 	/**
 	 * Get the current value of this control
-	 * 
+	 *
 	 * @return current value
 	 */
 	public String getCurrentValue() {
@@ -175,7 +175,7 @@ public class Field extends FormControl {
 
 	/**
 	 * Set the visibility of the spin button
-	 * 
+	 *
 	 * @param isVisible
 	 *            - true means the spin button is visible; false means the spin
 	 *            button is hidden
@@ -189,11 +189,11 @@ public class Field extends FormControl {
 	 * Set the format string of the field.
 	 * <p>
 	 * This function only works for float, date, time and percentage, otherwise an
-	 * {@link java.lang.IllegalArgumentException} will be thrown. 
+	 * {@link java.lang.IllegalArgumentException} will be thrown.
 	 * <p>
-	 * For value type float and percentage, the <code>formatStr</code> must follow the encoding 
+	 * For value type float and percentage, the <code>formatStr</code> must follow the encoding
 	 * rule of {@link java.text.DecimalFormat <code>java.text.DecimalFormat</code>}.
-	 * For value type date and time, the <code>formatStr</code> must follow the encoding 
+	 * For value type date and time, the <code>formatStr</code> must follow the encoding
 	 * rule of {@link java.text.SimpleDateFormat <code>java.text.SimpleDateFormat</code>}.
 	 * <p>
 	 * <blockquote>
@@ -280,7 +280,7 @@ public class Field extends FormControl {
 
 	/**
 	 * Get the format string of the field.
-	 * 
+	 *
 	 * @return the format string of the field
 	 */
 	public String getFormatString(OfficeValueTypeAttribute.Value typeValue) {
@@ -391,7 +391,7 @@ public class Field extends FormControl {
 
 	/**
 	 * Get a simple iterator for Field.
-	 * 
+	 *
 	 * @param container
 	 *            - an instance of form where to traverse the date fields
 	 */

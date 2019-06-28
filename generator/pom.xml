@@ -86,9 +86,9 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <attach>true</attach>
                     <additionalOptions>
-					    <additionalOption>${javadoc.opts}</additionalOption>
+                        <additionalOption>${javadoc.opts}</additionalOption>
                     </additionalOptions>
-					<bottom>${javadoc.bottom}</bottom>					
+                    <bottom>${javadoc.bottom}</bottom>
                 </configuration>
                 <executions>
                     <execution>
@@ -101,10 +101,11 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>           
+            </plugin>
             <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
+                <version>0.13</version>
             </plugin>
         </plugins>
     </build>
@@ -114,7 +115,7 @@
         <module>schema2template</module>
         <module>schema2template-maven-plugin</module>
     </modules>
-    
+
     <!-- More Project Information -->
     <name>XML Schema to Template Mapping Tool: Parent POM</name>
     <description>Parent project for XML Schema to Template Mapping Tool</description>

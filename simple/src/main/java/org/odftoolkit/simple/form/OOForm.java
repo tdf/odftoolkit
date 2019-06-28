@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -44,9 +44,9 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.AnchorType;
 /**
  * This class implements the interface of Form according to the implementation
  * of OpenOffice.org.
- * 
+ *
  * @since 0.8
- * 
+ *
  */
 public class OOForm extends Component implements Form {
 
@@ -81,7 +81,7 @@ public class OOForm extends Component implements Form {
 
 	/**
 	 * Get a form instance by an instance of <code>FormFormElement</code>.
-	 * 
+	 *
 	 * @param element
 	 * @return
 	 */
@@ -358,7 +358,7 @@ public class OOForm extends Component implements Form {
 
 	/**
 	 * Create a time field in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -368,7 +368,7 @@ public class OOForm extends Component implements Form {
 	 * @param defaultValue
 	 *            - the default value of this input field. It's a 6 digits
 	 *            number, e.g. 20121015 represents 2012-10-15.
-	 * 
+	 *
 	 * @return an instance of time field
 	 */
 	public FormControl createDateField(ControlContainer parent,
@@ -379,7 +379,7 @@ public class OOForm extends Component implements Form {
 
 	/**
 	 * Create a time field in this form.
-	 * 
+	 *
 	 * @param parent
 	 *            - the element that contains this form control
 	 * @param rectangle
@@ -389,7 +389,7 @@ public class OOForm extends Component implements Form {
 	 * @param defaultValue
 	 *            - the default value of this input field. It's a 6 digits
 	 *            number, e.g. 15304000 represents 15:30:40.
-	 * 
+	 *
 	 * @return an instance of time field
 	 */
 	public FormControl createTimeField(ControlContainer parent,

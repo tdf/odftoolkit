@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -155,7 +155,7 @@ public class FontTest {
 	// public void setFont(Font font);
 	//
 	// public String getFontFamilyName(Document.ScriptType type);
-	
+
 	@Test
 	public void testNewFont1() {
 		try {
@@ -165,10 +165,10 @@ public class FontTest {
 			Cell cell = table.getCellByPosition("A1");
 			cell.setFont(font);
 			cell.setStringValue("Hello world .");
-			
+
 			//save
 			document.save(ResourceUtilities.newTestOutputFile("testFontOutput1.ods"));
-			
+
 			//validate
 			SpreadsheetDocument doc = SpreadsheetDocument.loadDocument(ResourceUtilities
 					.getTestResourceAsStream("testFontOutput1.ods"));
@@ -178,14 +178,14 @@ public class FontTest {
 			Assert.assertEquals(font.getFamilyName(), font1.getFamilyName());
 			Assert.assertEquals(font.getSize(), font1.getSize());
 			Assert.assertEquals(font.getFontStyle(), font1.getFontStyle());
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testNewFont2() {
 		try {
@@ -195,10 +195,10 @@ public class FontTest {
 			Cell cell = table.getCellByPosition("A1");
 			cell.setFont(font);
 			cell.setStringValue("Hello world .");
-			
+
 			//save
 			document.save(ResourceUtilities.newTestOutputFile("testFontOutput1.ods"));
-			
+
 			//validate
 			SpreadsheetDocument doc = SpreadsheetDocument.loadDocument(ResourceUtilities
 					.getTestResourceAsStream("testFontOutput1.ods"));
@@ -210,14 +210,14 @@ public class FontTest {
 			Assert.assertEquals(font.getFontStyle(), font1.getFontStyle());
 			Assert.assertEquals(font.getColor().toString(), font1.getColor().toString());
 			Assert.assertEquals(font, font1);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testNewFont3() {
 		try {
@@ -227,10 +227,10 @@ public class FontTest {
 			Cell cell = table.getCellByPosition("A1");
 			cell.setFont(font);
 			cell.setStringValue("Hi World.");
-			
+
 			//save
 			document.save(ResourceUtilities.newTestOutputFile("testFontOutput1.ods"));
-			
+
 			//validate
 			SpreadsheetDocument doc = SpreadsheetDocument.loadDocument(ResourceUtilities
 					.getTestResourceAsStream("testFontOutput1.ods"));
@@ -242,14 +242,14 @@ public class FontTest {
 			Assert.assertEquals(font.getFontStyle(), font1.getFontStyle());
 			Assert.assertEquals(font.getTextLinePosition(), font1.getTextLinePosition());
 		//	Assert.assertEquals(font, font1);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testNewFont4() {
 		try {
@@ -259,10 +259,10 @@ public class FontTest {
 			Cell cell = table.getCellByPosition("A1");
 			cell.setFont(font);
 			cell.setStringValue("Hi World.");
-			
+
 			//save
 			document.save(ResourceUtilities.newTestOutputFile("testFontOutput1.ods"));
-			
+
 			//validate
 			SpreadsheetDocument doc = SpreadsheetDocument.loadDocument(ResourceUtilities
 					.getTestResourceAsStream("testFontOutput1.ods"));
@@ -275,14 +275,14 @@ public class FontTest {
 			Assert.assertEquals(font.getTextLinePosition(), font1.getTextLinePosition());
 			Assert.assertEquals(font.getColor().toString(), font1.getColor().toString());
 			Assert.assertEquals(font, font1);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testNewFont5() {
 		try {
@@ -292,10 +292,10 @@ public class FontTest {
 			Cell cell = table.getCellByPosition("A1");
 			cell.setFont(font);
 			cell.setStringValue("Hi World.");
-			
+
 			//save
 			document.save(ResourceUtilities.newTestOutputFile("testFontOutput1.ods"));
-			
+
 			//validate
 			SpreadsheetDocument doc = SpreadsheetDocument.loadDocument(ResourceUtilities
 					.getTestResourceAsStream("testFontOutput1.ods"));
@@ -308,14 +308,14 @@ public class FontTest {
 			Assert.assertEquals(font.getTextLinePosition(), font1.getTextLinePosition());
 			Assert.assertEquals(font.getColor().toString(), font1.getColor().toString());
 			Assert.assertEquals(font, font1);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testEquals() {
 		try {
@@ -325,24 +325,24 @@ public class FontTest {
 			Cell cell = table.getCellByPosition("A1");
 			cell.setFont(font);
 			cell.setStringValue("Hi World.");
-			
+
 			//save
 			document.save(ResourceUtilities.newTestOutputFile("testFontOutput1.ods"));
-			
+
 			//validate
 			SpreadsheetDocument doc = SpreadsheetDocument.loadDocument(ResourceUtilities
 					.getTestResourceAsStream("testFontOutput1.ods"));
 			Table table1 = doc.getTableByName("Sheet1");
 			Cell cell1 = table1.getCellByPosition("A1");
 			Font font1 = cell1.getFont();
-			
+
 			Assert.assertTrue(font.equals(font1));
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-	
-	
+
+
 }

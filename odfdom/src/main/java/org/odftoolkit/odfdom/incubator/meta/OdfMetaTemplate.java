@@ -27,7 +27,7 @@ import org.odftoolkit.odfdom.dom.element.meta.MetaTemplateElement;
 /**
  * <code>OdfMetaTemplate</code> feature specified the URL for the document that
  * was used to create a document.
- * 
+ *
  */
 
 // TODO: the functions are not completed.
@@ -37,7 +37,7 @@ public class OdfMetaTemplate {
 
 	/**
 	 * Constructor of <code>OdfMetaTemplate</code> feature.
-	 * 
+	 *
 	 * @param element
 	 *            an instance of ODF Element <code>MetaTemplateElement</code>
 	 */
@@ -48,7 +48,7 @@ public class OdfMetaTemplate {
 	/**
 	 * Return the instance of ODF Element <code>MetaTemplateElement</code> which
 	 * represents this feature.
-	 * 
+	 *
 	 * @return the instance of ODF Element <code>MetaTemplateElement</code>
 	 */
 	public MetaTemplateElement getMetaTemplateElement() {

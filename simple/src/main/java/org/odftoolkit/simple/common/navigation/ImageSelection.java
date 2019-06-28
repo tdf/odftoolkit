@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -41,7 +41,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * This is a decorator class of TextSelection, which help user replace a text content with a Image from Document or from URI.
- * 
+ *
  */
 public class ImageSelection extends Selection {
 
@@ -49,12 +49,12 @@ public class ImageSelection extends Selection {
 	private DrawFrameElement imageContainer;
 
 	private boolean mIsInserted;
-	
+
 	/**
 	 * Replace the content with a Image
-	 * 
+	 *
 	 * @param image the reference Image to replace.
-	 *   
+	 *
 	 * @return the new Image in the TextDocument,the image name is set to "replace" + System.currentTimeMillis(), please update the name to others by yourself.
 	 *
 	 */
@@ -67,7 +67,7 @@ public class ImageSelection extends Selection {
 		mIsInserted = false;
 		OdfElement parentElement = textSelection.getContainerElement();
 		OdfFileDom ownerDom = (OdfFileDom) parentElement.getOwnerDocument();
-		
+
 			int nodeLength = TextExtractor.getText(
 					this.textSelection.getContainerElement()).length();
 			if (this.textSelection.getText().length() != nodeLength)
@@ -108,12 +108,12 @@ public class ImageSelection extends Selection {
 		}
 		}
 		return mImage;
-	}	
+	}
 	/**
 	 * Replace the content with a Image
-	 * 
+	 *
 	 * @param imageUri the URI of the reference Image to replace
-	 *   
+	 *
 	 * @return the new Image in the TextDocument,the image name is set to "replace" + System.currentTimeMillis(), please update the name to others by yourself
 	 *
 	 */
@@ -159,13 +159,13 @@ public class ImageSelection extends Selection {
 			mImage = Image.getInstanceof(imageElement);
 			mImage.getStyleHandler().setAchorType(AnchorType.AS_CHARACTER);
 			mImage.setName("replace" + System.currentTimeMillis());
-			
+
 		} catch (Exception e) {
 			Logger.getLogger(ImageSelection.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			}
 		}
 		return mImage;
-	}	
+	}
 	/*
 	 * Delete the <code>pNode<code> from the <code>fromIndex</code> text, and
 	 * delete <code>leftLength</code> text.
@@ -245,7 +245,7 @@ public class ImageSelection extends Selection {
 	/**
 	 * Construct a ImageSelection with TextSelection. Then user can replace text
 	 * content with Image from Document or Image form System
-	 * 
+	 *
 	 * @param selection
 	 *            the TextSelection to be decorated.
 	 */
@@ -260,7 +260,7 @@ public class ImageSelection extends Selection {
 	 * same container element will be updated automatically because the start
 	 * index of the following selections will be changed when the previous
 	 * selection has been deleted.
-	 * 
+	 *
 	 * @throws InvalidNavigationException
 	 *             if the selection is unavailable.
 	 */
@@ -271,7 +271,7 @@ public class ImageSelection extends Selection {
 
 	/**
 	 * Paste this selection just after a specific selection.
-	 * 
+	 *
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException
@@ -281,11 +281,11 @@ public class ImageSelection extends Selection {
 	public void pasteAtEndOf(Selection positionItem) throws InvalidNavigationException {
 		textSelection.pasteAtEndOf(positionItem);
 	}
-	
+
 
 	/**
 	 * Paste this selection just before a specific selection.
-	 * 
+	 *
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException
@@ -307,7 +307,7 @@ public class ImageSelection extends Selection {
 	protected void refreshAfterFrontalInsert(Selection insertedItem) {
 		textSelection.refreshAfterFrontalInsert(insertedItem);
 	}
-	
+
 	private void insertOdfElement(OdfElement odfElement, int fromIndex, Node pNode) {
 		if (fromIndex < 0) {
 			fromIndex = 0;

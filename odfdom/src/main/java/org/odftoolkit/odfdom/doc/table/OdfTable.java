@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -71,7 +71,7 @@ import org.w3c.dom.NodeList;
  * OdfTable represents the table feature in ODF spreadsheet and text documents.
  * <p>
  * OdfTable provides methods to get/add/delete/modify table column/row/cell.
- * 
+ *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.table.Table} in Simple API.
  */
 public class OdfTable {
@@ -105,7 +105,7 @@ public class OdfTable {
 
 	/**
 	 * Get a table feature instance by an instance of <code>TableTableElement</code>.
-	 * 
+	 *
 	 * @param odfElement	an instance of <code>TableTableElement</code>
 	 * @return an instance of <code>OdfTable</code> that can represent <code>odfElement</code>
 	 */
@@ -256,15 +256,15 @@ public class OdfTable {
 	/**
 	 * Get the width of the table (in Millimeter).
 	 * <p>
-	 * Throw an UnsupportedOperationException if the 
+	 * Throw an UnsupportedOperationException if the
 	 * table is one sheet of a spreadsheet document.
 	 * because the sheet doesn't have an attribute of table width.
-	 * 
+	 *
 	 * @return the width of the current table (in Millimeter).
 	 * <p>
 	 * An UnsupportedOperationException will be thrown if the table is in the spreadsheet document.
 	 */
-	public long getWidth() {	
+	public long getWidth() {
 		if (!mIsSpreadsheet) {
 			String sWidth = mTableElement.getProperty(OdfTableProperties.Width);
 			if(sWidth == null){
@@ -285,10 +285,10 @@ public class OdfTable {
 	/**
 	 * Set the width of the table (in Millimeter).
 	 * <p>
-	 * Throw an UnsupportedOperationException if the 
+	 * Throw an UnsupportedOperationException if the
 	 * table is part of a spreadsheet document that does not allow to change the table size,
 	 * because spreadsheet is not allow user to set the table size.
-	 * 
+	 *
 	 * @param width	the width that need to set (in Millimeter).
 	 * <p>
 	 * An UnsupportedOperationException will be thrown if the table is in the spreadsheet document.
@@ -339,8 +339,8 @@ public class OdfTable {
 	}
 
 	private static TableTableElement createTable(OdfElement parent, int numRows, int numCols, int headerRowNumber, int headerColumnNumber) throws Exception {
-		
-		
+
+
 		// check arguments
 		if (numRows < 1 || numCols < 1 || headerRowNumber < 0
 				|| headerColumnNumber < 0 || headerRowNumber > numRows
@@ -355,7 +355,7 @@ public class OdfTable {
 		}else if(dom instanceof OdfStylesDom){
 			styles = ((OdfStylesDom) dom).getAutomaticStyles();
 		}
-		
+
 		//1. create table element
 		TableTableElement newTEle = (TableTableElement) OdfXMLFactory.newOdfElement(dom,
 				OdfName.newName(OdfDocumentNamespace.TABLE, "table"));
@@ -399,13 +399,13 @@ public class OdfTable {
 		if (!document.getMediaTypeString().equals(OdfMediaType.SPREADSHEET.getMediaTypeString())) {
 			lefttopStyle = styles.newStyle(OdfStyleFamily.TableCell);
 			setLeftTopBorderStyleProperties(lefttopStyle);
-	
+
 			leftbottomStyle = styles.newStyle(OdfStyleFamily.TableCell);
 			setLeftBottomBorderStylesProperties(leftbottomStyle);
-	
+
 			righttopStyle = styles.newStyle(OdfStyleFamily.TableCell);
 			setRightTopBorderStyleProperties(righttopStyle);
-	
+
 			rightbottomStyle = styles.newStyle(OdfStyleFamily.TableCell);
 			setRightBottomBorderStylesProperties(rightbottomStyle);
 		}
@@ -499,7 +499,7 @@ public class OdfTable {
 	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
 	 * <p>
 	 * If the document is a text document, cell borders will be created by default.
-	 * 
+	 *
 	 * @param tableParent the ODF element the new table will be appended to
 	 * @return the created <code>OdfTable</code> feature instance
 	 */
@@ -571,7 +571,7 @@ public class OdfTable {
 	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
 	 * <p>
 	 * If the document is a text document, cell borders will be created by default.
-	 * 
+	 *
 	 * @param tableParent	the ODF element the new table will be appended to
 	 * @param numRows	the row number
 	 * @param numCols	the column number
@@ -583,7 +583,7 @@ public class OdfTable {
 			tableParent.appendChild(newTEle);
 
 			return OdfTable.getInstance(newTEle);
-		
+
 		} catch (Exception e) {
 			Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
@@ -623,7 +623,7 @@ public class OdfTable {
 	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
 	 * <p>
 	 * If the document is a text document, cell borders will be created by default.
-	 * 
+	 *
 	 * @param tableParent the ODF element the new table will be appended to
 	 * @param numRows	the row number
 	 * @param numCols	the column number
@@ -683,7 +683,7 @@ public class OdfTable {
 	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
 	 * <p>
 	 * If the document is a text document, cell borders will be created by default.
-	 * 
+	 *
 	 * @param tableParent	the ODF document that contains this feature
 	 * @param rowLabel	set as the header row, it can be null if no header row needed
 	 * @param columnLabel	set as the header column, it can be null if no header column needed
@@ -785,7 +785,7 @@ public class OdfTable {
 	 * An unique table name will be given, you may set a custom table name using the <code>setTableName</code> method.
 	 * <p>
 	 * If the document is a text document, cell borders will be created by default.
-	 * 
+	 *
 	 * @param tableParent the ODF element the new table will be appended to
 	 * @param rowLabel	set as the header row, it can be null if no header row needed
 	 * @param columnLabel	set as the header column, it can be null if no header column needed
@@ -883,7 +883,7 @@ public class OdfTable {
 
 	/**
 	 * Get the row count of this table.
-	 * 
+	 *
 	 * @return total count of rows
 	 */
 	public int getRowCount() {
@@ -902,7 +902,7 @@ public class OdfTable {
 
 	/**
 	 * Get the column count of this table.
-	 * 
+	 *
 	 * @return total count of columns
 	 */
 	public int getColumnCount() {
@@ -928,11 +928,11 @@ public class OdfTable {
 		//3. create row elements
 		//3.0 create 4 kinds of styles
 		OdfStyle lefttopStyle=null,righttopStyle=null;
-		
+
 		if (!mIsSpreadsheet) {
 			lefttopStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
 			setLeftTopBorderStyleProperties(lefttopStyle);
-	
+
 			righttopStyle = mTableElement.getAutomaticStyles().newStyle(OdfStyleFamily.TableCell);
 			setRightTopBorderStyleProperties(righttopStyle);
 		}
@@ -967,7 +967,7 @@ public class OdfTable {
 	 * outside the current table is addressed the table is instantly expanded.
 	 * Method <code>getCellByPosition</code> can randomly access any cell, no
 	 * matter it in or out of the table original range.
-	 * 
+	 *
 	 * @return a new appended row
 	 * @see #appendRows(int)
 	 * @see #getRowByIndex(int)
@@ -993,13 +993,13 @@ public class OdfTable {
 
 	/**
 	 * Append a specific number of rows to the end of the table. The style of
-	 * new rows are same with the last row in the table. 
+	 * new rows are same with the last row in the table.
 	 * <p>
 	 * Since ODFDOM 8.5 automatic table expansion is supported. Whenever a cell
 	 * outside the current table is addressed the table is instantly expanded.
 	 * Method <code>getCellByPosition</code> can randomly access any cell, no
 	 * matter it in or out of the table original range.
-	 * 
+	 *
 	 * @param rowCount  is the number of rows to be appended.
 	 * @return a list of new appended rows
 	 * @see #appendRow()
@@ -1045,7 +1045,7 @@ public class OdfTable {
 	 * outside the current table is addressed the table is instantly expanded.
 	 * Method <code>getCellByPosition</code> can randomly access any cell, no
 	 * matter it in or out of the table original range.
-	 * 
+	 *
 	 * @return a new appended column
 	 * @see #appendColumns(int)
 	 * @see #getColumnByIndex(int)
@@ -1061,17 +1061,17 @@ public class OdfTable {
 		if (positonElement.getParentNode() instanceof TableTableHeaderRowsElement) {
 			positonElement = (OdfElement) positonElement.getParentNode();
 		}
-		
+
 		//Moved before column elements inserted
 		//insert cells firstly
 		//Or else, wrong column number will be gotten in updateCellRepository, which will cause a NPE.
-		//insertCellBefore()->splitRepeatedRows()->updateRowRepository()->updateCellRepository() 
+		//insertCellBefore()->splitRepeatedRows()->updateRowRepository()->updateCellRepository()
 		List<OdfTableRow> rowList = getRowList();
 		for (int i = 0; i < rowList.size();) {
 			OdfTableRow row1 = rowList.get(i);
 			row1.insertCellBefore(row1.getCellByIndex(columnCount - 1), null);
 			i = i + row1.getRowsRepeatedNumber();
-		}		
+		}
 
 		//insert columns secondly
 		if (columnList.size() == 0) //no column, create a new column
@@ -1097,13 +1097,13 @@ public class OdfTable {
 
 	/**
 	 * Append a specific number of columns to the right of the table. The style
-	 * of new columns are same with the rightmost column in the table. 
+	 * of new columns are same with the rightmost column in the table.
 	 * <p>
 	 * Since ODFDOM 8.5 automatic table expansion is supported. Whenever a cell
 	 * outside the current table is addressed the table is instantly expanded.
 	 * Method <code>getCellByPosition</code> can randomly access any cell, no
 	 * matter it in or out of the table original range.
-	 * 
+	 *
 	 * @param columnCount is the number of columns to be appended.
 	 * @return a list of new appended columns
 	 * @see #appendColumn()
@@ -1136,12 +1136,12 @@ public class OdfTable {
 					cellElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
 				}
 			}
-		}		
+		}
 		return resultList;
 	}
 
 	/**
-	 * This method is to insert a numbers of row  
+	 * This method is to insert a numbers of row
 	 */
 	private List<OdfTableRow> insertMultipleRowBefore(OdfTableRow refRow, OdfTableRow positionRow, int count) {
 		List<OdfTableRow> resultList = new ArrayList<OdfTableRow>();
@@ -1256,16 +1256,16 @@ public class OdfTable {
 
 	/**
 	 * Return an instance of <code>TableTableElement</code> which represents this feature.
-	 * 
+	 *
 	 * @return an instance of <code>TableTableElement</code>
 	 */
 	public TableTableElement getOdfElement() {
 		return mTableElement;
 	}
 
-	/** 
+	/**
 	 * Insert a specific number of columns before the column whose index is <code>index</code>.
-	 * 
+	 *
 	 * @param index	is the index of the column to insert before.
 	 * @param columnCount	is the number of columns to insert.
 	 * @return a list of new inserted columns
@@ -1338,9 +1338,9 @@ public class OdfTable {
 		return list;
 	}
 
-	/** 
+	/**
 	 * Remove a specific number of columns, starting from the column at <code>index</code>.
-	 * 
+	 *
 	 * @param startIndex
 	 * 				is the index of the first column to delete.
 	 * @param deleteColCount
@@ -1415,7 +1415,7 @@ public class OdfTable {
 			return;
 		}
 		int length = getColumnCount();
-		
+
 		for (int i = 0; i < length;) {
 			OdfTableCell cell = newTopRow.getCellByIndex(i);
 			if (cell.isCoveredElement()) {
@@ -1434,7 +1434,7 @@ public class OdfTable {
 
 	/**
 	 * Insert a specific number of rows before the row at <code>index</code>.
-	 * 
+	 *
 	 * @param index	is the index of the row to insert before.
 	 * @param rowCount	is the number of rows to insert.
 	 * @return a list of new inserted rows
@@ -1491,7 +1491,7 @@ public class OdfTable {
 
 	/**
 	 * Return a list of columns in the current table.
-	 * 
+	 *
 	 * @return a list of table columns
 	 */
 	public List<OdfTableColumn> getColumnList() {
@@ -1521,7 +1521,7 @@ public class OdfTable {
 
 	/**
 	 * Return a list of table rows in the current table.
-	 * 
+	 *
 	 * @return a list of table rows
 	 */
 	public List<OdfTableRow> getRowList() {
@@ -1552,7 +1552,7 @@ public class OdfTable {
 	/**
 	 * Get the column at the specified index. The table will be automatically
 	 * expanded, when the given index is outside of the original table.
-	 * 
+	 *
 	 * @param index
 	 *            the zero-based index of the column.
 	 * @return the column at the specified index
@@ -1624,7 +1624,7 @@ public class OdfTable {
 	/**
 	 * Get the row at the specified index. The table will be automatically
 	 * expanded, when the given index is outside of the original table.
-	 * 
+	 *
 	 * @param index
 	 *            the zero-based index of the row.
 	 * @return the row at the specified index
@@ -1662,9 +1662,9 @@ public class OdfTable {
 		return null;
 	}
 
-	/** 
+	/**
 	 * Remove the specific number of rows, starting from the row at <code>index</code>.
-	 * 
+	 *
 	 * @param startIndex	is the zero-based index of the first row to delete.
 	 * @param deleteRowCount	is the number of rows to delete.
 	 */
@@ -1735,7 +1735,7 @@ public class OdfTable {
 
 	/**
 	 * Return the number of header rows in this table.
-	 * 
+	 *
 	 * @return the number of header rows.
 	 */
 	public int getHeaderRowCount() {
@@ -1759,7 +1759,7 @@ public class OdfTable {
 
 	/**
 	 * Return the number of header columns in the table.
-	 * 
+	 *
 	 * @return the number of header columns.
 	 */
 	public int getHeaderColumnCount() {
@@ -1769,7 +1769,7 @@ public class OdfTable {
 
 	/**
 	 * Return the table name.
-	 * 
+	 *
 	 * @return the table name
 	 */
 	public String getTableName() {
@@ -1778,12 +1778,12 @@ public class OdfTable {
 
 	/**
 	 * Set the table name.
-	 * 
+	 *
 	 * @param tableName the table name
 	 * @throws IllegalArgumentException if the tableName is duplicate with one of tables in the current document
 	 */
 	public void setTableName(String tableName) {
-		//check if the table name is already exist 		
+		//check if the table name is already exist
 		List<OdfTable> tableList = mDocument.getTableList();
 		for(int i=0;i<tableList.size();i++){
 			OdfTable table = tableList.get(i);
@@ -1791,14 +1791,14 @@ public class OdfTable {
 				if(table != this) {
 					throw new IllegalArgumentException("The table name is duplicate with one of tables in the current document.");
 				}
-			}	
-		}		
+			}
+		}
 		mTableElement.setTableNameAttribute(tableName);
 	}
 
 	/**
 	 * Return true if the table is protected.
-	 * 
+	 *
 	 * @return true if the table is protected
 	 */
 	public boolean isProtected() {
@@ -1816,7 +1816,7 @@ public class OdfTable {
 	public void setProtected(boolean isProtected) {
 		mTableElement.setTableProtectedAttribute(isProtected);
 	}
-	
+
 	/**
 	 * Return true if cell style is inherited when a new cell is added to the
 	 * table.
@@ -1836,10 +1836,10 @@ public class OdfTable {
 	 * <code>getRowByIndex()</code> and <code>getColumnByIndex()</code>, if need
 	 * automatically expand cells, it will return empty cell(s) without any
 	 * style settings. So inheritance setting have no effect on them.
-	 * 
+	 *
 	 * @return true if cell style is inherited when a new cell is added to the
 	 *         table.
-	 * 
+	 *
 	 * @see #setCellStyleInheritance(boolean)
 	 * @see #appendColumn()
 	 * @see #appendColumns(int)
@@ -1876,11 +1876,11 @@ public class OdfTable {
 	 * <code>getRowByIndex()</code> and <code>getColumnByIndex()</code>, if need
 	 * automatically expand cells, it will return empty cell(s) without any
 	 * style settings. So inheritance setting have no effect on them.
-	 * 
+	 *
 	 * @param isEnabled
 	 *            if<code>isEnabled</code> is true, cell style will be inherited
 	 *            by new cell.
-	 *            
+	 *
 	 * @see #isCellStyleInheritance()
 	 * @see #appendColumn()
 	 * @see #appendColumns(int)
@@ -1903,7 +1903,7 @@ public class OdfTable {
 	/**
 	 * Return a range of cells within the specified range. The table will be
 	 * automatically expanded as need.
-	 * 
+	 *
 	 * @param startCol
 	 *            the column index of the first cell inside the range.
 	 * @param startRow
@@ -1932,7 +1932,7 @@ public class OdfTable {
 	 * alphabetic value representing the column, and a numeric value
 	 * representing the row. The table name can be omitted. For example:
 	 * "$Sheet1.A1", "Sheet1.A1" and "A1" are all valid cell address.
-	 * 
+	 *
 	 * @param startAddress
 	 *            the cell address of the first cell inside the range.
 	 * @param endAddress
@@ -1950,11 +1950,11 @@ public class OdfTable {
 	/**
 	 * Return a range of cells by a specified name.
 	 * <p>
-	 * After you get a cell range with <code>getCellRangeByPosition</code>,  
+	 * After you get a cell range with <code>getCellRangeByPosition</code>,
 	 * you can assign a name to this cell range with the method <code>setCellRangeName<code> in class <code>OdfTableCellRange</code>.
 	 * Then you will get a <b>named range</b> which can be represented by name.
 	 * This method can be used to get a named range.
-	 * 
+	 *
 	 * @param name	the name of the specified named range
 	 * @return	the specified cell range.
 	 */
@@ -1977,9 +1977,9 @@ public class OdfTable {
 	}
 
 	/**
-	 * Return a single cell that is positioned at the specified column and row. 
+	 * Return a single cell that is positioned at the specified column and row.
 	 * The table will be automatically expanded as need.
-	 * 
+	 *
 	 * @param colIndex  the column index of the cell.
 	 * @param rowIndex  the row index of the cell.
 	 * @return the cell at the specified position
@@ -2007,7 +2007,7 @@ public class OdfTable {
 
 	//return array of string contain 3 member
 	//1. sheet table name
-	//2. alphabetic represent the column 
+	//2. alphabetic represent the column
 	//3. string represent the row number
 	String[] splitCellAddress(String cellAddress) {
 		String[] returnArray = new String[3];
@@ -2047,11 +2047,11 @@ public class OdfTable {
 	 * Return a single cell that is positioned at the specified cell address.
 	 * The table can be automatically expanded as need.
 	 * <p>
-	 * The cell address is constructed with a table name, a dot (.), 
-	 * an alphabetic value representing the column, and a numeric value representing the row. 
+	 * The cell address is constructed with a table name, a dot (.),
+	 * an alphabetic value representing the column, and a numeric value representing the row.
 	 * The table name can be omitted. For example: "$Sheet1.A1", "Sheet1.A1" and "A1" are all
 	 * valid cell address.
-	 * 
+	 *
 	 * @param address	the cell address of the cell.
 	 * @return the cell at the specified position.
 	 */
@@ -2222,7 +2222,7 @@ public class OdfTable {
 						for (int i = oldRepeatIndex + 1; i < oldList.size(); i++) {
 							OdfTableRow row = oldList.get(i);
 							if (row != null) {
-								//update the cell in this row, 
+								//update the cell in this row,
 								int colNum = getColumnCount();
 								for (int j = 0; j < colNum; j++) {
 									OdfTableCell cell = row.getCellByIndex(j);

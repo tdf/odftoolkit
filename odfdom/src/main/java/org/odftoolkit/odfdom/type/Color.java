@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -53,9 +53,9 @@ public class Color implements OdfDataType {
 		labeledColors.put("yellow", "#ffff00");
 	}
 	private static final String COLOR_PREFIX = "#";
-	
+
 	private final String mColorAsSixHexRGB;
-	
+
 	/**
 	* The color aqua in sRGB space.
 	*/
@@ -157,17 +157,17 @@ public class Color implements OdfDataType {
 	*/
 	public static final Color YELLOW = new Color("#ffff00");
 
-	
+
 	/**
-	 * Construct Color by the parsing the given string. The string should be observed sRGB color standard 
+	 * Construct Color by the parsing the given string. The string should be observed sRGB color standard
 	 * which starts with "#" and following with six numbers or three numbers in Hex format.
-	 * For example, "#FFFFFF" is a valid argument and white color will be constructed. 
+	 * For example, "#FFFFFF" is a valid argument and white color will be constructed.
 	 * <p>
 	 * For further information on sRGB,
 	 * see <A href="http://www.w3.org/pub/WWW/Graphics/Color/sRGB.html">
 	 * http://www.w3.org/pub/WWW/Graphics/Color/sRGB.html
 	 * </A>.
-	 * 
+	 *
 	 * @param color  represented using the 3 or 6 HEX sRGB notation.
 	 * @throws IllegalArgumentException  if the given argument is not a valid Color in sRGB HEX notation.
 	 */
@@ -184,20 +184,20 @@ public class Color implements OdfDataType {
 
 	/**
 	 * Construct Color using the specified red, green and blue values in the range (0 - 255).
-	 * 
+	 *
 	 * @param red  the red component.
 	 * @param green  the green component.
 	 * @param blue  the blue component.
-	 * @throws IllegalArgumentException  if <code>red</code>, <code>green</code> or <code>blue</code> 
+	 * @throws IllegalArgumentException  if <code>red</code>, <code>green</code> or <code>blue</code>
 	 *         are outside of the range 0 to 255, inclusive.
 	 */
 	public Color(int red, int green, int blue) {
 		this(mapColorIntegerToString(red, green, blue));
 	}
-	
+
 	/**
 	 * Construct Color using the specified red, green, and blue values in the range (0.0 - 1.0).
-	 * 
+	 *
 	 * @param red  the red component
 	 * @param green  the green component
 	 * @param blue  the blue component
@@ -210,7 +210,7 @@ public class Color implements OdfDataType {
 
 	/**
 	 * Construct Color using {@link java.awt.Color <code>java.awt.Color</code>}.
-	 * 
+	 *
 	 * @param color the specified {@link java.awt.Color <code>java.awt.Color</code>}.
 	 * @throws IllegalArgumentException  if the given argument is not a valid Color.
 	 * @see java.awt.Color
@@ -222,7 +222,7 @@ public class Color implements OdfDataType {
 	/**
 	 * Returns the Color in six HEX sRGB notation.
 	 * format.
-	 * 
+	 *
 	 * @return a six number hexadecimal string representation of the Color
 	 */
 	@Override
@@ -232,7 +232,7 @@ public class Color implements OdfDataType {
 
 	/**
 	 * Returns a Color instance representing the specified String value.
-	 * 
+	 *
 	 * @param colorValue a six (or three) number hexadecimal string representation of the Color
 	 * @return return a Color instance representing <code>stringValue</code>.
 	 * @throws IllegalArgumentException  if the given argument is not a valid Color.
@@ -243,7 +243,7 @@ public class Color implements OdfDataType {
 
 	/**
 	 * Check if the specified String is a valid {@odf.datatype color} data type.
-	 * 
+	 *
 	 * @param colorValue  a six (or three) number hexadecimal string representation of the Color
 	 * @return true if the value of argument is valid for{@odf.datatype color} data type false otherwise.
 	 */
@@ -256,17 +256,17 @@ public class Color implements OdfDataType {
 	}
 
 	/**
-	 * Convert RGB color formats to six-digit hex RGB format. 
-	 * 
-	 * The RGB mapping works as follows:	 
-	 * rgb(110%, 0%, 0%)----clipped to rgb(100%,0%,0%), return #ff0000  
-	 * maroon----one of the seventeen fixed labeled numbers, return #800000  
+	 * Convert RGB color formats to six-digit hex RGB format.
+	 *
+	 * The RGB mapping works as follows:
+	 * rgb(110%, 0%, 0%)----clipped to rgb(100%,0%,0%), return #ff0000
+	 * maroon----one of the seventeen fixed labeled numbers, return #800000
 	 * #ff0000----six-digit notation #rrggbb, returns the input
 	 * #f00----three-digit notation #rgb, return #ff0000
 	 * rgb(255,0,0)----integer range 0 - 255, return #ff0000
 	 * rgb(300,0,0)----clipped to rgb(255,0,0), return #ff0000
-	 * rgb(255,-10,0)----clipped to rgb(255,0,0), return #ff0000 
-	 * 
+	 * rgb(255,-10,0)----clipped to rgb(255,0,0), return #ff0000
+	 *
 	 * @param colorValue  The sRGB color value to be converted.
 	 * @return the converted color.
 	 */
@@ -324,16 +324,16 @@ public class Color implements OdfDataType {
 
 	/**
 	 * Return the corresponding {@link java.awt.Color <code>java.awt.Color</code>} instance of the Color data type.
-	 * 
+	 *
 	 * @return the converted {@link java.awt.Color <code>java.awt.Color</code>} instance..
 	 */
 	public java.awt.Color getAWTColor(){
 		return mapColorToAWTColor(this);
 	}
-	
+
 	/**
-	 * Map a Color data type to {@link java.awt.Color <code>java.awt.Color</code>}. 
-	 * 
+	 * Map a Color data type to {@link java.awt.Color <code>java.awt.Color</code>}.
+	 *
 	 * @param color  The color data type to be mapped..
 	 * @return the converted {@link java.awt.Color <code>java.awt.Color</code>} instance.
 	 */
@@ -341,11 +341,11 @@ public class Color implements OdfDataType {
 		int rgb = Integer.decode("0x" + color.mColorAsSixHexRGB.substring(1));
 		return new java.awt.Color(rgb);
 	}
-	
+
 	/**
-	 * Converts Color expressed by red, green and blue values in the range (0 - 255) to 
+	 * Converts Color expressed by red, green and blue values in the range (0 - 255) to
 	 * a string format which is used in {@odf.datatype color}.
-	 * 
+	 *
 	 * @param red  the red component.
 	 * @param green  the green component.
 	 * @param blue  the blue component.
@@ -370,11 +370,11 @@ public class Color implements OdfDataType {
 		hexColor += bs;
 		return hexColor;
 	}
-	
+
 	/**
-	 * Converts Color from three-digit to six-digit form. The three-digit (#rgb) is converted into six-digit form (#rrggbb) by replicating digits, 
-	 * not by adding zeros. For example, #fb0 expands to #ffbb00. 
-	 * 	 * 
+	 * Converts Color from three-digit to six-digit form. The three-digit (#rgb) is converted into six-digit form (#rrggbb) by replicating digits,
+	 * not by adding zeros. For example, #fb0 expands to #ffbb00.
+	 * 	 *
 	 * @param threeDigitcColor  the three-digit color form.
 	 * @return the six-digit color form.
 	 */
@@ -412,7 +412,7 @@ public class Color implements OdfDataType {
 		}
 	}
 
-        
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -434,5 +434,5 @@ public class Color implements OdfDataType {
         hash = 97 * hash + (this.mColorAsSixHexRGB != null ? this.mColorAsSixHexRGB.hashCode() : 0);
         return hash;
     }
-        
+
 }

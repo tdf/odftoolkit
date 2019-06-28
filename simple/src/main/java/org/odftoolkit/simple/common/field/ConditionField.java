@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -30,7 +30,7 @@ import org.odftoolkit.simple.Component;
  * ConditionField specifies a condition for display of one text string or
  * another. If the condition is true, one of the text strings is displayed. If
  * the condition is false, the other text string is displayed.
- * 
+ *
  * @since 0.5
  */
 public class ConditionField extends Field {
@@ -58,7 +58,7 @@ public class ConditionField extends Field {
 
 	/**
 	 * Update the condition of this field.
-	 * 
+	 *
 	 * @param condition
 	 *            the new condition of this condition field.
 	 */
@@ -68,7 +68,7 @@ public class ConditionField extends Field {
 
 	/**
 	 * Update the true text of this condition field.
-	 * 
+	 *
 	 * @param text
 	 *            the new text content.
 	 */
@@ -78,7 +78,7 @@ public class ConditionField extends Field {
 
 	/**
 	 * Update the false text of this condition field.
-	 * 
+	 *
 	 * @param text
 	 *            the new text content.
 	 */

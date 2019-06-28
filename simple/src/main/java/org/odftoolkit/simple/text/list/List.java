@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -43,9 +43,9 @@ import org.odftoolkit.simple.text.list.ListDecorator.ListType;
 import org.w3c.dom.Node;
 
 /**
- * This class represents a list. It can contain list header, 
+ * This class represents a list. It can contain list header,
  * followed by list items.
- * 
+ *
  * @since 0.4
  */
 public class List {
@@ -55,9 +55,9 @@ public class List {
 
 	/**
 	 * Constructor ListItem, AbstractListContainer and List use only.
-	 * 
+	 *
 	 * @param element
-	 *            the ODF element 
+	 *            the ODF element
 	 */
 	List(TextListElement element) {
 		listElement = element;
@@ -72,7 +72,7 @@ public class List {
 	/**
 	 * Constructor with ListContainer only. A bullet list with default style
 	 * will be created.
-	 * 
+	 *
 	 * @param container
 	 *            the container in where this list will be appended.
 	 */
@@ -82,7 +82,7 @@ public class List {
 
 	/**
 	 * Constructor with ListContainer and ListDecorator.
-	 * 
+	 *
 	 * @param container
 	 *            the container in where this list will be appended.
 	 * @param decorator
@@ -94,7 +94,7 @@ public class List {
 
 	/**
 	 * Constructor with ListContainer, ListDecorator and header.
-	 * 
+	 *
 	 * @param container
 	 *            the container in where this list will be appended.
 	 * @param decorator
@@ -119,7 +119,7 @@ public class List {
 
 	/**
 	 * Constructor with ListContainer, ListDecorator, header and numbering setting.
-	 * 
+	 *
 	 * @param container
 	 *            the container in where this list will be appended.
 	 * @param decorator
@@ -137,7 +137,7 @@ public class List {
 
 	/**
 	 * Constructor with ListContainer, ListDecorator, header and continued list
-	 * 
+	 *
 	 * @param container
 	 *            the container in where this list will be appended.
 	 * @param decorator
@@ -157,7 +157,7 @@ public class List {
 	 * appended before the OdfElement bigBrother. Like the Contructor:
 	 * <code>List(ListContainer container, String header, ListDecorator decorator)</code>
 	 * but the List will be implemented as a brother before brother-element
-	 * 
+	 *
 	 * @param container the container in where this list will be appended.
 	 * @param brother   the new List will be appended as a brother before this
 	 *                  Element
@@ -183,7 +183,7 @@ public class List {
 	 * creates a List like the Contructor:
 	 * <code>List(ListContainer container, String header, ListDecorator decorator)</code>
 	 * but the List will be implemented as a brother before brother-element
-	 * 
+	 *
 	 * @param container the container in where this list will be appended.
 	 * @param brother   the new List will be appended as a brother before this
 	 *                  Element
@@ -195,10 +195,10 @@ public class List {
 		List newList = new List(container, brother, header, decorator);
 		return newList;
 	}
-	
+
 	/**
 	 * Get the type of this list. The list type can be BULLET, NUMBER and IMAGE.
-	 * 
+	 *
 	 * @return the list type.
 	 */
 	public ListType getType() {
@@ -234,7 +234,7 @@ public class List {
 
 	/**
 	 * Get the header of this list.
-	 * 
+	 *
 	 * @return the header of this list.
 	 */
 	public String getHeader() {
@@ -263,7 +263,7 @@ public class List {
 
 	/**
 	 * Set the header of this list. The exist header will be replaced.
-	 * 
+	 *
 	 * @param header
 	 *            the header to be set.
 	 */
@@ -297,7 +297,7 @@ public class List {
 	 * <p>
 	 * This is a useful method which can change the list type and style, even
 	 * though it has been created.
-	 * 
+	 *
 	 * @param decorator
 	 *            the ListDecorator to be used.
 	 */
@@ -310,7 +310,7 @@ public class List {
 
 	/**
 	 * Add a list item by specifying a string value.
-	 * 
+	 *
 	 * @param itemContent
 	 *            the list item content to be added.
 	 * @return the added ListItem.
@@ -327,7 +327,7 @@ public class List {
 	 * Insert the specified ListItem at the specified location.
 	 * The ListItem is inserted before the ListItem at the specified
 	 * location.
-	 * 
+	 *
 	 * @param location
 	 *            the index to insert. The start number is 0.
 	 * @param itemContent
@@ -349,7 +349,7 @@ public class List {
 
 	/**
 	 * Add the specified list item in ListItem object.
-	 * 
+	 *
 	 * @param item
 	 *            the list item to be added.
 	 * @return the added ListItem.
@@ -365,7 +365,7 @@ public class List {
 	 * Insert a ListItem at the specified location.
 	 * The ListItem is inserted before the ListItem at the specified
 	 * location.
-	 * 
+	 *
 	 * @param location
 	 *            the index to insert.
 	 * @param item
@@ -384,7 +384,7 @@ public class List {
 
 	/**
 	 * Add list items by specifying an array of string values.
-	 * 
+	 *
 	 * @param items
 	 *            the list items to be added.
 	 * @return the added items.
@@ -401,9 +401,9 @@ public class List {
 	}
 
 	/**
-	 * Insert the list items at the specified location in this List 
+	 * Insert the list items at the specified location in this List
 	 * by giving an array of string values.
-	 * 
+	 *
 	 * @param location
 	 *            the index to insert.
 	 * @param items
@@ -430,7 +430,7 @@ public class List {
 
 	/**
 	 * Add list items by specifying an array of ListItem.
-	 * 
+	 *
 	 * @param items
 	 *            the list items to be added.
 	 */
@@ -447,7 +447,7 @@ public class List {
 	/**
 	 * Insert the list items at the certain location
 	 * by specifying an array of ListItem.
-	 * 
+	 *
 	 * @param location
 	 *            the index to insert.
 	 * @param items
@@ -471,11 +471,11 @@ public class List {
 
 	/**
 	 * Return the item at the specified location in this List.
-	 * 
+	 *
 	 * @param location
 	 *            the index of the element to be returned.
 	 * @return the element at the specified location.
-	 * 
+	 *
 	 * @exception IndexOutOfBoundsException
 	 *                when the <code>location</code> is out of the List range.
 	 */
@@ -485,7 +485,7 @@ public class List {
 
 	/**
 	 * Get all of the list items.
-	 * 
+	 *
 	 * @return all of list items.
 	 */
 	public java.util.List<ListItem> getItems() {
@@ -502,7 +502,7 @@ public class List {
 
 	/**
 	 * Return the number of direct child items in this List.
-	 * 
+	 *
 	 * @return the number of direct child items in this List.
 	 */
 	public int size() {
@@ -520,7 +520,7 @@ public class List {
 	/**
 	 * Replace the item at the specified location in this List with the
 	 * specified item.
-	 * 
+	 *
 	 * @param location
 	 *            the index to put the specified item.
 	 * @param item
@@ -541,7 +541,7 @@ public class List {
 	/**
 	 * Replace the item at the specified location in this List with the
 	 * specified item content.
-	 * 
+	 *
 	 * @param location
 	 *            the index to insert. The start number is 0.
 	 * @param itemContent
@@ -563,7 +563,7 @@ public class List {
 
 	/**
 	 * Remove the item at the specified location from this List.
-	 * 
+	 *
 	 * @param location
 	 *            the index of the item to be removed.
 	 * @return true if this List is modified, false otherwise.
@@ -585,7 +585,7 @@ public class List {
 
 	/**
 	 * Remove the specified item from this List.
-	 * 
+	 *
 	 * @param item
 	 *            the item to be removed.
 	 * @return true if this List is modified, false otherwise.
@@ -605,7 +605,7 @@ public class List {
 
 	/**
 	 * Remove all the items in the collection from this list
-	 * 
+	 *
 	 * @param items
 	 *            the collection of items to be removed.
 	 * @return true if this List is modified, false otherwise.
@@ -655,7 +655,7 @@ public class List {
 	/**
 	 * Return whether the numbering of this list is continuing,
 	 * or whether the numbering of the preceding list is continued or not.
-	 * 
+	 *
 	 * @return true if the numbering of this list is continuing,
 	 *         false if not.
 	 */
@@ -687,8 +687,8 @@ public class List {
 	 * It easy, no need to get the reference of ListB. While if the user need
 	 * the first list item in ListC is the number of the last item in ListA
 	 * incremented by one, he must use ListC.setContinueList(ListA).
-	 * 
-	 * 
+	 *
+	 *
 	 * @param isContinueNumbering
 	 *            If <code>isContinueNumbering</code> is true, and
 	 *            text:continue-list attribute is not present and the numbering
@@ -707,9 +707,9 @@ public class List {
 	}
 
 	/**
-	 * Get the preceding list whose numbering is continued by this list. 
+	 * Get the preceding list whose numbering is continued by this list.
 	 * <p>Now only support to get the continued list reference in the same ListContainer and the same Level.
-	 * 
+	 *
 	 * @return the continued list of this list. If the list has no continued list,
 	 *         it will return null.
 	 */
@@ -754,7 +754,7 @@ public class List {
 	 * order. If the user needs the first list item in ListC is the number of the
 	 * last item in ListA incremented by one, he must use
 	 * ListC.setContinueList(ListA).
-	 * 
+	 *
 	 * @param continueList
 	 *            the continued list of this list.
 	 * @see #setContinueNumbering(boolean)
@@ -785,7 +785,7 @@ public class List {
 	 * a list and the counter domain for its list items and any sub list of that
 	 * list. Each sub list starts a counter for its list items and any sub list
 	 * it may contain.
-	 * 
+	 *
 	 * @return list level.
 	 */
 	public int getLevel() {
@@ -805,7 +805,7 @@ public class List {
 
 	/**
 	 * Get the instance of TextListElement which represents this list.
-	 * 
+	 *
 	 * @return the instance of TextListElement.
 	 */
 	public TextListElement getOdfElement() {
@@ -881,9 +881,9 @@ public class List {
 	/**
 	 * Answers an Iterator on the items of this List. The items are iterated in
 	 * the same order that they occur in the List.
-	 * 
+	 *
 	 * @return an Iterator on the items of this List
-	 * 
+	 *
 	 * @see java.util.Iterator
 	 */
 	/*

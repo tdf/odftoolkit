@@ -44,7 +44,7 @@ public class OdfFileSaxHandler extends DefaultHandler {
 	private Stack<ContentHandler> mHandlerStack = new Stack<ContentHandler>();
 	private StringBuilder mCharsForTextNode = new StringBuilder();
 	private JenaSink sink;
-	
+
 	OdfFileSaxHandler(Node rootNode) {
 		if (rootNode instanceof OdfFileDom) {
 			mFileDom = (OdfFileDom) rootNode;
@@ -154,7 +154,7 @@ public class OdfFileSaxHandler extends DefaultHandler {
 	public InputSource resolveEntity(String publicId, String systemId) throws IOException, SAXException {
 		return super.resolveEntity(publicId, systemId);
 	}
-	
+
 	/**
 	* Expose the current node to JenaSink to for caching the parsed RDF triples.
 	* @return

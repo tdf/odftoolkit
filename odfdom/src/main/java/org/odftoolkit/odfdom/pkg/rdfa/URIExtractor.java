@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -44,15 +44,15 @@ public interface URIExtractor {
     List<String> getURIs(StartElement element, Attribute attr, EvalContext context);
 
     String resolveURI(String uri, EvalContext context);
-    
+
     void setForSAX(boolean isForSAX);
-    
+
     void setNamespaceURI(String prefix, String namespaceURI);
 }
 
 /*
  * (c) Copyright 2009 University of Bristol All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  * 1. Redistributions of source code must retain the above copyright notice,
@@ -62,7 +62,7 @@ public interface URIExtractor {
  * materials provided with the distribution. 3. The name of the author may not
  * be used to endorse or promote products derived from this software without
  * specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -49,12 +49,12 @@ import org.odftoolkit.odfdom.type.Color;
 /**
  * This class represents the table cell style settings. It provides methods to
  * access borders styles. More functions will be added latter.
- * 
+ *
  * <p>
  * This class is a corresponded high level class for element
  * "style:table-cell-properties". It provides methods to access the attributes
  * and children of "style:table-cell-properties".
- * 
+ *
  * @since 0.3
  */
 public class TableCellProperties {
@@ -129,7 +129,7 @@ public class TableCellProperties {
 	// String borderLineWidthTop;
 	// String diagonalBlTrWidths;
 	// String diagonalTlBrWidths;
-	
+
 	BorderPropertiesImpl mBorderPropertiesHandler;
 
 	StyleTableCellPropertiesElement mElement;
@@ -143,7 +143,7 @@ public class TableCellProperties {
 	/**
 	 * Create an instance of TableCellProperties from an element
 	 * <style:table-cell-properties>
-	 * 
+	 *
 	 * @param properties
 	 *            - the element of style:table-cell-properties
 	 */
@@ -161,7 +161,7 @@ public class TableCellProperties {
 	 * <p>
 	 * The border style information will be removed if the parameter
 	 * <code>bordersType</code> is NONE.
-	 * 
+	 *
 	 * @param bordersType
 	 *            - the type of the borders
 	 * @param border
@@ -226,7 +226,7 @@ public class TableCellProperties {
 	 * Return the border setting for all four borders.
 	 * <p>
 	 * Null will be returned if there is no border setting for all four borders.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getBorder() {
@@ -237,7 +237,7 @@ public class TableCellProperties {
 	 * Return the border setting for the top border.
 	 * <p>
 	 * Null will be returned if there is no border setting for the top border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getTopBorder() {
@@ -248,7 +248,7 @@ public class TableCellProperties {
 	 * Return the border setting for the left border.
 	 * <p>
 	 * Null will be returned if there is no border setting for the left border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getLeftBorder() {
@@ -259,7 +259,7 @@ public class TableCellProperties {
 	 * Return the border setting for the right border.
 	 * <p>
 	 * Null will be returned if there is no border setting for the right border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getRightBorder() {
@@ -273,7 +273,7 @@ public class TableCellProperties {
 	 * <p>
 	 * Null will be returned if there is no border setting for the bottom
 	 * border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getBottomBorder() {
@@ -285,7 +285,7 @@ public class TableCellProperties {
 	 * <p>
 	 * Null will be returned if there is no border setting for the diagonal from
 	 * bottom left to top right.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getDiagonalBlTr() {
@@ -312,7 +312,7 @@ public class TableCellProperties {
 	 * <p>
 	 * Null will be returned if there is no border setting for the diagonal from
 	 * top left to bottom right.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getDiagonalTlBr() {
@@ -341,7 +341,7 @@ public class TableCellProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the bottom border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -359,7 +359,7 @@ public class TableCellProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the top border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -377,7 +377,7 @@ public class TableCellProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the left border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -395,7 +395,7 @@ public class TableCellProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the right border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -413,7 +413,7 @@ public class TableCellProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the diagonal from bottom left to top right will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -447,7 +447,7 @@ public class TableCellProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the diagonal from top left to bottom right will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -481,7 +481,7 @@ public class TableCellProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for all four borders will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -495,7 +495,7 @@ public class TableCellProperties {
 	 * <p>
 	 * If the parameter <code>aColor</code> is null, the background color
 	 * definition will be removed.
-	 * 
+	 *
 	 * @param aColor
 	 *            - the background color
 	 */
@@ -510,9 +510,9 @@ public class TableCellProperties {
 	// //style:cell-protect
 	// public void setProtected(boolean isProtected)
 	// {
-	//		
+	//
 	// }
-	//	
+	//
 	// //style:cell-protect
 	// public boolean isProctected()
 	// {
@@ -524,7 +524,7 @@ public class TableCellProperties {
 	 * <p>
 	 * Null will be returned if there is no the background color definition or
 	 * the background color definition is not valid.
-	 * 
+	 *
 	 * @return the background color
 	 */
 	public Color getBackgroundColor() {
@@ -544,7 +544,7 @@ public class TableCellProperties {
 	 * <p>
 	 * If the parameter <code>isWrapped</code> is true, the text will be allowed
 	 * to be wrapped. Or else, the text is not allowed to be wrapped.
-	 * 
+	 *
 	 * @param isWrapped
 	 *            - the wrapped option
 	 */
@@ -562,7 +562,7 @@ public class TableCellProperties {
 	 * <p>
 	 * If the parameter <code>alignType</code> is null or DEFAULT, the vertical
 	 * alignment definition will be removed.
-	 * 
+	 *
 	 * @param alignType
 	 *            - the vertical alignment
 	 */
@@ -578,7 +578,7 @@ public class TableCellProperties {
 	 * Return the vertical alignment.
 	 * <p>
 	 * If there is no vertical alignment definition, null will be returned.
-	 * 
+	 *
 	 * @return the vertical alignment
 	 */
 	public StyleTypeDefinitions.VerticalAlignmentType getVerticalAlignment() {
@@ -610,7 +610,7 @@ public class TableCellProperties {
 	 * Return whether the text is allowed to be wrapped.
 	 * <p>
 	 * Return true if the text is allowed to be wrapped. Or else, return false.
-	 * 
+	 *
 	 * @return a boolean value to indicate whether the text is allowed to be
 	 *         wrapped
 	 */
@@ -634,7 +634,7 @@ public class TableCellProperties {
 	 * Return an instance of
 	 * <code>TableCellProperties</p> to represent the "style:table-cell-properties" in a style element.
 	 * <p>If there is no "style:table-cell-properties" defined in the style element, a new "style:table-cell-properties" element will be created.
-	 * 
+	 *
 	 * @param style
 	 *            - a style element
 	 * @return an instance of <code>TableCellProperties</p>
@@ -649,7 +649,7 @@ public class TableCellProperties {
 	 * Return an instance of
 	 * <code>TableCellProperties</p> to represent the "style:table-cell-properties" in a style element.
 	 * <p>If there is no "style:table-cell-properties" defined in the style element, null will be returned.
-	 * 
+	 *
 	 * @param style
 	 *            - a style element
 	 * @return an instance of <code>TableCellProperties</p>;Null if there is no
@@ -666,9 +666,9 @@ public class TableCellProperties {
 }
 
 class BorderPropertiesImpl {
-	
+
 	OdfStylePropertiesBase borderPropertiesElement;
-	
+
 	public BorderPropertiesImpl(OdfStylePropertiesBase element)
 	{
 		borderPropertiesElement = element;
@@ -684,7 +684,7 @@ class BorderPropertiesImpl {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the bottom border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -718,7 +718,7 @@ class BorderPropertiesImpl {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the top border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -752,7 +752,7 @@ class BorderPropertiesImpl {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the left border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -786,7 +786,7 @@ class BorderPropertiesImpl {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the right border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -820,7 +820,7 @@ class BorderPropertiesImpl {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for all four borders will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -843,12 +843,12 @@ class BorderPropertiesImpl {
 			borderPropertiesElement.removeAttribute(FoBorderAttribute.ATTRIBUTE_NAME.getQName());
 		}
 	}
-	
+
 	/**
 	 * Return the border setting for all four borders.
 	 * <p>
 	 * Null will be returned if there is no border setting for all four borders.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getBorder() {
@@ -870,7 +870,7 @@ class BorderPropertiesImpl {
 	 * Return the border setting for the top border.
 	 * <p>
 	 * Null will be returned if there is no border setting for the top border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getTopBorder() {
@@ -892,7 +892,7 @@ class BorderPropertiesImpl {
 	 * Return the border setting for the left border.
 	 * <p>
 	 * Null will be returned if there is no border setting for the left border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getLeftBorder() {
@@ -914,7 +914,7 @@ class BorderPropertiesImpl {
 	 * Return the border setting for the right border.
 	 * <p>
 	 * Null will be returned if there is no border setting for the right border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getRightBorder() {
@@ -939,7 +939,7 @@ class BorderPropertiesImpl {
 	 * <p>
 	 * Null will be returned if there is no border setting for the bottom
 	 * border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getBottomBorder() {

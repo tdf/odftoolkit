@@ -1,7 +1,7 @@
 /**********************************************************************
- * 
+ *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -9,16 +9,16 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- * 
+ *
  *  http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
- * 
+ *
  **********************************************************************/
 package org.apache.odftoolkit.simple.sample;
 
@@ -35,7 +35,7 @@ import org.odftoolkit.odfdom.dom.attribute.meta.MetaValueTypeAttribute.Value;
  * mata to ODF documents automatically. This will be a useful function to have
  * in the future. As we add new unit tests and new test files, we will need to
  * add license info to those files. This could be done via code like this.
- * 
+ *
  * Maybe even a 2nd class that will test an ODF file to see if it has the
  * license in it, or one that will return the license. In the future, after we
  * release, we could share some code with the Apache RAT project, so they could

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -27,17 +27,17 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 /**
  * ParagraphContainer is a container which maintains paragraph(s) as element(s).
  * Paragraph(s) can be added and removed in this container.
- * 
+ *
  * @see Paragraph
  * @see org.odftoolkit.simple.TextDocument
- * 
+ *
  * @since 0.5
  */
 
 public interface ParagraphContainer {
 	/**
 	 * Add paragraph at the end of the container with specified text content.
-	 * 
+	 *
 	 * @param textContent
 	 *            - the text content
 	 * @return an instance of paragraph
@@ -46,7 +46,7 @@ public interface ParagraphContainer {
 
 	/**
 	 * Remove paragraph from the container
-	 * 
+	 *
 	 * @param para
 	 *            - the instance of paragraph
 	 * @return true if the paragraph is removed successfully, false if errors
@@ -56,14 +56,14 @@ public interface ParagraphContainer {
 
 	/**
 	 * Get the ODF element which can have <text:p> as child element directly.
-	 * 
+	 *
 	 * @return - an ODF element which can have paragraph as child
 	 */
 	public OdfElement getParagraphContainerElement();
 
 	/**
 	 * Return an Iterator of the paragraph in this container.
-	 * 
+	 *
 	 * @return an Iterator of the paragraph in this container
 	 */
 	public Iterator<Paragraph> getParagraphIterator();
@@ -74,7 +74,7 @@ public interface ParagraphContainer {
 	 * An index of zero represents the first paragraph.
 	 * <p>
 	 * If empty paragraph is skipped, the empty paragraph won't be counted.
-	 * 
+	 *
 	 * @param index
 	 *            - the index started from 0.
 	 * @param isEmptyParagraphSkipped
@@ -89,7 +89,7 @@ public interface ParagraphContainer {
 	 * An index of zero represents the last paragraph.
 	 * <p>
 	 * If empty paragraph is skipped, the empty paragraph won't be counted.
-	 * 
+	 *
 	 * @param reverseIndex
 	 *            - the index started from 0 in reverse order.
 	 * @param isEmptyParagraphSkipped

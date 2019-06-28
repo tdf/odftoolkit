@@ -159,5 +159,5 @@ public class OdfPercentageStyleTest {
 		Assert.assertEquals("value()<0", mapNode.getStyleConditionAttribute());
 		Assert.assertEquals(mapName, mapNode.getStyleApplyStyleNameAttribute());
 	}
-	
+
 }

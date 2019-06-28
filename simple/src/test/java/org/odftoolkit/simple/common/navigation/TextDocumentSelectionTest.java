@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -36,19 +36,19 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
  * org.odftoolkit.simple.common.navigation.TextDocumentSelection
  */
 public class TextDocumentSelectionTest {
-	
+
 	private static final String TEXT_FILE = "TestTextSelection.odt";
 	TextDocument doc, sourcedoc;
 	TextNavigation search;
-	
+
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 	}
-	
+
 	@AfterClass
 	public static void tearDownClass() throws Exception {
 	}
-	
+
 	@Before
 	public void setUp() {
 		try {
@@ -62,11 +62,11 @@ public class TextDocumentSelectionTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 	@After
 	public void tearDown() {
 	}
-	
+
 	/**
 	 * Test ReplaceWithTextDocument method of
 	 * org.odftoolkit.simple.common.navigation.TextDocumentSelection replace
@@ -113,7 +113,7 @@ public class TextDocumentSelectionTest {
 				Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 			}
 		}
-		
+
 		search = new TextNavigation("Hello1 from SIMPLE source document!", doc);
 		int j = 0;
 		while (search.hasNext()) {

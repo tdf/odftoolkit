@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -29,7 +29,7 @@ import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 /**
- * Test ReplaceWith method for class org.odftoolkit.simple.common.navigation.TextSelection 
+ * Test ReplaceWith method for class org.odftoolkit.simple.common.navigation.TextSelection
  */
 public class MONPTest {
 

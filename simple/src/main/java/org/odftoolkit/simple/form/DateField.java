@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -30,7 +30,7 @@ import org.odftoolkit.simple.Document;
 
 /**
  * This class represents a date field of form.
- * 
+ *
  */
 public class DateField extends Field {
 
@@ -42,7 +42,7 @@ public class DateField extends Field {
 	 * Get an instance of date field by an instance of FormFormattedTextElement,
 	 * while searching the document content to make a bind with the DrawControl
 	 * which already reference to this date field.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of FormFormattedTextElement
 	 * @return an instance of date field
@@ -61,7 +61,7 @@ public class DateField extends Field {
 
 	/**
 	 * Set the visibility of the drop-down button.
-	 * 
+	 *
 	 * @param isVisible
 	 *            - the visibility of drop-down button.
 	 */
@@ -72,7 +72,7 @@ public class DateField extends Field {
 
 	/**
 	 * Format the date value according to the appointed format and locale.
-	 * 
+	 *
 	 * @param formatStr
 	 *            - format code
 	 * @param locale
@@ -84,7 +84,7 @@ public class DateField extends Field {
 
 	/**
 	 * Get the format code which is used to format the display value
-	 * 
+	 *
 	 * @return the format code
 	 */
 	public String getDateFormat() {

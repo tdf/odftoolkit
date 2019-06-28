@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -33,7 +33,7 @@ import org.w3c.dom.DOMException;
  * interface, with a default implementation for every method defined in
  * FormContainer, except getFormContainerElement(). A subclass must implement
  * the abstract method getFormContainerElement().
- * 
+ *
  * @since 0.8
  */
 public abstract class AbstractFormContainer implements FormContainer {
@@ -163,7 +163,7 @@ public abstract class AbstractFormContainer implements FormContainer {
 
 	/**
 	 * Set the form provider of this container.
-	 * 
+	 *
 	 * @param provider
 	 *            - which is used to instantiate a form
 	 */
@@ -173,7 +173,7 @@ public abstract class AbstractFormContainer implements FormContainer {
 
 	/**
 	 * Get the form provider of this container.
-	 * 
+	 *
 	 * @return provider - a default provider followed by OO definition will be
 	 *         created if users don't appointed one.
 	 */

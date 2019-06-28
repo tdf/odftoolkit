@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -38,7 +38,7 @@ import org.odftoolkit.simple.Component;
 
 /**
  * DateField displays a date, by default this is the current date.
- * 
+ *
  * @since 0.5
  */
 public class DateField extends Field {
@@ -79,7 +79,7 @@ public class DateField extends Field {
 	/**
 	 * Set the format of this date field. Date format pattern is the same as
 	 * {@link java.text.SimpleDateFormat SimpleDateFormat}.
-	 * 
+	 *
 	 * @param formatString
 	 *            the format string of this date.
 	 * @see java.text.SimpleDateFormat
@@ -107,7 +107,7 @@ public class DateField extends Field {
 
 	/**
 	 * Set whether the date value of this field is fixed.
-	 * 
+	 *
 	 * @param isFixed
 	 *            if <code>true</code>, the date value shall be preserved,
 	 *            otherwise it may be replaced with a new value in future edits.
@@ -119,7 +119,7 @@ public class DateField extends Field {
 	/**
 	 * Return an instance of <code>TextDateElement</code> which represents this
 	 * feature.
-	 * 
+	 *
 	 * @return an instance of <code>TextDateElement</code>
 	 */
 	public TextDateElement getOdfElement() {

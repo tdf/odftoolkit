@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -42,7 +42,7 @@ public class ChartTypeTest {
 			Rectangle rect = new Rectangle();
 			Chart chart = tdoc.createChart(title, dataset, rect);
 			chart.setChartType(ChartType.AREA);
-			
+
 			String ctype = chart.getChartType().toString();
 			ChartType chartType = ChartType.enumValueOf(ctype);
 			Assert.assertEquals(chartType, ChartType.AREA);
@@ -53,7 +53,7 @@ public class ChartTypeTest {
 			Logger.getLogger(ChartTypeTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
-		
+
 	}
 
 }

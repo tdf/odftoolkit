@@ -55,14 +55,14 @@ public enum OdfDocumentNamespace implements NamespaceName {
 	XHTML("xhtml", "http://www.w3.org/1999/xhtml"),
 	XLINK("xlink", "http://www.w3.org/1999/xlink"),
 	XML("xml", "http://www.w3.org/XML/1998/namespace" );
-    	
+
 	private String mPrefix;
 	private String mUri;
-	
+
 	OdfDocumentNamespace(String prefix, String uri) {
 		mPrefix = prefix;
 		mUri = uri;
-	}    
+	}
 
 	/**
 	 * @return the prefix currently related to ODF Namespace.
@@ -77,4 +77,4 @@ public enum OdfDocumentNamespace implements NamespaceName {
 	public String getUri() {
 		return mUri;
 	}
-} 
+}

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -29,7 +29,7 @@ import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class CellStyleHandlerTest {
-	
+
 	private static final String TEST_FILE_NAME = "CellStyleHandlerTest.odp";
 
 	@Test
@@ -46,20 +46,20 @@ public class CellStyleHandlerTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetCountry() {
 		try {
 			Document doc = Document.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_NAME));
 			Table table = doc.getTableByName("slideTable");
 			CellStyleHandler styleHandler = table.getCellByPosition(1, 1).getStyleHandler();
-			
+
 			styleHandler.setCountry("English", Document.ScriptType.WESTERN);
 			//validate
 			String country = styleHandler.getCountry(Document.ScriptType.WESTERN);
 			Assert.assertEquals("English", country);
-			
+
 		} catch (Exception e) {
 			Logger.getLogger(CellStyleHandlerTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());

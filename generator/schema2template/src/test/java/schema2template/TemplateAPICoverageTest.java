@@ -100,7 +100,7 @@ public class TemplateAPICoverageTest {
     @Test
     public void testCoverage() {
         MethodSet methods;
-        
+
         methods = getMethods(PuzzleComponent.class);
         assertTrue(methods.contains("canHaveText", 0));
         assertTrue(methods.contains("getAttributes", 0));

@@ -33,5 +33,5 @@
             <zipfileset dir="${dist.dir}" includes="*.jar,*.txt"/>
         </zip>
     </target>
-    
+
 </project>

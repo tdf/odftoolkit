@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -42,7 +42,7 @@ import org.w3c.dom.Node;
  * This class is the default style handler. It provides methods to get the
  * readable style element and the writable style element. It also provides
  * method to get all kinds of style properties elements.
- * 
+ *
  * @since 0.5
  */
 public class DefaultStyleHandler {
@@ -118,10 +118,10 @@ public class DefaultStyleHandler {
 	protected TableProperties mWritableTableProperties;
 	/**
 	 * Constructor of DefaultStyleHandler
-	 * 
+	 *
 	 * @param element
 	 *            - the instance of structure component in an ODF document
-	 * 
+	 *
 	 */
 	public DefaultStyleHandler(OdfStylableElement element) {
 		mOdfElement = element;
@@ -166,7 +166,7 @@ public class DefaultStyleHandler {
 	 * <p>
 	 * Note if you try to write style properties to the returned object, errors
 	 * will be met with.
-	 * 
+	 *
 	 * @return the text style properties definition for this component, only for
 	 *         read function
 	 */
@@ -206,7 +206,7 @@ public class DefaultStyleHandler {
 	 * <p>
 	 * An empty text style properties definition will be created if there is no
 	 * explicit text style properties definition.
-	 * 
+	 *
 	 * @return the text style properties definition for this component, for read
 	 *         and write function
 	 */
@@ -235,7 +235,7 @@ public class DefaultStyleHandler {
 	 * <p>
 	 * Note if you try to write style properties to the returned object, errors
 	 * will be met with.
-	 * 
+	 *
 	 * @return the cell style properties definition for this component, only for
 	 *         read function
 	 */
@@ -278,7 +278,7 @@ public class DefaultStyleHandler {
 	 * <p>
 	 * An empty cell style properties definition will be created if there is no
 	 * explicit cell style properties definition.
-	 * 
+	 *
 	 * @return the cell style properties definition for this component, for read
 	 *         and write function
 	 */
@@ -310,7 +310,7 @@ public class DefaultStyleHandler {
 	 * <p>
 	 * Note if you try to write style properties to the returned object, errors
 	 * will be met with.
-	 * 
+	 *
 	 * @return the paragraph style properties definition for this component,
 	 *         only for read function
 	 */
@@ -353,7 +353,7 @@ public class DefaultStyleHandler {
 	 * <p>
 	 * An empty paragraph style properties definition will be created if there
 	 * is no explicit paragraph style properties definition.
-	 * 
+	 *
 	 * @return the paragraph style properties definition for this component, for
 	 *         read and write function
 	 */
@@ -385,7 +385,7 @@ public class DefaultStyleHandler {
 	 * <p>
 	 * Note if you try to write style properties to the returned object, errors
 	 * will be met with.
-	 * 
+	 *
 	 * @return the graphic style properties definition for this component, only
 	 *         for read function
 	 */
@@ -425,7 +425,7 @@ public class DefaultStyleHandler {
 	 * <p>
 	 * An empty text style properties definition will be created if there is no
 	 * explicit text style properties definition.
-	 * 
+	 *
 	 * @return the text style properties definition for this component, for read
 	 *         and write function
 	 */
@@ -450,7 +450,7 @@ public class DefaultStyleHandler {
 	 * Null will be returned if there is no style definition.
 	 * Note if you try to write style properties to the returned object, errors
 	 * will be met with.
-	 * 
+	 *
 	 * @return the table style properties definition for this component, only
 	 *         for read function
 	 */
@@ -493,7 +493,7 @@ public class DefaultStyleHandler {
 	 * An empty style definition will be created if there is no style
 	 * An empty table style properties definition will be created if there is no
 	 * explicit table style properties definition.
-	 * 
+	 *
 	 * @return the table style properties definition for this component, for
 	 *         read and write function
 	 */
@@ -524,7 +524,7 @@ public class DefaultStyleHandler {
 	 * getStyleName() of component. If the style name is shared by multiple
 	 * elements, getStyleElementForWrite() will return a copied style element,
 	 * which is not same with the return of this method.
-	 * 
+	 *
 	 * @return - the used style name of this component
 	 */
 	protected String getUsedStyleName() {
@@ -535,7 +535,7 @@ public class DefaultStyleHandler {
 	 * Return a readable style element by style name.
 	 * <p>
 	 * If the style name is null, the default style will be returned.
-	 * 
+	 *
 	 * @param styleName
 	 *            - the style name
 	 * @return a readable style element
@@ -572,7 +572,7 @@ public class DefaultStyleHandler {
 	 * If the style is shared, a copied style element would be returned.
 	 * <p>
 	 * If the style name is null, the default style will be copied.
-	 * 
+	 *
 	 * @param styleName
 	 *            - the style name
 	 * @return a writable style element
@@ -645,7 +645,7 @@ public class DefaultStyleHandler {
 	 * <p>
 	 * Note if you try to write style properties to the returned object, errors
 	 * will be met with.
-	 * 
+	 *
 	 * @return the style element
 	 * @see #getUsedStyleName()
 	 */
@@ -666,7 +666,7 @@ public class DefaultStyleHandler {
 	 * <p>
 	 * An empty style definition will be created if there is no style
 	 * definition.
-	 * 
+	 *
 	 * @return the style element
 	 * @see #getUsedStyleName()
 	 */

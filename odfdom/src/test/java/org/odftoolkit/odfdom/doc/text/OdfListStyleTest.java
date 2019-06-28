@@ -113,7 +113,7 @@ public class OdfListStyleTest {
 	    @Test
     public void testBuildFromFormat() {
 		int i;
-		
+
         LOG.info("createListStyle");
         OdfTextListStyle instance = null;
 

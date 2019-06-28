@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -30,7 +30,7 @@ import org.odftoolkit.simple.meta.Meta;
 /**
  * A <tt>TitleField</tt> displays the title value contained by the document meta
  * data.
- * 
+ *
  * @since 0.5
  */
 public class TitleField extends Field {
@@ -55,7 +55,7 @@ public class TitleField extends Field {
 	/**
 	 * Return an instance of <code>TextTitleElement</code> which represents this
 	 * feature.
-	 * 
+	 *
 	 * @return an instance of <code>TextTitleElement</code>
 	 */
 	public TextTitleElement getOdfElement() {

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -59,12 +59,12 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.WritingMode;
  * This class represents the page layout style settings. It provides methods to
  * access borders, margins,number format, page width, page height and etc. More
  * functions will be added latter.
- * 
+ *
  * <p>
  * This class is a corresponded high level class for element
  * "style:page-layout-properties". It provides methods to access the attributes
  * and children of "style:page-layout-properties".
- * 
+ *
  * @since 0.8
  */
 public class PageLayoutProperties {
@@ -137,7 +137,7 @@ public class PageLayoutProperties {
 	/**
 	 * Create an instance of PageLayoutProperties from an element
 	 * <style:page-layout-properties>
-	 * 
+	 *
 	 * @param pageLayoutProperties
 	 *            - the element of style:page-layout-properties
 	 */
@@ -160,7 +160,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * The border style information will be removed if the parameter
 	 * <code>bordersType</code> is NONE.
-	 * 
+	 *
 	 * @param bordersType
 	 *            - the type of the borders
 	 * @param border
@@ -225,7 +225,7 @@ public class PageLayoutProperties {
 	 * Return the border setting for all four borders.
 	 * <p>
 	 * Null will be returned if there is no border setting for all four borders.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getBorder() {
@@ -236,7 +236,7 @@ public class PageLayoutProperties {
 	 * Return the border setting for the top border.
 	 * <p>
 	 * Null will be returned if there is no border setting for the top border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getTopBorder() {
@@ -247,7 +247,7 @@ public class PageLayoutProperties {
 	 * Return the border setting for the left border.
 	 * <p>
 	 * Null will be returned if there is no border setting for the left border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getLeftBorder() {
@@ -258,7 +258,7 @@ public class PageLayoutProperties {
 	 * Return the border setting for the right border.
 	 * <p>
 	 * Null will be returned if there is no border setting for the right border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getRightBorder() {
@@ -272,7 +272,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * Null will be returned if there is no border setting for the bottom
 	 * border.
-	 * 
+	 *
 	 * @return the border setting
 	 */
 	public Border getBottomBorder() {
@@ -289,7 +289,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for all four borders will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -307,7 +307,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the bottom border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -325,7 +325,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the top border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -343,7 +343,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the left border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -361,7 +361,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If the line type in the border definition is NONE, the border definition
 	 * for the right border will be removed.
-	 * 
+	 *
 	 * @param border
 	 *            - the border setting
 	 */
@@ -373,7 +373,7 @@ public class PageLayoutProperties {
 	 * Set the left margin of this <code>PageLayoutProperties</code>
 	 * <p>
 	 * If the size is set to zero, the left margin definition will be removed.
-	 * 
+	 *
 	 * @param marginLeft
 	 *            the size of the left margin (in Millimeter)
 	 */
@@ -388,7 +388,7 @@ public class PageLayoutProperties {
 
 	/**
 	 * Returns the provided Millimeter value as Inch value
-	 * 
+	 *
 	 * @param value
 	 *            the value to set the attribute value to (in Millimeter)
 	 */
@@ -407,7 +407,7 @@ public class PageLayoutProperties {
 	 * Get the size of the left margin of this <code>PageLayoutProperties</code>
 	 * <p>
 	 * If the size is set to zero, the left margin definition will be removed.
-	 * 
+	 *
 	 * @return the size of the left margin (in Millimeter)
 	 */
 	public double getMarginLeft() {
@@ -426,7 +426,7 @@ public class PageLayoutProperties {
 	 * Set the right margin of this <code>PageLayoutProperties</code>
 	 * <p>
 	 * If the size is set to zero, the right margin definition will be removed.
-	 * 
+	 *
 	 * @param marginRight
 	 *            the size of the right margin (in Millimeter)
 	 */
@@ -442,7 +442,7 @@ public class PageLayoutProperties {
 	/**
 	 * Get the size of the right margin of this
 	 * <code>PageLayoutProperties</code>
-	 * 
+	 *
 	 * @return the size of the right margin (in Millimeter)
 	 */
 	public double getMarginRight() {
@@ -461,7 +461,7 @@ public class PageLayoutProperties {
 	 * Set the top margin of this <code>PageLayoutProperties</code>
 	 * <p>
 	 * If the size is set to zero, the top margin definition will be removed.
-	 * 
+	 *
 	 * @param marginTop
 	 *            the size of the right margin (in Millimeter)
 	 */
@@ -476,7 +476,7 @@ public class PageLayoutProperties {
 
 	/**
 	 * Get the size of the top margin of this <code>PageLayoutProperties</code>
-	 * 
+	 *
 	 * @return the size of the top margin (in Millimeter)
 	 */
 	public double getMarginTop() {
@@ -495,7 +495,7 @@ public class PageLayoutProperties {
 	 * Set the bottom margin of this <code>PageLayoutProperties</code>
 	 * <p>
 	 * If the size is set to zero, the bottom margin definition will be removed.
-	 * 
+	 *
 	 * @param marginBottom
 	 *            the size of the bottom margin (in Millimeter)
 	 */
@@ -511,7 +511,7 @@ public class PageLayoutProperties {
 	/**
 	 * Get the size of the bottom margin of this
 	 * <code>PageLayoutProperties</code>
-	 * 
+	 *
 	 * @return the size of the bottom margin (in Millimeter)
 	 */
 	public double getMarginBottom() {
@@ -528,7 +528,7 @@ public class PageLayoutProperties {
 
 	/**
 	 * Get the number format of this <code>PageLayoutProperties</code>
-	 * 
+	 *
 	 * @return the number format
 	 */
 	public String getNumberFormat() {
@@ -540,7 +540,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If the parameter <code>format</code> is null, the definition will be
 	 * removed.
-	 * 
+	 *
 	 * @param format
 	 *            specify the number format. The values of the style:num-format
 	 *            attribute are 1, i, I, string, an empty string, a or A.
@@ -556,7 +556,7 @@ public class PageLayoutProperties {
 
 	/**
 	 * Get the page width of this <code>PageLayoutProperties</code>
-	 * 
+	 *
 	 * @return the size of page width (in Millimeter)
 	 */
 	public double getPageWidth() {
@@ -575,7 +575,7 @@ public class PageLayoutProperties {
 	 * Set the page width of this <code>PageLayoutProperties</code>
 	 * <p>
 	 * If the size is set to zero, the page width definition will be removed.
-	 * 
+	 *
 	 * @param pageWidth
 	 *            the size of the page width (in Millimeter)
 	 */
@@ -590,7 +590,7 @@ public class PageLayoutProperties {
 
 	/**
 	 * Get the page height of this <code>PageLayoutProperties</code>
-	 * 
+	 *
 	 * @return the size of page height (in Millimeter)
 	 */
 	public double getPageHeight() {
@@ -609,7 +609,7 @@ public class PageLayoutProperties {
 	 * Set the page height of this <code>PageLayoutProperties</code>
 	 * <p>
 	 * If the size is set to zero, the page height definition will be removed.
-	 * 
+	 *
 	 * @param pageHeight
 	 *            the size of the page height (in Millimeter)
 	 */
@@ -624,7 +624,7 @@ public class PageLayoutProperties {
 
 	/**
 	 * Get the print orientation of this <code>PageLayoutProperties</code>
-	 * 
+	 *
 	 * @return the print orientation
 	 */
 	public String getPrintOrientation() {
@@ -636,7 +636,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If the parameter <code>orientation</code> is null, the print orientation
 	 * definition will be removed.
-	 * 
+	 *
 	 * @param orientation
 	 *            - the print orientation
 	 */
@@ -656,7 +656,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If there is no <code>style:footnote-sep</code> element, the default value
 	 * "left" will be returned.
-	 * 
+	 *
 	 * @return the adjustment value of footnote separator line.
 	 */
 	public String getFootnoteSepAdjustment() {
@@ -672,7 +672,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If there is no <code>style:footnote-sep</code> element, the null value
 	 * will be returned.
-	 * 
+	 *
 	 * @return the color of footnote separator line.
 	 */
 	public String getFootnoteSepColor() {
@@ -688,7 +688,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If there is no <code>style:footnote-sep</code> element, null will be
 	 * returned.
-	 * 
+	 *
 	 * @return the distance after a footnote separator line.
 	 */
 	public double getFootnoteSepDistanceAfterSep() {
@@ -708,7 +708,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If there is no <code>style:footnote-sep</code> element, null will be
 	 * returned.
-	 * 
+	 *
 	 * @return the distance before a footnote separator line.
 	 */
 	public double getFootnoteSepDistanceBeforeSep() {
@@ -728,7 +728,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If there is no <code>style:footnote-sep</code> element, the default value
 	 * "NONE" will be returned.
-	 * 
+	 *
 	 * @return the line style of a footnote separator line.
 	 */
 	public String getFootnoteSepLineStyle() {
@@ -744,7 +744,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If there is no <code>style:footnote-sep</code> element, the default value
 	 * 0 will be returned.
-	 * 
+	 *
 	 * @return the width a footnote separator line.
 	 */
 	public double getFootnoteSepWidth() {
@@ -763,7 +763,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If there is no <code>style:footnote-sep</code> element, the default value
 	 * 0 will be returned.
-	 * 
+	 *
 	 * @return the thickness a footnote separator line.
 	 */
 	public double getFootnoteSepThickness() {
@@ -788,29 +788,29 @@ public class PageLayoutProperties {
 	 * If other parameters, like <code>color,
 	 * distanceAfterSep, distanceBeforeSep, width or thickness</code> is null,
 	 * the corresponding definition will be removed.
-	 * 
+	 *
 	 * @param adjustment
 	 *            - specifies how a footnote separator line is aligned on a
 	 *            page.
-	 * 
+	 *
 	 * @param color
 	 *            - specifies the color of a column or footnote separator line
-	 * 
+	 *
 	 * @param distanceAfterSep
 	 *            - specifies the space between a footnote separator line and
 	 *            the footnote text.
-	 * 
+	 *
 	 * @param distanceBeforeSep
 	 *            - specifies the space between the body text area and a
 	 *            footnote separator line.
-	 * 
+	 *
 	 * @param lineStyle
 	 *            - specifies the style of a footnote separator line.
-	 * 
+	 *
 	 * @param width
 	 *            - specifies the length of the footnote separator line as a
 	 *            percentage of the body text area.
-	 * 
+	 *
 	 * @param thickness
 	 *            - specifies the width or thickness of a line.
 	 */
@@ -894,7 +894,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If the parameter <code>mode</code> is null, the default value of writing
 	 * node "page" will be set.
-	 * 
+	 *
 	 * @param mode
 	 *            - specifies a writing mode.
 	 */
@@ -908,7 +908,7 @@ public class PageLayoutProperties {
 
 	/**
 	 * Get the writing mode of this <code>PageLayoutProperties</code>
-	 * 
+	 *
 	 * @return the value of writing mode
 	 */
 	public String getWritingMode() {
@@ -921,7 +921,7 @@ public class PageLayoutProperties {
 	 * <p>
 	 * If the value of this attribute is set to 0, there is no limit to the
 	 * amount of space that the footnote can occupy.
-	 * 
+	 *
 	 * @param height
 	 *            - the max height which a footnote area can occupy
 	 */
@@ -931,7 +931,7 @@ public class PageLayoutProperties {
 
 	/**
 	 * Get the max height of a footnote area on a page.
-	 * 
+	 *
 	 * @return the value of max height of footnote area.
 	 */
 	public double getFootnoteMaxHeight() {
@@ -949,7 +949,7 @@ public class PageLayoutProperties {
 	 * Return an instance of
 	 * <code>PageLayoutProperties</p> to represent the "style:page-layout-properties" in a style element.
 	 * <p>If there is no "style:page-layout-properties" defined in the style element, a new "style:page-layout-properties" element will be created.
-	 * 
+	 *
 	 * @param style
 	 *            - a style element
 	 * @return an instance of <code>PageLayoutProperties</p>
@@ -966,7 +966,7 @@ public class PageLayoutProperties {
 	 * Return an instance of
 	 * <code>PageLayoutProperties</p> to represent the "style:page-layout-properties" in a style element.
 	 * <p>If there is no "style:page-layout-properties" defined in the style element, null will be returned.
-	 * 
+	 *
 	 * @param style
 	 *            - a style element
 	 * @return an instance of <code>PageLayoutProperties</p>;Null if there is no

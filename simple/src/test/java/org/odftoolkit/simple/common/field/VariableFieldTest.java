@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -47,7 +47,7 @@ public class VariableFieldTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testVariableTypesisplayField() {
 		try {
@@ -57,7 +57,7 @@ public class VariableFieldTest {
 			Assert.assertNotNull(simpleVariableField);
 			TextSpanElement newTextSpanElement = doc.newParagraph("Update Simple Variable Field:").newTextSpanElement();
 			simpleVariableField.updateField("simple variable content", newTextSpanElement);
-			
+
 			FieldType fieldType = simpleVariableField.getFieldType();
 			Assert.assertNotNull(fieldType);
 			Assert.assertEquals(FieldType.SIMPLE_VARIABLE_FIELD, fieldType);

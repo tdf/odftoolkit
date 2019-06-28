@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -46,7 +46,7 @@ import org.w3c.dom.NodeList;
  * AbstractChartContainer is an abstract implementation of the ChartContainer
  * interface, with a default implementation for every method defined in
  * ChartContainer.
- * 
+ *
  * @since 0.6
  */
 public abstract class AbstractChartContainer implements ChartContainer {
@@ -56,7 +56,7 @@ public abstract class AbstractChartContainer implements ChartContainer {
 
 	/**
 	 * The constructor to create a chart container
-	 * 
+	 *
 	 * @param doc
 	 *            - the onwer document
 	 */
@@ -80,7 +80,7 @@ public abstract class AbstractChartContainer implements ChartContainer {
 
 	/**
 	 * Returns the <draw:frame> element which can contain a chart image object.
-	 * 
+	 *
 	 * @return the draw:frame element
 	 */
 	protected abstract DrawFrameElement getChartFrame() throws Exception;

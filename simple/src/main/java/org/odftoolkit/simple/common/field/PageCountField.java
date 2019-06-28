@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -35,7 +35,7 @@ import org.odftoolkit.simple.style.NumberFormat;
  * <p>
  * NOTE: Before the document is opened in any editor, the value of this field
  * maybe invalid.
- * 
+ *
  * @since 0.5
  */
 public class PageCountField extends Field {
@@ -61,7 +61,7 @@ public class PageCountField extends Field {
 
 	/**
 	 * Specifies the number format of this field.
-	 * 
+	 *
 	 * @param format
 	 *            the format which is predefined in
 	 *            {@link org.odftoolkit.simple.style.NumberFormat NumberFormat}.
@@ -74,7 +74,7 @@ public class PageCountField extends Field {
 	/**
 	 * Return an instance of <code>TextPageCountElement</code> which represents
 	 * this feature.
-	 * 
+	 *
 	 * @return an instance of <code>TextPageCountElement</code>
 	 */
 	public TextPageCountElement getOdfElement() {

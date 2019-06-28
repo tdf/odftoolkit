@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -34,7 +34,7 @@ import org.odftoolkit.simple.draw.Control;
 /**
  * This class represents the form control of radio button, provides methods to
  * get/set the form properties and the style formatting of this control.
- * 
+ *
  * @since 0.8
  */
 public class RadioButton extends FormControl {
@@ -48,7 +48,7 @@ public class RadioButton extends FormControl {
 	 * Get an instance of radio button by an instance of FormRadioElement, while
 	 * searching the document content to make a bind with the DrawControl which
 	 * already reference to this radio button.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of FormRadioElement
 	 * @return an instance of radio button
@@ -91,7 +91,7 @@ public class RadioButton extends FormControl {
 
 	/**
 	 * Set the label content of this radio button
-	 * 
+	 *
 	 * @param label
 	 *            - the label content of this radio button
 	 */
@@ -101,7 +101,7 @@ public class RadioButton extends FormControl {
 
 	/**
 	 * Get the label content of this radio button
-	 * 
+	 *
 	 * @return the label content of this radio button
 	 */
 	public String getLabel() {
@@ -120,7 +120,7 @@ public class RadioButton extends FormControl {
 
 	/**
 	 * Get the default value of this control.
-	 * 
+	 *
 	 * @param default value
 	 */
 	public String getValue() {
@@ -130,7 +130,7 @@ public class RadioButton extends FormControl {
 	/**
 	 * Set the default value of this control, it will be override by current
 	 * value.
-	 * 
+	 *
 	 * @param value
 	 *            - default value
 	 */
@@ -140,7 +140,7 @@ public class RadioButton extends FormControl {
 
 	/**
 	 * Set the default selection status of this radio button
-	 * 
+	 *
 	 * @param isSelected
 	 *            - true means selected; false means unselected
 	 */
@@ -150,7 +150,7 @@ public class RadioButton extends FormControl {
 
 	/**
 	 * Get the default selection status of this radio button
-	 * 
+	 *
 	 * @return true means selected; false means unselected
 	 */
 	public boolean getDefaultSelected() {
@@ -160,7 +160,7 @@ public class RadioButton extends FormControl {
 	/**
 	 * Set current selection status of this radio button, it override the
 	 * default status
-	 * 
+	 *
 	 * @param isSelected
 	 *            - true means selected; false means unselected
 	 */
@@ -171,7 +171,7 @@ public class RadioButton extends FormControl {
 
 	/**
 	 * Get current selection status of this radio button
-	 * 
+	 *
 	 * @return true means selected; false means unselected
 	 */
 	public boolean getCurrentSelected() {
@@ -180,7 +180,7 @@ public class RadioButton extends FormControl {
 
 	/**
 	 * Get a simple iterator for radio buttons.
-	 * 
+	 *
 	 * @param container
 	 *            - an instance of form where to traverse the radio buttons
 	 */

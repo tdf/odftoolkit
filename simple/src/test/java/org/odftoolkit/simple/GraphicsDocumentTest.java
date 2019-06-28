@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -32,7 +32,7 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 public class GraphicsDocumentTest {
 	private static final Logger LOG = Logger.getLogger(GraphicsDocumentTest.class.getName());
 	private static final String TEST_FILE = "graphicTestTemplate.otg";
-	
+
 	@Test
 	public void testLoadingAChartTemplate() throws Exception {
 		try {
@@ -46,7 +46,7 @@ public class GraphicsDocumentTest {
 		}
 
 	}
-	
+
 	@Test
 	public void testLoadDocumentPath() throws Exception {
 		try {
@@ -58,9 +58,9 @@ public class GraphicsDocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testLoadDocumentFile() throws Exception {
 		try {
@@ -73,9 +73,9 @@ public class GraphicsDocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testLoadDocumentStream() throws Exception {
 		try {
@@ -89,9 +89,9 @@ public class GraphicsDocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testGetContentRoot() throws Exception {
 		try {
@@ -106,9 +106,9 @@ public class GraphicsDocumentTest {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testGetTableContainerElement() throws Exception {
 		String filePath = ResourceUtilities.getAbsolutePath(TEST_FILE);
@@ -123,7 +123,7 @@ public class GraphicsDocumentTest {
 			Assert.assertTrue(e instanceof UnsupportedOperationException);
 			Assert.assertEquals("Graphics document is not supported to hold table now.", e.getMessage());
 		}
-		
+
 	}
 
 }

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -44,7 +44,7 @@ import org.w3c.dom.Node;
  * with red color.
  * <p>
  * A NumberDecorator can be reused in the same Document.
- * 
+ *
  * @since 0.4
  */
 public abstract class NumberDecoratorBase implements ListDecorator {
@@ -63,12 +63,12 @@ public abstract class NumberDecoratorBase implements ListDecorator {
 
 	/**
 	 * Constructor with Document.
-	 * 
+	 *
 	 * @param doc
 	 *            the Document which this NumberDecorator will be used on.
-	 * @param styleName style name: (i.e. NumberDecorator:  NumberDecorator.DEFAULT_NAME)                 
-	 * @param styleNameIntern intern stylename (i.e. NumberDecorator:  "Numbering_20_Symbols")      
-	 * @param numberingFormat the numbering format (i.e. NumberDecorator:  "1", sonsrt "a", "A", "i", "I", ....)      
+	 * @param styleName style name: (i.e. NumberDecorator:  NumberDecorator.DEFAULT_NAME)
+	 * @param styleNameIntern intern stylename (i.e. NumberDecorator:  "Numbering_20_Symbols")
+	 * @param numberingFormat the numbering format (i.e. NumberDecorator:  "1", sonsrt "a", "A", "i", "I", ....)
 	 * @param suffix  suffix after the number ("." for 1., 2., ... ")" for a) b) c) etc)
 	 * @param prefix  prefix before the number ("(" for (a) (b) (c) etc)
 	 */
@@ -158,7 +158,7 @@ public abstract class NumberDecoratorBase implements ListDecorator {
 		}
 		return odfStyle;
 	}
-	
+
 	/**
 	 * only for JUnit Test
 	 * @return

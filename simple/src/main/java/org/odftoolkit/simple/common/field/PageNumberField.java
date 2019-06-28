@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -32,7 +32,7 @@ import org.odftoolkit.simple.style.NumberFormat;
  * <p>
  * NOTE: Before the document is opened in any editor, the value of this field is
  * invalid.
- * 
+ *
  * @since 0.5
  */
 public class PageNumberField extends Field {
@@ -44,7 +44,7 @@ public class PageNumberField extends Field {
 	 * A <tt>DisplayType</tt> represents the selected page attribute of the
 	 * field. The page immediately preceding the current page, current page and
 	 * the page immediately following the current page are supported.
-	 * 
+	 *
 	 * @since 0.5
 	 */
 	public static enum DisplayType {
@@ -75,7 +75,7 @@ public class PageNumberField extends Field {
 	/**
 	 * Specifies whether to display or not the number of a previous or following
 	 * page rather than the number of the current page.
-	 * 
+	 *
 	 * @param type
 	 *            the display type which is predefined.
 	 */
@@ -86,7 +86,7 @@ public class PageNumberField extends Field {
 
 	/**
 	 * Specifies the number format of this field.
-	 * 
+	 *
 	 * @param format
 	 *            the format which is predefined in
 	 *            {@link org.odftoolkit.simple.style.NumberFormat NumberFormat}.
@@ -99,7 +99,7 @@ public class PageNumberField extends Field {
 	/**
 	 * Return an instance of <code>TextPageNumberElement</code> which represents
 	 * this feature.
-	 * 
+	 *
 	 * @return an instance of <code>TextPageNumberElement</code>
 	 */
 	public TextPageNumberElement getOdfElement() {

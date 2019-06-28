@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -33,18 +33,18 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 public class ChapterFieldTest {
 
 	private static String TEST_DOCUMENT = "headerFooterHidden.odt";
-	
+
 	@Test
 	public void testSetOutlineLevel() {
 		try {
 			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_DOCUMENT));
 			ChapterField chapterField = Fields.createChapterField(doc.addParagraph("Chapter:").getOdfElement());
 			chapterField.setOutlineLevel(1);
-			
+
 			TextChapterElement tchapterele = chapterField.getOdfElement();
 			Integer level = tchapterele.getTextOutlineLevelAttribute();
 			Assert.assertTrue(1 == level);
-			
+
 			//save
 			//doc.save(ResourceUtilities.getAbsolutePath(TEST_DOCUMENT));
 		} catch (Exception e) {
@@ -52,7 +52,7 @@ public class ChapterFieldTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testGetOdfElement() {
 		try {
@@ -60,20 +60,20 @@ public class ChapterFieldTest {
 			ChapterField chapterField = Fields.createChapterField(doc.addParagraph("Chapter:").getOdfElement());
 			chapterField.setOutlineLevel(1);
 			TextChapterElement tchapterEle = chapterField.getOdfElement();
-			
+
 			Assert.assertNotNull(tchapterEle);
 			Assert.assertEquals("chapter", tchapterEle.getLocalName());
 			Assert.assertEquals("text:chapter", tchapterEle.getNodeName());
 
 			//save
 			//doc.save(ResourceUtilities.getAbsolutePath("TextFieldSampleDocument.odt"));
-			
+
 		} catch (Exception e) {
 			Logger.getLogger(ChapterFieldTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testGetFieldType() {
 		try {

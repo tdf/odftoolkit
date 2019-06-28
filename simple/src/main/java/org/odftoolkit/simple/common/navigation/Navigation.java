@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -27,30 +27,30 @@ import org.w3c.dom.Node;
  * element by user defined conditions.
  */
 public abstract class Navigation {
-	
+
 	/**
 	 * Return true if document still has more matched {@link Selection
 	 * Selection} when traversing the document(in other words return true if
 	 * getNextMatchElement() would return an element instance rather than return
 	 * null)
-	 * 
+	 *
 	 * @return true if document still has more matched Selection, and vice versa
 	 */
 	public abstract boolean hasNext();
 
 	// public abstract void gotoPrevious();
-	
+
 	/**
 	 * Get next {@link Selection Selection} result.
-	 * 
+	 *
 	 * @return the next <code>Selection</code> result
 	 */
 	public abstract Selection nextSelection();
-	
+
 	/**
 	 * Check if the element is a qualified one.
-	 * <p> Developers can define their own logic here to determine whether an element satisfies the requirements. 
-	 * 
+	 * <p> Developers can define their own logic here to determine whether an element satisfies the requirements.
+	 *
 	 * @param element
 	 *            navigate this element node.
 	 * @return true if the element node match the user defined condition; false
@@ -60,7 +60,7 @@ public abstract class Navigation {
 
 	/**
 	 * Get the next matched element in the whole element tree.
-	 * 
+	 *
 	 * @param startpoint
 	 *            navigate from the start point
 	 * @return the next matched element node
@@ -72,7 +72,7 @@ public abstract class Navigation {
 
 	/**
 	 * Get the next matched element node in a sub tree
-	 * 
+	 *
 	 * @param startpoint
 	 *            navigate from the start point
 	 * @param root

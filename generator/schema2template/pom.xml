@@ -25,7 +25,7 @@
         <artifactId>schema2template-pom</artifactId>
         <version>0.9.0-SNAPSHOT</version>
     </parent>
-  
+
     <!-- The Basics -->
     <artifactId>schema2template</artifactId>
     <version>0.9.0-SNAPSHOT</version>
@@ -36,103 +36,103 @@
             <artifactId>velocity-engine-core</artifactId>
             <version>2.0</version>
         </dependency>
-		<dependency>
-			<groupId>xerces</groupId>
-			<artifactId>xercesImpl</artifactId>			
-		</dependency>        
-		<dependency>
-			<groupId>net.java.dev.msv</groupId>
-			<artifactId>msv-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.msv</groupId>
+            <artifactId>msv-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
     </properties>
-	
-	<!-- Build Settings -->
-	<build>
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-webdav-jackrabbit</artifactId>
-				<version>1.0</version>
-			</extension>
-		</extensions>
-		<plugins>
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.2</version>
-				<configuration>
-					<archive>
-						<index>true</index>
-						<manifest>
-							<mainClass>schema2template.example.odf.OdfHelper</mainClass>
-						</manifest>
-						<manifestEntries>
-							<version>${project.version}</version>
-						</manifestEntries>
-						<manifestSections>
-							<manifestSection>
-								<name>schema2template</name>
-								<manifestEntries>
-									<Application-Name>schema2template</Application-Name>
-									<Application-Version>${project.version}</Application-Version>
-									<Application-Website>${project.url}</Application-Website>
-									<Built-By>${user.name}</Built-By>
-									<Built-Date>${build.timestamp}</Built-Date>
-								</manifestEntries>
-							</manifestSection>
-						</manifestSections>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<!-- Explizit version required for fix on systemPropertyVariables -->
-				<version>2.19.1</version>
-				<configuration>
-					<systemPropertyVariables>
-						<odfdom.version>${project.version}</odfdom.version>
-						<odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
-					</systemPropertyVariables>
-					<excludes>
-						<exclude>**/integrationtest/**</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.1</version>
-				<configuration>
+
+    <!-- Build Settings -->
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav-jackrabbit</artifactId>
+                <version>1.0</version>
+            </extension>
+        </extensions>
+        <plugins>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <mainClass>schema2template.example.odf.OdfHelper</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <version>${project.version}</version>
+                        </manifestEntries>
+                        <manifestSections>
+                            <manifestSection>
+                                <name>schema2template</name>
+                                <manifestEntries>
+                                    <Application-Name>schema2template</Application-Name>
+                                    <Application-Version>${project.version}</Application-Version>
+                                    <Application-Website>${project.url}</Application-Website>
+                                    <Built-By>${user.name}</Built-By>
+                                    <Built-Date>${build.timestamp}</Built-Date>
+                                </manifestEntries>
+                            </manifestSection>
+                        </manifestSections>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <!-- Explizit version required for fix on systemPropertyVariables -->
+                <version>2.19.1</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <odfdom.version>${project.version}</odfdom.version>
+                        <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
+                    </systemPropertyVariables>
+                    <excludes>
+                        <exclude>**/integrationtest/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
                     <!-- defined in the parent pom.xml -->
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-					<showDeprecation>true</showDeprecation>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>			
-				<version>3.1.0</version>
-				<configuration>
-					<doctitle>Schema2template</doctitle>
-					<links>
-						<link>http://docs.oracle.com/javase/8/docs/api/</link>
-					</links>
-					<splitindex>true</splitindex>
-					<windowtitle>Schema2template v${project.version} - https://odftoolkit.org</windowtitle>
-					<bottom>${javadoc.bottom}</bottom>
-					<additionalOptions>
-						<additionalOption>${javadoc.opts}</additionalOption>
-					</additionalOptions>
-				</configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <doctitle>Schema2template</doctitle>
+                    <links>
+                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
+                    </links>
+                    <splitindex>true</splitindex>
+                    <windowtitle>Schema2template v${project.version} - https://odftoolkit.org</windowtitle>
+                    <bottom>${javadoc.bottom}</bottom>
+                    <additionalOptions>
+                        <additionalOption>${javadoc.opts}</additionalOption>
+                    </additionalOptions>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -141,10 +141,10 @@
                         </goals>
                         <configuration>
                             <additionalparam>${javadoc.opts}</additionalparam>
-                        </configuration>                        
+                        </configuration>
                     </execution>
-                </executions>				
-			</plugin>			
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
@@ -156,30 +156,30 @@
                     </excludes>
                 </configuration>
             </plugin>
-		</plugins>
-	</build>
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>			
-				<version>3.1.0</version>
-				<configuration>
-					<doctitle>Schema2template</doctitle>
-					<links>
-						<link>http://docs.oracle.com/javase/8/docs/api/</link>
-					</links>
-					<splitindex>true</splitindex>
-					<windowtitle>Schema2template v${project.version} - https://odftoolkit.org</windowtitle>
-					<bottom>${javadoc.bottom}</bottom>
-					<additionalOptions>
-						<additionalOption>${javadoc.opts}</additionalOption>
-					</additionalOptions>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <doctitle>Schema2template</doctitle>
+                    <links>
+                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
+                    </links>
+                    <splitindex>true</splitindex>
+                    <windowtitle>Schema2template v${project.version} - https://odftoolkit.org</windowtitle>
+                    <bottom>${javadoc.bottom}</bottom>
+                    <additionalOptions>
+                        <additionalOption>${javadoc.opts}</additionalOption>
+                    </additionalOptions>
                     <docfilessubdirs>true</docfilessubdirs>
                     <doclint>none</doclint>
-				</configuration>
-				
-			</plugin>
+                </configuration>
+
+            </plugin>
 
             <!-- Code Coverage Testing generated by Cobertura -->
             <plugin>

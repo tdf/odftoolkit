@@ -1,20 +1,20 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2009 IBM. All rights reserved.
  * Copyright 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -32,12 +32,12 @@ import com.sun.tools.doclets.Taglet;
 /**
  * This class implements a custom taglet to the map the ODF element to the
  * declaration of the ODF element in the OpenDocument specification.
- * 
+ *
  * The position of the OpenDocument specification in HTML can be provided using
  * an environment variable or java system property, while the system property
  * overrides the environment variable. In case nothing is been a default path
  * within the JavaDoc doc-files directory is being used.
- * 
+ *
  * For example the taglet <code>{&#64;odf.element text:span}</code> would be
  * resolved without variable settings to
  * <code>JAVA_DOC_BASE/doc-files/OpenDocument-v1.2-part1.html#element-text_span</code>
@@ -61,8 +61,8 @@ public class OdfElementTaglet implements Taglet {
 	}
 
 	/*
-	 * FINDING THE ABSOLUTE PATH TO THE ODF SPEC PART1 and PART3 IN HTML: 
-	 * 1) Try to get the odfSpecPath from the Java System variable (ODF_SPEC_PATH) 
+	 * FINDING THE ABSOLUTE PATH TO THE ODF SPEC PART1 and PART3 IN HTML:
+	 * 1) Try to get the odfSpecPath from the Java System variable (ODF_SPEC_PATH)
 	 * 2) Try to get the odfSpecPath from the environment variable (ODF_SPEC_PATH)
 	 * 3) If both not worked, use the default path
 	 */
@@ -146,7 +146,7 @@ public class OdfElementTaglet implements Taglet {
 
 	/**
 	 * Will return true since this is an inline tag.
-	 * 
+	 *
 	 * @return true since this is an inline tag.
 	 */
 
@@ -156,7 +156,7 @@ public class OdfElementTaglet implements Taglet {
 
 	/**
 	 * Register this Taglet.
-	 * 
+	 *
 	 * @param tagletMap
 	 *            the map to register this tag to.
 	 */
@@ -172,7 +172,7 @@ public class OdfElementTaglet implements Taglet {
 	/**
 	 * Given the <code>Tag</code> representation of this custom tag, return its
 	 * string representation.
-	 * 
+	 *
 	 * @param tag
 	 *            he <code>Tag</code> representation of this custom tag.
 	 */
@@ -194,7 +194,7 @@ public class OdfElementTaglet implements Taglet {
 	/**
 	 * This method should not be called since arrays of inline tags do not
 	 * exist. Method should be used to convert this inline tag to a string.
-	 * 
+	 *
 	 * @param tags
 	 *            the array of <code>Tag</code>s representing of this custom
 	 *            tag.

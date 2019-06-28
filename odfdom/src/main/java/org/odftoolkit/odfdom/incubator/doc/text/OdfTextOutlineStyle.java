@@ -42,7 +42,7 @@ public class OdfTextOutlineStyle extends TextOutlineStyleElement
 
     /**
      * Retrieves the ODF TextOutlineLevelStyle with level count
-     * 
+     *
      * @param level  The level count
      * @return The <code>OdfTextOutlineLevelStyle</code>
      */
@@ -63,10 +63,10 @@ public class OdfTextOutlineStyle extends TextOutlineStyleElement
         }
         return null;
     }
-    
+
 	/**
 	 * Retrieves or create the ODF TextOutlineLevelStyle with level count
-	 * 
+	 *
 	 * @param level The level count
 	 * @return The <code>OdfTextOutlineLevelStyle</code>
 	 */

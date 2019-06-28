@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -31,7 +31,7 @@ import org.odftoolkit.odfdom.pkg.OdfPackage;
 
 /**
  * This class represents an empty ODF graphics document.
- * 
+ *
  */
 public class GraphicsDocument extends Document {
 
@@ -66,7 +66,7 @@ public class GraphicsDocument extends Document {
 		}
 
 		/**
-		 * 
+		 *
 		 * @param mediaType
 		 *            string defining an ODF document
 		 * @return the according OdfMediatype encapuslating the given string and
@@ -79,7 +79,7 @@ public class GraphicsDocument extends Document {
 
 	/**
 	 * Creates an empty graphics document.
-	 * 
+	 *
 	 * @return ODF graphics document based on a default template
 	 * @throws java.lang.Exception
 	 *             - if the document could not be created
@@ -91,7 +91,7 @@ public class GraphicsDocument extends Document {
 
 	/**
 	 * Creates an empty graphics template.
-	 * 
+	 *
 	 * @return ODF graphics template based on a default
 	 * @throws java.lang.Exception
 	 *             - if the template could not be created
@@ -115,7 +115,7 @@ public class GraphicsDocument extends Document {
 	/**
 	 * Creates an GraphicsDocument from the OpenDocument provided by a resource
 	 * Stream.
-	 * 
+	 *
 	 * <p>
 	 * Since an InputStream does not provide the arbitrary (non sequentiell)
 	 * read access needed by GraphicsDocument, the InputStream is cached. This
@@ -123,12 +123,12 @@ public class GraphicsDocument extends Document {
 	 * methods. An advantage of caching is that there are no problems
 	 * overwriting an input file.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If the resource stream is not a ODF graphics document, ClassCastException
 	 * might be thrown.
 	 * </p>
-	 * 
+	 *
 	 * @param inputStream
 	 *            - the InputStream of the ODF graphics document.
 	 * @return the graphics document created from the given InputStream
@@ -141,17 +141,17 @@ public class GraphicsDocument extends Document {
 
 	/**
 	 * Loads an GraphicsDocument from the provided path.
-	 * 
+	 *
 	 * <p>
 	 * GraphicsDocument relies on the file being available for read access over
 	 * the whole lifecycle of GraphicsDocument.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If the resource stream is not a ODF graphics document, ClassCastException
 	 * might be thrown.
 	 * </p>
-	 * 
+	 *
 	 * @param documentPath
 	 *            - the path from where the document can be loaded
 	 * @return the graphics document from the given path or NULL if the media
@@ -165,17 +165,17 @@ public class GraphicsDocument extends Document {
 
 	/**
 	 * Creates an GraphicsDocument from the OpenDocument provided by a File.
-	 * 
+	 *
 	 * <p>
 	 * GraphicsDocument relies on the file being available for read access over
 	 * the whole lifecycle of GraphicsDocument.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * If the resource stream is not a ODF graphics document, ClassCastException
 	 * might be thrown.
 	 * </p>
-	 * 
+	 *
 	 * @param file
 	 *            - a file representing the ODF graphics document.
 	 * @return the graphics document created from the given File
@@ -188,7 +188,7 @@ public class GraphicsDocument extends Document {
 
 	/**
 	 * Get the content root of a graphics document.
-	 * 
+	 *
 	 * @return content root, representing the office:drawing tag
 	 * @throws Exception
 	 *             if the file DOM could not be created.
@@ -201,7 +201,7 @@ public class GraphicsDocument extends Document {
 	/**
 	 * Changes the document to the given mediatype. This method can only be used
 	 * to convert a document to a related mediatype, e.g. template.
-	 * 
+	 *
 	 * @param mediaType
 	 *            the related ODF mimetype
 	 */

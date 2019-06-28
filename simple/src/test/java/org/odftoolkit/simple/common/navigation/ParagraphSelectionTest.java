@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -92,8 +92,8 @@ public class ParagraphSelectionTest {
 			j++;
 		}
 		Assert.assertTrue(i == j);
-		
-		//2 Task1, #1 at the start of original Paragraph, #2 replace original Paragraph  
+
+		//2 Task1, #1 at the start of original Paragraph, #2 replace original Paragraph
 				search = new TextNavigation("Task1", doc);
 				 i = 0;
 				while (search.hasNext()) {
@@ -110,8 +110,8 @@ public class ParagraphSelectionTest {
 					j++;
 				}
 				Assert.assertTrue(i == j);
-		
-				//1 Container, #1 at the end of original Paragraph, 
+
+				//1 Container, #1 at the end of original Paragraph,
 				search = new TextNavigation("Container", doc);
 				 i = 0;
 				while (search.hasNext()) {
@@ -128,8 +128,8 @@ public class ParagraphSelectionTest {
 					j++;
 				}
 				Assert.assertTrue(i == j);
-				
-				
+
+
 		try {
 			doc.save(ResourceUtilities.newTestOutputFile("TestParagraphSelectionResult.odt"));
 		} catch (Exception e) {

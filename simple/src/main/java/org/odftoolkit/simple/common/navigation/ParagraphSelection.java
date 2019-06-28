@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -47,17 +47,17 @@ import org.w3c.dom.NodeList;
 
 /**
  * This is a decorator class of TextSelection, which help user replace a text content with a Paragraph.
- * 
+ *
  */
 public class ParagraphSelection extends Selection {
 
 	private TextSelection textSelection;
 	private Paragraph paragraphContainer;
 	private Paragraph sourceParagraph;
-	
+
 	/**
 	 * Replace the content with a paragraph, the paragraph can be in the same TextDocument or in a different Document.
-	 * 
+	 *
 	 * @param paragraph
 	 *            the reference paragraph to replace.
 	 */
@@ -95,7 +95,7 @@ public class ParagraphSelection extends Selection {
 	/**
 	 * Construct a ParagraphSelection with TextSelection. Then user can replace text
 	 * content with paragraph.
-	 * 
+	 *
 	 * @param selection
 	 *            the TextSelection to be decorated.
 	 */
@@ -110,7 +110,7 @@ public class ParagraphSelection extends Selection {
 	 * same container element will be updated automatically because the start
 	 * index of the following selections will be changed when the previous
 	 * selection has been deleted.
-	 * 
+	 *
 	 * @throws InvalidNavigationException
 	 *             if the selection is unavailable.
 	 */
@@ -121,7 +121,7 @@ public class ParagraphSelection extends Selection {
 
 	/**
 	 * Paste this selection just after a specific selection.
-	 * 
+	 *
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException
@@ -205,7 +205,7 @@ public class ParagraphSelection extends Selection {
 
 	/**
 	 * Paste this selection just before a specific selection.
-	 * 
+	 *
 	 * @param positionItem
 	 *            a selection that is used to point out the position
 	 * @throws InvalidNavigationException
@@ -443,7 +443,7 @@ public class ParagraphSelection extends Selection {
 						sourceParagraph, true);
 				if (!continued)
 					cleanBreakProperty(orgparagraph);
-				
+
 			}
 		} else{
 			TextDocument document = (TextDocument) paragraphContainer

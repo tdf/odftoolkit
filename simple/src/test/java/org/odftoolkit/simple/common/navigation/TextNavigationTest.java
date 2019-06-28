@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -46,14 +46,14 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Node;
 
 /**
- * Test the method of class org.odftoolkit.simple.common.navigation.TextNavigation 
+ * Test the method of class org.odftoolkit.simple.common.navigation.TextNavigation
  */
 public class TextNavigationTest {
 
 	private static final Logger LOG = Logger.getLogger(TextNavigationTest.class.getName());
 	private static final String TEXT_FILE = "TestTextSelection.odt";
 	private static final String NAVIGATION_ODFELEMENT_FILE = "NavigationInOdfElementTest.odp";
-	
+
 	TextDocument doc;
 
 	@BeforeClass
@@ -110,7 +110,7 @@ public class TextNavigationTest {
 			// match values by specifying a document to TextNavigation
 			TextNavigation search = new TextNavigation("delete", doc);
 			matchLines(search, doc.getContentRoot());
-			
+
 			// match value by specifying a Node to the TextNavigation
 			search = new TextNavigation("delete", doc.getContentRoot());
 			matchLines(search, doc.getContentRoot());
@@ -119,7 +119,7 @@ public class TextNavigationTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 	/**
 	 * Matches the lines on the given search and rootNode
 	 * @param search
@@ -146,7 +146,7 @@ public class TextNavigationTest {
 		match = (OdfElement) search.getNextMatchElement(match);
 		Assert.assertNotNull(match);
 		Assert.assertEquals("Hello delete this word delete true delete  indeed", TextExtractor.getText(match));
-		
+
 		match = (OdfElement) search.getNextMatchElement(match);
 		Assert.assertNotNull(match);
 		Assert.assertEquals("something to delete in a frame!", TextExtractor.getText(match));
@@ -179,7 +179,7 @@ public class TextNavigationTest {
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 	}
-	
+
 
 	@Test
 	public void testCellReplacementWithParagraph() throws Exception {
@@ -192,9 +192,9 @@ public class TextNavigationTest {
 				selection.replaceWith(para);
 			}
 		});
-		
+
 	}
-	
+
 
 	@Test
 	public void testCellReplacementWithString() throws Exception {
@@ -204,9 +204,9 @@ public class TextNavigationTest {
 				selection.replaceWith(value);
 			}
 		});
-		
+
 	}
-	
+
 
 	private void replace(ReplacementAction replacementAction) throws Exception {
 		TextDocument docToReplaceIn = TextDocument.newTextDocument();
@@ -222,7 +222,7 @@ public class TextNavigationTest {
 		// sanity check
 		Assert.assertEquals("<<ONE>>\n<<TWO>>", cell.getDisplayText());
 		Assert.assertEquals("<<ONE>>\n<<TWO>>", cell.getStringValue());
-		
+
 		for (String toReplace : replacements.keySet()) {
 			TextNavigation navigation = new TextNavigation(toReplace, docToReplaceIn);
 			while (navigation.hasNext()) {
@@ -235,8 +235,8 @@ public class TextNavigationTest {
 		Assert.assertEquals("1\n2", cell.getDisplayText());
 		Assert.assertEquals("1\n2", cell.getStringValue());
 	}
-	
+
 	private static interface ReplacementAction {
 		void replace(TextSelection selection, String value) throws Exception;
-	}	
+	}
 }

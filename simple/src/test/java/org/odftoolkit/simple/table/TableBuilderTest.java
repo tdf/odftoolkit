@@ -28,7 +28,7 @@ import static org.junit.Assert.assertNotNull;
  * @author Florian Hopf, fhopf@apache.org
  */
 public class TableBuilderTest {
-    
+
     @Test
     public void testCreateTable() throws Exception {
         TextDocument textDoc = TextDocument.newTextDocument();
@@ -40,7 +40,7 @@ public class TableBuilderTest {
         assertEquals(1, table.getHeaderColumnCount());
         assertNotNull(table.getCellByPosition(1, 1));
     }
-    
+
     @Test
     public void testAppendRow() throws Exception {
         TextDocument textDoc = TextDocument.newTextDocument();
@@ -52,7 +52,7 @@ public class TableBuilderTest {
         assertEquals(5, table.getRowCount());
         assertNotNull(table.getCellByPosition(1, 1));
     }
-    
+
     @Test
     public void test363() throws Exception {
         TextDocument document = TextDocument.newTextDocument();

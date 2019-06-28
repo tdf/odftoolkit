@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -28,33 +28,33 @@ import java.util.Date;
 /**
  * This is a default realization of {@link CellValueAdapter CellValueAdapter}.
  * It will adapt cell string content as common rule.
- * 
+ *
  * @see CellValueAdapter
- * 
+ *
  * @since 0.3
  */
 public class DefaultCellValueAdapter implements CellValueAdapter{
-	
+
 	/**
 	 * The default date format of table cell.
 	 */
 	private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
-	
+
 	/**
 	 * The default time format of table cell.
 	 */
 	private static final String DEFAULT_TIME_FORMAT = "'PT'HH'H'mm'M'ss'S'";
-	
+
 	/**
 	 * The default percent format of table cell.
 	 */
 	private static final String DEFAULT_PERCENT_FORMAT = "0%";
-	
+
 	/**
 	 * The default currency format of table cell.
 	 */
 	private static final String DEFAULT_CURRENCY_FORMAT = "$#,##0.00;-$#,##0.00";
-	
+
 	/* (non-Javadoc)
 	 * @see org.odftoolkit.simple.table.CellValueAdapter#adaptValue()
 	 */

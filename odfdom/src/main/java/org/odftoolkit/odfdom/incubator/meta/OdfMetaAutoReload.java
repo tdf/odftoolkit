@@ -28,7 +28,7 @@ import org.odftoolkit.odfdom.dom.element.meta.MetaAutoReloadElement;
  * <code>OdfMetaAutoReload</code> feature specifies whether the document is
  * reloaded or replaced by another document after a certain period of time has
  * elapsed.
- * 
+ *
  */
 // TODO: the functions are not completed.
 public class OdfMetaAutoReload {
@@ -37,7 +37,7 @@ public class OdfMetaAutoReload {
 
 	/**
 	 * Constructor of <code>OdfMetaAutoReload</code> feature.
-	 * 
+	 *
 	 * @param element
 	 *            an instance of ODF Element <code>MetaAutoReloadElement</code>
 	 */
@@ -48,7 +48,7 @@ public class OdfMetaAutoReload {
 	/**
 	 * Return the instance of ODF Element <codeMetaAutoReloadElement</code>
 	 * which represents this feature.
-	 * 
+	 *
 	 * @return the instance of ODF Element <code>MetaAutoReloadElement</code>
 	 */
 	public MetaAutoReloadElement getMetaAutoReloadElement() {

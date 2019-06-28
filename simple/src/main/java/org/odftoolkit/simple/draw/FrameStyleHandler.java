@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -35,7 +35,7 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalRelative;
 
 /**
  * This class provides functions to handle the style of a frame.
- * 
+ *
  * @since 0.5
  */
 public class FrameStyleHandler extends DefaultStyleHandler {
@@ -54,7 +54,7 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 	 * The second parameter <code>bordersType</code> describes which borders you
 	 * want to apply the style to, e.g. up border, bottom border, left border,
 	 * right border, diagonal lines or four borders.
-	 * 
+	 *
 	 * @param border
 	 *            - the border style description
 	 * @param bordersType
@@ -76,7 +76,7 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * If the stroke is DASH, there is dash line around the frame. color, width
 	 * and the style name of dash line need to be specified.
-	 * 
+	 *
 	 * @param stroke
 	 *            - the stroke type
 	 * @param color
@@ -96,7 +96,7 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * If the parameter is null, there will be no background color defined for
 	 * this frame. The old setting of background color will be removed.
-	 * 
+	 *
 	 * @param color
 	 *            - the background color to be set
 	 */
@@ -112,7 +112,7 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 	 * Set whether the content of a frame is displayed in the background or
 	 * foreground. If it's displayed in the background, the content wouldn't be
 	 * selected or moved.
-	 * 
+	 *
 	 * @param isBackgroundFrame
 	 *            If <code>true</code>, the frame is displayed in the
 	 *            background.
@@ -122,10 +122,10 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 		GraphicProperties graphicPropertiesForWrite = getGraphicPropertiesForWrite();
 		graphicPropertiesForWrite.setStyleRunThrough(isBackgroundFrame);
 	}
-	
+
 	/**
 	 * Set how a frame is bound to a text document. Default position relative and alignment will be set.
-	 * 
+	 *
 	 * <p>If the document is not text document, nothing will happen.
 	 * @param achorType - the point at which a frame is bound to a text document
 	 */
@@ -138,7 +138,7 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 
 		DrawFrameElement frameElement = (DrawFrameElement)mOdfElement;
 		frameElement.setTextAnchorTypeAttribute(achorType.toString());
-		
+
 		//set default relative
 		switch(achorType)
 		{
@@ -168,10 +168,10 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 			break;
 		}
 	}
-	
+
 	/**
 	 * Set the horizontal position
-	 * 
+	 *
 	 * @param horizontalPos
 	 *            - the horizontal position
 	 */
@@ -179,10 +179,10 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 		GraphicProperties graphicPropertiesForWrite = getGraphicPropertiesForWrite();
 		graphicPropertiesForWrite.setHorizontalPosition(horizontalPos);
 	}
-	
+
 	/**
 	 * Set the horizontal relative
-	 * 
+	 *
 	 * @param relative
 	 *            - the horizontal relative
 	 */
@@ -191,10 +191,10 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 		GraphicProperties graphicPropertiesForWrite = getGraphicPropertiesForWrite();
 		graphicPropertiesForWrite.setHorizontalRelative(relative);
 	}
-	
+
 	/**
 	 * Set the vertical relative
-	 * 
+	 *
 	 * @param relative
 	 *            - the vertical relative
 	 */
@@ -206,7 +206,7 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 
 	/**
 	 * Set the vertical position
-	 * 
+	 *
 	 * @param verticalPos
 	 *            - the vertical position
 	 */
@@ -217,7 +217,7 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 
 	/**
 	 * Return the horizontal position
-	 * 
+	 *
 	 * @return the horizontal position
 	 */
 	public FrameHorizontalPosition getHorizontalPosition() {
@@ -227,14 +227,14 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 
 	/**
 	 * Return the vertical position
-	 * 
+	 *
 	 * @return the vertical position
 	 */
 	public FrameVerticalPosition getVerticalPosition() {
 		GraphicProperties graphicPropertiesForRead = getGraphicPropertiesForRead();
 		return graphicPropertiesForRead.getVerticalPosition();
 	}
-	
+
 	/**
 	 * Return the vertical relative
 	 * @return the vertical relative
@@ -244,7 +244,7 @@ public class FrameStyleHandler extends DefaultStyleHandler {
 		GraphicProperties graphicPropertiesForRead = getGraphicPropertiesForRead();
 		return graphicPropertiesForRead.getVerticalRelative();
 	}
-	
+
 	/**
 	 * Return the horizontal relative
 	 * @return the horizontal relative

@@ -27,7 +27,7 @@ import org.odftoolkit.odfdom.dom.element.meta.MetaDocumentStatisticElement;
 /**
  * <code>DocumentStatistic</code> feature specifies the statistics about
  * the document.
- * 
+ *
  */
 public class DocumentStatistic {
 
@@ -35,7 +35,7 @@ public class DocumentStatistic {
 
 	/**
 	 * Constructor of <code>DocumentStatistic</code> feature.
-	 * 
+	 *
 	 * @param docStatistic
 	 *            the <code>MetaDocumentStatisticElement</code> represent this
 	 *            feature
@@ -47,7 +47,7 @@ public class DocumentStatistic {
 	/**
 	 * Get the instance of <code>MetaDocumentStatisticElement</code> which represents this
 	 * feature.
-	 * 
+	 *
 	 * @return an instance of <code>MetaDocumentStatisticElement</code>
 	 */
 	private MetaDocumentStatisticElement getMetaDocumentStatisticElement() {
@@ -57,7 +57,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaCellCountAttribute</code>.
-	 * 
+	 *
 	 * @return the number of table cells contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -70,10 +70,10 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaCellCountAttribute</code> .
-	 * 
+	 *
 	 * @param cellCount	the number of table cells need to be set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaCellCountAttribute
-	 *            
+	 *
 	 */
 	public void setCellCount(int cellCount) {
 		mDocStatistic.setMetaCellCountAttribute(cellCount);
@@ -83,7 +83,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaCharacterCountAttribute</code> .
-	 * 
+	 *
 	 * @return the number of characters contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -96,7 +96,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaCharacterCountAttribute</code>.
-	 * 
+	 *
 	 * @param characterCount	the number of characters need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaCharacterCountAttribute
 	 */
@@ -108,7 +108,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaDrawCountAttribute</code> .
-	 * 
+	 *
 	 * @return the number of all the graphic related element in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -121,7 +121,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaDrawCountAttribute</code>.
-	 * 
+	 *
 	 * @param drawCount	the number of all the graphic related element need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaDrawCountAttribute
 	 */
@@ -133,7 +133,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaFrameCountAttribute</code>.
-	 * 
+	 *
 	 * @return the number of <code><draw:frame></code> element contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -146,7 +146,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaFrameCountAttribute</code> .
-	 * 
+	 *
 	 * @param frameCount the number of <code><draw:frame></code> element need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaFrameCountAttribute
 	 */
@@ -158,7 +158,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaImageCountAttribute</code> .
-	 * 
+	 *
 	 * @return the number of <code><draw:image></code> element contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -171,7 +171,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaImageCountAttribute</code> .
-	 * 
+	 *
 	 * @param imageCount the number of <code><draw:image></code> element need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaImageCountAttribute
 	 */
@@ -183,7 +183,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaNonWhitespaceCharacterCountAttribute</code>.
-	 * 
+	 *
 	 * @return the number of non-whitespace characters contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -196,7 +196,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaNonWhitespaceCharacterCountAttribute</code>.
-	 * 
+	 *
 	 * @param nonWhitespaceCharacterCount	the number of non-whitespace characters need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaNonWhitespaceCharacterCountAttribute
 	 */
@@ -209,7 +209,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaObjectCountAttribute</code>
-	 * 
+	 *
 	 * @return the number of <code><draw:object></code> element contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -222,7 +222,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaObjectCountAttribute</code>.
-	 * 
+	 *
 	 * @param objectCount the number of <code><draw:object></code> element need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaObjectCountAttribute
 	 */
@@ -234,7 +234,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaOleObjectCountAttribute</code>.
-	 * 
+	 *
 	 * @return the number of <code><draw:object-ole></code> element contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -248,7 +248,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaOleObjectCountAttribute</code>.
-	 * 
+	 *
 	 * @param oleObjectCount the number of <code><draw:object-ole></code> element need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaOleObjectCountAttribute
 	 */
@@ -260,7 +260,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaPageCountAttribute</code>.
-	 * 
+	 *
 	 * @return the number of page count contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -273,7 +273,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaPageCountAttribute</code>.
-	 * 
+	 *
 	 * @param pageCount the number of page count need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaPageCountAttribute
 	 */
@@ -285,7 +285,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaParagraphCountAttribute</code>.
-	 * 
+	 *
 	 * @return the number of <code><text:p></code> element contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -298,7 +298,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaParagraphCountAttribute</code>.
-	 * 
+	 *
 	 * @param paragraphCount the number of <code><text:p></code> element need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaParagraphCountAttribute
 	 */
@@ -310,7 +310,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaRowCountAttribute</code>.
-	 * 
+	 *
 	 * @return the number of lines contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -323,7 +323,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaRowCountAttribute</code>.
-	 * 
+	 *
 	 * @param rowCount the number of lines need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaRowCountAttribute
 	 */
@@ -335,7 +335,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaSentenceCountAttribute</code>.
-	 * 
+	 *
 	 * @return the number of sentences contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -348,7 +348,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaSentenceCountAttribute</code>.
-	 * 
+	 *
 	 * @param sentenceCount the number of sentences need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaSentenceCountAttribute.
 	 */
@@ -359,7 +359,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaSyllableCountAttribute</code>.
-	 * 
+	 *
 	 * @return the number of syllables contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -372,7 +372,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaSyllableCountAttribute</code>.
-	 * 
+	 *
 	 * @param syllableCount the number of syllables need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaSyllableCountAttribute.
 	 */
@@ -384,7 +384,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaTableCountAttribute</code>.
-	 * 
+	 *
 	 * @return the number of <code><table:table></code> element contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -397,7 +397,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaTableCountAttribute</code>.
-	 * 
+	 *
 	 * @param tableCount the number of <code><table:table></code> need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaTableCountAttribute.
 	 */
@@ -409,7 +409,7 @@ public class DocumentStatistic {
 	/**
 	 * Receives the value of the odf dom attribute representation
 	 * <code>MetaWordCountAttribute</code>.
-	 * 
+	 *
 	 * @return the number of words contained in the current document;
 	 * <p>
 	 * <code>null</code>, if the attribute is not set and no default value defined.
@@ -422,7 +422,7 @@ public class DocumentStatistic {
 	/**
 	 * Sets the value of odf dom attribute representation
 	 * <code>MetaWordCountAttribute</code>.
-	 * 
+	 *
 	 * @param wordCount the number of words need to set
 	 * @see org.odftoolkit.odfdom.dom.attribute.meta.MetaWordCountAttribute.
 	 */

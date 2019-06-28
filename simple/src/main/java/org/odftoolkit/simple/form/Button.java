@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -33,7 +33,7 @@ import org.odftoolkit.simple.Document;
 /**
  * This class represents the form control of Button, provides methods to get/set
  * the form properties and the style formatting of this control.
- * 
+ *
  * @since 0.8
  */
 public class Button extends FormControl {
@@ -47,7 +47,7 @@ public class Button extends FormControl {
 	 * Get an instance of button by an instance of FormButtonElement, while
 	 * searching the document content to make a bind with the DrawControl which
 	 * already reference to this button.
-	 * 
+	 *
 	 * @param element
 	 *            - an instance of FormButtonElement
 	 * @return an instance of button
@@ -100,7 +100,7 @@ public class Button extends FormControl {
 
 	/**
 	 * Set the label content of this button
-	 * 
+	 *
 	 * @param label
 	 *            - the label
 	 */
@@ -110,7 +110,7 @@ public class Button extends FormControl {
 
 	/**
 	 * Get the label content of this button
-	 * 
+	 *
 	 * @return the label
 	 */
 	public String getLabel() {
@@ -120,7 +120,7 @@ public class Button extends FormControl {
 	/**
 	 * Set the default value of this control, it will be override by current
 	 * value.
-	 * 
+	 *
 	 * @param value
 	 *            - the default value
 	 */
@@ -131,7 +131,7 @@ public class Button extends FormControl {
 
 	/**
 	 * Get a simple iterator for buttons.
-	 * 
+	 *
 	 * @param container
 	 *            - an instance of form where to traverse the buttons
 	 */

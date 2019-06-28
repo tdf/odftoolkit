@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -45,11 +45,11 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalAlignmentType;
 
 /**
  * This class provides functions to handle the style of a cell.
- * 
+ *
  * <p>
  * This class provides functions to handle the border settings, font settings,
  * text alignment settings and so on.
- * 
+ *
  * @since 0.3
  */
 public class CellStyleHandler extends DefaultStyleHandler {
@@ -100,7 +100,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * An empty style definition will be created if there is no style
 	 * definition.
-	 * 
+	 *
 	 * @return the style element
 	 */
 	@Override
@@ -164,7 +164,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * Null will be returned if there is no country information for this script
 	 * type.
-	 * 
+	 *
 	 * @param type
 	 *            - script type
 	 * @return the country information for a specific script type
@@ -222,7 +222,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * A default font definition will be returned if there is no font definition
 	 * for this script type at all.
-	 * 
+	 *
 	 * @param type
 	 *            - script type
 	 * @return the font definition for a specific script type
@@ -290,7 +290,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * Null will be returned if there is no language information for this script
 	 * type at all.
-	 * 
+	 *
 	 * @param type
 	 *            - script type
 	 * @return the language information for a specific script type
@@ -333,7 +333,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * If the parameter <code>country</code> is null, the country information
 	 * for this script type will be removed.
-	 * 
+	 *
 	 * @param country
 	 *            - the country information
 	 * @param type
@@ -350,7 +350,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * be used to justify the script type.
 	 * <p>
 	 * If the parameter <code>font</code> is null, nothing will be happened.
-	 * 
+	 *
 	 * @param font
 	 *            - font definition
 	 */
@@ -363,7 +363,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * be used to justify the script type.
 	 * <p>
 	 * If the parameter <code>font</code> is null, nothing will be happened.
-	 * 
+	 *
 	 * @param font
 	 *            - font definition
 	 */
@@ -376,7 +376,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * If the parameter <code>language</code> is null, the language information
 	 * for this script type will be removed.
-	 * 
+	 *
 	 * @param language
 	 *            - the language information
 	 * @param type
@@ -394,7 +394,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * Color WHITE will be returned if there is no the background color
 	 * definition or the background color definition is not valid.
-	 * 
+	 *
 	 * @return the background color
 	 */
 	public Color getBackgroundColor() {
@@ -468,7 +468,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * <code>Border.NONE</code> will be returned if there is no the border
 	 * definition for a specific border.
-	 * 
+	 *
 	 * @param type
 	 *            - the border type which describes a single border
 	 * @return the border setting
@@ -520,7 +520,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * The vertical alignment definition in its parent style and default style
 	 * will be taken into considered.
-	 * 
+	 *
 	 * @return the vertical alignment
 	 */
 	public VerticalAlignmentType getVerticalAlignment() {
@@ -566,7 +566,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * The wrap option definition in its parent style and default style will be
 	 * taken into considered.
-	 * 
+	 *
 	 * @return <code>true</code> if the cell content can be wrapped;
 	 *         <p>
 	 *         <code>false</code> if the cell content cannot be wrapped.
@@ -609,7 +609,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 
 	/**
 	 * Set the background color of this cell.
-	 * 
+	 *
 	 * @param color
 	 *            - the background color that need to set. If <code>color</code>
 	 *            is null, background color setting will be removed.
@@ -625,7 +625,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * The second parameter <code>bordersType</code> describes which borders you
 	 * want to apply the style to, e.g. up border, bottom border, left border,
 	 * right border, diagonal lines or four borders.
-	 * 
+	 *
 	 * @param border
 	 *            - the border style description
 	 * @param bordersType
@@ -640,7 +640,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * If the alignment is set as Default or null, the explicit vertical
 	 * alignment setting is removed.
-	 * 
+	 *
 	 * @param alignType
 	 *            - the vertical alignment setting.
 	 */
@@ -650,7 +650,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 
 	/**
 	 * Set the wrap option of this cell.
-	 * 
+	 *
 	 * @param isWrapped
 	 *            - whether the cell content can be wrapped or not
 	 */
@@ -663,7 +663,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * <p>
 	 * If the parameter <code>alignType</code> is null, the horizontal alignment
 	 * setting will be removed.
-	 * 
+	 *
 	 * @param alignType
 	 *            - the horizontal alignment
 	 */
@@ -678,7 +678,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
 	 * taken into considered.
 	 * <p>
 	 * DEFAULT will be returned if there is no horizontal alignment setting.
-	 * 
+	 *
 	 * @return - the horizontal alignment; null if there is no horizontal
 	 *         alignment setting.
 	 */

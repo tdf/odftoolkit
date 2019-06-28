@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -21,7 +21,7 @@ package org.odftoolkit.simple.style;
 
 /**
  * This class defines the common used types in style handling methods.
- * 
+ *
  * @since 0.3
  */
 public class StyleTypeDefinitions {
@@ -32,7 +32,7 @@ public class StyleTypeDefinitions {
 
 	/**
 	 * Common used line style from users perspective
-	 * 
+	 *
 	 */
 	public static enum LineStyle {
 		/**
@@ -74,7 +74,7 @@ public class StyleTypeDefinitions {
 
 	/**
 	 * Common used font style from users perspective
-	 * 
+	 *
 	 */
 	public static enum FontStyle {
 		REGULAR("Regular"), ITALIC("Italic"), BOLD("Bold"), BOLDITALIC("Bold_Italic");
@@ -112,7 +112,7 @@ public class StyleTypeDefinitions {
 	/**
 	 * Common used font text line position from users perspective.
 	 * <p>Currently, only support underline and strike through.
-	 * 
+	 *
 	 */
 	public static enum TextLinePosition {
 		REGULAR("Regular"), THROUGH("Through"), UNDER("Under"), THROUGHUNDER("Through_Under");
@@ -131,7 +131,7 @@ public class StyleTypeDefinitions {
 
 	/**
 	 * Common used style of line lining through text from users perspective
-	 * 
+	 *
 	 */
 	public static enum LineThroughStyle {
 		NONE("none"), SINGLE("single"), DOUBLE("double"), BOLD("bold"), WITH_X("with X"), WITH_SLASH("with /");
@@ -150,7 +150,7 @@ public class StyleTypeDefinitions {
 
 	/**
 	 * Common used horizontal alignment type from users perspective
-	 * 
+	 *
 	 */
 	public static enum HorizontalAlignmentType {
 		DEFAULT("default"), LEFT("left"), RIGHT("right"), CENTER("center"), JUSTIFY("justify"), FILLED("filled");
@@ -191,7 +191,7 @@ public class StyleTypeDefinitions {
 
 	/**
 	 * Common used vertical alignment type from users perspective
-	 * 
+	 *
 	 */
 	public static enum VerticalAlignmentType {
 		DEFAULT("default"), TOP("top"), MIDDLE("middle"), BOTTOM("bottom");
@@ -222,7 +222,7 @@ public class StyleTypeDefinitions {
 
 	/**
 	 * Emphasis mark type from ODF specification perspective
-	 * 
+	 *
 	 */
 	public static enum OdfEmphasisMarkType {
 		NONE("none"), ACCENT_ABOVE("accent above"), DOT_ABOVE("dot above"), CIRCLE_ABOVE("circle above"), DISC_ABOVE(
@@ -243,7 +243,7 @@ public class StyleTypeDefinitions {
 
 	/**
 	 * Line style from ODF specification perspective
-	 * 
+	 *
 	 */
 	public static enum OdfLineStyle {
 		DASH("dash"), DOT_DASH("dot-dash"), DOT_DOT_DASH("dot-dot-dash"), DOTTED("dotted"), LONG_DASH("long-dash"), NONE(
@@ -263,7 +263,7 @@ public class StyleTypeDefinitions {
 
 	/**
 	 * The supported line measurement till now
-	 * 
+	 *
 	 */
 	public static enum SupportedLinearMeasure {
 		//1in = 2.54cm = 25.4 mm = 72pt = 6pc
@@ -275,11 +275,11 @@ public class StyleTypeDefinitions {
 			public double toPTs(double measure) {
 				return measure;
 			}
-			
+
 			public double toCMs(double measure) {
 				return measure / 28.3465;
 			}
-			
+
 			public double convert(double measure, SupportedLinearMeasure measureUnit) {
 				return measureUnit.toPTs(measure);
 			}
@@ -296,7 +296,7 @@ public class StyleTypeDefinitions {
 			public double toCMs(double measure) {
 				return 2.54 * measure;
 			}
-			
+
 			public double convert(double measure, SupportedLinearMeasure measureUnit) {
 				return measureUnit.toINs(measure);
 			}
@@ -309,17 +309,17 @@ public class StyleTypeDefinitions {
 			public double toPTs(double measure) {
 				return measure * 28.3465;
 			}
-			
+
 			public double toCMs(double measure) {
 				return measure;
 			}
-			
+
 			public double convert(double measure, SupportedLinearMeasure measureUnit) {
 				return measureUnit.toPTs(measure);
 			}
 		};
 //		MM("mm") {
-//			
+//
 //		}
 
 		private String value;
@@ -330,7 +330,7 @@ public class StyleTypeDefinitions {
 
 		/**
 		 * Convert the given linear measure in the given unit to this unit.
-		 * 
+		 *
 		 * @param measure
 		 *            the measure value in the given <code>measureUnit</code>
 		 * @param measureUnit
@@ -343,7 +343,7 @@ public class StyleTypeDefinitions {
 
 		/**
 		 * Convert other measure to inch(IN) measure.
-		 * 
+		 *
 		 * @param measure
 		 *            the measure
 		 * @return the converted measure
@@ -355,7 +355,7 @@ public class StyleTypeDefinitions {
 
 		/**
 		 * Convert other measure to point(PT) measure.
-		 * 
+		 *
 		 * @param measure
 		 *            the measure
 		 * @return the converted measure
@@ -364,10 +364,10 @@ public class StyleTypeDefinitions {
 		public double toPTs(double measure) {
 			throw new AbstractMethodError();
 		}
-		
+
 		/**
 		 * Convert other measure to centimeter(CM) measure.
-		 * 
+		 *
 		 * @param measure
 		 *            the measure
 		 * @return the converted measure
@@ -396,9 +396,9 @@ public class StyleTypeDefinitions {
 	}
 
 	/**
-	 * 
+	 *
 	 * Common used border types from users perspective
-	 * 
+	 *
 	 */
 	public static enum CellBordersType {
 		TOP("top"), BOTTOM("bottom"), LEFT("left"), RIGHT("right"), DIAGONALBLTR("diagonal_bltr"), DIAGONALTLBR(
@@ -432,7 +432,7 @@ public class StyleTypeDefinitions {
 
 	/**
 	 * Line type from ODF specification perspective
-	 * 
+	 *
 	 */
 	public static enum LineType {
 		DOUBLE("double"), NONE("none"), SINGLE("single");
@@ -460,15 +460,15 @@ public class StyleTypeDefinitions {
 			return lineType;
 		}
 	}
-	
+
 	/**
 	 * Anchor type from users perspective.
-	 * 
+	 *
 	 * @since 0.5.5
 	 */
 	public static enum AnchorType {
-		TO_PAGE("page"), 
-		TO_PARAGRAPH("paragraph"), 
+		TO_PAGE("page"),
+		TO_PARAGRAPH("paragraph"),
 		TO_CHARACTER("char"),
 		AS_CHARACTER("as-char"),
 		TO_FRAME("frame");
@@ -499,12 +499,12 @@ public class StyleTypeDefinitions {
 
 	/**
 	 * Position vertical relative from ODF specification perspective
-	 * 
+	 *
 	 * @since 0.5.5
 	 */
 	public static enum VerticalRelative
 	{
-		PAGE("page"), 
+		PAGE("page"),
 		PAGE_CONTENT("page-content"),
 		FRAME("frame"),
 		FRAME_CONTENT("frame-content"),
@@ -538,14 +538,14 @@ public class StyleTypeDefinitions {
 			return relativeType;
 		}
 	}
-	
+
 	/**
 	 * Position horizontal relative from ODF specification perspective
 	 * @since 0.5.5
 	 */
 	public static enum HorizontalRelative
 	{
-		PAGE("page"), 
+		PAGE("page"),
 		PAGE_CONTENT("page-content"),
 		FRAME("frame"),
 		FRAME_CONTENT("frame-content"),
@@ -582,10 +582,10 @@ public class StyleTypeDefinitions {
 			return relativeType;
 		}
 	}
-	
+
 	/**
 	 * specifies the vertical alignment of a frame relative to a specific area.
-	 * 
+	 *
 	 * @since 0.5.5
 	 */
 	public static enum FrameVerticalPosition
@@ -619,10 +619,10 @@ public class StyleTypeDefinitions {
 			return verticalPos;
 		}
 	}
-	
+
 	/**
 	 * specifies the horizontal alignment of a frame relative to a specific area.
-	 * 
+	 *
 	 * @since 0.5.5
 	 */
 	public static enum FrameHorizontalPosition
@@ -658,11 +658,11 @@ public class StyleTypeDefinitions {
 			return horizontalPos;
 		}
 	}
-	
+
 
 	/**
 	 * Line width from ODF specification perspective
-	 * 
+	 *
 	 */
 	public static enum OdfLineWidth {
 		AUTO("auto"), BOLD("bold"), MEDIUM("medium"), NORMAL("normal"), THICK("thick"), THIN("thin");
@@ -681,7 +681,7 @@ public class StyleTypeDefinitions {
 
 	/**
 	 * Font style from ODF specification perspective
-	 * 
+	 *
 	 */
 	public static enum OdfFontStyle {
 		ITALIC("italic"), NORMAL("normal"), OBLIQUE("oblique");
@@ -712,7 +712,7 @@ public class StyleTypeDefinitions {
 
 	/**
 	 * Font weight from ODF specification perspective
-	 * 
+	 *
 	 */
 	public static enum OdfFontWeight {
 		_100("100"), _200("200"), _300("300"), _400("400"), _500("500"), _600("600"), _700("700"), _800("800"), _900(
@@ -740,10 +740,10 @@ public class StyleTypeDefinitions {
 			return value;
 		}
 	}
-	
+
 	/**
-	 * 
-	 * the fill style for a graphic object. 
+	 *
+	 * the fill style for a graphic object.
 	 *
 	 */
 	public static enum OdfDrawFill {
@@ -756,7 +756,7 @@ public class StyleTypeDefinitions {
 		 */
 		GRADIENT("gradient"),
 		/**
-		 * the drawing object is filled with the hatch specified by the draw:fill-hatch-name attribute. 
+		 * the drawing object is filled with the hatch specified by the draw:fill-hatch-name attribute.
 		 */
 		HATCH("hatch"),
 		/**
@@ -766,7 +766,7 @@ public class StyleTypeDefinitions {
 		/**
 		 * the drawing object is filled with the color specified by the draw:fill-color attribute.
 		 */
-		SOLID("solid");  		
+		SOLID("solid");
 
 		private String value;
 
@@ -791,9 +791,9 @@ public class StyleTypeDefinitions {
 			return value;
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * The style of the stroke from ODF perspective
 	 *
 	 */
@@ -810,7 +810,7 @@ public class StyleTypeDefinitions {
 		 * solid stroke is drawn.
 		 */
 		SOLID("solid");
-		
+
 		private String value;
 
 		OdfDrawStroke(String style) {

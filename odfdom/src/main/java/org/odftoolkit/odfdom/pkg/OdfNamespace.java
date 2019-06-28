@@ -71,7 +71,7 @@ public class OdfNamespace implements Comparable<OdfNamespace>, NamespaceName {
 				// prefix will be adapted for all OdfNamespaces (last wins)
 				odfNamespace.mPrefix = prefix;
 			}
-		} 
+		}
 		return odfNamespace;
 	}
 
@@ -138,7 +138,7 @@ public class OdfNamespace implements Comparable<OdfNamespace>, NamespaceName {
 		return new String[]{prefix, localpart};
 	}
 
-	/** 
+	/**
 	 * @param qname is the qualified name to be splitted.
 	 * @return the local name of the XML Qname.
 	 * @throws IllegalArgumentException if no qualified name was given.

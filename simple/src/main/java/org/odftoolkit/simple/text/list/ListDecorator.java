@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -30,14 +30,14 @@ package org.odftoolkit.simple.text.list;
  * <p>
  * A ListDecorator specified for a sub list overrides the ListDecorator
  * specified for the list in which the sub list is contained.
- * 
+ *
  * @since 0.4
  */
 public interface ListDecorator {
 
 	/**
 	 * The supported list types till now.
-	 * 
+	 *
 	 * @since 0.4
 	 */
 	public static enum ListType {
@@ -61,7 +61,7 @@ public interface ListDecorator {
 
 	/**
 	 * Decorate the specifies <code>list</code>, of which style is set.
-	 * 
+	 *
 	 * @param list
 	 *            the List is decorated.
 	 */
@@ -70,7 +70,7 @@ public interface ListDecorator {
 	/**
 	 * Decorate the specifies <code>item</code> in a List, of which style is
 	 * set.
-	 * 
+	 *
 	 * @param item
 	 *            the ListItem is decorated.
 	 */
@@ -78,7 +78,7 @@ public interface ListDecorator {
 
 	/**
 	 * Get the ListType of this ListDecorator.
-	 * 
+	 *
 	 * @return the ListType of this ListDecorator.
 	 */
 	public ListType getListType();

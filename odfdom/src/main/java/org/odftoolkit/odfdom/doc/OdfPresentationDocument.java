@@ -1,20 +1,20 @@
 /************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
- * 
+ *
  * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
- * 
+ *
  * Use is subject to license terms.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * 
+ *
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -65,7 +65,7 @@ import org.xml.sax.SAXException;
 
 /**
  * This class represents an empty ODF presentation.
- * 
+ *
  * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.PresentationDocument} in Simple API.
  */
 public class OdfPresentationDocument extends OdfDocument {
@@ -152,7 +152,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * takes more time compared to the other createInternalDocument methods.
 	 * An advantage of caching is that there are no problems overwriting
 	 * an input file.</p>
-	 * 
+	 *
 	 * <p>If the resource stream is not a ODF presentation document, ClassCastException might be thrown.</p>
 	 *
 	 * @param inputStream - the InputStream of the ODF presentation document.
@@ -170,7 +170,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * the whole lifecycle of OdfPresentationDocument.</p>
 	 *
 	 * <p>If the resource stream is not a ODF presentation document, ClassCastException might be thrown.</p>
-	 * 
+	 *
 	 * @param documentPath - the path from where the document can be loaded
 	 * @return the presentation document from the given path
 	 *		  or NULL if the media type is not supported by ODFDOM.
@@ -187,7 +187,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * the whole lifecycle of OdfPresentationDocument.</p>
 	 *
 	 * <p>If the resource stream is not a ODF presentation document, ClassCastException might be thrown.</p>
-	 * 
+	 *
 	 * @param file - a file representing the ODF presentation document.
 	 * @return the presentation document created from the given File
 	 * @throws java.lang.Exception - if the document could not be created.
@@ -218,9 +218,9 @@ public class OdfPresentationDocument extends OdfDocument {
 		setOdfMediaType(type.mMediaType);
 	}
 	private boolean hasCheckSlideName = false;
-	//if the copy foreign slide for several times, 
+	//if the copy foreign slide for several times,
 	//the same style might be copied for several times with the different name
-	//so use styleRenameMap to keep track the renamed style so we can reuse the style, 
+	//so use styleRenameMap to keep track the renamed style so we can reuse the style,
 	//rather than new several styles which only have the different style names.
 	//while if the style elements really have the same style name but with different content
 	//such as that these style elements are from different document
@@ -278,12 +278,12 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * Return the slide which have a specified slide name in this presentation.
 	 * <p>
 	 * According to the odf specification
-	 * "The draw:name attribute specifies a name by which this element can be referenced. 
-	 * It is optional but if present, must be unique within the document instance. 
+	 * "The draw:name attribute specifies a name by which this element can be referenced.
+	 * It is optional but if present, must be unique within the document instance.
 	 * If not present, an application may generate a unique name."
 	 * <p>
 	 * If the name is null, then return null because all the slide must has its own unique name.
-	 * 
+	 *
 	 * @param name	the specified slide name
 	 * @return	the slide whose name equals to the specified name
 	 */
@@ -399,7 +399,7 @@ public class OdfPresentationDocument extends OdfDocument {
 
 	private boolean deleteStyleRef(DrawPageElement slideEle) {
 		boolean success = true;
-		try {			
+		try {
 			//method 1:
 			//1.1. iterate child element of the content element
 			//1.2. if the child element is an OdfStylableElement, get the style-name ref count
@@ -541,10 +541,10 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * Make a copy of the slide at a specified position to another position in this presentation.
 	 * The original slide which at the dest index and after the dest index will move after.
 	 * <p>
-	 * @param source	the source position of the slide need to be copied 
+	 * @param source	the source position of the slide need to be copied
 	 * @param dest		the destination position of the slide need to be copied
 	 * @param newName	the new name of the copied slide
-	 * @return the new slide at the destination position with the specified name, and it has the same content 
+	 * @return the new slide at the destination position with the specified name, and it has the same content
 	 * with the slide at the source position.
 	 * <p>
 	 * Throw IndexOutOfBoundsException if the slide index is out of the presentation document slide count.
@@ -804,7 +804,7 @@ public class OdfPresentationDocument extends OdfDocument {
 			insertCollectedStyle(styleQName, srcStylesStyleCloneEleList, getStylesDom(), appendStylesStyleList);
 
 
-			//2. collect all the referred style element which has "draw:name" attribute 
+			//2. collect all the referred style element which has "draw:name" attribute
 			//2.1 draw:name of styles.xml
 			//the value of draw:name is string or StyleName,
 			//only when the value is StyleName type, the style definition should be cloned to the destination document
@@ -908,7 +908,7 @@ public class OdfPresentationDocument extends OdfDocument {
 				OdfElement cloneStyleElement = appendStyleList.get(styleElement);
 				String newStyleName = cloneStyleElement.getAttributeNS(styleURI, styleLocalName);
 				Boolean isAppended = styleAppendMap.get(newStyleName);
-				//if styleAppendMap contain the newStyleName, 
+				//if styleAppendMap contain the newStyleName,
 				//means that cloneStyleElement has already been appended
 				if ((isAppended != null) && isAppended.booleanValue() == true) {
 					continue;
@@ -930,7 +930,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	//all the style are defined in srcStyleNodeList
 	//and these style are all have the styleName defined in styleQName attribute
 	//the key of copyStyleEleList is the style definition element
-	//the value of the corresponding key is the clone of the element which refer to the key, 
+	//the value of the corresponding key is the clone of the element which refer to the key,
 	//the cloned element can be the content of slide or the style element.
 	//the key of appendStyleList is the style definition element which has the other style reference
 	//the value of the corresponding key is the the style definition clone element
@@ -1136,7 +1136,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	}
 
 	/**
-	 * Make a content copy of the specified element, 
+	 * Make a content copy of the specified element,
 	 * and the returned element should have the specified ownerDocument.
 	 * @param element	The element that need to be copied
 	 * @param dom		The specified DOM tree that the returned element belong to
@@ -1185,7 +1185,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * and use the specified slide template.
 	 * See <code>OdfDrawPage.SlideLayout</code>.
 	 * <p>
-	 * If index is invalid, such as larger than the current document 
+	 * If index is invalid, such as larger than the current document
 	 * slide number or is negative,
 	 * then append the new slide at the end of the document.
 	 * <p>
@@ -1193,7 +1193,7 @@ public class OdfPresentationDocument extends OdfDocument {
 	 * @param index		the new slide position
 	 * @param name		the new slide name
 	 * @param slideLayout	the new slide template
-	 * @return	the new slide which locate at the specified position 
+	 * @return	the new slide which locate at the specified position
 	 * with the specified name and apply the specified slide template.
 	 * If slideLayout is null, then use the default slide template which is a blank slide.
 	 * <p>

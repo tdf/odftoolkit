@@ -24,11 +24,11 @@
     <description>Creates cross references from ODF schema.</description>
     <import file="nbproject/build-impl.xml"/>
     <import file="build-schemas.xml"/>
- 
+
     <target name="-post-init" depends="-init-schema-props"
             description="Initialize schema properties"/>
 
-    <target name="add-v12-xref" depends="init,jar,-create-v12-xref-schema" 
+    <target name="add-v12-xref" depends="init,jar,-create-v12-xref-schema"
             description="add cross references to ODF 1.2 specification.">
         <property name="xref-schema-file" location="${build.dir}/schema/flat/${opendocument.v12.schema.xref}"/>
         <property name="log-file" location="${dist.dir}/xref/OpenDocument-v1.2${opendocument.v12.part1.state.target}.log"/>
@@ -44,7 +44,7 @@
         </java>
     </target>
 
-    <target name="create-v12-attribute-xref-ods" depends="init,jar,-create-v12-dtype-schema" 
+    <target name="create-v12-attribute-xref-ods" depends="init,jar,-create-v12-dtype-schema"
             description="Creates cross reference document from ODF 1.2 schema.">
         <copy file="misc/odf-attribute-xref.ods" todir="${dist.dir}/attr-xref"/>
         <java jar="${dist.jar}" fork="true">
@@ -56,27 +56,27 @@
             <arg value="${dist.dir}/attr-xref/odf-attribute-xref.ods"/>
         </java>
     </target>
-    
+
     <target name="-create-v12-xref-schema" depends="init">
-        <xslt style="sample_xslt/create-flat-schema.xsl" 
+        <xslt style="sample_xslt/create-flat-schema.xsl"
                     in="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}"
-                    out="${build.dir}/schema/flat/${opendocument.v12.schema.xref}">  
+                    out="${build.dir}/schema/flat/${opendocument.v12.schema.xref}">
             <param name="incl-conditions" expression="false"/>
             <param name="incl-default-values" expression="false"/>
             <param name="incl-types" expression="false"/>
             <param name="incl-elements" expression="true"/>
         </xslt>
     </target>
-    
+
     <target name="-create-v12-dtype-schema" depends="init">
-        <xslt style="sample_xslt/create-flat-schema.xsl" 
+        <xslt style="sample_xslt/create-flat-schema.xsl"
                     in="${opendocument.v12.part1.schema.dir}/${opendocument.v12.schema}"
-                    out="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}">  
+                    out="${build.dir}/schema/flat/${opendocument.v12.schema.dtype}">
             <param name="incl-conditions" expression="false"/>
             <param name="incl-default-values" expression="true"/>
             <param name="incl-types" expression="true"/>
             <param name="incl-elements" expression="false"/>
         </xslt>
     </target>
-    
+
 </project>

@@ -25,21 +25,21 @@ package org.odftoolkit.odfxsltrunnertask;
 import org.odftoolkit.odfxsltrunner.Logger;
 import org.apache.tools.ant.Project;
 
-class AntLogger extends Logger 
+class AntLogger extends Logger
 {
     static final String LINE_PREFIX = ": line ";
-    
+
     private Project m_aProject = null;
-    
+
     /** Creates a new instance of AntLogger */
-    AntLogger( Project aProject )     
+    AntLogger( Project aProject )
     {
         m_aProject = aProject;
     }
-    
+
     /**
      * Log a message.
-     * 
+     *
      * @param aPrefix Message prefix
      * @param aMsg Message text
      * @param aLocation file, row and column number as text (optional)
@@ -48,7 +48,7 @@ class AntLogger extends Logger
     protected void logMessage( String aPrefix, String aMsg, String aLocation, int nLevel  )
     {
         int nAntLevel = nLevel == ERROR ? Project.MSG_ERR : (nLevel == WARNING ? Project.MSG_WARN : Project.MSG_INFO);
-        
+
         StringBuffer aOut = new StringBuffer( aLocation != null ? aLocation : getName() );
         aOut.append( ": " );
         aOut.append( aPrefix );
@@ -60,7 +60,7 @@ class AntLogger extends Logger
 
     /**
      * Log a message.
-     * 
+     *
      * @param aPrefix Message prefix
      * @param aMsgWithLocation Message text including location information
      * @param nLevel the warning level (one of INFO, WARNING or ERROR)
@@ -70,7 +70,7 @@ class AntLogger extends Logger
         int nAntLevel = nLevel == ERROR ? Project.MSG_ERR : (nLevel == WARNING ? Project.MSG_WARN : Project.MSG_INFO);
 
         StringBuffer aOut = new StringBuffer( aMsgWithLocation );
-        
+
         // remove a " line" from the line number information
         int nPos = aOut.indexOf( LINE_PREFIX );
         if( nPos != -1 )

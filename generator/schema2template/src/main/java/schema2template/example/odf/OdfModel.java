@@ -65,7 +65,7 @@ public class OdfModel {
             }
             return retval;
         }
-        
+
         public Set<String> getDefaults() {
         	Set<String> defaults=new HashSet<String>();
         	for(String elementname : elementDefault.keySet()){
@@ -101,14 +101,14 @@ public class OdfModel {
     /**
      * Get defined style families for this ELEMENT Definition. Note: All Definitions sharing
      * the same name share the same style families.
-     * 
+     *
      * @param element Element
      * @return list of style family names
      */
     public List<QNamed> getStyleFamilies(QNamed element) {
         List<QNamed> retval = new ArrayList<QNamed>();
         for (String family : mNameToFamiliesMap.get(element.getQName())) {
-            retval.add(new QNameValue(family)); 
+            retval.add(new QNameValue(family));
         }
         return retval;
     }
@@ -143,7 +143,7 @@ public class OdfModel {
         }
         return defaults.getDefault(parentelement.getQName());
     }
-    
+
     /**
      * Get default values of ODF attribute.
      *

@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 public class SignedZeroToHundredPercent implements OdfDataType{
 	private double mN;
 	private static final Pattern signedZeroToHundredPercentPattern = Pattern.compile("^-?([0-9]?[0-9](\\.[0-9]*)?|100(\\.0*)?|\\.[0-9]+)%$");
-	
+
 	/**
 	 * Allocates a SignedZeroToHundredPercent object representing the n argument
 	 *
@@ -91,14 +91,14 @@ public class SignedZeroToHundredPercent implements OdfDataType{
 	 *         false otherwise
 	 */
 	public static boolean isValid(Double doubleValue) {
-		if ( (doubleValue != null) && (doubleValue.doubleValue() <= 1) && 
+		if ( (doubleValue != null) && (doubleValue.doubleValue() <= 1) &&
 				(doubleValue.doubleValue() >= -1)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * check if the specified String instance is a valid {@odf.datatype 'signedZeroToHundredPercent'} data type
 	 *

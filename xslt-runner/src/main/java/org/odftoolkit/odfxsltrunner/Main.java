@@ -40,12 +40,12 @@ public class Main {
     /** Creates a new instance of Main */
     public Main() {
     }
-    
+
     /**
      * @param aArgs the command line arguments
      */
     public static void main(String[] aArgs) {
-        
+
         String aStyleSheetName = null;
         String aInputName = null;
         String aOutputName = null;
@@ -57,7 +57,7 @@ public class Main {
         Vector<XSLTParameter> aParams = null;
         Vector<String> aExtractFileNames = null;
         int nLogLevel = CommandLineLogger.ERROR;
-        
+
         boolean bCommandLineValid = true;
         List<String> aArgList = Arrays.asList(aArgs);
         Iterator<String> aArgIter = aArgList.iterator();
@@ -156,7 +156,7 @@ public class Main {
                 break;
             }
         }
-        
+
         if( aOutputMode == ODFXSLTRunner.OUTPUT_MODE_COPY_INPUT_PACKAGE &&
             aOutputName == null )
             aOutputMode = ODFXSLTRunner.OUTPUT_MODE_STDOUT;
@@ -165,14 +165,14 @@ public class Main {
         bCommandLineValid = aInputName != null && aStyleSheetName != null;
         bCommandLineValid = bCommandLineValid &&
                             !(aOutputMode == ODFXSLTRunner.OUTPUT_MODE_REPLACE_INPUT_PACKAGE || aOutputMode == ODFXSLTRunner.OUTPUT_MODE_STDOUT) == (aOutputName != null);
-        
+
         // print help
         if( !bCommandLineValid )
         {
             printUsage();
             return;
         }
-        
+
         PrintStream aLogStream = null;
         if( aLogFileName != null )
         {
@@ -203,7 +203,7 @@ public class Main {
         if( aLogStream != null )
             aLogStream.close();
     }
-    
+
     private static void printUsage()
     {
         System.out.print("odfxsltrunner v");

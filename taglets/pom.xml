@@ -46,24 +46,24 @@
                     <target>${jdk.version}</target>
                 </configuration>
             </plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>			
-				<version>3.1.0</version>
-				<configuration>					
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
                     <doctitle>Schema2template</doctitle>
-					<links>
-						<link>http://docs.oracle.com/javase/8/docs/api/</link>
-					</links>
+                    <links>
+                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
+                    </links>
                     <encoding>${project.build.sourceEncoding}</encoding>
-					<splitindex>true</splitindex>
-					<windowtitle>Schema2template v${project.version} - https://odftoolkit.org</windowtitle>
-					<bottom>${javadoc.bottom}</bottom>
-					<additionalOptions>
-						<additionalOption>${javadoc.opts}</additionalOption>
-					</additionalOptions>
+                    <splitindex>true</splitindex>
+                    <windowtitle>Schema2template v${project.version} - https://odftoolkit.org</windowtitle>
+                    <bottom>${javadoc.bottom}</bottom>
+                    <additionalOptions>
+                        <additionalOption>${javadoc.opts}</additionalOption>
+                    </additionalOptions>
                     <attach>true</attach>
-				</configuration>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -74,8 +74,8 @@
                             <additionalOptions>${javadoc.opts}</additionalOptions>
                         </configuration>
                     </execution>
-                </executions>                
-			</plugin>            
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.0.1</version>
@@ -112,7 +112,7 @@
         </plugins>
     </build>
 
-     <!-- More Project Information -->
+    <!-- More Project Information -->
     <name>ODF Custom Javadoc Taglets</name>
     <description>Javadoc taglets for ODFDOM</description>
     <url>https://odftoolkit.org/odfdom/index.html</url>

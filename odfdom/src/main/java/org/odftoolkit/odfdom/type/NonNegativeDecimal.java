@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -26,7 +26,7 @@ public class NonNegativeDecimal implements OdfDataType {
 
 	/**
 	 * Allocates a NonNegativeDecimal object representing the n argument
-	 * 
+	 *
 	 * @param n
 	 *            the value of the NonNegativeDecimal
 	 * @throws IllegalArgumentException
@@ -41,7 +41,7 @@ public class NonNegativeDecimal implements OdfDataType {
 
 	/**
 	 * Returns a String Object representing this NonNegativeDecimal's value
-	 * 
+	 *
 	 * @return return a string representation of the value of this
 	 *         NonNegativeDecimal object
 	 */
@@ -53,7 +53,7 @@ public class NonNegativeDecimal implements OdfDataType {
 	/**
 	 * Returns a NonNegativeDecimal instance representing the specified String
 	 * value
-	 * 
+	 *
 	 * @param stringValue
 	 *            a String value
 	 * @return return a NonNegativeDecimal instance representing stringValue
@@ -69,7 +69,7 @@ public class NonNegativeDecimal implements OdfDataType {
 
 	/**
 	 * Returns the value of this NonNegativeDecimal object as a double primitive
-	 * 
+	 *
 	 * @return the primitive double value of this NonNegativeDecimal object.
 	 */
 	public double doubleValue() {
@@ -79,7 +79,7 @@ public class NonNegativeDecimal implements OdfDataType {
 	/**
 	 * check if the specified Double instance is a valid {@odf.datatype nonNegativeDecimal} data
 	 * type
-	 * 
+	 *
 	 * @param doubleValue
 	 *            the value to be tested
 	 * @return true if the value of argument is valid for {@odf.datatype nonNegativeDecimal}

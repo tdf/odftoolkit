@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -44,7 +44,7 @@ import org.w3c.dom.Node;
  * specifies list item with red color.
  * <p>
  * An OutLineDecorator can be reused in the same Document.
- * 
+ *
  * @since 0.4
  */
 public class OutLineDecorator implements ListDecorator {
@@ -63,7 +63,7 @@ public class OutLineDecorator implements ListDecorator {
 
 	/**
 	 * Constructor with Document.
-	 * 
+	 *
 	 * @param doc
 	 *            the Document which this OutLineDecorator will be used on.
 	 */

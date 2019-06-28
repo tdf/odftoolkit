@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -39,18 +39,18 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 public class TableCellPropertiesTest {
-	
+
 	private static final Logger LOGGER =  Logger.getLogger(TableCellPropertiesTest.class.getName());
-	
+
 	@Test
 	public void testSetBorders() {
 		try {
-			
+
 		    Border borderbase = new Border(Color.LIME, 1.0701, 0.0208, 0.0346, SupportedLinearMeasure.CM);
 			borderbase.setLineStyle(StyleTypeDefinitions.LineType.SINGLE);
 			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			Table table = doc.getTableByName("Sheet1");
-			
+
 			Cell cell = table.getCellByPosition(2, 2);
 			cell.setBorders(CellBordersType.BOTTOM, borderbase);
 			cell.setBorders(CellBordersType.RIGHT, borderbase);
@@ -62,7 +62,7 @@ public class TableCellPropertiesTest {
 			base = cell.getBorder(CellBordersType.DIAGONALTLBR);
 			Assert.assertEquals(borderbase, base);
 			Assert.assertEquals(StyleTypeDefinitions.LineType.SINGLE, borderbase.getLineStyle());
-			
+
 			//save
 			doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
 		} catch (Exception e) {
@@ -70,17 +70,17 @@ public class TableCellPropertiesTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testSetBorders_NONE() {
 		try {
-			
+
 		    Border borderbase = new Border(Color.LIME, 3.0701, 0.0208, 0.0346, SupportedLinearMeasure.CM);
 			borderbase.setLineStyle(StyleTypeDefinitions.LineType.SINGLE);
 			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			Table table = doc.getTableByName("Sheet1");
-			
+
 			Cell cell = table.getCellByPosition(0, 0);
 			//cell.setBorders(CellBordersType.DIAGONAL_LINES, borderbase);
 			cell.setBorders(CellBordersType.RIGHT, borderbase);
@@ -90,14 +90,14 @@ public class TableCellPropertiesTest {
 			NamedNodeMap attr = styleCell.mElement.getAttributes();
 			Node nod = attr.getNamedItem(FoBorderRightAttribute.ATTRIBUTE_NAME.getQName());
 			Assert.assertEquals("3.0701cm solid #00ff00", nod.getNodeValue());
-			
+
 			cell.setBorders(CellBordersType.NONE, borderbase);
-			
+
 			TableCellProperties styleCell1 = cell.getStyleHandler().getTableCellPropertiesForWrite();
 			NamedNodeMap attr1 = styleCell1.mElement.getAttributes();
 			Node nod1 = attr1.getNamedItem(FoBorderRightAttribute.ATTRIBUTE_NAME.getQName());
 			Assert.assertNull(nod1);
-			
+
 			//save
 			//doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
 		} catch (Exception e) {
@@ -105,27 +105,27 @@ public class TableCellPropertiesTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testSetBorders_DIAGONAL_LINES() {
 		try {
-			
+
 		    Border borderbase = new Border(Color.LIME, 3.0701, 0.0208, 0.0346, SupportedLinearMeasure.CM);
 			borderbase.setLineStyle(StyleTypeDefinitions.LineType.SINGLE);
 			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			Table table = doc.getTableByName("Sheet1");
-			
+
 			Cell cell = table.getCellByPosition(0, 0);
 			cell.setBorders(CellBordersType.DIAGONAL_LINES, borderbase);
 
 			//validate
 			TableCellProperties styleCell = cell.getStyleHandler().getTableCellPropertiesForWrite();
 			NamedNodeMap attr = styleCell.mElement.getAttributes();
-			
+
 			Node nod = attr.getNamedItem("style:diagonal-bl-tr");
 			Assert.assertEquals("3.0701cm solid #00ff00", nod.getNodeValue());
-			
+
 			//save
 			//doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
 		} catch (Exception e) {
@@ -133,8 +133,8 @@ public class TableCellPropertiesTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetBorder() {
 		try {
@@ -142,7 +142,7 @@ public class TableCellPropertiesTest {
 			borderbase.setLineStyle(StyleTypeDefinitions.LineType.SINGLE);
 			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			Table table = doc.getTableByName("Sheet1");
-			
+
 			Cell cell = table.getCellByPosition(2, 2);
 			cell.setBorders(CellBordersType.ALL_FOUR, borderbase);
 
@@ -150,7 +150,7 @@ public class TableCellPropertiesTest {
 			TableCellProperties styleCell = cell.getStyleHandler().getTableCellPropertiesForWrite();
 			Border bor = styleCell.getBorder();
 			Assert.assertEquals(borderbase, bor);
-			
+
 			//save
 			doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
 		} catch (Exception e) {
@@ -158,8 +158,8 @@ public class TableCellPropertiesTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetLeftBorder() {
 		try {
@@ -167,7 +167,7 @@ public class TableCellPropertiesTest {
 			borderbase.setLineStyle(StyleTypeDefinitions.LineType.DOUBLE);
 			SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
 			Table table = doc.getTableByName("Sheet1");
-			
+
 			Cell cell = table.getCellByPosition(2, 2);
 			cell.setBorders(CellBordersType.RIGHT, borderbase);
 
@@ -175,7 +175,7 @@ public class TableCellPropertiesTest {
 			TableCellProperties styleCell = cell.getStyleHandler().getTableCellPropertiesForWrite();
 			Border bor = styleCell.getRightBorder();
 			Assert.assertEquals(borderbase, bor);
-			
+
 			//save
 			doc.save(ResourceUtilities.newTestOutputFile("testSupportedLinearMeasure.ods"));
 		} catch (Exception e) {
@@ -183,7 +183,7 @@ public class TableCellPropertiesTest {
 			Assert.fail(e.getMessage());
 		}
 	}
-	
+
         @Test
 	public void testSettingNullBackgroundOnProperties() throws Exception {
             SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
@@ -199,7 +199,7 @@ public class TableCellPropertiesTest {
             Assert.assertNull(newCell.getStyleHandler().getTableCellPropertiesForRead().getBackgroundColor());
             Assert.assertEquals(Color.WHITE, newCell.getCellBackgroundColor());
         }
-        
+
         @Test
         public void testSettingBlackBackgroundOnProperties() throws Exception {
             SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();
@@ -212,7 +212,7 @@ public class TableCellPropertiesTest {
             Cell newCell = table.appendRow().getCellByIndex(1);
             Assert.assertEquals(Color.BLACK, newCell.getStyleHandler().getBackgroundColor());
         }
-        
+
         @Test
         public void testSettingNullBackgroundOnCell() throws Exception {
             SpreadsheetDocument doc = SpreadsheetDocument.newSpreadsheetDocument();

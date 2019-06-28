@@ -22,7 +22,7 @@
 package org.odftoolkit.odfdom.pkg;
 
 /**
- * 
+ *
  * An interface to visit every odf element, according to Visitor design pattern
  *
  */
@@ -30,7 +30,7 @@ public interface ElementVisitor {
 
 	/**
 	 * Visit odf element and process some operations
-	 * 
+	 *
 	 * @param element ODF element
 	 */
 	public void visit(OdfElement element);

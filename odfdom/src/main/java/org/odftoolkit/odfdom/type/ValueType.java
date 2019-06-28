@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -22,7 +22,7 @@ package org.odftoolkit.odfdom.type;
 
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype valueType}
- * 
+ *
  */
 public enum ValueType implements OdfDataType {
 

@@ -31,7 +31,7 @@ public class CommandLineLogger extends Logger
 {
     private PrintStream m_aOut;
     private int m_nLevel;
-    
+
     /** Creates a new instance of CommandLineLogger
      *
      * @param aOut PrintStream for messages
@@ -44,7 +44,7 @@ public class CommandLineLogger extends Logger
 
     /**
      * Log a message.
-     * 
+     *
      * @param aPrefix Message prefix
      * @param aMsg Message text
      * @param aLocation file, row and column number as text (optional)
@@ -62,10 +62,10 @@ public class CommandLineLogger extends Logger
             m_aOut.println( aOut.toString() );
         }
     }
-    
+
     /**
      * Log a message.
-     * 
+     *
      * @param aPrefix Message prefix
      * @param aMsgWithLocation Message text including location information
      * @param nLevel the warning level (one of INFO, WARNING or ERROR)
@@ -78,5 +78,5 @@ public class CommandLineLogger extends Logger
         aOut.append( ')' );
         m_aOut.println( aOut.toString() );
     }
-    
+
 }

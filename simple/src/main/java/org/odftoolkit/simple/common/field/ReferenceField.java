@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -43,7 +43,7 @@ import org.w3c.dom.Node;
  * <p>
  * NOTE: Before the document is opened in any editor, the value of this field
  * maybe invalid.
- * 
+ *
  * @since 0.5
  */
 public class ReferenceField extends Field {
@@ -65,7 +65,7 @@ public class ReferenceField extends Field {
 	 * appears.
 	 * <li>TEXT: displays the text of the referenced item.
 	 * </ul>
-	 * 
+	 *
 	 * @since 0.5
 	 */
 	public static enum DisplayType {
@@ -115,7 +115,7 @@ public class ReferenceField extends Field {
 
 	/**
 	 * Set the name of this reference field.
-	 * 
+	 *
 	 * @param referenceName
 	 *            the name of this content.
 	 */
@@ -126,7 +126,7 @@ public class ReferenceField extends Field {
 
 	/**
 	 * Get the name of this reference field.
-	 * 
+	 *
 	 * @return the name of this reference field.
 	 */
 	public String getName() {
@@ -135,7 +135,7 @@ public class ReferenceField extends Field {
 
 	/**
 	 * Append this reference field after the specifics OdfElement.
-	 * 
+	 *
 	 * @param odfEle
 	 *            the reference of odf element.
 	 *@param type

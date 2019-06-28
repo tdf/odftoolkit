@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -42,14 +42,14 @@ import org.w3c.dom.NodeList;
  * properties, content, and and styles. A frame is a container for enhanced
  * content like text boxes, images or objects. A frame may contain multiple
  * renditions of content.
- * 
+ *
  * @since 0.5
  */
 public class Frame extends Component {
 
 	/**
 	 * Attributes:
-	 * 
+	 *
 	 * draw:caption-id 19.115, draw:class-names 19.120, draw:copy-of 19.126,
 	 * draw:id 19.187.3, draw:layer 19.189, draw:name 19.197.10, draw:style-name
 	 * 19.219.13, draw:text-style-name 19.227, draw:transform 19.228,
@@ -74,7 +74,7 @@ public class Frame extends Component {
 
 	/**
 	 * Get a frame instance by an instance of <code>DrawFrameElement</code>.
-	 * 
+	 *
 	 * @param element
 	 *            - the instance of DrawFrameElement
 	 * @return an instance of frame
@@ -94,7 +94,7 @@ public class Frame extends Component {
 	 * Create an instance of frame
 	 * <p>
 	 * The frame will be added at the end of this container.
-	 * 
+	 *
 	 * @param container
 	 *            - the frame container that contains this frame.
 	 */
@@ -113,7 +113,7 @@ public class Frame extends Component {
 
 	/**
 	 * Set the name of this frame.
-	 * 
+	 *
 	 * @param name
 	 *            - the name of the frame
 	 */
@@ -123,7 +123,7 @@ public class Frame extends Component {
 
 	/**
 	 * Get the name of this frame.
-	 * 
+	 *
 	 * @return the name of the frame
 	 */
 	public String getName() {
@@ -151,7 +151,7 @@ public class Frame extends Component {
 	/**
 	 * Get the instance of <code>DrawFrameElement</code> which represents this
 	 * frame.
-	 * 
+	 *
 	 * @return the instance of <code>DrawFrameElement</code>
 	 */
 	public OdfElement getOdfElement() {
@@ -161,7 +161,7 @@ public class Frame extends Component {
 	/**
 	 * Get the instance of <code>DrawFrameElement</code> which represents this
 	 * frame.
-	 * 
+	 *
 	 * @return the instance of <code>DrawFrameElement</code>
 	 */
 	public DrawFrameElement getDrawFrameElement() {
@@ -170,7 +170,7 @@ public class Frame extends Component {
 
 	/**
 	 * Set the rectangle used by this frame
-	 * 
+	 *
 	 * @param rectangle
 	 *            - the rectangle used by this frame
 	 */
@@ -188,7 +188,7 @@ public class Frame extends Component {
 
 	/**
 	 * Return the rectangle used by this frame
-	 * 
+	 *
 	 * @return - the rectangle
 	 */
 	public FrameRectangle getRectangle() {
@@ -204,7 +204,7 @@ public class Frame extends Component {
 
 	/**
 	 * Set the title of this text box
-	 * 
+	 *
 	 * @param title
 	 *            - the title of this text box
 	 */
@@ -217,7 +217,7 @@ public class Frame extends Component {
 
 	/**
 	 * Get the title of this text box
-	 * 
+	 *
 	 * @return - the title of this text box
 	 */
 	public String getTitle() {
@@ -230,7 +230,7 @@ public class Frame extends Component {
 
 	/**
 	 * Get the description of this text box
-	 * 
+	 *
 	 * @return - the description of this text box
 	 */
 	public String getDesciption() {
@@ -243,7 +243,7 @@ public class Frame extends Component {
 
 	/**
 	 * Set the description of this text box.
-	 * 
+	 *
 	 * @param description
 	 *            - the description of this text box
 	 */
@@ -253,14 +253,14 @@ public class Frame extends Component {
 			descElement = mElement.newSvgDescElement();
 		descElement.setTextContent(description);
 	}
-	
+
 	/**
 	 * Add a hypertext reference to this frame.
-	 * 
+	 *
 	 * @param linkto
 	 *            the hyperlink
 	 * @since 0.6.5
-	 * 
+	 *
 	 */
 	public void setHyperlink(URI linkto) {
 		OdfElement thisFrame = getOdfElement();
@@ -291,7 +291,7 @@ public class Frame extends Component {
 
 	/**
 	 * Return the URI of hypertext reference if exists, or else, return null.
-	 * 
+	 *
 	 * @return the URI of hyperlink if exists
 	 */
 	public URI getHyperlink() {
@@ -307,7 +307,7 @@ public class Frame extends Component {
 
 	/**
 	 * Return style handler for this frame
-	 * 
+	 *
 	 * @return the style handler
 	 */
 	public FrameStyleHandler getStyleHandler() {
@@ -321,7 +321,7 @@ public class Frame extends Component {
 	 * <p>
 	 * If the parameter is null, there will be no background color defined for
 	 * this frame. The old setting of background color will be removed.
-	 * 
+	 *
 	 * @param color
 	 *            - the background color to be set
 	 */
@@ -348,7 +348,7 @@ public class Frame extends Component {
 
 	/**
 	 * Add a image to the frame after all the contents get removed.
-	 * 
+	 *
 	 * @since 0.5.5
 	 */
 	public Image setImage(URI uri) {
@@ -367,11 +367,11 @@ public class Frame extends Component {
 	// */
 	// public void setFitWeightToText()
 	// {
-	//		
+	//
 	// }
-	//	
+	//
 	// public void setFitHeightToText()
 	// {
-	//		
+	//
 	// }
 }

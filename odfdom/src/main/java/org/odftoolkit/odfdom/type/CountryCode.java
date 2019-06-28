@@ -1,5 +1,5 @@
 /************************************************************************
-* 
+*
 *  Licensed to the Apache Software Foundation (ASF) under one
 *  or more contributor license agreements.  See the NOTICE file
 *  distributed with this work for additional information
@@ -29,7 +29,7 @@ public class CountryCode implements OdfDataType {
 
 	private String mCountryCode;
 	private static final Pattern countryCodePattern = Pattern.compile("^[A-Za-z0-9]{1,8}$");
-	
+
 	/**
 	 * Construct CountryCode by the parsing the given string
 	 *

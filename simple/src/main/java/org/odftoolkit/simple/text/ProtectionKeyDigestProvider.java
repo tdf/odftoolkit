@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -23,7 +23,7 @@ public interface ProtectionKeyDigestProvider {
 
 	/**
 	 * Generate a digest value of the input key
-	 * 
+	 *
 	 * @param key
 	 *            -an key required to be digest
 	 * @return the digest result

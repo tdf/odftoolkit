@@ -26,15 +26,15 @@ import org.junit.runners.model.InitializationError;
 /**
  * Guarantees that the test methods of a test class are being executed in alphabetical order.
  * Activated by annotating the test class using <code>@RunWith(AlphabeticalOrderedRunner.class)</code>.
- * 
+ *
  * @author svanteschubert
  */
 public class AlphabeticalOrderedRunner extends BlockJUnit4ClassRunner {
 
 	//private static final Logger LOG = Logger.getLogger(OrderedRunner.class.getName());
 
-	/*                                                                         
-	 * default initializer                                                     
+	/*
+	 * default initializer
 	 */
 	public AlphabeticalOrderedRunner(Class _class) throws InitializationError {
 		super(_class);
@@ -54,8 +54,8 @@ public class AlphabeticalOrderedRunner extends BlockJUnit4ClassRunner {
 		return methodList;
 	}
 
-	/*                                                                              
-	 * Class for alphabetical ordering of a list                                   
+	/*
+	 * Class for alphabetical ordering of a list
 	 */
 	public class AlphabeticalOrder implements Comparator {
 

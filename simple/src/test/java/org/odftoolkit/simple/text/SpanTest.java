@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -65,24 +65,24 @@ public class SpanTest {
 		}
 
 	}
-	
+
 	@Test
 	public void testRemoveTextContent() {
 		try {
 			TextDocument doc = TextDocument.newTextDocument();
-			
+
 			Iterator<Paragraph> paraA = doc.getParagraphIterator();
 			while(paraA.hasNext()){
 				Paragraph pp = paraA.next();
 				doc.removeParagraph(pp);
 			}
-			
+
 			doc.addParagraph("This is a test paragraph!");
-			
+
 			TextNavigation navigation = new TextNavigation("test", doc);
 			TextSelection sel = (TextSelection) navigation.nextSelection();
 			Span span = Span.newSpan(sel);
-			
+
 			span.removeTextContent();
 			boolean flag = false;
 			Iterator<Paragraph> parai = doc.getParagraphIterator();
@@ -102,17 +102,17 @@ public class SpanTest {
 		}
 
 	}
-	
+
 	@Test
 	public void testAppendTextContent() {
 		try {
 			TextDocument doc = TextDocument.newTextDocument();
 			doc.addParagraph("This is a test paragraph!");
-			
+
 			TextNavigation navigation = new TextNavigation("test", doc);
 			TextSelection sel = (TextSelection) navigation.nextSelection();
 			Span span = Span.newSpan(sel);
-			
+
 			span.appendTextContent("hello world.");
 			Assert.assertEquals("testhello world.", span.getTextContent());
 
@@ -124,21 +124,21 @@ public class SpanTest {
 		}
 
 	}
-	
-	
+
+
 	@Test
 	public void testAppendTextContentPara() {
 		try {
 			TextDocument doc = TextDocument.newTextDocument();
 			doc.addParagraph("This is a test paragraph!");
-			
+
 			TextNavigation navigation = new TextNavigation("test", doc);
 			TextSelection sel = (TextSelection) navigation.nextSelection();
 			Span span = Span.newSpan(sel);
-			
+
 			span.appendTextContent("hello world.", true);
 			Assert.assertEquals("testhello world.", span.getTextContent());
-			
+
 			span.appendTextContent("hello world.", false);
 			Assert.assertEquals("testhello world.hello world.", span.getTextContent());
 
@@ -229,5 +229,5 @@ public class SpanTest {
 
 	}
 
-	
+
 }

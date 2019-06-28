@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -23,7 +23,7 @@ package org.odftoolkit.odfdom.type;
  */
 public class ZeroToOneDecimal implements OdfDataType{
 	private double mN;
-	
+
 	/**
 	 * Allocates a ZeroToOneDecimal object representing the n argument
 	 *
@@ -81,7 +81,7 @@ public class ZeroToOneDecimal implements OdfDataType{
 	 *         false otherwise
 	 */
 	public static boolean isValid(Double doubleValue) {
-		if ( (doubleValue != null) && (doubleValue.doubleValue() <= 1) && 
+		if ( (doubleValue != null) && (doubleValue.doubleValue() <= 1) &&
 				(doubleValue.doubleValue() >= 0)) {
 			return true;
 		} else {

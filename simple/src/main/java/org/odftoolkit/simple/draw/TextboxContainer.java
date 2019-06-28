@@ -1,4 +1,4 @@
-/* 
+/*
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -27,21 +27,21 @@ import org.odftoolkit.simple.PresentationDocument;
 /**
  * TextboxContainer is a container which maintains TextBox(s) as element(s).
  * TextBox(s) can be added, removed and iterated in this container.
- * 
+ *
  * @since 0.5
  */
 public interface TextboxContainer extends FrameContainer {
 
 	/**
 	 * Add a text box
-	 * 
+	 *
 	 * @return the object of text box
 	 */
 	public Textbox addTextbox();
 
 	/**
 	 * Add a text box with a specific size at a specific position
-	 * 
+	 *
 	 * @param position
 	 *            - the rectangle (position and size) of this text box
 	 * @return the object of text box
@@ -50,7 +50,7 @@ public interface TextboxContainer extends FrameContainer {
 
 	/**
 	 * Remove the text box
-	 * 
+	 *
 	 * @param box
 	 *            - the instance of text box
 	 * @return true if success, false if fails
@@ -59,14 +59,14 @@ public interface TextboxContainer extends FrameContainer {
 
 	/**
 	 * Return an Iterator of the text objects in this container.
-	 * 
+	 *
 	 * @return an Iterator of the text objects in this container
 	 */
 	public Iterator<Textbox> getTextboxIterator();
 
 	/**
 	 * Return a text box whose name is a given value.
-	 * 
+	 *
 	 * @param name
 	 *            - the name of the text box
 	 * @return a text box whose name is a given value
@@ -78,7 +78,7 @@ public interface TextboxContainer extends FrameContainer {
 	 * <p>
 	 * This method will return a list of text boxs by the usage in presentation
 	 * slides.
-	 * 
+	 *
 	 * @param usage
 	 *            - the usage description
 	 * @return a list of text box Null will be returned if the owner document is

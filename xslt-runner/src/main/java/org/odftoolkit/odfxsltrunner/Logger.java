@@ -37,25 +37,25 @@ public abstract class Logger {
     private String m_aFileName = "(none)";
     private boolean m_bError = false;
 
-    /** 
-     * Error log level. 
+    /**
+     * Error log level.
      */
     public static final int ERROR = 0;
 
-    /** 
-     * Warning log level. 
+    /**
+     * Warning log level.
      */
     public static final int WARNING = 1;
-    
-    /** 
-     * Information log level. 
+
+    /**
+     * Information log level.
      */
     public static final int INFO = 2;
 
     /**
      * Create a new Logger instance.
      */
-    protected Logger() 
+    protected Logger()
     {
     }
 
@@ -63,7 +63,7 @@ public abstract class Logger {
     {
         setName( aFileName, null );
     }
-    
+
     void setName( String aFileName, String aEntryName )
     {
         m_aFileName = aFileName;
@@ -72,7 +72,7 @@ public abstract class Logger {
 
     /**
      * Get name of the file for which messagea are logged.
-     * 
+     *
      * @return file name
      */
     protected String getName() {
@@ -85,9 +85,9 @@ public abstract class Logger {
         return aName.toString();
     }
 
-    /** 
+    /**
      * Was an error or fatal error logged.
-     * 
+     *
      * @return true if an error was logged.
      */
     public boolean hasError() {
@@ -154,7 +154,7 @@ public abstract class Logger {
         aLocation.append(e.getLineNumber());
         aLocation.append(": ");
         aLocation.append(e.getColumnNumber());
-        
+
         logMessage( aPrefix, e.getMessage(), aLocation.toString(), nLevel );
     }
 
@@ -162,20 +162,20 @@ public abstract class Logger {
     {
         logMessage( aPrefix, aMsg, null, nLevel );
     }
-    
+
     /**
      * Log a message.
-     * 
+     *
      * @param aPrefix Message prefix
      * @param aMsg Message text
      * @param aLocation file, row and column number as text (optional)
      * @param nLevel the warning level (one of INFO, WARNING or ERROR)
      */
     protected abstract void logMessage( String aPrefix, String aMsg, String aLocation, int nLevel );
-    
+
     /**
      * Log a message.
-     * 
+     *
      * @param aPrefix Message prefix
      * @param aMsgWithLocation Message text including location information
      * @param nLevel the warning level (one of INFO, WARNING or ERROR)
