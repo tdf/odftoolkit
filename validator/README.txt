@@ -11,4 +11,4 @@ ODF Validator is a tool that validates OpenDocument files and checks them for ce
 ODF Validator is available as Java library for command line or embedded use, as well as a web application archive (WAR) file. 
 
 Further information can be found under:
-http://incubator.apache.org/odftoolkit/conformance/ODFValidator.html
+https://odftoolkit.org/conformance/ODFValidator.html
