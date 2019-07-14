@@ -2,7 +2,7 @@
 
 ## Style Support
 
-Text applications support styles  of type `page`, `drawing`, `character`, `paragraph`, and `table`.
+Text applications support styles of type `page`, `drawing`, `character`, `paragraph`, and `table`.
 
 All operations that set formatting attributes will contain _attribute sets_. These attribute sets contain sub-objects with attributes and are mapped by attribute type. Additionally, an attribute set may contain the identifier of a style sheet referenced by a component in the document.
 
