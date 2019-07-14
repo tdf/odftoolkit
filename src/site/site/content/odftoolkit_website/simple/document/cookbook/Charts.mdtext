@@ -29,7 +29,7 @@
 		<span class='javaclass'>DataSet</span> dataset = <span class='modifier'>new</span> <span class='javaclass'>DataSet</span>(labels, legends, data);<br/>
 </pre>
 <br/><div class="bodytext">
-		You should also use rectangle to define the position and the size of this chart. For example: 
+		You should also use rectangle to define the position and the size of this chart. For example:
 </div>
 <br/><pre class='code' id="code2">
 		<span class='javaclass'>Rectangle</span> rect = <span class='modifier'>new</span> <span class='javaclass'>Rectangle</span>();<br/>
@@ -54,7 +54,7 @@
 				cellRange, <span class='basic'>true</span>, <span class='basic'>true</span>, <span class='basic'>false</span>, rect);<br/>
 </pre>
 <br/><div class="bodytext">
-		If you want to create a chart in a spreadsheet document, you need to specify a cell to be the anchor of this chart, for example: 
+		If you want to create a chart in a spreadsheet document, you need to specify a cell to be the anchor of this chart, for example:
 </div>
 <br/><pre class='code' id="code5">
 		spreadsheetDoc.createChart("<span class='javaclass'>Page</span> <span class='javaclass'>Visit</span>", spreadsheetDoc, cellRange,<br/>
@@ -114,7 +114,7 @@
 		textDoc.deleteChartById(chartid);<br/>
 		textDoc.deleteChartByTitle("<span class='javaclass'>New</span> title");<br/>
 </pre>
-<br/><br/> 
+<br/><br/>
 <div class="navigation">
  <ul>
   <li><a href="Cell Range.html">previous</a></li>

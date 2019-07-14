@@ -8,7 +8,7 @@
 <br/>
 <br/><strong><a href="#Get Text" >Get Text</a></strong>
 <div class="bodytext">
-		TextExtractor provides a method to get the display text of a single element. EditableTextExtractor is a sub class of TextExtractor. 		It provides a method to return all the text that the user can typically edit in a document, including text in cotent.xml, 		header and footer in styles.xml, meta data in meta.xml. 
+		TextExtractor provides a method to get the display text of a single element. EditableTextExtractor is a sub class of TextExtractor. 		It provides a method to return all the text that the user can typically edit in a document, including text in cotent.xml, 		header and footer in styles.xml, meta data in meta.xml.
 </div>
 <div class="bodytext">
 		The following codes use EditableTextExtractor as an example, the text of the document "textExtractor.odt" is extracted for user.		For TextExtractor, it can't extract the text from a TextDocument.
@@ -27,7 +27,7 @@
 		<span class='javaclass'>EditableTextExtractor</span> extractorE = <span class='javaclass'>EditableTextExtractor</span>.newOdfEditableTextExtractor(elem);<br/>
 		<span class='javaclass'>System</span>.out.println(extractorE.getText());<br/>
 </pre>
-<br/><br/> 
+<br/><br/>
 <div class="navigation">
  <ul>
   <li><a href="Manipulate TextSearch.html">previous</a></li>

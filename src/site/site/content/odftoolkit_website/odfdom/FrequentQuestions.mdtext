@@ -1,7 +1,7 @@
 Title: Frequently asked questions
-***Question:*** How to extracte featured text from a document, for example: extract all bold, italicized or underlined text from a document and any other layout evidence of emphasis like the text font size and so on?  
+***Question:*** How to extracte featured text from a document, for example: extract all bold, italicized or underlined text from a document and any other layout evidence of emphasis like the text font size and so on?
 
-***Answer:*** The model of ODF is for there to be "blocks" of text and each run can have an associated style reference. These style references then have definitions of exactly what text attributes they correspond to. There are two methods you can refer to.  
+***Answer:*** The model of ODF is for there to be "blocks" of text and each run can have an associated style reference. These style references then have definitions of exactly what text attributes they correspond to. There are two methods you can refer to.
 
  1. First identify which styles have the bold (or italics) attribute.
     The document might have more than one style that defines bold text.

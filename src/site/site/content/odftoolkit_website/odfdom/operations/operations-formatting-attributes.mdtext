@@ -39,7 +39,7 @@ Page formatting attributes will be applied to page elements.
 
 (1) The top and bottom page margin will include a header or footer if existing. If the header/footer is too large to fit into the empty space, the effective size of the page content area has to be reduced to prevent the header/footer from overlapping with the page content area.
 
-     
+
 ## ParagraphAttributes
 
 |Applications|Text|
@@ -154,7 +154,7 @@ Each table style sheet contains multiple attribute sets, mapped by conditional k
 
 (1) Applies to the border of the whole table only.
 
-     
+
 
 ## TableRowAttributes
 
@@ -170,7 +170,7 @@ Table row formatting attributes will be applied to row elements of tables in a t
 |`height`|Integer|String|“auto”|all|Row height. If set to “auto”, the row is sized automatically according to its contents.|
 |`headerRow`|Boolean|false|all|Specifies if this is a header row that is repeated on each page.|
 
-     
+
 
 ## TableCellAttributes
 
@@ -331,7 +331,7 @@ The following attributes are supported by drawing objects embedded in other draw
 |`width`|Number|0|element|The width of the drawing object in the parent object's virtual coordinate system (see attribute `[coordWidth](#general_drawing_attributes)` ).|
 |`height`|Number|0|element|The height of the drawing object in the parent object's virtual coordinate system (see attribute `[coordHeight](#general_drawing_attributes)` ).|
 
-     
+
 
 ## DrawingFillAttributes
 
@@ -358,7 +358,7 @@ Drawing fill attributes will be applied to entire drawing objects embedded in th
 |`bitmap`|[Bitmap](#bitmap)|_none_|all|The bitmap fill properties. Only used if the attributes `type` is set to “bitmap”.|
 |`pattern`|Enum [Pattern](#pattern)|“none”|all|The preset pattern identifier. Only used if the attributes `type` is set to “pattern”. The attributes `color` and `backgroundColor` determine the colors used for the pattern.|
 
-     
+
 
 ## DrawingLineAttributes
 
@@ -435,7 +435,7 @@ Drawing line attributes will be applied to entire drawing objects embedded in th
 ||“large”|Solid line.|
 ||
 
-     
+
 
 ## DrawingTextAttributes
 
@@ -450,7 +450,7 @@ Formatting attributes describing the source of the text contents of a drawing ob
 |---------|---------|-------------|-------------------------|-----------|
 |`link`|[SourceLink](#sourcelink)|\[\]|element|The constant text, or an application dependent link into the document.|
 
-     
+
 
 ## ImageAttributes
 
@@ -475,15 +475,15 @@ Formatting attributes for images and OLE objects.
 (1) The attributes `imageUrl` and `imageData` are mutually exclusive.
 
 *   An exception to this rule was introduced for the clipboard handling. The copy handler can not decide whether the `imageUrl` or the `imageData` attribute is needed on paste. Therefore the copy handler adds both attributes and the paste handler decides which one to use and which one to remove from the operation. Finally an operation with both attributes present may temporarily exist, but such operation is never sent to the filter.
-    
+
 
 (2) A value of 0 does not crop the bitmap, positive values will move the respective border of the bitmap outside the drawing frame, negative values will move the bitmap border inside the drawing frame. Cropping attributes are interpreted differently depending on the file format:
 
 *   OOXML: Cropping is used as percentage value. The value 100 corresponds to the total size of the drawing frame.
-    
-*   ODF: Cropping is used as absolute length in 1/100 of millimeters.    
 
-     
+*   ODF: Cropping is used as absolute length in 1/100 of millimeters.
+
+
 
 ## ShapeAttributes
 
@@ -511,7 +511,7 @@ Formatting attributes for shape objects.
 |`fontScale`|Number|1|all|scales all text-font releative to their original font-size, only if autoResizeText is true|
 |`lineReduction`|Number|0|all|reduces the distance between paragraphs relative to the original distance, only if autoResizeText is true|
 
-     
+
 
 ## GeometryAttributes
 
@@ -533,7 +533,7 @@ Geometry attributes for shape objects.
 |`textRect`|[GeometryTextRect](#geometrytextrect)||all|a special text rect that has to be used for text, if omitted then the text rect is as big as the shape|
 |`hostData`|String||all|This attribute is used only in the filter for better roundtrip.|
 
-     
+
 
 ## ConnectorAttributes
 
@@ -551,7 +551,7 @@ Connector attributes for connector shapes.
 |`endId`|String|””|element|Specifies the end shape the connector is connected to. If empty then the shape does not have a end connection.|
 |`endIndex`|Integer|0|element|Specifies the point at the end shape the connector is connected to.|
 
-     
+
 
 ## ChartAttributes
 
@@ -574,7 +574,7 @@ Formatting attributes for entire chart objects.
 |`varyColors`|Boolean|false|element|defines if the points of the first series are same color or not.|
 |`rotation`|integer|0|element|defines rotation of an pie or donut.|
 
-     
+
 
 ## ChartDataSeriesAttributes
 
@@ -608,7 +608,7 @@ Formatting attributes for data series in chart objects.
 |`axisYIndex`|Integer|0|element|0 = left axis, 1 = right axis|
 |`dataPoints`|Array<[ChartDataPointAttributeSet](#chartdatapointattributeset)\>|\[\]|element||
 
-     
+
 
 ## ChartAxisAttributes
 
@@ -631,7 +631,7 @@ Formatting attributes for axes in chart objects.
 |`max`|Number | String|“auto”|element|The maximum value shown at the end of the axis. The special value “auto” will obtain the axis maximum according to the series data. Used by axes of type “value” and “date” only. (never used! Deprecated?)|
 |`label`|Boolean|false|element|Whether the axis labels are visible.|
 
-     
+
 
 ## ChartLegendAttributes
 
@@ -653,4 +653,4 @@ Formatting attributes for the legend in chart objects.
 |“right”|The legend is located right of the chart plot area.|
 |“topRight”|The legend is located in the top-right corner of the chart area.|
 
-     
+

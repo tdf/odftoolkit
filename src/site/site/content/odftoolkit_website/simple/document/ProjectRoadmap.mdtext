@@ -1,4 +1,4 @@
-Title: Project Road Map 
+Title: Project Road Map
 Requirements Collection
 -----------------------
 
@@ -9,14 +9,14 @@ This page is used to discuss the requirements from a perspective of an Office so
 ###Cut/copy/paste/selection###
 Select something, cut or copy it, and paste to somewhere else. These operations are easily made in Office softwares, but are hard done in APIs. The functions include:
 
- - Create a selection    
- - Create a position   
- - Cut a selection   
- - Copy a selection   
- - Paste a selection to some position   
- - Delete a selection  
+ - Create a selection
+ - Create a position
+ - Cut a selection
+ - Copy a selection
+ - Paste a selection to some position
+ - Delete a selection
 
-Part of these functions have been implemented with package org.odftoolkit.simple.common.navigation       
+Part of these functions have been implemented with package org.odftoolkit.simple.common.navigation
 
 <table>
 <tr>
@@ -32,7 +32,7 @@ Part of these functions have been implemented with package org.odftoolkit.simple
  Copy a selection    </td><td></td></tr><tr><td>
  Paste a selection   </td><td></td></tr><tr><td>
  Delete a selection  </td><td></td></tr>
-</table> 
+</table>
 
 ###Navigator/document map###
 With these functions, users can easily go to a certain place in the whole document. These functions can provide methods to get a certain heading, get a certain image, get a certain table and so on. The functions include:

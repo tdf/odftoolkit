@@ -1,14 +1,14 @@
 Title: Simple Java API for ODF
 ##What is the Simple Java API for ODF?
 
-The Simple Java API for ODF is an easy-to-use, high-level Java API for creating, 
-modifying and extracting data from ODF 1.2 documents.  It is written in pure 
-Java and does not require that you install any document editor on your system.  
+The Simple Java API for ODF is an easy-to-use, high-level Java API for creating,
+modifying and extracting data from ODF 1.2 documents.  It is written in pure
+Java and does not require that you install any document editor on your system.
 The Simple Java API for ODF is a high level abstraction of the lower-level ODFDOM API.
 
 ##New Release 0.6.6
 
-We are pleased to announce the release of the Simple Java API for ODF version 
+We are pleased to announce the release of the Simple Java API for ODF version
 0.6.6 on Auguest 12th. The improvements in this version include:
 
   - Two critical bugs in the Navigation API are fixed, as well as
@@ -16,18 +16,18 @@ We are pleased to announce the release of the Simple Java API for ODF version
   - *Page columns,  a page layout feature in text documents, are supported.
   - *Unit test coverage rate increased.  This work improves the stability of our API.
 
-You can download it here. The full release notes can be found here. 
+You can download it here. The full release notes can be found here.
 
-ODF Toolkit has been accepted as an Apache incubator project and the move 
-process has been started. The security features (encryption and digital 
-signatures) will be included in Apache version. Thanks all of the contributors 
+ODF Toolkit has been accepted as an Apache incubator project and the move
+process has been started. The security features (encryption and digital
+signatures) will be included in Apache version. Thanks all of the contributors
 and users, please continue to pay attention to us in Apache.
 
 ##Project roadmap and schedule
 
-The Simple Java API for ODF adheres to the "Release Early and Often" development 
-philosophy.  We will target a monthly release, for the end of each month.  
-Code that is ready makes it into that month's release.  Code that is not yet 
+The Simple Java API for ODF adheres to the "Release Early and Often" development
+philosophy.  We will target a monthly release, for the end of each month.
+Code that is ready makes it into that month's release.  Code that is not yet
 ready will wait.
 
 Proposed Roadmap:
@@ -45,12 +45,12 @@ Proposed Roadmap:
 ###For Users
 
 ####How to download and install
-You can get Simple Java API for ODF as binary distribution from the download area. There you'll find Javadocs as well. To obtain source code, please refer to development section. 
+You can get Simple Java API for ODF as binary distribution from the download area. There you'll find Javadocs as well. To obtain source code, please refer to development section.
 
 ####How to start development
-I suggest you to start from an overview of this project. This page will give you 
+I suggest you to start from an overview of this project. This page will give you
 an overall introduction of the package structures. After that, you can go to the
-Cookbook and Demos to read some code samples. And then, you can start your own program 
+Cookbook and Demos to read some code samples. And then, you can start your own program
 to manipulate ODF document.
 
 If you are familiar with ODFDOM, here are the API changes from ODFDOM.
@@ -83,41 +83,41 @@ Enhance the default configuration, using GIT diff and enable [http://mercurial.s
     [ui]
     username = your Name <yourLoginName@odftoolkit.org>
     ;merge = your-merge-program (or internal:merge)
-    
+
     [diff]
     git = 1
-    
+
     [defaults]
     diff=-p -U 8
-    
+
     [extensions]
     # Enables mercurial EOL extension for line break handling
     # See http://mercurial.selenic.com/wiki/EolExtension (bundled since 1.5.4)
     eol =
-    
-    # It'll remove unknown files and empty directories by default. 
+
+    # It'll remove unknown files and empty directories by default.
     # Usually you call 'hg update -C' and 'hg purge' in sequence
     # See http://mercurial.selenic.com/wiki/PurgeExtension  (bundled)
     hgext.purge=
-    
+
     [eol]
-    # Converts mixed line ending within a file to LF (Unix) format 
+    # Converts mixed line ending within a file to LF (Unix) format
     # before adding the file to the source repository
     # See http://mercurial.selenic.com/wiki/EolExtension
     only-consistent = False
 
 </pre>
 
-Now, get the source code from the Simple project 
-[http://www.selenic.com/mercurial/wiki/ Mercurial] repository. 
-Please see below for a short introduction to using Mercurial on odftoolkit.org. 
-There's also a more general <a href="{{project help page 
-SourceControl}}">help</a> on how to use source control systems on 
+Now, get the source code from the Simple project
+[http://www.selenic.com/mercurial/wiki/ Mercurial] repository.
+Please see below for a short introduction to using Mercurial on odftoolkit.org.
+There's also a more general <a href="{{project help page
+SourceControl}}">help</a> on how to use source control systems on
 odftoolkit.org. The command <br /><pre>
-hg clone https://hg.odftoolkit.org/hg/simple~code-base</pre>will 
+hg clone https://hg.odftoolkit.org/hg/simple~code-base</pre>will
 download the repository into a new directory.
 
-Please note that by this you'll get the latest changeset. If you for example 
+Please note that by this you'll get the latest changeset. If you for example
 want stable release 0.2, you may want to use
 
     hg clone https://odftoolkit.org/hg/simple~code-base -r v0.2
@@ -126,11 +126,11 @@ Developers however always work on the latest changeset.
 
 ####How to build and run the unit tests
 
-After the source code is checked out, now get and install 
-[http://maven.apache.org/ Apache Maven]. On command line test your 
+After the source code is checked out, now get and install
+[http://maven.apache.org/ Apache Maven]. On command line test your
 installation with "mvn -v".
 
-If Maven is correctly installed, change into the project directory and build 
+If Maven is correctly installed, change into the project directory and build
 with command "mvn".
 
 ##Communications
@@ -143,14 +143,14 @@ TBD
 
 ##Design of the API
 
-The design principle is "make it easy for users to locate the functions they 
+The design principle is "make it easy for users to locate the functions they
 want".
 
 org.odftoolkit.simple.Document is the abstract base class which the specific document classes are derived from:  TextDocument, SpreadsheetDocument, PresentationDocument, GraphicsDocument and ChartDocument.
 
 For each document type  we have a subpackage that contain additional classes related to that kind of documents.  So org.odftoolkit.simple.chart has classes related to chart, org.odftoolkit.simple.text has classes related to text content,  and org.odftoolkit.simple.presentation has classes related to presentation documents.
 
-Besides the packages for different document types, there are additional packages defined for important common ODF features which are available across all kinds of documents, such as table, meta and style. 
+Besides the packages for different document types, there are additional packages defined for important common ODF features which are available across all kinds of documents, such as table, meta and style.
 
 There is another package named org.odftoolkit.simple.common, which contains functions that are not related with a specific document type nor a specific feature. For example, the text extractor functions are put in this package.
 

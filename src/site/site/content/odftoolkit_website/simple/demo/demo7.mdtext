@@ -1,32 +1,32 @@
-[**Demos**][1] > <b> Offer Letter with Text Fields</b>   
+[**Demos**][1] > <b> Offer Letter with Text Fields</b>
 
-**Overview**    
+**Overview**
 
-We have introduced several samples about how to use Simple ODF API to generate document from the predefined templete, for example, Demo: [Navigation API in Hotel Receipt][2]. I believe you have known how easy it is. But sounds like, we never talk about how to create a template document using  Simple ODF API.   
+We have introduced several samples about how to use Simple ODF API to generate document from the predefined templete, for example, Demo: [Navigation API in Hotel Receipt][2]. I believe you have known how easy it is. But sounds like, we never talk about how to create a template document using  Simple ODF API.
 
-Today, let's do it.   
+Today, let's do it.
 
-Simple API provides Fields API since version 0.5. OpenDocument text documents or OpenDocument text content embedded in other types of documents may contain variable text elements called fields. Fields are commonly used for, a page number field displays the number of the page on which it appears or a creation date field displays the date on which a document was created. Besides, there are several advance field, such as, variable field and condition field.      
+Simple API provides Fields API since version 0.5. OpenDocument text documents or OpenDocument text content embedded in other types of documents may contain variable text elements called fields. Fields are commonly used for, a page number field displays the number of the page on which it appears or a creation date field displays the date on which a document was created. Besides, there are several advance field, such as, variable field and condition field.
 
-This demo provides a Java application which can create the offer letter template document from a sample and use it to generate new offer letters with the information from a spreadsheet. The template document contains some fields whose content is decided by the information from data file.     
+This demo provides a Java application which can create the offer letter template document from a sample and use it to generate new offer letters with the information from a spreadsheet. The template document contains some fields whose content is decided by the information from data file.
 
-The following picture show a sample offer letter. I have labeled the variable content with blod and color style.    
+The following picture show a sample offer letter. I have labeled the variable content with blod and color style.
 
-![image1][3]    
+![image1][3]
 
-This offer was generated on "2011-01-20". It also can be in any other date, so this text content should be replaced by a date field. "Tom King" is the receiver, this name can be replaced with a variable field, then we can send it to any other perpson. Similarly, "software engineer" is the job title of "Tom King", "R&D" is the branch which he belongs to, and "2011-03-12" is his onboard date, all of them should be replaced by variable field in a template document.<br/><br/> 
+This offer was generated on "2011-01-20". It also can be in any other date, so this text content should be replaced by a date field. "Tom King" is the receiver, this name can be replaced with a variable field, then we can send it to any other perpson. Similarly, "software engineer" is the job title of "Tom King", "R&D" is the branch which he belongs to, and "2011-03-12" is his onboard date, all of them should be replaced by variable field in a template document.<br/><br/>
 Salary and allowance are more complex. Different job titles and branches have different rules. Simplicity, we assume that except "Secretary" is 5,500,00, all of the other job titles are 6,000.00. We also assume that employees from "Sales" don't have allowance. Condition field or Hidden Text field is needed to realize these rules. The same as certificates/testimonials, for campus hires, they need supply "Educational certificates", while for professinal hires, they need supply "Experience certificates from previous employers" and "Copy of resignation/acceptation letter and relieving letter". This is another use case of condition field.<br/><br/>
-After replaced all of these variable content with fields, the template document is ready. The process of generate new offer letter is very simple. Only need to load the following data, update the variable values with the data and save as a new document.    
+After replaced all of these variable content with fields, the template document is ready. The process of generate new offer letter is very simple. Only need to load the following data, update the variable values with the data and save as a new document.
 
-![image2][4]    
+![image2][4]
 
-No need text content search, no need target replace. It's faster than the content replace way. Beside, the variable content is highlighted automatically by Symphony or Open Office when the document is opend. The following is a generated letter sample.    
+No need text content search, no need target replace. It's faster than the content replace way. Beside, the variable content is highlighted automatically by Symphony or Open Office when the document is opend. The following is a generated letter sample.
 
 ![image3][5]
 
 As using fields, the new offer letter is easily updated without inconsistent, even though after generated. You can do it in Symphony or Open Office.
 Code Introduction
-There are two methods in the class, <code>createFieldTemplate()</code> is used to create template document from sample, and <code>generateOfferLetterDocument()</code> is used to generated new document using template and data file.    
+There are two methods in the class, <code>createFieldTemplate()</code> is used to create template document from sample, and <code>generateOfferLetterDocument()</code> is used to generated new document using template and data file.
 
 	public static void main(String[] args) {
 		try {
@@ -37,9 +37,9 @@ There are two methods in the class, <code>createFieldTemplate()</code> is used t
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	} 
-Below is the source code of method <code>createFieldTemplate()</code>. The basic process is find the variable content and replace it with a field. We use <code>FixedDateField</code>, <code>UserVariableField</code>, <code>ConditionField</code> and <code>HiddenTextField</code> in this method. Simple ODF API provides more types of fields. For more information, please reference the [Javadoc][6] or [CookBook][7].  
-  
+	}
+Below is the source code of method <code>createFieldTemplate()</code>. The basic process is find the variable content and replace it with a field. We use <code>FixedDateField</code>, <code>UserVariableField</code>, <code>ConditionField</code> and <code>HiddenTextField</code> in this method. Simple ODF API provides more types of fields. For more information, please reference the [Javadoc][6] or [CookBook][7].
+
 	public static void createFieldTemplate() throws Exception {
 		TextDocument sampleDocument = TextDocument.loadDocument("Tom's Offer.odt");
 		// replace offer date with FixedDateField
@@ -139,9 +139,9 @@ Method <code>generateOfferLetterDocument()</code> is easier. Just load the templ
 		}
 	}
 
-**Download**  
+**Download**
 
-Powered by the Simple Java API for ODF version [0.5][8].   
+Powered by the Simple Java API for ODF version [0.5][8].
 You can download the code of this demo from [here][9].
 
 

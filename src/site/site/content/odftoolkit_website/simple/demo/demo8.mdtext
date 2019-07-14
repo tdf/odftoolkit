@@ -1,27 +1,27 @@
-[**Demos**][1] > <b>Add 2D barcode image to a slide</b>   
+[**Demos**][1] > <b>Add 2D barcode image to a slide</b>
 
-**Overview**    
+**Overview**
 
-This demo shows the power of image and metadata support in Simple API.  
+This demo shows the power of image and metadata support in Simple API.
 
-A 2D bar code is a special image that can be scanned by a smart phone or a dedicated scanner. It could contain a URL, a books ISBN number a vCard for a person's contact, information, etc. It makes it easy to transfer information into a smartphone from a physical object, like a printed document, or a newspaper or magazine.   
+A 2D bar code is a special image that can be scanned by a smart phone or a dedicated scanner. It could contain a URL, a books ISBN number a vCard for a person's contact, information, etc. It makes it easy to transfer information into a smartphone from a physical object, like a printed document, or a newspaper or magazine.
 
-In this demo, the contact information of a document's author has been put in the metadata of a presentation document, with an ODF editor, such as IBM Lotus Symphony. The contact information in the metadata is extracted with the Simple ODF API, and wrapped into JSON object. Then a RESTful web service is called to generate a 2D bar code image based on this JSON object.    
- 
-The bar code image is then added to the first slide of this presentation using the Simple API.   
-	
-This picture shows how the contact information is added to the metadata of this document.    
+In this demo, the contact information of a document's author has been put in the metadata of a presentation document, with an ODF editor, such as IBM Lotus Symphony. The contact information in the metadata is extracted with the Simple ODF API, and wrapped into JSON object. Then a RESTful web service is called to generate a 2D bar code image based on this JSON object.
+
+The bar code image is then added to the first slide of this presentation using the Simple API.
+
+This picture shows how the contact information is added to the metadata of this document.
 
 ![image1][2]
 
-This picture shows the 2D bar code image added to the first slide of this presentation document.<br /><br/> 
-![image2][3]   
+This picture shows the 2D bar code image added to the first slide of this presentation document.<br /><br/>
+![image2][3]
 
-**Code Introduction**  
+**Code Introduction**
 
-There code of this demo is very simple. First, we load the presentation document, and extract the metadata with Simple ODF API. Second, we invoke the web service to generate the bar code image and get the URI of this image.    
+There code of this demo is very simple. First, we load the presentation document, and extract the metadata with Simple ODF API. Second, we invoke the web service to generate the bar code image and get the URI of this image.
 
-Finally, we get the subtitle text box in the first slide, add an image just below of this subtitle text box. Please note how FrameRectangle is used to specify the image position.    
+Finally, we get the subtitle text box in the first slide, add an image just below of this subtitle text box. Please note how FrameRectangle is used to specify the image position.
 
 	public static void main(String[] args) {
 
@@ -37,7 +37,7 @@ Finally, we get the subtitle text box in the first slide, add an image just belo
 			//invoke the 2D barcode service, and get the url
 			BarcodeImageGeneration demo = new BarcodeImageGeneration();
 			String url = demo.invokepost(creator,mailto,phoneno);
-			
+
 			//Add the image to the first slide
 			Slide slide = presentation.getSlideByIndex(0);
 			Textbox subtitleBox = slide.getTextboxByUsage(PresentationClass.SUBTITLE).get(0);
@@ -47,7 +47,7 @@ Finally, we get the subtitle text box in the first slide, add an image just belo
 			imageRect.setX(subtitleRect.getX()+(subtitleRect.getWidth()-imageRect.getWidth())/2);
 			imageRect.setY(subtitleRect.getY()+subtitleRect.getHeight());
 			image.setRectangle(imageRect);
-			
+
 			presentation.save("output.odp");
 
 		} catch (Exception e) {
@@ -56,10 +56,10 @@ Finally, we get the subtitle text box in the first slide, add an image just belo
 
 	}
 
-**Download**  
+**Download**
 
-Powered by the Simple Java API for ODF version [0.5.5][4].   
-You can download the code of this demo from [here][5].  
+Powered by the Simple Java API for ODF version [0.5.5][4].
+You can download the code of this demo from [here][5].
 The dependent library jslib.zip can be downloaded from [here][6].
 
 

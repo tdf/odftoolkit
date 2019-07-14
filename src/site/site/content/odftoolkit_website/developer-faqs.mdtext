@@ -18,10 +18,10 @@ Notice:    Licensed to the Apache Software Foundation (ASF) under one
 
 ##How do I edit this website?
 
-The pages on this website are written in [markdown syntax][1] and stored in GIT at 
+The pages on this website are written in [markdown syntax][1] and stored in GIT at
 [https://github.com/tdf/odftoolkit/tree/master/src/site][2]
 
-Via integration with the Apache CMS, it is possible to edit, stage and publish 
+Via integration with the Apache CMS, it is possible to edit, stage and publish
 website updates from the command line, or by using a web-based interface.
 
 Detailed information can be found in the [How to edit the ODF website][3] page.

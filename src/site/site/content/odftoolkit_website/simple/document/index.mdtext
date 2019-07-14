@@ -1,37 +1,37 @@
 Title: Simple API Documents
 
-*In this page, documents of Simple API are listed.*  
+*In this page, documents of Simple API are listed.*
 
-**Javadoc**  
-  
-Javadoc is a documentation generator for generating API documentation in HTML format from Java source code.    
-       
-<a href="javadoc/index.html" target="_blank"> Simple API <span id="versionNo">0.6.6</span> Online Version</a>  
+**Javadoc**
 
-You can download the Javadoc of different versions on the [Downloads Page][1].   
+Javadoc is a documentation generator for generating API documentation in HTML format from Java source code.
 
-**Cook Book**  
-  
+<a href="javadoc/index.html" target="_blank"> Simple API <span id="versionNo">0.6.6</span> Online Version</a>
+
+You can download the Javadoc of different versions on the [Downloads Page][1].
+
+**Cook Book**
+
 [Cookbook][2] provides simple codes to help developers know how to use Simple API.</p>
 
-**Frequently Asked Questions**     
+**Frequently Asked Questions**
 
 [This page][3] lists the frequently asked questions.
 
-**Article and Paper**   
+**Article and Paper**
 
-- [ODFDOM for Java: Simplifying programmatic control of documents and their data, Part 1][4]     
-- [ODFDOM for Java: Simplifying programmatic control of documents and their data, Part 2][5]     
-- [ODFDOM for Java: Simplifying programmatic control of documents and their data, Part 3][6]                
-- [Open Document Processing with ODFDOM in an insurance solution][7]          
+- [ODFDOM for Java: Simplifying programmatic control of documents and their data, Part 1][4]
+- [ODFDOM for Java: Simplifying programmatic control of documents and their data, Part 2][5]
+- [ODFDOM for Java: Simplifying programmatic control of documents and their data, Part 3][6]
+- [Open Document Processing with ODFDOM in an insurance solution][7]
 - [ODF Template Engine -- An easy document generation tool built with ODFDOM][8]
 
-**More Documents for Developer**   
+**More Documents for Developer**
 
-- [Project Road Map][9]    
-- [Requirements][10]     
-- [Architecture][11]                
-- [API Changes From ODFDOM 0.8.6][12]      
+- [Project Road Map][9]
+- [Requirements][10]
+- [Architecture][11]
+- [API Changes From ODFDOM 0.8.6][12]
 
 
   [1]: ../downloads.html

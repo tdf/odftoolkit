@@ -1,14 +1,14 @@
 Title: The ODFDOM Layers
-The ODFDOM project's objective is to provide an easy API for reading, writing and manipulating documents of the OpenDocument format (ODF). 
+The ODFDOM project's objective is to provide an easy API for reading, writing and manipulating documents of the OpenDocument format (ODF).
 To archive this, the ODFDOM API follows a layered approach to access documents, as layered design is the robust foundation for a well-designed modular structure.
 
 <center>![alt text][1]</center>
 
 The ODF Package Layer
 ---------------------
-The ODF Package Layer provides access to all resources stored within the ODF package, such as XML streams, images or embedded objects.   
- 
-**The ODF Package API**  
+The ODF Package Layer provides access to all resources stored within the ODF package, such as XML streams, images or embedded objects.
+
+**The ODF Package API**
 The ODF Package API covers all features from [the third part of the ODF 1.2 specification][2] defining the ODF Package features. The ODF 1.2 package features are build on top technologies as [ZIP package handling][3], [W3C encryption][4], [W3C signature][5] and [W3C metadata][6].
 
 At this layer a document is in general represented by a bundle of named resources zipped to a package.
@@ -16,10 +16,10 @@ For instance, an ODF text document like 'myVacation.odt' might contain the follo
 
 ![alt text][7]
 
-***Note:*** All file streams aside of the '/Pictures' directory and its content are specified by the ODF standard. 
-Furthermore, the file streams are similar for all types of ODF documents.  
+***Note:*** All file streams aside of the '/Pictures' directory and its content are specified by the ODF standard.
+Furthermore, the file streams are similar for all types of ODF documents.
 
-The main requirements for this layer in regard of ZIP are:   
+The main requirements for this layer in regard of ZIP are:
 
   - Zip/unzip the file streams of the package
   - Enlist all file streams in the /META-INF/manifest.xml (similar to an
@@ -34,11 +34,11 @@ The following example illustrates how to add a graphic to the package level
 
     import org.odftoolkit.odfdom.pkg.OdfPackage;
     [...]
-    
+
     // loads the ODF document package from the path
     OdfPackage pkg = OdfPackage.loadPackage("/home/myDocuments/myVacation.odt");
-    
-    // loads the image from the URL and inserts the image in the package, 
+
+    // loads the image from the URL and inserts the image in the package,
     // adapting the manifest
     pkg.insert(new URI("./myHoliday.png"), "Pictures/myHoliday.png", "image/png");
     pkg.save("/home/myDocuments/myVacation.odt");
@@ -47,11 +47,11 @@ The following example illustrates how to add a graphic to the package level
 The ODF XML Layer
 -----------------
 
-The ODF XML Layer provides all the features of an office format, such as tables, images, numbering etc. All features are defined in [the first part of the ODF 1.2 specification][8] describing the ODF XML schema. This layer consists of two APIs representing two different views on the features.   
+The ODF XML Layer provides all the features of an office format, such as tables, images, numbering etc. All features are defined in [the first part of the ODF 1.2 specification][8] describing the ODF XML schema. This layer consists of two APIs representing two different views on the features.
 
-**The ODF DOM API**  
-   
-The ODF DOM API gives access to the XML, the elemental parts of the ODF schema features. With this API it is easy to manipulate all specified XML nodes extending the platform and language independent DOM API [DOM API standardized by the W3C][9] - best-known by its implementation through the browsers. It extends the DOM API using a typed DOM. For every ODF XML element and ODF XML attribute defined by the ODF grammar (the RelaxNG schema) a unique class exists, providing methods for their allowed children. The purpose is to provide the user a corset to easily write valid ODF without consulting the spec constantly. This API is very consistent as instead of laboriously writing all these classes, the sources were generated directly from the ODF schema. This generation guarantees complete coverage of the ODF specification on one side and an easy and accurate upgrade to future ODF specifications on the other. 
+**The ODF DOM API**
+
+The ODF DOM API gives access to the XML, the elemental parts of the ODF schema features. With this API it is easy to manipulate all specified XML nodes extending the platform and language independent DOM API [DOM API standardized by the W3C][9] - best-known by its implementation through the browsers. It extends the DOM API using a typed DOM. For every ODF XML element and ODF XML attribute defined by the ODF grammar (the RelaxNG schema) a unique class exists, providing methods for their allowed children. The purpose is to provide the user a corset to easily write valid ODF without consulting the spec constantly. This API is very consistent as instead of laboriously writing all these classes, the sources were generated directly from the ODF schema. This generation guarantees complete coverage of the ODF specification on one side and an easy and accurate upgrade to future ODF specifications on the other.
 
 At this level, all XML file streams of the document are accessible via the [W3C DOM API][10], but only the ODF standardized XML file streams of the document (e.g. content.xml, meta.xml) have their own classes representing their ODF XML elements. Foreign XML within a specified ODF XML file will remain in the document model in general and won't be neglected unless desired ( which still might be a future option).
 
@@ -68,9 +68,9 @@ This XML would be mapped to a W3C derived ODF DOM class structure:
 
 All sources of the typed DOM API are organized beyond <code>org.odftoolkit.odfdom.dom.*</code>
 
-The sources for the ODF elements are all generated from the ODF grammar (RelaxNG schema) using the following naming conventions in the Java reference implementation:   
+The sources for the ODF elements are all generated from the ODF grammar (RelaxNG schema) using the following naming conventions in the Java reference implementation:
 
-- The class name is equal to the element local name using the Namespace as prefix and 'Element' as suffix (e.g. the 'draw:frame' element has the <code>DrawFrameElement</code> class).  
+- The class name is equal to the element local name using the Namespace as prefix and 'Element' as suffix (e.g. the 'draw:frame' element has the <code>DrawFrameElement</code> class).
 - Elements are stored beyond a sub-package equal to their Namespace used by the OOo. Therefore the frame element 'draw:frame' would be generated in Java as class <code>org.odftoolkit.odfdom.dom.draw.DrawFrameElement</code>.
 
 ***Note:*** The element local names 'h' and 'p' have been renamed to the classes 'Heading' and 'Paragraph' for usability reasons.
@@ -85,19 +85,19 @@ The following example illustrates how to add a graphic to the ODF document, that
     import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
     import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
     import org.odftoolkit.odfdom.dom.element.text.TextPElement;
-    
+
     [...]
-    
+
     // Load file
     OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument("ImageIn.odt");
-                
+
     // get root of all content of a text document
     OfficeTextElement officeText = odt.getContentRoot();
-                
+
     // get first paragraph
-    TextPElement firstParagraph = 
+    TextPElement firstParagraph =
       OdfElement.findFirstChildNode(TextPElement.class, officeText);
-                
+
     // XPath alternative to get the first paragraph
     /*
       XPath xpath = XPathFactory.newInstance().newXPath();
@@ -105,18 +105,18 @@ The following example illustrates how to add a graphic to the ODF document, that
       OdfFileDom dom = odt.getContentDom();
       firstParagraph = (TextPElement) xpath.evaluate("//text:p[1]", dom, XPathConstants.NODE);
     */
-    
+
     // insert a frame
     DrawFrameElement frame = firstParagraph.newDrawFrameElement();
-                
+
     // insert an image: This is a class from the Document API
     OdfDrawImage image = (OdfDrawImage) frame.newDrawImageElement();
     image.newImage(new URI("./MySampleImage.png"));
-                
+
     // Save file
     odt.save("ImageOut.odt");
 
-Even in this example we had to refer to a class from the Document API. Otherwise our implementation had gotten quite long and complex. 
+Even in this example we had to refer to a class from the Document API. Otherwise our implementation had gotten quite long and complex.
 
 **The ODF Document API**
 
@@ -131,25 +131,25 @@ For example, the document class for a 'draw:frame' element would be represented 
 
 Again let's look at the previous code example for the DOM API: Remember all DOM element classes are abstract and we're really getting objects from the Document API: Even if <code>frame.newDrawFrameElement()</code> is defined to return the DOM class DrawFrameElement, it really returns the DOC subclass OdfDrawFrame. So it's always save to use explicit casting <code>OdfDrawFrame frame = (OdfDrawFrame) firstParagraph.newDrawFrameElement();</code>.
 
-However reworking the previous example would just make the code larger, since we're not using any of the document methods provided by the DOC subclasses. 
+However reworking the previous example would just make the code larger, since we're not using any of the document methods provided by the DOC subclasses.
 
 Here's an example for working with DOC classes, completely avoiding handling the DOM manually:
 
     [...]
     // Load Image
     OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument("ImageIn.odt");
-    
+
     // Play around with text
     odt.addText("When there is no paragraph, the text will be embedded in a new paragraph");
     odt.newParagraph("Create new paragraph");
     odt.addText("\nThis is a new line");
-    
+
     // Insert Image and make last paragraph its anchor
     odt.newImage(new URI("./MySampleImage.png"));
-    
+
     // Insert new spreadsheet as sub document into the package within directory  "myOdsDirectoryPath/"
     odt.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "myOdsDirectoryPath");
-    
+
     // Save file
     odt.save("ImageOut.odt");
 

@@ -2,7 +2,7 @@
 # Fix format via command line: 'mvn editorconfig:format'
 root=true
 
-[*.{groovy,java,kt,xml}]
+[*.{groovy,java,kt,xml,mdtext}]
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true

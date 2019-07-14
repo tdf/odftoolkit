@@ -1,15 +1,15 @@
-Title: Class Structure in ODFDOM   
+Title: Class Structure in ODFDOM
 
 The Java packages reflect the layers of the ODFDOM library.
 
 Shared Functionality
 --------------------
 
-Shared by all layers are the basic XML classes as in the `org.odftoolkit.odfdom` package, like    
+Shared by all layers are the basic XML classes as in the `org.odftoolkit.odfdom` package, like
 
   - `OdfElement`: parent of all ODFDOM elements
-  - `OdfAttribute`: parent of all ODFDOM attributes 
-  - `OdfName`: the union of an ODF local name and an ODF namespace, represented by 
+  - `OdfAttribute`: parent of all ODFDOM attributes
+  - `OdfName`: the union of an ODF local name and an ODF namespace, represented by
   - `OdfNamespace`: embracing all ODF namespaces (prefixes and URIs) defined in the specification.
 
 Similar used through all layers are the ODF datatypes, to be found in
@@ -30,7 +30,7 @@ The classes you will find here include:
 The ODF Typed DOM / XML Layer
 -----------------------------
 
-These classes are in general the generated DOM elements and attributes of ODF 1.2. 
+These classes are in general the generated DOM elements and attributes of ODF 1.2.
 
   - `org.odftoolkit.odfdom.dom.element`: These classes give you access to the individual ODF elements. Its sub-packages are divided by namespace, so you would find the code for a `draw:ellipse` element in the `org.odftoolkit.odfdom.dom.element.draw.DrawEllipseElement` class.
   - `org.odftoolkit.odfdom.dom.attribute`: These classes give you access to the individual ODF attributes  (similar to the elements before). Again its sub-packages are divided by namespace, so you would find the code for a `xml:id` attribute in the `org.odftoolkit.odfdom.dom.attribute.xml.XmlId` class.
@@ -39,7 +39,7 @@ The third package `org.odftoolkit.odfdom.dom.style` will vanish in the future (m
 
   - `org.odftoolkit.odfdom.dom.style`: These classes and the `.props` sub-packages give you access to ODF&rsquo;s style families and their properties.
 
-If you are using an IDE such as NetBeans or Eclipse, you don't have to memorize this hierarchy; the IDE can generate the proper `import` statements for you. 
+If you are using an IDE such as NetBeans or Eclipse, you don't have to memorize this hierarchy; the IDE can generate the proper `import` statements for you.
 
 The code in these classes is generated directly from [the Relax NG][1] (RNG) schema for ODF.
 

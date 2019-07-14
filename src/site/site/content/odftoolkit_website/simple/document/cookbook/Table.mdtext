@@ -30,7 +30,7 @@ If you want to create table with specified column and row,you can do like this:
             table2.setTableName("table2");<br/>
 </pre>
 <br/><div class="bodytext">
-       If you want to put some numbers into a table while creating it, you can use the constructor Table.newTable(document,rowlabels,columnlabels, data)       which you should specify a 2 dimension array as the data and 2 String arrays as table labels,one for row and the other for column. 
+       If you want to put some numbers into a table while creating it, you can use the constructor Table.newTable(document,rowlabels,columnlabels, data)       which you should specify a 2 dimension array as the data and 2 String arrays as table labels,one for row and the other for column.
 </div>
 <br/><pre class='code' id="code2">
         <span class='basic'>int</span> rowcount = 10, columncount = 4;<br/>
@@ -104,7 +104,7 @@ Since version 0.8, new APIs are added to format a table, which will load the for
           <span class='basic'>Table</span> table = doc.getTableByName("Table2");<br/>
           table.applyStyle(template);<br/>
 </pre>
-<br/><br/> 
+<br/><br/>
 <div class="navigation">
  <ul>
   <li><a href="Slide.html">previous</a></li>

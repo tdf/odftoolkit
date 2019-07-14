@@ -81,7 +81,7 @@ Style handling methods provide convenient methods to set font and borders.
 		thisBorder = cell.getBorder(<span class='javaclass'>CellBordersType</span>.<span class='javaclass'>TOP</span>);<br/>
 		thisBorder = cell.getBorder(<span class='javaclass'>CellBordersType</span>.<span class='javaclass'>DIAGONALBLTR</span>);<br/>
 </pre>
-<br/><br/> 
+<br/><br/>
 <div class="navigation">
  <ul>
   <li><a href="Charts.html">previous</a></li>

@@ -32,7 +32,7 @@ A release candidate is a set of artifacts upon which a vote is held for a releas
 
         mvn release:prepare -Dusername=APACHE_ID -Dpassword=PASSWORD
 
-    This will start the interactive release preparation. You need to supply Maven with the versions of the release. "release version" should be the version of the intended release (recommended value should be fine). "SCM release tag or label" should include the RC version (e.g. odftoolkit-0.6.1-incubating-RC3). "new development version" should be the current SNAPSHOT version (don't use the recommended version, e.g. when building 0.6.1-incubating this should be 0.6.1-incubating-SNAPSHOT, not 0.6.2-incubating-SNAPSHOT).    
+    This will start the interactive release preparation. You need to supply Maven with the versions of the release. "release version" should be the version of the intended release (recommended value should be fine). "SCM release tag or label" should include the RC version (e.g. odftoolkit-0.6.1-incubating-RC3). "new development version" should be the current SNAPSHOT version (don't use the recommended version, e.g. when building 0.6.1-incubating this should be 0.6.1-incubating-SNAPSHOT, not 0.6.2-incubating-SNAPSHOT).
 
  3. Perform the release
 
@@ -65,8 +65,8 @@ A release candidate is a set of artifacts upon which a vote is held for a releas
 
         mvn install -Prelease-distribution -pl=. -Duser.name=&lt;YOUR ID&gt;
 
-    After package there should be a folder release/$TAG in the "target\"  
- 
+    After package there should be a folder release/$TAG in the "target\"
+
 
 VI. After the Vote
 ------------------------------

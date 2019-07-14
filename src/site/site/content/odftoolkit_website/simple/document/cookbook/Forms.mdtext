@@ -47,7 +47,7 @@
 </pre>
 <br/><a href="#Label">Label</a>
 <br/><div class="bodytext">
-			Below codes will create a label and add it to the text document with a paragraph as the anchor position. 
+			Below codes will create a label and add it to the text document with a paragraph as the anchor position.
 </div>
 <br/><pre class='code' id="code4">
 			<span class='javaclass'>Paragraph</span> para = doc.addParagraph("Add form label here:");<br/>
@@ -267,7 +267,7 @@
 			<span class='javaclass'>FrameRectangle</span> rtg = <span class='basic'>new</span> <span class='javaclass'>FrameRectangle</span>(0.01, 2.0, 5, 2,<span class='javaclass'>SupportedLinearMeasure.IN</span>);<br/>
 			button.setRectangle(rtg);<br/>
 </pre>
-<br/><br/> 
+<br/><br/>
 <div class="navigation">
  <ul>
   <li><a href="Fields.html">previous</a></li>

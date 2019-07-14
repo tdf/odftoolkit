@@ -2,7 +2,7 @@
 
 ODFDOM is a free OpenDocument Format (ODF) library. Its purpose is to provide an easy common way to create, access and manipulate ODF files, without requiring detailed knowledge of the ODF specification. It is designed to provide the ODF developer community with an easy lightwork programming API portable to any object-oriented language.
 
-The current reference implementation is written in Java (see [JavaDocs online][23]). 
+The current reference implementation is written in Java (see [JavaDocs online][23]).
 
 To learn more about the project's architecture, refer to the [project overview][1] and the [ODFDOM Layers][2] section.
 

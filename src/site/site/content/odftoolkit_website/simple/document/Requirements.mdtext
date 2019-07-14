@@ -6,35 +6,35 @@ This page is used to analysis the functions and requirements, and discuss the pr
 
 [TOC]
 
-###Requirements Tracking 
+###Requirements Tracking
 Below are requirements from our users.
 
-###Requirements for table (2010.12.20)    
- - getRowList/getColumnList, if there is a row element with 65535 repeate number, then get row list will return a list which contains 65535 row element, it is not necessary and time consuming.    
- - memory leak, because of using static map variables (Recorded in bugzilla, 2010.12.21)   
- - use SAX API to get the content/style element as required, rather than load whole dom tree to memory, which might cause out of memory exception if many large document has been loaded in the same time.    
- - create row/column/cell with/without repeat number(for example,if i want to create 10 rows, how to implement it ? with 10 row element or 1 row element with 10 repeate number)   
- - append row/column with/without previous row/column style, there should be a flag for setting it.    
- - cell format type can be auto calculated according to the style of cell.    
+###Requirements for table (2010.12.20)
+ - getRowList/getColumnList, if there is a row element with 65535 repeate number, then get row list will return a list which contains 65535 row element, it is not necessary and time consuming.
+ - memory leak, because of using static map variables (Recorded in bugzilla, 2010.12.21)
+ - use SAX API to get the content/style element as required, rather than load whole dom tree to memory, which might cause out of memory exception if many large document has been loaded in the same time.
+ - create row/column/cell with/without repeat number(for example,if i want to create 10 rows, how to implement it ? with 10 row element or 1 row element with 10 repeate number)
+ - append row/column with/without previous row/column style, there should be a flag for setting it.
+ - cell format type can be auto calculated according to the style of cell.
 
 ####Requirements for section and text box (2010.12.20)####
- - repeating sections of data. Repeating section may be to clone a section of a template multiple times for different data. So identify an element(s) in the document and be able to clone it and add it into the document. Think like a block of text in a document (maybe a table or a paragraph) that we grab, copy, repeat x times, and then modify a bookmark inside each section.        
- - text boxes that get a name at design time and something we can call it programmatically and then do something with it (delete, modify, etc.)      
- - embedded text tagging with multiple levels - tag a paragraph and then tag a section of text within it - so we can turn stuff off, do repeats, and do repeats within the sections.     
+ - repeating sections of data. Repeating section may be to clone a section of a template multiple times for different data. So identify an element(s) in the document and be able to clone it and add it into the document. Think like a block of text in a document (maybe a table or a paragraph) that we grab, copy, repeat x times, and then modify a bookmark inside each section.
+ - text boxes that get a name at design time and something we can call it programmatically and then do something with it (delete, modify, etc.)
+ - embedded text tagging with multiple levels - tag a paragraph and then tag a section of text within it - so we can turn stuff off, do repeats, and do repeats within the sections.
 
-###Functions Collection 
-Follow are functions collected from a perspective of an Office software user.    
+###Functions Collection
+Follow are functions collected from a perspective of an Office software user.
 
-####Cut/copy/paste/selection   
-Select something, cut or copy it, and paste to somewhere else. These operations are easily made in Office softwares, but are hard done in APIs. The functions include: 
-   
- - Create a selection  
- - Create a position   
- - Cut a selection    
- - Copy a selection    
- - Paste a selection to some position    
- - Delete a selection   
-Part of these functions have been implemented with package org.odftoolkit.simple.common.navigation    
+####Cut/copy/paste/selection
+Select something, cut or copy it, and paste to somewhere else. These operations are easily made in Office softwares, but are hard done in APIs. The functions include:
+
+ - Create a selection
+ - Create a position
+ - Cut a selection
+ - Copy a selection
+ - Paste a selection to some position
+ - Delete a selection
+Part of these functions have been implemented with package org.odftoolkit.simple.common.navigation
 
 <table>
 <tr>
@@ -47,28 +47,28 @@ Part of these functions have been implemented with package org.odftoolkit.simple
  Copy a selection    </td><td></td></tr><tr><td>
  Paste a selection   </td><td></td></tr><tr><td>
  Delete a selection  </td><td></td></tr>
-</table> 
+</table>
 
 ####Navigator/document map
-With these functions, users can easily go to a certain place in the whole document. These functions can provide methods to get a certain heading, get a certain image, get a certain table and so on. The functions include:    
-   
- - Return a list of main features, such as heading,paragraphs,graphics,table,bookmark,sections,hyperlinks,reference,index,comments,text frames, and draw objects.   
- - get next or previous feature, for example, there is a table under a paragraph, then the API can allow users to get next table after this paragraph.   
-Part of these functions have been implemented with getTableList() in org.odftoolkit.simple.Document.   
+With these functions, users can easily go to a certain place in the whole document. These functions can provide methods to get a certain heading, get a certain image, get a certain table and so on. The functions include:
+
+ - Return a list of main features, such as heading,paragraphs,graphics,table,bookmark,sections,hyperlinks,reference,index,comments,text frames, and draw objects.
+ - get next or previous feature, for example, there is a table under a paragraph, then the API can allow users to get next table after this paragraph.
+Part of these functions have been implemented with getTableList() in org.odftoolkit.simple.Document.
 
 ####Fields
 With this feature, users can create fields in the document. The available fields include:
 
- - Fields are used to insert information about the current document, for example, file name, template, statistics, user data, date, and time.   
- - The references or referenced fields that are referenced fields within the same document or within sub-documents of a master document.    
- - Variable fields which are dynamic content to the document.    
+ - Fields are used to insert information about the current document, for example, file name, template, statistics, user data, date, and time.
+ - The references or referenced fields that are referenced fields within the same document or within sub-documents of a master document.
+ - Variable fields which are dynamic content to the document.
 
 The functions include:
 
- - Add a field   
- - Edit a field   
- - Navigator among fields   
- - Delete a field   
+ - Add a field
+ - Edit a field
+ - Navigator among fields
+ - Delete a field
 
 ####Frame
 With frame, users can create a layout of one or more columns of text and objects. The functions include:

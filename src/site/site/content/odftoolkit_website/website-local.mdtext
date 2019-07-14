@@ -16,7 +16,7 @@ Notice:    Licensed to the Apache Software Foundation (ASF) under one
            specific language governing permissions and limitations
            under the License.
 
-We use [Git][1] for version control. You can [browse our 
+We use [Git][1] for version control. You can [browse our
 repository][2] in your web browser.
 
 This page gives instructions on doing website development on your computer.
@@ -45,7 +45,7 @@ NOTE: The Apache CMS [3] bundled within the site directory depends on old librar
     python -m pip install "Markdown==2.6.11"
     python -m pip install "Pygments==2.2.0"
 
-### Download the repo 
+### Download the repo
 
     git clone https://github.com/tdf/odftoolkit
     cd odftoolkit/src/site

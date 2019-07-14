@@ -70,7 +70,7 @@
 	stat.setCellCount(3);<br/>
 	<span class='javaclass'>Integer</span> cellCount=stat.getCellCount();<br/>
 </pre>
-<br/><br/> 
+<br/><br/>
 <div class="navigation">
  <ul>
   <li><a href="Forms.html">previous</a></li>

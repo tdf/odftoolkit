@@ -22,7 +22,7 @@ attrs: {
                                         }
                                     }
 
-     
+
 
 ## AttributeSet
 
@@ -53,7 +53,7 @@ Contains attributes for `character` style sheets and text spans, in the followin
 |`styleId`|String|_none_|Identifier of a character style sheet inserted with an [addStyle](#addStyle) operation.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Character formatting attributes.|
 
-     
+
 
 ## ParagraphAttributeSet
 
@@ -72,7 +72,7 @@ Contains attributes for `paragraph` style sheets and paragraph elements, in the 
 |`paragraph`|[ParagraphAttributes](#paragraphattributes)|{}|Paragraph formatting attributes.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Character formatting attributes.|
 
-     
+
 
 ## TableAttributeSet
 
@@ -95,7 +95,7 @@ Contains attributes for table elements (**not** table style sheets, see [TableSt
 |`paragraph`|[ParagraphAttributes](#paragraphattributes)|{}|Paragraph formatting attributes.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Character formatting attributes.|
 
-     
+
 
 ## TableStyleSheetAttributeSet
 
@@ -122,7 +122,7 @@ Contains attributes for `table` style sheets (**not** table elements, see [Table
 |`southEastCell`|[TableAttributeSet](#tableattributeset)|{}|Table attribute set for the bottom-right corner cell.|
 |`southWestCell`|[TableAttributeSet](#tableattributeset)|{}|Table attribute set for the bottom left corner cell.|
 
-     
+
 
 ## TableRowAttributeSet
 
@@ -139,7 +139,7 @@ Contains attributes for table row elements, in the following format:
 |--------|---------|-------------|-----------|
 |`row`|[TableRowAttributes](#tablerowattributes)|{}|Table row formatting attributes.|
 
-     
+
 
 ## TableCellAttributeSet
 
@@ -158,7 +158,7 @@ Contains attributes for table cell elements, in the following format:
 |`paragraph`|[ParagraphAttributes](#paragraphattributes)|{}|Paragraph formatting attributes.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Character formatting attributes.|
 
-   
+
 ## DocumentAttributeSet
 
 |Applications|all|
@@ -180,7 +180,7 @@ Contains global document settings, and default attribute values for different at
 |`cell`|[CellAttributes](#cellattributes)|{}|Spreadsheet|Default cell attributes for spreadsheet documents.|
 |`layout`|[LayoutAttributes](#layoutattributes)|{}|Presentation|Width in percent from the slide pane for presentation documents.|
 
-     
+
 
 ## PageAttributeSet
 
@@ -198,7 +198,7 @@ Contains attributes for `page` style sheets and page elements, in the following 
 |`styleId`|String|”” (no style sheet)|Identifier of a page style sheet inserted with an [insertStyleSheet](#insertstylesheet) operation.|
 |`page`|[PageAttributes](#pageattributes)|{}|Page formatting attributes.|
 
-     
+
 
 ## DrawingAttributeSet
 
@@ -223,7 +223,7 @@ Contains attributes for `drawing` style sheets and drawing objects, in the follo
 |`connector`|[ConnectorAttributes](#connectorattributes)|{}|Additional connector attributes for connector shapes.|
 |`chart`|[ChartAttributes](#chartattributes)|{}|Additional chart formatting attributes, only used for chart objects.|
 
-     
+
 
 ## ChartDataSeriesAttributeSet
 
@@ -242,7 +242,7 @@ Contains attributes for data series in chart objects, in the following format:
 |`fill`|[DrawingFillAttributes](#drawingfillattributes)|{}|Additional fill formatting attributes for the data series.|
 |`line`|[DrawingLineAttributes](#drawinglineattributes)|{}|Additional line formatting attributes for the data series.|
 
-     
+
 
 ## ChartDataPointAttributeSet
 
@@ -260,7 +260,7 @@ Contains attributes for data point in chart objects, in the following format:
 |`fill`|[DrawingFillAttributes](#drawingfillattributes)|{}|Additional fill formatting attributes for the data point.|
 |`line`|[DrawingLineAttributes](#drawinglineattributes)|{}|Additional line formatting attributes for the data point.|
 
-     
+
 
 ## ChartAxisAttributeSet
 
@@ -279,7 +279,7 @@ Contains attributes for axes in chart objects, in the following format:
 |`line`|[DrawingLineAttributes](#drawinglineattributes)|{}|Additional line formatting attributes for the axis.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Character formatting attributes for the axis labels.|
 
-     
+
 
 ## ChartTitleAttributeSet
 
@@ -299,7 +299,7 @@ Contains attributes for titles in chart objects, in the following format:
 |`text`|[DrawingTextAttributes](#drawingtextattributes)|{}|Attributes describing the text source.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Character formatting attributes for the title.|
 
-     
+
 
 ## ChartGridlineAttributeSet
 
@@ -316,7 +316,7 @@ Contains attributes for grid lines in chart objects, in the following format:
 |--------|---------|-------------|-----------|
 |`line`|[DrawingLineAttributes](#drawinglineattributes)|{}|Line formatting attributes for the grid line.|
 
-     
+
 
 ## ChartLegendAttributeSet
 
@@ -336,7 +336,7 @@ Contains attributes for the legend in a chart object, in the following format:
 |`line`|[DrawingLineAttributes](#drawinglineattributes)|{}|Additional line formatting attributes for the legend shape.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Additional character formatting attributes for the legend.|
 
-     
+
 
 ## TableDrawingAttributeSet
 

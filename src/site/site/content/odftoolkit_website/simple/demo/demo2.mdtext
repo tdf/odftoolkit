@@ -1,10 +1,10 @@
-**[Demos][1]** > **Persentation Extraction and Combination**    
-  
-**Overview**     
+**[Demos][1]** > **Persentation Extraction and Combination**
 
-To show the operation of Presentation in Simple API, the Presentation Codmbination demo is used which combine two independent presentation documents together and extract the notes of each slide out to a Text document.   
+**Overview**
 
-Here the original presentation documents "Pres1.odp" and "Pres2.odp" are used. Pres1.odp presents some basic concepts of XML and Pres2.odp presents some basic aspects of HTML. Both of them have their own cover page with the same slide name "Cover" at the front and an End page with the same slide name "end" at the end of the document. To combine these two presentation documents together, the following steps are used here.   
+To show the operation of Presentation in Simple API, the Presentation Codmbination demo is used which combine two independent presentation documents together and extract the notes of each slide out to a Text document.
+
+Here the original presentation documents "Pres1.odp" and "Pres2.odp" are used. Pres1.odp presents some basic concepts of XML and Pres2.odp presents some basic aspects of HTML. Both of them have their own cover page with the same slide name "Cover" at the front and an End page with the same slide name "end" at the end of the document. To combine these two presentation documents together, the following steps are used here.
 
  <ol>
  <li>Delete the last page of "Pres1.odp".</li>
@@ -17,17 +17,17 @@ Here the original presentation documents "Pres1.odp" and "Pres2.odp" are used. P
  </ol>
 
 
-The contents of the text document which contains the notes of the presentation document is shown in the following picture, where each note is identified by the corresponding slide name.   
+The contents of the text document which contains the notes of the presentation document is shown in the following picture, where each note is identified by the corresponding slide name.
 
 <img src="image/ExtractedNotes.JPG" >
 
-**Code Introduction**   
+**Code Introduction**
 
-To generate this sample, the Presentation and Text package in Simple API will be used. The related operations contains: load the existing presentation document, append one presentation to the end of another one, delete slide in the presentation, add new slide in the presentation, get certain slide in the presentation, add new notes to the slide, create a new text document, add new paragraph in the text document, etc.    
+To generate this sample, the Presentation and Text package in Simple API will be used. The related operations contains: load the existing presentation document, append one presentation to the end of another one, delete slide in the presentation, add new slide in the presentation, get certain slide in the presentation, add new notes to the slide, create a new text document, add new paragraph in the text document, etc.
 
-Seven functions exist in the resource: main(), Getpresentation(), ProcSlide(), titleofExtractnotes(), ExtractNotes(), FillExtractnotes() and saveDocument(). Each of them will be explained briefly in the following paragraphs.   
+Seven functions exist in the resource: main(), Getpresentation(), ProcSlide(), titleofExtractnotes(), ExtractNotes(), FillExtractnotes() and saveDocument(). Each of them will be explained briefly in the following paragraphs.
 
-First three variables should be used to hold the two presentation document and the text document.   
+First three variables should be used to hold the two presentation document and the text document.
 
 	PresentationDocument presentationdoc;
 	PresentationDocument presentationdoc2;
@@ -38,17 +38,17 @@ In function Getpresentation(), the two presentation documents are loaded so that
 	public void Getpresentation() {
 		try {
 			presentationdoc=PresentationDocument.loadDocument("Pres1.odp");
-			presentationdoc2=PresentationDocument.loadDocument("Pres2.odp");  
+			presentationdoc2=PresentationDocument.loadDocument("Pres2.odp");
 		} catch (Exception e) {
 			System.err.println("Unable to load document.");
-			System.err.println(e.getMessage());  
+			System.err.println(e.getMessage());
 		}
-	
+
 		try{
 			Extractednotes=TextDocument.newTextDocument();
 		} catch (Exception e) {
 			System.err.println("Unable to create text document.");
-			System.err.println(e.getMessage());  
+			System.err.println(e.getMessage());
 		}
 	}
 
@@ -57,41 +57,41 @@ In function ProcSlide(), five main operations are used to process the document: 
 	Slide slide;
 	Notes notes;
 	int count=presentationdoc.getSlideCount();
-	presentationdoc.deleteSlideByIndex(count-1);	
+	presentationdoc.deleteSlideByIndex(count-1);
 	//presentationdoc.deleteSlideByName("end");
 	slide=presentationdoc.getSlideByIndex(0);
 	slide.setSlideName("XML Cover");
 	slide=presentationdoc2.getSlideByName("Cover");
 	slide.setSlideName("HTML Cover");
 	presentationdoc.appendPresentation(presentationdoc2);
-	slide=presentationdoc.newSlide(0, "Cover", SlideLayout.TITLE_ONLY);	
+	slide=presentationdoc.newSlide(0, "Cover", SlideLayout.TITLE_ONLY);
 	notes=slide.getNotesPage();
 	notes.addText("This is the cover of the new presentation document");
 	DrawTextBoxElement textbox=(DrawTextBoxElement)slide.getOdfElement().getFirstChild().getFirstChild();
 	textbox.newTextPElement().setTextContent("Combined Presentation");
 
-In function titleofExtractnotes(), the title of the text document which is used to save the notes of each slide is added. And in function ExtractNotes(), the notes of each slide will be extracted (getTextContent), the function FillExtractnotes() will be called if the notes exists. Here function getSlideByIndex() is used to obtain the corresponding slide, getSlideName() is used to obtain the name of the specified slide in order to identify the notes. The codes are shown below:   
+In function titleofExtractnotes(), the title of the text document which is used to save the notes of each slide is added. And in function ExtractNotes(), the notes of each slide will be extracted (getTextContent), the function FillExtractnotes() will be called if the notes exists. Here function getSlideByIndex() is used to obtain the corresponding slide, getSlideName() is used to obtain the name of the specified slide in order to identify the notes. The codes are shown below:
 
 	slide=presentationdoc.getSlideByIndex(i);
 	String slidename=slide.getSlideName();
-	notes=slide.getNotesPage();	
+	notes=slide.getNotesPage();
 	if(!notes.getOdfElement().getTextContent().isEmpty()){
 		String notestring=notes.getOdfElement().getTextContent().toString().trim();
 		FillExtractnotes(notestring,slidename);
 	}
 
-In function FillExtractnotes, the notes will be added to the text document. Here the slide name is used as the identity and is followed by the corresponding notes, function newParagraph() is used to add a new paragraph in the text document. The codes are shown below:   
+In function FillExtractnotes, the notes will be added to the text document. Here the slide name is used as the identity and is followed by the corresponding notes, function newParagraph() is used to add a new paragraph in the text document. The codes are shown below:
 
 	OdfTextParagraph para =Extractednotes.newParagraph();
 	para.setProperty(OdfParagraphProperties.MarginTop, "0.25cm");
-	para.setTextContent("Notes of "+slidename+":");				
+	para.setTextContent("Notes of "+slidename+":");
 	para=Extractednotes.newParagraph();
 	para.setProperty(OdfParagraphProperties.TextAlign,"justify");
 	para.setTextContent("  "+notestext);
-	
-In function saveDocument(), the new combined presentation document and the text document which contains the notes will be saved. The codes are shown below:   
 
-	public void saveDocument(){ 	
+In function saveDocument(), the new combined presentation document and the text document which contains the notes will be saved. The codes are shown below:
+
+	public void saveDocument(){
 		try{
 			presentationdoc.save("Presentationsample.odp");
 			presentationdoc.close();
@@ -99,13 +99,13 @@ In function saveDocument(), the new combined presentation document and the text 
 			Extractednotes.close();
 		}catch(Exception e){
 			System.err.println("Unable to save document.");
-			System.err.println(e.getMessage());  
-		}   
+			System.err.println(e.getMessage());
+		}
 	}
 
 **Download**
 
-Powered by Simple API version <a target="_new" href="../downloads.html">0.3.5</a>.   
+Powered by Simple API version <a target="_new" href="../downloads.html">0.3.5</a>.
 You can download the code of this sample from <a Href="PresentationCombination.zip">here</a>.
 
 
