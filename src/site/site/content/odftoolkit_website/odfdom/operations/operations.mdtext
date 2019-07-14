@@ -5,7 +5,8 @@ Operations are a prerequirement for collaborative working on a document.
 
 [TOC]
 
-Most operations target specific text components (characters, paragraphs, tables, table cells, drawing objects, etc.) or ranges of text components. The following general rules apply for these operations:
+Most operations target specific text components (characters, paragraphs, tables, table cells, drawing objects, etc.) or ranges of text components. 
+The following general rules apply for these operations:
 
 1. Single text components are addressed by a `start` property containing a [Position](#position) array.
 2. Ranges of text components are addressed by a `start` and an `end` property, both containing a [Position](#position) array. The range is inclusive, the text component addressed by `end` is part of the range. The `end` position must be equal to `start` or must follow `start`.
@@ -52,11 +53,6 @@ Inserts a new empty paragraph node into the document.
 |`attrs`|[ParagraphAttributeSet](#paragraphattributeset)|{}|Initial attribute set for the paragraph.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> EditConfig normalization spaces in MarkDown files (mdtext)
 ## splitParagraph
 
 Splits the contents of an existing paragraph into two paragraphs.

@@ -30,7 +30,7 @@ The generic definition of an attribute set.
 
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
-|`styleId`|String|”” (no style sheet)|Reference to the style sheet defined by an [insertStyleSheet](#insertstylesheet) operation. MUST NOT be used in attribute sets of [insertStyleSheet](#insertstylesheet) operations.|
+|`styleId`|String|”” (no style sheet)|Reference to the style sheet defined by an [addStyle](#addStyle) operation. MUST NOT be used in attribute sets of [addStyle](#addStyle) operations.|
 |_type1_|Object|{}|Map with formatting attributes supported by the attribute _type1_.|
 |_type2_|Object|{}|Map with formatting attributes supported by the attribute _type2_.|
 |…||||
@@ -188,14 +188,14 @@ Contains global document settings, and default attribute values for different at
 |------------|
 |Attribute types|`page`|
 |---------------|
-|Operations|[documentLayout](#documentLayout), [insertStyleSheet](#insertstylesheet)|
+|Operations|[documentLayout](#documentLayout), [addStyle](#addStyle)|
 |----------|
 
 Contains attributes for `page` style sheets and page elements, in the following format:
 
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
-|`styleId`|String|”” (no style sheet)|Identifier of a page style sheet inserted with an [insertStyleSheet](#insertstylesheet) operation.|
+|`styleId`|String|”” (no style sheet)|Identifier of a page style sheet inserted with an [addStyle](#addStyle) operation.|
 |`page`|[PageAttributes](#pageattributes)|{}|Page formatting attributes.|
 
 
@@ -206,14 +206,14 @@ Contains attributes for `page` style sheets and page elements, in the following 
 |------------|
 |Attribute types|`drawing`, `fill`, `line`, `image`, `shape`, `geometry`, `connector`, `chart`|
 |---------------|
-|Operations|[insertStyleSheet](#insertstylesheet), [insertDrawing](#insertdrawing), [setDrawingAttributes](#setdrawingattributes), [setAttributes](#setattributes)|
+|Operations|[addStyle](#addStyle), [insertDrawing](#insertdrawing), [setDrawingAttributes](#setdrawingattributes), [setAttributes](#setattributes)|
 |----------|
 
 Contains attributes for `drawing` style sheets and drawing objects, in the following format:
 
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
-|`styleId`|String||Identifier of a drawing style sheet inserted with an [insertStyleSheet](#insertstylesheet) operation.|
+|`styleId`|String||Identifier of a drawing style sheet inserted with an [addStyle](#addStyle) operation.|
 |`drawing`|[DrawingAttributes](#drawingattributes)|{}|Drawing formatting attributes.|
 |`fill`|[DrawingFillAttributes](#drawingfillattributes)|{}|Additional fill formatting attributes for the entire drawing object.|
 |`line`|[DrawingLineAttributes](#drawinglineattributes)|{}|Additional line formatting attributes for the entire drawing object.|
@@ -351,7 +351,7 @@ Contains attributes for drawing objects of type 'table', in the following format
 
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
-|`styleId`|String|_none_|Identifier of a table style sheet inserted with an [insertStyleSheet](#insertstylesheet) operation.|
+|`styleId`|String|_none_|Identifier of a table style sheet inserted with an [addStyle](#addStyle) operation.|
 |`table`|[TableAttributes](#tableattributes)|{}|Table formatting attributes.|
 |`cell`|[TableCellAttributes](#tablecellattributes)|{}|Table Cell formatting attributes.|
 |`paragraph`|[ParagraphAttributes](#paragraphattributes)|{}|Paragraph formatting attributes.|
