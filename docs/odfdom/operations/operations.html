@@ -803,25 +803,7 @@ The following general rules apply for these operations:</p>
 <td><code>insertMode</code></td>
 <td>Enum</td>
 <td>“before”</td>
-<td>Where to insert the new cells, according to the column index.</td>
-</tr>
-<tr>
-<td></td>
-<td>“before”</td>
-<td>The new cells will be inserted before the existing cells.</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“behind”</td>
-<td>The new cells will be inserted behind the existing cells.</td>
-<td></td>
-<td></td>
+<td><strong>"before”</strong>/<strong>"behind"</strong> The new cells will be inserted before/behind the existing cells.</td>
 </tr>
 <tr>
 <td><code>target</code></td>
@@ -1447,73 +1429,7 @@ Must not be used for auto styles.</p>
 <td><code>type</code></td>
 <td>Enum</td>
 <td><em>required</em></td>
-<td>The type of the drawing contents.</td>
-</tr>
-<tr>
-<td></td>
-<td>“shape”</td>
-<td>The drawing object is a simple or complex shape (line, rectangle, ellipse, custom interactive shape).</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“group”</td>
-<td>The drawing object is a container for more embedded drawing objects.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“connector”</td>
-<td>The drawing object is a connector.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“image”</td>
-<td>The drawing object contains an image (bitmap or vector). Additional special attributes of the drawing object will describe the source of the image data.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“diagram”</td>
-<td>The drawing object contains a flow diagram consisting of several shapes and connectors.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“chart”</td>
-<td>The drawing object is a chart.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“table”</td>
-<td>The drawing object is a table (supported only in Presentation).</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“ole”</td>
-<td>The drawing object contains an OLE object.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“horizontal_line”</td>
-<td>The drawing object is a horizontal separator line between two paragraphs (Text only).</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“undefined”</td>
-<td>The type of the drawing object is unknown. Applications will show a placeholder frame.</td>
-<td></td>
-<td></td>
+<td>The type of the drawing contents: see <strong>DRAWING_CONTENT_TYPE</strong> below</td>
 </tr>
 <tr>
 <td><code>attrs</code></td>
@@ -1523,6 +1439,19 @@ Must not be used for auto styles.</p>
 </tr>
 </tbody>
 </table>
+<p><strong>DRAWING_CONTENT_TYPE</strong>:</p>
+<ul>
+<li><strong>“shape”</strong> The drawing object is a simple or complex shape (line, rectangle, ellipse, custom interactive shape).</li>
+<li><strong>“group”</strong> The drawing object is a container for more embedded drawing objects.</li>
+<li><strong>“connector”</strong> The drawing object is a connector.</li>
+<li><strong>“image”</strong> The drawing object contains an image (bitmap or vector). Additional special attributes of the drawing object will describe the source of the image data.</li>
+<li><strong>“diagram”</strong> The drawing object contains a flow diagram consisting of several shapes and connectors.</li>
+<li><strong>“chart”</strong> The drawing object is a chart.</li>
+<li><strong>“table”</strong> The drawing object is a table (supported only in Presentation).</li>
+<li><strong>“ole”</strong> The drawing object contains an OLE object.</li>
+<li><strong>“horizontal</strong> _line”|The drawing object is a horizontal separator line between two paragraphs (Text only).</li>
+<li><strong>“undefined”</strong> The type of the drawing object is unknown. Applications will show a placeholder frame.</li>
+</ul>
     </div>
     
     <div id="footera">

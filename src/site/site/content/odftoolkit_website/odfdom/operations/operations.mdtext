@@ -224,10 +224,7 @@ Inserts cells for a new column into a table.
 |`start`|[TablePosition](operations-data-types.html#position)|_required_|The position of the table the new column will be inserted into.|
 |`gridPosition`|Integer|_required_|Zero-based column index, according to the `tableGrid` attribute of the table.|
 |`tableGrid`|Integer\[\]|_required_|The complete array of relative widths for the entire table, containing the new entry for the new column. Will be set to the `tableGrid` attribute of the table.|
-|`insertMode`|Enum|“before”|Where to insert the new cells, according to the column index.|
-||“before”|The new cells will be inserted before the existing cells.|
-||
-|“behind”|The new cells will be inserted behind the existing cells.|
+|`insertMode`|Enum|“before”| **"before”**/**"behind"** The new cells will be inserted before/behind the existing cells.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
 *Note*:
@@ -409,16 +406,18 @@ Inserts a new drawing object into the document. This section describes the gener
 |--------|----|-------------|-----------|
 |`name`|String|_required_|“addDrawing”|
 |`start`|[DrawingPosition](operations-data-types.html#position)|_required_|The position of the drawing object.|
-|`type`|Enum|_required_|The type of the drawing contents.|
-||“shape”|The drawing object is a simple or complex shape (line, rectangle, ellipse, custom interactive shape).|
-||
-|“group”|The drawing object is a container for more embedded drawing objects.|
-|“connector”|The drawing object is a connector.|
-|“image”|The drawing object contains an image (bitmap or vector). Additional special attributes of the drawing object will describe the source of the image data.|
-|“diagram”|The drawing object contains a flow diagram consisting of several shapes and connectors.|
-|“chart”|The drawing object is a chart.|
-|“table”|The drawing object is a table (supported only in Presentation).|
-|“ole”|The drawing object contains an OLE object.|
-|“horizontal\_line”|The drawing object is a horizontal separator line between two paragraphs (Text only).|
-|“undefined”|The type of the drawing object is unknown. Applications will show a placeholder frame.|
+|`type`|Enum|_required_|The type of the drawing contents: see **DRAWING_CONTENT_TYPE** below |
 |`attrs`|[DrawingAttributeSet](operations-formatting-attribute-sets.html#drawingattributeset)|{}|Initial attribute set for the drawing object.|
+
+**DRAWING_CONTENT_TYPE**:
+
+* **“shape”** The drawing object is a simple or complex shape (line, rectangle, ellipse, custom interactive shape).
+* **“group”** The drawing object is a container for more embedded drawing objects.
+* **“connector”** The drawing object is a connector.
+* **“image”** The drawing object contains an image (bitmap or vector). Additional special attributes of the drawing object will describe the source of the image data.
+* **“diagram”** The drawing object contains a flow diagram consisting of several shapes and connectors.
+* **“chart”** The drawing object is a chart.
+* **“table”** The drawing object is a table (supported only in Presentation).
+* **“ole”** The drawing object contains an OLE object.
+* **“horizontal** \_line”|The drawing object is a horizontal separator line between two paragraphs (Text only).
+* **“undefined”** The type of the drawing object is unknown. Applications will show a placeholder frame.
