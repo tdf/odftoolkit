@@ -21,7 +21,7 @@ These attributes are only supported in the [documentLayout](#documentLayout) ope
 
 Page formatting attributes will be applied to page elements.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|Notes|
+|Attribute|Data Type|Default Value|Scope|Description|Notes|
 |---------|---------|-------------|-------------------------|-----------|-----|
 |`width`|Integer|0|all|Page width, including all margins.||
 |`height`|Integer|0|all|Page height, including all margins.||
@@ -43,7 +43,7 @@ Page formatting attributes will be applied to page elements.
 
 Paragraph formatting attributes will be applied to paragraph elements in a text document.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |`alignment`|Enum|“left”|all|Horizontal text alignment. One of “left”, “center”, “right”, or “justify”.|
 |`lineHeight`|[LineHeight](#lineheight)|{type:“percent”, value:100}|all|Relative or absolute text line height.|
@@ -74,7 +74,7 @@ Paragraph formatting attributes will be applied to paragraph elements in a text 
 
 Character attributes will be applied to any document components containing text.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|Notes|
+|Attribute|Data Type|Default Value|Scope|Description|Notes|
 |---------|---------|-------------|-------------------------|-----------|-----|
 |`fontName`|String|”+mn-lt”|all|Font name.||
 |`fontNameEastAsia`|String|””|all|Font name for East Asia unicode characters.|(1)|
@@ -107,7 +107,7 @@ Character attributes will be applied to any document components containing text.
 
 Table formatting attributes will be applied to table elements in a text document.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|Notes|
+|Attribute|Data Type|Default Value|Scope|Description|Notes|
 |---------|---------|-------------|-------------------------|-----------|-----|
 |`width`|Integer|String|“auto”|all|Table width. If set to “auto”, the table is sized automatically according to the page size.||
 |`tableGrid`|Array<Integer>|\[\]|element|Grid column widths in logical units.||
@@ -146,7 +146,7 @@ Each table style sheet contains multiple attribute sets, mapped by conditional k
 
 Table row formatting attributes will be applied to row elements of tables in a text document.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |`height`|Integer|String|“auto”|all|Row height. If set to “auto”, the row is sized automatically according to its contents.|
 |`headerRow`|Boolean|false|all|Specifies if this is a header row that is repeated on each page.|
@@ -157,7 +157,7 @@ Table row formatting attributes will be applied to row elements of tables in a t
 
 Table cell formatting attributes will be applied to cell elements in table rows in a text document.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |`gridSpan`|Integer|1|element|The number of columns spanned by the cell.|
 |`fillColor`|[Color](#color)|Color.AUTO|all|Cell background color.|
@@ -183,7 +183,7 @@ Drawing formatting attributes will be applied to drawing objects embedded in the
 
 Drawing formatting attributes will be applied to drawing objects embedded in the text document. Additionally to the attributes described in [DrawingAttributes](#drawingattributes), text documents support the following attributes:
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|Notes|
+|Attribute|Data Type|Default Value|Scope|Description|Notes|
 |---------|---------|-------------|-------------------------|-----------|-----|
 |`marginLeft`|Integer|0|all|Left margin to text contents.||
 |`marginRight`|Integer|0|all|Right margin to text contents.||
@@ -259,7 +259,7 @@ Drawing formatting attributes will be applied to drawing objects embedded in the
 
 The following attributes are supported by each drawing in each application regardless of the drawing type.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|Notes|
+|Attribute|Data Type|Default Value|Scope|Description|Notes|
 |---------|---------|-------------|-------------------------|-----------|-----|
 |`left`|Integer|0|all|The horizontal position of the drawing object in the drawing layer.|(1)|
 |`top`|Integer|0|all|The vertical position of the drawing object in the drawing layer.|(1)|
@@ -295,7 +295,7 @@ The following attributes are supported by each drawing in each application regar
 
 The following attributes are supported by drawing objects embedded in other drawing objects.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |`left`|Number|0|element|The horizontal position of the drawing object in the parent object's virtual coordinate system (see attribute `[coordWidth](#general_drawing_attributes)` ).|
 |`top`|Number|0|element|The vertical position of the drawing object in the parent object's virtual coordinate system (see attribute `[coordHeight](#general_drawing_attributes)` ).|
@@ -308,7 +308,7 @@ The following attributes are supported by drawing objects embedded in other draw
 
 Drawing fill attributes will be applied to entire drawing objects embedded in the document, or to specific parts of a complex drawing object, e.g. to a data series or the legend in a chart object.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |`type`|Enum|“none”|all|The fill type. The following types are supported:|
 ||“none”|The object has no fill style (completetly transparent).|
@@ -330,7 +330,7 @@ Drawing fill attributes will be applied to entire drawing objects embedded in th
 
 Drawing line attributes will be applied to entire drawing objects embedded in the document, or to specific parts of a complex drawing object, e.g. to a data series or the legend in a chart object.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |All [fill attributes](#drawingfillattributes) MUST also be supported as line attributes and will describe how to fill the outline polygons.|
 |`width`|Number|0|all|The width of the line. A value of 0 hides the line.|
@@ -402,7 +402,7 @@ Drawing line attributes will be applied to entire drawing objects embedded in th
 
 Formatting attributes describing the source of the text contents of a drawing object or chart data series.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |`link`|[SourceLink](#sourcelink)|\[\]|element|The constant text, or an application dependent link into the document.|
 
@@ -412,7 +412,7 @@ Formatting attributes describing the source of the text contents of a drawing ob
 
 Formatting attributes for images and OLE objects.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|Notes|
+|Attribute|Data Type|Default Value|Scope|Description|Notes|
 |---------|---------|-------------|-------------------------|-----------|-----|
 |`imageUrl`|String|""|element|URL pointing to the image data. If the image is embedded in the document, the URL will be relative to the document (e.g. “images/img1.png”).|(1)|
 |`imageData`|String|""|element|Image data. The string contains either Base64 image data, or SVG mark-up. If Base64 encoded image data is used, the string begins with “data:” otherwise if SVG is used it begins with ”<svg”.|(1)|
@@ -439,7 +439,7 @@ Formatting attributes for images and OLE objects.
 
 Formatting attributes for shape objects.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |`paddingLeft`|Number|250|all|The inner left distance from border to text.|
 |`paddingRight`|Number|250|all|The inner right distance from border to text.|
@@ -462,7 +462,7 @@ Formatting attributes for shape objects.
 
 Geometry attributes for shape objects.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |`presetShape`|String||all|The preset shape whose geometry should be used.|
 |`avList`|Object||all|adjustment values that are used|
@@ -479,7 +479,7 @@ Geometry attributes for shape objects.
 
 Connector attributes for connector shapes.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |`startId`|String|””|element|Specifies the start shape the connector is connected to. If empty then the shape does not have a start connection.|
 |`startIndex`|Integer|0|element|Specifies the point at the start shape the connector is connected to.|
@@ -492,7 +492,7 @@ Connector attributes for connector shapes.
 
 Formatting attributes for entire chart objects.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |`stacking`|Enum|“standard”|element|Stacking type for charts of type “bar”, “column” and “area”.|
 ||“standard”|Standard mode: clustered bars, overlapping lines.|
@@ -510,7 +510,7 @@ Formatting attributes for entire chart objects.
 
 Formatting attributes for data series in chart objects.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |`type`String|“bar”|element|chart type per series, for combination two chart types in one chart (line + bar, line + area, etc). The following chart types are supported:|
 ||“bar”|The data points are shown as horizontal rectangles.|
@@ -539,7 +539,7 @@ Formatting attributes for data series in chart objects.
 
 Formatting attributes for axes in chart objects.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |`type`|Enum|“value”|element|The type of the axis. (never used! Deprecated?)|
 ||“value”|The axis shows numerical data, and can be scaled.|
@@ -556,7 +556,7 @@ Formatting attributes for axes in chart objects.
 *Attribute type*:`legend`
 Formatting attributes for the legend in chart objects.
 
-|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
 |`pos`|Enum|“off”|element|The position of the legend in the chart area.|
 ||“off”|The legend is not visible.|
