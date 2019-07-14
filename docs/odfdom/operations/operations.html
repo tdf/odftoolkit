@@ -1,0 +1,1630 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE- 2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+  <link href="../../css/odf.css" rel="stylesheet" type="text/css">
+  
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28945571-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+
+<body>
+
+  <div id="banner">
+    <!--
+    <div id="bannerright"><a alt="Apache Incubator" href="http://incubator.apache.org">
+      <img id="asf-logo" alt="Apache Incubator" src="../../images/apache-incubator-logo.png"/></a></div>
+    <div id="bannercenter"><br/>&nbsp;&nbsp;&nbsp;&nbsp;Apache ODF Toolkit (incubating)</div>
+    -->
+    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
+        <img id="tdf-logo" class="w350" alt="The Document Foundation"
+          src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
+  </div>
+  <div id="clear"></div>
+  
+  <div id="sidenav">
+    <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="../../index.html">About</a></li>
+<li><a href="../../downloads.html">Downloads</a></li>
+</ul>
+<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="../../odfdom/index.html">ODFDOM</a></li>
+<li><a href="../../simple/index.html">Simple API (deprecated)</a></li>
+<li><a href="../../conformance/ODFValidator.html">ODF Validator</a></li>
+<li><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
+</ul>
+<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="../../get-involved.html">Get Involved</a></li>
+<li><a href="../../mailing-lists.html">Mailing Lists</a></li>
+<li><a href="../../people.html">People</a></li>
+<li><a href="../../community-faqs.html">Community FAQs</a></li>
+</ul>
+<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="../../source.html">Source Code</a></li>
+<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
+<li><a href="../../api/" target="_blank">JavaDoc</a></li>
+<li><a href="../../website-local.html">Website</a></li>
+<li><a href="../../developer-faqs.html">Developer FAQs</a></li>
+</ul>
+<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
+</ul>
+  </div>
+  <div id="contenta">
+    
+      
+      <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<h1 id="odf-text-operations">ODF Text Operations<a class="headerlink" href="#odf-text-operations" title="Permanent link">&para;</a></h1>
+<p>Operations are used to transfer the user changes between editors. 
+Operations are a prerequirement for collaborative working on a document.</p>
+<p>Most operations target specific text components (characters, paragraphs, tables, table cells, drawing objects, etc.) or ranges of text components. The following general rules apply for these operations:</p>
+<ol>
+<li>Single text components are addressed by a <code>start</code> property containing a <a href="#position">Position</a> array.</li>
+<li>Ranges of text components are addressed by a <code>start</code> and an <code>end</code> property, both containing a <a href="#position">Position</a> array. The range is inclusive, the text component addressed by <code>end</code> is part of the range. The <code>end</code> position must be equal to <code>start</code> or must follow <code>start</code>.</li>
+</ol>
+<p><strong>Note</strong>: In productive usage operation names and attributes should be shortened to limit bandwidth usage.</p>
+<h2 id="delete">delete<a class="headerlink" href="#delete" title="Permanent link">&para;</a></h2>
+<p>Deletes a component or a range of related components.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“delete”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#textposition">TextPosition</a></td>
+<td><em>required</em></td>
+<td>The position of the first component that will be deleted.</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td><a href="#textposition">TextPosition</a></td>
+<td><em>value of <code>start</code></em></td>
+<td>The position of the last component that will be deleted (closed range). if omitted, this operation addresses a single component.</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong>: Currently, only single components can be deleted, except for text ranges in a paragraph. A text range can include characters, fields, and drawing objects, but must be contained in a single paragraph.</p>
+<p>The operation deletes only the addressed components. It will never delete any parent components, even if they are left empty (for example: after deleting the last row in a table, the empty table will remain in the document).</p>
+<h2 id="move">move<a class="headerlink" href="#move" title="Permanent link">&para;</a></h2>
+<p>Moves a component or a range of related components to a new location.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“move”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#textposition">TextPosition</a></td>
+<td><em>required</em></td>
+<td>The position of the first component that will be moved.</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td><a href="#textposition">TextPosition</a></td>
+<td><em>value of <code>start</code></em></td>
+<td>The position of the last component that will be moved (closed range). If omitted, this operation addresses a single component.</td>
+</tr>
+<tr>
+<td><code>to</code></td>
+<td><a href="#textposition">TextPosition</a></td>
+<td><em>required</em></td>
+<td>The target position to move the selected components to.</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong>: Currently, only single <strong>drawing</strong> components can be moved. The property <code>end</code> will not be evaluated at all.</p>
+<h2 id="addparagraph">addParagraph<a class="headerlink" href="#addparagraph" title="Permanent link">&para;</a></h2>
+<p>Inserts a new empty paragraph node into the document.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addParagraph”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#paragraphposition">ParagraphPosition</a></td>
+<td><em>required</em></td>
+<td>The position of the new paragraph. The paragraph will be inserted before a component that is currently located at this position.</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#paragraphattributeset">ParagraphAttributeSet</a></td>
+<td></td>
+<td>Initial attribute set for the paragraph.</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="splitparagraph">splitParagraph<a class="headerlink" href="#splitparagraph" title="Permanent link">&para;</a></h2>
+<p>Splits the contents of an existing paragraph into two paragraphs.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“splitParagraph”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#characterposition">CharacterPosition</a></td>
+<td><em>required</em></td>
+<td>The position of the first character (or other child component in the paragraph) that will be moved to the beginning of the new paragraph.</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mergeparagraph">mergeParagraph<a class="headerlink" href="#mergeparagraph" title="Permanent link">&para;</a></h2>
+<p>Merges two consecutive paragraphs to a single paragraph.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“mergeParagraph”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#paragraphposition">ParagraphPosition</a></td>
+<td><em>required</em></td>
+<td>The position of the paragraph, that will be merged with the following paragraph.</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<p>The formatting attributes of the second paragraph will be lost, unless the leading paragraph is empty.</p>
+<h2 id="addtext">addText<a class="headerlink" href="#addtext" title="Permanent link">&para;</a></h2>
+<p>Inserts new text into a paragraph.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addText”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#characterposition">CharacterPosition</a></td>
+<td><em>required</em></td>
+<td>The position where the new text will be inserted. The text will be inserted before the character that is currently located at this position.</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>Text to be inserted into the specified paragraph at the specified position.</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#characterattributeset">CharacterAttributeSet</a></td>
+<td></td>
+<td>Attribute set with additional character attributes (see note below).</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>The inserted text gets the same formatting as the character that <strong>precedes</strong> the insertion position.</p>
+</li>
+<li>
+<p>At the beginning of the paragraph, the inserted text gets the same formatting as the first existing character.</p>
+</li>
+<li>
+<p>In empty paragraphs, the inserted text gets the character formatting defined at the paragraph itself.</p>
+</li>
+<li>
+<p>The attributes passed in the <code>attrs</code> property will be merged over the existing attributes.</p>
+</li>
+</ul>
+<h2 id="addtab">addTab<a class="headerlink" href="#addtab" title="Permanent link">&para;</a></h2>
+<p>Inserts a tabulator into a paragraph.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addTab”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#characterposition">CharacterPosition</a></td>
+<td><em>required</em></td>
+<td>The position where the new tabulator will be inserted. The tabulator will be inserted before the character that is currently located at this position.</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#characterattributeset">CharacterAttributeSet</a></td>
+<td></td>
+<td>Attribute set with additional character attributes (see note below).</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes_1">Notes<a class="headerlink" href="#notes_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>The inserted tabulator gets the same formatting as the character that <strong>precedes</strong> the insertion position.</p>
+</li>
+<li>
+<p>At the beginning of the paragraph, the inserted tabulator gets the same formatting as the first existing character.</p>
+</li>
+<li>
+<p>In empty paragraphs, the inserted tabulator gets the character formatting defined at the paragraph itself.</p>
+</li>
+<li>
+<p>The attributes passed in the <code>attrs</code> property will be merged over the existing attributes.</p>
+</li>
+</ul>
+<h2 id="addhardbreak">addHardBreak<a class="headerlink" href="#addhardbreak" title="Permanent link">&para;</a></h2>
+<p>Inserts a hard break into a paragraph.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addHardBreak”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#characterposition">CharacterPosition</a></td>
+<td><em>required</em></td>
+<td>The position where the new hard break will be inserted. The hard break will be inserted before the character that is currently located at this position.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Enum</td>
+<td>textWrapping</td>
+<td>One of “page”, “column” or “textWrapping”.</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#characterattributeset">CharacterAttributeSet</a></td>
+<td></td>
+<td>Attribute set with additional character attributes (see note below).</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes_2">Notes<a class="headerlink" href="#notes_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>The inserted break gets the same formatting as the character that <strong>precedes</strong> the insertion position.</p>
+</li>
+<li>
+<p>At the beginning of the paragraph, the inserted break gets the same formatting as the first existing character.</p>
+</li>
+<li>
+<p>In empty paragraphs, the inserted break gets the character formatting defined at the paragraph itself.</p>
+</li>
+<li>
+<p>The attributes passed in the <code>attrs</code> property will be merged over the existing attributes.</p>
+</li>
+</ul>
+<h2 id="addfield">addField<a class="headerlink" href="#addfield" title="Permanent link">&para;</a></h2>
+<p>Inserts simple text field into a paragraph.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addField”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#characterposition">CharacterPosition</a></td>
+<td><em>required</em></td>
+<td>The position where the new field will be inserted. The field will be inserted before the character that is currently located at this position.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td><strong>TODO</strong> The field type as string.</td>
+</tr>
+<tr>
+<td><code>representation</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>The latest text representation of this field.</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#characterattributeset">CharacterAttributeSet</a></td>
+<td></td>
+<td>Attribute set with additional character attributes (see note below).</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="updatefield">updateField<a class="headerlink" href="#updatefield" title="Permanent link">&para;</a></h2>
+<p>Updates an already existing simple field.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“updateField”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#characterposition">CharacterPosition</a></td>
+<td><em>required</em></td>
+<td>The position where the new field will be inserted. The field will be inserted before the character that is currently located at this position.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>String</td>
+<td>optional</td>
+<td>The field instruction.</td>
+</tr>
+<tr>
+<td><code>representation</code></td>
+<td>String</td>
+<td>optional</td>
+<td>The attribute represents the field representation.</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#characterattributeset">CharacterAttributeSet</a></td>
+<td></td>
+<td>Attribute set with additional character attributes (see note below).</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes_3">Notes<a class="headerlink" href="#notes_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>The inserted field gets the same formatting as the character that <strong>precedes</strong> the insertion position.</p>
+</li>
+<li>
+<p>At the beginning of the paragraph, the inserted field gets the same formatting as the first existing character.</p>
+</li>
+<li>
+<p>In empty paragraphs, the inserted field gets the character formatting defined at the paragraph itself.</p>
+</li>
+<li>
+<p>The attributes passed in the <code>attrs</code> property will be merged over the existing attributes.</p>
+</li>
+</ul>
+<h2 id="addtable">addTable<a class="headerlink" href="#addtable" title="Permanent link">&para;</a></h2>
+<p>Inserts a new table node into the document.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>'addTable'</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#tableposition">TablePosition</a></td>
+<td><em>required</em></td>
+<td>The position of the new table. The table will be inserted before a component that is currently located at this position.</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Initial attribute set for the table.</td>
+</tr>
+<tr>
+<td><code>sizeExceeded</code></td>
+<td>Object</td>
+<td><em>none</em></td>
+<td>If set to an object, the table is too big to be displayed or edited. The object must contain the attributes <code>rows</code> and <code>columns</code> containing the original row count and column count of the table. To be used for importing documents only, NOT while editing documents.</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes_4">Notes<a class="headerlink" href="#notes_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The new table will not contain any rows or cells.</li>
+</ul>
+<h2 id="addrows">addRows<a class="headerlink" href="#addrows" title="Permanent link">&para;</a></h2>
+<p>Inserts one or more new rows into a table.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addRows”</td>
+<td></td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#tablerowposition">TableRowPosition</a></td>
+<td><em>required</em></td>
+<td>The position of the new table row. The row will be inserted before a row that is currently located at this position.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td>Integer</td>
+<td>1</td>
+<td>The number of rows that will be inserted.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>insertDefaultCells</code></td>
+<td>Boolean</td>
+<td>false</td>
+<td>If true, empty cells will be inserted into the new row. The number of inserted cells will be equal to the number of columns in the table, as specified by the <code>tableGrid</code> attribute of the table.</td>
+<td>(1)</td>
+</tr>
+<tr>
+<td><code>referenceRow</code></td>
+<td>Integer</td>
+<td><em>none</em></td>
+<td>If specified, the zero-based index of the existing row whose cells and their attributes will be cloned (but <em>without</em> the cell contents).</td>
+<td>(1)</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#tablerowattributeset">TableRowAttributeSet</a></td>
+<td></td>
+<td>Initial attribute set for the table row.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes_5">Notes<a class="headerlink" href="#notes_5" title="Permanent link">&para;</a></h4>
+<p>(1) The properties <code>insertDefaultCells</code> and <code>referenceRow</code> are mutually exclusive.</p>
+<h2 id="addcells">addCells<a class="headerlink" href="#addcells" title="Permanent link">&para;</a></h2>
+<p>Inserts one or more new cells into a table row.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addCells”</td>
+<td></td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#tablecellposition">TableCellPosition</a></td>
+<td><em>required</em></td>
+<td>The position of the new cell. The cell will be inserted before a cell that is currently located at this position.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td>Integer</td>
+<td>1</td>
+<td>The number of cells that will be inserted.</td>
+<td>(1)</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#tablecellattributeset">TableCellAttributeSet</a></td>
+<td></td>
+<td>Initial attribute set for the cell.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes_6">Notes<a class="headerlink" href="#notes_6" title="Permanent link">&para;</a></h4>
+<p>(1) The resulting number of cells in the row <strong>must not</strong> exceed the number of columns in the table, as specified by the <code>tableGrid</code> attribute of the table.</p>
+<h2 id="addcolumn">addColumn<a class="headerlink" href="#addcolumn" title="Permanent link">&para;</a></h2>
+<p>Inserts cells for a new column into a table.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addColumn”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#tableposition">TablePosition</a></td>
+<td><em>required</em></td>
+<td>The position of the table the new column will be inserted into.</td>
+</tr>
+<tr>
+<td><code>gridPosition</code></td>
+<td>Integer</td>
+<td><em>required</em></td>
+<td>Zero-based column index, according to the <code>tableGrid</code> attribute of the table.</td>
+</tr>
+<tr>
+<td><code>tableGrid</code></td>
+<td>Integer[]</td>
+<td><em>required</em></td>
+<td>The complete array of relative widths for the entire table, containing the new entry for the new column. Will be set to the <code>tableGrid</code> attribute of the table.</td>
+</tr>
+<tr>
+<td><code>insertMode</code></td>
+<td>Enum</td>
+<td>“before”</td>
+<td>Where to insert the new cells, according to the column index.</td>
+</tr>
+<tr>
+<td></td>
+<td>“before”</td>
+<td>The new cells will be inserted before the existing cells.</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>“behind”</td>
+<td>The new cells will be inserted behind the existing cells.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes_7">Notes<a class="headerlink" href="#notes_7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>As a side effect, this operation changes the <code>tableGrid</code> attribute of the parent table.</li>
+</ul>
+<h2 id="deletecolumns">deleteColumns<a class="headerlink" href="#deletecolumns" title="Permanent link">&para;</a></h2>
+<p>Deletes the cells of a single column or multiple columns from a table.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“deleteColumns”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#tableposition">TablePosition</a></td>
+<td><em>required</em></td>
+<td>The position of the table whose columns will be removed.</td>
+</tr>
+<tr>
+<td><code>startGrid</code></td>
+<td>Integer</td>
+<td><em>required</em></td>
+<td>Zero-based index of the first column to be removed, according to the <code>tableGrid</code> attribute of the table.</td>
+</tr>
+<tr>
+<td><code>endGrid</code></td>
+<td>Integer</td>
+<td><em>value of <code>startGrid</code></em></td>
+<td>Zero-based index of the last column to be removed (closed range). If omitted, only one column will be removed.</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes_8">Notes<a class="headerlink" href="#notes_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Each cell that is addressed by the specified column range will be removed completely.</p>
+</li>
+<li>
+<p>As a side effect, this operation changes the <code>tableGrid</code> attribute of the parent table.</p>
+</li>
+</ul>
+<h2 id="format">format<a class="headerlink" href="#format" title="Permanent link">&para;</a></h2>
+<p>Sets or removes explicit formatting attributes at an arbitrary component in the text document.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“format”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#textposition">TextPosition</a></td>
+<td><em>required</em></td>
+<td>The position of the first component that will be formatted with the specified attributes.</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td><a href="#textposition">TextPosition</a></td>
+<td><em>value of <code>start</code></em></td>
+<td>The position of the last component that will be formatted (closed range). If omitted, this operation addresses a single component.</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#attributeset">AttributeSet</a></td>
+<td><em>required</em></td>
+<td>The attribute set containing all attributes to be changed. Attributes with a value of <code>null</code> will be removed from the component. Attributes not contained in the set remain unmodified.</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>specifies the target position, needs only to be used if document parts such as header or footer are addressed</td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes_9">Notes<a class="headerlink" href="#notes_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Currently, only single components can be formatted, except for text ranges in a paragraph. A text range can include characters, fields, and drawing objects, but must be contained in a single paragraph.</li>
+</ul>
+<h2 id="addliststyle">addListStyle<a class="headerlink" href="#addliststyle" title="Permanent link">&para;</a></h2>
+<p>Inserts the definition of a list style into the document. An existing list style with the given name will be replaced.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“insertList”</td>
+</tr>
+<tr>
+<td><code>listStyleId</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>The unique identifier of this list style.</td>
+</tr>
+<tr>
+<td><code>baseStyleId</code></td>
+<td>String</td>
+<td></td>
+<td>The unique identifier of the abstract base list style for this list style.</td>
+</tr>
+<tr>
+<td><code>listDefinition</code></td>
+<td>Object</td>
+<td><em>required</em></td>
+<td>Definitions for each numbering level, mapped by the property names <code>listLevel0</code> to <code>listLevel8</code>. See next table for details.</td>
+</tr>
+</tbody>
+</table>
+<p>List definitions per numbering level:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>textAlign</code></td>
+<td>Enum</td>
+<td>“left”</td>
+<td>One of “left”, “right”, “center”, or “justified”.</td>
+</tr>
+<tr>
+<td><code>numberFormat</code></td>
+<td>Enum</td>
+<td>“none”</td>
+<td>One of “none”, “bullet”, “decimal”, “lowerRoman”, “upperRoman”, “lowerLetter”, or “upperLetter”.</td>
+</tr>
+<tr>
+<td><code>levelStart</code></td>
+<td>Integer</td>
+<td></td>
+<td>Start index of the level.</td>
+</tr>
+<tr>
+<td><code>indentLeft</code></td>
+<td>Integer</td>
+<td>0</td>
+<td>Left indent of the numbered paragraph.</td>
+</tr>
+<tr>
+<td><code>indentFirstLine</code></td>
+<td>Integer</td>
+<td>0</td>
+<td>First line indent, negative values represent hanging indents.</td>
+</tr>
+<tr>
+<td><code>fontName</code></td>
+<td>String</td>
+<td></td>
+<td>Font name, typically used for bullet symbols.</td>
+</tr>
+<tr>
+<td><code>levelText</code></td>
+<td>String</td>
+<td></td>
+<td>Formatting text of the label. Bullet symbol for bullet lists, level formats (custom string with one of the placeholders from ”%1” to ”%9”) for numbered lists.</td>
+</tr>
+<tr>
+<td><code>textStyle</code></td>
+<td>String</td>
+<td></td>
+<td>Identifier of the text style that the current numbering level shall be applied to.</td>
+</tr>
+<tr>
+<td><code>paraStyle</code></td>
+<td>String</td>
+<td></td>
+<td>Identifier of the paragraph style that the current numbering level shall be applied to.</td>
+</tr>
+<tr>
+<td><code>levelPicBulletUri</code></td>
+<td>String</td>
+<td>””</td>
+<td>URI of the bullet picture.</td>
+</tr>
+<tr>
+<td><code>tabStopPosition</code></td>
+<td>Integer</td>
+<td></td>
+<td>Tabulator position, in 1/100 of millimeters.</td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td><a href="#color">Color</a></td>
+<td>Color.AUTO</td>
+<td>Font color of the list label.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="addheaderfooter">addHeaderFooter<a class="headerlink" href="#addheaderfooter" title="Permanent link">&para;</a></h2>
+<p>Inserts Header or Footer in the document.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addHeaderFooter”</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>Unique name, which is used as a target for operations belonging to this element</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>Should start with “header_” or “footer_” to identify is it header or footer</td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes_10">Notes<a class="headerlink" href="#notes_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Currently, three types of header/footer are supported:</p>
+</li>
+<li>
+<p>“header_default” (“footer_default”) - default type, used if no other type is defined or available</p>
+</li>
+<li>
+<p>“header_first” (“footer_first”) - if defined, used only on first page in document. Has bigger priority then “_default”, and overwrites it.</p>
+</li>
+<li>
+<p>“header_even” (“footer_even”) - if defined, used on even pages, and overwrites “_default” type, as it has higher priority. With this type defined, on odd pages, “_default” type is used.</p>
+</li>
+</ul>
+<h2 id="deleteheaderfootercontent">deleteHeaderFooterContent<a class="headerlink" href="#deleteheaderfootercontent" title="Permanent link">&para;</a></h2>
+<p>Removes header or footer with passed id from the document.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“deletetHeaderFooter”</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>Unique identifier, which is used to determine element to be deleted</td>
+</tr>
+</tbody>
+</table>
+<h2 id="addnote">addNote<a class="headerlink" href="#addnote" title="Permanent link">&para;</a></h2>
+<p>Inserts a new comment into a paragraph.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addNote”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#characterposition">CharacterPosition</a></td>
+<td><em>required</em></td>
+<td>The position where the new comment will be inserted. The commentRang will be inserted before the character that is currently located at this position.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>Unique name, which is used as a target for operations belonging to this element</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>String</td>
+<td>””</td>
+<td>The author of this comment.</td>
+</tr>
+<tr>
+<td><code>uid</code></td>
+<td>String</td>
+<td>””</td>
+<td>The unique id of the author of this comment (used for picture and meta information of the author).</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>String</td>
+<td></td>
+<td>The creation date of this comment.</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td>CharacterAttributeSet</td>
+<td></td>
+<td>Attribute set with additional character attributes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="insertrange">insertRange<a class="headerlink" href="#insertrange" title="Permanent link">&para;</a></h2>
+<p>Inserts a range object into the document. This ranges can be used for comments or complex fields.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addNoteRange”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#characterposition">CharacterPosition</a></td>
+<td><em>required</em></td>
+<td>The position where the range will be inserted. The range will be inserted before the character that is currently located at this position.</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>String</td>
+<td>””</td>
+<td>Specifies the target position, needs only to be used, if specific document parts like headers or footers are addressed.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>String</td>
+<td></td>
+<td>Unique name, which is used as a target for addNote operations</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td>Enum “start”, “end”</td>
+<td>“start”</td>
+<td>Specifies, if this is a start range marker or an end range marker.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Enum</td>
+<td><em>required</em></td>
+<td>The type of the element using this range marker.</td>
+</tr>
+<tr>
+<td></td>
+<td>“comment”</td>
+<td>The range marker belongs to a comment.</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>“field”</td>
+<td>The range marker belongs to a complex field.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#characterattributeset">CharacterAttributeSet</a></td>
+<td></td>
+<td>Attribute set with additional character attributes.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="notes_11">Notes<a class="headerlink" href="#notes_11" title="Permanent link">&para;</a></h4>
+<ul>
+<li>ODT: comment range is restricted by the comment node and a corresponding “end” node for the end of the range with the matching id.</li>
+</ul>
+<h2 id="documentlayout">documentLayout<a class="headerlink" href="#documentlayout" title="Permanent link">&para;</a></h2>
+<p>Sets default attributes for the document and for various formatting attribute types.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“setDocumentAttributes”</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#documentattributeset">DocumentAttributeSet</a></td>
+<td><em>required</em></td>
+<td>Application dependent attribute set with default attribute values for different attribute types.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="addfontdecl">addFontDecl<a class="headerlink" href="#addfontdecl" title="Permanent link">&para;</a></h2>
+<p>Inserts an extended description for a specific font which an be used for font substitution algorithms.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addFontDecl”</td>
+</tr>
+<tr>
+<td><code>fontName</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>The font name.</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td>Object</td>
+<td><em>required</em></td>
+<td>The font description. Supports the following properties:</td>
+</tr>
+<tr>
+<td>Property</td>
+<td>Type</td>
+<td>Default Value</td>
+<td>Description</td>
+</tr>
+<tr>
+<td>--------</td>
+<td>----</td>
+<td>-------------</td>
+<td>-----------</td>
+</tr>
+<tr>
+<td><code>altNames</code></td>
+<td>Array<String></td>
+<td>[]</td>
+<td>A list of alternative names for the font.</td>
+</tr>
+<tr>
+<td><code>family</code></td>
+<td>String</td>
+<td>””</td>
+<td>The font family.</td>
+</tr>
+<tr>
+<td><code>pitch</code></td>
+<td>Enum</td>
+<td>“variable”</td>
+<td>The font pitch. Either “fixed” or “variable”.</td>
+</tr>
+<tr>
+<td><code>panose1</code></td>
+<td>Array<Integer></td>
+<td><em>none</em></td>
+<td>The font typeface classification number. See <a href="http://en.wikipedia.org/wiki/PANOSE" title="http://en.wikipedia.org/wiki/PANOSE">http://en.wikipedia.org/wiki/PANOSE</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="addstyle">addStyle<a class="headerlink" href="#addstyle" title="Permanent link">&para;</a></h2>
+<p>Inserts a new style with its formatting attributes into the document.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addStyle”</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Enum</td>
+<td><em>required</em></td>
+<td>The main attribute type of the style sheet. The supported types are dependent on the application.</td>
+</tr>
+<tr>
+<td><code>styleId</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>The identifier of the new style sheet (must be unique inside the corresponding attribute type).</td>
+</tr>
+<tr>
+<td><code>styleName</code></td>
+<td>String</td>
+<td><em>value of</em> <code>styleId</code></td>
+<td>The readable name of this style sheet. Must not be set for auto styles. An empty string is an allowed value.</td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#attributeset">AttributeSet</a></td>
+<td></td>
+<td>The attribute set with all attributes defined by the style sheet. Must support the attributes of the main attribute type of this operation, may support attributes of other types.</td>
+</tr>
+<tr>
+<td><code>parent</code></td>
+<td>String</td>
+<td><em>none</em> (no parent)</td>
+<td>The identifier of the parent style sheet that derives formatting attributes to this style sheet. Must be omitted, if the style sheet does not have a parent. Auto styles must refer to their parent style sheet.</td>
+</tr>
+<tr>
+<td><code>uiPriority</code></td>
+<td>Integer</td>
+<td>0</td>
+<td>The priority of the style sheet used to order style sheet in the user interface. The lower the value the higher the priority.</td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td>Boolean</td>
+<td>false</td>
+<td>Whether this style sheet is the default style sheet of the family. Only one style sheet per family can be the default style sheet.</td>
+</tr>
+<tr>
+<td><code>hidden</code></td>
+<td>Boolean</td>
+<td>false</td>
+<td>Whether the style sheet is hidden in the user interface. Not used for auto-styles which are always hidden implicitly (see property <code>auto</code>).</td>
+</tr>
+<tr>
+<td><code>custom</code></td>
+<td>Boolean</td>
+<td>false</td>
+<td>Whether the style sheet has been created at runtime while editing the document. Will be false for built-in style sheets. Not used for auto styles.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="changestyle">changeStyle<a class="headerlink" href="#changestyle" title="Permanent link">&para;</a></h2>
+<p>Changes the formatting attributes, and other properties of an existing style. 
+Must not be used for auto styles.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“changeStyle”</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Enum</td>
+<td><em>required</em></td>
+<td>The main attribute type of the style sheet. The supported types are dependent on the application.</td>
+</tr>
+<tr>
+<td><code>styleId</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>The identifier of the style sheet to be changed. MUST NOT be an auto style (a style sheet with the property <code>auto</code> set to true, see operation <a href="#addStyle">addStyle</a>).</td>
+</tr>
+<tr>
+<td><em>other</em></td>
+<td></td>
+<td></td>
+<td>Other properties supported by the operation <a href="#addStyle">addStyle</a> that will be changed in the style sheet. The properties <code>default</code> and <code>auto</code> cannot be changed.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="deletestyle">deleteStyle<a class="headerlink" href="#deletestyle" title="Permanent link">&para;</a></h2>
+<p>Removes a style from the document. Does not modify any attribute sets of elements that refer to the style sheet.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“deleteStyle”</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Enum</td>
+<td><em>required</em></td>
+<td>The main attribute type of the style sheet. The supported types are dependent on the application.</td>
+</tr>
+<tr>
+<td><code>styleId</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>The identifier of the style sheet to be removed. MUST NOT be an auto style (a style sheet with the property <code>auto</code> set to true, see operation <a href="#addStyle">addStyle</a>).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="adddrawing">addDrawing<a class="headerlink" href="#adddrawing" title="Permanent link">&para;</a></h2>
+<p>Inserts a new drawing object into the document. This section describes the generic properties of the <code>addDrawing</code> operation.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td><em>required</em></td>
+<td>“addDrawing”</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td><a href="#drawingposition">DrawingPosition</a></td>
+<td><em>required</em></td>
+<td>The position of the drawing object.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Enum</td>
+<td><em>required</em></td>
+<td>The type of the drawing contents.</td>
+</tr>
+<tr>
+<td></td>
+<td>“shape”</td>
+<td>The drawing object is a simple or complex shape (line, rectangle, ellipse, custom interactive shape).</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>“group”</td>
+<td>The drawing object is a container for more embedded drawing objects.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>“connector”</td>
+<td>The drawing object is a connector.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>“image”</td>
+<td>The drawing object contains an image (bitmap or vector). Additional special attributes of the drawing object will describe the source of the image data.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>“diagram”</td>
+<td>The drawing object contains a flow diagram consisting of several shapes and connectors.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>“chart”</td>
+<td>The drawing object is a chart.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>“table”</td>
+<td>The drawing object is a table (supported only in Presentation).</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>“ole”</td>
+<td>The drawing object contains an OLE object.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>“horizontal_line”</td>
+<td>The drawing object is a horizontal separator line between two paragraphs (Text only).</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>“undefined”</td>
+<td>The type of the drawing object is unknown. Applications will show a placeholder frame.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td><a href="#drawingattributeset">DrawingAttributeSet</a></td>
+<td></td>
+<td>Initial attribute set for the drawing object.</td>
+</tr>
+</tbody>
+</table>
+    </div>
+    
+    <div id="footera">
+      <div id="copyrighta">
+        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
+            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
+            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
+            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
+            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
+          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
+          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
+            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
+          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
+          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
+            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
+          LibreOffice was based on OpenOffice.org.</p>
+      </div>
+    </div>   
+  </div>
+</body>
+</html>

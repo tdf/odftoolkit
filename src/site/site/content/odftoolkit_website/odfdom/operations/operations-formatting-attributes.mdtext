@@ -1,0 +1,656 @@
+# Formatting Attributes (Operations)
+
+Formatting attributes are used to modify the appearance of a specific component in the document. An object of type _Attributes_ contains a variable number of attribute values, mapped by the attribute name. An attribute value can be an atomic value, an array, or an object of any type described above.
+
+The following chapters describe all generic formatting attributes, divided by their _attribute type_. Unless specified differently, the values of all measurement attributes (sizes, margins, indentations, etc.) are in 1/100 of millimeters.
+
+## DocumentAttributes
+
+These attributes are only supported in the [setDocumentAttributes](#setdocumentattributes) operation.
+
+|Attribute|Data Type|Default Value|Application|Description|
+|---------|---------|-------------|-----------|-----------|
+|`fileFormat`|Enum|“ooxml”|all|The file format type this document is based on. The functionality of the applications may be depending on the underlying file format.|
+||“ooxml”|Office Open XML (native format of Microsoft Office).|
+||
+|“odf”|Open Document Format (native format of Apache Open Office, LibreOffice).|
+|`zoom`|Object|{value:100}|Document zoom factor, currently only as percentage in the property `value`.|
+|`defaultTabStop`|Integer|1270|Default interval of tab stops (1/2 inch).|
+
+## PageAttributes
+
+Page formatting attributes will be applied to page elements.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|Notes|
+|---------|---------|-------------|-------------------------|-----------|-----|
+|`width`|Integer|0|all|Page width, including all margins.||
+|`height`|Integer|0|all|Page height, including all margins.||
+|`orientation`|Enum|“portrait”|all|Page orientation (one of “portrait”, “landscape”). This is NOT supported in Presentation.||
+|`marginLeft`|Integer|0|all|Distance from the left page border to the left border of the content area.||
+|`marginRight`|Integer|0|all|Distance from the right page border to the right border of the content area.||
+|`marginTop`|Integer|0|all|Distance from the top page border to the top border of the content area.|(1)|
+|`marginBottom`|Integer|0|all|Distance from the bottom page border to the bottom border of the content area.|(1)|
+|`marginHeader`|Integer|0|all|Distance from the top page border to the top border of the header.||
+|`marginFooter`|Integer|0|all|Distance from the bottom page border to the bottom border of the footer.||
+|`firstPage`|Boolean|false|all|Whether to use separate header/footer settings for the first page.||
+|`evenOddPages`|Boolean|false|all|Whether to use separate header/footer settings for even and odd pages, and mirror margin settings accordingly.||
+
+#### Notes
+
+(1) The top and bottom page margin will include a header or footer if existing. If the header/footer is too large to fit into the empty space, the effective size of the page content area has to be reduced to prevent the header/footer from overlapping with the page content area.
+
+     
+## ParagraphAttributes
+
+|Applications|Text|
+|------------|
+|Attribute type|`paragraph`|
+|--------------|
+
+Paragraph formatting attributes will be applied to paragraph elements in a text document.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|`alignment`|Enum|“left”|all|Horizontal text alignment. One of “left”, “center”, “right”, or “justify”.|
+|`lineHeight`|[LineHeight](#lineheight)|{type:“percent”, value:100}|all|Relative or absolute text line height.|
+|`fillColor`|[Color](#color)|Color.AUTO|all|Paragraph background color.|
+|`outlineLevel`|Integer|9|all|The outline level specifies an integer which defines the level of the associated text. This level shall not affect the appearance of the text in the document, but shall be used to calculate the TOC field|
+|`listLevel`|Integer|\-1|all|Level of indention|
+|`listId`|String|””|all|Numbering definition instance reference. Can be shared by multiple lists.|
+|`listStyle`|String|””|all|ID of the list style sheet.|
+|`listStart`|Boolean|false|element|Indicates if the paragraph is at the start of a new list, require new numbering.|
+|`tabStops`|Array<[TabStop](#tabstop)\>|\[\]|all|Tabstop definitions|
+|`borderLeft`|[Border](#border)|Border.NONE|all|Left border|
+|`borderRight`|[Border](#border)|Border.NONE|all|Right border|
+|`borderTop`|[Border](#border)|Border.NONE|all|Top border|
+|`borderBottom`|[Border](#border)|Border.NONE|all|Bottom|
+|`borderInside`|[Border](#border)|Border.NONE|all|Border between paragraphs with same borders and margins|
+|`indentLeft`|Integer|0|all|left margin|
+|`indentRight`|Integer|0|all|right paragraph margin|
+|`indentFirstLine`|Integer|0|all|first line indent, negative values represent hanging indents|
+|`marginTop`|Integer|0|all|top margin|
+|`marginBottom`|Integer|0|all|bottom margin|
+|`pageBreakBefore`|Boolean|false|all|specifies that a page break is inserted before this paragraph, this attribute is not beeing inherited by followed paragraphs|
+|`contextualSpacing`|Boolean|false|all|ignore spacing between paragraph with same paragraph style|
+|`listStartValue`|Integer|\-1|element|Start index of the list level|
+|`listLabelHidden`|Boolean|false|element|ODF is able to have multiple lists in a single list item. To emulate this, all paragraphs following the first have to use this property to disable the list.|
+|`nextStyleId`|String|”” (no style sheet)|style|The identifier of the paragraph style sheet that should be used in next paragraph (Enter key at end of paragraph).|
+
+
+
+## CharacterAttributes
+
+|Applications|Text, Spreadsheet|
+|------------|
+|Attribute type|`character`|
+|--------------|
+
+Character attributes will be applied to any document components containing text.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|Notes|
+|---------|---------|-------------|-------------------------|-----------|-----|
+|`fontName`|String|”+mn-lt”|all|Font name.||
+|`fontNameEastAsia`|String|””|all|Font name for East Asia unicode characters.|(1)|
+|`fontNameComplex`|String|””|all|Font name for complex unicode characters.|(1)|
+|`fontNameSymbol`|String|””|all|Font name for symbol characters in the private unicode range F000 to F0FF.|(2)|
+|`fontSize`|Number|11|all|Font size, **in points**.||
+|`bold`|Boolean|false|all|Font weight.||
+|`italic`|Boolean|false|all|Font slant.||
+|`underline`|Boolean|false|all|Text underline (single line only).||
+|`strike`|Enum|“none”|all|Font strike through, one of “none”, “single”, or “double”.||
+|`color`|[Color](#color)|Color.AUTO|all|Text color||
+|`fillColor`|[Color](#color)|Color.AUTO|all|Text background color.|(3)|
+|`language`|String|””|all|Specifies the language of the text, e.g. for spell checker.|(3)|
+|`noProof`|Boolean|false|all|Specifies if spelling or grammar errors are to be reported.|(3)|
+|`url`|String|””|element|The URL of a hyperlink.|(3)|
+|`anchor`|String|””|element|The anchor of a hyperlink.|(3)|
+|`baseline`|Integer|0|all|Character baseline in percent, if greater than 0 then the character is superscript otherwise if lower than 0 the character is subscript.|(3)|
+|`caps`|Enum|“none”|all|Character capture, “none”, “all”, or “small”.|(3)|
+|`vertAlign`|Enum|“baseline”|all|Character escapement, one of “baseline”, “sub”, or “super”.|(3)|
+
+#### Notes
+
+(1) Presentation only. Only added for roundtrip (copy/paste, delete/undo, …).
+
+(2) Presentation only. Added to the attributes and add the fontName e.g. 'Wingdings' to the CSS font-family attribute.
+
+(3) May not be supported by all components.
+
+
+## TableAttributes
+
+Table formatting attributes will be applied to table elements in a text document.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|Notes|
+|---------|---------|-------------|-------------------------|-----------|-----|
+|`width`|Integer|String|“auto”|all|Table width. If set to “auto”, the table is sized automatically according to the page size.||
+|`tableGrid`|Array<Integer>|\[\]|element|Grid column widths in logical units.||
+|`fillColor`|[Color](#color)|Color.AUTO|all|Background color||
+|`borderTop`|[Border](#border)|Border.NONE|all|Top table border|(1)|
+|`borderBottom`|[Border](#border)|Border.NONE|all|Bottom table border|(1)|
+|`borderLeft`|[Border](#border)|Border.NONE|all|Left table border|(1)|
+|`borderRight`|[Border](#border)|Border.NONE|all|Right table border|(1)|
+|`borderInsideHor`|[Border](#border)|Border.NONE|all|Inner horizontal borders||
+|`borderInsideVert`|[Border](#border)|Border.NONE|all|Inner vertical borders||
+|`paddingTop`|Integer|0|all|Top cell padding||
+|`paddingBottom`|Integer|0|all|Bottom cell padding||
+|`paddingLeft`|Integer|0|all|Left cell padding||
+|`paddingRight`|Integer|0|all|Right cell padding||
+|`pageBreakBefore`|Boolean|false|all|specifies that a page break is inserted before this table, this attribute is not beeing inherited by followed table (ODF only feature, required by LO)||
+|`exclude`|Array<Enum>|\[\]|element|String array defining which conditional table attribute sets are **not** used from the table style sheet. See next table for details.||
+
+Each table style sheet contains multiple attribute sets, mapped by conditional keys which describe a specific area in the table. See [TableStyleSheetAttributeSet](#tablestylesheetattributeset) for details. The attribute `exclude` specifies which of these attribute sets will be excluded from the table.
+
+|`exclude` key|Excluded conditional attribute sets|Description|
+|-------------|-----------------------------------|-----------|
+|“firstRow”|`firstRow`, `northWestCell`, `northEastCell`|Ignore formatting defined for the first row and the top corner cells of the table.|
+|“lastRow”|`lastRow`, `southWestCell`, `southEastCell`|Ignore formatting defined for the last row and the bottom corner cells of the table.|
+|“firstCol”|`firstCol`, `northWestCell`, `southWestCell`|Ignore formatting defined for the left column inand the left corner cells of the table.|
+|“lastCol”|`lastCol`, `northEastCell`, `southEastCell`|Ignore formatting defined for the right column and the right corner cells of the table.|
+|“bandsHor”|`band1Hor`, `band2Hor`|Ignore formatting defined for the inner rows of the table.|
+|“bandsVert”|`band1Vert`, `band2Vert`|Ignore formatting defined for the inner columns of the table.|
+
+#### Notes
+
+(1) Applies to the border of the whole table only.
+
+     
+
+## TableRowAttributes
+
+|Applications|Text|
+|------------|
+|Attribute type|`row`|
+|--------------|
+
+Table row formatting attributes will be applied to row elements of tables in a text document.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|`height`|Integer|String|“auto”|all|Row height. If set to “auto”, the row is sized automatically according to its contents.|
+|`headerRow`|Boolean|false|all|Specifies if this is a header row that is repeated on each page.|
+
+     
+
+## TableCellAttributes
+
+|Applications|Text|
+|------------|
+|Attribute type|`cell`|
+|--------------|
+
+Table cell formatting attributes will be applied to cell elements in table rows in a text document.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|`gridSpan`|Integer|1|element|The number of columns spanned by the cell.|
+|`fillColor`|[Color](#color)|Color.AUTO|all|Cell background color.|
+|`fillType`|enum|“solid”|all|(spreadsheet & presentation only) to support transparent cell backgrounds. If full fill & line attribute sets are supported, this property has to be removed. values of this property are “none”, “solid”, “gradient”, “bitmap”|
+|`borderTop`|[Border](#border)|Border.NONE|all|Top cell border.|
+|`borderBottom`|[Border](#border)|Border.NONE|all|Bottom cell border.|
+|`borderLeft`|[Border](#border)|Border.NONE|all|Left cell border.|
+|`borderRight`|[Border](#border)|Border.NONE|all|Right cell border.|
+|`borderInsideHor`|[Border](#border)|Border.NONE|style|Inner horizontal borders for conditional style attributes.|
+|`borderInsideVert`|[Border](#border)|Border.NONE|style|Inner vertical borders for conditional style attributes.|
+|`paddingTop`|Integer|0|all|Top cell padding.|
+|`paddingBottom`|Integer|0|all|Bottom cell padding.|
+|`paddingLeft`|Integer|0|all|Left cell padding.|
+|`paddingRight`|Integer|0|all|Right cell padding.|
+|`alignVert`|Enum|“top”|all|This property describes the vertical cell alignment, its value can be “top”, “bottom”, “center”, “justified” or “distributed”|
+|`mergeVert`|Enum|“noMerge|all|This property describes the vertical merging of table cells. Its value can be “restart”, “continue” or “noMerge”|
+
+
+## Drawing Attributes (Text Doument)
+
+|Applications|all|
+|------------|
+|Attribute type|`drawing`|
+|--------------|
+
+Drawing formatting attributes will be applied to drawing objects embedded in the document.
+
+Drawing formatting attributes will be applied to drawing objects embedded in the text document. Additionally to the attributes described in [DrawingAttributes](#drawingattributes), text documents support the following attributes:
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|Notes|
+|---------|---------|-------------|-------------------------|-----------|-----|
+|`marginLeft`|Integer|0|all|Left margin to text contents.||
+|`marginRight`|Integer|0|all|Right margin to text contents.||
+|`marginTop`|Integer|0|all|Top margin to text contents.||
+|`marginBottom`|Integer|0|all|Bottom margin to text contents.||
+|`borderTop`|[Border](#border)|Border.NONE|element|Top border of the drawing object.|(1)|
+|`borderBottom`|[Border](#border)|Border.NONE|element|Bottom border of the drawing object.|(1)|
+|`borderLeft`|[Border](#border)|Border.NONE|element|Left border of the drawing object.|(1)|
+|`borderRight`|[Border](#border)|Border.NONE|element|Right border of the drawing object.|(1)|
+|`inline`|Boolean|true|all|If true, the drawing object is embedded as character, otherwise the drawing floats in its parent element and is optionally wrapped by the text.||
+|`anchorHorBase`|Enum|“margin”|all|Horizontal anchor mode.|(2)|
+||“margin”||
+||
+|“page”||
+|“column”||
+|“character”||
+|“leftMargin”||
+|“rightMargin”||
+|“insideMargin”||
+|“outsideMargin”||
+|`anchorHorAlign`|Enum|“left”|all|Horizontal anchor position.|(2)|
+||“left”|The drawing object is attached to the left border of the anchor component.|
+||
+|“right”|The drawing object is attached to the right border of the anchor component.|
+|“center”|The drawing object is attached in the middle of the anchor component.|
+|“inside”||
+|“outside”||
+|“offset”|The distance between left anchor position and drawing object is specified by the property `anchorHorOffset`.|
+|`anchorHorOffset`|Integer|0|all|Horizontal position offset (only used if `anchorHorAlign` is set to “offset”).|(2)|
+|`anchorVertBase`|Enum|“margin”|all|Vertical anchor mode.|(2)|
+||“margin”||
+||
+|“page”||
+|“paragraph”||
+|“line”||
+|“topMargin”||
+|“bottomMargin”||
+|“insideMargin”||
+|“outsideMargin”||
+|`anchorVertAlign`|Enum|“top”|all|Vertical anchor position.|(2)|
+||“top”|The drawing object is attached to the top border of the anchor component.|
+||
+|“bottom”|The drawing object is attached to the bottom border of the anchor component.|
+|“center”|The drawing object is attached in the middle of the anchor component.|
+|“inside”||
+|“outside”||
+|“offset”|The distance between top anchor position and drawing object is specified by the property `anchorVertOffset`.|
+|`anchorVertOffset`|Integer|0|all|Vertical position offset (only used if `anchorVertAlign` is set to “offset”).|(2)|
+|`anchorPageNumber`|Integer||element|In ODT documents, if the drawing is page anchored then this attribute specifies the page that is anchored to. This attribute is optional.|(2)|
+|`anchorLayerOrder`|Integer|0|all|Layer position (z-index)||
+|`anchorBehindDoc`|Boolean|false|all|Layer position in behind text (true) or in front of text (false). this feature is not supported yet, but it is important for “anchorLayerOrder”||
+|`textWrapMode`|Enum|“topAndBottom”|all|Text wrapping mode.|(2)|
+||“none”|The drawing object will not occupy any space at all, text will be rendred over or under the drawing object.|
+||
+|“square”|Text will be rendered around a square covering the drawing object, regardless of its actual outline shape.|
+|“tight”|Text will be rendered around the actual outline shape of the drawing object.|
+|“through”|Text will be rendered around the actual outline shape of the drawing object, and inside the transparent areas of the drawing object.|
+|“topAndBottom”|Text will be rendered above and below the drawing object only.|
+|`textWrapSide`|Enum|“both”|all|Sides where text wraps around the drawing object (only used if `textWrapMode` is set to “square”, “tight”, or “through”).|(2)|
+||“both”|Text will be rendered on both sides of the drawing object, as long as the available space is sufficient.|
+||
+|“left”|Text will be rendered left of the drawing object, as long as the available space is sufficient.|
+|“right”|Text will be rendered right of the drawing object, as long as the available space is sufficient.|
+|“largest”|Text will be rendered at the larger side (either left or right) of the drawing object.|
+
+#### Notes
+
+(1) Currently only `borderTop` is set if the drawing has the type “horizontal\_line”.
+
+(2) Attributes are only used if `inline` mode is false. The generic attributes `left` and `top` will not be used for drawing objects in text documents.
+
+
+### Drawing Attributes (General)
+
+The following attributes are supported by each drawing in each application regardless of the drawing type.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|Notes|
+|---------|---------|-------------|-------------------------|-----------|-----|
+|`left`|Integer|0|all|The horizontal position of the drawing object in the drawing layer.|(1)|
+|`top`|Integer|0|all|The vertical position of the drawing object in the drawing layer.|(1)|
+|`width`|Integer|0|all|The width of the drawing object (independent from its contents).|(1)|
+|`height`|Integer|0|all|The height of the drawing object (independent from its contents).|(1)|
+|`childLeft`|Integer|0|all|Used with group shapes only, it specifies the most left child object (in the child coord system).||
+|`childTop`|Integer|0|all|Used with group shapes only, it specifies the most top child object (in the child coord system).||
+|`childWidth`|Integer|0|all|Used with group shapes only, it specifies the width of all child objects (in the child coord system).||
+|`childHeight`|Integer|0|all|Used with group shapes only, it specifies the height of all child objects (in the child coord system).||
+|`coordWidth`|Integer|_width of object_|element|The width of the virtual coordinate system inside the drawing object (used e.g. for positioning of drawing objects embedded in groups, or for polygon path definitions.||
+|`coordHeight`|Integer|_height of object_|element|The height of the virtual coordinate system inside the drawing object (used e.g. for positioning of drawing objects embedded in groups, or for polygon path definitions.||
+|`name`|String|””|element|The name of the drawing object.||
+|`description`|String|””|element|A detailed description for the drawing object.||
+|`id`|String||element|Drawing id, used to identify drawing objects (needed for connector objects). If an id used then it has to be unique for the whole document. If the id is ommitted the filter will create it automatically when saving. In OOXML documents the id has to be convertible to Long.||
+|`replacementData`|String|””|element|Image data used as replacement for the actual drawing contents. The string contains either Base64 encoded image data (a URL starting with 'data:'), or SVG mark-up (starting with '<svg').||
+|`flipH`|Boolean|false|element|Whether the contents of the drawing object are flipped horizontally.||
+|`flipV`|Boolean|false|element|Whether the contents of the drawing object are flipped vertically.||
+|`rotation`|Number|0|element|The object rotation in degrees.||
+|`hidden`|Boolean|false|element|Whether the drawing object is hidden.||
+|`aspectLocked`|Boolean|false|element|Whether the aspect ratio of the drawing object is locked and cannot be changed when the drawing object will be resized.||
+|`noMove`|Boolean|false|element|Whether it is forbidden to move the drawing.||
+|`noResize`|Boolean|false|element|Whether it is forbidden to resize the drawing.||
+|`noSelect`|Boolean|false|element|Whether it is forbidden to select the drawing.||
+|`noGroup`|Boolean|false|element|Whether it is forbidden to group the drawing.||
+|`noRotation`|Boolean|false|element|Whether it is forbidden to rotate the drawing.||
+|`minFrameHeight`|Integer|0|element|Odf only, this property specifies the minimal height of text frames.||
+
+#### Notes
+
+(1) Some of the generic position and size attributes may be overridden by application-specific attributes.
+
+### Embedded Drawing Attributes
+
+The following attributes are supported by drawing objects embedded in other drawing objects.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|`left`|Number|0|element|The horizontal position of the drawing object in the parent object's virtual coordinate system (see attribute `[coordWidth](#general_drawing_attributes)` ).|
+|`top`|Number|0|element|The vertical position of the drawing object in the parent object's virtual coordinate system (see attribute `[coordHeight](#general_drawing_attributes)` ).|
+|`width`|Number|0|element|The width of the drawing object in the parent object's virtual coordinate system (see attribute `[coordWidth](#general_drawing_attributes)` ).|
+|`height`|Number|0|element|The height of the drawing object in the parent object's virtual coordinate system (see attribute `[coordHeight](#general_drawing_attributes)` ).|
+
+     
+
+## DrawingFillAttributes
+
+|Applications|all|
+|------------|
+|Attribute type|`fill`|
+|--------------|
+
+Drawing fill attributes will be applied to entire drawing objects embedded in the document, or to specific parts of a complex drawing object, e.g. to a data series or the legend in a chart object.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|`type`|Enum|“none”|all|The fill type. The following types are supported:|
+||“none”|The object has no fill style (completetly transparent).|
+||
+|“auto”|All fill settings are determined automatically depending on the context. All other fill attributes MUST be ignored.|
+|“solid”|The object is filled with a single fill color.|
+|“gradient”|The object is filled with a gradient.|
+|“bitmap”|The object is filled with a bitmap.|
+|“pattern”|The object is filled with a preset pattern.|
+|`color`|[Color](#color)|Color.AUTO|all|The primary fill color (used by the fill types “solid”, “gradient”, and “pattern”). If set to the automatic color, the effective fill color is dependent on the context (e.g. automatic fill colors for series in bar charts).|
+|`color2`|[Color](#color)|Color.AUTO|all|The secondary fill color for gradients and patterns. If set to the automatic color, the effective fill color is dependent on this specific context.|
+|`gradient`|[Gradient](#gradient)|Gradient.LINEAR|all|The gradient fill properties. Only used if the attributes `type` is set to “gradient”. If set to the \`auto\` value, the effective gradient is dependent on other color fill values (e.g. default/auto \`color\` and \`backgroundColor\` values).|
+|`bitmap`|[Bitmap](#bitmap)|_none_|all|The bitmap fill properties. Only used if the attributes `type` is set to “bitmap”.|
+|`pattern`|Enum [Pattern](#pattern)|“none”|all|The preset pattern identifier. Only used if the attributes `type` is set to “pattern”. The attributes `color` and `backgroundColor` determine the colors used for the pattern.|
+
+     
+
+## DrawingLineAttributes
+
+|Applications|all|
+|------------|
+|Attribute type|`line`|
+|--------------|
+
+Drawing line attributes will be applied to entire drawing objects embedded in the document, or to specific parts of a complex drawing object, e.g. to a data series or the legend in a chart object.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|All [fill attributes](#drawingfillattributes) MUST also be supported as line attributes and will describe how to fill the outline polygons.|
+|`width`|Number|0|all|The width of the line. A value of 0 hides the line.|
+|`style`|Enum|“solid”|all|The line style:|
+||“solid”|Solid line.|
+||
+|“dotted”|Dotted line.|
+|“dashed”|Dashed line.|
+|“dashDot”|Dash-dotted line.|
+|“dashDotDot”|Dash-dot-dotted line.|
+|`headEndType`|Enum|“none”|all|Specifies the head end of the line.|
+||“none”|no head end is drawn.|
+||
+||“triangle”|the head end looks like a triangle.|
+||
+||“stealth”|the head end looks like a stealth.|
+||
+||“diamond”|the head end looks like a diamon.|
+||
+||“oval”|the head end looks like a oval.|
+||
+||“arrow”|the head end looks like a arrow.|
+||
+|`headEndLength`|Enum|“medium”|all|Specifies the head end length of the line.|
+||“small”|Solid line.|
+||
+||“medium”|Solid line.|
+||
+||“large”|Solid line.|
+||
+|`headEndWidth`|Enum|“medium”|all|Specifies the head end width of the line.|
+||“small”|Solid line.|
+||
+||“medium”|Solid line.|
+||
+||“large”|Solid line.|
+||
+|`tailEndType`|Enum|“none”|all|Specifies the tail end of the line.|
+||“none”|no tail end is drawn.|
+||
+||“triangle”|the tail end looks like a triangle.|
+||
+||“stealth”|the tail end looks like a stealth.|
+||
+||“diamond”|the tail end looks like a diamon.|
+||
+||“oval”|the tail end looks like a oval.|
+||
+||“arrow”|the tail end looks like a arrow.|
+||
+|`tailEndLength`|Enum|“medium”|all|Specifies the tail end length of the line.|
+||“small”|Solid line.|
+||
+||“medium”|Solid line.|
+||
+||“large”|Solid line.|
+||
+|`tailEndWidth`|Enum|“medium”|all|Specifies the tail end width of the line.|
+||“small”|Solid line.|
+||
+||“medium”|Solid line.|
+||
+||“large”|Solid line.|
+||
+
+     
+
+## DrawingTextAttributes
+
+|Applications|all|
+|------------|
+|Attribute type|`text`|
+|--------------|
+
+Formatting attributes describing the source of the text contents of a drawing object or chart data series.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|`link`|[SourceLink](#sourcelink)|\[\]|element|The constant text, or an application dependent link into the document.|
+
+     
+
+## ImageAttributes
+
+|Applications|all|
+|------------|
+|Attribute type|`image`|
+|--------------|
+
+Formatting attributes for images and OLE objects.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|Notes|
+|---------|---------|-------------|-------------------------|-----------|-----|
+|`imageUrl`|String|""|element|URL pointing to the image data. If the image is embedded in the document, the URL will be relative to the document (e.g. “images/img1.png”).|(1)|
+|`imageData`|String|""|element|Image data. The string contains either Base64 image data, or SVG mark-up. If Base64 encoded image data is used, the string begins with “data:” otherwise if SVG is used it begins with ”<svg”.|(1)|
+|`cropLeft`|Number|0|all|Cropping size on the left side of the bitmap.|(2)|
+|`cropRight`|Number|0|all|Cropping size on the right side of the bitmap.|(2)|
+|`cropTop`|Number|0|all|Cropping size on the upper side of the bitmap.|(2)|
+|`cropBottom`|Number|0|all|Cropping size on the lower side of the bitmap.|(2)|
+
+#### Notes
+
+(1) The attributes `imageUrl` and `imageData` are mutually exclusive.
+
+*   An exception to this rule was introduced for the clipboard handling. The copy handler can not decide whether the `imageUrl` or the `imageData` attribute is needed on paste. Therefore the copy handler adds both attributes and the paste handler decides which one to use and which one to remove from the operation. Finally an operation with both attributes present may temporarily exist, but such operation is never sent to the filter.
+    
+
+(2) A value of 0 does not crop the bitmap, positive values will move the respective border of the bitmap outside the drawing frame, negative values will move the bitmap border inside the drawing frame. Cropping attributes are interpreted differently depending on the file format:
+
+*   OOXML: Cropping is used as percentage value. The value 100 corresponds to the total size of the drawing frame.
+    
+*   ODF: Cropping is used as absolute length in 1/100 of millimeters.    
+
+     
+
+## ShapeAttributes
+
+|Applications|all|
+|------------|
+|Attribute type|`shape`|
+|--------------|
+
+Formatting attributes for shape objects.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|`paddingLeft`|Number|250|all|The inner left distance from border to text.|
+|`paddingRight`|Number|250|all|The inner right distance from border to text.|
+|`paddingTop`|Number|125|all|The inner top distance from border to text.|
+|`paddingBottom`|Number|125|all|The inner bottom distance from border to text.|
+|`anchor`|Enum|top|element|Specifies the vertical alignment of text inside of a text body. 'bottom', 'centered', 'distributed', 'justified' or 'top' is possible.|
+|`anchorCentered`|Boolean|false|element|Specifies centering of the text box by determining the smallest possible bound box.|
+|`wordWrap`|Boolean|true|element|Specifies if the text is word wrapped.|
+|`vert`|Enum|horz|element|Specifies the text orientation. horz, vert, vert270, wordArtVert, eaVert, mongolianVert and wordArtVertRtl are possible values.|
+|`horzOverflow`|Enum|overflow|element|Specifies if the text is allowed to flow out of the bounding box or if it cut. Possible values are 'overflow' or 'clip'.|
+|`vertOverflow`|Enum|overflow|element|Specifies if the text is allowed to flow out of the bounding box or if it cut. Possible values are 'overflow', 'clip' or 'ellipsis'.|
+|`autoResizeHeight`|Boolean|false|all|Whether the size of the shape shall be adapted to the text content. This is a choice together with autoResizeText.|
+|`autoResizeText`|Boolean|false|all|Whether the fontsize of the text content shall be adapted to the shape height. This is a choice together with autoResizeHeight.|
+|`fontScale`|Number|1|all|scales all text-font releative to their original font-size, only if autoResizeText is true|
+|`lineReduction`|Number|0|all|reduces the distance between paragraphs relative to the original distance, only if autoResizeText is true|
+
+     
+
+## GeometryAttributes
+
+|Applications|all|
+|------------|
+|Attribute type|`geometry`|
+|--------------|
+
+Geometry attributes for shape objects.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|`presetShape`|String||all|The preset shape whose geometry should be used.|
+|`avList`|Object||all|adjustment values that are used|
+|`ahList`|Array<[GeometryAdjustmentHandle](#geometryadjustmenthandle)\>||all|list of adjustment handle specifications|
+|`cxnList`|Array<[GeometryConnectionPoint](#geometryconnectionpoint)\>||all|specifies the connection point a connector can connect to.|
+|`gdList`|Array<[GeometryGuide](#geometryguide)\>||all|formulas that can be used|
+|`pathList`|Array<[GeometryPath](#geometrypath)\>||all|path list|
+|`textRect`|[GeometryTextRect](#geometrytextrect)||all|a special text rect that has to be used for text, if omitted then the text rect is as big as the shape|
+|`hostData`|String||all|This attribute is used only in the filter for better roundtrip.|
+
+     
+
+## ConnectorAttributes
+
+|Applications|all|
+|------------|
+|Attribute type|`connector`|
+|--------------|
+
+Connector attributes for connector shapes.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|`startId`|String|””|element|Specifies the start shape the connector is connected to. If empty then the shape does not have a start connection.|
+|`startIndex`|Integer|0|element|Specifies the point at the start shape the connector is connected to.|
+|`endId`|String|””|element|Specifies the end shape the connector is connected to. If empty then the shape does not have a end connection.|
+|`endIndex`|Integer|0|element|Specifies the point at the end shape the connector is connected to.|
+
+     
+
+## ChartAttributes
+
+|Applications|all|
+|------------|
+|Attribute type|`chart`|
+|--------------|
+
+Formatting attributes for entire chart objects.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|`stacking`|Enum|“standard”|element|Stacking type for charts of type “bar”, “column” and “area”.|
+||“standard”|Standard mode: clustered bars, overlapping lines.|
+||
+|“stacked”|Data points of a category are stacked by their exact value.|
+|“percentStacked”|Data points of a category are stacked relative to each other, totalling in 100%.|
+|`chartStyleId`|integer|0|element|the ID for the auto-style. TODO define identifiers.|
+|`curved`|Boolean|false|element|Whether the series lines in line charts are splines.|
+|`varyColors`|Boolean|false|element|defines if the points of the first series are same color or not.|
+|`rotation`|integer|0|element|defines rotation of an pie or donut.|
+
+     
+
+## ChartDataSeriesAttributes
+
+|Applications|all|
+|------------|
+|Attribute type|`series`|
+|--------------|
+
+Formatting attributes for data series in chart objects.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|`type`|String|“bar”|element|chart type per series, for combination two chart types in one chart (line + bar, line + area, etc). The following chart types are supported:|
+||“bar”|The data points are shown as horizontal rectangles.|
+||
+|“column”|The data points are shown as vertical rectangles.|
+|“line”|The data points are shown as markers, and are connected with lines (markers and/or lines may be invisible).|
+|“area”|The data points are connected with lines, the area between the axis and the data series is filled.|
+|“scatter”|Similar to “line”, with custom positions of the data points in X and Y direction.|
+|“bubble”|Similar to “scatter”, with an additional source area that specifies the size of the data points.|
+|“pie”|The data points are shown in a pie.|
+|“donut”|The data points are shown in multiple rings.|
+|all types with appendix “2d” and “3d” are also supported by roundtrip|
+|`title`|[SourceLink](#sourcelink)|\[\]|element|The data source of the title to be shown for the data series (for example in the chart legend).|
+|`values`|[SourceLink](#sourcelink)|\[\]|element|The data source of the values to be shown by the data series.|
+|`names`|[SourceLink](#sourcelink)|\[\]|element|The category names to be shown for the data series (usually shown as labels on the X axis).|
+|`bubbles`|[SourceLink](#sourcelink)|\[\]|element|The size of the bubble data points to be shown for the data series (for bubble charts only).|
+|`dataLabel`|Boolean|false|element|Whether small labels are shown next to all data points.|
+|`format`|String|””|element|optional number format code|
+|`axisXIndex`|Integer|0|element|0 = bottom axis, 1 = top axis|
+|`axisYIndex`|Integer|0|element|0 = left axis, 1 = right axis|
+|`dataPoints`|Array<[ChartDataPointAttributeSet](#chartdatapointattributeset)\>|\[\]|element||
+
+     
+
+## ChartAxisAttributes
+
+|Applications|all|
+|------------|
+|Attribute type|`axis`|
+|--------------|
+
+Formatting attributes for axes in chart objects.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|`type`|Enum|“value”|element|The type of the axis. (never used! Deprecated?)|
+||“value”|The axis shows numerical data, and can be scaled.|
+||
+|“category”|The axis shows category names.|
+|“date”|The axis shows date/time values, and can be scaled.|
+|“series”|The axis shows series names. Used in deep 3D charts for the Z axis only.|
+|`min`|Number | String|“auto”|element|The minimum value shown at the beginning of the axis. The special value “auto” will obtain the axis minimum according to the series data. Used by axes of type “value” and “date” only. (never used! Deprecated?)|
+|`max`|Number | String|“auto”|element|The maximum value shown at the end of the axis. The special value “auto” will obtain the axis maximum according to the series data. Used by axes of type “value” and “date” only. (never used! Deprecated?)|
+|`label`|Boolean|false|element|Whether the axis labels are visible.|
+
+     
+
+## ChartLegendAttributes
+
+|Applications|all|
+|------------|
+|Attribute type|`legend`|
+|--------------|
+
+Formatting attributes for the legend in chart objects.
+
+|Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
+|---------|---------|-------------|-------------------------|-----------|
+|`pos`|Enum|“off”|element|The position of the legend in the chart area.|
+||“off”|The legend is not visible.|
+||
+|“top”|The legend is located above the chart plot area.|
+|“bottom”|The legend is located below the chart plot area.|
+|“left”|The legend is located left of the chart plot area.|
+|“right”|The legend is located right of the chart plot area.|
+|“topRight”|The legend is located in the top-right corner of the chart area.|
+
+     

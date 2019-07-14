@@ -1,0 +1,513 @@
+# ODF Text Operations
+
+Operations are used to transfer the user changes between editors. 
+Operations are a prerequirement for collaborative working on a document.
+
+
+Most operations target specific text components (characters, paragraphs, tables, table cells, drawing objects, etc.) or ranges of text components. The following general rules apply for these operations:
+
+1. Single text components are addressed by a `start` property containing a [Position](#position) array.
+2. Ranges of text components are addressed by a `start` and an `end` property, both containing a [Position](#position) array. The range is inclusive, the text component addressed by `end` is part of the range. The `end` position must be equal to `start` or must follow `start`.
+
+**Note**: In productive usage operation names and attributes should be shortened to limit bandwidth usage.
+
+## delete
+
+Deletes a component or a range of related components.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“delete”|
+|`start`|[TextPosition](#textposition)|_required_|The position of the first component that will be deleted.|
+|`end`|[TextPosition](#textposition)|_value of `start`_|The position of the last component that will be deleted (closed range). if omitted, this operation addresses a single component.|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+**Note**: Currently, only single components can be deleted, except for text ranges in a paragraph. A text range can include characters, fields, and drawing objects, but must be contained in a single paragraph.
+
+The operation deletes only the addressed components. It will never delete any parent components, even if they are left empty (for example: after deleting the last row in a table, the empty table will remain in the document).
+
+## move
+
+Moves a component or a range of related components to a new location.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“move”|
+|`start`|[TextPosition](#textposition)|_required_|The position of the first component that will be moved.|
+|`end`|[TextPosition](#textposition)|_value of `start`_|The position of the last component that will be moved (closed range). If omitted, this operation addresses a single component.|
+|`to`|[TextPosition](#textposition)|_required_|The target position to move the selected components to.|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+**Note**: Currently, only single **drawing** components can be moved. The property `end` will not be evaluated at all.
+
+## addParagraph
+
+Inserts a new empty paragraph node into the document.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“addParagraph”|
+|`start`|[ParagraphPosition](#paragraphposition)|_required_|The position of the new paragraph. The paragraph will be inserted before a component that is currently located at this position.|
+|`attrs`|[ParagraphAttributeSet](#paragraphattributeset)|{}|Initial attribute set for the paragraph.|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+     
+
+## splitParagraph
+
+Splits the contents of an existing paragraph into two paragraphs.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“splitParagraph”|
+|`start`|[CharacterPosition](#characterposition)|_required_|The position of the first character (or other child component in the paragraph) that will be moved to the beginning of the new paragraph.|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+     
+
+## mergeParagraph
+
+Merges two consecutive paragraphs to a single paragraph.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“mergeParagraph”|
+|`start`|[ParagraphPosition](#paragraphposition)|_required_|The position of the paragraph, that will be merged with the following paragraph.|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+The formatting attributes of the second paragraph will be lost, unless the leading paragraph is empty.
+
+     
+
+## addText
+
+Inserts new text into a paragraph.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“addText”|
+|`start`|[CharacterPosition](#characterposition)|_required_|The position where the new text will be inserted. The text will be inserted before the character that is currently located at this position.|
+|`text`|String|_required_|Text to be inserted into the specified paragraph at the specified position.|
+|`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+#### Notes
+
+*   The inserted text gets the same formatting as the character that **precedes** the insertion position.
+    
+*   At the beginning of the paragraph, the inserted text gets the same formatting as the first existing character.
+    
+*   In empty paragraphs, the inserted text gets the character formatting defined at the paragraph itself.
+    
+*   The attributes passed in the `attrs` property will be merged over the existing attributes.
+    
+     
+
+## addTab
+
+Inserts a tabulator into a paragraph.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“addTab”|
+|`start`|[CharacterPosition](#characterposition)|_required_|The position where the new tabulator will be inserted. The tabulator will be inserted before the character that is currently located at this position.|
+|`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+#### Notes
+
+*   The inserted tabulator gets the same formatting as the character that **precedes** the insertion position.
+    
+*   At the beginning of the paragraph, the inserted tabulator gets the same formatting as the first existing character.
+    
+*   In empty paragraphs, the inserted tabulator gets the character formatting defined at the paragraph itself.
+    
+*   The attributes passed in the `attrs` property will be merged over the existing attributes.
+    
+
+     
+
+## addHardBreak
+
+Inserts a hard break into a paragraph.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“addHardBreak”|
+|`start`|[CharacterPosition](#characterposition)|_required_|The position where the new hard break will be inserted. The hard break will be inserted before the character that is currently located at this position.|
+|`type`|Enum|textWrapping|One of “page”, “column” or “textWrapping”.|
+|`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+#### Notes
+
+*   The inserted break gets the same formatting as the character that **precedes** the insertion position.
+    
+*   At the beginning of the paragraph, the inserted break gets the same formatting as the first existing character.
+    
+*   In empty paragraphs, the inserted break gets the character formatting defined at the paragraph itself.
+    
+*   The attributes passed in the `attrs` property will be merged over the existing attributes.
+    
+
+     
+
+## addField
+
+Inserts simple text field into a paragraph.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“addField”|
+|`start`|[CharacterPosition](#characterposition)|_required_|The position where the new field will be inserted. The field will be inserted before the character that is currently located at this position.|
+|`type`|String|_required_|**TODO** The field type as string.|
+|`representation`|String|_required_|The latest text representation of this field.|
+|`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+     
+
+## updateField
+
+Updates an already existing simple field.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“updateField”|
+|`start`|[CharacterPosition](#characterposition)|_required_|The position where the new field will be inserted. The field will be inserted before the character that is currently located at this position.|
+|`type`|String|optional|The field instruction.|
+|`representation`|String|optional|The attribute represents the field representation.|
+|`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+#### Notes
+
+*   The inserted field gets the same formatting as the character that **precedes** the insertion position.
+    
+*   At the beginning of the paragraph, the inserted field gets the same formatting as the first existing character.
+    
+*   In empty paragraphs, the inserted field gets the character formatting defined at the paragraph itself.
+    
+*   The attributes passed in the `attrs` property will be merged over the existing attributes.
+    
+
+     
+
+## addTable
+
+Inserts a new table node into the document.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|'addTable'|
+|`start`|[TablePosition](#tableposition)|_required_|The position of the new table. The table will be inserted before a component that is currently located at this position.|
+|`attrs`|[TableAttributeSet](#tableattributeset)|{}|Initial attribute set for the table.|
+|`sizeExceeded`|Object|_none_|If set to an object, the table is too big to be displayed or edited. The object must contain the attributes `rows` and `columns` containing the original row count and column count of the table. To be used for importing documents only, NOT while editing documents.|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+#### Notes
+
+*   The new table will not contain any rows or cells.
+    
+
+
+## addRows
+
+Inserts one or more new rows into a table.
+
+|Property|Data Type|Default Value|Description|Notes|
+|--------|---------|-------------|-----------|-----|
+|`name`|String|_required_|“addRows”||
+|`start`|[TableRowPosition](#tablerowposition)|_required_|The position of the new table row. The row will be inserted before a row that is currently located at this position.||
+|`count`|Integer|1|The number of rows that will be inserted.||
+|`insertDefaultCells`|Boolean|false|If true, empty cells will be inserted into the new row. The number of inserted cells will be equal to the number of columns in the table, as specified by the `tableGrid` attribute of the table.|(1)|
+|`referenceRow`|Integer|_none_|If specified, the zero-based index of the existing row whose cells and their attributes will be cloned (but _without_ the cell contents).|(1)|
+|`attrs`|[TableRowAttributeSet](#tablerowattributeset)|{}|Initial attribute set for the table row.||
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed||
+
+#### Notes
+
+(1) The properties `insertDefaultCells` and `referenceRow` are mutually exclusive.
+
+
+## addCells
+
+Inserts one or more new cells into a table row.
+
+|Property|Data Type|Default Value|Description|Notes|
+|--------|---------|-------------|-----------|-----|
+|`name`|String|_required_|“addCells”||
+|`start`|[TableCellPosition](#tablecellposition)|_required_|The position of the new cell. The cell will be inserted before a cell that is currently located at this position.||
+|`count`|Integer|1|The number of cells that will be inserted.|(1)|
+|`attrs`|[TableCellAttributeSet](#tablecellattributeset)|{}|Initial attribute set for the cell.||
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed||
+
+#### Notes
+
+(1) The resulting number of cells in the row **must not** exceed the number of columns in the table, as specified by the `tableGrid` attribute of the table.
+
+     
+
+## addColumn
+
+Inserts cells for a new column into a table.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“addColumn”|
+|`start`|[TablePosition](#tableposition)|_required_|The position of the table the new column will be inserted into.|
+|`gridPosition`|Integer|_required_|Zero-based column index, according to the `tableGrid` attribute of the table.|
+|`tableGrid`|Integer\[\]|_required_|The complete array of relative widths for the entire table, containing the new entry for the new column. Will be set to the `tableGrid` attribute of the table.|
+|`insertMode`|Enum|“before”|Where to insert the new cells, according to the column index.|
+||“before”|The new cells will be inserted before the existing cells.|
+||
+|“behind”|The new cells will be inserted behind the existing cells.|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+#### Notes
+
+*   As a side effect, this operation changes the `tableGrid` attribute of the parent table.
+    
+
+     
+
+## deleteColumns
+
+Deletes the cells of a single column or multiple columns from a table.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“deleteColumns”|
+|`start`|[TablePosition](#tableposition)|_required_|The position of the table whose columns will be removed.|
+|`startGrid`|Integer|_required_|Zero-based index of the first column to be removed, according to the `tableGrid` attribute of the table.|
+|`endGrid`|Integer|_value of `startGrid`_|Zero-based index of the last column to be removed (closed range). If omitted, only one column will be removed.|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+#### Notes
+
+*   Each cell that is addressed by the specified column range will be removed completely.
+    
+*   As a side effect, this operation changes the `tableGrid` attribute of the parent table.
+    
+
+     
+
+## format
+
+Sets or removes explicit formatting attributes at an arbitrary component in the text document.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“format”|
+|`start`|[TextPosition](#textposition)|_required_|The position of the first component that will be formatted with the specified attributes.|
+|`end`|[TextPosition](#textposition)|_value of `start`_|The position of the last component that will be formatted (closed range). If omitted, this operation addresses a single component.|
+|`attrs`|[AttributeSet](#attributeset)|_required_|The attribute set containing all attributes to be changed. Attributes with a value of `null` will be removed from the component. Attributes not contained in the set remain unmodified.|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+#### Notes
+
+*   Currently, only single components can be formatted, except for text ranges in a paragraph. A text range can include characters, fields, and drawing objects, but must be contained in a single paragraph.
+    
+
+     
+
+## addListStyle
+
+Inserts the definition of a list style into the document. An existing list style with the given name will be replaced.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“insertList”|
+|`listStyleId`|String|_required_|The unique identifier of this list style.|
+|`baseStyleId`|String||The unique identifier of the abstract base list style for this list style.|
+|`listDefinition`|Object|_required_|Definitions for each numbering level, mapped by the property names `listLevel0` to `listLevel8`. See next table for details.|
+
+List definitions per numbering level:
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`textAlign`|Enum|“left”|One of “left”, “right”, “center”, or “justified”.|
+|`numberFormat`|Enum|“none”|One of “none”, “bullet”, “decimal”, “lowerRoman”, “upperRoman”, “lowerLetter”, or “upperLetter”.|
+|`levelStart`|Integer||Start index of the level.|
+|`indentLeft`|Integer|0|Left indent of the numbered paragraph.|
+|`indentFirstLine`|Integer|0|First line indent, negative values represent hanging indents.|
+|`fontName`|String||Font name, typically used for bullet symbols.|
+|`levelText`|String||Formatting text of the label. Bullet symbol for bullet lists, level formats (custom string with one of the placeholders from ”%1” to ”%9”) for numbered lists.|
+|`textStyle`|String||Identifier of the text style that the current numbering level shall be applied to.|
+|`paraStyle`|String||Identifier of the paragraph style that the current numbering level shall be applied to.|
+|`levelPicBulletUri`|String|””|URI of the bullet picture.|
+|`tabStopPosition`|Integer||Tabulator position, in 1/100 of millimeters.|
+|`color`|[Color](#color)|Color.AUTO|Font color of the list label.|
+
+     
+
+## addHeaderFooter
+
+Inserts Header or Footer in the document.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“addHeaderFooter”|
+|`id`|String|_required_|Unique name, which is used as a target for operations belonging to this element|
+|`type`|String|_required_|Should start with “header\_” or “footer\_” to identify is it header or footer|
+
+#### Notes
+
+*   Currently, three types of header/footer are supported:
+    
+
+1.  “header\_default” (“footer\_default”) - default type, used if no other type is defined or available
+    
+2.  “header\_first” (“footer\_first”) - if defined, used only on first page in document. Has bigger priority then “\_default”, and overwrites it.
+    
+3.  “header\_even” (“footer\_even”) - if defined, used on even pages, and overwrites “\_default” type, as it has higher priority. With this type defined, on odd pages, “\_default” type is used.
+    
+
+     
+
+## deleteHeaderFooterContent
+
+Removes header or footer with passed id from the document.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“deletetHeaderFooter”|
+|`id`|String|_required_|Unique identifier, which is used to determine element to be deleted|
+
+     
+
+## addNote
+
+Inserts a new comment into a paragraph.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“addNote”|
+|`start`|[CharacterPosition](#characterposition)|_required_|The position where the new comment will be inserted. The commentRang will be inserted before the character that is currently located at this position.|
+|`id`|String|_required_|Unique name, which is used as a target for operations belonging to this element|
+|`author`|String|””|The author of this comment.|
+|`uid`|String|””|The unique id of the author of this comment (used for picture and meta information of the author).|
+|`date`|String||The creation date of this comment.|
+|`attrs`|CharacterAttributeSet|{}|Attribute set with additional character attributes|
+
+     
+
+## insertRange
+
+Inserts a range object into the document. This ranges can be used for comments or complex fields.
+
+|Property|Type|Default Value|Description|
+|--------|----|-------------|-----------|
+|`name`|String|_required_|“addNoteRange”|
+|`start`|[CharacterPosition](#characterposition)|_required_|The position where the range will be inserted. The range will be inserted before the character that is currently located at this position.|
+|`target`|String|””|Specifies the target position, needs only to be used, if specific document parts like headers or footers are addressed.|
+|`id`|String||Unique name, which is used as a target for addNote operations|
+|`position`|Enum “start”, “end”|“start”|Specifies, if this is a start range marker or an end range marker.|
+|`type`|Enum|_required_|The type of the element using this range marker.|
+||“comment”|The range marker belongs to a comment.|
+||
+|“field”|The range marker belongs to a complex field.|
+|`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes.|
+
+#### Notes
+   
+
+*  ODT: comment range is restricted by the comment node and a corresponding “end” node for the end of the range with the matching id.
+  
+
+     
+
+## documentLayout
+
+Sets default attributes for the document and for various formatting attribute types.
+
+|Property|Type|Default Value|Description|
+|--------|----|-------------|-----------|
+|`name`|String|_required_|“setDocumentAttributes”|
+|`attrs`|[DocumentAttributeSet](#documentattributeset)|_required_|Application dependent attribute set with default attribute values for different attribute types.|
+
+     
+
+## addFontDecl
+
+Inserts an extended description for a specific font which an be used for font substitution algorithms.
+
+|Property|Type|Default Value|Description|
+|--------|----|-------------|-----------|
+|`name`|String|_required_|“addFontDecl”|
+|`fontName`|String|_required_|The font name.|
+|`attrs`|Object|_required_|The font description. Supports the following properties:|
+|Property|Type|Default Value|Description|
+|--------|----|-------------|-----------|
+|`altNames`|Array<String>|\[\]|A list of alternative names for the font.|
+|`family`|String|””|The font family.|
+|`pitch`|Enum|“variable”|The font pitch. Either “fixed” or “variable”.|
+|`panose1`|Array<Integer>|_none_|The font typeface classification number. See [http://en.wikipedia.org/wiki/PANOSE](http://en.wikipedia.org/wiki/PANOSE "http://en.wikipedia.org/wiki/PANOSE").|
+
+     
+
+## addStyle
+
+Inserts a new style with its formatting attributes into the document.
+
+|Property|Type|Default Value|Description|
+|--------|----|-------------|-----------|
+|`name`|String|_required_|“addStyle”|
+|`type`|Enum|_required_|The main attribute type of the style sheet. The supported types are dependent on the application.|
+|`styleId`|String|_required_|The identifier of the new style sheet (must be unique inside the corresponding attribute type).|
+|`styleName`|String|_value of_ `styleId`|The readable name of this style sheet. Must not be set for auto styles. An empty string is an allowed value.|
+|`attrs`|[AttributeSet](#attributeset)|{}|The attribute set with all attributes defined by the style sheet. Must support the attributes of the main attribute type of this operation, may support attributes of other types.|
+|`parent`|String|_none_ (no parent)|The identifier of the parent style sheet that derives formatting attributes to this style sheet. Must be omitted, if the style sheet does not have a parent. Auto styles must refer to their parent style sheet.|
+|`uiPriority`|Integer|0|The priority of the style sheet used to order style sheet in the user interface. The lower the value the higher the priority.|
+|`default`|Boolean|false|Whether this style sheet is the default style sheet of the family. Only one style sheet per family can be the default style sheet.|
+|`hidden`|Boolean|false|Whether the style sheet is hidden in the user interface. Not used for auto-styles which are always hidden implicitly (see property `auto`).|
+|`custom`|Boolean|false|Whether the style sheet has been created at runtime while editing the document. Will be false for built-in style sheets. Not used for auto styles.|
+
+     
+
+## changeStyle
+
+Changes the formatting attributes, and other properties of an existing style. 
+Must not be used for auto styles.
+
+|Property|Type|Default Value|Description|
+|--------|----|-------------|-----------|
+|`name`|String|_required_|“changeStyle”|
+|`type`|Enum|_required_|The main attribute type of the style sheet. The supported types are dependent on the application.|
+|`styleId`|String|_required_|The identifier of the style sheet to be changed. MUST NOT be an auto style (a style sheet with the property `auto` set to true, see operation [addStyle](#addStyle)).|
+|_other_|||Other properties supported by the operation [addStyle](#addStyle) that will be changed in the style sheet. The properties `default` and `auto` cannot be changed.|
+
+     
+
+## deleteStyle
+
+Removes a style from the document. Does not modify any attribute sets of elements that refer to the style sheet.
+
+|Property|Type|Default Value|Description|
+|--------|----|-------------|-----------|
+|`name`|String|_required_|“deleteStyle”|
+|`type`|Enum|_required_|The main attribute type of the style sheet. The supported types are dependent on the application.|
+|`styleId`|String|_required_|The identifier of the style sheet to be removed. MUST NOT be an auto style (a style sheet with the property `auto` set to true, see operation [addStyle](#addStyle)).|
+
+     
+## addDrawing
+
+Inserts a new drawing object into the document. This section describes the generic properties of the `addDrawing` operation.
+
+|Property|Type|Default Value|Description|
+|--------|----|-------------|-----------|
+|`name`|String|_required_|“addDrawing”|
+|`start`|[DrawingPosition](#drawingposition)|_required_|The position of the drawing object.|
+|`type`|Enum|_required_|The type of the drawing contents.|
+||“shape”|The drawing object is a simple or complex shape (line, rectangle, ellipse, custom interactive shape).|
+||
+|“group”|The drawing object is a container for more embedded drawing objects.|
+|“connector”|The drawing object is a connector.|
+|“image”|The drawing object contains an image (bitmap or vector). Additional special attributes of the drawing object will describe the source of the image data.|
+|“diagram”|The drawing object contains a flow diagram consisting of several shapes and connectors.|
+|“chart”|The drawing object is a chart.|
+|“table”|The drawing object is a table (supported only in Presentation).|
+|“ole”|The drawing object contains an OLE object.|
+|“horizontal\_line”|The drawing object is a horizontal separator line between two paragraphs (Text only).|
+|“undefined”|The type of the drawing object is unknown. Applications will show a placeholder frame.|
+|`attrs`|[DrawingAttributeSet](#drawingattributeset)|{}|Initial attribute set for the drawing object.|

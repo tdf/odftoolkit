@@ -103,7 +103,18 @@ h1,h2,h3,h4,h5,h6 {
   margin-top: 2em;
 }
 
-#content h3,h4,h5,h6 {
+#content h3 {
+  font-size: 1.2em;
+  margin-top: 2em;
+}
+
+
+font-size: 140%;
+margin-left: 40px;
+border-bottom: none;
+font-weight: bold;
+
+#content h4,h5,h6 {
   border-bottom: none;
   font-size: 1em;
   margin-bottom: 0;
@@ -156,7 +167,9 @@ h1,h2,h3,h4,h5,h6 {
 
 table {
   border-collapse:collapse;
-  margin: auto;
+  width:95%; 
+  margin-left:0%; 
+  margin-right:5%;
 }
 
 th {

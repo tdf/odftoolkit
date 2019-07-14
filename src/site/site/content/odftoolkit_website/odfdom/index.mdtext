@@ -1,4 +1,4 @@
-Title: ODFDOM - the OpenDocument API
+# ODFDOM - the OpenDocument API
 
 ODFDOM is a free OpenDocument Format (ODF) library. Its purpose is to provide an easy common way to create, access and manipulate ODF files, without requiring detailed knowledge of the ODF specification. It is designed to provide the ODF developer community with an easy lightwork programming API portable to any object-oriented language.
 
@@ -6,8 +6,7 @@ The current reference implementation is written in Java (see [JavaDocs online][2
 
 To learn more about the project's architecture, refer to the [project overview][1] and the [ODFDOM Layers][2] section.
 
-Quickstart
-----------
+## Quickstart
 
 Put the odfdom.jar file in your classpath. You will need [Apache Xerces-J][20] as XML parser and DOM implementation as well. Start with the following sample code to create a simple text document.
 
@@ -20,8 +19,7 @@ Put the odfdom.jar file in your classpath. You will need [Apache Xerces-J][20] a
 
 For information on working with the source code, please refer to [the development section][28].
 
-Documentation
--------------
+## Documentation
 
 A good starting point is reading [the project overview][21] and [the ODFDOM Layers][22] will help you to get an overview over the ODFDOM package structure.
 
@@ -31,8 +29,7 @@ There are [David's ODFDOM tutorials][25]. You'll find an introduction as well as
 
 When meeting with questions, check if [FAQs][26] can help you.
 
-How to Participate
----------
+## How to Participate
 
 There are many ways to participate and we're always looking for contributors. Just on the Apache ODF Toolkit Project and afterwards watch this project. Then you may want to start with reading and posting on the [mailing lists][27] or report bugs or write documentation.
 

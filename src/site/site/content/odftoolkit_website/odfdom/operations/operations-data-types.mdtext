@@ -1,0 +1,557 @@
+# Data Types (Operations)
+
+Property values in operations may consist of complex objects instead of simple values (strings, numbers). The following chapters define the contents of these complex values. The chapter title contains the type name as used in the remaining documentation.
+
+## Position
+
+A value of type _Position_ describes the exact position of a specific component in the document. A position is always an array of non-negative integer values. The exact meaning of the array elements is dependent on the operation, or even on the application that uses a generic operation.
+
+## LineHeight
+
+The total height of a text line, either absolute, or relative to the font size of the text in the line.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`type`|Enum|“percent”|Type of the line height. See table below for details.|
+|`value`|Integer|100|Length value (1/100mm or percent), depending on the `type` property. See table below for details.|
+
+|LineHeight `type`|LineHeight `value`|
+|-----------------|------------------|
+|“percent”|Line height, in percent of the _normal line height_. The normal line height is dependent on the font face and font size (usually somewhere between 110% and 140% of the font size).|
+|“fixed”|Fixed line height, in 1/100 mm.|
+|“leading”|Spacing between lines in 1/100 mm, will be added to 100% line height.|
+|“atLeast”|Fixed minimum line height in 1/100 mm, will be used if larger than 100% line height.|
+
+## TabStop
+
+Defines a tab stop inside a paragraph.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`fillChar`|Enum|“none”|Type of fill character.|
+||“none”|Tab is just empty space.|
+||
+|“dot”|Tab will be filled with dot chars: `. . . . . . . . . . .`|
+|“hyphen”|Tab will be filled with hyphen chars: `- - - - - - - - -`|
+|“underscore”|Tab will be filled with underscore chars `_ _ _ _ _ _ _`|
+|`pos`|Integer|0|Tab stop position in 1/100th mm.|
+|`value`|Enum|“left”|Type of justification for the tab stop.|
+||“left”|Following text is located right of the tab stop (text is left-aligned to the tab stop).|
+||
+|“center”|Following text is located centered around the tab stop.|
+|“right”|Following text is located left of the tab stop (text is right-aligned to the tab stop).|
+|“decimal”|Following text with decimal separator will be aligned so the decimal separator is located at the tab stop position.|
+|“bar”|A vertical line is painted exactly at the position of the tab stop. This position won't change by a text input ⇒ absolute position.|
+|“clear”|Removes a tab stop from the current tab stop list. Can be used to remove a previously defined tab stop in a parent style sheet.|
+
+## DrawingPosition
+
+The position of a drawing object is a [Position](#position) array whose contents are dependent on the document type.
+
+*   See the definition of a [text drawing position](#drawingposition) for text documents in ODT.
+    
+*   See the definition of a [sheet drawing position](#drawingposition) for spreadsheet documents in Spreadsheet.
+    
+
+     
+
+## EmbeddedDrawingPosition
+
+The positions of drawing objects embedded in other drawing objects (supported by groups and charts only) are built by extending the [DrawingPosition](#drawingposition) of the parent drawing object with the zero-based index of the embedded drawing object among all child drawings of the parent drawing object.
+
+*   Example: A group object at position `[0,4]` contains three child objects with the indexes `0`, `1`, and `2`. These child drawing objects are located at the positions `[0,4,0]`, `[0,4,1]`, and `[0,4,2]` then.
+    
+
+Drawing objects can be nested recursively.
+
+*   Example: A group object at position `[0,4]` contains a nested group object at position `[0,4,0]` which contains a chart at position `[0,4,0,0]`.
+    
+
+     
+
+## Color
+
+Description of a color value. Colors may be defined by a simple RGB value, or may refer to scheme colors defined by a document theme (inserted with the [operation "insertTheme"](#inserttheme)).
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`type`|Enum|“auto”|Color type, affects the `value` property. See table below for details.|
+|`value`|String | Object||Color value, depends on `type` property. See table below for details.|
+|`transformations`|Array<[ColorTransformation](#colortransformation)\>|\[\]|Transformations to be applied to the initial color value.|
+|`fallbackValue`|String||6-digits upper-case hexadecimal string (RRGGBB). This color should be used whenever a system is not able to calculate a color value from the type+value+transformation pair. Especially needed by systems which don't support theming or transformations.|
+
+Depending on the color type, the color values have different meanings:
+
+|Color `type`|Color `value` Data Type|Color `value`|Notes|
+|------------|-----------------------|-------------|-----|
+|“rgb”|String|RGB color model, 6-digits upper-case hexadecimal string (RRGGBB).||
+|“hsl”|Object|HSL color model, as object with the properties `h` (hue), `s` (saturation), and `l` (luminance). Hue must be in the interval \[0,21599999\], saturation and luminance must be in the interval \[0,100000\].||
+|“crgb”|Object|CRGB color model, each color channel as percentage, as object with the properties `r` (red), `g` (green), and `b` (blue). Each value must be in the interval \[0,100000\].|(1)|
+|“scheme”|String|Case-sensitive scheme color name from current theme.||
+|“system”|String|Name of a system color. The effective color value depends on the environment.||
+|“preset”|String|Name of a predefined color.||
+|“auto”|_Not used_|The effective color value depends on the context.||
+|Text characters|May depend on the current background color (character/paragraph) which must be calculated by the client, therefore the backend should NOT set any fixed color here.||
+|Border lines|Usually black. May be a different color, e.g. in spreadsheet documents where the automatic border color equals the grid line color.||
+|Background fill|Usually transparent, or any predefined color or calculated color depending on the context, e.g. in chart objects.||
+
+**Notes:**
+
+1) The CRGB color model uses linear values for the color channels (without gamma correction). When converting from CRGB color model to RGB or HSL color model, a `gamma` transformation (see [ColorTransformation](#colortransformation)) must be applied implicitly to the resulting color.
+
+The following constants will be used in this documentation:
+
+|Constant Name|Definition|
+|-------------|----------|
+|Color.AUTO|{type:“auto”}|
+
+     
+
+## ColorTransformation
+
+Color transformations are contained in [Color](#color) values, and modify the base color defined by the color value. Each transformation object contains the following properties:
+
+|Property|Type|Default|Description|
+|--------|----|-------|-----------|
+|`type`|Enum [ColorTransformationType](#colortransformationtype)|_required_|Type of the color transformation.|
+|`value`|Integer|0|Value, depends on the transformation `type` attribute. See [ColorTransformationType](#colortransformationtype) for details.|
+
+     
+
+## ColorTransformationType
+
+Specifies how to transform a given color. The following variables will be used in the following descriptions:
+
+|Variable|Value Range|Description|
+|--------|-----------|-----------|
+|R|\[0,100000\]|Red channel (RGB color model).|
+|G|\[0,100000\]|Green channel (RGB color model).|
+|B|\[0,100000\]|Blue channel (RGB color model).|
+|H|\[0,21599999\]|Hue channel (HSL color model). 0: red (0deg); 7200000: green (120deg); 14400000: blue (240deg).|
+|S|\[0,100000\]|Saturation channel (HSL color model). 0: gray; 100000: full color.|
+|L|\[0,100000\]|Luminance channel (HSL color model). 0: black; 50000: color; 100000: white.|
+|A|\[0,100000\]|Opacity (alpha channel). 0: transparent; 100000: opaque.|
+
+The following table will describe how to modify the components of the color for each transformation type:
+
+|Enum Value|Value Range|Value Description|Color Model|Implementation Notes|Notes|
+|----------|-----------|-----------------|-----------|--------------------|-----|
+|“alpha”|\[0,100000\]|Sets the opaqueness of the color. By default, the color is fully opaque. 0: transparent; 100000: opaque.|RGB/HSL|Anew = value||
+|“alphaMod”|\[0,\*\]|Modulates the opaqueness of the color. The value 100000 leaves opacity unmodified.|RGB/HSL|Anew = A \* (value/100000), result restricted to interval \[0,100000\]||
+|“alphaOff”|\[-100000,100000\]|Shifts the opaqueness of the color. The value 0 leaves opacity unmodified.|RGB/HSL|Anew = A + value, result restricted to interval \[0,100000\]||
+|“red”|\[0,100000\]|Sets the red channel of the color.|RGB|Rnew = value||
+|“redMod”|\[0,\*\]|Modulates the red channel of the color. The value 100000 leaves the channel unmodified.|RGB|Rnew = R \* (value/100000), result restricted to interval \[0,100000\]||
+|“redOff”|\[-100000,100000\]|Shifts the red channel of the color. The value 0 leaves the channel unmodified.|RGB|Rnew = R + value, result restricted to interval \[0,100000\]||
+|“green”|\[0,100000\]|Sets the green channel of the color.|RGB|Gnew = value||
+|“greenMod”|\[0,\*\]|Modulates the green channel of the color. The value 100000 leaves the channel unmodified.|RGB|Gnew = G + value, result restricted to interval \[0,100000\]||
+|“greenOff”|\[-100000,100000\]|Shifts the green channel of the color. The value 0 leaves the channel unmodified.|RGB|Gnew = G + value, result restricted to interval \[0,100000\]||
+|“blue”|\[0,100000\]|Sets the green channel of the color.|RGB|Gnew = value||
+|“blueMod”|\[0,\*\]|Modulates the blue channel of the color. The value 100000 leaves the channel unmodified.|RGB|Bnew = B \* (value/100000), result restricted to interval \[0,100000\]||
+|“blueOff”|\[-100000,100000\]|Shifts the blue channel of the color. The value 0 leaves the channel unmodified.|RGB|Bnew = B + value, result restricted to interval \[0,100000\]||
+|“hue”|\[0,21599999\]|Sets the hue channel of the color.|HSL|Hnew = value||
+|“hueMod”|\[0,\*\]|Modulates the hue channel of the color. The value 100000 leaves the channel unmodified.|HSL|Hnew = H \* (value/100000), result restricted to interval \[0,21599999\]||
+|“hueOff”|\[-21599999,21599999\]|Shifts the hue channel of the color. The value 0 leaves the channel unmodified.|HSL|Hnew = H + value, result restricted to interval \[0,21599999\]||
+|“sat”|\[0,100000\]|Sets the saturation channel of the color.|HSL|Snew = value||
+|“satMod”|\[0,\*\]|Modulates the saturation channel of the color. The value 100000 leaves the channel unmodified.|HSL|Snew = S \* (value/100000), result restricted to interval \[0,100000\]||
+|“satOff”|\[-100000,100000\]|Shifts the saturation channel of the color. The value 0 leaves the channel unmodified.|HSL|Snew = S + value, result restricted to interval \[0,100000\]||
+|“lum”|\[0,100000\]|Sets the luminance channel of the color.|HSL|Lnew = value|(1)|
+|“lumMod”|\[0,\*\]|Modulates the luminance channel of the color. The value 100000 leaves the channel unmodified.|HSL|Lnew = L \* (value/100000), result restricted to interval \[0,100000\]|(1)|
+|“lumOff”|\[-100000,100000\]|Shifts the luminance channel of the color. The value 0 leaves the channel unmodified.|HSL|Lnew = L + value, result restricted to interval \[0,100000\]|(1)|
+|“shade”|\[0,100000\]|Darkens the color. 0: black; 100000: original color.|RGB|RGBnew = RGB \* (value/100000)|(2)|
+|“tint”|\[0,100000\]|Lightens the color. 0: white; 100000: original color.|RGB|RGBnew = (RGB-100000) \* (value/100000) + 100000|(2)|
+|“comp”|_not used_|Complement color (rotate hue by 180 degrees).|HSL|Hnew = (H + 10800000) mod 21600000||
+|“inv”|_not used_|Inverse color (color channels inversed).|RGB|RGBnew = 100000 - RGB|(2)|
+|“gamma”|_not used_|Gamma correction (increases luminance of medium light colors).|RGB|RGBnew = (RGB/100000)1/2.27 \* 100000|(2)|
+|“invGamma”|_not used_|Inversed gamma correction (decreases luminance of medium light colors).|RGB|RGBnew = (RGB/100000)2.27 \* 100000|(2)|
+|“gray”|_not used_|Monochrome color.|RGB|RGBnew = 0.22 \* R + 0.72 \* G + 0.06 \* B|(2)|
+
+### Notes
+
+(1) If a luminance transformation results in the luminance values 0 or 100000, additionally the saturation of the color must be set to 0.
+
+(2) Must be applied to all three color channels R, G, and B.
+
+     
+
+## ColorStop
+
+Description of a \`ColorStop\` value as it is be used by [\`Gradient\` data types](#gradient). A \`ColorStop\` represents the interpolation end point of/between 2 colors.
+
+|Property|Type|Default|Description|
+|--------|----|-------|-----------|
+|`position`|Double|0|Per-cent ratio-range of distance values from (including) 0 to 1, representing values from 0% to 100%.|
+|`color`|[Color](#color)||Color value of the current interpolation's end point.|
+
+     
+
+## Gradient
+
+Description of a color gradient. A color gradient is the transition in between at least 2 [colors](#color).
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`type`|Enum|“linear”|Specifies one of the two possible gradient-fill main-types:|
+||“linear”|This gradient fill is of gradient type “linear”. Linear gradient type means that the transition from one color to the next is along a line (e.g. horizontal, vertical, diagonal, etc.).|
+||
+|“path”|This gradient fill is of gradient type “path”. Path gradient type means the that the boundary of transition from one color to the next is defined by e.g. a circle, a rectangle or a freely formed shape.|
+|`pathType`|Enum|“shape”|Specifies one of the 3 possible gradient-fill path sub-types:|
+||“circle”|same as pathType=“rect”|
+||
+|“rect”|The gradient follows a rectangular path. This rectangular “path” sub-type is defined by its 4 additional edge attributes “top”, “bottom”, “left” and “right” describing the shading rectangle for a centered gradient relatively to the fill tile rectangle. Thus the shade does fill the entire tile except for the margins specified by those edge attributes. Each edge of the center shade rectangle is defined by a percentage offset from the corresponding edge of the tile rectangle. A positive percentage specifies an inset, while a negative percentage specifies an outset.|
+||“shape”|The gradient follows its shape.|
+||
+|`left`|Double|0|Values from (including) -1 to 1. Specifies in percentage format (from the left to the right) the position of the left edge of the center shade rectangle. 0 targets the left edge of this rectangle whereas 1 targets its right edge.|
+|`right`|Double|0|Values from (including) -1 to 1. Specifies in percentage format (from the right to the left) the position of the right edge of the center shade rectangle. 0 targets the right edge of this rectangle whereas 1 targets its left edge.|
+|`top`|Double|0|Values from (including) -1 to 1. Specifies in percentage format (from the top to the bottom) the position of the top edge of the center shade rectangle. 0 targets the top edge of this rectangle whereas 1 targets its bottom edge.|
+|`bottom`|Double|0|Values from (including) -1 to 1. Specifies in percentage format (from the bottom to the top) the position of the bottom edge of the center shade rectangle. 0 targets the bottom edge of this rectangle whereas 1 targets its top edge.|
+|`pathFillLeft`|Double|0.5|Values from (including) -1 to 1. Specifies in percentage format (from the left to the right) the position of the left edge of the center shade rectangle. 0 targets the left edge of this rectangle whereas 1 targets its right edge.|
+|`pathFillRight`|Double|0.5|Values from (including) -1 to 1. Specifies in percentage format (from the right to the left) the position of the right edge of the center shade rectangle. 0 targets the right edge of this rectangle whereas 1 targets its left edge.|
+|`pathFillTop`|Double|0.5|Values from (including) -1 to 1. Specifies in percentage format (from the top to the bottom) the position of the top edge of the center shade rectangle. 0 targets the top edge of this rectangle whereas 1 targets its bottom edge.|
+|`pathFillBottom`|Double|0.5|Values from (including) -1 to 1. Specifies in percentage format (from the bottom to the top) the position of the bottom edge of the center shade rectangle. 0 targets the bottom edge of this rectangle whereas 1 targets its top edge.|
+|`rotation`|Double|0|Specifies the direction of color change for the gradient (indicating its orientation - e.g. vertical, horizontal, diagonal). A floating number range with values from (including) 0 to (excluding) 360.|
+|`isRotateWithShape`|Boolean|false|A flag that indicates whether a gradient will rotate with its shape.|
+|`isScaled`|Boolean|false|Specifies whether a gradient angle scales with the fill region or not.|
+|`flipH`|Boolean|false|Specifies if the gradient is mirrored horrizontally.|
+|`flipV`|Boolean|false|Specifies if the gradient is mirrored vertically.|
+|`colorStops`|Array<[ColorStop](#colorstop)\>|\[\]|A list of [color stops](#colorstop) specifying the distribution of colors along the gradient.|
+
+     
+
+## Tiling
+
+Description of a bitmap tiling.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`rectAlignment`|Enum|“topLeft”||“topLeft”|The tile is top left aligned.|
+||
+||“top”|The tile is top aligned.|
+||
+|“topRight”|The tile is top right aligned.|
+|“left”|The tile is left aligned.|
+|“center”|The tile is center aligned.|
+|“right”|The tile is right aligned.|
+|“bottomLeft”|The tile is bottom left aligned.|
+|“bottom”|The tile is bottom aligned.|
+|“bottomRight”|The tile is bottom right aligned.|
+|`flipMode`|Enum|“none”|The flip mode of the tiling, “x”, “xy”, “y” and “none” is possible.|
+|`stretchX`|percentage|100%|Specifies the amount in percent horizontally scaling the tile.|
+|`stretchY`|percentage|100%|Specifies the amount in percent vertically scaling the tile.|
+|`offX`|Integer|0|Specifies additional horizontal offset in 1/100mm after alignment.|
+|`offY`|Integer|0|Specifies additional vertical offset in 1/100mm after alignment.|
+
+     
+
+## Stretching
+
+Description of a bitmap fill for backgrounds and outlines of drawing objects.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`left`|percentage|0|Left offset of the source rectangle in percent.|
+|`top`|percentage|0|Top offset of the source rectangle in percent.|
+|`right`|percentage|0|Right offset of the source rectangle in percent.|
+|`bottom`|percentage|0|Bottom offset of the source rectangle in percent.|
+
+     
+
+## StretchingAligned
+
+ODF only… Description of a bitmap fill for backgrounds and outlines of drawing objects.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`rectAlignment`|enum|`center`|Specifies the alignment of the bitmap, the alignment can be “bottom”, “bottomLeft”, “bottomRight”, “center”, “left”, “right”, “top”, “topLeft” or “topRight”.|
+|`width`|Number|0|Specifies the width of the bitmap, if 0 then the original width has to be used.|
+|`height`|Number|0|Specifies the height of the bitmap, if 0 then the original height has to be used.|
+|`scaleX`|percentage|100|Specifies the x scaling of the bitmap.|
+|`scaleY`|percentage|100|Specifies the y scaling of the bitmap.|
+
+     
+
+## Bitmap
+
+Description of a bitmap fill for backgrounds and outlines of drawing objects.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`imageUrl`|String|””|The URL of the image source for the fill bitmap.|
+|`transparency`|Number|0|The transparency. A value of 1 means that the bitmap is fully transparent.|
+|`rotateWithShape`|Boolean|false|Specifies if the filling rotates with the shape.|
+|`tiling`|[Tiling](#tiling)||If set it specifies the tiling of the bitmap. A bitmap can either be tiled or stretched but not both.|
+|`stretching`|[Stretching](#stretching)||If set it specifies the stretching of the bitmap. A bitmap can either be tiled or stretched but not both.|
+|`stretchingAligned`|[StretchingAligned](#stretchingaligned)||ODF only, If set it specifies the stretching of the bitmap. A bitmap can either be tiled, stretched or stretchingAligned.|
+|`cropLeft`|Number|0|all|
+|`cropTop`|Number|0|all|
+|`cropRight`|Number|0|all|
+|`cropBottom`|Number|0|all|
+
+     
+
+## Pattern
+
+An enumeration for all preset pattern styles that can be used as background or outline for a drawing object.
+
+|Enum Value|Description|
+|----------|-----------|
+|“cross”|Thin horizontally/vertically crossing lines.|
+|“dashDnDiag”|Thin dashed diagonal lines (top-left to bottom-right).|
+|“dashHorz”|Thin dashed horizontal lines.|
+|“dashUpDiag”|Thin dashed diagonal lines (bottom-left to top-right).|
+|“dashVert”|Thin dashed vertical lines.|
+|“diagBrick”|Diagonal brick pattern.|
+|“diagCross”|Thin diagonally crossing lines.|
+|“divot”|Divot pattern.|
+|“dkDnDiag”|Thick narrow diagonal lines (top-left to bottom-right).|
+|“dkHorz”|Thick narrow horizontal lines.|
+|“dkUpDiag”|Thick narrow diagonal lines (bottom-left to top-right).|
+|“dkVert”|Thick narrow vertical lines.|
+|“dnDiag”|Thin diagonal lines (top-left to bottom-right).|
+|“dotDmnd”|Thin dotted diagonally crossing lines.|
+|“dotGrid”|Thin dotted horizontally/vertically crossing lines.|
+|“horz”|Thin horizontal lines.|
+|“horzBrick”|Horizontal brick pattern.|
+|“lgCheck”|Large checker board pattern.|
+|“lgConfetti”|Large unordered dots.|
+|“lgGrid”|Thin horizontally/vertically crossing lines.|
+|“ltDnDiag”|Thin narrow diagonal lines (top-left to bottom-right).|
+|“ltHorz”|Thin narrow horizontal lines.|
+|“ltUpDiag”|Thin narrow diagonal lines (bottom-left to top-right).|
+|“ltVert”|Thin narrow vertical lines.|
+|“narHorz”|Thin very narrow horizontal lines.|
+|“narVert”|Thin very narrow vertical lines.|
+|“none”|Transparent pattern (background color only).|
+|“openDmnd”|Thin diagonally crossing lines.|
+|“pct10”|Dither pattern 10%.|
+|“pct20”|Dither pattern 20%.|
+|“pct25”|Dither pattern 25%.|
+|“pct30”|Dither pattern 30%.|
+|“pct40”|Dither pattern 40%.|
+|“pct5”|Dither pattern 5%.|
+|“pct50”|Dither pattern 50%.|
+|“pct60”|Dither pattern 60%.|
+|“pct70”|Dither pattern 70%.|
+|“pct75”|Dither pattern 75%.|
+|“pct80”|Dither pattern 80%.|
+|“pct90”|Dither pattern 90%.|
+|“plaid”|Plaid pattern.|
+|“shingle”|Shingle pattern.|
+|“smCheck”|Small checker board pattern.|
+|“smConfetti”|Small unordered dots.|
+|“smGrid”|Thin narrow horizontally/vertically crossing lines.|
+|“solid”|Solid pattern (foreground color only).|
+|“solidDmnd”|Large solid diamond pattern.|
+|“sphere”|Sphere pattern.|
+|“trellis”|Narrow trellis pattern.|
+|“upDiag”|Thin diagonal lines (bottom-left to top-right).|
+|“vert”|Thin vertical lines.|
+|“wave”|Wave lines.|
+|“wdDnDiag”|Thick diagonal lines (top-left to bottom-right).|
+|“wdUpDiag”|Thick diagonal lines (bottom-left to top-right).|
+|“weave”|Weave pattern.|
+|“zigZag”|Zig zag lines.|
+
+     
+
+## Border
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`style`|Enum|“none”|Border line style.|
+||“none”|No line.|
+||
+|“single”|Solid single line.|
+|“double”|Solid double line.|
+|“dotted”|Dotted single line.|
+|“dashed”|Dashed single line.|
+|“dashDot”|Dash-dotted single line.|
+|“dashDotDot”|Dash-dot-dotted single line.|
+|`width`|Integer|0|Width of the border line. Not used if the `style` attribute equals “none”.|
+|`color`|[Color](#color)|Color.AUTO|Color of the border line. Not used if the `style` attribute equals “none”.|
+|`space`|Integer|0|Distance of the border line to the content (ATM paragraph only).|
+
+The following constants will be used in this documentation:
+
+|Constant Name|Definition|
+|-------------|----------|
+|Border.NONE|{style:“none”}|
+
+     
+
+## SourceLink
+
+A generic description of a source data sequence used by a specific object, e.g. a chart data series, or a drawing object with linked text contents.
+
+The data type of the source link denotes the kind of source data.
+
+|Data Type|Description|Example|
+|---------|-----------|-------|
+|Array|An array of constant values (numbers or strings).|\[“data”, 1, 2, 3, 4\]|
+|String|Application-dependent descriptor for the linked source data.||
+|Text|_not supported_||
+|Spreadsheet|A formula expression that evaluates to one or more cell ranges containing the source data.|“Sheet1!$A$2:$A$100”|
+|Presentation|_not supported_||
+
+     
+
+## GeometryConstant
+
+This is a list of constant values that might be used within GeometryPoints and or Geometry Guides
+
+|Constant|Description|
+|--------|-----------|
+|`3cd4`|3 x 360° / 4 = 270°|
+|`3cd8`|3 x 360° / 8 = 135°|
+|`5cd8`|5 x 360° / 8 = 225°|
+|`7cd8`|7 x 360° / 8 = 315°|
+|`b`|bottom|
+|`cd2`|360° / 2 = 180°|
+|`cd4`|360° / 4 = 90°|
+|`cd8`|360° / 8 = 45°|
+|`hc`|horizontal center|
+|`h`|height|
+|`hd2`|height / 2|
+|`hd3`|height / 3|
+|`hd4`|height / 4|
+|`hd5`|height / 5|
+|`hd6`|height / 6|
+|`hd8`|height / 8|
+|`l`|left|
+|`ls`|long side|
+|`r`|right|
+|`ss`|short side|
+|`ssd2`|short side / 2|
+|`ssd4`|short side / 4|
+|`ssd6`|short side / 6|
+|`ssd8`|short side / 8|
+|`ssd16`|short side / 16|
+|`ssd32`|short side / 32|
+|`t`|top|
+|`vc`|vertical center|
+|`w`|width|
+|`wd2`|width / 2|
+|`wd4`|width / 4|
+|`wd5`|width / 5|
+|`wd6`|width / 6|
+|`wd8`|width / 8|
+|`wd10`|width / 10|
+|`wd32`|width / 32|
+
+     
+
+## GeometryPoint
+
+This object spezifies a point that is used within this geometry.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`x`|Integer | String|_required_|specifies the x position of this point|
+|`y`|Integer | String|_required_|specifies the y position of this point|
+
+     
+
+## GeometryGuide
+
+A guide that can be referenced from paths and text rectangles.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String||The name of this guide. This name can be used within formulas and pathes to reference the corresponding formula value.|
+|`op`|String||The operation that should be executed.|
+|`p0`|Integer | String||The first parameter of this guide.|
+|`p1`|Integer | String||The second parameter of this guide.|
+|`p2`|Integer | String||The third parameter of this guide.|
+
+     
+
+## GeometryConnectionPoint
+
+A connection point that can be referenced by connector objects.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`x`|Integer | String||This attribute specifies the x position of the connection point.|
+|`y`|Integer | String||This attribute specifies the y position of the connection point.|
+|`ang`|Integer | String||This attribute specifies the angle the connector should leave the connected point.|
+
+     
+
+## GeometryAdjustmentHandle
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`type`|Enumeration||the type can be “xy” or “polar”|
+|`x`|Integer | String||This attribute specifies the x position of the adjustment handle. The allowed adjustment of this adjust value is specified via corresponding its min and max limitations.|
+|`y`|Integer | String||This attribute specifies the y position of the adjustment handle. The allowed adjustment of this adjust value is specified via corresponding its min and max limitations.|
+|The following attributes are available if the type is “xy”|
+|`gdRefX`|String||Specifies the name of the guide that is updated with the adjustment x position from this adjust handle.|
+|`minX`|Integer | String||Specifies the minimum horizontal position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move in the y direction. That is the maxY and minY are equal.|
+|`maxX`|Integer | String||Specifies the maximum horizontal position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move in the x direction. That is the maxX and minX are equal.|
+|`gdRefY`|String||Specifies the name of the guide that is updated with the adjustment y position from this adjust handle|
+|`minY`|Integer | String||Specifies the minimum vertical position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move in the y direction. That is the maxY and minY are equal.|
+|`maxY`|Integer | String||Specifies the maximum vertical position that is allowed for this adjustment handle. If this attribute is omitted, then it is assume that this adjust handle cannot move in the y direction. That is the maxY and minY are equal.|
+|The following attributes are available if the type is “polar”|
+|`gdRefR`|String||Specifies the name of the guide that is updated with the adjustment radius from this adjust handle|
+|`minR`|Integer | String||Specifies the minimum radial position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move radially. That is the maxR and minR are equal.|
+|`maxR`|Integer | String||Specifies the maximum radial position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move radially. That is the maxR and minR are equal.|
+|`gdRefAng`|String||Specifies the maximum angle position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move angulary. That is the maxAng and minAng are equal.|
+|`minAng`|Integer | String||Specifies the minimum angle position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move angularly. That is the maxAng and minAng are equal.|
+|`maxAng`|Integer | String||Specifies the maximum angle position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move angularly. That is the maxAng and minAng are equal.|
+
+     
+
+## GeometryCommand
+
+|Attribute|Data Type|Default Value|Application|Description|
+|---------|---------|-------------|-----------|-----------|
+|`c`|Enum|“moveTo”|all|The command that is to be used. Attributes that are allowed within this GeometryCommand depends to this value.|
+||“moveTo”|The current position is set to x,y|
+||
+|“lineTo”|A line is drawn from the current position to x,y|
+|“arcTo”|An arc is drawn from the current position. hr, wr, stAng and swAng are allowed properties|
+|“close”|The current path is closed by drawing a line to current point to the start point of this path|
+|“quadBezierTo”|One or more quadratic beziers are drawn to the points of the pts array|
+|“cubicBezierTo”|One or more cubic beziers are drawn to the points of the pts array. One cubic bezier point needs three points, the first two are control points, the third is the ending point.|
+|`x`|Integer | String||all|specifies the x position|
+|`y`|Integer | String||all|specifies the y position|
+|`hr`|Integer | String||all|specifies the arc height radius|
+|`wr`|Integer | String||all|specifies the arc width radius|
+|`stAng`|Integer | String||all|this attribute specifies the start angle of this arc|
+|`swAng`|Integer | String||all|this attribute specifies the swing angle of this arc|
+|`pts`|Array<[GeometryPoint](#geometrypoint)\>||all|attribute defines an array of points the beziers have to be drawn to|
+
+     
+
+## GeometryPath
+
+Specifies the path of a shape, the pathList of the geometry is referencing an array of this GeometryPath object for this purpose.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`fillMode`|Enum|“norm”|Specifies how the path is filled|
+|“norm”|the path is drawn with fill color|
+|“none”|the path is drawn without fill|
+|“lighten”|the path is drawn with a lightly shaded fill color|
+|“lightenLess”|the path is drawn with a slightly lighter shaded fill color|
+|“darken”|the path is drawn with a darker shaded color fill color|
+|“darkenLess”|the path is drawn with a slightly darker shaded fill color|
+|`width`|Integer|||
+|`height`|Integer|||
+|`lineSelection`|Boolean|false|specifies if a 2 point selection has to used (first path onlöy)|
+|`isStroke`|Boolean|true|specifies if the path is drawn using the current lineStyle|
+|`isExtrusionOk`|Boolean|false|specifies if this path is allowed to be drawn in 3d|
+|`commands`|Array<[GeometryCommand](#geometrycommand)\>||Specifies the commands to be used to draw this path.|
+
+     
+
+## GeometryTextRect
+
+This object specifies the text rectangle that is to be used.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`l`|String | Number||specifies the left border|
+|`t`|String | Number||specifies the top border|
+|`r`|String | Number||specifies the right border|
+|`b`|String | Number||specifies the bottom border|
+

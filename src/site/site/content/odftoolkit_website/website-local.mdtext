@@ -42,7 +42,7 @@ NOTE: The Apache CMS [3] bundled within the site directory depends on old librar
 
     sudo apt-get install -y python2.7-elementtree
     sudo apt install python-pip
-    python -m pip install "Markdown<2.6.0"
+    python -m pip install "Markdown==2.6.11"
     python -m pip install "Pygments==2.2.0"
 
 ### Download the repo 

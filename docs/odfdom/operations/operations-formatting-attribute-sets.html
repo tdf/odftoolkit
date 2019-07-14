@@ -1,0 +1,930 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE- 2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+  <link href="../../css/odf.css" rel="stylesheet" type="text/css">
+  
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28945571-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+
+<body>
+
+  <div id="banner">
+    <!--
+    <div id="bannerright"><a alt="Apache Incubator" href="http://incubator.apache.org">
+      <img id="asf-logo" alt="Apache Incubator" src="../../images/apache-incubator-logo.png"/></a></div>
+    <div id="bannercenter"><br/>&nbsp;&nbsp;&nbsp;&nbsp;Apache ODF Toolkit (incubating)</div>
+    -->
+    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
+        <img id="tdf-logo" class="w350" alt="The Document Foundation"
+          src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
+  </div>
+  <div id="clear"></div>
+  
+  <div id="sidenav">
+    <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="../../index.html">About</a></li>
+<li><a href="../../downloads.html">Downloads</a></li>
+</ul>
+<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="../../odfdom/index.html">ODFDOM</a></li>
+<li><a href="../../simple/index.html">Simple API (deprecated)</a></li>
+<li><a href="../../conformance/ODFValidator.html">ODF Validator</a></li>
+<li><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
+</ul>
+<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="../../get-involved.html">Get Involved</a></li>
+<li><a href="../../mailing-lists.html">Mailing Lists</a></li>
+<li><a href="../../people.html">People</a></li>
+<li><a href="../../community-faqs.html">Community FAQs</a></li>
+</ul>
+<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="../../source.html">Source Code</a></li>
+<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
+<li><a href="../../api/" target="_blank">JavaDoc</a></li>
+<li><a href="../../website-local.html">Website</a></li>
+<li><a href="../../developer-faqs.html">Developer FAQs</a></li>
+</ul>
+<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
+</ul>
+  </div>
+  <div id="contenta">
+    
+      
+      <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<h1 id="formatting-attribute-sets-operations">Formatting Attribute Sets (Operations)<a class="headerlink" href="#formatting-attribute-sets-operations" title="Permanent link">&para;</a></h1>
+<h2 id="style-support">Style Support<a class="headerlink" href="#style-support" title="Permanent link">&para;</a></h2>
+<p>Text applications support styles  of type <code>page</code>, <code>drawing</code>, <code>character</code>, <code>paragraph</code>, and <code>table</code>.</p>
+<p>All operations that set formatting attributes will contain <em>attribute sets</em>. These attribute sets contain sub-objects with attributes and are mapped by attribute type. Additionally, an attribute set may contain the identifier of a style sheet referenced by a component in the document.</p>
+<p>The attribute types supported by an attribute set are dependent on the operation containing the attribute set. An attribute set will always be carried in the <code>attrs</code> property of the operation.</p>
+<p>Example: A paragraph in a text document may contain paragraph attributes, character attributes, and a reference to a paragraph style sheet. The attribute set is an object containing up to two maps with attributes:</p>
+<p>attrs: {
+                                        styleId: "Normal",
+                                        paragraph: {
+                                        alignment: "right",
+                                        ...
+                                        },
+                                        character: {
+                                        fontSize: 12,
+                                        ...
+                                        }
+                                    }</p>
+<h2 id="attributeset">AttributeSet<a class="headerlink" href="#attributeset" title="Permanent link">&para;</a></h2>
+<p>The generic definition of an attribute set.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>styleId</code></td>
+<td>String</td>
+<td>”” (no style sheet)</td>
+<td>Reference to the style sheet defined by an <a href="#insertstylesheet">insertStyleSheet</a> operation. MUST NOT be used in attribute sets of <a href="#insertstylesheet">insertStyleSheet</a> operations.</td>
+</tr>
+<tr>
+<td><em>type1</em></td>
+<td>Object</td>
+<td></td>
+<td>Map with formatting attributes supported by the attribute <em>type1</em>.</td>
+</tr>
+<tr>
+<td><em>type2</em></td>
+<td>Object</td>
+<td></td>
+<td>Map with formatting attributes supported by the attribute <em>type2</em>.</td>
+</tr>
+<tr>
+<td>…</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="characterattributeset">CharacterAttributeSet<a class="headerlink" href="#characterattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|Text|
+|------------|
+|Attribute types|<code>character</code>|
+|---------------|
+|Operations|<a href="#setdocumentattributes">setDocumentAttributes</a>, <a href="#addStyle">addStyle</a>, <a href="#format">format</a>, <a href="#addText">addText</a>, <a href="#addTab">addTab</a>, <a href="#addHardBreak">addHardBreak</a>, <a href="#addField">addField</a>|
+|----------|</p>
+<p>Contains attributes for <code>character</code> style sheets and text spans, in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>styleId</code></td>
+<td>String</td>
+<td><em>none</em></td>
+<td>Identifier of a character style sheet inserted with an <a href="#addStyle">addStyle</a> operation.</td>
+</tr>
+<tr>
+<td><code>character</code></td>
+<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td></td>
+<td>Character formatting attributes.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="paragraphattributeset">ParagraphAttributeSet<a class="headerlink" href="#paragraphattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|Text|
+|------------|
+|Attribute types|<code>paragraph</code>, <code>character</code>|
+|---------------|
+|Operations|<a href="#setdocumentattributes">setDocumentAttributes</a>, <a href="#addStyle">addStyle</a>, <a href="#format">format</a>, <a href="#addParagraph">addParagraph</a>|
+|----------|</p>
+<p>Contains attributes for <code>paragraph</code> style sheets and paragraph elements, in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>styleId</code></td>
+<td>String</td>
+<td><em>none</em></td>
+<td>Identifier of a paragraph style sheet inserted with an <a href="#addStyle">addStyle</a> operation.</td>
+</tr>
+<tr>
+<td><code>paragraph</code></td>
+<td><a href="#paragraphattributes">ParagraphAttributes</a></td>
+<td></td>
+<td>Paragraph formatting attributes.</td>
+</tr>
+<tr>
+<td><code>character</code></td>
+<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td></td>
+<td>Character formatting attributes.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tableattributeset">TableAttributeSet<a class="headerlink" href="#tableattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|Text|
+|------------|
+|Attribute types|<code>table</code>, <code>row</code>, <code>cell</code>, <code>paragraph</code>, <code>character</code>|
+|---------------|
+|Operations|<a href="#format">format</a>, <a href="#addTable">addTable</a>|
+|----------|</p>
+<p>Contains attributes for table elements (<strong>not</strong> table style sheets, see <a href="#tablestylesheetattributeset">TableStyleSheetAttributeSet</a>), in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>styleId</code></td>
+<td>String</td>
+<td><em>none</em></td>
+<td>Identifier of a table style sheet inserted with an <a href="#addStyle">addStyle</a> operation.</td>
+</tr>
+<tr>
+<td><code>stripsetSize</code></td>
+<td>Integer</td>
+<td>1</td>
+<td>Table formatting attributes.</td>
+</tr>
+<tr>
+<td><code>table</code></td>
+<td><a href="#tableattributes">TableAttributes</a></td>
+<td></td>
+<td>Table formatting attributes.</td>
+</tr>
+<tr>
+<td><code>row</code></td>
+<td><a href="#tablerowattributes">TableRowAttributes</a></td>
+<td></td>
+<td>Table Row formatting attributes.</td>
+</tr>
+<tr>
+<td><code>cell</code></td>
+<td><a href="#tablecellattributes">TableCellAttributes</a></td>
+<td></td>
+<td>Table Cell formatting attributes.</td>
+</tr>
+<tr>
+<td><code>paragraph</code></td>
+<td><a href="#paragraphattributes">ParagraphAttributes</a></td>
+<td></td>
+<td>Paragraph formatting attributes.</td>
+</tr>
+<tr>
+<td><code>character</code></td>
+<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td></td>
+<td>Character formatting attributes.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tablestylesheetattributeset">TableStyleSheetAttributeSet<a class="headerlink" href="#tablestylesheetattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|Text|
+|------------|
+|Operations|<a href="#addStyle">addStyle</a>|
+|----------|</p>
+<p>Contains attributes for <code>table</code> style sheets (<strong>not</strong> table elements, see <a href="#tableattributeset">TableAttributeSet</a>), in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wholeTable</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Table attribute set for the entire table.</td>
+</tr>
+<tr>
+<td><code>firstRow</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Table attribute set for the top row.</td>
+</tr>
+<tr>
+<td><code>lastRow</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Table attribute set for the bottom row.</td>
+</tr>
+<tr>
+<td><code>firstCol</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Table attribute set for the left column.</td>
+</tr>
+<tr>
+<td><code>lastCol</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Table attribute set for the right column.</td>
+</tr>
+<tr>
+<td><code>band1Vert</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Table attribute set for the odd inner columns.</td>
+</tr>
+<tr>
+<td><code>band2Vert</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Table attribute set for the even inner columns.</td>
+</tr>
+<tr>
+<td><code>band1Hor</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Table attribute set for the odd inner rows.</td>
+</tr>
+<tr>
+<td><code>band2Hor</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Table attribute set for the even inner rows.</td>
+</tr>
+<tr>
+<td><code>northEastCell</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Table attribute set for the top-right corner cell.</td>
+</tr>
+<tr>
+<td><code>northWestCell</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Table attribute set for the top-left corner cell.</td>
+</tr>
+<tr>
+<td><code>southEastCell</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Table attribute set for the bottom-right corner cell.</td>
+</tr>
+<tr>
+<td><code>southWestCell</code></td>
+<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td></td>
+<td>Table attribute set for the bottom left corner cell.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tablerowattributeset">TableRowAttributeSet<a class="headerlink" href="#tablerowattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|Text|
+|------------|
+|Attribute types|<code>row</code>, <code>changes</code>|
+|---------------|
+|Operations|<a href="#format">format</a>, <a href="#addRows">addRows</a>|
+|----------|</p>
+<p>Contains attributes for table row elements, in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>row</code></td>
+<td><a href="#tablerowattributes">TableRowAttributes</a></td>
+<td></td>
+<td>Table row formatting attributes.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tablecellattributeset">TableCellAttributeSet<a class="headerlink" href="#tablecellattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|Text|
+|------------|
+|Attribute types|<code>cell</code>, <code>paragraph</code>, <code>character</code>, <code>changes</code>|
+|---------------|
+|Operations|<a href="#format">format</a>, <a href="#addCells">addCells</a>|
+|----------|</p>
+<p>Contains attributes for table cell elements, in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cell</code></td>
+<td><a href="#tablecellattributes">TableCellAttributes</a></td>
+<td></td>
+<td>Table cell formatting attributes.</td>
+</tr>
+<tr>
+<td><code>paragraph</code></td>
+<td><a href="#paragraphattributes">ParagraphAttributes</a></td>
+<td></td>
+<td>Paragraph formatting attributes.</td>
+</tr>
+<tr>
+<td><code>character</code></td>
+<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td></td>
+<td>Character formatting attributes.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="documentattributeset">DocumentAttributeSet<a class="headerlink" href="#documentattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|all|
+|------------|
+|Attribute types|<code>document</code>, various other types depending on application type|
+|---------------|
+|Operations|<a href="#setdocumentattributes">setDocumentAttributes</a>|
+|----------|</p>
+<p>Contains global document settings, and default attribute values for different attribute types supported by the current application. Default attribute values are used to determine the value of an attribute that is neither specified by a style sheet referenced by a component nor by an explicit attribute of the component.</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Application</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>document</code></td>
+<td><a href="#documentattributes">DocumentAttributes</a></td>
+<td></td>
+<td>all</td>
+<td>Global document settings, depending on the document type.</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td><a href="#pageattributes">PageAttributes</a></td>
+<td></td>
+<td>all</td>
+<td>Default page attributes.</td>
+</tr>
+<tr>
+<td><code>defaultTextListStyles</code></td>
+<td><a href="#to_be_defined">TO_BE_DEFINED</a></td>
+<td></td>
+<td>Presentation</td>
+<td>Default text list styles that are used for non presentation objects.</td>
+</tr>
+<tr>
+<td><code>character</code></td>
+<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td></td>
+<td>all</td>
+<td>Default character attributes for drawing objects, text documents, and spreadsheet cells.</td>
+</tr>
+<tr>
+<td><code>paragraph</code></td>
+<td><a href="#paragraphattributes">ParagraphAttributes</a></td>
+<td></td>
+<td>Text</td>
+<td>Default paragraph attributes for text documents.</td>
+</tr>
+<tr>
+<td><code>cell</code></td>
+<td><a href="#cellattributes">CellAttributes</a></td>
+<td></td>
+<td>Spreadsheet</td>
+<td>Default cell attributes for spreadsheet documents.</td>
+</tr>
+<tr>
+<td><code>layout</code></td>
+<td><a href="#layoutattributes">LayoutAttributes</a></td>
+<td></td>
+<td>Presentation</td>
+<td>Width in percent from the slide pane for presentation documents.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pageattributeset">PageAttributeSet<a class="headerlink" href="#pageattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|all|
+|------------|
+|Attribute types|<code>page</code>|
+|---------------|
+|Operations|<a href="#setdocumentattributes">setDocumentAttributes</a>, <a href="#insertstylesheet">insertStyleSheet</a>|
+|----------|</p>
+<p>Contains attributes for <code>page</code> style sheets and page elements, in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>styleId</code></td>
+<td>String</td>
+<td>”” (no style sheet)</td>
+<td>Identifier of a page style sheet inserted with an <a href="#insertstylesheet">insertStyleSheet</a> operation.</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td><a href="#pageattributes">PageAttributes</a></td>
+<td></td>
+<td>Page formatting attributes.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="drawingattributeset">DrawingAttributeSet<a class="headerlink" href="#drawingattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|all|
+|------------|
+|Attribute types|<code>drawing</code>, <code>fill</code>, <code>line</code>, <code>image</code>, <code>shape</code>, <code>geometry</code>, <code>connector</code>, <code>chart</code>|
+|---------------|
+|Operations|<a href="#insertstylesheet">insertStyleSheet</a>, <a href="#insertdrawing">insertDrawing</a>, <a href="#setdrawingattributes">setDrawingAttributes</a>, <a href="#setattributes">setAttributes</a>|
+|----------|</p>
+<p>Contains attributes for <code>drawing</code> style sheets and drawing objects, in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>styleId</code></td>
+<td>String</td>
+<td></td>
+<td>Identifier of a drawing style sheet inserted with an <a href="#insertstylesheet">insertStyleSheet</a> operation.</td>
+</tr>
+<tr>
+<td><code>drawing</code></td>
+<td><a href="#drawingattributes">DrawingAttributes</a></td>
+<td></td>
+<td>Drawing formatting attributes.</td>
+</tr>
+<tr>
+<td><code>fill</code></td>
+<td><a href="#drawingfillattributes">DrawingFillAttributes</a></td>
+<td></td>
+<td>Additional fill formatting attributes for the entire drawing object.</td>
+</tr>
+<tr>
+<td><code>line</code></td>
+<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td></td>
+<td>Additional line formatting attributes for the entire drawing object.</td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td><a href="#imageattributes">ImageAttributes</a></td>
+<td></td>
+<td>Additional image attributes, only used for image and OLE objects.</td>
+</tr>
+<tr>
+<td><code>shape</code></td>
+<td><a href="#shapeattributes">ShapeAttributes</a></td>
+<td></td>
+<td>Additional formatting attributes for auto-shapes and text frames.</td>
+</tr>
+<tr>
+<td><code>geometry</code></td>
+<td><a href="#geometryattributes">GeometryAttributes</a></td>
+<td></td>
+<td>Additional geometry attributes for auto-shapes and text frames.</td>
+</tr>
+<tr>
+<td><code>connector</code></td>
+<td><a href="#connectorattributes">ConnectorAttributes</a></td>
+<td></td>
+<td>Additional connector attributes for connector shapes.</td>
+</tr>
+<tr>
+<td><code>chart</code></td>
+<td><a href="#chartattributes">ChartAttributes</a></td>
+<td></td>
+<td>Additional chart formatting attributes, only used for chart objects.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="chartdataseriesattributeset">ChartDataSeriesAttributeSet<a class="headerlink" href="#chartdataseriesattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|all|
+|------------|
+|Attribute types|<code>series</code>, <code>fill</code>, <code>line</code>|
+|---------------|
+|Operations|<a href="#insertchartdataseries">insertChartDataSeries</a>, <a href="#setchartdataseriesattributes">setChartDataSeriesAttributes</a>|
+|----------|</p>
+<p>Contains attributes for data series in chart objects, in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>series</code></td>
+<td><a href="#chartdataseriesattributes">ChartDataSeriesAttributes</a></td>
+<td></td>
+<td>Chart data series formatting attributes.</td>
+</tr>
+<tr>
+<td><code>fill</code></td>
+<td><a href="#drawingfillattributes">DrawingFillAttributes</a></td>
+<td></td>
+<td>Additional fill formatting attributes for the data series.</td>
+</tr>
+<tr>
+<td><code>line</code></td>
+<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td></td>
+<td>Additional line formatting attributes for the data series.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="chartdatapointattributeset">ChartDataPointAttributeSet<a class="headerlink" href="#chartdatapointattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|all|
+|------------|
+|Attribute types|<code>fill</code>, <code>line</code>|
+|---------------|
+|Operations|<a href="#setchartdataseriesattributes">setChartDataSeriesAttributes</a>|
+|----------|</p>
+<p>Contains attributes for data point in chart objects, in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fill</code></td>
+<td><a href="#drawingfillattributes">DrawingFillAttributes</a></td>
+<td></td>
+<td>Additional fill formatting attributes for the data point.</td>
+</tr>
+<tr>
+<td><code>line</code></td>
+<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td></td>
+<td>Additional line formatting attributes for the data point.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="chartaxisattributeset">ChartAxisAttributeSet<a class="headerlink" href="#chartaxisattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|all|
+|------------|
+|Attribute types|<code>axis</code>, <code>line</code>, <code>character</code>|
+|---------------|
+|Operations|<a href="#setchartaxisattributes">setChartAxisAttributes</a>|
+|----------|</p>
+<p>Contains attributes for axes in chart objects, in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>axis</code></td>
+<td><a href="#chartaxisattributes">ChartAxisAttributes</a></td>
+<td></td>
+<td>Chart axis formatting attributes.</td>
+</tr>
+<tr>
+<td><code>line</code></td>
+<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td></td>
+<td>Additional line formatting attributes for the axis.</td>
+</tr>
+<tr>
+<td><code>character</code></td>
+<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td></td>
+<td>Character formatting attributes for the axis labels.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="charttitleattributeset">ChartTitleAttributeSet<a class="headerlink" href="#charttitleattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|all|
+|------------|
+|Attribute types|<code>fill</code>, <code>line</code>, <code>text</code>, <code>character</code>|
+|---------------|
+|Operations|<a href="#setcharttitleattributes">setChartTitleAttributes</a>|
+|----------|</p>
+<p>Contains attributes for titles in chart objects, in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fill</code></td>
+<td><a href="#drawingfillattributes">DrawingFillAttributes</a></td>
+<td></td>
+<td>Fill formatting attributes for the title shape.</td>
+</tr>
+<tr>
+<td><code>line</code></td>
+<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td></td>
+<td>Line formatting attributes for the title shape.</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td><a href="#drawingtextattributes">DrawingTextAttributes</a></td>
+<td></td>
+<td>Attributes describing the text source.</td>
+</tr>
+<tr>
+<td><code>character</code></td>
+<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td></td>
+<td>Character formatting attributes for the title.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="chartgridlineattributeset">ChartGridlineAttributeSet<a class="headerlink" href="#chartgridlineattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|all|
+|------------|
+|Attribute types|<code>line</code>|
+|---------------|
+|Operations|<a href="#setchartgridlineattributes">setChartGridlineAttributes</a>|
+|----------|</p>
+<p>Contains attributes for grid lines in chart objects, in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>line</code></td>
+<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td></td>
+<td>Line formatting attributes for the grid line.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="chartlegendattributeset">ChartLegendAttributeSet<a class="headerlink" href="#chartlegendattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|all|
+|------------|
+|Attribute types|<code>legend</code>, <code>fill</code>, <code>line</code>, <code>character</code>|
+|---------------|
+|Operations|<a href="#setchartlegendattributes">setChartLegendAttributes</a>|
+|----------|</p>
+<p>Contains attributes for the legend in a chart object, in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>legend</code></td>
+<td><a href="#chartlegendattributes">ChartLegendAttributes</a></td>
+<td></td>
+<td>Chart legend formatting attributes.</td>
+</tr>
+<tr>
+<td><code>fill</code></td>
+<td><a href="#drawingfillattributes">DrawingFillAttributes</a></td>
+<td></td>
+<td>Additional fill formatting attributes for the legend shape.</td>
+</tr>
+<tr>
+<td><code>line</code></td>
+<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td></td>
+<td>Additional line formatting attributes for the legend shape.</td>
+</tr>
+<tr>
+<td><code>character</code></td>
+<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td></td>
+<td>Additional character formatting attributes for the legend.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tabledrawingattributeset">TableDrawingAttributeSet<a class="headerlink" href="#tabledrawingattributeset" title="Permanent link">&para;</a></h2>
+<p>|Applications|Presentation|
+|------------|
+|Attribute types|<code>table</code>, <code>row</code>, <code>cell</code>, <code>paragraph</code>, <code>character</code>|
+|---------------|
+|Operations|<a href="#insertdrawing">insertDrawing</a>, <a href="#setattributes">setAttributes</a>|
+|----------|</p>
+<p>Contains attributes for drawing objects of type 'table', in the following format:</p>
+<table class="table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Data Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>styleId</code></td>
+<td>String</td>
+<td><em>none</em></td>
+<td>Identifier of a table style sheet inserted with an <a href="#insertstylesheet">insertStyleSheet</a> operation.</td>
+</tr>
+<tr>
+<td><code>table</code></td>
+<td><a href="#tableattributes">TableAttributes</a></td>
+<td></td>
+<td>Table formatting attributes.</td>
+</tr>
+<tr>
+<td><code>cell</code></td>
+<td><a href="#tablecellattributes">TableCellAttributes</a></td>
+<td></td>
+<td>Table Cell formatting attributes.</td>
+</tr>
+<tr>
+<td><code>paragraph</code></td>
+<td><a href="#paragraphattributes">ParagraphAttributes</a></td>
+<td></td>
+<td>Paragraph formatting attributes.</td>
+</tr>
+<tr>
+<td><code>character</code></td>
+<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td></td>
+<td>Character formatting attributes.</td>
+</tr>
+</tbody>
+</table>
+    </div>
+    
+    <div id="footera">
+      <div id="copyrighta">
+        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
+            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
+            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
+            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
+            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
+          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
+          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
+            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
+          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
+          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
+            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
+          LibreOffice was based on OpenOffice.org.</p>
+      </div>
+    </div>   
+  </div>
+</body>
+</html>
