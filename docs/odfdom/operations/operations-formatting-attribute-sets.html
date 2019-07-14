@@ -145,7 +145,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <td><code>styleId</code></td>
 <td>String</td>
 <td>”” (no style sheet)</td>
-<td>Reference to the style sheet defined by an <a href="#insertstylesheet">insertStyleSheet</a> operation. MUST NOT be used in attribute sets of <a href="#insertstylesheet">insertStyleSheet</a> operations.</td>
+<td>Reference to the style sheet defined by an <a href="#addStyle">addStyle</a> operation. MUST NOT be used in attribute sets of <a href="#addStyle">addStyle</a> operations.</td>
 </tr>
 <tr>
 <td><em>type1</em></td>
@@ -534,7 +534,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 |------------|
 |Attribute types|<code>page</code>|
 |---------------|
-|Operations|<a href="#documentLayout">documentLayout</a>, <a href="#insertstylesheet">insertStyleSheet</a>|
+|Operations|<a href="#documentLayout">documentLayout</a>, <a href="#addStyle">addStyle</a>|
 |----------|</p>
 <p>Contains attributes for <code>page</code> style sheets and page elements, in the following format:</p>
 <table class="table">
@@ -551,7 +551,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <td><code>styleId</code></td>
 <td>String</td>
 <td>”” (no style sheet)</td>
-<td>Identifier of a page style sheet inserted with an <a href="#insertstylesheet">insertStyleSheet</a> operation.</td>
+<td>Identifier of a page style sheet inserted with an <a href="#addStyle">addStyle</a> operation.</td>
 </tr>
 <tr>
 <td><code>page</code></td>
@@ -566,7 +566,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 |------------|
 |Attribute types|<code>drawing</code>, <code>fill</code>, <code>line</code>, <code>image</code>, <code>shape</code>, <code>geometry</code>, <code>connector</code>, <code>chart</code>|
 |---------------|
-|Operations|<a href="#insertstylesheet">insertStyleSheet</a>, <a href="#insertdrawing">insertDrawing</a>, <a href="#setdrawingattributes">setDrawingAttributes</a>, <a href="#setattributes">setAttributes</a>|
+|Operations|<a href="#addStyle">addStyle</a>, <a href="#insertdrawing">insertDrawing</a>, <a href="#setdrawingattributes">setDrawingAttributes</a>, <a href="#setattributes">setAttributes</a>|
 |----------|</p>
 <p>Contains attributes for <code>drawing</code> style sheets and drawing objects, in the following format:</p>
 <table class="table">
@@ -583,7 +583,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <td><code>styleId</code></td>
 <td>String</td>
 <td></td>
-<td>Identifier of a drawing style sheet inserted with an <a href="#insertstylesheet">insertStyleSheet</a> operation.</td>
+<td>Identifier of a drawing style sheet inserted with an <a href="#addStyle">addStyle</a> operation.</td>
 </tr>
 <tr>
 <td><code>drawing</code></td>
@@ -879,7 +879,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <td><code>styleId</code></td>
 <td>String</td>
 <td><em>none</em></td>
-<td>Identifier of a table style sheet inserted with an <a href="#insertstylesheet">insertStyleSheet</a> operation.</td>
+<td>Identifier of a table style sheet inserted with an <a href="#addStyle">addStyle</a> operation.</td>
 </tr>
 <tr>
 <td><code>table</code></td>

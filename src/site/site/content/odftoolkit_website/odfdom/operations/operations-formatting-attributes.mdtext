@@ -35,7 +35,7 @@ Page formatting attributes will be applied to page elements.
 |`firstPage`|Boolean|false|all|Whether to use separate header/footer settings for the first page.||
 |`evenOddPages`|Boolean|false|all|Whether to use separate header/footer settings for even and odd pages, and mirror margin settings accordingly.||
 
-* Notes*:
+*Notes*:
 
 (1) The top and bottom page margin will include a header or footer if existing. If the header/footer is too large to fit into the empty space, the effective size of the page content area has to be reduced to prevent the header/footer from overlapping with the page content area.
 
@@ -95,14 +95,13 @@ Character attributes will be applied to any document components containing text.
 |`caps`|Enum|“none”|all|Character capture, “none”, “all”, or “small”.|(3)|
 |`vertAlign`|Enum|“baseline”|all|Character escapement, one of “baseline”, “sub”, or “super”.|(3)|
 
-* Notes*:
+*Notes*:
 
 (1) Presentation only. Only added for roundtrip (copy/paste, delete/undo, …).
 
 (2) Presentation only. Added to the attributes and add the fontName e.g. 'Wingdings' to the CSS font-family attribute.
 
 (3) May not be supported by all components.
-
 
 ## TableAttributes
 
@@ -137,18 +136,13 @@ Each table style sheet contains multiple attribute sets, mapped by conditional k
 |“bandsHor”|`band1Hor`, `band2Hor`|Ignore formatting defined for the inner rows of the table.|
 |“bandsVert”|`band1Vert`, `band2Vert`|Ignore formatting defined for the inner columns of the table.|
 
-* Notes*:
+*Notes*:
 
 (1) Applies to the border of the whole table only.
 
-
-
 ## TableRowAttributes
 
-|Applications|Text|
-|------------|
-|Attribute type|`row`|
-|--------------|
+*Attribute type*:`row`|
 
 Table row formatting attributes will be applied to row elements of tables in a text document.
 
@@ -157,14 +151,9 @@ Table row formatting attributes will be applied to row elements of tables in a t
 |`height`|Integer|String|“auto”|all|Row height. If set to “auto”, the row is sized automatically according to its contents.|
 |`headerRow`|Boolean|false|all|Specifies if this is a header row that is repeated on each page.|
 
-
-
 ## TableCellAttributes
 
-|Applications|Text|
-|------------|
-|Attribute type|`cell`|
-|--------------|
+*Attribute type*:`cell`|
 
 Table cell formatting attributes will be applied to cell elements in table rows in a text document.
 
@@ -186,13 +175,9 @@ Table cell formatting attributes will be applied to cell elements in table rows 
 |`alignVert`|Enum|“top”|all|This property describes the vertical cell alignment, its value can be “top”, “bottom”, “center”, “justified” or “distributed”|
 |`mergeVert`|Enum|“noMerge|all|This property describes the vertical merging of table cells. Its value can be “restart”, “continue” or “noMerge”|
 
-
 ## Drawing Attributes (Text Doument)
 
-|Applications|all|
-|------------|
-|Attribute type|`drawing`|
-|--------------|
+*Attribute type*:`drawing`|
 
 Drawing formatting attributes will be applied to drawing objects embedded in the document.
 
@@ -264,12 +249,11 @@ Drawing formatting attributes will be applied to drawing objects embedded in the
 |“right”|Text will be rendered right of the drawing object, as long as the available space is sufficient.|
 |“largest”|Text will be rendered at the larger side (either left or right) of the drawing object.|
 
-* Notes*:
+*Notes*:
 
 (1) Currently only `borderTop` is set if the drawing has the type “horizontal\_line”.
 
 (2) Attributes are only used if `inline` mode is false. The generic attributes `left` and `top` will not be used for drawing objects in text documents.
-
 
 ### Drawing Attributes (General)
 
@@ -303,7 +287,7 @@ The following attributes are supported by each drawing in each application regar
 |`noRotation`|Boolean|false|element|Whether it is forbidden to rotate the drawing.||
 |`minFrameHeight`|Integer|0|element|Odf only, this property specifies the minimal height of text frames.||
 
-* Notes*:
+*Notes*:
 
 (1) Some of the generic position and size attributes may be overridden by application-specific attributes.
 
@@ -318,14 +302,9 @@ The following attributes are supported by drawing objects embedded in other draw
 |`width`|Number|0|element|The width of the drawing object in the parent object's virtual coordinate system (see attribute `[coordWidth](#general_drawing_attributes)` ).|
 |`height`|Number|0|element|The height of the drawing object in the parent object's virtual coordinate system (see attribute `[coordHeight](#general_drawing_attributes)` ).|
 
-
-
 ## DrawingFillAttributes
 
-|Applications|all|
-|------------|
-|Attribute type|`fill`|
-|--------------|
+*Attribute type*:`fill`
 
 Drawing fill attributes will be applied to entire drawing objects embedded in the document, or to specific parts of a complex drawing object, e.g. to a data series or the legend in a chart object.
 
@@ -345,14 +324,9 @@ Drawing fill attributes will be applied to entire drawing objects embedded in th
 |`bitmap`|[Bitmap](#bitmap)|_none_|all|The bitmap fill properties. Only used if the attributes `type` is set to “bitmap”.|
 |`pattern`|Enum [Pattern](#pattern)|“none”|all|The preset pattern identifier. Only used if the attributes `type` is set to “pattern”. The attributes `color` and `backgroundColor` determine the colors used for the pattern.|
 
-
-
 ## DrawingLineAttributes
 
-|Applications|all|
-|------------|
-|Attribute type|`line`|
-|--------------|
+*Attribute type*:`line`
 
 Drawing line attributes will be applied to entire drawing objects embedded in the document, or to specific parts of a complex drawing object, e.g. to a data series or the legend in a chart object.
 
@@ -422,14 +396,9 @@ Drawing line attributes will be applied to entire drawing objects embedded in th
 ||“large”|Solid line.|
 ||
 
-
-
 ## DrawingTextAttributes
 
-|Applications|all|
-|------------|
-|Attribute type|`text`|
-|--------------|
+*Attribute type*:`text`
 
 Formatting attributes describing the source of the text contents of a drawing object or chart data series.
 
@@ -437,14 +406,9 @@ Formatting attributes describing the source of the text contents of a drawing ob
 |---------|---------|-------------|-------------------------|-----------|
 |`link`|[SourceLink](#sourcelink)|\[\]|element|The constant text, or an application dependent link into the document.|
 
-
-
 ## ImageAttributes
 
-|Applications|all|
-|------------|
-|Attribute type|`image`|
-|--------------|
+*Attribute type*:`image`
 
 Formatting attributes for images and OLE objects.
 
@@ -457,27 +421,21 @@ Formatting attributes for images and OLE objects.
 |`cropTop`|Number|0|all|Cropping size on the upper side of the bitmap.|(2)|
 |`cropBottom`|Number|0|all|Cropping size on the lower side of the bitmap.|(2)|
 
-* Notes*:
+*Notes*:
 
 (1) The attributes `imageUrl` and `imageData` are mutually exclusive.
 
-*   An exception to this rule was introduced for the clipboard handling. The copy handler can not decide whether the `imageUrl` or the `imageData` attribute is needed on paste. Therefore the copy handler adds both attributes and the paste handler decides which one to use and which one to remove from the operation. Finally an operation with both attributes present may temporarily exist, but such operation is never sent to the filter.
-
+* An exception to this rule was introduced for the clipboard handling. The copy handler can not decide whether the `imageUrl` or the `imageData` attribute is needed on paste. Therefore the copy handler adds both attributes and the paste handler decides which one to use and which one to remove from the operation. Finally an operation with both attributes present may temporarily exist, but such operation is never sent to the filter.
 
 (2) A value of 0 does not crop the bitmap, positive values will move the respective border of the bitmap outside the drawing frame, negative values will move the bitmap border inside the drawing frame. Cropping attributes are interpreted differently depending on the file format:
 
-*   OOXML: Cropping is used as percentage value. The value 100 corresponds to the total size of the drawing frame.
+* OOXML: Cropping is used as percentage value. The value 100 corresponds to the total size of the drawing frame.
 
-*   ODF: Cropping is used as absolute length in 1/100 of millimeters.
-
-
+* ODF: Cropping is used as absolute length in 1/100 of millimeters.
 
 ## ShapeAttributes
 
-|Applications|all|
-|------------|
-|Attribute type|`shape`|
-|--------------|
+*Attribute type*:`shape`
 
 Formatting attributes for shape objects.
 
@@ -498,14 +456,9 @@ Formatting attributes for shape objects.
 |`fontScale`|Number|1|all|scales all text-font releative to their original font-size, only if autoResizeText is true|
 |`lineReduction`|Number|0|all|reduces the distance between paragraphs relative to the original distance, only if autoResizeText is true|
 
-
-
 ## GeometryAttributes
 
-|Applications|all|
-|------------|
-|Attribute type|`geometry`|
-|--------------|
+*Attribute type*:`geometry`
 
 Geometry attributes for shape objects.
 
@@ -520,14 +473,9 @@ Geometry attributes for shape objects.
 |`textRect`|[GeometryTextRect](#geometrytextrect)||all|a special text rect that has to be used for text, if omitted then the text rect is as big as the shape|
 |`hostData`|String||all|This attribute is used only in the filter for better roundtrip.|
 
-
-
 ## ConnectorAttributes
 
-|Applications|all|
-|------------|
-|Attribute type|`connector`|
-|--------------|
+*Attribute type*:`connector`
 
 Connector attributes for connector shapes.
 
@@ -538,14 +486,9 @@ Connector attributes for connector shapes.
 |`endId`|String|””|element|Specifies the end shape the connector is connected to. If empty then the shape does not have a end connection.|
 |`endIndex`|Integer|0|element|Specifies the point at the end shape the connector is connected to.|
 
-
-
 ## ChartAttributes
 
-|Applications|all|
-|------------|
-|Attribute type|`chart`|
-|--------------|
+*Attribute type*:`chart`
 
 Formatting attributes for entire chart objects.
 
@@ -561,20 +504,15 @@ Formatting attributes for entire chart objects.
 |`varyColors`|Boolean|false|element|defines if the points of the first series are same color or not.|
 |`rotation`|integer|0|element|defines rotation of an pie or donut.|
 
-
-
 ## ChartDataSeriesAttributes
 
-|Applications|all|
-|------------|
-|Attribute type|`series`|
-|--------------|
+*Attribute type*:`series`
 
 Formatting attributes for data series in chart objects.
 
 |Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
 |---------|---------|-------------|-------------------------|-----------|
-|`type`|String|“bar”|element|chart type per series, for combination two chart types in one chart (line + bar, line + area, etc). The following chart types are supported:|
+|`type`String|“bar”|element|chart type per series, for combination two chart types in one chart (line + bar, line + area, etc). The following chart types are supported:|
 ||“bar”|The data points are shown as horizontal rectangles.|
 ||
 |“column”|The data points are shown as vertical rectangles.|
@@ -595,14 +533,9 @@ Formatting attributes for data series in chart objects.
 |`axisYIndex`|Integer|0|element|0 = left axis, 1 = right axis|
 |`dataPoints`|Array<[ChartDataPointAttributeSet](#chartdatapointattributeset)\>|\[\]|element||
 
-
-
 ## ChartAxisAttributes
 
-|Applications|all|
-|------------|
-|Attribute type|`axis`|
-|--------------|
+*Attribute type*:`axis`
 
 Formatting attributes for axes in chart objects.
 
@@ -618,15 +551,9 @@ Formatting attributes for axes in chart objects.
 |`max`|Number | String|“auto”|element|The maximum value shown at the end of the axis. The special value “auto” will obtain the axis maximum according to the series data. Used by axes of type “value” and “date” only. (never used! Deprecated?)|
 |`label`|Boolean|false|element|Whether the axis labels are visible.|
 
-
-
 ## ChartLegendAttributes
 
-|Applications|all|
-|------------|
-|Attribute type|`legend`|
-|--------------|
-
+*Attribute type*:`legend`
 Formatting attributes for the legend in chart objects.
 
 |Attribute|Data Type|Default Value|[Scope](#attribute_scope)|Description|
@@ -639,5 +566,3 @@ Formatting attributes for the legend in chart objects.
 |“left”|The legend is located left of the chart plot area.|
 |“right”|The legend is located right of the chart plot area.|
 |“topRight”|The legend is located in the top-right corner of the chart area.|
-
-

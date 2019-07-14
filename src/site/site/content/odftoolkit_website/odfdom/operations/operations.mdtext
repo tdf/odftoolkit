@@ -5,7 +5,7 @@ Operations are a prerequirement for collaborative working on a document.
 
 [TOC]
 
-Most operations target specific text components (characters, paragraphs, tables, table cells, drawing objects, etc.) or ranges of text components. 
+Most operations target specific text components (characters, paragraphs, tables, table cells, drawing objects, etc.) or ranges of text components.
 The following general rules apply for these operations:
 
 1. Single text components are addressed by a `start` property containing a [Position](#position) array.

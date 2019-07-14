@@ -22,8 +22,6 @@ attrs: {
                                         }
                                     }
 
-
-
 ## AttributeSet
 
 The generic definition of an attribute set.

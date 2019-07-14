@@ -169,8 +169,6 @@ Description of a \`ColorStop\` value as it is be used by [\`Gradient\` data type
 |`position`|Double|0|Per-cent ratio-range of distance values from (including) 0 to 1, representing values from 0% to 100%.|
 |`color`|[Color](#color)||Color value of the current interpolation's end point.|
 
-
-
 ## Gradient
 
 Description of a color gradient. A color gradient is the transition in between at least 2 [colors](#color).
@@ -202,8 +200,6 @@ Description of a color gradient. A color gradient is the transition in between a
 |`flipV`|Boolean|false|Specifies if the gradient is mirrored vertically.|
 |`colorStops`|Array<[ColorStop](#colorstop)\>|\[\]|A list of [color stops](#colorstop) specifying the distribution of colors along the gradient.|
 
-
-
 ## Tiling
 
 Description of a bitmap tiling.
@@ -227,8 +223,6 @@ Description of a bitmap tiling.
 |`offX`|Integer|0|Specifies additional horizontal offset in 1/100mm after alignment.|
 |`offY`|Integer|0|Specifies additional vertical offset in 1/100mm after alignment.|
 
-
-
 ## Stretching
 
 Description of a bitmap fill for backgrounds and outlines of drawing objects.
@@ -239,8 +233,6 @@ Description of a bitmap fill for backgrounds and outlines of drawing objects.
 |`top`|percentage|0|Top offset of the source rectangle in percent.|
 |`right`|percentage|0|Right offset of the source rectangle in percent.|
 |`bottom`|percentage|0|Bottom offset of the source rectangle in percent.|
-
-
 
 ## StretchingAligned
 
@@ -253,8 +245,6 @@ ODF only… Description of a bitmap fill for backgrounds and outlines of drawing
 |`height`|Number|0|Specifies the height of the bitmap, if 0 then the original height has to be used.|
 |`scaleX`|percentage|100|Specifies the x scaling of the bitmap.|
 |`scaleY`|percentage|100|Specifies the y scaling of the bitmap.|
-
-
 
 ## Bitmap
 
@@ -272,8 +262,6 @@ Description of a bitmap fill for backgrounds and outlines of drawing objects.
 |`cropTop`|Number|0|all|
 |`cropRight`|Number|0|all|
 |`cropBottom`|Number|0|all|
-
-
 
 ## Pattern
 
@@ -338,8 +326,6 @@ An enumeration for all preset pattern styles that can be used as background or o
 |“weave”|Weave pattern.|
 |“zigZag”|Zig zag lines.|
 
-
-
 ## Border
 
 |Property|Data Type|Default Value|Description|
@@ -363,8 +349,6 @@ The following constants will be used in this documentation:
 |-------------|----------|
 |Border.NONE|{style:“none”}|
 
-
-
 ## SourceLink
 
 A generic description of a source data sequence used by a specific object, e.g. a chart data series, or a drawing object with linked text contents.
@@ -378,8 +362,6 @@ The data type of the source link denotes the kind of source data.
 |Text|_not supported_||
 |Spreadsheet|A formula expression that evaluates to one or more cell ranges containing the source data.|“Sheet1!$A$2:$A$100”|
 |Presentation|_not supported_||
-
-
 
 ## GeometryConstant
 
@@ -424,8 +406,6 @@ This is a list of constant values that might be used within GeometryPoints and o
 |`wd10`|width / 10|
 |`wd32`|width / 32|
 
-
-
 ## GeometryPoint
 
 This object spezifies a point that is used within this geometry.
@@ -434,8 +414,6 @@ This object spezifies a point that is used within this geometry.
 |--------|---------|-------------|-----------|
 |`x`|Integer | String|_required_|specifies the x position of this point|
 |`y`|Integer | String|_required_|specifies the y position of this point|
-
-
 
 ## GeometryGuide
 
@@ -449,8 +427,6 @@ A guide that can be referenced from paths and text rectangles.
 |`p1`|Integer | String||The second parameter of this guide.|
 |`p2`|Integer | String||The third parameter of this guide.|
 
-
-
 ## GeometryConnectionPoint
 
 A connection point that can be referenced by connector objects.
@@ -460,8 +436,6 @@ A connection point that can be referenced by connector objects.
 |`x`|Integer | String||This attribute specifies the x position of the connection point.|
 |`y`|Integer | String||This attribute specifies the y position of the connection point.|
 |`ang`|Integer | String||This attribute specifies the angle the connector should leave the connected point.|
-
-
 
 ## GeometryAdjustmentHandle
 
@@ -485,8 +459,6 @@ A connection point that can be referenced by connector objects.
 |`minAng`|Integer | String||Specifies the minimum angle position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move angularly. That is the maxAng and minAng are equal.|
 |`maxAng`|Integer | String||Specifies the maximum angle position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move angularly. That is the maxAng and minAng are equal.|
 
-
-
 ## GeometryCommand
 
 |Attribute|Data Type|Default Value|Application|Description|
@@ -506,8 +478,6 @@ A connection point that can be referenced by connector objects.
 |`stAng`|Integer | String||all|this attribute specifies the start angle of this arc|
 |`swAng`|Integer | String||all|this attribute specifies the swing angle of this arc|
 |`pts`|Array<[GeometryPoint](#geometrypoint)\>||all|attribute defines an array of points the beziers have to be drawn to|
-
-
 
 ## GeometryPath
 
@@ -529,8 +499,6 @@ Specifies the path of a shape, the pathList of the geometry is referencing an ar
 |`isExtrusionOk`|Boolean|false|specifies if this path is allowed to be drawn in 3d|
 |`commands`|Array<[GeometryCommand](#geometrycommand)\>||Specifies the commands to be used to draw this path.|
 
-
-
 ## GeometryTextRect
 
 This object specifies the text rectangle that is to be used.
@@ -541,4 +509,3 @@ This object specifies the text rectangle that is to be used.
 |`t`|String | Number||specifies the top border|
 |`r`|String | Number||specifies the right border|
 |`b`|String | Number||specifies the bottom border|
-
