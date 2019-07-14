@@ -33,16 +33,10 @@ The generic definition of an attribute set.
 |_type2_|Object|{}|Map with formatting attributes supported by the attribute _type2_.|
 |…||||
 
-
-
 ## CharacterAttributeSet
 
-|Applications|Text|
-|------------|
-|Attribute types|`character`|
-|---------------|
-|Operations|[documentLayout](#documentLayout), [addStyle](#addStyle), [format](#format), [addText](#addText), [addTab](#addTab), [addHardBreak](#addHardBreak), [addField](#addField)|
-|----------|
+* *Attribute types*: `character`
+* *Operations*: [documentLayout](#documentLayout), [addStyle](#addStyle), [format](#format), [addText](#addText), [addTab](#addTab), [addHardBreak](#addHardBreak), [addField](#addField)
 
 Contains attributes for `character` style sheets and text spans, in the following format:
 
@@ -51,16 +45,10 @@ Contains attributes for `character` style sheets and text spans, in the followin
 |`styleId`|String|_none_|Identifier of a character style sheet inserted with an [addStyle](#addStyle) operation.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Character formatting attributes.|
 
-
-
 ## ParagraphAttributeSet
 
-|Applications|Text|
-|------------|
-|Attribute types|`paragraph`, `character`|
-|---------------|
-|Operations|[documentLayout](#documentLayout), [addStyle](#addStyle), [format](#format), [addParagraph](#addParagraph)|
-|----------|
+* *Attribute types*: `paragraph`, `character`
+* *Operations*: [documentLayout](#documentLayout), [addStyle](#addStyle), [format](#format), [addParagraph](#addParagraph)
 
 Contains attributes for `paragraph` style sheets and paragraph elements, in the following format:
 
@@ -70,16 +58,10 @@ Contains attributes for `paragraph` style sheets and paragraph elements, in the 
 |`paragraph`|[ParagraphAttributes](#paragraphattributes)|{}|Paragraph formatting attributes.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Character formatting attributes.|
 
-
-
 ## TableAttributeSet
 
-|Applications|Text|
-|------------|
-|Attribute types|`table`, `row`, `cell`, `paragraph`, `character`|
-|---------------|
-|Operations|[format](#format), [addTable](#addTable)|
-|----------|
+* *Attribute types*: `table`, `row`, `cell`, `paragraph`, `character`
+* *Operations*: [format](#format), [addTable](#addTable)
 
 Contains attributes for table elements (**not** table style sheets, see [TableStyleSheetAttributeSet](#tablestylesheetattributeset)), in the following format:
 
@@ -93,14 +75,10 @@ Contains attributes for table elements (**not** table style sheets, see [TableSt
 |`paragraph`|[ParagraphAttributes](#paragraphattributes)|{}|Paragraph formatting attributes.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Character formatting attributes.|
 
-
-
 ## TableStyleSheetAttributeSet
 
-|Applications|Text|
-|------------|
-|Operations|[addStyle](#addStyle)|
-|----------|
+* *Attribute types*: `table`
+* *Operations*: [addStyle](#addStyle)
 
 Contains attributes for `table` style sheets (**not** table elements, see [TableAttributeSet](#tableattributeset)), in the following format:
 
@@ -120,16 +98,10 @@ Contains attributes for `table` style sheets (**not** table elements, see [Table
 |`southEastCell`|[TableAttributeSet](#tableattributeset)|{}|Table attribute set for the bottom-right corner cell.|
 |`southWestCell`|[TableAttributeSet](#tableattributeset)|{}|Table attribute set for the bottom left corner cell.|
 
-
-
 ## TableRowAttributeSet
 
-|Applications|Text|
-|------------|
-|Attribute types|`row`, `changes`|
-|---------------|
-|Operations|[format](#format), [addRows](#addRows)|
-|----------|
+* *Attribute types*: `row`, `changes`
+* *Operations*: [format](#format), [addRows](#addRows)
 
 Contains attributes for table row elements, in the following format:
 
@@ -137,16 +109,10 @@ Contains attributes for table row elements, in the following format:
 |--------|---------|-------------|-----------|
 |`row`|[TableRowAttributes](#tablerowattributes)|{}|Table row formatting attributes.|
 
-
-
 ## TableCellAttributeSet
 
-|Applications|Text|
-|------------|
-|Attribute types|`cell`, `paragraph`, `character`, `changes`|
-|---------------|
-|Operations|[format](#format), [addCells](#addCells)|
-|----------|
+* *Attribute types*: `cell`, `paragraph`, `character`, `changes`
+* *Operations*: [format](#format), [addCells](#addCells)
 
 Contains attributes for table cell elements, in the following format:
 
@@ -156,15 +122,10 @@ Contains attributes for table cell elements, in the following format:
 |`paragraph`|[ParagraphAttributes](#paragraphattributes)|{}|Paragraph formatting attributes.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Character formatting attributes.|
 
-
 ## DocumentAttributeSet
 
-|Applications|all|
-|------------|
-|Attribute types|`document`, various other types depending on application type|
-|---------------|
-|Operations|[documentLayout](#documentLayout)|
-|----------|
+* *Attribute types*: `document`, various other types depending on application type
+* *Operations*: [documentLayout](#documentLayout)
 
 Contains global document settings, and default attribute values for different attribute types supported by the current application. Default attribute values are used to determine the value of an attribute that is neither specified by a style sheet referenced by a component nor by an explicit attribute of the component.
 
@@ -178,16 +139,10 @@ Contains global document settings, and default attribute values for different at
 |`cell`|[CellAttributes](#cellattributes)|{}|Spreadsheet|Default cell attributes for spreadsheet documents.|
 |`layout`|[LayoutAttributes](#layoutattributes)|{}|Presentation|Width in percent from the slide pane for presentation documents.|
 
-
-
 ## PageAttributeSet
 
-|Applications|all|
-|------------|
-|Attribute types|`page`|
-|---------------|
-|Operations|[documentLayout](#documentLayout), [addStyle](#addStyle)|
-|----------|
+* *Attribute types*: `page`
+* *Operations*: [documentLayout](#documentLayout), [addStyle](#addStyle)
 
 Contains attributes for `page` style sheets and page elements, in the following format:
 
@@ -196,16 +151,10 @@ Contains attributes for `page` style sheets and page elements, in the following 
 |`styleId`|String|”” (no style sheet)|Identifier of a page style sheet inserted with an [addStyle](#addStyle) operation.|
 |`page`|[PageAttributes](#pageattributes)|{}|Page formatting attributes.|
 
-
-
 ## DrawingAttributeSet
 
-|Applications|all|
-|------------|
-|Attribute types|`drawing`, `fill`, `line`, `image`, `shape`, `geometry`, `connector`, `chart`|
-|---------------|
-|Operations|[addStyle](#addStyle), [insertDrawing](#insertdrawing), [setDrawingAttributes](#setdrawingattributes), [setAttributes](#setattributes)|
-|----------|
+* *Attribute types*: `drawing`, `fill`, `line`, `image`, `shape`, `geometry`, `connector`, `chart`
+* *Operations*: [addStyle](#addStyle), [insertDrawing](#insertdrawing), [setDrawingAttributes](#setdrawingattributes), [setAttributes](#setattributes)
 
 Contains attributes for `drawing` style sheets and drawing objects, in the following format:
 
@@ -221,16 +170,10 @@ Contains attributes for `drawing` style sheets and drawing objects, in the follo
 |`connector`|[ConnectorAttributes](#connectorattributes)|{}|Additional connector attributes for connector shapes.|
 |`chart`|[ChartAttributes](#chartattributes)|{}|Additional chart formatting attributes, only used for chart objects.|
 
-
-
 ## ChartDataSeriesAttributeSet
 
-|Applications|all|
-|------------|
-|Attribute types|`series`, `fill`, `line`|
-|---------------|
-|Operations|[insertChartDataSeries](#insertchartdataseries), [setChartDataSeriesAttributes](#setchartdataseriesattributes)|
-|----------|
+* *Attribute types*: `series`, `fill`, `line`
+* *Operations*: [insertChartDataSeries](#insertchartdataseries), [setChartDataSeriesAttributes](#setchartdataseriesattribute)
 
 Contains attributes for data series in chart objects, in the following format:
 
@@ -240,16 +183,10 @@ Contains attributes for data series in chart objects, in the following format:
 |`fill`|[DrawingFillAttributes](#drawingfillattributes)|{}|Additional fill formatting attributes for the data series.|
 |`line`|[DrawingLineAttributes](#drawinglineattributes)|{}|Additional line formatting attributes for the data series.|
 
-
-
 ## ChartDataPointAttributeSet
 
-|Applications|all|
-|------------|
-|Attribute types|`fill`, `line`|
-|---------------|
-|Operations|[setChartDataSeriesAttributes](#setchartdataseriesattributes)|
-|----------|
+* *Attribute types*: `fill`, `line`
+* *Operations*: [setChartDataSeriesAttributes](#setchartdataseriesattributes)
 
 Contains attributes for data point in chart objects, in the following format:
 
@@ -258,16 +195,10 @@ Contains attributes for data point in chart objects, in the following format:
 |`fill`|[DrawingFillAttributes](#drawingfillattributes)|{}|Additional fill formatting attributes for the data point.|
 |`line`|[DrawingLineAttributes](#drawinglineattributes)|{}|Additional line formatting attributes for the data point.|
 
-
-
 ## ChartAxisAttributeSet
 
-|Applications|all|
-|------------|
-|Attribute types|`axis`, `line`, `character`|
-|---------------|
-|Operations|[setChartAxisAttributes](#setchartaxisattributes)|
-|----------|
+* *Attribute types*: `axis`, `line`, `character`
+* *Operations*: [setChartAxisAttributes](#setchartaxisattributes)
 
 Contains attributes for axes in chart objects, in the following format:
 
@@ -277,16 +208,10 @@ Contains attributes for axes in chart objects, in the following format:
 |`line`|[DrawingLineAttributes](#drawinglineattributes)|{}|Additional line formatting attributes for the axis.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Character formatting attributes for the axis labels.|
 
-
-
 ## ChartTitleAttributeSet
 
-|Applications|all|
-|------------|
-|Attribute types|`fill`, `line`, `text`, `character`|
-|---------------|
-|Operations|[setChartTitleAttributes](#setcharttitleattributes)|
-|----------|
+* *Attribute types*: `fill`, `line`, `text`, `character`
+* *Operations*: [setChartTitleAttributes](#setcharttitleattributes)
 
 Contains attributes for titles in chart objects, in the following format:
 
@@ -297,16 +222,10 @@ Contains attributes for titles in chart objects, in the following format:
 |`text`|[DrawingTextAttributes](#drawingtextattributes)|{}|Attributes describing the text source.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Character formatting attributes for the title.|
 
-
-
 ## ChartGridlineAttributeSet
 
-|Applications|all|
-|------------|
-|Attribute types|`line`|
-|---------------|
-|Operations|[setChartGridlineAttributes](#setchartgridlineattributes)|
-|----------|
+* *Attribute types*: `line`
+* *Operations*: [setChartGridlineAttributes](#setchartgridlineattributes)
 
 Contains attributes for grid lines in chart objects, in the following format:
 
@@ -314,16 +233,10 @@ Contains attributes for grid lines in chart objects, in the following format:
 |--------|---------|-------------|-----------|
 |`line`|[DrawingLineAttributes](#drawinglineattributes)|{}|Line formatting attributes for the grid line.|
 
-
-
 ## ChartLegendAttributeSet
 
-|Applications|all|
-|------------|
-|Attribute types|`legend`, `fill`, `line`, `character`|
-|---------------|
-|Operations|[setChartLegendAttributes](#setchartlegendattributes)|
-|----------|
+* *Attribute types*: `legend`, `fill`, `line`, `character`
+* *Operations*: [setChartLegendAttributes](#setchartlegendattributes)
 
 Contains attributes for the legend in a chart object, in the following format:
 
@@ -334,16 +247,10 @@ Contains attributes for the legend in a chart object, in the following format:
 |`line`|[DrawingLineAttributes](#drawinglineattributes)|{}|Additional line formatting attributes for the legend shape.|
 |`character`|[CharacterAttributes](#characterattributes)|{}|Additional character formatting attributes for the legend.|
 
-
-
 ## TableDrawingAttributeSet
 
-|Applications|Presentation|
-|------------|
-|Attribute types|`table`, `row`, `cell`, `paragraph`, `character`|
-|---------------|
-|Operations|[insertDrawing](#insertdrawing), [setAttributes](#setattributes)|
-|----------|
+* *Attribute types*: `table`, `row`, `cell`, `paragraph`, `character`
+* *Operations*: [insertDrawing](#insertdrawing), [setAttributes](#setattributes)
 
 Contains attributes for drawing objects of type 'table', in the following format:
 
