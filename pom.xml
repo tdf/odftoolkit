@@ -25,6 +25,13 @@
     <version>0.9.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <parent>
+        <groupId>org.apache</groupId>
+        <artifactId>apache</artifactId>
+        <version>21</version>
+        <relativePath></relativePath>
+    </parent>
+
     <properties>
         <jdk.version>1.8</jdk.version>
         <javadoc.bottom>Copyright &#169; {inceptionYear}&#x2013;2018 Apache Software Foundation; Copyright &#169; 2018&#x2013;{currentYear} {organizationName}. All rights reserved.</javadoc.bottom>
