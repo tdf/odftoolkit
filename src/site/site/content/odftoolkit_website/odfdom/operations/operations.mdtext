@@ -20,8 +20,8 @@ Deletes a component or a range of related components.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“delete”|
-|`start`|[TextPosition](#textposition)|_required_|The position of the first component that will be deleted.|
-|`end`|[TextPosition](#textposition)|_value of `start`_|The position of the last component that will be deleted (closed range). if omitted, this operation addresses a single component.|
+|`start`|[TextPosition](operations-data-types.html#position)|_required_|The position of the first component that will be deleted.|
+|`end`|[TextPosition](operations-data-types.html#position)|_value of `start`_|The position of the last component that will be deleted (closed range). if omitted, this operation addresses a single component.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
 **Note**: Currently, only single components can be deleted, except for text ranges in a paragraph. A text range can include characters, fields, and drawing objects, but must be contained in a single paragraph.
@@ -35,9 +35,9 @@ Moves a component or a range of related components to a new location.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“move”|
-|`start`|[TextPosition](#textposition)|_required_|The position of the first component that will be moved.|
-|`end`|[TextPosition](#textposition)|_value of `start`_|The position of the last component that will be moved (closed range). If omitted, this operation addresses a single component.|
-|`to`|[TextPosition](#textposition)|_required_|The target position to move the selected components to.|
+|`start`|[TextPosition](operations-data-types.html#position)|_required_|The position of the first component that will be moved.|
+|`end`|[TextPosition](operations-data-types.html#position)|_value of `start`_|The position of the last component that will be moved (closed range). If omitted, this operation addresses a single component.|
+|`to`|[TextPosition](operations-data-types.html#position)|_required_|The target position to move the selected components to.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
 **Note**: Currently, only single **drawing** components can be moved. The property `end` will not be evaluated at all.
@@ -49,8 +49,8 @@ Inserts a new empty paragraph node into the document.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“addParagraph”|
-|`start`|[ParagraphPosition](#paragraphposition)|_required_|The position of the new paragraph. The paragraph will be inserted before a component that is currently located at this position.|
-|`attrs`|[ParagraphAttributeSet](#paragraphattributeset)|{}|Initial attribute set for the paragraph.|
+|`start`|[ParagraphPosition](operations-data-types.html#position)|_required_|The position of the new paragraph. The paragraph will be inserted before a component that is currently located at this position.|
+|`attrs`|[ParagraphAttributeSet](operations-formatting-attribute-sets.html#paragraphattributeset)|{}|Initial attribute set for the paragraph.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
 ## splitParagraph
@@ -60,7 +60,7 @@ Splits the contents of an existing paragraph into two paragraphs.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“splitParagraph”|
-|`start`|[CharacterPosition](#characterposition)|_required_|The position of the first character (or other child component in the paragraph) that will be moved to the beginning of the new paragraph.|
+|`start`|[CharacterPosition](operations-data-types.html#position)|_required_|The position of the first character (or other child component in the paragraph) that will be moved to the beginning of the new paragraph.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
 ## mergeParagraph
@@ -70,7 +70,7 @@ Merges two consecutive paragraphs to a single paragraph.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“mergeParagraph”|
-|`start`|[ParagraphPosition](#paragraphposition)|_required_|The position of the paragraph, that will be merged with the following paragraph.|
+|`start`|[ParagraphPosition](operations-data-types.html#position)|_required_|The position of the paragraph, that will be merged with the following paragraph.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
 The formatting attributes of the second paragraph will be lost, unless the leading paragraph is empty.
@@ -82,9 +82,9 @@ Inserts new text into a paragraph.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“addText”|
-|`start`|[CharacterPosition](#characterposition)|_required_|The position where the new text will be inserted. The text will be inserted before the character that is currently located at this position.|
+|`start`|[CharacterPosition](operations-data-types.html#position)|_required_|The position where the new text will be inserted. The text will be inserted before the character that is currently located at this position.|
 |`text`|String|_required_|Text to be inserted into the specified paragraph at the specified position.|
-|`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
+|`attrs`|[CharacterAttributeSet](operations-formatting-attribute-sets.html#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
 **Note**:
@@ -101,8 +101,8 @@ Inserts a tabulator into a paragraph.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“addTab”|
-|`start`|[CharacterPosition](#characterposition)|_required_|The position where the new tabulator will be inserted. The tabulator will be inserted before the character that is currently located at this position.|
-|`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
+|`start`|[CharacterPosition](operations-data-types.html#position)|_required_|The position where the new tabulator will be inserted. The tabulator will be inserted before the character that is currently located at this position.|
+|`attrs`|[CharacterAttributeSet](operations-formatting-attribute-sets.html#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
 *Note*:
@@ -119,9 +119,9 @@ Inserts a hard break into a paragraph.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“addHardBreak”|
-|`start`|[CharacterPosition](#characterposition)|_required_|The position where the new hard break will be inserted. The hard break will be inserted before the character that is currently located at this position.|
+|`start`|[CharacterPosition](operations-data-types.html#position)|_required_|The position where the new hard break will be inserted. The hard break will be inserted before the character that is currently located at this position.|
 |`type`|Enum|textWrapping|One of “page”, “column” or “textWrapping”.|
-|`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
+|`attrs`|[CharacterAttributeSet](operations-formatting-attribute-sets.html#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
 *Note*:
@@ -138,10 +138,10 @@ Inserts simple text field into a paragraph.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“addField”|
-|`start`|[CharacterPosition](#characterposition)|_required_|The position where the new field will be inserted. The field will be inserted before the character that is currently located at this position.|
+|`start`|[CharacterPosition](operations-data-types.html#position)|_required_|The position where the new field will be inserted. The field will be inserted before the character that is currently located at this position.|
 |`type`|String|_required_|**TODO** The field type as string.|
 |`representation`|String|_required_|The latest text representation of this field.|
-|`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
+|`attrs`|[CharacterAttributeSet](operations-formatting-attribute-sets.html#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
 ## updateField
@@ -151,10 +151,10 @@ Updates an already existing simple field.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“updateField”|
-|`start`|[CharacterPosition](#characterposition)|_required_|The position where the new field will be inserted. The field will be inserted before the character that is currently located at this position.|
+|`start`|[CharacterPosition](operations-data-types.html#position)|_required_|The position where the new field will be inserted. The field will be inserted before the character that is currently located at this position.|
 |`type`|String|optional|The field instruction.|
 |`representation`|String|optional|The attribute represents the field representation.|
-|`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
+|`attrs`|[CharacterAttributeSet](operations-formatting-attribute-sets.html#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
 *Note*:
@@ -171,8 +171,8 @@ Inserts a new table node into the document.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|'addTable'|
-|`start`|[TablePosition](#tableposition)|_required_|The position of the new table. The table will be inserted before a component that is currently located at this position.|
-|`attrs`|[TableAttributeSet](#tableattributeset)|{}|Initial attribute set for the table.|
+|`start`|[TablePosition](operations-data-types.html#position)|_required_|The position of the new table. The table will be inserted before a component that is currently located at this position.|
+|`attrs`|[TableAttributeSet](operations-formatting-attribute-sets.html#tableattributeset)|{}|Initial attribute set for the table.|
 |`sizeExceeded`|Object|_none_|If set to an object, the table is too big to be displayed or edited. The object must contain the attributes `rows` and `columns` containing the original row count and column count of the table. To be used for importing documents only, NOT while editing documents.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
@@ -187,11 +187,11 @@ Inserts one or more new rows into a table.
 |Property|Data Type|Default Value|Description|Notes|
 |--------|---------|-------------|-----------|-----|
 |`name`|String|_required_|“addRows”||
-|`start`|[TableRowPosition](#tablerowposition)|_required_|The position of the new table row. The row will be inserted before a row that is currently located at this position.||
+|`start`|[TableRowPosition](operations-data-types.html#position)|_required_|The position of the new table row. The row will be inserted before a row that is currently located at this position.||
 |`count`|Integer|1|The number of rows that will be inserted.||
 |`insertDefaultCells`|Boolean|false|If true, empty cells will be inserted into the new row. The number of inserted cells will be equal to the number of columns in the table, as specified by the `tableGrid` attribute of the table.|(1)|
 |`referenceRow`|Integer|_none_|If specified, the zero-based index of the existing row whose cells and their attributes will be cloned (but _without_ the cell contents).|(1)|
-|`attrs`|[TableRowAttributeSet](#tablerowattributeset)|{}|Initial attribute set for the table row.||
+|`attrs`|[TableRowAttributeSet](operations-formatting-attribute-sets.html#tablerowattributeset)|{}|Initial attribute set for the table row.||
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed||
 
 *Note*:
@@ -205,9 +205,9 @@ Inserts one or more new cells into a table row.
 |Property|Data Type|Default Value|Description|Notes|
 |--------|---------|-------------|-----------|-----|
 |`name`|String|_required_|“addCells”||
-|`start`|[TableCellPosition](#tablecellposition)|_required_|The position of the new cell. The cell will be inserted before a cell that is currently located at this position.||
+|`start`|[TableCellPosition](operations-data-types.html#position)|_required_|The position of the new cell. The cell will be inserted before a cell that is currently located at this position.||
 |`count`|Integer|1|The number of cells that will be inserted.|(1)|
-|`attrs`|[TableCellAttributeSet](#tablecellattributeset)|{}|Initial attribute set for the cell.||
+|`attrs`|[TableCellAttributeSet](operations-formatting-attribute-sets.html#tablecellattributeset)|{}|Initial attribute set for the cell.||
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed||
 
 *Note*:
@@ -221,7 +221,7 @@ Inserts cells for a new column into a table.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“addColumn”|
-|`start`|[TablePosition](#tableposition)|_required_|The position of the table the new column will be inserted into.|
+|`start`|[TablePosition](operations-data-types.html#position)|_required_|The position of the table the new column will be inserted into.|
 |`gridPosition`|Integer|_required_|Zero-based column index, according to the `tableGrid` attribute of the table.|
 |`tableGrid`|Integer\[\]|_required_|The complete array of relative widths for the entire table, containing the new entry for the new column. Will be set to the `tableGrid` attribute of the table.|
 |`insertMode`|Enum|“before”|Where to insert the new cells, according to the column index.|
@@ -241,7 +241,7 @@ Deletes the cells of a single column or multiple columns from a table.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“deleteColumns”|
-|`start`|[TablePosition](#tableposition)|_required_|The position of the table whose columns will be removed.|
+|`start`|[TablePosition](operations-data-types.html#position)|_required_|The position of the table whose columns will be removed.|
 |`startGrid`|Integer|_required_|Zero-based index of the first column to be removed, according to the `tableGrid` attribute of the table.|
 |`endGrid`|Integer|_value of `startGrid`_|Zero-based index of the last column to be removed (closed range). If omitted, only one column will be removed.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
@@ -314,12 +314,12 @@ Inserts a new comment into a paragraph.
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“addNote”|
-|`start`|[CharacterPosition](#characterposition)|_required_|The position where the new comment will be inserted. The commentRang will be inserted before the character that is currently located at this position.|
+|`start`|[CharacterPosition](operations-data-types.html#position)|_required_|The position where the new comment will be inserted. The commentRang will be inserted before the character that is currently located at this position.|
 |`id`|String|_required_|Unique name, which is used as a target for operations belonging to this element|
 |`author`|String|””|The author of this comment.|
 |`uid`|String|””|The unique id of the author of this comment (used for picture and meta information of the author).|
 |`date`|String||The creation date of this comment.|
-|`attrs`|CharacterAttributeSet|{}|Attribute set with additional character attributes|
+|`attrs`|CharacterAttributeSet|{operations-formatting-attribute-sets.html#characterAttributeSet}|Attribute set with additional character attributes|
 
 ## documentLayout
 
@@ -328,7 +328,7 @@ Sets default attributes for the document and for various formatting attribute ty
 |Property|Type|Default Value|Description|
 |--------|----|-------------|-----------|
 |`name`|String|_required_|“setDocumentAttributes”|
-|`attrs`|[DocumentAttributeSet](#documentattributeset)|_required_|Application dependent attribute set with default attribute values for different attribute types.|
+|`attrs`|[DocumentAttributeSet](operations-formatting-attribute-sets.html#documentattributeset)|_required_|Application dependent attribute set with default attribute values for different attribute types.|
 
 ## addFontDecl
 
@@ -353,9 +353,9 @@ Sets or removes explicit formatting attributes at an arbitrary component in the 
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“format”|
-|`start`|[TextPosition](#textposition)|_required_|The position of the first component that will be formatted with the specified attributes.|
-|`end`|[TextPosition](#textposition)|_value of `start`_|The position of the last component that will be formatted (closed range). If omitted, this operation addresses a single component.|
-|`attrs`|[AttributeSet](#attributeset)|_required_|The attribute set containing all attributes to be changed. Attributes with a value of `null` will be removed from the component. Attributes not contained in the set remain unmodified.|
+|`start`|[TextPosition](operations-data-types.html#position)|_required_|The position of the first component that will be formatted with the specified attributes.|
+|`end`|[TextPosition](operations-data-types.html#position)|_value of `start`_|The position of the last component that will be formatted (closed range). If omitted, this operation addresses a single component.|
+|`attrs`|[AttributeSet](operations-formatting-attribute-sets.html#attributeset)|_required_|The attribute set containing all attributes to be changed. Attributes with a value of `null` will be removed from the component. Attributes not contained in the set remain unmodified.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
 *Note*:
@@ -372,7 +372,7 @@ Inserts a new style with its formatting attributes into the document.
 |`type`|Enum|_required_|The main attribute type of the style sheet. The supported types are dependent on the application.|
 |`styleId`|String|_required_|The identifier of the new style sheet (must be unique inside the corresponding attribute type).|
 |`styleName`|String|_value of_ `styleId`|The readable name of this style sheet. Must not be set for auto styles. An empty string is an allowed value.|
-|`attrs`|[AttributeSet](#attributeset)|{}|The attribute set with all attributes defined by the style sheet. Must support the attributes of the main attribute type of this operation, may support attributes of other types.|
+|`attrs`|[AttributeSet](operations-formatting-attribute-sets.html#attributeset)|{}|The attribute set with all attributes defined by the style sheet. Must support the attributes of the main attribute type of this operation, may support attributes of other types.|
 |`parent`|String|_none_ (no parent)|The identifier of the parent style sheet that derives formatting attributes to this style sheet. Must be omitted, if the style sheet does not have a parent. Auto styles must refer to their parent style sheet.|
 |`uiPriority`|Integer|0|The priority of the style sheet used to order style sheet in the user interface. The lower the value the higher the priority.|
 |`default`|Boolean|false|Whether this style sheet is the default style sheet of the family. Only one style sheet per family can be the default style sheet.|
@@ -388,8 +388,8 @@ Must not be used for auto styles.
 |--------|----|-------------|-----------|
 |`name`|String|_required_|“changeStyle”|
 |`type`|Enum|_required_|The main attribute type of the style sheet. The supported types are dependent on the application.|
-|`styleId`|String|_required_|The identifier of the style sheet to be changed. MUST NOT be an auto style (a style sheet with the property `auto` set to true, see operation [addStyle](#addStyle)).|
-|_other_|||Other properties supported by the operation [addStyle](#addStyle) that will be changed in the style sheet. The properties `default` and `auto` cannot be changed.|
+|`styleId`|String|_required_|The identifier of the style sheet to be changed. MUST NOT be an auto style (a style sheet with the property `auto` set to true, see operation [addStyle](#addstyle)).|
+|_other_|||Other properties supported by the operation [addStyle](#addstyle) that will be changed in the style sheet. The properties `default` and `auto` cannot be changed.|
 
 ## deleteStyle
 
@@ -399,7 +399,7 @@ Removes a style from the document. Does not modify any attribute sets of element
 |--------|----|-------------|-----------|
 |`name`|String|_required_|“deleteStyle”|
 |`type`|Enum|_required_|The main attribute type of the style sheet. The supported types are dependent on the application.|
-|`styleId`|String|_required_|The identifier of the style sheet to be removed. MUST NOT be an auto style (a style sheet with the property `auto` set to true, see operation [addStyle](#addStyle)).|
+|`styleId`|String|_required_|The identifier of the style sheet to be removed. MUST NOT be an auto style (a style sheet with the property `auto` set to true, see operation [addStyle](#addstyle)).|
 
 ## addDrawing
 
@@ -408,7 +408,7 @@ Inserts a new drawing object into the document. This section describes the gener
 |Property|Type|Default Value|Description|
 |--------|----|-------------|-----------|
 |`name`|String|_required_|“addDrawing”|
-|`start`|[DrawingPosition](#drawingposition)|_required_|The position of the drawing object.|
+|`start`|[DrawingPosition](operations-data-types.html#position)|_required_|The position of the drawing object.|
 |`type`|Enum|_required_|The type of the drawing contents.|
 ||“shape”|The drawing object is a simple or complex shape (line, rectangle, ellipse, custom interactive shape).|
 ||
@@ -421,4 +421,4 @@ Inserts a new drawing object into the document. This section describes the gener
 |“ole”|The drawing object contains an OLE object.|
 |“horizontal\_line”|The drawing object is a horizontal separator line between two paragraphs (Text only).|
 |“undefined”|The type of the drawing object is unknown. Applications will show a placeholder frame.|
-|`attrs`|[DrawingAttributeSet](#drawingattributeset)|{}|Initial attribute set for the drawing object.|
+|`attrs`|[DrawingAttributeSet](operations-formatting-attribute-sets.html#drawingattributeset)|{}|Initial attribute set for the drawing object.|

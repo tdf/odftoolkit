@@ -145,7 +145,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <td><code>styleId</code></td>
 <td>String</td>
 <td>”” (no style sheet)</td>
-<td>Reference to the style sheet defined by an <a href="#addStyle">addStyle</a> operation. MUST NOT be used in attribute sets of <a href="#addStyle">addStyle</a> operations.</td>
+<td>Reference to the style sheet defined by an <a href="operations.html#addstyle">addStyle</a> operation. MUST NOT be used in attribute sets of <a href="operations.html#addstyle">addStyle</a> operations.</td>
 </tr>
 <tr>
 <td><em>type1</em></td>
@@ -170,7 +170,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <h2 id="characterattributeset">CharacterAttributeSet<a class="headerlink" href="#characterattributeset" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>Attribute types</em>: <code>character</code></li>
-<li><em>Operations</em>: <a href="#documentLayout">documentLayout</a>, <a href="#addStyle">addStyle</a>, <a href="#format">format</a>, <a href="#addText">addText</a>, <a href="#addTab">addTab</a>, <a href="#addHardBreak">addHardBreak</a>, <a href="#addField">addField</a></li>
+<li><em>Operations</em>: <a href="operations.html#documentlayout">documentLayout</a>, <a href="operations.html#addstyle">addStyle</a>, <a href="operations.html#format">format</a>, <a href="operations.html#addtext">addText</a>, <a href="operations.html#addtab">addTab</a>, <a href="operations.html#addhardbreak">addHardBreak</a>, <a href="operations.html#addfield">addField</a></li>
 </ul>
 <p>Contains attributes for <code>character</code> style sheets and text spans, in the following format:</p>
 <table class="table">
@@ -187,11 +187,11 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <td><code>styleId</code></td>
 <td>String</td>
 <td><em>none</em></td>
-<td>Identifier of a character style sheet inserted with an <a href="#addStyle">addStyle</a> operation.</td>
+<td>Identifier of a character style sheet inserted with an <a href="operations.html#addstyle">addStyle</a> operation.</td>
 </tr>
 <tr>
 <td><code>character</code></td>
-<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#characterattributes">CharacterAttributes</a></td>
 <td></td>
 <td>Character formatting attributes.</td>
 </tr>
@@ -200,7 +200,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <h2 id="paragraphattributeset">ParagraphAttributeSet<a class="headerlink" href="#paragraphattributeset" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>Attribute types</em>: <code>paragraph</code>, <code>character</code></li>
-<li><em>Operations</em>: <a href="#documentLayout">documentLayout</a>, <a href="#addStyle">addStyle</a>, <a href="#format">format</a>, <a href="#addParagraph">addParagraph</a></li>
+<li><em>Operations</em>: <a href="operations.html#documentlayout">documentLayout</a>, <a href="operations.html#addstyle">addStyle</a>, <a href="operations.html#format">format</a>, <a href="operations.html#addParagraph">addParagraph</a></li>
 </ul>
 <p>Contains attributes for <code>paragraph</code> style sheets and paragraph elements, in the following format:</p>
 <table class="table">
@@ -217,17 +217,17 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <td><code>styleId</code></td>
 <td>String</td>
 <td><em>none</em></td>
-<td>Identifier of a paragraph style sheet inserted with an <a href="#addStyle">addStyle</a> operation.</td>
+<td>Identifier of a paragraph style sheet inserted with an <a href="operations.html#addstyle">addStyle</a> operation.</td>
 </tr>
 <tr>
 <td><code>paragraph</code></td>
-<td><a href="#paragraphattributes">ParagraphAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#paragraphattributes">ParagraphAttributes</a></td>
 <td></td>
 <td>Paragraph formatting attributes.</td>
 </tr>
 <tr>
 <td><code>character</code></td>
-<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#characterattributes">CharacterAttributes</a></td>
 <td></td>
 <td>Character formatting attributes.</td>
 </tr>
@@ -236,7 +236,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <h2 id="tableattributeset">TableAttributeSet<a class="headerlink" href="#tableattributeset" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>Attribute types</em>: <code>table</code>, <code>row</code>, <code>cell</code>, <code>paragraph</code>, <code>character</code></li>
-<li><em>Operations</em>: <a href="#format">format</a>, <a href="#addTable">addTable</a></li>
+<li><em>Operations</em>: <a href="operations.html#format">format</a>, <a href="operations.html#addtable">addTable</a></li>
 </ul>
 <p>Contains attributes for table elements (<strong>not</strong> table style sheets, see <a href="#tablestylesheetattributeset">TableStyleSheetAttributeSet</a>), in the following format:</p>
 <table class="table">
@@ -253,7 +253,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <td><code>styleId</code></td>
 <td>String</td>
 <td><em>none</em></td>
-<td>Identifier of a table style sheet inserted with an <a href="#addStyle">addStyle</a> operation.</td>
+<td>Identifier of a table style sheet inserted with an <a href="operations.html#addstyle">addStyle</a> operation.</td>
 </tr>
 <tr>
 <td><code>stripsetSize</code></td>
@@ -263,31 +263,31 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </tr>
 <tr>
 <td><code>table</code></td>
-<td><a href="#tableattributes">TableAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#tableattributes">TableAttributes</a></td>
 <td></td>
 <td>Table formatting attributes.</td>
 </tr>
 <tr>
 <td><code>row</code></td>
-<td><a href="#tablerowattributes">TableRowAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#tablerowattributes">TableRowAttributes</a></td>
 <td></td>
 <td>Table Row formatting attributes.</td>
 </tr>
 <tr>
 <td><code>cell</code></td>
-<td><a href="#tablecellattributes">TableCellAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#tablecellattributes">TableCellAttributes</a></td>
 <td></td>
 <td>Table Cell formatting attributes.</td>
 </tr>
 <tr>
 <td><code>paragraph</code></td>
-<td><a href="#paragraphattributes">ParagraphAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#paragraphattributes">ParagraphAttributes</a></td>
 <td></td>
 <td>Paragraph formatting attributes.</td>
 </tr>
 <tr>
 <td><code>character</code></td>
-<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#characterattributes">CharacterAttributes</a></td>
 <td></td>
 <td>Character formatting attributes.</td>
 </tr>
@@ -296,7 +296,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <h2 id="tablestylesheetattributeset">TableStyleSheetAttributeSet<a class="headerlink" href="#tablestylesheetattributeset" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>Attribute types</em>: <code>table</code></li>
-<li><em>Operations</em>: <a href="#addStyle">addStyle</a></li>
+<li><em>Operations</em>: <a href="operations.html#addstyle">addStyle</a></li>
 </ul>
 <p>Contains attributes for <code>table</code> style sheets (<strong>not</strong> table elements, see <a href="#tableattributeset">TableAttributeSet</a>), in the following format:</p>
 <table class="table">
@@ -392,7 +392,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <h2 id="tablerowattributeset">TableRowAttributeSet<a class="headerlink" href="#tablerowattributeset" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>Attribute types</em>: <code>row</code>, <code>changes</code></li>
-<li><em>Operations</em>: <a href="#format">format</a>, <a href="#addRows">addRows</a></li>
+<li><em>Operations</em>: <a href="operations.html#format">format</a>, <a href="operations.html#addrows">addRows</a></li>
 </ul>
 <p>Contains attributes for table row elements, in the following format:</p>
 <table class="table">
@@ -407,7 +407,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <tbody>
 <tr>
 <td><code>row</code></td>
-<td><a href="#tablerowattributes">TableRowAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#tablerowattributes">TableRowAttributes</a></td>
 <td></td>
 <td>Table row formatting attributes.</td>
 </tr>
@@ -416,7 +416,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <h2 id="tablecellattributeset">TableCellAttributeSet<a class="headerlink" href="#tablecellattributeset" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>Attribute types</em>: <code>cell</code>, <code>paragraph</code>, <code>character</code>, <code>changes</code></li>
-<li><em>Operations</em>: <a href="#format">format</a>, <a href="#addCells">addCells</a></li>
+<li><em>Operations</em>: <a href="operations.html#format">format</a>, <a href="operations.html#addcells">addCells</a></li>
 </ul>
 <p>Contains attributes for table cell elements, in the following format:</p>
 <table class="table">
@@ -431,19 +431,19 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <tbody>
 <tr>
 <td><code>cell</code></td>
-<td><a href="#tablecellattributes">TableCellAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#tablecellattributes">TableCellAttributes</a></td>
 <td></td>
 <td>Table cell formatting attributes.</td>
 </tr>
 <tr>
 <td><code>paragraph</code></td>
-<td><a href="#paragraphattributes">ParagraphAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#paragraphattributes">ParagraphAttributes</a></td>
 <td></td>
 <td>Paragraph formatting attributes.</td>
 </tr>
 <tr>
 <td><code>character</code></td>
-<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#characterattributes">CharacterAttributes</a></td>
 <td></td>
 <td>Character formatting attributes.</td>
 </tr>
@@ -452,7 +452,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <h2 id="documentattributeset">DocumentAttributeSet<a class="headerlink" href="#documentattributeset" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>Attribute types</em>: <code>document</code>, various other types depending on application type</li>
-<li><em>Operations</em>: <a href="#documentLayout">documentLayout</a></li>
+<li><em>Operations</em>: <a href="operations.html#documentlayout">documentLayout</a></li>
 </ul>
 <p>Contains global document settings, and default attribute values for different attribute types supported by the current application. Default attribute values are used to determine the value of an attribute that is neither specified by a style sheet referenced by a component nor by an explicit attribute of the component.</p>
 <table class="table">
@@ -468,14 +468,14 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <tbody>
 <tr>
 <td><code>document</code></td>
-<td><a href="#documentattributes">DocumentAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#documentattributes">DocumentAttributes</a></td>
 <td></td>
 <td>all</td>
 <td>Global document settings, depending on the document type.</td>
 </tr>
 <tr>
 <td><code>page</code></td>
-<td><a href="#pageattributes">PageAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#pageattributes">PageAttributes</a></td>
 <td></td>
 <td>all</td>
 <td>Default page attributes.</td>
@@ -489,28 +489,28 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </tr>
 <tr>
 <td><code>character</code></td>
-<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#characterattributes">CharacterAttributes</a></td>
 <td></td>
 <td>all</td>
 <td>Default character attributes for drawing objects, text documents, and spreadsheet cells.</td>
 </tr>
 <tr>
 <td><code>paragraph</code></td>
-<td><a href="#paragraphattributes">ParagraphAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#paragraphattributes">ParagraphAttributes</a></td>
 <td></td>
 <td>Text</td>
 <td>Default paragraph attributes for text documents.</td>
 </tr>
 <tr>
 <td><code>cell</code></td>
-<td><a href="#cellattributes">CellAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#cellattributes">CellAttributes</a></td>
 <td></td>
 <td>Spreadsheet</td>
 <td>Default cell attributes for spreadsheet documents.</td>
 </tr>
 <tr>
 <td><code>layout</code></td>
-<td><a href="#layoutattributes">LayoutAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#layoutattributes">LayoutAttributes</a></td>
 <td></td>
 <td>Presentation</td>
 <td>Width in percent from the slide pane for presentation documents.</td>
@@ -520,7 +520,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <h2 id="pageattributeset">PageAttributeSet<a class="headerlink" href="#pageattributeset" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>Attribute types</em>: <code>page</code></li>
-<li><em>Operations</em>: <a href="#documentLayout">documentLayout</a>, <a href="#addStyle">addStyle</a></li>
+<li><em>Operations</em>: <a href="operations.html#documentlayout">documentLayout</a>, <a href="operations.html#addstyle">addStyle</a></li>
 </ul>
 <p>Contains attributes for <code>page</code> style sheets and page elements, in the following format:</p>
 <table class="table">
@@ -537,11 +537,11 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <td><code>styleId</code></td>
 <td>String</td>
 <td>”” (no style sheet)</td>
-<td>Identifier of a page style sheet inserted with an <a href="#addStyle">addStyle</a> operation.</td>
+<td>Identifier of a page style sheet inserted with an <a href="operations.html#addstyle">addStyle</a> operation.</td>
 </tr>
 <tr>
 <td><code>page</code></td>
-<td><a href="#pageattributes">PageAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#pageattributes">PageAttributes</a></td>
 <td></td>
 <td>Page formatting attributes.</td>
 </tr>
@@ -550,7 +550,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <h2 id="drawingattributeset">DrawingAttributeSet<a class="headerlink" href="#drawingattributeset" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>Attribute types</em>: <code>drawing</code>, <code>fill</code>, <code>line</code>, <code>image</code>, <code>shape</code>, <code>geometry</code>, <code>connector</code>, <code>chart</code></li>
-<li><em>Operations</em>: <a href="#addStyle">addStyle</a>, <a href="#insertdrawing">insertDrawing</a>, <a href="#setdrawingattributes">setDrawingAttributes</a>, <a href="#setattributes">setAttributes</a></li>
+<li><em>Operations</em>: <a href="operations.html#addstyle">addStyle</a>, <a href="operations.html#adddrawing">addDrawing</a>, <a href="#setdrawingattributes">setDrawingAttributes</a>, <a href="operations.html#format">format</a></li>
 </ul>
 <p>Contains attributes for <code>drawing</code> style sheets and drawing objects, in the following format:</p>
 <table class="table">
@@ -567,53 +567,53 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <td><code>styleId</code></td>
 <td>String</td>
 <td></td>
-<td>Identifier of a drawing style sheet inserted with an <a href="#addStyle">addStyle</a> operation.</td>
+<td>Identifier of a drawing style sheet inserted with an <a href="operations.html#addstyle">addStyle</a> operation.</td>
 </tr>
 <tr>
 <td><code>drawing</code></td>
-<td><a href="#drawingattributes">DrawingAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawingattributes">DrawingAttributes</a></td>
 <td></td>
 <td>Drawing formatting attributes.</td>
 </tr>
 <tr>
 <td><code>fill</code></td>
-<td><a href="#drawingfillattributes">DrawingFillAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawingfillattributes">DrawingFillAttributes</a></td>
 <td></td>
 <td>Additional fill formatting attributes for the entire drawing object.</td>
 </tr>
 <tr>
 <td><code>line</code></td>
-<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawinglineattributes">DrawingLineAttributes</a></td>
 <td></td>
 <td>Additional line formatting attributes for the entire drawing object.</td>
 </tr>
 <tr>
 <td><code>image</code></td>
-<td><a href="#imageattributes">ImageAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#imageattributes">ImageAttributes</a></td>
 <td></td>
 <td>Additional image attributes, only used for image and OLE objects.</td>
 </tr>
 <tr>
 <td><code>shape</code></td>
-<td><a href="#shapeattributes">ShapeAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#shapeattributes">ShapeAttributes</a></td>
 <td></td>
 <td>Additional formatting attributes for auto-shapes and text frames.</td>
 </tr>
 <tr>
 <td><code>geometry</code></td>
-<td><a href="#geometryattributes">GeometryAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#geometryattributes">GeometryAttributes</a></td>
 <td></td>
 <td>Additional geometry attributes for auto-shapes and text frames.</td>
 </tr>
 <tr>
 <td><code>connector</code></td>
-<td><a href="#connectorattributes">ConnectorAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#connectorattributes">ConnectorAttributes</a></td>
 <td></td>
 <td>Additional connector attributes for connector shapes.</td>
 </tr>
 <tr>
 <td><code>chart</code></td>
-<td><a href="#chartattributes">ChartAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#chartattributes">ChartAttributes</a></td>
 <td></td>
 <td>Additional chart formatting attributes, only used for chart objects.</td>
 </tr>
@@ -637,19 +637,19 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <tbody>
 <tr>
 <td><code>series</code></td>
-<td><a href="#chartdataseriesattributes">ChartDataSeriesAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#chartdataseriesattributes">ChartDataSeriesAttributes</a></td>
 <td></td>
 <td>Chart data series formatting attributes.</td>
 </tr>
 <tr>
 <td><code>fill</code></td>
-<td><a href="#drawingfillattributes">DrawingFillAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawingfillattributes">DrawingFillAttributes</a></td>
 <td></td>
 <td>Additional fill formatting attributes for the data series.</td>
 </tr>
 <tr>
 <td><code>line</code></td>
-<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawinglineattributes">DrawingLineAttributes</a></td>
 <td></td>
 <td>Additional line formatting attributes for the data series.</td>
 </tr>
@@ -673,13 +673,13 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <tbody>
 <tr>
 <td><code>fill</code></td>
-<td><a href="#drawingfillattributes">DrawingFillAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawingfillattributes">DrawingFillAttributes</a></td>
 <td></td>
 <td>Additional fill formatting attributes for the data point.</td>
 </tr>
 <tr>
 <td><code>line</code></td>
-<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawinglineattributes">DrawingLineAttributes</a></td>
 <td></td>
 <td>Additional line formatting attributes for the data point.</td>
 </tr>
@@ -703,19 +703,19 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <tbody>
 <tr>
 <td><code>axis</code></td>
-<td><a href="#chartaxisattributes">ChartAxisAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#chartaxisattributes">ChartAxisAttributes</a></td>
 <td></td>
 <td>Chart axis formatting attributes.</td>
 </tr>
 <tr>
 <td><code>line</code></td>
-<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawinglineattributes">DrawingLineAttributes</a></td>
 <td></td>
 <td>Additional line formatting attributes for the axis.</td>
 </tr>
 <tr>
 <td><code>character</code></td>
-<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#characterattributes">CharacterAttributes</a></td>
 <td></td>
 <td>Character formatting attributes for the axis labels.</td>
 </tr>
@@ -739,25 +739,25 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <tbody>
 <tr>
 <td><code>fill</code></td>
-<td><a href="#drawingfillattributes">DrawingFillAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawingfillattributes">DrawingFillAttributes</a></td>
 <td></td>
 <td>Fill formatting attributes for the title shape.</td>
 </tr>
 <tr>
 <td><code>line</code></td>
-<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawinglineattributes">DrawingLineAttributes</a></td>
 <td></td>
 <td>Line formatting attributes for the title shape.</td>
 </tr>
 <tr>
 <td><code>text</code></td>
-<td><a href="#drawingtextattributes">DrawingTextAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawingtextattributes">DrawingTextAttributes</a></td>
 <td></td>
 <td>Attributes describing the text source.</td>
 </tr>
 <tr>
 <td><code>character</code></td>
-<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#characterattributes">CharacterAttributes</a></td>
 <td></td>
 <td>Character formatting attributes for the title.</td>
 </tr>
@@ -781,7 +781,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <tbody>
 <tr>
 <td><code>line</code></td>
-<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawinglineattributes">DrawingLineAttributes</a></td>
 <td></td>
 <td>Line formatting attributes for the grid line.</td>
 </tr>
@@ -805,25 +805,25 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <tbody>
 <tr>
 <td><code>legend</code></td>
-<td><a href="#chartlegendattributes">ChartLegendAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#chartlegendattributes">ChartLegendAttributes</a></td>
 <td></td>
 <td>Chart legend formatting attributes.</td>
 </tr>
 <tr>
 <td><code>fill</code></td>
-<td><a href="#drawingfillattributes">DrawingFillAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawingfillattributes">DrawingFillAttributes</a></td>
 <td></td>
 <td>Additional fill formatting attributes for the legend shape.</td>
 </tr>
 <tr>
 <td><code>line</code></td>
-<td><a href="#drawinglineattributes">DrawingLineAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#drawinglineattributes">DrawingLineAttributes</a></td>
 <td></td>
 <td>Additional line formatting attributes for the legend shape.</td>
 </tr>
 <tr>
 <td><code>character</code></td>
-<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#characterattributes">CharacterAttributes</a></td>
 <td></td>
 <td>Additional character formatting attributes for the legend.</td>
 </tr>
@@ -832,7 +832,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <h2 id="tabledrawingattributeset">TableDrawingAttributeSet<a class="headerlink" href="#tabledrawingattributeset" title="Permanent link">&para;</a></h2>
 <ul>
 <li><em>Attribute types</em>: <code>table</code>, <code>row</code>, <code>cell</code>, <code>paragraph</code>, <code>character</code></li>
-<li><em>Operations</em>: <a href="#insertdrawing">insertDrawing</a>, <a href="#setattributes">setAttributes</a></li>
+<li><em>Operations</em>: <a href="operations.html#adddrawing">addDrawing</a>, <a href="operations.html#format">format</a></li>
 </ul>
 <p>Contains attributes for drawing objects of type 'table', in the following format:</p>
 <table class="table">
@@ -849,29 +849,29 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <td><code>styleId</code></td>
 <td>String</td>
 <td><em>none</em></td>
-<td>Identifier of a table style sheet inserted with an <a href="#addStyle">addStyle</a> operation.</td>
+<td>Identifier of a table style sheet inserted with an <a href="operations.html#addstyle">addStyle</a> operation.</td>
 </tr>
 <tr>
 <td><code>table</code></td>
-<td><a href="#tableattributes">TableAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#tableattributes">TableAttributes</a></td>
 <td></td>
 <td>Table formatting attributes.</td>
 </tr>
 <tr>
 <td><code>cell</code></td>
-<td><a href="#tablecellattributes">TableCellAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#tablecellattributes">TableCellAttributes</a></td>
 <td></td>
 <td>Table Cell formatting attributes.</td>
 </tr>
 <tr>
 <td><code>paragraph</code></td>
-<td><a href="#paragraphattributes">ParagraphAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#paragraphattributes">ParagraphAttributes</a></td>
 <td></td>
 <td>Paragraph formatting attributes.</td>
 </tr>
 <tr>
 <td><code>character</code></td>
-<td><a href="#characterattributes">CharacterAttributes</a></td>
+<td><a href="operations-formatting-attributes.html#characterattributes">CharacterAttributes</a></td>
 <td></td>
 <td>Character formatting attributes.</td>
 </tr>

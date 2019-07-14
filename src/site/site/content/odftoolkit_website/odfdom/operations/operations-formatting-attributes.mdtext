@@ -125,7 +125,7 @@ Table formatting attributes will be applied to table elements in a text document
 |`pageBreakBefore`|Boolean|false|all|specifies that a page break is inserted before this table, this attribute is not beeing inherited by followed table (ODF only feature, required by LO)||
 |`exclude`|Array<Enum>|\[\]|element|String array defining which conditional table attribute sets are **not** used from the table style sheet. See next table for details.||
 
-Each table style sheet contains multiple attribute sets, mapped by conditional keys which describe a specific area in the table. See [TableStyleSheetAttributeSet](#tablestylesheetattributeset) for details. The attribute `exclude` specifies which of these attribute sets will be excluded from the table.
+Each table style sheet contains multiple attribute sets, mapped by conditional keys which describe a specific area in the table. See [TableStyleSheetAttributeSet](operations-formatting-attribute-sets.html#tablestylesheetattributeset) for details. The attribute `exclude` specifies which of these attribute sets will be excluded from the table.
 
 |`exclude` key|Excluded conditional attribute sets|Description|
 |-------------|-----------------------------------|-----------|

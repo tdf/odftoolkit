@@ -175,13 +175,13 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#textposition">TextPosition</a></td>
+<td><a href="operations-data-types.html#position">TextPosition</a></td>
 <td><em>required</em></td>
 <td>The position of the first component that will be deleted.</td>
 </tr>
 <tr>
 <td><code>end</code></td>
-<td><a href="#textposition">TextPosition</a></td>
+<td><a href="operations-data-types.html#position">TextPosition</a></td>
 <td><em>value of <code>start</code></em></td>
 <td>The position of the last component that will be deleted (closed range). if omitted, this operation addresses a single component.</td>
 </tr>
@@ -215,19 +215,19 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#textposition">TextPosition</a></td>
+<td><a href="operations-data-types.html#position">TextPosition</a></td>
 <td><em>required</em></td>
 <td>The position of the first component that will be moved.</td>
 </tr>
 <tr>
 <td><code>end</code></td>
-<td><a href="#textposition">TextPosition</a></td>
+<td><a href="operations-data-types.html#position">TextPosition</a></td>
 <td><em>value of <code>start</code></em></td>
 <td>The position of the last component that will be moved (closed range). If omitted, this operation addresses a single component.</td>
 </tr>
 <tr>
 <td><code>to</code></td>
-<td><a href="#textposition">TextPosition</a></td>
+<td><a href="operations-data-types.html#position">TextPosition</a></td>
 <td><em>required</em></td>
 <td>The target position to move the selected components to.</td>
 </tr>
@@ -260,13 +260,13 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#paragraphposition">ParagraphPosition</a></td>
+<td><a href="operations-data-types.html#position">ParagraphPosition</a></td>
 <td><em>required</em></td>
 <td>The position of the new paragraph. The paragraph will be inserted before a component that is currently located at this position.</td>
 </tr>
 <tr>
 <td><code>attrs</code></td>
-<td><a href="#paragraphattributeset">ParagraphAttributeSet</a></td>
+<td><a href="operations-formatting-attribute-sets.html#paragraphattributeset">ParagraphAttributeSet</a></td>
 <td></td>
 <td>Initial attribute set for the paragraph.</td>
 </tr>
@@ -298,7 +298,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#characterposition">CharacterPosition</a></td>
+<td><a href="operations-data-types.html#position">CharacterPosition</a></td>
 <td><em>required</em></td>
 <td>The position of the first character (or other child component in the paragraph) that will be moved to the beginning of the new paragraph.</td>
 </tr>
@@ -330,7 +330,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#paragraphposition">ParagraphPosition</a></td>
+<td><a href="operations-data-types.html#position">ParagraphPosition</a></td>
 <td><em>required</em></td>
 <td>The position of the paragraph, that will be merged with the following paragraph.</td>
 </tr>
@@ -363,7 +363,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#characterposition">CharacterPosition</a></td>
+<td><a href="operations-data-types.html#position">CharacterPosition</a></td>
 <td><em>required</em></td>
 <td>The position where the new text will be inserted. The text will be inserted before the character that is currently located at this position.</td>
 </tr>
@@ -375,7 +375,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>attrs</code></td>
-<td><a href="#characterattributeset">CharacterAttributeSet</a></td>
+<td><a href="operations-formatting-attribute-sets.html#characterattributeset">CharacterAttributeSet</a></td>
 <td></td>
 <td>Attribute set with additional character attributes (see note below).</td>
 </tr>
@@ -414,13 +414,13 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#characterposition">CharacterPosition</a></td>
+<td><a href="operations-data-types.html#position">CharacterPosition</a></td>
 <td><em>required</em></td>
 <td>The position where the new tabulator will be inserted. The tabulator will be inserted before the character that is currently located at this position.</td>
 </tr>
 <tr>
 <td><code>attrs</code></td>
-<td><a href="#characterattributeset">CharacterAttributeSet</a></td>
+<td><a href="operations-formatting-attribute-sets.html#characterattributeset">CharacterAttributeSet</a></td>
 <td></td>
 <td>Attribute set with additional character attributes (see note below).</td>
 </tr>
@@ -459,7 +459,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#characterposition">CharacterPosition</a></td>
+<td><a href="operations-data-types.html#position">CharacterPosition</a></td>
 <td><em>required</em></td>
 <td>The position where the new hard break will be inserted. The hard break will be inserted before the character that is currently located at this position.</td>
 </tr>
@@ -471,7 +471,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>attrs</code></td>
-<td><a href="#characterattributeset">CharacterAttributeSet</a></td>
+<td><a href="operations-formatting-attribute-sets.html#characterattributeset">CharacterAttributeSet</a></td>
 <td></td>
 <td>Attribute set with additional character attributes (see note below).</td>
 </tr>
@@ -510,7 +510,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#characterposition">CharacterPosition</a></td>
+<td><a href="operations-data-types.html#position">CharacterPosition</a></td>
 <td><em>required</em></td>
 <td>The position where the new field will be inserted. The field will be inserted before the character that is currently located at this position.</td>
 </tr>
@@ -528,7 +528,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>attrs</code></td>
-<td><a href="#characterattributeset">CharacterAttributeSet</a></td>
+<td><a href="operations-formatting-attribute-sets.html#characterattributeset">CharacterAttributeSet</a></td>
 <td></td>
 <td>Attribute set with additional character attributes (see note below).</td>
 </tr>
@@ -560,7 +560,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#characterposition">CharacterPosition</a></td>
+<td><a href="operations-data-types.html#position">CharacterPosition</a></td>
 <td><em>required</em></td>
 <td>The position where the new field will be inserted. The field will be inserted before the character that is currently located at this position.</td>
 </tr>
@@ -578,7 +578,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>attrs</code></td>
-<td><a href="#characterattributeset">CharacterAttributeSet</a></td>
+<td><a href="operations-formatting-attribute-sets.html#characterattributeset">CharacterAttributeSet</a></td>
 <td></td>
 <td>Attribute set with additional character attributes (see note below).</td>
 </tr>
@@ -617,13 +617,13 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#tableposition">TablePosition</a></td>
+<td><a href="operations-data-types.html#position">TablePosition</a></td>
 <td><em>required</em></td>
 <td>The position of the new table. The table will be inserted before a component that is currently located at this position.</td>
 </tr>
 <tr>
 <td><code>attrs</code></td>
-<td><a href="#tableattributeset">TableAttributeSet</a></td>
+<td><a href="operations-formatting-attribute-sets.html#tableattributeset">TableAttributeSet</a></td>
 <td></td>
 <td>Initial attribute set for the table.</td>
 </tr>
@@ -667,7 +667,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#tablerowposition">TableRowPosition</a></td>
+<td><a href="operations-data-types.html#position">TableRowPosition</a></td>
 <td><em>required</em></td>
 <td>The position of the new table row. The row will be inserted before a row that is currently located at this position.</td>
 <td></td>
@@ -695,7 +695,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>attrs</code></td>
-<td><a href="#tablerowattributeset">TableRowAttributeSet</a></td>
+<td><a href="operations-formatting-attribute-sets.html#tablerowattributeset">TableRowAttributeSet</a></td>
 <td></td>
 <td>Initial attribute set for the table row.</td>
 <td></td>
@@ -733,7 +733,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#tablecellposition">TableCellPosition</a></td>
+<td><a href="operations-data-types.html#position">TableCellPosition</a></td>
 <td><em>required</em></td>
 <td>The position of the new cell. The cell will be inserted before a cell that is currently located at this position.</td>
 <td></td>
@@ -747,7 +747,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>attrs</code></td>
-<td><a href="#tablecellattributeset">TableCellAttributeSet</a></td>
+<td><a href="operations-formatting-attribute-sets.html#tablecellattributeset">TableCellAttributeSet</a></td>
 <td></td>
 <td>Initial attribute set for the cell.</td>
 <td></td>
@@ -783,7 +783,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#tableposition">TablePosition</a></td>
+<td><a href="operations-data-types.html#position">TablePosition</a></td>
 <td><em>required</em></td>
 <td>The position of the table the new column will be inserted into.</td>
 </tr>
@@ -855,7 +855,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#tableposition">TablePosition</a></td>
+<td><a href="operations-data-types.html#position">TablePosition</a></td>
 <td><em>required</em></td>
 <td>The position of the table whose columns will be removed.</td>
 </tr>
@@ -1096,7 +1096,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#characterposition">CharacterPosition</a></td>
+<td><a href="operations-data-types.html#position">CharacterPosition</a></td>
 <td><em>required</em></td>
 <td>The position where the new comment will be inserted. The commentRang will be inserted before the character that is currently located at this position.</td>
 </tr>
@@ -1127,7 +1127,7 @@ The following general rules apply for these operations:</p>
 <tr>
 <td><code>attrs</code></td>
 <td>CharacterAttributeSet</td>
-<td></td>
+<td operations-formatting-attribute-sets.html_characterAttributeSet="operations-formatting-attribute-sets.html#characterAttributeSet"></td>
 <td>Attribute set with additional character attributes</td>
 </tr>
 </tbody>
@@ -1152,7 +1152,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>attrs</code></td>
-<td><a href="#documentattributeset">DocumentAttributeSet</a></td>
+<td><a href="operations-formatting-attribute-sets.html#documentattributeset">DocumentAttributeSet</a></td>
 <td><em>required</em></td>
 <td>Application dependent attribute set with default attribute values for different attribute types.</td>
 </tr>
@@ -1246,19 +1246,19 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#textposition">TextPosition</a></td>
+<td><a href="operations-data-types.html#position">TextPosition</a></td>
 <td><em>required</em></td>
 <td>The position of the first component that will be formatted with the specified attributes.</td>
 </tr>
 <tr>
 <td><code>end</code></td>
-<td><a href="#textposition">TextPosition</a></td>
+<td><a href="operations-data-types.html#position">TextPosition</a></td>
 <td><em>value of <code>start</code></em></td>
 <td>The position of the last component that will be formatted (closed range). If omitted, this operation addresses a single component.</td>
 </tr>
 <tr>
 <td><code>attrs</code></td>
-<td><a href="#attributeset">AttributeSet</a></td>
+<td><a href="operations-formatting-attribute-sets.html#attributeset">AttributeSet</a></td>
 <td><em>required</em></td>
 <td>The attribute set containing all attributes to be changed. Attributes with a value of <code>null</code> will be removed from the component. Attributes not contained in the set remain unmodified.</td>
 </tr>
@@ -1312,7 +1312,7 @@ The following general rules apply for these operations:</p>
 </tr>
 <tr>
 <td><code>attrs</code></td>
-<td><a href="#attributeset">AttributeSet</a></td>
+<td><a href="operations-formatting-attribute-sets.html#attributeset">AttributeSet</a></td>
 <td></td>
 <td>The attribute set with all attributes defined by the style sheet. Must support the attributes of the main attribute type of this operation, may support attributes of other types.</td>
 </tr>
@@ -1377,13 +1377,13 @@ Must not be used for auto styles.</p>
 <td><code>styleId</code></td>
 <td>String</td>
 <td><em>required</em></td>
-<td>The identifier of the style sheet to be changed. MUST NOT be an auto style (a style sheet with the property <code>auto</code> set to true, see operation <a href="#addStyle">addStyle</a>).</td>
+<td>The identifier of the style sheet to be changed. MUST NOT be an auto style (a style sheet with the property <code>auto</code> set to true, see operation <a href="#addstyle">addStyle</a>).</td>
 </tr>
 <tr>
 <td><em>other</em></td>
 <td></td>
 <td></td>
-<td>Other properties supported by the operation <a href="#addStyle">addStyle</a> that will be changed in the style sheet. The properties <code>default</code> and <code>auto</code> cannot be changed.</td>
+<td>Other properties supported by the operation <a href="#addstyle">addStyle</a> that will be changed in the style sheet. The properties <code>default</code> and <code>auto</code> cannot be changed.</td>
 </tr>
 </tbody>
 </table>
@@ -1415,7 +1415,7 @@ Must not be used for auto styles.</p>
 <td><code>styleId</code></td>
 <td>String</td>
 <td><em>required</em></td>
-<td>The identifier of the style sheet to be removed. MUST NOT be an auto style (a style sheet with the property <code>auto</code> set to true, see operation <a href="#addStyle">addStyle</a>).</td>
+<td>The identifier of the style sheet to be removed. MUST NOT be an auto style (a style sheet with the property <code>auto</code> set to true, see operation <a href="#addstyle">addStyle</a>).</td>
 </tr>
 </tbody>
 </table>
@@ -1439,7 +1439,7 @@ Must not be used for auto styles.</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td><a href="#drawingposition">DrawingPosition</a></td>
+<td><a href="operations-data-types.html#position">DrawingPosition</a></td>
 <td><em>required</em></td>
 <td>The position of the drawing object.</td>
 </tr>
@@ -1517,7 +1517,7 @@ Must not be used for auto styles.</p>
 </tr>
 <tr>
 <td><code>attrs</code></td>
-<td><a href="#drawingattributeset">DrawingAttributeSet</a></td>
+<td><a href="operations-formatting-attribute-sets.html#drawingattributeset">DrawingAttributeSet</a></td>
 <td></td>
 <td>Initial attribute set for the drawing object.</td>
 </tr>
