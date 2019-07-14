@@ -112,14 +112,14 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
   visibility: hidden;
 }
 h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p><strong><a href="index.html">Demos</a> &gt; Automatically Formatting a Document</strong>  </p>
-<p><strong>Overview</strong>  </p>
-<p>Simple API enhanced features to support document formatting in version 0.6.5. It supplies methods for manipulating headings, page breaks, hyperlinks, comments, font and alignment. This demo shows how to use these features to help document formatting.  </p>
-<p>It's a common scenario that we need apply some  styles to plain text to improve its appearance. In this demo, a text document is created using plain text from a text file. While reading content, paragraphs whose  length  is less than 20 characters are changed to headings with a new font style. "Version" and "date" information is  set as right alignment and gray text. Each line which matches an URL  will be applied as a hyperlink. Each heading and its following paragraphs are considered as a chapter. There will be a page break after page line count larger than a predefined value. Then verify word spelling and add comments as tip to those which may have a spelling mistake. The last one is a security check. After these processes, the plain text has been changed into a formatted document.  </p>
+<p><strong><a href="index.html">Demos</a> &gt; Automatically Formatting a Document</strong></p>
+<p><strong>Overview</strong></p>
+<p>Simple API enhanced features to support document formatting in version 0.6.5. It supplies methods for manipulating headings, page breaks, hyperlinks, comments, font and alignment. This demo shows how to use these features to help document formatting.</p>
+<p>It's a common scenario that we need apply some  styles to plain text to improve its appearance. In this demo, a text document is created using plain text from a text file. While reading content, paragraphs whose  length  is less than 20 characters are changed to headings with a new font style. "Version" and "date" information is  set as right alignment and gray text. Each line which matches an URL  will be applied as a hyperlink. Each heading and its following paragraphs are considered as a chapter. There will be a page break after page line count larger than a predefined value. Then verify word spelling and add comments as tip to those which may have a spelling mistake. The last one is a security check. After these processes, the plain text has been changed into a formatted document.</p>
 <p>This picture shows part of the generated document. The new document looks orderly and beautiful than before.</p>
 <p><img alt="alt text" src="image/demo10.png" /></p>
 <p><strong>Code Introduction</strong></p>
-<p>There code of this demo is very clear. Firstly, we open the data source and create a text document. Secondly, we create paragraph for each line. Thirdly, we set different style for different content. Then we do spell and security check with the help of Navigation API. Comments are given if suspicious words are found.  Finally, the new created document is saved.  </p>
+<p>There code of this demo is very clear. Firstly, we open the data source and create a text document. Secondly, we create paragraph for each line. Thirdly, we set different style for different content. Then we do spell and security check with the help of Navigation API. Comments are given if suspicious words are found.  Finally, the new created document is saved.</p>
 <div class="codehilite"><pre><span></span>        BufferedReader reader = new BufferedReader(new InputStreamReader(this.class.getResourceAsStream(&quot;text.txt&quot;)));
         String in = reader.readLine();
         TextDocument doc = TextDocument.newTextDocument();
@@ -185,7 +185,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 
 
 <p><strong>Download</strong></p>
-<p>Powered by the Simple Java API for ODF version <a href="../downloads.html">0.6.5</a>.<br />
+<p>Powered by the Simple Java API for ODF version <a href="../downloads.html">0.6.5</a>.
 You can download the code of this demo from <a href="demo10.zip">here</a>.</p>
     </div>
     

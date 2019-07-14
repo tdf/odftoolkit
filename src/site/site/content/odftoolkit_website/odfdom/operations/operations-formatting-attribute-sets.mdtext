@@ -43,7 +43,7 @@ The generic definition of an attribute set.
 |------------|
 |Attribute types|`character`|
 |---------------|
-|Operations|[setDocumentAttributes](#setdocumentattributes), [addStyle](#addStyle), [format](#format), [addText](#addText), [addTab](#addTab), [addHardBreak](#addHardBreak), [addField](#addField)|
+|Operations|[documentLayout](#documentLayout), [addStyle](#addStyle), [format](#format), [addText](#addText), [addTab](#addTab), [addHardBreak](#addHardBreak), [addField](#addField)|
 |----------|
 
 Contains attributes for `character` style sheets and text spans, in the following format:
@@ -61,7 +61,7 @@ Contains attributes for `character` style sheets and text spans, in the followin
 |------------|
 |Attribute types|`paragraph`, `character`|
 |---------------|
-|Operations|[setDocumentAttributes](#setdocumentattributes), [addStyle](#addStyle), [format](#format), [addParagraph](#addParagraph)|
+|Operations|[documentLayout](#documentLayout), [addStyle](#addStyle), [format](#format), [addParagraph](#addParagraph)|
 |----------|
 
 Contains attributes for `paragraph` style sheets and paragraph elements, in the following format:
@@ -165,7 +165,7 @@ Contains attributes for table cell elements, in the following format:
 |------------|
 |Attribute types|`document`, various other types depending on application type|
 |---------------|
-|Operations|[setDocumentAttributes](#setdocumentattributes)|
+|Operations|[documentLayout](#documentLayout)|
 |----------|
 
 Contains global document settings, and default attribute values for different attribute types supported by the current application. Default attribute values are used to determine the value of an attribute that is neither specified by a style sheet referenced by a component nor by an explicit attribute of the component.
@@ -188,7 +188,7 @@ Contains global document settings, and default attribute values for different at
 |------------|
 |Attribute types|`page`|
 |---------------|
-|Operations|[setDocumentAttributes](#setdocumentattributes), [insertStyleSheet](#insertstylesheet)|
+|Operations|[documentLayout](#documentLayout), [insertStyleSheet](#insertstylesheet)|
 |----------|
 
 Contains attributes for `page` style sheets and page elements, in the following format:

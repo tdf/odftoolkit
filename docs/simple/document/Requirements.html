@@ -169,31 +169,31 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <p>Below are requirements from our users.</p>
 <h3 id="requirements-for-table-20101220">Requirements for table (2010.12.20)<a class="headerlink" href="#requirements-for-table-20101220" title="Permanent link">&para;</a></h3>
 <ul>
-<li>getRowList/getColumnList, if there is a row element with 65535 repeate number, then get row list will return a list which contains 65535 row element, it is not necessary and time consuming.    </li>
-<li>memory leak, because of using static map variables (Recorded in bugzilla, 2010.12.21)   </li>
-<li>use SAX API to get the content/style element as required, rather than load whole dom tree to memory, which might cause out of memory exception if many large document has been loaded in the same time.    </li>
-<li>create row/column/cell with/without repeat number(for example,if i want to create 10 rows, how to implement it ? with 10 row element or 1 row element with 10 repeate number)   </li>
-<li>append row/column with/without previous row/column style, there should be a flag for setting it.    </li>
-<li>cell format type can be auto calculated according to the style of cell.    </li>
+<li>getRowList/getColumnList, if there is a row element with 65535 repeate number, then get row list will return a list which contains 65535 row element, it is not necessary and time consuming.</li>
+<li>memory leak, because of using static map variables (Recorded in bugzilla, 2010.12.21)</li>
+<li>use SAX API to get the content/style element as required, rather than load whole dom tree to memory, which might cause out of memory exception if many large document has been loaded in the same time.</li>
+<li>create row/column/cell with/without repeat number(for example,if i want to create 10 rows, how to implement it ? with 10 row element or 1 row element with 10 repeate number)</li>
+<li>append row/column with/without previous row/column style, there should be a flag for setting it.</li>
+<li>cell format type can be auto calculated according to the style of cell.</li>
 </ul>
 <h4 id="requirements-for-section-and-text-box-20101220">Requirements for section and text box (2010.12.20)<a class="headerlink" href="#requirements-for-section-and-text-box-20101220" title="Permanent link">&para;</a></h4>
 <ul>
-<li>repeating sections of data. Repeating section may be to clone a section of a template multiple times for different data. So identify an element(s) in the document and be able to clone it and add it into the document. Think like a block of text in a document (maybe a table or a paragraph) that we grab, copy, repeat x times, and then modify a bookmark inside each section.        </li>
-<li>text boxes that get a name at design time and something we can call it programmatically and then do something with it (delete, modify, etc.)      </li>
-<li>embedded text tagging with multiple levels - tag a paragraph and then tag a section of text within it - so we can turn stuff off, do repeats, and do repeats within the sections.     </li>
+<li>repeating sections of data. Repeating section may be to clone a section of a template multiple times for different data. So identify an element(s) in the document and be able to clone it and add it into the document. Think like a block of text in a document (maybe a table or a paragraph) that we grab, copy, repeat x times, and then modify a bookmark inside each section.</li>
+<li>text boxes that get a name at design time and something we can call it programmatically and then do something with it (delete, modify, etc.)</li>
+<li>embedded text tagging with multiple levels - tag a paragraph and then tag a section of text within it - so we can turn stuff off, do repeats, and do repeats within the sections.</li>
 </ul>
 <h3 id="functions-collection">Functions Collection<a class="headerlink" href="#functions-collection" title="Permanent link">&para;</a></h3>
-<p>Follow are functions collected from a perspective of an Office software user.    </p>
+<p>Follow are functions collected from a perspective of an Office software user.</p>
 <h4 id="cutcopypasteselection">Cut/copy/paste/selection<a class="headerlink" href="#cutcopypasteselection" title="Permanent link">&para;</a></h4>
-<p>Select something, cut or copy it, and paste to somewhere else. These operations are easily made in Office softwares, but are hard done in APIs. The functions include: </p>
+<p>Select something, cut or copy it, and paste to somewhere else. These operations are easily made in Office softwares, but are hard done in APIs. The functions include:</p>
 <ul>
-<li>Create a selection  </li>
-<li>Create a position   </li>
-<li>Cut a selection    </li>
-<li>Copy a selection    </li>
-<li>Paste a selection to some position    </li>
-<li>Delete a selection <br />
-Part of these functions have been implemented with package org.odftoolkit.simple.common.navigation    </li>
+<li>Create a selection</li>
+<li>Create a position</li>
+<li>Cut a selection</li>
+<li>Copy a selection</li>
+<li>Paste a selection to some position</li>
+<li>Delete a selection
+Part of these functions have been implemented with package org.odftoolkit.simple.common.navigation</li>
 </ul>
 <table>
 <tr>
@@ -209,25 +209,25 @@ Part of these functions have been implemented with package org.odftoolkit.simple
 </table>
 
 <h4 id="navigatordocument-map">Navigator/document map<a class="headerlink" href="#navigatordocument-map" title="Permanent link">&para;</a></h4>
-<p>With these functions, users can easily go to a certain place in the whole document. These functions can provide methods to get a certain heading, get a certain image, get a certain table and so on. The functions include:    </p>
+<p>With these functions, users can easily go to a certain place in the whole document. These functions can provide methods to get a certain heading, get a certain image, get a certain table and so on. The functions include:</p>
 <ul>
-<li>Return a list of main features, such as heading,paragraphs,graphics,table,bookmark,sections,hyperlinks,reference,index,comments,text frames, and draw objects.   </li>
-<li>get next or previous feature, for example, there is a table under a paragraph, then the API can allow users to get next table after this paragraph. <br />
-Part of these functions have been implemented with getTableList() in org.odftoolkit.simple.Document.   </li>
+<li>Return a list of main features, such as heading,paragraphs,graphics,table,bookmark,sections,hyperlinks,reference,index,comments,text frames, and draw objects.</li>
+<li>get next or previous feature, for example, there is a table under a paragraph, then the API can allow users to get next table after this paragraph.
+Part of these functions have been implemented with getTableList() in org.odftoolkit.simple.Document.</li>
 </ul>
 <h4 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">&para;</a></h4>
 <p>With this feature, users can create fields in the document. The available fields include:</p>
 <ul>
-<li>Fields are used to insert information about the current document, for example, file name, template, statistics, user data, date, and time.   </li>
-<li>The references or referenced fields that are referenced fields within the same document or within sub-documents of a master document.    </li>
-<li>Variable fields which are dynamic content to the document.    </li>
+<li>Fields are used to insert information about the current document, for example, file name, template, statistics, user data, date, and time.</li>
+<li>The references or referenced fields that are referenced fields within the same document or within sub-documents of a master document.</li>
+<li>Variable fields which are dynamic content to the document.</li>
 </ul>
 <p>The functions include:</p>
 <ul>
-<li>Add a field   </li>
-<li>Edit a field   </li>
-<li>Navigator among fields   </li>
-<li>Delete a field   </li>
+<li>Add a field</li>
+<li>Edit a field</li>
+<li>Navigator among fields</li>
+<li>Delete a field</li>
 </ul>
 <h4 id="frame">Frame<a class="headerlink" href="#frame" title="Permanent link">&para;</a></h4>
 <p>With frame, users can create a layout of one or more columns of text and objects. The functions include:</p>

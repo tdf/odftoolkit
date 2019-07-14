@@ -112,10 +112,10 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
   visibility: hidden;
 }
 h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p><strong><a href="index.html">Demos</a></strong> &gt; <strong>Persentation Extraction and Combination</strong>    </p>
-<p><strong>Overview</strong>     </p>
-<p>To show the operation of Presentation in Simple API, the Presentation Codmbination demo is used which combine two independent presentation documents together and extract the notes of each slide out to a Text document.   </p>
-<p>Here the original presentation documents "Pres1.odp" and "Pres2.odp" are used. Pres1.odp presents some basic concepts of XML and Pres2.odp presents some basic aspects of HTML. Both of them have their own cover page with the same slide name "Cover" at the front and an End page with the same slide name "end" at the end of the document. To combine these two presentation documents together, the following steps are used here.   </p>
+<p><strong><a href="index.html">Demos</a></strong> &gt; <strong>Persentation Extraction and Combination</strong></p>
+<p><strong>Overview</strong></p>
+<p>To show the operation of Presentation in Simple API, the Presentation Codmbination demo is used which combine two independent presentation documents together and extract the notes of each slide out to a Text document.</p>
+<p>Here the original presentation documents "Pres1.odp" and "Pres2.odp" are used. Pres1.odp presents some basic concepts of XML and Pres2.odp presents some basic aspects of HTML. Both of them have their own cover page with the same slide name "Cover" at the front and an End page with the same slide name "end" at the end of the document. To combine these two presentation documents together, the following steps are used here.</p>
 <p><ol>
  <li>Delete the last page of "Pres1.odp".</li>
  <li>Change the slide name of the cover page for each presentation document.</li>
@@ -125,12 +125,12 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
  <li>Extract the notes from each slide in the presentation document and save them into a text document.</li>
  <li>Save the combined document and the text document.</li>
  </ol></p>
-<p>The contents of the text document which contains the notes of the presentation document is shown in the following picture, where each note is identified by the corresponding slide name.   </p>
+<p>The contents of the text document which contains the notes of the presentation document is shown in the following picture, where each note is identified by the corresponding slide name.</p>
 <p><img src="image/ExtractedNotes.JPG" ></p>
-<p><strong>Code Introduction</strong>   </p>
-<p>To generate this sample, the Presentation and Text package in Simple API will be used. The related operations contains: load the existing presentation document, append one presentation to the end of another one, delete slide in the presentation, add new slide in the presentation, get certain slide in the presentation, add new notes to the slide, create a new text document, add new paragraph in the text document, etc.    </p>
-<p>Seven functions exist in the resource: main(), Getpresentation(), ProcSlide(), titleofExtractnotes(), ExtractNotes(), FillExtractnotes() and saveDocument(). Each of them will be explained briefly in the following paragraphs.   </p>
-<p>First three variables should be used to hold the two presentation document and the text document.   </p>
+<p><strong>Code Introduction</strong></p>
+<p>To generate this sample, the Presentation and Text package in Simple API will be used. The related operations contains: load the existing presentation document, append one presentation to the end of another one, delete slide in the presentation, add new slide in the presentation, get certain slide in the presentation, add new notes to the slide, create a new text document, add new paragraph in the text document, etc.</p>
+<p>Seven functions exist in the resource: main(), Getpresentation(), ProcSlide(), titleofExtractnotes(), ExtractNotes(), FillExtractnotes() and saveDocument(). Each of them will be explained briefly in the following paragraphs.</p>
+<p>First three variables should be used to hold the two presentation document and the text document.</p>
 <div class="codehilite"><pre><span></span>PresentationDocument presentationdoc;
 PresentationDocument presentationdoc2;
 TextDocument Extractednotes;
@@ -141,17 +141,17 @@ TextDocument Extractednotes;
 <div class="codehilite"><pre><span></span>public void Getpresentation() {
     try {
         presentationdoc=PresentationDocument.loadDocument(&quot;Pres1.odp&quot;);
-        presentationdoc2=PresentationDocument.loadDocument(&quot;Pres2.odp&quot;);  
+        presentationdoc2=PresentationDocument.loadDocument(&quot;Pres2.odp&quot;);
     } catch (Exception e) {
         System.err.println(&quot;Unable to load document.&quot;);
-        System.err.println(e.getMessage());  
+        System.err.println(e.getMessage());
     }
 
     try{
         Extractednotes=TextDocument.newTextDocument();
     } catch (Exception e) {
         System.err.println(&quot;Unable to create text document.&quot;);
-        System.err.println(e.getMessage());  
+        System.err.println(e.getMessage());
     }
 }
 </pre></div>
@@ -161,14 +161,14 @@ TextDocument Extractednotes;
 <div class="codehilite"><pre><span></span>Slide slide;
 Notes notes;
 int count=presentationdoc.getSlideCount();
-presentationdoc.deleteSlideByIndex(count-1);    
+presentationdoc.deleteSlideByIndex(count-1);
 //presentationdoc.deleteSlideByName(&quot;end&quot;);
 slide=presentationdoc.getSlideByIndex(0);
 slide.setSlideName(&quot;XML Cover&quot;);
 slide=presentationdoc2.getSlideByName(&quot;Cover&quot;);
 slide.setSlideName(&quot;HTML Cover&quot;);
 presentationdoc.appendPresentation(presentationdoc2);
-slide=presentationdoc.newSlide(0, &quot;Cover&quot;, SlideLayout.TITLE_ONLY); 
+slide=presentationdoc.newSlide(0, &quot;Cover&quot;, SlideLayout.TITLE_ONLY);
 notes=slide.getNotesPage();
 notes.addText(&quot;This is the cover of the new presentation document&quot;);
 DrawTextBoxElement textbox=(DrawTextBoxElement)slide.getOdfElement().getFirstChild().getFirstChild();
@@ -176,10 +176,10 @@ textbox.newTextPElement().setTextContent(&quot;Combined Presentation&quot;);
 </pre></div>
 
 
-<p>In function titleofExtractnotes(), the title of the text document which is used to save the notes of each slide is added. And in function ExtractNotes(), the notes of each slide will be extracted (getTextContent), the function FillExtractnotes() will be called if the notes exists. Here function getSlideByIndex() is used to obtain the corresponding slide, getSlideName() is used to obtain the name of the specified slide in order to identify the notes. The codes are shown below:   </p>
+<p>In function titleofExtractnotes(), the title of the text document which is used to save the notes of each slide is added. And in function ExtractNotes(), the notes of each slide will be extracted (getTextContent), the function FillExtractnotes() will be called if the notes exists. Here function getSlideByIndex() is used to obtain the corresponding slide, getSlideName() is used to obtain the name of the specified slide in order to identify the notes. The codes are shown below:</p>
 <div class="codehilite"><pre><span></span>slide=presentationdoc.getSlideByIndex(i);
 String slidename=slide.getSlideName();
-notes=slide.getNotesPage(); 
+notes=slide.getNotesPage();
 if(!notes.getOdfElement().getTextContent().isEmpty()){
     String notestring=notes.getOdfElement().getTextContent().toString().trim();
     FillExtractnotes(notestring,slidename);
@@ -187,18 +187,18 @@ if(!notes.getOdfElement().getTextContent().isEmpty()){
 </pre></div>
 
 
-<p>In function FillExtractnotes, the notes will be added to the text document. Here the slide name is used as the identity and is followed by the corresponding notes, function newParagraph() is used to add a new paragraph in the text document. The codes are shown below:   </p>
+<p>In function FillExtractnotes, the notes will be added to the text document. Here the slide name is used as the identity and is followed by the corresponding notes, function newParagraph() is used to add a new paragraph in the text document. The codes are shown below:</p>
 <div class="codehilite"><pre><span></span>OdfTextParagraph para =Extractednotes.newParagraph();
 para.setProperty(OdfParagraphProperties.MarginTop, &quot;0.25cm&quot;);
-para.setTextContent(&quot;Notes of &quot;+slidename+&quot;:&quot;);             
+para.setTextContent(&quot;Notes of &quot;+slidename+&quot;:&quot;);
 para=Extractednotes.newParagraph();
 para.setProperty(OdfParagraphProperties.TextAlign,&quot;justify&quot;);
 para.setTextContent(&quot;  &quot;+notestext);
 </pre></div>
 
 
-<p>In function saveDocument(), the new combined presentation document and the text document which contains the notes will be saved. The codes are shown below:   </p>
-<div class="codehilite"><pre><span></span>public void saveDocument(){     
+<p>In function saveDocument(), the new combined presentation document and the text document which contains the notes will be saved. The codes are shown below:</p>
+<div class="codehilite"><pre><span></span>public void saveDocument(){
     try{
         presentationdoc.save(&quot;Presentationsample.odp&quot;);
         presentationdoc.close();
@@ -206,14 +206,14 @@ para.setTextContent(&quot;  &quot;+notestext);
         Extractednotes.close();
     }catch(Exception e){
         System.err.println(&quot;Unable to save document.&quot;);
-        System.err.println(e.getMessage());  
-    }   
+        System.err.println(e.getMessage());
+    }
 }
 </pre></div>
 
 
 <p><strong>Download</strong></p>
-<p>Powered by Simple API version <a target="_new" href="../downloads.html">0.3.5</a>. <br />
+<p>Powered by Simple API version <a target="_new" href="../downloads.html">0.3.5</a>.
 You can download the code of this sample from <a Href="PresentationCombination.zip">here</a>.</p>
     </div>
     

@@ -113,32 +113,32 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 }
 h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
 <h2 id="apply-xslt-stylesheets-to-odf-documents-with-ant">Apply XSLT stylesheets to ODF documents with Ant<a class="headerlink" href="#apply-xslt-stylesheets-to-odf-documents-with-ant" title="Permanent link">&para;</a></h2>
-<p><strong>ODFXSLTRunnerTask</strong> is a task definition for <a href="http://ant.apache.org/">Apache Ant</a> which allows 
-to apply XSLT stylesheets to ODF documents similar to Ant's build-in 
-<tt>&lt;xslt&gt;</tt> <a href="http://ant.apache.org/manual/CoreTasks/style.html">task</a>. It is based on ODFXSLTRunner. Please see 
+<p><strong>ODFXSLTRunnerTask</strong> is a task definition for <a href="http://ant.apache.org/">Apache Ant</a> which allows
+to apply XSLT stylesheets to ODF documents similar to Ant's build-in
+<tt>&lt;xslt&gt;</tt> <a href="http://ant.apache.org/manual/CoreTasks/style.html">task</a>. It is based on ODFXSLTRunner. Please see
 ODFXSLTRunner for further details of its operation.</p>
 <h2 id="getting-and-building-odfxsltrunnertask">Getting and building ODFXSLTRunnerTask<a class="headerlink" href="#getting-and-building-odfxsltrunnertask" title="Permanent link">&para;</a></h2>
-<p><strong>odfxsltrunnertask</strong> is build by a NetBeans project. After you have checked 
-out the odf-xslt-runner-task-src/show, you can open the project in NetBeans 
+<p><strong>odfxsltrunnertask</strong> is build by a NetBeans project. After you have checked
+out the odf-xslt-runner-task-src/show, you can open the project in NetBeans
 and build <strong>odfxsltrunnertask</strong>.</p>
-<p>A binary release of <strong>odfxsltrunnertask.jar</strong> is available in the download 
+<p>A binary release of <strong>odfxsltrunnertask.jar</strong> is available in the download
 section.</p>
-<p>Building and running <strong>odfxsltrunner.jar</strong> requires additional jar files. 
+<p>Building and running <strong>odfxsltrunner.jar</strong> requires additional jar files.
 Please see Requirements for details.</p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p>To use <strong>odfxsltrunner.jar</strong> with Ant, you have to include the following <a href="http://ant.apache.org/manual/CoreTasks/taskdef.html">task definition</a> into 
+<p>To use <strong>odfxsltrunner.jar</strong> with Ant, you have to include the following <a href="http://ant.apache.org/manual/CoreTasks/taskdef.html">task definition</a> into
 your buildfile, where ''<tt>&lt;path&gt;</tt>'' has to be replaced with the path where you have stored the <strong>odfxsltrunnertask.jar</strong> and <strong>odfxsltrunner.jar</strong> files:</p>
-<div class="codehilite"><pre><span></span> &lt;taskdef name=&quot;odfxslt&quot; classname=&quot;odfxsltrunnertask.ODFXSLTRunnerTask&quot; 
+<div class="codehilite"><pre><span></span> &lt;taskdef name=&quot;odfxslt&quot; classname=&quot;odfxsltrunnertask.ODFXSLTRunnerTask&quot;
      classpath=&quot;&lt;path&gt;/odfxsltrunnertak.jar:&lt;path&gt;/odfxsltrunner.jar&quot;/&gt;
 </pre></div>
 
 
-<p>You can use this task definition on the top level (that is as a child element 
-of the <tt>&lt;project&gt;</tt> element or locally within a single 
+<p>You can use this task definition on the top level (that is as a child element
+of the <tt>&lt;project&gt;</tt> element or locally within a single
 <tt>&lt;target&gt;</tt> element. It defines a new task <tt>&lt;odfxslt&gt;</tt> which allows to process ODF documents with XSLT stylesheets.</p>
-<p>The new task supports the use of nested <tt>&lt;param&gt;</tt> and 
-<tt>&lt;factory&gt;</tt>elements which have the same meaning as the 
-<tt>&lt;param&gt;</tt> and <tt>&lt;factory&gt;</tt> child elements of the 
+<p>The new task supports the use of nested <tt>&lt;param&gt;</tt> and
+<tt>&lt;factory&gt;</tt>elements which have the same meaning as the
+<tt>&lt;param&gt;</tt> and <tt>&lt;factory&gt;</tt> child elements of the
 <tt>&lt;xslt&gt;</tt> <a href="http://ant.apache.org/manual/CoreTasks/style.html">task</a>.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table border="border">
@@ -155,7 +155,7 @@ Unless template has been specified, the package specified by in is copied to out
 
 <h2 id="parameters-specified-as-nested-elements">Parameters specified as nested elements<a class="headerlink" href="#parameters-specified-as-nested-elements" title="Permanent link">&para;</a></h2>
 <h3 id="param">Param<a class="headerlink" href="#param" title="Permanent link">&para;</a></h3>
-<p>Param specifies a parameter that is passed as <a href="http://www.w3.org/TR/1999/REC-xslt-19991116#top-level-variables">XSLT parameter</a> to the 
+<p>Param specifies a parameter that is passed as <a href="http://www.w3.org/TR/1999/REC-xslt-19991116#top-level-variables">XSLT parameter</a> to the
 XSL stylesheet.</p>
 <h3 id="parameters_1">Parameters<a class="headerlink" href="#parameters_1" title="Permanent link">&para;</a></h3>
 <table border="border">
@@ -176,10 +176,10 @@ Note: All parameter values are passed as string values to the XSLT parameters sp
 </table>
 
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<p><strong>odfxsltrunnertask</strong> requires <a href="http://java.sun.com/javase/downloads/index.jsp">J2RE 5</a>, or a later version of Java. </p>
-<p>It further requires ODFXSLTRunner and the ODFDOM component (at least version  v0.6.1). </p>
+<p><strong>odfxsltrunnertask</strong> requires <a href="http://java.sun.com/javase/downloads/index.jsp">J2RE 5</a>, or a later version of Java.</p>
+<p>It further requires ODFXSLTRunner and the ODFDOM component (at least version  v0.6.1).</p>
 <p><strong>Note:</strong> When building <strong>odfxsltrunertask</strong>, the <strong>odfxsltrunner</strong> project has be checked out, too. It is build automatically.</p>
-<p>In the Ant task definition, the <strong>classpth</strong> attribute must include the <strong>odfxsltrunnertask.jar</strong> and <strong>odfxsltrunner.jar</strong> files. The  ODFDOM jar file is found automatically if it is located in a folder called <strong>lib</strong> next to the <strong>odfxsltrunner.jar</strong> file. </p>
+<p>In the Ant task definition, the <strong>classpth</strong> attribute must include the <strong>odfxsltrunnertask.jar</strong> and <strong>odfxsltrunner.jar</strong> files. The  ODFDOM jar file is found automatically if it is located in a folder called <strong>lib</strong> next to the <strong>odfxsltrunner.jar</strong> file.</p>
 <p><strong>Note:</strong> <a href="{{project odfdom page home}}">ODFDOM</a> v0.6.1  requires <a href="http://xml.apache.org/dist/xerces-j/">Apache Xerces</a>. The jar file <strong>xercesImpl.jar</strong> also must exist in a folder <strong>lib</strong> next to <strong>odfxsltrunner.jar</strong> file.</p>
     </div>
     

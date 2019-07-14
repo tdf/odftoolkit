@@ -116,7 +116,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <p>Formatting attributes are used to modify the appearance of a specific component in the document. An object of type <em>Attributes</em> contains a variable number of attribute values, mapped by the attribute name. An attribute value can be an atomic value, an array, or an object of any type described above.</p>
 <p>The following chapters describe all generic formatting attributes, divided by their <em>attribute type</em>. Unless specified differently, the values of all measurement attributes (sizes, margins, indentations, etc.) are in 1/100 of millimeters.</p>
 <h2 id="documentattributes">DocumentAttributes<a class="headerlink" href="#documentattributes" title="Permanent link">&para;</a></h2>
-<p>These attributes are only supported in the <a href="#setdocumentattributes">setDocumentAttributes</a> operation.</p>
+<p>These attributes are only supported in the <a href="#documentLayout">documentLayout</a> operation.</p>
 <table class="table">
 <thead>
 <tr>
@@ -276,13 +276,11 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </tr>
 </tbody>
 </table>
-<h4 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Notes*:</li>
+</ul>
 <p>(1) The top and bottom page margin will include a header or footer if existing. If the header/footer is too large to fit into the empty space, the effective size of the page content area has to be reduced to prevent the header/footer from overlapping with the page content area.</p>
 <h2 id="paragraphattributes">ParagraphAttributes<a class="headerlink" href="#paragraphattributes" title="Permanent link">&para;</a></h2>
-<p>|Applications|Text|
-|------------|
-|Attribute type|<code>paragraph</code>|
-|--------------|</p>
 <p>Paragraph formatting attributes will be applied to paragraph elements in a text document.</p>
 <table class="table">
 <thead>
@@ -466,10 +464,6 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </tbody>
 </table>
 <h2 id="characterattributes">CharacterAttributes<a class="headerlink" href="#characterattributes" title="Permanent link">&para;</a></h2>
-<p>|Applications|Text, Spreadsheet|
-|------------|
-|Attribute type|<code>character</code>|
-|--------------|</p>
 <p>Character attributes will be applied to any document components containing text.</p>
 <table class="table">
 <thead>
@@ -629,7 +623,9 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </tr>
 </tbody>
 </table>
-<h4 id="notes_1">Notes<a class="headerlink" href="#notes_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Notes*:</li>
+</ul>
 <p>(1) Presentation only. Only added for roundtrip (copy/paste, delete/undo, …).</p>
 <p>(2) Presentation only. Added to the attributes and add the fontName e.g. 'Wingdings' to the CSS font-family attribute.</p>
 <p>(3) May not be supported by all components.</p>
@@ -811,7 +807,9 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </tr>
 </tbody>
 </table>
-<h4 id="notes_2">Notes<a class="headerlink" href="#notes_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Notes*:</li>
+</ul>
 <p>(1) Applies to the border of the whole table only.</p>
 <h2 id="tablerowattributes">TableRowAttributes<a class="headerlink" href="#tablerowattributes" title="Permanent link">&para;</a></h2>
 <p>|Applications|Text|
@@ -1495,7 +1493,9 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </tr>
 </tbody>
 </table>
-<h4 id="notes_3">Notes<a class="headerlink" href="#notes_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Notes*:</li>
+</ul>
 <p>(1) Currently only <code>borderTop</code> is set if the drawing has the type “horizontal_line”.</p>
 <p>(2) Attributes are only used if <code>inline</code> mode is false. The generic attributes <code>left</code> and <code>top</code> will not be used for drawing objects in text documents.</p>
 <h3 id="drawing-attributes-general">Drawing Attributes (General)<a class="headerlink" href="#drawing-attributes-general" title="Permanent link">&para;</a></h3>
@@ -1714,7 +1714,9 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </tr>
 </tbody>
 </table>
-<h4 id="notes_4">Notes<a class="headerlink" href="#notes_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Notes*:</li>
+</ul>
 <p>(1) Some of the generic position and size attributes may be overridden by application-specific attributes.</p>
 <h3 id="embedded-drawing-attributes">Embedded Drawing Attributes<a class="headerlink" href="#embedded-drawing-attributes" title="Permanent link">&para;</a></h3>
 <p>The following attributes are supported by drawing objects embedded in other drawing objects.</p>
@@ -2423,7 +2425,9 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </tr>
 </tbody>
 </table>
-<h4 id="notes_5">Notes<a class="headerlink" href="#notes_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Notes*:</li>
+</ul>
 <p>(1) The attributes <code>imageUrl</code> and <code>imageData</code> are mutually exclusive.</p>
 <ul>
 <li>An exception to this rule was introduced for the clipboard handling. The copy handler can not decide whether the <code>imageUrl</code> or the <code>imageData</code> attribute is needed on paste. Therefore the copy handler adds both attributes and the paste handler decides which one to use and which one to remove from the operation. Finally an operation with both attributes present may temporarily exist, but such operation is never sent to the filter.</li>
@@ -2434,7 +2438,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <p>OOXML: Cropping is used as percentage value. The value 100 corresponds to the total size of the drawing frame.</p>
 </li>
 <li>
-<p>ODF: Cropping is used as absolute length in 1/100 of millimeters.    </p>
+<p>ODF: Cropping is used as absolute length in 1/100 of millimeters.</p>
 </li>
 </ul>
 <h2 id="shapeattributes">ShapeAttributes<a class="headerlink" href="#shapeattributes" title="Permanent link">&para;</a></h2>

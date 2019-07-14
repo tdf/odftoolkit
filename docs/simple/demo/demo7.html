@@ -112,23 +112,23 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
   visibility: hidden;
 }
 h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p><a href="index.html"><strong>Demos</strong></a> &gt; <b> Offer Letter with Text Fields</b>   </p>
-<p><strong>Overview</strong>    </p>
-<p>We have introduced several samples about how to use Simple ODF API to generate document from the predefined templete, for example, Demo: <a href="demo3.html">Navigation API in Hotel Receipt</a>. I believe you have known how easy it is. But sounds like, we never talk about how to create a template document using  Simple ODF API.   </p>
-<p>Today, let's do it.   </p>
-<p>Simple API provides Fields API since version 0.5. OpenDocument text documents or OpenDocument text content embedded in other types of documents may contain variable text elements called fields. Fields are commonly used for, a page number field displays the number of the page on which it appears or a creation date field displays the date on which a document was created. Besides, there are several advance field, such as, variable field and condition field.      </p>
-<p>This demo provides a Java application which can create the offer letter template document from a sample and use it to generate new offer letters with the information from a spreadsheet. The template document contains some fields whose content is decided by the information from data file.     </p>
-<p>The following picture show a sample offer letter. I have labeled the variable content with blod and color style.    </p>
-<p><img alt="image1" src="image/offer-letter-sample.png" />    </p>
-<p>This offer was generated on "2011-01-20". It also can be in any other date, so this text content should be replaced by a date field. "Tom King" is the receiver, this name can be replaced with a variable field, then we can send it to any other perpson. Similarly, "software engineer" is the job title of "Tom King", "R&amp;D" is the branch which he belongs to, and "2011-03-12" is his onboard date, all of them should be replaced by variable field in a template document.<br/><br/> 
+<p><a href="index.html"><strong>Demos</strong></a> &gt; <b> Offer Letter with Text Fields</b></p>
+<p><strong>Overview</strong></p>
+<p>We have introduced several samples about how to use Simple ODF API to generate document from the predefined templete, for example, Demo: <a href="demo3.html">Navigation API in Hotel Receipt</a>. I believe you have known how easy it is. But sounds like, we never talk about how to create a template document using  Simple ODF API.</p>
+<p>Today, let's do it.</p>
+<p>Simple API provides Fields API since version 0.5. OpenDocument text documents or OpenDocument text content embedded in other types of documents may contain variable text elements called fields. Fields are commonly used for, a page number field displays the number of the page on which it appears or a creation date field displays the date on which a document was created. Besides, there are several advance field, such as, variable field and condition field.</p>
+<p>This demo provides a Java application which can create the offer letter template document from a sample and use it to generate new offer letters with the information from a spreadsheet. The template document contains some fields whose content is decided by the information from data file.</p>
+<p>The following picture show a sample offer letter. I have labeled the variable content with blod and color style.</p>
+<p><img alt="image1" src="image/offer-letter-sample.png" /></p>
+<p>This offer was generated on "2011-01-20". It also can be in any other date, so this text content should be replaced by a date field. "Tom King" is the receiver, this name can be replaced with a variable field, then we can send it to any other perpson. Similarly, "software engineer" is the job title of "Tom King", "R&amp;D" is the branch which he belongs to, and "2011-03-12" is his onboard date, all of them should be replaced by variable field in a template document.<br/><br/>
 Salary and allowance are more complex. Different job titles and branches have different rules. Simplicity, we assume that except "Secretary" is 5,500,00, all of the other job titles are 6,000.00. We also assume that employees from "Sales" don't have allowance. Condition field or Hidden Text field is needed to realize these rules. The same as certificates/testimonials, for campus hires, they need supply "Educational certificates", while for professinal hires, they need supply "Experience certificates from previous employers" and "Copy of resignation/acceptation letter and relieving letter". This is another use case of condition field.<br/><br/>
-After replaced all of these variable content with fields, the template document is ready. The process of generate new offer letter is very simple. Only need to load the following data, update the variable values with the data and save as a new document.    </p>
-<p><img alt="image2" src="image/candidate-data.png" />    </p>
-<p>No need text content search, no need target replace. It's faster than the content replace way. Beside, the variable content is highlighted automatically by Symphony or Open Office when the document is opend. The following is a generated letter sample.    </p>
+After replaced all of these variable content with fields, the template document is ready. The process of generate new offer letter is very simple. Only need to load the following data, update the variable values with the data and save as a new document.</p>
+<p><img alt="image2" src="image/candidate-data.png" /></p>
+<p>No need text content search, no need target replace. It's faster than the content replace way. Beside, the variable content is highlighted automatically by Symphony or Open Office when the document is opend. The following is a generated letter sample.</p>
 <p><img alt="image3" src="image/generated-offer-letter.png" /></p>
 <p>As using fields, the new offer letter is easily updated without inconsistent, even though after generated. You can do it in Symphony or Open Office.
 Code Introduction
-There are two methods in the class, <code>createFieldTemplate()</code> is used to create template document from sample, and <code>generateOfferLetterDocument()</code> is used to generated new document using template and data file.    </p>
+There are two methods in the class, <code>createFieldTemplate()</code> is used to create template document from sample, and <code>generateOfferLetterDocument()</code> is used to generated new document using template and data file.</p>
 <div class="codehilite"><pre><span></span>public static void main(String[] args) {
     try {
         // create offer letter template with sample offer letter.
@@ -142,7 +142,7 @@ There are two methods in the class, <code>createFieldTemplate()</code> is used t
 </pre></div>
 
 
-<p>Below is the source code of method <code>createFieldTemplate()</code>. The basic process is find the variable content and replace it with a field. We use <code>FixedDateField</code>, <code>UserVariableField</code>, <code>ConditionField</code> and <code>HiddenTextField</code> in this method. Simple ODF API provides more types of fields. For more information, please reference the <a href="../document/javadoc/index.html">Javadoc</a> or <a href="../document/cookbook/index.html">CookBook</a>.  </p>
+<p>Below is the source code of method <code>createFieldTemplate()</code>. The basic process is find the variable content and replace it with a field. We use <code>FixedDateField</code>, <code>UserVariableField</code>, <code>ConditionField</code> and <code>HiddenTextField</code> in this method. Simple ODF API provides more types of fields. For more information, please reference the <a href="../document/javadoc/index.html">Javadoc</a> or <a href="../document/cookbook/index.html">CookBook</a>.</p>
 <div class="codehilite"><pre><span></span>public static void createFieldTemplate() throws Exception {
     TextDocument sampleDocument = TextDocument.loadDocument(&quot;Tom&#39;s Offer.odt&quot;);
     // replace offer date with FixedDateField
@@ -245,8 +245,8 @@ There are two methods in the class, <code>createFieldTemplate()</code> is used t
 </pre></div>
 
 
-<p><strong>Download</strong>  </p>
-<p>Powered by the Simple Java API for ODF version <a href="../downloads.html">0.5</a>. <br />
+<p><strong>Download</strong></p>
+<p>Powered by the Simple Java API for ODF version <a href="../downloads.html">0.5</a>.
 You can download the code of this demo from <a href="demo7.zip">here</a>.</p>
     </div>
     

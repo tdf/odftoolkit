@@ -1,8 +1,9 @@
-# ODF Text Operations
+# Supported ODF Text Operations
 
 Operations are used to transfer the user changes between editors.
 Operations are a prerequirement for collaborative working on a document.
 
+[TOC]
 
 Most operations target specific text components (characters, paragraphs, tables, table cells, drawing objects, etc.) or ranges of text components. The following general rules apply for these operations:
 
@@ -51,8 +52,11 @@ Inserts a new empty paragraph node into the document.
 |`attrs`|[ParagraphAttributeSet](#paragraphattributeset)|{}|Initial attribute set for the paragraph.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> EditConfig normalization spaces in MarkDown files (mdtext)
 ## splitParagraph
 
 Splits the contents of an existing paragraph into two paragraphs.
@@ -62,8 +66,6 @@ Splits the contents of an existing paragraph into two paragraphs.
 |`name`|String|_required_|“splitParagraph”|
 |`start`|[CharacterPosition](#characterposition)|_required_|The position of the first character (or other child component in the paragraph) that will be moved to the beginning of the new paragraph.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
-
-
 
 ## mergeParagraph
 
@@ -77,8 +79,6 @@ Merges two consecutive paragraphs to a single paragraph.
 
 The formatting attributes of the second paragraph will be lost, unless the leading paragraph is empty.
 
-
-
 ## addText
 
 Inserts new text into a paragraph.
@@ -91,17 +91,12 @@ Inserts new text into a paragraph.
 |`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
-#### Notes
+**Note**:
 
-*   The inserted text gets the same formatting as the character that **precedes** the insertion position.
-
-*   At the beginning of the paragraph, the inserted text gets the same formatting as the first existing character.
-
-*   In empty paragraphs, the inserted text gets the character formatting defined at the paragraph itself.
-
-*   The attributes passed in the `attrs` property will be merged over the existing attributes.
-
-
+* The inserted text gets the same formatting as the character that **precedes** the insertion position.
+* At the beginning of the paragraph, the inserted text gets the same formatting as the first existing character.
+* In empty paragraphs, the inserted text gets the character formatting defined at the paragraph itself.
+* The attributes passed in the `attrs` property will be merged over the existing attributes.
 
 ## addTab
 
@@ -114,18 +109,12 @@ Inserts a tabulator into a paragraph.
 |`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
-#### Notes
+*Note*:
 
-*   The inserted tabulator gets the same formatting as the character that **precedes** the insertion position.
-
-*   At the beginning of the paragraph, the inserted tabulator gets the same formatting as the first existing character.
-
-*   In empty paragraphs, the inserted tabulator gets the character formatting defined at the paragraph itself.
-
-*   The attributes passed in the `attrs` property will be merged over the existing attributes.
-
-
-
+* The inserted tabulator gets the same formatting as the character that **precedes** the insertion position.
+* At the beginning of the paragraph, the inserted tabulator gets the same formatting as the first existing character.
+* In empty paragraphs, the inserted tabulator gets the character formatting defined at the paragraph itself.
+* The attributes passed in the `attrs` property will be merged over the existing attributes.
 
 ## addHardBreak
 
@@ -139,18 +128,12 @@ Inserts a hard break into a paragraph.
 |`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
-#### Notes
+*Note*:
 
-*   The inserted break gets the same formatting as the character that **precedes** the insertion position.
-
-*   At the beginning of the paragraph, the inserted break gets the same formatting as the first existing character.
-
-*   In empty paragraphs, the inserted break gets the character formatting defined at the paragraph itself.
-
-*   The attributes passed in the `attrs` property will be merged over the existing attributes.
-
-
-
+* The inserted break gets the same formatting as the character that **precedes** the insertion position.
+* At the beginning of the paragraph, the inserted break gets the same formatting as the first existing character.
+* In empty paragraphs, the inserted break gets the character formatting defined at the paragraph itself.
+* The attributes passed in the `attrs` property will be merged over the existing attributes.
 
 ## addField
 
@@ -165,8 +148,6 @@ Inserts simple text field into a paragraph.
 |`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
-
-
 ## updateField
 
 Updates an already existing simple field.
@@ -180,18 +161,12 @@ Updates an already existing simple field.
 |`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes (see note below).|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
-#### Notes
+*Note*:
 
-*   The inserted field gets the same formatting as the character that **precedes** the insertion position.
-
-*   At the beginning of the paragraph, the inserted field gets the same formatting as the first existing character.
-
-*   In empty paragraphs, the inserted field gets the character formatting defined at the paragraph itself.
-
-*   The attributes passed in the `attrs` property will be merged over the existing attributes.
-
-
-
+* The inserted field gets the same formatting as the character that **precedes** the insertion position.
+* At the beginning of the paragraph, the inserted field gets the same formatting as the first existing character.
+* In empty paragraphs, the inserted field gets the character formatting defined at the paragraph itself.
+* The attributes passed in the `attrs` property will be merged over the existing attributes.
 
 ## addTable
 
@@ -205,11 +180,9 @@ Inserts a new table node into the document.
 |`sizeExceeded`|Object|_none_|If set to an object, the table is too big to be displayed or edited. The object must contain the attributes `rows` and `columns` containing the original row count and column count of the table. To be used for importing documents only, NOT while editing documents.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
-#### Notes
+*Note*:
 
-*   The new table will not contain any rows or cells.
-
-
+* The new table will not contain any rows or cells.
 
 ## addRows
 
@@ -225,10 +198,9 @@ Inserts one or more new rows into a table.
 |`attrs`|[TableRowAttributeSet](#tablerowattributeset)|{}|Initial attribute set for the table row.||
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed||
 
-#### Notes
+*Note*:
 
 (1) The properties `insertDefaultCells` and `referenceRow` are mutually exclusive.
-
 
 ## addCells
 
@@ -242,11 +214,9 @@ Inserts one or more new cells into a table row.
 |`attrs`|[TableCellAttributeSet](#tablecellattributeset)|{}|Initial attribute set for the cell.||
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed||
 
-#### Notes
+*Note*:
 
 (1) The resulting number of cells in the row **must not** exceed the number of columns in the table, as specified by the `tableGrid` attribute of the table.
-
-
 
 ## addColumn
 
@@ -264,12 +234,9 @@ Inserts cells for a new column into a table.
 |“behind”|The new cells will be inserted behind the existing cells.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
-#### Notes
+*Note*:
 
-*   As a side effect, this operation changes the `tableGrid` attribute of the parent table.
-
-
-
+* As a side effect, this operation changes the `tableGrid` attribute of the parent table.
 
 ## deleteColumns
 
@@ -283,33 +250,11 @@ Deletes the cells of a single column or multiple columns from a table.
 |`endGrid`|Integer|_value of `startGrid`_|Zero-based index of the last column to be removed (closed range). If omitted, only one column will be removed.|
 |`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
 
-#### Notes
+*Note*:
 
-*   Each cell that is addressed by the specified column range will be removed completely.
+* Each cell that is addressed by the specified column range will be removed completely.
 
-*   As a side effect, this operation changes the `tableGrid` attribute of the parent table.
-
-
-
-
-## format
-
-Sets or removes explicit formatting attributes at an arbitrary component in the text document.
-
-|Property|Data Type|Default Value|Description|
-|--------|---------|-------------|-----------|
-|`name`|String|_required_|“format”|
-|`start`|[TextPosition](#textposition)|_required_|The position of the first component that will be formatted with the specified attributes.|
-|`end`|[TextPosition](#textposition)|_value of `start`_|The position of the last component that will be formatted (closed range). If omitted, this operation addresses a single component.|
-|`attrs`|[AttributeSet](#attributeset)|_required_|The attribute set containing all attributes to be changed. Attributes with a value of `null` will be removed from the component. Attributes not contained in the set remain unmodified.|
-|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
-
-#### Notes
-
-*   Currently, only single components can be formatted, except for text ranges in a paragraph. A text range can include characters, fields, and drawing objects, but must be contained in a single paragraph.
-
-
-
+* As a side effect, this operation changes the `tableGrid` attribute of the parent table.
 
 ## addListStyle
 
@@ -339,8 +284,6 @@ List definitions per numbering level:
 |`tabStopPosition`|Integer||Tabulator position, in 1/100 of millimeters.|
 |`color`|[Color](#color)|Color.AUTO|Font color of the list label.|
 
-
-
 ## addHeaderFooter
 
 Inserts Header or Footer in the document.
@@ -351,19 +294,13 @@ Inserts Header or Footer in the document.
 |`id`|String|_required_|Unique name, which is used as a target for operations belonging to this element|
 |`type`|String|_required_|Should start with “header\_” or “footer\_” to identify is it header or footer|
 
-#### Notes
+*Note*:
 
-*   Currently, three types of header/footer are supported:
+Currently, three types of header/footer are supported:
 
-
-1.  “header\_default” (“footer\_default”) - default type, used if no other type is defined or available
-
-2.  “header\_first” (“footer\_first”) - if defined, used only on first page in document. Has bigger priority then “\_default”, and overwrites it.
-
-3.  “header\_even” (“footer\_even”) - if defined, used on even pages, and overwrites “\_default” type, as it has higher priority. With this type defined, on odd pages, “\_default” type is used.
-
-
-
+1. “header\_default” (“footer\_default”) - default type, used if no other type is defined or available
+2. “header\_first” (“footer\_first”) - if defined, used only on first page in document. Has bigger priority then “\_default”, and overwrites it.
+3. “header\_even” (“footer\_even”) - if defined, used on even pages, and overwrites “\_default” type, as it has higher priority. With this type defined, on odd pages, “\_default” type is used.
 
 ## deleteHeaderFooterContent
 
@@ -373,8 +310,6 @@ Removes header or footer with passed id from the document.
 |--------|---------|-------------|-----------|
 |`name`|String|_required_|“deletetHeaderFooter”|
 |`id`|String|_required_|Unique identifier, which is used to determine element to be deleted|
-
-
 
 ## addNote
 
@@ -390,33 +325,6 @@ Inserts a new comment into a paragraph.
 |`date`|String||The creation date of this comment.|
 |`attrs`|CharacterAttributeSet|{}|Attribute set with additional character attributes|
 
-
-
-## insertRange
-
-Inserts a range object into the document. This ranges can be used for comments or complex fields.
-
-|Property|Type|Default Value|Description|
-|--------|----|-------------|-----------|
-|`name`|String|_required_|“addNoteRange”|
-|`start`|[CharacterPosition](#characterposition)|_required_|The position where the range will be inserted. The range will be inserted before the character that is currently located at this position.|
-|`target`|String|””|Specifies the target position, needs only to be used, if specific document parts like headers or footers are addressed.|
-|`id`|String||Unique name, which is used as a target for addNote operations|
-|`position`|Enum “start”, “end”|“start”|Specifies, if this is a start range marker or an end range marker.|
-|`type`|Enum|_required_|The type of the element using this range marker.|
-||“comment”|The range marker belongs to a comment.|
-||
-|“field”|The range marker belongs to a complex field.|
-|`attrs`|[CharacterAttributeSet](#characterattributeset)|{}|Attribute set with additional character attributes.|
-
-#### Notes
-
-
-*  ODT: comment range is restricted by the comment node and a corresponding “end” node for the end of the range with the matching id.
-
-
-
-
 ## documentLayout
 
 Sets default attributes for the document and for various formatting attribute types.
@@ -425,8 +333,6 @@ Sets default attributes for the document and for various formatting attribute ty
 |--------|----|-------------|-----------|
 |`name`|String|_required_|“setDocumentAttributes”|
 |`attrs`|[DocumentAttributeSet](#documentattributeset)|_required_|Application dependent attribute set with default attribute values for different attribute types.|
-
-
 
 ## addFontDecl
 
@@ -444,7 +350,21 @@ Inserts an extended description for a specific font which an be used for font su
 |`pitch`|Enum|“variable”|The font pitch. Either “fixed” or “variable”.|
 |`panose1`|Array<Integer>|_none_|The font typeface classification number. See [http://en.wikipedia.org/wiki/PANOSE](http://en.wikipedia.org/wiki/PANOSE "http://en.wikipedia.org/wiki/PANOSE").|
 
+## format
 
+Sets or removes explicit formatting attributes at an arbitrary component in the text document.
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
+|`name`|String|_required_|“format”|
+|`start`|[TextPosition](#textposition)|_required_|The position of the first component that will be formatted with the specified attributes.|
+|`end`|[TextPosition](#textposition)|_value of `start`_|The position of the last component that will be formatted (closed range). If omitted, this operation addresses a single component.|
+|`attrs`|[AttributeSet](#attributeset)|_required_|The attribute set containing all attributes to be changed. Attributes with a value of `null` will be removed from the component. Attributes not contained in the set remain unmodified.|
+|`target`|String|””|specifies the target position, needs only to be used if document parts such as header or footer are addressed|
+
+*Note*:
+
+* Currently, only single components can be formatted, except for text ranges in a paragraph. A text range can include characters, fields, and drawing objects, but must be contained in a single paragraph.
 
 ## addStyle
 
@@ -463,8 +383,6 @@ Inserts a new style with its formatting attributes into the document.
 |`hidden`|Boolean|false|Whether the style sheet is hidden in the user interface. Not used for auto-styles which are always hidden implicitly (see property `auto`).|
 |`custom`|Boolean|false|Whether the style sheet has been created at runtime while editing the document. Will be false for built-in style sheets. Not used for auto styles.|
 
-
-
 ## changeStyle
 
 Changes the formatting attributes, and other properties of an existing style.
@@ -477,8 +395,6 @@ Must not be used for auto styles.
 |`styleId`|String|_required_|The identifier of the style sheet to be changed. MUST NOT be an auto style (a style sheet with the property `auto` set to true, see operation [addStyle](#addStyle)).|
 |_other_|||Other properties supported by the operation [addStyle](#addStyle) that will be changed in the style sheet. The properties `default` and `auto` cannot be changed.|
 
-
-
 ## deleteStyle
 
 Removes a style from the document. Does not modify any attribute sets of elements that refer to the style sheet.
@@ -488,7 +404,6 @@ Removes a style from the document. Does not modify any attribute sets of element
 |`name`|String|_required_|“deleteStyle”|
 |`type`|Enum|_required_|The main attribute type of the style sheet. The supported types are dependent on the application.|
 |`styleId`|String|_required_|The identifier of the style sheet to be removed. MUST NOT be an auto style (a style sheet with the property `auto` set to true, see operation [addStyle](#addStyle)).|
-
 
 ## addDrawing
 

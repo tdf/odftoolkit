@@ -112,23 +112,23 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
   visibility: hidden;
 }
 h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p><strong><a href="index.html">Demos</a></strong> &gt;  <strong>Multiple Presentations Assembler</strong>    </p>
-<p><strong>Overview</strong>   </p>
-<p>If you make a lot of presentations in your daily work, you  know that you don't always create a presentation from scratch.  </p>
+<p><strong><a href="index.html">Demos</a></strong> &gt;  <strong>Multiple Presentations Assembler</strong></p>
+<p><strong>Overview</strong></p>
+<p>If you make a lot of presentations in your daily work, you  know that you don't always create a presentation from scratch.</p>
 <p>Assembling several different presentations together to make a new presentation, e.g. copying several pages from presentation A and copying another several pages from presentation B, is a common activity for the presentation author.
-This demo provides a Java application that can assemble  specific pages of presentations together and make one presentation from the command line.     </p>
-<p>Here is an example. I want to make a presentation with the first page from presentation A, the first page from presentation B and  the first page from presentation C. I can call the following command:   </p>
-<p><code>java PresentationAssembler -in PresentationA.odp(1) -in PresentationB.odp(1) -in PresentationC.odp(1-2) -out newPresentation.odp</code>     </p>
-<p>A new presentation will be generated which is showed in the following picture. You can see, the pictures, the styles and master pages are copied too.  </p>
-<p><img alt="alt text" src="image/demo5_doc.jpg" />   </p>
-<p>In the next section, I will show how easy it is to create this assembling application using the Simple API.  </p>
+This demo provides a Java application that can assemble  specific pages of presentations together and make one presentation from the command line.</p>
+<p>Here is an example. I want to make a presentation with the first page from presentation A, the first page from presentation B and  the first page from presentation C. I can call the following command:</p>
+<p><code>java PresentationAssembler -in PresentationA.odp(1) -in PresentationB.odp(1) -in PresentationC.odp(1-2) -out newPresentation.odp</code></p>
+<p>A new presentation will be generated which is showed in the following picture. You can see, the pictures, the styles and master pages are copied too.</p>
+<p><img alt="alt text" src="image/demo5_doc.jpg" /></p>
+<p>In the next section, I will show how easy it is to create this assembling application using the Simple API.</p>
 <p><strong>Code Introduction</strong></p>
 <p><code>assemble</code> is the method that accepts the command line parameters, analyzes them, and assembles presentations with the Simple API. In this method, a new presentation is created, and then, pages from other presentation documents are attached while the command line is being analyzed. Simple API provides very simple methods to copy pages from other presentations:
 <code>PresentationDocument.copyForeignSlide(int destIndex, PresentationDocument srcDoc, int srcIndex)</code> and
-<code>PresentationDocument.appendPresentation(PresentationDocument srcDoc)</code>.    </p>
-<p>After the slides are attached, the first slide of the new presentation is deleted by invoking method <code>PresentationDocument.deleteSlideByIndex(int index)</code>.    </p>
-<p>This is because the first slide is an empty slide which was created when the new presentation was created with method <code>PresentationDocument.newPresentationDocument()</code>   </p>
-<p>Below is the source code of method <code>assemble</code>. Most of the code is used to analyze the command line parameters. Only a few statements are used to attach slides to the new presentation. So you can see how powerful functions Simple API provides.  </p>
+<code>PresentationDocument.appendPresentation(PresentationDocument srcDoc)</code>.</p>
+<p>After the slides are attached, the first slide of the new presentation is deleted by invoking method <code>PresentationDocument.deleteSlideByIndex(int index)</code>.</p>
+<p>This is because the first slide is an empty slide which was created when the new presentation was created with method <code>PresentationDocument.newPresentationDocument()</code></p>
+<p>Below is the source code of method <code>assemble</code>. Most of the code is used to analyze the command line parameters. Only a few statements are used to attach slides to the new presentation. So you can see how powerful functions Simple API provides.</p>
 <div class="codehilite"><pre><span></span>public void assemble(String[] args) throws Exception
 {
     String outputFileName=&quot;default.odp&quot;;
@@ -140,7 +140,7 @@ This demo provides a Java application that can assemble  specific pages of prese
         String param = args[i];
         if (param.equals(&quot;-out&quot;)) //get the output file name
             outputFileName = args[++i];
-        else if (param.equals(&quot;-in&quot;)) //get the input file name 
+        else if (param.equals(&quot;-in&quot;)) //get the input file name
         {
             String pageDesc = args[++i];
             String filename = pageDesc, pagelist;
@@ -150,7 +150,7 @@ This demo provides a Java application that can assemble  specific pages of prese
             {
                 filename = pageDesc.substring(0, indexStart);
                 pagelist = pageDesc.substring(indexStart+1, pageDesc.length()-1);
-                srcPages = getPageNumbers(pagelist); //analysis the page number description 
+                srcPages = getPageNumbers(pagelist); //analysis the page number description
                                                      //and return all page numbers that need to be copied
             }
             PresentationDocument sourceDoc = PresentationDocument.loadDocument(new File(filename));
@@ -173,8 +173,8 @@ This demo provides a Java application that can assemble  specific pages of prese
 </pre></div>
 
 
-<p><strong>Download</strong>  </p>
-<p>Powered by the Simple Java API for ODF version  <a target="_new" href="../downloads.html">0.4.5</a>.<br />
+<p><strong>Download</strong></p>
+<p>Powered by the Simple Java API for ODF version  <a target="_new" href="../downloads.html">0.4.5</a>.
 You can download the code of this demo from <a href="PresentationAssembler.zip">here</a>.</p>
     </div>
     

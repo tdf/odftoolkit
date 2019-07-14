@@ -6,7 +6,7 @@ The following chapters describe all generic formatting attributes, divided by th
 
 ## DocumentAttributes
 
-These attributes are only supported in the [setDocumentAttributes](#setdocumentattributes) operation.
+These attributes are only supported in the [documentLayout](#documentLayout) operation.
 
 |Attribute|Data Type|Default Value|Application|Description|
 |---------|---------|-------------|-----------|-----------|
@@ -35,17 +35,11 @@ Page formatting attributes will be applied to page elements.
 |`firstPage`|Boolean|false|all|Whether to use separate header/footer settings for the first page.||
 |`evenOddPages`|Boolean|false|all|Whether to use separate header/footer settings for even and odd pages, and mirror margin settings accordingly.||
 
-#### Notes
+* Notes*:
 
 (1) The top and bottom page margin will include a header or footer if existing. If the header/footer is too large to fit into the empty space, the effective size of the page content area has to be reduced to prevent the header/footer from overlapping with the page content area.
 
-
 ## ParagraphAttributes
-
-|Applications|Text|
-|------------|
-|Attribute type|`paragraph`|
-|--------------|
 
 Paragraph formatting attributes will be applied to paragraph elements in a text document.
 
@@ -76,14 +70,7 @@ Paragraph formatting attributes will be applied to paragraph elements in a text 
 |`listLabelHidden`|Boolean|false|element|ODF is able to have multiple lists in a single list item. To emulate this, all paragraphs following the first have to use this property to disable the list.|
 |`nextStyleId`|String|”” (no style sheet)|style|The identifier of the paragraph style sheet that should be used in next paragraph (Enter key at end of paragraph).|
 
-
-
 ## CharacterAttributes
-
-|Applications|Text, Spreadsheet|
-|------------|
-|Attribute type|`character`|
-|--------------|
 
 Character attributes will be applied to any document components containing text.
 
@@ -108,7 +95,7 @@ Character attributes will be applied to any document components containing text.
 |`caps`|Enum|“none”|all|Character capture, “none”, “all”, or “small”.|(3)|
 |`vertAlign`|Enum|“baseline”|all|Character escapement, one of “baseline”, “sub”, or “super”.|(3)|
 
-#### Notes
+* Notes*:
 
 (1) Presentation only. Only added for roundtrip (copy/paste, delete/undo, …).
 
@@ -150,7 +137,7 @@ Each table style sheet contains multiple attribute sets, mapped by conditional k
 |“bandsHor”|`band1Hor`, `band2Hor`|Ignore formatting defined for the inner rows of the table.|
 |“bandsVert”|`band1Vert`, `band2Vert`|Ignore formatting defined for the inner columns of the table.|
 
-#### Notes
+* Notes*:
 
 (1) Applies to the border of the whole table only.
 
@@ -277,7 +264,7 @@ Drawing formatting attributes will be applied to drawing objects embedded in the
 |“right”|Text will be rendered right of the drawing object, as long as the available space is sufficient.|
 |“largest”|Text will be rendered at the larger side (either left or right) of the drawing object.|
 
-#### Notes
+* Notes*:
 
 (1) Currently only `borderTop` is set if the drawing has the type “horizontal\_line”.
 
@@ -316,7 +303,7 @@ The following attributes are supported by each drawing in each application regar
 |`noRotation`|Boolean|false|element|Whether it is forbidden to rotate the drawing.||
 |`minFrameHeight`|Integer|0|element|Odf only, this property specifies the minimal height of text frames.||
 
-#### Notes
+* Notes*:
 
 (1) Some of the generic position and size attributes may be overridden by application-specific attributes.
 
@@ -470,7 +457,7 @@ Formatting attributes for images and OLE objects.
 |`cropTop`|Number|0|all|Cropping size on the upper side of the bitmap.|(2)|
 |`cropBottom`|Number|0|all|Cropping size on the lower side of the bitmap.|(2)|
 
-#### Notes
+* Notes*:
 
 (1) The attributes `imageUrl` and `imageData` are mutually exclusive.
 

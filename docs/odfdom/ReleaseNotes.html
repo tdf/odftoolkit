@@ -113,48 +113,48 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 }
 h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
 <h2 id="release-087">Release 0.8.7<a class="headerlink" href="#release-087" title="Permanent link">&para;</a></h2>
-<p>ODFDOM 0.8.7 is released on Feb 16th, 2010. Major enhancements are coming with this version:  </p>
+<p>ODFDOM 0.8.7 is released on Feb 16th, 2010. Major enhancements are coming with this version:</p>
 <ul>
-<li>Full Maven support: ODFDOM is now on the public Maven servers.    </li>
-<li>The sub document handling had been enhanced.      </li>
-<li>ODF Package validation in ODFDOM was enabled. ODFDOM is used by the ODF Validator project of ODF Toolkit.   </li>
+<li>Full Maven support: ODFDOM is now on the public Maven servers.</li>
+<li>The sub document handling had been enhanced.</li>
+<li>ODF Package validation in ODFDOM was enabled. ODFDOM is used by the ODF Validator project of ODF Toolkit.</li>
 <li>More functionality for source code generation of the ODF 1.2 typed DOM classes by using MultiSchemaValidator as RelaxNG parser and Apache Velocity as template engine</li>
-<li>A major design clean-up had been archived. The inheritance relationship between DOM and Document layer has been broken up as it was no 1:1 relationship. The convenient methods for text, image and style are moved to incubator package. </li>
+<li>A major design clean-up had been archived. The inheritance relationship between DOM and Document layer has been broken up as it was no 1:1 relationship. The convenient methods for text, image and style are moved to incubator package.</li>
 <li>A new function to extract text from documents, DOMs and elements has been provided.</li>
 <li>Several bugs related with table and presentation had been fixed.</li>
 </ul>
 <p><strong>Resolved Issues</strong></p>
 <ul>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=5">Bug 5</a> -  Enabling public Maven repository     </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=35">Bug 35</a>-  JavaDoc enhancments          </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=66">Bug 66</a> -  Enabling the ODF validation for ODFDOM          </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=69">Bug 69</a> -  Redesign: Break up DOM/DOC inheritance, removing empty DOC classes, moving DOC functionality to incubator package     </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=91">Bug 91</a> -  Enabling new source code generation for ODF 1.2 typed DOM using MultiSchemaValidator as RelaxNG parser &amp; Apache Velocity as template engine      </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=131">Bug 131</a> -  WebappClassLoader leak due to org.openoffice.odf.pkg.TempDirDeleter    </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=141">Bug 141</a> -  meta:generator field should state used ODFDOM version       </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=161">Bug 161</a> -  Consistent line breaks in Mercurial       </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=166">Bug 166</a> -  Embedded documents and Package documents       </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=171">Bug 171</a> -  JavaDoc is deployed via Maven to the ODFDOM website        </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=179">Bug 179</a> -  Enabling JDK XPath and package layer refactorings               </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=181">Bug 181</a> -  Document creation date and time not initialised          </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=198">Bug 198</a> -  Enhancement of Java Logging     </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=200">Bug 200</a> -  Adapt office:version in all ODF XML files, to ODF 1.2      </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=209">Bug 209</a> -  Version.getBuildResponsible needs to be renamed             </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=214">Bug 214</a> -  Add functionality to enable/disable cell style inheritance      </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=215">Bug 215</a> -  Text extraction &amp; adding a visitor for elements      </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=216">Bug 216</a> -  README.txt update to reference to Release Notes of Wiki                 </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=217">Bug 217</a> -  'java -jar odfdom.jar' returns incorrect version info           </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=219">Bug 219</a> -  OdfPackag.save(..) should save as well all its open documents         </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=220">Bug 220</a> -  Xerces SAX parser should always be chosen        </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=221">Bug 221</a> -  Removing locale attributes from ODF templates of ODFDOM JAR         </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=226">Bug 226</a> -  Adding OdfPackage.isExternalReference to public API         </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=233">Bug 233</a> -  Copy presentation slide result in error when an external reference is existent          </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=234">Bug 234</a> -  Fix for table cell merge and repetition functionality         </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=236">Bug 236</a> -  Column without width, should not have empty width attributes when split up      </li>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=257">Bug 257</a> -  Test utility does not handle spaces in directory names      </li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=5">Bug 5</a> -  Enabling public Maven repository</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=35">Bug 35</a>-  JavaDoc enhancments</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=66">Bug 66</a> -  Enabling the ODF validation for ODFDOM</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=69">Bug 69</a> -  Redesign: Break up DOM/DOC inheritance, removing empty DOC classes, moving DOC functionality to incubator package</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=91">Bug 91</a> -  Enabling new source code generation for ODF 1.2 typed DOM using MultiSchemaValidator as RelaxNG parser &amp; Apache Velocity as template engine</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=131">Bug 131</a> -  WebappClassLoader leak due to org.openoffice.odf.pkg.TempDirDeleter</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=141">Bug 141</a> -  meta:generator field should state used ODFDOM version</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=161">Bug 161</a> -  Consistent line breaks in Mercurial</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=166">Bug 166</a> -  Embedded documents and Package documents</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=171">Bug 171</a> -  JavaDoc is deployed via Maven to the ODFDOM website</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=179">Bug 179</a> -  Enabling JDK XPath and package layer refactorings</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=181">Bug 181</a> -  Document creation date and time not initialised</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=198">Bug 198</a> -  Enhancement of Java Logging</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=200">Bug 200</a> -  Adapt office:version in all ODF XML files, to ODF 1.2</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=209">Bug 209</a> -  Version.getBuildResponsible needs to be renamed</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=214">Bug 214</a> -  Add functionality to enable/disable cell style inheritance</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=215">Bug 215</a> -  Text extraction &amp; adding a visitor for elements</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=216">Bug 216</a> -  README.txt update to reference to Release Notes of Wiki</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=217">Bug 217</a> -  'java -jar odfdom.jar' returns incorrect version info</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=219">Bug 219</a> -  OdfPackag.save(..) should save as well all its open documents</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=220">Bug 220</a> -  Xerces SAX parser should always be chosen</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=221">Bug 221</a> -  Removing locale attributes from ODF templates of ODFDOM JAR</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=226">Bug 226</a> -  Adding OdfPackage.isExternalReference to public API</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=233">Bug 233</a> -  Copy presentation slide result in error when an external reference is existent</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=234">Bug 234</a> -  Fix for table cell merge and repetition functionality</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=236">Bug 236</a> -  Column without width, should not have empty width attributes when split up</li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=257">Bug 257</a> -  Test utility does not handle spaces in directory names</li>
 </ul>
-<p><strong>API changes since 0.8.6 Release</strong> <br />
-<strong><em>1.Package/Class Change List</em></strong>  <br />
+<p><strong>API changes since 0.8.6 Release</strong>
+<strong><em>1.Package/Class Change List</em></strong>
 Note: The first column 'Java class' package is relative to 'org.odftoolkit'.</p>
 <table>
 <tr>
@@ -270,7 +270,7 @@ Note: The first column 'Java class' package is relative to 'org.odftoolkit'.</p>
 </tr>
 </table>
 
-<p><strong><em>2.Method Change List</em></strong> <br />
+<p><strong><em>2.Method Change List</em></strong>
 Note: The first column 'Java class' package is relative to 'org.odftoolkit.odfdom'.
 <table>
 <tr><td>Previous Java Class
@@ -435,7 +435,7 @@ Note: The first column 'Java class' package is relative to 'org.odftoolkit.odfdo
 </td></tr><tr>
 <td>
 </td><td>void  embedDocument(String,OdfDocument)
-</td><td>pkg.OdfPackageDocument 
+</td><td>pkg.OdfPackageDocument
 </td><td>void  insertDocument(OdfPackageDocument,String)
 </td></tr><tr>
 <td>
@@ -449,9 +449,9 @@ Note: The first column 'Java class' package is relative to 'org.odftoolkit.odfdo
 </td><td>OdfPackage  getPackage()
 </td></tr><tr>
 <td>
-</td><td>void  setPackage(OdfPackage)<br />
+</td><td>void  setPackage(OdfPackage)
 </td><td>pkg.OdfPackageDocument
-</td><td>void  setPackage(OdfPackage)<br />
+</td><td>void  setPackage(OdfPackage)
 </td></tr><tr>
 <td>
 </td><td>String  getDocumentPackagePath()
@@ -470,7 +470,7 @@ Note: The first column 'Java class' package is relative to 'org.odftoolkit.odfdo
 </td></tr><tr>
 <td>
 </td><td>XPath  getXPath()
-</td><td>pkg.OdfFileDom 
+</td><td>pkg.OdfFileDom
 </td><td>XPath  getXPath()
 </td></tr><tr>
 <td>
@@ -544,7 +544,7 @@ Note: The first column 'Java class' package is relative to 'org.odftoolkit.odfdo
 </td><td>Calendar  getDate()
 </td></tr>
 </table></p>
-<p><strong><em>3.Package/Class/Method Removed List</em></strong>   </p>
+<p><strong><em>3.Package/Class/Method Removed List</em></strong></p>
 <table>
 <tr>
 <td>Removed Package/Class/Method</td><td>Adaptive Solution</td>
@@ -572,13 +572,13 @@ Note: The first column 'Java class' package is relative to 'org.odftoolkit.odfdo
  sample: org.odftoolkit.odfdom.doc.anim.OdfAnimate ->
          org.odftoolkit.odfdom.dom.anim.AnimAnimateElement
 </tr><tr>
-<td>remove get/setValue() from dom attribute classes 
-</td><td>use get/setValue() in XML DOM directly. 
+<td>remove get/setValue() from dom attribute classes
+</td><td>use get/setValue() in XML DOM directly.
 </tr><tr>
 <td>remove classes:<br/>
  OdfAttributeNames, OdfElementNames, OdfNamespaceNames<br/>
  from package org.odftoolkit.odfdom.dom
-</td><td>use String to replace emun value. 
+</td><td>use String to replace emun value.
 </tr><tr>
 <td>remove the following methods:<br/>
     int getColumnSpannedNumber();<br/>
@@ -588,12 +588,12 @@ Note: The first column 'Java class' package is relative to 'org.odftoolkit.odfdo
     void setColumnSpannedNumber(int spannedNum);<br/>
     void setRowSpannedNumber(int spannedNum);<br/>
     from org.odftoolkit.odfdom.doc.table.OdfTable;
-</td><td>use OdfTableCellRange.merge(). 
+</td><td>use OdfTableCellRange.merge().
 </tr><tr>
 <td>remove method:<br/>
     OdfOfficeBody  getOfficeBody()<br/>
  from org.odftoolkit.odfdom.doc.OdfDocument
-</td><td> 
+</td><td>
 </tr><tr>
 <td>remove class:<br/>
     OdfXMLHelper<br/>
@@ -603,10 +603,10 @@ Note: The first column 'Java class' package is relative to 'org.odftoolkit.odfdo
 </table>
 
 <h2 id="release-086">Release 0.8.6<a class="headerlink" href="#release-086" title="Permanent link">&para;</a></h2>
-<p>On July 16th, version 0.8.6 has been released. About a month after the release of 0.8.5 the new 0.8.6 version provides more than a dozen of bug fixes mainly for Table usage from the [[ProjectOverview|high level ODF Document API]]. Aside of this, minor enhancements have been added, e.g. a higher usability for the Color type. </p>
+<p>On July 16th, version 0.8.6 has been released. About a month after the release of 0.8.5 the new 0.8.6 version provides more than a dozen of bug fixes mainly for Table usage from the [[ProjectOverview|high level ODF Document API]]. Aside of this, minor enhancements have been added, e.g. a higher usability for the Color type.</p>
 <p><strong>Resolved Issues</strong></p>
 <ul>
-<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=146">Bug 146</a> - Some resources for performance test are not available    </li>
+<li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=146">Bug 146</a> - Some resources for performance test are not available</li>
 <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=161">Bug 161</a> - Adapt line breaking activating Mercurial plugin</li>
 <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=169">Bug 169</a> - Minor fix for OdfPackage Performance (and removing redundant log file)</li>
 <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=178">Bug 178</a> - Setting default column style does not work properly</li>
@@ -735,11 +735,11 @@ Note: The first column 'Java class' package is relative to 'org.odftoolkit.odfdo
 </table>
 
 <h2 id="release-085">Release: 0.8.5<a class="headerlink" href="#release-085" title="Permanent link">&para;</a></h2>
-<p>On 3rd July 2010 version 0.8.5 of the Java implementation has been released.  In this version, ODFDOM supports the load, parse and save of all available media types of OpenDocument documents - except Formula (MathML) and Database front end documents. 
+<p>On 3rd July 2010 version 0.8.5 of the Java implementation has been released.  In this version, ODFDOM supports the load, parse and save of all available media types of OpenDocument documents - except Formula (MathML) and Database front end documents.
 As well, ODFDOM now allows the load &amp; save of none-ODF XML elements and attributes.
-Furthermore, we introduced a series of slide relevant convenient methods for the Document API, which makes easy slide handling possible. 
-In particular the slide access, deletion, reordering, the copy of slides from a presentation to another and even merge of two presentations were enabled. </p>
-<p>A second focus had been the overall performance. 
+Furthermore, we introduced a series of slide relevant convenient methods for the Document API, which makes easy slide handling possible.
+In particular the slide access, deletion, reordering, the copy of slides from a presentation to another and even merge of two presentations were enabled.</p>
+<p>A second focus had been the overall performance.
 We improved the start-up time of ODFDOM using a class lazy loading approach and reduced the saving time of ODF documents by avoiding the compressing of already compressed file, e.g. images. In special the performance of table handling via  the Document API have been enhanced. For instance by using now automatic table expansion when a requested cell index was out of range. Finally we improved table method robustness by adding sanity checks and the fix of several table issues.</p>
 <p><strong>Resolved Issues</strong></p>
 <p>The resolved issues in this version include:</p>
@@ -820,9 +820,9 @@ We improved the start-up time of ODFDOM using a class lazy loading approach and 
 </table>
 
 <h2 id="release-08">Release: 0.8<a class="headerlink" href="#release-08" title="Permanent link">&para;</a></h2>
-<p>On 19 Feb 2010 version 0.8 of the Java implementation has been released. The API adapts to latest ODF Specification 1.2 part Community Draft 4 and the codegeneration has been updated to the new RelaxNG schema. A major improvement of convenient layer is the introduce of table convenient API - a first prototype of ODF features - which provides methods to manipulate table feature and its sub-features, such as rows, columns, cells and cell ranges. In this prototype, the 1:1 inheritance relationships between convenient layer classes and dom layer classes have been broken up, and composite relationships are used instead. We also provide metadata convenient API in incubator package which will be improved in the following version. Dom layer has been improved to support invalid attributes and values in DOM tree. Some bugs in package layer, DOM/XML layer and document/convenient layer have been fixed. The Java Docs are improved. </p>
+<p>On 19 Feb 2010 version 0.8 of the Java implementation has been released. The API adapts to latest ODF Specification 1.2 part Community Draft 4 and the codegeneration has been updated to the new RelaxNG schema. A major improvement of convenient layer is the introduce of table convenient API - a first prototype of ODF features - which provides methods to manipulate table feature and its sub-features, such as rows, columns, cells and cell ranges. In this prototype, the 1:1 inheritance relationships between convenient layer classes and dom layer classes have been broken up, and composite relationships are used instead. We also provide metadata convenient API in incubator package which will be improved in the following version. Dom layer has been improved to support invalid attributes and values in DOM tree. Some bugs in package layer, DOM/XML layer and document/convenient layer have been fixed. The Java Docs are improved.</p>
 <p><strong>Resolved Issues</strong></p>
-<p>The resolved issues in this version includes: </p>
+<p>The resolved issues in this version includes:</p>
 <ul>
 <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=19">Bug 19</a> - Special characters in package path string not handled correctly;</li>
 <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=56">Bug 56</a> - Allow to get meta.xml as a OdfFileDom object;</li>

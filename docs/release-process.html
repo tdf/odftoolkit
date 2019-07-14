@@ -116,7 +116,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <ol>
 <li>Environment setup for releasing artifacts (same for SNAPSHOTs and releases) -</li>
 <li>
-<p>Increase the default Java heap available to Maven (required for Java SE 6)  </p>
+<p>Increase the default Java heap available to Maven (required for Java SE 6)</p>
 <div class="codehilite"><pre><span></span>export MAVEN_OPTS=&quot;-Xmx1024m -XX:MaxPermSize=256m&quot;
 </pre></div>
 
@@ -128,20 +128,20 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </ol>
 </li>
 <li>
-<p>Prepare the source for release:     </p>
+<p>Prepare the source for release:</p>
 <ol>
 <li>Cleanup JIRA so the Fix Version in issues resolved since the last release includes this release version correctly. Also, transition any Resolved issues to the Closed state.</li>
 <li>Update the text files in a working copy of the project root -<ol>
 <li>Update the CHANGELOG based on the Text release reports from JIRA.</li>
 <li>Review and update README.txt if needed.</li>
-<li>Commit any changes back to svn </li>
+<li>Commit any changes back to svn</li>
 </ol>
 </li>
 <li>Stage any Roadmap or Release landing pages on the site.</li>
 </ol>
 </li>
 <li>
-<p>Checkout a clean copy of the trunk to release using command line svn.   </p>
+<p>Checkout a clean copy of the trunk to release using command line svn.</p>
 </li>
 </ol>
 <p><em>Do not use Eclipse to do the checkout. The extra dot (.) files created by Eclipse throws off the rat:check processing.</em></p>
@@ -150,7 +150,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <p>Use <code>mvn -P pedantic verify</code> to verify the source has the required headers before trying to release.</p>
 </li>
 <li>
-<p>Do a dry run of the release:prepare step:  </p>
+<p>Do a dry run of the release:prepare step:</p>
 <div class="codehilite"><pre><span></span>$ mvn -Papache-release release:prepare -DdryRun<span class="o">=</span><span class="nb">true</span>
 </pre></div>
 
@@ -158,17 +158,17 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </li>
 </ol>
 <p>The dry run will not commit any changes back to SVN and gives you the opportunity to verify that the release process will complete as expected. You will be prompted for the following information :
-      * Release version - take the default 
+      * Release version - take the default
       * SCM release tag - <em>DO NOT TAKE THE DEFAULT</em>  -: : 0.1-incubating
       * New development version - take the default
-      * GPG Passprhase  </p>
+      * GPG Passprhase</p>
 <p><em>If you cancel a release:prepare before it updates the pom.xml versions, then use the release:clean goal to just remove the extra files that were created.</em></p>
 <ol>
 <li>
 <p>Verify that the release process completed as expected</p>
 <ol>
 <li>The release plugin will create pom.xml.tag files which contain the changes that would have been committed to SVN. The only differences between pom.xml.tag and it's corresponding pom.xml file should be the version number.</li>
-<li>If other formatting changes have been made you should review the changes and then commit them -   <div class="codehilite"><pre><span></span>$ svn commit -m <span class="s2">&quot;fixing formatting for release&quot;</span>
+<li>If other formatting changes have been made you should review the changes and then commit them -<div class="codehilite"><pre><span></span>$ svn commit -m <span class="s2">&quot;fixing formatting for release&quot;</span>
 <span class="m">3</span>. Check release.properties and make sure that the scm properties have the right version. Sometimes the scm location can be the previous version not the next version.
 <span class="m">4</span>. Verify signatures <span class="o">([</span>Verifying release signatures<span class="o">](</span>http://incubator.apache.org/rave/release-process.html#verify_signatures<span class="o">))</span>
 </pre></div>
@@ -178,7 +178,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </ol>
 </li>
 <li>
-<p>Once any failures or required updates have been committed to svn, rollback the release prepare files:  </p>
+<p>Once any failures or required updates have been committed to svn, rollback the release prepare files:</p>
 <div class="codehilite"><pre><span></span>$ mvn -Papache-release release:rollback
 </pre></div>
 
@@ -201,7 +201,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <p>Perform the release</p>
 </li>
 </ol>
-<p>This step will create a maven staging repository and site for use in testing and voting. </p>
+<p>This step will create a maven staging repository and site for use in testing and voting.</p>
 <div class="codehilite"><pre><span></span>    $ mvn release:perform -Papache-release -Duser.name=&lt;your_apache_uid&gt;
 
 *If your local OS userid doesn&#39;t match your Apache userid, then you&#39;ll have to also override the value provided by the OS to Maven for the site-deploy step to work. This is known to work for Linux, but not for Mac and unknown for Windows.*
@@ -212,7 +212,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <ol>
 <li>Verify the release artifacts</li>
 <li>Verify the HTML links in site are correct</li>
-<li>Verify the staged artifacts in the nexus repo        <br />
+<li>Verify the staged artifacts in the nexus repo
            1. https://repository.apache.org/index.html
            2. Enterprise --&gt; Staging
            3. Staging tab --&gt; Name column --&gt; org.apache.rave
@@ -229,10 +229,10 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <ol>
 <li>Create a VOTE email thread on rave-dev@ to record votes as replies, like <a href="release-vote.txt">this</a></li>
 <li>Create a DISCUSS email thread on rave-dev@ for any vote questions, <a href="release-discuss.txt">this</a></li>
-<li>Perform a review of the release and cast your vote. See the following for more details on Apache releases </li>
+<li>Perform a review of the release and cast your vote. See the following for more details on Apache releases</li>
 </ol>
-<p><a href="http://www.apache.org/dev/release.html">http://www.apache.org/dev/release.html</a><br />
-<a href="http://incubator.apache.org/guides/releasemanagement.html">http://incubator.apache.org/guides/releasemanagement.html</a></p>
+<p><a href="http://www.apache.org/dev/release.html">http://www.apache.org/dev/release.html</a>
+ <a href="http://incubator.apache.org/guides/releasemanagement.html">http://incubator.apache.org/guides/releasemanagement.html</a></p>
 <ol>
 <li>A -1 vote does not necessarily mean that the vote must be redone, however it is usually a good idea to rollback the release if a -1 vote is received. See - Recovering from a vetoed release</li>
 <li>
@@ -279,13 +279,13 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </li>
 <li>
 <p>Copy the distribution artifacts over to the distribution area</p>
-<p>$ ssh ${user.name}@people.apache.org<br />
-  $ mkdir /www/www.apache.org/dist/incubator/rave/${project.version} <br />
-  $ cd /www/www.apache.org/dist/incubator/rave/${project.version} <br />
-  $ wget https://repository.apache.org/content/repositories/releases/org/apache/rave/rave-parent/${project.version}/rave-parent-${project.version}-source-release.zip  <br />
-  $ wget https://repository.apache.org/content/repositories/releases/org/apache/rave/rave-parent/${project.version}/rave-parent-${project.version}-source-release.zip.asc <br />
-  $ wget https://repository.apache.org/content/repositories/releases/org/apache/rave/rave-parent/${project.version}/rave-parent-${project.version}-source-release.zip.md5 <br />
-  $ wget https://repository.apache.org/content/repositories/releases/org/apache/rave/rave-parent/${project.version}/rave-parent-${project.version}-source-release.zip.sha1    </p>
+<p>$ ssh ${user.name}@people.apache.org
+  $ mkdir /www/www.apache.org/dist/incubator/rave/${project.version}
+  $ cd /www/www.apache.org/dist/incubator/rave/${project.version}
+  $ wget https://repository.apache.org/content/repositories/releases/org/apache/rave/rave-parent/${project.version}/rave-parent-${project.version}-source-release.zip
+  $ wget https://repository.apache.org/content/repositories/releases/org/apache/rave/rave-parent/${project.version}/rave-parent-${project.version}-source-release.zip.asc
+  $ wget https://repository.apache.org/content/repositories/releases/org/apache/rave/rave-parent/${project.version}/rave-parent-${project.version}-source-release.zip.md5
+  $ wget https://repository.apache.org/content/repositories/releases/org/apache/rave/rave-parent/${project.version}/rave-parent-${project.version}-source-release.zip.sha1</p>
 </li>
 </ol>
 <p><strong>Make sure all the copied files have g+rw set and only o+r set</strong></p>
@@ -296,7 +296,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 
 <p><em>Note: All of the artifacts are in the maven repos, but we may create an assembly to publish in future releases</em></p>
 <ol>
-<li>Publish the staged website </li>
+<li>Publish the staged website</li>
 </ol>
 </li>
 <li>
@@ -350,7 +350,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <p>On unix platforms the following command can be executed -</p>
 <div class="codehilite"><pre><span></span>  for file in `find . -type f -iname &#39;*.asc&#39;`
   do
-      gpg --verify <span class="cp">${</span><span class="nb">file</span><span class="cp">}</span> 
+      gpg --verify <span class="cp">${</span><span class="nb">file</span><span class="cp">}</span>
   done
 </pre></div>
 

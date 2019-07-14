@@ -272,7 +272,7 @@ The following code is to add a comment at the front of the paragraph.
         aSection.remove();<br/>
 </pre>
 <br/><div class="bodytext">
-        From version 0.8, we support high level APIs to protect a section.      You can use the following code to set the protection without a password:  <br />
+        From version 0.8, we support high level APIs to protect a section.      You can use the following code to set the protection without a password:
 </div>
 <br/><pre class='code' id="code17">
         aSection.setProtected(<span class='basic'>true</span>);<br/>
@@ -429,7 +429,7 @@ The following code is to add a comment at the front of the paragraph.
 </pre>
 <br/><br/><strong><a href="#Header and Footer" >Header and Footer</a></strong>
 <div class="bodytext">
-        From version 0.4.5, we support high level APIs for footer and header.       You can use the following code to get the header and footer. 
+        From version 0.4.5, we support high level APIs for footer and header.       You can use the following code to get the header and footer.
 </div>
 <br/><pre class='code' id="code35">
         <span class='javaclass'>Header</span> docHeader = doc.getHeader();<br/>
@@ -465,27 +465,27 @@ The following code is to add a comment at the front of the paragraph.
         <span class='javaclass'>Textbox</span> box = paragraph.addTextbox(<span class='modifier'>new</span> <span class='javaclass'>FrameRectangle</span>(1,1,2,1,<span class='javaclass'>SupportedLinearMeasure</span>.<span class='javaclass'>IN</span>));<br/>
 </pre>
 <br/><div class="bodytext">
-        Below codes is to set the text content and name of this text box; 
+        Below codes is to set the text content and name of this text box;
 </div>
 <br/><pre class='code' id="code39">
         box.setTextContent("this is a text box");<br/>
         box.setName("<span class='javaclass'>MyTextbox</span>");<br/>
 </pre>
 <br/><div class="bodytext">
-        Below codes is to get a text box by name or get an iterator of text box contained by a paragraph. 
+        Below codes is to get a text box by name or get an iterator of text box contained by a paragraph.
 </div>
 <br/><pre class='code' id="code40">
         <span class='javaclass'>Textbox</span> myBox=paragraph.getTextboxByName("<span class='javaclass'>MyTextbox</span>");<br/>
         <span class='javaclass'>Iterator</span>&lt;<span class='javaclass'>Textbox</span>&gt; boxIter = paragraph.getTextboxIterator();<br/>
 </pre>
 <br/><div class="bodytext">
-        Below code is to set the background color of a text box. 
+        Below code is to set the background color of a text box.
 </div>
 <br/><pre class='code' id="code41">
         myBox.setBackgroundColor(<span class='javaclass'>Color</span>.<span class='javaclass'>BLUE</span>);<br/>
 </pre>
 <br/><div class="bodytext">
-        Below code is to remove a text box; 
+        Below code is to remove a text box;
 </div>
 <br/><pre class='code' id="code42">
         paragraph.removeTextbox(myBox);<br/>
@@ -559,10 +559,10 @@ The following code is to apply a hyperlink to this span.
         <span class='javaclass'>TextDocument</span> newDoc = <span class='javaclass'>TextDocument</span>.newTextDocument();<br/>
         <span class='javaclass'>MasterPage</span> master = (<span class='javaclass'>MasterPage</span>) getOrCreateMasterPage(newDoc, "<span class='javaclass'>Envelope</span>");<br/>
         <span class='javaclass'>Paragraph</span> refParagraph = newDoc.addParagraph("before page break");<br/>
-        newDoc.addPageBreak(refParagraph, master);<br/> 
+        newDoc.addPageBreak(refParagraph, master);<br/>
 </pre>
 <div class="bodytext">
-        You can also create a customized page style and use it with a page break.     <br />
+        You can also create a customized page style and use it with a page break.
 </div>
 <br/><pre class='code' id="code51">
         <span class='javaclass'>TextDocument</span> newDoc = <span class='javaclass'>TextDocument</span>.newTextDocument();<br/>
@@ -577,7 +577,7 @@ The following code is to apply a hyperlink to this span.
         master.setMargins(20, 20, 20, 20);<br/>
         master.setFootnoteSepProperties(<span class='javaclass'>AdjustmentStyle.LEFT</span>, <span class='javaclass'>Color</span>.valueOf("#000000"), 1, 1, null, <span class='javaclass'>Percent</span>.valueOf("25%"), 0.18);<br/>
         <span class='javaclass'>Paragraph</span> refParagraph = newDoc.addParagraph("before page break");<br/>
-        newDoc.addPageBreak(refParagraph, master);<br/> 
+        newDoc.addPageBreak(refParagraph, master);<br/>
 </pre>
 <br/><br/><strong><a href="#Table of Content" >Table of Content</a></strong>
 <div class="bodytext">
@@ -603,7 +603,7 @@ The following code is to apply a hyperlink to this span.
         tocstyle.addStyle("User_20_Index_20_10", 10);
         <span class='javaclass'>TextTableOfContentElement</span> textTableOfContentElement = doc.createTOCwithStyle(paragraph1, tocstyle, <span class='basic'>true</span>);
 </pre>
-<br/><br/> 
+<br/><br/>
 <div class="navigation">
  <ul>
   <li><a href="Manipulate Metadata.html">previous</a></li>

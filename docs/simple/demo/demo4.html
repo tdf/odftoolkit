@@ -112,18 +112,18 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
   visibility: hidden;
 }
 h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p><strong><a href="index.html">Demos</a></strong> &gt; <strong>List and Table Conversion</strong>   </p>
-<p><strong>Overview</strong>  </p>
-<p>Starting in version 0.4, we have added methods to support bullet, numbered and image lists to the Simple API. This includes frequently used features  for processing lists and list item. This demo is designed to show the power of List API and help you learn how to use it.  </p>
-<p>This demo shows how to convert between a nested List and Table. As you can see in the following two pictures, on the left we have a simple outline of a corporate 
-hierarchy. There are four departments in this company.  Each department has several managers and each manager has several reporting staff.  Now we want 
-to change this list to a table, just like the picture on the right shows.  </p>
-<p><img alt="image1" src="image/demo4_organization_list.png" />  </p>
-<p>However, sometimes we want to convert in the opposite direction, from a table to a list. Take the following two pictures as example. The left one is table of country calling codes, which includes the codes of countries from different continents. Suppose you want to convert this table representation into a nested list.  The picture on the right shows the conversion result. The first level list show the continent names and the second level list show the countries and their calling codes.    </p>
-<p><img alt="image2" src="image/demo4_code_list.png" />     </p>
-<p>You can see similar functionality in office software, such as selective copy and paste. In the next section, I will show how easy to do these kinds of conversions using the Simple API. </p>
+<p><strong><a href="index.html">Demos</a></strong> &gt; <strong>List and Table Conversion</strong></p>
+<p><strong>Overview</strong></p>
+<p>Starting in version 0.4, we have added methods to support bullet, numbered and image lists to the Simple API. This includes frequently used features  for processing lists and list item. This demo is designed to show the power of List API and help you learn how to use it.</p>
+<p>This demo shows how to convert between a nested List and Table. As you can see in the following two pictures, on the left we have a simple outline of a corporate
+hierarchy. There are four departments in this company.  Each department has several managers and each manager has several reporting staff.  Now we want
+to change this list to a table, just like the picture on the right shows.</p>
+<p><img alt="image1" src="image/demo4_organization_list.png" /></p>
+<p>However, sometimes we want to convert in the opposite direction, from a table to a list. Take the following two pictures as example. The left one is table of country calling codes, which includes the codes of countries from different continents. Suppose you want to convert this table representation into a nested list.  The picture on the right shows the conversion result. The first level list show the continent names and the second level list show the countries and their calling codes.</p>
+<p><img alt="image2" src="image/demo4_code_list.png" /></p>
+<p>You can see similar functionality in office software, such as selective copy and paste. In the next section, I will show how easy to do these kinds of conversions using the Simple API.</p>
 <p><strong>Code Introduction</strong></p>
-<p>Let's have a look at the main method. It will help us get an overview of this demo. First, the list data text document, "ListTable.odt" and table data spreadsheet document "TableList.ods" are loaded. Secondly, we use the list iteration function to get all of the lists in the text document and invoke the method <code>convertFromListToTable</code> to convert each of them to a table. Finally, we get the data table from "TableList.ods" and invoke the method <code>convertFromTableToList</code> to convert this table to a list. All of the updated documents are saved as new files. You can open them and see the conversion results.   </p>
+<p>Let's have a look at the main method. It will help us get an overview of this demo. First, the list data text document, "ListTable.odt" and table data spreadsheet document "TableList.ods" are loaded. Secondly, we use the list iteration function to get all of the lists in the text document and invoke the method <code>convertFromListToTable</code> to convert each of them to a table. Finally, we get the data table from "TableList.ods" and invoke the method <code>convertFromTableToList</code> to convert this table to a list. All of the updated documents are saved as new files. You can open them and see the conversion results.</p>
 <div class="codehilite"><pre><span></span>public static void main(String[] args) {
     try {
         TextDocument textDoc = TextDocument.loadDocument(&quot;ListTable.odt&quot;);
@@ -155,9 +155,9 @@ to change this list to a table, just like the picture on the right shows.  </p>
 </pre></div>
 
 
-<p>In the following two sections, I will review the implementation of the methods <code>convertFromListToTable</code> and <code>convertFromTableToList</code>.    </p>
+<p>In the following two sections, I will review the implementation of the methods <code>convertFromListToTable</code> and <code>convertFromTableToList</code>.</p>
 <p><strong><em>Convert from List to Table</em></strong></p>
-<p>This is a recursive method, similar to a depth-first tree traversal. You determine the paste cell address by <code>startColumn</code> and <code>startRow</code>. First, all of the items in the list are retrieved. Second, each list item is converted to table cell. Its text content is extracted and set as the cell's display text. If the item has a sub list, its sub list is also handled the same as the parent list. After all of the items are converted to cells, we invoke <code>CellRange.merge()</code> to merge the blank cells. The generation document appears just like the picture shown earlier.    </p>
+<p>This is a recursive method, similar to a depth-first tree traversal. You determine the paste cell address by <code>startColumn</code> and <code>startRow</code>. First, all of the items in the list are retrieved. Second, each list item is converted to table cell. Its text content is extracted and set as the cell's display text. If the item has a sub list, its sub list is also handled the same as the parent list. After all of the items are converted to cells, we invoke <code>CellRange.merge()</code> to merge the blank cells. The generation document appears just like the picture shown earlier.</p>
 <div class="codehilite"><pre><span></span>private static int convertFromListToTable(List list, Table table, int startColumn, int startRow) {
     java.util.List&lt;listitem&gt; items = list.getItems();
     int newItemCount = startRow;
@@ -186,7 +186,7 @@ to change this list to a table, just like the picture on the right shows.  </p>
 
 
 <p><strong><em>Convert from Table to List</em></strong></p>
-<p>This is also a recursive method. You determine the conversion range of the table by <code>startColumn</code>, <code>startRow</code>, <code>endColumn</code> and <code>endRow</code>. First, every cell in the selected range is retrieved by <code>Table.getCellByPosition</code>. Next, a list item is created to store the cell display text. If the <code>rowSpannedNumber &gt; 1</code>, that means this item has a sub list. Parts of the cells in the right columns of this cell become the items of the sub list. They are also determined by recursive calls to <code>convertFromTableToList</code>. If the <code>rowSpannedNumber = 1</code>, there is no need to create a sub list, all of the content in the right cells is just added to this item.   </p>
+<p>This is also a recursive method. You determine the conversion range of the table by <code>startColumn</code>, <code>startRow</code>, <code>endColumn</code> and <code>endRow</code>. First, every cell in the selected range is retrieved by <code>Table.getCellByPosition</code>. Next, a list item is created to store the cell display text. If the <code>rowSpannedNumber &gt; 1</code>, that means this item has a sub list. Parts of the cells in the right columns of this cell become the items of the sub list. They are also determined by recursive calls to <code>convertFromTableToList</code>. If the <code>rowSpannedNumber = 1</code>, there is no need to create a sub list, all of the content in the right cells is just added to this item.</p>
 <div class="codehilite"><pre><span></span>private static void convertFromTableToList(Table table, List list, int startColumn, int startRow, int endColumn, int endRow) {
     while (startRow &lt;= endRow) {
         Cell cell = table.getCellByPosition(startColumn, startRow);
@@ -219,9 +219,9 @@ to change this list to a table, just like the picture on the right shows.  </p>
 </pre></div>
 
 
-<p><strong>Download</strong>   </p>
-<p>Powered by Simple API version <a href="../downloads.html">0.4</a>.  <br />
-You can download the code of this demo from <a href="table_list_convertion.zip">here</a>.   </p>
+<p><strong>Download</strong></p>
+<p>Powered by Simple API version <a href="../downloads.html">0.4</a>.
+You can download the code of this demo from <a href="table_list_convertion.zip">here</a>.</p>
     </div>
     
     <div id="footera">

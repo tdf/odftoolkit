@@ -113,17 +113,17 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 }
 h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
 <h2 id="simplify-the-application-of-xslt-stylesheets-to-odf-documents">Simplify the application of XSLT stylesheets to ODF documents<a class="headerlink" href="#simplify-the-application-of-xslt-stylesheets-to-odf-documents" title="Permanent link">&para;</a></h2>
-<p><strong>ODF XSLT Runner</strong> is a small Java application that allows you to apply 
-XSLT stylesheets to XML streams included in ODF packages without extracting 
-them from the package. It can be used from the command line. A <a href="http://incubator.apache.org/odftoolkit/xsltrunner/ODFXSLTRunnerTask.html">driver</a> to use 
+<p><strong>ODF XSLT Runner</strong> is a small Java application that allows you to apply
+XSLT stylesheets to XML streams included in ODF packages without extracting
+them from the package. It can be used from the command line. A <a href="http://incubator.apache.org/odftoolkit/xsltrunner/ODFXSLTRunnerTask.html">driver</a> to use
 it within Ant buildfiles is also available.</p>
 <h2 id="getting-and-building-odf-xslt-runner">Getting and building ODF XSLT Runner<a class="headerlink" href="#getting-and-building-odf-xslt-runner" title="Permanent link">&para;</a></h2>
 <p><strong>ODF XSLT Runner</strong> is build by a NetBeans project. After you have checked out
-the sources from the Mercurial repository, you can open the project 
+the sources from the Mercurial repository, you can open the project
 in NetBeans and build <strong>odfxsltrunner</strong>.</p>
-<p>A binary release of <strong>odfxsltrunner.jar</strong> is available in the ODF Toolkit binary package. Please download <a href="../downloads.html">here</a>. <br />
-If you need the earlier single jars, please access <a href="http://code.google.com/a/apache-extras.org/p/odftoolkit-extra/downloads/list">here</a>.   </p>
-<p>Building and running <strong>odfxsltrunner.jar</strong> requires additional jar files. 
+<p>A binary release of <strong>odfxsltrunner.jar</strong> is available in the ODF Toolkit binary package. Please download <a href="../downloads.html">here</a>.
+If you need the earlier single jars, please access <a href="http://code.google.com/a/apache-extras.org/p/odftoolkit-extra/downloads/list">here</a>.</p>
+<p>Building and running <strong>odfxsltrunner.jar</strong> requires additional jar files.
 Please see Requirements for details.</p>
 <h2 id="command-line-options">Command Line Options<a class="headerlink" href="#command-line-options" title="Permanent link">&para;</a></h2>
 <p><strong>ODF XSLT Runner</strong> is called by one of the below command lines:</p>
@@ -144,12 +144,12 @@ Please see Requirements for details.</p>
 </pre></div>
 
 
-<p>The default is to apply the XSLT stylesheet <strong><style-sheet></strong> to the stream 
-<strong>content.xml</strong> of the ODF file <strong>&lt;input package&gt;</strong>. 
+<p>The default is to apply the XSLT stylesheet <strong><style-sheet></strong> to the stream
+<strong>content.xml</strong> of the ODF file <strong>&lt;input package&gt;</strong>.
 If no <strong><output package></strong> parameter is specified, then the result of the transformation will be printed to the standard output. If an <strong>&lt;output package&gt;</strong> is specified, the <strong>&lt;input package&gt;</strong> is copied to the <strong>&lt;output package&gt;</strong>, and the steam <strong>content.xml</strong> of the <strong>&lt;output package&gt;</strong> is replaced with the result of the transformation.</p>
 <p>The <strong>-p</strong> option allows to specify another stream in the package as source of the transformation than <strong>content.xml</strong>.</p>
 <p>The <strong>-t</strong> options allows to specify a template for the output package. If it is used, the result of the transformation is stored in the <strong>content.xml</strong> stream (or the stream specified by the <strong>-p</strong> option) of the <strong>&lt;output package&gt;</strong>, but other streams of <strong>&lt;output package&gt;</strong> than that are not modified. This option can be used together with the <strong>-i</strong> option to create an ODF file from a plain XML file.</p>
-<p>The <strong>-i</strong> option allows to specify a plain XML file <strong>&lt;input file&gt;</strong> as source of the transformation. </p>
+<p>The <strong>-i</strong> option allows to specify a plain XML file <strong>&lt;input file&gt;</strong> as source of the transformation.</p>
 <p>If the <strong>-o</strong> option is specified, the result of the transformation is stored in the plain <strong>&lt;output file&gt;</strong> rather than in a ODF package. This is for instance of interest if the result of the transformation is HTML. The <strong>-x</strong> option can be used to extract further files from the input package. A file or directory specified by this option is extracted from the package into the directory of the output file. The <strong>-x</strong> option can be specified multiple times.</p>
 <p>The <strong>-r</strong> option allows to modify the <strong>content.xml</strong> stream (or the stream specified by the <strong>-p</strong> option) in place. If it is specified, the result of the transformation just replaces the stream that was the source of the transformation. This option should be used with care, because it modifies the original input ODF file.</p>
 <p>The <strong>-v</strong> option enables a verbose mode.</p>
@@ -158,23 +158,23 @@ If no <strong><output package></strong> parameter is specified, then the result 
 </pre></div>
 
 
-<p>The <strong>-l</strong> option can be used to redirect diagnostic messages into a log file. 
+<p>The <strong>-l</strong> option can be used to redirect diagnostic messages into a log file.
 By default they are printed on standard error.</p>
 <p>XSLT <a href="http://www.w3.org/TR/1999/REC-xslt-19991116#top-level-variables">Parameters</a> can be passed to the transformation by specifying them as name=value pairs. They must appear behind all other command line parameters.</p>
 <h2 id="uri-resolutiondocument-function">URI resolution/document() function<a class="headerlink" href="#uri-resolutiondocument-function" title="Permanent link">&para;</a></h2>
-<p>If the source of a transformation is an ODF package, the XSLT 
-<a href="http://www.w3.org/TR/1999/REC-xslt-19991116#document">document</a> function can be used to access other files in the package than 
-the one that is the source of the transformation. To do so, the first parameter 
-of the <em>document()</em> function must be a relative URI that references the file 
-that shall be accessed. The reference must be relative to the source file. 
-The second parameter of the <em>document()</em> function must be a node within the 
+<p>If the source of a transformation is an ODF package, the XSLT
+<a href="http://www.w3.org/TR/1999/REC-xslt-19991116#document">document</a> function can be used to access other files in the package than
+the one that is the source of the transformation. To do so, the first parameter
+of the <em>document()</em> function must be a relative URI that references the file
+that shall be accessed. The reference must be relative to the source file.
+The second parameter of the <em>document()</em> function must be a node within the
 source file.</p>
-<p><strong>Note:</strong> The second parameter specifies the base URI for the resolution of the 
-URI that is specified by the first parameter. This base URI is the base URI of 
-the file that contains the node that is passed as second parameter. If the 
-second parameter is omitted, the base URI is the one of the XSLT stylesheet 
-containing the <em>document()</em> function itself. <strong>odfxsltrunner</strong> runner uses 
-the rules ODF defines for resolving relative URIs only for URIs that are 
+<p><strong>Note:</strong> The second parameter specifies the base URI for the resolution of the
+URI that is specified by the first parameter. This base URI is the base URI of
+the file that contains the node that is passed as second parameter. If the
+second parameter is omitted, the base URI is the one of the XSLT stylesheet
+containing the <em>document()</em> function itself. <strong>odfxsltrunner</strong> runner uses
+the rules ODF defines for resolving relative URIs only for URIs that are
 relative to a file within an ODF package.</p>
 <p><strong>Example:</strong> When transforming a content.xml file contained in an ODF package, the following rule applies templates to the style elements contained in the style.xml file:</p>
 <div class="codehilite"><pre><span></span> &lt;xsl:apply-templates select=&quot;document(&#39;styles.xml&#39;,.)//office:styles/style:style&quot;/&gt;
@@ -183,18 +183,18 @@ relative to a file within an ODF package.</p>
 
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
 <p><strong>ODF XSLT Runner</strong> requires <a href="http://java.sun.com/javase/downloads/index.jsp">J2RE 5</a>, or a later version of Java.</p>
-<p>It further requires ODFDOM. The NetBeans project is pre-configured to build 
-ODFDOM while building <strong>ODF XSLT Runner</strong>. This requires that the ODFDOM 
-sources are located in a folder <strong>odfdom</strong> next to the folder of the 
+<p>It further requires ODFDOM. The NetBeans project is pre-configured to build
+ODFDOM while building <strong>ODF XSLT Runner</strong>. This requires that the ODFDOM
+sources are located in a folder <strong>odfdom</strong> next to the folder of the
 <strong>ODF XSLT Runner</strong> project.</p>
-<p>Alternatively, the reference to the ODFDOM project in the compile time 
-classpath of the <strong>ODF XSLT Runner</strong> project may be replaced with a reference 
+<p>Alternatively, the reference to the ODFDOM project in the compile time
+classpath of the <strong>ODF XSLT Runner</strong> project may be replaced with a reference
 to an already compiled <strong>odfdom.jar</strong>.</p>
-<p>At run time, the <strong>odfdom.jar</strong> file must be either located in folder called <strong>lib</strong> next to the <strong>odfxsltrunner.jar</strong> file, or it must be in the classpath. </p>
-<p><strong>Note:</strong> ODFDOM requires <a href="http://xml.apache.org/dist/xerces-j/">Apache Xerces</a>. The jar file <strong>xercesImpl.jar</strong> 
-also must exist in a folder <strong>lib</strong> next to <strong>odfxsltrunner.jar</strong> file, or it 
-must be in the classpath. The <strong>ODF XSLT Runner</strong> NetBeans projects includes a 
-reference to <strong>xersesImpl.jar</strong> in the runtime classpath which has to be 
+<p>At run time, the <strong>odfdom.jar</strong> file must be either located in folder called <strong>lib</strong> next to the <strong>odfxsltrunner.jar</strong> file, or it must be in the classpath.</p>
+<p><strong>Note:</strong> ODFDOM requires <a href="http://xml.apache.org/dist/xerces-j/">Apache Xerces</a>. The jar file <strong>xercesImpl.jar</strong>
+also must exist in a folder <strong>lib</strong> next to <strong>odfxsltrunner.jar</strong> file, or it
+must be in the classpath. The <strong>ODF XSLT Runner</strong> NetBeans projects includes a
+reference to <strong>xersesImpl.jar</strong> in the runtime classpath which has to be
 adapted after checking out the project.</p>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <p>Example stylesheets can be found on the <a href="http://incubator.apache.org/odftoolkit/xsltrunner/ODFXSLTRunnerExamples.html">ODFXSLTRunner Examples</a> page.</p>

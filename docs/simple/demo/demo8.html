@@ -112,19 +112,19 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
   visibility: hidden;
 }
 h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p><a href="index.html"><strong>Demos</strong></a> &gt; <b>Add 2D barcode image to a slide</b>   </p>
-<p><strong>Overview</strong>    </p>
-<p>This demo shows the power of image and metadata support in Simple API.  </p>
-<p>A 2D bar code is a special image that can be scanned by a smart phone or a dedicated scanner. It could contain a URL, a books ISBN number a vCard for a person's contact, information, etc. It makes it easy to transfer information into a smartphone from a physical object, like a printed document, or a newspaper or magazine.   </p>
-<p>In this demo, the contact information of a document's author has been put in the metadata of a presentation document, with an ODF editor, such as IBM Lotus Symphony. The contact information in the metadata is extracted with the Simple ODF API, and wrapped into JSON object. Then a RESTful web service is called to generate a 2D bar code image based on this JSON object.    </p>
-<p>The bar code image is then added to the first slide of this presentation using the Simple API.   </p>
-<p>This picture shows how the contact information is added to the metadata of this document.    </p>
+<p><a href="index.html"><strong>Demos</strong></a> &gt; <b>Add 2D barcode image to a slide</b></p>
+<p><strong>Overview</strong></p>
+<p>This demo shows the power of image and metadata support in Simple API.</p>
+<p>A 2D bar code is a special image that can be scanned by a smart phone or a dedicated scanner. It could contain a URL, a books ISBN number a vCard for a person's contact, information, etc. It makes it easy to transfer information into a smartphone from a physical object, like a printed document, or a newspaper or magazine.</p>
+<p>In this demo, the contact information of a document's author has been put in the metadata of a presentation document, with an ODF editor, such as IBM Lotus Symphony. The contact information in the metadata is extracted with the Simple ODF API, and wrapped into JSON object. Then a RESTful web service is called to generate a 2D bar code image based on this JSON object.</p>
+<p>The bar code image is then added to the first slide of this presentation using the Simple API.</p>
+<p>This picture shows how the contact information is added to the metadata of this document.</p>
 <p><img alt="image1" src="image/demo8_metadata.bmp" /></p>
-<p>This picture shows the 2D bar code image added to the first slide of this presentation document.<br /><br/> 
-<img alt="image2" src="image/demo8_slide.bmp" />   </p>
-<p><strong>Code Introduction</strong>  </p>
-<p>There code of this demo is very simple. First, we load the presentation document, and extract the metadata with Simple ODF API. Second, we invoke the web service to generate the bar code image and get the URI of this image.    </p>
-<p>Finally, we get the subtitle text box in the first slide, add an image just below of this subtitle text box. Please note how FrameRectangle is used to specify the image position.    </p>
+<p>This picture shows the 2D bar code image added to the first slide of this presentation document.<br /><br/>
+<img alt="image2" src="image/demo8_slide.bmp" /></p>
+<p><strong>Code Introduction</strong></p>
+<p>There code of this demo is very simple. First, we load the presentation document, and extract the metadata with Simple ODF API. Second, we invoke the web service to generate the bar code image and get the URI of this image.</p>
+<p>Finally, we get the subtitle text box in the first slide, add an image just below of this subtitle text box. Please note how FrameRectangle is used to specify the image position.</p>
 <div class="codehilite"><pre><span></span>public static void main(String[] args) {
 
     try {
@@ -160,9 +160,9 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </pre></div>
 
 
-<p><strong>Download</strong>  </p>
-<p>Powered by the Simple Java API for ODF version <a href="../downloads.html">0.5.5</a>. <br />
-You can download the code of this demo from <a href="TwoDBarcodeDemo.zip">here</a>.<br />
+<p><strong>Download</strong></p>
+<p>Powered by the Simple Java API for ODF version <a href="../downloads.html">0.5.5</a>.
+You can download the code of this demo from <a href="TwoDBarcodeDemo.zip">here</a>.
 The dependent library jslib.zip can be downloaded from <a href="http://puzzle.dl.sourceforge.net/sourceforge/xulmaker/jslib.zip">here</a>.</p>
     </div>
     
