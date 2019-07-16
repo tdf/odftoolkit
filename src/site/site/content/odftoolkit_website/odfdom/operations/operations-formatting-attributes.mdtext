@@ -6,7 +6,7 @@ The following chapters describe all generic formatting attributes, divided by th
 
 ## DocumentAttributes
 
-These attributes are only supported in the [documentLayout](#documentLayout) operation.
+These attributes are only supported in the [documentLayout](operations.html#documentlayout) operation.
 
 |Attribute|Data Type|Default Value|Application|Description|
 |---------|---------|-------------|-----------|-----------|
