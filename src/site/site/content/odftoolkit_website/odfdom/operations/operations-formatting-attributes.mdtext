@@ -190,60 +190,72 @@ Drawing formatting attributes will be applied to drawing objects embedded in the
 |`borderLeft`|[Border](#border)|Border.NONE|element|Left border of the drawing object.|(1)|
 |`borderRight`|[Border](#border)|Border.NONE|element|Right border of the drawing object.|(1)|
 |`inline`|Boolean|true|all|If true, the drawing object is embedded as character, otherwise the drawing floats in its parent element and is optionally wrapped by the text.||
-|`anchorHorBase`|Enum|“margin”|all|Horizontal anchor mode.|(2)|
-||“margin”||
-||
-|“page”||
-|“column”||
-|“character”||
-|“leftMargin”||
-|“rightMargin”||
-|“insideMargin”||
-|“outsideMargin”||
-|`anchorHorAlign`|Enum|“left”|all|Horizontal anchor position.|(2)|
-||“left”|The drawing object is attached to the left border of the anchor component.|
-||
-|“right”|The drawing object is attached to the right border of the anchor component.|
-|“center”|The drawing object is attached in the middle of the anchor component.|
-|“inside”||
-|“outside”||
-|“offset”|The distance between left anchor position and drawing object is specified by the property `anchorHorOffset`.|
+|`anchorHorBase`|Enum|“margin”|all|Horizontal anchor mode. (see **horizonallAnchorMode** below)|(2)|
+|`anchorHorAlign`|Enum|“left”|all|Horizontal anchor position. (see **horizontalAnchorPosition** below)|(2)|
 |`anchorHorOffset`|Integer|0|all|Horizontal position offset (only used if `anchorHorAlign` is set to “offset”).|(2)|
-|`anchorVertBase`|Enum|“margin”|all|Vertical anchor mode.|(2)|
-||“margin”||
-||
-|“page”||
-|“paragraph”||
-|“line”||
-|“topMargin”||
-|“bottomMargin”||
-|“insideMargin”||
-|“outsideMargin”||
-|`anchorVertAlign`|Enum|“top”|all|Vertical anchor position.|(2)|
-||“top”|The drawing object is attached to the top border of the anchor component.|
-||
-|“bottom”|The drawing object is attached to the bottom border of the anchor component.|
-|“center”|The drawing object is attached in the middle of the anchor component.|
-|“inside”||
-|“outside”||
-|“offset”|The distance between top anchor position and drawing object is specified by the property `anchorVertOffset`.|
+|`anchorVertBase`|Enum|“margin”|all|Vertical anchor mode. (see **verticalAnchorMode** below)|(2)|
+|`anchorVertAlign`|Enum|“top”|all|Vertical anchor position. (see **verticalAnchorPosition** below)|(2)|
 |`anchorVertOffset`|Integer|0|all|Vertical position offset (only used if `anchorVertAlign` is set to “offset”).|(2)|
 |`anchorPageNumber`|Integer||element|In ODT documents, if the drawing is page anchored then this attribute specifies the page that is anchored to. This attribute is optional.|(2)|
 |`anchorLayerOrder`|Integer|0|all|Layer position (z-index)||
 |`anchorBehindDoc`|Boolean|false|all|Layer position in behind text (true) or in front of text (false). this feature is not supported yet, but it is important for “anchorLayerOrder”||
-|`textWrapMode`|Enum|“topAndBottom”|all|Text wrapping mode.|(2)|
-||“none”|The drawing object will not occupy any space at all, text will be rendred over or under the drawing object.|
-||
-|“square”|Text will be rendered around a square covering the drawing object, regardless of its actual outline shape.|
-|“tight”|Text will be rendered around the actual outline shape of the drawing object.|
-|“through”|Text will be rendered around the actual outline shape of the drawing object, and inside the transparent areas of the drawing object.|
-|“topAndBottom”|Text will be rendered above and below the drawing object only.|
-|`textWrapSide`|Enum|“both”|all|Sides where text wraps around the drawing object (only used if `textWrapMode` is set to “square”, “tight”, or “through”).|(2)|
-||“both”|Text will be rendered on both sides of the drawing object, as long as the available space is sufficient.|
-||
-|“left”|Text will be rendered left of the drawing object, as long as the available space is sufficient.|
-|“right”|Text will be rendered right of the drawing object, as long as the available space is sufficient.|
-|“largest”|Text will be rendered at the larger side (either left or right) of the drawing object.|
+|`textWrapMode`|Enum|“topAndBottom”|all|Text wrapping mode. (see **textWrapModeType**|(2)|
+|`textWrapSide`|Enum|“both”|all|Sides where text wraps around the drawing object (only used if `textWrapMode` is set to “square”, “tight”, or “through”). (see **textWrapSideType**)|(2)|
+
+**horizontlaAnchorMode**:
+
+* “margin”
+* “page”
+* “column”
+* “character”
+* “leftMargin”
+* “rightMargin”
+* “insideMargin”
+* “outsideMargin”
+
+**horizontalAnchorPosition**:
+
+* “left” - The drawing object is attached to the left border of the anchor component.
+* “right” - The drawing object is attached to the right border of the anchor component.
+* “center” - The drawing object is attached in the middle of the anchor component.
+* “inside”
+* “outside”
+* “offset” - The distance between left anchor position and drawing object is specified by the property `anchorHorOffset`.
+
+**verticalAnchorMode**:
+
+* “margin”
+* “page”
+* “paragraph”
+* “line”
+* “topMargin”
+* “bottomMargin”
+* “insideMargin”
+* “outsideMargin”
+
+**verticalAnchorPosition**:
+
+* “top” - The drawing object is attached to the top border of the anchor component.
+* “bottom” - The drawing object is attached to the bottom border of the anchor component.
+* “center” - The drawing object is attached in the middle of the anchor component.
+* “inside”
+* “outside”
+* “offset” - The distance between top anchor position and drawing object is specified by the property `anchorVertOffset`.
+
+**textWrapModeType**:
+
+* “none” - The drawing object will not occupy any space at all, text will be rendred over or under the drawing object.
+* “square” - Text will be rendered around a square covering the drawing object, regardless of its actual outline shape.
+* “tight” - Text will be rendered around the actual outline shape of the drawing object.
+* “through” - Text will be rendered around the actual outline shape of the drawing object, and inside the transparent areas of the drawing object.
+* “topAndBottom” - Text will be rendered above and below the drawing object only.
+
+**textWrapSideType**:
+
+* “both” - Text will be rendered on both sides of the drawing object, as long as the available space is sufficient.
+* “left” - Text will be rendered left of the drawing object, as long as the available space is sufficient.
+* “right” - Text will be rendered right of the drawing object, as long as the available space is sufficient.
+* “largest” - Text will be rendered at the larger side (either left or right) of the drawing object.
 
 *Notes*:
 
@@ -251,7 +263,7 @@ Drawing formatting attributes will be applied to drawing objects embedded in the
 
 (2) Attributes are only used if `inline` mode is false. The generic attributes `left` and `top` will not be used for drawing objects in text documents.
 
-### Drawing Attributes (General)
+## Drawing Attributes (General)
 
 The following attributes are supported by each drawing in each application regardless of the drawing type.
 
@@ -283,9 +295,9 @@ The following attributes are supported by each drawing in each application regar
 |`noRotation`|Boolean|false|element|Whether it is forbidden to rotate the drawing.||
 |`minFrameHeight`|Integer|0|element|Odf only, this property specifies the minimal height of text frames.||
 
-*Notes*:
+**Notes**:
 
-(1) Some of the generic position and size attributes may be overridden by application-specific attributes.
+1. Some of the generic position and size attributes may be overridden by application-specific attributes.
 
 ### Embedded Drawing Attributes
 
@@ -306,19 +318,21 @@ Drawing fill attributes will be applied to entire drawing objects embedded in th
 
 |Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
-|`type`|Enum|“none”|all|The fill type. The following types are supported:|
-||“none”|The object has no fill style (completetly transparent).|
-||
-|“auto”|All fill settings are determined automatically depending on the context. All other fill attributes MUST be ignored.|
-|“solid”|The object is filled with a single fill color.|
-|“gradient”|The object is filled with a gradient.|
-|“bitmap”|The object is filled with a bitmap.|
-|“pattern”|The object is filled with a preset pattern.|
+|`type`|Enum|“none”|all|The fill type (see **drawingFillAttribute** below)|
 |`color`|[Color](#color)|Color.AUTO|all|The primary fill color (used by the fill types “solid”, “gradient”, and “pattern”). If set to the automatic color, the effective fill color is dependent on the context (e.g. automatic fill colors for series in bar charts).|
 |`color2`|[Color](#color)|Color.AUTO|all|The secondary fill color for gradients and patterns. If set to the automatic color, the effective fill color is dependent on this specific context.|
 |`gradient`|[Gradient](#gradient)|Gradient.LINEAR|all|The gradient fill properties. Only used if the attributes `type` is set to “gradient”. If set to the \`auto\` value, the effective gradient is dependent on other color fill values (e.g. default/auto \`color\` and \`backgroundColor\` values).|
 |`bitmap`|[Bitmap](#bitmap)|_none_|all|The bitmap fill properties. Only used if the attributes `type` is set to “bitmap”.|
 |`pattern`|Enum [Pattern](#pattern)|“none”|all|The preset pattern identifier. Only used if the attributes `type` is set to “pattern”. The attributes `color` and `backgroundColor` determine the colors used for the pattern.|
+
+**drawingFillAttributes**:
+
+* “none” - The object has no fill style (completly transparent).
+* “auto” - All fill settings are determined automatically depending on the context. All other fill attributes MUST be ignored.
+* “solid” - The object is filled with a single fill color.
+* “gradient” - The object is filled with a gradient.
+* “bitmap” - The object is filled with a bitmap.
+* “pattern” - The object is filled with a preset pattern.
 
 ## DrawingLineAttributes
 
@@ -330,67 +344,36 @@ Drawing line attributes will be applied to entire drawing objects embedded in th
 |---------|---------|-------------|-------------------------|-----------|
 |All [fill attributes](#drawingfillattributes) MUST also be supported as line attributes and will describe how to fill the outline polygons.|
 |`width`|Number|0|all|The width of the line. A value of 0 hides the line.|
-|`style`|Enum|“solid”|all|The line style:|
-||“solid”|Solid line.|
-||
-|“dotted”|Dotted line.|
-|“dashed”|Dashed line.|
-|“dashDot”|Dash-dotted line.|
-|“dashDotDot”|Dash-dot-dotted line.|
-|`headEndType`|Enum|“none”|all|Specifies the head end of the line.|
-||“none”|no head end is drawn.|
-||
-||“triangle”|the head end looks like a triangle.|
-||
-||“stealth”|the head end looks like a stealth.|
-||
-||“diamond”|the head end looks like a diamon.|
-||
-||“oval”|the head end looks like a oval.|
-||
-||“arrow”|the head end looks like a arrow.|
-||
-|`headEndLength`|Enum|“medium”|all|Specifies the head end length of the line.|
-||“small”|Solid line.|
-||
-||“medium”|Solid line.|
-||
-||“large”|Solid line.|
-||
-|`headEndWidth`|Enum|“medium”|all|Specifies the head end width of the line.|
-||“small”|Solid line.|
-||
-||“medium”|Solid line.|
-||
-||“large”|Solid line.|
-||
-|`tailEndType`|Enum|“none”|all|Specifies the tail end of the line.|
-||“none”|no tail end is drawn.|
-||
-||“triangle”|the tail end looks like a triangle.|
-||
-||“stealth”|the tail end looks like a stealth.|
-||
-||“diamond”|the tail end looks like a diamon.|
-||
-||“oval”|the tail end looks like a oval.|
-||
-||“arrow”|the tail end looks like a arrow.|
-||
-|`tailEndLength`|Enum|“medium”|all|Specifies the tail end length of the line.|
-||“small”|Solid line.|
-||
-||“medium”|Solid line.|
-||
-||“large”|Solid line.|
-||
-|`tailEndWidth`|Enum|“medium”|all|Specifies the tail end width of the line.|
-||“small”|Solid line.|
-||
-||“medium”|Solid line.|
-||
-||“large”|Solid line.|
-||
+|`style`|Enum|“solid”|all| drawing line style (see **drawingLineStyle**)|
+|`headEndType`|Enum|“none”|all|Specifies the head end of the line. (see **drawingHeadEndType**)|
+|`headEndLength`|Enum|“medium”|all|Specifies the head end length of the line.(see **drawingHeadEndLength**)|
+|`headEndWidth`|Enum|“medium”|all|Specifies the head end width of the line.(see **drawingHeadEndType**)|
+|`tailEndType`|Enum|“none”|all|Specifies the tail end of the line.(see **drawingTailEndType**)|
+|`tailEndLength`|Enum|“medium”|all|Specifies the tail end length of the line.(see **drawingTailEndLength**)|
+|`tailEndWidth`|Enum|“medium”|all|Specifies the tail end width of the line.(see **drawingTailEndWidth**)|
+
+**drawingLineStyle**:
+
+* “solid” - Solid line.
+* “dotted” - Dotted line.
+* “dashed” - Dashed line.
+* “dashDot” - Dash-dotted line.
+* “dashDotDot” - Dash-dot-dotted line.
+
+**drawingHeadEndType**, **drawingTailEndType**:
+
+* “none” - no head end is drawn.
+* “triangle” - the head end looks like a triangle.
+* “stealth” - the head end looks like a stealth.
+* “diamond” - the head end looks like a diamon.
+* “oval”- the head end looks like a oval.
+* “arrow” - the head end looks like a arrow.
+
+**drawingHeadEndLength**, **drawingHeadEndWidth**, **drawingTailEndLength**, **drawingTailEndWidth**:
+
+* “small” - Solid line.
+* “medium” - Solid line.
+* “large” - Solid line.
 
 ## DrawingTextAttributes
 
@@ -411,7 +394,7 @@ Formatting attributes for images and OLE objects.
 |Attribute|Data Type|Default Value|Scope|Description|Notes|
 |---------|---------|-------------|-------------------------|-----------|-----|
 |`imageUrl`|String|""|element|URL pointing to the image data. If the image is embedded in the document, the URL will be relative to the document (e.g. “images/img1.png”).|(1)|
-|`imageData`|String|""|element|Image data. The string contains either Base64 image data, or SVG mark-up. If Base64 encoded image data is used, the string begins with “data:” otherwise if SVG is used it begins with ”<svg”.|(1)|
+|`imageData`|String|""|element|Image data. The string contains either Base64 image data, or SVG mark-up. If Base64 encoded image data is used, the string begins with “data:” otherwise if SVG is used it begins with ”svg”.|(1)|
 |`cropLeft`|Number|0|all|Cropping size on the left side of the bitmap.|(2)|
 |`cropRight`|Number|0|all|Cropping size on the right side of the bitmap.|(2)|
 |`cropTop`|Number|0|all|Cropping size on the upper side of the bitmap.|(2)|
@@ -490,15 +473,17 @@ Formatting attributes for entire chart objects.
 
 |Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
-|`stacking`|Enum|“standard”|element|Stacking type for charts of type “bar”, “column” and “area”.|
-||“standard”|Standard mode: clustered bars, overlapping lines.|
-||
-|“stacked”|Data points of a category are stacked by their exact value.|
-|“percentStacked”|Data points of a category are stacked relative to each other, totalling in 100%.|
+|`stacking`|Enum|“standard”|element|Stacking type for charts of type “bar”, “column” and “area”. (see **chartStackingType**)|
 |`chartStyleId`|integer|0|element|the ID for the auto-style. TODO define identifiers.|
 |`curved`|Boolean|false|element|Whether the series lines in line charts are splines.|
 |`varyColors`|Boolean|false|element|defines if the points of the first series are same color or not.|
 |`rotation`|integer|0|element|defines rotation of an pie or donut.|
+
+**chartStackingType**:
+
+* “standard” - Standard mode: clustered bars, overlapping lines.
+* “stacked” - Data points of a category are stacked by their exact value.
+* “percentStacked” - Data points of a category are stacked relative to each other, summing up to 100%.
 
 ## ChartDataSeriesAttributes
 
@@ -508,17 +493,7 @@ Formatting attributes for data series in chart objects.
 
 |Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
-|`type`String|“bar”|element|chart type per series, for combination two chart types in one chart (line + bar, line + area, etc). The following chart types are supported:|
-||“bar”|The data points are shown as horizontal rectangles.|
-||
-|“column”|The data points are shown as vertical rectangles.|
-|“line”|The data points are shown as markers, and are connected with lines (markers and/or lines may be invisible).|
-|“area”|The data points are connected with lines, the area between the axis and the data series is filled.|
-|“scatter”|Similar to “line”, with custom positions of the data points in X and Y direction.|
-|“bubble”|Similar to “scatter”, with an additional source area that specifies the size of the data points.|
-|“pie”|The data points are shown in a pie.|
-|“donut”|The data points are shown in multiple rings.|
-|all types with appendix “2d” and “3d” are also supported by roundtrip|
+|`type`String|“bar”|element|chart type per series, for combination two chart types in one chart (line + bar, line + area, etc). (see supported **chartType** below)|
 |`title`|[SourceLink](#sourcelink)|\[\]|element|The data source of the title to be shown for the data series (for example in the chart legend).|
 |`values`|[SourceLink](#sourcelink)|\[\]|element|The data source of the values to be shown by the data series.|
 |`names`|[SourceLink](#sourcelink)|\[\]|element|The category names to be shown for the data series (usually shown as labels on the X axis).|
@@ -529,6 +504,18 @@ Formatting attributes for data series in chart objects.
 |`axisYIndex`|Integer|0|element|0 = left axis, 1 = right axis|
 |`dataPoints`|Array<[ChartDataPointAttributeSet](#chartdatapointattributeset)\>|\[\]|element||
 
+**chartType**:
+
+* “bar” - The data points are shown as horizontal rectangles.
+* “column” - The data points are shown as vertical rectangles.
+* “line” - The data points are shown as markers, and are connected with lines (markers and/or lines may be invisible).
+* “area” - The data points are connected with lines, the area between the axis and the data series is filled.
+* “scatter” - Similar to “line” - , with custom positions of the data points in X and Y direction.
+* “bubble” - Similar to “scatter” - , with an additional source area that specifies the size of the data points.
+* “pie” - The data points are shown in a pie.
+* “donut” - The data points are shown in multiple rings.
+* all types with appendix “2d” -  and “3d” -  are also supported by roundtrip
+
 ## ChartAxisAttributes
 
 *Attribute type*:`axis`
@@ -537,15 +524,17 @@ Formatting attributes for axes in chart objects.
 
 |Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
-|`type`|Enum|“value”|element|The type of the axis. (never used! Deprecated?)|
-||“value”|The axis shows numerical data, and can be scaled.|
-||
-|“category”|The axis shows category names.|
-|“date”|The axis shows date/time values, and can be scaled.|
-|“series”|The axis shows series names. Used in deep 3D charts for the Z axis only.|
+|`type`|Enum|“value”|element|The type of the axis. (never used! Deprecated?) - **chartAxisType**|
 |`min`|Number | String|“auto”|element|The minimum value shown at the beginning of the axis. The special value “auto” will obtain the axis minimum according to the series data. Used by axes of type “value” and “date” only. (never used! Deprecated?)|
 |`max`|Number | String|“auto”|element|The maximum value shown at the end of the axis. The special value “auto” will obtain the axis maximum according to the series data. Used by axes of type “value” and “date” only. (never used! Deprecated?)|
 |`label`|Boolean|false|element|Whether the axis labels are visible.|
+
+**chartAxisType**:
+
+* “value” - The axis shows numerical data, and can be scaled.
+* “category” - The axis shows category names.
+* “date” - The axis shows date/time values, and can be scaled.
+* “series” - The axis shows series names. Used in deep 3D charts for the Z axis only.
 
 ## ChartLegendAttributes
 
@@ -554,11 +543,13 @@ Formatting attributes for the legend in chart objects.
 
 |Attribute|Data Type|Default Value|Scope|Description|
 |---------|---------|-------------|-------------------------|-----------|
-|`pos`|Enum|“off”|element|The position of the legend in the chart area.|
-||“off”|The legend is not visible.|
-||
-|“top”|The legend is located above the chart plot area.|
-|“bottom”|The legend is located below the chart plot area.|
-|“left”|The legend is located left of the chart plot area.|
-|“right”|The legend is located right of the chart plot area.|
-|“topRight”|The legend is located in the top-right corner of the chart area.|
+|`pos`|Enum|“off”|element|The position of the legend in the chart area. **chartPostion**|
+
+**chartPostion**:
+
+* “off” - The legend is not visible.
+* “top” - The legend is located above the chart plot area.
+* “bottom” - The legend is located below the chart plot area.
+* “left” - The legend is located left of the chart plot area.
+* “right” - The legend is located right of the chart plot area.
+* “topRight” - The legend is located in the top-right corner of the chart area.

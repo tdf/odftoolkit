@@ -179,16 +179,8 @@ Description of a color gradient. A color gradient is the transition in between a
 
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
-|`type`|Enum|“linear”|Specifies one of the two possible gradient-fill main-types:|
-||“linear”|This gradient fill is of gradient type “linear”. Linear gradient type means that the transition from one color to the next is along a line (e.g. horizontal, vertical, diagonal, etc.).|
-||
-|“path”|This gradient fill is of gradient type “path”. Path gradient type means the that the boundary of transition from one color to the next is defined by e.g. a circle, a rectangle or a freely formed shape.|
-|`pathType`|Enum|“shape”|Specifies one of the 3 possible gradient-fill path sub-types:|
-||“circle”|same as pathType=“rect”|
-||
-|“rect”|The gradient follows a rectangular path. This rectangular “path” sub-type is defined by its 4 additional edge attributes “top”, “bottom”, “left” and “right” describing the shading rectangle for a centered gradient relatively to the fill tile rectangle. Thus the shade does fill the entire tile except for the margins specified by those edge attributes. Each edge of the center shade rectangle is defined by a percentage offset from the corresponding edge of the tile rectangle. A positive percentage specifies an inset, while a negative percentage specifies an outset.|
-||“shape”|The gradient follows its shape.|
-||
+|`type`|Enum|“linear”|Specifies one of the two possible gradient-fill main-types (see **gradientType**)|
+|`pathType`|Enum|“shape”|Specifies one of the 3 possible gradient-fill path sub-types (see **gradientPathType**)|
 |`left`|Double|0|Values from (including) -1 to 1. Specifies in percentage format (from the left to the right) the position of the left edge of the center shade rectangle. 0 targets the left edge of this rectangle whereas 1 targets its right edge.|
 |`right`|Double|0|Values from (including) -1 to 1. Specifies in percentage format (from the right to the left) the position of the right edge of the center shade rectangle. 0 targets the right edge of this rectangle whereas 1 targets its left edge.|
 |`top`|Double|0|Values from (including) -1 to 1. Specifies in percentage format (from the top to the bottom) the position of the top edge of the center shade rectangle. 0 targets the top edge of this rectangle whereas 1 targets its bottom edge.|
@@ -204,28 +196,40 @@ Description of a color gradient. A color gradient is the transition in between a
 |`flipV`|Boolean|false|Specifies if the gradient is mirrored vertically.|
 |`colorStops`|Array<[ColorStop](#colorstop)\>|\[\]|A list of [color stops](#colorstop) specifying the distribution of colors along the gradient.|
 
+**gradientType**:
+
+* “linear” - This gradient fill is of gradient type “linear” - . Linear gradient type means that the transition from one color to the next is along a line (e.g. horizontal, vertical, diagonal, etc.).
+* “path” - This gradient fill is of gradient type “path” - . Path gradient type means the that the boundary of transition from one color to the next is defined by e.g. a circle, a rectangle or a freely formed shape.
+
+**gradientPathType**:
+
+* “circle” - same as pathType=“rect”
+* “rect” - The gradient follows a rectangular path. This rectangular “path” -  sub-type is defined by its 4 additional edge attributes “top”, “bottom”, “left” and “right” describing the shading rectangle for a centered gradient relatively to the fill tile rectangle. Thus the shade does fill the entire tile except for the margins specified by those edge attributes. Each edge of the center shade rectangle is defined by a percentage offset from the corresponding edge of the tile rectangle. A positive percentage specifies an inset, while a negative percentage specifies an outset.
+* “shape” - The gradient follows its shape.
+
 ## Tiling
 
 Description of a bitmap tiling.
 
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
-|`rectAlignment`|Enum|“topLeft”||“topLeft”|The tile is top left aligned.|
-||
-||“top”|The tile is top aligned.|
-||
-|“topRight”|The tile is top right aligned.|
-|“left”|The tile is left aligned.|
-|“center”|The tile is center aligned.|
-|“right”|The tile is right aligned.|
-|“bottomLeft”|The tile is bottom left aligned.|
-|“bottom”|The tile is bottom aligned.|
-|“bottomRight”|The tile is bottom right aligned.|
+|`rectAlignment`|Enum|“topLeft”||“topLeft”|The tile is top left aligned. (see **rectAlignmentType**)|
 |`flipMode`|Enum|“none”|The flip mode of the tiling, “x”, “xy”, “y” and “none” is possible.|
 |`stretchX`|percentage|100%|Specifies the amount in percent horizontally scaling the tile.|
 |`stretchY`|percentage|100%|Specifies the amount in percent vertically scaling the tile.|
 |`offX`|Integer|0|Specifies additional horizontal offset in 1/100mm after alignment.|
 |`offY`|Integer|0|Specifies additional vertical offset in 1/100mm after alignment.|
+
+**rectAlignmentType**:
+
+* “top” - The tile is top aligned.
+* “topRight” - The tile is top right aligned.
+* “left” - The tile is left aligned.
+* “center” - The tile is center aligned.
+* “right” - The tile is right aligned.
+* “bottomLeft” - The tile is bottom left aligned.
+* “bottom” - The tile is bottom aligned.
+* “bottomRight” - The tile is bottom right aligned.
 
 ## Stretching
 
@@ -334,18 +338,20 @@ An enumeration for all preset pattern styles that can be used as background or o
 
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
-|`style`|Enum|“none”|Border line style.|
-||“none”|No line.|
-||
-|“single”|Solid single line.|
-|“double”|Solid double line.|
-|“dotted”|Dotted single line.|
-|“dashed”|Dashed single line.|
-|“dashDot”|Dash-dotted single line.|
-|“dashDotDot”|Dash-dot-dotted single line.|
+|`style`|Enum|“none”|Border line style. (see **borderLineStyle**)|
 |`width`|Integer|0|Width of the border line. Not used if the `style` attribute equals “none”.|
 |`color`|[Color](#color)|Color.AUTO|Color of the border line. Not used if the `style` attribute equals “none”.|
 |`space`|Integer|0|Distance of the border line to the content (ATM paragraph only).|
+
+**borderLineStyle**:
+
+* “none” - No line.
+* “single” - Solid single line.
+* “double” - Solid double line.
+* “dotted” - Dotted single line.
+* “dashed” - Dashed single line.
+* “dashDot” - Dash-dotted single line.
+* “dashDotDot” - Dash-dot-dotted single line.
 
 The following constants will be used in this documentation:
 
@@ -445,17 +451,25 @@ A connection point that can be referenced by connector objects.
 
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
-|`type`|Enumeration||the type can be “xy” or “polar”|
+|`type`|Enumeration||the type can be **“xy”** or **“polar”**|
 |`x`|Integer | String||This attribute specifies the x position of the adjustment handle. The allowed adjustment of this adjust value is specified via corresponding its min and max limitations.|
 |`y`|Integer | String||This attribute specifies the y position of the adjustment handle. The allowed adjustment of this adjust value is specified via corresponding its min and max limitations.|
-|The following attributes are available if the type is “xy”|
+
+The following attributes are available if the type is **“xy”**:
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
 |`gdRefX`|String||Specifies the name of the guide that is updated with the adjustment x position from this adjust handle.|
 |`minX`|Integer | String||Specifies the minimum horizontal position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move in the y direction. That is the maxY and minY are equal.|
 |`maxX`|Integer | String||Specifies the maximum horizontal position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move in the x direction. That is the maxX and minX are equal.|
 |`gdRefY`|String||Specifies the name of the guide that is updated with the adjustment y position from this adjust handle|
 |`minY`|Integer | String||Specifies the minimum vertical position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move in the y direction. That is the maxY and minY are equal.|
 |`maxY`|Integer | String||Specifies the maximum vertical position that is allowed for this adjustment handle. If this attribute is omitted, then it is assume that this adjust handle cannot move in the y direction. That is the maxY and minY are equal.|
-|The following attributes are available if the type is “polar”|
+
+The following attributes are available if the type is **“polar”**:
+
+|Property|Data Type|Default Value|Description|
+|--------|---------|-------------|-----------|
 |`gdRefR`|String||Specifies the name of the guide that is updated with the adjustment radius from this adjust handle|
 |`minR`|Integer | String||Specifies the minimum radial position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move radially. That is the maxR and minR are equal.|
 |`maxR`|Integer | String||Specifies the maximum radial position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move radially. That is the maxR and minR are equal.|
@@ -467,14 +481,7 @@ A connection point that can be referenced by connector objects.
 
 |Attribute|Data Type|Default Value|Application|Description|
 |---------|---------|-------------|-----------|-----------|
-|`c`|Enum|“moveTo”|all|The command that is to be used. Attributes that are allowed within this GeometryCommand depends to this value.|
-||“moveTo”|The current position is set to x,y|
-||
-|“lineTo”|A line is drawn from the current position to x,y|
-|“arcTo”|An arc is drawn from the current position. hr, wr, stAng and swAng are allowed properties|
-|“close”|The current path is closed by drawing a line to current point to the start point of this path|
-|“quadBezierTo”|One or more quadratic beziers are drawn to the points of the pts array|
-|“cubicBezierTo”|One or more cubic beziers are drawn to the points of the pts array. One cubic bezier point needs three points, the first two are control points, the third is the ending point.|
+|`c`|Enum|“moveTo”|all|The command that is to be used. Attributes that are allowed within this GeometryCommand depends to this value. (see **commandType** below)|
 |`x`|Integer | String||all|specifies the x position|
 |`y`|Integer | String||all|specifies the y position|
 |`hr`|Integer | String||all|specifies the arc height radius|
@@ -482,6 +489,15 @@ A connection point that can be referenced by connector objects.
 |`stAng`|Integer | String||all|this attribute specifies the start angle of this arc|
 |`swAng`|Integer | String||all|this attribute specifies the swing angle of this arc|
 |`pts`|Array<[GeometryPoint](#geometrypoint)\>||all|attribute defines an array of points the beziers have to be drawn to|
+
+**commandType**:
+
+* “moveTo” - The current position is set to x,y
+* “lineTo” - A line is drawn from the current position to x,y
+* “arcTo” - An arc is drawn from the current position. hr, wr, stAng and swAng are allowed properties
+* “close” - The current path is closed by drawing a line to current point to the start point of this path
+* “quadBezierTo” - One or more quadratic beziers are drawn to the points of the pts array
+* “cubicBezierTo” - One or more cubic beziers are drawn to the points of the pts array. One cubic bezier point needs three points, the first two are control points, the third is the ending point.
 
 ## GeometryPath
 
