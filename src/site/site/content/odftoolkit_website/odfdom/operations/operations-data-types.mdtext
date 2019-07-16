@@ -28,21 +28,25 @@ Defines a tab stop inside a paragraph.
 
 |Property|Data Type|Default Value|Description|
 |--------|---------|-------------|-----------|
-|`fillChar`|Enum|“none”|Type of fill character.|
-||“none”|Tab is just empty space.|
-||
-|“dot”|Tab will be filled with dot chars: `. . . . . . . . . . .`|
-|“hyphen”|Tab will be filled with hyphen chars: `- - - - - - - - -`|
-|“underscore”|Tab will be filled with underscore chars `_ _ _ _ _ _ _`|
+|`fillChar`|Enum|“none”|Type of fill character - see below: **TabStopFillCharacterType**|
 |`pos`|Integer|0|Tab stop position in 1/100th mm.|
-|`value`|Enum|“left”|Type of justification for the tab stop.|
-||“left”|Following text is located right of the tab stop (text is left-aligned to the tab stop).|
-||
-|“center”|Following text is located centered around the tab stop.|
-|“right”|Following text is located left of the tab stop (text is right-aligned to the tab stop).|
-|“decimal”|Following text with decimal separator will be aligned so the decimal separator is located at the tab stop position.|
-|“bar”|A vertical line is painted exactly at the position of the tab stop. This position won't change by a text input ⇒ absolute position.|
-|“clear”|Removes a tab stop from the current tab stop list. Can be used to remove a previously defined tab stop in a parent style sheet.|
+|`value`|Enum|“left”|Type of justification for the tab stop  - see below: **TabStopJustification**|
+
+**TabStopFillCharacterType**:
+
+* “none” - Tab is just empty space-
+* “dot” - Tab will be filled with dot chars: `. . . . . . . . . . .`
+* “hyphen”- Tab will be filled with hyphen chars: `- - - - - - - - -`
+* “underscore”- Tab will be filled with underscore chars `_ _ _ _ _ _ _`
+
+**TabStopJustification**:
+
+* “left” - Following text is located right of the tab stop (text is left-aligned to the tab stop).
+* “center” - Following text is located centered around the tab stop.
+* “right” - Following text is located left of the tab stop (text is right-aligned to the tab stop).
+* “decimal” - Following text with decimal separator will be aligned so the decimal separator is located at the tab stop position.
+* “bar” - A vertical line is painted exactly at the position of the tab stop. This position won't change by a text input ⇒ absolute position.
+* “clear” - Removes a tab stop from the current tab stop list. Can be used to remove a previously defined tab stop in a parent style sheet.
 
 ## DrawingPosition
 
@@ -154,11 +158,11 @@ The following table will describe how to modify the components of the color for 
 |“invGamma”|_not used_|Inversed gamma correction (decreases luminance of medium light colors).|RGB|RGBnew = (RGB/100000)2.27 \* 100000|(2)|
 |“gray”|_not used_|Monochrome color.|RGB|RGBnew = 0.22 \* R + 0.72 \* G + 0.06 \* B|(2)|
 
-* Notes*:
+**Notes**:
 
-(1) If a luminance transformation results in the luminance values 0 or 100000, additionally the saturation of the color must be set to 0.
+1. If a luminance transformation results in the luminance values 0 or 100000, additionally the saturation of the color must be set to 0.
 
-(2) Must be applied to all three color channels R, G, and B.
+2. Must be applied to all three color channels R, G, and B.
 
 ## ColorStop
 

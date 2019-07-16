@@ -406,10 +406,10 @@ Inserts a new drawing object into the document. This section describes the gener
 |--------|----|-------------|-----------|
 |`name`|String|_required_|“addDrawing”|
 |`start`|[DrawingPosition](operations-data-types.html#position)|_required_|The position of the drawing object.|
-|`type`|Enum|_required_|The type of the drawing contents: see **DRAWING_CONTENT_TYPE** below |
+|`type`|Enum|_required_|The type of the drawing contents: see **DrawingContentType** below |
 |`attrs`|[DrawingAttributeSet](operations-formatting-attribute-sets.html#drawingattributeset)|{}|Initial attribute set for the drawing object.|
 
-**DRAWING_CONTENT_TYPE**:
+**DrawingContentType**:
 
 * **“shape”** The drawing object is a simple or complex shape (line, rectangle, ellipse, custom interactive shape).
 * **“group”** The drawing object is a container for more embedded drawing objects.

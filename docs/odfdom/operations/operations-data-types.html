@@ -184,37 +184,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <td><code>fillChar</code></td>
 <td>Enum</td>
 <td>“none”</td>
-<td>Type of fill character.</td>
-</tr>
-<tr>
-<td></td>
-<td>“none”</td>
-<td>Tab is just empty space.</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“dot”</td>
-<td>Tab will be filled with dot chars: <code>. . . . . . . . . . .</code></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“hyphen”</td>
-<td>Tab will be filled with hyphen chars: <code>- - - - - - - - -</code></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“underscore”</td>
-<td>Tab will be filled with underscore chars <code>_ _ _ _ _ _ _</code></td>
-<td></td>
-<td></td>
+<td>Type of fill character - see below: <strong>TabStopFillCharacterType</strong></td>
 </tr>
 <tr>
 <td><code>pos</code></td>
@@ -226,52 +196,26 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <td><code>value</code></td>
 <td>Enum</td>
 <td>“left”</td>
-<td>Type of justification for the tab stop.</td>
-</tr>
-<tr>
-<td></td>
-<td>“left”</td>
-<td>Following text is located right of the tab stop (text is left-aligned to the tab stop).</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“center”</td>
-<td>Following text is located centered around the tab stop.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“right”</td>
-<td>Following text is located left of the tab stop (text is right-aligned to the tab stop).</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“decimal”</td>
-<td>Following text with decimal separator will be aligned so the decimal separator is located at the tab stop position.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“bar”</td>
-<td>A vertical line is painted exactly at the position of the tab stop. This position won't change by a text input ⇒ absolute position.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“clear”</td>
-<td>Removes a tab stop from the current tab stop list. Can be used to remove a previously defined tab stop in a parent style sheet.</td>
-<td></td>
-<td></td>
+<td>Type of justification for the tab stop  - see below: <strong>TabStopJustification</strong></td>
 </tr>
 </tbody>
 </table>
+<p><strong>TabStopFillCharacterType</strong>:</p>
+<ul>
+<li>“none” - Tab is just empty space-</li>
+<li>“dot” - Tab will be filled with dot chars: <code>. . . . . . . . . . .</code></li>
+<li>“hyphen”- Tab will be filled with hyphen chars: <code>- - - - - - - - -</code></li>
+<li>“underscore”- Tab will be filled with underscore chars <code>_ _ _ _ _ _ _</code></li>
+</ul>
+<p><strong>TabStopJustification</strong>:</p>
+<ul>
+<li>“left” - Following text is located right of the tab stop (text is left-aligned to the tab stop).</li>
+<li>“center” - Following text is located centered around the tab stop.</li>
+<li>“right” - Following text is located left of the tab stop (text is right-aligned to the tab stop).</li>
+<li>“decimal” - Following text with decimal separator will be aligned so the decimal separator is located at the tab stop position.</li>
+<li>“bar” - A vertical line is painted exactly at the position of the tab stop. This position won't change by a text input ⇒ absolute position.</li>
+<li>“clear” - Removes a tab stop from the current tab stop list. Can be used to remove a previously defined tab stop in a parent style sheet.</li>
+</ul>
 <h2 id="drawingposition">DrawingPosition<a class="headerlink" href="#drawingposition" title="Permanent link">&para;</a></h2>
 <p>The position of a drawing object is a <a href="#position">Position</a> array whose contents are dependent on the document type.</p>
 <ul>
@@ -732,11 +676,15 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 </tr>
 </tbody>
 </table>
-<ul>
-<li>Notes*:</li>
-</ul>
-<p>(1) If a luminance transformation results in the luminance values 0 or 100000, additionally the saturation of the color must be set to 0.</p>
-<p>(2) Must be applied to all three color channels R, G, and B.</p>
+<p><strong>Notes</strong>:</p>
+<ol>
+<li>
+<p>If a luminance transformation results in the luminance values 0 or 100000, additionally the saturation of the color must be set to 0.</p>
+</li>
+<li>
+<p>Must be applied to all three color channels R, G, and B.</p>
+</li>
+</ol>
 <h2 id="colorstop">ColorStop<a class="headerlink" href="#colorstop" title="Permanent link">&para;</a></h2>
 <p>Description of a `ColorStop` value as it is be used by <a href="#gradient">`Gradient` data types</a>. A `ColorStop` represents the interpolation end point of/between 2 colors.</p>
 <table class="table">

@@ -10,10 +10,6 @@ These attributes are only supported in the [documentLayout](#documentLayout) ope
 
 |Attribute|Data Type|Default Value|Application|Description|
 |---------|---------|-------------|-----------|-----------|
-|`fileFormat`|Enum|“ooxml”|all|The file format type this document is based on. The functionality of the applications may be depending on the underlying file format.|
-||“ooxml”|Office Open XML (native format of Microsoft Office).|
-||
-|“odf”|Open Document Format (native format of Apache Open Office, LibreOffice).|
 |`zoom`|Object|{value:100}|Document zoom factor, currently only as percentage in the property `value`.|
 |`defaultTabStop`|Integer|1270|Default interval of tab stops (1/2 inch).|
 
