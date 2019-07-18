@@ -26,7 +26,7 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <dependencySets>
         <dependencySet>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory></outputDirectory>
             <useProjectArtifact>true</useProjectArtifact>
             <unpack>true</unpack>
             <scope>runtime</scope>
@@ -35,7 +35,7 @@
 	<!-- customization: add classes (wtf isn't this included by default?) -->
     <fileSets>
         <fileSet>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory></outputDirectory>
             <directory>${basedir}/target/classes</directory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
