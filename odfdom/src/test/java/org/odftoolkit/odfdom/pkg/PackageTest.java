@@ -158,21 +158,15 @@ public class PackageTest {
 		File tmpFile1 = ResourceUtilities.newTestOutputFile(TARGET_STEP_1);
 		File tmpFile2 = ResourceUtilities.newTestOutputFile(TARGET_STEP_2);
 		File tmpFile3 = ResourceUtilities.newTestOutputFile(TARGET_STEP_3);
-		OdfDocument doc = null;
-		try {
-			doc = OdfSpreadsheetDocument.newSpreadsheetDocument();
+		try (OdfDocument doc = OdfSpreadsheetDocument.newSpreadsheetDocument()) {
 			doc.save(tmpFile1);
-			doc.close();
 		} catch (Exception ex) {
 			LOG.log(Level.SEVERE, mImagePath, ex);
 			Assert.fail();
 		}
 
 		long lengthBefore = tmpFile1.length();
-		try {
-			// not allowed to change the document simply by open and save
-			OdfPackage odfPackage = OdfPackage.loadPackage(tmpFile1);
-
+		try(OdfPackage odfPackage = OdfPackage.loadPackage(tmpFile1)) {
 			URI imageURI = new URI(mImagePath + mImageName);
 			// testing encoded none ASCII in URL path
 			String pkgRef1 = AnyURI.encodePath("Pictures/a&b.jpg");
@@ -192,8 +186,6 @@ public class PackageTest {
 			odfPackage.remove("Pictures/");
 			odfPackage.save(tmpFile3);
 			long lengthAfter3 = tmpFile3.length();
-			odfPackage.close();
-
 			// the package without the images should be as long as before
 			Assert.assertTrue("The files \n\t" + tmpFile1.getAbsolutePath() + " and \n\t" + tmpFile3.getAbsolutePath() + " differ!", lengthBefore == lengthAfter3);
 
