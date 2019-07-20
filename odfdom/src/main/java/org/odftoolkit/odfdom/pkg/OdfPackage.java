@@ -102,7 +102,7 @@ import org.xml.sax.XMLReader;
  * inserted and deleted. The changes take effect, when the OdfPackage is being made persisted by
  * save().
  */
-public class OdfPackage implements Closeable, AutoCloseable {
+public class OdfPackage implements Closeable {
 
 	// Static parts of file references
 	private static final String DOUBLE_DOT = "..";

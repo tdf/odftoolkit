@@ -62,7 +62,7 @@ import java.io.InputStreamReader;
  *
  * The class represents such a document, providing easier access to its XML files.
  */
-public abstract class OdfSchemaDocument extends OdfPackageDocument implements AutoCloseable {
+public abstract class OdfSchemaDocument extends OdfPackageDocument {
 
 	protected OdfContentDom mContentDom;
 	protected OdfStylesDom mStylesDom;

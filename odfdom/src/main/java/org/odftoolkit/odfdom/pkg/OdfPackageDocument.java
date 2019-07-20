@@ -52,7 +52,7 @@ import org.xml.sax.InputSource;
  *
  * Still the abstract concept of documents exist in the ODF Package layer.
  */
-public class OdfPackageDocument implements Closeable, AutoCloseable{
+public class OdfPackageDocument implements Closeable {
 
 	private static final String TWO_DOTS = "..";
 	private static final String SLASH = "/";
