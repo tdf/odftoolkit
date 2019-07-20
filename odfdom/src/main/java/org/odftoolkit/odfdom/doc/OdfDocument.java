@@ -79,7 +79,7 @@ import org.xml.sax.SAXException;
  * This abstract class is representing one of the possible ODF documents.
  *
  */
-public abstract class OdfDocument extends OdfSchemaDocument {
+public abstract class OdfDocument extends OdfSchemaDocument implements AutoCloseable {
 	// Static parts of file references
 
 	private static final String SLASH = "/";
