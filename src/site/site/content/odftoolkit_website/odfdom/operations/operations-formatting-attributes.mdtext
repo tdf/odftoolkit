@@ -171,9 +171,14 @@ Table cell formatting attributes will be applied to cell elements in table rows 
 |`alignVert`|Enum|“top”|all|This property describes the vertical cell alignment, its value can be “top”, “bottom”, “center”, “justified” or “distributed”|
 |`mergeVert`|Enum|“noMerge|all|This property describes the vertical merging of table cells. Its value can be “restart”, “continue” or “noMerge”|
 
-## Drawing Attributes (Text Doument)
+## DrawingAttributes
 
-*Attribute type*:`drawing`|
+* [Drawing Attributes - Text Document](#drawing-attributes-text-document)
+* [Drawing Attributes - General](#drawing-attributes-general)
+
+## Drawing Attributes - Text Document
+
+*Attribute type*:`drawing`
 
 Drawing formatting attributes will be applied to drawing objects embedded in the document.
 
@@ -263,7 +268,7 @@ Drawing formatting attributes will be applied to drawing objects embedded in the
 
 (2) Attributes are only used if `inline` mode is false. The generic attributes `left` and `top` will not be used for drawing objects in text documents.
 
-## Drawing Attributes (General)
+## Drawing Attributes - General
 
 The following attributes are supported by each drawing in each application regardless of the drawing type.
 
