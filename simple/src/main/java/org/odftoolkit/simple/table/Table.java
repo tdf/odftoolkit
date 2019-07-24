@@ -87,6 +87,7 @@ import org.w3c.dom.NodeList;
  */
 public class Table extends Component {
 
+    
 	private final TableTableElement mTableElement;
 	protected Document mDocument;
 	protected boolean mIsSpreadsheet;
