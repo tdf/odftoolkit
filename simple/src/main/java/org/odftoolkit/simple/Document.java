@@ -2541,7 +2541,7 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
         return tableContainerImpl;
     }
 
-    private class TableContainerImpl extends AbstractTableContainer {
+    class TableContainerImpl extends AbstractTableContainer {
 
         public OdfElement getTableContainerElement() {
             OdfElement containerElement = null;
@@ -2551,6 +2551,24 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
                 Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, e);
             }
             return containerElement;
+        }
+
+        /**
+         * Add a new Table to this container with a specified row number and column
+         * number.
+         * <p>
+         * The table will be inserted at the end of the tableContainer. An unique
+         * table name will be given, you may set a custom table name using the
+         * <code>setTableName</code> method.
+         *
+         * @param numRows
+         *            the row number
+         * @param numCols
+         *            the column number
+         * @return a new instance of <code>Table</code>
+         */
+        public Table addTable(int numRows, int numCols, int headerRowNumber, int headerColumnNumber) {
+            return Table.newTable(this, numRows, numCols, headerRowNumber, headerColumnNumber);
         }
     }
 

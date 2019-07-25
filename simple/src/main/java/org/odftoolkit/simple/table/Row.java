@@ -34,6 +34,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.attribute.fo.FoKeepTogetherAttribute;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
@@ -153,6 +154,14 @@ public class Row extends Component {
 		}
 		return null;
 	}
+
+    public String getKeepTogether() {
+        return maRowElement.getProperty(OdfTableRowProperties.KeepTogether);
+    }
+
+    public void setKeepTogether(boolean keepTogether) {
+        maRowElement.setProperty(OdfTableRowProperties.KeepTogether, keepTogether ? FoKeepTogetherAttribute.Value.ALWAYS.toString() : FoKeepTogetherAttribute.Value.AUTO.toString());
+    }
 
 	/**
 	 * Return the height of the row (in Millimeter).

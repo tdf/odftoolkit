@@ -823,7 +823,7 @@ public class Table extends Component {
 			// properties if it is "margins"
 			// otherwise the width seems not changed
 			String alineStyle = mTableElement.getProperty(StyleTablePropertiesElement.Align);
-			if (TableAlignAttribute.Value.MARGINS.toString().equals(alineStyle)) {
+            if (alineStyle == null || alineStyle.length() == 0 || TableAlignAttribute.Value.MARGINS.toString().equals(alineStyle)) {
 				mTableElement.setProperty(StyleTablePropertiesElement.Align, TableAlignAttribute.Value.LEFT.toString());
 			}
 		} else {
