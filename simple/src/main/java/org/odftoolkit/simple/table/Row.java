@@ -157,7 +157,7 @@ public class Row extends Component {
 
     /**
      * Return the string representation of the flag.
-     * 
+     *
      * @return
      */
     public String getKeepTogether() {
@@ -172,7 +172,7 @@ public class Row extends Component {
      * <li>true sets to keep always together</li>
      * <li>false sets to keep together auto</li>
      * </ul>
-     * 
+     *
      * @param keepTogether
      */
     public void setKeepTogether(boolean keepTogether) {

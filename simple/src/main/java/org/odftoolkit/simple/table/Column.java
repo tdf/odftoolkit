@@ -162,7 +162,7 @@ public class Column extends Component {
      * <p>
      * Take care that you call before {@link org.odftoolkit.simple.table.Table#setWidth(double)}
      * </p>
-     * 
+     *
      * @param width
      */
     public void setWidthWidthoutRelative(double width) {

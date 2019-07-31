@@ -90,7 +90,7 @@ import org.w3c.dom.NodeList;
  */
 public class Table extends Component {
 
-    
+
 	private final TableTableElement mTableElement;
 	protected Document mDocument;
 	protected boolean mIsSpreadsheet;
@@ -836,7 +836,7 @@ public class Table extends Component {
 
     /**
      * Sets the table align.
-     * 
+     *
      * @param align
      */
     public void setTableAlign(TableAlignAttribute.Value align) {
@@ -2971,14 +2971,14 @@ public class Table extends Component {
     }
 
     /**
-     * 
+     *
      * @param keepWithNext
      *            <ul>
      *            <li>true sets the property to always</li>
      *            <li>false sets the property to auto</li>
      *            </ul>
-     * 
-     * 
+     *
+     *
      */
     public void setKeepWithNext(boolean keepWithNext) {
         mTableElement.setProperty(OdfTableProperties.KeepWithNext, keepWithNext ? FoKeepWithNextAttribute.Value.ALWAYS.toString() : FoKeepWithNextAttribute.Value.AUTO.toString());
