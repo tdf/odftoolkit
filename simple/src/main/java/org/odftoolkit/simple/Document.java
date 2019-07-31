@@ -2565,6 +2565,10 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
          *            the row number
          * @param numCols
          *            the column number
+         * @param headerRowNumber
+         *            the header row number
+         * @param headerColumnNumber
+         *            the header column number
          * @return a new instance of <code>Table</code>
          */
         public Table addTable(int numRows, int numCols, int headerRowNumber, int headerColumnNumber) {

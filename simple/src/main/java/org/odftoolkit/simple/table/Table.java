@@ -834,6 +834,11 @@ public class Table extends Component {
 		}
 	}
 
+    /**
+     * Sets the table align.
+     * 
+     * @param align
+     */
     public void setTableAlign(TableAlignAttribute.Value align) {
         mTableElement.setProperty(StyleTablePropertiesElement.Align, align.toString());
     }
@@ -2953,6 +2958,9 @@ public class Table extends Component {
 		}
 	}
 
+    /**
+     * @return the string representation of the flag KeepWithNext
+     */
     public String getKeepWithNext() {
         String keepWithNext = null;
         ;
@@ -2962,6 +2970,16 @@ public class Table extends Component {
         return keepWithNext;
     }
 
+    /**
+     * 
+     * @param keepWithNext
+     *            <ul>
+     *            <li>true sets the property to always</li>
+     *            <li>false sets the property to auto</li>
+     *            </ul>
+     * 
+     * 
+     */
     public void setKeepWithNext(boolean keepWithNext) {
         mTableElement.setProperty(OdfTableProperties.KeepWithNext, keepWithNext ? FoKeepWithNextAttribute.Value.ALWAYS.toString() : FoKeepWithNextAttribute.Value.AUTO.toString());
     }

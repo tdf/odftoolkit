@@ -155,10 +155,26 @@ public class Row extends Component {
 		return null;
 	}
 
+    /**
+     * Return the string representation of the flag.
+     * 
+     * @return
+     */
     public String getKeepTogether() {
         return maRowElement.getProperty(OdfTableRowProperties.KeepTogether);
     }
 
+    /**
+     * <p>
+     * Set the keep together flag
+     * </p>
+     * <ul>
+     * <li>true sets to keep always together</li>
+     * <li>false sets to keep together auto</li>
+     * </ul>
+     * 
+     * @param keepTogether
+     */
     public void setKeepTogether(boolean keepTogether) {
         maRowElement.setProperty(OdfTableRowProperties.KeepTogether, keepTogether ? FoKeepTogetherAttribute.Value.ALWAYS.toString() : FoKeepTogetherAttribute.Value.AUTO.toString());
     }

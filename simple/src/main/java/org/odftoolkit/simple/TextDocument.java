@@ -1628,7 +1628,7 @@ public class TextDocument extends Document implements ListContainer,
      *            the row number
      * @param numCols
      *            the column number
-     *            * @param headerRowNumber
+     * @param headerRowNumber
      *            the header row number
      * @param headerColumnNumber
      *            the header column number
