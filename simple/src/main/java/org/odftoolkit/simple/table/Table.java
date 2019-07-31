@@ -34,6 +34,8 @@ import java.util.logging.Logger;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
+import org.odftoolkit.odfdom.dom.attribute.fo.FoKeepTogetherAttribute;
+import org.odftoolkit.odfdom.dom.attribute.fo.FoKeepWithNextAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
@@ -59,6 +61,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfTableProperties;
+import org.odftoolkit.odfdom.dom.style.props.OdfTableRowProperties;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
@@ -830,6 +833,10 @@ public class Table extends Component {
 			throw new UnsupportedOperationException();
 		}
 	}
+
+    public void setTableAlign(TableAlignAttribute.Value align) {
+        mTableElement.setProperty(StyleTablePropertiesElement.Align, align.toString());
+    }
 
 	static void setLeftTopBorderStyleProperties(OdfStyle style) {
 		style.setProperty(StyleTableCellPropertiesElement.Padding, "0.0382in");
@@ -2945,6 +2952,19 @@ public class Table extends Component {
 					.format(spaceBottom) + Unit.CENTIMETER.abbr()).replace(",", "."));
 		}
 	}
+
+    public String getKeepWithNext() {
+        String keepWithNext = null;
+        ;
+        if (mTableElement != null) {
+            keepWithNext = mTableElement.getProperty(StyleTablePropertiesElement.KeepWithNext);
+        }
+        return keepWithNext;
+    }
+
+    public void setKeepWithNext(boolean keepWithNext) {
+        mTableElement.setProperty(OdfTableProperties.KeepWithNext, keepWithNext ? FoKeepWithNextAttribute.Value.ALWAYS.toString() : FoKeepWithNextAttribute.Value.AUTO.toString());
+    }
 
 	// TODO: can put these two method to type.CellAddress
 	int getColIndexFromCellAddress(String cellAddress) {
