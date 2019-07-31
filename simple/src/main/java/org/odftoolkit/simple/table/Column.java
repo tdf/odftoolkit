@@ -154,6 +154,27 @@ public class Column extends Component {
 		return PositiveLength.parseDouble(sWidth, Unit.MILLIMETER) ;
 	}
 
+    /**
+     * <p>
+     * Set the width without any worry about that it fits, the caller has
+     * to care about this.
+     * </p>
+     * <p>
+     * Take care that you call before {@link org.odftoolkit.simple.table.Table#setWidth(double)}
+     * </p>
+     * 
+     * @param width
+     */
+    public void setWidthWidthoutRelative(double width) {
+        double roundingFactor = 10000.0;
+        // TODO:need refactor to PositiveLength.
+        double inValue = Math.round(roundingFactor * width / Unit.INCH.unitInMillimiter()) / roundingFactor;
+        String sWidthIN = String.valueOf(inValue) + Unit.INCH.abbr();
+        splitRepeatedColumns();
+        maColumnElement.setProperty(OdfTableColumnProperties.ColumnWidth, sWidthIN);
+        Table table = getTable();
+    }
+
 	/**
 	 * Set the width of the column (in Millimeter).
 	 *

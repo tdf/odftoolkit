@@ -34,6 +34,8 @@ import java.util.logging.Logger;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
+import org.odftoolkit.odfdom.dom.attribute.fo.FoKeepTogetherAttribute;
+import org.odftoolkit.odfdom.dom.attribute.fo.FoKeepWithNextAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
@@ -59,6 +61,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfTableProperties;
+import org.odftoolkit.odfdom.dom.style.props.OdfTableRowProperties;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
@@ -87,6 +90,7 @@ import org.w3c.dom.NodeList;
  */
 public class Table extends Component {
 
+    
 	private final TableTableElement mTableElement;
 	protected Document mDocument;
 	protected boolean mIsSpreadsheet;
@@ -822,13 +826,22 @@ public class Table extends Component {
 			// properties if it is "margins"
 			// otherwise the width seems not changed
 			String alineStyle = mTableElement.getProperty(StyleTablePropertiesElement.Align);
-			if (TableAlignAttribute.Value.MARGINS.toString().equals(alineStyle)) {
+            if (alineStyle == null || alineStyle.length() == 0 || TableAlignAttribute.Value.MARGINS.toString().equals(alineStyle)) {
 				mTableElement.setProperty(StyleTablePropertiesElement.Align, TableAlignAttribute.Value.LEFT.toString());
 			}
 		} else {
 			throw new UnsupportedOperationException();
 		}
 	}
+
+    /**
+     * Sets the table align.
+     * 
+     * @param align
+     */
+    public void setTableAlign(TableAlignAttribute.Value align) {
+        mTableElement.setProperty(StyleTablePropertiesElement.Align, align.toString());
+    }
 
 	static void setLeftTopBorderStyleProperties(OdfStyle style) {
 		style.setProperty(StyleTableCellPropertiesElement.Padding, "0.0382in");
@@ -2944,6 +2957,32 @@ public class Table extends Component {
 					.format(spaceBottom) + Unit.CENTIMETER.abbr()).replace(",", "."));
 		}
 	}
+
+    /**
+     * @return the string representation of the flag KeepWithNext
+     */
+    public String getKeepWithNext() {
+        String keepWithNext = null;
+        ;
+        if (mTableElement != null) {
+            keepWithNext = mTableElement.getProperty(StyleTablePropertiesElement.KeepWithNext);
+        }
+        return keepWithNext;
+    }
+
+    /**
+     * 
+     * @param keepWithNext
+     *            <ul>
+     *            <li>true sets the property to always</li>
+     *            <li>false sets the property to auto</li>
+     *            </ul>
+     * 
+     * 
+     */
+    public void setKeepWithNext(boolean keepWithNext) {
+        mTableElement.setProperty(OdfTableProperties.KeepWithNext, keepWithNext ? FoKeepWithNextAttribute.Value.ALWAYS.toString() : FoKeepWithNextAttribute.Value.AUTO.toString());
+    }
 
 	// TODO: can put these two method to type.CellAddress
 	int getColIndexFromCellAddress(String cellAddress) {

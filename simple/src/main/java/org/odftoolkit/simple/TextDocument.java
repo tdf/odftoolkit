@@ -93,6 +93,7 @@ import org.odftoolkit.simple.form.FormContainer;
 import org.odftoolkit.simple.style.MasterPage;
 import org.odftoolkit.simple.style.TOCStyle;
 import org.odftoolkit.simple.table.Table;
+import org.odftoolkit.simple.table.TableContainer;
 import org.odftoolkit.simple.text.AbstractParagraphContainer;
 import org.odftoolkit.simple.text.Footer;
 import org.odftoolkit.simple.text.Header;
@@ -1615,4 +1616,33 @@ public class TextDocument extends Document implements ListContainer,
 		return element;
 	}
 
+    /**
+     * Add a new Table to this container with a specified row number and column
+     * number.
+     * <p>
+     * The table will be inserted at the end of the tableContainer. An unique
+     * table name will be given, you may set a custom table name using the
+     * <code>setTableName</code> method.
+     *
+     * @param numRows
+     *            the row number
+     * @param numCols
+     *            the column number
+     * @param headerRowNumber
+     *            the header row number
+     * @param headerColumnNumber
+     *            the header column number
+     * @return a new instance of <code>Table</code>
+     */
+    public Table addTable(int numRows, int numCols, int headerRowNumber, int headerColumnNumber) {
+        TableContainer con = getTableContainerImpl();
+        Table resultTable;
+        if (con instanceof TableContainerImpl) {
+            TableContainerImpl tabcon = (TableContainerImpl) con;
+            resultTable = tabcon.addTable(numRows, numCols, headerRowNumber, headerColumnNumber);
+        } else {
+            resultTable = con.addTable(numRows, numCols);
+        }
+        return resultTable;
+    }
 }
