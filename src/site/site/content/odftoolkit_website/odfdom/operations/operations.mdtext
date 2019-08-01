@@ -335,7 +335,10 @@ Inserts an extended description for a specific font which an be used for font su
 |--------|----|-------------|-----------|
 |`name`|String|_required_|“addFontDecl”|
 |`fontName`|String|_required_|The font name.|
-|`attrs`|Object|_required_|The font description. Supports the following properties:|
+|**`attrs`**|Object|_required_|The font description. Supports the following properties:|
+
+**attrs** (from above) support the following properties:
+
 |Property|Type|Default Value|Description|
 |--------|----|-------------|-----------|
 |`altNames`|Array<String>|\[\]|A list of alternative names for the font.|

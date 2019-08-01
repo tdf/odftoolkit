@@ -229,11 +229,11 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <h2 id="embeddeddrawingposition">EmbeddedDrawingPosition<a class="headerlink" href="#embeddeddrawingposition" title="Permanent link">&para;</a></h2>
 <p>The positions of drawing objects embedded in other drawing objects (supported by groups and charts only) are built by extending the <a href="#drawingposition">DrawingPosition</a> of the parent drawing object with the zero-based index of the embedded drawing object among all child drawings of the parent drawing object.</p>
 <ul>
-<li>Example: A group object at position <code>[0,4]</code> contains three child objects with the indexes <code>0</code>, <code>1</code>, and <code>2</code>. These child drawing objects are located at the positions <code>[0,4,0]</code>, <code>[0,4,1]</code>, and <code>[0,4,2]</code> then.</li>
+<li>Example: A group object at position <code>[1,5]</code> contains three child objects with the indexes <code>1</code>, <code>2</code>, and <code>3</code>. These child drawing objects are located at the positions <code>[1,5,1]</code>, <code>[1,5,2]</code>, and <code>[1,5,3]</code> then.</li>
 </ul>
 <p>Drawing objects can be nested recursively.</p>
 <ul>
-<li>Example: A group object at position <code>[0,4]</code> contains a nested group object at position <code>[0,4,0]</code> which contains a chart at position <code>[0,4,0,0]</code>.</li>
+<li>Example: A group object at position <code>[1,5]</code> contains a nested group object at position <code>[1,5,1]</code> which contains a chart at position <code>[1,5,1,1]</code>.</li>
 </ul>
 <h2 id="color">Color<a class="headerlink" href="#color" title="Permanent link">&para;</a></h2>
 <p>Description of a color value. Colors may be defined by a simple RGB value, or may refer to scheme colors defined by a document theme (inserted with the <a href="#inserttheme">operation "insertTheme"</a>).</p>
