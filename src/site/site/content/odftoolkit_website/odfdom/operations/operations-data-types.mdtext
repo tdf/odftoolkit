@@ -60,11 +60,11 @@ The position of a drawing object is a [Position](#position) array whose contents
 
 The positions of drawing objects embedded in other drawing objects (supported by groups and charts only) are built by extending the [DrawingPosition](#drawingposition) of the parent drawing object with the zero-based index of the embedded drawing object among all child drawings of the parent drawing object.
 
-* Example: A group object at position `[0,4]` contains three child objects with the indexes `0`, `1`, and `2`. These child drawing objects are located at the positions `[0,4,0]`, `[0,4,1]`, and `[0,4,2]` then.
+* Example: A group object at position `[1,5]` contains three child objects with the indexes `1`, `2`, and `3`. These child drawing objects are located at the positions `[1,5,1]`, `[1,5,2]`, and `[1,5,3]` then.
 
 Drawing objects can be nested recursively.
 
-* Example: A group object at position `[0,4]` contains a nested group object at position `[0,4,0]` which contains a chart at position `[0,4,0,0]`.
+* Example: A group object at position `[1,5]` contains a nested group object at position `[1,5,1]` which contains a chart at position `[1,5,1,1]`.
 
 ## Color
 
