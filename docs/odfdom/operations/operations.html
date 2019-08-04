@@ -125,7 +125,7 @@ Operations are a prerequirement for collaborative working on a document.</p>
 <li><a href="#mergeparagraph">mergeParagraph</a></li>
 <li><a href="#addtext">addText</a></li>
 <li><a href="#addtab">addTab</a></li>
-<li><a href="#addhardbreak">addHardBreak</a></li>
+<li><a href="#addlinebreak">addLineBreak</a></li>
 <li><a href="#addfield">addField</a></li>
 <li><a href="#updatefield">updateField</a></li>
 <li><a href="#addtable">addTable</a></li>
@@ -439,8 +439,8 @@ The following general rules apply for these operations:</p>
 <li>In empty paragraphs, the inserted tabulator gets the character formatting defined at the paragraph itself.</li>
 <li>The attributes passed in the <code>attrs</code> property will be merged over the existing attributes.</li>
 </ul>
-<h2 id="addhardbreak">addHardBreak<a class="headerlink" href="#addhardbreak" title="Permanent link">&para;</a></h2>
-<p>Inserts a hard break into a paragraph.</p>
+<h2 id="addlinebreak">addLineBreak<a class="headerlink" href="#addlinebreak" title="Permanent link">&para;</a></h2>
+<p>Inserts a line break into a paragraph.</p>
 <table class="table">
 <thead>
 <tr>
@@ -455,13 +455,13 @@ The following general rules apply for these operations:</p>
 <td><code>name</code></td>
 <td>String</td>
 <td><em>required</em></td>
-<td>“addHardBreak”</td>
+<td>“addLineBreak”</td>
 </tr>
 <tr>
 <td><code>start</code></td>
 <td><a href="operations-data-types.html#position">CharacterPosition</a></td>
 <td><em>required</em></td>
-<td>The position where the new hard break will be inserted. The hard break will be inserted before the character that is currently located at this position.</td>
+<td>The position where the new line break will be inserted. The line break will be inserted before the character that is currently located at this position.</td>
 </tr>
 <tr>
 <td><code>type</code></td>

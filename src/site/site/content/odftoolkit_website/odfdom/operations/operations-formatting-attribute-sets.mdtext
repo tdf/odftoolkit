@@ -36,7 +36,7 @@ The generic definition of an attribute set.
 ## CharacterAttributeSet
 
 * *Attribute types*: `character`
-* *Operations*: [documentLayout](operations.html#documentlayout), [addStyle](operations.html#addstyle), [format](operations.html#format), [addText](operations.html#addtext), [addTab](operations.html#addtab), [addHardBreak](operations.html#addhardbreak), [addField](operations.html#addfield)
+* *Operations*: [documentLayout](operations.html#documentlayout), [addStyle](operations.html#addstyle), [format](operations.html#format), [addText](operations.html#addtext), [addTab](operations.html#addtab), [addLineBreak](operations.html#addlinebreak), [addField](operations.html#addfield)
 
 Contains attributes for `character` style sheets and text spans, in the following format:
 
