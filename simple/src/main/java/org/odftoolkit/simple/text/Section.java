@@ -249,7 +249,7 @@ public class Section extends Component implements ParagraphContainer,
 						pwd[2 * i + 1] = (byte) (passwd.charAt(i) >> 8);
 					}
 					md = MessageDigest.getInstance("SHA-1");
-					byte[] byteCode = md.digest(pwd);					
+					byte[] byteCode = md.digest(pwd);
 					hashKey = Base64.encode(byteCode);
 				} catch (NoSuchAlgorithmException e) {
 					Logger.getLogger(Section.class.getName(),

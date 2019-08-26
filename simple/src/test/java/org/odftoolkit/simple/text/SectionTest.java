@@ -238,7 +238,7 @@ public class SectionTest {
 				try {
 					byte[] pwd = passwd.getBytes();
 					md = MessageDigest.getInstance("MD5");
-					byte[] byteCode = md.digest(pwd);					
+					byte[] byteCode = md.digest(pwd);
 					hashKey = Base64.encode(byteCode);
 				} catch (NoSuchAlgorithmException e) {
 					Logger.getLogger(Section.class.getName(), "Fail to initiate the digest method.");
