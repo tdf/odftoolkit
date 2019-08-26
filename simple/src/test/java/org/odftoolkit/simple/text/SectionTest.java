@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import junit.framework.Assert;
+import org.apache.xerces.impl.dv.util.Base64;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
@@ -44,7 +45,7 @@ import org.odftoolkit.simple.text.list.OutLineDecorator;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NodeList;
-import sun.misc.BASE64Encoder;
+
 
 public class SectionTest {
 
@@ -237,9 +238,8 @@ public class SectionTest {
 				try {
 					byte[] pwd = passwd.getBytes();
 					md = MessageDigest.getInstance("MD5");
-					byte[] byteCode = md.digest(pwd);
-					BASE64Encoder encoder = new BASE64Encoder();
-					hashKey = encoder.encode(byteCode);
+					byte[] byteCode = md.digest(pwd);					
+					hashKey = Base64.encode(byteCode);
 				} catch (NoSuchAlgorithmException e) {
 					Logger.getLogger(Section.class.getName(), "Fail to initiate the digest method.");
 				}

@@ -39,7 +39,7 @@ import org.odftoolkit.simple.text.list.AbstractListContainer;
 import org.odftoolkit.simple.text.list.ListContainer;
 import org.odftoolkit.simple.text.list.ListDecorator;
 import org.w3c.dom.Node;
-import sun.misc.BASE64Encoder;
+import org.apache.xerces.impl.dv.util.Base64;
 
 /**
  * This class represents section definition in text document. It provides
@@ -249,9 +249,8 @@ public class Section extends Component implements ParagraphContainer,
 						pwd[2 * i + 1] = (byte) (passwd.charAt(i) >> 8);
 					}
 					md = MessageDigest.getInstance("SHA-1");
-					byte[] byteCode = md.digest(pwd);
-					BASE64Encoder encoder = new BASE64Encoder();
-					hashKey = encoder.encode(byteCode);
+					byte[] byteCode = md.digest(pwd);					
+					hashKey = Base64.encode(byteCode);
 				} catch (NoSuchAlgorithmException e) {
 					Logger.getLogger(Section.class.getName(),
 							"Fail to initiate the digest method.");
