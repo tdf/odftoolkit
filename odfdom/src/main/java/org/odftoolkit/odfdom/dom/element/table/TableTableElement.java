@@ -26,8 +26,10 @@
  */
 package org.odftoolkit.odfdom.dom.element.table;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.json.JSONArray;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
-import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
@@ -679,5 +681,77 @@ public class TableTableElement extends OdfStylableElement {
 		} else {
 			visitor.visit(this);
 		}
+	}
+
+	@Override
+	/** If this element is the first - perhaps only - element of a logical group of XML elements. For instance: table, paragraph */
+	public boolean isComponentRoot(){
+		return true;
+	}
+	/**
+	 * Caching the width of columns during insert/delete column as after an UNDO
+	 * setAttributes is called too early even before the column was undone
+	 */
+	// WORK AROUND for "UNDO COLUMN WIDTH" problem (see JsonOperationConsumer for further changes)
+	private List<JSONArray> mColumnWidthCache = null;
+	/**
+	 * OH PLEASE DELETE ME AFTER THE API WAS FIXED
+	 */
+	public void pushTableGrid(JSONArray tableGrid) {
+		if (mColumnWidthCache == null) {
+			mColumnWidthCache = new ArrayList<JSONArray>();
+		}
+		mColumnWidthCache.add(tableGrid);
+	}
+	private JSONArray mTablePositionOfColumnChange;
+	public void requireLaterWidthChange(JSONArray start) {
+		mTablePositionOfColumnChange = start;
+	}
+
+	public boolean isWidthChangeRequired() {
+		return mTablePositionOfColumnChange != null;
+	}
+
+	public void hasChangedWidth() {
+		mTablePositionOfColumnChange = null;
+	}
+
+	public JSONArray getPosition() {
+		return mTablePositionOfColumnChange;
+	}
+
+
+	/**
+	 * OH PLEASE DELETE ME AFTER THE API WAS FIXED
+	 */
+	public void pushTableGrid(List<Integer> columnWidths) {
+		if (columnWidths != null && !columnWidths.isEmpty()) {
+			this.pushTableGrid(new JSONArray(columnWidths));
+		}
+	}
+
+	/**
+	 * OH PLEASE DELETE ME AFTER THE API WAS FIXED
+	 */
+	public JSONArray popTableGrid() {
+		JSONArray previousColumnWidth = null;
+		if (mColumnWidthCache != null && mColumnWidthCache.size() > 0) {
+			previousColumnWidth = mColumnWidthCache.remove(mColumnWidthCache.size() - 1);
+			mTablePositionOfColumnChange = null;
+		}
+		return previousColumnWidth;
+	}
+
+	/**
+	 * OH PLEASE DELETE ME AFTER THE API WAS FIXED
+	 */
+	public void replaceLastTableGrid(JSONArray tableGrid) {
+		if (mColumnWidthCache == null) {
+			mColumnWidthCache = new ArrayList<JSONArray>();
+			mColumnWidthCache.add(tableGrid);
+		} else if (mColumnWidthCache.size() > 0) {
+			mColumnWidthCache.remove(mColumnWidthCache.size() - 1);
+		}
+		mColumnWidthCache.add(tableGrid);
 	}
 }

@@ -1,4 +1,5 @@
-/************************************************************************
+/**
+ * **********************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
@@ -7,8 +8,8 @@
  * Use is subject to license terms.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -18,7 +19,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- ************************************************************************/
+ ***********************************************************************
+ */
 package org.odftoolkit.odfdom.doc;
 
 import java.io.File;
@@ -38,12 +40,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-
 import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -52,6 +52,7 @@ import org.odftoolkit.odfdom.dom.OdfSchemaConstraint;
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPageElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
@@ -89,6 +90,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	private static final Pattern CONTROL_CHAR_PATTERN = Pattern.compile("\\p{Cntrl}");
 	private static final String EMPTY_STRING = "";
 	private Calendar mCreationDate;
+	private static final String FORMER_OPEN_OFFICE_VERSION = "StarOffice/8$Win32 OpenOffice.org_project/680m18$Build-9161";
 
 	// Using static factory instead of constructor
 	protected OdfDocument(OdfPackage pkg, String internalPath, OdfMediaType mediaType) throws SAXException {
@@ -131,21 +133,24 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 		/**
 		 * @return the mediatype String of this document
 		 */
-		public String getMediaTypeString() {
+		@Override
+        public String getMediaTypeString() {
 			return mMediaType;
 		}
 
 		/**
 		 * @return the ODF filesuffix of this document
 		 */
-		public String getSuffix() {
+		@Override
+        public String getSuffix() {
 			return mSuffix;
 		}
 
 		/**
 		 *
 		 * @param mediaType string defining an ODF document
-		 * @return the according OdfMediatype encapuslating the given string and the suffix
+		 * @return the according OdfMediatype encapsulating the given string and
+		 * the suffix
 		 */
 		public static OdfMediaType getOdfMediaType(String mediaType) {
 			OdfMediaType odfMediaType = null;
@@ -167,12 +172,13 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	/**
 	 * Loads the ODF root document from the given Resource.
 	 *
-	 * NOTE: Initial meta data (like the document creation time) will be added in this method.
+	 * NOTE: Initial meta data (like the document creation time) will be added
+	 * in this method.
 	 *
 	 * @param res a resource containing a package with a root document
 	 * @param odfMediaType the media type of the root document
-	 * @return the OpenDocument document
-	 *		  or NULL if the media type is not supported by ODFDOM.
+	 * @return the OpenDocument document or NULL if the media type is not
+	 * supported by ODFDOM.
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
 	protected static OdfDocument loadTemplate(Resource res, OdfMediaType odfMediaType) throws Exception {
@@ -193,25 +199,46 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * Loads the ODF root document from the ODF package provided by its path.
 	 *
 	 * <p>OdfDocument relies on the file being available for read access over
-	 * the whole lifecycle of OdfDocument.</p>
+	 * the whole life-cycle of OdfDocument.</p>
 	 *
 	 * @param documentPath - the path from where the document can be loaded
-	 * @return the OpenDocument from the given path
-	 *		  or NULL if the media type is not supported by ODFDOM.
+	 * @return the OpenDocument from the given path or NULL if the media type is
+	 * not supported by ODFDOM.
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
 	public static OdfDocument loadDocument(String documentPath) throws Exception {
 		return loadDocument(OdfPackage.loadPackage(documentPath));
 	}
 
+
+
 	/**
 	 * Loads the ODF root document from the ODF package provided by a Stream.
 	 *
-	 * <p>Since an InputStream does not provide the arbitrary (non sequentiell)
-	 * read access needed by OdfDocument, the InputStream is cached. This usually
-	 * takes more time compared to the other createInternalDocument methods.
-	 * An advantage of caching is that there are no problems overwriting
-	 * an input file.</p>
+	 * <p>Since an InputStream does not provide the arbitrary (non sequential)
+	 * read access needed by OdfDocument, the InputStream is cached. This
+	 * usually takes more time compared to the other createInternalDocument
+	 * methods. An advantage of caching is that there are no problems
+	 * overwriting an input file.</p>
+	 *
+	 * @param inStream - the InputStream of the ODF document.
+	 * @param configuration - key/value pairs of user given run-time settings (configuration)
+	 * @return the document created from the given InputStream
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfDocument loadDocument(InputStream inStream, Map<String, Object> configuration) throws Exception {
+		return loadDocument(OdfPackage.loadPackage(inStream, configuration));
+	}
+
+
+	/**
+	 * Loads the ODF root document from the ODF package provided by a Stream.
+	 *
+	 * <p>Since an InputStream does not provide the arbitrary (non sequential)
+	 * read access needed by OdfDocument, the InputStream is cached. This
+	 * usually takes more time compared to the other createInternalDocument
+	 * methods. An advantage of caching is that there are no problems
+	 * overwriting an input file.</p>
 	 *
 	 * @param inStream - the InputStream of the ODF document.
 	 * @return the document created from the given InputStream
@@ -245,8 +272,10 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
 	/**
 	 * Creates an OdfDocument from the OpenDocument provided by an ODF package.
+	 *
 	 * @param odfPackage - the ODF package containing the ODF document.
-	 * @param internalPath - the path to the ODF document relative to the package root, or an empty String for the root document.
+	 * @param internalPath - the path to the ODF document relative to the
+	 * package root, or an empty String for the root document.
 	 * @return the root document of the given OdfPackage
 	 * @throws java.lang.Exception - if the ODF document could not be created.
 	 */
@@ -260,9 +289,12 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 		}
 		if (odfMediaType == null) {
 			ErrorHandler errorHandler = odfPackage.getErrorHandler();
-			Matcher matcherCTRL = CONTROL_CHAR_PATTERN.matcher(documentMediaType);
-			if (matcherCTRL.find()) {
-				documentMediaType = matcherCTRL.replaceAll(EMPTY_STRING);
+
+			if (documentMediaType != null) {
+				Matcher matcherCTRL = CONTROL_CHAR_PATTERN.matcher(documentMediaType);
+				if (matcherCTRL.find()) {
+					documentMediaType = matcherCTRL.replaceAll(EMPTY_STRING);
+				}
 			}
 			OdfValidationException ve = new OdfValidationException(OdfSchemaConstraint.DOCUMENT_WITHOUT_ODF_MIMETYPE, internalPath, documentMediaType);
 			if (errorHandler != null) {
@@ -322,7 +354,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 *
 	 * @param odfMediaType The ODF Mediatype of the ODF document to be created.
 	 * @return The ODF document, which mediatype dependends on the parameter or
-	 *	NULL if media type were not supported.
+	 * NULL if media type were not supported.
 	 */
 	private static OdfDocument newDocument(OdfPackage pkg, String internalPath, OdfMediaType odfMediaType) throws SAXException {
 		OdfDocument newDoc = null;
@@ -394,7 +426,8 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	/**
 	 * Returns an embedded OdfPackageDocument from the given package path.
 	 *
-	 * @param documentPath to the ODF document within the package. The path is relative the current ODF document path.
+	 * @param documentPath to the ODF document within the package. The path is
+	 * relative the current ODF document path.
 	 * @return an embedded OdfPackageDocument
 	 */
 	@Override
@@ -403,20 +436,27 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Method returns all embedded OdfPackageDocuments, which match a valid OdfMediaType,
-	 * of the current OdfPackageDocument. Note: The root document is not part of the returned collection.
-	 * @return a map with all embedded documents and their paths of the current OdfPackageDocument
+	 * Method returns all embedded OdfPackageDocuments, which match a valid
+	 * OdfMediaType, of the current OdfPackageDocument. Note: The root document
+	 * is not part of the returned collection.
+	 *
+	 * @return a map with all embedded documents and their paths of the current
+	 * OdfPackageDocument
 	 */
 	public Map<String, OdfDocument> loadSubDocuments() {
 		return loadSubDocuments(null);
 	}
 
 	/**
-	 * Method returns all embedded OdfPackageDocuments of sthe current OdfPackageDocument matching the
-	 * according MediaType. This is done by matching the subfolder entries of the
-	 * manifest file with the given OdfMediaType.
-	 * @param desiredMediaType media type of the documents to be returned (used as a filter).
-	 * @return embedded documents of the current OdfPackageDocument matching the given media type
+	 * Method returns all embedded OdfPackageDocuments of sthe current
+	 * OdfPackageDocument matching the according MediaType. This is done by
+	 * matching the subfolder entries of the manifest file with the given
+	 * OdfMediaType.
+	 *
+	 * @param desiredMediaType media type of the documents to be returned (used
+	 * as a filter).
+	 * @return embedded documents of the current OdfPackageDocument matching the
+	 * given media type
 	 */
 	public Map<String, OdfDocument> loadSubDocuments(OdfMediaType desiredMediaType) {
 		String wantedMediaString = null;
@@ -455,6 +495,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
 	/**
 	 * Sets the media type of the OdfDocument
+	 *
 	 * @param odfMediaType media type to be set
 	 */
 	protected void setOdfMediaType(OdfMediaType odfMediaType) {
@@ -479,10 +520,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 		if (mOfficeMeta == null) {
 			try {
 				OdfMetaDom metaDom = getMetaDom();
-				if (metaDom == null) {
-					metaDom = new OdfMetaDom(this, OdfSchemaDocument.OdfXMLFile.META.getFileName());
-				}
-				mOfficeMeta = new OdfOfficeMeta(metaDom);
+ 				mOfficeMeta = new OdfOfficeMeta(metaDom);
 			} catch (Exception ex) {
 				Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
 			}
@@ -491,23 +529,24 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Save the document to an OutputStream. Delegate to the root document
-	 * and save possible embedded OdfDocuments.
+	 * Save the document to an OutputStream. Delegate to the root document and
+	 * save possible embedded OdfDocuments.
 	 *
-	 * <p>If the input file has been cached (this is the case when loading from an
-	 * InputStream), the input file can be overwritten.</p>
+	 * <p>If the input file has been cached (this is the case when loading from
+	 * an InputStream), the input file can be overwritten.</p>
 	 *
 	 * <p>If not, the OutputStream may not point to the input file! Otherwise
 	 * this will result in unwanted behaviour and broken files.</p>
 	 *
-	 * <p>When save the embedded document to a stand alone document,
-	 * all the file entries of the embedded document will be copied to a new document package.
-	 * If the embedded document is outside of the current document directory,
-	 * you have to embed it to the sub directory and refresh the link of the embedded document.
-	 * you should reload it from the stream to get the saved embedded document.
+	 * <p>When save the embedded document to a stand alone document, all the
+	 * file entries of the embedded document will be copied to a new document
+	 * package. If the embedded document is outside of the current document
+	 * directory, you have to embed it to the sub directory and refresh the link
+	 * of the embedded document. you should reload it from the stream to get the
+	 * saved embedded document.
 	 *
 	 * @param out - the OutputStream to write the file to
-	 * @throws java.lang.Exception  if the document could not be saved
+	 * @throws java.lang.Exception if the document could not be saved
 	 */
 	public void save(OutputStream out) throws Exception {
 		updateMetaData();
@@ -526,22 +565,23 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	/**
 	 * Save the document to a given file.
 	 *
-	 * <p>If the input file has been cached (this is the case when loading from an
-	 * InputStream), the input file can be overwritten.</p>
+	 * <p>If the input file has been cached (this is the case when loading from
+	 * an InputStream), the input file can be overwritten.</p>
 	 *
-	 * <p>Otherwise it's allowed to overwrite the input file as long as
-	 * the same path name is used that was used for loading (no symbolic link
-	 * foo2.odt pointing to the loaded file foo1.odt, no network path X:\foo.odt
-	 * pointing to the loaded file D:\foo.odt).</p>
+	 * <p>Otherwise it's allowed to overwrite the input file as long as the same
+	 * path name is used that was used for loading (no symbolic link foo2.odt
+	 * pointing to the loaded file foo1.odt, no network path X:\foo.odt pointing
+	 * to the loaded file D:\foo.odt).</p>
 	 *
-	 * <p>When saving the embedded document to a stand alone document,
-	 * all files of the embedded document will be copied to a new document package.
-	 * If the embedded document is outside of the current document directory,
-	 * you have to embed it to the sub directory and refresh the link of the embedded document.
-	 * You should reload it from the given file to get the saved embedded document.
+	 * <p>When saving the embedded document to a stand alone document, all files
+	 * of the embedded document will be copied to a new document package. If the
+	 * embedded document is outside of the current document directory, you have
+	 * to embed it to the sub directory and refresh the link of the embedded
+	 * document. You should reload it from the given file to get the saved
+	 * embedded document.
 	 *
 	 * @param file - the file to save the document
-	 * @throws java.lang.Exception  if the document could not be saved
+	 * @throws java.lang.Exception if the document could not be saved
 	 */
 	@Override
 	public void save(File file) throws Exception {
@@ -559,10 +599,10 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	}
 
 	/**
-	 * Close the OdfPackage and release all temporary created data.
-	 * Acter execution of this method, this class is no longer usable.
-	 * Do this as the last action to free resources.
-	 * Closing an already closed document has no effect.
+	 * Close the document and release all temporary created data. After
+	 * execution of this method, this class is no longer usable. Do this as the
+	 * last action to free resources. Closing an already closed document has no
+	 * effect.
 	 */
 	@Override
 	public void close() {
@@ -576,8 +616,8 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * Get the content root of a document.
 	 *
 	 * You may prefer to use the getContentRoot methods of subclasses of
-	 * OdfDocument. Their return parameters are already casted to
-	 * respective subclasses of OdfElement.
+	 * OdfDocument. Their return parameters are already casted to respective
+	 * subclasses of OdfElement.
 	 *
 	 * @param the type of the content root, depend on the document type
 	 * @return the child element of office:body, e.g. office:text for text docs
@@ -620,12 +660,15 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
 	/**
 	 * Insert an Image from the specified uri to the end of the OdfDocument.
+	 *
 	 * @param imageUri The URI of the image that will be added to the document,
-	 * 				   add image stream to the package,
-	 *                 in the 'Pictures/' graphic directory with the same image file name as in the URI.
-	 *                 If the imageURI is relative first the user.dir is taken to make it absolute.
-	 * @return         Returns the internal package path of the image, which was created based on the given URI.
-	 * */
+	 * add image stream to the package, in the 'Pictures/' graphic directory
+	 * with the same image file name as in the URI. If the imageURI is relative
+	 * first the user.dir is taken to make it absolute.
+	 * @return Returns the internal package path of the image, which was created
+	 * based on the given URI.
+	 *
+	 */
 	public String newImage(URI imageUri) {
 		try {
 			OdfContentDom contentDom = this.getContentDom();
@@ -658,7 +701,8 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
 	/**
 	 * Return an instance of table feature with the specific table name.
-	 * @param name of the table beeing searched for.
+	 *
+	 * @param name of the table being searched for.
 	 * @return an instance of table feature with the specific table name.
 	 */
 	public OdfTable getTableByName(String name) {
@@ -684,6 +728,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
 	/**
 	 * Return a list of table features in this document.
+	 *
 	 * @return a list of table features in this document.
 	 */
 	public List<OdfTable> getTableList() {
@@ -706,22 +751,27 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * Update document meta data in the ODF document. Following metadata data is
 	 * being updated:
 	 * <ul>
-	 * <li>The name of the person who last modified this document will be the Java user.name System property</li>
-	 * <li>The date and time when the document was last modified using current data</li>
-	 * <li>The number of times this document has been edited is incremented by 1</li>
+	 * <li>The name of the person who last modified this document will be the
+	 * Java user.name System property</li>
+	 * <li>The date and time when the document was last modified using current
+	 * data</li>
+	 * <li>The number of times this document has been edited is incremented by
+	 * 1</li>
 	 * <li>The total time spent editing this document</li>
 	 * </ul>
 	 *
-	 * TODO:This method will be moved to OdfMetadata class.
-	 *      see http://odftoolkit.org/bugzilla/show_bug.cgi?id=204
-	 * @throws Exception
-	 * @throws IllegalArgumentException
+	 * TODO:This method will be moved to OdfMetadata class. see
+	 * http://odftoolkit.org/bugzilla/show_bug.cgi?id=204
+	 *
 	 */
-	private void updateMetaData() throws IllegalArgumentException, Exception {
+	public void updateMetaData() {
 		if (getOfficeMetadata().hasAutomaticUpdate()) {
 			OdfOfficeMeta metaData = getOfficeMetadata();
 
-			// set creation date´
+			// OpenOffice 3.4.1 needs this metadata to continue list numbering correctly
+			metaData.setGenerator(FORMER_OPEN_OFFICE_VERSION);
+
+			// set creation date
 			if (mCreationDate != null) {
 				getOfficeMetadata().setCreationDate(mCreationDate);
 			}
@@ -765,7 +815,8 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 *
 	 * <p>
 	 * 2) There is CTL: Complex Text Layout, which uses BIDI algorithms and/or
-	 * glyph modules for instance Arabic, Hebrew, Indic and Thai. See http://en.wikipedia.org/wiki/Complex_Text_Layout
+	 * glyph modules for instance Arabic, Hebrew, Indic and Thai. See
+	 * http://en.wikipedia.org/wiki/Complex_Text_Layout
 	 *
 	 * <p>
 	 * 3) And there is all the rest, which was once called by MS Western.
@@ -840,23 +891,23 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * the document. Thus the font settings, the spell checkings and etc will be
 	 * affected.
 	 *
-	 * @param locale
-	 *            - an instance of Locale
+	 * @param locale - an instance of Locale
 	 */
 	public void setLocale(Locale locale) {
 		setLocale(locale, getUnicodeGroup(locale));
 	}
 
 	/**
-	 * This method will return Locale, which presents the default
-	 * language and country information settings in this document.
+	 * This method will return Locale, which presents the default language and
+	 * country information settings in this document.
 	 *
 	 * @return an instance of Locale that the default language and country is
-	 *         set to.
+	 * set to.
 	 */
 	/**
-	 * Similar to OpenOffice.org, ODFDOM assumes that every Locale is related
-	 * to one of the three Unicodes Groups, either CJK, CTL or Western.
+	 * Similar to OpenOffice.org, ODFDOM assumes that every Locale is related to
+	 * one of the three Unicodes Groups, either CJK, CTL or Western.
+	 *
 	 * @param locale the UnicodeGroup is requested for
 	 * @return the related UnicodeGroup
 	 */
@@ -878,10 +929,8 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * <p>
 	 * If the locale does not belong to the script type, it will not be set.
 	 *
-	 * @param locale
-	 *            - Locale information
-	 * @param unicodeGroup
-	 *            - The script type
+	 * @param locale - Locale information
+	 * @param unicodeGroup - The script type
 	 */
 	private void setLocale(Locale locale, UnicodeGroup unicodeGroup) {
 		try {
@@ -903,14 +952,13 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	}
 
 	/**
-	 * This method will return Locale, which presents the default
-	 * language and country information settings in this document
+	 * This method will return Locale, which presents the default language and
+	 * country information settings in this document
 	 * <p>
-	 * ODF allows to set a Locale for each of the three UnicodeGroups.
-	 * Therefore there might be three different Locale for the document.
+	 * ODF allows to set a Locale for each of the three UnicodeGroups. Therefore
+	 * there might be three different Locale for the document.
 	 *
-	 * @param unicodeGroup
-	 *            - One of the three (CJK, CTL or Western).
+	 * @param unicodeGroup - One of the three (CJK, CTL or Western).
 	 * @return the Locale for the given UnicodeGroup
 	 */
 	public Locale getLocale(UnicodeGroup unicodeGroup) {
@@ -935,7 +983,10 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 		return null;
 	}
 
-	/** Returns the current Locale for the OdfStyleProperty of the corresponding UnicodeGroup */
+	/**
+	 * Returns the current Locale for the OdfStyleProperty of the corresponding
+	 * UnicodeGroup
+	 */
 	private Locale getDefaultLanguageByProperty(OdfStyleProperty countryProp,
 			OdfStyleProperty languageProp) throws Exception {
 		String lang = null, ctry = null;
@@ -971,9 +1022,8 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * This method will set the default language and country information of the
 	 * document, based on the parameter of the Locale information.
 	 *
-	 * @param locale
-	 *            - an instance of Locale that the default language and country
-	 *            will be set to.
+	 * @param locale - an instance of Locale that the default language and
+	 * country will be set to.
 	 * @throws Exception
 	 */
 	private void setDefaultWesternLanguage(Locale locale) throws Exception {
@@ -998,9 +1048,8 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * Locale instance is not set a Asian language (Chinese, Traditional
 	 * Chinese, Japanese and Korean, nothing will take effect.
 	 *
-	 * @param locale
-	 *            - an instance of Locale that the default Asian language and
-	 *            country will be set to.
+	 * @param locale - an instance of Locale that the default Asian language and
+	 * country will be set to.
 	 * @throws Exception
 	 */
 	private void setDefaultAsianLanguage(Locale locale) throws Exception {
@@ -1023,9 +1072,8 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * This method will set the default complex language and country information
 	 * of the document, based on the parameter of the Locale information.
 	 *
-	 * @param locale
-	 *            - an instance of Locale that the default complex language and
-	 *            country will be set to.
+	 * @param locale - an instance of Locale that the default complex language
+	 * and country will be set to.
 	 * @throws Exception
 	 */
 	private void setDefaultComplexLanguage(Locale locale) throws Exception {
@@ -1043,4 +1091,52 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 			}
 		}
 	}
+	private Set<String> mFontNames = null;
+	private Map<String, OfficeAnnotationElement> annotations = null;
+
+	/**
+	 * This is a temporary solution to know about the fonts within the documents.
+	 * Project client does not provide font information, therefore the 16 fonts are hard
+	 * coded
+	 */
+	public Set<String> getFontNames() {
+		if (mFontNames == null) {
+			mFontNames = new HashSet<String>();
+		}
+		return mFontNames;
+	}
+
+    public void addAnnotation(String name, OfficeAnnotationElement element) {
+        if(annotations == null){
+            annotations = new HashMap<String, OfficeAnnotationElement>();
+        }
+        annotations.put(name,  element);
+    }
+    public OfficeAnnotationElement getAnnotation(String name) {
+        if(annotations == null || !annotations.containsKey(name)){
+            return null;
+        }
+        return annotations.get(name);
+    }
+    public void removeAnnotation(String name) {
+        if(annotations != null && annotations.containsKey(name)){
+            annotations.remove(name);
+        }
+    }
+    public String getUniqueAnnotationName() {
+        String prefix = "CmtId";
+        int freeIndex = 0;
+        if(annotations != null ){
+            while(annotations.containsKey(prefix + freeIndex)){
+                ++freeIndex;
+            }
+        }
+        return prefix + freeIndex;
+    }
+
+    protected void removeCachedView() {
+        mPackage = getPackage();
+        // removes the LO/AO view caching
+        mPackage.remove("Thumbnails/thumbnail.png");
+    }
 }

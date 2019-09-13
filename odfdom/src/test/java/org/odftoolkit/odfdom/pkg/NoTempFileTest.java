@@ -32,7 +32,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawImageElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
@@ -42,10 +41,11 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 public class NoTempFileTest {
 
 	private static final Logger LOG = Logger.getLogger(OdfPackage.class.getName());
-	private static final String TEST_FILE_FOLDER = ResourceUtilities.getTestOutputFolder();
+	private static final String TEST_INPUT_FOLDER = ResourceUtilities.getTestInputFolder();
+    private static final String TEST_OUTPUT_FOLDER = ResourceUtilities.getTestOutputFolder();
 	private static final String Test_File = "image.odt";
 	private static String IMage = "testA.jpg";
-	private static String New_File = "test3.odt";
+	private static String New_File = "test3_NoTempFileTest.odt";
 	private static String Test2File = "test2.odt";
 
 	@Before
@@ -63,7 +63,7 @@ public class NoTempFileTest {
 	@Test
 	public void testLoadPkgFromInputStream() {
 		try {
-			FileInputStream docStream = new FileInputStream(TEST_FILE_FOLDER + Test_File);
+			FileInputStream docStream = new FileInputStream(TEST_INPUT_FOLDER + Test_File);
 			OdfPackage pkg = OdfPackage.loadPackage(docStream);
 			docStream.close();
 
@@ -84,15 +84,15 @@ public class NoTempFileTest {
 	public void testInsertImageWithoutTemp() {
 		try {
 			// loads the ODF document package from the path
-			FileInputStream docStream = new FileInputStream(TEST_FILE_FOLDER + Test2File);
+			FileInputStream docStream = new FileInputStream(TEST_INPUT_FOLDER + Test2File);
 			OdfPackage pkg = OdfPackage.loadPackage(docStream);
 			docStream.close();
 
 			// loads the image from the URL and inserts the image in the package, adapting the manifest
-			pkg.insert(new FileInputStream(TEST_FILE_FOLDER + IMage), "Pictures/myHoliday.jpg", "image/jpeg");
-			pkg.save(ResourceUtilities.newTestOutputFile(New_File));
+			pkg.insert(new FileInputStream(TEST_INPUT_FOLDER + IMage), "Pictures/myHoliday.jpg", "image/jpeg");
+			pkg.save(ResourceUtilities.getTestOutputFile(New_File));
 
-			OdfDocument doc = OdfDocument.loadDocument(TEST_FILE_FOLDER + New_File);
+			OdfDocument doc = OdfDocument.loadDocument(TEST_OUTPUT_FOLDER + New_File);
 			OdfFileDom contentDom = doc.getContentDom();
 
 			XPath xpath = contentDom.getXPath();
@@ -105,11 +105,11 @@ public class NoTempFileTest {
 
 			TextPElement para = (TextPElement) xpath.evaluate("//text:p[1]", contentDom, XPathConstants.NODE);
 			para.appendChild(frame);
-			doc.save(TEST_FILE_FOLDER + New_File);
+			doc.save(TEST_OUTPUT_FOLDER + New_File);
 			doc.close();
 
 			//Test if the image has been inserted
-			doc = OdfDocument.loadDocument(TEST_FILE_FOLDER + New_File);
+			doc = OdfDocument.loadDocument(TEST_OUTPUT_FOLDER + New_File);
 			contentDom = doc.getContentDom();
 			DrawFrameElement frameobj = (DrawFrameElement) xpath.evaluate("//text:p[1]/draw:frame", contentDom, XPathConstants.NODE);
 			Assert.assertEquals("3in", frameobj.getSvgHeightAttribute());
@@ -118,6 +118,7 @@ public class NoTempFileTest {
 			Assert.assertEquals("Pictures/myHoliday.jpg", imageobj.getXlinkHrefAttribute());
 		} catch (Exception e) {
 			Logger.getLogger(NoTempFileTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+            Assert.fail(e.getMessage());
 		}
 	}
 

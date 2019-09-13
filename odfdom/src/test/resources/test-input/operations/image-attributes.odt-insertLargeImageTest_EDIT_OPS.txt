@@ -1,0 +1,3 @@
+{"changes":[
+{"name":"addDrawing","start":[1,15],"type":"image","attrs":{"drawing":{"height":5982,"marginBottom":317,"marginLeft":317,"marginRight":317,"marginTop":317,"width":17013},"image":{"imageUrl":"Pictures/uidd03f7d7218eb.jpg"}}}
+]}

@@ -23,11 +23,16 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.pkg.manifest;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
+import org.xml.sax.SAXException;
 
 /**
  * The DOM representation of the ODF manifest.xml file of an ODF document.
@@ -70,7 +75,11 @@ public class OdfManifestDom extends OdfFileDom {
 	protected void initialize() {
 		mUriByPrefix.put("manifest", "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0");
 		mPrefixByUri.put("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest");
-		super.initialize();
+        try {
+            super.initialize();
+        } catch (SAXException |IOException | ParserConfigurationException ex) {
+            Logger.getLogger(OdfManifestDom.class.getName()).log(Level.SEVERE, null, ex);
+        }
 	}
 
 	/**

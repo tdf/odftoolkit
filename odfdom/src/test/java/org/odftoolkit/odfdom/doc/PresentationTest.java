@@ -23,14 +23,10 @@ package org.odftoolkit.odfdom.doc;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-
 import org.junit.Assert;
 import org.junit.Test;
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.presentation.OdfSlide;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationClassAttribute;
@@ -45,6 +41,8 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 
@@ -58,7 +56,7 @@ public class PresentationTest {
 
 	public PresentationTest() {
 		try {
-			odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("presentation.odp"));
+			odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("presentation.odp"));
 		} catch (Exception e) {
 			Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
@@ -95,7 +93,7 @@ public class PresentationTest {
 			Assert.assertNotNull(officeMasterStyles);
 
 			// check if iterator has all two master pages
-			testIterator(StyleMasterPageElement.class, officeMasterStyles.getMasterPages(), 2);
+			testIterator(StyleMasterPageElement.class, officeMasterStyles.iterator(), 2);
 
 			// test "master-name-1"
 			StyleMasterPageElement master = officeMasterStyles.getMasterPage("master-name-1");

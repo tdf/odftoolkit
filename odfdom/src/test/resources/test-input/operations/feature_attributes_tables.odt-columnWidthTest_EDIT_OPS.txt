@@ -1,0 +1,15 @@
+{"changes":[
+{"name":"addColumn","start":[5],"gridPosition":2,"insertMode":"behind","tableGrid":[20,20,20,20,20]},
+{"name":"format","start":[5],"attrs":{"table":{"tableGrid":[20,20,20,20,20]}}},
+{"name":"addParagraph","start":[5,1,4,1]},
+{"name":"addText","start":[5,1,4,1,1],"text":"b"},
+{"name":"addParagraph","start":[5,2,4,1]},
+{"name":"addText","start":[5,2,4,1,1],"text":"c"},
+{"name":"addParagraph","start":[5,3,4,1]},
+{"name":"addText","start":[5,3,4,1,1],"text":"d"},
+{"name":"addParagraph","start":[5,4,4,1]},
+{"name":"addText","start":[5,4,4,1,1],"text":"e"},
+{"name":"addText","start":[5,1,4,1,1],"text":"b"},
+{"name":"addColumn","start":[5],"gridPosition":1,"insertMode":"behind","tableGrid":[17,17,17,17,17,17]},
+{"name":"format","start":[5],"attrs":{"table":{"tableGrid":[17,17,17,17,17,17]}}}
+]}

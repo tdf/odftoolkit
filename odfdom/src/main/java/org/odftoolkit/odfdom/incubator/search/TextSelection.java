@@ -49,8 +49,7 @@ import org.w3c.dom.Node;
  *  OdfTextHeadingt), the start index of the text content of the container element and
  *  the text content of this selection.
  *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.navigation.TextSelection} in Simple API.
- */
+  */
 public class TextSelection extends Selection {
 
 	private String mMatchedText;
@@ -673,7 +672,7 @@ public class TextSelection extends Selection {
 			OdfStylableElement toElement) {
 		if (styleMap != null) {
 			//preserve the style property of toElement if it is also exist in styleMap
-			OdfStyle resultStyleElement = toElement.getAutomaticStyles().newStyle(
+			OdfStyle resultStyleElement = toElement.getOrCreateAutomaticStyles().newStyle(
 					OdfStyleFamily.Text);
 
 			for (Map.Entry<OdfStyleProperty, String> entry : styleMap.entrySet()) {
@@ -820,7 +819,7 @@ public class TextSelection extends Selection {
 	 */
 	private Map<OdfStyleProperty, String> getTextStyleProperties(OdfStylableElement element) {
 		String styleName = element.getStyleName();
-		OdfStyleBase styleElement = element.getAutomaticStyles().getStyle(
+		OdfStyleBase styleElement = element.getOrCreateAutomaticStyles().getStyle(
 				styleName, element.getStyleFamily());
 
 		if (styleElement == null) {
@@ -854,7 +853,7 @@ public class TextSelection extends Selection {
 	 */
 	private Map<OdfStyleProperty, String> getTextStylePropertiesDeep(OdfStylableElement element) {
 		String styleName = element.getStyleName();
-		OdfStyleBase styleElement = element.getAutomaticStyles().getStyle(
+		OdfStyleBase styleElement = element.getOrCreateAutomaticStyles().getStyle(
 				styleName, element.getStyleFamily());
 
 		if (styleElement == null) {

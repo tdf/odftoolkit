@@ -188,16 +188,6 @@ public class TextListLevelStyleBulletElement extends TextListLevelStyleElementBa
 		attr.setValue(textStyleNameValue);
 	}
 
-	/**
-	 * Create child element {@odf.element style:list-level-properties}.
-	 *
-	 * @return the element {@odf.element style:list-level-properties}
-	 */
-	public StyleListLevelPropertiesElement newStyleListLevelPropertiesElement() {
-		StyleListLevelPropertiesElement styleListLevelProperties = ((OdfFileDom) this.ownerDocument).newOdfElement(StyleListLevelPropertiesElement.class);
-		this.appendChild(styleListLevelProperties);
-		return styleListLevelProperties;
-	}
 
 	/**
 	 * Create child element {@odf.element style:text-properties}.

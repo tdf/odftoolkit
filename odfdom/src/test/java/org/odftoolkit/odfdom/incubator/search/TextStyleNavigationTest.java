@@ -70,7 +70,7 @@ public class TextStyleNavigationTest {
 	@Before
 	public void setUp() {
 		try {
-			doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_FILE));
+			doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEXT_FILE));
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -123,7 +123,7 @@ public class TextStyleNavigationTest {
 		Assert.assertTrue(i == j);
 
 		try {
-			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_PAST_FRONT));
+			doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_PAST_FRONT));
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -170,7 +170,7 @@ public class TextStyleNavigationTest {
 		Assert.assertTrue(i == j);
 
 		try {
-			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_PAST_END));
+			doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_PAST_END));
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -202,7 +202,7 @@ public class TextStyleNavigationTest {
 		Assert.assertFalse(search2.hasNext());
 
 		try {
-			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_DELETE));
+			doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_DELETE));
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -254,7 +254,7 @@ public class TextStyleNavigationTest {
 		Assert.assertTrue(i == j);
 
 		try {
-			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE_STYLE));
+			doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_STYLE));
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");

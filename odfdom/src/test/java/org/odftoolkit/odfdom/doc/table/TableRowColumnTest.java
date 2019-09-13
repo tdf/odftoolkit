@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,8 +54,8 @@ public class TableRowColumnTest {
 	@Before
 	public void setUp() {
 		try {
-			odsdoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath(filename + ".ods"));
-			odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(odtfilename + ".odt"));
+			odsdoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(filename + ".ods"));
+			odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(odtfilename + ".odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
@@ -215,7 +215,7 @@ public class TableRowColumnTest {
 
 	private void saveods(String name) {
 		try {
-			odsdoc.save(ResourceUtilities.newTestOutputFile(filename + name + ".ods"));
+			odsdoc.save(ResourceUtilities.getTestOutputFile(filename + name + ".ods"));
 		} catch (Exception e) {
 			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}
@@ -223,7 +223,7 @@ public class TableRowColumnTest {
 
 	private void saveodt(String name) {
 		try {
-			odtdoc.save(ResourceUtilities.newTestOutputFile(odtfilename + name + ".odt"));
+			odtdoc.save(ResourceUtilities.getTestOutputFile(odtfilename + name + ".odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 		}

@@ -47,7 +47,7 @@ public class StyleNameRef implements OdfDataType {
 		// http://www.w3.org/TR/xmlschema-2/#NCName
 		if (!W3CSchemaType.isValid("NCName", styleNameRef)) {
 			throw new IllegalArgumentException(
-					"parameter is invalid for datatype StyleNameRef");
+					"parameter '" + styleNameRef + "' is invalid for datatype StyleNameRef");
 		}
 		mStyleNameRef = styleNameRef;
 	}

@@ -36,14 +36,14 @@ public class ChartTemplateTest {
 	@Test
 	@Ignore
 	public void testLoadingAChartTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_CHART_TEMPLATE));
+		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_CHART_TEMPLATE));
 		Assert.assertEquals(OdfDocument.OdfMediaType.CHART_TEMPLATE.getMediaTypeString(),
 				document.getMediaTypeString());
 	}
 
 	@Test
 	public void testSavingAChartTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_CHART_TEMPLATE));
+		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_CHART_TEMPLATE));
 		File destination = File.createTempFile("odfdom-test", ".otc", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 

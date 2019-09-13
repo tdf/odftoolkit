@@ -29,7 +29,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
@@ -42,11 +41,13 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
- * Tests the error behaviour while loading or saving a document.
+ * Tests the error behavior while loading or saving a document.
  */
 public class LoadSaveErrorTest {
 
-	private static final String SOURCE = "OdfTextDocument.odt";
+	private static final String SOURCE = "OdfTextDocument.odt"; // loaded from the class directory (the template)
+	private static final Logger LOG = Logger.getLogger(LoadSaveErrorTest.class.getName());
+
 
 	/**
 	 * The ZIP in this test claims to be an ODT file but then backs this with nothing.
@@ -138,10 +139,11 @@ public class LoadSaveErrorTest {
 				.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE));
 		Assert.assertTrue(odfDocument.getPackage().contains("content.xml"));
 		String baseURI = odfDocument.getPackage().getBaseURI();
-//		Assert.assertTrue(ResourceUtilities.getURI(SOURCE).toString()
-//				.compareToIgnoreCase(baseURI) == 0);
-		System.out.println("SOURCE URI1:"+ResourceUtilities.getURI(SOURCE).toString());
-		System.out.println("SOURCE URI2:"+baseURI);
+
+		LOG.info("SOURCE URI1:"+ResourceUtilities.getURI(SOURCE).toString());
+		LOG.info("SOURCE URI2:"+baseURI);
+		Assert.assertTrue(ResourceUtilities.getURI(SOURCE).toString()
+				.compareToIgnoreCase(baseURI) == 0);
 
 		Document odfContent = odfDocument.getFileDom("content.xml");
 		NodeList lst = odfContent.getElementsByTagNameNS(

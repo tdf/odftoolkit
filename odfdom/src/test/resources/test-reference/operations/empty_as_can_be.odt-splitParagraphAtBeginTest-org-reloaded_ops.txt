@@ -1,0 +1,7 @@
+{"changes":[
+{"name":"documentLayout","attrs":{"document":{"fileFormat":"odf"}}},
+{"name":"addStyle","type":"paragraph","styleId":"heading1","attrs":{"character":{"bold":true,"color":{"type":"rgb","value":"376092"},"fontSize":14},"paragraph":{"outlineLevel":0}},"parent":"default_paragraph_style","styleName":"heading 1"},
+{"name":"addParagraph","start":[1]},
+{"name":"addParagraph","start":[2]},
+{"name":"addText","start":[2,1],"text":"heading"}
+]}

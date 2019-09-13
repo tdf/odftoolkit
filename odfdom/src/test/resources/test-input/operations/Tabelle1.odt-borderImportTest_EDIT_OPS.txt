@@ -1,0 +1,4 @@
+{"changes":[
+{"name":"addText","start":[1,1],"text":"NewText"},
+{"name":"format","start":[1],"attrs":{"character":{"color":{"type":"auto"},"fillColor":{"type":"rgb","value":"FF00FF"}},"paragraph":{"borderBottom":{"style":"none"},"borderInside":{"style":"none"},"borderLeft":{"color":{"type":"auto"},"space":140,"style":"single","width":17},"borderRight":{"color":{"type":"auto"},"space":140,"style":"single","width":17},"borderTop":{"style":"single"}}}}
+]}

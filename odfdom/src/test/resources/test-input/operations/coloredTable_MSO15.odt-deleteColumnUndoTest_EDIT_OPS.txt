@@ -1,0 +1,8 @@
+{"changes":[
+{"name":"deleteColumns","start":[1],"endGrid":2,"opl":1,"osn":28,"startGrid":2},
+{"name":"format","start":[1],"attrs":{"table":{"tableGrid":[5,23]}},"opl":1,"osn":29},
+{"name":"format","start":[1],"end":[1],"attrs":{"table":{"tableGrid":[5,23,72]}},"opl":1,"osn":30},
+{"name":"addCells","start":[1,1,3],"attrs":{"cell":{"borderBottom":{"color":{"type":"rgb","value":"000000"},"style":"single","width":18},"borderLeft":{"color":{"type":"rgb","value":"000000"},"style":"single","width":18},"borderRight":{"color":{"type":"rgb","value":"000000"},"style":"single","width":18},"borderTop":{"color":{"type":"rgb","value":"000000"},"style":"single","width":18},"fillColor":{"type":"rgb","value":"ED7D31"},"paddingBottom":0,"paddingLeft":191,"paddingRight":191,"paddingTop":0}},"count":1,"opl":1,"osn":31},
+{"name":"addParagraph","start":[1,1,3,1],"attrs":{"styleId":"Normal","character":{"color":{"type":"rgb","value":"7030A0"},"underline":true},"paragraph":{"lineHeight":{"type":"percent","value":100},"marginBottom":0}},"opl":1,"osn":32},
+{"name":"addText","start":[1,1,3,1,1],"opl":1,"osn":33,"text":"3"}
+]}

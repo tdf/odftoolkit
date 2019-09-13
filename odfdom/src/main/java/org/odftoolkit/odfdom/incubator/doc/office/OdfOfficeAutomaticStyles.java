@@ -1,4 +1,5 @@
-/************************************************************************
+/**
+ * **********************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
@@ -7,8 +8,8 @@
  * Use is subject to license terms.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -18,7 +19,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- ************************************************************************/
+ ***********************************************************************
+ */
 package org.odftoolkit.odfdom.incubator.doc.office;
 
 import java.util.ArrayList;
@@ -26,13 +28,24 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.changes.MapHelper;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
+import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute.Value;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.dom.element.number.DataStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberBooleanStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberCurrencyStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberDateStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberNumberStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberPercentageStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberTextStyleElement;
-import org.odftoolkit.odfdom.dom.element.office.OfficeAutomaticStylesElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberTimeStyleElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
+import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
+import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberCurrencyStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberDateStyle;
@@ -42,364 +55,522 @@ import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberTimeStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
- * Convenient functionalty for the parent ODF OpenDocument element
+ * Convenient functionality for the parent ODF OpenDocument element
  *
  */
-public class OdfOfficeAutomaticStyles extends OfficeAutomaticStylesElement {
+abstract public class OdfOfficeAutomaticStyles extends OdfStylesBase {
 
-	private static final long serialVersionUID = -2925910664631016175L;
-	// styles that are only in OdfAutomaticStyles
-	private HashMap<String, OdfStylePageLayout> mPageLayouts;
-	// styles that are common for OdfStyles and OdfAutomaticStyles
-	private OdfStylesBase mStylesBaseImpl;
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.OFFICE, "automatic-styles");
 
-	public OdfOfficeAutomaticStyles(OdfFileDom ownerDoc) {
-		super(ownerDoc);
-		mStylesBaseImpl = new OdfStylesBase();
+    private static final long serialVersionUID = -2925910664631016175L;
+    // styles that are only in OdfAutomaticStyles
+    private HashMap<String, OdfStylePageLayout> mPageLayouts;
+    // styles that are common for OdfStyles and OdfAutomaticStyles
+
+    public OdfOfficeAutomaticStyles(OdfFileDom ownerDoc) {
+        super(ownerDoc, ELEMENT_NAME);
+//        mStylesBaseImpl = new OdfStylesBase();
+    }
+
+
+	public OdfName getOdfName() {
+		return ELEMENT_NAME;
 	}
 
-	/**
-	 * Create an <code>OdfStyle</code> element with style family
-	 *
-	 * @param styleFamily  The <code>OdfStyleFamily</code> element
-	 * @return an <code>OdfStyle</code> element
-	 */
-	public OdfStyle newStyle(OdfStyleFamily styleFamily) {
-		OdfFileDom dom = (OdfFileDom) this.ownerDocument;
-		OdfStyle newStyle = dom.newOdfElement(OdfStyle.class);
-		newStyle.setStyleFamilyAttribute(styleFamily.getName());
+   /**
+     * Create an <code>OdfStyle</code> element with style family
+     *
+     * @param styleFamily The <code>OdfStyleFamily</code> element
+     * @return an <code>OdfStyle</code> element
+     */
+    public OdfStyle newStyle(OdfStyleFamily styleFamily) {
+        OdfFileDom dom = (OdfFileDom) this.ownerDocument;
+        OdfStyle newStyle = dom.newOdfElement(OdfStyle.class);
+        newStyle.setStyleFamilyAttribute(styleFamily.getName());
 
-		newStyle.setStyleNameAttribute(newUniqueStyleName(styleFamily));
+        newStyle.setStyleNameAttribute(newUniqueStyleName(styleFamily));
+        // <style:style> elements are the first type of elements within the automatic styles parent
+        OdfElement firstChild = this.getFirstChildElement();
+        // if there another child, add the new <style:style> ahead
+        if (firstChild != null) {
+            this.insertBefore(newStyle, firstChild);
+        } else {
+            // otherwise append the <style:style> as first child
+            this.appendChild(newStyle);
+        }
+        return newStyle;
+    }
 
-		this.appendChild(newStyle);
+	protected <T extends OdfElement> T getStylesElement(OdfFileDom dom, Class<T> clazz) throws Exception {
+		OdfElement stylesRoot = dom.getRootElement();
 
-		return newStyle;
-	}
-
-	/**
-	 * Create an <code>OdfTextListStyle</code> element
-	 *
-	 * @return an <code>OdfTextListStyle</code> element
-	 */
-	public OdfTextListStyle newListStyle() {
-		OdfFileDom dom = (OdfFileDom) this.ownerDocument;
-		OdfTextListStyle newStyle = dom.newOdfElement(OdfTextListStyle.class);
-
-		newStyle.setStyleNameAttribute(newUniqueStyleName(OdfStyleFamily.List));
-
-		this.appendChild(newStyle);
-
-		return newStyle;
-	}
-
-	/** Returns the <code>OdfStylePageLayout</code> element with the given name.
-	 *
-	 * @param name is the name of the page layout
-	 * @return the page layout or null if there is no such page layout
-	 */
-	public OdfStylePageLayout getPageLayout(String name) {
-		if (mPageLayouts != null) {
-			return mPageLayouts.get(name);
-		} else {
-			return null;
+		OdfOfficeAutomaticStyles contentBody = OdfElement.findFirstChildNode(OdfOfficeAutomaticStyles.class, stylesRoot);
+		NodeList childs = contentBody.getChildNodes();
+		for (int i = 0;
+				i < childs.getLength();
+				i++) {
+			Node cur = childs.item(i);
+			if ((cur != null) && clazz.isInstance(cur)) {
+				return (T) cur;
+			}
 		}
+		return null;
+	}
+
+    /**
+     * Create an <code>OdfTextListStyle</code> element
+     *
+     * @return an <code>OdfTextListStyle</code> element
+     */
+    public OdfTextListStyle newListStyle() {
+        return newListStyle(newUniqueStyleName(OdfStyleFamily.List));
+    }
+
+    /**
+     * Create an <code>OdfStylePageLayout</code> element
+     *
+     * @return an <code>OdfStylePageLayout</code> element
+     */
+    public OdfStylePageLayout newPageLayout() {
+        return newPageLayout(newUniqueStyleName(null));
+    }
+
+
+    /**
+     * Create an <code>OdfStylePageLayout</code> element
+     *
+     * @return an <code>OdfStylePageLayout</code> element
+     */
+    public OdfStylePageLayout newPageLayout(String pageLayoutName) {
+        OdfFileDom dom = (OdfFileDom) this.ownerDocument;
+        OdfStylePageLayout newPageLayout = dom.newOdfElement(OdfStylePageLayout.class);
+
+        newPageLayout.setStyleNameAttribute(pageLayoutName);
+        // <style:page-layout always last in automatic styles
+          // append it to the automatic styles parent
+        this.appendChild(newPageLayout);
+        return newPageLayout;
+    }
+
+    /**
+     * Create an <code>OdfTextListStyle</code> element
+     *
+     * @param listStyleName the name of the new list style
+     * @return an <code>OdfTextListStyle</code> element
+     */
+    public OdfTextListStyle newListStyle(String listStyleName) {
+        OdfFileDom dom = (OdfFileDom) this.ownerDocument;
+        OdfTextListStyle newStyle = dom.newOdfElement(OdfTextListStyle.class);
+
+        newStyle.setStyleNameAttribute(listStyleName);
+        // <text:list-style are always the second after the <style:style> elements
+        OdfElement child = this.getFirstChildElement();
+        if (child != null) {
+            // check if the first element is of <style:style>
+            if (child instanceof StyleStyleElement) {
+                // search for a following sibling not being a <style:style> element
+                while (child != null && child instanceof StyleStyleElement) {
+                    child = OdfElement.getNextSiblingElement(child);
+                }
+            }
+            // if such a none <style:style> element exists
+            if (child != null) {
+                //check if a style by that name already exists
+                OdfElement removeChild = child;
+                while(removeChild != null)
+                {
+                    if(removeChild instanceof OdfTextListStyle && ((OdfTextListStyle)removeChild).getStyleNameAttribute().equals(listStyleName))
+                    {
+                        break;
+                    }
+                    removeChild = OdfElement.getNextSiblingElement(removeChild);
+                }
+                // add the list style before of this
+                this.insertBefore(newStyle, child);
+                if(removeChild != null)
+                    this.removeChild(removeChild);
+            } else {
+                // otherwise add the list style after the <style:style>
+                this.appendChild(newStyle);
+            }
+        } else {
+            // add the list style to this element, the empty automatic styles parent
+            this.appendChild(newStyle);
+        }
+
+        return newStyle;
+    }
+
+    /**
+     * Returns the <code>OdfStylePageLayout</code> element with the given name.
+     *
+     * @param name is the name of the page layout
+     * @return the page layout or null if there is no such page layout
+     */
+    public OdfStylePageLayout getPageLayout(String name) {
+        if (mPageLayouts != null) {
+            return mPageLayouts.get(name);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Returns the <code>OdfStylePageLayout</code> element with the given name.
+     *
+     * @param name is the name of the page layout
+     * @return the page layout
+     */
+    public OdfStylePageLayout getOrCreatePageLayout(String name) {
+        OdfStylePageLayout pageLayout = getPageLayout(name);
+        if (pageLayout == null) {
+            OdfFileDom dom = (OdfFileDom) this.ownerDocument;
+            pageLayout = dom.newOdfElement(OdfStylePageLayout.class);
+            pageLayout.setStyleNameAttribute(name);
+            this.appendChild(pageLayout);
+        }
+        return pageLayout;
+    }
+
+    @Override
+    public void onOdfNodeInserted(OdfElement node, Node refNode) {
+        if (node instanceof OdfStylePageLayout) {
+            OdfStylePageLayout pageLayout = (OdfStylePageLayout) node;
+            if (mPageLayouts == null) {
+                mPageLayouts = new HashMap<String, OdfStylePageLayout>();
+            }
+
+            mPageLayouts.put(pageLayout.getStyleNameAttribute(), pageLayout);
+        } else {
+            super.onOdfNodeInserted(node, refNode);
+        }
+    }
+
+    @Override
+    public void onOdfNodeRemoved(OdfElement node) {
+        if (node instanceof OdfStylePageLayout) {
+            if (mPageLayouts != null) {
+                OdfStylePageLayout pageLayout = (OdfStylePageLayout) node;
+                mPageLayouts.remove(pageLayout.getStyleNameAttribute());
+            }
+        } else {
+            super.onOdfNodeRemoved(node);
+        }
+    }
+
+    /**
+     * This methods removes all automatic styles that are currently not used by
+     * any styleable element. Additionally all duplicate automatic styles will
+     * be removed.
+     */
+    public void optimize() {
+        Iterator<OdfStyle> iter = getAllStyles().iterator();
+        SortedSet<OdfStyle> stylesSet = new TreeSet<OdfStyle>();
+        while (iter.hasNext()) {
+            OdfStyle cur = iter.next();
+
+            // skip styles which are not in use:
+            if (cur.getStyleUserCount() < 1) {
+                continue;
+            }
+
+            SortedSet<OdfStyle> tail = stylesSet.tailSet(cur);
+            OdfStyle found = tail.size() > 0 ? tail.first() : null;
+            if (found != null && found.equals(cur)) {
+                // cur already in set. Replace all usages of cur by found:
+                Iterator<OdfStylableElement> styleUsersIter = cur.getStyleUsers().iterator();
+                ArrayList<OdfStylableElement> styleUsers = new ArrayList<OdfStylableElement>();
+                while (styleUsersIter.hasNext()) {
+                    styleUsers.add(styleUsersIter.next());
+                }
+                styleUsersIter = styleUsers.iterator();
+                while (styleUsersIter.hasNext()) {
+                    OdfStylableElement elem = styleUsersIter.next();
+                    OdfStyle autoStyle = elem.getAutomaticStyle();
+                    if (autoStyle != null) {
+                        elem.setStyleName(found.getStyleNameAttribute());
+                    }
+                }
+            } else {
+                stylesSet.add(cur);
+            }
+        }
+
+        OdfStyle style = OdfElement.findFirstChildNode(OdfStyle.class, this);
+        while (style != null) {
+            OdfStyle nextStyle = OdfElement.findNextChildNode(OdfStyle.class, style);
+            if (style.getStyleUserCount() < 1) {
+                this.removeChild(style);
+            }
+
+            style = nextStyle;
+        }
+    }
+
+    /**
+     * This method makes the style unique
+     *
+     * @param referenceStyle The reference <code>OdfStyle</code> element to
+     * create a new automatic style
+     * @return an <code>OdfStyle</code> element
+     */
+    public OdfStyle makeStyleUnique(OdfStyle referenceStyle) {
+        OdfStyle newStyle = null;
+
+        if (referenceStyle.getOwnerDocument() != this.getOwnerDocument()) {
+            // import style from a different dom
+            newStyle = (OdfStyle) this.getOwnerDocument().importNode(referenceStyle, true);
+        } else {
+            // just clone
+            newStyle = (OdfStyle) referenceStyle.cloneNode(true);
+        }
+
+        newStyle.setStyleNameAttribute(newUniqueStyleName(newStyle.getFamily()));
+        appendChild(newStyle);
+
+        return newStyle;
+    }
+
+    private String newUniqueStyleName(OdfStyleFamily styleFamily) {
+        String unique_name;
+
+        if (styleFamily != null && styleFamily.equals(OdfStyleFamily.List)) {
+            do {
+                unique_name = String.format("l%06x", (int) (Math.random() * 0xffffff));
+            } while (getListStyle(unique_name) != null);
+        } else {
+            do {
+                unique_name = String.format("a%06x", (int) (Math.random() * 0xffffff));
+            } while (getStyle(unique_name, styleFamily) != null);
+        }
+        return unique_name;
+    }
+    private DataStyleElement createDataStyleElement(Value type, String numberFormatCode, String newDataStyleName) {
+    	Value t = type;
+    	if(t == OfficeValueTypeAttribute.Value.VOID) {
+    		t = MapHelper.detectFormatType(numberFormatCode);
+    	}
+    	if(t == OfficeValueTypeAttribute.Value.VOID) {
+            return null;
+        }
+        OdfFileDom fileDom = (OdfFileDom) getOwnerDocument();
+        DataStyleElement newStyle = null;
+        switch(t) {
+            case DATE:
+                newStyle = new OdfNumberDateStyle(fileDom, numberFormatCode, newDataStyleName);
+            break;
+            case BOOLEAN:
+                newStyle = new NumberBooleanStyleElement(fileDom, newDataStyleName);
+            break;
+            case CURRENCY:
+                newStyle = new OdfNumberCurrencyStyle(fileDom, numberFormatCode, newDataStyleName);
+            break;
+            case FLOAT:
+                newStyle = new OdfNumberStyle(fileDom, numberFormatCode, newDataStyleName);
+            break;
+            case PERCENTAGE:
+                newStyle = new OdfNumberPercentageStyle(fileDom, numberFormatCode, newDataStyleName);
+            break;
+            case STRING:
+                newStyle = new NumberTextStyleElement(fileDom, numberFormatCode, newDataStyleName);
+            break;
+            case TIME:
+                newStyle = new OdfNumberTimeStyle(fileDom, numberFormatCode, newDataStyleName);
+            break;
+            case VOID:
+                // can never happen, already blocked above
+            break;
+        }
+        return newStyle;
+    }
+    public DataStyleElement createDataStyle(Value type, String numberFormatCode, String newDataStyleName){
+        /* conditional formats:
+        - default conditions:
+            tow parts: "value()>=0";"value()<0"
+            three parts: "value()>0";"value()<0";value()==0
+            The last one is in general
+        */
+        ArrayList<String> partArray = new ArrayList<String>();
+        //TODO: skip quoted parts - check fails if semicolon is in quotes
+        while(numberFormatCode.contains(";")) {
+            int partStart = numberFormatCode.lastIndexOf(";", numberFormatCode.length());
+            String part = numberFormatCode.substring(partStart + 1);
+            partArray.add(0, part);
+            numberFormatCode = numberFormatCode.substring(0, partStart);
+        }
+        partArray.add(0, numberFormatCode);
+
+        // this is the anchor style in case multiple parts are required
+        DataStyleElement newStyle = createDataStyleElement(type, partArray.get(partArray.size() - 1), newDataStyleName);
+        if(partArray.size() > 1) {
+            OdfFileDom fileDom = (OdfFileDom) getOwnerDocument();
+            for( int partIndex = 0; partIndex < partArray.size() - 1; ++partIndex) {
+                String partStyleName = newDataStyleName + "P" + partIndex;
+                String part = partArray.get(partIndex);
+                DataStyleElement partStyle = createDataStyleElement(Value.VOID, part, partStyleName );
+                //generate an appropriate condition and add this style as sub style and make part style a volatile style
+                String condition = "value()";
+                // TODO: extract condition if available (e.g. '[>5]')
+                condition += partArray.size() == 1  ? ">=0" : partIndex == 0 ? ">0"  : "<0";
+
+                StyleMapElement styleMap = fileDom.newOdfElement(StyleMapElement.class);
+                styleMap.setStyleApplyStyleNameAttribute(partStyleName);
+                styleMap.setStyleConditionAttribute(condition);
+                newStyle.appendChild(styleMap);
+                partStyle.setAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "style:volatile", "true");
+                appendChild(partStyle);
+            }
+        }
+        return (DataStyleElement)appendChild(newStyle);
+    }
+
+	/**
+	 * Create child element {@odf.element number:boolean-style}.
+	 *
+	 * @param styleNameValue  the <code>String</code> value of <code>StyleNameAttribute</code>, see {@odf.attribute  style:name} at specification
+	 * @return the element {@odf.element number:boolean-style}
+	 */
+	 public NumberBooleanStyleElement newNumberBooleanStyleElement(String styleNameValue) {
+		NumberBooleanStyleElement numberBooleanStyle = ((OdfFileDom) this.ownerDocument).newOdfElement(NumberBooleanStyleElement.class);
+		numberBooleanStyle.setStyleNameAttribute(styleNameValue);
+		this.appendChild(numberBooleanStyle);
+		return numberBooleanStyle;
 	}
 
 	/**
-	 * Returns the <code>OdfStyleStyle</code> element with the given name and family.
+	 * Create child element {@odf.element number:currency-style}.
 	 *
-	 * @param name is the name of the style
-	 * @param familyType is the family of the style
-	 * @return the style or null if there is no such style
+	 * @param styleNameValue  the <code>String</code> value of <code>StyleNameAttribute</code>, see {@odf.attribute  style:name} at specification
+	 * @return the element {@odf.element number:currency-style}
 	 */
-	public OdfStyle getStyle(String name, OdfStyleFamily familyType) {
-		return mStylesBaseImpl.getStyle(name, familyType);
+	 public NumberCurrencyStyleElement newNumberCurrencyStyleElement(String styleNameValue) {
+		NumberCurrencyStyleElement numberCurrencyStyle = ((OdfFileDom) this.ownerDocument).newOdfElement(NumberCurrencyStyleElement.class);
+		numberCurrencyStyle.setStyleNameAttribute(styleNameValue);
+		this.appendChild(numberCurrencyStyle);
+		return numberCurrencyStyle;
 	}
 
 	/**
-	 * Returns an iterator for all <code>OdfStyleStyle</code> elements for the given family.
+	 * Create child element {@odf.element number:date-style}.
 	 *
-	 * @param familyType
-	 * @return an iterator for all <code>OdfStyleStyle</code> elements for the given family
+	 * @param styleNameValue  the <code>String</code> value of <code>StyleNameAttribute</code>, see {@odf.attribute  style:name} at specification
+	 * @return the element {@odf.element number:date-style}
 	 */
-	public Iterable<OdfStyle> getStylesForFamily(OdfStyleFamily familyType) {
-		return mStylesBaseImpl.getStylesForFamily(familyType);
+	 public NumberDateStyleElement newNumberDateStyleElement(String styleNameValue) {
+		NumberDateStyleElement numberDateStyle = ((OdfFileDom) this.ownerDocument).newOdfElement(NumberDateStyleElement.class);
+		numberDateStyle.setStyleNameAttribute(styleNameValue);
+		this.appendChild(numberDateStyle);
+		return numberDateStyle;
 	}
 
 	/**
-	 * Returns an iterator for all <code>OdfStyleStyle</code> elements.
+	 * Create child element {@odf.element number:number-style}.
 	 *
-	 * @return an iterator for all <code>OdfStyleStyle</code> elements
+	 * @param styleNameValue  the <code>String</code> value of <code>StyleNameAttribute</code>, see {@odf.attribute  style:name} at specification
+	 * @return the element {@odf.element number:number-style}
 	 */
-	public Iterable<OdfStyle> getAllStyles() {
-		return mStylesBaseImpl.getAllOdfStyles();
+	 public NumberNumberStyleElement newNumberNumberStyleElement(String styleNameValue) {
+		NumberNumberStyleElement numberNumberStyle = ((OdfFileDom) this.ownerDocument).newOdfElement(NumberNumberStyleElement.class);
+		numberNumberStyle.setStyleNameAttribute(styleNameValue);
+		this.appendChild(numberNumberStyle);
+		return numberNumberStyle;
 	}
 
 	/**
-	 * Returns the <code>OdfTextListStyle</code> element with the given name.
+	 * Create child element {@odf.element number:percentage-style}.
 	 *
-	 * @param name is the name of the list style
-	 * @return the list style or null if there is no such list style
+	 * @param styleNameValue  the <code>String</code> value of <code>StyleNameAttribute</code>, see {@odf.attribute  style:name} at specification
+	 * @return the element {@odf.element number:percentage-style}
 	 */
-	public OdfTextListStyle getListStyle(String name) {
-		return mStylesBaseImpl.getListStyle(name);
+	 public NumberPercentageStyleElement newNumberPercentageStyleElement(String styleNameValue) {
+		NumberPercentageStyleElement numberPercentageStyle = ((OdfFileDom) this.ownerDocument).newOdfElement(NumberPercentageStyleElement.class);
+		numberPercentageStyle.setStyleNameAttribute(styleNameValue);
+		this.appendChild(numberPercentageStyle);
+		return numberPercentageStyle;
 	}
 
 	/**
-	 * Returns an iterator for all <code>OdfTextListStyle</code> elements.
+	 * Create child element {@odf.element number:text-style}.
 	 *
-	 * @return an iterator for all <code>OdfTextListStyle</code> elements
+	 * @param styleNameValue  the <code>String</code> value of <code>StyleNameAttribute</code>, see {@odf.attribute  style:name} at specification
+	 * @return the element {@odf.element number:text-style}
 	 */
-	public Iterable<OdfTextListStyle> getListStyles() {
-		return mStylesBaseImpl.getListStyles();
+	 public NumberTextStyleElement newNumberTextStyleElement(String styleNameValue) {
+		NumberTextStyleElement numberTextStyle = ((OdfFileDom) this.ownerDocument).newOdfElement(NumberTextStyleElement.class);
+		numberTextStyle.setStyleNameAttribute(styleNameValue);
+		this.appendChild(numberTextStyle);
+		return numberTextStyle;
 	}
 
 	/**
-	 * Returns the <code>OdfNumberNumberStyle</code> element with the given name.
+	 * Create child element {@odf.element number:time-style}.
 	 *
-	 * @param name is the name of the number style
-	 * @return the number style or null if there is no such number style
+	 * @param styleNameValue  the <code>String</code> value of <code>StyleNameAttribute</code>, see {@odf.attribute  style:name} at specification
+	 * @return the element {@odf.element number:time-style}
 	 */
-	public OdfNumberStyle getNumberStyle(String name) {
-		return mStylesBaseImpl.getNumberStyle(name);
+	 public NumberTimeStyleElement newNumberTimeStyleElement(String styleNameValue) {
+		NumberTimeStyleElement numberTimeStyle = ((OdfFileDom) this.ownerDocument).newOdfElement(NumberTimeStyleElement.class);
+		numberTimeStyle.setStyleNameAttribute(styleNameValue);
+		this.appendChild(numberTimeStyle);
+		return numberTimeStyle;
 	}
 
 	/**
-	 * Returns an iterator for all <code>OdfNumberNumberStyle</code> elements.
+	 * Create child element {@odf.element style:page-layout}.
 	 *
-	 * @return an iterator for all <code>OdfNumberNumberStyle</code> elements
+	 * @param styleNameValue  the <code>String</code> value of <code>StyleNameAttribute</code>, see {@odf.attribute  style:name} at specification
+	 * @return the element {@odf.element style:page-layout}
 	 */
-	public Iterable<OdfNumberStyle> getNumberStyles() {
-		return mStylesBaseImpl.getNumberStyles();
+	 public StylePageLayoutElement newStylePageLayoutElement(String styleNameValue) {
+		StylePageLayoutElement stylePageLayout = ((OdfFileDom) this.ownerDocument).newOdfElement(StylePageLayoutElement.class);
+		stylePageLayout.setStyleNameAttribute(styleNameValue);
+		this.appendChild(stylePageLayout);
+		return stylePageLayout;
 	}
 
 	/**
-	 * Returns the <code>OdfNumberDateStyle</code> element with the given name.
+	 * Create child element {@odf.element style:style}.
 	 *
-	 * @param name is the name of the date style
-	 * @return the date style or null if there is no such date style
+	 * @param styleFamilyValue  the <code>String</code> value of <code>StyleFamilyAttribute</code>, see {@odf.attribute  style:family} at specification
+	 * @param styleNameValue  the <code>String</code> value of <code>StyleNameAttribute</code>, see {@odf.attribute  style:name} at specification
+	 * @return the element {@odf.element style:style}
 	 */
-	public OdfNumberDateStyle getDateStyle(String name) {
-		return mStylesBaseImpl.getDateStyle(name);
+	 public StyleStyleElement newStyleStyleElement(String styleFamilyValue, String styleNameValue) {
+		StyleStyleElement styleStyle = ((OdfFileDom) this.ownerDocument).newOdfElement(StyleStyleElement.class);
+		styleStyle.setStyleFamilyAttribute(styleFamilyValue);
+		styleStyle.setStyleNameAttribute(styleNameValue);
+		this.appendChild(styleStyle);
+		return styleStyle;
 	}
 
 	/**
-	 * Returns an iterator for all <code>OdfNumberDateStyle</code> elements.
+	 * Create child element {@odf.element text:list-style}.
 	 *
-	 * @return an iterator for all <code>OdfNumberDateStyle</code> elements
+	 * @param styleNameValue  the <code>String</code> value of <code>StyleNameAttribute</code>, see {@odf.attribute  style:name} at specification
+	 * @return the element {@odf.element text:list-style}
 	 */
-	public Iterable<OdfNumberDateStyle> getDateStyles() {
-		return mStylesBaseImpl.getDateStyles();
-	}
-
-	/**
-	 * Returns the <code>OdfNumberPercentageStyle</code> element with the given name.
-	 *
-	 * @param name is the name of the percentage style
-	 * @return the percentage style null if there is no such percentage style
-	 */
-	public OdfNumberPercentageStyle getPercentageStyle(String name) {
-		return mStylesBaseImpl.getPercentageStyle(name);
-	}
-
-	/**
-	 * Returns an iterator for all <code>OdfNumberPercentageStyle</code> elements.
-	 *
-	 * @return an iterator for all <code>OdfNumberPercentageStyle</code> elements
-	 */
-	public Iterable<OdfNumberPercentageStyle> getPercentageStyles() {
-		return mStylesBaseImpl.getPercentageStyles();
-	}
-
-	/**
-	 * Returns the <code>OdfNumberCurrencyStyle</code> element with the given name.
-	 *
-	 * @param name is the name of the currency style
-	 * @return the currency style null if there is no such currency style
-	 */
-	public OdfNumberCurrencyStyle getCurrencyStyle(String name) {
-		return mStylesBaseImpl.getCurrencyStyle(name);
-	}
-
-	/**
-	 * Returns an iterator for all <code>OdfNumberCurrencyStyle</code> elements.
-	 *
-	 * @return an iterator for all <code>OdfNumberCurrencyStyle</code> elements
-	 */
-	public Iterable<OdfNumberCurrencyStyle> getCurrencyStyles() {
-		return mStylesBaseImpl.getCurrencyStyles();
-	}
-
-	/**
-	 * Returns the <code>OdfNumberTimeStyle</code> element with the given name.
-	 *
-	 * @param name is the name of the time style
-	 * @return the time style null if there is no such time style
-	 */
-	public OdfNumberTimeStyle getTimeStyle(String name) {
-		return mStylesBaseImpl.getTimeStyle(name);
-	}
-
-	/**
-	 * Returns an iterator for all <code>OdfNumberTimeStyle</code> elements.
-	 *
-	 * @return an iterator for all <code>OdfNumberTimeStyle</code> elements
-	 */
-	public Iterable<OdfNumberTimeStyle> getTimeStyles() {
-		return mStylesBaseImpl.getTimeStyles();
-	}
-
-	/**
-	 * Returns the <code>NumberBooleanStyleElement</code> element with the given name.
-	 *
-	 * @param name is the name of the boolean style
-	 * @return the boolean style null if there is no such boolean style
-	 */
-	public NumberBooleanStyleElement getBooleanStyle(String name) {
-		return mStylesBaseImpl.getBooleanStyle(name);
-	}
-
-	/**
-	 * Returns an iterator for all <code>OdfNumberBooleanStyle</code> elements.
-	 *
-	 * @return an iterator for all <code>OdfNumberBooleanStyle</code> elements
-	 */
-	public Iterable<NumberBooleanStyleElement> getBooleanStyles() {
-		return mStylesBaseImpl.getBooleanStyles();
-	}
-
-	/**
-	 * Returns the <code>NumberTextStyleElement</code> element with the given name.
-	 *
-	 * @param name is the name of the text style
-	 * @return the text style null if there is no such text style
-	 */
-	public NumberTextStyleElement getTextStyle(String name) {
-		return mStylesBaseImpl.getTextStyle(name);
-	}
-
-	/**
-	 * Returns an iterator for all <code>NumberTextStyleElement</code> elements.
-	 *
-	 * @return an iterator for all <code>NumberTextStyleElement</code> elements
-	 */
-	public Iterable<NumberTextStyleElement> getTextStyles() {
-		return mStylesBaseImpl.getTextStyles();
+	 public TextListStyleElement newTextListStyleElement(String styleNameValue) {
+		TextListStyleElement textListStyle = ((OdfFileDom) this.ownerDocument).newOdfElement(TextListStyleElement.class);
+		textListStyle.setStyleNameAttribute(styleNameValue);
+		this.appendChild(textListStyle);
+		return textListStyle;
 	}
 
 	@Override
-	protected void onOdfNodeInserted(OdfElement node, Node refNode) {
-		if (node instanceof OdfStylePageLayout) {
-			OdfStylePageLayout pageLayout = (OdfStylePageLayout) node;
-			if (mPageLayouts == null) {
-				mPageLayouts = new HashMap<String, OdfStylePageLayout>();
-			}
-
-			mPageLayouts.put(pageLayout.getStyleNameAttribute(), pageLayout);
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
 		} else {
-			mStylesBaseImpl.onOdfNodeInserted(node, refNode);
+			visitor.visit(this);
 		}
-	}
-
-	@Override
-	protected void onOdfNodeRemoved(OdfElement node) {
-		if (node instanceof OdfStylePageLayout) {
-			if (mPageLayouts != null) {
-				OdfStylePageLayout pageLayout = (OdfStylePageLayout) node;
-				mPageLayouts.remove(pageLayout.getStyleNameAttribute());
-			}
-		} else {
-			mStylesBaseImpl.onOdfNodeRemoved(node);
-		}
-	}
-
-	/**
-	 * This methods removes all automatic styles that are currently not used by
-	 * any styleable element. Additionally all duplicate automatic styles will
-	 * be removed.
-	 */
-	public void optimize() {
-		Iterator<OdfStyle> iter = mStylesBaseImpl.getAllOdfStyles().iterator();
-		SortedSet<OdfStyle> stylesSet = new TreeSet<OdfStyle>();
-		while (iter.hasNext()) {
-			OdfStyle cur = iter.next();
-
-			// skip styles which are not in use:
-			if (cur.getStyleUserCount() < 1) {
-				continue;
-			}
-
-			SortedSet<OdfStyle> tail = stylesSet.tailSet(cur);
-			OdfStyle found = tail.size() > 0 ? tail.first() : null;
-			if (found != null && found.equals(cur)) {
-				// cur already in set. Replace all usages of cur by found:
-				Iterator<OdfStylableElement> styleUsersIter = cur.getStyleUsers().iterator();
-				ArrayList<OdfStylableElement> styleUsers = new ArrayList<OdfStylableElement>();
-				while (styleUsersIter.hasNext()) {
-					styleUsers.add(styleUsersIter.next());
-				}
-				styleUsersIter = styleUsers.iterator();
-				while (styleUsersIter.hasNext()) {
-					OdfStylableElement elem = styleUsersIter.next();
-					OdfStyle autoStyle = elem.getAutomaticStyle();
-					if (autoStyle != null) {
-						elem.setStyleName(found.getStyleNameAttribute());
-					}
-				}
-			} else {
-				stylesSet.add(cur);
-			}
-		}
-
-		OdfStyle style = OdfElement.findFirstChildNode(OdfStyle.class, this);
-		while (style != null) {
-			OdfStyle nextStyle = OdfElement.findNextChildNode(OdfStyle.class, style);
-			if (style.getStyleUserCount() < 1) {
-				this.removeChild(style);
-			}
-
-			style = nextStyle;
-		}
-	}
-
-	/**
-	 * This method makes the style unique
-	 *
-	 * @param referenceStyle The reference <code>OdfStyle</code> element
-	 * @return an <code>OdfStyle</code> element
-	 */
-	public OdfStyle makeStyleUnique(OdfStyle referenceStyle) {
-		OdfStyle newStyle = null;
-
-		if (referenceStyle.getOwnerDocument() != this.getOwnerDocument()) {
-			// import style from a different dom
-			newStyle = (OdfStyle) this.getOwnerDocument().importNode(referenceStyle, true);
-		} else {
-			// just clone
-			newStyle = (OdfStyle) referenceStyle.cloneNode(true);
-		}
-
-		newStyle.setStyleNameAttribute(newUniqueStyleName(newStyle.getFamily()));
-		appendChild(newStyle);
-
-		return newStyle;
-	}
-
-	private String newUniqueStyleName(OdfStyleFamily styleFamily) {
-		String unique_name;
-
-		if (styleFamily.equals(OdfStyleFamily.List)) {
-			do {
-				unique_name = String.format("l%06x", (int) (Math.random() * 0xffffff));
-			} while (getListStyle(unique_name) != null);
-		} else {
-			do {
-				unique_name = String.format("a%06x", (int) (Math.random() * 0xffffff));
-			} while (getStyle(unique_name, styleFamily) != null);
-		}
-		return unique_name;
 	}
 }

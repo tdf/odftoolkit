@@ -49,10 +49,10 @@ public class LoadSaveTest {
 	@Test
 	public void testLoadSave() {
 		try {
-			OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE));
+			OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SOURCE));
 			Assert.assertTrue(odfDocument.getPackage().contains("content.xml"));
 			String baseURI1 = odfDocument.getBaseURI();
-			String baseURI2 = ResourceUtilities.getURI(SOURCE).toString();
+			String baseURI2 = ResourceUtilities.getTestInputURI(SOURCE).toString();
 //			Assert.assertTrue(baseURI2.compareToIgnoreCase(baseURI1) == 0);
 			System.out.println("SOURCE URI1:"+baseURI1);
 			System.out.println("SOURCE URI2:"+baseURI2);
@@ -68,8 +68,8 @@ public class LoadSaveTest {
 			String oldText = "Changed!!!";
 			node.setTextContent(oldText);
 
-			odfDocument.save(ResourceUtilities.newTestOutputFile(TARGET));
-			odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TARGET));
+			odfDocument.save(ResourceUtilities.getTestOutputFile(TARGET));
+			odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(TARGET));
 
 			odfContent = odfDocument.getContentDom();
 			// ToDo: Will be used for issue 60: Load & Save of previous ODF versions (ie. ODF 1.0, ODF 1.1)

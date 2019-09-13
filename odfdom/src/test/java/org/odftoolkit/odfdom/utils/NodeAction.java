@@ -23,6 +23,8 @@ package org.odftoolkit.odfdom.utils;
 
 import org.w3c.dom.Node;
 
+/** Recursive function traversing nodes of the XML tree depth first.
+ Providing <code>apply</code> function for the user to apply actions on every node with knowledge of depths.*/
 public abstract class NodeAction<T> {
     protected abstract void apply(Node node, T arg, int depth) throws Exception;
     private int depth = 0;

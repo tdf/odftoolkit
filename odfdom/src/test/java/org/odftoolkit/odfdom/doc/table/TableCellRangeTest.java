@@ -23,7 +23,7 @@ package org.odftoolkit.odfdom.doc.table;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,8 +46,8 @@ public class TableCellRangeTest {
 	@Before
 	public void setUp() {
 		try {
-			odsdoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath(filename + ".ods"));
-			odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(odtfilename + ".odt"));
+			odsdoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(filename + ".ods"));
+			odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(odtfilename + ".odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -65,7 +65,7 @@ public class TableCellRangeTest {
 		Assert.assertEquals(cell.getDisplayText(), "cell1cell2");
 		saveodt("MergeTwoCell");
 		try {
-			OdfTextDocument saveddoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(odtfilename + "MergeTwoCell.odt"));
+			OdfTextDocument saveddoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(odtfilename + "MergeTwoCell.odt"));
 			OdfTable savedTable1 = saveddoc.getTableByName("Table1");
 			//get the cell range which the first cell is the covered cell.
 			//so the cell range will be enlarged
@@ -77,14 +77,14 @@ public class TableCellRangeTest {
 			OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
 			Assert.assertTrue(paraList.item(2) instanceof OdfTextParagraph);
 			Assert.assertEquals(textProcessor.getText(paraList.item(2)),"0.00");
-			saveddoc.save(ResourceUtilities.newTestOutputFile(odtfilename + "MergeCoveredCell.odt"));
+			saveddoc.save(ResourceUtilities.getTestOutputFile(odtfilename + "MergeCoveredCell.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
 
 		try {
-			OdfTextDocument saveddoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(odtfilename + "MergeTwoCell.odt"));
+			OdfTextDocument saveddoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(odtfilename + "MergeTwoCell.odt"));
 			OdfTable savedTable1 = saveddoc.getTableByName("Table1");
 			//get the cell range which the first cell is the covered cell.
 			//so the cell range will be enlarged
@@ -94,7 +94,7 @@ public class TableCellRangeTest {
 			Assert.assertTrue(savedCellRange.getRowNumber() == 2);
 			OdfTableCell savedCell = savedCellRange.getCellByPosition(0, 1);
 			Assert.assertTrue(savedCell.getOdfElement() instanceof TableCoveredTableCellElement);
-			saveddoc.save(ResourceUtilities.newTestOutputFile(odtfilename + "MergeCoveredCell2.odt"));
+			saveddoc.save(ResourceUtilities.getTestOutputFile(odtfilename + "MergeCoveredCell2.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -125,14 +125,14 @@ public class TableCellRangeTest {
 		Assert.assertTrue(cell.getOwnerTableCell().equals(firstCell));
 		saveodt("MergeFirstColumn");
 		try {
-			OdfTextDocument saveddoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(odtfilename + "MergeFirstColumn.odt"));
+			OdfTextDocument saveddoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(odtfilename + "MergeFirstColumn.odt"));
 			OdfTable savedTable = saveddoc.getTableByName("Table1");
 			OdfTableCellRange firstTwoColumn = savedTable.getCellRangeByPosition(0, 0, 1, savedTable.getRowCount() - 1);
 			firstTwoColumn.merge();
 			OdfTableCell cell1 = firstTwoColumn.getCellByPosition(0, 2);
 			OdfTableCell firstCell1 = firstTwoColumn.getCellByPosition(0, 0);
 			Assert.assertTrue(cell1.getOwnerTableCell().equals(firstCell1));
-			saveddoc.save(ResourceUtilities.newTestOutputFile(odtfilename + "MergeFirstTwoColumn.odt"));
+			saveddoc.save(ResourceUtilities.getTestOutputFile(odtfilename + "MergeFirstTwoColumn.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -163,7 +163,7 @@ public class TableCellRangeTest {
 
 		saveods("CellRangeName");
 		try {
-			OdfSpreadsheetDocument saveddos = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath(filename + "CellRangeName.ods"));
+			OdfSpreadsheetDocument saveddos = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(filename + "CellRangeName.ods"));
 			OdfTable savedSheet = saveddos.getTableByName("Sheet1");
 			OdfTableCellRange namedCellRange = savedSheet.getCellRangeByName("TimeCellRange");
 			OdfTableCell cell = namedCellRange.getCellByPosition("A1");
@@ -196,7 +196,7 @@ public class TableCellRangeTest {
 			OdfTableCell cell2 = table2.getCellByPosition("A1");
 			cell2.setStringValue("Merge A1:F3");
 			cellRange2.merge();
-			ods.save(ResourceUtilities.newTestOutputFile(filename + "MergeExpandCell.ods"));
+			ods.save(ResourceUtilities.getTestOutputFile(filename + "MergeExpandCell.ods"));
 			table = ods.getTableByName("Sheet1");
 			Assert.assertTrue(table.getColumnCount() == 5);
 			Assert.assertTrue(table.getRowCount() == 1);
@@ -209,7 +209,7 @@ public class TableCellRangeTest {
 			OdfTableCell swCell = swTable.getCellByPosition("E2");
 			swCell.setStringValue("Merge A1:E2");
 			swCellRange.merge();
-			odt.save(ResourceUtilities.newTestOutputFile(odtfilename + "MergeTextExpandCell.odt"));
+			odt.save(ResourceUtilities.getTestOutputFile(odtfilename + "MergeTextExpandCell.odt"));
 			swTable = odt.getTableList().get(0);
 			Assert.assertTrue(swTable.getColumnCount() == 1);
 			Assert.assertTrue(swTable.getRowCount() == 1);
@@ -222,7 +222,7 @@ public class TableCellRangeTest {
 
 	private void saveods(String name) {
 		try {
-			odsdoc.save(ResourceUtilities.newTestOutputFile(filename + name + ".ods"));
+			odsdoc.save(ResourceUtilities.getTestOutputFile(filename + name + ".ods"));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -231,7 +231,7 @@ public class TableCellRangeTest {
 
 	private void saveodt(String name) {
 		try {
-			odtdoc.save(ResourceUtilities.newTestOutputFile(odtfilename + name + ".odt"));
+			odtdoc.save(ResourceUtilities.getTestOutputFile(odtfilename + name + ".odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");

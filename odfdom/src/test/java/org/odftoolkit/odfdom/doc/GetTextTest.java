@@ -36,7 +36,7 @@ public class GetTextTest {
 	public void testToString() {
 
 		try {
-			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("text-extract.odt"));
+			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("text-extract.odt"));
 			OdfEditableTextExtractor extractor = OdfEditableTextExtractor.newOdfEditableTextExtractor(doc);
 			String output = extractor.getText();
 			LOG.info(output);

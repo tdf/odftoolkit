@@ -51,7 +51,7 @@ public class UnknownPropertiesTest {
     public void unknownPropertiesTest() {
         try {
             for (int i = 0; i < 2; ++i) {
-                OdfDocument odfDocument = i == 0 ? OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE)) : OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TARGET));
+                OdfDocument odfDocument = i == 0 ? OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SOURCE)) : OdfDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(TARGET));
 
                 Document odfContent = odfDocument.getContentDom();
                 NodeList lst = odfContent.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "p");
@@ -70,7 +70,7 @@ public class UnknownPropertiesTest {
                 Assert.assertEquals(tabstop.getStylePositionAttribute().toString(), "7.643cm");
 
                 if (i == 0) {
-                    odfDocument.save(ResourceUtilities.newTestOutputFile(TARGET));
+                    odfDocument.save(ResourceUtilities.getTestOutputFile(TARGET));
                 }
             }
         } catch (Exception e) {

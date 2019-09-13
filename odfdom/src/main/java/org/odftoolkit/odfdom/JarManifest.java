@@ -1,4 +1,4 @@
-/************************************************************************
+/** **********************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
@@ -18,27 +18,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- ************************************************************************/
+ *********************************************************************** */
 package org.odftoolkit.odfdom;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.odftoolkit.odfdom.changes.JsonOperationNormalizer;
+import org.odftoolkit.odfdom.changes.CollabTextDocument;
 
 /**
  * Provides metadata about the ODFDOM library as build date, version number. Its
  * main() method is the start method of the library, enabling the access of
- * versioning methods from command line: "java -jar odfdom.jar".
+ * versioning methods from command line: "java -jar
+ * odfdom-java-<VERSION_INFO>-jar-with-dependencies.jar".
  */
 public class JarManifest {
 
     private static final String CURRENT_CLASS_RESOURCE_PATH = "org/odftoolkit/odfdom/JarManifest.class";
-    private static final String MANIFEST_JAR_PATH = "META-INF/MANIFEST.MF";
+    private static final String INNER_JAR_MANIFEST_PATH = "META-INF/MANIFEST.MF";
     private static String ODFDOM_NAME;
     private static String ODFDOM_VERSION;
     private static String ODFDOM_WEBSITE;
@@ -59,9 +67,13 @@ public class JarManifest {
         }
     }
 
+    /**
+     * The problem is that in the test environment the class is NOT within the
+     * JAR, but in a class diretory where no MANIFEST.MF exists..
+     */
     private static InputStream getManifestAsStream() {
         String versionRef = JarManifest.class.getClassLoader().getResource(CURRENT_CLASS_RESOURCE_PATH).toString();
-        String manifestRef = versionRef.substring(0, versionRef.lastIndexOf(CURRENT_CLASS_RESOURCE_PATH)) + MANIFEST_JAR_PATH;
+        String manifestRef = versionRef.substring(0, versionRef.lastIndexOf(CURRENT_CLASS_RESOURCE_PATH)) + INNER_JAR_MANIFEST_PATH;
         URL manifestURL = null;
         InputStream in = null;
         try {
@@ -80,22 +92,44 @@ public class JarManifest {
     private JarManifest() {
     }
 
-	/**
-	 * The main method is meant to be called when the JAR is being executed,
-	 * e.g. "java -jar odfdom.jar" and provides versioning information:
-	 *
-	 *	odfdom 0.9-SNAPSHOT (build 20100701-1729)
-	 *	from http://odftoolkit.org supporting ODF 1.2
-	 *
-	 * Allowing version access from the JAR without the need to unzip the JAR nor naming the JAR
-	 * (requiring the change of classpath for every version due to JAR naming change).
-	 */
-    public static void main(String[] args) throws IOException {
-        System.out.println(getOdfdomTitle() + " (build " + getOdfdomBuildDate() + ')' + "\nfrom " + getOdfdomWebsite() + " supporting ODF " + getOdfdomSupportedOdfVersion());
+    /**
+     * The main method is meant to be called when the JAR is being executed,
+     * e.g."java -jar odfdom-java-1.0.0-SNAPSHOT-jar-with-dependencies.jar" and
+ provides versioning information:
+
+ odfdom 1.0.0-SNAPSHOT (build 2019-07-11T12:38:27) from
+ https://odftoolkit.org/odfdom/ supporting ODF 1.2
+
+ Allowing version access from the JAR without the need to unzip the JAR
+ nor naming the JAR (requiring the change of classpath for every version
+ due to JAR naming change).
+     * @param args a relative path to the ODT that should be transformed to JSON changes
+     */
+    public static void main(String[] args) throws IOException, Exception {
+        if (args == null || args.length == 0) {
+            System.out.println(getOdfdomTitle() + " (build " + getOdfdomBuildDate() + ')' + "\nfrom " + getOdfdomWebsite() + " supporting ODF " + getOdfdomSupportedOdfVersion());
+        } else {
+            if (args[0].endsWith(".odt")) {
+                // support of absolute file paths
+                try (CollabTextDocument doc1 = new CollabTextDocument(Files.newInputStream(Paths.get(args[0])))) {
+                    System.out.println(JsonOperationNormalizer.asString(doc1.getDocumentAsChanges()).replace(",{\"name\"", ",\n{\"name\""));
+                } catch (FileNotFoundException e) {
+                    // support of relative file paths adding the current user directory ahead
+                    try (CollabTextDocument doc2 = new CollabTextDocument(Files.newInputStream(Paths.get(System.getProperty("user.dir") + File.separator + args[0])))) {
+                        System.out.println(JsonOperationNormalizer.asString(doc2.getDocumentAsChanges()).replace(",{\"name\"", ",\n{\"name\""));
+                    }
+                }
+            } else {
+                System.out.println("NOTE:\n"
+                        + "The first argument have to be the relative path to an OpenDocument Text document and therefore have to end with '.odt'!\n"
+                        + "The ODT will be transformed to equivalent user changes (in JSON) to standard output");
+            }
+        }
     }
 
     /**
      * Return the name of ODFDOM;
+     *
      * @return the ODFDOM library name
      */
     public static String getOdfdomName() {
@@ -105,7 +139,8 @@ public class JarManifest {
     /**
      * Returns the ODFDOM library title
      *
-     * @return A string containing both the name and the version of the ODFDOM library.
+     * @return A string containing both the name and the version of the ODFDOM
+     * library.
      */
     public static String getOdfdomTitle() {
         return getOdfdomName() + ' ' + getOdfdomVersion();
@@ -113,6 +148,7 @@ public class JarManifest {
 
     /**
      * Return the version of the ODFDOM library (ie. odfdom.jar)
+     *
      * @return the ODFDOM library version
      */
     public static String getOdfdomVersion() {
@@ -121,6 +157,7 @@ public class JarManifest {
 
     /**
      * Return the website of the ODFDOM library (ie. odfdom.jar)
+     *
      * @return the ODFDOM library website
      */
     public static String getOdfdomWebsite() {
@@ -129,6 +166,7 @@ public class JarManifest {
 
     /**
      * Return the date when ODFDOM had been build
+     *
      * @return the date of the build formated as "yyyy-MM-dd'T'HH:mm:ss".
      */
     public static String getOdfdomBuildDate() {
@@ -136,7 +174,9 @@ public class JarManifest {
     }
 
     /**
-     * Returns the version of the OpenDocument specification covered by the ODFDOM library (ie. odfdom.jar)
+     * Returns the version of the OpenDocument specification covered by the
+     * ODFDOM library (ie. odfdom.jar)
+     *
      * @return the supported ODF version number
      */
     public static String getOdfdomSupportedOdfVersion() {

@@ -1,0 +1,4 @@
+{"changes":[
+{"name":"delete","start":[2,18],"end":[2,18]},
+{"name":"addField","start":[2,18],"attrs":{"character":{"bold":null,"color":null,"fillColor":null,"fontName":null,"fontSize":null,"italic":null,"language":null,"strike":null,"style":null,"underline":null,"url":null,"vertAlign":null}},"representation":"14:58:45"}
+]}

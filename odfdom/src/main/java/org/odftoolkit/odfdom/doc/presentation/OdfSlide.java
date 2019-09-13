@@ -33,7 +33,6 @@ import org.w3c.dom.NodeList;
  * <code>OdfSlide</code> represents the presentation slide feature of the ODF document.
  * <code>OdfSlide</code> provides methods to get the slide index,get the content of the current slide, etc.
  *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.presentation.Slide} in Simple API.
  */
 public class OdfSlide {
 

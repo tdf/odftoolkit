@@ -44,7 +44,7 @@ public class MONPTest {
 	public void testReplaceWith() {
 
 		try {
-			OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_FILE));
+			OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEXT_FILE));
 
 			TextNavigation search = new TextNavigation("mnop", doc);
 
@@ -60,7 +60,7 @@ public class MONPTest {
 				}
 			}
 			Assert.assertTrue(18 == i);
-			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE));
+			doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE));
 		} catch (Exception e) {
 			Logger.getLogger(MONPTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");

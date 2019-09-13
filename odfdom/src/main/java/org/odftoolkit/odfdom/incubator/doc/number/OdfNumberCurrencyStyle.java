@@ -21,17 +21,22 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.incubator.doc.number;
 
+import java.util.Currency;
+import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.changes.MapHelper;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.element.number.DataStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberCurrencyStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberCurrencySymbolElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberNumberElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberTextElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -52,16 +57,39 @@ public class OdfNumberCurrencyStyle extends NumberCurrencyStyleElement {
 		buildFromFormat(currencySymbol, format);
 	}
 
+    /**
+     *
+     * @param ownerDoc parent file
+     * @param format format string
+     * @param styleName new style name
+     */
+	public OdfNumberCurrencyStyle(OdfFileDom ownerDoc, String format, String styleName) {
+        super(ownerDoc);
+        this.setStyleNameAttribute(styleName);
+        setFormat(format);
+    }
+
 	/**
 	 * Get the format string that represents this style.
 	 * @return the format string
 	 */
-	public String getFormat() {
+	@Override
+    public String getFormat(boolean caps) {
 		String result = "";
+		String mappedResult = "";
 		Node m = getFirstChild();
 		while (m != null) {
 			if (m instanceof NumberCurrencySymbolElement) {
+			    result += "[$";
 				result += m.getTextContent();
+				String language = ((NumberCurrencySymbolElement) m).getAttributeNS(OdfDocumentNamespace.NUMBER.getUri(), "language");
+                String country = ((NumberCurrencySymbolElement) m).getAttributeNS(OdfDocumentNamespace.NUMBER.getUri(), "country");
+                if( !language.isEmpty() ) {
+                    result += "-";
+                    //convert local to ms language id
+                    result += MapHelper.getMSLangCode(language, country);
+                }
+                result += "]";
 			} else if (m instanceof NumberNumberElement) {
 				result += getNumberFormat();
 			} else if (m instanceof NumberTextElement) {
@@ -70,46 +98,45 @@ public class OdfNumberCurrencyStyle extends NumberCurrencyStyleElement {
 					textcontent = " ";
 				}
 				result += textcontent;
+            } else if (m instanceof StyleTextPropertiesElement) {
+                result += getColorFromElement((StyleTextPropertiesElement)m);
+            } else if(m instanceof StyleMapElement) {
+                mappedResult += getMapping((StyleMapElement)m);
+                mappedResult += ";";
 			}
 			m = m.getNextSibling();
 		}
+        if(!mappedResult.isEmpty()){
+            result = mappedResult + result;
+        }
 		return result;
 	}
 
-	public String getNumberFormat() {
-		String result = "";
-		NumberNumberElement number = OdfElement.findFirstChildNode(NumberNumberElement.class, this);
-		boolean isGroup = number.getNumberGroupingAttribute();
-		int decimalPos = (number.getNumberDecimalPlacesAttribute() == null) ? 0
-				: number.getNumberDecimalPlacesAttribute().intValue();
-		int minInt = (number.getNumberMinIntegerDigitsAttribute() == null) ? 1
-				: number.getNumberMinIntegerDigitsAttribute().intValue();
-
-		int i;
-		for (i = 0; i < minInt; i++) {
-			if (((i + 1) % 3) == 0 && isGroup) {
-				result = ",0" + result;
-			} else {
-				result = "0" + result;
+	public String getCurrencyCode() {
+		Node m = getFirstChild();
+		while (m!=null) {
+			if (m instanceof NumberCurrencySymbolElement) {
+				final String currencyValue = m.getTextContent();
+				if(currencyValue!=null&&currencyValue.equals("DM")) {
+					return "DEM";
+				}
+				final String language =  ((NumberCurrencySymbolElement) m).getAttributeNS(OdfDocumentNamespace.NUMBER.getUri(), "language");
+				final String country = ((NumberCurrencySymbolElement) m).getAttributeNS(OdfDocumentNamespace.NUMBER.getUri(), "country");
+				if(language!=null) {
+					try {
+						final Currency currency = Currency.getInstance(country!=null ? new Locale(language, country) : new Locale(language));
+						if(currency!=null) {
+							return currency.toString();
+						}
+					}
+					catch(IllegalArgumentException e) {
+					}
+				}
+				break;
 			}
+			m = m.getNextSibling();
 		}
-		while (isGroup && (result.indexOf(',') == -1)) {
-			if (((i + 1) % 3) == 0 && isGroup) {
-				result = ",#" + result;
-			} else {
-				result = "#" + result;
-			}
-			i++;
-		}
-
-		result = "#" + result;
-		if (decimalPos > 0) {
-			result += ".";
-			for (i = 0; i < decimalPos; i++) {
-				result += "0";
-			}
-		}
-		return result;
+		return getCurrencySymbolElement().getTextContent();
 	}
 
 	public String getConditionStyleName(double value) {
@@ -158,7 +185,12 @@ public class OdfNumberCurrencyStyle extends NumberCurrencyStyleElement {
 		}
 		return Double.parseDouble(results);
 	}
-
+	@Override
+    public void setFormat(String format) {
+        OdfFileDom dom = (OdfFileDom) this.getOwnerDocument();
+        List<StringToken> tokens = tokenize(format, DataStyleElement.NumberFormatType.FORMAT_CURRENCY);
+        emitTokens(tokens, DataStyleElement.NumberFormatType.FORMAT_CURRENCY);
+    }
 	/**
 	 * Creates a &lt;number:date-style&gt; element based upon format.
 	 * @param currencySymbol the string to be placed as the currency symbol
@@ -231,19 +263,6 @@ public class OdfNumberCurrencyStyle extends NumberCurrencyStyleElement {
 			emitText(text.substring(currencyPos + currencySymbol.length()));
 		} else {
 			emitText(text);
-		}
-	}
-
-	/**
-	 *	Place pending text into a &lt;number:text&gt; element.
-	 * @param textBuffer pending text
-	 */
-	private void emitText(String textBuffer) {
-		NumberTextElement textElement;
-		if (!textBuffer.equals("")) {
-			textElement = new NumberTextElement((OdfFileDom) this.getOwnerDocument());
-			textElement.setTextContent(textBuffer);
-			this.appendChild(textElement);
 		}
 	}
 

@@ -49,7 +49,6 @@ import org.w3c.dom.Node;
  * <p>
  * OdfTableColumn provides methods to get table cells that belong to this table column.
  *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.table.Column} in Simple API.
  */
 public class OdfTableColumn {
 
@@ -462,7 +461,7 @@ public class OdfTableColumn {
 	 */
 	public OdfStyle getDefaultCellStyle() {
 		String styleName = maColumnElement.getTableDefaultCellStyleNameAttribute();
-		OdfStyle style = maColumnElement.getAutomaticStyles().getStyle(
+		OdfStyle style = maColumnElement.getOrCreateAutomaticStyles().getStyle(
 				styleName, OdfStyleFamily.TableCell);
 
 		if (style == null) {

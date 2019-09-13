@@ -74,7 +74,7 @@ public class XPathTest {
 	@Test
 	public void testXPathwithAlienNodes() throws Exception {
 		try {
-			OdfPresentationDocument odpWithSlides = OdfPresentationDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE_FILE_1));
+			OdfPresentationDocument odpWithSlides = OdfPresentationDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SOURCE_FILE_1));
 			OdfFileDom contentDom = odpWithSlides.getContentDom();
 
 			XPath xpath = contentDom.getXPath();
@@ -111,7 +111,7 @@ public class XPathTest {
 			Assert.assertFalse(prefixes.hasNext());
 
 			Node rootNode = contentDom.getRootElement();
-			odpWithSlides.save(ResourceUtilities.newTestOutputFile("XPathTest-ForeignPrefix-output.odp"));
+			odpWithSlides.save(ResourceUtilities.getTestOutputFile("XPathTest-ForeignPrefix-output.odp"));
 
 			if (rootNode instanceof OdfAlienElement) {
 				Assert.fail("The none OOO default prefix for office: was not exchanged!");
@@ -151,14 +151,14 @@ public class XPathTest {
 	@Test
 	public void testCopyForeignSlide() {
 		try {
-			OdfPresentationDocument targetodp = OdfPresentationDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE_FILE_1));
-			OdfPresentationDocument sourceodp = OdfPresentationDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE_FILE_2));
+			OdfPresentationDocument targetodp = OdfPresentationDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SOURCE_FILE_1));
+			OdfPresentationDocument sourceodp = OdfPresentationDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SOURCE_FILE_2));
 
 			int slidecount = sourceodp.getSlideCount();
 			for (int i = 0; i < slidecount; i++) {
 				targetodp.copyForeignSlide(i, sourceodp, i);
 			}
-			targetodp.save(ResourceUtilities.newTestOutputFile("XPathTest-ForeignPrefix2-output.odp"));
+			targetodp.save(ResourceUtilities.getTestOutputFile("XPathTest-ForeignPrefix2-output.odp"));
 			targetodp.close();
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
@@ -173,7 +173,7 @@ public class XPathTest {
 	@Test
 	public void testXPathIsMissingXLinkButItWillPassBecauseItTheSecondTestInThisUnitTest() throws Exception {
 		try {
-			OdfPresentationDocument odpWithSlides = OdfPresentationDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE_FILE_1));
+			OdfPresentationDocument odpWithSlides = OdfPresentationDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SOURCE_FILE_1));
 			OdfFileDom contentDom = odpWithSlides.getContentDom();
 			XPath xpath = contentDom.getXPath();
 
@@ -212,7 +212,7 @@ public class XPathTest {
         public void testXPathDuplicatePrefixForForeignNamespace() throws Exception{
            try {
 
-            OdfDocument odfDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE_FILE_3));
+            OdfDocument odfDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SOURCE_FILE_3));
             OdfFileDom fileDom = odfDoc.getFileDom("meta/meta.rdf");
 
             // add additional duplicate NS prefixes to the DOM

@@ -23,11 +23,7 @@ package org.odftoolkit.odfdom.pkg;
 
 import org.xml.sax.SAXParseException;
 
-/**
- * This ODF specific validation exception facilities the usage of a
- * SAXParseException for none XML validation, used by an
- * <code>ErrorHandler</code>.
- */
+/** This ODF specific validation excpetion faciliates the usage of a SAXParseException for none XML validation, used by an  <code>ErrorHandler</code>. */
 public class OdfValidationException extends SAXParseException {
 
 	private ValidationConstraint mConstraint;
@@ -36,15 +32,10 @@ public class OdfValidationException extends SAXParseException {
 	private static final String SOURCE_SUFFIX = "'";
 
 	/**
-	 * An OdfValidationException should be used for any validation result
-	 * related to an ODF package. This constructor should only be used for
-	 * SaxParseExceptions unrelated to XML. This constructor sets the public and
-	 * system ID for XML and line and column number of the super class will be
-	 * set to be invalid.
-	 *
-	 * @param constraint
-	 *            the predefined constant message
-	 */
+	 * An OdfValidationException should be used for any validation result related to an ODF package.
+	 * This constructor should only be used for SaxParseExceptions unrelated to XML.
+	 * This constructor sets the public and system ID for XML and line and column number of the super class will be set to be invalid.
+	@param constraint the predefined constaint message */
 	public OdfValidationException(ValidationConstraint constraint) {
 		// The constraint convention is the first parameter to be the sourcePath of the ODF document/package causing the exception
 		super(String.format(constraint.getMessage(), NO_SOURCE), null, null, -1, -1);
@@ -52,21 +43,12 @@ public class OdfValidationException extends SAXParseException {
 	}
 
 	/**
-	 * An OdfValidationException should be used for any validation result
-	 * related to an ODF package. This constructor should only be used for
-	 * SaxParseExceptions unrelated to XML. This constructor sets the public and
-	 * system ID for XML and line and column number of the super class will be
-	 * set to be invalid.
-	 *
-	 * @param constraint
-	 *            the predefined constaint message
-	 * @param sourcePath
-	 *            the source path of the exception. For instance, it might be an
-	 *            ODF package or ODF document.
-	 * @param messageParameters
-	 *            allow the customization of a constraint message with
-	 *            parameters.
-	 */
+	 * An OdfValidationException should be used for any validation result related to an ODF package.
+	 * This constructor should only be used for SaxParseExceptions unrelated to XML.
+	 * This constructor sets the public and system ID for XML and line and column number of the super class will be set to be invalid.
+	@param constraint the predefined constaint message
+	@param sourcePath the source path of the exception. For instance, it might be an ODF package or ODF document.
+	@param messageParameters allow the customization of a constraint message with parameters.*/
 	public OdfValidationException(ValidationConstraint constraint, String sourcePath, Object... messageParameters) {
 		// The constraint convention is the first parameter to be the sourcePath of the ODF document/package causing the exception
 		super(formatMessage(constraint, sourcePath, messageParameters), null, null, -1, -1);
@@ -74,23 +56,13 @@ public class OdfValidationException extends SAXParseException {
 	}
 
 	/**
-	 * An OdfValidationException should be used for any validation result
-	 * related to an ODF package. This constructor should only be used for
-	 * SaxParseExceptions unrelated to XML. This constructor sets the public and
-	 * system ID for XML and line and column number of the super class will be
-	 * set to be invalid.
-	 *
-	 * @param e
-	 *            root exception to be embedded
-	 * @param constraint
-	 *            the predefined constant message
-	 * @param sourcePath
-	 *            the source path of the exception. For instance, it might be an
-	 *            ODF package or ODF document.
-	 * @param messageParameters
-	 *            allow the customization of a constraint message with
-	 *            parameters.
-	 */
+	 * An OdfValidationException should be used for any validation result related to an ODF package.
+	 * This constructor should only be used for SaxParseExceptions unrelated to XML.
+	 * This constructor sets the public and system ID for XML and line and column number of the super class will be set to be invalid.
+	 * @param e root exception to be embeddded
+	 * @param constraint the predefined constaint message
+	 * @param sourcePath the source path of the exception. For instance, it might be an ODF package or ODF document.
+	 * @param messageParameters allow the customization of a constraint message with parameters.*/
 	public OdfValidationException(ValidationConstraint constraint, String sourcePath, Exception e, Object... messageParameters) {
 		// The constraint convention is the first parameter to be the sourcePath of the ODF document/package causing the exception
 		super(formatMessage(constraint, sourcePath, messageParameters), null, null, -1, -1, e);

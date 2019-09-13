@@ -43,7 +43,7 @@ public class ListTest {
     @Test
     public void testList() {
         try {
-            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("list.odt"));
+            OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("list.odt"));
             OdfFileDom odfContent = odfdoc.getContentDom();
             NodeList lst = odfContent.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "list");
             for (int i = 0; i < lst.getLength(); i++) {

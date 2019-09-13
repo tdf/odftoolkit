@@ -34,6 +34,7 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.grddl.GrddlTransformationAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:document-content}.
@@ -116,8 +117,8 @@ public class OfficeDocumentContentElement extends OdfElement {
 	 *
 	 * @return the element {@odf.element office:automatic-styles}
 	 */
-	public OfficeAutomaticStylesElement newOfficeAutomaticStylesElement() {
-		OfficeAutomaticStylesElement officeAutomaticStyles = ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeAutomaticStylesElement.class);
+	public OdfOfficeAutomaticStyles newOfficeAutomaticStylesElement() {
+		OdfOfficeAutomaticStyles officeAutomaticStyles = ((OdfFileDom) this.ownerDocument).newOdfElement(OdfOfficeAutomaticStyles.class);
 		this.appendChild(officeAutomaticStyles);
 		return officeAutomaticStyles;
 	}

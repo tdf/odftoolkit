@@ -36,7 +36,7 @@ import net.rootdev.javardfa.Setting;
 import org.apache.commons.validator.routines.UrlValidator;
 
 /**
- * URIExtractorImpl modified from net.rootdev.javardfa.uri.URIExtractor10
+ * URIExtractorImpl modified from net.rootdev.javardfa.uri.URIExtractor
  */
 class URIExtractorImpl implements URIExtractor {
 	private Set<Setting> settings;
@@ -150,6 +150,7 @@ class URIExtractorImpl implements URIExtractor {
 		return namespaceURI + value.substring(offset);
 	}
 
+    @Override
 	public String expandSafeCURIE(StartElement element, String value,
 			EvalContext context) {
 		if (value.startsWith("[") && value.endsWith("]")) {
@@ -164,7 +165,10 @@ class URIExtractorImpl implements URIExtractor {
 				return value;
 			}
 
-			return resolver.resolve(context.getBase(), value);
+			// earlier "return resolver.resolve(context.getBase(), value);"
+            // now has JENA problem with '/' slash as base URL
+            // </> Code: 57/REQUIRED_COMPONENT_MISSING in SCHEME: A component that is required by the scheme is missing.
+            return value;
 		}
 	}
 

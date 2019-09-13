@@ -36,14 +36,14 @@ public class TextTemplateTest {
 
 	@Test
 	public void testLoadingATextTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_TEXT_TEMPLATE));
+		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getTestInputAsStream(TEST_TEXT_TEMPLATE));
 		Assert.assertEquals(OdfDocument.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
 				document.getMediaTypeString());
 	}
 
 	@Test
 	public void testSavingATextTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_TEXT_TEMPLATE));
+		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getTestInputAsStream(TEST_TEXT_TEMPLATE));
 		File destination = File.createTempFile("odfdom-test", ".ott", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 

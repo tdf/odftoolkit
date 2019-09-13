@@ -22,11 +22,17 @@
 package schema2template.model;
 
 import com.sun.msv.grammar.Expression;
+import com.sun.msv.reader.trex.ng.RELAXNGReader;
+import com.sun.msv.reader.xmlschema.XMLSchemaReader;
+import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.SortedSet;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
+import javax.xml.parsers.SAXParserFactory;
 
 /**
  * The most important model, the first access to the XML Schema information.
@@ -41,14 +47,20 @@ public class XMLModel {
     PuzzlePieceSet mAttributes = new PuzzlePieceSet();
     Map<String, PuzzlePiece> mNameElementMap;
     Map<String, PuzzlePiece> mNameAttributeMap;
+    public Expression mRootExpression;
+    public String mLastSchemaFileName;
 
     /**
      * Constructs new model by the MSV root expression
      *
      * @param root MSV root Expression
      */
-    public XMLModel(Expression root) {
-        PuzzlePiece.extractPuzzlePieces(root, mElements, mAttributes);
+    public XMLModel(File schemaFile) {
+        mRootExpression = loadSchema(schemaFile);
+		String absolutePath = schemaFile.getAbsolutePath();
+        mLastSchemaFileName = absolutePath.substring(absolutePath.lastIndexOf(File.separatorChar) + 1, absolutePath.length());
+
+        PuzzlePiece.extractPuzzlePieces(mRootExpression, mElements, mAttributes, mLastSchemaFileName);
         mElements.makeImmutable();
         mAttributes.makeImmutable();
         mNameElementMap = createMap(mElements);
@@ -65,6 +77,53 @@ public class XMLModel {
         }
         return retval;
     }
+
+    /**
+     * Map Name to PuzzlePiece(s).
+     */
+    static Map<String, SortedSet<PuzzlePiece>> createDefinitionMap(Collection<PuzzlePiece> definitions) {
+        Map<String, SortedSet<PuzzlePiece>> retval = new HashMap<String, SortedSet<PuzzlePiece>>();
+        Iterator<PuzzlePiece> iter = definitions.iterator();
+        while (iter.hasNext()) {
+            PuzzlePiece def = iter.next();
+            SortedSet<PuzzlePiece> multiples = retval.get(def.getQName());
+            if (multiples == null) {
+                multiples = new TreeSet<>();
+                retval.put(def.getQName(), multiples);
+            }
+            multiples.add(def);
+        }
+        return retval;
+    }
+
+	/**
+	 * Load and parse a Schema from File.
+	 *
+	 * @param Schema file (RelaxNG or W3C schema)
+	 * @return MSV Expression Tree (more specific: The tree's MSV root
+	 * expression)
+	 * @throws Exception
+	 */
+	public static Expression loadSchema(File rngFile) {
+		SAXParserFactory factory = SAXParserFactory.newInstance();
+		factory.setNamespaceAware(true);
+		// Parsing the Schema with MSV
+        // 4-DEBUG: DebugController ignoreController = new DebugController(true, false);
+		com.sun.msv.reader.util.IgnoreController ignoreController = new com.sun.msv.reader.util.IgnoreController();
+		String absolutePath = rngFile.getAbsolutePath();
+        Expression root = null;
+        if(absolutePath.endsWith(".rng")){
+             root = RELAXNGReader.parse(absolutePath, factory, ignoreController).getTopLevel();
+        }else if(absolutePath.endsWith(".xsd")){
+            root = XMLSchemaReader.parse(absolutePath, factory, ignoreController).getTopLevel();
+        }else{
+            throw new RuntimeException("Reader not chosen for given schema suffix!");
+        }
+		if (root == null) {
+			throw new RuntimeException("Schema could not be parsed.");
+		}
+		return root;
+	}
 
     /**
      * Get all elements, sorted by ns:local name.
@@ -101,7 +160,7 @@ public class XMLModel {
 
     /**
      * Get element by tag name and hash code. The hash code distincts
-     * Elements sharing the same tag name.
+     * elements from sharing the same tag name.
      *
      * @param name
      * @param hashCode

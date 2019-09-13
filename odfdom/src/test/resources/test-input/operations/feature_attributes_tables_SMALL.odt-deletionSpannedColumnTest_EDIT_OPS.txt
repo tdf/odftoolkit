@@ -1,0 +1,4 @@
+{"changes":[
+{"name":"deleteColumns","start":[3],"endGrid":2,"startGrid":2},
+{"name":"format","start":[3],"attrs":{"table":{"tableGrid":[25,25,25]}}}
+]}

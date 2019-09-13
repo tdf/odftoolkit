@@ -45,7 +45,7 @@ public class CreateTableTest {
 	@Test
 	public void testCreateTable1() {
 		try {
-			OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("empty.odt")).getContentDom();
+			OdfFileDom doc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("empty.odt")).getContentDom();
 
 			// find the last paragraph
 			NodeList lst = doc.getElementsByTagNameNS(
@@ -87,7 +87,7 @@ public class CreateTableTest {
 
 			td3.setProperty(StyleTableColumnPropertiesElement.ColumnWidth, "6cm");
 
-			doc.getDocument().save(ResourceUtilities.newTestOutputFile("tabletest.odt"));
+			doc.getDocument().save(ResourceUtilities.getTestOutputFile("tabletest.odt"));
 
 		} catch (Exception e) {
 			Logger.getLogger(CreateTableTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);

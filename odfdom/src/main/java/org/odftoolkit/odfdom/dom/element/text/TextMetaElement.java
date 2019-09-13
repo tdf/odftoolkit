@@ -26,10 +26,13 @@
  */
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlAboutAttribute;
+import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlContentAttribute;
+import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlDatatypeAttribute;
+import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlPropertyAttribute;
+import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCaptionElement;
@@ -53,11 +56,10 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationEndElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationDateTimeElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationFooterElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationHeaderElement;
-import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlAboutAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlContentAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlDatatypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlPropertyAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:meta}.
@@ -2049,6 +2051,15 @@ public class TextMetaElement extends OdfElement {
 		return textWordCount;
 	}
 
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
 	/**
 	 * Add text content. Only elements which are allowed to have text content offer this method.
 	 */
@@ -2064,7 +2075,7 @@ public class TextMetaElement extends OdfElement {
 	public void setTextContent(String content) {
 		super.setTextContent(content);
 		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
-	}
+}
 
 	protected void onRemoveNode() {
 		super.onRemoveNode();

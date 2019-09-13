@@ -21,14 +21,11 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.pkg;
 
-import static org.junit.Assert.fail;
-
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.HashMap;
@@ -38,14 +35,12 @@ import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
-
 import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
-
-import junit.framework.Assert;
-
+import org.junit.Assert;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfPresentationDocument;
@@ -66,7 +61,7 @@ public class PackageTest {
 
 
 	private static final Logger LOG = Logger.getLogger(PackageTest.class.getName());
-	private static final String mImagePath = "src/main/javadoc/doc-files/";
+	private static final String mImagePath = "src/main/javadoc/resources/";
 	private static final String mImageName = "ODFDOM-Layered-Model.png";
 	private static final String mImageMediaType = "image/png";
 	private static final String XSL_CONCAT = "xslt/concatfiles.xsl";
@@ -94,16 +89,16 @@ public class PackageTest {
 		DrawPageElement page = officePresentation.newDrawPageElement(null);
 		DrawFrameElement frame = page.newDrawFrameElement();
 		OdfDrawImage image = (OdfDrawImage) frame.newDrawImageElement();
-		image.newImage(ResourceUtilities.getURI(IMAGE_TEST_FILE));
-		odp.save(ResourceUtilities.newTestOutputFile(IMAGE_PRESENTATION));
+		image.newImage(ResourceUtilities.getTestInputURI(IMAGE_TEST_FILE));
+		odp.save(ResourceUtilities.getTestOutputFile(IMAGE_PRESENTATION));
 
 		// test if the image is not compressed
-		ZipInputStream zinput = new ZipInputStream(ResourceUtilities.getTestResourceAsStream(IMAGE_PRESENTATION));
+		ZipInputStream zinput = new ZipInputStream(ResourceUtilities.getTestOutputAsStream(IMAGE_PRESENTATION));
 		ZipEntry entry = zinput.getNextEntry();
 		while (entry != null) {
 			String entryName = entry.getName();
 			if (entryName.endsWith(".jpg")) {
-				File f = new File(ResourceUtilities.getAbsolutePath(IMAGE_TEST_FILE));
+				File f = new File(ResourceUtilities.getAbsoluteInputPath(IMAGE_TEST_FILE));
 				Assert.assertEquals(ZipEntry.STORED, entry.getMethod());
 				Assert.assertEquals(f.length(), entry.getSize());
 			}
@@ -117,14 +112,14 @@ public class PackageTest {
 
 			// LOAD PACKAGE FORMULA
 			LOG.info("Loading an unsupported ODF Formula document as an ODF Package!");
-			OdfPackage formulaPackage = OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath(ODF_FORMULAR_TEST_FILE));
+			OdfPackage formulaPackage = OdfPackage.loadPackage(ResourceUtilities.getAbsoluteInputPath(ODF_FORMULAR_TEST_FILE));
 			Assert.assertNotNull(formulaPackage);
 
 			// LOAD PACKAGE IMAGE
 			LOG.info("Loading an unsupported image file as an ODF Package!");
 			try {
 				// Exception is expected!
-				OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath(IMAGE_TEST_FILE));
+				OdfPackage.loadPackage(ResourceUtilities.getAbsoluteInputPath(IMAGE_TEST_FILE));
 				Assert.fail();
 			} catch (Exception e) {
 				String errorMsg = OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage();
@@ -138,7 +133,7 @@ public class PackageTest {
 			LOG.info("Loading an unsupported image file as an ODF Package (with error handler)!");
 			try {
 				// Exception is expected by error handler!
-				OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(IMAGE_TEST_FILE)), null, new DefaultHandler());
+				OdfPackage.loadPackage(new File(ResourceUtilities.getAbsoluteInputPath(IMAGE_TEST_FILE)), null, new DefaultHandler());
 				Assert.fail();
 			} catch (SAXException e) {
 				String errorMsg = OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage();
@@ -155,9 +150,10 @@ public class PackageTest {
 
 	@Test
 	public void testPackage() {
-		File tmpFile1 = ResourceUtilities.newTestOutputFile(TARGET_STEP_1);
-		File tmpFile2 = ResourceUtilities.newTestOutputFile(TARGET_STEP_2);
-		File tmpFile3 = ResourceUtilities.newTestOutputFile(TARGET_STEP_3);
+		File tmpFile1 = ResourceUtilities.getTestOutputFile(TARGET_STEP_1);
+		File tmpFile2 = ResourceUtilities.getTestOutputFile(TARGET_STEP_2);
+		File tmpFile3 = ResourceUtilities.getTestOutputFile(TARGET_STEP_3);
+
 		try (OdfDocument doc = OdfSpreadsheetDocument.newSpreadsheetDocument()) {
 			doc.save(tmpFile1);
 		} catch (Exception ex) {
@@ -166,7 +162,8 @@ public class PackageTest {
 		}
 
 		long lengthBefore = tmpFile1.length();
-		try(OdfPackage odfPackage = OdfPackage.loadPackage(tmpFile1)) {
+		try (OdfPackage odfPackage = OdfPackage.loadPackage(tmpFile1)){
+
 			URI imageURI = new URI(mImagePath + mImageName);
 			// testing encoded none ASCII in URL path
 			String pkgRef1 = AnyURI.encodePath("Pictures/a&b.jpg");
@@ -186,6 +183,7 @@ public class PackageTest {
 			odfPackage.remove("Pictures/");
 			odfPackage.save(tmpFile3);
 			long lengthAfter3 = tmpFile3.length();
+
 			// the package without the images should be as long as before
 			Assert.assertTrue("The files \n\t" + tmpFile1.getAbsolutePath() + " and \n\t" + tmpFile3.getAbsolutePath() + " differ!", lengthBefore == lengthAfter3);
 
@@ -228,10 +226,10 @@ public class PackageTest {
 	public void testResolverWithXSLT() {
 		try {
 			OdfXMLHelper helper = new OdfXMLHelper();
-			OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SIMPLE_ODT));
-			InputSource inputSource = new InputSource(ResourceUtilities.getURI(XSL_CONCAT).toString());
+			OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SIMPLE_ODT));
+			InputSource inputSource = new InputSource(ResourceUtilities.getTestInputURI(XSL_CONCAT).toString());
 			Templates multiFileAccessTemplate = TransformerFactory.newInstance().newTemplates(new SAXSource(inputSource));
-			File xslOut = ResourceUtilities.newTestOutputFile(XSL_OUTPUT);
+			File xslOut = ResourceUtilities.getTestOutputFile(XSL_OUTPUT);
 			helper.transform(odt.getPackage(), "content.xml", multiFileAccessTemplate, new StreamResult(xslOut));
 			LOG.info("Transformed ODF document " + SIMPLE_ODT + " to " + xslOut.getAbsolutePath() + "!");
 			File testOutputFile = new File(xslOut.getAbsolutePath());
@@ -251,8 +249,8 @@ public class PackageTest {
 	public void validationTestDefault() {
 		try {
 			// default no error handler: warnings and errors are not reported
-			OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath("testInvalidPkg1.odt"));
-			OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath("testInvalidPkg2.odt"));
+			OdfPackage.loadPackage(ResourceUtilities.getAbsoluteInputPath("testInvalidPkg1.odt"));
+			OdfPackage.loadPackage(ResourceUtilities.getAbsoluteInputPath("testInvalidPkg2.odt"));
 		} catch (Exception ex) {
 			LOG.log(Level.SEVERE, null, ex);
 			Assert.fail();
@@ -260,7 +258,7 @@ public class PackageTest {
 
 		// default no error handler: fatal errors are reported
 		try {
-			OdfPackage.loadPackage(ResourceUtilities.getAbsolutePath("testA.jpg"));
+			OdfPackage.loadPackage(ResourceUtilities.getAbsoluteInputPath("testA.jpg"));
 			Assert.fail();
 		} catch (Exception e) {
 			String errorMsg = OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage();
@@ -336,14 +334,14 @@ public class PackageTest {
 		ErrorHandlerStub handler4 = new ErrorHandlerStub(null, null, expectedFatalErrors4);
 
 		try {
-			OdfPackage pkg1 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler1.getTestFilePath())), null, handler1);
+			OdfPackage pkg1 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsoluteInputPath(handler1.getTestFilePath())), null, handler1);
 			Assert.assertNotNull(pkg1);
-			OdfPackage pkg2 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler2.getTestFilePath())), null, handler2);
+			OdfPackage pkg2 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsoluteInputPath(handler2.getTestFilePath())), null, handler2);
 			Assert.assertNotNull(pkg2);
-			OdfPackage pkg3 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler3.getTestFilePath())), null, handler3);
+			OdfPackage pkg3 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsoluteInputPath(handler3.getTestFilePath())), null, handler3);
 			Assert.assertNotNull(pkg3);
 			try {
-				OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath("testA.jpg")), null, handler4);
+				OdfPackage.loadPackage(new File(ResourceUtilities.getAbsoluteInputPath("testA.jpg")), null, handler4);
 				Assert.fail();
 			} catch (Exception e) {
 				String errorMsg = OdfPackageConstraint.PACKAGE_IS_NO_ZIP.getMessage();
@@ -363,7 +361,7 @@ public class PackageTest {
 
 	@Test
 	public void testPackagePassword() {
-		File tmpFile = ResourceUtilities.newTestOutputFile("PackagePassword.ods");
+		File tmpFile = ResourceUtilities.getTestOutputFile("PackagePassword.ods");
 		OdfDocument doc = null;
 		try {
 			doc = OdfSpreadsheetDocument.newSpreadsheetDocument();
@@ -378,11 +376,14 @@ public class PackageTest {
             // some encrypted XML
 			Assert.assertNotNull(contentBytes);
             try{
+                LOG.info("AS EXPECTED, WE WILL FAIL TO PARSE THE ENCRYPTED FILE");
                 odfPackage.getRootDocument().getFileDom("content.xml").toString();
                 fail("NullPointerException missing!");
-            }catch(NullPointerException e){
+            }catch(Throwable t){
                 // as expected
             }
+            LOG.info("^^EXPECTED SAXPARSER EXCEPTION! :-)");
+
             // using correct password
             OdfPackage odfPackage2 = OdfPackage.loadPackage(tmpFile, "password");
 			byte[] contentBytes2 = odfPackage2.getBytes("content.xml");
@@ -400,7 +401,7 @@ public class PackageTest {
 	@Test
 	public void testLoadingDocumentWithStyleStyleAttribute() {
 		try {
-			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_STYLE_STYLE_ATTRIBUTE_ODT));
+			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_STYLE_STYLE_ATTRIBUTE_ODT));
 			OdfElement contentRoot = doc.getContentRoot();
 		} catch (Throwable t) {
 			Logger.getLogger(PackageTest.class.getName()).log(Level.SEVERE, t.getMessage(), t);

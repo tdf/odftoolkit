@@ -26,14 +26,8 @@
  */
 package org.odftoolkit.odfdom.dom.element.number;
 
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.ElementVisitor;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
-import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberCountryAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberLanguageAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberRfcLanguageTagAttribute;
@@ -46,12 +40,17 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberTransliterationStyleAttr
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDisplayNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleVolatileAttribute;
+import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element number:number-style}.
  *
  */
-public class NumberNumberStyleElement extends OdfElement {
+public abstract class NumberNumberStyleElement extends DataStyleElement {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.NUMBER, "number-style");
 

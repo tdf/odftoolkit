@@ -50,7 +50,7 @@
 				The ODFDOM project's objective is to provide an easy API for reading, writing and manipulating documents of the OpenDocument format (ODF).
 				To archive this, the ODFDOM API follows a layered approach to access documents, as layered design is the robust foundation for a well-designed modular structure.
 
-			</p><p><img src='doc-files/ODFDOM-Layered-Model.png' />
+			</p><p><img src='resources/ODFDOM-Layered-Model.png' />
 			</p><h2><a name='The_ODF_Package_Layer'></a>The ODF Package Layer</h2>
 		<p>The ODF Package Layer provides access to all resources stored within the ODF package, such as XML streams, images or embedded objects.
 		</p><h3><a name='The_ODF_Package_API'></a>The ODF Package API</h3>
@@ -59,7 +59,7 @@
 		</p><p>At this layer a document is in general represented by a bundle of named resources zipped to a package.
 			For instance, an ODF text document like 'myVacation.odt' might contain the following files:
 
-		</p><p><img src='doc-files/ODF_Package.jpg' />
+		</p><p><img src='resources/ODF_Package.jpg' />
 
 		</p><p><b>Note:</b>
 			All file streams aside of the '/Pictures' directory and its content are specified by the ODF standard.
@@ -102,14 +102,14 @@ pkg.save(&quot;/home/myDocuments/myVacation.odt&quot;);
 
 	</p><p>Example of the ODF XML representing a table in ODF:
 
-	</p><p><img src='doc-files/FruitTable_code.jpg' />
+	</p><p><img src='resources/FruitTable_code.jpg' />
 
 	</p><p><b>Note:</b> In the OpenDocument standard the ODF elements are reused among all document types. The above XML of a table is for instance equally usable in Text and Spreadsheet documents.
 
 	</p><p>
 		This XML would be mapped to a W3C derived ODF DOM class structure:
 
-	</p><p><img src='doc-files/800px-Table_fruits_diagramm.jpg' width="670px" height="346px" />
+	</p><p><img src='resources/800px-Table_fruits_diagramm.jpg' width="670px" height="346px" />
 
 	</p><p>All sources of the typed DOM API are organized beyond <code>org.odftoolkit.odfdom.dom.*</code>
 

@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 
 import javax.xml.datatype.DatatypeFactory;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
 import org.odftoolkit.odfdom.type.Length.Unit;

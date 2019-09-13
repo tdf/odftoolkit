@@ -73,6 +73,9 @@ class StreamHelper {
         while ((r = in.read(buf, 0, PAGE_SIZE)) > -1) {
             out.write(buf, 0, r);
         }
+		in.close();
+		out.close();
+
         // free the references
         in = null;
         out = null;

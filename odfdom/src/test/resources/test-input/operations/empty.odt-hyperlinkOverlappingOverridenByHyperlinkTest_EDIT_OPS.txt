@@ -1,0 +1,5 @@
+{"changes":[
+{"name":"addText","start":[1,1],"opl":1,"osn":21,"text":"Empty Document"},
+{"name":"format","start":[1,3],"end":[1,9],"attrs":{"styleId":"Hyperlink","character":{"url":"http://www.heise.de"}},"opl":1,"osn":22},
+{"name":"format","start":[1,4],"end":[1,10],"attrs":{"styleId":"Hyperlink","character":{"url":"http://www.sueddeutsche.de"}},"opl":1,"osn":23}
+]}

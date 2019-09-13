@@ -1,0 +1,4 @@
+{"changes":[
+{"name":"splitParagraph","start":[2,23]},
+{"name":"addText","start":[3,1],"text":"Something!"}
+]}

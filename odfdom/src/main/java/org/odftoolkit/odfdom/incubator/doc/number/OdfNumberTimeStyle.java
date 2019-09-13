@@ -21,14 +21,22 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.incubator.doc.number;
 
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberFormatSourceAttribute;
 import org.odftoolkit.odfdom.dom.element.number.NumberAmPmElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberDayElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberDayOfWeekElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberEraElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberHoursElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberMinutesElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberMonthElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberQuarterElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberSecondsElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberTextElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberTimeStyleElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberYearElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.w3c.dom.Node;
 
 /**
  * Convenient functionalty for the parent ODF OpenDocument element
@@ -57,6 +65,7 @@ public class OdfNumberTimeStyle extends NumberTimeStyleElement {
         super(ownerDoc);
     }
     private String styleName;
+    private String formatCode;
 
 
     /** Creates a new instance of OdfTimeStyle.
@@ -67,15 +76,158 @@ public class OdfNumberTimeStyle extends NumberTimeStyleElement {
     public OdfNumberTimeStyle(OdfFileDom ownerDoc, String format, String styleName) {
         super(ownerDoc);
         this.styleName = styleName;
-        buildFromFormat(format);
+        this.formatCode = format;
+        setFormat(format);
+    }
+
+    /**
+     * Get the format string that represents this style.
+     * @return the format string
+     */
+    @Override
+    public String getFormat( boolean capsDateFormat ) {
+        if(formatCode == null)
+        {
+            formatCode = "";
+            String truncate = getAttribute("number:truncate-on-overflow");
+            boolean setBrackets = false; // set brackets around first time element
+            if(truncate != null && truncate.equals("false"))
+                setBrackets = true;
+            Node child = this.getFirstChild();
+            while (child != null) {
+                if (child instanceof OdfElement) {
+                    if (child instanceof NumberDayElement) {
+                        NumberDayElement ele = (NumberDayElement) child;
+                        String numberstyle = ele.getNumberStyleAttribute();
+                        if ((numberstyle != null) && numberstyle.equals("long")) {
+                            formatCode += capsDateFormat ? "DD" : "dd";
+                        } else {
+                            formatCode += capsDateFormat ? "D" : "d";
+                        }
+                    } else if (child instanceof NumberMonthElement) {
+                        NumberMonthElement ele = (NumberMonthElement) child;
+                        String numberstyle = ele.getNumberStyleAttribute();
+                        if (ele.getNumberTextualAttribute().booleanValue()) {
+                            if ((numberstyle != null) && numberstyle.equals("long")) {
+                                formatCode += "MMMM";
+                            } else {
+                                formatCode += "MMM";
+                            }
+                        } else {
+                            if ((numberstyle != null) && numberstyle.equals("long")) {
+                                formatCode += "MM";
+                            } else {
+                                formatCode += "M";
+                            }
+                        }
+                    } else if (child instanceof NumberYearElement) {
+                        NumberYearElement ele = (NumberYearElement) child;
+                        String numberstyle = ele.getNumberStyleAttribute();
+                        if ((numberstyle != null) && numberstyle.equals("long")) {
+                            formatCode += capsDateFormat ? "YYYY" : "yyyy";
+                        } else {
+                            formatCode += capsDateFormat ? "YY" : "yy";
+                        }
+                    } else if (child instanceof NumberTextElement) {
+                        String content = child.getTextContent();
+                        if ((content == null) || (content.equals(""))) {
+                            formatCode += " ";
+                        } else {
+                            formatCode += content;
+                        }
+                    } else if (child instanceof NumberEraElement) {
+                        NumberEraElement ele = (NumberEraElement) child;
+                        String numberstyle = ele.getNumberStyleAttribute();
+                        if ((numberstyle != null) && numberstyle.equals("long")) {
+                            formatCode += "GGGG";
+                        } else {
+                            formatCode += "GG";
+                        }
+                    } else if (child instanceof NumberHoursElement) {
+                        NumberHoursElement ele = (NumberHoursElement) child;
+                        String numberstyle = ele.getNumberStyleAttribute();
+                        if( setBrackets)
+                            formatCode += "[";
+                        if ((numberstyle != null) && numberstyle.equals("long")) {
+                            formatCode += capsDateFormat ? "HH": "hh";
+                        } else {
+                            formatCode += capsDateFormat ? "H": "h";
+                        }
+                        if( setBrackets)
+                        {
+                            formatCode += "]";
+                            setBrackets = false;
+                        }
+                    } else if (child instanceof NumberMinutesElement) {
+                        if( setBrackets)
+                            formatCode += "[";
+                        NumberMinutesElement ele = (NumberMinutesElement) child;
+                        String numberstyle = ele.getNumberStyleAttribute();
+                        if ((numberstyle != null) && numberstyle.equals("long")) {
+                            formatCode += "mm";
+                        } else {
+                            formatCode += "m";
+                        }
+                        if( setBrackets)
+                        {
+                            formatCode += "]";
+                            setBrackets = false;
+                        }
+                    } else if (child instanceof NumberSecondsElement) {
+                        if( setBrackets)
+                            formatCode += "[";
+                        NumberSecondsElement ele = (NumberSecondsElement) child;
+                        String numberstyle = ele.getNumberStyleAttribute();
+                        if ((numberstyle != null) && numberstyle.equals("long")) {
+                            formatCode += capsDateFormat ? "SS": "ss";
+                        } else {
+                            formatCode += capsDateFormat ? "SS": "s";
+                        }
+                        Integer decimals = ele.getNumberDecimalPlacesAttribute();
+                        if(decimals != null && decimals.intValue() > 0){
+                            formatCode += '.';
+                            for( int i = 0; i < decimals.intValue(); i++){
+                                formatCode += '0';
+                            }
+                        }
+                        if( setBrackets)
+                        {
+                            formatCode += "]";
+                            setBrackets = false;
+                        }
+                    } else if (child instanceof NumberQuarterElement) {
+                        NumberQuarterElement ele = (NumberQuarterElement) child;
+                        String numberstyle = ele.getNumberStyleAttribute();
+                        if ((numberstyle != null) && numberstyle.equals("long")) {
+                            formatCode += "QQQ";
+                        } else {
+                            formatCode += "Q";
+                        }
+                    } else if (child instanceof NumberDayOfWeekElement) {
+                        NumberDayOfWeekElement ele = (NumberDayOfWeekElement) child;
+                        String numberstyle = ele.getNumberStyleAttribute();
+                        if ((numberstyle != null) && numberstyle.equals("long")) {
+                            formatCode += "EEEE";
+                        } else {
+                            formatCode += "EEE";
+                        }
+                    } else if (child instanceof NumberAmPmElement) {
+                        formatCode += "AM/PM";
+                    }
+                }
+                child = child.getNextSibling();
+            }
+        }
+        return formatCode;
     }
 
     /**
      * Creates a <code>&lt;number:time-style&gt;</code> element based upon format.
      * @param format the format for the time
      */
-    public void buildFromFormat(String format) {
-        String actionChars = "GyQMwdEaHhms";
+    @Override
+    public void setFormat(String format) {
+        String actionChars = "GyQMwdEHhms";
         int actionCount = 0;
 
         char ch;
@@ -117,8 +269,18 @@ public class OdfNumberTimeStyle extends NumberTimeStyleElement {
                     i++;
                 }
             } else {
-                textBuffer += ch;
-                i++;
+                //special handling "AM/PM"
+                if(ch=='A' && format.startsWith("AM/PM", i)) {
+                    appendText(textBuffer);
+                    textBuffer = "";
+                    NumberAmPmElement ampm = new NumberAmPmElement((OdfFileDom) this.getOwnerDocument());
+                    this.appendChild(ampm);
+                    i+=5;
+                }
+                else {
+	                textBuffer += ch;
+	                i++;
+                }
             }
         }
         appendText(textBuffer);
@@ -145,21 +307,19 @@ public class OdfNumberTimeStyle extends NumberTimeStyleElement {
     private void processChar(char ch, int count) {
         OdfFileDom ownerDoc = (OdfFileDom) this.getOwnerDocument();
         switch (ch) {
-            case 'a':
-            	NumberAmPmElement ampm = new NumberAmPmElement(ownerDoc);
-                this.appendChild(ampm);
-                break;
             case 'H':
             case 'h':
             	NumberHoursElement hours = new NumberHoursElement(ownerDoc);
                 hours.setNumberStyleAttribute(isLongIf(count > 1));
                 this.appendChild(hours);
                 break;
+            case 'M':
             case 'm':
                 NumberMinutesElement minutes = new NumberMinutesElement(ownerDoc);
                 minutes.setNumberStyleAttribute(isLongIf(count > 1));
                 this.appendChild(minutes);
                 break;
+            case 'S':
             case 's':
                 NumberSecondsElement seconds = new NumberSecondsElement(ownerDoc);
                 seconds.setNumberStyleAttribute(isLongIf(count > 1));

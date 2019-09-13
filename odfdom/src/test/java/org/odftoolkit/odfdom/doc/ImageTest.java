@@ -48,7 +48,7 @@ import org.w3c.dom.Node;
 public class ImageTest {
 
 	private URI mImageUri_ODFDOM = null;
-	private static final String mImagePath = "src/main/javadoc/doc-files/";
+	private static final String mImagePath = "src/main/javadoc/resources/";
 	private static final String mImageName_ODFDOM = "ODFDOM-Layered-Model.png";
 	private static final String mPackageGraphicsPath = "Pictures/";
 
@@ -67,7 +67,7 @@ public class ImageTest {
 	@SuppressWarnings("unchecked")
 	public void testAddImageByUri() {
 		try {
-			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("image.odt"));
+			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("image.odt"));
 			final OdfPackage pkg = doc.getPackage();
 			NodeAction addImages = new NodeAction() {
 
@@ -92,7 +92,7 @@ public class ImageTest {
 			};
 			addImages.performAction(doc.getContentDom().getDocumentElement(),
 					null);
-			doc.save(ResourceUtilities.getTestOutput("add-images-by-uri.odt"));
+			doc.save(ResourceUtilities.getTestOutputFile("add-images-by-uri_output.odt"));
 
 		} catch (Exception e) {
 			Logger.getLogger(ImageTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -102,7 +102,7 @@ public class ImageTest {
 
 	@Test
 	public void testRemoveImage() throws Exception {
-		OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("image.odt"));
+		OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("image.odt"));
 		final OdfPackage pkg = doc.getPackage();
 		NodeAction<?> removeImages = new NodeAction<Object>() {
 
@@ -119,7 +119,7 @@ public class ImageTest {
 		};
 		removeImages.performAction(doc.getContentDom().getDocumentElement(),
 				null);
-		pkg.save(ResourceUtilities.getTestOutput("remove-images.odt"));
+		pkg.save(ResourceUtilities.getTestOutputFile("remove-images_output.odt"));
 
 	}
 
@@ -127,7 +127,7 @@ public class ImageTest {
 	public void testImageInTextDocument() {
 		try {
 			OdfTextDocument doc = OdfTextDocument.newTextDocument();
-			String imagePath1 = doc.newImage(ResourceUtilities.getURI("testA.jpg"));
+			String imagePath1 = doc.newImage(ResourceUtilities.getTestInputURI("testA.jpg"));
 			Assert.assertTrue(getImageCount(doc) == 1);
 			OdfDrawImage image = getImageByPath(doc, imagePath1).get(0);
 			Assert.assertTrue(image.getImageUri().toString().equals(imagePath1));
@@ -148,10 +148,10 @@ public class ImageTest {
 			OdfDrawFrame frame3 = (OdfDrawFrame) image3.getParentNode();
 			frame3.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.CHAR.toString());
 
-			doc.save(ResourceUtilities.newTestOutputFile("addimages.odt"));
+			doc.save(ResourceUtilities.getTestOutputFile("addimages.odt"));
 
 			//load the file again
-			OdfTextDocument doc1 = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("addimages.odt"));
+			OdfTextDocument doc1 = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("addimages.odt"));
 
 			Assert.assertTrue(getImageCount(doc1) == 3);
 			Assert.assertTrue(getImageByPath(doc1, imagePath2).size() == 2);
@@ -159,7 +159,7 @@ public class ImageTest {
 			Assert.assertTrue(getImageCount(doc1) == 1);
 			Assert.assertTrue(getImageByPath(doc1, imagePath3).size() == 0);
 			Assert.assertNull(doc1.getPackage().getBytes(imagePath3));
-			doc1.save(ResourceUtilities.newTestOutputFile("removeimages.odt"));
+			doc1.save(ResourceUtilities.getTestOutputFile("removeimages.odt"));
 
 		} catch (Exception ex) {
 			Logger.getLogger(ImageTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
@@ -168,11 +168,11 @@ public class ImageTest {
 
 	}
 
-        @Test
+    @Test
 	public void testSVGInTextDocument() {
 		try {
 			OdfTextDocument doc = OdfTextDocument.newTextDocument();
-			String imagePath1 = doc.newImage(ResourceUtilities.getURI("simple.svg"));
+			String imagePath1 = doc.newImage(ResourceUtilities.getTestInputURI("simple.svg"));
 			Assert.assertTrue(getImageCount(doc) == 1);
 			OdfDrawImage image = getImageByPath(doc, imagePath1).get(0);
 			Assert.assertTrue(image.getImageUri().toString().equals(imagePath1));
@@ -180,10 +180,10 @@ public class ImageTest {
 			frame1.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.PAGE.toString());
 			frame1.setTextAnchorPageNumberAttribute(1);
 
-			doc.save(ResourceUtilities.newTestOutputFile("svg-image.odt"));
+			doc.save(ResourceUtilities.getTestOutputFile("svg-image.odt"));
 
 			//load the file again
-			OdfTextDocument doc1 = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("svg-image.odt"));
+			OdfTextDocument doc1 = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("svg-image.odt"));
 
 			Assert.assertTrue(getImageCount(doc1) == 1);
 
@@ -199,7 +199,7 @@ public class ImageTest {
 		try {
 			// this test is dependent of the output of the following test, which is therefore being called explicitly
             testImageInTextDocument();
-			OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("addimages.odt"));
+			OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("addimages.odt"));
 
 			Set<String> pathSet = getImagePathSet(doc);
 			for (String pathIter : pathSet) {
@@ -214,7 +214,7 @@ public class ImageTest {
 				deleteImageByPath(doc, pathIter);
 			}
 			Assert.assertTrue(getImageCount(doc) == 0);
-			doc.save(ResourceUtilities.newTestOutputFile("removeAllImages.odt"));
+			doc.save(ResourceUtilities.getTestOutputFile("removeAllImages.odt"));
 
 		} catch (Exception ex) {
 			Logger.getLogger(ImageTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);

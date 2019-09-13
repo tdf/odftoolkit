@@ -53,7 +53,7 @@ public class OdfDrawImageTest {
 		OdfTextParagraph para = (OdfTextParagraph) odt.getContentRoot().newTextPElement();
 		OdfDrawFrame frame = (OdfDrawFrame) para.newDrawFrameElement();
 		OdfDrawImage image = (OdfDrawImage) frame.newDrawImageElement();
-		String packagePath = image.newImage(ResourceUtilities.getURI("testA.jpg"));
+		String packagePath = image.newImage(ResourceUtilities.getTestInputURI("testA.jpg"));
 		assertEquals(image.getXlinkTypeAttribute(), "simple");
 		LOG.info(frame.getSvgWidthAttribute());
 		LOG.info(frame.getSvgHeightAttribute());
@@ -74,7 +74,7 @@ public class OdfDrawImageTest {
 		OdfDrawImage image = (OdfDrawImage) frame.newDrawImageElement();
 		String packagePath = "Pictures/myChosenImageName.jpg";
 		String mediaType = "image/jpeg";
-		image.newImage(new FileInputStream(ResourceUtilities.getAbsolutePath("testA.jpg")), packagePath, mediaType);
+		image.newImage(new FileInputStream(ResourceUtilities.getAbsoluteInputPath("testA.jpg")), packagePath, mediaType);
 		assertEquals(image.getXlinkTypeAttribute(), "simple");
 		assert (frame.getSvgWidthAttribute().startsWith("19.") && frame.getSvgWidthAttribute().endsWith("cm"));
 		assert (frame.getSvgHeightAttribute().startsWith("6.") && frame.getSvgHeightAttribute().endsWith("cm"));

@@ -23,7 +23,6 @@ package org.odftoolkit.odfdom.doc;
 
 import java.io.File;
 import java.io.InputStream;
-
 import org.odftoolkit.odfdom.dom.element.office.OfficeImageElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
@@ -59,7 +58,7 @@ public class OdfImageDocument extends OdfDocument {
 		}
 
 		/**
-		 * @return the ODF filesuffix of this document
+		 * @return the ODF file suffix of this document
 		 */
 		public String getSuffix() {
 			return mMediaType.getSuffix();
@@ -68,7 +67,7 @@ public class OdfImageDocument extends OdfDocument {
 		/**
 		 *
 		 * @param mediaType string defining an ODF document
-		 * @return the according OdfMediatype encapuslating the given string and the suffix
+		 * @return the according OdfMediatype encapsulating the given string and the suffix
 		 */
 		public static OdfDocument.OdfMediaType getOdfMediaType(String mediaType) {
 			return OdfDocument.OdfMediaType.getOdfMediaType(mediaType);
@@ -96,7 +95,7 @@ public class OdfImageDocument extends OdfDocument {
 	}
 
 	/** To avoid data duplication a new document is only created, if not already opened.
-	 * A document is cached by this constructor using the internalpath as key. */
+	 * A document is cached by this constructor using the internal path as key. */
 	protected OdfImageDocument(OdfPackage pkg, String internalPath, OdfImageDocument.OdfMediaType odfMediaType) throws SAXException {
 		super(pkg, internalPath, odfMediaType.mMediaType);
 	}

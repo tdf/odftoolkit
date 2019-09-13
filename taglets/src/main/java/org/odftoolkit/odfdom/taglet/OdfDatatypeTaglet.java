@@ -1,6 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
+ * Copyright 2018-2019 The Document Foundation. All rights reserved.
  * Copyright 2009 IBM. All rights reserved.
  * Copyright 2010 Oracle and/or its affiliates. All rights reserved.
  *
@@ -21,10 +22,12 @@
  */
 package org.odftoolkit.odfdom.taglet;
 
+import com.sun.source.doctree.DocTree;
+import java.util.List;
 import java.util.Map;
-
-import com.sun.javadoc.Tag;
-import com.sun.tools.doclets.Taglet;
+import java.util.Set;
+import jdk.javadoc.doclet.Taglet;
+import javax.lang.model.element.Element;
 import java.util.logging.Logger;
 
 /**
@@ -34,16 +37,16 @@ import java.util.logging.Logger;
  *  The position of the OpenDocument specification in HTML can be provided using
  *  an environment variable or java system property, while the system property overrides
  *  the environment variable.
- *  In case nothing is been a default path within the JavaDoc doc-files directory is being used.
+ *  In case nothing is been a default path within the JavaDoc resources directory is being used.
  *
  *  For example the taglet <code>{&#64;odf.datatype countryCode}</code> would be resolved without variable settings to
- *  <code>JAVA_DOC_BASE/doc-files/OpenDocument-v1.2-cd05-part1.html#datatype-countryCode</code>.
+ *  <code>JAVA_DOC_BASE/resources/OpenDocument-v1.2-part1.html#datatype-countryCode</code>.
  */
 public class OdfDatatypeTaglet implements Taglet {
 
 	private static final Logger LOG = Logger.getLogger(OdfDatatypeTaglet.class.getName());
 	private static final String NAME = "odf.datatype";
-	private static final String ODF_SPEC_PATH = "../../../../doc-files/OpenDocument-v1.2-part1.html";
+	private static final String ODF_SPEC_PATH = "../../../../resources/OpenDocument-v1.2-part1.html";
 	private static String mOdfSpecPath = null;
 
 	/* FINDING THE ABSOLUTE PATH TO THE ODF SPEC IN HTML:
@@ -144,27 +147,23 @@ public class OdfDatatypeTaglet implements Taglet {
 	/**
 	 * Given the <code>Tag</code> representation of this custom
 	 * tag, return its string representation.
-	 * @param tag he <code>Tag</code> representation of this custom tag.
 	 * @return the string representation of the custom tag
 	 */
-	public String toString(Tag tag) {
-		String fragmentIdentifier = "datatype-" + tag.text();
-		return "<a href=\"" + mOdfSpecPath + "#" + fragmentIdentifier + "\">" + tag.text() + "</a>";
-	}
+	@Override
+	public String toString(List<? extends DocTree> tags, Element element) {
+		String docText = tags.get(0).toString();
+		String name = docText.substring(docText.lastIndexOf(" ") + 1, docText.length() - 1);
 
-	/**
-	 * This method should not be called since arrays of inline tags do not
-	 * exist.  Method should be used to convert this
-	 * inline tag to a string.
-	 * @param tags the array of <code>Tag</code>s representing of this custom tag.
-	 * @return Nothing is returned, instead an <code>UnsupportedOperationException</code> is being thrown.
-
-	 */
-	public String toString(Tag[] tags) {
-		throw new java.lang.UnsupportedOperationException("Arrays of inline tags do not exist!");
+		String fragmentIdentifier = "datatype-" + name;
+		return "<a href=\"" + mOdfSpecPath + "#" + fragmentIdentifier + "\">" + name + "</a>";
 	}
 
 	public boolean inType() {
 		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public Set<Location> getAllowedLocations() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 }

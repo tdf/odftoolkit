@@ -48,7 +48,7 @@ public class DefaultStylesTest {
     @Test
     public void testDefaultStyles() {
         try {
-            OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+            OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE));
 
             doc.getDocumentStyles();
             OdfDefaultStyle oDSG = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Graphic);

@@ -93,7 +93,7 @@ public class StyleExamplesTest {
 
 	@Test
 	public void displayActualFontForEachTextNode() throws Exception {
-		OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+		OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE));
 
 		OdfElement documentRoot = (OdfElement) odfDocument.getContentDom().getDocumentElement();
 
@@ -120,7 +120,7 @@ public class StyleExamplesTest {
 	@SuppressWarnings("unchecked")
 	public void dumpAllStyles() throws Exception {
 		if (LOG.isLoggable(INFO)) {
-			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE));
 			LOG.info("Parsed document.");
 
 			OdfElement e = (OdfElement) odfdoc.getContentDom().getDocumentElement();
@@ -161,7 +161,7 @@ public class StyleExamplesTest {
 	@Test
 	public void testDefaultStyles() {
 		try {
-			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+			OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE));
 
 			doc.getDocumentStyles();
 			OdfDefaultStyle oDSG = doc.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Graphic);

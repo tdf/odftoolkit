@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
   or more contributor license agreements.  See the NOTICE file
@@ -8,7 +9,7 @@
   "License"); you may not use this file except in compliance
   with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing,
   software distributed under the License is distributed on an
@@ -22,7 +23,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -33,15 +34,21 @@
     </parent>
 
     <properties>
-        <jdk.version>1.8</jdk.version>
-        <javadoc.bottom>Copyright &#169; {inceptionYear}&#x2013;2018 Apache Software Foundation; Copyright &#169; 2018&#x2013;{currentYear} {organizationName}. All rights reserved.</javadoc.bottom>
+        <jdk.version>11</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
-
-    <!-- defining version numbers across all projects -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>xml-apis</groupId>
+                <artifactId>xml-apis</artifactId>
+                <!-- never use version 2.0.2 as it is prior version 1.4.01 -->
+                <!-- see https://mvnrepository.com/artifact/xml-apis/xml-apis -->
+                <version>1.4.01</version>
+            </dependency>
             <dependency>
                 <groupId>xerces</groupId>
                 <artifactId>xercesImpl</artifactId>
@@ -84,9 +91,14 @@
                 <version>2013.6.1</version>
             </dependency>
             <dependency>
+                <groupId>org.iso_relax.verifier.jaxp.validation</groupId>
+                <artifactId>isorelax-jaxp-bridge</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.ant</groupId>
                 <artifactId>ant</artifactId>
-                <version>1.10.5</version>
+                <version>1.10.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -98,7 +110,6 @@
         <module>xslt-runner-task</module>
         <module>odfdom</module>
         <module>validator</module>
-        <module>simple</module>
     </modules>
 
     <name>The ODF Toolkit</name>
@@ -119,8 +130,9 @@
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit.git</url>
     </scm>
+
     <issueManagement>
-        <system>GitHub Issues</system>
+        <system>github</system>
         <url>https://github.com/tdf/odftoolkit/issues</url>
     </issueManagement>
 
@@ -136,6 +148,7 @@
             <url>https://odftoolkit.org/reports/${project.version}/</url>
         </site>
     </distributionManagement>
+
     <developers>
         <developer>
             <id>svanteschubert</id>
@@ -144,7 +157,6 @@
             <organization>Freelancer</organization>
             <roles>
                 <role>OASIS ODF Collaboration subcommittee chair</role>
-                <role>OASIS ODF committee member</role>
                 <role>architect</role>
                 <role>developer</role>
             </roles>
@@ -156,7 +168,6 @@
             <organization>CIB Software</organization>
             <organizationUrl>https://www.cib.de/</organizationUrl>
             <roles>
-                <role>OASIS ODF committee member</role>
                 <role>developer</role>
             </roles>
             <timezone>+1</timezone>
@@ -165,17 +176,21 @@
 
     <mailingLists>
         <mailingList>
-            <!--
-            Help: <dev+help@odftoolkit.org>
-            Digest subscription: <dev+subscribe-digest@odftoolkit.org>
-            No-mail subscription: <dev+subscribe-nomail@odftoolkit.org>
-            -->
+            <name>Developer List</name>
             <post>dev@odftoolkit.org</post>
-            <subscribe>dev+subscribe@odftoolkit.org</subscribe>
-            <unsubscribe>dev+unsubscribe@odftoolkit.org</unsubscribe>
-            <archive>https://listarchives.odftoolkit.org/dev/</archive>
-            <name>dev.odftoolkit.org</name><!-- List-Id -->
+            <!--2DO
+            <subscribe></subscribe>
+            <unsubscribe>odf-users-unsubscribe@odftoolkit.org</unsubscribe>
+            <archive>https://mail-archives.odftoolkit.org/mod_mbox/dev/</archive>
+              -->
         </mailingList>
+        <!-- Watch GitHub ?
+        <mailingList>
+            <name>Commits</name>
+            <subscribe>commits-subscribe@odftoolkit.org</subscribe>
+            <unsubscribe>commmits-unsubscribe@odftoolkit</unsubscribe>
+            <archive>https://mail-archives.odftoolkit.org/mod_mbox/commits/</archive>
+        </mailingList>-->
     </mailingLists>
 
     <build>
@@ -194,20 +209,17 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <excludes>
-                        <!-- +++++++++++ https://ec4j.github.io/editorconfig-maven-plugin/ +++++++++++-->
-                        <!-- Note that maven submodule directories and many non-source file patterns are excluded by default -->
-                        <!--     see https://github.com/ec4j/editorconfig-maven-plugin/blob/master/ec4j-lint-api/src/main/java/org/ec4j/maven/lint/api/Constants.java#L37 -->
-                        <!--      See https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties -->
-                        <!--      !!! 'mvn editorconfig:format' fixes format via command line!!! -->
-
-                        <!-- You can exclude further files from processing: -->
-                        <!--<exclude>src/main/**/*.whatever</exclude>-->
-                    </excludes>
-                    <!-- All files are included by default: -->
+                    <!-- +++++++++++ https://ec4j.github.io/editorconfig-maven-plugin/ +++++++++++-->
+                    <!-- Note that maven submodule directories and many non-source file patterns are excluded by default -->
+                    <!--     see https://github.com/ec4j/editorconfig-maven-plugin/blob/master/ec4j-lint-api/src/main/java/org/ec4j/maven/lint/api/Constants.java#L37 -->
+                    <!--      See https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties -->
+                    <!--      !!! 'mvn editorconfig:format' fixes format via command line!!! -->
+                    <!-- You can exclude further files from processing: -->
+                        <!--<excludes><exclude>src/main/**/*.whatever</exclude></excludes>-->
+                   <!-- All files are included by default:
                     <includes>
                         <include>**</include>
-                    </includes>>
+                    </includes>-->
                 </configuration>
             </plugin>
         </plugins>
@@ -224,12 +236,9 @@
                             <excludes>
                                 <exclude>CHANGES.txt</exclude>
                                 <exclude>.gitignore</exclude>
-                                <exclude>.editorconfig</exclude>
-                                <exclude>.travis.yml</exclude>
+                                <exclude>character-styles.json</exclude>
                                 <exclude>README.md</exclude>
                                 <exclude>DEPENDENCIES</exclude>
-                                <exclude>docs/**/*</exclude>
-                                <exclude>src/site/**/*</exclude>
                             </excludes>
                         </configuration>
                         <executions>
@@ -305,27 +314,27 @@
                                 <phase>prepare-package</phase>
                                 <configuration>
                                     <tasks>
-                                        <mkdir dir="${basedir}/target/${project.version}-bin" />
+                                        <mkdir dir="${basedir}/target/${project.version}-bin"/>
                                         <copy todir="${basedir}/target/${project.version}-bin" flatten="true">
                                             <fileset dir="${basedir}">
-                                                <include name="*.txt" />
-                                                <include name="KEYS" />
-                                                <include name="odfdom/target/*.jar" />
-                                                <include name="simple/target/*.jar" />
-                                                <include name="validator/target/*.?ar" />
-                                                <include name="xslt-runner/target/*.jar" />
-                                                <include name="xslt-runner-task/target/*.jar" />
-                                                <exclude name="**/target/**-javadoc.jar" />
-                                                <exclude name="**/target/**-sources.jar" />
-                                                <exclude name="**/target/**-jar-with-dependencies.jar" />
+                                                <include name="*.txt"/>
+                                                <include name="KEYS"/>
+                                                <include name="odfdom/target/*.jar"/>
+                                                <include name="simple/target/*.jar"/>
+                                                <include name="validator/target/*.?ar"/>
+                                                <include name="xslt-runner/target/*.jar"/>
+                                                <include name="xslt-runner-task/target/*.jar"/>
+                                                <exclude name="**/target/**-javadoc.jar"/>
+                                                <exclude name="**/target/**-sources.jar"/>
+                                                <exclude name="**/target/**-jar-with-dependencies.jar"/>
                                             </fileset>
                                         </copy>
-                                        <mkdir dir="${basedir}/target/${project.version}-docs" />
+                                        <mkdir dir="${basedir}/target/${project.version}-docs"/>
                                         <copy todir="${basedir}/target/${project.version}-docs" flatten="true">
                                             <fileset dir="${basedir}">
-                                                <include name="*.txt" />
-                                                <include name="KEYS" />
-                                                <include name="**/target/*-javadoc.jar" />
+                                                <include name="*.txt"/>
+                                                <include name="KEYS"/>
+                                                <include name="**/target/*-javadoc.jar"/>
                                             </fileset>
                                         </copy>
                                     </tasks>
@@ -341,34 +350,41 @@
                                     <tasks>
                                         <checksum algorithm="MD5" fileext=".md5">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*.zip" />
-                                                <include name="*.tar.gz" />
-                                                <include name="*.tar.bz2" />
+                                                <include name="*.zip"/>
+                                                <include name="*.tar.gz"/>
+                                                <include name="*.tar.bz2"/>
                                             </fileset>
                                         </checksum>
                                         <checksum algorithm="SHA-512" fileext=".sha">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*.zip" />
-                                                <include name="*.tar.gz" />
-                                                <include name="*.tar.bz2" />
+                                                <include name="*.zip"/>
+                                                <include name="*.tar.gz"/>
+                                                <include name="*.tar.bz2"/>
                                             </fileset>
                                         </checksum>
-                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA-512" property="checksum" />
+                                        <checksum file="target/odftoolkit-${project.version}-src.zip"
+                                                  algorithm="SHA-512" property="checksum"/>
                                         <copy todir="${basedir}/target/release/${project.version}/">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-source-release.*" />
+                                                <include name="*-source-release.*"/>
                                             </fileset>
                                         </copy>
                                         <copy todir="${basedir}/target/release/${project.version}/binaries">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-bin.*" />
+                                                <include name="*-bin.*"/>
                                             </fileset>
                                         </copy>
                                         <copy todir="${basedir}/target/release/${project.version}/docs">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-doc.*" />
+                                                <include name="*-doc.*"/>
                                             </fileset>
                                         </copy>
+                                        <echo/>
+                                        <echo>
+                                            The release candidate has been prepared in:
+                                            ${basedir}/target/${project.version}
+                                        </echo>
+                                        <echo/>
                                     </tasks>
                                 </configuration>
                             </execution>
@@ -382,7 +398,7 @@
                         </dependencies>
                     </plugin>
                     <plugin>
-                        <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
+                        <!-- see https://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <executions>

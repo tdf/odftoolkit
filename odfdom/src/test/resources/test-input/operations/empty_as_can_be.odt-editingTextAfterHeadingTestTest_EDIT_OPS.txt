@@ -1,0 +1,10 @@
+{"changes":[
+{"name":"addParagraph","start":[1]},
+{"name":"addText","start":[1,1],"text":"heading1"},
+{"name":"addStyle","type":"paragraph","styleId":"heading1","attrs":{"character":{"bold":true,"color":{"type":"scheme","fallbackValue":"376092","transformations":[{"type":"shade","value":74902}],"value":"accent1"},"fontSize":14},"next":"default_paragraph_style","paragraph":{"outlineLevel":0}},"parent":"default_paragraph_style","styleName":"heading 1","uiPriority":9},
+{"name":"format","start":[1],"attrs":{"character":{"bold":null,"color":null,"fillColor":null,"fontName":null,"fontSize":null,"italic":null,"language":null,"strike":null,"underline":null,"url":null,"vertAlign":null},"paragraph":{"alignment":null,"borderBottom":null,"borderInside":null,"borderLeft":null,"borderRight":null,"borderTop":null,"contextualSpacing":null,"fillColor":null,"indentFirstLine":null,"indentLeft":null,"indentRight":null,"lineHeight":null,"listLevel":null,"listStartValue":null,"listStyleId":null,"marginBottom":null,"marginTop":null,"outlineLevel":null,"showListLabel":null,"style":"heading1","tabStops":null}}},
+{"name":"splitParagraph","start":[1,9]},
+{"name":"format","start":[2],"attrs":{"paragraph":{"style":"default_paragraph_style"}}},
+{"name":"splitParagraph","start":[2,1]},
+{"name":"addText","start":[3,1],"text":"text"}
+]}

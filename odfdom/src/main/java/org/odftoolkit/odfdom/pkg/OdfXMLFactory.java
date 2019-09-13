@@ -37,7 +37,7 @@ import java.util.logging.Logger;
 import org.w3c.dom.DOMException;
 
 /** This factory determines what elements are being used in the DOC layer
- * (ie. the convenient layer).
+ * (i.e. the convenient layer).
  *
  *  The mapping of ODF element to convenient class can be changed from the user
  *  during run time.
@@ -52,8 +52,8 @@ public class OdfXMLFactory {
 	private static Map<OdfName, Class> mElementTypes = new HashMap<OdfName, Class>();
 	private static Map<OdfName, Class> mAttributeTypes = new HashMap<OdfName, Class>();
 	private static Map<String, String> mElementRenames = new HashMap<String, String>();
-	//a set for the element which need to load class from incubator package.
-	private static Set<String> mIncubatorElements = new HashSet<String>();
+	//a set for the element which need to load a none generated manual written class
+	private static Set<String> mHandwrittenElementClasses = new HashSet<String>();
 	private static final String LOCAL_NAME_DELIMITER = "-";
 	private static final String ELEMENT_NAME_DELIMITER = ":";
 	private static final String ELEMENT_PACKAGE_NAME = "element";
@@ -63,73 +63,57 @@ public class OdfXMLFactory {
 		mElementRenames.put("text:h", "text:heading");
 		mElementRenames.put("text:p", "text:paragraph");
 
-		mIncubatorElements.add("draw:frame");
-		mIncubatorElements.add("draw:image");
-		mIncubatorElements.add("number:currency-style");
-		mIncubatorElements.add("number:date-style");
-		mIncubatorElements.add("number:percentage-style");
-		mIncubatorElements.add("number:number-style");
-		mIncubatorElements.add("number:time-style");
-		mIncubatorElements.add("office:automatic-styles");
-		mIncubatorElements.add("office:master-styles");
-		mIncubatorElements.add("office:styles");
-		mIncubatorElements.add("style:default-style");
-		mIncubatorElements.add("style:style");
-		mIncubatorElements.add("style:page-layout");
-		mIncubatorElements.add("text:h");
-		mIncubatorElements.add("text:list");
-		mIncubatorElements.add("text:list-level-style-bullet");
-		mIncubatorElements.add("text:list-level-style-image");
-		mIncubatorElements.add("text:list-level-style-number");
-		mIncubatorElements.add("text:list-style");
-		mIncubatorElements.add("text:outline-level-style");
-		mIncubatorElements.add("text:outline-style");
-		mIncubatorElements.add("text:p");
-		mIncubatorElements.add("text:span");
-	}
-
-	/** Mapping an ODF element to a new Java DOM element class.
-	 *  Note: There is a default class for each element being generated from the latest ODF schema
-	 */
-	private static void setOdfElementClass(OdfName odfName, Class className) {
-		mElementTypes.put(odfName, className);
-	}
-
-	/** Mapping an ODF attribute to a new Java DOM attribute class.
-	 *  Note: There is a default class for each element being generated from the latest ODF schema. */
-	private static void setOdfAttributeClass(OdfName odfName, Class className) {
-		mAttributeTypes.put(odfName, className);
+		mHandwrittenElementClasses.add("draw:frame");
+		mHandwrittenElementClasses.add("draw:image");
+		mHandwrittenElementClasses.add("number:currency-style");
+		mHandwrittenElementClasses.add("number:date-style");
+		mHandwrittenElementClasses.add("number:percentage-style");
+		mHandwrittenElementClasses.add("number:number-style");
+		mHandwrittenElementClasses.add("number:time-style");
+        // Starting Refactoring. Goal: using XML DOM classes with sets for styles instead of own layer
+		//mHandwrittenElements.add("office:automatic-styles");
+		//mHandwrittenElements.add("office:master-styles");
+		//mHandwrittenElements.add("office:styles");
+		mHandwrittenElementClasses.add("style:default-style");
+		mHandwrittenElementClasses.add("style:style");
+		mHandwrittenElementClasses.add("style:page-layout");
+		mHandwrittenElementClasses.add("text:h");
+		mHandwrittenElementClasses.add("text:list");
+		mHandwrittenElementClasses.add("text:list-level-style-bullet");
+		mHandwrittenElementClasses.add("text:list-level-style-image");
+		mHandwrittenElementClasses.add("text:list-level-style-number");
+		mHandwrittenElementClasses.add("text:list-style");
+		mHandwrittenElementClasses.add("text:outline-level-style");
+		mHandwrittenElementClasses.add("text:outline-style");
+		mHandwrittenElementClasses.add("text:p");
+		mHandwrittenElementClasses.add("text:span");
 	}
 
 	/**
 	 * @param odfName the name of the ODF attribute the desired DOM class should represent.
 	 * @return the Java DOM attribute class to be mapped to a certain ODF attribute. */
 	private static Class getOdfAttributeClass(OdfName odfName) {
-		return getOdfNodeClass(odfName, ATTRIBUTE_PACKAGE_NAME, mAttributeTypes, true);
+		return getOdfNodeClass(odfName, ATTRIBUTE_PACKAGE_NAME, mAttributeTypes);
 	}
 
 	/**
 	 * @param odfName the name of the ODF element the desired DOM class should represent.
 	 * @return the Java DOM element class to be mapped to a certain ODF element. */
 	private static Class getOdfElementClass(OdfName odfName) {
-		return getOdfNodeClass(odfName, ELEMENT_PACKAGE_NAME, mElementTypes, false);
+		return getOdfNodeClass(odfName, ELEMENT_PACKAGE_NAME, mElementTypes);
 	}
 
-	private static Class getOdfNodeClass(OdfName odfName, String nodeType, Map<OdfName, Class> classCache, boolean isAttribute) {
+	private static Class getOdfNodeClass(OdfName odfName, String nodeType, Map<OdfName, Class> classCache) {
 		Class c = null;
 		String className = "";
 		c = classCache.get(odfName);
 		if (c == null) {
-        // Ignore looking for XML namespace attributes or ODF elements without prefix,
-        // as there are no typed ODF classes
-        // (NOTE: For any ODF node from the schema the ODF prefix would ALWAYS exist
-        // as there is a prefix normalization during the previous loading)
-        String prefix = odfName.getPrefix();
-		if (prefix != null && !(isAttribute && prefix.equals("xmlns"))) {
+			String prefix = odfName.getPrefix();
+			if (prefix != null && !(nodeType.equals(ATTRIBUTE_PACKAGE_NAME) && prefix.equals("xmlns"))) {
 				String qName = odfName.getQName();
 				String localName = odfName.getLocalName();
 				//judge whether the element need to load class from incubator package.
-				if (mIncubatorElements.contains(qName) && !isAttribute) {
+				if (mHandwrittenElementClasses.contains(qName)) {
 					//judge whether the element need to rename before find class name.
 					if (mElementRenames.containsKey(qName)) {
 						String renameName = mElementRenames.get(qName);
@@ -149,7 +133,7 @@ public class OdfXMLFactory {
 				} catch (ClassNotFoundException ex) {
 					// all classes are first tring to load and warning is given later
 				} catch (NoClassDefFoundError dex) {
-					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.INFO, "NoClassDefFoundError: " + className, dex.getMessage());
+					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.FINER, "NoClassDefFoundError: " + className, dex.getMessage());
 				}
 			}
 		}
@@ -238,11 +222,11 @@ public class OdfXMLFactory {
 					element = newOdfElement(dom, adaptedName);
 				} else {
 					element = (OdfElement) new OdfAlienElement(dom, adaptedName);
-					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.FINE, "None-ODF element created for {0}", adaptedName.getQName());
+					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.FINER, "None-ODF element created for {0}", adaptedName.getQName());
 				}
 			} else {
 				element = (OdfElement) new OdfAlienElement(dom, name);
-				Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.FINE, "None-ODF element created for {0}", name.getQName());
+				Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.FINER, "None-ODF element created for {0}", name.getQName());
 			}
 		}
 		return element;
@@ -252,31 +236,36 @@ public class OdfXMLFactory {
 		OdfAttribute attr = null;
 
 		// lookup registered attribute class for qname
+
+		// SJ: but there exists elements & attributes having the same qName ("style:style")
+		// so it is not ensured to get a OdfAttribute ... in case of "style:style" you get a
+		// OdfStyle which is not a OdfAttribute :-(
 		Class attributeClass = getOdfAttributeClass(name);
 
 		// if a class was registered create an instance of that class
 		if (attributeClass != null) {
-			attr = (OdfAttribute) getNodeFromClass(dom, attributeClass);
-		} else { // in case it is not a default ODF
-			// add a namespace unless it is a xmlns attribute (no attr value to set the uri)
-			String prefix = name.getPrefix();
-			if (prefix != null && !prefix.equals("xmlns")) {
-				// check if the namespace prefix is correct or add potential namespace to DOM
-				OdfName adaptedName = addNamespaceToDom(name, dom);
-				String newPrefix = adaptedName.getPrefix();
-				// in case the prefix was changed as it existed before
-				if (!prefix.equals(newPrefix) && newPrefix.indexOf("__") == -1) {
-					// look up again if there is a class registered for this prefix
-					attr = newOdfAttribute(dom, adaptedName);
-				} else {
-					attr = (OdfAttribute) new OdfAlienAttribute(dom, name);
-					Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.FINE, "None-ODF attribute created for {0}", adaptedName.getQName());
-				}
-			} else {
-				// create an alien attribute for namespace attribute "xmlns:*"
-				attr = (OdfAttribute) new OdfAlienAttribute(dom, name);
+			Object node = getNodeFromClass(dom, attributeClass);
+			if(node instanceof OdfAttribute) {
+				return (OdfAttribute)node;
 			}
-
+		}
+		// add a namespace unless it is a xmlns attribute (no attr value to set the uri)
+		String prefix = name.getPrefix();
+		if (prefix != null && !prefix.equals("xmlns")) {
+			// check if the namespace prefix is correct or add potential namespace to DOM
+			OdfName adaptedName = addNamespaceToDom(name, dom);
+			String newPrefix = adaptedName.getPrefix();
+			// in case the prefix was changed as it existed before
+			if (!prefix.equals(newPrefix) && newPrefix.indexOf("__") == -1) {
+				// look up again if there is a class registered for this prefix
+				attr = newOdfAttribute(dom, adaptedName);
+			} else {
+				attr = (OdfAttribute) new OdfAlienAttribute(dom, name);
+				Logger.getLogger(OdfXMLFactory.class.getName()).log(Level.FINER, "None-ODF attribute created for {0}", adaptedName.getQName());
+			}
+		} else {
+			// create an alien attribute for namespace attribute "xmlns:*"
+			attr = (OdfAttribute) new OdfAlienAttribute(dom, name);
 		}
 		return attr;
 	}
@@ -289,7 +278,7 @@ public class OdfXMLFactory {
 	/**
 	 * @param dom the XML DOM file where the node should be created on.
 	 * @param nodeClass being an XMLNode the Java class of the instance to be created.
-	 * @return an object instance of the XML node class being provided (usally an attribute or element). */
+	 * @return an object instance of the XML node class being provided (usually an attribute or element). */
 	static Object getNodeFromClass(OdfFileDom dom, Class nodeClass) {
 		Object o = null;
 		try {

@@ -21,9 +21,14 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.dom;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
-
+import org.odftoolkit.odfdom.changes.ChangesFileSaxHandler;
+import org.odftoolkit.odfdom.dom.element.office.OfficeAutomaticStylesElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBodyElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentContentElement;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
@@ -31,10 +36,14 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.pkg.NamespaceName;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
+import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.w3c.dom.Node;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
 
 /**
- * The DOM repesentation of the ODF content.xml file of an ODF document.
+ * The DOM representation of the ODF content.xml file of an ODF document.
  */
 public class OdfContentDom extends OdfFileDom {
 
@@ -51,17 +60,31 @@ public class OdfContentDom extends OdfFileDom {
 	}
 
 	/** Might be used to initialize specific XML Namespace prefixes/URIs for this XML file*/
-	@Override
-	protected void initialize() {
-		for (NamespaceName name : OdfDocumentNamespace.values()) {
-			mUriByPrefix.put(name.getPrefix(), name.getUri());
-			mPrefixByUri.put(name.getUri(), name.getPrefix());
-		}
-		super.initialize();
+    @Override
+    protected void initialize() throws SAXException, IOException, ParserConfigurationException {
+        for (NamespaceName name : OdfDocumentNamespace.values()) {
+            mUriByPrefix.put(name.getPrefix(), name.getUri());
+            mPrefixByUri.put(name.getUri(), name.getPrefix());
+        }
+        try {
+            super.initialize(new ChangesFileSaxHandler(this), this);
+        } catch (IOException | ParserConfigurationException | SAXException ex) {
+            Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
+            OdfValidationException ve = new OdfValidationException(OdfSchemaConstraint.DOCUMENT_WITH_EXISTENT_BUT_UNREADABLE_CONTENT_OR_STYLES_XML, mPackage.getBaseURI(), ex, OdfSchemaDocument.OdfXMLFile.STYLES.getFileName());
+            ErrorHandler eh = mPackage.getErrorHandler();
+            if (eh != null) {
+                try {
+                    eh.error(ve);
+                } catch (SAXException ex1) {
+                    Logger.getLogger(OdfStylesDom.class.getName()).log(Level.SEVERE, null, ex1);
+                    throw ex1;
+                }
+            }
+        }
 	}
 
 	/**
-	 * Retrieves the Odf Document
+	 * Retrieves the ODF Document
 	 *
 	 * @return The <code>OdfDocument</code>
 	 */
@@ -106,30 +129,42 @@ public class OdfContentDom extends OdfFileDom {
 		return OdfElement.findFirstChildNode(OdfOfficeAutomaticStyles.class, getFirstChild());
 	}
 
-	/**
-	 * @return the {@odf.element style:automatic-styles} element of this dom. If it does not
-	 *         yet exists, a new one is inserted into the dom and returned.
-	 *
-	 */
-	public OdfOfficeAutomaticStyles getOrCreateAutomaticStyles() {
+    /**
+     * @return the {
+     * @odf.element style:automatic-styles} element of this dom. If it does not
+     * yet exists, a new one is inserted into the dom and returned.
+     *
+     */
+    public OdfOfficeAutomaticStyles getOrCreateAutomaticStyles() {
 
-		OdfOfficeAutomaticStyles automaticStyles = getAutomaticStyles();
-		if (automaticStyles == null) {
-			automaticStyles = newOdfElement(OdfOfficeAutomaticStyles.class);
+        OdfOfficeAutomaticStyles automaticStyles = getAutomaticStyles();
+        if (automaticStyles == null) {
+            automaticStyles = newOdfElement(OfficeAutomaticStylesElement.class);
 
-			Node parent = getFirstChild();
+            Node parent = getFirstChild();
 
-			// try to insert before body or before master-styles element
+            /* from the ODF 1.2 schema
+                <define name="office-document-content">
+                    <element name="office:document-content">
+                        <ref name="office-document-common-attrs"/>
+                        <ref name="office-scripts"/>
+                        <ref name="office-font-face-decls"/>
+                        <ref name="office-automatic-styles"/>
+                        <ref name="office-body"/>
+                    </element>
+                </define>
+            */
+		// try to insert before body element
 			OdfElement sibling = OdfElement.findFirstChildNode(OfficeBodyElement.class, parent);
 			if (sibling == null) {
 				sibling = OdfElement.findFirstChildNode(OdfOfficeMasterStyles.class, parent);
 			}
 			if (sibling == null) {
-				parent.appendChild(automaticStyles);
-			} else {
-				parent.insertBefore(automaticStyles, sibling);
-			}
-		}
-		return automaticStyles;
-	}
+                parent.appendChild(automaticStyles);
+            }else{
+                parent.insertBefore(automaticStyles, sibling);
+            }
+        }
+        return automaticStyles;
+    }
 }

@@ -35,13 +35,13 @@ public class SpreadsheetTemplateTest {
 
 	@Test
 	public void testLoadingASpreadsheetTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_SPREADSHEET_TEMPLATE));
+		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getTestInputAsStream(TEST_SPREADSHEET_TEMPLATE));
 		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
 	}
 
 	@Test
 	public void testSavingASpreadsheetTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_SPREADSHEET_TEMPLATE));
+		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getTestInputAsStream(TEST_SPREADSHEET_TEMPLATE));
 		File destination = File.createTempFile("odfdom-test", ".ots", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 

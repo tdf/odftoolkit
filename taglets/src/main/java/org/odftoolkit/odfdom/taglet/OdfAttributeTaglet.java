@@ -1,6 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
+ * Copyright 2018-2019 The Document Foundation. All rights reserved.
  * Copyright 2009 IBM. All rights reserved.
  * Copyright 2010 Oracle and/or its affiliates. All rights reserved.
  *
@@ -21,13 +22,15 @@
  */
 package org.odftoolkit.odfdom.taglet;
 
+import com.sun.source.doctree.DocTree;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
+import jdk.javadoc.doclet.Taglet;
+import javax.lang.model.element.Element;
 
-import com.sun.javadoc.Tag;
-import com.sun.tools.doclets.Taglet;
 
 /**
  * This class implements a custom taglet to the map the ODF attribute to the
@@ -36,19 +39,19 @@ import com.sun.tools.doclets.Taglet;
  * The position of the OpenDocument specification in HTML can be provided using
  * an environment variable or java system property, while the system property
  * overrides the environment variable. In case nothing is been a default path
- * within the JavaDoc doc-files directory is being used.
+ * within the JavaDoc resources directory is being used.
  *
  * For example the taglet <code>{&#64;odf.attribute xml:id}</code> would be
  * resolved without variable settings to
- * <code>JAVA_DOC_BASE/doc-files/OpenDocument-v1.2-part1.html#attribute-xml_id</code>
+ * <code>JAVA_DOC_BASE/resources/OpenDocument-v1.2-part1.html#attribute-xml_id</code>
  * .
  */
 public class OdfAttributeTaglet implements Taglet {
 
 	private static final Logger LOG = Logger.getLogger(OdfAttributeTaglet.class.getName());
 	private static final String NAME = "odf.attribute";
-	private static final String ODF_SPEC_PART1_PATH = "../../../../../../doc-files/OpenDocument-v1.2-part1.html";
-	private static final String ODF_SPEC_PART3_PATH = "../../../../../doc-files/OpenDocument-v1.2-part3.html";
+	private static final String ODF_SPEC_PART1_PATH = "../../../../../../resources/OpenDocument-v1.2-part1.html";
+	private static final String ODF_SPEC_PART3_PATH = "../../../../../resources/OpenDocument-v1.2-part3.html";
 	private static String mOdfSpecPart1Path = null;
 	private static String mOdfSpecPart3Path = null;
 	private static Set<String> mNS_IN_PART3 = new HashSet<String>();
@@ -173,34 +176,29 @@ public class OdfAttributeTaglet implements Taglet {
 	 * Given the <code>Tag</code> representation of this custom tag, return its
 	 * string representation.
 	 *
-	 * @param tag
-	 *            he <code>Tag</code> representation of this custom tag.
 	 * @return the string representation of the custom tag
 	 */
-	public String toString(Tag tag) {
-		int pos = tag.text().lastIndexOf(":");
-		String namespace = tag.text().substring(0, pos);
-		String name = tag.text().substring(pos + 1);
+	@Override
+	public String toString(List<? extends DocTree> tags, Element element) {
+		// The taglet text like the following for the ODF attribute @draw:transform
+		// docText = {odf.attribute draw:transform}
+		String docText = tags.get(0).toString();
+		int startPos = docText.lastIndexOf(" ");
+		int endPos = docText.lastIndexOf(":");
+		String namespace = docText.substring(startPos + 1, endPos);
+		String name = docText.substring(endPos + 1, docText.length() - 1);
 		String mOdfSpecPath = mOdfSpecPart1Path;
 		if (mNS_IN_PART3.contains(namespace)) {
 			mOdfSpecPath = mOdfSpecPart3Path;
+		}else{
 		}
 		String fragmentIdentifier = "attribute-" + namespace + "_" + name;
-		return "<a href=\"" + mOdfSpecPath + "#" + fragmentIdentifier + "\">" + tag.text() + "</a>";
+		return "<a href=\"" + mOdfSpecPath + "#" + fragmentIdentifier + "\">@" + namespace + ":" + name + "</a>";
 	}
 
-	/**
-	 * This method should not be called since arrays of inline tags do not
-	 * exist. Method should be used to convert this inline tag to a string.
-	 *
-	 * @param tags
-	 *            the array of <code>Tag</code>s representing of this custom
-	 *            tag.
-	 * @return Nothing is returned, instead an
-	 *         <code>UnsupportedOperationException</code> is being thrown.
-	 */
-	public String toString(Tag[] tags) {
-		throw new java.lang.UnsupportedOperationException("Arrays of inline tags do not exist!");
+	@Override
+	public Set<Location> getAllowedLocations() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
 }

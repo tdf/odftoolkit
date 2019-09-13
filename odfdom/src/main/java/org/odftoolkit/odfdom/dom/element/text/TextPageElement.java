@@ -95,4 +95,10 @@ public class TextPageElement extends OdfElement {
 			visitor.visit(this);
 		}
 	}
+
+	@Override
+	/** If this element is the first - perhaps only - element of a logical group of XML elements. For instance: table, paragraph */
+	public boolean isComponentRoot(){
+		return true;
+	}
 }

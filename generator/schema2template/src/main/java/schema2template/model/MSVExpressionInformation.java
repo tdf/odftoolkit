@@ -1,4 +1,4 @@
-/************************************************************************
+/** **********************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
@@ -18,7 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- ************************************************************************/
+ *********************************************************************** */
 package schema2template.model;
 
 import com.sun.msv.grammar.AttributeExp;
@@ -27,6 +27,8 @@ import com.sun.msv.grammar.ElementExp;
 import com.sun.msv.grammar.Expression;
 import com.sun.msv.grammar.NameClassAndExpression;
 import com.sun.msv.grammar.OneOrMoreExp;
+import com.sun.msv.grammar.ReferenceExp;
+import com.sun.msv.grammar.SequenceExp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -34,6 +36,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.tinkerpop.gremlin.structure.Graph;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
+import schema2template.example.odf.OdfHelper;
+import schema2template.example.odf.PathPrinter;
+import static schema2template.model.PuzzlePiece.CHILD_VISITOR;
+import static schema2template.model.PuzzlePiece.TYPE_VISITOR;
+import static schema2template.model.PuzzlePiece.getName;
+import static schema2template.model.PuzzlePiece.getType;
 
 /**
  * Gather information from one MSV expression like:
@@ -44,7 +55,8 @@ import java.util.Set;
  * </ul>
  */
 public class MSVExpressionInformation {
-/*
+
+    /*
  * For each Named Expression (i.e. of Type Element or Attribute) we build a path
  *    thisNamedExpression -> Expression subEx -> Expression subsubEx -> ... -> childNamedExpression
  * All Expressions (thisNamedExpression, childNamedExpression and all in between) can be members of
@@ -53,19 +65,14 @@ public class MSVExpressionInformation {
  * If we query this Map for thisNamedExpression, we get all paths. If we query this Map for
  * childNamedExpression, we get all paths from this to the child. To display groups containing
  * one child, we have to query the group Expression to get all other elements of this group.
- */
-
-    private static final MSVExpressionVisitorChildren childVisitor = new MSVExpressionVisitorChildren();
-    private static final MSVExpressionVisitorType typeVisitor = new MSVExpressionVisitorType();
+     */
     private Map<Expression, List<List<Expression>>> mContainedInPaths;
-    private Expression mExpression;
     private boolean mCanHaveText = false;
     // map child to its isSingleton property
     private Set<Expression> mSingletonChildren = new HashSet<Expression>();
     private Set<Expression> mMultipleChildren = new HashSet<Expression>();
 
-    public MSVExpressionInformation(Expression exp) {
-        mExpression = exp;
+    public MSVExpressionInformation(Expression exp, String schemaFileName) {
         mContainedInPaths = new HashMap<Expression, List<List<Expression>>>();
 
         // Builds paths to child elements and child attributes
@@ -73,13 +80,29 @@ public class MSVExpressionInformation {
         List<Expression> start = new ArrayList<Expression>(1);
         start.add(exp);
         paths.add(start);
-        buildPaths(childVisitor, paths);
+        buildPaths(paths);
+        Graph g = buildGraph(exp);
+        if (exp instanceof ElementExp && schemaFileName != null) {
+            String elementName = getName((NameClassAndExpression) exp);
+        }
+
 
         // Test whether an element can have text content
         for (List<Expression> path : paths) {
-            if (((MSVExpressionType) path.get(path.size() - 1).visit(typeVisitor)) == MSVExpressionType.STRING) {
+            if (((MSVExpressionType) path.get(path.size() - 1).visit(TYPE_VISITOR)) == MSVExpressionType.STRING) {
                 mCanHaveText = true;
                 break;
+            }
+        }
+        if(OdfHelper.DEBUG) {
+            System.out.println("\n************ NEW EXPRESSION ****************");
+            List<String> pathPrints = PathPrinter.printChildPaths(paths);
+            if (paths == null) {
+                System.out.println("No Path found.");
+            } else {
+                for (String s : pathPrints) {
+                    System.out.println(s);
+                }
             }
         }
 
@@ -113,7 +136,7 @@ public class MSVExpressionInformation {
         Map<Expression, List<Expression>> paths = new HashMap<Expression, List<Expression>>();
 
         for (List<Expression> way : waysToChildren) {
-            Expression childexp = way.get(way.size()-1);
+            Expression childexp = way.get(way.size() - 1);
 
             Boolean newCardinality = new Boolean(false);                        // Cardinality (the opposite of isSingleton): true=N, false=1
             for (Expression step : way) {
@@ -172,8 +195,7 @@ public class MSVExpressionInformation {
                     if (commonChoice) {
                         System.err.println("We have a CHOICE between one definition with N and one with 1 -> What does that mean? WE CANNOT HANDLE THIS)");
                         System.exit(1);
-                    }
-                    // Valid case: One has 1, the other N, they don't share a common CHOICE -> Set N as the both defs are not exclusive (1 occurence + N occurences)
+                    } // Valid case: One has 1, the other N, they don't share a common CHOICE -> Set N as the both defs are not exclusive (1 occurence + N occurences)
                     else {
                         multiples.put(childexp, new Boolean(true));
                     }
@@ -183,8 +205,7 @@ public class MSVExpressionInformation {
                     // Valid case: Both have 1 and share a common CHOICE element
                     if (commonChoice) {
                         // Do nothing
-                    }
-                    // A case which we cannot handle. Both have 1:1 but do not share a common CHOICE element: 1:2 ??? ... 1:3 ???
+                    } // A case which we cannot handle. Both have 1:1 but do not share a common CHOICE element: 1:2 ??? ... 1:3 ???
                     else {
                         System.err.println("Already defined as 1, but two times without common choice. What does that mean? WE CANNOT HANDLE THIS!!!");
                         System.exit(1);
@@ -208,8 +229,7 @@ public class MSVExpressionInformation {
     private void setParentChildSingleton(Expression child, boolean singleton) {
         if (singleton) {
             mSingletonChildren.add(child);
-        }
-        else {
+        } else {
             mMultipleChildren.add(child);
         }
     }
@@ -237,16 +257,16 @@ public class MSVExpressionInformation {
      *      ElementExp parent -> [all Expressions but ElementExp or AttributeExp]* -> AttributeExp child
      * Since we use recursion we cannot make sure a path ends with an ElementExp or AttributeExp.
      */
-    private static void buildPaths(MSVExpressionVisitorChildren visitor, List<List<Expression>> paths) {
+    private static void buildPaths(List<List<Expression>> paths) {
         List<Expression> waytoresearch = paths.get(paths.size() - 1);
         Expression endpoint = waytoresearch.get(waytoresearch.size() - 1);
-        List<Expression> children = (List<Expression>) endpoint.visit(visitor);
+        List<Expression> children = (List<Expression>) endpoint.visit(CHILD_VISITOR);
 
         if (children.size() == 1) {
             Expression child = children.get(0);
             waytoresearch.add(child);
             if (!(child instanceof ElementExp) && !(child instanceof AttributeExp)) {
-                buildPaths(visitor, paths);
+                buildPaths(paths);
             }
         } else if (children.size() > 1) {
             paths.remove(paths.size() - 1);
@@ -256,9 +276,76 @@ public class MSVExpressionInformation {
                 newway.add(child);
                 paths.add(newway);
                 if (!(child instanceof ElementExp) && !(child instanceof AttributeExp)) {
-                    buildPaths(visitor, paths);
+                    buildPaths(paths);
                 }
             }
+        }
+    }
+
+    /**
+     * Creates a sub graph for elements & attributes with their element children
+     * as last descendant nodes
+     */
+    static Graph buildGraph(Expression exp) {
+        return buildGraph(null, null, null, exp, null);
+    }
+
+    /* Starting from every XML attribute and element (ie. ElementExp or AttributeExp) a subgraph of the XML RelaxNG schema is being created.
+
+     */
+    private static Graph buildGraph(Graph g, Vertex v, Vertex parentV, Expression exp, Expression parentExp) {
+        if (g == null) {
+            g = TinkerGraph.open();
+            v = g.addVertex(); // for the root element
+        }
+
+        // stop building the graph at element and attribtue children
+        addGraphProperties(exp, parentExp, v, parentV);
+        if (!(exp instanceof NameClassAndExpression) || parentExp == null) {
+            List<Expression> children = (List<Expression>) exp.visit(CHILD_VISITOR);
+            Integer newChildNo = 0;
+            for (Expression newChildExp : children) {
+                Vertex newChildV = g.addVertex();
+                // only for sequences the order of children is important
+                if (exp instanceof SequenceExp && parentV != null) {
+                    newChildNo++;
+                    v.addEdge("has", newChildV, "order", newChildNo.toString(), "color", "#00ee00"); // sequence edges using color green2 see http://www.farb-tabelle.de/de/rgb2hex.htm?q=green2
+                }
+                g = buildGraph(g, newChildV, v, newChildExp, exp);
+            }
+        }
+        return g;
+    }
+
+    private static void addGraphProperties(Expression exp, Expression parentExp, Vertex v, Vertex parentVertex) {
+
+        // property: type
+        String type = getType(exp).toString();
+        if (type != null && !type.isEmpty()) {
+            v.property("type", type);
+        }
+
+        // property: name
+        // only for all ElementExp || AttributeExp
+        if (exp instanceof NameClassAndExpression) {
+            String name = getName((NameClassAndExpression) exp);
+            v.property("name", name);
+            v.property("label", name);
+            if (exp instanceof ElementExp) {
+                v.property("color", "#6495ed"); // elements using CornflowerBlue
+            } else { // attribute}
+                v.property("color", "#ee0000"); // attributes using red2 see http://www.farb-tabelle.de/de/rgb2hex.htm?q=red2
+            }
+        } else if (exp instanceof ReferenceExp) {
+            v.property("label", "Ref: " + ((ReferenceExp) exp).name);
+            v.property("color", "#ffd700"); // gold1
+        } else {
+            v.property("label", type);
+        }
+
+        // if not already added an edge for the sequence
+        if (parentVertex != null && !(parentExp instanceof SequenceExp)) {
+            parentVertex.addEdge("has", v);
         }
     }
 
@@ -273,13 +360,13 @@ public class MSVExpressionInformation {
     }
 
     /**
-     * Gets all paths leading from this.getExpression() to exp (but not necessarily ending in exp).
-     * A path always starts with this.getExpression() and ends in
-     * someChildDefinition.getExpression().
+     * Gets all paths leading from this.getExpression() to exp (but not
+     * necessarily ending in exp). A path always starts with
+     * this.getExpression() and ends in someChildDefinition.getExpression().
      *
      * @param exp The MSV Expression. If you use this.getExpression() you get
-     * all paths starting from this.getExpression().
-     * If you use someChildDefinition.getExpression() you get all paths from
+     * all paths starting from this.getExpression(). If you use
+     * someChildDefinition.getExpression() you get all paths from
      * this.getExpression() to the Expression of the Child Definition.
      *
      * @return A List of paths containing exp or null if there are no such paths
@@ -300,11 +387,12 @@ public class MSVExpressionInformation {
     /**
      * Determines whether an Element or Attribute child is mandatory.
      *
-     * <p>If there are multiples of child (other equally named expressions)
+     * <p>
+     * If there are multiples of child (other equally named expressions)
      * providing only one of those Expressions will determine whether exactly
-     * this expression is mandatory. In most cases this will return false,
-     * and in most cases this is not what you want to know.
-     * Therefore you can provide a Collection of (equally named) child expressions.
+     * this expression is mandatory. In most cases this will return false, and
+     * in most cases this is not what you want to know. Therefore you can
+     * provide a Collection of (equally named) child expressions.
      * </p>
      *
      * @return whether child is mandatory
@@ -341,11 +429,10 @@ public class MSVExpressionInformation {
          * So both twins do not really share such a CHOICE. You have to look for another path which _really_ shares this choice or - if you find none -
          * set CHILD to optional.
          */
-
         HashSet<Expression> visitedChoices = new HashSet<Expression>();
 
         for (List<Expression> path : twins) {
-            for (int s=0; s<path.size(); s++) {
+            for (int s = 0; s < path.size(); s++) {
                 Expression step = path.get(s);
                 if (step instanceof ChoiceExp && !visitedChoices.contains(step)) {
                     visitedChoices.add(step);
@@ -363,9 +450,9 @@ public class MSVExpressionInformation {
                     int sharingPaths = 0;
 
                     for (List<Expression> otherPath : choiceInPaths) {
-                        if (otherPath.size() > s && path.subList(0, s+1).equals(otherPath.subList(0, s+1))) {
+                        if (otherPath.size() > s && path.subList(0, s + 1).equals(otherPath.subList(0, s + 1))) {
                             sharingPaths++;
-                            if (sharingPaths==2) {
+                            if (sharingPaths == 2) {
                                 break;
                             }
                         }

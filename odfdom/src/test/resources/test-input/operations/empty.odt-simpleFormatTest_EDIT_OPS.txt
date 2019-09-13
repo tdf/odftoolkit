@@ -1,0 +1,7 @@
+{"changes":[
+{"name":"documentLayout","attrs":{"document":{"fileFormat":"odf"}}},
+{"name":"addFontDecl","attrs":{"family":"Courier","familyGeneric":"modern","pitch":"fixed"},"fontName":"Courier"},
+{"name":"addParagraph","start":[1]},
+{"name":"addText","start":[1,1],"text":"Courier subscript"},
+{"name":"format","start":[1,1],"end":[1,17],"attrs":{"character":{"fontName":"Courier"}}}
+]}

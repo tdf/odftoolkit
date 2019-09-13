@@ -26,12 +26,8 @@
  */
 package org.odftoolkit.odfdom.dom.element.office;
 
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.ElementVisitor;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFillImageElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawGradientElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawHatchElement;
@@ -57,13 +53,16 @@ import org.odftoolkit.odfdom.dom.element.text.TextLinenumberingConfigurationElem
 import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;
 import org.odftoolkit.odfdom.dom.element.text.TextNotesConfigurationElement;
 import org.odftoolkit.odfdom.dom.element.text.TextOutlineStyleElement;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:styles}.
  *
  */
-public class OfficeStylesElement extends OdfContainerElementBase {
+public class OfficeStylesElement extends OdfOfficeStyles {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.OFFICE, "styles");
 
@@ -73,7 +72,7 @@ public class OfficeStylesElement extends OdfContainerElementBase {
 	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
 	 */
 	public OfficeStylesElement(OdfFileDom ownerDoc) {
-		super(ownerDoc, ELEMENT_NAME);
+		super(ownerDoc);
 	}
 
 	/**

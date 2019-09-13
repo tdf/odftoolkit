@@ -1,0 +1,8 @@
+{"changes":[
+{"name":"addText","start":[1,1,3,1,1],"text":"1"},
+{"name":"splitParagraph","start":[1,1,3,1,2]},
+{"name":"addText","start":[1,1,3,2,1],"text":"2"},
+{"name":"splitParagraph","start":[1,1,3,2,2]},
+{"name":"format","start":[1,1,3,2],"attrs":{"styleId":null,"character":{"bold":null,"color":null,"fillColor":null,"fontName":null,"fontSize":null,"italic":null,"language":null,"strike":null,"underline":null,"url":null,"vertAlign":null},"paragraph":{"alignment":null,"borderBottom":null,"borderInside":null,"borderLeft":null,"borderRight":null,"borderTop":null,"contextualSpacing":null,"fillColor":null,"indentFirstLine":null,"indentLeft":null,"indentRight":null,"lineHeight":null,"listLabelHidden":null,"listLevel":null,"listStartValue":null,"listStyleId":null,"marginBottom":null,"marginTop":null,"nextStyleId":null,"outlineLevel":null,"tabStops":null}}},
+{"name":"addText","start":[1,1,3,3,1],"text":"a"}
+]}

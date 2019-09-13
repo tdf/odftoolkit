@@ -82,7 +82,7 @@ public enum OdfPackageConstraint implements ValidationConstraint {
 //    FUTURE FEATUE: LOCALIZATION:
 //    =============================
 //    There should be a property files e.g. OdfPackageConstraint_de_DE.properties Sourcecode:
-//    PACKAGE_IS_NO_ZIP=%s muß eine ZIP Datei sein, wie in [ZIP] definiert. Alle Dateien innerhalbe des ZIPS müssen entwder unkomprimiert (STORED) oder komprimiert sein (DEFLATED) und den DEFLATE aloritmus verwenden.
+//    PACKAGE_IS_NO_ZIP=%s muss eine ZIP Datei sein, wie in [ZIP] definiert. Alle Dateien innerhalbe des ZIPS muessen entwder unkomprimiert (STORED) oder komprimiert sein (DEFLATED) und den DEFLATE aloritmus verwenden.
 //    MANIFEST_NOT_IN_PACKAGE=.....
 //    ResourceBundle bundle = ResourceBundle.getBundle(OdfPackageConstraint.class.getName());
 //    return bundle.getString(this.name());

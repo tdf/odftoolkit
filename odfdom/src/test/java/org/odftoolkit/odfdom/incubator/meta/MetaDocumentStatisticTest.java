@@ -21,7 +21,7 @@
 
 package org.odftoolkit.odfdom.incubator.meta;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.After;
 import org.junit.Before;
@@ -56,7 +56,7 @@ public class MetaDocumentStatisticTest {
 	@Before
 	public void setUp() throws Exception {
 		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities
-				.getTestResourceAsStream(filename));
+				.getTestInputAsStream(filename));
 		metadom = doc.getMetaDom();
 		OdfOfficeMeta meta = new OdfOfficeMeta(metadom);
 		stat = meta.getDocumentStatistic();
@@ -167,11 +167,11 @@ public class MetaDocumentStatisticTest {
 		doc = (OdfTextDocument) OdfTextDocument.newTextDocument();
 		doc
 				.save(ResourceUtilities
-						.newTestOutputFile("EmptyDocForMetaTest.odt"));
+						.getTestOutputFile("EmptyDocForMetaTest.odt"));
 
 		// read empty document meta
 		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities
-				.getTestResourceAsStream("EmptyDocForMetaTest.odt"));
+				.getTestOutputAsStream("EmptyDocForMetaTest.odt"));
 		metadom = doc.getMetaDom();
 		OdfOfficeMeta meta = new OdfOfficeMeta(metadom);
 		stat = meta.getDocumentStatistic();

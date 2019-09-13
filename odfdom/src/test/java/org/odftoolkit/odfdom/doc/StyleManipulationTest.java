@@ -44,13 +44,13 @@ public class StyleManipulationTest {
     @Test
     public void testLoadSave() {
         try {
-            OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE));
+            OdfDocument odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SOURCE));
             OdfOfficeStyles styles = odfDocument.getDocumentStyles();
             Assert.assertNotNull(styles);
             OdfStyle standardStyle = styles.getStyle("Standard", OdfStyleFamily.Paragraph);
             standardStyle.setProperty(StyleParagraphPropertiesElement.MarginLeft, "4711");
-            odfDocument.save(ResourceUtilities.newTestOutputFile(TARGET));
-            odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TARGET));
+            odfDocument.save(ResourceUtilities.getTestOutputFile(TARGET));
+            odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(TARGET));
             styles = odfDocument.getDocumentStyles();
             standardStyle = styles.getStyle("Standard", OdfStyleFamily.Paragraph);
             String marginLeft = standardStyle.getProperty(StyleParagraphPropertiesElement.MarginLeft);

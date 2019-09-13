@@ -1,4 +1,4 @@
-/************************************************************************
+/** **********************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
@@ -18,14 +18,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- ************************************************************************/
+ *********************************************************************** */
 package org.odftoolkit.odfdom.pkg;
 
+import java.io.File;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
@@ -39,22 +39,56 @@ public class LoadSaveTest {
 
     private static final String SOURCE = "not-only-odf.odt";
     private static final String TARGET = "loadsavetest.odt";
-	private static final String FOREIGN_ATTRIBUTE_NAME = "foreignAttribute";
-	private static final String FOREIGN_ATTRIBUTE_VALUE = "foreignAttributeValue";
-	private static final String FOREIGN_ELEMENT_TEXT = "foreignText";
+    private static final String TARGET_2 = "inputOutputTest.odt";
+    private static final String FOREIGN_ATTRIBUTE_NAME = "foreignAttribute";
+    private static final String FOREIGN_ATTRIBUTE_VALUE = "foreignAttributeValue";
+    private static final String FOREIGN_ELEMENT_TEXT = "foreignText";
 
     public LoadSaveTest() {
+    }
+
+        private static String OS = null;
+        public static boolean isWindows() {
+            if (OS == null) {
+                OS = System.getProperty("os.name");
+            }
+            return OS.startsWith("Windows");
+        }
+
+
+    @Test
+    public void testOutputToInputStream() {
+        try {
+            File testFileBefore = ResourceUtilities.getTestInputFile(SOURCE);
+            long lengthBefore = testFileBefore.length();
+            OdfPackageDocument odfDocument = OdfPackageDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SOURCE));
+            OdfPackage pkgBefore = odfDocument.getPackage();
+            Assert.assertTrue(pkgBefore.contains("content.xml"));
+            OdfPackage pkgAfter = OdfPackage.loadPackage(pkgBefore.getInputStream());
+            File testFileAfter = ResourceUtilities.getTestOutputFile(TARGET_2);
+            pkgAfter.save(testFileAfter);
+            long lengthAfter = testFileAfter.length();
+            // the XML declaration is in the new ODF XML files in a new line, adding for three files three bytes in total
+            if(isWindows()){
+                Assert.assertTrue("Before the package has a size of '" + lengthBefore + "' and afterwards a size of '" + lengthAfter + "'.", lengthBefore == lengthAfter);
+            }else{
+                // XML parser under Linux does insert line break after the XML declaration adding a byte for every ODF XML file..
+                Assert.assertTrue("Before the package has a size of '" + lengthBefore + "' and afterwards a size of '" + lengthAfter + "'.", lengthBefore == (lengthAfter + 3) || (lengthBefore == lengthAfter));
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(LoadSaveTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        }
     }
 
     @Test
     public void testLoadSave() {
         try {
-            OdfPackageDocument odfDocument = OdfPackageDocument.loadDocument(ResourceUtilities.getAbsolutePath(SOURCE));
+            OdfPackageDocument odfDocument = OdfPackageDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SOURCE));
             Assert.assertTrue(odfDocument.getPackage().contains("content.xml"));
             String baseURI = odfDocument.getPackage().getBaseURI();
-//            Assert.assertTrue(ResourceUtilities.getURI(SOURCE).toString().compareToIgnoreCase(baseURI) == 0);
-            System.out.println("SOURCE URI1:"+ResourceUtilities.getURI(SOURCE).toString());
-			System.out.println("SOURCE URI2:"+baseURI);
+            Assert.assertTrue(ResourceUtilities.getTestInputURI(SOURCE).toString().compareToIgnoreCase(baseURI) == 0);
 
             Document odfContent = odfDocument.getFileDom("content.xml");
             NodeList lst = odfContent.getElementsByTagNameNS("urn:oasis:names:tc:opendocument:xmlns:text:1.0", "p");
@@ -62,18 +96,18 @@ public class LoadSaveTest {
             String oldText = "Changed!!!";
             node.setTextContent(oldText);
 
-            //Added to reproduce the bug "xlmns:null=""" is added to namespace.
+            //Added to reproduce the bug "xmlns:null=''" is added to namespace.
             OdfFileDom dom = odfDocument.getFileDom("content.xml");
-			Map<String, String> nsByUri = dom.getMapNamespacePrefixByUri();
-			for (Entry<String, String> entry : nsByUri.entrySet()) {
-				Assert.assertNotNull(entry.getValue());
-				Assert.assertFalse(entry.getValue().length()==0);
-				Assert.assertNotNull(entry.getKey());
-				Assert.assertFalse(entry.getKey().length()==0);
-			}
+            Map<String, String> nsByUri = dom.getMapNamespacePrefixByUri();
+            for (Entry<String, String> entry : nsByUri.entrySet()) {
+                Assert.assertNotNull(entry.getValue());
+                Assert.assertFalse(entry.getValue().length() == 0);
+                Assert.assertNotNull(entry.getKey());
+                Assert.assertFalse(entry.getKey().length() == 0);
+            }
 
-            odfDocument.save(ResourceUtilities.newTestOutputFile(TARGET));
-            odfDocument = OdfPackageDocument.loadDocument(ResourceUtilities.getAbsolutePath(TARGET));
+            odfDocument.save(ResourceUtilities.getTestOutputFile(TARGET));
+            odfDocument = OdfPackageDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(TARGET));
 
             odfContent = odfDocument.getFileDom("content.xml");
             lst = odfContent.getElementsByTagNameNS("urn:oasis:names:tc:opendocument:xmlns:text:1.0", "p");
@@ -81,21 +115,19 @@ public class LoadSaveTest {
             String newText = node.getTextContent();
             Assert.assertTrue(newText.equals(oldText));
 
-			node = lst.item(1);
-			//check foreign attribute without namespace
-			Element foreignElement = (Element) node.getChildNodes().item(0);
+            node = lst.item(1);
+            //check foreign attribute without namespace
+            Element foreignElement = (Element) node.getChildNodes().item(0);
             String foreignText = foreignElement.getTextContent();
             Assert.assertTrue(foreignText.equals(FOREIGN_ELEMENT_TEXT));
 
-			//check foreign element without namespace
-			Attr foreignAttr = (Attr) node.getAttributes().getNamedItem(FOREIGN_ATTRIBUTE_NAME);
-			String foreignAttrValue = foreignAttr.getValue();
+            //check foreign element without namespace
+            Attr foreignAttr = (Attr) node.getAttributes().getNamedItem(FOREIGN_ATTRIBUTE_NAME);
+            String foreignAttrValue = foreignAttr.getValue();
             Assert.assertTrue(foreignAttrValue.equals(FOREIGN_ATTRIBUTE_VALUE));
 
-
-
         } catch (Exception e) {
-        	Logger.getLogger(LoadSaveTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+            Logger.getLogger(LoadSaveTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
             Assert.fail(e.getMessage());
         }
     }

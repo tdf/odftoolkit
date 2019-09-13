@@ -25,16 +25,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.Map.Entry;
-
-import org.odftoolkit.odfdom.pkg.OdfAttribute;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.style.StyleChartPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleDrawingPagePropertiesElement;
@@ -54,6 +48,11 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.OdfStylePropertySet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.NamedNodeMap;
@@ -61,7 +60,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- *
+ * A placeholder for multiple style incarnation, for instance <style:style> from either the automatic or the template styles parent, e.g. StyleStyleElement is inheriting from it
  */
 abstract public class OdfStyleBase extends OdfContainerElementBase implements OdfStylePropertySet, Comparable {
 
@@ -115,6 +114,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
     /**
      * get a map containing all properties of this style and their values.
      * @return map of properties.
+     * @Deprecated Broken by design as the same OdfStlyeProperty can occur multiple times and would be overwritten (e.g. background color exist 3times in cells).
      */
     public Map<OdfStyleProperty, String> getStyleProperties() {
         TreeMap<OdfStyleProperty, String> result = new TreeMap<OdfStyleProperty, String>();
@@ -133,6 +133,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
      * get a map containing all properties of this style and their values.
      * The map will also include any properties set by parent styles
      * @return  a map of all the properties.
+     * @Deprecated Broken by design as the same OdfStlyeProperty can occur multiple times and would be overwritten (e.g. background color exist 3times in cells).
      */
     public Map<OdfStyleProperty, String> getStylePropertiesDeep() {
         TreeMap<OdfStyleProperty, String> result = new TreeMap<OdfStyleProperty, String>();
@@ -154,7 +155,7 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
 
     public void removeStyleUser(OdfStylableElement user) {
         if (mStyleUser != null) {
-            mStyleUser.remove(user);
+			mStyleUser.remove(user);
         }
     }
 
@@ -517,11 +518,13 @@ abstract public class OdfStyleBase extends OdfContainerElementBase implements Od
         return 59 * 7 + (this.mPropertySetElementMap != null ? this.mPropertySetElementMap.hashCode() : 0);
     }
 
+    /** @return the style family of the style or null if none existent */
     public OdfStyleFamily getFamily() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 
+    /** @return the style parent of the style or null if none existent */
     public OdfStyleBase getParentStyle() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 }

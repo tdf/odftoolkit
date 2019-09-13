@@ -53,8 +53,9 @@ import java.util.Set;
  */
 public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleComponent {
 
-	private static MSVExpressionVisitorType TYPE_VISITOR = new MSVExpressionVisitorType();
-	private static MSVNameClassVisitorList NAME_VISITOR = new MSVNameClassVisitorList();
+	static final MSVExpressionVisitorType TYPE_VISITOR = new MSVExpressionVisitorType();
+	static final MSVNameClassVisitorList NAME_VISITOR = new MSVNameClassVisitorList();
+    static final MSVExpressionVisitorChildren CHILD_VISITOR = new MSVExpressionVisitorChildren();
 	private Expression mExpression;
 	// all multiples of this tagname (contains only this if there are no multiples)
 	private PuzzlePieceSet mMultiples = new PuzzlePieceSet();
@@ -88,11 +89,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 		mExpression = exp;
 		MSVExpressionType type = (MSVExpressionType) exp.visit(TYPE_VISITOR);
 		if (type == MSVExpressionType.ATTRIBUTE || type == MSVExpressionType.ELEMENT) {
-			List<String> names = (List<String>) ((NameClassAndExpression) exp).getNameClass().visit(NAME_VISITOR);
-			if (names == null || names.size() != 1) {
-				throw new RuntimeException("Definition: ELEMENT or ATTRIBUTE expression exp with none or more than one name is only allowed in this(exp, name)");
-			}
-			mName = names.get(0);
+			mName = getName((NameClassAndExpression) exp);
 		}
 		if (type == MSVExpressionType.VALUE) {
 			mName = ((ValueExp) exp).value.toString();
@@ -100,7 +97,58 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 		if (type == MSVExpressionType.DATA) {
 			mName = ((DataExp) exp).getName().localName;
 		}
+
+       // evaluateExpression(exp);
 	}
+
+    static String getName(NameClassAndExpression exp){
+        String name = null;
+        List<String> names = (List<String>) exp.getNameClass().visit(NAME_VISITOR);
+        if (names == null) {
+            name = "null";
+        }else if(names.size() != 1) {
+            name = "";
+            for(String n : names){
+                name += " | " + n;
+            }
+        }else{
+            name = names.get(0);
+        }
+        return name;
+    }
+
+    // SELF-ANALYSIS
+        // 'X?' is represented as 'choice(X,epsilon)'.
+            // is the parent a choice and the sibling an epsilon?
+    // CHILD-ANALYSIS
+            // is there an optional child
+            // is there a sequence of children
+            // do we have multiple children with an ID
+//    private void evaluateExpression(Expression exp){
+//        // 'X?' is represented as 'choice(X,epsilon)'.
+//        if (exp instanceof ChoiceExp) {
+//            ChoiceExp cexp = (ChoiceExp)exp;
+//            if (cexp.exp1 == Expression.epsilon)
+//                return cexp.exp2.evaluateExpression();
+//            if (cexp.exp2 == Expression.epsilon)
+//                return cexp.exp1.evaluateExpression();
+//
+//            // note that epsilon may be in some branch deep under the tree.
+//            // for example, when the expression is ((A|epsilon)|B)
+//            // the above code won't be able to peel the epsilon in it.
+//            // but this is OK, since this method still returns ChoiceExp,
+//            // and the type of the expression is what matters.
+//        }
+//
+//        // 'X+' is represented as 'oneOrMore(X)'
+//        if (exp instanceof OneOrMoreExp)
+//            return ((OneOrMoreExp)exp).exp.peelOccurence();
+//
+//        // 'X*' is represented as '(X+)?'
+//        // therefore it is important to recursively process it.
+//
+//        // otherwise we've finished.
+//    }
 
 	/**
 	 * Uses the name and the wrapped MSV Expression to test for equality.
@@ -122,7 +170,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	 * Uses the wrapped MSV Expression for the hashCode. MSV Expressions are numbered consecutively by a distinct Hash Code.
 	 */
 	public int hashCode() {
-		return mExpression.hashCode();
+		return 1013 * (mName.hashCode()) ^ 1009 * (mExpression.hashCode());
 	}
 
 	/**
@@ -223,6 +271,10 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 		return (MSVExpressionType) mExpression.visit(TYPE_VISITOR);
 	}
 
+    static MSVExpressionType getType(Expression exp){
+        return (MSVExpressionType) exp.visit(TYPE_VISITOR);
+    }
+
 	/**
 	 * Gets the wrapped Expression
 	 *
@@ -279,7 +331,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 			}
 			retval++;
 		}
-		throw new RuntimeException("aDefinition.getMultipleNumber: Internal error");
+		throw new RuntimeException("aDefinition.getMultipleNumber for Named:" +  this.mName);
 	}
 
 	/**
@@ -360,11 +412,11 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	 * @param newElementSet empty Set. Will be filled with Definitions of Type.ELEMENT
 	 * @param newAttributeSet empty Set. Will be filled with Definitions of Type.ATTRIBUTE
 	 */
-	public static void extractPuzzlePieces(Expression root, PuzzlePieceSet newElementSet, PuzzlePieceSet newAttributeSet) {
+	public static void extractPuzzlePieces(Expression root, PuzzlePieceSet newElementSet, PuzzlePieceSet newAttributeSet, String schemaFileName) {
 		// e.g. the newElementSet is the set to iterate later in the template
 		extractTypedPuzzlePieces(root, newElementSet, ElementExp.class);
 		extractTypedPuzzlePieces(root, newAttributeSet, AttributeExp.class);
-		configureProperties(newElementSet, newAttributeSet);
+		configureProperties(newElementSet, newAttributeSet, schemaFileName);
 		reduceDatatypes(newAttributeSet);
 		reduceValues(newAttributeSet);
 		reduceAttributes(newElementSet, newAttributeSet);
@@ -379,9 +431,10 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 
 		while (iter.hasNext()) {
 			Expression exp = iter.next();
-
+//2DO: ProbeRelaxNG mit NAME EXPRESSION ZUM TESTEN!!
 			// If there is more than one name for this expression, create more than one PuzzlePiece
 			List<String> names = (List<String>) ((NameClassAndExpression) exp).getNameClass().visit(NAME_VISITOR);
+//SVANTE: names commen aus einem CHOICE, wie könnte ich an dieser Stelle festhalten? - SONDERFALL -- kann eines von den 7 sein --> text:page-count - 7 Alternativen
 
 			for (String name : names) {
 				if (name.length() == 0) {
@@ -503,7 +556,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 	}
 
 	// Sets Children, Attributes and Parents.
-	private static void configureProperties(PuzzlePieceSet elements, PuzzlePieceSet attributes) {
+    private static void configureProperties(PuzzlePieceSet elements, PuzzlePieceSet attributes, String schemaFileName) {
 		Map<Expression, List<PuzzlePiece>> reverseElementMap = buildReverseMap(elements);
 		Map<Expression, List<PuzzlePiece>> reverseAttributeMap = buildReverseMap(attributes);
 
@@ -532,7 +585,8 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 					}
 				}
 			}
-			MSVExpressionInformation elementInfo = new MSVExpressionInformation(def.getExpression());
+            GraphSupport graphSupport = new GraphSupport(def.getExpression(), schemaFileName);
+			MSVExpressionInformation elementInfo = new MSVExpressionInformation(def.getExpression(), schemaFileName);
 			def.mCanHaveText = elementInfo.canHaveText();
 
 			Map<String, List<Expression>> atnameToDefs = buildNameExpressionsMap(def.mAttributes);

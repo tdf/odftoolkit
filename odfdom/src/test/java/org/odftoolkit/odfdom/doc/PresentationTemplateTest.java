@@ -35,13 +35,13 @@ public class PresentationTemplateTest {
 
 	@Test
 	public void testLoadingAPresentationTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_PRESENTATION));
+		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getTestInputAsStream(TEST_PRESENTATION));
 		Assert.assertEquals(OdfDocument.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
 	}
 
 	@Test
 	public void testSavingAPresentationTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_PRESENTATION));
+		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getTestInputAsStream(TEST_PRESENTATION));
 		File destination = File.createTempFile("odfdom-test", ".otp", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 

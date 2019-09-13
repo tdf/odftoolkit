@@ -263,4 +263,8 @@ public class OdfTextListStyle extends TextListStyleElement
 		}
 	}
 
+	@Override
+	public String toString() {
+		return this.getStyleNameAttribute();
+	}
 }

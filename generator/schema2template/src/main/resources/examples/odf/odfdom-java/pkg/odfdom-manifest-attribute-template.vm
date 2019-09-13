@@ -18,17 +18,17 @@
 ## under the License.
 ##
 ##################################################################
-
-## Template to create the list of artefacts which are to be generated
+## Template to create the list of manifest artefacts which are to be generated
 ##
 ## Documentation of template development can be found in local file
 ## TemplateHelp.html.
 ##
 ## Returns PuzzleComponent covering a PuzzlePiece or PuzzlePieceSet dependent if attribute is multiple times defined
-#set($attribute = $model.getAttribute($context))
-#set($NS = $attribute.getNamespace())
-#set($localname = ${model.extractLocalname($attribute)})
-#set($classname = "${model.camelCase($attribute.getLocalName())}Attribute")
+#set($attribute = $manifestmodel.getAttribute($context))
+#set ($NS = "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0")
+#set($NS = ${attribute.getNamespace()})
+#set($localname = ${manifestmodel.extractLocalname($attribute)})
+#set($classname = "${manifestmodel.camelCase($attribute)}Attribute")
 #set ($valueobject = "String")
 ##
 #set($datatypes = ${attribute.getDatatypes().withoutMultiples()})
@@ -94,14 +94,11 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 #end
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
 #if ($hasDefaultValue and $defaultValueSet.size()>1)
 #foreach ($parent in ${attribute.getParents().withoutMultiples()})
 #if ($odfmodel.getDefaultAttributeValue($attribute, $parent))
-#if (!$parent.equals("manifest")) ## Do not generate "import" for the same package!
-import org.odftoolkit.odfdom.pkg.manifest.${model.camelCase($parent.getLocalName())}Element;
-#end
+import org.odftoolkit.odfdom.pkg.${parent.getNamespace()}.${manifestmodel.camelCase($parent)}Element;
 #end
 #end
 #end
@@ -111,15 +108,15 @@ import org.odftoolkit.odfdom.pkg.manifest.${model.camelCase($parent.getLocalName
  */
 public class $classname extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.${NS.toUpperCase()}, "$localname");
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName("${NS}", "manifest:${attribute}");
 #if ($hasDefaultValue)
 #if ($defaultValueSet.size()>1)
 #foreach ($defaultValue in $defaultValueSet)
-#set ($constant = $model.constantCase($defaultValue))
+#set ($constant = $manifestmodel.constantCase($defaultValue))
 #if (($defaultValue=="true" or $defaultValue=="false") and $enum == false)
-	public static final String DEFAULT_VALUE_${model.escapeKeyword($constant)}= "$defaultValue";
+	public static final String DEFAULT_VALUE_${manifestmodel.escapeKeyword($constant)}= "$defaultValue";
 #else
-	public static final String DEFAULT_VALUE_${model.escapeKeyword($constant)}=	Value.${model.escapeKeyword($constant)}.toString();
+	public static final String DEFAULT_VALUE_${manifestmodel.escapeKeyword($constant)}=	Value.${manifestmodel.escapeKeyword($constant)}.toString();
 #end
 #end
 #else
@@ -169,8 +166,8 @@ public class $classname extends OdfAttribute {
 #if (${value.toString().length()} == 1)
 #set ($constant = $value)
 #else
-#set ($constant = $model.constantCase($value))
-#end${separator}${model.escapeKeyword($constant)}("${model.escapeLiteral($value)}")#set ($separator=", ")
+#set ($constant = $manifestmodel.constantCase($value))
+#end${separator}${manifestmodel.escapeKeyword($constant)}("${manifestmodel.escapeLiteral($value)}")#set ($separator=", ")
 #end ;
 
 		private String mValue;
@@ -226,7 +223,7 @@ public class $classname extends OdfAttribute {
 	/**
 	 * @param value The <code>${simplevalue}</code> value of the attribute.
 	 */
-	public void set${model.camelCase($simplevalue)}Value(${simplevalue} value) {
+	public void set${manifestmodel.camelCase($simplevalue)}Value(${simplevalue} value) {
 		super.setValue(String.valueOf(value));
 	}
 
@@ -236,7 +233,7 @@ public class $classname extends OdfAttribute {
 	public ${simplevalue} ${simplevalue}Value() {
 		String val = super.getValue();
 		try {
-			return ${valueobject}.parse${model.camelCase($simplevalue)}(val);
+			return ${valueobject}.parse${manifestmodel.camelCase($simplevalue)}(val);
 		} catch (NumberFormatException e) {
 			// TODO: validation handling/logging
 			throw (e);
@@ -320,13 +317,13 @@ public class $classname extends OdfAttribute {
 #if ($defaultValueSet.size()>1)
 #foreach ($parent in ${attribute.getParents().withoutMultiples()})
 #if ($odfmodel.getDefaultAttributeValue($attribute, $parent))
-			if (parentElement instanceof ${model.camelCase($parent)}Element) {
-				defaultValue = "${model.escapeLiteral($odfmodel.getDefaultAttributeValue($attribute, $parent))}";
+			if (parentElement instanceof ${manifestmodel.camelCase($parent)}Element) {
+				defaultValue = "${manifestmodel.escapeLiteral($odfmodel.getDefaultAttributeValue($attribute, $parent))}";
 			}
 #end
 #end
 #else
-			defaultValue = "${model.escapeLiteral($uniqueDefaultValue)}";
+			defaultValue = "${manifestmodel.escapeLiteral($uniqueDefaultValue)}";
 #end
 		}
 		return defaultValue;

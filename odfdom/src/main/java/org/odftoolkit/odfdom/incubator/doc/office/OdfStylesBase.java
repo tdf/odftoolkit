@@ -24,10 +24,19 @@ package org.odftoolkit.odfdom.incubator.doc.office;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.element.number.DataStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberBooleanStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberTextStyleElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberCurrencyStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberDateStyle;
@@ -41,7 +50,9 @@ import org.w3c.dom.Node;
 /**
  * Implements shared functions for OdfAutomaticStyles and OdfStyles.
  */
-class OdfStylesBase {
+abstract public class OdfStylesBase extends OdfContainerElementBase {
+
+	private static final long serialVersionUID = 1L;
 
 	private HashMap<OdfStyleFamily, HashMap<String, OdfStyle>> mStyles;
 	private HashMap<String, OdfTextListStyle> mListStyles;
@@ -53,14 +64,61 @@ class OdfStylesBase {
 	private HashMap<String, NumberBooleanStyleElement> mBooleanStyles;
 	private HashMap<String, NumberTextStyleElement> mTextStyles;
 
+    private HashMap<String, DataStyleElement> mAllDataStyles = new HashMap<String, DataStyleElement> ();
+
+	public OdfStylesBase(OdfFileDom ownerDoc, OdfName odfName) {
+		super(ownerDoc, odfName);
+	}
+
+    /**
+    *
+    * @return a set of all names of the contained 'number' styles (text, date, time, ...)
+    */
+   public HashMap<String, DataStyleElement> getAllDataStyles() {
+       return mAllDataStyles;
+   }
+
+   /**
+    * Create an ODF style with style name and family
+    *
+    * @param name  The style name
+    * @param family The style family
+    * @return  The <code>OdfStyle</code> element
+    */
+   public OdfStyle newStyle(String name, OdfStyleFamily family) {
+	   OdfStyle oldStyle = this.getStyle(name, family);
+		if(oldStyle != null){
+			this.removeChild(oldStyle);
+		}
+		OdfFileDom fileDom = ((OdfFileDom) this.ownerDocument);
+		OdfStyle newStyle = fileDom.newOdfElement(OdfStyle.class);
+		newStyle.setStyleNameAttribute(name);
+		newStyle.setStyleFamilyAttribute(family.getName());
+		StyleStyleElement firstStyle;
+		try {
+			firstStyle = getStylesElement(fileDom, StyleStyleElement.class);
+			if(firstStyle == null){
+				insertBefore(newStyle, firstStyle);
+			}else{
+				appendChild(newStyle);
+			}
+
+		} catch (Exception ex) {
+			Logger.getLogger(OdfOfficeStyles.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return newStyle;
+   	}
+
+   	protected abstract <T extends OdfElement> T getStylesElement(OdfFileDom dom, Class<T> clazz) throws Exception;
+
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	OdfStyle getStyle(String name, OdfStyleFamily familyType) {
-		if (mStyles != null) {
+	public OdfStyle getStyle(String name, OdfStyleFamily familyType) {
+		if (mStyles!=null&&name!=null) {
 			HashMap<String, OdfStyle> familyMap = mStyles.get(familyType);
 			if (familyMap != null) {
 				return familyMap.get(name);
+				}
 			}
-		}
 		return null;
 	}
 
@@ -68,7 +126,7 @@ class OdfStylesBase {
 	 *
 	 * @return iterator for all <code>OdfStyle</code> elements
 	 */
-	Iterable<OdfStyle> getAllOdfStyles() {
+	public Iterable<OdfStyle> getAllStyles() {
 		ArrayList<OdfStyle> allStyles = new ArrayList<OdfStyle>();
 		if (mStyles != null) {
 			for (OdfStyleFamily family : mStyles.keySet()) {
@@ -81,7 +139,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	Iterable<OdfStyle> getStylesForFamily(OdfStyleFamily familyType) {
+	public Iterable<OdfStyle> getStylesForFamily(OdfStyleFamily familyType) {
 		if (mStyles != null) {
 			HashMap<String, OdfStyle> familyMap = mStyles.get(familyType);
 			if (familyMap != null) {
@@ -92,7 +150,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	OdfTextListStyle getListStyle(String name) {
+	public OdfTextListStyle getListStyle(String name) {
 		if (mListStyles != null) {
 			return mListStyles.get(name);
 		} else {
@@ -101,7 +159,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	Iterable<OdfTextListStyle> getListStyles() {
+	public Iterable<OdfTextListStyle> getListStyles() {
 		if (mListStyles != null) {
 			return mListStyles.values();
 		} else {
@@ -110,7 +168,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	OdfNumberStyle getNumberStyle(String name) {
+	public OdfNumberStyle getNumberStyle(String name) {
 		if (mNumberStyles != null) {
 			return mNumberStyles.get(name);
 		} else {
@@ -119,7 +177,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	Iterable<OdfNumberStyle> getNumberStyles() {
+	public Iterable<OdfNumberStyle> getNumberStyles() {
 		if (mNumberStyles != null) {
 			return mNumberStyles.values();
 		} else {
@@ -128,7 +186,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	OdfNumberDateStyle getDateStyle(String name) {
+	public OdfNumberDateStyle getDateStyle(String name) {
 		if (mDateStyles != null) {
 			return mDateStyles.get(name);
 		} else {
@@ -137,7 +195,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	Iterable<OdfNumberDateStyle> getDateStyles() {
+	public Iterable<OdfNumberDateStyle> getDateStyles() {
 		if (mDateStyles != null) {
 			return mDateStyles.values();
 		} else {
@@ -146,7 +204,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	OdfNumberPercentageStyle getPercentageStyle(String name) {
+	public OdfNumberPercentageStyle getPercentageStyle(String name) {
 		if (mPercentageStyles != null) {
 			return mPercentageStyles.get(name);
 		} else {
@@ -155,7 +213,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	Iterable<OdfNumberPercentageStyle> getPercentageStyles() {
+	public Iterable<OdfNumberPercentageStyle> getPercentageStyles() {
 		if (mPercentageStyles != null) {
 			return mPercentageStyles.values();
 		} else {
@@ -164,7 +222,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	OdfNumberCurrencyStyle getCurrencyStyle(String name) {
+	public OdfNumberCurrencyStyle getCurrencyStyle(String name) {
 		if (mCurrencyStyles != null) {
 			return mCurrencyStyles.get(name);
 		} else {
@@ -173,7 +231,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	Iterable<OdfNumberCurrencyStyle> getCurrencyStyles() {
+	public Iterable<OdfNumberCurrencyStyle> getCurrencyStyles() {
 		if (mCurrencyStyles != null) {
 			return mCurrencyStyles.values();
 		} else {
@@ -182,7 +240,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	OdfNumberTimeStyle getTimeStyle(String name) {
+	public OdfNumberTimeStyle getTimeStyle(String name) {
 		if (mTimeStyles != null) {
 			return mTimeStyles.get(name);
 		} else {
@@ -191,7 +249,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	Iterable<OdfNumberTimeStyle> getTimeStyles() {
+	public Iterable<OdfNumberTimeStyle> getTimeStyles() {
 		if (mTimeStyles != null) {
 			return mTimeStyles.values();
 		} else {
@@ -200,7 +258,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	NumberBooleanStyleElement getBooleanStyle(String name) {
+	public NumberBooleanStyleElement getBooleanStyle(String name) {
 		if (mBooleanStyles != null) {
 			return mBooleanStyles.get(name);
 		} else {
@@ -209,7 +267,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	Iterable<NumberBooleanStyleElement> getBooleanStyles() {
+	public Iterable<NumberBooleanStyleElement> getBooleanStyles() {
 		if (mBooleanStyles != null) {
 			return mBooleanStyles.values();
 		} else {
@@ -227,7 +285,7 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	Iterable<NumberTextStyleElement> getTextStyles() {
+	public Iterable<NumberTextStyleElement> getTextStyles() {
 		if (mTextStyles != null) {
 			return mTextStyles.values();
 		} else {
@@ -236,7 +294,12 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	void onOdfNodeInserted(OdfElement node, Node refNode) {
+	@Override
+	public void onOdfNodeInserted(OdfElement node, Node refNode) {
+        if(node instanceof DataStyleElement ) {
+            OdfAttribute name = node.getOdfAttribute(OdfDocumentNamespace.STYLE, "name");
+            mAllDataStyles.put(name.getValue(), (DataStyleElement)node);
+        }
 		if (node instanceof OdfStyle) {
 			OdfStyle style = (OdfStyle) node;
 			if (mStyles == null) {
@@ -317,7 +380,12 @@ class OdfStylesBase {
 	}
 
 	// For documentation see OdfAutomaticStyles or OdfStyles.
-	void onOdfNodeRemoved(OdfElement node) {
+	@Override
+	public void onOdfNodeRemoved(OdfElement node) {
+        if(node instanceof DataStyleElement ) {
+            OdfAttribute name = node.getOdfAttribute(OdfDocumentNamespace.STYLE, "name");
+            mAllDataStyles.remove(name.getValue());
+        }
 		if (node instanceof OdfStyle) {
 			if (mStyles != null) {
 				OdfStyle style = (OdfStyle) node;

@@ -21,13 +21,12 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.incubator.doc.text;
 
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 
 /**
- * Convenient functionalty for the parent ODF OpenDocument element
+ * Convenient functionality for the parent ODF OpenDocument element
  *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.text.Paragraph} in Simple API.
  */
 public class OdfTextParagraph extends TextPElement {
 

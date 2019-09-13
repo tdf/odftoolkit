@@ -26,9 +26,7 @@
  */
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlAboutAttribute;
@@ -36,6 +34,10 @@ import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlContentAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlDatatypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlPropertyAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:bookmark-start}.
@@ -220,11 +222,17 @@ public class TextBookmarkStartElement extends OdfElement {
 		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 
-	protected void onRemoveNode() {
-		super.onRemoveNode();
-		((OdfFileDom) this.ownerDocument).getInContentMetadataCache().remove(this);
-	}
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+    }
 
+    @Override
 	protected void onInsertNode() {
 		super.onInsertNode();
 		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);

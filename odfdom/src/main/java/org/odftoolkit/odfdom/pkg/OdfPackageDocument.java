@@ -1,5 +1,4 @@
-/**
- * **********************************************************************
+/************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
@@ -8,8 +7,8 @@
  * Use is subject to license terms.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
+ * use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
  * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -19,13 +18,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- ***********************************************************************
- */
+ ************************************************************************/
 package org.odftoolkit.odfdom.pkg;
 
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.util.ResourceUtils;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -40,55 +35,49 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.util.ResourceUtils;
 import org.odftoolkit.odfdom.pkg.rdfa.Util;
+import org.w3c.dom.Document;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 
 /**
  *
- * The package layer described by the ODF 1.2 Package specification is
- * independent of the above ODF XML layer described by the ODF 1.2 XML Schema
- * specification.
+ * The package layer described by the ODF 1.2 Package specification is independent
+ * of the above ODF XML layer described by the ODF 1.2 XML Schema specification.
  *
  * Still the abstract concept of documents exist in the ODF Package layer.
  */
 public class OdfPackageDocument implements Closeable {
 
 	private static final String TWO_DOTS = "..";
-	private static final String SLASH = "/";
+	protected static final String SLASH = "/";
 	private static final String COLON = ":";
 	private static final String EMPTY_STRING = "";
-	/**
-	 * The path of the root document
-	 */
+	/** The path of the root document */
 	protected static final String ROOT_DOCUMENT_PATH = EMPTY_STRING;
 	private Resolver mResolver;
-	/**
-	 * The ODF package containing the document
-	 */
+	/** The ODF package containing the document */
 	protected OdfPackage mPackage;
-	/**
-	 * The internal path to the document relative to the ODF package
-	 */
+	/** The internal path to the document relative to the ODF package */
 	protected String mDocumentPathInPackage;
-	/**
-	 * The mediatype of the ODF package document. Note: Not necessarily an ODF
-	 * XML mediatype as specified in ODF 1.2 part1
-	 */
+	/** The media type of the ODF package document. Note: Not necessarily an ODF XML media type as specified in ODF 1.2 part1 */
 	protected String mDocumentMediaType;
 	private static Templates mRdfFileExtractionTemplate;
+
 
 	/**
 	 * Creates a new OdfPackageDocument.
 	 *
-	 * @param pkg - the ODF Package that contains the document. A baseURL is
-	 * being generated based on its location.
-	 * @param internalPath - the directory path within the package from where
-	 * the document should be loaded.
-	 * @param mediaTypeString - media type of stream. If unknown null can be
-	 * used.
+	 * @param pkg - the ODF Package that contains the document. A baseURL is being generated based on its location.
+	 * @param internalPath - the directory path within the package from where the document should be loaded.
+	 * @param mediaTypeString
+	 *      - media type of stream. If unknown null can be used.
 	 */
 	protected OdfPackageDocument(OdfPackage pkg, String internalPath, String mediaTypeString) {
+		super();
 		if (pkg != null) {
 			mPackage = pkg;
 			mDocumentPathInPackage = internalPath;
@@ -102,12 +91,12 @@ public class OdfPackageDocument implements Closeable {
 	/**
 	 * Loads an OdfPackageDocument from the provided path.
 	 *
-	 * <p>OdfPackageDocument relies on the file being available for read access
-	 * over the whole lifecycle of OdfDocument.</p>
+	 * <p>OdfPackageDocument relies on the file being available for read access over
+	 * the whole life-cycle of OdfDocument.</p>
 	 *
 	 * @param documentPath - the path from where the document can be loaded
-	 * @return the OpenDocument from the given path or NULL if the media type is
-	 * not supported by ODFDOM.
+	 * @return the OpenDocument from the given path
+	 *		  or NULL if the media type is not supported by ODFDOM.
 	 * @throws java.lang.Exception - if the document could not be created.
 	 */
 	public static OdfPackageDocument loadDocument(String documentPath) throws Exception {
@@ -118,8 +107,7 @@ public class OdfPackageDocument implements Closeable {
 	/**
 	 * Returns an embedded OdfPackageDocument from the given package path.
 	 *
-	 * @param documentPath to the document within the package. The path is
-	 * relative the current document path.
+	 * @param documentPath to the document within the package. The path is relative the current document path.
 	 * @return an embedded OdfPackageDocument
 	 */
 	public OdfPackageDocument loadSubDocument(String documentPath) {
@@ -129,14 +117,14 @@ public class OdfPackageDocument implements Closeable {
 	}
 
 	/**
-	 * @return the mediatype of this document
+	 * @return the media type of this document
 	 */
 	public String getMediaTypeString() {
 		return mDocumentMediaType;
 	}
 
 	/**
-	 * @param mediaTypeString for the mediatype of this document
+	 * @param mediaTypeString for the media type of this document
 	 */
 	protected final void setMediaTypeString(String mediaTypeString) {
 		mDocumentMediaType = mediaTypeString;
@@ -155,7 +143,7 @@ public class OdfPackageDocument implements Closeable {
 	}
 
 	/**
-	 * Retreives the OdfPackage for this OdfPackageDocument.
+	 * Retrieves the OdfPackage for this OdfPackageDocument.
 	 *
 	 * @return the OdfPackage that contains this OdfPackageDocument.
 	 */
@@ -165,9 +153,7 @@ public class OdfPackageDocument implements Closeable {
 
 	/**
 	 * Set the relative path for an embedded ODF document.
-	 *
-	 * @param path to directory of the embedded ODF document (relative to ODF
-	 * package root).
+	 * @param path to directory of the embedded ODF document (relative to ODF package root).
 	 */
 	String setDocumentPath(String path) {
 		mDocumentPathInPackage = normalizeDocumentPath(path);
@@ -176,28 +162,23 @@ public class OdfPackageDocument implements Closeable {
 
 	/**
 	 * Get the relative path for an embedded ODF document.
-	 *
-	 * @return path to the directory of the embedded ODF document (relative to
-	 * ODF package root).
+	 * @return path to the directory of the embedded ODF document (relative to ODF package root).
 	 */
 	public String getDocumentPath() {
 		return mDocumentPathInPackage;
 	}
 
 	/**
-	 * Removes an embedded ODF document from the ODF Package. All files within
-	 * the embedded document directory will be removed.
+	 * Removes an embedded ODF document from the ODF Package.
+	 * All files within the embedded document directory will be removed.
 	 *
-	 * @param internDocumentPath path to the directory of the embedded ODF
-	 * document (always relative to the package path of the current document).
+	 * @param internDocumentPath path to the directory of the embedded ODF document (always relative to the package path of the current document).
 	 */
 	public void removeDocument(String internDocumentPath) {
 		mPackage.removeDocument(mDocumentPathInPackage + internDocumentPath);
 	}
 
-	/**
-	 * @return true if the document is at the root level of the package
-	 */
+	/** @return true if the document is at the root level of the package */
 	public boolean isRootDocument() {
 		if (getDocumentPath().equals(ROOT_DOCUMENT_PATH)) {
 			return true;
@@ -211,7 +192,7 @@ public class OdfPackageDocument implements Closeable {
 	 * ODF package Only relative path are allowed with the exception of a single
 	 * slash '/' representing the root document.
 	 *
-	 * @param ref the file reference to be checked
+	 * @param ref   the file reference to be checked
 	 * @return true if the reference is an package external reference
 	 */
 	protected static boolean isExternalReference(String ref) {
@@ -232,8 +213,8 @@ public class OdfPackageDocument implements Closeable {
 	 * normalizing the path.
 	 *
 	 * @see OdfPackage#normalizeDirectoryPath(java.lang.String)
-	 * @param documentPath the destination directory of the document. The path
-	 * should end with a '/'.
+	 * @param documentPath  the destination directory of the document. The path should end
+	 *            with a '/'.
 	 * @return the documentPath after normalization.
 	 */
 	protected static String normalizeDocumentPath(String documentPath) {
@@ -248,15 +229,14 @@ public class OdfPackageDocument implements Closeable {
 	/**
 	 * Save the document to given path.
 	 *
-	 * <p>When save the embedded document to a stand alone document, all the
-	 * file entries of the embedded document will be copied to a new document
-	 * package. If the embedded document is outside of the current document
-	 * directory, you have to embed it to the sub directory and refresh the link
-	 * of the embedded document. You should reload it from the given path to get
-	 * the saved embedded document.
+	 * <p>When save the embedded document to a stand alone document,
+	 * all the file entries of the embedded document will be copied to a new document package.
+	 * If the embedded document is outside of the current document directory,
+	 * you have to embed it to the sub directory and refresh the link of the embedded document.
+	 * You should reload it from the given path to get the saved embedded document.
 	 *
 	 * @param documentPath - the path to the package document
-	 * @throws java.lang.Exception if the document could not be saved
+	 * @throws java.lang.Exception  if the document could not be saved
 	 */
 	public void save(String documentPath) throws Exception {
 		File f = new File(documentPath);
@@ -266,44 +246,37 @@ public class OdfPackageDocument implements Closeable {
 	/**
 	 * Save the document to a given file.
 	 *
-	 * <p>If the input file has been cached (this is the case when loading from
-	 * an InputStream), the input file can be overwritten.</p>
+	 * <p>If the input file has been cached (this is the case when loading from an
+	 * InputStream), the input file can be overwritten.</p>
 	 *
-	 * <p>Otherwise it's allowed to overwrite the input file as long as the same
-	 * path name is used that was used for loading (no symbolic link foo2.odt
-	 * pointing to the loaded file foo1.odt, no network path X:\foo.odt pointing
-	 * to the loaded file D:\foo.odt).</p>
+	 * <p>Otherwise it's allowed to overwrite the input file as long as
+	 * the same path name is used that was used for loading (no symbolic link
+	 * foo2.odt pointing to the loaded file foo1.odt, no network path X:\foo.odt
+	 * pointing to the loaded file D:\foo.odt).</p>
 	 *
-	 * <p>When saving the embedded document to a stand alone document, all files
-	 * of the embedded document will be copied to a new document package. If the
-	 * embedded document is outside of the current document directory, you have
-	 * to embed it to the sub directory and refresh the link of the embedded
-	 * document. You should reload it from the given file to get the saved
-	 * embedded document.
+	 * <p>When saving the embedded document to a stand alone document,
+	 * all files of the embedded document will be copied to a new document package.
+	 * If the embedded document is outside of the current document directory,
+	 * you have to embed it to the sub directory and refresh the link of the embedded document.
+	 * You should reload it from the given file to get the saved embedded document.
 	 *
 	 * @param file - the file to save the document
-	 * @throws java.lang.Exception if the document could not be saved
+	 * @throws java.lang.Exception  if the document could not be saved
 	 */
 	public void save(File file) throws Exception {
 		mPackage.save(file);
 	}
 
-	/**
-	 * Flush the existing DOM to the document to get in advantage of the recent
-	 * changes from the DOM
-	 */
+	/** Flush the existing DOM to the document to get in advantage of the recent changes from the DOM */
 	protected void flushDoms() {
 		mPackage.flushDoms(this);
 	}
 
 	/**
-	 * Embed an OdfPackageDocument to the current OdfPackageDocument. All the
-	 * file entries of child document will be embedded as well to the current
-	 * document package.
-	 *
+	 * Embed an OdfPackageDocument to the current OdfPackageDocument.
+	 * All the file entries of child document will be embedded as well to the current document package.
 	 * @param newDocument the OdfPackageDocument to be embedded.
-	 * @param documentPath to the directory the ODF document should be inserted
-	 * (relative to the root of this document).
+	 * @param documentPath to the directory the ODF document should be inserted (relative to the root of this document).
 	 */
 	public void insertDocument(OdfPackageDocument newDocument, String documentPath) {
 		newDocument.flushDoms();
@@ -311,21 +284,34 @@ public class OdfPackageDocument implements Closeable {
 		mPackage.insertDocument(newDocument, mDocumentPathInPackage + documentPath);
 	}
 
+
 	/**
-	 * @param internalPath path to the XML file relative to package root
-	 * @return the typed DOM of the given file
+	 * @param filePath of the XML relative to the document folder
+     * @return the typed DOM of the given file
 	 */
-	public OdfFileDom getFileDom(String internalPath) throws Exception {
+	public OdfFileDom getFileDom(String internalPath)  {
 		String normalizeDocumentPath = getDocumentPath();
 		if (!isRootDocument()) {
 			normalizeDocumentPath = normalizeDocumentPath(normalizeDocumentPath);
 		}
 		return OdfFileDom.newFileDom(this, normalizeDocumentPath + internalPath);
-	}
+    }
+
+    /**
+	 * @param relativeFilePath of the file path relative to the document folder
+     * @return the absolute file path relative to the package (i.e. ZIP) root.
+     */
+    public String getAbsoluteFilePath(String relativeFilePath){
+		String normalizeDocumentPath = getDocumentPath();
+		if (!isRootDocument()) {
+			normalizeDocumentPath = normalizeDocumentPath(normalizeDocumentPath);
+		}
+        return normalizeDocumentPath + relativeFilePath;
+    }
 
 	/**
-	 * Get EntityResolver to be used in XML Parsers which can resolve content
-	 * inside the OdfPackage
+	 * Get EntityResolver to be used in XML Parsers
+	 * which can resolve content inside the OdfPackage
 	 */
 	EntityResolver getEntityResolver() {
 		if (mResolver == null) {
@@ -335,8 +321,8 @@ public class OdfPackageDocument implements Closeable {
 	}
 
 	/**
-	 * Get URIResolver to be used in XSL Transformations which can resolve
-	 * content inside the OdfPackage
+	 * Get URIResolver to be used in XSL Transformations
+	 * which can resolve content inside the OdfPackage
 	 */
 	URIResolver getURIResolver() {
 		if (mResolver == null) {
@@ -346,10 +332,10 @@ public class OdfPackageDocument implements Closeable {
 	}
 
 	/**
-	 * Close the OdfPackageDocument, its OdfPackage and release all temporary
-	 * created data. Acter execution of this method, this class is no longer
-	 * usable. Do this as the last action to free resources. Closing an already
-	 * closed document has no effect.
+	 * Close the OdfPackageDocument, its OdfPackage and release all temporary created data.
+	 * After execution of this method, this class is no longer usable.
+	 * Do this as the last action to free resources.
+	 * Closing an already closed document has no effect.
 	 */
 	public void close() {
 		mPackage.close();
@@ -357,10 +343,7 @@ public class OdfPackageDocument implements Closeable {
 		mPackage = null;
 	}
 
-	/**
-	 * Helper class to receive an ODF document template for new documents from
-	 * the environment (ie. from the JAR via classloader)
-	 */
+	/** Helper class to receive an ODF document template for new documents from the environment (ie. from the JAR via classloader)*/
 	protected static class Resource {
 
 		private String name;
@@ -394,7 +377,7 @@ public class OdfPackageDocument implements Closeable {
 				URI uri = new URI(filePath);
 				InputSource inputSource = new InputSource(uri.toString());
 				mRdfFileExtractionTemplate = TransformerFactory.newInstance().newTemplates(new SAXSource(inputSource));
-			}
+}
 			helper.transform(this.getPackage(), internalPath, mRdfFileExtractionTemplate, new StreamResult(out));
 			String RDFBaseUri = Util.getRDFBaseUri(this.getPackage().getBaseURI(), internalPath);
 			rdfModel = ModelFactory.createDefaultModel();
@@ -407,4 +390,11 @@ public class OdfPackageDocument implements Closeable {
 		}
 		return rdfModel;
 	}
+
+    /**
+     * @return the already once parsed XML document
+     */
+    protected Document getCachedDom(String internalPath) {
+        return mPackage.getCachedDom(internalPath);
+    }
 }

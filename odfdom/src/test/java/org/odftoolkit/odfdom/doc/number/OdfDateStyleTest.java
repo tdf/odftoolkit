@@ -23,17 +23,17 @@ package org.odftoolkit.odfdom.doc.number;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberDateStyle;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -94,6 +94,7 @@ m 	Minute in hour       30
 s 	Second in minute     55
         */
     @Test
+    @Ignore
     public void testBuildFromFormat() {
 		int i;
 		int j;

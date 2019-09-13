@@ -21,8 +21,6 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.incubator.doc.number;
 
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberFormatSourceAttribute;
 import org.odftoolkit.odfdom.dom.element.number.NumberAmPmElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberDateStyleElement;
@@ -37,6 +35,8 @@ import org.odftoolkit.odfdom.dom.element.number.NumberSecondsElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberTextElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberWeekOfYearElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberYearElement;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.w3c.dom.Node;
 
 /**
@@ -102,16 +102,16 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 		super(ownerDoc);
 		this.styleName = styleName;
 		this.calendarName = calendarName;
-		buildFromFormat(format);
+		setFormat(format);
 	}
 
 	/**
 	 * Get the format string that represents this style.
 	 * @return the format string
 	 */
-	public String getFormat() {
+	@Override
+    public String getFormat(boolean caps) {
 		String result = "";
-		NumberAmPmElement ampmEle = OdfElement.findFirstChildNode(NumberAmPmElement.class, this);
 		Node child = this.getFirstChild();
 		while (child != null) {
 			if (child instanceof OdfElement) {
@@ -119,9 +119,9 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 					NumberDayElement ele = (NumberDayElement) child;
 					String numberstyle = ele.getNumberStyleAttribute();
 					if ((numberstyle != null) && numberstyle.equals("long")) {
-						result += "dd";
+						result += caps ? "DD" : "dd";
 					} else {
-						result += "d";
+						result += caps ? "D" : "d";
 					}
 				} else if (child instanceof NumberMonthElement) {
 					NumberMonthElement ele = (NumberMonthElement) child;
@@ -143,9 +143,9 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 					NumberYearElement ele = (NumberYearElement) child;
 					String numberstyle = ele.getNumberStyleAttribute();
 					if ((numberstyle != null) && numberstyle.equals("long")) {
-						result += "yyyy";
+						result += caps ?  "YYYY" : "yyyy";
 					} else {
-						result += "yy";
+						result += caps ?  "YY" : "yy";
 					}
 				} else if (child instanceof NumberTextElement) {
 					String content = child.getTextContent();
@@ -158,25 +158,17 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 					NumberEraElement ele = (NumberEraElement) child;
 					String numberstyle = ele.getNumberStyleAttribute();
 					if ((numberstyle != null) && numberstyle.equals("long")) {
-						result += "GGGG";
-					} else {
 						result += "GG";
+					} else {
+						result += "G";
 					}
 				} else if (child instanceof NumberHoursElement) {
 					NumberHoursElement ele = (NumberHoursElement) child;
 					String numberstyle = ele.getNumberStyleAttribute();
-					if (ampmEle != null) {
-						if ((numberstyle != null) && numberstyle.equals("long")) {
-							result += "hh";
-						} else {
-							result += "h";
-						}
+					if ((numberstyle != null) && numberstyle.equals("long")) {
+						result += caps ?  "HH" : "hh";
 					} else {
-						if ((numberstyle != null) && numberstyle.equals("long")) {
-							result += "HH";
-						} else {
-							result += "H";
-						}
+						result += caps ?  "H" : "h";
 					}
 				} else if (child instanceof NumberMinutesElement) {
 					NumberMinutesElement ele = (NumberMinutesElement) child;
@@ -190,15 +182,22 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 					NumberSecondsElement ele = (NumberSecondsElement) child;
 					String numberstyle = ele.getNumberStyleAttribute();
 					if ((numberstyle != null) && numberstyle.equals("long")) {
-						result += "ss";
+						result += caps ?  "SS" : "ss";
 					} else {
-						result += "s";
+						result += caps ?  "S" :"s";
 					}
+                    Integer decimals = ele.getNumberDecimalPlacesAttribute();
+                    if(decimals != null && decimals.intValue() > 0){
+                        result += '.';
+                        for( int i = 0; i < decimals.intValue(); i++){
+                            result += '0';
+                        }
+                    }
 				} else if (child instanceof NumberQuarterElement) {
 					NumberQuarterElement ele = (NumberQuarterElement) child;
 					String numberstyle = ele.getNumberStyleAttribute();
 					if ((numberstyle != null) && numberstyle.equals("long")) {
-						result += "QQQ";
+						result += "QQ";
 					} else {
 						result += "Q";
 					}
@@ -206,12 +205,14 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 					NumberDayOfWeekElement ele = (NumberDayOfWeekElement) child;
 					String numberstyle = ele.getNumberStyleAttribute();
 					if ((numberstyle != null) && numberstyle.equals("long")) {
-						result += "EEEE";
+						result += "NNN";
 					} else {
-						result += "EEE";
+						result += "NN";
 					}
 				} else if (child instanceof NumberAmPmElement) {
-					result += "a";
+					result += "AM/PM";
+                } else if (child instanceof NumberWeekOfYearElement) {
+                    result += "WW";
 				}
 			}
 			child = child.getNextSibling();
@@ -223,8 +224,9 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 	 * Creates a &lt;number:date-style&gt; element based upon format.
 	 * @param format the format string
 	 */
-	public void buildFromFormat(String format) {
-		String actionChars = "GyQMwdEaHhms";
+	@Override
+    public void setFormat(String format) {
+		String actionChars = "GgYyQqMWwDdNnEeHhmSs";
 		int actionCount = 0;
 
 		char ch;
@@ -239,14 +241,29 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 		while (i < format.length()) {
 			ch = format.charAt(i);
 			if (actionChars.indexOf(ch) >= 0) {
-				appendText(textBuffer);
+				emitText(textBuffer);
 				textBuffer = "";
 				actionCount = 0;
 				while (i < format.length() && format.charAt(i) == ch) {
 					actionCount++;
 					i++;
 				}
-				processChar(ch, actionCount);
+                int decimalCount = 0;
+                if(i < format.length() - 1 && format.charAt(i) == '.' && format.charAt(i + 1) == '0'){
+                    decimalCount = 1;
+                    i += 2;
+                    while (i < format.length() && format.charAt(i) == '0') {
+                        decimalCount++;
+                        i++;
+                    }
+                }
+                //special case: a single 'w' is not an action char
+                if(actionCount > 1 || (ch != 'w' && ch!= 'W')){
+                    processChar(ch, actionCount, decimalCount);
+                } else {
+                    textBuffer += ch;
+                }
+
 			} else if (ch == '\'') {
 				endQuote = false;
 				i++;
@@ -266,25 +283,23 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 					i++;
 				}
 			} else {
-				textBuffer += ch;
-				i++;
+                //special handling "AM/PM"
+                if(ch=='A' && format.startsWith("AM/PM", i)) {
+                    emitText(textBuffer);
+                    textBuffer = "";
+                    NumberAmPmElement ampm = new NumberAmPmElement((OdfFileDom) this.getOwnerDocument());
+                    this.appendChild(ampm);
+                    i+=5;
+                }
+                else {
+	                textBuffer += ch;
+	                i++;
+                }
 			}
 		}
-		appendText(textBuffer);
+        emitText(textBuffer);
 	}
 
-	/**
-	 *	Place pending text into a &lt;number:text&gt; element.
-	 * @param textBuffer pending text
-	 */
-	private void appendText(String textBuffer) {
-		NumberTextElement textElement = null;
-		if (!textBuffer.equals("")) {
-			textElement = new NumberTextElement((OdfFileDom) this.getOwnerDocument());
-			textElement.setTextContent(textBuffer);
-			this.appendChild(textElement);
-		}
-	}
 
 	/**
 	 * Process a formatting character.
@@ -292,7 +307,7 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 	 * @param ch the formatting character to process
 	 * @param count the number of occurrences of this character
 	 */
-	private void processChar(char ch, int count) {
+	private void processChar(char ch, int count, int decimalCount) {
 		OdfFileDom ownerDoc = (OdfFileDom) this.getOwnerDocument();
 		switch (ch) {
 			case 'G':
@@ -305,6 +320,7 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 				this.appendChild(era);
 				break;
 			case 'y':
+            case 'Y':
 				NumberYearElement year =
 						new NumberYearElement(ownerDoc);
 				year.setNumberStyleAttribute(isLongIf(count > 3));
@@ -333,6 +349,7 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 				this.appendChild(month);
 				break;
 			case 'w':
+            case 'W':
 				NumberWeekOfYearElement weekOfYear =
 						new NumberWeekOfYearElement(ownerDoc);
 				if (calendarName != null) {
@@ -341,27 +358,35 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 				this.appendChild(weekOfYear);
 				break;
 			case 'd':
-				NumberDayElement day =
-						new NumberDayElement(ownerDoc);
-				day.setNumberStyleAttribute(isLongIf(count > 1));
-				if (calendarName != null) {
-					day.setNumberCalendarAttribute(calendarName);
+            case 'D':
+				if(count > 2) {
+                    NumberDayOfWeekElement day = new NumberDayOfWeekElement(ownerDoc);
+                    day.setNumberStyleAttribute(isLongIf(count > 3));
+                    if (calendarName != null) {
+                        day.setNumberCalendarAttribute(calendarName);
+                    }
+                    this.appendChild(day);
+				} else {
+                    NumberDayElement day =
+    						new NumberDayElement(ownerDoc);
+    				day.setNumberStyleAttribute(isLongIf(count > 1));
+    				if (calendarName != null) {
+    					day.setNumberCalendarAttribute(calendarName);
+    				}
+    				this.appendChild(day);
 				}
-				this.appendChild(day);
 				break;
-			case 'E':
+			case 'N':
 				NumberDayOfWeekElement dayOfWeek =
 						new NumberDayOfWeekElement(ownerDoc);
 				dayOfWeek.setNumberStyleAttribute(isLongIf(count > 3));
+				if(count > 3) {
+				    emitText(", "); // NNNN resolves to long day-of-week plus ", "
+				}
 				if (calendarName != null) {
 					dayOfWeek.setNumberCalendarAttribute(calendarName);
 				}
 				this.appendChild(dayOfWeek);
-				break;
-			case 'a':
-				NumberAmPmElement ampm =
-						new NumberAmPmElement(ownerDoc);
-				this.appendChild(ampm);
 				break;
 			case 'H':
 			case 'h':
@@ -377,12 +402,16 @@ public class OdfNumberDateStyle extends NumberDateStyleElement {
 				this.appendChild(minutes);
 				break;
 			case 's':
-				NumberSecondsElement seconds =
-						new NumberSecondsElement(ownerDoc);
-				seconds.setNumberStyleAttribute(isLongIf(count > 1));
-				this.appendChild(seconds);
-				break;
-		}
+            case 'S':
+                NumberSecondsElement seconds =
+                        new NumberSecondsElement(ownerDoc);
+                seconds.setNumberStyleAttribute(isLongIf(count > 1));
+                if(decimalCount > 0){
+                    seconds.setNumberDecimalPlacesAttribute(decimalCount);
+                }
+                this.appendChild(seconds);
+                break;
+        }
 	}
 
 	/**

@@ -26,14 +26,16 @@
  */
 package org.odftoolkit.odfdom.dom.element.table;
 
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
-import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.pkg.ElementVisitor;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.attribute.table.TableNumberColumnsSpannedAttribute;
+import org.odftoolkit.odfdom.dom.attribute.table.TableNumberMatrixColumnsSpannedAttribute;
+import org.odftoolkit.odfdom.dom.attribute.table.TableNumberMatrixRowsSpannedAttribute;
+import org.odftoolkit.odfdom.dom.attribute.table.TableNumberRowsSpannedAttribute;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCaptionElement;
@@ -52,6 +54,7 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawPolygonElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPolylineElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRectElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRegularPolygonElement;
+import org.odftoolkit.odfdom.dom.element.number.DataStyleElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
 import org.odftoolkit.odfdom.dom.element.text.TextAlphabeticalIndexElement;
 import org.odftoolkit.odfdom.dom.element.text.TextBibliographyElement;
@@ -69,10 +72,15 @@ import org.odftoolkit.odfdom.dom.element.text.TextSoftPageBreakElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTableIndexElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTableOfContentElement;
 import org.odftoolkit.odfdom.dom.element.text.TextUserIndexElement;
-import org.odftoolkit.odfdom.dom.attribute.table.TableNumberColumnsSpannedAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableNumberMatrixColumnsSpannedAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableNumberMatrixRowsSpannedAttribute;
-import org.odftoolkit.odfdom.dom.attribute.table.TableNumberRowsSpannedAttribute;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:table-cell}.
@@ -96,7 +104,8 @@ public class TableTableCellElement extends TableTableCellElementBase {
 	 *
 	 * @return  return   <code>OdfName</code> the name of element {@odf.element table:table-cell}.
 	 */
-	public OdfName getOdfName() {
+	@Override
+    public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
@@ -701,4 +710,87 @@ public class TableTableCellElement extends TableTableCellElementBase {
 			visitor.visit(this);
 		}
 	}
+
+	@Override
+	/** If this element is the first - perhaps only - element of a logical group of XML elements. For instance: table, paragraph */
+	public boolean isComponentRoot(){
+		return true;
+	}
+
+	@Override
+	// ToDo: Move this to a intermediate class, e.g. ComponentRootElement
+	/** @return the component size of a heading, which is always 1 */
+	public int getRepetition() {
+		Integer repeated =  super.getTableNumberColumnsRepeatedAttribute();
+		if (repeated == null) {
+			repeated = 1;
+		}
+		return repeated;
+	}
+
+	@Override
+	// ToDo: Move this to a intermediate class, e.g. ComponentRootElement
+	/**
+	 * @return the component size of a heading, which is always 1
+	 */
+	public boolean isRepeatable() {
+		return true;
+	}
+
+	@Override
+	// ToDo: Move this to a intermediate class, e.g. ComponentRootElement
+	/** @return the component size of a heading, which is always 1 */
+	public void setRepetition(int repetition) {
+		super.setTableNumberColumnsRepeatedAttribute(repetition);
+	}
+    public DataStyleElement getOwnDataStyle(){
+        try {
+            String styleName = getAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
+            String dataStyleName = "";
+            OdfFileDom xDoc = (OdfFileDom)getOwnerDocument();
+            OdfDocument odfDoc = (OdfDocument)xDoc.getDocument();
+            OdfOfficeStyles officeStyles = odfDoc.getStylesDom().getOfficeStyles();
+            if(styleName == null || styleName.isEmpty()){
+                TableTableRowElement row =  (TableTableRowElement) getParentNode();
+                TableTableCellElement rowCell = (TableTableCellElement)row.getFirstChild();
+                int cellIndex = 0;
+                while(rowCell != null){
+                    if(rowCell.equals(this)){
+                        break;
+                    }
+                    cellIndex += rowCell.getRepetition();
+                    rowCell = (TableTableCellElement)rowCell.getNextSibling();
+                }
+
+                Node tableNode = row.getParentNode();
+                TableTableColumnElement columnNode = OdfElement.findFirstChildNode(TableTableColumnElement.class, tableNode);
+                int colIndex = 0;
+                while(columnNode != null){
+                    TableTableColumnElement column = columnNode;
+                    if(colIndex <= cellIndex && cellIndex <= colIndex + column.getRepetition() - 1){
+                        styleName = column.getTableDefaultCellStyleNameAttribute();
+                        break;
+                    }
+                    columnNode = (TableTableColumnElement)columnNode.getNextSibling();
+                }
+            }
+            OdfStyle ownStyle = officeStyles.getStyle(styleName, OdfStyleFamily.TableCell);
+            if(ownStyle == null) {
+                ownStyle = odfDoc.getContentDom().getAutomaticStyles().getStyle(styleName, OdfStyleFamily.TableCell);
+            }
+            dataStyleName = ownStyle.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "data-style-name");
+            if(dataStyleName != null) {
+                DataStyleElement dataStyle = officeStyles.getAllDataStyles().get(dataStyleName);
+                if(dataStyle == null) {
+                    dataStyle = odfDoc.getContentDom().getAutomaticStyles().getAllDataStyles().get(dataStyleName);
+                }
+                return dataStyle;
+            }
+        } catch (SAXException e) {
+            Logger.getLogger(TableTableCellElement.class.getName()).log(Level.SEVERE, null, e);
+        } catch (IOException ex) {
+            Logger.getLogger(TableTableCellElement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

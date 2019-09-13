@@ -27,9 +27,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -37,10 +35,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.odftoolkit.junit.AlphabeticalOrderedRunner;
 import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.attribute.meta.MetaValueTypeAttribute.Value;
 import org.odftoolkit.odfdom.dom.example.LoadMultipleTimes;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.type.Duration;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
@@ -70,9 +68,9 @@ public class OfficeMetaTest {
 	public void setUp() throws Exception {
 		// Former developer was writing into the original file, triggering a race discussion of regression tests working on all documents.
 		// Sometimes the file was changed (if this test ran earlier), sometimes not. Fixed by doing the test result in a new ODT output file
-		File newMetaFile = ResourceUtilities.newTestOutputFile(filenameOut);
+		File newMetaFile = ResourceUtilities.getTestOutputFile(filenameOut);
 		if(!newMetaFile.exists()){
-			doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(filename));
+			doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(filename));
 		}else{
 			doc = (OdfTextDocument) OdfTextDocument.loadDocument(newMetaFile);
 		}
@@ -83,7 +81,7 @@ public class OfficeMetaTest {
 
 	@After
 	public void tearDown() throws Exception {
-		doc.save(ResourceUtilities.newTestOutputFile(filenameOut));
+		doc.save(ResourceUtilities.getTestOutputFile(filenameOut));
 		doc.close();
 		doc = null;
 		metadom = null;
@@ -151,41 +149,25 @@ public class OfficeMetaTest {
 	@Test
 	public void test1SetGenerator() {
 		fMetadata.setGenerator(generator);
+        Assert.assertEquals(generator, fMetadata.getGenerator());
 	}
 
-	@Test
-	public void test2GetGenerator() {
-		Assert.assertEquals(generator, fMetadata.getGenerator());
-	}
 
 	@Test
 	public void test1SetDcTitle() {
 		fMetadata.setTitle(dctitle);
+        Assert.assertEquals(dctitle, fMetadata.getTitle());
 	}
 
 	@Test
-	public void test2GetDcTitle() {
-		Assert.assertEquals(dctitle, fMetadata.getTitle());
-	}
-
-	@Test
-	public void test1SetDcDescription() {
-		fMetadata.setDescription(dcdescription);
-	}
-
-	@Test
-	public void test2GetDcDescription() {
+	public void test1GetDcDescription() {
 		fMetadata.setDescription(dcdescription);
 		Assert.assertEquals(dcdescription, fMetadata.getDescription());
 	}
 
 	@Test
-	public void test1SetSubject() {
-		fMetadata.setSubject(subject);
-	}
-
-	@Test
-	public void test2GetSubject() {
+	public void test1GetSubject() {
+        fMetadata.setSubject(subject);
 		Assert.assertEquals(subject, fMetadata.getSubject());
 	}
 
@@ -203,20 +185,11 @@ public class OfficeMetaTest {
 	@Test
 	public void test1SetInitialCreator() {
 		fMetadata.setInitialCreator(initialCreator);
-	}
-
-	@Test
-	public void test2GetInitialCreator() {
 		Assert.assertEquals(initialCreator, fMetadata.getInitialCreator());
 	}
 
 	@Test
 	public void test1SetDcCreator() {
-		fMetadata.setCreator(dccreator);
-	}
-
-	@Test
-	public void test2GetDcCreator() {
 		fMetadata.setCreator(dccreator);
 		Assert.assertEquals(dccreator, fMetadata.getCreator());
 	}
@@ -224,10 +197,6 @@ public class OfficeMetaTest {
 	@Test
 	public void test1SetPrintedBy() {
 		fMetadata.setPrintedBy(printedBy);
-	}
-
-	@Test
-	public void test2GetPrintedBy() {
 		Assert.assertEquals(printedBy, fMetadata.getPrintedBy());
 	}
 
@@ -382,10 +351,10 @@ public class OfficeMetaTest {
 
 		// create a new empty document
 		doc = OdfTextDocument.newTextDocument();
-		doc.save(ResourceUtilities.newTestOutputFile("EmptyDocForMetaTest.odt"));
+		doc.save(ResourceUtilities.getTestOutputFile("EmptyDocForMetaTest.odt"));
 
 		// read empty document meta
-		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath("EmptyDocForMetaTest.odt"));
+		doc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("EmptyDocForMetaTest.odt"));
 		metadom = doc.getMetaDom();
 		fMetadata = new OdfOfficeMeta(metadom);
 		//Assert.assertTrue(fMetadata.getGenerator().startsWith(generator));
@@ -404,10 +373,10 @@ public class OfficeMetaTest {
 	public void testReadDocumentMeta() throws Exception {
 		// create a new empty document
 		OdfTextDocument textDoc = OdfTextDocument.newTextDocument(); // activiating metadata updates
-		textDoc.save(ResourceUtilities.newTestOutputFile("DocForMetaTest.odt"));
+		textDoc.save(ResourceUtilities.getTestOutputFile("DocForMetaTest.odt"));
 		textDoc.close();
 		// read empty document meta
-		textDoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath("DocForMetaTest.odt"));
+		textDoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("DocForMetaTest.odt"));
 		OdfOfficeMeta meta = textDoc.getOfficeMetadata();
 		Assert.assertNotNull(meta.getGenerator());
 		Assert.assertNotNull(meta.getCreationDate());

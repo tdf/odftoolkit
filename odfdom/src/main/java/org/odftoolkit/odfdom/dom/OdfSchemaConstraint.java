@@ -21,6 +21,7 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.dom;
 
+import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.odftoolkit.odfdom.pkg.ValidationConstraint;
 
 /**
@@ -37,9 +38,12 @@ public enum OdfSchemaConstraint implements ValidationConstraint {
 	DOCUMENT_WITHOUT_ODF_MIMETYPE("The ODF mimetype '%2$s' is invalid for the ODF XML Schema document%1$s!"),
 	/** At least \'content.xml' or 'styles.xml' have to be contained in the ODF XML Schema package.*/
 	DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML("At least 'content.xml' or 'styles.xml' have to be contained in the ODF XML Schema package%1$s!"),
+	/** The files \'content.xml' or 'styles.xml' must be parsed without error when existent in the ODF XML Schema package.*/
+	DOCUMENT_WITH_EXISTENT_BUT_UNREADABLE_CONTENT_OR_STYLES_XML("In an ODF document, the '%2$s' have to be readable, when existent!"),
 	/** The 'mimetype' file have to be contained in the ODF XML Schema package.*/
-	PACKAGE_SHALL_CONTAIN_MIMETYPE("The 'mimetype' file have to be contained in the ODF XML Schema package%1$s!");
-
+	PACKAGE_SHALL_CONTAIN_MIMETYPE("The 'mimetype' file have to be contained in the ODF XML Schema package%1$s!"),
+    /** The XML is not valid according to the ODF RelaxNG schema. */
+    DOCUMENT_XML_INVALID_ATTRIBUTE_VALUE("The XML is not valid according to the ODF RelaxNG schema. The value %1$s for the ODF attribute %2$s is invalid!");
 	private final String mMessage;
 
 	/**
@@ -61,7 +65,7 @@ public enum OdfSchemaConstraint implements ValidationConstraint {
 //    FUTURE FEATUE: LOCALIZATION:
 //    =============================
 //    There should be a property files e.g. OdfPackageConstraint_de_DE.properties Sourcecode:
-//    PACKAGE_SHALL_BE_ZIP=%s muß eine ZIP Datei sein, wie in [ZIP] definiert. Alle Dateien innerhalbe des ZIPS müssen entwder unkomprimiert (STORED) oder komprimiert sein (DEFLATED) und den DEFLATE aloritmus verwenden.
+//    PACKAGE_SHALL_BE_ZIP=%s muss eine ZIP Datei sein, wie in [ZIP] definiert. Alle Dateien innerhalbe des ZIPS muessen entwder unkomprimiert (STORED) oder komprimiert sein (DEFLATED) und den DEFLATE aloritmus verwenden.
 //    PACKAGE_SHALL_CONTAIN_MANIFEST=.....
 //    ResourceBundle bundle = ResourceBundle.getBundle(OdfPackageConstraint.class.getName());
 //    return bundle.getString(this.name());

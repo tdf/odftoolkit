@@ -20,16 +20,20 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.dom;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
-
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentSettingsElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeSettingsElement;
 import org.odftoolkit.odfdom.pkg.NamespaceName;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
+import org.xml.sax.SAXException;
 
 /**
- * The DOM repesentation of the ODF Settings.xml file of an ODF document.
+ * The DOM representation of the ODF Settings.xml file of an ODF document.
  */
 public class OdfSettingsDom extends OdfFileDom {
 
@@ -47,13 +51,34 @@ public class OdfSettingsDom extends OdfFileDom {
 
 	/** Might be used to initialize specific XML Namespace prefixes/URIs for this XML file*/
 	@Override
-	protected void initialize() {
-		for (NamespaceName name : OdfDocumentNamespace.values()) {
+	protected void initialize()  {
+        /* Only 4 namespaces are required:
+            OFFICE("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0"),
+            XLINK("xlink", "http://www.w3.org/1999/xlink"),
+            CONFIG("config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0"),
+            OOO("ooo", "http://openoffice.org/2004/office");
+         */
+		setPrefixAndUri(OdfDocumentNamespace.CONFIG);
+        setPrefixAndUri(OdfDocumentNamespace.OFFICE);
+        setPrefixAndUri(OdfDocumentNamespace.OOO);
+        setPrefixAndUri(OdfDocumentNamespace.XLINK);
+        try {
+            super.initialize();
+        } catch (SAXException | IOException | ParserConfigurationException ex) {
+            Logger.getLogger(OdfMetaDom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		OfficeDocumentSettingsElement rootElement = this.getRootElement();
+		if(rootElement == null){
+			rootElement = new OfficeDocumentSettingsElement(this);
+			this.appendChild(rootElement);
+			rootElement.appendChild(new OfficeSettingsElement(this));
+		}
+	}
+
+    private void setPrefixAndUri(OdfDocumentNamespace name){
 			mUriByPrefix.put(name.getPrefix(), name.getUri());
 			mPrefixByUri.put(name.getUri(), name.getPrefix());
-		}
-		super.initialize();
-	}
+    }
 
 	/**
 	 * Retrieves the Odf Document

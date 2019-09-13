@@ -30,12 +30,9 @@ package org.odftoolkit.odfdom.dom.element.text;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextLevelAttribute;
+import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
 
 /**
  * DOM implementation of OpenDocument base element
@@ -76,4 +73,16 @@ public abstract class TextListLevelStyleElementBase extends OdfStyleBase {
 		setOdfAttribute(attr);
 		attr.setIntValue(textLevelValue.intValue());
 	}
+
+	/**
+	 * Create child element {@odf.element style:list-level-properties}.
+	 *
+	 * @return the element {@odf.element style:list-level-properties}
+	 */
+	public StyleListLevelPropertiesElement newStyleListLevelPropertiesElement() {
+		StyleListLevelPropertiesElement styleListLevelProperties = ((OdfFileDom) this.ownerDocument).newOdfElement(StyleListLevelPropertiesElement.class);
+		this.appendChild(styleListLevelProperties);
+		return styleListLevelProperties;
+	}
+
 }

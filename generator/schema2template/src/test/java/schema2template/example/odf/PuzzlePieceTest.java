@@ -85,7 +85,7 @@ public class PuzzlePieceTest {
 			String odf10Ref = readFileAsString(OUTPUT_REF_ODF10);
 			if(!odf10Ref.equals(odf10Dump)){
 				String errorMsg = "There is a difference between the expected outcome of the parsed ODF 1.0 tree.\n"
-					+ "Please compare the output:\n\t'" + OUTPUT_DUMP_ODF10 + "'\nwith the reference\n\t'" + odf10RngFile;
+					+ "Please compare the output:\n\t'" + OUTPUT_DUMP_ODF10 + "'\nwith the reference\n\t'" + ODF10_RNG_FILE;
 				LOG.severe(errorMsg);
 				Assert.fail(errorMsg);
 			}
@@ -142,14 +142,14 @@ public class PuzzlePieceTest {
 		try {
 			PuzzlePieceSet allElements_ODF11 = new PuzzlePieceSet();
 			PuzzlePieceSet allAttributes_ODF11 = new PuzzlePieceSet();
-			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF11(), allElements_ODF11, allAttributes_ODF11);
+			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF11(), allElements_ODF11, allAttributes_ODF11, null);
 			// There is a difference of one wildcard "*" representing anyElement/anyAttribute
 			checkFoundNumber(allElements_ODF11.withoutMultiples(), ODF11_ELEMENT_NUMBER + 1, "element");
 			checkFoundNumber(allAttributes_ODF11.withoutMultiples(), ODF11_ATTRIBUTE_NUMBER + 1, "attribute");
 
 			PuzzlePieceSet allElements_ODF12 = new PuzzlePieceSet();
 			PuzzlePieceSet allAttributes_ODF12 = new PuzzlePieceSet();
-			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF12(), allElements_ODF12, allAttributes_ODF12);
+			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF12(), allElements_ODF12, allAttributes_ODF12, null);
 			// There is a difference of one wildcard "*" representing anyElement/anyAttribute
 			checkFoundNumber(allElements_ODF12.withoutMultiples(), ODF12_ELEMENT_NUMBER + 1, "element");
 			checkFoundNumber(allAttributes_ODF12.withoutMultiples(), ODF12_ATTRIBUTE_NUMBER + 1, "attribute");
@@ -172,7 +172,7 @@ public class PuzzlePieceTest {
 		try {
 			PuzzlePieceSet allElements_ODF12 = new PuzzlePieceSet();
 			PuzzlePieceSet allAttributes_ODF12 = new PuzzlePieceSet();
-			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF12(), allElements_ODF12, allAttributes_ODF12);
+			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF12(), allElements_ODF12, allAttributes_ODF12, null);
 			// There is a difference of one wildcard "*" representing anyElement/anyAttribute
 
 			int foundElementDuplicates = allElements_ODF12.size() - (ODF12_ELEMENT_NUMBER + 1);

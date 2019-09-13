@@ -1,0 +1,4 @@
+{"changes":[
+{"name":"addStyle","type":"character","styleId":"Hyperlink","attrs":{"character":{"color":{"type":"scheme","fallbackValue":"0080C0","value":"hyperlink"},"underline":true}},"parent":null,"styleName":"Hyperlink","uiPriority":99},
+{"name":"format","start":[1,5],"end":[1,5],"attrs":{"character":{"style":"Hyperlink","url":"http://www.alternate.de"}}}
+]}

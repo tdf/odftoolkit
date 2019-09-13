@@ -27,14 +27,7 @@
  */
 package org.odftoolkit.odfdom.dom.element.draw;
 
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
-import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawClassNamesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawNameAttribute;
@@ -42,6 +35,10 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawZIndexAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationClassNamesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationStyleNameAttribute;
+import org.odftoolkit.odfdom.dom.attribute.svg.SvgHeightAttribute;
+import org.odftoolkit.odfdom.dom.attribute.svg.SvgWidthAttribute;
+import org.odftoolkit.odfdom.dom.attribute.svg.SvgXAttribute;
+import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableEndCellAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableEndXAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableEndYAttribute;
@@ -49,6 +46,9 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableTableBackgroundAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorPageNumberAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
+import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
 
 /**
  * DOM implementation of OpenDocument base element
@@ -401,4 +401,127 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
 		setOdfAttribute(attr);
 		attr.setValue(xmlIdValue);
 	}
+    /**
+     * Receives the value of the ODFDOM attribute representation
+     * <code>SvgHeightAttribute</code> , See {
+     *
+     * @odf.attribute svg:height}
+     *
+     * @return - the <code>String</code> , the value or <code>null</code>, if
+     * the attribute is not set and no default value defined.
+     */
+    public String getSvgHeightAttribute() {
+        SvgHeightAttribute attr = (SvgHeightAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "height");
+        if (attr != null) {
+            return String.valueOf(attr.getValue());
+        }
+        return null;
+    }
+
+    /**
+     * Sets the value of ODFDOM attribute representation
+     * <code>SvgHeightAttribute</code> , See {
+     *
+     * @odf.attribute svg:height}
+     *
+     * @param svgHeightValue The type is <code>String</code>
+     */
+    public void setSvgHeightAttribute(String svgHeightValue) {
+        SvgHeightAttribute attr = new SvgHeightAttribute((OdfFileDom) this.ownerDocument);
+        setOdfAttribute(attr);
+        attr.setValue(svgHeightValue);
+    }
+
+    /**
+     * Receives the value of the ODFDOM attribute representation
+     * <code>SvgWidthAttribute</code> , See {
+     *
+     * @odf.attribute svg:width}
+     *
+     * @return - the <code>String</code> , the value or <code>null</code>, if
+     * the attribute is not set and no default value defined.
+     */
+    public String getSvgWidthAttribute() {
+        SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "width");
+        if (attr != null) {
+            return String.valueOf(attr.getValue());
+        }
+        return null;
+    }
+
+    /**
+     * Sets the value of ODFDOM attribute representation
+     * <code>SvgWidthAttribute</code> , See {
+     *
+     * @odf.attribute svg:width}
+     *
+     * @param svgWidthValue The type is <code>String</code>
+     */
+    public void setSvgWidthAttribute(String svgWidthValue) {
+        SvgWidthAttribute attr = new SvgWidthAttribute((OdfFileDom) this.ownerDocument);
+        setOdfAttribute(attr);
+        attr.setValue(svgWidthValue);
+    }
+    /**
+     * Receives the value of the ODFDOM attribute representation
+     * <code>SvgXAttribute</code> , See {
+     *
+     * @odf.attribute svg:x}
+     *
+     * @return - the <code>String</code> , the value or <code>null</code>, if
+     * the attribute is not set and no default value defined.
+     */
+    public String getSvgXAttribute() {
+        SvgXAttribute attr = (SvgXAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "x");
+        if (attr != null) {
+            return String.valueOf(attr.getValue());
+        }
+        return null;
+    }
+
+    /**
+     * Sets the value of ODFDOM attribute representation
+     * <code>SvgXAttribute</code> , See {
+     *
+     * @odf.attribute svg:x}
+     *
+     * @param svgXValue The type is <code>String</code>
+     */
+    public void setSvgXAttribute(String svgXValue) {
+        SvgXAttribute attr = new SvgXAttribute((OdfFileDom) this.ownerDocument);
+        setOdfAttribute(attr);
+        attr.setValue(svgXValue);
+    }
+
+    /**
+     * Receives the value of the ODFDOM attribute representation
+     * <code>SvgYAttribute</code> , See {
+     *
+     * @odf.attribute svg:y}
+     *
+     * @return - the <code>String</code> , the value or <code>null</code>, if
+     * the attribute is not set and no default value defined.
+     */
+    public String getSvgYAttribute() {
+        SvgYAttribute attr = (SvgYAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "y");
+        if (attr != null) {
+            return String.valueOf(attr.getValue());
+        }
+        return null;
+    }
+
+    /**
+     * Sets the value of ODFDOM attribute representation
+     * <code>SvgYAttribute</code> , See {
+     *
+     * @odf.attribute svg:y}
+     *
+     * @param svgYValue The type is <code>String</code>
+     */
+    public void setSvgYAttribute(String svgYValue) {
+        SvgYAttribute attr = new SvgYAttribute((OdfFileDom) this.ownerDocument);
+        setOdfAttribute(attr);
+        attr.setValue(svgYValue);
+    }
+
 }

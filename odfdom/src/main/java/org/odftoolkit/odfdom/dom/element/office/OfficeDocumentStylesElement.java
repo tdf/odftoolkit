@@ -26,14 +26,14 @@
  */
 package org.odftoolkit.odfdom.dom.element.office;
 
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.ElementVisitor;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.grddl.GrddlTransformationAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:document-styles}.
@@ -111,49 +111,49 @@ public class OfficeDocumentStylesElement extends OdfElement {
 		attr.setValue(officeVersionValue);
 	}
 
-	/**
-	 * Create child element {@odf.element office:automatic-styles}.
-	 *
-	 * @return the element {@odf.element office:automatic-styles}
-	 */
-	public OfficeAutomaticStylesElement newOfficeAutomaticStylesElement() {
-		OfficeAutomaticStylesElement officeAutomaticStyles = ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeAutomaticStylesElement.class);
-		this.appendChild(officeAutomaticStyles);
-		return officeAutomaticStyles;
-	}
-
-	/**
-	 * Create child element {@odf.element office:font-face-decls}.
-	 *
-	 * @return the element {@odf.element office:font-face-decls}
-	 */
-	public OfficeFontFaceDeclsElement newOfficeFontFaceDeclsElement() {
-		OfficeFontFaceDeclsElement officeFontFaceDecls = ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeFontFaceDeclsElement.class);
-		this.appendChild(officeFontFaceDecls);
-		return officeFontFaceDecls;
-	}
-
-	/**
-	 * Create child element {@odf.element office:master-styles}.
-	 *
-	 * @return the element {@odf.element office:master-styles}
-	 */
-	public OfficeMasterStylesElement newOfficeMasterStylesElement() {
-		OfficeMasterStylesElement officeMasterStyles = ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeMasterStylesElement.class);
-		this.appendChild(officeMasterStyles);
-		return officeMasterStyles;
-	}
-
-	/**
-	 * Create child element {@odf.element office:styles}.
-	 *
-	 * @return the element {@odf.element office:styles}
-	 */
-	public OfficeStylesElement newOfficeStylesElement() {
-		OfficeStylesElement officeStyles = ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeStylesElement.class);
-		this.appendChild(officeStyles);
-		return officeStyles;
-	}
+//	/**
+//	 * Create child element {@odf.element office:automatic-styles}.
+//	 *
+//	 * @return the element {@odf.element office:automatic-styles}
+//	 */
+//	public OdfOfficeAutomaticStyles newOfficeAutomaticStylesElement() {
+//		OdfOfficeAutomaticStyles officeAutomaticStyles = ((OdfFileDom) this.ownerDocument).newOdfElement(OdfOfficeAutomaticStyles.class);
+//		this.appendChild(officeAutomaticStyles);
+//		return officeAutomaticStyles;
+//	}
+//
+//	/**
+//	 * Create child element {@odf.element office:font-face-decls}.
+//	 *
+//	 * @return the element {@odf.element office:font-face-decls}
+//	 */
+//	public OfficeFontFaceDeclsElement newOfficeFontFaceDeclsElement() {
+//		OfficeFontFaceDeclsElement officeFontFaceDecls = ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeFontFaceDeclsElement.class);
+//		this.appendChild(officeFontFaceDecls);
+//		return officeFontFaceDecls;
+//	}
+//
+//	/**
+//	 * Create child element {@odf.element office:master-styles}.
+//	 *
+//	 * @return the element {@odf.element office:master-styles}
+//	 */
+//	public OfficeMasterStylesElement newOfficeMasterStylesElement() {
+//		OfficeMasterStylesElement officeMasterStyles = ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeMasterStylesElement.class);
+//		this.appendChild(officeMasterStyles);
+//		return officeMasterStyles;
+//	}
+//
+//	/**
+//	 * Create child element {@odf.element office:styles}.
+//	 *
+//	 * @return the element {@odf.element office:styles}
+//	 */
+//	public OdfOfficeStyles newOfficeStylesElement() {
+//		OdfOfficeStyles officeStyles = ((OdfFileDom) this.ownerDocument).newOdfElement(OdfOfficeStyles.class);
+//		this.appendChild(officeStyles);
+//		return officeStyles;
+//	}
 
 	@Override
 	public void accept(ElementVisitor visitor) {

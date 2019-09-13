@@ -26,12 +26,8 @@
  */
 package org.odftoolkit.odfdom.dom.element.office;
 
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.ElementVisitor;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.number.NumberBooleanStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberCurrencyStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberDateStyleElement;
@@ -42,13 +38,19 @@ import org.odftoolkit.odfdom.dom.element.number.NumberTimeStyleElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:automatic-styles}.
  *
  */
-public class OfficeAutomaticStylesElement extends OdfContainerElementBase {
+public class OfficeAutomaticStylesElement extends OdfOfficeAutomaticStyles {
+
+
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.OFFICE, "automatic-styles");
 
@@ -58,7 +60,7 @@ public class OfficeAutomaticStylesElement extends OdfContainerElementBase {
 	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
 	 */
 	public OfficeAutomaticStylesElement(OdfFileDom ownerDoc) {
-		super(ownerDoc, ELEMENT_NAME);
+		super(ownerDoc);
 	}
 
 	/**
@@ -66,6 +68,7 @@ public class OfficeAutomaticStylesElement extends OdfContainerElementBase {
 	 *
 	 * @return  return   <code>OdfName</code> the name of element {@odf.element office:automatic-styles}.
 	 */
+    @Override
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
@@ -211,4 +214,9 @@ public class OfficeAutomaticStylesElement extends OdfContainerElementBase {
 			visitor.visit(this);
 		}
 	}
+
+    @Override
+    protected <T extends OdfElement> T getStylesElement(OdfFileDom dom, Class<T> clazz) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

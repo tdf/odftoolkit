@@ -24,7 +24,6 @@ package org.odftoolkit.odfdom.incubator.search;
  * Thrown to indicate that the navigation operation can not be processed on
  * selections
  *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.navigation.InvalidNavigationException} in Simple API.
  */
 public class InvalidNavigationException extends Exception {
 

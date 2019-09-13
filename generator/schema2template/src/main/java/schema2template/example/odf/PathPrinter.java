@@ -23,6 +23,7 @@ package schema2template.example.odf;
 
 import com.sun.msv.grammar.Expression;
 import com.sun.msv.grammar.NameClassAndExpression;
+import com.sun.msv.grammar.ReferenceExp;
 import com.sun.msv.reader.trex.ng.RELAXNGReader;
 import java.io.File;
 import java.util.ArrayList;
@@ -34,12 +35,12 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import javax.xml.parsers.SAXParserFactory;
-import schema2template.model.PuzzlePiece;
-import schema2template.model.PuzzlePieceSet;
 import schema2template.model.MSVExpressionInformation;
 import schema2template.model.MSVExpressionType;
 import schema2template.model.MSVExpressionVisitorType;
 import schema2template.model.MSVNameClassVisitorList;
+import schema2template.model.PuzzlePiece;
+import schema2template.model.PuzzlePieceSet;
 
 /**
  * ODF example class to print the MSV expressions in between a PuzzlePiece parent element
@@ -58,12 +59,11 @@ public class PathPrinter {
     public final static String EXAMPLE_CHILD = "table:table-row";
     PuzzlePiece mParent;
     MSVExpressionInformation mInfo;
-    public final static String ODF_RESOURCE_DIR = "target" + File.separator + "classes"
-	+ File.separator + "examples" + File.separator + "odf";
+
 
     PathPrinter(PuzzlePiece parent) {
         mParent = parent;
-        mInfo = new MSVExpressionInformation(parent.getExpression());
+        mInfo = new MSVExpressionInformation(parent.getExpression(), null);
     }
 
     /**
@@ -84,8 +84,7 @@ public class PathPrinter {
         return retval;
     }
 
-    List<String> printPathsToChild(PuzzlePiece child) {
-        MSVExpressionVisitorType typeVisitor = new MSVExpressionVisitorType();
+    List<String> printChildPaths(PuzzlePiece child) {
         List<List<Expression>> paths = null;
         if (child != null) {
             paths = mInfo.getPathsContaining(child.getExpression());
@@ -95,15 +94,20 @@ public class PathPrinter {
         if (paths == null) {
             return null;
         }
-        MSVNameClassVisitorList nameVisitor = new MSVNameClassVisitorList();
+        return printChildPaths(paths);
+    }
 
-        List<String> retval = new ArrayList<String>(paths.size());
+    public static List<String> printChildPaths(List<List<Expression>> paths){
+        final MSVExpressionVisitorType typeVisitor = new MSVExpressionVisitorType();
+        final MSVNameClassVisitorList nameVisitor = new MSVNameClassVisitorList();
+        List<String> retval = new ArrayList<>(paths.size());
         for (List<Expression> path : paths) {
             boolean first = true;
             String wayString = "";
             for (Expression step : path) {
                 MSVExpressionType type = (MSVExpressionType) step.visit(typeVisitor);
                 if (type == MSVExpressionType.REF) {
+                    wayString = wayString.concat(" -> REF " + ((ReferenceExp) step).name );
                     continue;
                 }
                 String name = type.toString();
@@ -154,10 +158,10 @@ public class PathPrinter {
     }
 
     public static void main(String[] args) throws Exception {
-        Expression root = parseOdfSchema(new File(ODF_RESOURCE_DIR + File.separator + OdfHelper.ODF12_RNG_FILE_NAME));
+        Expression root = parseOdfSchema(new File(OdfHelper.odf12RngFile));
         PuzzlePieceSet elements = new PuzzlePieceSet();
         PuzzlePieceSet attributes = new PuzzlePieceSet();
-        PuzzlePiece.extractPuzzlePieces(root, elements, attributes);
+        PuzzlePiece.extractPuzzlePieces(root, elements, attributes, null);
         Map<String, SortedSet<PuzzlePiece>> nameToDefinition = createDefinitionMap(new TreeSet<PuzzlePiece>(elements));
 
         System.out.println("Print all paths from parent element (e.g. \"text:p\") to direct child element (e.g. \"text:span\")");
@@ -186,7 +190,7 @@ public class PathPrinter {
         System.out.println("PATHS from " + parent.getQName() + " to " + child.getQName() + ": ");
         System.out.println("---------------------------------------------------------");
 
-        List<String> paths = new PathPrinter(parent).printPathsToChild(child);
+        List<String> paths = new PathPrinter(parent).printChildPaths(child);
 
         if (paths == null) {
             System.out.println("No Path found.");

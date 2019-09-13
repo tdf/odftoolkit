@@ -35,13 +35,13 @@ public class GraphicsTemplateTest {
 
 	@Test
 	public void testLoadingAGraphicsTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_GRAPHICS_TEMPLATE));
+		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getTestInputAsStream(TEST_GRAPHICS_TEMPLATE));
 		Assert.assertEquals(OdfDocument.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
 	}
 
 	@Test
 	public void testSavingAGraphicsTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_GRAPHICS_TEMPLATE));
+		OdfDocument document = OdfDocument.loadDocument(ResourceUtilities.getTestInputAsStream(TEST_GRAPHICS_TEMPLATE));
 		File destination = File.createTempFile("odfdom-test", ".otg", ResourceUtilities.getTempTestDirectory());
 		document.save(destination);
 

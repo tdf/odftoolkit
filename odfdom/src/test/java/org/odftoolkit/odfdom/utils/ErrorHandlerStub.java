@@ -26,7 +26,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.odftoolkit.odfdom.dom.OdfSchemaConstraint;
 import org.odftoolkit.odfdom.pkg.OdfPackageConstraint;
 import org.odftoolkit.odfdom.pkg.OdfValidationException;
@@ -35,7 +35,7 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-/** A stub for a real SAX ErrorHandler embracing the expected amount of exceptions to be catched */
+/** A stub for a real SAX ErrorHandler embracing the expected amount of exceptions to be caught */
 public class ErrorHandlerStub implements ErrorHandler {
 
 	private static final Logger LOG = Logger.getLogger(ErrorHandlerStub.class.getName());

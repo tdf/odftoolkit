@@ -22,6 +22,7 @@
 package org.odftoolkit.odfdom.doc;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,15 +31,9 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
-
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.doc.presentation.OdfSlide;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -55,6 +50,10 @@ import org.odftoolkit.odfdom.dom.element.style.StylePresentationPageLayoutElemen
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.pkg.MediaType;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
@@ -66,7 +65,6 @@ import org.xml.sax.SAXException;
 /**
  * This class represents an empty ODF presentation.
  *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.PresentationDocument} in Simple API.
  */
 public class OdfPresentationDocument extends OdfDocument {
 
@@ -1289,7 +1287,14 @@ public class OdfPresentationDocument extends OdfDocument {
 		if (slideLayout == null) {
 			slideLayout = OdfSlide.SlideLayout.BLANK;
 		}
-		OdfOfficeStyles styles = getOrCreateDocumentStyles();
+		OdfOfficeStyles styles = null;
+        try {
+            styles = this.getStylesDom().getOrCreateOfficeStyles();
+        } catch (SAXException ex) {
+            Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, ex);
+        }
 		String layoutName;
 
 		if (slideLayout.toString().equals(OdfSlide.SlideLayout.TITLE_ONLY.toString())) {

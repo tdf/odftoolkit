@@ -31,7 +31,7 @@ import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 
 /**
- * Convenient functionalty for the parent ODF OpenDocument element
+ * Convenient functionality for the parent ODF OpenDocument element
  *
  */
 public class OdfStylePageLayout extends StylePageLayoutElement
@@ -53,6 +53,6 @@ public class OdfStylePageLayout extends StylePageLayoutElement
     @Override
     public OdfStyleFamily getFamily()
     {
-        return OdfStyleFamily.List;
+        return OdfStyleFamily.Page;
     }
 }

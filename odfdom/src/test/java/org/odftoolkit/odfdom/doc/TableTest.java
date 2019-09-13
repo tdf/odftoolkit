@@ -43,7 +43,7 @@ import org.w3c.dom.NodeList;
 
 public class TableTest {
 
-	private static final String TEST_FILE_SAVE_2TABLES_OUT = "TestSave2Tables.odt";
+	private static final String TEST_FILE_SAVE_2TABLES_OUT = "TestSave2Tables_out.odt";
 
 	public TableTest() {
 	}
@@ -51,7 +51,7 @@ public class TableTest {
 	@Test
 	public void testTable() {
 		try {
-			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("table.odt"));
+			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("table.odt"));
 			NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(), "table");
 			int tscount = 0;
 			for (int i = 0; i < lst.getLength(); i++) {
@@ -77,7 +77,7 @@ public class TableTest {
 	@Test
 	public void testCellsAndRows() {
 		try {
-			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("table.odt"));
+			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("table.odt"));
 			NodeList lst = odfdoc.getContentDom().getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(), "table-cell");
 			for (int i = 0; i < lst.getLength(); i++) {
 				Node node = lst.item(i);
@@ -131,6 +131,6 @@ public class TableTest {
 		p2.appendChild(odt.createTextNode("Bandit 600"));
 		cell2.appendChild(p2);
 
-		mysheet.save(ResourceUtilities.getTestOutput(TEST_FILE_SAVE_2TABLES_OUT));
+		mysheet.save(ResourceUtilities.getTestOutputFile(TEST_FILE_SAVE_2TABLES_OUT));
 	}
 }

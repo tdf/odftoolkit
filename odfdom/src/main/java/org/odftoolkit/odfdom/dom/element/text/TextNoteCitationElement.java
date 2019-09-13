@@ -101,4 +101,9 @@ public class TextNoteCitationElement extends OdfElement {
 			this.appendChild(this.getOwnerDocument().createTextNode(content));
 		}
 	}
+
+	@Override
+	public boolean selfAndDescendantTextIgnoredAsComponent(){
+		return true;
+	}
 }

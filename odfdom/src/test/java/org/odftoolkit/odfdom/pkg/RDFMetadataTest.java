@@ -22,32 +22,18 @@
 package org.odftoolkit.odfdom.pkg;
 
 import java.util.logging.Logger;
-
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-
 import junit.framework.TestCase;
-
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.test.ModelTestBase;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
-import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.text.TextBookmarkStartElement;
-import org.odftoolkit.odfdom.dom.element.text.TextHElement;
-import org.odftoolkit.odfdom.dom.element.text.TextMetaElement;
-import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.rdfa.BookmarkRDFMetadataExtractor;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
-import org.w3c.dom.Node;
-
-import org.apache.jena.rdf.model.Literal;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.rdf.model.StmtIterator;
-import org.apache.jena.rdf.model.test.ModelTestBase;
-import org.apache.jena.util.PrintUtil;
 
 public class RDFMetadataTest extends ModelTestBase {
 
@@ -62,8 +48,7 @@ public class RDFMetadataTest extends ModelTestBase {
 
 	@Test
 	public void testGetRDFMetaFromGRDDLXSLT() throws Exception {
-		OdfTextDocument odt = (OdfTextDocument) OdfDocument
-				.loadDocument(ResourceUtilities.getAbsolutePath(SIMPLE_ODT));
+		OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SIMPLE_ODT));
 		Model m1 = odt.getManifestRDFMetadata();
 		LOG.info("RDF Model - manifest:\n" + m1.toString());
 		long size1 = m1.size();
@@ -112,10 +97,11 @@ public class RDFMetadataTest extends ModelTestBase {
 
 	}
 
+/*
+/* Test based on the assumption that <table:table-cell> may contain plain text content, which is not allowed for ODF..
 	@Test
-	public void testGetInContentMetaFromCache() throws Exception {
-		OdfTextDocument odt = (OdfTextDocument) OdfDocument
-				.loadDocument(ResourceUtilities.getAbsolutePath(SIMPLE_ODT));
+    public void testGetInContentMetaFromCache() throws Exception {
+		OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(SIMPLE_ODT));
 		Model m1 = odt.getInContentMetadataFromCache();
 
 		// We have the following 1 triple in cache:
@@ -221,15 +207,23 @@ public class RDFMetadataTest extends ModelTestBase {
 		ttce.setXhtmlAboutAttribute("[dbpedia:J._K._Rowling]");
 		m1 = odt.getInContentMetadataFromCache();
 		TestCase.assertEquals(0, m1.size());
-		ttce.setXhtmlPropertyAttribute("dbpprop:nationality");
-		ttce.setTextContent("British");
-		m1 = odt.getInContentMetadataFromCache();
+        ttce.setXhtmlPropertyAttribute("dbpprop:nationality");
+        ttce.setTextContent("British"); // 2DO -- this call is triple wrong:
+        /* 2DO
+        // a) there is no interrupt to update the RDF model on setTextContent(XX)
+        // b) there is no direct text content within a cell, only within a paragraph within the cell
+        // c) As there is no direct content and multiple nodes involved for one subject this will not work out on node level
+
+        // Perhaps we should overwrite setTextContent() and throw an exception for now?
+        // correct would be to remove all content aside of the 1st paragraph (or create one) and place the text content within..
+		*//*
+        m1 = odt.getInContentMetadataFromCache();
+        // System.err.println("Model is: '" + m1 + "'");
 		TestCase.assertEquals(1, m1.size());
 		ttce.setXhtmlAboutAttribute("http://dbpedia.org/page/J._R._R._Tolkien");
 		m1 = odt.getInContentMetadataFromCache();
 		TestCase.assertEquals(1, m1.size());
-		TestCase.assertEquals("http://dbpedia.org/page/J._R._R._Tolkien", m1
-				.listStatements().nextStatement().getSubject().getURI());
+		TestCase.assertEquals("http://dbpedia.org/page/J._R._R._Tolkien", m1.listStatements().nextStatement().getSubject().getURI());
 
 		TableCoveredTableCellElement tctce = contentDom
 				.newOdfElement(TableCoveredTableCellElement.class);
@@ -258,12 +252,12 @@ public class RDFMetadataTest extends ModelTestBase {
 		m1 = odt.getInContentMetadataFromCache();
 		TestCase.assertEquals(0, m1.size());
 
-	}
+	}*/
 
 	@Test
 	public void testGetBookmarkRDFMetadata() throws Exception {
 		OdfTextDocument odt = (OdfTextDocument) OdfDocument
-				.loadDocument(ResourceUtilities.getAbsolutePath(SIMPLE_ODT));
+				.loadDocument(ResourceUtilities.getAbsoluteInputPath(SIMPLE_ODT));
 		Model m = odt.getBookmarkRDFMetadata();
 		TestCase.assertEquals(2, m.size());
 

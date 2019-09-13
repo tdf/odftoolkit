@@ -66,7 +66,7 @@ public class MSVExpressionVisitorChildren implements ExpressionVisitor {
     }
 
     public List<Expression> onConcur(ConcurExp exp) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return  children(exp.children()); //not used by ODF RelaxNG, but used by W3C schema of Cross Industry Invoice
     }
 
     public List<Expression> onData(DataExp exp) {
@@ -94,7 +94,7 @@ public class MSVExpressionVisitorChildren implements ExpressionVisitor {
     }
 
     public List<Expression> onNullSet() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return empty; //not used by ODF RelaxNG, but used by W3C schema of Cross Industry Invoice
     }
 
     public List<Expression> onOneOrMore(OneOrMoreExp exp) {
@@ -102,7 +102,7 @@ public class MSVExpressionVisitorChildren implements ExpressionVisitor {
     }
 
     public List<Expression> onOther(OtherExp exp) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return child(exp.exp); //not used by ODF RelaxNG, but used by W3C schema of Cross Industry Invoice
     }
 
     public List<Expression> onRef(ReferenceExp exp) {

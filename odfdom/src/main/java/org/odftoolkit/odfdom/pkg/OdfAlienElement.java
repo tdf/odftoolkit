@@ -21,7 +21,6 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.pkg;
 
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.w3c.dom.DOMException;
 
 /**
@@ -43,7 +42,7 @@ public class OdfAlienElement extends OdfElement {
         return ELEMENT_NAME;
     }
 
-	@Override
+    /** Special handling for this class, which represents elements of various names */
 	protected OdfElement cloneOdfElement() {
 		return new OdfAlienElement((OdfFileDom) this.ownerDocument, this.ELEMENT_NAME);
 	}

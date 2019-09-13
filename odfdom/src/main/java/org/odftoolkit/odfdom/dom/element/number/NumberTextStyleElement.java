@@ -26,14 +26,8 @@
  */
 package org.odftoolkit.odfdom.dom.element.number;
 
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.ElementVisitor;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
-import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberCountryAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberLanguageAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberRfcLanguageTagAttribute;
@@ -46,12 +40,18 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberTransliterationStyleAttr
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDisplayNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleVolatileAttribute;
+import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.w3c.dom.Node;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element number:text-style}.
  *
  */
-public class NumberTextStyleElement extends OdfElement {
+public class NumberTextStyleElement extends DataStyleElement {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.NUMBER, "text-style");
 
@@ -65,11 +65,25 @@ public class NumberTextStyleElement extends OdfElement {
 	}
 
 	/**
+     * Create the instance of <code>NumberTextStyleElement</code>
+     *
+     * @param  ownerDoc     The type is <code>OdfFileDom</code>
+     * @param  format       The format string
+     * @param  styleName    The style name
+     */
+    public NumberTextStyleElement(OdfFileDom ownerDoc,
+            String format, String styleName) {
+        super(ownerDoc, ELEMENT_NAME);
+        this.setStyleNameAttribute(styleName);
+        setFormat(format);
+    }
+   /**
 	 * Get the element name
 	 *
 	 * @return  return   <code>OdfName</code> the name of element {@odf.element number:text-style}.
 	 */
-	public OdfName getOdfName() {
+	@Override
+    public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
@@ -422,4 +436,56 @@ public class NumberTextStyleElement extends OdfElement {
 			visitor.visit(this);
 		}
 	}
+    @Override
+    public void setFormat(String format) {
+        //TODO: create attribute from format string
+        while(!format.isEmpty()){
+            int atPos = format.indexOf("@");
+            if( atPos == 0) {
+                newNumberTextContentElement();
+            } else {
+                NumberTextElement newSubElement = newNumberTextElement();
+                newSubElement.setTextContent(atPos < 0 ? format : format.substring(0, atPos));
+                if(atPos < 0) {
+                    break; // finished
+                } else {
+                    newNumberTextContentElement();
+                }
+            }
+            format = format.substring(atPos + 1);
+        }
+    }
+
+
+
+    /**
+     * Get the format string that represents this style.
+     * @return the format string
+     */
+    @Override
+    public String getFormat(boolean caps) {
+        String mappedResult = "";
+        String result = "";
+        Node m = getFirstChild();
+        while (m != null) {
+            if (m instanceof NumberTextElement) {
+                String textcontent = m.getTextContent();
+                if (textcontent == null || textcontent.length() == 0) {
+                    textcontent = " ";
+                }
+                result += textcontent;
+            } else if (m instanceof NumberTextContentElement) {
+                result += "@";
+            } else if(m instanceof StyleMapElement) {
+                mappedResult += getMapping((StyleMapElement)m);
+                mappedResult += ";";
+            }
+
+            m = m.getNextSibling();
+        }
+        if(!mappedResult.isEmpty()){
+            result = mappedResult + result;
+        }
+        return result;
+    }
 }

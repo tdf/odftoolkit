@@ -1,0 +1,8 @@
+{"changes":[
+{"name":"splitParagraph","start":[2,23]},
+{"name":"addText","start":[3,1],"text":"svante"},
+{"name":"format","start":[1,7],"end":[1,23],"attrs":{"character":{"color":{"type":"rgb","value":"C00000"}}}},
+{"name":"format","start":[2,1],"end":[2,22],"attrs":{"character":{"color":{"type":"rgb","value":"C00000"}}}},
+{"name":"format","start":[3,1],"end":[3,5],"attrs":{"character":{"color":{"type":"rgb","value":"C00000"}}}},
+{"name":"delete","start":[1,7],"end":[1,22]}
+]}

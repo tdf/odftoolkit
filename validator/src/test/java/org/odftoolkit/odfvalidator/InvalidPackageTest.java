@@ -124,7 +124,7 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
             t.printStackTrace(new PrintWriter(errors));
             Assert.fail(t.toString() + "\n" + errors.toString());
         }
-        Assert.assertTrue(output.contains("Fatal: ZIP entry 'mimetype': only DEFLATED entries can have EXT descriptor"));
+        Assert.assertTrue(output.contains("The document is encrypted. Validation of encrypted documents is not supported."));
         java.util.logging.Logger.getLogger(getClass().getName()).log(Level.INFO, "Test result:\n{0}", output);
     }
 

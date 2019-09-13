@@ -93,7 +93,7 @@ public class DocumentTest {
 			LOG.info("Loading an supported ODF Spreadsheet document as an ODF Document!");
 			try {
 				// Should work!
-				OdfDocument ods = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(GENERATED_INVALID_SPREADSHEET));
+				OdfDocument ods = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(GENERATED_INVALID_SPREADSHEET));
 				Assert.assertNotNull(ods);
 			} catch (Exception e) {
 				LOG.log(Level.SEVERE, e.getMessage(), e);
@@ -105,7 +105,7 @@ public class DocumentTest {
 			LOG.info("Loading an empty document as an ODF Document!");
 			try {
 				// Should throw error!
-				OdfDocument ods = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(ZERO_BYTE_SPREADSHEET));
+				OdfDocument ods = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(ZERO_BYTE_SPREADSHEET));
 				Assert.fail();
 			} catch (Exception e) {
 				if (!e.getMessage().contains("shall be a ZIP file")) {
@@ -118,7 +118,7 @@ public class DocumentTest {
 			LOG.info("Loading an unsupported ODF Formula document as an ODF Document!");
 			try {
 				// Exception is expected!
-				OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(ODF_FORMULAR_TEST_FILE));
+				OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(ODF_FORMULAR_TEST_FILE));
 				Assert.fail();
 			} catch (IllegalArgumentException e) {
 				if (!e.getMessage().contains("is not yet supported!")) {
@@ -131,7 +131,7 @@ public class DocumentTest {
 			LOG.info("Loading an unsupported image file as an ODF Document!");
 			try {
 				// Exception is expected!
-				OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(IMAGE_TEST_FILE));
+				OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(IMAGE_TEST_FILE));
 				Assert.fail();
 			} catch (IllegalArgumentException e) {
 				if (!e.getMessage().contains("shall be a ZIP file")) {
@@ -153,7 +153,7 @@ public class DocumentTest {
 	@Test
 	public void testParser() {
 		try {
-			OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+			OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE));
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
@@ -163,7 +163,7 @@ public class DocumentTest {
 	@Test
 	public void testGetContentRoot() {
 		try {
-			OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE_WITHOUT_OPT));
+			OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE_WITHOUT_OPT));
 			Assert.assertNotNull(odt.getContentRoot());
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
@@ -183,7 +183,7 @@ public class DocumentTest {
 	}
 
 	private static boolean testXSLT(String odfFileNamePrefix) throws Exception {
-		OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+		OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE));
 
 		Transformer trans = TransformerFactory.newInstance().newTransformer();
 		trans.setOutputProperty("indent", "yes");
@@ -205,7 +205,7 @@ public class DocumentTest {
 		saveString(xmlString, ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-temporary-test.xml");
 
 		// The template XML was once transformed and saved to the resource folder to gurantee the same indentation
-		String xmlStringOriginal = inputStreamToString(ResourceUtilities.getTestResourceAsStream("test2-" + odfFileNamePrefix + ".xml"));
+		String xmlStringOriginal = inputStreamToString(ResourceUtilities.getTestInputAsStream("test2-" + odfFileNamePrefix + ".xml"));
 		// Saving original file to disc
 		saveString(xmlStringOriginal, ResourceUtilities.getTestOutputFolder() + odfFileNamePrefix + "-temporary-original.xml");
 
@@ -229,7 +229,7 @@ public class DocumentTest {
 	@Test
 	public void testStylesDom() {
 		try {
-			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE));
 
 			OdfStylesDom stylesDom = odfdoc.getStylesDom();
 			Assert.assertNotNull(stylesDom);
@@ -275,7 +275,7 @@ public class DocumentTest {
 	@Test
 	public void testContentNode() {
 		try {
-			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE));
 
 			OdfContentDom contentDom = odfdoc.getContentDom();
 
@@ -310,7 +310,7 @@ public class DocumentTest {
 	@Test
 	public void testSaveDocument() {
 		try {
-			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TEST_FILE));
+			OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE));
 			new NodeAction<String>() {
 
 				@Override
@@ -321,7 +321,7 @@ public class DocumentTest {
 				}
 			};
 //            replaceText.performAction(e, "X");
-			odfdoc.save(ResourceUtilities.newTestOutputFile("list-out.odt"));
+			odfdoc.save(ResourceUtilities.getTestOutputFile("list-out.odt"));
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
@@ -360,7 +360,7 @@ public class DocumentTest {
 	public void testParsingOfInvalidAttribute() {
 		try {
 			// file with invalid value for enum text-underline-style
-			File testfile = ResourceUtilities.newTestOutputFile("InvalidUnderlineAttribute.odt");
+			File testfile = ResourceUtilities.getTestInputFile("InvalidUnderlineAttribute.odt");
 
 			// Test1: Loading shouldn't fail just because of one invalid attribute
 			OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(testfile);
@@ -376,7 +376,7 @@ public class DocumentTest {
 			OdfStyle styleNode2 = odt.getStylesDom().getOfficeStyles().getStyle("bug77", OdfStyleFamily.Graphic);
 			StyleGraphicPropertiesElement propsGrapicElement = OdfElement.findFirstChildNode(StyleGraphicPropertiesElement.class, styleNode2);
 			Assert.assertTrue("Could not find the attribute svg:opac-capicity. Workaround bug77 did not succeeded!", propsGrapicElement.hasAttribute("svg:stroke-opacity"));
-			odt.save(ResourceUtilities.newTestOutputFile("saving-is-possible.odt"));
+			odt.save(ResourceUtilities.getTestOutputFile("saving-is-possible.odt"));
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, e.getMessage(), e);
 			Assert.fail(e.getMessage());
@@ -403,9 +403,8 @@ public class DocumentTest {
 			doc.setLocale(chinese_china);
 			doc.setLocale(ar_eg);
 
-			doc.save(ResourceUtilities.newTestOutputFile(filename));
-
-			OdfPresentationDocument newDoc = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(filename));
+			doc.save(ResourceUtilities.getTestOutputFile(filename));
+			OdfPresentationDocument newDoc = OdfPresentationDocument.loadDocument(ResourceUtilities.getTestOutputAsStream(filename));
 			Assert.assertEquals(eng_can, newDoc.getLocale(OdfDocument.UnicodeGroup.WESTERN));
 			Assert.assertEquals(chinese_china, newDoc.getLocale(OdfDocument.UnicodeGroup.CJK));
 			Assert.assertEquals(ar_eg, newDoc.getLocale(OdfDocument.UnicodeGroup.CTL));
@@ -485,12 +484,12 @@ public class DocumentTest {
 		handler1.setTestFilePath("testInvalidPkg1.odt");
 		try {
 			// First Test / Handler2
-			OdfPackage pkg2 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler2.getTestFilePath())), null, handler2);
+			OdfPackage pkg2 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsoluteInputPath(handler2.getTestFilePath())), null, handler2);
 			OdfDocument doc2 = OdfDocument.loadDocument(pkg2);
 			Assert.assertNotNull(doc2);
 
 			// Second Test / Handler3
-			OdfPackage pkg3 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler3.getTestFilePath())), null, handler3);
+			OdfPackage pkg3 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsoluteInputPath(handler3.getTestFilePath())), null, handler3);
 			OdfDocument doc3 = OdfDocument.loadDocument(pkg3);
 			Assert.assertNotNull(doc3);
 			Map subDocs = doc3.loadSubDocuments();
@@ -498,7 +497,7 @@ public class DocumentTest {
 			Assert.assertEquals(PRESENTATION1_DOC_COUNT, subDocs.size());
 
 			// Third Test / Handler1
-			OdfPackage pkg1 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsolutePath(handler1.getTestFilePath())), null, handler1);
+			OdfPackage pkg1 = OdfPackage.loadPackage(new File(ResourceUtilities.getAbsoluteInputPath(handler1.getTestFilePath())), null, handler1);
 			OdfDocument.loadDocument(pkg1);
 			Assert.fail();
 		} catch (Exception e) {

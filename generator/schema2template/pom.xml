@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
+
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
   or more contributor license agreements.  See the NOTICE file
@@ -8,7 +9,7 @@
   "License"); you may not use this file except in compliance
   with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing,
   software distributed under the License is distributed on an
@@ -23,12 +24,12 @@
     <parent>
         <groupId>org.odftoolkit</groupId>
         <artifactId>schema2template-pom</artifactId>
-        <version>0.9.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <!-- The Basics -->
+	<!-- The Basics -->
     <artifactId>schema2template</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -43,6 +44,21 @@
         <dependency>
             <groupId>net.java.dev.msv</groupId>
             <artifactId>msv-core</artifactId>
+            <version>2013.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tinkerpop</groupId>
+            <artifactId>neo4j-gremlin</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tinkerpop</groupId>
+            <artifactId>tinkergraph-gremlin</artifactId>
+            <version>3.4.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -55,7 +71,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
     </properties>
 
-    <!-- Build Settings -->
+	<!-- Build Settings -->
     <build>
         <extensions>
             <extension>
@@ -94,7 +110,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <!-- Explizit version required for fix on systemPropertyVariables -->
+				<!-- Explizit version required for fix on systemPropertyVariables -->
                 <version>2.19.1</version>
                 <configuration>
                     <systemPropertyVariables>
@@ -118,34 +134,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <doctitle>Schema2template</doctitle>
-                    <links>
-                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
-                    </links>
-                    <splitindex>true</splitindex>
-                    <windowtitle>Schema2template v${project.version} - https://odftoolkit.org</windowtitle>
-                    <bottom>${javadoc.bottom}</bottom>
-                    <additionalOptions>
-                        <additionalOption>${javadoc.opts}</additionalOption>
-                    </additionalOptions>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <additionalparam>${javadoc.opts}</additionalparam>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
                 <configuration>
@@ -156,42 +144,51 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <!-- Workaround: Build the project using the same JDK version as the project is targetting.
+                        see https://issues.apache.org/jira/browse/MJAVADOC-562
+                        see https://bugs.openjdk.java.net/browse/JDK-8212233
+                    -->
+                    <source>${jdk.version}</source>
+                    <doctitle>Schema2template</doctitle>
+                    <additionalOptions>${javadoc.opts}</additionalOptions>
+                    <docfilessubdirs>true</docfilessubdirs>
+                    <doclint>none</doclint>
+                    <windowtitle>Schema2template v${project.version} - https://odftoolkit.org</windowtitle>
+                    <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <doclint>none</doclint>
+                            <additionalOptions>${javadoc.opts}</additionalOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <reporting>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1</version>
                 <configuration>
                     <doctitle>Schema2template</doctitle>
-                    <links>
-                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
-                    </links>
-                    <splitindex>true</splitindex>
-                    <windowtitle>Schema2template v${project.version} - https://odftoolkit.org</windowtitle>
-                    <bottom>${javadoc.bottom}</bottom>
-                    <additionalOptions>
-                        <additionalOption>${javadoc.opts}</additionalOption>
-                    </additionalOptions>
-                    <docfilessubdirs>true</docfilessubdirs>
+					<!-- JDK 8 as workaround for exception,
+					see https://bugs.openjdk.java.net/browse/JDK-8212233 -->
+                    <source>8</source>
+                    <windowtitle>Schema2template v${project.version} - https://odftoolkit.org/</windowtitle>
+                    <additionalOptions>${javadoc.opts}</additionalOptions>
                     <doclint>none</doclint>
-                </configuration>
-
-            </plugin>
-
-            <!-- Code Coverage Testing generated by Cobertura -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <instrumentation>
-                        <excludes>
-                            <exclude>org/odftoolkit/**/*Test.class</exclude>
-                        </excludes>
-                    </instrumentation>
                 </configuration>
             </plugin>
         </plugins>
@@ -207,7 +204,7 @@
             </properties>
         </profile>
     </profiles>
-    <!-- More Project Information -->
+	<!-- More Project Information -->
     <name>XML Schema to Template Mapping Tool: Library</name>
     <description>XML Schema to Template Mapping Tool: Library</description>
     <organization>

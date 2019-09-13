@@ -20,6 +20,7 @@
 ************************************************************************/
 package org.odftoolkit.odfdom.doc.table;
 
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -28,8 +29,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
@@ -67,22 +67,11 @@ public class TableTest {
 	@Before
 	public void setUp() {
 		try {
-			mOdsDoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath(mOdsTestFileName + ".ods"));
+			mOdsDoc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(mOdsTestFileName + ".ods"));
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
 		}
-	}
-
-	private OdfTextDocument loadODTDocument(String name) {
-		try {
-			OdfTextDocument odtdoc = (OdfTextDocument) OdfTextDocument.loadDocument(ResourceUtilities.getAbsolutePath(name));
-			return odtdoc;
-		} catch (Exception e) {
-			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-		return null;
 	}
 
 	@Test
@@ -99,7 +88,7 @@ public class TableTest {
 			document.newParagraph("Table with string values:");
 			createTableWithString(document);
 
-			document.save(ResourceUtilities.newTestOutputFile("CreateTableCase.odt"));
+			document.save(ResourceUtilities.getTestOutputFile("CreateTableCase.odt"));
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
@@ -312,7 +301,7 @@ public class TableTest {
 	@Test
 	public void testDeleteTable() {
 		try {
-			mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
+			mOdtDoc = OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
 			List<OdfTable> tableList = mOdtDoc.getTableList();
 			int count = tableList.size();
 
@@ -322,7 +311,7 @@ public class TableTest {
 			}
 
 			saveodt(mOdtTestFileName + "Out.odt");
-			mOdtDoc = loadODTDocument(mOdtTestFileName + "Out.odt");
+			mOdtDoc = OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(mOdtTestFileName + "Out.odt"));
 			tableList = mOdtDoc.getTableList();
 			Assert.assertEquals(count - 1, tableList.size());
 		} catch (Exception e) {
@@ -341,7 +330,7 @@ public class TableTest {
 			table.setWidth(width);
 			Assert.assertTrue(Math.abs(width - table.getWidth()) < 3);
 
-			document.save(ResourceUtilities.newTestOutputFile("TestSetGetWidth.odt"));
+			document.save(ResourceUtilities.getTestOutputFile("TestSetGetWidth.odt"));
 
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
@@ -351,19 +340,27 @@ public class TableTest {
 
 	@Test
 	public void testAppendColumn() {
-		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
-		List<OdfTable> tableList = mOdtDoc.getTableList();
-		for (int i = 0; i < tableList.size(); i++) {
-			OdfTable table = tableList.get(i);
-			int clmnum = table.getColumnCount();
-			table.appendColumn();
-			Assert.assertEquals(clmnum + 1, table.getColumnCount());
+        try {
+            mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
+            List<OdfTable> tableList = mOdtDoc.getTableList();
+            for (int i = 0; i < tableList.size(); i++) {
+                OdfTable table = tableList.get(i);
+                int clmnum = table.getColumnCount();
+                table.appendColumn();
+                Assert.assertEquals(clmnum + 1, table.getColumnCount());
 
-			OdfTableColumn column = table.getColumnByIndex(clmnum);
-			OdfTableColumn columnOld = table.getColumnByIndex(clmnum - 1);
-			Assert.assertEquals(column.getCellCount(), columnOld.getCellCount());
-		}
-		saveodt(mOdtTestFileName + "Output.odt");
+                OdfTableColumn column = table.getColumnByIndex(clmnum);
+                OdfTableColumn columnOld = table.getColumnByIndex(clmnum - 1);
+                Assert.assertEquals(column.getCellCount(), columnOld.getCellCount());
+            }
+            saveodt(mOdtTestFileName + "Output.odt");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        } catch (Exception ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        }
 	}
 
 	@Test
@@ -377,9 +374,9 @@ public class TableTest {
 			table.setTableName(tablename);
 			Assert.assertEquals(tablename, table.getTableName());
 
-			document.save(ResourceUtilities.newTestOutputFile("TestGetSetName.odt"));
+			document.save(ResourceUtilities.getTestOutputFile("TestGetSetName.odt"));
 			document.close();
-			document = loadODTDocument("TestGetSetName.odt");
+			document =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("TestGetSetName.odt"));
 			table = document.getTableByName(tablename);
 			Assert.assertNotNull(table);
 			String tablename2 = table.getTableName();
@@ -393,7 +390,7 @@ public class TableTest {
 			//an exception will be thrown
 			OdfTable table2 = OdfTable.newTable(document);
 			table2.setTableName(tablename);
-			document.save(ResourceUtilities.newTestOutputFile("TestGetSetName.odt"));
+			document.save(ResourceUtilities.getTestOutputFile("TestGetSetName.odt"));
 			Assert.fail("should not save the tables with the same table name.");
 		} catch (Exception e) {
 			if (!e.getMessage().startsWith("The table name is duplicate")) {
@@ -404,91 +401,115 @@ public class TableTest {
 
 	@Test
 	public void testInsertColumnBefore() {
-		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
-		OdfTable table1 = mOdtDoc.getTableByName("Table3");
-		OdfTableCellRange range = table1.getCellRangeByPosition(0, 1, 1, 2);
-		range.merge();
+        try {
+            mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
+            OdfTable table1 = mOdtDoc.getTableByName("Table3");
+            OdfTableCellRange range = table1.getCellRangeByPosition(0, 1, 1, 2);
+            range.merge();
 
-		int clmnum = table1.getColumnCount();
-		OdfTableColumn oldClm1 = table1.getColumnByIndex(1);
+            int clmnum = table1.getColumnCount();
+            OdfTableColumn oldClm1 = table1.getColumnByIndex(1);
 
-		List<OdfTableColumn> columns = table1.insertColumnsBefore(1, 2);
-		Assert.assertEquals(clmnum + 2, table1.getColumnCount());
-		OdfTableColumn clm0 = table1.getColumnByIndex(0);
-		OdfTableColumn clm1 = table1.getColumnByIndex(1);
-		OdfTableColumn clm2 = table1.getColumnByIndex(2);
-		OdfTableColumn clm3 = table1.getColumnByIndex(3);
-		Assert.assertEquals(columns.get(0), clm1);
-		Assert.assertEquals(columns.get(1), clm2);
-		Assert.assertEquals(clm0.getCellCount(), clm1.getCellCount());
-		Assert.assertEquals(clm1.getCellCount(), clm2.getCellCount());
-		Assert.assertEquals(clm3, oldClm1);
+            List<OdfTableColumn> columns = table1.insertColumnsBefore(1, 2);
+            Assert.assertEquals(clmnum + 2, table1.getColumnCount());
+            OdfTableColumn clm0 = table1.getColumnByIndex(0);
+            OdfTableColumn clm1 = table1.getColumnByIndex(1);
+            OdfTableColumn clm2 = table1.getColumnByIndex(2);
+            OdfTableColumn clm3 = table1.getColumnByIndex(3);
+            Assert.assertEquals(columns.get(0), clm1);
+            Assert.assertEquals(columns.get(1), clm2);
+            Assert.assertEquals(clm0.getCellCount(), clm1.getCellCount());
+            Assert.assertEquals(clm1.getCellCount(), clm2.getCellCount());
+            Assert.assertEquals(clm3, oldClm1);
 
-		OdfTable table2 = mOdtDoc.getTableByName("Table2");
-		OdfTableColumn oldClm0 = table2.getColumnByIndex(0);
-		columns = table2.insertColumnsBefore(0, 2);
+            OdfTable table2 = mOdtDoc.getTableByName("Table2");
+            OdfTableColumn oldClm0 = table2.getColumnByIndex(0);
+            columns = table2.insertColumnsBefore(0, 2);
 
-		OdfTableColumn newClm0 = table2.getColumnByIndex(0);
-		OdfTableColumn newClm1 = table2.getColumnByIndex(1);
-		OdfTableColumn newClm2 = table2.getColumnByIndex(2);
-		Assert.assertEquals(newClm0.getCellCount(), newClm2.getCellCount());
-		Assert.assertEquals(newClm1.getCellCount(), newClm2.getCellCount());
-		Assert.assertEquals(newClm2, oldClm0);
+            OdfTableColumn newClm0 = table2.getColumnByIndex(0);
+            OdfTableColumn newClm1 = table2.getColumnByIndex(1);
+            OdfTableColumn newClm2 = table2.getColumnByIndex(2);
+            Assert.assertEquals(newClm0.getCellCount(), newClm2.getCellCount());
+            Assert.assertEquals(newClm1.getCellCount(), newClm2.getCellCount());
+            Assert.assertEquals(newClm2, oldClm0);
 
-		saveodt(mOdtTestFileName + "Out.odt");
+            saveodt(mOdtTestFileName + "Out.odt");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        } catch (Exception ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        }
 	}
 
 	@Test
 	public void testRemoveColumnByIndex() {
-		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
-		OdfTable table1 = mOdtDoc.getTableByName("Table3");
-		OdfTableCellRange range = table1.getCellRangeByPosition(0, 1, 1, 2);
-		range.merge();
+        try {
+            mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
+            OdfTable table1 = mOdtDoc.getTableByName("Table3");
+            OdfTableCellRange range = table1.getCellRangeByPosition(0, 1, 1, 2);
+            range.merge();
 
-		int clmnum = table1.getColumnCount();
-		OdfTableColumn oldClm0 = table1.getColumnByIndex(0);
-		OdfTableColumn oldClm3 = table1.getColumnByIndex(3);
-		table1.removeColumnsByIndex(1, 2);
-		OdfTableColumn newClm0 = table1.getColumnByIndex(0);
-		OdfTableColumn newClm1 = table1.getColumnByIndex(1);
-		Assert.assertEquals(clmnum - 2, table1.getColumnCount());
-		Assert.assertEquals(oldClm0, newClm0);
-		Assert.assertEquals(oldClm3, newClm1);
+            int clmnum = table1.getColumnCount();
+            OdfTableColumn oldClm0 = table1.getColumnByIndex(0);
+            OdfTableColumn oldClm3 = table1.getColumnByIndex(3);
+            table1.removeColumnsByIndex(1, 2);
+            OdfTableColumn newClm0 = table1.getColumnByIndex(0);
+            OdfTableColumn newClm1 = table1.getColumnByIndex(1);
+            Assert.assertEquals(clmnum - 2, table1.getColumnCount());
+            Assert.assertEquals(oldClm0, newClm0);
+            Assert.assertEquals(oldClm3, newClm1);
 
-		OdfTable table2 = mOdtDoc.getTableByName("Table4");
-		clmnum = table2.getColumnCount();
-		OdfTableColumn oldClm1 = table2.getColumnByIndex(2);
-		table2.removeColumnsByIndex(0, 2);
-		table2.removeColumnsByIndex(table2.getColumnCount() - 2, 2);
-		OdfTableColumn clm0 = table2.getColumnByIndex(0);
-		Assert.assertEquals(oldClm1, clm0);
-		Assert.assertEquals(clmnum - 4, table2.getColumnCount());
-		saveodt(mOdtTestFileName + "Out.odt");
+            OdfTable table2 = mOdtDoc.getTableByName("Table4");
+            clmnum = table2.getColumnCount();
+            OdfTableColumn oldClm1 = table2.getColumnByIndex(2);
+            table2.removeColumnsByIndex(0, 2);
+            table2.removeColumnsByIndex(table2.getColumnCount() - 2, 2);
+            OdfTableColumn clm0 = table2.getColumnByIndex(0);
+            Assert.assertEquals(oldClm1, clm0);
+            Assert.assertEquals(clmnum - 4, table2.getColumnCount());
+            saveodt(mOdtTestFileName + "Out.odt");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        } catch (Exception ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        }
 
 	}
 
 	@Test
 	public void testInsertRowBefore() {
-		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
-		OdfTable table2 = mOdtDoc.getTableByName("Table2");
-		OdfTableRow row = table2.getRowByIndex(0);
-		int originalRowCount = table2.getRowCount();
-		List<OdfTableRow> newRows = table2.insertRowsBefore(0, 2);
+        try {
+            mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
+            OdfTable table2 = mOdtDoc.getTableByName("Table2");
+            OdfTableRow row = table2.getRowByIndex(0);
+            int originalRowCount = table2.getRowCount();
+            List<OdfTableRow> newRows = table2.insertRowsBefore(0, 2);
 
 
-		OdfTableRow newRow1 = table2.getRowByIndex(0);
-		OdfTableRow newRow2 = table2.getRowByIndex(0);
-		Assert.assertEquals(newRow1.getCellCount(), newRows.get(0).getCellCount());
-		Assert.assertEquals(newRow2.getCellCount(), newRows.get(1).getCellCount());
-		//original row index 0
-		Assert.assertEquals(row, table2.getRowByIndex(2));
+            OdfTableRow newRow1 = table2.getRowByIndex(0);
+            OdfTableRow newRow2 = table2.getRowByIndex(0);
+            Assert.assertEquals(newRow1.getCellCount(), newRows.get(0).getCellCount());
+            Assert.assertEquals(newRow2.getCellCount(), newRows.get(1).getCellCount());
+            //original row index 0
+            Assert.assertEquals(row, table2.getRowByIndex(2));
 
-		saveodt(mOdtTestFileName + "Out.odt");
+            saveodt(mOdtTestFileName + "Out.odt");
 
-		mOdtDoc = loadODTDocument(mOdtTestFileName + "Out.odt");
-		OdfTable newTable = mOdtDoc.getTableByName("Table2");
+            mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(mOdtTestFileName + "Out.odt"));
+            OdfTable newTable = mOdtDoc.getTableByName("Table2");
 
-		Assert.assertEquals(originalRowCount + 2, newTable.getRowCount());
+            Assert.assertEquals(originalRowCount + 2, newTable.getRowCount());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        } catch (Exception ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        }
 
 	}
 
@@ -520,8 +541,8 @@ public class TableTest {
 			OdfTable table3 = OdfTable.newTable(document, rowlabels, columnlabels, data);
 			table3.setTableName(tablename);
 
-			document.save(ResourceUtilities.newTestOutputFile(testFileName));
-			document = loadODTDocument(testFileName);
+			document.save(ResourceUtilities.getTestOutputFile(testFileName));
+			document =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(testFileName));
 			OdfTable table = document.getTableByName(tablename);
 			OdfTableColumn tmpColumn;
 			List<OdfTableColumn> columns = table.getColumnList();
@@ -587,8 +608,8 @@ public class TableTest {
 			OdfTable table3 = OdfTable.newTable(document, rowlabels, columnlabels, data);
 			table3.setTableName(tablename);
 
-			document.save(ResourceUtilities.newTestOutputFile(testFileName));
-			document = loadODTDocument(testFileName);
+			document.save(ResourceUtilities.getTestOutputFile(testFileName));
+			document =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(testFileName));
 			OdfTable table = document.getTableByName(tablename);
 			OdfTableRow tmpRow;
 			List<OdfTableRow> rows = table.getRowList();
@@ -608,104 +629,143 @@ public class TableTest {
 
 	@Test
 	public void testGetColumnByIndex() {
-
-		testNewTable();
-		mOdtDoc = loadODTDocument("CreateTableCase.odt");
-		OdfTable table = mOdtDoc.getTableByName("Table3");
-		Assert.assertNotNull(table);
-		//test if index is negative number, which is an illegal argument.
-		boolean illegalArgumentFlag = false;
 		try {
-			table.getColumnByIndex(-1);
-		} catch (IllegalArgumentException ie) {
-			if ("index should be nonnegative integer.".equals(ie.getMessage())) {
-				illegalArgumentFlag = true;
-			}
-		}
-		Assert.assertTrue(illegalArgumentFlag);
-		OdfTableColumn column = table.getColumnByIndex(2);
-		Assert.assertNotNull(column);
-		Assert.assertEquals("string6", column.getCellByIndex(2).getStringValue());
-		// test column automatically expands.
-		// Table3 original size is 7 rows and 5 columns. this test case will
-		// test row index 8 and columns index 6 are work well though they are
-		// both out bound of the original table.
-		column = table.getColumnByIndex(8);
-		Assert.assertNotNull(column);
-		OdfTableCell cell = column.getCellByIndex(6);
-		Assert.assertNotNull(cell);
-		cell.setStringValue("string86");
-		Assert.assertEquals("string86", cell.getStringValue());
+            testNewTable();
+            mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("CreateTableCase.odt"));
+            OdfTable table = mOdtDoc.getTableByName("Table3");
+            Assert.assertNotNull(table);
+            //test if index is negative number, which is an illegal argument.
+            boolean illegalArgumentFlag = false;
+            try {
+                table.getColumnByIndex(-1);
+            } catch (IllegalArgumentException ie) {
+                if ("index should be nonnegative integer.".equals(ie.getMessage())) {
+                    illegalArgumentFlag = true;
+                }
+            }
+            Assert.assertTrue(illegalArgumentFlag);
+            OdfTableColumn column = table.getColumnByIndex(2);
+            Assert.assertNotNull(column);
+            Assert.assertEquals("string6", column.getCellByIndex(2).getStringValue());
+            // test column automatically expands.
+            // Table3 original size is 7 rows and 5 columns. this test case will
+            // test row index 8 and columns index 6 are work well though they are
+            // both out bound of the original table.
+            column = table.getColumnByIndex(8);
+            Assert.assertNotNull(column);
+            OdfTableCell cell = column.getCellByIndex(6);
+            Assert.assertNotNull(cell);
+            cell.setStringValue("string86");
+            Assert.assertEquals("string86", cell.getStringValue());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+		} catch (Exception ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        }
 	}
 
 	@Test
-	public void testGetRowByIndex() {
-		testNewTable();
-		mOdtDoc = loadODTDocument("CreateTableCase.odt");
-		OdfTable table = mOdtDoc.getTableByName("Table3");
-		Assert.assertNotNull(table);
-		//test index is negative number. This is a illegal argument.
-		boolean illegalArgumentFlag = false;
+	public void testGetRowByIndex() throws Exception {
 		try {
-			table.getRowByIndex(-1);
-		} catch (IllegalArgumentException ie) {
-			if ("index should be nonnegative integer.".equals(ie.getMessage())) {
-				illegalArgumentFlag = true;
-			}
-		}
-		Assert.assertTrue(illegalArgumentFlag);
-		OdfTableRow row = table.getRowByIndex(3);
-		Assert.assertNotNull(row);
-		Assert.assertEquals("string12", row.getCellByIndex(3).getStringValue());
-		// test row automatically expands.
-		// Table3 original size is 7 rows and 5 columns. this test case will
-		// test row index 8 and columns index 6 are work well though they are
-		// both out bound of the original table.
-		row = table.getRowByIndex(6);
-		Assert.assertNotNull(row);
-		OdfTableCell cell = row.getCellByIndex(8);
-		Assert.assertNotNull(cell);
-		cell.setStringValue("string86");
-		Assert.assertEquals("string86", cell.getStringValue());
+            testNewTable();
+            mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("CreateTableCase.odt"));
+            OdfTable table = mOdtDoc.getTableByName("Table3");
+            Assert.assertNotNull(table);
+            //test index is negative number. This is a illegal argument.
+            boolean illegalArgumentFlag = false;
+            try {
+                table.getRowByIndex(-1);
+            } catch (IllegalArgumentException ie) {
+                if ("index should be nonnegative integer.".equals(ie.getMessage())) {
+                    illegalArgumentFlag = true;
+                }
+            }
+            Assert.assertTrue(illegalArgumentFlag);
+            OdfTableRow row = table.getRowByIndex(3);
+            Assert.assertNotNull(row);
+            Assert.assertEquals("string12", row.getCellByIndex(3).getStringValue());
+            // test row automatically expands.
+            // Table3 original size is 7 rows and 5 columns. this test case will
+            // test row index 8 and columns index 6 are work well though they are
+            // both out bound of the original table.
+            row = table.getRowByIndex(6);
+            Assert.assertNotNull(row);
+            OdfTableCell cell = row.getCellByIndex(8);
+            Assert.assertNotNull(cell);
+            cell.setStringValue("string86");
+            Assert.assertEquals("string86", cell.getStringValue());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+		} catch (Exception ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        }
 	}
 
 	@Test
 	public void testRemoveRowByIndex() {
-		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
-		OdfTable table2 = mOdtDoc.getTableByName("Table2");
-		OdfTableRow row0 = table2.getRowByIndex(0);
-		OdfTableRow row3 = table2.getRowByIndex(3);
-		int originalRowCount = table2.getRowCount();
-		table2.removeRowsByIndex(1, 2);
+        try {
+            mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
+            OdfTable table2 = mOdtDoc.getTableByName("Table2");
+            OdfTableRow row0 = table2.getRowByIndex(0);
+            OdfTableRow row3 = table2.getRowByIndex(3);
+            int originalRowCount = table2.getRowCount();
+            table2.removeRowsByIndex(1, 2);
 
-		//original row index 0
-		Assert.assertEquals(row0, table2.getRowByIndex(0));
-		Assert.assertEquals(row3, table2.getRowByIndex(1));
+            //original row index 0
+            Assert.assertEquals(row0, table2.getRowByIndex(0));
+            Assert.assertEquals(row3, table2.getRowByIndex(1));
 
-		saveodt(mOdtTestFileName + "Out.odt");
+            saveodt(mOdtTestFileName + "Out.odt");
 
-		mOdtDoc = loadODTDocument(mOdtTestFileName + "Out.odt");
-		OdfTable newTable = mOdtDoc.getTableByName("Table2");
+            mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(mOdtTestFileName + "Out.odt"));
+            OdfTable newTable = mOdtDoc.getTableByName("Table2");
 
-		Assert.assertEquals(originalRowCount - 2, newTable.getRowCount());
+            Assert.assertEquals(originalRowCount - 2, newTable.getRowCount());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        } catch (Exception ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        }
 	}
 
 	@Test
 	public void testGetHeaderRowCount() {
-		testNewTable();
-		mOdtDoc = loadODTDocument("CreateTableCase.odt");
-		OdfTable table = mOdtDoc.getTableByName("Table3");
-		int headerRowCount = table.getHeaderRowCount();
-		Assert.assertEquals(1, headerRowCount);
+        try {
+            testNewTable();
+            mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("CreateTableCase.odt"));
+            OdfTable table = mOdtDoc.getTableByName("Table3");
+            int headerRowCount = table.getHeaderRowCount();
+            Assert.assertEquals(1, headerRowCount);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        } catch (Exception ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        }
 	}
 
 	@Test
 	public void testGetHeaderColumnCount() {
-		testNewTable();
-		mOdtDoc = loadODTDocument("CreateTableCase.odt");
-		OdfTable table = mOdtDoc.getTableByName("Table3");
-		int headerColumnCount = table.getHeaderColumnCount();
-		Assert.assertEquals(1, headerColumnCount);
+        try {
+            testNewTable();
+            mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("CreateTableCase.odt"));
+            OdfTable table = mOdtDoc.getTableByName("Table3");
+            int headerColumnCount = table.getHeaderColumnCount();
+            Assert.assertEquals(1, headerColumnCount);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        } catch (Exception ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        }
 
 	}
 
@@ -714,13 +774,13 @@ public class TableTest {
 		String tablename = "DeletedTable";
 		String outputFilename = "tableProtected.odt";
 
-		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
+		mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
 		Assert.assertNotNull(mOdtDoc);
 		OdfTable table = mOdtDoc.getTableByName(tablename);
 		table.setProtected(false);
-		mOdtDoc.save(ResourceUtilities.newTestOutputFile(outputFilename));
+		mOdtDoc.save(ResourceUtilities.getTestOutputFile(outputFilename));
 
-		mOdtDoc = loadODTDocument(outputFilename);
+		mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(outputFilename));
 		table = mOdtDoc.getTableByName(tablename);
 		Assert.assertFalse(table.isProtected());
 
@@ -731,21 +791,21 @@ public class TableTest {
 		String tablename = "DeletedTable";
 		String outputFilename = "tableProtected.odt";
 
-		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
+		mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
 		Assert.assertNotNull(mOdtDoc);
 		OdfTable table = mOdtDoc.getTableByName(tablename);
 		table.setProtected(true);
-		mOdtDoc.save(ResourceUtilities.newTestOutputFile(outputFilename));
+		mOdtDoc.save(ResourceUtilities.getTestOutputFile(outputFilename));
 
-		mOdtDoc = loadODTDocument(outputFilename);
+		mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(outputFilename));
 		table = mOdtDoc.getTableByName(tablename);
 		Assert.assertTrue(table.isProtected());
 	}
 
 	@Test
-	public void testGetCellByPosition() {
+	public void testGetCellByPosition() throws Exception {
 		testNewTable();
-		mOdtDoc = loadODTDocument("CreateTableCase.odt");
+		mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("CreateTableCase.odt"));
 		OdfTable table = mOdtDoc.getTableByName("Table3");
 
 		OdfTableCell cell = table.getCellByPosition(3, 3);
@@ -839,9 +899,9 @@ public class TableTest {
 	}
 
 	@Test
-	public void testGetCellRangeByPosition() {
+	public void testGetCellRangeByPosition() throws Exception {
 		testNewTable();
-		mOdtDoc = loadODTDocument("CreateTableCase.odt");
+		mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("CreateTableCase.odt"));
 		OdfTable table = mOdtDoc.getTableByName("Table3");
 
 		OdfTableCellRange range = table.getCellRangeByPosition(0, 0, 3, 3);
@@ -887,24 +947,28 @@ public class TableTest {
 
 	@Test
 	public void testRemoveRowColumn() {
-		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
-		OdfTable table1 = mOdtDoc.getTableByName("Table1");
-		int rowCount = table1.getRowCount();
-		table1.removeRowsByIndex(1, 2);
-		Assert.assertEquals(rowCount - 2, table1.getRowCount());
+        try {
+            mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
+            OdfTable table1 = mOdtDoc.getTableByName("Table1");
+            int rowCount = table1.getRowCount();
+            table1.removeRowsByIndex(1, 2);
+            Assert.assertEquals(rowCount - 2, table1.getRowCount());
 
-		OdfTable table2 = mOdtDoc.getTableByName("Table2");
-		int columnCount = table2.getColumnCount();
-		table2.removeColumnsByIndex(2, 1);
-		Assert.assertEquals(columnCount - 1, table2.getColumnCount());
+            OdfTable table2 = mOdtDoc.getTableByName("Table2");
+            int columnCount = table2.getColumnCount();
+            table2.removeColumnsByIndex(2, 1);
+            Assert.assertEquals(columnCount - 1, table2.getColumnCount());
 
-		OdfTable table3 = mOdtDoc.getTableByName("Table3");
-		rowCount = table3.getRowCount();
-		table3.removeRowsByIndex(0, 2);
-		Assert.assertEquals(rowCount - 2, table3.getRowCount());
+            OdfTable table3 = mOdtDoc.getTableByName("Table3");
+            rowCount = table3.getRowCount();
+            table3.removeRowsByIndex(0, 2);
+            Assert.assertEquals(rowCount - 2, table3.getRowCount());
 
-		saveodt(mOdtTestFileName + "Out.odt");
-
+            saveodt(mOdtTestFileName + "Out.odt");
+        } catch (Exception ex) {
+            Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+            Assert.fail();
+        }
 	}
 
 	@Test
@@ -917,7 +981,7 @@ public class TableTest {
 			testAppendRow(mOdsTable);
 			saveods();
 
-			mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
+			mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
 			dom = mOdtDoc.getContentDom();
 			tablelist = dom.getElementsByTagNameNS(OdfDocumentNamespace.TABLE.getUri(), "table");
 			for (int i = 0; i < tablelist.getLength(); i++) {
@@ -933,8 +997,8 @@ public class TableTest {
 	}
 
 	@Test
-	public void testSplitCellAddress() {
-		mOdtDoc = loadODTDocument(mOdtTestFileName + ".odt");
+	public void testSplitCellAddress() throws Exception {
+		mOdtDoc =  OdfTextDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
 		OdfTable table1 = mOdtDoc.getTableByName("Table1");
 		//reproduce bug 138, test case to proof the fix problem.
 		//test address without table name.
@@ -996,7 +1060,7 @@ public class TableTest {
 	@Test
 	public void testGetCellAt() {
 		try {
-			OdfSpreadsheetDocument doc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsolutePath("testGetCellAt.ods"));
+			OdfSpreadsheetDocument doc = (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("testGetCellAt.ods"));
 			OdfTable odfTable = doc.getTableList().get(0);
 			OdfTableRow valueRows = odfTable.getRowByIndex(0);
 			for (int i = 0; i < 4; i++) {
@@ -1041,7 +1105,7 @@ public class TableTest {
 	@Test
 	public void testTableInHeaderFooter() {
 		try {
-			OdfDocument odfDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(mOdtTestFileName + ".odt"));
+			OdfDocument odfDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
 			Map<String, StyleMasterPageElement> masterPages1 = odfDoc.getMasterPages();
 			StyleMasterPageElement masterPage1 = masterPages1.get("Standard");
 			Assert.assertNotNull(masterPage1);
@@ -1055,8 +1119,8 @@ public class TableTest {
 //			HashMap<String, String> footerProps1 = getFooterStyleProps(odfDoc, masterPage1);
 //			HashMap<String, String> headerProps1 = getHeaderStyleProps(odfDoc, masterPage1);
 
-			odfDoc.save(ResourceUtilities.newTestOutputFile("TestHeaderFooter.odt"));
-			odfDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestHeaderFooter.odt"));
+			odfDoc.save(ResourceUtilities.getTestOutputFile("TestHeaderFooter.odt"));
+			odfDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("TestHeaderFooter.odt"));
 			Map<String, StyleMasterPageElement> masterPages2 = odfDoc.getMasterPages();
 			StyleMasterPageElement masterPage2 = masterPages2.get("Standard");
 
@@ -1175,7 +1239,7 @@ public class TableTest {
 
 	private void saveods() {
 		try {
-			mOdsDoc.save(ResourceUtilities.newTestOutputFile(mOdsTestFileName + "Output.ods"));
+			mOdsDoc.save(ResourceUtilities.getAbsoluteOutputPath(mOdsTestFileName + "Output.ods"));
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());
@@ -1184,7 +1248,7 @@ public class TableTest {
 
 	private void saveodt(String filename) {
 		try {
-			mOdtDoc.save(ResourceUtilities.newTestOutputFile(filename));
+			mOdtDoc.save(ResourceUtilities.getAbsoluteOutputPath(filename));
 		} catch (Exception e) {
 			Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
 			Assert.fail(e.getMessage());

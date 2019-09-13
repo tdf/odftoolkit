@@ -26,14 +26,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.xpath.XPath;
-
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
-
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -51,8 +45,12 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfTableRowProperties;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.type.PositiveLength;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.type.Length.Unit;
+import org.odftoolkit.odfdom.type.PositiveLength;
 import org.w3c.dom.Node;
 
 /**
@@ -60,7 +58,6 @@ import org.w3c.dom.Node;
  * <p>
  * OdfTableRow provides methods to get table cells that belong to this table row.
  *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.table.Row} in Simple API.
  */
 public class OdfTableRow {
 
@@ -170,7 +167,6 @@ public class OdfTableRow {
 		String sHeightMM = String.valueOf(height) + Unit.MILLIMETER.abbr();
 		String sHeightIN = PositiveLength.mapToUnit(sHeightMM, Unit.INCH);
 		splitRepeatedRows();
-		maRowElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
 		maRowElement.setProperty(OdfTableRowProperties.RowHeight, sHeightIN);
 	}
 
@@ -434,7 +430,7 @@ public class OdfTableRow {
 	 */
 	public OdfStyle getDefaultCellStyle() {
 		String styleName = maRowElement.getTableDefaultCellStyleNameAttribute();
-		OdfStyle style = maRowElement.getAutomaticStyles().getStyle(
+		OdfStyle style = maRowElement.getOrCreateAutomaticStyles().getStyle(
 				styleName, OdfStyleFamily.TableCell);
 
 		if (style == null) {
@@ -772,20 +768,30 @@ public class OdfTableRow {
 		int index = nStart;
 		for (int i = 0; i < nCount; i++) {
 			OdfTableCell cell = getCellByIndex(index);
-			cell.splitRepeatedCells();
-			if (cell.isCoveredElement() && coverCell != null) {
-				coverCell.setColumnSpannedNumber(coverCell.getColumnSpannedNumber() - cell.getColumnsRepeatedNumber());
-				maRowElement.removeChild(cell.getOdfElement());
-				i += cell.getColumnsRepeatedNumber() - 1;
-			} else if (cell.isCoveredElement()) {
-				maRowElement.removeChild(cell.getOdfElement());
-				i += cell.getColumnsRepeatedNumber() - 1;
-			} else if (!cell.isCoveredElement()) {
-				if (i + cell.getColumnSpannedNumber() <= nCount) {
+			if(cell!=null) {
+				cell.splitRepeatedCells();
+				if (cell.isCoveredElement() && coverCell != null) {
+					coverCell.setColumnSpannedNumber(coverCell.getColumnSpannedNumber() - cell.getColumnsRepeatedNumber());
 					maRowElement.removeChild(cell.getOdfElement());
-					i += cell.getColumnSpannedNumber() - 1;
-				} else {
-					removeCellByIndex(index + 1, nCount - i);
+					i += cell.getColumnsRepeatedNumber() - 1;
+				} else if (cell.isCoveredElement()) {
+					maRowElement.removeChild(cell.getOdfElement());
+					i += cell.getColumnsRepeatedNumber() - 1;
+				} else if (!cell.isCoveredElement()) {
+	                int columnSpan = cell.getColumnSpannedNumber();
+					if (i + columnSpan <= nCount) {
+						maRowElement.removeChild(cell.getOdfElement());
+						i += columnSpan - 1;
+					} else {
+	                    cell.setColumnSpannedNumber(columnSpan - 1);
+	                    OdfElement nextCell = OdfElement.getNextSiblingElement(cell.mCellElement);
+	                    // Recently some office application do not use <table:covered-table-cell> elements any longer
+	                    if(nextCell instanceof TableCoveredTableCellElement){
+	                        // only delete the next child if the next IS a <table:covered-table-cell> element
+	                        removeCellByIndex(index + 1, nCount - i);
+	                    }
+
+					}
 				}
 			}
 		}

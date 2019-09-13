@@ -1,4 +1,4 @@
-/** **********************************************************************
+/************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
@@ -18,7 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *********************************************************************** */
+ ************************************************************************/
 package org.odftoolkit.odfdom.integrationtest;
 
 import java.io.BufferedReader;
@@ -116,4 +116,71 @@ public class JarManifestIT {
             LOG.log(Level.SEVERE, null, e);
         }
     }
+//}
+//	private static final Logger LOG = Logger.getLogger(JarManifestIT.class.getName());
+//
+//    @Test
+//	public void testJar() {
+//		try {
+//
+//
+//            File jarFile = getFileFromSubstring("target" + File.separator, "-jar-with-dependencies.jar");
+//            System.err.println("JarFile: " + jarFile.getAbsolutePath());
+//			String command = "java -jar target" + File.separator + "odfdom-java-0.9.0-incubating-SNAPSHOT-jar-with-dependencies.jar";
+//			Process process = Runtime.getRuntime().exec(command);
+//			process.waitFor();
+//			BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+//			BufferedReader outputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//			String line;
+//			while ((line = errorReader.readLine()) != null) {
+//				LOG.info(line);
+//				Assert.assertTrue(line.indexOf("Exception") == -1);
+//			}
+//			String firstOutputLine = outputReader.readLine();
+//			String secondOutputLine = outputReader.readLine();
+//			errorReader.close();
+//			outputReader.close();
+//			process.destroy();
+//			LOG.log(Level.INFO, "The version info from commandline given by {0} is:\n", command);
+//			LOG.log(Level.INFO, "\"{0}\"", firstOutputLine);
+//			LOG.log(Level.INFO, "\"{0}\"", secondOutputLine);
+//			Assert.assertEquals(firstOutputLine, JarManifest.getOdfdomTitle() + " (build " + JarManifest.getOdfdomBuildDate() + ')');
+//			Assert.assertEquals(secondOutputLine, "from " + JarManifest.getOdfdomWebsite() + " supporting ODF " + JarManifest.getOdfdomSupportedOdfVersion());
+//
+//			LOG.log(Level.INFO, "\nJarManifest.getName(): {0}", JarManifest.getOdfdomName());
+//			Assert.assertNotNull(JarManifest.getOdfdomName());
+//
+//			LOG.log(Level.INFO, "\nJarManifest.getTitle(): {0}", JarManifest.getOdfdomTitle());
+//			Assert.assertNotNull(JarManifest.getOdfdomTitle());
+//
+//			LOG.log(Level.INFO, "\nJarManifest.getVersion(): {0}", JarManifest.getOdfdomVersion());
+//			Assert.assertNotNull(JarManifest.getOdfdomVersion());
+//
+//			LOG.log(Level.INFO, "\nJarManifest.getBuildDate(): {0}", JarManifest.getOdfdomBuildDate());
+//			Assert.assertNotNull(JarManifest.getOdfdomBuildDate());
+//
+//			LOG.log(Level.INFO, "\nJarManifest.getSupportedOdfVersion(): {0}", JarManifest.getOdfdomSupportedOdfVersion());
+//			Assert.assertNotNull(JarManifest.getOdfdomSupportedOdfVersion());
+//
+//		} catch (Exception e) {
+//			LOG.log(Level.SEVERE, null, e);
+//		}
+//	}
+//
+//    private File getFileFromSubstring(String relDirectoryPath, String fileSuffix) {
+//        File searchFile = null;
+//        File dir = new File(relDirectoryPath);
+//        System.out.println(dir.getName());
+//        System.out.println(dir.getAbsolutePath());
+//        File files[] = dir.listFiles();
+//        for (File f : files) {
+//            System.out.println(f.getName());
+//            if (f.getName().contains(fileSuffix)) {
+//                System.out.println("Found IT!");
+//                searchFile = f;
+//            }
+//        }
+//        return searchFile;
+//    }
+
 }

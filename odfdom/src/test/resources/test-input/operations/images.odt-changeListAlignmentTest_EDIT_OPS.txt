@@ -1,0 +1,3 @@
+{"changes":[
+{"name":"format","start":[11,17],"attrs":{"drawing":{"anchorHorAlign":"left","anchorHorBase":"column","anchorHorOffset":0,"inline":false,"textWrapMode":"square","textWrapSide":"right"}}}
+]}

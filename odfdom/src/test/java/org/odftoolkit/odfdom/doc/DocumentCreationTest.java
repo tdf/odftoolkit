@@ -21,6 +21,9 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.doc;
 
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,21 +61,22 @@ import org.w3c.dom.NodeList;
 public class DocumentCreationTest {
 
 	private static final Logger LOG = Logger.getLogger(DocumentCreationTest.class.getName());
-	private static final String TEST_FILE_FOLDER = ResourceUtilities.getTestOutputFolder();
-	private static final String TEST_FILE_EMBEDDED = TEST_FILE_FOLDER + "testEmbeddedDoc.odt";
+	private static final String TEST_INPUT_FOLDER = ResourceUtilities.getTestInputFolder();
+    private static final String TEST_OUTPUT_FOLDER = ResourceUtilities.getTestOutputFolder();
+	private static final String TEST_FILE_EMBEDDED = TEST_INPUT_FOLDER + "testEmbeddedDoc.odt";
 	private static final String TEST_PIC = "testA.jpg";
 	// Changed leading space against character as leading space have to be <text:s/> element in ODF, see http://docs.oasis-open.org/office/v1.2/os/OpenDocument-v1.2-os-part1.html#White-space_Characters
 	private static final String TEST_SPAN_TEXT = "*Find Truth!!!";
-	private static final String TEST_FILE_ACCESS_EMBEDDED = TEST_FILE_FOLDER + "TestAccess_EmbeddedDocument.odt";
-	private static final String TEST_FILE_EMBEDDED_EMBEDDED = TEST_FILE_FOLDER + "TestAccess_EmbeddedinEmbedded.odt";
-	private static final String TEST_FILE_SAVE_EMBEDDED = TEST_FILE_FOLDER + "testSaveEmbeddedDoc.odt";
-	private static final String TEST_FILE_SAVE_EMBEDDED_OUT = TEST_FILE_FOLDER + "TestSaveEmbeddedDoc_newName.odt";
-	private static final String TEST_FILE_SAVE_EMBEDDED_OUT2 = TEST_FILE_FOLDER + "TestSaveEmbeddedDoc2.odt";
-	private static final String TEST_FILE_SAVE_QUEER_PATH = TEST_FILE_FOLDER + "TestSaveQueerEmbeddedPathDoc1.odt";
-	private static final String CORRUPTED_MIMETYPE_DOC = TEST_FILE_FOLDER + "CorruptedMimetypeDoc.odt";
-	private static final String CORRUPTED_MIMETYPE_DOC_OUT = TEST_FILE_FOLDER + "TestSaveCorruptedMimetypeDoc.odt";
-	private static final String CORRUPTED_MIMETYPE_CHART = TEST_FILE_FOLDER + "CorruptedMimetypeChart.odc";
-	private static final String CORRUPTED_MIMETYPE_CHART_OUT = TEST_FILE_FOLDER + "TestSaveCorruptedMimetypeChart.odc";
+	private static final String TEST_FILE_ACCESS_EMBEDDED = TEST_INPUT_FOLDER + "TestAccess_EmbeddedDocument.odt";
+	private static final String TEST_FILE_EMBEDDED_EMBEDDED = TEST_INPUT_FOLDER + "TestAccess_EmbeddedinEmbedded.odt";
+	private static final String TEST_FILE_SAVE_EMBEDDED = TEST_INPUT_FOLDER + "testSaveEmbeddedDoc.odt";
+	private static final String TEST_FILE_SAVE_EMBEDDED_OUT = TEST_OUTPUT_FOLDER + "TestSaveEmbeddedDoc_newName.odt";
+	private static final String TEST_FILE_SAVE_EMBEDDED_OUT2 = TEST_OUTPUT_FOLDER + "TestSaveEmbeddedDoc2.odt";
+	private static final String TEST_FILE_SAVE_QUEER_PATH = TEST_OUTPUT_FOLDER + "TestSaveQueerEmbeddedPathDoc1.odt";
+	private static final String CORRUPTED_MIMETYPE_DOC = TEST_INPUT_FOLDER + "CorruptedMimetypeDoc.odt";
+	private static final String CORRUPTED_MIMETYPE_DOC_OUT = TEST_INPUT_FOLDER + "TestSaveCorruptedMimetypeDoc.odt";
+	private static final String CORRUPTED_MIMETYPE_CHART = TEST_INPUT_FOLDER + "CorruptedMimetypeChart.odc";
+	private static final String CORRUPTED_MIMETYPE_CHART_OUT = TEST_INPUT_FOLDER + "TestSaveCorruptedMimetypeChart.odc";
 
 	@Test
 	public void _1_createEmptyDocs() {
@@ -80,40 +84,40 @@ public class DocumentCreationTest {
 			OdfTextDocument odtDoc1 = OdfTextDocument.newTextDocument();
 			OdfTextDocument odtDoc2 = OdfTextDocument.newTextDocument();
 			odtDoc2.getContentDom();
-			odtDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfTextDocument.odt"));
+			odtDoc1.save(ResourceUtilities.getTestOutputFile("TestEmpty_OdfTextDocument.odt"));
 
 			OdfGraphicsDocument odgDoc1 = OdfGraphicsDocument.newGraphicsDocument();
 			OdfGraphicsDocument odgDoc2 = OdfGraphicsDocument.newGraphicsDocument();
 			odgDoc2.getContentDom();
-			odgDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfGraphicsDocument.odg"));
+			odgDoc1.save(ResourceUtilities.getTestOutputFile("TestEmpty_OdfGraphicsDocument.odg"));
 
 			OdfSpreadsheetDocument odsDoc1 = OdfSpreadsheetDocument.newSpreadsheetDocument();
 			OdfSpreadsheetDocument odsDoc2 = OdfSpreadsheetDocument.newSpreadsheetDocument();
 			odsDoc2.getContentDom();
-			odsDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfSpreadsheetDocument.ods"));
+			odsDoc1.save(ResourceUtilities.getTestOutputFile("TestEmpty_OdfSpreadsheetDocument.ods"));
 
 			OdfPresentationDocument odpDoc1 = OdfPresentationDocument.newPresentationDocument();
 			OdfPresentationDocument odpDoc2 = OdfPresentationDocument.newPresentationDocument();
 			odpDoc2.getContentDom();
-			odpDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfPresentationDocument.odp"));
+			odpDoc1.save(ResourceUtilities.getTestOutputFile("TestEmpty_OdfPresentationDocument.odp"));
 
 			OdfChartDocument odcDoc1 = OdfChartDocument.newChartDocument();
 			OdfChartDocument odcDoc2 = OdfChartDocument.newChartDocument();
 			odcDoc2.getContentDom();
-			odcDoc1.save(ResourceUtilities.newTestOutputFile("TestEmpty_OdfChartDocument.odc"));
+			odcDoc1.save(ResourceUtilities.getTestOutputFile("TestEmpty_OdfChartDocument.odc"));
 
 			/////////////////////////////////////////
 			// ODFDOM PACKAGE LAYER - WIKI EXAMPLE //
 			/////////////////////////////////////////
 
 			// loads the ODF document package from the path
-			OdfPackage pkg = OdfPackage.loadPackage(ResourceUtilities.getTestResourceAsStream("TestEmpty_OdfTextDocument.odt"));
+			OdfPackage pkg = OdfPackage.loadPackage(ResourceUtilities.getTestOutputAsStream("TestEmpty_OdfTextDocument.odt"));
 
 			// loads the images from the URLs and inserts the image in the package, adapting the manifest
-			pkg.insert(ResourceUtilities.getURI(TEST_PIC), "Pictures/" + TEST_PIC, null);
+			pkg.insert(ResourceUtilities.getURI("test-input" + File.separatorChar + TEST_PIC), "Pictures/" + TEST_PIC, null);
 			//Deactivated as test fail, when test machine is not online (painful for offline work)
 			//pkg.insert(new URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"), "someweiredname/tableandfruits.jpg", null);
-			pkg.save(ResourceUtilities.newTestOutputFile("odfdom-wiki-package.odt"));
+			pkg.save(ResourceUtilities.getTestOutputFile("odfdom-wiki-package.odt"));
 
 
 			/////////////////////////////////////
@@ -121,7 +125,7 @@ public class DocumentCreationTest {
 			/////////////////////////////////////
 
 			// loads the ODF document from the path
-			OdfDocument odfDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestEmpty_OdfTextDocument.odt"));
+			OdfDocument odfDoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("TestEmpty_OdfTextDocument.odt"));
 
 			// get the ODF content as DOM tree representation
 			OdfFileDom odfContent = odfDoc.getContentDom();
@@ -143,13 +147,13 @@ public class DocumentCreationTest {
 			para.appendChild(odfFrame);
 			OdfDrawImage odfImage = (OdfDrawImage) OdfXMLFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
 			odfFrame.appendChild(odfImage);
-			odfImage.newImage(ResourceUtilities.getURI(TEST_PIC));
+			odfImage.newImage(ResourceUtilities.getURI("test-input" + File.separatorChar + TEST_PIC));
 
 			OdfDrawImage odfImage2 = (OdfDrawImage) OdfXMLFactory.newOdfElement(odfContent, OdfDrawImage.ELEMENT_NAME);
 			odfFrame.appendChild(odfImage2);
 			//Deactivated as test fail, when test machine is not online (painful for offline work)
 			//odfImage2.newImage(new URI("http://odftoolkit.org/attachments/wiki_images/odftoolkit/Table_fruits_diagramm.jpg"));
-			odfDoc.save(ResourceUtilities.newTestOutputFile("odfdom-wiki-dom.odt"));
+			odfDoc.save(ResourceUtilities.getTestOutputFile("odfdom-wiki-dom.odt"));
 
 		} catch (Exception e) {
 			LOG.log(Level.SEVERE, null, e);
@@ -163,14 +167,14 @@ public class DocumentCreationTest {
 			OdfTextDocument odtDoc1 = OdfTextDocument.newTextDocument();
 			odtDoc1.insertDocument(OdfTextDocument.newTextDocument(), "Object1/");
 			odtDoc1.insertDocument(OdfTextDocument.newTextDocument(), "Object2/");
-			odtDoc1.insertDocument(OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath("TestEmpty_OdfGraphicsDocument.odg")), "Object3");
+			odtDoc1.insertDocument(OdfDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath("TestEmpty_OdfGraphicsDocument.odg")), "Object3");
 			odtDoc1.insertDocument(OdfChartDocument.newChartDocument(), "Object4");
 			odtDoc1.insertDocument(OdfGraphicsDocument.newGraphicsDocument(), "Object5");
 			odtDoc1.insertDocument(OdfPresentationDocument.newPresentationDocument(), "Object6");
 
 			Map<String, OdfDocument> embeddedDocs = odtDoc1.loadSubDocuments();
 			LOG.log(Level.INFO, "Embedded Document count: {0}", embeddedDocs.size());
-			odtDoc1.save(ResourceUtilities.newTestOutputFile("TestCreate_EmbeddedDocuments.odt"));
+			odtDoc1.save(ResourceUtilities.getTestOutputFile("TestCreate_EmbeddedDocuments.odt"));
 
 			Assert.assertTrue(embeddedDocs.size() == 6);
 
@@ -387,7 +391,7 @@ public class DocumentCreationTest {
 						String refObjPath = object.getAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
 						Assert.assertTrue(refObjPath.equals("Pictures/"	+ TEST_PIC)	|| refObjPath.equals("./NewEmbedded"));
 					}
-					Assert.assertNotNull(testLoad.getPackage().getFileEntry("Pictures/" + TEST_PIC));
+					Assert.assertNotNull(testLoad.getPackage().getFileEntry("Pictures/testA.jpg"));
 					OdfDocument embedDocOftestLoad = testLoad.loadSubDocument("NewEmbedded/");
 					contentDom4 = embedDocOftestLoad.getContentDom();
 					OdfTextSpan span4 = (OdfTextSpan) xpath.evaluate("//text:span[last()]", contentDom4, XPathConstants.NODE);
@@ -457,7 +461,7 @@ public class DocumentCreationTest {
 
 		OdfDrawImage image = new OdfDrawImage(dom);
 		drawFrame.appendChild(image);
-		image.newImage(ResourceUtilities.getURI(TEST_PIC));
+		image.newImage(ResourceUtilities.getURI("test-input" + File.separatorChar + TEST_PIC));
 	}
 
 	private void addFrameForEmbeddedDoc(OdfContentDom dom, TextPElement para, String path) throws Exception {

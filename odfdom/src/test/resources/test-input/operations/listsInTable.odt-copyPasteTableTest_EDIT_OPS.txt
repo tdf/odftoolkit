@@ -1,0 +1,13 @@
+{"changes":[
+{"name":"addStyle","type":"table","styleId":"TableGrid","attrs":{"wholeTable":{"paragraph":{"lineHeight":{"type":"percent","value":100}},"table":{"borderBottom":{"color":{"type":"auto"},"style":"single","width":17},"borderInsideHor":{"color":{"type":"auto"},"style":"single","width":17},"borderInsideVert":{"color":{"type":"auto"},"style":"single","width":17},"borderLeft":{"color":{"type":"auto"},"style":"single","width":17},"borderRight":{"color":{"type":"auto"},"style":"single","width":17},"borderTop":{"color":{"type":"auto"},"style":"single","width":17},"paddingBottom":0,"paddingLeft":190,"paddingRight":190,"paddingTop":0}}},"opl":1,"osn":16,"styleName":"Table Grid","uiPriority":59},
+{"name":"addTable","start":[2],"attrs":{"styleId":"TableGrid","table":{"exclude":["lastRow","lastCol","bandsVert"],"tableGrid":[1000,1000],"width":"auto"}},"opl":1,"osn":17},
+{"name":"addRows","start":[2,1],"addDefaultCells":true,"count":1,"opl":1,"osn":18},
+{"name":"addParagraph","start":[3],"opl":1,"osn":19},
+{"name":"addText","start":[3,1],"opl":14,"osn":20,"text":"Zweite Tabelle"},
+{"name":"splitParagraph","start":[3,15],"opl":1,"osn":34},
+{"name":"splitParagraph","start":[4,1],"opl":1,"osn":35},
+{"name":"addTable","start":[5],"attrs":{"styleId":"TableGrid","table":{"exclude":["lastRow","lastCol","bandsVert"],"tableGrid":[1000,1000],"width":"auto"}},"opl":1,"osn":36},
+{"name":"addRows","start":[5,1],"addDefaultCells":false,"count":1,"opl":1,"osn":37},
+{"name":"addCells","start":[5,1,1],"count":1,"opl":1,"osn":38},
+{"name":"addCells","start":[5,1,2],"count":1,"opl":1,"osn":39}
+]}

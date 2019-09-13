@@ -35,6 +35,8 @@ import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.attribute.grddl.GrddlTransformationAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeMimetypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:document}.
@@ -143,8 +145,8 @@ public class OfficeDocumentElement extends OdfElement {
 	 *
 	 * @return the element {@odf.element office:automatic-styles}
 	 */
-	public OfficeAutomaticStylesElement newOfficeAutomaticStylesElement() {
-		OfficeAutomaticStylesElement officeAutomaticStyles = ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeAutomaticStylesElement.class);
+	public OdfOfficeAutomaticStyles newOfficeAutomaticStylesElement() {
+		OdfOfficeAutomaticStyles officeAutomaticStyles = ((OdfFileDom) this.ownerDocument).newOdfElement(OdfOfficeAutomaticStyles.class);
 		this.appendChild(officeAutomaticStyles);
 		return officeAutomaticStyles;
 	}
@@ -222,8 +224,8 @@ public class OfficeDocumentElement extends OdfElement {
 	 *
 	 * @return the element {@odf.element office:styles}
 	 */
-	public OfficeStylesElement newOfficeStylesElement() {
-		OfficeStylesElement officeStyles = ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeStylesElement.class);
+	public OdfOfficeStyles newOfficeStylesElement() {
+		OdfOfficeStyles officeStyles = ((OdfFileDom) this.ownerDocument).newOdfElement(OdfOfficeStyles.class);
 		this.appendChild(officeStyles);
 		return officeStyles;
 	}

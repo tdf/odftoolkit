@@ -21,16 +21,20 @@
  ************************************************************************/
 package org.odftoolkit.odfdom.dom;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
-
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentMetaElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMetaElement;
 import org.odftoolkit.odfdom.pkg.NamespaceName;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.xml.sax.SAXException;
 
 /**
- * The DOM repesentation of the ODF meta.xml file of an ODF document.
+ * The DOM representation of the ODF meta.xml file of an ODF document.
  */
 public class OdfMetaDom extends OdfFileDom {
 
@@ -60,7 +64,11 @@ public class OdfMetaDom extends OdfFileDom {
 			mUriByPrefix.put(name.getPrefix(), name.getUri());
 			mPrefixByUri.put(name.getUri(), name.getPrefix());
 		}
-		super.initialize();
+        try {
+            super.initialize();
+        } catch (SAXException | IOException | ParserConfigurationException ex) {
+            Logger.getLogger(OdfMetaDom.class.getName()).log(Level.SEVERE, null, ex);
+        }
 	}
 
 	/**

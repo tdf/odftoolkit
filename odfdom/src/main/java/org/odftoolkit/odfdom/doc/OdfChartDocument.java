@@ -33,7 +33,6 @@ import org.xml.sax.SAXException;
  * This class represents an empty ODF document , which will be in general embedded
  * in an existing ODF (Spreadsheet) document.
  *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.ChartDocument} in Simple API.
  */
 public class OdfChartDocument extends OdfDocument {
 

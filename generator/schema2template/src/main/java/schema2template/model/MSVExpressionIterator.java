@@ -21,7 +21,6 @@
  ************************************************************************/
 package schema2template.model;
 
-import static schema2template.example.odf.OdfHelper.DEBUG;
 import com.sun.msv.grammar.DataExp;
 import com.sun.msv.grammar.ElementExp;
 import com.sun.msv.grammar.Expression;
@@ -33,6 +32,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 import java.util.logging.Logger;
+import static schema2template.example.odf.OdfHelper.DEBUG;
 
 /**
  * Iterates through the MSV expression tree.
@@ -59,7 +59,7 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
 	// Situation: Element a contains Element b contains Element a, will stop after the second a not continuing with b
 	private HashSet<Expression> mKnownElementExpressions;
 
-	// The vertical tree position is remembered by the stack, the vertical position will be remembered by a sibling index
+	// The vertical tree position is remembered by the stack, the horizontal position will be remembered by a sibling index
 	private class UniqueAncestor {
 
 		public UniqueAncestor(Expression exp, int siblingIndex) {
@@ -183,7 +183,7 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
 
 	/** Iterating the Tree like the following
 	If there are (unvisited) children -> go down
-	If there are no (unvisited) children, but unvistsiblings -> go up and right
+	If there are no (unvisited) children, but unvisted siblings -> go up and right
 	 */
 	private Expression getNextExpression() {
 		Expression nextExpression = null;

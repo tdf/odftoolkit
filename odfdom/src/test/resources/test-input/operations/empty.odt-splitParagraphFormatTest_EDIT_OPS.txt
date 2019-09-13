@@ -1,0 +1,6 @@
+{"changes":[
+{"name":"format","start":[1],"attrs":{"character":{"bold":false}}},
+{"name":"addText","start":[1,1],"attrs":{"character":{"bold":true}},"text":"a"},
+{"name":"splitParagraph","start":[1,2]},
+{"name":"addText","start":[2,1],"text":"b"}
+]}

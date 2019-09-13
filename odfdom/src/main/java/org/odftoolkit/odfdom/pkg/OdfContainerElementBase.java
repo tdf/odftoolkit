@@ -90,12 +90,13 @@ abstract public class OdfContainerElementBase extends OdfElement {
 	@Override
 	public Node replaceChild(Node newChild, Node oldChild) throws DOMException {
 		Node ret = super.replaceChild(newChild, oldChild);
+		// first REMOVE afterwards ADD, otherwise the removal will take away the insered from the OdfStyleBase properties map
+		if (oldChild instanceof OdfElement) {
+			onOdfNodeRemoved((OdfElement) oldChild);
+		}
 
 		if (newChild instanceof OdfElement) {
 			onOdfNodeInserted((OdfElement) newChild, oldChild);
-		}
-		if (oldChild instanceof OdfElement) {
-			onOdfNodeRemoved((OdfElement) oldChild);
 		}
 		return ret;
 	}

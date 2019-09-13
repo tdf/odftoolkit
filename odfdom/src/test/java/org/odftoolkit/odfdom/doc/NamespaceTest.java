@@ -65,13 +65,13 @@ public class NamespaceTest {
             Assert.assertTrue(resElement1 != null);
 
             // Save documnet
-            File targetFile = ResourceUtilities.newTestOutputFile(TARGET);
+            File targetFile = ResourceUtilities.getTestOutputFile(TARGET);
             doc.save(targetFile);
 
 
 
             // Load document with ODF foreign attriute
-            OdfTextDocument docReloaded = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsolutePath(TARGET));
+            OdfTextDocument docReloaded = (OdfTextDocument) OdfDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(TARGET));
             OdfFileDom contentDomReloaded = docReloaded.getContentDom();
 
             // Postive test for XPath on ODF attributes

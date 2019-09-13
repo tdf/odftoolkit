@@ -1,0 +1,10 @@
+{"changes":[
+{"name":"addText","start":[1,1],"opl":4,"osn":16,"text":"link"},
+{"name":"addStyle","type":"character","styleId":"Hyperlink","attrs":{"character":{"color":{"type":"scheme","fallbackValue":"0080C0","value":"hyperlink"},"underline":true}},"opl":1,"osn":20,"parent":null,"styleName":"Hyperlink","uiPriority":99},
+{"name":"format","start":[1,3],"end":[1,3],"attrs":{"styleId":"Hyperlink","character":{"url":"http://www.heise.de"}},"opl":1,"osn":21},
+{"name":"splitParagraph","start":[1,5],"opl":1,"osn":22},
+{"name":"addText","start":[2,1],"opl":5,"osn":23,"text":"link2"},
+{"name":"format","start":[2,1],"end":[2,5],"attrs":{"styleId":"Hyperlink","character":{"url":"http://www.spiegel.de"}},"opl":1,"osn":28},
+{"name":"splitParagraph","start":[2,6],"opl":1,"osn":29},
+{"name":"addText","start":[3,1],"attrs":{"styleId":null,"character":{"url":null}},"opl":5,"osn":30,"text":"link3"}
+]}

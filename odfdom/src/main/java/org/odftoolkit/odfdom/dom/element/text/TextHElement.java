@@ -1804,4 +1804,10 @@ public class TextHElement extends TextParagraphElementBase {
 			this.appendChild(this.getOwnerDocument().createTextNode(content));
 		}
 	}
+
+	@Override
+	/** If this element is the first - perhaps only - element of a logical group of XML elements. For instance: table, paragraph */
+	public boolean isComponentRoot(){
+		return true;
+	}
 }

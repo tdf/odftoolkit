@@ -31,7 +31,7 @@ import javax.xml.namespace.QName;
 public class Util {
 
 	private static final String SLASH = "/";
-
+    private static final String EMPTY_BASE_URI = "";
 	/**
 	 * Test whether two QNames are equal to each other. This is a bug fix for
 	 * java-rdfa library. "xhtml:about" and "about" should be considered as
@@ -65,8 +65,13 @@ public class Util {
 	 * @return
 	 */
 	public static String getRDFBaseUri(String pkgBaseUri, String internalPath) {
-		String subDirectory = internalPath.lastIndexOf(SLASH) == -1 ? "" : SLASH + internalPath.substring(0, internalPath.lastIndexOf(SLASH));
-		String baseUri = pkgBaseUri + subDirectory + SLASH;
+		String baseUri = null;
+        String subDirectory = internalPath.lastIndexOf(SLASH) == -1 ? "" : "" + SLASH + internalPath.substring(0, internalPath.lastIndexOf(SLASH));
+		if(pkgBaseUri != null) {
+            baseUri = pkgBaseUri + subDirectory + SLASH;
+        } else {
+            baseUri = subDirectory + SLASH;
+        }
 		return baseUri;
 	}
 

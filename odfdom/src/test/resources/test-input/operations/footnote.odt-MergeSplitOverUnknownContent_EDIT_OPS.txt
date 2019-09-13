@@ -1,0 +1,6 @@
+{"changes":[
+{"name":"splitParagraph","start":[1,1]},
+{"name":"mergeParagraph","start":[1]},
+{"name":"splitParagraph","start":[2,23]},
+{"name":"addText","start":[3,1],"text":"This text was lost!!"}
+]}

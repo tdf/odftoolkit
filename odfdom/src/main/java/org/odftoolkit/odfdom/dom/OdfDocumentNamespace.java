@@ -30,6 +30,7 @@ import org.odftoolkit.odfdom.pkg.NamespaceName;
 public enum OdfDocumentNamespace implements NamespaceName {
 
 	ANIM("anim", "urn:oasis:names:tc:opendocument:xmlns:animation:1.0"),
+	CALCEXT("calcext", "urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0"),
 	CHART("chart", "urn:oasis:names:tc:opendocument:xmlns:chart:1.0"),
 	CONFIG("config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0"),
 	DB("db", "urn:oasis:names:tc:opendocument:xmlns:database:1.0"),
@@ -44,6 +45,7 @@ public enum OdfDocumentNamespace implements NamespaceName {
 	NUMBER("number", "urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0"),
 	OF("of", "urn:oasis:names:tc:opendocument:xmlns:of:1.2"),
 	OFFICE("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0"),
+    OOO("ooo", "http://openoffice.org/2004/office"),
 	PRESENTATION("presentation", "urn:oasis:names:tc:opendocument:xmlns:presentation:1.0"),
 	SCRIPT("script", "urn:oasis:names:tc:opendocument:xmlns:script:1.0"),
 	SMIL("smil", "urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0"),
@@ -65,16 +67,26 @@ public enum OdfDocumentNamespace implements NamespaceName {
 	}
 
 	/**
-	 * @return the prefix currently related to ODF Namespace.
+	 * @return the prefix by default related to ODF Namespace.
 	 */
-	public String getPrefix() {
+	@Override
+    public String getPrefix() {
 		return mPrefix;
 	}
 
 	/**
 	 * @return the URI identifiying the ODF Namespace.
 	 */
-	public String getUri() {
+	@Override
+    public String getUri() {
 		return mUri;
+	}
+
+	/**
+	 * @return the prefix by default related to ODF Namespace
+	 */
+	@Override
+    public String toString() {
+		return mPrefix;
 	}
 }

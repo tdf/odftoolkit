@@ -82,17 +82,17 @@ class ZipHelper {
 						try {
 							zipEntry = inputStream.getNextEntry();
 						} catch (java.util.zip.ZipException e) {
-                            // JDK 6 -- the try/catch is workaround for a
-							// specific JDK 5 only problem
-                            String eMsg = e.getMessage();
-                            String jVersion = System.getProperty("java.version");
-							if (eMsg != null && jVersion != null && !eMsg.contains("missing entry name")  && !jVersion.equals("1.5.0")) {
-								Logger.getLogger(ZipHelper.class.getName()).info("ZIP ENTRY not found");
-								throw new java.util.zip.ZipException("ZIP entry '" + zipEntry.toString() + "': " + eMsg);
-							}else{
-                                Logger.getLogger(ZipHelper.class.getName()).info(e.getMessage());
-                                throw new java.util.zip.ZipException("ZIP entry '" + zipEntry.toString() + "': " + eMsg);
-                            }
+							if (e.getMessage().contains("only DEFLATED entries can have EXT descriptor")) {
+								Logger.getLogger(ZipHelper.class.getName()).finer("ZIP seems to contain encoded parts!");
+								throw e;
+							}
+							// JDK 6 -- the try/catch is workaround for a specific JDK 5 only problem
+							if (!e.getMessage().contains("missing entry name") && !System.getProperty("Java.version").equals("1.5.0")) {
+								Logger.getLogger(ZipHelper.class.getName()).finer("ZIP ENTRY not found");
+								throw e;
+							}
+							// ToDo: Error: "only DEFLATED entries can have EXT descriptor"
+							// ZipInputStream does not expect (and does not know how to handle) an EXT descriptor when the associated data was not DEFLATED (i.e. was stored uncompressed, as-is).
 						}
 					}
 				}
@@ -109,8 +109,7 @@ class ZipHelper {
 			try {
 				int zipMethod = zipEntry.getMethod();
 				if (zipMethod != ZipEntry.STORED && zipMethod != ZipEntry.DEFLATED) {
-					mPackage.getErrorHandler().error(
-							new OdfValidationException(OdfPackageConstraint.PACKAGE_ENTRY_USING_INVALID_COMPRESSION, mPackage.getBaseURI(), filePath));
+					mPackage.getErrorHandler().error(new OdfValidationException(OdfPackageConstraint.PACKAGE_ENTRY_USING_INVALID_COMPRESSION, mPackage.getBaseURI(), filePath));
 				}
 			} catch (SAXException ex) {
 				Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,7 +122,8 @@ class ZipHelper {
 		if (mZipFile != null) {
 			return mZipFile.getInputStream(entry);
 		} else {
-			ZipInputStream inputStream = new ZipInputStream(new ByteArrayInputStream(mZipBuffer));
+			ZipInputStream inputStream = new ZipInputStream(
+					new ByteArrayInputStream(mZipBuffer));
 			ZipEntry zipEntry = inputStream.getNextEntry();
 			while (zipEntry != null) {
 				if (zipEntry.getName().equalsIgnoreCase(entry.getName())) {
@@ -135,7 +135,8 @@ class ZipHelper {
 		}
 	}
 
-	private InputStream readAsInputStream(ZipInputStream inputStream) throws IOException {
+	private InputStream readAsInputStream(ZipInputStream inputStream)
+			throws IOException {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		if (outputStream != null) {
 			byte[] buf = new byte[4096];

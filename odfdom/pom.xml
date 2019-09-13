@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
   or more contributor license agreements.  See the NOTICE file
@@ -8,7 +9,7 @@
   "License"); you may not use this file except in compliance
   with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing,
   software distributed under the License is distributed on an
@@ -23,33 +24,33 @@
     <parent>
         <groupId>org.odftoolkit</groupId>
         <artifactId>odftoolkit</artifactId>
-        <version>0.9.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>odfdom-java</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/xerces/xercesImpl -->
         <dependency>
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
         </dependency>
-        <!-- optional RDF metdata feature -->
         <dependency>
-            <groupId>org.apache.jena</groupId>
-            <artifactId>jena-core</artifactId>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <!-- never use version 2.0.2 as it is prior version 1.4.01 -->
+            <!-- see https://mvnrepository.com/artifact/xml-apis/xml-apis -->
         </dependency>
+        <!-- https://mvnrepository.com/artifact/xalan/serializer -->
+        <!-- Used by org/odftoolkit/odfdom/IElementWriter.java -->
         <dependency>
-            <groupId>commons-validator</groupId>
-            <artifactId>commons-validator</artifactId>
+            <groupId>xalan</groupId>
+            <artifactId>serializer</artifactId>
+            <version>2.7.2</version>
         </dependency>
-        <dependency>
-            <groupId>net.rootdev</groupId>
-            <artifactId>java-rdfa</artifactId>
-        </dependency>
-        <!-- *** TESTING *** -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -58,16 +59,59 @@
         <dependency>
             <groupId>org.apache.jena</groupId>
             <artifactId>jena-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-core</artifactId>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.rootdev</groupId>
+            <artifactId>java-rdfa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20190722</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.8.0-beta4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.8.0-beta4</version>
+        </dependency>-->
+        <!-- http://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html
+        NOTE: SLF4J and LOG4J dependencies are given directly in pom.xml
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j18-impl</artifactId>
+            <version>2.12.1</version>
+        </dependency>-->
     </dependencies>
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
         <skipTests>false</skipTests>
         <maven.javadoc.skip>false</maven.javadoc.skip>
         <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
     </properties>
 
     <!-- Build Settings -->
@@ -87,7 +131,21 @@
                     <!-- defined in the parent pom.xml -->
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
+                    <testSource>${jdk.version}</testSource>
+                    <testTarget>${jdk.version}</testTarget>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <!--
+                    <compilerArgs>
+                        <arg>-Xlint:unchecked</arg>
+                        <arg>-Xlint:deprecation</arg>
+                    </compilerArgs>
+                    -->
+                    <!--
+                    <compilerArgs>
+                        <arg>-verbose</arg>
+                        <arg>-Xlint:all,-options,-path</arg>
+                    </compilerArgs>
+                    -->
                 </configuration>
             </plugin>
             <plugin>
@@ -103,33 +161,9 @@
                         <manifestEntries>
                             <version>${project.version}</version>
                         </manifestEntries>
-                        <manifestSections>
-                            <manifestSection>
-                                <name>ODFDOM</name>
-                                <manifestEntries>
-                                    <ODFDOM-Name>odfdom</ODFDOM-Name>
-                                    <ODFDOM-Version>${project.version}</ODFDOM-Version>
-                                    <ODFDOM-Website>${project.url}</ODFDOM-Website>
-                                    <ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
-                                    <ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
-                                </manifestEntries>
-                            </manifestSection>
-                        </manifestSections>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <archive>
-                        <index>true</index>
-                        <manifest>
-                            <mainClass>org.odftoolkit.odfdom.JarManifest</mainClass>
-                        </manifest>
+                        <!-- see https://stackoverflow.com/questions/53049346/is-log4j2-compatible-with-java-11/57616897#57616897 -->
                         <manifestEntries>
-                            <version>${project.version}</version>
+                            <Multi-Release>true</Multi-Release>
                         </manifestEntries>
                         <manifestSections>
                             <manifestSection>
@@ -137,7 +171,6 @@
                                 <manifestEntries>
                                     <ODFDOM-Name>odfdom</ODFDOM-Name>
                                     <ODFDOM-Version>${project.version}</ODFDOM-Version>
-                                    <!--  Implementation-URL -->
                                     <ODFDOM-Website>${project.url}</ODFDOM-Website>
                                     <ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
                                     <ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
@@ -145,19 +178,7 @@
                             </manifestSection>
                         </manifestSections>
                     </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>single</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
@@ -172,33 +193,35 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                    <forkMode>pertest</forkMode>
+                    <!--                    <forkCount>3</forkCount>
+                    <reuseForks>true</reuseForks>-->
+                    <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
                     <systemPropertyVariables>
                         <odfdom.version>${project.version}</odfdom.version>
                         <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
-                        <org.odftoolkit.odfdom.validation>org.odftoolkit.odfdom.pkg.DefaultErrorHandler</org.odftoolkit.odfdom.validation>
-                        <skipTests>${skipTests}</skipTests>
+                        <org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
                     </systemPropertyVariables>
+                    <skipTests>${skipTests}</skipTests>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1.1</version>
                 <configuration>
-                    <doctitle>ODFDOM</doctitle>
-                    <minmemory>512m</minmemory>
-                    <maxmemory>1024m</maxmemory>
+                    <!-- Workaround: Build the project using the same JDK version as the project is targetting.
+                        see https://issues.apache.org/jira/browse/MJAVADOC-562
+                        see https://bugs.openjdk.java.net/browse/JDK-8212233
+                    -->
+                    <source>${jdk.version}</source>
+                    <doctitle>ODFDOM v${project.version}</doctitle>
+                    <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
+                    <isOffline>false</isOffline>
                     <links>
-                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
-                        <link>http://xerces.apache.org/xerces-j/apiDocs/</link>
+                        <link>https://xerces.apache.org/xerces-j/apiDocs/</link>
                     </links>
                     <splitindex>true</splitindex>
-                    <windowtitle>ODFDOM API v${project.version} - https://odftoolkit.org</windowtitle>
-                    <additionalOptions>
-                        <additionalOption>${javadoc.opts}</additionalOption>
-                    </additionalOptions>
-                    <bottom>${javadoc.bottom}</bottom>
+                    <windowtitle>ODFDOM API v${project.version} - https://odftoolkit.org/</windowtitle>
                     <taglets>
                         <taglet>
                             <tagletClass>org.odftoolkit.odfdom.taglet.OdfElementTaglet</tagletClass>
@@ -225,9 +248,7 @@
                         </goals>
                         <configuration>
                             <doclint>none</doclint>
-                            <additionalOptions>
-                                <additionalOption>${javadoc.opts}</additionalOption>
-                            </additionalOptions>
+                            <additionalOptions>${javadoc.opts}</additionalOptions>
                         </configuration>
                     </execution>
                 </executions>
@@ -245,15 +266,52 @@
                 </executions>
             </plugin>
             <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <mainClass>org.odftoolkit.odfdom.JarManifest</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <version>${project.version}</version>
+                        </manifestEntries>
+                        <manifestSections>
+                            <manifestSection>
+                                <name>ODFDOM</name>
+                                <manifestEntries>
+                                    <ODFDOM-Name>odfdom</ODFDOM-Name>
+                                    <ODFDOM-Version>${project.version}</ODFDOM-Version>
+                                    <ODFDOM-Website>${project.url}</ODFDOM-Website>
+                                    <ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
+                                    <ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
+                                </manifestEntries>
+                            </manifestSection>
+                        </manifestSections>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>single</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
-                <version>0.13</version>
                 <configuration>
                     <excludes>
                         <exclude>src/main/resources/**</exclude>
                         <exclude>src/test/resources/**</exclude>
-                        <exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-part1.html</exclude>
-                        <exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-part3.html</exclude>
+                        <exclude>src/main/javadoc/resources/OpenDocument-v1.2-part1.html</exclude>
+                        <exclude>src/main/javadoc/resources/OpenDocument-v1.2-part3.html</exclude>
                         <exclude>src/codegen/resources/dom/*.rng</exclude>
                         <exclude>src/codegen/resources/pkg/*.rng</exclude>
                     </excludes>
@@ -262,7 +320,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.1</version>
+                <version>2.22.2</version>
                 <configuration>
                     <excludes>
                         <exclude>**/PerformanceIT.java</exclude>
@@ -289,21 +347,20 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1.1</version>
                 <configuration>
-                    <doctitle>ODFDOM</doctitle>
-                    <minmemory>512m</minmemory>
-                    <maxmemory>1024m</maxmemory>
+                    <!-- JDK 8 as workaround for exception,
+                    see https://bugs.openjdk.java.net/browse/JDK-8212233 -->
+                    <source>8</source>
+                    <doctitle>ODFDOM v${project.version}</doctitle>
                     <links>
-                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
-                        <link>http://xerces.apache.org/xerces-j/apiDocs/</link>
+                        <link>https://docs.oracle.com/en/java/javase/${jdk.version}/docs/api/</link>
+                        <link>https://xerces.apache.org/xerces-j/apiDocs/</link>
                     </links>
+                    <isOffline>false</isOffline>
                     <splitindex>true</splitindex>
-                    <windowtitle>ODFDOM API v${project.version} - https://odftoolkit.org</windowtitle>
-                    <additionalOptions>
-                        <additionalOption>${javadoc.opts}</additionalOption>
-                    </additionalOptions>
-                    <bottom>${javadoc.bottom}</bottom>
+                    <windowtitle>ODFDOM API v${project.version} - https://odftoolkit.org/</windowtitle>
+                    <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
                     <taglets>
                         <taglet>
                             <tagletClass>org.odftoolkit.odfdom.taglet.OdfElementTaglet</tagletClass>
@@ -325,32 +382,20 @@
                     <docfilessubdirs>true</docfilessubdirs>
                 </configuration>
             </plugin>
-            <!-- Code Coverage Testing generated by Cobertura
-                Errors with JDK 8
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <instrumentation>
-                        <excludes>
-                            <exclude>org.odftoolkit.odfdom.integrationtest.JarManifestIT.class</exclude>
-                            <exclude>org/odftoolkit/**/*Test.class</exclude>
-                        </excludes>
-                    </instrumentation>
-                </configuration>
-            </plugin> -->
             <!-- Reporting integration test results -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.1</version>
+                <version>2.22.2</version>
                 <reportSets>
                     <reportSet>
                         <id>integration-tests</id>
                         <reports>
-                            <report>integration-test</report>
+                            <report>report-only</report>
                         </reports>
+                        <configuration>
+                            <outputName>failsafe-report</outputName>
+                        </configuration>
                     </reportSet>
                 </reportSets>
             </plugin>
@@ -375,7 +420,7 @@
     <licenses>
         <license>
             <name>Apache 2</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
     <organization>
@@ -395,7 +440,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>wagon-maven-plugin</artifactId>
-                        <version>2.0.0</version>
+                        <version>1.0</version>
                         <executions>
                             <execution>
                                 <id>download-odf-schema-v1.2</id>
@@ -404,7 +449,7 @@
                                     <goal>download-single</goal>
                                 </goals>
                                 <configuration>
-                                    <url>dav:http://docs.oasis-open.org/office/v1.2</url>
+                                    <url>dav:https://docs.oasis-open.org/office/v1.2</url>
                                     <fromFile>os/OpenDocument-v1.2-os-schema.rng</fromFile>
                                     <toDir>${project.build.directory}/odf-schemas</toDir>
                                 </configuration>
@@ -416,7 +461,7 @@
                                     <goal>download-single</goal>
                                 </goals>
                                 <configuration>
-                                    <url>dav:http://docs.oasis-open.org/office/v1.2</url>
+                                    <url>dav:https://docs.oasis-open.org/office/v1.2</url>
                                     <fromFile>os/OpenDocument-v1.2-os-manifest-schema.rng</fromFile>
                                     <toDir>${project.build.directory}/odf-schemas</toDir>
                                 </configuration>
@@ -428,7 +473,7 @@
                                     <goal>download-single</goal>
                                 </goals>
                                 <configuration>
-                                    <url>dav:http://docs.oasis-open.org/office/v1.2</url>
+                                    <url>dav:https://docs.oasis-open.org/office/v1.2</url>
                                     <fromFile>os/OpenDocument-v1.2-os-dsig-schema.rng</fromFile>
                                     <toDir>${project.build.directory}/odf-schemas</toDir>
                                 </configuration>
@@ -440,7 +485,7 @@
                                     <goal>download-single</goal>
                                 </goals>
                                 <configuration>
-                                    <url>dav:http://docs.oasis-open.org/office/v1.1</url>
+                                    <url>dav:https://docs.oasis-open.org/office/v1.1</url>
                                     <fromFile>OS/OpenDocument-schema-v1.1.rng</fromFile>
                                     <toDir>${project.build.directory}/odf-schemas</toDir>
                                 </configuration>
@@ -479,7 +524,7 @@
         <profile>
             <id>codegen-pkg</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+              <activeByDefault>true</activeByDefault>
             </activation>
             <build>
                 <defaultGoal>install</defaultGoal>
@@ -521,14 +566,12 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.22.1</version>
+                        <version>2.22.2</version>
                         <configuration>
                             <systemPropertyVariables>
                                 <testresourcefolder>performance</testresourcefolder>
                                 <executetimes>1</executetimes>
                                 <testflag>test</testflag>
-                                <odfdom.version>${project.version}</odfdom.version>
-                                <org.odftoolkit.odfdom.validation>org.odftoolkit.odfdom.pkg.DefaultErrorHandler</org.odftoolkit.odfdom.validation>
                             </systemPropertyVariables>
                         </configuration>
                         <executions>
@@ -545,8 +588,11 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.1</version>
+                        <version>2.22.2</version>
                         <configuration>
+                            <!--                    <forkCount>3</forkCount>
+                            <reuseForks>true</reuseForks>-->
+                            <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
                             <systemPropertyVariables>
                                 <odfdom.version>${project.version}</odfdom.version>
                                 <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
@@ -591,22 +637,13 @@
                     </plugin>
                 </plugins>
             </build>
-            <!--<distributionManagement>
+            <!-- <distributionManagement>
                 <site>
                     <id>odfdom</id>
                     <name>ODFDOM Java Toolkit Project</name>
                     <url>dav:https://odftoolkit.org/website/odfdom/${project.version}/odfdom</url>
                 </site>
-            </distributionManagement>-->
-        </profile>
-        <profile>
-            <id>doclint-java8-disable</id>
-            <activation>
-                <jdk>[1.8,)</jdk>
-            </activation>
-            <properties>
-                <javadoc.opts>-Xdoclint:none</javadoc.opts>
-            </properties>
+            </distributionManagement> -->
         </profile>
     </profiles>
 </project>

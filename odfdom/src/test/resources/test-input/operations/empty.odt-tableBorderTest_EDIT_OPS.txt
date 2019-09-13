@@ -1,0 +1,4 @@
+{"changes":[
+{"name":"addText","start":[1,1],"text":"peng"},
+{"name":"format","start":[1],"attrs":{"paragraph":{"borderBottom":{"color":{"type":"auto"},"space":140,"style":"single","width":17},"borderInside":{"style":"none"},"borderLeft":{"color":{"type":"auto"},"space":140,"style":"single","width":17},"borderRight":{"color":{"type":"auto"},"space":140,"style":"single","width":17},"borderTop":{"color":{"type":"auto"},"space":140,"style":"single","width":17}}}}
+]}

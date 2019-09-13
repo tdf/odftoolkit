@@ -1,0 +1,12 @@
+{"changes":[
+{"name":"addText","start":[10,5,1,1,17],"opl":5,"osn":677,"text":" WHAT"},
+{"name":"addText","start":[10,21,2,1,2],"opl":1,"osn":682,"text":"x"},
+{"name":"addText","start":[10,31,1,1,23],"opl":1,"osn":683,"text":"d"},
+{"name":"addText","start":[10,26,1,1,1],"opl":2,"osn":684,"text":"dd"},
+{"name":"addColumn","start":[10],"gridPosition":0,"insertMode":"behind","opl":1,"osn":686,"tableGrid":[35,35,7,7,7,7]},
+{"name":"format","start":[10],"attrs":{"table":{"tableGrid":[35,35,7,7,7,7]}},"opl":1,"osn":687},
+{"name":"addText","start":[10,3,3,1,4],"opl":1,"osn":688,"text":"d"},
+{"name":"addText","start":[10,5,1,1,22],"opl":1,"osn":689,"text":" "},
+{"name":"addColumn","start":[10],"gridPosition":0,"insertMode":"behind","opl":1,"osn":690,"tableGrid":[26,26,26,5,5,5,5]},
+{"name":"format","start":[10],"attrs":{"table":{"tableGrid":[26,26,26,5,5,5,5]}},"opl":1,"osn":691}
+]}

@@ -47,7 +47,7 @@ class W3CSchemaType {
 			}
 		} catch (InvalidDatatypeValueException e) {
 			isValid = false;
-			Logger.getLogger(W3CSchemaType.class.getName()).log(Level.FINE, content + "is not of datatype " + dataType + "!", e);
+			Logger.getLogger(W3CSchemaType.class.getName()).log(Level.FINER, content + "is not of datatype " + dataType + "!", e);
 		}
 		return isValid;
 	}
