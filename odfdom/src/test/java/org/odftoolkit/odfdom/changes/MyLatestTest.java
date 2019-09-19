@@ -48,18 +48,18 @@ public class MyLatestTest extends RoundtripTestHelper {
 
     public void myTest() {
 
-        System.setProperty("test", "org.odftoolkit.odfdom.component.MyLatestTest");
-        final String SOURCE_FILE_NAME_TRUNC = "JSONCritical";
-        //super.roundtripRegressionTextTest(SOURCE_FILE_NAME_TRUNC, "2", getEditingOperations(INPUT_FOLDER_OP_REF));
-        super.roundtripRegressionTextTest(SOURCE_FILE_NAME_TRUNC, "3", null);
-
-//*****************************************
-        String editOperations = "{\"changes\":["
-                + "{\"name\":\"addParagraph\",\"start\":[1]},"
-                + "{\"name\":\"addText\",\"start\":[1,1],\"text\":\"PATH: C:\\\\path\\\\own.xls und URL: http:\\/\\/www.heise.de\"}"
-                + "]}";
-        super.roundtripRegressionTextTest(SOURCE_FILE_NAME_TRUNC, "1", editOperations);
-//*****************************************
+//        System.setProperty("test", "org.odftoolkit.odfdom.component.MyLatestTest");
+//        final String SOURCE_FILE_NAME_TRUNC = "JSONCritical";
+//        //super.roundtripRegressionTextTest(SOURCE_FILE_NAME_TRUNC, "2", getEditingOperations(INPUT_FOLDER_OP_REF));
+//        super.roundtripRegressionTextTest(SOURCE_FILE_NAME_TRUNC, "3", null);
+//
+////*****************************************
+//        String editOperations = "{\"changes\":["
+//                + "{\"name\":\"addParagraph\",\"start\":[1]},"
+//                + "{\"name\":\"addText\",\"start\":[1,1],\"text\":\"PATH: C:\\\\path\\\\own.xls und URL: http:\\/\\/www.heise.de\"}"
+//                + "]}";
+//        super.roundtripRegressionTextTest(SOURCE_FILE_NAME_TRUNC, "1", editOperations);
+////*****************************************
 //		super.roundtripOnlyToEmptyDocRegressionTest(SOURCE_FILE_NAME_TRUNC, ".odt");
 //      super.importOnlyRegressionTest(SOURCE_FILE_NAME_TRUNC, ".odt", getTestMethodName(), editOperations);
 
