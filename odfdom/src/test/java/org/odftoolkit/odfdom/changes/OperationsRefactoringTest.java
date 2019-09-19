@@ -49,11 +49,10 @@ public class OperationsRefactoringTest {
     static private String ODFDOM_ID = "ODFDOM_" + System.getProperty("odfdom.version");
     static private String ODFDOM_TIMESTAMP = System.getProperty("odfdom.timestamp");
 
-
     public OperationsRefactoringTest() {
         File adoptedRefOpsDirFile = new File(ResourceUtilities.getSrcTestReferenceFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX);
         adoptedRefOpsDirFile.mkdirs();
-        File adoptedEditOpsDirFile = new File(ResourceUtilities.getTestInputFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX);
+        File adoptedEditOpsDirFile = new File(ResourceUtilities.getSrcTestInputFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX);
         adoptedEditOpsDirFile.mkdirs();
     }
 
@@ -63,14 +62,14 @@ public class OperationsRefactoringTest {
      */
     // odfdom/src/test/resources/test-reference/operations
     private static final String INPUT_FOLDER_OP_REF = ResourceUtilities.getSrcTestReferenceFolder() + File.separator + OPERATION_OUTPUT_DIR + File.separator;
-    // odfdom/target/test-classes/test-input/operations
-    private static final String INPUT_FOLDER_OP_EDIT = ResourceUtilities.getTestInputFolder() + File.separator + OPERATION_OUTPUT_DIR + File.separator;
+    // odfdom/src/test/resources/test-input/operations
+    private static final String INPUT_FOLDER_OP_EDIT = ResourceUtilities.getSrcTestInputFolder() + File.separator + OPERATION_OUTPUT_DIR + File.separator;
 
     /**
      * Folder name to be created beyond test output directory
      * "odfdom/target/test-classes/"
      */
-    private static final String REFACTORED_OPS_OUTPUT_DIR_SUFFIX = "refactored" + File.separator + OPERATION_OUTPUT_DIR;
+    private static final String REFACTORED_OPS_OUTPUT_DIR_SUFFIX = "operations_refactored" + File.separator + OPERATION_OUTPUT_DIR;
 
     /**
      * For every new refactoring ONLY this method have to be adopted. For
@@ -79,17 +78,32 @@ public class OperationsRefactoringTest {
      * @param op single operation from the operation file to be refactored
      */
     static private JSONObject refactorOperation(JSONObject op) {
+        if (op.has("attrs")) {
+            JSONObject attrs = op.optJSONObject("attrs");
+            if (attrs.has("paragraph")) {
+                JSONObject paragraph = attrs.optJSONObject("paragraph");
+                if (paragraph.has("outlineLevel")) {
+                    Integer outlineLevel = paragraph.optInt("outlineLevel", -1);
+                    if(!outlineLevel.equals(JSONObject.NULL) && outlineLevel > -1){
+                        paragraph.put("outlineLevel", ++outlineLevel);
+                        attrs.put("paragraph", paragraph);
+                        op.put("attrs", attrs);
+                    }
+                }
+            }
+        }
+
 //        // CHANGES TO THE REFERENCE OPERATIONS
-//        JSONArray start = decrementAll(op.optJSONArray("start"));
+//        JSONArray start = decrementPosition(op.optJSONArray("start"));
 //        op.putOpt("start", start);
-//        JSONArray end = decrementAll(op.optJSONArray("end"));
+//        JSONArray end = decrementPosition(op.optJSONArray("end"));
 //        op.putOpt("end", end);
-//        JSONArray to = decrementAll(op.optJSONArray("to"));
+//        JSONArray to = decrementPosition(op.optJSONArray("to"));
 //        op.putOpt("to", to);
         return op;
     }
 
-    static private JSONArray incrementAll(JSONArray position) {
+    static private JSONArray incrementPosition(JSONArray position) {
         if (position != null) {
             for (int i = 0; i < position.length(); i++) {
                 position.put(i, ((Integer) position.get(i)) + 1);
@@ -98,7 +112,7 @@ public class OperationsRefactoringTest {
         return position;
     }
 
-    static private JSONArray decrementAll(JSONArray position) {
+    static private JSONArray decrementPosition(JSONArray position) {
         if (position != null) {
             for (int i = 0; i < position.length(); i++) {
                 position.put(i, ((Integer) position.get(i)) - 1);
@@ -111,9 +125,9 @@ public class OperationsRefactoringTest {
     @Test
     @Ignore
     public void refactorOperations() {
-            // READING: odfdom/src/test/resources/test-reference/operations
+        // READING: odfdom/src/test/resources/test-reference/operations
         refactorDirectory(INPUT_FOLDER_OP_REF);
-            // READING: odfdom/target/test-classes/test-input/operations
+        // READING: odfdom/target/test-classes/test-input/operations
         refactorDirectory(INPUT_FOLDER_OP_EDIT);
     }
 
@@ -135,14 +149,14 @@ public class OperationsRefactoringTest {
      * feature), otherwise potential problems would be overseen by all the false
      * positives
      */
-    public static  void refactorOperationFile(Path opsPath) {
+    public static void refactorOperationFile(Path opsPath) {
         File opsFile = new File(opsPath.toString());
         System.out.println("Reading: " + opsPath.toString());
 
         String refOpsString = "";
         try {
             refOpsString = ResourceUtilities.loadFileAsString(opsFile);
-            String opsFilePath = opsPath.getParent().getParent().toString() + File.separator + REFACTORED_OPS_OUTPUT_DIR_SUFFIX + opsFile.getName();
+            String opsFileOutPath = opsPath.getParent().getParent().toString() + File.separator + REFACTORED_OPS_OUTPUT_DIR_SUFFIX + opsFile.getName();
 
             JSONObject jOps = null;
             jOps = new JSONObject(refOpsString);
@@ -152,12 +166,12 @@ public class OperationsRefactoringTest {
 //                System.out.println("OP:\n" + op.toString());
                 ops.put(i, refactorOperation(op));
             }
-            jOps.put(OPK_VERSION, ODFDOM_TIMESTAMP);
-            jOps.put(OPK_EDITOR, ODFDOM_ID);
+//            jOps.put(OPK_VERSION, ODFDOM_TIMESTAMP);
+//            jOps.put(OPK_EDITOR, ODFDOM_ID);
             jOps.put(OPK_OPERATIONS, ops);
             String newOps = JsonOperationNormalizer.asString(jOps);
-            ResourceUtilities.saveStringToFile(new File(opsFilePath), newOps.replace(",{\"name\"", ",\n{\"name\""));
-            System.out.println("Writing: " + opsFilePath);
+            ResourceUtilities.saveStringToFile(new File(opsFileOutPath), newOps.replace(",{\"name\"", ",\n{\"name\""));
+            System.out.println("Writing: " + opsFileOutPath);
         } catch (JSONException ex) {
             System.err.println("Erroneous JSON file:\n" + opsPath);
             Logger.getLogger(RoundtripTestHelper.class.getName()).log(Level.SEVERE, null, ex);

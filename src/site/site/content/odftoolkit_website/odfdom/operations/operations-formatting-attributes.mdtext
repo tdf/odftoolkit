@@ -44,8 +44,8 @@ Paragraph formatting attributes will be applied to paragraph elements in a text 
 |`alignment`|Enum|“left”|all|Horizontal text alignment. One of “left”, “center”, “right”, or “justify”.|
 |`lineHeight`|[LineHeight](#lineheight)|{type:“percent”, value:100}|all|Relative or absolute text line height.|
 |`fillColor`|[Color](#color)|Color.AUTO|all|Paragraph background color.|
-|`outlineLevel`|Integer|9|all|The outline level specifies an integer which defines the level of the associated text. This level shall not affect the appearance of the text in the document, but shall be used to calculate the TOC field|
-|`listLevel`|Integer|\-1|all|Level of indention|
+|`outlineLevel`|Integer|0|all|The outline level specifies an integer which defines the level of the associated text. This level shall not affect the appearance of the text in the document, but shall be used to calculate the TOC field|
+|`listLevel`|Integer|0|all|Level of indention|
 |`listId`|String|””|all|Numbering definition instance reference. Can be shared by multiple lists.|
 |`listStyle`|String|””|all|ID of the list style sheet.|
 |`listStart`|Boolean|false|element|Indicates if the paragraph is at the start of a new list, require new numbering.|

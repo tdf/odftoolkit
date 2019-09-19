@@ -434,7 +434,7 @@ public class JsonOperationConsumer {
                 int outlineLevel = paraProps.optInt("outlineLevel");
                 if (outlineLevel != 0) {
                     paragraphBaseElement = new TextHElement(xmlDoc);
-                    ((TextHElement) paragraphBaseElement).setTextOutlineLevelAttribute(outlineLevel + 1);
+                    ((TextHElement) paragraphBaseElement).setTextOutlineLevelAttribute(outlineLevel);
                 } else {
                     paragraphBaseElement = new TextPElement(xmlDoc);
                 }
@@ -1267,8 +1267,8 @@ public class JsonOperationConsumer {
                 if (props.has("outlineLevel")) {
                     if (!props.get("outlineLevel").equals(JSONObject.NULL)) {
                         Integer outlineLevel = props.optInt("outlineLevel");
-                        if (outlineLevel > -1) {
-                            style.setStyleDefaultOutlineLevelAttribute(outlineLevel + 1);
+                        if (outlineLevel >= 1) {
+                            style.setStyleDefaultOutlineLevelAttribute(outlineLevel);
                         } else {
                             style.removeAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "default-outline-level");
                         }
@@ -1683,12 +1683,12 @@ public class JsonOperationConsumer {
 
         if (style != null) {
             // if no outline Level was set, but there is a parentComponentElement
-            if (outlineLevel == -2) {
+            if (outlineLevel == NO_OUTLINE_LEVEL) {
                 OdfStyleBase parentStyle = null;
                 style.getParentStyle();
-                while (outlineLevel == -2) {
+                while (outlineLevel == NO_OUTLINE_LEVEL) {
                     outlineLevel = getStyleOutlineLevel(parentStyle);
-                    if (outlineLevel != -2) {
+                    if (outlineLevel != NO_OUTLINE_LEVEL) {
                         break;
                     }
                     if (parentStyle instanceof OdfStyle) {
@@ -1705,8 +1705,9 @@ public class JsonOperationConsumer {
         return outlineLevel;
     }
 
+    private static final int NO_OUTLINE_LEVEL = -2;
     private static int getStyleOutlineLevel(OdfStyleBase style) {
-        int outlineLevel = -2;
+        int outlineLevel = NO_OUTLINE_LEVEL;
         if (style != null) {
             String outlineLevelValue;
             if (style.hasAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "default-outline-level")) {

@@ -826,7 +826,7 @@ public class JsonOperationProducer {
                     componentProps.put("paragraph", paraProps);
                 }
                 if (outlineLevel != null) {
-                    paraProps.put("outlineLevel", outlineLevel - 1);
+                    paraProps.put("outlineLevel", outlineLevel);
                 }
                 if (nextStyleId != null && !nextStyleId.isEmpty()) {
                     paraProps.put("nextStyleId", nextStyleId);

@@ -1,7 +1,7 @@
 {"changes":[
 {"name":"documentLayout","attrs":{"document":{"fileFormat":"odf"}}},
-{"name":"addStyle","type":"paragraph","styleId":"heading1","attrs":{"character":{"bold":true,"color":{"type":"rgb","value":"376092"},"fontSize":14},"paragraph":{"outlineLevel":0}},"parent":"default_paragraph_style","styleName":"heading 1"},
-{"name":"addStyle","type":"paragraph","styleId":"heading2","attrs":{"character":{"bold":true,"color":{"type":"rgb","value":"4F81BD"},"fontSize":13},"paragraph":{"outlineLevel":1}},"parent":"default_paragraph_style","styleName":"heading 2"},
+{"name":"addStyle","type":"paragraph","styleId":"heading1","attrs":{"character":{"bold":true,"color":{"type":"rgb","value":"376092"},"fontSize":14},"paragraph":{"outlineLevel":1}},"parent":"default_paragraph_style","styleName":"heading 1"},
+{"name":"addStyle","type":"paragraph","styleId":"heading2","attrs":{"character":{"bold":true,"color":{"type":"rgb","value":"4F81BD"},"fontSize":13},"paragraph":{"outlineLevel":2}},"parent":"default_paragraph_style","styleName":"heading 2"},
 {"name":"addParagraph","start":[1]},
 {"name":"addText","start":[1,1],"text":"Überschrift1"},
 {"name":"addParagraph","start":[2]},

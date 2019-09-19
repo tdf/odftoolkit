@@ -664,7 +664,6 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                                 if (element instanceof TextHElement) {
                                     Integer outlineLevel = ((TextHElement) p).getTextOutlineLevelAttribute();
                                     if (outlineLevel != null) {
-                                        outlineLevel--;
                                         paraProps.put("outlineLevel", outlineLevel);
                                     }
                                 }

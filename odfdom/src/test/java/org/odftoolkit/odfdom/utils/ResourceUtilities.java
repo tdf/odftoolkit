@@ -60,6 +60,7 @@ public final class ResourceUtilities {
     private static final String PATH_FROM_TEST_CLASSES_TO_REFENCE = "test-reference" + File.separator;
     private static final String PATH_FROM_TEST_CLASSES_TO_OUTPUT = "test-output" + File.separator;
     private static final String PATH_FROM_TEST_CLASSES_TO_INPUT = "test-input" + File.separator;
+    private static final String PATH_TO_SRC_TEST_INPUT = "src" + File.separator + "test" + File.separator + "resources" + File.separator + "test-input" + File.separator;
     private static final String PATH_TO_SRC_TEST_REFERENCES = "src" + File.separator + "test" + File.separator + "resources" + File.separator + "test-reference" + File.separator;
 
     private ResourceUtilities() {
@@ -294,6 +295,24 @@ public final class ResourceUtilities {
         }
         return refFolder;
     }
+
+    /**
+     * @return the absolute path of the test reference folder, which is for
+     * ODFDOM <code>src/test/resources/test-input</code>.
+     */
+    public static String getSrcTestInputFolder() {
+        String refFolder = null;
+        try {
+            Path testClassesPath = Path.of(ResourceUtilities.class.getClassLoader().getResource("").toURI());
+
+            String projectRootPath = testClassesPath.getParent().getParent().toString();
+            refFolder = projectRootPath + File.separator + PATH_TO_SRC_TEST_INPUT;
+        } catch (Throwable ex) {
+            Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return refFolder;
+    }
+
 
     /**
      * @return the <code>File</code> of the test directory, within the temporary
