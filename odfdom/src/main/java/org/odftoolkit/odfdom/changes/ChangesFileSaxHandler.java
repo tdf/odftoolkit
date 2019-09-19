@@ -372,7 +372,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
     // Candidate Component Mode
     // Some components consist of multiple XML elements.
     // Even some ODF components start with the same
-    // 2DO - DRAGON BOOK - Parser Look-ahead funzt net bei SAX? ;)
+    // 2DO - DRAGON BOOK - Parser Look-ahead does not work with SAX? ;)
     //private boolean isCandidateComponentMode = true;
     public ChangesFileSaxHandler(Node rootNode) throws SAXException {
         super(rootNode);

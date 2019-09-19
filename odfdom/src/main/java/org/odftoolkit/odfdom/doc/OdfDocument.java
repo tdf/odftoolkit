@@ -91,6 +91,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	private static final String EMPTY_STRING = "";
 	private Calendar mCreationDate;
 	private static final String FORMER_OPEN_OFFICE_VERSION = "StarOffice/8$Win32 OpenOffice.org_project/680m18$Build-9161";
+    protected Boolean mHasCollaboration = null;
 
 	// Using static factory instead of constructor
 	protected OdfDocument(OdfPackage pkg, String internalPath, OdfMediaType mediaType) throws SAXException {
@@ -189,7 +190,35 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 		} finally {
 			in.close();
 		}
-		OdfDocument newDocument = newDocument(pkg, ROOT_DOCUMENT_PATH, odfMediaType);
+		OdfDocument newDocument = newDocument(pkg, ROOT_DOCUMENT_PATH, odfMediaType, Boolean.FALSE);
+		//add creation time, the metadata have to be explicitly set
+		newDocument.mCreationDate = Calendar.getInstance();
+		return newDocument;
+	}
+
+
+	/**
+	 * Loads the ODF root document from the given Resource.
+	 *
+	 * NOTE: Initial meta data (like the document creation time) will be added
+	 * in this method.
+	 *
+	 * @param res a resource containing a package with a root document
+	 * @param odfMediaType the media type of the root document
+     * @param enableCollaboration - user changes equivalent for creating this document are gathered
+     * @return the OpenDocument document or NULL if the media type is not
+	 * supported by ODFDOM.
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	protected static OdfDocument loadTemplate(Resource res, OdfMediaType odfMediaType, Boolean enableCollaboration) throws Exception {
+		InputStream in = res.createInputStream();
+		OdfPackage pkg = null;
+		try {
+			pkg = OdfPackage.loadPackage(in);
+		} finally {
+			in.close();
+		}
+		OdfDocument newDocument = newDocument(pkg, ROOT_DOCUMENT_PATH, odfMediaType, enableCollaboration);
 		//add creation time, the metadata have to be explicitly set
 		newDocument.mCreationDate = Calendar.getInstance();
 		return newDocument;
@@ -230,6 +259,24 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 		return loadDocument(OdfPackage.loadPackage(inStream, configuration));
 	}
 
+	/**
+	 * Loads the ODF root document from the ODF package provided by a Stream.
+	 *
+	 * <p>Since an InputStream does not provide the arbitrary (non sequential)
+	 * read access needed by OdfDocument, the InputStream is cached. This
+	 * usually takes more time compared to the other createInternalDocument
+	 * methods. An advantage of caching is that there are no problems
+	 * overwriting an input file.</p>
+	 *
+	 * @param inStream - the InputStream of the ODF document.
+	 * @param configuration - key/value pairs of user given run-time settings (configuration)
+     * @param enableCollaboration - user changes equivalent for creating this document are gathered
+	 * @return the document created from the given InputStream
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfDocument loadDocument(InputStream inStream, Map<String, Object> configuration, Boolean enableCollaboration) throws Exception {
+		return loadDocument(OdfPackage.loadPackage(inStream, configuration), enableCollaboration);
+	}
 
 	/**
 	 * Loads the ODF root document from the ODF package provided by a Stream.
@@ -246,6 +293,24 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 */
 	public static OdfDocument loadDocument(InputStream inStream) throws Exception {
 		return loadDocument(OdfPackage.loadPackage(inStream));
+	}
+
+	/**
+	 * Loads the ODF root document from the ODF package provided by a Stream.
+	 *
+	 * <p>Since an InputStream does not provide the arbitrary (non sequential)
+	 * read access needed by OdfDocument, the InputStream is cached. This
+	 * usually takes more time compared to the other createInternalDocument
+	 * methods. An advantage of caching is that there are no problems
+	 * overwriting an input file.</p>
+	 *
+	 * @param inStream - the InputStream of the ODF document.
+     * @param enableCollaboration - user changes equivalent for creating this document are gathered
+	 * @return the document created from the given InputStream
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfDocument loadDocument(InputStream inStream, Boolean enableCollaboration) throws Exception {
+		return loadDocument(OdfPackage.loadPackage(inStream), enableCollaboration);
 	}
 
 	/**
@@ -271,6 +336,18 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	}
 
 	/**
+	 * Loads the ODF root document from the ODF package.
+	 *
+	 * @param odfPackage - the ODF package containing the ODF document.
+     * @param enableCollaboration - user changes equivalent for creating this document are gathered
+	 * @return the root document of the given OdfPackage
+	 * @throws java.lang.Exception - if the ODF document could not be created.
+	 */
+	public static OdfDocument loadDocument(OdfPackage odfPackage, Boolean enableCollaboration) throws Exception {
+		return loadDocument(odfPackage, ROOT_DOCUMENT_PATH, enableCollaboration);
+	}
+
+	/**
 	 * Creates an OdfDocument from the OpenDocument provided by an ODF package.
 	 *
 	 * @param odfPackage - the ODF package containing the ODF document.
@@ -280,6 +357,20 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * @throws java.lang.Exception - if the ODF document could not be created.
 	 */
 	public static OdfDocument loadDocument(OdfPackage odfPackage, String internalPath) throws Exception {
+        return loadDocument(odfPackage, internalPath, Boolean.FALSE);
+    }
+
+	/**
+	 * Creates an OdfDocument from the OpenDocument provided by an ODF package.
+	 *
+	 * @param odfPackage - the ODF package containing the ODF document.
+	 * @param internalPath - the path to the ODF document relative to the
+	 * package root, or an empty String for the root document.
+     * @param enableCollaboration - user changes equivalent for creating this document are gathered
+	 * @return the root document of the given OdfPackage
+	 * @throws java.lang.Exception - if the ODF document could not be created.
+	 */
+	public static OdfDocument loadDocument(OdfPackage odfPackage, String internalPath, Boolean enableCollaboration) throws Exception {
 		String documentMediaType = odfPackage.getMediaTypeString(internalPath);
 		OdfMediaType odfMediaType = null;
 		try {
@@ -302,7 +393,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 			}
 			throw ve;
 		}
-		return newDocument(odfPackage, internalPath, odfMediaType);
+		return newDocument(odfPackage, internalPath, odfMediaType, enableCollaboration);
 	}
 
 	//return null if the media type can not be recognized.
@@ -353,26 +444,27 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 	 * Creates one of the ODF documents based a given mediatype.
 	 *
 	 * @param odfMediaType The ODF Mediatype of the ODF document to be created.
+     * @param enableCollaboration - user changes equivalent for creating this document are gathered
 	 * @return The ODF document, which mediatype dependends on the parameter or
 	 * NULL if media type were not supported.
 	 */
-	private static OdfDocument newDocument(OdfPackage pkg, String internalPath, OdfMediaType odfMediaType) throws SAXException {
+	private static OdfDocument newDocument(OdfPackage pkg, String internalPath, OdfMediaType odfMediaType, Boolean enableCollaboration) throws SAXException {
 		OdfDocument newDoc = null;
 		switch (odfMediaType) {
 			case TEXT:
-				newDoc = new OdfTextDocument(pkg, internalPath, OdfTextDocument.OdfMediaType.TEXT);
+				newDoc = new OdfTextDocument(pkg, internalPath, OdfTextDocument.OdfMediaType.TEXT, enableCollaboration);
 				break;
 
 			case TEXT_TEMPLATE:
-				newDoc = new OdfTextDocument(pkg, internalPath, OdfTextDocument.OdfMediaType.TEXT_TEMPLATE);
+				newDoc = new OdfTextDocument(pkg, internalPath, OdfTextDocument.OdfMediaType.TEXT_TEMPLATE, enableCollaboration);
 				break;
 
 			case TEXT_MASTER:
-				newDoc = new OdfTextDocument(pkg, internalPath, OdfTextDocument.OdfMediaType.TEXT_MASTER);
+				newDoc = new OdfTextDocument(pkg, internalPath, OdfTextDocument.OdfMediaType.TEXT_MASTER, enableCollaboration);
 				break;
 
 			case TEXT_WEB:
-				newDoc = new OdfTextDocument(pkg, internalPath, OdfTextDocument.OdfMediaType.TEXT_WEB);
+				newDoc = new OdfTextDocument(pkg, internalPath, OdfTextDocument.OdfMediaType.TEXT_WEB, enableCollaboration);
 				break;
 
 			case SPREADSHEET:
@@ -1138,5 +1230,10 @@ public abstract class OdfDocument extends OdfSchemaDocument {
         mPackage = getPackage();
         // removes the LO/AO view caching
         mPackage.remove("Thumbnails/thumbnail.png");
+    }
+
+    /** @return TRUE if the document was created by CollabTextDocument and thereby supports user changes, otherwise FALSE */
+    public Boolean hasCollaboration(){
+        return mHasCollaboration != null && mHasCollaboration;
     }
 }

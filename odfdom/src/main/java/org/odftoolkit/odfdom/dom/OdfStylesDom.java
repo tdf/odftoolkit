@@ -30,6 +30,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 import org.odftoolkit.odfdom.changes.ChangesFileSaxHandler;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.element.office.OfficeAutomaticStylesElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentStylesElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
@@ -40,6 +42,7 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.pkg.NamespaceName;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfFileSaxHandler;
 import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.w3c.dom.Node;
@@ -52,8 +55,6 @@ import org.xml.sax.SAXException;
 public class OdfStylesDom extends OdfFileDom {
 
     private static final long serialVersionUID = 766167617530147886L;
-    // there is one default tab stop width
-    private Integer mDefaultTabStopWidth;
 
     /**
      * Creates the DOM representation of an XML file of an Odf document.
@@ -76,7 +77,11 @@ public class OdfStylesDom extends OdfFileDom {
             mPrefixByUri.put(name.getUri(), name.getPrefix());
         }
         try {
-            super.initialize(new ChangesFileSaxHandler(this), this);
+            if(mPackageDocument instanceof OdfTextDocument && ((OdfDocument) mPackageDocument).hasCollaboration()){
+                super.initialize(new ChangesFileSaxHandler(this), this);
+            }else{
+                super.initialize(new OdfFileSaxHandler(this), this);
+            }
         } catch (IOException | ParserConfigurationException | SAXException ex) {
             Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
             OdfValidationException ve = new OdfValidationException(OdfSchemaConstraint.DOCUMENT_WITH_EXISTENT_BUT_UNREADABLE_CONTENT_OR_STYLES_XML, mPackage.getBaseURI(), ex, OdfSchemaDocument.OdfXMLFile.STYLES.getFileName());

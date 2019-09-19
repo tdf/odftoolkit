@@ -88,10 +88,11 @@ public class CollabTextDocument implements Closeable {
 
     /**
      * Creates a new ODT document from the default template
+     * @return new CollabTextDocument
      */
     public static CollabTextDocument newTextCollabDocument() throws Exception {
         CollabTextDocument odt = new CollabTextDocument();
-        odt.mTextDocument = OdfTextDocument.newTextDocument();
+        odt.mTextDocument = OdfTextDocument.newTextDocument(Boolean.TRUE);
         return odt;
     }
 
@@ -107,10 +108,9 @@ public class CollabTextDocument implements Closeable {
      * overwriting an input file.</p>
      *
      * @param inputStream - the InputStream of the ODF text document.
-     * @return the text document created from the given InputStream
      */
-    public CollabTextDocument(InputStream aInputDocumentStm) throws Exception {
-        mTextDocument = OdfTextDocument.loadDocument(aInputDocumentStm);
+    public CollabTextDocument(InputStream inputStream) throws Exception {
+        mTextDocument = OdfTextDocument.loadDocument(inputStream, Boolean.TRUE);
     }
 
     /**
@@ -152,7 +152,7 @@ public class CollabTextDocument implements Closeable {
      * @throws java.lang.Exception document could not be opened
      */
     public CollabTextDocument(InputStream inputStream, Map<Long, byte[]> resourceManager, Map<String, Object> configuration) throws Exception {
-        mTextDocument = OdfTextDocument.loadDocument(inputStream, configuration);
+        mTextDocument = OdfTextDocument.loadDocument(inputStream, configuration, Boolean.TRUE);
         mPackage = getDocument().getPackage();
         mResourceMap = resourceManager;
         if (configuration != null) {

@@ -103,6 +103,17 @@ public class OdfTextDocument extends OdfDocument {
 	/**
 	 * Creates an empty text document.
 	 *
+     * @param enableCollaboration - user changes equivalent for creating this document are gathered
+	 * @return ODF text document based on a default template
+	 * @throws java.lang.Exception - if the document could not be created
+	 */
+	public static OdfTextDocument newTextDocument(Boolean enableCollaboration) throws Exception {
+		return (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.TEXT, enableCollaboration);
+	}
+
+	/**
+	 * Creates an empty text document.
+	 *
 	 * @return ODF text document based on a default template
 	 * @throws java.lang.Exception - if the document could not be created
 	 */
@@ -179,6 +190,28 @@ public class OdfTextDocument extends OdfDocument {
 	 * might be thrown.</p>
 	 *
 	 * @param inputStream - the InputStream of the ODF text document.
+     * @param enableCollaboration - user changes equivalent for creating this document are gathered
+	 * @return the text document created from the given InputStream
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfTextDocument loadDocument(InputStream inputStream, Boolean enableCollaboration) throws Exception {
+		return (OdfTextDocument) OdfDocument.loadDocument(inputStream, enableCollaboration);
+	}
+
+	/**
+	 * Creates an OdfTextDocument from the OpenDocument provided by a resource
+	 * Stream.
+	 *
+	 * <p>Since an InputStream does not provide the arbitrary (non sequential)
+	 * read access needed by OdfTextDocument, the InputStream is cached. This
+	 * usually takes more time compared to the other createInternalDocument
+	 * methods. An advantage of caching is that there are no problems
+	 * overwriting an input file.</p>
+	 *
+	 * <p>If the resource stream is not a ODF text document, ClassCastException
+	 * might be thrown.</p>
+	 *
+	 * @param inputStream - the InputStream of the ODF text document.
 	 * @param configuration - key/value pairs of user given run-time settings
 	 * (configuration)
 	 * @return the text document created from the given InputStream
@@ -186,6 +219,30 @@ public class OdfTextDocument extends OdfDocument {
 	 */
 	public static OdfTextDocument loadDocument(InputStream inputStream, Map<String, Object> configuration) throws Exception {
  		return (OdfTextDocument) OdfDocument.loadDocument(inputStream, configuration);
+	}
+
+	/**
+	 * Creates an OdfTextDocument from the OpenDocument provided by a resource
+	 * Stream.
+	 *
+	 * <p>Since an InputStream does not provide the arbitrary (non sequential)
+	 * read access needed by OdfTextDocument, the InputStream is cached. This
+	 * usually takes more time compared to the other createInternalDocument
+	 * methods. An advantage of caching is that there are no problems
+	 * overwriting an input file.</p>
+	 *
+	 * <p>If the resource stream is not a ODF text document, ClassCastException
+	 * might be thrown.</p>
+	 *
+	 * @param inputStream - the InputStream of the ODF text document.
+	 * @param configuration - key/value pairs of user given run-time settings
+	 * (configuration)
+     * @param enableCollaboration - user changes equivalent for creating this document are gathered
+	 * @return the text document created from the given InputStream
+	 * @throws java.lang.Exception - if the document could not be created.
+	 */
+	public static OdfTextDocument loadDocument(InputStream inputStream, Map<String, Object> configuration, Boolean enableCollaboration) throws Exception {
+ 		return (OdfTextDocument) OdfDocument.loadDocument(inputStream, configuration, enableCollaboration);
 	}
 
 	/**
@@ -221,6 +278,16 @@ public class OdfTextDocument extends OdfDocument {
 	 */
 	public static OdfTextDocument loadDocument(File file) throws Exception {
 		return (OdfTextDocument) OdfDocument.loadDocument(file);
+	}
+
+	/**
+	 * To avoid data duplication a new document is only created, if not already
+	 * opened. A document is cached by this constructor using the internal path
+	 * as key.
+	 */
+	protected OdfTextDocument(OdfPackage pkg, String internalPath, OdfTextDocument.OdfMediaType odfMediaType, Boolean enableCollaboration) throws SAXException {
+		super(pkg, internalPath, odfMediaType.mMediaType);
+        mHasCollaboration = enableCollaboration;
 	}
 
 	/**
