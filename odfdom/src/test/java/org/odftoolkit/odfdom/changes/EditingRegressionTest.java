@@ -93,7 +93,7 @@ public class EditingRegressionTest extends RoundtripTestHelper {
         System.out.println("Serialized JSON2: out2:\n" +  out2);
         ResourceUtilities.saveStringToFile(ResourceUtilities.getTestOutputFile("svanteRoundtrip"), out2);
 
-        String newOps = JsonOperationNormalizer.asString(ro1);
+        String newOps = JsonOperationNormalizer.asString(ro1, Boolean.TRUE);
         System.out.println("Serialized JSON3: norm:\n" +  newOps);
         ResourceUtilities.saveStringToFile(ResourceUtilities.getTestOutputFile("svanteRoundtrip"), newOps);
         Assert.assertTrue(out1.equals(out2));

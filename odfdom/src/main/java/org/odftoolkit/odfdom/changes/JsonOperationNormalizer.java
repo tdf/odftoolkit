@@ -52,12 +52,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONString;
+import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_EDITOR;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_END;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_NAME;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_OPERATIONS;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_START;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_STYLE_ID;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_TYPE;
+import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_VERSION;
+import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_VERSION_BRANCH;
+import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_VERSION_TIME;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OP_STYLE;
 
 /**
@@ -83,7 +87,14 @@ public class JsonOperationNormalizer {
      * brace)</small> and ending with <code>}</code>&nbsp;<small>(right
      * brace)</small>.
      */
-    public static String asString(JSONObject jsonObject) {
+    public static String asString(JSONObject jsonObject, Boolean isTest) {
+        if(jsonObject.has(OPK_OPERATIONS)){
+            // removing for test output & references the most varying attributes to reduce noise
+            jsonObject.remove(OPK_VERSION);
+            jsonObject.remove(OPK_VERSION_TIME);
+            jsonObject.remove(OPK_VERSION_BRANCH);
+            jsonObject.remove(OPK_EDITOR);
+        }
         StringBuilder sb = new StringBuilder("{");
         Iterator<String> keys = getSortedIterator(jsonObject);
         while (keys.hasNext()) {
@@ -115,6 +126,25 @@ public class JsonOperationNormalizer {
         }
         sb.append('}');
         return sb.toString();
+    }
+
+
+    /**
+     * Make a JSON text of this JSONObject.For compactness, no whitespace is
+ added. If this would not result in a syntactically correct JSON text,
+ then null will be returned instead.
+ <p>
+     * Warning: This method assumes that the data structure is acyclical.
+     *
+     * @param jsonObject the jsonObject to be normalized, with an operation for each line.
+     *
+     * @return a printable, displayable, portable, transmittable representation
+     * of the object, beginning with <code>{</code>&nbsp;<small>(left
+     * brace)</small> and ending with <code>}</code>&nbsp;<small>(right
+     * brace)</small>.
+     */
+    public static String asString(JSONObject jsonObject) {
+        return JsonOperationNormalizer.asString(jsonObject, Boolean.FALSE);
     }
 
     /**

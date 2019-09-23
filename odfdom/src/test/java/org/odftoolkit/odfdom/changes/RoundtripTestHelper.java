@@ -261,7 +261,7 @@ class RoundtripTestHelper {
             JSONObject loadingOps = doc.getDocumentAsChanges();
             Assert.assertNotNull(loadingOps);
             String initialTestOpsFile = operationTestOutputPath + testFileNameTrunc + testfileNameSuffix + HYPEN + testMethodName + INITIAL_OPS_SUFFIX;
-            String initialTestOps = JsonOperationNormalizer.asString(loadingOps).replace(",{\"name\"", ",\n{\"name\"");
+            String initialTestOps = JsonOperationNormalizer.asString(loadingOps, Boolean.TRUE).replace(",{\"name\"", ",\n{\"name\"");
             ResourceUtilities.saveStringToFile(new File(initialTestOpsFile), initialTestOps);
 
             File initialRefOpsFile = new File(operationTestReferencePath + testFileNameTrunc + testfileNameSuffix + HYPEN + testMethodName + INITIAL_OPS_SUFFIX);
@@ -381,13 +381,13 @@ class RoundtripTestHelper {
 //2Much		LOG.log(Level.INFO, "\n\nThe reloaded ops are:{0}", reloadedOps.toString());
 
             // FOR REGRESSION TEST REFERENCE CREATION - THE OPERATION OF THE RELOADED DOCUMENT
-            ResourceUtilities.saveStringToFile(new File(testOpsTextFilePath), JsonOperationNormalizer.asString(reloadedOps).replace(",{\"name\"", ",\n{\"name\""));
+            ResourceUtilities.saveStringToFile(new File(testOpsTextFilePath), JsonOperationNormalizer.asString(reloadedOps, Boolean.TRUE).replace(",{\"name\"", ",\n{\"name\""));
             File referenceReloadedOpsFile = new File(referenceOpsTextFilePath);
             if (referenceReloadedOpsFile.exists()) {
                 String referenceOpsFromFile = ResourceUtilities.loadFileAsString(referenceReloadedOpsFile);
                 LOG.log(Level.FINEST, "The reference ops are:{0}", referenceOpsTextFilePath);
                 // Test the known read operations with the above one - using ASCII-compare, e.g. UTF-8 character for list bullets
-                if (!JsonOperationNormalizer.asString(reloadedOps).replace(",{\"name\"", ",\n{\"name\"").equals(referenceOpsFromFile)) {
+                if (!JsonOperationNormalizer.asString(reloadedOps, Boolean.TRUE).replace(",{\"name\"", ",\n{\"name\"").equals(referenceOpsFromFile)) {
                     LOG.log(Level.SEVERE, "The reference ops are:{0}", referenceOpsFromFile);
                     reloadedComparisonFailure = true;
                 }

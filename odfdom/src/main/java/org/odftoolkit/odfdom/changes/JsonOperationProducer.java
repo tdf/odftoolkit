@@ -80,6 +80,11 @@ public class JsonOperationProducer {
 
     private static final Logger LOG = Logger.getLogger(JsonOperationProducer.class.getName());
     static final String BLACK = "#000000";
+    static private String ODFDOM_GIT_BRANCH = System.getProperty("odfdom.git.branch");
+    static private String ODFDOM_GIT_COMMIT_TIME = System.getProperty("odfdom.git.commit.time");
+    static private String ODFDOM_GIT_COMMIT_DESCRIBE = System.getProperty("odfdom.git.commit.id.describe");
+    static private String ODFDOM_GIT_URL = System.getProperty("odfdom.git.remote.origin.url");
+
     // line widths constants
     private final JSONArray mOperationQueue = new JSONArray();
     private final JSONObject mOperations = new JSONObject();
@@ -103,6 +108,10 @@ public class JsonOperationProducer {
         try {
             mDocumentAttributes.put(OPK_NAME, "noOp");
             mOperationQueue.put(mDocumentAttributes);
+            mOperations.put(OPK_EDITOR, ODFDOM_GIT_URL);
+            mOperations.put(OPK_VERSION, ODFDOM_GIT_COMMIT_DESCRIBE);
+            mOperations.put(OPK_VERSION_BRANCH, ODFDOM_GIT_BRANCH);
+            mOperations.put(OPK_VERSION_TIME, ODFDOM_GIT_COMMIT_TIME);
             mOperations.put(OPK_OPERATIONS, mOperationQueue);
         } catch (JSONException e) {
             Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);

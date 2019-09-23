@@ -26,11 +26,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.Assert;
-import org.junit.Ignore;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPERATION_OUTPUT_DIR;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_EDITOR;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_OPERATIONS;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_VERSION;
+import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_VERSION_BRANCH;
+import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_VERSION_TIME;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**
@@ -45,9 +46,13 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
  */
 public class OperationsRefactoringTest {
 
-    static protected Logger LOG = Logger.getLogger(OperationsRefactoringTest.class.getName());
-    static private String ODFDOM_ID = "ODFDOM_" + System.getProperty("odfdom.version");
-    static private String ODFDOM_TIMESTAMP = System.getProperty("odfdom.timestamp");
+    private static final Logger LOG = Logger.getLogger(OperationsRefactoringTest.class.getName());
+    private static final String ODFDOM_GIT_BRANCH = System.getProperty("odfdom.git.branch");
+    private static final String ODFDOM_GIT_COMMIT_TIME = System.getProperty("odfdom.git.commit.time");
+    private static final String ODFDOM_GIT_COMMIT_DESCRIBE = System.getProperty("odfdom.git.commit.id.describe");
+    private static final String ODFDOM_GIT_URL = System.getProperty("odfdom.git.remote.origin.url");
+    static private Boolean mIsTestInputOpsCreated = Boolean.FALSE;
+    static private Boolean mIsTestRefOpsCreated = Boolean.FALSE;
 
     public OperationsRefactoringTest() {
         File adoptedRefOpsDirFile = new File(ResourceUtilities.getSrcTestReferenceFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX);
@@ -69,7 +74,7 @@ public class OperationsRefactoringTest {
      * Folder name to be created beyond test output directory
      * "odfdom/target/test-classes/"
      */
-    private static final String REFACTORED_OPS_OUTPUT_DIR_SUFFIX = "operations_refactored" + File.separator + OPERATION_OUTPUT_DIR;
+    private static final String REFACTORED_OPS_OUTPUT_DIR_SUFFIX = "operations_refactored" + File.separator;
 
     /**
      * For every new refactoring ONLY this method have to be adopted. For
@@ -77,7 +82,8 @@ public class OperationsRefactoringTest {
      *
      * @param op single operation from the operation file to be refactored
      */
-    static private JSONObject refactorOperation(JSONObject op) {
+    private static JSONObject refactorOperation(JSONObject op) {
+/**
         if (op.has("attrs")) {
             JSONObject attrs = op.optJSONObject("attrs");
             if (attrs.has("paragraph")) {
@@ -92,6 +98,7 @@ public class OperationsRefactoringTest {
                 }
             }
         }
+*/
 
 //        // CHANGES TO THE REFERENCE OPERATIONS
 //        JSONArray start = decrementPosition(op.optJSONArray("start"));
@@ -123,7 +130,7 @@ public class OperationsRefactoringTest {
     //****************************************************************************
 
     @Test
-    @Ignore
+    //@Ignore
     public void refactorOperations() {
         // READING: odfdom/src/test/resources/test-reference/operations
         refactorDirectory(INPUT_FOLDER_OP_REF);
@@ -150,26 +157,45 @@ public class OperationsRefactoringTest {
      * positives
      */
     public static void refactorOperationFile(Path opsPath) {
-        File opsFile = new File(opsPath.toString());
-        System.out.println("Reading: " + opsPath.toString());
+        String sOpsPath = opsPath.toString();
+        File opsFile = new File(sOpsPath);
+        System.out.println("Reading: " + sOpsPath);
 
         String refOpsString = "";
         try {
             refOpsString = ResourceUtilities.loadFileAsString(opsFile);
-            String opsFileOutPath = opsPath.getParent().getParent().toString() + File.separator + REFACTORED_OPS_OUTPUT_DIR_SUFFIX + opsFile.getName();
-
+            /**
+            Reading:
+            * odfdom\src\test\resources\test-reference\operations\sections.odt--initial_ops.txt
+            */
+            String opsFileOutPath;
+            if(sOpsPath.contains("test-input")){
+                if(!mIsTestInputOpsCreated){
+                    new File(ResourceUtilities.getTestInputFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX).mkdirs();
+                    mIsTestInputOpsCreated = Boolean.TRUE;
+                }
+                opsFileOutPath =  ResourceUtilities.getTestInputFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX + opsFile.getName();
+            }else{
+                if(!mIsTestRefOpsCreated){
+                    new File(ResourceUtilities.getTestReferenceFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX).mkdirs();
+                    mIsTestRefOpsCreated = Boolean.TRUE;
+                }
+                opsFileOutPath =  ResourceUtilities.getTestReferenceFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX + opsFile.getName();
+            }
             JSONObject jOps = null;
             jOps = new JSONObject(refOpsString);
+            jOps.put(OPK_EDITOR, ODFDOM_GIT_URL);
+            jOps.put(OPK_VERSION, ODFDOM_GIT_COMMIT_DESCRIBE);
+            jOps.put(OPK_VERSION_BRANCH, ODFDOM_GIT_BRANCH);
+            jOps.put(OPK_VERSION_TIME, ODFDOM_GIT_COMMIT_TIME);
             JSONArray ops = jOps.getJSONArray(OPK_OPERATIONS);
             for (int i = 0; i < ops.length(); i++) {
                 JSONObject op = ops.getJSONObject(i);
 //                System.out.println("OP:\n" + op.toString());
                 ops.put(i, refactorOperation(op));
             }
-//            jOps.put(OPK_VERSION, ODFDOM_TIMESTAMP);
-//            jOps.put(OPK_EDITOR, ODFDOM_ID);
             jOps.put(OPK_OPERATIONS, ops);
-            String newOps = JsonOperationNormalizer.asString(jOps);
+            String newOps = JsonOperationNormalizer.asString(jOps, Boolean.TRUE);
             ResourceUtilities.saveStringToFile(new File(opsFileOutPath), newOps.replace(",{\"name\"", ",\n{\"name\""));
             System.out.println("Writing: " + opsFileOutPath);
         } catch (JSONException ex) {

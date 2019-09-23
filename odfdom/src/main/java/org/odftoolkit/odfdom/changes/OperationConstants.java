@@ -69,6 +69,8 @@ public interface OperationConstants {
     public static final String OPK_CONTEXT = "context";
     public static final String OPK_EDITOR = "editor";
     public static final String OPK_VERSION = "version";
+    public static final String OPK_VERSION_TIME = "version-time";
+    public static final String OPK_VERSION_BRANCH = "version-branch";
     public static final String OPK_SHEET = "sheet";
 
 

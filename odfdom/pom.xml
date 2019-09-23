@@ -105,6 +105,11 @@
             <artifactId>log4j-slf4j18-impl</artifactId>
             <version>2.12.1</version>
         </dependency>-->
+        <dependency>
+            <groupId>pl.project13.maven</groupId>
+            <artifactId>git-commit-id-plugin</artifactId>
+            <version>3.0.1</version>
+        </dependency>
     </dependencies>
     <properties>
         <skipTests>false</skipTests>
@@ -189,6 +194,33 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos-validate</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludeProperties>
+                        <excludeProperty>git.*.user.*</excludeProperty>
+                    </excludeProperties>
+                    <prefix>git</prefix>
+                    <verbose>true</verbose>
+                    <skipPoms>false</skipPoms>
+                    <!-- <runOnlyOnce>true</runOnlyOnce> -->
+                    <dotGitDirectory>${project.basedir}/../.git</dotGitDirectory>
+                    <injectAllReactorProjects>true</injectAllReactorProjects>
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <evaluateOnCommit>HEAD</evaluateOnCommit>
+                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
@@ -198,8 +230,11 @@
                     <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
                     <systemPropertyVariables>
                         <odfdom.version>${project.version}</odfdom.version>
-                        <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
                         <org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
+                        <odfdom.git.branch>${git.branch}</odfdom.git.branch>
+                        <odfdom.git.commit.id.describe>${git.commit.id.describe}</odfdom.git.commit.id.describe>
+                        <odfdom.git.remote.origin.url>${git.remote.origin.url}</odfdom.git.remote.origin.url>
+                        <odfdom.git.commit.time>${git.commit.time}</odfdom.git.commit.time>
                     </systemPropertyVariables>
                     <skipTests>${skipTests}</skipTests>
                 </configuration>

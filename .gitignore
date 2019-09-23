@@ -1,9 +1,6 @@
 # Created by https://www.gitignore.io/api/java,maven,eclipse,intellij+all
 # Edit at https://www.gitignore.io/?templates=java,maven,eclipse,intellij+all
 
-### ODF TOOLKIT ###
-**/operations_refactored/
-
 ### Eclipse ###
 .metadata
 bin/
