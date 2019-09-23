@@ -26,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Ignore;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPERATION_OUTPUT_DIR;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_EDITOR;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_OPERATIONS;
@@ -130,7 +131,7 @@ public class OperationsRefactoringTest {
     //****************************************************************************
 
     @Test
-    //@Ignore
+    @Ignore
     public void refactorOperations() {
         // READING: odfdom/src/test/resources/test-reference/operations
         refactorDirectory(INPUT_FOLDER_OP_REF);
