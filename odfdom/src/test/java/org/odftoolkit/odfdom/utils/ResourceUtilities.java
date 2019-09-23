@@ -49,8 +49,8 @@ import org.odftoolkit.odfdom.pkg.rdfa.Util;
  */
 public final class ResourceUtilities {
 
-    static final String INITIAL_OPS_SUFFIX = "-initial_ops.txt";
-    static final String RELOADED_OPS_SUFFIX = "-reloaded_ops.txt";
+    static final String INITIAL_OPS_SUFFIX = "-initial_ops.json";
+    static final String RELOADED_OPS_SUFFIX = "-reloaded_ops.json";
     static final String HYPEN = "-";
     static final String ODT_SUFFIX = ".odt";
     static final List<String> NO_OPERATIONS = new ArrayList<String>(0);

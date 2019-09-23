@@ -45,7 +45,7 @@ class RoundtripTestHelper {
 
     static protected Logger LOG = Logger.getLogger(RoundtripTestHelper.class.getName());
     private static final String ENABLE_DEFAULT_ERROR_HANDLER = "true";
-    private static final String EDIT_OPS_FILE_SUFFIX = "_EDIT_OPS.txt";
+    private static final String EDIT_OPS_FILE_SUFFIX = "_EDIT_OPS.json";
 
     public RoundtripTestHelper() {
     }
@@ -54,8 +54,8 @@ class RoundtripTestHelper {
      * Usually <code>src/test/resources/test-references/</code>.
      */
     static final String TEST_INPUT_DIR = ResourceUtilities.getTestInputFolder();
-    static final String INITIAL_OPS_SUFFIX = "-initial_ops.txt";
-    static final String RELOADED_OPS_SUFFIX = "-reloaded_ops.txt";
+    static final String INITIAL_OPS_SUFFIX = "-initial_ops.json";
+    static final String RELOADED_OPS_SUFFIX = "-reloaded_ops.json";
     static final String HYPEN = "-";
     static final String ODT_SUFFIX = ".odt";
     static final String NO_METHOD_NAME = "";

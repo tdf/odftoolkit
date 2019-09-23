@@ -142,7 +142,7 @@ public class OperationsRefactoringTest {
         try (Stream<Path> paths = Files.walk(new File(operationInputDirectory).toPath())) {
             paths
                     .filter(Files::isRegularFile)
-                    .filter(p -> p.toString().endsWith(".txt"))
+                    .filter(p -> p.toString().endsWith(".json"))
                     //.forEach(System.out::println); // list all files being found!
                     .forEach(org.odftoolkit.odfdom.changes.OperationsRefactoringTest::refactorOperationFile);
         } catch (IOException ex) {
@@ -166,7 +166,7 @@ public class OperationsRefactoringTest {
             refOpsString = ResourceUtilities.loadFileAsString(opsFile);
             /**
             Reading:
-            * odfdom\src\test\resources\test-reference\operations\sections.odt--initial_ops.txt
+            * odfdom\src\test\resources\test-reference\operations\sections.odt--initial_ops.json
             */
             String opsFileOutPath;
             if(sOpsPath.contains("test-input")){
