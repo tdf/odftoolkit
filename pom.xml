@@ -29,12 +29,12 @@
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
         <version>21</version>
-        <relativePath></relativePath>
+        <relativePath />
     </parent>
 
     <properties>
         <jdk.version>1.8</jdk.version>
-        <javadoc.bottom>Copyright &#169; {inceptionYear}&#x2013;2018 Apache Software Foundation; Copyright &#169; 2018&#x2013;{currentYear} {organizationName}. All rights reserved.</javadoc.bottom>
+        <javadoc.bottom>Copyright © {inceptionYear}–2018 Apache Software Foundation; Copyright © 2018–{currentYear} {organizationName}. All rights reserved.</javadoc.bottom>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -114,10 +114,12 @@
         <name>The Document Foundation</name>
         <url>https://www.documentfoundation.org/</url>
     </organization>
+
     <scm>
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit.git</url>
+        <tag>odftoolkit-0.9.0-SNAPSHOT</tag>
     </scm>
     <issueManagement>
         <system>GitHub Issues</system>
@@ -130,6 +132,15 @@
     </ciManagement>
 
     <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
+            </url>
+        </repository>
         <!-- not used for deployment but only for site:stage goal -->
         <site>
             <id>odftoolkit.org</id>
@@ -207,7 +218,49 @@
                     <!-- All files are included by default: -->
                     <includes>
                         <include>**</include>
-                    </includes>>
+                    </includes>&gt;
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.4.2</version>
+                <configuration>
+                    <localCheckout>true</localCheckout>
+                    <pushChanges>false</pushChanges>
+                    <mavenExecutorId>forked-path</mavenExecutorId>
+                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-provider-gitexe</artifactId>
+                        <version>1.11.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
         </plugins>
@@ -244,105 +297,23 @@
                 </plugins>
             </build>
         </profile>
+
+        <!-- GPG Signature on release -->
         <profile>
-            <id>release-distribution</id>
-            <properties>
-                <username>${user.name}</username>
-            </properties>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
             <build>
                 <plugins>
+                    <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
                     <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <inherited>false</inherited>
-                        <executions>
-                            <execution>
-                                <id>package</id>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <phase>prepare-package</phase>
-                                <configuration>
-                                    <tasks>
-                                        <mkdir dir="${basedir}/target/${project.version}-bin" />
-                                        <copy todir="${basedir}/target/${project.version}-bin" flatten="true">
-                                            <fileset dir="${basedir}">
-                                                <include name="*.txt" />
-                                                <include name="KEYS" />
-                                                <include name="odfdom/target/*.jar" />
-                                                <include name="simple/target/*.jar" />
-                                                <include name="validator/target/*.?ar" />
-                                                <include name="xslt-runner/target/*.jar" />
-                                                <include name="xslt-runner-task/target/*.jar" />
-                                                <exclude name="**/target/**-javadoc.jar" />
-                                                <exclude name="**/target/**-sources.jar" />
-                                                <exclude name="**/target/**-jar-with-dependencies.jar" />
-                                            </fileset>
-                                        </copy>
-                                        <mkdir dir="${basedir}/target/${project.version}-docs" />
-                                        <copy todir="${basedir}/target/${project.version}-docs" flatten="true">
-                                            <fileset dir="${basedir}">
-                                                <include name="*.txt" />
-                                                <include name="KEYS" />
-                                                <include name="**/target/*-javadoc.jar" />
-                                            </fileset>
-                                        </copy>
-                                    </tasks>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>checksum</id>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <phase>install</phase>
-                                <configuration>
-                                    <tasks>
-                                        <checksum algorithm="MD5" fileext=".md5">
-                                            <fileset dir="${basedir}/target">
-                                                <include name="*.zip" />
-                                                <include name="*.tar.gz" />
-                                                <include name="*.tar.bz2" />
-                                            </fileset>
-                                        </checksum>
-                                        <checksum algorithm="SHA-512" fileext=".sha">
-                                            <fileset dir="${basedir}/target">
-                                                <include name="*.zip" />
-                                                <include name="*.tar.gz" />
-                                                <include name="*.tar.bz2" />
-                                            </fileset>
-                                        </checksum>
-                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA-512" property="checksum" />
-                                        <copy todir="${basedir}/target/release/${project.version}/">
-                                            <fileset dir="${basedir}/target">
-                                                <include name="*-source-release.*" />
-                                            </fileset>
-                                        </copy>
-                                        <copy todir="${basedir}/target/release/${project.version}/binaries">
-                                            <fileset dir="${basedir}/target">
-                                                <include name="*-bin.*" />
-                                            </fileset>
-                                        </copy>
-                                        <copy todir="${basedir}/target/release/${project.version}/docs">
-                                            <fileset dir="${basedir}/target">
-                                                <include name="*-doc.*" />
-                                            </fileset>
-                                        </copy>
-                                    </tasks>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.apache.ant</groupId>
-                                <artifactId>ant-nodeps</artifactId>
-                                <version>1.8.1</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-                    <plugin>
-                        <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>

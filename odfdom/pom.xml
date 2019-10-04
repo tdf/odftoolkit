@@ -386,7 +386,8 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit/tree/trunk/odfdom</url>
-    </scm>
+      <tag>odftoolkit-0.9.0-SNAPSHOT</tag>
+  </scm>
     <profiles>
         <profile>
             <id>codegen</id>
