@@ -24,11 +24,11 @@
     <parent>
         <groupId>org.odftoolkit</groupId>
         <artifactId>odftoolkit</artifactId>
-        <version>0.9.0-RC1</version>
+        <version>0.9.0-RC2-SNAPSHOT</version>
     </parent>
 
     <artifactId>taglets</artifactId>
-    <version>0.9.0-RC1</version>
+    <version>0.9.0-RC2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -132,7 +132,7 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit/tree/trunk/taglets</url>
-        <tag>odftoolkit-0.9.0-RC1</tag>
+        <tag>odftoolkit-0.9.0-SNAPSHOT</tag>
     </scm>
     <profiles>
         <profile>
