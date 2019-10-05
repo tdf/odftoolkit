@@ -184,7 +184,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1.1</version>
                 <configuration>
                     <doctitle>ODFDOM</doctitle>
                     <minmemory>512m</minmemory>
@@ -234,7 +234,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -245,9 +245,18 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <localCheckout>true</localCheckout>
+                    <pushChanges>false</pushChanges>
+                    <mavenExecutorId>forked-path</mavenExecutorId>
+                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
-                <version>0.13</version>
                 <configuration>
                     <excludes>
                         <exclude>src/main/resources/**</exclude>
@@ -386,8 +395,8 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit/tree/trunk/odfdom</url>
-      <tag>odftoolkit-0.9.0-SNAPSHOT</tag>
-  </scm>
+        <tag>odftoolkit-0.9.0-SNAPSHOT</tag>
+    </scm>
     <profiles>
         <profile>
             <id>codegen</id>
@@ -566,6 +575,7 @@
         https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
         https://issues.sonatype.org/browse/OSSRH-960
         -->
+        <!-- GPG Signature on release -->
         <profile>
             <id>release-sign-artifacts</id>
             <activation>
@@ -576,10 +586,10 @@
             </activation>
             <build>
                 <plugins>
+                    <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -587,18 +597,17 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <configuration>
+                                    <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
+                                        https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
+                                    <keyname>${gpg.keyname}</keyname>
+                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
                 </plugins>
             </build>
-            <!--<distributionManagement>
-                <site>
-                    <id>odfdom</id>
-                    <name>ODFDOM Java Toolkit Project</name>
-                    <url>dav:https://odftoolkit.org/website/odfdom/${project.version}/odfdom</url>
-                </site>
-            </distributionManagement>-->
         </profile>
         <profile>
             <id>doclint-java8-disable</id>

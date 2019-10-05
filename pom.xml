@@ -254,7 +254,7 @@
                         <groupId>org.apache.maven.scm</groupId>
                         <artifactId>maven-scm-api</artifactId>
                         <version>1.11.2</version>
-                    </dependency>                    
+                    </dependency>
                 </dependencies>
             </plugin>
             <plugin>
@@ -327,6 +327,8 @@
                                     <goal>sign</goal>
                                 </goals>
                                 <configuration>
+                                    <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
+                                        https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
                                     <keyname>${gpg.keyname}</keyname>
                                     <passphraseServerId>${gpg.keyname}</passphraseServerId>
                                 </configuration>

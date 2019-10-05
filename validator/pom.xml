@@ -313,8 +313,8 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit/tree/trunk/validator</url>
-      <tag>odftoolkit-0.9.0-SNAPSHOT</tag>
-  </scm>
+        <tag>odftoolkit-0.9.0-SNAPSHOT</tag>
+    </scm>
     <profiles>
         <!-- Profile for deploying to the Sonatype repository, which
         requires GPG signatures
@@ -323,6 +323,7 @@
         https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
         https://issues.sonatype.org/browse/OSSRH-960
         -->
+        <!-- GPG Signature on release -->
         <profile>
             <id>release-sign-artifacts</id>
             <activation>
@@ -333,10 +334,10 @@
             </activation>
             <build>
                 <plugins>
+                    <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -344,6 +345,12 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <configuration>
+                                    <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
+                                        https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
+                                    <keyname>${gpg.keyname}</keyname>
+                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
