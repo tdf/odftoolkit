@@ -22,17 +22,17 @@
     <parent>
         <groupId>org.odftoolkit</groupId>
         <artifactId>odftoolkit</artifactId>
-        <version>0.9.0-SNAPSHOT</version>
+        <version>0.9.0-RC1</version>
     </parent>
     <artifactId>odfvalidator</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
+    <version>0.9.0-RC1</version>
     <packaging>war</packaging>
 
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>odfdom-java</artifactId>
-            <version>0.9.0-SNAPSHOT</version>
+            <version>0.9.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -313,7 +313,7 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit/tree/trunk/validator</url>
-        <tag>odftoolkit-0.9.0-SNAPSHOT</tag>
+        <tag>odftoolkit-0.9.0-RC1</tag>
     </scm>
     <profiles>
         <!-- Profile for deploying to the Sonatype repository, which
