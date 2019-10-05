@@ -75,7 +75,19 @@
                     </excludes>
                 </configuration>
             </plugin>
-        </plugins>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>            
+        </plugins>        
     </build>
     <profiles>
         <!-- GPG Signature on release -->
@@ -95,7 +107,7 @@
                         <artifactId>maven-gpg-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>sign-artifacts</id>
+                                <id>release-sign-artifacts</id>
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
