@@ -194,8 +194,7 @@
             <id>release-sign-artifacts</id>
             <activation>
                 <property>
-                    <name>performRelease</name>
-                    <value>true</value>
+                    <name>gpg.keyname</name>
                 </property>
             </activation>
             <build>
@@ -213,7 +212,7 @@
                                 </goals>
                                 <configuration>
                                     <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
-                                        https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
+                                    https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
                                     <keyname>${gpg.keyname}</keyname>
                                     <passphraseServerId>${gpg.keyname}</passphraseServerId>
                                 </configuration>

@@ -76,6 +76,41 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <doctitle>${project.name}</doctitle>
+                    <minmemory>512m</minmemory>
+                    <maxmemory>1024m</maxmemory>
+                    <links>
+                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
+                        <link>http://xerces.apache.org/xerces-j/apiDocs/</link>
+                    </links>
+                    <splitindex>true</splitindex>
+                    <windowtitle>${project.name} API v${project.version} - https://odftoolkit.org</windowtitle>
+                    <additionalOptions>
+                        <additionalOption>${javadoc.opts}</additionalOption>
+                    </additionalOptions>
+                    <bottom>${javadoc.bottom}</bottom>
+                    <docfilessubdirs>true</docfilessubdirs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <doclint>none</doclint>
+                            <additionalOptions>
+                                <additionalOption>${javadoc.opts}</additionalOption>
+                            </additionalOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>3.1.0</version>
                 <executions>
@@ -86,8 +121,8 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>            
-        </plugins>        
+            </plugin>
+        </plugins>
     </build>
     <profiles>
         <!-- GPG Signature on release -->
@@ -95,8 +130,7 @@
             <id>release-sign-artifacts</id>
             <activation>
                 <property>
-                    <name>performRelease</name>
-                    <value>true</value>
+                    <name>gpg.keyname</name>
                 </property>
             </activation>
             <build>
