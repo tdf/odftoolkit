@@ -98,41 +98,55 @@
                      </execution>
                  </executions>
              </plugin>
-             <plugin>
-                 <groupId>org.apache.maven.plugins</groupId>
-                 <artifactId>maven-javadoc-plugin</artifactId>
-                 <version>3.1.1</version>
-                 <configuration>
-                     <doctitle>${project.name}</doctitle>
-                     <minmemory>512m</minmemory>
-                     <maxmemory>1024m</maxmemory>
-                     <links>
-                         <link>http://docs.oracle.com/javase/8/docs/api/</link>
-                         <link>http://xerces.apache.org/xerces-j/apiDocs/</link>
-                     </links>
-                     <splitindex>true</splitindex>
-                     <windowtitle>${project.name} API v${project.version} - https://odftoolkit.org</windowtitle>
-                     <additionalOptions>
-                         <additionalOption>${javadoc.opts}</additionalOption>
-                     </additionalOptions>
-                     <bottom>${javadoc.bottom}</bottom>
-                     <docfilessubdirs>true</docfilessubdirs>
-                 </configuration>
-                 <executions>
-                     <execution>
-                         <id>attach-javadocs</id>
-                         <goals>
-                             <goal>jar</goal>
-                         </goals>
-                         <configuration>
-                             <doclint>none</doclint>
-                             <additionalOptions>
-                                 <additionalOption>${javadoc.opts}</additionalOption>
-                             </additionalOptions>
-                         </configuration>
-                     </execution>
-                 </executions>
-             </plugin>
+           <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <!-- Workaround: Build the project using the same JDK version as the project is targetting.
+                        see https://issues.apache.org/jira/browse/MJAVADOC-562
+                        see https://bugs.openjdk.java.net/browse/JDK-8212233
+                    -->
+                    <source>${jdk.version}</source>
+                    <doctitle>${project.name} v${project.version}</doctitle>
+                    <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
+                    <isOffline>false</isOffline>
+                    <links>
+                        <link>https://xerces.apache.org/xerces-j/apiDocs/</link>
+                    </links>
+                    <splitindex>true</splitindex>
+                    <windowtitle>${project.name} API v${project.version} - https://odftoolkit.org/</windowtitle>
+                    <taglets>
+                        <taglet>
+                            <tagletClass>org.odftoolkit.odfdom.taglet.OdfElementTaglet</tagletClass>
+                        </taglet>
+                        <taglet>
+                            <tagletClass>org.odftoolkit.odfdom.taglet.OdfAttributeTaglet</tagletClass>
+                        </taglet>
+                        <taglet>
+                            <tagletClass>org.odftoolkit.odfdom.taglet.OdfDatatypeTaglet</tagletClass>
+                        </taglet>
+                    </taglets>
+                    <tagletArtifact>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>taglets</artifactId>
+                        <version>${project.version}</version>
+                    </tagletArtifact>
+                    <docfilessubdirs>true</docfilessubdirs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <doclint>none</doclint>
+                            <additionalOptions>${javadoc.opts}</additionalOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>             
              <plugin>
                  <artifactId>maven-source-plugin</artifactId>
                  <version>3.1.0</version>
