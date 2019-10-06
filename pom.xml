@@ -300,6 +300,7 @@
                                 <exclude>DEPENDENCIES</exclude>
                                 <exclude>docs/**/*</exclude>
                                 <exclude>src/site/**/*</exclude>
+                                <exclude>**/nb-configuration.xml</exclude>								
                             </excludes>
                         </configuration>
                         <executions>
