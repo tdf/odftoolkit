@@ -55,12 +55,6 @@ public class OperationsRefactoringTest {
     static private Boolean mIsTestInputOpsCreated = Boolean.FALSE;
     static private Boolean mIsTestRefOpsCreated = Boolean.FALSE;
 
-    public OperationsRefactoringTest() {
-        File adoptedRefOpsDirFile = new File(ResourceUtilities.getSrcTestReferenceFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX);
-        adoptedRefOpsDirFile.mkdirs();
-        File adoptedEditOpsDirFile = new File(ResourceUtilities.getSrcTestInputFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX);
-        adoptedEditOpsDirFile.mkdirs();
-    }
 
     /**
      * File folder to import the JSON text files - by default the reference
