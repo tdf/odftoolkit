@@ -19,7 +19,7 @@ The ODF Toolkit consists of four subcomponents:
     provide the ODF developer community with an easy, lightweight programming API
     portable to any object-oriented language.
 
-2. Simple API (simple-odf-*.jar)
+2. Simple API (deprecated) - (simple-odf-*.jar)
     The Simple Java API for ODF is an easy-to-use, high-level Java API
     for creating, modifying and extracting data from ODF 1.2 documents.
     It is written in pure Java and does not require that you install any
@@ -50,14 +50,21 @@ The simplest way to use these modules are just put the jars files in your classp
 directly. If you are not using maven you can see the versions of the major components for
 your release in [CHANGES.txt](CHANGES.txt).
 
+## Release Candidate
+
+1. We have a new release candidate 0.9.0-RC1 using JDK 8 and for the final time including the Simple API.
+
+2. We also have a new beta release for 1.0.0-BETA1 using >=JDK 9 and providing the new collaboration feature.
+
+
 ## Documentation
 
 * The Home Page for the ODF Toolkit:http://odftoolkit.org/index.html
 * ODFDOM Getting Start Guide: http://odftoolkit.org/odfdom/index.html
-* Simple API Getting Start Guide: http://odftoolkit.org/simple/gettingstartguide.html
-* Simple API Cookbook: http://odftoolkit.org/simple/document/cookbook/index.html
-* Simple API Demos: http://odftoolkit.org/simple/demo/index.html
-* Simple API Online JavaDoc: http://odftoolkit.org/simple/document/javadoc/index.html
+* Simple API (deprecated) - Getting Start Guide: http://odftoolkit.org/simple/gettingstartguide.html
+* Simple API (deprecated) - Cookbook: http://odftoolkit.org/simple/document/cookbook/index.html
+* Simple API (deprecated) - Demos: http://odftoolkit.org/simple/demo/index.html
+* Simple API (deprecated) - Online JavaDoc: http://odftoolkit.org/simple/document/javadoc/index.html
 * ODF Validator Getting Start Guide: http://odftoolkit.org/conformance/ODFValidator.html
 * ODF XSLT Runner Getting Start Guide: http://odftoolkit.org/xsltrunner/ODFXSLTRunner.html
 
