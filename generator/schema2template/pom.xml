@@ -144,7 +144,7 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
+           <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.1.1</version>
@@ -154,12 +154,15 @@
                         see https://bugs.openjdk.java.net/browse/JDK-8212233
                     -->
                     <source>${jdk.version}</source>
-                    <doctitle>Schema2template</doctitle>
-                    <additionalOptions>${javadoc.opts}</additionalOptions>
-                    <docfilessubdirs>true</docfilessubdirs>
-                    <doclint>none</doclint>
-                    <windowtitle>Schema2template v${project.version} - https://odftoolkit.org</windowtitle>
+                    <doctitle>${project.name} v${project.version}</doctitle>
                     <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
+                    <isOffline>false</isOffline>
+                    <links>
+                        <link>https://xerces.apache.org/xerces-j/apiDocs/</link>
+                    </links>
+                    <splitindex>true</splitindex>
+                    <windowtitle>${project.name} API v${project.version} - https://odftoolkit.org/</windowtitle>
+                    <docfilessubdirs>true</docfilessubdirs>
                 </configuration>
                 <executions>
                     <execution>

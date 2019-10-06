@@ -82,7 +82,8 @@
                     <goalPrefix>schema2template</goalPrefix>
                 </configuration>
             </plugin>
-            <plugin>
+           <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>
@@ -91,13 +92,15 @@
                         see https://bugs.openjdk.java.net/browse/JDK-8212233
                     -->
                     <source>${jdk.version}</source>
-                    <doctitle>Schema2template maven plugin</doctitle>
+                    <doctitle>${project.name} v${project.version}</doctitle>
+                    <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
+                    <isOffline>false</isOffline>
+                    <links>
+                        <link>https://xerces.apache.org/xerces-j/apiDocs/</link>
+                    </links>
                     <splitindex>true</splitindex>
-                    <windowtitle>Schema2template Maven plugin v${project.version} - https://odftoolkit.org/</windowtitle>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <attach>true</attach>
-                    <doclint>none</doclint>
-                    <additionalOptions>${javadoc.opts}</additionalOptions>
+                    <windowtitle>${project.name} API v${project.version} - https://odftoolkit.org/</windowtitle>
+                    <docfilessubdirs>true</docfilessubdirs>
                 </configuration>
                 <executions>
                     <execution>
@@ -106,6 +109,7 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
+                            <doclint>none</doclint>
                             <additionalOptions>${javadoc.opts}</additionalOptions>
                         </configuration>
                     </execution>

@@ -116,22 +116,6 @@
                     </links>
                     <splitindex>true</splitindex>
                     <windowtitle>${project.name} API v${project.version} - https://odftoolkit.org/</windowtitle>
-                    <taglets>
-                        <taglet>
-                            <tagletClass>org.odftoolkit.odfdom.taglet.OdfElementTaglet</tagletClass>
-                        </taglet>
-                        <taglet>
-                            <tagletClass>org.odftoolkit.odfdom.taglet.OdfAttributeTaglet</tagletClass>
-                        </taglet>
-                        <taglet>
-                            <tagletClass>org.odftoolkit.odfdom.taglet.OdfDatatypeTaglet</tagletClass>
-                        </taglet>
-                    </taglets>
-                    <tagletArtifact>
-                        <groupId>${project.groupId}</groupId>
-                        <artifactId>taglets</artifactId>
-                        <version>${project.version}</version>
-                    </tagletArtifact>
                     <docfilessubdirs>true</docfilessubdirs>
                 </configuration>
                 <executions>
@@ -146,7 +130,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>             
+            </plugin>           
              <plugin>
                  <artifactId>maven-source-plugin</artifactId>
                  <version>3.1.0</version>
