@@ -171,6 +171,17 @@
             </roles>
             <timezone>+1</timezone>
         </developer>
+        <developer>
+            <id>olira</id>
+            <name>Oliver</name>
+            <email>opensource AT neomm.net</email>
+            <organization>Freelancer</organization>            
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>        
     </developers>
 
     <mailingLists>
