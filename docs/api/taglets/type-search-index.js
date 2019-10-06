@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"org.odftoolkit.odfdom.taglet","l":"OdfAttributeTaglet"},{"p":"org.odftoolkit.odfdom.taglet","l":"OdfDatatypeTaglet"},{"p":"org.odftoolkit.odfdom.taglet","l":"OdfElementTaglet"}]
