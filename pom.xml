@@ -253,162 +253,37 @@
                 </plugins>
             </build>
         </profile>
+        <!-- Profile for deploying to the Sonatype repository, which
+        requires GPG signatures
+        see
+        https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+        https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
+        https://issues.sonatype.org/browse/OSSRH-960
+        -->
+        <!-- GPG Signature on release -->
         <profile>
-            <id>release-distribution</id>
-            <properties>
-                <username>${user.name}</username>
-            </properties>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>gpg.keyname</name>
+                </property>
+            </activation>
             <build>
                 <plugins>
+                    <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
                     <plugin>
-                        <artifactId>maven-assembly-plugin</artifactId>
-                        <inherited>false</inherited>
-                        <executions>
-                            <execution>
-                                <id>src</id>
-                                <goals>
-                                    <goal>single</goal>
-                                </goals>
-                                <phase>package</phase>
-                                <configuration>
-                                    <descriptors>
-                                        <descriptor>assemble/src.xml</descriptor>
-                                    </descriptors>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>doc</id>
-                                <goals>
-                                    <goal>single</goal>
-                                </goals>
-                                <phase>package</phase>
-                                <configuration>
-                                    <descriptors>
-                                        <descriptor>assemble/doc.xml</descriptor>
-                                    </descriptors>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>bin</id>
-                                <goals>
-                                    <goal>single</goal>
-                                </goals>
-                                <phase>package</phase>
-                                <configuration>
-                                    <descriptors>
-                                        <descriptor>assemble/bin.xml</descriptor>
-                                    </descriptors>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <inherited>false</inherited>
-                        <executions>
-                            <execution>
-                                <id>package</id>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <phase>prepare-package</phase>
-                                <configuration>
-                                    <tasks>
-                                        <mkdir dir="${basedir}/target/${project.version}-bin"/>
-                                        <copy todir="${basedir}/target/${project.version}-bin" flatten="true">
-                                            <fileset dir="${basedir}">
-                                                <include name="*.txt"/>
-                                                <include name="KEYS"/>
-                                                <include name="odfdom/target/*.jar"/>
-                                                <include name="simple/target/*.jar"/>
-                                                <include name="validator/target/*.?ar"/>
-                                                <include name="xslt-runner/target/*.jar"/>
-                                                <include name="xslt-runner-task/target/*.jar"/>
-                                                <exclude name="**/target/**-javadoc.jar"/>
-                                                <exclude name="**/target/**-sources.jar"/>
-                                                <exclude name="**/target/**-jar-with-dependencies.jar"/>
-                                            </fileset>
-                                        </copy>
-                                        <mkdir dir="${basedir}/target/${project.version}-docs"/>
-                                        <copy todir="${basedir}/target/${project.version}-docs" flatten="true">
-                                            <fileset dir="${basedir}">
-                                                <include name="*.txt"/>
-                                                <include name="KEYS"/>
-                                                <include name="**/target/*-javadoc.jar"/>
-                                            </fileset>
-                                        </copy>
-                                    </tasks>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>checksum</id>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <phase>install</phase>
-                                <configuration>
-                                    <tasks>
-                                        <checksum algorithm="MD5" fileext=".md5">
-                                            <fileset dir="${basedir}/target">
-                                                <include name="*.zip"/>
-                                                <include name="*.tar.gz"/>
-                                                <include name="*.tar.bz2"/>
-                                            </fileset>
-                                        </checksum>
-                                        <checksum algorithm="SHA-512" fileext=".sha">
-                                            <fileset dir="${basedir}/target">
-                                                <include name="*.zip"/>
-                                                <include name="*.tar.gz"/>
-                                                <include name="*.tar.bz2"/>
-                                            </fileset>
-                                        </checksum>
-                                        <checksum file="target/odftoolkit-${project.version}-src.zip"
-                                                  algorithm="SHA-512" property="checksum"/>
-                                        <copy todir="${basedir}/target/release/${project.version}/">
-                                            <fileset dir="${basedir}/target">
-                                                <include name="*-source-release.*"/>
-                                            </fileset>
-                                        </copy>
-                                        <copy todir="${basedir}/target/release/${project.version}/binaries">
-                                            <fileset dir="${basedir}/target">
-                                                <include name="*-bin.*"/>
-                                            </fileset>
-                                        </copy>
-                                        <copy todir="${basedir}/target/release/${project.version}/docs">
-                                            <fileset dir="${basedir}/target">
-                                                <include name="*-doc.*"/>
-                                            </fileset>
-                                        </copy>
-                                        <echo/>
-                                        <echo>
-                                            The release candidate has been prepared in:
-                                            ${basedir}/target/${project.version}
-                                        </echo>
-                                        <echo/>
-                                    </tasks>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.apache.ant</groupId>
-                                <artifactId>ant-nodeps</artifactId>
-                                <version>1.8.1</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-                    <plugin>
-                        <!-- see https://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>sign-artifacts</id>
+                                <id>release-sign-artifacts</id>
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
                                 <configuration>
+                                    <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
+                                        https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
                                     <keyname>${gpg.keyname}</keyname>
                                     <passphraseServerId>${gpg.keyname}</passphraseServerId>
                                 </configuration>

@@ -74,6 +74,95 @@
                     </excludes>
                 </configuration>
             </plugin>
-        </plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <doctitle>${project.name}</doctitle>
+                    <minmemory>512m</minmemory>
+                    <maxmemory>1024m</maxmemory>
+                    <links>
+                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
+                        <link>http://xerces.apache.org/xerces-j/apiDocs/</link>
+                    </links>
+                    <splitindex>true</splitindex>
+                    <windowtitle>${project.name} API v${project.version} - https://odftoolkit.org</windowtitle>
+                    <additionalOptions>
+                        <additionalOption>${javadoc.opts}</additionalOption>
+                    </additionalOptions>
+                    <bottom>${javadoc.bottom}</bottom>
+                    <docfilessubdirs>true</docfilessubdirs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <doclint>none</doclint>
+                            <additionalOptions>
+                                <additionalOption>${javadoc.opts}</additionalOption>
+                            </additionalOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>            
     </build>
+    <profiles>
+        <!-- Profile for deploying to the Sonatype repository, which
+        requires GPG signatures
+        see
+        https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+        https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
+        https://issues.sonatype.org/browse/OSSRH-960
+        -->
+        <!-- GPG Signature on release -->
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>gpg.keyname</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>release-sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
+                                        https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
+                                    <keyname>${gpg.keyname}</keyname>
+                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>        
+    </profiles>
 </project>
