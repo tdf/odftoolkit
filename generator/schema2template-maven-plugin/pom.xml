@@ -82,7 +82,7 @@
                     <goalPrefix>schema2template</goalPrefix>
                 </configuration>
             </plugin>
-           <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.1.1</version>
@@ -95,9 +95,6 @@
                     <doctitle>${project.name} v${project.version}</doctitle>
                     <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
                     <isOffline>false</isOffline>
-                    <links>
-                        <link>https://xerces.apache.org/xerces-j/apiDocs/</link>
-                    </links>
                     <splitindex>true</splitindex>
                     <windowtitle>${project.name} API v${project.version} - https://odftoolkit.org/</windowtitle>
                     <docfilessubdirs>true</docfilessubdirs>

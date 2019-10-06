@@ -135,7 +135,7 @@
                     </excludes>
                 </configuration>
             </plugin>
-           <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.1.1</version>
@@ -148,9 +148,6 @@
                     <doctitle>${project.name} v${project.version}</doctitle>
                     <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
                     <isOffline>false</isOffline>
-                    <links>
-                        <link>https://xerces.apache.org/xerces-j/apiDocs/</link>
-                    </links>
                     <splitindex>true</splitindex>
                     <windowtitle>${project.name} API v${project.version} - https://odftoolkit.org/</windowtitle>
                     <docfilessubdirs>true</docfilessubdirs>
@@ -179,7 +176,30 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>             
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <version>${project.version}</version>
+                            <Main-Class>org.odftoolkit.odfvalidator.Main</Main-Class>
+                        </manifestEntries>
+                    </archive>
+                    <descriptors>
+                        <descriptor>src/main/assembly/src.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>single</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
@@ -329,6 +349,6 @@
             <properties>
                 <javadoc.opts>-Xdoclint:none</javadoc.opts>
             </properties>
-        </profile>        
+        </profile>
     </profiles>
 </project>

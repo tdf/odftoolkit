@@ -98,39 +98,36 @@
                      </execution>
                  </executions>
              </plugin>
-           <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-javadoc-plugin</artifactId>
+                 <version>3.1.1</version>
+                 <configuration>
                     <!-- Workaround: Build the project using the same JDK version as the project is targetting.
                         see https://issues.apache.org/jira/browse/MJAVADOC-562
                         see https://bugs.openjdk.java.net/browse/JDK-8212233
                     -->
-                    <source>${jdk.version}</source>
-                    <doctitle>${project.name} v${project.version}</doctitle>
-                    <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
-                    <isOffline>false</isOffline>
-                    <links>
-                        <link>https://xerces.apache.org/xerces-j/apiDocs/</link>
-                    </links>
-                    <splitindex>true</splitindex>
-                    <windowtitle>${project.name} API v${project.version} - https://odftoolkit.org/</windowtitle>
-                    <docfilessubdirs>true</docfilessubdirs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <doclint>none</doclint>
-                            <additionalOptions>${javadoc.opts}</additionalOptions>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>           
+                     <source>${jdk.version}</source>
+                     <doctitle>${project.name} v${project.version}</doctitle>
+                     <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
+                     <isOffline>false</isOffline>
+                     <splitindex>true</splitindex>
+                     <windowtitle>${project.name} API v${project.version} - https://odftoolkit.org/</windowtitle>
+                     <docfilessubdirs>true</docfilessubdirs>
+                 </configuration>
+                 <executions>
+                     <execution>
+                         <id>attach-javadocs</id>
+                         <goals>
+                             <goal>jar</goal>
+                         </goals>
+                         <configuration>
+                             <doclint>none</doclint>
+                             <additionalOptions>${javadoc.opts}</additionalOptions>
+                         </configuration>
+                     </execution>
+                 </executions>
+             </plugin>
              <plugin>
                  <artifactId>maven-source-plugin</artifactId>
                  <version>3.1.0</version>
@@ -142,7 +139,7 @@
                          </goals>
                      </execution>
                  </executions>
-             </plugin>             
+             </plugin>
          </plugins>
      </build>
      <profiles>
@@ -154,46 +151,46 @@
         https://issues.sonatype.org/browse/OSSRH-960
         -->
         <!-- GPG Signature on release -->
-        <profile>
-            <id>release-sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>gpg.keyname</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
+         <profile>
+             <id>release-sign-artifacts</id>
+             <activation>
+                 <property>
+                     <name>gpg.keyname</name>
+                 </property>
+             </activation>
+             <build>
+                 <plugins>
                     <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>release-sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                                <configuration>
+                     <plugin>
+                         <groupId>org.apache.maven.plugins</groupId>
+                         <artifactId>maven-gpg-plugin</artifactId>
+                         <executions>
+                             <execution>
+                                 <id>release-sign-artifacts</id>
+                                 <phase>verify</phase>
+                                 <goals>
+                                     <goal>sign</goal>
+                                 </goals>
+                                 <configuration>
                                     <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
                                         https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
-                                    <keyname>${gpg.keyname}</keyname>
-                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>doclint-java8-disable</id>
-            <activation>
-                <jdk>[1.8,)</jdk>
-            </activation>
-            <properties>
-                <javadoc.opts>-Xdoclint:none</javadoc.opts>
-            </properties>
-        </profile>              
+                                     <keyname>${gpg.keyname}</keyname>
+                                     <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                                 </configuration>
+                             </execution>
+                         </executions>
+                     </plugin>
+                 </plugins>
+             </build>
+         </profile>
+         <profile>
+             <id>doclint-java8-disable</id>
+             <activation>
+                 <jdk>[1.8,)</jdk>
+             </activation>
+             <properties>
+                 <javadoc.opts>-Xdoclint:none</javadoc.opts>
+             </properties>
+         </profile>
      </profiles>
  </project>
