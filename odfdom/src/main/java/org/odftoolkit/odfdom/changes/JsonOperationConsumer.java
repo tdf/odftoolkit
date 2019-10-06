@@ -461,11 +461,11 @@ public class JsonOperationConsumer {
                 int listLevel = getListLevel(paragraphBaseElement);
                 int newListLevel;
                 if (paraProps.isNull("listLevel")) {
-                    newListLevel = -1;
+                    newListLevel = 0; // deleting the list
                 } else {
-                    newListLevel = paraProps.optInt("listLevel", -2);
+                    newListLevel = paraProps.optInt("listLevel", 0);
                     // if the list level should be unchanged
-                    if (newListLevel == -2) {
+                    if (newListLevel == 0) {
                         // use the current listlevel..
                         newListLevel = listLevel;
                     }
@@ -1367,9 +1367,9 @@ public class JsonOperationConsumer {
                                         autoStyle.removeAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "list-style-name");
                                     }
                                 } else {
-                                    newListLevel = paraProps.optInt("listLevel", -2);
+                                    newListLevel = paraProps.optInt("listLevel", -1);
                                     // if the list level should be unchanged
-                                    if (newListLevel == -2) {
+                                    if (newListLevel == -1) {
                                         // use the current listlevel..
                                         newListLevel = listLevel;
                                     }
@@ -1401,7 +1401,7 @@ public class JsonOperationConsumer {
                                     }
                                     // ToDo Optimiszation: remove the following for list level 0 and those without preceding/following content!
                                     // temporary move the paragraph out of the list to separate both list styles
-                                    setParagraphListProperties(paragraphBaseElement, paraProps, xmlDoc, listLevel, -1, null);
+                                    setParagraphListProperties(paragraphBaseElement, paraProps, xmlDoc, listLevel, 0, null);
                                     listLevel = -1;
                                 }
                                 setParagraphListProperties(paragraphBaseElement, paraProps, xmlDoc, listLevel, newListLevel, currentListStyleName);
@@ -1781,7 +1781,7 @@ public class JsonOperationConsumer {
         // Will the listlevel change)
         if (listLevel != newListLevel) {
             // if there has been already a list
-            if (listLevel > -1) {
+            if (listLevel > 0) {
                 if (newListLevel > listLevel) {
                     // raise the level of lists
                     addListLevel(paragraphBaseElement, newListLevel - listLevel, paraProps, xmlDoc, currentListStyleName);
@@ -1790,7 +1790,7 @@ public class JsonOperationConsumer {
                     removeListLevel(paragraphBaseElement, listLevel - newListLevel, paraProps, currentListStyleName);
                 }
             } else { // there is no list yet (level plus one as it start counting with 0)
-                addListLevel(paragraphBaseElement, newListLevel + 1, paraProps, xmlDoc, currentListStyleName);
+                addListLevel(paragraphBaseElement, newListLevel, paraProps, xmlDoc, currentListStyleName);
             }
         }
         // Add list style and xml id to the top most list element
@@ -1800,10 +1800,11 @@ public class JsonOperationConsumer {
     }
 
     /**
-     * ToDo after release: Move this to the paragraph of ODFDOM
+     * The list level is equal to the number of anchester text:list elements. 
      */
     public static int getListLevel(TextParagraphElementBase paragraphBaseElement) {
-        return getListLevel(paragraphBaseElement, -1);
+        // the default list level is none, which is equal to 0
+        return getListLevel(paragraphBaseElement, 0);
     }
 
     /**
@@ -1838,8 +1839,8 @@ public class JsonOperationConsumer {
             rootListElement = getListRootElement(paragraphBaseElement);
             if (rootListElement != null) {
                 listStyleName = rootListElement.getTextStyleNameAttribute();
-                removeListLevel(paragraphBaseElement, listLevel + 1, null, null);
-                TextListElement newRootListElement = addListLevel(paragraphBaseElement, listLevel + 1, null, (OdfFileDom) paragraphBaseElement.getOwnerDocument(), listStyleName);
+                removeListLevel(paragraphBaseElement, listLevel, null, null);
+                TextListElement newRootListElement = addListLevel(paragraphBaseElement, listLevel, null, (OdfFileDom) paragraphBaseElement.getOwnerDocument(), listStyleName);
                 if (newRootListElement != null) {
                     rootListElement = newRootListElement;
                 }
@@ -2340,7 +2341,7 @@ public class JsonOperationConsumer {
             OdfOfficeAutomaticStyles autoStyles = doc.getContentDom().getOrCreateAutomaticStyles();
             OdfTextListStyle listStyle = autoStyles.newListStyle(listStyleId);
             JSONObject listLevelDefinition = null;
-            for (int i = 0; i < 9; i++) {
+            for (int i = 1; i < 10; i++) {
                 listLevelDefinition = listDefinition.optJSONObject("listLevel" + i);
                 addListDefinition(listStyle, listLevelDefinition, i);
             }
@@ -2386,13 +2387,13 @@ public class JsonOperationConsumer {
                     if (levelPicBulletUri != null && !levelPicBulletUri.isEmpty()) {
                         listLevelStyle = createListLevelStyleImage(listStyle, listLevel, levelPicBulletUri);
                     } else {
-                        listLevelStyle = listStyle.newTextListLevelStyleBulletElement(levelText, listLevel + 1);
+                        listLevelStyle = listStyle.newTextListLevelStyleBulletElement(levelText, listLevel);
                     }
                 } else {
                     listLevelStyle = createListLevelStyleImage(listStyle, listLevel, levelPicBulletUri);
                 }
             } else { // *** NUMBERED LIST ***
-                listLevelStyle = listStyle.newTextListLevelStyleNumberElement(getNumFormat(numberFormat), listLevel + 1);
+                listLevelStyle = listStyle.newTextListLevelStyleNumberElement(getNumFormat(numberFormat), listLevel);
                 listLevelStyle.setAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "text:display-levels", Integer.toString(countOccurrences(levelText, '%')));
 
                 // if there is prefix
@@ -2425,7 +2426,7 @@ public class JsonOperationConsumer {
     }
 
     private static TextListLevelStyleElementBase createListLevelStyleImage(OdfTextListStyle listStyle, int listLevel, String levelPicBulletUri) {
-        TextListLevelStyleElementBase listLevelStyle = listStyle.newTextListLevelStyleImageElement(listLevel + 1);
+        TextListLevelStyleElementBase listLevelStyle = listStyle.newTextListLevelStyleImageElement(listLevel);
 
         if (levelPicBulletUri != null && !levelPicBulletUri.isEmpty()) {
 			listLevelStyle.setAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "xlink:href", levelPicBulletUri);

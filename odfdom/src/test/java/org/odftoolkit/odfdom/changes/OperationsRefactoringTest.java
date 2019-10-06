@@ -84,7 +84,43 @@ public class OperationsRefactoringTest {
      * @param op single operation from the operation file to be refactored
      */
     private static JSONObject refactorOperation(JSONObject op) {
-/**
+        if (op.has("attrs")) {
+            JSONObject attrs = op.optJSONObject("attrs");
+            if (attrs.has("paragraph")) {
+                JSONObject paragraph = attrs.optJSONObject("paragraph");
+                if (paragraph.has("listLevel")) {
+                    Integer outlineLevel = paragraph.optInt("listLevel", -1);
+                    if (!outlineLevel.equals(JSONObject.NULL) && outlineLevel > -1) {
+                        paragraph.put("listLevel", ++outlineLevel);
+                        attrs.put("paragraph", paragraph);
+                        op.put("attrs", attrs);
+                    }
+                }
+            }
+        }
+        if (op.has("listDefinition")) {
+            JSONObject listDefinition = op.optJSONObject("listDefinition");
+            boolean isChanged = Boolean.FALSE;
+            for (int i = 10; i >= 0; i--) {
+                String listLevel = "listLevel" + i;
+                if (listDefinition.has(listLevel)) {
+                    isChanged = Boolean.TRUE;
+                    JSONObject listLevelObj = listDefinition.optJSONObject(listLevel);
+                    if (!listLevelObj.equals(JSONObject.NULL)) {
+                        listDefinition.put("listLevel" + ++i, listLevelObj);
+                        listDefinition.remove(listLevel);
+                    }
+                }
+            }
+            if (isChanged) {
+                op.put("listDefinition", listDefinition);
+            }
+        }
+        /**
+         * {"name":"addListStyle","listDefinition":{"listLevel0":{"indentFirstLine":-635,"indentLeft":1270,"labelFollowedBy":"listtab","levelText":"","listLevelPositionAndSpaceMode":"label-alignment","numberFormat":"bullet","textAlign":"left"},"listLevel1":{"indentFirstLine":-635,"indentLeft":2540,"labelFollowedBy":"listtab","levelText":"○","listLevelPositionAndSpaceMode":"label-alignment","numberFormat":"bullet","textAlign":"left"},"listLevel2":{"indentFirstLine":-635,"indentLeft":3810,"labelFollowedBy":"listtab","levelText":"■","listLevelPositionAndSpaceMode":"label-alignment","numberFormat":"bullet","textAlign":"left"},"listLevel3":{"indentFirstLine":-635,"indentLeft":5080,"labelFollowedBy":"listtab","levelText":"","listLevelPositionAndSpaceMode":"label-alignment","numberFormat":"bullet","textAlign":"left"},"listLevel4":{"indentFirstLine":-635,"indentLeft":6350,"labelFollowedBy":"listtab","levelText":"○","listLevelPositionAndSpaceMode":"label-alignment","numberFormat":"bullet","textAlign":"left"},"listLevel5":{"indentFirstLine":-635,"indentLeft":7620,"labelFollowedBy":"listtab","levelText":"■","listLevelPositionAndSpaceMode":"label-alignment","numberFormat":"bullet","textAlign":"left"},"listLevel6":{"indentFirstLine":-635,"indentLeft":8890,"labelFollowedBy":"listtab","levelText":"","listLevelPositionAndSpaceMode":"label-alignment","numberFormat":"bullet","textAlign":"left"},"listLevel7":{"indentFirstLine":-635,"indentLeft":10160,"labelFollowedBy":"listtab","levelText":"○","listLevelPositionAndSpaceMode":"label-alignment","numberFormat":"bullet","textAlign":"left"},"listLevel8":{"indentFirstLine":-635,"indentLeft":11430,"labelFollowedBy":"listtab","levelText":"■","listLevelPositionAndSpaceMode":"label-alignment","numberFormat":"bullet","textAlign":"left"}},"listStyleId":"L1"},
+         *
+         */
+        /* 
         if (op.has("attrs")) {
             JSONObject attrs = op.optJSONObject("attrs");
             if (attrs.has("paragraph")) {
@@ -98,8 +134,9 @@ public class OperationsRefactoringTest {
                     }
                 }
             }
-        }
-*/
+        }        
+        
+         */
 
 //        // CHANGES TO THE REFERENCE OPERATIONS
 //        JSONArray start = decrementPosition(op.optJSONArray("start"));
@@ -131,7 +168,6 @@ public class OperationsRefactoringTest {
     //****************************************************************************
 
     @Test
-    @Ignore
     public void refactorOperations() {
         // READING: odfdom/src/test/resources/test-reference/operations
         refactorDirectory(INPUT_FOLDER_OP_REF);
@@ -166,22 +202,22 @@ public class OperationsRefactoringTest {
         try {
             refOpsString = ResourceUtilities.loadFileAsString(opsFile);
             /**
-            Reading:
-            * odfdom\src\test\resources\test-reference\operations\sections.odt--initial_ops.json
-            */
+             * Reading:
+             * odfdom\src\test\resources\test-reference\operations\sections.odt--initial_ops.json
+             */
             String opsFileOutPath;
-            if(sOpsPath.contains("test-input")){
-                if(!mIsTestInputOpsCreated){
+            if (sOpsPath.contains("test-input")) {
+                if (!mIsTestInputOpsCreated) {
                     new File(ResourceUtilities.getTestInputFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX).mkdirs();
                     mIsTestInputOpsCreated = Boolean.TRUE;
                 }
-                opsFileOutPath =  ResourceUtilities.getTestInputFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX + opsFile.getName();
-            }else{
-                if(!mIsTestRefOpsCreated){
+                opsFileOutPath = ResourceUtilities.getTestInputFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX + opsFile.getName();
+            } else {
+                if (!mIsTestRefOpsCreated) {
                     new File(ResourceUtilities.getTestReferenceFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX).mkdirs();
                     mIsTestRefOpsCreated = Boolean.TRUE;
                 }
-                opsFileOutPath =  ResourceUtilities.getTestReferenceFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX + opsFile.getName();
+                opsFileOutPath = ResourceUtilities.getTestReferenceFolder() + REFACTORED_OPS_OUTPUT_DIR_SUFFIX + opsFile.getName();
             }
             JSONObject jOps = null;
             jOps = new JSONObject(refOpsString);

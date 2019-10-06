@@ -615,7 +615,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
 
                             try {
                                 if (!mListStyleStack.isEmpty()) {
-                                    paraProps.put("listLevel", mListStyleStack.size() - 1);
+                                    paraProps.put("listLevel", mListStyleStack.size());
                                     // Only the first paragraph within a list item should show a label!
                                     ParagraphListProperties listProps = mListStyleStack.getLast();
                                     if (listProps.hasListLabel()) {

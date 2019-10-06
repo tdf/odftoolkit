@@ -1155,9 +1155,9 @@ public class JsonOperationProducer {
             } else {
                 TextListLevelStyleElementBase listLevelStyle = (TextListLevelStyleElementBase) child;
                 // Transform mandatory attribute to integer
-
+                // For a <text:numbered-paragraph> 5.3.6 element the default value for this attribute is 1.
                 String textLevel = listLevelStyle.getAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "level");
-                int listLevel = Integer.parseInt(textLevel) - 1;
+                int listLevel = Integer.parseInt(textLevel);
                 try {
                     listDefinition.put("listLevel" + listLevel, createListLevelDefinition(listLevelStyle, listLevel));
 
@@ -1467,14 +1467,16 @@ public class JsonOperationProducer {
                 // Creating the label, in ODF always adding the low levelText first, adding each follow up level for display level
                 // Custom string with one of the placeholders from '%1' to '%9') for numbered lists.
                 for (int i = showLevels; i > 0; i--) {
-                    levelText.append("%").append(listLevel + 2 - i);
-                    // Although not commented in the specification a "." is being added to the text level
-                    if (i != 1) {
-                        levelText.append('.');
+                    if (listLevel + 1 - i > 0) {
+                        levelText.append("%").append(listLevel + 1 - i);
+                        // Although not commented in the specification a "." is being added to the text level
+                        if (i != 1) {
+                            levelText.append('.');
+                        }
                     }
                 }
             } else {
-                levelText.append("%").append(listLevel + 1);
+                levelText.append("%").append(listLevel);
             }
             // creating label suffix
             String labelSuffix = listLevelStyle.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "num-suffix");

@@ -312,7 +312,7 @@
 {"name":"addHeaderFooter","type":"header_first","id":"header_first_Standard"},
 {"name":"addParagraph","start":[1],"attrs":{"styleId":"Header","character":{"language":"de-DE"}},"context":"header_first_Standard"},
 {"name":"addDrawing","start":[1,1],"type":"shape","attrs":{"styleId":"default","drawing":{"anchorBehindDoc":true,"anchorHorAlign":"center","anchorHorBase":"leftMargin","anchorHorOffset":-2540,"anchorLayerOrder":2,"anchorVertBase":"margin","anchorVertOffset":13921,"height":23279,"indentLeft":319,"indentRight":319,"inline":true,"left":-2540,"marginLeft":319,"marginRight":319,"textWrapMode":"through","textWrapSide":"both","top":13921,"width":23279},"fill":{"type":"solid","color":{"type":"rgb","value":"c0c0c0"}},"image":{},"shape":{"paddingBottom":229,"paddingLeft":441,"paddingRight":441,"paddingTop":229}},"context":"header_first_Standard"},
-{"name":"addParagraph","start":[1,1,1],"attrs":{"character":{"bold":false,"fontName":"Calibri","fontNameAsian":"Calibri","fontNameComplex":"Calibri","italic":false},"paragraph":{"listLabelHidden":true,"listLevel":0,"listStart":true,"listStyleId":"OTK_DEFAULT_LIST"}},"context":"header_first_Standard"},
+{"name":"addParagraph","start":[1,1,1],"attrs":{"character":{"bold":false,"fontName":"Calibri","fontNameAsian":"Calibri","fontNameComplex":"Calibri","italic":false},"paragraph":{"listLabelHidden":true,"listLevel":1,"listStart":true,"listStyleId":"OTK_DEFAULT_LIST"}},"context":"header_first_Standard"},
 {"name":"addText","start":[1,1,1,1],"context":"header_first_Standard","text":"DRAFT"},
 {"name":"addHeaderFooter","type":"footer_default","id":"footer_default_Standard"},
 {"name":"addParagraph","start":[1],"attrs":{"styleId":"Footer"},"context":"footer_default_Standard"},
