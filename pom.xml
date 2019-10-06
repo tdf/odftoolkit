@@ -9,7 +9,7 @@
   "License"); you may not use this file except in compliance
   with the License.  You may obtain a copy of the License at
 
-    https://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing,
   software distributed under the License is distributed on an
@@ -30,16 +30,18 @@
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
         <version>21</version>
-        <relativePath></relativePath>
+        <relativePath />
     </parent>
 
     <properties>
         <jdk.version>11</jdk.version>
+        <javadoc.bottom>Copyright © {inceptionYear}–2018 Apache Software Foundation; Copyright © 2018–{currentYear} {organizationName}. All rights reserved.</javadoc.bottom>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
+    <!-- defining version numbers across all subprojects -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -98,7 +100,7 @@
             <dependency>
                 <groupId>org.apache.ant</groupId>
                 <artifactId>ant</artifactId>
-                <version>1.10.1</version>
+                <version>1.10.7</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -132,7 +134,7 @@
     </scm>
 
     <issueManagement>
-        <system>github</system>
+        <system>GitHub Issues</system>
         <url>https://github.com/tdf/odftoolkit/issues</url>
     </issueManagement>
 
@@ -142,6 +144,15 @@
     </ciManagement>
 
     <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
+            </url>
+        </repository>
         <!-- not used for deployment but only for site:stage goal -->
         <site>
             <id>odftoolkit.org</id>
@@ -157,6 +168,7 @@
             <organization>Freelancer</organization>
             <roles>
                 <role>OASIS ODF Collaboration subcommittee chair</role>
+                <role>OASIS ODF committee member</role>
                 <role>architect</role>
                 <role>developer</role>
             </roles>
@@ -168,6 +180,7 @@
             <organization>CIB Software</organization>
             <organizationUrl>https://www.cib.de/</organizationUrl>
             <roles>
+                <role>OASIS ODF committee member</role>
                 <role>developer</role>
             </roles>
             <timezone>+1</timezone>
@@ -176,22 +189,19 @@
 
     <mailingLists>
         <mailingList>
-            <name>Developer List</name>
+            <!--
+            Help: <dev+help@odftoolkit.org>
+            Digest subscription: <dev+subscribe-digest@odftoolkit.org>
+            No-mail subscription: <dev+subscribe-nomail@odftoolkit.org>
+            -->
             <post>dev@odftoolkit.org</post>
-            <!--2DO
-            <subscribe></subscribe>
-            <unsubscribe>odf-users-unsubscribe@odftoolkit.org</unsubscribe>
-            <archive>https://mail-archives.odftoolkit.org/mod_mbox/dev/</archive>
-              -->
+            <subscribe>dev+subscribe@odftoolkit.org</subscribe>
+            <unsubscribe>dev+unsubscribe@odftoolkit.org</unsubscribe>
+            <archive>https://listarchives.odftoolkit.org/dev/</archive>
+            <name>dev.odftoolkit.org</name><!-- List-Id -->
         </mailingList>
-        <!-- Watch GitHub ?
-        <mailingList>
-            <name>Commits</name>
-            <subscribe>commits-subscribe@odftoolkit.org</subscribe>
-            <unsubscribe>commmits-unsubscribe@odftoolkit</unsubscribe>
-            <archive>https://mail-archives.odftoolkit.org/mod_mbox/commits/</archive>
-        </mailingList>-->
     </mailingLists>
+
 
     <build>
         <plugins>
@@ -215,11 +225,58 @@
                     <!--      See https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties -->
                     <!--      !!! 'mvn editorconfig:format' fixes format via command line!!! -->
                     <!-- You can exclude further files from processing: -->
-                        <!--<excludes><exclude>src/main/**/*.whatever</exclude></excludes>-->
-                   <!-- All files are included by default:
+                    <!--<excludes><exclude>src/main/**/*.whatever</exclude></excludes>-->
+                    <!-- All files are included by default:
                     <includes>
                         <include>**</include>
                     </includes>-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <localCheckout>true</localCheckout>
+                    <pushChanges>false</pushChanges>
+                    <mavenExecutorId>forked-path</mavenExecutorId>
+                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-provider-gitexe</artifactId>
+                        <version>1.11.2</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-api</artifactId>
+                        <version>1.11.2</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
         </plugins>
@@ -236,9 +293,12 @@
                             <excludes>
                                 <exclude>CHANGES.txt</exclude>
                                 <exclude>.gitignore</exclude>
-                                <exclude>character-styles.json</exclude>
+                                <exclude>.editorconfig</exclude>
+                                <exclude>.travis.yml</exclude>
                                 <exclude>README.md</exclude>
                                 <exclude>DEPENDENCIES</exclude>
+                                <exclude>docs/**/*</exclude>
+                                <exclude>src/site/**/*</exclude>
                             </excludes>
                         </configuration>
                         <executions>
@@ -283,7 +343,7 @@
                                 </goals>
                                 <configuration>
                                     <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
-                                        https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
+                                    https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
                                     <keyname>${gpg.keyname}</keyname>
                                     <passphraseServerId>${gpg.keyname}</passphraseServerId>
                                 </configuration>

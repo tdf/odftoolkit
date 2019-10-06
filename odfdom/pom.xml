@@ -9,7 +9,7 @@
   "License"); you may not use this file except in compliance
   with the License.  You may obtain a copy of the License at
 
-    https://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing,
   software distributed under the License is distributed on an
@@ -250,7 +250,7 @@
                     -->
                     <source>${jdk.version}</source>
                     <doctitle>ODFDOM v${project.version}</doctitle>
-                    <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
+                    <bottom>${javadoc.bottom}</bottom>
                     <isOffline>false</isOffline>
                     <links>
                         <link>https://xerces.apache.org/xerces-j/apiDocs/</link>
@@ -283,7 +283,9 @@
                         </goals>
                         <configuration>
                             <doclint>none</doclint>
-                            <additionalOptions>${javadoc.opts}</additionalOptions>
+                            <additionalOptions>
+                                <additionalOption>${javadoc.opts}</additionalOption>
+                            </additionalOptions>
                         </configuration>
                     </execution>
                 </executions>
@@ -395,7 +397,7 @@
                     <isOffline>false</isOffline>
                     <splitindex>true</splitindex>
                     <windowtitle>ODFDOM API v${project.version} - https://odftoolkit.org/</windowtitle>
-                    <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
+                    <bottom>${javadoc.bottom}</bottom>
                     <taglets>
                         <taglet>
                             <tagletClass>org.odftoolkit.odfdom.taglet.OdfElementTaglet</tagletClass>
@@ -413,7 +415,9 @@
                         <version>${project.version}</version>
                     </tagletArtifact>
                     <doclint>none</doclint>
-                    <additionalOptions>${javadoc.opts}</additionalOptions>
+                    <additionalOptions>
+                        <additionalOption>${javadoc.opts}</additionalOption>
+                    </additionalOptions>
                     <docfilessubdirs>true</docfilessubdirs>
                 </configuration>
             </plugin>
@@ -455,7 +459,7 @@
     <licenses>
         <license>
             <name>Apache 2</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
     <organization>
@@ -669,7 +673,7 @@
                                 </goals>
                                 <configuration>
                                     <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
-                                        https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
+                                    https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
                                     <keyname>${gpg.keyname}</keyname>
                                     <passphraseServerId>${gpg.keyname}</passphraseServerId>
                                 </configuration>
