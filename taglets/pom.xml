@@ -24,11 +24,11 @@
     <parent>
         <groupId>org.odftoolkit</groupId>
         <artifactId>odftoolkit</artifactId>
-        <version>1.0.0-BETA1</version>
+        <version>1.0.0-BETA2-SNAPSHOT</version>
     </parent>
 
     <artifactId>taglets</artifactId>
-    <version>1.0.0-BETA1</version>
+    <version>1.0.0-BETA2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -134,7 +134,7 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit/tree/trunk/taglets</url>
-        <tag>odftoolkit-1.0.0-BETA1</tag>
+        <tag>HEAD</tag>
     </scm>
     <profiles>
         <!-- Profile for deploying to the Sonatype repository, which

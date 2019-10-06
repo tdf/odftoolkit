@@ -23,7 +23,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>1.0.0-BETA1</version>
+    <version>1.0.0-BETA2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -131,7 +131,7 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit.git</url>
-        <tag>odftoolkit-1.0.0-BETA1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <issueManagement>

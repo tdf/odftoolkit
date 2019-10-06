@@ -23,12 +23,12 @@
     <parent>
         <groupId>org.odftoolkit</groupId>
         <artifactId>odftoolkit</artifactId>
-        <version>1.0.0-BETA1</version>
+        <version>1.0.0-BETA2-SNAPSHOT</version>
     </parent>
 
     <!-- The Basics -->
     <artifactId>schema2template-pom</artifactId>
-    <version>1.0.0-BETA1</version>
+    <version>1.0.0-BETA2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -129,7 +129,7 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit/tree/trunk/generator</url>
-        <tag>odftoolkit-1.0.0-BETA1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <profiles>
