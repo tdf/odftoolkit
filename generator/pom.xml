@@ -124,7 +124,7 @@
     <licenses>
         <license>
             <name>Apache 2</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
     <organization>
@@ -135,7 +135,6 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit/tree/trunk/generator</url>
-        <tag>odftoolkit-0.9.0-SNAPSHOT</tag>
     </scm>
 
     <profiles>

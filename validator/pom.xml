@@ -313,7 +313,6 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit/tree/trunk/validator</url>
-        <tag>odftoolkit-0.9.0-SNAPSHOT</tag>
     </scm>
     <profiles>
         <!-- Profile for deploying to the Sonatype repository, which

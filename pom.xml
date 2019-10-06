@@ -86,7 +86,7 @@
             <dependency>
                 <groupId>org.apache.ant</groupId>
                 <artifactId>ant</artifactId>
-                <version>1.10.5</version>
+                <version>1.10.7</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -119,7 +119,6 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit.git</url>
-        <tag>odftoolkit-0.9.0-SNAPSHOT</tag>
     </scm>
     <issueManagement>
         <system>GitHub Issues</system>
@@ -218,7 +217,7 @@
                     <!-- All files are included by default: -->
                     <includes>
                         <include>**</include>
-                    </includes>&gt;
+                    </includes>
                 </configuration>
             </plugin>
             <plugin>
