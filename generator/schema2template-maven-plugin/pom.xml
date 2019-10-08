@@ -9,7 +9,7 @@
   "License"); you may not use this file except in compliance
   with the License.  You may obtain a copy of the License at
 
-    https://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing,
   software distributed under the License is distributed on an
@@ -24,14 +24,14 @@
     <parent>
         <groupId>org.odftoolkit</groupId>
         <artifactId>schema2template-pom</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0-BETA2-SNAPSHOT</version>
     </parent>
 
     <!-- The Basics -->
     <name>XML Schema to Template Mapping Tool: Maven2 Plugin</name>
     <artifactId>schema2template-maven-plugin</artifactId>
     <description>Maven Plugin for XML Schema to Template Mapping Tool</description>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-BETA2-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <dependencies>
         <dependency>
@@ -83,6 +83,7 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>
@@ -91,13 +92,12 @@
                         see https://bugs.openjdk.java.net/browse/JDK-8212233
                     -->
                     <source>${jdk.version}</source>
-                    <doctitle>Schema2template maven plugin</doctitle>
+                    <doctitle>${project.name} v${project.version}</doctitle>
+                    <bottom>${javadoc.bottom}</bottom>
+                    <isOffline>false</isOffline>
                     <splitindex>true</splitindex>
-                    <windowtitle>Schema2template Maven plugin v${project.version} - https://odftoolkit.org/</windowtitle>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <attach>true</attach>
-                    <doclint>none</doclint>
-                    <additionalOptions>${javadoc.opts}</additionalOptions>
+                    <windowtitle>${project.name} API v${project.version} - https://odftoolkit.org/</windowtitle>
+                    <docfilessubdirs>true</docfilessubdirs>
                 </configuration>
                 <executions>
                     <execution>
@@ -106,14 +106,69 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <additionalOptions>${javadoc.opts}</additionalOptions>
+                            <doclint>none</doclint>
+                            <additionalOptions>
+                                <additionalOption>${javadoc.opts}</additionalOption>
+                            </additionalOptions>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
     <profiles>
+        <!-- Profile for deploying to the Sonatype repository, which
+        requires GPG signatures
+        see
+        https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+        https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
+        https://issues.sonatype.org/browse/OSSRH-960
+        -->
+        <!-- GPG Signature on release -->
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>gpg.keyname</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>release-sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
+                                    https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
+                                    <keyname>${gpg.keyname}</keyname>
+                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>doclint-java8-disable</id>
             <activation>

@@ -9,7 +9,7 @@
   "License"); you may not use this file except in compliance
   with the License.  You may obtain a copy of the License at
 
-    https://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing,
   software distributed under the License is distributed on an
@@ -24,12 +24,12 @@
     <parent>
         <groupId>org.odftoolkit</groupId>
         <artifactId>odftoolkit</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0-BETA2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>odfdom-java</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-BETA2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -186,14 +186,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <!-- Workaround for http://jira.codehaus.org/browse/MGPG-9 -->
-                    <mavenExecutorId>forked-path</mavenExecutorId>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
                 <version>3.0.1</version>
@@ -250,7 +242,7 @@
                     -->
                     <source>${jdk.version}</source>
                     <doctitle>ODFDOM v${project.version}</doctitle>
-                    <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
+                    <bottom>${javadoc.bottom}</bottom>
                     <isOffline>false</isOffline>
                     <links>
                         <link>https://xerces.apache.org/xerces-j/apiDocs/</link>
@@ -283,14 +275,16 @@
                         </goals>
                         <configuration>
                             <doclint>none</doclint>
-                            <additionalOptions>${javadoc.opts}</additionalOptions>
+                            <additionalOptions>
+                                <additionalOption>${javadoc.opts}</additionalOption>
+                            </additionalOptions>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -395,7 +389,7 @@
                     <isOffline>false</isOffline>
                     <splitindex>true</splitindex>
                     <windowtitle>ODFDOM API v${project.version} - https://odftoolkit.org/</windowtitle>
-                    <bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. All rights reserved.</bottom>
+                    <bottom>${javadoc.bottom}</bottom>
                     <taglets>
                         <taglet>
                             <tagletClass>org.odftoolkit.odfdom.taglet.OdfElementTaglet</tagletClass>
@@ -413,7 +407,9 @@
                         <version>${project.version}</version>
                     </tagletArtifact>
                     <doclint>none</doclint>
-                    <additionalOptions>${javadoc.opts}</additionalOptions>
+                    <additionalOptions>
+                        <additionalOption>${javadoc.opts}</additionalOption>
+                    </additionalOptions>
                     <docfilessubdirs>true</docfilessubdirs>
                 </configuration>
             </plugin>
@@ -455,7 +451,7 @@
     <licenses>
         <license>
             <name>Apache 2</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
     <organization>
@@ -466,6 +462,7 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit/tree/trunk/odfdom</url>
+        <tag>HEAD</tag>
     </scm>
     <profiles>
         <profile>
@@ -646,39 +643,38 @@
         https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
         https://issues.sonatype.org/browse/OSSRH-960
         -->
+        <!-- GPG Signature on release -->
         <profile>
             <id>release-sign-artifacts</id>
             <activation>
                 <property>
-                    <name>performRelease</name>
-                    <value>true</value>
+                    <name>gpg.keyname</name>
                 </property>
             </activation>
             <build>
                 <plugins>
+                    <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
                         <executions>
                             <execution>
-                                <id>sign-artifacts</id>
+                                <id>release-sign-artifacts</id>
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <configuration>
+                                    <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
+                                    https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
+                                    <keyname>${gpg.keyname}</keyname>
+                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
                 </plugins>
             </build>
-            <!-- <distributionManagement>
-                <site>
-                    <id>odfdom</id>
-                    <name>ODFDOM Java Toolkit Project</name>
-                    <url>dav:https://odftoolkit.org/website/odfdom/${project.version}/odfdom</url>
-                </site>
-            </distributionManagement> -->
         </profile>
     </profiles>
 </project>
