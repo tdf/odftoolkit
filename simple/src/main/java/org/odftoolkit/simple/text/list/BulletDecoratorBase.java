@@ -37,14 +37,11 @@ import org.odftoolkit.simple.Document;
 import org.w3c.dom.Node;
 
 /**
- * BulletDecorator is an implementation of the ListDecorator interface,
- * decorates a given List as bullet list. User can extend this class and realize
- * their own list and list item style. For example, set a specifies list item
- * with red color.
+ * Abstract implementation of the ListDecorator interface,
  * <p>
- * A BulletDecorator can be reused in the same Document.
- *
- * @since 0.4
+ * @see BulletDecorator
+ * @see SquareDecorator
+ * @see DiscDecorator
  */
 public abstract class BulletDecoratorBase implements ListDecorator {
 
@@ -52,8 +49,9 @@ public abstract class BulletDecoratorBase implements ListDecorator {
 			"2.001cm", "2.399cm", "2.8cm", "3.2cm", "3.601cm" };
 	private static final String DEFAULT_TEXT_MIN_LABEL_WIDTH = "0.4cm";
 	private static final String DEFAULT_FONT_NAME = "Tahoma";
-	protected static final String DEFAULT_BULLET_CHAR = "\u25e6";
-//	private static String DEFAULT_NAME = "Simple_Default_Bullet_List";
+	protected static final String DEFAULT_BULLET_CHAR = "\u2022";
+	protected static final String DEFAULT_DISC_CHAR = "\u25e6";
+	protected static final String DEFAULT_SQUARE_CHAR = "\ue00a";
 
 	private OdfTextListStyle listStyle;
 	private OdfStyle paragraphStyle;
