@@ -44,11 +44,13 @@ public class PuzzlePieceTest {
 	private static final String OUTPUT_DUMP_ODF10 = "target" + File.separator + "odf10-msvtree.dump";
 	private static final String OUTPUT_DUMP_ODF11 = "target" + File.separator + "odf11-msvtree.dump";
 	private static final String OUTPUT_DUMP_ODF12 = "target" + File.separator + "odf12-msvtree.dump";
+    private static final String OUTPUT_DUMP_ODF13 = "target" + File.separator + "odf13-msvtree.dump";
 	private static final String OUTPUT_REF_ODF10 = TEST_REFERENCE_DIR + File.separator + "odf10-msvtree.ref";
 	private static final String OUTPUT_REF_ODF11 = TEST_REFERENCE_DIR + File.separator + "odf11-msvtree.ref";
 	private static final String OUTPUT_REF_ODF12 = TEST_REFERENCE_DIR + File.separator + "odf12-msvtree.ref";
-	private static final int ODF12_ELEMENT_DUPLICATES = 7;
-	private static final int ODF12_ATTRIBUTE_DUPLICATES = 134;
+    private static final String OUTPUT_REF_ODF13 = TEST_REFERENCE_DIR + File.separator + "odf13-msvtree.ref";
+	private static final int ODF13_ELEMENT_DUPLICATES = 7;
+	private static final int ODF13_ATTRIBUTE_DUPLICATES = 134;
 
 
 
@@ -82,6 +84,13 @@ public class PuzzlePieceTest {
 			out2.print(odf12Dump);
 			out2.close();
 
+			Expression odf13Root = OdfHelper.loadSchemaODF13();
+			String odf13Dump = MSVExpressionIterator.dumpMSVExpressionTree(odf13Root);
+			LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP_ODF13);
+			PrintWriter out3 = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF13));
+			out3.print(odf13Dump);
+			out3.close();
+
 			String odf10Ref = readFileAsString(OUTPUT_REF_ODF10);
 			if(!odf10Ref.equals(odf10Dump)){
 				String errorMsg = "There is a difference between the expected outcome of the parsed ODF 1.0 tree.\n"
@@ -102,6 +111,14 @@ public class PuzzlePieceTest {
 			if(!odf12Ref.equals(odf12Dump)){
 				String errorMsg = "There is a difference between the expected outcome of the parsed ODF 1.2 tree.\n"
 					+ "Please compare the output:\n\t'" + OUTPUT_DUMP_ODF12 + "'\nwith the reference\n\t'" + odf12RngFile;
+				LOG.severe(errorMsg);
+				Assert.fail(errorMsg);
+			}
+
+			String odf13Ref = readFileAsString(OUTPUT_REF_ODF13);
+			if(!odf13Ref.equals(odf13Dump)){
+				String errorMsg = "There is a difference between the expected outcome of the parsed ODF 1.3 tree.\n"
+					+ "Please compare the output:\n\t'" + OUTPUT_DUMP_ODF13 + "'\nwith the reference\n\t'" + odf13RngFile;
 				LOG.severe(errorMsg);
 				Assert.fail(errorMsg);
 			}
@@ -153,6 +170,13 @@ public class PuzzlePieceTest {
 			// There is a difference of one wildcard "*" representing anyElement/anyAttribute
 			checkFoundNumber(allElements_ODF12.withoutMultiples(), ODF12_ELEMENT_NUMBER + 1, "element");
 			checkFoundNumber(allAttributes_ODF12.withoutMultiples(), ODF12_ATTRIBUTE_NUMBER + 1, "attribute");
+
+            PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
+			PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
+			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13);
+			// There is a difference of one wildcard "*" representing anyElement/anyAttribute
+			checkFoundNumber(allElements_ODF13.withoutMultiples(), ODF13_ELEMENT_NUMBER + 1, "element");
+			checkFoundNumber(allAttributes_ODF13.withoutMultiples(), ODF13_ATTRIBUTE_NUMBER + 1, "attribute");
 		} catch (Exception ex) {
 			Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
 			Assert.fail(ex.toString());
@@ -170,23 +194,23 @@ public class PuzzlePieceTest {
 	@Ignore
 	public void testExtractPuzzlePiecesWithDuplicates() {
 		try {
-			PuzzlePieceSet allElements_ODF12 = new PuzzlePieceSet();
-			PuzzlePieceSet allAttributes_ODF12 = new PuzzlePieceSet();
-			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF12(), allElements_ODF12, allAttributes_ODF12);
+			PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
+			PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
+			PuzzlePiece.extractPuzzlePieces(OdfHelper.loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13);
 			// There is a difference of one wildcard "*" representing anyElement/anyAttribute
 
-			int foundElementDuplicates = allElements_ODF12.size() - (ODF12_ELEMENT_NUMBER + 1);
-			int foundAttributeDuplicates = allAttributes_ODF12.size() - (ODF12_ATTRIBUTE_NUMBER + 1);
+			int foundElementDuplicates = allElements_ODF13.size() - (ODF13_ELEMENT_NUMBER + 1);
+			int foundAttributeDuplicates = allAttributes_ODF13.size() - (ODF13_ATTRIBUTE_NUMBER + 1);
 
-			if(ODF12_ELEMENT_DUPLICATES != foundElementDuplicates){
+			if(ODF13_ELEMENT_DUPLICATES != foundElementDuplicates){
 				String errorMsg = "There is a difference between the expected outcome of duplicates for ODF 1.2 elements.\n"
-					+ "Expected: '" + ODF12_ELEMENT_DUPLICATES + "'\tfound:'" + foundElementDuplicates;
+					+ "Expected: '" + ODF13_ELEMENT_DUPLICATES + "'\tfound:'" + foundElementDuplicates;
 				LOG.severe(errorMsg);
 				Assert.fail(errorMsg);
 			}
-			if(ODF12_ATTRIBUTE_DUPLICATES != foundAttributeDuplicates){
-				String errorMsg = "There is a difference between the expected outcome of duplicates for ODF 1.2 elements.\n"
-					+ "Expected: '" + ODF12_ATTRIBUTE_DUPLICATES + "'\tfound:'" + foundAttributeDuplicates;
+			if(ODF13_ATTRIBUTE_DUPLICATES != foundAttributeDuplicates){
+				String errorMsg = "There is a difference between the expected outcome of duplicates for ODF 1.3 elements.\n"
+					+ "Expected: '" + ODF13_ATTRIBUTE_DUPLICATES + "'\tfound:'" + foundAttributeDuplicates;
 				LOG.severe(errorMsg);
 				Assert.fail(errorMsg);
 			}

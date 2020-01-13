@@ -47,8 +47,8 @@ public class OdfAttributeTaglet implements Taglet {
 
 	private static final Logger LOG = Logger.getLogger(OdfAttributeTaglet.class.getName());
 	private static final String NAME = "odf.attribute";
-	private static final String ODF_SPEC_PART1_PATH = "../../../../../../doc-files/OpenDocument-v1.2-part1.html";
-	private static final String ODF_SPEC_PART3_PATH = "../../../../../doc-files/OpenDocument-v1.2-part3.html";
+	private static final String ODF_SPEC_PART1_PATH = "../../../../../../doc-files/OpenDocument-v1.3-cs01-part1.html";
+	private static final String ODF_SPEC_PART3_PATH = "../../../../../doc-files/OpenDocument-v1.3-cs01-part3.html";
 	private static String mOdfSpecPart1Path = null;
 	private static String mOdfSpecPart3Path = null;
 	private static Set<String> mNS_IN_PART3 = new HashSet<String>();

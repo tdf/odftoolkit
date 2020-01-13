@@ -245,24 +245,14 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <localCheckout>true</localCheckout>
-                    <pushChanges>false</pushChanges>
-                    <mavenExecutorId>forked-path</mavenExecutorId>
-                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
                 <configuration>
                     <excludes>
                         <exclude>src/main/resources/**</exclude>
                         <exclude>src/test/resources/**</exclude>
-                        <exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-part1.html</exclude>
-                        <exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-part3.html</exclude>
+                        <exclude>src/main/javadoc/doc-files/OpenDocument-v1.3-cs01-part1.html</exclude>
+                        <exclude>src/main/javadoc/doc-files/OpenDocument-v1.3-cs01-part3.html</exclude>
                         <exclude>src/codegen/resources/dom/*.rng</exclude>
                         <exclude>src/codegen/resources/pkg/*.rng</exclude>
                     </excludes>
@@ -402,61 +392,6 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>wagon-maven-plugin</artifactId>
-                        <version>2.0.0</version>
-                        <executions>
-                            <execution>
-                                <id>download-odf-schema-v1.2</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>download-single</goal>
-                                </goals>
-                                <configuration>
-                                    <url>dav:http://docs.oasis-open.org/office/v1.2</url>
-                                    <fromFile>os/OpenDocument-v1.2-os-schema.rng</fromFile>
-                                    <toDir>${project.build.directory}/odf-schemas</toDir>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>download-odf-manifest-schema-v1.2</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>download-single</goal>
-                                </goals>
-                                <configuration>
-                                    <url>dav:http://docs.oasis-open.org/office/v1.2</url>
-                                    <fromFile>os/OpenDocument-v1.2-os-manifest-schema.rng</fromFile>
-                                    <toDir>${project.build.directory}/odf-schemas</toDir>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>download-odf-dsig-schema-v1.2</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>download-single</goal>
-                                </goals>
-                                <configuration>
-                                    <url>dav:http://docs.oasis-open.org/office/v1.2</url>
-                                    <fromFile>os/OpenDocument-v1.2-os-dsig-schema.rng</fromFile>
-                                    <toDir>${project.build.directory}/odf-schemas</toDir>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>download-odf-schema-v1.1</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>download-single</goal>
-                                </goals>
-                                <configuration>
-                                    <url>dav:http://docs.oasis-open.org/office/v1.1</url>
-                                    <fromFile>OS/OpenDocument-schema-v1.1.rng</fromFile>
-                                    <toDir>${project.build.directory}/odf-schemas</toDir>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
                         <groupId>${project.groupId}</groupId>
                         <artifactId>schema2template-maven-plugin</artifactId>
                         <version>${project.version}</version>
@@ -472,10 +407,12 @@
                                     <targetRoot>${basedir}/src/main/java/</targetRoot>
                                     <domResourceRoot>${basedir}/src/codegen/resources/dom/template</domResourceRoot>
                                     <pkgResourceRoot>${basedir}/src/codegen/resources/pkg/template</pkgResourceRoot>
+                                    <odf13SchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.3-cs01-schema.rng</odf13SchemaFile>
                                     <odf12SchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.2-os-schema.rng</odf12SchemaFile>
-                                    <odf11SchemaFile>${project.build.directory}/odf-schemas/OpenDocument-schema-v1.1.rng</odf11SchemaFile>
-                                    <signatureSchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.2-os-dsig-schema.rng</signatureSchemaFile>
-                                    <manifestSchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.2-os-manifest-schema.rng</manifestSchemaFile>
+                                    <signature13SchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.3-cs01-dsig-schema.rng</signature13SchemaFile>
+                                    <signature12SchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.2-os-dsig-schema.rng</signature12SchemaFile>
+                                    <manifest13SchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.3-cs01-manifest-schema.rng</manifest13SchemaFile>
+                                    <manifest12SchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.2-os-manifest-schema.rng</manifest12SchemaFile>
                                     <configFile>${basedir}/src/codegen/resources/config.xml</configFile>
                                 </configuration>
                             </execution>
