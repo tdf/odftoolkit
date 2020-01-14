@@ -175,13 +175,13 @@
             <id>olira</id>
             <name>Oliver</name>
             <email>opensource AT neomm.net</email>
-            <organization>Freelancer</organization>            
+            <organization>Freelancer</organization>
             <roles>
                 <role>architect</role>
                 <role>developer</role>
             </roles>
             <timezone>+1</timezone>
-        </developer>        
+        </developer>
     </developers>
 
     <mailingLists>
@@ -236,7 +236,7 @@
                 <version>2.8.2</version>
                 <executions>
                     <execution>
-                        <id>default-deploy</id>
+                        <id>maven-deploy</id>
                         <phase>deploy</phase>
                         <goals>
                             <goal>deploy</goal>
@@ -284,43 +284,82 @@
         <profile>
             <id>pedantic</id>
             <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.rat</groupId>
-                        <artifactId>apache-rat-plugin</artifactId>
-                        <configuration>
-                            <excludes>
-                                <exclude>CHANGES.txt</exclude>
-                                <exclude>.gitignore</exclude>
-                                <exclude>.editorconfig</exclude>
-                                <exclude>.travis.yml</exclude>
-                                <exclude>README.md</exclude>
-                                <exclude>DEPENDENCIES</exclude>
-                                <exclude>docs/**/*</exclude>
-                                <exclude>src/site/**/*</exclude>
-                            </excludes>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.rat</groupId>
+                            <artifactId>apache-rat-plugin</artifactId>
+                            <configuration>
+                                <excludes>
+                                    <!-- for all projects -->
+                                    <exclude>CHANGES.txt</exclude>
+                                    <exclude>.gitignore</exclude>
+                                    <exclude>.editorconfig</exclude>
+                                    <exclude>.travis.yml</exclude>
+                                    <exclude>README.md</exclude>
+                                    <exclude>DEPENDENCIES</exclude>
+                                    <exclude>docs/**/*</exclude>
+                                    <exclude>src/site/**/*</exclude>
+                                    <exclude>nb-configuration.xml</exclude>
+                                    <exclude>.factorypath</exclude>
+                                    <!-- schema2template -->
+                                    <exclude>src/test/resources/examples/odf/*.ref</exclude>
+                                    <exclude>src/main/resources/examples/odf/odfdom-python/OdfTextDocument.odt</exclude>
+                                    <exclude>src/main/resources/examples/odf/odf-schemas/*.rng</exclude>
+                                    <!-- odfdom -->
+                                    <exclude>src/main/resources/**</exclude>
+                                    <exclude>src/test/resources/**</exclude>
+                                    <exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-part1.html</exclude>
+                                    <exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-part3.html</exclude>
+                                    <exclude>src/codegen/resources/dom/*.rng</exclude>
+                                    <exclude>src/codegen/resources/pkg/*.rng</exclude>
+                                    <!-- xslt-runner-task -->
+                                    <exclude>nbproject/**</exclude>
+                                </excludes>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <phase>verify</phase>
+                                    <goals>
+                                        <goal>check</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
             </build>
         </profile>
 
-        <!-- GPG Signature on release -->
+        <!-- The purpose of the following profile is to make a release.
+            PRECONDITION:
+                1) You need to have a GPG Signature specified:
+                    Best in your <USR_HOME>/.m2/settings.xml
+                        <profile>
+                            <id>ossrh</id>
+                            <activation>
+                                <activeByDefault>true</activeByDefault>
+                            </activation>
+                            <properties>
+                                <gpg.keyname>YOUR_KEY_ID</gpg.keyname>
+                                <gpg.passphraseServerId>YOUR_KEY_PASSPHRASE</gpg.passphraseServerId>
+                            </properties>
+                        </profile>
+
+                    </profiles>
+                see
+
+            This profile is being triggered via command line by its id, for instance:
+                mvn install -Pprepare-release -Ppedantic
+
+            This plugin is doing the following
+                1) All relevant binary & documentation files are being copied via ANT into ${basedir}/target/release-tmp
+                2) Via the Maven Assembly Plugin three ZIPs are being created for sources, binaries and documentations.
+                3) All ZIPs are signed and copied into the directory:
+                    ${basedir}/target/release/
+        -->
         <profile>
-            <id>release-sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>gpg.keyname</name>
-                </property>
-            </activation>
+            <id>prepare-release</id>
             <build>
                 <plugins>
                     <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
@@ -330,16 +369,159 @@
                         <version>1.6</version>
                         <executions>
                             <execution>
-                                <id>release-sign-artifacts</id>
-                                <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
                                 <configuration>
                                     <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
                                         https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
                                     <keyname>${gpg.keyname}</keyname>
                                     <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <inherited>false</inherited>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <id>assembly-dir-creation</id>
+                                <phase>initialize</phase>
+                                <configuration>
+                                    <tasks>
+                                        <mkdir dir="${basedir}/target/release-tmp/${project.version}-bin" />
+                                        <mkdir dir="${basedir}/target/release-tmp/${project.version}-docs" />
+                                    </tasks>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <id>assembly-copy</id>
+                                <phase>post-integration-test</phase>
+                                <configuration>
+                                    <tasks>
+                                        <copy todir="${basedir}/target/release-tmp/${project.version}-bin" flatten="true">
+                                            <fileset dir="${basedir}">
+                                                <include name="*.txt" />
+                                                <include name="KEYS" />
+                                                <include name="odfdom/target/*.jar" />
+                                                <include name="simple/target/*.jar" />
+                                                <include name="validator/target/*.?ar" />
+                                                <include name="xslt-runner/target/*.jar" />
+                                                <include name="xslt-runner-task/target/*.jar" />
+                                                <exclude name="**/target/**-javadoc.jar" />
+                                                <exclude name="**/target/**-sources.jar" />
+                                                <exclude name="**/target/**-jar-with-dependencies.jar" />
+                                            </fileset>
+                                        </copy>
+                                        <copy todir="${basedir}/target/release-tmp/${project.version}-docs" flatten="true">
+                                            <fileset dir="${basedir}">
+                                                <include name="*.txt" />
+                                                <include name="KEYS" />
+                                                <include name="**/target/*-javadoc.jar" />
+                                                <include name="docs" />
+                                            </fileset>
+                                        </copy>
+                                    </tasks>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <id>assembly-sign-and-zip</id>
+                                <phase>install</phase>
+                                <configuration>
+                                    <tasks>
+                                        <checksum algorithm="SHA-512" fileext=".sha">
+                                            <fileset dir="${basedir}/target">
+                                                <include name="*.zip" />
+                                                <include name="*.tar.gz" />
+                                                <include name="*.tar.bz2" />
+                                            </fileset>
+                                        </checksum>
+                                        <checksum file="target/odftoolkit-${project.version}-src.zip" algorithm="SHA-512" property="checksum" />
+                                        <copy todir="${basedir}/target/release/${project.version}/sources">
+                                            <fileset dir="${basedir}/target">
+                                                <include name="*-src.*" />
+                                            </fileset>
+                                        </copy>
+                                        <checksum file="target/odftoolkit-${project.version}-bin.zip" algorithm="SHA-512" property="checksum" />
+                                        <copy todir="${basedir}/target/release/${project.version}/binaries">
+                                            <fileset dir="${basedir}/target">
+                                                <include name="*-bin.*" />
+                                            </fileset>
+                                        </copy>
+                                        <checksum file="target/odftoolkit-${project.version}-doc.zip" algorithm="SHA-512" property="checksum" />
+                                        <copy todir="${basedir}/target/release/${project.version}/docs">
+                                            <fileset dir="${basedir}/target">
+                                                <include name="*-doc.*" />
+                                            </fileset>
+                                        </copy>
+                                        <delete dir="${basedir}/target/archive-tmp" />
+                                        <delete dir="${basedir}/target/release-tmp" />
+                                        <echo>
+                                            The release has been prepared in:    ${basedir}/target/release/
+                                        </echo>
+                                    </tasks>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.ant</groupId>
+                                <artifactId>ant-nodeps</artifactId>
+                                <version>1.8.1</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <inherited>false</inherited>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <id>src</id>
+                                <phase>verify</phase>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>${basedir}/src/maven-release-assemble/src.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>doc</id>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <phase>package</phase>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>${basedir}/src/maven-release-assemble/doc.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>bin</id>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <phase>package</phase>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>${basedir}/src/maven-release-assemble/bin.xml</descriptor>
+                                    </descriptors>
                                 </configuration>
                             </execution>
                         </executions>

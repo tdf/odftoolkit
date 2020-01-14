@@ -160,14 +160,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <!-- Workaround for http://jira.codehaus.org/browse/MGPG-9 -->
-                    <mavenExecutorId>forked-path</mavenExecutorId>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
@@ -252,20 +244,6 @@
                     <pushChanges>false</pushChanges>
                     <mavenExecutorId>forked-path</mavenExecutorId>
                     <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.rat</groupId>
-                <artifactId>apache-rat-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>src/main/resources/**</exclude>
-                        <exclude>src/test/resources/**</exclude>
-                        <exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-part1.html</exclude>
-                        <exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-part3.html</exclude>
-                        <exclude>src/codegen/resources/dom/*.rng</exclude>
-                        <exclude>src/codegen/resources/pkg/*.rng</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
             <plugin>

@@ -145,17 +145,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.rat</groupId>
-                <artifactId>apache-rat-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>src/test/resources/examples/odf/*.ref</exclude>
-                        <exclude>src/main/resources/examples/odf/odfdom-python/OdfTextDocument.odt</exclude>
-                        <exclude>src/main/resources/examples/odf/odf-schemas/*.rng</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
     <reporting>
