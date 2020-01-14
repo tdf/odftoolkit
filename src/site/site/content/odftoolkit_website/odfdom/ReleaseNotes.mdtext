@@ -21,7 +21,7 @@ The [first release candidate of ODFDOM 0.9.0](https://mvnrepository.com/artifact
  - All modules of the ODF Toolkit have now unified version numbers
  - Last release bundling the Simple API, which includes too many copied source code, likely as it was meant as a stand-alone fork. The Simple API is by copying and obfuscating ODFDOM API incompatible with the upcoming Collaboration API and is being removed (see above).
  - Many fixes & enhancements
- 
+
 
 Release 0.8.7
 -------------
