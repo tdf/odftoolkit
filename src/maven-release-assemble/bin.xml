@@ -16,17 +16,31 @@
 -->
 
 <assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
     <id>bin</id>
     <formats>
         <format>zip</format>
     </formats>
     <fileSets>
         <fileSet>
-            <directory>${project.basedir}/target/release-tmp/${project.version}-bin/</directory>
-            <outputDirectory></outputDirectory>
+            <directory>${release.tmpdir.bin}</directory>
+            <outputDirectory>${basedir}/target</outputDirectory>
+            <includes>
+                <include>*.txt</include>
+                <include>KEYS</include>
+                <include>NOTICE</include>
+                <include>LICENSE</include>
+                <include>odfdom/target/*.jar</include>
+                <include>simple/target/*.jar</include>
+                <include>validator/target/*.war</include>
+                <include>validator/target/*.jar</include>
+                <include>xslt-runner/target/*.jar</include>
+                <include>xslt-runner-task/target/*.jar</include>
+            </includes>
             <excludes>
+                <exclude>**/target/**-javadoc.jar</exclude>
+                <exclude>**/target/**-sources.jar</exclude>
                 <exclude>**/DEPENDENCIES</exclude>
             </excludes>
         </fileSet>
