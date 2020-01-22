@@ -333,20 +333,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.rat</groupId>
-                <artifactId>apache-rat-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>src/main/resources/**</exclude>
-                        <exclude>src/test/resources/**</exclude>
-                        <exclude>src/main/javadoc/resources/OpenDocument-v1.2-part1.html</exclude>
-                        <exclude>src/main/javadoc/resources/OpenDocument-v1.2-part3.html</exclude>
-                        <exclude>src/codegen/resources/dom/*.rng</exclude>
-                        <exclude>src/codegen/resources/pkg/*.rng</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.22.2</version>
@@ -632,46 +618,6 @@
                             </systemPropertyVariables>
                             <skipTests>${skipTests}</skipTests>
                         </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <!-- Profile for deploying to the Sonatype repository, which
-        requires GPG signatures
-        see
-        https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
-        https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
-        https://issues.sonatype.org/browse/OSSRH-960
-        -->
-        <!-- GPG Signature on release -->
-        <profile>
-            <id>release-sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>gpg.keyname</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>release-sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                                <configuration>
-                                    <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
-                                    https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
-                                    <keyname>${gpg.keyname}</keyname>
-                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
-                                </configuration>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>

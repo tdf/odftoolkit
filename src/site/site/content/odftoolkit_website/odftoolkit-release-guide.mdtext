@@ -24,7 +24,7 @@ The release candidate jars are deployed to the Maven repository. Making release 
     Add your userID & password to your local [<HOME>/.m2/settings.xml](https://maven.apache.org/settings.html).
 
  2. Install GNU PG. Install in your OS. [See details in tutorial 'publish your artifacts to Maven'](https://dzone.com/articles/     publish-your-artifacts-to-maven-central)
-    
+
  3. Add your GNU and JIRA credentials to your local [<HOME>/.m2/settings.xml](https://maven.apache.org/settings.html).
     See [our example settings.xml](https://tdf.github.io/odftoolkit/docs/docs/settings.xml) and search & replace the placeholders starting with 'YOUR_'.
 

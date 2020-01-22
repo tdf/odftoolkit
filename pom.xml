@@ -39,9 +39,23 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <!-- ANT driven release bundle creation: 3 ZIPs for the complete Toolkit for binaries, documentation and sources -->
+        <release.dir>${basedir}/target/release</release.dir>
+        <release.dir.bin>${release.dir}/${project.version}/binaries</release.dir.bin>
+        <release.dir.doc>${release.dir}/${project.version}/docs</release.dir.doc>
+        <release.dir.src>${release.dir}/${project.version}/sources</release.dir.src>
+        <release.tmpdir>${basedir}/target/release-tmp</release.tmpdir>
+        <release.tmpdir.bin>${release.tmpdir}/${project.version}-bin</release.tmpdir.bin>
+        <release.tmpdir.doc>${release.tmpdir}/${project.version}-doc</release.tmpdir.doc>
+        <release.tmpdir.src>${release.tmpdir}/${project.version}-src</release.tmpdir.src>
+        <release.zip.bin>odftoolkit-${project.version}-bin.zip</release.zip.bin>
+        <release.zip.doc>odftoolkit-${project.version}-doc.zip</release.zip.doc>
+        <release.zip.src>odftoolkit-${project.version}-src.zip</release.zip.src>
     </properties>
 
-    <!-- defining version numbers across all subprojects -->
+
+    <!-- At root project level defining dependencies useable across all projects.
+    Making version management easy and consistent! -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -220,28 +234,32 @@
             <plugin>
                 <groupId>org.ec4j.maven</groupId>
                 <artifactId>editorconfig-maven-plugin</artifactId>
-                <version>0.0.10</version>
+                <version>0.0.11</version>
                 <executions>
                     <execution>
                         <id>check</id>
-                        <phase>verify</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>format</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <!-- +++++++++++ https://ec4j.github.io/editorconfig-maven-plugin/ +++++++++++-->
-                    <!-- Note that maven submodule directories and many non-source file patterns are excluded by default -->
-                    <!--     see https://github.com/ec4j/editorconfig-maven-plugin/blob/master/ec4j-lint-api/src/main/java/org/ec4j/maven/lint/api/Constants.java#L37 -->
-                    <!--      See https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties -->
-                    <!--      !!! 'mvn editorconfig:format' fixes format via command line!!! -->
-                    <!-- You can exclude further files from processing: -->
-                    <!--<excludes><exclude>src/main/**/*.whatever</exclude></excludes>-->
-                    <!-- All files are included by default:
+                    <!-- All files are included by default: -->
                     <includes>
                         <include>**</include>
-                    </includes>-->
+                    </includes>
+                    <excludes>
+                        <!-- +++++++++++ https://ec4j.github.io/editorconfig-maven-plugin/ +++++++++++-->
+                        <!-- Note that maven submodule directories and many non-source file patterns are excluded by default -->
+                        <!--     see https://github.com/ec4j/editorconfig-maven-plugin/blob/master/ec4j-lint-api/src/main/java/org/ec4j/maven/lint/api/Constants.java#L37 -->
+                        <!--      See https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties -->
+                        <!--      !!! 'mvn editorconfig:format' fixes format via command line!!! -->
+
+                        <!-- You can exclude further files from processing: -->
+                        <!--<exclude>src/main/**/*.whatever</exclude>-->
+                        <exclude>target</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -249,7 +267,7 @@
                 <version>2.8.2</version>
                 <executions>
                     <execution>
-                        <id>default-deploy</id>
+                        <id>maven-deploy</id>
                         <phase>deploy</phase>
                         <goals>
                             <goal>deploy</goal>
@@ -301,8 +319,10 @@
                     <plugin>
                         <groupId>org.apache.rat</groupId>
                         <artifactId>apache-rat-plugin</artifactId>
+                        <version>0.13</version>
                         <configuration>
                             <excludes>
+                                <!-- for all projects -->
                                 <exclude>CHANGES.txt</exclude>
                                 <exclude>.gitignore</exclude>
                                 <exclude>.editorconfig</exclude>
@@ -311,12 +331,28 @@
                                 <exclude>DEPENDENCIES</exclude>
                                 <exclude>docs/**/*</exclude>
                                 <exclude>src/site/**/*</exclude>
-                                <exclude>**/nb-configuration.xml</exclude>								
+                                <exclude>nb-configuration.xml</exclude>
+                                <exclude>.factorypath</exclude>
+                                <exclude>manifest.mf</exclude>
+                                <!-- schema2template -->
+                                <exclude>src/test/resources/examples/odf/*.ref</exclude>
+                                <exclude>src/main/resources/examples/odf/odfdom-python/OdfTextDocument.odt</exclude>
+                                <exclude>src/main/resources/examples/odf/odf-schemas/*.rng</exclude>
+                                <exclude>src/main/resources/examples/odf/graphml/*.graphml</exclude>
+                                <!-- odfdom -->
+                                <exclude>src/main/resources/**</exclude>
+                                <exclude>src/test/resources/**</exclude>
+                                <exclude>src/main/javadoc/resources/OpenDocument-v1.2-part1.html</exclude>
+                                <exclude>src/main/javadoc/resources/OpenDocument-v1.2-part3.html</exclude>
+                                <exclude>src/codegen/resources/dom/*.rng</exclude>
+                                <exclude>src/codegen/resources/pkg/*.rng</exclude>
+                                <!-- xslt-runner-task -->
+                                <exclude>nbproject/**</exclude>
                             </excludes>
                         </configuration>
                         <executions>
                             <execution>
-                                <phase>verify</phase>
+                                <phase>validate</phase>
                                 <goals>
                                     <goal>check</goal>
                                 </goals>
@@ -349,11 +385,11 @@
                         <artifactId>maven-gpg-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>release-sign-artifacts</id>
-                                <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <id>default-sign</id>
+                                <phase>verify</phase>
                                 <configuration>
                                     <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
                                     https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
@@ -362,6 +398,156 @@
                                 </configuration>
                             </execution>
                         </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- The purpose of the following profile is to make a SonaType Maven release.
+            PRECONDITION:
+                1) You need to have a GPG Signature specified:
+                    Best in your <USR_HOME>/.m2/settings.xml
+                        <profile>
+                            <id>ossrh</id>
+                            <activation>
+                                <activeByDefault>true</activeByDefault>
+                            </activation>
+                            <properties>
+                                <gpg.keyname>YOUR_KEY_ID</gpg.keyname>
+                                <gpg.passphraseServerId>YOUR_KEY_PASSPHRASE</gpg.passphraseServerId>
+                            </properties>
+                        </profile>
+
+                    </profiles>
+                see
+
+            This profile is being triggered via command line by its id, for instance:
+                mvn install -Pprepare-release -Ppedantic
+
+            This plugin is doing the following
+                1) All relevant binary & documentation files are being copied via ANT into ${release.tmpdir}
+                2) Via the Maven Assembly Plugin three ZIPs are being created for sources, binaries and documentations.
+                3) All ZIPs are signed and copied into the directory: ${release.dir}
+        -->
+        <profile>
+            <id>prepare-release</id>
+            <build>
+                <plugins>
+                    <!-- GitHub Release: 3 ZIPs (bin, doc, source) for release-->
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <inherited>false</inherited>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <id>prepare-github-release</id>
+                                <phase>install</phase>
+                                <configuration>
+                                    <target>
+                                        <!-- MAKE 3 DIRECTORIES -->
+                                        <mkdir dir="${release.dir.bin}" />
+                                        <mkdir dir="${release.dir.doc}" />
+                                        <mkdir dir="${release.dir.src}" />
+                                        <mkdir dir="${release.tmpdir.bin}" />
+                                        <mkdir dir="${release.tmpdir.doc}" />
+                                        <mkdir dir="${release.tmpdir.src}" />
+
+                                        <!-- COLLECT FILES OF BUNDLES -->
+                                        <!-- collect binary artefacts -->
+                                        <copy todir="${release.tmpdir.bin}" flatten="true">
+                                            <fileset dir="${basedir}">
+                                                <include name="*.txt" />
+                                                <include name="KEYS" />
+                                                <include name="NOTICE" />
+                                                <include name="LICENSE" />
+                                                <include name="odfdom/target/*.jar" />
+                                                <include name="simple/target/*.jar" />
+                                                <include name="validator/target/*.war" />
+                                                <include name="validator/target/*.jar" />
+                                                <include name="xslt-runner/target/*.jar" />
+                                                <include name="xslt-runner-task/target/*.jar" />
+                                                <exclude name="**/target/**-javadoc.jar" />
+                                                <exclude name="**/target/**-sources.jar" />
+                                            </fileset>
+                                        </copy>
+                                        <!-- collect documentation artefacts - without directory hierarchy -->
+                                        <copy todir="${release.tmpdir.doc}" flatten="true">
+                                            <fileset dir="${basedir}">
+                                                <include name="*.txt" />
+                                                <include name="KEYS" />
+                                                <include name="NOTICE" />
+                                                <include name="LICENSE" />
+                                                <include name="**/target/*-javadoc.jar" />
+                                            </fileset>
+                                        </copy>
+                                        <!-- collect documentation artefacts - keeping directory hierarchy -->
+                                        <copy todir="${release.tmpdir.doc}/site">
+                                            <fileset dir="${basedir}/docs" />
+                                        </copy>
+                                        <!-- collect source code -->
+                                        <copy todir="${release.tmpdir.src}">
+                                            <fileset dir="${basedir}">
+                                                <include name="**" />
+                                                <exclude name="**/target/**" />
+                                                <exclude name="**/.vscode/**" />
+                                                <exclude name="**/.project" />
+                                                <exclude name="**/.classpath" />
+                                                <exclude name="**/.nb-configuration.xml" />
+                                                <exclude name="**/.settings/**" />
+                                                <exclude name="**/.classes/**" />
+                                                <exclude name="**/.idea" />
+                                            </fileset>
+                                        </copy>
+
+                                        <!-- ZIP FILES to 3 BUNDLES -->
+                                        <zip basedir="${release.tmpdir.bin}" destfile="${basedir}/target/${release.zip.bin}"/>
+                                        <zip basedir="${release.tmpdir.doc}" destfile="${basedir}/target/${release.zip.doc}"/>
+                                        <zip basedir="${release.tmpdir.src}" destfile="${basedir}/target/${release.zip.src}"/>
+
+                                        <!-- SIGN 3 BUNDLES -->
+                                        <checksum algorithm="SHA-512" fileext=".sha">
+                                            <fileset dir="${basedir}/target">
+                                                <include name="*.zip" />
+                                                <include name="*.tar.gz" />
+                                                <include name="*.tar.bz2" />
+                                            </fileset>
+                                        </checksum>
+
+                                        <!-- MOVE THE 3 BUNDLES -->
+                                        <move todir="${release.dir.bin}">
+                                            <fileset dir="${basedir}/target">
+                                                <include name="*-bin.*" />
+                                            </fileset>
+                                        </move>
+                                        <move todir="${release.dir.doc}">
+                                            <fileset dir="${basedir}/target">
+                                                <include name="*-doc.*" />
+                                            </fileset>
+                                        </move>
+                                        <move todir="${release.dir.src}">
+                                            <fileset dir="${basedir}/target">
+                                                <include name="*-src.*" />
+                                            </fileset>
+                                        </move>
+
+                                        <!-- DELETE TEMPORARY DIRECTORIES>-->
+                                        <delete quiet="true" dir="${basedir}/target/archive-tmp" />
+                                        <delete quiet="true" dir="${release.tmpdir}" />
+
+                                        <echo>*** The release has been prepared in:  ${release.dir} ***</echo>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.ant</groupId>
+                                <artifactId>ant-nodeps</artifactId>
+                                <version>1.8.1</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
