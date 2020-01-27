@@ -26,7 +26,10 @@ For further information see the [Source Code Repository][1] page.
 
 ## Build setup
 ###Linux
+    # ODF Toolkit 0.9.0
     sudo apt-get install openjdk-8-jdk
+    # >= ODF Toolkit 1.0.0
+    sudo apt-get install openjdk-11-jdk
     sudo apt-get install maven
 
 Note: The previous instructions has been tested with an Ubuntu 16.04 installation.
