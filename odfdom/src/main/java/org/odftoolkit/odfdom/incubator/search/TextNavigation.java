@@ -38,7 +38,6 @@ import org.w3c.dom.NodeList;
  * it is used to search the document and find the matched text
  * and would return TextSelection instance
  *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.navigation.TextNavigation} in Simple API.
  */
 public class TextNavigation extends Navigation {
 

@@ -28,7 +28,6 @@ import org.odftoolkit.odfdom.dom.element.text.TextHElement;
 /**
  * Convenient functionalty for the parent ODF OpenDocument element
  *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.text.Paragraph} in Simple API.
  */
 public class OdfTextHeading extends TextHElement
 {

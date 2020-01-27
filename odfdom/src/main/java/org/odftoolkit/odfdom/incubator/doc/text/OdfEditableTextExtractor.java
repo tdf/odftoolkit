@@ -46,7 +46,6 @@ import org.w3c.dom.NodeList;
  *
  * <p>This function can be used by search engine, and text analytic operations. </p>
  *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.EditableTextExtractor} in Simple API.
  */
 public class OdfEditableTextExtractor extends OdfTextExtractor {
 

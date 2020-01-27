@@ -32,7 +32,6 @@ import org.xml.sax.SAXException;
 /**
  * This class represents an empty ODF graphics document.
  *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.GraphicsDocument} in Simple API.
  */
 public class OdfGraphicsDocument extends OdfDocument {
 
