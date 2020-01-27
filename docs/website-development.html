@@ -22,7 +22,7 @@
 
   <link href="./css/odf.css" rel="stylesheet" type="text/css">
   
-  <title>Website Development</title>
+  <title></title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <script type="text/javascript">
@@ -42,12 +42,7 @@
 
 <body>
 
-  <div id="banner">
-    <!--
-    <div id="bannerright"><a alt="Apache Incubator" href="http://incubator.apache.org">
-      <img id="asf-logo" alt="Apache Incubator" src="./images/apache-incubator-logo.png"/></a></div>
-    <div id="bannercenter"><br/>&nbsp;&nbsp;&nbsp;&nbsp;Apache ODF Toolkit (incubating)</div>
-    -->
+  <div id="banner">  
     <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
         <img id="tdf-logo" class="w350" alt="The Document Foundation"
           src="./images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
@@ -83,15 +78,15 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <li><a href="./get-involved.html">Get Involved</a></li>
 <li><a href="./mailing-lists.html">Mailing Lists</a></li>
 <li><a href="./people.html">People</a></li>
-<li><a href="./community-faqs.html">Community FAQs</a></li>
+<li><a href="./developer-faqs.html">FAQs</a></li>
 </ul>
 <h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
 <ul>
 <li><a href="./source.html">Source Code</a></li>
 <li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="./api/" target="_blank">JavaDoc</a></li>
-<li><a href="./website-local.html">Website</a></li>
-<li><a href="./developer-faqs.html">Developer FAQs</a></li>
+<li><a href="./javadoc.html">JavaDoc</a></li>
+<li><a href="./website-development.html">Website Development</a></li>
+<li><a href="./release-guide.html">Release Guide</a></li>
 </ul>
 <h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
 <ul>
@@ -100,7 +95,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
   </div>
   <div id="contenta">
     
-      <h1 class="title">Website Development</h1>
+      
       <style type="text/css">
 /* The following code is added by mdx_elementid.py
    It was originally lifted from http://subversion.apache.org/style/site.css */
@@ -112,9 +107,14 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
   visibility: hidden;
 }
 h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p>We use <a href="https://git-scm.com/">Git</a> for version control. You can <a href="https://github.com/tdf/odftoolkit">browse our
-repository</a> in your web browser.</p>
-<p>This page gives instructions on doing website development on your computer.</p>
+<h1 id="website-development">Website Development<a class="headerlink" href="#website-development" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>The pages on this website are written in <a href="https://www.apache.org/dev/cmsref.html#markdown">markdown syntax</a> and stored in our GIT repro at
+<a href="https://github.com/tdf/odftoolkit/tree/master/src/site">src/site</a></p>
+<p>We are bundling the previous used <a href="https://www.apache.org/dev/cmsref.html">Apache CMS</a> now as <a href="https://github.com/tdf/odftoolkit/tree/master/src/site/cms">local CMS</a> and capsulating its complexity via <a href="https://github.com/tdf/odftoolkit/tree/master/src/site">two bash scripts</a>.
+By this it is possible to edit, stage and publish website updates from the command line under Linux (see below)</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>This website development page is divided into:</p>
 <ul>
 <li><a href="#setup">Setup</a> - How to download the website and setup the tooling.</li>
 <li><a href="#directory-layout">Directory Layout</a> - Where to find the content, templates, and scripts.</li>
@@ -122,7 +122,9 @@ repository</a> in your web browser.</p>
 <li><a href="#submitting-your-results">Submitting Your Results</a> - How to contribute your edits.</li>
 </ul>
 <h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
-<h3 id="install-python-2-dependencies">Install Python 2 dependencies.<a class="headerlink" href="#install-python-2-dependencies" title="Permanent link">&para;</a></h3>
+<p><strong>NOTE:</strong>
+Some of us are using on their computer a VirtualBox with Linux (e.g. Ubuntu) just for this environment.</p>
+<h3 id="install-python-2-dependencies">Install Python 2 dependencies<a class="headerlink" href="#install-python-2-dependencies" title="Permanent link">&para;</a></h3>
 <h4 id="check-your-version-of-python">Check your version of Python<a class="headerlink" href="#check-your-version-of-python" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span>python --version
 </pre></div>
@@ -130,7 +132,7 @@ repository</a> in your web browser.</p>
 
 <p>Source code generation has been tested successfully with Python 2.7.16</p>
 <h4 id="install-dependencies">Install dependencies<a class="headerlink" href="#install-dependencies" title="Permanent link">&para;</a></h4>
-<p>NOTE: The Apache CMS <a href="http://www.apache.org/dev/cmsref.html#local-build">3</a> bundled within the site directory depends on old libraries.</p>
+<p>NOTE: The Apache CMS <a href="http://www.apache.org/dev/cmsref.html#local-build">5</a> bundled within the site directory depends on old libraries.</p>
 <div class="codehilite"><pre><span></span>sudo apt-get install -y python2.7-elementtree
 sudo apt install python-pip
 python -m pip install &quot;Markdown==2.6.11&quot;
@@ -145,21 +147,21 @@ cd odftoolkit/src/site
 
 
 <h2 id="directory-layout">Directory Layout<a class="headerlink" href="#directory-layout" title="Permanent link">&para;</a></h2>
-<h4 id="content-directory">Content directory<a class="headerlink" href="#content-directory" title="Permanent link">&para;</a></h4>
+<h3 id="content-directory">Content directory<a class="headerlink" href="#content-directory" title="Permanent link">&para;</a></h3>
 <p>The <code>src/site/site/content/odftoolkit</code> directory contains web content - markdown, html, javascript, css, images and other files. Files that do not fit recognized patterns from <code>site/lib/path.pm</code> are copied as is to the web site during the build.</p>
-<h4 id="templates-directory">Templates directory<a class="headerlink" href="#templates-directory" title="Permanent link">&para;</a></h4>
+<h3 id="templates-directory">Templates directory<a class="headerlink" href="#templates-directory" title="Permanent link">&para;</a></h3>
 <p>The <code>src/site/site/templates</code> directory contains the html skeletons used during the site build.</p>
 <ul>
 <li><code>skeleton.html</code> - our current html page template.</li>
 <li><code>sidenav.mdtext</code> - markdown of the side navigation panel.</li>
 </ul>
-<h4 id="lib-directory">Lib directory<a class="headerlink" href="#lib-directory" title="Permanent link">&para;</a></h4>
+<h3 id="lib-directory">Lib directory<a class="headerlink" href="#lib-directory" title="Permanent link">&para;</a></h3>
 <p>The <code>src/site/site/lib</code> directory contains two python modules that determine how content files are processed during the site build.</p>
 <ul>
 <li><code>path.pm</code> - maps file patterns like <code>.mdtext</code> into the view building routines. We can expand to cover other patterns.</li>
 <li><code>view.pm</code> - a set of python subroutines for converting content into web pages.</li>
 </ul>
-<h4 id="build-tools">Build tools<a class="headerlink" href="#build-tools" title="Permanent link">&para;</a></h4>
+<h3 id="build-tools">Build tools<a class="headerlink" href="#build-tools" title="Permanent link">&para;</a></h3>
 <p>You can find the CMS build tools in the <code>cms</code> directory.</p>
 <ul>
 <li><code>src/site/cms/build/</code> - perl scripts for building the site and markdown extensions.</li>
@@ -169,13 +171,13 @@ cd odftoolkit/src/site
 <h2 id="local-development">Local Development<a class="headerlink" href="#local-development" title="Permanent link">&para;</a></h2>
 <h3 id="edit-the-site">Edit the site<a class="headerlink" href="#edit-the-site" title="Permanent link">&para;</a></h3>
 <p>Using your favorite editors edit the site content, templates.</p>
-<h3 id="build-the-site">build the site<a class="headerlink" href="#build-the-site" title="Permanent link">&para;</a></h3>
+<h3 id="build-the-site">Build the site<a class="headerlink" href="#build-the-site" title="Permanent link">&para;</a></h3>
 <p>Run the <code>build-site.sh</code> script to build the markdown to HTML and copy all resources into the odftoolkit/docs directory.
-Afterthe changes have been merged to the master branch, all changes will become visible at https://tdf.github.io/odftoolkit/docs/</p>
-<h2 id="building-javadoc-and-publishing-the-javadoc">building JavaDoc and publishing the JavaDoc<a class="headerlink" href="#building-javadoc-and-publishing-the-javadoc" title="Permanent link">&para;</a></h2>
+Afterthe changes have been merged to the master branch, all changes will become visible at <a href="https://tdf.github.io/odftoolkit/docs/">https://tdf.github.io/odftoolkit/docs/</a></p>
+<h2 id="building-javadoc-and-publishing-the-javadoc">Building JavaDoc and publishing the JavaDoc<a class="headerlink" href="#building-javadoc-and-publishing-the-javadoc" title="Permanent link">&para;</a></h2>
 <p>JavaDoc is generated as part of the <code>mvn clean install</code> command called from the root of the project.
 Run the <code>copy-javadoc.sh</code> script to build copy the created API directories into the odftoolkit/docs/api directory and remove any prior files within.</p>
-<h2 id="submitting-your-results">Submitting your results.<a class="headerlink" href="#submitting-your-results" title="Permanent link">&para;</a></h2>
+<h2 id="submitting-your-results">Submitting your results<a class="headerlink" href="#submitting-your-results" title="Permanent link">&para;</a></h2>
 <h3 id="committer">Committer<a class="headerlink" href="#committer" title="Permanent link">&para;</a></h3>
 <p>Do the appropriate combination of git status, git add, and git commits.</p>
 <h3 id="contributor">Contributor<a class="headerlink" href="#contributor" title="Permanent link">&para;</a></h3>

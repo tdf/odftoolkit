@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE- 2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+  <link href="./css/odf.css" rel="stylesheet" type="text/css">
+  
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28945571-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+
+<body>
+
+  <div id="banner">  
+    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
+        <img id="tdf-logo" class="w350" alt="The Document Foundation"
+          src="./images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
+  </div>
+  <div id="clear"></div>
+  
+  <div id="sidenav">
+    <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="./index.html">About</a></li>
+<li><a href="./downloads.html">Downloads</a></li>
+</ul>
+<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="./odfdom/index.html">ODFDOM</a></li>
+<li><a href="./simple/index.html">Simple API (deprecated)</a></li>
+<li><a href="./conformance/ODFValidator.html">ODF Validator</a></li>
+<li><a href="./xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
+</ul>
+<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="./get-involved.html">Get Involved</a></li>
+<li><a href="./mailing-lists.html">Mailing Lists</a></li>
+<li><a href="./people.html">People</a></li>
+<li><a href="./developer-faqs.html">FAQs</a></li>
+</ul>
+<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="./source.html">Source Code</a></li>
+<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
+<li><a href="./javadoc.html">JavaDoc</a></li>
+<li><a href="./website-development.html">Website Development</a></li>
+<li><a href="./release-guide.html">Release Guide</a></li>
+</ul>
+<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
+</ul>
+  </div>
+  <div id="contenta">
+    
+      
+      <style type="text/css">
+/* The following code is added by mdx_elementid.py
+   It was originally lifted from http://subversion.apache.org/style/site.css */
+/*
+ * Hide class="elementid-permalink", except when an enclosing heading
+ * has the :hover property.
+ */
+.headerlink, .elementid-permalink {
+  visibility: hidden;
+}
+h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
+<h1 id="release-guide">Release Guide<a class="headerlink" href="#release-guide" title="Permanent link">&para;</a></h1>
+<p>We are doing two kind of releases at the same time:</p>
+<ol>
+<li>One <strong>Maven release</strong> with the artefacts of each project.</li>
+<li>One <strong>GitHub release</strong> bundling artefacts of the ODF Toolkit as ZIPs.</li>
+</ol>
+<h2 id="maven-release-guide">Maven Release Guide<a class="headerlink" href="#maven-release-guide" title="Permanent link">&para;</a></h2>
+<p>The release jars for each project are deployed to the Maven repository. Making release artefacts should follow the following steps:</p>
+<ol>
+<li>
+<p><strong>Maven Repro Access</strong></br>Make sure you got access to Maven repro via our <a href="https://issues.sonatype.org/browse/OSSRH-960">Sonatype JIRA issue</a>. Add your userID &amp; password to your local <a href="https://maven.apache.org/settings.html">&lt;USER_HOME&gt;/.m2/settings.xml</a>.</p>
+</li>
+<li>
+<p><strong>Install GNU PG</strong></br>Install in your OS. <a href="https://dzone.com/articles/      publish-your-artifacts-to-maven-central">See details in tutorial 'publish your artifacts to Maven'</a></p>
+</li>
+<li>
+<p><strong>Configure GNU PG</strong></br>Add your GNU and JIRA credentials to your local <a href="https://maven.apache.org/settings.html">&lt;USER_HOME&gt;/.m2/settings.xml</a>.
+   See <a href="docs/settings-example.xml">our example settings.xml</a> and search &amp; replace the placeholders starting with 'YOUR_'.</p>
+</li>
+<li>
+<p><strong>Clean start</strong></br>Make sure that your working copy is clean.
+   Preferrably check out a clean version from <a href="https://github.com/tdf/odftoolkit">GitHub</a>.</p>
+</li>
+<li>
+<p><strong>Prepare the release</strong></br>
+   This will start the interactive release preparation. You need to supply Maven with the versions of the release. "release version" should be the version of the intended release (recommended value should be fine). "SCM release tag or label" should include the RC version (e.g. odftoolkit-0.9.0-RC1). "new development version" should be the current SNAPSHOT version.</p>
+<div class="codehilite"><pre><span></span>mvn release:prepare
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>Perform the release</strong></br>
+   This will checkout the tag to the target directory, build and package everything and upload the artifacts to the staging repository.
+   Users will download the mirrored release artifacts from machines outside TDF control. Users need to verify that the copy downloaded is identical to the original. Mirrored copies of checksums, KEYS and signature files (.asc and .md5 files) will be present on the mirrors but must never be used for verification. So, all links from the podling website to signatures, sums and <a href="https://tdf.github.io/odftoolkit/docs/KEYS">KEYS</a> need to refer to the original documents on GitHub. See release signing guide for more information.</p>
+<div class="codehilite"><pre><span></span>mvn release:perform
+</pre></div>
+
+
+</li>
+<li>
+<p><strong>Publish Document</strong></br> Publish all of the prepared document on the website and update the download page.</p>
+</li>
+<li><strong>Send Announcements</strong></br> The release manager need to send announcements to odf-dev list. The sample looks like:<div class="codehilite"><pre><span></span>Subject:[ANNOUNCEMENT] &quot;ODF Toolkit 1.0.0&quot; &amp; &quot;ODF Toolkit 0.9.0 Release&quot;
+To: dev@odftoolkit.org
+Hi all,
+
+The ODF Toolkit team is pleased to announce the release of 1.0.0 (&gt;=JDK 9) and in addition a release of 0.9.0 (JDK 8). 
+The list of changes is available in the release notes[1].
+
+All new ODF Toolkit components (binary, source and JavaDoc bundles) are available as GitHub Releases [2].
+Or in the central Maven repository under Group ID &quot;org.apache.odftoolkit&quot; and Version &quot;1.0.0&quot; and &quot;0.9.0&quot; and are referenced by the README[3].
+
+[1] https://tdf.github.io/odftoolkit/docs/odfdom/ReleaseNotes.html
+[2] https://github.com/tdf/odftoolkit/releases
+[3] https://tdf.github.io/odftoolkit/#releases
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="github-release-guide">GitHub Release Guide<a class="headerlink" href="#github-release-guide" title="Permanent link">&para;</a></h2>
+<h3 id="the-six-release-artefacts"><strong>The Six Release Artefacts:</strong><a class="headerlink" href="#the-six-release-artefacts" title="Permanent link">&para;</a></h3>
+<p>The <strong>GitHub release</strong> has always <strong>six files</strong>:</p>
+<ul>
+<li><strong>Three ZIPs</strong> representing the ODF Toolkit:</li>
+<li>The sources (without the .git directory)</li>
+<li>The binaries (including all JARs and WARs of the projects)</li>
+<li>
+<p>The documentation (including all JavaDoc as JARs and the complete website)</p>
+</li>
+<li>
+<p><strong>Three SHA files</strong>, one for each ZIP to proof their correctness.</p>
+</li>
+</ul>
+<h3 id="creating-release-artefacts"><strong>Creating Release Artefacts:</strong><a class="headerlink" href="#creating-release-artefacts" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Call from the ODF TOOLKIT base via command line:</p>
+<div class="codehilite"><pre><span></span>mvn clean
+</pre></div>
+
+
+</li>
+<li>
+<p>Call from the ODF TOOLKIT base via command line one of the following:</p>
+<div class="codehilite"><pre><span></span>mvn install -Ppedantic
+
+mvn install -Ppedantic &gt; mylogFile.txt 2&gt;&amp;1
+</pre></div>
+
+
+</li>
+</ol>
+<p><strong>NOTE</strong>: The option pedantic checks if all files have either a valid license header or an explicit exception.
+   Often helpful for reviewing the build output is redirecting it into an own logfile. </br></p>
+<h3 id="bundling-release-artefacts"><strong>Bundling Release Artefacts:</strong><a class="headerlink" href="#bundling-release-artefacts" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Test the JARs if they are working and if the documentation is correct, esp. JavaDoc references to ODF elements, attributes and units have been created correctly by our JavaDoc taglet project.</p>
+</li>
+<li>
+<p>If all project artefacts have been created without an error, they can be bundled into ZIPs and signed via:</p>
+<div class="codehilite"><pre><span></span> mvn antrun:run@prepare-github-release -Pprepare-release
+</pre></div>
+
+
+</li>
+</ol>
+<p>The output will be created in the directory: 'ODF_TOOLKIT_BASE&amp;/target/release/'.</p>
+<p><strong>NOTE:</strong> Don't forget to  check if the ZIPs of the result directory have the correct content.</p>
+<h2 id="upload-of-the-6-release-artefacts">Upload of the 6 Release Artefacts<a class="headerlink" href="#upload-of-the-6-release-artefacts" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Browse to <a href="https://github.com/tdf/odftoolkit/releases">our GitHub release page</a>.</li>
+<li>Press the "Draft a new release" button (or ask for access rights on the mailing list if not visible).</li>
+<li>Upload all 6 files from the release and name it like "'odftoolkit-' + version", for instance: odftoolkit-8.0.0-RC2</li>
+</ol>
+<h3 id="references"><strong>References</strong><a class="headerlink" href="#references" title="Permanent link">&para;</a></h3>
+<ol>
+<li><a href="https://dzone.com/articles/publish-your-artifacts-to-maven-central">How to Publish Your Artifacts to Maven Central</a></li>
+</ol>
+    </div>
+    
+    <div id="footera">
+      <div id="copyrighta">
+        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
+            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
+            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
+            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
+            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
+          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
+          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
+            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
+          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
+          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
+            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
+          LibreOffice was based on OpenOffice.org.</p>
+      </div>
+    </div>   
+  </div>
+</body>
+</html>
