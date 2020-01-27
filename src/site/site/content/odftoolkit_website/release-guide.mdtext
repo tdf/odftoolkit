@@ -14,7 +14,7 @@ The release jars for each project are deployed to the Maven repository. Making r
 2. **Install GNU PG**</br>Install in your OS. [See details in tutorial 'publish your artifacts to Maven'](https://dzone.com/articles/      publish-your-artifacts-to-maven-central)
 
 3. **Configure GNU PG**</br>Add your GNU and JIRA credentials to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html).
-   See [our example settings.xml](docs/settings.xml) and search & replace the placeholders starting with 'YOUR_'.
+   See [our example settings.xml](docs/settings-example.xml) and search & replace the placeholders starting with 'YOUR_'.
 
 4. **Clean start**</br>Make sure that your working copy is clean.
    Preferrably check out a clean version from [GitHub](https://github.com/tdf/odftoolkit).
