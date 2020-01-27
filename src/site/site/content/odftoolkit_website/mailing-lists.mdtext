@@ -1,64 +1,46 @@
-Title: Mailing List
-Notice:    Licensed to the Apache Software Foundation (ASF) under one
-           or more contributor license agreements.  See the NOTICE file
-           distributed with this work for additional information
-           regarding copyright ownership.  The ASF licenses this file
-           to you under the Apache License, Version 2.0 (the
-           "License"); you may not use this file except in compliance
-           with the License.  You may obtain a copy of the License at
-           .
-             http://www.apache.org/licenses/LICENSE-2.0
-           .
-           Unless required by applicable law or agreed to in writing,
-           software distributed under the License is distributed on an
-           "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-           KIND, either express or implied.  See the License for the
-           specific language governing permissions and limitations
-           under the License.
+# Mailing List
 
 ## ODF Toolkit Mailing List
 
 We welcome you to join our mailing lists and let us know about your thoughts or
-ideas about Apache ODF Toolkit
+ideas about the ODF Toolkit
 
- - [Development Mailing List](#development-mailing-list).
- - [Participation Guidelines](#participation-guidelines).
-
+- [Development Mailing List](#development-mailing-list).
+- [Participation Guidelines](#participation-guidelines).
 
 ## Development and User Mailing List
 
 This is where the community hangs out. This list is used to coordinate
 activities and ensure we are all pulling in the same direction.
 
-  - Subscribe: [dev+subscribe@odftoolkit.org][0]
-  - Post (after subscription): [dev@odftoolkit.org][1]
-  - Unsubscribe: [dev+unsubscribe@odftoolkit.org][2]
-  - Archives - [https://listarchives.odftoolkit.org/dev/][3]
-
+- Subscribe: [dev+subscribe@odftoolkit.org][0]
+- Post (after subscription): [dev@odftoolkit.org][1]
+- Unsubscribe: [dev+unsubscribe@odftoolkit.org][2]
+- Archives - [https://listarchives.odftoolkit.org/dev/][3]
 
 ## Participation Guidelines
+
 We ask all mailing list participants to observe [these guidelines][4].
 
 Specifically note the request "Use sensible and concise email subject headings".
 
 Some subject tags to consider include:
 
- - [www] for posts related to the website
- - [Repo] for posts related to the source code repository
+- [www] for posts related to the website
+- [Repo] for posts related to the source code repository
 
 Other useful topic tags can be found by observing traffic on the list or by looking at the list archives.
 
 In addition to the topic subject tags, there are also tags used to indicate a request:
 
- - [DISCUSS] indicates a rough idea is being floated, and input is welcome
- - [PROPOSAL] indicates a specific proposal is being made, and often that Lazy Consensus is being sought.
- - [VOTE] indicates that a formal vote is being called.  This is rare.
+- [DISCUSS] indicates a rough idea is being floated, and input is welcome
+- [PROPOSAL] indicates a specific proposal is being made, and often that Lazy Consensus is being sought.
+- [VOTE] indicates that a formal vote is being called.  This is rare.
 
 Note: it is common for a topic tag and an action tag to be combined, e.g.:
 
- - [PROPOSAL][Repo] Migration of legacy repository to GIT
- - [DISCUSS][download] What are our options of mirroring legacy releases?
-
+- [PROPOSAL][Repo] Migration of legacy repository to GIT
+- [DISCUSS][download] What are our options of mirroring legacy releases?
 
   [0]:  mailto:dev+subscribe@odftoolkit.org
   [1]:  mailto:dev@odftoolkit.org

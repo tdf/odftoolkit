@@ -15,17 +15,16 @@
   - [Get Involved](/odftoolkit_website/get-involved.html)
   - [Mailing Lists](/odftoolkit_website/mailing-lists.html)
   - [People](/odftoolkit_website/people.html)
-  - [Community FAQs](/odftoolkit_website/community-faqs.html)
+  - [FAQs](/odftoolkit_website/developer-faqs.html)
 
 # Development
 
   - [Source Code](/odftoolkit_website/source.html)
   - [Bug Tracker](https://github.com/tdf/odftoolkit/issues)
-  - <a href="/odftoolkit_website/api/" target="_blank">JavaDoc</a>
-  - [Website](/odftoolkit_website/website-local.html)
-  - [Developer FAQs](/odftoolkit_website/developer-faqs.html)
+  - [JavaDoc](/odftoolkit_website/javadoc.html)
+  - [Website Development](/odftoolkit_website/website-development.html)
+  - [Release Guide](/odftoolkit_website/release-guide.html)
 
 
 # TDF
-
   - [The Document Foundation](https://www.documentfoundation.org/)
