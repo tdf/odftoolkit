@@ -48,7 +48,6 @@ import org.w3c.dom.NodeList;
 /**
  * Convenient functionality for the parent ODF OpenDocument element
  *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.draw.Image} in Simple API.
  */
 public class OdfDrawImage extends DrawImageElement {
 
