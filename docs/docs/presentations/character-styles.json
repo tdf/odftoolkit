@@ -105,7 +105,7 @@
 {"name":"addParagraph","start":[25],"attrs":{"styleId":"Heading_20_2","paragraph":{"outlineLevel":1}}},
 {"name":"addText","start":[25,1],"text":"Special Characters"},
 {"name":"addParagraph","start":[26],"attrs":{"styleId":"Normal"}},
-{"name":"addText","start":[26,1],"text":"\u201Csome site\u201D"},
-{"name":"addText","start":[26,12],"text":": http:\/\/www.heise.de"},
-{"name":"format","start":[26,1],"end":[26,11],"attrs":{"styleId":"Internet_20_link","character":{"url":"http:\/\/www.heise.de\/"}}}
+{"name":"addText","start":[26,1],"text":"\u201csome site\u201d"},
+{"name":"addText","start":[26,12],"text":": http://www.heise.de"},
+{"name":"format","start":[26,1],"end":[26,11],"attrs":{"styleId":"Internet_20_link","character":{"url":"http://www.heise.de/"}}}
 ]}

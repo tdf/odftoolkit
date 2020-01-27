@@ -1,20 +1,4 @@
-Title:     Voting
-Notice:    Licensed to the Apache Software Foundation (ASF) under one
-           or more contributor license agreements.  See the NOTICE file
-           distributed with this work for additional information
-           regarding copyright ownership.  The ASF licenses this file
-           to you under the Apache License, Version 2.0 (the
-           "License"); you may not use this file except in compliance
-           with the License.  You may obtain a copy of the License at
-           .
-             http://www.apache.org/licenses/LICENSE-2.0
-           .
-           Unless required by applicable law or agreed to in writing,
-           software distributed under the License is distributed on an
-           "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-           KIND, either express or implied.  See the License for the
-           specific language governing permissions and limitations
-           under the License.
+# Voting
 
 Occasionally a "feel" for consensus is not enough. Sometimes we need to have a
 measurable consensus. For example, when voting in new committers or to approve a
@@ -49,7 +33,7 @@ The notation used in voting is:
    Yes, you must support your objection and provide an alternative course of action
    that you are willing and able to implement (where appropriate).
 
-#### Example for a vote mail:
+#### Example for a vote mail
 
     Address: private@
     Subject: [VOTE] John Doe should become a regular committer
@@ -65,15 +49,14 @@ The notation used in voting is:
 
     Voting time frame is finished 72 hours from now until June 30, 12:00 PM UTC.
 
-#### Example for a reply mail:
+#### Example for a reply mail
 
     Text:
     +1
 
     I like his work and want him to stay and to go on with his good improvements.
 
-
-#### Example for a result mail:
+#### Example for a result mail
 
     Subject: [VOTE][RESULTS] John Doe should become a regular committer
 
@@ -103,10 +86,12 @@ The notation used in voting is:
     +1 Simon
     +1 Greg
 
-[See here for more information][2] <br>
-[See here for more mail templates][3]
+[See for more information on consenus building][1] [derived from its original Apache process][2]
+[See for more information on new committers from its original Apache process][3]
+[See for more information on voting][4] [derived from its original Apache process][5]
 
-
-  [1]: http://incubator.apache.org/odftoolkit/docs/governance/consensusBuilding.html
-  [2]: http://incubator.apache.org/rave/docs/governance/voting.html
+  [1]: /odftoolkit_website/docs/governance/consensusBuilding.html
+  [2]: https://community.apache.org/committers/consensusBuilding.html
   [3]: http://community.apache.org/newcommitter.html
+  [4]: /odftoolkit_website/docs/governance/voting.html
+  [5]: https://community.apache.org/committers/voting.html

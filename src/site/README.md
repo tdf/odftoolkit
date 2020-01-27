@@ -4,4 +4,4 @@ ODFTOOLKIT Website:
 * https://tdf.github.io/odftoolkit/docs/
 * https://odftoolkit.org
 
-For build information see: https://tdf.github.io/odftoolkit/docs/website-local.html
+For build information see: https://tdf.github.io/odftoolkit/docs/website-development.html

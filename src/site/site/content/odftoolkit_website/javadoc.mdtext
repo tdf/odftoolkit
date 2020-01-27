@@ -1,0 +1,7 @@
+# Java API Documentation
+
+Some Java projects of the ODF TOOLKIT offer a JavaDoc API:
+
+* [ODFDOM API](api/odfdom/index.html)
+* [Generator - based on ODF Grammar data](api/schema2template/index.html)
+* [Simple API (deprecated)](api/simple/index.html)

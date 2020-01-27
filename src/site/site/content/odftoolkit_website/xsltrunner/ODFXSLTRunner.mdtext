@@ -1,6 +1,6 @@
-Title: ODF XSLT Runner
+# ODF XSLT Runner
 
-##Simplify the application of XSLT stylesheets to ODF documents
+## Simplify the application of XSLT stylesheets to ODF documents
 
 **ODF XSLT Runner** is a small Java application that allows you to apply
 XSLT stylesheets to XML streams included in ODF packages without extracting
@@ -23,8 +23,6 @@ Please see Requirements for details.
 
 **ODF XSLT Runner** is called by one of the below command lines:
 
-
-
     java -jar odfxsltrunner.jar <style sheet> [-v] [-f <factory>] [-p <path in package>]
       [-l log file] <input package> [<output package> [name=value ...]
 
@@ -40,9 +38,9 @@ Please see Requirements for details.
      java -jar odfxsltrunner.jar <style sheet> [-v] [-f <factory>] [-p <path in package&gt;]
       [-l log file] -i <input file> <output package> [name=value ...]
 
-The default is to apply the XSLT stylesheet **<style-sheet>** to the stream
+The default is to apply the XSLT stylesheet **&lt;style-sheet&gt;** to the stream
 **content.xml** of the ODF file **&lt;input package&gt;**.
-If no **<output package>** parameter is specified, then the result of the transformation will be printed to the standard output. If an **&lt;output package&gt;** is specified, the **&lt;input package&gt;** is copied to the **&lt;output package&gt;**, and the steam **content.xml** of the **&lt;output package&gt;** is replaced with the result of the transformation.
+If no **&lt;output package&gt;** parameter is specified, then the result of the transformation will be printed to the standard output. If an **&lt;output package&gt;** is specified, the **&lt;input package&gt;** is copied to the **&lt;output package&gt;**, and the steam **content.xml** of the **&lt;output package&gt;** is replaced with the result of the transformation.
 
 The **-p** option allows to specify another stream in the package as source of the transformation than **content.xml**.
 
@@ -56,14 +54,16 @@ The **-r** option allows to modify the **content.xml** stream (or the stream spe
 
 The **-v** option enables a verbose mode.
 
-The **-f** option specifies the ''javax.xml.transform.TransformerFactory'' to use. **Note:** When calling ''java'' with the ''-jar'' option, the user class path is ignored. If a transformer factory is used which is not contained in the JRE, like Saxon, **odfxsltrunner** has to be called without the ''-jar'' option:
+The **-f** option specifies the ''javax.xml.transform.TransformerFactory'' to use.
+
+**Note:** When calling ''java'' with the ''-jar'' option, the user class path is ignored. If a transformer factory is used which is not contained in the JRE, like Saxon, **odfxsltrunner** has to be called without the ''-jar'' option:
 
      java -cp odfxsltrunner.jar:&lt;factory jar&gt; org.odftoolkit.odfxsltrunner.Main ...
 
 The **-l** option can be used to redirect diagnostic messages into a log file.
 By default they are printed on standard error.
 
-XSLT [Parameters] [4] can be passed to the transformation by specifying them as name=value pairs. They must appear behind all other command line parameters.
+XSLT [Parameters][4] can be passed to the transformation by specifying them as name=value pairs. They must appear behind all other command line parameters.
 
 ## URI resolution/document() function
 
@@ -87,12 +87,11 @@ relative to a file within an ODF package.
 
      <xsl:apply-templates select="document('styles.xml',.)//office:styles/style:style"/>
 
-
 ## Requirements
 
-**ODF XSLT Runner** requires [J2RE 5] [6], or a later version of Java.
+**ODF XSLT Runner** requires [Java RE 5][6], or a later version of Java.
 
-It further requires ODFDOM. The NetBeans project is pre-configured to build
+It further requires ODFDOM. This former NetBeans project is pre-configured to build
 ODFDOM while building **ODF XSLT Runner**. This requires that the ODFDOM
 sources are located in a folder **odfdom** next to the folder of the
 **ODF XSLT Runner** project.
@@ -113,12 +112,11 @@ adapted after checking out the project.
 
 Example stylesheets can be found on the [ODFXSLTRunner Examples][8] page.
 
-
-  [1]: http://incubator.apache.org/odftoolkit/xsltrunner/ODFXSLTRunnerTask.html
+  [1]: ODFXSLTRunnerTask.html
   [2]: http://code.google.com/a/apache-extras.org/p/odftoolkit-extra/downloads/list
   [3]: ../downloads.html
   [4]: http://www.w3.org/TR/1999/REC-xslt-19991116#top-level-variables
   [5]: http://www.w3.org/TR/1999/REC-xslt-19991116#document
-  [6]: http://java.sun.com/javase/downloads/index.jsp
+  [6]: https://openjdk.java.net/install/
   [7]: http://xml.apache.org/dist/xerces-j/
-  [8]: http://incubator.apache.org/odftoolkit/xsltrunner/ODFXSLTRunnerExamples.html
+  [8]: ODFXSLTRunnerExamples.html

@@ -1,82 +1,47 @@
-Title:  Downloads
-Notice:    Licensed to the Apache Software Foundation (ASF) under one
-           or more contributor license agreements.  See the NOTICE file
-           distributed with this work for additional information
-           regarding copyright ownership.  The ASF licenses this file
-           to you under the Apache License, Version 2.0 (the
-           "License"); you may not use this file except in compliance
-           with the License.  You may obtain a copy of the License at
-           .
-             http://www.apache.org/licenses/LICENSE-2.0
-           .
-           Unless required by applicable law or agreed to in writing,
-           software distributed under the License is distributed on an
-           "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-           KIND, either express or implied.  See the License for the
-           specific language governing permissions and limitations
-           under the License.
+# Downloads
 
-**Current Version**
+## Current Version
 
-The ODF Toolkit team is pleased to announce the double release of 0.9.0 and 1.0.0 on January 27th, 2020.
+The current version is the 1.0.0 release. The future development is based on 1.0.0.</br>
+The releases of 0.9.0 and 1.0.0 were both on the January 27th, 2020.
 
-* The release 0.9.0 is using JDK 8 with ODF 1.2 and for the final time including the Simple API - a fork once made by IBM but no longer maintained, containg too much copy/pasted functionality.
-* The release 1.0.0 is using >=JDK 9 with ODF 1.2, [providing a new collaboration feature]() and adding more than half a dozen years of development by merging the ODFDOM fork of [Open-XChange's browser office OX Documents](https://www.open-xchange.com/portfolio/ox-documents/).
+## Latest Releases
 
-The current version is the 1.0.0 release. The future development is based on 1.0.0.
+1. The release 1.0.0 is using >=JDK 9 implementing [ODF 1.2](http://docs.oasis-open.org/office/v1.2/os/).</br>
+It is [providing the new collaboration feature]() and adding more than half a dozen years of development by merging the ODFDOM fork of [Open-XChange's browser office OX Documents](https://www.open-xchange.com/portfolio/ox-documents/).
+2. The release 0.9.0 is using JDK 8 implementing [ODF 1.2](http://docs.oasis-open.org/office/v1.2/os/).</br>
+It is for the final time including the Simple API - a fork once made by IBM but no longer maintained, containing too much copy/pasted functionality. Its purpose was to be the first release of the TDF being close to the latest Apache sources as possible.
 
+For more details see the [release notes](https://tdf.github.io/odftoolkit/docs/odfdom/ReleaseNotes.html).</br>
 A full list of changes is available in the [change log](https://raw.githubusercontent.com/tdf/odftoolkit/master/CHANGES.txt). People interested should also follow the [mail list](mailing-lists.html) to track progress.
 
-## Release 
+## Latest Project Releases for Maven
 
-1. We have a release for 1.0.0 using >=JDK 9 and providing the new collaboration feature:
+### Project Releases for Maven on ODF 1.2
 
-    *MAVEN RELEASE (1.0.0)*:   
-    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/1.0.0/)
-    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/1.0.0/)
-    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/1.0.0/)
+* ODFDOM: [1.0.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/1.0.0/) or [0.9.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.9.0/)
+* ODF Validator: [1.0.0](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/1.0.0/) or [0.9.0](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.9.0/)
+* XSLT Runner: [1.0.0](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/1.0.0/) or [0.9.0](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.9.0/)
+* Simple API (deprecated): [0.9.0](https://repo1.maven.org/maven2/org/odftoolkit/simple-odf/0.9.0/)
 
-2. We have a release 0.9.0 using JDK 8 and for the final time including the Simple API:
+## Latest ODF Toolkit Release Bundles
 
-    *MAVEN RELEASE (0.9.0)*:   
-    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.9.0/)
-    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.9.0/)
-    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.9.0/)
-    * [Simple API (deprecated)](https://repo1.maven.org/maven2/org/odftoolkit/simple-odf/0.9.0/)
+### ODF Toolkit 1.0.0 Release Bundle
 
-For more details see the [release notes](https://tdf.github.io/odftoolkit/docs/odfdom/ReleaseNotes.html).
+* Sources: [odftoolkit-1.0.0-src.zip](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-1.0.0/odftoolkit-1.0.0-src.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-1.0.0/odftoolkit-1.0.0-src.zip.sha)]
+* Binaries: [odftoolkit-1.0.0-bin.zip](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-1.0.0/odftoolkit-1.0.0-bin.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-1.0.0/odftoolkit-0.9-0-bin.zip.sha)]
+* Documentation: [odftoolkit-1.0.0-doc.zip](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-1.0.0/odftoolkit-1.0.0-doc.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-1.0.0/odftoolkit-1.0.0-doc.zip.sha)]
 
-Below as well a list of the 1.0.0 bundles:
- * Source:
- * [odftoolkit-1.0.0-src.zip ](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-1.0.0/odftoolkit-1.0.0-src.zip ) 
-   [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-1.0.0/odftoolkit-1.0.0-src.zip.sha)] 
-	
- * Binaries:
- * [odftoolkit-1.0.0-bin.zip ](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-1.0.0/odftoolkit-1.0.0-bin.zip ) 
-	[[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-1.0.0/odftoolkit-0.9-0-bin.zip.sha)]
-    
- * Documentation:
- * [odftoolkit-1.0.0-doc.zip ](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-1.0.0/odftoolkit-1.0.0-doc.zip ) 
-   [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-1.0.0/odftoolkit-1.0.0-doc.zip.sha)]
+### ODF Toolkit 0.9.0 Release Bundle
 
-Below as well a list of the 0.9.0 bundles:
- * Source:
- * [odftoolkit-0.9.0-src.zip ](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-src.zip ) 
-   [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-src.zip.sha)] 
-	
- * Binaries:
- * [odftoolkit-0.9.0-bin.zip ](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-bin.zip ) 
-	[[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9-0-bin.zip.sha)]
-    
- * Documentation:
- * [odftoolkit-0.9.0-doc.zip ](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-doc.zip ) 
-   [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-doc.zip.sha)]
+* Sources: [odftoolkit-0.9.0-src.zip](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-src.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-src.zip.sha)]
+* Binaries: [odftoolkit-0.9.0-bin.zip](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-bin.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9-0-bin.zip.sha)]
+* Documentation: [odftoolkit-0.9.0-doc.zip](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-doc.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-doc.zip.sha)]
 
+## Former ODF Toolkit Releases at Apache
 
-**Former Apache Releases**
+Former Apache releases can be found in the [Apache Archive](http://archive.apache.org/dist/incubator/odftoolkit).
 
-Former Apache releases can be found in the [Apache Archive](http://archive.apache.org/dist/incubator/odftoolkit/).
-
-**Prior Apache Releases**
+## Prior Apache Releases
 
 Apache ODF Toolkit became an incubator project in August 2011. Prior to that date the ODF Toolkit was a set of projects of ODF Toolkit Union. Now, all of the legacy ODF Toolkit Union releases are archived at [apache-extras.org](http://code.google.com/a/apache-extras.org/p/odftoolkit-extra/).

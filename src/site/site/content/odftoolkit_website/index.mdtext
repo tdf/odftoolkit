@@ -1,25 +1,34 @@
-Title: The Document Foundation - ODF Toolkit
+# The Document Foundation - ODF Toolkit
 
-**2020-01-27 - ODF Toolkit twin release of 0.9.0 and 1.0.0 **
+## Mission Statement
+
+The ODF Toolkit is a set of Java modules that allow programmatic creation,
+scanning and manipulation of [Open Document Format][1], which [is being developed under OASIS][2] (ISO/IEC 26300 == ODF) documents. Unlike other approaches which rely on runtime manipulation
+of heavy-weight editors via an automation interface, the ODF Toolkit
+is lightweight and ideal for server use.
+
+## Components of the ODF Toolkit (Java)
+
+1. **Software access to ODF** is archievable by [ODFDOM](odfdom/index.html).
+With 1.0.0 the [basics of collaboration functionality](2DO.html) were added.
+
+2. **ODF Conformance** can be tested via the [ODF Validator](conformance/OdfValidator.html).
+Offered as command-line tool (executable JAR) or Web server component (WAR).
+
+3. **XSL Transformation** loading the ODF XML from the zipped ODF can take the zipped ODF as source using the [ODF XSLT Runner](xsltrunner/ODFXSLTRunner.html).</br>
+This functionality is also available from [ANT](https://ant.apache.org/) using our [ANT task](xsltrunner/ODFXSLTRunnerTask.html)
+
+4. **Creating Software Artefacts from the ODF grammar** is possible via the [generator project](2DO.html)
+
+## 2020-01-29 - ODF Toolkit releases of 0.9.0 and 1.0.0
 
 See the [downloads page](downloads.html) for more details on the releases.
 
-
-**2018-12-18 - ODF Toolkit becomes a project of The Document Foundation (TDF) **
+## 2018-12-18 - ODF Toolkit becomes a project of The Document Foundation (TDF)
 
 The ODF Toolkit team is pleased to announce the reuniation with LibreOffice.
-We are working on an initial Maven release based on the latest Apache sources. The upcoming release will be based on JDK 8.
 
 People interested should also follow the [mail list](mailing-lists.html) to track progress.
-
-
-**Mission Statement**
-
-The ODF Toolkit is a set of Java modules that allow programmatic creation,
-scanning and manipulation of [Open Document Format] [1][2] (ISO/IEC 26300 == ODF)
-documents. Unlike other approaches which rely on runtime manipulation
-of heavy-weight editors via an automation interface, the ODF Toolkit
-is lightweight and ideal for server use.
 
 [1]: http://opendocument.xml.org/
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office

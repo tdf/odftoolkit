@@ -1,0 +1,105 @@
+# Release Guide
+
+We are doing two kind of releases at the same time:
+
+1. One **Maven release** with the artefacts of each project.
+2. One **GitHub release** bundling artefacts of the ODF Toolkit as ZIPs.
+
+## Maven Release Guide
+
+The release jars for each project are deployed to the Maven repository. Making release artefacts should follow the following steps:
+
+1. **Maven Repro Access**</br>Make sure you got access to Maven repro via our [Sonatype JIRA issue](https://issues.sonatype.org/browse/OSSRH-960). Add your userID & password to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html).
+
+2. **Install GNU PG**</br>Install in your OS. [See details in tutorial 'publish your artifacts to Maven'](https://dzone.com/articles/      publish-your-artifacts-to-maven-central)
+
+3. **Configure GNU PG**</br>Add your GNU and JIRA credentials to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html).
+   See [our example settings.xml](docs/settings.xml) and search & replace the placeholders starting with 'YOUR_'.
+
+4. **Clean start**</br>Make sure that your working copy is clean.
+   Preferrably check out a clean version from [GitHub](https://github.com/tdf/odftoolkit).
+
+5. **Prepare the release**</br>
+   This will start the interactive release preparation. You need to supply Maven with the versions of the release. "release version" should be the version of the intended release (recommended value should be fine). "SCM release tag or label" should include the RC version (e.g. odftoolkit-0.9.0-RC1). "new development version" should be the current SNAPSHOT version.
+
+        mvn release:prepare
+
+6. **Perform the release**</br>
+   This will checkout the tag to the target directory, build and package everything and upload the artifacts to the staging repository.
+   Users will download the mirrored release artifacts from machines outside TDF control. Users need to verify that the copy downloaded is identical to the original. Mirrored copies of checksums, KEYS and signature files (.asc and .md5 files) will be present on the mirrors but must never be used for verification. So, all links from the podling website to signatures, sums and [KEYS](https://tdf.github.io/odftoolkit/docs/KEYS) need to refer to the original documents on GitHub. See release signing guide for more information.
+
+        mvn release:perform   
+
+7. **Publish Document**</br> Publish all of the prepared document on the website and update the download page.
+8. **Send Announcements**</br> The release manager need to send announcements to odf-dev list. The sample looks like:
+
+        Subject:[ANNOUNCEMENT] "ODF Toolkit 1.0.0" & "ODF Toolkit 0.9.0 Release"
+        To: dev@odftoolkit.org
+        Hi all,
+        
+        The ODF Toolkit team is pleased to announce the release of 1.0.0 (>=JDK 9) and in addition a release of 0.9.0 (JDK 8). 
+        The list of changes is available in the release notes[1].
+        
+        All new ODF Toolkit components (binary, source and JavaDoc bundles) are available as GitHub Releases [2].
+        Or in the central Maven repository under Group ID "org.apache.odftoolkit" and Version "1.0.0" and "0.9.0" and are referenced by the README[3].
+
+        [1] https://tdf.github.io/odftoolkit/docs/odfdom/ReleaseNotes.html
+        [2] https://github.com/tdf/odftoolkit/releases
+        [3] https://tdf.github.io/odftoolkit/#releases
+
+## GitHub Release Guide
+
+### **The Six Release Artefacts:**
+
+The **GitHub release** has always **six files**:
+
+* **Three ZIPs** representing the ODF Toolkit:
+   1. The sources (without the .git directory)
+   2. The binaries (including all JARs and WARs of the projects)
+   3. The documentation (including all JavaDoc as JARs and the complete website)
+
+* **Three SHA files**, one for each ZIP to proof their correctness.
+
+### **Creating Release Artefacts:**
+
+1. Call from the ODF TOOLKIT base via command line:
+
+        mvn clean
+
+2. Call from the ODF TOOLKIT base via command line one of the following:
+
+        mvn install -Ppedantic
+
+        mvn install -Ppedantic > mylogFile.txt 2>&1
+
+   **NOTE**: The option pedantic checks if all files have either a valid license header or an explicit exception.
+   Often helpful for reviewing the build output is redirecting it into an own logfile. </br>
+
+### **Bundling Release Artefacts:**
+
+1. Test the JARs if they are working and if the documentation is correct, esp. JavaDoc references to ODF elements, attributes and units have been created correctly by our JavaDoc taglet project.
+
+2. If all project artefacts have been created without an error, they can be bundled into ZIPs and signed via:
+
+         mvn antrun:run@prepare-github-release -Pprepare-release
+
+The output will be created in the directory: 'ODF_TOOLKIT_BASE&/target/release/'.
+
+**NOTE:** Don't forget to  check if the ZIPs of the result directory have the correct content.
+
+## Upload of the 6 Release Artefacts
+
+1. Browse to [our GitHub release page](https://github.com/tdf/odftoolkit/releases).
+2. Press the "Draft a new release" button (or ask for access rights on the mailing list if not visible).
+3. Upload all 6 files from the release and name it like "'odftoolkit-' + version", for instance: odftoolkit-8.0.0-RC2
+
+### **References**
+
+1. [How to Publish Your Artifacts to Maven Central][1]
+
+  [1]: https://dzone.com/articles/publish-your-artifacts-to-maven-central
+  [2]: www.gnupg.org
+  [3]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
+  [4]: http://openjdk.java.net/
+  [5]: http://maven.apache.org/
+  [6]: http://www.apache.org/dev/crypto.html
