@@ -51,7 +51,10 @@ import org.w3c.dom.Node;
 public class List {
 
 	private TextListElement listElement;
-	private ListDecorator decorator;
+	/**
+	 * decorator is visible in package for testing purpose
+	 */
+	ListDecorator decorator;
 
 	/**
 	 * Constructor ListItem, AbstractListContainer and List use only.
