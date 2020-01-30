@@ -23,7 +23,7 @@ public class NumberedListTest{
 			OdfTextListStyle listStyle = greekListdecorator.getListStyle();
 			Element odfTextListLevelStyleNumberEle = listStyle.getFirstElementChild();
 			String styleNumFormat = odfTextListLevelStyleNumberEle.getAttribute("style:num-format");
-			// Test if the Number3eStyle starts with lower greek alfa,
+			// Test if the number style starts with lower greek alfa:
 			Assert.assertTrue(styleNumFormat.indexOf(lowerGreekAlfa) == 0);
 		} catch (Exception e) {
 			Logger.getLogger(NumberedListTest.class.getName()).log(Level.SEVERE, null, e);
