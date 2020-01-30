@@ -18,7 +18,6 @@ public class NumberedListTest{
 		try {
 			TextDocument doc = TextDocument.newTextDocument();
 			List greekList = doc.addList(new NumberedGreekLowerDecorator(doc));
-			System.out.println(greekList.decorator);
 			NumberedGreekLowerDecorator greekListdecorator = (NumberedGreekLowerDecorator)greekList.decorator;
 			OdfTextListStyle listStyle = greekListdecorator.getListStyle();
 			Element odfTextListLevelStyleNumberEle = listStyle.getFirstElementChild();
