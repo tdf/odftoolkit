@@ -39,6 +39,6 @@ public class NumberedGreekLowerDecorator extends NumberDecoratorBase {
 	 *            the Document which this NumberDecorator will be used on.
 	 */
 	public NumberedGreekLowerDecorator(Document doc) {
-	    	super(doc, "Simple_Default_greek_lower_List", "Numbering_20_Symbols", "Î±, Î², ... (gr)", ")", null);
+	    	super(doc, "Simple_Default_greek_lower_List", "Numbering_20_Symbols", "\u03B1, \u03B2, ... (gr)", ")", null);
 	}
 }
