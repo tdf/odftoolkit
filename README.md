@@ -50,22 +50,22 @@ The simplest way to use these modules are just put the jars files in your classp
 directly. If you are not using maven you can see the versions of the major components for
 your release in [CHANGES.txt](CHANGES.txt).
 
-## Release Candidate
+## Recent Releases
 
-1. We have a new beta release for 1.0.0 using >=JDK 9 and providing the new collaboration feature:
+1. We have a beta release for 1.0.0 using >=JDK 9 and providing the new collaboration feature:
 
     *RELEASE (1.0.0-BETA1)*:   
     * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/1.0.0-BETA1/)
     * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/1.0.0-BETA1/)
     * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/1.0.0-BETA1/)
 
-2. We have a new release candidate 0.9.0 using JDK 8 and for the final time including the Simple API:
+2. We have a new release 0.9.0 using JDK 8 and for the final time including the Simple API:
 
-    *RELEASE (0.9.0-RC1)*:   
-    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.9.0-RC1/)
-    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.9.0-RC1/)
-    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.9.0-RC1/)
-    * [Simple API (deprecated)](https://repo1.maven.org/maven2/org/odftoolkit/simple-odf/0.9.0-RC1/)
+    *RELEASE (0.9.0)*:   
+    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.9.0/)
+    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.9.0/)
+    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.9.0/)
+    * [Simple API (deprecated)](https://repo1.maven.org/maven2/org/odftoolkit/simple-odf/0.9.0/)
 
 For more details see the [release notes](https://tdf.github.io/odftoolkit/docs/odfdom/ReleaseNotes.html).
 
