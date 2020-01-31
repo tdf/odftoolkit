@@ -9,7 +9,7 @@ is lightweight and ideal for server use.
 
 ## Components of the ODF Toolkit (Java)
 
-1. **Software access to ODF** is archievable by [ODFDOM](odfdom/index.html).
+1. **Software access to ODF** is achievable by [ODFDOM](odfdom/index.html).
 With 1.0.0 the [basics of collaboration functionality](2DO.html) were added.
 
 2. **ODF Conformance** can be tested via the [ODF Validator](conformance/OdfValidator.html).
