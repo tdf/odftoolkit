@@ -25,7 +25,7 @@
 3. Copy it into the [template](template.html)
 4. Make it XML by replacing &lt;br&gt; with &lt;br/&gt; (likely that's all)
 4. Change correct indent from tab to 4 Space (only necessary for ODF 1.2 parts - easy with UltraEdit ^t)
-5. Place the created HTML into the appropriate folder, e.g. '[xslt-runner/src/test/resources/odf13](../../../xslt-runner/src/test/resources/odf13)'
+5. Place the created HTML into the appropriate folder, e.g. '[xslt-runner/src/test/resources/odf13](../../../src/test/resources/odf13)'
 6. If necessary adopt the new input path in the [pom.xml](../../../pom.xml)
 7. Do XSL transformation via Maven 'mvn clean install' to add IDs for RelaxNG Defines & HRefs for RelaxNG refs 
 8. Copy the [sample_xslt/rng/view-source.css](../../../sample_xslt/rng/view-source.css) to the new created output target\generated-resources\xml\xslt) 
