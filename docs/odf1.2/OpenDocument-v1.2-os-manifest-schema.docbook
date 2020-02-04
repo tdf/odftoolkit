@@ -1,0 +1,1622 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article
+  SYSTEM "../../../dtds/docbkx412/docbookx.dtd">
+<article>
+   <title>RELAX-NG Schema Documentation</title>
+   <section>
+      <title>Grammar Documentation</title>
+      <para>Namespace: </para>
+      <section>
+         <title>
+	Element: </title>
+         <table role="element" id="anyElements.">
+            <title>Element: </title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+		</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Attributes</para>
+                     </entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry/>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Source</para>
+                     </entry>
+                     <entry>
+                        <programlisting><![CDATA[<element xmlns="http://relaxng.org/ns/structure/1.0"
+                                    xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0">
+                              <anyName/>
+                              <mixed>
+                                 <ref name="anyAttListOrElements"/>
+                              </mixed>
+                           </element>]]></programlisting>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section>
+         <title>
+	Element: manifest:algorithm</title>
+         <table role="element" id="algorithm.manifest:algorithm">
+            <title>Element: manifest:algorithm</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+                           <link linkend="anyElements">%anyElements;</link>
+                        </para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Attributes</para>
+                     </entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:algorithm-name</entry>
+                              <entry>
+	    Enumeration: 
+	      "Blowfish CFB"
+	       | </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:initialisation-vector</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Source</para>
+                     </entry>
+                     <entry>
+                        <programlisting><![CDATA[<element xmlns="http://relaxng.org/ns/structure/1.0"
+                                    xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0"
+                                    name="manifest:algorithm">
+                              <ref name="algorithm-attlist"/>
+                              <ref name="anyElements"/>
+                           </element>]]></programlisting>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section>
+         <title>
+	Element: manifest:encryption-data</title>
+         <table role="element" id="encryption-data.manifest:encryption-data">
+            <title>Element: manifest:encryption-data</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+                           <link linkend="algorithm">%algorithm;</link>, 
+			<link linkend="start-key-generation">%start-key-generation;</link>
+		?
+      
+		<link linkend="key-derivation">%key-derivation;</link>
+                        </para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Attributes</para>
+                     </entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:checksum-type</entry>
+                              <entry>
+	    Enumeration: 
+	      "SHA1/1K"
+	       | </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:checksum</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Source</para>
+                     </entry>
+                     <entry>
+                        <programlisting><![CDATA[<element xmlns="http://relaxng.org/ns/structure/1.0"
+                                    xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0"
+                                    name="manifest:encryption-data">
+                              <ref name="encryption-data-attlist"/>
+                              <ref name="algorithm"/>
+                              <optional>
+                                 <ref name="start-key-generation"/>
+                              </optional>
+                              <ref name="key-derivation"/>
+                           </element>]]></programlisting>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section>
+         <title>
+	Element: manifest:file-entry</title>
+         <table role="element" id="file-entry.manifest:file-entry">
+            <title>Element: manifest:file-entry</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+                           <link linkend="encryption-data">%encryption-data;</link>
+		?
+      
+	</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Attributes</para>
+                     </entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:full-path</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:size</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:media-type</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:preferred-view-mode</entry>
+                              <entry>
+	    Enumeration: 
+	      "edit"
+	       | 
+	      "presentation-slide-show"
+	       | 
+	      "read-only"
+	       | </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:version</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Source</para>
+                     </entry>
+                     <entry>
+                        <programlisting><![CDATA[<element xmlns="http://relaxng.org/ns/structure/1.0"
+                                    xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0"
+                                    name="manifest:file-entry">
+                              <ref name="file-entry-attlist"/>
+                              <optional>
+                                 <ref name="encryption-data"/>
+                              </optional>
+                           </element>]]></programlisting>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section>
+         <title>
+	Element: manifest:key-derivation</title>
+         <table role="element" id="key-derivation.manifest:key-derivation">
+            <title>Element: manifest:key-derivation</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+		
+    EMPTY
+  
+	</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Attributes</para>
+                     </entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:key-derivation-name</entry>
+                              <entry>
+	    Enumeration: 
+	      "PBKDF2"
+	       | </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:salt</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:iteration-count</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:key-size</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Source</para>
+                     </entry>
+                     <entry>
+                        <programlisting><![CDATA[<element xmlns="http://relaxng.org/ns/structure/1.0"
+                                    xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0"
+                                    name="manifest:key-derivation">
+                              <ref name="key-derivation-attlist"/>
+                              <empty/>
+                           </element>]]></programlisting>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section>
+         <title>
+	Element: manifest:manifest</title>
+         <table role="element" id="manifest.manifest:manifest">
+            <title>Element: manifest:manifest</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+		
+    (
+			<link linkend="file-entry">%file-entry;</link>
+		)+
+    
+	</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Attributes</para>
+                     </entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:version</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Source</para>
+                     </entry>
+                     <entry>
+                        <programlisting><![CDATA[<element xmlns="http://relaxng.org/ns/structure/1.0"
+                                    xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0"
+                                    name="manifest:manifest">
+                              <ref name="manifest-attlist"/>
+                              <oneOrMore>
+                                 <ref name="file-entry"/>
+                              </oneOrMore>
+                           </element>]]></programlisting>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section>
+         <title>
+	Element: manifest:start-key-generation</title>
+         <table role="element" id="start-key-generation.manifest:start-key-generation">
+            <title>Element: manifest:start-key-generation</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+		
+    EMPTY
+  
+	</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Attributes</para>
+                     </entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:start-key-generation-name</entry>
+                              <entry>
+	    Enumeration: 
+	      "SHA1"
+	       | </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:key-size</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Source</para>
+                     </entry>
+                     <entry>
+                        <programlisting><![CDATA[<element xmlns="http://relaxng.org/ns/structure/1.0"
+                                    xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0"
+                                    name="manifest:start-key-generation">
+                              <ref name="start-key-generation-attlist"/>
+                              <empty/>
+                           </element>]]></programlisting>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="algorithm">
+         <title>Pattern: algorithm</title>
+         <table>
+            <title>Pattern: algorithm</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+                           <link linkend="algorithm.manifest:algorithm">manifest:algorithm</link>
+                        </para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="algorithm-attlist">
+         <title>Pattern: algorithm-attlist</title>
+         <table>
+            <title>Pattern: algorithm-attlist</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">Attributes</entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:algorithm-name</entry>
+                              <entry>
+	    Enumeration: 
+	      "Blowfish CFB"
+	       | </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:initialisation-vector</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="anyAttListOrElements">
+         <title>Pattern: anyAttListOrElements</title>
+         <table>
+            <title>Pattern: anyAttListOrElements</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+    (
+	)*
+    <link linkend="anyElements">%anyElements;</link>
+                        </para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">Attributes</entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry/>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="anyElements">
+         <title>Pattern: anyElements</title>
+         <table>
+            <title>Pattern: anyElements</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+    (
+		<link linkend="anyElements."/>
+	)*
+    </para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="anyURI">
+         <title>Pattern: anyURI</title>
+         <table>
+            <title>Pattern: anyURI</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="base64Binary">
+         <title>Pattern: base64Binary</title>
+         <table>
+            <title>Pattern: base64Binary</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="encryption-data">
+         <title>Pattern: encryption-data</title>
+         <table>
+            <title>Pattern: encryption-data</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+                           <link linkend="encryption-data.manifest:encryption-data">manifest:encryption-data</link>
+                        </para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="encryption-data-attlist">
+         <title>Pattern: encryption-data-attlist</title>
+         <table>
+            <title>Pattern: encryption-data-attlist</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">Attributes</entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:checksum-type</entry>
+                              <entry>
+	    Enumeration: 
+	      "SHA1/1K"
+	       | </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:checksum</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="file-entry">
+         <title>Pattern: file-entry</title>
+         <table>
+            <title>Pattern: file-entry</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+                           <link linkend="file-entry.manifest:file-entry">manifest:file-entry</link>
+                        </para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="file-entry-attlist">
+         <title>Pattern: file-entry-attlist</title>
+         <table>
+            <title>Pattern: file-entry-attlist</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">Attributes</entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:full-path</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:size</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:media-type</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:preferred-view-mode</entry>
+                              <entry>
+	    Enumeration: 
+	      "edit"
+	       | 
+	      "presentation-slide-show"
+	       | 
+	      "read-only"
+	       | </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:version</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="key-derivation">
+         <title>Pattern: key-derivation</title>
+         <table>
+            <title>Pattern: key-derivation</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+                           <link linkend="key-derivation.manifest:key-derivation">manifest:key-derivation</link>
+                        </para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="key-derivation-attlist">
+         <title>Pattern: key-derivation-attlist</title>
+         <table>
+            <title>Pattern: key-derivation-attlist</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">Attributes</entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:key-derivation-name</entry>
+                              <entry>
+	    Enumeration: 
+	      "PBKDF2"
+	       | </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:salt</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:iteration-count</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:key-size</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="manifest">
+         <title>Pattern: manifest</title>
+         <table>
+            <title>Pattern: manifest</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+                           <link linkend="manifest.manifest:manifest">manifest:manifest</link>
+                        </para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="manifest-attlist">
+         <title>Pattern: manifest-attlist</title>
+         <table>
+            <title>Pattern: manifest-attlist</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">Attributes</entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:version</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="namespacedToken">
+         <title>Pattern: namespacedToken</title>
+         <table>
+            <title>Pattern: namespacedToken</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="nonNegativeInteger">
+         <title>Pattern: nonNegativeInteger</title>
+         <table>
+            <title>Pattern: nonNegativeInteger</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="start-key-generation">
+         <title>Pattern: start-key-generation</title>
+         <table>
+            <title>Pattern: start-key-generation</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+                           <link linkend="start-key-generation.manifest:start-key-generation">manifest:start-key-generation</link>
+                        </para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="start-key-generation-attlist">
+         <title>Pattern: start-key-generation-attlist</title>
+         <table>
+            <title>Pattern: start-key-generation-attlist</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">Attributes</entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:start-key-generation-name</entry>
+                              <entry>
+	    Enumeration: 
+	      "SHA1"
+	       | </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>manifest:key-size</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="string">
+         <title>Pattern: string</title>
+         <table>
+            <title>Pattern: string</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+   </section>
+</article>

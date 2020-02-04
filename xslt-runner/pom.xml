@@ -35,6 +35,18 @@
         <url>https://www.documentfoundation.org/</url>
     </organization>
 
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
+        <odf12.rng>src/test/resources/odf12/</odf12.rng>
+        <odf13.rng>src/test/resources/odf13/</odf13.rng>
+        <rng2html.stylesheet>sample_xslt/rng/rng2html.xsl</rng2html.stylesheet>
+        <rng2docbook.stylesheet>sample_xslt/rng/rng2docbook.xsl</rng2docbook.stylesheet>
+        <version.saxon-he>9.9.1-3</version.saxon-he>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -46,14 +58,95 @@
             <artifactId>xml-apis</artifactId>
         </dependency>
     </dependencies>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
-    </properties>
 
     <!-- Build Settings -->
     <build>
         <plugins>
+            <!-- SAXON XSLT 2.0 processor -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <version>1.0.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <transformationSets>
+                        <transformationSet>
+                            <dir>${odf12.rng}</dir>
+                            <includes>*.rng</includes>
+                            <stylesheet>${rng2docbook.stylesheet}</stylesheet>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                    <targetExtension>.docbook</targetExtension>
+                                </fileMapper>
+                            </fileMappers>
+                        </transformationSet>
+                        <transformationSet>
+                            <dir>${odf12.rng}</dir>
+                            <includes>*.html</includes>
+                            <stylesheet>${rng2html.stylesheet}</stylesheet>
+                            <outputProperties>
+                                <outputProperty>
+                                    <name>omit-xml-declaration</name>
+                                    <value>yes</value>
+                                </outputProperty>
+                                <outputProperty>
+                                    <name>version</name>
+                                    <value>5</value>
+                                </outputProperty>
+                            </outputProperties>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                    <targetExtension>.html</targetExtension>
+                                </fileMapper>
+                            </fileMappers>
+                        </transformationSet>
+                        <transformationSet>
+                            <dir>${odf13.rng}</dir>
+                            <includes>*.rng</includes>
+                            <stylesheet>${rng2docbook.stylesheet}</stylesheet>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                    <targetExtension>.docbook</targetExtension>
+                                </fileMapper>
+                            </fileMappers>
+                        </transformationSet>
+                        <transformationSet>
+                            <dir>${odf13.rng}</dir>
+                            <includes>*.html</includes>
+                            <stylesheet>${rng2html.stylesheet}</stylesheet>
+                            <outputProperties>
+                                <outputProperty>
+                                    <name>omit-xml-declaration</name>
+                                    <value>yes</value>
+                                </outputProperty>
+                                <outputProperty>
+                                    <name>version</name>
+                                    <value>5</value>
+                                </outputProperty>
+                            </outputProperties>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                    <targetExtension>.html</targetExtension>
+                                </fileMapper>
+                            </fileMappers>
+                        </transformationSet>
+                    </transformationSets>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.saxon</groupId>
+                        <artifactId>Saxon-HE</artifactId>
+                        <version>${version.saxon-he}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>

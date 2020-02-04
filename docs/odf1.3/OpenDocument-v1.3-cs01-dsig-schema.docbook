@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article
+  SYSTEM "../../../dtds/docbkx412/docbookx.dtd">
+<article>
+   <title>RELAX-NG Schema Documentation</title>
+   <section>
+      <title>Grammar Documentation</title>
+      <para>Namespace: </para>
+      <section>
+         <title>
+	Element: </title>
+         <table role="element" id="dsMarkup.">
+            <title>Element: </title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+                           <link linkend="dsMarkup">%dsMarkup;</link>
+                        </para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Attributes</para>
+                     </entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry/>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Source</para>
+                     </entry>
+                     <entry>
+                        <programlisting><![CDATA[<rng:element xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                                        xmlns:dsig="urn:oasis:names:tc:opendocument:xmlns:digitalsignature:1.0"
+                                        xmlns:rng="http://relaxng.org/ns/structure/1.0">
+                              <rng:anyName/>
+                              <rng:ref name="dsMarkup"/>
+                           </rng:element>]]></programlisting>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section>
+         <title>
+	Element: ds:Signature</title>
+         <table role="element" id="ds-signature.ds:Signature">
+            <title>Element: ds:Signature</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+                           <link linkend="dsMarkup">%dsMarkup;</link>
+                        </para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Attributes</para>
+                     </entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry/>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Source</para>
+                     </entry>
+                     <entry>
+                        <programlisting><![CDATA[<rng:element xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                                        xmlns:dsig="urn:oasis:names:tc:opendocument:xmlns:digitalsignature:1.0"
+                                        xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                                        name="ds:Signature">
+      <!-- The permitted content of this element is the permitted -->
+      <!-- content of the Signature element defined by W3C XML    -->
+      <!-- Signature Syntax and Processing (Second Edition).      -->
+      <!-- See OpenDocument v1.3 part 2, section 5.3.             -->
+      <!-- Office-3874 -->
+                              <rng:ref name="dsMarkup"/>
+                           </rng:element>]]></programlisting>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section>
+         <title>
+	Element: dsig:document-signatures</title>
+         <table role="element" id="dsig-document-signatures.dsig:document-signatures">
+            <title>Element: dsig:document-signatures</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+      
+    (
+        <link linkend="ds-signature">%ds-signature;</link>
+      )+
+    
+    </para>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Attributes</para>
+                     </entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>dsig:version</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Optional</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+                  <row>
+                     <entry role="header" valign="top">
+                        <para>Source</para>
+                     </entry>
+                     <entry>
+                        <programlisting><![CDATA[<rng:element xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                                        xmlns:dsig="urn:oasis:names:tc:opendocument:xmlns:digitalsignature:1.0"
+                                        xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                                        name="dsig:document-signatures">
+                              <rng:ref name="dsig-document-signatures-attlist"/>
+                              <rng:oneOrMore>
+                                 <rng:ref name="ds-signature"/>
+                              </rng:oneOrMore>
+                           </rng:element>]]></programlisting>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="ds-signature">
+         <title>Pattern: ds-signature</title>
+         <table>
+            <title>Pattern: ds-signature</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+                           <link linkend="ds-signature.ds:Signature">ds:Signature</link>
+                        </para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="dsMarkup">
+         <title>Pattern: dsMarkup</title>
+         <table>
+            <title>Pattern: dsMarkup</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+    (
+      
+    ( 
+     | 
+    TEXT
+     | <link linkend="dsMarkup."/>
+    )
+  
+    )*
+    </para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">Attributes</entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry/>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="dsig-document-signatures">
+         <title>Pattern: dsig-document-signatures</title>
+         <table>
+            <title>Pattern: dsig-document-signatures</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">
+                        <para>Content Model</para>
+                     </entry>
+                     <entry>
+                        <para>
+                           <link linkend="dsig-document-signatures.dsig:document-signatures">dsig:document-signatures</link>
+                        </para>
+                     </entry>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+      <section id="dsig-document-signatures-attlist">
+         <title>Pattern: dsig-document-signatures-attlist</title>
+         <table>
+            <title>Pattern: dsig-document-signatures-attlist</title>
+            <tgroup cols="2">
+               <colspec colnum="1"/>
+               <colspec colnum="2" colwidth="*"/>
+               <tbody>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Namespace</para>
+                     </entry>
+                     <entry>
+                        <para/>
+                     </entry>
+                  </row>
+                  <row>
+                     <entry class="header" valign="top">
+                        <para>Documentation</para>
+                     </entry>
+                     <entry>
+                        <para>No documentation available.</para>
+                     </entry>
+                  </row>
+                  <row valign="top">
+                     <entry class="header">Attributes</entry>
+                     <entrytbl cols="3">
+                        <tbody>
+                           <row>
+                              <entry role="header">
+                                 <para>Attribute</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Type</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Use</para>
+                              </entry>
+                              <entry role="header">
+                                 <para>Documentation</para>
+                              </entry>
+                           </row>
+                           <row>
+                              <entry>dsig:version</entry>
+                              <entry>
+	    TEXT
+	  </entry>
+                              <entry>Required</entry>
+                              <entry>
+                                 <para/>
+                              </entry>
+                           </row>
+                        </tbody>
+                     </entrytbl>
+                  </row>
+               </tbody>
+            </tgroup>
+         </table>
+      </section>
+   </section>
+</article>

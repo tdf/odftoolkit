@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="rng-svg" default="usage">
+
+    <property file="build.properties"/>
+    <property name="title" value="'Schema Diagram'"/>
+    <property name="key" value="'none'"/>
+
+    <target name="usage">
+        <echo message="ANT build file for RNG to SVG Stylesheets"/>
+        <echo message="   Copyright (c) 2004, Khalil Ahmed."/>
+        <echo message=""/>
+        <echo message="IMPORTANT: This build process **ONLY** works with SAXON"/>
+        <echo message="           You **MUST** specify the location of the SAXON JAR file"/>
+        <echo message="           either in the build.properties file or on the command line."/>
+        <echo message=""/>
+        <echo message="Build Targets:"/>
+        <echo message=""/>
+        <echo message="  usage    :  Display this message"/>
+        <echo message="  generate : Generate SVG files from a schema file"/>
+        <echo message=""/>
+        <echo message="Parameters:"/>
+        <echo message=""/>
+        <echo message="Each of the following parameters can be specified on the command-line"/>
+        <echo message="or as a property in the file build.properties located in the same "/>
+        <echo message="directory as this build.xml file."/>
+        <echo message=""/>
+        <echo message="REQUIRED parameters:"/>
+        <echo message="  saxon.jar : The full path to the SAXON JAR file to use."/>
+        <echo message="  schema    : The name of the schema file to process. This file"/>
+        <echo message="              should be first copied to the schema subdirectory"/>
+        <echo message=""/>
+        <echo message="OPTIONAL parameters:"/>
+        <echo message="  title     : A title string to display on the generated diagram(s)"/>
+        <echo message="  start-elements : A list of the names of the elements to diagram."/>
+        <echo message="  start-patterns : A list of the names of the defines to diagram."/>
+        <echo message=""/>
+        <echo message="Both start-elements and start-patterns accept the * wildcard."/>
+        <echo message="The title, start-elements and start-patterns values must be enclosed"/>
+        <echo message="in single quotes. E.g. -Dtitle='My Schema' -Dstart-elements='*'"/>
+        <echo message="--"/>
+        <echo message="This build file last modified $Date: 2004/01/24 19:54:42 $"/>
+        <echo message="Please report any problems to the author."/>
+        <echo message="See http://www.techquila.com/contact.html for contact information."/>
+    </target>
+
+    <target name="test-saxon" unless="saxon.jar">
+        <fail message="The parameter 'saxon.jar' must be defined. The value must be the full path to the SAXON JAR file to be used by this process."/>
+    </target>
+
+    <target name="test-schema" unless="schema">
+    </target>
+
+    <target name="test-params">
+        <fail message="The parameter 'saxon.jar' must be defined. The value must be the full path to the SAXON JAR file to be used by this process." unless="saxon.jar"/>
+        <available property="saxon-available" classname="com.icl.saxon.StyleSheet">
+            <classpath>
+                <pathelement location="${saxon.jar}"/>
+            </classpath>
+        </available>
+        <fail message="The SAXON driver class cannot be found. Check that the property saxon.jar (${saxon.jar}) really does point to a SAXON JAR file." unless="saxon-available"/>
+
+        <fail message="The parameter 'schema' must be defined. The value of this parameter must be the name of the schema file to be rendered, and the schema file itself must be copied to the directory 'schemas' under the directory where this build.xml file is located." unless="schema"/>
+
+        <available property="schema-available" file="schemas/${schema}"/>
+        <fail message="Cannot find the schema ${schema} in the directory 'schemas'. Please copy the schema file to the schemas directory." unless="schema-available"/>
+    </target>
+
+    <target name="simplify">
+        <echo message="${saxon.jar}"/>
+        <delete dir="temp"/>
+        <copy todir="temp">
+            <fileset dir="schemas"/>
+            <fileset dir=".">
+                <include name="*.xsl"/>
+            </fileset>
+        </copy>
+        <java classname="com.icl.saxon.StyleSheet"
+	  classpath="${saxon.jar}"
+	  dir="temp"
+	  fork="yes">
+            <arg line="-o temp_out ${schema} rng-simplification.xsl out-name=${schema}-simplified- stop-after=step7.12"/>
+        </java>
+        <java classname="com.icl.saxon.StyleSheet"
+	  classpath="${saxon.jar}"
+	  dir="temp"
+	  fork="yes">
+            <arg line="-o ${schema}-simplified.rng ${schema}-simplified-7-12.rng rng-simplify-defines.xsl"/>
+        </java>
+    </target>
+
+    <target name="init">
+        <mkdir dir="svg"/>
+    </target>
+
+    <target name="make-args">
+        <condition property="elements-and-patterns">
+            <and>
+                <isset property="start-elements"/>
+                <isset property="start-patterns"/>
+            </and>
+        </condition>
+        <condition property="params">
+            <or>
+                <isset property="start-elements"/>
+                <isset property="start-patterns"/>
+            </or>
+        </condition>
+    </target>
+
+
+    <target name="tree2svg-no-params" unless="params">
+        <java classname="com.icl.saxon.StyleSheet"
+	  classpath="${saxon.jar}"
+	  dir="temp"
+	  fork="yes">
+            <arg line="-o ../svg/${schema}.svg ${schema}-tree.xml tree2svg.xsl"/>
+            <arg value='title=${title}'/>
+            <arg value='key=${key}'/>
+        </java>
+    </target>
+
+    <target name="tree2svg-elements-patterns" if="elements-and-patterns">
+        <java classname="com.icl.saxon.StyleSheet"
+	  classpath="${saxon.jar}"
+	  dir="temp"
+	  fork="yes">
+            <arg line="-o ../svg/${schema}.svg ${schema}-tree.xml tree2svg.xsl"/>
+            <arg value='start-elements=${start-elements}'/>
+            <arg value='start-patterns=${start-patterns}'/>
+            <arg value='title=${title}'/>
+            <arg value='key=${key}'/>
+        </java>
+    </target>
+
+    <target name="tree2svg-elements-only" if="start-elements" unless="start-patterns">
+        <echo message="${start-elements}"/>
+        <java classname="com.icl.saxon.StyleSheet"
+	  classpath="${saxon.jar}"
+	  dir="temp"
+	  fork="yes">
+            <arg line="-o ../svg/${schema}.svg ${schema}-tree.xml tree2svg.xsl"/>
+            <arg value='start-elements=${start-elements}'/>
+            <arg value='title=${title}'/>
+        </java>
+    </target>
+
+    <target name="tree2svg-patterns-only" if="start-patterns" unless="start-elements">
+        <java classname="com.icl.saxon.StyleSheet"
+	  classpath="${saxon.jar}"
+	  dir="temp"
+	  fork="yes">
+            <arg line="-o ../svg/${schema}.svg ${schema}-tree.xml tree2svg.xsl"/>
+            <arg value='start-patterns=${start-patterns}'/>
+            <arg value='title=${title}'/>
+            <arg value='key=${key}'/>
+        </java>
+    </target>
+
+    <target name="generate" depends="init, test-params, simplify, make-args">
+        <java classname="com.icl.saxon.StyleSheet"
+	  classpath="${saxon.jar}"
+	  dir="temp"
+	  fork="yes">
+            <arg line="-o ${schema}-tree.xml ${schema}-simplified.rng rng2tree.xsl"/>
+        </java>
+        <copy todir="temp">
+            <fileset dir="schemas"/>
+            <fileset dir=".">
+                <include name="*.xsl"/>
+            </fileset>
+        </copy>
+        <antcall target="tree2svg-no-params"/>
+        <antcall target="tree2svg-elements-patterns"/>
+        <antcall target="tree2svg-elements-only"/>
+        <antcall target="tree2svg-patterns-only"/>
+        <copy todir="svg">
+            <fileset dir="temp">
+                <include name="**/*.svg"/>
+            </fileset>
+            <fileset dir=".">
+                <include name="rng-diag.css"/>
+            </fileset>
+        </copy>
+    <!--
+    <delete dir="temp"/>
+    -->
+    </target>
+
+</project>
