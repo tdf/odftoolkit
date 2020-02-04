@@ -2,22 +2,23 @@
 
 1. Rename RNG file with HTML suffix and open it in browser.
 2. Choice from the context menu show source
-* RNG file opened in chrome browser
-´´´
-    <tr>
-        <td class="line-number" value="61"></td>
-        <td class="line-content">&lt;define name="ds-signature"&gt;</td>
-    </tr>
-    
-* RNG with named with HTML suffix opened in chrome browser (providing more styles)
+* RNG file opened in Chrome browser
 
-´´´
-    <tr>
-        <td class="line-number" value="61"></td>
-        <td class="line-content">
-            <span class="html-tag">&lt;define <span class="html-attribute-name">name</span>="<span class="html-attribute-value">ds-signature</span>"&gt;</span>
-        </td>
-    </tr>
+        <tr>
+            <td class="line-number" value="61"></td>
+            <td class="line-content">&lt;define name="ds-signature"&gt;</td>
+        </tr>
+    
+* RNG with named with HTML suffix opened in Chrome browser (providing more styles)
+
+        <tr>
+            <td class="line-number" value="61"></td>
+            <td class="line-content">
+            <span class="html-tag">&lt;define 
+                <span class="html-attribute-name">name</span>="
+                <span class="html-attribute-value">ds-signature</span>"&gt;</span>
+            </td>
+        </tr>
     
 3. From the 'source' window, choose again from the context menu 'inspect'
 2. From the shown nodes, choose the body element and from the context menu choose 'copy element'
@@ -30,4 +31,4 @@
 8. Copy the sample_xslt\rng\view-source.css to the new created output target\generated-resources\xml\xslt
 
 **NOTE:** 
-Original CSS was downloaded from [chromium](https://chromium.googlesource.com/chromium/blink/+/72fef91ac1ef679207f51def8133b336a6f6588f/Source/core/css/view-source.css?autodive=0%2F%2F%2F)
+Original CSS was downloaded from [Chromium sources](https://chromium.googlesource.com/chromium/blink/+/72fef91ac1ef679207f51def8133b336a6f6588f/Source/core/css/view-source.css?autodive=0%2F%2F%2F)
