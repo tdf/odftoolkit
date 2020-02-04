@@ -111,7 +111,7 @@
                                     <ODFDOM-Version>${project.version}</ODFDOM-Version>
                                     <ODFDOM-Website>${project.url}</ODFDOM-Website>
                                     <ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
-                                    <ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
+                                    <ODFDOM-Supported-Odf-Version>${odf.version}</ODFDOM-Supported-Odf-Version>
                                 </manifestEntries>
                             </manifestSection>
                         </manifestSections>

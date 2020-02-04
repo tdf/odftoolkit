@@ -2,7 +2,7 @@
 
 # The ODF Toolkit
 
-http://odftoolkit.org
+Visit our latest documentation on [GitHub](https://tdf.github.io/odftoolkit/docs/). 
 
 The ODF Toolkit is a set of Java modules that allow programmatic
 creation, scanning and manipulation of Open Document Format (ISO/IEC 26300 == ODF)

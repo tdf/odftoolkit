@@ -34,8 +34,12 @@
 
     <properties>
         <jdk.version>1.8</jdk.version>
+        <odf.version>1.2</odf.version>
         <javadoc.bottom>Copyright © {inceptionYear}–2018 Apache Software Foundation; Copyright © 2018–{currentYear} {organizationName}. All rights reserved.</javadoc.bottom>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
+        <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
         <!-- ANT driven release bundle creation: 3 ZIPs for the complete Toolkit for binaries, documentation and sources -->
         <release.dir>${basedir}/target/release</release.dir>
         <release.dir.bin>${release.dir}/${project.version}/binaries</release.dir.bin>
@@ -324,8 +328,8 @@
                                 <!-- odfdom -->
                                 <exclude>src/main/resources/**</exclude>
                                 <exclude>src/test/resources/**</exclude>
-                                <exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-part1.html</exclude>
-                                <exclude>src/main/javadoc/doc-files/OpenDocument-v1.2-part3.html</exclude>
+                                <exclude>src/main/javadoc/doc-files/OpenDocument-v${odf.version}-part1.html</exclude>
+                                <exclude>src/main/javadoc/doc-files/OpenDocument-v${odf.version}-part3.html</exclude>
                                 <exclude>src/codegen/resources/dom/*.rng</exclude>
                                 <exclude>src/codegen/resources/pkg/*.rng</exclude>
                                 <!-- xslt-runner-task -->

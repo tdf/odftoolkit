@@ -117,25 +117,56 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
+
                     <archive>
                         <manifest>
                             <mainClass>org.odftoolkit.odfxsltrunner.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
+
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>                    
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <mainClass>org.odftoolkit.odfxsltrunner.Main</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <version>${project.version}</version>
+                        </manifestEntries>
+                        <manifestSections>
+                            <manifestSection>
+                                <name>XSLTRUNNER</name>
+                                <manifestEntries>
+                                    <XSLTRUNNER-Name>XSLTRUNNER</XSLTRUNNER-Name>
+                                    <XSLTRUNNER-Version>${project.version}</XSLTRUNNER-Version>
+                                    <!--  Implementation-URL -->
+                                    <XSLTRUNNER-Website>${project.url}</XSLTRUNNER-Website>
+                                    <XSLTRUNNER-Built-Date>${build.timestamp}</XSLTRUNNER-Built-Date>
+                                    <XSLTRUNNER-Supported-Odf-Version>${odf.version}</XSLTRUNNER-Supported-Odf-Version>
+                                </manifestEntries>
+                            </manifestSection>
+                        </manifestSections>
+                    </archive>
+                </configuration>            
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
+                        <id>single</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>            
         </plugins>
     </build>
     <profiles>
