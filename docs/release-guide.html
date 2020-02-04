@@ -192,7 +192,9 @@ Or in the central Maven repository under Group ID &quot;org.apache.odftoolkit&qu
 
 </li>
 <li>
-<p>Call from the ODF TOOLKIT base via command line one of the following:</p>
+<p>Call from the ODF TOOLKIT base via command line one of the following.
+<strong>NOTE</strong>: The option pedantic checks if all files have either a valid license header or an explicit exception.
+Often helpful for reviewing the build output is redirecting it into an own logfile.</p>
 <div class="codehilite"><pre><span></span>mvn install -Ppedantic
 
 mvn install -Ppedantic &gt; mylogFile.txt 2&gt;&amp;1
@@ -200,9 +202,10 @@ mvn install -Ppedantic &gt; mylogFile.txt 2&gt;&amp;1
 
 
 </li>
+<li>
+<p>You might want to <a href="website-development.html">update the website</a> to announce the release.</p>
+</li>
 </ol>
-<p><strong>NOTE</strong>: The option pedantic checks if all files have either a valid license header or an explicit exception.
-   Often helpful for reviewing the build output is redirecting it into an own logfile. </br></p>
 <h3 id="bundling-release-artefacts"><strong>Bundling Release Artefacts:</strong><a class="headerlink" href="#bundling-release-artefacts" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
@@ -216,7 +219,7 @@ mvn install -Ppedantic &gt; mylogFile.txt 2&gt;&amp;1
 
 </li>
 </ol>
-<p>The output will be created in the directory: 'ODF_TOOLKIT_BASE&amp;/target/release/'.</p>
+<p>The output will be created in the directory: 'ODF_TOOLKIT_BASE/target/release/'.</p>
 <p><strong>NOTE:</strong> Don't forget to  check if the ZIPs of the result directory have the correct content.</p>
 <h2 id="upload-of-the-6-release-artefacts">Upload of the 6 Release Artefacts<a class="headerlink" href="#upload-of-the-6-release-artefacts" title="Permanent link">&para;</a></h2>
 <ol>

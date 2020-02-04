@@ -1,4 +1,4 @@
-# The Document Foundation - ODF Toolkit
+# The ODF Toolkit
 
 ## Mission Statement
 
@@ -13,7 +13,7 @@ is lightweight and ideal for server use.
 With 1.0.0 the [basics of collaboration functionality](2DO.html) were added.
 
 2. **ODF Conformance** can be tested via the [ODF Validator](conformance/OdfValidator.html).
-Offered as command-line tool (executable JAR) or Web server component (WAR).
+Offered as command-line tool (executable JAR) or Web application archive (WAR) like [here](https://odfvalidator.org/).
 
 3. **XSL Transformation** loading the ODF XML from the zipped ODF can take the zipped ODF as source using the [ODF XSLT Runner](xsltrunner/ODFXSLTRunner.html).</br>
 This functionality is also available from [ANT](https://ant.apache.org/) using our [ANT task](xsltrunner/ODFXSLTRunnerTask.html)

@@ -173,7 +173,9 @@ cd odftoolkit/src/site
 <p>Using your favorite editors edit the site content, templates.</p>
 <h3 id="build-the-site">Build the site<a class="headerlink" href="#build-the-site" title="Permanent link">&para;</a></h3>
 <p>Run the <code>build-site.sh</code> script to build the markdown to HTML and copy all resources into the odftoolkit/docs directory.
-Afterthe changes have been merged to the master branch, all changes will become visible at <a href="https://tdf.github.io/odftoolkit/docs/">https://tdf.github.io/odftoolkit/docs/</a></p>
+After the changes have been merged into the master branch, all changes will become visible at <a href="https://tdf.github.io/odftoolkit/docs/">https://tdf.github.io/odftoolkit/docs/</a> as our GitHub project has enabled this feature.
+<strong>NOTE:</strong>
+Before commiting, you should test if all content of the HTML pages have been created - by clicking on every link on the local page. Often ODFDOM or Validator page were empty.</p>
 <h2 id="building-javadoc-and-publishing-the-javadoc">Building JavaDoc and publishing the JavaDoc<a class="headerlink" href="#building-javadoc-and-publishing-the-javadoc" title="Permanent link">&para;</a></h2>
 <p>JavaDoc is generated as part of the <code>mvn clean install</code> command called from the root of the project.
 Run the <code>copy-javadoc.sh</code> script to build copy the created API directories into the odftoolkit/docs/api directory and remove any prior files within.</p>

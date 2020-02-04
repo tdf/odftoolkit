@@ -66,14 +66,15 @@ The **GitHub release** has always **six files**:
 
         mvn clean
 
-2. Call from the ODF TOOLKIT base via command line one of the following:
+2. Call from the ODF TOOLKIT base via command line one of the following.
+**NOTE**: The option pedantic checks if all files have either a valid license header or an explicit exception.
+Often helpful for reviewing the build output is redirecting it into an own logfile.
 
         mvn install -Ppedantic
 
-        mvn install -Ppedantic > mylogFile.txt 2>&1
+        mvn install -Ppedantic > mylogFile.txt 2>&1   
 
-   **NOTE**: The option pedantic checks if all files have either a valid license header or an explicit exception.
-   Often helpful for reviewing the build output is redirecting it into an own logfile. </br>
+3. You might want to [update the website](website-development.html) to announce the release.
 
 ### **Bundling Release Artefacts:**
 
@@ -83,7 +84,7 @@ The **GitHub release** has always **six files**:
 
          mvn antrun:run@prepare-github-release -Pprepare-release
 
-The output will be created in the directory: 'ODF_TOOLKIT_BASE&/target/release/'.
+The output will be created in the directory: 'ODF_TOOLKIT_BASE/target/release/'.
 
 **NOTE:** Don't forget to  check if the ZIPs of the result directory have the correct content.
 
