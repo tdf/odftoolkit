@@ -26,11 +26,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -40,13 +45,11 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
 
 /**
  * Class for applying style sheets to ODF documents.
@@ -125,11 +128,11 @@ public class ODFXSLTRunner {
                      List<String> aExtractFileNames,
                      Logger aLogger )
     {
-        return runXSLT( new File( aStyleSheet ), aParams,
-                        new File( aInputFile), aInputMode,
-                        aOutputFile != null ? new File(aOutputFile) : null, aOutputMode,
-                        aPathInPackage, aTransformerFactoryClassName,
-                        aExtractFileNames, aLogger );
+            return runXSLT( new File( aStyleSheet ), aParams,
+                    new File( aInputFile), aInputMode,
+                    aOutputFile != null ? new File(aOutputFile) : null, aOutputMode,
+                    aPathInPackage, aTransformerFactoryClassName,
+                    aExtractFileNames, aLogger );
     }
 
 
@@ -243,8 +246,12 @@ public class ODFXSLTRunner {
 
         aLogger.setName( aStyleSheetFile.getAbsolutePath() );
         aLogger.logInfo( "Applying stylesheet to '" + aInputName + "'");
-        bError = runXSLT( aStyleSheetFile, aParams, aInputSource, aOutputResult,
-                          aTransformerFactoryClassName, aURIResolver, aLogger );
+        try {
+            bError = runXSLT( aStyleSheetFile, aParams, aInputSource, aOutputResult,
+                    aTransformerFactoryClassName, aURIResolver, aLogger );
+        } catch (ParserConfigurationException ex) {
+            java.util.logging.Logger.getLogger(ODFXSLTRunner.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if( bError )
             return true;
 
@@ -262,7 +269,7 @@ public class ODFXSLTRunner {
                 extractFiles( aInputPkg, aTargetDir, aExtractFileNames, aLogger );
             }
         }
-        catch( Exception e )
+        catch( IOException | SAXException e )
         {
             aLogger.logFatalError(e.getMessage());
             return true;
@@ -277,7 +284,7 @@ public class ODFXSLTRunner {
                      InputSource aInputInputSource, Result aOutputTarget,
                      String aTransformerFactoryClassName,
                      URIResolver aURIResolver,
-                     Logger aLogger )
+                     Logger aLogger ) throws ParserConfigurationException
     {
         InputStream aStyleSheetInputStream = null;
         try
@@ -293,12 +300,14 @@ public class ODFXSLTRunner {
         InputSource aStyleSheetInputSource = new InputSource(aStyleSheetInputStream);
         aStyleSheetInputSource.setSystemId(aStyleSheetFile.getAbsolutePath());
 
-        XMLReader aStyleSheetXMLReader = null;
-        XMLReader aInputXMLReader = null;
+        XMLReader aStyleSheetXMLReader;
+        XMLReader aInputXMLReader;
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        factory.setValidating(true);
         try
         {
-            aStyleSheetXMLReader = XMLReaderFactory.createXMLReader();
-            aInputXMLReader = XMLReaderFactory.createXMLReader();
+            aStyleSheetXMLReader =  factory.newSAXParser().getXMLReader();
+            aInputXMLReader = factory.newSAXParser().getXMLReader();
         }
         catch( SAXException e )
         {
@@ -328,23 +337,15 @@ public class ODFXSLTRunner {
             if (cl == null)
                 cl = ClassLoader.getSystemClassLoader();
             Class classInstance = cl.loadClass(aTransformerFactoryClassName);
-			aFactory = (TransformerFactory)classInstance.newInstance();
+			aFactory = (TransformerFactory)classInstance.getDeclaredConstructor().newInstance();
 		  }
-		  catch( ClassNotFoundException ce )
+		  catch( ClassNotFoundException | InstantiationException | IllegalAccessException ce )
           {
             aLogger.logFatalError(ce.getMessage());
             return true;
-          }
-		  catch( InstantiationException ie )
-          {
-            aLogger.logFatalError(ie.getMessage());
-            return true;
-          }
-		  catch( IllegalAccessException ile )
-          {
-            aLogger.logFatalError(ile.getMessage());
-            return true;
-          }
+          } catch (NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException ex) {
+                java.util.logging.Logger.getLogger(ODFXSLTRunner.class.getName()).log(Level.SEVERE, null, ex);
+            }
 		}
         ErrorListener aErrorListener = new TransformerErrorListener( aLogger );
         aLogger.logInfo( "Using transformer factory class: " + aFactory.getClass().getName() );
