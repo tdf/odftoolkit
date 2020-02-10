@@ -4,8 +4,7 @@
 
 **ODF XSLT Runner** is a small Java application that allows you to apply
 XSLT stylesheets to XML streams included in ODF packages without extracting
-them from the package. It can be used from the command line. A [driver][1] to use
-it within Ant buildfiles is also available.
+them from the package. It can be used from the command line. 
 
 ## Getting and building ODF XSLT Runner
 
