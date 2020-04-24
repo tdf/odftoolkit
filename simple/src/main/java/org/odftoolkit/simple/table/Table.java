@@ -31,6 +31,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.xerces.dom.ParentNode;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
@@ -43,19 +44,7 @@ import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableColumnPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
-import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
-import org.odftoolkit.odfdom.dom.element.table.TableNamedExpressionsElement;
-import org.odftoolkit.odfdom.dom.element.table.TableNamedRangeElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
-import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableColumnsElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderColumnsElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderRowsElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableRowElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableRowGroupElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableRowsElement;
+import org.odftoolkit.odfdom.dom.element.table.*;
 import org.odftoolkit.odfdom.dom.element.text.TextHElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
@@ -713,8 +702,9 @@ public class Table extends Component {
 		int result = 0;
 		TableTableColumnElement columnEle = null;
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
-			if (n instanceof TableTableHeaderColumnsElement) {
-				TableTableHeaderColumnsElement headers = (TableTableHeaderColumnsElement) n;
+			if (n instanceof TableTableHeaderColumnsElement ||
+                n instanceof TableTableColumnGroupElement) {
+				ParentNode headers = (ParentNode) n;
 				for (Node m : new DomNodeList(headers.getChildNodes())) {
 					if (m instanceof TableTableColumnElement) {
 						columnEle = (TableTableColumnElement) m;
@@ -1285,9 +1275,9 @@ public class Table extends Component {
 	public int getColumnCount() {
 		int result = 0;
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
-			// TODO: how about <table:table-column-group>
-			if (n instanceof TableTableHeaderColumnsElement) {
-				result += getHeaderColumnCount((TableTableHeaderColumnsElement) n);
+			if (n instanceof TableTableHeaderColumnsElement ||
+                n instanceof TableTableColumnGroupElement) {
+				result += getHeaderColumnCount((ParentNode) n);
 			}
 
 			// <table:table-columns>
@@ -2237,8 +2227,9 @@ public class Table extends Component {
 		ArrayList<Column> list = new ArrayList<Column>();
 		TableTableColumnElement colEle = null;
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
-			if (n instanceof TableTableHeaderColumnsElement) {
-				TableTableHeaderColumnsElement headers = (TableTableHeaderColumnsElement) n;
+			if (n instanceof TableTableHeaderColumnsElement ||
+                n instanceof TableTableColumnGroupElement) {
+				ParentNode headers = (ParentNode) n;
 				for (Node m : new DomNodeList(headers.getChildNodes())) {
 					if (m instanceof TableTableColumnElement) {
 						colEle = (TableTableColumnElement) m;
@@ -2335,12 +2326,13 @@ public class Table extends Component {
 		Column col = null;
 		// TableTableColumnElement colEle=null;
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
-			if (n instanceof TableTableHeaderColumnsElement) {
-				col = getHeaderColumnByIndex((TableTableHeaderColumnsElement) n, index);
+			if (n instanceof TableTableHeaderColumnsElement ||
+                n instanceof TableTableColumnGroupElement) {
+				col = getHeaderColumnByIndex((ParentNode) n, index);
 				if (col != null) {
 					return col;
 				}
-				result += getHeaderColumnCount((TableTableHeaderColumnsElement) n);
+				result += getHeaderColumnCount((ParentNode) n);
 			}
 			if (n instanceof TableTableColumnElement) {
 				col = getColumnInstance((TableTableColumnElement) n, 0);
@@ -2368,13 +2360,13 @@ public class Table extends Component {
 		return null;
 	}
 
-	private Column getHeaderColumnByIndex(TableTableHeaderColumnsElement headers, int nIndex) {
+	private Column getHeaderColumnByIndex(ParentNode headers, int nIndex) {
 		int result = 0;
 		Column col = null;
 		for (Node n : new DomNodeList(headers.getChildNodes())) {
 			if (n instanceof TableTableColumnElement) {
 				col = getColumnInstance((TableTableColumnElement) n, 0);
-				result += col.getColumnsRepeatedNumber();
+				result = col.getColumnIndex() + col.getColumnsRepeatedNumber();
 			}
 			if (result > nIndex) {
 				return getColumnInstance(col.getOdfElement(), nIndex - (result - col.getColumnsRepeatedNumber()));
@@ -2519,7 +2511,7 @@ public class Table extends Component {
 		return getHeaderRowCount(headers);
 	}
 
-	private int getHeaderColumnCount(TableTableHeaderColumnsElement headers) {
+	private int getHeaderColumnCount(ParentNode headers) {
 		int result = 0;
 		if (headers != null) {
 			for (Node n : new DomNodeList(headers.getChildNodes())) {
@@ -3364,8 +3356,9 @@ public class Table extends Component {
 				if (nextColumnElement == null) {
 					child = ownerTable.getOdfElement().getFirstChild();
 					while (child != null) {
-						if (child instanceof TableTableHeaderColumnsElement) {
-							TableTableHeaderColumnsElement headers = (TableTableHeaderColumnsElement) child;
+						if (child instanceof TableTableHeaderColumnsElement ||
+                            child instanceof TableTableColumnGroupElement) {
+							ParentNode headers = (ParentNode) child;
 							Node header = headers.getFirstChild();
 							while (header != null) {
 								if (header instanceof TableTableColumnElement) {

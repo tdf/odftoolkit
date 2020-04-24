@@ -29,6 +29,8 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.xerces.dom.ParentNode;
+import org.odftoolkit.odfdom.dom.element.table.*;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
@@ -44,15 +46,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTableColumnPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
-import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
-import org.odftoolkit.odfdom.dom.element.table.TableNamedRangeElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
-import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderColumnsElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderRowsElement;
-import org.odftoolkit.odfdom.dom.element.table.TableTableRowElement;
 import org.odftoolkit.odfdom.dom.element.text.TextHElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
@@ -194,8 +187,9 @@ public class OdfTable {
 		int result = 0;
 		TableTableColumnElement columnEle = null;
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
-			if (n instanceof TableTableHeaderColumnsElement) {
-				TableTableHeaderColumnsElement headers = (TableTableHeaderColumnsElement) n;
+			if (n instanceof TableTableHeaderColumnsElement ||
+                n instanceof TableTableColumnGroupElement) {
+				ParentNode headers = (ParentNode) n;
 				for (Node m : new DomNodeList(headers.getChildNodes())) {
 					if (m instanceof TableTableColumnElement) {
 						columnEle = (TableTableColumnElement) m;

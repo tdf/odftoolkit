@@ -26,6 +26,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.apache.xerces.dom.ParentNode;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnGroupElement;
@@ -62,7 +63,7 @@ public class Column extends Component {
 	/**
 	 * Construct the <code>Column</code> feature.
 	 *
-	 * @param odfElement
+	 * @param colElement
 	 *            the element that can construct this table column
 	 * @param repeatedIndex
 	 *            the index in the repeated columns
@@ -485,8 +486,9 @@ public class Column extends Component {
 		TableTableColumnElement columnEle;
 		TableTableElement mTableElement = table.getOdfElement();
 		for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
-			if (n instanceof TableTableHeaderColumnsElement) {
-				TableTableHeaderColumnsElement headers = (TableTableHeaderColumnsElement) n;
+			if (n instanceof TableTableHeaderColumnsElement ||
+                n instanceof TableTableColumnGroupElement) {
+				ParentNode headers = (ParentNode) n;
 				for (Node m : new DomNodeList(headers.getChildNodes())) {
 					if (m instanceof TableTableColumnElement) {
 						columnEle = (TableTableColumnElement) m;
