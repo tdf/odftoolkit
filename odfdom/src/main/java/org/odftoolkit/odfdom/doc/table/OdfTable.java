@@ -26,6 +26,7 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.xerces.dom.ParentNode;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
@@ -42,6 +43,7 @@ import org.odftoolkit.odfdom.dom.element.table.TableNamedRangeElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElementBase;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableColumnGroupElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnsElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderColumnsElement;
@@ -195,8 +197,9 @@ public class OdfTable {
     int result = 0;
     TableTableColumnElement columnEle = null;
     for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
-      if (n instanceof TableTableHeaderColumnsElement) {
-        TableTableHeaderColumnsElement headers = (TableTableHeaderColumnsElement) n;
+      if (n instanceof TableTableHeaderColumnsElement
+          || n instanceof TableTableColumnGroupElement) {
+        ParentNode headers = (ParentNode) n;
         for (Node m : new DomNodeList(headers.getChildNodes())) {
           if (m instanceof TableTableColumnElement) {
             columnEle = (TableTableColumnElement) m;
