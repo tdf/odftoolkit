@@ -133,7 +133,7 @@
                 <configuration>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>                    
+                    </descriptorRefs>
                     <archive>
                         <index>true</index>
                         <manifest>
@@ -156,7 +156,7 @@
                             </manifestSection>
                         </manifestSections>
                     </archive>
-                </configuration>            
+                </configuration>
                 <executions>
                     <execution>
                         <id>single</id>
@@ -166,7 +166,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>            
+            </plugin>
         </plugins>
     </build>
     <profiles>
