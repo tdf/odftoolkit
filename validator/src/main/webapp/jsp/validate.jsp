@@ -90,6 +90,16 @@ if(ServletFileUpload.isMultipartContent(request)) {
 						break;
 					case 1:
 						aOdfVersion = OdfVersion.V1_2;
+						odfValidatorMode = OdfValidatorMode.CONFORMANCE;
+						break;
+					case 7:
+						aOdfVersion = OdfVersion.V1_3;
+						odfValidatorMode = OdfValidatorMode.CONFORMANCE;
+						break;
+					case 8:
+						odfValidatorMode = OdfValidatorMode.EXTENDED_CONFORMANCE;
+						aOdfVersion = OdfVersion.V1_3;
+						break;
 					default:
 						odfValidatorMode = OdfValidatorMode.CONFORMANCE;
 						break;
@@ -145,6 +155,8 @@ if(ServletFileUpload.isMultipartContent(request)) {
 	<p class="selection"><a href="info.html">ODF Version</a>:<br/>
 		<select name="modeSelection" size="1" onChange="javascript: return setconfig();">
 			<option value="0" selected="">auto-detect</option>
+			<option value="7">OASIS ODF 1.3 (conforming)</option>
+			<option value="8">OASIS ODF 1.3 (extended conforming)</option>
 			<option value="1">OASIS ODF 1.2 (conforming)</option>
 			<option value="2">OASIS ODF 1.2 (extended conforming)</option>
 			<option value="3">OASIS ODF 1.1 (strict)</option>
