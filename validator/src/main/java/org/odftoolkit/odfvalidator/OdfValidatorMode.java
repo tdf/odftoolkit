@@ -39,7 +39,7 @@ public enum OdfValidatorMode {
     VALIDATE_STRICT ("strict valid"),
 
     /***
-     * ODF 1.2 only, equals CONFORMANCE for ODF 1.0/1.1
+     * ODF 1.2 and 1.3 only, equals CONFORMANCE for ODF 1.0/1.1
      */
     EXTENDED_CONFORMANCE ("extended conformant");
 
