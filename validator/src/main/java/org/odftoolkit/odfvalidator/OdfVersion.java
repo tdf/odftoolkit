@@ -24,7 +24,7 @@ package org.odftoolkit.odfvalidator;
 
 public enum OdfVersion {
 
-    V1_0( "1.0" ), V1_1( "1.1" ), V1_2( "1.2" );
+    V1_0( "1.0" ), V1_1( "1.1" ), V1_2( "1.2" ), V1_3( "1.3" );
 
     private String m_aValue;
 

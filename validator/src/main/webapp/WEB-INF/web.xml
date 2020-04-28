@@ -28,7 +28,7 @@
     <context-param>
 		<!-- application title, shown in the header of the application -->
         <param-name>APPLICATION_TITLE</param-name>
-        <param-value>ODF Validator 1.2</param-value>
+        <param-value>ODF Validator 1.3</param-value>
     </context-param>
     <context-param>
 		<!-- name for setting-storing, used in the settings database -->
