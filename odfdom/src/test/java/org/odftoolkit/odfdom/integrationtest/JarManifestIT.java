@@ -61,7 +61,17 @@ public class JarManifestIT {
             String firstOutputLine = null;
             String secondOutputLine = null;
             try {
-                ProcessBuilder builder = new ProcessBuilder(System.getenv("JAVA_HOME") +"/bin/java",  "-jar", jarPath);
+                String javaHome = System.getenv("JAVA_HOME");
+                ProcessBuilder builder;
+                String javaPath;
+                if(javaHome == null || javaHome.isEmpty()){
+                    LOG.info("JAVA_HOME not set, therefore calling default java!");
+                    javaPath = "java";
+                }else{
+                    LOG.log(Level.INFO, "Calling java defined by JAVA_HOME: {0}/bin/java", javaHome);
+                    javaPath = System.getenv("JAVA_HOME") + "/bin/java";
+                }
+                builder = new ProcessBuilder(javaPath, "-jar", jarPath);
                 builder.redirectErrorStream(true);
                 Process p = builder.start();
                 BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));

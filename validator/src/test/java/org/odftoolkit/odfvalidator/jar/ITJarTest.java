@@ -27,14 +27,17 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Integration test to validate via JAR testing command line parameters on
- * (an invalid) ODF package.
+ * Integration test to validate via JAR testing command line parameters on (an
+ * invalid) ODF package.
  */
 public class ITJarTest {
+
+    private static final Logger LOG = Logger.getLogger(ITJarTest.class.getName());
     private static final String JAR_NAME_SUFFIX = "-jar-with-dependencies.jar";
     private static final String JAR_NAME_PREFIX = "odfvalidator-";
     private static final String ODT_NAME = "testInvalidPkg2.odt"; // password: hello
@@ -47,9 +50,19 @@ public class ITJarTest {
             // Command line call might be:
             // java -jar .m2/repository/org/apache/odftoolkit/odfvalidator/1.2.0-incubating-SNAPSHOT/odfvalidator-1.2.0-incubating-SNAPSHOT-jar-with-dependencies.jar foo.odt
             String odfvalidatorVersion = System.getProperty("odfvalidator.version");
-            ProcessBuilder builder = new ProcessBuilder(
-                System.getenv("JAVA_HOME") +"/bin/java", "-jar", "target" + File.separatorChar + JAR_NAME_PREFIX + odfvalidatorVersion + JAR_NAME_SUFFIX,
-                "target" + File.separatorChar + "test-classes" + File.separatorChar + ODT_NAME);
+            String javaHome = System.getenv("JAVA_HOME");
+            ProcessBuilder builder;
+            String javaPath;
+            if (javaHome == null || javaHome.isEmpty()) {
+                LOG.info("JAVA_HOME not set, therefore calling default java!");
+                javaPath = "java";
+            } else {
+                LOG.log(Level.INFO, "Calling java defined by JAVA_HOME: {0}/bin/java", javaHome);
+                javaPath = System.getenv("JAVA_HOME") + "/bin/java";
+            }
+            builder = new ProcessBuilder(
+                    javaPath, "-jar", "target" + File.separatorChar + JAR_NAME_PREFIX + odfvalidatorVersion + JAR_NAME_SUFFIX,
+                    "target" + File.separatorChar + "test-classes" + File.separatorChar + ODT_NAME);
             builder.redirectErrorStream(true);
             Process p = builder.start();
             BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
