@@ -61,7 +61,7 @@ public class JarManifestIT {
             String firstOutputLine = null;
             String secondOutputLine = null;
             try {
-                ProcessBuilder builder = new ProcessBuilder("java",  "-jar", jarPath);
+                ProcessBuilder builder = new ProcessBuilder(System.getenv("JAVA_HOME") +"/bin/java",  "-jar", jarPath);
                 builder.redirectErrorStream(true);
                 Process p = builder.start();
                 BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));

@@ -48,7 +48,7 @@ public class ITJarTest {
             // java -jar .m2/repository/org/apache/odftoolkit/odfvalidator/1.2.0-incubating-SNAPSHOT/odfvalidator-1.2.0-incubating-SNAPSHOT-jar-with-dependencies.jar foo.odt
             String odfvalidatorVersion = System.getProperty("odfvalidator.version");
             ProcessBuilder builder = new ProcessBuilder(
-                "java", "-jar", "target" + File.separatorChar + JAR_NAME_PREFIX + odfvalidatorVersion + JAR_NAME_SUFFIX,
+                System.getenv("JAVA_HOME") +"/bin/java", "-jar", "target" + File.separatorChar + JAR_NAME_PREFIX + odfvalidatorVersion + JAR_NAME_SUFFIX,
                 "target" + File.separatorChar + "test-classes" + File.separatorChar + ODT_NAME);
             builder.redirectErrorStream(true);
             Process p = builder.start();
