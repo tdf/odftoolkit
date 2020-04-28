@@ -19,28 +19,28 @@
 <h2>Options</h2>
 <h3 id="mode">ODF Version</h3>
 <ul>
-	<li><p><span style="font-weight:bold;">autodetect  </span>: Detects the ODF version of the root document from the given ODF package. ODF documents with version 1.2 will be validated against conformance, version 1.0/1.1 against none strict. 
+	<li><p><span style="font-weight:bold;">autodetect  </span>: Detects the ODF version of the root document from the given ODF package. ODF documents with version 1.2/1.3 will be validated against conformance, version 1.0/1.1 against none strict. 
 			In all other choices the document is validated with respect to the selected OpenDocument version regardless of the version information that is included in the file</p></li>
 	<li><p><span style="font-weight:bold;">conformant  </span>: Checks the basic requirements conforming OpenDocument documents must meet.
-			This modes considers the version of the checked documents. This means that for OpenDocument v1.2 documents (or if OpenDocument v1.2 has been selected) the
-			conformance definitions of the OpenDocument v1.2 specification are taken as basis, while those of the OpenDocument v1.1/v1.0 specification are taken as basis
+			This modes considers the version of the checked documents. This means that for OpenDocument v1.2/1.3 documents (or if OpenDocument v1.2/1.3) has been selected) the
+			conformance definitions of the OpenDocument v1.2/1.3 specification are taken as basis, while those of the OpenDocument v1.1/v1.0 specification are taken as basis
 			for OpenDocument v1.1/v1.0 documents. Please note that not all provisions for conforming documents are checked.</p></li>
-	<li><p><span style="font-weight:bold;">extended conformance test</span>: For OpenDocument v1.2 documents (or if OpenDocument v1.2 has been selected), the basic requirements of extended conforming ODF documents are checked.
+	<li><p><span style="font-weight:bold;">extended conformance test</span>: For OpenDocument v1.2/1.3 documents (or if OpenDocument v1.2/1.3 has been selected), the basic requirements of extended conforming ODF documents are checked.
 			For OpenDocument v1.0/v1.1 documents (or if OpenDocument v1.0/v1.1 has been selected) this mode equals the <span style="font-weight:bold;">conformance test</span> mode.</p></li>
 	<li><p><span style="font-weight:bold;">validation</span>: For OpenDocument v1.1/v1.0 documents (or if OpenDocument v1.1/v1.0 has been selected) the selected document is validated in regard of the OpenDocument v1.1/v1.0 schema.
-			For OpenDocument v1.2 documents (or if OpenDocument v1.2 has been selected) this mode equals the <span style="font-weight:bold;">conformance test</span> mode.</p></li>
+			For OpenDocument v1.2/1.3 documents (or if OpenDocument v1.2/1.3 has been selected) this mode equals the <span style="font-weight:bold;">conformance test</span> mode.</p></li>
 	<li><p><span style="font-weight:bold;">strict validation</span>: For OpenDocument v1.1/v1.0 documents (or if OpenDocument v1.1/v1.0 has been selected) the selected document is validated in regard of the strict OpenDocument v1.1/v1.0 schema.
-			For OpenDocument v1.2 documents (or if OpenDocument v1.2 has been selected) this mode equals the <span style="font-weight:bold;">conformance test</span> mode.</p></li>
+			For OpenDocument v1.2/1.3 documents (or if OpenDocument v1.2/1.3 has been selected) this mode equals the <span style="font-weight:bold;">conformance test</span> mode.</p></li>
 </ul>
 <p>For OpenDocument v1.1/v1.0 documents, the <span style="font-weight:bold;">validation</span> and <span style="font-weight:bold;">strict validation</span> tests are more restrictive than a conformance test. Please note that this means that errors may be reported for documents that are actually conforming to the ODF specification.</p>
 <p>The <span style="font-weight:bold;">strict validation test</span> is recommended for developers that want to make sure that an OpenDocument v1.0/v1.1 document does not only validate in regards to the ODF schema, but also does not use any extensions. The recommended mode
 	for OpenDocument v1.2 documents is <span style="font-weight:bold;">conformance test</span>.</p>
 <p>The following items are checked by the validation service:</p>
 <ul>
-	<li><p>OpenDocument v1.2 documents</p>
+	<li><p>OpenDocument v1.2/1.3 documents</p>
 		<ul>
-			<li><p>If the test type is <span style="font-weight:bold;">conformance test</span>, and if the file is not a formula file, then the sub files <i>content.xml</i>, <i>styles.xml</i>, <i>meta.xml</i> and <i>settings.xml</i> are  validated with respect to the OpenDocument v1.2 schema.</p></li>
-			<li><p>If the test type is <span style="font-weight:bold;">extended conformance test</span>, and if the file is not a formula file, then the sub files <i>content.xml</i>, <i>styles.xml</i>, <i>meta.xml</i> and <i>settings.xml</i> are pre-processed as described in section 1.4.2.1 of the OpenDocument v1.2 specification (that is <i>foreign elements and attributes</i> are removed), and are then validated with respect to the OpenDocument v1.2 schema.</p></li>
+			<li><p>If the test type is <span style="font-weight:bold;">conformance test</span>, and if the file is not a formula file, then the sub files <i>content.xml</i>, <i>styles.xml</i>, <i>meta.xml</i> and <i>settings.xml</i> are  validated with respect to the OpenDocument v1.2/1.3 schema.</p></li>
+			<li><p>If the test type is <span style="font-weight:bold;">extended conformance test</span>, and if the file is not a formula file, then the sub files <i>content.xml</i>, <i>styles.xml</i>, <i>meta.xml</i> and <i>settings.xml</i> are pre-processed as described in section 1.4.2.1 of the OpenDocument v1.2 specification (that is <i>foreign elements and attributes</i> are removed), and are then validated with respect to the OpenDocument v1.2/1.3 schema.</p></li>
 		</ul>
 	</li>
 	<li><p>OpenDocument v1.1/1.0 documents</p>
@@ -54,7 +54,7 @@
 		<ul>
 			<li><p>If the file is a formula file, then the sub file <i>content.xml</i> is validated with respect to the MathML 2.0 W3C XSD schema.  The sub files <i>styles.xml</i>, <i>meta.xml</i> and <i>settings.xml</i> are checked as described for other document types.</p></li>
 			<li><p>The file <i>META-INF/manifest.xml</i> is validated with respect to the manifest schema of the selected ODF specification.</p></li>
-			<li><p>If the file is an ODF 1.2 file, then the <i>META-INF/documentsignatures.xml</i> and <i>META-INF/macrosignatures.xml</i> sub files are validated with respect to the digital signatures schema of the ODF 1.2 specification.</p></li>
+			<li><p>If the file is an ODF 1.2/1.3 file, then the <i>META-INF/documentsignatures.xml</i> and <i>META-INF/macrosignatures.xml</i> sub files are validated with respect to the digital signatures schema of the ODF 1.2/1.3 specification.</p></li>
 			<li><p>For all embedded objects in ODF format, the <i>content.xml</i>, <i>styles.xml</i>, <i>meta.xml</i> and <i>settings.xml</i> are validated as described for the main document above</p></li>
 			<li><p>It is checked whether the file itself ans all embedded objects in ODF format contain at least a <i>content.xml</i> or <i>styles.xml</i> sub file.</p></li>
 		</ul>

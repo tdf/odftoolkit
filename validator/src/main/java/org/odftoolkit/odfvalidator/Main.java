@@ -177,7 +177,7 @@ public class Main {
             {
                 bPrintVersion = true;
             }
-            else if( aArg.equals("-1.0") || aArg.equals("-1.1") || aArg.equals("-1.2") )
+            else if( aArg.equals("-1.0") || aArg.equals("-1.1") || aArg.equals("-1.2") || aArg.equals("-1.3") )
             {
                 aVersion = OdfVersion.valueOf( aArg.substring(1), false );
             }
@@ -331,7 +331,7 @@ public class Main {
     private static void printUsage()
     {
         System.out.println( "usage: odfvalidator -g <odffiles>");
-        System.out.println( "       odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>] [-o outputfile] [-1.0|-1.1|-1.2] <odffiles>");
+        System.out.println( "       odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>] [-o outputfile] [-1.0|-1.1|-1.2|1.3] <odffiles>");
         System.out.println( "       odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>] [-o outputfile] -S <schemafile> <odffiles>");
         System.out.println( "       odfvalidator [-r] [-c|-e|-s] [-v|-w] -O <rngfile> -M <rngfile> -D <rngfile> -m <xsdfile> [-f <filterfile>] [-x <regexp>] [-o outputfile] <odffiles>");
         System.out.println( "       odfvalidator [-c|-s] [-v|-w] [-d] [-o outputfile] -C <configfile>");
@@ -345,8 +345,8 @@ public class Main {
         System.out.println( "-D: Use ODF dsig schema <schemafile> for validation" );
         System.out.println( "-m: Use MathML2 schema <schemafile> for validation" );
         System.out.println( "-V: Print version" );
-        System.out.println( "-c: Check conformance (default for ODF 1.2 documents)" );
-        System.out.println( "-e: Check extended conformance (ODF 1.2 documents only)" );
+        System.out.println( "-c: Check conformance (default for ODF 1.2 and 1.3 documents)" );
+        System.out.println( "-e: Check extended conformance (ODF 1.2 and 1.3 documents only)" );
         System.out.println( "-d: Use MathML DTD rather than MathML2 schema for validation" );
         System.out.println( "-f: Use filterfile <filterfile>" );
         System.out.println( "-g: Show <odffiles> generators and exit" );

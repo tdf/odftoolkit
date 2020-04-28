@@ -114,11 +114,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <h2 id="how-to-start">How to start<a class="headerlink" href="#how-to-start" title="Permanent link">&para;</a></h2>
 <p>To use the '''ODF Validator''', the following steps are required:</p>
 <ul>
-<li>Get the source code.</li>
-<li>Add the jar files listed under Requirements to the project's libraries.</li>
-<li>Get the ODF 1.0, 1,1 and 1.2 schemas, and add the directories where your local copies of the schemas are stored to the '''schema.user.properties''' file.</li>
-<li>Get the MathML 1.01 DTD and the MathML 2.0 schemas, and add the directories where you local copies of the schemas are stored to the '''schema.user.properties''' file.</li>
-<li>Build the project.</li>
+<li>Build ODFToolkit as described in https://github.com/tdf/odftoolkit#getting-started</li>
 <li>You may <strong>deploy the WAR bundle from the target file into your application server</strong> of choice (e.g. Tomcat)</li>
 <li>Choose an arbitrary OpenDocument file &lt;odffile&gt;</li>
 <li>
@@ -151,7 +147,7 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <p>These command lines are abbreviated <em>odfvalidator</em> from now on.</p>
 <p>The <strong>ODF Validator</strong> may be called with the following options:</p>
 <div class="codehilite"><pre><span></span> odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x &lt;expclude pattern&gt;]
-              [-o outputfile] [-1.0|-1.1|-1.2] &lt;odffiles&gt;
+              [-o outputfile] [-1.0|-1.1|-1.2|-1.3] &lt;odffiles&gt;
  odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x &lt;expclude pattern&gt;]
               [-o outputfile] -S &lt;schemafile&gt; &amp;lt;odffiles&gt;
  odfvalidator [-c|-s] [-v|-w] [-d] [-o outputfile] -C &amp;lt;configfile&gt;
@@ -164,8 +160,9 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <p>If no parameters are specified, the files <strong>&lt;odffiles&gt;</strong> are validated using the schema that belongs to the ODF version of the file. For ODF 1.0 files the ODF 1.0 schema is used, for ODF 1.1 files the ODF 1.1 schema is used, and so on. The version of an ODF file is detected for each file separately.</p>
 <p>The options have the following meaning:</p>
 <p><strong>-1.0</strong>: Use the ODF 1.0 schemas regardless of the version specified by the validated document.</p>
-<p><strong>-1.1</strong>: Use the ODF 1.0 schemas regardless of the version specified by the validated document.</p>
-<p><strong>-1.2</strong>: Use the ODF 1.0 schemas regardless of the version specified by the validated document.</p>
+<p><strong>-1.1</strong>: Use the ODF 1.1 schemas regardless of the version specified by the validated document.</p>
+<p><strong>-1.2</strong>: Use the ODF 1.2 schemas regardless of the version specified by the validated document.</p>
+<p><strong>-1.3</strong>: Use the ODF 1.3 schemas regardless of the version specified by the validated document.</p>
 <p><strong>-c</strong>: Apply ODF conformance rules (ODF 1.0 and 1.1 documents only): Unknown markup is ignored during validation. For ODF 1.2 documents this option does not have any effect.</p>
 <p><strong>-e</strong>: Apply extended ODF conformance rules (ODF 1.2 documents only): Unknown markup is ignored during validation. For ODF 1.0/1.1 documents this option does not have any effect.</p>
 <p><strong>-d</strong>: Use MathML 1.01 DTD rather than MathML 2.0 schema for content.xml of formula documents.</p>
@@ -181,11 +178,11 @@ h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover
 <p><strong>-S</strong>: Use the specified <strong>&lt;schemafile&gt;</strong> for validation.</p>
 <p><strong>-V</strong>: Print version information.</p>
 <h3 id="validation-using-default-schemas">Validation using default schemas<a class="headerlink" href="#validation-using-default-schemas" title="Permanent link">&para;</a></h3>
-<p>The ODF 1.0, ODF 1.1, ODF 1.2 schemas as well as the MathML 1.01 DTD and
+<p>The ODF 1.0, ODF 1.1, ODF 1.2, ODF 1.3 schemas as well as the MathML 1.01 DTD and
 the MathML 2.0 schema are included in the <strong>ODFValidator.jar</strong> file. If
 the ODFValidator is called without the <strong>-S</strong> or <strong>-C</strong> options, these schemas are used for validation.</p>
 <div class="codehilite"><pre><span></span>odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x &lt;expclude pattern&gt;]
-              [-o outputfile] [-1.0|-1.1|-1.2] &lt;odffiles&gt;
+              [-o outputfile] [-1.0|-1.1|-1.2|-1.3] &lt;odffiles&gt;
 </pre></div>
 
 
@@ -195,7 +192,7 @@ extension (like <strong>odt</strong>, <strong>ods</strong> or <strong>ott</stron
 specified additionally, all directories are processed recursively.</p>
 <p>By default, the <strong>ODF Validator</strong> detects the version of the files that
 shall be validated and chooses the corresponding schema. The command line
-options <strong>-1.0</strong>', <strong>-1.1</strong> and <strong>-1.2</strong> can be used to specify that the
+options <strong>-1.0</strong>', <strong>-1.1</strong>, <strong>-1.2</strong> and <strong>-1.3</strong> can be used to specify that the
 schemas of a particular ODF version should be used for all files,
 regardless of the version they specify themselves.</p>
 <p>The command line option <strong>-d</strong> specifies that the MathML 1.01 DTD should
@@ -266,7 +263,7 @@ a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html
 <h2 id="what-is-checked">What is checked<a class="headerlink" href="#what-is-checked" title="Permanent link">&para;</a></h2>
 <p>The following items are checked:</p>
 <ul>
-<li>OpenDocument v1.2 documents<ul>
+<li>OpenDocument v1.2/1.3 documents<ul>
 <li>If the test type is <strong>conformance test</strong> (default, or if <strong>-c</strong> is provided) , and if the file is not a formula file, then the sub files <em>content.xml</em>, <em>styles.xml</em>, <em>meta.xml</em> and <em>settings.xml</em> are  validated with respect to the OpenDocument v1.2 schema.</li>
 <li>If the test type is <strong>extended conformance test</strong> (<strong>-e</strong> is provided), and if the file is not a formula file, then the sub files <em>content.xml</em>, <em>styles.xml</em>, <em>meta.xml</em> and <em>settings.xml</em> are pre-processed as described in section 1.4.2.1 of the OpenDocument v1.2 specification (that is <em>foreign elements and attributes</em> are removed), and are then validated with respect to the OpenDocument v1.2 schema.</li>
 </ul>
@@ -280,7 +277,7 @@ a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html
 <li>All versions<ul>
 <li>If the file is a formula file, then the sub file <em>content.xml</em> is validated with respect to the MathML 2.0 W3C XSD schema.  The sub files <em>styles.xml</em>, <em>meta.xml</em> and <em>settings.xml</em> are checked as described for other document types.</li>
 <li>The file <em>META-INF/manifest.xml</em> is validated with respect to the manifest schema of the selected ODF specification.</li>
-<li>If the file is an ODF 1.2 file, then the <em>META-INF/documentsignatures.xml</em> and <em>META-INF/macrosignatures.xml</em> sub files are validated with respect to the digital signatures schema of the ODF 1.2 specification.</li>
+<li>If the file is an ODF 1.2/1.3 file, then the <em>META-INF/documentsignatures.xml</em> and <em>META-INF/macrosignatures.xml</em> sub files are validated with respect to the digital signatures schema of the ODF 1.2/1.3 specification.</li>
 <li>For all embedded objects in ODF format, the <em>content.xml</em>, <em>styles.xml</em>, <em>meta.xml</em> and <em>settings.xml</em> are validated as described for the main document above.</li>
 <li>It is checked whether the file itself and all embedded objects in ODF format contain at least a <em>content.xml</em> or <em>styles.xml</em> sub file.</li>
 </ul>
@@ -329,7 +326,7 @@ a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html
 Committee</a> page. The ODF 1.0 and 1.1 schemas can be downloaded directly
 from that page]. A zip file containing the most recent ODF 1.2 schemas is
 available in the document section.</p>
-<p>The MathML DTD that is included in the ODF Validator us the one that is
+<p>The MathML DTD that is included in the ODF Validator is the one that is
 included in the <strong>/share/dtd/math/1_01/</strong> folder of each
 OpenOffice.org/Oracle Open Office installation.</p>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
@@ -337,25 +334,7 @@ OpenOffice.org/Oracle Open Office installation.</p>
 <div class="codehilite"><pre><span></span> -Djavax.xml.validation.SchemaFactory:&lt;http://relaxng.org/ns/structure/1.0&gt;=org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl
  -Dorg.iso_relax.verifier.VerifierFactoryLoader=com.sun.msv.verifier.jarv.FactoryLoaderImpl
 </pre></div>
-
-
-<p><strong>ODF Validator</strong> further requires the following packages:</p>
-<ul>
-<li><a href="https://github.com/xmlark/msv">MSV</a>. <strong>msv.jar</strong>, <strong>isorelax.jar</strong>, <strong>relaxngDatatype.jar</strong> and <strong>xsdlib.jar</strong> included in the MSV distribution must be added to the project's libraries and must be in the classpath or a folder called <strong>lib</strong> that is next to the <strong>odfvalidator.jar</strong> at runtime.</li>
-<li><a href="https://mvnrepository.com/artifact/org.jopendocument/isorelax-jaxp-bridge-ILM">ISORELAX JARV -&gt; JAXP 1.3 Xml Validation Engine Adaptor</a>.  <strong>isorelax-jaxp-bridge-1.1.jar</strong> must be added to the project's libraries and must be in the classpath or a folder called <strong>lib</strong> that is next to the <strong>odfvalidator.jar</strong>  at runtime.</li>
-<li><strong>odfdom.jar</strong> from the ODFDOM component must be added to the project's libraries and must be in the classpath or a folder called <strong>lib</strong> that is next to the <strong>odfvalidator.jar</strong>  at runtime.</li>
-</ul>
-<p>The NetBeans project is pre-configured to build ODFDOM while building <strong>ODF Validator</strong>. This requires that the ODFDOM sources are located in a folder <strong>odfdom</strong> next to the folder of the <strong>ODF Validator</strong> project.</p>
-<p>Alternatively, the reference to the ODFDOM project in the compile time classpath of the <strong>ODF Validator</strong> project may be replaced with a reference to an already compiled <strong>odfdom.jar</strong>.</p>
-<p>The references to all other jar files must be updated manually before
-building <strong>ODF Validator</strong>.</p>
-<p><strong>Note:</strong> ODFDOM requires <a href="http://xml.apache.org/dist/xerces-j/">Apache Xerces</a>. The jar file <strong>xercesImpl.jar</strong> also must exist in a folder <strong>lib</strong> next to <strong>odvalidator.jar</strong> file, or it must be in the classpath. The <strong>ODF Validator</strong> NetBeans projects includes a reference to <strong>xersesImpl.jar</strong> in the runtime classpath which has to be adapted after checking out the project.</p>
-<p><strong>Note:</strong> ODFDOM requires at least Xerces 2.8.0. Please note that MSV distribution contains an xercesImpl.jar which is older.</p>
-<h2 id="source-code">Source Code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p>The <strong>ODF Validator</strong> source code is located <a href="https://github.com/tdf/odftoolkit/tree/master/validator">here</a>. <strong>ODF Validator</strong> uses Mercurial for source control. Please check the
-help for instruction how to use Mercurial.</p>
     </div>
-    
     <div id="footera">
       <div id="copyrighta">
         <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
