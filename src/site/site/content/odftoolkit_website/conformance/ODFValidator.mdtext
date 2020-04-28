@@ -221,7 +221,7 @@ The following actions take place before or during the validation:
     **Note:** Early ODF implementations in OpenOffice.org
     used the wrong namespace. Changing it to the correct one enables the
     validation of the manifest despite the wrong namespace.
-* Namespaces defined in the [ODF v1.0 Committee Draft 2][13] are replaced with those of the 
+* Namespaces defined in the [ODF v1.0 Committee Draft 2][13] are replaced with those of the
     [ODF v1.0 OASIS Standard][14]. For the logging level **all**, an
     information is displayed if this happens.
     **Note:** Changing the namespaces enables the validation of documents that conform to the

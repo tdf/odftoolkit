@@ -55,7 +55,7 @@ To some the idea of having to establish consensus in a large and distributed tea
 sounds inefficient and frustrating. Don't despair though, we still use the Apache Way, which has a
 set of simple processes to ensure things proceed at a good pace.
 
-As in ASF projects we don't like to vote. 
+As in ASF projects we don't like to vote.
 Most of the time we work with the consensus building techniques documented below.
 
 ### Lazy Consensus
