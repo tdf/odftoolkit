@@ -342,7 +342,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 				break;
 
 			case TEXT_MASTER_TEMPLATE:
-			    newDoc = new OdfTextDocument(pkg, internalPath, OdfTextDocument.OdfMediaType.TEXT_MASTER_TEMPLATE, enableCollaboration);
+			    newDoc = new OdfTextDocument(pkg, internalPath, OdfTextDocument.OdfMediaType.TEXT_MASTER_TEMPLATE);
 			    break;
 
 			case TEXT_WEB:
