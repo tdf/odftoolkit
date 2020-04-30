@@ -156,6 +156,7 @@ abstract class ODFRootPackageValidator extends ODFPackageValidator implements Ma
             || aMimetype.equals(ODFMediaTypes.FORMULA_MEDIA_TYPE)
             || aMimetype.equals(ODFMediaTypes.FORMULA_TEMPLATE_MEDIA_TYPE)
             || aMimetype.equals(ODFMediaTypes.TEXT_MASTER_MEDIA_TYPE)
+            || aMimetype.equals(ODFMediaTypes.TEXT_MASTER_TEMPLATE_MEDIA_TYPE)
             || aMimetype.equals(ODFMediaTypes.TEXT_WEB_MEDIA_TYPE))) {
             aLogger.logInfo("mimetype is not an ODFMediaTypes mimetype.", false);
             bHasErrors = true;
