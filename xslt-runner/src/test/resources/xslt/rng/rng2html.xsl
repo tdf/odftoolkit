@@ -8,7 +8,22 @@
             <xsl:apply-templates select="*|@*|text()|processing-instruction()|comment()"/>
         </xsl:copy>
     </xsl:template>
-                      
+
+    <!--
+     Including styles and script from external file
+     -->
+     <xsl:template match="head">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <script>                
+                <xsl:copy-of select="unparsed-text('highlight-lines-by-fragment-identifier.js')"/>                                
+            </script>            
+            <style>                
+                <xsl:copy-of select="unparsed-text('view-source.css')"/>                
+            </style>
+        </head>
+    </xsl:template>
+
     <!--
      Adding an ID for every RelaxNG define:
      Input:

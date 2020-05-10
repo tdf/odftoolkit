@@ -21,7 +21,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
-<!--
+
  body {
     margin: 0
 }
@@ -74,7 +74,7 @@ tbody:last-child .line-content:empty:before {
     padding: 0 5px !important;
 }
 .highlight {
-    background-color: rgb(100%, 42%, 42%);
+    background-color: #edff14;
     border: 2px solid rgb(100%, 31%, 31%);
 }
 .html-tag {
@@ -142,4 +142,3 @@ tbody:last-child .line-content:empty:before {
     top: 2px;
     margin: 0 4px;
 }
--->
