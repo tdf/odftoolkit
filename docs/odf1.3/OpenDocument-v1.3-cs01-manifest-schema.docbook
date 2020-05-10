@@ -966,10 +966,10 @@
                      </entry>
                      <entry>
                         <para>
-       
+      
     (
         <link linkend="encrypted-key">%encrypted-key;</link>
-             )*
+      )*
     ,
       
     (
