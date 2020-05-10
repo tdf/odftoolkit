@@ -73,8 +73,8 @@ tbody:last-child .line-content:empty:before {
 .line-content {
     padding: 0 5px !important;
 }
-.highlight {
-    background-color: rgb(100%, 42%, 42%);
+.highlight {	
+    background-color: #edff14;
     border: 2px solid rgb(100%, 31%, 31%);
 }
 .html-tag {
