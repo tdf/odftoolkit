@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:map="http://www.w3.org/2005/xpath-functions/map" version="3.0" extension-element-prefixes="rng a">
+<xsl:stylesheet xmlns:html="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:map="http://www.w3.org/2005/xpath-functions/map" version="3.0" exclude-result-prefixes="rng a map xs html">
     <xsl:output encoding="UTF-8" method="html" indent="no"/>
 
     <!--Identity template -->
@@ -24,6 +24,22 @@
             </xsl:element>
         </span>
     </xsl:template>
+
+    <!--
+     Adding an ID for every line number:
+     Input:
+        <td class="line-number" value="66"></td>  
+    -->
+     <xsl:template match="td[@class ='line-number']">
+     <td class="line-number">                     
+         <xsl:attribute name="value" select="@value"/>
+         <xsl:element name="a">
+            <xsl:attribute name="id">
+                <xsl:value-of select="@value"/>
+            </xsl:attribute>
+        </xsl:element>    
+     </td>
+ </xsl:template>       
 
     <!--
     Adding an Anchor for every RelaxNG ref:
