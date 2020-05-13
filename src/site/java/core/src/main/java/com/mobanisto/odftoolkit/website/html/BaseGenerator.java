@@ -3,9 +3,9 @@ package com.mobanisto.odftoolkit.website.html;
 import com.mobanisto.odftoolkit.website.html.widgets.Footer;
 import com.mobanisto.odftoolkit.website.html.widgets.MainMenu;
 
-import de.topobyte.jsoup.Bootstrap3;
 import de.topobyte.jsoup.ElementUtil;
 import de.topobyte.jsoup.HtmlBuilder;
+import de.topobyte.jsoup.bootstrap3.Bootstrap3;
 import de.topobyte.jsoup.nodes.Element;
 import de.topobyte.webpaths.WebPath;
 

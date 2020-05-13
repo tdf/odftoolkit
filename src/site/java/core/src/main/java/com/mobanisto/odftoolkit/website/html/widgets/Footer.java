@@ -1,7 +1,7 @@
 package com.mobanisto.odftoolkit.website.html.widgets;
 
-import de.topobyte.jsoup.Bootstrap;
 import de.topobyte.jsoup.HTML;
+import de.topobyte.jsoup.bootstrap3.Bootstrap;
 import de.topobyte.jsoup.components.UnorderedList;
 import de.topobyte.jsoup.nodes.Element;
 import de.topobyte.webpaths.WebPath;
