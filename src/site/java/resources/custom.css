@@ -1,0 +1,17 @@
+.footer {
+  background-color: #f5f5f5;
+  padding: 3rem;
+  margin-top: 2rem;
+}
+
+.footer ul {
+  padding-left: 0;
+}
+
+.footer li {
+  display: inline-block;
+}
+
+.footer li+li {
+  margin-left: 1rem;
+}
