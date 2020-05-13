@@ -36,7 +36,7 @@ public class LoadMultipleTimes {
 
 	@Test
 	@Ignore
-	/** A testdocument will be loaded and closed repeatedly and the memory will be logged.
+	/** A test document will be loaded and closed repeatedly and the memory will be logged.
 	Loading is tested with and without disc memory usage */
 	public void testRepeatedLoading() {
 		System.setProperty("org.odftoolkit.odfdom.tmpfile.disable", "true");
@@ -45,7 +45,7 @@ public class LoadMultipleTimes {
 		repeatedLoading();
 	}
 
-	// ToDO: Load instead the specification as extreme example (not neccessarily 50 times)
+	// TODO: Load instead the specification as extreme example (not necessarily 50 times)
 	private void repeatedLoading() {
 		long t = 0;
 		for (int i = 0; i < num; i++) {
