@@ -5,11 +5,11 @@ import java.nio.file.Path;
 
 import com.mobanisto.odftoolkit.website.markdown.Markdown;
 
-import de.topobyte.jsoup.Bootstrap;
 import de.topobyte.jsoup.HTML;
 import de.topobyte.jsoup.HtmlBuilder;
+import de.topobyte.jsoup.bootstrap3.Bootstrap;
+import de.topobyte.jsoup.bootstrap3.components.Container;
 import de.topobyte.jsoup.components.Div;
-import de.topobyte.jsoup.components.bootstrap3.Container;
 import de.topobyte.jsoup.nodes.Element;
 import de.topobyte.webpaths.WebPath;
 

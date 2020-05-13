@@ -3,8 +3,8 @@ package com.mobanisto.odftoolkit.website.html.widgets;
 import com.mobanisto.odftoolkit.website.html.Site;
 
 import de.topobyte.jsoup.HTML;
+import de.topobyte.jsoup.bootstrap3.components.Menu;
 import de.topobyte.jsoup.components.A;
-import de.topobyte.jsoup.components.bootstrap3.Menu;
 import de.topobyte.webpaths.WebPath;
 
 public class MainMenu extends Menu
