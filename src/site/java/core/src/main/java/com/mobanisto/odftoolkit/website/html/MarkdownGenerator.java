@@ -39,6 +39,14 @@ public class MarkdownGenerator extends BaseGenerator
 		Div main = row.ac(HTML.div("col col-xs-12 col-sm-9"));
 
 		Markdown.renderString(side, markdownSidenav);
+
+		for (org.jsoup.nodes.Element element : side.select("ul")) {
+			element.addClass("list-group");
+		}
+		for (org.jsoup.nodes.Element element : side.select("li")) {
+			element.addClass("list-group-item");
+		}
+
 		Markdown.renderFile(main, file);
 
 		addFooter(webPath, body);
