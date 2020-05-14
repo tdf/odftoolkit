@@ -119,6 +119,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 		TEXT("application/vnd.oasis.opendocument.text", "odt"),
 		TEXT_MASTER("application/vnd.oasis.opendocument.text-master", "odm"),
 		TEXT_TEMPLATE("application/vnd.oasis.opendocument.text-template", "ott"),
+		TEXT_MASTER_TEMPLATE("application/vnd.oasis.opendocument.text-master-template", "otm"),
 		TEXT_WEB("application/vnd.oasis.opendocument.text-web", "oth");
 		private final String mMediaType;
 		private final String mSuffix;
@@ -281,6 +282,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 			case TEXT:
 			case TEXT_TEMPLATE:
 			case TEXT_MASTER:
+			case TEXT_MASTER_TEMPLATE:
 			case TEXT_WEB:
 				documentTemplate = OdfTextDocument.EMPTY_TEXT_DOCUMENT_RESOURCE;
 				break;
@@ -338,6 +340,10 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 			case TEXT_MASTER:
 				newDoc = new OdfTextDocument(pkg, internalPath, OdfTextDocument.OdfMediaType.TEXT_MASTER);
 				break;
+
+			case TEXT_MASTER_TEMPLATE:
+			    newDoc = new OdfTextDocument(pkg, internalPath, OdfTextDocument.OdfMediaType.TEXT_MASTER_TEMPLATE);
+			    break;
 
 			case TEXT_WEB:
 				newDoc = new OdfTextDocument(pkg, internalPath, OdfTextDocument.OdfMediaType.TEXT_WEB);

@@ -50,6 +50,7 @@ public class OdfTextDocument extends OdfDocument {
 		TEXT(OdfDocument.OdfMediaType.TEXT),
 		TEXT_TEMPLATE(OdfDocument.OdfMediaType.TEXT_TEMPLATE),
 		TEXT_MASTER(OdfDocument.OdfMediaType.TEXT_MASTER),
+		TEXT_MASTER_TEMPLATE(OdfDocument.OdfMediaType.TEXT_MASTER_TEMPLATE),
 		TEXT_WEB(OdfDocument.OdfMediaType.TEXT_WEB);
 		private final OdfDocument.OdfMediaType mMediaType;
 
@@ -118,6 +119,18 @@ public class OdfTextDocument extends OdfDocument {
 		OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.TEXT_MASTER);
 		doc.changeMode(OdfMediaType.TEXT_MASTER);
 		return doc;
+	}
+
+	/**
+	 * Creates an empty text master document.
+	 *
+	 * @return ODF text master based on a default
+	 * @throws java.lang.Exception - if the document could not be created
+	 */
+	public static OdfTextDocument newTextMasterTemplateDocument() throws Exception {
+	    OdfTextDocument doc = (OdfTextDocument) OdfDocument.loadTemplate(EMPTY_TEXT_DOCUMENT_RESOURCE, OdfDocument.OdfMediaType.TEXT_MASTER);
+	    doc.changeMode(OdfMediaType.TEXT_MASTER_TEMPLATE);
+	    return doc;
 	}
 
 	/**
