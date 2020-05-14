@@ -9,9 +9,11 @@ import de.topobyte.jsoup.HTML;
 import de.topobyte.jsoup.HtmlBuilder;
 import de.topobyte.jsoup.bootstrap3.Bootstrap;
 import de.topobyte.jsoup.bootstrap3.components.Container;
+import de.topobyte.jsoup.components.A;
 import de.topobyte.jsoup.components.Div;
 import de.topobyte.jsoup.nodes.Element;
 import de.topobyte.webpaths.WebPath;
+import de.topobyte.webpaths.WebPaths;
 
 public class MarkdownGenerator extends BaseGenerator
 {
@@ -32,6 +34,16 @@ public class MarkdownGenerator extends BaseGenerator
 		addMenu(webPath, body);
 
 		Container content = body.ac(Bootstrap.container());
+
+		Div rowLogo = content.ac(Bootstrap.row());
+		Div colLogo = rowLogo.ac(HTML.div("col col-xs-12 col-sm-12"));
+
+		WebPath pathLogo = WebPaths.get(
+				"images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png");
+		Div divLogo = colLogo.ac(HTML.div());
+		divLogo.attr("style", "float:right");
+		A linkLogo = divLogo.ac(HTML.a("https://www.documentfoundation.org/"));
+		linkLogo.ac(HTML.img(webPath.relativize(pathLogo).toString()));
 
 		Div row = content.ac(Bootstrap.row());
 
