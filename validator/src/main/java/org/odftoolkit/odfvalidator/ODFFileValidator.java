@@ -22,7 +22,9 @@
 
 package org.odftoolkit.odfvalidator;
 
+import java.nio.file.Files;
 import java.io.File;
+import java.io.IOException;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.xml.sax.ErrorHandler;
 
@@ -58,6 +60,12 @@ public class ODFFileValidator extends ODFRootPackageValidator {
     protected OdfPackage getPackage(ErrorHandler handler) throws Exception
     {
         return OdfPackage.loadPackage(m_aFile, handler);
+    }
+
+    @Override
+    protected byte[] getBytes() throws IOException
+    {
+        return Files.readAllBytes(m_aFile.toPath());
     }
 
 }
