@@ -145,17 +145,43 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
         output.contains("testInvalidPkg3.odt:  Info: 3 errors, no warnings"));
   }
 
-  @Test
-  public void validateEncryptedODT() {
-    String output = "";
-    try {
-      // password: hello
-      String name = "encrypted-with-pwd_hello.odt";
-      output = doValidation(name, null);
-    } catch (Exception t) {
-      StringWriter errors = new StringWriter();
-      t.printStackTrace(new PrintWriter(errors));
-      Assert.fail(t.toString() + "\n" + errors.toString());
+    @Test
+    public void validateEncryptedODT() {
+        String output = "";
+        try {
+            // password: hello
+            String name = "encrypted-with-pwd_hello.odt";
+            output = doValidation(name, null);
+        } catch (Exception t) {
+            StringWriter errors = new StringWriter();
+            t.printStackTrace(new PrintWriter(errors));
+            Assert.fail(t.toString() + "\n" + errors.toString());
+        }
+        Assert.assertTrue(output.contains("Fatal: only DEFLATED entries can have EXT descriptor"));
+        Assert.assertTrue(output.contains("Fatal: The document is encrypted. Validation of encrypted documents is not supported."));
+        java.util.logging.Logger.getLogger(getClass().getName()).log(Level.INFO, "Test result:\n{0}", output);
+    }
+
+    @Test
+    public void validateEncryptedODF13WithInvalidOpenPGP() {
+        String output = "";
+        try {
+            // password: hello
+            String name = "gpg13.odt";
+            output = doValidation(name, null);
+        java.util.logging.Logger.getLogger(getClass().getName()).log(Level.INFO, "Test result:\n{0}", output);
+        } catch (Exception t) {
+            StringWriter errors = new StringWriter();
+            t.printStackTrace(new PrintWriter(errors));
+            Assert.fail(t.toString() + "\n" + errors.toString());
+        }
+        Assert.assertTrue(output.contains("Fatal: only DEFLATED entries can have EXT descriptor"));
+        Assert.assertTrue(output.contains("Fatal: The document is encrypted. Validation of encrypted documents is not supported."));
+        Assert.assertTrue(output.contains("META-INF/manifest.xml:  Info: ODF version of manifest: \"1.3\""));
+        Assert.assertTrue(output.contains("META-INF/manifest.xml[3,20]:  Error: tag name \"manifest:keyinfo\" is not allowed. Possible tag names are: <encrypted-key>,<file-entry>"));
+        Assert.assertTrue(output.contains("META-INF/manifest.xml[10,25]:  Error: element \"manifest:CipherData\" was found where no element may occur"));
+        Assert.assertTrue(output.contains("META-INF/manifest.xml:  Info: 2 errors, no warnings"));
+        java.util.logging.Logger.getLogger(getClass().getName()).log(Level.INFO, "Test result:\n{0}", output);
     }
     Assert.assertTrue(
         output.contains(

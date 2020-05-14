@@ -23,38 +23,47 @@
  */
 package org.odftoolkit.odfvalidator;
 
+import java.nio.file.Files;
 import java.io.File;
+import java.io.IOException;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.xml.sax.ErrorHandler;
 
 /** Validator for Files */
 public class ODFFileValidator extends ODFRootPackageValidator {
 
-  private File m_aFile = null;
+    private File m_aFile = null;
 
-  /** Creates a new instance of ODFFileValidator */
-  public ODFFileValidator(
-      File aFile,
-      Logger.LogLevel nLogLevel,
-      OdfValidatorMode eMode,
-      OdfVersion aVersion,
-      SAXParseExceptionFilter aFilter,
-      ODFValidatorProvider aValidatorProvider)
-      throws ODFValidatorException {
-    super(nLogLevel, eMode, aVersion, aFilter, aValidatorProvider);
-    m_aFile = aFile;
-  }
+        /** Creates a new instance of ODFFileValidator */
+    public ODFFileValidator( File aFile, Logger.LogLevel nLogLevel,
+                             OdfValidatorMode eMode, OdfVersion aVersion,
+                             SAXParseExceptionFilter aFilter,
+                             ODFValidatorProvider aValidatorProvider ) throws ODFValidatorException
+    {
+        super( nLogLevel, eMode, aVersion, aFilter, aValidatorProvider );
+        m_aFile = aFile;
+    }
 
-  protected String getLoggerName() {
-    return m_aFile.getAbsolutePath();
-  }
+    protected String getLoggerName()
+    {
+        return m_aFile.getAbsolutePath();
+    }
 
-  @Override
-  protected String getDocumentPath() {
-    return ""; // this is the root document
-  }
+    @Override
+    protected String getDocumentPath()
+    {
+        return ""; // this is the root document
+    }
 
-  protected OdfPackage getPackage(ErrorHandler handler) throws Exception {
-    return OdfPackage.loadPackage(m_aFile, handler);
-  }
+    protected OdfPackage getPackage(ErrorHandler handler) throws Exception
+    {
+        return OdfPackage.loadPackage(m_aFile, handler);
+    }
+
+    @Override
+    protected byte[] getBytes() throws IOException
+    {
+        return Files.readAllBytes(m_aFile.toPath());
+    }
+
 }
