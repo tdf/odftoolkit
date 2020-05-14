@@ -47,6 +47,9 @@ public class WebsiteGenerator
 		Path dirResources = repo.resolve("src/site/java/resources");
 		copy(dirResources.resolve("custom.css"), dirOutput);
 
+		Path dirImages = dirContent.resolve("images");
+		copyRecursive(dirImages, dirOutput.resolve("images"));
+
 		Path fileSideNav = dirTemplates.resolve("sidenav.mdtext");
 		markdownSidenav = loadText(fileSideNav);
 	}
@@ -73,6 +76,22 @@ public class WebsiteGenerator
 	{
 		Files.copy(file, dir.resolve(file.getFileName()),
 				StandardCopyOption.REPLACE_EXISTING);
+	}
+
+	private void copyRecursive(Path source, Path target) throws IOException
+	{
+		Files.createDirectories(target);
+		List<Path> files = PathUtil.findRecursive(source, "*");
+		for (Path file : files) {
+			if (!Files.isRegularFile(file)) {
+				continue;
+			}
+			Path relative = source.relativize(file);
+			Path targetFile = target.resolve(relative);
+			Files.createDirectories(targetFile.getParent());
+			System.out.println("Create " + targetFile);
+			Files.copy(file, targetFile, StandardCopyOption.REPLACE_EXISTING);
+		}
 	}
 
 	private String loadText(Path file) throws IOException
