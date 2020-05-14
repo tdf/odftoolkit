@@ -235,7 +235,7 @@ abstract class ODFPackageValidator {
 		return aInStream != null ? validate(aInStream, aFilter, aValidator, aLogger) : false;
 	}
 
-	private boolean validate(InputStream aInStream,
+	protected boolean validate(InputStream aInStream,
 			XMLFilter aFilter,
 			javax.xml.validation.Validator aValidator,
 			Logger aLogger) throws ODFValidatorException {
@@ -368,7 +368,7 @@ abstract class ODFPackageValidator {
 		return false;
 	}
 
-	private SAXParser getSAXParser(boolean bValidating) throws ODFValidatorException {
+	protected SAXParser getSAXParser(boolean bValidating) throws ODFValidatorException {
 		SAXParser aParser = null;
 		if (m_aSAXParserFactory == null) {
 			m_aSAXParserFactory = SAXParserFactory.newInstance();
