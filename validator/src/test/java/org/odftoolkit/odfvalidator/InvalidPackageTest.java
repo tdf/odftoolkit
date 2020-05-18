@@ -32,16 +32,22 @@ import org.junit.Test;
 /** Test some invalid packages. */
 public class InvalidPackageTest extends OdfValidatorTestBase {
 
-  @Test
-  public void validatePackage1() {
-    String output = "";
-    try {
-      String name = "testInvalidPkg1.odt";
-      output = doValidation(name, null);
-    } catch (Throwable t) {
-      t.printStackTrace();
-      Assert.fail(t.toString());
-    }
+    @Test
+    public void validatePackage1() {
+        String output = "";
+        try {
+            String name = "testInvalidPkg1.odt";
+            output = doValidation(name, null);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            Assert.fail(t.toString());
+        }
+        System.out.println(output);
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt/mimetype:  Error: The file 'mimetype' is not the first file in the ODF package"));
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt/mimetype:  Error: The file 'mimetype' shall not be compressed"));
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt/mimetype:  Error: There shall be no extra field for the 'mimetype' file"));
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt/META-INF/manifest.xml:  Error: The file 'Configurations2/accelerator/current.xml' shall not be listed in the 'META-INF/manifest.xml' file as it does not exist in the ODF package"));
+        Assert.assertTrue(output.contains("testInvalidPkg1.odt:  Info: 8 errors, 10 warnings"));
     Assert.assertTrue(
         output.contains(
             "testInvalidPkg1.odt/mimetype:  Error: The file 'mimetype' is not the first file in the ODF package"));
@@ -145,18 +151,23 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
         output.contains("testInvalidPkg3.odt:  Info: 3 errors, no warnings"));
   }
 
-  @Test
-  public void validateEncryptedODT() {
-    String output = "";
-    try {
-      // password: hello
-      String name = "encrypted-with-pwd_hello.odt";
-      output = doValidation(name, null);
-    } catch (Exception t) {
-      StringWriter errors = new StringWriter();
-      t.printStackTrace(new PrintWriter(errors));
-      Assert.fail(t.toString() + "\n" + errors.toString());
-    }
+
+    @Test
+    public void validateEncryptedODT() {
+        String output = "";
+        try {
+            // password: hello
+            String name = "encrypted-with-pwd_hello.odt";
+            output = doValidation(name, null);
+        } catch (Exception t) {
+            StringWriter errors = new StringWriter();
+            t.printStackTrace(new PrintWriter(errors));
+            Assert.fail(t.toString() + "\n" + errors.toString());
+        }
+        System.out.println(output);
+        Assert.assertTrue(output.contains("Fatal: only DEFLATED entries can have EXT descriptor"));
+        Assert.assertTrue(output.contains("Fatal: The document is encrypted. Validation of encrypted documents is not supported."));
+        java.util.logging.Logger.getLogger(getClass().getName()).log(Level.INFO, "Test result:\n{0}", output);
     Assert.assertTrue(output.contains("Fatal: only DEFLATED entries can have EXT descriptor"));
     Assert.assertTrue(
         output.contains(
@@ -201,18 +212,22 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
         .log(Level.INFO, "Test result:\n{0}", output);
   }
 
-  @Test
-  public void validateDocumentSignature() {
-    String output = "";
-    try {
-      // the manifest.xml is valid, but "META-INF/documentsignatures.xml"
-      // was erroneously reported as missing
-      String name = "good.odt";
-      output = doValidation(name, OdfVersion.V1_2, OdfValidatorMode.EXTENDED_CONFORMANCE);
-    } catch (Throwable t) {
-      t.printStackTrace();
-      Assert.fail(t.toString());
-    }
+    @Test
+    public void validateDocumentSignature() {
+        String output = "";
+        try {
+            // the manifest.xml is valid, but "META-INF/documentsignatures.xml"
+            // was erroneously reported as missing
+            String name = "good.odt";
+            output = doValidation(name, OdfVersion.V1_2, OdfValidatorMode.EXTENDED_CONFORMANCE);
+            System.out.println(output);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            Assert.fail(t.toString());
+        }
+        Assert.assertFalse("Output of validateDocumentSignature(): " + output, output.contains("Error: The file 'META-INF/documentsignatures.xml' shall be listed in the 'META-INF/manifest.xml' file as it exists in the ODF package 'good.odt'"));
+        Assert.assertTrue("Output of validateDocumentSignature(): " + output, output.contains("Error: element \"document-signatures\" is missing \"version\" attribute"));
+        Assert.assertTrue("Output of validateDocumentSignature(): " + output, output.contains("good.odt:  Info: 1 errors, no warnings"));
     Assert.assertFalse(
         "Output of validateDocumentSignature(): " + output,
         output.contains(

@@ -34,6 +34,9 @@ import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
+
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
@@ -55,57 +58,57 @@ class ZipHelper {
     mPackage = pkg;
   }
 
-  String entriesToMap(Map<String, ZipEntry> zipEntries) throws IOException, SAXException {
-    String firstEntryName = null;
-    if (mZipFile != null) {
-      Enumeration<? extends ZipEntry> entries = mZipFile.entries();
-      if (entries.hasMoreElements()) {
-        ZipEntry zipEntry = entries.nextElement();
-        if (zipEntry != null) {
-          firstEntryName = zipEntry.getName();
-          addZipEntry(zipEntry, zipEntries);
-          while (entries.hasMoreElements()) {
-            zipEntry = entries.nextElement();
-            addZipEntry(zipEntry, zipEntries);
-          }
-        }
-      }
-    } else {
-      ZipInputStream inputStream = new ZipInputStream(new ByteArrayInputStream(mZipBuffer));
-      if (inputStream.available() == 0) {
-        throw new IllegalArgumentException("Could not unzip the given ODF package!");
-      } else {
-        ZipEntry zipEntry = inputStream.getNextEntry();
-        if (zipEntry != null) {
-          firstEntryName = zipEntry.getName();
-          addZipEntry(zipEntry, zipEntries);
-          while (zipEntry != null) {
-            addZipEntry(zipEntry, zipEntries);
-            try {
-              zipEntry = inputStream.getNextEntry();
-            } catch (java.util.zip.ZipException e) {
-              if (e.getMessage().contains("only DEFLATED entries can have EXT descriptor")) {
-                Logger.getLogger(ZipHelper.class.getName())
-                    .finer("ZIP seems to contain encoded parts!");
-                throw e;
-              }
-              // JDK 6 -- the try/catch is workaround for a specific JDK 5 only problem
-              if (!e.getMessage().contains("missing entry name")
-                  && !System.getProperty("Java.version").equals("1.5.0")) {
-                Logger.getLogger(ZipHelper.class.getName()).finer("ZIP ENTRY not found");
-                throw e;
-              }
-              // ToDo: Error: "only DEFLATED entries can have EXT descriptor"
-              // ZipInputStream does not expect (and does not know how to handle) an EXT descriptor
-              // when the associated data was not DEFLATED (i.e. was stored uncompressed, as-is).
-            }
-          }
-        }
-      }
-      inputStream.close();
-    }
-    return firstEntryName;
-  }
+	String entriesToMap(Map<String, ZipEntry> zipEntries) throws IOException, SAXException {
+		String firstEntryName = null;
+		if (mZipFile != null) {
+			Enumeration<? extends ZipEntry> entries = mZipFile.entries();
+			if (entries.hasMoreElements()) {
+				ZipEntry zipEntry = entries.nextElement();
+				if (zipEntry != null) {
+					firstEntryName = zipEntry.getName();
+					addZipEntry(zipEntry, zipEntries);
+					while (entries.hasMoreElements()) {
+						zipEntry = entries.nextElement();
+						addZipEntry(zipEntry, zipEntries);
+					}
+				}
+			}
+		} else {
+		    System.out.println(mZipBuffer.length);
+			ZipArchiveInputStream inputStream = new ZipArchiveInputStream(new ByteArrayInputStream(mZipBuffer));
+			// available() equals 0 even if getNextZipEntry() succeeds!
+//			if (inputStream.available() == 0) {
+//                throw new IllegalArgumentException("Could not unzip the given ODF package!");
+//			}
+            ZipArchiveEntry zipEntry = inputStream.getNextZipEntry();
+            if (zipEntry != null) {
+                firstEntryName = zipEntry.getName();
+                addZipEntry(zipEntry, zipEntries);
+                System.out.println("zip entry: " + zipEntry);
+                while (zipEntry != null) {
+                    addZipEntry(zipEntry, zipEntries);
+                    System.out.println("zip entry: " + zipEntry);
+                    try {
+                        zipEntry = inputStream.getNextZipEntry();
+                    } catch (java.util.zip.ZipException e) {
+                        if (e.getMessage().contains("only DEFLATED entries can have EXT descriptor")) {
+                            Logger.getLogger(ZipHelper.class.getName()).finer("ZIP seems to contain encoded parts!");
+                            throw e;
+                        }
+                        // JDK 6 -- the try/catch is workaround for a specific JDK 5 only problem
+                        if (!e.getMessage().contains("missing entry name") && !System.getProperty("Java.version").equals("1.5.0")) {
+                            Logger.getLogger(ZipHelper.class.getName()).finer("ZIP ENTRY not found");
+                            throw e;
+                        }
+                        // ToDo: Error: "only DEFLATED entries can have EXT descriptor"
+                        // ZipInputStream does not expect (and does not know how to handle) an EXT descriptor when the associated data was not DEFLATED (i.e. was stored uncompressed, as-is).
+                    }
+                }
+			}
+			inputStream.close();
+		}
+		return firstEntryName;
+	}
 
   private void addZipEntry(ZipEntry zipEntry, Map<String, ZipEntry> zipEntries) {
     String filePath = OdfPackage.normalizePath(zipEntry.getName());
