@@ -60,10 +60,4 @@ public class ODFFileValidator extends ODFRootPackageValidator {
         return OdfPackage.loadPackage(m_aFile, handler);
     }
 
-    @Override
-    protected byte[] getBytes() throws IOException
-    {
-        return Files.readAllBytes(m_aFile.toPath());
-    }
-
 }

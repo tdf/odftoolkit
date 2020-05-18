@@ -25,7 +25,6 @@ package org.odftoolkit.odfvalidator;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.xml.sax.ErrorHandler;
@@ -77,10 +76,5 @@ public class ODFStreamValidator extends ODFRootPackageValidator {
 
   protected @Override String getDocumentPath() {
     return ""; // this is the root document
-  }
-
-  @Override
-  protected byte[] getBytes() throws IOException {
-    return m_Buffer;
   }
 };
