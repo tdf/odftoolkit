@@ -83,7 +83,7 @@
                 <configuration>
                     <transformationSets>
                         <transformationSet>
-                            <dir>${odf12.input}/normalization</dir>
+                            <dir>${odf12.input}/rng-normalization</dir>
                             <includes>OpenDocument-v1.2-os-schema_original_but_manual_space_adoption.rng</includes>
                             <stylesheet>${rng2normalization.stylesheet}</stylesheet>
                             <fileMappers>
