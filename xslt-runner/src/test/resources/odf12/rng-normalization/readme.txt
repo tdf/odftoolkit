@@ -18,7 +18,7 @@ Run the command line command:
 "java -jar <input_RNG> <output_RNG>
 
 To verify that the sorted SVN file has the same feature set as the original ODF 1.2, a very similar XSL transformation was created:
- MISSING LINK
+	xslt-runner/src/test/resources/xslt/rng/rng2normalization.xsl
 
 The following steps were done to successfully  validate that the SVN file as the same feature set as the original ODF 1.2 schema file:
 
