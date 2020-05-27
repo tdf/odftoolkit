@@ -151,12 +151,12 @@ public class OdfHelper {
 //        // Needed for the base classes - common attributes are being moved into the base classes
         mJavaModelOdf = new SourceCodeModel(mOdf12SchemaModel, mOdf12SignatureSchemaModel, mOdf12ManifestSchemaModel, mOdfModel, elementToBaseNameMap, datatypeValueAndConversionMap);
         LOG.info("Finished initilization..");
-//        // HTML Reference for ODF 1.2 (yet without BNF nor images)
-//        fillTemplates(ODF_REFERENCE_RESOURCE_DIR, mOdf12SchemaModel.mRootExpression, REFERENCE_OUTPUT_FILES_TEMPLATE, REFERENCE_OUTPUT_FILES);
-//
-//        // ODF 1.2 Python (The generated Python source is from a former colleague and might not work any longer..)
-//        fillTemplates(ODF_PYTHON_RESOURCE_DIR, mOdf12SchemaModel.mRootExpression, PYTHON_OUTPUT_FILES_TEMPLATE, PYTHON_OUTPUT_FILES);
-//
+        // HTML Reference for ODF 1.2 (yet without BNF nor images)
+        fillTemplates(ODF_REFERENCE_RESOURCE_DIR, mOdf12SchemaModel.mRootExpression, REFERENCE_OUTPUT_FILES_TEMPLATE, REFERENCE_OUTPUT_FILES);
+
+        // ODF 1.2 Python (The generated Python source is from a former colleague and might not work any longer..)
+        fillTemplates(ODF_PYTHON_RESOURCE_DIR, mOdf12SchemaModel.mRootExpression, PYTHON_OUTPUT_FILES_TEMPLATE, PYTHON_OUTPUT_FILES);
+
 //        // ODF 1.2 Code Generation
 //        fillTemplates(odfDomResourceDir, mOdf12SchemaModel.mRootExpression, DOM_OUTPUT_FILES_TEMPLATE, DOM_OUTPUT_FILES);
 //        fillTemplates(odfPkgResourceDir, mOdf12ManifestSchemaModel.mRootExpression, PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
