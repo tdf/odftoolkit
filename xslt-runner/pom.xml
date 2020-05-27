@@ -42,6 +42,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
         <odf12.input>src/test/resources/odf12/</odf12.input>
         <odf13.input>src/test/resources/odf13/</odf13.input>
+        <rng2normalization.stylesheet>src/test/resources/xslt/rng/rng2normalization.xsl</rng2normalization.stylesheet>
         <rng2html.stylesheet>src/test/resources/xslt/rng/rng2html.xsl</rng2html.stylesheet>
         <rng2docbook.stylesheet>src/test/resources/xslt/rng/rng2docbook.xsl</rng2docbook.stylesheet>
         <odf.defaultvalue.extraction>src/test/resources/xslt/getAttributeDefaults.xsl</odf.defaultvalue.extraction>
@@ -81,6 +82,16 @@
                 </executions>
                 <configuration>
                     <transformationSets>
+                        <transformationSet>
+                            <dir>${odf12.input}/normalization</dir>
+                            <includes>OpenDocument-v1.2-os-schema_original_but_manual_space_adoption.rng</includes>
+                            <stylesheet>${rng2normalization.stylesheet}</stylesheet>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                    <targetExtension>.xml</targetExtension>
+                                </fileMapper>
+                            </fileMappers>
+                        </transformationSet>
                         <!--
                         <transformationSet>
                             <dir>${odf13.input}</dir>
