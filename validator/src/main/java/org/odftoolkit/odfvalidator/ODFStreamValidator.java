@@ -22,7 +22,10 @@
 
 package org.odftoolkit.odfvalidator;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.IOException;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.xml.sax.ErrorHandler;
 
@@ -34,6 +37,7 @@ public class ODFStreamValidator extends ODFRootPackageValidator {
 
     private InputStream m_aInputStream = null;
     private String m_aBaseURI = null;
+    private byte[] m_Buffer = null;
 
     ODFStreamValidator(InputStream aInputStream,
                               String aBaseURI,
@@ -52,7 +56,22 @@ public class ODFStreamValidator extends ODFRootPackageValidator {
 
     protected OdfPackage getPackage(ErrorHandler handler) throws Exception
     {
-        return OdfPackage.loadPackage(m_aInputStream, m_aBaseURI, handler);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        byte[] buf = new byte[4096];
+        while (true) {
+            int n = m_aInputStream.read(buf);
+            if (n < 0) {
+                break;
+            }
+            baos.write(buf, 0, n);
+        }
+        m_Buffer = baos.toByteArray();
+
+        ByteArrayInputStream bais = new ByteArrayInputStream(m_Buffer);
+
+        OdfPackage ret = OdfPackage.loadPackage(bais, m_aBaseURI, handler);
+        m_Buffer = null; // only needed in fallbackValidateManifest
+        return ret;
     }
 
     protected String getLoggerName() {
@@ -65,4 +84,9 @@ public class ODFStreamValidator extends ODFRootPackageValidator {
         return ""; // this is the root document
     }
 
+    @Override
+    protected byte[] getBytes() throws IOException
+    {
+        return m_Buffer;
+    }
 };
