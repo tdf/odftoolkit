@@ -34,7 +34,7 @@ public class ExampleGenerationTest {
 	/**
 	 * Test: It should be able to generate all examples without a failure.
 	 */
-	@Test
+
 	public void testAllExampleGenerations() {
 		try {
 			OdfHelper.main(null);

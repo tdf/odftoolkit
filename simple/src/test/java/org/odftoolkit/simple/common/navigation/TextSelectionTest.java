@@ -859,6 +859,7 @@ public class TextSelectionTest {
 		sourcedoc.addParagraph("Hello1 from SIMPLE source document!");
 		sourcedoc.addParagraph("Hello2 from source document!");
 		sourcedoc.addParagraph("Hello3 from source document!");
+        sourcedoc.setSelectionManager(doc.getSelectionManager());
 		search = null;
 		// 6 Simple, at the middle of original Paragraph, split original
 		// Paragraph, insert before the second Paragraph.

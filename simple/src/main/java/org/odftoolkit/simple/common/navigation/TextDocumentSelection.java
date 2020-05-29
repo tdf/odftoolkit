@@ -288,7 +288,7 @@ public class TextDocumentSelection extends Selection {
 				document.insertOdfElement(orgparagraph.getOdfElement(), sourceDocument, node, true);
 			}
 			int offset = 0 - leftLength - index;
-			SelectionManager.refresh(rightparentElement, offset, offset);
+            sourceDocument.getSelectionManager().refresh(rightparentElement, offset, offset);
 		}
 	}
 }

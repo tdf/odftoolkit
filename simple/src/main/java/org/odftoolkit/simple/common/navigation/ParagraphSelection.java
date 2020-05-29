@@ -77,7 +77,7 @@ public class ParagraphSelection extends Selection {
 				textSearch.setHandlePageBreak(false);
 			}
 			prepareParagraphContainer(leftLength, index, continued);
-			Selection.SelectionManager.unregisterItem(this.textSelection);
+            search.mDocument.getSelectionManager().unregisterItem(this.textSelection);
 			if (textSearch != null) {
 				textSearch.setReplacedItem(this.textSelection);
 				OdfElement containerElement = paragraphContainer

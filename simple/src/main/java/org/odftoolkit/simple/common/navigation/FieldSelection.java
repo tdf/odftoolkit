@@ -121,7 +121,7 @@ public class FieldSelection extends Selection {
 		textSelection.mMatchedText = field.getOdfElement().getTextContent();
 		int textLength = textSelection.mMatchedText.length();
 		int offset = textLength - leftLength;
-		SelectionManager.refresh(textSelection.getContainerElement(), offset, index + textLength);
+		search.mDocument.getSelectionManager().refresh(textSelection.getContainerElement(), offset, index + textLength);
 		return field;
 	}
 
@@ -139,7 +139,7 @@ public class FieldSelection extends Selection {
 		textSelection.mMatchedText = field.getOdfElement().getTextContent();
 		int textLength = textSelection.mMatchedText.length();
 		int offset = textLength - leftLength;
-		SelectionManager.refresh(textSelection.getContainerElement(), offset, index + textLength);
+        search.mDocument.getSelectionManager().refresh(textSelection.getContainerElement(), offset, index + textLength);
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class FieldSelection extends Selection {
 		textSelection.mMatchedText = field.getOdfElement().getTextContent();
 		int textLength = textSelection.mMatchedText.length();
 		int offset = textLength - leftLength;
-		SelectionManager.refresh(textSelection.getContainerElement(), offset, index + textLength);
+		search.mDocument.getSelectionManager().refresh(textSelection.getContainerElement(), offset, index + textLength);
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class FieldSelection extends Selection {
 		prepareSpanContainer(leftLength, index);
 		textSelection.mMatchedText = "";
 		int offset = -leftLength;
-		SelectionManager.refresh(textSelection.getContainerElement(), offset, index);
+        search.mDocument.getSelectionManager().refresh(textSelection.getContainerElement(), offset, index);
 		return Fields.createConditionField(spanContainer, condition, trueText, falseText);
 	}
 
@@ -199,7 +199,7 @@ public class FieldSelection extends Selection {
 		prepareSpanContainer(leftLength, index);
 		textSelection.mMatchedText = "";
 		int offset = -leftLength;
-		SelectionManager.refresh(textSelection.getContainerElement(), offset, index);
+        search.mDocument.getSelectionManager().refresh(textSelection.getContainerElement(), offset, index);
 		return Fields.createHiddenTextField(spanContainer, condition, text);
 	}
 
@@ -230,6 +230,7 @@ public class FieldSelection extends Selection {
 	public FieldSelection(TextSelection selection) {
 		textSelection = selection;
 		spanContainer = null;
+		search = selection.search;
 	}
 
 	/**

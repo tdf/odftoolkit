@@ -20,6 +20,7 @@ under the License.
 package org.odftoolkit.simple.common.navigation;
 
 import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
+import org.odftoolkit.simple.Document;
 import org.w3c.dom.Node;
 
 /**
@@ -27,6 +28,8 @@ import org.w3c.dom.Node;
  * element by user defined conditions.
  */
 public abstract class Navigation {
+
+    protected Document mDocument;
 
 	/**
 	 * Return true if document still has more matched {@link Selection
