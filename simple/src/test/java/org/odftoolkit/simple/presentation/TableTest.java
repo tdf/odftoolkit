@@ -22,46 +22,48 @@ package org.odftoolkit.simple.presentation;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import junit.framework.Assert;
-
 import org.junit.Test;
 import org.odftoolkit.simple.PresentationDocument;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class TableTest {
-	private static final Logger LOG = Logger.getLogger(TableTest.class.getName());
-	PresentationDocument doc;
-	final String TEST_PRESENTATION_FILE = "PresentationTableTest.odp";
+  private static final Logger LOG = Logger.getLogger(TableTest.class.getName());
+  PresentationDocument doc;
+  final String TEST_PRESENTATION_FILE = "PresentationTableTest.odp";
 
-	@Test
-	public void testGetTable() {
-		try {
-			doc = PresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE));
-			Table table = doc.getTableByName("table1");
-			Assert.assertNotNull(table);
-			String cellText = table.getCellByPosition(4, 1).getDisplayText();
-			Assert.assertEquals("11", cellText);
-		} catch (Exception e) {
-			LOG.log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
-		}
-	}
+  @Test
+  public void testGetTable() {
+    try {
+      doc =
+          PresentationDocument.loadDocument(
+              ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE));
+      Table table = doc.getTableByName("table1");
+      Assert.assertNotNull(table);
+      String cellText = table.getCellByPosition(4, 1).getDisplayText();
+      Assert.assertEquals("11", cellText);
+    } catch (Exception e) {
+      LOG.log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+    }
+  }
 
-	@Test
-	public void testGetTableList() {
-		try {
-			doc = PresentationDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE));
-			List<Table> tables = doc.getTableList();
-			Assert.assertEquals(3, tables.size());
-			for (Table table : tables) {
-				String cellText = table.getCellByPosition(4, 1).getDisplayText();
-				Assert.assertEquals("11", cellText);
-			}
-		} catch (Exception e) {
-			LOG.log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
-		}
-	}
+  @Test
+  public void testGetTableList() {
+    try {
+      doc =
+          PresentationDocument.loadDocument(
+              ResourceUtilities.getTestResourceAsStream(TEST_PRESENTATION_FILE));
+      List<Table> tables = doc.getTableList();
+      Assert.assertEquals(3, tables.size());
+      for (Table table : tables) {
+        String cellText = table.getCellByPosition(4, 1).getDisplayText();
+        Assert.assertEquals("11", cellText);
+      }
+    } catch (Exception e) {
+      LOG.log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+    }
+  }
 }

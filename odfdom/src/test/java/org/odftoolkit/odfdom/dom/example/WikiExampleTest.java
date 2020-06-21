@@ -21,7 +21,6 @@ package org.odftoolkit.odfdom.dom.example;
 
 import java.net.URI;
 import org.junit.Ignore;
-
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
@@ -33,92 +32,92 @@ import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 
-/** The test was deactivated. As an invalid value will no longer throw an exception and cause the removal of the attribute. */
+/**
+ * The test was deactivated. As an invalid value will no longer throw an exception and cause the
+ * removal of the attribute.
+ */
 public class WikiExampleTest {
 
-	@Test
-	@Ignore
-	public void testWikiExamples1() throws Exception {
+  @Test
+  @Ignore
+  public void testWikiExamples1() throws Exception {
 
-		// WIKI EXAMPLE I from http://odftoolkit.org/projects/odfdom/pages/Home
+    // WIKI EXAMPLE I from http://odftoolkit.org/projects/odfdom/pages/Home
 
-		// Create a text document from a standard template (empty documents within the JAR)
-		OdfTextDocument odt = OdfTextDocument.newTextDocument();
+    // Create a text document from a standard template (empty documents within the JAR)
+    OdfTextDocument odt = OdfTextDocument.newTextDocument();
 
-		// Append text to the end of the document.
-		odt.addText("This is my very first ODF test");
+    // Append text to the end of the document.
+    odt.addText("This is my very first ODF test");
 
-		// Save document
-		odt.save("MyFilename.odt");
-	}
+    // Save document
+    odt.save("MyFilename.odt");
+  }
 
+  @Test
+  @Ignore
+  public void testWikiExamples2() throws Exception {
 
-	@Test
-	@Ignore
-	public void testWikiExamples2() throws Exception {
+    // ********************************************************************
+    // WIKI EXAMPLE I from http://odftoolkit.org/projects/odfdom/pages/Layers
 
-		//********************************************************************
-		// WIKI EXAMPLE I from http://odftoolkit.org/projects/odfdom/pages/Layers
+    // loads the ODF document package from the path
+    OdfPackage pkg = OdfPackage.loadPackage("/home/myDocuments/myVacation.odt");
 
-		// loads the ODF document package from the path
-		OdfPackage pkg = OdfPackage.loadPackage("/home/myDocuments/myVacation.odt");
+    // loads the image from the URL and inserts the image in the package,
+    // adapting the manifest
+    pkg.insert(new URI("./myHoliday.png"), "Pictures/myHoliday.png", "image/png");
+    pkg.save("/home/myDocuments/myVacation.odt");
 
-		// loads the image from the URL and inserts the image in the package,
-		// adapting the manifest
-		pkg.insert(new URI("./myHoliday.png"), "Pictures/myHoliday.png", "image/png");
-		pkg.save("/home/myDocuments/myVacation.odt");
+    // ********************************************************************
+    // WIKI EXAMPLE II from http://odftoolkit.org/projects/odfdom/pages/Layers
 
+    // Load file
+    OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument("ImageIn.odt");
 
+    // get root of all content of a text document
+    OfficeTextElement officeText = odt.getContentRoot();
 
-		//********************************************************************
-		// WIKI EXAMPLE II from http://odftoolkit.org/projects/odfdom/pages/Layers
+    // get first paragraph
+    TextPElement firstParagraph = OdfElement.findFirstChildNode(TextPElement.class, officeText);
 
-		// Load file
-		OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument("ImageIn.odt");
+    // XPath alternative to get the first paragraph
+    /*
+      XPath xpath = XPathFactory.newInstance().newXPath();
+      xpath.setNamespaceContext(new OdfNamespace());
+      OdfFileDom dom = odt.getContentDom();
+      firstParagraph = (TextPElement) xpath.evaluate("//text:p[1]", dom, XPathConstants.NODE);
+    */
 
-		// get root of all content of a text document
-		OfficeTextElement officeText = odt.getContentRoot();
+    // insert a frame
+    DrawFrameElement frame = firstParagraph.newDrawFrameElement();
 
-		// get first paragraph
-		TextPElement firstParagraph =
-		  OdfElement.findFirstChildNode(TextPElement.class, officeText);
+    // insert an image: This is a class from the Document API
+    OdfDrawImage image = (OdfDrawImage) frame.newDrawImageElement();
+    image.newImage(new URI("./MySampleImage.png"));
 
-		// XPath alternative to get the first paragraph
-		/*
-		  XPath xpath = XPathFactory.newInstance().newXPath();
-		  xpath.setNamespaceContext(new OdfNamespace());
-		  OdfFileDom dom = odt.getContentDom();
-		  firstParagraph = (TextPElement) xpath.evaluate("//text:p[1]", dom, XPathConstants.NODE);
-		*/
+    // Save file
+    odt.save("ImageOut.odt");
 
-		// insert a frame
-		DrawFrameElement frame = firstParagraph.newDrawFrameElement();
+    // ********************************************************************
+    // WIKI EXAMPLE III from http://odftoolkit.org/projects/odfdom/pages/Layers
 
-		// insert an image: This is a class from the Document API
-		OdfDrawImage image = (OdfDrawImage) frame.newDrawImageElement();
-		image.newImage(new URI("./MySampleImage.png"));
+    // Load Image
+    odt = (OdfTextDocument) OdfDocument.loadDocument("ImageIn.odt");
 
-		// Save file
-		odt.save("ImageOut.odt");
+    // Play around with text
+    odt.addText("When there is no paragraph, the text will be embedded in a new paragraph");
+    odt.newParagraph("Create new paragraph");
+    odt.addText("\nThis is a new line");
 
-		//********************************************************************
-		// WIKI EXAMPLE III from http://odftoolkit.org/projects/odfdom/pages/Layers
+    // Insert Image and make last paragraph its anchor
+    odt.newImage(new URI("./MySampleImage.png"));
 
-		// Load Image
-		odt = (OdfTextDocument) OdfDocument.loadDocument("ImageIn.odt");
+    // Insert new spreadsheet as sub document into the package within directory
+    // "myOdsDirectoryPath/"
+    odt.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "myOdsDirectoryPath");
 
-		// Play around with text
-		odt.addText("When there is no paragraph, the text will be embedded in a new paragraph");
-		odt.newParagraph("Create new paragraph");
-		odt.addText("\nThis is a new line");
-
-		// Insert Image and make last paragraph its anchor
-		odt.newImage(new URI("./MySampleImage.png"));
-
-		// Insert new spreadsheet as sub document into the package within directory  "myOdsDirectoryPath/"
-		odt.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "myOdsDirectoryPath");
-
-		// Save file
-		odt.save("ImageOut.odt");
-	}
+    // Save file
+    odt.save("ImageOut.odt");
+  }
 }

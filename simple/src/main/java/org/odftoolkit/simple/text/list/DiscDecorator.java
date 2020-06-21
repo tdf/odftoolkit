@@ -22,26 +22,23 @@ package org.odftoolkit.simple.text.list;
 import org.odftoolkit.simple.Document;
 
 /**
- * DiscDecorator is an implementation of the ListDecorator interface,
- * decorates a given List as disc list. User can extend this class and realize
- * their own list and list item style. For example, set a specifies list item
- * with red color.
- * <p>
- * A DiscDecorator can be reused in the same Document.
+ * DiscDecorator is an implementation of the ListDecorator interface, decorates a given List as disc
+ * list. User can extend this class and realize their own list and list item style. For example, set
+ * a specifies list item with red color.
+ *
+ * <p>A DiscDecorator can be reused in the same Document.
  *
  * @since 0.4
  */
 public class DiscDecorator extends BulletDecoratorBase {
-	private static String DEFAULT_NAME = "Simple_Default_Disc_List";
+  private static String DEFAULT_NAME = "Simple_Default_Disc_List";
 
-	/**
-	 * Constructor with Document.
-	 *
-	 * @param doc
-	 *            the Document which this BulletDecorator will be used on.
-	 */
-	public DiscDecorator(Document doc) {
-	    super(doc, DEFAULT_NAME, "Bullet_20_Symbols", DEFAULT_DISC_CHAR);
-	}
-
+  /**
+   * Constructor with Document.
+   *
+   * @param doc the Document which this BulletDecorator will be used on.
+   */
+  public DiscDecorator(Document doc) {
+    super(doc, DEFAULT_NAME, "Bullet_20_Symbols", DEFAULT_DISC_CHAR);
+  }
 }

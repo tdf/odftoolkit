@@ -25,21 +25,20 @@ package org.odftoolkit.simple.style;
  * @since 0.5
  */
 public enum NumberFormat {
+  HINDU_ARABIC_NUMBER("1"),
+  LOWERCASE_LATIN_ALPHABET("a"),
+  UPPERCASE_LATIN_ALPHABET("A"),
+  LOWERCASE_ROMAN_NUMBER("i"),
+  UPPERCASE_ROMAN_NUMBER("I");
 
-	HINDU_ARABIC_NUMBER("1"),
-	LOWERCASE_LATIN_ALPHABET("a"),
-	UPPERCASE_LATIN_ALPHABET("A"),
-	LOWERCASE_ROMAN_NUMBER("i"),
-	UPPERCASE_ROMAN_NUMBER("I");
+  private final String numberFormat;
 
-	private final String numberFormat;
+  NumberFormat(String format) {
+    numberFormat = format;
+  }
 
-	NumberFormat(String format) {
-		numberFormat = format;
-	}
-
-	@Override
-	public String toString() {
-		return numberFormat;
-	}
+  @Override
+  public String toString() {
+    return numberFormat;
+  }
 }

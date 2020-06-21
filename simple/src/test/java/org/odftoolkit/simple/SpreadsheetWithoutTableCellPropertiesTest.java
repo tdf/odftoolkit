@@ -19,28 +19,24 @@ under the License.
 
 package org.odftoolkit.simple;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import junit.framework.Assert;
-
 import org.junit.Test;
+import org.odftoolkit.odfdom.type.Color;
+import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.utils.ResourceUtilities;
-import org.odftoolkit.simple.table.Cell;
-import org.odftoolkit.odfdom.type.Color;
 
 public class SpreadsheetWithoutTableCellPropertiesTest {
 
-	private final static String TEST_FILE_NAME = "TestCellWithoutTableCellProperties.ods";
+  private static final String TEST_FILE_NAME = "TestCellWithoutTableCellProperties.ods";
 
-	@Test
-	public void testGetCellBackgroundColorOfEmptySpace() throws Exception {
-		SpreadsheetDocument document = SpreadsheetDocument.loadDocument(ResourceUtilities
-			.getTestResourceAsStream(TEST_FILE_NAME));
-		Table table = document.getSheetByIndex(0);
-		Cell cell = table.getCellByPosition(0, 0);
-		Color color = cell.getCellBackgroundColor();
-		Assert.assertEquals(color, org.odftoolkit.odfdom.type.Color.WHITE);
-	}
+  @Test
+  public void testGetCellBackgroundColorOfEmptySpace() throws Exception {
+    SpreadsheetDocument document =
+        SpreadsheetDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_NAME));
+    Table table = document.getSheetByIndex(0);
+    Cell cell = table.getCellByPosition(0, 0);
+    Color color = cell.getCellBackgroundColor();
+    Assert.assertEquals(color, org.odftoolkit.odfdom.type.Color.WHITE);
+  }
 }

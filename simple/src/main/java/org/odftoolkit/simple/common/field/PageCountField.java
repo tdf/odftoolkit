@@ -29,60 +29,57 @@ import org.odftoolkit.simple.meta.Meta;
 import org.odftoolkit.simple.style.NumberFormat;
 
 /**
- * A <tt>PageCountField</tt> displays the total number of pages in a document.
- * The value of this field is from the owner document meta statistic
- * information.
- * <p>
- * NOTE: Before the document is opened in any editor, the value of this field
- * maybe invalid.
+ * A <tt>PageCountField</tt> displays the total number of pages in a document. The value of this
+ * field is from the owner document meta statistic information.
+ *
+ * <p>NOTE: Before the document is opened in any editor, the value of this field maybe invalid.
  *
  * @since 0.5
  */
 public class PageCountField extends Field {
 
-	private TextPageCountElement pageCountElement;
+  private TextPageCountElement pageCountElement;
 
-	// package constructor, only called by Fields
-	PageCountField(OdfElement odfElement) {
-		TextSpanElement spanElement = ((OdfFileDom) odfElement.getOwnerDocument()).newOdfElement(TextSpanElement.class);
-		odfElement.appendChild(spanElement);
-		pageCountElement = spanElement.newTextPageCountElement(null);
-		try {
-			OdfFileDom dom = (OdfFileDom) odfElement.getOwnerDocument();
-			Meta meta = ((Document) dom.getDocument()).getOfficeMetadata();
-			int count = meta.getDocumentStatistic().getPageCount();
-			pageCountElement.setTextContent(String.valueOf(count));
-		} catch (Exception e) {
-			// get meta info failed, do not set count value. Let editor update
-			// it.
-		}
-		Component.registerComponent(this, getOdfElement());
-	}
+  // package constructor, only called by Fields
+  PageCountField(OdfElement odfElement) {
+    TextSpanElement spanElement =
+        ((OdfFileDom) odfElement.getOwnerDocument()).newOdfElement(TextSpanElement.class);
+    odfElement.appendChild(spanElement);
+    pageCountElement = spanElement.newTextPageCountElement(null);
+    try {
+      OdfFileDom dom = (OdfFileDom) odfElement.getOwnerDocument();
+      Meta meta = ((Document) dom.getDocument()).getOfficeMetadata();
+      int count = meta.getDocumentStatistic().getPageCount();
+      pageCountElement.setTextContent(String.valueOf(count));
+    } catch (Exception e) {
+      // get meta info failed, do not set count value. Let editor update
+      // it.
+    }
+    Component.registerComponent(this, getOdfElement());
+  }
 
-	/**
-	 * Specifies the number format of this field.
-	 *
-	 * @param format
-	 *            the format which is predefined in
-	 *            {@link org.odftoolkit.simple.style.NumberFormat NumberFormat}.
-	 * @see org.odftoolkit.simple.style.NumberFormat
-	 */
-	public void setNumberFormat(NumberFormat format) {
-		pageCountElement.setStyleNumFormatAttribute(format.toString());
-	}
+  /**
+   * Specifies the number format of this field.
+   *
+   * @param format the format which is predefined in {@link org.odftoolkit.simple.style.NumberFormat
+   *     NumberFormat}.
+   * @see org.odftoolkit.simple.style.NumberFormat
+   */
+  public void setNumberFormat(NumberFormat format) {
+    pageCountElement.setStyleNumFormatAttribute(format.toString());
+  }
 
-	/**
-	 * Return an instance of <code>TextPageCountElement</code> which represents
-	 * this feature.
-	 *
-	 * @return an instance of <code>TextPageCountElement</code>
-	 */
-	public TextPageCountElement getOdfElement() {
-		return pageCountElement;
-	}
+  /**
+   * Return an instance of <code>TextPageCountElement</code> which represents this feature.
+   *
+   * @return an instance of <code>TextPageCountElement</code>
+   */
+  public TextPageCountElement getOdfElement() {
+    return pageCountElement;
+  }
 
-	@Override
-	public FieldType getFieldType() {
-		return FieldType.PAGE_COUNT_FIELD;
-	}
+  @Override
+  public FieldType getFieldType() {
+    return FieldType.PAGE_COUNT_FIELD;
+  }
 }

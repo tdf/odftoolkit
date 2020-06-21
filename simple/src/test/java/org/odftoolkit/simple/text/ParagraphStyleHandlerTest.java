@@ -22,7 +22,6 @@ package org.odftoolkit.simple.text;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.type.Color;
@@ -34,83 +33,82 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.TextLinePosition;
 
 public class ParagraphStyleHandlerTest {
 
-	private static final Logger LOGGER =  Logger.getLogger(ParagraphStyleHandlerTest.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(ParagraphStyleHandlerTest.class.getName());
 
-	@Test
-	public void testGetParagraphByIndex() {
-		try {
-			TextDocument doc = TextDocument.newTextDocument();
-			Paragraph paragraph = doc.addParagraph("paragraphTest");
-			ParagraphStyleHandler paragraphHandler = paragraph.getStyleHandler();
+  @Test
+  public void testGetParagraphByIndex() {
+    try {
+      TextDocument doc = TextDocument.newTextDocument();
+      Paragraph paragraph = doc.addParagraph("paragraphTest");
+      ParagraphStyleHandler paragraphHandler = paragraph.getStyleHandler();
 
-			paragraphHandler.setCountry("English", Document.ScriptType.WESTERN);
+      paragraphHandler.setCountry("English", Document.ScriptType.WESTERN);
 
-			//validate
-			String country = paragraphHandler.getCountry(Document.ScriptType.WESTERN);
-			Assert.assertEquals("English", country);
+      // validate
+      String country = paragraphHandler.getCountry(Document.ScriptType.WESTERN);
+      Assert.assertEquals("English", country);
 
-			paragraphHandler.setCountry(null, Document.ScriptType.WESTERN);
+      paragraphHandler.setCountry(null, Document.ScriptType.WESTERN);
 
-			//validate
-			String country1 = paragraphHandler.getCountry(Document.ScriptType.WESTERN);
+      // validate
+      String country1 = paragraphHandler.getCountry(Document.ScriptType.WESTERN);
 
-			Assert.assertNull(country1);
+      Assert.assertNull(country1);
 
-			//save
-			//doc.save(ResourceUtilities.newTestOutputFile("testParagraphStyleHandler.odt"));
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      // save
+      // doc.save(ResourceUtilities.newTestOutputFile("testParagraphStyleHandler.odt"));
+    } catch (Exception e) {
+      LOGGER.log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
+  @Test
+  public void testGetFont() {
+    try {
+      TextDocument doc = TextDocument.newTextDocument();
+      Paragraph paragraph = doc.addParagraph("paragraphTest");
+      ParagraphStyleHandler paragraphHandler = paragraph.getStyleHandler();
 
-	@Test
-	public void testGetFont() {
-		try {
-			TextDocument doc = TextDocument.newTextDocument();
-			Paragraph paragraph = doc.addParagraph("paragraphTest");
-			ParagraphStyleHandler paragraphHandler = paragraph.getStyleHandler();
+      Font fontBase =
+          new Font("Arial", FontStyle.ITALIC, 10, Color.BLACK, TextLinePosition.THROUGH);
+      paragraphHandler.setFont(fontBase);
+      // validate
+      Font font = paragraphHandler.getFont(Document.ScriptType.WESTERN);
+      Assert.assertEquals(fontBase, font);
 
-			Font fontBase = new Font("Arial", FontStyle.ITALIC, 10, Color.BLACK, TextLinePosition.THROUGH);
-			paragraphHandler.setFont(fontBase);
-			//validate
-			Font font = paragraphHandler.getFont(Document.ScriptType.WESTERN);
-			Assert.assertEquals(fontBase, font);
+      paragraphHandler.setFont(fontBase, Locale.CHINESE);
+      // validate
+      Font font1 = paragraphHandler.getFont(Document.ScriptType.WESTERN);
+      Assert.assertEquals(fontBase, font1);
 
-			paragraphHandler.setFont(fontBase, Locale.CHINESE);
-			//validate
-			Font font1 = paragraphHandler.getFont(Document.ScriptType.WESTERN);
-			Assert.assertEquals(fontBase, font1);
+      // save
+      // doc.save(ResourceUtilities.newTestOutputFile("testParagraphStyleHandler.odt"));
+    } catch (Exception e) {
+      LOGGER.log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-			//save
-			//doc.save(ResourceUtilities.newTestOutputFile("testParagraphStyleHandler.odt"));
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+  @Test
+  public void testGetLanguage() {
+    try {
+      TextDocument doc = TextDocument.newTextDocument();
+      Paragraph paragraph = doc.addParagraph("paragraphTest");
+      ParagraphStyleHandler paragraphHandler = paragraph.getStyleHandler();
 
+      paragraphHandler.setLanguage("English", Document.ScriptType.WESTERN);
 
-	@Test
-	public void testGetLanguage() {
-		try {
-			TextDocument doc = TextDocument.newTextDocument();
-			Paragraph paragraph = doc.addParagraph("paragraphTest");
-			ParagraphStyleHandler paragraphHandler = paragraph.getStyleHandler();
+      // validate
+      String language = paragraphHandler.getLanguage(Document.ScriptType.WESTERN);
 
-			paragraphHandler.setLanguage("English", Document.ScriptType.WESTERN);
+      Assert.assertEquals("English", language);
 
-			//validate
-			String language = paragraphHandler.getLanguage(Document.ScriptType.WESTERN);
-
-			Assert.assertEquals("English", language);
-
-			//save
-			//doc.save(ResourceUtilities.newTestOutputFile("testParagraphStyleHandler.odt"));
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      // save
+      // doc.save(ResourceUtilities.newTestOutputFile("testParagraphStyleHandler.odt"));
+    } catch (Exception e) {
+      LOGGER.log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 }

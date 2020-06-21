@@ -1,24 +1,26 @@
-/************************************************************************
+/**
+ * **********************************************************************
  *
- * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
+ * <p>DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
- * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
+ * <p>Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
  *
- * Use is subject to license terms.
+ * <p>Use is subject to license terms.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
- * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0. You can also obtain a copy of the License at
+ * http://odftoolkit.org/docs/license.txt
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied.
  *
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * <p>See the License for the specific language governing permissions and limitations under the
+ * License.
  *
- ************************************************************************/
+ * <p>**********************************************************************
+ */
 package org.odftoolkit.odfdom.pkg.rdfa;
 
 import java.util.Collections;
@@ -29,146 +31,149 @@ import java.util.List;
 import java.util.Map;
 import javax.xml.namespace.NamespaceContext;
 
-/**
- * EvalContext modified from net.rootdev.javardfa.EvalContext
- */
+/** EvalContext modified from net.rootdev.javardfa.EvalContext */
 final class EvalContext implements NamespaceContext {
 
-    EvalContext parent;
-    String base;
-    String parentSubject;
-    String parentObject;
-    String language;
-    String vocab;
-    List<String> forwardProperties;
-    List<String> backwardProperties;
-    Map<String, String> xmlnsMap = Collections.EMPTY_MAP;
-    Map<String, String> prefixMap = Collections.EMPTY_MAP;
+  EvalContext parent;
+  String base;
+  String parentSubject;
+  String parentObject;
+  String language;
+  String vocab;
+  List<String> forwardProperties;
+  List<String> backwardProperties;
+  Map<String, String> xmlnsMap = Collections.EMPTY_MAP;
+  Map<String, String> prefixMap = Collections.EMPTY_MAP;
 
-    protected EvalContext(String base) {
-        super();
-        this.base = base;
-        this.parentSubject = base;
-        this.forwardProperties = new LinkedList<String>();
-        this.backwardProperties = new LinkedList<String>();
+  protected EvalContext(String base) {
+    super();
+    this.base = base;
+    this.parentSubject = base;
+    this.forwardProperties = new LinkedList<String>();
+    this.backwardProperties = new LinkedList<String>();
+  }
+
+  public EvalContext(EvalContext toCopy) {
+    super();
+    this.base = toCopy.base;
+    this.parentSubject = toCopy.parentSubject;
+    this.parentObject = toCopy.parentObject;
+    this.language = toCopy.language;
+    this.forwardProperties = new LinkedList<String>(toCopy.forwardProperties);
+    this.backwardProperties = new LinkedList<String>(toCopy.backwardProperties);
+    this.parent = toCopy;
+    this.vocab = toCopy.vocab;
+  }
+
+  public void setBase(String abase) {
+    // This is very dodgy. We want to check if ps and po have been changed
+    // from their typical values (base).
+    // Base changing happens very late in the day when we're streaming, and
+    // it is very fiddly to handle
+    boolean setPS = parentSubject == base;
+    boolean setPO = parentObject == base;
+
+    if (abase.contains("#")) {
+      this.base = abase.substring(0, abase.indexOf("#"));
+    } else {
+      this.base = abase;
     }
 
-    public EvalContext(EvalContext toCopy) {
-        super();
-        this.base = toCopy.base;
-        this.parentSubject = toCopy.parentSubject;
-        this.parentObject = toCopy.parentObject;
-        this.language = toCopy.language;
-        this.forwardProperties = new LinkedList<String>(toCopy.forwardProperties);
-        this.backwardProperties = new LinkedList<String>(toCopy.backwardProperties);
-        this.parent = toCopy;
-        this.vocab = toCopy.vocab;
+    if (setPS) this.parentSubject = base;
+    if (setPO) this.parentObject = base;
+
+    if (parent != null) {
+      parent.setBase(base);
     }
+  }
 
-    public void setBase(String abase) {
-        // This is very dodgy. We want to check if ps and po have been changed
-        // from their typical values (base).
-        // Base changing happens very late in the day when we're streaming, and
-        // it is very fiddly to handle
-        boolean setPS = parentSubject == base;
-        boolean setPO = parentObject == base;
+  @Override
+  public String toString() {
+    return String.format(
+        "[\n\tBase: %s\n\tPS: %s\n\tPO: %s\n\tlang: %s\n\tIncomplete: -> %s <- %s\n]",
+        base,
+        parentSubject,
+        parentObject,
+        language,
+        forwardProperties.size(),
+        backwardProperties.size());
+  }
 
-        if (abase.contains("#")) {
-            this.base = abase.substring(0, abase.indexOf("#"));
-        } else {
-            this.base = abase;
-        }
-
-        if (setPS) this.parentSubject = base;
-        if (setPO) this.parentObject = base;
-
-        if (parent != null) {
-            parent.setBase(base);
-        }
+  /**
+   * RDFa 1.1 prefix support
+   *
+   * @param prefix Prefix
+   * @param uri URI
+   */
+  public void setPrefix(String prefix, String uri) {
+    if (uri.length() == 0) {
+      uri = base;
     }
+    if (prefixMap == Collections.EMPTY_MAP) prefixMap = new HashMap<String, String>();
+    prefixMap.put(prefix, uri);
+  }
 
-    @Override
-    public String toString() {
-        return
-            String.format("[\n\tBase: %s\n\tPS: %s\n\tPO: %s\n\tlang: %s\n\tIncomplete: -> %s <- %s\n]",
-                base, parentSubject, parentObject, language,
-                forwardProperties.size(), backwardProperties.size()
-                );
+  /**
+   * RDFa 1.1 prefix support.
+   *
+   * @param prefix
+   * @return
+   */
+  public String getURIForPrefix(String prefix) {
+    if (prefixMap.containsKey(prefix)) {
+      return prefixMap.get(prefix);
+    } else if (xmlnsMap.containsKey(prefix)) {
+      return xmlnsMap.get(prefix);
+    } else if (parent != null) {
+      return parent.getURIForPrefix(prefix);
+    } else {
+      return null;
     }
+  }
 
-    /**
-     * RDFa 1.1 prefix support
-     * @param prefix Prefix
-     * @param uri URI
-     */
-    public void setPrefix(String prefix, String uri) {
-        if (uri.length() == 0) {
-            uri = base;
-        }
-        if (prefixMap == Collections.EMPTY_MAP) prefixMap = new HashMap<String, String>();
-        prefixMap.put(prefix, uri);
+  // Namespace methods
+  public void setNamespaceURI(String prefix, String uri) {
+    if (uri.length() == 0) {
+      uri = base;
     }
+    if (xmlnsMap == Collections.EMPTY_MAP) xmlnsMap = new HashMap<String, String>();
+    xmlnsMap.put(prefix, uri);
+  }
 
-    /**
-     * RDFa 1.1 prefix support.
-     * @param prefix
-     * @return
-     */
-    public String getURIForPrefix(String prefix) {
-        if (prefixMap.containsKey(prefix)) {
-            return prefixMap.get(prefix);
-        } else if (xmlnsMap.containsKey(prefix)) {
-            return xmlnsMap.get(prefix);
-        } else if (parent != null) {
-            return parent.getURIForPrefix(prefix);
-        } else {
-            return null;
-        }
+  public String getNamespaceURI(String prefix) {
+    if (xmlnsMap.containsKey(prefix)) {
+      return xmlnsMap.get(prefix);
+    } else if (parent != null) {
+      return parent.getNamespaceURI(prefix);
+    } else {
+      return null;
     }
+  }
 
-    // Namespace methods
-    public void setNamespaceURI(String prefix, String uri) {
-        if (uri.length() == 0) {
-            uri = base;
-        }
-        if (xmlnsMap == Collections.EMPTY_MAP) xmlnsMap = new HashMap<String, String>();
-        xmlnsMap.put(prefix, uri);
-    }
+  public String getPrefix(String uri) {
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
 
-    public String getNamespaceURI(String prefix) {
-        if (xmlnsMap.containsKey(prefix)) {
-            return xmlnsMap.get(prefix);
-        } else if (parent != null) {
-            return parent.getNamespaceURI(prefix);
-        } else {
-            return null;
-        }
-    }
+  public Iterator getPrefixes(String uri) {
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
 
-    public String getPrefix(String uri) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+  // I'm not sure about this 1.1 term business. Reuse prefix map
+  public void setTerm(String term, String uri) {
+    setPrefix(term + ":", uri);
+  }
 
-    public Iterator getPrefixes(String uri) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+  public String getURIForTerm(String term) {
+    return getURIForPrefix(term + ":");
+  }
 
-    // I'm not sure about this 1.1 term business. Reuse prefix map
-    public void setTerm(String term, String uri) {
-       setPrefix(term + ":", uri);
-    }
+  public String getBase() {
+    return base;
+  }
 
-    public String getURIForTerm(String term) {
-        return getURIForPrefix(term + ":");
-    }
-
-    public String getBase() {
-        return base;
-    }
-
-    public String getVocab() {
-        return vocab;
-    }
+  public String getVocab() {
+    return vocab;
+  }
 }
 
 /*
@@ -195,4 +200,3 @@ final class EvalContext implements NamespaceContext {
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-

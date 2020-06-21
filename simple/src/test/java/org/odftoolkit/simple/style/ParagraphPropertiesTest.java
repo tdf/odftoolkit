@@ -31,53 +31,53 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class ParagraphPropertiesTest {
 
-    private static final Logger LOGGER = Logger.getLogger(ParagraphPropertiesTest.class.getName());
-    static final String filename = "testGetCellAt.ods";
+  private static final Logger LOGGER = Logger.getLogger(ParagraphPropertiesTest.class.getName());
+  static final String filename = "testGetCellAt.ods";
 
-    @Test
-    public void testGetSetBorder() {
-        try {
-            TextDocument doc = TextDocument.newTextDocument();
-            Paragraph paragraph1 = doc.addParagraph("paragraph1");
+  @Test
+  public void testGetSetBorder() {
+    try {
+      TextDocument doc = TextDocument.newTextDocument();
+      Paragraph paragraph1 = doc.addParagraph("paragraph1");
 
-            paragraph1.setHorizontalAlignment(HorizontalAlignmentType.JUSTIFY);
-            HorizontalAlignmentType align = paragraph1.getHorizontalAlignment();
-            Assert.assertEquals(HorizontalAlignmentType.JUSTIFY, align);
+      paragraph1.setHorizontalAlignment(HorizontalAlignmentType.JUSTIFY);
+      HorizontalAlignmentType align = paragraph1.getHorizontalAlignment();
+      Assert.assertEquals(HorizontalAlignmentType.JUSTIFY, align);
 
-            paragraph1.setHorizontalAlignment(HorizontalAlignmentType.LEFT);
-            align = paragraph1.getHorizontalAlignment();
-            Assert.assertEquals(HorizontalAlignmentType.LEFT, align);
+      paragraph1.setHorizontalAlignment(HorizontalAlignmentType.LEFT);
+      align = paragraph1.getHorizontalAlignment();
+      Assert.assertEquals(HorizontalAlignmentType.LEFT, align);
 
-            paragraph1.setHorizontalAlignment(HorizontalAlignmentType.RIGHT);
-            align = paragraph1.getHorizontalAlignment();
-            Assert.assertEquals(HorizontalAlignmentType.RIGHT, align);
+      paragraph1.setHorizontalAlignment(HorizontalAlignmentType.RIGHT);
+      align = paragraph1.getHorizontalAlignment();
+      Assert.assertEquals(HorizontalAlignmentType.RIGHT, align);
 
-            doc.save(ResourceUtilities.newTestOutputFile("TestParagraphPropertiesSetGetHoriAlignment.odt"));
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
-            Assert.fail();
-        }
-
+      doc.save(
+          ResourceUtilities.newTestOutputFile("TestParagraphPropertiesSetGetHoriAlignment.odt"));
+    } catch (Exception e) {
+      LOGGER.log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail();
     }
+  }
 
-    @Test
-    public void testGetSetBackgroundColor() {
-        try {
-            TextDocument doc = TextDocument.newTextDocument();
-            Paragraph paragraph1 = doc.addParagraph("paragraph1");
+  @Test
+  public void testGetSetBackgroundColor() {
+    try {
+      TextDocument doc = TextDocument.newTextDocument();
+      Paragraph paragraph1 = doc.addParagraph("paragraph1");
 
-            ParagraphStyleHandler psh = paragraph1.getStyleHandler();
-            ParagraphProperties paraProp = psh.getParagraphPropertiesForWrite();
-            paraProp.setBackgroundColor(new Color("#FF0000"));
+      ParagraphStyleHandler psh = paragraph1.getStyleHandler();
+      ParagraphProperties paraProp = psh.getParagraphPropertiesForWrite();
+      paraProp.setBackgroundColor(new Color("#FF0000"));
 
-            psh = paragraph1.getStyleHandler();
-            paraProp = psh.getParagraphPropertiesForWrite();
+      psh = paragraph1.getStyleHandler();
+      paraProp = psh.getParagraphPropertiesForWrite();
 
-            Assert.assertEquals("#FF0000", paraProp.getBackgroundColorAttribute());
+      Assert.assertEquals("#FF0000", paraProp.getBackgroundColorAttribute());
 
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
-            Assert.fail();
-        }
+    } catch (Exception e) {
+      LOGGER.log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail();
     }
+  }
 }

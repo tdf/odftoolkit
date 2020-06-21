@@ -22,9 +22,7 @@ package org.odftoolkit.simple.text;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import junit.framework.Assert;
-
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
@@ -40,228 +38,226 @@ import org.w3c.dom.Node;
 
 public class HeaderTest {
 
-	String headerDocumentPath = "HeaderTableDocument.odt";
+  String headerDocumentPath = "HeaderTableDocument.odt";
 
-	@Test
-	public void testAddTable() {
-		try {
-			TextDocument doc = TextDocument.newTextDocument();
-			Header header = doc.getHeader();
-			Assert.assertNotNull(header);
+  @Test
+  public void testAddTable() {
+    try {
+      TextDocument doc = TextDocument.newTextDocument();
+      Header header = doc.getHeader();
+      Assert.assertNotNull(header);
 
-			Table table = header.addTable();
-			table.setTableName("headerTable");
-			int rowCount = table.getRowCount();
-			int columnCount = table.getColumnCount();
-			String expectedCellValue = "header table cell";
-			table.getCellByPosition(1, 1).setStringValue(expectedCellValue);
-			Cell cell = table.getCellByPosition(4, 0);
-			cell.setImage(ResourceUtilities.getURI("image_list_item.png"));
-			// first page
-			header = doc.getHeader(true);
-			Assert.assertNotNull(header);
+      Table table = header.addTable();
+      table.setTableName("headerTable");
+      int rowCount = table.getRowCount();
+      int columnCount = table.getColumnCount();
+      String expectedCellValue = "header table cell";
+      table.getCellByPosition(1, 1).setStringValue(expectedCellValue);
+      Cell cell = table.getCellByPosition(4, 0);
+      cell.setImage(ResourceUtilities.getURI("image_list_item.png"));
+      // first page
+      header = doc.getHeader(true);
+      Assert.assertNotNull(header);
 
-			table = header.addTable();
-			table.setTableName("headerHTable");
-			doc.save(ResourceUtilities.newTestOutputFile(headerDocumentPath));
+      table = header.addTable();
+      table.setTableName("headerHTable");
+      doc.save(ResourceUtilities.newTestOutputFile(headerDocumentPath));
 
-			// load the document again.
-			doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(headerDocumentPath));
-			header = doc.getHeader();
-			table = header.getTableByName("headerTable");
-			Assert.assertEquals(rowCount, table.getRowCount());
-			Assert.assertEquals(columnCount, table.getColumnCount());
-			Assert.assertEquals(expectedCellValue, table.getCellByPosition(1, 1).getStringValue());
-			cell = table.getCellByPosition(4, 0);
-			Assert.assertEquals(34, cell.getBufferedImage().getHeight(null));
-			table.getColumnByIndex(4).setWidth(15);
+      // load the document again.
+      doc =
+          TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(headerDocumentPath));
+      header = doc.getHeader();
+      table = header.getTableByName("headerTable");
+      Assert.assertEquals(rowCount, table.getRowCount());
+      Assert.assertEquals(columnCount, table.getColumnCount());
+      Assert.assertEquals(expectedCellValue, table.getCellByPosition(1, 1).getStringValue());
+      cell = table.getCellByPosition(4, 0);
+      Assert.assertEquals(34, cell.getBufferedImage().getHeight(null));
+      table.getColumnByIndex(4).setWidth(15);
 
-			header = doc.getHeader(true);
-			table = header.getTableByName("headerHTable");
-			Assert.assertNotNull(table);
-		} catch (Exception e) {
-			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      header = doc.getHeader(true);
+      table = header.getTableByName("headerHTable");
+      Assert.assertNotNull(table);
+    } catch (Exception e) {
+      Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testHeaderHidden() {
-		try {
-			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("headerFooterHidden.odt"));
-			Header header = doc.getHeader();
-			Assert.assertEquals(true, header.isVisible());
-			header.setVisible(false);
-			Assert.assertEquals(false, header.isVisible());
-			doc.save(ResourceUtilities.newTestOutputFile("headerHiddenOutput.odt"));
-		} catch (Exception e) {
-			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+  @Test
+  public void testHeaderHidden() {
+    try {
+      TextDocument doc =
+          TextDocument.loadDocument(
+              ResourceUtilities.getTestResourceAsStream("headerFooterHidden.odt"));
+      Header header = doc.getHeader();
+      Assert.assertEquals(true, header.isVisible());
+      header.setVisible(false);
+      Assert.assertEquals(false, header.isVisible());
+      doc.save(ResourceUtilities.newTestOutputFile("headerHiddenOutput.odt"));
+    } catch (Exception e) {
+      Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testGetOdfElement() {
-		try {
-			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream("headerFooterHidden.odt"));
-			Header header = doc.getHeader();
-			StyleHeaderElement styleheader = header.getOdfElement();
-			Assert.assertNotNull(styleheader);
-			Assert.assertEquals("header", styleheader.getLocalName());
+  @Test
+  public void testGetOdfElement() {
+    try {
+      TextDocument doc =
+          TextDocument.loadDocument(
+              ResourceUtilities.getTestResourceAsStream("headerFooterHidden.odt"));
+      Header header = doc.getHeader();
+      StyleHeaderElement styleheader = header.getOdfElement();
+      Assert.assertNotNull(styleheader);
+      Assert.assertEquals("header", styleheader.getLocalName());
 
-			//save
-			doc.save(ResourceUtilities.newTestOutputFile("headerHiddenOutput.odt"));
-		} catch (Exception e) {
-			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      // save
+      doc.save(ResourceUtilities.newTestOutputFile("headerHiddenOutput.odt"));
+    } catch (Exception e) {
+      Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
+  @Test
+  public void testGetTableList() {
+    try {
+      TextDocument doc = TextDocument.newTextDocument();
+      Header header = doc.getHeader();
+      Table tab = header.addTable();
 
-	@Test
-	public void testGetTableList() {
-		try {
-			TextDocument doc = TextDocument.newTextDocument();
-			Header header = doc.getHeader();
-			Table tab = header.addTable();
+      // validate
+      List<Table> listTab = header.getTableList();
+      Table tab1 = listTab.get(0);
+      Assert.assertNotNull(tab1);
+      Assert.assertEquals(tab, tab1);
 
-			//validate
-			List<Table> listTab = header.getTableList();
-			Table tab1 = listTab.get(0);
-			Assert.assertNotNull(tab1);
-			Assert.assertEquals(tab, tab1);
+      // save
+      doc.save(ResourceUtilities.newTestOutputFile("headerTableOutput.odt"));
+    } catch (Exception e) {
+      Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-			//save
-			doc.save(ResourceUtilities.newTestOutputFile("headerTableOutput.odt"));
-		} catch (Exception e) {
-			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+  @Test
+  public void testGetTableBuilder() {
+    try {
+      TextDocument doc = TextDocument.newTextDocument();
+      Header header = doc.getHeader();
 
+      TableBuilder tabBuilder = header.getTableBuilder();
+      Table tab = tabBuilder.newTable();
+      Assert.assertNotNull(tab);
+      Assert.assertTrue(2 == tab.getRowCount());
+      Assert.assertTrue(5 == tab.getColumnCount());
 
-	@Test
-	public void testGetTableBuilder() {
-		try {
-			TextDocument doc = TextDocument.newTextDocument();
-			Header header = doc.getHeader();
+      // validate
+      List<Table> listTab = header.getTableList();
+      Table tab1 = listTab.get(0);
+      Assert.assertNotNull(tab1);
+      Assert.assertEquals(tab, tab1);
 
-			TableBuilder tabBuilder = header.getTableBuilder();
-			Table tab = tabBuilder.newTable();
-			Assert.assertNotNull(tab);
-			Assert.assertTrue(2 == tab.getRowCount());
-			Assert.assertTrue(5 == tab.getColumnCount());
+      // save
+      doc.save(ResourceUtilities.newTestOutputFile("headerTableOutput.odt"));
+    } catch (Exception e) {
+      Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-			//validate
-			List<Table> listTab = header.getTableList();
-			Table tab1 = listTab.get(0);
-			Assert.assertNotNull(tab1);
-			Assert.assertEquals(tab, tab1);
+  @Test
+  public void testGetVariableContainerElement() {
+    try {
+      TextDocument doc = TextDocument.newTextDocument();
+      Header header = doc.getHeader();
 
-			//save
-			doc.save(ResourceUtilities.newTestOutputFile("headerTableOutput.odt"));
-		} catch (Exception e) {
-			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      OdfElement odfEle = header.getVariableContainerElement();
 
+      TableBuilder tb = header.getTableBuilder();
+      Table tab = tb.newTable();
 
-	@Test
-	public void testGetVariableContainerElement() {
-		try {
-			TextDocument doc = TextDocument.newTextDocument();
-			Header header = doc.getHeader();
+      Assert.assertNotNull(tab);
+      Assert.assertTrue(2 == tab.getRowCount());
+      Assert.assertTrue(5 == tab.getColumnCount());
 
-			OdfElement odfEle = header.getVariableContainerElement();
+      Node nod = odfEle.getFirstChild();
+      Assert.assertEquals("table:table", nod.getNodeName());
 
-			TableBuilder tb = header.getTableBuilder();
-			Table tab = tb.newTable();
+      // save
+      doc.save(ResourceUtilities.newTestOutputFile("headerTableOutput.odt"));
+    } catch (Exception e) {
+      Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-			Assert.assertNotNull(tab);
-			Assert.assertTrue(2 == tab.getRowCount());
-			Assert.assertTrue(5 == tab.getColumnCount());
+  @Test
+  public void testDeclareVariable() {
+    try {
+      TextDocument doc = TextDocument.newTextDocument();
+      Header header = doc.getHeader();
 
-			Node nod = odfEle.getFirstChild();
-			Assert.assertEquals("table:table", nod.getNodeName());
+      header.declareVariable("headername", VariableType.USER);
 
-			//save
-			doc.save(ResourceUtilities.newTestOutputFile("headerTableOutput.odt"));
-		} catch (Exception e) {
-			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      // validate
+      StyleHeaderElement styleHeader = header.getOdfElement();
+      Node nod = styleHeader.getFirstChild().getFirstChild();
+      NamedNodeMap nameMap = nod.getAttributes();
+      Node nodtext = nameMap.getNamedItem("text:name");
+      Assert.assertEquals("headername", nodtext.getNodeValue());
 
+      // save
+      doc.save(ResourceUtilities.newTestOutputFile("headerTableOutput.odt"));
+    } catch (Exception e) {
+      Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testDeclareVariable() {
-		try {
-			TextDocument doc = TextDocument.newTextDocument();
-			Header header = doc.getHeader();
+  @Test
+  public void testGetVariableFieldByName() {
+    try {
+      TextDocument doc = TextDocument.newTextDocument();
+      Header header = doc.getHeader();
 
-			header.declareVariable("headername", VariableType.USER);
+      header.declareVariable("headername", VariableType.USER);
+      VariableField vField = header.getVariableFieldByName("headername");
+      String vName = vField.getVariableName();
 
-			//validate
-			StyleHeaderElement styleHeader = header.getOdfElement();
-			Node nod = styleHeader.getFirstChild().getFirstChild();
-			NamedNodeMap nameMap = nod.getAttributes();
-			Node nodtext = nameMap.getNamedItem("text:name");
-			Assert.assertEquals("headername", nodtext.getNodeValue());
+      // validate
+      StyleHeaderElement styleHead = header.getOdfElement();
+      Node nod = styleHead.getFirstChild().getFirstChild();
+      NamedNodeMap nameMap = nod.getAttributes();
+      Node nodtext = nameMap.getNamedItem("text:name");
+      Assert.assertEquals(vName, nodtext.getNodeValue());
 
-			//save
-			doc.save(ResourceUtilities.newTestOutputFile("headerTableOutput.odt"));
-		} catch (Exception e) {
-			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      // save
+      doc.save(ResourceUtilities.newTestOutputFile("headerTableOutput.odt"));
+    } catch (Exception e) {
+      Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
+  @Test
+  public void testAppendNewSection() {
+    try {
+      TextDocument doc = TextDocument.newTextDocument();
+      Header header = doc.getHeader();
+      Section sect = header.appendSection("Section1");
+      Assert.assertNotNull(sect);
 
-	@Test
-	public void testGetVariableFieldByName() {
-		try {
-			TextDocument doc = TextDocument.newTextDocument();
-			Header header = doc.getHeader();
+      StyleHeaderElement styleHead = header.getOdfElement();
+      Node nod = styleHead.getFirstChild();
+      NamedNodeMap nameMap = nod.getAttributes();
+      Node nodtext = nameMap.getNamedItem("text:name");
+      Assert.assertEquals("Section1", nodtext.getNodeValue());
 
-			header.declareVariable("headername", VariableType.USER);
-			VariableField vField = header.getVariableFieldByName("headername");
-			String vName = vField.getVariableName();
-
-			//validate
-			StyleHeaderElement styleHead = header.getOdfElement();
-			Node nod = styleHead.getFirstChild().getFirstChild();
-			NamedNodeMap nameMap = nod.getAttributes();
-			Node nodtext = nameMap.getNamedItem("text:name");
-			Assert.assertEquals(vName, nodtext.getNodeValue());
-
-			//save
-			doc.save(ResourceUtilities.newTestOutputFile("headerTableOutput.odt"));
-		} catch (Exception e) {
-			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
-
-	@Test
-	public void testAppendNewSection() {
-		try {
-			TextDocument doc = TextDocument.newTextDocument();
-			Header header = doc.getHeader();
-			Section sect = header.appendSection("Section1");
-			Assert.assertNotNull(sect);
-
-			StyleHeaderElement styleHead = header.getOdfElement();
-			Node nod = styleHead.getFirstChild();
-			NamedNodeMap nameMap = nod.getAttributes();
-			Node nodtext = nameMap.getNamedItem("text:name");
-			Assert.assertEquals("Section1", nodtext.getNodeValue());
-
-		} catch (Exception e) {
-			Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE,
-					null, e);
-			Assert.fail(e.getMessage());
-		}
-
-	}
+    } catch (Exception e) {
+      Logger.getLogger(HeaderTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 }

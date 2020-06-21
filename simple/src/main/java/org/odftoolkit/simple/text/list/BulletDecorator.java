@@ -22,26 +22,24 @@ package org.odftoolkit.simple.text.list;
 import org.odftoolkit.simple.Document;
 
 /**
- * BulletDecorator is an implementation of the ListDecorator interface,
- * decorates a given List as bullet list. User can extend this class and realize
- * their own list and list item style. For example, set a specifies list item
- * with red color.
- * <p>
- * A BulletDecorator can be reused in the same Document.
+ * BulletDecorator is an implementation of the ListDecorator interface, decorates a given List as
+ * bullet list. User can extend this class and realize their own list and list item style. For
+ * example, set a specifies list item with red color.
+ *
+ * <p>A BulletDecorator can be reused in the same Document.
  *
  * @since 0.4
  */
-public class BulletDecorator extends BulletDecoratorBase  {
+public class BulletDecorator extends BulletDecoratorBase {
 
-	private static String DEFAULT_NAME = "Simple_Default_Bullet_List";
+  private static String DEFAULT_NAME = "Simple_Default_Bullet_List";
 
-	/**
-	 * Constructor with Document.
-	 *
-	 * @param doc
-	 *            the Document which this BulletDecorator will be used on.
-	 */
-	public BulletDecorator(Document doc) {
-	    super(doc, DEFAULT_NAME, "Bullet_20_Symbols", DEFAULT_BULLET_CHAR);
-	}
+  /**
+   * Constructor with Document.
+   *
+   * @param doc the Document which this BulletDecorator will be used on.
+   */
+  public BulletDecorator(Document doc) {
+    super(doc, DEFAULT_NAME, "Bullet_20_Symbols", DEFAULT_BULLET_CHAR);
+  }
 }

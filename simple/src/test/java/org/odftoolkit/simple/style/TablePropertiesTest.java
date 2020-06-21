@@ -21,8 +21,6 @@ package org.odftoolkit.simple.style;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.simple.TextDocument;
@@ -31,69 +29,62 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class TablePropertiesTest {
 
-	private static final Logger LOGGER = Logger
-			.getLogger(TablePropertiesTest.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(TablePropertiesTest.class.getName());
 
-	@Test
-	public void testGetSetPageBreak() {
-		try {
+  @Test
+  public void testGetSetPageBreak() {
+    try {
 
-			TextDocument doc = TextDocument.newTextDocument();
-			doc.addParagraph("This is the first paragraph.");
-			Table table = doc.addTable();
-			TableProperties writeProperties = table.getStyleHandler()
-					.getTablePropertiesForWrite();
-			TableProperties readProperties = table.getStyleHandler()
-					.getTablePropertiesForRead();
+      TextDocument doc = TextDocument.newTextDocument();
+      doc.addParagraph("This is the first paragraph.");
+      Table table = doc.addTable();
+      TableProperties writeProperties = table.getStyleHandler().getTablePropertiesForWrite();
+      TableProperties readProperties = table.getStyleHandler().getTablePropertiesForRead();
 
-			writeProperties.setBreak("before", "page");
-			Assert.assertEquals("page", readProperties.getBreakBefore());
+      writeProperties.setBreak("before", "page");
+      Assert.assertEquals("page", readProperties.getBreakBefore());
 
-			// save
-			doc.save(ResourceUtilities
-					.newTestOutputFile("AAAA1.ods"));
+      // save
+      doc.save(ResourceUtilities.newTestOutputFile("AAAA1.ods"));
 
-			writeProperties.setBreak("before", null);
-			Assert.assertEquals(null, readProperties.getBreakBefore());
+      writeProperties.setBreak("before", null);
+      Assert.assertEquals(null, readProperties.getBreakBefore());
 
-			writeProperties.setBreak(null, "page");
-			Assert.assertEquals(null, readProperties.getBreakBefore());
+      writeProperties.setBreak(null, "page");
+      Assert.assertEquals(null, readProperties.getBreakBefore());
 
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+    } catch (Exception e) {
+      LOGGER.log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testGetSetPageNumber() {
-		try {
+  @Test
+  public void testGetSetPageNumber() {
+    try {
 
-			TextDocument doc = TextDocument.newTextDocument();
-			doc.addParagraph("This is the first paragraph.");
-			Table table = doc.addTable();
-			TableProperties writeProperties = table.getStyleHandler()
-					.getTablePropertiesForWrite();
-			TableProperties readProperties = table.getStyleHandler()
-					.getTablePropertiesForRead();
+      TextDocument doc = TextDocument.newTextDocument();
+      doc.addParagraph("This is the first paragraph.");
+      Table table = doc.addTable();
+      TableProperties writeProperties = table.getStyleHandler().getTablePropertiesForWrite();
+      TableProperties readProperties = table.getStyleHandler().getTablePropertiesForRead();
 
-			writeProperties.setBreak("before", "page");
-			Assert.assertEquals("page", readProperties.getBreakBefore());
-			writeProperties.setPageNumber(3);
-			Assert.assertEquals(3, readProperties.getPageNumber());
+      writeProperties.setBreak("before", "page");
+      Assert.assertEquals("page", readProperties.getBreakBefore());
+      writeProperties.setPageNumber(3);
+      Assert.assertEquals(3, readProperties.getPageNumber());
 
-			// save
-			doc.save(ResourceUtilities
-					.newTestOutputFile("AAAA2.ods"));
+      // save
+      doc.save(ResourceUtilities.newTestOutputFile("AAAA2.ods"));
 
-			writeProperties.setPageNumber(0);
-			Assert.assertEquals(0, readProperties.getPageNumber());
-			writeProperties.setPageNumber(-2);
-			Assert.assertEquals(0, readProperties.getPageNumber());
+      writeProperties.setPageNumber(0);
+      Assert.assertEquals(0, readProperties.getPageNumber());
+      writeProperties.setPageNumber(-2);
+      Assert.assertEquals(0, readProperties.getPageNumber());
 
-		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+    } catch (Exception e) {
+      LOGGER.log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 }

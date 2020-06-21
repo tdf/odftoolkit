@@ -27,53 +27,70 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 /**
  * Test class for template aspects of calc documents.
+ *
  * @author <a href="mailto:fhopf@odftoolkit.org">Florian Hopf</a>
  */
 public class SpreadsheetTemplateTest {
 
-	private static final String TEST_SPREADSHEET_TEMPLATE = "/spreadsheetTestTemplate.ots";
+  private static final String TEST_SPREADSHEET_TEMPLATE = "/spreadsheetTestTemplate.ots";
 
-	@Test
-	public void testLoadingASpreadsheetTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_SPREADSHEET_TEMPLATE));
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
-	}
+  @Test
+  public void testLoadingASpreadsheetTemplate() throws Exception {
+    OdfDocument document =
+        OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_SPREADSHEET_TEMPLATE));
+    Assert.assertEquals(
+        OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(),
+        document.getMediaTypeString());
+  }
 
-	@Test
-	public void testSavingASpreadsheetTemplate() throws Exception {
-		OdfDocument document = OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_SPREADSHEET_TEMPLATE));
-		File destination = File.createTempFile("odfdom-test", ".ots", ResourceUtilities.getTempTestDirectory());
-		document.save(destination);
+  @Test
+  public void testSavingASpreadsheetTemplate() throws Exception {
+    OdfDocument document =
+        OdfDocument.loadDocument(this.getClass().getResourceAsStream(TEST_SPREADSHEET_TEMPLATE));
+    File destination =
+        File.createTempFile("odfdom-test", ".ots", ResourceUtilities.getTempTestDirectory());
+    document.save(destination);
 
-		// load again
-		OdfDocument loadedDocument = OdfDocument.loadDocument(destination);
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(), loadedDocument.getMediaTypeString());
-	}
+    // load again
+    OdfDocument loadedDocument = OdfDocument.loadDocument(destination);
+    Assert.assertEquals(
+        OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(),
+        loadedDocument.getMediaTypeString());
+  }
 
-	@Test
-	public void testNewSpreadsheetTemplate() throws Exception {
-		OdfDocument document = OdfSpreadsheetDocument.newSpreadsheetTemplateDocument();
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("odfdom-test", ".ots", ResourceUtilities.getTempTestDirectory());
-		document.save(destination);
+  @Test
+  public void testNewSpreadsheetTemplate() throws Exception {
+    OdfDocument document = OdfSpreadsheetDocument.newSpreadsheetTemplateDocument();
+    Assert.assertEquals(
+        OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(),
+        document.getMediaTypeString());
+    Assert.assertEquals(
+        OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+    File destination =
+        File.createTempFile("odfdom-test", ".ots", ResourceUtilities.getTempTestDirectory());
+    document.save(destination);
 
-		// load again
-		OdfDocument loadedDocument = OdfDocument.loadDocument(destination);
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(),
-				loadedDocument.getMediaTypeString());
-		Assert.assertTrue(document instanceof OdfSpreadsheetDocument);
-	}
+    // load again
+    OdfDocument loadedDocument = OdfDocument.loadDocument(destination);
+    Assert.assertEquals(
+        OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(),
+        loadedDocument.getMediaTypeString());
+    Assert.assertTrue(document instanceof OdfSpreadsheetDocument);
+  }
 
-	@Test
-	public void testSwitchingOdfSpreadsheetDocument() throws Exception {
-		OdfSpreadsheetDocument document = OdfSpreadsheetDocument.newSpreadsheetDocument();
-		document.changeMode(OdfSpreadsheetDocument.OdfMediaType.SPREADSHEET_TEMPLATE);
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
+  @Test
+  public void testSwitchingOdfSpreadsheetDocument() throws Exception {
+    OdfSpreadsheetDocument document = OdfSpreadsheetDocument.newSpreadsheetDocument();
+    document.changeMode(OdfSpreadsheetDocument.OdfMediaType.SPREADSHEET_TEMPLATE);
+    Assert.assertEquals(
+        OdfDocument.OdfMediaType.SPREADSHEET_TEMPLATE.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
 
-		document = OdfSpreadsheetDocument.newSpreadsheetTemplateDocument();
-		document.changeMode(OdfSpreadsheetDocument.OdfMediaType.SPREADSHEET);
-		Assert.assertEquals(OdfDocument.OdfMediaType.SPREADSHEET.getMediaTypeString(),
-				document.getPackage().getMediaTypeString());
-	}
+    document = OdfSpreadsheetDocument.newSpreadsheetTemplateDocument();
+    document.changeMode(OdfSpreadsheetDocument.OdfMediaType.SPREADSHEET);
+    Assert.assertEquals(
+        OdfDocument.OdfMediaType.SPREADSHEET.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+  }
 }

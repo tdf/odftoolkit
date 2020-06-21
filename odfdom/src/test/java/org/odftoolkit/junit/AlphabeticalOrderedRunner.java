@@ -25,45 +25,46 @@ import org.junit.runners.model.InitializationError;
 
 /**
  * Guarantees that the test methods of a test class are being executed in alphabetical order.
- * Activated by annotating the test class using <code>@RunWith(AlphabeticalOrderedRunner.class)</code>.
+ * Activated by annotating the test class using <code>@RunWith(AlphabeticalOrderedRunner.class)
+ * </code>.
  *
  * @author svanteschubert
  */
 public class AlphabeticalOrderedRunner extends BlockJUnit4ClassRunner {
 
-	//private static final Logger LOG = Logger.getLogger(OrderedRunner.class.getName());
+  // private static final Logger LOG = Logger.getLogger(OrderedRunner.class.getName());
 
-	/*
-	 * default initializer
-	 */
-	public AlphabeticalOrderedRunner(Class _class) throws InitializationError {
-		super(_class);
-	}
+  /*
+   * default initializer
+   */
+  public AlphabeticalOrderedRunner(Class _class) throws InitializationError {
+    super(_class);
+  }
 
-	/**
-	 * The initializer just pipes through to the superclass. Pretty standard
-	 * stuff. The interesting part is in overriding the computeTestMethods method.
-	 */
-	@Override
-	protected List computeTestMethods() {
-		List lst = super.computeTestMethods();
-		List methodList = new ArrayList(lst);
+  /**
+   * The initializer just pipes through to the superclass. Pretty standard stuff. The interesting
+   * part is in overriding the computeTestMethods method.
+   */
+  @Override
+  protected List computeTestMethods() {
+    List lst = super.computeTestMethods();
+    List methodList = new ArrayList(lst);
 
-		Collections.sort(methodList, new AlphabeticalOrder());
+    Collections.sort(methodList, new AlphabeticalOrder());
 
-		return methodList;
-	}
+    return methodList;
+  }
 
-	/*
-	 * Class for alphabetical ordering of a list
-	 */
-	public class AlphabeticalOrder implements Comparator {
+  /*
+   * Class for alphabetical ordering of a list
+   */
+  public class AlphabeticalOrder implements Comparator {
 
-		public int compare(Object o1, Object o2) {
-			FrameworkMethod f1 = (FrameworkMethod) o1;
-			FrameworkMethod f2 = (FrameworkMethod) o2;
+    public int compare(Object o1, Object o2) {
+      FrameworkMethod f1 = (FrameworkMethod) o1;
+      FrameworkMethod f2 = (FrameworkMethod) o2;
 
-			return f1.getName().compareTo(f2.getName());
-		}
-	}
+      return f1.getName().compareTo(f2.getName());
+    }
+  }
 }

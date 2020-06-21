@@ -21,7 +21,6 @@ package org.odftoolkit.simple.common;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
@@ -33,75 +32,71 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class GetTextTest {
 
-	public static final Logger LOG = Logger.getLogger(GetTextTest.class.getName());
+  public static final Logger LOG = Logger.getLogger(GetTextTest.class.getName());
 
-	/**
-	 * This method will invoke EditableTextExtractor to test text extraction
-	 * function.
-	 */
-	@Test
-	public void testToString() {
-		try {
-			Document doc = Document.loadDocument(ResourceUtilities.getTestResourceAsStream("text-extract.odt"));
-			EditableTextExtractor extractor = EditableTextExtractor.newOdfEditableTextExtractor(doc);
-			String output = extractor.getText();
-			LOG.info(output);
-			int count = 0;
-			int index = output.indexOf("SIMPLE");
-			while (index != -1) {
-				count++;
-				index = output.indexOf("SIMPLE", index + 1);
-			}
-			if (count != 30) {
-				// there are
-				// 23 SIMPLE in the /content.xml
-				// 2 SIMPLE in the /styles.xml
-				// 5 SIMPLE in the /Object 1/content.xml
-				throw new RuntimeException("Something wrong! count=" + count);
-			}
-		} catch (Exception e) {
-			LOG.log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+  /** This method will invoke EditableTextExtractor to test text extraction function. */
+  @Test
+  public void testToString() {
+    try {
+      Document doc =
+          Document.loadDocument(ResourceUtilities.getTestResourceAsStream("text-extract.odt"));
+      EditableTextExtractor extractor = EditableTextExtractor.newOdfEditableTextExtractor(doc);
+      String output = extractor.getText();
+      LOG.info(output);
+      int count = 0;
+      int index = output.indexOf("SIMPLE");
+      while (index != -1) {
+        count++;
+        index = output.indexOf("SIMPLE", index + 1);
+      }
+      if (count != 30) {
+        // there are
+        // 23 SIMPLE in the /content.xml
+        // 2 SIMPLE in the /styles.xml
+        // 5 SIMPLE in the /Object 1/content.xml
+        throw new RuntimeException("Something wrong! count=" + count);
+      }
+    } catch (Exception e) {
+      LOG.log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testReturnChar() {
-		try {
-			TextDocument textDoc = TextDocument.newTextDocument();
-			textDoc.newParagraph();
-			OdfTextParagraph graph = textDoc.newParagraph("abc");
+  @Test
+  public void testReturnChar() {
+    try {
+      TextDocument textDoc = TextDocument.newTextDocument();
+      textDoc.newParagraph();
+      OdfTextParagraph graph = textDoc.newParagraph("abc");
 
-			TextExtractor extractor = TextExtractor.newOdfTextExtractor(textDoc.getContentRoot());
-			String text = extractor.getText();
-			System.out.println(text);
+      TextExtractor extractor = TextExtractor.newOdfTextExtractor(textDoc.getContentRoot());
+      String text = extractor.getText();
+      System.out.println(text);
 
-			int count = 0;
-			for (int i = 0; i < text.length(); i++)
-				if (text.charAt(i) == '\n')
-					count++;
-			Assert.assertEquals(2, count);
+      int count = 0;
+      for (int i = 0; i < text.length(); i++) if (text.charAt(i) == '\n') count++;
+      Assert.assertEquals(2, count);
 
-			extractor = TextExtractor.newOdfTextExtractor(graph);
-			text = extractor.getText();
-			count = 0;
-			for (int i = 0; i < text.length(); i++)
-				if (text.charAt(i) == '\n')
-					count++;
-			Assert.assertEquals(0, count);
-		} catch (Exception e) {
-			LOG.log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      extractor = TextExtractor.newOdfTextExtractor(graph);
+      text = extractor.getText();
+      count = 0;
+      for (int i = 0; i < text.length(); i++) if (text.charAt(i) == '\n') count++;
+      Assert.assertEquals(0, count);
+    } catch (Exception e) {
+      LOG.log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-        @Test
-        public void testExtractFromDocumentWithAlienElement() throws Exception {
-            TextDocument document = TextDocument.newTextDocument();
-            document.getContentRoot().appendChild(new OdfAlienElement(document.getContentDom(), OdfName.newName("instance")));
-            document.addParagraph("Some text");
-            TextExtractor extractor = TextExtractor.newOdfTextExtractor(document.getContentRoot());
-            String text = extractor.getText();
-            Assert.assertEquals("\nSome text", text);
-        }
+  @Test
+  public void testExtractFromDocumentWithAlienElement() throws Exception {
+    TextDocument document = TextDocument.newTextDocument();
+    document
+        .getContentRoot()
+        .appendChild(new OdfAlienElement(document.getContentDom(), OdfName.newName("instance")));
+    document.addParagraph("Some text");
+    TextExtractor extractor = TextExtractor.newOdfTextExtractor(document.getContentRoot());
+    String text = extractor.getText();
+    Assert.assertEquals("\nSome text", text);
+  }
 }

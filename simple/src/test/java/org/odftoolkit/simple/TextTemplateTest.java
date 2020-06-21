@@ -21,7 +21,6 @@
 package org.odftoolkit.simple;
 
 import java.io.File;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.simple.utils.ResourceUtilities;
@@ -33,110 +32,146 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
  */
 public class TextTemplateTest {
 
-	private static final String TEST_TEXT_TEMPLATE = "/textTestTemplate.ott";
+  private static final String TEST_TEXT_TEMPLATE = "/textTestTemplate.ott";
 
-	@Test
-	public void testLoadingATextTemplate() throws Exception {
-		Document document = Document.loadDocument(this.getClass().getResourceAsStream(TEST_TEXT_TEMPLATE));
-		Assert.assertEquals(Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
-				document.getMediaTypeString());
-	}
+  @Test
+  public void testLoadingATextTemplate() throws Exception {
+    Document document =
+        Document.loadDocument(this.getClass().getResourceAsStream(TEST_TEXT_TEMPLATE));
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
+  }
 
-	@Test
-	public void testSavingATextTemplate() throws Exception {
-		Document document = Document.loadDocument(this.getClass().getResourceAsStream(TEST_TEXT_TEMPLATE));
-		File destination = File.createTempFile("simple-test", ".ott", ResourceUtilities.getTempTestDirectory());
-		document.save(destination);
+  @Test
+  public void testSavingATextTemplate() throws Exception {
+    Document document =
+        Document.loadDocument(this.getClass().getResourceAsStream(TEST_TEXT_TEMPLATE));
+    File destination =
+        File.createTempFile("simple-test", ".ott", ResourceUtilities.getTempTestDirectory());
+    document.save(destination);
 
-		// load again
-		Document loadedDocument = Document.loadDocument(destination);
-		Assert.assertEquals(Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
-				loadedDocument.getMediaTypeString());
-	}
+    // load again
+    Document loadedDocument = Document.loadDocument(destination);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
+        loadedDocument.getMediaTypeString());
+  }
 
-	@Test
-	public void testNewTextTemplate() throws Exception {
-		Document document = TextDocument.newTextTemplateDocument();
-		Assert.assertEquals(Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
-				document.getMediaTypeString());
-		Assert.assertEquals(Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
-				document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("simple-test", ".ott", ResourceUtilities.getTempTestDirectory());
-		document.save(destination);
+  @Test
+  public void testNewTextTemplate() throws Exception {
+    Document document = TextDocument.newTextTemplateDocument();
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+    File destination =
+        File.createTempFile("simple-test", ".ott", ResourceUtilities.getTempTestDirectory());
+    document.save(destination);
 
-		// load again
-		Document loadedDocument = Document.loadDocument(destination);
-		Assert.assertEquals(Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
-				loadedDocument.getMediaTypeString());
-		Assert.assertTrue(document instanceof TextDocument);
-	}
+    // load again
+    Document loadedDocument = Document.loadDocument(destination);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
+        loadedDocument.getMediaTypeString());
+    Assert.assertTrue(document instanceof TextDocument);
+  }
 
-	@Test
-	public void testNewTextMaster() throws Exception {
-		Document document = TextDocument.newTextMasterDocument();
-		Assert.assertEquals(Document.OdfMediaType.TEXT_MASTER.getMediaTypeString(),
-				document.getMediaTypeString());
-		Assert.assertEquals(Document.OdfMediaType.TEXT_MASTER.getMediaTypeString(),
-				document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("simple-test", ".ott", ResourceUtilities.getTempTestDirectory());
-		document.save(destination);
+  @Test
+  public void testNewTextMaster() throws Exception {
+    Document document = TextDocument.newTextMasterDocument();
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_MASTER.getMediaTypeString(), document.getMediaTypeString());
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_MASTER.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+    File destination =
+        File.createTempFile("simple-test", ".ott", ResourceUtilities.getTempTestDirectory());
+    document.save(destination);
 
-		// load again
-		Document loadedDocument = Document.loadDocument(destination);
-		Assert.assertEquals(Document.OdfMediaType.TEXT_MASTER.getMediaTypeString(),
-				loadedDocument.getMediaTypeString());
-		Assert.assertTrue(document instanceof TextDocument);
-	}
+    // load again
+    Document loadedDocument = Document.loadDocument(destination);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_MASTER.getMediaTypeString(),
+        loadedDocument.getMediaTypeString());
+    Assert.assertTrue(document instanceof TextDocument);
+  }
 
-	@Test
-	public void testNewTextWeb() throws Exception {
-		Document document = TextDocument.newTextWebDocument();
-		Assert.assertEquals(Document.OdfMediaType.TEXT_WEB.getMediaTypeString(),
-				document.getMediaTypeString());
-		Assert.assertEquals(Document.OdfMediaType.TEXT_WEB.getMediaTypeString(),
-				document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("simple-test", ".ott", ResourceUtilities.getTempTestDirectory());
-		document.save(destination);
+  @Test
+  public void testNewTextWeb() throws Exception {
+    Document document = TextDocument.newTextWebDocument();
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_WEB.getMediaTypeString(), document.getMediaTypeString());
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_WEB.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+    File destination =
+        File.createTempFile("simple-test", ".ott", ResourceUtilities.getTempTestDirectory());
+    document.save(destination);
 
-		// load again
-		Document loadedDocument = Document.loadDocument(destination);
-		Assert.assertEquals(Document.OdfMediaType.TEXT_WEB.getMediaTypeString(),
-				loadedDocument.getMediaTypeString());
-		Assert.assertTrue(document instanceof TextDocument);
-	}
+    // load again
+    Document loadedDocument = Document.loadDocument(destination);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_WEB.getMediaTypeString(), loadedDocument.getMediaTypeString());
+    Assert.assertTrue(document instanceof TextDocument);
+  }
 
-	@Test
-	public void testSwitchingOdfTextDocument() throws Exception {
-		TextDocument document = TextDocument.newTextDocument();
-		document.changeMode(TextDocument.OdfMediaType.TEXT_TEMPLATE);
-		Assert.assertEquals(Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
-		document.changeMode(TextDocument.OdfMediaType.TEXT_WEB);
-		Assert.assertEquals(Document.OdfMediaType.TEXT_WEB.getMediaTypeString(), document.getPackage().getMediaTypeString());
-		document.changeMode(TextDocument.OdfMediaType.TEXT_MASTER);
-		Assert.assertEquals(Document.OdfMediaType.TEXT_MASTER.getMediaTypeString(), document.getPackage().getMediaTypeString());
+  @Test
+  public void testSwitchingOdfTextDocument() throws Exception {
+    TextDocument document = TextDocument.newTextDocument();
+    document.changeMode(TextDocument.OdfMediaType.TEXT_TEMPLATE);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+    document.changeMode(TextDocument.OdfMediaType.TEXT_WEB);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_WEB.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+    document.changeMode(TextDocument.OdfMediaType.TEXT_MASTER);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_MASTER.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
 
-		document = TextDocument.newTextTemplateDocument();
-		document.changeMode(TextDocument.OdfMediaType.TEXT);
-		Assert.assertEquals(Document.OdfMediaType.TEXT.getMediaTypeString(), document.getPackage().getMediaTypeString());
-		document.changeMode(TextDocument.OdfMediaType.TEXT_MASTER);
-		Assert.assertEquals(Document.OdfMediaType.TEXT_MASTER.getMediaTypeString(), document.getPackage().getMediaTypeString());
-		document.changeMode(TextDocument.OdfMediaType.TEXT_WEB);
-		Assert.assertEquals(Document.OdfMediaType.TEXT_WEB.getMediaTypeString(), document.getPackage().getMediaTypeString());
+    document = TextDocument.newTextTemplateDocument();
+    document.changeMode(TextDocument.OdfMediaType.TEXT);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+    document.changeMode(TextDocument.OdfMediaType.TEXT_MASTER);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_MASTER.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+    document.changeMode(TextDocument.OdfMediaType.TEXT_WEB);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_WEB.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
 
-		document = TextDocument.newTextMasterDocument();
-		document.changeMode(TextDocument.OdfMediaType.TEXT);
-		Assert.assertEquals(Document.OdfMediaType.TEXT.getMediaTypeString(), document.getPackage().getMediaTypeString());
-		document.changeMode(TextDocument.OdfMediaType.TEXT_TEMPLATE);
-		Assert.assertEquals(Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
-		document.changeMode(TextDocument.OdfMediaType.TEXT_WEB);
-		Assert.assertEquals(Document.OdfMediaType.TEXT_WEB.getMediaTypeString(), document.getPackage().getMediaTypeString());
+    document = TextDocument.newTextMasterDocument();
+    document.changeMode(TextDocument.OdfMediaType.TEXT);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+    document.changeMode(TextDocument.OdfMediaType.TEXT_TEMPLATE);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+    document.changeMode(TextDocument.OdfMediaType.TEXT_WEB);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_WEB.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
 
-		document = TextDocument.newTextWebDocument();
-		document.changeMode(TextDocument.OdfMediaType.TEXT);
-		Assert.assertEquals(Document.OdfMediaType.TEXT.getMediaTypeString(), document.getPackage().getMediaTypeString());
-		document.changeMode(TextDocument.OdfMediaType.TEXT_TEMPLATE);
-		Assert.assertEquals(Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
-		document.changeMode(TextDocument.OdfMediaType.TEXT_MASTER);
-		Assert.assertEquals(Document.OdfMediaType.TEXT_MASTER.getMediaTypeString(), document.getPackage().getMediaTypeString());
-	}
+    document = TextDocument.newTextWebDocument();
+    document.changeMode(TextDocument.OdfMediaType.TEXT);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+    document.changeMode(TextDocument.OdfMediaType.TEXT_TEMPLATE);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+    document.changeMode(TextDocument.OdfMediaType.TEXT_MASTER);
+    Assert.assertEquals(
+        Document.OdfMediaType.TEXT_MASTER.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+  }
 }

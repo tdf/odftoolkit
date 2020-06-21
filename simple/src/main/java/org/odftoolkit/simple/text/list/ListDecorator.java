@@ -20,66 +20,54 @@ under the License.
 package org.odftoolkit.simple.text.list;
 
 /**
- * ListDecorator is a decorator which decides how to decorate a List and its
- * ListItems.
- * <p>
- * Every list, including sub lists, may have a list style which is applied to
- * its list items and sub lists. ListDecorator holds this style and decides the
- * appearance of a list. List style is applied by invoking decorateList(List),
- * while list item style is applied by invoking decorateListItem(ListItem).
- * <p>
- * A ListDecorator specified for a sub list overrides the ListDecorator
- * specified for the list in which the sub list is contained.
+ * ListDecorator is a decorator which decides how to decorate a List and its ListItems.
+ *
+ * <p>Every list, including sub lists, may have a list style which is applied to its list items and
+ * sub lists. ListDecorator holds this style and decides the appearance of a list. List style is
+ * applied by invoking decorateList(List), while list item style is applied by invoking
+ * decorateListItem(ListItem).
+ *
+ * <p>A ListDecorator specified for a sub list overrides the ListDecorator specified for the list in
+ * which the sub list is contained.
  *
  * @since 0.4
  */
 public interface ListDecorator {
 
-	/**
-	 * The supported list types till now.
-	 *
-	 * @since 0.4
-	 */
-	public static enum ListType {
-		/**
-		 * BULLET specifies a list type where list items are preceded by
-		 * bullets.
-		 */
-		BULLET,
+  /**
+   * The supported list types till now.
+   *
+   * @since 0.4
+   */
+  public static enum ListType {
+    /** BULLET specifies a list type where list items are preceded by bullets. */
+    BULLET,
 
-		/**
-		 * NUMBER specifies a list type where list items are preceded by
-		 * numbers.
-		 */
-		NUMBER,
+    /** NUMBER specifies a list type where list items are preceded by numbers. */
+    NUMBER,
 
-		/**
-		 * IMAGE specifies a list type where list items are preceded by images.
-		 */
-		IMAGE
-	}
+    /** IMAGE specifies a list type where list items are preceded by images. */
+    IMAGE
+  }
 
-	/**
-	 * Decorate the specifies <code>list</code>, of which style is set.
-	 *
-	 * @param list
-	 *            the List is decorated.
-	 */
-	public void decorateList(List list);
+  /**
+   * Decorate the specifies <code>list</code>, of which style is set.
+   *
+   * @param list the List is decorated.
+   */
+  public void decorateList(List list);
 
-	/**
-	 * Decorate the specifies <code>item</code> in a List, of which style is
-	 * set.
-	 *
-	 * @param item
-	 *            the ListItem is decorated.
-	 */
-	public void decorateListItem(ListItem item);
+  /**
+   * Decorate the specifies <code>item</code> in a List, of which style is set.
+   *
+   * @param item the ListItem is decorated.
+   */
+  public void decorateListItem(ListItem item);
 
-	/**
-	 * Get the ListType of this ListDecorator.
-	 *
-	 * @return the ListType of this ListDecorator.
-	 */
-	public ListType getListType();
+  /**
+   * Get the ListType of this ListDecorator.
+   *
+   * @return the ListType of this ListDecorator.
+   */
+  public ListType getListType();
 }

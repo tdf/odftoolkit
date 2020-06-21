@@ -21,9 +21,7 @@ package org.odftoolkit.simple.common.field;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import junit.framework.Assert;
-
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.simple.TextDocument;
@@ -32,47 +30,52 @@ import org.odftoolkit.simple.common.navigation.FieldSelectionTest;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class VariableFieldTest {
-	private static final Logger LOG = Logger.getLogger(VariableFieldTest.class.getName());
-	private static String TEST_DOCUMENT = "TextFieldSampleDocument.odt";
+  private static final Logger LOG = Logger.getLogger(VariableFieldTest.class.getName());
+  private static String TEST_DOCUMENT = "TextFieldSampleDocument.odt";
 
-	@Test
-	public void testVariableTypeToString() {
-		try {
-			VariableField.VariableType variableType = VariableField.VariableType.valueOf(VariableField.VariableType.class, VariableField.VariableType.SIMPLE.name());
-			String variableTypeStr = variableType.toString();
-			Assert.assertNotNull(variableType);
-			Assert.assertEquals("simple", variableTypeStr);
-		} catch (Exception e) {
-			LOG.log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+  @Test
+  public void testVariableTypeToString() {
+    try {
+      VariableField.VariableType variableType =
+          VariableField.VariableType.valueOf(
+              VariableField.VariableType.class, VariableField.VariableType.SIMPLE.name());
+      String variableTypeStr = variableType.toString();
+      Assert.assertNotNull(variableType);
+      Assert.assertEquals("simple", variableTypeStr);
+    } catch (Exception e) {
+      LOG.log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testVariableTypesisplayField() {
-		try {
-			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_DOCUMENT));
-			// declare simple variable
-			VariableField simpleVariableField = Fields.createSimpleVariableField(doc, "test_simple_variable");
-			Assert.assertNotNull(simpleVariableField);
-			TextSpanElement newTextSpanElement = doc.newParagraph("Update Simple Variable Field:").newTextSpanElement();
-			simpleVariableField.updateField("simple variable content", newTextSpanElement);
+  @Test
+  public void testVariableTypesisplayField() {
+    try {
+      TextDocument doc =
+          TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_DOCUMENT));
+      // declare simple variable
+      VariableField simpleVariableField =
+          Fields.createSimpleVariableField(doc, "test_simple_variable");
+      Assert.assertNotNull(simpleVariableField);
+      TextSpanElement newTextSpanElement =
+          doc.newParagraph("Update Simple Variable Field:").newTextSpanElement();
+      simpleVariableField.updateField("simple variable content", newTextSpanElement);
 
-			FieldType fieldType = simpleVariableField.getFieldType();
-			Assert.assertNotNull(fieldType);
-			Assert.assertEquals(FieldType.SIMPLE_VARIABLE_FIELD, fieldType);
-			newTextSpanElement = doc.newParagraph("Show Simple Variable Field:").newTextSpanElement();
-			simpleVariableField.displayField(newTextSpanElement);
-			simpleVariableField.updateField("aaaa", newTextSpanElement);
-			try {
-				doc.save(ResourceUtilities.newTestOutputFile("TextFieldSampleDocumentVariableField.odt"));
-			} catch (Exception e) {
-				Logger.getLogger(FieldSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-				Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
-			}
-		} catch (Exception e) {
-			LOG.log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      FieldType fieldType = simpleVariableField.getFieldType();
+      Assert.assertNotNull(fieldType);
+      Assert.assertEquals(FieldType.SIMPLE_VARIABLE_FIELD, fieldType);
+      newTextSpanElement = doc.newParagraph("Show Simple Variable Field:").newTextSpanElement();
+      simpleVariableField.displayField(newTextSpanElement);
+      simpleVariableField.updateField("aaaa", newTextSpanElement);
+      try {
+        doc.save(ResourceUtilities.newTestOutputFile("TextFieldSampleDocumentVariableField.odt"));
+      } catch (Exception e) {
+        Logger.getLogger(FieldSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+        Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+      }
+    } catch (Exception e) {
+      LOG.log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 }

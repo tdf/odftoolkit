@@ -22,23 +22,22 @@ package org.odftoolkit.simple.text.list;
 import org.odftoolkit.simple.Document;
 
 /**
- * NumberDecorator is an implementation of the ListDecorator interface,
- * decorates a given List as number list. User can extend this class and realize
- * their own list and list item style. For example, set a specifies list item
- * with red color.
- * <p>
- * A NumberDecorator can be reused in the same Document.
+ * NumberDecorator is an implementation of the ListDecorator interface, decorates a given List as
+ * number list. User can extend this class and realize their own list and list item style. For
+ * example, set a specifies list item with red color.
+ *
+ * <p>A NumberDecorator can be reused in the same Document.
  *
  * @since 0.4
  */
 public class NumberedRomanUpperDecorator extends NumberDecoratorBase {
 
-	/**
-	 * Constructor with Document.
-	 * @param doc
-	 *            the Document which this NumberDecorator will be used on.
-	 */
-	public NumberedRomanUpperDecorator(Document doc) {
-	    	super(doc, "Simple_Default_roman_upper_List", "Numbering_20_Symbols", "I", ")", null);
-	}
+  /**
+   * Constructor with Document.
+   *
+   * @param doc the Document which this NumberDecorator will be used on.
+   */
+  public NumberedRomanUpperDecorator(Document doc) {
+    super(doc, "Simple_Default_roman_upper_List", "Numbering_20_Symbols", "I", ")", null);
+  }
 }

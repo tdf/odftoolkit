@@ -26,86 +26,81 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Component;
 
 /**
- * ChapterField is placed inside a header or footer, it displays the current
- * chapter name or number on every page.
- * <p>
- * NOTE: Before the document is opened in any editor, the value of this field
- * maybe invalid.
+ * ChapterField is placed inside a header or footer, it displays the current chapter name or number
+ * on every page.
+ *
+ * <p>NOTE: Before the document is opened in any editor, the value of this field maybe invalid.
  *
  * @since 0.5
  */
 public class ChapterField extends Field {
 
-	private TextChapterElement chapterElement;
+  private TextChapterElement chapterElement;
 
-	/**
-	 * A <tt>DisplayType</tt> specifies the information that a chapter field
-	 * should display.
-	 *
-	 * @since 0.5
-	 */
-	public static enum DisplayType {
+  /**
+   * A <tt>DisplayType</tt> specifies the information that a chapter field should display.
+   *
+   * @since 0.5
+   */
+  public static enum DisplayType {
+    NAME("name"),
+    NUMBER("number"),
+    NUMBER_AND_NAME("number-and-name"),
+    PLAIN_NUMBER("plain-number"),
+    PLAIN_NUMBER_AND_NAME("plain-number-and-name");
 
-		NAME("name"),
-		NUMBER("number"),
-		NUMBER_AND_NAME("number-and-name"),
-		PLAIN_NUMBER("plain-number"),
-		PLAIN_NUMBER_AND_NAME("plain-number-and-name");
+    private final String displayType;
 
-		private final String displayType;
+    DisplayType(String type) {
+      displayType = type;
+    }
 
-		DisplayType(String type) {
-			displayType = type;
-		}
+    @Override
+    public String toString() {
+      return displayType;
+    }
+  }
 
-		@Override
-		public String toString() {
-			return displayType;
-		}
-	}
+  // package constructor, only called by Fields
+  ChapterField(OdfElement odfElement) {
+    TextSpanElement spanElement =
+        ((OdfFileDom) odfElement.getOwnerDocument()).newOdfElement(TextSpanElement.class);
+    odfElement.appendChild(spanElement);
+    chapterElement = spanElement.newTextChapterElement(null, 1);
+    setDisplayPage(DisplayType.NUMBER_AND_NAME);
+    Component.registerComponent(this, getOdfElement());
+  }
 
-	// package constructor, only called by Fields
-	ChapterField(OdfElement odfElement) {
-		TextSpanElement spanElement = ((OdfFileDom) odfElement.getOwnerDocument()).newOdfElement(TextSpanElement.class);
-		odfElement.appendChild(spanElement);
-		chapterElement = spanElement.newTextChapterElement(null, 1);
-		setDisplayPage(DisplayType.NUMBER_AND_NAME);
-		Component.registerComponent(this, getOdfElement());
-	}
+  /**
+   * Specifies the information that a chapter field should display.
+   *
+   * @param type the display type which is predefined in {@link ChapterField.DisplayType
+   *     DisplayType}.
+   */
+  public void setDisplayPage(DisplayType type) {
+    chapterElement.setTextDisplayAttribute(type.toString());
+  }
 
-	/**
-	 * Specifies the information that a chapter field should display.
-	 *
-	 * @param type
-	 *            the display type which is predefined in
-	 *            {@link ChapterField.DisplayType DisplayType}.
-	 */
-	public void setDisplayPage(DisplayType type) {
-		chapterElement.setTextDisplayAttribute(type.toString());
-	}
+  /**
+   * Specifies the outline level to be displayed.
+   *
+   * @param level the outline level to be displayed.
+   */
+  public void setOutlineLevel(int level) {
+    chapterElement.setTextOutlineLevelAttribute(level);
+  }
 
-	/**
-	 * Specifies the outline level to be displayed.
-	 *
-	 * @param level
-	 *            the outline level to be displayed.
-	 */
-	public void setOutlineLevel(int level) {
-		chapterElement.setTextOutlineLevelAttribute(level);
-	}
+  /**
+   * Return an instance of <code>TextChapterElement</code> which represents this feature.
+   *
+   * @return an instance of <code>TextChapterElement</code>
+   */
+  public TextChapterElement getOdfElement() {
+    return chapterElement;
+  }
 
-	/**
-	 * Return an instance of <code>TextChapterElement</code> which represents
-	 * this feature.
-	 *
-	 * @return an instance of <code>TextChapterElement</code>
-	 */
-	public TextChapterElement getOdfElement() {
-		return chapterElement;
-	}
-
-	@Override
-	public FieldType getFieldType() {
-		return FieldType.CHAPTER_FIELD;
-	}
+  @Override
+  public FieldType getFieldType() {
+    return FieldType.CHAPTER_FIELD;
+  }
 }

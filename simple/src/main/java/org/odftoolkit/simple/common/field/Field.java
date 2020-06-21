@@ -25,41 +25,40 @@ import org.odftoolkit.simple.Component;
  * This is the abstract class of all kinds of fields.
  *
  * @see org.odftoolkit.simple.common.navigation.FieldSelection
- *
  * @since 0.5
  */
 public abstract class Field extends Component {
 
-	/**
-	 * A <tt>FieldType</tt> specifies the type of a field.
-	 *
-	 * @since 0.5
-	 */
-	public static enum FieldType {
-		DATE_FIELD,
-		FIXED_DATE_FIELD,
-		TIME_FIELD,
-		FIXED_TIME_FIELD,
-		PREVIOUS_PAGE_NUMBER_FIELD,
-		CURRENT_PAGE_NUMBER_FIELD,
-		NEXT_PAGE_NUMBER_FIELD,
-		PAGE_COUNT_FIELD,
-		TITLE_FIELD,
-		SUBJECT_FIELD,
-		AUTHOR_NAME_FIELD,
-		AUTHOR_INITIALS_FIELD,
-		CHAPTER_FIELD,
-		REFERENCE_FIELD,
-		SIMPLE_VARIABLE_FIELD,
-		USER_VARIABLE_FIELD,
-		CONDITION_FIELD,
-		HIDDEN_TEXT_FIELD;
-	}
+  /**
+   * A <tt>FieldType</tt> specifies the type of a field.
+   *
+   * @since 0.5
+   */
+  public static enum FieldType {
+    DATE_FIELD,
+    FIXED_DATE_FIELD,
+    TIME_FIELD,
+    FIXED_TIME_FIELD,
+    PREVIOUS_PAGE_NUMBER_FIELD,
+    CURRENT_PAGE_NUMBER_FIELD,
+    NEXT_PAGE_NUMBER_FIELD,
+    PAGE_COUNT_FIELD,
+    TITLE_FIELD,
+    SUBJECT_FIELD,
+    AUTHOR_NAME_FIELD,
+    AUTHOR_INITIALS_FIELD,
+    CHAPTER_FIELD,
+    REFERENCE_FIELD,
+    SIMPLE_VARIABLE_FIELD,
+    USER_VARIABLE_FIELD,
+    CONDITION_FIELD,
+    HIDDEN_TEXT_FIELD;
+  }
 
-	/**
-	 * Return the type of this field.
-	 *
-	 * @return the type of this field.
-	 */
-	public abstract FieldType getFieldType();
+  /**
+   * Return the type of this field.
+   *
+   * @return the type of this field.
+   */
+  public abstract FieldType getFieldType();
 }

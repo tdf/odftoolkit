@@ -21,9 +21,7 @@ package org.odftoolkit.simple.common.field;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import junit.framework.Assert;
-
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.element.text.TextConditionalTextElement;
 import org.odftoolkit.simple.TextDocument;
@@ -33,147 +31,186 @@ import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class ConditionFieldTest {
 
-	private static String TEST_DOCUMENT = "TextFieldSampleDocument.odt";
+  private static String TEST_DOCUMENT = "TextFieldSampleDocument.odt";
 
-	@Test
-	public void testUpdateCondition() {
-		try {
-			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_DOCUMENT));
+  @Test
+  public void testUpdateCondition() {
+    try {
+      TextDocument doc =
+          TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_DOCUMENT));
 
-			// declare simple variable
-			VariableField simpleVariableField = Fields.createSimpleVariableField(doc, "test_con_variable");
-			Paragraph varParagraph = doc.addParagraph("test_con_variable:");
-			simpleVariableField.updateField("true", varParagraph.getOdfElement());
+      // declare simple variable
+      VariableField simpleVariableField =
+          Fields.createSimpleVariableField(doc, "test_con_variable");
+      Paragraph varParagraph = doc.addParagraph("test_con_variable:");
+      simpleVariableField.updateField("true", varParagraph.getOdfElement());
 
-			// test condition field
-			Paragraph newParagraph = doc.addParagraph("Condition Field Test:");
-			ConditionField conditionField = Fields.createConditionField(newParagraph.getOdfElement(), "test_con_variable == \"true\"",
-					"trueText", "falseText");
-			Assert.assertNotNull(conditionField);
-			conditionField.updateCondition("test_con_variable == \"false\"");
-			TextConditionalTextElement textCondEle = (TextConditionalTextElement) conditionField.getOdfElement();
-			Assert.assertEquals("ooow:test_con_variable == \"false\"", textCondEle.getTextConditionAttribute());
-			//save
-			//doc.save(ResourceUtilities.getAbsolutePath(TEST_DOCUMENT));
-		} catch (Exception e) {
-			Logger.getLogger(ConditionFieldTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      // test condition field
+      Paragraph newParagraph = doc.addParagraph("Condition Field Test:");
+      ConditionField conditionField =
+          Fields.createConditionField(
+              newParagraph.getOdfElement(),
+              "test_con_variable == \"true\"",
+              "trueText",
+              "falseText");
+      Assert.assertNotNull(conditionField);
+      conditionField.updateCondition("test_con_variable == \"false\"");
+      TextConditionalTextElement textCondEle =
+          (TextConditionalTextElement) conditionField.getOdfElement();
+      Assert.assertEquals(
+          "ooow:test_con_variable == \"false\"", textCondEle.getTextConditionAttribute());
+      // save
+      // doc.save(ResourceUtilities.getAbsolutePath(TEST_DOCUMENT));
+    } catch (Exception e) {
+      Logger.getLogger(ConditionFieldTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testUpdateTrueText() {
-		try {
-			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_DOCUMENT));
+  @Test
+  public void testUpdateTrueText() {
+    try {
+      TextDocument doc =
+          TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_DOCUMENT));
 
-			// declare simple variable
-			VariableField simpleVariableField = Fields.createSimpleVariableField(doc, "test_con_variable");
-			Paragraph varParagraph = doc.addParagraph("test_con_variable:");
-			simpleVariableField.updateField("true", varParagraph.getOdfElement());
+      // declare simple variable
+      VariableField simpleVariableField =
+          Fields.createSimpleVariableField(doc, "test_con_variable");
+      Paragraph varParagraph = doc.addParagraph("test_con_variable:");
+      simpleVariableField.updateField("true", varParagraph.getOdfElement());
 
-			// test condition field
-			Paragraph newParagraph = doc.addParagraph("Condition Field Test:");
-			ConditionField conditionField = Fields.createConditionField(newParagraph.getOdfElement(), "test_con_variable == \"true\"",
-					"trueText", "falseText");
-			Assert.assertNotNull(conditionField);
-			conditionField.updateTrueText("trueTextUpdate");
+      // test condition field
+      Paragraph newParagraph = doc.addParagraph("Condition Field Test:");
+      ConditionField conditionField =
+          Fields.createConditionField(
+              newParagraph.getOdfElement(),
+              "test_con_variable == \"true\"",
+              "trueText",
+              "falseText");
+      Assert.assertNotNull(conditionField);
+      conditionField.updateTrueText("trueTextUpdate");
 
-			//validate
-			TextConditionalTextElement conditionalTextElement = (TextConditionalTextElement) conditionField.getOdfElement();
-			conditionalTextElement.getTextStringValueIfTrueAttribute();
-			Assert.assertEquals("trueTextUpdate", conditionalTextElement.getTextStringValueIfTrueAttribute());
+      // validate
+      TextConditionalTextElement conditionalTextElement =
+          (TextConditionalTextElement) conditionField.getOdfElement();
+      conditionalTextElement.getTextStringValueIfTrueAttribute();
+      Assert.assertEquals(
+          "trueTextUpdate", conditionalTextElement.getTextStringValueIfTrueAttribute());
 
-			//save
-			//doc.save(ResourceUtilities.getAbsolutePath(TEST_DOCUMENT));
-		} catch (Exception e) {
-			Logger.getLogger(ConditionFieldTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      // save
+      // doc.save(ResourceUtilities.getAbsolutePath(TEST_DOCUMENT));
+    } catch (Exception e) {
+      Logger.getLogger(ConditionFieldTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testUpdateFalseText() {
-		try {
-			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_DOCUMENT));
+  @Test
+  public void testUpdateFalseText() {
+    try {
+      TextDocument doc =
+          TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_DOCUMENT));
 
-			// declare simple variable
-			VariableField simpleVariableField = Fields.createSimpleVariableField(doc, "test_con_variable");
-			Paragraph varParagraph = doc.addParagraph("test_con_variable:");
-			simpleVariableField.updateField("true", varParagraph.getOdfElement());
+      // declare simple variable
+      VariableField simpleVariableField =
+          Fields.createSimpleVariableField(doc, "test_con_variable");
+      Paragraph varParagraph = doc.addParagraph("test_con_variable:");
+      simpleVariableField.updateField("true", varParagraph.getOdfElement());
 
-			// test condition field
-			Paragraph newParagraph = doc.addParagraph("Condition Field Test:");
-			ConditionField conditionField = Fields.createConditionField(newParagraph.getOdfElement(), "test_con_variable == \"true\"",
-					"trueText", "falseText");
-			Assert.assertNotNull(conditionField);
+      // test condition field
+      Paragraph newParagraph = doc.addParagraph("Condition Field Test:");
+      ConditionField conditionField =
+          Fields.createConditionField(
+              newParagraph.getOdfElement(),
+              "test_con_variable == \"true\"",
+              "trueText",
+              "falseText");
+      Assert.assertNotNull(conditionField);
 
-			conditionField.updateCondition("test_con_variable == \"false\"");
-			conditionField.updateFalseText("falseTextUpdate");
+      conditionField.updateCondition("test_con_variable == \"false\"");
+      conditionField.updateFalseText("falseTextUpdate");
 
-			//validate
-			TextConditionalTextElement conditionalTextElement = (TextConditionalTextElement) conditionField.getOdfElement();
-			conditionalTextElement.getTextStringValueIfFalseAttribute();
-			Assert.assertEquals("falseTextUpdate", conditionalTextElement.getTextStringValueIfFalseAttribute());
-		} catch (Exception e) {
-			Logger.getLogger(ConditionFieldTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      // validate
+      TextConditionalTextElement conditionalTextElement =
+          (TextConditionalTextElement) conditionField.getOdfElement();
+      conditionalTextElement.getTextStringValueIfFalseAttribute();
+      Assert.assertEquals(
+          "falseTextUpdate", conditionalTextElement.getTextStringValueIfFalseAttribute());
+    } catch (Exception e) {
+      Logger.getLogger(ConditionFieldTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testGetOdfElement() {
-		try {
-			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_DOCUMENT));
+  @Test
+  public void testGetOdfElement() {
+    try {
+      TextDocument doc =
+          TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_DOCUMENT));
 
-			// declare simple variable
-			VariableField simpleVariableField = Fields.createSimpleVariableField(doc, "test_con_variable");
-			Paragraph varParagraph = doc.addParagraph("test_con_variable:");
-			simpleVariableField.updateField("true", varParagraph.getOdfElement());
+      // declare simple variable
+      VariableField simpleVariableField =
+          Fields.createSimpleVariableField(doc, "test_con_variable");
+      Paragraph varParagraph = doc.addParagraph("test_con_variable:");
+      simpleVariableField.updateField("true", varParagraph.getOdfElement());
 
-			// test condition field
-			Paragraph newParagraph = doc.addParagraph("Condition Field Test:");
-			ConditionField conditionField = Fields.createConditionField(newParagraph.getOdfElement(), "test_con_variable == \"true\"",
-					"trueText", "falseText");
-			Assert.assertNotNull(conditionField);
+      // test condition field
+      Paragraph newParagraph = doc.addParagraph("Condition Field Test:");
+      ConditionField conditionField =
+          Fields.createConditionField(
+              newParagraph.getOdfElement(),
+              "test_con_variable == \"true\"",
+              "trueText",
+              "falseText");
+      Assert.assertNotNull(conditionField);
 
-			// validate
-			TextConditionalTextElement conditionalTextElement = (TextConditionalTextElement) conditionField.getOdfElement();
-			conditionalTextElement.getTextStringValueIfFalseAttribute();
-			Assert.assertEquals("falseText", conditionalTextElement.getTextStringValueIfFalseAttribute());
+      // validate
+      TextConditionalTextElement conditionalTextElement =
+          (TextConditionalTextElement) conditionField.getOdfElement();
+      conditionalTextElement.getTextStringValueIfFalseAttribute();
+      Assert.assertEquals("falseText", conditionalTextElement.getTextStringValueIfFalseAttribute());
 
-		} catch (Exception e) {
-			Logger.getLogger(ConditionFieldTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+    } catch (Exception e) {
+      Logger.getLogger(ConditionFieldTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testFieldType() {
-		try {
-			TextDocument doc = TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_DOCUMENT));
+  @Test
+  public void testFieldType() {
+    try {
+      TextDocument doc =
+          TextDocument.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_DOCUMENT));
 
-			// declare simple variable
-			VariableField simpleVariableField = Fields.createSimpleVariableField(doc, "test_con_variable");
-			Paragraph varParagraph = doc.addParagraph("test_con_variable:");
-			simpleVariableField.updateField("true", varParagraph.getOdfElement());
+      // declare simple variable
+      VariableField simpleVariableField =
+          Fields.createSimpleVariableField(doc, "test_con_variable");
+      Paragraph varParagraph = doc.addParagraph("test_con_variable:");
+      simpleVariableField.updateField("true", varParagraph.getOdfElement());
 
-			// test condition field
-			Paragraph newParagraph = doc.addParagraph("Condition Field Test:");
-			ConditionField conditionField = Fields.createConditionField(newParagraph.getOdfElement(), "test_con_variable == \"true\"",
-					"trueText", "falseText");
-			Assert.assertNotNull(conditionField);
+      // test condition field
+      Paragraph newParagraph = doc.addParagraph("Condition Field Test:");
+      ConditionField conditionField =
+          Fields.createConditionField(
+              newParagraph.getOdfElement(),
+              "test_con_variable == \"true\"",
+              "trueText",
+              "falseText");
+      Assert.assertNotNull(conditionField);
 
-			FieldType fieldType = conditionField.getFieldType();
-			Assert.assertEquals(FieldType.CONDITION_FIELD, fieldType);
+      FieldType fieldType = conditionField.getFieldType();
+      Assert.assertEquals(FieldType.CONDITION_FIELD, fieldType);
 
-			// test hide field
-			newParagraph = doc.addParagraph("Hide Text Field Test:");
-			conditionField = Fields.createHiddenTextField(newParagraph.getOdfElement(), "test_con_variable == \"true\"", "hiddenText");
-			FieldType fieldType1 = conditionField.getFieldType();
-			Assert.assertEquals(FieldType.HIDDEN_TEXT_FIELD, fieldType1);
-		} catch (Exception e) {
-			Logger.getLogger(ConditionFieldTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      // test hide field
+      newParagraph = doc.addParagraph("Hide Text Field Test:");
+      conditionField =
+          Fields.createHiddenTextField(
+              newParagraph.getOdfElement(), "test_con_variable == \"true\"", "hiddenText");
+      FieldType fieldType1 = conditionField.getFieldType();
+      Assert.assertEquals(FieldType.HIDDEN_TEXT_FIELD, fieldType1);
+    } catch (Exception e) {
+      Logger.getLogger(ConditionFieldTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 }

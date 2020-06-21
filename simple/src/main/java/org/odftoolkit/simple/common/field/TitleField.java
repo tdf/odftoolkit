@@ -28,42 +28,41 @@ import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.meta.Meta;
 
 /**
- * A <tt>TitleField</tt> displays the title value contained by the document meta
- * data.
+ * A <tt>TitleField</tt> displays the title value contained by the document meta data.
  *
  * @since 0.5
  */
 public class TitleField extends Field {
-	private TextTitleElement titleElement;
+  private TextTitleElement titleElement;
 
-	// package constructor, only called by Fields
-	TitleField(OdfElement odfElement) {
-		TextSpanElement spanElement = ((OdfFileDom) odfElement.getOwnerDocument()).newOdfElement(TextSpanElement.class);
-		odfElement.appendChild(spanElement);
-		titleElement = spanElement.newTextTitleElement();
-		try {
-			OdfFileDom dom = (OdfFileDom) odfElement.getOwnerDocument();
-			Meta meta = ((Document) dom.getDocument()).getOfficeMetadata();
-			titleElement.setTextContent(meta.getTitle());
-		} catch (Exception e) {
-			// get meta info failed, do not set content value. Let editor update
-			// it.
-		}
-		Component.registerComponent(this, getOdfElement());
-	}
+  // package constructor, only called by Fields
+  TitleField(OdfElement odfElement) {
+    TextSpanElement spanElement =
+        ((OdfFileDom) odfElement.getOwnerDocument()).newOdfElement(TextSpanElement.class);
+    odfElement.appendChild(spanElement);
+    titleElement = spanElement.newTextTitleElement();
+    try {
+      OdfFileDom dom = (OdfFileDom) odfElement.getOwnerDocument();
+      Meta meta = ((Document) dom.getDocument()).getOfficeMetadata();
+      titleElement.setTextContent(meta.getTitle());
+    } catch (Exception e) {
+      // get meta info failed, do not set content value. Let editor update
+      // it.
+    }
+    Component.registerComponent(this, getOdfElement());
+  }
 
-	/**
-	 * Return an instance of <code>TextTitleElement</code> which represents this
-	 * feature.
-	 *
-	 * @return an instance of <code>TextTitleElement</code>
-	 */
-	public TextTitleElement getOdfElement() {
-		return titleElement;
-	}
+  /**
+   * Return an instance of <code>TextTitleElement</code> which represents this feature.
+   *
+   * @return an instance of <code>TextTitleElement</code>
+   */
+  public TextTitleElement getOdfElement() {
+    return titleElement;
+  }
 
-	@Override
-	public FieldType getFieldType() {
-		return FieldType.TITLE_FIELD;
-	}
+  @Override
+  public FieldType getFieldType() {
+    return FieldType.TITLE_FIELD;
+  }
 }

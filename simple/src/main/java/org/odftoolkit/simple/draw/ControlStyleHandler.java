@@ -36,77 +36,58 @@ import org.odftoolkit.simple.style.StyleTypeDefinitions.VerticalRelative;
  */
 public class ControlStyleHandler extends DefaultStyleHandler {
 
-	private Control mControl;
+  private Control mControl;
 
-	public ControlStyleHandler(Control control) {
-		super(control.getOdfElement());
-		mControl = control;
-	}
+  public ControlStyleHandler(Control control) {
+    super(control.getOdfElement());
+    mControl = control;
+  }
 
-	/**
-	 * Set how a form control is bound to a text document. Default position
-	 * relative and alignment will be set.
-	 *
-	 * <p>
-	 * If the document is not text document, nothing will happen.
-	 *
-	 * @param achorType
-	 *            - the point at which a form control is bound to a text
-	 *            document
-	 */
-	public void setAchorType(StyleTypeDefinitions.AnchorType achorType) {
-		if (!mDocument.getMediaTypeString().equals(
-				Document.OdfMediaType.TEXT.getMediaTypeString())
-				&& !mDocument.getMediaTypeString().equals(
-						Document.OdfMediaType.TEXT_TEMPLATE
-								.getMediaTypeString()))
-			return;
-		GraphicProperties graphicPropertiesForWrite = getGraphicPropertiesForWrite();
+  /**
+   * Set how a form control is bound to a text document. Default position relative and alignment
+   * will be set.
+   *
+   * <p>If the document is not text document, nothing will happen.
+   *
+   * @param achorType - the point at which a form control is bound to a text document
+   */
+  public void setAchorType(StyleTypeDefinitions.AnchorType achorType) {
+    if (!mDocument.getMediaTypeString().equals(Document.OdfMediaType.TEXT.getMediaTypeString())
+        && !mDocument
+            .getMediaTypeString()
+            .equals(Document.OdfMediaType.TEXT_TEMPLATE.getMediaTypeString())) return;
+    GraphicProperties graphicPropertiesForWrite = getGraphicPropertiesForWrite();
 
-		DrawControlElement controlElement = (DrawControlElement) mOdfElement;
-		controlElement.setTextAnchorTypeAttribute(achorType.toString());
+    DrawControlElement controlElement = (DrawControlElement) mOdfElement;
+    controlElement.setTextAnchorTypeAttribute(achorType.toString());
 
-		// set default relative
-		switch (achorType) {
-		case AS_CHARACTER:
-			graphicPropertiesForWrite
-					.setVerticalRelative(VerticalRelative.BASELINE);
-			graphicPropertiesForWrite
-					.setVerticalPosition(FrameVerticalPosition.TOP);
-			break;
-		case TO_CHARACTER:
-			graphicPropertiesForWrite
-					.setVerticalRelative(VerticalRelative.PARAGRAPH);
-			graphicPropertiesForWrite
-					.setVerticalPosition(FrameVerticalPosition.TOP);
-			graphicPropertiesForWrite
-					.setHorizontalRelative(HorizontalRelative.PARAGRAPH);
-			graphicPropertiesForWrite
-					.setHorizontalPosition(FrameHorizontalPosition.CENTER);
-			break;
-		case TO_PAGE:
-			controlElement.setTextAnchorPageNumberAttribute(Integer.valueOf(1));
-			graphicPropertiesForWrite
-					.setVerticalRelative(VerticalRelative.PAGE);
-			graphicPropertiesForWrite
-					.setVerticalPosition(FrameVerticalPosition.FROMTOP);
-			graphicPropertiesForWrite
-					.setHorizontalRelative(HorizontalRelative.PARAGRAPH);
-			graphicPropertiesForWrite
-					.setHorizontalPosition(FrameHorizontalPosition.FROMLEFT);
-			break;
-		case TO_PARAGRAPH:
-			graphicPropertiesForWrite
-					.setVerticalRelative(VerticalRelative.PARAGRAPH);
-			graphicPropertiesForWrite
-					.setVerticalPosition(FrameVerticalPosition.TOP);
-			graphicPropertiesForWrite
-					.setHorizontalRelative(HorizontalRelative.PARAGRAPH);
-			graphicPropertiesForWrite
-					.setHorizontalPosition(FrameHorizontalPosition.CENTER);
-			break;
-		case TO_FRAME:
-			break;
-		}
-	}
+    // set default relative
+    switch (achorType) {
+      case AS_CHARACTER:
+        graphicPropertiesForWrite.setVerticalRelative(VerticalRelative.BASELINE);
+        graphicPropertiesForWrite.setVerticalPosition(FrameVerticalPosition.TOP);
+        break;
+      case TO_CHARACTER:
+        graphicPropertiesForWrite.setVerticalRelative(VerticalRelative.PARAGRAPH);
+        graphicPropertiesForWrite.setVerticalPosition(FrameVerticalPosition.TOP);
+        graphicPropertiesForWrite.setHorizontalRelative(HorizontalRelative.PARAGRAPH);
+        graphicPropertiesForWrite.setHorizontalPosition(FrameHorizontalPosition.CENTER);
+        break;
+      case TO_PAGE:
+        controlElement.setTextAnchorPageNumberAttribute(Integer.valueOf(1));
+        graphicPropertiesForWrite.setVerticalRelative(VerticalRelative.PAGE);
+        graphicPropertiesForWrite.setVerticalPosition(FrameVerticalPosition.FROMTOP);
+        graphicPropertiesForWrite.setHorizontalRelative(HorizontalRelative.PARAGRAPH);
+        graphicPropertiesForWrite.setHorizontalPosition(FrameHorizontalPosition.FROMLEFT);
+        break;
+      case TO_PARAGRAPH:
+        graphicPropertiesForWrite.setVerticalRelative(VerticalRelative.PARAGRAPH);
+        graphicPropertiesForWrite.setVerticalPosition(FrameVerticalPosition.TOP);
+        graphicPropertiesForWrite.setHorizontalRelative(HorizontalRelative.PARAGRAPH);
+        graphicPropertiesForWrite.setHorizontalPosition(FrameHorizontalPosition.CENTER);
+        break;
+      case TO_FRAME:
+        break;
+    }
+  }
 }

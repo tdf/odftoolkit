@@ -26,64 +26,46 @@ package org.odftoolkit.simple.chart;
  */
 public enum ChartType {
 
-	/**
-	 * BAR, The bar type chart
-	 */
-	BAR("chart:bar"),
-	/**
-	 * PIE, The pie type chart
-	 */
-	PIE("chart:circle"),
-	/**
-	 * RING, The ring type chart
-	 */
-	RING("chart:ring"),
-	/**
-	 * AREA, The area type chart
-	 */
-	AREA("chart:area"),
-	/**
-	 * LINE, The line type chart
-	 */
-	LINE("chart:line"),
-	/**
-	 * SCATTER, The scatter type chart
-	 */
-	SCATTER("chart:scatter"),
-	/**
-	 * RADAR, The radar type chart
-	 */
-	RADAR("chart:radar"),
-	/**
-	 * STOCK, The stock type chart
-	 */
-	STOCK("chart:stock");
+  /** BAR, The bar type chart */
+  BAR("chart:bar"),
+  /** PIE, The pie type chart */
+  PIE("chart:circle"),
+  /** RING, The ring type chart */
+  RING("chart:ring"),
+  /** AREA, The area type chart */
+  AREA("chart:area"),
+  /** LINE, The line type chart */
+  LINE("chart:line"),
+  /** SCATTER, The scatter type chart */
+  SCATTER("chart:scatter"),
+  /** RADAR, The radar type chart */
+  RADAR("chart:radar"),
+  /** STOCK, The stock type chart */
+  STOCK("chart:stock");
 
-	private String m_aValue;
+  private String m_aValue;
 
-	private ChartType(String _aValue) {
-		m_aValue = _aValue;
-	}
+  private ChartType(String _aValue) {
+    m_aValue = _aValue;
+  }
 
+  @Override
+  public String toString() {
+    return m_aValue;
+  }
 
-	@Override
-	public String toString() {
-		return m_aValue;
-	}
-
-	/**
-	 * Returns the enum of ChartType string.
-	 *
-	 * @param mString
-	 *            the string value
-	 * @return the enum of ChartType.
-	 */
-	public static ChartType enumValueOf(String mString) {
-		for (ChartType aIter : values()) {
-			if (mString.equals(aIter.toString())) {
-				return aIter;
-			}
-		}
-		return null;
-	}
+  /**
+   * Returns the enum of ChartType string.
+   *
+   * @param mString the string value
+   * @return the enum of ChartType.
+   */
+  public static ChartType enumValueOf(String mString) {
+    for (ChartType aIter : values()) {
+      if (mString.equals(aIter.toString())) {
+        return aIter;
+      }
+    }
+    return null;
+  }
 }

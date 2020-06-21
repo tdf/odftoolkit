@@ -21,27 +21,25 @@ package org.odftoolkit.simple.common.field;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import junit.framework.Assert;
-
 import org.junit.Test;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.common.field.Field.FieldType;
 
 public class SubjectFieldTest {
 
-	@Test
-	public void testGetFieldType() {
-		try {
-			TextDocument doc = TextDocument.newTextDocument();
-			SubjectField subjectField = Fields.createSubjectField(doc.newParagraph("The Subject:"));
+  @Test
+  public void testGetFieldType() {
+    try {
+      TextDocument doc = TextDocument.newTextDocument();
+      SubjectField subjectField = Fields.createSubjectField(doc.newParagraph("The Subject:"));
 
-			FieldType fieldType = subjectField.getFieldType();
-			Assert.assertNotNull(subjectField);
-			Assert.assertEquals(fieldType, FieldType.SUBJECT_FIELD);
-		} catch (Exception e) {
-			Logger.getLogger(SubjectFieldTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      FieldType fieldType = subjectField.getFieldType();
+      Assert.assertNotNull(subjectField);
+      Assert.assertEquals(fieldType, FieldType.SUBJECT_FIELD);
+    } catch (Exception e) {
+      Logger.getLogger(SubjectFieldTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 }

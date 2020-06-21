@@ -28,12 +28,11 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
  */
 public interface FrameContainer {
 
-	/**
-	 * Get the ODF element which can have <draw:frame> as child element directly
-	 * according to ODF specification. This Element will help to find the
-	 * position to insert a new draw:frame element.
-	 *
-	 * @return the parent of draw:frame
-	 */
-	OdfElement getFrameContainerElement();
+  /**
+   * Get the ODF element which can have <draw:frame> as child element directly according to ODF
+   * specification. This Element will help to find the position to insert a new draw:frame element.
+   *
+   * @return the parent of draw:frame
+   */
+  OdfElement getFrameContainerElement();
 }

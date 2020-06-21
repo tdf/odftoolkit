@@ -23,45 +23,38 @@ import java.net.URI;
 import java.util.Iterator;
 
 /**
- * TextHyperlinkContainer is a container which maintains text hyperlinks.
- * Hyperlinks can be added and removed in this container.
+ * TextHyperlinkContainer is a container which maintains text hyperlinks. Hyperlinks can be added
+ * and removed in this container.
  *
  * @see TextHyperlink
- *
  * @since 0.6.5
  */
-
 public interface TextHyperlinkContainer {
 
-	/**
-	 * Add a hypertext reference to this hyperlink container.
-	 *
-	 * @param linkto
-	 *            the hyperlink
-	 * @return an instance of TextHyperlink
-	 */
-	public TextHyperlink applyHyperlink(URI linkto);
+  /**
+   * Add a hypertext reference to this hyperlink container.
+   *
+   * @param linkto the hyperlink
+   * @return an instance of TextHyperlink
+   */
+  public TextHyperlink applyHyperlink(URI linkto);
 
-	/**
-	 * Remove all the hyperlinks in this container element.
-	 */
-	public void removeHyperlinks();
+  /** Remove all the hyperlinks in this container element. */
+  public void removeHyperlinks();
 
-	/**
-	 * Append a hyperlink at the end of the container
-	 *
-	 * @param text
-	 *            - the text content
-	 * @param linkto
-	 *            - the URI of this hyperlink
-	 * @return an instance of TextHyperlink
-	 */
-	public TextHyperlink appendHyperlink(String text, URI linkto);
+  /**
+   * Append a hyperlink at the end of the container
+   *
+   * @param text - the text content
+   * @param linkto - the URI of this hyperlink
+   * @return an instance of TextHyperlink
+   */
+  public TextHyperlink appendHyperlink(String text, URI linkto);
 
-	/**
-	 * Get the iterator of hyperlinks within this container element
-	 *
-	 * @return the iterator of hyperlinks within this container element
-	 */
-	public Iterator<TextHyperlink> getHyperlinkIterator();
+  /**
+   * Get the iterator of hyperlinks within this container element
+   *
+   * @return the iterator of hyperlinks within this container element
+   */
+  public Iterator<TextHyperlink> getHyperlinkIterator();
 }

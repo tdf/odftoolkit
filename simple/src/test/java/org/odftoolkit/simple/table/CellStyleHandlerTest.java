@@ -21,48 +21,47 @@ package org.odftoolkit.simple.table;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import junit.framework.Assert;
-
 import org.junit.Test;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 public class CellStyleHandlerTest {
 
-	private static final String TEST_FILE_NAME = "CellStyleHandlerTest.odp";
+  private static final String TEST_FILE_NAME = "CellStyleHandlerTest.odp";
 
-	@Test
-	public void testGetFont() {
-		try {
-			Document doc = Document.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_NAME));
-			Table table = doc.getTableByName("slideTable");
-			CellStyleHandler styleHandler = table.getCellByPosition(1, 1).getStyleHandler();
-			// NullPointerException should not be thrown even if no default text
-			// properties style exists.
-			styleHandler.getFont(Document.ScriptType.WESTERN);
-		} catch (Exception e) {
-			Logger.getLogger(CellStyleHandlerTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+  @Test
+  public void testGetFont() {
+    try {
+      Document doc =
+          Document.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_NAME));
+      Table table = doc.getTableByName("slideTable");
+      CellStyleHandler styleHandler = table.getCellByPosition(1, 1).getStyleHandler();
+      // NullPointerException should not be thrown even if no default text
+      // properties style exists.
+      styleHandler.getFont(Document.ScriptType.WESTERN);
+    } catch (Exception e) {
+      Logger.getLogger(CellStyleHandlerTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
+  @Test
+  public void testGetCountry() {
+    try {
+      Document doc =
+          Document.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_NAME));
+      Table table = doc.getTableByName("slideTable");
+      CellStyleHandler styleHandler = table.getCellByPosition(1, 1).getStyleHandler();
 
-	@Test
-	public void testGetCountry() {
-		try {
-			Document doc = Document.loadDocument(ResourceUtilities.getTestResourceAsStream(TEST_FILE_NAME));
-			Table table = doc.getTableByName("slideTable");
-			CellStyleHandler styleHandler = table.getCellByPosition(1, 1).getStyleHandler();
+      styleHandler.setCountry("English", Document.ScriptType.WESTERN);
+      // validate
+      String country = styleHandler.getCountry(Document.ScriptType.WESTERN);
+      Assert.assertEquals("English", country);
 
-			styleHandler.setCountry("English", Document.ScriptType.WESTERN);
-			//validate
-			String country = styleHandler.getCountry(Document.ScriptType.WESTERN);
-			Assert.assertEquals("English", country);
-
-		} catch (Exception e) {
-			Logger.getLogger(CellStyleHandlerTest.class.getName()).log(Level.SEVERE, null, e);
-			Assert.fail(e.getMessage());
-		}
-	}
+    } catch (Exception e) {
+      Logger.getLogger(CellStyleHandlerTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
 }

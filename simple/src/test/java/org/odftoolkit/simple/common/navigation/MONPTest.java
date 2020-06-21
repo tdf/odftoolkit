@@ -21,48 +21,44 @@ package org.odftoolkit.simple.common.navigation;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.TextDocument;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
-/**
- * Test ReplaceWith method for class org.odftoolkit.simple.common.navigation.TextSelection
- */
+/** Test ReplaceWith method for class org.odftoolkit.simple.common.navigation.TextSelection */
 public class MONPTest {
 
-	public static final String TEXT_FILE = "navigationtest.odt";
-	public static final String SAVE_FILE = "testsave1.odt";
+  public static final String TEXT_FILE = "navigationtest.odt";
+  public static final String SAVE_FILE = "testsave1.odt";
 
-	/**
-	 * replace all the "mnop" occurance in navigationtest.odt with the word "success"
-	 */
-	@Test
-	public void testReplaceWith() {
+  /** replace all the "mnop" occurance in navigationtest.odt with the word "success" */
+  @Test
+  public void testReplaceWith() {
 
-		try {
-			TextDocument doc = (TextDocument) Document.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_FILE));
+    try {
+      TextDocument doc =
+          (TextDocument) Document.loadDocument(ResourceUtilities.getAbsolutePath(TEXT_FILE));
 
-			TextNavigation search = new TextNavigation("mnop", doc);
+      TextNavigation search = new TextNavigation("mnop", doc);
 
-			int i = 0;
-			while (search.hasNext()) {
-				TextSelection item = (TextSelection) search.nextSelection();
-				try {
-					item.replaceWith("success");
-					i++;
-					// item.addHref(new URL("http://www.oracle.com"));
-				} catch (InvalidNavigationException e) {
-					Assert.fail(e.getMessage());
-				}
-			}
-			Assert.assertTrue(18 == i);
-			doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE));
-		} catch (Exception e) {
-			Logger.getLogger(MONPTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
-		}
-	}
+      int i = 0;
+      while (search.hasNext()) {
+        TextSelection item = (TextSelection) search.nextSelection();
+        try {
+          item.replaceWith("success");
+          i++;
+          // item.addHref(new URL("http://www.oracle.com"));
+        } catch (InvalidNavigationException e) {
+          Assert.fail(e.getMessage());
+        }
+      }
+      Assert.assertTrue(18 == i);
+      doc.save(ResourceUtilities.newTestOutputFile(SAVE_FILE));
+    } catch (Exception e) {
+      Logger.getLogger(MONPTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+    }
+  }
 }

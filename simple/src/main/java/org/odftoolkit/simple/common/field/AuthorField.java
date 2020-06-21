@@ -27,54 +27,53 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.simple.Component;
 
 /**
- * An <tt>AuthorField</tt> represents the initials of the author or the full
- * name of the author of a document.
- * <p>
- * NOTE: Before the document is opened in any editor, the value of this field is
- * invalid.
+ * An <tt>AuthorField</tt> represents the initials of the author or the full name of the author of a
+ * document.
+ *
+ * <p>NOTE: Before the document is opened in any editor, the value of this field is invalid.
  *
  * @since 0.5
  */
 public class AuthorField extends Field {
 
-	private final boolean isInitials;
+  private final boolean isInitials;
 
-	private TextAuthorNameElement authorNameElement;
-	private TextAuthorInitialsElement authorInitialsElement;
+  private TextAuthorNameElement authorNameElement;
+  private TextAuthorInitialsElement authorInitialsElement;
 
-	// package constructor, only called by Fields
-	AuthorField(OdfElement odfElement, boolean isAuthorInitials) {
-		isInitials = isAuthorInitials;
-		TextSpanElement spanElement = ((OdfFileDom) odfElement.getOwnerDocument()).newOdfElement(TextSpanElement.class);
-		odfElement.appendChild(spanElement);
-		if (isAuthorInitials) {
-			authorInitialsElement = spanElement.newTextAuthorInitialsElement();
-			authorInitialsElement.setTextFixedAttribute(false);
-		} else {
-			authorNameElement = spanElement.newTextAuthorNameElement();
-			authorNameElement.setTextFixedAttribute(false);
-		}
-		Component.registerComponent(this, getOdfElement());
-	}
+  // package constructor, only called by Fields
+  AuthorField(OdfElement odfElement, boolean isAuthorInitials) {
+    isInitials = isAuthorInitials;
+    TextSpanElement spanElement =
+        ((OdfFileDom) odfElement.getOwnerDocument()).newOdfElement(TextSpanElement.class);
+    odfElement.appendChild(spanElement);
+    if (isAuthorInitials) {
+      authorInitialsElement = spanElement.newTextAuthorInitialsElement();
+      authorInitialsElement.setTextFixedAttribute(false);
+    } else {
+      authorNameElement = spanElement.newTextAuthorNameElement();
+      authorNameElement.setTextFixedAttribute(false);
+    }
+    Component.registerComponent(this, getOdfElement());
+  }
 
-	/**
-	 * Return an instance of <code>OdfElement</code> which represents this
-	 * feature. If this is an initial author field, an instance of
-	 * <code>TextAuthorInitialsElement</code> is returned, otherwise an instance
-	 * of <code>TextAuthorNameElement</code> is returned.
-	 *
-	 * @return an instance of <code>OdfElement</code>
-	 */
-	public OdfElement getOdfElement() {
-		if (isInitials) {
-			return authorInitialsElement;
-		} else {
-			return authorNameElement;
-		}
-	}
+  /**
+   * Return an instance of <code>OdfElement</code> which represents this feature. If this is an
+   * initial author field, an instance of <code>TextAuthorInitialsElement</code> is returned,
+   * otherwise an instance of <code>TextAuthorNameElement</code> is returned.
+   *
+   * @return an instance of <code>OdfElement</code>
+   */
+  public OdfElement getOdfElement() {
+    if (isInitials) {
+      return authorInitialsElement;
+    } else {
+      return authorNameElement;
+    }
+  }
 
-	@Override
-	public FieldType getFieldType() {
-		return isInitials ? FieldType.AUTHOR_INITIALS_FIELD : FieldType.AUTHOR_NAME_FIELD;
-	}
+  @Override
+  public FieldType getFieldType() {
+    return isInitials ? FieldType.AUTHOR_INITIALS_FIELD : FieldType.AUTHOR_NAME_FIELD;
+  }
 }

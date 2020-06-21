@@ -21,60 +21,76 @@
 package org.odftoolkit.simple;
 
 import java.io.File;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
 /**
  * Test class for template aspects of graphics.
+ *
  * @author <a href="mailto:fhopf@odftoolkit.org">Florian Hopf</a>
  */
 public class GraphicsTemplateTest {
 
-	private static final String TEST_GRAPHICS_TEMPLATE = "/graphicTestTemplate.otg";
+  private static final String TEST_GRAPHICS_TEMPLATE = "/graphicTestTemplate.otg";
 
-	@Test
-	public void testLoadingAGraphicsTemplate() throws Exception {
-		Document document = Document.loadDocument(this.getClass().getResourceAsStream(TEST_GRAPHICS_TEMPLATE));
-		Assert.assertEquals(Document.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
-	}
+  @Test
+  public void testLoadingAGraphicsTemplate() throws Exception {
+    Document document =
+        Document.loadDocument(this.getClass().getResourceAsStream(TEST_GRAPHICS_TEMPLATE));
+    Assert.assertEquals(
+        Document.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(),
+        document.getMediaTypeString());
+  }
 
-	@Test
-	public void testSavingAGraphicsTemplate() throws Exception {
-		Document document = Document.loadDocument(this.getClass().getResourceAsStream(TEST_GRAPHICS_TEMPLATE));
-		File destination = File.createTempFile("simple-test", ".otg", ResourceUtilities.getTempTestDirectory());
-		document.save(destination);
+  @Test
+  public void testSavingAGraphicsTemplate() throws Exception {
+    Document document =
+        Document.loadDocument(this.getClass().getResourceAsStream(TEST_GRAPHICS_TEMPLATE));
+    File destination =
+        File.createTempFile("simple-test", ".otg", ResourceUtilities.getTempTestDirectory());
+    document.save(destination);
 
-		// load again
-		Document loadedDocument = Document.loadDocument(destination);
-		Assert.assertEquals(Document.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(), loadedDocument.getMediaTypeString());
-	}
+    // load again
+    Document loadedDocument = Document.loadDocument(destination);
+    Assert.assertEquals(
+        Document.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(),
+        loadedDocument.getMediaTypeString());
+  }
 
-	@Test
-	public void testNewGraphicsTemplate() throws Exception {
-		Document document = GraphicsDocument.newGraphicsTemplateDocument();
-		Assert.assertEquals(Document.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
-		Assert.assertEquals(Document.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
-		File destination = File.createTempFile("simple-test", ".otg", ResourceUtilities.getTempTestDirectory());
-		document.save(destination);
+  @Test
+  public void testNewGraphicsTemplate() throws Exception {
+    Document document = GraphicsDocument.newGraphicsTemplateDocument();
+    Assert.assertEquals(
+        Document.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(),
+        document.getMediaTypeString());
+    Assert.assertEquals(
+        Document.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+    File destination =
+        File.createTempFile("simple-test", ".otg", ResourceUtilities.getTempTestDirectory());
+    document.save(destination);
 
-		// load again
-		Document loadedDocument = Document.loadDocument(destination);
-		Assert.assertEquals(Document.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(),
-				loadedDocument.getMediaTypeString());
-		Assert.assertTrue(document instanceof GraphicsDocument);
-	}
+    // load again
+    Document loadedDocument = Document.loadDocument(destination);
+    Assert.assertEquals(
+        Document.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(),
+        loadedDocument.getMediaTypeString());
+    Assert.assertTrue(document instanceof GraphicsDocument);
+  }
 
-	@Test
-	public void testSwitchingOdfGraphicsDocument() throws Exception {
-		GraphicsDocument document = GraphicsDocument.newGraphicsDocument();
-		document.changeMode(GraphicsDocument.OdfMediaType.GRAPHICS_TEMPLATE);
-		Assert.assertEquals(Document.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
+  @Test
+  public void testSwitchingOdfGraphicsDocument() throws Exception {
+    GraphicsDocument document = GraphicsDocument.newGraphicsDocument();
+    document.changeMode(GraphicsDocument.OdfMediaType.GRAPHICS_TEMPLATE);
+    Assert.assertEquals(
+        Document.OdfMediaType.GRAPHICS_TEMPLATE.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
 
-		document = GraphicsDocument.newGraphicsTemplateDocument();
-		document.changeMode(GraphicsDocument.OdfMediaType.GRAPHICS);
-		Assert.assertEquals(Document.OdfMediaType.GRAPHICS.getMediaTypeString(),
-				document.getPackage().getMediaTypeString());
-	}
+    document = GraphicsDocument.newGraphicsTemplateDocument();
+    document.changeMode(GraphicsDocument.OdfMediaType.GRAPHICS);
+    Assert.assertEquals(
+        Document.OdfMediaType.GRAPHICS.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+  }
 }

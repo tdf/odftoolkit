@@ -21,62 +21,77 @@
 package org.odftoolkit.simple;
 
 import java.io.File;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.simple.utils.ResourceUtilities;
 
-
 /**
  * Test class for template aspects of presentations.
+ *
  * @author <a href="mailto:fhopf@odftoolkit.org">Florian Hopf</a>
  */
 public class PresentationTemplateTest {
 
-	private static final String TEST_PRESENTATION = "/presentationTestTemplate.otp";
+  private static final String TEST_PRESENTATION = "/presentationTestTemplate.otp";
 
-	@Test
-	public void testLoadingAPresentationTemplate() throws Exception {
-		Document document = Document.loadDocument(this.getClass().getResourceAsStream(TEST_PRESENTATION));
-		Assert.assertEquals(Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
-	}
+  @Test
+  public void testLoadingAPresentationTemplate() throws Exception {
+    Document document =
+        Document.loadDocument(this.getClass().getResourceAsStream(TEST_PRESENTATION));
+    Assert.assertEquals(
+        Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(),
+        document.getMediaTypeString());
+  }
 
-	@Test
-	public void testSavingAPresentationTemplate() throws Exception {
-		Document document = Document.loadDocument(this.getClass().getResourceAsStream(TEST_PRESENTATION));
-		File destination = File.createTempFile("simple-test", ".otp", ResourceUtilities.getTempTestDirectory());
-		document.save(destination);
+  @Test
+  public void testSavingAPresentationTemplate() throws Exception {
+    Document document =
+        Document.loadDocument(this.getClass().getResourceAsStream(TEST_PRESENTATION));
+    File destination =
+        File.createTempFile("simple-test", ".otp", ResourceUtilities.getTempTestDirectory());
+    document.save(destination);
 
-		// load again
-		Document loadedDocument = Document.loadDocument(destination);
-		Assert.assertEquals(Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), loadedDocument.getMediaTypeString());
-	}
+    // load again
+    Document loadedDocument = Document.loadDocument(destination);
+    Assert.assertEquals(
+        Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(),
+        loadedDocument.getMediaTypeString());
+  }
 
-	@Test
-	public void testNewPresentationTemplate() throws Exception {
-		Document document = PresentationDocument.newPresentationTemplateDocument();
-		Assert.assertEquals(Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getMediaTypeString());
-		Assert.assertEquals(Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
+  @Test
+  public void testNewPresentationTemplate() throws Exception {
+    Document document = PresentationDocument.newPresentationTemplateDocument();
+    Assert.assertEquals(
+        Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(),
+        document.getMediaTypeString());
+    Assert.assertEquals(
+        Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
 
-		File destination = File.createTempFile("simple-test", ".otp", ResourceUtilities.getTempTestDirectory());
-		document.save(destination);
+    File destination =
+        File.createTempFile("simple-test", ".otp", ResourceUtilities.getTempTestDirectory());
+    document.save(destination);
 
-		// load again
-		Document loadedDocument = Document.loadDocument(destination);
-		Assert.assertEquals(Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(),
-				loadedDocument.getMediaTypeString());
-		Assert.assertTrue(document instanceof PresentationDocument);
-	}
+    // load again
+    Document loadedDocument = Document.loadDocument(destination);
+    Assert.assertEquals(
+        Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(),
+        loadedDocument.getMediaTypeString());
+    Assert.assertTrue(document instanceof PresentationDocument);
+  }
 
-	@Test
-	public void testSwitchingOdfPresentationDocument() throws Exception {
-		PresentationDocument document = PresentationDocument.newPresentationDocument();
-		document.changeMode(PresentationDocument.OdfMediaType.PRESENTATION_TEMPLATE);
-		Assert.assertEquals(Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(), document.getPackage().getMediaTypeString());
+  @Test
+  public void testSwitchingOdfPresentationDocument() throws Exception {
+    PresentationDocument document = PresentationDocument.newPresentationDocument();
+    document.changeMode(PresentationDocument.OdfMediaType.PRESENTATION_TEMPLATE);
+    Assert.assertEquals(
+        Document.OdfMediaType.PRESENTATION_TEMPLATE.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
 
-		document = PresentationDocument.newPresentationTemplateDocument();
-		document.changeMode(PresentationDocument.OdfMediaType.PRESENTATION);
-		Assert.assertEquals(Document.OdfMediaType.PRESENTATION.getMediaTypeString(),
-				document.getPackage().getMediaTypeString());
-	}
+    document = PresentationDocument.newPresentationTemplateDocument();
+    document.changeMode(PresentationDocument.OdfMediaType.PRESENTATION);
+    Assert.assertEquals(
+        Document.OdfMediaType.PRESENTATION.getMediaTypeString(),
+        document.getPackage().getMediaTypeString());
+  }
 }
