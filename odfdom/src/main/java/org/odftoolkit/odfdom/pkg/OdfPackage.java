@@ -742,7 +742,7 @@ public class OdfPackage implements Closeable {
 	}
 
 	/**
-	 * @deprecated This method is only added temporary as workaround for the IBM fork using
+	 * @Deprecated This method is only added temporary as workaround for the IBM fork using
 	 * different DOC classes. Until the registering of DOC documents to the PKG layer has been
 	 * finished.
 	 * @param internalPath path relative to the package root, where the document should be inserted.

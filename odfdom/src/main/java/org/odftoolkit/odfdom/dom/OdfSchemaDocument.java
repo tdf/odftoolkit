@@ -359,7 +359,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
 	 * demand (whenever such a structure is required from the user) or by
 	 * default
 	 *
-	 * @deprecated This method will be moved to the generated sources as soon
+	 * @Deprecated This method will be moved to the generated sources as soon
 	 *              code generation was improved!
 	 *
 	 */
