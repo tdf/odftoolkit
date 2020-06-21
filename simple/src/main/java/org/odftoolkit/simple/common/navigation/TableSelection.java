@@ -79,7 +79,7 @@ public class TableSelection extends Selection {
 				textSearch.setHandlePageBreak(false);
 			}
 			preparetableContainer(leftLength, index, continued);
-			Selection.SelectionManager.unregisterItem(this.textSelection);
+			search.mDocument.getSelectionManager().unregisterItem(this.textSelection);
 			if (textSearch != null) {
 				textSearch.setReplacedItem(this.textSelection);
 				Paragraph lastParagraph = getLastParagraphInTable(tableContainer);
@@ -444,7 +444,7 @@ public class TableSelection extends Selection {
 			OdfElement containerElement, int index) {
 		TextSelection selection = new TextSelectionForTableReplacement(search,
 				text, containerElement, index);
-		Selection.SelectionManager.registerItem(selection);
+        search.mDocument.getSelectionManager().registerItem(selection);
 		return selection;
 	}
 }

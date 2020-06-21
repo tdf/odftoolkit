@@ -88,6 +88,8 @@ import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.odfdom.type.Duration;
+import org.odftoolkit.simple.common.navigation.Navigation;
+import org.odftoolkit.simple.common.navigation.SelectionManager;
 import org.odftoolkit.simple.meta.Meta;
 import org.odftoolkit.simple.table.AbstractTableContainer;
 import org.odftoolkit.simple.table.Cell;
@@ -115,10 +117,12 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
     private long documentOpeningTime;
     private TableContainerImpl tableContainerImpl;
     private static final Pattern CONTROL_CHAR_PATTERN = Pattern.compile("\\p{Cntrl}");
-    private static final String EMPTY_STRING = "";
+    private static final String           EMPTY_STRING     = "";
+    public SelectionManager selectionManager = new SelectionManager();
 
-    private IdentityHashMap<OdfElement, Component> mComponentRepository
-        = new IdentityHashMap<OdfElement, Component>();
+
+    private              IdentityHashMap<OdfElement, Component> mComponentRepository
+                                                                                 = new IdentityHashMap<OdfElement, Component>();
 
     // FIXME: This field is only used in method copyResourcesFrom to improve
     // copy performance, should not be used in any other way.
@@ -2745,4 +2749,11 @@ public abstract class Document extends OdfSchemaDocument implements TableContain
         return template;
     }
 
+    public SelectionManager getSelectionManager() {
+        return selectionManager;
+    }
+
+    public void setSelectionManager(SelectionManager selectionManager) {
+        this.selectionManager = selectionManager;
+    }
 }

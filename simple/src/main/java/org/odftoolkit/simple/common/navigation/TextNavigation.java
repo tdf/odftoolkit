@@ -46,7 +46,6 @@ public class TextNavigation extends Navigation {
 
 	private String mMatchedElementName = "text:p,text:h";
 	private Pattern mPattern;
-	private Document mDocument;
 	private OdfElement mElement;
 	private TextSelection mNextSelectedItem;
 	private TextSelection mTempSelectedItem;
@@ -129,7 +128,9 @@ public class TextNavigation extends Navigation {
 		if (mNextSelectedItem == null) {
 			return null;
 		} else {
-			Selection.SelectionManager.registerItem(mNextSelectedItem);
+		    if (mDocument != null){
+		        mDocument.getSelectionManager().registerItem(mNextSelectedItem);
+            }
 			return mNextSelectedItem;
 		}
 	}

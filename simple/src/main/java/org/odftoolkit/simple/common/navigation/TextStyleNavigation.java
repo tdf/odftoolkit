@@ -36,6 +36,7 @@ import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextHeading;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextParagraph;
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.simple.Document;
 import org.odftoolkit.simple.TextDocument;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -48,7 +49,6 @@ import org.w3c.dom.NodeList;
  */
 public class TextStyleNavigation extends Navigation {
 
-	private TextDocument mTextDocument;
 	private TextSelection mNextSelectedItem;
 	private TextSelection mTempSelectedItem;
 	private int mCurrentIndex;
@@ -67,8 +67,8 @@ public class TextStyleNavigation extends Navigation {
 	 * @param doc
 	 *            the navigation search scope
 	 */
-	public TextStyleNavigation(Map<OdfStyleProperty, String> props, TextDocument doc) {
-		mTextDocument = doc;
+	public TextStyleNavigation(Map<OdfStyleProperty, String> props, Document doc) {
+		mDocument = doc;
 		mNextSelectedItem = null;
 		mTempSelectedItem = null;
 		this.mProps = props;
@@ -101,7 +101,7 @@ public class TextStyleNavigation extends Navigation {
 		if (mNextSelectedItem == null) {
 			return null;
 		} else {
-			Selection.SelectionManager.registerItem(mNextSelectedItem);
+			this.mDocument.getSelectionManager().registerItem(mNextSelectedItem);
 			return mNextSelectedItem;
 		}
 	}
@@ -140,7 +140,7 @@ public class TextStyleNavigation extends Navigation {
 	private TextSelection findNext(TextSelection selected) {
 		OdfElement element = null;
 		try {
-			Node rootNode = mTextDocument.getContentRoot();
+			Node rootNode = mDocument.getContentRoot();
 			if (selected == null) {
 				mNode = getNextMatchElementInTree(rootNode, rootNode);
 			} else {
@@ -218,12 +218,12 @@ public class TextStyleNavigation extends Navigation {
 		String sname;
 		HashMap<String, OdfDefaultStyle> defaultStyles = new HashMap<String, OdfDefaultStyle>();
 		try {
-			NodeList defStyleList = mTextDocument.getDocumentStyles().getElementsByTagName("style:default-style");
+			NodeList defStyleList = mDocument.getDocumentStyles().getElementsByTagName("style:default-style");
 			for (int i = 0; i < defStyleList.getLength(); i++) {
 				OdfDefaultStyle defStyle = (OdfDefaultStyle) defStyleList.item(i);
 				defaultStyles.put(defStyle.getFamilyName(), defStyle);
 			}
-			NodeList styleList = mTextDocument.getDocumentStyles().getElementsByTagName("style:style");
+			NodeList styleList = mDocument.getDocumentStyles().getElementsByTagName("style:style");
 			for (int i = 0; i < styleList.getLength(); i++) {
 				OdfStyle sStyle = (OdfStyle) styleList.item(i);
 				// get default properties and style properties
@@ -253,7 +253,7 @@ public class TextStyleNavigation extends Navigation {
 				}
 			}
 			// get all automatic styles
-			Iterator<OdfStyle> cStyles = mTextDocument.getContentDom().getAutomaticStyles().getAllStyles().iterator();
+			Iterator<OdfStyle> cStyles = mDocument.getContentDom().getAutomaticStyles().getAllStyles().iterator();
 			while (cStyles.hasNext()) {
 				OdfStyle cStyle = cStyles.next();
 				// get default properties and style properties
