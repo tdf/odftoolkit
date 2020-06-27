@@ -344,17 +344,21 @@
                         <configuration>
                             <excludes>
                                 <!-- for all projects -->
-                                <exclude>CHANGES.txt</exclude>
-                                <exclude>.gitignore</exclude>
                                 <exclude>.editorconfig</exclude>
+                                <exclude>.gitignore</exclude>
+                                <exclude>**/.classpath</exclude>
+                                <exclude>**/.factorypath</exclude>
+                                <exclude>**/.project</exclude>
+                                <exclude>**/.settings/**</exclude>
+                                <exclude>**/target/**</exclude>
                                 <exclude>.travis.yml</exclude>
+                                <exclude>CHANGES.txt</exclude>
                                 <exclude>README.md</exclude>
                                 <exclude>DEPENDENCIES</exclude>
                                 <exclude>docs/**/*</exclude>
-                                <exclude>src/site/**/*</exclude>
-                                <exclude>nb-configuration.xml</exclude>
-                                <exclude>.factorypath</exclude>
                                 <exclude>manifest.mf</exclude>
+                                <exclude>nb-configuration.xml</exclude>
+                                <exclude>src/site/**/*</exclude>
                                 <!-- schema2template -->
                                 <exclude>src/test/resources/examples/odf/*.ref</exclude>
                                 <exclude>src/main/resources/examples/odf/odfdom-python/OdfTextDocument.odt</exclude>
