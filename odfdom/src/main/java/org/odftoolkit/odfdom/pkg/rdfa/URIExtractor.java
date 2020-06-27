@@ -1,53 +1,52 @@
-/************************************************************************
+/**
+ * **********************************************************************
  *
- * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
+ * <p>DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
- * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
+ * <p>Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
  *
- * Use is subject to license terms.
+ * <p>Use is subject to license terms.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
- * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0. You can also obtain a copy of the License at
+ * http://odftoolkit.org/docs/license.txt
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied.
  *
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * <p>See the License for the specific language governing permissions and limitations under the
+ * License.
  *
- ************************************************************************/
+ * <p>**********************************************************************
+ */
 package org.odftoolkit.odfdom.pkg.rdfa;
 
 import java.util.List;
 import java.util.Set;
-
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
-
 import net.rootdev.javardfa.Setting;
-/**
- * URIExtractor modified from net.rootdev.javardfa.uri.URIExtractor
- */
+
+/** URIExtractor modified from net.rootdev.javardfa.uri.URIExtractor */
 public interface URIExtractor {
 
-    void setSettings(Set<Setting> settings);
+  void setSettings(Set<Setting> settings);
 
-    String expandCURIE(StartElement element, String value, EvalContext context);
+  String expandCURIE(StartElement element, String value, EvalContext context);
 
-    String expandSafeCURIE(StartElement element, String value, EvalContext context);
+  String expandSafeCURIE(StartElement element, String value, EvalContext context);
 
-    String getURI(StartElement element, Attribute attr, EvalContext context);
+  String getURI(StartElement element, Attribute attr, EvalContext context);
 
-    List<String> getURIs(StartElement element, Attribute attr, EvalContext context);
+  List<String> getURIs(StartElement element, Attribute attr, EvalContext context);
 
-    String resolveURI(String uri, EvalContext context);
+  String resolveURI(String uri, EvalContext context);
 
-    void setForSAX(boolean isForSAX);
+  void setForSAX(boolean isForSAX);
 
-    void setNamespaceURI(String prefix, String namespaceURI);
+  void setNamespaceURI(String prefix, String namespaceURI);
 }
 
 /*
@@ -74,4 +73,3 @@ public interface URIExtractor {
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-

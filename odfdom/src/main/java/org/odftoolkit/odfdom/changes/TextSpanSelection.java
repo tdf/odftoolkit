@@ -18,47 +18,50 @@ package org.odftoolkit.odfdom.changes;
 import java.util.List;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 
-/**
- *
- * @author svante.schubertATgmail.com
- */
+/** @author svante.schubertATgmail.com */
 public class TextSpanSelection extends TextSelection implements Comparable {
 
-    /**
-     * Constructor.
-     *
-     * @param spanElement the spanElement of the Span element.
-     * @param startPosition the startPosition of the Span element.
-     */
-    public TextSpanSelection(TextSpanElement spanElement, List<Integer> startPosition) {
-        mSelectionElement = spanElement;
-        mStartPosition = startPosition;
-    }
+  /**
+   * Constructor.
+   *
+   * @param spanElement the spanElement of the Span element.
+   * @param startPosition the startPosition of the Span element.
+   */
+  public TextSpanSelection(TextSpanElement spanElement, List<Integer> startPosition) {
+    mSelectionElement = spanElement;
+    mStartPosition = startPosition;
+  }
 
-    /**
-     * Constructor.
-     *
-     * @param spanElement the spanElement of the Span element.
-     * @param startPosition the startPosition of the Span element.
-     */
-    public TextSpanSelection(TextSpanElement spanElement, List<Integer> startPosition, List<Integer> endPosition) {
-        mSelectionElement = spanElement;
-        mStartPosition = startPosition;
-        mEndPosition = endPosition;
-    }
+  /**
+   * Constructor.
+   *
+   * @param spanElement the spanElement of the Span element.
+   * @param startPosition the startPosition of the Span element.
+   */
+  public TextSpanSelection(
+      TextSpanElement spanElement, List<Integer> startPosition, List<Integer> endPosition) {
+    mSelectionElement = spanElement;
+    mStartPosition = startPosition;
+    mEndPosition = endPosition;
+  }
 
-    /**
-     * Returns the spanElement of the Span element.
-     *
-     * @return the spanElement of the Span element.
-     */
-    public TextSpanElement getSpanElement() {
-        return (TextSpanElement) mSelectionElement;
-    }
+  /**
+   * Returns the spanElement of the Span element.
+   *
+   * @return the spanElement of the Span element.
+   */
+  public TextSpanElement getSpanElement() {
+    return (TextSpanElement) mSelectionElement;
+  }
 
-    @Override
-    public String toString() {
-        return mStartPosition.toString() + "-URL" + mUrl + "-" + mEndPosition.toString() + mSelectionElement.toString() + ((TextSpanElement) mSelectionElement).getAutomaticStyle().toString();
-    }
-
+  @Override
+  public String toString() {
+    return mStartPosition.toString()
+        + "-URL"
+        + mUrl
+        + "-"
+        + mEndPosition.toString()
+        + mSelectionElement.toString()
+        + ((TextSpanElement) mSelectionElement).getAutomaticStyle().toString();
+  }
 }

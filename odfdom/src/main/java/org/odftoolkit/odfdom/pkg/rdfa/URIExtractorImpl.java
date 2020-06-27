@@ -1,24 +1,26 @@
-/************************************************************************
+/**
+ * **********************************************************************
  *
- * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
+ * <p>DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
- * Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
+ * <p>Copyright 2008, 2010 Oracle and/or its affiliates. All rights reserved.
  *
- * Use is subject to license terms.
+ * <p>Use is subject to license terms.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0. You can also
- * obtain a copy of the License at http://odftoolkit.org/docs/license.txt
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0. You can also obtain a copy of the License at
+ * http://odftoolkit.org/docs/license.txt
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied.
  *
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * <p>See the License for the specific language governing permissions and limitations under the
+ * License.
  *
- ************************************************************************/
+ * <p>**********************************************************************
+ */
 package org.odftoolkit.odfdom.pkg.rdfa;
 
 import java.util.Collections;
@@ -35,161 +37,147 @@ import net.rootdev.javardfa.Resolver;
 import net.rootdev.javardfa.Setting;
 import org.apache.commons.validator.routines.UrlValidator;
 
-/**
- * URIExtractorImpl modified from net.rootdev.javardfa.uri.URIExtractor
- */
+/** URIExtractorImpl modified from net.rootdev.javardfa.uri.URIExtractor */
 class URIExtractorImpl implements URIExtractor {
-	private Set<Setting> settings;
-	private final Resolver resolver;
-	private Map<String, String> xmlnsMap = Collections.EMPTY_MAP;
-	private boolean isForSAX;
-	private UrlValidator urlValidator;
+  private Set<Setting> settings;
+  private final Resolver resolver;
+  private Map<String, String> xmlnsMap = Collections.EMPTY_MAP;
+  private boolean isForSAX;
+  private UrlValidator urlValidator;
 
-	public URIExtractorImpl(Resolver resolver, boolean isForSAX) {
-		this.resolver = resolver;
-		this.isForSAX = isForSAX;
-		this.urlValidator = new UrlValidator();
-	}
+  public URIExtractorImpl(Resolver resolver, boolean isForSAX) {
+    this.resolver = resolver;
+    this.isForSAX = isForSAX;
+    this.urlValidator = new UrlValidator();
+  }
 
-	public void setForSAX(boolean isForSAX) {
-		this.isForSAX = isForSAX;
-	}
+  public void setForSAX(boolean isForSAX) {
+    this.isForSAX = isForSAX;
+  }
 
-	public void setSettings(Set<Setting> settings) {
-		this.settings = settings;
-	}
+  public void setSettings(Set<Setting> settings) {
+    this.settings = settings;
+  }
 
-	public String getURI(StartElement element, Attribute attr,
-			EvalContext context) {
-		QName attrName = attr.getName();
-		if (Util.qNameEquals(attrName, Constants.about)) // Safe CURIE or URI
-		{
-			return expandSafeCURIE(element, attr.getValue(), context);
-		}
-		if (Util.qNameEquals(attrName, Constants.datatype)) // A CURIE
-		{
-			return expandCURIE(element, attr.getValue(), context);
-		}
-		throw new RuntimeException("Unexpected attribute: " + attr);
-	}
+  public String getURI(StartElement element, Attribute attr, EvalContext context) {
+    QName attrName = attr.getName();
+    if (Util.qNameEquals(attrName, Constants.about)) // Safe CURIE or URI
+    {
+      return expandSafeCURIE(element, attr.getValue(), context);
+    }
+    if (Util.qNameEquals(attrName, Constants.datatype)) // A CURIE
+    {
+      return expandCURIE(element, attr.getValue(), context);
+    }
+    throw new RuntimeException("Unexpected attribute: " + attr);
+  }
 
-	private boolean isValidURI(String uri){
-		return this.urlValidator.isValid(uri);
-	}
+  private boolean isValidURI(String uri) {
+    return this.urlValidator.isValid(uri);
+  }
 
-	public List<String> getURIs(StartElement element, Attribute attr,
-			EvalContext context) {
+  public List<String> getURIs(StartElement element, Attribute attr, EvalContext context) {
 
-		List<String> uris = new LinkedList<String>();
+    List<String> uris = new LinkedList<String>();
 
-		String[] curies = attr.getValue().split("\\s+");
-		boolean permitReserved = Util
-				.qNameEquals(Constants.rel, attr.getName())
-				|| Util.qNameEquals(Constants.rev, attr.getName());
-		for (String curie : curies) {
-			if (Constants.SpecialRels.contains(curie.toLowerCase())) {
-				if (permitReserved)
-					uris.add("http://www.w3.org/1999/xhtml/vocab#"
-							+ curie.toLowerCase());
-			} else {
-				String uri = expandCURIE(element, curie, context);
-				if (uri != null) {
-					uris.add(uri);
-				}
-			}
-		}
-		return uris;
-	}
+    String[] curies = attr.getValue().split("\\s+");
+    boolean permitReserved =
+        Util.qNameEquals(Constants.rel, attr.getName())
+            || Util.qNameEquals(Constants.rev, attr.getName());
+    for (String curie : curies) {
+      if (Constants.SpecialRels.contains(curie.toLowerCase())) {
+        if (permitReserved) uris.add("http://www.w3.org/1999/xhtml/vocab#" + curie.toLowerCase());
+      } else {
+        String uri = expandCURIE(element, curie, context);
+        if (uri != null) {
+          uris.add(uri);
+        }
+      }
+    }
+    return uris;
+  }
 
-	public String expandCURIE(StartElement element, String value,
-			EvalContext context) {
+  public String expandCURIE(StartElement element, String value, EvalContext context) {
 
-		if (value.startsWith("_:")) {
-			if (!settings.contains(Setting.ManualNamespaces))
-				return value;
-			if (element.getNamespaceURI("_") == null)
-				return value;
-		}
-		if (settings.contains(Setting.FormMode) && // variable
-				value.startsWith("?")) {
-			return value;
-		}
-		int offset = value.indexOf(":") + 1;
-		if (offset == 0) {
-			return null;
-		}
-		String prefix = value.substring(0, offset - 1);
+    if (value.startsWith("_:")) {
+      if (!settings.contains(Setting.ManualNamespaces)) return value;
+      if (element.getNamespaceURI("_") == null) return value;
+    }
+    if (settings.contains(Setting.FormMode)
+        && // variable
+        value.startsWith("?")) {
+      return value;
+    }
+    int offset = value.indexOf(":") + 1;
+    if (offset == 0) {
+      return null;
+    }
+    String prefix = value.substring(0, offset - 1);
 
+    // Apparently these are not allowed to expand
+    if ("xml".equals(prefix) || "xmlns".equals(prefix)) return null;
 
-		// Apparently these are not allowed to expand
-		if ("xml".equals(prefix) || "xmlns".equals(prefix))
-			return null;
+    String namespaceURI = null;
+    if (prefix.length() == 0) {
+      namespaceURI = "http://www.w3.org/1999/xhtml/vocab#";
+    } else {
+      namespaceURI = element.getNamespaceURI(prefix);
+      if (isForSAX) {
+        if (namespaceURI != null) {
+          if (xmlnsMap == Collections.EMPTY_MAP) xmlnsMap = new HashMap<String, String>();
+          xmlnsMap.put(prefix, namespaceURI);
+        }
+      } else {
+        if (namespaceURI == null) {
+          namespaceURI = xmlnsMap.get(prefix);
+        }
+      }
+    }
+    if (namespaceURI == null) {
+      return null;
+      // throw new RuntimeException("Unknown prefix: " + prefix);
+    }
 
-		String namespaceURI = null;
-		if (prefix.length() == 0) {
-			namespaceURI = "http://www.w3.org/1999/xhtml/vocab#";
-		} else {
-			namespaceURI = element.getNamespaceURI(prefix);
-			if (isForSAX) {
-				if (namespaceURI != null) {
-					if (xmlnsMap == Collections.EMPTY_MAP)
-						xmlnsMap = new HashMap<String, String>();
-					xmlnsMap.put(prefix, namespaceURI);
-				}
-			} else {
-				if (namespaceURI == null) {
-					namespaceURI = xmlnsMap.get(prefix);
-				}
-			}
-		}
-		if (namespaceURI == null) {
-			return null;
-			// throw new RuntimeException("Unknown prefix: " + prefix);
-		}
+    return namespaceURI + value.substring(offset);
+  }
 
-		return namespaceURI + value.substring(offset);
-	}
+  @Override
+  public String expandSafeCURIE(StartElement element, String value, EvalContext context) {
+    if (value.startsWith("[") && value.endsWith("]")) {
+      return expandCURIE(element, value.substring(1, value.length() - 1), context);
+    } else {
+      if (value.length() == 0) {
+        return context.getBase();
+      }
 
-    @Override
-	public String expandSafeCURIE(StartElement element, String value,
-			EvalContext context) {
-		if (value.startsWith("[") && value.endsWith("]")) {
-			return expandCURIE(element, value.substring(1, value.length() - 1),
-					context);
-		} else {
-			if (value.length() == 0) {
-				return context.getBase();
-			}
+      if (settings.contains(Setting.FormMode) && value.startsWith("?")) {
+        return value;
+      }
 
-			if (settings.contains(Setting.FormMode) && value.startsWith("?")) {
-				return value;
-			}
+      // earlier "return resolver.resolve(context.getBase(), value);"
+      // now has JENA problem with '/' slash as base URL
+      // </> Code: 57/REQUIRED_COMPONENT_MISSING in SCHEME: A component that is required by the
+      // scheme is missing.
+      return value;
+    }
+  }
 
-			// earlier "return resolver.resolve(context.getBase(), value);"
-            // now has JENA problem with '/' slash as base URL
-            // </> Code: 57/REQUIRED_COMPONENT_MISSING in SCHEME: A component that is required by the scheme is missing.
-            return value;
-		}
-	}
+  public String resolveURI(String uri, EvalContext context) {
+    return resolver.resolve(context.getBase(), uri);
+  }
 
-	public String resolveURI(String uri, EvalContext context) {
-		return resolver.resolve(context.getBase(), uri);
-	}
+  public String getNamespaceURI(String prefix) {
+    if (xmlnsMap.containsKey(prefix)) {
+      return xmlnsMap.get(prefix);
+    } else {
+      return null;
+    }
+  }
 
-	public String getNamespaceURI(String prefix) {
-		if (xmlnsMap.containsKey(prefix)) {
-			return xmlnsMap.get(prefix);
-		} else {
-			return null;
-		}
-	}
-
-	public void setNamespaceURI(String prefix, String namespaceURI){
-		if (xmlnsMap == Collections.EMPTY_MAP)
-			xmlnsMap = new HashMap<String, String>();
-		xmlnsMap.put(prefix, namespaceURI);
-	}
-
+  public void setNamespaceURI(String prefix, String namespaceURI) {
+    if (xmlnsMap == Collections.EMPTY_MAP) xmlnsMap = new HashMap<String, String>();
+    xmlnsMap.put(prefix, namespaceURI);
+  }
 }
 
 /*

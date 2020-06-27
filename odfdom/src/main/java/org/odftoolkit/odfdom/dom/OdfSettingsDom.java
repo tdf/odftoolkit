@@ -32,88 +32,87 @@ import org.odftoolkit.odfdom.pkg.NamespaceName;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.xml.sax.SAXException;
 
-/**
- * The DOM representation of the ODF Settings.xml file of an ODF document.
- */
+/** The DOM representation of the ODF Settings.xml file of an ODF document. */
 public class OdfSettingsDom extends OdfFileDom {
 
-	private static final long serialVersionUID = 766167617530147885L;
+  private static final long serialVersionUID = 766167617530147885L;
 
-	/**
-	 * Creates the DOM representation of an XML file of an Odf document.
-	 *
-	 * @param odfDocument   the document the XML files belongs to
-	 * @param packagePath   the internal package path to the XML file
-	 */
-	public OdfSettingsDom(OdfSchemaDocument odfDocument, String packagePath) {
-		super(odfDocument, packagePath);
-	}
+  /**
+   * Creates the DOM representation of an XML file of an Odf document.
+   *
+   * @param odfDocument the document the XML files belongs to
+   * @param packagePath the internal package path to the XML file
+   */
+  public OdfSettingsDom(OdfSchemaDocument odfDocument, String packagePath) {
+    super(odfDocument, packagePath);
+  }
 
-	/** Might be used to initialize specific XML Namespace prefixes/URIs for this XML file*/
-	@Override
-	protected void initialize()  {
-        /* Only 4 namespaces are required:
-            OFFICE("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0"),
-            XLINK("xlink", "http://www.w3.org/1999/xlink"),
-            CONFIG("config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0"),
-            OOO("ooo", "http://openoffice.org/2004/office");
-         */
-		setPrefixAndUri(OdfDocumentNamespace.CONFIG);
-        setPrefixAndUri(OdfDocumentNamespace.OFFICE);
-        setPrefixAndUri(OdfDocumentNamespace.OOO);
-        setPrefixAndUri(OdfDocumentNamespace.XLINK);
-        try {
-            super.initialize();
-        } catch (SAXException | IOException | ParserConfigurationException ex) {
-            Logger.getLogger(OdfMetaDom.class.getName()).log(Level.SEVERE, null, ex);
-        }
-		OfficeDocumentSettingsElement rootElement = this.getRootElement();
-		if(rootElement == null){
-			rootElement = new OfficeDocumentSettingsElement(this);
-			this.appendChild(rootElement);
-			rootElement.appendChild(new OfficeSettingsElement(this));
-		}
-	}
-
-    private void setPrefixAndUri(OdfDocumentNamespace name){
-			mUriByPrefix.put(name.getPrefix(), name.getUri());
-			mPrefixByUri.put(name.getUri(), name.getPrefix());
+  /** Might be used to initialize specific XML Namespace prefixes/URIs for this XML file */
+  @Override
+  protected void initialize() {
+    /* Only 4 namespaces are required:
+       OFFICE("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0"),
+       XLINK("xlink", "http://www.w3.org/1999/xlink"),
+       CONFIG("config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0"),
+       OOO("ooo", "http://openoffice.org/2004/office");
+    */
+    setPrefixAndUri(OdfDocumentNamespace.CONFIG);
+    setPrefixAndUri(OdfDocumentNamespace.OFFICE);
+    setPrefixAndUri(OdfDocumentNamespace.OOO);
+    setPrefixAndUri(OdfDocumentNamespace.XLINK);
+    try {
+      super.initialize();
+    } catch (SAXException | IOException | ParserConfigurationException ex) {
+      Logger.getLogger(OdfMetaDom.class.getName()).log(Level.SEVERE, null, ex);
     }
+    OfficeDocumentSettingsElement rootElement = this.getRootElement();
+    if (rootElement == null) {
+      rootElement = new OfficeDocumentSettingsElement(this);
+      this.appendChild(rootElement);
+      rootElement.appendChild(new OfficeSettingsElement(this));
+    }
+  }
 
-	/**
-	 * Retrieves the Odf Document
-	 *
-	 * @return The <code>OdfDocument</code>
-	 */
-	@Override
-	public OdfSchemaDocument getDocument() {
-		return (OdfSchemaDocument) mPackageDocument;
-	}
+  private void setPrefixAndUri(OdfDocumentNamespace name) {
+    mUriByPrefix.put(name.getPrefix(), name.getUri());
+    mPrefixByUri.put(name.getUri(), name.getPrefix());
+  }
 
-	/**
-	 * @return The root element <office:document-settings> of the settings.xml file as <code>OfficeDocumentSettingsElement</code>.
-	 */
-	@Override
-	public OfficeDocumentSettingsElement getRootElement() {
-		return (OfficeDocumentSettingsElement) getDocumentElement();
-	}
+  /**
+   * Retrieves the Odf Document
+   *
+   * @return The <code>OdfDocument</code>
+   */
+  @Override
+  public OdfSchemaDocument getDocument() {
+    return (OdfSchemaDocument) mPackageDocument;
+  }
 
-	/**
-	 * Creates an JDK <code>XPath</code> instance.
-	 * Initialized with ODF namespaces from <code>OdfDocumentNamespace</code>. Updated with all namespace of the XML file.
-	 * @return an XPath instance with namespace context set to include the standard
-	 * ODFDOM prefixes.
-	 */
-	@Override
-	public XPath getXPath() {
-		if (mXPath == null) {
-			mXPath = XPathFactory.newInstance().newXPath();
-			mXPath.setNamespaceContext(this);
-			for (NamespaceName name : OdfDocumentNamespace.values()) {
-				mUriByPrefix.put(name.getPrefix(), name.getUri());
-				mPrefixByUri.put(name.getUri(), name.getPrefix());
-			}
-		}
-		return mXPath;
-	}
+  /**
+   * @return The root element <office:document-settings> of the settings.xml file as <code>
+   *     OfficeDocumentSettingsElement</code>.
+   */
+  @Override
+  public OfficeDocumentSettingsElement getRootElement() {
+    return (OfficeDocumentSettingsElement) getDocumentElement();
+  }
+
+  /**
+   * Creates an JDK <code>XPath</code> instance. Initialized with ODF namespaces from <code>
+   * OdfDocumentNamespace</code>. Updated with all namespace of the XML file.
+   *
+   * @return an XPath instance with namespace context set to include the standard ODFDOM prefixes.
+   */
+  @Override
+  public XPath getXPath() {
+    if (mXPath == null) {
+      mXPath = XPathFactory.newInstance().newXPath();
+      mXPath.setNamespaceContext(this);
+      for (NamespaceName name : OdfDocumentNamespace.values()) {
+        mUriByPrefix.put(name.getPrefix(), name.getUri());
+        mPrefixByUri.put(name.getUri(), name.getPrefix());
+      }
+    }
+    return mXPath;
+  }
 }

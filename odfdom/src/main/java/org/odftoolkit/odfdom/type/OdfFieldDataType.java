@@ -23,8 +23,5 @@ under the License.
  */
 package org.odftoolkit.odfdom.type;
 
-/**
- * An interface marking a data type to be used in an ODF field
- */
-public interface OdfFieldDataType extends OdfDataType {
-}
+/** An interface marking a data type to be used in an ODF field */
+public interface OdfFieldDataType extends OdfDataType {}
