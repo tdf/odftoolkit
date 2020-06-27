@@ -30,14 +30,13 @@ The ODF Toolkit consists of four subcomponents:
     This is a tool that validates Open Document Format (ODF) files and checks them
     for conformance according to the ODF Standard. ODF Validator is available as an
     online service and as a command line tool. This page primarily describes the
-    command line tool. Please visit http://odftoolkit.org/conformance/ODFValidator.html for details regarding the online tool.
+    command line tool. Please visit the [ODF Validator documentation](https://tdf.github.io/odftoolkit/docs/conformance/ODFValidator.html) for details.
 
 4. ODF XSLT Runner(xslt-runner-*.jar, xslt-runner-task-*.jar)
     ODF XSLT Runner is a small Java application that allows you to apply XSLT
     stylesheets to XML streams included in ODF packages without extracting them
     from the package. It can be used from the command line. A driver to use it
     within an Ant build file, ODF XSLT Runner Task, is also available.
-
 
 ## Getting Started
 
@@ -52,16 +51,16 @@ your release in [CHANGES.txt](CHANGES.txt).
 
 ## Recent Releases
 
-1. We have a beta release for 1.0.0 using >=JDK 9 and providing the new collaboration feature:
+1. We have a beta release for 1.0.0 using >=JDK 9 and providing the [new collaboration API](https://tdf.github.io/odftoolkit/docs/odfdom/operations/operations.html):
 
-    *RELEASE (1.0.0-BETA1)*:   
+    *RELEASE (1.0.0-BETA1)*:
     * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/1.0.0-BETA1/)
     * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/1.0.0-BETA1/)
     * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/1.0.0-BETA1/)
 
-2. We have a new release 0.9.0 using JDK 8 and for the final time including the Simple API:
+2. We have a new release 0.9.0 for the final time using JDK 8 and including the Simple API:
 
-    *RELEASE (0.9.0)*:   
+    *RELEASE (0.9.0)*:
     * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.9.0/)
     * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.9.0/)
     * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.9.0/)
@@ -85,8 +84,9 @@ For more details see the [release notes](https://tdf.github.io/odftoolkit/docs/o
 See also [LICENSE](LICENSE).
 
 Collective work:
+
 * Copyright 2011-2018 The Apache Software Foundation.
-* Copyright 2018-2019 The Document Foundation.
+* Copyright 2018-2020 The Document Foundation.
 
 This product has been created by The Document Foundation, incorporating
 many modifications from different contributors.
@@ -98,7 +98,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
- http://www.apache.org/licenses/LICENSE-2.0
+ <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -118,14 +118,12 @@ Discussion about ODF Toolkit takes place on the following mailing lists:
   * Subscribe: dev+subscribe@odftoolkit.org
   * Post (after subscription): dev@odftoolkit.org
   * Unsubscribe: dev+unsubscribe@odftoolkit.org
-  * Archives - https://listarchives.odftoolkit.org/dev/
+  * [Mail archives](https://listarchives.odftoolkit.org/dev/)
 
 The mailing lists are open to anyone and publicly archived.
-
 
 ## Issue Tracker
 
 If you encounter errors in ODF Toolkit or want to suggest an improvement or
-a new feature, please visit the ODF Toolkit issue tracker at
-https://github.com/tdf/odftoolkit/issues. There you can also find the
+a new feature, please visit the [ODF Toolkit issue tracker](https://github.com/tdf/odftoolkit/issues). There you can also find the
 latest information on known issues and recent bug fixes and enhancements.

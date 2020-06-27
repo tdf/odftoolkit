@@ -10,7 +10,7 @@ It is based on [ODFXSLTRunner](https://tdf.github.io/odftoolkit/docs/xsltrunner/
 
 In general, our online page is a great place to start when looking for [documentation and other information about ODFXSLTRunnerTask](https://tdf.github.io/odftoolkit/docs/xsltrunner/ODFXSLTRunnerTask.html).
 
-## Usage    
+## Usage
 
 Easiest way is to use the latest [Maven release](https://oss.sonatype.org/content/groups/public/org/odftoolkit/xslt-runner-task) by adding the Maven dependency:
 
@@ -25,4 +25,5 @@ Detailed documentation can be found [online](https://tdf.github.io/odftoolkit/do
 You will need [ODFXSLTRunner](https://tdf.github.io/odftoolkit/docs/xsltrunner/ODFXSLTRunner.html) and [ODFDOM](https://tdf.github.io/odftoolkit/docs/odfdom/index.html).
 
 ## License
+
 Apache License, Version 2.0. Please see file [LICENSE.txt](LICENSE.txt).
