@@ -6,11 +6,15 @@ echo "  in https://tdf.github.io/odftoolkit/website-development.html"
 export MARKDOWN_SOCKET=`pwd`/markdown.socket PYTHONPATH=`pwd`
 python cms/build/markdownd.py
 echo 
-echo 1. Built the site..
+echo 1. Copy README.md files to site source.. (avoiding overlapping documentation)
+#  Copy README.md files to site source..
+cp ../../README.md ./site/content/odftoolkit_website/introduction.mdtext
+
+echo 2. Built the site..
 #  Build the site
 cms/build/build_site.pl --source-base site --target-base www
 
-echo 2. Exchanging the absolute HTML reference with relative ones..
+echo 3. Exchanging the absolute HTML reference with relative ones..
 # 1) find all files (even with space in name) ending with ''.html' of a certain directory level
 # 2) exchange the fixed prefix '/odftoolkit_website' with the adequate relative one
 find www -mindepth 3 -maxdepth 3 -type f -print0 -name *.html | xargs -0 sed -i -e 's+/odftoolkit_website+.+g'
@@ -21,17 +25,19 @@ find www -mindepth 7 -maxdepth 7 -type f -print0 -name *.html | xargs -0 sed -i 
 find www -mindepth 8 -maxdepth 8 -type f -print0 -name *.html | xargs -0 sed -i -e 's+/odftoolkit_website+../../../../..+g' 2>/dev/null
 find www -mindepth 9 -maxdepth 9 -type f -print0 -name *.html | xargs -0 sed -i -e 's+/odftoolkit_website+../../../../../..+g' 2>/dev/null
 
-echo 3. Copied the HTML to GitHub /docs
-echo 4. Saved the generated JAVADOC API
+echo 4. Backup none-site related content
 mv  ../../docs/api  ../..
+mv  ../../docs/presentations  ../..
+mv  ../../docs/odf1.2  ../..
+mv  ../../docs/odf1.3  ../..
 
-echo 5. Removed all prior website content
+echo 5. Remove all existing content
 rm -rf ../../docs/*
 
-echo 6. Copied all generated HTML as new website content
+echo 6. Move all new generated HTML into /docs folder
 mv ./www/content/odftoolkit_website/* ../../docs/
 
-echo 7. Restored saved generated javadoc
+echo 7. Restore none-site related content
 mv ../../api ../../docs
 
 echo 8. Removed temporary files and directories

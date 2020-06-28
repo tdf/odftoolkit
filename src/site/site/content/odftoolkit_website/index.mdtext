@@ -1,4 +1,4 @@
-# The ODF Toolkit
+# The ODF Toolkit  
 
 ## Mission Statement
 
@@ -10,25 +10,29 @@ is lightweight and ideal for server use.
 ## Components of the ODF Toolkit (Java)
 
 1. **Software access to ODF** is achievable by [ODFDOM](odfdom/index.html).
-With 1.0.0 the [basics of collaboration functionality](2DO.html) were added.
+With 1.0.0 the basics of collaboration functionality - [the change/operation concept]](https://tdf.github.io/odftoolkit/docs/odfdom/operations/operations.html) were added.
 
 2. **ODF Conformance** can be tested via the [ODF Validator](conformance/OdfValidator.html).
-Offered as command-line tool (executable JAR) or Web application archive (WAR) like [here](https://odfvalidator.org/).
+Offered as command-line tool (executable JAR) or server component - via Web application archive (WAR) like [here](https://odfvalidator.org/).
 
 3. **XSL Transformation** loading the ODF XML from the zipped ODF can take the zipped ODF as source using the [ODF XSLT Runner](xsltrunner/ODFXSLTRunner.html).</br>
 This functionality is also available from [ANT](https://ant.apache.org/) using our [ANT task](xsltrunner/ODFXSLTRunnerTask.html)
 
 4. **Creating Software Artefacts from the ODF grammar** is possible via the [generator project](2DO.html)
 
-## 2020-01-29 - ODF Toolkit releases of 0.9.0 and 1.0.0
+## Updates
+
+People interested should also follow the [mail list](mailing-lists.html) to track progress.
+
+### 2020-06-28 - ODF Toolkit releases of 0.9.0 and 1.0.0-rc
 
 See the [downloads page](downloads.html) for more details on the releases.
 
-## 2018-12-18 - ODF Toolkit becomes a project of The Document Foundation (TDF)
+### 2020-01-29 - ODF Toolkit releases of 0.9.0-rc and 1.0.0-beta
+
+### 2018-12-18 - ODF Toolkit becomes a project of The Document Foundation (TDF)
 
 The ODF Toolkit team is pleased to announce the reuniation with LibreOffice.
-
-People interested should also follow the [mail list](mailing-lists.html) to track progress.
 
 [1]: http://opendocument.xml.org/
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office
