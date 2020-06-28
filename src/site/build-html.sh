@@ -41,14 +41,12 @@ rm -rf cms/build/*.pyc
 
 echo 
 echo Now you may review the generated website in the '"<ODF_TOOLKIT>/docs/" directory'!
-
 # There is a HTML generation bug, sometimes the created files are empty
-emptyFiles=`find ../../docs/ -name "*.html" -empty `
-if test -z "$emptyFiles" 
-then
-      echo "No empty generated HTML files were found."
-else
-      echo
-      echo WARNING: Empty generated HTML files found:
-      echo $emptyFiles
-fi
+find ../../docs/ -name "*.html" -print0 | while read -d $'\0' file
+do
+      DIFF=`diff "$file" site/empty-template.html`
+      if [ "$DIFF" == "" ] 
+      then
+            echo WARNING: Empty generated HTML file found: $file
+      fi
+done
