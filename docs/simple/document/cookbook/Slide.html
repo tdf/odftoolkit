@@ -1,275 +1,272 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
-<head>
-  <!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../../../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../../index.html">About</a></li>
-<li><a href="../../../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../../../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../../../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../../get-involved.html">Get Involved</a></li>
-<li><a href="../../../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../../../people.html">People</a></li>
-<li><a href="../../../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../../../javadoc.html">JavaDoc</a></li>
-<li><a href="../../../website-development.html">Website Development</a></li>
-<li><a href="../../../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      
-      <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p><strong><a href="../index.html">Documents</a></strong> &gt; <strong><a href="index.html">Cookbook</a></strong> &gt;<strong><a href="Slide.html">Slide</a></strong>
-<div class="navigation">
- <ul>
-  <li><a href="Presentation Document.html">previous</a></li>
-  <li><a href="Table.html">next</a></li>
- </ul>
-</div>
-<br/>
-<br/><strong><a href="#Add Slide" >Add Slide</a></strong>
-<div class="bodytext">
-If you want to add new slide to the presentation document, you can use the following codes:
-</div>
-<div class="bodytext">
-Here the SlideLayout is the layout model of the added slide, the first parameter is the index of the added slide and the second parameter is the name of this slide.
-</div>
-<br/><pre class='code' id="code0">
-                <span class='javaclass'>PresentationDocument</span> document=<span class='javaclass'>PresentationDocument</span>.newPresentationDocument();                     <br/>
-        document.newSlide(1, "new slide", <span class='javaclass'>SlideLayout</span>.TITLE_ONLY);<br/>
-</pre>
-<br/><br/><strong><a href="#Get Slide" >Get Slide</a></strong>
-<div class="bodytext">
-You can get the slide through the index in the presentation document, like follows:
-</div>
-<br/><pre class='code' id="code1">
-        <span class='javaclass'>Slide</span> slide;<br/>
-        slide=document.getSlideByIndex(0);<br/>
-</pre>
-<br/><div class="bodytext">
-Or you can get the slide through the name of it by using the following code:
-</div>
-<br/><pre class='code' id="code2">
-        slide=document.getSlideByName("new slide");<br/>
-</pre>
-<br/><div class="bodytext">
-To get all the slides in the document,you can do like this:
-</div>
-<br/><pre class='code' id="code3">
-        <span class='javaclass'>Iterator</span>&lt;<span class='javaclass'>Slide</span>&gt; slideList=document.getSlides();<br/>
-</pre>
-<br/><div class="bodytext">
-Also you can get the number of the slides in the document by the following code:
-</div>
-<br/><pre class='code' id="code4">
-        <span class='basic'>int</span> numSlide=document.getSlideCount();<br/>
-</pre>
-<br/><br/><strong><a href="#Set/Get Slide Name/Index" >Set/Get Slide Name/Index</a></strong>
-<div class="bodytext">
-If you want to set a new name for a slide, you can use the following two methods:
-</div>
-<br/><pre class='code' id="code5">
-        slide.setSlideName("second slide"); <br/>
-        document.getSlideByIndex(2).setSlideName("third slide");<br/>
-</pre>
-<br/><div class="bodytext">
-If you want to know the index and the name of one slide which is being operated, you can use the following codes:
-</div>
-<br/><pre class='code' id="code6">
-        <span class='basic'>int</span> slideIndex=slide.getSlideIndex();<br/>
-        <span class='javaclass'>String</span> slideName=slide.getSlideName();<br/>
-</pre>
-<br/><br/><strong><a href="#Copy Slide" >Copy Slide</a></strong>
-<div class="bodytext">
-You can copy a slide in the presentation document from one position to another by using the following codes:
-</div>
-<div class="bodytext">
-Here the first parameter is the source position of the slide need to be copied, the second parameter is the destination position of the slide need to be copied, and the last parameter is the new name of the copied slide.
-</div>
-<br/><pre class='code' id="code7">
-        document.copySlide(1, 2, "copied slide");<br/>
-</pre>
-<br/><div class="bodytext">
-And also you can copy a slide from another document by using the following codes:
-</div>
-<div class="bodytext">
-Here the first parameter of copyForeignSlide is the new position of the copied slide in the current document, the second parameter is the source document of the copied slide, and the last one is the slide index of the source document that need to be copied.
-</div>
-<br/><pre class='code' id="code8">
-         <span class='javaclass'>PresentationDocument</span> documentmodel;<br/>
-         documentmodel=(<span class='javaclass'>PresentationDocument</span>)<span class='javaclass'>PresentationDocument</span>.loadDocument("presentation.odp");<br/>
-         document.copyForeignSlide(1, documentmodel, 2);<br/>
-</pre>
-<br/><br/><strong><a href="#Move/Delete Slide" >Move/Delete Slide</a></strong>
-<div class="bodytext">
-To move one slide to another position of this presentation position, you can use the following codes:
-</div>
-<div class="bodytext">
-Here the first parameter is the current index of the slide that need to be moved, and the second parameter is the index of the destination position before the move action.
-</div>
-<br/><pre class='code' id="code9">
-        document.moveSlide(2, 1);       <br/>
-</pre>
-<br/><div class="bodytext">
-You can delete the slide either by through the index or through the name of the specified slide, like follows:
-</div>
-<br/><pre class='code' id="code10">
-        document.deleteSlideByIndex(1);<br/>
-        document.deleteSlideByName("third slide");<br/>
-</pre>
-<br/><br/><strong><a href="#Add Text to Slide" >Add Text to Slide</a></strong>
-<div class="bodytext">
-      You can set the text content of a slide with text box API since version 0.5.    Below codes will get the title text box of a slide, set the text content,   and then get the outline text box, set the list content.
-</div>
-<br/><pre class='code' id="code11">
-        <span class='javaclass'>Textbox</span> titleBox = slide.getTextboxByUsage(<span class='javaclass'>PresentationClass</span>.<span class='javaclass'>TITLE</span>).get(0);<br/>
-        titleBox.setTextContent("<span class='javaclass'>This</span> is the title");<br/>
-        <span class='javaclass'>Textbox</span> outline = slide.getTextboxByUsage(<span class='javaclass'>PresentationClass</span>.<span class='javaclass'>OUTLINE</span>).get(0);<br/>
-        <span class='javaclass'>List</span> txtList = outline.addList();<br/>
-        txtList.addItem("<span class='javaclass'>List</span> Item1");<br/>
-        txtList.addItem("<span class='javaclass'>List</span> Item2");<br/>
-</pre>
-<br/><div class="bodytext">
-To add some text, you can first get the notes of one slide and then add text to this corresponding notes. The following codes shows this process:
-</div>
-<br/><pre class='code' id="code12">
-        <span class='javaclass'>Notes</span> note=slide.getNotesPage();<br/>
-        note.addText("text notes");<br/>
-</pre>
-<br/><br/><strong><a href="#Add Image to Slide" >Add Image to Slide</a></strong>
-<div class="bodytext">
-To add an image to slide, you can use below codes to simply add the image to the last slide of the presentation document.
-</div>
-<br/><pre class='code' id="code13">
-        <span class='javaclass'>URI</span> imageuri=<span class='modifier'>new</span> <span class='javaclass'>URI</span>("namdaemun.jpg");<br/>
-        document.newImage(imageuri);<br/>
-</pre>
-<br/><div class="bodytext">
-Or you can use following code to add an image to a specific position you want
-</div>
-<br/><pre class='code' id="code14">
-        <span class='javaclass'>Slide</span> slide1 = document.getSlideByIndex(1);<br/>
-        <span class='javaclass'>Image</span> image = <span class='javaclass'>Image</span>.newImage(slide1, <span class='modifier'>new</span> <span class='javaclass'>URI</span>("http://www.xxx.com/a.jpg"));<br/>
-        <span class='javaclass'>FrameRectangle</span> rect = image.getRectangle();<br/>
-        rect.setX(4);<br/>
-        rect.setY(5.7);<br/>
-        image.setRectangle(rect);<br/>
-</pre>
-<br/><br/>
-<div class="navigation">
- <ul>
-  <li><a href="Presentation Document.html">previous</a></li>
-  <li><a href="Table.html">next</a></li>
-  <li><a href="#">top</a></li>
- </ul>
-</div>
-<link type="text/css" rel="stylesheet" href="cookbook.css"/></p>
-    </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../../../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
       </div>
-    </div>   
-  </div>
-</body>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../../../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../../../simple/index.html">Simple API (deprecated)</a></li> 
+        <li class="list-group-item"><a href="../../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../../../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../../../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../../../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../../../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../../../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../../../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <p><strong><a href="../index.html">Documents</a></strong> &gt; <strong><a href="index.html">Cookbook</a></strong> &gt;<strong><a href="Slide.html">Slide</a></strong></p> 
+      <div class="navigation"> 
+        <ul> 
+          <li><a href="Presentation Document.html">previous</a></li> 
+          <li><a href="Table.html">next</a></li> 
+        </ul> 
+      </div> 
+      <br> 
+      <br>
+      <strong><a href="#Add Slide">Add Slide</a></strong> 
+      <div class="bodytext">
+         If you want to add new slide to the presentation document, you can use the following codes: 
+      </div> 
+      <div class="bodytext">
+         Here the SlideLayout is the layout model of the added slide, the first parameter is the index of the added slide and the second parameter is the name of this slide. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code0">
+                <span class="javaclass">PresentationDocument</span> document=<span class="javaclass">PresentationDocument</span>.newPresentationDocument();	        			<br>
+		document.newSlide(1, "new slide", <span class="javaclass">SlideLayout</span>.TITLE_ONLY);<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Get Slide">Get Slide</a></strong> 
+      <div class="bodytext">
+         You can get the slide through the index in the presentation document, like follows: 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code1">
+		<span class="javaclass">Slide</span> slide;<br>
+		slide=document.getSlideByIndex(0);<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         Or you can get the slide through the name of it by using the following code: 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code2">
+		slide=document.getSlideByName("new slide");<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         To get all the slides in the document,you can do like this: 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code3">
+		<span class="javaclass">Iterator</span>&lt;<span class="javaclass">Slide</span>&gt; slideList=document.getSlides();<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         Also you can get the number of the slides in the document by the following code: 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code4">
+		<span class="basic">int</span> numSlide=document.getSlideCount();<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Set/Get Slide Name/Index">Set/Get Slide Name/Index</a></strong> 
+      <div class="bodytext">
+         If you want to set a new name for a slide, you can use the following two methods: 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code5">
+		slide.setSlideName("second slide");	<br>
+		document.getSlideByIndex(2).setSlideName("third slide");<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         If you want to know the index and the name of one slide which is being operated, you can use the following codes: 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code6">
+		<span class="basic">int</span> slideIndex=slide.getSlideIndex();<br>
+		<span class="javaclass">String</span> slideName=slide.getSlideName();<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Copy Slide">Copy Slide</a></strong> 
+      <div class="bodytext">
+         You can copy a slide in the presentation document from one position to another by using the following codes: 
+      </div> 
+      <div class="bodytext">
+         Here the first parameter is the source position of the slide need to be copied, the second parameter is the destination position of the slide need to be copied, and the last parameter is the new name of the copied slide. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code7">
+		document.copySlide(1, 2, "copied slide");<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         And also you can copy a slide from another document by using the following codes: 
+      </div> 
+      <div class="bodytext">
+         Here the first parameter of copyForeignSlide is the new position of the copied slide in the current document, the second parameter is the source document of the copied slide, and the last one is the slide index of the source document that need to be copied. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code8">
+		 <span class="javaclass">PresentationDocument</span> documentmodel;<br>
+		 documentmodel=(<span class="javaclass">PresentationDocument</span>)<span class="javaclass">PresentationDocument</span>.loadDocument("presentation.odp");<br>
+		 document.copyForeignSlide(1, documentmodel, 2);<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Move/Delete Slide">Move/Delete Slide</a></strong> 
+      <div class="bodytext">
+         To move one slide to another position of this presentation position, you can use the following codes: 
+      </div> 
+      <div class="bodytext">
+         Here the first parameter is the current index of the slide that need to be moved, and the second parameter is the index of the destination position before the move action. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code9">
+		document.moveSlide(2, 1);		<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         You can delete the slide either by through the index or through the name of the specified slide, like follows: 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code10">
+		document.deleteSlideByIndex(1);<br>
+		document.deleteSlideByName("third slide");<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Add Text to Slide">Add Text to Slide</a></strong> 
+      <div class="bodytext">
+         You can set the text content of a slide with text box API since version 0.5. Below codes will get the title text box of a slide, set the text content, and then get the outline text box, set the list content. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code11">
+	    <span class="javaclass">Textbox</span> titleBox = slide.getTextboxByUsage(<span class="javaclass">PresentationClass</span>.<span class="javaclass">TITLE</span>).get(0);<br>
+	    titleBox.setTextContent("<span class="javaclass">This</span> is the title");<br>
+	    <span class="javaclass">Textbox</span> outline = slide.getTextboxByUsage(<span class="javaclass">PresentationClass</span>.<span class="javaclass">OUTLINE</span>).get(0);<br>
+	    <span class="javaclass">List</span> txtList = outline.addList();<br>
+	    txtList.addItem("<span class="javaclass">List</span> Item1");<br>
+	    txtList.addItem("<span class="javaclass">List</span> Item2");<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         To add some text, you can first get the notes of one slide and then add text to this corresponding notes. The following codes shows this process: 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code12">
+		<span class="javaclass">Notes</span> note=slide.getNotesPage();<br>
+		note.addText("text notes");<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Add Image to Slide">Add Image to Slide</a></strong> 
+      <div class="bodytext">
+         To add an image to slide, you can use below codes to simply add the image to the last slide of the presentation document. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code13">
+		<span class="javaclass">URI</span> imageuri=<span class="modifier">new</span> <span class="javaclass">URI</span>("namdaemun.jpg");<br>
+		document.newImage(imageuri);<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         Or you can use following code to add an image to a specific position you want 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code14">
+		<span class="javaclass">Slide</span> slide1 = document.getSlideByIndex(1);<br>
+		<span class="javaclass">Image</span> image = <span class="javaclass">Image</span>.newImage(slide1, <span class="modifier">new</span> <span class="javaclass">URI</span>("http://www.xxx.com/a.jpg"));<br>
+		<span class="javaclass">FrameRectangle</span> rect = image.getRectangle();<br>
+		rect.setX(4);<br>
+		rect.setY(5.7);<br>
+		image.setRectangle(rect);<br>
+</pre>
+      </div> 
+      <br>
+      <br> 
+      <div class="navigation"> 
+        <ul> 
+          <li><a href="Presentation Document.html">previous</a></li> 
+          <li><a href="Table.html">next</a></li> 
+          <li><a href="#">top</a></li> 
+        </ul> 
+      </div> 
+      <link type="text/css" rel="stylesheet" href="cookbook.css"> 
+    </div>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>

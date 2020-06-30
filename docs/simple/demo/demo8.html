@@ -1,182 +1,109 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
-<head>
-  <!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../index.html">About</a></li>
-<li><a href="../../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../get-involved.html">Get Involved</a></li>
-<li><a href="../../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../../people.html">People</a></li>
-<li><a href="../../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../../javadoc.html">JavaDoc</a></li>
-<li><a href="../../website-development.html">Website Development</a></li>
-<li><a href="../../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      
-      <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p><a href="index.html"><strong>Demos</strong></a> &gt; <b>Add 2D barcode image to a slide</b></p>
-<p><strong>Overview</strong></p>
-<p>This demo shows the power of image and metadata support in Simple API.</p>
-<p>A 2D bar code is a special image that can be scanned by a smart phone or a dedicated scanner. It could contain a URL, a books ISBN number a vCard for a person's contact, information, etc. It makes it easy to transfer information into a smartphone from a physical object, like a printed document, or a newspaper or magazine.</p>
-<p>In this demo, the contact information of a document's author has been put in the metadata of a presentation document, with an ODF editor, such as IBM Lotus Symphony. The contact information in the metadata is extracted with the Simple ODF API, and wrapped into JSON object. Then a RESTful web service is called to generate a 2D bar code image based on this JSON object.</p>
-<p>The bar code image is then added to the first slide of this presentation using the Simple API.</p>
-<p>This picture shows how the contact information is added to the metadata of this document.</p>
-<p><img alt="image1" src="image/demo8_metadata.bmp" /></p>
-<p>This picture shows the 2D bar code image added to the first slide of this presentation document.<br /><br/>
-<img alt="image2" src="image/demo8_slide.bmp" /></p>
-<p><strong>Code Introduction</strong></p>
-<p>There code of this demo is very simple. First, we load the presentation document, and extract the metadata with Simple ODF API. Second, we invoke the web service to generate the bar code image and get the URI of this image.</p>
-<p>Finally, we get the subtitle text box in the first slide, add an image just below of this subtitle text box. Please note how FrameRectangle is used to specify the image position.</p>
-<div class="codehilite"><pre><span></span>public static void main(String[] args) {
-
-    try {
-        //load the presentation
-        PresentationDocument presentation = PresentationDocument.loadDocument(&quot;Demotemplate.odp&quot;);
-        //get the metadata
-        Meta metaData = new Meta(presentation.getMetaDom());
-        String creator = metaData.getCreator();
-        String mailto = metaData.getUserDefinedDataValue(&quot;Email&quot;);
-        String phoneno = metaData.getUserDefinedDataValue(&quot;Phone&quot;);
-
-        //invoke the 2D barcode service, and get the url
-        BarcodeImageGeneration demo = new BarcodeImageGeneration();
-        String url = demo.invokepost(creator,mailto,phoneno);
-
-        //Add the image to the first slide
-        Slide slide = presentation.getSlideByIndex(0);
-        Textbox subtitleBox = slide.getTextboxByUsage(PresentationClass.SUBTITLE).get(0);
-        FrameRectangle subtitleRect = subtitleBox.getRectangle();
-        Image image = Image.newImage(slide, new URI(url));
-        FrameRectangle imageRect = image.getRectangle();
-        imageRect.setX(subtitleRect.getX()+(subtitleRect.getWidth()-imageRect.getWidth())/2);
-        imageRect.setY(subtitleRect.getY()+subtitleRect.getHeight());
-        image.setRectangle(imageRect);
-
-        presentation.save(&quot;output.odp&quot;);
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-
-}
-</pre></div>
-
-
-<p><strong>Download</strong></p>
-<p>Powered by the Simple Java API for ODF version <a href="../downloads.html">0.5.5</a>.
-You can download the code of this demo from <a href="TwoDBarcodeDemo.zip">here</a>.
-The dependent library jslib.zip can be downloaded from <a href="http://puzzle.dl.sourceforge.net/sourceforge/xulmaker/jslib.zip">here</a>.</p>
-    </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
       </div>
-    </div>   
-  </div>
-</body>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
+        <li class="list-group-item"><a href="../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <p><a href="index.html"><strong>Demos</strong></a> &gt; <b>Add 2D barcode image to a slide</b></p> 
+      <p><strong>Overview</strong></p> 
+      <p>This demo shows the power of image and metadata support in Simple API.</p> 
+      <p>A 2D bar code is a special image that can be scanned by a smart phone or a dedicated scanner. It could contain a URL, a books ISBN number a vCard for a person's contact, information, etc. It makes it easy to transfer information into a smartphone from a physical object, like a printed document, or a newspaper or magazine.</p> 
+      <p>In this demo, the contact information of a document's author has been put in the metadata of a presentation document, with an ODF editor, such as IBM Lotus Symphony. The contact information in the metadata is extracted with the Simple ODF API, and wrapped into JSON object. Then a RESTful web service is called to generate a 2D bar code image based on this JSON object.</p> 
+      <p>The bar code image is then added to the first slide of this presentation using the Simple API.</p> 
+      <p>This picture shows how the contact information is added to the metadata of this document.</p> 
+      <p><img src="image/demo8_metadata.bmp" alt="image1"></p> 
+      <p>This picture shows the 2D bar code image added to the first slide of this presentation document.<br><br> <img src="image/demo8_slide.bmp" alt="image2"></p> 
+      <p><strong>Code Introduction</strong></p> 
+      <p>There code of this demo is very simple. First, we load the presentation document, and extract the metadata with Simple ODF API. Second, we invoke the web service to generate the bar code image and get the URI of this image.</p> 
+      <p>Finally, we get the subtitle text box in the first slide, add an image just below of this subtitle text box. Please note how FrameRectangle is used to specify the image position.</p> 
+      <div class="codehilite">
+        <pre><code>public static void main(String[] args) {
+
+	try {
+		//load the presentation
+		PresentationDocument presentation = PresentationDocument.loadDocument("Demotemplate.odp");
+		//get the metadata
+		Meta metaData = new Meta(presentation.getMetaDom());
+		String creator = metaData.getCreator();
+		String mailto = metaData.getUserDefinedDataValue("Email");
+		String phoneno = metaData.getUserDefinedDataValue("Phone");
+
+		//invoke the 2D barcode service, and get the url
+		BarcodeImageGeneration demo = new BarcodeImageGeneration();
+		String url = demo.invokepost(creator,mailto,phoneno);
+
+		//Add the image to the first slide
+		Slide slide = presentation.getSlideByIndex(0);
+		Textbox subtitleBox = slide.getTextboxByUsage(PresentationClass.SUBTITLE).get(0);
+		FrameRectangle subtitleRect = subtitleBox.getRectangle();
+		Image image = Image.newImage(slide, new URI(url));
+		FrameRectangle imageRect = image.getRectangle();
+		imageRect.setX(subtitleRect.getX()+(subtitleRect.getWidth()-imageRect.getWidth())/2);
+		imageRect.setY(subtitleRect.getY()+subtitleRect.getHeight());
+		image.setRectangle(imageRect);
+
+		presentation.save("output.odp");
+
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+
+}
+</code></pre>
+      </div> 
+      <p><strong>Download</strong></p> 
+      <p>Powered by the Simple Java API for ODF version <a href="../downloads.html">0.5.5</a>. You can download the code of this demo from <a href="TwoDBarcodeDemo.zip">here</a>. The dependent library jslib.zip can be downloaded from <a href="http://puzzle.dl.sourceforge.net/sourceforge/xulmaker/jslib.zip">here</a>.</p> 
+    </div>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>

@@ -1,233 +1,162 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
-<head>
-  <!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../index.html">About</a></li>
-<li><a href="../../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../get-involved.html">Get Involved</a></li>
-<li><a href="../../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../../people.html">People</a></li>
-<li><a href="../../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../../javadoc.html">JavaDoc</a></li>
-<li><a href="../../website-development.html">Website Development</a></li>
-<li><a href="../../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      
-      <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p><strong><a href="index.html">Demos</a></strong> &gt; <strong>Persentation Extraction and Combination</strong></p>
-<p><strong>Overview</strong></p>
-<p>To show the operation of Presentation in Simple API, the Presentation Codmbination demo is used which combine two independent presentation documents together and extract the notes of each slide out to a Text document.</p>
-<p>Here the original presentation documents "Pres1.odp" and "Pres2.odp" are used. Pres1.odp presents some basic concepts of XML and Pres2.odp presents some basic aspects of HTML. Both of them have their own cover page with the same slide name "Cover" at the front and an End page with the same slide name "end" at the end of the document. To combine these two presentation documents together, the following steps are used here.</p>
-<p><ol>
- <li>Delete the last page of "Pres1.odp".</li>
- <li>Change the slide name of the cover page for each presentation document.</li>
- <li>Append "Pres2.odp" to the end of "Pres1.odp".</li>
- <li>Add a new slide at the front of the combined presentation document as the new cover page.</li>
- <li>Add title and notes to the new cover page.</li>
- <li>Extract the notes from each slide in the presentation document and save them into a text document.</li>
- <li>Save the combined document and the text document.</li>
- </ol></p>
-<p>The contents of the text document which contains the notes of the presentation document is shown in the following picture, where each note is identified by the corresponding slide name.</p>
-<p><img src="image/ExtractedNotes.JPG" ></p>
-<p><strong>Code Introduction</strong></p>
-<p>To generate this sample, the Presentation and Text package in Simple API will be used. The related operations contains: load the existing presentation document, append one presentation to the end of another one, delete slide in the presentation, add new slide in the presentation, get certain slide in the presentation, add new notes to the slide, create a new text document, add new paragraph in the text document, etc.</p>
-<p>Seven functions exist in the resource: main(), Getpresentation(), ProcSlide(), titleofExtractnotes(), ExtractNotes(), FillExtractnotes() and saveDocument(). Each of them will be explained briefly in the following paragraphs.</p>
-<p>First three variables should be used to hold the two presentation document and the text document.</p>
-<div class="codehilite"><pre><span></span>PresentationDocument presentationdoc;
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
+      </div>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
+        <li class="list-group-item"><a href="../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <p><strong><a href="index.html">Demos</a></strong> &gt; <strong>Persentation Extraction and Combination</strong></p> 
+      <p><strong>Overview</strong></p> 
+      <p>To show the operation of Presentation in Simple API, the Presentation Codmbination demo is used which combine two independent presentation documents together and extract the notes of each slide out to a Text document.</p> 
+      <p>Here the original presentation documents "Pres1.odp" and "Pres2.odp" are used. Pres1.odp presents some basic concepts of XML and Pres2.odp presents some basic aspects of HTML. Both of them have their own cover page with the same slide name "Cover" at the front and an End page with the same slide name "end" at the end of the document. To combine these two presentation documents together, the following steps are used here.</p> 
+      <ol> 
+        <li>Delete the last page of "Pres1.odp".</li> 
+        <li>Change the slide name of the cover page for each presentation document.</li> 
+        <li>Append "Pres2.odp" to the end of "Pres1.odp".</li> 
+        <li>Add a new slide at the front of the combined presentation document as the new cover page.</li> 
+        <li>Add title and notes to the new cover page.</li> 
+        <li>Extract the notes from each slide in the presentation document and save them into a text document.</li> 
+        <li>Save the combined document and the text document.</li> 
+      </ol> 
+      <p>The contents of the text document which contains the notes of the presentation document is shown in the following picture, where each note is identified by the corresponding slide name.</p> 
+      <img src="image/ExtractedNotes.JPG"> 
+      <p><strong>Code Introduction</strong></p> 
+      <p>To generate this sample, the Presentation and Text package in Simple API will be used. The related operations contains: load the existing presentation document, append one presentation to the end of another one, delete slide in the presentation, add new slide in the presentation, get certain slide in the presentation, add new notes to the slide, create a new text document, add new paragraph in the text document, etc.</p> 
+      <p>Seven functions exist in the resource: main(), Getpresentation(), ProcSlide(), titleofExtractnotes(), ExtractNotes(), FillExtractnotes() and saveDocument(). Each of them will be explained briefly in the following paragraphs.</p> 
+      <p>First three variables should be used to hold the two presentation document and the text document.</p> 
+      <div class="codehilite">
+        <pre><code>PresentationDocument presentationdoc;
 PresentationDocument presentationdoc2;
 TextDocument Extractednotes;
-</pre></div>
+</code></pre>
+      </div> 
+      <p>In function Getpresentation(), the two presentation documents are loaded so that they can be operated by Simple API, and the text document is created to save the extracted notes. The codes are shown below:</p> 
+      <div class="codehilite">
+        <pre><code>public void Getpresentation() {
+	try {
+		presentationdoc=PresentationDocument.loadDocument("Pres1.odp");
+		presentationdoc2=PresentationDocument.loadDocument("Pres2.odp");
+	} catch (Exception e) {
+		System.err.println("Unable to load document.");
+		System.err.println(e.getMessage());
+	}
 
-
-<p>In function Getpresentation(), the two presentation documents are loaded so that they can be operated by Simple API, and the text document is created to save the extracted notes. The codes are shown below:</p>
-<div class="codehilite"><pre><span></span>public void Getpresentation() {
-    try {
-        presentationdoc=PresentationDocument.loadDocument(&quot;Pres1.odp&quot;);
-        presentationdoc2=PresentationDocument.loadDocument(&quot;Pres2.odp&quot;);
-    } catch (Exception e) {
-        System.err.println(&quot;Unable to load document.&quot;);
-        System.err.println(e.getMessage());
-    }
-
-    try{
-        Extractednotes=TextDocument.newTextDocument();
-    } catch (Exception e) {
-        System.err.println(&quot;Unable to create text document.&quot;);
-        System.err.println(e.getMessage());
-    }
+	try{
+		Extractednotes=TextDocument.newTextDocument();
+	} catch (Exception e) {
+		System.err.println("Unable to create text document.");
+		System.err.println(e.getMessage());
+	}
 }
-</pre></div>
-
-
-<p>In function ProcSlide(), five main operations are used to process the document: delete extra slide (deleteSlideByIndex, deleteSlideByName), change slide name (setSlideName), combine these two presentations together (appendPresentation), add a new cover for the new combined document (newSlide), add title and notes for the new slide. Here the function getSlideCount() is used to get the slide number of the specified presentation document, getSlideByName()and getSlideByIndex() are used to get the specified slide, getNotesPage() and setTextContent() are used to add notes for the added slide. In order to add text to the title frame, a DrawTextBoxElement should be used to get the editable component. The codes are shown below:</p>
-<div class="codehilite"><pre><span></span>Slide slide;
+</code></pre>
+      </div> 
+      <p>In function ProcSlide(), five main operations are used to process the document: delete extra slide (deleteSlideByIndex, deleteSlideByName), change slide name (setSlideName), combine these two presentations together (appendPresentation), add a new cover for the new combined document (newSlide), add title and notes for the new slide. Here the function getSlideCount() is used to get the slide number of the specified presentation document, getSlideByName()and getSlideByIndex() are used to get the specified slide, getNotesPage() and setTextContent() are used to add notes for the added slide. In order to add text to the title frame, a DrawTextBoxElement should be used to get the editable component. The codes are shown below:</p> 
+      <div class="codehilite">
+        <pre><code>Slide slide;
 Notes notes;
 int count=presentationdoc.getSlideCount();
 presentationdoc.deleteSlideByIndex(count-1);
-//presentationdoc.deleteSlideByName(&quot;end&quot;);
+//presentationdoc.deleteSlideByName("end");
 slide=presentationdoc.getSlideByIndex(0);
-slide.setSlideName(&quot;XML Cover&quot;);
-slide=presentationdoc2.getSlideByName(&quot;Cover&quot;);
-slide.setSlideName(&quot;HTML Cover&quot;);
+slide.setSlideName("XML Cover");
+slide=presentationdoc2.getSlideByName("Cover");
+slide.setSlideName("HTML Cover");
 presentationdoc.appendPresentation(presentationdoc2);
-slide=presentationdoc.newSlide(0, &quot;Cover&quot;, SlideLayout.TITLE_ONLY);
+slide=presentationdoc.newSlide(0, "Cover", SlideLayout.TITLE_ONLY);
 notes=slide.getNotesPage();
-notes.addText(&quot;This is the cover of the new presentation document&quot;);
+notes.addText("This is the cover of the new presentation document");
 DrawTextBoxElement textbox=(DrawTextBoxElement)slide.getOdfElement().getFirstChild().getFirstChild();
-textbox.newTextPElement().setTextContent(&quot;Combined Presentation&quot;);
-</pre></div>
-
-
-<p>In function titleofExtractnotes(), the title of the text document which is used to save the notes of each slide is added. And in function ExtractNotes(), the notes of each slide will be extracted (getTextContent), the function FillExtractnotes() will be called if the notes exists. Here function getSlideByIndex() is used to obtain the corresponding slide, getSlideName() is used to obtain the name of the specified slide in order to identify the notes. The codes are shown below:</p>
-<div class="codehilite"><pre><span></span>slide=presentationdoc.getSlideByIndex(i);
+textbox.newTextPElement().setTextContent("Combined Presentation");
+</code></pre>
+      </div> 
+      <p>In function titleofExtractnotes(), the title of the text document which is used to save the notes of each slide is added. And in function ExtractNotes(), the notes of each slide will be extracted (getTextContent), the function FillExtractnotes() will be called if the notes exists. Here function getSlideByIndex() is used to obtain the corresponding slide, getSlideName() is used to obtain the name of the specified slide in order to identify the notes. The codes are shown below:</p> 
+      <div class="codehilite">
+        <pre><code>slide=presentationdoc.getSlideByIndex(i);
 String slidename=slide.getSlideName();
 notes=slide.getNotesPage();
 if(!notes.getOdfElement().getTextContent().isEmpty()){
-    String notestring=notes.getOdfElement().getTextContent().toString().trim();
-    FillExtractnotes(notestring,slidename);
+	String notestring=notes.getOdfElement().getTextContent().toString().trim();
+	FillExtractnotes(notestring,slidename);
 }
-</pre></div>
-
-
-<p>In function FillExtractnotes, the notes will be added to the text document. Here the slide name is used as the identity and is followed by the corresponding notes, function newParagraph() is used to add a new paragraph in the text document. The codes are shown below:</p>
-<div class="codehilite"><pre><span></span>OdfTextParagraph para =Extractednotes.newParagraph();
-para.setProperty(OdfParagraphProperties.MarginTop, &quot;0.25cm&quot;);
-para.setTextContent(&quot;Notes of &quot;+slidename+&quot;:&quot;);
+</code></pre>
+      </div> 
+      <p>In function FillExtractnotes, the notes will be added to the text document. Here the slide name is used as the identity and is followed by the corresponding notes, function newParagraph() is used to add a new paragraph in the text document. The codes are shown below:</p> 
+      <div class="codehilite">
+        <pre><code>OdfTextParagraph para =Extractednotes.newParagraph();
+para.setProperty(OdfParagraphProperties.MarginTop, "0.25cm");
+para.setTextContent("Notes of "+slidename+":");
 para=Extractednotes.newParagraph();
-para.setProperty(OdfParagraphProperties.TextAlign,&quot;justify&quot;);
-para.setTextContent(&quot;  &quot;+notestext);
-</pre></div>
-
-
-<p>In function saveDocument(), the new combined presentation document and the text document which contains the notes will be saved. The codes are shown below:</p>
-<div class="codehilite"><pre><span></span>public void saveDocument(){
-    try{
-        presentationdoc.save(&quot;Presentationsample.odp&quot;);
-        presentationdoc.close();
-        Extractednotes.save(&quot;Extractednotes.odt&quot;);
-        Extractednotes.close();
-    }catch(Exception e){
-        System.err.println(&quot;Unable to save document.&quot;);
-        System.err.println(e.getMessage());
-    }
+para.setProperty(OdfParagraphProperties.TextAlign,"justify");
+para.setTextContent("  "+notestext);
+</code></pre>
+      </div> 
+      <p>In function saveDocument(), the new combined presentation document and the text document which contains the notes will be saved. The codes are shown below:</p> 
+      <div class="codehilite">
+        <pre><code>public void saveDocument(){
+	try{
+		presentationdoc.save("Presentationsample.odp");
+		presentationdoc.close();
+		Extractednotes.save("Extractednotes.odt");
+		Extractednotes.close();
+	}catch(Exception e){
+		System.err.println("Unable to save document.");
+		System.err.println(e.getMessage());
+	}
 }
-</pre></div>
-
-
-<p><strong>Download</strong></p>
-<p>Powered by Simple API version <a target="_new" href="../downloads.html">0.3.5</a>.
-You can download the code of this sample from <a Href="PresentationCombination.zip">here</a>.</p>
+</code></pre>
+      </div> 
+      <p><strong>Download</strong></p> 
+      <p>Powered by Simple API version <a target="_new" href="../downloads.html">0.3.5</a>. You can download the code of this sample from <a href="PresentationCombination.zip">here</a>.</p> 
     </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
-      </div>
-    </div>   
-  </div>
-</body>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>
