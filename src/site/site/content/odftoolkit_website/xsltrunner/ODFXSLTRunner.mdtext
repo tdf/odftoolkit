@@ -19,6 +19,10 @@ If you need the earlier single jars, please access [here][2].
 Building and running **odfxsltrunner.jar** requires additional jar files.
 Please see Requirements for details.
 
+## Examples
+
+Example stylesheets can be found on the [ODFXSLTRunner Examples][8] page.
+
 ## Command Line Options
 
 **ODF XSLT Runner** is called by one of the below command lines:
@@ -107,10 +111,6 @@ also must exist in a folder **lib** next to **odfxsltrunner.jar** file, or it
 must be in the classpath. The **ODF XSLT Runner** NetBeans projects includes a
 reference to **xersesImpl.jar** in the runtime classpath which has to be
 adapted after checking out the project.
-
-## Examples
-
-Example stylesheets can be found on the [ODFXSLTRunner Examples][8] page.
 
   [1]: ODFXSLTRunnerTask.html
   [2]: http://code.google.com/a/apache-extras.org/p/odftoolkit-extra/downloads/list

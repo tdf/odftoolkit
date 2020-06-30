@@ -24,11 +24,10 @@ Please see Requirements for details.
 To use **odfxsltrunner.jar** with Ant, you have to include the following [task definition][3] into
 your buildfile, where ''<code>&lt;path&gt;</code>'' has to be replaced with the path where you have stored the **odfxsltrunnertask.jar** and **odfxsltrunner.jar** files:
 
-
+```shell
      <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask"
          classpath="<path>/odfxsltrunnertak.jar:<path>/odfxsltrunner.jar"/>
-
-
+```
 
 You can use this task definition on the top level (that is as a child element
 of the <code>&lt;project&gt;</code> element or locally within a single
