@@ -6,4 +6,8 @@ Build the project:
 
 Generate the website:
 
-    ./scripts/website-cli generate
+    ./scripts/website-cli generate <output directory>
+
+## Known Bugs
+
+* The table header in people.html does not work
