@@ -1,6 +1,6 @@
 # The ODF Toolkit
 
-Visit our website on [GitHub](./docs/index.html).
+Visit our website on [GitHub](https://tdf.github.io/odftoolkit/docs/index.html).
 
 The ODF Toolkit consists of four subcomponents:
 
@@ -22,7 +22,7 @@ The ODF Toolkit consists of four subcomponents:
     This is a tool that validates Open Document Format (ODF) files and checks them
     for conformance according to the ODF Standard. ODF Validator is available as an
     online service and as a command line tool. This page primarily describes the
-    command line tool. Please visit the [ODF Validator documentation](./docs/conformance/ODFValidator.html) for details.
+    command line tool. Please visit the [ODF Validator documentation](https://tdf.github.io/odftoolkit/docs/conformance/ODFValidator.html) for details.
 
 4. ODF XSLT Runner(xslt-runner-*.jar, xslt-runner-task-*.jar)
     ODF XSLT Runner is a small Java application that allows you to apply XSLT
@@ -30,7 +30,7 @@ The ODF Toolkit consists of four subcomponents:
     from the package. It can be used from the command line. A driver to use it
     within an Ant build file, ODF XSLT Runner Task, is also available.
 
-People interested should follow the [mail list](mailing-lists.html) to track progress.
+People interested should follow the [mail list](https://tdf.github.io/odftoolkit/docs/mailing-lists.html) to track progress.
 
 ## Getting Started
 
@@ -39,13 +39,9 @@ build system. To build ODF Toolkit, use the following command in this directory:
 
     mvn clean install
 
-The simplest way to use these modules are just put the jars files in your classpath
-directly. If you are not using maven you can see the versions of the major components for
-your release in [CHANGES.txt](CHANGES.txt).
-
 ## Recent Releases
 
-1. We have a beta release for 1.0.0 using >=JDK 9 and providing the [new collaboration API](./docs/odfdom/operations/operations.html):
+1. We have a beta release for 1.0.0 using >=JDK 9 and providing the [new collaboration API](https://tdf.github.io/odftoolkit/docs/odfdom/operations/operations.html):
 
     *RELEASE BETA (1.0.0)*:
     * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/1.0.0-BETA1/)
@@ -60,18 +56,18 @@ your release in [CHANGES.txt](CHANGES.txt).
     * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.9.0-RC1/)
     * [Simple API (deprecated)](https://repo1.maven.org/maven2/org/odftoolkit/simple-odf/0.9.0-RC1/)
 
-For more details see the [release notes](./docs/odfdom/ReleaseNotes.html).
+For more details see the [release notes](https://tdf.github.io/odftoolkit/docs/odfdom/ReleaseNotes.html).
 
 ## Documentation
 
-* The Home Page for the ODF Toolkit:./docs/index.html
-* ODFDOM Getting Start Guide: ./docs/odfdom/index.html
-* Simple API (deprecated) - Getting Start Guide: ./docs/simple/gettingstartguide.html
-* Simple API (deprecated) - Cookbook: ./docs/simple/document/cookbook/index.html
-* Simple API (deprecated) - Demos: ./docs/simple/demo/index.html
-* Simple API (deprecated) - Online JavaDoc: ./docs/simple/document/javadoc/index.html
-* ODF Validator Getting Start Guide: ./docs/conformance/ODFValidator.html
-* ODF XSLT Runner Getting Start Guide: ./docs/xsltrunner/ODFXSLTRunner.html
+* [The Home Page for the ODF Toolkit](https://tdf.github.io/odftoolkit/docs/index.html)
+* [ODFDOM Getting Start Guide](https://tdf.github.io/odftoolkit/docs/odfdom/index.html)
+* [Simple API (deprecated) - Getting Start Guide](https://tdf.github.io/odftoolkit/docs/simple/gettingstartguide.html)
+* [Simple API (deprecated) - Cookbook](https://tdf.github.io/odftoolkit/docs/simple/document/cookbook/)index.html
+* [Simple API (deprecated) - Demos](https://tdf.github.io/odftoolkit/docs/simple/demo/index.html)
+* [Simple API (deprecated) - Online JavaDoc](https://tdf.github.io/odftoolkit/docs/simple/document/javadoc/index.html)
+* [ODF Validator Getting Start Guide](https://tdf.github.io/odftoolkit/docs/conformance/ODFValidator.html)
+* [ODF XSLT Runner Getting Start Guide](https://tdf.github.io/odftoolkit/docs/xsltrunner/ODFXSLTRunner.html)
 
 ## Mailing Lists
 
