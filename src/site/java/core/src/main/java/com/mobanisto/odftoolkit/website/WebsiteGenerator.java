@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -47,11 +48,14 @@ public class WebsiteGenerator
 		Path dirResources = repo.resolve("src/site/java/resources");
 		copy(dirResources.resolve("custom.css"), dirOutput);
 
-		Path dirImages = dirContent.resolve("images");
-		copyRecursive(dirImages, dirOutput.resolve("images"));
+		List<String> extensions = Arrays.asList("png", "gif", "jpg", "zip");
+		for (String path : Arrays.asList("images", "simple", "odfdom")) {
+			copyRecursive(dirContent.resolve(path), dirOutput.resolve(path),
+					extensions);
+		}
 
 		Path dirCss = dirContent.resolve("css");
-		copyRecursive(dirCss, dirOutput.resolve("css"));
+		copyRecursive(dirCss, dirOutput.resolve("css"), null);
 
 		Path fileSideNav = dirTemplates.resolve("sidenav.mdtext");
 		markdownSidenav = loadText(fileSideNav);
@@ -81,12 +85,26 @@ public class WebsiteGenerator
 				StandardCopyOption.REPLACE_EXISTING);
 	}
 
-	private void copyRecursive(Path source, Path target) throws IOException
+	private void copyRecursive(Path source, Path target,
+			List<String> extensions) throws IOException
 	{
 		Files.createDirectories(target);
 		List<Path> files = PathUtil.findRecursive(source, "*");
 		for (Path file : files) {
 			if (!Files.isRegularFile(file)) {
+				continue;
+			}
+			boolean take = false;
+			if (extensions != null) {
+				for (String extension : extensions) {
+					String filename = file.getFileName().toString();
+					if (filename.endsWith("." + extension)) {
+						take = true;
+						break;
+					}
+				}
+			}
+			if (!take) {
 				continue;
 			}
 			Path relative = source.relativize(file);
