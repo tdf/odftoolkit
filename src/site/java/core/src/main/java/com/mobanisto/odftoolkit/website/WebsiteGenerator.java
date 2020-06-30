@@ -95,7 +95,7 @@ public class WebsiteGenerator
 			if (!Files.isRegularFile(file)) {
 				continue;
 			}
-			boolean take = false;
+			boolean take = extensions == null;
 			if (extensions != null) {
 				for (String extension : extensions) {
 					String filename = file.getFileName().toString();
