@@ -8,7 +8,7 @@ them from the package.
 
 ## Documentation
 
-In general, our online site is a great place to start when looking for documentation and other information about [ODFXSLTRunner](https://tdf.github.io/odftoolkit/docs/xsltrunner/ODFXSLTRunner.html).
+In general, our online site is a great place to start when looking for documentation and other information about [ODFXSLTRunner](./docs/xsltrunner/ODFXSLTRunner.html).
 
 ## Usage
 
@@ -20,9 +20,9 @@ Easiest way is to use the latest [Maven release](https://oss.sonatype.org/conten
             </dependency>
 
 Or just call from command line: "java -jar xslt-runner-&lt;VERSION&gt;-jar-with-dependencies.jar". 
-Detailed documentation can be found [online](https://tdf.github.io/odftoolkit/docs/xsltrunner/ODFXSLTRunner.html).
+Detailed documentation can be found [online](./docs/xsltrunner/ODFXSLTRunner.html).
 
-You will have [ODFDOM](https://tdf.github.io/odftoolkit/docs/odfdom/index.html) as a dependency.
+You will have [ODFDOM](./docs/odfdom/index.html) as a dependency.
 
 ## License
 Apache License, Version 2.0. Please see file [LICENSE.txt](LICENSE.txt).

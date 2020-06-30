@@ -10,14 +10,14 @@ level abstraction of the lower-level ODFDOM API
 
 ## Documentation
 
-* [The Home Page for the ODF Toolkit](https://tdf.github.io/odftoolkit/docs)
+* [The Home Page for the ODF Toolkit](./docs)
     
-* [ODFDOM Getting Start Guide](https://tdf.github.io/odftoolkit/docs/odfdom/index.html)
+* [ODFDOM Getting Start Guide](./docs/odfdom/index.html)
 
-* [Simple API Getting Start Guide](https://tdf.github.io/odftoolkit/docs/simple/index.html)   
+* [Simple API Getting Start Guide](./docs/simple/index.html)   
        
-* [Simple API Cookbook](https://tdf.github.io/odftoolkit/docs/simple/document/cookbook/index.html)
+* [Simple API Cookbook](./docs/simple/document/cookbook/index.html)
     
-* [Simple API Demos](https://tdf.github.io/odftoolkit/docs/simple/demo/index.html)
+* [Simple API Demos](./docs/simple/demo/index.html)
     
-* [Simple API Online JavaDoc](https://tdf.github.io/odftoolkit/docs/api/simple/index.html)
+* [Simple API Online JavaDoc](./docs/api/simple/index.html)

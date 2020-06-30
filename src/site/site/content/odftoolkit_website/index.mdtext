@@ -1,16 +1,19 @@
 # The ODF Toolkit  
 
+Visit our latest documentation on [GitHub](./docs/index.html).
+People interested should follow the [mail list](mailing-lists.html) to track progress.
+
 ## Mission Statement
 
 The ODF Toolkit is a set of Java modules that allow programmatic creation,
-scanning and manipulation of [Open Document Format][1], which [is being developed under OASIS][2] (ISO/IEC 26300 == ODF) documents. Unlike other approaches which rely on runtime manipulation
+scanning and manipulation of [Open Document Format][http://opendocument.xml.org/], which [is being developed under OASIS][https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office] (ISO/IEC 26300 == ODF) documents. Unlike other approaches which rely on runtime manipulation
 of heavy-weight editors via an automation interface, the ODF Toolkit
 is lightweight and ideal for server use.
 
 ## Components of the ODF Toolkit (Java)
 
 1. **Software access to ODF** is achievable by [ODFDOM](odfdom/index.html).
-With 1.0.0 the basics of collaboration functionality - [the change/operation concept]](https://tdf.github.io/odftoolkit/docs/odfdom/operations/operations.html) were added.
+With 1.0.0 the basics of collaboration functionality - [the change/operation concept]](./docs/odfdom/operations/operations.html) were added.
 
 2. **ODF Conformance** can be tested via the [ODF Validator](conformance/OdfValidator.html).
 Offered as command-line tool (executable JAR) or server component - via Web application archive (WAR) like [here](https://odfvalidator.org/).
@@ -20,9 +23,7 @@ This functionality is also available from [ANT](https://ant.apache.org/) using o
 
 4. **Creating Software Artefacts from the ODF grammar** is possible via the [generator project](2DO.html)
 
-## Updates
-
-People interested should also follow the [mail list](mailing-lists.html) to track progress.
+## History
 
 ### 2020-06-28 - ODF Toolkit releases of 0.9.0 and 1.0.0-rc
 
@@ -34,5 +35,3 @@ See the [downloads page](downloads.html) for more details on the releases.
 
 The ODF Toolkit team is pleased to announce the reuniation with LibreOffice.
 
-[1]: http://opendocument.xml.org/
-[2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office

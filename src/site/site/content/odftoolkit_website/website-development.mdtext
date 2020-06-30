@@ -81,7 +81,7 @@ Using your favorite editors edit the site content, templates.
 ### Build the site
 
 Run the `build-site.sh` script to build the markdown to HTML and copy all resources into the odftoolkit/docs directory.
-After the changes have been merged into the master branch, all changes will become visible at <https://tdf.github.io/odftoolkit/docs/> as our GitHub project has enabled this feature.
+After the changes have been merged into the master branch, all changes will become visible at <./docs/> as our GitHub project has enabled this feature.
 **NOTE:**
 Before commiting, you should test if all content of the HTML pages have been created - by clicking on every link on the local page. Often ODFDOM or Validator page were empty.
 

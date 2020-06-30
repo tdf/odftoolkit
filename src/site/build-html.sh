@@ -1,14 +1,16 @@
 #!/bin/bash
 
 echo "Creating HTML from MarkDown as described"
-echo "  in https://tdf.github.io/odftoolkit/website-development.html"
+echo "  in ./website-development.html"
 # Start the Python Markdown daemon. (tested with Python 2.7.16)
 export MARKDOWN_SOCKET=`pwd`/markdown.socket PYTHONPATH=`pwd`
 python cms/build/markdownd.py
-echo 
-echo 1. Copy README.md files to site source.. (avoiding overlapping documentation)
-#  Copy README.md files to site source..
-cp ../../README.md ./site/content/odftoolkit_website/introduction.mdtext
+echo 1. Copying actual README.md & related files to site
+# root README.md and related fiels becomding index.mdtext
+#cp ../../README.md ./site/content/odftoolkit_website/introduction.mdtext #2DO rename to index.mdtext
+cp ../../LICENSE ./site/content/odftoolkit_website/
+cp ../../NOTICE ./site/content/odftoolkit_website/
+cp ../../KEYS ./site/content/odftoolkit_website/
 
 echo 2. Built the site..
 #  Build the site
@@ -26,10 +28,10 @@ find www -mindepth 8 -maxdepth 8 -type f -print0 -name *.html | xargs -0 sed -i 
 find www -mindepth 9 -maxdepth 9 -type f -print0 -name *.html | xargs -0 sed -i -e 's+/odftoolkit_website+../../../../../..+g' 2>/dev/null
 
 echo 4. Backup none-site related content
-mv  ../../docs/api  ../..
-mv  ../../docs/presentations  ../..
-mv  ../../docs/odf1.2  ../..
-mv  ../../docs/odf1.3  ../..
+mv ../../docs/api ../..
+mv ../../docs/docs/presentations ../..
+mv ../../docs/odf1.2 ../..
+mv ../../docs/odf1.3 ../..
 
 echo 5. Remove all existing content
 rm -rf ../../docs/*
@@ -39,11 +41,19 @@ mv ./www/content/odftoolkit_website/* ../../docs/
 
 echo 7. Restore none-site related content
 mv ../../api ../../docs
+mv ../../presentations ../../docs/docs/
+mv ../../odf1.2 ../../docs
+mv ../../odf1.3 ../../docs
 
-echo 8. Removed temporary files and directories
+echo 8. Remove temporary files and directories
 rm markdown.socket
 rm -rf www
 rm -rf cms/build/*.pyc
+# root README.md and related fiels becomding index.mdtext
+rm ./site/content/odftoolkit_website/introduction.mdtext #2DO rename
+rm ./site/content/odftoolkit_website/LICENSE
+rm ./site/content/odftoolkit_website/NOTICE
+rm ./site/content/odftoolkit_website/KEYS
 
 echo 
 echo Now you may review the generated website in the '"<ODF_TOOLKIT>/docs/" directory'!
