@@ -1,193 +1,148 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
-<head>
-  <!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../../../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../../index.html">About</a></li>
-<li><a href="../../../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../../../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../../../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../../get-involved.html">Get Involved</a></li>
-<li><a href="../../../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../../../people.html">People</a></li>
-<li><a href="../../../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../../../javadoc.html">JavaDoc</a></li>
-<li><a href="../../../website-development.html">Website Development</a></li>
-<li><a href="../../../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      
-      <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p><strong><a href="../index.html">Documents</a></strong> &gt; <strong><a href="index.html">Cookbook</a></strong> &gt;<strong><a href="Cell Range.html">Cell Range</a></strong>
-<div class="navigation">
- <ul>
-  <li><a href="Cell.html">previous</a></li>
-  <li><a href="Charts.html">next</a></li>
- </ul>
-</div>
-<br/>
-<br/><strong><a href="#Get CellRange" >Get CellRange</a></strong>
-<div class="bodytext">
-You can get cell range by providing start and end index of the column and row,or just provide start and end address of the cell(if you are using the spreadsheet.)
-</div>
-<br/><pre class='code' id="code0">
-        <span class='javaclass'>CellRange</span> cellRange = table.getCellRangeByPosition(1, 0, 2, 0);<br/>
-        <span class='javaclass'>CellRange</span> cellRangeAdd = table.getCellRangeByPosition("$E1","$E6");<br/>
-</pre>
-<br/><br/><strong><a href="#Merge Text Table" >Merge Text Table</a></strong>
-<div class="bodytext">
-The code below merges all of the selected cells into one:
-</div>
-<br/><pre class='code' id="code1">
-        <span class='javaclass'>Table</span> table1 = document.getTableByName("Table1");<br/>
-        <span class='javaclass'>CellRange</span> cellrange = table1.getCellRangeByPosition(0, 0, table1.getColumnCount()-1, table1.getRowCount()-1);<br/>
-        cellRange.merge();<br/>
-</pre>
-<br/><br/><strong><a href="#Merge Text Column" >Merge Text Column</a></strong>
-<div class="bodytext">
-The code below shows how to merge the cells of the first column into one ：
-</div>
-<br/><pre class='code' id="code2">
-            table1 = document.getTableByName("Table1");<br/>
-            <span class='javaclass'>CellRange</span> firstColumn = table1.getCellRangeByPosition(0, 0, 0, table1.getRowCount()-1);<br/>
-            firstColumn.merge();<br/>
-</pre>
-<br/><br/><strong><a href="#Merge Text Row" >Merge Text Row</a></strong>
-<div class="bodytext">
-The code below shows how to merge the cells of the first 2 rows into one ：
-</div>
-<br/><pre class='code' id="code3">
-        table1 = document.getTableByName("Table1");<br/>
-        <span class='basic'>int</span> rowCount = table1.getRowCount();<br/>
-                <span class='javaclass'>CellRange</span> firstTwoRow = table1.getCellRangeByPosition(0, 0, table1.getColumnCount()-1, 1);<br/>
-                firstTwoRow.merge();<br/>
-</pre>
-<br/><br/><strong><a href="#Merge SpreadSheet" >Merge SpreadSheet</a></strong>
-<div class="bodytext">
-Merge a spreadsheet's cell is the same as text document.Especially,when getting the cell range of spreadsheet,you can use special address instead of index.
-</div>
-<br/><pre class='code' id="code4">
-        <span class='javaclass'>Table</span> sheet1 = document.getTableByName("Sheet1");<br/>
-        <span class='javaclass'>CellRange</span> cellRange2 = sheet1.getCellRangeByPosition("$E1","$E6");<br/>
-        cellRange2.setCellRangeName("<span class='javaclass'>TimeCellRange</span>");<br/>
-        cellRange2.merge(); <br/>
-</pre>
-<br/><br/>
-<div class="navigation">
- <ul>
-  <li><a href="Cell.html">previous</a></li>
-  <li><a href="Charts.html">next</a></li>
-  <li><a href="#">top</a></li>
- </ul>
-</div>
-<link type="text/css" rel="stylesheet" href="cookbook.css"/></p>
-    </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../../../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
       </div>
-    </div>   
-  </div>
-</body>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../../../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../../../simple/index.html">Simple API (deprecated)</a></li> 
+        <li class="list-group-item"><a href="../../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../../../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../../../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../../../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../../../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../../../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../../../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <p><strong><a href="../index.html">Documents</a></strong> &gt; <strong><a href="index.html">Cookbook</a></strong> &gt;<strong><a href="Cell Range.html">Cell Range</a></strong></p> 
+      <div class="navigation"> 
+        <ul> 
+          <li><a href="Cell.html">previous</a></li> 
+          <li><a href="Charts.html">next</a></li> 
+        </ul> 
+      </div> 
+      <br> 
+      <br>
+      <strong><a href="#Get CellRange">Get CellRange</a></strong> 
+      <div class="bodytext">
+         You can get cell range by providing start and end index of the column and row,or just provide start and end address of the cell(if you are using the spreadsheet.) 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code0">
+	    <span class="javaclass">CellRange</span> cellRange = table.getCellRangeByPosition(1, 0, 2, 0);<br>
+	    <span class="javaclass">CellRange</span> cellRangeAdd = table.getCellRangeByPosition("$E1","$E6");<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Merge Text Table">Merge Text Table</a></strong> 
+      <div class="bodytext">
+         The code below merges all of the selected cells into one: 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code1">
+	    <span class="javaclass">Table</span> table1 = document.getTableByName("Table1");<br>
+	    <span class="javaclass">CellRange</span> cellrange = table1.getCellRangeByPosition(0, 0, table1.getColumnCount()-1, table1.getRowCount()-1);<br>
+	    cellRange.merge();<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Merge Text Column">Merge Text Column</a></strong> 
+      <div class="bodytext">
+         The code below shows how to merge the cells of the first column into one ： 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code2">
+	    	table1 = document.getTableByName("Table1");<br>
+	    	<span class="javaclass">CellRange</span> firstColumn = table1.getCellRangeByPosition(0, 0, 0, table1.getRowCount()-1);<br>
+	    	firstColumn.merge();<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Merge Text Row">Merge Text Row</a></strong> 
+      <div class="bodytext">
+         The code below shows how to merge the cells of the first 2 rows into one ： 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code3">
+		table1 = document.getTableByName("Table1");<br>
+		<span class="basic">int</span> rowCount = table1.getRowCount();<br>
+    	        <span class="javaclass">CellRange</span> firstTwoRow = table1.getCellRangeByPosition(0, 0, table1.getColumnCount()-1, 1);<br>
+    	        firstTwoRow.merge();<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Merge SpreadSheet">Merge SpreadSheet</a></strong> 
+      <div class="bodytext">
+         Merge a spreadsheet's cell is the same as text document.Especially,when getting the cell range of spreadsheet,you can use special address instead of index. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code4">
+		<span class="javaclass">Table</span> sheet1 = document.getTableByName("Sheet1");<br>
+		<span class="javaclass">CellRange</span> cellRange2 = sheet1.getCellRangeByPosition("$E1","$E6");<br>
+		cellRange2.setCellRangeName("<span class="javaclass">TimeCellRange</span>");<br>
+		cellRange2.merge(); <br>
+</pre>
+      </div> 
+      <br>
+      <br> 
+      <div class="navigation"> 
+        <ul> 
+          <li><a href="Cell.html">previous</a></li> 
+          <li><a href="Charts.html">next</a></li> 
+          <li><a href="#">top</a></li> 
+        </ul> 
+      </div> 
+      <link type="text/css" rel="stylesheet" href="cookbook.css"> 
+    </div>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>

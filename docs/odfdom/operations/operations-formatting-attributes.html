@@ -1,2189 +1,2047 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
-<head>
-  <!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../index.html">About</a></li>
-<li><a href="../../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../get-involved.html">Get Involved</a></li>
-<li><a href="../../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../../people.html">People</a></li>
-<li><a href="../../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../../javadoc.html">JavaDoc</a></li>
-<li><a href="../../website-development.html">Website Development</a></li>
-<li><a href="../../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      
-      <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="formatting-attributes-operations">Formatting Attributes (Operations)<a class="headerlink" href="#formatting-attributes-operations" title="Permanent link">&para;</a></h1>
-<p>Formatting attributes are used to modify the appearance of a specific component in the document. An object of type <em>Attributes</em> contains a variable number of attribute values, mapped by the attribute name. An attribute value can be an atomic value, an array, or an object of any type described above.</p>
-<p>The following chapters describe all generic formatting attributes, divided by their <em>attribute type</em>. Unless specified differently, the values of all measurement attributes (sizes, margins, indentations, etc.) are in 1/100 of millimeters.</p>
-<h2 id="documentattributes">DocumentAttributes<a class="headerlink" href="#documentattributes" title="Permanent link">&para;</a></h2>
-<p>These attributes are only supported in the <a href="operations.html#documentlayout">documentLayout</a> operation.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Application</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>zoom</code></td>
-<td>Object</td>
-<td value:100="value:100"></td>
-<td>Document zoom factor, currently only as percentage in the property <code>value</code>.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>defaultTabStop</code></td>
-<td>Integer</td>
-<td>1270</td>
-<td>Default interval of tab stops (1/2 inch).</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="pageattributes">PageAttributes<a class="headerlink" href="#pageattributes" title="Permanent link">&para;</a></h2>
-<p>Page formatting attributes will be applied to page elements.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>width</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Page width, including all margins.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>height</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Page height, including all margins.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>orientation</code></td>
-<td>Enum</td>
-<td>“portrait”</td>
-<td>all</td>
-<td>Page orientation (one of “portrait”, “landscape”). This is NOT supported in Presentation.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marginLeft</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Distance from the left page border to the left border of the content area.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marginRight</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Distance from the right page border to the right border of the content area.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marginTop</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Distance from the top page border to the top border of the content area.</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>marginBottom</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Distance from the bottom page border to the bottom border of the content area.</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>marginHeader</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Distance from the top page border to the top border of the header.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marginFooter</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Distance from the bottom page border to the bottom border of the footer.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>firstPage</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>all</td>
-<td>Whether to use separate header/footer settings for the first page.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>evenOddPages</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>all</td>
-<td>Whether to use separate header/footer settings for even and odd pages, and mirror margin settings accordingly.</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><em>Notes</em>:</p>
-<p>(1) The top and bottom page margin will include a header or footer if existing. If the header/footer is too large to fit into the empty space, the effective size of the page content area has to be reduced to prevent the header/footer from overlapping with the page content area.</p>
-<h2 id="paragraphattributes">ParagraphAttributes<a class="headerlink" href="#paragraphattributes" title="Permanent link">&para;</a></h2>
-<p>Paragraph formatting attributes will be applied to paragraph elements in a text document.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>alignment</code></td>
-<td>Enum</td>
-<td>“left”</td>
-<td>all</td>
-<td>Horizontal text alignment. One of “left”, “center”, “right”, or “justify”.</td>
-</tr>
-<tr>
-<td><code>lineHeight</code></td>
-<td><a href="#lineheight">LineHeight</a></td>
-<td type:_percent_="type:“percent”," value:100="value:100"></td>
-<td>all</td>
-<td>Relative or absolute text line height.</td>
-</tr>
-<tr>
-<td><code>fillColor</code></td>
-<td><a href="#color">Color</a></td>
-<td>Color.AUTO</td>
-<td>all</td>
-<td>Paragraph background color.</td>
-</tr>
-<tr>
-<td><code>outlineLevel</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>The outline level specifies an integer which defines the level of the associated text. This level shall not affect the appearance of the text in the document, but shall be used to calculate the TOC field</td>
-</tr>
-<tr>
-<td><code>listLevel</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Level of indention</td>
-</tr>
-<tr>
-<td><code>listId</code></td>
-<td>String</td>
-<td>””</td>
-<td>all</td>
-<td>Numbering definition instance reference. Can be shared by multiple lists.</td>
-</tr>
-<tr>
-<td><code>listStyle</code></td>
-<td>String</td>
-<td>””</td>
-<td>all</td>
-<td>ID of the list style sheet.</td>
-</tr>
-<tr>
-<td><code>listStart</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Indicates if the paragraph is at the start of a new list, require new numbering.</td>
-</tr>
-<tr>
-<td><code>tabStops</code></td>
-<td>Array&lt;<a href="#tabstop">TabStop</a>></td>
-<td>[]</td>
-<td>all</td>
-<td>Tabstop definitions</td>
-</tr>
-<tr>
-<td><code>borderLeft</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Left border</td>
-</tr>
-<tr>
-<td><code>borderRight</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Right border</td>
-</tr>
-<tr>
-<td><code>borderTop</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Top border</td>
-</tr>
-<tr>
-<td><code>borderBottom</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Bottom</td>
-</tr>
-<tr>
-<td><code>borderInside</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Border between paragraphs with same borders and margins</td>
-</tr>
-<tr>
-<td><code>indentLeft</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>left margin</td>
-</tr>
-<tr>
-<td><code>indentRight</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>right paragraph margin</td>
-</tr>
-<tr>
-<td><code>indentFirstLine</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>first line indent, negative values represent hanging indents</td>
-</tr>
-<tr>
-<td><code>marginTop</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>top margin</td>
-</tr>
-<tr>
-<td><code>marginBottom</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>bottom margin</td>
-</tr>
-<tr>
-<td><code>pageBreakBefore</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>all</td>
-<td>specifies that a page break is inserted before this paragraph, this attribute is not beeing inherited by followed paragraphs</td>
-</tr>
-<tr>
-<td><code>contextualSpacing</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>all</td>
-<td>ignore spacing between paragraph with same paragraph style</td>
-</tr>
-<tr>
-<td><code>listStartValue</code></td>
-<td>Integer</td>
-<td>-1</td>
-<td>element</td>
-<td>Start index of the list level</td>
-</tr>
-<tr>
-<td><code>listLabelHidden</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>ODF is able to have multiple lists in a single list item. To emulate this, all paragraphs following the first have to use this property to disable the list.</td>
-</tr>
-<tr>
-<td><code>nextStyleId</code></td>
-<td>String</td>
-<td>”” (no style sheet)</td>
-<td>style</td>
-<td>The identifier of the paragraph style sheet that should be used in next paragraph (Enter key at end of paragraph).</td>
-</tr>
-</tbody>
-</table>
-<h2 id="characterattributes">CharacterAttributes<a class="headerlink" href="#characterattributes" title="Permanent link">&para;</a></h2>
-<p>Character attributes will be applied to any document components containing text.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>fontName</code></td>
-<td>String</td>
-<td>”+mn-lt”</td>
-<td>all</td>
-<td>Font name.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>fontNameEastAsia</code></td>
-<td>String</td>
-<td>””</td>
-<td>all</td>
-<td>Font name for East Asia unicode characters.</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>fontNameComplex</code></td>
-<td>String</td>
-<td>””</td>
-<td>all</td>
-<td>Font name for complex unicode characters.</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>fontNameSymbol</code></td>
-<td>String</td>
-<td>””</td>
-<td>all</td>
-<td>Font name for symbol characters in the private unicode range F000 to F0FF.</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td><code>fontSize</code></td>
-<td>Number</td>
-<td>11</td>
-<td>all</td>
-<td>Font size, <strong>in points</strong>.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>bold</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>all</td>
-<td>Font weight.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>italic</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>all</td>
-<td>Font slant.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>underline</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>all</td>
-<td>Text underline (single line only).</td>
-<td></td>
-</tr>
-<tr>
-<td><code>strike</code></td>
-<td>Enum</td>
-<td>“none”</td>
-<td>all</td>
-<td>Font strike through, one of “none”, “single”, or “double”.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>color</code></td>
-<td><a href="#color">Color</a></td>
-<td>Color.AUTO</td>
-<td>all</td>
-<td>Text color</td>
-<td></td>
-</tr>
-<tr>
-<td><code>fillColor</code></td>
-<td><a href="#color">Color</a></td>
-<td>Color.AUTO</td>
-<td>all</td>
-<td>Text background color.</td>
-<td>(3)</td>
-</tr>
-<tr>
-<td><code>language</code></td>
-<td>String</td>
-<td>””</td>
-<td>all</td>
-<td>Specifies the language of the text, e.g. for spell checker.</td>
-<td>(3)</td>
-</tr>
-<tr>
-<td><code>noProof</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>all</td>
-<td>Specifies if spelling or grammar errors are to be reported.</td>
-<td>(3)</td>
-</tr>
-<tr>
-<td><code>url</code></td>
-<td>String</td>
-<td>””</td>
-<td>element</td>
-<td>The URL of a hyperlink.</td>
-<td>(3)</td>
-</tr>
-<tr>
-<td><code>anchor</code></td>
-<td>String</td>
-<td>””</td>
-<td>element</td>
-<td>The anchor of a hyperlink.</td>
-<td>(3)</td>
-</tr>
-<tr>
-<td><code>baseline</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Character baseline in percent, if greater than 0 then the character is superscript otherwise if lower than 0 the character is subscript.</td>
-<td>(3)</td>
-</tr>
-<tr>
-<td><code>caps</code></td>
-<td>Enum</td>
-<td>“none”</td>
-<td>all</td>
-<td>Character capture, “none”, “all”, or “small”.</td>
-<td>(3)</td>
-</tr>
-<tr>
-<td><code>vertAlign</code></td>
-<td>Enum</td>
-<td>“baseline”</td>
-<td>all</td>
-<td>Character escapement, one of “baseline”, “sub”, or “super”.</td>
-<td>(3)</td>
-</tr>
-</tbody>
-</table>
-<p><em>Notes</em>:</p>
-<p>(1) Presentation only. Only added for roundtrip (copy/paste, delete/undo, …).</p>
-<p>(2) Presentation only. Added to the attributes and add the fontName e.g. 'Wingdings' to the CSS font-family attribute.</p>
-<p>(3) May not be supported by all components.</p>
-<h2 id="tableattributes">TableAttributes<a class="headerlink" href="#tableattributes" title="Permanent link">&para;</a></h2>
-<p>Table formatting attributes will be applied to table elements in a text document.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>width</code></td>
-<td>Integer</td>
-<td>String</td>
-<td>“auto”</td>
-<td>all</td>
-<td>Table width. If set to “auto”, the table is sized automatically according to the page size.</td>
-</tr>
-<tr>
-<td><code>tableGrid</code></td>
-<td>Array<Integer></td>
-<td>[]</td>
-<td>element</td>
-<td>Grid column widths in logical units.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>fillColor</code></td>
-<td><a href="#color">Color</a></td>
-<td>Color.AUTO</td>
-<td>all</td>
-<td>Background color</td>
-<td></td>
-</tr>
-<tr>
-<td><code>borderTop</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Top table border</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>borderBottom</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Bottom table border</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>borderLeft</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Left table border</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>borderRight</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Right table border</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>borderInsideHor</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Inner horizontal borders</td>
-<td></td>
-</tr>
-<tr>
-<td><code>borderInsideVert</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Inner vertical borders</td>
-<td></td>
-</tr>
-<tr>
-<td><code>paddingTop</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Top cell padding</td>
-<td></td>
-</tr>
-<tr>
-<td><code>paddingBottom</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Bottom cell padding</td>
-<td></td>
-</tr>
-<tr>
-<td><code>paddingLeft</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Left cell padding</td>
-<td></td>
-</tr>
-<tr>
-<td><code>paddingRight</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Right cell padding</td>
-<td></td>
-</tr>
-<tr>
-<td><code>pageBreakBefore</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>all</td>
-<td>specifies that a page break is inserted before this table, this attribute is not beeing inherited by followed table (ODF only feature, required by LO)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>exclude</code></td>
-<td>Array<Enum></td>
-<td>[]</td>
-<td>element</td>
-<td>String array defining which conditional table attribute sets are <strong>not</strong> used from the table style sheet. See next table for details.</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Each table style sheet contains multiple attribute sets, mapped by conditional keys which describe a specific area in the table. See <a href="operations-formatting-attribute-sets.html#tablestylesheetattributeset">TableStyleSheetAttributeSet</a> for details. The attribute <code>exclude</code> specifies which of these attribute sets will be excluded from the table.</p>
-<table class="table">
-<thead>
-<tr>
-<th><code>exclude</code> key</th>
-<th>Excluded conditional attribute sets</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>“firstRow”</td>
-<td><code>firstRow</code>, <code>northWestCell</code>, <code>northEastCell</code></td>
-<td>Ignore formatting defined for the first row and the top corner cells of the table.</td>
-</tr>
-<tr>
-<td>“lastRow”</td>
-<td><code>lastRow</code>, <code>southWestCell</code>, <code>southEastCell</code></td>
-<td>Ignore formatting defined for the last row and the bottom corner cells of the table.</td>
-</tr>
-<tr>
-<td>“firstCol”</td>
-<td><code>firstCol</code>, <code>northWestCell</code>, <code>southWestCell</code></td>
-<td>Ignore formatting defined for the left column inand the left corner cells of the table.</td>
-</tr>
-<tr>
-<td>“lastCol”</td>
-<td><code>lastCol</code>, <code>northEastCell</code>, <code>southEastCell</code></td>
-<td>Ignore formatting defined for the right column and the right corner cells of the table.</td>
-</tr>
-<tr>
-<td>“bandsHor”</td>
-<td><code>band1Hor</code>, <code>band2Hor</code></td>
-<td>Ignore formatting defined for the inner rows of the table.</td>
-</tr>
-<tr>
-<td>“bandsVert”</td>
-<td><code>band1Vert</code>, <code>band2Vert</code></td>
-<td>Ignore formatting defined for the inner columns of the table.</td>
-</tr>
-</tbody>
-</table>
-<p><em>Notes</em>:</p>
-<p>(1) Applies to the border of the whole table only.</p>
-<h2 id="tablerowattributes">TableRowAttributes<a class="headerlink" href="#tablerowattributes" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>row</code>|</p>
-<p>Table row formatting attributes will be applied to row elements of tables in a text document.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>height</code></td>
-<td>Integer</td>
-<td>String</td>
-<td>“auto”</td>
-<td>all</td>
-</tr>
-<tr>
-<td><code>headerRow</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>all</td>
-<td>Specifies if this is a header row that is repeated on each page.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="tablecellattributes">TableCellAttributes<a class="headerlink" href="#tablecellattributes" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>cell</code>|</p>
-<p>Table cell formatting attributes will be applied to cell elements in table rows in a text document.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>gridSpan</code></td>
-<td>Integer</td>
-<td>1</td>
-<td>element</td>
-<td>The number of columns spanned by the cell.</td>
-</tr>
-<tr>
-<td><code>fillColor</code></td>
-<td><a href="#color">Color</a></td>
-<td>Color.AUTO</td>
-<td>all</td>
-<td>Cell background color.</td>
-</tr>
-<tr>
-<td><code>fillType</code></td>
-<td>enum</td>
-<td>“solid”</td>
-<td>all</td>
-<td>(spreadsheet &amp; presentation only) to support transparent cell backgrounds. If full fill &amp; line attribute sets are supported, this property has to be removed. values of this property are “none”, “solid”, “gradient”, “bitmap”</td>
-</tr>
-<tr>
-<td><code>borderTop</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Top cell border.</td>
-</tr>
-<tr>
-<td><code>borderBottom</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Bottom cell border.</td>
-</tr>
-<tr>
-<td><code>borderLeft</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Left cell border.</td>
-</tr>
-<tr>
-<td><code>borderRight</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>all</td>
-<td>Right cell border.</td>
-</tr>
-<tr>
-<td><code>borderInsideHor</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>style</td>
-<td>Inner horizontal borders for conditional style attributes.</td>
-</tr>
-<tr>
-<td><code>borderInsideVert</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>style</td>
-<td>Inner vertical borders for conditional style attributes.</td>
-</tr>
-<tr>
-<td><code>paddingTop</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Top cell padding.</td>
-</tr>
-<tr>
-<td><code>paddingBottom</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Bottom cell padding.</td>
-</tr>
-<tr>
-<td><code>paddingLeft</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Left cell padding.</td>
-</tr>
-<tr>
-<td><code>paddingRight</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Right cell padding.</td>
-</tr>
-<tr>
-<td><code>alignVert</code></td>
-<td>Enum</td>
-<td>“top”</td>
-<td>all</td>
-<td>This property describes the vertical cell alignment, its value can be “top”, “bottom”, “center”, “justified” or “distributed”</td>
-</tr>
-<tr>
-<td><code>mergeVert</code></td>
-<td>Enum</td>
-<td>“noMerge</td>
-<td>all</td>
-<td>This property describes the vertical merging of table cells. Its value can be “restart”, “continue” or “noMerge”</td>
-</tr>
-</tbody>
-</table>
-<h2 id="drawingattributes">DrawingAttributes<a class="headerlink" href="#drawingattributes" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="#drawing-attributes-text-document">Drawing Attributes - Text Document</a></li>
-<li><a href="#drawing-attributes-general">Drawing Attributes - General</a></li>
-</ul>
-<h2 id="drawing-attributes-text-document">Drawing Attributes - Text Document<a class="headerlink" href="#drawing-attributes-text-document" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>drawing</code></p>
-<p>Drawing formatting attributes will be applied to drawing objects embedded in the document.</p>
-<p>Drawing formatting attributes will be applied to drawing objects embedded in the text document. Additionally to the attributes described in <a href="#drawingattributes">DrawingAttributes</a>, text documents support the following attributes:</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>marginLeft</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Left margin to text contents.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marginRight</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Right margin to text contents.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marginTop</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Top margin to text contents.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>marginBottom</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Bottom margin to text contents.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>borderTop</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>element</td>
-<td>Top border of the drawing object.</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>borderBottom</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>element</td>
-<td>Bottom border of the drawing object.</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>borderLeft</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>element</td>
-<td>Left border of the drawing object.</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>borderRight</code></td>
-<td><a href="#border">Border</a></td>
-<td>Border.NONE</td>
-<td>element</td>
-<td>Right border of the drawing object.</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>inline</code></td>
-<td>Boolean</td>
-<td>true</td>
-<td>all</td>
-<td>If true, the drawing object is embedded as character, otherwise the drawing floats in its parent element and is optionally wrapped by the text.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>anchorHorBase</code></td>
-<td>Enum</td>
-<td>“margin”</td>
-<td>all</td>
-<td>Horizontal anchor mode. (see <strong>horizonallAnchorMode</strong> below)</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td><code>anchorHorAlign</code></td>
-<td>Enum</td>
-<td>“left”</td>
-<td>all</td>
-<td>Horizontal anchor position. (see <strong>horizontalAnchorPosition</strong> below)</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td><code>anchorHorOffset</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Horizontal position offset (only used if <code>anchorHorAlign</code> is set to “offset”).</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td><code>anchorVertBase</code></td>
-<td>Enum</td>
-<td>“margin”</td>
-<td>all</td>
-<td>Vertical anchor mode. (see <strong>verticalAnchorMode</strong> below)</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td><code>anchorVertAlign</code></td>
-<td>Enum</td>
-<td>“top”</td>
-<td>all</td>
-<td>Vertical anchor position. (see <strong>verticalAnchorPosition</strong> below)</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td><code>anchorVertOffset</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Vertical position offset (only used if <code>anchorVertAlign</code> is set to “offset”).</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td><code>anchorPageNumber</code></td>
-<td>Integer</td>
-<td></td>
-<td>element</td>
-<td>In ODT documents, if the drawing is page anchored then this attribute specifies the page that is anchored to. This attribute is optional.</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td><code>anchorLayerOrder</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Layer position (z-index)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>anchorBehindDoc</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>all</td>
-<td>Layer position in behind text (true) or in front of text (false). this feature is not supported yet, but it is important for “anchorLayerOrder”</td>
-<td></td>
-</tr>
-<tr>
-<td><code>textWrapMode</code></td>
-<td>Enum</td>
-<td>“topAndBottom”</td>
-<td>all</td>
-<td>Text wrapping mode. (see <strong>textWrapModeType</strong></td>
-<td>(2)</td>
-</tr>
-<tr>
-<td><code>textWrapSide</code></td>
-<td>Enum</td>
-<td>“both”</td>
-<td>all</td>
-<td>Sides where text wraps around the drawing object (only used if <code>textWrapMode</code> is set to “square”, “tight”, or “through”). (see <strong>textWrapSideType</strong>)</td>
-<td>(2)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>horizontlaAnchorMode</strong>:</p>
-<ul>
-<li>“margin”</li>
-<li>“page”</li>
-<li>“column”</li>
-<li>“character”</li>
-<li>“leftMargin”</li>
-<li>“rightMargin”</li>
-<li>“insideMargin”</li>
-<li>“outsideMargin”</li>
-</ul>
-<p><strong>horizontalAnchorPosition</strong>:</p>
-<ul>
-<li>“left” - The drawing object is attached to the left border of the anchor component.</li>
-<li>“right” - The drawing object is attached to the right border of the anchor component.</li>
-<li>“center” - The drawing object is attached in the middle of the anchor component.</li>
-<li>“inside”</li>
-<li>“outside”</li>
-<li>“offset” - The distance between left anchor position and drawing object is specified by the property <code>anchorHorOffset</code>.</li>
-</ul>
-<p><strong>verticalAnchorMode</strong>:</p>
-<ul>
-<li>“margin”</li>
-<li>“page”</li>
-<li>“paragraph”</li>
-<li>“line”</li>
-<li>“topMargin”</li>
-<li>“bottomMargin”</li>
-<li>“insideMargin”</li>
-<li>“outsideMargin”</li>
-</ul>
-<p><strong>verticalAnchorPosition</strong>:</p>
-<ul>
-<li>“top” - The drawing object is attached to the top border of the anchor component.</li>
-<li>“bottom” - The drawing object is attached to the bottom border of the anchor component.</li>
-<li>“center” - The drawing object is attached in the middle of the anchor component.</li>
-<li>“inside”</li>
-<li>“outside”</li>
-<li>“offset” - The distance between top anchor position and drawing object is specified by the property <code>anchorVertOffset</code>.</li>
-</ul>
-<p><strong>textWrapModeType</strong>:</p>
-<ul>
-<li>“none” - The drawing object will not occupy any space at all, text will be rendred over or under the drawing object.</li>
-<li>“square” - Text will be rendered around a square covering the drawing object, regardless of its actual outline shape.</li>
-<li>“tight” - Text will be rendered around the actual outline shape of the drawing object.</li>
-<li>“through” - Text will be rendered around the actual outline shape of the drawing object, and inside the transparent areas of the drawing object.</li>
-<li>“topAndBottom” - Text will be rendered above and below the drawing object only.</li>
-</ul>
-<p><strong>textWrapSideType</strong>:</p>
-<ul>
-<li>“both” - Text will be rendered on both sides of the drawing object, as long as the available space is sufficient.</li>
-<li>“left” - Text will be rendered left of the drawing object, as long as the available space is sufficient.</li>
-<li>“right” - Text will be rendered right of the drawing object, as long as the available space is sufficient.</li>
-<li>“largest” - Text will be rendered at the larger side (either left or right) of the drawing object.</li>
-</ul>
-<p><em>Notes</em>:</p>
-<p>(1) Currently only <code>borderTop</code> is set if the drawing has the type “horizontal_line”.</p>
-<p>(2) Attributes are only used if <code>inline</code> mode is false. The generic attributes <code>left</code> and <code>top</code> will not be used for drawing objects in text documents.</p>
-<h2 id="drawing-attributes-general">Drawing Attributes - General<a class="headerlink" href="#drawing-attributes-general" title="Permanent link">&para;</a></h2>
-<p>The following attributes are supported by each drawing in each application regardless of the drawing type.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>left</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>The horizontal position of the drawing object in the drawing layer.</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>top</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>The vertical position of the drawing object in the drawing layer.</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>width</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>The width of the drawing object (independent from its contents).</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>height</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>The height of the drawing object (independent from its contents).</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>childLeft</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Used with group shapes only, it specifies the most left child object (in the child coord system).</td>
-<td></td>
-</tr>
-<tr>
-<td><code>childTop</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Used with group shapes only, it specifies the most top child object (in the child coord system).</td>
-<td></td>
-</tr>
-<tr>
-<td><code>childWidth</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Used with group shapes only, it specifies the width of all child objects (in the child coord system).</td>
-<td></td>
-</tr>
-<tr>
-<td><code>childHeight</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>all</td>
-<td>Used with group shapes only, it specifies the height of all child objects (in the child coord system).</td>
-<td></td>
-</tr>
-<tr>
-<td><code>coordWidth</code></td>
-<td>Integer</td>
-<td><em>width of object</em></td>
-<td>element</td>
-<td>The width of the virtual coordinate system inside the drawing object (used e.g. for positioning of drawing objects embedded in groups, or for polygon path definitions.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>coordHeight</code></td>
-<td>Integer</td>
-<td><em>height of object</em></td>
-<td>element</td>
-<td>The height of the virtual coordinate system inside the drawing object (used e.g. for positioning of drawing objects embedded in groups, or for polygon path definitions.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>name</code></td>
-<td>String</td>
-<td>””</td>
-<td>element</td>
-<td>The name of the drawing object.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>description</code></td>
-<td>String</td>
-<td>””</td>
-<td>element</td>
-<td>A detailed description for the drawing object.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>id</code></td>
-<td>String</td>
-<td></td>
-<td>element</td>
-<td>Drawing id, used to identify drawing objects (needed for connector objects). If an id used then it has to be unique for the whole document. If the id is ommitted the filter will create it automatically when saving. In OOXML documents the id has to be convertible to Long.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>replacementData</code></td>
-<td>String</td>
-<td>””</td>
-<td>element</td>
-<td>Image data used as replacement for the actual drawing contents. The string contains either Base64 encoded image data (a URL starting with 'data:'), or SVG mark-up (starting with '&lt;svg').</td>
-<td></td>
-</tr>
-<tr>
-<td><code>flipH</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Whether the contents of the drawing object are flipped horizontally.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>flipV</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Whether the contents of the drawing object are flipped vertically.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>rotation</code></td>
-<td>Number</td>
-<td>0</td>
-<td>element</td>
-<td>The object rotation in degrees.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>hidden</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Whether the drawing object is hidden.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>aspectLocked</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Whether the aspect ratio of the drawing object is locked and cannot be changed when the drawing object will be resized.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>noMove</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Whether it is forbidden to move the drawing.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>noResize</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Whether it is forbidden to resize the drawing.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>noSelect</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Whether it is forbidden to select the drawing.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>noGroup</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Whether it is forbidden to group the drawing.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>noRotation</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Whether it is forbidden to rotate the drawing.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>minFrameHeight</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>element</td>
-<td>Odf only, this property specifies the minimal height of text frames.</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Notes</strong>:</p>
-<ol>
-<li>Some of the generic position and size attributes may be overridden by application-specific attributes.</li>
-</ol>
-<h3 id="embedded-drawing-attributes">Embedded Drawing Attributes<a class="headerlink" href="#embedded-drawing-attributes" title="Permanent link">&para;</a></h3>
-<p>The following attributes are supported by drawing objects embedded in other drawing objects.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>left</code></td>
-<td>Number</td>
-<td>0</td>
-<td>element</td>
-<td>The horizontal position of the drawing object in the parent object's virtual coordinate system (see attribute <code>[coordWidth](#general_drawing_attributes)</code> ).</td>
-</tr>
-<tr>
-<td><code>top</code></td>
-<td>Number</td>
-<td>0</td>
-<td>element</td>
-<td>The vertical position of the drawing object in the parent object's virtual coordinate system (see attribute <code>[coordHeight](#general_drawing_attributes)</code> ).</td>
-</tr>
-<tr>
-<td><code>width</code></td>
-<td>Number</td>
-<td>0</td>
-<td>element</td>
-<td>The width of the drawing object in the parent object's virtual coordinate system (see attribute <code>[coordWidth](#general_drawing_attributes)</code> ).</td>
-</tr>
-<tr>
-<td><code>height</code></td>
-<td>Number</td>
-<td>0</td>
-<td>element</td>
-<td>The height of the drawing object in the parent object's virtual coordinate system (see attribute <code>[coordHeight](#general_drawing_attributes)</code> ).</td>
-</tr>
-</tbody>
-</table>
-<h2 id="drawingfillattributes">DrawingFillAttributes<a class="headerlink" href="#drawingfillattributes" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>fill</code></p>
-<p>Drawing fill attributes will be applied to entire drawing objects embedded in the document, or to specific parts of a complex drawing object, e.g. to a data series or the legend in a chart object.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>type</code></td>
-<td>Enum</td>
-<td>“none”</td>
-<td>all</td>
-<td>The fill type (see <strong>drawingFillAttribute</strong> below)</td>
-</tr>
-<tr>
-<td><code>color</code></td>
-<td><a href="#color">Color</a></td>
-<td>Color.AUTO</td>
-<td>all</td>
-<td>The primary fill color (used by the fill types “solid”, “gradient”, and “pattern”). If set to the automatic color, the effective fill color is dependent on the context (e.g. automatic fill colors for series in bar charts).</td>
-</tr>
-<tr>
-<td><code>color2</code></td>
-<td><a href="#color">Color</a></td>
-<td>Color.AUTO</td>
-<td>all</td>
-<td>The secondary fill color for gradients and patterns. If set to the automatic color, the effective fill color is dependent on this specific context.</td>
-</tr>
-<tr>
-<td><code>gradient</code></td>
-<td><a href="#gradient">Gradient</a></td>
-<td>Gradient.LINEAR</td>
-<td>all</td>
-<td>The gradient fill properties. Only used if the attributes <code>type</code> is set to “gradient”. If set to the `auto` value, the effective gradient is dependent on other color fill values (e.g. default/auto `color` and `backgroundColor` values).</td>
-</tr>
-<tr>
-<td><code>bitmap</code></td>
-<td><a href="#bitmap">Bitmap</a></td>
-<td><em>none</em></td>
-<td>all</td>
-<td>The bitmap fill properties. Only used if the attributes <code>type</code> is set to “bitmap”.</td>
-</tr>
-<tr>
-<td><code>pattern</code></td>
-<td>Enum <a href="#pattern">Pattern</a></td>
-<td>“none”</td>
-<td>all</td>
-<td>The preset pattern identifier. Only used if the attributes <code>type</code> is set to “pattern”. The attributes <code>color</code> and <code>backgroundColor</code> determine the colors used for the pattern.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>drawingFillAttributes</strong>:</p>
-<ul>
-<li>“none” - The object has no fill style (completly transparent).</li>
-<li>“auto” - All fill settings are determined automatically depending on the context. All other fill attributes MUST be ignored.</li>
-<li>“solid” - The object is filled with a single fill color.</li>
-<li>“gradient” - The object is filled with a gradient.</li>
-<li>“bitmap” - The object is filled with a bitmap.</li>
-<li>“pattern” - The object is filled with a preset pattern.</li>
-</ul>
-<h2 id="drawinglineattributes">DrawingLineAttributes<a class="headerlink" href="#drawinglineattributes" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>line</code></p>
-<p>Drawing line attributes will be applied to entire drawing objects embedded in the document, or to specific parts of a complex drawing object, e.g. to a data series or the legend in a chart object.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>All <a href="#drawingfillattributes">fill attributes</a> MUST also be supported as line attributes and will describe how to fill the outline polygons.</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>width</code></td>
-<td>Number</td>
-<td>0</td>
-<td>all</td>
-<td>The width of the line. A value of 0 hides the line.</td>
-</tr>
-<tr>
-<td><code>style</code></td>
-<td>Enum</td>
-<td>“solid”</td>
-<td>all</td>
-<td>drawing line style (see <strong>drawingLineStyle</strong>)</td>
-</tr>
-<tr>
-<td><code>headEndType</code></td>
-<td>Enum</td>
-<td>“none”</td>
-<td>all</td>
-<td>Specifies the head end of the line. (see <strong>drawingHeadEndType</strong>)</td>
-</tr>
-<tr>
-<td><code>headEndLength</code></td>
-<td>Enum</td>
-<td>“medium”</td>
-<td>all</td>
-<td>Specifies the head end length of the line.(see <strong>drawingHeadEndLength</strong>)</td>
-</tr>
-<tr>
-<td><code>headEndWidth</code></td>
-<td>Enum</td>
-<td>“medium”</td>
-<td>all</td>
-<td>Specifies the head end width of the line.(see <strong>drawingHeadEndType</strong>)</td>
-</tr>
-<tr>
-<td><code>tailEndType</code></td>
-<td>Enum</td>
-<td>“none”</td>
-<td>all</td>
-<td>Specifies the tail end of the line.(see <strong>drawingTailEndType</strong>)</td>
-</tr>
-<tr>
-<td><code>tailEndLength</code></td>
-<td>Enum</td>
-<td>“medium”</td>
-<td>all</td>
-<td>Specifies the tail end length of the line.(see <strong>drawingTailEndLength</strong>)</td>
-</tr>
-<tr>
-<td><code>tailEndWidth</code></td>
-<td>Enum</td>
-<td>“medium”</td>
-<td>all</td>
-<td>Specifies the tail end width of the line.(see <strong>drawingTailEndWidth</strong>)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>drawingLineStyle</strong>:</p>
-<ul>
-<li>“solid” - Solid line.</li>
-<li>“dotted” - Dotted line.</li>
-<li>“dashed” - Dashed line.</li>
-<li>“dashDot” - Dash-dotted line.</li>
-<li>“dashDotDot” - Dash-dot-dotted line.</li>
-</ul>
-<p><strong>drawingHeadEndType</strong>, <strong>drawingTailEndType</strong>:</p>
-<ul>
-<li>“none” - no head end is drawn.</li>
-<li>“triangle” - the head end looks like a triangle.</li>
-<li>“stealth” - the head end looks like a stealth.</li>
-<li>“diamond” - the head end looks like a diamon.</li>
-<li>“oval”- the head end looks like a oval.</li>
-<li>“arrow” - the head end looks like a arrow.</li>
-</ul>
-<p><strong>drawingHeadEndLength</strong>, <strong>drawingHeadEndWidth</strong>, <strong>drawingTailEndLength</strong>, <strong>drawingTailEndWidth</strong>:</p>
-<ul>
-<li>“small” - Solid line.</li>
-<li>“medium” - Solid line.</li>
-<li>“large” - Solid line.</li>
-</ul>
-<h2 id="drawingtextattributes">DrawingTextAttributes<a class="headerlink" href="#drawingtextattributes" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>text</code></p>
-<p>Formatting attributes describing the source of the text contents of a drawing object or chart data series.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>link</code></td>
-<td><a href="#sourcelink">SourceLink</a></td>
-<td>[]</td>
-<td>element</td>
-<td>The constant text, or an application dependent link into the document.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="imageattributes">ImageAttributes<a class="headerlink" href="#imageattributes" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>image</code></p>
-<p>Formatting attributes for images and OLE objects.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>imageUrl</code></td>
-<td>String</td>
-<td>""</td>
-<td>element</td>
-<td>URL pointing to the image data. If the image is embedded in the document, the URL will be relative to the document (e.g. “images/img1.png”).</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>imageData</code></td>
-<td>String</td>
-<td>""</td>
-<td>element</td>
-<td>Image data. The string contains either Base64 image data, or SVG mark-up. If Base64 encoded image data is used, the string begins with “data:” otherwise if SVG is used it begins with ”svg”.</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td><code>cropLeft</code></td>
-<td>Number</td>
-<td>0</td>
-<td>all</td>
-<td>Cropping size on the left side of the bitmap.</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td><code>cropRight</code></td>
-<td>Number</td>
-<td>0</td>
-<td>all</td>
-<td>Cropping size on the right side of the bitmap.</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td><code>cropTop</code></td>
-<td>Number</td>
-<td>0</td>
-<td>all</td>
-<td>Cropping size on the upper side of the bitmap.</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td><code>cropBottom</code></td>
-<td>Number</td>
-<td>0</td>
-<td>all</td>
-<td>Cropping size on the lower side of the bitmap.</td>
-<td>(2)</td>
-</tr>
-</tbody>
-</table>
-<p><em>Notes</em>:</p>
-<p>(1) The attributes <code>imageUrl</code> and <code>imageData</code> are mutually exclusive.</p>
-<ul>
-<li>An exception to this rule was introduced for the clipboard handling. The copy handler can not decide whether the <code>imageUrl</code> or the <code>imageData</code> attribute is needed on paste. Therefore the copy handler adds both attributes and the paste handler decides which one to use and which one to remove from the operation. Finally an operation with both attributes present may temporarily exist, but such operation is never sent to the filter.</li>
-</ul>
-<p>(2) A value of 0 does not crop the bitmap, positive values will move the respective border of the bitmap outside the drawing frame, negative values will move the bitmap border inside the drawing frame. Cropping attributes are interpreted differently depending on the file format:</p>
-<ul>
-<li>
-<p>OOXML: Cropping is used as percentage value. The value 100 corresponds to the total size of the drawing frame.</p>
-</li>
-<li>
-<p>ODF: Cropping is used as absolute length in 1/100 of millimeters.</p>
-</li>
-</ul>
-<h2 id="shapeattributes">ShapeAttributes<a class="headerlink" href="#shapeattributes" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>shape</code></p>
-<p>Formatting attributes for shape objects.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>paddingLeft</code></td>
-<td>Number</td>
-<td>250</td>
-<td>all</td>
-<td>The inner left distance from border to text.</td>
-</tr>
-<tr>
-<td><code>paddingRight</code></td>
-<td>Number</td>
-<td>250</td>
-<td>all</td>
-<td>The inner right distance from border to text.</td>
-</tr>
-<tr>
-<td><code>paddingTop</code></td>
-<td>Number</td>
-<td>125</td>
-<td>all</td>
-<td>The inner top distance from border to text.</td>
-</tr>
-<tr>
-<td><code>paddingBottom</code></td>
-<td>Number</td>
-<td>125</td>
-<td>all</td>
-<td>The inner bottom distance from border to text.</td>
-</tr>
-<tr>
-<td><code>anchor</code></td>
-<td>Enum</td>
-<td>top</td>
-<td>element</td>
-<td>Specifies the vertical alignment of text inside of a text body. 'bottom', 'centered', 'distributed', 'justified' or 'top' is possible.</td>
-</tr>
-<tr>
-<td><code>anchorCentered</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Specifies centering of the text box by determining the smallest possible bound box.</td>
-</tr>
-<tr>
-<td><code>wordWrap</code></td>
-<td>Boolean</td>
-<td>true</td>
-<td>element</td>
-<td>Specifies if the text is word wrapped.</td>
-</tr>
-<tr>
-<td><code>vert</code></td>
-<td>Enum</td>
-<td>horz</td>
-<td>element</td>
-<td>Specifies the text orientation. horz, vert, vert270, wordArtVert, eaVert, mongolianVert and wordArtVertRtl are possible values.</td>
-</tr>
-<tr>
-<td><code>horzOverflow</code></td>
-<td>Enum</td>
-<td>overflow</td>
-<td>element</td>
-<td>Specifies if the text is allowed to flow out of the bounding box or if it cut. Possible values are 'overflow' or 'clip'.</td>
-</tr>
-<tr>
-<td><code>vertOverflow</code></td>
-<td>Enum</td>
-<td>overflow</td>
-<td>element</td>
-<td>Specifies if the text is allowed to flow out of the bounding box or if it cut. Possible values are 'overflow', 'clip' or 'ellipsis'.</td>
-</tr>
-<tr>
-<td><code>autoResizeHeight</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>all</td>
-<td>Whether the size of the shape shall be adapted to the text content. This is a choice together with autoResizeText.</td>
-</tr>
-<tr>
-<td><code>autoResizeText</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>all</td>
-<td>Whether the fontsize of the text content shall be adapted to the shape height. This is a choice together with autoResizeHeight.</td>
-</tr>
-<tr>
-<td><code>fontScale</code></td>
-<td>Number</td>
-<td>1</td>
-<td>all</td>
-<td>scales all text-font releative to their original font-size, only if autoResizeText is true</td>
-</tr>
-<tr>
-<td><code>lineReduction</code></td>
-<td>Number</td>
-<td>0</td>
-<td>all</td>
-<td>reduces the distance between paragraphs relative to the original distance, only if autoResizeText is true</td>
-</tr>
-</tbody>
-</table>
-<h2 id="geometryattributes">GeometryAttributes<a class="headerlink" href="#geometryattributes" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>geometry</code></p>
-<p>Geometry attributes for shape objects.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>presetShape</code></td>
-<td>String</td>
-<td></td>
-<td>all</td>
-<td>The preset shape whose geometry should be used.</td>
-</tr>
-<tr>
-<td><code>avList</code></td>
-<td>Object</td>
-<td></td>
-<td>all</td>
-<td>adjustment values that are used</td>
-</tr>
-<tr>
-<td><code>ahList</code></td>
-<td>Array&lt;<a href="#geometryadjustmenthandle">GeometryAdjustmentHandle</a>></td>
-<td></td>
-<td>all</td>
-<td>list of adjustment handle specifications</td>
-</tr>
-<tr>
-<td><code>cxnList</code></td>
-<td>Array&lt;<a href="#geometryconnectionpoint">GeometryConnectionPoint</a>></td>
-<td></td>
-<td>all</td>
-<td>specifies the connection point a connector can connect to.</td>
-</tr>
-<tr>
-<td><code>gdList</code></td>
-<td>Array&lt;<a href="#geometryguide">GeometryGuide</a>></td>
-<td></td>
-<td>all</td>
-<td>formulas that can be used</td>
-</tr>
-<tr>
-<td><code>pathList</code></td>
-<td>Array&lt;<a href="#geometrypath">GeometryPath</a>></td>
-<td></td>
-<td>all</td>
-<td>path list</td>
-</tr>
-<tr>
-<td><code>textRect</code></td>
-<td><a href="#geometrytextrect">GeometryTextRect</a></td>
-<td></td>
-<td>all</td>
-<td>a special text rect that has to be used for text, if omitted then the text rect is as big as the shape</td>
-</tr>
-<tr>
-<td><code>hostData</code></td>
-<td>String</td>
-<td></td>
-<td>all</td>
-<td>This attribute is used only in the filter for better roundtrip.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="connectorattributes">ConnectorAttributes<a class="headerlink" href="#connectorattributes" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>connector</code></p>
-<p>Connector attributes for connector shapes.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>startId</code></td>
-<td>String</td>
-<td>””</td>
-<td>element</td>
-<td>Specifies the start shape the connector is connected to. If empty then the shape does not have a start connection.</td>
-</tr>
-<tr>
-<td><code>startIndex</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>element</td>
-<td>Specifies the point at the start shape the connector is connected to.</td>
-</tr>
-<tr>
-<td><code>endId</code></td>
-<td>String</td>
-<td>””</td>
-<td>element</td>
-<td>Specifies the end shape the connector is connected to. If empty then the shape does not have a end connection.</td>
-</tr>
-<tr>
-<td><code>endIndex</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>element</td>
-<td>Specifies the point at the end shape the connector is connected to.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="chartattributes">ChartAttributes<a class="headerlink" href="#chartattributes" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>chart</code></p>
-<p>Formatting attributes for entire chart objects.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>stacking</code></td>
-<td>Enum</td>
-<td>“standard”</td>
-<td>element</td>
-<td>Stacking type for charts of type “bar”, “column” and “area”. (see <strong>chartStackingType</strong>)</td>
-</tr>
-<tr>
-<td><code>chartStyleId</code></td>
-<td>integer</td>
-<td>0</td>
-<td>element</td>
-<td>the ID for the auto-style. TODO define identifiers.</td>
-</tr>
-<tr>
-<td><code>curved</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Whether the series lines in line charts are splines.</td>
-</tr>
-<tr>
-<td><code>varyColors</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>defines if the points of the first series are same color or not.</td>
-</tr>
-<tr>
-<td><code>rotation</code></td>
-<td>integer</td>
-<td>0</td>
-<td>element</td>
-<td>defines rotation of an pie or donut.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>chartStackingType</strong>:</p>
-<ul>
-<li>“standard” - Standard mode: clustered bars, overlapping lines.</li>
-<li>“stacked” - Data points of a category are stacked by their exact value.</li>
-<li>“percentStacked” - Data points of a category are stacked relative to each other, summing up to 100%.</li>
-</ul>
-<h2 id="chartdataseriesattributes">ChartDataSeriesAttributes<a class="headerlink" href="#chartdataseriesattributes" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>series</code></p>
-<p>Formatting attributes for data series in chart objects.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>type</code>String</td>
-<td>“bar”</td>
-<td>element</td>
-<td>chart type per series, for combination two chart types in one chart (line + bar, line + area, etc). (see supported <strong>chartType</strong> below)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>title</code></td>
-<td><a href="#sourcelink">SourceLink</a></td>
-<td>[]</td>
-<td>element</td>
-<td>The data source of the title to be shown for the data series (for example in the chart legend).</td>
-</tr>
-<tr>
-<td><code>values</code></td>
-<td><a href="#sourcelink">SourceLink</a></td>
-<td>[]</td>
-<td>element</td>
-<td>The data source of the values to be shown by the data series.</td>
-</tr>
-<tr>
-<td><code>names</code></td>
-<td><a href="#sourcelink">SourceLink</a></td>
-<td>[]</td>
-<td>element</td>
-<td>The category names to be shown for the data series (usually shown as labels on the X axis).</td>
-</tr>
-<tr>
-<td><code>bubbles</code></td>
-<td><a href="#sourcelink">SourceLink</a></td>
-<td>[]</td>
-<td>element</td>
-<td>The size of the bubble data points to be shown for the data series (for bubble charts only).</td>
-</tr>
-<tr>
-<td><code>dataLabel</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Whether small labels are shown next to all data points.</td>
-</tr>
-<tr>
-<td><code>format</code></td>
-<td>String</td>
-<td>””</td>
-<td>element</td>
-<td>optional number format code</td>
-</tr>
-<tr>
-<td><code>axisXIndex</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>element</td>
-<td>0 = bottom axis, 1 = top axis</td>
-</tr>
-<tr>
-<td><code>axisYIndex</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>element</td>
-<td>0 = left axis, 1 = right axis</td>
-</tr>
-<tr>
-<td><code>dataPoints</code></td>
-<td>Array&lt;<a href="#chartdatapointattributeset">ChartDataPointAttributeSet</a>></td>
-<td>[]</td>
-<td>element</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>chartType</strong>:</p>
-<ul>
-<li>“bar” - The data points are shown as horizontal rectangles.</li>
-<li>“column” - The data points are shown as vertical rectangles.</li>
-<li>“line” - The data points are shown as markers, and are connected with lines (markers and/or lines may be invisible).</li>
-<li>“area” - The data points are connected with lines, the area between the axis and the data series is filled.</li>
-<li>“scatter” - Similar to “line” - , with custom positions of the data points in X and Y direction.</li>
-<li>“bubble” - Similar to “scatter” - , with an additional source area that specifies the size of the data points.</li>
-<li>“pie” - The data points are shown in a pie.</li>
-<li>“donut” - The data points are shown in multiple rings.</li>
-<li>all types with appendix “2d” -  and “3d” -  are also supported by roundtrip</li>
-</ul>
-<h2 id="chartaxisattributes">ChartAxisAttributes<a class="headerlink" href="#chartaxisattributes" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>axis</code></p>
-<p>Formatting attributes for axes in chart objects.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>type</code></td>
-<td>Enum</td>
-<td>“value”</td>
-<td>element</td>
-<td>The type of the axis. (never used! Deprecated?) - <strong>chartAxisType</strong></td>
-</tr>
-<tr>
-<td><code>min</code></td>
-<td>Number</td>
-<td>String</td>
-<td>“auto”</td>
-<td>element</td>
-</tr>
-<tr>
-<td><code>max</code></td>
-<td>Number</td>
-<td>String</td>
-<td>“auto”</td>
-<td>element</td>
-</tr>
-<tr>
-<td><code>label</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>element</td>
-<td>Whether the axis labels are visible.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>chartAxisType</strong>:</p>
-<ul>
-<li>“value” - The axis shows numerical data, and can be scaled.</li>
-<li>“category” - The axis shows category names.</li>
-<li>“date” - The axis shows date/time values, and can be scaled.</li>
-<li>“series” - The axis shows series names. Used in deep 3D charts for the Z axis only.</li>
-</ul>
-<h2 id="chartlegendattributes">ChartLegendAttributes<a class="headerlink" href="#chartlegendattributes" title="Permanent link">&para;</a></h2>
-<p><em>Attribute type</em>:<code>legend</code>
-Formatting attributes for the legend in chart objects.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Scope</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>pos</code></td>
-<td>Enum</td>
-<td>“off”</td>
-<td>element</td>
-<td>The position of the legend in the chart area. <strong>chartPostion</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>chartPostion</strong>:</p>
-<ul>
-<li>“off” - The legend is not visible.</li>
-<li>“top” - The legend is located above the chart plot area.</li>
-<li>“bottom” - The legend is located below the chart plot area.</li>
-<li>“left” - The legend is located left of the chart plot area.</li>
-<li>“right” - The legend is located right of the chart plot area.</li>
-<li>“topRight” - The legend is located in the top-right corner of the chart area.</li>
-</ul>
-    </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
       </div>
-    </div>   
-  </div>
-</body>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
+        <li class="list-group-item"><a href="../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <h1>Formatting Attributes (Operations)</h1> 
+      <p>Formatting attributes are used to modify the appearance of a specific component in the document. An object of type <em>Attributes</em> contains a variable number of attribute values, mapped by the attribute name. An attribute value can be an atomic value, an array, or an object of any type described above.</p> 
+      <p>The following chapters describe all generic formatting attributes, divided by their <em>attribute type</em>. Unless specified differently, the values of all measurement attributes (sizes, margins, indentations, etc.) are in 1/100 of millimeters.</p> 
+      <h2>DocumentAttributes</h2> 
+      <p>These attributes are only supported in the <a href="operations.html#documentlayout">documentLayout</a> operation.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Application</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>zoom</code></td>
+            <td>Object</td>
+            <td>{value:100}</td>
+            <td>Document zoom factor, currently only as percentage in the property <code>value</code>.</td>
+          </tr> 
+          <tr>
+            <td><code>defaultTabStop</code></td>
+            <td>Integer</td>
+            <td>1270</td>
+            <td>Default interval of tab stops (1/2 inch).</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2>PageAttributes</h2> 
+      <p>Page formatting attributes will be applied to page elements.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+            <th>Notes</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>width</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Page width, including all margins.</td>
+          </tr> 
+          <tr>
+            <td><code>height</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Page height, including all margins.</td>
+          </tr> 
+          <tr>
+            <td><code>orientation</code></td>
+            <td>Enum</td>
+            <td>“portrait”</td>
+            <td>all</td>
+            <td colspan="2">Page orientation (one of “portrait”, “landscape”). This is NOT supported in Presentation.</td>
+          </tr> 
+          <tr>
+            <td><code>marginLeft</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Distance from the left page border to the left border of the content area.</td>
+          </tr> 
+          <tr>
+            <td><code>marginRight</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Distance from the right page border to the right border of the content area.</td>
+          </tr> 
+          <tr>
+            <td><code>marginTop</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Distance from the top page border to the top border of the content area.</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>marginBottom</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Distance from the bottom page border to the bottom border of the content area.</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>marginHeader</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Distance from the top page border to the top border of the header.</td>
+          </tr> 
+          <tr>
+            <td><code>marginFooter</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Distance from the bottom page border to the bottom border of the footer.</td>
+          </tr> 
+          <tr>
+            <td><code>firstPage</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>all</td>
+            <td colspan="2">Whether to use separate header/footer settings for the first page.</td>
+          </tr> 
+          <tr>
+            <td><code>evenOddPages</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>all</td>
+            <td colspan="2">Whether to use separate header/footer settings for even and odd pages, and mirror margin settings accordingly.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><em>Notes</em>:</p> 
+      <p>(1) The top and bottom page margin will include a header or footer if existing. If the header/footer is too large to fit into the empty space, the effective size of the page content area has to be reduced to prevent the header/footer from overlapping with the page content area.</p> 
+      <h2>ParagraphAttributes</h2> 
+      <p>Paragraph formatting attributes will be applied to paragraph elements in a text document.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>alignment</code></td>
+            <td>Enum</td>
+            <td>“left”</td>
+            <td>all</td>
+            <td>Horizontal text alignment. One of “left”, “center”, “right”, or “justify”.</td>
+          </tr> 
+          <tr>
+            <td><code>lineHeight</code></td>
+            <td><a href="#lineheight">LineHeight</a></td>
+            <td>{type:“percent”, value:100}</td>
+            <td>all</td>
+            <td>Relative or absolute text line height.</td>
+          </tr> 
+          <tr>
+            <td><code>fillColor</code></td>
+            <td><a href="#color">Color</a></td>
+            <td>Color.AUTO</td>
+            <td>all</td>
+            <td>Paragraph background color.</td>
+          </tr> 
+          <tr>
+            <td><code>outlineLevel</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>The outline level specifies an integer which defines the level of the associated text. This level shall not affect the appearance of the text in the document, but shall be used to calculate the TOC field</td>
+          </tr> 
+          <tr>
+            <td><code>listLevel</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Level of indention</td>
+          </tr> 
+          <tr>
+            <td><code>listId</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>all</td>
+            <td>Numbering definition instance reference. Can be shared by multiple lists.</td>
+          </tr> 
+          <tr>
+            <td><code>listStyle</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>all</td>
+            <td>ID of the list style sheet.</td>
+          </tr> 
+          <tr>
+            <td><code>listStart</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td>Indicates if the paragraph is at the start of a new list, require new numbering.</td>
+          </tr> 
+          <tr>
+            <td><code>tabStops</code></td>
+            <td>Array&lt;<a href="#tabstop">TabStop</a>&gt;</td>
+            <td>[]</td>
+            <td>all</td>
+            <td>Tabstop definitions</td>
+          </tr> 
+          <tr>
+            <td><code>borderLeft</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td>Left border</td>
+          </tr> 
+          <tr>
+            <td><code>borderRight</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td>Right border</td>
+          </tr> 
+          <tr>
+            <td><code>borderTop</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td>Top border</td>
+          </tr> 
+          <tr>
+            <td><code>borderBottom</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td>Bottom</td>
+          </tr> 
+          <tr>
+            <td><code>borderInside</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td>Border between paragraphs with same borders and margins</td>
+          </tr> 
+          <tr>
+            <td><code>indentLeft</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>left margin</td>
+          </tr> 
+          <tr>
+            <td><code>indentRight</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>right paragraph margin</td>
+          </tr> 
+          <tr>
+            <td><code>indentFirstLine</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>first line indent, negative values represent hanging indents</td>
+          </tr> 
+          <tr>
+            <td><code>marginTop</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>top margin</td>
+          </tr> 
+          <tr>
+            <td><code>marginBottom</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>bottom margin</td>
+          </tr> 
+          <tr>
+            <td><code>pageBreakBefore</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>all</td>
+            <td>specifies that a page break is inserted before this paragraph, this attribute is not beeing inherited by followed paragraphs</td>
+          </tr> 
+          <tr>
+            <td><code>contextualSpacing</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>all</td>
+            <td>ignore spacing between paragraph with same paragraph style</td>
+          </tr> 
+          <tr>
+            <td><code>listStartValue</code></td>
+            <td>Integer</td>
+            <td>-1</td>
+            <td>element</td>
+            <td>Start index of the list level</td>
+          </tr> 
+          <tr>
+            <td><code>listLabelHidden</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td>ODF is able to have multiple lists in a single list item. To emulate this, all paragraphs following the first have to use this property to disable the list.</td>
+          </tr> 
+          <tr>
+            <td><code>nextStyleId</code></td>
+            <td>String</td>
+            <td>”” (no style sheet)</td>
+            <td>style</td>
+            <td>The identifier of the paragraph style sheet that should be used in next paragraph (Enter key at end of paragraph).</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2>CharacterAttributes</h2> 
+      <p>Character attributes will be applied to any document components containing text.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+            <th>Notes</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>fontName</code></td>
+            <td>String</td>
+            <td>”+mn-lt”</td>
+            <td>all</td>
+            <td colspan="2">Font name.</td>
+          </tr> 
+          <tr>
+            <td><code>fontNameEastAsia</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>all</td>
+            <td>Font name for East Asia unicode characters.</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>fontNameComplex</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>all</td>
+            <td>Font name for complex unicode characters.</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>fontNameSymbol</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>all</td>
+            <td>Font name for symbol characters in the private unicode range F000 to F0FF.</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td><code>fontSize</code></td>
+            <td>Number</td>
+            <td>11</td>
+            <td>all</td>
+            <td colspan="2">Font size, <strong>in points</strong>.</td>
+          </tr> 
+          <tr>
+            <td><code>bold</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>all</td>
+            <td colspan="2">Font weight.</td>
+          </tr> 
+          <tr>
+            <td><code>italic</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>all</td>
+            <td colspan="2">Font slant.</td>
+          </tr> 
+          <tr>
+            <td><code>underline</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>all</td>
+            <td colspan="2">Text underline (single line only).</td>
+          </tr> 
+          <tr>
+            <td><code>strike</code></td>
+            <td>Enum</td>
+            <td>“none”</td>
+            <td>all</td>
+            <td colspan="2">Font strike through, one of “none”, “single”, or “double”.</td>
+          </tr> 
+          <tr>
+            <td><code>color</code></td>
+            <td><a href="#color">Color</a></td>
+            <td>Color.AUTO</td>
+            <td>all</td>
+            <td colspan="2">Text color</td>
+          </tr> 
+          <tr>
+            <td><code>fillColor</code></td>
+            <td><a href="#color">Color</a></td>
+            <td>Color.AUTO</td>
+            <td>all</td>
+            <td>Text background color.</td>
+            <td>(3)</td>
+          </tr> 
+          <tr>
+            <td><code>language</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>all</td>
+            <td>Specifies the language of the text, e.g. for spell checker.</td>
+            <td>(3)</td>
+          </tr> 
+          <tr>
+            <td><code>noProof</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>all</td>
+            <td>Specifies if spelling or grammar errors are to be reported.</td>
+            <td>(3)</td>
+          </tr> 
+          <tr>
+            <td><code>url</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>element</td>
+            <td>The URL of a hyperlink.</td>
+            <td>(3)</td>
+          </tr> 
+          <tr>
+            <td><code>anchor</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>element</td>
+            <td>The anchor of a hyperlink.</td>
+            <td>(3)</td>
+          </tr> 
+          <tr>
+            <td><code>baseline</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Character baseline in percent, if greater than 0 then the character is superscript otherwise if lower than 0 the character is subscript.</td>
+            <td>(3)</td>
+          </tr> 
+          <tr>
+            <td><code>caps</code></td>
+            <td>Enum</td>
+            <td>“none”</td>
+            <td>all</td>
+            <td>Character capture, “none”, “all”, or “small”.</td>
+            <td>(3)</td>
+          </tr> 
+          <tr>
+            <td><code>vertAlign</code></td>
+            <td>Enum</td>
+            <td>“baseline”</td>
+            <td>all</td>
+            <td>Character escapement, one of “baseline”, “sub”, or “super”.</td>
+            <td>(3)</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><em>Notes</em>:</p> 
+      <p>(1) Presentation only. Only added for roundtrip (copy/paste, delete/undo, …).</p> 
+      <p>(2) Presentation only. Added to the attributes and add the fontName e.g. 'Wingdings' to the CSS font-family attribute.</p> 
+      <p>(3) May not be supported by all components.</p> 
+      <h2>TableAttributes</h2> 
+      <p>Table formatting attributes will be applied to table elements in a text document.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+            <th>Notes</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>width</code></td>
+            <td>Integer</td>
+            <td>String</td>
+            <td>“auto”</td>
+            <td>all</td>
+            <td colspan="2">Table width. If set to “auto”, the table is sized automatically according to the page size.</td>
+          </tr> 
+          <tr>
+            <td><code>tableGrid</code></td>
+            <td>Array
+              <integer></integer></td>
+            <td>[]</td>
+            <td>element</td>
+            <td colspan="2">Grid column widths in logical units.</td>
+          </tr> 
+          <tr>
+            <td><code>fillColor</code></td>
+            <td><a href="#color">Color</a></td>
+            <td>Color.AUTO</td>
+            <td>all</td>
+            <td colspan="2">Background color</td>
+          </tr> 
+          <tr>
+            <td><code>borderTop</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td>Top table border</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>borderBottom</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td>Bottom table border</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>borderLeft</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td>Left table border</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>borderRight</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td>Right table border</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>borderInsideHor</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td colspan="2">Inner horizontal borders</td>
+          </tr> 
+          <tr>
+            <td><code>borderInsideVert</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td colspan="2">Inner vertical borders</td>
+          </tr> 
+          <tr>
+            <td><code>paddingTop</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Top cell padding</td>
+          </tr> 
+          <tr>
+            <td><code>paddingBottom</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Bottom cell padding</td>
+          </tr> 
+          <tr>
+            <td><code>paddingLeft</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Left cell padding</td>
+          </tr> 
+          <tr>
+            <td><code>paddingRight</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Right cell padding</td>
+          </tr> 
+          <tr>
+            <td><code>pageBreakBefore</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>all</td>
+            <td colspan="2">specifies that a page break is inserted before this table, this attribute is not beeing inherited by followed table (ODF only feature, required by LO)</td>
+          </tr> 
+          <tr>
+            <td><code>exclude</code></td>
+            <td>Array
+              <enum></enum></td>
+            <td>[]</td>
+            <td>element</td>
+            <td colspan="2">String array defining which conditional table attribute sets are <strong>not</strong> used from the table style sheet. See next table for details.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p>Each table style sheet contains multiple attribute sets, mapped by conditional keys which describe a specific area in the table. See <a href="operations-formatting-attribute-sets.html#tablestylesheetattributeset">TableStyleSheetAttributeSet</a> for details. The attribute <code>exclude</code> specifies which of these attribute sets will be excluded from the table.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th><code>exclude</code> key</th>
+            <th>Excluded conditional attribute sets</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td>“firstRow”</td>
+            <td><code>firstRow</code>, <code>northWestCell</code>, <code>northEastCell</code></td>
+            <td>Ignore formatting defined for the first row and the top corner cells of the table.</td>
+          </tr> 
+          <tr>
+            <td>“lastRow”</td>
+            <td><code>lastRow</code>, <code>southWestCell</code>, <code>southEastCell</code></td>
+            <td>Ignore formatting defined for the last row and the bottom corner cells of the table.</td>
+          </tr> 
+          <tr>
+            <td>“firstCol”</td>
+            <td><code>firstCol</code>, <code>northWestCell</code>, <code>southWestCell</code></td>
+            <td>Ignore formatting defined for the left column inand the left corner cells of the table.</td>
+          </tr> 
+          <tr>
+            <td>“lastCol”</td>
+            <td><code>lastCol</code>, <code>northEastCell</code>, <code>southEastCell</code></td>
+            <td>Ignore formatting defined for the right column and the right corner cells of the table.</td>
+          </tr> 
+          <tr>
+            <td>“bandsHor”</td>
+            <td><code>band1Hor</code>, <code>band2Hor</code></td>
+            <td>Ignore formatting defined for the inner rows of the table.</td>
+          </tr> 
+          <tr>
+            <td>“bandsVert”</td>
+            <td><code>band1Vert</code>, <code>band2Vert</code></td>
+            <td>Ignore formatting defined for the inner columns of the table.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><em>Notes</em>:</p> 
+      <p>(1) Applies to the border of the whole table only.</p> 
+      <h2>TableRowAttributes</h2> 
+      <p><em>Attribute type</em>:<code>row</code>|</p> 
+      <p>Table row formatting attributes will be applied to row elements of tables in a text document.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>height</code></td>
+            <td>Integer</td>
+            <td>String</td>
+            <td>“auto”</td>
+            <td>all</td>
+            <td>Row height. If set to “auto”, the row is sized automatically according to its contents.</td>
+          </tr> 
+          <tr>
+            <td><code>headerRow</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>all</td>
+            <td>Specifies if this is a header row that is repeated on each page.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2>TableCellAttributes</h2> 
+      <p><em>Attribute type</em>:<code>cell</code>|</p> 
+      <p>Table cell formatting attributes will be applied to cell elements in table rows in a text document.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>gridSpan</code></td>
+            <td>Integer</td>
+            <td>1</td>
+            <td>element</td>
+            <td>The number of columns spanned by the cell.</td>
+          </tr> 
+          <tr>
+            <td><code>fillColor</code></td>
+            <td><a href="#color">Color</a></td>
+            <td>Color.AUTO</td>
+            <td>all</td>
+            <td>Cell background color.</td>
+          </tr> 
+          <tr>
+            <td><code>fillType</code></td>
+            <td>enum</td>
+            <td>“solid”</td>
+            <td>all</td>
+            <td>(spreadsheet &amp; presentation only) to support transparent cell backgrounds. If full fill &amp; line attribute sets are supported, this property has to be removed. values of this property are “none”, “solid”, “gradient”, “bitmap”</td>
+          </tr> 
+          <tr>
+            <td><code>borderTop</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td>Top cell border.</td>
+          </tr> 
+          <tr>
+            <td><code>borderBottom</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td>Bottom cell border.</td>
+          </tr> 
+          <tr>
+            <td><code>borderLeft</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td>Left cell border.</td>
+          </tr> 
+          <tr>
+            <td><code>borderRight</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>all</td>
+            <td>Right cell border.</td>
+          </tr> 
+          <tr>
+            <td><code>borderInsideHor</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>style</td>
+            <td>Inner horizontal borders for conditional style attributes.</td>
+          </tr> 
+          <tr>
+            <td><code>borderInsideVert</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>style</td>
+            <td>Inner vertical borders for conditional style attributes.</td>
+          </tr> 
+          <tr>
+            <td><code>paddingTop</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Top cell padding.</td>
+          </tr> 
+          <tr>
+            <td><code>paddingBottom</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Bottom cell padding.</td>
+          </tr> 
+          <tr>
+            <td><code>paddingLeft</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Left cell padding.</td>
+          </tr> 
+          <tr>
+            <td><code>paddingRight</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Right cell padding.</td>
+          </tr> 
+          <tr>
+            <td><code>alignVert</code></td>
+            <td>Enum</td>
+            <td>“top”</td>
+            <td>all</td>
+            <td>This property describes the vertical cell alignment, its value can be “top”, “bottom”, “center”, “justified” or “distributed”</td>
+          </tr> 
+          <tr>
+            <td><code>mergeVert</code></td>
+            <td>Enum</td>
+            <td>“noMerge</td>
+            <td>all</td>
+            <td>This property describes the vertical merging of table cells. Its value can be “restart”, “continue” or “noMerge”</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2>DrawingAttributes</h2> 
+      <ul> 
+        <li><a href="#drawing-attributes-text-document">Drawing Attributes - Text Document</a></li> 
+        <li><a href="#drawing-attributes-general">Drawing Attributes - General</a></li> 
+      </ul> 
+      <h2>Drawing Attributes - Text Document</h2> 
+      <p><em>Attribute type</em>:<code>drawing</code></p> 
+      <p>Drawing formatting attributes will be applied to drawing objects embedded in the document.</p> 
+      <p>Drawing formatting attributes will be applied to drawing objects embedded in the text document. Additionally to the attributes described in <a href="#drawingattributes">DrawingAttributes</a>, text documents support the following attributes:</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+            <th>Notes</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>marginLeft</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Left margin to text contents.</td>
+          </tr> 
+          <tr>
+            <td><code>marginRight</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Right margin to text contents.</td>
+          </tr> 
+          <tr>
+            <td><code>marginTop</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Top margin to text contents.</td>
+          </tr> 
+          <tr>
+            <td><code>marginBottom</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Bottom margin to text contents.</td>
+          </tr> 
+          <tr>
+            <td><code>borderTop</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>element</td>
+            <td>Top border of the drawing object.</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>borderBottom</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>element</td>
+            <td>Bottom border of the drawing object.</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>borderLeft</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>element</td>
+            <td>Left border of the drawing object.</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>borderRight</code></td>
+            <td><a href="#border">Border</a></td>
+            <td>Border.NONE</td>
+            <td>element</td>
+            <td>Right border of the drawing object.</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>inline</code></td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>all</td>
+            <td colspan="2">If true, the drawing object is embedded as character, otherwise the drawing floats in its parent element and is optionally wrapped by the text.</td>
+          </tr> 
+          <tr>
+            <td><code>anchorHorBase</code></td>
+            <td>Enum</td>
+            <td>“margin”</td>
+            <td>all</td>
+            <td>Horizontal anchor mode. (see <strong>horizonallAnchorMode</strong> below)</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td><code>anchorHorAlign</code></td>
+            <td>Enum</td>
+            <td>“left”</td>
+            <td>all</td>
+            <td>Horizontal anchor position. (see <strong>horizontalAnchorPosition</strong> below)</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td><code>anchorHorOffset</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Horizontal position offset (only used if <code>anchorHorAlign</code> is set to “offset”).</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td><code>anchorVertBase</code></td>
+            <td>Enum</td>
+            <td>“margin”</td>
+            <td>all</td>
+            <td>Vertical anchor mode. (see <strong>verticalAnchorMode</strong> below)</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td><code>anchorVertAlign</code></td>
+            <td>Enum</td>
+            <td>“top”</td>
+            <td>all</td>
+            <td>Vertical anchor position. (see <strong>verticalAnchorPosition</strong> below)</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td><code>anchorVertOffset</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Vertical position offset (only used if <code>anchorVertAlign</code> is set to “offset”).</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td><code>anchorPageNumber</code></td>
+            <td colspan="2">Integer</td>
+            <td>element</td>
+            <td>In ODT documents, if the drawing is page anchored then this attribute specifies the page that is anchored to. This attribute is optional.</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td><code>anchorLayerOrder</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Layer position (z-index)</td>
+          </tr> 
+          <tr>
+            <td><code>anchorBehindDoc</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>all</td>
+            <td colspan="2">Layer position in behind text (true) or in front of text (false). this feature is not supported yet, but it is important for “anchorLayerOrder”</td>
+          </tr> 
+          <tr>
+            <td><code>textWrapMode</code></td>
+            <td>Enum</td>
+            <td>“topAndBottom”</td>
+            <td>all</td>
+            <td>Text wrapping mode. (see <strong>textWrapModeType</strong></td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td><code>textWrapSide</code></td>
+            <td>Enum</td>
+            <td>“both”</td>
+            <td>all</td>
+            <td>Sides where text wraps around the drawing object (only used if <code>textWrapMode</code> is set to “square”, “tight”, or “through”). (see <strong>textWrapSideType</strong>)</td>
+            <td>(2)</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>horizontlaAnchorMode</strong>:</p> 
+      <ul> 
+        <li>“margin”</li> 
+        <li>“page”</li> 
+        <li>“column”</li> 
+        <li>“character”</li> 
+        <li>“leftMargin”</li> 
+        <li>“rightMargin”</li> 
+        <li>“insideMargin”</li> 
+        <li>“outsideMargin”</li> 
+      </ul> 
+      <p><strong>horizontalAnchorPosition</strong>:</p> 
+      <ul> 
+        <li>“left” - The drawing object is attached to the left border of the anchor component.</li> 
+        <li>“right” - The drawing object is attached to the right border of the anchor component.</li> 
+        <li>“center” - The drawing object is attached in the middle of the anchor component.</li> 
+        <li>“inside”</li> 
+        <li>“outside”</li> 
+        <li>“offset” - The distance between left anchor position and drawing object is specified by the property <code>anchorHorOffset</code>.</li> 
+      </ul> 
+      <p><strong>verticalAnchorMode</strong>:</p> 
+      <ul> 
+        <li>“margin”</li> 
+        <li>“page”</li> 
+        <li>“paragraph”</li> 
+        <li>“line”</li> 
+        <li>“topMargin”</li> 
+        <li>“bottomMargin”</li> 
+        <li>“insideMargin”</li> 
+        <li>“outsideMargin”</li> 
+      </ul> 
+      <p><strong>verticalAnchorPosition</strong>:</p> 
+      <ul> 
+        <li>“top” - The drawing object is attached to the top border of the anchor component.</li> 
+        <li>“bottom” - The drawing object is attached to the bottom border of the anchor component.</li> 
+        <li>“center” - The drawing object is attached in the middle of the anchor component.</li> 
+        <li>“inside”</li> 
+        <li>“outside”</li> 
+        <li>“offset” - The distance between top anchor position and drawing object is specified by the property <code>anchorVertOffset</code>.</li> 
+      </ul> 
+      <p><strong>textWrapModeType</strong>:</p> 
+      <ul> 
+        <li>“none” - The drawing object will not occupy any space at all, text will be rendred over or under the drawing object.</li> 
+        <li>“square” - Text will be rendered around a square covering the drawing object, regardless of its actual outline shape.</li> 
+        <li>“tight” - Text will be rendered around the actual outline shape of the drawing object.</li> 
+        <li>“through” - Text will be rendered around the actual outline shape of the drawing object, and inside the transparent areas of the drawing object.</li> 
+        <li>“topAndBottom” - Text will be rendered above and below the drawing object only.</li> 
+      </ul> 
+      <p><strong>textWrapSideType</strong>:</p> 
+      <ul> 
+        <li>“both” - Text will be rendered on both sides of the drawing object, as long as the available space is sufficient.</li> 
+        <li>“left” - Text will be rendered left of the drawing object, as long as the available space is sufficient.</li> 
+        <li>“right” - Text will be rendered right of the drawing object, as long as the available space is sufficient.</li> 
+        <li>“largest” - Text will be rendered at the larger side (either left or right) of the drawing object.</li> 
+      </ul> 
+      <p><em>Notes</em>:</p> 
+      <p>(1) Currently only <code>borderTop</code> is set if the drawing has the type “horizontal_line”.</p> 
+      <p>(2) Attributes are only used if <code>inline</code> mode is false. The generic attributes <code>left</code> and <code>top</code> will not be used for drawing objects in text documents.</p> 
+      <h2>Drawing Attributes - General</h2> 
+      <p>The following attributes are supported by each drawing in each application regardless of the drawing type.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+            <th>Notes</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>left</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>The horizontal position of the drawing object in the drawing layer.</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>top</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>The vertical position of the drawing object in the drawing layer.</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>width</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>The width of the drawing object (independent from its contents).</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>height</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td>The height of the drawing object (independent from its contents).</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>childLeft</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Used with group shapes only, it specifies the most left child object (in the child coord system).</td>
+          </tr> 
+          <tr>
+            <td><code>childTop</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Used with group shapes only, it specifies the most top child object (in the child coord system).</td>
+          </tr> 
+          <tr>
+            <td><code>childWidth</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Used with group shapes only, it specifies the width of all child objects (in the child coord system).</td>
+          </tr> 
+          <tr>
+            <td><code>childHeight</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>all</td>
+            <td colspan="2">Used with group shapes only, it specifies the height of all child objects (in the child coord system).</td>
+          </tr> 
+          <tr>
+            <td><code>coordWidth</code></td>
+            <td>Integer</td>
+            <td><em>width of object</em></td>
+            <td>element</td>
+            <td colspan="2">The width of the virtual coordinate system inside the drawing object (used e.g. for positioning of drawing objects embedded in groups, or for polygon path definitions.</td>
+          </tr> 
+          <tr>
+            <td><code>coordHeight</code></td>
+            <td>Integer</td>
+            <td><em>height of object</em></td>
+            <td>element</td>
+            <td colspan="2">The height of the virtual coordinate system inside the drawing object (used e.g. for positioning of drawing objects embedded in groups, or for polygon path definitions.</td>
+          </tr> 
+          <tr>
+            <td><code>name</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>element</td>
+            <td colspan="2">The name of the drawing object.</td>
+          </tr> 
+          <tr>
+            <td><code>description</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>element</td>
+            <td colspan="2">A detailed description for the drawing object.</td>
+          </tr> 
+          <tr>
+            <td><code>id</code></td>
+            <td colspan="2">String</td>
+            <td>element</td>
+            <td colspan="2">Drawing id, used to identify drawing objects (needed for connector objects). If an id used then it has to be unique for the whole document. If the id is ommitted the filter will create it automatically when saving. In OOXML documents the id has to be convertible to Long.</td>
+          </tr> 
+          <tr>
+            <td><code>replacementData</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>element</td>
+            <td colspan="2">Image data used as replacement for the actual drawing contents. The string contains either Base64 encoded image data (a URL starting with 'data:'), or SVG mark-up (starting with '&lt;svg').</td>
+          </tr> 
+          <tr>
+            <td><code>flipH</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td colspan="2">Whether the contents of the drawing object are flipped horizontally.</td>
+          </tr> 
+          <tr>
+            <td><code>flipV</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td colspan="2">Whether the contents of the drawing object are flipped vertically.</td>
+          </tr> 
+          <tr>
+            <td><code>rotation</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>element</td>
+            <td colspan="2">The object rotation in degrees.</td>
+          </tr> 
+          <tr>
+            <td><code>hidden</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td colspan="2">Whether the drawing object is hidden.</td>
+          </tr> 
+          <tr>
+            <td><code>aspectLocked</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td colspan="2">Whether the aspect ratio of the drawing object is locked and cannot be changed when the drawing object will be resized.</td>
+          </tr> 
+          <tr>
+            <td><code>noMove</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td colspan="2">Whether it is forbidden to move the drawing.</td>
+          </tr> 
+          <tr>
+            <td><code>noResize</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td colspan="2">Whether it is forbidden to resize the drawing.</td>
+          </tr> 
+          <tr>
+            <td><code>noSelect</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td colspan="2">Whether it is forbidden to select the drawing.</td>
+          </tr> 
+          <tr>
+            <td><code>noGroup</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td colspan="2">Whether it is forbidden to group the drawing.</td>
+          </tr> 
+          <tr>
+            <td><code>noRotation</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td colspan="2">Whether it is forbidden to rotate the drawing.</td>
+          </tr> 
+          <tr>
+            <td><code>minFrameHeight</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>element</td>
+            <td colspan="2">Odf only, this property specifies the minimal height of text frames.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>Notes</strong>:</p> 
+      <ol> 
+        <li>Some of the generic position and size attributes may be overridden by application-specific attributes.</li> 
+      </ol> 
+      <h3>Embedded Drawing Attributes</h3> 
+      <p>The following attributes are supported by drawing objects embedded in other drawing objects.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>left</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>element</td>
+            <td>The horizontal position of the drawing object in the parent object's virtual coordinate system (see attribute <code>[coordWidth](#general_drawing_attributes)</code> ).</td>
+          </tr> 
+          <tr>
+            <td><code>top</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>element</td>
+            <td>The vertical position of the drawing object in the parent object's virtual coordinate system (see attribute <code>[coordHeight](#general_drawing_attributes)</code> ).</td>
+          </tr> 
+          <tr>
+            <td><code>width</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>element</td>
+            <td>The width of the drawing object in the parent object's virtual coordinate system (see attribute <code>[coordWidth](#general_drawing_attributes)</code> ).</td>
+          </tr> 
+          <tr>
+            <td><code>height</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>element</td>
+            <td>The height of the drawing object in the parent object's virtual coordinate system (see attribute <code>[coordHeight](#general_drawing_attributes)</code> ).</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2>DrawingFillAttributes</h2> 
+      <p><em>Attribute type</em>:<code>fill</code></p> 
+      <p>Drawing fill attributes will be applied to entire drawing objects embedded in the document, or to specific parts of a complex drawing object, e.g. to a data series or the legend in a chart object.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>type</code></td>
+            <td>Enum</td>
+            <td>“none”</td>
+            <td>all</td>
+            <td>The fill type (see <strong>drawingFillAttribute</strong> below)</td>
+          </tr> 
+          <tr>
+            <td><code>color</code></td>
+            <td><a href="#color">Color</a></td>
+            <td>Color.AUTO</td>
+            <td>all</td>
+            <td>The primary fill color (used by the fill types “solid”, “gradient”, and “pattern”). If set to the automatic color, the effective fill color is dependent on the context (e.g. automatic fill colors for series in bar charts).</td>
+          </tr> 
+          <tr>
+            <td><code>color2</code></td>
+            <td><a href="#color">Color</a></td>
+            <td>Color.AUTO</td>
+            <td>all</td>
+            <td>The secondary fill color for gradients and patterns. If set to the automatic color, the effective fill color is dependent on this specific context.</td>
+          </tr> 
+          <tr>
+            <td><code>gradient</code></td>
+            <td><a href="#gradient">Gradient</a></td>
+            <td>Gradient.LINEAR</td>
+            <td>all</td>
+            <td>The gradient fill properties. Only used if the attributes <code>type</code> is set to “gradient”. If set to the `auto` value, the effective gradient is dependent on other color fill values (e.g. default/auto `color` and `backgroundColor` values).</td>
+          </tr> 
+          <tr>
+            <td><code>bitmap</code></td>
+            <td><a href="#bitmap">Bitmap</a></td>
+            <td><em>none</em></td>
+            <td>all</td>
+            <td>The bitmap fill properties. Only used if the attributes <code>type</code> is set to “bitmap”.</td>
+          </tr> 
+          <tr>
+            <td><code>pattern</code></td>
+            <td>Enum <a href="#pattern">Pattern</a></td>
+            <td>“none”</td>
+            <td>all</td>
+            <td>The preset pattern identifier. Only used if the attributes <code>type</code> is set to “pattern”. The attributes <code>color</code> and <code>backgroundColor</code> determine the colors used for the pattern.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>drawingFillAttributes</strong>:</p> 
+      <ul> 
+        <li>“none” - The object has no fill style (completly transparent).</li> 
+        <li>“auto” - All fill settings are determined automatically depending on the context. All other fill attributes MUST be ignored.</li> 
+        <li>“solid” - The object is filled with a single fill color.</li> 
+        <li>“gradient” - The object is filled with a gradient.</li> 
+        <li>“bitmap” - The object is filled with a bitmap.</li> 
+        <li>“pattern” - The object is filled with a preset pattern.</li> 
+      </ul> 
+      <h2>DrawingLineAttributes</h2> 
+      <p><em>Attribute type</em>:<code>line</code></p> 
+      <p>Drawing line attributes will be applied to entire drawing objects embedded in the document, or to specific parts of a complex drawing object, e.g. to a data series or the legend in a chart object.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td>All <a href="#drawingfillattributes">fill attributes</a> MUST also be supported as line attributes and will describe how to fill the outline polygons.</td>
+          </tr> 
+          <tr>
+            <td><code>width</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>all</td>
+            <td>The width of the line. A value of 0 hides the line.</td>
+          </tr> 
+          <tr>
+            <td><code>style</code></td>
+            <td>Enum</td>
+            <td>“solid”</td>
+            <td>all</td>
+            <td>drawing line style (see <strong>drawingLineStyle</strong>)</td>
+          </tr> 
+          <tr>
+            <td><code>headEndType</code></td>
+            <td>Enum</td>
+            <td>“none”</td>
+            <td>all</td>
+            <td>Specifies the head end of the line. (see <strong>drawingHeadEndType</strong>)</td>
+          </tr> 
+          <tr>
+            <td><code>headEndLength</code></td>
+            <td>Enum</td>
+            <td>“medium”</td>
+            <td>all</td>
+            <td>Specifies the head end length of the line.(see <strong>drawingHeadEndLength</strong>)</td>
+          </tr> 
+          <tr>
+            <td><code>headEndWidth</code></td>
+            <td>Enum</td>
+            <td>“medium”</td>
+            <td>all</td>
+            <td>Specifies the head end width of the line.(see <strong>drawingHeadEndType</strong>)</td>
+          </tr> 
+          <tr>
+            <td><code>tailEndType</code></td>
+            <td>Enum</td>
+            <td>“none”</td>
+            <td>all</td>
+            <td>Specifies the tail end of the line.(see <strong>drawingTailEndType</strong>)</td>
+          </tr> 
+          <tr>
+            <td><code>tailEndLength</code></td>
+            <td>Enum</td>
+            <td>“medium”</td>
+            <td>all</td>
+            <td>Specifies the tail end length of the line.(see <strong>drawingTailEndLength</strong>)</td>
+          </tr> 
+          <tr>
+            <td><code>tailEndWidth</code></td>
+            <td>Enum</td>
+            <td>“medium”</td>
+            <td>all</td>
+            <td>Specifies the tail end width of the line.(see <strong>drawingTailEndWidth</strong>)</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>drawingLineStyle</strong>:</p> 
+      <ul> 
+        <li>“solid” - Solid line.</li> 
+        <li>“dotted” - Dotted line.</li> 
+        <li>“dashed” - Dashed line.</li> 
+        <li>“dashDot” - Dash-dotted line.</li> 
+        <li>“dashDotDot” - Dash-dot-dotted line.</li> 
+      </ul> 
+      <p><strong>drawingHeadEndType</strong>, <strong>drawingTailEndType</strong>:</p> 
+      <ul> 
+        <li>“none” - no head end is drawn.</li> 
+        <li>“triangle” - the head end looks like a triangle.</li> 
+        <li>“stealth” - the head end looks like a stealth.</li> 
+        <li>“diamond” - the head end looks like a diamon.</li> 
+        <li>“oval”- the head end looks like a oval.</li> 
+        <li>“arrow” - the head end looks like a arrow.</li> 
+      </ul> 
+      <p><strong>drawingHeadEndLength</strong>, <strong>drawingHeadEndWidth</strong>, <strong>drawingTailEndLength</strong>, <strong>drawingTailEndWidth</strong>:</p> 
+      <ul> 
+        <li>“small” - Solid line.</li> 
+        <li>“medium” - Solid line.</li> 
+        <li>“large” - Solid line.</li> 
+      </ul> 
+      <h2>DrawingTextAttributes</h2> 
+      <p><em>Attribute type</em>:<code>text</code></p> 
+      <p>Formatting attributes describing the source of the text contents of a drawing object or chart data series.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>link</code></td>
+            <td><a href="#sourcelink">SourceLink</a></td>
+            <td>[]</td>
+            <td>element</td>
+            <td>The constant text, or an application dependent link into the document.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2>ImageAttributes</h2> 
+      <p><em>Attribute type</em>:<code>image</code></p> 
+      <p>Formatting attributes for images and OLE objects.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+            <th>Notes</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>imageUrl</code></td>
+            <td>String</td>
+            <td>""</td>
+            <td>element</td>
+            <td>URL pointing to the image data. If the image is embedded in the document, the URL will be relative to the document (e.g. “images/img1.png”).</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>imageData</code></td>
+            <td>String</td>
+            <td>""</td>
+            <td>element</td>
+            <td>Image data. The string contains either Base64 image data, or SVG mark-up. If Base64 encoded image data is used, the string begins with “data:” otherwise if SVG is used it begins with ”svg”.</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td><code>cropLeft</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Cropping size on the left side of the bitmap.</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td><code>cropRight</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Cropping size on the right side of the bitmap.</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td><code>cropTop</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Cropping size on the upper side of the bitmap.</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td><code>cropBottom</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>all</td>
+            <td>Cropping size on the lower side of the bitmap.</td>
+            <td>(2)</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><em>Notes</em>:</p> 
+      <p>(1) The attributes <code>imageUrl</code> and <code>imageData</code> are mutually exclusive.</p> 
+      <ul> 
+        <li>An exception to this rule was introduced for the clipboard handling. The copy handler can not decide whether the <code>imageUrl</code> or the <code>imageData</code> attribute is needed on paste. Therefore the copy handler adds both attributes and the paste handler decides which one to use and which one to remove from the operation. Finally an operation with both attributes present may temporarily exist, but such operation is never sent to the filter.</li> 
+      </ul> 
+      <p>(2) A value of 0 does not crop the bitmap, positive values will move the respective border of the bitmap outside the drawing frame, negative values will move the bitmap border inside the drawing frame. Cropping attributes are interpreted differently depending on the file format:</p> 
+      <ul> 
+        <li> <p>OOXML: Cropping is used as percentage value. The value 100 corresponds to the total size of the drawing frame.</p> </li> 
+        <li> <p>ODF: Cropping is used as absolute length in 1/100 of millimeters.</p> </li> 
+      </ul> 
+      <h2>ShapeAttributes</h2> 
+      <p><em>Attribute type</em>:<code>shape</code></p> 
+      <p>Formatting attributes for shape objects.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>paddingLeft</code></td>
+            <td>Number</td>
+            <td>250</td>
+            <td>all</td>
+            <td>The inner left distance from border to text.</td>
+          </tr> 
+          <tr>
+            <td><code>paddingRight</code></td>
+            <td>Number</td>
+            <td>250</td>
+            <td>all</td>
+            <td>The inner right distance from border to text.</td>
+          </tr> 
+          <tr>
+            <td><code>paddingTop</code></td>
+            <td>Number</td>
+            <td>125</td>
+            <td>all</td>
+            <td>The inner top distance from border to text.</td>
+          </tr> 
+          <tr>
+            <td><code>paddingBottom</code></td>
+            <td>Number</td>
+            <td>125</td>
+            <td>all</td>
+            <td>The inner bottom distance from border to text.</td>
+          </tr> 
+          <tr>
+            <td><code>anchor</code></td>
+            <td>Enum</td>
+            <td>top</td>
+            <td>element</td>
+            <td>Specifies the vertical alignment of text inside of a text body. 'bottom', 'centered', 'distributed', 'justified' or 'top' is possible.</td>
+          </tr> 
+          <tr>
+            <td><code>anchorCentered</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td>Specifies centering of the text box by determining the smallest possible bound box.</td>
+          </tr> 
+          <tr>
+            <td><code>wordWrap</code></td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>element</td>
+            <td>Specifies if the text is word wrapped.</td>
+          </tr> 
+          <tr>
+            <td><code>vert</code></td>
+            <td>Enum</td>
+            <td>horz</td>
+            <td>element</td>
+            <td>Specifies the text orientation. horz, vert, vert270, wordArtVert, eaVert, mongolianVert and wordArtVertRtl are possible values.</td>
+          </tr> 
+          <tr>
+            <td><code>horzOverflow</code></td>
+            <td>Enum</td>
+            <td>overflow</td>
+            <td>element</td>
+            <td>Specifies if the text is allowed to flow out of the bounding box or if it cut. Possible values are 'overflow' or 'clip'.</td>
+          </tr> 
+          <tr>
+            <td><code>vertOverflow</code></td>
+            <td>Enum</td>
+            <td>overflow</td>
+            <td>element</td>
+            <td>Specifies if the text is allowed to flow out of the bounding box or if it cut. Possible values are 'overflow', 'clip' or 'ellipsis'.</td>
+          </tr> 
+          <tr>
+            <td><code>autoResizeHeight</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>all</td>
+            <td>Whether the size of the shape shall be adapted to the text content. This is a choice together with autoResizeText.</td>
+          </tr> 
+          <tr>
+            <td><code>autoResizeText</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>all</td>
+            <td>Whether the fontsize of the text content shall be adapted to the shape height. This is a choice together with autoResizeHeight.</td>
+          </tr> 
+          <tr>
+            <td><code>fontScale</code></td>
+            <td>Number</td>
+            <td>1</td>
+            <td>all</td>
+            <td>scales all text-font releative to their original font-size, only if autoResizeText is true</td>
+          </tr> 
+          <tr>
+            <td><code>lineReduction</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>all</td>
+            <td>reduces the distance between paragraphs relative to the original distance, only if autoResizeText is true</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2>GeometryAttributes</h2> 
+      <p><em>Attribute type</em>:<code>geometry</code></p> 
+      <p>Geometry attributes for shape objects.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>presetShape</code></td>
+            <td colspan="2">String</td>
+            <td>all</td>
+            <td>The preset shape whose geometry should be used.</td>
+          </tr> 
+          <tr>
+            <td><code>avList</code></td>
+            <td colspan="2">Object</td>
+            <td>all</td>
+            <td>adjustment values that are used</td>
+          </tr> 
+          <tr>
+            <td><code>ahList</code></td>
+            <td colspan="2">Array&lt;<a href="#geometryadjustmenthandle">GeometryAdjustmentHandle</a>&gt;</td>
+            <td>all</td>
+            <td>list of adjustment handle specifications</td>
+          </tr> 
+          <tr>
+            <td><code>cxnList</code></td>
+            <td colspan="2">Array&lt;<a href="#geometryconnectionpoint">GeometryConnectionPoint</a>&gt;</td>
+            <td>all</td>
+            <td>specifies the connection point a connector can connect to.</td>
+          </tr> 
+          <tr>
+            <td><code>gdList</code></td>
+            <td colspan="2">Array&lt;<a href="#geometryguide">GeometryGuide</a>&gt;</td>
+            <td>all</td>
+            <td>formulas that can be used</td>
+          </tr> 
+          <tr>
+            <td><code>pathList</code></td>
+            <td colspan="2">Array&lt;<a href="#geometrypath">GeometryPath</a>&gt;</td>
+            <td>all</td>
+            <td>path list</td>
+          </tr> 
+          <tr>
+            <td><code>textRect</code></td>
+            <td colspan="2"><a href="#geometrytextrect">GeometryTextRect</a></td>
+            <td>all</td>
+            <td>a special text rect that has to be used for text, if omitted then the text rect is as big as the shape</td>
+          </tr> 
+          <tr>
+            <td><code>hostData</code></td>
+            <td colspan="2">String</td>
+            <td>all</td>
+            <td>This attribute is used only in the filter for better roundtrip.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2>ConnectorAttributes</h2> 
+      <p><em>Attribute type</em>:<code>connector</code></p> 
+      <p>Connector attributes for connector shapes.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>startId</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>element</td>
+            <td>Specifies the start shape the connector is connected to. If empty then the shape does not have a start connection.</td>
+          </tr> 
+          <tr>
+            <td><code>startIndex</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>element</td>
+            <td>Specifies the point at the start shape the connector is connected to.</td>
+          </tr> 
+          <tr>
+            <td><code>endId</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>element</td>
+            <td>Specifies the end shape the connector is connected to. If empty then the shape does not have a end connection.</td>
+          </tr> 
+          <tr>
+            <td><code>endIndex</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>element</td>
+            <td>Specifies the point at the end shape the connector is connected to.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2>ChartAttributes</h2> 
+      <p><em>Attribute type</em>:<code>chart</code></p> 
+      <p>Formatting attributes for entire chart objects.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>stacking</code></td>
+            <td>Enum</td>
+            <td>“standard”</td>
+            <td>element</td>
+            <td>Stacking type for charts of type “bar”, “column” and “area”. (see <strong>chartStackingType</strong>)</td>
+          </tr> 
+          <tr>
+            <td><code>chartStyleId</code></td>
+            <td>integer</td>
+            <td>0</td>
+            <td>element</td>
+            <td>the ID for the auto-style. TODO define identifiers.</td>
+          </tr> 
+          <tr>
+            <td><code>curved</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td>Whether the series lines in line charts are splines.</td>
+          </tr> 
+          <tr>
+            <td><code>varyColors</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td>defines if the points of the first series are same color or not.</td>
+          </tr> 
+          <tr>
+            <td><code>rotation</code></td>
+            <td>integer</td>
+            <td>0</td>
+            <td>element</td>
+            <td>defines rotation of an pie or donut.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>chartStackingType</strong>:</p> 
+      <ul> 
+        <li>“standard” - Standard mode: clustered bars, overlapping lines.</li> 
+        <li>“stacked” - Data points of a category are stacked by their exact value.</li> 
+        <li>“percentStacked” - Data points of a category are stacked relative to each other, summing up to 100%.</li> 
+      </ul> 
+      <h2>ChartDataSeriesAttributes</h2> 
+      <p><em>Attribute type</em>:<code>series</code></p> 
+      <p>Formatting attributes for data series in chart objects.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>type</code>String</td>
+            <td>“bar”</td>
+            <td>element</td>
+            <td>chart type per series, for combination two chart types in one chart (line + bar, line + area, etc). (see supported <strong>chartType</strong> below)</td>
+          </tr> 
+          <tr>
+            <td><code>title</code></td>
+            <td><a href="#sourcelink">SourceLink</a></td>
+            <td>[]</td>
+            <td>element</td>
+            <td>The data source of the title to be shown for the data series (for example in the chart legend).</td>
+          </tr> 
+          <tr>
+            <td><code>values</code></td>
+            <td><a href="#sourcelink">SourceLink</a></td>
+            <td>[]</td>
+            <td>element</td>
+            <td>The data source of the values to be shown by the data series.</td>
+          </tr> 
+          <tr>
+            <td><code>names</code></td>
+            <td><a href="#sourcelink">SourceLink</a></td>
+            <td>[]</td>
+            <td>element</td>
+            <td>The category names to be shown for the data series (usually shown as labels on the X axis).</td>
+          </tr> 
+          <tr>
+            <td><code>bubbles</code></td>
+            <td><a href="#sourcelink">SourceLink</a></td>
+            <td>[]</td>
+            <td>element</td>
+            <td>The size of the bubble data points to be shown for the data series (for bubble charts only).</td>
+          </tr> 
+          <tr>
+            <td><code>dataLabel</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td>Whether small labels are shown next to all data points.</td>
+          </tr> 
+          <tr>
+            <td><code>format</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>element</td>
+            <td>optional number format code</td>
+          </tr> 
+          <tr>
+            <td><code>axisXIndex</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>element</td>
+            <td>0 = bottom axis, 1 = top axis</td>
+          </tr> 
+          <tr>
+            <td><code>axisYIndex</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>element</td>
+            <td>0 = left axis, 1 = right axis</td>
+          </tr> 
+          <tr>
+            <td><code>dataPoints</code></td>
+            <td>Array&lt;<a href="#chartdatapointattributeset">ChartDataPointAttributeSet</a>&gt;</td>
+            <td>[]</td>
+            <td colspan="2">element</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>chartType</strong>:</p> 
+      <ul> 
+        <li>“bar” - The data points are shown as horizontal rectangles.</li> 
+        <li>“column” - The data points are shown as vertical rectangles.</li> 
+        <li>“line” - The data points are shown as markers, and are connected with lines (markers and/or lines may be invisible).</li> 
+        <li>“area” - The data points are connected with lines, the area between the axis and the data series is filled.</li> 
+        <li>“scatter” - Similar to “line” - , with custom positions of the data points in X and Y direction.</li> 
+        <li>“bubble” - Similar to “scatter” - , with an additional source area that specifies the size of the data points.</li> 
+        <li>“pie” - The data points are shown in a pie.</li> 
+        <li>“donut” - The data points are shown in multiple rings.</li> 
+        <li>all types with appendix “2d” - and “3d” - are also supported by roundtrip</li> 
+      </ul> 
+      <h2>ChartAxisAttributes</h2> 
+      <p><em>Attribute type</em>:<code>axis</code></p> 
+      <p>Formatting attributes for axes in chart objects.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>type</code></td>
+            <td>Enum</td>
+            <td>“value”</td>
+            <td>element</td>
+            <td>The type of the axis. (never used! Deprecated?) - <strong>chartAxisType</strong></td>
+          </tr> 
+          <tr>
+            <td><code>min</code></td>
+            <td>Number</td>
+            <td>String</td>
+            <td>“auto”</td>
+            <td>element</td>
+            <td>The minimum value shown at the beginning of the axis. The special value “auto” will obtain the axis minimum according to the series data. Used by axes of type “value” and “date” only. (never used! Deprecated?)</td>
+          </tr> 
+          <tr>
+            <td><code>max</code></td>
+            <td>Number</td>
+            <td>String</td>
+            <td>“auto”</td>
+            <td>element</td>
+            <td>The maximum value shown at the end of the axis. The special value “auto” will obtain the axis maximum according to the series data. Used by axes of type “value” and “date” only. (never used! Deprecated?)</td>
+          </tr> 
+          <tr>
+            <td><code>label</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>element</td>
+            <td>Whether the axis labels are visible.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>chartAxisType</strong>:</p> 
+      <ul> 
+        <li>“value” - The axis shows numerical data, and can be scaled.</li> 
+        <li>“category” - The axis shows category names.</li> 
+        <li>“date” - The axis shows date/time values, and can be scaled.</li> 
+        <li>“series” - The axis shows series names. Used in deep 3D charts for the Z axis only.</li> 
+      </ul> 
+      <h2>ChartLegendAttributes</h2> 
+      <p><em>Attribute type</em>:<code>legend</code> Formatting attributes for the legend in chart objects.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Scope</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>pos</code></td>
+            <td>Enum</td>
+            <td>“off”</td>
+            <td>element</td>
+            <td>The position of the legend in the chart area. <strong>chartPostion</strong></td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>chartPostion</strong>:</p> 
+      <ul> 
+        <li>“off” - The legend is not visible.</li> 
+        <li>“top” - The legend is located above the chart plot area.</li> 
+        <li>“bottom” - The legend is located below the chart plot area.</li> 
+        <li>“left” - The legend is located left of the chart plot area.</li> 
+        <li>“right” - The legend is located right of the chart plot area.</li> 
+        <li>“topRight” - The legend is located in the top-right corner of the chart area.</li> 
+      </ul> 
+    </div>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>

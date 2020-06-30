@@ -1,163 +1,89 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
+      </div>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
+        <li class="list-group-item"><a href="../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <h1>Voting</h1> 
+      <p>Occasionally a "feel" for consensus is not enough. Sometimes we need to have a measurable consensus. For example, when voting in new committers or to approve a release.</p> 
+      <h2>Preparing for a Vote</h2> 
+      <p>Before calling a vote it is important to ensure that the community is given time to discuss the upcoming vote. This will be done by posting an email to the list indicating the intention to call a vote and the options available. By the time a vote is called there should already be <a href="/odftoolkit_website/docs/governance/consensusBuilding.html">consensus in the community</a>. The vote itself is, normally, a formality.</p> 
+      <h2>Calling a Vote</h2> 
+      <p>Once it is time to call the vote a mail is posted with a subject starting with "[VOTE]". This enables the community members to ensure they do not miss an important vote thread. It also indicates that this is not consensus building but a formal vote. The initiator is responsible for the vote. That means also to count the votes and present the results. Everyone has 1 vote.</p> 
+      <h3>Casting Your Vote</h3> 
+      <p>The notation used in voting is:</p> 
+      <p>+1 (means I vote positive) You can say why you vote positive but it's not a must-have.</p> 
+      <p>0 (means vote abstention and nothing else)</p> 
+      <p>-1 (means I vote negative because of the following reason) Yes, you must support your objection and provide an alternative course of action that you are willing and able to implement (where appropriate).</p> 
+      <h4>Example for a vote mail</h4> 
+      <div class="codehilite">
+        <pre><code>Address: private@
+Subject: [VOTE] John Doe should become a regular committer
 
-<head>
-  <!--
+Text:
+"I would like to propose to vote in John Doe as committer. John has showed in
+the last months that he has the skills and oversight for improving things (think
+about the last UI change of the "Find" dialog)."
 
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
++1 (means I vote for John)
+ 0 (means vote abstention)
+-1 (means I vote against John because of the following reason:
 
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../index.html">About</a></li>
-<li><a href="../../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../get-involved.html">Get Involved</a></li>
-<li><a href="../../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../../people.html">People</a></li>
-<li><a href="../../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../../javadoc.html">JavaDoc</a></li>
-<li><a href="../../website-development.html">Website Development</a></li>
-<li><a href="../../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      
-      <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="voting">Voting<a class="headerlink" href="#voting" title="Permanent link">&para;</a></h1>
-<p>Occasionally a "feel" for consensus is not enough. Sometimes we need to have a
-measurable consensus. For example, when voting in new committers or to approve a
-release.</p>
-<h2 id="preparing-for-a-vote">Preparing for a Vote<a class="headerlink" href="#preparing-for-a-vote" title="Permanent link">&para;</a></h2>
-<p>Before calling a vote it is important to ensure that the community is given time to
-discuss the upcoming vote. This will be done by posting an email to the list
-indicating the intention to call a vote and the options available. By the time a
-vote is called there should already be <a href="../../docs/governance/consensusBuilding.html">consensus in the community</a>. The vote
-itself is, normally, a formality.</p>
-<h2 id="calling-a-vote">Calling a Vote<a class="headerlink" href="#calling-a-vote" title="Permanent link">&para;</a></h2>
-<p>Once it is time to call the vote a mail is posted with a subject starting with
-"[VOTE]". This enables the community members to ensure they do not miss an important
-vote thread. It also indicates that this is not consensus building but a formal
-vote. The initiator is responsible for the vote. That means also to count the votes
-and present the results. Everyone has 1 vote.</p>
-<h3 id="casting-your-vote">Casting Your Vote<a class="headerlink" href="#casting-your-vote" title="Permanent link">&para;</a></h3>
-<p>The notation used in voting is:</p>
-<p>+1 (means I vote positive)
-   You can say why you vote positive but it's not a must-have.</p>
-<p>0 (means vote abstention and nothing else)</p>
-<p>-1 (means I vote negative because of the following reason)
-   Yes, you must support your objection and provide an alternative course of action
-   that you are willing and able to implement (where appropriate).</p>
-<h4 id="example-for-a-vote-mail">Example for a vote mail<a class="headerlink" href="#example-for-a-vote-mail" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="n">Address</span><span class="o">:</span> <span class="kd">private</span><span class="err">@</span>
-<span class="n">Subject</span><span class="o">:</span> <span class="o">[</span><span class="n">VOTE</span><span class="o">]</span> <span class="n">John</span> <span class="n">Doe</span> <span class="n">should</span> <span class="n">become</span> <span class="n">a</span> <span class="n">regular</span> <span class="n">committer</span>
-
-<span class="n">Text</span><span class="o">:</span>
-<span class="s2">&quot;I would like to propose to vote in John Doe as committer. John has showed in</span>
-<span class="s2">the last months that he has the skills and oversight for improving things (think</span>
-<span class="s2">about the last UI change of the &quot;</span><span class="n">Find</span><span class="s2">&quot; dialog).&quot;</span>
-
-<span class="o">+</span><span class="mi">1</span> <span class="o">(</span><span class="n">means</span> <span class="n">I</span> <span class="n">vote</span> <span class="k">for</span> <span class="n">John</span><span class="o">)</span>
- <span class="mi">0</span> <span class="o">(</span><span class="n">means</span> <span class="n">vote</span> <span class="n">abstention</span><span class="o">)</span>
-<span class="o">-</span><span class="mi">1</span> <span class="o">(</span><span class="n">means</span> <span class="n">I</span> <span class="n">vote</span> <span class="n">against</span> <span class="n">John</span> <span class="n">because</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">reason</span><span class="o">:</span>
-
-<span class="n">Voting</span> <span class="n">time</span> <span class="n">frame</span> <span class="k">is</span> <span class="n">finished</span> <span class="mi">72</span> <span class="n">hours</span> <span class="n">from</span> <span class="n">now</span> <span class="n">until</span> <span class="n">June</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">12</span><span class="o">:</span><span class="mi">00</span> <span class="n">PM</span> <span class="n">UTC</span><span class="o">.</span>
-</pre></div>
-
-
-<h4 id="example-for-a-reply-mail">Example for a reply mail<a class="headerlink" href="#example-for-a-reply-mail" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>Text:
+Voting time frame is finished 72 hours from now until June 30, 12:00 PM UTC.
+</code></pre>
+      </div> 
+      <h4>Example for a reply mail</h4> 
+      <div class="codehilite">
+        <pre><code>Text:
 +1
 
 I like his work and want him to stay and to go on with his good improvements.
-</pre></div>
-
-
-<h4 id="example-for-a-result-mail">Example for a result mail<a class="headerlink" href="#example-for-a-result-mail" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span>Subject: [VOTE][RESULTS] John Doe should become a regular committer
+</code></pre>
+      </div> 
+      <h4>Example for a result mail</h4> 
+      <div class="codehilite">
+        <pre><code>Subject: [VOTE][RESULTS] John Doe should become a regular committer
 
 Text:
 Vote started Thu, Jun 27, 2011 at 12:00 PM UTC, voting is now closed.
@@ -184,30 +110,19 @@ Voting results:
 +1 Karl
 +1 Simon
 +1 Greg
-</pre></div>
-
-
-<p><a href="../../docs/governance/consensusBuilding.html">See for more information on consenus building</a> <a href="https://community.apache.org/committers/consensusBuilding.html">derived from its original Apache process</a>
-<a href="http://community.apache.org/newcommitter.html">See for more information on new committers from its original Apache process</a>
-<a href="../../docs/governance/voting.html">See for more information on voting</a> <a href="https://community.apache.org/committers/voting.html">derived from its original Apache process</a></p>
+</code></pre>
+      </div> 
+      <p><a href="/odftoolkit_website/docs/governance/consensusBuilding.html">See for more information on consenus building</a> <a href="https://community.apache.org/committers/consensusBuilding.html">derived from its original Apache process</a> <a href="http://community.apache.org/newcommitter.html">See for more information on new committers from its original Apache process</a> <a href="/odftoolkit_website/docs/governance/voting.html">See for more information on voting</a> <a href="https://community.apache.org/committers/voting.html">derived from its original Apache process</a></p> 
     </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
-      </div>
-    </div>   
-  </div>
-</body>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>

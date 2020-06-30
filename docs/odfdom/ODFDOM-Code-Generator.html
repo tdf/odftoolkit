@@ -1,493 +1,460 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
-<head>
-  <!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title>ODFDOM Code Generator</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../index.html">About</a></li>
-<li><a href="../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../get-involved.html">Get Involved</a></li>
-<li><a href="../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../people.html">People</a></li>
-<li><a href="../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../javadoc.html">JavaDoc</a></li>
-<li><a href="../website-development.html">Website Development</a></li>
-<li><a href="../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      <h1 class="title">ODFDOM Code Generator</h1>
-      <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p>The ODFDOMCodeGenerator is a java application to create source code for elements and attributes that are defined using relaxng schema.
-It is used in the ODFDOM project to generate the java source files for the elements available in the OpenDocument format.</p>
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p>To generate source code files, start the application with</p>
-<div class="codehilite"><pre><span></span>java -jar ODFDOMCodeGenerator.jar your-schema.rng your-config.xml your-template.xml /your/target/directory
-</pre></div>
-
-
-<p>Please not, if you use the ODFDOM project, you can change the setting 'gen-flat-odf-schema' inside the user.properties file
-to 'true' and the next build will use the 'schema/OpenDocument-schema-v1.1.rng' schema, the 'codegen/config.xml' config file,
-the 'codegen/javacodetemplate.xml' template file and the src directory of the project as the target directory. This will override
-all generated code files in your project.</p>
-<h2 id="the-config-file">The config file<a class="headerlink" href="#the-config-file" title="Permanent link">&para;</a></h2>
-<p>The config file must be an xml file with the following structure</p>
-<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-  &lt;config&gt;
-  &lt;elements&gt;
-  &lt;element .../&gt;
-  &lt;element .../&gt;
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
+      </div>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
+        <li class="list-group-item"><a href="../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <h1>ODFDOM Code Generator</h1> 
+      <p>The ODFDOMCodeGenerator is a java application to create source code for elements and attributes that are defined using relaxng schema. It is used in the ODFDOM project to generate the java source files for the elements available in the OpenDocument format.</p> 
+      <h2>Usage</h2> 
+      <p>To generate source code files, start the application with</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">    java -jar ODFDOMCodeGenerator.jar your-schema.rng your-config.xml your-template.xml /your/target/directory
+</code></pre>
+      </div> 
+      <p>Please not, if you use the ODFDOM project, you can change the setting 'gen-flat-odf-schema' inside the user.properties file to 'true' and the next build will use the 'schema/OpenDocument-schema-v1.1.rng' schema, the 'codegen/config.xml' config file, the 'codegen/javacodetemplate.xml' template file and the src directory of the project as the target directory. This will override all generated code files in your project.</p> 
+      <h2>The config file</h2> 
+      <p>The config file must be an xml file with the following structure</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;?xml version="1.0" encoding="UTF-8"?&amp;gt;
+  &amp;lt;config&amp;gt;
+  &amp;lt;elements&amp;gt;
+  &amp;lt;element .../&amp;gt;
+  &amp;lt;element .../&amp;gt;
   ...
-  &lt;/elements&gt;
-  &lt;data-types&gt;
-  &lt;data .../&gt;
-  &lt;data .../&gt;
+  &amp;lt;/elements&amp;gt;
+  &amp;lt;data-types&amp;gt;
+  &amp;lt;data .../&amp;gt;
+  &amp;lt;data .../&amp;gt;
   ...
-  &lt;/data-types&gt;
-  &lt;attributes&gt;
-  &lt;attribute .../&gt;
-  &lt;attribute .../&gt;
-  &lt;attribute .../&gt;
+  &amp;lt;/data-types&amp;gt;
+  &amp;lt;attributes&amp;gt;
+  &amp;lt;attribute .../&amp;gt;
+  &amp;lt;attribute .../&amp;gt;
+  &amp;lt;attribute .../&amp;gt;
   ...
-  &lt;/attributes&gt;
-  &lt;/config&gt;</p>
-<h2 id="element">Element<a class="headerlink" href="#element" title="Permanent link">&para;</a></h2>
-<p>The &lt;element&gt; element supports the following attributes</p>
-<p><strong>Name</strong></p>
-<p>The mandatory attribute 'name' selects the element from the relaxng schema with its qualified name (qname).</p>
-<p><strong>Rename</strong></p>
-<p>The optional attribute 'rename' changes the variable 'elementname' for this element.
-This can be used f.e. to give an element like &lt;text:a&gt; a more readable implementation name like &lt;text:anchor&gt;</p>
-<p><strong>Base</strong></p>
-<p>The optional attribute 'base' changes the variable 'elementbasename' for this element.</p>
-<p><strong>Family</strong></p>
-<p>The optional attribute 'family' changes the variable 'elementstylefamily' for this element.</p>
-<h2 id="attribute">Attribute<a class="headerlink" href="#attribute" title="Permanent link">&para;</a></h2>
-<p>The &lt;attribute&gt; element supports the following attributes</p>
-<p><strong>Name</strong></p>
-<p>The mandatory attribute 'name' selects the attribute from the relaxng schema with its qname.</p>
-<p><strong>Element</strong></p>
-<p>The optional attribute 'element' selects only the attributes with the qname given by the attribute 'name'
-with the elements qname.</p>
-<p><strong>Rename</strong></p>
-<p>The optional attribute 'rename' changes the variable 'attributename' for the selected attributes.
-This can be used f.e. to avoid generating getter/setter methods which names collide with base class methods.</p>
-<p><strong>Type-name</strong></p>
-<p>The optional attribute 'type-name' changes the variable 'conversiontype' for the selected attributes.
-This can be used f.e. to have different attributes from multiple elements with the same defined values
-to use a shared class for conversions.</p>
-<h2 id="data">Data<a class="headerlink" href="#data" title="Permanent link">&para;</a></h2>
-<p>The &lt;data&gt; element supports the following attributes</p>
-<p><strong>Name</strong></p>
-<p>The mandatory attribute 'name' selects the data type by its qname. Data types are the types defined in the relaxng
-schema by the &lt;data&gt; elements inside the &lt;attribute&gt; element. The name can also be the name of a &lt;ref&gt;
-element. In that case the processing of the relaxng schema stops at this &lt;ref&gt; element and the configuration
-from this element is used.</p>
-<p><strong>Value-type</strong></p>
-<p>The mandatory attribute 'value-type' changes the variable 'valuetype' for attributes using this data-type.</p>
-<p><strong>Conversion-type</strong></p>
-<p>The optional attribute 'conversion-type' changes the variable 'conversion-type' for attributes using this data-type.
-If this attribute is not available, the variable 'conversion-type' will have the same value as the variable 'valuetype'.</p>
-<h2 id="the-template-file">The template file<a class="headerlink" href="#the-template-file" title="Permanent link">&para;</a></h2>
-<p>The template file must be a valid xml file with the element &lt;template&gt; as the root element. It can contain
-the following elements</p>
-<h2 id="code">Code<a class="headerlink" href="#code" title="Permanent link">&para;</a></h2>
-<p>The &lt;code&gt; element outputs the characters inside this element to the current output file.
-The characters are scanned for expressions before written to the file.</p>
-<p>&lt;code&gt;
+  &amp;lt;/attributes&amp;gt;
+  &amp;lt;/config&amp;gt;
+</code></pre>
+      </div> 
+      <h2>Element</h2> 
+      <p>The &lt;element&gt; element supports the following attributes</p> 
+      <p><strong>Name</strong></p> 
+      <p>The mandatory attribute 'name' selects the element from the relaxng schema with its qualified name (qname).</p> 
+      <p><strong>Rename</strong></p> 
+      <p>The optional attribute 'rename' changes the variable 'elementname' for this element. This can be used f.e. to give an element like &lt;text:a&gt; a more readable implementation name like &lt;text:anchor&gt;</p> 
+      <p><strong>Base</strong></p> 
+      <p>The optional attribute 'base' changes the variable 'elementbasename' for this element.</p> 
+      <p><strong>Family</strong></p> 
+      <p>The optional attribute 'family' changes the variable 'elementstylefamily' for this element.</p> 
+      <h2>Attribute</h2> 
+      <p>The &lt;attribute&gt; element supports the following attributes</p> 
+      <p><strong>Name</strong></p> 
+      <p>The mandatory attribute 'name' selects the attribute from the relaxng schema with its qname.</p> 
+      <p><strong>Element</strong></p> 
+      <p>The optional attribute 'element' selects only the attributes with the qname given by the attribute 'name' with the elements qname.</p> 
+      <p><strong>Rename</strong></p> 
+      <p>The optional attribute 'rename' changes the variable 'attributename' for the selected attributes. This can be used f.e. to avoid generating getter/setter methods which names collide with base class methods.</p> 
+      <p><strong>Type-name</strong></p> 
+      <p>The optional attribute 'type-name' changes the variable 'conversiontype' for the selected attributes. This can be used f.e. to have different attributes from multiple elements with the same defined values to use a shared class for conversions.</p> 
+      <h2>Data</h2> 
+      <p>The &lt;data&gt; element supports the following attributes</p> 
+      <p><strong>Name</strong></p> 
+      <p>The mandatory attribute 'name' selects the data type by its qname. Data types are the types defined in the relaxng schema by the &lt;data&gt; elements inside the &lt;attribute&gt; element. The name can also be the name of a &lt;ref&gt; element. In that case the processing of the relaxng schema stops at this &lt;ref&gt; element and the configuration from this element is used.</p> 
+      <p><strong>Value-type</strong></p> 
+      <p>The mandatory attribute 'value-type' changes the variable 'valuetype' for attributes using this data-type.</p> 
+      <p><strong>Conversion-type</strong></p> 
+      <p>The optional attribute 'conversion-type' changes the variable 'conversion-type' for attributes using this data-type. If this attribute is not available, the variable 'conversion-type' will have the same value as the variable 'valuetype'.</p> 
+      <h2>The template file</h2> 
+      <p>The template file must be a valid xml file with the element &lt;template&gt; as the root element. It can contain the following elements</p> 
+      <h2>Code</h2> 
+      <p>The &lt;code&gt; element outputs the characters inside this element to the current output file. The characters are scanned for expressions before written to the file.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">&amp;lt;code&amp;gt;
   // this element generates a comment
-&lt;/code&gt;</p>
-<h2 id="define">Define<a class="headerlink" href="#define" title="Permanent link">&para;</a></h2>
-<p>The &lt;define&gt; element does not execute its child elements but remembers them with the given name for later
-use with the &lt;ref&gt; element.</p>
-<p>The mandatory attribute 'name' gives the name for this define.</p>
-<p>&lt;define name="header"&gt;
-  &lt;code&gt;
+&amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <h2>Define</h2> 
+      <p>The &lt;define&gt; element does not execute its child elements but remembers them with the given name for later use with the &lt;ref&gt; element.</p> 
+      <p>The mandatory attribute 'name' gives the name for this define.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">&amp;lt;define name="header"&amp;gt;
+  &amp;lt;code&amp;gt;
   // This file uses the gpl
   // Do not edit this file as it is automaticaly generated!
-  &lt;/code&gt;
-&lt;/define&gt;</p>
-<h2 id="ref">Ref<a class="headerlink" href="#ref" title="Permanent link">&para;</a></h2>
-<p>The &lt;ref&gt; element executes the child elements of a &lt;define&gt; element with the same name.</p>
-<p>The mandatory attribute 'name' selects the &lt;define&gt; by its attribute 'name'.</p>
-<p><ref name="header"/></p>
-<h2 id="if">If<a class="headerlink" href="#if" title="Permanent link">&para;</a></h2>
-<p>The &lt;if&gt; element executes its child elements only if the evaluated expression from its attribute 'test' is
-a non empty string and not the string constant 'false'.</p>
-<p>The mandatory attribute 'test' is evaluated as an expression.</p>
-<p>&lt;if test="elementname='text:a'&gt;
-  &lt;code&gt;
+  &amp;lt;/code&amp;gt;
+&amp;lt;/define&amp;gt;
+</code></pre>
+      </div> 
+      <h2>Ref</h2> 
+      <p>The &lt;ref&gt; element executes the child elements of a &lt;define&gt; element with the same name. The mandatory attribute 'name' selects the &lt;define&gt; by its attribute 'name'.</p> 
+      <h2>If</h2> 
+      <p>The &lt;if&gt; element executes its child elements only if the evaluated expression from its attribute 'test' is a non empty string and not the string constant 'false'.</p> 
+      <p>The mandatory attribute 'test' is evaluated as an expression.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;if test="elementname='text:a'&amp;gt;
+  &amp;lt;code&amp;gt;
     // interface for links
     public String getLink();
     public void setLink( String newLink );
-  &lt;/code&gt;
-  &lt;/if&gt;</p>
-<h2 id="else">Else<a class="headerlink" href="#else" title="Permanent link">&para;</a></h2>
-<p>The &lt;else&gt; element is always ignored, except if it is a child element inside an &lt;if&gt; element and the
-test attribute was evaluated to 'false' or an empty string.</p>
-<p>&lt;if test="elementbasename=''"&gt;
-  &lt;code&gt;
+  &amp;lt;/code&amp;gt;
+  &amp;lt;/if&amp;gt;
+</code></pre>
+      </div> 
+      <h2>Else</h2> 
+      <p>The &lt;else&gt; element is always ignored, except if it is a child element inside an &lt;if&gt; element and the test attribute was evaluated to 'false' or an empty string.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;if test="elementbasename=''"&amp;gt;
+  &amp;lt;code&amp;gt;
   class %{elementname} extends DefaultElement
-  &lt;/code&gt;
-  &lt;else&gt;
-  &lt;code&gt;
+  &amp;lt;/code&amp;gt;
+  &amp;lt;else&amp;gt;
+  &amp;lt;code&amp;gt;
   class %{elementname} extends %{elementbasename}
-  &lt;/code&gt;
-  &lt;/else&gt;
-  &lt;/if&gt;</p>
-<h2 id="set">Set<a class="headerlink" href="#set" title="Permanent link">&para;</a></h2>
-<p>The &lt;set&gt; element changes all variables with the names of the given attributes to their values. The values
-are scanned for expressions before assignement.</p>
-<p>&lt;set elementname="Hyperlink"/&gt;
-  &lt;set elementclassname="Odf%{elementname}Element"/&gt;
-  &lt;code&gt;
+  &amp;lt;/code&amp;gt;
+  &amp;lt;/else&amp;gt;
+  &amp;lt;/if&amp;gt;
+</code></pre>
+      </div> 
+      <h2>Set</h2> 
+      <p>The &lt;set&gt; element changes all variables with the names of the given attributes to their values. The values are scanned for expressions before assignement.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;set elementname="Hyperlink"/&amp;gt;
+  &amp;lt;set elementclassname="Odf%{elementname}Element"/&amp;gt;
+  &amp;lt;code&amp;gt;
   class %{elementclassname} extends OdfElement
   {
   }
-  &lt;/code&gt;</p>
-<p>will output</p>
-<div class="codehilite"><pre><span></span>  <span class="k">class</span> <span class="n">OdfHyperlinkElement</span> <span class="n">extends</span> <span class="n">OdfElement</span>
-  {
-  }
-</pre></div>
-
-
-<h2 id="foreach">Foreach<a class="headerlink" href="#foreach" title="Permanent link">&para;</a></h2>
-<p>The &lt;foreach&gt; element executes its child elements once for all objects of the given type from the relaxng schema.</p>
-<p>The mandatory attribute 'type' must have one of the following values</p>
-<p><strong>'element'</strong></p>
-<p>All elements that are defined in the relaxng are iterated. For each element the following variables will be set</p>
-<ul>
-<li>'elementqname' is the qualified name of the current element.</li>
-<li>'elementname' is the same as 'elementqname' by default. The configuration file can override this.</li>
-<li>'elementstylefamily' is empty by default. The configuration file can override this.</li>
-</ul>
-<p><strong>'attribute'</strong></p>
-<p>All attributes of the currently selected element as defined in the relaxng schema are iterated. For each attribute the following variables will be set</p>
-<ul>
-<li>'attributeqname' is the qualified name of the current attribute</li>
-<li>'attributename' is the same as 'attributeqname' by default. The configuration file can override this.</li>
-<li>'valuetype' is the data type of the &lt;data&gt; element for this attribute. If this attribute is defined by &lt;value&gt; elements, it is set to 'enum'. The configuration file can override this.</li>
-<li>'conversiontype' is the same as 'valuetype' by default. The configuration file can override this.</li>
-<li>'defaultvalue' is the default value for this attribute as defined by the relaxng schema.</li>
-</ul>
-<p><strong>'value'</strong></p>
-<p>All values for the currently selected atteribute as defined in the relaxng schmea are iterated. For each value the following variable 'value' will be set.
-This only works for attributes that are defined using &lt;value&gt; elements in the relaxng schema.</p>
-<p><strong>'namespace'</strong></p>
-<p>All namespaces used in the relaxng schema are iterated. For each namespace the following variables will be set</p>
-<ul>
-<li>'namespaceprefix' is the prefix of the current namespace</li>
-<li>'namespaceuri' is the uri of the current namespace</li>
-</ul>
-<h2 id="select">Select<a class="headerlink" href="#select" title="Permanent link">&para;</a></h2>
-<p>The &lt;select&gt; element works the same as the &lt;foreach&gt; element but instead of iterating all objects of the given type it selects only one object by its qname with the mandatory attribute 'name'.
-Can only be used for types 'element', 'attribute' and 'namespace'.</p>
-<h2 id="file">File<a class="headerlink" href="#file" title="Permanent link">&para;</a></h2>
-<p>The &lt;file&gt; element opens a new text file for writing. The following attributes are supported</p>
-<p><strong>Path</strong></p>
-<p>The mandatory attribute 'path' specifies the path of the new file.</p>
-<p><strong>Name</strong></p>
-<p>The mandatory attribute 'name' specifies the name of the new file.</p>
-<p><strong>Extension</strong></p>
-<p>The mandatory attribute 'extension' specifies the extension of the new file.</p>
-<h2 id="expressions">Expressions<a class="headerlink" href="#expressions" title="Permanent link">&para;</a></h2>
-<p>Expressions can be part of characters inside &lt;code&gt; elements and inside some attributes.
-If embedded inside other text they are distinguished by putting them inside %{...} constructs.
-Expressions can contain variable names, contant strings, operators and functions</p>
-<h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h2>
-<p>Variables must start with a us-ascii character ('a-z' or 'A-Z) or one of the following characters '_' '.' and
-contain more of the same characters and also digits.</p>
-<p>The following example</p>
-<p>&lt;set testvar="World"/&gt;
-  &lt;code&gt;Hello %{testvar}!&lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>Hello World!
-</pre></div>
-
-
-<h2 id="constant-strings">Constant strings<a class="headerlink" href="#constant-strings" title="Permanent link">&para;</a></h2>
-<p>Constand strings must be delimeted by either ' or " like c++ or java strings.</p>
-<p>The following example</p>
-<p>&lt;set testvar="yes"/&gt;
-  &lt;if test="testvar='yes'"&gt;
-  &lt;code&gt;
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>will output</p> 
+      <div class="codehilite">
+        <pre><code class="language-Java">      class OdfHyperlinkElement extends OdfElement
+      {
+      }
+</code></pre>
+      </div> 
+      <h2>Foreach</h2> 
+      <p>The &lt;foreach&gt; element executes its child elements once for all objects of the given type from the relaxng schema.</p> 
+      <p>The mandatory attribute 'type' must have one of the following values</p> 
+      <p><strong>'element'</strong></p> 
+      <p>All elements that are defined in the relaxng are iterated. For each element the following variables will be set</p> 
+      <ul> 
+        <li>'elementqname' is the qualified name of the current element.</li> 
+        <li>'elementname' is the same as 'elementqname' by default. The configuration file can override this.</li> 
+        <li>'elementstylefamily' is empty by default. The configuration file can override this.</li> 
+      </ul> 
+      <p><strong>'attribute'</strong></p> 
+      <p>All attributes of the currently selected element as defined in the relaxng schema are iterated. For each attribute the following variables will be set</p> 
+      <ul> 
+        <li>'attributeqname' is the qualified name of the current attribute</li> 
+        <li>'attributename' is the same as 'attributeqname' by default. The configuration file can override this.</li> 
+        <li>'valuetype' is the data type of the &lt;data&gt; element for this attribute. If this attribute is defined by &lt;value&gt; elements, it is set to 'enum'. The configuration file can override this.</li> 
+        <li>'conversiontype' is the same as 'valuetype' by default. The configuration file can override this.</li> 
+        <li>'defaultvalue' is the default value for this attribute as defined by the relaxng schema.</li> 
+      </ul> 
+      <p><strong>'value'</strong></p> 
+      <p>All values for the currently selected atteribute as defined in the relaxng schmea are iterated. For each value the following variable 'value' will be set. This only works for attributes that are defined using &lt;value&gt; elements in the relaxng schema.</p> 
+      <p><strong>'namespace'</strong></p> 
+      <p>All namespaces used in the relaxng schema are iterated. For each namespace the following variables will be set</p> 
+      <ul> 
+        <li>'namespaceprefix' is the prefix of the current namespace</li> 
+        <li>'namespaceuri' is the uri of the current namespace</li> 
+      </ul> 
+      <h2>Select</h2> 
+      <p>The &lt;select&gt; element works the same as the &lt;foreach&gt; element but instead of iterating all objects of the given type it selects only one object by its qname with the mandatory attribute 'name'. Can only be used for types 'element', 'attribute' and 'namespace'.</p> 
+      <h2>File</h2> 
+      <p>The &lt;file&gt; element opens a new text file for writing. The following attributes are supported</p> 
+      <p><strong>Path</strong></p> 
+      <p>The mandatory attribute 'path' specifies the path of the new file.</p> 
+      <p><strong>Name</strong></p> 
+      <p>The mandatory attribute 'name' specifies the name of the new file.</p> 
+      <p><strong>Extension</strong></p> 
+      <p>The mandatory attribute 'extension' specifies the extension of the new file.</p> 
+      <h2>Expressions</h2> 
+      <p>Expressions can be part of characters inside &lt;code&gt; elements and inside some attributes. If embedded inside other text they are distinguished by putting them inside %{...} constructs. Expressions can contain variable names, contant strings, operators and functions</p> 
+      <h2>Variables</h2> 
+      <p>Variables must start with a us-ascii character ('a-z' or 'A-Z) or one of the following characters '_' '.' and contain more of the same characters and also digits.</p> 
+      <p>The following example</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;set testvar="World"/&amp;gt;
+  &amp;lt;code&amp;gt;Hello %{testvar}!&amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">    Hello World!
+</code></pre>
+      </div> 
+      <h2>Constant strings</h2> 
+      <p>Constand strings must be delimeted by either ' or " like c++ or java strings.</p> 
+      <p>The following example</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;set testvar="yes"/&amp;gt;
+  &amp;lt;if test="testvar='yes'"&amp;gt;
+  &amp;lt;code&amp;gt;
   Yes!
-  &lt;/code&gt;
-  &lt;else&gt;
-  &lt;code&gt;
+  &amp;lt;/code&amp;gt;
+  &amp;lt;else&amp;gt;
+  &amp;lt;code&amp;gt;
   No!
-  &lt;/code&gt;
-  &lt;/else&gt;
-  &lt;/if&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  Yes!
-</pre></div>
-
-
-<h2 id="operators">Operators<a class="headerlink" href="#operators" title="Permanent link">&para;</a></h2>
-<p>The following operators are supported (given from lowest to highes priority)</p>
-<p><strong>not</strong></p>
-<p>The not operator returns 'true' of the following string expression is not empty and not 'false' or 'false' otherwise.</p>
-<p>The following example</p>
-<p>&lt;set testvar="yes"/&gt;
-  &lt;code&gt;
+  &amp;lt;/code&amp;gt;
+  &amp;lt;/else&amp;gt;
+  &amp;lt;/if&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      Yes!
+</code></pre>
+      </div> 
+      <h2>Operators</h2> 
+      <p>The following operators are supported (given from lowest to highes priority)</p> 
+      <p><strong>not</strong></p> 
+      <p>The not operator returns 'true' of the following string expression is not empty and not 'false' or 'false' otherwise.</p> 
+      <p>The following example</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;set testvar="yes"/&amp;gt;
+  &amp;lt;code&amp;gt;
   %{ testvar } or %{ not testvar }
-  &lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  yes or false
-</pre></div>
-
-
-<p><strong>+</strong></p>
-<p>The + operator concatenates two string expressions.</p>
-<p>The following example</p>
-<p>&lt;code&gt;
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      yes or false
+</code></pre>
+      </div> 
+      <p><strong>+</strong></p> 
+      <p>The + operator concatenates two string expressions.</p> 
+      <p>The following example</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;code&amp;gt;
   %{ 'Hello' + ' ' + "World" + "!" }
-  &lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  Hello World!
-</pre></div>
-
-
-<p><strong>or</strong></p>
-<p>The or operator returns 'true' if the previous string expression is not empty and not 'false' or the next string expression is not empty and not 'false'.</p>
-<p>&lt;code&gt;
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      Hello World!
+</code></pre>
+      </div> 
+      <p><strong>or</strong></p> 
+      <p>The or operator returns 'true' if the previous string expression is not empty and not 'false' or the next string expression is not empty and not 'false'.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;code&amp;gt;
   %{ 'true' or 'false' }
-  &lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  true
-</pre></div>
-
-
-<p><strong>and</strong></p>
-<p>The or operator returns 'true' if the previous string expression is not empty and not 'false' and the next string expression is not empty and not 'false'.</p>
-<p>&lt;code&gt;
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      true
+</code></pre>
+      </div> 
+      <p><strong>and</strong></p> 
+      <p>The or operator returns 'true' if the previous string expression is not empty and not 'false' and the next string expression is not empty and not 'false'.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;code&amp;gt;
   %{ 'true' and 'false' }
   %{ 'true' and 'true' }
-  &lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  false
-  true
-</pre></div>
-
-
-<p><strong>Equals</strong></p>
-<p>The '=' operator returns 'true' if the previous string expression is equal to the next string expression or 'false' otherwise.</p>
-<p>&lt;code&gt;
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      false
+      true
+</code></pre>
+      </div> 
+      <p><strong>Equals</strong></p> 
+      <p>The '=' operator returns 'true' if the previous string expression is equal to the next string expression or 'false' otherwise.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;code&amp;gt;
   %{ 'true' = 'false' }
   %{ 'hello' = 'hello' }
-  &lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  false
-  true
-</pre></div>
-
-
-<p><strong>Unequals</strong></p>
-<p>The '!=' operator returns 'false' if the previous string expression is equal to the next string expression or 'true' otherwise.</p>
-<p>&lt;code&gt;
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      false
+      true
+</code></pre>
+      </div> 
+      <p><strong>Unequals</strong></p> 
+      <p>The '!=' operator returns 'false' if the previous string expression is equal to the next string expression or 'true' otherwise.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;code&amp;gt;
   %{ 'true' != 'false' }
   %{ 'hello' != 'hello' }
-  &lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  true
-  false
-</pre></div>
-
-
-<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
-<p>Functions start with a name followed by a pair of brackets with a list of coma seperated parameters inside. The following functions are supported</p>
-<p><strong>toupper</strong></p>
-<p>The function toupper returns the given string as an upercase version</p>
-<p>&lt;code&gt;
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      true
+      false
+</code></pre>
+      </div> 
+      <h2>Functions</h2> 
+      <p>Functions start with a name followed by a pair of brackets with a list of coma seperated parameters inside. The following functions are supported</p> 
+      <p><strong>toupper</strong></p> 
+      <p>The function toupper returns the given string as an upercase version</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;code&amp;gt;
   %{ toupper('true') }
-  &lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  TRUE
-</pre></div>
-
-
-<p><strong>tolower</strong></p>
-<p>The function tolower returns the given string as a lowercase version.</p>
-<p>&lt;code&gt;
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      TRUE
+</code></pre>
+      </div> 
+      <p><strong>tolower</strong></p> 
+      <p>The function tolower returns the given string as a lowercase version.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;code&amp;gt;
   %{ toupper('TRUE') }
-  &lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  true
-</pre></div>
-
-
-<p><strong>prefix</strong></p>
-<p>The function 'prefix' returns the namespace prefix from a qualified name.</p>
-<p><strong>local_name</strong></p>
-<p>The function 'local_name' returns the local name from a qualified name.</p>
-<p>&lt;set qname='text:section'/&gt;
-  &lt;code&gt;
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      true
+</code></pre>
+      </div> 
+      <p><strong>prefix</strong></p> 
+      <p>The function 'prefix' returns the namespace prefix from a qualified name.</p> 
+      <p><strong>local_name</strong></p> 
+      <p>The function 'local_name' returns the local name from a qualified name.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;set qname='text:section'/&amp;gt;
+  &amp;lt;code&amp;gt;
   %{ prefix(qname) }
   %{ local_name(qname) }
-  &lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  text
-  section
-</pre></div>
-
-
-<p><strong>identifier</strong></p>
-<p>The function 'identifier' converts the given string into a valid java/c++ identifier.
-If the given string is a qualified name, it first removes the prefix.
-Then all '-' Characters will be removed and all characters following '-' will be converted to upercase.
-If the result begins with a non valid character, a '_' will be inserted as the first character.</p>
-<p>&lt;set qname='text:section'/&gt;
-  &lt;code&gt;
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      text
+      section
+</code></pre>
+      </div> 
+      <p><strong>identifier</strong></p> 
+      <p>The function 'identifier' converts the given string into a valid java/c++ identifier. If the given string is a qualified name, it first removes the prefix. Then all '-' Characters will be removed and all characters following '-' will be converted to upercase. If the result begins with a non valid character, a '_' will be inserted as the first character.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;set qname='text:section'/&amp;gt;
+  &amp;lt;code&amp;gt;
   %{ identifier('text:anchor-position') }
   %{ identifier('300') }
-  &lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  AnchorPosition
-  _300
-</pre></div>
-
-
-<p><strong>endswith</strong></p>
-<p>The function 'endswith' returns true if the first parameter ends with the second.</p>
-<p>&lt;code&gt;
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      AnchorPosition
+      _300
+</code></pre>
+      </div> 
+      <p><strong>endswith</strong></p> 
+      <p>The function 'endswith' returns true if the first parameter ends with the second.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;code&amp;gt;
   %{ endswith('foobar','bar') }
   %{ endswith('foobar','foo') }
-  &lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  true
-  false
-</pre></div>
-
-
-<p><strong>startswith</strong></p>
-<p>The function 'startswith' returns true if the first parameter starts with the second.</p>
-<p>&lt;code&gt;
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      true
+      false
+</code></pre>
+      </div> 
+      <p><strong>startswith</strong></p> 
+      <p>The function 'startswith' returns true if the first parameter starts with the second.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;code&amp;gt;
   %{ startswith('foobar','bar') }
   %{ startswith('foobar','foo') }
-  &lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  false
-  true
-</pre></div>
-
-
-<p><strong>replace</strong></p>
-<p>The function 'replace' replaces all occurrences of the first parameter with the second parameter inside the third parameter.</p>
-<p>&lt;code&gt;
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      false
+      true
+</code></pre>
+      </div> 
+      <p><strong>replace</strong></p> 
+      <p>The function 'replace' replaces all occurrences of the first parameter with the second parameter inside the third parameter.</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">  &amp;lt;code&amp;gt;
   %{ replace('USA','World','Hello USA!') }
-  &lt;/code&gt;</p>
-<p>outputs</p>
-<div class="codehilite"><pre><span></span>  Hello World!
-</pre></div>
+  &amp;lt;/code&amp;gt;
+</code></pre>
+      </div> 
+      <p>outputs</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">      Hello World!
+</code></pre>
+      </div> 
     </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
-      </div>
-    </div>   
-  </div>
-</body>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>
