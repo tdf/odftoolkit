@@ -1,8 +1,5 @@
 # The ODF Toolkit
 
-Visit our latest documentation on [GitHub](./docs/index.html).
-People interested should follow the [mail list](mailing-lists.html) to track progress.
-
 ## Mission Statement
 
 The ODF Toolkit is a set of Java modules that allow programmatic creation,
@@ -22,6 +19,9 @@ Offered as command-line tool (executable JAR) or server component - via Web appl
 This functionality is also available from [ANT](https://ant.apache.org/) using our [ANT task](xsltrunner/ODFXSLTRunnerTask.html)
 
 4. **Creating Software Artefacts from the ODF grammar** is possible via the [generator project](2DO.html)
+
+Find our sources on [GitHub](https://github.com/tdf/odftoolkit).
+People interested should follow the [mail list](mailing-lists.html) to track progress.
 
 ## History
 
