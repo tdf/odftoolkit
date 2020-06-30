@@ -3,7 +3,7 @@
 ## Mission Statement
 
 The ODF Toolkit is a set of Java modules that allow programmatic creation,
-scanning and manipulation of [Open Document Format][http://opendocument.xml.org/], which [is being developed under OASIS][https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office] (ISO/IEC 26300 == ODF) documents. Unlike other approaches which rely on runtime manipulation
+scanning and manipulation of [Open Document Format](http://opendocument.xml.org/), which [is being developed under OASIS](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office) (ISO/IEC 26300 == ODF) documents. Unlike other approaches which rely on runtime manipulation
 of heavy-weight editors via an automation interface, the ODF Toolkit
 is lightweight and ideal for server use.
 
