@@ -50,6 +50,9 @@ public class WebsiteGenerator
 		Path dirImages = dirContent.resolve("images");
 		copyRecursive(dirImages, dirOutput.resolve("images"));
 
+		Path dirCss = dirContent.resolve("css");
+		copyRecursive(dirCss, dirOutput.resolve("css"));
+
 		Path fileSideNav = dirTemplates.resolve("sidenav.mdtext");
 		markdownSidenav = loadText(fileSideNav);
 	}
