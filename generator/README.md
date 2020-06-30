@@ -18,7 +18,7 @@ In the ODFDOM project these classes have the following locations:
 
 The library is build upon two powerful open source tools:
 
-1. [Multi Schema Validator (MSV)](https://github.com/xmlark/msv)
+1. [Multi Schema Validator (MSV)](https://github.com/kohsuke/msv)
 Used to read arbitrary XML schema and map them to an internal RelaxNG model.
 
 2. [Apache's Velocity Template Engine](http://velocity.apache.org/)
@@ -32,7 +32,7 @@ For a given XML schema (e.g. RelaxNG, DTD, W3C schema) the following can be crea
 
 ## Design
 
-Read in the Java documentation more about the [generator design](./docs/api/schema2template/index.html) build upon the Multi Schema Validator (MSV).
+Read in the Java documentation more about the [generator design](https://tdf.github.io/odftoolkit/docs/api/schema2template/index.html) build upon the Multi Schema Validator (MSV).
 
 ## License
 
