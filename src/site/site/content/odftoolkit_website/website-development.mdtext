@@ -2,88 +2,52 @@
 
 ## Introduction
 
-The pages on this website are written in [markdown syntax] [1] and stored in our GIT repro at
+The pages on this website are written in [markdown syntax] [1] and stored in our GIT repo at
 [src/site] [2]
 
-We are bundling the previous used [Apache CMS] [7] now as [local CMS] [3] and capsulating its complexity via [two bash scripts] [4].
-By this it is possible to edit, stage and publish website updates from the command line under Linux (see below)
+A subproject contained within the repo is used to generate the website from the Markdown text
+files and the resources stored in the content directory.
 
 ## Overview
 
 This website development page is divided into:
 
 * [Setup](#setup) - How to download the website and setup the tooling.
-* [Directory Layout](#directory-layout) - Where to find the content, templates, and scripts.
+* [Directory Layout](#directory-layout) - Where to find the content and scripts.
 * [Local Development](#local-development) - How to build and test locally.
 * [Submitting Your Results](#submitting-your-results) - How to contribute your edits.
 
 ## Setup
 
-**NOTE:**
-Some of us are using on their computer a VirtualBox with Linux (e.g. Ubuntu) just for this environment.
-
-### Install Python 2 dependencies
-
-#### Check your version of Python
-
-*python --version*
-
-Source code generation has been tested successfully with Python 2.7.16
-
-#### Install dependencies
-
-NOTE: The Apache CMS [5] bundled within the site directory depends on old libraries.
-
-*sudo apt-get install -y python2.7-elementtree*
-*sudo apt install python-pip*
-*python -m pip install "Markdown==2.6.11"*
-*python -m pip install "Pygments==2.2.0"*
-
 ### Download the repo
 
-*git clone https://github.com/tdf/odftoolkit*
-*cd odftoolkit/src/site*
+Check out the repository and navigate there:
+
+    git clone https://github.com/tdf/odftoolkit
+    cd odftoolkit/src/site/java
+
+Then build the project:
+
+    ./gradlew createRuntime
 
 ## Directory Layout
 
 ### Content directory
 
-The `src/site/site/content/odftoolkit` directory contains web content - markdown, html, javascript, css, images and other files. Files that do not fit recognized patterns from `site/lib/path.pm` are copied as is to the web site during the build.
-
-### Templates directory
-
-The `src/site/site/templates` directory contains the html skeletons used during the site build.
-
-* `skeleton.html` - our current html page template.
-* `sidenav.mdtext` - markdown of the side navigation panel.
-
-### Lib directory
-
-The `src/site/site/lib` directory contains two python modules that determine how content files are processed during the site build.
-
-* `path.pm` - maps file patterns like `.mdtext` into the view building routines. We can expand to cover other patterns.
-* `view.pm` - a set of python subroutines for converting content into web pages.
-
-### Build tools
-
-You can find the CMS build tools in the `cms` directory.
-
-* `src/site/cms/build/` - perl scripts for building the site and markdown extensions.
-* `src/site/cms/conversion-utilities/` - scripts used by various projects for conversion including `cwiki` conversion.
-* `src/site/cms/webgui/` - the webgui behind the `bookmarklet`.
+The `src/site/site/content/odftoolkit` directory contains web content - markdown, html, javascript, css, images and other files.
+Resources such as images, CSS files and ZIP files are copied as is to the web site during the build.
 
 ## Local Development
 
 ### Edit the site
 
-Using your favorite editors edit the site content, templates.
+Using your favorite editors edit the site content.
 
 ### Build the site
 
-Run the `build-site.sh` script to build the markdown to HTML and copy all resources into the odftoolkit/docs directory.
-After the changes have been merged into the master branch, all changes will become visible at <./docs/> as our GitHub project has enabled this feature.
-**NOTE:**
-Before commiting, you should test if all content of the HTML pages have been created - by clicking on every link on the local page. Often ODFDOM or Validator page were empty.
+Run this to generate the website into directory <output>:
+
+    ./scripts/website-cli generate `<output>`
 
 ## Building JavaDoc and publishing the JavaDoc
 
@@ -102,8 +66,4 @@ For further information see the [GitHub help on creating a pull request from a f
 
 [1]: https://www.apache.org/dev/cmsref.html#markdown
 [2]: https://github.com/tdf/odftoolkit/tree/master/src/site
-[3]: https://github.com/tdf/odftoolkit/tree/master/src/site/cms
-[4]: https://github.com/tdf/odftoolkit/tree/master/src/site
-[5]: http://www.apache.org/dev/cmsref.html#local-build
 [6]: https://help.github.com/en/articles/creating-a-pull-request-from-a-fork
-[7]: https://www.apache.org/dev/cmsref.html
