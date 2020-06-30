@@ -48,7 +48,8 @@ public class WebsiteGenerator
 		Path dirResources = repo.resolve("src/site/java/resources");
 		copy(dirResources.resolve("custom.css"), dirOutput);
 
-		List<String> extensions = Arrays.asList("png", "gif", "jpg", "zip");
+		List<String> extensions = Arrays.asList("png", "gif", "jpg", "zip",
+				"css");
 		for (String path : Arrays.asList("images", "simple", "odfdom")) {
 			copyRecursive(dirContent.resolve(path), dirOutput.resolve(path),
 					extensions);
