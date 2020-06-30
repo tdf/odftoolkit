@@ -62,6 +62,12 @@ public class MarkdownGenerator extends BaseGenerator
 
 		Markdown.renderFile(contentA, file);
 
+		for (org.jsoup.nodes.Element element : contentA.select("pre")) {
+			Div codeContainer = HTML.div("codehilite");
+			element.before(codeContainer);
+			codeContainer.ac(element);
+		}
+
 		addFooter(body);
 
 		Files.createDirectories(path.getParent());
