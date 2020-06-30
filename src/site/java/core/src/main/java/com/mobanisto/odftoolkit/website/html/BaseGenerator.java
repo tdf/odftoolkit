@@ -19,12 +19,12 @@ public class BaseGenerator
 		Meta meta = head.ac(HTML.meta());
 		meta.attr("http-equiv", "content-type");
 		meta.attr("content", "text/html; charset=utf-8");
-
+/*
 		ElementUtil.appendFragmentHead(head,
 				"<link rel=\"stylesheet\" href=\""
 						+ webPath.relativize(Site.PATH_CUSTOM_STYLES).toString()
 						+ "\">");
-
+*/
 		head.ac(ElementBuilder.styleSheet(
 				webPath.relativize(Site.PATH_ODF_STYLES).toString()));
 	}
