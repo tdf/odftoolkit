@@ -20,8 +20,6 @@ public class BaseGenerator
 		meta.attr("http-equiv", "content-type");
 		meta.attr("content", "text/html; charset=utf-8");
 
-		ElementUtil.appendFragmentHead(head, "<link rel=\"stylesheet\" href=\""
-				+ webPath.relativize(Site.PATH_STYLES).toString() + "\">");
 		ElementUtil.appendFragmentHead(head,
 				"<link rel=\"stylesheet\" href=\""
 						+ webPath.relativize(Site.PATH_CUSTOM_STYLES).toString()
