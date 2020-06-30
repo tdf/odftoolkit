@@ -5,18 +5,11 @@ echo "  in ./website-development.html"
 # Start the Python Markdown daemon. (tested with Python 2.7.16)
 export MARKDOWN_SOCKET=`pwd`/markdown.socket PYTHONPATH=`pwd`
 python cms/build/markdownd.py
-echo 1. Copying actual README.md \& related files to site
-# root README.md and related fiels becomding index.mdtext
-#cp ../../README.md ./site/content/odftoolkit_website/introduction.mdtext #2DO rename to index.mdtext
-cp ../../LICENSE ./site/content/odftoolkit_website/
-cp ../../NOTICE ./site/content/odftoolkit_website/
-cp ../../KEYS ./site/content/odftoolkit_website/
-
-echo 2. Built the site..
+echo 1. Built the site..
 #  Build the site
 cms/build/build_site.pl --source-base site --target-base www
 
-echo 3. Exchanging the absolute HTML reference with relative ones..
+echo 2. Exchanging the absolute HTML reference with relative ones..
 # 1) find all files (even with space in name) ending with ''.html' of a certain directory level
 # 2) exchange the fixed prefix '/odftoolkit_website' with the adequate relative one
 find www -mindepth 3 -maxdepth 3 -type f -print0 -name *.html | xargs -0 sed -i -e 's+/odftoolkit_website+.+g'
@@ -27,33 +20,46 @@ find www -mindepth 7 -maxdepth 7 -type f -print0 -name *.html | xargs -0 sed -i 
 find www -mindepth 8 -maxdepth 8 -type f -print0 -name *.html | xargs -0 sed -i -e 's+/odftoolkit_website+../../../../..+g' 2>/dev/null
 find www -mindepth 9 -maxdepth 9 -type f -print0 -name *.html | xargs -0 sed -i -e 's+/odftoolkit_website+../../../../../..+g' 2>/dev/null
 
-echo 4. Backup none-site related content
-mv ../../docs/api ../..
-mv ../../docs/docs/presentations ../..
-mv ../../docs/odf1.2 ../..
-mv ../../docs/odf1.3 ../..
+echo 3. Backup none-site related content
+mv "../../docs/api" ../..
 
-echo 5. Remove all existing content
-rm -rf ../../docs/*
+echo 4. Remove previous HTML
+rm ../../docs/*.html
+rm ../../docs/odfdom/*.html
+rm ../../docs/simple/*.html
+rm ../../docs/xsltrunner/*.html
 
-echo 6. Move all new generated HTML into /docs folder
-mv ./www/content/odftoolkit_website/* ../../docs/
+echo 5. Move all new generated HTML into /docs folder
+cp -rf ./www/content/odftoolkit_website/* ../../docs/
 
-echo 7. Restore none-site related content
-mv ../../api ../../docs
-mv ../../presentations ../../docs/docs/
-mv ../../odf1.2 ../../docs
-mv ../../odf1.3 ../../docs
+echo 6. Restore none-site related content
+mv "../../api" ../../docs
 
-echo 8. Remove temporary files and directories
+echo 7. Remove temporary files and directories
 rm markdown.socket
 rm -rf www
 rm -rf cms/build/*.pyc
-# root README.md and related fiels becomding index.mdtext
-rm ./site/content/odftoolkit_website/introduction.mdtext #2DO rename
-rm ./site/content/odftoolkit_website/LICENSE
-rm ./site/content/odftoolkit_website/NOTICE
-rm ./site/content/odftoolkit_website/KEYS
+
+echo 8. Workaround of brokin HTML tooling - problem with MD indent
+python -m markdown site/content/odftoolkit_website/conformance/ODFValidator.mdtext > tmp.html
+cat site/start.html tmp.html site/end.html > ../../docs/conformance/ODFValidator.html
+rm tmp.html
+
+python -m markdown site/content/odftoolkit_website/odfdom/index.mdtext > tmp.html
+cat site/start.html tmp.html site/end.html > ../../docs/odfdom/index.html
+rm tmp.html
+
+python -m markdown site/content/odftoolkit_website/xsltrunner/ODFXSLTRunner.mdtext > tmp.html
+cat site/start.html tmp.html site/end.html > ../../docs/xsltrunner/ODFXSLTRunner.html
+rm tmp.html
+
+python -m markdown site/content/odftoolkit_website/xsltrunner/ODFXSLTRunnerExamples.mdtext > tmp.html
+cat site/start.html tmp.html site/end.html > ../../docs/xsltrunner/ODFXSLTRunnerExamples.html
+rm tmp.html
+
+python -m markdown site/content/odftoolkit_website/xsltrunner/ODFXSLTRunnerTask.mdtext > tmp.html
+cat site/start.html tmp.html site/end.html > ../../docs/xsltrunner/ODFXSLTRunnerTask.html
+rm tmp.html
 
 echo 
 echo Now you may review the generated website in the '"<ODF_TOOLKIT>/docs/" directory'!
