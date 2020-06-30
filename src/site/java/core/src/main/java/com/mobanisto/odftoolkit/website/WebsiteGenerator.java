@@ -23,13 +23,14 @@ public class WebsiteGenerator
 {
 
 	private Path repo;
+	private Path dirOutput;
 
-	public WebsiteGenerator(Path repo)
+	public WebsiteGenerator(Path repo, Path dirOutput)
 	{
 		this.repo = repo;
+		this.dirOutput = dirOutput;
 	}
 
-	private Path dirOutput;
 	private Path dirSite;
 	private Path dirTemplates;
 	private Path dirContent;
@@ -38,7 +39,6 @@ public class WebsiteGenerator
 
 	private void init() throws IOException
 	{
-		dirOutput = repo.resolve("docs");
 		System.out.println("output directory: " + dirOutput);
 
 		dirSite = repo.resolve("src/site/site");

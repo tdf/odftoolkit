@@ -1,7 +1,11 @@
 package com.mobanisto.odftoolkit.website;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
+import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
 
 import de.topobyte.utilities.apache.commons.cli.commands.args.CommonsCliArguments;
@@ -18,7 +22,8 @@ public class RunGenerate
 		public ExeOptions createOptions()
 		{
 			Options options = new Options();
-			return new CommonsCliExeOptions(options, "[options]");
+			return new CommonsCliExeOptions(options,
+					"[options] <output directory>");
 		}
 
 	};
@@ -31,7 +36,19 @@ public class RunGenerate
 		CliEnvironment environment = new CliEnvironment();
 		Path repo = environment.getPathRepo();
 
-		WebsiteGenerator websiteGenerator = new WebsiteGenerator(repo);
+		CommandLine line = arguments.getLine();
+		List<String> args = line.getArgList();
+		if (args.size() != 1) {
+			System.out.println("Please specify the output directory");
+			arguments.getOptions().usage("generate");
+			System.exit(1);
+		}
+
+		Path dirOutput = Paths.get(args.get(0));
+		Files.createDirectories(dirOutput);
+
+		WebsiteGenerator websiteGenerator = new WebsiteGenerator(repo,
+				dirOutput);
 		websiteGenerator.generate();
 	}
 
