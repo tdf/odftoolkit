@@ -1,4 +1,4 @@
-Title: Simple API Documents
+# Simple API Documents
 
 *In this page, documents of Simple API are listed.*
 
@@ -32,7 +32,6 @@ You can download the Javadoc of different versions on the [Downloads Page][1].
 - [Requirements][10]
 - [Architecture][11]
 - [API Changes From ODFDOM 0.8.6][12]
-
 
   [1]: ../downloads.html
   [2]: cookbook/index.html

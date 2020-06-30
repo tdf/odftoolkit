@@ -1,13 +1,13 @@
-Title: Simple API Release Notes
+# Simple API Release Notes
 
 **Release 0.6.6**
 *Auguest 12th 2011*
 
 We are pleased to announce the release of the Simple Java API for ODF version 0.6.6 today. The improvements in this version include:
 
-  - Two critical bugs in Navigation API and several other issues are fixed.
-  - Page columns, a page layout feature in text document, are now supported.
-  - Unit test coverage rate increased.  This work improves the stability of our API.
+- Two critical bugs in Navigation API and several other issues are fixed.
+- Page columns, a page layout feature in text document, are now supported.
+- Unit test coverage rate increased.  This work improves the stability of our API.
 
 You can download it [here][1].
 
@@ -33,12 +33,12 @@ ODF Toolkit has been accepted as [Apache incubator project][2] and the move proc
 
 We are pleased to announce the release of the Simple Java API for ODF version 0.6.5 today. The improvements in this version focus on paragraph and text documents. They are:
 
- - Hard page breaks, including append page break at the end of text document and append page break after a reference paragraph.
- - Headings, including append heading, apply plain text as heading.
- - Comments, including add comment to a text selection, apply comment to a paragraph.
- - Paragraph font, get/set paragraph font size, style, color and so on.
- - Paragraph alignment, get/set paragraph text alignment.
- - Hyperlinks, including navigation hyperlinks, apply hyperlink to a selection, append hyperlink to paragraph.
+- Hard page breaks, including append page break at the end of text document and append page break after a reference paragraph.
+- Headings, including append heading, apply plain text as heading.
+- Comments, including add comment to a text selection, apply comment to a paragraph.
+- Paragraph font, get/set paragraph font size, style, color and so on.
+- Paragraph alignment, get/set paragraph text alignment.
+- Hyperlinks, including navigation hyperlinks, apply hyperlink to a selection, append hyperlink to paragraph.
 
 An interesting [demo][15] is uploaded to the website to show how to use these new features to format a text document.
 
@@ -77,17 +77,17 @@ We are pleased to announce the release of the Simple Java API for ODF version 0.
 
 We also make some enhancements based on user requests:
 
- - Ability to set table cell widths and heights with high precision;
- - Ability to set validity rules for the values of table cells;
- - Provide helper methods for Spreadsheet document to get table;
- - Provide more layout definitions for slides
+- Ability to set table cell widths and heights with high precision;
+- Ability to set validity rules for the values of table cells;
+- Provide helper methods for Spreadsheet document to get table;
+- Provide more layout definitions for slides
 
 ***Resolved Issues***
 
- - [Bug 332][22] -  Nice to have means to set table cell widths and heights with sub-millimeter precision.
- - [Bug 260][23] -  Table cell validate function.
- - [Bug 243][24] -  SpreadsheetDocument needs helper functions to get to Table.
- - [Bug 330][25] -  Supply Chart API Features.
+- [Bug 332][22] -  Nice to have means to set table cell widths and heights with sub-millimeter precision.
+- [Bug 260][23] -  Table cell validate function.
+- [Bug 243][24] -  SpreadsheetDocument needs helper functions to get to Table.
+- [Bug 330][25] -  Supply Chart API Features.
 
 ***API changes since 0.5.5 Release***
 
@@ -125,24 +125,24 @@ We released the Simple Java API for ODF  version 0.5.5 today. In this version, w
 
 We also made some useful enhancements based on user requests:
 
- - automatically adjust the table column width based on its text content
- - allow several paragraphs to be added to a single cell
- - set whether or not a header/footer is visible
- - optimize some table methods to improve performance
+- automatically adjust the table column width based on its text content
+- allow several paragraphs to be added to a single cell
+- set whether or not a header/footer is visible
+- optimize some table methods to improve performance
 
 ***Resolved Issues***
 
- - [Bug 256][27] -  JavaDoc should be deployed via Maven to the Simple website.
- - [Bug 269][28] -  Desirable column width is calculated in characters on the basis of the size of the data that will go into the table.
- - [Bug 273][29] -  The performance of getRowList/getColumnList is too low, if there is a row element with 65535 repeat number.
- - [Bug 309][30] -  Supply method to set the header/footer visible or not.
- - [Bug 311][31] -  Insert several paragraphs in a cell or several different text in the same paragraph in a cell.
- - [Bug 312][32] -  Allow to set alignment of image in a table cell.
- - [Bug 326][33] -  Something is missing in order to move the object on the sheet.
- - [Bug 327][34] -  Problem with the adding of tables in Footer.
- - [Bug 328][35] -  Performance problem in CellRange constructor when Table.getRowCount() is large.
- - [Bug 329][36] -  Unable to set the column widths of a table with precision.
- - [Bug 333][37] -  Provide convenient methods for image and text span.
+- [Bug 256][27] -  JavaDoc should be deployed via Maven to the Simple website.
+- [Bug 269][28] -  Desirable column width is calculated in characters on the basis of the size of the data that will go into the table.
+- [Bug 273][29] -  The performance of getRowList/getColumnList is too low, if there is a row element with 65535 repeat number.
+- [Bug 309][30] -  Supply method to set the header/footer visible or not.
+- [Bug 311][31] -  Insert several paragraphs in a cell or several different text in the same paragraph in a cell.
+- [Bug 312][32] -  Allow to set alignment of image in a table cell.
+- [Bug 326][33] -  Something is missing in order to move the object on the sheet.
+- [Bug 327][34] -  Problem with the adding of tables in Footer.
+- [Bug 328][35] -  Performance problem in CellRange constructor when Table.getRowCount() is large.
+- [Bug 329][36] -  Unable to set the column widths of a table with precision.
+- [Bug 333][37] -  Provide convenient methods for image and text span.
 
 ***API changes since 0.5 Release***
 
@@ -166,24 +166,24 @@ Note: The first column 'Java class' package is relative to 'org.odftoolkit'.
 We released the Simple Java API for ODF  version 0.5 today.
 
 In this version, we provides paragraph, field, and text box manipulation methods.
- - Paragraph methods allow you to create paragraph, get paragraph by index, set the text content, and remove paragraph.
- - Fields methods allow you to easily add a field to a document, and change the value of a field. We now support data field, time field, chapter field, title field, subject field, author field, page number field, page count field, etc.
- - Text box methods allow you to add a text box, change the content of text box, and delete a text box.
+- Paragraph methods allow you to create paragraph, get paragraph by index, set the text content, and remove paragraph.
+- Fields methods allow you to easily add a field to a document, and change the value of a field. We now support data field, time field, chapter field, title field, subject field, author field, page number field, page count field, etc.
+- Text box methods allow you to add a text box, change the content of text box, and delete a text box.
 You can implement powerful document generation scenarios with these API. You can get sample codes from the cookbook for paragraph, field and text box.
 
 ***Resolved Issues***
 
- - [Bug 307][38] -  Table.getColumnByIndex() throws NullPointerException.
- - [Bug 308][39] -  Remove padding from table in header/footer.
- - [Bug 314][40] -  Navigation API should support find/replace in a specific OdfElement range
- - [Bug 315][41] -  Add Field API to Simple ODF
- - [Bug 316][42] -  Access to header and footer to Standard and First Page.
- - [Bug 317][43] -  Table.getColumnCount() doesn't work when exists table:table-columns
- - [Bug 318][44] -  Provide paragraph functions and its style handling functions.
- - [Bug 319][45] -  Provide frame and text box API.
- - [Bug 320][46] -  Section should provide methods to access paragraph.
- - [Bug 323][47] -  VariableContainer should have a method to get its VariableFields.
- - [Bug 324][48] -  Table unnamed causes a NullPointerException.
+- [Bug 307][38] -  Table.getColumnByIndex() throws NullPointerException.
+- [Bug 308][39] -  Remove padding from table in header/footer.
+- [Bug 314][40] -  Navigation API should support find/replace in a specific OdfElement range
+- [Bug 315][41] -  Add Field API to Simple ODF
+- [Bug 316][42] -  Access to header and footer to Standard and First Page.
+- [Bug 317][43] -  Table.getColumnCount() doesn't work when exists table:table-columns
+- [Bug 318][44] -  Provide paragraph functions and its style handling functions.
+- [Bug 319][45] -  Provide frame and text box API.
+- [Bug 320][46] -  Section should provide methods to access paragraph.
+- [Bug 323][47] -  VariableContainer should have a method to get its VariableFields.
+- [Bug 324][48] -  Table unnamed causes a NullPointerException.
 
 ***API changes since 0.4.5 Release***
 Method Change List
@@ -206,25 +206,25 @@ Note: The first column 'Java class' package is relative to 'org.odftoolkit'.
 
 We are pleased to announce the release of the Simple Java API for ODF version 0.4.5.   Major changes in this release include:
 
- - We are now using ODFDOM 0.8.7
- - We have added initial support  for footers and headers. Now you can simply get the footer and header of text document and add table/image/string content to footer and header.
- - We have also improved the performance of copying slides from other presentations (foreign slides). The time to copy a single slide is decreased by 20%, and the time to copy slides with referenced resources is decreased much more. A sample to show the function of copying slides from foreign documents is available in the [website][49].
+- We are now using ODFDOM 0.8.7
+- We have added initial support  for footers and headers. Now you can simply get the footer and header of text document and add table/image/string content to footer and header.
+- We have also improved the performance of copying slides from other presentations (foreign slides). The time to copy a single slide is decreased by 20%, and the time to copy slides with referenced resources is decreased much more. A sample to show the function of copying slides from foreign documents is available in the [website][49].
 
 ***Resolved Issues***
 
- - [Bug 224][50] -  Setting note for individual cell
- - [Bug 254][51] -  Update Simple API to support ODFDOM 0.8.7
- - [Bug 274][52] -  Create row/column/cell with/without repeat number
- - [Bug 275][53] -  Append row/column with/without previous row/column style
- - [Bug 276][54] -  Cell format type can be auto calculated according to the style of cell
- - [Bug 278][55] -  Adding border to created cell, OutOfMemoryError was throwed about 11,000 records
- - [Bug 284][56] -  Cell.getFont() throws NullPointerException
- - [Bug 290][57] -  Table API doesn't work for Presentation Document
- - [Bug 295][58] -  The Simple API does not work with JDK5
- - [Bug 303][59] -  Performance tuning for foreign slide copy
- - [Bug 304][60] -  Support image and text in footer and header
- - [Bug 305][61] -  A bug that occurs when resizing the column width of a table to 0
- - [Bug 306][62] -  Errors when Locale is set to Germany
+- [Bug 224][50] -  Setting note for individual cell
+- [Bug 254][51] -  Update Simple API to support ODFDOM 0.8.7
+- [Bug 274][52] -  Create row/column/cell with/without repeat number
+- [Bug 275][53] -  Append row/column with/without previous row/column style
+- [Bug 276][54] -  Cell format type can be auto calculated according to the style of cell
+- [Bug 278][55] -  Adding border to created cell, OutOfMemoryError was throwed about 11,000 records
+- [Bug 284][56] -  Cell.getFont() throws NullPointerException
+- [Bug 290][57] -  Table API doesn't work for Presentation Document
+- [Bug 295][58] -  The Simple API does not work with JDK5
+- [Bug 303][59] -  Performance tuning for foreign slide copy
+- [Bug 304][60] -  Support image and text in footer and header
+- [Bug 305][61] -  A bug that occurs when resizing the column width of a table to 0
+- [Bug 306][62] -  Errors when Locale is set to Germany
 
 There is no API changes in this version.
 
@@ -239,10 +239,10 @@ There is no API changes in this version.
 
 ***Resolved Issues***
 
- - [Bug 279][65] -  The performance of Table API need enhance, some methods cost too much time
- - [Bug 280][66] -  Supply List API Support in Simple API
- - [Bug 285][67] -  Supply text through line and under line setting support to Font
- - [Bug 291][68] -  Provide high level methods for section
+- [Bug 279][65] -  The performance of Table API need enhance, some methods cost too much time
+- [Bug 280][66] -  Supply List API Support in Simple API
+- [Bug 285][67] -  Supply text through line and under line setting support to Font
+- [Bug 291][68] -  Provide high level methods for section
 
 **Release 0.3.5**
 *December 24th 2010*
@@ -252,18 +252,18 @@ You may notice that there are no new features in this month's release. Our inten
 
 ***Resolved Issues***
 
- - [Bug 250][69] -  Table.newTable(Document document, int numRows, int numCols) does not work well
- - [Bug 251][70] -  Table.appendRows throws ClassCastException
- - [Bug 253][71] -  Column.setWidth() don't work for new created table
- - [Bug 255][72] -  cell.setFormatString() and column.setWidth() throw exceptions
- - [Bug 258][73] -  Where documentation says "deprecated" new preferred way should be given
- - [Bug 259][74] -  Setting font style to a spreadsheet cell is incorrectly inherited
- - [Bug 261][75] -  JavaDoc for the TextExtractor needs a lot more prose
- - [Bug 262][76] -  JavaDoc for TextNavigation match() method is confusing
- - [Bug 266][77] -  hasNext() method of TextNavigation apparently is REQUIRED and should not be
- - [Bug 267][78] -  String returned by TextExtractor.getText() has a carriage return (ASCII 13) at the start
- - [Bug 271][79] -  Comments of Table Style API
- - [Bug 272][80] -  Static Map variables in Table lead memory leak
+- [Bug 250][69] -  Table.newTable(Document document, int numRows, int numCols) does not work well
+- [Bug 251][70] -  Table.appendRows throws ClassCastException
+- [Bug 253][71] -  Column.setWidth() don't work for new created table
+- [Bug 255][72] -  cell.setFormatString() and column.setWidth() throw exceptions
+- [Bug 258][73] -  Where documentation says "deprecated" new preferred way should be given
+- [Bug 259][74] -  Setting font style to a spreadsheet cell is incorrectly inherited
+- [Bug 261][75] -  JavaDoc for the TextExtractor needs a lot more prose
+- [Bug 262][76] -  JavaDoc for TextNavigation match() method is confusing
+- [Bug 266][77] -  hasNext() method of TextNavigation apparently is REQUIRED and should not be
+- [Bug 267][78] -  String returned by TextExtractor.getText() has a carriage return (ASCII 13) at the start
+- [Bug 271][79] -  Comments of Table Style API
+- [Bug 272][80] -  Static Map variables in Table lead memory leak
 
 ***API changes since 0.3 Release***
 Enum name change list
@@ -339,11 +339,11 @@ There are also a few updates in table cell functions: some functions are enhance
 
 ***Resolved Issues***
 
- - [Bug 246][82]-  Extend the navigation API under simple.text.search to spreadsheet and presentation.
- - [Bug 247][83]-  Provide table methods for presentation document.
- - [Bug 248][84]-  setHorizontalAlignment and setVerticalAlignment do not work for new created table.
- - [Bug 249][85]-  getRowCount() doesn't work if table:table-rows or table:table-group exits.
- - [Bug 252][86]-  Provide high level style methods for table.
+- [Bug 246][82]-  Extend the navigation API under simple.text.search to spreadsheet and presentation.
+- [Bug 247][83]-  Provide table methods for presentation document.
+- [Bug 248][84]-  setHorizontalAlignment and setVerticalAlignment do not work for new created table.
+- [Bug 249][85]-  getRowCount() doesn't work if table:table-rows or table:table-group exits.
+- [Bug 252][86]-  Provide high level style methods for table.
 
 ***API changes since 0.2 Release***
 Package/Class Change List

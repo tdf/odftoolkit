@@ -1,4 +1,6 @@
-Title:     Lazy Consensus
+# Lazy Consensus
+
+```licence
 Notice:    Licensed to the Apache Software Foundation (ASF) under one
            or more contributor license agreements.  See the NOTICE file
            distributed with this work for additional information
@@ -15,6 +17,7 @@ Notice:    Licensed to the Apache Software Foundation (ASF) under one
            KIND, either express or implied.  See the License for the
            specific language governing permissions and limitations
            under the License.
+```
 
 The concept of "Lazy Consensus" is very important in our project. Lazy
 Consensus means that when you are convinced that you know what the community
