@@ -1,4 +1,5 @@
-Title: Project Overview
+# Project Overview
+
 The ODFDOM project's objective is to provide an easy API for reading, writing and manipulating documents of the OpenDocument format (ODF).
 To archive this, the ODFDOM API follows a layered approach to access documents, as layered design is the robust foundation for a well-designed modular structure.
 
@@ -20,7 +21,6 @@ Provides a different much more high level view on the ODF schema features. This 
 ODFDOM is part of [ODF Toolkit project][9]. Development is discussed on [mailing list][10].
 
 ***[More detailed information about ODFDOM layers][12]***.
-
 
   [1]: http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part3.html
   [2]: http://www.pkware.com/documents/APPNOTE/APPNOTE_6.2.0.txt

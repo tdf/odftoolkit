@@ -1,4 +1,5 @@
-Title: Compiler Errors and Recommended Solutions - migration from ODFDOM 0.8.6
+# Compiler Errors and Recommended Solutions - migration from ODFDOM 0.8.6
+
 If you are migrating existing code from ODFDOM 0.8.6 to Simple API for ODF, you might get many compiler errors. This page will tell you how to resolve your compiler errors.
 <table>
 <tr>
@@ -150,4 +151,3 @@ If you are migrating existing code from ODFDOM 0.8.6 to Simple API for ODF, you 
 </td>
 </tr>
 </table>
-

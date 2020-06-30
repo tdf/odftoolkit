@@ -1,8 +1,8 @@
-Title: Who We Are
+# Who We Are
+
 The ODFDOM project is based on the help of many contributors. We'd like to list all names here. If you think we missed a contributor, please, contact us via the development [mailing list][1].
 
-Developers
-----------
+## Developers
 
 <table style="width:100%" border="1">
 <tr style="background-color:#e3edf7;font-weight:bold">
@@ -15,8 +15,7 @@ Developers
 
 You can contact each one from the list by sending an E-Mail to ''(developer's ID)''@odftoolkit.org.
 
-Contributors
-------------
+## Contributors
 
 <table style="width:100%" border="1">
 <tr style="background-color:#e3edf7;font-weight:bold">
@@ -28,6 +27,5 @@ Contributors
 </table>
 
 You can contact each one from the list by sending an E-Mail to ''(contributor's ID)''@odftoolkit.org.
-
 
   [1]: http://odftoolkit.org/projects/odfdom/lists
