@@ -23,11 +23,13 @@ public class WebsiteGenerator
 {
 
 	private Path repo;
+	private Path repoContent;
 	private Path dirOutput;
 
-	public WebsiteGenerator(Path repo, Path dirOutput)
+	public WebsiteGenerator(Path repo, Path repoContent, Path dirOutput)
 	{
 		this.repo = repo;
+		this.repoContent = repoContent;
 		this.dirOutput = dirOutput;
 	}
 
@@ -42,8 +44,11 @@ public class WebsiteGenerator
 		System.out.println("output directory: " + dirOutput);
 
 		dirSite = repo.resolve("src/site/site");
+
 		dirTemplates = dirSite.resolve("templates");
-		dirContent = dirSite.resolve("content/odftoolkit_website");
+
+		Path dirSiteContent = repoContent.resolve("src/site/site");
+		dirContent = dirSiteContent.resolve("content/odftoolkit_website");
 
 		Path dirResources = repo.resolve("src/site/java/resources");
 		copy(dirResources.resolve("custom.css"), dirOutput);
