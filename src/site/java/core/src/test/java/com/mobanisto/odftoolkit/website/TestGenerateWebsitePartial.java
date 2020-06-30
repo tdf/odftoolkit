@@ -11,7 +11,8 @@ public class TestGenerateWebsitePartial
 	public static void main(String[] args) throws IOException
 	{
 		WebsiteGenerator websiteGenerator = new WebsiteGenerator(
-				SystemPaths.HOME.resolve("github/sebkur/odftoolkit"));
+				SystemPaths.HOME.resolve("github/sebkur/odftoolkit"),
+				SystemPaths.HOME.resolve("github/sebkur/odftoolkit-gh-pages"));
 		websiteGenerator
 				.generate(Arrays.asList("index.mdtext", "odfdom/index.mdtext"));
 	}
