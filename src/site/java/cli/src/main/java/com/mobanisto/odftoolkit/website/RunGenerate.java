@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
 
+import de.topobyte.utilities.apache.commons.cli.OptionHelper;
 import de.topobyte.utilities.apache.commons.cli.commands.args.CommonsCliArguments;
 import de.topobyte.utilities.apache.commons.cli.commands.options.CommonsCliExeOptions;
 import de.topobyte.utilities.apache.commons.cli.commands.options.ExeOptions;
@@ -16,12 +17,16 @@ import de.topobyte.utilities.apache.commons.cli.commands.options.ExeOptionsFacto
 public class RunGenerate
 {
 
+	private static final String OPTION_CONTENT = "content";
+
 	public static ExeOptionsFactory OPTIONS_FACTORY = new ExeOptionsFactory() {
 
 		@Override
 		public ExeOptions createOptions()
 		{
 			Options options = new Options();
+			OptionHelper.addL(options, OPTION_CONTENT, true, false,
+					"specify the content repository");
 			return new CommonsCliExeOptions(options,
 					"[options] <output directory>");
 		}
@@ -44,11 +49,16 @@ public class RunGenerate
 			System.exit(1);
 		}
 
+		Path repoContent = repo;
+		if (line.hasOption(OPTION_CONTENT)) {
+			repoContent = Paths.get(line.getOptionValue(OPTION_CONTENT));
+		}
+
 		Path dirOutput = Paths.get(args.get(0));
 		Files.createDirectories(dirOutput);
 
 		WebsiteGenerator websiteGenerator = new WebsiteGenerator(repo,
-				dirOutput);
+				repoContent, dirOutput);
 		websiteGenerator.generate();
 	}
 
