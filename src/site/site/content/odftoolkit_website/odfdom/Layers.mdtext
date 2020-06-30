@@ -3,7 +3,7 @@
 The ODFDOM project's objective is to provide an easy API for reading, writing and manipulating documents of the OpenDocument format (ODF).
 To archive this, the ODFDOM API follows a layered approach to access documents, as layered design is the robust foundation for a well-designed modular structure.
 
-<center>![alt text][1]</center>
+![alt text][1]
 
 ## The ODF Package Layer
 
@@ -32,16 +32,18 @@ All sources of the Package layer are organized in ODFDOM beyond <code>org.odftoo
 The following example illustrates how to add a graphic to the package level
 (although not shown by an ODF application (like OpenOffice.org), as not used by the shown content):
 
-    import org.odftoolkit.odfdom.pkg.OdfPackage;
-    [...]
+```Java
+import org.odftoolkit.odfdom.pkg.OdfPackage;
+[...]
 
-    // loads the ODF document package from the path
-    OdfPackage pkg = OdfPackage.loadPackage("/home/myDocuments/myVacation.odt");
+// loads the ODF document package from the path
+OdfPackage pkg = OdfPackage.loadPackage("/home/myDocuments/myVacation.odt");
 
-    // loads the image from the URL and inserts the image in the package,
-    // adapting the manifest
-    pkg.insert(new URI("./myHoliday.png"), "Pictures/myHoliday.png", "image/png");
-    pkg.save("/home/myDocuments/myVacation.odt");
+// loads the image from the URL and inserts the image in the package,
+// adapting the manifest
+pkg.insert(new URI("./myHoliday.png"), "Pictures/myHoliday.png", "image/png");
+pkg.save("/home/myDocuments/myVacation.odt");
+```
 
 ## The ODF XML Layer
 
@@ -75,44 +77,47 @@ The sources for the ODF elements are all generated from the ODF grammar (RelaxNG
 
 The following example illustrates how to add a graphic to the ODF document, that it is viewable:
 
-    import java.net.URI;
-    import org.odftoolkit.odfdom.OdfElement;
-    import org.odftoolkit.odfdom.doc.OdfDocument;
-    import org.odftoolkit.odfdom.doc.OdfTextDocument;
-    import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
-    import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
-    import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
-    import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+```Java
+import java.net.URI;
+import org.odftoolkit.odfdom.OdfElement;
+import org.odftoolkit.odfdom.doc.OdfDocument;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.doc.draw.OdfDrawImage;
+import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 
-    [...]
+[...]
 
-    // Load file
-    OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument("ImageIn.odt");
+// Load file
+OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument("ImageIn.odt");
 
-    // get root of all content of a text document
-    OfficeTextElement officeText = odt.getContentRoot();
+// get root of all content of a text document
+OfficeTextElement officeText = odt.getContentRoot();
 
-    // get first paragraph
-    TextPElement firstParagraph =
-      OdfElement.findFirstChildNode(TextPElement.class, officeText);
+// get first paragraph
+TextPElement firstParagraph =
+  OdfElement.findFirstChildNode(TextPElement.class, officeText);
 
-    // XPath alternative to get the first paragraph
-    /*
-      XPath xpath = XPathFactory.newInstance().newXPath();
-      xpath.setNamespaceContext(new OdfNamespace());
-      OdfFileDom dom = odt.getContentDom();
-      firstParagraph = (TextPElement) xpath.evaluate("//text:p[1]", dom, XPathConstants.NODE);
-    */
+// XPath alternative to get the first paragraph
+/*
+  XPath xpath = XPathFactory.newInstance().newXPath();
+  xpath.setNamespaceContext(new OdfNamespace());
+  OdfFileDom dom = odt.getContentDom();
+  firstParagraph = (TextPElement) xpath.evaluate("//text:p[1]", dom,
+                                                  XPathConstants.NODE);
+*/
 
-    // insert a frame
-    DrawFrameElement frame = firstParagraph.newDrawFrameElement();
+// insert a frame
+DrawFrameElement frame = firstParagraph.newDrawFrameElement();
 
-    // insert an image: This is a class from the Document API
-    OdfDrawImage image = (OdfDrawImage) frame.newDrawImageElement();
-    image.newImage(new URI("./MySampleImage.png"));
+// insert an image: This is a class from the Document API
+OdfDrawImage image = (OdfDrawImage) frame.newDrawImageElement();
+image.newImage(new URI("./MySampleImage.png"));
 
-    // Save file
-    odt.save("ImageOut.odt");
+// Save file
+odt.save("ImageOut.odt");
+```
 
 Even in this example we had to refer to a class from the Document API. Otherwise our implementation had gotten quite long and complex.
 
@@ -133,23 +138,26 @@ However reworking the previous example would just make the code larger, since we
 
 Here's an example for working with DOC classes, completely avoiding handling the DOM manually:
 
-    [...]
-    // Load Image
-    OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument("ImageIn.odt");
+```Java
+[...]
+// Load Image
+OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument("ImageIn.odt");
 
-    // Play around with text
-    odt.addText("When there is no paragraph, the text will be embedded in a new paragraph");
-    odt.newParagraph("Create new paragraph");
-    odt.addText("\nThis is a new line");
+// Play around with text
+odt.addText("When there is no paragraph,
+             the text will be embedded in a new paragraph");
+odt.newParagraph("Create new paragraph");
+odt.addText("\nThis is a new line");
 
-    // Insert Image and make last paragraph its anchor
-    odt.newImage(new URI("./MySampleImage.png"));
+// Insert Image and make last paragraph its anchor
+odt.newImage(new URI("./MySampleImage.png"));
 
-    // Insert new spreadsheet as sub document into the package within directory  "myOdsDirectoryPath/"
-    odt.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "myOdsDirectoryPath");
+// Insert new spreadsheet as sub document into the package within "newOdsPath/"
+odt.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "newOdsPath");
 
-    // Save file
-    odt.save("ImageOut.odt");
+// Save file
+odt.save("ImageOut.odt");
+```
 
 Go on reading about [how to set up a building environment and where to get the source code][13].
 

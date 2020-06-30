@@ -3,12 +3,21 @@
 Operations (or Changes) are used to transfer the user changes between editors.
 Operations are a prerequirement for collaborative working on a document.
 
-**Resaoning**: No developer would ever sent a zipped repository for exchangin work with other developers. Still we are doing this by zipping document and sending those. To be able to dispatch only changes among collaborators new functionalty had been added: Any OpenDocumen Text can now be transformed into an equal sequence of user changes ([ODT](./docs/docs/presentations/character-styles.odt)/[JSON](./docs/docs/presentations/character-styles.json)).
+**Resaon**: No developer would ever sent a zipped repository for exchangin work with other developers. Still we are doing this by zipping document and sending those. To be able to dispatch only changes among collaborators new functionalty had been added: Any OpenDocumen Text can now be transformed into an equal sequence of user changes ([ODT](./docs/docs/presentations/character-styles.odt)/[JSON](./docs/docs/presentations/character-styles.json)).
  This list of user changes is like a batch of text operations, similar as if the user would created the document from top to the bottom. Formost, new user changes can be merged into the existing document via JSON.
 
-**Demo**
-You may test creating changes as JSON output transformation by commandline: java -jar <ODFDOM_JAR> <ODT_INPUT>
-You need version =>1.0.0 for this feature, version information is provided by: java -jar <ODFDOM_JAR>
+**Test Demo**
+You may test creating changes as JSON output transformation by commandline:
+
+```shell
+java -jar <ODFDOM_JAR> <ODT_INPUT>
+```
+
+You need version =>1.0.0 for this feature, version information is provided by:
+
+```shell
+java -jar <ODFDOM_JAR>
+```
 
 [TOC]
 

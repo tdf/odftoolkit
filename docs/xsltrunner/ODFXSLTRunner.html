@@ -57,20 +57,20 @@
       <h2>Command Line Options</h2> 
       <p><strong>ODF XSLT Runner</strong> is called by one of the below command lines:</p> 
       <div class="codehilite">
-        <pre><code>java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&gt;]
-  [-l log file] &lt;input package&gt; [&lt;output package&gt; [name=value ...]
+        <pre><code class="language-shell">java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&gt;]
+     [-l log file] &lt;input package&gt; [&lt;output package&gt; [name=value ...]
 
- java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&gt;]
- [-l log file] -t &lt;input package&amp;gt; &lt;output package&amp;gt; [name=value ...]
+java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&gt;]
+     [-l log file] -t &lt;input package&amp;gt; &lt;output package&amp;gt; [name=value ...]
 
- java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&amp;gt;]
-  [-l log file] -r &lt;package&gt; [name=value ...]
+java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&amp;gt;]
+     [-l log file] -r &lt;package&gt; [name=value ...]
 
- java -jar odfxsltrunner.jar &lt;style sheet&gt;; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&amp;gt;]
-  [-l log file] [-x &lt;extract path&gt; ...] -o &lt;input package&gt; &lt;output file&gt; [name=value ...]
+java -jar odfxsltrunner.jar &lt;style sheet&gt;; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&amp;gt;]
+     [-l log file] [-x &lt;extract path&gt; ...] -o &lt;input package&gt; &lt;output file&gt; [name=value ...]
 
- java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&amp;gt;]
-  [-l log file] -i &lt;input file&gt; &lt;output package&gt; [name=value ...]
+java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&amp;gt;]
+     [-l log file] -i &lt;input file&gt; &lt;output package&gt; [name=value ...]
 </code></pre>
       </div> 
       <p>The default is to apply the XSLT stylesheet <strong>&lt;style-sheet&gt;</strong> to the stream <strong>content.xml</strong> of the ODF file <strong>&lt;input package&gt;</strong>. If no <strong>&lt;output package&gt;</strong> parameter is specified, then the result of the transformation will be printed to the standard output. If an <strong>&lt;output package&gt;</strong> is specified, the <strong>&lt;input package&gt;</strong> is copied to the <strong>&lt;output package&gt;</strong>, and the steam <strong>content.xml</strong> of the <strong>&lt;output package&gt;</strong> is replaced with the result of the transformation.</p> 
@@ -83,7 +83,7 @@
       <p>The <strong>-f</strong> option specifies the ''javax.xml.transform.TransformerFactory'' to use.</p> 
       <p><strong>Note:</strong> When calling ''java'' with the ''-jar'' option, the user class path is ignored. If a transformer factory is used which is not contained in the JRE, like Saxon, <strong>odfxsltrunner</strong> has to be called without the ''-jar'' option:</p> 
       <div class="codehilite">
-        <pre><code> java -cp odfxsltrunner.jar:&amp;lt;factory jar&amp;gt; org.odftoolkit.odfxsltrunner.Main ...
+        <pre><code class="language-shell">java -cp odfxsltrunner.jar:&amp;lt;factory jar&amp;gt; org.odftoolkit.odfxsltrunner.Main ...
 </code></pre>
       </div> 
       <p>The <strong>-l</strong> option can be used to redirect diagnostic messages into a log file. By default they are printed on standard error.</p> 
@@ -93,7 +93,7 @@
       <p><strong>Note:</strong> The second parameter specifies the base URI for the resolution of the URI that is specified by the first parameter. This base URI is the base URI of the file that contains the node that is passed as second parameter. If the second parameter is omitted, the base URI is the one of the XSLT stylesheet containing the <em>document()</em> function itself. <strong>odfxsltrunner</strong> runner uses the rules ODF defines for resolving relative URIs only for URIs that are relative to a file within an ODF package.</p> 
       <p><strong>Example:</strong> When transforming a content.xml file contained in an ODF package, the following rule applies templates to the style elements contained in the style.xml file:</p> 
       <div class="codehilite">
-        <pre><code> &lt;xsl:apply-templates select="document('styles.xml',.)//office:styles/style:style"/&gt;
+        <pre><code class="language-xml">&lt;xsl:apply-templates select="document('styles.xml',.)//office:styles/style:style"/&gt;
 </code></pre>
       </div> 
       <h2>Requirements</h2> 

@@ -20,7 +20,7 @@ Provides a different much more high level view on the ODF schema features. This 
 
 ODFDOM is part of [ODF Toolkit project][9]. Development is discussed on [mailing list][10].
 
-***[More detailed information about ODFDOM layers][12]***.
+There is more [ information about the ODFDOM layers available][12].
 
   [1]: http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part3.html
   [2]: http://www.pkware.com/documents/APPNOTE/APPNOTE_6.2.0.txt

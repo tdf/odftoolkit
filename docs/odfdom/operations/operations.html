@@ -47,8 +47,17 @@
     <div id="contenta">
       <h1>Supported ODF Text Operations (or Changes)</h1> 
       <p>Operations (or Changes) are used to transfer the user changes between editors. Operations are a prerequirement for collaborative working on a document.</p> 
-      <p><strong>Resaoning</strong>: No developer would ever sent a zipped repository for exchangin work with other developers. Still we are doing this by zipping document and sending those. To be able to dispatch only changes among collaborators new functionalty had been added: Any OpenDocumen Text can now be transformed into an equal sequence of user changes (<a href="./docs/docs/presentations/character-styles.odt">ODT</a>/<a href="./docs/docs/presentations/character-styles.json">JSON</a>). This list of user changes is like a batch of text operations, similar as if the user would created the document from top to the bottom. Formost, new user changes can be merged into the existing document via JSON.</p> 
-      <p><strong>Demo</strong> You may test creating changes as JSON output transformation by commandline: java -jar &lt;ODFDOM_JAR&gt; &lt;ODT_INPUT&gt; You need version =&gt;1.0.0 for this feature, version information is provided by: java -jar &lt;ODFDOM_JAR&gt;</p> 
+      <p><strong>Resaon</strong>: No developer would ever sent a zipped repository for exchangin work with other developers. Still we are doing this by zipping document and sending those. To be able to dispatch only changes among collaborators new functionalty had been added: Any OpenDocumen Text can now be transformed into an equal sequence of user changes (<a href="./docs/docs/presentations/character-styles.odt">ODT</a>/<a href="./docs/docs/presentations/character-styles.json">JSON</a>). This list of user changes is like a batch of text operations, similar as if the user would created the document from top to the bottom. Formost, new user changes can be merged into the existing document via JSON.</p> 
+      <p><strong>Test Demo</strong> You may test creating changes as JSON output transformation by commandline:</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">java -jar &lt;ODFDOM_JAR&gt; &lt;ODT_INPUT&gt;
+</code></pre>
+      </div> 
+      <p>You need version =&gt;1.0.0 for this feature, version information is provided by:</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">java -jar &lt;ODFDOM_JAR&gt;
+</code></pre>
+      </div> 
       <p>[TOC]</p> 
       <p>Most operations target specific text components (characters, paragraphs, tables, table cells, drawing objects, etc.) or ranges of text components. The following general rules apply for these operations:</p> 
       <ol> 

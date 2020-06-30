@@ -27,7 +27,7 @@ sudo apt-get install maven
 ```
 
 **Note:**
-The previous instructions has been tested with an Ubuntu 16.04 installation.
+The previous instructions has been tested with an Ubuntu 20.04 installation.
 Other distros and versions should work fine, but might require some slight
 modifications.
 

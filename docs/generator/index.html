@@ -45,18 +45,29 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>Project Overview</h1> 
-      <p>The ODFDOM project's objective is to provide an easy API for reading, writing and manipulating documents of the OpenDocument format (ODF). To archive this, the ODFDOM API follows a layered approach to access documents, as layered design is the robust foundation for a well-designed modular structure.</p> 
-      <p>The two ODFDOM layers are:</p> 
-      <p><strong>-The ODF Package Layer</strong>: Provides access to all resources stored within the ODF package, such as XML streams, images or embedded objects. This layer covers all features from the <a href="http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part3.html">third part of the ODF 1.2 specification</a> defining the ODF Package features. The ODF 1.2 package features are build on top technologies as <a href="http://www.pkware.com/documents/APPNOTE/APPNOTE_6.2.0.txt">ZIP package handling</a>, <a href="http://www.w3.org/TR/2002/REC-xmlenc-core-20021210/">W3C encryption</a>, <a href="http://www.w3.org/TR/2008/REC-xmldsig-core-20080610/">W3C signature</a> and <a href="http://www.w3.org/TR/2004/REC-rdf-concepts-20040210/">W3C metadata</a>.</p> 
-      <p><strong>-The ODF XML Layer</strong>:<br>Provides all the features of an office format, such as tables, images, numbering etc. All features are defined in <a href="http://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part1.html">the first part of the ODF 1.2 specification</a> describing the ODF XML schema. This layer consists of two APIs representing two different views on the features:</p> 
+      <h1>Generator (schema2template)</h1> 
+      <h2>Overview</h2> 
+      <p>The schema2template library loads arbitrary XML schemata (XML grammar) into the most powerful grammar model, which is the one given by RelaxNG XML. Based on loaded XML model given by the grammar Schema2template offers functionality to fill arbitrary user templates files with data.</p> 
+      <p>The ODF Toolkit uses Schema2template to generate the XML layer. Every XML element and XML attribute from the grammar is given a Java class in the ODFDOM project. In the ODFDOM project these classes have the following locations:</p> 
       <ul> 
-        <li> <p><em>The low-level DOM API</em>: Gives access to the XML, the elemental parts of the ODF schema features. With this API it is easy to manipulate all specified XML nodes extending the platform and language independent DOM API <a href="http://www.w3.org/DOM/">DOM API standardized by the W3C</a> - best-known by its implementation through the browsers. It extends the DOM API using a typed DOM. For every ODF XML element and ODF XML attribute defined by the ODF grammar (the RelaxNG schema) a unique class exists, providing methods for their allowed children. The purpose is to provide the user a corset to easily write valid ODF without consulting the spec constantly. This API is very consistent as instead of laboriously writing all these classes, the sources were generated directly from the ODF schema. This generation guarantees complete coverage of the ODF specification on one side and an easy and accurate upgrade to future ODF specifications on the other.</p> </li> 
-        <li> <p><em>The high-level Document API</em>: Provides a different much more high level view on the ODF schema features. This API is concerned about usability, hiding all ODF XML implementation details from the user, covering frequent user scenarios. For example, changing the content of a certain spreadsheet cell (e.g. Add 'Hello World' to a spreadsheet cell positioned at 'B2'). While in the ODF DOM API in general each class represents an ODF XML node, here a class covers multiple underlying ODF XML elements (&amp; their attributes). Think of puzzle piece consisting of multiple smaller pieces. Therefore the typed DOM tree is being mapped to feature tree.</p> </li> 
+        <li>ODF attributes <a href="https://github.com/tdf/odftoolkit/tree/master/odfdom/src/main/java/org/odftoolkit/odfdom/dom/attribute">odfdom/src/main/java/org/odftoolkit/odfdom/dom/attribute</a></li> 
+        <li>ODF elements: <a href="https://github.com/tdf/odftoolkit/tree/master/odfdom/src/main/java/org/odftoolkit/odfdom/dom/element">odfdom/src/main/java/org/odftoolkit/odfdom/dom/element</a></li> 
       </ul> 
-      <p><img src="ODFDOM-New-Layered-Model.png" alt="alt text"></p> 
-      <p>ODFDOM is part of <a href="https://odftoolkit.org">ODF Toolkit project</a>. Development is discussed on <a href="../mailing-lists.html">mailing list</a>.</p> 
-      <p>There is more <a href="Layers.html"> information about the ODFDOM layers available</a>.</p> 
+      <h2>Architecture</h2> 
+      <p>The library is build upon two powerful open source tools:</p> 
+      <ol> 
+        <li> <p><a href="https://github.com/kohsuke/msv">Multi Schema Validator (MSV)</a> Used to read arbitrary XML schema and map them to an internal RelaxNG model.</p> </li> 
+        <li> <p><a href="http://velocity.apache.org/">Apache's Velocity Template Engine</a> Used as template framework, e.g. to provide scripting within templates.</p> </li> 
+      </ol> 
+      <p>Within schema2template three common use cases covers with default templates as examples. For a given XML schema (e.g. RelaxNG, DTD, W3C schema) the following can be created:</p> 
+      <ol> 
+        <li>a XML node reference for the given format as HTML file</li> 
+        <li>Java sources for a typed DOM tree of the format</li> 
+      </ol> 
+      <h2>Design</h2> 
+      <p>Read in the Java documentation more about the <a href="../api/schema2template/index.html">generator design</a> build upon the Multi Schema Validator (MSV).</p> 
+      <h2>License</h2> 
+      <p>Apache License, Version 2.0. Please see file <a href="../LICENSE">LICENSE</a>.</p> 
     </div>
     <html>
       <head></head>
