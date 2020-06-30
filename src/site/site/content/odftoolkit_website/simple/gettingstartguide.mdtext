@@ -18,6 +18,7 @@ NOTE: The latest version of this all-inclusive-JAR can be received after buildin
 
 We write all of the code needed to create the document in the HelloWorld class. For simplicity, the code is wrapped in main method directly, package declaration is omitted and hard code is also included in this program.
 
+```Java
     import java.net.URI;
     import org.odftoolkit.simple.TextDocument;
     import org.odftoolkit.simple.table.Cell;
@@ -53,21 +54,24 @@ We write all of the code needed to create the document in the HelloWorld class. 
             }
         }
     }
+```
 
 The TextDocument class has these convenient methods:
 
-// Creates a new text document that contains an empty paragraph.<br/>
-TextDocument.newTextDocument);<br/>
-// Puts the image at the given location at the end of the document.<br/>
-TextDocument.newImage(URI location)<br/>
-// Creates a new paragraph with the given content and appends it to the end of the document.<br/>
-TextDocument.addParagraph(String content)<br/>
-// Creates a new, empty list and appends it to the end of the document you're building. You can add items for this list.<br/>
-TextDocument.addList()<br/>
-// Creates a new table with columnCount columns and rowCount rows. You can get the cell at given position and set its content.<br/>
-TextDocument.addTable(int columnCount, int rowCount);<br/>
-// Saves the document at the given path.<br/>
-TextDocument.save(String path)<br/>
+```Java
+// Creates a new text document that contains an empty paragraph.
+TextDocument.newTextDocument);
+// Puts the image at the given location at the end of the document.
+TextDocument.newImage(URI location)
+// Creates a new paragraph with the given content and appends it to the end of the document.
+TextDocument.addParagraph(String content)
+// Creates a new, empty list and appends it to the end of the document you're building. You can add items for this list.
+TextDocument.addList()
+// Creates a new table with columnCount columns and rowCount rows. You can get the cell at given position and set its content.
+TextDocument.addTable(int columnCount, int rowCount);
+// Saves the document at the given path.
+TextDocument.save(String path)
+```
 
 ## Building and Running
 
