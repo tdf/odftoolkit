@@ -168,8 +168,8 @@ font-weight: bold;
 
 table {
   border-collapse:collapse;
-  width:95%; 
-  margin-left:0%; 
+  width:95%;
+  margin-left:0%;
   margin-right:5%;
 }
 
@@ -255,7 +255,7 @@ td {
 }
 
 #sidenav li {
-  border-bottom: 1px solid #e6ebed; 
+  border-bottom: 1px solid #e6ebed;
   margin: 0.2em 0;
   padding: 0;
 }
@@ -307,7 +307,7 @@ td {
 }
 
 #navigation li {
-  border-bottom: 1px solid #e6ebed; 
+  border-bottom: 1px solid #e6ebed;
   margin: 0.2em 0;
   padding: 0;
 }

@@ -49,10 +49,10 @@ public class WebsiteGenerator
 
 		Path dirSiteContent = repoContent.resolve("src/site/site");
 		dirContent = dirSiteContent.resolve("content/odftoolkit_website");
-
+/**
 		Path dirResources = repo.resolve("src/site/java/resources");
 		copy(dirResources.resolve("custom.css"), dirOutput);
-
+ */
 		List<String> extensions = Arrays.asList("png", "gif", "jpg", "zip",
 				"css");
 		for (String path : Arrays.asList("images", "simple", "odfdom")) {
