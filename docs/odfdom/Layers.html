@@ -47,9 +47,7 @@
     <div id="contenta">
       <h1>The ODFDOM Layers</h1> 
       <p>The ODFDOM project's objective is to provide an easy API for reading, writing and manipulating documents of the OpenDocument format (ODF). To archive this, the ODFDOM API follows a layered approach to access documents, as layered design is the robust foundation for a well-designed modular structure.</p> 
-      <center>
-        ![alt text][1]
-      </center> 
+      <p><img src="ODFDOM-New-Layered-Model.png" alt="alt text"></p> 
       <h2>The ODF Package Layer</h2> 
       <p>The ODF Package Layer provides access to all resources stored within the ODF package, such as XML streams, images or embedded objects.</p> 
       <h3>The ODF Package API</h3> 
@@ -66,7 +64,7 @@
       <p>All sources of the Package layer are organized in ODFDOM beyond <code>org.odftoolkit.odfdom.pkg.*</code></p> 
       <p>The following example illustrates how to add a graphic to the package level (although not shown by an ODF application (like OpenOffice.org), as not used by the shown content):</p> 
       <div class="codehilite">
-        <pre><code>import org.odftoolkit.odfdom.pkg.OdfPackage;
+        <pre><code class="language-Java">import org.odftoolkit.odfdom.pkg.OdfPackage;
 [...]
 
 // loads the ODF document package from the path
@@ -97,7 +95,7 @@ pkg.save("/home/myDocuments/myVacation.odt");
       <p><em><strong>Note:</strong></em> The element local names 'h' and 'p' have been renamed to the classes 'Heading' and 'Paragraph' for usability reasons.</p> 
       <p>The following example illustrates how to add a graphic to the ODF document, that it is viewable:</p> 
       <div class="codehilite">
-        <pre><code>import java.net.URI;
+        <pre><code class="language-Java">import java.net.URI;
 import org.odftoolkit.odfdom.OdfElement;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
@@ -123,7 +121,8 @@ TextPElement firstParagraph =
   XPath xpath = XPathFactory.newInstance().newXPath();
   xpath.setNamespaceContext(new OdfNamespace());
   OdfFileDom dom = odt.getContentDom();
-  firstParagraph = (TextPElement) xpath.evaluate("//text:p[1]", dom, XPathConstants.NODE);
+  firstParagraph = (TextPElement) xpath.evaluate("//text:p[1]", dom,
+                                                  XPathConstants.NODE);
 */
 
 // insert a frame
@@ -147,20 +146,21 @@ odt.save("ImageOut.odt");
       <p>However reworking the previous example would just make the code larger, since we're not using any of the document methods provided by the DOC subclasses.</p> 
       <p>Here's an example for working with DOC classes, completely avoiding handling the DOM manually:</p> 
       <div class="codehilite">
-        <pre><code>[...]
+        <pre><code class="language-Java">[...]
 // Load Image
 OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument("ImageIn.odt");
 
 // Play around with text
-odt.addText("When there is no paragraph, the text will be embedded in a new paragraph");
+odt.addText("When there is no paragraph,
+             the text will be embedded in a new paragraph");
 odt.newParagraph("Create new paragraph");
 odt.addText("\nThis is a new line");
 
 // Insert Image and make last paragraph its anchor
 odt.newImage(new URI("./MySampleImage.png"));
 
-// Insert new spreadsheet as sub document into the package within directory  "myOdsDirectoryPath/"
-odt.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "myOdsDirectoryPath");
+// Insert new spreadsheet as sub document into the package within "newOdsPath/"
+odt.insertDocument(OdfSpreadsheetDocument.newSpreadsheetDocument(), "newOdsPath");
 
 // Save file
 odt.save("ImageOut.odt");

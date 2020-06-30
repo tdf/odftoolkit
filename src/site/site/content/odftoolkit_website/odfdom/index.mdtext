@@ -6,16 +6,21 @@ The current reference implementation is written in Java (see [JavaDocs online][3
 
 To learn more about the project's architecture, refer to the [project overview][10] and the [ODFDOM Layers][11] section.
 
+With 1.0.0 the basics of collaboration functionality - [the change/operation concept](./operations/operations.html) were added.
+
 ## Quickstart
 
 Put the odfdom.jar file in your classpath. You will need [Apache Xerces-J][9] as XML parser and DOM implementation as well. Start with the following sample code to create a simple text document.
 
-    // Create a text document from a standard template (empty documents within the JAR)
+```Java
+    // Create a text document from a standard template
+    // (empty documents within the JAR)
     OdfTextDocument odt = OdfTextDocument.newTextDocument();
     // Append text to the end of the document.
     odt.addText("This is my very first ODF test");
     // Save document
     odt.save("MyFilename.odt");
+```
 
 For information on working with the source code, please refer to [the development section][8].
 
