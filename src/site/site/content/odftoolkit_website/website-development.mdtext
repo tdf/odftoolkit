@@ -21,14 +21,18 @@ This website development page is divided into:
 
 ### Download the repo
 
-Check out the repository and navigate there:
+Check out the repository:
 
-    git clone https://github.com/tdf/odftoolkit
-    cd odftoolkit/src/site/java
+```shell
+git clone https://github.com/tdf/odftoolkit
+```
 
 Then build the project:
 
-    ./gradlew createRuntime
+```shell
+cd odftoolkit/src/site/java
+./new-build-html.sh
+```
 
 ## Directory Layout
 
@@ -45,14 +49,27 @@ Using your favorite editors edit the site content.
 
 ### Build the site
 
-Run this to generate the website into directory <output>:
+Run this to generate the website into GitHub Pages directory <ODFTOOLKIT_ROOT>/docs
 
-    ./scripts/website-cli generate `<output>`
+```shell
+cd odftoolkit/src/site/java
+./new-build-html.sh
+```
 
 ## Building JavaDoc and publishing the JavaDoc
 
-JavaDoc is generated as part of the `mvn clean install` command called from the root of the project.
-Run the `copy-javadoc.sh` script to build copy the created API directories into the odftoolkit/docs/api directory and remove any prior files within.
+JavaDoc is generated as part of by calling from the root of the project the command:
+
+```shell
+mvn clean install
+```
+
+Run `copy-javadoc.sh` to build & copy the created API directories into the <ODFTOOLKIT_ROOT>/docs/api directory and remove any prior files within.
+
+```shell
+cd odftoolkit/src/site/java
+./copy-javadoc.sh
+```
 
 ## Submitting your results
 
@@ -62,8 +79,8 @@ Do the appropriate combination of git status, git add, and git commits.
 
 ### Contributor
 
-For further information see the [GitHub help on creating a pull request from a fork][6] page.
+For further information see the [GitHub help on creating a pull request from a fork][3] page.
 
 [1]: https://www.apache.org/dev/cmsref.html#markdown
 [2]: https://github.com/tdf/odftoolkit/tree/master/src/site
-[6]: https://help.github.com/en/articles/creating-a-pull-request-from-a-fork
+[3]: https://help.github.com/en/articles/creating-a-pull-request-from-a-fork
