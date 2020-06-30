@@ -1,6 +1,8 @@
 package com.mobanisto.odftoolkit.website.html;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -33,6 +35,9 @@ public class MarkdownGenerator extends BaseGenerator
 		this.webPath = webPath;
 
 		HtmlBuilder htmlBuilder = new HtmlBuilder();
+
+		htmlBuilder.getHtml().attr("lang", "en");
+
 		setupHeader(webPath, htmlBuilder);
 
 		Element body = htmlBuilder.getBody();
@@ -60,7 +65,12 @@ public class MarkdownGenerator extends BaseGenerator
 		addFooter(body);
 
 		Files.createDirectories(path.getParent());
-		htmlBuilder.write(path);
+
+		String text = htmlBuilder.getDocument().toString();
+		OutputStream os = Files.newOutputStream(path);
+		os.write("<!DOCTYPE html>".getBytes());
+		os.write(text.getBytes(Charset.forName("UTF-8")));
+		os.close();
 	}
 
 	private void addFooter(Element element) throws IOException
