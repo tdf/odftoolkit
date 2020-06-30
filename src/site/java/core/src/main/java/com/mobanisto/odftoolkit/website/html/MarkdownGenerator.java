@@ -1,6 +1,7 @@
 package com.mobanisto.odftoolkit.website.html;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import com.mobanisto.odftoolkit.website.Resources;
@@ -58,6 +59,7 @@ public class MarkdownGenerator extends BaseGenerator
 
 		addFooter(body);
 
+		Files.createDirectories(path.getParent());
 		htmlBuilder.write(path);
 	}
 
