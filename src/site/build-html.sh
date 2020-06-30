@@ -5,7 +5,7 @@ echo "  in ./website-development.html"
 # Start the Python Markdown daemon. (tested with Python 2.7.16)
 export MARKDOWN_SOCKET=`pwd`/markdown.socket PYTHONPATH=`pwd`
 python cms/build/markdownd.py
-echo 1. Copying actual README.md & related files to site
+echo 1. Copying actual README.md \& related files to site
 # root README.md and related fiels becomding index.mdtext
 #cp ../../README.md ./site/content/odftoolkit_website/introduction.mdtext #2DO rename to index.mdtext
 cp ../../LICENSE ./site/content/odftoolkit_website/
