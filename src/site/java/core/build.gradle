@@ -2,7 +2,7 @@ dependencies {
     compile 'de.topobyte:jsoup-elements:0.1.3'
     compile 'de.topobyte:jsoup-bootstrap:0.4.1'
     compile 'de.topobyte:jsoup-utils:0.1.6'
-    compile 'de.topobyte:jsoup-toc:0.0.2'
+    compile 'de.topobyte:jsoup-toc:0.1.0'
     compile 'de.topobyte:melon-paths:0.0.3'
     compile 'de.topobyte:css-utils:0.1.0'
     compile 'de.topobyte:webpaths-core:0.0.3'
