@@ -17,6 +17,8 @@ import de.topobyte.jsoup.components.A;
 import de.topobyte.jsoup.components.Div;
 import de.topobyte.jsoup.components.Img;
 import de.topobyte.jsoup.nodes.Element;
+import de.topobyte.jsoup.toc.TablesOfContent;
+import de.topobyte.jsoup.toc.table.TableOfContent;
 import de.topobyte.webpaths.WebPath;
 import de.topobyte.webpaths.WebPaths;
 
@@ -65,6 +67,9 @@ public class MarkdownGenerator extends BaseGenerator
 
 		addHeadingIds(contentA);
 		addCodeHilite(contentA);
+
+		TableOfContent toc = TablesOfContent.create(contentA);
+		TablesOfContent.replaceMarker(contentA, "[TOC]", toc);
 
 		addFooter(body);
 
