@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 import com.mobanisto.odftoolkit.website.Resources;
 import com.mobanisto.odftoolkit.website.markdown.Markdown;
@@ -62,11 +63,8 @@ public class MarkdownGenerator extends BaseGenerator
 
 		Markdown.renderFile(contentA, file);
 
-		for (org.jsoup.nodes.Element element : contentA.select("pre")) {
-			Div codeContainer = HTML.div("codehilite");
-			element.before(codeContainer);
-			codeContainer.ac(element);
-		}
+		addHeadingIds(contentA);
+		addCodeHilite(contentA);
 
 		addFooter(body);
 
@@ -77,6 +75,31 @@ public class MarkdownGenerator extends BaseGenerator
 		os.write("<!DOCTYPE html>".getBytes());
 		os.write(text.getBytes(Charset.forName("UTF-8")));
 		os.close();
+	}
+
+	private void addHeadingIds(Div element)
+	{
+		for (String hx : Arrays.asList("h1", "h2", "h3", "h4", "h5", "h6")) {
+			for (org.jsoup.nodes.Element child : element.select(hx)) {
+				String text = child.text();
+				String id = headingId(text);
+				child.attr("id", id);
+			}
+		}
+	}
+
+	private String headingId(String text)
+	{
+		return text.toLowerCase().replaceAll(" ", "-").replaceAll("---", "-");
+	}
+
+	private void addCodeHilite(Element element)
+	{
+		for (org.jsoup.nodes.Element child : element.select("pre")) {
+			Div codeContainer = HTML.div("codehilite");
+			child.before(codeContainer);
+			codeContainer.ac(child);
+		}
 	}
 
 	private void addFooter(Element element) throws IOException
