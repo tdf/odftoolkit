@@ -1,6 +1,6 @@
 # Frequently Asked Questions
 
-##For Users
+## For Users
 
 **How to download and install**
 
@@ -26,7 +26,7 @@ You can find sample codes from our [Cookbook][8] and [Demos][9].
 **How to report defects**
 The Simple API uses Bugzilla to track the defects. You can report defects [here][10].
 
-##For Developers
+## For Developers
 
 **How to download source**
 
@@ -76,14 +76,14 @@ After the source code is checked out, now get and install [Apache Maven][14]. On
 
 If Maven is correctly installed, change into the project directory and build with command `"mvn"`.
 
-##Communications
+## Communications
 You can subscribe to the project's mailing lists from [this page][15].  The "users" list is for discussions about using the toolkit, and the "dev" list is for discussing the development of the toolkit.  Active developers should also subscribe to the "commit" mailing list so they will receive those automatic notifications.
 
 
-##Easy entry level tasks
+## Easy entry level tasks
 TBD
 
-##Design of the API
+## Design of the API
 The design principle is "make it easy for users to locate the functions they want".
 
 org.odftoolkit.simple.Document is the abstract base class which the specific document classes are derived from:  TextDocument, SpreadsheetDocument, PresentationDocument, GraphicsDocument and ChartDocument.
@@ -95,7 +95,7 @@ Besides the packages for different document types, there are additional packages
 There is another package named org.odftoolkit.simple.common, which contains functions that are not related with a specific document type nor a specific feature. For example, the text extractor functions are put in this package.
 
 
-##How to contribute patches
+## How to contribute patches
 If you want to contribute a patch to this project, following below steps:
 
   - Step 1. Create an issue in [bugzilla][16], or write a comment to a related open issue, to describe what functions you want to provide.
@@ -113,7 +113,7 @@ If you want to contribute a patch to this project, following below steps:
   - Step 6. Upload your patch to bugzilla.
   - Step 7. Refactor your patch if you get comments from reviewers.
 
-##How to review patches
+## How to review patches
 
 As a reviewer, you need to carefully read the source code, run the unit tests, to make sure the new contributed code won't hurt the quality of this project.
 
@@ -138,7 +138,7 @@ As a reviewer, you need to carefully read the source code, run the unit tests, t
     `hg commit -A -u "Developer:xxx Reviewer:yyy" -m "#bug XY# Description of changes"`
     `hg push https://<your user id>:<your password>@odftoolkit.org/hg/simple~code-base`
 
-##Reference material
+## Reference material
 **ODF**
 
 The current draft of the OASIS ODF 1.2 standard can be downloaded [here][19].
