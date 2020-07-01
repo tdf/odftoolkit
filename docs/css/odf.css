@@ -87,7 +87,6 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 #content h1,h2,h3,h4,h5,h6 {
-  font-weight: normal;
   text-transform:none;
   margin: 10px 0 15px;
   padding: 5px 0;
@@ -132,7 +131,6 @@ font-weight: bold;
 }
 
 #contenta h1,h2,h3,h4,h5,h6 {
-  font-weight: normal;
   margin: 10px 0 15px;
   padding: 5px 0;
 }
@@ -212,9 +210,14 @@ td {
   width: 350px;
 }
 
-code, .codehilite {
+.codehilite {
   background-color: #c8edc2;
   padding: 0.01em 1em;
+  border-radius: 10px;
+}
+
+code {
+  background-color: #c8edc2;
   border-radius: 10px;
 }
 
@@ -365,6 +368,40 @@ code, .codehilite {
   padding-top: 20px;
 }
 
+.toc-container {
+  background-color: #c8edc2;
+  padding: 1em 0.1em;
+  border-radius: 10px;
+}
+
+.toc-l1, .toc-l2, .toc-l3, .toc-l4, .toc-l5, .toc-l6 {
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+}
+
+.toc-l1 {
+  padding-left: 1.5em;
+}
+
+.toc-l2 {
+  padding-left: 2em;
+}
+
+.toc-l3 {
+  padding-left: 2.5em;
+}
+
+.toc-l4 {
+  padding-left: 3em;
+}
+
+.toc-l5 {
+  padding-left: 3.5em;
+}
+
+.toc-l6 {
+  padding-left: 4em;
+}
 
 
 /* definition lists */
