@@ -369,9 +369,14 @@ code {
 }
 
 .toc-container {
-  background-color: #c8edc2;
+  background-color: #d3f7ff;
   padding: 1em 0.1em;
   border-radius: 10px;
+}
+
+.toc-headline {
+  padding: 0.5em 1em;
+  font-size: 1.5em;
 }
 
 .toc-l1, .toc-l2, .toc-l3, .toc-l4, .toc-l5, .toc-l6 {
