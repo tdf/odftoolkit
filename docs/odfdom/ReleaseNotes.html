@@ -20,9 +20,10 @@
       <h1>Components</h1> 
       <ul class="list-group"> 
         <li class="list-group-item"><a href="../odfdom/index.html">ODFDOM</a></li> 
-        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
         <li class="list-group-item"><a href="../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../generator/index.html">Schema To Template</a></li> 
         <li class="list-group-item"><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
       </ul> 
       <h1>Community</h1> 
       <ul class="list-group"> 
@@ -45,15 +46,15 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>Release Notes</h1> 
-      <h2>Release 1.0.0</h2> 
+      <h1 id="release-notes">Release Notes</h1> 
+      <h2 id="release-1.0.0">Release 1.0.0</h2> 
       <p>The <a href="https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/1.0.0/">ODFDOM 1.0.0</a> was released on Jun 30th, 2020. Major updates are coming with this version:</p> 
       <ul> 
         <li>JDK 9 (or higher) is required to build</li> 
         <li><strong>Collaboration API</strong>: No developer would ever sent a zipped repository for exchangin work with other developers. Still we are doing this by zipping document and sending those. To be able to dispatch only changes among collaborators new functionalty had bee added: Any OpenDocumen Text can now be transformed into an equal sequence of user changes (<a href="../docs/presentations/character-styles.odt">ODT</a>/<a href="../docs/presentations/character-styles.json">JSON</a>). This list of user changes is like a batch of text operations, similar as if the user would created the document from top to the bottom. Formost, new user changes can be merged into the existing document via JSON. For more details see the <a href="./operations/operations.html">list of supported changes/operations</a></li> 
         <li>Many Fixes &amp; enhancements, which were done over several years by merging (more an overwriting) with the former Open-XChange ODFDOM fork.</li> 
       </ul> 
-      <h2>Release 0.9.0</h2> 
+      <h2 id="release-0.9.0">Release 0.9.0</h2> 
       <p>The <a href="https://mvnrepository.com/artifact/org.odftoolkit/odfdom-java/0.9.0">release of ODFDOM 0.9.0</a> is released on Jun 30th, 2020:</p> 
       <ul> 
         <li>JDK 8 is required to build</li> 
@@ -62,7 +63,7 @@
         <li>Last release bundling the Simple API, which includes too many copied source code, likely as it was meant as a stand-alone fork. The Simple API is by copying and obfuscating ODFDOM API incompatible with the upcoming Collaboration API and is being removed (see above).</li> 
         <li>Many fixes &amp; enhancements</li> 
       </ul> 
-      <h2>Release 0.8.7</h2> 
+      <h2 id="release-0.8.7">Release 0.8.7</h2> 
       <p>ODFDOM 0.8.7 is released on Feb 16th, 2011. Major enhancements are coming with this version:</p> 
       <ul> 
         <li>Full Maven support: ODFDOM is now on the public Maven servers.</li> 
@@ -73,7 +74,7 @@
         <li>A new function to extract text from documents, DOMs and elements has been provided.</li> 
         <li>Several bugs related with table and presentation had been fixed.</li> 
       </ul> 
-      <h3>Resolved Issues: 0.8.7</h3> 
+      <h3 id="resolved-issues:-0.8.7">Resolved Issues: 0.8.7</h3> 
       <ul> 
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=5">Bug 5</a> - Enabling public Maven repository</li> 
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=35">Bug 35</a> - JavaDoc enhancments</li> 
@@ -103,7 +104,7 @@
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=236">Bug 236</a> - Column without width, should not have empty width attributes when split up</li> 
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=257">Bug 257</a> - Test utility does not handle spaces in directory names</li> 
       </ul> 
-      <h3>API changes since 0.8.6 Release</h3> 
+      <h3 id="api-changes-since-0.8.6-release">API changes since 0.8.6 Release</h3> 
       <p><em><strong>1.Package/Class Change List</strong></em> Note: The first column 'Java class' package is relative to 'org.odftoolkit'.</p> 
       <table class="table"> 
         <thead> 
@@ -626,9 +627,9 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>Release 0.8.6</h2> 
+      <h2 id="release-0.8.6">Release 0.8.6</h2> 
       <p>On July 16th, version 0.8.6 has been released. About a month after the release of 0.8.5 the new 0.8.6 version provides more than a dozen of bug fixes mainly for Table usage from the <a href="high-level-ODF-Document-API">ProjectOverview</a>. Aside of this, minor enhancements have been added, e.g. a higher usability for the Color type.</p> 
-      <h3>Resolved Issues: 0.8.6</h3> 
+      <h3 id="resolved-issues:-0.8.6">Resolved Issues: 0.8.6</h3> 
       <ul> 
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=146">Bug 146</a> - Some resources for performance test are not available</li> 
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=161">Bug 161</a> - Adapt line breaking activating Mercurial plugin</li> 
@@ -647,7 +648,7 @@
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=210">Bug 210</a> - Make API for metadata of odfdom.jar more obvious</li> 
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=212">Bug 212</a> - Trying to access a spreadsheet cell without first inserting rows causes NPE</li> 
       </ul> 
-      <h3>API changes since 0.8.5 Release</h3> 
+      <h3 id="api-changes-since-0.8.5-release">API changes since 0.8.5 Release</h3> 
       <p>Note: The first column 'Java class' package is relative to 'org.odftoolkit.odfdom'.</p> 
       <table class="table"> 
         <thead> 
@@ -764,10 +765,10 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>Release: 0.8.5</h2> 
+      <h2 id="release:-0.8.5">Release: 0.8.5</h2> 
       <p>On 3rd July 2010 version 0.8.5 of the Java implementation has been released. In this version, ODFDOM supports the load, parse and save of all available media types of OpenDocument documents - except Formula (MathML) and Database front end documents. As well, ODFDOM now allows the load &amp; save of none-ODF XML elements and attributes. Furthermore, we introduced a series of slide relevant convenient methods for the Document API, which makes easy slide handling possible. In particular the slide access, deletion, reordering, the copy of slides from a presentation to another and even merge of two presentations were enabled.</p> 
       <p>A second focus had been the overall performance. We improved the start-up time of ODFDOM using a class lazy loading approach and reduced the saving time of ODF documents by avoiding the compressing of already compressed file, e.g. images. In special the performance of table handling via the Document API have been enhanced. For instance by using now automatic table expansion when a requested cell index was out of range. Finally we improved table method robustness by adding sanity checks and the fix of several table issues.</p> 
-      <h3>Resolved Issues: 0.8.5</h3> 
+      <h3 id="resolved-issues:-0.8.5">Resolved Issues: 0.8.5</h3> 
       <p>The resolved issues in this version include:</p> 
       <ul> 
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=97">Bug 97</a> - OdfTableRow.getCellAt(int) returns null when the cell is a repeat cell;</li> 
@@ -787,7 +788,7 @@
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=169">Bug 169</a> - Minor fix for OdfPackage Performance;</li> 
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=170">Bug 170</a> - Update of ODF 1.2 part 1 specification in ODFDOM JavaDoc to Public Review Draft (CD05).</li> 
       </ul> 
-      <h3>API changes since 0.8 Release</h3> 
+      <h3 id="api-changes-since-0.8-release">API changes since 0.8 Release</h3> 
       <p>Note: The first column 'Java class' package is relative to 'org.odftoolkit.odfdom'.</p> 
       <table class="table"> 
         <thead> 
@@ -852,9 +853,9 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>Release: 0.8</h2> 
+      <h2 id="release:-0.8">Release: 0.8</h2> 
       <p>On 19 Feb 2010 version 0.8 of the Java implementation has been released. The API adapts to latest ODF Specification 1.2 part Community Draft 4 and the codegeneration has been updated to the new RelaxNG schema. A major improvement of convenient layer is the introduce of table convenient API - a first prototype of ODF features - which provides methods to manipulate table feature and its sub-features, such as rows, columns, cells and cell ranges. In this prototype, the 1:1 inheritance relationships between convenient layer classes and dom layer classes have been broken up, and composite relationships are used instead. We also provide metadata convenient API in incubator package which will be improved in the following version. Dom layer has been improved to support invalid attributes and values in DOM tree. Some bugs in package layer, DOM/XML layer and document/convenient layer have been fixed. The Java Docs are improved.</p> 
-      <h3>Resolved Issues: 0.8</h3> 
+      <h3 id="resolved-issues:-0.8">Resolved Issues: 0.8</h3> 
       <p>The resolved issues in this version includes:</p> 
       <ul> 
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=19">Bug 19</a> - Special characters in package path string not handled correctly;</li> 
@@ -872,7 +873,7 @@
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=128">Bug 128</a> - Exchange System.out.print/println with JDK logging;</li> 
         <li><a href="https://odftoolkit.org/bugzilla/show_bug.cgi?id=133">Bug 133</a> - Slight enhancements of the Maven pom.xml.</li> 
       </ul> 
-      <h3>API changes since 0.7 Release (possibly uncomplete)</h3> 
+      <h3 id="api-changes-since-0.7-release-(possibly-uncomplete)">API changes since 0.7 Release (possibly uncomplete)</h3> 
       <p>Note: The first column 'Java class' package is relative to 'org.odftoolkit.odfdom'.</p> 
       <table class="table"> 
         <thead> 

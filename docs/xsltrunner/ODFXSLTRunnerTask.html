@@ -20,9 +20,10 @@
       <h1>Components</h1> 
       <ul class="list-group"> 
         <li class="list-group-item"><a href="../odfdom/index.html">ODFDOM</a></li> 
-        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
         <li class="list-group-item"><a href="../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../generator/index.html">Schema To Template</a></li> 
         <li class="list-group-item"><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
       </ul> 
       <h1>Community</h1> 
       <ul class="list-group"> 
@@ -45,14 +46,14 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>ODF XSLT Runner Task</h1> 
-      <h2>Apply XSLT stylesheets to ODF documents with Ant</h2> 
+      <h1 id="odf-xslt-runner-task">ODF XSLT Runner Task</h1> 
+      <h2 id="apply-xslt-stylesheets-to-odf-documents-with-ant">Apply XSLT stylesheets to ODF documents with Ant</h2> 
       <p><strong>ODF XSLT Runner Task</strong> is a task definition for <a href="http://ant.apache.org/">Apache Ant</a> which allows to apply XSLT stylesheets to ODF documents similar to Ant's build-in <code>&lt;xslt&gt;</code> <a href="http://ant.apache.org/manual/CoreTasks/style.html">task</a>. It is based on ODFXSLTRunner. Please see ODFXSLTRunner for further details of its operation.</p> 
-      <h2>Getting and building ODFXSLTRunnerTask</h2> 
+      <h2 id="getting-and-building-odfxsltrunnertask">Getting and building ODFXSLTRunnerTask</h2> 
       <p><strong>odfxsltrunnertask</strong> is build by a NetBeans project. After you have checked out the odf-xslt-runner-task-src/show, you can open the project in NetBeans and build <strong>odfxsltrunnertask</strong>.</p> 
       <p>A binary release of <strong>odfxsltrunnertask.jar</strong> is available in the download section.</p> 
       <p>Building and running <strong>odfxsltrunner.jar</strong> requires additional jar files. Please see Requirements for details.</p> 
-      <h2>Usage</h2> 
+      <h2 id="usage">Usage</h2> 
       <p>To use <strong>odfxsltrunner.jar</strong> with Ant, you have to include the following <a href="http://ant.apache.org/manual/CoreTasks/taskdef.html">task definition</a> into your buildfile, where ''<code>&lt;path&gt;</code>'' has to be replaced with the path where you have stored the <strong>odfxsltrunnertask.jar</strong> and <strong>odfxsltrunner.jar</strong> files:</p> 
       <div class="codehilite">
         <pre><code class="language-shell">     &lt;taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask"
@@ -61,7 +62,7 @@
       </div> 
       <p>You can use this task definition on the top level (that is as a child element of the <code>&lt;project&gt;</code> element or locally within a single <code>&lt;target&gt;</code> element. It defines a new task <code>&lt;odfxslt&gt;</code> which allows to process ODF documents with XSLT stylesheets.</p> 
       <p>The new task supports the use of nested <code>&lt;param&gt;</code> and <code>&lt;factory&gt;</code>elements which have the same meaning as the <code>&lt;param&gt;</code> and <code>&lt;factory&gt;</code> child elements of the <code>&lt;xslt&gt;</code> <a href="http://ant.apache.org/manual/CoreTasks/style.html">task</a>.</p> 
-      <h2>Parameters</h2> 
+      <h2 id="parameters">Parameters</h2> 
       <table border="border"> 
         <tbody>
           <tr>
@@ -106,10 +107,10 @@
           </tr> 
         </tbody>
       </table> 
-      <h2>Parameters specified as nested elements</h2> 
-      <h3>Param</h3> 
+      <h2 id="parameters-specified-as-nested-elements">Parameters specified as nested elements</h2> 
+      <h3 id="param">Param</h3> 
       <p>Param specifies a parameter that is passed as <a href="http://www.w3.org/TR/1999/REC-xslt-19991116#top-level-variables">XSLT parameter</a> to the XSL stylesheet.</p> 
-      <h3>Parameters</h3> 
+      <h3 id="parameters">Parameters</h3> 
       <table border="border"> 
         <tbody>
           <tr>
@@ -130,9 +131,9 @@
         </tbody>
       </table> 
       <p><strong>Note:</strong> The parameters <code>if</code> and <code>unless</code> which are supported by the <code>&lt;xslt&gt;</code> task are (not yet) supported.</p> 
-      <h3>Factory</h3> 
+      <h3 id="factory">Factory</h3> 
       <p>Factory specifies Java TransformerFactory class to use.</p> 
-      <h3>Parameters</h3> 
+      <h3 id="parameters">Parameters</h3> 
       <table border="border"> 
         <tbody>
           <tr>
@@ -147,7 +148,7 @@
           </tr> 
         </tbody>
       </table> 
-      <h2>Requirements</h2> 
+      <h2 id="requirements">Requirements</h2> 
       <p><strong>odfxsltrunnertask</strong> requires <a href="https://openjdk.java.net/install/">Java 5</a>, or a later version of Java.</p> 
       <p>It further requires ODFXSLTRunner and the corresponding ODFDOM component.</p> 
       <p><strong>Note:</strong> When building <strong>odfxsltrunertask</strong>, the <strong>odfxsltrunner</strong> project has be checked out, too. It is build automatically.</p> 

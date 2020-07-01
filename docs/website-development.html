@@ -20,9 +20,10 @@
       <h1>Components</h1> 
       <ul class="list-group"> 
         <li class="list-group-item"><a href="odfdom/index.html">ODFDOM</a></li> 
-        <li class="list-group-item"><a href="simple/index.html">Simple API (deprecated)</a></li> 
         <li class="list-group-item"><a href="conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="generator/index.html">Schema To Template</a></li> 
         <li class="list-group-item"><a href="xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="simple/index.html">Simple API (deprecated)</a></li> 
       </ul> 
       <h1>Community</h1> 
       <ul class="list-group"> 
@@ -45,11 +46,11 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>Website Development</h1> 
-      <h2>Introduction</h2> 
+      <h1 id="website-development">Website Development</h1> 
+      <h2 id="introduction">Introduction</h2> 
       <p>The pages on this website are written in [markdown syntax] <a href="https://www.apache.org/dev/cmsref.html#markdown">1</a> and stored in our GIT repo at [src/site] <a href="https://github.com/tdf/odftoolkit/tree/master/src/site">2</a></p> 
       <p>A subproject contained within the repo is used to generate the website from the Markdown text files and the resources stored in the content directory.</p> 
-      <h2>Overview</h2> 
+      <h2 id="overview">Overview</h2> 
       <p>This website development page is divided into:</p> 
       <ul> 
         <li><a href="#setup">Setup</a> - How to download the website and setup the tooling.</li> 
@@ -57,8 +58,8 @@
         <li><a href="#local-development">Local Development</a> - How to build and test locally.</li> 
         <li><a href="#submitting-your-results">Submitting Your Results</a> - How to contribute your edits.</li> 
       </ul> 
-      <h2>Setup</h2> 
-      <h3>Download the repo</h3> 
+      <h2 id="setup">Setup</h2> 
+      <h3 id="download-the-repo">Download the repo</h3> 
       <p>Check out the repository:</p> 
       <div class="codehilite">
         <pre><code class="language-shell">git clone https://github.com/tdf/odftoolkit
@@ -70,20 +71,20 @@
 ./new-build-html.sh
 </code></pre>
       </div> 
-      <h2>Directory Layout</h2> 
-      <h3>Content directory</h3> 
+      <h2 id="directory-layout">Directory Layout</h2> 
+      <h3 id="content-directory">Content directory</h3> 
       <p>The <code>src/site/site/content/odftoolkit</code> directory contains web content - markdown, html, javascript, css, images and other files. Resources such as images, CSS files and ZIP files are copied as is to the web site during the build.</p> 
-      <h2>Local Development</h2> 
-      <h3>Edit the site</h3> 
+      <h2 id="local-development">Local Development</h2> 
+      <h3 id="edit-the-site">Edit the site</h3> 
       <p>Using your favorite editors edit the site content.</p> 
-      <h3>Build the site</h3> 
+      <h3 id="build-the-site">Build the site</h3> 
       <p>Run this to generate the website into GitHub Pages directory &lt;ODFTOOLKIT_ROOT&gt;/docs</p> 
       <div class="codehilite">
         <pre><code class="language-shell">cd odftoolkit/src/site/java
 ./new-build-html.sh
 </code></pre>
       </div> 
-      <h2>Building JavaDoc and publishing the JavaDoc</h2> 
+      <h2 id="building-javadoc-and-publishing-the-javadoc">Building JavaDoc and publishing the JavaDoc</h2> 
       <p>JavaDoc is generated as part of by calling from the root of the project the command:</p> 
       <div class="codehilite">
         <pre><code class="language-shell">mvn clean install
@@ -95,10 +96,10 @@
 ./copy-javadoc.sh
 </code></pre>
       </div> 
-      <h2>Submitting your results</h2> 
-      <h3>Committer</h3> 
+      <h2 id="submitting-your-results">Submitting your results</h2> 
+      <h3 id="committer">Committer</h3> 
       <p>Do the appropriate combination of git status, git add, and git commits.</p> 
-      <h3>Contributor</h3> 
+      <h3 id="contributor">Contributor</h3> 
       <p>For further information see the <a href="https://help.github.com/en/articles/creating-a-pull-request-from-a-fork">GitHub help on creating a pull request from a fork</a> page.</p> 
     </div>
     <html>

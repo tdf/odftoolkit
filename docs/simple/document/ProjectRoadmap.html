@@ -20,9 +20,10 @@
       <h1>Components</h1> 
       <ul class="list-group"> 
         <li class="list-group-item"><a href="../../odfdom/index.html">ODFDOM</a></li> 
-        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
         <li class="list-group-item"><a href="../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../generator/index.html">Schema To Template</a></li> 
         <li class="list-group-item"><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
       </ul> 
       <h1>Community</h1> 
       <ul class="list-group"> 
@@ -45,11 +46,52 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>Project Road Map</h1> 
-      <h2>Requirements Collection</h2> 
+      <h1 id="project-road-map">Project Road Map</h1> 
+      <h2 id="requirements-collection">Requirements Collection</h2> 
       <p>This page is used to discuss the requirements from a perspective of an Office software user.</p> 
-      <p>[TOC]</p> 
-      <h3>Cut/copy/paste/selection</h3> 
+      <p>
+        <ul>
+          <li><a href="#project-road-map">Project Road Map</a>
+            <ul>
+              <li><a href="#requirements-collection">Requirements Collection</a>
+                <ul>
+                  <li><a href="#cut/copy/paste/selection">Cut/copy/paste/selection</a></li>
+                  <li><a href="#navigator/document-map">Navigator/document map</a></li>
+                  <li><a href="#fields">Fields</a></li>
+                  <li><a href="#frame">Frame</a>
+                    <ul>
+                      <li><a href="#text-frame">Text frame</a></li>
+                      <li><a href="#graphics">Graphics</a></li>
+                    </ul></li>
+                  <li><a href="#section">Section</a></li>
+                  <li><a href="#bullet-&amp;-numbering">Bullet &amp; numbering</a></li>
+                  <li><a href="#heading">Heading</a></li>
+                  <li><a href="#header/footer">Header/footer</a></li>
+                  <li><a href="#footnote/endnote">Footnote/endnote</a></li>
+                  <li><a href="#hyperlinks">Hyperlinks</a></li>
+                  <li><a href="#break">Break</a></li>
+                  <li><a href="#page-numbering">Page numbering</a></li>
+                  <li><a href="#comment">Comment</a></li>
+                  <li><a href="#document-bookmark">Document bookmark</a></li>
+                  <li><a href="#fontwork">Fontwork</a></li>
+                  <li><a href="#chart">Chart</a></li>
+                  <li><a href="#ole-object">OLE object</a></li>
+                  <li><a href="#layout-and-columns">Layout and columns</a></li>
+                  <li><a href="#table">Table</a>
+                    <ul>
+                      <li><a href="#filter-and-validity">Filter and validity</a></li>
+                      <li><a href="#group">Group</a></li>
+                      <li><a href="#split">Split</a></li>
+                    </ul></li>
+                  <li><a href="#slide">Slide</a>
+                    <ul>
+                      <li><a href="#master-slide">Master Slide</a></li>
+                    </ul></li>
+                </ul></li>
+              <li><a href="#project-roadmap">Project Roadmap</a></li>
+            </ul></li>
+        </ul></p> 
+      <h3 id="cut/copy/paste/selection">Cut/copy/paste/selection</h3> 
       <p>Select something, cut or copy it, and paste to somewhere else. These operations are easily made in Office softwares, but are hard done in APIs. The functions include:</p> 
       <ul> 
         <li>Create a selection</li> 
@@ -92,14 +134,14 @@
           </tr> 
         </tbody>
       </table> 
-      <h3>Navigator/document map</h3> 
+      <h3 id="navigator/document-map">Navigator/document map</h3> 
       <p>With these functions, users can easily go to a certain place in the whole document. These functions can provide methods to get a certain heading, get a certain image, get a certain table and so on. The functions include:</p> 
       <ul> 
         <li>Return a list of main features, such as heading,paragraphs,graphics,table,bookmark,sections,hyperlinks,reference,index,comments,text frames, and draw objects.</li> 
         <li>get next or previous feature, for example, there is a table under a paragraph, then the API can allow users to get next table after this paragraph.</li> 
       </ul> 
       <p>Part of these functions have been implemented with getTableList() in org.odftoolkit.simple.Document.</p> 
-      <h3>Fields</h3> 
+      <h3 id="fields">Fields</h3> 
       <p>With this feature, users can create fields in the document. The available fields include:</p> 
       <ul> 
         <li>Fields are used to insert information about the current document, for example, file name, template, statistics, user data, date, and time.</li> 
@@ -113,7 +155,7 @@
         <li>Navigator among fields</li> 
         <li>Delete a field</li> 
       </ul> 
-      <h3>Frame</h3> 
+      <h3 id="frame">Frame</h3> 
       <p>With frame, users can create a layout of one or more columns of text and objects. The functions include:</p> 
       <ul> 
         <li>Set properties to a frame, including names</li> 
@@ -121,13 +163,13 @@
         <li>Navigator among frames</li> 
         <li>Add caption</li> 
       </ul> 
-      <h4>Text frame</h4> 
+      <h4 id="text-frame">Text frame</h4> 
       <p>The functions include:</p> 
       <ul> 
         <li>Add a text frame</li> 
         <li>Search a text frame by name</li> 
       </ul> 
-      <h4>Graphics</h4> 
+      <h4 id="graphics">Graphics</h4> 
       <p>With graphics, users can insert a picture or create with shapes. The functions include:</p> 
       <ul> 
         <li>Insert a picture from file</li> 
@@ -137,7 +179,7 @@
         <li>Set properties</li> 
         <li>Add caption</li> 
       </ul> 
-      <h3>Section</h3> 
+      <h3 id="section">Section</h3> 
       <p>Sections are named blocks of text, including graphics or objects. With section, users can:</p> 
       <ul> 
         <li>To prevent text from being edited.</li> 
@@ -154,75 +196,75 @@
         <li>Navigator through sections</li> 
         <li>Set properties of section</li> 
       </ul> 
-      <h3>Bullet &amp; numbering</h3> 
+      <h3 id="bullet-&amp;-numbering">Bullet &amp; numbering</h3> 
       <p>To create bullet and numbering. The functions include:</p> 
       <ul> 
         <li>Create bullet to paragraphs, including graphics bullets</li> 
         <li>create numbering to paragraphs</li> 
         <li>Set the style properties</li> 
       </ul> 
-      <h3>Heading</h3> 
+      <h3 id="heading">Heading</h3> 
       <p>To create heading of a document. The functions include:</p> 
       <ul> 
         <li>Create headings</li> 
         <li>Set styles of headings</li> 
         <li>Set outline numbering</li> 
       </ul> 
-      <h3>Header/footer</h3> 
+      <h3 id="header/footer">Header/footer</h3> 
       <p>With these function, you can set header and footer.</p> 
       <ul> 
         <li>Set header and footer</li> 
         <li>Set the styles of header and footer</li> 
       </ul> 
-      <h3>Footnote/endnote</h3> 
+      <h3 id="footnote/endnote">Footnote/endnote</h3> 
       <p>With these function, you can create footnote or endnote in your document.</p> 
       <ul> 
         <li>Add the footnote and the endnote</li> 
         <li>Find the footnote and endnote</li> 
         <li>Delete the foontnote and endnote</li> 
       </ul> 
-      <h3>Hyperlinks</h3> 
+      <h3 id="hyperlinks">Hyperlinks</h3> 
       <p>With these function, you can create a hyperlink in your document.</p> 
       <ul> 
         <li>Add a hyperlink</li> 
         <li>Delete a hyperlink</li> 
         <li>Find hyperlinks</li> 
       </ul> 
-      <h3>Break</h3> 
+      <h3 id="break">Break</h3> 
       <p>With these function, you can add break characters in your document.</p> 
       <ul> 
         <li>Add breaks</li> 
         <li>Delete breaks</li> 
         <li>Find breaks</li> 
       </ul> 
-      <h3>Page numbering</h3> 
+      <h3 id="page-numbering">Page numbering</h3> 
       <p>With these function, you can add page numbering in your document.</p> 
       <ul> 
         <li>Add page numbering</li> 
         <li>Delete page numbering</li> 
       </ul> 
-      <h3>Comment</h3> 
+      <h3 id="comment">Comment</h3> 
       <p>With this function, you can add comment to your document.</p> 
       <ul> 
         <li>Add comments</li> 
         <li>Navigation among comments</li> 
         <li>delete comments</li> 
       </ul> 
-      <h3>Document bookmark</h3> 
+      <h3 id="document-bookmark">Document bookmark</h3> 
       <p>To create bookmark</p> 
       <ul> 
         <li>Add bookmark</li> 
         <li>Navigation through bookmarks</li> 
         <li>Delete bookmarks</li> 
       </ul> 
-      <h3>Fontwork</h3> 
+      <h3 id="fontwork">Fontwork</h3> 
       <p>To create a fontwork</p> 
       <ul> 
         <li>Add frontwork</li> 
         <li>Delete fontwork</li> 
         <li>Navigation through fontwork</li> 
       </ul> 
-      <h3>Chart</h3> 
+      <h3 id="chart">Chart</h3> 
       <p>To create a chart</p> 
       <ul> 
         <li>Add chart</li> 
@@ -231,7 +273,7 @@
         <li>Navigation through chart</li> 
         <li>Delete chart</li> 
       </ul> 
-      <h3>OLE object</h3> 
+      <h3 id="ole-object">OLE object</h3> 
       <p>To operate OLE object</p> 
       <ul> 
         <li>Add a OLE object</li> 
@@ -239,12 +281,12 @@
         <li>Delete OLE object</li> 
         <li>Update OLE object properties</li> 
       </ul> 
-      <h3>Layout and columns</h3> 
+      <h3 id="layout-and-columns">Layout and columns</h3> 
       <p>To edit the layout and columns properties</p> 
       <ul> 
         <li>Set properties of layout</li> 
       </ul> 
-      <h3>Table</h3> 
+      <h3 id="table">Table</h3> 
       <p>To provide functions to manipulate table. Following functions have been provided:</p> 
       <ul> 
         <li>create table</li> 
@@ -255,33 +297,33 @@
         <li>delete row/column</li> 
         <li>numbering format</li> 
       </ul> 
-      <h4>Filter and validity</h4> 
+      <h4 id="filter-and-validity">Filter and validity</h4> 
       <p>To provide filter/validity functions to data in a table</p> 
       <ul> 
         <li>Add/delete/update filter</li> 
         <li>Add/delete/update validity</li> 
       </ul> 
-      <h4>Group</h4> 
+      <h4 id="group">Group</h4> 
       <p>To group rows or columns</p> 
       <ul> 
         <li>Add group</li> 
         <li>Delete group</li> 
       </ul> 
-      <h4>Split</h4> 
+      <h4 id="split">Split</h4> 
       <p>To split a cell</p> 
-      <h3>Slide</h3> 
+      <h3 id="slide">Slide</h3> 
       <p>To manipulate slides. Following functions have been provided:</p> 
       <ul> 
         <li>Add/delete slides</li> 
         <li>Navigation through slides</li> 
         <li>Merge slides</li> 
       </ul> 
-      <h4>Master Slide</h4> 
+      <h4 id="master-slide">Master Slide</h4> 
       <p>To manipulate master slides</p> 
       <ul> 
         <li>update styles of master slides</li> 
       </ul> 
-      <h2>Project Roadmap</h2> 
+      <h2 id="project-roadmap">Project Roadmap</h2> 
     </div>
     <html>
       <head></head>

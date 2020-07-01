@@ -20,9 +20,10 @@
       <h1>Components</h1> 
       <ul class="list-group"> 
         <li class="list-group-item"><a href="../odfdom/index.html">ODFDOM</a></li> 
-        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
         <li class="list-group-item"><a href="../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../generator/index.html">Schema To Template</a></li> 
         <li class="list-group-item"><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
       </ul> 
       <h1>Community</h1> 
       <ul class="list-group"> 
@@ -45,8 +46,8 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>Some Design Thoughts on ODFDOM Convenience Layer</h1> 
-      <h2>The API is our User Interface</h2> 
+      <h1 id="some-design-thoughts-on-odfdom-convenience-layer">Some Design Thoughts on ODFDOM Convenience Layer</h1> 
+      <h2 id="the-api-is-our-user-interface">The API is our User Interface</h2> 
       <p>Since the users of ODFDOM are programmers who use our library, this means that our API is our "User Interface". Although it is not a GUI, it is a UI, and we should design it like a UI, meaning we:</p> 
       <ol> 
         <li>Consider the tasks that the user will perform</li> 
@@ -54,7 +55,7 @@
         <li>Identify those tasks which are more advanced and might require more steps</li> 
         <li>Design an interface that makes the most-common tasks very easy, while still being powerful enough for more advanced uses.</li> 
       </ol> 
-      <h2>Some Typical User Tasks</h2> 
+      <h2 id="some-typical-user-tasks">Some Typical User Tasks</h2> 
       <p>Operations such as these should be possible to do with only 10 lines code, and with no knowledge of XML or XPath or ODF. We should add to this list and discuss</p> 
       <p>Do we agree that these are all common tasks that should be simple to program with ODFDOM?</p> 
       <ol> 
@@ -84,7 +85,7 @@
         <li>Create a custom shape in presentation slide, set animation effect “entrance-&gt;fly in“ to the custom shape.</li> 
         <li>Split a large document to many small documents, each chapter beginning with “heading 1“ style will be saved as a small document.</li> 
       </ol> 
-      <h2>Programming = Data structures + Algorithms</h2> 
+      <h2 id="programming-=-data-structures-+-algorithms">Programming = Data structures + Algorithms</h2> 
       <p>We probably all saw a statement like that in our first Computer Science class. These are both essential parts of programming. But many libraries have the fault that they only have strength in the data modeling. They often have very little support for common algorithms. For example, what did the C Programming Language give us? Aside from qsort() and bsearch(), there was very little. C++ on the other hand, contained the powerful Standard Template Library (STL).</p> 
       <p>ODFDOM is mainly convenience wrappers of ODF markup, raising the level of abstraction of this data. But we should also consider supporting algorithms, along the STL model. This would be quite powerful and is necessary to make the above task examples very simple for our users.</p> 
       <p>For example, a typical pattern of use is:</p> 
@@ -112,7 +113,7 @@
         <li>And of course, all the wrappers to read/write ODF content once we have the fragment that the user wants.</li> 
         <li>And I'm sure there are several other items to consider</li> 
       </ul> 
-      <h2>A Possible Direction Forward</h2> 
+      <h2 id="a-possible-direction-forward">A Possible Direction Forward</h2> 
       <p>I'd like us to consider doing the following:</p> 
       <ol> 
         <li>Spend a few days completing the list of user tasks that we agree should be easy to do with the ODFDOM convenience layer API.</li> 

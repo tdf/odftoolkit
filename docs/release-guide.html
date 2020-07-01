@@ -20,9 +20,10 @@
       <h1>Components</h1> 
       <ul class="list-group"> 
         <li class="list-group-item"><a href="odfdom/index.html">ODFDOM</a></li> 
-        <li class="list-group-item"><a href="simple/index.html">Simple API (deprecated)</a></li> 
         <li class="list-group-item"><a href="conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="generator/index.html">Schema To Template</a></li> 
         <li class="list-group-item"><a href="xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="simple/index.html">Simple API (deprecated)</a></li> 
       </ul> 
       <h1>Community</h1> 
       <ul class="list-group"> 
@@ -45,13 +46,13 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>Release Guide</h1> 
+      <h1 id="release-guide">Release Guide</h1> 
       <p>We are doing two kind of releases at the same time:</p> 
       <ol> 
         <li>One <strong>Maven release</strong> with the artefacts of each project.</li> 
         <li>One <strong>GitHub release</strong> bundling artefacts of the ODF Toolkit as ZIPs.</li> 
       </ol> 
-      <h2>Maven Release Guide</h2> 
+      <h2 id="maven-release-guide">Maven Release Guide</h2> 
       <p>The release jars for each project are deployed to the Maven repository. Making release artefacts should follow the following steps:</p> 
       <ol> 
         <li> <p><strong>Maven Repro Access</strong><br>Make sure you got access to Maven repro via our <a href="https://issues.sonatype.org/browse/OSSRH-960">Sonatype JIRA issue</a>. Add your userID &amp; password to your local <a href="https://maven.apache.org/settings.html">&lt;USER_HOME&gt;/.m2/settings.xml</a>.</p> </li> 
@@ -86,8 +87,8 @@
 </code></pre>
           </div> </li> 
       </ol> 
-      <h2>GitHub Release Guide</h2> 
-      <h3>The Six Release Artefacts</h3> 
+      <h2 id="github-release-guide">GitHub Release Guide</h2> 
+      <h3 id="the-six-release-artefacts">The Six Release Artefacts</h3> 
       <p>The <strong>GitHub release</strong> has always <strong>six files</strong>:</p> 
       <ul> 
         <li> <p><strong>Three ZIPs</strong> representing the ODF Toolkit:</p> 
@@ -98,7 +99,7 @@
           </ol> </li> 
         <li> <p><strong>Three SHA files</strong>, one for each ZIP to proof their correctness.</p> </li> 
       </ul> 
-      <h3>Creating Release Artefacts</h3> 
+      <h3 id="creating-release-artefacts">Creating Release Artefacts</h3> 
       <ol> 
         <li>Call from the ODF TOOLKIT base via command line:</li> 
       </ol> 
@@ -118,7 +119,7 @@ mvn install -Ppedantic &gt; mylogFile.txt 2&gt;&amp;1*
       <ol> 
         <li>You might want to <a href="website-development.html">update the website</a> to announce the release.</li> 
       </ol> 
-      <h3><strong>Bundling Release Artefacts:</strong></h3> 
+      <h3 id="bundling-release-artefacts:"><strong>Bundling Release Artefacts:</strong></h3> 
       <ol> 
         <li> <p>Test the JARs if they are working and if the documentation is correct, esp. JavaDoc references to ODF elements, attributes and units have been created correctly by our JavaDoc taglet project.</p> </li> 
         <li> <p>If all project artefacts have been created without an error, they can be bundled into ZIPs and signed via:</p> </li> 
@@ -128,13 +129,13 @@ mvn install -Ppedantic &gt; mylogFile.txt 2&gt;&amp;1*
 </code></pre>
       </div> 
       <p>The output will be created in the directory: 'ODF_TOOLKIT_BASE/target/release/'.<br><br> <strong>NOTE:</strong> Don't forget to check if the ZIPs of the result directory have the correct content.</p> 
-      <h2>Upload of the 6 Release Artefacts</h2> 
+      <h2 id="upload-of-the-6-release-artefacts">Upload of the 6 Release Artefacts</h2> 
       <ol> 
         <li>Browse to <a href="https://github.com/tdf/odftoolkit/releases">our GitHub release page</a>.</li> 
         <li>Press the "Draft a new release" button (or ask for access rights on the mailing list if not visible).</li> 
         <li>Upload all 6 files from the release and name it like "'odftoolkit-' + version", for instance: odftoolkit-8.0.0-RC2</li> 
       </ol> 
-      <h3><strong>References</strong></h3> 
+      <h3 id="references"><strong>References</strong></h3> 
       <ol> 
         <li><a href="https://dzone.com/articles/publish-your-artifacts-to-maven-central">How to Publish Your Artifacts to Maven Central</a></li> 
       </ol> 

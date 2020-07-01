@@ -20,9 +20,10 @@
       <h1>Components</h1> 
       <ul class="list-group"> 
         <li class="list-group-item"><a href="odfdom/index.html">ODFDOM</a></li> 
-        <li class="list-group-item"><a href="simple/index.html">Simple API (deprecated)</a></li> 
         <li class="list-group-item"><a href="conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="generator/index.html">Schema To Template</a></li> 
         <li class="list-group-item"><a href="xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="simple/index.html">Simple API (deprecated)</a></li> 
       </ul> 
       <h1>Community</h1> 
       <ul class="list-group"> 
@@ -45,31 +46,31 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>Source Control</h1> 
+      <h1 id="source-control">Source Control</h1> 
       <p>We are using <a href="http://github.com/tdf/odftoolkit">GitHub</a> for version control.</p> 
-      <h2>Getting the source code</h2> 
+      <h2 id="getting-the-source-code">Getting the source code</h2> 
       <div class="codehilite">
         <pre><code class="language-shell">git clone https://github.com/tdf/odftoolkit.git
 </code></pre>
       </div> 
       <p>For further information see the <a href="http://github.com/tdf/odftoolkit">Source Code Repository</a> page.</p> 
-      <h2>Build setup (Linux)</h2> 
-      <h3>ODF Toolkit == 0.9.0 using JDK 8</h3> 
+      <h2 id="build-setup-(linux)">Build setup (Linux)</h2> 
+      <h3 id="odf-toolkit-==-0.9.0-using-jdk-8">ODF Toolkit == 0.9.0 using JDK 8</h3> 
       <div class="codehilite">
         <pre><code class="language-shell">sudo apt-get install openjdk-8-jdk
 sudo apt-get install maven`
 </code></pre>
       </div> 
-      <h3>ODF Toolkit &gt;= 1.0.0 using JDK &gt;= 9</h3> 
+      <h3 id="odf-toolkit->=-1.0.0-using-jdk->=-9">ODF Toolkit &gt;= 1.0.0 using JDK &gt;= 9</h3> 
       <div class="codehilite">
         <pre><code class="language-shell">sudo apt-get install openjdk-11-jdk
 sudo apt-get install maven
 </code></pre>
       </div> 
       <p><strong>Note:</strong> The previous instructions has been tested with an Ubuntu 20.04 installation. Other distros and versions should work fine, but might require some slight modifications.</p> 
-      <h2>Build Setup (Windows)</h2> 
+      <h2 id="build-setup-(windows)">Build Setup (Windows)</h2> 
       <p>For the setup of the build environment, please see <a href="https://openjdk.java.net/install/">Java JDK download for Windows</a> and <a href="https://maven.apache.org/guides/getting-started/windows-prerequisites.html">Maven setup on Windows</a></p> 
-      <h2>Building (Linux &amp; Windows)</h2> 
+      <h2 id="building-(linux-&amp;-windows)">Building (Linux &amp; Windows)</h2> 
       <div class="codehilite">
         <pre><code class="language-shell">cd odftoolkit
 mvn clean install

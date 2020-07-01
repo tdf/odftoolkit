@@ -20,9 +20,10 @@
       <h1>Components</h1> 
       <ul class="list-group"> 
         <li class="list-group-item"><a href="../odfdom/index.html">ODFDOM</a></li> 
-        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
         <li class="list-group-item"><a href="../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../generator/index.html">Schema To Template</a></li> 
         <li class="list-group-item"><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
       </ul> 
       <h1>Community</h1> 
       <ul class="list-group"> 
@@ -45,15 +46,15 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>Generator (schema2template)</h1> 
-      <h2>Overview</h2> 
+      <h1 id="generator-(schema2template)">Generator (schema2template)</h1> 
+      <h2 id="overview">Overview</h2> 
       <p>The schema2template library loads arbitrary XML schemata (XML grammar) into the most powerful grammar model, which is the one given by RelaxNG XML. Based on loaded XML model given by the grammar Schema2template offers functionality to fill arbitrary user templates files with data.</p> 
       <p>The ODF Toolkit uses Schema2template to generate the XML layer. Every XML element and XML attribute from the grammar is given a Java class in the ODFDOM project. In the ODFDOM project these classes have the following locations:</p> 
       <ul> 
         <li>ODF attributes <a href="https://github.com/tdf/odftoolkit/tree/master/odfdom/src/main/java/org/odftoolkit/odfdom/dom/attribute">odfdom/src/main/java/org/odftoolkit/odfdom/dom/attribute</a></li> 
         <li>ODF elements: <a href="https://github.com/tdf/odftoolkit/tree/master/odfdom/src/main/java/org/odftoolkit/odfdom/dom/element">odfdom/src/main/java/org/odftoolkit/odfdom/dom/element</a></li> 
       </ul> 
-      <h2>Architecture</h2> 
+      <h2 id="architecture">Architecture</h2> 
       <p>The library is build upon two powerful open source tools:</p> 
       <ol> 
         <li> <p><a href="https://github.com/kohsuke/msv">Multi Schema Validator (MSV)</a> Used to read arbitrary XML schema and map them to an internal RelaxNG model.</p> </li> 
@@ -64,9 +65,9 @@
         <li>a XML node reference for the given format as HTML file</li> 
         <li>Java sources for a typed DOM tree of the format</li> 
       </ol> 
-      <h2>Design</h2> 
+      <h2 id="design">Design</h2> 
       <p>Read in the Java documentation more about the <a href="../api/schema2template/index.html">generator design</a> build upon the Multi Schema Validator (MSV).</p> 
-      <h2>License</h2> 
+      <h2 id="license">License</h2> 
       <p>Apache License, Version 2.0. Please see file <a href="../LICENSE">LICENSE</a>.</p> 
     </div>
     <html>

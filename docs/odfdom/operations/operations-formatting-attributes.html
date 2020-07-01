@@ -20,9 +20,10 @@
       <h1>Components</h1> 
       <ul class="list-group"> 
         <li class="list-group-item"><a href="../../odfdom/index.html">ODFDOM</a></li> 
-        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
         <li class="list-group-item"><a href="../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../generator/index.html">Schema To Template</a></li> 
         <li class="list-group-item"><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
       </ul> 
       <h1>Community</h1> 
       <ul class="list-group"> 
@@ -45,10 +46,10 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>Formatting Attributes (Operations)</h1> 
+      <h1 id="formatting-attributes-(operations)">Formatting Attributes (Operations)</h1> 
       <p>Formatting attributes are used to modify the appearance of a specific component in the document. An object of type <em>Attributes</em> contains a variable number of attribute values, mapped by the attribute name. An attribute value can be an atomic value, an array, or an object of any type described above.</p> 
       <p>The following chapters describe all generic formatting attributes, divided by their <em>attribute type</em>. Unless specified differently, the values of all measurement attributes (sizes, margins, indentations, etc.) are in 1/100 of millimeters.</p> 
-      <h2>DocumentAttributes</h2> 
+      <h2 id="documentattributes">DocumentAttributes</h2> 
       <p>These attributes are only supported in the <a href="operations.html#documentlayout">documentLayout</a> operation.</p> 
       <table class="table"> 
         <thead> 
@@ -75,7 +76,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>PageAttributes</h2> 
+      <h2 id="pageattributes">PageAttributes</h2> 
       <p>Page formatting attributes will be applied to page elements.</p> 
       <table class="table"> 
         <thead> 
@@ -172,7 +173,7 @@
       </table> 
       <p><em>Notes</em>:</p> 
       <p>(1) The top and bottom page margin will include a header or footer if existing. If the header/footer is too large to fit into the empty space, the effective size of the page content area has to be reduced to prevent the header/footer from overlapping with the page content area.</p> 
-      <h2>ParagraphAttributes</h2> 
+      <h2 id="paragraphattributes">ParagraphAttributes</h2> 
       <p>Paragraph formatting attributes will be applied to paragraph elements in a text document.</p> 
       <table class="table"> 
         <thead> 
@@ -355,7 +356,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>CharacterAttributes</h2> 
+      <h2 id="characterattributes">CharacterAttributes</h2> 
       <p>Character attributes will be applied to any document components containing text.</p> 
       <table class="table"> 
         <thead> 
@@ -512,7 +513,7 @@
       <p>(1) Presentation only. Only added for roundtrip (copy/paste, delete/undo, …).</p> 
       <p>(2) Presentation only. Added to the attributes and add the fontName e.g. 'Wingdings' to the CSS font-family attribute.</p> 
       <p>(3) May not be supported by all components.</p> 
-      <h2>TableAttributes</h2> 
+      <h2 id="tableattributes">TableAttributes</h2> 
       <p>Table formatting attributes will be applied to table elements in a text document.</p> 
       <table class="table"> 
         <thead> 
@@ -684,7 +685,7 @@
       </table> 
       <p><em>Notes</em>:</p> 
       <p>(1) Applies to the border of the whole table only.</p> 
-      <h2>TableRowAttributes</h2> 
+      <h2 id="tablerowattributes">TableRowAttributes</h2> 
       <p><em>Attribute type</em>:<code>row</code>|</p> 
       <p>Table row formatting attributes will be applied to row elements of tables in a text document.</p> 
       <table class="table"> 
@@ -715,7 +716,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>TableCellAttributes</h2> 
+      <h2 id="tablecellattributes">TableCellAttributes</h2> 
       <p><em>Attribute type</em>:<code>cell</code>|</p> 
       <p>Table cell formatting attributes will be applied to cell elements in table rows in a text document.</p> 
       <table class="table"> 
@@ -836,12 +837,12 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>DrawingAttributes</h2> 
+      <h2 id="drawingattributes">DrawingAttributes</h2> 
       <ul> 
         <li><a href="#drawing-attributes-text-document">Drawing Attributes - Text Document</a></li> 
         <li><a href="#drawing-attributes-general">Drawing Attributes - General</a></li> 
       </ul> 
-      <h2>Drawing Attributes - Text Document</h2> 
+      <h2 id="drawing-attributes-text-document">Drawing Attributes - Text Document</h2> 
       <p><em>Attribute type</em>:<code>drawing</code></p> 
       <p>Drawing formatting attributes will be applied to drawing objects embedded in the document.</p> 
       <p>Drawing formatting attributes will be applied to drawing objects embedded in the text document. Additionally to the attributes described in <a href="#drawingattributes">DrawingAttributes</a>, text documents support the following attributes:</p> 
@@ -1069,7 +1070,7 @@
       <p><em>Notes</em>:</p> 
       <p>(1) Currently only <code>borderTop</code> is set if the drawing has the type “horizontal_line”.</p> 
       <p>(2) Attributes are only used if <code>inline</code> mode is false. The generic attributes <code>left</code> and <code>top</code> will not be used for drawing objects in text documents.</p> 
-      <h2>Drawing Attributes - General</h2> 
+      <h2 id="drawing-attributes-general">Drawing Attributes - General</h2> 
       <p>The following attributes are supported by each drawing in each application regardless of the drawing type.</p> 
       <table class="table"> 
         <thead> 
@@ -1267,7 +1268,7 @@
       <ol> 
         <li>Some of the generic position and size attributes may be overridden by application-specific attributes.</li> 
       </ol> 
-      <h3>Embedded Drawing Attributes</h3> 
+      <h3 id="embedded-drawing-attributes">Embedded Drawing Attributes</h3> 
       <p>The following attributes are supported by drawing objects embedded in other drawing objects.</p> 
       <table class="table"> 
         <thead> 
@@ -1310,7 +1311,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>DrawingFillAttributes</h2> 
+      <h2 id="drawingfillattributes">DrawingFillAttributes</h2> 
       <p><em>Attribute type</em>:<code>fill</code></p> 
       <p>Drawing fill attributes will be applied to entire drawing objects embedded in the document, or to specific parts of a complex drawing object, e.g. to a data series or the legend in a chart object.</p> 
       <table class="table"> 
@@ -1377,7 +1378,7 @@
         <li>“bitmap” - The object is filled with a bitmap.</li> 
         <li>“pattern” - The object is filled with a preset pattern.</li> 
       </ul> 
-      <h2>DrawingLineAttributes</h2> 
+      <h2 id="drawinglineattributes">DrawingLineAttributes</h2> 
       <p><em>Attribute type</em>:<code>line</code></p> 
       <p>Drawing line attributes will be applied to entire drawing objects embedded in the document, or to specific parts of a complex drawing object, e.g. to a data series or the legend in a chart object.</p> 
       <table class="table"> 
@@ -1475,7 +1476,7 @@
         <li>“medium” - Solid line.</li> 
         <li>“large” - Solid line.</li> 
       </ul> 
-      <h2>DrawingTextAttributes</h2> 
+      <h2 id="drawingtextattributes">DrawingTextAttributes</h2> 
       <p><em>Attribute type</em>:<code>text</code></p> 
       <p>Formatting attributes describing the source of the text contents of a drawing object or chart data series.</p> 
       <table class="table"> 
@@ -1498,7 +1499,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>ImageAttributes</h2> 
+      <h2 id="imageattributes">ImageAttributes</h2> 
       <p><em>Attribute type</em>:<code>image</code></p> 
       <p>Formatting attributes for images and OLE objects.</p> 
       <table class="table"> 
@@ -1573,7 +1574,7 @@
         <li> <p>OOXML: Cropping is used as percentage value. The value 100 corresponds to the total size of the drawing frame.</p> </li> 
         <li> <p>ODF: Cropping is used as absolute length in 1/100 of millimeters.</p> </li> 
       </ul> 
-      <h2>ShapeAttributes</h2> 
+      <h2 id="shapeattributes">ShapeAttributes</h2> 
       <p><em>Attribute type</em>:<code>shape</code></p> 
       <p>Formatting attributes for shape objects.</p> 
       <table class="table"> 
@@ -1687,7 +1688,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>GeometryAttributes</h2> 
+      <h2 id="geometryattributes">GeometryAttributes</h2> 
       <p><em>Attribute type</em>:<code>geometry</code></p> 
       <p>Geometry attributes for shape objects.</p> 
       <table class="table"> 
@@ -1751,7 +1752,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>ConnectorAttributes</h2> 
+      <h2 id="connectorattributes">ConnectorAttributes</h2> 
       <p><em>Attribute type</em>:<code>connector</code></p> 
       <p>Connector attributes for connector shapes.</p> 
       <table class="table"> 
@@ -1795,7 +1796,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>ChartAttributes</h2> 
+      <h2 id="chartattributes">ChartAttributes</h2> 
       <p><em>Attribute type</em>:<code>chart</code></p> 
       <p>Formatting attributes for entire chart objects.</p> 
       <table class="table"> 
@@ -1852,7 +1853,7 @@
         <li>“stacked” - Data points of a category are stacked by their exact value.</li> 
         <li>“percentStacked” - Data points of a category are stacked relative to each other, summing up to 100%.</li> 
       </ul> 
-      <h2>ChartDataSeriesAttributes</h2> 
+      <h2 id="chartdataseriesattributes">ChartDataSeriesAttributes</h2> 
       <p><em>Attribute type</em>:<code>series</code></p> 
       <p>Formatting attributes for data series in chart objects.</p> 
       <table class="table"> 
@@ -1948,7 +1949,7 @@
         <li>“donut” - The data points are shown in multiple rings.</li> 
         <li>all types with appendix “2d” - and “3d” - are also supported by roundtrip</li> 
       </ul> 
-      <h2>ChartAxisAttributes</h2> 
+      <h2 id="chartaxisattributes">ChartAxisAttributes</h2> 
       <p><em>Attribute type</em>:<code>axis</code></p> 
       <p>Formatting attributes for axes in chart objects.</p> 
       <table class="table"> 
@@ -2001,7 +2002,7 @@
         <li>“date” - The axis shows date/time values, and can be scaled.</li> 
         <li>“series” - The axis shows series names. Used in deep 3D charts for the Z axis only.</li> 
       </ul> 
-      <h2>ChartLegendAttributes</h2> 
+      <h2 id="chartlegendattributes">ChartLegendAttributes</h2> 
       <p><em>Attribute type</em>:<code>legend</code> Formatting attributes for the legend in chart objects.</p> 
       <table class="table"> 
         <thead> 

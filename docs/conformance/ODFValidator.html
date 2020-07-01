@@ -20,9 +20,10 @@
       <h1>Components</h1> 
       <ul class="list-group"> 
         <li class="list-group-item"><a href="../odfdom/index.html">ODFDOM</a></li> 
-        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
         <li class="list-group-item"><a href="../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../generator/index.html">Schema To Template</a></li> 
         <li class="list-group-item"><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
       </ul> 
       <h1>Community</h1> 
       <ul class="list-group"> 
@@ -45,11 +46,11 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>ODF Validator</h1> 
-      <h2>Overview</h2> 
+      <h1 id="odf-validator">ODF Validator</h1> 
+      <h2 id="overview">Overview</h2> 
       <p><strong>ODF Validator</strong> is a tool that validates OpenDocument files and checks them for certain conformance criteria.</p> 
       <p><strong>ODF Validator</strong> is available as Java library for command line use or as web application archive (WAR). An instance of the WAR is <a href="https://odfvalidator.org">hosted online</a>. This page describes the command line tool, the user front-end of the WAR should be self-explaining.</p> 
-      <h2>How to start</h2> 
+      <h2 id="how-to-start">How to start</h2> 
       <p>To use the '''ODF Validator''', the following steps are required:</p> 
       <ul> 
         <li> <p>Get the source code.</p> </li> 
@@ -69,8 +70,8 @@
     -jar "&amp;lt;PATH&amp;gt;/odfvalidator-&amp;lt;VERSION&amp;gt;-jar-with-dependencies.jar"  &amp;lt;odffile&amp;gt;
 </code></pre>
       </div> 
-      <h2>Usage</h2> 
-      <h3>Usage Summary</h3> 
+      <h2 id="usage">Usage</h2> 
+      <h3 id="usage-summary">Usage Summary</h3> 
       <p>In a command-line environment, <strong>ODF Validator</strong> is invoked by the following command:</p> 
       <div class="codehilite">
         <pre><code class="language-shell">     java -jar "&lt;path&gt;/odfvalidator-VERSION-jar-with-dependencies.jar"
@@ -116,7 +117,7 @@
       <p><strong>-C</strong>: Validate using configuration file <strong>&lt;configfile&gt;</strong>.</p> 
       <p><strong>-S</strong>: Use the specified <strong>&lt;schemafile&gt;</strong> for validation.</p> 
       <p><strong>-V</strong>: Print version information.</p> 
-      <h3>Validation using default schemas</h3> 
+      <h3 id="validation-using-default-schemas">Validation using default schemas</h3> 
       <p>The ODF 1.0, ODF 1.1, ODF 1.2 schemas as well as the MathML 1.01 DTD and the MathML 2.0 schema are included in the <strong>ODFValidator.jar</strong> file. If the ODFValidator is called without the <strong>-S</strong> or <strong>-C</strong> options, these schemas are used for validation.</p> 
       <div class="codehilite">
         <pre><code class="language-shell">    odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x &lt;expclude pattern&gt;]
@@ -131,7 +132,7 @@
       <p>If <strong>-w</strong> is specified additionally, not only validation errors are reported, but also warnings.</p> 
       <p>If <strong>-v</strong> is specified additionally, not only validation errors and warnings are reported, but also the generator stored in the manifest, MIME types, the files that are processed, etc.</p> 
       <p>If the <strong>-o</strong> option is present, all messages go into the specified file. Otherwise, they are printed to standard out.</p> 
-      <h3>Validation using a non-default schema</h3> 
+      <h3 id="validation-using-a-non-default-schema">Validation using a non-default schema</h3> 
       <p>To specify the schema that is used for <strong>meta-xml</strong>, <strong>content.xml</strong>, <strong>styles.xml</strong> and <strong>settings.xml</strong> on the command line, <strong>ODF Validator</strong> has to be called with the following parameters:</p> 
       <div class="codehilite">
         <pre><code class="language-shell">    odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x &amp;lt;expclude pattern&amp;gt;]
@@ -140,7 +141,7 @@
       </div> 
       <p><strong>&lt;schemafile&gt;</strong> is the schema that shall be used.</p> 
       <p>All other command line option are as described in <em>Validation using default schemas</em>.</p> 
-      <h3>Validation using a configuration file</h3> 
+      <h3 id="validation-using-a-configuration-file">Validation using a configuration file</h3> 
       <p>The schemas and the files that should be validated can be specified in a configuration file. A configuration file is a Java XML properties file as described in the <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Properties.html">Java API documentation</a>. The following properties are supported:</p> 
       <ul> 
         <li><strong>strict-schema</strong>: Specifies the strict schema to be used.</li> 
@@ -164,7 +165,7 @@
       &lt;/properties&gt;
 </code></pre>
       </div> 
-      <h2>What is checked</h2> 
+      <h2 id="what-is-checked">What is checked</h2> 
       <p>The following items are checked:</p> 
       <ul> 
         <li>OpenDocument v1.2 documents 
@@ -195,10 +196,10 @@
         <li>The value of <em>draw:points</em> attributes is truncated to 2048 characters. For the logging level <strong>all</strong>, an information is displayed if this happens. <strong>Note:</strong> The truncation of this attribute value avoids a stack overflow in MSV while validating the attribute value against a regular expression.</li> 
         <li>A namespace "<a href="http://openoffice.org/2004/database">http://openoffice.org/2004/database</a>" within a <em>content.xml</em> file is changed to "urn:oasis:names:tc:opendocument:xmlns:database:1.0", and a namespace "<a href="http://openoffice.org/2004/office">http://openoffice.org/2004/office</a>" within a <em>content.xml</em> file is changed to "urn:oasis:names:tc:opendocument:xmlns:office:1.0". For the logging level <strong>all</strong>, an information is displayed if this happens. <strong>Note:</strong> These namespaces were used in OpenOffice.org 2.x database documents, because database documents are included in OpenDocument since version 1.2 only. Changing them enables the validation of OpenOffice.org 2.x database documents.</li> 
       </ul> 
-      <h2>Where are the ODF schemas</h2> 
+      <h2 id="where-are-the-odf-schemas">Where are the ODF schemas</h2> 
       <p>The OpenDocument schemas are available on the <a href="http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office">OASIS OpenDocument Technical Committee</a> page. The ODF 1.0 and 1.1 schemas can be downloaded directly from that page]. A zip file containing the most recent ODF 1.2 schemas is available in the document section.</p> 
       <p>The MathML DTD that is included in the ODF Validator us the one that is included in the <strong>/share/dtd/math/1_01/</strong> folder of each OpenOffice.org/Oracle Open Office installation.</p> 
-      <h2>Requirements</h2> 
+      <h2 id="requirements">Requirements</h2> 
       <p><strong>ODF Validator</strong> requires J2RE 1.5 or J2RE 1.6. For J2RE 1.6, the following options have to be included into the <strong>java</strong> command line:</p> 
       <div class="codehilite">
         <pre><code class="language-shell">    -Djavax.xml.validation.SchemaFactory:&lt;http://relaxng.org/ns/structure/1.0&gt;=org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl
@@ -216,7 +217,7 @@
       <p>The references to all other jar files must be updated manually before building <strong>ODF Validator</strong>.</p> 
       <p><strong>Note:</strong> ODFDOM requires <a href="http://xml.apache.org/dist/xerces-j/">Apache Xerces</a>. The jar file <strong>xercesImpl.jar</strong> also must exist in a folder <strong>lib</strong> next to <strong>odvalidator.jar</strong> file, or it must be in the classpath. The <strong>ODF Validator</strong> NetBeans projects includes a reference to <strong>xersesImpl.jar</strong> in the runtime classpath which has to be adapted after checking out the project.</p> 
       <p><strong>Note:</strong> ODFDOM requires at least Xerces 2.8.0. Please note that MSV distribution contains an xercesImpl.jar which is older.</p> 
-      <h2>Source Code</h2> 
+      <h2 id="source-code">Source Code</h2> 
       <p>The <strong>ODF Validator</strong> source code is located <a href="https://github.com/tdf/odftoolkit/tree/master/validator">here</a>. <strong>ODF Validator</strong> uses Mercurial for source control. Please check the help for instruction how to use Mercurial.</p> 
     </div>
     <html>

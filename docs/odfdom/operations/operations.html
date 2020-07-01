@@ -20,9 +20,10 @@
       <h1>Components</h1> 
       <ul class="list-group"> 
         <li class="list-group-item"><a href="../../odfdom/index.html">ODFDOM</a></li> 
-        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
         <li class="list-group-item"><a href="../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../generator/index.html">Schema To Template</a></li> 
         <li class="list-group-item"><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
       </ul> 
       <h1>Community</h1> 
       <ul class="list-group"> 
@@ -45,7 +46,7 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>Supported ODF Text Operations (or Changes)</h1> 
+      <h1 id="supported-odf-text-operations-(or-changes)">Supported ODF Text Operations (or Changes)</h1> 
       <p>Operations (or Changes) are used to transfer the user changes between editors. Operations are a prerequirement for collaborative working on a document.</p> 
       <p><strong>Resaon</strong>: No developer would ever sent a zipped repository for exchangin work with other developers. Still we are doing this by zipping document and sending those. To be able to dispatch only changes among collaborators new functionalty had been added: Any OpenDocumen Text can now be transformed into an equal sequence of user changes (<a href="./docs/docs/presentations/character-styles.odt">ODT</a>/<a href="./docs/docs/presentations/character-styles.json">JSON</a>). This list of user changes is like a batch of text operations, similar as if the user would created the document from top to the bottom. Formost, new user changes can be merged into the existing document via JSON.</p> 
       <p><strong>Test Demo</strong> You may test creating changes as JSON output transformation by commandline:</p> 
@@ -58,14 +59,45 @@
         <pre><code class="language-shell">java -jar &lt;ODFDOM_JAR&gt;
 </code></pre>
       </div> 
-      <p>[TOC]</p> 
+      <p>
+        <ul>
+          <li><a href="#supported-odf-text-operations-(or-changes)">Supported ODF Text Operations (or Changes)</a>
+            <ul>
+              <li><a href="#delete">delete</a></li>
+              <li><a href="#move">move</a></li>
+              <li><a href="#addparagraph">addParagraph</a></li>
+              <li><a href="#splitparagraph">splitParagraph</a></li>
+              <li><a href="#mergeparagraph">mergeParagraph</a></li>
+              <li><a href="#addtext">addText</a></li>
+              <li><a href="#addtab">addTab</a></li>
+              <li><a href="#addlinebreak">addLineBreak</a></li>
+              <li><a href="#addfield">addField</a></li>
+              <li><a href="#updatefield">updateField</a></li>
+              <li><a href="#addtable">addTable</a></li>
+              <li><a href="#addrows">addRows</a></li>
+              <li><a href="#addcells">addCells</a></li>
+              <li><a href="#addcolumn">addColumn</a></li>
+              <li><a href="#deletecolumns">deleteColumns</a></li>
+              <li><a href="#addliststyle">addListStyle</a></li>
+              <li><a href="#addheaderfooter">addHeaderFooter</a></li>
+              <li><a href="#deleteheaderfootercontent">deleteHeaderFooterContent</a></li>
+              <li><a href="#addnote">addNote</a></li>
+              <li><a href="#documentlayout">documentLayout</a></li>
+              <li><a href="#addfontdecl">addFontDecl</a></li>
+              <li><a href="#format">format</a></li>
+              <li><a href="#addstyle">addStyle</a></li>
+              <li><a href="#changestyle">changeStyle</a></li>
+              <li><a href="#deletestyle">deleteStyle</a></li>
+              <li><a href="#adddrawing">addDrawing</a></li>
+            </ul></li>
+        </ul></p> 
       <p>Most operations target specific text components (characters, paragraphs, tables, table cells, drawing objects, etc.) or ranges of text components. The following general rules apply for these operations:</p> 
       <ol> 
         <li>Single text components are addressed by a <code>start</code> property containing a <a href="#position">Position</a> array.</li> 
         <li>Ranges of text components are addressed by a <code>start</code> and an <code>end</code> property, both containing a <a href="#position">Position</a> array. The range is inclusive, the text component addressed by <code>end</code> is part of the range. The <code>end</code> position must be equal to <code>start</code> or must follow <code>start</code>.</li> 
       </ol> 
       <p><strong>Note</strong>: In productive usage operation names and attributes should be shortened to limit bandwidth usage.</p> 
-      <h2>delete</h2> 
+      <h2 id="delete">delete</h2> 
       <p>Deletes a component or a range of related components.</p> 
       <table class="table"> 
         <thead> 
@@ -105,7 +137,7 @@
       </table> 
       <p><strong>Note</strong>: Currently, only single components can be deleted, except for text ranges in a paragraph. A text range can include characters, fields, and drawing objects, but must be contained in a single paragraph.</p> 
       <p>The operation deletes only the addressed components. It will never delete any parent components, even if they are left empty (for example: after deleting the last row in a table, the empty table will remain in the document).</p> 
-      <h2>move</h2> 
+      <h2 id="move">move</h2> 
       <p>Moves a component or a range of related components to a new location.</p> 
       <table class="table"> 
         <thead> 
@@ -150,7 +182,7 @@
         </tbody> 
       </table> 
       <p><strong>Note</strong>: Currently, only single <strong>drawing</strong> components can be moved. The property <code>end</code> will not be evaluated at all.</p> 
-      <h2>addParagraph</h2> 
+      <h2 id="addparagraph">addParagraph</h2> 
       <p>Inserts a new empty paragraph node into the document.</p> 
       <table class="table"> 
         <thead> 
@@ -188,7 +220,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>splitParagraph</h2> 
+      <h2 id="splitparagraph">splitParagraph</h2> 
       <p>Splits the contents of an existing paragraph into two paragraphs.</p> 
       <table class="table"> 
         <thead> 
@@ -220,7 +252,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>mergeParagraph</h2> 
+      <h2 id="mergeparagraph">mergeParagraph</h2> 
       <p>Merges two consecutive paragraphs to a single paragraph.</p> 
       <table class="table"> 
         <thead> 
@@ -253,7 +285,7 @@
         </tbody> 
       </table> 
       <p>The formatting attributes of the second paragraph will be lost, unless the leading paragraph is empty.</p> 
-      <h2>addText</h2> 
+      <h2 id="addtext">addText</h2> 
       <p>Inserts new text into a paragraph.</p> 
       <table class="table"> 
         <thead> 
@@ -304,7 +336,7 @@
         <li>In empty paragraphs, the inserted text gets the character formatting defined at the paragraph itself.</li> 
         <li>The attributes passed in the <code>attrs</code> property will be merged over the existing attributes.</li> 
       </ul> 
-      <h2>addTab</h2> 
+      <h2 id="addtab">addTab</h2> 
       <p>Inserts a tabulator into a paragraph.</p> 
       <table class="table"> 
         <thead> 
@@ -349,7 +381,7 @@
         <li>In empty paragraphs, the inserted tabulator gets the character formatting defined at the paragraph itself.</li> 
         <li>The attributes passed in the <code>attrs</code> property will be merged over the existing attributes.</li> 
       </ul> 
-      <h2>addLineBreak</h2> 
+      <h2 id="addlinebreak">addLineBreak</h2> 
       <p>Inserts a line break into a paragraph.</p> 
       <table class="table"> 
         <thead> 
@@ -400,7 +432,7 @@
         <li>In empty paragraphs, the inserted break gets the character formatting defined at the paragraph itself.</li> 
         <li>The attributes passed in the <code>attrs</code> property will be merged over the existing attributes.</li> 
       </ul> 
-      <h2>addField</h2> 
+      <h2 id="addfield">addField</h2> 
       <p>Inserts simple text field into a paragraph.</p> 
       <table class="table"> 
         <thead> 
@@ -450,7 +482,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>updateField</h2> 
+      <h2 id="updatefield">updateField</h2> 
       <p>Updates an already existing simple field.</p> 
       <table class="table"> 
         <thead> 
@@ -507,7 +539,7 @@
         <li>In empty paragraphs, the inserted field gets the character formatting defined at the paragraph itself.</li> 
         <li>The attributes passed in the <code>attrs</code> property will be merged over the existing attributes.</li> 
       </ul> 
-      <h2>addTable</h2> 
+      <h2 id="addtable">addTable</h2> 
       <p>Inserts a new table node into the document.</p> 
       <table class="table"> 
         <thead> 
@@ -555,7 +587,7 @@
       <ul> 
         <li>The new table will not contain any rows or cells.</li> 
       </ul> 
-      <h2>addRows</h2> 
+      <h2 id="addrows">addRows</h2> 
       <p>Inserts one or more new rows into a table.</p> 
       <table class="table"> 
         <thead> 
@@ -616,7 +648,7 @@
       </table> 
       <p><em>Note</em>:</p> 
       <p>(1) The properties <code>insertDefaultCells</code> and <code>referenceRow</code> are mutually exclusive.</p> 
-      <h2>addCells</h2> 
+      <h2 id="addcells">addCells</h2> 
       <p>Inserts one or more new cells into a table row.</p> 
       <table class="table"> 
         <thead> 
@@ -664,7 +696,7 @@
       </table> 
       <p><em>Note</em>:</p> 
       <p>(1) The resulting number of cells in the row <strong>must not</strong> exceed the number of columns in the table, as specified by the <code>tableGrid</code> attribute of the table.</p> 
-      <h2>addColumn</h2> 
+      <h2 id="addcolumn">addColumn</h2> 
       <p>Inserts cells for a new column into a table.</p> 
       <table class="table"> 
         <thead> 
@@ -718,7 +750,7 @@
       <ul> 
         <li>As a side effect, this operation changes the <code>tableGrid</code> attribute of the parent table.</li> 
       </ul> 
-      <h2>deleteColumns</h2> 
+      <h2 id="deletecolumns">deleteColumns</h2> 
       <p>Deletes the cells of a single column or multiple columns from a table.</p> 
       <table class="table"> 
         <thead> 
@@ -767,7 +799,7 @@
         <li> <p>Each cell that is addressed by the specified column range will be removed completely.</p> </li> 
         <li> <p>As a side effect, this operation changes the <code>tableGrid</code> attribute of the parent table.</p> </li> 
       </ul> 
-      <h2>addListStyle</h2> 
+      <h2 id="addliststyle">addListStyle</h2> 
       <p>Inserts the definition of a list style into the document. An existing list style with the given name will be replaced.</p> 
       <table class="table"> 
         <thead> 
@@ -883,7 +915,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>addHeaderFooter</h2> 
+      <h2 id="addheaderfooter">addHeaderFooter</h2> 
       <p>Inserts Header or Footer in the document.</p> 
       <table class="table"> 
         <thead> 
@@ -922,7 +954,7 @@
         <li>“header_first” (“footer_first”) - if defined, used only on first page in document. Has bigger priority then “_default”, and overwrites it.</li> 
         <li>“header_even” (“footer_even”) - if defined, used on even pages, and overwrites “_default” type, as it has higher priority. With this type defined, on odd pages, “_default” type is used.</li> 
       </ol> 
-      <h2>deleteHeaderFooterContent</h2> 
+      <h2 id="deleteheaderfootercontent">deleteHeaderFooterContent</h2> 
       <p>Removes header or footer with passed id from the document.</p> 
       <table class="table"> 
         <thead> 
@@ -948,7 +980,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>addNote</h2> 
+      <h2 id="addnote">addNote</h2> 
       <p>Inserts a new comment into a paragraph.</p> 
       <table class="table"> 
         <thead> 
@@ -1003,7 +1035,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>documentLayout</h2> 
+      <h2 id="documentlayout">documentLayout</h2> 
       <p>Sets default attributes for the document and for various formatting attribute types.</p> 
       <table class="table"> 
         <thead> 
@@ -1029,7 +1061,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>addFontDecl</h2> 
+      <h2 id="addfontdecl">addFontDecl</h2> 
       <p>Inserts an extended description for a specific font which an be used for font substitution algorithms.</p> 
       <table class="table"> 
         <thead> 
@@ -1100,7 +1132,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>format</h2> 
+      <h2 id="format">format</h2> 
       <p>Sets or removes explicit formatting attributes at an arbitrary component in the text document.</p> 
       <table class="table"> 
         <thead> 
@@ -1148,7 +1180,7 @@
       <ul> 
         <li>Currently, only single components can be formatted, except for text ranges in a paragraph. A text range can include characters, fields, and drawing objects, but must be contained in a single paragraph.</li> 
       </ul> 
-      <h2>addStyle</h2> 
+      <h2 id="addstyle">addStyle</h2> 
       <p>Inserts a new style with its formatting attributes into the document.</p> 
       <table class="table"> 
         <thead> 
@@ -1222,7 +1254,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>changeStyle</h2> 
+      <h2 id="changestyle">changeStyle</h2> 
       <p>Changes the formatting attributes, and other properties of an existing style. Must not be used for auto styles.</p> 
       <table class="table"> 
         <thead> 
@@ -1258,7 +1290,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>deleteStyle</h2> 
+      <h2 id="deletestyle">deleteStyle</h2> 
       <p>Removes a style from the document. Does not modify any attribute sets of elements that refer to the style sheet.</p> 
       <table class="table"> 
         <thead> 
@@ -1290,7 +1322,7 @@
           </tr> 
         </tbody> 
       </table> 
-      <h2>addDrawing</h2> 
+      <h2 id="adddrawing">addDrawing</h2> 
       <p>Inserts a new drawing object into the document. This section describes the generic properties of the <code>addDrawing</code> operation.</p> 
       <table class="table"> 
         <thead> 
