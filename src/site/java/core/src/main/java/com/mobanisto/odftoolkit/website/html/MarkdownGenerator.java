@@ -97,6 +97,13 @@ public class MarkdownGenerator extends BaseGenerator
 		TocDivRenderer tocRenderner = new TocDivRenderer(toc);
 		TablesOfContent.replaceMarker(contentA, "[TOC]", tocRenderner);
 
+		for (org.jsoup.nodes.Element element : contentA
+				.select(".toc-container")) {
+			Div div = HTML.div("toc-headline");
+			element.prependChild(div);
+			div.appendText("Table of contents");
+		}
+
 		/*
 		 * file output
 		 */
