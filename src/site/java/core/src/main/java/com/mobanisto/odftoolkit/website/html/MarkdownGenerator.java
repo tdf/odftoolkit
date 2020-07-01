@@ -38,25 +38,47 @@ public class MarkdownGenerator extends BaseGenerator
 	{
 		this.webPath = webPath;
 
-		HtmlBuilder htmlBuilder = new HtmlBuilder();
+		/*
+		 * preparation
+		 */
 
+		HtmlBuilder htmlBuilder = new HtmlBuilder();
 		htmlBuilder.getHtml().attr("lang", "en");
 
+		// set up the header
 		setupHeader(webPath, htmlBuilder);
 
+		/*
+		 * site layout and content
+		 */
+
+		// add main content
 		Element body = htmlBuilder.getBody();
 
+		// logo at the top
 		banner(body);
 		clear(body);
 
+		// sidebar navigation
 		Div sidenav = body.ac(HTML.div());
 		sidenav.attr("id", "sidenav");
 
+		Markdown.renderString(sidenav, markdownSidenav);
+
+		// main content rendered from Markdown file
 		Div contentA = body.ac(HTML.div());
 		contentA.attr("id", "contenta");
 
-		Markdown.renderString(sidenav, markdownSidenav);
+		Markdown.renderFile(contentA, file);
 
+		// footer
+		footer(body);
+
+		/*
+		 * post processing
+		 */
+
+		// Side navigation needs some CSS classes
 		for (org.jsoup.nodes.Element element : sidenav.select("ul")) {
 			element.addClass("list-group");
 		}
@@ -64,24 +86,59 @@ public class MarkdownGenerator extends BaseGenerator
 			element.addClass("list-group-item");
 		}
 
-		Markdown.renderFile(contentA, file);
-
+		// add ids for headings for navigation to invidudual sections
 		addHeadingIds(contentA);
+
+		// code highlighting
 		addCodeHilite(contentA);
 
+		// table of contents
 		TableOfContent toc = TablesOfContent.create(contentA);
 		TocDivRenderer tocRenderner = new TocDivRenderer(toc);
 		TablesOfContent.replaceMarker(contentA, "[TOC]", tocRenderner);
 
-		addFooter(body);
+		/*
+		 * file output
+		 */
 
 		Files.createDirectories(path.getParent());
 
 		String text = htmlBuilder.getDocument().toString();
-		OutputStream os = Files.newOutputStream(path);
-		os.write("<!DOCTYPE html>".getBytes());
-		os.write(text.getBytes(Charset.forName("UTF-8")));
-		os.close();
+		try (OutputStream os = Files.newOutputStream(path)) {
+			os.write("<!DOCTYPE html>".getBytes());
+			os.write(text.getBytes(Charset.forName("UTF-8")));
+		}
+	}
+
+	private void banner(Element content)
+	{
+		Div divBanner = content.ac(HTML.div());
+		divBanner.attr("id", "banner");
+		Div divBannerRight = divBanner.ac(HTML.div());
+		divBannerRight.attr("id", "bannerright");
+		A linkLogo = divBannerRight
+				.ac(HTML.a("https://www.documentfoundation.org/"));
+		linkLogo.attr("alt", "The Document Foundation");
+
+		WebPath pathLogo = WebPaths.get(
+				"images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png");
+
+		Img image = linkLogo
+				.ac(HTML.img(webPath.relativize(pathLogo).toString()));
+		image.attr("id", "tdf-logo");
+		image.attr("class", "w350");
+		image.attr("alt", "The Document Foundation");
+	}
+
+	private void clear(Element element)
+	{
+		element.ac(HTML.div()).attr("id", "clear");
+	}
+
+	private void footer(Element element) throws IOException
+	{
+		String text = Resources.load("snippets/footer.html");
+		ElementUtil.appendFragment(element, text);
 	}
 
 	private void addHeadingIds(Div element)
@@ -107,37 +164,6 @@ public class MarkdownGenerator extends BaseGenerator
 			child.before(codeContainer);
 			codeContainer.ac(child);
 		}
-	}
-
-	private void addFooter(Element element) throws IOException
-	{
-		String text = Resources.load("snippets/footer.html");
-		ElementUtil.appendFragment(element, text);
-	}
-
-	private void clear(Element element)
-	{
-		element.ac(HTML.div()).attr("id", "clear");
-	}
-
-	private void banner(Element content)
-	{
-		Div divBanner = content.ac(HTML.div());
-		divBanner.attr("id", "banner");
-		Div divBannerRight = divBanner.ac(HTML.div());
-		divBannerRight.attr("id", "bannerright");
-		A linkLogo = divBannerRight
-				.ac(HTML.a("https://www.documentfoundation.org/"));
-		linkLogo.attr("alt", "The Document Foundation");
-
-		WebPath pathLogo = WebPaths.get(
-				"images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png");
-
-		Img image = linkLogo
-				.ac(HTML.img(webPath.relativize(pathLogo).toString()));
-		image.attr("id", "tdf-logo");
-		image.attr("class", "w350");
-		image.attr("alt", "The Document Foundation");
 	}
 
 }
