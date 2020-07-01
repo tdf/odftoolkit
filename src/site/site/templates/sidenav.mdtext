@@ -6,10 +6,10 @@
 # Components
 
 - [ODFDOM](/odftoolkit_website/odfdom/index.html)
-- [Simple API (deprecated)](/odftoolkit_website/simple/index.html)
 - [ODF Validator](/odftoolkit_website/conformance/ODFValidator.html)
 - [Schema To Template](/odftoolkit_website/generator/index.html)
 - [XSLT Runner](/odftoolkit_website/xsltrunner/ODFXSLTRunner.html)
+- [Simple API (deprecated)](/odftoolkit_website/simple/index.html)
 
 # Community
 

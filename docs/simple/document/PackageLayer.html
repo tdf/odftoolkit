@@ -20,9 +20,10 @@
       <h1>Components</h1> 
       <ul class="list-group"> 
         <li class="list-group-item"><a href="../../odfdom/index.html">ODFDOM</a></li> 
-        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
         <li class="list-group-item"><a href="../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../generator/index.html">Schema To Template</a></li> 
         <li class="list-group-item"><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
       </ul> 
       <h1>Community</h1> 
       <ul class="list-group"> 
@@ -45,8 +46,8 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>Package Layer</h1> 
-      <h2>Package Description</h2> 
+      <h1 id="package-layer">Package Layer</h1> 
+      <h2 id="package-description">Package Description</h2> 
       <p>The Simple Java API for ODF focuses on the high level methods development. It has three layers:</p> 
       <ol> 
         <li><strong>Feature Layer</strong> provides convenient methods for features in ODF documents, for example, table, style, metadata. It has several packages, e.g. <em>org.odftoolkit.simple.table</em>, ''org.odftoolkit.simple.presentation''. Each package is either related with a specific document type or related with a common feature.</li> 
@@ -55,7 +56,7 @@
       </ol> 
       <p>Following diagram shows the structure of Simple Java API for ODF. The yellow boxes represent packages. The root package is <em>org.odftoolkit.simple</em>. The other packages are under the root package, and the name has eliminated <em>org.odftoolkit.simple</em>.</p> 
       <p><img src="simple_odf_structure.jpg" alt="Layers of ODF Toolkit"></p> 
-      <h2>API changes from ODFDOM</h2> 
+      <h2 id="api-changes-from-odfdom">API changes from ODFDOM</h2> 
       <p>The Simple Java API has corresponding classes for the document layer of ODFDOM. Follow table shows the mapping between ODFDOM and Simple Java API.</p> 
       <p>Note: The first column "ODFDOM Package" is relative to "org.odftoolkit.odfdom", and the third column "Simple Package" is relative to "org.odftoolkit.simple".</p> 
       <table class="table"> 

@@ -20,9 +20,10 @@
       <h1>Components</h1> 
       <ul class="list-group"> 
         <li class="list-group-item"><a href="../odfdom/index.html">ODFDOM</a></li> 
-        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
         <li class="list-group-item"><a href="../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../generator/index.html">Schema To Template</a></li> 
         <li class="list-group-item"><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
       </ul> 
       <h1>Community</h1> 
       <ul class="list-group"> 
@@ -45,16 +46,16 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1>ODF XSLT Runner</h1> 
-      <h2>Simplify the application of XSLT stylesheets to ODF documents</h2> 
+      <h1 id="odf-xslt-runner">ODF XSLT Runner</h1> 
+      <h2 id="simplify-the-application-of-xslt-stylesheets-to-odf-documents">Simplify the application of XSLT stylesheets to ODF documents</h2> 
       <p><strong>ODF XSLT Runner</strong> is a small Java application that allows you to apply XSLT stylesheets to XML streams included in ODF packages without extracting them from the package. It can be used from the command line. A <a href="ODFXSLTRunnerTask.html">driver</a> to use it within Ant buildfiles is also available.</p> 
-      <h2>Getting and building ODF XSLT Runner</h2> 
+      <h2 id="getting-and-building-odf-xslt-runner">Getting and building ODF XSLT Runner</h2> 
       <p><strong>ODF XSLT Runner</strong> is build by a NetBeans project. After you have checked out the sources from the Mercurial repository, you can open the project in NetBeans and build <strong>odfxsltrunner</strong>.</p> 
       <p>A binary release of <strong>odfxsltrunner.jar</strong> is available in the ODF Toolkit binary package. Please download <a href="../downloads.html">here</a>. If you need the earlier single jars, please access <a href="http://code.google.com/a/apache-extras.org/p/odftoolkit-extra/downloads/list">here</a>.</p> 
       <p>Building and running <strong>odfxsltrunner.jar</strong> requires additional jar files. Please see Requirements for details.</p> 
-      <h2>Examples</h2> 
+      <h2 id="examples">Examples</h2> 
       <p>Example stylesheets can be found on the <a href="ODFXSLTRunnerExamples.html">ODFXSLTRunner Examples</a> page.</p> 
-      <h2>Command Line Options</h2> 
+      <h2 id="command-line-options">Command Line Options</h2> 
       <p><strong>ODF XSLT Runner</strong> is called by one of the below command lines:</p> 
       <div class="codehilite">
         <pre><code class="language-shell">java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&gt;]
@@ -88,7 +89,7 @@ java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &l
       </div> 
       <p>The <strong>-l</strong> option can be used to redirect diagnostic messages into a log file. By default they are printed on standard error.</p> 
       <p>XSLT <a href="http://www.w3.org/TR/1999/REC-xslt-19991116#top-level-variables">Parameters</a> can be passed to the transformation by specifying them as name=value pairs. They must appear behind all other command line parameters.</p> 
-      <h2>URI resolution/document() function</h2> 
+      <h2 id="uri-resolution/document()-function">URI resolution/document() function</h2> 
       <p>If the source of a transformation is an ODF package, the XSLT <a href="http://www.w3.org/TR/1999/REC-xslt-19991116#document">document</a> function can be used to access other files in the package than the one that is the source of the transformation. To do so, the first parameter of the <em>document()</em> function must be a relative URI that references the file that shall be accessed. The reference must be relative to the source file. The second parameter of the <em>document()</em> function must be a node within the source file.</p> 
       <p><strong>Note:</strong> The second parameter specifies the base URI for the resolution of the URI that is specified by the first parameter. This base URI is the base URI of the file that contains the node that is passed as second parameter. If the second parameter is omitted, the base URI is the one of the XSLT stylesheet containing the <em>document()</em> function itself. <strong>odfxsltrunner</strong> runner uses the rules ODF defines for resolving relative URIs only for URIs that are relative to a file within an ODF package.</p> 
       <p><strong>Example:</strong> When transforming a content.xml file contained in an ODF package, the following rule applies templates to the style elements contained in the style.xml file:</p> 
@@ -96,7 +97,7 @@ java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &l
         <pre><code class="language-xml">&lt;xsl:apply-templates select="document('styles.xml',.)//office:styles/style:style"/&gt;
 </code></pre>
       </div> 
-      <h2>Requirements</h2> 
+      <h2 id="requirements">Requirements</h2> 
       <p><strong>ODF XSLT Runner</strong> requires <a href="https://openjdk.java.net/install/">Java RE 5</a>, or a later version of Java.</p> 
       <p>It further requires ODFDOM. This former NetBeans project is pre-configured to build ODFDOM while building <strong>ODF XSLT Runner</strong>. This requires that the ODFDOM sources are located in a folder <strong>odfdom</strong> next to the folder of the <strong>ODF XSLT Runner</strong> project.</p> 
       <p>Alternatively, the reference to the ODFDOM project in the compile time classpath of the <strong>ODF XSLT Runner</strong> project may be replaced with a reference to an already compiled <strong>odfdom.jar</strong>.</p> 
