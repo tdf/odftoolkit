@@ -212,7 +212,7 @@ td {
   width: 350px;
 }
 
-.codehilite {
+code, .codehilite {
   background-color: #c8edc2;
   padding: 0.01em 1em;
   border-radius: 10px;
