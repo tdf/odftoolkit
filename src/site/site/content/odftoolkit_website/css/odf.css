@@ -87,7 +87,6 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 #content h1,h2,h3,h4,h5,h6 {
-  font-weight: normal;
   text-transform:none;
   margin: 10px 0 15px;
   padding: 5px 0;
@@ -132,7 +131,6 @@ font-weight: bold;
 }
 
 #contenta h1,h2,h3,h4,h5,h6 {
-  font-weight: normal;
   margin: 10px 0 15px;
   padding: 5px 0;
 }
