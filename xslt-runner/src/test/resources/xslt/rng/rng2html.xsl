@@ -11,7 +11,7 @@
 
     <!--
      Including styles and script from external file
-     -->
+
      <xsl:template match="head">
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -22,7 +22,7 @@
                 <xsl:copy-of select="unparsed-text('view-source.css')"/>                
             </style>
         </head>
-    </xsl:template>
+    </xsl:template>      -->
 
     <!--
      Adding an ID for every RelaxNG define:
