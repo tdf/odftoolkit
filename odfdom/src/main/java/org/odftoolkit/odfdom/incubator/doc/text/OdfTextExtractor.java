@@ -37,8 +37,6 @@ import org.w3c.dom.Node;
  * returned, without any tag information.</p>
  * <p> It implements part of white space handling fuctions: text:p, text:h, text:s, text:tab, text:linebreak are processed
  * according to ODF specification.</p>
- *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.TextExtractor} in Simple API.
  */
 public class OdfTextExtractor extends DefaultElementVisitor {
 

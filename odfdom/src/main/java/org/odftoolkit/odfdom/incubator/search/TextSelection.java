@@ -48,8 +48,6 @@ import org.w3c.dom.Node;
  * it is recognized by the container element(which type should be OdfTextParagraph or
  *  OdfTextHeadingt), the start index of the text content of the container element and
  *  the text content of this selection.
- *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.navigation.TextSelection} in Simple API.
  */
 public class TextSelection extends Selection {
 

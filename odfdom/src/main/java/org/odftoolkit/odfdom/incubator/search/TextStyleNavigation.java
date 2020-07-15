@@ -46,8 +46,6 @@ import org.w3c.dom.NodeList;
  * A derived Navigation class used for navigate the mText content it is used to
  * search the document and find the matched style properties and would return
  * TextSelection instance
- *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.common.navigation.TextStyleNavigation} in Simple API.
  */
 public class TextStyleNavigation extends Navigation {
 

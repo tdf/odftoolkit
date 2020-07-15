@@ -73,8 +73,6 @@ import org.w3c.dom.Node;
  * OdfTableCell represents table cell feature in ODF document.
  * <p>
  * OdfTable provides methods to get/set/modify the cell content and cell properties.
- *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.table.Cell} in Simple API.
  */
 public class OdfTableCell {
 

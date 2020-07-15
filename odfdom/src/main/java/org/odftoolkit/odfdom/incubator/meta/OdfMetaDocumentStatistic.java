@@ -27,8 +27,6 @@ import org.odftoolkit.odfdom.dom.element.meta.MetaDocumentStatisticElement;
 /**
  * <code>OdfMetaDocumentStatistic</code> feature specifies the statistics about
  * the document.
- *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.meta.DocumentStatistic} in Simple API.
  */
 public class OdfMetaDocumentStatistic {
 

@@ -33,8 +33,6 @@ import org.xml.sax.SAXException;
 
 /**
  * This class represents an empty ODF text document.
- *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.TextDocument} in Simple API.
  */
 public class OdfTextDocument extends OdfDocument {
 

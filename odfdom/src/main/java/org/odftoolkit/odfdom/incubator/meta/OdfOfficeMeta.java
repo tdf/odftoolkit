@@ -56,8 +56,6 @@ import org.odftoolkit.odfdom.type.Duration;
  * <code>OdfOfficeMeta</code> represent the meta data feature in the ODF document.
  * <p>
  * It provides convenient method to get meta data info.
- *
- * @deprecated As of release 0.8.8, replaced by {@link org.odftoolkit.simple.meta.Meta} in Simple API.
  */
 public class OdfOfficeMeta {
 
