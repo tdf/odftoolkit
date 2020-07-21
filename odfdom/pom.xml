@@ -110,6 +110,11 @@
             <artifactId>git-commit-id-plugin</artifactId>
             <version>3.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.20</version>
+        </dependency>
     </dependencies>
     <properties>
         <skipTests>false</skipTests>
