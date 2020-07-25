@@ -343,6 +343,7 @@ public class PackageTest {
     Map expectedErrors3 = new HashMap();
     expectedErrors3.put(OdfPackageConstraint.MANIFEST_NOT_IN_PACKAGE, 1);
     expectedErrors3.put(OdfPackageConstraint.MIMETYPE_WITHOUT_MANIFEST_MEDIATYPE, 1);
+    expectedErrors3.put(OdfPackageConstraint.MIMETYPE_HAS_EXTRA_FIELD, 1);
     ErrorHandlerStub handler3 = new ErrorHandlerStub(null, expectedErrors3, null);
     handler3.setTestFilePath("testInvalidPkg3.odt");
 
