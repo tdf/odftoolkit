@@ -296,6 +296,7 @@ public class PackageTest {
       ZipArchiveOutputStream zipped = new ZipArchiveOutputStream(out);
       ZipArchiveEntry entry = new ZipArchiveEntry("someentry");
       zipped.putArchiveEntry(entry);
+      zipped.closeArchiveEntry();
       zipped.close();
 
       byte[] data = out.toByteArray();
