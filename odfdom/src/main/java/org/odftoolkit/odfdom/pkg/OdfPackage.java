@@ -1136,41 +1136,38 @@ public class OdfPackage implements Closeable {
       rootEntry.setMediaTypeString(mMediaType);
     }
     ZipArchiveOutputStream zos = new ZipArchiveOutputStream(odfStream);
-    try {
-      // remove mediatype path and use it as first
-      this.mManifestEntries.remove(OdfFile.MEDIA_TYPE.getPath());
-      Set<String> keys = mManifestEntries.keySet();
-      boolean isFirstFile = true;
-      CRC32 crc = new CRC32();
-      long modTime = (new java.util.Date()).getTime();
-      byte[] data = null;
-      for (String path : keys) {
-        // ODF requires the "mimetype" file to be at first in the package
-        if (isFirstFile) {
-          isFirstFile = false;
-          // create "mimetype" from current attribute value
-          data = mMediaType.getBytes("UTF-8");
-          createZipEntry(OdfFile.MEDIA_TYPE.getPath(), data, zos, modTime, crc);
-        }
-        // create an entry, but NOT for "ODF document directory", "MANIFEST" or "mimetype"
-        if (!path.endsWith(SLASH)
-            && !path.equals(OdfPackage.OdfFile.MANIFEST.getPath())
-            && !path.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
-          data = getBytes(path);
-          createZipEntry(path, data, zos, modTime, crc);
-        }
-        data = null;
+    // remove mediatype path and use it as first
+    this.mManifestEntries.remove(OdfFile.MEDIA_TYPE.getPath());
+    Set<String> keys = mManifestEntries.keySet();
+    boolean isFirstFile = true;
+    CRC32 crc = new CRC32();
+    long modTime = (new java.util.Date()).getTime();
+    byte[] data = null;
+    for (String path : keys) {
+      // ODF requires the "mimetype" file to be at first in the package
+      if (isFirstFile) {
+        isFirstFile = false;
+        // create "mimetype" from current attribute value
+        data = mMediaType.getBytes("UTF-8");
+        createZipEntry(OdfFile.MEDIA_TYPE.getPath(), data, zos, modTime, crc);
       }
-      // Create "META-INF/" directory
-      createZipEntry("META-INF/", null, zos, modTime, crc);
-      // Create "META-INF/manifest.xml" file after all entries with potential encryption have been
-      // added
-      data = getBytes(OdfFile.MANIFEST.getPath());
-      createZipEntry(OdfFile.MANIFEST.getPath(), data, zos, modTime, crc);
-    } finally {
-      zos.flush();
-      zos.close();
+      // create an entry, but NOT for "ODF document directory", "MANIFEST" or "mimetype"
+      if (!path.endsWith(SLASH)
+          && !path.equals(OdfPackage.OdfFile.MANIFEST.getPath())
+          && !path.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
+        data = getBytes(path);
+        createZipEntry(path, data, zos, modTime, crc);
+      }
+      data = null;
     }
+    // Create "META-INF/" directory
+    createZipEntry("META-INF/", null, zos, modTime, crc);
+    // Create "META-INF/manifest.xml" file after all entries with potential encryption have been
+    // added
+    data = getBytes(OdfFile.MANIFEST.getPath());
+    createZipEntry(OdfFile.MANIFEST.getPath(), data, zos, modTime, crc);
+    zos.flush();
+    zos.close();
     odfStream.flush();
   }
 
