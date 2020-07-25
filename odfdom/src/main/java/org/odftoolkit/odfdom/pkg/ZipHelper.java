@@ -31,6 +31,7 @@ import java.util.Enumeration;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.ZipException;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.compress.archivers.zip.ZipFile;
@@ -73,7 +74,12 @@ class ZipHelper {
     } else {
       ZipArchiveInputStream inputStream =
           new ZipArchiveInputStream(new ByteArrayInputStream(mZipBuffer));
-      ZipArchiveEntry zipEntry = inputStream.getNextZipEntry();
+      ZipArchiveEntry zipEntry = null;
+      try {
+        zipEntry = inputStream.getNextZipEntry();
+      } catch (ZipException e) {
+        // Unit tests expect us to return an empty map in this case.
+      }
       if (zipEntry != null) {
         firstEntryName = zipEntry.getName();
         addZipEntry(zipEntry, zipEntries);
