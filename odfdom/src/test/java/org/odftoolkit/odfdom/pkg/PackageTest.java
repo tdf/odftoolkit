@@ -36,13 +36,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-import java.util.zip.ZipOutputStream;
 import javax.xml.transform.Templates;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
+import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
@@ -94,17 +94,17 @@ public class PackageTest {
     odp.save(ResourceUtilities.getTestOutputFile(IMAGE_PRESENTATION));
 
     // test if the image is not compressed
-    ZipInputStream zinput =
-        new ZipInputStream(ResourceUtilities.getTestOutputAsStream(IMAGE_PRESENTATION));
-    ZipEntry entry = zinput.getNextEntry();
+    ZipArchiveInputStream zinput =
+        new ZipArchiveInputStream(ResourceUtilities.getTestOutputAsStream(IMAGE_PRESENTATION));
+    ZipArchiveEntry entry = zinput.getNextZipEntry();
     while (entry != null) {
       String entryName = entry.getName();
       if (entryName.endsWith(".jpg")) {
         File f = new File(ResourceUtilities.getAbsoluteInputPath(IMAGE_TEST_FILE));
-        Assert.assertEquals(ZipEntry.STORED, entry.getMethod());
+        Assert.assertEquals(ZipArchiveEntry.STORED, entry.getMethod());
         Assert.assertEquals(f.length(), entry.getSize());
       }
-      entry = zinput.getNextEntry();
+      entry = zinput.getNextZipEntry();
     }
   }
 
@@ -293,9 +293,9 @@ public class PackageTest {
       // errorhandler
       // doesn't throw NPE
       ByteArrayOutputStream out = new ByteArrayOutputStream();
-      ZipOutputStream zipped = new ZipOutputStream(out);
-      ZipEntry entry = new ZipEntry("someentry");
-      zipped.putNextEntry(entry);
+      ZipArchiveOutputStream zipped = new ZipArchiveOutputStream(out);
+      ZipArchiveEntry entry = new ZipArchiveEntry("someentry");
+      zipped.putArchiveEntry(entry);
       zipped.close();
 
       byte[] data = out.toByteArray();
