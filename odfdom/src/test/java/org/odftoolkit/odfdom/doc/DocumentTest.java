@@ -505,6 +505,7 @@ public class DocumentTest {
     expectedErrors3.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 2);
     expectedErrors3.put(OdfSchemaConstraint.DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML, 1);
     expectedErrors3.put(OdfPackageConstraint.MANIFEST_WITH_EMPTY_PATH, 1);
+    expectedErrors3.put(OdfPackageConstraint.MIMETYPE_HAS_EXTRA_FIELD, 1);
     ErrorHandlerStub handler3 = new ErrorHandlerStub(expectedWarning3, expectedErrors3, null);
     handler3.setTestFilePath("performance/Presentation1_INVALID.odp");
 
