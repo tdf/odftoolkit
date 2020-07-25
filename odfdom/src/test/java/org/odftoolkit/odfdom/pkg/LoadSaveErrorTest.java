@@ -27,8 +27,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
@@ -58,11 +58,11 @@ public class LoadSaveErrorTest {
   @Test
   public void testInvalidZipAsODF() throws Exception {
     ByteArrayOutputStream baout = new ByteArrayOutputStream();
-    ZipOutputStream zout = new ZipOutputStream(baout);
-    ZipEntry entry = new ZipEntry("mimetype");
-    zout.putNextEntry(entry);
+    ZipArchiveOutputStream zout = new ZipArchiveOutputStream(baout);
+    ZipArchiveEntry entry = new ZipArchiveEntry("mimetype");
+    zout.putArchiveEntry(entry);
     zout.write(OdfDocument.OdfMediaType.TEXT.getMediaTypeString().getBytes("US-ASCII"));
-    zout.closeEntry();
+    zout.closeArchiveEntry();
     zout.close();
 
     byte[] zip = baout.toByteArray();
