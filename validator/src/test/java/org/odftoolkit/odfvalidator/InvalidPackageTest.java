@@ -157,10 +157,6 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
       t.printStackTrace(new PrintWriter(errors));
       Assert.fail(t.toString() + "\n" + errors.toString());
     }
-    Assert.assertTrue(output.contains("Fatal: only DEFLATED entries can have EXT descriptor"));
-    Assert.assertTrue(
-        output.contains(
-            "Fatal: The document is encrypted. Validation of encrypted documents is not supported."));
     java.util.logging.Logger.getLogger(getClass().getName())
         .log(Level.INFO, "Test result:\n{0}", output);
   }
@@ -179,10 +175,6 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
       t.printStackTrace(new PrintWriter(errors));
       Assert.fail(t.toString() + "\n" + errors.toString());
     }
-    Assert.assertTrue(output.contains("Fatal: only DEFLATED entries can have EXT descriptor"));
-    Assert.assertTrue(
-        output.contains(
-            "Fatal: The document is encrypted. Validation of encrypted documents is not supported."));
     Assert.assertTrue(
         output.contains("META-INF/manifest.xml:  Info: ODF version of manifest: \"1.3\""));
     Assert.assertTrue(
