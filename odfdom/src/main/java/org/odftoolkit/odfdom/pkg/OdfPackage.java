@@ -741,7 +741,7 @@ public class OdfPackage implements Closeable {
     if (mimetypeEntry.getMethod() != ZipArchiveEntry.STORED) {
       logValidationError(OdfPackageConstraint.MIMETYPE_IS_COMPRESSED, getBaseURI());
     }
-    if (mimetypeEntry.getExtra() != null) {
+    if (mimetypeEntry.getExtra() != null && mimetypeEntry.getExtra().length > 0) {
       logValidationError(OdfPackageConstraint.MIMETYPE_HAS_EXTRA_FIELD, getBaseURI());
     }
     if (!OdfFile.MEDIA_TYPE.getPath().equals(firstEntryName)) {
