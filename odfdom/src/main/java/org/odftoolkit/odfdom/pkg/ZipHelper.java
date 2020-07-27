@@ -95,7 +95,7 @@ class ZipHelper {
             }
             // JDK 6 -- the try/catch is workaround for a specific JDK 5 only problem
             if (!e.getMessage().contains("missing entry name")
-                && !System.getProperty("Java.version").equals("1.5.0")) {
+                && !"1.5.0".equals(System.getProperty("Java.version"))) {
               Logger.getLogger(ZipHelper.class.getName()).finer("ZIP ENTRY not found");
               throw e;
             }
