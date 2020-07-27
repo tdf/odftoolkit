@@ -27,6 +27,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.logging.Level;
@@ -57,7 +58,7 @@ class ZipHelper {
   }
 
   public static ZipArchiveInputStream createZipInputStream(InputStream is) {
-    return new ZipArchiveInputStream(is);
+    return new ZipArchiveInputStream(is, StandardCharsets.UTF_8.toString(), true, true);
   }
 
   String entriesToMap(Map<String, ZipArchiveEntry> zipEntries) throws IOException, SAXException {
