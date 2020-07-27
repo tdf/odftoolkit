@@ -95,7 +95,7 @@ public class PackageTest {
 
     // test if the image is not compressed
     ZipArchiveInputStream zinput =
-        new ZipArchiveInputStream(ResourceUtilities.getTestOutputAsStream(IMAGE_PRESENTATION));
+        ZipHelper.createZipInputStream(ResourceUtilities.getTestOutputAsStream(IMAGE_PRESENTATION));
     ZipArchiveEntry entry = zinput.getNextZipEntry();
     while (entry != null) {
       String entryName = entry.getName();

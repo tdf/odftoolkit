@@ -56,6 +56,10 @@ class ZipHelper {
     mPackage = pkg;
   }
 
+  public static ZipArchiveInputStream createZipInputStream(InputStream is) {
+    return new ZipArchiveInputStream(is);
+  }
+
   String entriesToMap(Map<String, ZipArchiveEntry> zipEntries) throws IOException, SAXException {
     String firstEntryName = null;
     if (mZipFile != null) {
@@ -73,7 +77,7 @@ class ZipHelper {
       }
     } else {
       ZipArchiveInputStream inputStream =
-          new ZipArchiveInputStream(new ByteArrayInputStream(mZipBuffer));
+          createZipInputStream(new ByteArrayInputStream(mZipBuffer));
       ZipArchiveEntry zipEntry = null;
       try {
         zipEntry = inputStream.getNextZipEntry();
@@ -137,7 +141,7 @@ class ZipHelper {
       return mZipFile.getInputStream(entry);
     } else {
       ZipArchiveInputStream inputStream =
-          new ZipArchiveInputStream(new ByteArrayInputStream(mZipBuffer));
+          createZipInputStream(new ByteArrayInputStream(mZipBuffer));
       ZipArchiveEntry zipEntry = inputStream.getNextZipEntry();
       while (zipEntry != null) {
         if (zipEntry.getName().equalsIgnoreCase(entry.getName())) {
