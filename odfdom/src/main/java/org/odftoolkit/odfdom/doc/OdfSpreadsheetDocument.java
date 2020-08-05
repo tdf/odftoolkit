@@ -25,6 +25,8 @@ package org.odftoolkit.odfdom.doc;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.List;
+import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.dom.element.office.OfficeSpreadsheetElement;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
@@ -176,5 +178,16 @@ public class OdfSpreadsheetDocument extends OdfDocument {
    */
   public void changeMode(OdfMediaType mediaType) {
     setOdfMediaType(mediaType.mMediaType);
+  }
+
+  /**
+   * Return a list of table features in this document. For general ODF documents it searches for
+   * them recursively through the document. For ODF documents, there is a getOdsTableList
+   *
+   * @see OdfDocument:getTableList
+   * @return a list of table features in this document.
+   */
+  public List<OdfTable> getSpreadsheetTables() {
+    return getTableList(true);
   }
 }

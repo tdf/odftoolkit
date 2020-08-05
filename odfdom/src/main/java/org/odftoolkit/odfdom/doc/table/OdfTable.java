@@ -1915,7 +1915,8 @@ public class OdfTable {
    */
   public void setTableName(String tableName) {
     // check if the table name is already exist
-    List<OdfTable> tableList = mDocument.getTableList();
+    boolean isSpreadsheet = mDocument instanceof OdfSpreadsheetDocument;
+    List<OdfTable> tableList = mDocument.getTableList(!isSpreadsheet);
     for (int i = 0; i < tableList.size(); i++) {
       OdfTable table = tableList.get(i);
       if (tableName.equals(table.getTableName())) {
