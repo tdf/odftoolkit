@@ -142,7 +142,7 @@ public class EmbeddedDocumentTest {
       Assert.assertNotNull(docB);
       Assert.assertNull(odtRootDoc.loadSubDocument("DOCA/DOCB/"));
       docB.newImage(ResourceUtilities.getTestInputURI(TEST_PIC_ANOTHER));
-      OdfTable table1 = docB.getTableList().get(0);
+      OdfTable table1 = docB.getTableList(true).get(0);
       table1.setTableName("NewTable");
       updateFrameForEmbeddedDoc(contentA, "./DOCB", "DOCA/DOCB");
       // if user want to save the docA with the side by side embedded document
@@ -199,7 +199,7 @@ public class EmbeddedDocumentTest {
       addFrameForEmbeddedDoc(contentA, lastPara, "./DOCB");
       OdfDocument docB = odtDoc1.loadSubDocument("DOCA/DOCB/");
       docB.newImage(ResourceUtilities.getTestInputURI(TEST_PIC_ANOTHER));
-      OdfTable table1 = docB.getTableList().get(0);
+      OdfTable table1 = docB.getTableList(true).get(0);
       table1.setTableName("NewTable");
       Assert.assertNotNull(docB);
       Assert.assertNull(odtDoc1.loadSubDocument("DOCB/"));

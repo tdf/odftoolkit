@@ -831,14 +831,31 @@ public abstract class OdfDocument extends OdfSchemaDocument {
   }
 
   /**
-   * Return a list of table features in this document.
+   * Return a list of table features in this document. For general ODF documents it searches for
+   * them recursively through the document. For ODF documents, there is a getOdsTableList
    *
+   * @see OdfSpreadsheetDocument:getSpreadsheetTables
    * @return a list of table features in this document.
    */
+  @Deprecated(
+      since =
+          "It was not clear that this is searching recursively, especialy in OdfSpreadsheetDocuments")
   public List<OdfTable> getTableList() {
+    return getTableList(false);
+  }
+
+  /**
+   * Return a list of table features in this document. For general ODF documents it searches for
+   * tables recursively through the document.
+   *
+   * @see OdfSpreadsheetDocument:getSpreadsheetTables
+   * @param doRecursiveSearch In spreadsheet documents you do not need a recursive search.
+   * @return a list of table features in this document.
+   */
+  public List<OdfTable> getTableList(boolean doRecursiveSearch) {
     List<OdfTable> tableList = null;
     try {
-      List<TableTableElement> tableElementList = getTables();
+      List<TableTableElement> tableElementList = getTables(doRecursiveSearch);
       tableList = new ArrayList<OdfTable>(tableElementList.size());
       for (int i = 0; i < tableElementList.size(); i++) {
         tableList.add(OdfTable.getInstance(tableElementList.get(i)));

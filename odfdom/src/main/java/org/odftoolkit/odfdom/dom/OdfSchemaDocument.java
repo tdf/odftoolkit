@@ -642,23 +642,40 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
    *
    * @return a list of table features in this document.
    */
+  @Deprecated(since = "explicit state whether the search should be recursive")
+  public List<TableTableElement> getTables() {
+    return getTables(true);
+  }
+
+  /**
+   * Return a list of table features in this document.
+   *
+   * @param deepSearch Go through the whole document in search for tables (including master pages,
+   *     headers, and footers), or search only at root level for ODS documents.
+   * @return a list of table features in this document.
+   */
   // ToDo: Instead of a method to receive all possible feature/components on the document, there
   // might be a generic or one each element?
-  public List<TableTableElement> getTables() {
+  public List<TableTableElement> getTables(boolean deepSearch) {
     List<TableTableElement> tableList = new ArrayList<TableTableElement>();
     try {
       // find tables from content.xml
       OfficeBodyElement officeBody =
           OdfElement.findFirstChildNode(OfficeBodyElement.class, getContentDom().getRootElement());
       OdfElement contentRoot = OdfElement.findFirstChildNode(OdfElement.class, officeBody);
-      tableList = fillTableList(contentRoot, tableList);
+      fillTableList(contentRoot, tableList, deepSearch);
+
+      // stop here for ODS
+      if (!deepSearch) {
+        return tableList;
+      }
 
       // find tables from styles.xml (header & footer)
       Map<String, StyleMasterPageElement> masterPages = getMasterPages();
       if (masterPages != null) {
         StyleMasterPageElement defaultMasterPage = masterPages.get("Standard");
         if (defaultMasterPage != null) {
-          tableList = fillTableList(defaultMasterPage, tableList);
+          fillTableList(defaultMasterPage, tableList, deepSearch);
         }
       }
     } catch (Exception ex) {
@@ -667,9 +684,18 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
     return tableList;
   }
 
-  // Only tables being on root level are being considered
+  /**
+   * Fills tableList either for the found tables in children or do a (depth-first) search through
+   * the DOM tree for all tables.
+   *
+   * @param startElement Iterate throught the children of this node
+   * @param tableList filling the found table-table elements into this list.
+   * @param recurse Only tables being on startElement's children level are being considered (or
+   *     recurse through all xml tags)
+   * @return tableList
+   */
   private List<TableTableElement> fillTableList(
-      Element startElement, List<TableTableElement> tableList) {
+      Element startElement, List<TableTableElement> tableList, boolean recurse) {
     NodeList childList = startElement.getChildNodes();
     for (int i = 0; i < childList.getLength(); i++) {
       Node childNode = childList.item(i);
@@ -677,7 +703,9 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
         if (childNode instanceof TableTableElement) {
           tableList.add((TableTableElement) childList.item(i));
         } else {
-          fillTableList((Element) childNode, tableList);
+          if (recurse) {
+            fillTableList((Element) childNode, tableList, recurse);
+          }
         }
       }
     }

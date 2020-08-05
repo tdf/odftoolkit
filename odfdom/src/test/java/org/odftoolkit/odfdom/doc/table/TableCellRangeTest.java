@@ -227,7 +227,7 @@ public class TableCellRangeTest {
       swCell.setStringValue("Merge A1:E2");
       swCellRange.merge();
       odt.save(ResourceUtilities.getTestOutputFile(odtfilename + "MergeTextExpandCell.odt"));
-      swTable = odt.getTableList().get(0);
+      swTable = odt.getTableList(true).get(0); // is never an ODS document
       Assert.assertTrue(swTable.getColumnCount() == 1);
       Assert.assertTrue(swTable.getRowCount() == 1);
     } catch (Exception ex) {

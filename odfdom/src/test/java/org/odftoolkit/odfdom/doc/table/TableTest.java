@@ -298,7 +298,7 @@ public class TableTest {
       mOdtDoc =
           OdfTextDocument.loadDocument(
               ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
-      List<OdfTable> tableList = mOdtDoc.getTableList();
+      List<OdfTable> tableList = mOdtDoc.getTableList(true);
       int count = tableList.size();
 
       OdfTable table = mOdtDoc.getTableByName("DeletedTable");
@@ -310,7 +310,7 @@ public class TableTest {
       mOdtDoc =
           OdfTextDocument.loadDocument(
               ResourceUtilities.getAbsoluteOutputPath(mOdtTestFileName + "Out.odt"));
-      tableList = mOdtDoc.getTableList();
+      tableList = mOdtDoc.getTableList(true);
       Assert.assertEquals(count - 1, tableList.size());
     } catch (Exception e) {
       Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
@@ -342,7 +342,7 @@ public class TableTest {
       mOdtDoc =
           OdfTextDocument.loadDocument(
               ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
-      List<OdfTable> tableList = mOdtDoc.getTableList();
+      List<OdfTable> tableList = mOdtDoc.getTableList(true);
       for (int i = 0; i < tableList.size(); i++) {
         OdfTable table = tableList.get(i);
         int clmnum = table.getColumnCount();
@@ -1096,7 +1096,7 @@ public class TableTest {
           (OdfSpreadsheetDocument)
               OdfSpreadsheetDocument.loadDocument(
                   ResourceUtilities.getAbsoluteInputPath("testGetCellAt.ods"));
-      OdfTable odfTable = doc.getTableList().get(0);
+      OdfTable odfTable = doc.getTableList(false).get(0);
       OdfTableRow valueRows = odfTable.getRowByIndex(0);
       for (int i = 0; i < 4; i++) {
         OdfTableCell cell = valueRows.getCellByIndex(i);
