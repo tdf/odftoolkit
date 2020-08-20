@@ -51,5 +51,8 @@ public abstract class ODFMediaTypes {
       "application/vnd.oasis.opendocument.formula-template";
   public static final String TEXT_MASTER_MEDIA_TYPE =
       "application/vnd.oasis.opendocument.text-master";
+  public static final String TEXT_MASTER_TEMPLATE_MEDIA_TYPE =
+      "application/vnd.oasis.opendocument.text-master";
   public static final String TEXT_WEB_MEDIA_TYPE = "application/vnd.oasis.opendocument.text-web";
+  public static final String DATABASE_MEDIA_TYPE = "application/vnd.oasis.opendocument.base";
 }

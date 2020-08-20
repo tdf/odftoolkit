@@ -165,6 +165,7 @@ abstract class ODFRootPackageValidator extends ODFPackageValidator
         || aMimetype.equals(ODFMediaTypes.GRAPHICS_MEDIA_TYPE)
         || aMimetype.equals(ODFMediaTypes.GRAPHICS_TEMPLATE_MEDIA_TYPE)
         || aMimetype.equals(ODFMediaTypes.PRESENTATION_MEDIA_TYPE)
+        || aMimetype.equals(ODFMediaTypes.PRESENTATION_TEMPLATE_MEDIA_TYPE)
         || aMimetype.equals(ODFMediaTypes.SPREADSHEET_MEDIA_TYPE)
         || aMimetype.equals(ODFMediaTypes.SPREADSHEET_TEMPLATE_MEDIA_TYPE)
         || aMimetype.equals(ODFMediaTypes.CHART_MEDIA_TYPE)
@@ -173,9 +174,11 @@ abstract class ODFRootPackageValidator extends ODFPackageValidator
         || aMimetype.equals(ODFMediaTypes.IMAGE_TEMPLATE_MEDIA_TYPE)
         || aMimetype.equals(ODFMediaTypes.FORMULA_MEDIA_TYPE)
         || aMimetype.equals(ODFMediaTypes.FORMULA_TEMPLATE_MEDIA_TYPE)
+        || aMimetype.equals(ODFMediaTypes.DATABASE_MEDIA_TYPE)
         || aMimetype.equals(ODFMediaTypes.TEXT_MASTER_MEDIA_TYPE)
+        || aMimetype.equals(ODFMediaTypes.TEXT_MASTER_TEMPLATE_MEDIA_TYPE)
         || aMimetype.equals(ODFMediaTypes.TEXT_WEB_MEDIA_TYPE))) {
-      aLogger.logInfo("mimetype is not an ODFMediaTypes mimetype.", false);
+      aLogger.logError("mimetype is not an ODFMediaTypes mimetype.");
       bHasErrors = true;
     }
 
