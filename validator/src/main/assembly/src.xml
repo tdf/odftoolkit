@@ -28,6 +28,37 @@
             <outputDirectory></outputDirectory>
             <useProjectArtifact>true</useProjectArtifact>
             <unpack>true</unpack>
+            <!-- HACK: this suppresses empty files of that name, will get the directories that we want instead
+              FIXME: WHY DOES THIS WORK???
+            -->
+            <unpackOptions>
+                <excludes>
+                    <exclude>META-INF/maven/commons-beanutils</exclude>
+                    <exclude>META-INF/maven/commons-beanutils/commons-beanutils</exclude>
+                    <exclude>META-INF/maven/com.google.code.findbugs</exclude>
+                    <exclude>META-INF/maven/com.google.code.findbugs/jsr305</exclude>
+                    <exclude>META-INF/maven/com.sun.xml.bind.jaxb</exclude>
+                    <exclude>META-INF/maven/org.slf4j</exclude>
+                    <exclude>META-INF/maven/org.codehaus.plexus/plexus-component-annotations</exclude>
+                    <exclude>META-INF/maven/commons-logging</exclude>
+                    <exclude>META-INF/maven/net.java.dev.msv/xsdlib</exclude>
+                    <exclude>META-INF/maven/org.codehaus.plexus</exclude>
+                    <exclude>META-INF/maven/com.google.j2objc/j2objc-annotations</exclude>
+                    <exclude>META-INF/maven/org.slf4j/slf4j-api</exclude>
+                    <exclude>META-INF/maven/org.codehaus.plexus/plexus-classworlds</exclude>
+                    <exclude>META-INF/maven/net.java.dev.msv</exclude>
+                    <exclude>META-INF/maven/org.codehaus.plexus/plexus-utils</exclude>
+                    <exclude>META-INF/maven/com.jcraft</exclude>
+                    <exclude>META-INF/maven/com.jcraft/jsch</exclude>
+                    <exclude>META-INF/maven/commons-logging/commons-logging</exclude>
+                    <exclude>META-INF/maven/com.google.j2objc</exclude>
+                    <exclude>META-INF/maven/com.sun.xml.bind.jaxb/isorelax</exclude>
+                    <exclude>META-INF/maven/commons-io</exclude>
+                    <exclude>META-INF/maven/commons-io/commons-io</exclude>
+                    <exclude>META-INF/maven/org.codehaus.plexus/plexus-interpolation</exclude>
+                    <exclude>META-INF/maven/net.java.dev.msv/msv-core</exclude>
+                </excludes>
+            </unpackOptions>
             <scope>runtime</scope>
         </dependencySet>
     </dependencySets>
