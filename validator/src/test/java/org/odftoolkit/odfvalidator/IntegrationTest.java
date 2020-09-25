@@ -108,7 +108,8 @@ public class IntegrationTest {
       Assert.assertTrue(
           output.contains(
               "math_OOo311.odt/META-INF/manifest.xml[19,143]:  Error: unexpected attribute \"manifest:version\""));
-      Assert.assertTrue(
+      // customized schema...
+      Assert.assertFalse(
           output.contains(
               "math_OOo311.odt/Object 1/content.xml[3,60]:  Error: Attribute \"xmlns:math\" must be declared for element type \"math:math\""));
 
