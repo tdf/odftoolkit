@@ -236,13 +236,11 @@ public class ODFValidator implements ODFValidatorProvider {
 
   public String getMathMLDTDSystemId(OdfVersion aVersion) throws ODFValidatorException {
     String aDTD = null;
-    if (m_bUseMathDTD) {
-      Configuration aConfig = m_aConfig != null ? m_aConfig : getConfiguration(aVersion);
+    Configuration aConfig = m_aConfig != null ? m_aConfig : getConfiguration(aVersion);
 
-      aDTD = aConfig.getProperty(Configuration.MATHML_SCHEMA);
-      if (m_aConfig == null && aDTD != null && aDTD.length() > 0) {
-        aDTD = InternalResources.createInternalResourceIdentifier(aDTD);
-      }
+    aDTD = aConfig.getProperty(Configuration.MATHML_SCHEMA);
+    if (m_aConfig == null && aDTD != null && aDTD.length() > 0) {
+      aDTD = InternalResources.createInternalResourceIdentifier(aDTD);
     }
 
     return aDTD;

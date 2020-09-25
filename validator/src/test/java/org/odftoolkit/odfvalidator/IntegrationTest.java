@@ -75,7 +75,7 @@ public class IntegrationTest {
         String testFolder =
             IntegrationTest.class.getClassLoader().getResource("").toURI().getPath();
         String file = testFolder + "math_OOo311.odt";
-        builder = new ProcessBuilder(javaPath, "-jar", jarPath, "-1.1", "-d", file);
+        builder = new ProcessBuilder(javaPath, "-jar", jarPath, "-1.1", /*"-d",*/ file);
         builder.redirectErrorStream(true);
         Process p = builder.start();
         BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));

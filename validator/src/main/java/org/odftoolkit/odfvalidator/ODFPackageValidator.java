@@ -23,8 +23,10 @@
  */
 package org.odftoolkit.odfvalidator;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.Iterator;
 import java.util.Set;
@@ -214,7 +216,34 @@ abstract class ODFPackageValidator {
       throws IOException, ZipException, IllegalStateException, ODFValidatorException {
     Logger aLogger = new Logger(aEntryName, aParentLogger);
     String aMathMLDTDSystemId = m_aValidatorProvider.getMathMLDTDSystemId(aVersion);
-    if (aMathMLDTDSystemId != null) {
+    boolean haveDoctype = false;
+
+    // auto-detect whether MathML 1 DTD should be used
+    try {
+      OdfPackage aPkg = getPackage(aLogger);
+      InputStream stream = aPkg.getInputStream(aEntryName, true);
+      BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+      while (true) {
+        String line = reader.readLine();
+        if (line == null) {
+          break;
+        }
+        if (line.startsWith("<?xml")) {
+          continue;
+        }
+        if (line.contains("<!DOCTYPE")) {
+          haveDoctype = true;
+          break;
+        }
+        if (!line.trim().isEmpty()) {
+          break; // ignore whitespace lines
+        }
+      }
+    } catch (Exception e) {
+      throw new ODFValidatorException(e);
+    }
+
+    if (aMathMLDTDSystemId != null && haveDoctype) {
       // validate using DTD
       return parseEntry(
           new MathML101Filter(aMathMLDTDSystemId, aLogger), aLogger, aEntryName, true);

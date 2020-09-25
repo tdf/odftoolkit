@@ -257,7 +257,8 @@ public class Main {
     System.out.println("-V: Print version");
     System.out.println("-c: Check conformance (default for ODF 1.2 and 1.3 documents)");
     System.out.println("-e: Check extended conformance (ODF 1.2 and 1.3 documents only)");
-    System.out.println("-d: Use MathML DTD rather than MathML2 schema for validation");
+    System.out.println(
+        "-d: deprecated and ignored; Whether to use MathML DTD or MathML2 schema for validation is auto-detected");
     System.out.println("-f: Use filterfile <filterfile>");
     System.out.println("-g: Show <odffiles> generators and exit");
     System.out.println("-h: Print this help and exit");
