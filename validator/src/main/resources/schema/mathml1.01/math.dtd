@@ -17,6 +17,8 @@
 <!-- 4) added this comment block                        -->
 <!-- Modifications are intended to ease validation      -->
 <!-- of MathML files written by StarMath 6.0            -->
+<!-- modified 25. September 2020:                       -->
+<!-- 5) added xmlns:math attribute                      -->
 
 
 <!-- Content model for content and presentation        -->
@@ -942,6 +944,7 @@ schema  -->
 <!ATTLIST  math:math         %att-topinfo;
                         %att-browif;   >
 
+<!ATTLIST math:math xmlns:math CDATA #FIXED "http://www.w3.org/1998/Math/MathML">
 
 <!-- ENTITY sets -->
 
