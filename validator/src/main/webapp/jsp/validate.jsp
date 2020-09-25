@@ -104,7 +104,7 @@ if(ServletFileUpload.isMultipartContent(request)) {
 						odfValidatorMode = OdfValidatorMode.CONFORMANCE;
 						break;
 				}				
-				validator = new ODFValidator(null, aLogLevel, true, aOdfVersion, true);				
+				validator = new ODFValidator(null, aLogLevel, true, aOdfVersion);
 				ByteArrayOutputStream bout = null;
 				if(validator != null) {
 					out.println("<h2>Result for " + item.getName() + "</h2>");

@@ -35,7 +35,7 @@ public class OdfValidatorTestBase {
   public OdfValidatorTestBase() {}
 
   String doValidation(String aFileName, OdfVersion aVersion) throws Exception {
-    ODFValidator aValidator = new ODFValidator(null, Logger.LogLevel.INFO, aVersion, true);
+    ODFValidator aValidator = new ODFValidator(null, Logger.LogLevel.INFO, aVersion);
     ByteArrayOutputStream aOut = new ByteArrayOutputStream();
     PrintStream aPOut = new PrintStream(aOut);
     InputStream aIn = getClass().getClassLoader().getResourceAsStream(aFileName);
@@ -55,8 +55,7 @@ public class OdfValidatorTestBase {
   String doValidation(
       String aFileName, OdfVersion aVersion, OdfValidatorMode odfValidatorMode, boolean htmlOutput)
       throws Exception {
-    ODFValidator aValidator =
-        new ODFValidator(null, Logger.LogLevel.INFO, htmlOutput, aVersion, true);
+    ODFValidator aValidator = new ODFValidator(null, Logger.LogLevel.INFO, htmlOutput, aVersion);
     ByteArrayOutputStream aOut = new ByteArrayOutputStream();
     PrintStream aPOut = new PrintStream(aOut);
     InputStream aIn = getClass().getClassLoader().getResourceAsStream(aFileName);

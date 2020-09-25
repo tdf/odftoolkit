@@ -58,7 +58,6 @@ public class Main {
     String aOutputFileName = null;
     String aExcludeRegExp = null;
     boolean bPrintGenerator = false;
-    boolean bUseMathDTD = false;
     boolean bPrintHelp = false;
     boolean bPrintVersion = false;
     boolean bRecursive = false;
@@ -75,7 +74,7 @@ public class Main {
       if (aArg.equals("-c")) {
         eMode = OdfValidatorMode.CONFORMANCE;
       } else if (aArg.equals("-d")) {
-        bUseMathDTD = true;
+        // ignore: bUseMathDTD = true;
       } else if (aArg.equals("-e")) {
         eMode = OdfValidatorMode.EXTENDED_CONFORMANCE;
       } else if (aArg.equals("-f")) {
@@ -218,7 +217,7 @@ public class Main {
       }
 
       PrintStream aOut = aOutputFileName != null ? new PrintStream(aOutputFileName) : System.out;
-      ODFValidator aValidator = new ODFValidator(aConfig, nLogLevel, aVersion, bUseMathDTD);
+      ODFValidator aValidator = new ODFValidator(aConfig, nLogLevel, aVersion);
 
       if (aConfigFileName != null) {
         aValidator.validate(aOut, aConfig, eMode);
