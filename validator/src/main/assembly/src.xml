@@ -15,9 +15,9 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
-		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		  xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
+    <!-- http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html#jar-with-dependencies -->
     <id>jar-with-dependencies</id>
     <formats>
         <format>jar</format>
@@ -26,12 +26,15 @@
     <dependencySets>
         <dependencySet>
             <outputDirectory></outputDirectory>
+            <excludes> <!-- Customization 1) remove WAR files itself -->
+                <exclude>org.odftoolkit:odfvalidator</exclude>
+            </excludes>
             <useProjectArtifact>true</useProjectArtifact>
             <unpack>true</unpack>
             <scope>runtime</scope>
         </dependencySet>
     </dependencySets>
-	<!-- customization: add classes -->
+    <!-- Customization 2) add own classes and property files  -->
     <fileSets>
         <fileSet>
             <outputDirectory></outputDirectory>
