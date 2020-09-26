@@ -40,8 +40,8 @@ public class Configuration extends Properties {
   public static final String SCHEMA = "schema";
   public static final String STRICT_SCHEMA = "strict-schema";
   public static final String MANIFEST_SCHEMA = "manifest-schema";
-  public static final String MATHML_SCHEMA = "mathml-schema";
-  public static final String MATHML2_SCHEMA = "mathml2-schema";
+  public static final String MATHML1_01_SCHEMA = "mathml1.01-schema";
+  public static final String MATHML3_SCHEMA = "mathml3-schema";
   public static final String DSIG_SCHEMA = "dsig-schema";
   public static final String PATH = "path";
   public static final String EXCLUDE = "exclude";

@@ -94,23 +94,30 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.1</version>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
                 <configuration>
                     <archive>
                         <index>true</index>
+                        <manifest>
+                            <mainClass>org.odftoolkit.validator.Main</mainClass>
+                        </manifest>
                         <manifestEntries>
                             <version>${project.version}</version>
                         </manifestEntries>
+                        <!-- see https://stackoverflow.com/questions/53049346/is-log4j2-compatible-with-java-11/57616897#57616897 -->
+                        <manifestEntries>
+                            <Multi-Release>true</Multi-Release>
+                        </manifestEntries>
                         <manifestSections>
                             <manifestSection>
-                                <name>odfvalidator</name>
+                                <name>ODFVALIDATOR</name>
                                 <manifestEntries>
-                                    <ODFDOM-Name>ODFDOM Validator</ODFDOM-Name>
-                                    <ODFDOM-Version>${project.version}</ODFDOM-Version>
-                                    <ODFDOM-Website>${project.url}</ODFDOM-Website>
-                                    <ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
-                                    <ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
+                                    <ODFVALIDATOR-Name>odfvalidator</ODFVALIDATOR-Name>
+                                    <ODFVALIDATOR-Version>${project.version}</ODFVALIDATOR-Version>
+                                    <ODFVALIDATOR-Website>${project.url}</ODFVALIDATOR-Website>
+                                    <ODFVALIDATOR-Built-Date>${build.timestamp}</ODFVALIDATOR-Built-Date>
+                                    <ODFVALIDATOR-Supported-Odf-Version>1.2</ODFVALIDATOR-Supported-Odf-Version>
                                 </manifestEntries>
                             </manifestSection>
                         </manifestSections>
@@ -175,10 +182,25 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <archive>
+                        <index>true</index>
+                        <manifest>
+                            <Main-Class>org.odftoolkit.odfvalidator.Main</Main-Class>
+                        </manifest>
                         <manifestEntries>
                             <version>${project.version}</version>
-                            <Main-Class>org.odftoolkit.odfvalidator.Main</Main-Class>
                         </manifestEntries>
+                        <manifestSections>
+                            <manifestSection>
+                                <name>ODFVALIDATOR</name>
+                                <manifestEntries>
+                                    <ODFVALIDATOR-Name>odfvalidator</ODFVALIDATOR-Name>
+                                    <ODFVALIDATOR-Version>${project.version}</ODFVALIDATOR-Version>
+                                    <ODFVALIDATOR-Website>${project.url}</ODFVALIDATOR-Website>
+                                    <ODFVALIDATOR-Built-Date>${build.timestamp}</ODFVALIDATOR-Built-Date>
+                                    <ODFVALIDATOR-Supported-Odf-Version>1.2</ODFVALIDATOR-Supported-Odf-Version>
+                                </manifestEntries>
+                            </manifestSection>
+                        </manifestSections>
                     </archive>
                     <descriptors>
                         <descriptor>src/main/assembly/src.xml</descriptor>
@@ -186,7 +208,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>single</id>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>

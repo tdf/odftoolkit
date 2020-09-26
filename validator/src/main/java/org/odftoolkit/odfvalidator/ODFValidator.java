@@ -222,14 +222,14 @@ public class ODFValidator implements ODFValidatorProvider {
 
   public Validator getMathMLValidator(PrintStream aOut, OdfVersion aVersion)
       throws ODFValidatorException {
-    return getValidatorForSchema(aOut, getSchemaFileName(Configuration.MATHML2_SCHEMA, aVersion));
+    return getValidatorForSchema(aOut, getSchemaFileName(Configuration.MATHML3_SCHEMA, aVersion));
   }
 
   public String getMathMLDTDSystemId(OdfVersion aVersion) throws ODFValidatorException {
     String aDTD = null;
     Configuration aConfig = m_aConfig != null ? m_aConfig : getConfiguration(aVersion);
 
-    aDTD = aConfig.getProperty(Configuration.MATHML_SCHEMA);
+    aDTD = aConfig.getProperty(Configuration.MATHML1_01_SCHEMA);
     if (m_aConfig == null && aDTD != null && aDTD.length() > 0) {
       aDTD = InternalResources.createInternalResourceIdentifier(aDTD);
     }
