@@ -13,7 +13,7 @@ To use the '''ODF Validator''', the following steps are required:
 * Get the source code.
 * Add the jar files listed under Requirements to the project's libraries.
 * Get the ODF 1.0, 1,1 and 1.2 schemas, and add the directories where your local copies of the schemas are stored to the '''schema.user.properties''' file.
-* Get the MathML 1.01 DTD and the MathML 2.0 schemas, and add the directories where you local copies of the schemas are stored to the '''schema.user.properties''' file.
+* Get the MathML 1.01 DTD and the MathML 3.0 schemas, and add the directories where you local copies of the schemas are stored to the '''schema.user.properties''' file.
 * Build the project.
 * You may **deploy the WAR bundle from the target file into your application server** of choice (e.g. Tomcat)
 * Choose an arbitrary OpenDocument file &lt;odffile&gt;
@@ -70,8 +70,6 @@ The options have the following meaning:
 
 **-e**: Apply extended ODF conformance rules (ODF 1.2 documents only): Unknown markup is ignored during validation. For ODF 1.0/1.1 documents this option does not have any effect.
 
-**-d**: Use MathML 1.01 DTD rather than MathML 2.0 schema for content.xml of formula documents.
-
 **-g**: Show the generator information of the specified *&lt;odffiles&gt;* without validation.
 
 **-h**: Print a short help.
@@ -97,7 +95,7 @@ The options have the following meaning:
 ### Validation using default schemas
 
 The ODF 1.0, ODF 1.1, ODF 1.2 schemas as well as the MathML 1.01 DTD and
-the MathML 2.0 schema are included in the **ODFValidator.jar** file. If
+the MathML 3.0 schema are included in the **ODFValidator.jar** file. If
 the ODFValidator is called without the **-S** or **-C** options, these schemas are used for validation.
 
     odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x <expclude pattern>]
@@ -116,7 +114,7 @@ regardless of the version they specify themselves.
 
 The command line option **-d** specifies that the MathML 1.01 DTD should
 be used for the validation of the **content.xml** of formula documents.
-Default is to use the MathML 2.0 schema.
+Default is to use the MathML 3.0 schema.
 
 If the **-c** command line option is specified and if the validated document
 is an ODF 1.0 or ODF 1.1 document, unknown markup is ignored as specified
@@ -168,8 +166,8 @@ are supported:
 
 * **strict-schema**: Specifies the strict schema to be used.
 * **manifest-schema**: Specifies the manifest schema to be used.
-* **mathml-schema**: Specifies the MathML 1.01 schema to be used.
-* **mathml2-schema**: Specifies the MathML 2 schema to be used.
+* **mathml1.01-schema**: Specifies the MathML 1.01 schema to be used.
+* **mathml3-schema**: Specifies the MathML 3 schema to be used.
 * **path***: All properties whose names start with "path" are considered to be files or directories that shall be validated.
 * **recursive**: This boolean property specifies whether directories are scanned recursively. It takes the values **true** and **false**.
 * **exclude**: Specifies files and directories that shall be excluded as
@@ -177,15 +175,15 @@ a [regular expression][6]. See description of **-x** option.
 
 A sample configuration file looks like this:
 
-      <?xml version="1.0" encoding="UTF-8"?>
-      <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-      <properties>
-      <entry key="strict-schema">/home/odf11-cd2/msv/OpenDocument-strict-schema-v1.1-cd2.rng</entry>
-      <entry key="manifest-schema">/home/odf11-cd2/msv/OpenDocument-manifest-schema-v1.1-cd2.rng</entry>
-      <entry key="mathml-schema">/home/odf11-cd2/msv/mathml2.xsd</entry>
-      <entry key="path1">/home/testdocs</entry>
-      <entry key="path2">/home/temp</entry>
-      </properties>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <properties>
+        <entry key="manifest-schema">/schema/odf1.2/OpenDocument-v1.2-os-manifest-schema.rng</entry>
+        <entry key="strict-schema"></entry>
+        <entry key="schema">/schema/odf1.2/OpenDocument-v1.2-os-schema.rng</entry>
+        <entry key="mathml1.01-schema">/schema/mathml1.01/math.dtd</entry>
+        <entry key="mathml3-schema">/schema/mathml3/mathml3.rng</entry>
+        <entry key="dsig-schema">/schema/odf1.2/OpenDocument-v1.2-os-dsig-schema.rng</entry>
+    </properties>
 
 ## What is checked
 
@@ -199,7 +197,7 @@ The following items are checked:
       * If the test type is **validation** (default), and if the file is not a formula file, then the sub files *content.xml*, *styles.xml*, *meta.xml* and *settings.xml* are validated with respect to the schema of the selected OpenDocument version. Pre-processing of *foreign elements and attributes* is not applied.
       * If the test type is **strict validation** (**-s** is provided), and if the file is not a formula file, then the sub files *content.xml*, *styles.xml*, *meta.xml* and *settings.xml* are validated with respect to the strict schema of the selected OpenDocument version. Pre-processing of *foreign elements and attributes* is not applied.
 * All versions
-      * If the file is a formula file, then the sub file *content.xml* is validated with respect to the MathML 2.0 W3C XSD schema.  The sub files *styles.xml*, *meta.xml* and *settings.xml* are checked as described for other document types.
+      * If the file is a formula file, then the sub file *content.xml* is validated with respect to the MathML 3.0 W3C RelaxNG schema.  The sub files *styles.xml*, *meta.xml* and *settings.xml* are checked as described for other document types.
       * The file *META-INF/manifest.xml* is validated with respect to the manifest schema of the selected ODF specification.
       * If the file is an ODF 1.2 file, then the *META-INF/documentsignatures.xml* and *META-INF/macrosignatures.xml* sub files are validated with respect to the digital signatures schema of the ODF 1.2 specification.
       * For all embedded objects in ODF format, the *content.xml*, *styles.xml*, *meta.xml* and *settings.xml* are validated as described for the main document above.
