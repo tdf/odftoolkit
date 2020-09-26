@@ -40,7 +40,8 @@ import java.util.Vector;
  */
 public class Main {
 
-  private static final String VERSION = "1.1.4";
+  // Versions of ODFDOM and ODF Validator are equal
+  private static final String VERSION = JarManifest.getVersion();
 
   /** Creates a new instance of Main */
   public Main() {}
@@ -213,7 +214,7 @@ public class Main {
         aConfig.setProperty(Configuration.DSIG_SCHEMA, aDSigSchemaFileName);
       }
       if (aMathMLSchemaFileName != null) {
-        aConfig.setProperty(Configuration.MATHML2_SCHEMA, aMathMLSchemaFileName);
+        aConfig.setProperty(Configuration.MATHML3_SCHEMA, aMathMLSchemaFileName);
       }
 
       PrintStream aOut = aOutputFileName != null ? new PrintStream(aOutputFileName) : System.out;
