@@ -253,7 +253,7 @@ public class Main {
     System.out.println("-O: Use ODF schema <schemafile> for validation");
     System.out.println("-M: Use ODF manifest schema <schemafile> for validation");
     System.out.println("-D: Use ODF dsig schema <schemafile> for validation");
-    System.out.println("-m: Use MathML2 schema <schemafile> for validation");
+    System.out.println("-m: Use specific MathML schema <schemafile> for validation");
     System.out.println("-V: Print version");
     System.out.println("-c: Check conformance (default for ODF 1.2 and 1.3 documents)");
     System.out.println("-e: Check extended conformance (ODF 1.2 and 1.3 documents only)");

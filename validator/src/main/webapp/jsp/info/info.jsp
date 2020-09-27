@@ -52,7 +52,7 @@
 	</li>
 	<li><p>All versions</p>
 		<ul>
-			<li><p>If the file is a formula file, then the sub file <i>content.xml</i> is validated with respect to the MathML 2.0 W3C XSD schema.  The sub files <i>styles.xml</i>, <i>meta.xml</i> and <i>settings.xml</i> are checked as described for other document types.</p></li>
+			<li><p>If the file is a formula file, then the sub file <i>content.xml</i> is validated with respect to the MathML 3.0 W3C RelaxNG schema.  The sub files <i>styles.xml</i>, <i>meta.xml</i> and <i>settings.xml</i> are checked as described for other document types.</p></li>
 			<li><p>The file <i>META-INF/manifest.xml</i> is validated with respect to the manifest schema of the selected ODF specification.</p></li>
 			<li><p>If the file is an ODF 1.2/1.3 file, then the <i>META-INF/documentsignatures.xml</i> and <i>META-INF/macrosignatures.xml</i> sub files are validated with respect to the digital signatures schema of the ODF 1.2/1.3 specification.</p></li>
 			<li><p>For all embedded objects in ODF format, the <i>content.xml</i>, <i>styles.xml</i>, <i>meta.xml</i> and <i>settings.xml</i> are validated as described for the main document above</p></li>
@@ -85,8 +85,7 @@
 
 <p>The following schemas are being used:</p>
 <ul>
-	<li><p>MathML: The MathML2.0 Schema from <a href="http://www.w3.org/Math/XMLSchema/mathml2/mathml2.xsd">http://www.w3.org/Math/XMLSchema/mathml2/mathml2.xsd</a> is used for validation.<br/><br/>
-			<span style="font-weight:bold;">Note:</span> OpenOffice.org currently wrongly exports namespace prefixes for attributes. The validator reports this as an error.</p></li>
+	<li><p>MathML: The MathML 3.0 (2nd edition) schema from <a href="https://www.w3.org/TR/MathML/appendixa.html#parsing.usingrnc">http://www.w3.org/Math/RelaxNG/mathml3/mathml3.rng</a> is used in general for MathML validation.<br/></li>
 	<li><p>OpenDocument <a href="http://relaxng.org/">RELAX NG</a> Schemas: The schemas used are those available on the <a href="http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office#technical">OASIS OpenDocument Technical Committee web page</a><!--, except that <q>&lt;ref name=&quot;string&quot;&gt;</q> is replaced with <q>&lt;text/&gt;</q> when it defines the content model of an element. Reason is that the former leads to (wrong) validation errors within <a href="https://msv.dev.java.net/">MSV</a>-->.</p></li>
 </ul>
 
