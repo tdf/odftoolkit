@@ -43,7 +43,7 @@
         <odf12.input>src/test/resources/odf12/</odf12.input>
         <odf13.input>src/test/resources/odf13/</odf13.input>
         <rng2normalization.stylesheet>src/test/resources/xslt/rng/rng2normalization.xsl</rng2normalization.stylesheet>
-        <rng2html.stylesheet>src/test/resources/xslt/rng/rng2html.xsl</rng2html.stylesheet>
+        <rnghtml.stylesheet>src/test/resources/xslt/rng/addRefs4rng-html.xsl</rnghtml.stylesheet>
         <rng2docbook.stylesheet>src/test/resources/xslt/rng/rng2docbook.xsl</rng2docbook.stylesheet>
         <odf.defaultvalue.extraction>src/test/resources/xslt/getAttributeDefaults.xsl</odf.defaultvalue.extraction>
         <version.saxon-he>9.9.1-3</version.saxon-he>
@@ -103,6 +103,7 @@
                                 </fileMapper>
                             </fileMappers>
                         </transformationSet>-->
+<!--                        
                         <transformationSet>
                             <dir>${odf12.input}</dir>
                             <includes>*.rng</includes>
@@ -116,7 +117,7 @@
                         <transformationSet>
                             <dir>${odf12.input}</dir>
                             <includes>*.html</includes>
-                            <stylesheet>${rng2html.stylesheet}</stylesheet>
+                            <stylesheet>${rnghtml.stylesheet}</stylesheet>
                             <outputProperties>
                                 <outputProperty>
                                     <name>omit-xml-declaration</name>
@@ -143,10 +144,11 @@
                                 </fileMapper>
                             </fileMappers>
                         </transformationSet>
+-->                        
                         <transformationSet>
                             <dir>${odf13.input}</dir>
                             <includes>*.html</includes>
-                            <stylesheet>${rng2html.stylesheet}</stylesheet>
+                            <stylesheet>${rnghtml.stylesheet}</stylesheet>
                             <outputProperties>
                                 <outputProperty>
                                     <name>omit-xml-declaration</name>
