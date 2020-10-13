@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
@@ -45,6 +46,8 @@ public class LoadSaveTest {
   private static final String FOREIGN_ATTRIBUTE_NAME = "foreignAttribute";
   private static final String FOREIGN_ATTRIBUTE_VALUE = "foreignAttributeValue";
   private static final String FOREIGN_ELEMENT_TEXT = "foreignText";
+  private static final String SOURCE_DEFAULT_NAMESPACE = "default_namespace.ods";
+  private static final String TARGET_DEFAULT_NAMESPACE = "default_namespace__out.ods";
 
   public LoadSaveTest() {}
 
@@ -100,13 +103,18 @@ public class LoadSaveTest {
 
   @Test
   public void testLoadSave() {
+    loadSave(SOURCE, TARGET);
+    loadSave(SOURCE_DEFAULT_NAMESPACE, TARGET_DEFAULT_NAMESPACE);
+  }
+
+  private void loadSave(String source, String target) {
     try {
       OdfPackageDocument odfDocument =
-          OdfPackageDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SOURCE));
+          OdfPackageDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(source));
       Assert.assertTrue(odfDocument.getPackage().contains("content.xml"));
       String baseURI = odfDocument.getPackage().getBaseURI();
       Assert.assertTrue(
-          ResourceUtilities.getTestInputURI(SOURCE).toString().compareToIgnoreCase(baseURI) == 0);
+          ResourceUtilities.getTestInputURI(source).toString().compareToIgnoreCase(baseURI) == 0);
 
       Document odfContent = odfDocument.getFileDom("content.xml");
       NodeList lst =
@@ -125,9 +133,9 @@ public class LoadSaveTest {
         Assert.assertFalse(entry.getKey().length() == 0);
       }
 
-      odfDocument.save(ResourceUtilities.getTestOutputFile(TARGET));
+      odfDocument.save(ResourceUtilities.getTestOutputFile(target));
       odfDocument =
-          OdfPackageDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(TARGET));
+          OdfPackageDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(target));
 
       odfContent = odfDocument.getFileDom("content.xml");
       lst =
@@ -148,7 +156,8 @@ public class LoadSaveTest {
       Assert.assertTrue(foreignAttrValue.equals(FOREIGN_ATTRIBUTE_VALUE));
 
     } catch (Exception e) {
-      Logger.getLogger(LoadSaveTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      Logger.getLogger(LoadSaveTest.class.getName())
+          .log(Level.SEVERE, e.getMessage() + ExceptionUtils.getStackTrace(e), e);
       Assert.fail(e.getMessage());
     }
   }
