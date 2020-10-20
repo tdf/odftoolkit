@@ -35,6 +35,7 @@ public class OdfName implements Comparable<OdfName> {
   private String mLocalName;
   private String mExpandedName; // i.e. {nsURI}localName
   private static HashMap<String, OdfName> mOdfNames = new HashMap<String, OdfName>();
+  private static StringBuilder mSB;
 
   private OdfName(OdfNamespace ns, String localname, String expandedName) {
     mNS = ns;
@@ -87,20 +88,20 @@ public class OdfName implements Comparable<OdfName> {
 
   private static OdfName createName(OdfNamespace odfNamespace, String name) {
     int i = 0;
+    // make sure the name is the local name
     if ((i = name.indexOf(':')) >= 0) {
       name = name.substring(i + 1);
     }
+    return getOdfName(odfNamespace, name);
+  }
+
+  /** Used for receiving an OdfName, in case of a default nameaspace, when there is no prefix. */
+  public static OdfName getOdfName(OdfNamespace odfNamespace, String localName) {
     String expandedName = null;
-    // ToDo: Is there need for the prefix? For instance during serialization?
     if (odfNamespace != null) {
-      StringBuilder b = new StringBuilder();
-      b.append('{');
-      b.append(odfNamespace.toString());
-      b.append('}');
-      b.append(name);
-      expandedName = b.toString();
+      expandedName = createExpandedName(odfNamespace.toString(), localName);
     } else {
-      expandedName = name;
+      expandedName = localName;
     }
     // return a similar OdfName if one was already created before..
     OdfName odfName = mOdfNames.get(expandedName);
@@ -108,10 +109,23 @@ public class OdfName implements Comparable<OdfName> {
       return odfName;
     } else {
       // otherwise create a new OdfName, store it in the map and return it..
-      odfName = new OdfName(odfNamespace, name, expandedName);
+      odfName = new OdfName(odfNamespace, localName, expandedName);
       mOdfNames.put(expandedName, odfName);
       return odfName;
     }
+  }
+
+  private static String createExpandedName(String nsUri, String localName) {
+    if (mSB == null) {
+      mSB = new StringBuilder();
+    } else {
+      mSB.delete(0, mSB.length());
+    }
+    mSB.append('{');
+    mSB.append(nsUri);
+    mSB.append('}');
+    mSB.append(localName);
+    return mSB.toString();
   }
 
   /**

@@ -25,13 +25,23 @@ package org.odftoolkit.odfdom.pkg;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 
-/** Class wrapping the XML Namespace URI and XML Namespace prefix as a single entity. */
+/**
+ * Class wrapping the XML Namespace URI and XML Namespace prefix (used by default) as a single
+ * entity For instance, the ODF paragraph element <text:p> uses by default in the ODF specification
+ * the prefix "text" and is bound to this prefix heres
+ */
 public class OdfNamespace implements Comparable<OdfNamespace>, NamespaceName {
 
   private static Map<String, OdfNamespace> mNamespacesByURI = new HashMap<String, OdfNamespace>();
   private String mUri;
   private String mPrefix;
+  /**
+   * In case of a default namespace no prefix is given, but we require the prefix for our class
+   * loader
+   */
+  private static Map<String, String> mUrlToPrefix;
 
   private OdfNamespace() {}
 
@@ -60,22 +70,47 @@ public class OdfNamespace implements Comparable<OdfNamespace>, NamespaceName {
    * Returns the OdfNamespace for the given name. Creates a new one, if the name was not asked
    * before.
    *
+   * @param prefix abbreviation for the URL, might be null when a default namespace was set
    * @param uri identifying the namespace.
    * @return the namespace.
    */
   public static OdfNamespace newNamespace(String prefix, String uri) {
     OdfNamespace odfNamespace = null;
-    if (uri != null && uri.length() > 0 && prefix != null && prefix.length() > 0) {
+    if (prefix == null || prefix.isEmpty()) {
+      if (mUrlToPrefix == null) {
+        initializeUrl2DefaultPrefixMap();
+      }
+      prefix = mUrlToPrefix.get(uri);
+    }
+    if (uri != null && uri.length() > 0) {
       odfNamespace = mNamespacesByURI.get(uri);
       if (odfNamespace == null) {
         odfNamespace = new OdfNamespace(prefix, uri);
         mNamespacesByURI.put(uri, odfNamespace);
       } else {
-        // prefix will be adapted for all OdfNamespaces (last wins)
-        odfNamespace.mPrefix = prefix;
+        if (prefix != null) {
+          // prefix will be adapted for all OdfNamespaces (last wins)
+          odfNamespace.mPrefix = prefix;
+        }
       }
     }
     return odfNamespace;
+  }
+
+  /**
+   * In case of a default namespace no prefix is given, but we require the prefix for our class
+   * loader
+   */
+  public static void initializeUrl2DefaultPrefixMap() {
+    mUrlToPrefix = new HashMap(32);
+    // add all namespaces from the ODF package specification
+    for (OdfPackageNamespace packageNamespace : OdfPackageNamespace.values()) {
+      mUrlToPrefix.put(packageNamespace.getUri(), packageNamespace.getPrefix());
+    }
+    // add all namespaces from the ODF schema specification
+    for (OdfDocumentNamespace schemaNamespace : OdfDocumentNamespace.values()) {
+      mUrlToPrefix.put(schemaNamespace.getUri(), schemaNamespace.getPrefix());
+    }
   }
 
   /**
@@ -127,7 +162,7 @@ public class OdfNamespace implements Comparable<OdfNamespace>, NamespaceName {
   /**
    * Splits the XML Qname into the local name and the prefix.
    *
-   * @param qname is the qualified name to be splitted.
+   * @param qname is the qualified name to be split.
    * @return an array of two strings containing first the prefix and the second the local part.
    * @throws IllegalArgumentException if no qualified name was given.
    */
