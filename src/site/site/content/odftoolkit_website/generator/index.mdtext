@@ -2,9 +2,9 @@
 
 ## Overview
 
-The schema2template library loads arbitrary XML schemata (XML grammar) 
+The schema2template library loads arbitrary XML schemata (XML grammar)
 into the most powerful grammar model, which is the one given by RelaxNG XML.
-Based on loaded XML model given by the grammar Schema2template offers functionality 
+Based on loaded XML model given by the grammar Schema2template offers functionality
 to fill arbitrary user templates files with data.
 
 The ODF Toolkit uses Schema2template to generate the XML layer.
