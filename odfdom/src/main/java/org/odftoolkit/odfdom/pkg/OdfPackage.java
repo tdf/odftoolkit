@@ -1682,9 +1682,9 @@ public class OdfPackage implements Closeable {
       throws SAXException, ParserConfigurationException, IllegalArgumentException,
           TransformerConfigurationException, TransformerException, IOException {
 
-    Document doc = mPkgDoms.get(internalPath);
-    if (doc != null) {
-      return doc;
+    Document dom = mPkgDoms.get(internalPath);
+    if (dom != null) {
+      return dom;
     }
 
     InputStream is = getInputStream(internalPath);
@@ -1720,13 +1720,13 @@ public class OdfPackage implements Closeable {
     InputSource ins = new InputSource(is);
     ins.setSystemId(uri);
 
-    doc = builder.parse(ins);
+    dom = builder.parse(ins);
 
-    if (doc != null) {
-      mPkgDoms.put(internalPath, doc);
+    if (dom != null) {
+      mPkgDoms.put(internalPath, dom);
       mMemoryFileCache.remove(internalPath);
     }
-    return doc;
+    return dom;
   }
 
   /**
