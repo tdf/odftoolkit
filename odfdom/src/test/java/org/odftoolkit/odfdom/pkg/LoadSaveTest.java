@@ -24,30 +24,16 @@
 package org.odftoolkit.odfdom.pkg;
 
 import java.io.File;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class LoadSaveTest {
 
   private static final String SOURCE = "not-only-odf.odt";
-  private static final String TARGET = "loadsavetest.odt";
-  private static final String TARGET_2 = "inputOutputTest.odt";
-  private static final String FOREIGN_ATTRIBUTE_NAME = "foreignAttribute";
-  private static final String FOREIGN_ATTRIBUTE_VALUE = "foreignAttributeValue";
-  private static final String FOREIGN_ELEMENT_TEXT = "foreignText";
-  private static final String SOURCE_DEFAULT_NAMESPACE = "default_namespace.ods";
-  private static final String TARGET_DEFAULT_NAMESPACE = "default_namespace__out.ods";
+  private static final String TARGET = "inputOutputTest.odt";
 
   public LoadSaveTest() {}
 
@@ -70,7 +56,7 @@ public class LoadSaveTest {
       OdfPackage pkgBefore = odfDocument.getPackage();
       Assert.assertTrue(pkgBefore.contains("content.xml"));
       OdfPackage pkgAfter = OdfPackage.loadPackage(pkgBefore.getInputStream());
-      File testFileAfter = ResourceUtilities.getTestOutputFile(TARGET_2);
+      File testFileAfter = ResourceUtilities.getTestOutputFile(TARGET);
       pkgAfter.save(testFileAfter);
       long lengthAfter = testFileAfter.length();
       // the XML declaration is in the new ODF XML files in a new line, adding for three files three
@@ -98,67 +84,6 @@ public class LoadSaveTest {
     } catch (Exception ex) {
       Logger.getLogger(LoadSaveTest.class.getName()).log(Level.SEVERE, null, ex);
       Assert.fail();
-    }
-  }
-
-  @Test
-  public void testLoadSave() {
-    loadSave(SOURCE, TARGET);
-    loadSave(SOURCE_DEFAULT_NAMESPACE, TARGET_DEFAULT_NAMESPACE);
-  }
-
-  private void loadSave(String source, String target) {
-    try {
-      OdfPackageDocument odfDocument =
-          OdfPackageDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(source));
-      Assert.assertTrue(odfDocument.getPackage().contains("content.xml"));
-      String baseURI = odfDocument.getPackage().getBaseURI();
-      Assert.assertTrue(
-          ResourceUtilities.getTestInputURI(source).toString().compareToIgnoreCase(baseURI) == 0);
-
-      Document odfContent = odfDocument.getFileDom("content.xml");
-      NodeList lst =
-          odfContent.getElementsByTagNameNS("urn:oasis:names:tc:opendocument:xmlns:text:1.0", "p");
-      Node node = lst.item(0);
-      String oldText = "Changed!!!";
-      node.setTextContent(oldText);
-
-      // Added to reproduce the bug "xmlns:null=''" is added to namespace.
-      OdfFileDom dom = odfDocument.getFileDom("content.xml");
-      Map<String, String> nsByUri = dom.getMapNamespacePrefixByUri();
-      for (Entry<String, String> entry : nsByUri.entrySet()) {
-        Assert.assertNotNull(entry.getValue());
-        Assert.assertFalse(entry.getValue().length() == 0);
-        Assert.assertNotNull(entry.getKey());
-        Assert.assertFalse(entry.getKey().length() == 0);
-      }
-
-      odfDocument.save(ResourceUtilities.getTestOutputFile(target));
-      odfDocument =
-          OdfPackageDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(target));
-
-      odfContent = odfDocument.getFileDom("content.xml");
-      lst =
-          odfContent.getElementsByTagNameNS("urn:oasis:names:tc:opendocument:xmlns:text:1.0", "p");
-      node = lst.item(0);
-      String newText = node.getTextContent();
-      Assert.assertTrue(newText.equals(oldText));
-
-      node = lst.item(1);
-      // check foreign attribute without namespace
-      Element foreignElement = (Element) node.getChildNodes().item(0);
-      String foreignText = foreignElement.getTextContent();
-      Assert.assertTrue(foreignText.equals(FOREIGN_ELEMENT_TEXT));
-
-      // check foreign element without namespace
-      Attr foreignAttr = (Attr) node.getAttributes().getNamedItem(FOREIGN_ATTRIBUTE_NAME);
-      String foreignAttrValue = foreignAttr.getValue();
-      Assert.assertTrue(foreignAttrValue.equals(FOREIGN_ATTRIBUTE_VALUE));
-
-    } catch (Exception e) {
-      Logger.getLogger(LoadSaveTest.class.getName())
-          .log(Level.SEVERE, e.getMessage() + ExceptionUtils.getStackTrace(e), e);
-      Assert.fail(e.getMessage());
     }
   }
 }

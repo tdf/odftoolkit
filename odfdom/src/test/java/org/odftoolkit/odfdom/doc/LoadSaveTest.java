@@ -19,12 +19,13 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  *
- * <p>**********************************************************************
+ * <p>*********************************************************************
  */
 package org.odftoolkit.odfdom.doc;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -95,7 +96,8 @@ public class LoadSaveTest {
       Assert.assertTrue(foreignAttrValue.equals(FOREIGN_ATTRIBUTE_VALUE));
 
     } catch (Exception e) {
-      Logger.getLogger(LoadSaveTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      Logger.getLogger(LoadSaveTest.class.getName())
+          .log(Level.SEVERE, e.getMessage() + ExceptionUtils.getStackTrace(e), e);
       Assert.fail(e.getMessage());
     }
   }
