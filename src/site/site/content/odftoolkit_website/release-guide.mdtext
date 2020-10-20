@@ -43,10 +43,10 @@ See [our example settings.xml](docs/settings-example.xml) and search & replace t
       Subject:[ANNOUNCEMENT] "ODF Toolkit 1.0.0" & "ODF Toolkit 0.9.0 Release"
       To: dev@odftoolkit.org
       Hi all,
-      
+
       The ODF Toolkit team is pleased to announce the release of 1.0.0 (>=JDK 9) and in addition a release of 0.9.0 (JDK 8).
       The list of changes is available in the release notes[1].
-      
+
       All new ODF Toolkit components (binary, source and JavaDoc bundles) are available as GitHub Releases [2].
       Or in the central Maven repository under Group ID "org.apache.odftoolkit" and Version "1.0.0" and "0.9.0".
 
