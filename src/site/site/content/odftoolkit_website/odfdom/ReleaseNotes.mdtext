@@ -162,7 +162,7 @@ pkg.OdfPackage | HashMap  getManifestEntries() | pkg.OdfPackage | Map  getManife
  | OdfPackageDocument  loadPackageDocument(String) |  | OdfPackageDocument  loadDocument(String)
  | Set  getInnerDocumentPaths(String) |  | Set  getDocumentPaths()
  | Set  getInnerDocumentPaths(String,String) |  | Set  getDocumentPaths(String,String)
-  incubator.meta.OdfOfficeMeta | void  setDcdate(Calendar) | incubator.meta.OdfOfficeMeta | void  setDate(Calendar) 
+  incubator.meta.OdfOfficeMeta | void  setDcdate(Calendar) | incubator.meta.OdfOfficeMeta | void  setDate(Calendar)
  | Calendar  getDcdate() |  | Calendar  getDate()
 
 ***3.Package/Class/Method Removed List***
