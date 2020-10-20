@@ -103,7 +103,7 @@
                                 </fileMapper>
                             </fileMappers>
                         </transformationSet>-->
-<!--                        
+<!--
                         <transformationSet>
                             <dir>${odf12.input}</dir>
                             <includes>*.rng</includes>
@@ -144,7 +144,6 @@
                                 </fileMapper>
                             </fileMappers>
                         </transformationSet>
--->                        
                         <transformationSet>
                             <dir>${odf13.input}</dir>
                             <includes>*.html</includes>
@@ -165,6 +164,7 @@
                                 </fileMapper>
                             </fileMappers>
                         </transformationSet>
+                    -->
                     </transformationSets>
                 </configuration>
                 <dependencies>
