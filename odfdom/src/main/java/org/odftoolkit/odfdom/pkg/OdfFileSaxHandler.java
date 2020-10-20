@@ -79,7 +79,14 @@ public class OdfFileSaxHandler extends DefaultHandler {
     if (uri.equals(EMPTY_STRING) || qName.equals(EMPTY_STRING)) {
       element = mFileDom.createElement(localName);
     } else {
-      element = mFileDom.createElementNS(uri, qName);
+      // if localName is the same object as qName, there is a default namespace set
+      if (localName == qName) {
+        element =
+            mFileDom.createElementNS(
+                OdfName.getOdfName(OdfNamespace.newNamespace(null, uri), localName));
+      } else {
+        element = mFileDom.createElementNS(uri, qName);
+      }
     }
     String attrQname = null;
     String attrURL = null;

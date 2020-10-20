@@ -103,6 +103,7 @@ import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.w3c.dom.Element;
@@ -548,12 +549,18 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
     // ToDo: Should be able to create operations without creating the DOM Tree
     // ToDo: Are there use-cases that text:s still resides in the DOM? if(isWhiteSpaceElement) ??
     // If Paragraph is not being edited, it will be saved as it is..
-
     if (domCreationEnabled) {
       if (uri.equals(Constants.EMPTY_STRING) || qName.equals(Constants.EMPTY_STRING)) {
         element = mFileDom.createElement(localName);
       } else {
-        element = mFileDom.createElementNS(uri, qName);
+        // == correct: if localName is the same object as qName, there is a default namespace set
+        if (localName == qName) {
+          element =
+              mFileDom.createElementNS(
+                  OdfName.getOdfName(OdfNamespace.newNamespace(null, uri), localName));
+        } else {
+          element = mFileDom.createElementNS(uri, qName);
+        }
       }
       addAttributes(element, attributes);
     }
