@@ -32,15 +32,15 @@ java -jar odfxsltrunner.jar <style sheet> [-v] [-f <factory>] [-p <path in packa
      [-l log file] <input package> [<output package> [name=value ...]
 
 java -jar odfxsltrunner.jar <style sheet> [-v] [-f <factory>] [-p <path in package>]
-     [-l log file] -t <input package&gt; <output package&gt; [name=value ...]
+     [-l log file] -t <input package> <output package> [name=value ...]
 
-java -jar odfxsltrunner.jar <style sheet> [-v] [-f <factory>] [-p <path in package&gt;]
+java -jar odfxsltrunner.jar <style sheet> [-v] [-f <factory>] [-p <path in package>]
      [-l log file] -r <package> [name=value ...]
 
-java -jar odfxsltrunner.jar <style sheet>; [-v] [-f <factory>] [-p <path in package&gt;]
+java -jar odfxsltrunner.jar <style sheet>; [-v] [-f <factory>] [-p <path in package>]
      [-l log file] [-x <extract path> ...] -o <input package> <output file> [name=value ...]
 
-java -jar odfxsltrunner.jar <style sheet> [-v] [-f <factory>] [-p <path in package&gt;]
+java -jar odfxsltrunner.jar <style sheet> [-v] [-f <factory>] [-p <path in package>]
      [-l log file] -i <input file> <output package> [name=value ...]
 ```
 
@@ -65,7 +65,7 @@ The **-f** option specifies the ''javax.xml.transform.TransformerFactory'' to us
 **Note:** When calling ''java'' with the ''-jar'' option, the user class path is ignored. If a transformer factory is used which is not contained in the JRE, like Saxon, **odfxsltrunner** has to be called without the ''-jar'' option:
 
 ```shell
-java -cp odfxsltrunner.jar:&lt;factory jar&gt; org.odftoolkit.odfxsltrunner.Main ...
+java -cp odfxsltrunner.jar:<factory jar> org.odftoolkit.odfxsltrunner.Main ...
 ```
 
 The **-l** option can be used to redirect diagnostic messages into a log file.

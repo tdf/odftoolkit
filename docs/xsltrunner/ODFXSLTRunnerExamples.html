@@ -57,16 +57,13 @@
       &lt;ooo-xslt&gt;/export/xhtml/opendoc2xhtml.xsl &lt;ODT&gt; -o &lt;XHTML&gt;
 </code></pre>
       </div> 
-      <p><em>&lt;saxon.jar&gt;</em> is the jar of the <a href="http://saxon.sourceforge.net/">SAXON</a> XSLT Processor. <em>&lt;ooo-xslt&gt;</em> is the location of the LibreOffice XSLT stylesheets within an LibreOffice installation. In a typical LibreOffice installation, this is <code>
-          <basedir>
-            /share/xslt
-          </basedir></code> on (Linux and Windows).</p> 
-      <p><em><strong>Note:</strong></em> A few changes were necessary to use LibreOffice's XHTML transformation with <strong>ODFXSLTRunner</strong>. These are available as patch in the OpenOffice.org issue <a href="http://qa.openoffice.org/issues/show_bug.cgi?id=115881">i115881</a>.</p> 
+      <p><em>&lt;saxon.jar&gt;</em> is the jar of the <a href="http://saxon.sourceforge.net/">SAXON</a> XSLT Processor. <em>&lt;ooo-xslt&gt;</em> is the location of the LibreOffice XSLT stylesheets within an LibreOffice installation. In a typical LibreOffice installation, this is <code>&lt;BASEDIR&gt;/share/xslt</code> on (Linux and Windows).</p> 
+      <p><em><strong>Note:</strong></em> A few changes were necessary to use LibreOffice's XHTML transformation with <strong>ODFXSLTRunner</strong>.</p> 
       <h2 id="xhtml-with-referenced-images-only">XHTML with referenced images only</h2> 
       <p>The XHTML transformation in the above example extracts all images from the ODF document, regardless whether these are referenced in the XHTML document. To extract only the images that are referenced a list of referenced images may be created by the <strong>create-html-img-list.xsl</strong> style sheet that is contained in the <strong>sample-xslt</strong> folder of <strong>ODFXSLTRunner</strong>. It is applied to the XHTML file, and the target is a text file that contains the references images. Although the input file is an XHTML rather than a ODF file, <strong>ODFXSLTRunner</strong> may be used to apply the style sheet.</p> 
       <div class="codehilite">
         <pre><code class="language-shell">    java -jar odfxsltrunner.jar create-html-img-list.xsl -i &lt;XHTML&gt; -o &lt;img-list&gt;
-     unzip &lt;ODT&gt; `&lt;img-list&gt;`
+     unzip &lt;ODT&gt; &lt;img-list&gt;
 </code></pre>
       </div> 
       <h2 id="replace-embedded-objects-with-bitmap-images">Replace embedded objects with bitmap images</h2> 
@@ -75,7 +72,14 @@
       <ul> 
         <li>Load the ODT document into LibreOffice and save it with the HTML filter. The file may have an arbitrary name. <strong>&lt;ooo-html-file&gt;</strong> is used as a placeholder here.</li> 
         <li>Convert the HTML file into an XHTML file. You may use <strong>xmllint</strong> for this purpose, which is part of <a href="http://xmlsoft.org/">libxml2</a>, or any other tools that converts HTML into XHTML. The command line for <strong>xmllint</strong> is: xmllint --html --xmlout --dropdtd -o &lt;ooo-xhtml-file&gt; &lt;ooo-html-file&gt;</li> 
-        <li>Apply the <strong>replace-object.xsl</strong> style sheet to the ODF document. The style sheet requires the name of the XHTML file converted in the previous step as '''hrml-ref''' parameter. java -jar odfxsltrunner.jar replace-objects.xsl &lt;input odf&gt; &lt;output odf&gt; ref-html=&lt;ooo-xhtml-file&gt;</li> 
+        <li>Apply the <strong>replace-object.xsl</strong> style sheet to the ODF document. The style sheet requires the name of the XHTML file converted in the previous step as '''hrml-ref''' parameter.</li> 
+      </ul> 
+      <div class="codehilite">
+        <pre><code class="language-shell"> java -jar odfxsltrunner.jar replace-objects.xsl &lt;input odf&gt; &lt;output odf&gt;
+  ref-html=&lt;ooo-xhtml-file&gt;
+</code></pre>
+      </div> 
+      <ul> 
         <li>Zip the images that LibreOffice has saved next to the HTML document into the output ODF file. The new ODF file now can be transformed to XHTML with LibreOffice's XHTML transformation.</li> 
       </ul> 
     </div>

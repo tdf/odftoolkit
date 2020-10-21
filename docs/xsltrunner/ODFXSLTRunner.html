@@ -62,15 +62,15 @@
      [-l log file] &lt;input package&gt; [&lt;output package&gt; [name=value ...]
 
 java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&gt;]
-     [-l log file] -t &lt;input package&amp;gt; &lt;output package&amp;gt; [name=value ...]
+     [-l log file] -t &lt;input package&gt; &lt;output package&gt; [name=value ...]
 
-java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&amp;gt;]
+java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&gt;]
      [-l log file] -r &lt;package&gt; [name=value ...]
 
-java -jar odfxsltrunner.jar &lt;style sheet&gt;; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&amp;gt;]
+java -jar odfxsltrunner.jar &lt;style sheet&gt;; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&gt;]
      [-l log file] [-x &lt;extract path&gt; ...] -o &lt;input package&gt; &lt;output file&gt; [name=value ...]
 
-java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&amp;gt;]
+java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &lt;path in package&gt;]
      [-l log file] -i &lt;input file&gt; &lt;output package&gt; [name=value ...]
 </code></pre>
       </div> 
@@ -84,7 +84,7 @@ java -jar odfxsltrunner.jar &lt;style sheet&gt; [-v] [-f &lt;factory&gt;] [-p &l
       <p>The <strong>-f</strong> option specifies the ''javax.xml.transform.TransformerFactory'' to use.</p> 
       <p><strong>Note:</strong> When calling ''java'' with the ''-jar'' option, the user class path is ignored. If a transformer factory is used which is not contained in the JRE, like Saxon, <strong>odfxsltrunner</strong> has to be called without the ''-jar'' option:</p> 
       <div class="codehilite">
-        <pre><code class="language-shell">java -cp odfxsltrunner.jar:&amp;lt;factory jar&amp;gt; org.odftoolkit.odfxsltrunner.Main ...
+        <pre><code class="language-shell">java -cp odfxsltrunner.jar:&lt;factory jar&gt; org.odftoolkit.odfxsltrunner.Main ...
 </code></pre>
       </div> 
       <p>The <strong>-l</strong> option can be used to redirect diagnostic messages into a log file. By default they are printed on standard error.</p> 

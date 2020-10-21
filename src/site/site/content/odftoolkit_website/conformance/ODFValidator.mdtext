@@ -19,7 +19,9 @@ To use the '''ODF Validator''', the following steps are required:
 * Choose an arbitrary OpenDocument file &lt;odffile&gt;
 * OR for command line usage and help, call the '''ODF Validator''' with
 
+```shell
     java -jar "./target/odfvalidator-&lt;VERSION&gt;-jar-with-dependencies.jar" &lt;odffile&gt;
+```
 
 * You may call the ODF Validator via
 
