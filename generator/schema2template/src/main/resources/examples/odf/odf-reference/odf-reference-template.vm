@@ -155,7 +155,7 @@ for an element to have a special child element.</p>
 #else
 #set ($dup = "[${attribute.getMultipleNumber()}]")
 #end
-<h3><a name="attribute_${attribute}_${attribute.getMultipleNumber()}">${attribute}${dup} Attribute</a>#if (${oldattribute} == "")&nbsp;(new in Odf 1.2) #end</h3>
+<h3><a name="attribute_${attribute}_$dub">${attribute}${dup} Attribute</a>#if (${oldattribute} == "")&nbsp;(new in Odf 1.2) #end</h3>
 #if ( ${attribute.withMultiples().size()} > 1 )
 <p>There are more than one Definitions by this name.</p>
 #end
