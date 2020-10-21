@@ -53,15 +53,21 @@
       <h2 id="how-to-start">How to start</h2> 
       <p>To use the '''ODF Validator''', the following steps are required:</p> 
       <ul> 
-        <li> <p>Get the source code.</p> </li> 
-        <li> <p>Add the jar files listed under Requirements to the project's libraries.</p> </li> 
-        <li> <p>Get the ODF 1.0, 1,1 and 1.2 schemas, and add the directories where your local copies of the schemas are stored to the '''schema.user.properties''' file.</p> </li> 
-        <li> <p>Get the MathML 1.01 DTD and the MathML 2.0 schemas, and add the directories where you local copies of the schemas are stored to the '''schema.user.properties''' file.</p> </li> 
-        <li> <p>Build the project.</p> </li> 
-        <li> <p>You may <strong>deploy the WAR bundle from the target file into your application server</strong> of choice (e.g. Tomcat)</p> </li> 
-        <li> <p>Choose an arbitrary OpenDocument file &lt;odffile&gt;</p> </li> 
-        <li> <p>OR for command line usage and help, call the '''ODF Validator''' with</p> <p>java -jar "./target/odfvalidator-&lt;VERSION&gt;-jar-with-dependencies.jar" &lt;odffile&gt;</p> </li> 
-        <li> <p>You may call the ODF Validator via</p> </li> 
+        <li>Get the source code.</li> 
+        <li>Add the jar files listed under Requirements to the project's libraries.</li> 
+        <li>Get the ODF 1.0, 1,1 and 1.2 schemas, and add the directories where your local copies of the schemas are stored to the '''schema.user.properties''' file.</li> 
+        <li>Get the MathML 1.01 DTD and the MathML 2.0 schemas, and add the directories where you local copies of the schemas are stored to the '''schema.user.properties''' file.</li> 
+        <li>Build the project.</li> 
+        <li>You may <strong>deploy the WAR bundle from the target file into your application server</strong> of choice (e.g. Tomcat)</li> 
+        <li>Choose an arbitrary OpenDocument file &lt;odffile&gt;</li> 
+        <li>OR for command line usage and help, call the '''ODF Validator''' with</li> 
+      </ul> 
+      <div class="codehilite">
+        <pre><code class="language-shell">    java -jar "./target/odfvalidator-&amp;lt;VERSION&amp;gt;-jar-with-dependencies.jar" &amp;lt;odffile&amp;gt;
+</code></pre>
+      </div> 
+      <ul> 
+        <li>You may call the ODF Validator via</li> 
       </ul> 
       <div class="codehilite">
         <pre><code class="language-shell">    java

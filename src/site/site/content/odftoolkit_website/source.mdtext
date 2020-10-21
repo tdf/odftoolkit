@@ -16,7 +16,7 @@ For further information see the [Source Code Repository][1] page.
 
 ```shell
 sudo apt-get install openjdk-8-jdk
-sudo apt-get install maven`
+sudo apt-get install maven
 ```
 
 ### ODF Toolkit >= 1.0.0 using JDK >= 9

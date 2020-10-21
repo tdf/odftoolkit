@@ -4,7 +4,7 @@
 
 **ODF XSLT Runner Task** is a task definition for [Apache Ant][1] which allows
 to apply XSLT stylesheets to ODF documents similar to Ant's build-in
-<code>&lt;xslt&gt;</code> [task][2]. It is based on ODFXSLTRunner. Please see
+&lt;xslt&gt; [task][2]. It is based on ODFXSLTRunner. Please see
 ODFXSLTRunner for further details of its operation.
 
 ## Getting and building ODFXSLTRunnerTask
@@ -22,7 +22,7 @@ Please see Requirements for details.
 ## Usage
 
 To use **odfxsltrunner.jar** with Ant, you have to include the following [task definition][3] into
-your buildfile, where ''<code>&lt;path&gt;</code>'' has to be replaced with the path where you have stored the **odfxsltrunnertask.jar** and **odfxsltrunner.jar** files:
+your buildfile, where &lt;path&gt; has to be replaced with the path where you have stored the **odfxsltrunnertask.jar** and **odfxsltrunner.jar** files:
 
 ```shell
      <taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask"
@@ -30,13 +30,13 @@ your buildfile, where ''<code>&lt;path&gt;</code>'' has to be replaced with the 
 ```
 
 You can use this task definition on the top level (that is as a child element
-of the <code>&lt;project&gt;</code> element or locally within a single
-<code>&lt;target&gt;</code> element. It defines a new task <code>&lt;odfxslt&gt;</code> which allows to process ODF documents with XSLT stylesheets.
+of the `&lt;project&gt;` element or locally within a single
+`&lt;target&gt;` element. It defines a new task `&lt;odfxslt&gt;` which allows to process ODF documents with XSLT stylesheets.
 
-The new task supports the use of nested <code>&lt;param&gt;</code> and
-<code>&lt;factory&gt;</code>elements which have the same meaning as the
-<code>&lt;param&gt;</code> and <code>&lt;factory&gt;</code> child elements of the
-<code>&lt;xslt&gt;</code> [task][2].
+The new task supports the use of nested `&lt;param&gt;` and
+`&lt;factory&gt;`elements which have the same meaning as the
+`&lt;param&gt;` and `&lt;factory&gt;` child elements of the
+`&lt;xslt&gt;` [task][2].
 
 ## Parameters
 
@@ -65,11 +65,11 @@ XSL stylesheet.
 <tr><th>Attribute</th><th>Description</th><th>Required</th></tr>
 <tr><td valign="top">name</td><td valign="top">name of the parameter.</td><td valign="top">Yes</td></tr>
 <tr><td valign="top">expression</td><td>value of the parameter.
-Note: All parameter values are passed as string values to the XSLT parameters specified by <code>&lt;xslt:param&gt;</code> elements within the stylesheet.
+Note: All parameter values are passed as string values to the XSLT parameters specified by `&lt;xslt:param&gt;` elements within the stylesheet.
 </td><td valign="top">Yes</td></tr>
 </table>
 
-**Note:** The parameters <code>if</code> and <code>unless</code> which are supported by the <code>&lt;xslt&gt;</code> task are (not yet) supported.
+**Note:** The parameters `if` and `unless` which are supported by the `&lt;xslt&gt;` task are (not yet) supported.
 
 ### Factory
 
