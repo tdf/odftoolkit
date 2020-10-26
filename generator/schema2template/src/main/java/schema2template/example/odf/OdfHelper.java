@@ -129,7 +129,7 @@ public class OdfHelper {
           + File.separator
           + "odf";
 
-  private static final String REFERENCE_OUTPUT_FILES_TEMPLATE = "dom-output-files.vm";
+  private static final String REFERENCE_OUTPUT_FILES_TEMPLATE = "ref-output-file.vm";
   private static final String REFERENCE_OUTPUT_FILES =
       TEST_INPUT_ROOT_ODF
           + File.separator
