@@ -20,48 +20,47 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * For developer: Temporary Test document for quick tests! :D Changes not relevant, might be added
+ * to .git ignore list of project.
  *
- * For developer: Temporary Test document for quick tests! :D Changes not
- * relevant, might be added to .git ignore list of project.
- *
- * Loads a document with tables and gathers its operations. Gathered operations
- * will be applied to an empty text document. The changed text document will be
- * saved and reloaded. New gathered operations will be compared with the
- * original ones, expected to be identical!
+ * <p>Loads a document with tables and gathers its operations. Gathered operations will be applied
+ * to an empty text document. The changed text document will be saved and reloaded. New gathered
+ * operations will be compared with the original ones, expected to be identical!
  *
  * @author svanteschubert
  */
 public class MyLatestTest extends RoundtripTestHelper {
 
-    private static final Logger LOG = Logger.getLogger(MyLatestTest.class.getName());
+  private static final Logger LOG = Logger.getLogger(MyLatestTest.class.getName());
 
-    public MyLatestTest() {
-    }
+  public MyLatestTest() {}
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-        // Creating the output directory for the tests
-        RoundtripTestHelper.setUpBeforeClass();
-    }
+  @BeforeClass
+  public static void setUpBeforeClass() throws Exception {
+    // Creating the output directory for the tests
+    RoundtripTestHelper.setUpBeforeClass();
+  }
 
-    @Test
+  @Test
+  public void myTest() {
 
-    public void myTest() {
+    //        System.setProperty("test", "org.odftoolkit.odfdom.component.MyLatestTest");
+    //        final String SOURCE_FILE_NAME_TRUNC = "JSONCritical";
+    //        //super.roundtripRegressionTextTest(SOURCE_FILE_NAME_TRUNC, "2",
+    // getEditingOperations(INPUT_FOLDER_OP_REF));
+    //        super.roundtripRegressionTextTest(SOURCE_FILE_NAME_TRUNC, "3", null);
+    //
+    //// *****************************************
+    //        String editOperations = "{\"changes\":["
+    //                + "{\"name\":\"addParagraph\",\"start\":[1]},"
+    //                + "{\"name\":\"addText\",\"start\":[1,1],\"text\":\"PATH:
+    // C:\\\\path\\\\own.xls und URL: http:\\/\\/www.heise.de\"}"
+    //                + "]}";
+    //        super.roundtripRegressionTextTest(SOURCE_FILE_NAME_TRUNC, "1", editOperations);
+    //// *****************************************
+    //		super.roundtripOnlyToEmptyDocRegressionTest(SOURCE_FILE_NAME_TRUNC, ".odt");
+    //      super.importOnlyRegressionTest(SOURCE_FILE_NAME_TRUNC, ".odt", getTestMethodName(),
+    // editOperations);
 
-//        System.setProperty("test", "org.odftoolkit.odfdom.component.MyLatestTest");
-//        final String SOURCE_FILE_NAME_TRUNC = "JSONCritical";
-//        //super.roundtripRegressionTextTest(SOURCE_FILE_NAME_TRUNC, "2", getEditingOperations(INPUT_FOLDER_OP_REF));
-//        super.roundtripRegressionTextTest(SOURCE_FILE_NAME_TRUNC, "3", null);
-//
-////*****************************************
-//        String editOperations = "{\"changes\":["
-//                + "{\"name\":\"addParagraph\",\"start\":[1]},"
-//                + "{\"name\":\"addText\",\"start\":[1,1],\"text\":\"PATH: C:\\\\path\\\\own.xls und URL: http:\\/\\/www.heise.de\"}"
-//                + "]}";
-//        super.roundtripRegressionTextTest(SOURCE_FILE_NAME_TRUNC, "1", editOperations);
-////*****************************************
-//		super.roundtripOnlyToEmptyDocRegressionTest(SOURCE_FILE_NAME_TRUNC, ".odt");
-//      super.importOnlyRegressionTest(SOURCE_FILE_NAME_TRUNC, ".odt", getTestMethodName(), editOperations);
-
-    }
+  }
 }

@@ -46,157 +46,163 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NodeList;
 
-/**
- *
- * @author cl93746
- */
+/** @author cl93746 */
 public class PresentationTest {
 
-	OdfDocument odfdoc;
+  OdfDocument odfdoc;
 
-	public PresentationTest() {
-		try {
-			odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("presentation.odp"));
-		} catch (Exception e) {
-			Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+  public PresentationTest() {
+    try {
+      odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("presentation.odp"));
+    } catch (Exception e) {
+      Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testPresentation() {
-		try {
-			OdfPresentationDocument odpdoc = (OdfPresentationDocument) odfdoc;
+  @Test
+  public void testPresentation() {
+    try {
+      OdfPresentationDocument odpdoc = (OdfPresentationDocument) odfdoc;
 
-			OdfSlide page = odpdoc.getSlideByName("slide-name-1");
-			Assert.assertTrue((page != null) && page.getSlideName().equals("slide-name-1"));
-			Assert.assertEquals(page, odpdoc.getSlideByIndex(0));
+      OdfSlide page = odpdoc.getSlideByName("slide-name-1");
+      Assert.assertTrue((page != null) && page.getSlideName().equals("slide-name-1"));
+      Assert.assertEquals(page, odpdoc.getSlideByIndex(0));
 
-			page = odpdoc.getSlideByName("slide-name-2");
-			Assert.assertTrue((page != null) && page.getSlideName().equals("slide-name-2"));
-			Assert.assertEquals(page, odpdoc.getSlideByIndex(1));
+      page = odpdoc.getSlideByName("slide-name-2");
+      Assert.assertTrue((page != null) && page.getSlideName().equals("slide-name-2"));
+      Assert.assertEquals(page, odpdoc.getSlideByIndex(1));
 
-			page = odpdoc.getSlideByName("slide-name-3");
-			Assert.assertTrue((page != null) && page.getSlideName().equals("slide-name-3"));
-			Assert.assertEquals(page, odpdoc.getSlideByIndex(2));
+      page = odpdoc.getSlideByName("slide-name-3");
+      Assert.assertTrue((page != null) && page.getSlideName().equals("slide-name-3"));
+      Assert.assertEquals(page, odpdoc.getSlideByIndex(2));
 
-		} catch (Exception e) {
-			Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+    } catch (Exception e) {
+      Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testMasterStyles() {
-		try {
-			OdfOfficeMasterStyles officeMasterStyles = odfdoc.getOfficeMasterStyles();
-			Assert.assertNotNull(officeMasterStyles);
+  @Test
+  public void testMasterStyles() {
+    try {
+      OdfOfficeMasterStyles officeMasterStyles = odfdoc.getOfficeMasterStyles();
+      Assert.assertNotNull(officeMasterStyles);
 
-			// check if iterator has all two master pages
-			testIterator(StyleMasterPageElement.class, officeMasterStyles.iterator(), 2);
+      // check if iterator has all two master pages
+      testIterator(StyleMasterPageElement.class, officeMasterStyles.iterator(), 2);
 
-			// test "master-name-1"
-			StyleMasterPageElement master = officeMasterStyles.getMasterPage("master-name-1");
-			Assert.assertNotNull(master);
-			Assert.assertEquals(master.getStyleNameAttribute(), "master-name-1");
+      // test "master-name-1"
+      StyleMasterPageElement master = officeMasterStyles.getMasterPage("master-name-1");
+      Assert.assertNotNull(master);
+      Assert.assertEquals(master.getStyleNameAttribute(), "master-name-1");
 
-			// test "master-name-2"
-			master = officeMasterStyles.getMasterPage("master-name-2");
-			Assert.assertNotNull(master);
-			Assert.assertEquals(master.getStyleNameAttribute(), "master-name-2");
+      // test "master-name-2"
+      master = officeMasterStyles.getMasterPage("master-name-2");
+      Assert.assertNotNull(master);
+      Assert.assertEquals(master.getStyleNameAttribute(), "master-name-2");
 
-			// test handout master
-			Assert.assertNotNull(officeMasterStyles.getHandoutMaster());
+      // test handout master
+      Assert.assertNotNull(officeMasterStyles.getHandoutMaster());
 
-			// test layerset
-			Assert.assertNotNull(officeMasterStyles.getLayerSet());
-		} catch (Exception e) {
-			Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      // test layerset
+      Assert.assertNotNull(officeMasterStyles.getLayerSet());
+    } catch (Exception e) {
+      Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testStyles() {
-		try {
-			OdfOfficeStyles officeStyles = odfdoc.getDocumentStyles();
-			Assert.assertNotNull(officeStyles);
+  @Test
+  public void testStyles() {
+    try {
+      OdfOfficeStyles officeStyles = odfdoc.getDocumentStyles();
+      Assert.assertNotNull(officeStyles);
 
-			Assert.assertNotNull(officeStyles.getGradient("Linear_20_blue_2f_white"));
-			testIterator(DrawGradientElement.class, officeStyles.getGradients().iterator(), 1);
+      Assert.assertNotNull(officeStyles.getGradient("Linear_20_blue_2f_white"));
+      testIterator(DrawGradientElement.class, officeStyles.getGradients().iterator(), 1);
 
-			Assert.assertNotNull(officeStyles.getMarker("Arrow"));
-			testIterator(DrawMarkerElement.class, officeStyles.getMarker().iterator(), 1);
+      Assert.assertNotNull(officeStyles.getMarker("Arrow"));
+      testIterator(DrawMarkerElement.class, officeStyles.getMarker().iterator(), 1);
 
-			Assert.assertNotNull(officeStyles.getHatch("Black_20_0_20_Degrees"));
-			testIterator(DrawHatchElement.class, officeStyles.getHatches().iterator(), 1);
+      Assert.assertNotNull(officeStyles.getHatch("Black_20_0_20_Degrees"));
+      testIterator(DrawHatchElement.class, officeStyles.getHatches().iterator(), 1);
 
-			Assert.assertNotNull(officeStyles.getFillImage("Aqua"));
-			testIterator(DrawFillImageElement.class, officeStyles.getFillImages().iterator(), 1);
+      Assert.assertNotNull(officeStyles.getFillImage("Aqua"));
+      testIterator(DrawFillImageElement.class, officeStyles.getFillImages().iterator(), 1);
 
-			// check for some styles
-			Assert.assertNotNull(officeStyles.getDefaultStyle(OdfStyleFamily.Graphic));
-			Assert.assertNotNull(officeStyles.getStyle("standard", OdfStyleFamily.Graphic));
-			Assert.assertNotNull(officeStyles.getStyle("master-name-1-outline1", OdfStyleFamily.Presentation));
+      // check for some styles
+      Assert.assertNotNull(officeStyles.getDefaultStyle(OdfStyleFamily.Graphic));
+      Assert.assertNotNull(officeStyles.getStyle("standard", OdfStyleFamily.Graphic));
+      Assert.assertNotNull(
+          officeStyles.getStyle("master-name-1-outline1", OdfStyleFamily.Presentation));
 
-			Iterator<OdfStyle> style_iter = officeStyles.getStylesForFamily(OdfStyleFamily.Presentation).iterator();
-			Assert.assertNotNull(style_iter);
-			Assert.assertTrue(style_iter.hasNext());
-		} catch (Exception e) {
-			Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      Iterator<OdfStyle> style_iter =
+          officeStyles.getStylesForFamily(OdfStyleFamily.Presentation).iterator();
+      Assert.assertNotNull(style_iter);
+      Assert.assertTrue(style_iter.hasNext());
+    } catch (Exception e) {
+      Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	private <T extends OdfElement> void testIterator(Class<T> clazz, Iterator<T> iter, int elements) {
-		Assert.assertNotNull(iter);
-		while (elements > 0) {
-			Assert.assertTrue(iter.hasNext());
-			Assert.assertTrue(clazz.isInstance(iter.next()));
-			elements--;
-		}
+  private <T extends OdfElement> void testIterator(Class<T> clazz, Iterator<T> iter, int elements) {
+    Assert.assertNotNull(iter);
+    while (elements > 0) {
+      Assert.assertTrue(iter.hasNext());
+      Assert.assertTrue(clazz.isInstance(iter.next()));
+      elements--;
+    }
 
-		Assert.assertFalse(iter.hasNext());
-	}
+    Assert.assertFalse(iter.hasNext());
+  }
 
-	@Test
-	public void testPresentationClassAttribute() {
-		try {
-			OdfGraphicsDocument doc = OdfGraphicsDocument.newGraphicsDocument();
-			OdfFileDom dom = doc.getContentDom();
-			OdfDrawFrame f = new OdfDrawFrame(dom);
+  @Test
+  public void testPresentationClassAttribute() {
+    try {
+      OdfGraphicsDocument doc = OdfGraphicsDocument.newGraphicsDocument();
+      OdfFileDom dom = doc.getContentDom();
+      OdfDrawFrame f = new OdfDrawFrame(dom);
 
-			f.setPresentationClassAttribute(PresentationClassAttribute.Value.GRAPHIC.toString());
-			Logger.getLogger(DocumentCreationTest.class.getName()).info(f.getPresentationClassAttribute());
-		} catch (Exception e) {
-			Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+      f.setPresentationClassAttribute(PresentationClassAttribute.Value.GRAPHIC.toString());
+      Logger.getLogger(DocumentCreationTest.class.getName())
+          .info(f.getPresentationClassAttribute());
+    } catch (Exception e) {
+      Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 
-	@Test
-	public void testStyleUsageCount() {
-		try {
-			OdfOfficeAutomaticStyles s = odfdoc.getStylesDom().getAutomaticStyles();
-			OdfStyle pr1 = s.getStyle("pr1", OdfStyleFamily.Presentation);
-			int styleUserCount = pr1.getStyleUserCount();
-			OdfStylesDom stylesDom = odfdoc.getStylesDom();
-			XPath xpath = stylesDom.getXPath();
-			NodeList elementsWithStyle = (NodeList) xpath.evaluate("//draw:frame[@presentation:style-name='pr1']",
-					stylesDom, XPathConstants.NODESET);
-			int elementsWithStyleCount = elementsWithStyle.getLength();
-			Assert.assertTrue(styleUserCount == elementsWithStyleCount);
-//			//#bug51,the bug will be induced by using set attribute method
-//			OdfDrawFrame frame = (OdfDrawFrame) elementsWithStyle.item(0);
-//			frame.setPresentationStyleNameAttribute("pr2");
-//			styleUserCount = pr1.getStyleUserCount();
-//			elementsWithStyle = (NodeList) xpath.evaluate("//draw:frame[@presentation:style-name='pr1']",
-//					odfdoc.getStylesDom(), XPathConstants.NODESET);
-//			elementsWithStyleCount = elementsWithStyle.getLength();
-//			Assert.assertTrue("Last part of bug51 still to be fixed..!!", styleUserCount == elementsWithStyleCount);
-		} catch (Exception e) {
-			Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
-			Assert.fail(e.getMessage());
-		}
-	}
+  @Test
+  public void testStyleUsageCount() {
+    try {
+      OdfOfficeAutomaticStyles s = odfdoc.getStylesDom().getAutomaticStyles();
+      OdfStyle pr1 = s.getStyle("pr1", OdfStyleFamily.Presentation);
+      int styleUserCount = pr1.getStyleUserCount();
+      OdfStylesDom stylesDom = odfdoc.getStylesDom();
+      XPath xpath = stylesDom.getXPath();
+      NodeList elementsWithStyle =
+          (NodeList)
+              xpath.evaluate(
+                  "//draw:frame[@presentation:style-name='pr1']",
+                  stylesDom,
+                  XPathConstants.NODESET);
+      int elementsWithStyleCount = elementsWithStyle.getLength();
+      Assert.assertTrue(styleUserCount == elementsWithStyleCount);
+      //			//#bug51,the bug will be induced by using set attribute method
+      //			OdfDrawFrame frame = (OdfDrawFrame) elementsWithStyle.item(0);
+      //			frame.setPresentationStyleNameAttribute("pr2");
+      //			styleUserCount = pr1.getStyleUserCount();
+      //			elementsWithStyle = (NodeList)
+      // xpath.evaluate("//draw:frame[@presentation:style-name='pr1']",
+      //					odfdoc.getStylesDom(), XPathConstants.NODESET);
+      //			elementsWithStyleCount = elementsWithStyle.getLength();
+      //			Assert.assertTrue("Last part of bug51 still to be fixed..!!", styleUserCount ==
+      // elementsWithStyleCount);
+    } catch (Exception e) {
+      Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail(e.getMessage());
+    }
+  }
 }

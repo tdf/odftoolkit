@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:rpt="http://openoffice.org/2005/report"
+        xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2"
+        xmlns:rdfa="http://docs.oasis-open.org/opendocument/meta/rdfa#"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+        office:version="1.2">
+    <attributes/>
+</config>

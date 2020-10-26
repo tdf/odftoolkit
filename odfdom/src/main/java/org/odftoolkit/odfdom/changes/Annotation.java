@@ -20,22 +20,19 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 
 class Annotation extends Component {
 
-    Annotation(OdfElement componentElement, Component parent) {
-        super(componentElement, parent);
-    }
+  Annotation(OdfElement componentElement, Component parent) {
+    super(componentElement, parent);
+  }
 
-    /**
-     * Get parent component of the given position
-     */
-    @Override
-    public Component getParentOf(JSONArray position) {
-        Component c = null;
-        if (position.length() == 1) {
-            c = this;
-        } else {
-            c = get(position, true, false, 0);
-        }
-        return c;
+  /** Get parent component of the given position */
+  @Override
+  public Component getParentOf(JSONArray position) {
+    Component c = null;
+    if (position.length() == 1) {
+      c = this;
+    } else {
+      c = get(position, true, false, 0);
     }
-
+    return c;
+  }
 }

@@ -29,7 +29,7 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>21</version>
+        <version>23</version>
         <relativePath />
     </parent>
 
@@ -73,18 +73,24 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.12</version>
+                <version>4.13.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.jena</groupId>
                 <artifactId>jena-core</artifactId>
-                <version>3.9.0</version>
+                <version>3.16.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.jena</groupId>
                 <artifactId>jena-core</artifactId>
                 <classifier>tests</classifier>
-                <version>3.9.0</version>
+                <version>3.16.0</version>
+            </dependency>
+            <!-- Jena 3.16 requires the following slf4j API -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.30</version>
             </dependency>
             <dependency>
                 <groupId>net.rootdev</groupId>
@@ -114,7 +120,7 @@
             <dependency>
                 <groupId>org.apache.ant</groupId>
                 <artifactId>ant</artifactId>
-                <version>1.10.7</version>
+                <version>1.10.8</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -123,7 +129,6 @@
         <module>taglets</module>
         <module>generator</module>
         <module>xslt-runner</module>
-        <module>xslt-runner-task</module>
         <module>odfdom</module>
         <module>validator</module>
     </modules>
@@ -232,6 +237,32 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>com.cosium.code</groupId>
+                <artifactId>git-code-format-maven-plugin</artifactId>
+                <version>2.6</version>
+                <!-- BUG WORKAROUND: unformatted/uncommitted new files break the build
+                    run from command-line to format:
+                    mvn git-code-format:format-code -Dgcf.globPattern=**/*
+                -->
+                <executions>
+                    <!-- On commit, format the modified java files -->
+                    <execution>
+                        <id>install-formatter-hook</id>
+                        <goals>
+                            <goal>install-hooks</goal>
+                        </goals>
+                    </execution>
+                    <!-- On Maven verify phase, fail if any file
+                    (including unmodified) is badly formatted -->
+                    <execution>
+                        <id>validate-code-format</id>
+                        <goals>
+                            <goal>validate-code-format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.ec4j.maven</groupId>
                 <artifactId>editorconfig-maven-plugin</artifactId>
                 <version>0.0.11</version>
@@ -323,17 +354,21 @@
                         <configuration>
                             <excludes>
                                 <!-- for all projects -->
-                                <exclude>CHANGES.txt</exclude>
-                                <exclude>.gitignore</exclude>
                                 <exclude>.editorconfig</exclude>
+                                <exclude>.gitignore</exclude>
+                                <exclude>**/.classpath</exclude>
+                                <exclude>**/.factorypath</exclude>
+                                <exclude>**/.project</exclude>
+                                <exclude>**/.settings/**</exclude>
+                                <exclude>**/target/**</exclude>
                                 <exclude>.travis.yml</exclude>
+                                <exclude>CHANGES.txt</exclude>
                                 <exclude>README.md</exclude>
                                 <exclude>DEPENDENCIES</exclude>
                                 <exclude>docs/**/*</exclude>
-                                <exclude>src/site/**/*</exclude>
-                                <exclude>nb-configuration.xml</exclude>
-                                <exclude>.factorypath</exclude>
                                 <exclude>manifest.mf</exclude>
+                                <exclude>nb-configuration.xml</exclude>
+                                <exclude>src/site/**/*</exclude>
                                 <!-- schema2template -->
                                 <exclude>src/test/resources/examples/odf/*.ref</exclude>
                                 <exclude>src/main/resources/examples/odf/odfdom-python/OdfTextDocument.odt</exclude>

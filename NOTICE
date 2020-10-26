@@ -23,6 +23,16 @@ This product contains MathML XML Schema documents. Copyright (c) 1998-2003
 World Wide Web Consortium (Massachusetts Institute of Technology, European
 Research Consortium for Informatics and Mathematics, Keio University)
 
+Copyright © 2015 W3C® (MIT, ERCIM, Keio, Beihang). This software or document
+includes material copied from or derived from Mathematical Markup Language
+(MathML) Version 2.0 https://www.w3.org/TR/MathML2/
+https://www.w3.org/Math/XMLSchema/mathml2.tgz
+
+Copyright © 2015 W3C® (MIT, ERCIM, Keio, Beihang). This software or document
+includes material copied from or derived from Mathematical Markup Language
+(MathML) Version 3.0 2nd Edition https://www.w3.org/TR/MathML3/
+https://www.w3.org/Math/RelaxNG/mathml3-relaxng.zip
+
 This product contains Oracle Multi-Schema XML Validator (MSV).
 under BSD license. Copyright (c) 2001-2009 Sun Microsystems, Inc. All Rights Reserved.
 

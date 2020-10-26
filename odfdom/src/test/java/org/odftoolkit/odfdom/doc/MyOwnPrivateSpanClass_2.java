@@ -21,19 +21,16 @@
 
 package org.odftoolkit.odfdom.doc;
 
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
-
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
 
 public class MyOwnPrivateSpanClass_2 extends TextSpanElement {
 
-    /**
-	 *
-	 */
-	private static final long serialVersionUID = 3782225493052113393L;
+  /** */
+  private static final long serialVersionUID = 3782225493052113393L;
 
-	/** Creates a new instance of this class */
-    public MyOwnPrivateSpanClass_2(OdfFileDom ownerDoc) {
-        super(ownerDoc);
-    }
+  /** Creates a new instance of this class */
+  public MyOwnPrivateSpanClass_2(OdfFileDom ownerDoc) {
+    super(ownerDoc);
+  }
 }
