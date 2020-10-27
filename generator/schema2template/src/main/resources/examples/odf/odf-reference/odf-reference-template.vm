@@ -55,7 +55,7 @@ for an element to have a special child element.</p>
 #set ($oldelement = ${oldmodel.getElement($element.getQName())} )
 #if ($element != "*")
 ##
-#if (${element.withMultiples().size()} == 1)
+#if (${element.withMultiples().size()} <= 1)
 #set ($dup = "")
 #else
 #set ($dup = "[${element.getMultipleNumber()}]")
@@ -75,7 +75,7 @@ for an element to have a special child element.</p>
 #if ($parent == "*")
 [any org.w3c.dom.Element]&nbsp;
 #else
-#if (${parent.withMultiples().size()} == 1)
+#if (${parent.withMultiples().size()} <= 1)
 #set ($dup = "")
 #else
 #set ($dup = "[${parent.getMultipleNumber()}]")
@@ -92,7 +92,7 @@ for an element to have a special child element.</p>
 #if ($child == "*")
 [any org.w3c.dom.Element]&nbsp;
 #else
-#if (${child.withMultiples().size()} == 1)
+#if (${child.withMultiples().size()} <= 1)
 #set ($dup = "")
 #else
 #set ($dup = "[${child.getMultipleNumber()}]")
@@ -122,7 +122,7 @@ for an element to have a special child element.</p>
 #if ($attribute == "*")
 [any org.w3c.dom.Attribute]&nbsp;
 #else
-#if (${attribute.withMultiples().size()} == 1)
+#if (${attribute.withMultiples().size()} <= 1)
 #set ($dup = "")
 #else
 #set ($dup = "[${attribute.getMultipleNumber()}]")
@@ -150,12 +150,12 @@ for an element to have a special child element.</p>
 #set ($oldattribute = ${oldmodel.getAttribute($attribute.getQName())} )
 #if ($attribute != "*")
 ##
-#if (${attribute.withMultiples().size()} == 1)
+#if (${attribute.withMultiples().size()} <= 1)
 #set ($dup = "")
 #else
 #set ($dup = "[${attribute.getMultipleNumber()}]")
 #end
-<h3><a name="attribute_${attribute}_$dub">${attribute}${dup} Attribute</a>#if (${oldattribute} == "")&nbsp;(new in Odf 1.2) #end</h3>
+<h3><a name="attribute_${attribute}_${attribute.getMultipleNumber()}">${attribute}${dup} Attribute</a>#if (${oldattribute} == "")&nbsp;(new in Odf 1.2) #end</h3>
 #if ( ${attribute.withMultiples().size()} > 1 )
 <p>There are more than one Definitions by this name.</p>
 #end
@@ -167,7 +167,7 @@ for an element to have a special child element.</p>
 #if ($parent == "*")
 [any org.w3c.dom.Element]&nbsp;
 #else
-#if (${parent.withMultiples().size()} == 1)
+#if (${parent.withMultiples().size()} <= 1)
 #set ($dup = "")
 #else
 #set ($dup = "[${parent.getMultipleNumber()}]")

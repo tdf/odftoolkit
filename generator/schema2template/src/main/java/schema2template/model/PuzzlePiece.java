@@ -336,7 +336,8 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
       }
       retval++;
     }
-    throw new RuntimeException("aDefinition.getMultipleNumber for Named:" + this.mName);
+    return 0;
+    // throw new RuntimeException("aDefinition.getMultipleNumber for Named:" + this.mName);
   }
 
   /**
