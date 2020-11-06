@@ -239,10 +239,10 @@
             <plugin>
                 <groupId>com.cosium.code</groupId>
                 <artifactId>git-code-format-maven-plugin</artifactId>
-                <version>2.6</version>
+                <version>2.7</version>
                 <!-- BUG WORKAROUND: unformatted/uncommitted new files break the build
                     run from command-line to format:
-                    mvn git-code-format:format-code -Dgcf.globPattern=**/*
+                    mvn git-code-format:format-code -D"gcf.globPattern=**/*"
                 -->
                 <executions>
                     <!-- On commit, format the modified java files -->

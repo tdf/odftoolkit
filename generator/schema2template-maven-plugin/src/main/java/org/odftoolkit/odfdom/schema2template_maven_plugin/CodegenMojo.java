@@ -48,13 +48,13 @@ public class CodegenMojo extends AbstractMojo {
    * @parameter
    * @required
    */
-  String odf12SchemaFile;
+  String odf13SchemaFile;
 
   /**
    * @parameter
    * @required
    */
-  String odf11SchemaFile;
+  String odf12SchemaFile;
 
   /**
    * @parameter
@@ -66,13 +66,25 @@ public class CodegenMojo extends AbstractMojo {
    * @parameter
    * @required
    */
-  String signatureSchemaFile;
+  String odf13SignatureSchemaFile;
 
   /**
    * @parameter
    * @required
    */
-  String manifestSchemaFile;
+  String odf12SignatureSchemaFile;
+
+  /**
+   * @parameter
+   * @required
+   */
+  String odf13ManifestSchemaFile;
+
+  /**
+   * @parameter
+   * @required
+   */
+  String odf12ManifestSchemaFile;
 
   /**
    * @parameter
@@ -103,19 +115,27 @@ public class CodegenMojo extends AbstractMojo {
         getLog().error("Please set configure file patch.");
         throw new MojoFailureException("Please set configure file patch.");
       }
+      if (odf13SchemaFile == null) {
+        getLog().error("Please set odf1.3 schema file patch.");
+        throw new MojoFailureException("Please set schema file patch.");
+      }
       if (odf12SchemaFile == null) {
         getLog().error("Please set odf1.2 schema file patch.");
         throw new MojoFailureException("Please set schema file patch.");
       }
-      if (odf11SchemaFile == null) {
-        getLog().error("Please set odf1.1 schema file patch.");
+      if (odf13SignatureSchemaFile == null) {
+        getLog().error("Please set odf1.3 document signature schema file patch.");
         throw new MojoFailureException("Please set schema file patch.");
       }
-      if (signatureSchemaFile == null) {
+      if (odf12SignatureSchemaFile == null) {
         getLog().error("Please set odf1.2 document signature schema file patch.");
         throw new MojoFailureException("Please set schema file patch.");
       }
-      if (manifestSchemaFile == null) {
+      if (odf13ManifestSchemaFile == null) {
+        getLog().error("Please set odf1.3 manifest schema file patch.");
+        throw new MojoFailureException("Please set schema file patch.");
+      }
+      if (odf12ManifestSchemaFile == null) {
         getLog().error("Please set odf1.2 manifest schema file patch.");
         throw new MojoFailureException("Please set schema file patch.");
       }
@@ -137,19 +157,23 @@ public class CodegenMojo extends AbstractMojo {
       getLog().debug("Generation Code Files Root Directory " + targetRootPath);
       getLog().debug("Config File " + configFile);
       getLog().debug("Dom Template Files Directory " + domResourceRootPath);
+      getLog().debug("ODF1.3 Schema File " + odf13SchemaFile);
       getLog().debug("ODF1.2 Schema File " + odf12SchemaFile);
-      getLog().debug("ODF1.1 Schema File " + odf11SchemaFile);
       getLog().debug("Pkg Template Files Directory " + pkgResourceRootPath);
-      getLog().debug("ODF1.2 Signature Schema File " + signatureSchemaFile);
-      getLog().debug("ODF1.2 Manifest Schema File " + manifestSchemaFile);
+      getLog().debug("ODF1.3 Signature Schema File " + odf13SignatureSchemaFile);
+      getLog().debug("ODF1.2 Signature Schema File " + odf12SignatureSchemaFile);
+      getLog().debug("ODF1.3 Manifest Schema File " + odf13ManifestSchemaFile);
+      getLog().debug("ODF1.2 Manifest Schema File " + odf12ManifestSchemaFile);
       OdfHelper codeGen =
           new OdfHelper(
               domResourceRootPath,
+              odf13SchemaFile,
               odf12SchemaFile,
-              odf11SchemaFile,
               pkgResourceRootPath,
-              signatureSchemaFile,
-              manifestSchemaFile,
+              odf13SignatureSchemaFile,
+              odf12SignatureSchemaFile,
+              odf13ManifestSchemaFile,
+              odf12ManifestSchemaFile,
               targetRootPath,
               configFile);
       codeGen.main(null);

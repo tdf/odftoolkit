@@ -53,6 +53,8 @@ public class PuzzlePieceTest {
       TEST_REFERENCE_DIR + File.separator + "odf11-msvtree.ref";
   private static final String OUTPUT_REF_ODF12 =
       TEST_REFERENCE_DIR + File.separator + "odf12-msvtree.ref";
+  private static final String OUTPUT_REF_ODF13 =
+      TEST_REFERENCE_DIR + File.separator + "odf13-msvtree.ref";
   private static final int ODF12_ELEMENT_DUPLICATES = 7;
   private static final int ODF12_ATTRIBUTE_DUPLICATES = 134;
 
@@ -105,7 +107,7 @@ public class PuzzlePieceTest {
                 + "Please compare the output:\n\t'"
                 + OUTPUT_DUMP_ODF11
                 + "'\nwith the reference\n\t'"
-                + odf11RngFile;
+                + ODF11_RNG_FILE;
         LOG.severe(errorMsg);
         Assert.fail(errorMsg);
       }
@@ -117,10 +119,23 @@ public class PuzzlePieceTest {
                 + "Please compare the output:\n\t'"
                 + OUTPUT_DUMP_ODF12
                 + "'\nwith the reference\n\t'"
-                + odf12RngFile;
+                + ODF12_RNG_FILE;
         LOG.severe(errorMsg);
         Assert.fail(errorMsg);
       }
+      //      2DO
+      //      String odf13Ref = readFileAsString(OUTPUT_REF_ODF13);
+      //      if (!odf12Ref.equals(odf12Dump)) {
+      //        String errorMsg =
+      //            "There is a difference between the expected outcome of the parsed ODF 1.3
+      // tree.\n"
+      //                + "Please compare the output:\n\t'"
+      //                + OUTPUT_DUMP_ODF12
+      //                + "'\nwith the reference\n\t'"
+      //                + ODF13_RNG_FILE;
+      //        LOG.severe(errorMsg);
+      //        Assert.fail(errorMsg);
+      //      }
     } catch (Exception ex) {
       Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
       Assert.fail(ex.toString());

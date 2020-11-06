@@ -61,6 +61,8 @@ public class OdfHelper {
   // element or attribute declaration
 
   public static final int ODF12_ELEMENT_NUMBER = 598;
+
+  public static final int ODF13_ELEMENT_NUMBER = 598;
   /**
    * Expresses the amount of attributes in ODF 1.1. There are some issues in the schema that have to
    * be fixed before the full number can be returned by MSV: Following references are never used,
@@ -83,6 +85,10 @@ public class OdfHelper {
       1300; // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced
   // (ie. @office:process-content)
 
+  public static final int ODF13_ATTRIBUTE_NUMBER =
+      1300; // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced
+  // (ie. @office:process-content)
+
   public static final String TEST_INPUT_ROOT_ODF =
       "target" + File.separator + "classes" + File.separator + "examples" + File.separator + "odf";
   public static final String ODF10_RNG_FILE =
@@ -91,30 +97,52 @@ public class OdfHelper {
           + "odf-schemas"
           + File.separator
           + "OpenDocument-strict-schema-v1.0-os.rng";
-  public static String odf11RngFile =
+  public static final String ODF11_RNG_FILE =
       TEST_INPUT_ROOT_ODF
           + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-strict-schema-v1.1.rng";
-  public static String odf12RngFile =
+  public static final String ODF12_RNG_FILE =
       TEST_INPUT_ROOT_ODF
           + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-v1.2-os-schema.rng";
-  public static String odf12SignatureRngFile =
+  public static final String ODF13_RNG_FILE =
+      TEST_INPUT_ROOT_ODF
+          + File.separator
+          + "odf-schemas"
+          + File.separator
+          + "OpenDocument-v1.3-schema.rng";
+
+  public static final String ODF12_SIGNATURE_RNG_FILE =
       TEST_INPUT_ROOT_ODF
           + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-v1.2-os-dsig-schema.rng";
-  public static String odf12ManifestRngFile =
+
+  public static final String ODF13_SIGNATURE_RNG_FILE =
+      TEST_INPUT_ROOT_ODF
+          + File.separator
+          + "odf-schemas"
+          + File.separator
+          + "OpenDocument-v1.3-dsig-schema.rng";
+
+  public static final String ODF12_MANIFEST_RNG_FILE =
       TEST_INPUT_ROOT_ODF
           + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-v1.2-os-manifest-schema.rng";
+
+  public static final String ODF13_MANIFEST_RNG_FILE =
+      TEST_INPUT_ROOT_ODF
+          + File.separator
+          + "odf-schemas"
+          + File.separator
+          + "OpenDocument-v1.3-manifest-schema.rng";
 
   public static String mConfigFile = TEST_INPUT_ROOT_ODF + File.separator + "config.xml";
 
@@ -157,6 +185,9 @@ public class OdfHelper {
   private static final String ODF_REFERENCE_RESOURCE_DIR =
       TEST_INPUT_ROOT_ODF + File.separator + "odf-reference";
 
+  private static XMLModel mOdf13SignatureSchemaModel;
+  private static XMLModel mOdf13ManifestSchemaModel;
+  private static XMLModel mOdf13SchemaModel;
   private static XMLModel mOdf12SignatureSchemaModel;
   private static XMLModel mOdf12ManifestSchemaModel;
   private static XMLModel mOdf12SchemaModel;
@@ -168,19 +199,17 @@ public class OdfHelper {
 
   public OdfHelper(
       String domResourceRoot,
+      String odf13SchemaFile,
       String odf12SchemaFile,
-      String odf11SchemaFile,
       String pkgResourceRoot,
+      String odf13SignatureSchemaFile,
       String odf12SignatureSchemaFile,
+      String odf13ManifestSchemaFile,
       String odf12ManifestSchemaFile,
       String targetRoot,
       String configFile) {
     odfDomResourceDir = domResourceRoot;
     odfPkgResourceDir = pkgResourceRoot;
-    odf11RngFile = odf11SchemaFile;
-    odf12RngFile = odf12SchemaFile;
-    odf12SignatureRngFile = odf12SignatureSchemaFile;
-    odf12ManifestRngFile = odf12ManifestSchemaFile;
     outputRoot = targetRoot;
     mConfigFile = configFile;
   }
@@ -206,8 +235,8 @@ public class OdfHelper {
         datatypeValueAndConversionMap);
 
     //        mOdf12SignatureSchemaModel = new XMLModel(new File(odf12SignatureRngFile));
-    mOdf12ManifestSchemaModel = new XMLModel(new File(odf12ManifestRngFile));
-    mOdf12SchemaModel = new XMLModel(new File(odf12RngFile));
+    mOdf13ManifestSchemaModel = new XMLModel(new File(ODF13_MANIFEST_RNG_FILE));
+    mOdf13SchemaModel = new XMLModel(new File(ODF13_RNG_FILE));
     //        mOdf11SchemaModel = new XMLModel(new File(odf11RngFile));
     //
     mOdfModel = new OdfModel(elementStyleFamiliesMap, attributeDefaultMap);
@@ -215,25 +244,25 @@ public class OdfHelper {
     // classes
     mJavaModelOdf =
         new SourceCodeModel(
-            mOdf12SchemaModel,
-            mOdf12SignatureSchemaModel,
-            mOdf12ManifestSchemaModel,
+            mOdf13SchemaModel,
+            mOdf13SignatureSchemaModel,
+            mOdf13ManifestSchemaModel,
             mOdfModel,
             elementToBaseNameMap,
             datatypeValueAndConversionMap);
     LOG.info("Finished initilization..");
-    // HTML Reference for ODF 1.2 (yet without BNF nor images)
+    // HTML Reference for ODF 1.3 (yet without BNF nor images)
     fillTemplates(
         ODF_REFERENCE_RESOURCE_DIR,
-        mOdf12SchemaModel.mRootExpression,
+        mOdf13SchemaModel.mRootExpression,
         REFERENCE_OUTPUT_FILES_TEMPLATE,
         REFERENCE_OUTPUT_FILES);
 
-    // ODF 1.2 Python (The generated Python source is from a former colleague and might not work any
+    // ODF 1.3 Python (The generated Python source is from a former colleague and might not work any
     // longer..)
     fillTemplates(
         ODF_PYTHON_RESOURCE_DIR,
-        mOdf12SchemaModel.mRootExpression,
+        mOdf13SchemaModel.mRootExpression,
         PYTHON_OUTPUT_FILES_TEMPLATE,
         PYTHON_OUTPUT_FILES);
 
@@ -349,7 +378,7 @@ public class OdfHelper {
    * @throws Exception
    */
   public static Expression loadSchemaODF11() throws Exception {
-    return XMLModel.loadSchema(new File(odf11RngFile));
+    return XMLModel.loadSchema(new File(ODF11_RNG_FILE));
   }
 
   /**
@@ -360,7 +389,18 @@ public class OdfHelper {
    * @throws Exception
    */
   public static Expression loadSchemaODF12() throws Exception {
-    return XMLModel.loadSchema(new File(odf12RngFile));
+    return XMLModel.loadSchema(new File(ODF12_RNG_FILE));
+  }
+
+  /**
+   * Load and parse the ODF 1.3 Schema.
+   *
+   * @return MSV Expression Tree of ODF 1.3 RelaxNG schema (more specific: The tree's MSV root
+   *     expression)
+   * @throws Exception
+   */
+  public static Expression loadSchemaODF13() throws Exception {
+    return XMLModel.loadSchema(new File(ODF13_RNG_FILE));
   }
 
   private static String generateFilename(String rawName) {

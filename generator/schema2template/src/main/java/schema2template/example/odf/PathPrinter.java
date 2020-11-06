@@ -159,7 +159,7 @@ public class PathPrinter {
   }
 
   public static void main(String[] args) throws Exception {
-    Expression root = parseOdfSchema(new File(OdfHelper.odf12RngFile));
+    Expression root = parseOdfSchema(new File(OdfHelper.ODF12_RNG_FILE));
     PuzzlePieceSet elements = new PuzzlePieceSet();
     PuzzlePieceSet attributes = new PuzzlePieceSet();
     PuzzlePiece.extractPuzzlePieces(root, elements, attributes, null);
