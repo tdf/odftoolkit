@@ -32,7 +32,6 @@ import org.odftoolkit.simple.Document.ScriptType;
 import org.odftoolkit.simple.style.DefaultStyleHandler;
 import org.odftoolkit.simple.style.Font;
 import org.odftoolkit.simple.style.ParagraphProperties;
-import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.FontStyle;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.TextLinePosition;
@@ -47,18 +46,10 @@ import org.odftoolkit.simple.style.TextProperties;
  */
 public class ParagraphStyleHandler extends DefaultStyleHandler {
 
-  Paragraph mParagraph;
   TextParagraphElementBase mParaElement;
-
-  TextProperties mTextProperties;
-  TextProperties mWritableTextProperties;
-
-  ParagraphProperties mParagraphProperties;
-  ParagraphProperties mWritableParagraphProperties;
 
   ParagraphStyleHandler(Paragraph aParagraph) {
     super(aParagraph.getOdfElement());
-    mParagraph = aParagraph;
     mParaElement = aParagraph.getOdfElement();
   }
 
@@ -125,7 +116,7 @@ public class ParagraphStyleHandler extends DefaultStyleHandler {
     if (textProperties != null) {
       font = textProperties.getFont(type);
     } else {
-      font = new Font(null, null, 0, (StyleTypeDefinitions.TextLinePosition) null);
+      font = new Font(null, null, 0, (TextLinePosition) null);
     }
 
     if (font != null
@@ -144,14 +135,16 @@ public class ParagraphStyleHandler extends DefaultStyleHandler {
     }
     while ((!isDefault) && (parentStyle != null)) {
       TextProperties parentStyleSetting = TextProperties.getTextProperties(parentStyle);
-      Font tempFont = parentStyleSetting.getFont(type);
-      mergeFont(font, tempFont);
-      if (font.getFamilyName() != null
-          && font.getColor() != null
-          && font.getSize() > 0
-          && font.getFontStyle() != null
-          && font.getTextLinePosition() != null) {
-        return font;
+      if (parentStyleSetting != null) {
+        Font tempFont = parentStyleSetting.getFont(type);
+        mergeFont(font, tempFont);
+        if (font.getFamilyName() != null
+            && font.getColor() != null
+            && font.getSize() > 0
+            && font.getFontStyle() != null
+            && font.getTextLinePosition() != null) {
+          return font;
+        }
       }
       // continue to get parent properties
       if (parentStyle instanceof OdfDefaultStyle) {

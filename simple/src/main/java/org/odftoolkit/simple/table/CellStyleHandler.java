@@ -33,7 +33,6 @@ import org.odftoolkit.simple.style.Border;
 import org.odftoolkit.simple.style.DefaultStyleHandler;
 import org.odftoolkit.simple.style.Font;
 import org.odftoolkit.simple.style.ParagraphProperties;
-import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.CellBordersType;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.FontStyle;
 import org.odftoolkit.simple.style.StyleTypeDefinitions.HorizontalAlignmentType;
@@ -55,96 +54,13 @@ public class CellStyleHandler extends DefaultStyleHandler {
   Cell mCell;
   TableTableCellElementBase mCellElement;
 
-  TextProperties mTextProperties;
-  TextProperties mWritableTextProperties;
-  TableCellProperties mTableCellProperties;
-  TableCellProperties mWritableTableCellProperties;
-  ParagraphProperties mParagraphProperties;
-  ParagraphProperties mWritableParagraphProperties;
-
   CellStyleHandler(Cell aCell) {
     super(aCell.getOdfElement());
     mCell = aCell;
-    mCellElement = (TableTableCellElementBase) mCell.getOdfElement();
+    mCellElement = mCell.getOdfElement();
   }
 
   private boolean isShared = false;
-
-  /**
-   * Return the used style name of this cell.
-   *
-   * <p>If there is no style name defined for cell, the attribute "table:default-cell-style-name" in
-   * table row and table column would be returned.
-   */
-  @Override
-  public String getUsedStyleName() {
-    String styleName = mCellElement.getStyleName();
-    if (styleName == null || (styleName.equals(""))) { // search in row
-      Row aRow = mCell.getTableRow();
-      styleName = aRow.getOdfElement().getTableDefaultCellStyleNameAttribute();
-      isShared = true;
-    }
-    if (styleName == null || (styleName.equals(""))) { // search in column
-      Column aColumn = mCell.getTableColumn();
-      styleName = aColumn.getOdfElement().getTableDefaultCellStyleNameAttribute();
-      isShared = true;
-    }
-    return styleName;
-  }
-
-  /**
-   * Return the style element for this cell, for read and write functions.
-   *
-   * <p>An empty style definition will be created if there is no style definition.
-   *
-   * @return the style element
-   */
-  @Override
-  public OdfStyle getStyleElementForWrite() {
-    if (mWritableStyleElement != null) return mWritableStyleElement;
-
-    mCell.splitRepeatedCells();
-    mCellElement = (TableTableCellElementBase) mCell.getOdfElement();
-    mOdfElement = mCellElement; // note here: mOdfElement in
-    // DefaultStyleHandler must be updated at
-    // the same time
-
-    String styleName = getUsedStyleName();
-    mWritableStyleElement = getWritableStyleElementByName(styleName, isShared);
-    return mWritableStyleElement;
-  }
-
-  private OdfDefaultStyle getCellDefaultStyle() {
-    return mDocument.getDocumentStyles().getDefaultStyle(OdfStyleFamily.TableCell);
-  }
-
-  private OdfDefaultStyle getParagraphDefaultStyle() {
-    return mDocument.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Paragraph);
-  }
-
-  private OdfStyleBase getParentStyle(OdfStyle aStyle) {
-    String parentName = aStyle.getStyleParentStyleNameAttribute();
-    if (parentName == null || parentName.length() == 0) return null;
-    if (parentName.equals("Default")) return getCellDefaultStyle();
-    else return getStyleByName(parentName);
-  }
-
-  private OdfStyle getStyleByName(String name) {
-    OdfStyle styleElement = null;
-    OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
-    styleElement = styles.getStyle(name, OdfStyleFamily.TableCell);
-
-    if (styleElement == null) {
-      styleElement = mDocument.getDocumentStyles().getStyle(name, OdfStyleFamily.TableCell);
-    }
-
-    return styleElement;
-  }
-
-  private OdfStyleBase getCurrentUsedStyle() {
-    if (mWritableStyleElement != null) return mWritableStyleElement;
-    else return mStyleElement;
-  }
 
   /**
    * Return the country information for a specific script type
@@ -159,19 +75,30 @@ public class CellStyleHandler extends DefaultStyleHandler {
   public String getCountry(ScriptType type) {
     String country = null;
     TextProperties textProperties = getTextPropertiesForRead();
-    if (textProperties != null) country = textProperties.getCountry(type);
-    if (country != null && country.length() > 0) return country;
+    if (textProperties != null) {
+      country = textProperties.getCountry(type);
+    }
+    if (country != null && country.length() > 0) {
+      return country;
+    }
 
     boolean isDefault = isUseDefaultStyle;
     OdfStyleBase parentStyle = null;
-    if (!isDefault) parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    if (!isDefault) {
+      parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    }
     while ((!isDefault) && (parentStyle != null)) {
       TextProperties parentStyleSetting = TextProperties.getTextProperties(parentStyle);
       country = parentStyleSetting.getCountry(type);
-      if (country != null && country.length() > 0) return country;
+      if (country != null && country.length() > 0) {
+        return country;
+      }
 
-      if (parentStyle instanceof OdfDefaultStyle) isDefault = true;
-      else parentStyle = getParentStyle((OdfStyle) parentStyle);
+      if (parentStyle instanceof OdfDefaultStyle) {
+        isDefault = true;
+      } else {
+        parentStyle = getParentStyle((OdfStyle) parentStyle);
+      }
     }
     if (!isDefault) {
       OdfDefaultStyle defaultStyle = getCellDefaultStyle();
@@ -179,18 +106,6 @@ public class CellStyleHandler extends DefaultStyleHandler {
       country = defaultStyleSetting.getCountry(type);
     }
     return country;
-  }
-
-  private void mergeFont(Font target, Font source) {
-    // merge font
-    if (target.getFamilyName() == null && source.getFamilyName() != null)
-      target.setFamilyName(source.getFamilyName());
-    if (target.getColor() == null && source.getColor() != null) target.setColor(source.getColor());
-    if (target.getSize() == 0 && source.getSize() > 0) target.setSize(source.getSize());
-    if (target.getFontStyle() == null && source.getFontStyle() != null)
-      target.setFontStyle(source.getFontStyle());
-    if (target.getTextLinePosition() == null && source.getTextLinePosition() != null)
-      target.setTextLinePosition(source.getTextLinePosition());
   }
 
   /**
@@ -208,33 +123,45 @@ public class CellStyleHandler extends DefaultStyleHandler {
     // A font includes font family name, font style, font color, font size
     Font font = null;
     TextProperties textProperties = getTextPropertiesForRead();
-    if (textProperties != null) font = textProperties.getFont(type);
-    else font = new Font(null, null, 0, (StyleTypeDefinitions.TextLinePosition) null);
+    if (textProperties != null) {
+      font = textProperties.getFont(type);
+    } else {
+      font = new Font(null, null, 0, (TextLinePosition) null);
+    }
 
     if (font != null
         && font.getFamilyName() != null
         && font.getColor() != null
         && font.getSize() != 0
         && font.getFontStyle() != null
-        && font.getTextLinePosition() != null) return font;
+        && font.getTextLinePosition() != null) {
+      return font;
+    }
 
     boolean isDefault = isUseDefaultStyle;
     OdfStyleBase parentStyle = null;
-    if (!isDefault) parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    if (!isDefault) {
+      parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    }
     while ((!isDefault) && (parentStyle != null)) {
       TextProperties parentStyleSetting = TextProperties.getTextProperties(parentStyle);
-      Font tempFont = parentStyleSetting.getFont(type);
-      mergeFont(font, tempFont);
-      if (font.getFamilyName() != null
-          && font.getColor() != null
-          && font.getSize() > 0
-          && font.getFontStyle() != null
-          && font.getTextLinePosition() != null) {
-        return font;
+      if (parentStyleSetting != null) {
+        Font tempFont = parentStyleSetting.getFont(type);
+        mergeFont(font, tempFont);
+        if (font.getFamilyName() != null
+            && font.getColor() != null
+            && font.getSize() > 0
+            && font.getFontStyle() != null
+            && font.getTextLinePosition() != null) {
+          return font;
+        }
       }
       // continue to get parent properties
-      if (parentStyle instanceof OdfDefaultStyle) isDefault = true;
-      else parentStyle = getParentStyle((OdfStyle) parentStyle);
+      if (parentStyle instanceof OdfDefaultStyle) {
+        isDefault = true;
+      } else {
+        parentStyle = getParentStyle((OdfStyle) parentStyle);
+      }
     }
     if (!isDefault) {
       OdfDefaultStyle defaultStyle = getCellDefaultStyle();
@@ -250,9 +177,15 @@ public class CellStyleHandler extends DefaultStyleHandler {
       }
     }
 
-    if (font.getColor() == null) font.setColor(Color.BLACK);
-    if (font.getFontStyle() == null) font.setFontStyle(FontStyle.REGULAR);
-    if (font.getTextLinePosition() == null) font.setTextLinePosition(TextLinePosition.REGULAR);
+    if (font.getColor() == null) {
+      font.setColor(Color.BLACK);
+    }
+    if (font.getFontStyle() == null) {
+      font.setFontStyle(FontStyle.REGULAR);
+    }
+    if (font.getTextLinePosition() == null) {
+      font.setTextLinePosition(TextLinePosition.REGULAR);
+    }
 
     return font;
   }
@@ -270,19 +203,30 @@ public class CellStyleHandler extends DefaultStyleHandler {
   public String getLanguage(ScriptType type) {
     String language = null;
     TextProperties textProperties = getTextPropertiesForRead();
-    if (textProperties != null) language = textProperties.getLanguage(type);
-    if (language != null && language.length() > 0) return language;
+    if (textProperties != null) {
+      language = textProperties.getLanguage(type);
+    }
+    if (language != null && language.length() > 0) {
+      return language;
+    }
 
     boolean isDefault = isUseDefaultStyle;
     OdfStyleBase parentStyle = null;
-    if (!isDefault) parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    if (!isDefault) {
+      parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    }
     while ((!isDefault) && (parentStyle != null)) {
       TextProperties parentStyleSetting = TextProperties.getTextProperties(parentStyle);
       language = parentStyleSetting.getLanguage(type);
-      if (language != null && language.length() > 0) return language;
+      if (language != null && language.length() > 0) {
+        return language;
+      }
 
-      if (parentStyle instanceof OdfDefaultStyle) isDefault = true;
-      else parentStyle = getParentStyle((OdfStyle) parentStyle);
+      if (parentStyle instanceof OdfDefaultStyle) {
+        isDefault = true;
+      } else {
+        parentStyle = getParentStyle((OdfStyle) parentStyle);
+      }
     }
     if (!isDefault) {
       OdfDefaultStyle defaultStyle = getCellDefaultStyle();
@@ -315,7 +259,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
    *
    * <p>If the parameter <code>font</code> is null, nothing will be happened.
    *
-   * @param font - font definition
+   * @param font font definition
    */
   public void setFont(Font font) {
     getTextPropertiesForWrite().setFont(font);
@@ -327,7 +271,7 @@ public class CellStyleHandler extends DefaultStyleHandler {
    *
    * <p>If the parameter <code>font</code> is null, nothing will be happened.
    *
-   * @param font - font definition
+   * @param font font definition
    */
   public void setFont(Font font, Locale language) {
     getTextPropertiesForWrite().setFont(font, language);
@@ -347,6 +291,178 @@ public class CellStyleHandler extends DefaultStyleHandler {
   }
 
   /**
+   * Set the horizontal alignment.
+   *
+   * <p>If the parameter <code>alignType</code> is null, the horizontal alignment setting will be
+   * removed.
+   *
+   * @param alignType the horizontal alignment
+   */
+  public void setHorizontalAlignment(HorizontalAlignmentType alignType) {
+    getParagraphPropertiesForWrite().setHorizontalAlignment(alignType);
+  }
+
+  /**
+   * Return the horizontal alignment.
+   *
+   * <p>The horizontal alignment in its parent style and default style will be taken into
+   * considered.
+   *
+   * <p>HorizontalAlignmentType.DEFAULT will be returned if there is no horizontal alignment
+   * setting.
+   *
+   * @return the horizontal alignment; null if there is no horizontal alignment setting.
+   */
+  public HorizontalAlignmentType getHorizontalAlignment() {
+    HorizontalAlignmentType tempAlign = null;
+    ParagraphProperties properties = getParagraphPropertiesForRead();
+    if (properties != null) {
+      tempAlign = properties.getHorizontalAlignment();
+    }
+    if (tempAlign != null) {
+      return tempAlign;
+    }
+
+    boolean isDefault = isUseDefaultStyle;
+    // find in parent style definition
+    OdfStyleBase parentStyle = null;
+    if (!isDefault) {
+      parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    }
+    while ((!isDefault) && (parentStyle != null)) {
+      ParagraphProperties parentStyleSetting =
+          ParagraphProperties.getParagraphProperties(parentStyle);
+      tempAlign = parentStyleSetting.getHorizontalAlignment();
+      if (tempAlign != null) {
+        return tempAlign;
+      }
+
+      if (parentStyle instanceof OdfDefaultStyle) {
+        isDefault = true;
+      } else {
+        parentStyle = getParentStyle((OdfStyle) parentStyle);
+      }
+    }
+    // find in default style definition
+    if (!isDefault) {
+      OdfDefaultStyle defaultStyle = getCellDefaultStyle();
+      ParagraphProperties defaultStyleSetting =
+          ParagraphProperties.getParagraphProperties(defaultStyle);
+      tempAlign = defaultStyleSetting.getHorizontalAlignment();
+    }
+    // use default
+    if (tempAlign == null) {
+      return HorizontalAlignmentType.DEFAULT;
+    }
+    return tempAlign;
+  }
+
+  private OdfDefaultStyle getParagraphDefaultStyle() {
+    return mDocument.getDocumentStyles().getDefaultStyle(OdfStyleFamily.Paragraph);
+  }
+
+  private OdfStyleBase getParentStyle(OdfStyle aStyle) {
+    String parentName = aStyle.getStyleParentStyleNameAttribute();
+    if (parentName == null || parentName.length() == 0) {
+      return null;
+    }
+    if (parentName.equals("Default")) {
+      return getCellDefaultStyle();
+    } else {
+      return getStyleByName(parentName);
+    }
+  }
+
+  private OdfStyle getStyleByName(String name) {
+    OdfStyle styleElement = null;
+    OdfOfficeAutomaticStyles styles = mCellElement.getAutomaticStyles();
+    styleElement = styles.getStyle(name, OdfStyleFamily.TableCell);
+
+    if (styleElement == null) {
+      styleElement = mDocument.getDocumentStyles().getStyle(name, OdfStyleFamily.TableCell);
+    }
+
+    return styleElement;
+  }
+
+  private OdfStyleBase getCurrentUsedStyle() {
+    if (mWritableStyleElement != null) {
+      return mWritableStyleElement;
+    } else {
+      return mStyleElement;
+    }
+  }
+
+  private void mergeFont(Font target, Font source) {
+    // merge font
+    if (target.getFamilyName() == null && source.getFamilyName() != null) {
+      target.setFamilyName(source.getFamilyName());
+    }
+    if (target.getColor() == null && source.getColor() != null) {
+      target.setColor(source.getColor());
+    }
+    if (target.getSize() == 0 && source.getSize() > 0) {
+      target.setSize(source.getSize());
+    }
+    if (target.getFontStyle() == null && source.getFontStyle() != null) {
+      target.setFontStyle(source.getFontStyle());
+    }
+    if (target.getTextLinePosition() == null && source.getTextLinePosition() != null) {
+      target.setTextLinePosition(source.getTextLinePosition());
+    }
+  }
+
+  /**
+   * Return the style element for this cell, for read and write functions.
+   *
+   * <p>An empty style definition will be created if there is no style definition.
+   *
+   * @return the style element
+   */
+  @Override
+  public OdfStyle getStyleElementForWrite() {
+    if (mWritableStyleElement != null) {
+      return mWritableStyleElement;
+    }
+
+    mCell.splitRepeatedCells();
+    mCellElement = (TableTableCellElementBase) mCell.getOdfElement();
+    mOdfElement = mCellElement; // note here: mOdfElement in
+    // DefaultStyleHandler must be updated at
+    // the same time
+
+    String styleName = getUsedStyleName();
+    mWritableStyleElement = getWritableStyleElementByName(styleName, isShared);
+    return mWritableStyleElement;
+  }
+
+  private OdfDefaultStyle getCellDefaultStyle() {
+    return mDocument.getDocumentStyles().getDefaultStyle(OdfStyleFamily.TableCell);
+  }
+
+  /**
+   * Return the used style name of this cell.
+   *
+   * <p>If there is no style name defined for cell, the attribute "table:default-cell-style-name" in
+   * table row and table column would be returned.
+   */
+  @Override
+  public String getUsedStyleName() {
+    String styleName = mCellElement.getStyleName();
+    if (styleName == null || (styleName.equals(""))) { // search in row
+      Row aRow = mCell.getTableRow();
+      styleName = aRow.getOdfElement().getTableDefaultCellStyleNameAttribute();
+      isShared = true;
+    }
+    if (styleName == null || (styleName.equals(""))) { // search in column
+      Column aColumn = mCell.getTableColumn();
+      styleName = aColumn.getOdfElement().getTableDefaultCellStyleNameAttribute();
+      isShared = true;
+    }
+    return styleName;
+  }
+
+  /**
    * Return the background color.
    *
    * <p>The background color in its parent style and default style will be taken into considered.
@@ -359,21 +475,32 @@ public class CellStyleHandler extends DefaultStyleHandler {
   public Color getBackgroundColor() {
     Color tempColor = null;
     TableCellProperties properties = getTableCellPropertiesForRead();
-    if (properties != null) tempColor = properties.getBackgroundColor();
-    if (tempColor != null) return tempColor;
+    if (properties != null) {
+      tempColor = properties.getBackgroundColor();
+    }
+    if (tempColor != null) {
+      return tempColor;
+    }
 
     boolean isDefault = isUseDefaultStyle;
     // find in parent style definition
     OdfStyleBase parentStyle = null;
-    if (!isDefault) parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    if (!isDefault) {
+      parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    }
     while ((!isDefault) && (parentStyle != null)) {
       TableCellProperties parentStyleSetting =
           TableCellProperties.getTableCellProperties(parentStyle);
       tempColor = parentStyleSetting.getBackgroundColor();
-      if (tempColor != null) return tempColor;
+      if (tempColor != null) {
+        return tempColor;
+      }
 
-      if (parentStyle instanceof OdfDefaultStyle) isDefault = true;
-      else parentStyle = getParentStyle((OdfStyle) parentStyle);
+      if (parentStyle instanceof OdfDefaultStyle) {
+        isDefault = true;
+      } else {
+        parentStyle = getParentStyle((OdfStyle) parentStyle);
+      }
     }
     // find in default style definition
     if (!isDefault) {
@@ -385,7 +512,9 @@ public class CellStyleHandler extends DefaultStyleHandler {
       }
     }
     // use default
-    if (tempColor == null) return Color.WHITE;
+    if (tempColor == null) {
+      return Color.WHITE;
+    }
     return tempColor;
   }
 
@@ -431,21 +560,30 @@ public class CellStyleHandler extends DefaultStyleHandler {
     if (properties != null) {
       tempBorder = getNullableBorder(properties, type);
     }
-    if (tempBorder != null) return tempBorder;
+    if (tempBorder != null) {
+      return tempBorder;
+    }
 
     boolean isDefault = isUseDefaultStyle;
     // find in parent style definition
     OdfStyleBase parentStyle = null;
-    if (!isDefault) parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    if (!isDefault) {
+      parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    }
     while ((!isDefault) && (parentStyle != null)) {
       TableCellProperties parentStyleSetting =
           TableCellProperties.getTableCellProperties(parentStyle);
       tempBorder = getNullableBorder(parentStyleSetting, type);
       ;
-      if (tempBorder != null) return tempBorder;
+      if (tempBorder != null) {
+        return tempBorder;
+      }
 
-      if (parentStyle instanceof OdfDefaultStyle) isDefault = true;
-      else parentStyle = getParentStyle((OdfStyle) parentStyle);
+      if (parentStyle instanceof OdfDefaultStyle) {
+        isDefault = true;
+      } else {
+        parentStyle = getParentStyle((OdfStyle) parentStyle);
+      }
     }
     // find in default style definition
     if (!isDefault) {
@@ -477,20 +615,29 @@ public class CellStyleHandler extends DefaultStyleHandler {
     if (properties != null) {
       tempAlign = properties.getVerticalAlignment();
     }
-    if (tempAlign != null) return tempAlign;
+    if (tempAlign != null) {
+      return tempAlign;
+    }
 
     boolean isDefault = isUseDefaultStyle;
     // find in parent style definition
     OdfStyleBase parentStyle = null;
-    if (!isDefault) parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    if (!isDefault) {
+      parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    }
     while ((!isDefault) && (parentStyle != null)) {
       TableCellProperties parentStyleSetting =
           TableCellProperties.getTableCellProperties(parentStyle);
       tempAlign = parentStyleSetting.getVerticalAlignment();
-      if (tempAlign != null) return tempAlign;
+      if (tempAlign != null) {
+        return tempAlign;
+      }
 
-      if (parentStyle instanceof OdfDefaultStyle) isDefault = true;
-      else parentStyle = getParentStyle((OdfStyle) parentStyle);
+      if (parentStyle instanceof OdfDefaultStyle) {
+        isDefault = true;
+      } else {
+        parentStyle = getParentStyle((OdfStyle) parentStyle);
+      }
     }
     // find in default style definition
     if (!isDefault) {
@@ -518,21 +665,32 @@ public class CellStyleHandler extends DefaultStyleHandler {
   public boolean isTextWrapped() {
     Boolean tempBool = null;
     TableCellProperties properties = getTableCellPropertiesForRead();
-    if (properties != null) tempBool = properties.isWrapped();
-    if (tempBool != null) return tempBool.booleanValue();
+    if (properties != null) {
+      tempBool = properties.isWrapped();
+    }
+    if (tempBool != null) {
+      return tempBool.booleanValue();
+    }
 
     boolean isDefault = isUseDefaultStyle;
     // find in parent style definition
     OdfStyleBase parentStyle = null;
-    if (!isDefault) parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    if (!isDefault) {
+      parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
+    }
     while ((!isDefault) && (parentStyle != null)) {
       TableCellProperties parentStyleSetting =
           TableCellProperties.getTableCellProperties(parentStyle);
       tempBool = parentStyleSetting.isWrapped();
-      if (tempBool != null) return tempBool;
+      if (tempBool != null) {
+        return tempBool;
+      }
 
-      if (parentStyle instanceof OdfDefaultStyle) isDefault = true;
-      else parentStyle = getParentStyle((OdfStyle) parentStyle);
+      if (parentStyle instanceof OdfDefaultStyle) {
+        isDefault = true;
+      } else {
+        parentStyle = getParentStyle((OdfStyle) parentStyle);
+      }
     }
     // find in default style definition
     if (!isDefault) {
@@ -542,7 +700,9 @@ public class CellStyleHandler extends DefaultStyleHandler {
       tempBool = defaultStyleSetting.isWrapped();
     }
     // use default
-    if (tempBool == null) return false;
+    if (tempBool == null) {
+      return false;
+    }
     return tempBool.booleanValue();
   }
 
@@ -590,58 +750,5 @@ public class CellStyleHandler extends DefaultStyleHandler {
    */
   public void setTextWrapped(boolean isWrapped) {
     getTableCellPropertiesForWrite().setWrapped(isWrapped);
-  }
-
-  /**
-   * Set the horizontal alignment.
-   *
-   * <p>If the parameter <code>alignType</code> is null, the horizontal alignment setting will be
-   * removed.
-   *
-   * @param alignType - the horizontal alignment
-   */
-  public void setHorizontalAlignment(HorizontalAlignmentType alignType) {
-    getParagraphPropertiesForWrite().setHorizontalAlignment(alignType);
-  }
-
-  /**
-   * Return the horizontal alignment.
-   *
-   * <p>The horizontal alignment in its parent style and default style will be taken into
-   * considered.
-   *
-   * <p>DEFAULT will be returned if there is no horizontal alignment setting.
-   *
-   * @return - the horizontal alignment; null if there is no horizontal alignment setting.
-   */
-  public HorizontalAlignmentType getHorizontalAlignment() {
-    HorizontalAlignmentType tempAlign = null;
-    ParagraphProperties properties = getParagraphPropertiesForRead();
-    if (properties != null) tempAlign = properties.getHorizontalAlignment();
-    if (tempAlign != null) return tempAlign;
-
-    boolean isDefault = isUseDefaultStyle;
-    // find in parent style definition
-    OdfStyleBase parentStyle = null;
-    if (!isDefault) parentStyle = getParentStyle((OdfStyle) getCurrentUsedStyle());
-    while ((!isDefault) && (parentStyle != null)) {
-      ParagraphProperties parentStyleSetting =
-          ParagraphProperties.getParagraphProperties(parentStyle);
-      tempAlign = parentStyleSetting.getHorizontalAlignment();
-      if (tempAlign != null) return tempAlign;
-
-      if (parentStyle instanceof OdfDefaultStyle) isDefault = true;
-      else parentStyle = getParentStyle((OdfStyle) parentStyle);
-    }
-    // find in default style definition
-    if (!isDefault) {
-      OdfDefaultStyle defaultStyle = getCellDefaultStyle();
-      ParagraphProperties defaultStyleSetting =
-          ParagraphProperties.getParagraphProperties(defaultStyle);
-      tempAlign = defaultStyleSetting.getHorizontalAlignment();
-    }
-    // use default
-    if (tempAlign == null) return HorizontalAlignmentType.DEFAULT;
-    return tempAlign;
   }
 }
