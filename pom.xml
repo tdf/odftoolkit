@@ -51,6 +51,7 @@
         <release.zip.bin>odftoolkit-${project.version}-bin.zip</release.zip.bin>
         <release.zip.doc>odftoolkit-${project.version}-doc.zip</release.zip.doc>
         <release.zip.src>odftoolkit-${project.version}-src.zip</release.zip.src>
+        <osgi.import.range>[1.0,2)</osgi.import.range>
     </properties>
 
 
@@ -95,7 +96,7 @@
             <dependency>
                 <groupId>net.rootdev</groupId>
                 <artifactId>java-rdfa</artifactId>
-                <version>0.4.2</version>
+                <version>1.0.0-BETA1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>commons-validator</groupId>
