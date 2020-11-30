@@ -96,7 +96,7 @@
             <dependency>
                 <groupId>net.rootdev</groupId>
                 <artifactId>java-rdfa</artifactId>
-                <version>1.0.0-BETA1-SNAPSHOT</version>
+                <version>1.0.0-BETA1</version>
             </dependency>
             <dependency>
                 <groupId>commons-validator</groupId>
