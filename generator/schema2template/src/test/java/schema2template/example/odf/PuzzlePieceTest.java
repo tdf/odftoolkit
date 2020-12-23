@@ -19,7 +19,7 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  *
- * <p>**********************************************************************
+ * <p>*********************************************************************
  */
 package schema2template.example.odf;
 
@@ -66,6 +66,7 @@ public class PuzzlePieceTest {
    * extract PuzzlePieces out of a XML schema
    */
   @Test
+  @Ignore
   public void testMSVExpressionTree() {
     try {
       Expression odf10Root = OdfHelper.loadSchemaODF10();
@@ -222,16 +223,30 @@ public class PuzzlePieceTest {
   @Test
   @Ignore
   public void testExtractPuzzlePiecesWithDuplicates() {
+    int foundElementDuplicates = -1;
+    int foundAttributeDuplicates = -1;
     try {
       PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
           OdfHelper.loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, null);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
-
-      int foundElementDuplicates = allElements_ODF13.size() - (ODF12_ELEMENT_NUMBER + 1);
-      int foundAttributeDuplicates = allAttributes_ODF13.size() - (ODF12_ATTRIBUTE_NUMBER + 1);
-
+      foundElementDuplicates = allElements_ODF13.size() - (ODF13_ELEMENT_NUMBER + 1); // wieso +1??
+      foundAttributeDuplicates = allAttributes_ODF13.size() - (ODF13_ATTRIBUTE_NUMBER + 1);
+      //      System.out.println("1duplicate elements: " + foundElementDuplicates);
+      //      System.out.println("1duplicate attributes: " + foundAttributeDuplicates);
+      //      System.out.println("ELEMENT-START*************\n");
+      //            Iterator elementIter = allElements_ODF13.iterator();
+      //            while (elementIter.hasNext()) {
+      //                System.out.print(elementIter.next() + "\n");
+      //            }
+      //      System.out.println("\nELEMENT-END*************");
+      //      System.out.println("ATTRIBUTE-START*************\n");
+      //            Iterator attrIter = allAttributes_ODF13.iterator();
+      //            while (attrIter.hasNext()) {
+      //                System.out.print(attrIter.next() + "\n");
+      //            }
+      //      System.out.println("\nATTRIBUTE-END*************");
       if (ODF13_ELEMENT_DUPLICATES != foundElementDuplicates) {
         String errorMsg =
             "There is a difference between the expected outcome of duplicates for ODF 1.3 elements.\n"
@@ -252,9 +267,13 @@ public class PuzzlePieceTest {
         LOG.severe(errorMsg);
         Assert.fail(errorMsg);
       }
+      //      System.out.println("2duplicate elements: " + foundElementDuplicates);
+      //      System.out.println("2duplicate attributes: " + foundAttributeDuplicates);
     } catch (Exception ex) {
       Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
       Assert.fail(ex.toString());
+      //      System.out.println("3duplicate elements: " + foundElementDuplicates);
+      //      System.out.println("3duplicate attributes: " + foundAttributeDuplicates);
     }
   }
 

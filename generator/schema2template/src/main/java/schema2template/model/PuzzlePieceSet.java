@@ -92,9 +92,7 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
   }
 
   public boolean equals(Object o) {
-    return (o instanceof PuzzlePieceSet && ((PuzzlePieceSet) o).mDefinitions.equals(mDefinitions))
-        ? true
-        : false;
+    return (o instanceof PuzzlePieceSet && ((PuzzlePieceSet) o).mDefinitions.equals(mDefinitions));
   }
 
   public int hashCode() {
@@ -110,6 +108,7 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
    * Returns a Map of the lost Definitions to their survived counterparts
    */
   Map<PuzzlePiece, PuzzlePiece> uniteDefinitionsWithEqualContent() {
+    //    System.out.println("this.mDefinitions: " + this.mDefinitions.size());
     Map<PuzzlePiece, PuzzlePiece> retval = new HashMap<PuzzlePiece, PuzzlePiece>();
     SortedSet<PuzzlePiece> immutableSet = new TreeSet<PuzzlePiece>(this.mDefinitions);
     for (PuzzlePiece def1 : immutableSet) {

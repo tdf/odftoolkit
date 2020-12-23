@@ -243,66 +243,6 @@ public class $classname extends OdfAttribute {
 #end
 ##
 
-	/**
-	 * @param attrValue The <code>String</code> value of the attribute.
-	 * @throws IllegalArgumentException If the provided attribute value is invalid
-	 */
-	@Override
-	public void setValue(String attrValue) {
-#if ($enum)
-#if ($hasdatatype)
-## enum and datatype
-		// Since we have not only enumValues, but also a DataType, we use String as common base and don't validate.
-		super.setValue(attrValue);
-#else
-## enum and no datatype
-		try {
-			super.setValue(Value.enumValueOf(attrValue).toString());
-		} catch (NullPointerException e) {
-			throw new IllegalArgumentException(e);
-		}
-#end
-#else
-		try {
-			super.setValue(attrValue);
-		} catch (NullPointerException e) {
-			// TODO: validation handling/logging
-			throw new IllegalArgumentException(e);
-		} catch (IllegalArgumentException e) {
-			// TODO: validation handling/logging
-			throw (e);
-		}
-#end
-	}
-
-	/**
-	 * @return Returns the <code>String</code> value of the attribute
-	 */
-	@Override
-	public String getValue() {
-#if ($enum)
-#if ($hasdatatype)
-## enum and datatype
-		// Since we have not only enumValues, but also a DataType, we use String as common base and don't validate.
-		return super.getValue();
-#else
-## enum and no datatype
-		try {
-			return Value.enumValueOf(super.getValue()).toString();
-		} catch (NullPointerException e) {
-			throw new IllegalArgumentException("the value of ${attribute} is not valid");
-		}
-#end
-#else
-		try {
-			return super.getValue();
-		} catch (IllegalArgumentException e) {
-			// TODO: validation handling/logging
-			throw new NumberFormatException("the value of ${attribute} is not valid");
-		}
-#end
-	}
-
 #if ($hasDefaultValue)
 	/**
 	 * Returns the default value of {@odf.attribute ${attribute}}.

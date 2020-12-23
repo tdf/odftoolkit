@@ -181,7 +181,7 @@ public class OdfHelper {
   private static final String PYTHON_OUTPUT_FILES =
       "target" + File.separator + "python-output-files.xml";
 
-  private static String outputRoot = "target";
+  private static String outputRoot = "target" + File.separator + "generated-sources";
   private static final String ODF_REFERENCE_RESOURCE_DIR =
       TEST_INPUT_ROOT_ODF + File.separator + "odf-reference";
 
@@ -192,7 +192,7 @@ public class OdfHelper {
   private static XMLModel mOdf12ManifestSchemaModel;
   private static XMLModel mOdf12SchemaModel;
   private static XMLModel mOdf11SchemaModel;
-  private static OdfModel mOdfModel;
+  private static OdfModel mOdf13Constants;
   private static SourceCodeModel mJavaModelOdf;
 
   public OdfHelper() {}
@@ -234,20 +234,25 @@ public class OdfHelper {
         elementStyleFamiliesMap,
         datatypeValueAndConversionMap);
 
-    //        mOdf12SignatureSchemaModel = new XMLModel(new File(odf12SignatureRngFile));
     mOdf13ManifestSchemaModel = new XMLModel(new File(ODF13_MANIFEST_RNG_FILE));
     mOdf13SchemaModel = new XMLModel(new File(ODF13_RNG_FILE));
+    mOdf13SignatureSchemaModel = new XMLModel(new File(ODF13_SIGNATURE_RNG_FILE));
+
+    mOdf12ManifestSchemaModel = new XMLModel(new File(ODF12_MANIFEST_RNG_FILE));
+    mOdf12SchemaModel = new XMLModel(new File(ODF12_RNG_FILE));
+    mOdf12SignatureSchemaModel = new XMLModel(new File(ODF12_SIGNATURE_RNG_FILE));
+
     //        mOdf11SchemaModel = new XMLModel(new File(odf11RngFile));
     //
-    mOdfModel = new OdfModel(elementStyleFamiliesMap, attributeDefaultMap);
+    mOdf13Constants = new OdfModel(elementStyleFamiliesMap, attributeDefaultMap);
     //        // Needed for the base classes - common attributes are being moved into the base
     // classes
     mJavaModelOdf =
         new SourceCodeModel(
-            mOdf13SchemaModel,
-            mOdf13SignatureSchemaModel,
-            mOdf13ManifestSchemaModel,
-            mOdfModel,
+            mOdf12SchemaModel,
+            mOdf12SignatureSchemaModel,
+            mOdf12ManifestSchemaModel,
+            mOdf13Constants,
             elementToBaseNameMap,
             datatypeValueAndConversionMap);
     LOG.info("Finished initilization..");
@@ -266,14 +271,22 @@ public class OdfHelper {
         PYTHON_OUTPUT_FILES_TEMPLATE,
         PYTHON_OUTPUT_FILES);
 
-    //        // ODF 1.2 Code Generation
-    //        fillTemplates(odfDomResourceDir, mOdf12SchemaModel.mRootExpression,
-    // DOM_OUTPUT_FILES_TEMPLATE, DOM_OUTPUT_FILES);
-    //        fillTemplates(odfPkgResourceDir, mOdf12ManifestSchemaModel.mRootExpression,
-    // PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
-    //        fillTemplates(odfPkgResourceDir, mOdf12SignatureSchemaModel.mRootExpression,
-    // PKG_OUTPUT_FILES_TEMPLATE, PKG_OUTPUT_FILES);
-
+    // ODF 1.3 Code Generation
+    fillTemplates(
+        odfDomResourceDir,
+        mOdf12SchemaModel.mRootExpression,
+        DOM_OUTPUT_FILES_TEMPLATE,
+        DOM_OUTPUT_FILES);
+    fillTemplates(
+        odfPkgResourceDir,
+        mOdf12ManifestSchemaModel.mRootExpression,
+        PKG_OUTPUT_FILES_TEMPLATE,
+        PKG_OUTPUT_FILES);
+    fillTemplates(
+        odfPkgResourceDir,
+        mOdf12SignatureSchemaModel.mRootExpression,
+        PKG_OUTPUT_FILES_TEMPLATE,
+        PKG_OUTPUT_FILES);
   }
 
   private static void fillTemplates(
@@ -348,11 +361,11 @@ public class OdfHelper {
 
   private static VelocityContext getOdfContext(String contextStr, String param) {
     VelocityContext context = new VelocityContext();
-    context.put("signaturemodel", mOdf12SignatureSchemaModel);
-    context.put("manifestmodel", mOdf12ManifestSchemaModel);
-    context.put("model", mOdf12SchemaModel);
-    context.put("oldmodel", mOdf11SchemaModel);
-    context.put("odfmodel", mOdfModel);
+    context.put("signaturemodel", mOdf13SignatureSchemaModel);
+    context.put("manifestmodel", mOdf13ManifestSchemaModel);
+    context.put("model", mOdf13SchemaModel);
+    context.put("oldmodel", mOdf12SchemaModel);
+    context.put("odfmodel", mOdf13Constants);
     context.put("javamodel", mJavaModelOdf);
     context.put("context", contextStr);
     context.put("param", param);

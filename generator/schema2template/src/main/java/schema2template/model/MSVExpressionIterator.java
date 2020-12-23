@@ -51,14 +51,14 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
 
   private static final Logger LOG = Logger.getLogger(MSVExpressionIterator.class.getName());
   private Expression mCurrentExpression; // the expression that will be received by next()
-  public int mCurrentExpressionDepth; // Level of current expression starting with 0
+  // public int mCurrentExpressionDepth; // Level of current expression starting with 0
   private MSVExpressionVisitorChildren mVisitor;
   // list of already visited expressions to avoid endless recursion
   // The stack assists the iteration to go back up (usually done in by recursion)
   // The stack contains the next expression, parent, grandparent, ...
   private Stack<UniqueAncestor> mAncestorsAndCurrent;
   // to prevent enless loops, known Element expression will be remembered and not again reentered
-  // Situation: Element a contains Element b contains Element a, will stop after the second a not
+  // Situation: Element a contains Element b contains Element a, will stop after the second and not
   // continuing with b
   private HashSet<Expression> mKnownElementExpressions;
 
@@ -169,13 +169,13 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
         if (DEBUG) System.out.println(returnValue);
       }
     } else if (expr instanceof ReferenceExp) {
-      returnValue += (" '" + ((ReferenceExp) expr).name + "',");
+      returnValue += (" 'R-" + ((ReferenceExp) expr).name + "',");
       if (DEBUG) System.out.println(returnValue);
     } else if (type == MSVExpressionType.VALUE) {
-      returnValue += (" '" + ((ValueExp) expr).value.toString() + "',");
+      returnValue += (" 'V-" + ((ValueExp) expr).value.toString() + "',");
       if (DEBUG) System.out.println(returnValue);
     } else if (type == MSVExpressionType.DATA) {
-      returnValue += (" '" + ((DataExp) expr).getName().localName + "',");
+      returnValue += (" 'D-" + ((DataExp) expr).getName().localName + "',");
       if (DEBUG) System.out.println(returnValue);
     } else {
       if (DEBUG) System.out.println(returnValue);

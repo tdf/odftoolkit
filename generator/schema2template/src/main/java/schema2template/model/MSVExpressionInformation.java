@@ -146,10 +146,10 @@ public class MSVExpressionInformation {
       Expression childexp = way.get(way.size() - 1);
 
       Boolean newCardinality =
-          new Boolean(false); // Cardinality (the opposite of isSingleton): true=N, false=1
+          Boolean.FALSE; // Cardinality (the opposite of isSingleton): true=N, false=1
       for (Expression step : way) {
         if (step instanceof OneOrMoreExp) {
-          newCardinality = new Boolean(true);
+          newCardinality = Boolean.TRUE;
           break;
         }
       }
@@ -212,7 +212,7 @@ public class MSVExpressionInformation {
           } // Valid case: One has 1, the other N, they don't share a common CHOICE -> Set N as the
           // both defs are not exclusive (1 occurence + N occurences)
           else {
-            multiples.put(childexp, new Boolean(true));
+            multiples.put(childexp, Boolean.TRUE);
           }
         }
 

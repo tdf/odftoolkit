@@ -61,7 +61,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
   static final MSVExpressionVisitorType TYPE_VISITOR = new MSVExpressionVisitorType();
   static final MSVNameClassVisitorList NAME_VISITOR = new MSVNameClassVisitorList();
   static final MSVExpressionVisitorChildren CHILD_VISITOR = new MSVExpressionVisitorChildren();
-  private Expression mExpression;
+  private final Expression mExpression;
   // all multiples of this tagname (contains only this if there are no multiples)
   private PuzzlePieceSet mMultiples = new PuzzlePieceSet();
   // definitions of elements which can have this as children
@@ -165,7 +165,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
     if (b instanceof PuzzlePiece) {
       PuzzlePiece d = (PuzzlePiece) b;
       if (d.mName.equals(mName) && d.mExpression.equals(mExpression)) {
-        return true;
+        return this.contentEquals(d);
       }
     }
     return false;
@@ -420,6 +420,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
    * @param root MSV root Expression
    * @param newElementSet empty Set. Will be filled with Definitions of Type.ELEMENT
    * @param newAttributeSet empty Set. Will be filled with Definitions of Type.ATTRIBUTE
+   * @param schemaFileName file name of the XML grammar file. Used as folder name of GraphML files.
    */
   public static void extractPuzzlePieces(
       Expression root,
@@ -429,12 +430,17 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
     // e.g. the newElementSet is the set to iterate later in the template
     extractTypedPuzzlePieces(root, newElementSet, ElementExp.class);
     extractTypedPuzzlePieces(root, newAttributeSet, AttributeExp.class);
+    System.out.println("newAttributeSet-A: " + newAttributeSet.size());
     configureProperties(newElementSet, newAttributeSet, schemaFileName);
     reduceDatatypes(newAttributeSet);
+    System.out.println("newAttributeSet-B: " + newAttributeSet.size());
     reduceValues(newAttributeSet);
+    System.out.println("newAttributeSet-C: " + newAttributeSet.size());
     reduceAttributes(newElementSet, newAttributeSet);
+    System.out.println("newAttributeSet-D: " + newAttributeSet.size());
     makePuzzlePiecesImmutable(newElementSet);
     makePuzzlePiecesImmutable(newAttributeSet);
+    System.out.println("newAttributeSet-E: " + newAttributeSet.size());
   }
 
   // Extracts all Definitions of Type [ATTRIBUTE, ELEMENT] from MSV tree.
@@ -442,6 +448,8 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
       Expression root, PuzzlePieceSet setToBeFilled, Class<T> superclass) {
     MSVExpressionIterator iter = new MSVExpressionIterator(root, superclass);
     HashMap<String, List<PuzzlePiece>> multipleMap = new HashMap<String, List<PuzzlePiece>>();
+
+    System.out.println("\n####ATTRIBUTE/ELEMENT DEPTH: " + iter.getDepth());
 
     while (iter.hasNext()) {
       Expression exp = iter.next();
@@ -561,6 +569,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
   // Definitions have been assigned to Elements)
   private static void reduceAttributes(PuzzlePieceSet elements, PuzzlePieceSet attributes) {
     Map<PuzzlePiece, PuzzlePiece> lostToSurvived = attributes.uniteDefinitionsWithEqualContent();
+    System.out.println("lostToSurvived.size(): " + lostToSurvived.size());
     for (PuzzlePiece el : elements) {
       PuzzlePieceSet elementAttributes = el.getAttributes();
       PuzzlePieceSet immutable = new PuzzlePieceSet(elementAttributes);
