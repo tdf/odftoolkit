@@ -460,6 +460,7 @@
             <id>codegen</id>
             <build>
                 <plugins>
+<!--                    
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>wagon-maven-plugin</artifactId>
@@ -515,6 +516,7 @@
                             </execution>
                         </executions>
                     </plugin>
+-->        
                     <plugin>
                         <groupId>${project.groupId}</groupId>
                         <artifactId>schema2template-maven-plugin</artifactId>
@@ -526,35 +528,22 @@
                                 <goals>
                                     <goal>codegen</goal>
                                 </goals>
-                                <!-- DOM LAYER CONFIGURATION 
-              domResourceRootPath,
-              pkgResourceRootPath,
-                odf13SchemaFile,
-              odf12SchemaFile,
-                            
-              odf13SignatureSchemaFile,
-              odf12SignatureSchemaFile,
-              odf13ManifestSchemaFile,
-              odf12ManifestSchemaFile,
-              targetRootPath,
-              configFile);
-                                
-                                -->
+                                <!-- DOM LAYER CONFIGURATION -->
                                 <configuration>
-                                    <targetRootPath>${basedir}/src/main/java/</targetRootPath>
-                                    <domResourceRootPath>${basedir}/src/codegen/resources/dom/template</domResourceRootPath>
-                                    <pkgResourceRootPath>${basedir}/src/codegen/resources/pkg/template</pkgResourceRootPath>
-                                    <odf12SchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.2-os-schema.rng</odf12SchemaFile>
-                                    <odf12SignatureSchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.2-os-dsig-schema.rng</odf12SignatureSchemaFile>
-                                    <odf12ManifestSchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.2-os-manifest-schema.rng</odf12ManifestSchemaFile>
-                                    <odf13SchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.3-schema.rng</odf13SchemaFile>
-                                    <odf13SignatureSchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.3-dsig-schema.rng</odf13SignatureSchemaFile>
-                                    <odf13ManifestSchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.3-manifest-schema.rng</odf13ManifestSchemaFile>                                    
+                                    <targetRoot>${basedir}/src/main/java/</targetRoot>
+                                    <domResourceRoot>${basedir}/src/codegen/resources/dom/template</domResourceRoot>
+                                    <pkgResourceRoot>${basedir}/src/codegen/resources/pkg/template</pkgResourceRoot>
+                                    <odf12SchemaFile>../generator/schema2template/src/main/resources/examples/odf/odf-schemas/odf-schemas/OpenDocument-v1.2-os-schema.rng</odf12SchemaFile>
+                                    <odf12SignatureSchemaFile>../generator/schema2template/src/main/resources/examples/odf/odf-schemas/odf-schemas/OpenDocument-v1.2-os-dsig-schema.rng</odf12SignatureSchemaFile>
+                                    <odf12ManifestSchemaFile>../generator/schema2template/src/main/resources/examples/odf/odf-schemas/odf-schemas/OpenDocument-v1.2-os-manifest-schema.rng</odf12ManifestSchemaFile>
+                                    <odf13SchemaFile>../generator/schema2template/src/main/resources/examples/odf/odf-schemas/odf-schemas/OpenDocument-v1.3-schema.rng</odf13SchemaFile>
+                                    <odf13SignatureSchemaFile>../generator/schema2template/src/main/resources/examples/odf/odf-schemas/odf-schemas/OpenDocument-v1.3-dsig-schema.rng</odf13SignatureSchemaFile>
+                                    <odf13ManifestSchemaFile>../generator/schema2template/src/main/resources/examples/odf/odf-schemas/odf-schemas/OpenDocument-v1.3-manifest-schema.rng</odf13ManifestSchemaFile>                                    
                                     <configFile>${basedir}/src/codegen/resources/config.xml</configFile>
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>
+                    </plugin>   
                 </plugins>
             </build>
         </profile>

@@ -212,9 +212,17 @@ public class OdfHelper {
     odfPkgResourceDir = pkgResourceRoot;
     outputRoot = targetRoot;
     mConfigFile = configFile;
+
+    mOdf13ManifestSchemaModel = new XMLModel(new File(odf13ManifestSchemaFile));
+    mOdf13SchemaModel = new XMLModel(new File(odf13SchemaFile));
+    mOdf13SignatureSchemaModel = new XMLModel(new File(odf13SignatureSchemaFile));
+
+    mOdf12ManifestSchemaModel = new XMLModel(new File(odf12ManifestSchemaFile));
+    mOdf12SchemaModel = new XMLModel(new File(odf12SchemaFile));
+    mOdf12SignatureSchemaModel = new XMLModel(new File(odf12SignatureSchemaFile));
   }
 
-  public static void main(String[] args) throws Exception {
+  public void generate() throws Exception {
     LOG.info("Starting code generation:");
     LOG.info("Starting initilization..");
     // Read config.xml 2DO WHAT IS ODFDOM GENERATOR CONFIG FILE
@@ -233,14 +241,6 @@ public class OdfHelper {
         attributeDefaultMap,
         elementStyleFamiliesMap,
         datatypeValueAndConversionMap);
-
-    mOdf13ManifestSchemaModel = new XMLModel(new File(ODF13_MANIFEST_RNG_FILE));
-    mOdf13SchemaModel = new XMLModel(new File(ODF13_RNG_FILE));
-    mOdf13SignatureSchemaModel = new XMLModel(new File(ODF13_SIGNATURE_RNG_FILE));
-
-    mOdf12ManifestSchemaModel = new XMLModel(new File(ODF12_MANIFEST_RNG_FILE));
-    mOdf12SchemaModel = new XMLModel(new File(ODF12_RNG_FILE));
-    mOdf12SignatureSchemaModel = new XMLModel(new File(ODF12_SIGNATURE_RNG_FILE));
 
     //        mOdf11SchemaModel = new XMLModel(new File(odf11RngFile));
     //

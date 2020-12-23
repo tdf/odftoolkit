@@ -176,7 +176,7 @@ public class CodegenMojo extends AbstractMojo {
               odf12ManifestSchemaFile,
               targetRootPath,
               configFile);
-      codeGen.main(null);
+      codeGen.generate();
     } catch (Exception ex) {
       getLog().error("Failed to parse template.");
       getLog().error(ex);
