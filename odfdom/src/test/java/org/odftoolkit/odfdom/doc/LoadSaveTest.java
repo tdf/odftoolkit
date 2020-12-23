@@ -61,11 +61,11 @@ public class LoadSaveTest {
       System.out.println("SOURCE URI2:" + baseURI2);
 
       OdfFileDom odfContent = odfDocument.getContentDom();
-      String odf12 = OfficeVersionAttribute.Value._1_2.toString();
+      String odf13 = OfficeVersionAttribute.Value._1_3.toString();
       OfficeDocumentContentElement content =
           (OfficeDocumentContentElement) odfContent.getDocumentElement();
       String version = content.getOfficeVersionAttribute();
-      Assert.assertFalse(version.equals(odf12));
+      Assert.assertFalse(version.equals(odf13));
 
       NodeList lst = odfContent.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "p");
       Node node = lst.item(0);
