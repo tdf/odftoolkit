@@ -89,62 +89,61 @@ public class OdfHelper {
       1300; // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced
   // (ie. @office:process-content)
 
-  public static final String TEST_INPUT_ROOT_ODF =
-      "target" + File.separator + "classes" + File.separator + "examples" + File.separator + "odf";
+  public static final String RESOURCES_ROOT_ODF = "examples" + File.separator + "odf";
   public static final String ODF10_RNG_FILE =
-      TEST_INPUT_ROOT_ODF
+      RESOURCES_ROOT_ODF
           + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-strict-schema-v1.0-os.rng";
   public static final String ODF11_RNG_FILE =
-      TEST_INPUT_ROOT_ODF
+      RESOURCES_ROOT_ODF
           + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-strict-schema-v1.1.rng";
   public static final String ODF12_RNG_FILE =
-      TEST_INPUT_ROOT_ODF
+      RESOURCES_ROOT_ODF
           + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-v1.2-os-schema.rng";
   public static final String ODF13_RNG_FILE =
-      TEST_INPUT_ROOT_ODF
+      RESOURCES_ROOT_ODF
           + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-v1.3-schema.rng";
 
   public static final String ODF12_SIGNATURE_RNG_FILE =
-      TEST_INPUT_ROOT_ODF
+      RESOURCES_ROOT_ODF
           + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-v1.2-os-dsig-schema.rng";
 
   public static final String ODF13_SIGNATURE_RNG_FILE =
-      TEST_INPUT_ROOT_ODF
+      RESOURCES_ROOT_ODF
           + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-v1.3-dsig-schema.rng";
 
   public static final String ODF12_MANIFEST_RNG_FILE =
-      TEST_INPUT_ROOT_ODF
+      RESOURCES_ROOT_ODF
           + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-v1.2-os-manifest-schema.rng";
 
   public static final String ODF13_MANIFEST_RNG_FILE =
-      TEST_INPUT_ROOT_ODF
+      RESOURCES_ROOT_ODF
           + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-v1.3-manifest-schema.rng";
 
-  public static String mConfigFile = TEST_INPUT_ROOT_ODF + File.separator + "config.xml";
+  public static String mConfigFile = RESOURCES_ROOT_ODF + File.separator + "config.xml";
 
   // Home of test reference output of MSV ODF dump: odf10-msvtree.ref, odf11-msvtree.ref,
   // odf12-msvtree.ref
@@ -157,20 +156,21 @@ public class OdfHelper {
           + File.separator
           + "odf";
 
-  private static final String REFERENCE_OUTPUT_FILES_TEMPLATE = "ref-output-file.vm";
+  private static final String REFERENCE_OUTPUT_FILES_TEMPLATE =
+      RESOURCES_ROOT_ODF + File.separator + "odf-reference" + File.separator + "ref-output-file.vm";
   private static final String REFERENCE_OUTPUT_FILES =
-      TEST_INPUT_ROOT_ODF
+      RESOURCES_ROOT_ODF
           + File.separator
           + "odf-reference"
           + File.separator
           + "reference-output-files.xml";
 
   private static String odfDomResourceDir =
-      TEST_INPUT_ROOT_ODF + File.separator + "odfdom-java" + File.separator + "dom";
+      RESOURCES_ROOT_ODF + File.separator + "odfdom-java" + File.separator + "dom";
   private static String odfPkgResourceDir =
-      TEST_INPUT_ROOT_ODF + File.separator + "odfdom-java" + File.separator + "pkg";
+      RESOURCES_ROOT_ODF + File.separator + "odfdom-java" + File.separator + "pkg";
   private static final String ODF_PYTHON_RESOURCE_DIR =
-      TEST_INPUT_ROOT_ODF + File.separator + "odfdom-python";
+      RESOURCES_ROOT_ODF + File.separator + "odfdom-python";
 
   private static final String DOM_OUTPUT_FILES_TEMPLATE = "dom-output-files.vm";
   private static final String PKG_OUTPUT_FILES_TEMPLATE = "pkg-output-files.vm";
@@ -183,7 +183,7 @@ public class OdfHelper {
 
   private static String outputRoot = "target" + File.separator + "generated-sources";
   private static final String ODF_REFERENCE_RESOURCE_DIR =
-      TEST_INPUT_ROOT_ODF + File.separator + "odf-reference";
+      RESOURCES_ROOT_ODF + File.separator + "odf-reference";
 
   private static XMLModel mOdf13SignatureSchemaModel;
   private static XMLModel mOdf13ManifestSchemaModel;
@@ -208,11 +208,29 @@ public class OdfHelper {
       String odf12ManifestSchemaFile,
       String targetRoot,
       String configFile) {
+    LOG.info("Generation Code Files Root Directory " + targetRoot);
+    LOG.info("Config File " + configFile);
+    LOG.info("Dom Template Files Directory " + domResourceRoot);
+    LOG.info("ODF1.3 Schema File " + odf13SchemaFile);
+    LOG.info("ODF1.2 Schema File " + odf12SchemaFile);
+    LOG.info("Pkg Template Files Directory " + pkgResourceRoot);
+    LOG.info("ODF1.3 Signature Schema File " + odf13SignatureSchemaFile);
+    LOG.info("ODF1.2 Signature Schema File " + odf12SignatureSchemaFile);
+    LOG.info("ODF1.3 Manifest Schema File " + odf13ManifestSchemaFile);
+    LOG.info("ODF1.2 Manifest Schema File " + odf12ManifestSchemaFile);
+
     odfDomResourceDir = domResourceRoot;
     odfPkgResourceDir = pkgResourceRoot;
     outputRoot = targetRoot;
     mConfigFile = configFile;
-
+    //// From ClassLoader, all paths are "absolute" already - there's no context
+    //// from which they could be relative. Therefore you don't need a leading slash.
+    // InputStream in = this.getClass().getClassLoader()
+    //                                .getResourceAsStream("SomeTextFile.txt");
+    //// From Class, the path is relative to the package of the class unless
+    //// you include a leading slash, so if you don't want to use the current
+    //// package, include a slash like this:
+    // InputStream in = this.getClass().getResourceAsStream("/SomeTextFile.txt");
     mOdf13ManifestSchemaModel = new XMLModel(new File(odf13ManifestSchemaFile));
     mOdf13SchemaModel = new XMLModel(new File(odf13SchemaFile));
     mOdf13SignatureSchemaModel = new XMLModel(new File(odf13SignatureSchemaFile));
@@ -224,6 +242,7 @@ public class OdfHelper {
 
   public void generate() throws Exception {
     LOG.info("Starting code generation:");
+    LOG.info("user.dir: " + System.getProperty("user.dir"));
     LOG.info("Starting initilization..");
     // Read config.xml 2DO WHAT IS ODFDOM GENERATOR CONFIG FILE
     // Manual added Java specific info - Base class for inheritance

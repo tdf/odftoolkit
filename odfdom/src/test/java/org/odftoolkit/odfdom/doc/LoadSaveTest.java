@@ -29,8 +29,6 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
-import org.odftoolkit.odfdom.dom.element.office.OfficeDocumentContentElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Attr;
@@ -61,11 +59,11 @@ public class LoadSaveTest {
       System.out.println("SOURCE URI2:" + baseURI2);
 
       OdfFileDom odfContent = odfDocument.getContentDom();
-      String odf13 = OfficeVersionAttribute.Value._1_3.toString();
-      OfficeDocumentContentElement content =
-          (OfficeDocumentContentElement) odfContent.getDocumentElement();
-      String version = content.getOfficeVersionAttribute();
-      Assert.assertFalse(version.equals(odf13));
+      //      String odf13 = OfficeVersionAttribute.Value._1_3.toString();
+      //      OfficeDocumentContentElement content =
+      //          (OfficeDocumentContentElement) odfContent.getDocumentElement();
+      //      String version = content.getOfficeVersionAttribute();
+      //      Assert.assertFalse(version.equals(odf13));
 
       NodeList lst = odfContent.getElementsByTagNameNS(OdfDocumentNamespace.TEXT.getUri(), "p");
       Node node = lst.item(0);

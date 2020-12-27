@@ -34,7 +34,6 @@ public class ExampleGenerationTest {
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test
-  @Ignore
   public void testAllExampleGenerations() {
     try {
       // user.dir ==> generator/schema2template
