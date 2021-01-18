@@ -37,7 +37,7 @@ import org.w3c.dom.NodeList;
 public class TextNavigation extends Navigation {
 
   private String mMatchedElementName = "text:p,text:h";
-  private String mPatternText;
+  private Pattern mPattern;
   private OdfTextDocument mTextDocument;
   private TextSelection mCurrentSelectedItem;
   private String mCurrentText;
@@ -51,10 +51,19 @@ public class TextNavigation extends Navigation {
    * @param doc the navigation scope
    */
   public TextNavigation(String pattern, OdfTextDocument doc) {
-    this.mPatternText = pattern;
-    mTextDocument = doc;
-    mCurrentSelectedItem = null;
-    mbFinishFindInHeaderFooter = false;
+    this(Pattern.compile(pattern), doc);
+  }
+
+    /**
+     * Construct TextNavigation with matched condition and navigation scope
+     * @param pattern the Pattern object to search with
+     * @param doc the navigation scope
+     */
+  public TextNavigation(Pattern pattern, OdfTextDocument doc){
+      this.mPattern = pattern;
+      mTextDocument = doc;
+      mCurrentSelectedItem = null;
+      mbFinishFindInHeaderFooter = false;
   }
 
   // the matched text might exist in header/footer
@@ -70,8 +79,7 @@ public class TextNavigation extends Navigation {
       String content = textProcessor.getText(containerElement);
 
       int nextIndex = -1;
-      Pattern pattern = Pattern.compile(mPatternText);
-      Matcher matcher = pattern.matcher(content);
+      Matcher matcher = mPattern.matcher(content);
       // start from the end index of the selected item
       if (matcher.find(index + selected.getText().length())) {
         // here just consider \n\r\t occupy one char
@@ -148,8 +156,7 @@ public class TextNavigation extends Navigation {
     String content = textProcessor.getText(containerElement);
 
     int nextIndex = -1;
-    Pattern pattern = Pattern.compile(mPatternText);
-    Matcher matcher = pattern.matcher(content);
+    Matcher matcher = mPattern.matcher(content);
     // start from the end index of the selected item
     if (matcher.find(index + selected.getText().length())) {
       // here just consider \n\r\t occupy one char
@@ -203,9 +210,8 @@ public class TextNavigation extends Navigation {
         OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
         String content = textProcessor.getText(element);
 
-        Pattern pattern = Pattern.compile(mPatternText);
-        Matcher matcher = pattern.matcher(content);
-        while (matcher.find()) {
+        Matcher matcher = mPattern.matcher(content);
+        if (matcher.find()) {
           // here just consider \n\r\t occupy one char
           mCurrentIndex = matcher.start();
           int eIndex = matcher.end();
