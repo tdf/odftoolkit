@@ -36,9 +36,9 @@ import org.w3c.dom.NodeList;
  */
 public class TextNavigation extends Navigation {
 
-  private String mMatchedElementName = "text:p,text:h";
-  private Pattern mPattern;
-  private OdfTextDocument mTextDocument;
+  private static final String mMatchedElementName = "text:p,text:h";
+  private final Pattern mPattern;
+  private final OdfTextDocument mTextDocument;
   private TextSelection mCurrentSelectedItem;
   private String mCurrentText;
   private int mCurrentIndex;
@@ -73,20 +73,7 @@ public class TextNavigation extends Navigation {
     OdfElement element = null;
 
     if (selected != null) {
-      OdfElement containerElement = selected.getContainerElement();
-      int index = selected.getIndex();
-      OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
-      String content = textProcessor.getText(containerElement);
-
-      int nextIndex = -1;
-      Matcher matcher = mPattern.matcher(content);
-      // start from the end index of the selected item
-      if (matcher.find(index + selected.getText().length())) {
-        // here just consider \n\r\t occupy one char
-        nextIndex = matcher.start();
-        int eIndex = matcher.end();
-        mCurrentText = content.substring(nextIndex, eIndex);
-      }
+      int nextIndex = setCurrentTextAndGetIndex(selected);
       if (nextIndex != -1) {
         TextSelection item =
             new TextSelection(mCurrentText, selected.getContainerElement(), nextIndex);
@@ -151,9 +138,26 @@ public class TextNavigation extends Navigation {
     }
 
     OdfElement containerElement = selected.getContainerElement();
+    int nextIndex = setCurrentTextAndGetIndex(selected);
+    if (nextIndex != -1) {
+      TextSelection item =
+          new TextSelection(mCurrentText, containerElement, nextIndex);
+      return item;
+    } else {
+      OdfElement element = (OdfElement) getNextMatchElement(containerElement);
+      if (element != null) {
+        TextSelection item = new TextSelection(mCurrentText, element, mCurrentIndex);
+        return item;
+      } else {
+        return null;
+      }
+    }
+  }
+
+  private int setCurrentTextAndGetIndex(TextSelection selected){
     int index = selected.getIndex();
     OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
-    String content = textProcessor.getText(containerElement);
+    String content = textProcessor.getText(selected.getContainerElement());
 
     int nextIndex = -1;
     Matcher matcher = mPattern.matcher(content);
@@ -164,19 +168,7 @@ public class TextNavigation extends Navigation {
       int eIndex = matcher.end();
       mCurrentText = content.substring(nextIndex, eIndex);
     }
-    if (nextIndex != -1) {
-      TextSelection item =
-          new TextSelection(mCurrentText, selected.getContainerElement(), nextIndex);
-      return item;
-    } else {
-      OdfElement element = (OdfElement) getNextMatchElement((Node) containerElement);
-      if (element != null) {
-        TextSelection item = new TextSelection(mCurrentText, element, mCurrentIndex);
-        return item;
-      } else {
-        return null;
-      }
-    }
+    return nextIndex;
   }
 
   /* (non-Javadoc)
@@ -206,7 +198,7 @@ public class TextNavigation extends Navigation {
   @Override
   public boolean match(Node element) {
     if (element instanceof OdfElement) {
-      if (mMatchedElementName.indexOf(element.getNodeName()) != -1) {
+      if (mMatchedElementName.contains(element.getNodeName())) {
         OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
         String content = textProcessor.getText(element);
 
