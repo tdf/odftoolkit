@@ -20,7 +20,10 @@ package org.odftoolkit.odfdom.incubator.search;
 
 import java.util.Hashtable;
 import java.util.Vector;
+
+import org.odftoolkit.odfdom.incubator.doc.text.OdfWhitespaceProcessor;
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.w3c.dom.Node;
 
 /**
  * Abstract class Selection describe one of the matched results The selection can be recognized by
@@ -220,16 +223,51 @@ public abstract class Selection {
      * @param offset the offset
      * @param positionIndex the mIndex of a certain position
      */
-    public static synchronized void refresh(
-        OdfElement containerElement, int offset, int positionIndex) {
-      if (repository.containsKey(containerElement)) {
-        Vector<Selection> selections = repository.get(containerElement);
-        for (int i = 0; i < selections.size(); i++) {
-          if (selections.get(i).getIndex() >= positionIndex) {
-            selections.get(i).refresh(offset);
-          }
+    public synchronized static void refresh(OdfElement containerElement, int offset, int positionIndex) {
+        refreshParent(containerElement, offset);
+        if (repository.containsKey(containerElement)) {
+            Vector<Selection> selections = repository.get(containerElement);
+            for (Selection selection : selections) {
+                if (selection.getIndex() >= positionIndex) {
+                    selection.refresh(offset);
+                }
+            }
         }
-      }
+    }
+
+    private static void refreshParent(OdfElement containerElement, int offset) {
+        OdfElement parent = getOdfParent(containerElement);
+        while (parent != null) {
+            if (repository.containsKey(parent)) {
+                Vector<Selection> selections = repository.get(parent);
+                for (Selection selection : selections) {
+                    if (isAfter(selection, containerElement)) {
+                        selection.refresh(offset);
+                    }
+                }
+            }
+            parent = getOdfParent(parent);
+        }
+    }
+
+    private static OdfElement getOdfParent(OdfElement element) {
+        Node parent = element.getParentNode();
+        while (parent != null && !(parent instanceof OdfElement) && parent != parent.getParentNode()) {
+            parent = parent.getParentNode();
+        }
+        return parent instanceof OdfElement ? (OdfElement) parent : null;
+    }
+
+    private static boolean isAfter(Selection selection, OdfElement reference) {
+        //Assumes that reference is a child of selection.getElement
+        final OdfWhitespaceProcessor processor = new OdfWhitespaceProcessor();
+        final String text = processor.getText(reference);
+        final int idx = processor.getText(selection.getElement()).indexOf(text);
+        if (idx == -1 || idx != processor.getText(selection.getElement()).lastIndexOf(text)) {
+            //TODO obviously don't do that, need to work with Text nodes perhaps
+            throw new IllegalStateException();
+        }
+        return selection.getIndex() >= idx + text.length();
     }
 
     private SelectionManager() {}
