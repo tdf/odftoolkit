@@ -18,6 +18,9 @@
  */
 package org.odftoolkit.odfdom.incubator.search;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -36,7 +39,7 @@ import org.w3c.dom.NodeList;
  */
 public class TextNavigation extends Navigation {
 
-  private static final String mMatchedElementName = "text:p,text:h";
+  private static final Set<String> mMatchedElementNames = new HashSet<>(Arrays.asList("text:p", "text:h"));
   private final Pattern mPattern;
   private final OdfTextDocument mTextDocument;
   private TextSelection mCurrentSelectedItem;
@@ -198,7 +201,7 @@ public class TextNavigation extends Navigation {
   @Override
   public boolean match(Node element) {
     if (element instanceof OdfElement) {
-      if (mMatchedElementName.contains(element.getNodeName())) {
+      if (mMatchedElementNames.contains(element.getNodeName())) {
         OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
         String content = textProcessor.getText(element);
 
@@ -214,4 +217,9 @@ public class TextNavigation extends Navigation {
     }
     return false;
   }
+
+    @Override
+    public boolean isMatchingNode(Node node) {
+        return mMatchedElementNames.contains(node.getNodeName());
+    }
 }

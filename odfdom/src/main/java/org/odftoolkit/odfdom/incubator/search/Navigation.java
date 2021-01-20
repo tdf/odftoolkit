@@ -20,6 +20,8 @@ package org.odftoolkit.odfdom.incubator.search;
 
 import org.w3c.dom.Node;
 
+import java.util.Set;
+
 /**
  * Abstract class Navigation used to navigate the document and find the matched element by the user
  * defined conditions
@@ -52,6 +54,13 @@ public abstract class Navigation {
   public abstract boolean match(Node element);
 
   /**
+   * Checks if the given node can be matched by the navigation
+   * @param node the node
+   * @return true if the node is of interest for the navigation
+   */
+  public abstract boolean isMatchingNode(Node node);
+
+  /**
    * get the next matched element in a whole dom tree
    *
    * @param startpoint navigate from the startpoint
@@ -63,6 +72,9 @@ public abstract class Navigation {
 
     Node currentpoint = startpoint;
     while ((matchedNode == null) && (currentpoint != null)) {
+      if (isMatchingNode(currentpoint) && currentpoint != startpoint){
+          //TODO do something here
+      }
       Node sibling = currentpoint.getNextSibling();
       if ((sibling != null)
           && (sibling.getNodeType() == Node.TEXT_NODE || sibling.getNodeType() == Node.ELEMENT_NODE)

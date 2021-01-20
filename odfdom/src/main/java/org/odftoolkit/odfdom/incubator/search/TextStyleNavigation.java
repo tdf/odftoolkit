@@ -155,7 +155,12 @@ public class TextStyleNavigation extends Navigation {
     return match;
   }
 
-  private void getIndex(NodeList nodes, Node element) {
+    @Override
+    public boolean isMatchingNode(final Node node) {
+        return node instanceof OdfStylableElement;
+    }
+
+    private void getIndex(NodeList nodes, Node element) {
     for (int i = 0; i < nodes.getLength(); i++) {
       Node node = nodes.item(i);
       if (node == element) {
