@@ -72,30 +72,39 @@ public abstract class Navigation {
 
     Node currentpoint = startpoint;
     while ((matchedNode == null) && (currentpoint != null)) {
-      if (isMatchingNode(currentpoint) && currentpoint != startpoint){
-          //TODO do something here
+      if (isMatchingNode(currentpoint) && currentpoint != startpoint && parentMatches(currentpoint, startpoint)){
+          matchedNode = currentpoint;
+      } else {
+          Node sibling = currentpoint.getNextSibling();
+          if ((sibling != null)
+              && (sibling.getNodeType() == Node.TEXT_NODE || sibling.getNodeType() == Node.ELEMENT_NODE)
+              && (match(sibling))) {
+              matchedNode = sibling;
+          }
+          while ((sibling != null) && (matchedNode == null)) {
+              if ((sibling.getNodeType() == Node.TEXT_NODE
+                  || sibling.getNodeType() == Node.ELEMENT_NODE)) {
+                  matchedNode = traverseTree(sibling);
+              }
+              sibling = sibling.getNextSibling();
+              if (sibling != null && match(sibling)) {
+                  matchedNode = sibling;
+              }
+          }
+          currentpoint = currentpoint.getParentNode();
       }
-      Node sibling = currentpoint.getNextSibling();
-      if ((sibling != null)
-          && (sibling.getNodeType() == Node.TEXT_NODE || sibling.getNodeType() == Node.ELEMENT_NODE)
-          && (match(sibling))) {
-        matchedNode = sibling;
-      }
-      while ((sibling != null) && (matchedNode == null)) {
-        if ((sibling.getNodeType() == Node.TEXT_NODE
-            || sibling.getNodeType() == Node.ELEMENT_NODE)) {
-          matchedNode = traverseTree(sibling);
-        }
-        sibling = sibling.getNextSibling();
-        if (sibling != null && match(sibling)) {
-          matchedNode = sibling;
-        }
-      }
-      currentpoint = currentpoint.getParentNode();
     }
 
     return matchedNode;
   }
+
+  /**
+   * Checks that a parent node matches given the current node
+   * @param parent The parent node
+   * @param current The current node
+   * @return true if the parent matches, false otherwise
+   */
+  protected abstract boolean parentMatches(final Node parent, final Node current);
 
   /**
    * get the next matched element in a sub tree

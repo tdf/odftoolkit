@@ -157,7 +157,13 @@ public class TextStyleNavigation extends Navigation {
 
     @Override
     public boolean isMatchingNode(final Node node) {
-        return node instanceof OdfStylableElement;
+      return node instanceof OdfStylableElement;
+    }
+
+    @Override
+    protected boolean parentMatches(final Node parent, final Node current) {
+      //TODO?
+      return false;
     }
 
     private void getIndex(NodeList nodes, Node element) {

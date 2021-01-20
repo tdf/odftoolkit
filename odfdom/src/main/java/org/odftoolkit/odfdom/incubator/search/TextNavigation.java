@@ -218,8 +218,34 @@ public class TextNavigation extends Navigation {
     return false;
   }
 
-    @Override
-    public boolean isMatchingNode(Node node) {
-        return mMatchedElementNames.contains(node.getNodeName());
-    }
+  @Override
+  public boolean isMatchingNode(Node node) {
+      return mMatchedElementNames.contains(node.getNodeName());
+  }
+
+  @Override
+  protected boolean parentMatches(final Node parent, final Node current) {
+      if (parent instanceof OdfElement) {
+          if (mMatchedElementNames.contains(parent.getNodeName())) {
+              OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
+              String content = textProcessor.getText(parent);
+              String childContent = textProcessor.getText(current);
+              int idx = content.indexOf(childContent);
+              if (idx == -1 || content.lastIndexOf(childContent) != idx){
+                  //TODO
+                  throw new IllegalStateException();
+              }
+
+              Matcher matcher = mPattern.matcher(content);
+              if (matcher.find(idx + childContent.length())) {
+                  // here just consider \n\r\t occupy one char
+                  mCurrentIndex = matcher.start();
+                  int eIndex = matcher.end();
+                  mCurrentText = content.substring(mCurrentIndex, eIndex);
+                  return true;
+              }
+          }
+      }
+      return false;
+  }
 }
