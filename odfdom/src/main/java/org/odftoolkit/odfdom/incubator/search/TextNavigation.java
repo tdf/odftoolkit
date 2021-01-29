@@ -54,16 +54,17 @@ public class TextNavigation extends Navigation {
     this(Pattern.compile(pattern), doc);
   }
 
-    /**
-     * Construct TextNavigation with matched condition and navigation scope
-     * @param pattern the Pattern object to search with
-     * @param doc the navigation scope
-     */
-  public TextNavigation(Pattern pattern, OdfTextDocument doc){
-      this.mPattern = pattern;
-      mTextDocument = doc;
-      mCurrentSelectedItem = null;
-      mbFinishFindInHeaderFooter = false;
+  /**
+   * Construct TextNavigation with matched condition and navigation scope
+   *
+   * @param pattern the Pattern object to search with
+   * @param doc the navigation scope
+   */
+  public TextNavigation(Pattern pattern, OdfTextDocument doc) {
+    this.mPattern = pattern;
+    mTextDocument = doc;
+    mCurrentSelectedItem = null;
+    mbFinishFindInHeaderFooter = false;
   }
 
   // the matched text might exist in header/footer
@@ -140,8 +141,7 @@ public class TextNavigation extends Navigation {
     OdfElement containerElement = selected.getContainerElement();
     int nextIndex = setCurrentTextAndGetIndex(selected);
     if (nextIndex != -1) {
-      TextSelection item =
-          new TextSelection(mCurrentText, containerElement, nextIndex);
+      TextSelection item = new TextSelection(mCurrentText, containerElement, nextIndex);
       return item;
     } else {
       OdfElement element = (OdfElement) getNextMatchElement(containerElement);
@@ -154,7 +154,7 @@ public class TextNavigation extends Navigation {
     }
   }
 
-  private int setCurrentTextAndGetIndex(TextSelection selected){
+  private int setCurrentTextAndGetIndex(TextSelection selected) {
     int index = selected.getIndex();
     OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
     String content = textProcessor.getText(selected.getContainerElement());
