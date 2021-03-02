@@ -36,7 +36,7 @@ by specifying it in an ant task, like:
     <title>Schema2Template Overview</title>
 </head>
 <body> 
-<p>The schema2template project's objective is to provide an API for easily filling user templates from arbitrary XML schematas.</p>
+<p>The schema2template project's goal is to provide an API for easily filling user templates from arbitrary XML schematas.</p>
             
 <h2>Introduction</h2>
 
@@ -44,8 +44,7 @@ by specifying it in an ant task, like:
 you can produce one source code file for each element defined in schema file. Or maybe you want to produce one single text or HTML
 based overview of the schema.</p>
 
-<p>Since this project is based on the Sun Multi Schema Validator, it should be able to process multiple schema formats. However up to now it has only been
-tested with RelaxNG.</p>
+<p>Since this project is based on the - former Sun - Multi Schema Validator, it should be able to process multiple schema formats. However up to now it has only being used with RelaxNG.</p>
 
 <p>Several examples are delivered together with this project:</p>
 <ol>
@@ -92,7 +91,7 @@ property and write the output to the given "path".
 The "context" property (and as seen later - the optional "param" property as well) is used in templates which process only one element or attribute - 
 to provide them with the name of this element or attribute. 
 In the above example the template for the generation of a Java class is such a template, while the template to produce the whole 
-OdfHtmlSpecification.html is a template whith a global context, i.e. it processes the whole Schema.</p>
+OdfHtmlSpecification.html is a template with a global context, i.e. it processes the whole Schema.</p>
 
 <h2>Schema2Template specific template help</h2>
 
@@ -115,7 +114,7 @@ context of output-files.vm the optional context Objects "context" and "param" ar
 <h3>PuzzlePiece Class</h3>
 
 <p>The PuzzlePiece class provides some sort of "piece of a puzzle", containing the definition of an Odf element, attribute, datatype or
-constant attribute value. This class contains methods for quiering the relationship between definitions, e.g. to get all child elements,
+constant attribute value. This class contains methods for querying the relationship between definitions, e.g. to get all child elements,
 attributes, parent elements, datatypes, values, etc... PuzzlePieces are
 sorted by their name (which has the form "ns:localname").</p>
 
