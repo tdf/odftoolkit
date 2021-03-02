@@ -27,6 +27,7 @@ import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import schema2template.example.odf.OdfHelper;
 
@@ -34,6 +35,7 @@ public class ExampleGenerationTest {
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test
+  @Ignore
   public void testAllExampleGenerations() {
     try {
       // user.dir ==> generator/schema2template
@@ -51,9 +53,7 @@ public class ExampleGenerationTest {
               + "resources"
               + File.separator
               + "config.xml";
-      // String targetRootPath =  ".." + File.separator + ".." + File.separator + "odfdom" +
-      // File.separator + "src" + File.separator + "main" + File.separator + "java" +
-      // File.separator;
+
       String targetRootPath =
           ".."
               + File.separator
@@ -185,9 +185,8 @@ public class ExampleGenerationTest {
               + "odf-schemas"
               + File.separator
               + "OpenDocument-v1.2-os-manifest-schema.rng";
-
       Logger.getLogger(ExampleGenerationTest.class.getName())
-          .fine("Generation Code Files Root Directory " + targetRootPath);
+          .fine("Generation Code2 Files Root Directory is " + targetRootPath);
       Logger.getLogger(ExampleGenerationTest.class.getName()).fine("Config File " + configFile);
       Logger.getLogger(ExampleGenerationTest.class.getName())
           .fine("Dom Template Files Directory " + domResourceRootPath);

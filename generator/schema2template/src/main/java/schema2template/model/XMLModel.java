@@ -103,23 +103,31 @@ public class XMLModel {
   /**
    * Load and parse a Schema from File.
    *
-   * @param Schema file (RelaxNG or W3C schema)
+   * @param rngFile Schema file (RelaxNG or W3C schema)
    * @return MSV Expression Tree (more specific: The tree's MSV root expression)
-   * @throws Exception
    */
   public static Expression loadSchema(File rngFile) {
+    return loadSchema(rngFile.getAbsolutePath());
+  }
+
+  /**
+   * Load and parse a Schema from File.
+   *
+   * @param rngFilePath Schema file (RelaxNG or W3C schema)
+   * @return MSV Expression Tree (more specific: The tree's MSV root expression)
+   */
+  public static Expression loadSchema(String rngFilePath) {
     SAXParserFactory factory = SAXParserFactory.newInstance();
     factory.setNamespaceAware(true);
     // Parsing the Schema with MSV
     // 4-DEBUG: DebugController ignoreController = new DebugController(true, false);
     com.sun.msv.reader.util.IgnoreController ignoreController =
         new com.sun.msv.reader.util.IgnoreController();
-    String absolutePath = rngFile.getAbsolutePath();
     Expression root = null;
-    if (absolutePath.endsWith(".rng")) {
-      root = RELAXNGReader.parse(absolutePath, factory, ignoreController).getTopLevel();
-    } else if (absolutePath.endsWith(".xsd")) {
-      root = XMLSchemaReader.parse(absolutePath, factory, ignoreController).getTopLevel();
+    if (rngFilePath.endsWith(".rng")) {
+      root = RELAXNGReader.parse(rngFilePath, factory, ignoreController).getTopLevel();
+    } else if (rngFilePath.endsWith(".xsd")) {
+      root = XMLSchemaReader.parse(rngFilePath, factory, ignoreController).getTopLevel();
     } else {
       throw new RuntimeException("Reader not chosen for given schema suffix!");
     }

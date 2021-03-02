@@ -154,7 +154,7 @@ public class CodegenMojo extends AbstractMojo {
         getLog().error("Please set pkg templates root patch.");
         throw new MojoFailureException("Please set templates root patch.");
       }
-      getLog().debug("Generation Code Files Root Directory " + targetRootPath);
+      getLog().debug("Generation Code Files Root Directory: " + targetRootPath);
       getLog().debug("Config File " + configFile);
       getLog().debug("Dom Template Files Directory " + domResourceRootPath);
       getLog().debug("ODF1.3 Schema File " + odf13SchemaFile);

@@ -26,6 +26,7 @@ package schema2template.example.odf;
 import com.sun.msv.grammar.Expression;
 import java.io.File;
 import java.io.FileWriter;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.RuntimeConstants;
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import schema2template.OutputFileListEntry;
 import schema2template.OutputFileListHandler;
 import schema2template.model.XMLModel;
@@ -56,9 +59,10 @@ public class OdfHelper {
    * "table:table-template" NOTE: Ignoring the '*' there can be 525 elements parsed, but with fixed
    * schema it should be 535.
    */
-  public static final int ODF11_ELEMENT_NUMBER =
-      525; // ToDo: 535 - by search/Replace using RNGSchema and tools, prior exchange <name> to
-  // element or attribute declaration
+
+  // ToDo: 535 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or
+  // attribute declaration
+  public static final int ODF11_ELEMENT_NUMBER = 525;
 
   public static final int ODF12_ELEMENT_NUMBER = 598;
 
@@ -77,71 +81,45 @@ public class OdfHelper {
    * <p>NOTE: Ignoring the '*' there can be 1162 elements parsed, but with fixed schema it should be
    * 1169.
    */
-  public static final int ODF11_ATTRIBUTE_NUMBER =
-      1162; // ToDo: 1169 - by search/Replace using RNGSchema and tools, prior exchange <name> to
-  // element or attribute declaration
 
-  public static final int ODF12_ATTRIBUTE_NUMBER =
-      1300; // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced
-  // (ie. @office:process-content)
+  // ToDo: 1169 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or
+  // attribute declaration
+  public static final int ODF11_ATTRIBUTE_NUMBER = 1162;
 
-  public static final int ODF13_ATTRIBUTE_NUMBER =
-      1300; // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced
-  // (ie. @office:process-content)
+  // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie.
+  // @office:process-content)
+  public static final int ODF12_ATTRIBUTE_NUMBER = 1300;
 
-  public static final String RESOURCES_ROOT_ODF = "examples" + File.separator + "odf";
+  // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie.
+  // @office:process-content)
+  public static final int ODF13_ATTRIBUTE_NUMBER = 1300;
+
+  public static final String RESOURCES_ROOT_ODF =
+      "examples" + File.separator + "odf" + File.separator;
   public static final String ODF10_RNG_FILE =
       RESOURCES_ROOT_ODF
-          + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-strict-schema-v1.0-os.rng";
   public static final String ODF11_RNG_FILE =
-      RESOURCES_ROOT_ODF
-          + File.separator
-          + "odf-schemas"
-          + File.separator
-          + "OpenDocument-strict-schema-v1.1.rng";
+      RESOURCES_ROOT_ODF + "odf-schemas" + File.separator + "OpenDocument-strict-schema-v1.1.rng";
+
   public static final String ODF12_RNG_FILE =
-      RESOURCES_ROOT_ODF
-          + File.separator
-          + "odf-schemas"
-          + File.separator
-          + "OpenDocument-v1.2-os-schema.rng";
-  public static final String ODF13_RNG_FILE =
-      RESOURCES_ROOT_ODF
-          + File.separator
-          + "odf-schemas"
-          + File.separator
-          + "OpenDocument-v1.3-schema.rng";
-
-  public static final String ODF12_SIGNATURE_RNG_FILE =
-      RESOURCES_ROOT_ODF
-          + File.separator
-          + "odf-schemas"
-          + File.separator
-          + "OpenDocument-v1.2-os-dsig-schema.rng";
-
-  public static final String ODF13_SIGNATURE_RNG_FILE =
-      RESOURCES_ROOT_ODF
-          + File.separator
-          + "odf-schemas"
-          + File.separator
-          + "OpenDocument-v1.3-dsig-schema.rng";
-
+      RESOURCES_ROOT_ODF + "odf-schemas" + File.separator + "OpenDocument-v1.2-os-schema.rng";
   public static final String ODF12_MANIFEST_RNG_FILE =
       RESOURCES_ROOT_ODF
-          + File.separator
           + "odf-schemas"
           + File.separator
           + "OpenDocument-v1.2-os-manifest-schema.rng";
+  public static final String ODF12_SIGNATURE_RNG_FILE =
+      RESOURCES_ROOT_ODF + "odf-schemas" + File.separator + "OpenDocument-v1.2-os-dsig-schema.rng";
 
+  public static final String ODF13_RNG_FILE =
+      RESOURCES_ROOT_ODF + "odf-schemas" + File.separator + "OpenDocument-v1.3-schema.rng";
   public static final String ODF13_MANIFEST_RNG_FILE =
-      RESOURCES_ROOT_ODF
-          + File.separator
-          + "odf-schemas"
-          + File.separator
-          + "OpenDocument-v1.3-manifest-schema.rng";
+      RESOURCES_ROOT_ODF + "odf-schemas" + File.separator + "OpenDocument-v1.3-manifest-schema.rng";
+  public static final String ODF13_SIGNATURE_RNG_FILE =
+      RESOURCES_ROOT_ODF + "odf-schemas" + File.separator + "OpenDocument-v1.3-dsig-schema.rng";
 
   public static String mConfigFile = RESOURCES_ROOT_ODF + File.separator + "config.xml";
 
@@ -154,36 +132,36 @@ public class OdfHelper {
           + File.separator
           + "examples"
           + File.separator
-          + "odf";
+          + "odf"
+          + File.separator;
 
-  private static final String REFERENCE_OUTPUT_FILES_TEMPLATE =
-      RESOURCES_ROOT_ODF + File.separator + "odf-reference" + File.separator + "ref-output-file.vm";
-  private static final String REFERENCE_OUTPUT_FILES =
-      RESOURCES_ROOT_ODF
-          + File.separator
-          + "odf-reference"
-          + File.separator
-          + "reference-output-files.xml";
+  /**
+   * ALL TEMPLATES must be ONLY file name as load path is given to Velocity during initialization..
+   */
+  private static final String REFERENCE_OUTPUT_FILES_TEMPLATE = "ref-output-file.vm";
 
-  private static String odfDomResourceDir =
-      RESOURCES_ROOT_ODF + File.separator + "odfdom-java" + File.separator + "dom";
-  private static String odfPkgResourceDir =
-      RESOURCES_ROOT_ODF + File.separator + "odfdom-java" + File.separator + "pkg";
-  private static final String ODF_PYTHON_RESOURCE_DIR =
-      RESOURCES_ROOT_ODF + File.separator + "odfdom-python";
+  private static final String REFERENCE_OUTPUT_FILES = "reference-output-files.xml";
+  private static final String ODF_REFERENCE_RESOURCE_DIR =
+      RESOURCES_ROOT_ODF + "odf-reference" + File.separator;
 
   private static final String DOM_OUTPUT_FILES_TEMPLATE = "dom-output-files.vm";
-  private static final String PKG_OUTPUT_FILES_TEMPLATE = "pkg-output-files.vm";
-  private static final String PYTHON_OUTPUT_FILES_TEMPLATE = "dom-output-files.vm";
-
   private static final String DOM_OUTPUT_FILES = "target" + File.separator + "dom-output-files.xml";
+  private static String odfDomResourceDir =
+      RESOURCES_ROOT_ODF + "odfdom-java" + File.separator + "dom" + File.separator;
+
+  private static final String PKG_OUTPUT_FILES_TEMPLATE = "pkg-output-files.vm";
   private static final String PKG_OUTPUT_FILES = "target" + File.separator + "pkg-output-files.xml";
+  private static String odfPkgResourceDir =
+      RESOURCES_ROOT_ODF + "odfdom-java" + File.separator + "pkg" + File.separator;
+
+  private static final String PYTHON_OUTPUT_FILES_TEMPLATE = "dom-output-files.vm";
+  private static final String PYTHON_RESOURCE_DIR =
+      RESOURCES_ROOT_ODF + "odfdom-python" + File.separator;
   private static final String PYTHON_OUTPUT_FILES =
       "target" + File.separator + "python-output-files.xml";
 
-  private static String outputRoot = "target" + File.separator + "generated-sources";
-  private static final String ODF_REFERENCE_RESOURCE_DIR =
-      RESOURCES_ROOT_ODF + File.separator + "odf-reference";
+  private static String outputRoot =
+      "target" + File.separator + "generated-sources" + File.separator;
 
   private static XMLModel mOdf13SignatureSchemaModel;
   private static XMLModel mOdf13ManifestSchemaModel;
@@ -191,7 +169,6 @@ public class OdfHelper {
   private static XMLModel mOdf12SignatureSchemaModel;
   private static XMLModel mOdf12ManifestSchemaModel;
   private static XMLModel mOdf12SchemaModel;
-  private static XMLModel mOdf11SchemaModel;
   private static OdfModel mOdf13Constants;
   private static SourceCodeModel mJavaModelOdf;
 
@@ -208,6 +185,7 @@ public class OdfHelper {
       String odf12ManifestSchemaFile,
       String targetRoot,
       String configFile) {
+    LOG.info("UserDir " + System.getProperty("user.dir"));
     LOG.info("Generation Code Files Root Directory " + targetRoot);
     LOG.info("Config File " + configFile);
     LOG.info("Dom Template Files Directory " + domResourceRoot);
@@ -261,8 +239,6 @@ public class OdfHelper {
         elementStyleFamiliesMap,
         datatypeValueAndConversionMap);
 
-    //        mOdf11SchemaModel = new XMLModel(new File(odf11RngFile));
-    //
     mOdf13Constants = new OdfModel(elementStyleFamiliesMap, attributeDefaultMap);
     //        // Needed for the base classes - common attributes are being moved into the base
     // classes
@@ -274,18 +250,18 @@ public class OdfHelper {
             mOdf13Constants,
             elementToBaseNameMap,
             datatypeValueAndConversionMap);
-    LOG.info("Finished initilization..");
+    LOG.info("Finished initialization..");
     // HTML Reference for ODF 1.3 (yet without BNF nor images)
     fillTemplates(
         ODF_REFERENCE_RESOURCE_DIR,
         mOdf13SchemaModel.mRootExpression,
         REFERENCE_OUTPUT_FILES_TEMPLATE,
-        REFERENCE_OUTPUT_FILES);
+        ODF_REFERENCE_RESOURCE_DIR + REFERENCE_OUTPUT_FILES);
 
     // ODF 1.3 Python (The generated Python source is from a former colleague and might not work any
     // longer..)
     fillTemplates(
-        ODF_PYTHON_RESOURCE_DIR,
+        PYTHON_RESOURCE_DIR,
         mOdf13SchemaModel.mRootExpression,
         PYTHON_OUTPUT_FILES_TEMPLATE,
         PYTHON_OUTPUT_FILES);
@@ -311,10 +287,18 @@ public class OdfHelper {
   private static void fillTemplates(
       String sourceDir, Expression root, String outputRuleTemplate, String outputRuleFile)
       throws Exception {
-    // intialising template engine (ie. Velocity)
+
+    // initializing template engine (ie. Velocity)
     Properties props = new Properties();
-    props.setProperty("file.resource.loader.path", sourceDir);
+    System.out.println("***** sourceDir + File.separator + outputRuleFile: " + outputRuleFile);
+    //    props.setProperty(
+    //        "file.resource.loader.path", System.getProperty("user.dir") + File.separator +
+    // sourceDir);
+    //
+    // schema2template\target\classes\examples\odf\odf-reference
     VelocityEngine ve = new VelocityEngine(props);
+    ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+    ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
     ve.init();
 
     // Create output-files.xml
@@ -399,7 +383,7 @@ public class OdfHelper {
    * @throws Exception
    */
   public static Expression loadSchemaODF10() throws Exception {
-    return XMLModel.loadSchema(new File(ODF10_RNG_FILE));
+    return XMLModel.loadSchema(getAbsolutePathFromClassloader(ODF10_RNG_FILE));
   }
 
   /**
@@ -410,7 +394,7 @@ public class OdfHelper {
    * @throws Exception
    */
   public static Expression loadSchemaODF11() throws Exception {
-    return XMLModel.loadSchema(new File(ODF11_RNG_FILE));
+    return XMLModel.loadSchema(getAbsolutePathFromClassloader(ODF11_RNG_FILE));
   }
 
   /**
@@ -421,7 +405,7 @@ public class OdfHelper {
    * @throws Exception
    */
   public static Expression loadSchemaODF12() throws Exception {
-    return XMLModel.loadSchema(new File(ODF12_RNG_FILE));
+    return XMLModel.loadSchema(getAbsolutePathFromClassloader(ODF12_RNG_FILE));
   }
 
   /**
@@ -432,7 +416,17 @@ public class OdfHelper {
    * @throws Exception
    */
   public static Expression loadSchemaODF13() throws Exception {
-    return XMLModel.loadSchema(new File(ODF13_RNG_FILE));
+    return XMLModel.loadSchema(getAbsolutePathFromClassloader(ODF13_RNG_FILE));
+  }
+
+  private static String getAbsolutePathFromClassloader(String resourcePath) {
+    String path = null;
+    try {
+      path = OdfHelper.class.getClassLoader().getResource(resourcePath).toURI().getPath();
+    } catch (URISyntaxException ex) {
+      Logger.getLogger(OdfHelper.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return path;
   }
 
   private static String generateFilename(String rawName) {
