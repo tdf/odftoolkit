@@ -41,6 +41,7 @@ import java.util.Vector;
 public class Main {
 
   private static final String VERSION = "1.1.4";
+  private static final String SCM = JarManifest.getSCMRevision();
 
   /** Creates a new instance of Main */
   public Main() {}
@@ -152,6 +153,7 @@ public class Main {
     if (bPrintVersion) {
       System.out.print("odfvalidator v");
       System.out.println(VERSION);
+      System.out.println(SCM);
       System.exit(0);
     }
 
