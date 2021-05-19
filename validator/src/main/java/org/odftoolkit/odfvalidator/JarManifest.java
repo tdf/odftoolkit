@@ -46,6 +46,7 @@ public class JarManifest {
   private static final String INNER_JAR_MANIFEST_PATH = "META-INF/MANIFEST.MF";
   private static String ODFVALIDATOR_NAME;
   private static String ODFVALIDATOR_VERSION;
+  private static String ODFVALIDATOR_SCM;
   private static String ODFVALIDATOR_WEBSITE;
   private static String ODFVALIDATOR_BUILD_DATE;
   private static String ODFVALIDATOR_SUPPORTED_ODF_VERSION;
@@ -56,6 +57,7 @@ public class JarManifest {
       Attributes attr = manifest.getEntries().get("ODFVALIDATOR");
       ODFVALIDATOR_NAME = attr.getValue("ODFVALIDATOR-Name");
       ODFVALIDATOR_VERSION = attr.getValue("ODFVALIDATOR-Version");
+      ODFVALIDATOR_SCM = attr.getValue("ODFVALIDATOR-SCM");
       ODFVALIDATOR_WEBSITE = attr.getValue("ODFVALIDATOR-Website");
       ODFVALIDATOR_BUILD_DATE = attr.getValue("ODFVALIDATOR-Built-Date");
       ODFVALIDATOR_SUPPORTED_ODF_VERSION = attr.getValue("ODFVALIDATOR-Supported-Odf-Version");
@@ -71,9 +73,15 @@ public class JarManifest {
   private static InputStream getManifestAsStream() {
     String versionRef =
         JarManifest.class.getClassLoader().getResource(CURRENT_CLASS_RESOURCE_PATH).toString();
-    String manifestRef =
-        versionRef.substring(0, versionRef.lastIndexOf(CURRENT_CLASS_RESOURCE_PATH))
-            + INNER_JAR_MANIFEST_PATH;
+    String rootRef = versionRef.substring(0, versionRef.lastIndexOf(CURRENT_CLASS_RESOURCE_PATH));
+    // 1. in war file, manifest is in top-level META-INF but classes in subdir
+    // 2. somehow the URL is wrong, it's a file url to a directory named after
+    //    the .war file but without .war extension - fix it to look like the
+    //    one from .jar file
+    if (rootRef.endsWith("/WEB-INF/classes/")) {
+      rootRef = "jar:" + rootRef.substring(0, rootRef.lastIndexOf("/WEB-INF/classes/")) + ".war!/";
+    }
+    String manifestRef = rootRef + INNER_JAR_MANIFEST_PATH;
     URL manifestURL = null;
     InputStream in = null;
     try {
@@ -167,6 +175,11 @@ public class JarManifest {
    */
   public static String getVersion() {
     return ODFVALIDATOR_VERSION;
+  }
+
+  /** @return the git commit id */
+  public static String getSCMRevision() {
+    return ODFVALIDATOR_SCM;
   }
 
   /**
