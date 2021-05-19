@@ -24,6 +24,7 @@
 		 org.apache.commons.fileupload.FileItemIterator,
 		 org.apache.commons.fileupload.FileItemStream,
 		 org.apache.commons.fileupload.util.Streams,
+		 org.odftoolkit.odfvalidator.JarManifest,
 		 org.odftoolkit.odfvalidator.ODFValidator,
 		 org.odftoolkit.odfvalidator.Logger,
 		 org.odftoolkit.odfvalidator.Configuration,
@@ -189,6 +190,14 @@ if(ServletFileUpload.isMultipartContent(request)) {
 			alt="To reset this formular press this button." -->		
 		<input type="reset"  value="Reset"  />
 	</p>
+<p>Version info:
+<%
+    out.println(JarManifest.getLibraryName());
+    out.println(JarManifest.getVersion());
+    out.println(JarManifest.getSCMRevision());
+    out.println(JarManifest.getBuildDate());
+%>
+</p>
 </form>
 <%
 }

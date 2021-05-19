@@ -42,6 +42,7 @@ public class Main {
 
   // Versions of ODFDOM and ODF Validator are equal
   private static final String VERSION = JarManifest.getVersion();
+  private static final String SCM = JarManifest.getSCMRevision();
 
   /** Creates a new instance of Main */
   public Main() {}
@@ -152,6 +153,7 @@ public class Main {
     if (bPrintVersion) {
       System.out.print("odfvalidator v");
       System.out.println(VERSION);
+      System.out.println(SCM);
       System.exit(0);
     }
 

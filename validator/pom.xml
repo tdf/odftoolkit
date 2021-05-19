@@ -92,6 +92,25 @@
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>4.0.4</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -115,6 +134,7 @@
                                 <manifestEntries>
                                     <ODFVALIDATOR-Name>odfvalidator</ODFVALIDATOR-Name>
                                     <ODFVALIDATOR-Version>${project.version}</ODFVALIDATOR-Version>
+                                    <ODFVALIDATOR-SCM>${git.commit.id}</ODFVALIDATOR-SCM>
                                     <ODFVALIDATOR-Website>${project.url}</ODFVALIDATOR-Website>
                                     <ODFVALIDATOR-Built-Date>${build.timestamp}</ODFVALIDATOR-Built-Date>
                                     <ODFVALIDATOR-Supported-Odf-Version>1.2</ODFVALIDATOR-Supported-Odf-Version>
@@ -195,6 +215,7 @@
                                 <manifestEntries>
                                     <ODFVALIDATOR-Name>odfvalidator</ODFVALIDATOR-Name>
                                     <ODFVALIDATOR-Version>${project.version}</ODFVALIDATOR-Version>
+                                    <ODFVALIDATOR-SCM>${git.commit.id}</ODFVALIDATOR-SCM>
                                     <ODFVALIDATOR-Website>${project.url}</ODFVALIDATOR-Website>
                                     <ODFVALIDATOR-Built-Date>${build.timestamp}</ODFVALIDATOR-Built-Date>
                                     <ODFVALIDATOR-Supported-Odf-Version>1.2</ODFVALIDATOR-Supported-Odf-Version>
