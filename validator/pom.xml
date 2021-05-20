@@ -131,8 +131,8 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.2</version>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
                 <configuration>
                     <archive>
                         <index>true</index>
@@ -141,13 +141,13 @@
                         </manifestEntries>
                         <manifestSections>
                             <manifestSection>
-                                <name>odfvalidator</name>
+                                <name>ODFVALIDATOR</name>
                                 <manifestEntries>
-                                    <ODFDOM-Name>ODFDOM Validator</ODFDOM-Name>
-                                    <ODFDOM-Version>${project.version}</ODFDOM-Version>
-                                    <ODFDOM-Website>${project.url}</ODFDOM-Website>
-                                    <ODFDOM-Built-Date>${build.timestamp}</ODFDOM-Built-Date>
-                                    <ODFDOM-Supported-Odf-Version>1.2</ODFDOM-Supported-Odf-Version>
+                                    <ODFVALIDATOR-Name>odfvalidator</ODFVALIDATOR-Name>
+                                    <ODFVALIDATOR-Version>${project.version}</ODFVALIDATOR-Version>
+                                    <ODFVALIDATOR-Website>${project.url}</ODFVALIDATOR-Website>
+                                    <ODFVALIDATOR-Built-Date>${build.timestamp}</ODFVALIDATOR-Built-Date>
+                                    <ODFVALIDATOR-Supported-Odf-Version>1.2</ODFVALIDATOR-Supported-Odf-Version>
                                 </manifestEntries>
                             </manifestSection>
                         </manifestSections>
@@ -193,6 +193,18 @@
                             <version>${project.version}</version>
                             <Main-Class>org.odftoolkit.odfvalidator.Main</Main-Class>
                         </manifestEntries>
+                        <manifestSections>
+                            <manifestSection>
+                                <name>ODFVALIDATOR</name>
+                                <manifestEntries>
+                                    <ODFVALIDATOR-Name>odfvalidator</ODFVALIDATOR-Name>
+                                    <ODFVALIDATOR-Version>${project.version}</ODFVALIDATOR-Version>
+                                    <ODFVALIDATOR-Website>${project.url}</ODFVALIDATOR-Website>
+                                    <ODFVALIDATOR-Built-Date>${build.timestamp}</ODFVALIDATOR-Built-Date>
+                                    <ODFVALIDATOR-Supported-Odf-Version>1.2</ODFVALIDATOR-Supported-Odf-Version>
+                                </manifestEntries>
+                            </manifestSection>
+                        </manifestSections>
                     </archive>
                     <descriptors>
                         <descriptor>src/main/assembly/src.xml</descriptor>
