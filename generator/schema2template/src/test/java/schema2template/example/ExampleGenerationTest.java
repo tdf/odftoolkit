@@ -186,7 +186,7 @@ public class ExampleGenerationTest {
               + File.separator
               + "OpenDocument-v1.2-os-manifest-schema.rng";
       Logger.getLogger(ExampleGenerationTest.class.getName())
-          .fine("Generation Code2 Files Root Directory is " + targetRootPath);
+          .fine("Generation Code Files Root Directory is " + targetRootPath);
       Logger.getLogger(ExampleGenerationTest.class.getName()).fine("Config File " + configFile);
       Logger.getLogger(ExampleGenerationTest.class.getName())
           .fine("Dom Template Files Directory " + domResourceRootPath);

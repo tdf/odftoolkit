@@ -36,7 +36,7 @@ import org.xml.sax.helpers.DefaultHandler;
 /**
  * If a template should be used multiple times (e.g. for every element of the schema), For every
  * file we create a line will be created. This class parses this list of the output files to be
- * created.</code>
+ * created.
  */
 public class OutputFileListHandler extends DefaultHandler {
 
@@ -117,7 +117,7 @@ public class OutputFileListHandler extends DefaultHandler {
 
   public static List<OutputFileListEntry> readFileListFile(File flf) throws Exception {
     SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-    List<OutputFileListEntry> retval = new ArrayList<OutputFileListEntry>();
+    List<OutputFileListEntry> retval = new ArrayList<>();
     parser.parse(flf, new OutputFileListHandler(retval));
     return retval;
   }

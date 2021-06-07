@@ -62,7 +62,7 @@ import schema2template.example.odf.PathPrinter;
 public class MSVExpressionInformation {
 
   /*
-   * For each Named Expression (i.e. of Type Element or Attribute) we build a path
+   * For each Named Expression (i.e. of the type "Element" or "Attribute") we build a path
    *    thisNamedExpression -> Expression subEx -> Expression subsubEx -> ... -> childNamedExpression
    * All Expressions (thisNamedExpression, childNamedExpression and all in between) can be members of
    * multiple paths. Therefore we create a Map Expression->List<path>.

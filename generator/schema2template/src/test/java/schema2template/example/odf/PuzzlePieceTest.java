@@ -44,10 +44,30 @@ import schema2template.model.PuzzlePieceSet;
 public class PuzzlePieceTest {
 
   private static final Logger LOG = Logger.getLogger(PuzzlePieceTest.class.getName());
-  private static final String OUTPUT_DUMP_ODF10 = "target" + File.separator + "odf10-msvtree.dump";
-  private static final String OUTPUT_DUMP_ODF11 = "target" + File.separator + "odf11-msvtree.dump";
-  private static final String OUTPUT_DUMP_ODF12 = "target" + File.separator + "odf12-msvtree.dump";
-  private static final String OUTPUT_DUMP_ODF13 = "target" + File.separator + "odf13-msvtree.dump";
+  private static final String OUTPUT_DUMP_ODF10 =
+      System.getProperty("user.dir")
+          + File.separator
+          + "target"
+          + File.separator
+          + "odf10-msvtree.dump";
+  private static final String OUTPUT_DUMP_ODF11 =
+      System.getProperty("user.dir")
+          + File.separator
+          + "target"
+          + File.separator
+          + "odf11-msvtree.dump";
+  private static final String OUTPUT_DUMP_ODF12 =
+      System.getProperty("user.dir")
+          + File.separator
+          + "target"
+          + File.separator
+          + "odf12-msvtree.dump";
+  private static final String OUTPUT_DUMP_ODF13 =
+      System.getProperty("user.dir")
+          + File.separator
+          + "target"
+          + File.separator
+          + "odf13-msvtree.dump";
   private static final String OUTPUT_REF_ODF10 =
       TEST_REFERENCE_DIR + File.separator + "odf10-msvtree.ref";
   private static final String OUTPUT_REF_ODF11 =
@@ -66,7 +86,6 @@ public class PuzzlePieceTest {
    * extract PuzzlePieces out of a XML schema
    */
   @Test
-  @Ignore
   public void testMSVExpressionTree() {
     try {
       Expression odf10Root = OdfHelper.loadSchemaODF10();

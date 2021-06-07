@@ -169,13 +169,13 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
         if (DEBUG) System.out.println(returnValue);
       }
     } else if (expr instanceof ReferenceExp) {
-      returnValue += (" 'R-" + ((ReferenceExp) expr).name + "',");
+      returnValue += (" '" + ((ReferenceExp) expr).name + "',");
       if (DEBUG) System.out.println(returnValue);
     } else if (type == MSVExpressionType.VALUE) {
-      returnValue += (" 'V-" + ((ValueExp) expr).value.toString() + "',");
+      returnValue += (" '" + ((ValueExp) expr).value.toString() + "',");
       if (DEBUG) System.out.println(returnValue);
     } else if (type == MSVExpressionType.DATA) {
-      returnValue += (" 'D-" + ((DataExp) expr).getName().localName + "',");
+      returnValue += (" '" + ((DataExp) expr).getName().localName + "',");
       if (DEBUG) System.out.println(returnValue);
     } else {
       if (DEBUG) System.out.println(returnValue);
