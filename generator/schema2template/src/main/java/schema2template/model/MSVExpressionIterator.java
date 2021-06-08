@@ -206,10 +206,10 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
           Expression nextExpCandidate = children.get(0);
           // DO NOT expand elements which occur more than one time in the ancestors hierarchy (i.e.
           // since we compute the last element: Do not expand it, if it also occurs before)
+          mAncestorsAndCurrent.push(new UniqueAncestor(nextExpCandidate, 0));
           if (isNoKnownElement(nextExpCandidate)) {
             // GO DOWN - Proceed with first child
             nextExpression = nextExpCandidate;
-            mAncestorsAndCurrent.push(new UniqueAncestor(nextExpression, 0));
           }
         }
       }
@@ -230,10 +230,10 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
           Expression nextExpCandidate = siblings.get(nextSiblingIndex);
           // DO NOT expand elements which occur more than one time in the ancestors hierarchy (i.e.
           // since we compute the last element: Do not expand it, if it also occurs before)
+          mAncestorsAndCurrent.push(new UniqueAncestor(nextExpCandidate, nextSiblingIndex));
           if (isNoKnownElement(nextExpCandidate)) {
             // GO RIGHT - Add next sibling to the stack
             nextExpression = nextExpCandidate;
-            mAncestorsAndCurrent.push(new UniqueAncestor(nextExpression, nextSiblingIndex));
           }
         }
       }
