@@ -62,11 +62,11 @@ public class OdfHelper {
 
   // ToDo: 535 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or
   // attribute declaration
-  public static final int ODF11_ELEMENT_NUMBER = 525;
+  public static final int ODF11_ELEMENT_NUMBER = 526;
 
-  public static final int ODF12_ELEMENT_NUMBER = 598;
+  public static final int ODF12_ELEMENT_NUMBER = 599;
 
-  public static final int ODF13_ELEMENT_NUMBER = 598;
+  public static final int ODF13_ELEMENT_NUMBER = 606;
   /**
    * Expresses the amount of attributes in ODF 1.1. There are some issues in the schema that have to
    * be fixed before the full number can be returned by MSV: Following references are never used,
@@ -84,15 +84,15 @@ public class OdfHelper {
 
   // ToDo: 1169 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or
   // attribute declaration
-  public static final int ODF11_ATTRIBUTE_NUMBER = 1162;
+  public static final int ODF11_ATTRIBUTE_NUMBER = 1163;
 
   // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie.
   // @office:process-content)
-  public static final int ODF12_ATTRIBUTE_NUMBER = 1300;
+  public static final int ODF12_ATTRIBUTE_NUMBER = 1301;
 
   // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie.
   // @office:process-content)
-  public static final int ODF13_ATTRIBUTE_NUMBER = 1300;
+  public static final int ODF13_ATTRIBUTE_NUMBER = 1317;
 
   public static final String RESOURCES_ROOT_ODF =
       "examples" + File.separator + "odf" + File.separator;

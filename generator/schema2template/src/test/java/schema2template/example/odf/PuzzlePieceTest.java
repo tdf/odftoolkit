@@ -35,7 +35,6 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import schema2template.model.MSVExpressionIterator;
 import schema2template.model.PuzzlePiece;
@@ -77,7 +76,7 @@ public class PuzzlePieceTest {
   private static final String OUTPUT_REF_ODF13 =
       TEST_REFERENCE_DIR + File.separator + "odf13-msvtree.ref";
   private static final int ODF13_ELEMENT_DUPLICATES = 7;
-  private static final int ODF13_ATTRIBUTE_DUPLICATES = 134;
+  private static final int ODF13_ATTRIBUTE_DUPLICATES = 163;
 
   /**
    * Test: Use the MSV
@@ -196,7 +195,7 @@ public class PuzzlePieceTest {
    * extract PuzzlePieces out of a XML schema
    */
   @Test
-  @Ignore // due to issue https://issues.apache.org/jira/browse/ODFTOOLKIT-180
+  // due to issue https://issues.apache.org/jira/browse/ODFTOOLKIT-180
   public void testExtractPuzzlePieces() {
     try {
       PuzzlePieceSet allElements_ODF11 = new PuzzlePieceSet();
@@ -204,27 +203,24 @@ public class PuzzlePieceTest {
       PuzzlePiece.extractPuzzlePieces(
           OdfHelper.loadSchemaODF11(), allElements_ODF11, allAttributes_ODF11, null);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
-      checkFoundNumber(allElements_ODF11.withoutMultiples(), ODF11_ELEMENT_NUMBER + 1, "element");
-      checkFoundNumber(
-          allAttributes_ODF11.withoutMultiples(), ODF11_ATTRIBUTE_NUMBER + 1, "attribute");
+      checkFoundNumber(allElements_ODF11.withoutMultiples(), ODF11_ELEMENT_NUMBER, "element");
+      checkFoundNumber(allAttributes_ODF11.withoutMultiples(), ODF11_ATTRIBUTE_NUMBER, "attribute");
 
       PuzzlePieceSet allElements_ODF12 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF12 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
           OdfHelper.loadSchemaODF12(), allElements_ODF12, allAttributes_ODF12, null);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
-      checkFoundNumber(allElements_ODF12.withoutMultiples(), ODF12_ELEMENT_NUMBER + 1, "element");
-      checkFoundNumber(
-          allAttributes_ODF12.withoutMultiples(), ODF12_ATTRIBUTE_NUMBER + 1, "attribute");
+      checkFoundNumber(allElements_ODF12.withoutMultiples(), ODF12_ELEMENT_NUMBER, "element");
+      checkFoundNumber(allAttributes_ODF12.withoutMultiples(), ODF12_ATTRIBUTE_NUMBER, "attribute");
 
       PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
           OdfHelper.loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, null);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
-      checkFoundNumber(allElements_ODF13.withoutMultiples(), ODF13_ELEMENT_NUMBER + 1, "element");
-      checkFoundNumber(
-          allAttributes_ODF13.withoutMultiples(), ODF13_ATTRIBUTE_NUMBER + 1, "attribute");
+      checkFoundNumber(allElements_ODF13.withoutMultiples(), ODF13_ELEMENT_NUMBER, "element");
+      checkFoundNumber(allAttributes_ODF13.withoutMultiples(), ODF13_ATTRIBUTE_NUMBER, "attribute");
 
     } catch (Exception ex) {
       Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -240,7 +236,6 @@ public class PuzzlePieceTest {
    * extract PuzzlePieces out of a XML schema
    */
   @Test
-  @Ignore
   public void testExtractPuzzlePiecesWithDuplicates() {
     int foundElementDuplicates = -1;
     int foundAttributeDuplicates = -1;
@@ -250,8 +245,8 @@ public class PuzzlePieceTest {
       PuzzlePiece.extractPuzzlePieces(
           OdfHelper.loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, null);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
-      foundElementDuplicates = allElements_ODF13.size() - (ODF13_ELEMENT_NUMBER + 1); // wieso +1??
-      foundAttributeDuplicates = allAttributes_ODF13.size() - (ODF13_ATTRIBUTE_NUMBER + 1);
+      foundElementDuplicates = allElements_ODF13.size() - ODF13_ELEMENT_NUMBER;
+      foundAttributeDuplicates = allAttributes_ODF13.size() - ODF13_ATTRIBUTE_NUMBER;
       //      System.out.println("1duplicate elements: " + foundElementDuplicates);
       //      System.out.println("1duplicate attributes: " + foundAttributeDuplicates);
       //      System.out.println("ELEMENT-START*************\n");
@@ -278,7 +273,7 @@ public class PuzzlePieceTest {
       }
       if (ODF13_ATTRIBUTE_DUPLICATES != foundAttributeDuplicates) {
         String errorMsg =
-            "There is a difference between the expected outcome of duplicates for ODF 1.3 elements.\n"
+            "There is a difference between the expected outcome of duplicates for ODF 1.3 attributes.\n"
                 + "Expected: '"
                 + ODF13_ATTRIBUTE_DUPLICATES
                 + "'\tfound:'"
