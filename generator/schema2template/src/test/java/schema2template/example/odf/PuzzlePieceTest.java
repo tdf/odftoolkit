@@ -35,7 +35,6 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import schema2template.model.MSVExpressionIterator;
 import schema2template.model.PuzzlePiece;
@@ -54,7 +53,7 @@ public class PuzzlePieceTest {
   private static final String OUTPUT_REF_ODF12 =
       TEST_REFERENCE_DIR + File.separator + "odf12-msvtree.ref";
   private static final int ODF12_ELEMENT_DUPLICATES = 7;
-  private static final int ODF12_ATTRIBUTE_DUPLICATES = 134;
+  private static final int ODF12_ATTRIBUTE_DUPLICATES = 116;
 
   /**
    * Test: Use the MSV
@@ -155,7 +154,6 @@ public class PuzzlePieceTest {
    * extract PuzzlePieces out of a XML schema
    */
   @Test
-  @Ignore // due to issue https://issues.apache.org/jira/browse/ODFTOOLKIT-180
   public void testExtractPuzzlePieces() {
     try {
       PuzzlePieceSet allElements_ODF11 = new PuzzlePieceSet();
@@ -189,7 +187,6 @@ public class PuzzlePieceTest {
    * extract PuzzlePieces out of a XML schema
    */
   @Test
-  @Ignore
   public void testExtractPuzzlePiecesWithDuplicates() {
     try {
       PuzzlePieceSet allElements_ODF12 = new PuzzlePieceSet();
