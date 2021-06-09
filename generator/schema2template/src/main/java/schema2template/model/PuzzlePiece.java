@@ -192,7 +192,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
     if (retval != 0) {
       return retval;
     }
-    return hashCode() - o.hashCode();
+    return Integer.compare(hashCode(), o.hashCode());
   }
 
   /*
