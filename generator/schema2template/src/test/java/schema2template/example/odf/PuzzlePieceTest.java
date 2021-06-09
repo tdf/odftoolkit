@@ -201,7 +201,10 @@ public class PuzzlePieceTest {
       PuzzlePieceSet allElements_ODF11 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF11 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          OdfHelper.loadSchemaODF11(), allElements_ODF11, allAttributes_ODF11, null);
+          OdfHelper.loadSchemaODF11(),
+          allElements_ODF11,
+          allAttributes_ODF11,
+          OdfHelper.ODF11_RNG_FILE);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
       checkFoundNumber(allElements_ODF11.withoutMultiples(), ODF11_ELEMENT_NUMBER, "element");
       checkFoundNumber(allAttributes_ODF11.withoutMultiples(), ODF11_ATTRIBUTE_NUMBER, "attribute");
@@ -209,7 +212,10 @@ public class PuzzlePieceTest {
       PuzzlePieceSet allElements_ODF12 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF12 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          OdfHelper.loadSchemaODF12(), allElements_ODF12, allAttributes_ODF12, null);
+          OdfHelper.loadSchemaODF12(),
+          allElements_ODF12,
+          allAttributes_ODF12,
+          OdfHelper.ODF12_RNG_FILE);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
       checkFoundNumber(allElements_ODF12.withoutMultiples(), ODF12_ELEMENT_NUMBER, "element");
       checkFoundNumber(allAttributes_ODF12.withoutMultiples(), ODF12_ATTRIBUTE_NUMBER, "attribute");
@@ -217,7 +223,10 @@ public class PuzzlePieceTest {
       PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          OdfHelper.loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, null);
+          OdfHelper.loadSchemaODF13(),
+          allElements_ODF13,
+          allAttributes_ODF13,
+          OdfHelper.ODF13_RNG_FILE);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
       checkFoundNumber(allElements_ODF13.withoutMultiples(), ODF13_ELEMENT_NUMBER, "element");
       checkFoundNumber(allAttributes_ODF13.withoutMultiples(), ODF13_ATTRIBUTE_NUMBER, "attribute");
@@ -243,7 +252,24 @@ public class PuzzlePieceTest {
       PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          OdfHelper.loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, null);
+          OdfHelper.loadSchemaODF13(),
+          allElements_ODF13,
+          allAttributes_ODF13,
+          OdfHelper.ODF13_RNG_FILE);
+      allElements_ODF13 = new PuzzlePieceSet();
+      allAttributes_ODF13 = new PuzzlePieceSet();
+      PuzzlePiece.extractPuzzlePieces(
+          OdfHelper.loadSchemaODF13(),
+          allElements_ODF13,
+          allAttributes_ODF13,
+          OdfHelper.ODF13_RNG_FILE);
+      allElements_ODF13 = new PuzzlePieceSet();
+      allAttributes_ODF13 = new PuzzlePieceSet();
+      PuzzlePiece.extractPuzzlePieces(
+          OdfHelper.loadSchemaODF13(),
+          allElements_ODF13,
+          allAttributes_ODF13,
+          OdfHelper.ODF13_RNG_FILE);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
       foundElementDuplicates = allElements_ODF13.size() - ODF13_ELEMENT_NUMBER;
       foundAttributeDuplicates = allAttributes_ODF13.size() - ODF13_ATTRIBUTE_NUMBER;

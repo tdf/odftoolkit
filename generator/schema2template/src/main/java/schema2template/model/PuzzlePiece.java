@@ -38,6 +38,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import schema2template.example.odf.OdfHelper;
 
 /**
  * One of the following RelaxNG definitions of an Element, Attribute, Value or Datatype.
@@ -431,13 +432,45 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
     extractTypedPuzzlePieces(root, newElementSet, ElementExp.class);
     extractTypedPuzzlePieces(root, newAttributeSet, AttributeExp.class);
     System.out.println("newAttributeSet-A: " + newAttributeSet.size());
+    /* original compareTo
+    assert(!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1628);
+    assert(!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1822);
+    assert(!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1837);
+    */
+    assert (!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1627);
+    assert (!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1820);
+    assert (!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1836);
     configureProperties(newElementSet, newAttributeSet, schemaFileName);
     reduceDatatypes(newAttributeSet);
     System.out.println("newAttributeSet-B: " + newAttributeSet.size());
+    /*
+    assert(!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1628);
+    assert(!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1822);
+    assert(!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1837);
+    */
+    assert (!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1627);
+    assert (!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1820);
+    assert (!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1836);
     reduceValues(newAttributeSet);
     System.out.println("newAttributeSet-C: " + newAttributeSet.size());
+    /*
+    assert(!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1628);
+    assert(!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1822);
+    assert(!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1837);
+    */
+    assert (!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1627);
+    assert (!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1820);
+    assert (!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1836);
     reduceAttributes(newElementSet, newAttributeSet);
     System.out.println("newAttributeSet-D: " + newAttributeSet.size());
+    /*
+    assert(!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1313);
+    assert(!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1461);
+    assert(!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1471);
+    */
+    assert (!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1270);
+    assert (!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1417);
+    assert (!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1434);
     makePuzzlePiecesImmutable(newElementSet);
     makePuzzlePiecesImmutable(newAttributeSet);
     System.out.println("newAttributeSet-E: " + newAttributeSet.size());
