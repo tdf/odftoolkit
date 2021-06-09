@@ -76,7 +76,7 @@ public class PuzzlePieceTest {
   private static final String OUTPUT_REF_ODF13 =
       TEST_REFERENCE_DIR + File.separator + "odf13-msvtree.ref";
   private static final int ODF13_ELEMENT_DUPLICATES = 7;
-  private static final int ODF13_ATTRIBUTE_DUPLICATES = 163;
+  private static final int ODF13_ATTRIBUTE_DUPLICATES = 117;
 
   /**
    * Test: Use the MSV
