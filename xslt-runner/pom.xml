@@ -46,7 +46,7 @@
         <rnghtml.stylesheet>src/test/resources/xslt/rng/addRefs4rng-html.xsl</rnghtml.stylesheet>
         <rng2docbook.stylesheet>src/test/resources/xslt/rng/rng2docbook.xsl</rng2docbook.stylesheet>
         <odf.defaultvalue.extraction>src/test/resources/xslt/getAttributeDefaults.xsl</odf.defaultvalue.extraction>
-        <version.saxon-he>9.9.1-3</version.saxon-he>
+        <version.saxon-he>9.9.1-8</version.saxon-he>
     </properties>
 
     <dependencies>
