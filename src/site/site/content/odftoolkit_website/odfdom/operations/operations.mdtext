@@ -13,7 +13,7 @@ You may test creating changes as JSON output transformation by commandline:
 java -jar <ODFDOM_JAR> <ODT_INPUT>
 ```
 
-You need version =>1.0.0 for this feature, version information is provided by:
+You need version =>0.10.0 for this feature, version information is provided by:
 
 ```shell
 java -jar <ODFDOM_JAR>

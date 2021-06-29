@@ -19,7 +19,7 @@ sudo apt-get install openjdk-8-jdk
 sudo apt-get install maven
 ```
 
-### ODF Toolkit >= 1.0.0 using JDK >= 9
+### ODF Toolkit >= 0.10.0 using JDK >= 9
 
 ```shell
 sudo apt-get install openjdk-11-jdk
