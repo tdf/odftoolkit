@@ -178,7 +178,7 @@ remove class:<br/>OdfXMLHelper<br/>from org.odftoolkit.odfdom.pkg |
 
 ## Release 0.8.6
 
-On July 16th, version 0.8.6 has been released. About a month after the release of 0.8.5 the new 0.8.6 version provides more than a dozen of bug fixes mainly for Table usage from the [[ProjectOverview|high level ODF Document API]]. Aside of this, minor enhancements have been added, e.g. a higher usability for the Color type.
+On July 16th, version 0.8.6 has been released. About a month after the release of 0.8.5 the new 0.8.6 version provides more than a dozen of bug fixes mainly for Table usage from the "high level ODF Document API". Aside of this, minor enhancements have been added, e.g. a higher usability for the Color type.
 
 ### Resolved Issues: 0.8.6
 
