@@ -13,7 +13,7 @@ is lightweight and ideal for server use.
 ## Components of the ODF Toolkit (Java)
 
 1. **Software access to ODF** is achievable by [ODFDOM](./odfdom/index.html).
-With 1.0.0 the basics of collaboration functionality - [the change/operation concept](./odfdom/operations/operations.html) were added.
+With 0.10.0 the basics of collaboration functionality - [the change/operation concept](./odfdom/operations/operations.html) were added.
 
 2. **ODF Conformance** can be tested via the [ODF Validator](conformance/ODFValidator.html).
 Offered as command-line tool (executable JAR) or server component - via Web application archive (WAR) like [here](https://odfvalidator.org/).
@@ -28,11 +28,11 @@ People interested should follow the [mail list](mailing-lists.html) to track pro
 
 ## History
 
-### 2020-07-01 - ODF Toolkit releases of 0.9.0 and 1.0.0
+### 2020-07-01 - ODF Toolkit releases of 0.9.0 and 0.10.0
 
 See the [downloads page](downloads.html) for more details on the releases.
 
-### 2020-01-29 - ODF Toolkit releases of 0.9.0-rc and 1.0.0-beta
+### 2020-01-29 - ODF Toolkit releases of 0.9.0-rc and 0.10.0-beta
 
 ### 2018-12-18 - ODF Toolkit becomes a project of The Document Foundation (TDF)
 

@@ -6,7 +6,7 @@ The current reference implementation is written in Java (see [JavaDocs online][3
 
 To learn more about the project's architecture, refer to the [project overview][10] and the [ODFDOM Layers][11] section.
 
-With 1.0.0 the basics of collaboration functionality - [the change/operation concept](./operations/operations.html) were added.
+With 0.10.0 the basics of collaboration functionality - [the change/operation concept](./operations/operations.html) were added.
 
 ## Quickstart
 
