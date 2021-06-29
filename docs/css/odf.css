@@ -94,7 +94,7 @@ h1,h2,h3,h4,h5,h6 {
 
 #content h1 {
   font-size: 1.4em;
-  padding: 15px;
+  padding-top: 15px;
   border-top: 1px solid #a3afb6;
 }
 
@@ -109,10 +109,12 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 
+/*
 font-size: 140%;
 margin-left: 40px;
 border-bottom: none;
 font-weight: bold;
+*/
 
 #content h4,h5,h6 {
   border-bottom: none;
@@ -137,7 +139,7 @@ font-weight: bold;
 
 #contenta h1 {
   font-size: 1.4em;
-  padding: 15px;
+  padding-top: 15px;
   border-top: 1px solid #a3afb6;
 }
 
@@ -219,8 +221,8 @@ td {
 }
 
 code {
-  font-weight:bold;
-  font-style:italic;
+  font-weight:normal;
+  /*font-style:italic;*/
 }
 
 #sidenav {
