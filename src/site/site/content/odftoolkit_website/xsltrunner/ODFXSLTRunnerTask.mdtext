@@ -93,8 +93,8 @@ It further requires ODFXSLTRunner and the corresponding ODFDOM component.
 In the Ant task definition, the **classpath** attribute must include the **odfxsltrunnertask.jar** and **odfxsltrunner.jar** files. The  ODFDOM jar file is found automatically if it is located in a folder called **lib** next to the **odfxsltrunner.jar** file.
 
 [1]: http://ant.apache.org/
-[2]: http://ant.apache.org/manual/CoreTasks/style.html
-[3]: http://ant.apache.org/manual/CoreTasks/taskdef.html
+[2]: http://ant.apache.org/manual/Tasks/style.html
+[3]: http://ant.apache.org/manual/Tasks/taskdef.html
 [4]: http://www.w3.org/TR/1999/REC-xslt-19991116#top-level-variables
 [5]: https://openjdk.java.net/install/
 [6]: http://xml.apache.org/dist/xerces-j/

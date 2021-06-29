@@ -48,20 +48,20 @@
     <div id="contenta">
       <h1 id="odf-xslt-runner-task">ODF XSLT Runner Task</h1> 
       <h2 id="apply-xslt-stylesheets-to-odf-documents-with-ant">Apply XSLT stylesheets to ODF documents with Ant</h2> 
-      <p><strong>ODF XSLT Runner Task</strong> is a task definition for <a href="http://ant.apache.org/">Apache Ant</a> which allows to apply XSLT stylesheets to ODF documents similar to Ant's build-in &lt;xslt&gt; <a href="http://ant.apache.org/manual/CoreTasks/style.html">task</a>. It is based on ODFXSLTRunner. Please see ODFXSLTRunner for further details of its operation.</p> 
+      <p><strong>ODF XSLT Runner Task</strong> is a task definition for <a href="http://ant.apache.org/">Apache Ant</a> which allows to apply XSLT stylesheets to ODF documents similar to Ant's build-in &lt;xslt&gt; <a href="http://ant.apache.org/manual/Tasks/style.html">task</a>. It is based on ODFXSLTRunner. Please see ODFXSLTRunner for further details of its operation.</p> 
       <h2 id="getting-and-building-odfxsltrunnertask">Getting and building ODFXSLTRunnerTask</h2> 
       <p><strong>odfxsltrunnertask</strong> is build by a NetBeans project. After you have checked out the odf-xslt-runner-task-src/show, you can open the project in NetBeans and build <strong>odfxsltrunnertask</strong>.</p> 
       <p>A binary release of <strong>odfxsltrunnertask.jar</strong> is available in the download section.</p> 
       <p>Building and running <strong>odfxsltrunner.jar</strong> requires additional jar files. Please see Requirements for details.</p> 
       <h2 id="usage">Usage</h2> 
-      <p>To use <strong>odfxsltrunner.jar</strong> with Ant, you have to include the following <a href="http://ant.apache.org/manual/CoreTasks/taskdef.html">task definition</a> into your buildfile, where &lt;path&gt; has to be replaced with the path where you have stored the <strong>odfxsltrunnertask.jar</strong> and <strong>odfxsltrunner.jar</strong> files:</p> 
+      <p>To use <strong>odfxsltrunner.jar</strong> with Ant, you have to include the following <a href="http://ant.apache.org/manual/Tasks/taskdef.html">task definition</a> into your buildfile, where &lt;path&gt; has to be replaced with the path where you have stored the <strong>odfxsltrunnertask.jar</strong> and <strong>odfxsltrunner.jar</strong> files:</p> 
       <div class="codehilite">
         <pre><code class="language-shell">     &lt;taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask"
          classpath="&lt;path&gt;/odfxsltrunnertak.jar:&lt;path&gt;/odfxsltrunner.jar"/&gt;
 </code></pre>
       </div> 
       <p>You can use this task definition on the top level (that is as a child element of the <code>&amp;lt;project&amp;gt;</code> element or locally within a single <code>&amp;lt;target&amp;gt;</code> element. It defines a new task <code>&amp;lt;odfxslt&amp;gt;</code> which allows to process ODF documents with XSLT stylesheets.</p> 
-      <p>The new task supports the use of nested <code>&amp;lt;param&amp;gt;</code> and <code>&amp;lt;factory&amp;gt;</code>elements which have the same meaning as the <code>&amp;lt;param&amp;gt;</code> and <code>&amp;lt;factory&amp;gt;</code> child elements of the <code>&amp;lt;xslt&amp;gt;</code> <a href="http://ant.apache.org/manual/CoreTasks/style.html">task</a>.</p> 
+      <p>The new task supports the use of nested <code>&amp;lt;param&amp;gt;</code> and <code>&amp;lt;factory&amp;gt;</code>elements which have the same meaning as the <code>&amp;lt;param&amp;gt;</code> and <code>&amp;lt;factory&amp;gt;</code> child elements of the <code>&amp;lt;xslt&amp;gt;</code> <a href="http://ant.apache.org/manual/Tasks/style.html">task</a>.</p> 
       <h2 id="parameters">Parameters</h2> 
       <table border="border"> 
         <tbody>
