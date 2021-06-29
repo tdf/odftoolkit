@@ -12,7 +12,7 @@ It is [providing the new collaboration feature](https://tdf.github.io/odftoolkit
 2. The release 0.9.0 is using JDK 8 implementing [ODF 1.2](http://docs.oasis-open.org/office/v1.2/os/).</br>
 It is for the final time including the Simple API - a fork once made by IBM but no longer maintained, containing too much copy/pasted functionality. Its purpose was to be the first release of the TDF being close to the latest Apache sources as possible.
 
-For more details see the [release notes](./docs/odfdom/ReleaseNotes.html). People interested should also follow the [mail list](mailing-lists.html) to track progress.
+For more details see the [release notes](./odfdom/ReleaseNotes.html). People interested should also follow the [mail list](mailing-lists.html) to track progress.
 
 ## Project Releases for Maven (latest)
 

@@ -34,7 +34,7 @@ See [our example settings.xml](docs/settings-example.xml) and search & replace t
    ```
 
    This will checkout the tag to the target directory, build and package everything and upload the artifacts to the staging repository.
-   Users will download the mirrored release artifacts from machines outside TDF control. Users need to verify that the copy downloaded is identical to the original. Mirrored copies of checksums, KEYS and signature files (.asc and .md5 files) will be present on the mirrors but must never be used for verification. So, all links from the podling website to signatures, sums and [KEYS](./docs/KEYS) need to refer to the original documents on GitHub. See release signing guide for more information.
+   Users will download the mirrored release artifacts from machines outside TDF control. Users need to verify that the copy downloaded is identical to the original. Mirrored copies of checksums, KEYS and signature files (.asc and .md5 files) will be present on the mirrors but must never be used for verification. So, all links from the podling website to signatures, sums and [KEYS](./KEYS) need to refer to the original documents on GitHub. See release signing guide for more information.
 
 7. **Publish Document**</br> Publish all of the prepared document on the website and update the download page.
 8. **Send Announcements**</br> The release manager need to send announcements to odf-dev list. The sample looks like:
