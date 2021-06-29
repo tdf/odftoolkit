@@ -28,7 +28,7 @@ For information on working with the source code, please refer to [the developmen
 
 A good starting point is reading [the project overview][1] and [the ODFDOM Layers][2] will help you to get an overview over the ODFDOM package structure.
 
-Access [JavaDocs online][3] or [JavaDoc as bundle][4] from the official Apache repository.
+Access [JavaDocs online][3] or [JavaDoc as bundle][4] from the official Maven repository.
 
 There are [David's ODFDOM tutorials][5]. You'll find an introduction as well as sample code for creating text and spreadsheet documents. (Note: The tutorials might not yet be adapted to the latest version).
 
@@ -43,7 +43,7 @@ If you're a developer, just dive into [the development section][8]. Here you fin
   [1]: ProjectOverview.html
   [2]: Layers.html
   [3]: ../api/odfdom/index.html
-  [4]: odftoolkit.org/api/odfdom/index.html
+  [4]: ../downloads.html
   [5]: http://www.langintro.com/odfdom_tutorials/
   [6]: FrequentQuestions.html
   [7]: ../mailing-lists.html
