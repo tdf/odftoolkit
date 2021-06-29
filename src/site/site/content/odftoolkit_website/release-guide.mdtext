@@ -50,7 +50,7 @@ See [our example settings.xml](docs/settings-example.xml) and search & replace t
       All new ODF Toolkit components (binary, source and JavaDoc bundles) are available as GitHub Releases [2].
       Or in the central Maven repository under Group ID "org.apache.odftoolkit" and Version "1.0.0" and "0.9.0".
 
-      [1] https://tdf.github.io/odftoolkit/docs/odfdom/ReleaseNotes.html
+      [1] ./odfdom/ReleaseNotes.html
       [2] https://github.com/tdf/odftoolkit/releases
    ```
 
