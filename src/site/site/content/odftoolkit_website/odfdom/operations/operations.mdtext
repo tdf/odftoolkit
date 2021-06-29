@@ -3,7 +3,7 @@
 Operations (or Changes) are used to transfer the user changes between editors.
 Operations are a prerequirement for collaborative working on a document.
 
-**Reason**: No developer would ever send a zipped repository for exchanging work with other developers. Still we are doing this by zipping documents and sending those. To be able to dispatch only changes among collaborators new functionality had been added: Any OpenDocumend Text can now be transformed into an equivalent sequence of user changes ([ODT](./docs/docs/presentations/character-styles.odt)/[JSON](./docs/docs/presentations/character-styles.json)).
+**Reason**: No developer would ever send a zipped repository for exchanging work with other developers. Still we are doing this by zipping documents and sending those. To be able to dispatch only changes among collaborators new functionality had been added: Any OpenDocumend Text can now be transformed into an equivalent sequence of user changes ([ODT](./docs/presentations/character-styles.odt)/[JSON](./docs/presentations/character-styles.json)).
  This list of user changes is like a batch of text operations, similar to a stream of actions the user would perform to create the document from top to the bottom. Foremost, new user changes can be merged into the existing document via JSON.
 
 **Test Demo**
