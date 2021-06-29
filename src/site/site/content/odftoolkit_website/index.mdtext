@@ -1,7 +1,7 @@
 # The ODF Toolkit
 
 Visit our latest documentation on [GitHub](https://tdf.github.io/odftoolkit/).
-People interested should follow the [mail list](mailing-lists.html) to track progress.
+People interested should follow the [mail list](./mailing-lists.html) to track progress.
 
 ## Mission Statement
 
@@ -12,16 +12,16 @@ is lightweight and ideal for server use.
 
 ## Components of the ODF Toolkit (Java)
 
-1. **Software access to ODF** is achievable by [ODFDOM](odfdom/index.html).
+1. **Software access to ODF** is achievable by [ODFDOM](./odfdom/index.html).
 With 1.0.0 the basics of collaboration functionality - [the change/operation concept](./odfdom/operations/operations.html) were added.
 
 2. **ODF Conformance** can be tested via the [ODF Validator](conformance/ODFValidator.html).
 Offered as command-line tool (executable JAR) or server component - via Web application archive (WAR) like [here](https://odfvalidator.org/).
 
 3. **XSL Transformation** loading the ODF XML from the zipped ODF can take the zipped ODF as source using the [ODF XSLT Runner](xsltrunner/ODFXSLTRunner.html).</br>
-This functionality is also available from [ANT](https://ant.apache.org/) using our [ANT task](xsltrunner/ODFXSLTRunnerTask.html)
+This functionality is also available from [ANT](https://ant.apache.org/) using our [ANT task](./xsltrunner/ODFXSLTRunnerTask.html)
 
-4. **Creating Software Artefacts from the ODF grammar** is possible via the [generator project](generator/index.html)
+4. **Creating Software Artefacts from the ODF grammar** is possible via the [generator project](./generator/index.html)
 
 Find our sources on [GitHub](https://github.com/tdf/odftoolkit).
 People interested should follow the [mail list](mailing-lists.html) to track progress.
