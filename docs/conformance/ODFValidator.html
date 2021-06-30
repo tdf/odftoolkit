@@ -63,7 +63,7 @@
         <li>OR for command line usage and help, call the '''ODF Validator''' with</li> 
       </ul> 
       <div class="codehilite">
-        <pre><code class="language-shell">    java -jar "./target/odfvalidator-&amp;lt;VERSION&amp;gt;-jar-with-dependencies.jar" &amp;lt;odffile&amp;gt;
+        <pre><code class="language-shell">    java -jar "./target/odfvalidator-&lt;VERSION&gt;-jar-with-dependencies.jar" &lt;odffile&gt;
 </code></pre>
       </div> 
       <ul> 
@@ -71,9 +71,9 @@
       </ul> 
       <div class="codehilite">
         <pre><code class="language-shell">    java
-    -Djavax.xml.validation.SchemaFactory:&amp;lt;http://relaxng.org/ns/structure/1.0&amp;gt;=org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl
+    -Djavax.xml.validation.SchemaFactory:&lt;http://relaxng.org/ns/structure/1.0&gt;=org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl
     -Dorg.iso_relax.verifier.VerifierFactoryLoader=com.sun.msv.verifier.jarv.FactoryLoaderImpl
-    -jar "&amp;lt;PATH&amp;gt;/odfvalidator-&amp;lt;VERSION&amp;gt;-jar-with-dependencies.jar"  &amp;lt;odffile&amp;gt;
+    -jar "&lt;PATH&gt;/odfvalidator-&lt;VERSION&gt;-jar-with-dependencies.jar"  &lt;odffile&gt;
 </code></pre>
       </div> 
       <h2 id="usage">Usage</h2> 
@@ -86,7 +86,7 @@
       <p>For instance, with the following parameters:</p> 
       <div class="codehilite">
         <pre><code class="language-shell">    java
-      -Djavax.xml.validation.SchemaFactory:&amp;lt;http://relaxng.org/ns/structure/1.0&amp;gt;=org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl
+      -Djavax.xml.validation.SchemaFactory:http://relaxng.org/ns/structure/1.0=org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl
       -Dorg.iso_relax.verifier.VerifierFactoryLoader=com.sun.msv.verifier.jarv.FactoryLoaderImpl
       -jar "&lt;path&gt;/odfvalidator-&lt;VERSION&gt;-jar-with-dependencies.jar"
 </code></pre>
@@ -97,8 +97,8 @@
         <pre><code class="language-shell">    odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x &lt;expclude pattern&gt;]
                   [-o outputfile] [-1.0|-1.1|-1.2] &lt;odffiles&gt;
     odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x &lt;expclude pattern&gt;]
-                  [-o outputfile] -S &lt;schemafile&gt; &amp;lt;odffiles&gt;
-    odfvalidator [-c|-s] [-v|-w] [-d] [-o outputfile] -C &amp;lt;configfile&gt;
+                  [-o outputfile] -S &lt;schemafile&gt; &lt;odffiles&gt;
+    odfvalidator [-c|-s] [-v|-w] [-d] [-o outputfile] -C &lt;configfile&gt;
     odfvalidator -g &lt;odffiles&gt;
     odfvalidator -h
     odfvalidator -V
@@ -141,7 +141,7 @@
       <h3 id="validation-using-a-non-default-schema">Validation using a non-default schema</h3> 
       <p>To specify the schema that is used for <strong>meta-xml</strong>, <strong>content.xml</strong>, <strong>styles.xml</strong> and <strong>settings.xml</strong> on the command line, <strong>ODF Validator</strong> has to be called with the following parameters:</p> 
       <div class="codehilite">
-        <pre><code class="language-shell">    odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x &amp;lt;expclude pattern&amp;gt;]
+        <pre><code class="language-shell">    odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x &lt;expclude pattern&gt;]
     [-o outputfile] -S &lt;schemafile&gt; &lt;odffiles&gt;
 </code></pre>
       </div> 
