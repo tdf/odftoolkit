@@ -1,39 +1,44 @@
-Title: Requirements
-Function analysis
------------------
+# Requirements
+
+## Function analysis
 
 This page is used to analysis the functions and requirements, and discuss the priority and the project plan.
 
 [TOC]
 
-###Requirements Tracking
+### Requirements Tracking
+
 Below are requirements from our users.
 
-###Requirements for table (2010.12.20)
- - getRowList/getColumnList, if there is a row element with 65535 repeate number, then get row list will return a list which contains 65535 row element, it is not necessary and time consuming.
- - memory leak, because of using static map variables (Recorded in bugzilla, 2010.12.21)
- - use SAX API to get the content/style element as required, rather than load whole dom tree to memory, which might cause out of memory exception if many large document has been loaded in the same time.
- - create row/column/cell with/without repeat number(for example,if i want to create 10 rows, how to implement it ? with 10 row element or 1 row element with 10 repeate number)
- - append row/column with/without previous row/column style, there should be a flag for setting it.
- - cell format type can be auto calculated according to the style of cell.
+### Requirements for table (2010.12.20)
 
-####Requirements for section and text box (2010.12.20)####
- - repeating sections of data. Repeating section may be to clone a section of a template multiple times for different data. So identify an element(s) in the document and be able to clone it and add it into the document. Think like a block of text in a document (maybe a table or a paragraph) that we grab, copy, repeat x times, and then modify a bookmark inside each section.
- - text boxes that get a name at design time and something we can call it programmatically and then do something with it (delete, modify, etc.)
- - embedded text tagging with multiple levels - tag a paragraph and then tag a section of text within it - so we can turn stuff off, do repeats, and do repeats within the sections.
+- getRowList/getColumnList, if there is a row element with 65535 repeate number, then get row list will return a list which contains 65535 row element, it is not necessary and time consuming.
+- memory leak, because of using static map variables (Recorded in bugzilla, 2010.12.21)
+- use SAX API to get the content/style element as required, rather than load whole dom tree to memory, which might cause out of memory exception if many large document has been loaded in the same time.
+- create row/column/cell with/without repeat number(for example,if i want to create 10 rows, how to implement it ? with 10 row element or 1 row element with 10 repeate number)
+- append row/column with/without previous row/column style, there should be a flag for setting it.
+- cell format type can be auto calculated according to the style of cell.
 
-###Functions Collection
+#### Requirements for section and text box (2010.12.20)
+
+- repeating sections of data. Repeating section may be to clone a section of a template multiple times for different data. So identify an element(s) in the document and be able to clone it and add it into the document. Think like a block of text in a document (maybe a table or a paragraph) that we grab, copy, repeat x times, and then modify a bookmark inside each section.
+- text boxes that get a name at design time and something we can call it programmatically and then do something with it (delete, modify, etc.)
+- embedded text tagging with multiple levels - tag a paragraph and then tag a section of text within it - so we can turn stuff off, do repeats, and do repeats within the sections.
+
+### Functions Collection
+
 Follow are functions collected from a perspective of an Office software user.
 
-####Cut/copy/paste/selection
+#### Cut/copy/paste/selection
+
 Select something, cut or copy it, and paste to somewhere else. These operations are easily made in Office softwares, but are hard done in APIs. The functions include:
 
- - Create a selection
- - Create a position
- - Cut a selection
- - Copy a selection
- - Paste a selection to some position
- - Delete a selection
+- Create a selection
+- Create a position
+- Cut a selection
+- Copy a selection
+- Paste a selection to some position
+- Delete a selection
 Part of these functions have been implemented with package org.odftoolkit.simple.common.navigation
 
 <table>
@@ -49,216 +54,244 @@ Part of these functions have been implemented with package org.odftoolkit.simple
  Delete a selection  </td><td></td></tr>
 </table>
 
-####Navigator/document map
+#### Navigator/document map
+
 With these functions, users can easily go to a certain place in the whole document. These functions can provide methods to get a certain heading, get a certain image, get a certain table and so on. The functions include:
 
- - Return a list of main features, such as heading,paragraphs,graphics,table,bookmark,sections,hyperlinks,reference,index,comments,text frames, and draw objects.
- - get next or previous feature, for example, there is a table under a paragraph, then the API can allow users to get next table after this paragraph.
+- Return a list of main features, such as heading,paragraphs,graphics,table,bookmark,sections,hyperlinks,reference,index,comments,text frames, and draw objects.
+- get next or previous feature, for example, there is a table under a paragraph, then the API can allow users to get next table after this paragraph.
 Part of these functions have been implemented with getTableList() in org.odftoolkit.simple.Document.
 
-####Fields
+#### Fields
+
 With this feature, users can create fields in the document. The available fields include:
 
- - Fields are used to insert information about the current document, for example, file name, template, statistics, user data, date, and time.
- - The references or referenced fields that are referenced fields within the same document or within sub-documents of a master document.
- - Variable fields which are dynamic content to the document.
+- Fields are used to insert information about the current document, for example, file name, template, statistics, user data, date, and time.
+- The references or referenced fields that are referenced fields within the same document or within sub-documents of a master document.
+- Variable fields which are dynamic content to the document.
 
 The functions include:
 
- - Add a field
- - Edit a field
- - Navigator among fields
- - Delete a field
+- Add a field
+- Edit a field
+- Navigator among fields
+- Delete a field
 
-####Frame
+#### Frame
+
 With frame, users can create a layout of one or more columns of text and objects. The functions include:
 
- - Set properties to a frame, including names
- - Delete a frame
- - Navigator among frames
- - Add caption
+- Set properties to a frame, including names
+- Delete a frame
+- Navigator among frames
+- Add caption
 
-#####Text frame
+##### Text frame
+
 The functions include:
 
- - Add a text frame
- - Search a text frame by name
+- Add a text frame
+- Search a text frame by name
 
-#####Graphics
+##### Graphics
+
 With graphics, users can insert a picture or create with shapes. The functions include:
 
- - Insert a picture from file
- - Create shapes
- - Navigator among images and shapes
- - Delete images or shapes
- - Set properties
- - Add caption
+- Insert a picture from file
+- Create shapes
+- Navigator among images and shapes
+- Delete images or shapes
+- Set properties
+- Add caption
 
-####Section
+#### Section
+
 Sections are named blocks of text, including graphics or objects. With section, users can:
 
- - To prevent text from being edited.
- - To show or hide text.
- - To reuse text and graphics from other Lotus? Symphony? documents.
- - To insert sections of text that uses a different column layout than the current page style.
- - Add caption
+- To prevent text from being edited.
+- To show or hide text.
+- To reuse text and graphics from other Lotus? Symphony? documents.
+- To insert sections of text that uses a different column layout than the current page style.
+- Add caption
 
 The functions include:
 
- - Create Section
- - Delete Section
- - Copy and paste section
- - Navigator through sections
- - Set properties of section
+- Create Section
+- Delete Section
+- Copy and paste section
+- Navigator through sections
+- Set properties of section
 
-####Bullet & numbering
+#### Bullet & numbering
+
 To create bullet and numbering. The functions include:
 
- - Create bullet to paragraphs, including graphics bullets
- - create numbering to paragraphs
- - Set the style properties
+- Create bullet to paragraphs, including graphics bullets
+- create numbering to paragraphs
+- Set the style properties
 
-####Heading
+#### Heading
+
 To create heading of a document. The functions include:
 
- - Create headings
- - Set styles of headings
- - Set outline numbering
+- Create headings
+- Set styles of headings
+- Set outline numbering
 
-####Table of Content
+#### Table of Content
+
 To create a TOC at some place.
 
-####Header/footer
+#### Header/footer
+
 With these function, you can set header and footer.
 
- - Set header and footer
- - Set the styles of header and footer
+- Set header and footer
+- Set the styles of header and footer
 
-####Footnote/endnote
+#### Footnote/endnote
+
 With these function, you can create footnote or endnote in your document.
 
- - Add the footnote and the endnote
- - Find the footnote and endnote
- - Delete the foontnote and endnote
+- Add the footnote and the endnote
+- Find the footnote and endnote
+- Delete the foontnote and endnote
 
-####Hyperlinks
+#### Hyperlinks
+
 With these function, you can create a hyperlink in your document.
 
- - Add a hyperlink
- - Delete a hyperlink
- - Find hyperlinks
+- Add a hyperlink
+- Delete a hyperlink
+- Find hyperlinks
 
-####Break
+#### Break
+
 With these function, you can add break characters in your document.
 
- - Add breaks
- - Delete breaks
- - Find breaks
+- Add breaks
+- Delete breaks
+- Find breaks
 
-####Page numbering
+#### Page numbering
+
 With these function, you can add page numbering in your document.
 
- - Add page numbering
- - Delete page numbering
+- Add page numbering
+- Delete page numbering
 
-####Comment
+#### Comment
+
 With this function, you can add comment to your document.
 
- - Add comments
- - Navigation among comments
- - delete comments
+- Add comments
+- Navigation among comments
+- delete comments
 
-####Document bookmark
+#### Document bookmark
+
 To create bookmark
 
- - Add bookmark
- - Navigation through bookmarks
- - Delete bookmarks
+- Add bookmark
+- Navigation through bookmarks
+- Delete bookmarks
 
-####Fontwork
+#### Fontwork
+
 To create a fontwork
 
- - Add frontwork
- - Delete fontwork
- - Navigation through fontwork
+- Add frontwork
+- Delete fontwork
+- Navigation through fontwork
 
-####Chart
+#### Chart
+
 To create a chart
 
- - Add chart
- - Update chart properties
- - Update style setting of chart
- - Navigation through chart
- - Delete chart
+- Add chart
+- Update chart properties
+- Update style setting of chart
+- Navigation through chart
+- Delete chart
 
-####OLE object
+#### OLE object
+
 To operate OLE object
 
- - Add a OLE object
- - Navigation through OLE object
- - Delete OLE object
- - Update OLE object properties
+- Add a OLE object
+- Navigation through OLE object
+- Delete OLE object
+- Update OLE object properties
 
-####Layout and columns
+#### Layout and columns
+
 To edit the layout and columns properties
 
- - Set properties of layout
+- Set properties of layout
 
-####Table
+#### Table
+
 To provide functions to manipulate table. Following functions have been provided:
 
- - create table
- - insert row/column
- - access cell
- - styles handling
- - merge cell
- - delete row/column
- - numbering format
- - insert formula
+- create table
+- insert row/column
+- access cell
+- styles handling
+- merge cell
+- delete row/column
+- numbering format
+- insert formula
 
-#####Filter and validity
+##### Filter and validity
+
 To provide filter/validity functions to data in a table
 
- - Add/delete/update filter
- - Add/delete/update validity
+- Add/delete/update filter
+- Add/delete/update validity
 
-#####Group
+##### Group
+
 To group rows or columns
 
- - Add group
- - Delete group
+- Add group
+- Delete group
 
-#####Data pilot
+##### Data pilot
+
 To create or delete data pilot in a spreadsheet document.
 
- - Create data pilot
- - Delete data pilot
+- Create data pilot
+- Delete data pilot
 
-#####Split
+##### Split
+
 To split a cell
 
-####Slide
+#### Slide
+
 To manipulate slides. Following functions have been provided:
 
- - Add/delete slides
- - Navigation through slides
- - Merge slides
+- Add/delete slides
+- Navigation through slides
+- Merge slides
 
-#####Master Slide
+##### Master Slide
+
 To manipulate master slides
 
- - update styles of master slides
+- update styles of master slides
 
-#####Animation
+##### Animation
+
 To manipulate the animation settings.
 
- - Set effects
- - Set order
- - Remove animation setting
+- Set effects
+- Set order
+- Remove animation setting
 
-####Page setup
+#### Page setup
+
 To define the page setup.
 
- - Set page orientation
- - Set page margin
-
+- Set page orientation
+- Set page margin

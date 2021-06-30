@@ -4,7 +4,9 @@ We are using [GitHub][1] for version control.
 
 ## Getting the source code
 
-    git clone https://github.com/tdf/odftoolkit.git
+```shell
+git clone https://github.com/tdf/odftoolkit.git
+```
 
 For further information see the [Source Code Repository][1] page.
 
@@ -12,16 +14,20 @@ For further information see the [Source Code Repository][1] page.
 
 ### ODF Toolkit == 0.9.0 using JDK 8
 
-    sudo apt-get install openjdk-8-jdk
-    sudo apt-get install maven
+```shell
+sudo apt-get install openjdk-8-jdk
+sudo apt-get install maven
+```
 
-### ODF Toolkit >= 1.0.0 using JDK >= 9
+### ODF Toolkit >= 0.10.0 using JDK >= 9
 
-    sudo apt-get install openjdk-11-jdk
-    sudo apt-get install maven
+```shell
+sudo apt-get install openjdk-11-jdk
+sudo apt-get install maven
+```
 
 **Note:**
-The previous instructions has been tested with an Ubuntu 16.04 installation.
+The previous instructions has been tested with an Ubuntu 20.04 installation.
 Other distros and versions should work fine, but might require some slight
 modifications.
 
@@ -31,8 +37,10 @@ For the setup of the build environment, please see [Java JDK download for Window
 
 ## Building (Linux & Windows)
 
-    cd odftoolkit
-    mvn clean install
+```shell
+cd odftoolkit
+mvn clean install
+```
 
 [1]: http://github.com/tdf/odftoolkit
 [2]: https://openjdk.java.net/install/

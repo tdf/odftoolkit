@@ -1,16 +1,15 @@
-Title: Some Design Thoughts on ODFDOM Convenience Layer
-The API is our User Interface
------------------------------
+# Some Design Thoughts on ODFDOM Convenience Layer
+
+## The API is our User Interface
 
 Since the users of ODFDOM are programmers who use our library,  this means that our API is our "User Interface".  Although it is not a GUI, it is a UI, and we should design it like a UI, meaning we:
 
  1. Consider the tasks that the user will perform
- 1. Identify which tasks are repeated most frequently and thus should be very easy to do
- 1. Identify those tasks which are more advanced and might require more steps
- 1. Design an interface that makes the most-common tasks very easy, while still being powerful enough for more advanced uses.
+ 2. Identify which tasks are repeated most frequently and thus should be very easy to do
+ 3. Identify those tasks which are more advanced and might require more steps
+ 4. Design an interface that makes the most-common tasks very easy, while still being powerful enough for more advanced uses.
 
-Some Typical User Tasks
------------------------
+## Some Typical User Tasks
 
 Operations such as these should be possible to do with only 10 lines code, and with no knowledge of XML or XPath or ODF.  We should add to this list and discuss
 
@@ -42,12 +41,11 @@ Do we agree that these are all common tasks that should be simple to program wit
   1. Create a custom shape in presentation slide, set animation effect “entrance->fly in“ to the custom shape.
   1. Split a large document to many small documents, each chapter beginning with “heading 1“ style will be saved as a small document.
 
-Programming = Data structures + Algorithms
-------------------------------------------
+## Programming = Data structures + Algorithms
 
 We probably all saw a statement like that in our first Computer Science class.  These are both essential parts of programming.  But many libraries have the fault that they only have strength in the data modeling.  They often have very little support for common algorithms.  For example, what did the C Programming Language give us?  Aside from qsort() and bsearch(), there was very little.  C++ on the other hand, contained the powerful Standard Template Library (STL).
 
-ODFDOM 0.7 is mainly convenience wrappers of ODF markup, raising the level of abstraction of this data.  But we should also consider supporting algorithms, along the STL model.  This would be quite powerful and is necessary to make the above task examples very simple for our users.
+ODFDOM is mainly convenience wrappers of ODF markup, raising the level of abstraction of this data.  But we should also consider supporting algorithms, along the STL model.  This would be quite powerful and is necessary to make the above task examples very simple for our users.
 
 For example, a typical pattern of use is:
 
@@ -68,14 +66,13 @@ And another is:
 
 As we think of this more, we see some commonality, including the need to define:
 
- - A parametrized selection mechanism that has some predefined predicates, like for all content, all content of a given style, etc., but also allow user-defined predicates
- - Mutable and immutable iterators
- - Copy semantics on content, so it can be moved from document to document and preserve styles (if desired) including possibly merging styles where they are identical
- - And of course, all the wrappers to read/write ODF content once we have the fragment that the user wants.
- - And I'm sure there are several other items to consider
+* A parametrized selection mechanism that has some predefined predicates, like for all content, all content of a given style, etc., but also allow user-defined predicates
+* Mutable and immutable iterators
+* Copy semantics on content, so it can be moved from document to document and preserve styles (if desired) including possibly merging styles where they are identical
+* And of course, all the wrappers to read/write ODF content once we have the fragment that the user wants.
+* And I'm sure there are several other items to consider
 
-A Possible Direction Forward
-----------------------------
+## A Possible Direction Forward
 
 I'd like us to consider doing the following:
 
@@ -83,5 +80,3 @@ I'd like us to consider doing the following:
  1. Then review that list and identify common patterns of use, those recurring interactions that should be coded once and reused.
  1. Then, before writing any real code, let's write pseudo code for some (or even all) of our original tasks.  Let's validate the API design at a high level by confirming that this API radically simplifies the coding required for the most common use cases.
  1. Then we implement the API's, write unit tests, etc.
-
-

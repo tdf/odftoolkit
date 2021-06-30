@@ -87,7 +87,6 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 #content h1,h2,h3,h4,h5,h6 {
-  font-weight: normal;
   text-transform:none;
   margin: 10px 0 15px;
   padding: 5px 0;
@@ -95,7 +94,7 @@ h1,h2,h3,h4,h5,h6 {
 
 #content h1 {
   font-size: 1.4em;
-  padding: 15px;
+  padding-top: 15px;
   border-top: 1px solid #a3afb6;
 }
 
@@ -110,10 +109,12 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 
+/*
 font-size: 140%;
 margin-left: 40px;
 border-bottom: none;
 font-weight: bold;
+*/
 
 #content h4,h5,h6 {
   border-bottom: none;
@@ -132,14 +133,13 @@ font-weight: bold;
 }
 
 #contenta h1,h2,h3,h4,h5,h6 {
-  font-weight: normal;
   margin: 10px 0 15px;
   padding: 5px 0;
 }
 
 #contenta h1 {
   font-size: 1.4em;
-  padding: 15px;
+  padding-top: 15px;
   border-top: 1px solid #a3afb6;
 }
 
@@ -168,8 +168,8 @@ font-weight: bold;
 
 table {
   border-collapse:collapse;
-  width:95%; 
-  margin-left:0%; 
+  width:95%;
+  margin-left:0%;
   margin-right:5%;
 }
 
@@ -216,6 +216,13 @@ td {
   background-color: #c8edc2;
   padding: 0.01em 1em;
   border-radius: 10px;
+  font-weight: normal;
+  font-style: normal;
+}
+
+code {
+  font-weight:normal;
+  /*font-style:italic;*/
 }
 
 #sidenav {
@@ -255,7 +262,7 @@ td {
 }
 
 #sidenav li {
-  border-bottom: 1px solid #e6ebed; 
+  border-bottom: 1px solid #e6ebed;
   margin: 0.2em 0;
   padding: 0;
 }
@@ -307,7 +314,7 @@ td {
 }
 
 #navigation li {
-  border-bottom: 1px solid #e6ebed; 
+  border-bottom: 1px solid #e6ebed;
   margin: 0.2em 0;
   padding: 0;
 }
@@ -365,6 +372,45 @@ td {
   padding-top: 20px;
 }
 
+.toc-container {
+  background-color: #ebffe8;
+  padding: 1em 0.1em;
+  border-radius: 10px;
+}
+
+.toc-headline {
+  padding: 0.5em 1em;
+  font-size: 1.5em;
+}
+
+.toc-l1, .toc-l2, .toc-l3, .toc-l4, .toc-l5, .toc-l6 {
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+}
+
+.toc-l1 {
+  padding-left: 1.5em;
+}
+
+.toc-l2 {
+  padding-left: 2em;
+}
+
+.toc-l3 {
+  padding-left: 2.5em;
+}
+
+.toc-l4 {
+  padding-left: 3em;
+}
+
+.toc-l5 {
+  padding-left: 3.5em;
+}
+
+.toc-l6 {
+  padding-left: 4em;
+}
 
 
 /* definition lists */

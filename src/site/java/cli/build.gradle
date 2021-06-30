@@ -1,0 +1,23 @@
+dependencies {
+    compile project(':odftoolkit-website-core')
+
+    compile 'de.topobyte:commons-cli-helper:0.1.0'
+    compile 'de.topobyte:system-utils:0.0.1'
+
+    runtime 'org.slf4j:slf4j-log4j12:1.6.1'
+    runtime 'log4j:log4j:1.2.16'
+}
+
+task copyJars(type: Copy) {
+    into "$buildDir/lib-run"
+    from jar
+}
+
+task copyDeps(type: Copy) {
+    into "$buildDir/lib-run"
+    from configurations.runtime
+}
+
+task createRuntime(dependsOn: [copyJars, copyDeps]) {
+    description 'Setup the execution environment for the main scripts'
+}

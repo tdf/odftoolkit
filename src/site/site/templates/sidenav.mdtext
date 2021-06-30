@@ -1,30 +1,31 @@
 # General
 
-  - [About](/odftoolkit_website/index.html)
-  - [Downloads](/odftoolkit_website/downloads.html)
+- [About](/odftoolkit_website/index.html)
+- [Downloads](/odftoolkit_website/downloads.html)
 
 # Components
 
- - [ODFDOM](/odftoolkit_website/odfdom/index.html)
- - [Simple API (deprecated)](/odftoolkit_website/simple/index.html)
- - [ODF Validator](/odftoolkit_website/conformance/ODFValidator.html)
- - [XSLT Runner](/odftoolkit_website/xsltrunner/ODFXSLTRunner.html)
+- [ODFDOM](/odftoolkit_website/odfdom/index.html)
+- [ODF Validator](/odftoolkit_website/conformance/ODFValidator.html)
+- [Schema To Template](/odftoolkit_website/generator/index.html)
+- [XSLT Runner](/odftoolkit_website/xsltrunner/ODFXSLTRunner.html)
+- [Simple API (deprecated)](/odftoolkit_website/simple/index.html)
 
 # Community
 
-  - [Get Involved](/odftoolkit_website/get-involved.html)
-  - [Mailing Lists](/odftoolkit_website/mailing-lists.html)
-  - [People](/odftoolkit_website/people.html)
-  - [FAQs](/odftoolkit_website/developer-faqs.html)
+- [Get Involved](/odftoolkit_website/get-involved.html)
+- [Mailing Lists](/odftoolkit_website/mailing-lists.html)
+- [People](/odftoolkit_website/people.html)
+- [FAQs](/odftoolkit_website/developer-faqs.html)
 
 # Development
 
-  - [Source Code](/odftoolkit_website/source.html)
-  - [Bug Tracker](https://github.com/tdf/odftoolkit/issues)
-  - [JavaDoc](/odftoolkit_website/javadoc.html)
-  - [Website Development](/odftoolkit_website/website-development.html)
-  - [Release Guide](/odftoolkit_website/release-guide.html)
-
+- [Source Code](/odftoolkit_website/source.html)
+- [Bug Tracker](https://github.com/tdf/odftoolkit/issues)
+- [JavaDoc](/odftoolkit_website/javadoc.html)
+- [Website Development](/odftoolkit_website/website-development.html)
+- [Release Guide](/odftoolkit_website/release-guide.html)
 
 # TDF
-  - [The Document Foundation](https://www.documentfoundation.org/)
+
+- [The Document Foundation](https://www.documentfoundation.org/)

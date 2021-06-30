@@ -1,0 +1,7 @@
+#!/bin/bash
+
+DIR=$(dirname $0)
+CMD="$DIR/website.sh"
+CLASS="com.mobanisto.odftoolkit.website.WebsiteCli"
+
+exec "$CMD" "$CLASS" "$@"

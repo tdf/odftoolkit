@@ -1,0 +1,3 @@
+include 'cli', 'core'
+project(':cli').name = 'odftoolkit-website-cli'
+project(':core').name = 'odftoolkit-website-core'
