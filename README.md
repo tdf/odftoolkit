@@ -1,6 +1,12 @@
 # The ODF Toolkit
 
-Visit our website on [GitHub](https://tdf.github.io/odftoolkit/docs/index.html).
+Visit our latest documentation on [GitHub](https://tdf.github.io/odftoolkit/docs/).
+
+[The ODF Toolkit](http://odftoolkit.org) is a set of Java modules that allow programmatic
+creation, scanning and manipulation of Open Document Format (ISO/IEC 26300 == ODF)
+documents. Unlike other approaches which rely on runtime manipulation of heavy-weight
+editors via an automation interface, the ODF Toolkit is lightweight and ideal for
+server use.
 
 The ODF Toolkit consists of four subcomponents:
 
@@ -22,7 +28,7 @@ The ODF Toolkit consists of four subcomponents:
     This is a tool that validates Open Document Format (ODF) files and checks them
     for conformance according to the ODF Standard. ODF Validator is available as an
     online service and as a command line tool. This page primarily describes the
-    command line tool. Please visit the [ODF Validator documentation](https://tdf.github.io/odftoolkit/docs/conformance/ODFValidator.html) for details.
+    command line tool. Please visit the [ODF Validator documentation](https://tdf.github.io/odftoolkit/conformance/ODFValidator.html) for details.
 
 4. ODF XSLT Runner(xslt-runner-*.jar, xslt-runner-task-*.jar)
     ODF XSLT Runner is a small Java application that allows you to apply XSLT
@@ -30,44 +36,44 @@ The ODF Toolkit consists of four subcomponents:
     from the package. It can be used from the command line. A driver to use it
     within an Ant build file, ODF XSLT Runner Task, is also available.
 
-People interested should follow the [mail list](https://tdf.github.io/odftoolkit/docs/mailing-lists.html) to track progress.
+People interested should follow the [mail list](https://tdf.github.io/odftoolkit/mailing-lists.html) to track progress.
 
 ## Getting Started
 
-The ODF Toolkit is based on Java 8 and uses the Maven 3 <http://maven.apache.org/>
+The ODF Toolkit is based on Java (tested with JDK 11) and uses the Maven 3 <http://maven.apache.org/>
 build system. To build ODF Toolkit, use the following command in this directory:
 
     mvn clean install
 
 ## Recent Releases
 
-1. We have a beta release for 1.0.0 using >=JDK 9 and providing the [new collaboration API](https://tdf.github.io/odftoolkit/docs/odfdom/operations/operations.html):
+1. We have a release 0.10.0 using >=JDK 9 and providing the [new collaboration API](https://tdf.github.io/odftoolkit/odfdom/operations/operations.html):
 
-    *RELEASE BETA (1.0.0)*:
-    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/1.0.0-BETA1/)
-    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/1.0.0-BETA1/)
-    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/1.0.0-BETA1/)
+    *RELEASE (0.10.0)*:
+    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.10.0/)
+    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.10.0/)
+    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.10.0/)
 
-2. We have a new release 0.9.0 for the final time using JDK 8 and including the Simple API:
+2. We have a release 0.9.0 using JDK 8 and for the final time including the Simple API:
 
-    *RELEASE CANDIDATE (0.9.0)*:
-    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.9.0-RC1/)
-    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.9.0-RC1/)
-    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.9.0-RC1/)
-    * [Simple API (deprecated)](https://repo1.maven.org/maven2/org/odftoolkit/simple-odf/0.9.0-RC1/)
+    *RELEASE (0.9.0)*:
+    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.9.0/)
+    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.9.0/)
+    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.9.0/)
+    * [Simple API (deprecated)](https://repo1.maven.org/maven2/org/odftoolkit/simple-odf/0.9.0/)
 
-For more details see the [release notes](https://tdf.github.io/odftoolkit/docs/odfdom/ReleaseNotes.html).
+For more details see the [release notes](https://tdf.github.io/odftoolkit/odfdom/ReleaseNotes.html).
 
 ## Documentation
 
-* [The Home Page for the ODF Toolkit](https://tdf.github.io/odftoolkit/docs/index.html)
-* [ODFDOM Getting Start Guide](https://tdf.github.io/odftoolkit/docs/odfdom/index.html)
-* [Simple API (deprecated) - Getting Start Guide](https://tdf.github.io/odftoolkit/docs/simple/gettingstartguide.html)
-* [Simple API (deprecated) - Cookbook](https://tdf.github.io/odftoolkit/docs/simple/document/cookbook/)index.html
-* [Simple API (deprecated) - Demos](https://tdf.github.io/odftoolkit/docs/simple/demo/index.html)
-* [Simple API (deprecated) - Online JavaDoc](https://tdf.github.io/odftoolkit/docs/simple/document/javadoc/index.html)
-* [ODF Validator Getting Start Guide](https://tdf.github.io/odftoolkit/docs/conformance/ODFValidator.html)
-* [ODF XSLT Runner Getting Start Guide](https://tdf.github.io/odftoolkit/docs/xsltrunner/ODFXSLTRunner.html)
+* [The Home Page for the ODF Toolkit](https://tdf.github.io/odftoolkit)
+* [ODFDOM Getting Start Guide](https://tdf.github.io/odftoolkit/odfdom/index.html)
+* [Simple API (deprecated) - Getting Start Guide](https://tdf.github.io/odftoolkit/simple/gettingstartguide.html)
+* [Simple API (deprecated) - Cookbook](https://tdf.github.io/odftoolkit/simple/document/cookbook/)index.html
+* [Simple API (deprecated) - Demos](https://tdf.github.io/odftoolkit/simple/demo/index.html)
+* [Simple API (deprecated) - Online JavaDoc](https://tdf.github.io/odftoolkit/simple/document/javadoc/index.html)
+* [ODF Validator Getting Start Guide](https://tdf.github.io/odftoolkit/conformance/ODFValidator.html)
+* [ODF XSLT Runner Getting Start Guide](https://tdf.github.io/odftoolkit/xsltrunner/ODFXSLTRunner.html)
 
 ## Mailing Lists
 
