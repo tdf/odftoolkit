@@ -46,25 +46,29 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1 id="simple-api-(deprecated)">Simple API (deprecated)</h1> 
-      <h2 id="what-is-simple-api?-(now-deprecated-reason-below)">What is Simple API? (now deprecated - reason below)</h2> 
-      <p>Simple API, also called Simple Java API for ODF, was a sub-project of ODF Toolkit. This is an <strong>easy-to-use</strong>, <strong>high-level</strong> Java API for creating, modifying and extracting data from <a href="http://en.wikipedia.org/wiki/OpenDocument">Open Document Format (ODF)</a> documents. It is written in pure Java and does not require users to install any document editor on their systems. It is a high level abstraction of the lower-level <a href="../odfdom/index.html">ODFDOM API</a>.</p> 
-      <h2 id="why-was-the-simple-api-being-forked-from-odfdom?">Why was the Simple API being forked from ODFDOM?</h2> 
-      <p>The Simple API had been a fork by IBM to accelerate the work on an high-level API for their customers. The team of Sun Microsystems were focusing instead on improving the source code generation of ODFDOM and build the user API afterwards.</p> 
-      <h2 id="why-is-the-simple-api-being-deprecated?">Why is the Simple API being deprecated?</h2> 
-      <p>Many parts of the Simple API are copy/pasted source code from ODFDOM. Latest when reuniting with ODFDOM at Apache the Simple API should have undo their fork by merging again with ODFDOM. Due to the lack of volunteers to undo the duplicated code and continuing the work on Simple API and due to the questionable design decision as for lists (not being a paragraph with a list attribute) the library had been deprecated and will be removed after the TDF ODF Toolkit release 0.9.0.</p> 
-      <h2 id="what-can-i-do-with-simple-api?">What can I do with Simple API?</h2> 
-      <p>We provide lots of interesting demos to show the ability of Simple API. You can see the <a href="demo/index.html">demo page</a>.</p> 
-      <h2 id="how-do-i-get-started?">How do I get started?</h2> 
-      <p>Firstly, you can see the <a href="gettingstartguide.html">getting started guide</a>.</p> 
-      <p>Secondly, we recommend <a href="document/cookbook/index.html">cookbook</a> and <a href="demo/index.html">demo</a>. Both of them supply lots of sample code.</p> 
-      <p>Lastly, please reference the newest <a href="../api/simple/index.html">javadoc</a>, which supplies more details of Simple API.</p> 
-      <h2 id="where-can-i-get-simple-api?">Where can I get Simple API?</h2> 
-      <p>You can go to <a href="../downloads.html">downloads page</a>. This page lists the jar, the javadoc and the source code packages. You can unzip and find Simple API in these packages. If you need the earlier versions before moved to Apache, please download <a href="downloads.html">here</a>.</p> 
-      <h2 id="need-more-infomation?">Need More Infomation?</h2> 
-      <p>If you want to supply suggestion or feedback, please send <a href="mailto:dev@odftoolkit.org">e-mail</a> to us.</p> 
-      <p>If you want to contribute code, please read the <a href="document/faq.html">developer guide document</a>, which introduces how to build the development environment.</p> 
-      <p>If you want to dive into this project, please reference the <a href="document/index.html">document page</a>, which lists lots of useful materials.</p> 
+      <h1 id="generator-(schema2template)">Generator (schema2template)</h1> 
+      <h2 id="overview">Overview</h2> 
+      <p>The schema2template library loads arbitrary XML schemata (XML grammar) into the most powerful grammar model, which is the one given by RelaxNG XML. Based on loaded XML model given by the grammar Schema2template offers functionality to fill arbitrary user templates files with data.</p> 
+      <p>The ODF Toolkit uses Schema2template to generate the XML layer. Every XML element and XML attribute from the grammar is given a Java class in the ODFDOM project. In the ODFDOM project these classes have the following locations:</p> 
+      <ul> 
+        <li>ODF attributes <a href="https://github.com/tdf/odftoolkit/tree/master/odfdom/src/main/java/org/odftoolkit/odfdom/dom/attribute">odfdom/src/main/java/org/odftoolkit/odfdom/dom/attribute</a></li> 
+        <li>ODF elements: <a href="https://github.com/tdf/odftoolkit/tree/master/odfdom/src/main/java/org/odftoolkit/odfdom/dom/element">odfdom/src/main/java/org/odftoolkit/odfdom/dom/element</a></li> 
+      </ul> 
+      <h2 id="architecture">Architecture</h2> 
+      <p>The library is build upon two powerful open source tools:</p> 
+      <ol> 
+        <li> <p><a href="https://github.com/kohsuke/msv">Multi Schema Validator (MSV)</a> Used to read arbitrary XML schema and map them to an internal RelaxNG model.</p> </li> 
+        <li> <p><a href="http://velocity.apache.org/">Apache's Velocity Template Engine</a> Used as template framework, e.g. to provide scripting within templates.</p> </li> 
+      </ol> 
+      <p>Within schema2template three common use cases covers with default templates as examples. For a given XML schema (e.g. RelaxNG, DTD, W3C schema) the following can be created:</p> 
+      <ol> 
+        <li>a XML node reference for the given format as HTML file</li> 
+        <li>Java sources for a typed DOM tree of the format</li> 
+      </ol> 
+      <h2 id="design">Design</h2> 
+      <p>Read in the Java documentation more about the <a href="../api/schema2template/index.html">generator design</a> build upon the Multi Schema Validator (MSV).</p> 
+      <h2 id="license">License</h2> 
+      <p>Apache License, Version 2.0. Please see file <a href="../LICENSE">LICENSE</a>.</p> 
     </div>
     <html>
       <head></head>

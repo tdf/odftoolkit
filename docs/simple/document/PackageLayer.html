@@ -1,270 +1,188 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
-<head>
-  <!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title>Package Layer</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../index.html">About</a></li>
-<li><a href="../../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../get-involved.html">Get Involved</a></li>
-<li><a href="../../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../../people.html">People</a></li>
-<li><a href="../../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../../javadoc.html">JavaDoc</a></li>
-<li><a href="../../website-development.html">Website Development</a></li>
-<li><a href="../../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      <h1 class="title">Package Layer</h1>
-      <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h2 id="package-description">Package Description<a class="headerlink" href="#package-description" title="Permanent link">&para;</a></h2>
-<p>The Simple Java API for ODF focuses on the high level methods development.
-It has three layers:</p>
-<ol>
-<li><strong>Feature Layer</strong> provides convenient methods for features in ODF documents, for example, table, style, metadata. It has several
-    packages, e.g. <em>org.odftoolkit.simple.table</em>,
-    ''org.odftoolkit.simple.presentation''. Each package is either
-    related with a specific document type or related with a common
-    feature.</li>
-<li><strong>Document Layer</strong> has classes defined for each document type, for example, TextDocument, PresentationDocument,
-    SpreadsheetDocument. The root package is in this layer.</li>
-<li><strong>Business Layer</strong> provides more high level methods which are driven from business scenarios. These methods are not related with a
-    document type nor a common feature. The package
-    <em>org.odftoolkit.simple.common</em> package is in this layer.</li>
-</ol>
-<p>Following diagram shows the structure of Simple Java API for ODF. The yellow
-boxes represent packages. The root package is <em>org.odftoolkit.simple</em>. The
-other packages are under the root package, and the name has eliminated
-<em>org.odftoolkit.simple</em>.</p>
-<p><img alt="Layers of ODF Toolkit" src="simple_odf_structure.jpg" /></p>
-<h2 id="api-changes-from-odfdom">API changes from ODFDOM<a class="headerlink" href="#api-changes-from-odfdom" title="Permanent link">&para;</a></h2>
-<p>The Simple Java API has corresponding classes for the document layer of
-ODFDOM. Follow table shows the mapping between ODFDOM and Simple Java API.</p>
-<p>Note: The first column "ODFDOM Package" is relative to
-"org.odftoolkit.odfdom", and the third column "Simple Package" is relative
-to "org.odftoolkit.simple".</p>
-<table class="table">
-<thead>
-<tr>
-<th>ODFDOM Package</th>
-<th>ODFDOM Class</th>
-<th>Simple Package</th>
-<th>Simple Class</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>doc</td>
-<td>OdfDocument</td>
-<td>root</td>
-<td>Document</td>
-</tr>
-<tr>
-<td></td>
-<td>OdfTextDocument</td>
-<td></td>
-<td>TextDocument</td>
-</tr>
-<tr>
-<td></td>
-<td>OdfSpreadsheetDocument</td>
-<td></td>
-<td>SpreadsheetDocument</td>
-</tr>
-<tr>
-<td></td>
-<td>OdfPresentationDocument</td>
-<td></td>
-<td>PresentationDocument</td>
-</tr>
-<tr>
-<td></td>
-<td>OdfChartDocument</td>
-<td></td>
-<td>ChartDocument</td>
-</tr>
-<tr>
-<td></td>
-<td>OdfGraphicsDocument</td>
-<td></td>
-<td>GraphicsDocument</td>
-</tr>
-<tr>
-<td>doc.table</td>
-<td>OdfTable</td>
-<td>table</td>
-<td>Table</td>
-</tr>
-<tr>
-<td></td>
-<td>OdfTableRow</td>
-<td></td>
-<td>Row</td>
-</tr>
-<tr>
-<td></td>
-<td>OdfTableColumn</td>
-<td></td>
-<td>Column</td>
-</tr>
-<tr>
-<td></td>
-<td>OdfTableCell</td>
-<td></td>
-<td>Cell</td>
-</tr>
-<tr>
-<td></td>
-<td>OdfTableCellRange</td>
-<td></td>
-<td>CellRange</td>
-</tr>
-<tr>
-<td>doc.presentation</td>
-<td>OdfSlide</td>
-<td>presentation</td>
-<td>Slide</td>
-</tr>
-<tr>
-<td></td>
-<td>OdfPresentationNotes</td>
-<td></td>
-<td>Notes</td>
-</tr>
-<tr>
-<td>incubator.meta</td>
-<td>OdfOfficeMeta</td>
-<td>meta</td>
-<td>Meta</td>
-</tr>
-<tr>
-<td></td>
-<td>OdfMetaDocumentStatistic</td>
-<td></td>
-<td>DocumentStatistic</td>
-</tr>
-<tr>
-<td>incubator.search</td>
-<td></td>
-<td>common.navigation</td>
-<td></td>
-</tr>
-<tr>
-<td>incubator.doc.text</td>
-<td></td>
-<td>common</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-    </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
       </div>
-    </div>   
-  </div>
-</body>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../generator/index.html">Schema To Template</a></li> 
+        <li class="list-group-item"><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <h1 id="package-layer">Package Layer</h1> 
+      <h2 id="package-description">Package Description</h2> 
+      <p>The Simple Java API for ODF focuses on the high level methods development. It has three layers:</p> 
+      <ol> 
+        <li><strong>Feature Layer</strong> provides convenient methods for features in ODF documents, for example, table, style, metadata. It has several packages, e.g. <em>org.odftoolkit.simple.table</em>, ''org.odftoolkit.simple.presentation''. Each package is either related with a specific document type or related with a common feature.</li> 
+        <li><strong>Document Layer</strong> has classes defined for each document type, for example, TextDocument, PresentationDocument, SpreadsheetDocument. The root package is in this layer.</li> 
+        <li><strong>Business Layer</strong> provides more high level methods which are driven from business scenarios. These methods are not related with a document type nor a common feature. The package <em>org.odftoolkit.simple.common</em> package is in this layer.</li> 
+      </ol> 
+      <p>Following diagram shows the structure of Simple Java API for ODF. The yellow boxes represent packages. The root package is <em>org.odftoolkit.simple</em>. The other packages are under the root package, and the name has eliminated <em>org.odftoolkit.simple</em>.</p> 
+      <p><img src="simple_odf_structure.jpg" alt="Layers of ODF Toolkit"></p> 
+      <h2 id="api-changes-from-odfdom">API changes from ODFDOM</h2> 
+      <p>The Simple Java API has corresponding classes for the document layer of ODFDOM. Follow table shows the mapping between ODFDOM and Simple Java API.</p> 
+      <p>Note: The first column "ODFDOM Package" is relative to "org.odftoolkit.odfdom", and the third column "Simple Package" is relative to "org.odftoolkit.simple".</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>ODFDOM Package</th>
+            <th>ODFDOM Class</th>
+            <th>Simple Package</th>
+            <th>Simple Class</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td>doc</td>
+            <td>OdfDocument</td>
+            <td>root</td>
+            <td>Document</td>
+          </tr> 
+          <tr>
+            <td></td>
+            <td>OdfTextDocument</td>
+            <td></td>
+            <td>TextDocument</td>
+          </tr> 
+          <tr>
+            <td></td>
+            <td>OdfSpreadsheetDocument</td>
+            <td></td>
+            <td>SpreadsheetDocument</td>
+          </tr> 
+          <tr>
+            <td></td>
+            <td>OdfPresentationDocument</td>
+            <td></td>
+            <td>PresentationDocument</td>
+          </tr> 
+          <tr>
+            <td></td>
+            <td>OdfChartDocument</td>
+            <td></td>
+            <td>ChartDocument</td>
+          </tr> 
+          <tr>
+            <td></td>
+            <td>OdfGraphicsDocument</td>
+            <td></td>
+            <td>GraphicsDocument</td>
+          </tr> 
+          <tr>
+            <td>doc.table</td>
+            <td>OdfTable</td>
+            <td>table</td>
+            <td>Table</td>
+          </tr> 
+          <tr>
+            <td></td>
+            <td>OdfTableRow</td>
+            <td></td>
+            <td>Row</td>
+          </tr> 
+          <tr>
+            <td></td>
+            <td>OdfTableColumn</td>
+            <td></td>
+            <td>Column</td>
+          </tr> 
+          <tr>
+            <td></td>
+            <td>OdfTableCell</td>
+            <td></td>
+            <td>Cell</td>
+          </tr> 
+          <tr>
+            <td></td>
+            <td>OdfTableCellRange</td>
+            <td></td>
+            <td>CellRange</td>
+          </tr> 
+          <tr>
+            <td>doc.presentation</td>
+            <td>OdfSlide</td>
+            <td>presentation</td>
+            <td>Slide</td>
+          </tr> 
+          <tr>
+            <td></td>
+            <td>OdfPresentationNotes</td>
+            <td></td>
+            <td>Notes</td>
+          </tr> 
+          <tr>
+            <td>incubator.meta</td>
+            <td>OdfOfficeMeta</td>
+            <td>meta</td>
+            <td>Meta</td>
+          </tr> 
+          <tr>
+            <td></td>
+            <td>OdfMetaDocumentStatistic</td>
+            <td></td>
+            <td>DocumentStatistic</td>
+          </tr> 
+          <tr>
+            <td>incubator.search</td>
+            <td></td>
+            <td>common.navigation</td>
+            <td></td>
+          </tr> 
+          <tr>
+            <td>incubator.doc.text</td>
+            <td></td>
+            <td>common</td>
+            <td></td>
+          </tr> 
+        </tbody> 
+      </table> 
+    </div>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>
