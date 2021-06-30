@@ -28,7 +28,7 @@ The ODF Toolkit consists of four subcomponents:
     This is a tool that validates Open Document Format (ODF) files and checks them
     for conformance according to the ODF Standard. ODF Validator is available as an
     online service and as a command line tool. This page primarily describes the
-    command line tool. Please visit the [ODF Validator documentation](https://tdf.github.io/odftoolkit/docs/conformance/ODFValidator.html) for details.
+    command line tool. Please visit the [ODF Validator documentation](https://tdf.github.io/odftoolkit/conformance/ODFValidator.html) for details.
 
 4. ODF XSLT Runner(xslt-runner-*.jar, xslt-runner-task-*.jar)
     ODF XSLT Runner is a small Java application that allows you to apply XSLT
@@ -36,59 +36,44 @@ The ODF Toolkit consists of four subcomponents:
     from the package. It can be used from the command line. A driver to use it
     within an Ant build file, ODF XSLT Runner Task, is also available.
 
+People interested should follow the [mail list](https://tdf.github.io/odftoolkit/mailing-lists.html) to track progress.
+
 ## Getting Started
 
-The ODF Toolkit is based on >=Java 9 and uses the [Maven 3](http://maven.apache.org)
+The ODF Toolkit is based on Java (tested with JDK 11) and uses the Maven 3 <http://maven.apache.org/>
 build system. To build ODF Toolkit, use the following command in this directory:
 
     mvn clean install
 
-The simplest way to use these modules are just put the jars files in your classpath
-directly. If you are not using maven you can see the versions of the major components for
-your release in [CHANGES.txt](CHANGES.txt).
-There is more information about development on our [project website](https://tdf.github.io/odftoolkit/docs/source.html).
+## Recent Releases
 
-### Working on the first Pull Request
+1. We have a release 0.10.0 using >=JDK 9 and providing the [new collaboration API](https://tdf.github.io/odftoolkit/odfdom/operations/operations.html):
 
-You can learn how from this *free* series: [How to Contribute to an Open Source Project on GitHub](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github).
+    *RELEASE (0.10.0)*:
+    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.10.0/)
+    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.10.0/)
+    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.10.0/)
+
+2. We have a release 0.9.0 using JDK 8 and for the final time including the Simple API:
+
+    *RELEASE (0.9.0)*:
+    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.9.0/)
+    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.9.0/)
+    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.9.0/)
+    * [Simple API (deprecated)](https://repo1.maven.org/maven2/org/odftoolkit/simple-odf/0.9.0/)
+
+For more details see the [release notes](https://tdf.github.io/odftoolkit/odfdom/ReleaseNotes.html).
 
 ## Documentation
 
-* [The Home Page for the ODF Toolkit](https://tdf.github.io/odftoolkit/docs/)
-* [ODFDOM Getting Start Guide](https://tdf.github.io/odftoolkit/docs/odfdom/index.html)
-* [ODF Validator Getting Start Guide](https://tdf.github.io/odftoolkit/docs/conformance/ODFValidator.html)
-* [ODF XSLT Runner Getting Start Guide](https://tdf.github.io/odftoolkit/docs/xsltrunner/ODFXSLTRunner.html)
-
-## License
-
-See also [LICENSE](LICENSE).
-
-Collective work:
-
-* Copyright 2011-2018 The Apache Software Foundation.
-* Copyright 2018-2020 The Document Foundation.
-
-This product has been created by The Document Foundation, incorporating
-many modifications from different contributors.
-
-See the [NOTICE](NOTICE) file distributed with this work for additional information
-regarding copyright ownership.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
- <http://www.apache.org/licenses/LICENSE-2.0>
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-The ODF Toolkit includes a number of subcomponents with separate copyright
-notices and license terms. Your use of these subcomponents is subject to
-the terms and conditions of the licenses listed in the LICENSE.txt file.
+* [The Home Page for the ODF Toolkit](https://tdf.github.io/odftoolkit)
+* [ODFDOM Getting Start Guide](https://tdf.github.io/odftoolkit/odfdom/index.html)
+* [Simple API (deprecated) - Getting Start Guide](https://tdf.github.io/odftoolkit/simple/gettingstartguide.html)
+* [Simple API (deprecated) - Cookbook](https://tdf.github.io/odftoolkit/simple/document/cookbook/)index.html
+* [Simple API (deprecated) - Demos](https://tdf.github.io/odftoolkit/simple/demo/index.html)
+* [Simple API (deprecated) - Online JavaDoc](https://tdf.github.io/odftoolkit/simple/document/javadoc/index.html)
+* [ODF Validator Getting Start Guide](https://tdf.github.io/odftoolkit/conformance/ODFValidator.html)
+* [ODF XSLT Runner Getting Start Guide](https://tdf.github.io/odftoolkit/xsltrunner/ODFXSLTRunner.html)
 
 ## Mailing Lists
 
@@ -107,3 +92,10 @@ The mailing lists are open to anyone and publicly archived.
 If you encounter errors in ODF Toolkit or want to suggest an improvement or
 a new feature, please visit the [ODF Toolkit issue tracker](https://github.com/tdf/odftoolkit/issues). There you can also find the
 latest information on known issues and recent bug fixes and enhancements.
+
+## License
+
+The ODF Toolkit includes a number of subcomponents with separate copyright
+notices and license terms. Your use of these subcomponents is subject to
+the terms and conditions of the licenses listed in the [LICENSE](LICENSE) file.
+Copyright ownership information can be found in [NOTICE](NOTICE).

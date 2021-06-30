@@ -19,10 +19,11 @@ Easiest way is to use the latest [Maven release](https://oss.sonatype.org/conten
                 <artifactId>xslt-runner</artifactId>
             </dependency>
 
-Or just call from command line: "java -jar xslt-runner-&lt;VERSION&gt;-jar-with-dependencies.jar". 
+Or just call from command line: "java -jar xslt-runner-&lt;VERSION&gt;-jar-with-dependencies.jar".
 Detailed documentation can be found [online](https://tdf.github.io/odftoolkit/docs/xsltrunner/ODFXSLTRunner.html).
 
 You will have [ODFDOM](https://tdf.github.io/odftoolkit/docs/odfdom/index.html) as a dependency.
 
 ## License
+
 Apache License, Version 2.0. Please see file [LICENSE.txt](LICENSE.txt).
