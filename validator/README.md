@@ -1,4 +1,4 @@
-#  ODF VALIDATOR                                                           *
+# ODF VALIDATOR                                                           *
 
 ## About ODF VALIDATOR
 
