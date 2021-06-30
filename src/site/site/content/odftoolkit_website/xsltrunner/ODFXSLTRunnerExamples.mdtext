@@ -2,28 +2,29 @@
 
 ## XHTML
 
-The XHTML transformation contained in [LibreOffice] [1] can be used to
+The XHTML transformation contained in [LibreOffice][1] can be used to
 transform ODF documents into XHTML. Using **ODFXSLTRunner** it is not even
 required to extract the ODF package.
 
 The XHTML style sheet runs only with the [SAXON XSLT Processor][2].
-Using version 9.1 is recommended.
+Using version 9.1 (or higher) is recommended.
 
 The following command converts an ODF text document **&lt;ODT&gt;** into
 an XHTML document **&lt;XHTML&gt;**:
 
+```shell
     java -cp odfxsltrunner.jar:<saxon.jar> org.odftoolkit.odfxsltrunner.Main
        -f net.sf.saxon.TransformerFactoryImpl  -x Pictures/
       <ooo-xslt>/export/xhtml/opendoc2xhtml.xsl <ODT> -o <XHTML>
+```
 
 *&lt;saxon.jar&gt;* is the jar of the [SAXON][2] XSLT Processor.  *&lt;ooo-xslt&gt;*
 is the location of the LibreOffice XSLT stylesheets within an LibreOffice
 installation. In a typical LibreOffice installation, this is
-<code><BASEDIR>/share/xslt</code> on (Linux and Windows).
+`<BASEDIR>/share/xslt` on (Linux and Windows).
 
 ***Note:*** A few changes were necessary to use LibreOffice's XHTML
-transformation with **ODFXSLTRunner**. These are available as patch in the
-OpenOffice.org issue [i115881][3].
+transformation with **ODFXSLTRunner**.
 
 ## XHTML with referenced images only
 
@@ -36,8 +37,10 @@ to the XHTML file, and the target is a text file that contains the references
 images. Although the input file is an XHTML rather than a ODF file,
 **ODFXSLTRunner** may be used to apply the style sheet.
 
+```shell
     java -jar odfxsltrunner.jar create-html-img-list.xsl -i <XHTML> -o <img-list>
-     unzip <ODT> `<img-list>`
+     unzip <ODT> <img-list>
+```
 
 ## Replace embedded objects with bitmap images
 
@@ -53,15 +56,18 @@ The following steps are required:
 - Load the ODT document into LibreOffice and save it with the HTML
     filter. The file may have an arbitrary name.
     **&lt;ooo-html-file&gt;** is used as a placeholder here.
-- Convert the HTML file into an XHTML file. You may use **xmllint** for this purpose, which is part of [libxml2][4], or any other tools that converts HTML into XHTML. The command line for **xmllint** is:
+- Convert the HTML file into an XHTML file. You may use **xmllint** for this purpose, which is part of [libxml2][3], or any other tools that converts HTML into XHTML. The command line for **xmllint** is:
  xmllint --html --xmlout --dropdtd -o &lt;ooo-xhtml-file&gt; &lt;ooo-html-file&gt;
 - Apply the **replace-object.xsl** style sheet to the ODF document. The style sheet requires the name of the XHTML file converted in the previous step as '''hrml-ref''' parameter.
- java -jar odfxsltrunner.jar replace-objects.xsl &lt;input odf&gt; &lt;output odf&gt;
-  ref-html=&lt;ooo-xhtml-file&gt;
+
+```shell
+ java -jar odfxsltrunner.jar replace-objects.xsl <input odf> <output odf>
+  ref-html=<ooo-xhtml-file>
+```
+
 - Zip the images that LibreOffice has saved next to the HTML document into the output ODF file.
 The new ODF file now can be transformed to XHTML with LibreOffice's XHTML transformation.
 
 [1]: https://www.libreoffice.org
 [2]: http://saxon.sourceforge.net/
-[3]: http://qa.openoffice.org/issues/show_bug.cgi?id=115881
-[4]: http://xmlsoft.org/
+[3]: http://xmlsoft.org/

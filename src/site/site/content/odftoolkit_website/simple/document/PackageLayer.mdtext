@@ -1,5 +1,6 @@
-Title: Package Layer
-##Package Description
+# Package Layer
+
+## Package Description
 
 The Simple Java API for ODF focuses on the high level methods development.
 It has three layers:
@@ -22,8 +23,7 @@ other packages are under the root package, and the name has eliminated
 
 ![Layers of ODF Toolkit][1]
 
-
-##API changes from ODFDOM
+## API changes from ODFDOM
 
 The Simple Java API has corresponding classes for the document layer of
 ODFDOM. Follow table shows the mapping between ODFDOM and Simple Java API.
@@ -52,6 +52,5 @@ to "org.odftoolkit.simple".
 | | OdfMetaDocumentStatistic | | DocumentStatistic |
 | incubator.search | | common.navigation | |
 | incubator.doc.text | | common | |
-
 
 [1]: simple_odf_structure.jpg

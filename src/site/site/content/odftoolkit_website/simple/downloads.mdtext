@@ -1,21 +1,21 @@
-**The Earlier Release Downloads**
----------
+# The Earlier Release Downloads
+
 In this page, you can download different release versions of Simple API before moved to Apache.
 
-  - version 0.6.6( [Binary][1]| [Java Doc][2]| [Source Code][3])
-  - version 0.6.5( [Binary][5]| [Java Doc][6]| [Source Code][7])
-  - version 0.6( [Binary][8]| [Java Doc][9]| [Source Code][10])
-  - version 0.5.5( [Binary][11]| [Java Doc][12]| [Source Code][13])
-  - version 0.5( [Binary][14]| [Java Doc][15]| [Source Code][16])
-  - version 0.4.5( [Binary][17]| [Java Doc][18]| [Source Code][19])
-  - version 0.4( [Binary][20]| [Java Doc][21]| [Source Code][22])
-  - version 0.3.5( [Binary][23]| [Java Doc][24]| [Source Code][25])
-  - version 0.3( [Binary][26]| [Java Doc][27]| [Source Code][28])
-  - version 0.2( [Binary][29]| [Java Doc][30]| [Source Code][31])
+* version 0.6.6( [Binary][1]| [Java Doc][2]| [Source Code][3])
+* version 0.6.5( [Binary][5]| [Java Doc][6]| [Source Code][7])
+* version 0.6( [Binary][8]| [Java Doc][9]| [Source Code][10])
+* version 0.5.5( [Binary][11]| [Java Doc][12]| [Source Code][13])
+* version 0.5( [Binary][14]| [Java Doc][15]| [Source Code][16])
+* version 0.4.5( [Binary][17]| [Java Doc][18]| [Source Code][19])
+* version 0.4( [Binary][20]| [Java Doc][21]| [Source Code][22])
+* version 0.3.5( [Binary][23]| [Java Doc][24]| [Source Code][25])
+* version 0.3( [Binary][26]| [Java Doc][27]| [Source Code][28])
+* version 0.2( [Binary][29]| [Java Doc][30]| [Source Code][31])
 
 The full release notes log can be found [here][4].
 
-**Project roadmap and schedule(Update)**
+## Project roadmap and schedule(Update)
 
 The Simple ODF API adhears to the "Release Early and Often" development philosophy. We will target a monthly release, for the end of each month. Code that is ready makes it into that month's release. Code that is not yet ready will wait. Proposed Roadmap:
 
@@ -27,7 +27,6 @@ The Simple ODF API adhears to the "Release Early and Often" development philosop
 * Version 0.6.5 at the start of July, 2011 with text document format features;
 * Version 0.6.6 at the middle of August, 2011 with bugs fixed;
 * More work will be started in Apache.
-
 
   [1]: http://odftoolkit-extra.apache-extras.org.codespot.com/files/simple-odf-0.6.6.jar
   [2]: http://odftoolkit-extra.apache-extras.org.codespot.com/files/simple-odf-0.6.6-javadoc.jar

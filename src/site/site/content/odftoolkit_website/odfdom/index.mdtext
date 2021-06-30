@@ -6,16 +6,21 @@ The current reference implementation is written in Java (see [JavaDocs online][3
 
 To learn more about the project's architecture, refer to the [project overview][10] and the [ODFDOM Layers][11] section.
 
+With 0.10.0 the basics of collaboration functionality - [the change/operation concept](./operations/operations.html) were added.
+
 ## Quickstart
 
 Put the odfdom.jar file in your classpath. You will need [Apache Xerces-J][9] as XML parser and DOM implementation as well. Start with the following sample code to create a simple text document.
 
-    // Create a text document from a standard template (empty documents within the JAR)
+```Java
+    // Create a text document from a standard template
+    // (empty documents within the JAR)
     OdfTextDocument odt = OdfTextDocument.newTextDocument();
     // Append text to the end of the document.
     odt.addText("This is my very first ODF test");
     // Save document
     odt.save("MyFilename.odt");
+```
 
 For information on working with the source code, please refer to [the development section][8].
 
@@ -23,7 +28,7 @@ For information on working with the source code, please refer to [the developmen
 
 A good starting point is reading [the project overview][1] and [the ODFDOM Layers][2] will help you to get an overview over the ODFDOM package structure.
 
-Access [JavaDocs online][3] or [JavaDoc as bundle][4] from the official Apache repository.
+Access [JavaDocs online][3] or [JavaDoc as bundle][4] from the official Maven repository.
 
 There are [David's ODFDOM tutorials][5]. You'll find an introduction as well as sample code for creating text and spreadsheet documents. (Note: The tutorials might not yet be adapted to the latest version).
 
@@ -38,11 +43,11 @@ If you're a developer, just dive into [the development section][8]. Here you fin
   [1]: ProjectOverview.html
   [2]: Layers.html
   [3]: ../api/odfdom/index.html
-  [4]: odftoolkit.org/api/odfdom/index.html
+  [4]: ../downloads.html
   [5]: http://www.langintro.com/odfdom_tutorials/
   [6]: FrequentQuestions.html
   [7]: ../mailing-lists.html
   [8]: ../source.html
-  [9]: http://xml.apache.org/dist/xerces-j/
+  [9]: https://xerces.apache.org/
   [10]: ProjectOverview.html
   [11]: Layers.html

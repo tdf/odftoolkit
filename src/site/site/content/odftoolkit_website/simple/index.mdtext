@@ -1,44 +1,23 @@
-Title: Simple API (deprecated)
-Notice:    Licensed to the Apache Software Foundation (ASF) under one
-           or more contributor license agreements.  See the NOTICE file
-           distributed with this work for additional information
-           regarding copyright ownership.  The ASF licenses this file
-           to you under the Apache License, Version 2.0 (the
-           "License"); you may not use this file except in compliance
-           with the License.  You may obtain a copy of the License at
-           .
-             http://www.apache.org/licenses/LICENSE-2.0
-           .
-           Unless required by applicable law or agreed to in writing,
-           software distributed under the License is distributed on an
-           "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-           KIND, either express or implied.  See the License for the
-           specific language governing permissions and limitations
-           under the License.
+# Simple API (deprecated)
 
-What is Simple API?  (now deprecated - reason below)
---------------------------------------------------
+## What is Simple API?  (now deprecated - reason below)
 
 Simple API, also called Simple Java API for ODF, was a sub-project of ODF Toolkit. This is an **easy-to-use**, **high-level** Java API for creating, modifying and extracting data from [Open Document Format (ODF)][3] documents. It is written in pure Java and does not require users to install any document editor on their systems. It is a high level abstraction of the lower-level [ODFDOM API][4].
 
-Why was the Simple API being forked from ODFDOM?
-------------------------------------------------
+## Why was the Simple API being forked from ODFDOM?
 
 The Simple API had been a fork by IBM to accelerate the work on an high-level API for their customers. The team of Sun Microsystems were focusing instead on improving the source code generation of ODFDOM and build the user API afterwards.
 
-Why is the Simple API being deprecated?
-----------------------------------------
+## Why is the Simple API being deprecated?
 
 Many parts of the Simple API are copy/pasted source code from ODFDOM. Latest when reuniting with ODFDOM at Apache the Simple API should have undo their fork by merging again with ODFDOM.
 Due to the lack of volunteers to undo the duplicated code and continuing the work on Simple API and due to the questionable design decision as for lists (not being a paragraph with a list attribute) the library had been deprecated and will be removed after the TDF ODF Toolkit release 0.9.0.
 
-What can I do with Simple API?
-------------------------------
+## What can I do with Simple API?
 
 We provide lots of interesting demos to show the ability of Simple API. You can see the [demo page][5].
 
-How do I get started?
----------------------
+## How do I get started?
 
 Firstly, you can see the [getting started guide][6].
 
@@ -46,14 +25,12 @@ Secondly, we recommend [cookbook][7] and [demo][8]. Both of them supply lots of 
 
 Lastly, please reference the newest [javadoc][9], which supplies more details of Simple API.
 
-Where can I get Simple API?
----------------------------
+## Where can I get Simple API?
 
 You can go to [downloads page][10]. This page lists the jar, the javadoc and the source code packages. You can unzip and find Simple API in these packages.
 If you need the earlier versions before moved to Apache, please download [here][15].
 
-Need More Infomation?
--------------------------
+## Need More Infomation?
 
 If you want to supply suggestion or feedback, please send [e-mail][11] to us.
 
@@ -72,6 +49,6 @@ If you want to dive into this project, please reference the [document page][14],
   [9]: ../api/simple/index.html
   [10]: ../downloads.html
   [11]: mailto:dev@odftoolkit.org
-  [13]: odftoolkit/simple/document/faq.html
+  [13]: document/faq.html
   [14]: document/index.html
   [15]: downloads.html
