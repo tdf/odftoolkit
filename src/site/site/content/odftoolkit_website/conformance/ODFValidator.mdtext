@@ -20,16 +20,16 @@ To use the '''ODF Validator''', the following steps are required:
 * OR for command line usage and help, call the '''ODF Validator''' with
 
 ```shell
-    java -jar "./target/odfvalidator-&lt;VERSION&gt;-jar-with-dependencies.jar" &lt;odffile&gt;
+    java -jar "./target/odfvalidator-<VERSION>-jar-with-dependencies.jar" <odffile>
 ```
 
 * You may call the ODF Validator via
 
 ```shell
     java
-    -Djavax.xml.validation.SchemaFactory:&lt;http://relaxng.org/ns/structure/1.0&gt;=org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl
+    -Djavax.xml.validation.SchemaFactory:<http://relaxng.org/ns/structure/1.0>=org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl
     -Dorg.iso_relax.verifier.VerifierFactoryLoader=com.sun.msv.verifier.jarv.FactoryLoaderImpl
-    -jar "&lt;PATH&gt;/odfvalidator-&lt;VERSION&gt;-jar-with-dependencies.jar"  &lt;odffile&gt;
+    -jar "<PATH>/odfvalidator-<VERSION>-jar-with-dependencies.jar"  <odffile>
 ```
 
 ## Usage
@@ -46,7 +46,7 @@ For instance, with the following parameters:
 
 ```shell
     java
-      -Djavax.xml.validation.SchemaFactory:&lt;http://relaxng.org/ns/structure/1.0&gt;=org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl
+      -Djavax.xml.validation.SchemaFactory:http://relaxng.org/ns/structure/1.0=org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl
       -Dorg.iso_relax.verifier.VerifierFactoryLoader=com.sun.msv.verifier.jarv.FactoryLoaderImpl
       -jar "<path>/odfvalidator-<VERSION>-jar-with-dependencies.jar"
 ```
@@ -59,8 +59,8 @@ The **ODF Validator** may be called with the following options:
     odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x <expclude pattern>]
                   [-o outputfile] [-1.0|-1.1|-1.2] <odffiles>
     odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x <expclude pattern>]
-                  [-o outputfile] -S <schemafile> &lt;odffiles>
-    odfvalidator [-c|-s] [-v|-w] [-d] [-o outputfile] -C &lt;configfile>
+                  [-o outputfile] -S <schemafile> <odffiles>
+    odfvalidator [-c|-s] [-v|-w] [-d] [-o outputfile] -C <configfile>
     odfvalidator -g <odffiles>
     odfvalidator -h
     odfvalidator -V
@@ -165,7 +165,7 @@ To specify the schema that is used for **meta-xml**, **content.xml**,
 **ODF Validator** has to be called with the following parameters:
 
 ```shell
-    odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x &lt;expclude pattern&gt;]
+    odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-x <expclude pattern>]
     [-o outputfile] -S <schemafile> <odffiles>
 ```
 
