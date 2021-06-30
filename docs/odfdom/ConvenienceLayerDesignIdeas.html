@@ -1,204 +1,136 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
-<head>
-  <!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title>Some Design Thoughts on ODFDOM Convenience Layer</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../index.html">About</a></li>
-<li><a href="../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../get-involved.html">Get Involved</a></li>
-<li><a href="../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../people.html">People</a></li>
-<li><a href="../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../javadoc.html">JavaDoc</a></li>
-<li><a href="../website-development.html">Website Development</a></li>
-<li><a href="../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      <h1 class="title">Some Design Thoughts on ODFDOM Convenience Layer</h1>
-      <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h2 id="the-api-is-our-user-interface">The API is our User Interface<a class="headerlink" href="#the-api-is-our-user-interface" title="Permanent link">&para;</a></h2>
-<p>Since the users of ODFDOM are programmers who use our library,  this means that our API is our "User Interface".  Although it is not a GUI, it is a UI, and we should design it like a UI, meaning we:</p>
-<ol>
-<li>Consider the tasks that the user will perform</li>
-<li>Identify which tasks are repeated most frequently and thus should be very easy to do</li>
-<li>Identify those tasks which are more advanced and might require more steps</li>
-<li>Design an interface that makes the most-common tasks very easy, while still being powerful enough for more advanced uses.</li>
-</ol>
-<h2 id="some-typical-user-tasks">Some Typical User Tasks<a class="headerlink" href="#some-typical-user-tasks" title="Permanent link">&para;</a></h2>
-<p>Operations such as these should be possible to do with only 10 lines code, and with no knowledge of XML or XPath or ODF.  We should add to this list and discuss</p>
-<p>Do we agree that these are all common tasks that should be simple to program with ODFDOM?</p>
-<ol>
-<li>Open an ODF document, search for a text string "foo" and replace it with "bar" every where it occurs in the user text of the document.</li>
-<li>Combine two documents into one document.</li>
-<li>Print out the metadata fields for a document.</li>
-<li>Replace one image with another image in a file</li>
-<li>Reorder slides in a presentation</li>
-<li>Take 5 slides from 5 different presentations and combine them into one new presentation</li>
-<li>Find all text with the style "private" and replace that text with "XXXXXXXX"</li>
-<li>Add a logo image in the document header</li>
-<li>Given a 2 dimensional data array or a cell range address, create a bar chart in a spreadsheet</li>
-<li>Highlight all the occurrences of a given text with blue bold properties</li>
-<li>Create a 5rows X 2columns table in a text document, the first row is head row.</li>
-<li>Create a presentation document from a given template document</li>
-<li>Insert a rectangle shape with the shape text “hello world"</li>
-<li>Create TOC at the beginning of the text document</li>
-<li>Create a new sheet in a spreadsheet, insert a text at the given cell address, format the text as bold/italic</li>
-<li>Create a data pilot given row/column/data fields in the sheet in a spreadsheet</li>
-<li>Insert a formula at the given cell address in a spreadsheet</li>
-<li>Define simple page setup for a text document, orientation is portrait, left/right margin is 2cm, top/bottom is 2.5cm</li>
-<li>Insert page number in the footer</li>
-<li>Set row height and column width for a sheet in a spreadsheet</li>
-<li>Set bullet number for a text list</li>
-<li>Create a customized paragraph style, apply this style to all paragraphs in a text document</li>
-<li>Select a custom shape, create a style from the custom shape properties, apply this style to another custom shape.</li>
-<li>Create a custom shape in presentation slide, set animation effect “entrance-&gt;fly in“ to the custom shape.</li>
-<li>Split a large document to many small documents, each chapter beginning with “heading 1“ style will be saved as a small document.</li>
-</ol>
-<h2 id="programming-data-structures-algorithms">Programming = Data structures + Algorithms<a class="headerlink" href="#programming-data-structures-algorithms" title="Permanent link">&para;</a></h2>
-<p>We probably all saw a statement like that in our first Computer Science class.  These are both essential parts of programming.  But many libraries have the fault that they only have strength in the data modeling.  They often have very little support for common algorithms.  For example, what did the C Programming Language give us?  Aside from qsort() and bsearch(), there was very little.  C++ on the other hand, contained the powerful Standard Template Library (STL).</p>
-<p>ODFDOM 0.7 is mainly convenience wrappers of ODF markup, raising the level of abstraction of this data.  But we should also consider supporting algorithms, along the STL model.  This would be quite powerful and is necessary to make the above task examples very simple for our users.</p>
-<p>For example, a typical pattern of use is:</p>
-<ol>
-<li>Given an ODF document instance, navigate to a point in the document</li>
-<li>At that point insert content</li>
-<li>Save the document</li>
-</ol>
-<p>Another is:</p>
-<ol>
-<li>Given an ODF document instance, define a selection (by start and end point, by start point and "distance", by similarity, etc.)</li>
-<li>Modify the selection, e.g., replace the content, modify the the style, delete the selection, etc.</li>
-<li>Save the document</li>
-</ol>
-<p>And another is:</p>
-<ol>
-<li>Given an ODF document instance, iterate over content of a given type, e..g, all footnotes, all images, all paragraphs of a given style</li>
-<li>As you iterate over the content, treat each returned fragment as a selection that can be operated on.</li>
-</ol>
-<p>As we think of this more, we see some commonality, including the need to define:</p>
-<ul>
-<li>A parametrized selection mechanism that has some predefined predicates, like for all content, all content of a given style, etc., but also allow user-defined predicates</li>
-<li>Mutable and immutable iterators</li>
-<li>Copy semantics on content, so it can be moved from document to document and preserve styles (if desired) including possibly merging styles where they are identical</li>
-<li>And of course, all the wrappers to read/write ODF content once we have the fragment that the user wants.</li>
-<li>And I'm sure there are several other items to consider</li>
-</ul>
-<h2 id="a-possible-direction-forward">A Possible Direction Forward<a class="headerlink" href="#a-possible-direction-forward" title="Permanent link">&para;</a></h2>
-<p>I'd like us to consider doing the following:</p>
-<ol>
-<li>Spend a few days completing the list of user tasks that we agree should be easy to do with the ODFDOM convenience layer API.</li>
-<li>Then review that list and identify common patterns of use, those recurring interactions that should be coded once and reused.</li>
-<li>Then, before writing any real code, let's write pseudo code for some (or even all) of our original tasks.  Let's validate the API design at a high level by confirming that this API radically simplifies the coding required for the most common use cases.</li>
-<li>Then we implement the API's, write unit tests, etc.</li>
-</ol>
-    </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
       </div>
-    </div>   
-  </div>
-</body>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../generator/index.html">Schema To Template</a></li> 
+        <li class="list-group-item"><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <h1 id="some-design-thoughts-on-odfdom-convenience-layer">Some Design Thoughts on ODFDOM Convenience Layer</h1> 
+      <h2 id="the-api-is-our-user-interface">The API is our User Interface</h2> 
+      <p>Since the users of ODFDOM are programmers who use our library, this means that our API is our "User Interface". Although it is not a GUI, it is a UI, and we should design it like a UI, meaning we:</p> 
+      <ol> 
+        <li>Consider the tasks that the user will perform</li> 
+        <li>Identify which tasks are repeated most frequently and thus should be very easy to do</li> 
+        <li>Identify those tasks which are more advanced and might require more steps</li> 
+        <li>Design an interface that makes the most-common tasks very easy, while still being powerful enough for more advanced uses.</li> 
+      </ol> 
+      <h2 id="some-typical-user-tasks">Some Typical User Tasks</h2> 
+      <p>Operations such as these should be possible to do with only 10 lines code, and with no knowledge of XML or XPath or ODF. We should add to this list and discuss</p> 
+      <p>Do we agree that these are all common tasks that should be simple to program with ODFDOM?</p> 
+      <ol> 
+        <li>Open an ODF document, search for a text string "foo" and replace it with "bar" every where it occurs in the user text of the document.</li> 
+        <li>Combine two documents into one document.</li> 
+        <li>Print out the metadata fields for a document.</li> 
+        <li>Replace one image with another image in a file</li> 
+        <li>Reorder slides in a presentation</li> 
+        <li>Take 5 slides from 5 different presentations and combine them into one new presentation</li> 
+        <li>Find all text with the style "private" and replace that text with "XXXXXXXX"</li> 
+        <li>Add a logo image in the document header</li> 
+        <li>Given a 2 dimensional data array or a cell range address, create a bar chart in a spreadsheet</li> 
+        <li>Highlight all the occurrences of a given text with blue bold properties</li> 
+        <li>Create a 5rows X 2columns table in a text document, the first row is head row.</li> 
+        <li>Create a presentation document from a given template document</li> 
+        <li>Insert a rectangle shape with the shape text “hello world"</li> 
+        <li>Create TOC at the beginning of the text document</li> 
+        <li>Create a new sheet in a spreadsheet, insert a text at the given cell address, format the text as bold/italic</li> 
+        <li>Create a data pilot given row/column/data fields in the sheet in a spreadsheet</li> 
+        <li>Insert a formula at the given cell address in a spreadsheet</li> 
+        <li>Define simple page setup for a text document, orientation is portrait, left/right margin is 2cm, top/bottom is 2.5cm</li> 
+        <li>Insert page number in the footer</li> 
+        <li>Set row height and column width for a sheet in a spreadsheet</li> 
+        <li>Set bullet number for a text list</li> 
+        <li>Create a customized paragraph style, apply this style to all paragraphs in a text document</li> 
+        <li>Select a custom shape, create a style from the custom shape properties, apply this style to another custom shape.</li> 
+        <li>Create a custom shape in presentation slide, set animation effect “entrance-&gt;fly in“ to the custom shape.</li> 
+        <li>Split a large document to many small documents, each chapter beginning with “heading 1“ style will be saved as a small document.</li> 
+      </ol> 
+      <h2 id="programming-=-data-structures-+-algorithms">Programming = Data structures + Algorithms</h2> 
+      <p>We probably all saw a statement like that in our first Computer Science class. These are both essential parts of programming. But many libraries have the fault that they only have strength in the data modeling. They often have very little support for common algorithms. For example, what did the C Programming Language give us? Aside from qsort() and bsearch(), there was very little. C++ on the other hand, contained the powerful Standard Template Library (STL).</p> 
+      <p>ODFDOM is mainly convenience wrappers of ODF markup, raising the level of abstraction of this data. But we should also consider supporting algorithms, along the STL model. This would be quite powerful and is necessary to make the above task examples very simple for our users.</p> 
+      <p>For example, a typical pattern of use is:</p> 
+      <ol> 
+        <li>Given an ODF document instance, navigate to a point in the document</li> 
+        <li>At that point insert content</li> 
+        <li>Save the document</li> 
+      </ol> 
+      <p>Another is:</p> 
+      <ol> 
+        <li>Given an ODF document instance, define a selection (by start and end point, by start point and "distance", by similarity, etc.)</li> 
+        <li>Modify the selection, e.g., replace the content, modify the the style, delete the selection, etc.</li> 
+        <li>Save the document</li> 
+      </ol> 
+      <p>And another is:</p> 
+      <ol> 
+        <li>Given an ODF document instance, iterate over content of a given type, e..g, all footnotes, all images, all paragraphs of a given style</li> 
+        <li>As you iterate over the content, treat each returned fragment as a selection that can be operated on.</li> 
+      </ol> 
+      <p>As we think of this more, we see some commonality, including the need to define:</p> 
+      <ul> 
+        <li>A parametrized selection mechanism that has some predefined predicates, like for all content, all content of a given style, etc., but also allow user-defined predicates</li> 
+        <li>Mutable and immutable iterators</li> 
+        <li>Copy semantics on content, so it can be moved from document to document and preserve styles (if desired) including possibly merging styles where they are identical</li> 
+        <li>And of course, all the wrappers to read/write ODF content once we have the fragment that the user wants.</li> 
+        <li>And I'm sure there are several other items to consider</li> 
+      </ul> 
+      <h2 id="a-possible-direction-forward">A Possible Direction Forward</h2> 
+      <p>I'd like us to consider doing the following:</p> 
+      <ol> 
+        <li>Spend a few days completing the list of user tasks that we agree should be easy to do with the ODFDOM convenience layer API.</li> 
+        <li>Then review that list and identify common patterns of use, those recurring interactions that should be coded once and reused.</li> 
+        <li>Then, before writing any real code, let's write pseudo code for some (or even all) of our original tasks. Let's validate the API design at a high level by confirming that this API radically simplifies the coding required for the most common use cases.</li> 
+        <li>Then we implement the API's, write unit tests, etc.</li> 
+      </ol> 
+    </div>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>

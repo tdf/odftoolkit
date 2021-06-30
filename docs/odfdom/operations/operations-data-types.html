@@ -1,2000 +1,1864 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
-<head>
-  <!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../index.html">About</a></li>
-<li><a href="../../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../get-involved.html">Get Involved</a></li>
-<li><a href="../../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../../people.html">People</a></li>
-<li><a href="../../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../../javadoc.html">JavaDoc</a></li>
-<li><a href="../../website-development.html">Website Development</a></li>
-<li><a href="../../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      
-      <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="data-types-operations">Data Types (Operations)<a class="headerlink" href="#data-types-operations" title="Permanent link">&para;</a></h1>
-<p>Property values in operations may consist of complex objects instead of simple values (strings, numbers). The following chapters define the contents of these complex values. The chapter title contains the type name as used in the remaining documentation.</p>
-<h2 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h2>
-<p>A value of type <em>Position</em> describes the exact position of a specific component in the document. A position is always an array of non-negative integer values. The exact meaning of the array elements is dependent on the operation, or even on the application that uses a generic operation.</p>
-<h2 id="lineheight">LineHeight<a class="headerlink" href="#lineheight" title="Permanent link">&para;</a></h2>
-<p>The total height of a text line, either absolute, or relative to the font size of the text in the line.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>type</code></td>
-<td>Enum</td>
-<td>“percent”</td>
-<td>Type of the line height. See table below for details.</td>
-</tr>
-<tr>
-<td><code>value</code></td>
-<td>Integer</td>
-<td>100</td>
-<td>Length value (1/100mm or percent), depending on the <code>type</code> property. See table below for details.</td>
-</tr>
-</tbody>
-</table>
-<table class="table">
-<thead>
-<tr>
-<th>LineHeight <code>type</code></th>
-<th>LineHeight <code>value</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>“percent”</td>
-<td>Line height, in percent of the <em>normal line height</em>. The normal line height is dependent on the font face and font size (usually somewhere between 110% and 140% of the font size).</td>
-</tr>
-<tr>
-<td>“fixed”</td>
-<td>Fixed line height, in 1/100 mm.</td>
-</tr>
-<tr>
-<td>“leading”</td>
-<td>Spacing between lines in 1/100 mm, will be added to 100% line height.</td>
-</tr>
-<tr>
-<td>“atLeast”</td>
-<td>Fixed minimum line height in 1/100 mm, will be used if larger than 100% line height.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="tabstop">TabStop<a class="headerlink" href="#tabstop" title="Permanent link">&para;</a></h2>
-<p>Defines a tab stop inside a paragraph.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>fillChar</code></td>
-<td>Enum</td>
-<td>“none”</td>
-<td>Type of fill character - see below: <strong>TabStopFillCharacterType</strong></td>
-</tr>
-<tr>
-<td><code>pos</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>Tab stop position in 1/100th mm.</td>
-</tr>
-<tr>
-<td><code>value</code></td>
-<td>Enum</td>
-<td>“left”</td>
-<td>Type of justification for the tab stop  - see below: <strong>TabStopJustification</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>TabStopFillCharacterType</strong>:</p>
-<ul>
-<li>“none” - Tab is just empty space-</li>
-<li>“dot” - Tab will be filled with dot chars: <code>. . . . . . . . . . .</code></li>
-<li>“hyphen”- Tab will be filled with hyphen chars: <code>- - - - - - - - -</code></li>
-<li>“underscore”- Tab will be filled with underscore chars <code>_ _ _ _ _ _ _</code></li>
-</ul>
-<p><strong>TabStopJustification</strong>:</p>
-<ul>
-<li>“left” - Following text is located right of the tab stop (text is left-aligned to the tab stop).</li>
-<li>“center” - Following text is located centered around the tab stop.</li>
-<li>“right” - Following text is located left of the tab stop (text is right-aligned to the tab stop).</li>
-<li>“decimal” - Following text with decimal separator will be aligned so the decimal separator is located at the tab stop position.</li>
-<li>“bar” - A vertical line is painted exactly at the position of the tab stop. This position won't change by a text input ⇒ absolute position.</li>
-<li>“clear” - Removes a tab stop from the current tab stop list. Can be used to remove a previously defined tab stop in a parent style sheet.</li>
-</ul>
-<h2 id="drawingposition">DrawingPosition<a class="headerlink" href="#drawingposition" title="Permanent link">&para;</a></h2>
-<p>The position of a drawing object is a <a href="#position">Position</a> array whose contents are dependent on the document type.</p>
-<ul>
-<li>
-<p>See the definition of a <a href="#drawingposition">text drawing position</a> for text documents in ODT.</p>
-</li>
-<li>
-<p>See the definition of a <a href="#drawingposition">sheet drawing position</a> for spreadsheet documents in Spreadsheet.</p>
-</li>
-</ul>
-<h2 id="embeddeddrawingposition">EmbeddedDrawingPosition<a class="headerlink" href="#embeddeddrawingposition" title="Permanent link">&para;</a></h2>
-<p>The positions of drawing objects embedded in other drawing objects (supported by groups and charts only) are built by extending the <a href="#drawingposition">DrawingPosition</a> of the parent drawing object with the zero-based index of the embedded drawing object among all child drawings of the parent drawing object.</p>
-<ul>
-<li>Example: A group object at position <code>[1,5]</code> contains three child objects with the indexes <code>1</code>, <code>2</code>, and <code>3</code>. These child drawing objects are located at the positions <code>[1,5,1]</code>, <code>[1,5,2]</code>, and <code>[1,5,3]</code> then.</li>
-</ul>
-<p>Drawing objects can be nested recursively.</p>
-<ul>
-<li>Example: A group object at position <code>[1,5]</code> contains a nested group object at position <code>[1,5,1]</code> which contains a chart at position <code>[1,5,1,1]</code>.</li>
-</ul>
-<h2 id="color">Color<a class="headerlink" href="#color" title="Permanent link">&para;</a></h2>
-<p>Description of a color value. Colors may be defined by a simple RGB value, or may refer to scheme colors defined by a document theme (inserted with the <a href="#inserttheme">operation "insertTheme"</a>).</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>type</code></td>
-<td>Enum</td>
-<td>“auto”</td>
-<td>Color type, affects the <code>value</code> property. See table below for details.</td>
-</tr>
-<tr>
-<td><code>value</code></td>
-<td>String</td>
-<td>Object</td>
-<td></td>
-</tr>
-<tr>
-<td><code>transformations</code></td>
-<td>Array&lt;<a href="#colortransformation">ColorTransformation</a>></td>
-<td>[]</td>
-<td>Transformations to be applied to the initial color value.</td>
-</tr>
-<tr>
-<td><code>fallbackValue</code></td>
-<td>String</td>
-<td></td>
-<td>6-digits upper-case hexadecimal string (RRGGBB). This color should be used whenever a system is not able to calculate a color value from the type+value+transformation pair. Especially needed by systems which don't support theming or transformations.</td>
-</tr>
-</tbody>
-</table>
-<p>Depending on the color type, the color values have different meanings:</p>
-<table class="table">
-<thead>
-<tr>
-<th>Color <code>type</code></th>
-<th>Color <code>value</code> Data Type</th>
-<th>Color <code>value</code></th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>“rgb”</td>
-<td>String</td>
-<td>RGB color model, 6-digits upper-case hexadecimal string (RRGGBB).</td>
-<td></td>
-</tr>
-<tr>
-<td>“hsl”</td>
-<td>Object</td>
-<td>HSL color model, as object with the properties <code>h</code> (hue), <code>s</code> (saturation), and <code>l</code> (luminance). Hue must be in the interval [0,21599999], saturation and luminance must be in the interval [0,100000].</td>
-<td></td>
-</tr>
-<tr>
-<td>“crgb”</td>
-<td>Object</td>
-<td>CRGB color model, each color channel as percentage, as object with the properties <code>r</code> (red), <code>g</code> (green), and <code>b</code> (blue). Each value must be in the interval [0,100000].</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td>“scheme”</td>
-<td>String</td>
-<td>Case-sensitive scheme color name from current theme.</td>
-<td></td>
-</tr>
-<tr>
-<td>“system”</td>
-<td>String</td>
-<td>Name of a system color. The effective color value depends on the environment.</td>
-<td></td>
-</tr>
-<tr>
-<td>“preset”</td>
-<td>String</td>
-<td>Name of a predefined color.</td>
-<td></td>
-</tr>
-<tr>
-<td>“auto”</td>
-<td><em>Not used</em></td>
-<td>The effective color value depends on the context.</td>
-<td></td>
-</tr>
-<tr>
-<td>Text characters</td>
-<td>May depend on the current background color (character/paragraph) which must be calculated by the client, therefore the backend should NOT set any fixed color here.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Border lines</td>
-<td>Usually black. May be a different color, e.g. in spreadsheet documents where the automatic border color equals the grid line color.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Background fill</td>
-<td>Usually transparent, or any predefined color or calculated color depending on the context, e.g. in chart objects.</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Notes:</strong></p>
-<p>1) The CRGB color model uses linear values for the color channels (without gamma correction). When converting from CRGB color model to RGB or HSL color model, a <code>gamma</code> transformation (see <a href="#colortransformation">ColorTransformation</a>) must be applied implicitly to the resulting color.</p>
-<p>The following constants will be used in this documentation:</p>
-<table class="table">
-<thead>
-<tr>
-<th>Constant Name</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Color.AUTO</td>
-<td type:_auto_="type:“auto”"></td>
-</tr>
-</tbody>
-</table>
-<h2 id="colortransformation">ColorTransformation<a class="headerlink" href="#colortransformation" title="Permanent link">&para;</a></h2>
-<p>Color transformations are contained in <a href="#color">Color</a> values, and modify the base color defined by the color value. Each transformation object contains the following properties:</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>type</code></td>
-<td>Enum <a href="#colortransformationtype">ColorTransformationType</a></td>
-<td><em>required</em></td>
-<td>Type of the color transformation.</td>
-</tr>
-<tr>
-<td><code>value</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>Value, depends on the transformation <code>type</code> attribute. See <a href="#colortransformationtype">ColorTransformationType</a> for details.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="colortransformationtype">ColorTransformationType<a class="headerlink" href="#colortransformationtype" title="Permanent link">&para;</a></h2>
-<p>Specifies how to transform a given color. The following variables will be used in the following descriptions:</p>
-<table class="table">
-<thead>
-<tr>
-<th>Variable</th>
-<th>Value Range</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>R</td>
-<td>[0,100000]</td>
-<td>Red channel (RGB color model).</td>
-</tr>
-<tr>
-<td>G</td>
-<td>[0,100000]</td>
-<td>Green channel (RGB color model).</td>
-</tr>
-<tr>
-<td>B</td>
-<td>[0,100000]</td>
-<td>Blue channel (RGB color model).</td>
-</tr>
-<tr>
-<td>H</td>
-<td>[0,21599999]</td>
-<td>Hue channel (HSL color model). 0: red (0deg); 7200000: green (120deg); 14400000: blue (240deg).</td>
-</tr>
-<tr>
-<td>S</td>
-<td>[0,100000]</td>
-<td>Saturation channel (HSL color model). 0: gray; 100000: full color.</td>
-</tr>
-<tr>
-<td>L</td>
-<td>[0,100000]</td>
-<td>Luminance channel (HSL color model). 0: black; 50000: color; 100000: white.</td>
-</tr>
-<tr>
-<td>A</td>
-<td>[0,100000]</td>
-<td>Opacity (alpha channel). 0: transparent; 100000: opaque.</td>
-</tr>
-</tbody>
-</table>
-<p>The following table will describe how to modify the components of the color for each transformation type:</p>
-<table class="table">
-<thead>
-<tr>
-<th>Enum Value</th>
-<th>Value Range</th>
-<th>Value Description</th>
-<th>Color Model</th>
-<th>Implementation Notes</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>“alpha”</td>
-<td>[0,100000]</td>
-<td>Sets the opaqueness of the color. By default, the color is fully opaque. 0: transparent; 100000: opaque.</td>
-<td>RGB/HSL</td>
-<td>Anew = value</td>
-<td></td>
-</tr>
-<tr>
-<td>“alphaMod”</td>
-<td>[0,*]</td>
-<td>Modulates the opaqueness of the color. The value 100000 leaves opacity unmodified.</td>
-<td>RGB/HSL</td>
-<td>Anew = A * (value/100000), result restricted to interval [0,100000]</td>
-<td></td>
-</tr>
-<tr>
-<td>“alphaOff”</td>
-<td>[-100000,100000]</td>
-<td>Shifts the opaqueness of the color. The value 0 leaves opacity unmodified.</td>
-<td>RGB/HSL</td>
-<td>Anew = A + value, result restricted to interval [0,100000]</td>
-<td></td>
-</tr>
-<tr>
-<td>“red”</td>
-<td>[0,100000]</td>
-<td>Sets the red channel of the color.</td>
-<td>RGB</td>
-<td>Rnew = value</td>
-<td></td>
-</tr>
-<tr>
-<td>“redMod”</td>
-<td>[0,*]</td>
-<td>Modulates the red channel of the color. The value 100000 leaves the channel unmodified.</td>
-<td>RGB</td>
-<td>Rnew = R * (value/100000), result restricted to interval [0,100000]</td>
-<td></td>
-</tr>
-<tr>
-<td>“redOff”</td>
-<td>[-100000,100000]</td>
-<td>Shifts the red channel of the color. The value 0 leaves the channel unmodified.</td>
-<td>RGB</td>
-<td>Rnew = R + value, result restricted to interval [0,100000]</td>
-<td></td>
-</tr>
-<tr>
-<td>“green”</td>
-<td>[0,100000]</td>
-<td>Sets the green channel of the color.</td>
-<td>RGB</td>
-<td>Gnew = value</td>
-<td></td>
-</tr>
-<tr>
-<td>“greenMod”</td>
-<td>[0,*]</td>
-<td>Modulates the green channel of the color. The value 100000 leaves the channel unmodified.</td>
-<td>RGB</td>
-<td>Gnew = G + value, result restricted to interval [0,100000]</td>
-<td></td>
-</tr>
-<tr>
-<td>“greenOff”</td>
-<td>[-100000,100000]</td>
-<td>Shifts the green channel of the color. The value 0 leaves the channel unmodified.</td>
-<td>RGB</td>
-<td>Gnew = G + value, result restricted to interval [0,100000]</td>
-<td></td>
-</tr>
-<tr>
-<td>“blue”</td>
-<td>[0,100000]</td>
-<td>Sets the green channel of the color.</td>
-<td>RGB</td>
-<td>Gnew = value</td>
-<td></td>
-</tr>
-<tr>
-<td>“blueMod”</td>
-<td>[0,*]</td>
-<td>Modulates the blue channel of the color. The value 100000 leaves the channel unmodified.</td>
-<td>RGB</td>
-<td>Bnew = B * (value/100000), result restricted to interval [0,100000]</td>
-<td></td>
-</tr>
-<tr>
-<td>“blueOff”</td>
-<td>[-100000,100000]</td>
-<td>Shifts the blue channel of the color. The value 0 leaves the channel unmodified.</td>
-<td>RGB</td>
-<td>Bnew = B + value, result restricted to interval [0,100000]</td>
-<td></td>
-</tr>
-<tr>
-<td>“hue”</td>
-<td>[0,21599999]</td>
-<td>Sets the hue channel of the color.</td>
-<td>HSL</td>
-<td>Hnew = value</td>
-<td></td>
-</tr>
-<tr>
-<td>“hueMod”</td>
-<td>[0,*]</td>
-<td>Modulates the hue channel of the color. The value 100000 leaves the channel unmodified.</td>
-<td>HSL</td>
-<td>Hnew = H * (value/100000), result restricted to interval [0,21599999]</td>
-<td></td>
-</tr>
-<tr>
-<td>“hueOff”</td>
-<td>[-21599999,21599999]</td>
-<td>Shifts the hue channel of the color. The value 0 leaves the channel unmodified.</td>
-<td>HSL</td>
-<td>Hnew = H + value, result restricted to interval [0,21599999]</td>
-<td></td>
-</tr>
-<tr>
-<td>“sat”</td>
-<td>[0,100000]</td>
-<td>Sets the saturation channel of the color.</td>
-<td>HSL</td>
-<td>Snew = value</td>
-<td></td>
-</tr>
-<tr>
-<td>“satMod”</td>
-<td>[0,*]</td>
-<td>Modulates the saturation channel of the color. The value 100000 leaves the channel unmodified.</td>
-<td>HSL</td>
-<td>Snew = S * (value/100000), result restricted to interval [0,100000]</td>
-<td></td>
-</tr>
-<tr>
-<td>“satOff”</td>
-<td>[-100000,100000]</td>
-<td>Shifts the saturation channel of the color. The value 0 leaves the channel unmodified.</td>
-<td>HSL</td>
-<td>Snew = S + value, result restricted to interval [0,100000]</td>
-<td></td>
-</tr>
-<tr>
-<td>“lum”</td>
-<td>[0,100000]</td>
-<td>Sets the luminance channel of the color.</td>
-<td>HSL</td>
-<td>Lnew = value</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td>“lumMod”</td>
-<td>[0,*]</td>
-<td>Modulates the luminance channel of the color. The value 100000 leaves the channel unmodified.</td>
-<td>HSL</td>
-<td>Lnew = L * (value/100000), result restricted to interval [0,100000]</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td>“lumOff”</td>
-<td>[-100000,100000]</td>
-<td>Shifts the luminance channel of the color. The value 0 leaves the channel unmodified.</td>
-<td>HSL</td>
-<td>Lnew = L + value, result restricted to interval [0,100000]</td>
-<td>(1)</td>
-</tr>
-<tr>
-<td>“shade”</td>
-<td>[0,100000]</td>
-<td>Darkens the color. 0: black; 100000: original color.</td>
-<td>RGB</td>
-<td>RGBnew = RGB * (value/100000)</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td>“tint”</td>
-<td>[0,100000]</td>
-<td>Lightens the color. 0: white; 100000: original color.</td>
-<td>RGB</td>
-<td>RGBnew = (RGB-100000) * (value/100000) + 100000</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td>“comp”</td>
-<td><em>not used</em></td>
-<td>Complement color (rotate hue by 180 degrees).</td>
-<td>HSL</td>
-<td>Hnew = (H + 10800000) mod 21600000</td>
-<td></td>
-</tr>
-<tr>
-<td>“inv”</td>
-<td><em>not used</em></td>
-<td>Inverse color (color channels inversed).</td>
-<td>RGB</td>
-<td>RGBnew = 100000 - RGB</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td>“gamma”</td>
-<td><em>not used</em></td>
-<td>Gamma correction (increases luminance of medium light colors).</td>
-<td>RGB</td>
-<td>RGBnew = (RGB/100000)1/2.27 * 100000</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td>“invGamma”</td>
-<td><em>not used</em></td>
-<td>Inversed gamma correction (decreases luminance of medium light colors).</td>
-<td>RGB</td>
-<td>RGBnew = (RGB/100000)2.27 * 100000</td>
-<td>(2)</td>
-</tr>
-<tr>
-<td>“gray”</td>
-<td><em>not used</em></td>
-<td>Monochrome color.</td>
-<td>RGB</td>
-<td>RGBnew = 0.22 * R + 0.72 * G + 0.06 * B</td>
-<td>(2)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Notes</strong>:</p>
-<ol>
-<li>
-<p>If a luminance transformation results in the luminance values 0 or 100000, additionally the saturation of the color must be set to 0.</p>
-</li>
-<li>
-<p>Must be applied to all three color channels R, G, and B.</p>
-</li>
-</ol>
-<h2 id="colorstop">ColorStop<a class="headerlink" href="#colorstop" title="Permanent link">&para;</a></h2>
-<p>Description of a `ColorStop` value as it is be used by <a href="#gradient">`Gradient` data types</a>. A `ColorStop` represents the interpolation end point of/between 2 colors.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>position</code></td>
-<td>Double</td>
-<td>0</td>
-<td>Per-cent ratio-range of distance values from (including) 0 to 1, representing values from 0% to 100%.</td>
-</tr>
-<tr>
-<td><code>color</code></td>
-<td><a href="#color">Color</a></td>
-<td></td>
-<td>Color value of the current interpolation's end point.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="gradient">Gradient<a class="headerlink" href="#gradient" title="Permanent link">&para;</a></h2>
-<p>Description of a color gradient. A color gradient is the transition in between at least 2 <a href="#color">colors</a>.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>type</code></td>
-<td>Enum</td>
-<td>“linear”</td>
-<td>Specifies one of the two possible gradient-fill main-types (see <strong>gradientType</strong>)</td>
-</tr>
-<tr>
-<td><code>pathType</code></td>
-<td>Enum</td>
-<td>“shape”</td>
-<td>Specifies one of the 3 possible gradient-fill path sub-types (see <strong>gradientPathType</strong>)</td>
-</tr>
-<tr>
-<td><code>left</code></td>
-<td>Double</td>
-<td>0</td>
-<td>Values from (including) -1 to 1. Specifies in percentage format (from the left to the right) the position of the left edge of the center shade rectangle. 0 targets the left edge of this rectangle whereas 1 targets its right edge.</td>
-</tr>
-<tr>
-<td><code>right</code></td>
-<td>Double</td>
-<td>0</td>
-<td>Values from (including) -1 to 1. Specifies in percentage format (from the right to the left) the position of the right edge of the center shade rectangle. 0 targets the right edge of this rectangle whereas 1 targets its left edge.</td>
-</tr>
-<tr>
-<td><code>top</code></td>
-<td>Double</td>
-<td>0</td>
-<td>Values from (including) -1 to 1. Specifies in percentage format (from the top to the bottom) the position of the top edge of the center shade rectangle. 0 targets the top edge of this rectangle whereas 1 targets its bottom edge.</td>
-</tr>
-<tr>
-<td><code>bottom</code></td>
-<td>Double</td>
-<td>0</td>
-<td>Values from (including) -1 to 1. Specifies in percentage format (from the bottom to the top) the position of the bottom edge of the center shade rectangle. 0 targets the bottom edge of this rectangle whereas 1 targets its top edge.</td>
-</tr>
-<tr>
-<td><code>pathFillLeft</code></td>
-<td>Double</td>
-<td>0.5</td>
-<td>Values from (including) -1 to 1. Specifies in percentage format (from the left to the right) the position of the left edge of the center shade rectangle. 0 targets the left edge of this rectangle whereas 1 targets its right edge.</td>
-</tr>
-<tr>
-<td><code>pathFillRight</code></td>
-<td>Double</td>
-<td>0.5</td>
-<td>Values from (including) -1 to 1. Specifies in percentage format (from the right to the left) the position of the right edge of the center shade rectangle. 0 targets the right edge of this rectangle whereas 1 targets its left edge.</td>
-</tr>
-<tr>
-<td><code>pathFillTop</code></td>
-<td>Double</td>
-<td>0.5</td>
-<td>Values from (including) -1 to 1. Specifies in percentage format (from the top to the bottom) the position of the top edge of the center shade rectangle. 0 targets the top edge of this rectangle whereas 1 targets its bottom edge.</td>
-</tr>
-<tr>
-<td><code>pathFillBottom</code></td>
-<td>Double</td>
-<td>0.5</td>
-<td>Values from (including) -1 to 1. Specifies in percentage format (from the bottom to the top) the position of the bottom edge of the center shade rectangle. 0 targets the bottom edge of this rectangle whereas 1 targets its top edge.</td>
-</tr>
-<tr>
-<td><code>rotation</code></td>
-<td>Double</td>
-<td>0</td>
-<td>Specifies the direction of color change for the gradient (indicating its orientation - e.g. vertical, horizontal, diagonal). A floating number range with values from (including) 0 to (excluding) 360.</td>
-</tr>
-<tr>
-<td><code>isRotateWithShape</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>A flag that indicates whether a gradient will rotate with its shape.</td>
-</tr>
-<tr>
-<td><code>isScaled</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>Specifies whether a gradient angle scales with the fill region or not.</td>
-</tr>
-<tr>
-<td><code>flipH</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>Specifies if the gradient is mirrored horrizontally.</td>
-</tr>
-<tr>
-<td><code>flipV</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>Specifies if the gradient is mirrored vertically.</td>
-</tr>
-<tr>
-<td><code>colorStops</code></td>
-<td>Array&lt;<a href="#colorstop">ColorStop</a>></td>
-<td>[]</td>
-<td>A list of <a href="#colorstop">color stops</a> specifying the distribution of colors along the gradient.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>gradientType</strong>:</p>
-<ul>
-<li>“linear” - This gradient fill is of gradient type “linear” - . Linear gradient type means that the transition from one color to the next is along a line (e.g. horizontal, vertical, diagonal, etc.).</li>
-<li>“path” - This gradient fill is of gradient type “path” - . Path gradient type means the that the boundary of transition from one color to the next is defined by e.g. a circle, a rectangle or a freely formed shape.</li>
-</ul>
-<p><strong>gradientPathType</strong>:</p>
-<ul>
-<li>“circle” - same as pathType=“rect”</li>
-<li>“rect” - The gradient follows a rectangular path. This rectangular “path” -  sub-type is defined by its 4 additional edge attributes “top”, “bottom”, “left” and “right” describing the shading rectangle for a centered gradient relatively to the fill tile rectangle. Thus the shade does fill the entire tile except for the margins specified by those edge attributes. Each edge of the center shade rectangle is defined by a percentage offset from the corresponding edge of the tile rectangle. A positive percentage specifies an inset, while a negative percentage specifies an outset.</li>
-<li>“shape” - The gradient follows its shape.</li>
-</ul>
-<h2 id="tiling">Tiling<a class="headerlink" href="#tiling" title="Permanent link">&para;</a></h2>
-<p>Description of a bitmap tiling.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>rectAlignment</code></td>
-<td>Enum</td>
-<td>“topLeft”</td>
-<td></td>
-</tr>
-<tr>
-<td><code>flipMode</code></td>
-<td>Enum</td>
-<td>“none”</td>
-<td>The flip mode of the tiling, “x”, “xy”, “y” and “none” is possible.</td>
-</tr>
-<tr>
-<td><code>stretchX</code></td>
-<td>percentage</td>
-<td>100%</td>
-<td>Specifies the amount in percent horizontally scaling the tile.</td>
-</tr>
-<tr>
-<td><code>stretchY</code></td>
-<td>percentage</td>
-<td>100%</td>
-<td>Specifies the amount in percent vertically scaling the tile.</td>
-</tr>
-<tr>
-<td><code>offX</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>Specifies additional horizontal offset in 1/100mm after alignment.</td>
-</tr>
-<tr>
-<td><code>offY</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>Specifies additional vertical offset in 1/100mm after alignment.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>rectAlignmentType</strong>:</p>
-<ul>
-<li>“top” - The tile is top aligned.</li>
-<li>“topRight” - The tile is top right aligned.</li>
-<li>“left” - The tile is left aligned.</li>
-<li>“center” - The tile is center aligned.</li>
-<li>“right” - The tile is right aligned.</li>
-<li>“bottomLeft” - The tile is bottom left aligned.</li>
-<li>“bottom” - The tile is bottom aligned.</li>
-<li>“bottomRight” - The tile is bottom right aligned.</li>
-</ul>
-<h2 id="stretching">Stretching<a class="headerlink" href="#stretching" title="Permanent link">&para;</a></h2>
-<p>Description of a bitmap fill for backgrounds and outlines of drawing objects.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>left</code></td>
-<td>percentage</td>
-<td>0</td>
-<td>Left offset of the source rectangle in percent.</td>
-</tr>
-<tr>
-<td><code>top</code></td>
-<td>percentage</td>
-<td>0</td>
-<td>Top offset of the source rectangle in percent.</td>
-</tr>
-<tr>
-<td><code>right</code></td>
-<td>percentage</td>
-<td>0</td>
-<td>Right offset of the source rectangle in percent.</td>
-</tr>
-<tr>
-<td><code>bottom</code></td>
-<td>percentage</td>
-<td>0</td>
-<td>Bottom offset of the source rectangle in percent.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="stretchingaligned">StretchingAligned<a class="headerlink" href="#stretchingaligned" title="Permanent link">&para;</a></h2>
-<p>ODF only… Description of a bitmap fill for backgrounds and outlines of drawing objects.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>rectAlignment</code></td>
-<td>enum</td>
-<td><code>center</code></td>
-<td>Specifies the alignment of the bitmap, the alignment can be “bottom”, “bottomLeft”, “bottomRight”, “center”, “left”, “right”, “top”, “topLeft” or “topRight”.</td>
-</tr>
-<tr>
-<td><code>width</code></td>
-<td>Number</td>
-<td>0</td>
-<td>Specifies the width of the bitmap, if 0 then the original width has to be used.</td>
-</tr>
-<tr>
-<td><code>height</code></td>
-<td>Number</td>
-<td>0</td>
-<td>Specifies the height of the bitmap, if 0 then the original height has to be used.</td>
-</tr>
-<tr>
-<td><code>scaleX</code></td>
-<td>percentage</td>
-<td>100</td>
-<td>Specifies the x scaling of the bitmap.</td>
-</tr>
-<tr>
-<td><code>scaleY</code></td>
-<td>percentage</td>
-<td>100</td>
-<td>Specifies the y scaling of the bitmap.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="bitmap">Bitmap<a class="headerlink" href="#bitmap" title="Permanent link">&para;</a></h2>
-<p>Description of a bitmap fill for backgrounds and outlines of drawing objects.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>imageUrl</code></td>
-<td>String</td>
-<td>””</td>
-<td>The URL of the image source for the fill bitmap.</td>
-</tr>
-<tr>
-<td><code>transparency</code></td>
-<td>Number</td>
-<td>0</td>
-<td>The transparency. A value of 1 means that the bitmap is fully transparent.</td>
-</tr>
-<tr>
-<td><code>rotateWithShape</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>Specifies if the filling rotates with the shape.</td>
-</tr>
-<tr>
-<td><code>tiling</code></td>
-<td><a href="#tiling">Tiling</a></td>
-<td></td>
-<td>If set it specifies the tiling of the bitmap. A bitmap can either be tiled or stretched but not both.</td>
-</tr>
-<tr>
-<td><code>stretching</code></td>
-<td><a href="#stretching">Stretching</a></td>
-<td></td>
-<td>If set it specifies the stretching of the bitmap. A bitmap can either be tiled or stretched but not both.</td>
-</tr>
-<tr>
-<td><code>stretchingAligned</code></td>
-<td><a href="#stretchingaligned">StretchingAligned</a></td>
-<td></td>
-<td>ODF only, If set it specifies the stretching of the bitmap. A bitmap can either be tiled, stretched or stretchingAligned.</td>
-</tr>
-<tr>
-<td><code>cropLeft</code></td>
-<td>Number</td>
-<td>0</td>
-<td>all</td>
-</tr>
-<tr>
-<td><code>cropTop</code></td>
-<td>Number</td>
-<td>0</td>
-<td>all</td>
-</tr>
-<tr>
-<td><code>cropRight</code></td>
-<td>Number</td>
-<td>0</td>
-<td>all</td>
-</tr>
-<tr>
-<td><code>cropBottom</code></td>
-<td>Number</td>
-<td>0</td>
-<td>all</td>
-</tr>
-</tbody>
-</table>
-<h2 id="pattern">Pattern<a class="headerlink" href="#pattern" title="Permanent link">&para;</a></h2>
-<p>An enumeration for all preset pattern styles that can be used as background or outline for a drawing object.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Enum Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>“cross”</td>
-<td>Thin horizontally/vertically crossing lines.</td>
-</tr>
-<tr>
-<td>“dashDnDiag”</td>
-<td>Thin dashed diagonal lines (top-left to bottom-right).</td>
-</tr>
-<tr>
-<td>“dashHorz”</td>
-<td>Thin dashed horizontal lines.</td>
-</tr>
-<tr>
-<td>“dashUpDiag”</td>
-<td>Thin dashed diagonal lines (bottom-left to top-right).</td>
-</tr>
-<tr>
-<td>“dashVert”</td>
-<td>Thin dashed vertical lines.</td>
-</tr>
-<tr>
-<td>“diagBrick”</td>
-<td>Diagonal brick pattern.</td>
-</tr>
-<tr>
-<td>“diagCross”</td>
-<td>Thin diagonally crossing lines.</td>
-</tr>
-<tr>
-<td>“divot”</td>
-<td>Divot pattern.</td>
-</tr>
-<tr>
-<td>“dkDnDiag”</td>
-<td>Thick narrow diagonal lines (top-left to bottom-right).</td>
-</tr>
-<tr>
-<td>“dkHorz”</td>
-<td>Thick narrow horizontal lines.</td>
-</tr>
-<tr>
-<td>“dkUpDiag”</td>
-<td>Thick narrow diagonal lines (bottom-left to top-right).</td>
-</tr>
-<tr>
-<td>“dkVert”</td>
-<td>Thick narrow vertical lines.</td>
-</tr>
-<tr>
-<td>“dnDiag”</td>
-<td>Thin diagonal lines (top-left to bottom-right).</td>
-</tr>
-<tr>
-<td>“dotDmnd”</td>
-<td>Thin dotted diagonally crossing lines.</td>
-</tr>
-<tr>
-<td>“dotGrid”</td>
-<td>Thin dotted horizontally/vertically crossing lines.</td>
-</tr>
-<tr>
-<td>“horz”</td>
-<td>Thin horizontal lines.</td>
-</tr>
-<tr>
-<td>“horzBrick”</td>
-<td>Horizontal brick pattern.</td>
-</tr>
-<tr>
-<td>“lgCheck”</td>
-<td>Large checker board pattern.</td>
-</tr>
-<tr>
-<td>“lgConfetti”</td>
-<td>Large unordered dots.</td>
-</tr>
-<tr>
-<td>“lgGrid”</td>
-<td>Thin horizontally/vertically crossing lines.</td>
-</tr>
-<tr>
-<td>“ltDnDiag”</td>
-<td>Thin narrow diagonal lines (top-left to bottom-right).</td>
-</tr>
-<tr>
-<td>“ltHorz”</td>
-<td>Thin narrow horizontal lines.</td>
-</tr>
-<tr>
-<td>“ltUpDiag”</td>
-<td>Thin narrow diagonal lines (bottom-left to top-right).</td>
-</tr>
-<tr>
-<td>“ltVert”</td>
-<td>Thin narrow vertical lines.</td>
-</tr>
-<tr>
-<td>“narHorz”</td>
-<td>Thin very narrow horizontal lines.</td>
-</tr>
-<tr>
-<td>“narVert”</td>
-<td>Thin very narrow vertical lines.</td>
-</tr>
-<tr>
-<td>“none”</td>
-<td>Transparent pattern (background color only).</td>
-</tr>
-<tr>
-<td>“openDmnd”</td>
-<td>Thin diagonally crossing lines.</td>
-</tr>
-<tr>
-<td>“pct10”</td>
-<td>Dither pattern 10%.</td>
-</tr>
-<tr>
-<td>“pct20”</td>
-<td>Dither pattern 20%.</td>
-</tr>
-<tr>
-<td>“pct25”</td>
-<td>Dither pattern 25%.</td>
-</tr>
-<tr>
-<td>“pct30”</td>
-<td>Dither pattern 30%.</td>
-</tr>
-<tr>
-<td>“pct40”</td>
-<td>Dither pattern 40%.</td>
-</tr>
-<tr>
-<td>“pct5”</td>
-<td>Dither pattern 5%.</td>
-</tr>
-<tr>
-<td>“pct50”</td>
-<td>Dither pattern 50%.</td>
-</tr>
-<tr>
-<td>“pct60”</td>
-<td>Dither pattern 60%.</td>
-</tr>
-<tr>
-<td>“pct70”</td>
-<td>Dither pattern 70%.</td>
-</tr>
-<tr>
-<td>“pct75”</td>
-<td>Dither pattern 75%.</td>
-</tr>
-<tr>
-<td>“pct80”</td>
-<td>Dither pattern 80%.</td>
-</tr>
-<tr>
-<td>“pct90”</td>
-<td>Dither pattern 90%.</td>
-</tr>
-<tr>
-<td>“plaid”</td>
-<td>Plaid pattern.</td>
-</tr>
-<tr>
-<td>“shingle”</td>
-<td>Shingle pattern.</td>
-</tr>
-<tr>
-<td>“smCheck”</td>
-<td>Small checker board pattern.</td>
-</tr>
-<tr>
-<td>“smConfetti”</td>
-<td>Small unordered dots.</td>
-</tr>
-<tr>
-<td>“smGrid”</td>
-<td>Thin narrow horizontally/vertically crossing lines.</td>
-</tr>
-<tr>
-<td>“solid”</td>
-<td>Solid pattern (foreground color only).</td>
-</tr>
-<tr>
-<td>“solidDmnd”</td>
-<td>Large solid diamond pattern.</td>
-</tr>
-<tr>
-<td>“sphere”</td>
-<td>Sphere pattern.</td>
-</tr>
-<tr>
-<td>“trellis”</td>
-<td>Narrow trellis pattern.</td>
-</tr>
-<tr>
-<td>“upDiag”</td>
-<td>Thin diagonal lines (bottom-left to top-right).</td>
-</tr>
-<tr>
-<td>“vert”</td>
-<td>Thin vertical lines.</td>
-</tr>
-<tr>
-<td>“wave”</td>
-<td>Wave lines.</td>
-</tr>
-<tr>
-<td>“wdDnDiag”</td>
-<td>Thick diagonal lines (top-left to bottom-right).</td>
-</tr>
-<tr>
-<td>“wdUpDiag”</td>
-<td>Thick diagonal lines (bottom-left to top-right).</td>
-</tr>
-<tr>
-<td>“weave”</td>
-<td>Weave pattern.</td>
-</tr>
-<tr>
-<td>“zigZag”</td>
-<td>Zig zag lines.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="border">Border<a class="headerlink" href="#border" title="Permanent link">&para;</a></h2>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>style</code></td>
-<td>Enum</td>
-<td>“none”</td>
-<td>Border line style. (see <strong>borderLineStyle</strong>)</td>
-</tr>
-<tr>
-<td><code>width</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>Width of the border line. Not used if the <code>style</code> attribute equals “none”.</td>
-</tr>
-<tr>
-<td><code>color</code></td>
-<td><a href="#color">Color</a></td>
-<td>Color.AUTO</td>
-<td>Color of the border line. Not used if the <code>style</code> attribute equals “none”.</td>
-</tr>
-<tr>
-<td><code>space</code></td>
-<td>Integer</td>
-<td>0</td>
-<td>Distance of the border line to the content (ATM paragraph only).</td>
-</tr>
-</tbody>
-</table>
-<p><strong>borderLineStyle</strong>:</p>
-<ul>
-<li>“none” - No line.</li>
-<li>“single” - Solid single line.</li>
-<li>“double” - Solid double line.</li>
-<li>“dotted” - Dotted single line.</li>
-<li>“dashed” - Dashed single line.</li>
-<li>“dashDot” - Dash-dotted single line.</li>
-<li>“dashDotDot” - Dash-dot-dotted single line.</li>
-</ul>
-<p>The following constants will be used in this documentation:</p>
-<table class="table">
-<thead>
-<tr>
-<th>Constant Name</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Border.NONE</td>
-<td style:_none_="style:“none”"></td>
-</tr>
-</tbody>
-</table>
-<h2 id="sourcelink">SourceLink<a class="headerlink" href="#sourcelink" title="Permanent link">&para;</a></h2>
-<p>A generic description of a source data sequence used by a specific object, e.g. a chart data series, or a drawing object with linked text contents.</p>
-<p>The data type of the source link denotes the kind of source data.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Data Type</th>
-<th>Description</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Array</td>
-<td>An array of constant values (numbers or strings).</td>
-<td>[“data”, 1, 2, 3, 4]</td>
-</tr>
-<tr>
-<td>String</td>
-<td>Application-dependent descriptor for the linked source data.</td>
-<td></td>
-</tr>
-<tr>
-<td>Text</td>
-<td><em>not supported</em></td>
-<td></td>
-</tr>
-<tr>
-<td>Spreadsheet</td>
-<td>A formula expression that evaluates to one or more cell ranges containing the source data.</td>
-<td>“Sheet1!$A$2:$A$100”</td>
-</tr>
-<tr>
-<td>Presentation</td>
-<td><em>not supported</em></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="geometryconstant">GeometryConstant<a class="headerlink" href="#geometryconstant" title="Permanent link">&para;</a></h2>
-<p>This is a list of constant values that might be used within GeometryPoints and or Geometry Guides</p>
-<table class="table">
-<thead>
-<tr>
-<th>Constant</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>3cd4</code></td>
-<td>3 x 360° / 4 = 270°</td>
-</tr>
-<tr>
-<td><code>3cd8</code></td>
-<td>3 x 360° / 8 = 135°</td>
-</tr>
-<tr>
-<td><code>5cd8</code></td>
-<td>5 x 360° / 8 = 225°</td>
-</tr>
-<tr>
-<td><code>7cd8</code></td>
-<td>7 x 360° / 8 = 315°</td>
-</tr>
-<tr>
-<td><code>b</code></td>
-<td>bottom</td>
-</tr>
-<tr>
-<td><code>cd2</code></td>
-<td>360° / 2 = 180°</td>
-</tr>
-<tr>
-<td><code>cd4</code></td>
-<td>360° / 4 = 90°</td>
-</tr>
-<tr>
-<td><code>cd8</code></td>
-<td>360° / 8 = 45°</td>
-</tr>
-<tr>
-<td><code>hc</code></td>
-<td>horizontal center</td>
-</tr>
-<tr>
-<td><code>h</code></td>
-<td>height</td>
-</tr>
-<tr>
-<td><code>hd2</code></td>
-<td>height / 2</td>
-</tr>
-<tr>
-<td><code>hd3</code></td>
-<td>height / 3</td>
-</tr>
-<tr>
-<td><code>hd4</code></td>
-<td>height / 4</td>
-</tr>
-<tr>
-<td><code>hd5</code></td>
-<td>height / 5</td>
-</tr>
-<tr>
-<td><code>hd6</code></td>
-<td>height / 6</td>
-</tr>
-<tr>
-<td><code>hd8</code></td>
-<td>height / 8</td>
-</tr>
-<tr>
-<td><code>l</code></td>
-<td>left</td>
-</tr>
-<tr>
-<td><code>ls</code></td>
-<td>long side</td>
-</tr>
-<tr>
-<td><code>r</code></td>
-<td>right</td>
-</tr>
-<tr>
-<td><code>ss</code></td>
-<td>short side</td>
-</tr>
-<tr>
-<td><code>ssd2</code></td>
-<td>short side / 2</td>
-</tr>
-<tr>
-<td><code>ssd4</code></td>
-<td>short side / 4</td>
-</tr>
-<tr>
-<td><code>ssd6</code></td>
-<td>short side / 6</td>
-</tr>
-<tr>
-<td><code>ssd8</code></td>
-<td>short side / 8</td>
-</tr>
-<tr>
-<td><code>ssd16</code></td>
-<td>short side / 16</td>
-</tr>
-<tr>
-<td><code>ssd32</code></td>
-<td>short side / 32</td>
-</tr>
-<tr>
-<td><code>t</code></td>
-<td>top</td>
-</tr>
-<tr>
-<td><code>vc</code></td>
-<td>vertical center</td>
-</tr>
-<tr>
-<td><code>w</code></td>
-<td>width</td>
-</tr>
-<tr>
-<td><code>wd2</code></td>
-<td>width / 2</td>
-</tr>
-<tr>
-<td><code>wd4</code></td>
-<td>width / 4</td>
-</tr>
-<tr>
-<td><code>wd5</code></td>
-<td>width / 5</td>
-</tr>
-<tr>
-<td><code>wd6</code></td>
-<td>width / 6</td>
-</tr>
-<tr>
-<td><code>wd8</code></td>
-<td>width / 8</td>
-</tr>
-<tr>
-<td><code>wd10</code></td>
-<td>width / 10</td>
-</tr>
-<tr>
-<td><code>wd32</code></td>
-<td>width / 32</td>
-</tr>
-</tbody>
-</table>
-<h2 id="geometrypoint">GeometryPoint<a class="headerlink" href="#geometrypoint" title="Permanent link">&para;</a></h2>
-<p>This object spezifies a point that is used within this geometry.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>x</code></td>
-<td>Integer</td>
-<td>String</td>
-<td><em>required</em></td>
-</tr>
-<tr>
-<td><code>y</code></td>
-<td>Integer</td>
-<td>String</td>
-<td><em>required</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="geometryguide">GeometryGuide<a class="headerlink" href="#geometryguide" title="Permanent link">&para;</a></h2>
-<p>A guide that can be referenced from paths and text rectangles.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>String</td>
-<td></td>
-<td>The name of this guide. This name can be used within formulas and pathes to reference the corresponding formula value.</td>
-</tr>
-<tr>
-<td><code>op</code></td>
-<td>String</td>
-<td></td>
-<td>The operation that should be executed.</td>
-</tr>
-<tr>
-<td><code>p0</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td><code>p1</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td><code>p2</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="geometryconnectionpoint">GeometryConnectionPoint<a class="headerlink" href="#geometryconnectionpoint" title="Permanent link">&para;</a></h2>
-<p>A connection point that can be referenced by connector objects.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>x</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td><code>y</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td><code>ang</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="geometryadjustmenthandle">GeometryAdjustmentHandle<a class="headerlink" href="#geometryadjustmenthandle" title="Permanent link">&para;</a></h2>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>type</code></td>
-<td>Enumeration</td>
-<td></td>
-<td>the type can be <strong>“xy”</strong> or <strong>“polar”</strong></td>
-</tr>
-<tr>
-<td><code>x</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td><code>y</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>The following attributes are available if the type is <strong>“xy”</strong>:</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>gdRefX</code></td>
-<td>String</td>
-<td></td>
-<td>Specifies the name of the guide that is updated with the adjustment x position from this adjust handle.</td>
-</tr>
-<tr>
-<td><code>minX</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td><code>maxX</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td><code>gdRefY</code></td>
-<td>String</td>
-<td></td>
-<td>Specifies the name of the guide that is updated with the adjustment y position from this adjust handle</td>
-</tr>
-<tr>
-<td><code>minY</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td><code>maxY</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>The following attributes are available if the type is <strong>“polar”</strong>:</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>gdRefR</code></td>
-<td>String</td>
-<td></td>
-<td>Specifies the name of the guide that is updated with the adjustment radius from this adjust handle</td>
-</tr>
-<tr>
-<td><code>minR</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td><code>maxR</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td><code>gdRefAng</code></td>
-<td>String</td>
-<td></td>
-<td>Specifies the maximum angle position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move angulary. That is the maxAng and minAng are equal.</td>
-</tr>
-<tr>
-<td><code>minAng</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td><code>maxAng</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="geometrycommand">GeometryCommand<a class="headerlink" href="#geometrycommand" title="Permanent link">&para;</a></h2>
-<table class="table">
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Application</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>c</code></td>
-<td>Enum</td>
-<td>“moveTo”</td>
-<td>all</td>
-<td>The command that is to be used. Attributes that are allowed within this GeometryCommand depends to this value. (see <strong>commandType</strong> below)</td>
-</tr>
-<tr>
-<td><code>x</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-<td>all</td>
-</tr>
-<tr>
-<td><code>y</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-<td>all</td>
-</tr>
-<tr>
-<td><code>hr</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-<td>all</td>
-</tr>
-<tr>
-<td><code>wr</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-<td>all</td>
-</tr>
-<tr>
-<td><code>stAng</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-<td>all</td>
-</tr>
-<tr>
-<td><code>swAng</code></td>
-<td>Integer</td>
-<td>String</td>
-<td></td>
-<td>all</td>
-</tr>
-<tr>
-<td><code>pts</code></td>
-<td>Array&lt;<a href="#geometrypoint">GeometryPoint</a>></td>
-<td></td>
-<td>all</td>
-<td>attribute defines an array of points the beziers have to be drawn to</td>
-</tr>
-</tbody>
-</table>
-<p><strong>commandType</strong>:</p>
-<ul>
-<li>“moveTo” - The current position is set to x,y</li>
-<li>“lineTo” - A line is drawn from the current position to x,y</li>
-<li>“arcTo” - An arc is drawn from the current position. hr, wr, stAng and swAng are allowed properties</li>
-<li>“close” - The current path is closed by drawing a line to current point to the start point of this path</li>
-<li>“quadBezierTo” - One or more quadratic beziers are drawn to the points of the pts array</li>
-<li>“cubicBezierTo” - One or more cubic beziers are drawn to the points of the pts array. One cubic bezier point needs three points, the first two are control points, the third is the ending point.</li>
-</ul>
-<h2 id="geometrypath">GeometryPath<a class="headerlink" href="#geometrypath" title="Permanent link">&para;</a></h2>
-<p>Specifies the path of a shape, the pathList of the geometry is referencing an array of this GeometryPath object for this purpose.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>fillMode</code></td>
-<td>Enum</td>
-<td>“norm”</td>
-<td>Specifies how the path is filled</td>
-</tr>
-<tr>
-<td>“norm”</td>
-<td>the path is drawn with fill color</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“none”</td>
-<td>the path is drawn without fill</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“lighten”</td>
-<td>the path is drawn with a lightly shaded fill color</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“lightenLess”</td>
-<td>the path is drawn with a slightly lighter shaded fill color</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“darken”</td>
-<td>the path is drawn with a darker shaded color fill color</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>“darkenLess”</td>
-<td>the path is drawn with a slightly darker shaded fill color</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>width</code></td>
-<td>Integer</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>height</code></td>
-<td>Integer</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>lineSelection</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>specifies if a 2 point selection has to used (first path onlöy)</td>
-</tr>
-<tr>
-<td><code>isStroke</code></td>
-<td>Boolean</td>
-<td>true</td>
-<td>specifies if the path is drawn using the current lineStyle</td>
-</tr>
-<tr>
-<td><code>isExtrusionOk</code></td>
-<td>Boolean</td>
-<td>false</td>
-<td>specifies if this path is allowed to be drawn in 3d</td>
-</tr>
-<tr>
-<td><code>commands</code></td>
-<td>Array&lt;<a href="#geometrycommand">GeometryCommand</a>></td>
-<td></td>
-<td>Specifies the commands to be used to draw this path.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="geometrytextrect">GeometryTextRect<a class="headerlink" href="#geometrytextrect" title="Permanent link">&para;</a></h2>
-<p>This object specifies the text rectangle that is to be used.</p>
-<table class="table">
-<thead>
-<tr>
-<th>Property</th>
-<th>Data Type</th>
-<th>Default Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>l</code></td>
-<td>String</td>
-<td>Number</td>
-<td></td>
-</tr>
-<tr>
-<td><code>t</code></td>
-<td>String</td>
-<td>Number</td>
-<td></td>
-</tr>
-<tr>
-<td><code>r</code></td>
-<td>String</td>
-<td>Number</td>
-<td></td>
-</tr>
-<tr>
-<td><code>b</code></td>
-<td>String</td>
-<td>Number</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-    </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
       </div>
-    </div>   
-  </div>
-</body>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../generator/index.html">Schema To Template</a></li> 
+        <li class="list-group-item"><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <h1 id="data-types-(operations)">Data Types (Operations)</h1> 
+      <p>Property values in operations may consist of complex objects instead of simple values (strings, numbers). The following chapters define the contents of these complex values. The chapter title contains the type name as used in the remaining documentation.</p> 
+      <h2 id="position">Position</h2> 
+      <p>A value of type <em>Position</em> describes the exact position of a specific component in the document. A position is always an array of non-negative integer values. The exact meaning of the array elements is dependent on the operation, or even on the application that uses a generic operation.</p> 
+      <h2 id="lineheight">LineHeight</h2> 
+      <p>The total height of a text line, either absolute, or relative to the font size of the text in the line.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>type</code></td>
+            <td>Enum</td>
+            <td>“percent”</td>
+            <td>Type of the line height. See table below for details.</td>
+          </tr> 
+          <tr>
+            <td><code>value</code></td>
+            <td>Integer</td>
+            <td>100</td>
+            <td>Length value (1/100mm or percent), depending on the <code>type</code> property. See table below for details.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>LineHeight <code>type</code></th>
+            <th>LineHeight <code>value</code></th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td>“percent”</td>
+            <td>Line height, in percent of the <em>normal line height</em>. The normal line height is dependent on the font face and font size (usually somewhere between 110% and 140% of the font size).</td>
+          </tr> 
+          <tr>
+            <td>“fixed”</td>
+            <td>Fixed line height, in 1/100 mm.</td>
+          </tr> 
+          <tr>
+            <td>“leading”</td>
+            <td>Spacing between lines in 1/100 mm, will be added to 100% line height.</td>
+          </tr> 
+          <tr>
+            <td>“atLeast”</td>
+            <td>Fixed minimum line height in 1/100 mm, will be used if larger than 100% line height.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="tabstop">TabStop</h2> 
+      <p>Defines a tab stop inside a paragraph.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>fillChar</code></td>
+            <td>Enum</td>
+            <td>“none”</td>
+            <td>Type of fill character - see below: <strong>TabStopFillCharacterType</strong></td>
+          </tr> 
+          <tr>
+            <td><code>pos</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>Tab stop position in 1/100th mm.</td>
+          </tr> 
+          <tr>
+            <td><code>value</code></td>
+            <td>Enum</td>
+            <td>“left”</td>
+            <td>Type of justification for the tab stop - see below: <strong>TabStopJustification</strong></td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>TabStopFillCharacterType</strong>:</p> 
+      <ul> 
+        <li>“none” - Tab is just empty space-</li> 
+        <li>“dot” - Tab will be filled with dot chars: <code>. . . . . . . . . . .</code></li> 
+        <li>“hyphen”- Tab will be filled with hyphen chars: <code>- - - - - - - - -</code></li> 
+        <li>“underscore”- Tab will be filled with underscore chars <code>_ _ _ _ _ _ _</code></li> 
+      </ul> 
+      <p><strong>TabStopJustification</strong>:</p> 
+      <ul> 
+        <li>“left” - Following text is located right of the tab stop (text is left-aligned to the tab stop).</li> 
+        <li>“center” - Following text is located centered around the tab stop.</li> 
+        <li>“right” - Following text is located left of the tab stop (text is right-aligned to the tab stop).</li> 
+        <li>“decimal” - Following text with decimal separator will be aligned so the decimal separator is located at the tab stop position.</li> 
+        <li>“bar” - A vertical line is painted exactly at the position of the tab stop. This position won't change by a text input ⇒ absolute position.</li> 
+        <li>“clear” - Removes a tab stop from the current tab stop list. Can be used to remove a previously defined tab stop in a parent style sheet.</li> 
+      </ul> 
+      <h2 id="drawingposition">DrawingPosition</h2> 
+      <p>The position of a drawing object is a <a href="#position">Position</a> array whose contents are dependent on the document type.</p> 
+      <ul> 
+        <li> <p>See the definition of a <a href="#drawingposition">text drawing position</a> for text documents in ODT.</p> </li> 
+        <li> <p>See the definition of a <a href="#drawingposition">sheet drawing position</a> for spreadsheet documents in Spreadsheet.</p> </li> 
+      </ul> 
+      <h2 id="embeddeddrawingposition">EmbeddedDrawingPosition</h2> 
+      <p>The positions of drawing objects embedded in other drawing objects (supported by groups and charts only) are built by extending the <a href="#drawingposition">DrawingPosition</a> of the parent drawing object with the zero-based index of the embedded drawing object among all child drawings of the parent drawing object.</p> 
+      <ul> 
+        <li>Example: A group object at position <code>[1,5]</code> contains three child objects with the indexes <code>1</code>, <code>2</code>, and <code>3</code>. These child drawing objects are located at the positions <code>[1,5,1]</code>, <code>[1,5,2]</code>, and <code>[1,5,3]</code> then.</li> 
+      </ul> 
+      <p>Drawing objects can be nested recursively.</p> 
+      <ul> 
+        <li>Example: A group object at position <code>[1,5]</code> contains a nested group object at position <code>[1,5,1]</code> which contains a chart at position <code>[1,5,1,1]</code>.</li> 
+      </ul> 
+      <h2 id="color">Color</h2> 
+      <p>Description of a color value. Colors may be defined by a simple RGB value, or may refer to scheme colors defined by a document theme (inserted with the <a href="#inserttheme">operation "insertTheme"</a>).</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>type</code></td>
+            <td>Enum</td>
+            <td>“auto”</td>
+            <td>Color type, affects the <code>value</code> property. See table below for details.</td>
+          </tr> 
+          <tr>
+            <td><code>value</code></td>
+            <td>String</td>
+            <td colspan="2">Object</td>
+            <td>Color value, depends on <code>type</code> property. See table below for details.</td>
+          </tr> 
+          <tr>
+            <td><code>transformations</code></td>
+            <td>Array&lt;<a href="#colortransformation">ColorTransformation</a>&gt;</td>
+            <td>[]</td>
+            <td>Transformations to be applied to the initial color value.</td>
+          </tr> 
+          <tr>
+            <td><code>fallbackValue</code></td>
+            <td colspan="2">String</td>
+            <td>6-digits upper-case hexadecimal string (RRGGBB). This color should be used whenever a system is not able to calculate a color value from the type+value+transformation pair. Especially needed by systems which don't support theming or transformations.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p>Depending on the color type, the color values have different meanings:</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Color <code>type</code></th>
+            <th>Color <code>value</code> Data Type</th>
+            <th>Color <code>value</code></th>
+            <th>Notes</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td>“rgb”</td>
+            <td>String</td>
+            <td colspan="2">RGB color model, 6-digits upper-case hexadecimal string (RRGGBB).</td>
+          </tr> 
+          <tr>
+            <td>“hsl”</td>
+            <td>Object</td>
+            <td colspan="2">HSL color model, as object with the properties <code>h</code> (hue), <code>s</code> (saturation), and <code>l</code> (luminance). Hue must be in the interval [0,21599999], saturation and luminance must be in the interval [0,100000].</td>
+          </tr> 
+          <tr>
+            <td>“crgb”</td>
+            <td>Object</td>
+            <td>CRGB color model, each color channel as percentage, as object with the properties <code>r</code> (red), <code>g</code> (green), and <code>b</code> (blue). Each value must be in the interval [0,100000].</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td>“scheme”</td>
+            <td>String</td>
+            <td colspan="2">Case-sensitive scheme color name from current theme.</td>
+          </tr> 
+          <tr>
+            <td>“system”</td>
+            <td>String</td>
+            <td colspan="2">Name of a system color. The effective color value depends on the environment.</td>
+          </tr> 
+          <tr>
+            <td>“preset”</td>
+            <td>String</td>
+            <td colspan="2">Name of a predefined color.</td>
+          </tr> 
+          <tr>
+            <td>“auto”</td>
+            <td><em>Not used</em></td>
+            <td colspan="2">The effective color value depends on the context.</td>
+          </tr> 
+          <tr>
+            <td>Text characters</td>
+            <td colspan="2">May depend on the current background color (character/paragraph) which must be calculated by the client, therefore the backend should NOT set any fixed color here.</td>
+          </tr> 
+          <tr>
+            <td>Border lines</td>
+            <td colspan="2">Usually black. May be a different color, e.g. in spreadsheet documents where the automatic border color equals the grid line color.</td>
+          </tr> 
+          <tr>
+            <td>Background fill</td>
+            <td colspan="2">Usually transparent, or any predefined color or calculated color depending on the context, e.g. in chart objects.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>Notes:</strong></p> 
+      <ol> 
+        <li>The CRGB color model uses linear values for the color channels (without gamma correction). When converting from CRGB color model to RGB or HSL color model, a <code>gamma</code> transformation (see <a href="#colortransformation">ColorTransformation</a>) must be applied implicitly to the resulting color.</li> 
+      </ol> 
+      <p>The following constants will be used in this documentation:</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Constant Name</th>
+            <th>Definition</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td>Color.AUTO</td>
+            <td>{type:“auto”}</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="colortransformation">ColorTransformation</h2> 
+      <p>Color transformations are contained in <a href="#color">Color</a> values, and modify the base color defined by the color value. Each transformation object contains the following properties:</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>type</code></td>
+            <td>Enum <a href="#colortransformationtype">ColorTransformationType</a></td>
+            <td><em>required</em></td>
+            <td>Type of the color transformation.</td>
+          </tr> 
+          <tr>
+            <td><code>value</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>Value, depends on the transformation <code>type</code> attribute. See <a href="#colortransformationtype">ColorTransformationType</a> for details.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="colortransformationtype">ColorTransformationType</h2> 
+      <p>Specifies how to transform a given color. The following variables will be used in the following descriptions:</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Variable</th>
+            <th>Value Range</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td>R</td>
+            <td>[0,100000]</td>
+            <td>Red channel (RGB color model).</td>
+          </tr> 
+          <tr>
+            <td>G</td>
+            <td>[0,100000]</td>
+            <td>Green channel (RGB color model).</td>
+          </tr> 
+          <tr>
+            <td>B</td>
+            <td>[0,100000]</td>
+            <td>Blue channel (RGB color model).</td>
+          </tr> 
+          <tr>
+            <td>H</td>
+            <td>[0,21599999]</td>
+            <td>Hue channel (HSL color model). 0: red (0deg); 7200000: green (120deg); 14400000: blue (240deg).</td>
+          </tr> 
+          <tr>
+            <td>S</td>
+            <td>[0,100000]</td>
+            <td>Saturation channel (HSL color model). 0: gray; 100000: full color.</td>
+          </tr> 
+          <tr>
+            <td>L</td>
+            <td>[0,100000]</td>
+            <td>Luminance channel (HSL color model). 0: black; 50000: color; 100000: white.</td>
+          </tr> 
+          <tr>
+            <td>A</td>
+            <td>[0,100000]</td>
+            <td>Opacity (alpha channel). 0: transparent; 100000: opaque.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p>The following table will describe how to modify the components of the color for each transformation type:</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Enum Value</th>
+            <th>Value Range</th>
+            <th>Value Description</th>
+            <th>Color Model</th>
+            <th>Implementation Notes</th>
+            <th>Notes</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td>“alpha”</td>
+            <td>[0,100000]</td>
+            <td>Sets the opaqueness of the color. By default, the color is fully opaque. 0: transparent; 100000: opaque.</td>
+            <td>RGB/HSL</td>
+            <td colspan="2">Anew = value</td>
+          </tr> 
+          <tr>
+            <td>“alphaMod”</td>
+            <td>[0,*]</td>
+            <td>Modulates the opaqueness of the color. The value 100000 leaves opacity unmodified.</td>
+            <td>RGB/HSL</td>
+            <td colspan="2">Anew = A * (value/100000), result restricted to interval [0,100000]</td>
+          </tr> 
+          <tr>
+            <td>“alphaOff”</td>
+            <td>[-100000,100000]</td>
+            <td>Shifts the opaqueness of the color. The value 0 leaves opacity unmodified.</td>
+            <td>RGB/HSL</td>
+            <td colspan="2">Anew = A + value, result restricted to interval [0,100000]</td>
+          </tr> 
+          <tr>
+            <td>“red”</td>
+            <td>[0,100000]</td>
+            <td>Sets the red channel of the color.</td>
+            <td>RGB</td>
+            <td colspan="2">Rnew = value</td>
+          </tr> 
+          <tr>
+            <td>“redMod”</td>
+            <td>[0,*]</td>
+            <td>Modulates the red channel of the color. The value 100000 leaves the channel unmodified.</td>
+            <td>RGB</td>
+            <td colspan="2">Rnew = R * (value/100000), result restricted to interval [0,100000]</td>
+          </tr> 
+          <tr>
+            <td>“redOff”</td>
+            <td>[-100000,100000]</td>
+            <td>Shifts the red channel of the color. The value 0 leaves the channel unmodified.</td>
+            <td>RGB</td>
+            <td colspan="2">Rnew = R + value, result restricted to interval [0,100000]</td>
+          </tr> 
+          <tr>
+            <td>“green”</td>
+            <td>[0,100000]</td>
+            <td>Sets the green channel of the color.</td>
+            <td>RGB</td>
+            <td colspan="2">Gnew = value</td>
+          </tr> 
+          <tr>
+            <td>“greenMod”</td>
+            <td>[0,*]</td>
+            <td>Modulates the green channel of the color. The value 100000 leaves the channel unmodified.</td>
+            <td>RGB</td>
+            <td colspan="2">Gnew = G + value, result restricted to interval [0,100000]</td>
+          </tr> 
+          <tr>
+            <td>“greenOff”</td>
+            <td>[-100000,100000]</td>
+            <td>Shifts the green channel of the color. The value 0 leaves the channel unmodified.</td>
+            <td>RGB</td>
+            <td colspan="2">Gnew = G + value, result restricted to interval [0,100000]</td>
+          </tr> 
+          <tr>
+            <td>“blue”</td>
+            <td>[0,100000]</td>
+            <td>Sets the green channel of the color.</td>
+            <td>RGB</td>
+            <td colspan="2">Gnew = value</td>
+          </tr> 
+          <tr>
+            <td>“blueMod”</td>
+            <td>[0,*]</td>
+            <td>Modulates the blue channel of the color. The value 100000 leaves the channel unmodified.</td>
+            <td>RGB</td>
+            <td colspan="2">Bnew = B * (value/100000), result restricted to interval [0,100000]</td>
+          </tr> 
+          <tr>
+            <td>“blueOff”</td>
+            <td>[-100000,100000]</td>
+            <td>Shifts the blue channel of the color. The value 0 leaves the channel unmodified.</td>
+            <td>RGB</td>
+            <td colspan="2">Bnew = B + value, result restricted to interval [0,100000]</td>
+          </tr> 
+          <tr>
+            <td>“hue”</td>
+            <td>[0,21599999]</td>
+            <td>Sets the hue channel of the color.</td>
+            <td>HSL</td>
+            <td colspan="2">Hnew = value</td>
+          </tr> 
+          <tr>
+            <td>“hueMod”</td>
+            <td>[0,*]</td>
+            <td>Modulates the hue channel of the color. The value 100000 leaves the channel unmodified.</td>
+            <td>HSL</td>
+            <td colspan="2">Hnew = H * (value/100000), result restricted to interval [0,21599999]</td>
+          </tr> 
+          <tr>
+            <td>“hueOff”</td>
+            <td>[-21599999,21599999]</td>
+            <td>Shifts the hue channel of the color. The value 0 leaves the channel unmodified.</td>
+            <td>HSL</td>
+            <td colspan="2">Hnew = H + value, result restricted to interval [0,21599999]</td>
+          </tr> 
+          <tr>
+            <td>“sat”</td>
+            <td>[0,100000]</td>
+            <td>Sets the saturation channel of the color.</td>
+            <td>HSL</td>
+            <td colspan="2">Snew = value</td>
+          </tr> 
+          <tr>
+            <td>“satMod”</td>
+            <td>[0,*]</td>
+            <td>Modulates the saturation channel of the color. The value 100000 leaves the channel unmodified.</td>
+            <td>HSL</td>
+            <td colspan="2">Snew = S * (value/100000), result restricted to interval [0,100000]</td>
+          </tr> 
+          <tr>
+            <td>“satOff”</td>
+            <td>[-100000,100000]</td>
+            <td>Shifts the saturation channel of the color. The value 0 leaves the channel unmodified.</td>
+            <td>HSL</td>
+            <td colspan="2">Snew = S + value, result restricted to interval [0,100000]</td>
+          </tr> 
+          <tr>
+            <td>“lum”</td>
+            <td>[0,100000]</td>
+            <td>Sets the luminance channel of the color.</td>
+            <td>HSL</td>
+            <td>Lnew = value</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td>“lumMod”</td>
+            <td>[0,*]</td>
+            <td>Modulates the luminance channel of the color. The value 100000 leaves the channel unmodified.</td>
+            <td>HSL</td>
+            <td>Lnew = L * (value/100000), result restricted to interval [0,100000]</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td>“lumOff”</td>
+            <td>[-100000,100000]</td>
+            <td>Shifts the luminance channel of the color. The value 0 leaves the channel unmodified.</td>
+            <td>HSL</td>
+            <td>Lnew = L + value, result restricted to interval [0,100000]</td>
+            <td>(1)</td>
+          </tr> 
+          <tr>
+            <td>“shade”</td>
+            <td>[0,100000]</td>
+            <td>Darkens the color. 0: black; 100000: original color.</td>
+            <td>RGB</td>
+            <td>RGBnew = RGB * (value/100000)</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td>“tint”</td>
+            <td>[0,100000]</td>
+            <td>Lightens the color. 0: white; 100000: original color.</td>
+            <td>RGB</td>
+            <td>RGBnew = (RGB-100000) * (value/100000) + 100000</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td>“comp”</td>
+            <td><em>not used</em></td>
+            <td>Complement color (rotate hue by 180 degrees).</td>
+            <td>HSL</td>
+            <td colspan="2">Hnew = (H + 10800000) mod 21600000</td>
+          </tr> 
+          <tr>
+            <td>“inv”</td>
+            <td><em>not used</em></td>
+            <td>Inverse color (color channels inversed).</td>
+            <td>RGB</td>
+            <td>RGBnew = 100000 - RGB</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td>“gamma”</td>
+            <td><em>not used</em></td>
+            <td>Gamma correction (increases luminance of medium light colors).</td>
+            <td>RGB</td>
+            <td>RGBnew = (RGB/100000)1/2.27 * 100000</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td>“invGamma”</td>
+            <td><em>not used</em></td>
+            <td>Inversed gamma correction (decreases luminance of medium light colors).</td>
+            <td>RGB</td>
+            <td>RGBnew = (RGB/100000)2.27 * 100000</td>
+            <td>(2)</td>
+          </tr> 
+          <tr>
+            <td>“gray”</td>
+            <td><em>not used</em></td>
+            <td>Monochrome color.</td>
+            <td>RGB</td>
+            <td>RGBnew = 0.22 * R + 0.72 * G + 0.06 * B</td>
+            <td>(2)</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>Notes</strong>:</p> 
+      <ol> 
+        <li> <p>If a luminance transformation results in the luminance values 0 or 100000, additionally the saturation of the color must be set to 0.</p> </li> 
+        <li> <p>Must be applied to all three color channels R, G, and B.</p> </li> 
+      </ol> 
+      <h2 id="colorstop">ColorStop</h2> 
+      <p>Description of a `ColorStop` value as it is be used by <a href="#gradient">`Gradient` data types</a>. A `ColorStop` represents the interpolation end point of/between 2 colors.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>position</code></td>
+            <td>Double</td>
+            <td>0</td>
+            <td>Per-cent ratio-range of distance values from (including) 0 to 1, representing values from 0% to 100%.</td>
+          </tr> 
+          <tr>
+            <td><code>color</code></td>
+            <td colspan="2"><a href="#color">Color</a></td>
+            <td>Color value of the current interpolation's end point.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="gradient">Gradient</h2> 
+      <p>Description of a color gradient. A color gradient is the transition in between at least 2 <a href="#color">colors</a>.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>type</code></td>
+            <td>Enum</td>
+            <td>“linear”</td>
+            <td>Specifies one of the two possible gradient-fill main-types (see <strong>gradientType</strong>)</td>
+          </tr> 
+          <tr>
+            <td><code>pathType</code></td>
+            <td>Enum</td>
+            <td>“shape”</td>
+            <td>Specifies one of the 3 possible gradient-fill path sub-types (see <strong>gradientPathType</strong>)</td>
+          </tr> 
+          <tr>
+            <td><code>left</code></td>
+            <td>Double</td>
+            <td>0</td>
+            <td>Values from (including) -1 to 1. Specifies in percentage format (from the left to the right) the position of the left edge of the center shade rectangle. 0 targets the left edge of this rectangle whereas 1 targets its right edge.</td>
+          </tr> 
+          <tr>
+            <td><code>right</code></td>
+            <td>Double</td>
+            <td>0</td>
+            <td>Values from (including) -1 to 1. Specifies in percentage format (from the right to the left) the position of the right edge of the center shade rectangle. 0 targets the right edge of this rectangle whereas 1 targets its left edge.</td>
+          </tr> 
+          <tr>
+            <td><code>top</code></td>
+            <td>Double</td>
+            <td>0</td>
+            <td>Values from (including) -1 to 1. Specifies in percentage format (from the top to the bottom) the position of the top edge of the center shade rectangle. 0 targets the top edge of this rectangle whereas 1 targets its bottom edge.</td>
+          </tr> 
+          <tr>
+            <td><code>bottom</code></td>
+            <td>Double</td>
+            <td>0</td>
+            <td>Values from (including) -1 to 1. Specifies in percentage format (from the bottom to the top) the position of the bottom edge of the center shade rectangle. 0 targets the bottom edge of this rectangle whereas 1 targets its top edge.</td>
+          </tr> 
+          <tr>
+            <td><code>pathFillLeft</code></td>
+            <td>Double</td>
+            <td>0.5</td>
+            <td>Values from (including) -1 to 1. Specifies in percentage format (from the left to the right) the position of the left edge of the center shade rectangle. 0 targets the left edge of this rectangle whereas 1 targets its right edge.</td>
+          </tr> 
+          <tr>
+            <td><code>pathFillRight</code></td>
+            <td>Double</td>
+            <td>0.5</td>
+            <td>Values from (including) -1 to 1. Specifies in percentage format (from the right to the left) the position of the right edge of the center shade rectangle. 0 targets the right edge of this rectangle whereas 1 targets its left edge.</td>
+          </tr> 
+          <tr>
+            <td><code>pathFillTop</code></td>
+            <td>Double</td>
+            <td>0.5</td>
+            <td>Values from (including) -1 to 1. Specifies in percentage format (from the top to the bottom) the position of the top edge of the center shade rectangle. 0 targets the top edge of this rectangle whereas 1 targets its bottom edge.</td>
+          </tr> 
+          <tr>
+            <td><code>pathFillBottom</code></td>
+            <td>Double</td>
+            <td>0.5</td>
+            <td>Values from (including) -1 to 1. Specifies in percentage format (from the bottom to the top) the position of the bottom edge of the center shade rectangle. 0 targets the bottom edge of this rectangle whereas 1 targets its top edge.</td>
+          </tr> 
+          <tr>
+            <td><code>rotation</code></td>
+            <td>Double</td>
+            <td>0</td>
+            <td>Specifies the direction of color change for the gradient (indicating its orientation - e.g. vertical, horizontal, diagonal). A floating number range with values from (including) 0 to (excluding) 360.</td>
+          </tr> 
+          <tr>
+            <td><code>isRotateWithShape</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>A flag that indicates whether a gradient will rotate with its shape.</td>
+          </tr> 
+          <tr>
+            <td><code>isScaled</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>Specifies whether a gradient angle scales with the fill region or not.</td>
+          </tr> 
+          <tr>
+            <td><code>flipH</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>Specifies if the gradient is mirrored horrizontally.</td>
+          </tr> 
+          <tr>
+            <td><code>flipV</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>Specifies if the gradient is mirrored vertically.</td>
+          </tr> 
+          <tr>
+            <td><code>colorStops</code></td>
+            <td>Array&lt;<a href="#colorstop">ColorStop</a>&gt;</td>
+            <td>[]</td>
+            <td>A list of <a href="#colorstop">color stops</a> specifying the distribution of colors along the gradient.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>gradientType</strong>:</p> 
+      <ul> 
+        <li>“linear” - This gradient fill is of gradient type “linear” - . Linear gradient type means that the transition from one color to the next is along a line (e.g. horizontal, vertical, diagonal, etc.).</li> 
+        <li>“path” - This gradient fill is of gradient type “path” - . Path gradient type means the that the boundary of transition from one color to the next is defined by e.g. a circle, a rectangle or a freely formed shape.</li> 
+      </ul> 
+      <p><strong>gradientPathType</strong>:</p> 
+      <ul> 
+        <li>“circle” - same as pathType=“rect”</li> 
+        <li>“rect” - The gradient follows a rectangular path. This rectangular “path” - sub-type is defined by its 4 additional edge attributes “top”, “bottom”, “left” and “right” describing the shading rectangle for a centered gradient relatively to the fill tile rectangle. Thus the shade does fill the entire tile except for the margins specified by those edge attributes. Each edge of the center shade rectangle is defined by a percentage offset from the corresponding edge of the tile rectangle. A positive percentage specifies an inset, while a negative percentage specifies an outset.</li> 
+        <li>“shape” - The gradient follows its shape.</li> 
+      </ul> 
+      <h2 id="tiling">Tiling</h2> 
+      <p>Description of a bitmap tiling.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>rectAlignment</code></td>
+            <td>Enum</td>
+            <td colspan="2">“topLeft”</td>
+            <td>“topLeft”</td>
+            <td>The tile is top left aligned. (see <strong>rectAlignmentType</strong>)</td>
+          </tr> 
+          <tr>
+            <td><code>flipMode</code></td>
+            <td>Enum</td>
+            <td>“none”</td>
+            <td>The flip mode of the tiling, “x”, “xy”, “y” and “none” is possible.</td>
+          </tr> 
+          <tr>
+            <td><code>stretchX</code></td>
+            <td>percentage</td>
+            <td>100%</td>
+            <td>Specifies the amount in percent horizontally scaling the tile.</td>
+          </tr> 
+          <tr>
+            <td><code>stretchY</code></td>
+            <td>percentage</td>
+            <td>100%</td>
+            <td>Specifies the amount in percent vertically scaling the tile.</td>
+          </tr> 
+          <tr>
+            <td><code>offX</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>Specifies additional horizontal offset in 1/100mm after alignment.</td>
+          </tr> 
+          <tr>
+            <td><code>offY</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>Specifies additional vertical offset in 1/100mm after alignment.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>rectAlignmentType</strong>:</p> 
+      <ul> 
+        <li>“top” - The tile is top aligned.</li> 
+        <li>“topRight” - The tile is top right aligned.</li> 
+        <li>“left” - The tile is left aligned.</li> 
+        <li>“center” - The tile is center aligned.</li> 
+        <li>“right” - The tile is right aligned.</li> 
+        <li>“bottomLeft” - The tile is bottom left aligned.</li> 
+        <li>“bottom” - The tile is bottom aligned.</li> 
+        <li>“bottomRight” - The tile is bottom right aligned.</li> 
+      </ul> 
+      <h2 id="stretching">Stretching</h2> 
+      <p>Description of a bitmap fill for backgrounds and outlines of drawing objects.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>left</code></td>
+            <td>percentage</td>
+            <td>0</td>
+            <td>Left offset of the source rectangle in percent.</td>
+          </tr> 
+          <tr>
+            <td><code>top</code></td>
+            <td>percentage</td>
+            <td>0</td>
+            <td>Top offset of the source rectangle in percent.</td>
+          </tr> 
+          <tr>
+            <td><code>right</code></td>
+            <td>percentage</td>
+            <td>0</td>
+            <td>Right offset of the source rectangle in percent.</td>
+          </tr> 
+          <tr>
+            <td><code>bottom</code></td>
+            <td>percentage</td>
+            <td>0</td>
+            <td>Bottom offset of the source rectangle in percent.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="stretchingaligned">StretchingAligned</h2> 
+      <p>ODF only… Description of a bitmap fill for backgrounds and outlines of drawing objects.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>rectAlignment</code></td>
+            <td>enum</td>
+            <td><code>center</code></td>
+            <td>Specifies the alignment of the bitmap, the alignment can be “bottom”, “bottomLeft”, “bottomRight”, “center”, “left”, “right”, “top”, “topLeft” or “topRight”.</td>
+          </tr> 
+          <tr>
+            <td><code>width</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>Specifies the width of the bitmap, if 0 then the original width has to be used.</td>
+          </tr> 
+          <tr>
+            <td><code>height</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>Specifies the height of the bitmap, if 0 then the original height has to be used.</td>
+          </tr> 
+          <tr>
+            <td><code>scaleX</code></td>
+            <td>percentage</td>
+            <td>100</td>
+            <td>Specifies the x scaling of the bitmap.</td>
+          </tr> 
+          <tr>
+            <td><code>scaleY</code></td>
+            <td>percentage</td>
+            <td>100</td>
+            <td>Specifies the y scaling of the bitmap.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="bitmap">Bitmap</h2> 
+      <p>Description of a bitmap fill for backgrounds and outlines of drawing objects.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>imageUrl</code></td>
+            <td>String</td>
+            <td>””</td>
+            <td>The URL of the image source for the fill bitmap.</td>
+          </tr> 
+          <tr>
+            <td><code>transparency</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>The transparency. A value of 1 means that the bitmap is fully transparent.</td>
+          </tr> 
+          <tr>
+            <td><code>rotateWithShape</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>Specifies if the filling rotates with the shape.</td>
+          </tr> 
+          <tr>
+            <td><code>tiling</code></td>
+            <td colspan="2"><a href="#tiling">Tiling</a></td>
+            <td>If set it specifies the tiling of the bitmap. A bitmap can either be tiled or stretched but not both.</td>
+          </tr> 
+          <tr>
+            <td><code>stretching</code></td>
+            <td colspan="2"><a href="#stretching">Stretching</a></td>
+            <td>If set it specifies the stretching of the bitmap. A bitmap can either be tiled or stretched but not both.</td>
+          </tr> 
+          <tr>
+            <td><code>stretchingAligned</code></td>
+            <td colspan="2"><a href="#stretchingaligned">StretchingAligned</a></td>
+            <td>ODF only, If set it specifies the stretching of the bitmap. A bitmap can either be tiled, stretched or stretchingAligned.</td>
+          </tr> 
+          <tr>
+            <td><code>cropLeft</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>all</td>
+          </tr> 
+          <tr>
+            <td><code>cropTop</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>all</td>
+          </tr> 
+          <tr>
+            <td><code>cropRight</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>all</td>
+          </tr> 
+          <tr>
+            <td><code>cropBottom</code></td>
+            <td>Number</td>
+            <td>0</td>
+            <td>all</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="pattern">Pattern</h2> 
+      <p>An enumeration for all preset pattern styles that can be used as background or outline for a drawing object.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Enum Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td>“cross”</td>
+            <td>Thin horizontally/vertically crossing lines.</td>
+          </tr> 
+          <tr>
+            <td>“dashDnDiag”</td>
+            <td>Thin dashed diagonal lines (top-left to bottom-right).</td>
+          </tr> 
+          <tr>
+            <td>“dashHorz”</td>
+            <td>Thin dashed horizontal lines.</td>
+          </tr> 
+          <tr>
+            <td>“dashUpDiag”</td>
+            <td>Thin dashed diagonal lines (bottom-left to top-right).</td>
+          </tr> 
+          <tr>
+            <td>“dashVert”</td>
+            <td>Thin dashed vertical lines.</td>
+          </tr> 
+          <tr>
+            <td>“diagBrick”</td>
+            <td>Diagonal brick pattern.</td>
+          </tr> 
+          <tr>
+            <td>“diagCross”</td>
+            <td>Thin diagonally crossing lines.</td>
+          </tr> 
+          <tr>
+            <td>“divot”</td>
+            <td>Divot pattern.</td>
+          </tr> 
+          <tr>
+            <td>“dkDnDiag”</td>
+            <td>Thick narrow diagonal lines (top-left to bottom-right).</td>
+          </tr> 
+          <tr>
+            <td>“dkHorz”</td>
+            <td>Thick narrow horizontal lines.</td>
+          </tr> 
+          <tr>
+            <td>“dkUpDiag”</td>
+            <td>Thick narrow diagonal lines (bottom-left to top-right).</td>
+          </tr> 
+          <tr>
+            <td>“dkVert”</td>
+            <td>Thick narrow vertical lines.</td>
+          </tr> 
+          <tr>
+            <td>“dnDiag”</td>
+            <td>Thin diagonal lines (top-left to bottom-right).</td>
+          </tr> 
+          <tr>
+            <td>“dotDmnd”</td>
+            <td>Thin dotted diagonally crossing lines.</td>
+          </tr> 
+          <tr>
+            <td>“dotGrid”</td>
+            <td>Thin dotted horizontally/vertically crossing lines.</td>
+          </tr> 
+          <tr>
+            <td>“horz”</td>
+            <td>Thin horizontal lines.</td>
+          </tr> 
+          <tr>
+            <td>“horzBrick”</td>
+            <td>Horizontal brick pattern.</td>
+          </tr> 
+          <tr>
+            <td>“lgCheck”</td>
+            <td>Large checker board pattern.</td>
+          </tr> 
+          <tr>
+            <td>“lgConfetti”</td>
+            <td>Large unordered dots.</td>
+          </tr> 
+          <tr>
+            <td>“lgGrid”</td>
+            <td>Thin horizontally/vertically crossing lines.</td>
+          </tr> 
+          <tr>
+            <td>“ltDnDiag”</td>
+            <td>Thin narrow diagonal lines (top-left to bottom-right).</td>
+          </tr> 
+          <tr>
+            <td>“ltHorz”</td>
+            <td>Thin narrow horizontal lines.</td>
+          </tr> 
+          <tr>
+            <td>“ltUpDiag”</td>
+            <td>Thin narrow diagonal lines (bottom-left to top-right).</td>
+          </tr> 
+          <tr>
+            <td>“ltVert”</td>
+            <td>Thin narrow vertical lines.</td>
+          </tr> 
+          <tr>
+            <td>“narHorz”</td>
+            <td>Thin very narrow horizontal lines.</td>
+          </tr> 
+          <tr>
+            <td>“narVert”</td>
+            <td>Thin very narrow vertical lines.</td>
+          </tr> 
+          <tr>
+            <td>“none”</td>
+            <td>Transparent pattern (background color only).</td>
+          </tr> 
+          <tr>
+            <td>“openDmnd”</td>
+            <td>Thin diagonally crossing lines.</td>
+          </tr> 
+          <tr>
+            <td>“pct10”</td>
+            <td>Dither pattern 10%.</td>
+          </tr> 
+          <tr>
+            <td>“pct20”</td>
+            <td>Dither pattern 20%.</td>
+          </tr> 
+          <tr>
+            <td>“pct25”</td>
+            <td>Dither pattern 25%.</td>
+          </tr> 
+          <tr>
+            <td>“pct30”</td>
+            <td>Dither pattern 30%.</td>
+          </tr> 
+          <tr>
+            <td>“pct40”</td>
+            <td>Dither pattern 40%.</td>
+          </tr> 
+          <tr>
+            <td>“pct5”</td>
+            <td>Dither pattern 5%.</td>
+          </tr> 
+          <tr>
+            <td>“pct50”</td>
+            <td>Dither pattern 50%.</td>
+          </tr> 
+          <tr>
+            <td>“pct60”</td>
+            <td>Dither pattern 60%.</td>
+          </tr> 
+          <tr>
+            <td>“pct70”</td>
+            <td>Dither pattern 70%.</td>
+          </tr> 
+          <tr>
+            <td>“pct75”</td>
+            <td>Dither pattern 75%.</td>
+          </tr> 
+          <tr>
+            <td>“pct80”</td>
+            <td>Dither pattern 80%.</td>
+          </tr> 
+          <tr>
+            <td>“pct90”</td>
+            <td>Dither pattern 90%.</td>
+          </tr> 
+          <tr>
+            <td>“plaid”</td>
+            <td>Plaid pattern.</td>
+          </tr> 
+          <tr>
+            <td>“shingle”</td>
+            <td>Shingle pattern.</td>
+          </tr> 
+          <tr>
+            <td>“smCheck”</td>
+            <td>Small checker board pattern.</td>
+          </tr> 
+          <tr>
+            <td>“smConfetti”</td>
+            <td>Small unordered dots.</td>
+          </tr> 
+          <tr>
+            <td>“smGrid”</td>
+            <td>Thin narrow horizontally/vertically crossing lines.</td>
+          </tr> 
+          <tr>
+            <td>“solid”</td>
+            <td>Solid pattern (foreground color only).</td>
+          </tr> 
+          <tr>
+            <td>“solidDmnd”</td>
+            <td>Large solid diamond pattern.</td>
+          </tr> 
+          <tr>
+            <td>“sphere”</td>
+            <td>Sphere pattern.</td>
+          </tr> 
+          <tr>
+            <td>“trellis”</td>
+            <td>Narrow trellis pattern.</td>
+          </tr> 
+          <tr>
+            <td>“upDiag”</td>
+            <td>Thin diagonal lines (bottom-left to top-right).</td>
+          </tr> 
+          <tr>
+            <td>“vert”</td>
+            <td>Thin vertical lines.</td>
+          </tr> 
+          <tr>
+            <td>“wave”</td>
+            <td>Wave lines.</td>
+          </tr> 
+          <tr>
+            <td>“wdDnDiag”</td>
+            <td>Thick diagonal lines (top-left to bottom-right).</td>
+          </tr> 
+          <tr>
+            <td>“wdUpDiag”</td>
+            <td>Thick diagonal lines (bottom-left to top-right).</td>
+          </tr> 
+          <tr>
+            <td>“weave”</td>
+            <td>Weave pattern.</td>
+          </tr> 
+          <tr>
+            <td>“zigZag”</td>
+            <td>Zig zag lines.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="border">Border</h2> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>style</code></td>
+            <td>Enum</td>
+            <td>“none”</td>
+            <td>Border line style. (see <strong>borderLineStyle</strong>)</td>
+          </tr> 
+          <tr>
+            <td><code>width</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>Width of the border line. Not used if the <code>style</code> attribute equals “none”.</td>
+          </tr> 
+          <tr>
+            <td><code>color</code></td>
+            <td><a href="#color">Color</a></td>
+            <td>Color.AUTO</td>
+            <td>Color of the border line. Not used if the <code>style</code> attribute equals “none”.</td>
+          </tr> 
+          <tr>
+            <td><code>space</code></td>
+            <td>Integer</td>
+            <td>0</td>
+            <td>Distance of the border line to the content (ATM paragraph only).</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>borderLineStyle</strong>:</p> 
+      <ul> 
+        <li>“none” - No line.</li> 
+        <li>“single” - Solid single line.</li> 
+        <li>“double” - Solid double line.</li> 
+        <li>“dotted” - Dotted single line.</li> 
+        <li>“dashed” - Dashed single line.</li> 
+        <li>“dashDot” - Dash-dotted single line.</li> 
+        <li>“dashDotDot” - Dash-dot-dotted single line.</li> 
+      </ul> 
+      <p>The following constants will be used in this documentation:</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Constant Name</th>
+            <th>Definition</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td>Border.NONE</td>
+            <td>{style:“none”}</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="sourcelink">SourceLink</h2> 
+      <p>A generic description of a source data sequence used by a specific object, e.g. a chart data series, or a drawing object with linked text contents.</p> 
+      <p>The data type of the source link denotes the kind of source data.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Data Type</th>
+            <th>Description</th>
+            <th>Example</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td>Array</td>
+            <td>An array of constant values (numbers or strings).</td>
+            <td>[“data”, 1, 2, 3, 4]</td>
+          </tr> 
+          <tr>
+            <td>String</td>
+            <td colspan="2">Application-dependent descriptor for the linked source data.</td>
+          </tr> 
+          <tr>
+            <td>Text</td>
+            <td colspan="2"><em>not supported</em></td>
+          </tr> 
+          <tr>
+            <td>Spreadsheet</td>
+            <td>A formula expression that evaluates to one or more cell ranges containing the source data.</td>
+            <td>“Sheet1!$A$2:$A$100”</td>
+          </tr> 
+          <tr>
+            <td>Presentation</td>
+            <td colspan="2"><em>not supported</em></td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="geometryconstant">GeometryConstant</h2> 
+      <p>This is a list of constant values that might be used within GeometryPoints and or Geometry Guides</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Constant</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>3cd4</code></td>
+            <td>3 x 360° / 4 = 270°</td>
+          </tr> 
+          <tr>
+            <td><code>3cd8</code></td>
+            <td>3 x 360° / 8 = 135°</td>
+          </tr> 
+          <tr>
+            <td><code>5cd8</code></td>
+            <td>5 x 360° / 8 = 225°</td>
+          </tr> 
+          <tr>
+            <td><code>7cd8</code></td>
+            <td>7 x 360° / 8 = 315°</td>
+          </tr> 
+          <tr>
+            <td><code>b</code></td>
+            <td>bottom</td>
+          </tr> 
+          <tr>
+            <td><code>cd2</code></td>
+            <td>360° / 2 = 180°</td>
+          </tr> 
+          <tr>
+            <td><code>cd4</code></td>
+            <td>360° / 4 = 90°</td>
+          </tr> 
+          <tr>
+            <td><code>cd8</code></td>
+            <td>360° / 8 = 45°</td>
+          </tr> 
+          <tr>
+            <td><code>hc</code></td>
+            <td>horizontal center</td>
+          </tr> 
+          <tr>
+            <td><code>h</code></td>
+            <td>height</td>
+          </tr> 
+          <tr>
+            <td><code>hd2</code></td>
+            <td>height / 2</td>
+          </tr> 
+          <tr>
+            <td><code>hd3</code></td>
+            <td>height / 3</td>
+          </tr> 
+          <tr>
+            <td><code>hd4</code></td>
+            <td>height / 4</td>
+          </tr> 
+          <tr>
+            <td><code>hd5</code></td>
+            <td>height / 5</td>
+          </tr> 
+          <tr>
+            <td><code>hd6</code></td>
+            <td>height / 6</td>
+          </tr> 
+          <tr>
+            <td><code>hd8</code></td>
+            <td>height / 8</td>
+          </tr> 
+          <tr>
+            <td><code>l</code></td>
+            <td>left</td>
+          </tr> 
+          <tr>
+            <td><code>ls</code></td>
+            <td>long side</td>
+          </tr> 
+          <tr>
+            <td><code>r</code></td>
+            <td>right</td>
+          </tr> 
+          <tr>
+            <td><code>ss</code></td>
+            <td>short side</td>
+          </tr> 
+          <tr>
+            <td><code>ssd2</code></td>
+            <td>short side / 2</td>
+          </tr> 
+          <tr>
+            <td><code>ssd4</code></td>
+            <td>short side / 4</td>
+          </tr> 
+          <tr>
+            <td><code>ssd6</code></td>
+            <td>short side / 6</td>
+          </tr> 
+          <tr>
+            <td><code>ssd8</code></td>
+            <td>short side / 8</td>
+          </tr> 
+          <tr>
+            <td><code>ssd16</code></td>
+            <td>short side / 16</td>
+          </tr> 
+          <tr>
+            <td><code>ssd32</code></td>
+            <td>short side / 32</td>
+          </tr> 
+          <tr>
+            <td><code>t</code></td>
+            <td>top</td>
+          </tr> 
+          <tr>
+            <td><code>vc</code></td>
+            <td>vertical center</td>
+          </tr> 
+          <tr>
+            <td><code>w</code></td>
+            <td>width</td>
+          </tr> 
+          <tr>
+            <td><code>wd2</code></td>
+            <td>width / 2</td>
+          </tr> 
+          <tr>
+            <td><code>wd4</code></td>
+            <td>width / 4</td>
+          </tr> 
+          <tr>
+            <td><code>wd5</code></td>
+            <td>width / 5</td>
+          </tr> 
+          <tr>
+            <td><code>wd6</code></td>
+            <td>width / 6</td>
+          </tr> 
+          <tr>
+            <td><code>wd8</code></td>
+            <td>width / 8</td>
+          </tr> 
+          <tr>
+            <td><code>wd10</code></td>
+            <td>width / 10</td>
+          </tr> 
+          <tr>
+            <td><code>wd32</code></td>
+            <td>width / 32</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="geometrypoint">GeometryPoint</h2> 
+      <p>This object spezifies a point that is used within this geometry.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>x</code></td>
+            <td>Integer</td>
+            <td>String</td>
+            <td><em>required</em></td>
+            <td>specifies the x position of this point</td>
+          </tr> 
+          <tr>
+            <td><code>y</code></td>
+            <td>Integer</td>
+            <td>String</td>
+            <td><em>required</em></td>
+            <td>specifies the y position of this point</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="geometryguide">GeometryGuide</h2> 
+      <p>A guide that can be referenced from paths and text rectangles.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>name</code></td>
+            <td colspan="2">String</td>
+            <td>The name of this guide. This name can be used within formulas and pathes to reference the corresponding formula value.</td>
+          </tr> 
+          <tr>
+            <td><code>op</code></td>
+            <td colspan="2">String</td>
+            <td>The operation that should be executed.</td>
+          </tr> 
+          <tr>
+            <td><code>p0</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>The first parameter of this guide.</td>
+          </tr> 
+          <tr>
+            <td><code>p1</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>The second parameter of this guide.</td>
+          </tr> 
+          <tr>
+            <td><code>p2</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>The third parameter of this guide.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="geometryconnectionpoint">GeometryConnectionPoint</h2> 
+      <p>A connection point that can be referenced by connector objects.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>x</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>This attribute specifies the x position of the connection point.</td>
+          </tr> 
+          <tr>
+            <td><code>y</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>This attribute specifies the y position of the connection point.</td>
+          </tr> 
+          <tr>
+            <td><code>ang</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>This attribute specifies the angle the connector should leave the connected point.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="geometryadjustmenthandle">GeometryAdjustmentHandle</h2> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>type</code></td>
+            <td colspan="2">Enumeration</td>
+            <td>the type can be <strong>“xy”</strong> or <strong>“polar”</strong></td>
+          </tr> 
+          <tr>
+            <td><code>x</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>This attribute specifies the x position of the adjustment handle. The allowed adjustment of this adjust value is specified via corresponding its min and max limitations.</td>
+          </tr> 
+          <tr>
+            <td><code>y</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>This attribute specifies the y position of the adjustment handle. The allowed adjustment of this adjust value is specified via corresponding its min and max limitations.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p>The following attributes are available if the type is <strong>“xy”</strong>:</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>gdRefX</code></td>
+            <td colspan="2">String</td>
+            <td>Specifies the name of the guide that is updated with the adjustment x position from this adjust handle.</td>
+          </tr> 
+          <tr>
+            <td><code>minX</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>Specifies the minimum horizontal position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move in the y direction. That is the maxY and minY are equal.</td>
+          </tr> 
+          <tr>
+            <td><code>maxX</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>Specifies the maximum horizontal position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move in the x direction. That is the maxX and minX are equal.</td>
+          </tr> 
+          <tr>
+            <td><code>gdRefY</code></td>
+            <td colspan="2">String</td>
+            <td>Specifies the name of the guide that is updated with the adjustment y position from this adjust handle</td>
+          </tr> 
+          <tr>
+            <td><code>minY</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>Specifies the minimum vertical position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move in the y direction. That is the maxY and minY are equal.</td>
+          </tr> 
+          <tr>
+            <td><code>maxY</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>Specifies the maximum vertical position that is allowed for this adjustment handle. If this attribute is omitted, then it is assume that this adjust handle cannot move in the y direction. That is the maxY and minY are equal.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p>The following attributes are available if the type is <strong>“polar”</strong>:</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>gdRefR</code></td>
+            <td colspan="2">String</td>
+            <td>Specifies the name of the guide that is updated with the adjustment radius from this adjust handle</td>
+          </tr> 
+          <tr>
+            <td><code>minR</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>Specifies the minimum radial position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move radially. That is the maxR and minR are equal.</td>
+          </tr> 
+          <tr>
+            <td><code>maxR</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>Specifies the maximum radial position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move radially. That is the maxR and minR are equal.</td>
+          </tr> 
+          <tr>
+            <td><code>gdRefAng</code></td>
+            <td colspan="2">String</td>
+            <td>Specifies the maximum angle position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move angulary. That is the maxAng and minAng are equal.</td>
+          </tr> 
+          <tr>
+            <td><code>minAng</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>Specifies the minimum angle position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move angularly. That is the maxAng and minAng are equal.</td>
+          </tr> 
+          <tr>
+            <td><code>maxAng</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>Specifies the maximum angle position that is allowed for this adjustment handle. If this attribute is omitted, then it is assumed that this adjust handle cannot move angularly. That is the maxAng and minAng are equal.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="geometrycommand">GeometryCommand</h2> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Attribute</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Application</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>c</code></td>
+            <td>Enum</td>
+            <td>“moveTo”</td>
+            <td>all</td>
+            <td>The command that is to be used. Attributes that are allowed within this GeometryCommand depends to this value. (see <strong>commandType</strong> below)</td>
+          </tr> 
+          <tr>
+            <td><code>x</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>all</td>
+            <td>specifies the x position</td>
+          </tr> 
+          <tr>
+            <td><code>y</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>all</td>
+            <td>specifies the y position</td>
+          </tr> 
+          <tr>
+            <td><code>hr</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>all</td>
+            <td>specifies the arc height radius</td>
+          </tr> 
+          <tr>
+            <td><code>wr</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>all</td>
+            <td>specifies the arc width radius</td>
+          </tr> 
+          <tr>
+            <td><code>stAng</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>all</td>
+            <td>this attribute specifies the start angle of this arc</td>
+          </tr> 
+          <tr>
+            <td><code>swAng</code></td>
+            <td>Integer</td>
+            <td colspan="2">String</td>
+            <td>all</td>
+            <td>this attribute specifies the swing angle of this arc</td>
+          </tr> 
+          <tr>
+            <td><code>pts</code></td>
+            <td colspan="2">Array&lt;<a href="#geometrypoint">GeometryPoint</a>&gt;</td>
+            <td>all</td>
+            <td>attribute defines an array of points the beziers have to be drawn to</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <p><strong>commandType</strong>:</p> 
+      <ul> 
+        <li>“moveTo” - The current position is set to x,y</li> 
+        <li>“lineTo” - A line is drawn from the current position to x,y</li> 
+        <li>“arcTo” - An arc is drawn from the current position. hr, wr, stAng and swAng are allowed properties</li> 
+        <li>“close” - The current path is closed by drawing a line to current point to the start point of this path</li> 
+        <li>“quadBezierTo” - One or more quadratic beziers are drawn to the points of the pts array</li> 
+        <li>“cubicBezierTo” - One or more cubic beziers are drawn to the points of the pts array. One cubic bezier point needs three points, the first two are control points, the third is the ending point.</li> 
+      </ul> 
+      <h2 id="geometrypath">GeometryPath</h2> 
+      <p>Specifies the path of a shape, the pathList of the geometry is referencing an array of this GeometryPath object for this purpose.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>fillMode</code></td>
+            <td>Enum</td>
+            <td>“norm”</td>
+            <td>Specifies how the path is filled</td>
+          </tr> 
+          <tr>
+            <td>“norm”</td>
+            <td>the path is drawn with fill color</td>
+          </tr> 
+          <tr>
+            <td>“none”</td>
+            <td>the path is drawn without fill</td>
+          </tr> 
+          <tr>
+            <td>“lighten”</td>
+            <td>the path is drawn with a lightly shaded fill color</td>
+          </tr> 
+          <tr>
+            <td>“lightenLess”</td>
+            <td>the path is drawn with a slightly lighter shaded fill color</td>
+          </tr> 
+          <tr>
+            <td>“darken”</td>
+            <td>the path is drawn with a darker shaded color fill color</td>
+          </tr> 
+          <tr>
+            <td>“darkenLess”</td>
+            <td>the path is drawn with a slightly darker shaded fill color</td>
+          </tr> 
+          <tr>
+            <td><code>width</code></td>
+            <td colspan="3">Integer</td>
+          </tr> 
+          <tr>
+            <td><code>height</code></td>
+            <td colspan="3">Integer</td>
+          </tr> 
+          <tr>
+            <td><code>lineSelection</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>specifies if a 2 point selection has to used (first path onlöy)</td>
+          </tr> 
+          <tr>
+            <td><code>isStroke</code></td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>specifies if the path is drawn using the current lineStyle</td>
+          </tr> 
+          <tr>
+            <td><code>isExtrusionOk</code></td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>specifies if this path is allowed to be drawn in 3d</td>
+          </tr> 
+          <tr>
+            <td><code>commands</code></td>
+            <td colspan="2">Array&lt;<a href="#geometrycommand">GeometryCommand</a>&gt;</td>
+            <td>Specifies the commands to be used to draw this path.</td>
+          </tr> 
+        </tbody> 
+      </table> 
+      <h2 id="geometrytextrect">GeometryTextRect</h2> 
+      <p>This object specifies the text rectangle that is to be used.</p> 
+      <table class="table"> 
+        <thead> 
+          <tr>
+            <th>Property</th>
+            <th>Data Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr>
+            <td><code>l</code></td>
+            <td>String</td>
+            <td colspan="2">Number</td>
+            <td>specifies the left border</td>
+          </tr> 
+          <tr>
+            <td><code>t</code></td>
+            <td>String</td>
+            <td colspan="2">Number</td>
+            <td>specifies the top border</td>
+          </tr> 
+          <tr>
+            <td><code>r</code></td>
+            <td>String</td>
+            <td colspan="2">Number</td>
+            <td>specifies the right border</td>
+          </tr> 
+          <tr>
+            <td><code>b</code></td>
+            <td>String</td>
+            <td colspan="2">Number</td>
+            <td>specifies the bottom border</td>
+          </tr> 
+        </tbody> 
+      </table> 
+    </div>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>

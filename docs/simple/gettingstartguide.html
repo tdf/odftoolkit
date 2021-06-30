@@ -1,210 +1,133 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
-<head>
-  <!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../index.html">About</a></li>
-<li><a href="../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../get-involved.html">Get Involved</a></li>
-<li><a href="../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../people.html">People</a></li>
-<li><a href="../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../javadoc.html">JavaDoc</a></li>
-<li><a href="../website-development.html">Website Development</a></li>
-<li><a href="../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      
-      <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h2 id="getting-start-guide"><strong>Getting Start Guide</strong><a class="headerlink" href="#getting-start-guide" title="Permanent link">&para;</a></h2>
-<p>This start guide shows how to use the Simple ODF API to create a text document with image, paragraph, list and table in OpenDocument format (ODF). In about 40 lines of code, you will be able to produce an OpenDocument Format text document named HelloWorld.odt that looks like this:</p>
-<p><img alt="demo file" src="helloworld.png" /></p>
-<p><strong>Prerequisites</strong></p>
-<p>Simple ODF is written in Java, so you will need to have Java 1.6 or above installed on your system. Make sure you download the SDK (software development kit), not just the runtime version of Java.</p>
-<p>In this tutorial, you can build and run the application from the command line or IDE, such as Eclipse or Netbeans.
-Anyway, all required jars, are stored within the "lib" directory of the demo bundle and needed to be added to the classpath.
-A JAR with all dependencies had been included as download within <a href="helloworld.zip">the resource file</a> of this demo.</p>
-<p>NOTE: The latest version of this all-inclusive-JAR can be received after building the Simple ODF project. This will be JAR within the 'target' directory embracing all required JARs.</p>
-<p><strong>Code</strong></p>
-<p>We write all of the code needed to create the document in the HelloWorld class. For simplicity, the code is wrapped in main method directly, package declaration is omitted and hard code is also included in this program.</p>
-<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.net.URI</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="nn">org.odftoolkit.simple.TextDocument</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.odftoolkit.simple.table.Cell</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.odftoolkit.simple.table.Table</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.odftoolkit.simple.text.list.List</span><span class="p">;</span>
-
-<span class="n">public</span> <span class="k">class</span> <span class="nc">HelloWorld</span> <span class="p">{</span>
-    <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">TextDocument</span> <span class="n">outputOdt</span><span class="p">;</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="n">outputOdt</span> <span class="o">=</span> <span class="n">TextDocument</span><span class="o">.</span><span class="n">newTextDocument</span><span class="p">();</span>
-
-            <span class="o">//</span> <span class="n">add</span> <span class="n">image</span>
-            <span class="n">outputOdt</span><span class="o">.</span><span class="n">newImage</span><span class="p">(</span><span class="n">new</span> <span class="n">URI</span><span class="p">(</span><span class="s2">&quot;odf-logo.png&quot;</span><span class="p">));</span>
-
-            <span class="o">//</span> <span class="n">add</span> <span class="n">paragraph</span>
-            <span class="n">outputOdt</span><span class="o">.</span><span class="n">addParagraph</span><span class="p">(</span><span class="s2">&quot;Hello World, Hello Simple ODF!&quot;</span><span class="p">);</span>
-
-            <span class="o">//</span> <span class="n">add</span> <span class="nb">list</span>
-            <span class="n">outputOdt</span><span class="o">.</span><span class="n">addParagraph</span><span class="p">(</span><span class="s2">&quot;The following is a list.&quot;</span><span class="p">);</span>
-            <span class="n">List</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">outputOdt</span><span class="o">.</span><span class="n">addList</span><span class="p">();</span>
-            <span class="n">String</span><span class="p">[]</span> <span class="n">items</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;item1&quot;</span><span class="p">,</span> <span class="s2">&quot;item2&quot;</span><span class="p">,</span> <span class="s2">&quot;item3&quot;</span><span class="p">};</span>
-            <span class="nb">list</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span><span class="n">items</span><span class="p">);</span>
-
-            <span class="o">//</span> <span class="n">add</span> <span class="n">table</span>
-            <span class="n">Table</span> <span class="n">table</span> <span class="o">=</span> <span class="n">outputOdt</span><span class="o">.</span><span class="n">addTable</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
-            <span class="n">Cell</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">getCellByPosition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-            <span class="n">cell</span><span class="o">.</span><span class="n">setStringValue</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">);</span>
-
-            <span class="n">outputOdt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;HelloWorld.odt&quot;</span><span class="p">);</span>
-        <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="ne">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;ERROR: unable to create output file.&quot;</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>The TextDocument class has these convenient methods:</p>
-<div class="codehilite"><pre><span></span>    // Creates a new text document that contains an empty paragraph.
-    TextDocument.newTextDocument();
-    // Puts the image at the given location at the end of the document.
-    TextDocument.newImage(URI location)
-    // Creates a new paragraph with the given content and appends it to the end of the document.
-    TextDocument.addParagraph(String content)
-    // Creates a new, empty list and appends it to the end of the document you&#39;re building. You can add items for this list.
-    TextDocument.addList()
-    // Creates a new table with columnCount columns and rowCount rows. You can get the cell at given position and set its content.
-    TextDocument.addTable(int columnCount, int rowCount);
-    // Saves the document at the given path.
-    TextDocument.save(String path)
-</pre></div>
-
-
-<p><strong>Building and Running</strong></p>
-<p>If you use an IDE, you can just run this class as a Java Application. If you use command line, you may compile the code and run it with the following commands:</p>
-<div class="codehilite"><pre><span></span>javac -cp lib/simple-odf-0.8.2-incubating-jar-with-dependencies.jar HelloWorld.java
-
-    LINUX using &#39;:&#39; as classpath separator:
-    java -cp .:lib/simple-odf-0.8.2-incubating-jar-with-dependencies.jar HelloWorld
-
-    WINDOWS using &#39;;&#39; as classpath separator:
-    java -cp .;lib/simple-odf-0.8.2-incubating-jar-with-dependencies.jar HelloWorld
-</pre></div>
-
-
-<p><strong>Getting the Files</strong></p>
-<p>You can download the code and resources of this demo from <a href="helloworld.zip">here</a>.</p>
-    </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
       </div>
-    </div>   
-  </div>
-</body>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../generator/index.html">Schema To Template</a></li> 
+        <li class="list-group-item"><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <h1 id="getting-start-guide">Getting Start Guide</h1> 
+      <p>This start guide shows how to use the Simple ODF API to create a text document with image, paragraph, list and table in OpenDocument format (ODF). In about 40 lines of code, you will be able to produce an OpenDocument Format text document named HelloWorld.odt that looks like this:</p> 
+      <p><img src="helloworld.png" alt="demo file"></p> 
+      <h2 id="prerequisites">Prerequisites</h2> 
+      <p>Simple ODF is written in Java, so you will need to have Java 1.6 or above installed on your system. Make sure you download the SDK (software development kit), not just the runtime version of Java.</p> 
+      <p>In this tutorial, you can build and run the application from the command line or IDE, such as Eclipse or Netbeans. Anyway, all required jars, are stored within the "lib" directory of the demo bundle and needed to be added to the classpath. A JAR with all dependencies had been included as download within <a href="helloworld.zip">the resource file</a> of this demo.</p> 
+      <p>NOTE: The latest version of this all-inclusive-JAR can be received after building the Simple ODF project. This will be JAR within the 'target' directory embracing all required JARs.</p> 
+      <h2 id="code">Code</h2> 
+      <p>We write all of the code needed to create the document in the HelloWorld class. For simplicity, the code is wrapped in main method directly, package declaration is omitted and hard code is also included in this program.</p> 
+      <div class="codehilite">
+        <pre><code class="language-Java">    import java.net.URI;
+    import org.odftoolkit.simple.TextDocument;
+    import org.odftoolkit.simple.table.Cell;
+    import org.odftoolkit.simple.table.Table;
+    import org.odftoolkit.simple.text.list.List;
+
+    public class HelloWorld {
+        public static void main(String[] args) {
+            TextDocument outputOdt;
+            try {
+                outputOdt = TextDocument.newTextDocument();
+
+                // add image
+                outputOdt.newImage(new URI("odf-logo.png"));
+
+                // add paragraph
+                outputOdt.addParagraph("Hello World, Hello Simple ODF!");
+
+                // add list
+                outputOdt.addParagraph("The following is a list.");
+                List list = outputOdt.addList();
+                String[] items = {"item1", "item2", "item3"};
+                list.addItems(items);
+
+                // add table
+                Table table = outputOdt.addTable(2, 2);
+                Cell cell = table.getCellByPosition(0, 0);
+                cell.setStringValue("Hello World!");
+
+                outputOdt.save("HelloWorld.odt");
+            } catch (Exception e) {
+                System.err.println("ERROR: unable to create output file.");
+            }
+        }
+    }
+</code></pre>
+      </div> 
+      <p>The TextDocument class has these convenient methods:</p> 
+      <div class="codehilite">
+        <pre><code class="language-Java">// Creates a new text document that contains an empty paragraph.
+TextDocument.newTextDocument);
+// Puts the image at the given location at the end of the document.
+TextDocument.newImage(URI location)
+// Creates a new paragraph with the given content and appends it to the end of the document.
+TextDocument.addParagraph(String content)
+// Creates a new, empty list and appends it to the end of the document you're building. You can add items for this list.
+TextDocument.addList()
+// Creates a new table with columnCount columns and rowCount rows. You can get the cell at given position and set its content.
+TextDocument.addTable(int columnCount, int rowCount);
+// Saves the document at the given path.
+TextDocument.save(String path)
+</code></pre>
+      </div> 
+      <h2 id="building-and-running">Building and Running</h2> 
+      <p>If you use an IDE, you can just run this class as a Java Application. If you use command line, you may compile the code and run it with the following commands:</p> 
+      <ul> 
+        <li>Java: <strong>javac -cp lib/simple-odf-0.9.0-jar-with-dependencies.jar HelloWorld.java</strong></li> 
+        <li>LINUX using ':' as classpath separator: <strong>java -cp .:lib/simple-odf-0.8.2-incubating-jar-with-dependencies.jar HelloWorld</strong></li> 
+        <li>WINDOWS using ';' as classpath separator: <strong>java -cp .;lib/simple-odf-0.8.2-incubating-jar-with-dependencies.jar HelloWorld</strong></li> 
+      </ul> 
+      <h2 id="getting-the-files">Getting the Files</h2> 
+      <p>You can download the code and resources of this demo from <a href="helloworld.zip">here</a>.</p> 
+    </div>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>

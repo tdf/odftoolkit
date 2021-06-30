@@ -1,245 +1,228 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
-<head>
-  <!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../../../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../../index.html">About</a></li>
-<li><a href="../../../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../../../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../../../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../../get-involved.html">Get Involved</a></li>
-<li><a href="../../../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../../../people.html">People</a></li>
-<li><a href="../../../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../../../javadoc.html">JavaDoc</a></li>
-<li><a href="../../../website-development.html">Website Development</a></li>
-<li><a href="../../../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      
-      <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p><strong><a href="../index.html">Documents</a></strong> &gt; <strong><a href="index.html">Cookbook</a></strong> &gt;<strong><a href="Table.html">Table</a></strong>
-<div class="navigation">
- <ul>
-  <li><a href="Slide.html">previous</a></li>
-  <li><a href="Column and Row.html">next</a></li>
- </ul>
-</div>
-<br/>
-<br/><strong><a href="#Overview" >Overview</a></strong>
-<div class="bodytext">
- This <a href="">Table</a> API supports to manipulate tables in text and spreadsheet documents. It covers the table definition in <a href="http:docs.oasis-open.org/office/v1.2/cd05/OpenDocument-v1.2-cd05-part1.html#a_9_Tables">ODF Specification 1.2 Committee Draft05</a>
-</div>
-<br/><strong><a href="#Create Table" >Create Table</a></strong>
-<div class="bodytext">
-Let's create an empty table first.By default,the code below create a table with 5 columns and 2 rows.
-</div>
-<br/><pre class='code' id="code0">
-            <span class='javaclass'>TextDocument</span> document = <span class='javaclass'>TextDocument</span>.newTextDocument();<br/>
-            <span class='javaclass'>Table</span> table1 = <span class='javaclass'>Table</span>.newTable(document);<br/>
-            table1.setTableName("table1");<br/>
-            document.save(filePath);<br/>
-</pre>
-<br/><div class="bodytext">
-If you want to create table with specified column and row,you can do like this:
-</div>
-<br/><pre class='code' id="code1">
-            <span class='basic'>int</span> row=4;<br/>
-            <span class='basic'>int</span> column=3;<br/>
-            <span class='javaclass'>Table</span> table2=<span class='javaclass'>Table</span>.newTable(document, row, column);<br/>
-            table2.setTableName("table2");<br/>
-</pre>
-<br/><div class="bodytext">
-       If you want to put some numbers into a table while creating it, you can use the constructor Table.newTable(document,rowlabels,columnlabels, data)       which you should specify a 2 dimension array as the data and 2 String arrays as table labels,one for row and the other for column.
-</div>
-<br/><pre class='code' id="code2">
-        <span class='basic'>int</span> rowcount = 10, columncount = 4;<br/>
-        <span class='basic'>double</span>[][] data = <span class='modifier'>new</span> <span class='basic'>double</span>[rowcount][columncount];    <br/>
-        <span class='javaclass'>String</span>[] rowlabels = <span class='modifier'>new</span> <span class='javaclass'>String</span>[rowcount];<br/>
-        <span class='javaclass'>String</span>[] columnlabels = <span class='modifier'>new</span> <span class='javaclass'>String</span>[columncount];<br/>
-        <span class='javaclass'>Table</span> table3=<span class='javaclass'>Table</span>.newTable(document,rowlabels,columnlabels, data);<br/>
-        table3.setTableName("dataTable");<br/>
-</pre>
-<br/><div class="bodytext">
-You can also fill table with string values while creating it, to do this you should provide a 2 dimension string array instead of double array.
-</div>
-<br/><pre class='code' id="code3">
-        <span class='javaclass'>String</span>[][] stringData = <span class='modifier'>new</span> <span class='javaclass'>String</span>[rowcount][columncount];<br/>
-        <span class='javaclass'>Table</span> table4 = <span class='javaclass'>Table</span>.newTable(document, rowlabels, columnlabels, stringData);<br/>
-        table4.setTableName("stringTable");<br/>
-</pre>
-<br/><br/><strong><a href="#Find Table" >Find Table</a></strong>
-<div class="bodytext">
-To get all the tables in the document,you can do like this:
-</div>
-<br/><pre class='code' id="code4">
-        <span class='javaclass'>List</span>&lt;<span class='javaclass'>Table</span>&gt; tableList=document.getTableList();<br/>
-</pre>
-<br/><div class="bodytext">
-If you want to get a single table,you can use the table name to find it.If it's not found,the method returns null.
-</div>
-<br/><pre class='code' id="code5">
-        <span class='javaclass'>Table</span> emptyTable=document.getTableByName("table1");<br/>
-</pre>
-<br/><br/><strong><a href="#Delete Table" >Delete Table</a></strong>
-<br/><pre class='code' id="code6">
-        <span class='javaclass'>Table</span> table = document.getTableByName("<span class='javaclass'>DeletedTable</span>");<br/>
-        <span class='control'>if</span> (table != <span class='basic'>null</span>) {<br/>
-        table.remove();<br/>
-        }<br/>
-</pre>
-<br/><br/><strong><a href="#Set Table" >Set Table</a></strong>
-<div class="bodytext">
-You can set or update table name,which can be regarded as table identifier in a document.
-</div>
-<br/><pre class='code' id="code7">
-           table1.getTableName();<br/>
-           table1.setTableName("<span class='javaclass'>EnglishScore</span>");<br/>
-</pre>
-<br/><div class="bodytext">
-If you want to change table width,you can do like this:
-</div>
-<br/><pre class='code' id="code8">
-        <span class='javaclass'>Table</span> tableWidth=document.getTableByName("table1");<br/>
-        <span class='control'>if</span>(tableWidth!=<span class='basic'>null</span>) {<br/>
-            <span class='basic'>long</span> width=500;<br/>
-            tableWidth.setWidth(width);<br/>
-            tableWidth.getWidth();<br/>
-        }<br/>
-</pre>
-<br/><div class="bodytext">
-Each table in the document has a protect attribute to show whether it is protected or not.
-</div>
-<br/><pre class='code' id="code9">
-           <span class='basic'>boolean</span> isProtected=table1.isProtected();<br/>
-           table1.setProtected(<span class='basic'>true</span>);<br/>
-</pre>
-<br/><br/><strong><a href="#Format Table" >Format Table</a></strong>
-<div class="bodytext">
-Since version 0.8, new APIs are added to format a table, which will load the formatting from a template table in a foreign document and apply them to corresponding cells of current table. The template table should be a 5*5 table with predefined formatting, includes number format, text format, text alignment, borders and background.   The following code will load formatting from a foreign template table - Table1 in TemplateTable.odt, and apply the styles to a new table - Table2 in TargetTable.odt.
-</div>
-<br/><pre class='code' id="code10">
-          <span class='javaclass'>Document</span> doc = <span class='javaclass'>TextDocument</span>.loadDocument("TargetTable.odt");<br/>
-          <span class='basic'>TableTemplate</span> template = doc.LoadTableTemplateFromForeignTable(<span class='modifier'>new</span> <span class='javaclass'>FileInputStream</span>("TableTemplate.odt"), "Table1");<br/>
-          <span class='basic'>Table</span> table = doc.getTableByName("Table2");<br/>
-          table.applyStyle(template);<br/>
-</pre>
-<br/><br/>
-<div class="navigation">
- <ul>
-  <li><a href="Slide.html">previous</a></li>
-  <li><a href="Column and Row.html">next</a></li>
-  <li><a href="#">top</a></li>
- </ul>
-</div>
-<link type="text/css" rel="stylesheet" href="cookbook.css"/></p>
-    </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../../../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
       </div>
-    </div>   
-  </div>
-</body>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../../../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../../generator/index.html">Schema To Template</a></li> 
+        <li class="list-group-item"><a href="../../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../../../simple/index.html">Simple API (deprecated)</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../../../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../../../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../../../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../../../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../../../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../../../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <p><strong><a href="../index.html">Documents</a></strong> &gt; <strong><a href="index.html">Cookbook</a></strong> &gt;<strong><a href="Table.html">Table</a></strong></p> 
+      <div class="navigation"> 
+        <ul> 
+          <li><a href="Slide.html">previous</a></li> 
+          <li><a href="Column and Row.html">next</a></li> 
+        </ul> 
+      </div> 
+      <br> 
+      <br>
+      <strong><a href="#Overview">Overview</a></strong> 
+      <div class="bodytext">
+         This 
+        <a href="">Table</a> API supports to manipulate tables in text and spreadsheet documents. It covers the table definition in 
+        <a href="http:docs.oasis-open.org/office/v1.2/cd05/OpenDocument-v1.2-cd05-part1.html#a_9_Tables">ODF Specification 1.2 Committee Draft05</a> 
+      </div> 
+      <br>
+      <strong><a href="#Create Table">Create Table</a></strong> 
+      <div class="bodytext">
+         Let's create an empty table first.By default,the code below create a table with 5 columns and 2 rows. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code0">
+            <span class="javaclass">TextDocument</span> document = <span class="javaclass">TextDocument</span>.newTextDocument();<br>
+            <span class="javaclass">Table</span> table1 = <span class="javaclass">Table</span>.newTable(document);<br>
+            table1.setTableName("table1");<br>
+            document.save(filePath);<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         If you want to create table with specified column and row,you can do like this: 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code1">
+            <span class="basic">int</span> row=4;<br>
+            <span class="basic">int</span> column=3;<br>
+            <span class="javaclass">Table</span> table2=<span class="javaclass">Table</span>.newTable(document, row, column);<br>
+            table2.setTableName("table2");<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         If you want to put some numbers into a table while creating it, you can use the constructor Table.newTable(document,rowlabels,columnlabels, data) which you should specify a 2 dimension array as the data and 2 String arrays as table labels,one for row and the other for column. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code2">
+        <span class="basic">int</span> rowcount = 10, columncount = 4;<br>
+     	<span class="basic">double</span>[][] data = <span class="modifier">new</span> <span class="basic">double</span>[rowcount][columncount];	<br>
+     	<span class="javaclass">String</span>[] rowlabels = <span class="modifier">new</span> <span class="javaclass">String</span>[rowcount];<br>
+     	<span class="javaclass">String</span>[] columnlabels = <span class="modifier">new</span> <span class="javaclass">String</span>[columncount];<br>
+     	<span class="javaclass">Table</span> table3=<span class="javaclass">Table</span>.newTable(document,rowlabels,columnlabels, data);<br>
+     	table3.setTableName("dataTable");<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         You can also fill table with string values while creating it, to do this you should provide a 2 dimension string array instead of double array. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code3">
+     	<span class="javaclass">String</span>[][] stringData = <span class="modifier">new</span> <span class="javaclass">String</span>[rowcount][columncount];<br>
+     	<span class="javaclass">Table</span> table4 = <span class="javaclass">Table</span>.newTable(document, rowlabels, columnlabels, stringData);<br>
+     	table4.setTableName("stringTable");<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Find Table">Find Table</a></strong> 
+      <div class="bodytext">
+         To get all the tables in the document,you can do like this: 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code4">
+        <span class="javaclass">List</span>&lt;<span class="javaclass">Table</span>&gt; tableList=document.getTableList();<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         If you want to get a single table,you can use the table name to find it.If it's not found,the method returns null. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code5">
+        <span class="javaclass">Table</span> emptyTable=document.getTableByName("table1");<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Delete Table">Delete Table</a></strong> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code6">
+        <span class="javaclass">Table</span> table = document.getTableByName("<span class="javaclass">DeletedTable</span>");<br>
+        <span class="control">if</span> (table != <span class="basic">null</span>) {<br>
+     	table.remove();<br>
+        }<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Set Table">Set Table</a></strong> 
+      <div class="bodytext">
+         You can set or update table name,which can be regarded as table identifier in a document. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code7">
+           table1.getTableName();<br>
+           table1.setTableName("<span class="javaclass">EnglishScore</span>");<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         If you want to change table width,you can do like this: 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code8">
+        <span class="javaclass">Table</span> tableWidth=document.getTableByName("table1");<br>
+        <span class="control">if</span>(tableWidth!=<span class="basic">null</span>) {<br>
+            <span class="basic">long</span> width=500;<br>
+            tableWidth.setWidth(width);<br>
+            tableWidth.getWidth();<br>
+        }<br>
+</pre>
+      </div> 
+      <br>
+      <div class="bodytext">
+         Each table in the document has a protect attribute to show whether it is protected or not. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code9">
+           <span class="basic">boolean</span> isProtected=table1.isProtected();<br>
+           table1.setProtected(<span class="basic">true</span>);<br>
+</pre>
+      </div> 
+      <br>
+      <br>
+      <strong><a href="#Format Table">Format Table</a></strong> 
+      <div class="bodytext">
+         Since version 0.8, new APIs are added to format a table, which will load the formatting from a template table in a foreign document and apply them to corresponding cells of current table. The template table should be a 5*5 table with predefined formatting, includes number format, text format, text alignment, borders and background. The following code will load formatting from a foreign template table - Table1 in TemplateTable.odt, and apply the styles to a new table - Table2 in TargetTable.odt. 
+      </div> 
+      <br>
+      <div class="codehilite">
+        <pre class="code" id="code10">
+          <span class="javaclass">Document</span> doc = <span class="javaclass">TextDocument</span>.loadDocument("TargetTable.odt");<br>
+          <span class="basic">TableTemplate</span> template = doc.LoadTableTemplateFromForeignTable(<span class="modifier">new</span> <span class="javaclass">FileInputStream</span>("TableTemplate.odt"), "Table1");<br>
+          <span class="basic">Table</span> table = doc.getTableByName("Table2");<br>
+          table.applyStyle(template);<br>
+</pre>
+      </div> 
+      <br>
+      <br> 
+      <div class="navigation"> 
+        <ul> 
+          <li><a href="Slide.html">previous</a></li> 
+          <li><a href="Column and Row.html">next</a></li> 
+          <li><a href="#">top</a></li> 
+        </ul> 
+      </div> 
+      <link type="text/css" rel="stylesheet" href="cookbook.css"> 
+    </div>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>

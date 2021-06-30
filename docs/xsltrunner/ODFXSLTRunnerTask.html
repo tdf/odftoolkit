@@ -1,120 +1,168 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
-<head>
-  <!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../index.html">About</a></li>
-<li><a href="../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../get-involved.html">Get Involved</a></li>
-<li><a href="../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../people.html">People</a></li>
-<li><a href="../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../javadoc.html">JavaDoc</a></li>
-<li><a href="../website-development.html">Website Development</a></li>
-<li><a href="../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      
-      
-    </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
       </div>
-    </div>   
-  </div>
-</body>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../generator/index.html">Schema To Template</a></li> 
+        <li class="list-group-item"><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <h1 id="odf-xslt-runner-task">ODF XSLT Runner Task</h1> 
+      <h2 id="apply-xslt-stylesheets-to-odf-documents-with-ant">Apply XSLT stylesheets to ODF documents with Ant</h2> 
+      <p><strong>ODF XSLT Runner Task</strong> is a task definition for <a href="http://ant.apache.org/">Apache Ant</a> which allows to apply XSLT stylesheets to ODF documents similar to Ant's build-in &lt;xslt&gt; <a href="http://ant.apache.org/manual/Tasks/style.html">task</a>. It is based on ODFXSLTRunner. Please see ODFXSLTRunner for further details of its operation.</p> 
+      <h2 id="getting-and-building-odfxsltrunnertask">Getting and building ODFXSLTRunnerTask</h2> 
+      <p><strong>odfxsltrunnertask</strong> is build by a NetBeans project. After you have checked out the odf-xslt-runner-task-src/show, you can open the project in NetBeans and build <strong>odfxsltrunnertask</strong>.</p> 
+      <p>A binary release of <strong>odfxsltrunnertask.jar</strong> is available in the download section.</p> 
+      <p>Building and running <strong>odfxsltrunner.jar</strong> requires additional jar files. Please see Requirements for details.</p> 
+      <h2 id="usage">Usage</h2> 
+      <p>To use <strong>odfxsltrunner.jar</strong> with Ant, you have to include the following <a href="http://ant.apache.org/manual/Tasks/taskdef.html">task definition</a> into your buildfile, where &lt;path&gt; has to be replaced with the path where you have stored the <strong>odfxsltrunnertask.jar</strong> and <strong>odfxsltrunner.jar</strong> files:</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">     &lt;taskdef name="odfxslt" classname="odfxsltrunnertask.ODFXSLTRunnerTask"
+         classpath="&lt;path&gt;/odfxsltrunnertak.jar:&lt;path&gt;/odfxsltrunner.jar"/&gt;
+</code></pre>
+      </div> 
+      <p>You can use this task definition on the top level (that is as a child element of the <code>&amp;lt;project&amp;gt;</code> element or locally within a single <code>&amp;lt;target&amp;gt;</code> element. It defines a new task <code>&amp;lt;odfxslt&amp;gt;</code> which allows to process ODF documents with XSLT stylesheets.</p> 
+      <p>The new task supports the use of nested <code>&amp;lt;param&amp;gt;</code> and <code>&amp;lt;factory&amp;gt;</code>elements which have the same meaning as the <code>&amp;lt;param&amp;gt;</code> and <code>&amp;lt;factory&amp;gt;</code> child elements of the <code>&amp;lt;xslt&amp;gt;</code> <a href="http://ant.apache.org/manual/Tasks/style.html">task</a>.</p> 
+      <h2 id="parameters">Parameters</h2> 
+      <table border="border"> 
+        <tbody>
+          <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+            <th>Required</th>
+          </tr> 
+          <tr>
+            <td valign="top">in</td>
+            <td valign="top">specifies an ODF document to which the stylesheet is applied.</td>
+            <td valign="top">Yes, unless infile has been specified</td>
+          </tr> 
+          <tr>
+            <td valign="top">infile</td>
+            <td valign="top">specifies a plain XML document to which the stylesheet is applied.</td>
+            <td valign="top">Yes, unless in has been specified</td>
+          </tr> 
+          <tr>
+            <td valign="top">out</td>
+            <td valign="top">specifies an ODF document to which the result of the transformation is stored.<br> Unless template has been specified, the package specified by in is copied to out, and the stream specified by path is replaced with the result of the transformation.</td>
+            <td valign="top">Yes, unless outfile has been specified</td>
+          </tr> 
+          <tr>
+            <td valign="top">outfile</td>
+            <td valign="top">specifies a plain XML document to which the result of the transformation is stored.</td>
+            <td valign="top">Yes, unless out has been specified</td>
+          </tr> 
+          <tr>
+            <td valign="top">path</td>
+            <td valign="top">Specifies the stream within the ODF packages specified by in and out, which is the source or target of the transformation.</td>
+            <td valign="top">No</td>
+          </tr> 
+          <tr>
+            <td valign="top">template</td>
+            <td valign="top">Specifies that the specified stream within the out ODF package is replaced with the result of the transformation, without previously copying the package specified by in. The specified out package must exist.</td>
+            <td valign="top">No: Default is "content.xml"</td>
+          </tr> 
+          <tr>
+            <td valign="top">force</td>
+            <td valign="top">Specifies that the target file shall be recreated, even if it is newer than the source file or the stylesheet.</td>
+            <td valign="top">No: Default is false</td>
+          </tr> 
+        </tbody>
+      </table> 
+      <h2 id="parameters-specified-as-nested-elements">Parameters specified as nested elements</h2> 
+      <h3 id="param">Param</h3> 
+      <p>Param specifies a parameter that is passed as <a href="http://www.w3.org/TR/1999/REC-xslt-19991116#top-level-variables">XSLT parameter</a> to the XSL stylesheet.</p> 
+      <h3 id="parameters">Parameters</h3> 
+      <table border="border"> 
+        <tbody>
+          <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+            <th>Required</th>
+          </tr> 
+          <tr>
+            <td valign="top">name</td>
+            <td valign="top">name of the parameter.</td>
+            <td valign="top">Yes</td>
+          </tr> 
+          <tr>
+            <td valign="top">expression</td>
+            <td>value of the parameter. Note: All parameter values are passed as string values to the XSLT parameters specified by `&lt;xslt:param&gt;` elements within the stylesheet. </td>
+            <td valign="top">Yes</td>
+          </tr> 
+        </tbody>
+      </table> 
+      <p><strong>Note:</strong> The parameters <code>if</code> and <code>unless</code> which are supported by the <code>&amp;lt;xslt&amp;gt;</code> task are (not yet) supported.</p> 
+      <h3 id="factory">Factory</h3> 
+      <p>Factory specifies Java TransformerFactory class to use.</p> 
+      <h3 id="parameters">Parameters</h3> 
+      <table border="border"> 
+        <tbody>
+          <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+            <th>Required</th>
+          </tr> 
+          <tr>
+            <td valign="top">name</td>
+            <td valign="top">full qualified TransformerFactory class name.</td>
+            <td valign="top">Yes</td>
+          </tr> 
+        </tbody>
+      </table> 
+      <h2 id="requirements">Requirements</h2> 
+      <p><strong>odfxsltrunnertask</strong> requires <a href="https://openjdk.java.net/install/">Java 5</a>, or a later version of Java.</p> 
+      <p>It further requires ODFXSLTRunner and the corresponding ODFDOM component.</p> 
+      <p><strong>Note:</strong> When building <strong>odfxsltrunertask</strong>, the <strong>odfxsltrunner</strong> project has be checked out, too. It is build automatically.</p> 
+      <p>In the Ant task definition, the <strong>classpath</strong> attribute must include the <strong>odfxsltrunnertask.jar</strong> and <strong>odfxsltrunner.jar</strong> files. The ODFDOM jar file is found automatically if it is located in a folder called <strong>lib</strong> next to the <strong>odfxsltrunner.jar</strong> file.</p> 
+    </div>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>

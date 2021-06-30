@@ -1,281 +1,209 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
-<head>
-  <!--
-
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE- 2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-
-  <link href="../../css/odf.css" rel="stylesheet" type="text/css">
-  
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28945571-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-  </script>
-</head>
-
-<body>
-
-  <div id="banner">  
-    <div id="bannerright"><a alt="The Document Foundation" href="https://www.documentfoundation.org/">
-        <img id="tdf-logo" class="w350" alt="The Document Foundation"
-          src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" /></a></div>
-  </div>
-  <div id="clear"></div>
-  
-  <div id="sidenav">
-    <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<h1 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../index.html">About</a></li>
-<li><a href="../../downloads.html">Downloads</a></li>
-</ul>
-<h1 id="components">Components<a class="headerlink" href="#components" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../odfdom/index.html">ODFDOM</a></li>
-<li><a href="../../simple/index.html">Simple API (deprecated)</a></li>
-<li><a href="../../conformance/ODFValidator.html">ODF Validator</a></li>
-<li><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li>
-</ul>
-<h1 id="community">Community<a class="headerlink" href="#community" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../get-involved.html">Get Involved</a></li>
-<li><a href="../../mailing-lists.html">Mailing Lists</a></li>
-<li><a href="../../people.html">People</a></li>
-<li><a href="../../developer-faqs.html">FAQs</a></li>
-</ul>
-<h1 id="development">Development<a class="headerlink" href="#development" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="../../source.html">Source Code</a></li>
-<li><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li>
-<li><a href="../../javadoc.html">JavaDoc</a></li>
-<li><a href="../../website-development.html">Website Development</a></li>
-<li><a href="../../release-guide.html">Release Guide</a></li>
-</ul>
-<h1 id="tdf">TDF<a class="headerlink" href="#tdf" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://www.documentfoundation.org/">The Document Foundation</a></li>
-</ul>
-  </div>
-  <div id="contenta">
-    
-      
-      <style type="text/css">
-/* The following code is added by mdx_elementid.py
-   It was originally lifted from http://subversion.apache.org/style/site.css */
-/*
- * Hide class="elementid-permalink", except when an enclosing heading
- * has the :hover property.
- */
-.headerlink, .elementid-permalink {
-  visibility: hidden;
-}
-h2:hover > .headerlink, h3:hover > .headerlink, h1:hover > .headerlink, h6:hover > .headerlink, h4:hover > .headerlink, h5:hover > .headerlink, dt:hover > .elementid-permalink { visibility: visible }</style>
-<p><a href="index.html"><strong>Demos</strong></a> &gt;  <b>Create Analysis Report with Charts</b></p>
-<p><strong>Overview</strong></p>
-<p>Simple ODF provides Chart API since version 0.6. Chart is a visualized way of data show in electronic document. For ODF document, text document, spreadsheet document and presentation document can embed charts to help describe content. This demo shows the power of chart support in Simple ODF.</p>
-<p>In this demo, a web traffic analytics report will be generated in presentation document and text document format. The initial data is stored in a spreadsheet document, which includes visitors, traffic sources and page visit information. These data will be used in charts. Each chart chooses a cell range and uses the values of these cells to draw picture. It's easy and convenient.</p>
-<p>No need predefined template, all of the document are generated by Simple ODF API. This demo not only tell you how to use Chart API, but also teach you ro use slide layout to improve presentation design.<br/><br/>
-This picture shows the generated presentation document.</p>
-<p><img alt="image" src="image/demo9p.png" />
-This picture shows the generated text document.</p>
-<p><img alt="image" src="image/demo9t.png" /></p>
-<p>Besides, we also supply some codes to show how to create chart in a spreadsheet document. The following picture shows the generated document.</p>
-<p><img alt="image" src="image/demo9s.png" /></p>
-<p><strong>Code Introduction</strong></p>
-<p>There code of this demo is very clear. First, we create a presentation document and load the data document. Second, we create cover page and set its content. Thirdly, we add charts to each slide. If you want to add chart to a slide, you must chose a layout which can hold chart. In Simple ODF 0.6, these layouts are "TITLE_PLUS_CHART", "TITLE_PLUS_2_CHART", "TITLE_LEFT_CHART_RIGHT_OUTLINE", "TITLE_PLUS_3_OBJECT", "TITLE_PLUS_4_OBJECT". Different layout can own different count of charts. Please be sure you know that, otherwise chart insert would be failed. For slide, you needn't set the chart size or position, Simple ODF will do it automatically. Finally, the data document is closed and the new created document is saved.</p>
-<div class="codehilite"><pre><span></span><span class="nt">private</span> <span class="nt">static</span> <span class="nt">void</span> <span class="nt">generatePresentationChart</span><span class="o">()</span> <span class="p">{</span>
-    <span class="err">try</span> <span class="err">{</span>
-        <span class="err">PresentationDocument</span> <span class="err">presentationDoc</span> <span class="err">=</span> <span class="err">PresentationDocument.newPresentationDocument()</span><span class="p">;</span>
-        <span class="err">SpreadsheetDocument</span> <span class="err">spreadsheetDoc</span> <span class="err">=</span> <span class="err">SpreadsheetDocument.loadDocument(&quot;demo9_data.ods&quot;)</span><span class="p">;</span>
-
-        <span class="err">//</span> <span class="err">create</span> <span class="err">cover</span> <span class="err">page</span>
-        <span class="err">Slide</span> <span class="err">slide</span> <span class="err">=</span> <span class="err">presentationDoc.newSlide(0,</span> <span class="err">&quot;Slide1&quot;,</span> <span class="err">SlideLayout.TITLE_SUBTITLE)</span><span class="p">;</span>
-        <span class="err">setSlideTextContent(slide,</span> <span class="err">&quot;Simple</span> <span class="err">Website</span> <span class="err">Analytics</span> <span class="err">Report&quot;,</span> <span class="err">&quot;2011-04-27~2011-05-27&quot;)</span><span class="p">;</span>
-
-        <span class="err">//</span> <span class="err">create</span> <span class="err">visitors</span> <span class="err">overview</span> <span class="err">page</span> <span class="err">1</span>
-        <span class="err">slide</span> <span class="err">=</span> <span class="err">presentationDoc.newSlide(1,</span> <span class="err">&quot;Slide2&quot;,</span> <span class="err">SlideLayout.TITLE_PLUS_3_OBJECT)</span><span class="p">;</span>
-        <span class="err">setSlideTextContent(slide,</span> <span class="err">&quot;Visitors</span> <span class="err">Overview&quot;)</span><span class="p">;</span>
-        <span class="err">Table</span> <span class="err">tableA</span> <span class="err">=</span> <span class="err">spreadsheetDoc.getTableByName(&quot;A&quot;)</span><span class="p">;</span>
-        <span class="err">convertFromTableToList(tableA,</span> <span class="err">slide.addList(),</span> <span class="err">4,</span> <span class="err">17,</span> <span class="err">5,</span> <span class="err">20)</span><span class="p">;</span>
-        <span class="err">CellRangeAddressList</span> <span class="err">cellRange</span> <span class="err">=</span> <span class="err">CellRangeAddressList.valueOf(&quot;A.</span><span class="n">A1</span><span class="p">:</span><span class="n">A</span><span class="o">.</span><span class="n">B3</span><span class="s2">&quot;);</span>
-<span class="s2">        Chart chart = slide.createChart(&quot;</span><span class="n">New</span> <span class="n">Visitor</span> <span class="n">VS</span><span class="o">.</span> <span class="n">Returning</span> <span class="n">Visitor</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, null);</span>
-<span class="s2">        chart.setChartType(ChartType.PIE);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">A</span><span class="o">.</span><span class="n">A6</span><span class="o">:</span><span class="n">A</span><span class="o">.</span><span class="n">B37</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = slide.createChart(&quot;</span><span class="n">Daily</span> <span class="n">Visit</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, null);</span>
-<span class="s2">        chart.setChartType(ChartType.LINE);</span>
-
-<span class="s2">        // create visitors overview page 2</span>
-<span class="s2">        slide = presentationDoc.newSlide(2, &quot;</span><span class="n">Slide3</span><span class="s2">&quot;, SlideLayout.TITLE_PLUS_2_CHART);</span>
-<span class="s2">        setSlideTextContent(slide, &quot;</span><span class="n">Visitors</span> <span class="n">Overview</span><span class="s2">&quot;);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">A</span><span class="o">.</span><span class="n">E1</span><span class="o">:</span><span class="n">A</span><span class="o">.</span><span class="n">G14</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = slide.createChart(&quot;</span><span class="n">Count</span> <span class="n">of</span> <span class="n">Visits</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, null);</span>
-<span class="s2">        chart.setChartType(ChartType.BAR);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">A</span><span class="o">.</span><span class="n">I1</span><span class="o">:</span><span class="n">A</span><span class="o">.</span><span class="n">K8</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = slide.createChart(&quot;</span><span class="n">Visit</span> <span class="n">Duration</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, null);</span>
-
-<span class="s2">        // create traffic sources overview page</span>
-<span class="s2">        slide = presentationDoc.newSlide(3, &quot;</span><span class="n">Slide4</span><span class="s2">&quot;, SlideLayout.TITLE_PLUS_4_OBJECT);</span>
-<span class="s2">        setSlideTextContent(slide, &quot;</span><span class="n">Traffic</span> <span class="n">Sources</span> <span class="n">Overview</span><span class="s2">&quot;);</span>
-<span class="s2">        Table tableB = spreadsheetDoc.getTableByName(&quot;</span><span class="n">B</span><span class="s2">&quot;);</span>
-<span class="s2">        convertFromTableToList(tableB, slide.addList(), 0, 2, 1, 4);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">B</span><span class="o">.</span><span class="n">A2</span><span class="o">:</span><span class="n">B</span><span class="o">.</span><span class="n">C5</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = slide.createChart(&quot;</span><span class="n">Traffic</span> <span class="n">Sources</span> <span class="n">Type</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, null);</span>
-<span class="s2">        chart.setChartType(ChartType.PIE);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">B</span><span class="o">.</span><span class="n">A9</span><span class="o">:</span><span class="n">B</span><span class="o">.</span><span class="n">C19</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = slide.createChart(&quot;</span><span class="n">Referral</span> <span class="n">Traffic</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, null);</span>
-<span class="s2">        chart.setChartType(ChartType.PIE);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">B</span><span class="o">.</span><span class="n">E2</span><span class="o">:</span><span class="n">B</span><span class="o">.</span><span class="n">G8</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = slide.createChart(&quot;</span><span class="n">Search</span> <span class="n">Keyword</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, null);</span>
-<span class="s2">        chart.setChartType(ChartType.PIE);</span>
-
-<span class="s2">        // create content overview page</span>
-<span class="s2">        slide = presentationDoc.newSlide(4, &quot;</span><span class="n">Slide5</span><span class="s2">&quot;, SlideLayout.TITLE_PLUS_CHART);</span>
-<span class="s2">        setSlideTextContent(slide, &quot;</span><span class="n">Content</span> <span class="n">Overview</span><span class="s2">&quot;);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">C</span><span class="o">.</span><span class="n">A1</span><span class="o">:</span><span class="n">C</span><span class="o">.</span><span class="n">C8</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = slide.createChart(&quot;</span><span class="n">Page</span> <span class="n">Visit</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, null);</span>
-<span class="s2">        chart.setChartType(ChartType.BAR);</span>
-
-<span class="s2">        spreadsheetDoc.close();</span>
-<span class="s2">        presentationDoc.save(&quot;</span><span class="n">demo9p</span><span class="o">.</span><span class="n">odp</span><span class="err">&quot;</span><span class="p">);</span>
-        <span class="err">presentationDoc.close()</span><span class="p">;</span>
-    <span class="p">}</span> <span class="nt">catch</span> <span class="o">(</span><span class="nt">Exception</span> <span class="nt">e</span><span class="o">)</span> <span class="p">{</span>
-        <span class="err">e.printStackTrace()</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="err">}</span>
-</pre></div>
-
-
-<p>The following codes show how to generate the text document format report. Different from presentation, you need to set chart size before add it to the document.</p>
-<div class="codehilite"><pre><span></span><span class="nt">private</span> <span class="nt">static</span> <span class="nt">void</span> <span class="nt">generateTextDocument</span><span class="o">()</span> <span class="p">{</span>
-    <span class="err">try</span> <span class="err">{</span>
-        <span class="err">TextDocument</span> <span class="err">textDoc</span> <span class="err">=</span> <span class="err">TextDocument.newTextDocument()</span><span class="p">;</span>
-        <span class="err">SpreadsheetDocument</span> <span class="err">spreadsheetDoc</span> <span class="err">=</span> <span class="err">SpreadsheetDocument.loadDocument(&quot;demo9_data.ods&quot;)</span><span class="p">;</span>
-
-        <span class="err">//</span> <span class="err">create</span> <span class="err">cover</span> <span class="err">page</span>
-        <span class="err">textDoc.addParagraph(&quot;Simple</span> <span class="err">Website</span> <span class="err">Analytics</span> <span class="err">Report(2011-04-27~2011-05-27)&quot;)</span><span class="p">;</span>
-        <span class="err">textDoc.addParagraph(&quot;Visitors</span> <span class="err">Overview&quot;)</span><span class="p">;</span>
-        <span class="err">//</span> <span class="err">create</span> <span class="err">visitors</span> <span class="err">overview</span> <span class="err">page</span> <span class="err">1</span>
-        <span class="err">CellRangeAddressList</span> <span class="err">cellRange</span> <span class="err">=</span> <span class="err">CellRangeAddressList.valueOf(&quot;A.</span><span class="n">A1</span><span class="p">:</span><span class="n">A</span><span class="o">.</span><span class="n">B3</span><span class="s2">&quot;);</span>
-<span class="s2">        Rectangle rect = new Rectangle();</span>
-<span class="s2">        rect.width = 14000;</span>
-<span class="s2">        rect.height = 8000;</span>
-<span class="s2">        Chart chart = textDoc.createChart(&quot;</span><span class="n">New</span> <span class="n">Visitor</span> <span class="n">VS</span><span class="o">.</span> <span class="n">Returning</span> <span class="n">Visitor</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, rect);</span>
-<span class="s2">        chart.setChartType(ChartType.PIE);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">A</span><span class="o">.</span><span class="n">A6</span><span class="o">:</span><span class="n">A</span><span class="o">.</span><span class="n">B37</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = textDoc.createChart(&quot;</span><span class="n">Daily</span> <span class="n">Visit</span><span class="s2">&quot;, spreadsheetDoc,cellRange, true, true, false, rect);</span>
-<span class="s2">        chart.setChartType(ChartType.LINE);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">A</span><span class="o">.</span><span class="n">E1</span><span class="o">:</span><span class="n">A</span><span class="o">.</span><span class="n">G14</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = textDoc.createChart(&quot;</span><span class="n">Count</span> <span class="n">of</span> <span class="n">Visits</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, rect);</span>
-<span class="s2">        chart.setChartType(ChartType.BAR);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">A</span><span class="o">.</span><span class="n">I1</span><span class="o">:</span><span class="n">A</span><span class="o">.</span><span class="n">K8</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = textDoc.createChart(&quot;</span><span class="n">Visit</span> <span class="n">Duration</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, rect);</span>
-
-<span class="s2">        // create traffic sources overview page</span>
-<span class="s2">        textDoc.addParagraph(&quot;</span><span class="n">Traffic</span> <span class="n">Sources</span> <span class="n">Overview</span><span class="s2">&quot;);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">B</span><span class="o">.</span><span class="n">A2</span><span class="o">:</span><span class="n">B</span><span class="o">.</span><span class="n">C5</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = textDoc.createChart(&quot;</span><span class="n">Traffic</span> <span class="n">Sources</span> <span class="n">Type</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, rect);</span>
-<span class="s2">        chart.setChartType(ChartType.PIE);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">B</span><span class="o">.</span><span class="n">A9</span><span class="o">:</span><span class="n">B</span><span class="o">.</span><span class="n">C19</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = textDoc.createChart(&quot;</span><span class="n">Referral</span> <span class="n">Traffic</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, rect);</span>
-<span class="s2">        chart.setChartType(ChartType.PIE);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">B</span><span class="o">.</span><span class="n">E2</span><span class="o">:</span><span class="n">B</span><span class="o">.</span><span class="n">G8</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = textDoc.createChart(&quot;</span><span class="n">Search</span> <span class="n">Keyword</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, rect);</span>
-<span class="s2">        chart.setChartType(ChartType.PIE);</span>
-
-<span class="s2">        // create content overview page</span>
-<span class="s2">        textDoc.addParagraph(&quot;</span><span class="n">Content</span> <span class="n">Overview</span><span class="s2">&quot;);</span>
-<span class="s2">        cellRange = CellRangeAddressList.valueOf(&quot;</span><span class="n">C</span><span class="o">.</span><span class="n">A1</span><span class="o">:</span><span class="n">C</span><span class="o">.</span><span class="n">C8</span><span class="s2">&quot;);</span>
-<span class="s2">        chart = textDoc.createChart(&quot;</span><span class="n">Page</span> <span class="n">Visit</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, rect);</span>
-<span class="s2">        chart.setChartType(ChartType.BAR);</span>
-
-<span class="s2">        spreadsheetDoc.close();</span>
-<span class="s2">        textDoc.save(&quot;</span><span class="n">demo9t</span><span class="o">.</span><span class="n">odt</span><span class="err">&quot;</span><span class="p">);</span>
-        <span class="err">textDoc.close()</span><span class="p">;</span>
-    <span class="p">}</span> <span class="nt">catch</span> <span class="o">(</span><span class="nt">Exception</span> <span class="nt">e</span><span class="o">)</span> <span class="p">{</span>
-        <span class="err">e.printStackTrace()</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="err">}</span>
-</pre></div>
-
-
-<p>Lastly, let's have a look at how to add chart to spreadsheet document. It's similar with text and presentation documents. On the other hand, it also has a special feature. You can specify a cell as the position where the chart should be located.</p>
-<div class="codehilite"><pre><span></span><span class="nt">private</span> <span class="nt">static</span> <span class="nt">void</span> <span class="nt">generateSpreadsheetDocument</span><span class="o">()</span> <span class="p">{</span>
-    <span class="err">try</span> <span class="err">{</span>
-        <span class="err">SpreadsheetDocument</span> <span class="err">spreadsheetDoc</span> <span class="err">=</span> <span class="err">SpreadsheetDocument.loadDocument(&quot;demo9_data.ods&quot;)</span><span class="p">;</span>
-        <span class="err">//</span> <span class="err">create</span> <span class="err">visitors</span> <span class="err">overview</span> <span class="err">page</span> <span class="err">1</span>
-        <span class="err">CellRangeAddressList</span> <span class="err">cellRange</span> <span class="err">=</span> <span class="err">CellRangeAddressList.valueOf(&quot;A.</span><span class="n">A1</span><span class="p">:</span><span class="n">A</span><span class="o">.</span><span class="n">B3</span><span class="s2">&quot;);</span>
-<span class="s2">        Rectangle rect = new Rectangle();</span>
-<span class="s2">        rect.width = 15000;</span>
-<span class="s2">        rect.height = 8000;</span>
-<span class="s2">        Cell positionCell = spreadsheetDoc.getTableByName(&quot;</span><span class="n">B</span><span class="s2">&quot;).getCellByPosition(&quot;</span><span class="n">E1</span><span class="s2">&quot;);</span>
-<span class="s2">        spreadsheetDoc.createChart(&quot;</span><span class="n">Page</span> <span class="n">Visit</span><span class="s2">&quot;, spreadsheetDoc, cellRange, true, true, false, rect, positionCell);</span>
-<span class="s2">        spreadsheetDoc.save(&quot;</span><span class="n">demo9s</span><span class="o">.</span><span class="n">ods</span><span class="err">&quot;</span><span class="p">);</span>
-        <span class="err">spreadsheetDoc.close()</span><span class="p">;</span>
-    <span class="p">}</span> <span class="nt">catch</span> <span class="o">(</span><span class="nt">Exception</span> <span class="nt">e</span><span class="o">)</span> <span class="p">{</span>
-        <span class="err">e.printStackTrace()</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="err">}</span>
-</pre></div>
-
-
-<p><strong>Download</strong></p>
-<p>Powered by the Simple Java API for ODF version <a href="../downloads.html">0.6</a>.
-You can download the code of this demo from <a href="demo9.zip">here</a>.</p>
-    </div>
-    
-    <div id="footera">
-      <div id="copyrighta">
-        <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a
-            href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a
-            href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English
-            translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding
-            German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website
-          are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which
-          is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public
-            License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their
-          corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective
-          logos and icons are also subject to international copyright laws. Use thereof is explained in our <a
-            href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>.
-          LibreOffice was based on OpenOffice.org.</p>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
       </div>
-    </div>   
-  </div>
-</body>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../../downloads.html">Downloads</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../../generator/index.html">Schema To Template</a></li> 
+        <li class="list-group-item"><a href="../../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../../simple/index.html">Simple API (deprecated)</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <p><a href="index.html"><strong>Demos</strong></a> &gt; <b>Create Analysis Report with Charts</b></p> 
+      <p><strong>Overview</strong></p> 
+      <p>Simple ODF provides Chart API since version 0.6. Chart is a visualized way of data show in electronic document. For ODF document, text document, spreadsheet document and presentation document can embed charts to help describe content. This demo shows the power of chart support in Simple ODF.</p> 
+      <p>In this demo, a web traffic analytics report will be generated in presentation document and text document format. The initial data is stored in a spreadsheet document, which includes visitors, traffic sources and page visit information. These data will be used in charts. Each chart chooses a cell range and uses the values of these cells to draw picture. It's easy and convenient.</p> 
+      <p>No need predefined template, all of the document are generated by Simple ODF API. This demo not only tell you how to use Chart API, but also teach you ro use slide layout to improve presentation design.<br><br> This picture shows the generated presentation document.</p> 
+      <p><img src="image/demo9p.png" alt="image"> This picture shows the generated text document.</p> 
+      <p><img src="image/demo9t.png" alt="image"></p> 
+      <p>Besides, we also supply some codes to show how to create chart in a spreadsheet document. The following picture shows the generated document.</p> 
+      <p><img src="image/demo9s.png" alt="image"></p> 
+      <p><strong>Code Introduction</strong></p> 
+      <p>There code of this demo is very clear. First, we create a presentation document and load the data document. Second, we create cover page and set its content. Thirdly, we add charts to each slide. If you want to add chart to a slide, you must chose a layout which can hold chart. In Simple ODF 0.6, these layouts are "TITLE_PLUS_CHART", "TITLE_PLUS_2_CHART", "TITLE_LEFT_CHART_RIGHT_OUTLINE", "TITLE_PLUS_3_OBJECT", "TITLE_PLUS_4_OBJECT". Different layout can own different count of charts. Please be sure you know that, otherwise chart insert would be failed. For slide, you needn't set the chart size or position, Simple ODF will do it automatically. Finally, the data document is closed and the new created document is saved.</p> 
+      <div class="codehilite">
+        <pre><code>private static void generatePresentationChart() {
+	try {
+		PresentationDocument presentationDoc = PresentationDocument.newPresentationDocument();
+		SpreadsheetDocument spreadsheetDoc = SpreadsheetDocument.loadDocument("demo9_data.ods");
+
+		// create cover page
+		Slide slide = presentationDoc.newSlide(0, "Slide1",	SlideLayout.TITLE_SUBTITLE);
+		setSlideTextContent(slide, "Simple Website Analytics Report", "2011-04-27~2011-05-27");
+
+		// create visitors overview page 1
+		slide = presentationDoc.newSlide(1, "Slide2", SlideLayout.TITLE_PLUS_3_OBJECT);
+		setSlideTextContent(slide, "Visitors Overview");
+		Table tableA = spreadsheetDoc.getTableByName("A");
+		convertFromTableToList(tableA, slide.addList(), 4, 17, 5, 20);
+		CellRangeAddressList cellRange = CellRangeAddressList.valueOf("A.A1:A.B3");
+		Chart chart = slide.createChart("New Visitor VS. Returning Visitor", spreadsheetDoc, cellRange, true, true, false, null);
+		chart.setChartType(ChartType.PIE);
+		cellRange = CellRangeAddressList.valueOf("A.A6:A.B37");
+		chart = slide.createChart("Daily Visit", spreadsheetDoc, cellRange,	true, true, false, null);
+		chart.setChartType(ChartType.LINE);
+
+		// create visitors overview page 2
+		slide = presentationDoc.newSlide(2, "Slide3", SlideLayout.TITLE_PLUS_2_CHART);
+		setSlideTextContent(slide, "Visitors Overview");
+		cellRange = CellRangeAddressList.valueOf("A.E1:A.G14");
+		chart = slide.createChart("Count of Visits", spreadsheetDoc, cellRange, true, true, false, null);
+		chart.setChartType(ChartType.BAR);
+		cellRange = CellRangeAddressList.valueOf("A.I1:A.K8");
+		chart = slide.createChart("Visit Duration", spreadsheetDoc,	cellRange, true, true, false, null);
+
+		// create traffic sources overview page
+		slide = presentationDoc.newSlide(3, "Slide4", SlideLayout.TITLE_PLUS_4_OBJECT);
+		setSlideTextContent(slide, "Traffic Sources Overview");
+		Table tableB = spreadsheetDoc.getTableByName("B");
+		convertFromTableToList(tableB, slide.addList(), 0, 2, 1, 4);
+		cellRange = CellRangeAddressList.valueOf("B.A2:B.C5");
+		chart = slide.createChart("Traffic Sources Type", spreadsheetDoc, cellRange, true, true, false, null);
+		chart.setChartType(ChartType.PIE);
+		cellRange = CellRangeAddressList.valueOf("B.A9:B.C19");
+		chart = slide.createChart("Referral Traffic", spreadsheetDoc, cellRange, true, true, false, null);
+		chart.setChartType(ChartType.PIE);
+		cellRange = CellRangeAddressList.valueOf("B.E2:B.G8");
+		chart = slide.createChart("Search Keyword", spreadsheetDoc,	cellRange, true, true, false, null);
+		chart.setChartType(ChartType.PIE);
+
+		// create content overview page
+		slide = presentationDoc.newSlide(4, "Slide5", SlideLayout.TITLE_PLUS_CHART);
+		setSlideTextContent(slide, "Content Overview");
+		cellRange = CellRangeAddressList.valueOf("C.A1:C.C8");
+		chart = slide.createChart("Page Visit", spreadsheetDoc, cellRange, true, true, false, null);
+		chart.setChartType(ChartType.BAR);
+
+		spreadsheetDoc.close();
+		presentationDoc.save("demo9p.odp");
+		presentationDoc.close();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+</code></pre>
+      </div> 
+      <p>The following codes show how to generate the text document format report. Different from presentation, you need to set chart size before add it to the document.</p> 
+      <div class="codehilite">
+        <pre><code>private static void generateTextDocument() {
+	try {
+		TextDocument textDoc = TextDocument.newTextDocument();
+		SpreadsheetDocument spreadsheetDoc = SpreadsheetDocument.loadDocument("demo9_data.ods");
+
+		// create cover page
+		textDoc.addParagraph("Simple Website Analytics Report(2011-04-27~2011-05-27)");
+		textDoc.addParagraph("Visitors Overview");
+		// create visitors overview page 1
+		CellRangeAddressList cellRange = CellRangeAddressList.valueOf("A.A1:A.B3");
+		Rectangle rect = new Rectangle();
+		rect.width = 14000;
+		rect.height = 8000;
+		Chart chart = textDoc.createChart("New Visitor VS. Returning Visitor", spreadsheetDoc, cellRange, true, true, false, rect);
+		chart.setChartType(ChartType.PIE);
+		cellRange = CellRangeAddressList.valueOf("A.A6:A.B37");
+		chart = textDoc.createChart("Daily Visit", spreadsheetDoc,cellRange, true, true, false, rect);
+		chart.setChartType(ChartType.LINE);
+		cellRange = CellRangeAddressList.valueOf("A.E1:A.G14");
+		chart = textDoc.createChart("Count of Visits", spreadsheetDoc, cellRange, true, true, false, rect);
+		chart.setChartType(ChartType.BAR);
+		cellRange = CellRangeAddressList.valueOf("A.I1:A.K8");
+		chart = textDoc.createChart("Visit Duration", spreadsheetDoc, cellRange, true, true, false, rect);
+
+		// create traffic sources overview page
+		textDoc.addParagraph("Traffic Sources Overview");
+		cellRange = CellRangeAddressList.valueOf("B.A2:B.C5");
+		chart = textDoc.createChart("Traffic Sources Type", spreadsheetDoc,	cellRange, true, true, false, rect);
+		chart.setChartType(ChartType.PIE);
+		cellRange = CellRangeAddressList.valueOf("B.A9:B.C19");
+		chart = textDoc.createChart("Referral Traffic", spreadsheetDoc,	cellRange, true, true, false, rect);
+		chart.setChartType(ChartType.PIE);
+		cellRange = CellRangeAddressList.valueOf("B.E2:B.G8");
+		chart = textDoc.createChart("Search Keyword", spreadsheetDoc, cellRange, true, true, false, rect);
+		chart.setChartType(ChartType.PIE);
+
+		// create content overview page
+		textDoc.addParagraph("Content Overview");
+		cellRange = CellRangeAddressList.valueOf("C.A1:C.C8");
+		chart = textDoc.createChart("Page Visit", spreadsheetDoc, cellRange, true, true, false, rect);
+		chart.setChartType(ChartType.BAR);
+
+		spreadsheetDoc.close();
+		textDoc.save("demo9t.odt");
+		textDoc.close();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+</code></pre>
+      </div> 
+      <p>Lastly, let's have a look at how to add chart to spreadsheet document. It's similar with text and presentation documents. On the other hand, it also has a special feature. You can specify a cell as the position where the chart should be located.</p> 
+      <div class="codehilite">
+        <pre><code>private static void generateSpreadsheetDocument() {
+	try {
+		SpreadsheetDocument spreadsheetDoc = SpreadsheetDocument.loadDocument("demo9_data.ods");
+		// create visitors overview page 1
+		CellRangeAddressList cellRange = CellRangeAddressList.valueOf("A.A1:A.B3");
+		Rectangle rect = new Rectangle();
+		rect.width = 15000;
+		rect.height = 8000;
+		Cell positionCell = spreadsheetDoc.getTableByName("B").getCellByPosition("E1");
+		spreadsheetDoc.createChart("Page Visit", spreadsheetDoc, cellRange,	true, true, false, rect, positionCell);
+		spreadsheetDoc.save("demo9s.ods");
+		spreadsheetDoc.close();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+</code></pre>
+      </div> 
+      <p><strong>Download</strong></p> 
+      <p>Powered by the Simple Java API for ODF version <a href="../downloads.html">0.6</a>. You can download the code of this demo from <a href="demo9.zip">here</a>.</p> 
+    </div>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
 </html>
