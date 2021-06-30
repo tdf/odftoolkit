@@ -8,6 +8,8 @@ The [ODFDOM 0.10.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.
 * **Collaboration API**: No developer would ever sent a zipped repository for exchangin work with other developers. Still we are doing this by zipping document and sending those. To be able to dispatch only changes among collaborators new functionalty had bee added: Any OpenDocumen Text can now be transformed into an equal sequence of user changes ([ODT](../docs/presentations/character-styles.odt)/[JSON](../docs/presentations/character-styles.json)).
  This list of user changes is like a batch of text operations, similar as if the user would created the document from top to the bottom. Formost, new user changes can be merged into the existing document via JSON.
  For more details see the [list of supported changes/operations](./operations/operations.html)
+* [ODFTOOLKIT-180](https://issues.apache.org/jira/browse/ODFTOOLKIT-180) was [fixed](https://github.com/tdf/odftoolkit/commit/5e0e6a0ce124f9d6aefc005389bef2cd8e55d0ec).
+* Another [anomaly in the generator was fixed](https://github.com/tdf/odftoolkit/commit/8256ac43df9559890c6c7d68808383129124cd0a).
 * Many Fixes & enhancements, which were done over several years by merging (more an overwriting) with the former Open-XChange ODFDOM fork.
 
 ## Release 0.9.0
