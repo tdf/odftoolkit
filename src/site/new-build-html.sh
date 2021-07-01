@@ -2,7 +2,6 @@
 
 echo "Creating HTML from MarkDown as described"
 echo "  in ./website-development.html"
-# Start the Python Markdown daemon. (tested with Python 2.7.16)
 
 echo 1. Backup none-site related content
 mv "../../docs/api" ../..
@@ -25,3 +24,5 @@ mv "../../api" ../../docs
 
 echo
 echo Now you may review the generated website in the '"<ODF_TOOLKIT>/docs/" directory'!
+echo Alternative use your GitHub Pages on your GitHub fork using your Git branch and /docs as root!
+echo Use a broken link checker e.g. https://www.drlinkcheck.com/
