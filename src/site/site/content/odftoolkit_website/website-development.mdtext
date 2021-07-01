@@ -24,17 +24,19 @@ This website development page is divided into:
 
 ### Download the repo
 
-Check out the repository:
+1. Check out the repository:
 
 ```shell
 git clone https://github.com/tdf/odftoolkit
 ```
 
-Then build the project:
+2. Install Gradle build system, see https://gradle.org/install/
+
+3. Build the project:
 
 ```shell
 cd odftoolkit/src/site/java
-./new-build-html.sh
+./build-html.sh
 ```
 
 ## Directory Layout
@@ -56,7 +58,7 @@ Run this to generate the website into GitHub Pages directory <ODFTOOLKIT_ROOT>/d
 
 ```shell
 cd odftoolkit/src/site/java
-./new-build-html.sh
+./build-html.sh
 ```
 
 ### Testing your results
