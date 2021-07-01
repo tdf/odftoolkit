@@ -8,6 +8,9 @@ The pages on this website are written in [markdown syntax] [1] and stored in our
 A subproject contained within the repo is used to generate the website from the Markdown text
 files and the resources stored in the content directory.
 
+This Java solution is meant as an interim solution as we do not want to reinvent the wheel.
+Instead we are likely switching to [Sphinx](https://www.zverovich.net/2016/06/16/rst-vs-markdown.html).
+
 ## Overview
 
 This website development page is divided into:
@@ -55,6 +58,11 @@ Run this to generate the website into GitHub Pages directory <ODFTOOLKIT_ROOT>/d
 cd odftoolkit/src/site/java
 ./new-build-html.sh
 ```
+
+### Testing your results
+
+Use your GitHub Pages on your GitHub fork using your Git branch and /docs as root!
+Use a broken link checker (e.g. https://www.drlinkcheck.com/) testing on your GitHub HTML deployment!
 
 ## Building JavaDoc and publishing the JavaDoc
 
