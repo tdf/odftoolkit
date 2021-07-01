@@ -41,14 +41,15 @@ import java.util.TreeSet;
 import java.util.Map;
 import java.util.HashMap;
 ##
-#foreach ($styleelement in ${model.getElements().withoutMultiples()})
-#if ($styleelement.getNamespace() == "style" && ${styleelement.getLocalName().endsWith("properties")})
-import org.odftoolkit.odfdom.dom.element.style.${model.camelCase($styleelement)}Element;
+#foreach ($styleElement in ${xmlModel.getElements().withoutMultiples()})
+#if ($styleElement.getNamespace() == "style" && ${styleElement.getLocalName().endsWith("properties")})
+import org.odftoolkit.odfdom.dom.element.style.${xmlModel.camelCase($styleElement)}Element;
 #end
 #end
 
 public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 
+	private String m_name;
 	private Set<OdfStyleProperty> m_properties = new TreeSet<OdfStyleProperty>();
 	private static Map<String, OdfStyleFamily> m_familyByName = new HashMap<String, OdfStyleFamily>();
 
@@ -101,17 +102,17 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 		return Collections.unmodifiableSet(m_properties);
 	}
 
-#foreach ($family in ${odfmodel.getStyleFamilies()})
-	public final static OdfStyleFamily ${model.camelCase($model.extractLocalname($family))} = new OdfStyleFamily("${model.extractLocalname($family)}",
+#foreach ($family in ${odfModel.getStyleFamilies()})
+	public final static OdfStyleFamily ${xmlModel.camelCase($xmlModel.extractLocalName($family))} = new OdfStyleFamily("${xmlModel.extractLocalName($family)}",
 			new OdfStyleProperty[]{
-#foreach ($styleelement in ${model.getElements().withoutMultiples()})
-#if ($styleelement.getNamespace() == "style" && ${styleelement.getLocalName().endsWith("properties")})
-#foreach ($property in ${styleelement.withMultiples().getAttributes()})
+#foreach ($styleElement in ${xmlModel.getElements().withoutMultiples()})
+#if ($styleElement.getNamespace() == "style" && ${styleElement.getLocalName().endsWith("properties")})
+#foreach ($property in ${styleElement.withMultiples().getAttributes()})
 #set($propertyName = ${property.getLocalName()})
-#if (${styleelement.getLocalName()}=="graphic-properties" && $propertyName =="shadow")
+#if (${styleElement.getLocalName()}=="graphic-properties" && $propertyName =="shadow")
 #set($propertyName = ${property.getQName()})
 #end
-	${model.camelCase($styleelement)}Element.${model.camelCase($propertyName)},
+	${xmlModel.camelCase($styleElement)}Element.${xmlModel.camelCase($propertyName)},
 #end
 #end
 #end

@@ -18,6 +18,7 @@
 ## under the License.
 ##
 ##################################################################
+
 #include('copyright.txt')
 // !!! GENERATED SOURCE CODE !!!
 package org.odftoolkit.odfdom.dom.style.props;
@@ -26,15 +27,15 @@ import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 
-#set ($element = ${model.getElement($context)})
-#set ($classname = "Odf${model.camelCase($element.getLocalName())}")
-public interface $classname {
+#set ($element = ${xmlModel.getElement($contextNode)})
+#set ($className = "Odf${xmlModel.camelCase($element.getLocalName())}")
+public interface $className {
 #foreach ($property in ${element.getAttributes().withoutMultiples()})
 #set($propertyName = ${property.getLocalName()})
 #if (${element.getLocalName()}=="graphic-properties" && $propertyName =="shadow")
 #set($propertyName = ${property.getQName()})
 #end
-	public final static OdfStyleProperty ${model.camelCase($propertyName)} =
-		OdfStyleProperty.get(OdfStylePropertiesSet.${model.camelCase($element.getLocalName())}, OdfName.newName(OdfDocumentNamespace.${property.getNamespace().toUpperCase()}, "${property.getLocalName()}"));
+	public final static OdfStyleProperty ${xmlModel.camelCase($propertyName)} =
+		OdfStyleProperty.get(OdfStylePropertiesSet.${xmlModel.camelCase($element.getLocalName())}, OdfName.newName(OdfDocumentNamespace.${property.getNamespace().toUpperCase()}, "${property.getLocalName()}"));
 #end
 }
