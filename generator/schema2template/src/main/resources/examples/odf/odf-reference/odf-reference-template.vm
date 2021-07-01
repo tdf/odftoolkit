@@ -50,7 +50,7 @@ for an element to have a special child element.</p>
 
 <p>Here's a shortcut to the content <a href="#element_office:document_0">toplevel</a> element.</p>
 
-#foreach( $element in ${model.getElements()} )
+#foreach( $element in ${xmlModel.getElements()} )
 #set ($oldelement = "")
 #set ($oldelement = ${oldmodel.getElement($element.getQName())} )
 #if ($element != "*")
@@ -145,7 +145,7 @@ for an element to have a special child element.</p>
 #end
 ##
 ##
-#foreach( $attribute in ${model.getAttributes()} )
+#foreach( $attribute in ${xmlModel.getAttributes()} )
 #set ($oldattribute = "")
 #set ($oldattribute = ${oldmodel.getAttribute($attribute.getQName())} )
 #if ($attribute != "*")

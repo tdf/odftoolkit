@@ -53,7 +53,7 @@ public class QNameValue implements QNamed, Comparable<QNameValue> {
   }
 
   public String getLocalName() {
-    return XMLModel.extractLocalname(mName);
+    return XMLModel.extractLocalName(mName);
   }
 
   public String getQName() {

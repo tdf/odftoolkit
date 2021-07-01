@@ -159,7 +159,29 @@ public class PathPrinter {
   }
 
   public static void main(String[] args) throws Exception {
-    Expression root = parseOdfSchema(new File(OdfHelper.odf12RngFile));
+    // originally:
+    // schema2template\src\main\resources\examples\odf\odf-schemas\OpenDocument-v1.2-os-schema.rng
+    //
+    // schema2template\src\main\resources\examples\odf\odf-schemas\OpenDocument-v1.2-os-schema.rng
+    // better via classpath: generator\schema2template\target\classes\examples\odf\odf-schemas
+    System.out.println(
+        "ODF 1.2 RNG file is located at '"
+            + System.getProperty(
+                "user.dir") // E:\GitHub\odf\odftoolkit-latest-0.11.0\generator\schema2template\
+            + File.separator
+            + "src\\main\\resources"
+            + File.separator
+            + SchemaToTemplate
+                .ODF12_RNG_FILE // examples\odf\odf-schemas\OpenDocument-v1.2-os-schema.rng'
+            + "'");
+    Expression root =
+        parseOdfSchema(
+            new File(
+                System.getProperty("user.dir")
+                    + File.separator
+                    + "src\\main\\resources"
+                    + File.separator
+                    + SchemaToTemplate.ODF12_RNG_FILE));
     PuzzlePieceSet elements = new PuzzlePieceSet();
     PuzzlePieceSet attributes = new PuzzlePieceSet();
     PuzzlePiece.extractPuzzlePieces(root, elements, attributes, null);
@@ -167,10 +189,12 @@ public class PathPrinter {
         createDefinitionMap(new TreeSet<PuzzlePiece>(elements));
 
     System.out.println(
-        "Print all paths from parent element (e.g. \"text:p\") to direct child element (e.g. \"text:span\")");
-
+        "Print all paths from parent element ("
+            + EXAMPLE_PARENT
+            + ") to direct child element ("
+            + EXAMPLE_CHILD
+            + ")");
     SortedSet<PuzzlePiece> pieces = nameToDefinition.get(EXAMPLE_PARENT);
-
     if (pieces == null) {
       System.out.println("No parent element found by the given name: " + EXAMPLE_PARENT);
     }
@@ -189,13 +213,9 @@ public class PathPrinter {
       System.out.println(
           "There were more than one element by this name. Dropped all instances but one.");
     }
-
-    System.out.println();
-    System.out.println("PATHS from " + parent.getQName() + " to " + child.getQName() + ": ");
-    System.out.println("---------------------------------------------------------");
-
+    System.out.println(
+        "All paths from " + parent.getQName() + " to " + child.getQName() + " are: ");
     List<String> paths = new PathPrinter(parent).printChildPaths(child);
-
     if (paths == null) {
       System.out.println("No Path found.");
     } else {
