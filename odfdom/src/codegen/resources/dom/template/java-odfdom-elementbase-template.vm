@@ -23,16 +23,16 @@
 ## Documentation of template development can be found in local file
 ## TemplateHelp.html.
 ##
-#set ($base = $javamodel.getBaseclass($context))
-#set ($baseElement = ${model.getElement($base.getQName())})
-#set($classname = "${model.camelCase($base)}ElementBase")
+#set ($base = ${codeModel.getBaseClass($contextNode)})
+#set ($baseElement = ${xmlModel.getElement($base.getQName())})
+#set ($className = "${xmlModel.camelCase($base)}ElementBase")
 ##
 ## Set Superclass
 #if (${base.isStylable()})
 #set ($stylable = true)
 #set ($superclass = "OdfStylableElement")
-#if ($baseElement)
-#set ($elementStyleFamily=${odfmodel.getStyleFamilies($baseElement)})
+#if (${baseElement})
+#set ($elementStyleFamily=${odfModel.getStyleFamilies($baseElement)})
 #set ($useOdfStyleableShapeElement = false)
 #foreach($f in $elementStyleFamily)
 #if (${f.getQName()}=="draw:graphic" || ${f.getQName()}=="presentation:presentation")
@@ -43,12 +43,12 @@
 #else
 #set ($superclass = 'OdfElement')
 #end
-#if ($context== "text:list-level-style")
+#if ($contextNode== "text:list-level-style")
 #set ($superclass = 'OdfStyleBase')
 #end
-
-#if ($useOdfStyleableShapeElement || $classname=="DrawShapeElementBase")
+#if ($useOdfStyleableShapeElement || $className=="DrawShapeElementBase")
 #set ($superclass = "OdfStyleableShapeElement")
+#set ($useOdfStyleableShapeElement = true) ## DrawShapeElementBase.java contextNode="draw:shape"
 #end
 ##
 ## Begin Code
@@ -67,7 +67,6 @@ package org.odftoolkit.odfdom.dom.element.${base.getNamespace()};
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
@@ -76,7 +75,7 @@ import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 #if ($attribute == "*")
 #set ($anyattribute = true)
 #else
-import org.odftoolkit.odfdom.dom.attribute.${attribute.getNamespace()}.${model.camelCase($attribute)}Attribute;
+import org.odftoolkit.odfdom.dom.attribute.${attribute.getNamespace()}.${xmlModel.camelCase($attribute)}Attribute;
 #end
 #end
 
@@ -92,19 +91,23 @@ import org.odftoolkit.odfdom.dom.attribute.${attribute.getNamespace()}.${model.c
  * This class can have any org.w3c.dom.Attribute attribute.
 #end
  */
-public abstract class $classname extends $superclass {
+public abstract class $className extends $superclass {
 
 	/**
-	 * Create the instance of <code>$classname</code>
+	 * Create the instance of <code>$className</code>
 	 *
 	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
+	 * @param  elementName	The type is <code>OdfName</code>
+#if (${base.isStylable()} && ($useOdfStyleableShapeElement == false) || $className == "TextParagraphElementBase")	 
+	 * @param  styleFamily	The type is <code>OdfStyleFamily</code>
+	 * @param  styleAttrName	The type is <code>OdfName</code>
 	 */
-#if (${base.isStylable()}&& ($useOdfStyleableShapeElement == false) || $classname=="TextParagraphElementBase")
-	public $classname(OdfFileDom ownerDoc, OdfName elementName, OdfStyleFamily styleFamily, OdfName styleAttrName) {
+	public ${className}(OdfFileDom ownerDoc, OdfName elementName, OdfStyleFamily styleFamily, OdfName styleAttrName) {
 		super(ownerDoc, elementName, styleFamily, styleAttrName);
 	}
 #else
-	public $classname(OdfFileDom ownerDoc, OdfName elementName) {
+	 */
+	public ${className}(OdfFileDom ownerDoc, OdfName elementName) {
 		super(ownerDoc, elementName);
 	}
 #end
@@ -118,7 +121,7 @@ public abstract class $classname extends $superclass {
 #set ($valueObject = "String")
 #set ($simpleValue = "")
 #set ($dataTypes = ${attr.getDatatypes().withoutMultiples()})
-#set ($valueTypes = ${javamodel.getValuetypes($dataTypes)})
+#set ($valueTypes = ${codeModel.getValuetypes($dataTypes)})
 #foreach ($valueType in $valueTypes)
 #set ($valueObject = $valueType)
 #end
@@ -143,21 +146,21 @@ public abstract class $classname extends $superclass {
 #set ($valueObject = "String")
 #end
 #if ($valueObject != "String")
-#set ($simpleValue = ${javamodel.getPrimitiveType($valueObject)})
+#set ($simpleValue = ${codeModel.getPrimitiveType($valueObject)})
 #end
 #if ($attr != "*")
 #set ($attribute = ${attr.withMultiples()})
 #set ($aNS = ${attribute.getNamespace()})
-#set ($aClassname = "${model.camelCase($attribute)}Attribute")
-#set ($aParam = "${model.javaCase($attribute)}Value")
+#set ($aClassName = "${xmlModel.camelCase($attribute)}Attribute")
+#set ($aParam = "${xmlModel.javaCase($attribute)}Value")
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>$aClassname</code> , See {@odf.attribute ${attribute.getQName()}}
+	 * Receives the value of the ODFDOM attribute representation <code>$aClassName</code> , See {@odf.attribute ${attribute.getQName()}}
 	 *
 	 * @return - the <code>$valueObject</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public $valueObject get${aClassname}() {
-		$aClassname attr = ($aClassname) getOdfAttribute(OdfDocumentNamespace.${aNS.toUpperCase()}, "${attribute.getLocalName()}");
+	public $valueObject get${aClassName}() {
+		$aClassName attr = ($aClassName) getOdfAttribute(OdfDocumentNamespace.${aNS.toUpperCase()}, "${attribute.getLocalName()}");
 		if (attr != null) {
 #if ($simpleValue!="")
 			return ${valueObject}.valueOf(attr.${simpleValue}Value());
@@ -165,21 +168,21 @@ public abstract class $classname extends $superclass {
 			return ${valueObject}.valueOf(attr.getValue());
 #end
 		}
-#if ($odfmodel.getDefaultAttributeValue($attr, $base))
-#set ($defaultValue = ${model.escapeLiteral($odfmodel.getDefaultAttributeValue($attr, $base))})
-#set ($defaultValueSet = $odfmodel.getDefaultAttributeValues($attr))
+#if ($odfModel.getDefaultAttributeValue($attr, $base))
+#set ($defaultValue = ${xmlModel.escapeLiteral($odfModel.getDefaultAttributeValue($attr, $base))})
+#set ($defaultValueSet = $odfModel.getDefaultAttributeValues($attr))
 #if ($defaultValueSet.size()>1)
-#set ($constant = $model.constantCase($defaultValue))
+#set ($constant = $xmlModel.constantCase($defaultValue))
 #if ($valueObject == "String")
-		return ${aClassname}.DEFAULT_VALUE_${model.escapeKeyword($constant)};
+		return ${aClassName}.DEFAULT_VALUE_${xmlModel.escapeKeyword($constant)};
 #else
-		return ${valueObject}.valueOf(${aClassname}.DEFAULT_VALUE_${model.escapeKeyword($constant)});
+		return ${valueObject}.valueOf(${aClassName}.DEFAULT_VALUE_${xmlModel.escapeKeyword($constant)});
 #end
 #else
 #if ($valueObject == "String")
-		return ${aClassname}.DEFAULT_VALUE;
+		return ${aClassName}.DEFAULT_VALUE;
 #else
-		return ${valueObject}.valueOf(${aClassname}.DEFAULT_VALUE);
+		return ${valueObject}.valueOf(${aClassName}.DEFAULT_VALUE);
 #end
 #end
 #else
@@ -188,17 +191,17 @@ public abstract class $classname extends $superclass {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>$aClassname</code> , See {@odf.attribute ${attribute.getQName()}}
+	 * Sets the value of ODFDOM attribute representation <code>$aClassName</code> , See {@odf.attribute ${attribute.getQName()}}
 	 *
 	 * @param $aParam   The type is <code>$valueObject</code>
 	 */
-	public void set${aClassname}($valueObject $aParam) {
-		$aClassname attr = new ${aClassname}((OdfFileDom) this.ownerDocument);
+	public void set${aClassName}($valueObject $aParam) {
+		$aClassName attr = new ${aClassName}((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 #if ($valueObject == "String")
 		attr.setValue($aParam);
 #else
-		attr.set${model.camelCase($simpleValue)}Value($aParam.${simpleValue}Value());
+		attr.set${xmlModel.camelCase($simpleValue)}Value(${aParam}.${simpleValue}Value());
 #end
 	}
 #end

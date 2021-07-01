@@ -23,7 +23,7 @@
  */
 package schema2template.model;
 
-import static schema2template.example.odf.OdfHelper.DEBUG;
+import static schema2template.example.odf.SchemaToTemplate.DEBUG;
 
 import com.sun.msv.grammar.DataExp;
 import com.sun.msv.grammar.ElementExp;
@@ -51,14 +51,14 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
 
   private static final Logger LOG = Logger.getLogger(MSVExpressionIterator.class.getName());
   private Expression mCurrentExpression; // the expression that will be received by next()
-  public int mCurrentExpressionDepth; // Level of current expression starting with 0
+  // public int mCurrentExpressionDepth; // Level of current expression starting with 0
   private MSVExpressionVisitorChildren mVisitor;
   // list of already visited expressions to avoid endless recursion
   // The stack assists the iteration to go back up (usually done in by recursion)
   // The stack contains the next expression, parent, grandparent, ...
   private Stack<UniqueAncestor> mAncestorsAndCurrent;
   // to prevent enless loops, known Element expression will be remembered and not again reentered
-  // Situation: Element a contains Element b contains Element a, will stop after the second a not
+  // Situation: Element a contains Element b contains Element a, will stop after the second and not
   // continuing with b
   private HashSet<Expression> mKnownElementExpressions;
 

@@ -33,45 +33,45 @@ import schema2template.model.XMLModel;
 /**
  * Encapsulates the name of the java base class
  *
- * <p>Convention: Unique key is the name of the baseclass. So name is used for compareTo(o),
+ * <p>Convention: Unique key is the name of the baseClass. So name is used for compareTo(o),
  * equals(o) and hashCode().
  */
 public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass>, QNamed {
 
-  private SortedSet<PuzzlePiece> mSubelements;
-  private String mBasename;
-  private OdfModel mOdfmodel;
+  private SortedSet<PuzzlePiece> mSubElements;
+  private String mBaseName;
+  private OdfModel mOdfModel;
 
   protected SourceCodeBaseClass(
-      OdfModel odfmodel, String basename, SortedSet<PuzzlePiece> subelements) {
-    mSubelements = subelements;
-    mBasename = basename;
-    mOdfmodel = odfmodel;
+      OdfModel odfModel, String baseName, SortedSet<PuzzlePiece> subElements) {
+    mSubElements = subElements;
+    mBaseName = baseName;
+    mOdfModel = odfModel;
   }
 
   public int compareTo(SourceCodeBaseClass o) {
-    return mBasename.compareTo(o.mBasename);
+    return mBaseName.compareTo(o.mBaseName);
   }
 
   public boolean equals(Object o) {
     return (o instanceof SourceCodeBaseClass
-        && ((SourceCodeBaseClass) o).mBasename.equals(mBasename));
+        && ((SourceCodeBaseClass) o).mBaseName.equals(mBaseName));
   }
 
   public int hashCode() {
-    return mBasename.hashCode();
+    return mBaseName.hashCode();
   }
 
   public String getLocalName() {
-    return XMLModel.extractLocalname(mBasename);
+    return XMLModel.extractLocalName(mBaseName);
   }
 
   public String getQName() {
-    return mBasename;
+    return mBaseName;
   }
 
   public String getNamespace() {
-    return XMLModel.extractNamespace(mBasename);
+    return XMLModel.extractNamespace(mBaseName);
   }
 
   public String toString() {
@@ -84,7 +84,7 @@ public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass>, QNa
    * @return subclasses
    */
   public PuzzlePieceSet getElements() {
-    return new PuzzlePieceSet(mSubelements);
+    return new PuzzlePieceSet(mSubElements);
   }
 
   /**
@@ -94,8 +94,8 @@ public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass>, QNa
    */
   public PuzzlePieceSet getBaseAttributes() {
     SortedSet<PuzzlePiece> attributes =
-        new TreeSet<PuzzlePiece>(mSubelements.last().getAttributes());
-    for (PuzzlePiece subelement : mSubelements.headSet(mSubelements.last())) {
+        new TreeSet<PuzzlePiece>(mSubElements.last().getAttributes());
+    for (PuzzlePiece subelement : mSubElements.headSet(mSubElements.last())) {
       attributes.retainAll(subelement.getAttributes());
     }
     return new PuzzlePieceSet(attributes);
@@ -111,7 +111,7 @@ public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass>, QNa
     boolean notStylable = false;
     boolean stylable = false;
     for (PuzzlePiece def : getElements()) {
-      if (mOdfmodel.isStylable(def)) {
+      if (mOdfModel.isStylable(def)) {
         stylable = true;
       } else {
         notStylable = true;

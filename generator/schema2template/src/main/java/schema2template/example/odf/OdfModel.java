@@ -152,10 +152,15 @@ public class OdfModel {
    * @return Default values for attribute
    */
   public Set<String> getDefaultAttributeValues(QNamed attribute) {
-    AttributeDefaults defaults = mNameToDefaultsMap.get(attribute.getQName());
-    if (defaults == null) {
+    if (mNameToDefaultsMap == null || attribute == null) {
       return null;
+    } else {
+      AttributeDefaults defaults = mNameToDefaultsMap.get(attribute.getQName());
+      if (defaults == null) {
+        return null;
+      } else {
+        return defaults.getDefaults();
+      }
     }
-    return defaults.getDefaults();
   }
 }
