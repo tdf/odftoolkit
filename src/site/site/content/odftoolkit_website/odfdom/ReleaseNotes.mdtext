@@ -2,7 +2,7 @@
 
 ## Release 0.10.0
 
-The [ODFDOM 0.10.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.10.0/) was released on July 1st, 2021. Major updates are coming with this version:
+[ODFDOM 0.10.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.10.0/) was released on July 1st, 2021. Major updates are coming with this version:
 
 * JDK 9 (or higher) is required to build
 * **Collaboration API**: No developer would ever sent a zipped repository for exchangin work with other developers. Still we are doing this by zipping document and sending those. To be able to dispatch only changes among collaborators new functionalty had bee added: Any OpenDocumen Text can now be transformed into an equal sequence of user changes ([ODT](../docs/presentations/character-styles.odt)/[JSON](../docs/presentations/character-styles.json)).
@@ -14,7 +14,7 @@ The [ODFDOM 0.10.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.
 
 ## Release 0.9.0
 
-The [release of ODFDOM 0.9.0](https://mvnrepository.com/artifact/org.odftoolkit/odfdom-java/0.9.0) was released on July 1st, 2021:
+[ODFDOM 0.9.0](https://mvnrepository.com/artifact/org.odftoolkit/odfdom-java/0.9.0) was released on July 1st, 2021:
 
 * JDK 8 is required to build
 * First release of the ODF Toolkit at The Document Foundation (TDF)
