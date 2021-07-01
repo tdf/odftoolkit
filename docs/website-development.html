@@ -50,6 +50,7 @@
       <h2 id="introduction">Introduction</h2> 
       <p>The pages on this website are written in [markdown syntax] <a href="https://www.apache.org/dev/cmsref.html#markdown">1</a> and stored in our GIT repo at [src/site] <a href="https://github.com/tdf/odftoolkit/tree/master/src/site">2</a></p> 
       <p>A subproject contained within the repo is used to generate the website from the Markdown text files and the resources stored in the content directory.</p> 
+      <p>This Java solution is meant as an interim solution as we do not want to reinvent the wheel. Instead we are likely switching to <a href="https://www.zverovich.net/2016/06/16/rst-vs-markdown.html">Sphinx</a>.</p> 
       <h2 id="overview">Overview</h2> 
       <p>This website development page is divided into:</p> 
       <ul> 
@@ -84,6 +85,8 @@
 ./new-build-html.sh
 </code></pre>
       </div> 
+      <h3 id="testing-your-results">Testing your results</h3> 
+      <p>Use your GitHub Pages on your GitHub fork using your Git branch and /docs as root! Use a broken link checker (e.g. https://www.drlinkcheck.com/) testing on your GitHub HTML deployment!</p> 
       <h2 id="building-javadoc-and-publishing-the-javadoc">Building JavaDoc and publishing the JavaDoc</h2> 
       <p>JavaDoc is generated as part of by calling from the root of the project the command:</p> 
       <div class="codehilite">
