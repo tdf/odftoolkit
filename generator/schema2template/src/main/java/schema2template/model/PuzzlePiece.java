@@ -38,6 +38,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import schema2template.example.odf.SchemaToTemplate;
 
 /**
  * One of the following RelaxNG definitions of an Element, Attribute, Value or Datatype.
@@ -61,7 +62,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
   static final MSVExpressionVisitorType TYPE_VISITOR = new MSVExpressionVisitorType();
   static final MSVNameClassVisitorList NAME_VISITOR = new MSVNameClassVisitorList();
   static final MSVExpressionVisitorChildren CHILD_VISITOR = new MSVExpressionVisitorChildren();
-  private Expression mExpression;
+  private final Expression mExpression;
   // all multiples of this tagname (contains only this if there are no multiples)
   private PuzzlePieceSet mMultiples = new PuzzlePieceSet();
   // definitions of elements which can have this as children
@@ -165,7 +166,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
     if (b instanceof PuzzlePiece) {
       PuzzlePiece d = (PuzzlePiece) b;
       if (d.mName.equals(mName) && d.mExpression.equals(mExpression)) {
-        return true;
+        return this.contentEquals(d);
       }
     }
     return false;
@@ -253,7 +254,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
   }
 
   public String getLocalName() {
-    return XMLModel.extractLocalname(mName);
+    return XMLModel.extractLocalName(mName);
   }
 
   public String getNamespace() {
@@ -420,6 +421,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
    * @param root MSV root Expression
    * @param newElementSet empty Set. Will be filled with Definitions of Type.ELEMENT
    * @param newAttributeSet empty Set. Will be filled with Definitions of Type.ATTRIBUTE
+   * @param schemaFileName file name of the XML grammar file. Used as folder name of GraphML files.
    */
   public static void extractPuzzlePieces(
       Expression root,
@@ -429,10 +431,58 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
     // e.g. the newElementSet is the set to iterate later in the template
     extractTypedPuzzlePieces(root, newElementSet, ElementExp.class);
     extractTypedPuzzlePieces(root, newAttributeSet, AttributeExp.class);
+
+    /* original compareTo
+    assert(!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1628);
+    assert(!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1822);
+    assert(!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1837);
+    */
+    assert (!schemaFileName.equals(SchemaToTemplate.ODF11_RNG_FILE)
+        || newAttributeSet.size() == 1627);
+    assert (!schemaFileName.equals(SchemaToTemplate.ODF12_RNG_FILE)
+        || newAttributeSet.size() == 1820);
+    assert (!schemaFileName.equals(SchemaToTemplate.ODF13_RNG_FILE)
+        || newAttributeSet.size() == 1836);
     configureProperties(newElementSet, newAttributeSet, schemaFileName);
     reduceDatatypes(newAttributeSet);
+
+    /*
+    assert(!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1628);
+    assert(!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1822);
+    assert(!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1837);
+    */
+    assert (!schemaFileName.equals(SchemaToTemplate.ODF11_RNG_FILE)
+        || newAttributeSet.size() == 1627);
+    assert (!schemaFileName.equals(SchemaToTemplate.ODF12_RNG_FILE)
+        || newAttributeSet.size() == 1820);
+    assert (!schemaFileName.equals(SchemaToTemplate.ODF13_RNG_FILE)
+        || newAttributeSet.size() == 1836);
     reduceValues(newAttributeSet);
+
+    /*
+    assert(!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1628);
+    assert(!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1822);
+    assert(!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1837);
+    */
+    assert (!schemaFileName.equals(SchemaToTemplate.ODF11_RNG_FILE)
+        || newAttributeSet.size() == 1627);
+    assert (!schemaFileName.equals(SchemaToTemplate.ODF12_RNG_FILE)
+        || newAttributeSet.size() == 1820);
+    assert (!schemaFileName.equals(SchemaToTemplate.ODF13_RNG_FILE)
+        || newAttributeSet.size() == 1836);
     reduceAttributes(newElementSet, newAttributeSet);
+
+    /*
+    assert(!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1313);
+    assert(!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1461);
+    assert(!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1471);
+    */
+    assert (!schemaFileName.equals(SchemaToTemplate.ODF11_RNG_FILE)
+        || newAttributeSet.size() == 1270);
+    assert (!schemaFileName.equals(SchemaToTemplate.ODF12_RNG_FILE)
+        || newAttributeSet.size() == 1417);
+    assert (!schemaFileName.equals(SchemaToTemplate.ODF13_RNG_FILE)
+        || newAttributeSet.size() == 1434);
     makePuzzlePiecesImmutable(newElementSet);
     makePuzzlePiecesImmutable(newAttributeSet);
   }
@@ -445,12 +495,9 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 
     while (iter.hasNext()) {
       Expression exp = iter.next();
-      // 2DO: ProbeRelaxNG mit NAME EXPRESSION ZUM TESTEN!!
       // If there is more than one name for this expression, create more than one PuzzlePiece
       List<String> names =
           (List<String>) ((NameClassAndExpression) exp).getNameClass().visit(NAME_VISITOR);
-      // SVANTE: names commen aus einem CHOICE, wie könnte ich an dieser Stelle festhalten? -
-      // SONDERFALL -- kann eines von den 7 sein --> text:page-count - 7 Alternativen
 
       for (String name : names) {
         if (name.length() == 0) {

@@ -19,11 +19,11 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  *
- * <p>**********************************************************************
+ * <p>*********************************************************************
  */
 package schema2template.example.odf;
 
-import static schema2template.example.odf.OdfHelper.*;
+import static schema2template.example.odf.SchemaToTemplate.*;
 
 import com.sun.msv.grammar.Expression;
 import java.io.BufferedReader;
@@ -43,17 +43,91 @@ import schema2template.model.PuzzlePieceSet;
 public class PuzzlePieceTest {
 
   private static final Logger LOG = Logger.getLogger(PuzzlePieceTest.class.getName());
-  private static final String OUTPUT_DUMP_ODF10 = "target" + File.separator + "odf10-msvtree.dump";
-  private static final String OUTPUT_DUMP_ODF11 = "target" + File.separator + "odf11-msvtree.dump";
-  private static final String OUTPUT_DUMP_ODF12 = "target" + File.separator + "odf12-msvtree.dump";
+  /**
+   * Expresses the amount of elements in ODF 1.1. There are some issues in the schema that have to
+   * be fixed before the full number can be returned by MSV: Reference table-table-template is never
+   * used, therefore several elements are not taking into account:: "table:body"
+   * "table:even-columns" "table:even-rows" "table:first-column" "table:first-row"
+   * "table:last-column" "table:last-row" "table:odd-columns" "table:odd-rows"
+   * "table:table-template" NOTE: Ignoring the '*' there can be 525 elements parsed, but with fixed
+   * schema it should be 535.
+   */
+  // ToDo: 535 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or
+  // attribute declaration
+  private static final int ODF11_ELEMENT_NUMBER = 526;
+
+  private static final int ODF12_ELEMENT_NUMBER = 599;
+
+  private static final int ODF13_ELEMENT_NUMBER = 606;
+  /**
+   * Expresses the amount of attributes in ODF 1.1. There are some issues in the schema that have to
+   * be fixed before the full number can be returned by MSV: Following references are never used,
+   * therefore its attribute is not taking into account:: draw-glue-points-attlist with
+   * "draw:escape-direction" office-process-content with "office:process-content" (DEPRECATED in
+   * ODF1.2 only on foreign elements)
+   *
+   * <p>Following attributes are member of the not referenced element "table:table-template":
+   * "text:first-row-end-column" "text:first-row-start-column" "text:last-row-end-column"
+   * "text:last-row-start-column" "text:paragraph-style-name"
+   *
+   * <p>NOTE: Ignoring the '*' there can be 1162 elements parsed, but with fixed schema it should be
+   * 1169.
+   */
+
+  // ToDo: 1169 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or
+  // attribute declaration
+  private static final int ODF11_ATTRIBUTE_NUMBER = 1163;
+
+  // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie.
+  // @office:process-content)
+  private static final int ODF12_ATTRIBUTE_NUMBER = 1301;
+
+  // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie.
+  // @office:process-content)
+  private static final int ODF13_ATTRIBUTE_NUMBER = 1317;
+  private static final int ODF13_ELEMENT_DUPLICATES = 7;
+  private static final int ODF13_ATTRIBUTE_DUPLICATES = 117;
+
+  private static final String OUTPUT_DUMP_ODF10 =
+      System.getProperty("user.dir")
+          + File.separator
+          + "target"
+          + File.separator
+          + "odf10-msvtree.dump";
+  private static final String OUTPUT_DUMP_ODF11 =
+      System.getProperty("user.dir")
+          + File.separator
+          + "target"
+          + File.separator
+          + "odf11-msvtree.dump";
+  private static final String OUTPUT_DUMP_ODF12 =
+      System.getProperty("user.dir")
+          + File.separator
+          + "target"
+          + File.separator
+          + "odf12-msvtree.dump";
+  private static final String OUTPUT_DUMP_ODF13 =
+      System.getProperty("user.dir")
+          + File.separator
+          + "target"
+          + File.separator
+          + "odf13-msvtree.dump";
+  private static final String TEST_REFERENCE_DIR =
+      "target"
+          + File.separator
+          + "test-classes"
+          + File.separator
+          + "examples"
+          + File.separator
+          + "odf";
   private static final String OUTPUT_REF_ODF10 =
       TEST_REFERENCE_DIR + File.separator + "odf10-msvtree.ref";
   private static final String OUTPUT_REF_ODF11 =
       TEST_REFERENCE_DIR + File.separator + "odf11-msvtree.ref";
   private static final String OUTPUT_REF_ODF12 =
       TEST_REFERENCE_DIR + File.separator + "odf12-msvtree.ref";
-  private static final int ODF12_ELEMENT_DUPLICATES = 7;
-  private static final int ODF12_ATTRIBUTE_DUPLICATES = 116;
+  private static final String OUTPUT_REF_ODF13 =
+      TEST_REFERENCE_DIR + File.separator + "odf13-msvtree.ref";
 
   /**
    * Test: Use the MSV
@@ -64,26 +138,33 @@ public class PuzzlePieceTest {
   @Test
   public void testMSVExpressionTree() {
     try {
-      Expression odf10Root = OdfHelper.loadSchemaODF10();
+      Expression odf10Root = SchemaToTemplate.loadSchemaODF10();
       String odf10Dump = MSVExpressionIterator.dumpMSVExpressionTree(odf10Root);
       LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP_ODF10);
       PrintWriter out0 = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF10));
       out0.print(odf10Dump);
       out0.close();
 
-      Expression odf11Root = OdfHelper.loadSchemaODF11();
+      Expression odf11Root = SchemaToTemplate.loadSchemaODF11();
       String odf11Dump = MSVExpressionIterator.dumpMSVExpressionTree(odf11Root);
       LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP_ODF11);
       PrintWriter out1 = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF11));
       out1.print(odf11Dump);
       out1.close();
 
-      Expression odf12Root = OdfHelper.loadSchemaODF12();
+      Expression odf12Root = SchemaToTemplate.loadSchemaODF12();
       String odf12Dump = MSVExpressionIterator.dumpMSVExpressionTree(odf12Root);
       LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP_ODF12);
       PrintWriter out2 = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF12));
       out2.print(odf12Dump);
       out2.close();
+
+      Expression odf13Root = SchemaToTemplate.loadSchemaODF13();
+      String odf13Dump = MSVExpressionIterator.dumpMSVExpressionTree(odf13Root);
+      LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP_ODF13);
+      PrintWriter out3 = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF13));
+      out3.print(odf13Dump);
+      out3.close();
 
       String odf10Ref = readFileAsString(OUTPUT_REF_ODF10);
       if (!odf10Ref.equals(odf10Dump)) {
@@ -104,7 +185,7 @@ public class PuzzlePieceTest {
                 + "Please compare the output:\n\t'"
                 + OUTPUT_DUMP_ODF11
                 + "'\nwith the reference\n\t'"
-                + odf11RngFile;
+                + ODF11_RNG_FILE;
         LOG.severe(errorMsg);
         Assert.fail(errorMsg);
       }
@@ -116,7 +197,18 @@ public class PuzzlePieceTest {
                 + "Please compare the output:\n\t'"
                 + OUTPUT_DUMP_ODF12
                 + "'\nwith the reference\n\t'"
-                + odf12RngFile;
+                + ODF12_RNG_FILE;
+        LOG.severe(errorMsg);
+        Assert.fail(errorMsg);
+      }
+      String odf13Ref = readFileAsString(OUTPUT_REF_ODF13);
+      if (!odf13Ref.equals(odf13Dump)) {
+        String errorMsg =
+            "There is a difference between the expected outcome of the parsed ODF 1.3 tree.\n"
+                + "Please compare the output:\n\t'"
+                + OUTPUT_DUMP_ODF13
+                + "'\nwith the reference\n\t'"
+                + ODF13_RNG_FILE;
         LOG.severe(errorMsg);
         Assert.fail(errorMsg);
       }
@@ -154,25 +246,42 @@ public class PuzzlePieceTest {
    * extract PuzzlePieces out of a XML schema
    */
   @Test
+  // due to issue https://issues.apache.org/jira/browse/ODFTOOLKIT-180
   public void testExtractPuzzlePieces() {
     try {
       PuzzlePieceSet allElements_ODF11 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF11 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          OdfHelper.loadSchemaODF11(), allElements_ODF11, allAttributes_ODF11, null);
+          SchemaToTemplate.loadSchemaODF11(),
+          allElements_ODF11,
+          allAttributes_ODF11,
+          SchemaToTemplate.ODF11_RNG_FILE);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
-      checkFoundNumber(allElements_ODF11.withoutMultiples(), ODF11_ELEMENT_NUMBER + 1, "element");
-      checkFoundNumber(
-          allAttributes_ODF11.withoutMultiples(), ODF11_ATTRIBUTE_NUMBER + 1, "attribute");
+      checkFoundNumber(allElements_ODF11.withoutMultiples(), ODF11_ELEMENT_NUMBER, "element");
+      checkFoundNumber(allAttributes_ODF11.withoutMultiples(), ODF11_ATTRIBUTE_NUMBER, "attribute");
 
       PuzzlePieceSet allElements_ODF12 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF12 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          OdfHelper.loadSchemaODF12(), allElements_ODF12, allAttributes_ODF12, null);
+          SchemaToTemplate.loadSchemaODF12(),
+          allElements_ODF12,
+          allAttributes_ODF12,
+          SchemaToTemplate.ODF12_RNG_FILE);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
-      checkFoundNumber(allElements_ODF12.withoutMultiples(), ODF12_ELEMENT_NUMBER + 1, "element");
-      checkFoundNumber(
-          allAttributes_ODF12.withoutMultiples(), ODF12_ATTRIBUTE_NUMBER + 1, "attribute");
+      checkFoundNumber(allElements_ODF12.withoutMultiples(), ODF12_ELEMENT_NUMBER, "element");
+      checkFoundNumber(allAttributes_ODF12.withoutMultiples(), ODF12_ATTRIBUTE_NUMBER, "attribute");
+
+      PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
+      PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
+      PuzzlePiece.extractPuzzlePieces(
+          SchemaToTemplate.loadSchemaODF13(),
+          allElements_ODF13,
+          allAttributes_ODF13,
+          SchemaToTemplate.ODF13_RNG_FILE);
+      // There is a difference of one wildcard "*" representing anyElement/anyAttribute
+      checkFoundNumber(allElements_ODF13.withoutMultiples(), ODF13_ELEMENT_NUMBER, "element");
+      checkFoundNumber(allAttributes_ODF13.withoutMultiples(), ODF13_ATTRIBUTE_NUMBER, "attribute");
+
     } catch (Exception ex) {
       Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
       Assert.fail(ex.toString());
@@ -188,31 +297,48 @@ public class PuzzlePieceTest {
    */
   @Test
   public void testExtractPuzzlePiecesWithDuplicates() {
+    int foundElementDuplicates = -1;
+    int foundAttributeDuplicates = -1;
     try {
-      PuzzlePieceSet allElements_ODF12 = new PuzzlePieceSet();
-      PuzzlePieceSet allAttributes_ODF12 = new PuzzlePieceSet();
+      PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
+      PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          OdfHelper.loadSchemaODF12(), allElements_ODF12, allAttributes_ODF12, null);
+          SchemaToTemplate.loadSchemaODF13(),
+          allElements_ODF13,
+          allAttributes_ODF13,
+          SchemaToTemplate.ODF13_RNG_FILE);
+      allElements_ODF13 = new PuzzlePieceSet();
+      allAttributes_ODF13 = new PuzzlePieceSet();
+      PuzzlePiece.extractPuzzlePieces(
+          SchemaToTemplate.loadSchemaODF13(),
+          allElements_ODF13,
+          allAttributes_ODF13,
+          SchemaToTemplate.ODF13_RNG_FILE);
+      allElements_ODF13 = new PuzzlePieceSet();
+      allAttributes_ODF13 = new PuzzlePieceSet();
+      PuzzlePiece.extractPuzzlePieces(
+          SchemaToTemplate.loadSchemaODF13(),
+          allElements_ODF13,
+          allAttributes_ODF13,
+          SchemaToTemplate.ODF13_RNG_FILE);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
-
-      int foundElementDuplicates = allElements_ODF12.size() - (ODF12_ELEMENT_NUMBER + 1);
-      int foundAttributeDuplicates = allAttributes_ODF12.size() - (ODF12_ATTRIBUTE_NUMBER + 1);
-
-      if (ODF12_ELEMENT_DUPLICATES != foundElementDuplicates) {
+      foundElementDuplicates = allElements_ODF13.size() - ODF13_ELEMENT_NUMBER;
+      foundAttributeDuplicates = allAttributes_ODF13.size() - ODF13_ATTRIBUTE_NUMBER;
+      if (ODF13_ELEMENT_DUPLICATES != foundElementDuplicates) {
         String errorMsg =
-            "There is a difference between the expected outcome of duplicates for ODF 1.2 elements.\n"
+            "There is a difference between the expected outcome of duplicates for ODF 1.3 elements.\n"
                 + "Expected: '"
-                + ODF12_ELEMENT_DUPLICATES
+                + ODF13_ELEMENT_DUPLICATES
                 + "'\tfound:'"
                 + foundElementDuplicates;
         LOG.severe(errorMsg);
         Assert.fail(errorMsg);
       }
-      if (ODF12_ATTRIBUTE_DUPLICATES != foundAttributeDuplicates) {
+      if (ODF13_ATTRIBUTE_DUPLICATES != foundAttributeDuplicates) {
         String errorMsg =
-            "There is a difference between the expected outcome of duplicates for ODF 1.2 elements.\n"
+            "There is a difference between the expected outcome of duplicates for ODF 1.3 attributes.\n"
                 + "Expected: '"
-                + ODF12_ATTRIBUTE_DUPLICATES
+                + ODF13_ATTRIBUTE_DUPLICATES
                 + "'\tfound:'"
                 + foundAttributeDuplicates;
         LOG.severe(errorMsg);
