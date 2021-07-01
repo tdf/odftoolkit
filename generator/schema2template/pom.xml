@@ -83,7 +83,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>3.2.0</version>
                 <configuration>
                     <archive>
                         <index>true</index>
@@ -111,7 +111,7 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <!-- Explizit version required for fix on systemPropertyVariables -->
-                <version>2.19.1</version>
+                <version>2.22.2</version>
                 <configuration>
                     <systemPropertyVariables>
                         <odfdom.version>${project.version}</odfdom.version>
@@ -125,7 +125,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>3.8.1</version>
                 <configuration>
                     <!-- defined in the parent pom.xml -->
                     <source>${jdk.version}</source>
@@ -136,7 +136,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.3.0</version>
                 <configuration>
                     <!-- Workaround: Build the project using the same JDK version as the project is targetting.
                         see https://issues.apache.org/jira/browse/MJAVADOC-562
@@ -167,7 +167,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
