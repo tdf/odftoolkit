@@ -34,7 +34,7 @@ public enum MSVExpressionType {
   EPSILON,
   INTERLEAVE,
   LIST,
-  MIXED,
+  MIXED, // 2DO: should not exist in 'normalisied' RelaxNG..
   NULLSET,
   ONEOREMORE,
   OTHER,
