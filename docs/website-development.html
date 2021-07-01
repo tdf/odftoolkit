@@ -61,15 +61,20 @@
       </ul> 
       <h2 id="setup">Setup</h2> 
       <h3 id="download-the-repo">Download the repo</h3> 
-      <p>Check out the repository:</p> 
+      <ol> 
+        <li>Check out the repository:</li> 
+      </ol> 
       <div class="codehilite">
         <pre><code class="language-shell">git clone https://github.com/tdf/odftoolkit
 </code></pre>
       </div> 
-      <p>Then build the project:</p> 
+      <ol start="2"> 
+        <li> <p>Install Gradle build system, see https://gradle.org/install/</p> </li> 
+        <li> <p>Build the project:</p> </li> 
+      </ol> 
       <div class="codehilite">
         <pre><code class="language-shell">cd odftoolkit/src/site/java
-./new-build-html.sh
+./build-html.sh
 </code></pre>
       </div> 
       <h2 id="directory-layout">Directory Layout</h2> 
@@ -82,7 +87,7 @@
       <p>Run this to generate the website into GitHub Pages directory &lt;ODFTOOLKIT_ROOT&gt;/docs</p> 
       <div class="codehilite">
         <pre><code class="language-shell">cd odftoolkit/src/site/java
-./new-build-html.sh
+./build-html.sh
 </code></pre>
       </div> 
       <h3 id="testing-your-results">Testing your results</h3> 
