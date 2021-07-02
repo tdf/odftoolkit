@@ -1,23 +1,7 @@
 ODF Toolkit Change Log
 =============================
-======= Release 0.9.0 =======
 
-First release at the Document Foundation, resembling the latest state of the sources from Apache ODF Toolkit.
-Release is based on JDK 1.8, the next release will be start working based on JDK 11.
-This is the last release including the Simple API, which is unmaintainable due to too many copied sources from ODFDOM and has not sufficient development support.
-
-GitHub issues fixed in this release:
-* #7 Clarify Java Version?
-* #12 Travis does not download artifacts from different Maven repos
-* #15 Avoiding Whitespace Noise from Commits by Automation/GitHooks
-
-ASF JIRA issues fixed in this release:
-* ODFTOOLKIT-415 Replace/Upgrade jena dependency with org.apache.jena:jena-core:3.x
-* ODFTOOLKIT-448 Upgrade Java version to JDK 8
-* ODFTOOLKIT-460 validator reports errors about missing manifest.xml file entries for files in META-INF/
-* ODFTOOLKIT-464 Pom does not follow best practices
-* ODFTOOLKIT-474 list decorators with different bullet points
-* ODFTOOLKIT-475 validator applies ODF 1.1 rules to ODF 1.2 documents when checking character content in foreign elements, part 2: ODF elements that don't allow character content
+See src/site/site/content/odftoolkit_website/ReleaseNotes.mdtext
 
 
 Historic ASF incubator releases

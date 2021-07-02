@@ -1,0 +1,53 @@
+# ODF Toolkit Release Notes
+
+## Release 0.10.0
+
+[ODFDOM 0.10.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.10.0/) is released on July 7th, 2021. Major updates are coming with this version:
+
+* JDK 9 (or higher) is required to build
+* **Collaboration API**: No developer would ever sent a zipped repository for exchangin work with other developers. Still we are doing this by zipping document and sending those. To be able to dispatch only changes among collaborators new functionalty had bee added: Any OpenDocumen Text can now be transformed into an equal sequence of user changes ([ODT](../docs/presentations/character-styles.odt)/[JSON](../docs/presentations/character-styles.json)).
+ This list of user changes is like a batch of text operations, similar as if the user would created the document from top to the bottom. Formost, new user changes can be merged into the existing document via JSON.
+ For more details see the [list of supported changes/operations](./operations/operations.html)
+* Many Fixes & enhancements, which were done over several years by merging (more an overwriting) with the former Open-XChange ODFDOM fork.
+
+### GitHub issues fixed in this release:
+* #70 ODFDOM should support XML default namespace
+* #78 Make odfdom-java an OSGi bundle
+
+## Release 0.9.0
+
+[ODFDOM 0.9.0](https://mvnrepository.com/artifact/org.odftoolkit/odfdom-java/0.9.0) is released on July 7th, 2021:
+
+* JDK 8 is required to build
+* First release of the ODF Toolkit at The Document Foundation (TDF)
+* All modules of the ODF Toolkit now have unified version numbers following ODFDOM's current version number
+* Last release bundling the Simple API, which includes too many copied source code, likely as it was meant as a stand-alone fork. The Simple API is by copying and obfuscating ODFDOM API incompatible with the upcoming Collaboration API and is being removed (see above).
+* validator supports ODF 1.3
+* validator can now validate manifest of encrypted ODF files as produced by LibreOffice
+* Many fixes & enhancements
+* Another [anomaly in the generator was fixed](https://github.com/tdf/odftoolkit/commit/8256ac43df9559890c6c7d68808383129124cd0a).
+
+### GitHub issues fixed in this release:
+* #7 Clarify Java Version?
+* #12 Travis does not download artifacts from different Maven repos
+* #15 Avoiding Whitespace Noise from Commits by Automation/GitHooks
+* #23 Small mistake in odftoolkit v0.9RC description?
+* #30 Add regression tests for MarkDown to HTML creation
+* #49 Memory Leak in ODF Simple API
+* #50 Java Formatter triggered by Maven
+* #55 Update to modern Jena
+* #84 Upgrade libs to prevent security issues - CVE
+
+### ASF JIRA issues fixed in this release:
+* [ODFTOOLKIT-187](https://issues.apache.org/jira/browse/ODFTOOLKIT-187) was [fixed](https://github.com/tdf/odftoolkit/commit/5e0e6a0ce124f9d6aefc005389bef2cd8e55d0ec).
+* ODFTOOLKIT-415 Replace/Upgrade jena dependency with org.apache.jena:jena-core:3.x
+* ODFTOOLKIT-448 Upgrade Java version to JDK 8
+* ODFTOOLKIT-460 validator reports errors about missing manifest.xml file entries for files in META-INF/
+* ODFTOOLKIT-464 Pom does not follow best practices
+* ODFTOOLKIT-474 list decorators with different bullet points
+* ODFTOOLKIT-475 validator applies ODF 1.1 rules to ODF 1.2 documents when checking character content in foreign elements, part 2: ODF elements that don't allow character content
+
+[Historic release notes from ASF incubator times can be found here](https://github.com/tdf/odftoolkit/blob/master/CHANGES.txt)
+
+[Historic release notes of ODFDOM can be found here](./odfdom/ReleaseNotes.html)
+
