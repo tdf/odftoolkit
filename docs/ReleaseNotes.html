@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
+      </div>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="index.html">About</a></li> 
+        <li class="list-group-item"><a href="downloads.html">Downloads</a></li> 
+        <li class="list-group-item"><a href="ReleaseNotes.html">ReleaseNotes</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="generator/index.html">Schema To Template</a></li> 
+        <li class="list-group-item"><a href="xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="simple/index.html">Simple API (deprecated)</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="people.html">People</a></li> 
+        <li class="list-group-item"><a href="developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <h1 id="odf-toolkit-release-notes">ODF Toolkit Release Notes</h1> 
+      <h2 id="release-0.10.0">Release 0.10.0</h2> 
+      <p><a href="https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.10.0/">ODFDOM 0.10.0</a> is released on July 7th, 2021. Major updates are coming with this version:</p> 
+      <ul> 
+        <li>JDK 9 (or higher) is required to build</li> 
+        <li><strong>Collaboration API</strong>: No developer would ever sent a zipped repository for exchangin work with other developers. Still we are doing this by zipping document and sending those. To be able to dispatch only changes among collaborators new functionalty had bee added: Any OpenDocumen Text can now be transformed into an equal sequence of user changes (<a href="../docs/presentations/character-styles.odt">ODT</a>/<a href="../docs/presentations/character-styles.json">JSON</a>). This list of user changes is like a batch of text operations, similar as if the user would created the document from top to the bottom. Formost, new user changes can be merged into the existing document via JSON. For more details see the <a href="./operations/operations.html">list of supported changes/operations</a></li> 
+        <li>Many Fixes &amp; enhancements, which were done over several years by merging (more an overwriting) with the former Open-XChange ODFDOM fork.</li> 
+      </ul> 
+      <h3 id="github-issues-fixed-in-this-release:">GitHub issues fixed in this release:</h3> 
+      <ul> 
+        <li>#70 ODFDOM should support XML default namespace</li> 
+        <li>#78 Make odfdom-java an OSGi bundle</li> 
+      </ul> 
+      <h2 id="release-0.9.0">Release 0.9.0</h2> 
+      <p><a href="https://mvnrepository.com/artifact/org.odftoolkit/odfdom-java/0.9.0">ODFDOM 0.9.0</a> is released on July 7th, 2021:</p> 
+      <ul> 
+        <li>JDK 8 is required to build</li> 
+        <li>First release of the ODF Toolkit at The Document Foundation (TDF)</li> 
+        <li>All modules of the ODF Toolkit now have unified version numbers following ODFDOM's current version number</li> 
+        <li>Last release bundling the Simple API, which includes too many copied source code, likely as it was meant as a stand-alone fork. The Simple API is by copying and obfuscating ODFDOM API incompatible with the upcoming Collaboration API and is being removed (see above).</li> 
+        <li>validator supports ODF 1.3</li> 
+        <li>validator can now validate manifest of encrypted ODF files as produced by LibreOffice</li> 
+        <li>Many fixes &amp; enhancements</li> 
+        <li>Another <a href="https://github.com/tdf/odftoolkit/commit/8256ac43df9559890c6c7d68808383129124cd0a">anomaly in the generator was fixed</a>.</li> 
+      </ul> 
+      <h3 id="github-issues-fixed-in-this-release:">GitHub issues fixed in this release:</h3> 
+      <ul> 
+        <li>#7 Clarify Java Version?</li> 
+        <li>#12 Travis does not download artifacts from different Maven repos</li> 
+        <li>#15 Avoiding Whitespace Noise from Commits by Automation/GitHooks</li> 
+        <li>#23 Small mistake in odftoolkit v0.9RC description?</li> 
+        <li>#30 Add regression tests for MarkDown to HTML creation</li> 
+        <li>#49 Memory Leak in ODF Simple API</li> 
+        <li>#50 Java Formatter triggered by Maven</li> 
+        <li>#55 Update to modern Jena</li> 
+        <li>#84 Upgrade libs to prevent security issues - CVE</li> 
+      </ul> 
+      <h3 id="asf-jira-issues-fixed-in-this-release:">ASF JIRA issues fixed in this release:</h3> 
+      <ul> 
+        <li><a href="https://issues.apache.org/jira/browse/ODFTOOLKIT-187">ODFTOOLKIT-187</a> was <a href="https://github.com/tdf/odftoolkit/commit/5e0e6a0ce124f9d6aefc005389bef2cd8e55d0ec">fixed</a>.</li> 
+        <li>ODFTOOLKIT-415 Replace/Upgrade jena dependency with org.apache.jena:jena-core:3.x</li> 
+        <li>ODFTOOLKIT-448 Upgrade Java version to JDK 8</li> 
+        <li>ODFTOOLKIT-460 validator reports errors about missing manifest.xml file entries for files in META-INF/</li> 
+        <li>ODFTOOLKIT-464 Pom does not follow best practices</li> 
+        <li>ODFTOOLKIT-474 list decorators with different bullet points</li> 
+        <li>ODFTOOLKIT-475 validator applies ODF 1.1 rules to ODF 1.2 documents when checking character content in foreign elements, part 2: ODF elements that don't allow character content</li> 
+      </ul> 
+      <p><a href="https://github.com/tdf/odftoolkit/blob/master/CHANGES.txt">Historic release notes from ASF incubator times can be found here</a></p> 
+      <p><a href="./odfdom/HistoricReleaseNotes.html">Historic release notes of ODFDOM can be found here</a></p> 
+    </div>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
+</html>
