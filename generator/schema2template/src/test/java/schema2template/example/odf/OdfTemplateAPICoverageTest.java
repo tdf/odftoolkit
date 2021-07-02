@@ -51,9 +51,9 @@ public class OdfTemplateAPICoverageTest {
     assertTrue(methods.contains("isStylable", 1));
 
     methods = TemplateAPICoverageTest.getMethods(SourceCodeModel.class);
-    assertTrue(methods.contains("getBaseclass", 1));
-    assertTrue(methods.contains("getBaseclasses", 0));
-    assertTrue(methods.contains("getBaseclassOf", 1));
+    assertTrue(methods.contains("getBaseClass", 1));
+    assertTrue(methods.contains("getBaseClasses", 0));
+    assertTrue(methods.contains("getBaseClassOf", 1));
     assertTrue(methods.contains("getConversiontype", 1));
     assertTrue(methods.contains("getPrimitiveType", 1));
     assertTrue(methods.contains("getValuetype", 1));

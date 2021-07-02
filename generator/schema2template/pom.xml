@@ -44,6 +44,7 @@
         <dependency>
             <groupId>net.java.dev.msv</groupId>
             <artifactId>msv-core</artifactId>
+            <!--<version>2020.11-SNAPSHOT</version>-->
             <version>2013.6.1</version>
         </dependency>
         <dependency>
@@ -77,7 +78,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-webdav-jackrabbit</artifactId>
-                <version>1.0</version>
+                <version>2.12</version>
             </extension>
         </extensions>
         <plugins>
@@ -88,7 +89,7 @@
                     <archive>
                         <index>true</index>
                         <manifest>
-                            <mainClass>schema2template.example.odf.OdfHelper</mainClass>
+                            <mainClass>schema2template.example.odf.SchemaToTemplate</mainClass>
                         </manifest>
                         <manifestEntries>
                             <version>${project.version}</version>
@@ -183,7 +184,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.2.0</version>
                 <configuration>
                     <doctitle>Schema2template</doctitle>
                     <!-- JDK 8 as workaround for exception,

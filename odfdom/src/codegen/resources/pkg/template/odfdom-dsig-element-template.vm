@@ -23,7 +23,7 @@
 ## Documentation of template development can be found in local file
 ## TemplateHelp.html.
 ##
-#set ($element = ${signaturemodel.getElement($context)})
+#set ($element = ${xmlModel.getElement($contextNode)})
 #if ($element == "Signature")
 	#set ($NS = "http://www.w3.org/2000/09/xmldsig#")
 	#set ($PREFIX = "ds")
@@ -32,25 +32,25 @@
 	#set ($PREFIX = "dsig")
 #end
 ###set ($NS = "${element.getNamespace()}")
-#set ($classname = "${model.camelCase($element)}Element")
+#set ($className = "${xmlModel.camelCase($element)}Element")
 ##
 ## Set child element and child attributes
 #set ($children = ${element.getChildElements().withoutMultiples()})
 #set ($attributes = ${element.getAttributes().withoutMultiples()})
 ##
 ## Set base class OdfElement
-#set ($baseclassname = "OdfElement")
+#set ($baseClassName = "OdfElement")
 #set ($baseHasMandatoryAttr = false)
 ##
 ## ...or configured base class
-#if (${javamodel.getBaseclassOf($element)})
-#set ($base = ${javamodel.getBaseclassOf($element)})
+#if (${codeModel.getBaseClassOf($element)})
+#set ($base = ${codeModel.getBaseClassOf($element)})
 #end
 ## Configured manually generated base class?
 #if ($base == "container")
 #set ($_specialbase = true)
-#set ($baseclassname = "OdfContainerElementBase")
-#set ($baseimport = "org.odftoolkit.odfdom.pkg.$baseclassname")
+#set ($baseClassName = "OdfContainerElementBase")
+#set ($baseimport = "org.odftoolkit.odfdom.pkg.$baseClassName")
 #set ($baseHasMandatoryAttr = false)
 #end
 ##
@@ -92,7 +92,7 @@ import ${baseimport};
 ## ---------------------------------------------------
 ##
 /**
- * DOM implementation of OpenDocument element  {@odf.element ${PREFIX}:${context}}.
+ * Data signature implementation of OpenDocument element  {@odf.element ${contextNode}}.
  *
 #if ($anychild)
  * This class can have any org.w3c.dom.Element child element.
@@ -101,23 +101,23 @@ import ${baseimport};
  * This class can have any org.w3c.dom.Attribute attribute.
 #end
  */
-public class $classname extends $baseclassname {
+public class $className extends $baseClassName {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName("${NS}", "${PREFIX}:${element}");
 
 	/**
-	 * Create the instance of <code>$classname</code>
+	 * Create the instance of <code>$className</code>
 	 *
-	 * @param  ownerDoc The type is <code>OdfFileDom</code>
+	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
 	 */
-	public $classname(OdfFileDom ownerDoc) {
+	public $className(OdfFileDom ownerDoc) {
 		super(ownerDoc, ELEMENT_NAME);
 	}
 
 	/**
 	 * Get the element name
 	 *
-	 * @return  return <code>OdfName</code> the name of element {@odf.element ${PREFIX}:${context}}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element ${contextNode}}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
@@ -134,11 +134,11 @@ public class $classname extends $baseclassname {
 ## ---------------------------------------------------
 ##
 #foreach ($attr in $attributes)
-#set($attri = ${signaturemodel.getAttribute($attr.getQName())})
+#set($attri = ${xmlModel.getAttribute($attr.getQName())})
 #set ($valueObject = "String")
 #set ($simpleValue = "")
 #set ($dataTypes = ${attri.getDatatypes().withoutMultiples()})
-#set ($valueTypes = ${javamodel.getValuetypes($dataTypes)})
+#set ($valueTypes = ${codeModel.getValuetypes($dataTypes)})
 #foreach ($valueType in $valueTypes)
 #set ($valueObject = $valueType)
 #end
@@ -164,16 +164,16 @@ public class $classname extends $baseclassname {
 #set ($valueObject = "String")
 #end
 #if ($valueObject != "String")
-#set ($simpleValue = ${javamodel.getPrimitiveType($valueObject)})
+#set ($simpleValue = ${codeModel.getPrimitiveType($valueObject)})
 #end
 #if ($attr != "*")
 #set ($attribute = ${attr.withMultiples()})
 #set ($aNS = ${attribute.getNamespace()})
-#set ($aClassname = "${signaturemodel.camelCase($attribute)}Attribute")
-#set ($aParam = "${signaturemodel.javaCase($attribute)}Value")
+#set ($aClassName = "${xmlModel.camelCase($attribute)}Attribute")
+#set ($aParam = "${xmlModel.javaCase($attribute)}Value")
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>$aClassname</code> , See {@odf.attribute ${PREFIX}:${attribute.getQName()}}
+	 * Receives the value of the ODFDOM attribute representation <code>$aClassName</code> , See {@odf.attribute ${attribute.getQName()}}
 	 *
 #if (${element.isMandatory($attribute)})
 	 * Attribute is mandatory.
@@ -181,8 +181,8 @@ public class $classname extends $baseclassname {
 #end
 	 * @return - the <code>$valueObject</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public $valueObject get${aClassname}() {
-		$aClassname attr = ($aClassname) getOdfAttribute(${aClassname}.ATTRIBUTE_NAME);
+	public $valueObject get${aClassName}() {
+		$aClassName attr = ($aClassName) getOdfAttribute(${aClassName}.ATTRIBUTE_NAME);
 		if (attr != null) {
 #if ($simpleValue!="")
 			return ${valueObject}.valueOf(attr.${simpleValue}Value());
@@ -190,21 +190,21 @@ public class $classname extends $baseclassname {
 			return ${valueObject}.valueOf(attr.getValue());
 #end
 		}
-#if ($odfmodel.getDefaultAttributeValue($attribute, $element))
-#set ($defaultValue = ${signaturemodel.escapeLiteral($odfmodel.getDefaultAttributeValue($attribute, $element))})
-#set ($defaultValueSet = $odfmodel.getDefaultAttributeValues($attribute))
+#if ($odfModel.getDefaultAttributeValue($attribute, $element))
+#set ($defaultValue = ${xmlModel.escapeLiteral($odfModel.getDefaultAttributeValue($attribute, $element))})
+#set ($defaultValueSet = $odfModel.getDefaultAttributeValues($attribute))
 #if ($defaultValueSet.size()>1)
-#set ($constant = $signaturemodel.constantCase($defaultValue))
+#set ($constant = $xmlModel.constantCase($defaultValue))
 #if ($valueObject == "String")
-		return ${aClassname}.DEFAULT_VALUE_${signaturemodel.escapeKeyword($constant)};
+		return ${aClassName}.DEFAULT_VALUE_${xmlModel.escapeKeyword($constant)};
 #else
-		return ${valueObject}.valueOf(${aClassname}.DEFAULT_VALUE_${signaturemodel.escapeKeyword($constant)});
+		return ${valueObject}.valueOf(${aClassName}.DEFAULT_VALUE_${xmlModel.escapeKeyword($constant)});
 #end
 #else
 #if ($valueObject == "String")
-		return ${aClassname}.DEFAULT_VALUE;
+		return ${aClassName}.DEFAULT_VALUE;
 #else
-		return ${valueObject}.valueOf(${aClassname}.DEFAULT_VALUE);
+		return ${valueObject}.valueOf(${aClassName}.DEFAULT_VALUE);
 #end
 #end
 #else
@@ -213,17 +213,17 @@ public class $classname extends $baseclassname {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>$aClassname</code> , See {@odf.attribute ${PREFIX}:${attribute.getQName()}}
+	 * Sets the value of ODFDOM attribute representation <code>$aClassName</code> , See {@odf.attribute ${attribute.getQName()}}
 	 *
 	 * @param $aParam   The type is <code>$valueObject</code>
 	 */
-	public void set${aClassname}($valueObject $aParam) {
-		$aClassname attr = new ${aClassname}((OdfFileDom) this.ownerDocument);
+	public void set${aClassName}($valueObject $aParam) {
+		$aClassName attr = new ${aClassName}((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 #if ($valueObject == "String")
 		attr.setValue($aParam);
 #else
-		attr.set${signaturemodel.camelCase($simpleValue)}Value($aParam.${simpleValue}Value());
+		attr.set${xmlModel.camelCase($simpleValue)}Value($aParam.${simpleValue}Value());
 #end
 	}
 #end
@@ -237,8 +237,8 @@ public class $classname extends $baseclassname {
 #foreach($ch in $children)
 #if ($ch != "*")
 #set ($child = ${ch.withMultiples()})
-#set ($cClassname = "${signaturemodel.camelCase($child)}Element")
-#set ($cVar = ${signaturemodel.javaCase($child)})
+#set ($cClassName = "${xmlModel.camelCase($child)}Element")
+#set ($cVar = ${xmlModel.javaCase($child)})
 #set ($ch_attributes = ${child.getAttributes().withoutMultiples()})
 ##set has parameter flag
 #set ($hasParams = false)
@@ -249,17 +249,17 @@ public class $classname extends $baseclassname {
 #end
 #if ($hasParams)
 	/**
-	 * Create child element {@odf.element ds:${child}}.
+	 * Create child element {@odf.element ${child}}.
 	 *
 #set ($seperateFlag="")
 #set ($params="")
 #foreach ($ch_attr in $ch_attributes)
 #if (${child.isMandatory($ch_attr)})
-#set($ch_attri = ${signaturemodel.getAttribute($ch_attr.getQName())})
+#set($ch_attri = ${xmlModel.getAttribute($ch_attr.getQName())})
 #set ($ch_ValueObject = "String")
 #set ($ch_SimpleValue = "")
 #set ($ch_DataTypes = ${ch_attri.getDatatypes().withoutMultiples()})
-#set ($ch_ValueTypes = ${javamodel.getValuetypes($ch_DataTypes)})
+#set ($ch_ValueTypes = ${codeModel.getValuetypes($ch_DataTypes)})
 #foreach ($ch_ValueType in $ch_ValueTypes)
 #set ($ch_ValueObject = $ch_ValueType)
 #end
@@ -285,14 +285,14 @@ public class $classname extends $baseclassname {
 #set ($ch_ValueObject = "String")
 #end
 #if ($ch_ValueObject != "String")
-#set ($ch_SimpleValue = ${javamodel.getPrimitiveType($ch_ValueObject)})
+#set ($ch_SimpleValue = ${codeModel.getPrimitiveType($ch_ValueObject)})
 #end
 #if ($ch_attr != "*")
 #set ($attribute = ${ch_attr.withMultiples()})
 #set ($aNS = ${attribute.getNamespace()})
-#set ($aClassname = "${signaturemodel.camelCase($attribute)}Attribute")
-#set ($aParam = "${signaturemodel.javaCase($attribute)}Value")
-	 * @param $aParam  the <code>$ch_ValueObject</code> value of <code>$aClassname</code>, see {@odf.attribute ${PREFIX}:${attribute.getQName()}} at specification
+#set ($aClassName = "${xmlModel.camelCase($attribute)}Attribute")
+#set ($aParam = "${xmlModel.javaCase($attribute)}Value")
+	 * @param $aParam  the <code>$ch_ValueObject</code> value of <code>$aClassName</code>, see {@odf.attribute  ${attribute.getQName()}} at specification
 #if ($ch_SimpleValue!="")
 #set ($params="${params}${seperateFlag}${ch_SimpleValue} ${aParam}")
 #else
@@ -302,25 +302,37 @@ public class $classname extends $baseclassname {
 #end
 #end
 #end
+### VERSION:ODF-NODE - START
 ## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
 ## but we can compare by name
-#if (!$oldelement || !${oldelement.getChildElements().containsName($child)})
-	 * Child element is new in Odf 1.2
+#if ( !$oldModelList)
+## First possible version the node was added is the current version
+#set ($newVersionLabel = ${xmlModel.getVersionLabel()})
+#foreach( $oldModel in $oldModelList )
+#set ($oldElement = ${oldModel.getElement($contextNode)})
+#if (!$oldElement || !${oldElement.getChildElements().containsName($child)})
+	 * Child element is new in ${newVersionLabel}
 	 *
+#break
 #end
+## Remember this old version as the version the node might be added
+#set ($newVersionLabel = ${oldModel.getVersionLabel()})
+#end
+#end
+### NEW ODF NODE - END
 #if (${element.isMandatory($child)})
 	 * Child element is mandatory.
 	 *
 #end
-	 * @return the element {@odf.element ds:${child}}
+	 * @return the element {@odf.element ${child}}
 	 */
-	 public $cClassname new${cClassname}($params) {
-		$cClassname $cVar = ((OdfFileDom) this.ownerDocument).newOdfElement(${cClassname}.class);
+	 public $cClassName new${cClassName}($params) {
+		$cClassName $cVar = ((OdfFileDom) this.ownerDocument).newOdfElement(${cClassName}.class);
 #foreach ($ch_attr in $ch_attributes)
 #if ($ch_attr != "*" && ${child.isMandatory($ch_attr)})
-#set ($aClassname = "${signaturemodel.camelCase($ch_attr)}Attribute")
-#set ($aParam = "${signaturemodel.javaCase($ch_attr)}Value")
-		${cVar}.set$aClassname($aParam);
+#set ($aClassName = "${xmlModel.camelCase($ch_attr)}Attribute")
+#set ($aParam = "${xmlModel.javaCase($ch_attr)}Value")
+		${cVar}.set$aClassName($aParam);
 #end
 #end
 		this.appendChild($cVar);
@@ -329,7 +341,7 @@ public class $classname extends $baseclassname {
 
 #else
 	/**
-	 * Create child element {@odf.element ds:${child}}.
+	 * Create child element {@odf.element ${child}}.
 	 *
 ## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
 ## but we can compare by name
@@ -341,10 +353,10 @@ public class $classname extends $baseclassname {
 	 * Child element is mandatory.
 	 *
 #end
-	 * @return the element {@odf.element ds:${child}}
+	 * @return the element {@odf.element ${child}}
 	 */
-	public $cClassname new${cClassname}() {
-		$cClassname $cVar = ((OdfFileDom) this.ownerDocument).newOdfElement(${cClassname}.class);
+	public $cClassName new${cClassName}() {
+		$cClassName $cVar = ((OdfFileDom) this.ownerDocument).newOdfElement(${cClassName}.class);
 		this.appendChild($cVar);
 		return $cVar;
 	}

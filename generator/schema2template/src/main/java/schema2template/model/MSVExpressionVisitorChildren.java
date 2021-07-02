@@ -56,7 +56,7 @@ public class MSVExpressionVisitorChildren implements ExpressionVisitor {
   private static final List<Expression> empty = Collections.EMPTY_LIST;
 
   public List<Expression> onAnyString() {
-    return empty;
+    return empty; // 2DO: shouldn't be there some data?
   }
 
   public List<Expression> onAttribute(AttributeExp exp) {
@@ -74,7 +74,7 @@ public class MSVExpressionVisitorChildren implements ExpressionVisitor {
   }
 
   public List<Expression> onData(DataExp exp) {
-    return empty;
+    return empty; // 2DO: shouldn't be there some data?
   }
 
   public List<Expression> onElement(ElementExp exp) {
@@ -94,7 +94,7 @@ public class MSVExpressionVisitorChildren implements ExpressionVisitor {
   }
 
   public List<Expression> onMixed(MixedExp exp) {
-    return child(exp.exp);
+    return child(exp.exp); // 2DO: shouldn't be there some TEXT and EXPRESSiiON DATA?
   }
 
   public List<Expression> onNullSet() {

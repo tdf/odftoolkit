@@ -43,11 +43,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.tinkerpop.gremlin.structure.Graph;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
-import schema2template.example.odf.OdfHelper;
 import schema2template.example.odf.PathPrinter;
+import schema2template.example.odf.SchemaToTemplate;
 
 /**
  * Gather information from one MSV expression like:
@@ -62,7 +64,7 @@ import schema2template.example.odf.PathPrinter;
 public class MSVExpressionInformation {
 
   /*
-   * For each Named Expression (i.e. of Type Element or Attribute) we build a path
+   * For each Named Expression (i.e. of the type "Element" or "Attribute") we build a path
    *    thisNamedExpression -> Expression subEx -> Expression subsubEx -> ... -> childNamedExpression
    * All Expressions (thisNamedExpression, childNamedExpression and all in between) can be members of
    * multiple paths. Therefore we create a Map Expression->List<path>.
@@ -99,7 +101,7 @@ public class MSVExpressionInformation {
         break;
       }
     }
-    if (OdfHelper.DEBUG) {
+    if (SchemaToTemplate.DEBUG) {
       System.out.println("\n************ NEW EXPRESSION ****************");
       List<String> pathPrints = PathPrinter.printChildPaths(paths);
       if (paths == null) {
@@ -146,10 +148,10 @@ public class MSVExpressionInformation {
       Expression childexp = way.get(way.size() - 1);
 
       Boolean newCardinality =
-          new Boolean(false); // Cardinality (the opposite of isSingleton): true=N, false=1
+          Boolean.FALSE; // Cardinality (the opposite of isSingleton): true=N, false=1
       for (Expression step : way) {
         if (step instanceof OneOrMoreExp) {
-          newCardinality = new Boolean(true);
+          newCardinality = Boolean.TRUE;
           break;
         }
       }
@@ -208,11 +210,15 @@ public class MSVExpressionInformation {
           if (commonChoice) {
             System.err.println(
                 "We have a CHOICE between one definition with N and one with 1 -> What does that mean? WE CANNOT HANDLE THIS)");
-            System.exit(1);
+            try {
+              throw new Exception("We have a CHOICE between one definition with N and one with 1");
+            } catch (Exception e) {
+              Logger.getLogger(MSVExpressionInformation.class.getName()).log(Level.SEVERE, null, e);
+            }
           } // Valid case: One has 1, the other N, they don't share a common CHOICE -> Set N as the
           // both defs are not exclusive (1 occurence + N occurences)
           else {
-            multiples.put(childexp, new Boolean(true));
+            multiples.put(childexp, Boolean.TRUE);
           }
         }
 
@@ -225,7 +231,11 @@ public class MSVExpressionInformation {
           else {
             System.err.println(
                 "Already defined as 1, but two times without common choice. What does that mean? WE CANNOT HANDLE THIS!!!");
-            System.exit(1);
+            try {
+              throw new Exception("Cardinality defined as 1 but with two choices");
+            } catch (Exception e) {
+              Logger.getLogger(MSVExpressionInformation.class.getName()).log(Level.SEVERE, null, e);
+            }
           }
         }
       } else {

@@ -24,12 +24,13 @@
 ## TemplateHelp.html.
 ##
 ## Returns PuzzleComponent covering a PuzzlePiece or PuzzlePieceSet dependent if attribute is multiple times defined
-#set($attribute = $manifestmodel.getAttribute($context))
-#set ($NS = "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0")
-#set($NS = ${attribute.getNamespace()})
-#set($localname = ${manifestmodel.extractLocalname($attribute)})
-#set($classname = "${manifestmodel.camelCase($attribute)}Attribute")
-#set ($valueobject = "String")
+#set($attribute = $xmlModel.getAttribute($contextNode))
+## 2DO: no NS at attributes#set($NS = $attribute.getNamespace())
+#set($NS = "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0")
+#set ($PREFIX = "manifest")
+#set($localname = ${xmlModel.extractLocalName($attribute)})
+#set($className = "${xmlModel.camelCase($attribute)}Attribute")
+#set($valueobject = "String")
 ##
 #set($datatypes = ${attribute.getDatatypes().withoutMultiples()})
 #if ($datatypes.size() > 0)
@@ -69,12 +70,12 @@
 ##
 #set ($hasDefaultValue = false)
 #foreach ($parent in ${attribute.getParents().withoutMultiples()})
-#if (${odfmodel.getDefaultAttributeValue($attribute, $parent)})
+#if (${odfModel.getDefaultAttributeValue($attribute, $parent)})
 #set ($hasDefaultValue = true)
 #end
 #end
 ##
-#set ($defaultValueSet = $odfmodel.getDefaultAttributeValues($attribute))
+#set ($defaultValueSet = $odfModel.getDefaultAttributeValues($attribute))
 #if ($hasDefaultValue and $defaultValueSet.size() == 1)
 #foreach ($value in $defaultValueSet)
 #set ($uniqueDefaultValue = $value)
@@ -97,26 +98,26 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 
 #if ($hasDefaultValue and $defaultValueSet.size()>1)
 #foreach ($parent in ${attribute.getParents().withoutMultiples()})
-#if ($odfmodel.getDefaultAttributeValue($attribute, $parent))
-import org.odftoolkit.odfdom.pkg.${parent.getNamespace()}.${manifestmodel.camelCase($parent)}Element;
+#if ($odfModel.getDefaultAttributeValue($attribute, $parent))
+import org.odftoolkit.odfdom.pkg.${parent.getNamespace()}.${xmlModel.camelCase($parent)}Element;
 #end
 #end
 #end
 /**
- * Manifest implementation of OpenDocument attribute  {@odf.attribute manifest:${attribute.getQName()}}.
+ * Manifest implementation of OpenDocument attribute  {@odf.attribute ${PREFIX}:${attribute.getQName()}}.
  *
  */
-public class $classname extends OdfAttribute {
+public class $className extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName("${NS}", "manifest:${attribute}");
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName("${NS}", "${PREFIX}:${attribute}");
 #if ($hasDefaultValue)
 #if ($defaultValueSet.size()>1)
 #foreach ($defaultValue in $defaultValueSet)
-#set ($constant = $manifestmodel.constantCase($defaultValue))
+#set ($constant = $xmlModel.constantCase($defaultValue))
 #if (($defaultValue=="true" or $defaultValue=="false") and $enum == false)
-	public static final String DEFAULT_VALUE_${manifestmodel.escapeKeyword($constant)}= "$defaultValue";
+	public static final String DEFAULT_VALUE_${xmlModel.escapeKeyword($constant)}= "$defaultValue";
 #else
-	public static final String DEFAULT_VALUE_${manifestmodel.escapeKeyword($constant)}=	Value.${manifestmodel.escapeKeyword($constant)}.toString();
+	public static final String DEFAULT_VALUE_${xmlModel.escapeKeyword($constant)}=	Value.${xmlModel.escapeKeyword($constant)}.toString();
 #end
 #end
 #else
@@ -129,18 +130,18 @@ public class $classname extends OdfAttribute {
 #end
 
 	/**
-	 * Create the instance of OpenDocument attribute {@odf.attribute manifest:${attribute}}.
+	 * Create the instance of OpenDocument attribute {@odf.attribute ${PREFIX}:${attribute}}.
 	 *
 	 * @param ownerDocument       The type is <code>OdfFileDom</code>
 	 */
-	public $classname(OdfFileDom ownerDocument) {
+	public $className(OdfFileDom ownerDocument) {
 		super(ownerDocument, ATTRIBUTE_NAME);
 	}
 
 	/**
 	 * Returns the attribute name.
 	 *
-	 * @return the <code>OdfName</code> for {@odf.attribute manifest:${attribute}}.
+	 * @return the <code>OdfName</code> for {@odf.attribute ${PREFIX}:${attribute}}.
 	 */
 	@Override
 	public OdfName getOdfName() {
@@ -158,7 +159,7 @@ public class $classname extends OdfAttribute {
 #if ($enum)
 
 	/**
-	 * The value set of {@odf.attribute manifest:${attribute}}.
+	 * The value set of {@odf.attribute ${PREFIX}:${attribute}}.
 	 */
 	public enum Value {
 #set ($separator="		")
@@ -166,8 +167,8 @@ public class $classname extends OdfAttribute {
 #if (${value.toString().length()} == 1)
 #set ($constant = $value)
 #else
-#set ($constant = $manifestmodel.constantCase($value))
-#end${separator}${manifestmodel.escapeKeyword($constant)}("${manifestmodel.escapeLiteral($value)}")#set ($separator=", ")
+#set ($constant = $xmlModel.constantCase($value))
+#end${separator}${xmlModel.escapeKeyword($constant)}("${xmlModel.escapeLiteral($value)}")#set ($separator=", ")
 #end ;
 
 		private String mValue;
@@ -207,7 +208,7 @@ public class $classname extends OdfAttribute {
 #end
 ##
 ## Handle Non-String-Attributes
-#set ($valuetypes = ${javamodel.getValuetypes($datatypes)})
+#set ($valuetypes = ${codeModel.getValuetypes($datatypes)})
 #if ($valueobject != "Boolean")
 #foreach ($valuetype in $valuetypes)
 #set ($valueobject = $valuetype)
@@ -217,13 +218,13 @@ public class $classname extends OdfAttribute {
 #set ($valueobject = "String")
 #end
 #if ($valueobject != "String")
-#set ($simplevalue = ${javamodel.getPrimitiveType($valueobject)})
+#set ($simplevalue = ${codeModel.getPrimitiveType($valueobject)})
 ##
 
 	/**
 	 * @param value The <code>${simplevalue}</code> value of the attribute.
 	 */
-	public void set${manifestmodel.camelCase($simplevalue)}Value(${simplevalue} value) {
+	public void set${xmlModel.camelCase($simplevalue)}Value(${simplevalue} value) {
 		super.setValue(String.valueOf(value));
 	}
 
@@ -233,7 +234,7 @@ public class $classname extends OdfAttribute {
 	public ${simplevalue} ${simplevalue}Value() {
 		String val = super.getValue();
 		try {
-			return ${valueobject}.parse${manifestmodel.camelCase($simplevalue)}(val);
+			return ${valueobject}.parse${xmlModel.camelCase($simplevalue)}(val);
 		} catch (NumberFormatException e) {
 			// TODO: validation handling/logging
 			throw (e);
@@ -242,69 +243,9 @@ public class $classname extends OdfAttribute {
 #end
 ##
 
-	/**
-	 * @param attrValue The <code>String</code> value of the attribute.
-	 * @throws IllegalArgumentException If the provided attribute value is invalid
-	 */
-	@Override
-	public void setValue(String attrValue) {
-#if ($enum)
-#if ($hasdatatype)
-## enum and datatype
-		// Since we have not only enumValues, but also a DataType, we use String as common base and don't validate.
-		super.setValue(attrValue);
-#else
-## enum and no datatype
-		try {
-			super.setValue(Value.enumValueOf(attrValue).toString());
-		} catch (NullPointerException e) {
-			throw new IllegalArgumentException(e);
-		}
-#end
-#else
-		try {
-			super.setValue(attrValue);
-		} catch (NullPointerException e) {
-			// TODO: validation handling/logging
-			throw new IllegalArgumentException(e);
-		} catch (IllegalArgumentException e) {
-			// TODO: validation handling/logging
-			throw (e);
-		}
-#end
-	}
-
-	/**
-	 * @return Returns the <code>String</code> value of the attribute
-	 */
-	@Override
-	public String getValue() {
-#if ($enum)
-#if ($hasdatatype)
-## enum and datatype
-		// Since we have not only enumValues, but also a DataType, we use String as common base and don't validate.
-		return super.getValue();
-#else
-## enum and no datatype
-		try {
-			return Value.enumValueOf(super.getValue()).toString();
-		} catch (NullPointerException e) {
-			throw new IllegalArgumentException("the value of ${attribute} is not valid");
-		}
-#end
-#else
-		try {
-			return super.getValue();
-		} catch (IllegalArgumentException e) {
-			// TODO: validation handling/logging
-			throw new NumberFormatException("the value of ${attribute} is not valid");
-		}
-#end
-	}
-
 #if ($hasDefaultValue)
 	/**
-	 * Returns the default value of {@odf.attribute manifest:${attribute}}.
+	 * Returns the default value of {@odf.attribute ${PREFIX}:${attribute}}.
 	 *
 	 * @return the default value as <code>String</code> dependent of its element name
 	 *         return <code>null</code> if the default value does not exist
@@ -316,14 +257,14 @@ public class $classname extends OdfAttribute {
 		if (parentElement != null) {
 #if ($defaultValueSet.size()>1)
 #foreach ($parent in ${attribute.getParents().withoutMultiples()})
-#if ($odfmodel.getDefaultAttributeValue($attribute, $parent))
-			if (parentElement instanceof ${manifestmodel.camelCase($parent)}Element) {
-				defaultValue = "${manifestmodel.escapeLiteral($odfmodel.getDefaultAttributeValue($attribute, $parent))}";
+#if ($odfModel.getDefaultAttributeValue($attribute, $parent))
+			if (parentElement instanceof ${xmlModel.camelCase($parent)}Element) {
+				defaultValue = "${xmlModel.escapeLiteral($odfModel.getDefaultAttributeValue($attribute, $parent))}";
 			}
 #end
 #end
 #else
-			defaultValue = "${manifestmodel.escapeLiteral($uniqueDefaultValue)}";
+			defaultValue = "${xmlModel.escapeLiteral($uniqueDefaultValue)}";
 #end
 		}
 		return defaultValue;
@@ -332,7 +273,7 @@ public class $classname extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 *
-	 * @return <code>true</code> if {@odf.attribute manifest:${attribute}} has an element parent
+	 * @return <code>true</code> if {@odf.attribute ${PREFIX}:${attribute}} has an element parent
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override
@@ -341,7 +282,7 @@ public class $classname extends OdfAttribute {
 	}
 #else
 	/**
-	 * Returns the default value of {@odf.attribute manifest:${attribute}}.
+	 * Returns the default value of {@odf.attribute ${PREFIX}:${attribute}}.
 	 *
 	 * @return the default value as <code>String</code> dependent of its element name
 	 *         return <code>null</code> if the default value does not exist
@@ -354,7 +295,7 @@ public class $classname extends OdfAttribute {
 	/**
 	 * Default value indicator. As the attribute default value is dependent from its element, the attribute has only a default, when a parent element exists.
 	 *
-	 * @return <code>true</code> if {@odf.attribute manifest:${attribute}} has an element parent
+	 * @return <code>true</code> if {@odf.attribute ${PREFIX}:${attribute}} has an element parent
 	 *         otherwise return <code>false</code> as undefined.
 	 */
 	@Override

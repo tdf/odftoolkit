@@ -118,7 +118,7 @@ public class TemplateAPICoverageTest {
     assertTrue(methods.contains("constantCase", 1));
     assertTrue(methods.contains("escapeKeyword", 1));
     assertTrue(methods.contains("escapeLiteral", 1));
-    assertTrue(methods.contains("extractLocalname", 1));
+    assertTrue(methods.contains("extractLocalName", 1));
     assertTrue(methods.contains("extractNamespace", 1));
     assertTrue(methods.contains("firstWord", 1));
     assertTrue(methods.contains("getAttribute", 1));

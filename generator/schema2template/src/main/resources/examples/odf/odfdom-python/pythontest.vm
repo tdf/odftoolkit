@@ -33,7 +33,7 @@
 ##    String nsdict.getLocalNamespace(String NamespaceURI)
 ##    String nsdict.getNamespaceURI(String LocalNamespace)
 ## Expressions util: Utility to get and transform Expression names:
-##               String util.extractLocalname(String name)
+##               String util.extractLocalName(String name)
 ##               String util.extractNamespace(String name)
 ##               String util.getQName(Expression exp)
 ##               String util.camelCase(String raw): some-text-fragment -> SomeTextFragment

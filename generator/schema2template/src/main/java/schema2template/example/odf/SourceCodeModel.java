@@ -19,7 +19,7 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  *
- * <p>**********************************************************************
+ * <p>*********************************************************************
  */
 package schema2template.example.odf;
 
@@ -41,83 +41,85 @@ import schema2template.model.XMLModel;
 public class SourceCodeModel {
 
   Map<String, SourceCodeBaseClass> mElementBaseMap;
-  SortedSet<SourceCodeBaseClass> mBaseclasses;
-  Map<String, SourceCodeBaseClass> mBasenameToBaseclass;
+  SortedSet<SourceCodeBaseClass> mBaseClasses;
+  Map<String, SourceCodeBaseClass> mBaseNameToBaseClass;
   Map<String, String[]>
-      mDatatypeValueAndConversionMap; // datatype -> {value-type, conversion-classname}
+      mDataTypeValueAndConversionMap; // datatype -> {value-type, conversion-classname}
 
   /**
    * Construct SourceCodeModel. Not meant for template usage.
    *
-   * @param model the XMLModel
-   * @param signatureModel the signature XMLModel
-   * @param manifestModel the manifest XMLModel
-   * @param odfmodel the OdfModel
-   * @param elementnameBasenameMap the mapping from element names to source code base class names
+   * @param schemaModel he XMLModel (grammar model)
+   * @param odfModel the OdfModel
+   * @param elementNameBaseNameMap the mapping from element names to source code base class names
    * @param datatypeValueAndConversionMap the mapping from schema datatype to {source code types,
    *     name of conversion class}
    */
   public SourceCodeModel(
-      XMLModel model,
-      XMLModel signatureModel,
-      XMLModel manifestModel,
-      OdfModel odfmodel,
-      Map<String, String> elementnameBasenameMap,
+      XMLModel schemaModel,
+      OdfModel odfModel,
+      Map<String, String> elementNameBaseNameMap,
       Map<String, String[]> datatypeValueAndConversionMap) {
-    mDatatypeValueAndConversionMap = datatypeValueAndConversionMap;
+    mDataTypeValueAndConversionMap = datatypeValueAndConversionMap;
 
-    // Intermediate Step -> get all basenames
-    SortedSet<String> basenames = new TreeSet<String>(elementnameBasenameMap.values());
+    // Intermediate Step -> get all baseNames
+    SortedSet<String> baseNames = new TreeSet<String>(elementNameBaseNameMap.values());
 
-    // Intermediate Step -> get all subelement Definitions for each basename
-    Map<String, SortedSet<PuzzlePiece>> basenameElementsMap =
-        new HashMap<String, SortedSet<PuzzlePiece>>(basenames.size());
-    for (String elementname : elementnameBasenameMap.keySet()) {
-      String basename = elementnameBasenameMap.get(elementname);
-      SortedSet<PuzzlePiece> elements = basenameElementsMap.get(basename);
+    // Intermediate Step -> get all subElement Definitions for each baseName
+    Map<String, SortedSet<PuzzlePiece>> baseNameElementsMap =
+        new HashMap<String, SortedSet<PuzzlePiece>>(baseNames.size());
+    for (String elementName : elementNameBaseNameMap.keySet()) {
+      String baseName = elementNameBaseNameMap.get(elementName);
+      SortedSet<PuzzlePiece> elements = baseNameElementsMap.get(baseName);
       if (elements == null) {
         elements = new TreeSet<PuzzlePiece>();
-        basenameElementsMap.put(basename, elements);
+        baseNameElementsMap.put(baseName, elements);
       }
-      QNamedPuzzleComponent subelement = model.getElement(elementname);
-      if (subelement != null) {
-        if (subelement instanceof Collection) {
-          elements.addAll((Collection) subelement);
+      QNamedPuzzleComponent subElement = schemaModel.getElement(elementName);
+      if (subElement != null) {
+        if (subElement instanceof Collection) {
+          elements.addAll((Collection) subElement);
         } else {
-          elements.add((PuzzlePiece) subelement);
+          elements.add((PuzzlePiece) subElement);
         }
       } else {
-        System.err.println("Warning: Baseclass definition for unknown element " + elementname);
+        System.err.println("Warning: BaseClass definition for unknown element " + elementName);
       }
     }
 
     // Generate all baseclasses (additional intermediate step: register them)
-    mBasenameToBaseclass = new HashMap<String, SourceCodeBaseClass>(basenames.size());
-    mBaseclasses = new TreeSet<SourceCodeBaseClass>();
-    for (String basename : basenames) {
+    mBaseNameToBaseClass = new HashMap<String, SourceCodeBaseClass>(baseNames.size());
+    mBaseClasses = new TreeSet<SourceCodeBaseClass>();
+    for (String baseName : baseNames) {
       SourceCodeBaseClass javabaseclass =
-          new SourceCodeBaseClass(odfmodel, basename, basenameElementsMap.get(basename));
-      mBaseclasses.add(javabaseclass);
-      mBasenameToBaseclass.put(basename, javabaseclass);
+          new SourceCodeBaseClass(odfModel, baseName, baseNameElementsMap.get(baseName));
+      mBaseClasses.add(javabaseclass);
+      mBaseNameToBaseClass.put(baseName, javabaseclass);
     }
 
-    // Generate a map from element tag name to baseclasses
-    mElementBaseMap = new HashMap<String, SourceCodeBaseClass>(elementnameBasenameMap.size());
-    for (String elementname : elementnameBasenameMap.keySet()) {
-      String basename = elementnameBasenameMap.get(elementname);
-      SourceCodeBaseClass baseclass = mBasenameToBaseclass.get(basename);
-      mElementBaseMap.put(elementname, baseclass);
+    // Generate a map from element tag name to base classes
+    mElementBaseMap = new HashMap<String, SourceCodeBaseClass>(elementNameBaseNameMap.size());
+    for (String elementName : elementNameBaseNameMap.keySet()) {
+      String baseName = elementNameBaseNameMap.get(elementName);
+      SourceCodeBaseClass baseclass = mBaseNameToBaseClass.get(baseName);
+      mElementBaseMap.put(elementName, baseclass);
     }
   }
 
   /**
-   * Use in templates: Get baseclass of one element
+   * Use in templates: Get base class of one element
    *
-   * @param subelement element
+   * @param subElement element
    * @return baseclass
    */
-  public SourceCodeBaseClass getBaseclassOf(QNamed subelement) {
-    return mElementBaseMap.get(subelement.getQName());
+  public SourceCodeBaseClass getBaseClassOf(QNamed subElement) {
+    SourceCodeBaseClass c = null;
+    if (subElement != null) {
+      if (mElementBaseMap.containsKey(subElement.getQName())) {
+        c = mElementBaseMap.get(subElement.getQName());
+      }
+    }
+    return c;
   }
 
   /**
@@ -125,18 +127,18 @@ public class SourceCodeModel {
    *
    * @return all baseclasses
    */
-  public SortedSet<SourceCodeBaseClass> getBaseclasses() {
-    return mBaseclasses;
+  public SortedSet<SourceCodeBaseClass> getBaseClasses() {
+    return mBaseClasses;
   }
 
   /**
    * Use in templates: Get baseclass by name
    *
-   * @param basename name of baseclass
+   * @param baseName name of baseclass
    * @return baseclass object
    */
-  public SourceCodeBaseClass getBaseclass(String basename) {
-    return mBasenameToBaseclass.get(basename);
+  public SourceCodeBaseClass getBaseClass(String baseName) {
+    return mBaseNameToBaseClass.get(baseName);
   }
 
   /**
@@ -145,8 +147,8 @@ public class SourceCodeModel {
    * @param base name of baseclass
    * @return baseclass object
    */
-  public SourceCodeBaseClass getBaseclass(QNamed base) {
-    return getBaseclass(base.getQName());
+  public SourceCodeBaseClass getBaseClass(QNamed base) {
+    return getBaseClass(base.getQName());
   }
 
   /**
@@ -157,7 +159,7 @@ public class SourceCodeModel {
    */
   public String getValuetype(QNamed datatype) {
     String datatypename = datatype.getQName();
-    String[] tuple = mDatatypeValueAndConversionMap.get(datatypename);
+    String[] tuple = mDataTypeValueAndConversionMap.get(datatypename);
     if (tuple == null) {
       return "";
     }
@@ -172,18 +174,23 @@ public class SourceCodeModel {
    * @return the corresponding source code datatypes
    */
   public SortedSet<String> getValuetypes(PuzzleComponent datatypes) {
-    SortedSet<String> retval = new TreeSet<String>();
-    for (PuzzlePiece datatype : datatypes.getCollection()) {
-      String datatypename = datatype.getQName();
-      String[] tuple = mDatatypeValueAndConversionMap.get(datatypename);
-      if (tuple != null) {
-        String valuetype = tuple[0];
-        if (valuetype != null) {
-          retval.add(valuetype);
+    SortedSet<String> retval = null;
+    if (datatypes != null) {
+      retval = new TreeSet<String>();
+      for (PuzzlePiece datatype : datatypes.getCollection()) {
+        String datatypename = datatype.getQName();
+        String[] tuple = mDataTypeValueAndConversionMap.get(datatypename);
+        if (tuple != null) {
+          String valuetype = tuple[0];
+          if (valuetype != null) {
+            retval.add(valuetype);
+          }
         }
       }
+      return retval;
+    } else {
+      return retval;
     }
-    return retval;
   }
 
   /**
@@ -213,7 +220,7 @@ public class SourceCodeModel {
    */
   public String getConversiontype(QNamed datatype) {
     String datatypename = datatype.getQName();
-    String[] tuple = mDatatypeValueAndConversionMap.get(datatypename);
+    String[] tuple = mDataTypeValueAndConversionMap.get(datatypename);
     if (tuple == null) {
       return "";
     }
@@ -228,7 +235,7 @@ public class SourceCodeModel {
    * @return name of source code conversion class for this datatype
    */
   public String getConversiontype(String datatypename) {
-    String[] tuple = mDatatypeValueAndConversionMap.get(datatypename);
+    String[] tuple = mDataTypeValueAndConversionMap.get(datatypename);
     if (tuple == null) {
       return "";
     }

@@ -25,38 +25,22 @@
 ## src/main/resources/documentation/help.html
 ##
 <filelist>
-##
-#foreach ($element in ${signaturemodel.getElements().withoutMultiples()})
+#foreach ($element in ${xmlModel.getElements().withoutMultiples()})
 #if ($element != "*")
 ##
-#set($classname = "${signaturemodel.camelCase($element)}Element")
-	<file path="org/odftoolkit/odfdom/pkg/dsig/${classname}.java" context="$element" template="odfdom-dsig-element-template.vm" />
+#set($localName = "${element.getLocalName()}")
+#set($className = "${xmlModel.camelCase($localName)}Element")
+	<file path="org/odftoolkit/odfdom/pkg/dsig/${className}.java" contextNode="$element" template="odfdom-dsig-element-template.vm" />
 ##
 #end
 #end
 ##
-#foreach ($attribute in ${signaturemodel.getAttributes().withoutMultiples()})
+#foreach ($attribute in ${xmlModel.getAttributes().withoutMultiples()})
 #if ($attribute != "*")
 ##
-#set($classname = "${signaturemodel.camelCase($attribute)}Attribute")
-	<file path="org/odftoolkit/odfdom/pkg/dsig/${classname}.java" context="$attribute" template="odfdom-dsig-attribute-template.vm" />
-#end
-#end
-##
-#foreach ($element in ${manifestmodel.getElements().withoutMultiples()})
-#if ($element != "*")
-##
-#set($classname = "${manifestmodel.camelCase($element)}Element")
-	<file path="org/odftoolkit/odfdom/pkg/manifest/${classname}.java" context="$element" template="odfdom-manifest-element-template.vm" />
-##
-#end
-#end
-##
-#foreach ($attribute in ${manifestmodel.getAttributes().withoutMultiples()})
-#if ($attribute != "*")
-##
-#set($classname = "${manifestmodel.camelCase($attribute)}Attribute")
-	<file path="org/odftoolkit/odfdom/pkg/manifest/${classname}.java" context="$attribute" template="odfdom-manifest-attribute-template.vm" />
+#set($localName = "${attribute.getLocalName()}")
+#set($className = "${xmlModel.camelCase($localName)}Attribute")
+	<file path="org/odftoolkit/odfdom/pkg/dsig/${className}.java" contextNode="$attribute" template="odfdom-dsig-attribute-template.vm" />
 #end
 #end
 </filelist>

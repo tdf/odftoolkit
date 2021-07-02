@@ -51,13 +51,16 @@ public class XMLModel {
   Map<String, PuzzlePiece> mNameAttributeMap;
   public Expression mRootExpression;
   public String mLastSchemaFileName;
+  private String mVersionLabel;
 
   /**
-   * Constructs new model by the MSV root expression
+   * Constructs new model by the grammar and a label
    *
-   * @param root MSV root Expression
+   * @param schemaFile grammar to read into MSV
+   * @param versionLabel identifier of the grammar (used in Velocity template)
    */
-  public XMLModel(File schemaFile) {
+  public XMLModel(File schemaFile, String versionLabel) {
+    mVersionLabel = versionLabel;
     mRootExpression = loadSchema(schemaFile);
     String absolutePath = schemaFile.getAbsolutePath();
     mLastSchemaFileName =
@@ -69,6 +72,11 @@ public class XMLModel {
     mAttributes.makeImmutable();
     mNameElementMap = createMap(mElements);
     mNameAttributeMap = createMap(mAttributes);
+  }
+
+  /** @return the version label identifying this schema (XML grammar) */
+  public String getVersionLabel() {
+    return mVersionLabel;
   }
 
   // Create Map Name->PuzzlePiece. Ignore the fact that there may be more than one PuzzlePiece per
@@ -103,23 +111,31 @@ public class XMLModel {
   /**
    * Load and parse a Schema from File.
    *
-   * @param Schema file (RelaxNG or W3C schema)
+   * @param rngFile Schema file (RelaxNG or W3C schema)
    * @return MSV Expression Tree (more specific: The tree's MSV root expression)
-   * @throws Exception
    */
   public static Expression loadSchema(File rngFile) {
+    return loadSchema(rngFile.getAbsolutePath());
+  }
+
+  /**
+   * Load and parse a Schema from File.
+   *
+   * @param rngFilePath Schema file (RelaxNG or W3C schema)
+   * @return MSV Expression Tree (more specific: The tree's MSV root expression)
+   */
+  public static Expression loadSchema(String rngFilePath) {
     SAXParserFactory factory = SAXParserFactory.newInstance();
     factory.setNamespaceAware(true);
     // Parsing the Schema with MSV
     // 4-DEBUG: DebugController ignoreController = new DebugController(true, false);
     com.sun.msv.reader.util.IgnoreController ignoreController =
         new com.sun.msv.reader.util.IgnoreController();
-    String absolutePath = rngFile.getAbsolutePath();
     Expression root = null;
-    if (absolutePath.endsWith(".rng")) {
-      root = RELAXNGReader.parse(absolutePath, factory, ignoreController).getTopLevel();
-    } else if (absolutePath.endsWith(".xsd")) {
-      root = XMLSchemaReader.parse(absolutePath, factory, ignoreController).getTopLevel();
+    if (rngFilePath.endsWith(".rng")) {
+      root = RELAXNGReader.parse(rngFilePath, factory, ignoreController).getTopLevel();
+    } else if (rngFilePath.endsWith(".xsd")) {
+      root = XMLSchemaReader.parse(rngFilePath, factory, ignoreController).getTopLevel();
     } else {
       throw new RuntimeException("Reader not chosen for given schema suffix!");
     }
@@ -437,10 +453,13 @@ public class XMLModel {
    * @param name in form ns:local
    * @return local part from ns:local name
    */
-  public static String extractLocalname(String name) {
+  public static String extractLocalName(String name) {
     int pos = name.lastIndexOf(":");
     if (pos > 0 && pos < name.length() - 1) {
       return name.substring(pos + 1);
+    } else if (pos < 0 && name.length() > 0) {
+      // the name is a local name
+      return name;
     } else {
       return null;
     }
@@ -452,7 +471,7 @@ public class XMLModel {
    * @param def QNamed object
    * @return local part from ns:local name
    */
-  public static String extractLocalname(QNamed def) {
-    return extractLocalname(def.getQName());
+  public static String extractLocalName(QNamed def) {
+    return extractLocalName(def.getQName());
   }
 }
