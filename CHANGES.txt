@@ -1,0 +1,488 @@
+ODF Toolkit Change Log
+=============================
+======= Release 0.9.0 =======
+
+First release at the Document Foundation, resembling the latest state of the sources from Apache ODF Toolkit.
+Release is based on JDK 1.8, the next release will be start working based on JDK 11.
+This is the last release including the Simple API, which is unmaintainable due to too many copied sources from ODFDOM and has not sufficient development support.
+
+GitHub issues fixed in this release:
+* #7 Clarify Java Version?
+* #12 Travis does not download artifacts from different Maven repos
+* #15 Avoiding Whitespace Noise from Commits by Automation/GitHooks
+
+ASF JIRA issues fixed in this release:
+* ODFTOOLKIT-415 Replace/Upgrade jena dependency with org.apache.jena:jena-core:3.x
+* ODFTOOLKIT-448 Upgrade Java version to JDK 8
+* ODFTOOLKIT-460 validator reports errors about missing manifest.xml file entries for files in META-INF/
+* ODFTOOLKIT-464 Pom does not follow best practices
+* ODFTOOLKIT-474 list decorators with different bullet points
+* ODFTOOLKIT-475 validator applies ODF 1.1 rules to ODF 1.2 documents when checking character content in foreign elements, part 2: ODF elements that don't allow character content
+
+
+Historic ASF incubator releases
+===============================================================================
+======= Release 0.6.2 =======
+
+The most notable changes in ODF Toolkit 0.6.2 incubating over previous release:
+* Enable password encryption and encryption manifest handling to ODFDOM
+
+Release wiki page: https://cwiki.apache.org/confluence/display/ODFTOOLKIT/0.6.2-incubating
+
+Versions of major components
+----------------------------
+
+* Apache Xerces 2.9.1 (http://xerces.apache.org/mirrors.cgi)
+* Apache Jena 2.11.2 (http://jena.apache.org/download/index.html)
+* Apache Commons Validator 1.5.0 (http://commons.apache.org/proper/commons-validator//download_validator.cgi)
+
+For a full dependency list run mvn dependency:tree from the top level in the source module or see the release wiki page.
+
+Optimizations
+-------------
+* ODFTOOLKIT-200 Enable password encryption and encryption manifest handling to ODFDOM
+* ODFTOOLKIT-294 Adding the XSL stylesheet for extracting default values to XSLT_RUNNER XSL sample folder
+* ODFTOOLKIT-304 Update ODF 1.2 schema to OpenDocument-v1.2 final version
+* ODFTOOLKIT-375 odftoolkit-0.6 does not work in my environment
+* ODFTOOLKIT-374 Set the field "Last Modified By" in the metadata file
+* ODFTOOLKIT-410 Set table:error-message for content-validation to activate actual validation
+* ODFTOOLKIT-417 Missing methods for set and get background-color, subscripted and superscripted for a paragraph
+* ODFTOOLKIT-418 missing method to find an embedded section
+* ODFTOOLKIT-420 missing functions in TextProperties set/get background color
+* ODFTOOLKIT-426 PERFORMANCE: simple Document.getCopyStyleList improvements to reduce String allocation, hashing, etc.
+* ODFTOOLKIT-436 odfvalidator: better error reporting
+* ODFTOOLKIT-437 odfvalidator: make schema files configurable from cmd line
+* ODFTOOLKIT-438 odfvalidator: always honour input file on cmd line
+* ODFTOOLKIT-440 Java base line: Change to JDK 6 for next release
+
+Bug Fixes
+---------
+* ODFTOOLKIT-300 Memory Leak in ODF Simple API
+* ODFTOOLKIT-323 Remove old references to odftoolkit.org site
+* ODFTOOLKIT-367 Paragraph.getTextContent sometimes failed to replace text:s with spaces 
+* ODFTOOLKIT-368 Column.setWidth wrong size
+* ODFTOOLKIT-386 Project doesn't build with JDK 8
+* ODFTOOLKIT-388 Test hangs when iterating over a spreadsheet created with LibreOffice 4.0.0
+* ODFTOOLKIT-391 Publish ODF Toolkit artifacts to Maven Central + tag release version in SVN
+* ODFTOOLKIT-395 [PATCH] validator applies ODF 1.1 rules to ODF 1.2 documents when checking character content in foreign elements
+* ODFTOOLKIT-396 SpreadsheetDocument.appendSheet fails because of buggy alien element cloning
+* ODFTOOLKIT-398 crash when calling getCellBackgroundColor from the org.odftoolkit.simple.table.Cell
+* ODFTOOLKIT-401 NullPointerException from typo hides all ZIP exceptions
+* ODFTOOLKIT-404 Obsolete Jena dependency at ODF Toolkit
+* ODFTOOLKIT-405 XSLTRunner JAR unexecutable from commandline
+* ODFTOOLKIT-406 Build failure on Apache Build server when downloading ODF 1.0 schema
+* ODFTOOLKIT-407 Mixed case package name org.odftoolkit.Junit avoids building on Linux
+* ODFTOOLKIT-408 OdfXmlHelper duplicated in src/test
+* ODFTOOLKIT-409 Hang on Cell.setValidityList() if the ContentValidationElement is reused New Feature 
+* ODFTOOLKIT-412 Document.loadDocument(File file, String password) doesn't work for encrypted ods file
+* ODFTOOLKIT-413 Document corrupted after copying a sheet including a chart into new spreadsheet
+* ODFTOOLKIT-421 Chinese Word Can't set font
+* ODFTOOLKIT-425 Please delete old releases from mirroring system
+* ODFTOOLKIT-433 Document.updateXMLIds(...) does not update referenced id's
+* ODFTOOLKIT-442 Table.getRowIterator() out of sync without calling hasNext()
+* ODFTOOLKIT-446 Receiving encrypted file without password should be not NULL
+* ODFTOOLKIT-447 Encrypted documents invalid due to misordered manifest XML elements
+
+The following people have contributed to ODF Toolkit 0.6.2 incubating by reporting or submitting on the issues resolved in this release:
+
+Nick Burch (mentor)
+Rob Weir (mentor)
+Sam Ruby (mentor)
+Tom Barber (mentor)
+Yegor Kozlov (mentor)
+Damjan Jovanovic (committer)
+Dave Fisher (committer)
+Oliver Rau  (committer)
+Svante Schubert (committer)
+Alain Fagot Béarez 
+Alexandr Klimov
+Bruno Girin
+David Reepmeyer
+Erika Köster
+Florian Hopf 
+Georg Füchsle
+Guzman Rejon
+Hendy Irawan
+Igor Avila
+Jeremias Maerki
+Jerry Sie Hsiung
+Josef Petrák
+Jörg Büsse
+Kakha Kheladze
+Marc Schreiber
+Mathias Silbermann 
+Michael Stahl
+Nimarukan
+Raimund Hölle
+Reaper
+Sebb
+Stefan Szpikowski
+Uwe Ryssel
+William Zhang
+
+======= Release 0.6.1 =======
+
+The most notable changes in ODF Toolkit 0.6.1 incubating over previous release:
+* Make release 0.6 available in Maven repositories
+
+Release wiki page: https://cwiki.apache.org/confluence/display/ODFTOOLKIT/0.6.1-incubating
+
+Versions of major components
+----------------------------
+
+* Xerces 2.9.1 (http://xerces.apache.org/mirrors.cgi)
+* Apache Jena 2.9.4 (http://jena.apache.org/download/index.html)
+* Apache Commons Validator 1.4.0 (http://commons.apache.org/proper/commons-validator//download_validator.cgi)
+
+For a full dependency list run mvn dependency:tree from the top level in the source module or see the release wiki page.
+
+Upgrading from 0.6-incubating
+-----------------------------
+
+The behaviour of CellSelection#replaceWith(String) has changed. If you are relying on the old behaviour use CellSelection#advancedReplaceWith(String) instead (see ODFTOOLKIT-362).
+
+Detailed Change List
+--------------------
+
+New Features
+------------
+
+* ODFTOOLKIT-358 Add method to set date time value on Cell (Florian Hopf)
+
+Optimizations
+-------------
+
+Bug Fixes
+---------
+
+* ODFTOOLKIT-355 NullPointerException when removing rows from a new Spreadsheet table (Florian Hopf)
+* ODFTOOLKIT-362 TextSelection.replaceWith() ends in an infinite loop (Florian Hopf)
+* ODFTOOLKIT-363 Table#appendRow() method creates a row without any cell (Florian Hopf)
+* ODFTOOLKIT-379 NullPointerException in Paragraph.getTextContent() (Florian Hopf, Patch by Marc Schreiber)
+
+Other
+-----
+
+* ODFTOOLKIT-365 Improve Release Process to easily publish releases with maven (Florian Hopf)
+
+The following people have contributed to ODF Toolkit 0.6.1 incubating by submitting or commenting on the issues resolved in this release, 
+or contributed via reported bugs/comments on the mailing list:
+
+Nick Burch (mentor)
+Yegor Kozlov (mentor)
+Dali Liu (committer)
+Devin Han (committer)
+Donald Harbison (committer)
+Florian Hopf (committer)
+Oliver Rau (committer)
+Rob Weir (committer)
+Svante Schubert (committer)
+Alain Fagot Béarez 
+Alexandr Klimov
+Andy Jefferson
+Anders Sjostrom
+Ashok Hariharan
+Charitha Madusanka
+Dani Prieto 
+Dave Fisher
+Dennis E. Hamilton 
+Gavin McDonald
+Graham Weatherup
+Ian Cunningham
+Jeremias Maerki
+Johnny Haugen Sorgard
+Jörg Büsse
+Kejia Ye
+Lars Moller 
+Pavel Jisl
+Philip Helger
+Peter Junge
+Marc Schreiber
+Mathias Silbermann 
+Michael Stahl
+Michan Jaskurzyński
+Nick de Graeve
+Noah Tilton
+Romain Benefice
+Steele, Raymond
+Stefan Renz
+Steffen Börsig
+Sherzod Muratov
+Svante Schubert
+Tao Lin
+Torsten Krah 
+Vicente Villegas Larios
+
+======= Release 0.6 incubating =======
+
+The most notable changes in ODF Toolkit 0.6 incubating over previous release:
+* Added document encryption support
+* Added metadata support
+* Support for OpenDocument-v1.2
+* Additional APIs for Simple API
+
+Release wiki page: https://cwiki.apache.org/confluence/display/ODFTOOLKIT/0.6-incubating
+
+Versions of major components
+----------------------------
+
+* Xerces 2.9.1 (http://xerces.apache.org/mirrors.cgi)
+* Apache Jena 2.9.4 (http://jena.apache.org/download/index.html)
+* Apache Clerezza 0.1-incubating (http://incubator.apache.org/clerezza/downloads/)
+* Apache Commons Validator 1.4.0 (http://commons.apache.org/proper/commons-validator//download_validator.cgi)
+
+For a full dependency list run mvn dependency:tree from the top level in the source module or see the release wiki page.
+
+Upgrading from 0.5-incubating
+-----------------------------
+
+There are no known API changes.
+
+Detailed Change List
+--------------------
+
+New Features
+------------
+
+* ODFTOOLKIT-319 Document encryption support (Devin Han, Rob Weir, DaLi Liu)
+* ODFTOOLKIT-50 Add ODF 1.2 RDF metadata support (Tao Lin, Svante Schubert, DaLi Liu)
+* ODFTOOLKIT-346 New API to create protected section in TextDocument to protect contents (DaLi Liu, Patch by Kejia Ye)
+* ODFTOOLKIT-340 New API to insert form controls into document (DaLi Liu, Patch by Kejia Ye)
+* ODFTOOLKIT-339 new methods in TextDocument to suport insert a document into an open document (DaLi Liu)
+* ODFTOOLKIT-330 Improve the method TextSelection.replaceWith(String). new param types support (DaLi Liu)
+* ODFTOOLKIT-334 New API to support table autoformat (DaLi Liu, Patch by Kejia Ye)
+* ODFTOOLKIT-336 New APIs to set page style when inserting page break in TextDocument (DaLi Liu, Patch by Kejia Ye)
+* ODFTOOLKIT-329 New Simple API to generate a table of content in text document (Rob Weir, Patch by DaLi Liu)
+* ODFTOOLKIT-305 Update ODF 1.2 schema to OpenDocument-v1.2 final version (Devin Han)
+* ODFTOOLKIT-307 Update ODF Validator to support ODF 1.2 final version (Devin Han)
+* ODFTOOLKIT-306 Update Taglets to support ODF 1.2 final version. (Devin Han)
+* ODFTOOLKIT-199 Supply signature and manifest features to code generator plugin (Devin Han)
+
+Optimizations
+-------------
+
+Bug Fixes
+---------
+
+* ODFTOOLKIT-324 Simple ODF is throwing an exception on alien elements (Florian Hopf)
+* ODFTOOLKIT-325 Spreadsheet : Call to cell.getTimeValue on cell marked as valueType TIME but no value set gives NPE (Florian Hopf)
+* ODFTOOLKIT-338 The Value of VariableField always is "" when try to get a VariableField instance by TextDocument.getVariableFieldByName(String) (DaLi Liu)
+* ODFTOOLKIT-326 NPE when setting default background in TextCellProperties (Rob Weir, Patch by Florian Hopf)
+* ODFTOOLKIT-341 newImage() generates java.lang.NullPointerException when using an svg image (Rob Weir, Patch by Anders Sjöström)
+* ODFTOOLKIT-327 java.lang.NullPointerException at org.odftoolkit.odfdom.pkg.OdfPackage.logValidationError(OdfPackage.java:2028) (Rob Weir, Patch by Florian Hopf)
+* ODFTOOLKIT-331 AbstractListContainer.getListIterator() doesn't include all lists (Rob Weir, Patch by Nick de Graeve)
+* ODFTOOLKIT-302 getNamespaceURI() implementation in ODFDOM is not aware of duplicate namespace prefixes (Svante Schubert, Patch by Ashok Hariharan)
+* ODFTOOLKIT-311 TextExtractor uses wrong new line character (Oliver Rau)
+
+Other
+-----
+
+* ODFTOOLKIT-342 MetaDocumentStatisticTest sometimes fails (Florian Hopf)
+* ODFTOOLKIT-318 Build of validator with Maven 3.0.4 (Svante Schubert)
+* Correct the link for Simple API Cookbook (Rob Weir, patch by noahktilton)
+* ODFTOOLKIT-190 Improvement of XPath Tests (Svante Schubert)
+* ODFTOOLKIT-299 Build with JDK 7 as well as Earlier versions (Svante Schubert, Patch by Dennis E. Hamilton)
+* ODFTOOLKIT-312 Better exception handling for OdfPackage (Svante Schubert, Patch by Jeremias Maerki)
+
+
+The following people have contributed to ODF Toolkit 0.6 incubating by submitting or commenting on the issues resolved in this release, 
+or contributed via reported bugs/comments on the mailing list:
+
+Nick Burch (mentor)
+Yegor Kozlov (mentor)
+Dali Liu (committer)
+Devin Han (committer)
+Donald Harbison (committer)
+Florian Hopf (committer)
+Oliver Rau (committer)
+Rob Weir (committer)
+Svante Schubert (committer)
+Andy Jefferson
+Anders Sjostrom
+Ashok Hariharan
+Charitha Madusanka
+Dani Prieto 
+Dave Fisher
+Dennis E. Hamilton 
+Gavin McDonald
+Graham Weatherup
+Ian Cunningham
+Jeremias Maerki
+Johnny Haugen Sorgard
+Kejia Ye
+Lars Moller 
+Pavel Jisl
+Philip Helger
+Peter Junge
+Marc Schreiber
+Mathias Silbermann 
+Michael Stahl
+Michan Jaskurzyński
+Nick de Graeve
+Noah Tilton
+Romain Benefice
+Steele, Raymond
+Stefan Renz
+Sherzod Muratov
+Svante Schubert
+Tao Lin
+Torsten Krah 
+Vicente Villegas Larios
+
+======= Release 0.5 incubating =======
+
+The most notable changes in ODF Toolkit 0.5 incubating over previous releases in ODF Toolkit Union are:
+ * All of the sub-projects release with an all in one package.
+ * Mark ODFDOM DOC API's as "deprecated", will be replaced by Simple API in future.
+ * Some bugs fixed.
+
+New Features
+------------
+
+* ODFTOOLKIT-287 PraragraphProperties should contain methods for margins and text indention.[Developer:Oliver Rau,Devin;Reviewer:Devin]
+
+Optimizations
+-------------
+
+* ODFTOOLKIT-289 Clean up unnecessary log messages.[Developer:Devin]
+
+Bug Fixes
+---------
+
+* ODFTOOLKIT-104 Create new spreadsheet, save it, load it, add a sheet, save it, then load it causes failure. (Devin Han)
+* ODFTOOLKIT-133 NullPointerException sometimes happened when parsing a centain kind of XML under IBM JDK. (Devin Han, Patch by kelvin)
+* ODFTOOLKIT-288 No null check for lastNode in setTextContent of Span class.[Developer:Oliver Rau,Devin;Reviewer:Devin]
+* ODFTOOLKIT-295 Exit condition of Length.parseUnit in ODFDOM is wrong.[Developer:Oliver Rau;Reviewer:Devin]
+
+Other
+-----
+
+* ODFTOOLKIT-290 Consolidate build of ODFToolkit sub-projects.[Developer:Yegor Kozlov,Devin;Reviewer:Devin]
+* ODFTOOLKIT-291 Adapt Simple API to the newest ODFDOM trunk.[Developer:Devin]
+* ODFTOOLKIT-292 Mark ODFDOM DOC API's as "deprecated".[Developer:Devin]
+* ODFTOOLKIT-293 Submit Apache Licence info automatically added code to SVN.[Developer:Devin]
+* ODFTOOLKIT-297 Test: testGetLanguage(org.odftoolkit.simple.meta.OfficeMetaTest) failed when the platform language is not 'Chinese'. [Developer:Devin]
+* ODFTOOLKIT-298 XLST-Runner and Validator aren't compatible with Java 5. [Developer:Robert Weir,Devin]
+ 
+
+ODF Toolkit relies on the current set of major dependencies (generated using mvn dependency:tree from the top-level odf toolkit src dir):
+
+org.apache.odftoolkit:taglets:jar:0.8.8-incubating
+org.apache.odftoolkit:schema2template:jar:0.8.8-incubating
++- org.apache.velocity:velocity:jar:1.6.4:compile
+|  +- commons-collections:commons-collections:jar:3.2.1:compile
+|  +- commons-lang:commons-lang:jar:2.4:compile
+|  \- oro:oro:jar:2.0.8:compile
++- net.java.dev.msv:msv-core:jar:2009.1:compile
+|  +- com.sun.msv.datatype.xsd:xsdlib:jar:2009.1:compile
+|  +- net.java.dev.msv:msv-testharness:jar:2009.1:compile
+|  |  \- org.apache.ant:ant:jar:1.7.1:compile
+|  |     \- org.apache.ant:ant-launcher:jar:1.7.1:compile
+|  +- xml-resolver:xml-resolver:jar:1.2:compile
+|  +- xerces:xercesImpl:jar:2.9.1:compile
+|  |  \- xml-apis:xml-apis:jar:1.3.04:compile
+|  +- isorelax:isorelax:jar:20030108:compile
+|  \- relaxngDatatype:relaxngDatatype:jar:20020414:compile
+\- junit:junit:jar:4.5:test
+org.apache.odftoolkit:schema2template-maven-plugin:maven-plugin:0.8.8-incubating
++- org.apache.odftoolkit:schema2template:jar:0.8.8-incubating:compile
+|  +- org.apache.velocity:velocity:jar:1.6.4:compile
+|  |  +- commons-collections:commons-collections:jar:3.2.1:compile
+|  |  +- commons-lang:commons-lang:jar:2.4:compile
+|  |  \- oro:oro:jar:2.0.8:compile
+|  \- net.java.dev.msv:msv-core:jar:2009.1:compile
+|     +- com.sun.msv.datatype.xsd:xsdlib:jar:2009.1:compile
+|     +- net.java.dev.msv:msv-testharness:jar:2009.1:compile
+|     |  \- org.apache.ant:ant:jar:1.7.1:compile
+|     |     \- org.apache.ant:ant-launcher:jar:1.7.1:compile
+|     +- xml-resolver:xml-resolver:jar:1.2:compile
+|     +- xerces:xercesImpl:jar:2.9.1:compile
+|     |  \- xml-apis:xml-apis:jar:1.3.04:compile
+|     +- isorelax:isorelax:jar:20030108:compile
+|     \- relaxngDatatype:relaxngDatatype:jar:20020414:compile
++- junit:junit:jar:4.5:test
++- org.apache.maven:maven-plugin-api:jar:2.0.7:provided
++- org.apache.maven:maven-project:jar:2.0.7:provided
+|  +- org.apache.maven:maven-settings:jar:2.0.7:provided
+|  +- org.apache.maven:maven-profile:jar:2.0.7:provided
+|  +- org.apache.maven:maven-model:jar:2.0.7:provided
+|  +- org.apache.maven:maven-artifact-manager:jar:2.0.7:provided
+|  |  +- org.apache.maven:maven-repository-metadata:jar:2.0.7:provided
+|  |  \- org.apache.maven.wagon:wagon-provider-api:jar:1.0-beta-2:provided
+|  +- org.apache.maven:maven-plugin-registry:jar:2.0.7:provided
+|  +- org.codehaus.plexus:plexus-utils:jar:1.4.1:provided
+|  \- org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:provided
+|     \- classworlds:classworlds:jar:1.1-alpha-2:provided
+\- org.apache.maven:maven-artifact:jar:2.0.7:provided
+org.apache.odftoolkit:odfdom-java:jar:0.8.8-incubating
++- org.apache.odftoolkit:taglets:jar:0.8.8-incubating:compile
++- xerces:xercesImpl:jar:2.9.1:compile
+|  \- xml-apis:xml-apis:jar:1.3.04:compile
+\- junit:junit:jar:4.8.1:test
+org.apache.odftoolkit:xslt-runner:jar:1.2.1-incubating
+\- org.apache.odftoolkit:odfdom-java:jar:0.8.8-incubating:compile
+   +- org.apache.odftoolkit:taglets:jar:0.8.8-incubating:compile
+   \- xerces:xercesImpl:jar:2.9.1:compile
+      \- xml-apis:xml-apis:jar:1.3.04:compile
+org.apache.odftoolkit:xslt-runner-task:jar:1.2.1-incubating
++- org.apache.odftoolkit:xslt-runner:jar:1.2.1-incubating:compile
+|  \- org.apache.odftoolkit:odfdom-java:jar:0.8.8-incubating:compile
+|     +- org.apache.odftoolkit:taglets:jar:0.8.8-incubating:compile
+|     \- xerces:xercesImpl:jar:2.9.1:compile
+|        \- xml-apis:xml-apis:jar:1.3.04:compile
+\- org.apache.ant:ant:jar:1.8.2:compile
+   \- org.apache.ant:ant-launcher:jar:1.8.2:compile
+org.apache.odftoolkit:odfvalidator:war:1.1.5-incubating
++- org.apache.odftoolkit:odfdom-java:jar:0.8.8-incubating:compile
+|  \- org.apache.odftoolkit:taglets:jar:0.8.8-incubating:compile
++- commons-fileupload:commons-fileupload:jar:1.2.2:compile
++- net.java.dev.msv:msv-core:jar:2011.1:compile
+|  +- com.sun.msv.datatype.xsd:xsdlib:jar:2010.1:compile
+|  +- isorelax:isorelax:jar:20030108:compile
+|  \- relaxngDatatype:relaxngDatatype:jar:20020414:compile
++- org.iso_relax.verifier.jaxp.validation:isorelax-jaxp-bridge:jar:1.0:compile
++- xerces:xercesImpl:jar:2.9.1:compile
+|  \- xml-apis:xml-apis:jar:1.3.04:compile
+\- junit:junit:jar:4.8.1:test
+org.apache.odftoolkit:simple-odf:jar:0.7-incubating
++- org.apache.odftoolkit:odfdom-java:jar:0.8.8-incubating:compile
+|  \- org.apache.odftoolkit:taglets:jar:0.8.8-incubating:compile
++- xerces:xercesImpl:jar:2.9.1:compile
+|  \- xml-apis:xml-apis:jar:1.3.04:compile
+\- junit:junit:jar:4.8.1:test
+org.apache.odftoolkit:odftoolkit:pom:0.5-incubating
+
+The following people have contributed to ODF Toolkit 0.5 incubating by submitting or commenting on the issues resolved in this release, 
+or contributed via reported bugs/comments on the mailing list:
+
+Sam Ruby (mentor)
+Nick Burch (mentor)
+Yegor Kozlov (mentor)
+Rob Weir (committer)
+Devin Han (committer)
+Svante Schubert (committer)
+Daisy Guo (committer)
+Donald Harbison (committer)
+Andy Brown (committer)
+Dave Fisher (committer)
+Juergen Schmidt (committer)
+Oliver Rau (committer)
+Dennis E. Hamilton
+Jeremias Maerki
+Wilson Barbosa
+Ansgar Konermann
+Grzegorz Kaczor
+Watte Babbu
+Ashok Hariharan
+Henrique Lobo Weissmann
+Ian Lynch
+Michael McCandless
+Michael Stahl
+Patrick Durusau
+Pedro F. Giffuni
+Drew Jensen
+Kevin Skelton
+Neelima
+Ram Kane
+
+See http://s.apache.org/odfC for more details on these contributions.
