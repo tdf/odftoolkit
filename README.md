@@ -62,7 +62,7 @@ build system. To build ODF Toolkit, use the following command in this directory:
     * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.9.0/)
     * [Simple API (deprecated)](https://repo1.maven.org/maven2/org/odftoolkit/simple-odf/0.9.0/)
 
-For more details see the [release notes](https://tdf.github.io/odftoolkit/odfdom/ReleaseNotes.html).
+For more details see the [release notes](https://tdf.github.io/odftoolkit/ReleaseNotes.html).
 
 ## Documentation
 
