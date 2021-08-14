@@ -1,0 +1,16 @@
+{
+    "version": "0.1",
+    "ignorePaths": [
+        ".git",
+        ".git/**",
+        ".vscode/*"
+    ],
+    "language": "en",
+    "dictionaries": [],
+    "words": [
+        "ODFDOM",
+        "odfvalidator",
+        "subcomponents"
+    ],
+    "ignoreRegExpList": []
+}
