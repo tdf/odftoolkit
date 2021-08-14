@@ -126,8 +126,8 @@ public class Main {
           || aArg.equals("-1.3")) {
         aVersion = OdfVersion.valueOf(aArg.substring(1), false);
       } else if (aArg.startsWith("-")) {
-        System.out.print(aArg);
-        System.out.println(": unknown option, use '-h' for help");
+        System.err.print(aArg);
+        System.err.println(": unknown option, use '-h' for help");
         System.exit(1);
       } else if (aArg.length() > 0) {
         aFileNames.add(aArg);
@@ -176,11 +176,11 @@ public class Main {
           aConfig = new Configuration(aConfigFile);
         } catch (FileNotFoundException e) {
           if (aConfigFileName != null) {
-            System.out.println(aConfigFile.getAbsolutePath() + ": file not found.");
+            System.err.println(aConfigFile.getAbsolutePath() + ": file not found.");
             System.exit(1);
           }
         } catch (IOException e) {
-          System.out.println(
+          System.err.println(
               "error reading " + aConfigFile.getAbsolutePath() + ": " + e.getLocalizedMessage());
           System.exit(1);
         }
@@ -219,7 +219,7 @@ public class Main {
         aConfig.setProperty(Configuration.MATHML3_SCHEMA, aMathMLSchemaFileName);
       }
 
-      PrintStream aOut = aOutputFileName != null ? new PrintStream(aOutputFileName) : System.out;
+      PrintStream aOut = aOutputFileName != null ? new PrintStream(aOutputFileName) : null;
       ODFValidator aValidator = new ODFValidator(aConfig, nLogLevel, aVersion);
 
       if (aConfigFileName != null) {
@@ -228,12 +228,12 @@ public class Main {
         aValidator.validate(aOut, aFileNames, aExcludeRegExp, eMode, bRecursive, aFilterFileName);
       }
     } catch (ODFValidatorException e) {
-      System.out.println(e.getMessage());
-      System.out.println("Validation aborted.");
+      System.err.println(e.getMessage());
+      System.err.println("Validation aborted.");
       System.exit(1);
     } catch (FileNotFoundException e) {
-      System.out.println(e.getMessage());
-      System.out.println("Validation aborted.");
+      System.err.println(e.getMessage());
+      System.err.println("Validation aborted.");
       System.exit(1);
     }
   }

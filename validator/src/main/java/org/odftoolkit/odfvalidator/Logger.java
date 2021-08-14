@@ -41,6 +41,8 @@ public class Logger {
   private String m_aFileName;
   private String m_aEntryName;
   private PrintStream m_aOut;
+  private PrintStream m_aInfoStream;
+  private PrintStream m_aErrorStream;
   private int m_nErrors;
   private int m_nWarnings;
   private LogLevel m_nLevel;
@@ -56,22 +58,22 @@ public class Logger {
   Logger(String aFileName, String aEntryName, PrintStream aOut, LogLevel nLevel) {
     m_aFileName = aFileName;
     m_aEntryName = aEntryName;
-    m_aOut = aOut;
     m_nLevel = nLevel;
     m_nErrors = 0;
     m_nWarnings = 0;
     m_aParentLogger = null;
+    setOutputStream(aOut);
   }
 
   /** Creates a new instance of Logger */
   Logger(String aEntryName, Logger aParentLogger) {
     m_aFileName = aParentLogger.m_aFileName;
     m_aEntryName = aEntryName;
-    m_aOut = aParentLogger.m_aOut;
     m_nLevel = aParentLogger.m_nLevel;
     m_nErrors = 0;
     m_nWarnings = 0;
     m_aParentLogger = aParentLogger;
+    setOutputStream(aParentLogger.m_aOut);
   }
 
   static void enableHTML(boolean isHTMLEnabled) {
@@ -84,6 +86,13 @@ public class Logger {
 
   public void setOutputStream(PrintStream aOut) {
     m_aOut = aOut;
+    if (m_aOut != null) {
+      m_aInfoStream = m_aOut;
+      m_aErrorStream = m_aOut;
+    } else {
+      m_aInfoStream = System.out;
+      m_aErrorStream = System.err;
+    }
   }
 
   public void setInputStream(InputStream aIn) {
@@ -112,27 +121,27 @@ public class Logger {
   void logWarning(String aMsg) {
     if (m_nLevel.compareTo(LogLevel.WARNING) >= 0) {
       if (m_isHTMLEnabled) {
-        m_aOut.print("<span class='warning'>");
+        m_aInfoStream.print("<span class='warning'>");
       }
-      logMessage(WARNING_PREFIX, aMsg);
+      logMessage(m_aInfoStream, WARNING_PREFIX, aMsg);
     }
     incWarnings();
   }
 
   void logFatalError(String aMsg) {
     if (m_isHTMLEnabled) {
-      m_aOut.print("<span class='fatalError'>");
+      m_aErrorStream.print("<span class='fatalError'>");
     }
-    logMessage(FATAL_PREFIX, aMsg);
+    logMessage(m_aErrorStream, FATAL_PREFIX, aMsg);
     incErrors();
   }
 
   void logError(String aMsg) {
     if (m_nLevel.compareTo(LogLevel.ERROR) >= 0) {
       if (m_isHTMLEnabled) {
-        m_aOut.print("<span class='error'>");
+        m_aErrorStream.print("<span class='error'>");
       }
-      logMessage(ERROR_PREFIX, aMsg);
+      logMessage(m_aErrorStream, ERROR_PREFIX, aMsg);
     }
     incErrors();
   }
@@ -140,36 +149,36 @@ public class Logger {
   void logInfo(String aMsg, boolean bForceOutput) {
     if (m_nLevel.compareTo(LogLevel.INFO) >= 0 || bForceOutput) {
       if (m_isHTMLEnabled) {
-        m_aOut.print("<span class='info'>");
+        m_aInfoStream.print("<span class='info'>");
       }
-      logMessage(INFO_PREFIX, aMsg);
+      logMessage(m_aInfoStream, INFO_PREFIX, aMsg);
     }
   }
 
   void logWarning(SAXParseException e) {
     if (m_nLevel.compareTo(LogLevel.WARNING) >= 0) {
       if (m_isHTMLEnabled) {
-        m_aOut.print("<span class='warning'>");
+        m_aInfoStream.print("<span class='warning'>");
       }
-      logMessage(WARNING_PREFIX, e);
+      logMessage(m_aInfoStream, WARNING_PREFIX, e);
     }
     incWarnings();
   }
 
   void logFatalError(SAXParseException e) {
     if (m_isHTMLEnabled) {
-      m_aOut.print("<span class='fatalError'>");
+      m_aErrorStream.print("<span class='fatalError'>");
     }
-    logMessage(FATAL_PREFIX, e);
+    logMessage(m_aErrorStream, FATAL_PREFIX, e);
     incErrors();
   }
 
   void logError(SAXParseException e) {
     if (m_isHTMLEnabled) {
-      m_aOut.print("<span class='error'>");
+      m_aErrorStream.print("<span class='error'>");
     }
     if (m_nLevel.compareTo(LogLevel.ERROR) >= 0) {
-      logMessage(ERROR_PREFIX, e);
+      logMessage(m_aErrorStream, ERROR_PREFIX, e);
     }
     incErrors();
   }
@@ -183,43 +192,43 @@ public class Logger {
         false);
   }
 
-  private void printFileEntryPrefix() {
-    m_aOut.print(m_aFileName);
+  private void printFileEntryPrefix(PrintStream aOut) {
+    aOut.print(m_aFileName);
     if (m_aEntryName != null && m_aEntryName.length() > 0) {
-      m_aOut.print("/");
-      m_aOut.print(m_aEntryName);
+      aOut.print("/");
+      aOut.print(m_aEntryName);
     }
   }
 
-  private void logMessage(String aPrefix, SAXParseException e) {
+  private void logMessage(PrintStream aOut, String aPrefix, SAXParseException e) {
     // filepath
     if (m_isHTMLEnabled) {
-      m_aOut.print("<span class='filePath'>");
+      aOut.print("<span class='filePath'>");
     }
-    printFileEntryPrefix();
-    m_aOut.print("[");
-    m_aOut.print(e.getLineNumber());
-    m_aOut.print(",");
-    m_aOut.print(e.getColumnNumber());
-    m_aOut.print("]:  ");
+    printFileEntryPrefix(aOut);
+    aOut.print("[");
+    aOut.print(e.getLineNumber());
+    aOut.print(",");
+    aOut.print(e.getColumnNumber());
+    aOut.print("]:  ");
     if (m_isHTMLEnabled) {
-      m_aOut.print("</span>");
+      aOut.print("</span>");
     }
 
     // prefix, e.g. warning
     if (m_isHTMLEnabled) {
-      m_aOut.print("<span class='messageType'>");
+      aOut.print("<span class='messageType'>");
     }
-    m_aOut.print(aPrefix);
+    aOut.print(aPrefix);
     if (m_isHTMLEnabled) {
-      m_aOut.print("</span>");
+      aOut.print("</span>");
     }
 
-    m_aOut.print(" " + e.getMessage());
+    aOut.print(" " + e.getMessage());
     if (m_isHTMLEnabled) {
-      m_aOut.print("</span></br>");
+      aOut.print("</span></br>");
     }
-    m_aOut.println();
+    aOut.println();
 
     if (m_aEntryContent != null) {
       try {
@@ -232,44 +241,44 @@ public class Logger {
         String errorLine = reader.readLine();
         int len = errorLine.length();
         if (len > 80) {
-          m_aOut.println(
+          aOut.println(
               errorLine.substring(
                   Math.max(0, e.getColumnNumber() - 40),
                   Math.min(len - 1, e.getColumnNumber() + 39)));
-          m_aOut.println("".format("%1$38s", "----^"));
+          aOut.println("".format("%1$38s", "----^"));
         } else {
-          m_aOut.println(errorLine);
-          m_aOut.println("".format("%1$" + Math.max(0, e.getColumnNumber() - 2) + "s", "----^"));
+          aOut.println(errorLine);
+          aOut.println("".format("%1$" + Math.max(0, e.getColumnNumber() - 2) + "s", "----^"));
         }
       } catch (IOException x) {
       }
     }
   }
 
-  private void logMessage(String aPrefix, String aMsg) {
+  private void logMessage(PrintStream aOut, String aPrefix, String aMsg) {
     // filepath
     if (m_isHTMLEnabled) {
-      m_aOut.print("<span class='filePath'>");
+      aOut.print("<span class='filePath'>");
     }
-    printFileEntryPrefix();
-    m_aOut.print(":  ");
+    printFileEntryPrefix(aOut);
+    aOut.print(":  ");
     if (m_isHTMLEnabled) {
-      m_aOut.print("</span>");
+      aOut.print("</span>");
     }
 
     // prefix, e.g. warning
     if (m_isHTMLEnabled) {
-      m_aOut.print("<span class='messageType'>");
+      aOut.print("<span class='messageType'>");
     }
-    m_aOut.print(aPrefix);
+    aOut.print(aPrefix);
     if (m_isHTMLEnabled) {
-      m_aOut.print("</span>");
+      aOut.print("</span>");
     }
-    m_aOut.print(" " + aMsg);
+    aOut.print(" " + aMsg);
     if (m_isHTMLEnabled) {
-      m_aOut.print("</span></br>");
+      aOut.print("</span></br>");
     }
-    m_aOut.println();
+    aOut.println();
   }
 
   private void incErrors() {
