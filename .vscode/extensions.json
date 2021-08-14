@@ -1,0 +1,24 @@
+{
+	// See http://go.microsoft.com/fwlink/?LinkId=827846
+	// for the documentation about the extensions.json format
+	"recommendations": [
+		"gimenete.github-linker",
+		"jasonnutter.vscode-codeowners",
+		"eamodio.gitlens",
+		"sidneys1.gitconfig",
+		"mhutchie.git-graph",
+		"editorconfig.editorconfig",
+		"yuichinukiyama.tabspacer",
+		"sleistner.vscode-fileutils",
+		"gruntfuggly.todo-tree",
+		"davidanson.vscode-markdownlint",
+		"bierner.markdown-preview-github-styles",
+		"streetsidesoftware.code-spell-checker",
+		"bewhite.dokd-vscode-preview",
+		"kisstkondoros.vscode-gutter-preview",
+		"redhat.java",
+		"redhat.fabric8-analytics",
+		"vscjava.vscode-maven",
+		"vscjava.vscode-java-pack"
+	]
+}

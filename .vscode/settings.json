@@ -1,0 +1,138 @@
+{
+	"files.exclude": {
+		".git": true,
+		"node_modules/": true,
+		"**/Thumbs.db": true,
+		"Thumbs.db": true,
+		"**/.~lock.*": true
+	},
+	"files.associations": {
+		"**/packages.config": "xml"
+	},
+	"shellcheck.exclude": [
+		"1017"
+	],
+	"[xml]": {
+		"editor.formatOnSave": false,
+		"editor.autoClosingBrackets": "never",
+		"files.trimTrailingWhitespace": false,
+		"files.insertFinalNewline": false
+	},
+	"[xslt]": {
+		"editor.defaultFormatter": "deltaxml.xslt-xpath",
+		"editor.formatOnSave": false,
+		"editor.formatOnPaste": false,
+		"editor.formatOnType": false,
+		"editor.autoClosingBrackets": "never",
+		"files.trimTrailingWhitespace": true,
+		"files.insertFinalNewline": false
+	},
+	"editor.autoClosingTags": false,
+	"editor.linkedEditing": true,
+	"xml.autoCloseTags.enabled": true,
+	"xml.validation.enabled": true,
+	"xml.validation.schema.enabled": "always",
+	"xml.validation.disallowDocTypeDecl": true,
+	"xml.validation.noGrammar": "ignore",
+	"XSLT.resources.xsltPackages": [
+		{
+			"name": "http://github.com/test-st-petersburg/DocTemplates/tools/xslt/system/fix-saxon.xslt",
+			"version": "2.3.0",
+			"path": "tools/xslt/system/fix-saxon.xslt"
+		},
+		{
+			"name": "http://github.com/test-st-petersburg/DocTemplates/tools/xslt/system/uri.xslt",
+			"version": "2.3.0",
+			"path": "tools/xslt/system/uri.xslt"
+		},
+		{
+			"name": "http://github.com/test-st-petersburg/DocTemplates/tools/xslt/formatter/basic.xslt",
+			"version": "1.5.0",
+			"path": "tools/xslt/formatter/basic.xslt"
+		},
+		{
+			"name": "http://github.com/test-st-petersburg/DocTemplates/tools/xslt/formatter/OO.xslt",
+			"version": "1.5.0",
+			"path": "tools/xslt/formatter/OO.xslt"
+		},
+		{
+			"name": "http://github.com/test-st-petersburg/DocTemplates/tools/xslt/OODocumentProcessor/oo-document.xslt",
+			"version": "2.3.0",
+			"path": "tools/xslt/OODocumentProcessor/oo-document.xslt"
+		},
+		{
+			"name": "http://github.com/test-st-petersburg/DocTemplates/tools/xslt/OODocumentProcessor/oo-macrolib.xslt",
+			"version": "2.3.0",
+			"path": "tools/xslt/OODocumentProcessor/oo-macrolib.xslt"
+		},
+		{
+			"name": "http://github.com/test-st-petersburg/DocTemplates/tools/xslt/OODocumentProcessor/oo-merger.xslt",
+			"version": "2.3.0",
+			"path": "tools/xslt/OODocumentProcessor/oo-merger.xslt"
+		},
+		{
+			"name": "http://github.com/test-st-petersburg/DocTemplates/tools/xslt/OODocumentProcessor/oo-preprocessor.xslt",
+			"version": "2.3.0",
+			"path": "tools/xslt/OODocumentProcessor/oo-preprocessor.xslt"
+		},
+		{
+			"name": "http://github.com/test-st-petersburg/DocTemplates/tools/xslt/OODocumentProcessor/oo-writer.xslt",
+			"version": "1.5.0",
+			"path": "tools/xslt/OODocumentProcessor/oo-writer.xslt"
+		},
+		{
+			"name": "http://github.com/test-st-petersburg/DocTemplates/tools/xslt/optimizer/OOOptimizer.xslt",
+			"version": "1.5.0",
+			"path": "tools/xslt/optimizer/OOOptimizer.xslt"
+		}
+	],
+	"[powershell]": {
+		"editor.formatOnSave": true,
+		"files.trimTrailingWhitespace": true,
+		"files.insertFinalNewline": true
+	},
+	"editor.folding": true,
+	"editor.foldingHighlight": true,
+	"editor.foldingStrategy": "auto",
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": false,
+	"files.trimTrailingWhitespace": true,
+	"files.insertFinalNewline": true,
+	"powershell.codeFormatting.alignPropertyValuePairs": false,
+	"powershell.codeFormatting.openBraceOnSameLine": false,
+	"powershell.codeFormatting.newLineAfterOpenBrace": false,
+	"powershell.codeFormatting.newLineAfterCloseBrace": true,
+	"powershell.codeFormatting.whitespaceBeforeOpenBrace": true,
+	"powershell.codeFormatting.whitespaceBeforeOpenParen": true,
+	"powershell.codeFormatting.whitespaceAroundOperator": true,
+	"powershell.codeFormatting.whitespaceAfterSeparator": true,
+	"powershell.codeFormatting.ignoreOneLineBlock": false,
+	"powershell.codeFormatting.preset": "Custom",
+	"typescript.tsc.autoDetect": "off",
+	"grunt.autoDetect": "off",
+	"jake.autoDetect": "off",
+	"gulp.autoDetect": "off",
+	"task.autoDetect": "off",
+	"conventionalCommits.autoCommit": false,
+	// "conventionalCommits.emojiFormat": "",
+	"conventionalCommits.gitmoji": true,
+	"conventionalCommits.lineBreak": "\n",
+	"conventionalCommits.promptBody": true,
+	"conventionalCommits.promptFooter": true,
+	"conventionalCommits.promptScopes": true,
+	"conventionalCommits.scopes": [
+		"ott",
+		"odt",
+		"design",
+		"vscode",
+		"git",
+		"github",
+		"github-actions",
+		"deps",
+		"other",
+		"changelog",
+		"readme"
+	],
+	"conventionalCommits.showEditor": false,
+	"licenser.author": "Sergei S. Betke"
+}

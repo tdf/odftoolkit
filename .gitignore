@@ -17,8 +17,8 @@ local.properties
 ### Netbeans ###
 nb-configuration.xml
 
-# External Editor 
-.vscode/
+# External Editor
+# .vscode/
 
 # External tool builders
 .externalToolBuilders/
