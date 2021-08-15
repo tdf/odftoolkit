@@ -1,23 +1,23 @@
 {
-    "version": "0.1",
-    "ignorePaths": [
-        ".git",
-        ".git/**",
-        ".vscode/*"
-    ],
-    "language": "en",
-    "dictionaries": [],
-    "words": [
-        "configfile",
-        "filterfile",
-        "ODFDOM",
-        "odffiles",
-        "odfvalidator",
-        "outputfile",
-        "rngfile",
-        "schemafile",
-        "subcomponents",
-        "xsdfile"
-    ],
-    "ignoreRegExpList": []
+	"version": "0.1",
+	"ignorePaths": [
+		".git",
+		".git/**",
+		".vscode/*"
+	],
+	"language": "en",
+	"dictionaries": [],
+	"words": [
+		"configfile",
+		"filterfile",
+		"ODFDOM",
+		"odffiles",
+		"odfvalidator",
+		"outputfile",
+		"rngfile",
+		"schemafile",
+		"subcomponents",
+		"xsdfile"
+	],
+	"ignoreRegExpList": []
 }

@@ -23,14 +23,19 @@
 	},
 	"tasks": [
 		{
-			"label": "verify",
-			"type": "shell",
-			"command": "mvn -B verify"
-		},
-		{
 			"label": "compile",
 			"type": "shell",
-			"command": "mvn -B compile",
+			"command": "mvn -B compile"
+		},
+		{
+			"label": "package",
+			"type": "shell",
+			"command": "mvn -B package"
+		},
+		{
+			"label": "verify",
+			"type": "shell",
+			"command": "mvn -B verify",
 			"group": "build"
 		},
 		{
