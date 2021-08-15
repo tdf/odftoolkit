@@ -30,12 +30,12 @@
 		{
 			"label": "package",
 			"type": "shell",
-			"command": "mvn -B package"
+			"command": "mvn -B package -Ppedantic"
 		},
 		{
 			"label": "verify",
 			"type": "shell",
-			"command": "mvn -B verify",
+			"command": "mvn -B verify -Ppedantic",
 			"group": "build"
 		},
 		{

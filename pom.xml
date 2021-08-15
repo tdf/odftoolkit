@@ -355,6 +355,8 @@
                         <configuration>
                             <excludes>
                                 <!-- for all projects -->
+                                <exclude>.vscode/**/*</exclude>
+                                <exclude>.github/**/*</exclude>
                                 <exclude>.editorconfig</exclude>
                                 <exclude>.gitignore</exclude>
                                 <exclude>**/.classpath</exclude>
