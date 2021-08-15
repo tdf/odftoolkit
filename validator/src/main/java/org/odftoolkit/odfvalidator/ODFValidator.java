@@ -149,7 +149,7 @@ public class ODFValidator implements ODFValidatorProvider {
       OdfValidatorMode eMode,
       SAXParseExceptionFilter aFilter)
       throws ODFValidatorException {
-    boolean bRet = true;
+    boolean bRet = false;
     File[] aFiles = aDir.listFiles(aFileFilter);
 
     if (aFiles != null) {
