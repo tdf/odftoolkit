@@ -345,7 +345,6 @@ abstract class ODFPackageValidator {
       Set<String> aForeignElementURISet = m_aResult.getForeignElements().keySet();
       StringBuilder aBuffer = new StringBuilder();
       Iterator<String> aIter = aForeignElementURISet.iterator();
-      boolean bFirst = true;
       while (aIter.hasNext()) {
         String aURI = aIter.next();
         aBuffer.setLength(0);
