@@ -222,11 +222,15 @@ public class Main {
       PrintStream aOut = aOutputFileName != null ? new PrintStream(aOutputFileName) : null;
       ODFValidator aValidator = new ODFValidator(aConfig, nLogLevel, aVersion);
 
+      boolean bHasErrors;
       if (aConfigFileName != null) {
-        aValidator.validate(aOut, aConfig, eMode);
+        bHasErrors = aValidator.validate(aOut, aConfig, eMode);
       } else {
-        aValidator.validate(aOut, aFileNames, aExcludeRegExp, eMode, bRecursive, aFilterFileName);
+        bHasErrors =
+            aValidator.validate(
+                aOut, aFileNames, aExcludeRegExp, eMode, bRecursive, aFilterFileName);
       }
+      System.exit(bHasErrors ? 1 : 0);
     } catch (ODFValidatorException e) {
       System.err.println(e.getMessage());
       System.err.println("Validation aborted.");
