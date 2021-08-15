@@ -245,10 +245,10 @@ public class Logger {
               errorLine.substring(
                   Math.max(0, e.getColumnNumber() - 40),
                   Math.min(len - 1, e.getColumnNumber() + 39)));
-          aOut.println("".format("%1$38s", "----^"));
+          aOut.println(String.format("%1$38s", "----^"));
         } else {
           aOut.println(errorLine);
-          aOut.println("".format("%1$" + Math.max(0, e.getColumnNumber() - 2) + "s", "----^"));
+          aOut.println(String.format("%1$" + Math.max(0, e.getColumnNumber() - 2) + "s", "----^"));
         }
       } catch (IOException x) {
       }

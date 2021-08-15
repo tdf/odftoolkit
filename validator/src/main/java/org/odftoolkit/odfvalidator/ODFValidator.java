@@ -40,7 +40,7 @@ import javax.xml.validation.Validator;
 public class ODFValidator implements ODFValidatorProvider {
 
   // Prefix used to distinguish internal resources from external ones
-  // Loglevel
+  // LogLevel
   private Logger.LogLevel m_nLogLevel;
   // Validator provider
   private SchemaFactory m_aRNGSchemaFactory = null;
@@ -378,7 +378,7 @@ public class ODFValidator implements ODFValidatorProvider {
           System.setProperty(
               "javax.xml.validation.SchemaFactory:" + aSchemaLanguage,
               "org.iso_relax.verifier.jaxp.validation.RELAXNGSchemaFactoryImpl");
-          SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.RELAXNG_NS_URI);
+          // SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.RELAXNG_NS_URI);
           m_aRNGSchemaFactory = SchemaFactory.newInstance(aSchemaLanguage);
           aSchemaFactory = m_aRNGSchemaFactory;
         } else {
