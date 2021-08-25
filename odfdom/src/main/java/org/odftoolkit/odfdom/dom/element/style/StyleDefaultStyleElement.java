@@ -108,6 +108,8 @@ public class StyleDefaultStyleElement extends OdfStyleBase {
   /**
    * Create child element {@odf.element style:drawing-page-properties}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element style:drawing-page-properties}
    */
   public StyleDrawingPagePropertiesElement newStyleDrawingPagePropertiesElement() {
@@ -119,6 +121,8 @@ public class StyleDefaultStyleElement extends OdfStyleBase {
 
   /**
    * Create child element {@odf.element style:graphic-properties}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element style:graphic-properties}
    */
@@ -132,6 +136,8 @@ public class StyleDefaultStyleElement extends OdfStyleBase {
   /**
    * Create child element {@odf.element style:paragraph-properties}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element style:paragraph-properties}
    */
   public StyleParagraphPropertiesElement newStyleParagraphPropertiesElement() {
@@ -143,6 +149,8 @@ public class StyleDefaultStyleElement extends OdfStyleBase {
 
   /**
    * Create child element {@odf.element style:ruby-properties}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element style:ruby-properties}
    */
@@ -156,6 +164,8 @@ public class StyleDefaultStyleElement extends OdfStyleBase {
   /**
    * Create child element {@odf.element style:section-properties}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element style:section-properties}
    */
   public StyleSectionPropertiesElement newStyleSectionPropertiesElement() {
@@ -167,6 +177,8 @@ public class StyleDefaultStyleElement extends OdfStyleBase {
 
   /**
    * Create child element {@odf.element style:table-cell-properties}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element style:table-cell-properties}
    */
@@ -180,6 +192,8 @@ public class StyleDefaultStyleElement extends OdfStyleBase {
   /**
    * Create child element {@odf.element style:table-column-properties}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element style:table-column-properties}
    */
   public StyleTableColumnPropertiesElement newStyleTableColumnPropertiesElement() {
@@ -192,6 +206,8 @@ public class StyleDefaultStyleElement extends OdfStyleBase {
   /**
    * Create child element {@odf.element style:table-properties}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element style:table-properties}
    */
   public StyleTablePropertiesElement newStyleTablePropertiesElement() {
@@ -203,6 +219,8 @@ public class StyleDefaultStyleElement extends OdfStyleBase {
 
   /**
    * Create child element {@odf.element style:table-row-properties}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element style:table-row-properties}
    */
@@ -228,6 +246,12 @@ public class StyleDefaultStyleElement extends OdfStyleBase {
     return styleTextProperties;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

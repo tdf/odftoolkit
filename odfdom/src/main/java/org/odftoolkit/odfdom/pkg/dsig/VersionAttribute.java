@@ -32,12 +32,12 @@ package org.odftoolkit.odfdom.pkg.dsig;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
 /** DOM implementation of OpenDocument attribute {@odf.attribute dsig:version}. */
 public class VersionAttribute extends OdfAttribute {
 
-  public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.DSIG, "version");
+  public static final OdfName ATTRIBUTE_NAME =
+      OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:digitalsignature:1.0", "dsig:version");
 
   /**
    * Create the instance of OpenDocument attribute {@odf.attribute dsig:version}.
@@ -97,29 +97,6 @@ public class VersionAttribute extends OdfAttribute {
   /** @return Returns the <code>Enum</code> value of the attribute */
   public Value getEnumValue() {
     return Value.enumValueOf(this.getValue());
-  }
-
-  /**
-   * @param attrValue The <code>String</code> value of the attribute.
-   * @throws IllegalArgumentException If the provided attribute value is invalid
-   */
-  @Override
-  public void setValue(String attrValue) {
-    try {
-      super.setValue(Value.enumValueOf(attrValue).toString());
-    } catch (NullPointerException e) {
-      throw new IllegalArgumentException(e);
-    }
-  }
-
-  /** @return Returns the <code>String</code> value of the attribute */
-  @Override
-  public String getValue() {
-    try {
-      return Value.enumValueOf(super.getValue()).toString();
-    } catch (NullPointerException e) {
-      throw new IllegalArgumentException("the value of dsig:version is not valid");
-    }
   }
 
   /**

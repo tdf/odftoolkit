@@ -172,6 +172,8 @@ public class OfficeSpreadsheetElement extends OdfElement {
   /**
    * Create child element {@odf.element table:calculation-settings}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:calculation-settings}
    */
   public TableCalculationSettingsElement newTableCalculationSettingsElement() {
@@ -211,6 +213,8 @@ public class OfficeSpreadsheetElement extends OdfElement {
   /**
    * Create child element {@odf.element table:content-validations}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:content-validations}
    */
   public TableContentValidationsElement newTableContentValidationsElement() {
@@ -222,6 +226,8 @@ public class OfficeSpreadsheetElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:data-pilot-tables}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:data-pilot-tables}
    */
@@ -235,6 +241,8 @@ public class OfficeSpreadsheetElement extends OdfElement {
   /**
    * Create child element {@odf.element table:database-ranges}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:database-ranges}
    */
   public TableDatabaseRangesElement newTableDatabaseRangesElement() {
@@ -246,6 +254,8 @@ public class OfficeSpreadsheetElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:dde-links}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:dde-links}
    */
@@ -259,6 +269,8 @@ public class OfficeSpreadsheetElement extends OdfElement {
   /**
    * Create child element {@odf.element table:label-ranges}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:label-ranges}
    */
   public TableLabelRangesElement newTableLabelRangesElement() {
@@ -270,6 +282,8 @@ public class OfficeSpreadsheetElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:named-expressions}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:named-expressions}
    */
@@ -283,6 +297,8 @@ public class OfficeSpreadsheetElement extends OdfElement {
   /**
    * Create child element {@odf.element table:table}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:table}
    */
   public TableTableElement newTableTableElement() {
@@ -294,6 +310,8 @@ public class OfficeSpreadsheetElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:tracked-changes}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:tracked-changes}
    */
@@ -327,6 +345,8 @@ public class OfficeSpreadsheetElement extends OdfElement {
   /**
    * Create child element {@odf.element text:dde-connection-decls}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:dde-connection-decls}
    */
   public TextDdeConnectionDeclsElement newTextDdeConnectionDeclsElement() {
@@ -338,6 +358,8 @@ public class OfficeSpreadsheetElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:sequence-decls}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sequence-decls}
    */
@@ -351,6 +373,8 @@ public class OfficeSpreadsheetElement extends OdfElement {
   /**
    * Create child element {@odf.element text:user-field-decls}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:user-field-decls}
    */
   public TextUserFieldDeclsElement newTextUserFieldDeclsElement() {
@@ -363,6 +387,8 @@ public class OfficeSpreadsheetElement extends OdfElement {
   /**
    * Create child element {@odf.element text:variable-decls}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:variable-decls}
    */
   public TextVariableDeclsElement newTextVariableDeclsElement() {
@@ -372,6 +398,12 @@ public class OfficeSpreadsheetElement extends OdfElement {
     return textVariableDecls;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -43,12 +43,16 @@
 #else
 #set ($superclass = 'OdfElement')
 #end
+##
 #if ($contextNode== "text:list-level-style")
 #set ($superclass = 'OdfStyleBase')
 #end
 #if ($useOdfStyleableShapeElement || $className=="DrawShapeElementBase")
 #set ($superclass = "OdfStyleableShapeElement")
 #set ($useOdfStyleableShapeElement = true) ## DrawShapeElementBase.java contextNode="draw:shape"
+#end
+#if ($contextNode== "number:data-style")
+#set ($superclass = 'DataStyleElement')
 #end
 ##
 ## Begin Code

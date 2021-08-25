@@ -215,6 +215,8 @@ public class TableContentValidationElement extends OdfElement {
   /**
    * Create child element {@odf.element office:event-listeners}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element office:event-listeners}
    */
   public OfficeEventListenersElement newOfficeEventListenersElement() {
@@ -226,6 +228,8 @@ public class TableContentValidationElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:error-macro}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:error-macro}
    */
@@ -239,6 +243,8 @@ public class TableContentValidationElement extends OdfElement {
   /**
    * Create child element {@odf.element table:error-message}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:error-message}
    */
   public TableErrorMessageElement newTableErrorMessageElement() {
@@ -251,6 +257,8 @@ public class TableContentValidationElement extends OdfElement {
   /**
    * Create child element {@odf.element table:help-message}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:help-message}
    */
   public TableHelpMessageElement newTableHelpMessageElement() {
@@ -260,6 +268,12 @@ public class TableContentValidationElement extends OdfElement {
     return tableHelpMessage;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

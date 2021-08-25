@@ -1834,7 +1834,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
    * Create child element {@odf.element style:columns}.
    *
    * @param foColumnCountValue the <code>Integer</code> value of <code>FoColumnCountAttribute</code>
-   *     , see {@odf.attribute fo:column-count} at specification Child element is new in Odf 1.2
+   *     , see {@odf.attribute fo:column-count} at specification
    * @return the element {@odf.element style:columns}
    */
   public StyleColumnsElement newStyleColumnsElement(int foColumnCountValue) {
@@ -1859,6 +1859,12 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     return styleFootnoteSep;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

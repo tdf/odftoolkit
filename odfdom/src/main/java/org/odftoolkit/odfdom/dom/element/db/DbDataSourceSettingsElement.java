@@ -67,8 +67,7 @@ public class DbDataSourceSettingsElement extends OdfElement {
    *     at specification
    * @param dbDataSourceSettingTypeValue the <code>String</code> value of <code>
    *     DbDataSourceSettingTypeAttribute</code>, see {@odf.attribute db:data-source-setting-type}
-   *     at specification Child element is new in Odf 1.2
-   *     <p>Child element is mandatory.
+   *     at specification Child element is mandatory.
    * @return the element {@odf.element db:data-source-setting}
    */
   public DbDataSourceSettingElement newDbDataSourceSettingElement(
@@ -81,6 +80,12 @@ public class DbDataSourceSettingsElement extends OdfElement {
     return dbDataSourceSetting;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

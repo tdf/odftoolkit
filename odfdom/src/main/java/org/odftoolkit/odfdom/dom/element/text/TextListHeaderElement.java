@@ -104,6 +104,8 @@ public class TextListHeaderElement extends OdfElement {
   /**
    * Create child element {@odf.element text:list}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:list}
    */
   public TextListElement newTextListElement() {
@@ -115,6 +117,8 @@ public class TextListHeaderElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:number}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:number}
    */
@@ -128,6 +132,8 @@ public class TextListHeaderElement extends OdfElement {
   /**
    * Create child element {@odf.element text:p}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:p}
    */
   public TextPElement newTextPElement() {
@@ -139,6 +145,8 @@ public class TextListHeaderElement extends OdfElement {
   /**
    * Create child element {@odf.element text:soft-page-break}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:soft-page-break}
    */
   public TextSoftPageBreakElement newTextSoftPageBreakElement() {
@@ -148,6 +156,12 @@ public class TextListHeaderElement extends OdfElement {
     return textSoftPageBreak;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

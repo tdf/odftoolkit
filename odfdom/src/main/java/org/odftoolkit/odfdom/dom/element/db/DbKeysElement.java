@@ -62,8 +62,7 @@ public class DbKeysElement extends OdfElement {
    * Create child element {@odf.element db:key}.
    *
    * @param dbTypeValue the <code>String</code> value of <code>DbTypeAttribute</code>, see
-   *     {@odf.attribute db:type} at specification Child element is new in Odf 1.2
-   *     <p>Child element is mandatory.
+   *     {@odf.attribute db:type} at specification Child element is mandatory.
    * @return the element {@odf.element db:key}
    */
   public DbKeyElement newDbKeyElement(String dbTypeValue) {
@@ -73,6 +72,12 @@ public class DbKeysElement extends OdfElement {
     return dbKey;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

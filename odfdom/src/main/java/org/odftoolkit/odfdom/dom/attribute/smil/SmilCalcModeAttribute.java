@@ -120,13 +120,13 @@ public class SmilCalcModeAttribute extends OdfAttribute {
     String defaultValue = null;
     if (parentElement != null) {
       if (parentElement instanceof AnimAnimateElement) {
-        defaultValue = DEFAULT_VALUE_DISCRETE;
+        defaultValue = "discrete";
       }
       if (parentElement instanceof AnimAnimateColorElement) {
-        defaultValue = DEFAULT_VALUE_DISCRETE;
+        defaultValue = "discrete";
       }
       if (parentElement instanceof AnimAnimateMotionElement) {
-        defaultValue = DEFAULT_VALUE_PACED;
+        defaultValue = "paced";
       }
     }
     return defaultValue;

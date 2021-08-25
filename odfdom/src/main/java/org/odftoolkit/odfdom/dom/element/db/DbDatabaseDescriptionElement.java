@@ -67,7 +67,7 @@ public class DbDatabaseDescriptionElement extends OdfElement {
    * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
    *     {@odf.attribute xlink:href} at specification
    * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
-   *     {@odf.attribute xlink:type} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute xlink:type} at specification
    * @return the element {@odf.element db:file-based-database}
    */
   public DbFileBasedDatabaseElement newDbFileBasedDatabaseElement(
@@ -85,7 +85,7 @@ public class DbDatabaseDescriptionElement extends OdfElement {
    * Create child element {@odf.element db:server-database}.
    *
    * @param dbTypeValue the <code>String</code> value of <code>DbTypeAttribute</code>, see
-   *     {@odf.attribute db:type} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute db:type} at specification
    * @return the element {@odf.element db:server-database}
    */
   public DbServerDatabaseElement newDbServerDatabaseElement(String dbTypeValue) {
@@ -96,6 +96,12 @@ public class DbDatabaseDescriptionElement extends OdfElement {
     return dbServerDatabase;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

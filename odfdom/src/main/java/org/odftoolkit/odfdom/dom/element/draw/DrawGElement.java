@@ -121,6 +121,8 @@ public class DrawGElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element dr3d:scene}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element dr3d:scene}
    */
   public Dr3dSceneElement newDr3dSceneElement() {
@@ -136,7 +138,7 @@ public class DrawGElement extends DrawShapeElementBase {
    * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
    *     {@odf.attribute xlink:href} at specification
    * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
-   *     {@odf.attribute xlink:type} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute xlink:type} at specification
    * @return the element {@odf.element draw:a}
    */
   public DrawAElement newDrawAElement(String xlinkHrefValue, String xlinkTypeValue) {
@@ -150,6 +152,8 @@ public class DrawGElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element draw:caption}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:caption}
    */
   public DrawCaptionElement newDrawCaptionElement() {
@@ -161,6 +165,8 @@ public class DrawGElement extends DrawShapeElementBase {
 
   /**
    * Create child element {@odf.element draw:circle}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:circle}
    */
@@ -204,6 +210,8 @@ public class DrawGElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element draw:custom-shape}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:custom-shape}
    */
   public DrawCustomShapeElement newDrawCustomShapeElement() {
@@ -215,6 +223,8 @@ public class DrawGElement extends DrawShapeElementBase {
 
   /**
    * Create child element {@odf.element draw:ellipse}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:ellipse}
    */
@@ -228,6 +238,8 @@ public class DrawGElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element draw:frame}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:frame}
    */
   public DrawFrameElement newDrawFrameElement() {
@@ -239,6 +251,8 @@ public class DrawGElement extends DrawShapeElementBase {
 
   /**
    * Create child element {@odf.element draw:g}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:g}
    */
@@ -327,6 +341,8 @@ public class DrawGElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element draw:page-thumbnail}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:page-thumbnail}
    */
   public DrawPageThumbnailElement newDrawPageThumbnailElement() {
@@ -393,6 +409,8 @@ public class DrawGElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element draw:rect}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:rect}
    */
   public DrawRectElement newDrawRectElement() {
@@ -424,6 +442,8 @@ public class DrawGElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element office:event-listeners}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element office:event-listeners}
    */
   public OfficeEventListenersElement newOfficeEventListenersElement() {
@@ -436,6 +456,8 @@ public class DrawGElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element svg:desc}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element svg:desc}
    */
   public SvgDescElement newSvgDescElement() {
@@ -447,6 +469,8 @@ public class DrawGElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element svg:title}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element svg:title}
    */
   public SvgTitleElement newSvgTitleElement() {
@@ -456,6 +480,12 @@ public class DrawGElement extends DrawShapeElementBase {
     return svgTitle;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

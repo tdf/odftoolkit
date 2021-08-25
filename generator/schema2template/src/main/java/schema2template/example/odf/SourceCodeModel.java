@@ -36,7 +36,7 @@ import schema2template.model.XMLModel;
 
 /**
  * Model for Java specific enhancements like common base classes for elements and Java valuetypes
- * for valuetypes used in schema.
+ * for valuetypes used in schema. Capsulates information from the from the config file.
  */
 public class SourceCodeModel {
 
