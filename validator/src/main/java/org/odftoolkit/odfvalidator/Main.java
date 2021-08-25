@@ -230,7 +230,7 @@ public class Main {
             aValidator.validate(
                 aOut, aFileNames, aExcludeRegExp, eMode, bRecursive, aFilterFileName);
       }
-      System.exit(bHasErrors ? 1 : 0);
+      System.exit(bHasErrors ? 2 : 0);
     } catch (ODFValidatorException e) {
       System.err.println(e.getMessage());
       System.err.println("Validation aborted.");
