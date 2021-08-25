@@ -92,6 +92,8 @@ public class TableTableRowGroupElement extends OdfElement {
   /**
    * Create child element {@odf.element table:table-header-rows}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:table-header-rows}
    */
   public TableTableHeaderRowsElement newTableTableHeaderRowsElement() {
@@ -103,6 +105,8 @@ public class TableTableRowGroupElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:table-row}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:table-row}
    */
@@ -116,6 +120,8 @@ public class TableTableRowGroupElement extends OdfElement {
   /**
    * Create child element {@odf.element table:table-row-group}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:table-row-group}
    */
   public TableTableRowGroupElement newTableTableRowGroupElement() {
@@ -127,6 +133,8 @@ public class TableTableRowGroupElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:table-rows}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:table-rows}
    */
@@ -140,6 +148,8 @@ public class TableTableRowGroupElement extends OdfElement {
   /**
    * Create child element {@odf.element text:soft-page-break}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:soft-page-break}
    */
   public TextSoftPageBreakElement newTextSoftPageBreakElement() {
@@ -149,6 +159,12 @@ public class TableTableRowGroupElement extends OdfElement {
     return textSoftPageBreak;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

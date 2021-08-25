@@ -19,13 +19,15 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  *
- * <p>**********************************************************************
+ * <p>*********************************************************************
  */
 package schema2template.model;
 
 import com.sun.msv.grammar.Expression;
+import com.sun.msv.grammar.Grammar;
 import com.sun.msv.reader.trex.ng.RELAXNGReader;
 import com.sun.msv.reader.xmlschema.XMLSchemaReader;
+import com.sun.msv.writer.relaxng.RELAXNGWriter;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
@@ -34,7 +36,12 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.SAXParserFactory;
+import org.apache.xml.serialize.OutputFormat;
+import org.apache.xml.serialize.XMLSerializer;
+import org.xml.sax.SAXException;
 
 /**
  * The most important model, the first access to the XML Schema information.
@@ -50,6 +57,7 @@ public class XMLModel {
   Map<String, PuzzlePiece> mNameElementMap;
   Map<String, PuzzlePiece> mNameAttributeMap;
   public Expression mRootExpression;
+  private Grammar mGrammar;
   public String mLastSchemaFileName;
   private String mVersionLabel;
 
@@ -61,17 +69,23 @@ public class XMLModel {
    */
   public XMLModel(File schemaFile, String versionLabel) {
     mVersionLabel = versionLabel;
-    mRootExpression = loadSchema(schemaFile);
+    mGrammar = loadSchema(schemaFile);
+    mRootExpression = mGrammar.getTopLevel();
     String absolutePath = schemaFile.getAbsolutePath();
     mLastSchemaFileName =
         absolutePath.substring(
             absolutePath.lastIndexOf(File.separatorChar) + 1, absolutePath.length());
 
-    PuzzlePiece.extractPuzzlePieces(mRootExpression, mElements, mAttributes, mLastSchemaFileName);
+    PuzzlePiece.extractPuzzlePieces(mGrammar, mElements, mAttributes, mLastSchemaFileName);
     mElements.makeImmutable();
     mAttributes.makeImmutable();
     mNameElementMap = createMap(mElements);
     mNameAttributeMap = createMap(mAttributes);
+  }
+
+  /** @return the MSV Grammar this model is based upon. */
+  public Grammar getGrammar() {
+    return mGrammar;
   }
 
   /** @return the version label identifying this schema (XML grammar) */
@@ -114,7 +128,7 @@ public class XMLModel {
    * @param rngFile Schema file (RelaxNG or W3C schema)
    * @return MSV Expression Tree (more specific: The tree's MSV root expression)
    */
-  public static Expression loadSchema(File rngFile) {
+  public static Grammar loadSchema(File rngFile) {
     return loadSchema(rngFile.getAbsolutePath());
   }
 
@@ -124,25 +138,73 @@ public class XMLModel {
    * @param rngFilePath Schema file (RelaxNG or W3C schema)
    * @return MSV Expression Tree (more specific: The tree's MSV root expression)
    */
-  public static Expression loadSchema(String rngFilePath) {
+  public static Grammar loadSchema(String rngFilePath) {
     SAXParserFactory factory = SAXParserFactory.newInstance();
     factory.setNamespaceAware(true);
     // Parsing the Schema with MSV
     // 4-DEBUG: DebugController ignoreController = new DebugController(true, false);
     com.sun.msv.reader.util.IgnoreController ignoreController =
         new com.sun.msv.reader.util.IgnoreController();
-    Expression root = null;
+    Grammar grammar = null;
     if (rngFilePath.endsWith(".rng")) {
-      root = RELAXNGReader.parse(rngFilePath, factory, ignoreController).getTopLevel();
+      try {
+        grammar = RELAXNGReader.parse(rngFilePath, factory, ignoreController);
+        // reuse the trunk/core name of the grammar file currently loaded
+        String rngFileTrunkName =
+            rngFilePath.substring(
+                rngFilePath.lastIndexOf(File.separatorChar) + 1, rngFilePath.indexOf(".rng"));
+        // create a output path for the run-time MSV grammar model as XML file (dump)
+        String outputFilePath =
+            System.getProperty("user.dir")
+                + File.separator
+                + "target"
+                + File.separator
+                + "msv-dump_"
+                + rngFileTrunkName
+                + ".xml";
+        // writeGrammar(grammar, new PrintStream(new FileOutputStream(outputFilePath)));
+
+        //        OdfFamilyPropertiesPatternMatcher matcher = new
+        // OdfFamilyPropertiesPatternMatcher(grammar);
+        //        Map<String, List<String>> results = matcher.getFamilyProperties();
+        //        if(results != null){
+        //            System.out.println("MAPS: " + results.toString());
+        //        }else System.out.println("MAPS: EMPTY!!");
+
+        //            RELAXNGWriter writer = new RELAXNGWriter();
+        //            writer.setDocumentHandler(new Echo(null));
+        //            writer.write(grammar);
+        //            // adding SAX1 interface documentHandler (also adapting contentHandler SAX2)
+        ////            System.setProperty("org.xml.sax.parser",
+        // "com.sun.msv.writer.relaxng.RELAXNGWriter");
+        ////            ParserAdapter parserAdapter = new ParserAdapter();
+        ////            writer.setDocumentHandler(new
+        // ContentHandlerAdaptor(parserAdapter.getContentHandler()));
+        //            writer.setDocumentHandler(new Echo(null));
+        //            writer.write(grammar);
+      } catch (Exception ex) {
+        Logger.getLogger(XMLModel.class.getName()).log(Level.SEVERE, null, ex);
+      }
     } else if (rngFilePath.endsWith(".xsd")) {
-      root = XMLSchemaReader.parse(rngFilePath, factory, ignoreController).getTopLevel();
+      grammar = XMLSchemaReader.parse(rngFilePath, factory, ignoreController);
     } else {
       throw new RuntimeException("Reader not chosen for given schema suffix!");
     }
-    if (root == null) {
+    if (grammar == null) {
       throw new RuntimeException("Schema could not be parsed.");
     }
-    return root;
+    return grammar;
+  }
+
+  /** Writes a grammar to the specified output. */
+  public static void writeGrammar(Grammar g, java.io.OutputStream out) throws SAXException {
+
+    RELAXNGWriter writer = new RELAXNGWriter();
+    // use XMLSerializer of Apache to serialize SAX event into plain text.
+    // OutputFormat specifies "pretty printing".
+    writer.setDocumentHandler(new XMLSerializer(out, new OutputFormat("xml", null, true)));
+    // visit TREXGrammar and generate its XML representation.
+    writer.write(g);
   }
 
   /**

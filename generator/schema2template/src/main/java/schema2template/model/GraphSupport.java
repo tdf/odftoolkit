@@ -109,7 +109,7 @@ class GraphSupport {
       v = createVertex(g, exp);
     }
 
-    // stop building the graph at element and attribtue children
+    // stop building the graph after first element and attribtue children
     addGraphProperties(g, v, parentV, exp, parentExp);
     if (!(exp instanceof NameClassAndExpression) || parentExp == null) {
       List<Expression> children = (List<Expression>) exp.visit(CHILD_VISITOR);

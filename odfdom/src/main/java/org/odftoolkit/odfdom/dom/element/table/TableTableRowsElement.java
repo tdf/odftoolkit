@@ -63,6 +63,8 @@ public class TableTableRowsElement extends OdfElement {
   /**
    * Create child element {@odf.element table:table-row}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * <p>Child element is mandatory.
    *
    * @return the element {@odf.element table:table-row}
@@ -77,6 +79,8 @@ public class TableTableRowsElement extends OdfElement {
   /**
    * Create child element {@odf.element text:soft-page-break}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:soft-page-break}
    */
   public TextSoftPageBreakElement newTextSoftPageBreakElement() {
@@ -86,6 +90,12 @@ public class TableTableRowsElement extends OdfElement {
     return textSoftPageBreak;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

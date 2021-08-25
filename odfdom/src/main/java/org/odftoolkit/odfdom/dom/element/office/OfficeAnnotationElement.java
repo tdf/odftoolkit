@@ -415,6 +415,8 @@ public class OfficeAnnotationElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element dc:creator}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element dc:creator}
    */
   public DcCreatorElement newDcCreatorElement() {
@@ -427,6 +429,8 @@ public class OfficeAnnotationElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element dc:date}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element dc:date}
    */
   public DcDateElement newDcDateElement() {
@@ -437,6 +441,8 @@ public class OfficeAnnotationElement extends DrawShapeElementBase {
 
   /**
    * Create child element {@odf.element meta:date-string}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element meta:date-string}
    */
@@ -450,6 +456,8 @@ public class OfficeAnnotationElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element text:list}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:list}
    */
   public TextListElement newTextListElement() {
@@ -462,6 +470,8 @@ public class OfficeAnnotationElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element text:p}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:p}
    */
   public TextPElement newTextPElement() {
@@ -470,6 +480,12 @@ public class OfficeAnnotationElement extends DrawShapeElementBase {
     return textP;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

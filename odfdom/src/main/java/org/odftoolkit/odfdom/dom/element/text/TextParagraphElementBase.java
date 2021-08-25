@@ -28,7 +28,6 @@
  */
 package org.odftoolkit.odfdom.dom.element.text;
 
-import org.odftoolkit.odfdom.changes.TextContainingElement;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextClassNamesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextCondStyleNameAttribute;
@@ -39,22 +38,25 @@ import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlContentAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlDatatypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlPropertyAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
-import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
-import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
-import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
-/** DOM implementation of OpenDocument base element */
-public abstract class TextParagraphElementBase extends TextContainingElement {
+/**
+ * DOM implementation of OpenDocument base element
+ *
+ * <p>This class can have any org.w3c.dom.Attribute attribute.
+ */
+public abstract class TextParagraphElementBase extends OdfStylableElement {
 
   /**
    * Create the instance of <code>TextParagraphElementBase</code>
    *
    * @param ownerDoc The type is <code>OdfFileDom</code>
+   * @param elementName The type is <code>OdfName</code>
+   * @param styleFamily The type is <code>OdfStyleFamily</code>
+   * @param styleAttrName The type is <code>OdfName</code>
    */
   public TextParagraphElementBase(
       OdfFileDom ownerDoc, OdfName elementName, OdfStyleFamily styleFamily, OdfName styleAttrName) {
@@ -63,9 +65,8 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TextClassNamesAttribute</code>
-   * , See {
+   * , See {@odf.attribute text:class-names}
    *
-   * @odf.attribute text:class-names}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -79,9 +80,9 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TextClassNamesAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>TextClassNamesAttribute</code> , See
+   * {@odf.attribute text:class-names}
    *
-   * @odf.attribute text:class-names}
    * @param textClassNamesValue The type is <code>String</code>
    */
   public void setTextClassNamesAttribute(String textClassNamesValue) {
@@ -92,9 +93,8 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TextCondStyleNameAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute text:cond-style-name}
    *
-   * @odf.attribute text:cond-style-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -109,9 +109,8 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>TextCondStyleNameAttribute</code> , See
-   * {
+   * {@odf.attribute text:cond-style-name}
    *
-   * @odf.attribute text:cond-style-name}
    * @param textCondStyleNameValue The type is <code>String</code>
    */
   public void setTextCondStyleNameAttribute(String textCondStyleNameValue) {
@@ -122,9 +121,9 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
   }
 
   /**
-   * Receives the value of the ODFDOM attribute representation <code>TextIdAttribute</code> , See {
+   * Receives the value of the ODFDOM attribute representation <code>TextIdAttribute</code> , See
+   * {@odf.attribute text:id}
    *
-   * @odf.attribute text:id}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -137,9 +136,9 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TextIdAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>TextIdAttribute</code> , See
+   * {@odf.attribute text:id}
    *
-   * @odf.attribute text:id}
    * @param textIdValue The type is <code>String</code>
    */
   public void setTextIdAttribute(String textIdValue) {
@@ -150,9 +149,8 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TextStyleNameAttribute</code> ,
-   * See {
+   * See {@odf.attribute text:style-name}
    *
-   * @odf.attribute text:style-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -166,9 +164,9 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TextStyleNameAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>TextStyleNameAttribute</code> , See
+   * {@odf.attribute text:style-name}
    *
-   * @odf.attribute text:style-name}
    * @param textStyleNameValue The type is <code>String</code>
    */
   public void setTextStyleNameAttribute(String textStyleNameValue) {
@@ -179,9 +177,8 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>XhtmlAboutAttribute</code> ,
-   * See {
+   * See {@odf.attribute xhtml:about}
    *
-   * @odf.attribute xhtml:about}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -195,23 +192,21 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlAboutAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>XhtmlAboutAttribute</code> , See
+   * {@odf.attribute xhtml:about}
    *
-   * @odf.attribute xhtml:about}
    * @param xhtmlAboutValue The type is <code>String</code>
    */
   public void setXhtmlAboutAttribute(String xhtmlAboutValue) {
     XhtmlAboutAttribute attr = new XhtmlAboutAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlAboutValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>XhtmlContentAttribute</code> ,
-   * See {
+   * See {@odf.attribute xhtml:content}
    *
-   * @odf.attribute xhtml:content}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -225,23 +220,21 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlContentAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>XhtmlContentAttribute</code> , See
+   * {@odf.attribute xhtml:content}
    *
-   * @odf.attribute xhtml:content}
    * @param xhtmlContentValue The type is <code>String</code>
    */
   public void setXhtmlContentAttribute(String xhtmlContentValue) {
     XhtmlContentAttribute attr = new XhtmlContentAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlContentValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>XhtmlDatatypeAttribute</code> ,
-   * See {
+   * See {@odf.attribute xhtml:datatype}
    *
-   * @odf.attribute xhtml:datatype}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -255,23 +248,21 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlDatatypeAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>XhtmlDatatypeAttribute</code> , See
+   * {@odf.attribute xhtml:datatype}
    *
-   * @odf.attribute xhtml:datatype}
    * @param xhtmlDatatypeValue The type is <code>String</code>
    */
   public void setXhtmlDatatypeAttribute(String xhtmlDatatypeValue) {
     XhtmlDatatypeAttribute attr = new XhtmlDatatypeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlDatatypeValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>XhtmlPropertyAttribute</code> ,
-   * See {
+   * See {@odf.attribute xhtml:property}
    *
-   * @odf.attribute xhtml:property}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -285,22 +276,21 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlPropertyAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>XhtmlPropertyAttribute</code> , See
+   * {@odf.attribute xhtml:property}
    *
-   * @odf.attribute xhtml:property}
    * @param xhtmlPropertyValue The type is <code>String</code>
    */
   public void setXhtmlPropertyAttribute(String xhtmlPropertyValue) {
     XhtmlPropertyAttribute attr = new XhtmlPropertyAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlPropertyValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
-   * Receives the value of the ODFDOM attribute representation <code>XmlIdAttribute</code> , See {
+   * Receives the value of the ODFDOM attribute representation <code>XmlIdAttribute</code> , See
+   * {@odf.attribute xml:id}
    *
-   * @odf.attribute xml:id}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -313,82 +303,14 @@ public abstract class TextParagraphElementBase extends TextContainingElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XmlIdAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>XmlIdAttribute</code> , See
+   * {@odf.attribute xml:id}
    *
-   * @odf.attribute xml:id}
    * @param xmlIdValue The type is <code>String</code>
    */
   public void setXmlIdAttribute(String xmlIdValue) {
     XmlIdAttribute attr = new XmlIdAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xmlIdValue);
-  }
-
-  /**
-   * Splitting the element at the given position into two halves
-   *
-   * <p>If the paragraph does have an automatic style with a master-page, which results into a page
-   * break before the paragraph, this page break will be removed for the new second half. For
-   * paragraph containing template styles the follow-up style should be chosen.
-   *
-   * @param posStart The logical position of the first character (or other paragraph child
-   *     component) that will be moved to the beginning of the new paragraph.
-   * @return the new created second text container
-   */
-  @Override
-  public OdfElement split(int posStart) {
-    TextParagraphElementBase newSecondElement = (TextParagraphElementBase) super.split(posStart);
-    OdfStyle autoStyle = newSecondElement.getAutomaticStyle();
-
-    if (autoStyle != null) {
-      OdfStylePropertiesBase paragraphProps =
-          autoStyle.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties);
-      if (autoStyle.getStyleMasterPageNameAttribute() != null || paragraphProps != null) {
-        StyleStyleElement newStyle = newSecondElement.getOrCreateUnqiueAutomaticStyle();
-        if (autoStyle.getStyleMasterPageNameAttribute() != null) {
-          newStyle.removeAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "master-page-name");
-        }
-        // overwrite the paragraph properties from the source one, with the cloned element's
-        paragraphProps = newStyle.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties);
-        // no paragraph page break should be inherited
-        if (paragraphProps != null) {
-          paragraphProps.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "break-before");
-          paragraphProps.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "break-after");
-        }
-      }
-    }
-    return newSecondElement;
-  }
-
-  /**
-   * Set text content.Only elements which are allowed to have text content offer this method.
-   *
-   * @param content the parapgraph text content
-   */
-  @Override
-  public void setTextContent(String content) {
-    super.setTextContent(content);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
-  }
-
-  @Override
-  protected void onRemoveNode() {
-    super.onRemoveNode();
-    ((OdfFileDom) this.ownerDocument).getInContentMetadataCache().remove(this);
-  }
-
-  @Override
-  protected void onInsertNode() {
-    super.onInsertNode();
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
-  }
-
-  @Override
-  /**
-   * If this element is the first - perhaps only - element of a logical group of XML elements. For
-   * instance: table, paragraph
-   */
-  public boolean isComponentRoot() {
-    return true;
   }
 }

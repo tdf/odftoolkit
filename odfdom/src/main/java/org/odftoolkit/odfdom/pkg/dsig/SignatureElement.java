@@ -32,17 +32,12 @@ package org.odftoolkit.odfdom.pkg.dsig;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
-/**
- * Data signature implementation of OpenDocument element {@odf.element ds:Signature}.
- *
- * <p>This class can have any org.w3c.dom.Element child element. This class can have any
- * org.w3c.dom.Attribute attribute.
- */
+/** Data signature implementation of OpenDocument element {@odf.element Signature}. */
 public class SignatureElement extends OdfElement {
 
-  public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.DS, "Signature");
+  public static final OdfName ELEMENT_NAME =
+      OdfName.newName("http://www.w3.org/2000/09/xmldsig#", "ds:Signature");
 
   /**
    * Create the instance of <code>SignatureElement</code>
@@ -56,16 +51,15 @@ public class SignatureElement extends OdfElement {
   /**
    * Get the element name
    *
-   * @return return <code>OdfName</code> the name of element {@odf.element ds:Signature}.
+   * @return return <code>OdfName</code> the name of element {@odf.element Signature}.
    */
-  @Override
   public OdfName getOdfName() {
     return ELEMENT_NAME;
   }
 
   /** Add text content. Only elements which are allowed to have text content offer this method. */
   public void newTextNode(String content) {
-    if (content != null && !content.isEmpty()) {
+    if (content != null && !content.equals("")) {
       this.appendChild(this.getOwnerDocument().createTextNode(content));
     }
   }

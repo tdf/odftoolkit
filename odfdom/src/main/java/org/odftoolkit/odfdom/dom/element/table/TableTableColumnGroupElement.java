@@ -92,6 +92,8 @@ public class TableTableColumnGroupElement extends OdfElement {
   /**
    * Create child element {@odf.element table:table-column}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:table-column}
    */
   public TableTableColumnElement newTableTableColumnElement() {
@@ -103,6 +105,8 @@ public class TableTableColumnGroupElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:table-column-group}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:table-column-group}
    */
@@ -116,6 +120,8 @@ public class TableTableColumnGroupElement extends OdfElement {
   /**
    * Create child element {@odf.element table:table-columns}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:table-columns}
    */
   public TableTableColumnsElement newTableTableColumnsElement() {
@@ -128,6 +134,8 @@ public class TableTableColumnGroupElement extends OdfElement {
   /**
    * Create child element {@odf.element table:table-header-columns}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:table-header-columns}
    */
   public TableTableHeaderColumnsElement newTableTableHeaderColumnsElement() {
@@ -137,6 +145,12 @@ public class TableTableColumnGroupElement extends OdfElement {
     return tableTableHeaderColumns;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

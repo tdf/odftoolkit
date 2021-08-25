@@ -120,6 +120,8 @@ public class TextNoteElement extends OdfElement {
   /**
    * Create child element {@odf.element text:note-body}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * <p>Child element is mandatory.
    *
    * @return the element {@odf.element text:note-body}
@@ -134,6 +136,8 @@ public class TextNoteElement extends OdfElement {
   /**
    * Create child element {@odf.element text:note-citation}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * <p>Child element is mandatory.
    *
    * @return the element {@odf.element text:note-citation}
@@ -145,6 +149,12 @@ public class TextNoteElement extends OdfElement {
     return textNoteCitation;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

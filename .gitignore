@@ -204,3 +204,4 @@ buildNumber.properties
 /xslt-runner/nbproject/private/
 /xslt-runner-task/nbproject/private/
 /xslt-runner/nbproject/
+/generator/schema2template/nbproject/

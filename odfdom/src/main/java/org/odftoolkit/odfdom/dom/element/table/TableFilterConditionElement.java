@@ -215,7 +215,7 @@ public class TableFilterConditionElement extends OdfElement {
    * Create child element {@odf.element table:filter-set-item}.
    *
    * @param tableValueValue the <code>String</code> value of <code>TableValueAttribute</code>, see
-   *     {@odf.attribute table:value} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute table:value} at specification
    * @return the element {@odf.element table:filter-set-item}
    */
   public TableFilterSetItemElement newTableFilterSetItemElement(String tableValueValue) {
@@ -226,6 +226,12 @@ public class TableFilterConditionElement extends OdfElement {
     return tableFilterSetItem;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

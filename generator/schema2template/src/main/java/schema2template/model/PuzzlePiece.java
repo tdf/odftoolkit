@@ -27,6 +27,7 @@ import com.sun.msv.grammar.AttributeExp;
 import com.sun.msv.grammar.DataExp;
 import com.sun.msv.grammar.ElementExp;
 import com.sun.msv.grammar.Expression;
+import com.sun.msv.grammar.Grammar;
 import com.sun.msv.grammar.NameClassAndExpression;
 import com.sun.msv.grammar.ValueExp;
 import java.util.ArrayList;
@@ -107,7 +108,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
     // evaluateExpression(exp);
   }
 
-  static String getName(NameClassAndExpression exp) {
+  public static String getName(NameClassAndExpression exp) {
     String name = null;
     List<String> names = (List<String>) exp.getNameClass().visit(NAME_VISITOR);
     if (names == null) {
@@ -424,13 +425,13 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
    * @param schemaFileName file name of the XML grammar file. Used as folder name of GraphML files.
    */
   public static void extractPuzzlePieces(
-      Expression root,
+      Grammar grammar,
       PuzzlePieceSet newElementSet,
       PuzzlePieceSet newAttributeSet,
       String schemaFileName) {
     // e.g. the newElementSet is the set to iterate later in the template
-    extractTypedPuzzlePieces(root, newElementSet, ElementExp.class);
-    extractTypedPuzzlePieces(root, newAttributeSet, AttributeExp.class);
+    extractTypedPuzzlePieces(grammar, newElementSet, ElementExp.class);
+    extractTypedPuzzlePieces(grammar, newAttributeSet, AttributeExp.class);
 
     /* original compareTo
     assert(!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1628);
@@ -489,7 +490,8 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 
   // Extracts all Definitions of Type [ATTRIBUTE, ELEMENT] from MSV tree.
   private static <T extends Expression> void extractTypedPuzzlePieces(
-      Expression root, PuzzlePieceSet setToBeFilled, Class<T> superclass) {
+      Grammar grammar, PuzzlePieceSet setToBeFilled, Class<T> superclass) {
+    Expression root = grammar.getTopLevel();
     MSVExpressionIterator iter = new MSVExpressionIterator(root, superclass);
     HashMap<String, List<PuzzlePiece>> multipleMap = new HashMap<String, List<PuzzlePiece>>();
 

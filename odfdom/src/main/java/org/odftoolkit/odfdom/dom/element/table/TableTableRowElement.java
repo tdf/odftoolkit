@@ -38,21 +38,14 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
-/**
- * DOM implementation of OpenDocument element {
- *
- * @odf.element table:table-row}.
- */
+/** DOM implementation of OpenDocument element {@odf.element table:table-row}. */
 public class TableTableRowElement extends OdfStylableElement {
 
   public static final OdfName ELEMENT_NAME =
       OdfName.newName(OdfDocumentNamespace.TABLE, "table-row");
-  private static final String VISIBLE = "visible";
-  private static final String COLLAPSE = "collapse";
 
   /**
    * Create the instance of <code>TableTableRowElement</code>
@@ -70,8 +63,7 @@ public class TableTableRowElement extends OdfStylableElement {
   /**
    * Get the element name
    *
-   * @return return <code>OdfName</code> the name of element {
-   * @odf.element table:table-row}.
+   * @return return <code>OdfName</code> the name of element {@odf.element table:table-row}.
    */
   public OdfName getOdfName() {
     return ELEMENT_NAME;
@@ -79,9 +71,8 @@ public class TableTableRowElement extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * TableDefaultCellStyleNameAttribute</code> , See {
+   * TableDefaultCellStyleNameAttribute</code> , See {@odf.attribute table:default-cell-style-name}
    *
-   * @odf.attribute table:default-cell-style-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -97,9 +88,8 @@ public class TableTableRowElement extends OdfStylableElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>TableDefaultCellStyleNameAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute table:default-cell-style-name}
    *
-   * @odf.attribute table:default-cell-style-name}
    * @param tableDefaultCellStyleNameValue The type is <code>String</code>
    */
   public void setTableDefaultCellStyleNameAttribute(String tableDefaultCellStyleNameValue) {
@@ -111,9 +101,8 @@ public class TableTableRowElement extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * TableNumberRowsRepeatedAttribute</code> , See {
+   * TableNumberRowsRepeatedAttribute</code> , See {@odf.attribute table:number-rows-repeated}
    *
-   * @odf.attribute table:number-rows-repeated}
    * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
@@ -129,9 +118,8 @@ public class TableTableRowElement extends OdfStylableElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>TableNumberRowsRepeatedAttribute</code>
-   * , See {
+   * , See {@odf.attribute table:number-rows-repeated}
    *
-   * @odf.attribute table:number-rows-repeated}
    * @param tableNumberRowsRepeatedValue The type is <code>Integer</code>
    */
   public void setTableNumberRowsRepeatedAttribute(Integer tableNumberRowsRepeatedValue) {
@@ -143,9 +131,8 @@ public class TableTableRowElement extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableStyleNameAttribute</code>
-   * , See {
+   * , See {@odf.attribute table:style-name}
    *
-   * @odf.attribute table:style-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -159,9 +146,9 @@ public class TableTableRowElement extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TableStyleNameAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>TableStyleNameAttribute</code> , See
+   * {@odf.attribute table:style-name}
    *
-   * @odf.attribute table:style-name}
    * @param tableStyleNameValue The type is <code>String</code>
    */
   public void setTableStyleNameAttribute(String tableStyleNameValue) {
@@ -172,9 +159,8 @@ public class TableTableRowElement extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableVisibilityAttribute</code>
-   * , See {
+   * , See {@odf.attribute table:visibility}
    *
-   * @odf.attribute table:visibility}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -188,9 +174,9 @@ public class TableTableRowElement extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TableVisibilityAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>TableVisibilityAttribute</code> , See
+   * {@odf.attribute table:visibility}
    *
-   * @odf.attribute table:visibility}
    * @param tableVisibilityValue The type is <code>String</code>
    */
   public void setTableVisibilityAttribute(String tableVisibilityValue) {
@@ -200,9 +186,9 @@ public class TableTableRowElement extends OdfStylableElement {
   }
 
   /**
-   * Receives the value of the ODFDOM attribute representation <code>XmlIdAttribute</code> , See {
+   * Receives the value of the ODFDOM attribute representation <code>XmlIdAttribute</code> , See
+   * {@odf.attribute xml:id}
    *
-   * @odf.attribute xml:id}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -215,9 +201,9 @@ public class TableTableRowElement extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XmlIdAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>XmlIdAttribute</code> , See
+   * {@odf.attribute xml:id}
    *
-   * @odf.attribute xml:id}
    * @param xmlIdValue The type is <code>String</code>
    */
   public void setXmlIdAttribute(String xmlIdValue) {
@@ -227,17 +213,13 @@ public class TableTableRowElement extends OdfStylableElement {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element table:covered-table-cell}.
    *
-   * @odf.element table:covered-table-cell}.
-   * @param officeValueValue the <code>Double</code> value * of <code>OfficeValueAttribute</code>,
-   *     see {
-   * @odf.attribute office:value} at specification
-   * @param officeValueTypeValue the <code>String</code> value * of <code>OfficeValueTypeAttribute
-   *     </code>, see {
-   * @odf.attribute office:value-type} at specification
-   * @return the element {
-   * @odf.element table:covered-table-cell}
+   * @param officeValueValue the <code>Double</code> value of <code>OfficeValueAttribute</code>, see
+   *     {@odf.attribute office:value} at specification
+   * @param officeValueTypeValue the <code>String</code> value of <code>OfficeValueTypeAttribute
+   *     </code>, see {@odf.attribute office:value-type} at specification
+   * @return the element {@odf.element table:covered-table-cell}
    */
   public TableCoveredTableCellElement newTableCoveredTableCellElement(
       double officeValueValue, String officeValueTypeValue) {
@@ -250,17 +232,13 @@ public class TableTableRowElement extends OdfStylableElement {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element table:table-cell}.
    *
-   * @odf.element table:table-cell}.
-   * @param officeValueValue the <code>Double</code> value * of <code>OfficeValueAttribute</code>,
-   *     see {
-   * @odf.attribute office:value} at specification
-   * @param officeValueTypeValue the <code>String</code> value * of <code>OfficeValueTypeAttribute
-   *     </code>, see {
-   * @odf.attribute office:value-type} at specification
-   * @return the element {
-   * @odf.element table:table-cell}
+   * @param officeValueValue the <code>Double</code> value of <code>OfficeValueAttribute</code>, see
+   *     {@odf.attribute office:value} at specification
+   * @param officeValueTypeValue the <code>String</code> value of <code>OfficeValueTypeAttribute
+   *     </code>, see {@odf.attribute office:value-type} at specification
+   * @return the element {@odf.element table:table-cell}
    */
   public TableTableCellElement newTableTableCellElement(
       double officeValueValue, String officeValueTypeValue) {
@@ -272,6 +250,12 @@ public class TableTableRowElement extends OdfStylableElement {
     return tableTableCell;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -280,92 +264,5 @@ public class TableTableRowElement extends OdfStylableElement {
     } else {
       visitor.visit(this);
     }
-  }
-
-  @Override
-  /**
-   * If this element is the first - perhaps only - element of a logical group of XML elements. For
-   * instance: table, paragraph
-   */
-  public boolean isComponentRoot() {
-    return true;
-  }
-
-  /** Changes the visibility of the @table:visibility attributes */
-  public void setVisiblity(Boolean show) {
-    // the default is visible ("true")
-    boolean isVisible = Boolean.TRUE;
-    if (hasAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "visibility")) {
-      isVisible = VISIBLE.equals(getAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "visibility"));
-    }
-    if (show && !isVisible || !show && isVisible) {
-      if (show) {
-        removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "visible");
-      } else {
-        setAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "table:visibility", COLLAPSE);
-      }
-    }
-  }
-
-  @Override
-  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
-  /** @return the component size of a heading, which is always 1 */
-  public boolean isRepeatable() {
-    return true;
-  }
-
-  @Override
-  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
-  /** @return the component size of a heading, which is always 1 */
-  public void setRepetition(int repetition) {
-    if (repetition >= 0) {
-      setTableNumberRowsRepeatedAttribute(repetition);
-    }
-  }
-
-  @Override
-  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
-  /** @return the component size of a heading, which is always 1 */
-  public int getRepetition() {
-    Integer repeated = getTableNumberRowsRepeatedAttribute();
-    if (repeated == null) {
-      repeated = 1;
-    }
-    return repeated;
-  }
-
-  /**
-   * Splitting the element at the given position into two halves
-   *
-   * @param posStart The split position. The start of the second half.
-   * @return the new created second element (or if posStart was less than 1 the original element)
-   */
-  @Override
-  public OdfElement split(int posStart) {
-    TableTableRowElement newElement = this;
-    if (posStart > 0) {
-      newElement = (TableTableRowElement) this.cloneNode(true);
-      int repeated = getTableNumberRowsRepeatedAttribute();
-      if (repeated > 1) {
-        if (posStart > 1) {
-          this.setTableNumberRowsRepeatedAttribute(posStart);
-        } else {
-          this.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-rows-repeated");
-        }
-        if (repeated - posStart > 1) {
-          newElement.setTableNumberRowsRepeatedAttribute(repeated - posStart);
-        } else {
-          newElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-rows-repeated");
-        }
-      }
-      OdfElement nextElementSibling = OdfElement.getNextSiblingElement(this);
-      OdfElement parent = (OdfElement) this.getParentNode();
-      if (nextElementSibling == null) {
-        parent.appendChild(newElement);
-      } else {
-        parent.insertBefore(newElement, nextElementSibling);
-      }
-    }
-    return newElement;
   }
 }

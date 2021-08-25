@@ -33,13 +33,13 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLayerSetElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHandoutMasterElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
+import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
 /** DOM implementation of OpenDocument element {@odf.element office:master-styles}. */
-public class OfficeMasterStylesElement extends OdfOfficeMasterStyles {
+public class OfficeMasterStylesElement extends OdfContainerElementBase {
 
   public static final OdfName ELEMENT_NAME =
       OdfName.newName(OdfDocumentNamespace.OFFICE, "master-styles");
@@ -50,7 +50,7 @@ public class OfficeMasterStylesElement extends OdfOfficeMasterStyles {
    * @param ownerDoc The type is <code>OdfFileDom</code>
    */
   public OfficeMasterStylesElement(OdfFileDom ownerDoc) {
-    super(ownerDoc);
+    super(ownerDoc, ELEMENT_NAME);
   }
 
   /**
@@ -64,6 +64,8 @@ public class OfficeMasterStylesElement extends OdfOfficeMasterStyles {
 
   /**
    * Create child element {@odf.element draw:layer-set}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:layer-set}
    */
@@ -110,6 +112,12 @@ public class OfficeMasterStylesElement extends OdfOfficeMasterStyles {
     return styleMasterPage;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

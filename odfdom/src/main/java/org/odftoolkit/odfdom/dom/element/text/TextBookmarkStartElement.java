@@ -120,7 +120,6 @@ public class TextBookmarkStartElement extends OdfElement {
     XhtmlAboutAttribute attr = new XhtmlAboutAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlAboutValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
@@ -149,7 +148,6 @@ public class TextBookmarkStartElement extends OdfElement {
     XhtmlContentAttribute attr = new XhtmlContentAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlContentValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
@@ -178,7 +176,6 @@ public class TextBookmarkStartElement extends OdfElement {
     XhtmlDatatypeAttribute attr = new XhtmlDatatypeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlDatatypeValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
@@ -207,7 +204,6 @@ public class TextBookmarkStartElement extends OdfElement {
     XhtmlPropertyAttribute attr = new XhtmlPropertyAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlPropertyValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
@@ -236,12 +232,13 @@ public class TextBookmarkStartElement extends OdfElement {
     setOdfAttribute(attr);
     attr.setValue(xmlIdValue);
   }
-  /** Set text content. Only elements which are allowed to have text content offer this method. */
-  public void setTextContent(String content) {
-    super.setTextContent(content);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
-  }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -250,11 +247,5 @@ public class TextBookmarkStartElement extends OdfElement {
     } else {
       visitor.visit(this);
     }
-  }
-
-  @Override
-  protected void onInsertNode() {
-    super.onInsertNode();
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 }
