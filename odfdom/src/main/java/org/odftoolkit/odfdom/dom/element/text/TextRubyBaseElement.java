@@ -85,6 +85,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element dr3d:scene}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element dr3d:scene}
    */
   public Dr3dSceneElement newDr3dSceneElement() {
@@ -114,6 +116,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:caption}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:caption}
    */
   public DrawCaptionElement newDrawCaptionElement() {
@@ -125,6 +129,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element draw:circle}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:circle}
    */
@@ -168,6 +174,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:custom-shape}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:custom-shape}
    */
   public DrawCustomShapeElement newDrawCustomShapeElement() {
@@ -179,6 +187,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element draw:ellipse}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:ellipse}
    */
@@ -192,6 +202,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:frame}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:frame}
    */
   public DrawFrameElement newDrawFrameElement() {
@@ -203,6 +215,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element draw:g}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:g}
    */
@@ -264,6 +278,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element draw:page-thumbnail}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:page-thumbnail}
    */
@@ -331,6 +347,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:rect}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:rect}
    */
   public DrawRectElement newDrawRectElement() {
@@ -362,6 +380,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element office:annotation}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element office:annotation}
    */
   public OfficeAnnotationElement newOfficeAnnotationElement() {
@@ -375,7 +395,7 @@ public class TextRubyBaseElement extends OdfElement {
    * Create child element {@odf.element office:annotation-end}.
    *
    * @param officeNameValue the <code>String</code> value of <code>OfficeNameAttribute</code>, see
-   *     {@odf.attribute office:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute office:name} at specification
    * @return the element {@odf.element office:annotation-end}
    */
   public OfficeAnnotationEndElement newOfficeAnnotationEndElement(String officeNameValue) {
@@ -389,6 +409,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element presentation:date-time}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element presentation:date-time}
    */
   public PresentationDateTimeElement newPresentationDateTimeElement() {
@@ -401,6 +423,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element presentation:footer}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element presentation:footer}
    */
   public PresentationFooterElement newPresentationFooterElement() {
@@ -412,6 +436,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element presentation:header}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element presentation:header}
    */
@@ -491,6 +517,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:author-initials}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:author-initials}
    */
   public TextAuthorInitialsElement newTextAuthorInitialsElement() {
@@ -502,6 +530,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:author-name}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:author-name}
    */
@@ -561,6 +591,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:bookmark-ref}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:bookmark-ref}
    */
@@ -694,6 +726,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:creation-date}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:creation-date}
    */
   public TextCreationDateElement newTextCreationDateElement() {
@@ -706,6 +740,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:creation-time}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:creation-time}
    */
   public TextCreationTimeElement newTextCreationTimeElement() {
@@ -717,6 +753,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:creator}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:creator}
    */
@@ -813,6 +851,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:date}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:date}
    */
   public TextDateElement newTextDateElement() {
@@ -841,6 +881,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:description}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:description}
    */
   public TextDescriptionElement newTextDescriptionElement() {
@@ -852,6 +894,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:editing-cycles}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:editing-cycles}
    */
@@ -865,6 +909,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:editing-duration}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:editing-duration}
    */
   public TextEditingDurationElement newTextEditingDurationElement() {
@@ -876,6 +922,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:execute-macro}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:execute-macro}
    */
@@ -907,6 +955,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:file-name}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:file-name}
    */
@@ -969,6 +1019,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:initial-creator}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:initial-creator}
    */
   public TextInitialCreatorElement newTextInitialCreatorElement() {
@@ -981,6 +1033,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:keywords}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:keywords}
    */
   public TextKeywordsElement newTextKeywordsElement() {
@@ -992,6 +1046,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:line-break}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:line-break}
    */
@@ -1035,7 +1091,7 @@ public class TextRubyBaseElement extends OdfElement {
    * Create child element {@odf.element text:meta-field}.
    *
    * @param xmlIdValue the <code>String</code> value of <code>XmlIdAttribute</code>, see
-   *     {@odf.attribute xml:id} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute xml:id} at specification
    * @return the element {@odf.element text:meta-field}
    */
   public TextMetaFieldElement newTextMetaFieldElement(String xmlIdValue) {
@@ -1049,6 +1105,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:modification-date}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:modification-date}
    */
   public TextModificationDateElement newTextModificationDateElement() {
@@ -1060,6 +1118,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:modification-time}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:modification-time}
    */
@@ -1178,6 +1238,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:page-variable-set}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:page-variable-set}
    */
   public TextPageVariableSetElement newTextPageVariableSetElement() {
@@ -1221,6 +1283,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:print-date}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:print-date}
    */
   public TextPrintDateElement newTextPrintDateElement() {
@@ -1233,6 +1297,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:print-time}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:print-time}
    */
   public TextPrintTimeElement newTextPrintTimeElement() {
@@ -1244,6 +1310,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:printed-by}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:printed-by}
    */
@@ -1302,6 +1370,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:reference-ref}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:reference-ref}
    */
   public TextReferenceRefElement newTextReferenceRefElement() {
@@ -1313,6 +1383,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:ruby}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:ruby}
    */
@@ -1326,6 +1398,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:s}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:s}
    */
   public TextSElement newTextSElement() {
@@ -1336,6 +1410,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:script}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:script}
    */
@@ -1349,6 +1425,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-city}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:sender-city}
    */
   public TextSenderCityElement newTextSenderCityElement() {
@@ -1360,6 +1438,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:sender-company}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-company}
    */
@@ -1373,6 +1453,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-country}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:sender-country}
    */
   public TextSenderCountryElement newTextSenderCountryElement() {
@@ -1384,6 +1466,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:sender-email}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-email}
    */
@@ -1397,6 +1481,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-fax}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:sender-fax}
    */
   public TextSenderFaxElement newTextSenderFaxElement() {
@@ -1408,6 +1494,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:sender-firstname}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-firstname}
    */
@@ -1421,6 +1509,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-initials}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:sender-initials}
    */
   public TextSenderInitialsElement newTextSenderInitialsElement() {
@@ -1432,6 +1522,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:sender-lastname}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-lastname}
    */
@@ -1445,6 +1537,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-phone-private}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:sender-phone-private}
    */
   public TextSenderPhonePrivateElement newTextSenderPhonePrivateElement() {
@@ -1456,6 +1550,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:sender-phone-work}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-phone-work}
    */
@@ -1469,6 +1565,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-position}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:sender-position}
    */
   public TextSenderPositionElement newTextSenderPositionElement() {
@@ -1480,6 +1578,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:sender-postal-code}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-postal-code}
    */
@@ -1493,6 +1593,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-state-or-province}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:sender-state-or-province}
    */
   public TextSenderStateOrProvinceElement newTextSenderStateOrProvinceElement() {
@@ -1505,6 +1607,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-street}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:sender-street}
    */
   public TextSenderStreetElement newTextSenderStreetElement() {
@@ -1516,6 +1620,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:sender-title}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-title}
    */
@@ -1548,6 +1654,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sequence-ref}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:sequence-ref}
    */
   public TextSequenceRefElement newTextSequenceRefElement() {
@@ -1559,6 +1667,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:sheet-name}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sheet-name}
    */
@@ -1572,6 +1682,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:soft-page-break}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:soft-page-break}
    */
   public TextSoftPageBreakElement newTextSoftPageBreakElement() {
@@ -1583,6 +1695,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:span}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:span}
    */
@@ -1596,6 +1710,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:subject}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:subject}
    */
   public TextSubjectElement newTextSubjectElement() {
@@ -1607,6 +1723,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:tab}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:tab}
    */
@@ -1634,6 +1752,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:table-formula}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:table-formula}
    */
   public TextTableFormulaElement newTextTableFormulaElement() {
@@ -1645,6 +1765,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:template-name}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:template-name}
    */
@@ -1658,6 +1780,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:text-input}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:text-input}
    */
   public TextTextInputElement newTextTextInputElement() {
@@ -1670,6 +1794,8 @@ public class TextRubyBaseElement extends OdfElement {
   /**
    * Create child element {@odf.element text:time}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:time}
    */
   public TextTimeElement newTextTimeElement() {
@@ -1681,6 +1807,8 @@ public class TextRubyBaseElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:title}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:title}
    */
@@ -1905,6 +2033,12 @@ public class TextRubyBaseElement extends OdfElement {
     return textWordCount;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -1914,6 +2048,7 @@ public class TextRubyBaseElement extends OdfElement {
       visitor.visit(this);
     }
   }
+
   /** Add text content. Only elements which are allowed to have text content offer this method. */
   public void newTextNode(String content) {
     if (content != null && !content.equals("")) {

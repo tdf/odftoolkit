@@ -32,13 +32,13 @@ package org.odftoolkit.odfdom.pkg.manifest;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
-/** Manifest implementation of OpenDocument element {@odf.element manifest:encryption-data}. */
+/** Manifest implementation of OpenDocument element {@odf.element encryption-data}. */
 public class EncryptionDataElement extends OdfElement {
 
   public static final OdfName ELEMENT_NAME =
-      OdfName.newName(OdfPackageNamespace.MANIFEST, "encryption-data");
+      OdfName.newName(
+          "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:encryption-data");
 
   /**
    * Create the instance of <code>EncryptionDataElement</code>
@@ -52,17 +52,15 @@ public class EncryptionDataElement extends OdfElement {
   /**
    * Get the element name
    *
-   * @return return <code>OdfName</code> the name of element {@odf.element
-   *     manifest:encryption-data}.
+   * @return return <code>OdfName</code> the name of element {@odf.element encryption-data}.
    */
-  @Override
   public OdfName getOdfName() {
     return ELEMENT_NAME;
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>ChecksumAttribute</code> , See
-   * {@odf.attribute manifest:checksum}
+   * {@odf.attribute checksum}
    *
    * <p>Attribute is mandatory.
    *
@@ -70,8 +68,7 @@ public class EncryptionDataElement extends OdfElement {
    *     and no default value defined.
    */
   public String getChecksumAttribute() {
-    ChecksumAttribute attr =
-        (ChecksumAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "checksum");
+    ChecksumAttribute attr = (ChecksumAttribute) getOdfAttribute(ChecksumAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -80,7 +77,7 @@ public class EncryptionDataElement extends OdfElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>ChecksumAttribute</code> , See
-   * {@odf.attribute manifest:checksum}
+   * {@odf.attribute checksum}
    *
    * @param checksumValue The type is <code>String</code>
    */
@@ -92,7 +89,7 @@ public class EncryptionDataElement extends OdfElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>ChecksumTypeAttribute</code> ,
-   * See {@odf.attribute manifest:checksum-type}
+   * See {@odf.attribute checksum-type}
    *
    * <p>Attribute is mandatory.
    *
@@ -101,7 +98,7 @@ public class EncryptionDataElement extends OdfElement {
    */
   public String getChecksumTypeAttribute() {
     ChecksumTypeAttribute attr =
-        (ChecksumTypeAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "checksum-type");
+        (ChecksumTypeAttribute) getOdfAttribute(ChecksumTypeAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -110,7 +107,7 @@ public class EncryptionDataElement extends OdfElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>ChecksumTypeAttribute</code> , See
-   * {@odf.attribute manifest:checksum-type}
+   * {@odf.attribute checksum-type}
    *
    * @param checksumTypeValue The type is <code>String</code>
    */
@@ -121,63 +118,61 @@ public class EncryptionDataElement extends OdfElement {
   }
 
   /**
-   * Create child element {@odf.element manifest:algorithm}.
+   * Create child element {@odf.element algorithm}.
    *
    * @param algorithmNameValue the <code>String</code> value of <code>AlgorithmNameAttribute</code>,
-   *     see {@odf.attribute manifest:algorithm-name} at specification
+   *     see {@odf.attribute algorithm-name} at specification
    * @param initialisationVectorValue the <code>String</code> value of <code>
-   *     InitialisationVectorAttribute</code>, see {@odf.attribute manifest:initialisation-vector}
-   *     at specification Child element is new in Odf 1.2
-   *     <p>Child element is mandatory.
-   * @return the element {@odf.element manifest:algorithm}
+   *     InitialisationVectorAttribute</code>, see {@odf.attribute initialisation-vector} at
+   *     specification Child element is mandatory.
+   * @return the element {@odf.element algorithm}
    */
   public AlgorithmElement newAlgorithmElement(
       String algorithmNameValue, String initialisationVectorValue) {
-    AlgorithmElement manifestAlgorithm =
+    AlgorithmElement algorithm =
         ((OdfFileDom) this.ownerDocument).newOdfElement(AlgorithmElement.class);
-    manifestAlgorithm.setAlgorithmNameAttribute(algorithmNameValue);
-    manifestAlgorithm.setInitialisationVectorAttribute(initialisationVectorValue);
-    this.appendChild(manifestAlgorithm);
-    return manifestAlgorithm;
+    algorithm.setAlgorithmNameAttribute(algorithmNameValue);
+    algorithm.setInitialisationVectorAttribute(initialisationVectorValue);
+    this.appendChild(algorithm);
+    return algorithm;
   }
 
   /**
-   * Create child element {@odf.element manifest:key-derivation}.
+   * Create child element {@odf.element key-derivation}.
    *
    * @param iterationCountValue the <code>Integer</code> value of <code>IterationCountAttribute
-   *     </code>, see {@odf.attribute manifest:iteration-count} at specification
+   *     </code>, see {@odf.attribute iteration-count} at specification
    * @param keyDerivationNameValue the <code>String</code> value of <code>KeyDerivationNameAttribute
-   *     </code>, see {@odf.attribute manifest:key-derivation-name} at specification
+   *     </code>, see {@odf.attribute key-derivation-name} at specification
    * @param saltValue the <code>String</code> value of <code>SaltAttribute</code>, see
-   *     {@odf.attribute manifest:salt} at specification Child element is new in Odf 1.2
-   *     <p>Child element is mandatory.
-   * @return the element {@odf.element manifest:key-derivation}
+   *     {@odf.attribute salt} at specification Child element is mandatory.
+   * @return the element {@odf.element key-derivation}
    */
   public KeyDerivationElement newKeyDerivationElement(
       int iterationCountValue, String keyDerivationNameValue, String saltValue) {
-    KeyDerivationElement manifestKeyDerivation =
+    KeyDerivationElement keyDerivation =
         ((OdfFileDom) this.ownerDocument).newOdfElement(KeyDerivationElement.class);
-    manifestKeyDerivation.setIterationCountAttribute(iterationCountValue);
-    manifestKeyDerivation.setKeyDerivationNameAttribute(keyDerivationNameValue);
-    manifestKeyDerivation.setSaltAttribute(saltValue);
-    this.appendChild(manifestKeyDerivation);
-    return manifestKeyDerivation;
+    keyDerivation.setIterationCountAttribute(iterationCountValue);
+    keyDerivation.setKeyDerivationNameAttribute(keyDerivationNameValue);
+    keyDerivation.setSaltAttribute(saltValue);
+    this.appendChild(keyDerivation);
+    return keyDerivation;
   }
 
   /**
-   * Create child element {@odf.element manifest:start-key-generation}.
+   * Create child element {@odf.element start-key-generation}.
    *
    * @param startKeyGenerationNameValue the <code>String</code> value of <code>
-   *     StartKeyGenerationNameAttribute</code>, see {@odf.attribute
-   *     manifest:start-key-generation-name} at specification Child element is new in Odf 1.2
-   * @return the element {@odf.element manifest:start-key-generation}
+   *     StartKeyGenerationNameAttribute</code>, see {@odf.attribute start-key-generation-name} at
+   *     specification
+   * @return the element {@odf.element start-key-generation}
    */
   public StartKeyGenerationElement newStartKeyGenerationElement(
       String startKeyGenerationNameValue) {
-    StartKeyGenerationElement manifestStartKeyGeneration =
+    StartKeyGenerationElement startKeyGeneration =
         ((OdfFileDom) this.ownerDocument).newOdfElement(StartKeyGenerationElement.class);
-    manifestStartKeyGeneration.setStartKeyGenerationNameAttribute(startKeyGenerationNameValue);
-    this.appendChild(manifestStartKeyGeneration);
-    return manifestStartKeyGeneration;
+    startKeyGeneration.setStartKeyGenerationNameAttribute(startKeyGenerationNameValue);
+    this.appendChild(startKeyGeneration);
+    return startKeyGeneration;
   }
 }

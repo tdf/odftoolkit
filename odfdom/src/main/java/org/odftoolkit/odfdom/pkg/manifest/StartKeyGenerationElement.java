@@ -32,13 +32,13 @@ package org.odftoolkit.odfdom.pkg.manifest;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
-/** Manifest implementation of OpenDocument element {@odf.element manifest:start-key-generation}. */
+/** Manifest implementation of OpenDocument element {@odf.element start-key-generation}. */
 public class StartKeyGenerationElement extends OdfElement {
 
   public static final OdfName ELEMENT_NAME =
-      OdfName.newName(OdfPackageNamespace.MANIFEST, "start-key-generation");
+      OdfName.newName(
+          "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:start-key-generation");
 
   /**
    * Create the instance of <code>StartKeyGenerationElement</code>
@@ -52,24 +52,21 @@ public class StartKeyGenerationElement extends OdfElement {
   /**
    * Get the element name
    *
-   * @return return <code>OdfName</code> the name of element {@odf.element
-   *     manifest:start-key-generation}.
+   * @return return <code>OdfName</code> the name of element {@odf.element start-key-generation}.
    */
-  @Override
   public OdfName getOdfName() {
     return ELEMENT_NAME;
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>KeySizeAttribute</code> , See
-   * {@odf.attribute manifest:key-size}
+   * {@odf.attribute key-size}
    *
    * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
   public Integer getKeySizeAttribute() {
-    KeySizeAttribute attr =
-        (KeySizeAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "key-size");
+    KeySizeAttribute attr = (KeySizeAttribute) getOdfAttribute(KeySizeAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return Integer.valueOf(attr.intValue());
     }
@@ -78,7 +75,7 @@ public class StartKeyGenerationElement extends OdfElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>KeySizeAttribute</code> , See
-   * {@odf.attribute manifest:key-size}
+   * {@odf.attribute key-size}
    *
    * @param keySizeValue The type is <code>Integer</code>
    */
@@ -90,7 +87,7 @@ public class StartKeyGenerationElement extends OdfElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StartKeyGenerationNameAttribute
-   * </code> , See {@odf.attribute manifest:start-key-generation-name}
+   * </code> , See {@odf.attribute start-key-generation-name}
    *
    * <p>Attribute is mandatory.
    *
@@ -100,7 +97,7 @@ public class StartKeyGenerationElement extends OdfElement {
   public String getStartKeyGenerationNameAttribute() {
     StartKeyGenerationNameAttribute attr =
         (StartKeyGenerationNameAttribute)
-            getOdfAttribute(OdfPackageNamespace.MANIFEST, "start-key-generation-name");
+            getOdfAttribute(StartKeyGenerationNameAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -109,7 +106,7 @@ public class StartKeyGenerationElement extends OdfElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StartKeyGenerationNameAttribute</code>
-   * , See {@odf.attribute manifest:start-key-generation-name}
+   * , See {@odf.attribute start-key-generation-name}
    *
    * @param startKeyGenerationNameValue The type is <code>String</code>
    */

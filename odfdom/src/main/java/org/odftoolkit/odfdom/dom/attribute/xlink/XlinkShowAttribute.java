@@ -52,8 +52,8 @@ public class XlinkShowAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespace.XLINK, "show");
   public static final String DEFAULT_VALUE_REPLACE = Value.REPLACE.toString();
-  public static final String DEFAULT_VALUE_NONE = Value.NONE.toString();
   public static final String DEFAULT_VALUE_EMBED = Value.EMBED.toString();
+  public static final String DEFAULT_VALUE_NONE = Value.NONE.toString();
 
   /**
    * Create the instance of OpenDocument attribute {@odf.attribute xlink:show}.
@@ -130,43 +130,43 @@ public class XlinkShowAttribute extends OdfAttribute {
     String defaultValue = null;
     if (parentElement != null) {
       if (parentElement instanceof DbConnectionResourceElement) {
-        defaultValue = DEFAULT_VALUE_NONE;
+        defaultValue = "none";
       }
       if (parentElement instanceof DrawAppletElement) {
-        defaultValue = DEFAULT_VALUE_EMBED;
+        defaultValue = "embed";
       }
       if (parentElement instanceof DrawFillImageElement) {
-        defaultValue = DEFAULT_VALUE_EMBED;
+        defaultValue = "embed";
       }
       if (parentElement instanceof DrawFloatingFrameElement) {
-        defaultValue = DEFAULT_VALUE_EMBED;
+        defaultValue = "embed";
       }
       if (parentElement instanceof DrawImageElement) {
-        defaultValue = DEFAULT_VALUE_EMBED;
+        defaultValue = "embed";
       }
       if (parentElement instanceof DrawObjectElement) {
-        defaultValue = DEFAULT_VALUE_EMBED;
+        defaultValue = "embed";
       }
       if (parentElement instanceof DrawObjectOleElement) {
-        defaultValue = DEFAULT_VALUE_EMBED;
+        defaultValue = "embed";
       }
       if (parentElement instanceof DrawPluginElement) {
-        defaultValue = DEFAULT_VALUE_EMBED;
+        defaultValue = "embed";
       }
       if (parentElement instanceof MetaAutoReloadElement) {
-        defaultValue = DEFAULT_VALUE_REPLACE;
+        defaultValue = "replace";
       }
       if (parentElement instanceof PresentationEventListenerElement) {
-        defaultValue = DEFAULT_VALUE_EMBED;
+        defaultValue = "embed";
       }
       if (parentElement instanceof StyleBackgroundImageElement) {
-        defaultValue = DEFAULT_VALUE_EMBED;
+        defaultValue = "embed";
       }
       if (parentElement instanceof TextListLevelStyleImageElement) {
-        defaultValue = DEFAULT_VALUE_EMBED;
+        defaultValue = "embed";
       }
       if (parentElement instanceof TextSectionSourceElement) {
-        defaultValue = DEFAULT_VALUE_EMBED;
+        defaultValue = "embed";
       }
     }
     return defaultValue;

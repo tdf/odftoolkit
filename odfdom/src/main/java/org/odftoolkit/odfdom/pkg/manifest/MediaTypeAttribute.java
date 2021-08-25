@@ -32,13 +32,12 @@ package org.odftoolkit.odfdom.pkg.manifest;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
 /** Manifest implementation of OpenDocument attribute {@odf.attribute manifest:media-type}. */
 public class MediaTypeAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME =
-      OdfName.newName(OdfPackageNamespace.MANIFEST, "media-type");
+      OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:media-type");
 
   /**
    * Create the instance of OpenDocument attribute {@odf.attribute manifest:media-type}.
@@ -63,34 +62,6 @@ public class MediaTypeAttribute extends OdfAttribute {
   @Override
   public String getName() {
     return ATTRIBUTE_NAME.getLocalName();
-  }
-
-  /**
-   * @param attrValue The <code>String</code> value of the attribute.
-   * @throws IllegalArgumentException If the provided attribute value is invalid
-   */
-  @Override
-  public void setValue(String attrValue) {
-    try {
-      super.setValue(attrValue);
-    } catch (NullPointerException e) {
-      // TODO: validation handling/logging
-      throw new IllegalArgumentException(e);
-    } catch (IllegalArgumentException e) {
-      // TODO: validation handling/logging
-      throw (e);
-    }
-  }
-
-  /** @return Returns the <code>String</code> value of the attribute */
-  @Override
-  public String getValue() {
-    try {
-      return super.getValue();
-    } catch (IllegalArgumentException e) {
-      // TODO: validation handling/logging
-      throw new NumberFormatException("the value of manifest:media-type is not valid");
-    }
   }
 
   /**

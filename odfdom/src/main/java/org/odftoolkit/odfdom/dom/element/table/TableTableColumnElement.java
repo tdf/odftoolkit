@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
@@ -47,8 +46,6 @@ public class TableTableColumnElement extends OdfStylableElement {
 
   public static final OdfName ELEMENT_NAME =
       OdfName.newName(OdfDocumentNamespace.TABLE, "table-column");
-  private static final String VISIBLE = "visible";
-  private static final String COLLAPSE = "collapse";
 
   /**
    * Create the instance of <code>TableTableColumnElement</code>
@@ -215,6 +212,12 @@ public class TableTableColumnElement extends OdfStylableElement {
     attr.setValue(xmlIdValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -222,87 +225,6 @@ public class TableTableColumnElement extends OdfStylableElement {
       defaultVisitor.visit(this);
     } else {
       visitor.visit(this);
-    }
-  }
-
-  @Override
-  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
-  /** @return the component size of a heading, which is always 1 */
-  public int getRepetition() {
-    Integer repeated = getTableNumberColumnsRepeatedAttribute();
-    if (repeated == null) {
-      repeated = 1;
-    }
-    return repeated;
-  }
-
-  @Override
-  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
-  /** @return the component size of a heading, which is always 1 */
-  public boolean isRepeatable() {
-    return true;
-  }
-
-  @Override
-  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
-  /** @return the component size of a heading, which is always 1 */
-  public void setRepetition(int repetition) {
-    setTableNumberColumnsRepeatedAttribute(repetition);
-  }
-
-  /**
-   * Splitting the element at the given position into two halves
-   *
-   * @param posStart The split position. Counting is starting with zero. The start of the second
-   *     half.
-   * @return the new created second element (or if posStart was less than 1 the original element)
-   */
-  @Override
-  public TableTableColumnElement split(int posStart) {
-    TableTableColumnElement newElement = this;
-    // 0 would not leave anything left on the left side
-    if (posStart > 0) {
-      newElement = (TableTableColumnElement) this.cloneNode(true);
-      int repeated = getTableNumberColumnsRepeatedAttribute();
-      if (repeated > 1) {
-        if (posStart > 1) {
-          this.setTableNumberColumnsRepeatedAttribute(posStart);
-        } else {
-          this.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
-        }
-        // any higher value one for repeated write out.
-        // 1 is the default and has not to be written out
-        if (repeated - posStart > 1) {
-          newElement.setTableNumberColumnsRepeatedAttribute(repeated - posStart);
-        } else {
-          newElement.removeAttributeNS(
-              OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
-        }
-      }
-      OdfElement nextElementSibling = OdfElement.getNextSiblingElement(this);
-      OdfElement parent = (OdfElement) this.getParentNode();
-      if (nextElementSibling == null) {
-        parent.appendChild(newElement);
-      } else {
-        parent.insertBefore(newElement, nextElementSibling);
-      }
-    }
-    return newElement;
-  }
-
-  /** Changes the visibility of the @table:visibility attributes */
-  public void setVisiblity(Boolean show) {
-    // the default is visible ("true")
-    boolean isVisible = Boolean.TRUE;
-    if (hasAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "visibility")) {
-      isVisible = VISIBLE.equals(getAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "visibility"));
-    }
-    if (show && !isVisible || !show && isVisible) {
-      if (show) {
-        removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "visible");
-      } else {
-        setAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "table:visibility", COLLAPSE);
-      }
     }
   }
 }

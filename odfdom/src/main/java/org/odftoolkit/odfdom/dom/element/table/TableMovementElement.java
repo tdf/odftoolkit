@@ -155,6 +155,8 @@ public class TableMovementElement extends OdfElement {
   /**
    * Create child element {@odf.element office:change-info}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * <p>Child element is mandatory.
    *
    * @return the element {@odf.element office:change-info}
@@ -169,6 +171,8 @@ public class TableMovementElement extends OdfElement {
   /**
    * Create child element {@odf.element table:deletions}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:deletions}
    */
   public TableDeletionsElement newTableDeletionsElement() {
@@ -181,6 +185,8 @@ public class TableMovementElement extends OdfElement {
   /**
    * Create child element {@odf.element table:dependencies}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:dependencies}
    */
   public TableDependenciesElement newTableDependenciesElement() {
@@ -192,6 +198,8 @@ public class TableMovementElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:source-range-address}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * <p>Child element is mandatory.
    *
@@ -207,6 +215,8 @@ public class TableMovementElement extends OdfElement {
   /**
    * Create child element {@odf.element table:target-range-address}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * <p>Child element is mandatory.
    *
    * @return the element {@odf.element table:target-range-address}
@@ -218,6 +228,12 @@ public class TableMovementElement extends OdfElement {
     return tableTargetRangeAddress;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

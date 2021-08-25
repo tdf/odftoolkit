@@ -279,6 +279,8 @@ public class TableCalculationSettingsElement extends OdfElement {
   /**
    * Create child element {@odf.element table:iteration}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:iteration}
    */
   public TableIterationElement newTableIterationElement() {
@@ -291,6 +293,8 @@ public class TableCalculationSettingsElement extends OdfElement {
   /**
    * Create child element {@odf.element table:null-date}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:null-date}
    */
   public TableNullDateElement newTableNullDateElement() {
@@ -300,6 +304,12 @@ public class TableCalculationSettingsElement extends OdfElement {
     return tableNullDate;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

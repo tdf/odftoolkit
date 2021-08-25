@@ -226,8 +226,7 @@ public class TableTableTemplateElement extends OdfElement {
    * Create child element {@odf.element table:background}.
    *
    * @param tableStyleNameValue the <code>String</code> value of <code>TableStyleNameAttribute
-   *     </code>, see {@odf.attribute table:style-name} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute table:style-name} at specification
    * @return the element {@odf.element table:background}
    */
   public TableBackgroundElement newTableBackgroundElement(String tableStyleNameValue) {
@@ -242,9 +241,7 @@ public class TableTableTemplateElement extends OdfElement {
    * Create child element {@odf.element table:body}.
    *
    * @param tableStyleNameValue the <code>String</code> value of <code>TableStyleNameAttribute
-   *     </code>, see {@odf.attribute table:style-name} at specification Child element is new in Odf
-   *     1.2
-   *     <p>Child element is mandatory.
+   *     </code>, see {@odf.attribute table:style-name} at specification Child element is mandatory.
    * @return the element {@odf.element table:body}
    */
   public TableBodyElement newTableBodyElement(String tableStyleNameValue) {
@@ -259,8 +256,7 @@ public class TableTableTemplateElement extends OdfElement {
    * Create child element {@odf.element table:even-columns}.
    *
    * @param tableStyleNameValue the <code>String</code> value of <code>TableStyleNameAttribute
-   *     </code>, see {@odf.attribute table:style-name} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute table:style-name} at specification
    * @return the element {@odf.element table:even-columns}
    */
   public TableEvenColumnsElement newTableEvenColumnsElement(String tableStyleNameValue) {
@@ -275,8 +271,7 @@ public class TableTableTemplateElement extends OdfElement {
    * Create child element {@odf.element table:even-rows}.
    *
    * @param tableStyleNameValue the <code>String</code> value of <code>TableStyleNameAttribute
-   *     </code>, see {@odf.attribute table:style-name} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute table:style-name} at specification
    * @return the element {@odf.element table:even-rows}
    */
   public TableEvenRowsElement newTableEvenRowsElement(String tableStyleNameValue) {
@@ -291,8 +286,7 @@ public class TableTableTemplateElement extends OdfElement {
    * Create child element {@odf.element table:first-column}.
    *
    * @param tableStyleNameValue the <code>String</code> value of <code>TableStyleNameAttribute
-   *     </code>, see {@odf.attribute table:style-name} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute table:style-name} at specification
    * @return the element {@odf.element table:first-column}
    */
   public TableFirstColumnElement newTableFirstColumnElement(String tableStyleNameValue) {
@@ -307,8 +301,7 @@ public class TableTableTemplateElement extends OdfElement {
    * Create child element {@odf.element table:first-row}.
    *
    * @param tableStyleNameValue the <code>String</code> value of <code>TableStyleNameAttribute
-   *     </code>, see {@odf.attribute table:style-name} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute table:style-name} at specification
    * @return the element {@odf.element table:first-row}
    */
   public TableFirstRowElement newTableFirstRowElement(String tableStyleNameValue) {
@@ -323,8 +316,7 @@ public class TableTableTemplateElement extends OdfElement {
    * Create child element {@odf.element table:last-column}.
    *
    * @param tableStyleNameValue the <code>String</code> value of <code>TableStyleNameAttribute
-   *     </code>, see {@odf.attribute table:style-name} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute table:style-name} at specification
    * @return the element {@odf.element table:last-column}
    */
   public TableLastColumnElement newTableLastColumnElement(String tableStyleNameValue) {
@@ -339,8 +331,7 @@ public class TableTableTemplateElement extends OdfElement {
    * Create child element {@odf.element table:last-row}.
    *
    * @param tableStyleNameValue the <code>String</code> value of <code>TableStyleNameAttribute
-   *     </code>, see {@odf.attribute table:style-name} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute table:style-name} at specification
    * @return the element {@odf.element table:last-row}
    */
   public TableLastRowElement newTableLastRowElement(String tableStyleNameValue) {
@@ -355,8 +346,7 @@ public class TableTableTemplateElement extends OdfElement {
    * Create child element {@odf.element table:odd-columns}.
    *
    * @param tableStyleNameValue the <code>String</code> value of <code>TableStyleNameAttribute
-   *     </code>, see {@odf.attribute table:style-name} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute table:style-name} at specification
    * @return the element {@odf.element table:odd-columns}
    */
   public TableOddColumnsElement newTableOddColumnsElement(String tableStyleNameValue) {
@@ -371,8 +361,7 @@ public class TableTableTemplateElement extends OdfElement {
    * Create child element {@odf.element table:odd-rows}.
    *
    * @param tableStyleNameValue the <code>String</code> value of <code>TableStyleNameAttribute
-   *     </code>, see {@odf.attribute table:style-name} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute table:style-name} at specification
    * @return the element {@odf.element table:odd-rows}
    */
   public TableOddRowsElement newTableOddRowsElement(String tableStyleNameValue) {
@@ -383,6 +372,12 @@ public class TableTableTemplateElement extends OdfElement {
     return tableOddRows;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

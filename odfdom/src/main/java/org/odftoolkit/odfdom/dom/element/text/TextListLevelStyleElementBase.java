@@ -31,17 +31,21 @@ package org.odftoolkit.odfdom.dom.element.text;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextLevelAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
-import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
-/** DOM implementation of OpenDocument base element */
+/**
+ * DOM implementation of OpenDocument base element
+ *
+ * <p>This class can have any org.w3c.dom.Attribute attribute.
+ */
 public abstract class TextListLevelStyleElementBase extends OdfStyleBase {
 
   /**
    * Create the instance of <code>TextListLevelStyleElementBase</code>
    *
    * @param ownerDoc The type is <code>OdfFileDom</code>
+   * @param elementName The type is <code>OdfName</code>
    */
   public TextListLevelStyleElementBase(OdfFileDom ownerDoc, OdfName elementName) {
     super(ownerDoc, elementName);
@@ -73,17 +77,5 @@ public abstract class TextListLevelStyleElementBase extends OdfStyleBase {
     TextLevelAttribute attr = new TextLevelAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setIntValue(textLevelValue.intValue());
-  }
-
-  /**
-   * Create child element {@odf.element style:list-level-properties}.
-   *
-   * @return the element {@odf.element style:list-level-properties}
-   */
-  public StyleListLevelPropertiesElement newStyleListLevelPropertiesElement() {
-    StyleListLevelPropertiesElement styleListLevelProperties =
-        ((OdfFileDom) this.ownerDocument).newOdfElement(StyleListLevelPropertiesElement.class);
-    this.appendChild(styleListLevelProperties);
-    return styleListLevelProperties;
   }
 }

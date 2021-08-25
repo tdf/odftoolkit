@@ -156,6 +156,8 @@ public class TableCellContentChangeElement extends OdfElement {
   /**
    * Create child element {@odf.element office:change-info}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * <p>Child element is mandatory.
    *
    * @return the element {@odf.element office:change-info}
@@ -192,6 +194,8 @@ public class TableCellContentChangeElement extends OdfElement {
   /**
    * Create child element {@odf.element table:deletions}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:deletions}
    */
   public TableDeletionsElement newTableDeletionsElement() {
@@ -203,6 +207,8 @@ public class TableCellContentChangeElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:dependencies}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:dependencies}
    */
@@ -216,6 +222,8 @@ public class TableCellContentChangeElement extends OdfElement {
   /**
    * Create child element {@odf.element table:previous}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * <p>Child element is mandatory.
    *
    * @return the element {@odf.element table:previous}
@@ -227,6 +235,12 @@ public class TableCellContentChangeElement extends OdfElement {
     return tablePrevious;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

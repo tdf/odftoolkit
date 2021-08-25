@@ -362,6 +362,8 @@ public class DrawAreaRectangleElement extends OdfElement {
   /**
    * Create child element {@odf.element office:event-listeners}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element office:event-listeners}
    */
   public OfficeEventListenersElement newOfficeEventListenersElement() {
@@ -374,6 +376,8 @@ public class DrawAreaRectangleElement extends OdfElement {
   /**
    * Create child element {@odf.element svg:desc}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element svg:desc}
    */
   public SvgDescElement newSvgDescElement() {
@@ -385,6 +389,8 @@ public class DrawAreaRectangleElement extends OdfElement {
   /**
    * Create child element {@odf.element svg:title}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element svg:title}
    */
   public SvgTitleElement newSvgTitleElement() {
@@ -394,6 +400,12 @@ public class DrawAreaRectangleElement extends OdfElement {
     return svgTitle;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
