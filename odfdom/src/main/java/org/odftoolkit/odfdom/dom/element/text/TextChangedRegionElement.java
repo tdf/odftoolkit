@@ -120,6 +120,8 @@ public class TextChangedRegionElement extends OdfElement {
   /**
    * Create child element {@odf.element text:deletion}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:deletion}
    */
   public TextDeletionElement newTextDeletionElement() {
@@ -131,6 +133,8 @@ public class TextChangedRegionElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:format-change}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:format-change}
    */
@@ -144,6 +148,8 @@ public class TextChangedRegionElement extends OdfElement {
   /**
    * Create child element {@odf.element text:insertion}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:insertion}
    */
   public TextInsertionElement newTextInsertionElement() {
@@ -153,6 +159,12 @@ public class TextChangedRegionElement extends OdfElement {
     return textInsertion;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

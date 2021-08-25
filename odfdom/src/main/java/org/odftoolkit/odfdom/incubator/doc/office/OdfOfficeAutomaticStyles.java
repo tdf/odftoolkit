@@ -47,6 +47,7 @@ import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberBooleanStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberCurrencyStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberDateStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberPercentageStyle;
@@ -363,7 +364,7 @@ public abstract class OdfOfficeAutomaticStyles extends OdfStylesBase {
         newStyle = new OdfNumberDateStyle(fileDom, numberFormatCode, newDataStyleName);
         break;
       case BOOLEAN:
-        newStyle = new NumberBooleanStyleElement(fileDom, newDataStyleName);
+        newStyle = new OdfNumberBooleanStyle(fileDom, newDataStyleName);
         break;
       case CURRENCY:
         newStyle = new OdfNumberCurrencyStyle(fileDom, numberFormatCode, newDataStyleName);
@@ -375,7 +376,7 @@ public abstract class OdfOfficeAutomaticStyles extends OdfStylesBase {
         newStyle = new OdfNumberPercentageStyle(fileDom, numberFormatCode, newDataStyleName);
         break;
       case STRING:
-        newStyle = new NumberTextStyleElement(fileDom, numberFormatCode, newDataStyleName);
+        newStyle = new OdfNumberTextStyle(fileDom, numberFormatCode, newDataStyleName);
         break;
       case TIME:
         newStyle = new OdfNumberTimeStyle(fileDom, numberFormatCode, newDataStyleName);

@@ -28,7 +28,6 @@
  */
 package org.odftoolkit.odfdom.dom.element.text;
 
-import java.util.logging.Logger;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextCAttribute;
@@ -36,17 +35,11 @@ import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
-import org.w3c.dom.Node;
 
-/**
- * DOM implementation of OpenDocument element {
- *
- * @odf.element text:s}.
- */
+/** DOM implementation of OpenDocument element {@odf.element text:s}. */
 public class TextSElement extends OdfElement {
 
   public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "s");
-  private static final Logger LOG = Logger.getLogger(TextSElement.class.getName());
 
   /**
    * Create the instance of <code>TextSElement</code>
@@ -60,17 +53,16 @@ public class TextSElement extends OdfElement {
   /**
    * Get the element name
    *
-   * @return return <code>OdfName</code> the name of element {
-   * @odf.element text:s}.
+   * @return return <code>OdfName</code> the name of element {@odf.element text:s}.
    */
   public OdfName getOdfName() {
     return ELEMENT_NAME;
   }
 
   /**
-   * Receives the value of the ODFDOM attribute representation <code>TextCAttribute</code> , See {
+   * Receives the value of the ODFDOM attribute representation <code>TextCAttribute</code> , See
+   * {@odf.attribute text:c}
    *
-   * @odf.attribute text:c}
    * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
@@ -83,9 +75,9 @@ public class TextSElement extends OdfElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TextCAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>TextCAttribute</code> , See
+   * {@odf.attribute text:c}
    *
-   * @odf.attribute text:c}
    * @param textCValue The type is <code>Integer</code>
    */
   public void setTextCAttribute(Integer textCValue) {
@@ -94,6 +86,12 @@ public class TextSElement extends OdfElement {
     attr.setIntValue(textCValue.intValue());
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -102,80 +100,5 @@ public class TextSElement extends OdfElement {
     } else {
       visitor.visit(this);
     }
-  }
-
-  @Override
-  /**
-   * Splitting the element at the given position into two halves
-   *
-   * @param posStart The split position. The start of the second half.
-   * @return the new created second space element or null if the element had a count of 1 or the
-   *     given position was larger than the space
-   */
-  public OdfElement split(int posStart) {
-    TextSElement newElement = this;
-    if (posStart > 0) {
-      newElement = (TextSElement) this.cloneNode(true);
-      int repeated = getTextCAttribute();
-      if (repeated > 1) {
-        if (posStart > 1) {
-          this.setTextCAttribute(posStart);
-        } else {
-          this.removeAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c");
-        }
-        if (repeated - posStart > 1) {
-          newElement.setTextCAttribute(repeated - posStart);
-        } else {
-          newElement.removeAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c");
-        }
-      }
-      Node nextNodeSibling = this.getNextSibling();
-      OdfElement parent = (OdfElement) this.getParentNode();
-      if (nextNodeSibling == null) {
-        parent.appendChild(newElement);
-      } else {
-        parent.insertBefore(newElement, nextNodeSibling);
-      }
-    } else {
-      LOG.fine(
-          "The result from a split at the beginning is equal its input! "
-              + "Likely nested <text:spans> having template and hard style...");
-    }
-    return newElement;
-  }
-  //		return this;
-  //
-  //		TextSElement previousSpace = null;
-  //		if (spaces != 1 && spaces != posStart) {
-  //			if(posStart > 1){
-  //				setTextCAttribute(spaces - posStart);
-  //			}else{
-  //				this.removeAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c");
-  //			}
-  //			previousSpace = new TextSElement((OdfFileDom) getOwnerDocument());
-  //			if ((spaces - posStart) > 1) {
-  //				previousSpace.setTextCAttribute(spaces - posStart);
-  //			}
-  //			getParentNode().insertBefore(previousSpace, this);
-  //		}
-  //		return this;
-  //	}
-
-  @Override
-  public int getRepetition() {
-    Integer spaces = getTextCAttribute();
-    if (spaces == null) {
-      spaces = 1;
-    }
-    return spaces;
-  }
-
-  @Override
-  /**
-   * If this element is the first - perhaps only - element of a logical group of XML elements. For
-   * instance: table, paragraph
-   */
-  public boolean isComponentRoot() {
-    return true;
   }
 }

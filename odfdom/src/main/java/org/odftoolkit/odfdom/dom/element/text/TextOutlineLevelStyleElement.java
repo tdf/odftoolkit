@@ -304,6 +304,8 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
   /**
    * Create child element {@odf.element style:list-level-properties}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element style:list-level-properties}
    */
   public StyleListLevelPropertiesElement newStyleListLevelPropertiesElement() {
@@ -328,6 +330,12 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
     return styleTextProperties;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -65,7 +65,7 @@ public class DbConnectionDataElement extends OdfElement {
    * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
    *     {@odf.attribute xlink:href} at specification
    * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
-   *     {@odf.attribute xlink:type} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute xlink:type} at specification
    * @return the element {@odf.element db:connection-resource}
    */
   public DbConnectionResourceElement newDbConnectionResourceElement(
@@ -105,6 +105,12 @@ public class DbConnectionDataElement extends OdfElement {
     return dbLogin;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

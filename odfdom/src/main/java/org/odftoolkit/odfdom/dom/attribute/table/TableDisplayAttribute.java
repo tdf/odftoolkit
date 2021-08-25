@@ -43,8 +43,8 @@ public class TableDisplayAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME =
       OdfName.newName(OdfDocumentNamespace.TABLE, "display");
-  public static final String DEFAULT_VALUE_TRUE = "true";
   public static final String DEFAULT_VALUE_FALSE = "false";
+  public static final String DEFAULT_VALUE_TRUE = "true";
 
   /**
    * Create the instance of OpenDocument attribute {@odf.attribute table:display}.
@@ -99,16 +99,16 @@ public class TableDisplayAttribute extends OdfAttribute {
     String defaultValue = null;
     if (parentElement != null) {
       if (parentElement instanceof TableErrorMessageElement) {
-        defaultValue = DEFAULT_VALUE_FALSE;
+        defaultValue = "false";
       }
       if (parentElement instanceof TableHelpMessageElement) {
-        defaultValue = DEFAULT_VALUE_FALSE;
+        defaultValue = "false";
       }
       if (parentElement instanceof TableTableColumnGroupElement) {
-        defaultValue = DEFAULT_VALUE_TRUE;
+        defaultValue = "true";
       }
       if (parentElement instanceof TableTableRowGroupElement) {
-        defaultValue = DEFAULT_VALUE_TRUE;
+        defaultValue = "true";
       }
     }
     return defaultValue;

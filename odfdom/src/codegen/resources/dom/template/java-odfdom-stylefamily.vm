@@ -35,17 +35,24 @@ package org.odftoolkit.odfdom.dom.style;
 
 import java.util.Arrays;
 import java.util.Collections;
-import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.Map;
-import java.util.HashMap;
-##
-#foreach ($styleElement in ${xmlModel.getElements().withoutMultiples()})
-#if ($styleElement.getNamespace() == "style" && ${styleElement.getLocalName().endsWith("properties")})
-import org.odftoolkit.odfdom.dom.element.style.${xmlModel.camelCase($styleElement)}Element;
-#end
-#end
+import org.odftoolkit.odfdom.dom.element.style.StyleChartPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleDrawingPagePropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleRubyPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleSectionPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTableColumnPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTableRowPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
+import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+
+
 
 public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 
@@ -101,22 +108,31 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 	public Set<OdfStyleProperty> getProperties() {
 		return Collections.unmodifiableSet(m_properties);
 	}
-
-#foreach ($family in ${odfModel.getStyleFamilies()})
-	public final static OdfStyleFamily ${xmlModel.camelCase($xmlModel.extractLocalName($family))} = new OdfStyleFamily("${xmlModel.extractLocalName($family)}",
+#foreach ($styleFamilyName in ${styleFamilyPropertiesMap.keySet()})
+	public final static OdfStyleFamily ${xmlModel.camelCase($styleFamilyName)} = new OdfStyleFamily("${styleFamilyName}",
 			new OdfStyleProperty[]{
-#foreach ($styleElement in ${xmlModel.getElements().withoutMultiples()})
-#if ($styleElement.getNamespace() == "style" && ${styleElement.getLocalName().endsWith("properties")})
-#foreach ($property in ${styleElement.withMultiples().getAttributes()})
+#foreach ($stylePropertiesElementName in ${styleFamilyPropertiesMap.get($styleFamilyName)})
+## stylePropertiesElement-endswith $stylePropertiesElementName
+#foreach ($stylePropertiesElement in ${xmlModel.getElements().withoutMultiples()})
+##stylePropertiesElement.getLocalName ${stylePropertiesElement.getLocalName()}
+#if (${stylePropertiesElement.getLocalName().endsWith($stylePropertiesElementName)})
+##stylePropertiesElementName.getLocalName ${stylePropertiesElementName.getLocalName()}
+#foreach ($property in ${stylePropertiesElement.withMultiples().getAttributes().withoutMultiples()})
+## for ease of use all Java variables of ODF properties are without localname. 
+## But 'shadow' exist once twice with 'dr3d' & 'draw' prefix!
 #set($propertyName = ${property.getLocalName()})
-#if (${styleElement.getLocalName()}=="graphic-properties" && $propertyName =="shadow")
-#set($propertyName = ${property.getQName()})
+#if (${stylePropertiesElementName}=="graphic-properties" && $propertyName =="shadow")
+#set($propertyName = ${property.getQName()}) 
 #end
-	${xmlModel.camelCase($styleElement)}Element.${xmlModel.camelCase($propertyName)},
+				Style${xmlModel.camelCase($stylePropertiesElementName)}Element.${xmlModel.camelCase($propertyName)}#if($foreach.hasNext),
 #end
 #end
 #end
-	});
+#end
+#if($foreach.hasNext),
+#end
+#end
+			});
 
 #end
 }

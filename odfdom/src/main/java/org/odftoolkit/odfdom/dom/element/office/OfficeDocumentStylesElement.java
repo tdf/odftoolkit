@@ -121,54 +121,68 @@ public class OfficeDocumentStylesElement extends OdfElement {
     attr.setValue(officeVersionValue);
   }
 
-  //	/**
-  //	 * Create child element {@odf.element office:automatic-styles}.
-  //	 *
-  //	 * @return the element {@odf.element office:automatic-styles}
-  //	 */
-  //	public OdfOfficeAutomaticStyles newOfficeAutomaticStylesElement() {
-  //		OdfOfficeAutomaticStyles officeAutomaticStyles = ((OdfFileDom)
-  // this.ownerDocument).newOdfElement(OdfOfficeAutomaticStyles.class);
-  //		this.appendChild(officeAutomaticStyles);
-  //		return officeAutomaticStyles;
-  //	}
-  //
-  //	/**
-  //	 * Create child element {@odf.element office:font-face-decls}.
-  //	 *
-  //	 * @return the element {@odf.element office:font-face-decls}
-  //	 */
-  //	public OfficeFontFaceDeclsElement newOfficeFontFaceDeclsElement() {
-  //		OfficeFontFaceDeclsElement officeFontFaceDecls = ((OdfFileDom)
-  // this.ownerDocument).newOdfElement(OfficeFontFaceDeclsElement.class);
-  //		this.appendChild(officeFontFaceDecls);
-  //		return officeFontFaceDecls;
-  //	}
-  //
-  //	/**
-  //	 * Create child element {@odf.element office:master-styles}.
-  //	 *
-  //	 * @return the element {@odf.element office:master-styles}
-  //	 */
-  //	public OfficeMasterStylesElement newOfficeMasterStylesElement() {
-  //		OfficeMasterStylesElement officeMasterStyles = ((OdfFileDom)
-  // this.ownerDocument).newOdfElement(OfficeMasterStylesElement.class);
-  //		this.appendChild(officeMasterStyles);
-  //		return officeMasterStyles;
-  //	}
-  //
-  //	/**
-  //	 * Create child element {@odf.element office:styles}.
-  //	 *
-  //	 * @return the element {@odf.element office:styles}
-  //	 */
-  //	public OdfOfficeStyles newOfficeStylesElement() {
-  //		OdfOfficeStyles officeStyles = ((OdfFileDom)
-  // this.ownerDocument).newOdfElement(OdfOfficeStyles.class);
-  //		this.appendChild(officeStyles);
-  //		return officeStyles;
-  //	}
+  /**
+   * Create child element {@odf.element office:automatic-styles}.
+   *
+   * <p>Child element is new in Odf 1.2
+   *
+   * @return the element {@odf.element office:automatic-styles}
+   */
+  public OfficeAutomaticStylesElement newOfficeAutomaticStylesElement() {
+    OfficeAutomaticStylesElement officeAutomaticStyles =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeAutomaticStylesElement.class);
+    this.appendChild(officeAutomaticStyles);
+    return officeAutomaticStyles;
+  }
 
+  /**
+   * Create child element {@odf.element office:font-face-decls}.
+   *
+   * <p>Child element is new in Odf 1.2
+   *
+   * @return the element {@odf.element office:font-face-decls}
+   */
+  public OfficeFontFaceDeclsElement newOfficeFontFaceDeclsElement() {
+    OfficeFontFaceDeclsElement officeFontFaceDecls =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeFontFaceDeclsElement.class);
+    this.appendChild(officeFontFaceDecls);
+    return officeFontFaceDecls;
+  }
+
+  /**
+   * Create child element {@odf.element office:master-styles}.
+   *
+   * <p>Child element is new in Odf 1.2
+   *
+   * @return the element {@odf.element office:master-styles}
+   */
+  public OfficeMasterStylesElement newOfficeMasterStylesElement() {
+    OfficeMasterStylesElement officeMasterStyles =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeMasterStylesElement.class);
+    this.appendChild(officeMasterStyles);
+    return officeMasterStyles;
+  }
+
+  /**
+   * Create child element {@odf.element office:styles}.
+   *
+   * <p>Child element is new in Odf 1.2
+   *
+   * @return the element {@odf.element office:styles}
+   */
+  public OfficeStylesElement newOfficeStylesElement() {
+    OfficeStylesElement officeStyles =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeStylesElement.class);
+    this.appendChild(officeStyles);
+    return officeStyles;
+  }
+
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

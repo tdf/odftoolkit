@@ -353,6 +353,8 @@ public class DrawCustomShapeElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element draw:enhanced-geometry}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:enhanced-geometry}
    */
   public DrawEnhancedGeometryElement newDrawEnhancedGeometryElement() {
@@ -391,6 +393,8 @@ public class DrawCustomShapeElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element office:event-listeners}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element office:event-listeners}
    */
   public OfficeEventListenersElement newOfficeEventListenersElement() {
@@ -403,6 +407,8 @@ public class DrawCustomShapeElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element svg:desc}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element svg:desc}
    */
   public SvgDescElement newSvgDescElement() {
@@ -413,6 +419,8 @@ public class DrawCustomShapeElement extends DrawShapeElementBase {
 
   /**
    * Create child element {@odf.element svg:title}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element svg:title}
    */
@@ -426,6 +434,8 @@ public class DrawCustomShapeElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element text:list}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:list}
    */
   public TextListElement newTextListElement() {
@@ -438,6 +448,8 @@ public class DrawCustomShapeElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element text:p}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:p}
    */
   public TextPElement newTextPElement() {
@@ -446,6 +458,12 @@ public class DrawCustomShapeElement extends DrawShapeElementBase {
     return textP;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -119,10 +119,10 @@ public class DrawTypeAttribute extends OdfAttribute {
     String defaultValue = null;
     if (parentElement != null) {
       if (parentElement instanceof DrawConnectorElement) {
-        defaultValue = DEFAULT_VALUE_STANDARD;
+        defaultValue = "standard";
       }
       if (parentElement instanceof DrawEnhancedGeometryElement) {
-        defaultValue = DEFAULT_VALUE_NON_PRIMITIVE;
+        defaultValue = "non-primitive";
       }
     }
     return defaultValue;

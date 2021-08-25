@@ -62,7 +62,7 @@ public class DbFormsElement extends OdfElement {
    * Create child element {@odf.element db:component}.
    *
    * @param dbNameValue the <code>String</code> value of <code>DbNameAttribute</code>, see
-   *     {@odf.attribute db:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute db:name} at specification
    * @return the element {@odf.element db:component}
    */
   public DbComponentElement newDbComponentElement(String dbNameValue) {
@@ -77,7 +77,7 @@ public class DbFormsElement extends OdfElement {
    * Create child element {@odf.element db:component-collection}.
    *
    * @param dbNameValue the <code>String</code> value of <code>DbNameAttribute</code>, see
-   *     {@odf.attribute db:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute db:name} at specification
    * @return the element {@odf.element db:component-collection}
    */
   public DbComponentCollectionElement newDbComponentCollectionElement(String dbNameValue) {
@@ -88,6 +88,12 @@ public class DbFormsElement extends OdfElement {
     return dbComponentCollection;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

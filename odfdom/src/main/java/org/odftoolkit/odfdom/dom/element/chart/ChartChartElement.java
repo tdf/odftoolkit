@@ -329,6 +329,8 @@ public class ChartChartElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element chart:footer}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element chart:footer}
    */
   public ChartFooterElement newChartFooterElement() {
@@ -362,6 +364,8 @@ public class ChartChartElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element chart:plot-area}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * <p>Child element is mandatory.
    *
    * @return the element {@odf.element chart:plot-area}
@@ -376,6 +380,8 @@ public class ChartChartElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element chart:subtitle}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element chart:subtitle}
    */
   public ChartSubtitleElement newChartSubtitleElement() {
@@ -387,6 +393,8 @@ public class ChartChartElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element chart:title}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element chart:title}
    */
@@ -400,6 +408,8 @@ public class ChartChartElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element table:table}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:table}
    */
   public TableTableElement newTableTableElement() {
@@ -409,6 +419,12 @@ public class ChartChartElement extends OdfStylableElement {
     return tableTable;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

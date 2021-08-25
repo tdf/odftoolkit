@@ -567,6 +567,8 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
   /**
    * Create child element {@odf.element text:index-title-template}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:index-title-template}
    */
   public TextIndexTitleTemplateElement newTextIndexTitleTemplateElement() {
@@ -576,6 +578,12 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     return textIndexTitleTemplate;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

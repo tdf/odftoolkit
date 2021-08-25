@@ -24,6 +24,7 @@
 package schema2template.example.odf;
 
 import com.sun.msv.grammar.Expression;
+import com.sun.msv.grammar.Grammar;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URISyntaxException;
@@ -138,6 +139,13 @@ public class SchemaToTemplate {
       context.put("odfModel", odfModel);
       context.put("codeModel", sourceCodeModel);
       context.put("xmlModelHistory", xmlModelHistory);
+      Map<String, List<String>> styleFamilyPropertiesMap =
+          new OdfFamilyPropertiesPatternMatcher(xmlModel.getGrammar()).getFamilyProperties();
+      /* Only works for part 3 schema:
+        assert styleFamilyPropertiesMap != null && !styleFamilyPropertiesMap.isEmpty()
+          : "The @style:family<->'properties elements' map must not be empty!";
+      */
+      context.put("styleFamilyPropertiesMap", styleFamilyPropertiesMap);
     }
     LOG.info("Finished initialization..");
     return context;
@@ -249,7 +257,7 @@ public class SchemaToTemplate {
    *     expression)
    * @throws Exception
    */
-  public static Expression loadSchemaODF10() throws Exception {
+  public static Grammar loadSchemaODF10() throws Exception {
     return XMLModel.loadSchema(getAbsolutePathFromClassloader(ODF10_RNG_FILE));
   }
 
@@ -260,7 +268,7 @@ public class SchemaToTemplate {
    *     expression)
    * @throws Exception
    */
-  public static Expression loadSchemaODF11() throws Exception {
+  public static Grammar loadSchemaODF11() throws Exception {
     return XMLModel.loadSchema(getAbsolutePathFromClassloader(ODF11_RNG_FILE));
   }
 
@@ -271,7 +279,7 @@ public class SchemaToTemplate {
    *     expression)
    * @throws Exception
    */
-  public static Expression loadSchemaODF12() throws Exception {
+  public static Grammar loadSchemaODF12() throws Exception {
     return XMLModel.loadSchema(getAbsolutePathFromClassloader(ODF12_RNG_FILE));
   }
 
@@ -282,7 +290,7 @@ public class SchemaToTemplate {
    *     expression)
    * @throws Exception
    */
-  public static Expression loadSchemaODF13() throws Exception {
+  public static Grammar loadSchemaODF13() throws Exception {
     return XMLModel.loadSchema(getAbsolutePathFromClassloader(ODF13_RNG_FILE));
   }
 

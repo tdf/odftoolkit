@@ -19,7 +19,7 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  *
- * <p>********************************************************************
+ * <p>******************************************************************
  */
 package schema2template.example.odf;
 
@@ -254,33 +254,33 @@ public class OdfGenerationTest {
               .toString();
 
       // ******** ODF 1.3 *************
-      /*      SchemaToTemplate.run(
-                templateFilePathDom,
-                templateFileDom,
-                xmlModelOdf13Dom,
-                xmlModelDomHistory13,
-                contextInfoDom,
-                targetOdf13,
-                "dom-output-files.xml");
+      SchemaToTemplate.run(
+          templateFilePathDom,
+          templateFileDom,
+          xmlModelOdf13Dom,
+          xmlModelDomHistory13,
+          contextInfoDom,
+          targetOdf13,
+          "dom-output-files.xml");
 
-            SchemaToTemplate.run(
-                templateFilePathPkg,
-                templateFilePkgManifest,
-                xmlModelOdf13PkgManifest,
-                xmlModelPkgManifestHistory13,
-                contextInfoPkg,
-                targetOdf13,
-                "pkg-manifest-output-files.xml");
+      SchemaToTemplate.run(
+          templateFilePathPkg,
+          templateFilePkgManifest,
+          xmlModelOdf13PkgManifest,
+          xmlModelPkgManifestHistory13,
+          contextInfoPkg,
+          targetOdf13,
+          "pkg-manifest-output-files.xml");
 
-            SchemaToTemplate.run(
-                templateFilePathPkg,
-                templateFilePkgSignature,
-                xmlModelOdf13PkgSignature,
-                xmlModelPkgSignatureHistory13,
-                contextInfoPkg,
-                targetOdf13,
-                "pkg-dsig-output-files.xml");
-      */
+      SchemaToTemplate.run(
+          templateFilePathPkg,
+          templateFilePkgSignature,
+          xmlModelOdf13PkgSignature,
+          xmlModelPkgSignatureHistory13,
+          contextInfoPkg,
+          targetOdf13,
+          "pkg-dsig-output-files.xml");
+
       // ******** ODF 1.2 *************
       SchemaToTemplate.run(
           templateFilePathDom,
@@ -310,30 +310,28 @@ public class OdfGenerationTest {
           "pkg-dsig-output-files.xml");
 
       // ******** ODF 1.1 *************
-      /*    SchemaToTemplate.run(
-                templateFilePathDom,
-                templateFileDom,
-                xmlModelOdf11Dom,
-                xmlModelDomHistory11,
-                contextInfoDom,
-                targetOdf11,
-                "dom-output-files.xml");
-      */
-      // ******** ODF 1.0 *************
+      SchemaToTemplate.run(
+          templateFilePathDom,
+          templateFileDom,
+          xmlModelOdf11Dom,
+          xmlModelDomHistory11,
+          contextInfoDom,
+          targetOdf11,
+          "dom-output-files.xml");
 
-      /*      SchemaToTemplate.run(
-                templateFilePathDom,
-                templateFileDom,
-                xmlModelOdf10Dom,
-                null,
-                contextInfoDom,
-                targetOdf10,
-                "dom-output-files.xml");
-      */
+      // ******** ODF 1.0 *************
+      SchemaToTemplate.run(
+          templateFilePathDom,
+          templateFileDom,
+          xmlModelOdf10Dom,
+          null,
+          contextInfoDom,
+          targetOdf10,
+          "dom-output-files.xml");
+
       // ******** Reference Test *************
       // **2DO: Compare text file content, but ignore line breaking. Showing lines with the
       // difference!!
-
       // generated sources must be equal to the previously generated reference sources
       //            Assert.assertTrue(
       //                    "The new generated sources\n\t"

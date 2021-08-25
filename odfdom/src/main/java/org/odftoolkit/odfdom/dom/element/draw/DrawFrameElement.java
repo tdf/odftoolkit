@@ -474,6 +474,8 @@ public class DrawFrameElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element draw:applet}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:applet}
    */
   public DrawAppletElement newDrawAppletElement() {
@@ -577,6 +579,8 @@ public class DrawFrameElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element draw:image}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:image}
    */
   public DrawImageElement newDrawImageElement() {
@@ -588,6 +592,8 @@ public class DrawFrameElement extends DrawShapeElementBase {
 
   /**
    * Create child element {@odf.element draw:image-map}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:image-map}
    */
@@ -601,6 +607,8 @@ public class DrawFrameElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element draw:object}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:object}
    */
   public DrawObjectElement newDrawObjectElement() {
@@ -612,6 +620,8 @@ public class DrawFrameElement extends DrawShapeElementBase {
 
   /**
    * Create child element {@odf.element draw:object-ole}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:object-ole}
    */
@@ -643,6 +653,8 @@ public class DrawFrameElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element draw:text-box}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:text-box}
    */
   public DrawTextBoxElement newDrawTextBoxElement() {
@@ -654,6 +666,8 @@ public class DrawFrameElement extends DrawShapeElementBase {
 
   /**
    * Create child element {@odf.element office:event-listeners}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element office:event-listeners}
    */
@@ -667,6 +681,8 @@ public class DrawFrameElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element svg:desc}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element svg:desc}
    */
   public SvgDescElement newSvgDescElement() {
@@ -677,6 +693,8 @@ public class DrawFrameElement extends DrawShapeElementBase {
 
   /**
    * Create child element {@odf.element svg:title}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element svg:title}
    */
@@ -701,6 +719,12 @@ public class DrawFrameElement extends DrawShapeElementBase {
     return tableTable;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
