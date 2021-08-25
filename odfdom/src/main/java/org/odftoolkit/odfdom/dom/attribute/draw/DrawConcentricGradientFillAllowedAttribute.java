@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.attribute.draw;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
@@ -94,12 +93,7 @@ public class DrawConcentricGradientFillAllowedAttribute extends OdfAttribute {
    */
   @Override
   public String getDefault() {
-    OdfElement parentElement = (OdfElement) getOwnerElement();
-    String defaultValue = null;
-    if (parentElement != null) {
-      defaultValue = DEFAULT_VALUE;
-    }
-    return defaultValue;
+    return DEFAULT_VALUE;
   }
 
   /**

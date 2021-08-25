@@ -178,6 +178,8 @@ public class TextListElement extends OdfElement {
   /**
    * Create child element {@odf.element text:list-header}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:list-header}
    */
   public TextListHeaderElement newTextListHeaderElement() {
@@ -190,6 +192,8 @@ public class TextListElement extends OdfElement {
   /**
    * Create child element {@odf.element text:list-item}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:list-item}
    */
   public TextListItemElement newTextListItemElement() {
@@ -199,6 +203,12 @@ public class TextListElement extends OdfElement {
     return textListItem;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

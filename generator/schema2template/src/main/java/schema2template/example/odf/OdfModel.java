@@ -36,8 +36,8 @@ import schema2template.model.QNameValue;
 import schema2template.model.QNamed;
 
 /**
- * Model for ODF specific enhancements. For example, these might be style families used for ODF
- * elements or attribute default values.
+ * Model for ODF specific enhancements. Capsulates information from the from the config file. For
+ * example, these might be: - style families used for ODF elements - default value attribute
  */
 public class OdfModel {
 
@@ -92,7 +92,7 @@ public class OdfModel {
    * Determine whether an ELEMENT is stylable (a.k.a. has at least one defined style family). Note:
    * All Definitions sharing the same name share the same style families.
    *
-   * @param element Element
+   * @param element stylable element name
    * @return whether there are style families defined for this Definition
    */
   public boolean isStylable(QNamed element) {

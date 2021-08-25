@@ -239,6 +239,8 @@ public class DrawObjectElement extends OdfElement {
   /**
    * Create child element {@odf.element math:math}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element math:math}
    */
   public MathMathElement newMathMathElement() {
@@ -267,6 +269,12 @@ public class DrawObjectElement extends OdfElement {
     return officeDocument;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

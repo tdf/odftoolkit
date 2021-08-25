@@ -24,6 +24,7 @@
 package schema2template.example.odf;
 
 import com.sun.msv.grammar.Expression;
+import com.sun.msv.grammar.Grammar;
 import com.sun.msv.grammar.NameClassAndExpression;
 import com.sun.msv.grammar.ReferenceExp;
 import com.sun.msv.reader.trex.ng.RELAXNGReader;
@@ -143,19 +144,18 @@ public class PathPrinter {
     return retval;
   }
 
-  private static Expression parseOdfSchema(File rngFile) throws Exception {
+  private static Grammar parseOdfSchema(File rngFile) throws Exception {
     SAXParserFactory factory = SAXParserFactory.newInstance();
     factory.setNamespaceAware(true);
 
-    Expression root =
+    Grammar grammar =
         RELAXNGReader.parse(
-                rngFile.getAbsolutePath(), factory, new com.sun.msv.reader.util.IgnoreController())
-            .getTopLevel();
+            rngFile.getAbsolutePath(), factory, new com.sun.msv.reader.util.IgnoreController());
 
-    if (root == null) {
+    if (grammar == null) {
       throw new Exception("Schema could not be parsed.");
     }
-    return root;
+    return grammar;
   }
 
   public static void main(String[] args) throws Exception {
@@ -174,7 +174,7 @@ public class PathPrinter {
             + SchemaToTemplate
                 .ODF12_RNG_FILE // examples\odf\odf-schemas\OpenDocument-v1.2-os-schema.rng'
             + "'");
-    Expression root =
+    Grammar grammar =
         parseOdfSchema(
             new File(
                 System.getProperty("user.dir")
@@ -184,7 +184,7 @@ public class PathPrinter {
                     + SchemaToTemplate.ODF12_RNG_FILE));
     PuzzlePieceSet elements = new PuzzlePieceSet();
     PuzzlePieceSet attributes = new PuzzlePieceSet();
-    PuzzlePiece.extractPuzzlePieces(root, elements, attributes, null);
+    PuzzlePiece.extractPuzzlePieces(grammar, elements, attributes, null);
     Map<String, SortedSet<PuzzlePiece>> nameToDefinition =
         createDefinitionMap(new TreeSet<PuzzlePiece>(elements));
 

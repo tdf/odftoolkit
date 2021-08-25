@@ -64,7 +64,7 @@ public class DbQueriesElement extends OdfElement {
    * @param dbCommandValue the <code>String</code> value of <code>DbCommandAttribute</code>, see
    *     {@odf.attribute db:command} at specification
    * @param dbNameValue the <code>String</code> value of <code>DbNameAttribute</code>, see
-   *     {@odf.attribute db:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute db:name} at specification
    * @return the element {@odf.element db:query}
    */
   public DbQueryElement newDbQueryElement(String dbCommandValue, String dbNameValue) {
@@ -79,7 +79,7 @@ public class DbQueriesElement extends OdfElement {
    * Create child element {@odf.element db:query-collection}.
    *
    * @param dbNameValue the <code>String</code> value of <code>DbNameAttribute</code>, see
-   *     {@odf.attribute db:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute db:name} at specification
    * @return the element {@odf.element db:query-collection}
    */
   public DbQueryCollectionElement newDbQueryCollectionElement(String dbNameValue) {
@@ -90,6 +90,12 @@ public class DbQueriesElement extends OdfElement {
     return dbQueryCollection;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

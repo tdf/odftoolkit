@@ -113,6 +113,8 @@ public class StyleHeaderLeftElement extends OdfElement {
   /**
    * Create child element {@odf.element style:region-center}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element style:region-center}
    */
   public StyleRegionCenterElement newStyleRegionCenterElement() {
@@ -124,6 +126,8 @@ public class StyleHeaderLeftElement extends OdfElement {
 
   /**
    * Create child element {@odf.element style:region-left}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element style:region-left}
    */
@@ -137,6 +141,8 @@ public class StyleHeaderLeftElement extends OdfElement {
   /**
    * Create child element {@odf.element style:region-right}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element style:region-right}
    */
   public StyleRegionRightElement newStyleRegionRightElement() {
@@ -148,6 +154,8 @@ public class StyleHeaderLeftElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:table}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:table}
    */
@@ -256,6 +264,8 @@ public class StyleHeaderLeftElement extends OdfElement {
   /**
    * Create child element {@odf.element text:dde-connection-decls}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:dde-connection-decls}
    */
   public TextDdeConnectionDeclsElement newTextDdeConnectionDeclsElement() {
@@ -312,6 +322,8 @@ public class StyleHeaderLeftElement extends OdfElement {
   /**
    * Create child element {@odf.element text:list}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:list}
    */
   public TextListElement newTextListElement() {
@@ -338,6 +350,8 @@ public class StyleHeaderLeftElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:p}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:p}
    */
@@ -367,6 +381,8 @@ public class StyleHeaderLeftElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:sequence-decls}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sequence-decls}
    */
@@ -410,6 +426,8 @@ public class StyleHeaderLeftElement extends OdfElement {
   /**
    * Create child element {@odf.element text:tracked-changes}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:tracked-changes}
    */
   public TextTrackedChangesElement newTextTrackedChangesElement() {
@@ -421,6 +439,8 @@ public class StyleHeaderLeftElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:user-field-decls}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:user-field-decls}
    */
@@ -449,6 +469,8 @@ public class StyleHeaderLeftElement extends OdfElement {
   /**
    * Create child element {@odf.element text:variable-decls}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:variable-decls}
    */
   public TextVariableDeclsElement newTextVariableDeclsElement() {
@@ -458,6 +480,12 @@ public class StyleHeaderLeftElement extends OdfElement {
     return textVariableDecls;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

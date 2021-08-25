@@ -631,6 +631,8 @@ public class ChartPlotAreaElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element chart:floor}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element chart:floor}
    */
   public ChartFloorElement newChartFloorElement() {
@@ -642,6 +644,8 @@ public class ChartPlotAreaElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element chart:series}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element chart:series}
    */
@@ -655,6 +659,8 @@ public class ChartPlotAreaElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element chart:stock-gain-marker}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element chart:stock-gain-marker}
    */
   public ChartStockGainMarkerElement newChartStockGainMarkerElement() {
@@ -666,6 +672,8 @@ public class ChartPlotAreaElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element chart:stock-loss-marker}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element chart:stock-loss-marker}
    */
@@ -679,6 +687,8 @@ public class ChartPlotAreaElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element chart:stock-range-line}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element chart:stock-range-line}
    */
   public ChartStockRangeLineElement newChartStockRangeLineElement() {
@@ -690,6 +700,8 @@ public class ChartPlotAreaElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element chart:wall}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element chart:wall}
    */
@@ -715,6 +727,12 @@ public class ChartPlotAreaElement extends OdfStylableElement {
     return dr3dLight;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

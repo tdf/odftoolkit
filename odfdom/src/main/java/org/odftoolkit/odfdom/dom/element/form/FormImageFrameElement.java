@@ -383,6 +383,8 @@ public class FormImageFrameElement extends OdfElement {
   /**
    * Create child element {@odf.element form:properties}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element form:properties}
    */
   public FormPropertiesElement newFormPropertiesElement() {
@@ -395,6 +397,8 @@ public class FormImageFrameElement extends OdfElement {
   /**
    * Create child element {@odf.element office:event-listeners}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element office:event-listeners}
    */
   public OfficeEventListenersElement newOfficeEventListenersElement() {
@@ -404,6 +408,12 @@ public class FormImageFrameElement extends OdfElement {
     return officeEventListeners;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

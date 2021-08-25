@@ -32,13 +32,12 @@ package org.odftoolkit.odfdom.pkg.manifest;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
-/** Manifest implementation of OpenDocument element {@odf.element manifest:manifest}. */
+/** Manifest implementation of OpenDocument element {@odf.element manifest}. */
 public class ManifestElement extends OdfElement {
 
   public static final OdfName ELEMENT_NAME =
-      OdfName.newName(OdfPackageNamespace.MANIFEST, "manifest");
+      OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:manifest");
 
   /**
    * Create the instance of <code>ManifestElement</code>
@@ -52,16 +51,15 @@ public class ManifestElement extends OdfElement {
   /**
    * Get the element name
    *
-   * @return return <code>OdfName</code> the name of element {@odf.element manifest:manifest}.
+   * @return return <code>OdfName</code> the name of element {@odf.element manifest}.
    */
-  @Override
   public OdfName getOdfName() {
     return ELEMENT_NAME;
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>VersionAttribute</code> , See
-   * {@odf.attribute manifest:version}
+   * {@odf.attribute version}
    *
    * <p>Attribute is mandatory.
    *
@@ -69,8 +67,7 @@ public class ManifestElement extends OdfElement {
    *     and no default value defined.
    */
   public String getVersionAttribute() {
-    VersionAttribute attr =
-        (VersionAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "version");
+    VersionAttribute attr = (VersionAttribute) getOdfAttribute(VersionAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -79,7 +76,7 @@ public class ManifestElement extends OdfElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>VersionAttribute</code> , See
-   * {@odf.attribute manifest:version}
+   * {@odf.attribute version}
    *
    * @param versionValue The type is <code>String</code>
    */
@@ -90,21 +87,20 @@ public class ManifestElement extends OdfElement {
   }
 
   /**
-   * Create child element {@odf.element manifest:file-entry}.
+   * Create child element {@odf.element file-entry}.
    *
    * @param fullPathValue the <code>String</code> value of <code>FullPathAttribute</code>, see
-   *     {@odf.attribute manifest:full-path} at specification
+   *     {@odf.attribute full-path} at specification
    * @param mediaTypeValue the <code>String</code> value of <code>MediaTypeAttribute</code>, see
-   *     {@odf.attribute manifest:media-type} at specification Child element is new in Odf 1.2
-   *     <p>Child element is mandatory.
-   * @return the element {@odf.element manifest:file-entry}
+   *     {@odf.attribute media-type} at specification Child element is mandatory.
+   * @return the element {@odf.element file-entry}
    */
   public FileEntryElement newFileEntryElement(String fullPathValue, String mediaTypeValue) {
-    FileEntryElement manifestFileEntry =
+    FileEntryElement fileEntry =
         ((OdfFileDom) this.ownerDocument).newOdfElement(FileEntryElement.class);
-    manifestFileEntry.setFullPathAttribute(fullPathValue);
-    manifestFileEntry.setMediaTypeAttribute(mediaTypeValue);
-    this.appendChild(manifestFileEntry);
-    return manifestFileEntry;
+    fileEntry.setFullPathAttribute(fullPathValue);
+    fileEntry.setMediaTypeAttribute(mediaTypeValue);
+    this.appendChild(fileEntry);
+    return fileEntry;
   }
 }

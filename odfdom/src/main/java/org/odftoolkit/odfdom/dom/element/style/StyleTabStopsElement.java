@@ -65,7 +65,7 @@ public class StyleTabStopsElement extends OdfElement {
    * @param stylePositionValue the <code>String</code> value of <code>StylePositionAttribute</code>,
    *     see {@odf.attribute style:position} at specification
    * @param styleTypeValue the <code>String</code> value of <code>StyleTypeAttribute</code>, see
-   *     {@odf.attribute style:type} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute style:type} at specification
    * @return the element {@odf.element style:tab-stop}
    */
   public StyleTabStopElement newStyleTabStopElement(
@@ -78,6 +78,12 @@ public class StyleTabStopsElement extends OdfElement {
     return styleTabStop;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

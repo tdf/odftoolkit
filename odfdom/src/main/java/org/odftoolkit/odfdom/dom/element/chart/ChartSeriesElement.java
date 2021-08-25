@@ -259,6 +259,8 @@ public class ChartSeriesElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element chart:data-point}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element chart:data-point}
    */
   public ChartDataPointElement newChartDataPointElement() {
@@ -270,6 +272,8 @@ public class ChartSeriesElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element chart:domain}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element chart:domain}
    */
@@ -298,6 +302,8 @@ public class ChartSeriesElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element chart:mean-value}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element chart:mean-value}
    */
   public ChartMeanValueElement newChartMeanValueElement() {
@@ -310,6 +316,8 @@ public class ChartSeriesElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element chart:regression-curve}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element chart:regression-curve}
    */
   public ChartRegressionCurveElement newChartRegressionCurveElement() {
@@ -319,6 +327,12 @@ public class ChartSeriesElement extends OdfStylableElement {
     return chartRegressionCurve;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -450,6 +450,8 @@ public class DrawPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element anim:audio}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element anim:audio}
    */
   public AnimAudioElement newAnimAudioElement() {
@@ -477,6 +479,8 @@ public class DrawPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element anim:iterate}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element anim:iterate}
    */
   public AnimIterateElement newAnimIterateElement() {
@@ -489,6 +493,8 @@ public class DrawPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element anim:par}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element anim:par}
    */
   public AnimParElement newAnimParElement() {
@@ -499,6 +505,8 @@ public class DrawPageElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element anim:seq}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element anim:seq}
    */
@@ -540,6 +548,8 @@ public class DrawPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element dr3d:scene}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element dr3d:scene}
    */
   public Dr3dSceneElement newDr3dSceneElement() {
@@ -555,7 +565,7 @@ public class DrawPageElement extends OdfStylableElement {
    * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
    *     {@odf.attribute xlink:href} at specification
    * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
-   *     {@odf.attribute xlink:type} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute xlink:type} at specification
    * @return the element {@odf.element draw:a}
    */
   public DrawAElement newDrawAElement(String xlinkHrefValue, String xlinkTypeValue) {
@@ -569,6 +579,8 @@ public class DrawPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:caption}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:caption}
    */
   public DrawCaptionElement newDrawCaptionElement() {
@@ -580,6 +592,8 @@ public class DrawPageElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:circle}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:circle}
    */
@@ -623,6 +637,8 @@ public class DrawPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:custom-shape}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:custom-shape}
    */
   public DrawCustomShapeElement newDrawCustomShapeElement() {
@@ -634,6 +650,8 @@ public class DrawPageElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:ellipse}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:ellipse}
    */
@@ -647,6 +665,8 @@ public class DrawPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:frame}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:frame}
    */
   public DrawFrameElement newDrawFrameElement() {
@@ -658,6 +678,8 @@ public class DrawPageElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:g}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:g}
    */
@@ -734,6 +756,8 @@ public class DrawPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:page-thumbnail}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:page-thumbnail}
    */
   public DrawPageThumbnailElement newDrawPageThumbnailElement() {
@@ -800,6 +824,8 @@ public class DrawPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:rect}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:rect}
    */
   public DrawRectElement newDrawRectElement() {
@@ -831,6 +857,8 @@ public class DrawPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element office:forms}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element office:forms}
    */
   public OfficeFormsElement newOfficeFormsElement() {
@@ -843,6 +871,8 @@ public class DrawPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element presentation:animations}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element presentation:animations}
    */
   public PresentationAnimationsElement newPresentationAnimationsElement() {
@@ -854,6 +884,8 @@ public class DrawPageElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element presentation:notes}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element presentation:notes}
    */
@@ -891,6 +923,12 @@ public class DrawPageElement extends OdfStylableElement {
     return svgTitle;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

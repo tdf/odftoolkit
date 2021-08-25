@@ -129,6 +129,8 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 #end
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -462,6 +464,13 @@ public class $className extends $baseClassName {
 #end
 #end
 #end
+
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
 	@Override
 	public void accept(ElementVisitor visitor) {
 		if (visitor instanceof DefaultElementVisitor) {

@@ -171,6 +171,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element dr3d:scene}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element dr3d:scene}
    */
   public Dr3dSceneElement newDr3dSceneElement() {
@@ -200,6 +202,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:caption}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:caption}
    */
   public DrawCaptionElement newDrawCaptionElement() {
@@ -211,6 +215,8 @@ public class OfficeTextElement extends OdfElement {
 
   /**
    * Create child element {@odf.element draw:circle}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:circle}
    */
@@ -254,6 +260,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:custom-shape}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:custom-shape}
    */
   public DrawCustomShapeElement newDrawCustomShapeElement() {
@@ -265,6 +273,8 @@ public class OfficeTextElement extends OdfElement {
 
   /**
    * Create child element {@odf.element draw:ellipse}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:ellipse}
    */
@@ -278,6 +288,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:frame}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:frame}
    */
   public DrawFrameElement newDrawFrameElement() {
@@ -289,6 +301,8 @@ public class OfficeTextElement extends OdfElement {
 
   /**
    * Create child element {@odf.element draw:g}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:g}
    */
@@ -350,6 +364,8 @@ public class OfficeTextElement extends OdfElement {
 
   /**
    * Create child element {@odf.element draw:page-thumbnail}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:page-thumbnail}
    */
@@ -417,6 +433,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:rect}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element draw:rect}
    */
   public DrawRectElement newDrawRectElement() {
@@ -448,6 +466,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element office:forms}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element office:forms}
    */
   public OfficeFormsElement newOfficeFormsElement() {
@@ -459,6 +479,8 @@ public class OfficeTextElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:calculation-settings}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:calculation-settings}
    */
@@ -499,6 +521,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element table:content-validations}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:content-validations}
    */
   public TableContentValidationsElement newTableContentValidationsElement() {
@@ -510,6 +534,8 @@ public class OfficeTextElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:data-pilot-tables}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:data-pilot-tables}
    */
@@ -523,6 +549,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element table:database-ranges}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:database-ranges}
    */
   public TableDatabaseRangesElement newTableDatabaseRangesElement() {
@@ -534,6 +562,8 @@ public class OfficeTextElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:dde-links}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:dde-links}
    */
@@ -547,6 +577,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element table:label-ranges}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:label-ranges}
    */
   public TableLabelRangesElement newTableLabelRangesElement() {
@@ -559,6 +591,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element table:named-expressions}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element table:named-expressions}
    */
   public TableNamedExpressionsElement newTableNamedExpressionsElement() {
@@ -570,6 +604,8 @@ public class OfficeTextElement extends OdfElement {
 
   /**
    * Create child element {@odf.element table:table}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:table}
    */
@@ -678,6 +714,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element text:dde-connection-decls}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:dde-connection-decls}
    */
   public TextDdeConnectionDeclsElement newTextDdeConnectionDeclsElement() {
@@ -718,6 +756,8 @@ public class OfficeTextElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:list}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:list}
    */
@@ -761,6 +801,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element text:p}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:p}
    */
   public TextPElement newTextPElement() {
@@ -771,6 +813,8 @@ public class OfficeTextElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:page-sequence}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:page-sequence}
    */
@@ -802,6 +846,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sequence-decls}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:sequence-decls}
    */
   public TextSequenceDeclsElement newTextSequenceDeclsElement() {
@@ -813,6 +859,8 @@ public class OfficeTextElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:soft-page-break}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:soft-page-break}
    */
@@ -856,6 +904,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element text:tracked-changes}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:tracked-changes}
    */
   public TextTrackedChangesElement newTextTrackedChangesElement() {
@@ -867,6 +917,8 @@ public class OfficeTextElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:user-field-decls}.
+   *
+   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:user-field-decls}
    */
@@ -895,6 +947,8 @@ public class OfficeTextElement extends OdfElement {
   /**
    * Create child element {@odf.element text:variable-decls}.
    *
+   * <p>Child element is new in Odf 1.2
+   *
    * @return the element {@odf.element text:variable-decls}
    */
   public TextVariableDeclsElement newTextVariableDeclsElement() {
@@ -904,6 +958,12 @@ public class OfficeTextElement extends OdfElement {
     return textVariableDecls;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
