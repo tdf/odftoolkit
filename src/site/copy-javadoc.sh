@@ -1,11 +1,12 @@
 #!/bin/bash
 
-echo "Copy generated JavaDoc API from projects into /docs - must been built earlier with 'mvn install'..."
+echo "Copy generated JavaDoc API from projects into /docs - must been built earlier with '(mvn install && cd odfdom && mvn javadoc:javadoc)'..."
 rm -rf ../../docs/api/schema2template
 mv ../../generator/schema2template/target/apidocs ../../docs/api/schema2template
 
 rm -rf ../../docs/api/odfdom
-mv ../../odfdom/target/apidocs ../../docs/api/odfdom
+mv ../../odfdom/target/site/apidocs ../../docs/api/odfdom
+mv ../../odfdom/target/apidocs/resources ../../docs/api/odfdom/apidocs/
 
 rm -rf ../../docs/api/taglets
 mv ../../taglets/target/apidocs ../../docs/api/taglets
