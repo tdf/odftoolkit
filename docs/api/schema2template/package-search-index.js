@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"schema2template"},{"l":"schema2template.example.odf"},{"l":"schema2template.model"}]
