@@ -96,13 +96,12 @@
       <h2 id="building-javadoc-and-publishing-the-javadoc">Building JavaDoc and publishing the JavaDoc</h2> 
       <p>JavaDoc is generated as part of by calling from the root of the project the command:</p> 
       <div class="codehilite">
-        <pre><code class="language-shell">mvn clean install
+        <pre><code class="language-shell">(mvn install &amp;&amp; cd odfdom &amp;&amp; mvn javadoc:javadoc)
 </code></pre>
       </div> 
       <p>Run <code>copy-javadoc.sh</code> to build &amp; copy the created API directories into the &lt;ODFTOOLKIT_ROOT&gt;/docs/api directory and remove any prior files within.</p> 
       <div class="codehilite">
-        <pre><code class="language-shell">cd odftoolkit/src/site/java
-./copy-javadoc.sh
+        <pre><code class="language-shell">(cd src/site/java &amp;&amp; ./copy-javadoc.sh)
 </code></pre>
       </div> 
       <h2 id="submitting-your-results">Submitting your results</h2> 
