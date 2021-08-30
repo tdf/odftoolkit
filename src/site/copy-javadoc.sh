@@ -5,8 +5,7 @@ rm -rf ../../docs/api/schema2template
 mv ../../generator/schema2template/target/apidocs ../../docs/api/schema2template
 
 rm -rf ../../docs/api/odfdom
-mv ../../odfdom/target/site/apidocs ../../docs/api/odfdom
-mv ../../odfdom/target/apidocs/resources ../../docs/api/odfdom/apidocs/
+mv ../../odfdom/target/apidocs ../../docs/api/odfdom
 
 rm -rf ../../docs/api/taglets
 mv ../../taglets/target/apidocs ../../docs/api/taglets
