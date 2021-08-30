@@ -304,9 +304,11 @@
                         </goals>
                         <configuration>
                             <doclint>none</doclint>
+                            <!-- NullPointerException if not set!
                             <additionalOptions>
                                 <additionalOption>${javadoc.opts}</additionalOption>
                             </additionalOptions>
+                            -->
                         </configuration>
                     </execution>
                 </executions>
@@ -388,46 +390,6 @@
     </build>
     <reporting>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <!-- JDK 8 as workaround for exception,
-                    see https://bugs.openjdk.java.net/browse/JDK-8212233 -->
-                    <source>8</source>
-                    <doctitle>ODFDOM v${project.version}</doctitle>
-                    <links>
-                        <link>https://docs.oracle.com/en/java/javase/${jdk.version}/docs/api/</link>
-                        <link>https://xerces.apache.org/xerces-j/apiDocs/</link>
-                    </links>
-                    <isOffline>false</isOffline>
-                    <splitindex>true</splitindex>
-                    <windowtitle>ODFDOM API v${project.version} - https://odftoolkit.org/</windowtitle>
-                    <bottom>${javadoc.bottom}</bottom>
-                    <taglets>
-                        <taglet>
-                            <tagletClass>org.odftoolkit.odfdom.taglet.OdfElementTaglet</tagletClass>
-                        </taglet>
-                        <taglet>
-                            <tagletClass>org.odftoolkit.odfdom.taglet.OdfAttributeTaglet</tagletClass>
-                        </taglet>
-                        <taglet>
-                            <tagletClass>org.odftoolkit.odfdom.taglet.OdfDatatypeTaglet</tagletClass>
-                        </taglet>
-                    </taglets>
-                    <tagletArtifact>
-                        <groupId>${project.groupId}</groupId>
-                        <artifactId>taglets</artifactId>
-                        <version>${project.version}</version>
-                    </tagletArtifact>
-                    <doclint>none</doclint>
-                    <additionalOptions>
-                        <additionalOption>${javadoc.opts}</additionalOption>
-                    </additionalOptions>
-                    <docfilessubdirs>true</docfilessubdirs>
-                </configuration>
-            </plugin>
             <!-- Reporting integration test results -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
