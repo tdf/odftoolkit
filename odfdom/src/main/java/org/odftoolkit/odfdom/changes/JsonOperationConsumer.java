@@ -408,7 +408,7 @@ public class JsonOperationConsumer {
     } catch (Exception e) {
       LOG.log(
           Level.SEVERE,
-          "An error occured in the operation number {0}{1}",
+          "An error occurred in the operation number {0}{1}",
           new Object[] {acceptedOpCount, 1});
       LOG.severe("The operation was: " + op);
       throw e;
@@ -964,7 +964,7 @@ public class JsonOperationConsumer {
               // <text:p/> </text:list-item>< /text:list>. With the last paragraph the list
               // construct is being removed!
               // -> this seems to be wrong. For lists in the body it is a no op while in cells it
-              // sets the cell parent component wronlgy
+              // sets the cell parent component wrongly
               // parentComponentElement.setComponent(rootComponent);
               removeComponentElementAndInbetweenBoilerplate(parentComponentElement, targetElement);
             }
@@ -1009,7 +1009,7 @@ public class JsonOperationConsumer {
           // removing the no longer desired content
           targetParent.removeChild(targetElement);
 
-          // moving the previous list-item chilrden to the new list-header
+          // moving the previous list-item children to the new list-header
           TextListHeaderElement listHeader =
               new TextListHeaderElement((OdfFileDom) targetParent.getOwnerDocument());
           targetParent.moveChildrenTo(listHeader);
@@ -1041,15 +1041,15 @@ public class JsonOperationConsumer {
    * @param componentParent The element representing the next higher component
    * @param targetElement the element to be deleted. Bottom-up will be all parents traversed and
    *     deleted in case the original element to be deleted had no other siblings being components.
-   * @param decendantCount the number of descendants of the targetElement
+   * @param descendantCount the number of descendants of the targetElement
    * @return the number of descendants of the targetParent
    */
   private static int removeComponentElementAndEmptyBoilerplate(
-      OdfElement componentParent, OdfElement targetElement, int decendantCount) {
+      OdfElement componentParent, OdfElement targetElement, int descendantCount) {
     // if there is boilerplate elements between the targetElement and the componentParent
     OdfElement targetParent = (OdfElement) targetElement.getParentNode();
-    // if there is only a single elment below (not being the original target)
-    if (decendantCount == 0) {
+    // if there is only a single element below (not being the original target)
+    if (descendantCount == 0) {
       // if there is still no other component, delete the boilerplate element
       targetParent.removeChild(targetElement);
     }
@@ -1057,7 +1057,7 @@ public class JsonOperationConsumer {
       removeComponentElementAndEmptyBoilerplate(
           componentParent, targetParent, targetParent.countDescendantComponents());
     }
-    return decendantCount;
+    return descendantCount;
   }
 
   // ** Only adds text to Headings and Paragraphs */
@@ -1090,7 +1090,7 @@ public class JsonOperationConsumer {
     // ToDo - parse the text spans positions from the beginning, creating array - could do this from
     // the beginning..
     // better not for very long texts it is unnecessary, does not scale
-    //        adding the span depths, the span element referece, for every character?
+    //        adding the span depths, the span element reference, for every character?
     int endPos = startPos + newText.length() - 1;
     paragraphElementBase.insert(newText, startPos);
     // LO let the value attribute overrule the content, therefore this value have to vanish!
@@ -1116,7 +1116,7 @@ public class JsonOperationConsumer {
       // ToDo - parse the text spans positions from the beginning, creating array - could do this
       // from the beginning..
       // better not for very long texts it is unnecessary, does not scale
-      //  adding the span depths, the span element referece, for every character?
+      //  adding the span depths, the span element reference, for every character?
       // Insert an hyperlink above the span if an URL was included as property
       if (attrs.has("character")) {
         // Remove JSON String encoding for URLs
@@ -1362,7 +1362,7 @@ public class JsonOperationConsumer {
         if (oldStyle != null) {
           styles.removeChild(oldStyle);
         } else {
-          /* Workaround for OOo applicatoins
+          /* Workaround for OOo applications
            * Applications from the OpenOffice family are exchanging any space in their names with an '_20_' string.
            * Unfortunately they are using them equivalent in general, therefore the names 'Heading_20_2' and 'Heading 2' would result and into a name clash */
           if (styleName != null && styleName.contains(" ")) {
@@ -1440,7 +1440,7 @@ public class JsonOperationConsumer {
       // component earlier, why searching it ALWAYS again?
       final Component parentComponent = rootComponent.getParentOf(start);
       if (parentComponent != null) {
-        // the targetComponent migth be either text or an element
+        // the targetComponent might be either text or an element
         int targetPos = start.optInt(start.length() - 1);
         Node targetNode = parentComponent.getChildNode(targetPos);
         format(parentComponent.mRootElement, targetNode, start, end, attrs, Boolean.FALSE);
@@ -1476,7 +1476,7 @@ public class JsonOperationConsumer {
     if (attrs != null && attrs.length() != 0) {
       if (targetNode != null && targetNode instanceof OdfStylableElement) {
         OdfFileDom xmlDoc = (OdfFileDom) targetNode.getOwnerDocument();
-        // Adds the automatic/tempate style to the target element
+        // Adds the automatic/template style to the target element
         StyleStyleElement autoStyle = null;
         if (targetNode instanceof TextParagraphElementBase) {
           TextParagraphElementBase paragraphBaseElement = (TextParagraphElementBase) targetNode;
@@ -1563,7 +1563,7 @@ public class JsonOperationConsumer {
                   if (autoStyle != null && listStyleId != null && !listStyleId.isEmpty()) {
                     autoStyle.setStyleListStyleNameAttribute(listStyleId);
                   }
-                  // ToDo Optimiszation: remove the following for list level 0 and those without
+                  // ToDo Optimization: remove the following for list level 0 and those without
                   // preceding/following content!
                   // temporary move the paragraph out of the list to separate both list styles
                   setParagraphListProperties(
@@ -1744,7 +1744,7 @@ public class JsonOperationConsumer {
         }
       } else if (parentElement != null) {
         // If the parentComponentElement is a paragraph/heading, the target can not be a
-        // paragraph/heading as they are not allwed nested.
+        // paragraph/heading as they are not allowed nested.
         // Therefore we addChild a span around the text (or target element as draw:frame for image,
         // which is done by MSO15 by default)
         if (attrs.has("character")) {
@@ -2173,7 +2173,7 @@ public class JsonOperationConsumer {
           // if there is no preceding content, we need to move the paragraph into a list-header
           // element
           if (hasPrecedingListContent) {
-            // if the list item is shown the pragraph has to be in a list-item
+            // if the list item is shown the paragraph has to be in a list-item
             newParentElement = (OdfElement) lowestListElement.getParentNode().getParentNode();
             // Create new List Item
             TextListHeaderElement newListHeaderElement =
@@ -2207,7 +2207,7 @@ public class JsonOperationConsumer {
           OdfElement newParentElement;
 
           // parentComponentElement is a list element
-          // as if the list item is shown the pragraph has to be in a list-item
+          // as if the list item is shown the paragraph has to be in a list-item
           OdfElement listItemPrecedingSibling = (OdfElement) lowestListElement.getParentNode();
           OdfElement listItemFollowingSibling;
           if (listItemPrecedingSibling instanceof TextListItemElement
@@ -2361,7 +2361,7 @@ public class JsonOperationConsumer {
                 isSelectedParagraph = true;
                 // the selected character will always be removed
                 listItem.removeChild(listItemParagraph);
-                // if no deletion before the seleciton is required..
+                // if no deletion before the selection is required..
                 if (!deleteBeforeSelection) {
                   // stop here..
                   break;
@@ -2957,7 +2957,7 @@ public class JsonOperationConsumer {
         // ToDo - parse the text spans positions from the beginning, creating array - could do this
         // from the beginning..
         // better not for very long texts it is unnecessary, does not scale
-        //        adding the span depths, the span element referece, for every character?
+        //        adding the span depths, the span element reference, for every character?
         if (parentComponent instanceof TextContainer) {
           int startPos = start.getInt(start.length() - 1);
           int endPos;
@@ -4058,7 +4058,7 @@ public class JsonOperationConsumer {
     }
   }
 
-  // The following we should consider for symetry reasons..
+  // The following we should consider for symmetry reasons..
   // private static void addColumns(Component rootComponent, JSONArray start, JSONObject attrs, int
   // count, int referenceColumn, boolean isTextTable) {	}
   private static void addColumnAndCellElements(
@@ -4074,7 +4074,7 @@ public class JsonOperationConsumer {
     TableTableElement tableElement = (TableTableElement) tableComponent.getRootElement();
 
     // We need to exchange all absolute widths
-    // If the tableElement has an absolute width, the absoluted column width is derived from the
+    // If the tableElement has an absolute width, the absolute column width is derived from the
     // given tableGrid
     List<String> newAbsColumnWidthsGrid = null;
     if (tableGrid != null) {
@@ -4105,8 +4105,8 @@ public class JsonOperationConsumer {
         //	Iterating through columns (there might be repeated)
         //	Breaking repeated columns if
         //		a) new column is within the repeated
-        //		b) column given by grid has differnet follow-up width
-        //	We can not join yet as there is no hasSameStyle function for columsn
+        //		b) column given by grid has different follow-up width
+        //	We can not join yet as there is no hasSameStyle function for columns
         // if COLUMN element repeated (covers multiple column grid positions)
         // check for every repeated cell if the grid has changed, increment columnGridNo after each
         // repeat..
@@ -4192,7 +4192,7 @@ public class JsonOperationConsumer {
         addCellsInRows(
             tableComponent, start, appendColumnCount, insertMode, appendColumnCount, isTextTable);
       } else if (referenceColumnGridPosition
-          != Integer.MAX_VALUE) { // MAX VALUE used for setAttribute reussage
+          != Integer.MAX_VALUE) { // MAX VALUE used for setAttribute reusage
         addCellsInRows(
             tableComponent,
             start,
@@ -4287,7 +4287,7 @@ public class JsonOperationConsumer {
       boolean isTextTable) {
     // A new cell is being inserted at the given position for each row
     if (referenceColumnGridPosition
-        != Integer.MAX_VALUE) { // MAX VALUE used for setAttribute reussage
+        != Integer.MAX_VALUE) { // MAX VALUE used for setAttribute reusage
       // GET TARGET POSITION
       // Figure out target grid position for cell/column
       int newColumnTargetGridPosition = -1;
@@ -4373,7 +4373,7 @@ public class JsonOperationConsumer {
     // MULTIPLYING THE CELLS - adding XML & Component
     int currentRowPosition = 0;
     int rowComponentLevel = start.length();
-    // Add inital row and cell position
+    // Add initial row and cell position
     JSONArray destinationCellPosition = start.put(currentRowPosition).put(cellTargetPosition);
     TableTableCellElement clonedCellElement = null;
     TableTableElement tableElement = (TableTableElement) tableComponent.mRootElement;
@@ -4399,7 +4399,7 @@ public class JsonOperationConsumer {
         clonedCellElement.removeAttribute("xml:id");
       }
 
-      //			// if there is a target positin
+      //			// if there is a target position
       //			if ((rowComponent.getChildNode(cellTargetPosition) == null || cellTargetPosition == 1 +
       // cellReferencePosition) && clonedCellElement != null) {
       if (cellRepetition == -1) {
@@ -4536,7 +4536,7 @@ public class JsonOperationConsumer {
         addStyle(attrs, rowElement, xmlDoc);
       }
 
-      // Only addChild cells to a new row, when exlicitly requested or reference row had been
+      // Only addChild cells to a new row, when explicitly requested or reference row had been
       // addressed
       Component newRowComponent =
           addElementAsComponent(parentComponent, rowElement, start.optInt(start.length() - 1));
@@ -4713,7 +4713,7 @@ public class JsonOperationConsumer {
    * </office:spreadsheet>
    *
    */
-  // ToDo Move this function to Component/Element or make it obselete by no longer using component
+  // ToDo Move this function to Component/Element or make it obsolete by no longer using component
   // structure
   public static Component addElementAsComponent(
       Component parentComponent, OdfElement newElement, int newPosition) {

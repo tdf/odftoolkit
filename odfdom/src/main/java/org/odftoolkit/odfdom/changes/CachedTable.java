@@ -43,7 +43,7 @@ class CachedTable extends CachedComponent {
   // added cell data (content & format) neglecting starting/ending empty cells and within the row
   // any adjacent empty cells above MAX_REPEATING_EMPTY_CELLS
   public JSONArray mCurrentRange;
-  // only cells with content should trigger an operatoin
+  // only cells with content should trigger an operation
   public int mFirstContentCellNo = -1;
   // equal cell contents can be given out compressed
   public int mFirstEqualCellNo = -1;
@@ -77,7 +77,7 @@ class CachedTable extends CachedComponent {
   public ColumnDefaultCellProps mCurrentDefaultCellProps = null;
   public int nextColumnDefaultCellListPos = 0;
   public String mPreviousColumnCellStyleID = null;
-  // Boolean object as three states: There is a default style and all columns covered with dfault
+  // Boolean object as three states: There is a default style and all columns covered with default
   // style (TRUE), there is a default style, but sometimes no style (FALSE) and no "Default" style
   // (NULL)
   public Boolean mHasOnlyDefaultColumnCellStyles = null;

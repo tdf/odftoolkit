@@ -72,7 +72,7 @@ public class RDFMetadataTest extends ModelTestBase {
     //		int duplicated = 2;
     Model m3 = m1.intersection(m2);
     LOG.info("RDF Model - duplicated (manifest & in-content of root doc):\n" + m3.toString());
-    // Uncertain about the previuos statement, as the duplicated RDF triple do not have an identical
+    // Uncertain about the previous statement, as the duplicated RDF triple do not have an identical
     // subject..
     //		TestCase.assertEquals(duplicated, m3.size());
     //		TestCase.assertEquals(size1 + size2 - duplicated, m.size());

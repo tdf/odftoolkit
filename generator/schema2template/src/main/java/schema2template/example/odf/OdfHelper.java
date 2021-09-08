@@ -187,7 +187,7 @@ public class OdfHelper {
 
   public static void main(String[] args) throws Exception {
     LOG.info("Starting code generation:");
-    LOG.info("Starting initilization..");
+    LOG.info("Starting initialization..");
     // Read config.xml 2DO WHAT IS ODFDOM GENERATOR CONFIG FILE
     // Manual added Java specific info - Base class for inheritance
     Map<String, String> elementToBaseNameMap = new HashMap<String, String>();
@@ -221,7 +221,7 @@ public class OdfHelper {
             mOdfModel,
             elementToBaseNameMap,
             datatypeValueAndConversionMap);
-    LOG.info("Finished initilization..");
+    LOG.info("Finished initialization..");
     // HTML Reference for ODF 1.2 (yet without BNF nor images)
     fillTemplates(
         ODF_REFERENCE_RESOURCE_DIR,
@@ -250,7 +250,7 @@ public class OdfHelper {
   private static void fillTemplates(
       String sourceDir, Expression root, String outputRuleTemplate, String outputRuleFile)
       throws Exception {
-    // intialising template engine (ie. Velocity)
+    // initializing template engine (ie. Velocity)
     Properties props = new Properties();
     props.setProperty("file.resource.loader.path", sourceDir);
     VelocityEngine ve = new VelocityEngine(props);
