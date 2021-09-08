@@ -37,18 +37,24 @@
         <dependency>
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>xml-apis</groupId>
-            <artifactId>xml-apis</artifactId>
-            <!-- never use version 2.0.2 as it is prior version 1.4.01 -->
-            <!-- see https://mvnrepository.com/artifact/xml-apis/xml-apis -->
+            <exclusions>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- https://mvnrepository.com/artifact/xalan/serializer -->
         <!-- Used by org/odftoolkit/odfdom/IElementWriter.java -->
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>serializer</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
+            </exclusions>
             <version>2.7.2</version>
         </dependency>
         <dependency>
@@ -208,7 +214,7 @@
                                    org.odftoolkit.odfdom;version="${osgi.import.range}",
                                    org.odftoolkit.odfdom.*;version="${osgi.import.range}",
                                    *
-                                </Import-Package>
+</Import-Package>
                             </instructions>
                         </configuration>
                     </execution>
@@ -421,7 +427,7 @@
         portable to any object-oriented language.
 
         The current reference implementation is written in Java.
-    </description>
+</description>
     <url>https://odftoolkit.org/odfdom/</url>
     <inceptionYear>2008</inceptionYear>
 

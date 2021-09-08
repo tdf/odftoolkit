@@ -40,15 +40,17 @@
         <dependency>
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>net.java.dev.msv</groupId>
             <artifactId>msv-core</artifactId>
             <version>2013.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>xml-apis</groupId>
-            <artifactId>xml-apis</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.tinkerpop</groupId>
