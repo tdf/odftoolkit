@@ -154,7 +154,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
   private int mComponentDepth = -1; // as component depth starts with zero
   // the actual component. Linking each other building the tree view of the document
   private Component mCurrentComponent;
-  // the postion of the component, being updated for the operations being generated
+  // the position of the component, being updated for the operations being generated
   private final LinkedList<Integer> mLastComponentPositions = new LinkedList<Integer>();
   /** DOM is created by default, but is in general not needed */
   private final boolean domCreationEnabled = true;
@@ -194,7 +194,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
   boolean mNoOperationsAllowed = false;
   // All following blocking modes have different behavior
   boolean mIsBlockingFrame = false; // itself and children are allowed
-  boolean mIsIgnoredElement = false; // not even itself allwed
+  boolean mIsIgnoredElement = false; // not even itself allowed
   boolean mIsBlockingShape = false; // itself allowed
   // RunTimeConfiguration given by the caller of the ODF Adapter
   private int mMaxAllowedColumnCount;
@@ -203,7 +203,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
 
   /**
    * LO/AOO/Calligra are applying to Hyperlinks the "Internet_20_link" style, without writing out
-   * the dependency into XML. Therefore whenever a Hyperlink existists without character style
+   * the dependency into XML. Therefore whenever a Hyperlink exists without character style
    * properties, the reference will be set.
    */
   private static final String HYERLINK_DEFAULT_STYLE = "Internet_20_link";
@@ -416,7 +416,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
     // Make the Operation Queue to be created accessible via the Schema Document
     mJsonOperationProducer = mSchemaDoc.getJsonOperationQueue();
     if (mJsonOperationProducer == null) {
-      // temporary initated here as all the tests are not using the OperationTextDocument
+      // temporary initiated here as all the tests are not using the OperationTextDocument
       mJsonOperationProducer = new JsonOperationProducer();
       mSchemaDoc.setJsonOperationQueue(mJsonOperationProducer);
     }
@@ -424,7 +424,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
     mAutoListStyles = new HashMap<String, TextListStyleElement>();
     mUserFieldDecls = new HashMap<String, TextUserFieldDeclElement>();
 
-    // Stack to remember/track the nested delimiters not being componenets (spans) open-up by SAX
+    // Stack to remember/track the nested delimiters not being components (spans) open-up by SAX
     // events
     mTextSelectionStack = new ArrayDeque<TextSelection>();
     mListStyleStack = new ArrayDeque<ParagraphListProperties>();
