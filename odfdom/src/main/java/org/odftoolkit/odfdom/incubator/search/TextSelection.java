@@ -549,10 +549,12 @@ public class TextSelection extends Selection {
           if (node.getLocalName().equals("s")) // text:s
           {
             // delete space
-            ((TextSElement) node).setTextCAttribute(new Integer(nodeLength - fromindex));
             leftLength = leftLength - (nodeLength - fromindex);
             fromindex = 0;
-
+            Node nodeMerker = node.getNextSibling();
+            pNode.removeChild(node);
+            node = nodeMerker;
+            continue;
           } else if (node.getLocalName().equals("line-break")
               || node.getLocalName().equals("tab")) {
             fromindex = 0;
