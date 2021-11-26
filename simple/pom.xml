@@ -22,18 +22,18 @@
     <parent>
         <groupId>org.odftoolkit</groupId>
         <artifactId>odftoolkit</artifactId>
-        <version>0.9.0</version>
+        <version>0.9.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>simple-odf</artifactId>
-    <version>0.9.0</version>
+    <version>0.9.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>odfdom-java</artifactId>
-            <version>0.9.0</version>
+            <version>0.9.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>xerces</groupId>
@@ -257,7 +257,7 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit/tree/trunk/simple</url>
-        <tag>odftoolkit-0.9.0</tag>
+        <tag>HEAD</tag>
     </scm>
     <profiles>
         <profile>
