@@ -23,12 +23,12 @@
     <parent>
         <groupId>org.odftoolkit</groupId>
         <artifactId>odftoolkit</artifactId>
-        <version>0.10.0-SNAPSHOT</version>
+        <version>0.10.0</version>
     </parent>
 
     <artifactId>xslt-runner</artifactId>
     <name>ODF XSLT-Runner</name>
-    <version>0.10.0-SNAPSHOT</version>
+    <version>0.10.0</version>
 
     <organization>
         <name>The Document Foundation</name>
@@ -53,7 +53,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>odfdom-java</artifactId>
-            <version>0.10.0-SNAPSHOT</version>
+            <version>0.10.0</version>
         </dependency>
         <dependency>
             <!-- a reliable XSLT processor -->
@@ -188,8 +188,7 @@
                             <goal>exec</goal>
                         </goals>
                         <!-- see https://tdf.github.io/odftoolkit/docs/xsltrunner/ODFXSLTRunner.html
-                            java -jar odfxsltrunner.jar <style sheet>; [-v] [-f <factory>] [-p <path in package&gt;]
-                                [-l log file] [-x <extract path> ...] -o <input package> <output file> [name=value ...] -->
+                            java -jar odfxsltrunner.jar <style sheet>; [-v] [-f <factory>] [-p <path in package&gt;] [-l log file] [-x <extract path> ...] -o <input package> <output file> [name=value ...] -->
                         <configuration>
                             <executable>${java.home}/bin/java</executable>
                             <executableDependency>
@@ -217,8 +216,7 @@
                             <goal>exec</goal>
                         </goals>
                         <!-- see https://tdf.github.io/odftoolkit/docs/xsltrunner/ODFXSLTRunner.html
-                            java -jar odfxsltrunner.jar <style sheet>; [-v] [-f <factory>] [-p <path in package&gt;]
-                                [-l log file] [-x <extract path> ...] -o <input package> <output file> [name=value ...] -->
+                            java -jar odfxsltrunner.jar <style sheet>; [-v] [-f <factory>] [-p <path in package&gt;] [-l log file] [-x <extract path> ...] -o <input package> <output file> [name=value ...] -->
                         <configuration>
                             <executable>${java.home}/bin/java</executable>
                             <executableDependency>
