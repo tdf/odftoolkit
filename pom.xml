@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
+    <version>0.9.0</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -141,6 +141,7 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit.git</url>
+        <tag>odftoolkit-0.9.0</tag>
     </scm>
     <issueManagement>
         <system>GitHub Issues</system>
@@ -495,9 +496,9 @@
                                         </copy>
 
                                         <!-- ZIP FILES to 3 BUNDLES -->
-                                        <zip basedir="${release.tmpdir.bin}" destfile="${basedir}/target/${release.zip.bin}"/>
-                                        <zip basedir="${release.tmpdir.doc}" destfile="${basedir}/target/${release.zip.doc}"/>
-                                        <zip basedir="${release.tmpdir.src}" destfile="${basedir}/target/${release.zip.src}"/>
+                                        <zip basedir="${release.tmpdir.bin}" destfile="${basedir}/target/${release.zip.bin}" />
+                                        <zip basedir="${release.tmpdir.doc}" destfile="${basedir}/target/${release.zip.doc}" />
+                                        <zip basedir="${release.tmpdir.src}" destfile="${basedir}/target/${release.zip.src}" />
 
                                         <!-- SIGN 3 BUNDLES -->
                                         <checksum algorithm="SHA-512" fileext=".sha">
