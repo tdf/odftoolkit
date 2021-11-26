@@ -324,6 +324,27 @@
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
+            <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <id>default-sign</id>
+                        <phase>verify</phase>
+                        <configuration>
+                            <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
+                            https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
+                            <keyname>${gpg.keyname}</keyname>
+                            <passphraseServerId>${gpg.passphraseServerId}</passphraseServerId>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <profiles>
