@@ -47,7 +47,7 @@ build system. To build ODF Toolkit, use the following command in this directory:
 
 ## Recent Releases
 
-1. We have a *release 0.10.0* using >=JDK 9 and providing the [new collaboration API](https://tdf.github.io/odftoolkit/odfdom/operations/operations.html):
+1. We have a *release 0.10.0* using >=JDK 11 and providing the [new collaboration API](https://tdf.github.io/odftoolkit/odfdom/operations/operations.html):
     *RELEASE (0.10.0)*:
     (*Note*: the release branch was earlier called 1.0.0-BETA, but it lacks JDK module API, therefore 1.0.0 was renamed 0.10.0)
     * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.10.0/)
