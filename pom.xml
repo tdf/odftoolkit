@@ -298,7 +298,7 @@
                     <localCheckout>true</localCheckout>
                     <pushChanges>false</pushChanges>
                     <mavenExecutorId>forked-path</mavenExecutorId>
-                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+                    <arguments>-Dgpg.passphrase=${gpg.passphraseServerId}</arguments>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -388,7 +388,7 @@
                                     <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
                                     https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
                                     <keyname>${gpg.keyname}</keyname>
-                                    <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                                    <passphraseServerId>${gpg.passphraseServerId}</passphraseServerId>
                                 </configuration>
                             </execution>
                         </executions>
