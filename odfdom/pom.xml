@@ -24,12 +24,12 @@
     <parent>
         <groupId>org.odftoolkit</groupId>
         <artifactId>odftoolkit</artifactId>
-        <version>0.10.0</version>
+        <version>0.10.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>odfdom-java</artifactId>
-    <version>0.10.0</version>
+    <version>0.10.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -445,7 +445,7 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit/tree/trunk/odfdom</url>
-        <tag>odftoolkit-0.10.0</tag>
+        <tag>HEAD</tag>
     </scm>
     <profiles>
         <profile>
