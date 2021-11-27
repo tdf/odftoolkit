@@ -32,12 +32,13 @@ package org.odftoolkit.odfdom.pkg.manifest;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
-/** Manifest implementation of OpenDocument element {@odf.element algorithm}. */
+/** Manifest implementation of OpenDocument element {@odf.element manifest:algorithm}. */
 public class AlgorithmElement extends OdfElement {
 
   public static final OdfName ELEMENT_NAME =
-      OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:algorithm");
+      OdfName.newName(OdfPackageNamespace.MANIFEST, "algorithm");
 
   /**
    * Create the instance of <code>AlgorithmElement</code>
@@ -51,15 +52,16 @@ public class AlgorithmElement extends OdfElement {
   /**
    * Get the element name
    *
-   * @return return <code>OdfName</code> the name of element {@odf.element algorithm}.
+   * @return return <code>OdfName</code> the name of element {@odf.element manifest:algorithm}.
    */
+  @Override
   public OdfName getOdfName() {
     return ELEMENT_NAME;
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>AlgorithmNameAttribute</code> ,
-   * See {@odf.attribute algorithm-name}
+   * See {@odf.attribute manifest:algorithm-name}
    *
    * <p>Attribute is mandatory.
    *
@@ -68,7 +70,7 @@ public class AlgorithmElement extends OdfElement {
    */
   public String getAlgorithmNameAttribute() {
     AlgorithmNameAttribute attr =
-        (AlgorithmNameAttribute) getOdfAttribute(AlgorithmNameAttribute.ATTRIBUTE_NAME);
+        (AlgorithmNameAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "algorithm-name");
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -77,7 +79,7 @@ public class AlgorithmElement extends OdfElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>AlgorithmNameAttribute</code> , See
-   * {@odf.attribute algorithm-name}
+   * {@odf.attribute manifest:algorithm-name}
    *
    * @param algorithmNameValue The type is <code>String</code>
    */
@@ -89,7 +91,7 @@ public class AlgorithmElement extends OdfElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>InitialisationVectorAttribute
-   * </code> , See {@odf.attribute initialisation-vector}
+   * </code> , See {@odf.attribute manifest:initialisation-vector}
    *
    * <p>Attribute is mandatory.
    *
@@ -99,7 +101,7 @@ public class AlgorithmElement extends OdfElement {
   public String getInitialisationVectorAttribute() {
     InitialisationVectorAttribute attr =
         (InitialisationVectorAttribute)
-            getOdfAttribute(InitialisationVectorAttribute.ATTRIBUTE_NAME);
+            getOdfAttribute(OdfPackageNamespace.MANIFEST, "initialisation-vector");
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -108,7 +110,7 @@ public class AlgorithmElement extends OdfElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>InitialisationVectorAttribute</code> ,
-   * See {@odf.attribute initialisation-vector}
+   * See {@odf.attribute manifest:initialisation-vector}
    *
    * @param initialisationVectorValue The type is <code>String</code>
    */

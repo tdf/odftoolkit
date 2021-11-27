@@ -42,6 +42,7 @@ import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
@@ -65,6 +66,7 @@ public class OfficeAutomaticStylesElement extends OdfOfficeAutomaticStyles {
    *
    * @return return <code>OdfName</code> the name of element {@odf.element office:automatic-styles}.
    */
+  @Override
   public OdfName getOdfName() {
     return ELEMENT_NAME;
   }
@@ -222,12 +224,6 @@ public class OfficeAutomaticStylesElement extends OdfOfficeAutomaticStyles {
     return textListStyle;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -236,5 +232,12 @@ public class OfficeAutomaticStylesElement extends OdfOfficeAutomaticStyles {
     } else {
       visitor.visit(this);
     }
+  }
+
+  @Override
+  protected <T extends OdfElement> T getStylesElement(OdfFileDom dom, Class<T> clazz)
+      throws Exception {
+    throw new UnsupportedOperationException(
+        "Not supported yet."); // To change body of generated methods, choose Tools | Templates.
   }
 }

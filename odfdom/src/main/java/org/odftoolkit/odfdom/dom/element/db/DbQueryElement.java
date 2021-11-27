@@ -284,7 +284,7 @@ public class DbQueryElement extends OdfElement {
    * Create child element {@odf.element db:filter-statement}.
    *
    * @param dbCommandValue the <code>String</code> value of <code>DbCommandAttribute</code>, see
-   *     {@odf.attribute db:command} at specification
+   *     {@odf.attribute db:command} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element db:filter-statement}
    */
   public DbFilterStatementElement newDbFilterStatementElement(String dbCommandValue) {
@@ -299,7 +299,7 @@ public class DbQueryElement extends OdfElement {
    * Create child element {@odf.element db:order-statement}.
    *
    * @param dbCommandValue the <code>String</code> value of <code>DbCommandAttribute</code>, see
-   *     {@odf.attribute db:command} at specification
+   *     {@odf.attribute db:command} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element db:order-statement}
    */
   public DbOrderStatementElement newDbOrderStatementElement(String dbCommandValue) {
@@ -314,7 +314,7 @@ public class DbQueryElement extends OdfElement {
    * Create child element {@odf.element db:update-table}.
    *
    * @param dbNameValue the <code>String</code> value of <code>DbNameAttribute</code>, see
-   *     {@odf.attribute db:name} at specification
+   *     {@odf.attribute db:name} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element db:update-table}
    */
   public DbUpdateTableElement newDbUpdateTableElement(String dbNameValue) {
@@ -325,12 +325,6 @@ public class DbQueryElement extends OdfElement {
     return dbUpdateTable;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

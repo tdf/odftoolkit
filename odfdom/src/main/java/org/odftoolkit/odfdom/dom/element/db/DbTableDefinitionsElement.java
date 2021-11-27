@@ -63,7 +63,7 @@ public class DbTableDefinitionsElement extends OdfElement {
    * Create child element {@odf.element db:table-definition}.
    *
    * @param dbNameValue the <code>String</code> value of <code>DbNameAttribute</code>, see
-   *     {@odf.attribute db:name} at specification
+   *     {@odf.attribute db:name} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element db:table-definition}
    */
   public DbTableDefinitionElement newDbTableDefinitionElement(String dbNameValue) {
@@ -74,12 +74,6 @@ public class DbTableDefinitionsElement extends OdfElement {
     return dbTableDefinition;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

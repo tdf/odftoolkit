@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.element.text;
 
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.dom.attribute.text.TextLevelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
@@ -38,12 +37,11 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
 /** DOM implementation of OpenDocument element {@odf.element text:list-level-style-image}. */
-public class TextListLevelStyleImageElement extends OdfElement {
+public class TextListLevelStyleImageElement extends TextListLevelStyleElementBase {
 
   public static final OdfName ELEMENT_NAME =
       OdfName.newName(OdfDocumentNamespace.TEXT, "list-level-style-image");
@@ -65,36 +63,6 @@ public class TextListLevelStyleImageElement extends OdfElement {
    */
   public OdfName getOdfName() {
     return ELEMENT_NAME;
-  }
-
-  /**
-   * Receives the value of the ODFDOM attribute representation <code>TextLevelAttribute</code> , See
-   * {@odf.attribute text:level}
-   *
-   * <p>Attribute is mandatory.
-   *
-   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
-   *     set and no default value defined.
-   */
-  public Integer getTextLevelAttribute() {
-    TextLevelAttribute attr =
-        (TextLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "level");
-    if (attr != null) {
-      return Integer.valueOf(attr.intValue());
-    }
-    return null;
-  }
-
-  /**
-   * Sets the value of ODFDOM attribute representation <code>TextLevelAttribute</code> , See
-   * {@odf.attribute text:level}
-   *
-   * @param textLevelValue The type is <code>Integer</code>
-   */
-  public void setTextLevelAttribute(Integer textLevelValue) {
-    TextLevelAttribute attr = new TextLevelAttribute((OdfFileDom) this.ownerDocument);
-    setOdfAttribute(attr);
-    attr.setIntValue(textLevelValue.intValue());
   }
 
   /**
@@ -212,8 +180,6 @@ public class TextListLevelStyleImageElement extends OdfElement {
   /**
    * Create child element {@odf.element office:binary-data}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:binary-data}
    */
   public OfficeBinaryDataElement newOfficeBinaryDataElement() {
@@ -226,8 +192,6 @@ public class TextListLevelStyleImageElement extends OdfElement {
   /**
    * Create child element {@odf.element style:list-level-properties}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element style:list-level-properties}
    */
   public StyleListLevelPropertiesElement newStyleListLevelPropertiesElement() {
@@ -237,12 +201,6 @@ public class TextListLevelStyleImageElement extends OdfElement {
     return styleListLevelProperties;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

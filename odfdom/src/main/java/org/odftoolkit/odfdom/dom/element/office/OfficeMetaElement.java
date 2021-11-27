@@ -319,7 +319,7 @@ public class OfficeMetaElement extends OdfElement {
    * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
    *     {@odf.attribute xlink:href} at specification
    * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
-   *     {@odf.attribute xlink:type} at specification
+   *     {@odf.attribute xlink:type} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element meta:template}
    */
   public MetaTemplateElement newMetaTemplateElement(String xlinkHrefValue, String xlinkTypeValue) {
@@ -337,7 +337,7 @@ public class OfficeMetaElement extends OdfElement {
    * @param metaNameValue the <code>String</code> value of <code>MetaNameAttribute</code>, see
    *     {@odf.attribute meta:name} at specification
    * @param metaValueTypeValue the <code>String</code> value of <code>MetaValueTypeAttribute</code>,
-   *     see {@odf.attribute meta:value-type} at specification
+   *     see {@odf.attribute meta:value-type} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element meta:user-defined}
    */
   public MetaUserDefinedElement newMetaUserDefinedElement(
@@ -350,12 +350,6 @@ public class OfficeMetaElement extends OdfElement {
     return metaUserDefined;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

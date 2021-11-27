@@ -119,16 +119,16 @@ public class TableCaseSensitiveAttribute extends OdfAttribute {
     String defaultValue = null;
     if (parentElement != null) {
       if (parentElement instanceof TableCalculationSettingsElement) {
-        defaultValue = "true";
+        defaultValue = DEFAULT_VALUE_TRUE;
       }
       if (parentElement instanceof TableFilterConditionElement) {
-        defaultValue = "false";
+        defaultValue = DEFAULT_VALUE_FALSE;
       }
       if (parentElement instanceof TableSortElement) {
-        defaultValue = "false";
+        defaultValue = DEFAULT_VALUE_FALSE;
       }
       if (parentElement instanceof TableSubtotalRulesElement) {
-        defaultValue = "false";
+        defaultValue = DEFAULT_VALUE_FALSE;
       }
     }
     return defaultValue;

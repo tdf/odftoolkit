@@ -206,8 +206,8 @@ public class OdfHelper {
         datatypeValueAndConversionMap);
 
     //        mOdf12SignatureSchemaModel = new XMLModel(new File(odf12SignatureRngFile));
-    mOdf12ManifestSchemaModel = new XMLModel(new File(odf12ManifestRngFile));
-    mOdf12SchemaModel = new XMLModel(new File(odf12RngFile));
+    mOdf12ManifestSchemaModel = new XMLModel(new File(odf12ManifestRngFile), "odf12");
+    mOdf12SchemaModel = new XMLModel(new File(odf12RngFile), "odf12");
     //        mOdf11SchemaModel = new XMLModel(new File(odf11RngFile));
     //
     mOdfModel = new OdfModel(elementStyleFamiliesMap, attributeDefaultMap);
@@ -216,8 +216,8 @@ public class OdfHelper {
     mJavaModelOdf =
         new SourceCodeModel(
             mOdf12SchemaModel,
-            mOdf12SignatureSchemaModel,
-            mOdf12ManifestSchemaModel,
+            /*mOdf12SignatureSchemaModel,
+            mOdf12ManifestSchemaModel, */
             mOdfModel,
             elementToBaseNameMap,
             datatypeValueAndConversionMap);
@@ -338,7 +338,7 @@ public class OdfHelper {
    * @throws Exception
    */
   public static Expression loadSchemaODF10() throws Exception {
-    return XMLModel.loadSchema(new File(ODF10_RNG_FILE));
+    return XMLModel.loadSchema(new File(ODF10_RNG_FILE)).getTopLevel();
   }
 
   /**
@@ -349,7 +349,7 @@ public class OdfHelper {
    * @throws Exception
    */
   public static Expression loadSchemaODF11() throws Exception {
-    return XMLModel.loadSchema(new File(odf11RngFile));
+    return XMLModel.loadSchema(new File(odf11RngFile)).getTopLevel();
   }
 
   /**
@@ -360,7 +360,7 @@ public class OdfHelper {
    * @throws Exception
    */
   public static Expression loadSchemaODF12() throws Exception {
-    return XMLModel.loadSchema(new File(odf12RngFile));
+    return XMLModel.loadSchema(new File(odf12RngFile)).getTopLevel();
   }
 
   private static String generateFilename(String rawName) {

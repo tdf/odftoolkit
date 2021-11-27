@@ -237,8 +237,6 @@ public class DrawImageElement extends OdfElement {
   /**
    * Create child element {@odf.element office:binary-data}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:binary-data}
    */
   public OfficeBinaryDataElement newOfficeBinaryDataElement() {
@@ -250,8 +248,6 @@ public class DrawImageElement extends OdfElement {
 
   /**
    * Create child element {@odf.element text:list}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:list}
    */
@@ -265,8 +261,6 @@ public class DrawImageElement extends OdfElement {
   /**
    * Create child element {@odf.element text:p}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:p}
    */
   public TextPElement newTextPElement() {
@@ -275,12 +269,6 @@ public class DrawImageElement extends OdfElement {
     return textP;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
