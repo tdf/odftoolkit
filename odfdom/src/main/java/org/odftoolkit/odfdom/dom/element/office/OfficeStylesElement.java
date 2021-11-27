@@ -55,13 +55,13 @@ import org.odftoolkit.odfdom.dom.element.text.TextLinenumberingConfigurationElem
 import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;
 import org.odftoolkit.odfdom.dom.element.text.TextNotesConfigurationElement;
 import org.odftoolkit.odfdom.dom.element.text.TextOutlineStyleElement;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
 /** DOM implementation of OpenDocument element {@odf.element office:styles}. */
-public class OfficeStylesElement extends OdfContainerElementBase {
+public class OfficeStylesElement extends OdfOfficeStyles {
 
   public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.OFFICE, "styles");
 
@@ -71,7 +71,7 @@ public class OfficeStylesElement extends OdfContainerElementBase {
    * @param ownerDoc The type is <code>OdfFileDom</code>
    */
   public OfficeStylesElement(OdfFileDom ownerDoc) {
-    super(ownerDoc, ELEMENT_NAME);
+    super(ownerDoc);
   }
 
   /**
@@ -404,7 +404,7 @@ public class OfficeStylesElement extends OdfContainerElementBase {
    *     TableLastRowStartColumnAttribute</code>, see {@odf.attribute table:last-row-start-column}
    *     at specification
    * @param tableNameValue the <code>String</code> value of <code>TableNameAttribute</code>, see
-   *     {@odf.attribute table:name} at specification
+   *     {@odf.attribute table:name} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element table:table-template}
    */
   public TableTableTemplateElement newTableTableTemplateElement(
@@ -426,8 +426,6 @@ public class OfficeStylesElement extends OdfContainerElementBase {
 
   /**
    * Create child element {@odf.element text:bibliography-configuration}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:bibliography-configuration}
    */
@@ -504,12 +502,6 @@ public class OfficeStylesElement extends OdfContainerElementBase {
     return textOutlineStyle;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

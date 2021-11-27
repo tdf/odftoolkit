@@ -113,7 +113,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <!-- Explizit version required for fix on systemPropertyVariables -->
+                <!-- Explicit version required for fix on systemPropertyVariables -->
                 <version>2.22.2</version>
                 <configuration>
                     <systemPropertyVariables>

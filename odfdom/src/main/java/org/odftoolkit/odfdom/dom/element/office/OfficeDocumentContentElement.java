@@ -32,6 +32,7 @@ import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.grddl.GrddlTransformationAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
@@ -124,21 +125,17 @@ public class OfficeDocumentContentElement extends OdfElement {
   /**
    * Create child element {@odf.element office:automatic-styles}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:automatic-styles}
    */
-  public OfficeAutomaticStylesElement newOfficeAutomaticStylesElement() {
-    OfficeAutomaticStylesElement officeAutomaticStyles =
-        ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeAutomaticStylesElement.class);
+  public OdfOfficeAutomaticStyles newOfficeAutomaticStylesElement() {
+    OdfOfficeAutomaticStyles officeAutomaticStyles =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(OdfOfficeAutomaticStyles.class);
     this.appendChild(officeAutomaticStyles);
     return officeAutomaticStyles;
   }
 
   /**
    * Create child element {@odf.element office:body}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * <p>Child element is mandatory.
    *
@@ -154,8 +151,6 @@ public class OfficeDocumentContentElement extends OdfElement {
   /**
    * Create child element {@odf.element office:font-face-decls}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:font-face-decls}
    */
   public OfficeFontFaceDeclsElement newOfficeFontFaceDeclsElement() {
@@ -168,8 +163,6 @@ public class OfficeDocumentContentElement extends OdfElement {
   /**
    * Create child element {@odf.element office:scripts}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:scripts}
    */
   public OfficeScriptsElement newOfficeScriptsElement() {
@@ -179,12 +172,6 @@ public class OfficeDocumentContentElement extends OdfElement {
     return officeScripts;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

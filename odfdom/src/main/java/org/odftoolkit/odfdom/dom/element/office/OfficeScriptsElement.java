@@ -62,8 +62,6 @@ public class OfficeScriptsElement extends OdfElement {
   /**
    * Create child element {@odf.element office:event-listeners}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:event-listeners}
    */
   public OfficeEventListenersElement newOfficeEventListenersElement() {
@@ -88,12 +86,6 @@ public class OfficeScriptsElement extends OdfElement {
     return officeScript;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

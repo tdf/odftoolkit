@@ -312,7 +312,7 @@ public class DbComponentElement extends OdfElement {
    * @param officeMimetypeValue the <code>String</code> value of <code>OfficeMimetypeAttribute
    *     </code>, see {@odf.attribute office:mimetype} at specification
    * @param officeVersionValue the <code>String</code> value of <code>OfficeVersionAttribute</code>,
-   *     see {@odf.attribute office:version} at specification
+   *     see {@odf.attribute office:version} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element office:document}
    */
   public OfficeDocumentElement newOfficeDocumentElement(
@@ -325,12 +325,6 @@ public class DbComponentElement extends OdfElement {
     return officeDocument;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

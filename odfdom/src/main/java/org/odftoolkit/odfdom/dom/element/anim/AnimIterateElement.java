@@ -861,8 +861,6 @@ public class AnimIterateElement extends OdfElement {
   /**
    * Create child element {@odf.element anim:audio}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element anim:audio}
    */
   public AnimAudioElement newAnimAudioElement() {
@@ -890,8 +888,6 @@ public class AnimIterateElement extends OdfElement {
   /**
    * Create child element {@odf.element anim:iterate}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element anim:iterate}
    */
   public AnimIterateElement newAnimIterateElement() {
@@ -904,8 +900,6 @@ public class AnimIterateElement extends OdfElement {
   /**
    * Create child element {@odf.element anim:par}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element anim:par}
    */
   public AnimParElement newAnimParElement() {
@@ -916,8 +910,6 @@ public class AnimIterateElement extends OdfElement {
 
   /**
    * Create child element {@odf.element anim:seq}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element anim:seq}
    */
@@ -956,12 +948,6 @@ public class AnimIterateElement extends OdfElement {
     return animTransitionFilter;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

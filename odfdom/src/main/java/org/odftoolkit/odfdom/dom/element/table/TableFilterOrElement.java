@@ -62,8 +62,6 @@ public class TableFilterOrElement extends OdfElement {
   /**
    * Create child element {@odf.element table:filter-and}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element table:filter-and}
    */
   public TableFilterAndElement newTableFilterAndElement() {
@@ -95,12 +93,6 @@ public class TableFilterOrElement extends OdfElement {
     return tableFilterCondition;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

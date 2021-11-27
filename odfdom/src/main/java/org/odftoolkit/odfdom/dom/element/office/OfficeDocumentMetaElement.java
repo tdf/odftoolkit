@@ -124,8 +124,6 @@ public class OfficeDocumentMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element office:meta}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:meta}
    */
   public OfficeMetaElement newOfficeMetaElement() {
@@ -135,12 +133,6 @@ public class OfficeDocumentMetaElement extends OdfElement {
     return officeMeta;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

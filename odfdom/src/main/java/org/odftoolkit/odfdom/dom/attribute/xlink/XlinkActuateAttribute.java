@@ -61,8 +61,8 @@ public class XlinkActuateAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME =
       OdfName.newName(OdfDocumentNamespace.XLINK, "actuate");
-  public static final String DEFAULT_VALUE_ONREQUEST = Value.ONREQUEST.toString();
   public static final String DEFAULT_VALUE_ONLOAD = Value.ONLOAD.toString();
+  public static final String DEFAULT_VALUE_ONREQUEST = Value.ONREQUEST.toString();
 
   /**
    * Create the instance of OpenDocument attribute {@odf.attribute xlink:actuate}.
@@ -137,70 +137,70 @@ public class XlinkActuateAttribute extends OdfAttribute {
     String defaultValue = null;
     if (parentElement != null) {
       if (parentElement instanceof DbConnectionResourceElement) {
-        defaultValue = "onRequest";
+        defaultValue = DEFAULT_VALUE_ONREQUEST;
       }
       if (parentElement instanceof DrawAElement) {
-        defaultValue = "onRequest";
+        defaultValue = DEFAULT_VALUE_ONREQUEST;
       }
       if (parentElement instanceof DrawAppletElement) {
-        defaultValue = "onLoad";
+        defaultValue = DEFAULT_VALUE_ONLOAD;
       }
       if (parentElement instanceof DrawFillImageElement) {
-        defaultValue = "onLoad";
+        defaultValue = DEFAULT_VALUE_ONLOAD;
       }
       if (parentElement instanceof DrawFloatingFrameElement) {
-        defaultValue = "onLoad";
+        defaultValue = DEFAULT_VALUE_ONLOAD;
       }
       if (parentElement instanceof DrawImageElement) {
-        defaultValue = "onLoad";
+        defaultValue = DEFAULT_VALUE_ONLOAD;
       }
       if (parentElement instanceof DrawObjectElement) {
-        defaultValue = "onLoad";
+        defaultValue = DEFAULT_VALUE_ONLOAD;
       }
       if (parentElement instanceof DrawObjectOleElement) {
-        defaultValue = "onLoad";
+        defaultValue = DEFAULT_VALUE_ONLOAD;
       }
       if (parentElement instanceof DrawPluginElement) {
-        defaultValue = "onLoad";
+        defaultValue = DEFAULT_VALUE_ONLOAD;
       }
       if (parentElement instanceof FormFormElement) {
-        defaultValue = "onRequest";
+        defaultValue = DEFAULT_VALUE_ONREQUEST;
       }
       if (parentElement instanceof MetaAutoReloadElement) {
-        defaultValue = "onLoad";
+        defaultValue = DEFAULT_VALUE_ONLOAD;
       }
       if (parentElement instanceof MetaTemplateElement) {
-        defaultValue = "onRequest";
+        defaultValue = DEFAULT_VALUE_ONREQUEST;
       }
       if (parentElement instanceof PresentationEventListenerElement) {
-        defaultValue = "onRequest";
+        defaultValue = DEFAULT_VALUE_ONREQUEST;
       }
       if (parentElement instanceof PresentationSoundElement) {
-        defaultValue = "onRequest";
+        defaultValue = DEFAULT_VALUE_ONREQUEST;
       }
       if (parentElement instanceof ScriptEventListenerElement) {
-        defaultValue = "onRequest";
+        defaultValue = DEFAULT_VALUE_ONREQUEST;
       }
       if (parentElement instanceof StyleBackgroundImageElement) {
-        defaultValue = "onLoad";
+        defaultValue = DEFAULT_VALUE_ONLOAD;
       }
       if (parentElement instanceof SvgDefinitionSrcElement) {
-        defaultValue = "onRequest";
+        defaultValue = DEFAULT_VALUE_ONREQUEST;
       }
       if (parentElement instanceof SvgFontFaceUriElement) {
-        defaultValue = "onRequest";
+        defaultValue = DEFAULT_VALUE_ONREQUEST;
       }
       if (parentElement instanceof TableCellRangeSourceElement) {
-        defaultValue = "onRequest";
+        defaultValue = DEFAULT_VALUE_ONREQUEST;
       }
       if (parentElement instanceof TableTableSourceElement) {
-        defaultValue = "onRequest";
+        defaultValue = DEFAULT_VALUE_ONREQUEST;
       }
       if (parentElement instanceof TextAElement) {
-        defaultValue = "onRequest";
+        defaultValue = DEFAULT_VALUE_ONREQUEST;
       }
       if (parentElement instanceof TextListLevelStyleImageElement) {
-        defaultValue = "onLoad";
+        defaultValue = DEFAULT_VALUE_ONLOAD;
       }
     }
     return defaultValue;

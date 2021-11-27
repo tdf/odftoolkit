@@ -62,8 +62,6 @@ public class TableDeletionsElement extends OdfElement {
   /**
    * Create child element {@odf.element table:cell-content-deletion}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element table:cell-content-deletion}
    */
   public TableCellContentDeletionElement newTableCellContentDeletionElement() {
@@ -76,8 +74,6 @@ public class TableDeletionsElement extends OdfElement {
   /**
    * Create child element {@odf.element table:change-deletion}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element table:change-deletion}
    */
   public TableChangeDeletionElement newTableChangeDeletionElement() {
@@ -87,12 +83,6 @@ public class TableDeletionsElement extends OdfElement {
     return tableChangeDeletion;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

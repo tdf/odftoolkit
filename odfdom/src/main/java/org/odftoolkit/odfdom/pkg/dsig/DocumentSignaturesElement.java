@@ -32,13 +32,15 @@ package org.odftoolkit.odfdom.pkg.dsig;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
-/** Data signature implementation of OpenDocument element {@odf.element document-signatures}. */
+/**
+ * Data signature implementation of OpenDocument element {@odf.element dsig:document-signatures}.
+ */
 public class DocumentSignaturesElement extends OdfElement {
 
   public static final OdfName ELEMENT_NAME =
-      OdfName.newName(
-          "urn:oasis:names:tc:opendocument:xmlns:digitalsignature:1.0", "dsig:document-signatures");
+      OdfName.newName(OdfPackageNamespace.DSIG, "document-signatures");
 
   /**
    * Create the instance of <code>DocumentSignaturesElement</code>
@@ -52,15 +54,17 @@ public class DocumentSignaturesElement extends OdfElement {
   /**
    * Get the element name
    *
-   * @return return <code>OdfName</code> the name of element {@odf.element document-signatures}.
+   * @return return <code>OdfName</code> the name of element {@odf.element
+   *     dsig:document-signatures}.
    */
+  @Override
   public OdfName getOdfName() {
     return ELEMENT_NAME;
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>VersionAttribute</code> , See
-   * {@odf.attribute version}
+   * {@odf.attribute dsig:version}
    *
    * <p>Attribute is mandatory.
    *
@@ -68,7 +72,7 @@ public class DocumentSignaturesElement extends OdfElement {
    *     and no default value defined.
    */
   public String getVersionAttribute() {
-    VersionAttribute attr = (VersionAttribute) getOdfAttribute(VersionAttribute.ATTRIBUTE_NAME);
+    VersionAttribute attr = (VersionAttribute) getOdfAttribute(OdfPackageNamespace.DSIG, "version");
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -77,7 +81,7 @@ public class DocumentSignaturesElement extends OdfElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>VersionAttribute</code> , See
-   * {@odf.attribute version}
+   * {@odf.attribute dsig:version}
    *
    * @param versionValue The type is <code>String</code>
    */
@@ -88,18 +92,18 @@ public class DocumentSignaturesElement extends OdfElement {
   }
 
   /**
-   * Create child element {@odf.element Signature}.
+   * Create child element {@odf.element ds:Signature}.
    *
    * <p>Child element is new in Odf 1.2
    *
    * <p>Child element is mandatory.
    *
-   * @return the element {@odf.element Signature}
+   * @return the element {@odf.element ds:Signature}
    */
   public SignatureElement newSignatureElement() {
-    SignatureElement signature =
+    SignatureElement dsSignature =
         ((OdfFileDom) this.ownerDocument).newOdfElement(SignatureElement.class);
-    this.appendChild(signature);
-    return signature;
+    this.appendChild(dsSignature);
+    return dsSignature;
   }
 }

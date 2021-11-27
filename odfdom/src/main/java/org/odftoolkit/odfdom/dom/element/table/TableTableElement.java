@@ -28,6 +28,9 @@
  */
 package org.odftoolkit.odfdom.dom.element.table;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.json.JSONArray;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.table.TableIsSubTableAttribute;
@@ -575,8 +578,6 @@ public class TableTableElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element office:forms}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:forms}
    */
   public OfficeFormsElement newOfficeFormsElement() {
@@ -637,8 +638,6 @@ public class TableTableElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element table:shapes}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element table:shapes}
    */
   public TableShapesElement newTableShapesElement() {
@@ -650,8 +649,6 @@ public class TableTableElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element table:table-column}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:table-column}
    */
@@ -665,8 +662,6 @@ public class TableTableElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element table:table-column-group}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element table:table-column-group}
    */
   public TableTableColumnGroupElement newTableTableColumnGroupElement() {
@@ -678,8 +673,6 @@ public class TableTableElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element table:table-columns}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:table-columns}
    */
@@ -693,8 +686,6 @@ public class TableTableElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element table:table-header-columns}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element table:table-header-columns}
    */
   public TableTableHeaderColumnsElement newTableTableHeaderColumnsElement() {
@@ -706,8 +697,6 @@ public class TableTableElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element table:table-header-rows}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:table-header-rows}
    */
@@ -721,8 +710,6 @@ public class TableTableElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element table:table-row}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element table:table-row}
    */
   public TableTableRowElement newTableTableRowElement() {
@@ -735,8 +722,6 @@ public class TableTableElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element table:table-row-group}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element table:table-row-group}
    */
   public TableTableRowGroupElement newTableTableRowGroupElement() {
@@ -748,8 +733,6 @@ public class TableTableElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element table:table-rows}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:table-rows}
    */
@@ -796,8 +779,6 @@ public class TableTableElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:soft-page-break}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:soft-page-break}
    */
   public TextSoftPageBreakElement newTextSoftPageBreakElement() {
@@ -807,12 +788,6 @@ public class TableTableElement extends OdfStylableElement {
     return textSoftPageBreak;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -821,5 +796,73 @@ public class TableTableElement extends OdfStylableElement {
     } else {
       visitor.visit(this);
     }
+  }
+
+  @Override
+  /**
+   * If this element is the first - perhaps only - element of a logical group of XML elements. For
+   * instance: table, paragraph
+   */
+  public boolean isComponentRoot() {
+    return true;
+  }
+  /**
+   * Caching the width of columns during insert/delete column as after an UNDO setAttributes is
+   * called too early even before the column was undone
+   */
+  // WORK AROUND for "UNDO COLUMN WIDTH" problem (see JsonOperationConsumer for further changes)
+  private List<JSONArray> mColumnWidthCache = null;
+  /** OH PLEASE DELETE ME AFTER THE API WAS FIXED */
+  public void pushTableGrid(JSONArray tableGrid) {
+    if (mColumnWidthCache == null) {
+      mColumnWidthCache = new ArrayList<JSONArray>();
+    }
+    mColumnWidthCache.add(tableGrid);
+  }
+
+  private JSONArray mTablePositionOfColumnChange;
+
+  public void requireLaterWidthChange(JSONArray start) {
+    mTablePositionOfColumnChange = start;
+  }
+
+  public boolean isWidthChangeRequired() {
+    return mTablePositionOfColumnChange != null;
+  }
+
+  public void hasChangedWidth() {
+    mTablePositionOfColumnChange = null;
+  }
+
+  public JSONArray getPosition() {
+    return mTablePositionOfColumnChange;
+  }
+
+  /** OH PLEASE DELETE ME AFTER THE API WAS FIXED */
+  public void pushTableGrid(List<Integer> columnWidths) {
+    if (columnWidths != null && !columnWidths.isEmpty()) {
+      this.pushTableGrid(new JSONArray(columnWidths));
+    }
+  }
+
+  /** OH PLEASE DELETE ME AFTER THE API WAS FIXED */
+  public JSONArray popTableGrid() {
+    JSONArray previousColumnWidth = null;
+    if (mColumnWidthCache != null && mColumnWidthCache.size() > 0) {
+      previousColumnWidth = mColumnWidthCache.remove(mColumnWidthCache.size() - 1);
+      mTablePositionOfColumnChange = null;
+    }
+    return previousColumnWidth;
+  }
+
+  /** OH PLEASE DELETE ME AFTER THE API WAS FIXED */
+  public void replaceLastTableGrid(JSONArray tableGrid) {
+    if (mColumnWidthCache == null) {
+      mColumnWidthCache = new ArrayList<JSONArray>();
+      mColumnWidthCache.add(tableGrid);
+    } else if (mColumnWidthCache.size() > 0) {
+      mColumnWidthCache.remove(mColumnWidthCache.size() - 1);
+    }
+    mColumnWidthCache.add(tableGrid);
   }
 }

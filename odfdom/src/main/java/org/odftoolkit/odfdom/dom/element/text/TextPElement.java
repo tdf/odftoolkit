@@ -30,16 +30,6 @@ package org.odftoolkit.odfdom.dom.element.text;
 
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.dom.attribute.text.TextClassNamesAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextCondStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextIdAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlAboutAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlContentAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlDatatypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlPropertyAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawCaptionElement;
@@ -69,7 +59,7 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
 /** DOM implementation of OpenDocument element {@odf.element text:p}. */
-public class TextPElement extends OdfStylableElement {
+public class TextPElement extends TextParagraphElementBase {
 
   public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "p");
 
@@ -96,260 +86,7 @@ public class TextPElement extends OdfStylableElement {
   }
 
   /**
-   * Receives the value of the ODFDOM attribute representation <code>TextClassNamesAttribute</code>
-   * , See {@odf.attribute text:class-names}
-   *
-   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
-   *     and no default value defined.
-   */
-  public String getTextClassNamesAttribute() {
-    TextClassNamesAttribute attr =
-        (TextClassNamesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "class-names");
-    if (attr != null) {
-      return String.valueOf(attr.getValue());
-    }
-    return null;
-  }
-
-  /**
-   * Sets the value of ODFDOM attribute representation <code>TextClassNamesAttribute</code> , See
-   * {@odf.attribute text:class-names}
-   *
-   * @param textClassNamesValue The type is <code>String</code>
-   */
-  public void setTextClassNamesAttribute(String textClassNamesValue) {
-    TextClassNamesAttribute attr = new TextClassNamesAttribute((OdfFileDom) this.ownerDocument);
-    setOdfAttribute(attr);
-    attr.setValue(textClassNamesValue);
-  }
-
-  /**
-   * Receives the value of the ODFDOM attribute representation <code>TextCondStyleNameAttribute
-   * </code> , See {@odf.attribute text:cond-style-name}
-   *
-   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
-   *     and no default value defined.
-   */
-  public String getTextCondStyleNameAttribute() {
-    TextCondStyleNameAttribute attr =
-        (TextCondStyleNameAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "cond-style-name");
-    if (attr != null) {
-      return String.valueOf(attr.getValue());
-    }
-    return null;
-  }
-
-  /**
-   * Sets the value of ODFDOM attribute representation <code>TextCondStyleNameAttribute</code> , See
-   * {@odf.attribute text:cond-style-name}
-   *
-   * @param textCondStyleNameValue The type is <code>String</code>
-   */
-  public void setTextCondStyleNameAttribute(String textCondStyleNameValue) {
-    TextCondStyleNameAttribute attr =
-        new TextCondStyleNameAttribute((OdfFileDom) this.ownerDocument);
-    setOdfAttribute(attr);
-    attr.setValue(textCondStyleNameValue);
-  }
-
-  /**
-   * Receives the value of the ODFDOM attribute representation <code>TextIdAttribute</code> , See
-   * {@odf.attribute text:id}
-   *
-   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
-   *     and no default value defined.
-   */
-  public String getTextIdAttribute() {
-    TextIdAttribute attr = (TextIdAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "id");
-    if (attr != null) {
-      return String.valueOf(attr.getValue());
-    }
-    return null;
-  }
-
-  /**
-   * Sets the value of ODFDOM attribute representation <code>TextIdAttribute</code> , See
-   * {@odf.attribute text:id}
-   *
-   * @param textIdValue The type is <code>String</code>
-   */
-  public void setTextIdAttribute(String textIdValue) {
-    TextIdAttribute attr = new TextIdAttribute((OdfFileDom) this.ownerDocument);
-    setOdfAttribute(attr);
-    attr.setValue(textIdValue);
-  }
-
-  /**
-   * Receives the value of the ODFDOM attribute representation <code>TextStyleNameAttribute</code> ,
-   * See {@odf.attribute text:style-name}
-   *
-   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
-   *     and no default value defined.
-   */
-  public String getTextStyleNameAttribute() {
-    TextStyleNameAttribute attr =
-        (TextStyleNameAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "style-name");
-    if (attr != null) {
-      return String.valueOf(attr.getValue());
-    }
-    return null;
-  }
-
-  /**
-   * Sets the value of ODFDOM attribute representation <code>TextStyleNameAttribute</code> , See
-   * {@odf.attribute text:style-name}
-   *
-   * @param textStyleNameValue The type is <code>String</code>
-   */
-  public void setTextStyleNameAttribute(String textStyleNameValue) {
-    TextStyleNameAttribute attr = new TextStyleNameAttribute((OdfFileDom) this.ownerDocument);
-    setOdfAttribute(attr);
-    attr.setValue(textStyleNameValue);
-  }
-
-  /**
-   * Receives the value of the ODFDOM attribute representation <code>XhtmlAboutAttribute</code> ,
-   * See {@odf.attribute xhtml:about}
-   *
-   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
-   *     and no default value defined.
-   */
-  public String getXhtmlAboutAttribute() {
-    XhtmlAboutAttribute attr =
-        (XhtmlAboutAttribute) getOdfAttribute(OdfDocumentNamespace.XHTML, "about");
-    if (attr != null) {
-      return String.valueOf(attr.getValue());
-    }
-    return null;
-  }
-
-  /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlAboutAttribute</code> , See
-   * {@odf.attribute xhtml:about}
-   *
-   * @param xhtmlAboutValue The type is <code>String</code>
-   */
-  public void setXhtmlAboutAttribute(String xhtmlAboutValue) {
-    XhtmlAboutAttribute attr = new XhtmlAboutAttribute((OdfFileDom) this.ownerDocument);
-    setOdfAttribute(attr);
-    attr.setValue(xhtmlAboutValue);
-  }
-
-  /**
-   * Receives the value of the ODFDOM attribute representation <code>XhtmlContentAttribute</code> ,
-   * See {@odf.attribute xhtml:content}
-   *
-   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
-   *     and no default value defined.
-   */
-  public String getXhtmlContentAttribute() {
-    XhtmlContentAttribute attr =
-        (XhtmlContentAttribute) getOdfAttribute(OdfDocumentNamespace.XHTML, "content");
-    if (attr != null) {
-      return String.valueOf(attr.getValue());
-    }
-    return null;
-  }
-
-  /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlContentAttribute</code> , See
-   * {@odf.attribute xhtml:content}
-   *
-   * @param xhtmlContentValue The type is <code>String</code>
-   */
-  public void setXhtmlContentAttribute(String xhtmlContentValue) {
-    XhtmlContentAttribute attr = new XhtmlContentAttribute((OdfFileDom) this.ownerDocument);
-    setOdfAttribute(attr);
-    attr.setValue(xhtmlContentValue);
-  }
-
-  /**
-   * Receives the value of the ODFDOM attribute representation <code>XhtmlDatatypeAttribute</code> ,
-   * See {@odf.attribute xhtml:datatype}
-   *
-   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
-   *     and no default value defined.
-   */
-  public String getXhtmlDatatypeAttribute() {
-    XhtmlDatatypeAttribute attr =
-        (XhtmlDatatypeAttribute) getOdfAttribute(OdfDocumentNamespace.XHTML, "datatype");
-    if (attr != null) {
-      return String.valueOf(attr.getValue());
-    }
-    return null;
-  }
-
-  /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlDatatypeAttribute</code> , See
-   * {@odf.attribute xhtml:datatype}
-   *
-   * @param xhtmlDatatypeValue The type is <code>String</code>
-   */
-  public void setXhtmlDatatypeAttribute(String xhtmlDatatypeValue) {
-    XhtmlDatatypeAttribute attr = new XhtmlDatatypeAttribute((OdfFileDom) this.ownerDocument);
-    setOdfAttribute(attr);
-    attr.setValue(xhtmlDatatypeValue);
-  }
-
-  /**
-   * Receives the value of the ODFDOM attribute representation <code>XhtmlPropertyAttribute</code> ,
-   * See {@odf.attribute xhtml:property}
-   *
-   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
-   *     and no default value defined.
-   */
-  public String getXhtmlPropertyAttribute() {
-    XhtmlPropertyAttribute attr =
-        (XhtmlPropertyAttribute) getOdfAttribute(OdfDocumentNamespace.XHTML, "property");
-    if (attr != null) {
-      return String.valueOf(attr.getValue());
-    }
-    return null;
-  }
-
-  /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlPropertyAttribute</code> , See
-   * {@odf.attribute xhtml:property}
-   *
-   * @param xhtmlPropertyValue The type is <code>String</code>
-   */
-  public void setXhtmlPropertyAttribute(String xhtmlPropertyValue) {
-    XhtmlPropertyAttribute attr = new XhtmlPropertyAttribute((OdfFileDom) this.ownerDocument);
-    setOdfAttribute(attr);
-    attr.setValue(xhtmlPropertyValue);
-  }
-
-  /**
-   * Receives the value of the ODFDOM attribute representation <code>XmlIdAttribute</code> , See
-   * {@odf.attribute xml:id}
-   *
-   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
-   *     and no default value defined.
-   */
-  public String getXmlIdAttribute() {
-    XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute(OdfDocumentNamespace.XML, "id");
-    if (attr != null) {
-      return String.valueOf(attr.getValue());
-    }
-    return null;
-  }
-
-  /**
-   * Sets the value of ODFDOM attribute representation <code>XmlIdAttribute</code> , See
-   * {@odf.attribute xml:id}
-   *
-   * @param xmlIdValue The type is <code>String</code>
-   */
-  public void setXmlIdAttribute(String xmlIdValue) {
-    XmlIdAttribute attr = new XmlIdAttribute((OdfFileDom) this.ownerDocument);
-    setOdfAttribute(attr);
-    attr.setValue(xmlIdValue);
-  }
-
-  /**
    * Create child element {@odf.element dr3d:scene}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element dr3d:scene}
    */
@@ -380,8 +117,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:caption}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:caption}
    */
   public DrawCaptionElement newDrawCaptionElement() {
@@ -393,8 +128,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:circle}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:circle}
    */
@@ -438,8 +171,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:custom-shape}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:custom-shape}
    */
   public DrawCustomShapeElement newDrawCustomShapeElement() {
@@ -451,8 +182,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:ellipse}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:ellipse}
    */
@@ -466,8 +195,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:frame}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:frame}
    */
   public DrawFrameElement newDrawFrameElement() {
@@ -479,8 +206,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:g}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:g}
    */
@@ -542,8 +267,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:page-thumbnail}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:page-thumbnail}
    */
@@ -611,8 +334,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:rect}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:rect}
    */
   public DrawRectElement newDrawRectElement() {
@@ -644,8 +365,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element office:annotation}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:annotation}
    */
   public OfficeAnnotationElement newOfficeAnnotationElement() {
@@ -659,7 +378,7 @@ public class TextPElement extends OdfStylableElement {
    * Create child element {@odf.element office:annotation-end}.
    *
    * @param officeNameValue the <code>String</code> value of <code>OfficeNameAttribute</code>, see
-   *     {@odf.attribute office:name} at specification
+   *     {@odf.attribute office:name} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element office:annotation-end}
    */
   public OfficeAnnotationEndElement newOfficeAnnotationEndElement(String officeNameValue) {
@@ -673,8 +392,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element presentation:date-time}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element presentation:date-time}
    */
   public PresentationDateTimeElement newPresentationDateTimeElement() {
@@ -687,8 +404,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element presentation:footer}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element presentation:footer}
    */
   public PresentationFooterElement newPresentationFooterElement() {
@@ -700,8 +415,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element presentation:header}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element presentation:header}
    */
@@ -781,8 +494,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:author-initials}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:author-initials}
    */
   public TextAuthorInitialsElement newTextAuthorInitialsElement() {
@@ -794,8 +505,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:author-name}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:author-name}
    */
@@ -855,8 +564,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:bookmark-ref}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:bookmark-ref}
    */
@@ -990,8 +697,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:creation-date}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:creation-date}
    */
   public TextCreationDateElement newTextCreationDateElement() {
@@ -1004,8 +709,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:creation-time}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:creation-time}
    */
   public TextCreationTimeElement newTextCreationTimeElement() {
@@ -1017,8 +720,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:creator}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:creator}
    */
@@ -1115,8 +816,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:date}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:date}
    */
   public TextDateElement newTextDateElement() {
@@ -1145,8 +844,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:description}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:description}
    */
   public TextDescriptionElement newTextDescriptionElement() {
@@ -1158,8 +855,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:editing-cycles}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:editing-cycles}
    */
@@ -1173,8 +868,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:editing-duration}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:editing-duration}
    */
   public TextEditingDurationElement newTextEditingDurationElement() {
@@ -1186,8 +879,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:execute-macro}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:execute-macro}
    */
@@ -1219,8 +910,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:file-name}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:file-name}
    */
@@ -1283,8 +972,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:initial-creator}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:initial-creator}
    */
   public TextInitialCreatorElement newTextInitialCreatorElement() {
@@ -1297,8 +984,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:keywords}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:keywords}
    */
   public TextKeywordsElement newTextKeywordsElement() {
@@ -1310,8 +995,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:line-break}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:line-break}
    */
@@ -1355,7 +1038,7 @@ public class TextPElement extends OdfStylableElement {
    * Create child element {@odf.element text:meta-field}.
    *
    * @param xmlIdValue the <code>String</code> value of <code>XmlIdAttribute</code>, see
-   *     {@odf.attribute xml:id} at specification
+   *     {@odf.attribute xml:id} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element text:meta-field}
    */
   public TextMetaFieldElement newTextMetaFieldElement(String xmlIdValue) {
@@ -1369,8 +1052,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:modification-date}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:modification-date}
    */
   public TextModificationDateElement newTextModificationDateElement() {
@@ -1382,8 +1063,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:modification-time}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:modification-time}
    */
@@ -1502,8 +1181,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:page-variable-set}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:page-variable-set}
    */
   public TextPageVariableSetElement newTextPageVariableSetElement() {
@@ -1547,8 +1224,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:print-date}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:print-date}
    */
   public TextPrintDateElement newTextPrintDateElement() {
@@ -1561,8 +1236,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:print-time}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:print-time}
    */
   public TextPrintTimeElement newTextPrintTimeElement() {
@@ -1574,8 +1247,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:printed-by}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:printed-by}
    */
@@ -1634,8 +1305,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:reference-ref}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:reference-ref}
    */
   public TextReferenceRefElement newTextReferenceRefElement() {
@@ -1647,8 +1316,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:ruby}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:ruby}
    */
@@ -1662,8 +1329,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:s}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:s}
    */
   public TextSElement newTextSElement() {
@@ -1674,8 +1339,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:script}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:script}
    */
@@ -1689,8 +1352,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:sender-city}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:sender-city}
    */
   public TextSenderCityElement newTextSenderCityElement() {
@@ -1702,8 +1363,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:sender-company}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-company}
    */
@@ -1717,8 +1376,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:sender-country}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:sender-country}
    */
   public TextSenderCountryElement newTextSenderCountryElement() {
@@ -1730,8 +1387,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:sender-email}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-email}
    */
@@ -1745,8 +1400,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:sender-fax}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:sender-fax}
    */
   public TextSenderFaxElement newTextSenderFaxElement() {
@@ -1758,8 +1411,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:sender-firstname}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-firstname}
    */
@@ -1773,8 +1424,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:sender-initials}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:sender-initials}
    */
   public TextSenderInitialsElement newTextSenderInitialsElement() {
@@ -1786,8 +1435,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:sender-lastname}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-lastname}
    */
@@ -1801,8 +1448,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:sender-phone-private}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:sender-phone-private}
    */
   public TextSenderPhonePrivateElement newTextSenderPhonePrivateElement() {
@@ -1814,8 +1459,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:sender-phone-work}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-phone-work}
    */
@@ -1829,8 +1472,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:sender-position}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:sender-position}
    */
   public TextSenderPositionElement newTextSenderPositionElement() {
@@ -1842,8 +1483,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:sender-postal-code}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-postal-code}
    */
@@ -1857,8 +1496,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:sender-state-or-province}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:sender-state-or-province}
    */
   public TextSenderStateOrProvinceElement newTextSenderStateOrProvinceElement() {
@@ -1871,8 +1508,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:sender-street}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:sender-street}
    */
   public TextSenderStreetElement newTextSenderStreetElement() {
@@ -1884,8 +1519,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:sender-title}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sender-title}
    */
@@ -1918,8 +1551,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:sequence-ref}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:sequence-ref}
    */
   public TextSequenceRefElement newTextSequenceRefElement() {
@@ -1931,8 +1562,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:sheet-name}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:sheet-name}
    */
@@ -1946,8 +1575,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:soft-page-break}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:soft-page-break}
    */
   public TextSoftPageBreakElement newTextSoftPageBreakElement() {
@@ -1959,8 +1586,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:span}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:span}
    */
@@ -1974,8 +1599,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:subject}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:subject}
    */
   public TextSubjectElement newTextSubjectElement() {
@@ -1987,8 +1610,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:tab}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:tab}
    */
@@ -2016,8 +1637,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:table-formula}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:table-formula}
    */
   public TextTableFormulaElement newTextTableFormulaElement() {
@@ -2029,8 +1648,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:template-name}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:template-name}
    */
@@ -2044,8 +1661,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:text-input}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:text-input}
    */
   public TextTextInputElement newTextTextInputElement() {
@@ -2058,8 +1673,6 @@ public class TextPElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:time}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:time}
    */
   public TextTimeElement newTextTimeElement() {
@@ -2071,8 +1684,6 @@ public class TextPElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:title}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:title}
    */
@@ -2297,12 +1908,6 @@ public class TextPElement extends OdfStylableElement {
     return textWordCount;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -2312,7 +1917,6 @@ public class TextPElement extends OdfStylableElement {
       visitor.visit(this);
     }
   }
-
   /** Add text content. Only elements which are allowed to have text content offer this method. */
   public void newTextNode(String content) {
     if (content != null && !content.equals("")) {

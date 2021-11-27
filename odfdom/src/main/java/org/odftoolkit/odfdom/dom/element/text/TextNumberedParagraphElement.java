@@ -258,8 +258,6 @@ public class TextNumberedParagraphElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:number}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:number}
    */
   public TextNumberElement newTextNumberElement() {
@@ -272,8 +270,6 @@ public class TextNumberedParagraphElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:p}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:p}
    */
   public TextPElement newTextPElement() {
@@ -282,12 +278,6 @@ public class TextNumberedParagraphElement extends OdfStylableElement {
     return textP;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

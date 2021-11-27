@@ -357,12 +357,6 @@ public class TextExpressionElement extends OdfElement {
     attr.setValue(textFormulaValue);
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -372,7 +366,6 @@ public class TextExpressionElement extends OdfElement {
       visitor.visit(this);
     }
   }
-
   /** Add text content. Only elements which are allowed to have text content offer this method. */
   public void newTextNode(String content) {
     if (content != null && !content.equals("")) {
