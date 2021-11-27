@@ -1387,8 +1387,6 @@ public class DrawEnhancedGeometryElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:equation}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:equation}
    */
   public DrawEquationElement newDrawEquationElement() {
@@ -1414,12 +1412,6 @@ public class DrawEnhancedGeometryElement extends OdfElement {
     return drawHandle;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

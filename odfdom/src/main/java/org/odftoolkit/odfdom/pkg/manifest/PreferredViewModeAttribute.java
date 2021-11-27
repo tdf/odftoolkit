@@ -32,6 +32,7 @@ package org.odftoolkit.odfdom.pkg.manifest;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
 /**
  * Manifest implementation of OpenDocument attribute {@odf.attribute manifest:preferred-view-mode}.
@@ -39,8 +40,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 public class PreferredViewModeAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME =
-      OdfName.newName(
-          "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:preferred-view-mode");
+      OdfName.newName(OdfPackageNamespace.MANIFEST, "preferred-view-mode");
 
   /**
    * Create the instance of OpenDocument attribute {@odf.attribute manifest:preferred-view-mode}.
@@ -102,6 +102,25 @@ public class PreferredViewModeAttribute extends OdfAttribute {
   /** @return Returns the <code>Enum</code> value of the attribute */
   public Value getEnumValue() {
     return Value.enumValueOf(this.getValue());
+  }
+
+  /**
+   * @param attrValue The <code>String</code> value of the attribute.
+   * @throws IllegalArgumentException If the provided attribute value is invalid
+   */
+  @Override
+  public void setValue(String attrValue) {
+    // Since we have not only enumValues, but also a DataType, we use String as common base and
+    // don't validate.
+    super.setValue(attrValue);
+  }
+
+  /** @return Returns the <code>String</code> value of the attribute */
+  @Override
+  public String getValue() {
+    // Since we have not only enumValues, but also a DataType, we use String as common base and
+    // don't validate.
+    return super.getValue();
   }
 
   /**

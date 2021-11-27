@@ -266,8 +266,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element dr3d:scene}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element dr3d:scene}
    */
   public Dr3dSceneElement newDr3dSceneElement() {
@@ -297,8 +295,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:caption}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:caption}
    */
   public DrawCaptionElement newDrawCaptionElement() {
@@ -310,8 +306,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:circle}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:circle}
    */
@@ -355,8 +349,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:custom-shape}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:custom-shape}
    */
   public DrawCustomShapeElement newDrawCustomShapeElement() {
@@ -368,8 +360,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:ellipse}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:ellipse}
    */
@@ -383,8 +373,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:frame}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:frame}
    */
   public DrawFrameElement newDrawFrameElement() {
@@ -396,8 +384,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:g}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:g}
    */
@@ -459,8 +445,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:page-thumbnail}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:page-thumbnail}
    */
@@ -528,8 +512,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:rect}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:rect}
    */
   public DrawRectElement newDrawRectElement() {
@@ -560,8 +542,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element table:table}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element table:table}
    */
@@ -694,8 +674,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:list}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:list}
    */
   public TextListElement newTextListElement() {
@@ -738,8 +716,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:p}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:p}
    */
   public TextPElement newTextPElement() {
@@ -768,8 +744,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:soft-page-break}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:soft-page-break}
    */
@@ -825,12 +799,6 @@ public class TextIndexTitleElement extends OdfStylableElement {
     return textUserIndex;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -429,8 +429,6 @@ public class TextNotesConfigurationElement extends OdfElement {
   /**
    * Create child element {@odf.element text:note-continuation-notice-backward}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:note-continuation-notice-backward}
    */
   public TextNoteContinuationNoticeBackwardElement newTextNoteContinuationNoticeBackwardElement() {
@@ -444,8 +442,6 @@ public class TextNotesConfigurationElement extends OdfElement {
   /**
    * Create child element {@odf.element text:note-continuation-notice-forward}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:note-continuation-notice-forward}
    */
   public TextNoteContinuationNoticeForwardElement newTextNoteContinuationNoticeForwardElement() {
@@ -456,12 +452,6 @@ public class TextNotesConfigurationElement extends OdfElement {
     return textNoteContinuationNoticeForward;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

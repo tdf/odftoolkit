@@ -34,17 +34,14 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNumPrefixAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNumSuffixAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextBulletCharAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextBulletRelativeSizeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextLevelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
 /** DOM implementation of OpenDocument element {@odf.element text:list-level-style-bullet}. */
-public class TextListLevelStyleBulletElement extends OdfElement {
+public class TextListLevelStyleBulletElement extends TextListLevelStyleElementBase {
 
   public static final OdfName ELEMENT_NAME =
       OdfName.newName(OdfDocumentNamespace.TEXT, "list-level-style-bullet");
@@ -185,36 +182,6 @@ public class TextListLevelStyleBulletElement extends OdfElement {
   }
 
   /**
-   * Receives the value of the ODFDOM attribute representation <code>TextLevelAttribute</code> , See
-   * {@odf.attribute text:level}
-   *
-   * <p>Attribute is mandatory.
-   *
-   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
-   *     set and no default value defined.
-   */
-  public Integer getTextLevelAttribute() {
-    TextLevelAttribute attr =
-        (TextLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "level");
-    if (attr != null) {
-      return Integer.valueOf(attr.intValue());
-    }
-    return null;
-  }
-
-  /**
-   * Sets the value of ODFDOM attribute representation <code>TextLevelAttribute</code> , See
-   * {@odf.attribute text:level}
-   *
-   * @param textLevelValue The type is <code>Integer</code>
-   */
-  public void setTextLevelAttribute(Integer textLevelValue) {
-    TextLevelAttribute attr = new TextLevelAttribute((OdfFileDom) this.ownerDocument);
-    setOdfAttribute(attr);
-    attr.setIntValue(textLevelValue.intValue());
-  }
-
-  /**
    * Receives the value of the ODFDOM attribute representation <code>TextStyleNameAttribute</code> ,
    * See {@odf.attribute text:style-name}
    *
@@ -243,20 +210,6 @@ public class TextListLevelStyleBulletElement extends OdfElement {
   }
 
   /**
-   * Create child element {@odf.element style:list-level-properties}.
-   *
-   * <p>Child element is new in Odf 1.2
-   *
-   * @return the element {@odf.element style:list-level-properties}
-   */
-  public StyleListLevelPropertiesElement newStyleListLevelPropertiesElement() {
-    StyleListLevelPropertiesElement styleListLevelProperties =
-        ((OdfFileDom) this.ownerDocument).newOdfElement(StyleListLevelPropertiesElement.class);
-    this.appendChild(styleListLevelProperties);
-    return styleListLevelProperties;
-  }
-
-  /**
    * Create child element {@odf.element style:text-properties}.
    *
    * @param textDisplayValue the <code>String</code> value of <code>TextDisplayAttribute</code>, see
@@ -271,12 +224,6 @@ public class TextListLevelStyleBulletElement extends OdfElement {
     return styleTextProperties;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

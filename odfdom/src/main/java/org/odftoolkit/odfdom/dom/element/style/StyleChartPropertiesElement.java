@@ -2466,7 +2466,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
    * Create child element {@odf.element chart:symbol-image}.
    *
    * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
-   *     {@odf.attribute xlink:href} at specification
+   *     {@odf.attribute xlink:href} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element chart:symbol-image}
    */
   public ChartSymbolImageElement newChartSymbolImageElement(String xlinkHrefValue) {
@@ -2477,12 +2477,6 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     return chartSymbolImage;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

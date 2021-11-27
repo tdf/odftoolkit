@@ -155,8 +155,6 @@ public class ChartAxisElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element chart:categories}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element chart:categories}
    */
   public ChartCategoriesElement newChartCategoriesElement() {
@@ -168,8 +166,6 @@ public class ChartAxisElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element chart:grid}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element chart:grid}
    */
@@ -183,8 +179,6 @@ public class ChartAxisElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element chart:title}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element chart:title}
    */
   public ChartTitleElement newChartTitleElement() {
@@ -194,12 +188,6 @@ public class ChartAxisElement extends OdfStylableElement {
     return chartTitle;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -253,7 +253,8 @@ public class StyleMasterPageElement extends OdfStylableElement {
    * Create child element {@odf.element anim:animate}.
    *
    * @param smilAttributeNameValue the <code>String</code> value of <code>SmilAttributeNameAttribute
-   *     </code>, see {@odf.attribute smil:attributeName} at specification
+   *     </code>, see {@odf.attribute smil:attributeName} at specification Child element is new in
+   *     Odf 1.2
    * @return the element {@odf.element anim:animate}
    */
   public AnimAnimateElement newAnimAnimateElement(String smilAttributeNameValue) {
@@ -268,7 +269,8 @@ public class StyleMasterPageElement extends OdfStylableElement {
    * Create child element {@odf.element anim:animateColor}.
    *
    * @param smilAttributeNameValue the <code>String</code> value of <code>SmilAttributeNameAttribute
-   *     </code>, see {@odf.attribute smil:attributeName} at specification
+   *     </code>, see {@odf.attribute smil:attributeName} at specification Child element is new in
+   *     Odf 1.2
    * @return the element {@odf.element anim:animateColor}
    */
   public AnimAnimateColorElement newAnimAnimateColorElement(String smilAttributeNameValue) {
@@ -283,7 +285,8 @@ public class StyleMasterPageElement extends OdfStylableElement {
    * Create child element {@odf.element anim:animateMotion}.
    *
    * @param smilAttributeNameValue the <code>String</code> value of <code>SmilAttributeNameAttribute
-   *     </code>, see {@odf.attribute smil:attributeName} at specification
+   *     </code>, see {@odf.attribute smil:attributeName} at specification Child element is new in
+   *     Odf 1.2
    * @return the element {@odf.element anim:animateMotion}
    */
   public AnimAnimateMotionElement newAnimAnimateMotionElement(String smilAttributeNameValue) {
@@ -300,7 +303,7 @@ public class StyleMasterPageElement extends OdfStylableElement {
    * @param smilAttributeNameValue the <code>String</code> value of <code>SmilAttributeNameAttribute
    *     </code>, see {@odf.attribute smil:attributeName} at specification
    * @param svgTypeValue the <code>String</code> value of <code>SvgTypeAttribute</code>, see
-   *     {@odf.attribute svg:type} at specification
+   *     {@odf.attribute svg:type} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element anim:animateTransform}
    */
   public AnimAnimateTransformElement newAnimAnimateTransformElement(
@@ -331,7 +334,7 @@ public class StyleMasterPageElement extends OdfStylableElement {
    * Create child element {@odf.element anim:command}.
    *
    * @param animCommandValue the <code>String</code> value of <code>AnimCommandAttribute</code>, see
-   *     {@odf.attribute anim:command} at specification
+   *     {@odf.attribute anim:command} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element anim:command}
    */
   public AnimCommandElement newAnimCommandElement(String animCommandValue) {
@@ -386,7 +389,8 @@ public class StyleMasterPageElement extends OdfStylableElement {
    * Create child element {@odf.element anim:set}.
    *
    * @param smilAttributeNameValue the <code>String</code> value of <code>SmilAttributeNameAttribute
-   *     </code>, see {@odf.attribute smil:attributeName} at specification
+   *     </code>, see {@odf.attribute smil:attributeName} at specification Child element is new in
+   *     Odf 1.2
    * @return the element {@odf.element anim:set}
    */
   public AnimSetElement newAnimSetElement(String smilAttributeNameValue) {
@@ -400,7 +404,7 @@ public class StyleMasterPageElement extends OdfStylableElement {
    * Create child element {@odf.element anim:transitionFilter}.
    *
    * @param smilTypeValue the <code>String</code> value of <code>SmilTypeAttribute</code>, see
-   *     {@odf.attribute smil:type} at specification
+   *     {@odf.attribute smil:type} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element anim:transitionFilter}
    */
   public AnimTransitionFilterElement newAnimTransitionFilterElement(String smilTypeValue) {
@@ -413,8 +417,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element dr3d:scene}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element dr3d:scene}
    */
@@ -431,7 +433,7 @@ public class StyleMasterPageElement extends OdfStylableElement {
    * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
    *     {@odf.attribute xlink:href} at specification
    * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
-   *     {@odf.attribute xlink:type} at specification
+   *     {@odf.attribute xlink:type} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element draw:a}
    */
   public DrawAElement newDrawAElement(String xlinkHrefValue, String xlinkTypeValue) {
@@ -445,8 +447,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:caption}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:caption}
    */
   public DrawCaptionElement newDrawCaptionElement() {
@@ -458,8 +458,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:circle}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:circle}
    */
@@ -503,8 +501,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:custom-shape}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:custom-shape}
    */
   public DrawCustomShapeElement newDrawCustomShapeElement() {
@@ -516,8 +512,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:ellipse}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:ellipse}
    */
@@ -531,8 +525,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:frame}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:frame}
    */
   public DrawFrameElement newDrawFrameElement() {
@@ -544,8 +536,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element draw:g}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element draw:g}
    */
@@ -622,8 +612,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:page-thumbnail}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:page-thumbnail}
    */
   public DrawPageThumbnailElement newDrawPageThumbnailElement() {
@@ -690,8 +678,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element draw:rect}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element draw:rect}
    */
   public DrawRectElement newDrawRectElement() {
@@ -723,8 +709,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element office:forms}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:forms}
    */
   public OfficeFormsElement newOfficeFormsElement() {
@@ -736,8 +720,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element presentation:notes}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element presentation:notes}
    */
@@ -751,8 +733,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element style:footer}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element style:footer}
    */
   public StyleFooterElement newStyleFooterElement() {
@@ -764,8 +744,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element style:footer-left}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element style:footer-left}
    */
@@ -779,8 +757,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element style:header}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element style:header}
    */
   public StyleHeaderElement newStyleHeaderElement() {
@@ -793,8 +769,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element style:header-left}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element style:header-left}
    */
   public StyleHeaderLeftElement newStyleHeaderLeftElement() {
@@ -804,12 +778,6 @@ public class StyleMasterPageElement extends OdfStylableElement {
     return styleHeaderLeft;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
