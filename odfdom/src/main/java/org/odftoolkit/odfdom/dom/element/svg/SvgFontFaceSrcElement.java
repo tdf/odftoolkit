@@ -62,8 +62,6 @@ public class SvgFontFaceSrcElement extends OdfElement {
   /**
    * Create child element {@odf.element svg:font-face-name}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element svg:font-face-name}
    */
   public SvgFontFaceNameElement newSvgFontFaceNameElement() {
@@ -92,12 +90,6 @@ public class SvgFontFaceSrcElement extends OdfElement {
     return svgFontFaceUri;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

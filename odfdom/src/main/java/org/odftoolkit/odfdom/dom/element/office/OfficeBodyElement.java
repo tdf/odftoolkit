@@ -61,8 +61,6 @@ public class OfficeBodyElement extends OdfElement {
   /**
    * Create child element {@odf.element office:chart}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:chart}
    */
   public OfficeChartElement newOfficeChartElement() {
@@ -89,8 +87,6 @@ public class OfficeBodyElement extends OdfElement {
   /**
    * Create child element {@odf.element office:drawing}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:drawing}
    */
   public OfficeDrawingElement newOfficeDrawingElement() {
@@ -102,8 +98,6 @@ public class OfficeBodyElement extends OdfElement {
 
   /**
    * Create child element {@odf.element office:image}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element office:image}
    */
@@ -117,8 +111,6 @@ public class OfficeBodyElement extends OdfElement {
   /**
    * Create child element {@odf.element office:presentation}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:presentation}
    */
   public OfficePresentationElement newOfficePresentationElement() {
@@ -130,8 +122,6 @@ public class OfficeBodyElement extends OdfElement {
 
   /**
    * Create child element {@odf.element office:spreadsheet}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element office:spreadsheet}
    */
@@ -145,8 +135,6 @@ public class OfficeBodyElement extends OdfElement {
   /**
    * Create child element {@odf.element office:text}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element office:text}
    */
   public OfficeTextElement newOfficeTextElement() {
@@ -156,12 +144,6 @@ public class OfficeBodyElement extends OdfElement {
     return officeText;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

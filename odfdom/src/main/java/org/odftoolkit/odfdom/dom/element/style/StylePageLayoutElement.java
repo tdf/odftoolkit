@@ -122,8 +122,6 @@ public class StylePageLayoutElement extends OdfStyleBase {
   /**
    * Create child element {@odf.element style:footer-style}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element style:footer-style}
    */
   public StyleFooterStyleElement newStyleFooterStyleElement() {
@@ -135,8 +133,6 @@ public class StylePageLayoutElement extends OdfStyleBase {
 
   /**
    * Create child element {@odf.element style:header-style}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element style:header-style}
    */
@@ -163,12 +159,6 @@ public class StylePageLayoutElement extends OdfStyleBase {
     return stylePageLayoutProperties;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

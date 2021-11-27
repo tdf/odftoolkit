@@ -113,8 +113,6 @@ public class TextObjectIndexEntryTemplateElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:index-entry-page-number}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:index-entry-page-number}
    */
   public TextIndexEntryPageNumberElement newTextIndexEntryPageNumberElement() {
@@ -126,8 +124,6 @@ public class TextObjectIndexEntryTemplateElement extends OdfStylableElement {
 
   /**
    * Create child element {@odf.element text:index-entry-span}.
-   *
-   * <p>Child element is new in Odf 1.2
    *
    * @return the element {@odf.element text:index-entry-span}
    */
@@ -156,8 +152,6 @@ public class TextObjectIndexEntryTemplateElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:index-entry-text}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * @return the element {@odf.element text:index-entry-text}
    */
   public TextIndexEntryTextElement newTextIndexEntryTextElement() {
@@ -167,12 +161,6 @@ public class TextObjectIndexEntryTemplateElement extends OdfStylableElement {
     return textIndexEntryText;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

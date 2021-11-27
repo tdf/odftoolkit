@@ -49,23 +49,17 @@ import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlPropertyAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
-/**
- * DOM implementation of OpenDocument base element
- *
- * <p>This class can have any org.w3c.dom.Attribute attribute.
- */
+/** DOM implementation of OpenDocument base element */
 public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Create the instance of <code>TableTableCellElementBase</code>
    *
    * @param ownerDoc The type is <code>OdfFileDom</code>
-   * @param elementName The type is <code>OdfName</code>
-   * @param styleFamily The type is <code>OdfStyleFamily</code>
-   * @param styleAttrName The type is <code>OdfName</code>
    */
   public TableTableCellElementBase(
       OdfFileDom ownerDoc, OdfName elementName, OdfStyleFamily styleFamily, OdfName styleAttrName) {
@@ -74,8 +68,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeBooleanValueAttribute
-   * </code> , See {@odf.attribute office:boolean-value}
+   * </code> , See {
    *
+   * @odf.attribute office:boolean-value}
    * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
@@ -90,8 +85,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>OfficeBooleanValueAttribute</code> ,
-   * See {@odf.attribute office:boolean-value}
+   * See {
    *
+   * @odf.attribute office:boolean-value}
    * @param officeBooleanValueValue The type is <code>Boolean</code>
    */
   public void setOfficeBooleanValueAttribute(Boolean officeBooleanValueValue) {
@@ -103,8 +99,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeCurrencyAttribute</code>
-   * , See {@odf.attribute office:currency}
+   * , See {
    *
+   * @odf.attribute office:currency}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -118,9 +115,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>OfficeCurrencyAttribute</code> , See
-   * {@odf.attribute office:currency}
+   * Sets the value of ODFDOM attribute representation <code>OfficeCurrencyAttribute</code> , See {
    *
+   * @odf.attribute office:currency}
    * @param officeCurrencyValue The type is <code>String</code>
    */
   public void setOfficeCurrencyAttribute(String officeCurrencyValue) {
@@ -131,8 +128,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeDateValueAttribute</code>
-   * , See {@odf.attribute office:date-value}
+   * , See {
    *
+   * @odf.attribute office:date-value}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -146,9 +144,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>OfficeDateValueAttribute</code> , See
-   * {@odf.attribute office:date-value}
+   * Sets the value of ODFDOM attribute representation <code>OfficeDateValueAttribute</code> , See {
    *
+   * @odf.attribute office:date-value}
    * @param officeDateValueValue The type is <code>String</code>
    */
   public void setOfficeDateValueAttribute(String officeDateValueValue) {
@@ -159,8 +157,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeStringValueAttribute
-   * </code> , See {@odf.attribute office:string-value}
+   * </code> , See {
    *
+   * @odf.attribute office:string-value}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -175,8 +174,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>OfficeStringValueAttribute</code> , See
-   * {@odf.attribute office:string-value}
+   * {
    *
+   * @odf.attribute office:string-value}
    * @param officeStringValueValue The type is <code>String</code>
    */
   public void setOfficeStringValueAttribute(String officeStringValueValue) {
@@ -188,8 +188,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeTimeValueAttribute</code>
-   * , See {@odf.attribute office:time-value}
+   * , See {
    *
+   * @odf.attribute office:time-value}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -203,9 +204,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>OfficeTimeValueAttribute</code> , See
-   * {@odf.attribute office:time-value}
+   * Sets the value of ODFDOM attribute representation <code>OfficeTimeValueAttribute</code> , See {
    *
+   * @odf.attribute office:time-value}
    * @param officeTimeValueValue The type is <code>String</code>
    */
   public void setOfficeTimeValueAttribute(String officeTimeValueValue) {
@@ -216,8 +217,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeValueAttribute</code> ,
-   * See {@odf.attribute office:value}
+   * See {
    *
+   * @odf.attribute office:value}
    * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -231,9 +233,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>OfficeValueAttribute</code> , See
-   * {@odf.attribute office:value}
+   * Sets the value of ODFDOM attribute representation <code>OfficeValueAttribute</code> , See {
    *
+   * @odf.attribute office:value}
    * @param officeValueValue The type is <code>Double</code>
    */
   public void setOfficeValueAttribute(Double officeValueValue) {
@@ -244,8 +246,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeValueTypeAttribute</code>
-   * , See {@odf.attribute office:value-type}
+   * , See {
    *
+   * @odf.attribute office:value-type}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -259,9 +262,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>OfficeValueTypeAttribute</code> , See
-   * {@odf.attribute office:value-type}
+   * Sets the value of ODFDOM attribute representation <code>OfficeValueTypeAttribute</code> , See {
    *
+   * @odf.attribute office:value-type}
    * @param officeValueTypeValue The type is <code>String</code>
    */
   public void setOfficeValueTypeAttribute(String officeValueTypeValue) {
@@ -269,11 +272,16 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
     setOdfAttribute(attr);
     attr.setValue(officeValueTypeValue);
   }
+  /** @param officeValueTypeValue The type is <code>String</code> */
+  public void setCalcextValueTypeAttribute(String valueTypeValue) {
+    setAttributeNS(OdfDocumentNamespace.CALCEXT.getUri(), "calcext:value-type", valueTypeValue);
+  }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * TableContentValidationNameAttribute</code> , See {@odf.attribute table:content-validation-name}
+   * TableContentValidationNameAttribute</code> , See {
    *
+   * @odf.attribute table:content-validation-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -289,8 +297,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>TableContentValidationNameAttribute
-   * </code> , See {@odf.attribute table:content-validation-name}
+   * </code> , See {
    *
+   * @odf.attribute table:content-validation-name}
    * @param tableContentValidationNameValue The type is <code>String</code>
    */
   public void setTableContentValidationNameAttribute(String tableContentValidationNameValue) {
@@ -302,8 +311,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableFormulaAttribute</code> ,
-   * See {@odf.attribute table:formula}
+   * See {
    *
+   * @odf.attribute table:formula}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -317,9 +327,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TableFormulaAttribute</code> , See
-   * {@odf.attribute table:formula}
+   * Sets the value of ODFDOM attribute representation <code>TableFormulaAttribute</code> , See {
    *
+   * @odf.attribute table:formula}
    * @param tableFormulaValue The type is <code>String</code>
    */
   public void setTableFormulaAttribute(String tableFormulaValue) {
@@ -330,8 +340,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * TableNumberColumnsRepeatedAttribute</code> , See {@odf.attribute table:number-columns-repeated}
+   * TableNumberColumnsRepeatedAttribute</code> , See {
    *
+   * @odf.attribute table:number-columns-repeated}
    * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
@@ -347,8 +358,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>TableNumberColumnsRepeatedAttribute
-   * </code> , See {@odf.attribute table:number-columns-repeated}
+   * </code> , See {
    *
+   * @odf.attribute table:number-columns-repeated}
    * @param tableNumberColumnsRepeatedValue The type is <code>Integer</code>
    */
   public void setTableNumberColumnsRepeatedAttribute(Integer tableNumberColumnsRepeatedValue) {
@@ -360,8 +372,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableProtectAttribute</code> ,
-   * See {@odf.attribute table:protect}
+   * See {
    *
+   * @odf.attribute table:protect}
    * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
@@ -375,9 +388,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TableProtectAttribute</code> , See
-   * {@odf.attribute table:protect}
+   * Sets the value of ODFDOM attribute representation <code>TableProtectAttribute</code> , See {
    *
+   * @odf.attribute table:protect}
    * @param tableProtectValue The type is <code>Boolean</code>
    */
   public void setTableProtectAttribute(Boolean tableProtectValue) {
@@ -388,8 +401,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableProtectedAttribute</code>
-   * , See {@odf.attribute table:protected}
+   * , See {
    *
+   * @odf.attribute table:protected}
    * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
@@ -403,9 +417,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TableProtectedAttribute</code> , See
-   * {@odf.attribute table:protected}
+   * Sets the value of ODFDOM attribute representation <code>TableProtectedAttribute</code> , See {
    *
+   * @odf.attribute table:protected}
    * @param tableProtectedValue The type is <code>Boolean</code>
    */
   public void setTableProtectedAttribute(Boolean tableProtectedValue) {
@@ -416,8 +430,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableStyleNameAttribute</code>
-   * , See {@odf.attribute table:style-name}
+   * , See {
    *
+   * @odf.attribute table:style-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -431,9 +446,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TableStyleNameAttribute</code> , See
-   * {@odf.attribute table:style-name}
+   * Sets the value of ODFDOM attribute representation <code>TableStyleNameAttribute</code> , See {
    *
+   * @odf.attribute table:style-name}
    * @param tableStyleNameValue The type is <code>String</code>
    */
   public void setTableStyleNameAttribute(String tableStyleNameValue) {
@@ -444,8 +459,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>XhtmlAboutAttribute</code> ,
-   * See {@odf.attribute xhtml:about}
+   * See {
    *
+   * @odf.attribute xhtml:about}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -459,21 +475,23 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlAboutAttribute</code> , See
-   * {@odf.attribute xhtml:about}
+   * Sets the value of ODFDOM attribute representation <code>XhtmlAboutAttribute</code> , See {
    *
+   * @odf.attribute xhtml:about}
    * @param xhtmlAboutValue The type is <code>String</code>
    */
   public void setXhtmlAboutAttribute(String xhtmlAboutValue) {
     XhtmlAboutAttribute attr = new XhtmlAboutAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlAboutValue);
+    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>XhtmlContentAttribute</code> ,
-   * See {@odf.attribute xhtml:content}
+   * See {
    *
+   * @odf.attribute xhtml:content}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -487,21 +505,23 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlContentAttribute</code> , See
-   * {@odf.attribute xhtml:content}
+   * Sets the value of ODFDOM attribute representation <code>XhtmlContentAttribute</code> , See {
    *
+   * @odf.attribute xhtml:content}
    * @param xhtmlContentValue The type is <code>String</code>
    */
   public void setXhtmlContentAttribute(String xhtmlContentValue) {
     XhtmlContentAttribute attr = new XhtmlContentAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlContentValue);
+    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>XhtmlDatatypeAttribute</code> ,
-   * See {@odf.attribute xhtml:datatype}
+   * See {
    *
+   * @odf.attribute xhtml:datatype}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -515,21 +535,23 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlDatatypeAttribute</code> , See
-   * {@odf.attribute xhtml:datatype}
+   * Sets the value of ODFDOM attribute representation <code>XhtmlDatatypeAttribute</code> , See {
    *
+   * @odf.attribute xhtml:datatype}
    * @param xhtmlDatatypeValue The type is <code>String</code>
    */
   public void setXhtmlDatatypeAttribute(String xhtmlDatatypeValue) {
     XhtmlDatatypeAttribute attr = new XhtmlDatatypeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlDatatypeValue);
+    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>XhtmlPropertyAttribute</code> ,
-   * See {@odf.attribute xhtml:property}
+   * See {
    *
+   * @odf.attribute xhtml:property}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -543,21 +565,22 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlPropertyAttribute</code> , See
-   * {@odf.attribute xhtml:property}
+   * Sets the value of ODFDOM attribute representation <code>XhtmlPropertyAttribute</code> , See {
    *
+   * @odf.attribute xhtml:property}
    * @param xhtmlPropertyValue The type is <code>String</code>
    */
   public void setXhtmlPropertyAttribute(String xhtmlPropertyValue) {
     XhtmlPropertyAttribute attr = new XhtmlPropertyAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlPropertyValue);
+    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
-   * Receives the value of the ODFDOM attribute representation <code>XmlIdAttribute</code> , See
-   * {@odf.attribute xml:id}
+   * Receives the value of the ODFDOM attribute representation <code>XmlIdAttribute</code> , See {
    *
+   * @odf.attribute xml:id}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -570,14 +593,94 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XmlIdAttribute</code> , See
-   * {@odf.attribute xml:id}
+   * Sets the value of ODFDOM attribute representation <code>XmlIdAttribute</code> , See {
    *
+   * @odf.attribute xml:id}
    * @param xmlIdValue The type is <code>String</code>
    */
   public void setXmlIdAttribute(String xmlIdValue) {
     XmlIdAttribute attr = new XmlIdAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xmlIdValue);
+  }
+
+  @Override
+  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
+  /** @return the component size of a heading, which is always 1 */
+  public boolean isRepeatable() {
+    return true;
+  }
+
+  @Override
+  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
+  /** @return the component size of a heading, which is always 1 */
+  public void setRepetition(int repetition) {
+    if (repetition >= 0) {
+      setTableNumberColumnsRepeatedAttribute(repetition);
+    }
+  }
+
+  @Override
+  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
+  /** @return the component size of a heading, which is always 1 */
+  public int getRepetition() {
+    Integer repeated = getTableNumberColumnsRepeatedAttribute();
+    if (repeated == null) {
+      repeated = 1;
+    }
+    return repeated;
+  }
+
+  /**
+   * Splitting the element at the given position into two halves
+   *
+   * @param posStart The split position. The start of the second half.
+   * @return the new created second element (or if posStart was less than 1 the original element)
+   */
+  @Override
+  public OdfElement split(int posStart) {
+    TableTableCellElementBase newElement = this;
+    // 0 would not leave anything left on the right side
+    if (posStart > 0) {
+      newElement = (TableTableCellElementBase) this.cloneNode(true);
+      int repeated = getTableNumberColumnsRepeatedAttribute();
+      if (repeated > 1) {
+        if (posStart > 1) {
+          this.setTableNumberColumnsRepeatedAttribute(posStart);
+        } else {
+          this.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
+        }
+        // any higher value one for repeated write out.
+        // 1 is the default and has not to be written out
+        if (repeated - posStart > 1) {
+          newElement.setTableNumberColumnsRepeatedAttribute(repeated - posStart);
+        } else {
+          newElement.removeAttributeNS(
+              OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
+        }
+      }
+      OdfElement nextElementSibling = OdfElement.getNextSiblingElement(this);
+      OdfElement parent = (OdfElement) this.getParentNode();
+      if (nextElementSibling == null) {
+        parent.appendChild(newElement);
+      } else {
+        parent.insertBefore(newElement, nextElementSibling);
+      }
+    }
+    return newElement;
+  }
+
+  /** Removes all the content from the element */
+  @Override
+  public void removeContent() {
+    super.removeContent();
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "value");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "value-type");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "time-value");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "date-value");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "boolean-value");
+    this.removeAttributeNS(
+        "urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0", "value-type");
+    this.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "formula");
   }
 }

@@ -6136,7 +6136,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
    * Create child element {@odf.element style:columns}.
    *
    * @param foColumnCountValue the <code>Integer</code> value of <code>FoColumnCountAttribute</code>
-   *     , see {@odf.attribute fo:column-count} at specification
+   *     , see {@odf.attribute fo:column-count} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element style:columns}
    */
   public StyleColumnsElement newStyleColumnsElement(int foColumnCountValue) {
@@ -6151,7 +6151,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
    * Create child element {@odf.element text:list-style}.
    *
    * @param styleNameValue the <code>String</code> value of <code>StyleNameAttribute</code>, see
-   *     {@odf.attribute style:name} at specification
+   *     {@odf.attribute style:name} at specification Child element is new in Odf 1.2
    * @return the element {@odf.element text:list-style}
    */
   public TextListStyleElement newTextListStyleElement(String styleNameValue) {
@@ -6162,12 +6162,6 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
     return textListStyle;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

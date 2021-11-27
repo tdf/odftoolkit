@@ -86,8 +86,6 @@ public class TableDdeLinkElement extends OdfElement {
   /**
    * Create child element {@odf.element table:table}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * <p>Child element is mandatory.
    *
    * @return the element {@odf.element table:table}
@@ -99,12 +97,6 @@ public class TableDdeLinkElement extends OdfElement {
     return tableTable;
   }
 
-  /**
-   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
-   * pattern to get a better understanding.
-   *
-   * @param visitor an instance of DefaultElementVisitor
-   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
