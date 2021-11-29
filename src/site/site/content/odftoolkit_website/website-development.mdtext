@@ -71,12 +71,12 @@ Use a broken link checker (e.g. https://www.drlinkcheck.com/) testing on your Gi
 JavaDoc is generated as part of by calling from the root of the project the command:
 
 ```shell
-(mvn install && cd odfdom && mvn javadoc:javadoc)
+mvn install
 ```
 Run `copy-javadoc.sh` to build & copy the created API directories into the <ODFTOOLKIT_ROOT>/docs/api directory and remove any prior files within.
 
 ```shell
-(cd src/site/java && ./copy-javadoc.sh)
+(cd src/site && ./copy-javadoc.sh)
 ```
 
 ## Submitting your results
