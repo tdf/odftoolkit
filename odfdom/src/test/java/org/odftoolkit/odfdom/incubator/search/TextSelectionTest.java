@@ -307,7 +307,7 @@ public class TextSelectionTest {
         toSearch.stream()
             .map(s -> new TextNavigation(Pattern.compile(s), doc))
             .collect(Collectors.toList());
-    navigations.forEach(n -> assertTrue(n.hasNext()));
+    navigations.forEach(n -> assertTrue("Navigation " + n + " should have a next", n.hasNext()));
     final List<TextSelection> selections =
         navigations.stream()
             .map(n -> (TextSelection) n.getCurrentItem())
@@ -320,10 +320,11 @@ public class TextSelectionTest {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
-    navigations.forEach(n -> assertFalse(n.hasNext()));
+    navigations.forEach(
+        n -> assertFalse("Navigation " + n + " should not have a next", n.hasNext()));
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_REPLACE_MULTI_SPACE));
-    } catch (Exception e) {
+    } catch (final Exception e) {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
