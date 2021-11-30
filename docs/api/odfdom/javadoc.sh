@@ -1,1 +1,1 @@
-/usr/lib/jvm/java-11-openjdk-11.0.12.0.7-0.fc34.x86_64/bin/javadoc @options @packages
+/usr/lib/jvm/open-jdk-11/bin/javadoc @options @packages

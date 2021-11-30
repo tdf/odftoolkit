@@ -3,7 +3,7 @@
 ## Current Version
 
 The current version is the 0.10.0 supporting ODF 1.2. The future development is based on the [master branch](https://github.com/tdf/odftoolkit).</br>
-The releases of 0.9.0 and 0.10.0 were both on the July 1st, 2021.
+The releases of 0.9.0 and 0.10.0 were both on Novmenber 26th, 2021.
 
 ## Releases (latest)
 
@@ -27,15 +27,15 @@ For more details see the [release notes](./ReleaseNotes.html). People interested
 
 ### ODF Toolkit 0.10.0 Release Bundle (ODF 1.2 using JDK 11)
 
-* Sources: [odftoolkit-0.10.0-src.zip](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.10.0/odftoolkit-0.10.0-src.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.10.0/odftoolkit-0.10.0-src.zip.sha)]
-* Binaries: [odftoolkit-0.10.0-bin.zip](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.10.0/odftoolkit-0.10.0-bin.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.10.0/odftoolkit-0.10.0-bin.zip.sha)]
-* Documentation: [odftoolkit-0.10.0-doc.zip](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.10.0/odftoolkit-0.10.0-doc.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.10.0/odftoolkit-0.10.0-doc.zip.sha)]
+* Sources: [odftoolkit-0.10.0-src.zip](https://github.com/tdf/odftoolkit/releases/download/v0.10.0/odftoolkit-0.10.0-src.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/v0.10.0/odftoolkit-0.10.0-src.zip.sha)]
+* Binaries: [odftoolkit-0.10.0-bin.zip](https://github.com/tdf/odftoolkit/releases/download/v0.10.0/odftoolkit-0.10.0-bin.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/v0.10.0/odftoolkit-0.10.0-bin.zip.sha)]
+* Documentation: [odftoolkit-0.10.0-doc.zip](https://github.com/tdf/odftoolkit/releases/download/v0.10.0/odftoolkit-0.10.0-doc.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/v0.10.0/odftoolkit-0.10.0-doc.zip.sha)]
 
 ### ODF Toolkit 0.9.0 Release Bundle (ODF 1.2 using JDK 8)
 
-* Sources: [odftoolkit-0.9.0-src.zip](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-src.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-src.zip.sha)]
-* Binaries: [odftoolkit-0.9.0-bin.zip](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-bin.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-bin.zip.sha)]
-* Documentation: [odftoolkit-0.9.0-doc.zip](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-doc.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/odftoolkit-0.9.0/odftoolkit-0.9.0-doc.zip.sha)]
+* Sources: [odftoolkit-0.9.0-src.zip](https://github.com/tdf/odftoolkit/releases/download/v0.9.0/odftoolkit-0.9.0-src.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/v0.9.0/odftoolkit-0.9.0-src.zip.sha)]
+* Binaries: [odftoolkit-0.9.0-bin.zip](https://github.com/tdf/odftoolkit/releases/download/v0.9.0/odftoolkit-0.9.0-bin.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/v0.9.0/odftoolkit-0.9.0-bin.zip.sha)]
+* Documentation: [odftoolkit-0.9.0-doc.zip](https://github.com/tdf/odftoolkit/releases/download/v0.9.0/odftoolkit-0.9.0-doc.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/v0.9.0/odftoolkit-0.9.0-doc.zip.sha)]
 
 ## Former ODF Toolkit Releases at Apache
 
