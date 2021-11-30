@@ -18,16 +18,18 @@
  */
 package org.odftoolkit.odfdom.incubator.search;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import org.junit.*;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
@@ -46,6 +48,8 @@ public class TextSelectionTest {
   public static final String SAVE_FILE_STYLE = "TextSelectionResultStyle.odt";
   public static final String SAVE_FILE_HREF = "TextSelectionResultHref.odt";
   public static final String SAVE_FILE_REPLACE = "TextSelectionResultReplace.odt";
+  public static final String SAVE_FILE_REPLACE_MULTI_SPACE =
+      "TextSelectionResultReplaceMultispace.odt";
   public static final String SAVE_FILE_COPYTO = "TextSelectionResultCopyTo.odt";
   public static final String SAVE_FILE_COPYTO1 = "TextSelectionResultCopyTo1.odt";
   public static final String SAVE_FILE_DELETE_PATTERN = "TextSelectionResultPatternDelete.odt";
@@ -99,7 +103,7 @@ public class TextSelectionTest {
         Assert.fail(e.getMessage());
       }
     }
-    Assert.assertTrue(8 == i);
+    assertTrue(8 == i);
     // research the "delete"
     search = new TextNavigation("delete", doc);
     Assert.assertFalse(search.hasNext());
@@ -151,7 +155,7 @@ public class TextSelectionTest {
     while (search.hasNext()) {
       j++;
     }
-    Assert.assertTrue(i == j);
+    assertTrue(i == j);
 
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_COPYTO));
@@ -191,7 +195,7 @@ public class TextSelectionTest {
     while (search.hasNext()) {
       j++;
     }
-    Assert.assertTrue(i == j);
+    assertTrue(i == j);
 
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_COPYTO1));
@@ -275,7 +279,7 @@ public class TextSelectionTest {
     while (search.hasNext()) {
       j++;
     }
-    Assert.assertTrue(i == j);
+    assertTrue(i == j);
 
     try {
       nextSelect.replaceWith("bbb");
@@ -285,6 +289,40 @@ public class TextSelectionTest {
 
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_REPLACE));
+    } catch (Exception e) {
+      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+    }
+  }
+
+  /**
+   * Test replacewith method of org.odftoolkit.odfdom.incubator.search.TextSelection with multiple
+   * spaces
+   */
+  @Test
+  public void testReplacewithMultispace() {
+    final List<String> toSearch =
+        Arrays.asList("multiple\\s+spaces", "some\\s+words", "some\\s+others");
+    final List<TextNavigation> navigations =
+        toSearch.stream()
+            .map(s -> new TextNavigation(Pattern.compile(s), doc))
+            .collect(Collectors.toList());
+    navigations.forEach(n -> assertTrue(n.hasNext()));
+    final List<TextSelection> selections =
+        navigations.stream()
+            .map(n -> (TextSelection) n.getCurrentItem())
+            .collect(Collectors.toList());
+    try {
+      selections.get(0).replaceWith("one space");
+      selections.get(1).replaceWith("all words");
+      selections.get(2).replaceWith("none");
+    } catch (final Exception e) {
+      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+    }
+    navigations.forEach(n -> assertFalse(n.hasNext()));
+    try {
+      doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_REPLACE_MULTI_SPACE));
     } catch (Exception e) {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
