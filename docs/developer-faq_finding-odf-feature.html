@@ -47,20 +47,34 @@
       </ul> 
     </div>
     <div id="contenta">
-      <h1 id="frequently-asked-questions-(faqs)">Frequently Asked Questions (FAQs)</h1> 
-      <h2 id="how-to-participate">How to Participate</h2> 
-      <p>There are many ways to participate and we're always looking for contributors. Just on the ODF Toolkit Project and afterwards watch this project. Then you may want to start with reading and posting on the <a href="mailing-lists.html">mailing lists</a> or report bugs or write documentation.</p> 
-      <p>If you're a developer, just dive into <a href="source.html">the development section</a>. Here you find information on where to access the source code and how to set up a build environment.</p> 
-      <h2 id="how-to-contribute-to-an-open-source-project-on-github">How to contribute to an open-source project on GitHub</h2> 
-      <p>General information on doing the first pull-request can be found on <a href="https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github">this blog</a>.</p> 
-      <h2 id="how-to-get-in-contact">How to get in contact</h2> 
-      <p>For any questions, comments, or concerns about this project or website please contact the project on the <a href="mailing-lists.html">developer mail list</a>.</p> 
-      <h2 id="how-to-report-an-issue">How to report an issue</h2> 
-      <p>Please create issue on our <a href="https://github.com/tdf/odftoolkit/issues">GitHub</a>.</p> 
-      <h2 id="how-to-edit-our-website">How to edit our website</h2> 
-      <p>The pages on this website are written in <a href="https://www.apache.org/dev/cmsref.html#markdown">markdown syntax</a> and stored in our GIT repro at <a href="https://github.com/tdf/odftoolkit/tree/master/src/site">src/site</a>. Detailed information can be found on our <a href="website-development.html">Website Development</a> page.</p> 
-      <h2 id="how-to-find-an-odf-feature-in-odfdom?">How to find an ODF feature in ODFDOM?</h2> 
-      <p>Take a look at <a href="developer-faq_finding-odf-feature.html">'finding an ODF feature in ODFDOM'</a>.</p> 
+      <h1 id="how-to-find-an-api-in-the-odfdom">How to find an API in the ODFDOM</h1> 
+      <p>In case you do not remember the API, so try the following (for the example of Hyperlink feature).</p> 
+      <h2 id="are-there-test-using/testing-the-functionality?">Are there Test using/testing the functionality?</h2> 
+      <p>First usually quickly look into the test of the source code, such as via command line:</p> 
+      <div class="codehilite">
+        <pre><code class="language-shell">            git clone https://github.com/tdf/odftoolkit.git
+            cd odftoolkit/odfdom/src/test
+            find . -name *.java | xargs grep hyper
+</code></pre>
+      </div> 
+      <p>Here: The results are just within the changes packages, which is the new Event API (similar to SAX) only supporting ODT (not ODS yet).</p> 
+      <h2 id="what-xml-is-being-used-for-the-feature?-test-it-in-libreoffice">What XML is being used for the feature? Test it in LibreOffice</h2> 
+      <p>What is always working is to use the DOM API. But you need to know what XML is being used for your feature! Test it! You may use LibreOffice to add a simple hyperlink in a cell save it, unzip it and take a look into the XML.. (<a href="http://www.jedit.org/">JEdit</a> with the Archive is able to edit &amp; save XML from within the ODF ZIP. Its XML Indent Plugin helpful to pretty-print, but not ODF conform (might insert whitespaces). Therefore, a Visual Studio Code ODF extension to edit ODF XML would be very tempting)</p> 
+      <p>There I find my test file and you see how a hyperlink works:</p> 
+      <div class="codehilite">
+        <pre><code class="language-xml">            &lt;table:table-cell office:value-type="string"&gt;
+                &lt;text:p&gt;Next a hyperlink: &lt;text:a xlink:href="https://tdf.github.io/odftoolkit/" xlink:type="simple"&gt;some text&lt;/text:a&gt;&lt;/text:p&gt;
+</code></pre>
+      </div> 
+      <h2 id="check-the-odf-specification-&amp;-odf-grammar">Check the ODF Specification &amp; ODF Grammar</h2> 
+      <p>Now, when you know what is the XML node you might look into the ODF specification for more information:</p> 
+      <p><a href="https://docs.oasis-open.org/office/OpenDocument/v1.3/os/part3-schema/OpenDocument-v1.3-os-part3-schema.html#element-text_a">https://docs.oasis-open.org/office/OpenDocument/v1.3/os/part3-schema/OpenDocument-v1.3-os-part3-schema.html#element-text_a</a></p> 
+      <p>Or in the ODF grammar: <a href="http://docs.oasis-open.org/office/OpenDocument/v1.3/os/schemas/OpenDocument-v1.3-schema-rng.html#16201">http://docs.oasis-open.org/office/OpenDocument/v1.3/os/schemas/OpenDocument-v1.3-schema-rng.html#16201</a></p> 
+      <p>All ODF XML is reused across the ODF document formats, therefore Hyperlink XML is the same for ODT and ODS</p> 
+      <h2 id="find-the-odf-element/attribute-in-the-odfdom-api">Find the ODF Element/Attribute in the ODFDOM API</h2> 
+      <p>Any XML element/attribute is represented by a Java Class as the "typed" DOM node by a simple pattern. For instance, the XML element <a href="text:a">text:a</a> will become <a href="https://github.com/tdf/odftoolkit/blob/master/odfdom/src/main/java/org/odftoolkit/odfdom/dom/element/text/TextAElement.java">https://github.com/tdf/odftoolkit/blob/master/odfdom/src/main/java/org/odftoolkit/odfdom/dom/element/text/TextAElement.java</a></p> 
+      <h2 id="check-in-your-ide-the-odfdom-node-class-for-usage-by-high-level-api-classes">Check in your IDE the ODFDOM node class for usage by High-Level API classes</h2> 
+      <p>Now you might check in your favorite Java IDE [for instance, <a href="https://netbeans.apache.org/">Netbeans</a>, <a href="https://www.jetbrains.com/idea/">IntelliJ</a> and <a href="https://code.visualstudio.com/">VSCode</a>) what classes are using this class. By this, you will see that the parent DOM elements (e.g. TextPElement) have a function to add a Hyperlink.</p> 
     </div>
     <html>
       <head></head>

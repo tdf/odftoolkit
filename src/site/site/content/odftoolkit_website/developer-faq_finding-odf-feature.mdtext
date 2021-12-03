@@ -1,0 +1,51 @@
+# How to find an API in the ODFDOM
+
+In case you do not remember the API, so try the following (for the example of Hyperlink feature).
+
+## Are there Test using/testing the functionality?
+
+First usually quickly look into the test of the source code, such as via command line:
+
+```shell
+            git clone https://github.com/tdf/odftoolkit.git
+            cd odftoolkit/odfdom/src/test
+            find . -name *.java | xargs grep hyper
+```
+
+Here: The results are just within the changes packages, which is the new Event API (similar to SAX) only supporting ODT (not ODS yet).
+
+## What XML is being used for the feature? Test it in LibreOffice
+
+What is always working is to use the DOM API. But you need to know what XML is being used for your feature!
+Test it!
+You may use LibreOffice to add a simple hyperlink in a cell save it, unzip it and take a look into the XML..
+([JEdit](http://www.jedit.org/) with the Archive is able to edit & save XML from within the ODF ZIP. Its XML Indent Plugin helpful to pretty-print, but not ODF conform (might insert whitespaces). Therefore, a Visual Studio Code ODF extension to edit ODF XML would be very tempting)
+
+There I find my test file and you see how a hyperlink works:
+
+```xml
+            <table:table-cell office:value-type="string">
+                <text:p>Next a hyperlink: <text:a xlink:href="https://tdf.github.io/odftoolkit/" xlink:type="simple">some text</text:a></text:p>
+```
+
+## Check the ODF Specification & ODF Grammar
+
+Now, when you know what is the XML node you might look into the ODF specification for more information:
+
+<https://docs.oasis-open.org/office/OpenDocument/v1.3/os/part3-schema/OpenDocument-v1.3-os-part3-schema.html#element-text_a>
+
+Or in the ODF grammar:
+<http://docs.oasis-open.org/office/OpenDocument/v1.3/os/schemas/OpenDocument-v1.3-schema-rng.html#16201>
+
+All ODF XML is reused across the ODF document formats, therefore  Hyperlink XML is the same for ODT and ODS
+
+## Find the ODF Element/Attribute in the ODFDOM API
+
+Any XML element/attribute is represented by a Java Class as the "typed" DOM node by a simple pattern.
+For instance, the XML element <text:a> will become
+<https://github.com/tdf/odftoolkit/blob/master/odfdom/src/main/java/org/odftoolkit/odfdom/dom/element/text/TextAElement.java>
+
+## Check in your IDE the ODFDOM node class for usage by High-Level API classes
+
+Now you might check in your favorite Java IDE [for instance, [Netbeans](https://netbeans.apache.org/), [IntelliJ](https://www.jetbrains.com/idea/) and [VSCode](https://code.visualstudio.com/)) what classes are using this class.
+By this, you will see that the parent DOM elements (e.g. TextPElement) have a function to add a Hyperlink.

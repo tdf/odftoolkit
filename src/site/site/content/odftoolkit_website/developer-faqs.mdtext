@@ -23,8 +23,13 @@ Please create issue on our [GitHub][2].
 The pages on this website are written in [markdown syntax][3] and stored in our GIT repro at
 [src/site][4]. Detailed information can be found on our [Website Development][5] page.
 
+## How to find an ODF feature in ODFDOM?
+
+Take a look at ['finding an ODF feature in ODFDOM'][6].
+
   [1]: https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github
   [2]: https://github.com/tdf/odftoolkit/issues
   [3]: https://www.apache.org/dev/cmsref.html#markdown
   [4]: https://github.com/tdf/odftoolkit/tree/master/src/site
   [5]: website-development.html
+  [6]: developer-faq_finding-odf-feature.html
