@@ -107,13 +107,13 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <doctitle>Simple Java API for ODF (Simple ODF)</doctitle>
+                    <doctitle>DEPRECATED Simple Java API for ODF (Simple ODF) - removed in v0.10</doctitle>
                     <links>
                         <link>https://docs.oracle.com/javase/8/docs/api/</link>
                         <link>https://xerces.apache.org/xerces-j/apiDocs/</link>
                     </links>
                     <splitindex>true</splitindex>
-                    <windowtitle>Simple ODF v${project.version} - http://odftoolkit.org</windowtitle>
+                    <windowtitle>DEPRECATED Simple ODF v${project.version} - http://odftoolkit.org</windowtitle>
                     <additionalOptions>
                         <additionalOption>${javadoc.opts}</additionalOption>
                     </additionalOptions>
