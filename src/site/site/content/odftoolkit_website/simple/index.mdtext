@@ -1,6 +1,6 @@
 # Simple API (deprecated)
 
-## What is Simple API?  (now deprecated - reason below)
+## What was Simple API?  (deprecated since 0.9 and removed in 0.10 - reason below)
 
 Simple API, also called Simple Java API for ODF, was a sub-project of ODF Toolkit. This is an **easy-to-use**, **high-level** Java API for creating, modifying and extracting data from [Open Document Format (ODF)][3] documents. It is written in pure Java and does not require users to install any document editor on their systems. It is a high level abstraction of the lower-level [ODFDOM API][4].
 
@@ -11,7 +11,7 @@ The Simple API had been a fork by IBM to accelerate the work on an high-level AP
 ## Why is the Simple API being deprecated?
 
 Many parts of the Simple API are copy/pasted source code from ODFDOM. Latest when reuniting with ODFDOM at Apache the Simple API should have undo their fork by merging again with ODFDOM.
-Due to the lack of volunteers to undo the duplicated code and continuing the work on Simple API and due to the questionable design decision as for lists (not being a paragraph with a list attribute) the library had been deprecated and will be removed after the TDF ODF Toolkit release 0.9.0.
+Due to the lack of volunteers to undo the duplicated code and continuing the work on Simple API and due to the questionable design decision as for lists (not being a paragraph with a list attribute) the library had been deprecated and was removed after the TDF ODF Toolkit release 0.9.0.
 
 ## What can I do with Simple API?
 
@@ -26,6 +26,8 @@ Secondly, we recommend [cookbook][7] and [demo][8]. Both of them supply lots of 
 Lastly, please reference the newest [javadoc][9], which supplies more details of Simple API.
 
 ## Where can I get Simple API?
+
+The deprecated Simple API has been removed in ODF Toolkit 0.10.
 
 You can go to [downloads page][10]. This page lists the jar, the javadoc and the source code packages. You can unzip and find Simple API in these packages.
 If you need the earlier versions before moved to Apache, please download [here][15].
@@ -46,7 +48,7 @@ If you want to dive into this project, please reference the [document page][14],
   [6]: gettingstartguide.html
   [7]: document/cookbook/index.html
   [8]: demo/index.html
-  [9]: ../api/simple/index.html
+  [9]: https://odftoolkit.org/api-0.9/simple/index.html
   [10]: ../downloads.html
   [11]: mailto:dev@odftoolkit.org
   [13]: document/faq.html
