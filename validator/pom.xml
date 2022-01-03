@@ -311,7 +311,7 @@
     <name>ODF Validator</name>
     <description>
         ODF Validator is a tool that validates OpenDocument files and checks them for certain conformance criteria.
-</description>
+    </description>
     <url>https://odfvalidator.org/</url>
     <inceptionYear>2008</inceptionYear>
     <licenses>
