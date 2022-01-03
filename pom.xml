@@ -134,7 +134,7 @@
         (ISO/IEC 26300 == ODF) documents. Unlike other approaches which rely on
         runtime manipulation of heavy-weight editors via an automation
         interface, the ODF Toolkit is lightweight and ideal for server use.
-</description>
+    </description>
     <url>https://odftoolkit.org</url>
     <organization>
         <name>The Document Foundation</name>
@@ -165,7 +165,7 @@
         <repository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
-</url>
+            </url>
         </repository>
         <!-- not used for deployment but only for site:stage goal -->
         <site>

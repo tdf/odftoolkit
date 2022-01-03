@@ -200,7 +200,7 @@
                                    org.odftoolkit.odfdom;version="${osgi.import.range}",
                                    org.odftoolkit.odfdom.*;version="${osgi.import.range}",
                                    *
-</Import-Package>
+                                </Import-Package>
                             </instructions>
                         </configuration>
                     </execution>
@@ -413,7 +413,7 @@
         portable to any object-oriented language.
 
         The current reference implementation is written in Java.
-</description>
+    </description>
     <url>https://odftoolkit.org/odfdom/</url>
     <inceptionYear>2008</inceptionYear>
 

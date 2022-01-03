@@ -1,0 +1,39 @@
+name: Publish JAR on tagging
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: maven
+    - name: Build with Maven # build, test & package sources & create 3 ZIP for all bin, doc and src deliverables!
+      run: mvn -B install -Ppedantic,prepare-release --file pom.xml
+    - name: Read pom.xml to get version for new release # The following step reads the pom.xml from repo and use its version for the release
+      run: |
+        echo "release_version=$(cat pom.xml | grep -a -m 1 "<version>" | sed 's/.*<version>//p' | head -1 | sed 's/<\/version>//p' | head -1)" >> $GITHUB_ENV
+    - name: Upload binaries as GitHub release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: target/release/**/*.*
+        tag: odftoolkit-${{ env.release_version }}  # <--- Use environment variables that was created before
+        overwrite: true
+        file_glob: true
+        body: "Support of **ODF 1.2** and >=**JDK 11**\n
+\n
+Detailed documentation:\n
+https://tdf.github.io/odftoolkit/ReleaseNotes.html#release-${{ env.release_version }}\n
+\n
+Available via Maven repository:\n
+https://oss.sonatype.org/content/groups/public/org/odftoolkit/\n
+\n"
