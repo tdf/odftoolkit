@@ -69,7 +69,7 @@ For more details see the [release notes](https://tdf.github.io/odftoolkit/Releas
 * [The Home Page for the ODF Toolkit](https://tdf.github.io/odftoolkit)
 * [ODFDOM Getting Start Guide](https://tdf.github.io/odftoolkit/odfdom/index.html)
 * [Simple API (deprecated) - Getting Start Guide](https://tdf.github.io/odftoolkit/simple/gettingstartguide.html)
-* [Simple API (deprecated) - Cookbook](https://tdf.github.io/odftoolkit/simple/document/cookbook/)index.html
+* [Simple API (deprecated) - Cookbook](https://tdf.github.io/odftoolkit/simple/document/cookbook/index.html)
 * [Simple API (deprecated) - Demos](https://tdf.github.io/odftoolkit/simple/demo/index.html)
 * [Simple API (deprecated) - Online JavaDoc](https://tdf.github.io/odftoolkit/simple/document/javadoc/index.html)
 * [ODF Validator Getting Start Guide](https://tdf.github.io/odftoolkit/conformance/ODFValidator.html)
