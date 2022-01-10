@@ -10,7 +10,6 @@ tmp/
 *.swp
 *~.nib
 local.properties
-.settings/
 .loadpath
 .recommenders
 
@@ -65,8 +64,6 @@ nb-configuration.xml
 .worksheet
 
 ### Eclipse Patch ###
-# Eclipse Core
-.project
 
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
