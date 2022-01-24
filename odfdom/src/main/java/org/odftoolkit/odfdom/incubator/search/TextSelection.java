@@ -549,11 +549,17 @@ public class TextSelection extends Selection {
           if (node.getLocalName().equals("s")) // text:s
           {
             // delete space
-            leftLength = leftLength - (nodeLength - fromindex);
+            if (0 < fromindex || leftLength < nodeLength) {
+              final int deleted = Math.min(leftLength, nodeLength - fromindex);
+              ((TextSElement) node).setTextCAttribute(new Integer(nodeLength - deleted));
+              leftLength = leftLength - deleted;
+            } else {
+              Node nodeMerker = node.getNextSibling();
+              pNode.removeChild(node);
+              node = nodeMerker;
+              leftLength = leftLength - nodeLength;
+            }
             fromindex = 0;
-            Node nodeMerker = node.getNextSibling();
-            pNode.removeChild(node);
-            node = nodeMerker;
             continue;
           } else if (node.getLocalName().equals("line-break")
               || node.getLocalName().equals("tab")) {
