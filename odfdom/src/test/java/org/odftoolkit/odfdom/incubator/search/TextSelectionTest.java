@@ -302,7 +302,7 @@ public class TextSelectionTest {
   @Test
   public void testReplacewithMultispace() {
     final List<String> toSearch =
-        Arrays.asList("multiple\\s+spaces", "some\\s+words", "some\\s+others");
+        Arrays.asList("multiple\\s+spaces", "some\\s+words", "some\\s+others", "%>  ");
     final List<TextNavigation> navigations =
         toSearch.stream()
             .map(s -> new TextNavigation(Pattern.compile(s), doc))
@@ -316,6 +316,7 @@ public class TextSelectionTest {
       selections.get(0).replaceWith("one space");
       selections.get(1).replaceWith("all words");
       selections.get(2).replaceWith("none");
+      selections.get(3).replaceWith("X");
     } catch (final Exception e) {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
