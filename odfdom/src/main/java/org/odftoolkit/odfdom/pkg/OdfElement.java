@@ -2566,8 +2566,8 @@ public abstract class OdfElement extends ElementNSImpl {
   public OdfElement getLastChildElement() {
     OdfElement lastElementChild = null;
     NodeList nodeList = this.getChildNodes();
-    Node node = nodeList.item(0);
     for (int i = nodeList.getLength(); i >= 0; i--) {
+      Node node = nodeList.item(i);
       if (node instanceof OdfElement) {
         lastElementChild = (OdfElement) node;
         break;
