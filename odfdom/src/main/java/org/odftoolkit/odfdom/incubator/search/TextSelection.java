@@ -214,25 +214,44 @@ public class TextSelection extends Selection {
         fromindex -= nodeLength;
       } else {
         // the start index is in this node
-        if (node.getNodeType() == Node.TEXT_NODE) {
-          String value = node.getNodeValue();
-          node.setNodeValue(value.substring(0, fromindex));
+        if (node.getNodeType() == Node.TEXT_NODE
+            || (node.getNodeType() == Node.ELEMENT_NODE && node.getLocalName().equals("s"))) {
           int endLength = fromindex + leftLength;
-          int nextLength = value.length() - endLength;
+          int nextLength = nodeLength - endLength;
+          String value = null;
+          if (node.getNodeType() == Node.TEXT_NODE) {
+            value = node.getNodeValue();
+            node.setNodeValue(value.substring(0, fromindex));
+          } else {
+            ((TextSElement) node).setTextCAttribute(fromindex);
+          }
 
           Node nextNode = node.getNextSibling();
           Node parNode = node.getParentNode();
-          // init text:a
+          // init text:span
           OdfTextSpan textSpan = new OdfTextSpan((OdfFileDom) node.getOwnerDocument());
           Node newNode = null;
           if (nextLength >= 0) {
-            textSpan.setTextContent(value.substring(fromindex, endLength));
             newNode = node.cloneNode(true);
-            newNode.setNodeValue(value.substring(endLength, value.length()));
+            if (node.getNodeType() == Node.TEXT_NODE) {
+              textSpan.setTextContent(value.substring(fromindex, endLength));
+              newNode.setNodeValue(value.substring(endLength, nodeLength));
+            } else {
+              Node newS = node.cloneNode(true);
+              ((TextSElement) newS).setTextCAttribute(endLength - fromindex);
+              textSpan.appendChild(newS);
+              ((TextSElement) newNode).setTextCAttribute(nodeLength - endLength);
+            }
             leftLength = 0;
           } else {
-            textSpan.setTextContent(value.substring(fromindex, value.length()));
-            leftLength = endLength - value.length();
+            if (node.getNodeType() == Node.TEXT_NODE) {
+              textSpan.setTextContent(value.substring(fromindex, nodeLength));
+            } else {
+              Node newS = node.cloneNode(true);
+              ((TextSElement) newS).setTextCAttribute(nodeLength - fromindex);
+              textSpan.appendChild(newS);
+            }
+            leftLength = endLength - nodeLength;
           }
           textSpan.setProperties(style.getStyleProperties());
 
@@ -247,6 +266,10 @@ public class TextSelection extends Selection {
               parNode.appendChild(newNode);
             }
           }
+          if (fromindex == 0) // node only contains the prefix, is it empty?
+          {
+            parNode.removeChild(node);
+          }
           fromindex = 0;
           if (nextNode != null) {
             node = nextNode;
@@ -255,16 +278,8 @@ public class TextSelection extends Selection {
           }
 
         } else if (node.getNodeType() == Node.ELEMENT_NODE) {
-          // if text:s?????????
-          if (node.getLocalName().equals("s")) // text:s
-          {
-            // delete space
-            ((TextSElement) node).setTextCAttribute(new Integer(nodeLength - fromindex));
-            leftLength = leftLength - (nodeLength - fromindex);
-            fromindex = 0;
-
-          } else if (node.getLocalName().equals("line-break")
-              || node.getLocalName().equals("tab")) {
+          assert (!node.getLocalName().equals("s")); // was handled above
+          if (node.getLocalName().equals("line-break") || node.getLocalName().equals("tab")) {
             fromindex = 0;
             leftLength--;
           } else {
@@ -422,11 +437,17 @@ public class TextSelection extends Selection {
         fromindex -= nodeLength;
       } else {
         // the start index is in this node
-        if (node.getNodeType() == Node.TEXT_NODE) {
-          String value = node.getNodeValue();
-          node.setNodeValue(value.substring(0, fromindex));
+        if (node.getNodeType() == Node.TEXT_NODE
+            || (node.getNodeType() == Node.ELEMENT_NODE && node.getLocalName().equals("s"))) {
           int endLength = fromindex + leftLength;
-          int nextLength = value.length() - endLength;
+          int nextLength = nodeLength - endLength;
+          String value = null;
+          if (node.getNodeType() == Node.TEXT_NODE) {
+            value = node.getNodeValue();
+            node.setNodeValue(value.substring(0, fromindex));
+          } else {
+            ((TextSElement) node).setTextCAttribute(fromindex);
+          }
 
           Node nextNode = node.getNextSibling();
           Node parNode = node.getParentNode();
@@ -434,13 +455,26 @@ public class TextSelection extends Selection {
           TextAElement textLink = new TextAElement((OdfFileDom) node.getOwnerDocument());
           Node newNode = null;
           if (nextLength >= 0) {
-            textLink.setTextContent(value.substring(fromindex, endLength));
             newNode = node.cloneNode(true);
-            newNode.setNodeValue(value.substring(endLength, value.length()));
+            if (node.getNodeType() == Node.TEXT_NODE) {
+              textLink.setTextContent(value.substring(fromindex, endLength));
+              newNode.setNodeValue(value.substring(endLength, nodeLength));
+            } else {
+              Node newS = node.cloneNode(true);
+              ((TextSElement) newS).setTextCAttribute(endLength - fromindex);
+              textLink.appendChild(newS);
+              ((TextSElement) newNode).setTextCAttribute(nodeLength - endLength);
+            }
             leftLength = 0;
           } else {
-            textLink.setTextContent(value.substring(fromindex, value.length()));
-            leftLength = endLength - value.length();
+            if (node.getNodeType() == Node.TEXT_NODE) {
+              textLink.setTextContent(value.substring(fromindex, value.length()));
+            } else {
+              Node newS = node.cloneNode(true);
+              ((TextSElement) newS).setTextCAttribute(nodeLength - fromindex);
+              textLink.appendChild(newS);
+            }
+            leftLength = endLength - nodeLength;
           }
           textLink.setXlinkTypeAttribute("simple");
           textLink.setXlinkHrefAttribute(href);
@@ -456,6 +490,10 @@ public class TextSelection extends Selection {
               parNode.appendChild(newNode);
             }
           }
+          if (fromindex == 0) // node only contains the prefix, is it empty?
+          {
+            parNode.removeChild(node);
+          }
           fromindex = 0;
           if (nextNode != null) {
             node = nextNode;
@@ -464,16 +502,8 @@ public class TextSelection extends Selection {
           }
 
         } else if (node.getNodeType() == Node.ELEMENT_NODE) {
-          // if text:s?????????
-          if (node.getLocalName().equals("s")) // text:s
-          {
-            // delete space
-            ((TextSElement) node).setTextCAttribute(new Integer(nodeLength - fromindex));
-            leftLength = leftLength - (nodeLength - fromindex);
-            fromindex = 0;
-
-          } else if (node.getLocalName().equals("line-break")
-              || node.getLocalName().equals("tab")) {
+          assert (!node.getLocalName().equals("s")); // was handled above
+          if (node.getLocalName().equals("line-break") || node.getLocalName().equals("tab")) {
             fromindex = 0;
             leftLength--;
           } else {
