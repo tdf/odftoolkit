@@ -182,7 +182,7 @@
             <organization>Freelancer</organization>
             <roles>
                 <role>OASIS ODF Collaboration subcommittee chair</role>
-                <role>OASIS ODF committee member</role>
+                <role>OASIS ODF committee editor</role>
                 <role>architect</role>
                 <role>developer</role>
             </roles>
@@ -191,10 +191,10 @@
         <developer>
             <id>mst</id>
             <name>Michael</name>
-            <organization>CIB Software</organization>
-            <organizationUrl>https://www.cib.de/</organizationUrl>
+            <organization>allotropia</organization>
+            <organizationUrl>https://www.allotropia.de/</organizationUrl>
             <roles>
-                <role>OASIS ODF committee member</role>
+                <role>OASIS ODF committee editor</role>
                 <role>developer</role>
             </roles>
             <timezone>+1</timezone>
