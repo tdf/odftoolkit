@@ -135,6 +135,9 @@
         <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
+        <!-- argline will be overwritten by JaCoCo Coverage tool -->
+        <!-- argline must be set (not null) otherwise stand-alone tests in IDE always fail -->
+        <argLine>-DdummyProperty=notUsed</argLine>
     </properties>
 
     <!-- Build Settings -->
