@@ -283,7 +283,7 @@
                 <configuration>
                     <!--                    <forkCount>3</forkCount>
                     <reuseForks>true</reuseForks>-->
-                    <argLine>@{argLine} -Dfile.encoding=${project.build.sourceEncoding}</argLine>
+                    <argLine>${argLine} -Dfile.encoding=${project.build.sourceEncoding}</argLine>
                     <systemPropertyVariables>
                         <odfdom.version>${project.version}</odfdom.version>
                         <org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
