@@ -56,24 +56,13 @@ public class CoberturaXMLHandler extends DefaultHandler {
 
   Coverage mCoverage = null;
 
-  // e.g. within odftoolkit_latest-0.10.1/odfdom/target/test-classes/test-input/feature/coverage
+  // e.g. within odftoolkit/odfdom/target/test-classes/test-input/feature/coverage
   private static final String COBERTURA_XML_FILENAME = "cobertura_bold__indent.cov";
-  // private static final String COBERTURA_XML_FILENAME = "coverage_loadBoldTextODT.xml";
-  // private static final String COBERTURA_XML_FILENAME = "coverage_loadPlainODT.xml";
   static File mStrippedCoberturaFile = null;
-  // Reusing second CoberturyXML for neglecting all lines/methods/classes/packages without hits
-  // (coverage)
   XMLStreamWriter mXsw = null;
-
-  // keeping the information from the start element SAX event until it is certain the XML should be
-  // written
+  // keeping all information from start elements
+  // until it is certain the XML should be written
   Deque<ElementInfo> mStartElementStack = new ArrayDeque<ElementInfo>();
-  //    String mPackageName;
-  //    String mFileName;
-  //    String mClassName;
-  //    String mMethodName;
-  //    String mMethodSignature;
-  //    int mLineNumber;
   boolean mIsCoveredCondition = false;
 
   Locator mLocator;
@@ -97,8 +86,6 @@ public class CoberturaXMLHandler extends DefaultHandler {
         || qName.equals("packages")) {
       mStartElementStack.push(new ElementInfo(uri, localName, qName, attributes));
       if (qName.equals("line")) {
-        String lineNumber = getAttributeValue(attributes, "number");
-        //              mLineNumber = Integer.parseInt(lineNumber);
         String hits = getAttributeValue(attributes, "hits");
         int hitCount = Integer.parseInt(hits);
         if (hitCount > 0) {
@@ -107,36 +94,7 @@ public class CoberturaXMLHandler extends DefaultHandler {
             mIsCoveredCondition = true;
           }
           flushStartElements();
-          //                    if (mMethodName != null) {
-          //                        // System.out.println(mClassName + "-L" + mLineNumber + " - "+
-          // mMethodName + "() - Times:"
-          //                        // + mHits);
-          //                    } else {
-          //                        System.out.print(mClassName + "-L" + mLineNumber);
-          //                        if (mHits > 1) {
-          //                            System.out.print(" - Times:" + mHits);
-          //                        }
-          //                        System.out.println();
-          //                    }
         }
-        //            } else if (qName.equals("method")) {
-        //                // reset its information for debug
-        //                mMethodName = getAttributeValue(attributes, "name");
-        //                mMethodSignature = getAttributeValue(attributes, "signature");
-        //
-        //            } else if (qName.equals("class")) {
-        //                // reset its information for debug
-        //                mFileName = getAttributeValue(attributes, "filename");
-        //                mClassName = getAttributeValue(attributes, "name");
-        //
-        //            } else if (qName.equals("package")) {
-        //                // add information for debug
-        //                mPackageName = getAttributeValue(attributes, "name");
-        //
-        //            } else if (qName.equals("packages")) {
-        //                // add information for debug
-        //                mPackageName = getAttributeValue(attributes, "name");
-
       }
     } else if (qName.equals("condition") || qName.equals("conditions")) {
       if (mIsCoveredCondition) {
@@ -161,7 +119,7 @@ public class CoberturaXMLHandler extends DefaultHandler {
               + " is empty or null:'"
               + attrValue
               + "'!");
-    } else {
+      // } else {
       // System.out.println("Line" + mLocator.getLineNumber() + "Column" +
       // mLocator.getColumnNumber() + ": " + attrName + ":'" + attrValue + "'!");
     }
@@ -181,19 +139,6 @@ public class CoberturaXMLHandler extends DefaultHandler {
       if (mStartElementStack.pop().isStartElementWritten) {
         writeEndElement();
       }
-      //            if (qName.equals("method")) {
-      //                // reset its information for debug
-      //                mMethodName = null;
-      //                mMethodSignature = null;
-      //            } else if (qName.equals("class")) {
-      //                // reset its information for debug
-      //                mFileName = null;
-      //                mClassName = null;
-      //            } else if (qName.equals("package")) {
-      //                // reset its information for debug
-      //                mPackageName = null;
-      //            }
-      //
     } else if (qName.equals("condition") || qName.equals("conditions")) {
       if (mIsCoveredCondition) {
         writeEndElement();
@@ -206,84 +151,6 @@ public class CoberturaXMLHandler extends DefaultHandler {
       // System.out.println("WRITING BASIC END:" + qName);
       writeEndElement();
     }
-
-    /*
-
-            if (qName.equals("line")) {
-                if(mStartElementStack.pop().isStartElementWritten){
-                if (mIsCoveredLine) {
-                    mIsCoveredLine = Boolean.FALSE;
-                    writeEndElement();
-                }
-            } else if (qName.equals("lines")) {
-                mStartElementStack.pop();
-                if (mIsCoveredLines) {
-                    mIsCoveredLines = Boolean.FALSE;
-                    writeEndElement();
-                }
-            } else if (qName.equals("method")) {
-                // reset its information for debug
-                mMethodName = null;
-                mMethodSignature = null;
-                mStartElementStack.pop();
-                if (mIsCoveredMethod) {
-                    mIsCoveredMethod = Boolean.FALSE;
-                    writeEndElement();
-                }
-            } else if (qName.equals("methods")) {
-                mStartElementStack.pop();
-                if (mIsCoveredMethods) {
-                    mIsCoveredMethods = Boolean.FALSE;
-                    writeEndElement();
-                }
-            } else if (qName.equals("class")) {
-                // reset its information for debug
-                mFileName = null;
-                mClassName = null;
-                mStartElementStack.pop();
-                if (mIsCoveredClass) {
-                    mIsCoveredClass = Boolean.FALSE;
-                    writeEndElement();
-                }
-            } else if (qName.equals("classes")) {
-                mStartElementStack.pop();
-                if (mIsCoveredClasses) {
-                    mIsCoveredClasses = Boolean.FALSE;
-                    writeEndElement();
-                }
-            } else if (qName.equals("package")) {
-                mIsCoveredPackage = false;
-
-                // reset its information for debug
-                mPackageName = null;
-                mStartElementStack.pop();
-                if (mIsCoveredPackage) {
-                    mIsCoveredPackage = Boolean.FALSE;
-                    writeEndElement();
-                }
-            } else if (qName.equals("packages")) {
-                mIsCoveredPackages = false;
-
-                if (mIsCoveredPackages) {
-                    mIsCoveredPackages = Boolean.FALSE;
-                    writeEndElement();
-                }
-            } else if (qName.equals("condition")) {
-                //mStartElementStack.pop();
-                if (mIsCoveredCondition) {
-                    writeEndElement();
-                }
-            } else if (qName.equals("conditions")) {
-                //mStartElementStack.pop();
-                if (mIsCoveredCondition) {
-                    mIsCoveredCondition = false;
-                    writeEndElement();
-                }
-            } else { // any other element will be written out
-                // assumed not being in the descendant line of "line"
-                writeEndElement();
-            }
-    */
   }
 
   /** As soon a line with coverage was founda all ancestor start elements will be written out */
@@ -299,11 +166,6 @@ public class CoberturaXMLHandler extends DefaultHandler {
       }
     }
   }
-  //
-  //    private void writeStartElement(ElementInfo elementInfo) {
-  //        writeStartElement(elementInfo.uri, elementInfo.localName, elementInfo.qName,
-  // elementInfo.attributes);
-  //    }
 
   private void writeStartElement(
       String uri, String localName, String qName, Attributes attributes) {
@@ -384,7 +246,7 @@ public class CoberturaXMLHandler extends DefaultHandler {
       // the first");
       coberturaFileName = COBERTURA_XML_FILENAME;
     }
-    // e.g. odftoolkit_latest-0.10.1/odfdom/target/test-classes/test-reference/features
+    // e.g. odftoolkit/odfdom/target/test-classes/test-reference/features
     File coberturaXMLFile =
         ResourceUtilities.getTestInputFile(
             "feature" + File.separator + "coverage" + File.separator + coberturaFileName);
@@ -401,7 +263,7 @@ public class CoberturaXMLHandler extends DefaultHandler {
         ResourceUtilities.getTestOutputFile("feature" + File.separator + strippedCoberturaFileName);
 
     try {
-      readFileListFile(coberturaXMLFile, "testRun");
+      readFileListFile(coberturaXMLFile, coberturaFileName);
     } catch (Exception ex) {
       Logger.getLogger(CoberturaXMLHandler.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -429,21 +291,24 @@ public class CoberturaXMLHandler extends DefaultHandler {
     // key: className value: LinkedList of CoveredLines
   }
 
-  // temporary static and hie
+  // all relevent information of an XML element (by startElement SAX event)
   static class ElementInfo {
 
     public String uri;
     public String localName;
     public String qName;
     public Attributes attributes;
-    public boolean isStartElementWritten =
-        false; // if there is another subelement, e.g. methods not all covered will be written out
-    // again
+    // if there is another subelement e.g. <method>
+    // the already writen prarent <methods>
+    // will not written out again
+    public boolean isStartElementWritten = false;
 
     public ElementInfo(String uri, String localName, String qName, Attributes attributes) {
       this.uri = uri;
       this.localName = localName;
       this.qName = qName;
+      // Attributes2Impl will create a real copy, otherwise
+      // all attributes are the same from the last element
       this.attributes = new Attributes2Impl(attributes);
     }
   }
