@@ -58,6 +58,8 @@ public class CoberturaXMLHandler extends DefaultHandler {
 
   // e.g. within odftoolkit_latest-0.10.1/odfdom/target/test-classes/test-input/feature/coverage
   private static final String COBERTURA_XML_FILENAME = "cobertura_bold__indent.cov";
+  // private static final String COBERTURA_XML_FILENAME = "coverage_loadBoldTextODT.xml";
+  // private static final String COBERTURA_XML_FILENAME = "coverage_loadPlainODT.xml";
   static File mStrippedCoberturaFile = null;
   // Reusing second CoberturyXML for neglecting all lines/methods/classes/packages without hits
   // (coverage)
@@ -375,7 +377,7 @@ public class CoberturaXMLHandler extends DefaultHandler {
               + "\t   Name of the Cobertura Coverage XML file from directory:\n"
               + "\t   odfdom/target/test-classes/test-input/feature/coverage/\n\n"
               + "OUTPUT:\n"
-              + "\tName of the Cobertura Coverage input XML file added with '--feature' in directory:\n"
+              + "\tName of output file is the input XML file trunc name appended with '--feature' saved to directory:\n"
               + "\t   odfdom/target/test-classes/test-output/feature!\n\n");
 
       // "t2nd (optional) parameter: Path to Cobertura Coverage XML which will be substracted from
@@ -387,7 +389,14 @@ public class CoberturaXMLHandler extends DefaultHandler {
         ResourceUtilities.getTestInputFile(
             "feature" + File.separator + "coverage" + File.separator + coberturaFileName);
 
-    String strippedCoberturaFileName = coberturaFileName.replace(".cov", "--feature.xml");
+    String strippedCoberturaFileName = null;
+    if (coberturaFileName.contains(".")) {
+      String suffix = coberturaFileName.substring(coberturaFileName.lastIndexOf('.'));
+      strippedCoberturaFileName = coberturaFileName.replace(suffix, "--feature" + suffix);
+    } else {
+      strippedCoberturaFileName = coberturaFileName.concat("--feature.xml");
+    }
+
     mStrippedCoberturaFile =
         ResourceUtilities.getTestOutputFile("feature" + File.separator + strippedCoberturaFileName);
 
