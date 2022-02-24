@@ -12,7 +12,7 @@ ODF_TRUNC="table_merged-cells"
 #  Version number of the Saxon release currently used to add feature branch before rebase!
 JACOCO_AGENT_VERION="0.8.7"
 # Maven .m2 repository parent directory
-MAVEN_REPO_PATH=$HOME
+MAVEN_REPO_PATH=$HOME/.m2
 
 
 
@@ -25,7 +25,7 @@ rm -rf ./target/site
 
 # Triggers a single test 'FeatureLoadTest' with the system property 'textFeatureName' being the trunc name of an ODT test file
 # being loaded from src/test/resources/test-input/feature/
-mvn surefire:test -Dtest=FeatureLoadTest -DtextFeatureName=${ODF_TRUNC} -DargLine=-javaagent:$MAVEN_REPO_PATH/.m2/repository/org/jacoco/org.jacoco.agent/${JACOCO_AGENT_VERION}/org.jacoco.agent-${JACOCO_AGENT_VERION}-runtime.jar=destfile=./target/jacoco.exec
+mvn surefire:test -Dtest=FeatureLoadTest -DtextFeatureName=${ODF_TRUNC} -DargLine=-javaagent:$MAVEN_REPO_PATH/repository/org/jacoco/org.jacoco.agent/${JACOCO_AGENT_VERION}/org.jacoco.agent-${JACOCO_AGENT_VERION}-runtime.jar=destfile=./target/jacoco.exec
 
 # Creates the cobertura XML file and HTML coverage report from the binary target/jacoco.exec file
 mvn jacoco:report

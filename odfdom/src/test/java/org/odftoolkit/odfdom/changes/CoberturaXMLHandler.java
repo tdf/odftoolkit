@@ -251,8 +251,6 @@ public class CoberturaXMLHandler extends DefaultHandler {
               + "\t   The output file's trunc name ends with '--feature' and is saved to directory:\n"
               + "\t   odfdom/target/test-classes/test-output/feature!\n\n");
 
-      // "t2nd (optional) parameter: Path to Cobertura Coverage XML which will be substracted from
-      // the first");
       coberturaFileName = COBERTURA_XML_FILENAME_A;
     }
     // e.g. odftoolkit/odfdom/target/test-classes/test-reference/features
