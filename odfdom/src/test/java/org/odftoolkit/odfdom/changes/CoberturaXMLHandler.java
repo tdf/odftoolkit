@@ -27,6 +27,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -57,14 +58,15 @@ public class CoberturaXMLHandler extends DefaultHandler {
   Coverage mCoverage = null;
 
   // e.g. within odftoolkit/odfdom/target/test-classes/test-input/feature/coverage
-  private static final String COBERTURA_XML_FILENAME = "cobertura_bold__indent.cov";
+  private static final String COBERTURA_XML_FILENAME_A = "cobertura_bold__indent.cov";
+  private static final String COBERTURA_XML_FILENAME_B = "cobertura_text_italic.cov";
   static File mStrippedCoberturaFile = null;
   XMLStreamWriter mXsw = null;
   // keeping all information from start elements
   // until it is certain the XML should be written
   Deque<ElementInfo> mStartElementStack = new ArrayDeque<ElementInfo>();
   boolean mIsCoveredCondition = false;
-
+  String mClassName = null;
   Locator mLocator;
 
   /** With the DocumentLocator line numbers will be received during errors */
@@ -95,6 +97,8 @@ public class CoberturaXMLHandler extends DefaultHandler {
           }
           flushStartElements();
         }
+      } else if (qName.equals("class")) {
+        mClassName = getAttributeValue(attributes, "name");
       }
     } else if (qName.equals("condition") || qName.equals("conditions")) {
       if (mIsCoveredCondition) {
@@ -138,6 +142,9 @@ public class CoberturaXMLHandler extends DefaultHandler {
         || qName.equals("packages")) {
       if (mStartElementStack.pop().isStartElementWritten) {
         writeEndElement();
+      }
+      if (qName.equals("class")) {
+        mClassName = null;
       }
     } else if (qName.equals("condition") || qName.equals("conditions")) {
       if (mIsCoveredCondition) {
@@ -232,19 +239,21 @@ public class CoberturaXMLHandler extends DefaultHandler {
     String coberturaFileName = null;
     if (params.length == 0) {
       System.err.println(
-          "PURPOSE:\n"
-              + "\tRemoves all lines without coverage from a single Cobertura XML file. Becoming a Feature Coverage XML file!\n\n"
-              + "USAGE:\n"
-              + "\t1st parameter: \n"
+          "USAGE:\n"
+              + "\t1st PARAMETER (mandatory)\n"
               + "\t   Name of the Cobertura Coverage XML file from directory:\n"
               + "\t   odfdom/target/test-classes/test-input/feature/coverage/\n\n"
-              + "OUTPUT:\n"
-              + "\tName of output file is the input XML file trunc name appended with '--feature' saved to directory:\n"
+              + "\t2nd PARAMETER (optional)\n"
+              + "\t   Name of a Cobertura Coverage XML file (as above)\n"
+              + "\t   the coverage of the second will be substraced from the first.\n\n"
+              + "\tOUTPUT:\n"
+              + "\t   Output coverage file reduced to hit lines only and in case of second file showing only the coverage of the feature difference.\n"
+              + "\t   The output file's trunc name ends with '--feature' and is saved to directory:\n"
               + "\t   odfdom/target/test-classes/test-output/feature!\n\n");
 
       // "t2nd (optional) parameter: Path to Cobertura Coverage XML which will be substracted from
       // the first");
-      coberturaFileName = COBERTURA_XML_FILENAME;
+      coberturaFileName = COBERTURA_XML_FILENAME_A;
     }
     // e.g. odftoolkit/odfdom/target/test-classes/test-reference/features
     File coberturaXMLFile =
@@ -280,15 +289,24 @@ public class CoberturaXMLHandler extends DefaultHandler {
   static class Coverage {
 
     public String mCoverageName;
-    public Map<String, List> mClassCoverages;
+    public Map<String, List<Integer>> mClassCoverages;
 
     public Coverage(String name) {
       mCoverageName = name;
-      mClassCoverages = new HashMap<String, List>();
+      mClassCoverages = new HashMap<String, List<Integer>>();
     }
 
-    // Map of LinkedList
-    // key: className value: LinkedList of CoveredLines
+    /** @return an ordered list of line numbers */
+    public List getClassCoverage(String className) {
+      return mClassCoverages.get(className);
+    }
+
+    /** @return an empty list of line numbers */
+    public List<Integer> newClassCoverage(String className) {
+      List<Integer> lineList = new LinkedList<>();
+      mClassCoverages.put(className, lineList);
+      return lineList;
+    }
   }
 
   // all relevent information of an XML element (by startElement SAX event)
