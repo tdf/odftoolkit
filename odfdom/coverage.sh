@@ -11,7 +11,7 @@ rm -rf ./target/site
 # ToDo: textFeatureName should vary on input name
 # ToDo: Add variable for MavenRepo Path
 # ToDo: Add variable for JAR version used from pom.xm
-mvn surefire:test -Dtest=FeatureLoadTest -DtextFeatureName=text_italic -DargLine=-javaagent:~/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=./target/jacoco.exec
+mvn surefire:test -Dtest=FeatureLoadTest -DtextFeatureName=text_italic -DargLine=-javaagent:/home/svante/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=./target/jacoco.exec
 mvn jacoco:report
 
 # ToDo: destination file name should vary on input name
