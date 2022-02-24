@@ -17,7 +17,7 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  *
- * <p>*********************************************************************
+ * <p>********************************************************************
  */
 package org.odftoolkit.odfdom.changes;
 
@@ -58,9 +58,8 @@ public class CoberturaXMLHandler extends DefaultHandler {
   Coverage mCoverage = null;
 
   // e.g. within odftoolkit/odfdom/target/test-classes/test-input/feature/coverage
-  private static final String COBERTURA_XML_FILENAME_A = "cobertura_bold__indent.cov";
-  private static final String COBERTURA_XML_FILENAME_B = "cobertura_text_italic.cov";
-  static File mStrippedCoberturaFile = null;
+  private static final String COBERTURA_XML_FILENAME__BASE = "cobertura_bold__indent.cov";
+  private static final String COBERTURA_XML_FILENAME__MINUS = "cobertura_text_italic.cov";
   XMLStreamWriter mXsw = null;
   // keeping all information from start elements
   // until it is certain the XML should be written
@@ -209,8 +208,10 @@ public class CoberturaXMLHandler extends DefaultHandler {
     XMLOutputFactory xof = XMLOutputFactory.newInstance();
     try {
       // make sure the output directories are being created
-      mStrippedCoberturaFile.getParentFile().mkdirs();
-      mXsw = xof.createXMLStreamWriter(new FileWriter(mStrippedCoberturaFile.getAbsolutePath()));
+      mCoverage.mOutputCoberturaXmlFile.getParentFile().mkdirs();
+      mXsw =
+          xof.createXMLStreamWriter(
+              new FileWriter(mCoverage.mOutputCoberturaXmlFile.getAbsolutePath()));
       mXsw.writeStartDocument();
     } catch (Exception e) {
       System.err.println("Unable to write the file: " + e.getMessage());
@@ -236,61 +237,103 @@ public class CoberturaXMLHandler extends DefaultHandler {
   }
 
   public static void main(String[] params) {
-    String coberturaFileName = null;
-    if (params.length == 0) {
-      System.err.println(
-          "USAGE:\n"
-              + "\t1st PARAMETER (mandatory)\n"
-              + "\t   Name of the Cobertura Coverage XML file from directory:\n"
-              + "\t   odfdom/target/test-classes/test-input/feature/coverage/\n\n"
-              + "\t2nd PARAMETER (optional)\n"
-              + "\t   Name of a Cobertura Coverage XML file (as above)\n"
-              + "\t   the coverage of the second will be substraced from the first.\n\n"
-              + "\tOUTPUT:\n"
-              + "\t   Output coverage file reduced to hit lines only and in case of second file showing only the coverage of the feature difference.\n"
-              + "\t   The output file's trunc name ends with '--feature' and is saved to directory:\n"
-              + "\t   odfdom/target/test-classes/test-output/feature!\n\n");
-
-      coberturaFileName = COBERTURA_XML_FILENAME_A;
+    String coberturaFileName_FeatureA = null;
+    String coberturaFileName_FeatureB = null;
+    if (params.length == 0 || params.length > 2) {
+      printErrorManual();
+      coberturaFileName_FeatureA = COBERTURA_XML_FILENAME__BASE;
+      coberturaFileName_FeatureB = COBERTURA_XML_FILENAME__MINUS;
+    } else if (params.length == 1) {
+      coberturaFileName_FeatureA = params[0];
+      if (coberturaFileName_FeatureA == null || coberturaFileName_FeatureA.isBlank()) {
+        printErrorManual();
+        coberturaFileName_FeatureA = COBERTURA_XML_FILENAME__BASE;
+      }
+    } else if (params.length == 2) {
+      coberturaFileName_FeatureA = params[0];
+      coberturaFileName_FeatureB = params[1];
+      if (coberturaFileName_FeatureA == null
+          || coberturaFileName_FeatureA.isBlank()
+          || coberturaFileName_FeatureB == null
+          || coberturaFileName_FeatureB.isBlank()) {
+        printErrorManual();
+        coberturaFileName_FeatureA = COBERTURA_XML_FILENAME__BASE;
+        coberturaFileName_FeatureB = COBERTURA_XML_FILENAME__MINUS;
+      }
     }
-    // e.g. odftoolkit/odfdom/target/test-classes/test-reference/features
-    File coberturaXMLFile =
-        ResourceUtilities.getTestInputFile(
-            "feature" + File.separator + "coverage" + File.separator + coberturaFileName);
-
-    String strippedCoberturaFileName = null;
-    if (coberturaFileName.contains(".")) {
-      String suffix = coberturaFileName.substring(coberturaFileName.lastIndexOf('.'));
-      strippedCoberturaFileName = coberturaFileName.replace(suffix, "--feature" + suffix);
-    } else {
-      strippedCoberturaFileName = coberturaFileName.concat("--feature.xml");
-    }
-
-    mStrippedCoberturaFile =
-        ResourceUtilities.getTestOutputFile("feature" + File.separator + strippedCoberturaFileName);
-
     try {
-      readFileListFile(coberturaXMLFile, coberturaFileName);
+      // e.g. odftoolkit/odfdom/target/test-classes/test-reference/features
+      File inputCoberturaXML_FeatureA = getCoberturaXMLInputFile(coberturaFileName_FeatureA);
+      File outputCoberturaXML_FeatureA = getCoberturaXMLOutputFile(coberturaFileName_FeatureA);
+      Coverage coverage_FeatureA =
+          readCoberturaFile(
+              inputCoberturaXML_FeatureA, coberturaFileName_FeatureA, outputCoberturaXML_FeatureA);
+
+      if (coberturaFileName_FeatureB != null) {
+        File inputCoberturaXML_FeatureB = getCoberturaXMLInputFile(coberturaFileName_FeatureB);
+        File outputCoberturaXML_FeatureB = getCoberturaXMLOutputFile(coberturaFileName_FeatureB);
+        Coverage coverage_FeatureB =
+            readCoberturaFile(
+                inputCoberturaXML_FeatureB,
+                coberturaFileName_FeatureB,
+                outputCoberturaXML_FeatureB);
+        coverage_FeatureA.substracedBy(coverage_FeatureB);
+      }
     } catch (Exception ex) {
       Logger.getLogger(CoberturaXMLHandler.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 
-  public static Coverage readFileListFile(File coberturaXML, String coverageName) throws Exception {
+  private static File getCoberturaXMLInputFile(String coberturaXMLFileName) {
+    return ResourceUtilities.getTestInputFile(
+        "feature" + File.separator + "coverage" + File.separator + coberturaXMLFileName);
+  }
+
+  private static File getCoberturaXMLOutputFile(String coberturaXMLFileName) {
+    String strippedCoberturaFileName = null;
+    if (coberturaXMLFileName.contains(".")) {
+      String suffix = coberturaXMLFileName.substring(coberturaXMLFileName.lastIndexOf('.'));
+      strippedCoberturaFileName = coberturaXMLFileName.replace(suffix, "--feature" + suffix);
+    } else {
+      strippedCoberturaFileName = coberturaXMLFileName.concat("--feature.xml");
+    }
+    return ResourceUtilities.getTestOutputFile(
+        "feature" + File.separator + strippedCoberturaFileName);
+  }
+
+  private static void printErrorManual() {
+    System.err.println(
+        "USAGE:\n"
+            + "\t1st PARAMETER (mandatory)\n"
+            + "\t   Name of the Cobertura Coverage XML file from directory:\n"
+            + "\t   odfdom/target/test-classes/test-input/feature/coverage/\n\n"
+            + "\t2nd PARAMETER (optional)\n"
+            + "\t   Name of a Cobertura Coverage XML file (as above)\n"
+            + "\t   the coverage of the second will be substraced from the first.\n\n"
+            + "\tOUTPUT:\n"
+            + "\t   Output coverage file reduced to hit lines only and in case of second file showing only the coverage of the feature difference.\n"
+            + "\t   The output file's trunc name ends with '--feature' and is saved to directory:\n"
+            + "\t   odfdom/target/test-classes/test-output/feature!\n\n");
+  }
+
+  public static Coverage readCoberturaFile(
+      File inputCoberturaXML, String coverageName, File outputCoberturaXML) throws Exception {
     SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-    Coverage coverage = new Coverage(coverageName);
-    parser.parse(coberturaXML, new CoberturaXMLHandler(coverage));
+    Coverage coverage = new Coverage(inputCoberturaXML, outputCoberturaXML);
+    parser.parse(inputCoberturaXML, new CoberturaXMLHandler(coverage));
     return coverage;
   }
 
   // temporary static and hie
   static class Coverage {
 
-    public String mCoverageName;
+    public File mInputCoberturaXmlFile;
+    public File mOutputCoberturaXmlFile;
     public Map<String, List<Integer>> mClassCoverages;
 
-    public Coverage(String name) {
-      mCoverageName = name;
+    public Coverage(File inputCoberturaXML, File outputCoberturaXML) {
+      mInputCoberturaXmlFile = inputCoberturaXML;
+      mOutputCoberturaXmlFile = outputCoberturaXML;
       mClassCoverages = new HashMap<String, List<Integer>>();
     }
 
@@ -304,6 +347,10 @@ public class CoberturaXMLHandler extends DefaultHandler {
       List<Integer> lineList = new LinkedList<>();
       mClassCoverages.put(className, lineList);
       return lineList;
+    }
+
+    public void substracedBy(Coverage c) {
+      System.out.println("Feature coverage substraction not yet implemented!");
     }
   }
 
