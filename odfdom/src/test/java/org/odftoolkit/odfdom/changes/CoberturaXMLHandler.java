@@ -17,7 +17,7 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  *
- * <p>********************************************************************
+ * <p>******************************************************************
  */
 package org.odftoolkit.odfdom.changes;
 
@@ -52,10 +52,16 @@ import org.xml.sax.helpers.DefaultHandler;
 public class CoberturaXMLHandler extends DefaultHandler {
 
   public CoberturaXMLHandler(Coverage coverage) {
-    mCoverage = coverage;
+    mCoverage_featureA = coverage;
   }
 
-  Coverage mCoverage = null;
+  public CoberturaXMLHandler(Coverage coverage_featureA, Coverage coverage_featureB) {
+    mCoverage_featureA = coverage_featureA;
+    mCoverage_featureB = coverage_featureB;
+  }
+
+  Coverage mCoverage_featureA = null;
+  Coverage mCoverage_featureB = null;
 
   // e.g. within odftoolkit/odfdom/target/test-classes/test-input/feature/coverage
   private static final String COBERTURA_XML_FILENAME__BASE = "cobertura_bold__indent.cov";
@@ -207,11 +213,19 @@ public class CoberturaXMLHandler extends DefaultHandler {
   public void startDocument() {
     XMLOutputFactory xof = XMLOutputFactory.newInstance();
     try {
-      // make sure the output directories are being created
-      mCoverage.mOutputCoberturaXmlFile.getParentFile().mkdirs();
-      mXsw =
-          xof.createXMLStreamWriter(
-              new FileWriter(mCoverage.mOutputCoberturaXmlFile.getAbsolutePath()));
+      if (mCoverage_featureB == null) {
+        // make sure the output directories are being created
+        mCoverage_featureA.mOutputCoberturaXmlFile.getParentFile().mkdirs();
+        mXsw =
+            xof.createXMLStreamWriter(
+                new FileWriter(mCoverage_featureA.mOutputCoberturaXmlFile.getAbsolutePath()));
+      } else {
+        // make sure the output directories are being created
+        mCoverage_featureB.mOutputCoberturaXmlFile.getParentFile().mkdirs();
+        mXsw =
+            xof.createXMLStreamWriter(
+                new FileWriter(mCoverage_featureB.mOutputCoberturaXmlFile.getAbsolutePath()));
+      }
       mXsw.writeStartDocument();
     } catch (Exception e) {
       System.err.println("Unable to write the file: " + e.getMessage());
@@ -273,11 +287,11 @@ public class CoberturaXMLHandler extends DefaultHandler {
         File inputCoberturaXML_FeatureB = getCoberturaXMLInputFile(coberturaFileName_FeatureB);
         File outputCoberturaXML_FeatureB = getCoberturaXMLOutputFile(coberturaFileName_FeatureB);
         Coverage coverage_FeatureB =
-            readCoberturaFile(
+            diffCoberturaFiles(
+                coverage_FeatureA,
                 inputCoberturaXML_FeatureB,
                 coberturaFileName_FeatureB,
                 outputCoberturaXML_FeatureB);
-        coverage_FeatureA.substracedBy(coverage_FeatureB);
       }
     } catch (Exception ex) {
       Logger.getLogger(CoberturaXMLHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -316,6 +330,15 @@ public class CoberturaXMLHandler extends DefaultHandler {
             + "\t   odfdom/target/test-classes/test-output/feature!\n\n");
   }
 
+  public static Coverage diffCoberturaFiles(
+      Coverage firstCoverage, File inputCoberturaXML, String coverageName, File outputCoberturaXML)
+      throws Exception {
+    SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
+    Coverage coverage = new Coverage(inputCoberturaXML, outputCoberturaXML);
+    parser.parse(inputCoberturaXML, new CoberturaXMLHandler(firstCoverage, coverage));
+    return coverage;
+  }
+
   public static Coverage readCoberturaFile(
       File inputCoberturaXML, String coverageName, File outputCoberturaXML) throws Exception {
     SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
@@ -347,10 +370,6 @@ public class CoberturaXMLHandler extends DefaultHandler {
       List<Integer> lineList = new LinkedList<>();
       mClassCoverages.put(className, lineList);
       return lineList;
-    }
-
-    public void substracedBy(Coverage c) {
-      System.out.println("Feature coverage substraction not yet implemented!");
     }
   }
 
