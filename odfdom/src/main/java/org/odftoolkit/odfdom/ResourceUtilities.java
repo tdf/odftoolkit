@@ -207,13 +207,20 @@ public final class ResourceUtilities {
    *     target/test-classes/</code>.
    */
   public static String getMavenTestFolder() {
-    String testFolder = null;
-    try {
-      testFolder = ResourceUtilities.class.getClassLoader().getResource("").toURI().getPath();
-    } catch (URISyntaxException ex) {
-      Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    return testFolder;
+    //    String testFolder = null;
+    //    try {
+    //      testFolder = ResourceUtilities.class.getClassLoader().getResource("").toURI().getPath();
+    //    } catch (URISyntaxException ex) {
+    //      Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+    //    }
+    //    return testFolder;
+
+    // does not work from JAR only with test classes..
+    return "target"
+        + File.separator
+        + "test-classes"
+        + File
+            .separator; // ResourceUtilities.class.getClassLoader().getResource("").toURI().getPath();
   }
 
   /**
