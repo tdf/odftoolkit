@@ -110,7 +110,11 @@ public class CoberturaXMLHandler extends DefaultHandler {
       }
     } else {
       // System.out.println("WRITING BASIC START:" + qName);
-      writeStartElement(uri, localName, qName, attributes);
+      if (qName.equals("coverage")) {
+        writeStartElementWithoutAttribute(uri, localName, qName, attributes, "timestamp");
+      } else {
+        writeStartElement(uri, localName, qName, attributes);
+      }
     }
   }
 
@@ -187,6 +191,27 @@ public class CoberturaXMLHandler extends DefaultHandler {
       mXsw.writeStartElement(qName);
       for (int i = 0; i < attributes.getLength(); i++) {
         mXsw.writeAttribute(attributes.getQName(i), attributes.getValue(i));
+      }
+    } catch (XMLStreamException ex) {
+      Logger.getLogger(CoberturaXMLHandler.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+
+  private void writeStartElementWithoutAttribute(
+      String uri,
+      String localName,
+      String qName,
+      Attributes attributes,
+      String qNameOfattributeToOmit) {
+    if (qName == null || qName.isBlank()) {
+      System.err.println("ERROR: Non existent qname: " + qName);
+    }
+    try {
+      mXsw.writeStartElement(qName);
+      for (int i = 0; i < attributes.getLength(); i++) {
+        if (!attributes.getQName(i).equals(qNameOfattributeToOmit)) {
+          mXsw.writeAttribute(attributes.getQName(i), attributes.getValue(i));
+        }
       }
     } catch (XMLStreamException ex) {
       Logger.getLogger(CoberturaXMLHandler.class.getName()).log(Level.SEVERE, null, ex);

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<coverage branch-rate="0.0852672221093" complexity="38647.0" line-rate="0.0764489957662" timestamp="1645801717">
+<coverage branch-rate="0.0852672221093" complexity="38647.0" line-rate="0.0764489957662">
   <sources>
     <source/>
   </sources>
