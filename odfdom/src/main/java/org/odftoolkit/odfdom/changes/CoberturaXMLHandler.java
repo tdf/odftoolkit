@@ -37,7 +37,6 @@ import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
-import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
@@ -307,12 +306,12 @@ public class CoberturaXMLHandler extends DefaultHandler {
     String strippedCoberturaFileName = null;
     if (coberturaXMLFileName.contains(".")) {
       String suffix = coberturaXMLFileName.substring(coberturaXMLFileName.lastIndexOf('.'));
-      strippedCoberturaFileName = coberturaXMLFileName.replace(suffix, "--feature" + suffix);
+      strippedCoberturaFileName = coberturaXMLFileName.replace(suffix, "--stripped" + suffix);
     } else {
-      strippedCoberturaFileName = coberturaXMLFileName.concat("--feature.xml");
+      strippedCoberturaFileName = coberturaXMLFileName.concat("--stripped.xml");
     }
-    return ResourceUtilities.getTestOutputFile(
-        "feature" + File.separator + strippedCoberturaFileName);
+    return ResourceUtilities.getTestReferenceFile(
+        "feature" + File.separator + "coverage" + File.separator + strippedCoberturaFileName);
   }
 
   private static void printErrorManual() {
