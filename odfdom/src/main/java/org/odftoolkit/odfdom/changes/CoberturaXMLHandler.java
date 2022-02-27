@@ -62,11 +62,26 @@ public class CoberturaXMLHandler extends DefaultHandler {
   Coverage mCov = null;
   Coverage mCovSubtrahend = null;
 
+  private static final String TEST_INPUT_DIR_NAME =
+      "src"
+          + File.separator
+          + "test"
+          + File.separator
+          + "resources"
+          + File.separator
+          + "test-input"
+          + File.separator
+          + "feature"
+          + File.separator
+          + "coverage"
+          + File.separator;
   // e.g. within odftoolkit/odfdom/target/test-classes/test-input/feature/coverage
-  // private static final String COBERTURA_FILENAME__MINUEND = "cobertura_bold__indent.cov";
-  private static final String COBERTURA_FILENAME__MINUEND = "coverage_loadBoldTextODT.cov";
-  // private static final String COBERTURA_FILENAME__SUBTRAHEND = "cobertura_text_italic.cov";
-  private static final String COBERTURA_FILENAME__SUBTRAHEND = "coverage_loadPlainODT.cov";
+  private static final String COBERTURA_FILENAME__MINUEND =
+      TEST_INPUT_DIR_NAME + "cobertura_bold__indent.cov";
+  // private static final String COBERTURA_FILENAME__MINUEND = "coverage_loadBoldTextODT.cov";
+  private static final String COBERTURA_FILENAME__SUBTRAHEND =
+      TEST_INPUT_DIR_NAME + "cobertura_text_italic.cov";
+  // private static final String COBERTURA_FILENAME__SUBTRAHEND = "coverage_loadPlainODT.cov";
 
   // mStrippedWriter will be filled twice
   StreamWriter mStrippedWriter = null;
@@ -319,15 +334,14 @@ public class CoberturaXMLHandler extends DefaultHandler {
     System.err.println(
         "USAGE:\n"
             + "\t1st PARAMETER (mandatory)\n"
-            + "\t   Name of the Cobertura Coverage XML file from directory:\n"
-            + "\t   odfdom/target/test-classes/test-input/feature/coverage/\n\n"
+            + "\t   Relative path of the Cobertura Coverage XML file from working directory:\n"
             + "\t2nd PARAMETER (optional)\n"
             + "\t   Name of a Cobertura Coverage XML file (as above)\n"
-            + "\t   the coverage of the second will be substraced from the first.\n\n"
+            + "\t   the coverage of the second will be subtracted from the first.\n\n"
             + "\tOUTPUT:\n"
             + "\t   Output coverage file reduced to hit lines only and in case of second file showing only the coverage of the feature difference.\n"
-            + "\t   The output file's trunc name ends with '--feature' and is saved to directory:\n"
-            + "\t   odfdom/target/test-classes/test-output/feature!\n\n");
+            + "\t   The output file's trunc name ends with '--diff' and is saved to directory:\n"
+            + "\t   odfdom/src/test/resources/test-reference/feature/cobertura!\n\n");
   }
 
   public static Coverage diffCoberturaFiles(
@@ -505,13 +519,13 @@ public class CoberturaXMLHandler extends DefaultHandler {
 
     public void updateClassId(String className, String fileName) {
       mLineIterator = null;
-      mCurrentClassId = className + "___" + fileName;
-      if (className == null && fileName == null) {
-        mCurrentClassId = className + "___" + fileName;
-      } else if (className != null && fileName != null) {
+      mCurrentClassId = null;
+      if (className != null && fileName != null) {
         mCurrentClassId = className + "___" + fileName;
         mCurrentClass_CoveredLines = mClassCoveragesLines.get(mCurrentClassId);
         mCurrentClass_LineHits = mClassLineHits.get(mCurrentClassId);
+      } else if (className == null || fileName == null) {
+        mCurrentClassId = null;
       } else {
         System.err.println(
             "ClassName '" + className + "' or fileName '" + fileName + "' should not be null!");
@@ -561,18 +575,21 @@ public class CoberturaXMLHandler extends DefaultHandler {
     }
 
     private void initializeInputOutputFiles(String inputFileName) {
-      // e.g. odftoolkit/odfdom/target/test-classes/test-reference/features
       mInputCoberturaXmlFile = getCoberturaXMLInputFile(inputFileName);
       mOutputCoberturaXmlFile_stripped = getCoberturaXMLOutputFile(inputFileName, "--stripped");
       mOutputCoberturaXmlFile_Diff = getCoberturaXMLOutputFile(inputFileName, "--diff");
     }
 
     private static File getCoberturaXMLInputFile(String coberturaXMLFileName) {
-      return ResourceUtilities.getTestInputFile(
-          "feature" + File.separator + "coverage" + File.separator + coberturaXMLFileName);
+      return new File(System.getProperty("user.dir") + File.separator + coberturaXMLFileName);
     }
 
     private File getCoberturaXMLOutputFile(String coberturaXMLFileName, String newSuffix) {
+      if (coberturaXMLFileName.contains(File.separator)) {
+        coberturaXMLFileName =
+            coberturaXMLFileName.substring(
+                coberturaXMLFileName.lastIndexOf(File.separator), coberturaXMLFileName.length());
+      }
       String strippedCoberturaFileName = null;
       if (coberturaXMLFileName.contains(".")) {
         String suffix = coberturaXMLFileName.substring(coberturaXMLFileName.lastIndexOf('.'));
@@ -580,8 +597,23 @@ public class CoberturaXMLHandler extends DefaultHandler {
       } else {
         strippedCoberturaFileName = coberturaXMLFileName.concat(newSuffix);
       }
-      return ResourceUtilities.getTestReferenceFile(
-          "feature" + File.separator + "coverage" + File.separator + strippedCoberturaFileName);
+      // odfdom/src/test/resources/test-reference/feature/cobertura
+      return new File(
+          System.getProperty("user.dir")
+              + File.separator
+              + "src"
+              + File.separator
+              + "test"
+              + File.separator
+              + "resources"
+              + File.separator
+              + "test-reference"
+              + File.separator
+              + "feature"
+              + File.separator
+              + "coverage"
+              + File.separator
+              + strippedCoberturaFileName);
     }
   }
 
