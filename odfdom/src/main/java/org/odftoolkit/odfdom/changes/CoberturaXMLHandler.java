@@ -17,7 +17,7 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  *
- * <p>**************************************************************
+ * <p>**********************************************************
  */
 package org.odftoolkit.odfdom.changes;
 
@@ -50,26 +50,31 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class CoberturaXMLHandler extends DefaultHandler {
 
-  public CoberturaXMLHandler(Coverage coverageBuilding) {
-    mCov = coverageBuilding;
+  public CoberturaXMLHandler(Coverage coverage) {
+    mCov = coverage;
   }
 
-  public CoberturaXMLHandler(Coverage coverage2Build, Coverage coverage4Compare) {
-    mCov = coverage2Build;
-    mCov4Compare = coverage4Compare;
+  public CoberturaXMLHandler(Coverage coverageMinuend, Coverage coverageSubtrahend) {
+    mCov = coverageMinuend;
+    mCovSubtrahend = coverageSubtrahend;
   }
 
   Coverage mCov = null;
-  Coverage mCov4Compare = null;
+  Coverage mCovSubtrahend = null;
 
   // e.g. within odftoolkit/odfdom/target/test-classes/test-input/feature/coverage
-  private static final String COBERTURA_XML_FILENAME__BASE = "cobertura_bold__indent.cov";
-  private static final String COBERTURA_XML_FILENAME__MINUS = "cobertura_text_italic.cov";
-  XMLStreamWriter mXsw = null;
+  private static final String COBERTURA_FILENAME__MINUEND = "cobertura_bold__indent.cov";
+  private static final String COBERTURA_FILENAME__SUBTRAHEND = "cobertura_text_italic.cov";
+
+  // mStrippedWriter will be filled twice
+  StreamWriter mStrippedWriter = null;
+  StreamWriter mStrippedWriter_Diff = null;
   // keeping all information from start elements
   // until it is certain the XML should be written
   Deque<ElementInfo> mStartElementStack = new ArrayDeque<ElementInfo>();
+  Deque<ElementInfo> mStartElementStack_Diff = new ArrayDeque<ElementInfo>();
   boolean mIsCoveredCondition = false;
+  boolean mIsCoveredCondition_Diff = false;
 
   Locator mLocator;
 
@@ -90,16 +95,22 @@ public class CoberturaXMLHandler extends DefaultHandler {
         || qName.equals("classes")
         || qName.equals("package")
         || qName.equals("packages")) {
+
+      // stack as the elements are only written, if at least one line has a hit > 1 (otherwise
+      // elements are neglected)
       mStartElementStack.push(new ElementInfo(uri, localName, qName, attributes));
+      if (mCovSubtrahend != null) {
+        mStartElementStack_Diff.push(new ElementInfo(uri, localName, qName, attributes));
+      }
       if (qName.equals("class")) {
         String className = getAttributeValue(attributes, "name");
         if (className != null && !className.isBlank()) {
           try {
             // sets all dependant state changes
             mCov.newClassCoverage(className);
-            if (mCov4Compare != null) {
-              mCov4Compare.updateClassName(className);
-              mCov4Compare.updateLineAndHitNo();
+            if (mCovSubtrahend != null) {
+              mCovSubtrahend.updateClassName(className);
+              mCovSubtrahend.updateLineAndHitNo();
             }
           } catch (Exception ex) {
             Logger.getLogger(CoberturaXMLHandler.class.getName())
@@ -113,44 +124,67 @@ public class CoberturaXMLHandler extends DefaultHandler {
         String hits = getAttributeValue(attributes, "hits");
         int hitCount = Integer.parseInt(hits);
         if (hitCount > 0) {
-          String conditionCoverage = attributes.getValue("condition-coverage");
-          if (conditionCoverage != null && !conditionCoverage.isBlank()) {
+          boolean hasConditionCoverage = hasConditionCoverage(attributes);
+          if (hasConditionCoverage) {
             mIsCoveredCondition = true;
           }
-          flushStartElements();
           String number = getAttributeValue(attributes, "number");
           int lineNo = Integer.parseInt(number);
           // adding the new line coverage
           mCov.addLineCoverage(lineNo, hitCount, mLocator);
-          if (mCov4Compare != null) {
-            // lineNo == 0 states there is not a single hit in this class
-            if (mCov4Compare.mLineNo != 0 && mCov4Compare.mLineNo == lineNo) {
-              if (hitCount == mCov4Compare.mHitCount) {
-                // not a single feature! Nothing is written
-              } else if (hitCount > mCov4Compare.mHitCount) {
+          flushStartElements(mStartElementStack, mStrippedWriter);
+          if (mCovSubtrahend != null) {
+            // state is saved in the handler's start-element stack
+            if (mCovSubtrahend.mLineNo != 0 && mCovSubtrahend.mLineNo == lineNo) {
+              if (hitCount > mCovSubtrahend.mHitCount) {
                 // only a feature of the current parsed file mCov
-                // 2DO:Svante
-              } else {
-                // only a feature of the previous parsed file mCov4Compare
-                // 2DO:Svante
+                int index = attributes.getIndex("hits");
+                mStartElementStack_Diff.pop(); // remove wrong hit attribute
+                Attributes2Impl updatedAttributes = new Attributes2Impl(attributes);
+                updatedAttributes.setValue(
+                    index, Integer.toString(hitCount - mCovSubtrahend.mHitCount));
+                mStartElementStack_Diff.push(
+                    new ElementInfo(uri, localName, qName, updatedAttributes));
+                mCovSubtrahend.addLineCoverage(lineNo, hitCount, mLocator);
+                if (hasConditionCoverage) {
+                  mIsCoveredCondition_Diff = true;
+                }
+                flushStartElements(mStartElementStack_Diff, mStrippedWriter_Diff);
               }
-              mCov4Compare.updateLineAndHitNo();
+              mCovSubtrahend.updateLineAndHitNo();
             }
           }
         }
       }
-    } else if (qName.equals("condition") || qName.equals("conditions")) {
-      if (mIsCoveredCondition) {
-        writeStartElement(uri, localName, qName, attributes);
-      }
     } else {
-      // System.out.println("WRITING BASIC START:" + qName);
-      if (qName.equals("coverage")) {
-        writeStartElementWithoutAttribute(uri, localName, qName, attributes, "timestamp");
-      } else {
-        writeStartElement(uri, localName, qName, attributes);
+      /* NOTE: The condition element always follows a line element
+      and will be written if the prior line was written (hit > 0) */
+      if (qName.equals("condition") || qName.equals("conditions")) {
+        if (mIsCoveredCondition) {
+          mStrippedWriter.writeStartElement(uri, localName, qName, attributes);
+        }
+        if (mIsCoveredCondition_Diff) {
+          mStrippedWriter_Diff.writeStartElement(uri, localName, qName, attributes);
+        }
+      } else if (qName.equals("coverage")) {
+        mStrippedWriter.writeStartElementWithoutAttribute(
+            uri, localName, qName, attributes, "timestamp");
+        if (mCovSubtrahend != null) {
+          mStrippedWriter_Diff.writeStartElementWithoutAttribute(
+              uri, localName, qName, attributes, "timestamp");
+        }
+      } else { // all other elements (not mentioned earlier) will be writen out
+        mStrippedWriter.writeStartElement(uri, localName, qName, attributes);
+        if (mCovSubtrahend != null) {
+          mStrippedWriter_Diff.writeStartElement(uri, localName, qName, attributes);
+        }
       }
     }
+  }
+
+  private boolean hasConditionCoverage(Attributes attributes) {
+    String conditionCoverage = attributes.getValue("condition-coverage");
+    return (conditionCoverage != null && !conditionCoverage.isBlank());
   }
 
   private String getAttributeValue(Attributes attributes, String attrName) {
@@ -183,131 +217,60 @@ public class CoberturaXMLHandler extends DefaultHandler {
         || qName.equals("classes")
         || qName.equals("package")
         || qName.equals("packages")) {
-      if (mStartElementStack.pop().isStartElementWritten) {
-        writeEndElement();
+      ElementInfo elementInfo = mStartElementStack.pop();
+      if (elementInfo.mIsStartElementWritten) {
+        mStrippedWriter.writeEndElement();
+      }
+      if (mCovSubtrahend != null) {
+        ElementInfo elementInfo_Diff = mStartElementStack_Diff.pop();
+        if (elementInfo_Diff.mIsStartElementWritten) {
+          mStrippedWriter_Diff.writeEndElement();
+        }
       }
       if (qName.equals("class")) {
         mCov.updateClassName(null);
-        if (mCov4Compare != null) {
-          mCov4Compare.updateClassName(null);
+        if (mCovSubtrahend != null) {
+          mCovSubtrahend.updateClassName(null);
         }
       }
+
     } else if (qName.equals("condition") || qName.equals("conditions")) {
       if (mIsCoveredCondition) {
-        writeEndElement();
+        mStrippedWriter.writeEndElement();
         if (qName.equals("conditions")) {
           mIsCoveredCondition = false;
+        }
+      }
+      if (mCovSubtrahend != null) {
+        if (this.mIsCoveredCondition_Diff) {
+          mStrippedWriter_Diff.writeEndElement();
+          if (qName.equals("conditions")) {
+            mIsCoveredCondition_Diff = false;
+          }
         }
       }
     } else { // any other element will be written out
       // assumed not being in the descendant line of "line"
       // System.out.println("WRITING BASIC END:" + qName);
-      writeEndElement();
-    }
-  }
-
-  /** As soon a line with coverage was founda all ancestor start elements will be written out */
-  private void flushStartElements() {
-    Iterator<ElementInfo> it = mStartElementStack.descendingIterator();
-    while (it.hasNext()) {
-      ElementInfo elementInfo = it.next();
-      if (!elementInfo.isStartElementWritten) {
-        writeStartElement(
-            elementInfo.uri, elementInfo.localName, elementInfo.qName, elementInfo.attributes);
-        // System.out.println("Writing StartElement with qName:" + elementInfo.qName);
-        elementInfo.isStartElementWritten = true;
-      }
-    }
-  }
-
-  private void writeStartElement(
-      String uri, String localName, String qName, Attributes attributes) {
-    if (qName == null || qName.isBlank()) {
-      System.err.println("ERROR: Non existent qname: " + qName);
-    }
-    try {
-      mXsw.writeStartElement(qName);
-      for (int i = 0; i < attributes.getLength(); i++) {
-        mXsw.writeAttribute(attributes.getQName(i), attributes.getValue(i));
-      }
-    } catch (XMLStreamException ex) {
-      Logger.getLogger(CoberturaXMLHandler.class.getName()).log(Level.SEVERE, null, ex);
-    }
-  }
-
-  private void writeStartElementWithoutAttribute(
-      String uri,
-      String localName,
-      String qName,
-      Attributes attributes,
-      String qNameOfattributeToOmit) {
-    if (qName == null || qName.isBlank()) {
-      System.err.println("ERROR: Non existent qname: " + qName);
-    }
-    try {
-      mXsw.writeStartElement(qName);
-      for (int i = 0; i < attributes.getLength(); i++) {
-        if (!attributes.getQName(i).equals(qNameOfattributeToOmit)) {
-          mXsw.writeAttribute(attributes.getQName(i), attributes.getValue(i));
-        }
-      }
-    } catch (XMLStreamException ex) {
-      Logger.getLogger(CoberturaXMLHandler.class.getName()).log(Level.SEVERE, null, ex);
-    }
-  }
-
-  private void writeEndElement() {
-    try {
-      mXsw.writeEndElement();
-    } catch (XMLStreamException ex) {
-      Logger.getLogger(CoberturaXMLHandler.class.getName()).log(Level.SEVERE, null, ex);
-      try {
-        if (mXsw != null) {
-          mXsw.close();
-          mXsw = null;
-        }
-      } catch (Exception e) {
-        System.err.println("Unable to close the file: " + e.getMessage());
+      mStrippedWriter.writeEndElement();
+      if (mCovSubtrahend != null) {
+        mStrippedWriter_Diff.writeEndElement();
       }
     }
   }
 
   public void startDocument() {
-    XMLOutputFactory xof = XMLOutputFactory.newInstance();
-    try {
-      // make sure the output directories are being created
-      mCov.mOutputCoberturaXmlFile.getParentFile().mkdirs();
-      mXsw =
-          xof.createXMLStreamWriter(new FileWriter(mCov.mOutputCoberturaXmlFile.getAbsolutePath()));
-      if (mCov4Compare != null) {
-        // initialize the two feature output streams
-        //        // make sure the output directories are being created
-        //        mCov4Compare.mOutputCoberturaXmlFile.getParentFile().mkdirs();
-        //        mXsw =
-        //            xof.createXMLStreamWriter(
-        //                new FileWriter(mCov4Compare.mOutputCoberturaXmlFile.getAbsolutePath()));
-      }
-      mXsw.writeStartDocument();
-    } catch (Exception e) {
-      System.err.println("Unable to write the file: " + e.getMessage());
+    mStrippedWriter = new StreamWriter(mCov.mOutputCoberturaXmlFile_stripped);
+    if (mCovSubtrahend != null) {
+      // initialize the two feature output streams
+      mStrippedWriter_Diff = new StreamWriter(mCovSubtrahend.mOutputCoberturaXmlFile_Diff);
     }
   }
 
   public void endDocument() {
-    try {
-      mXsw.writeEndDocument();
-      mXsw.flush();
-    } catch (Exception e) {
-      System.err.println("Unable to write the file: " + e.getMessage());
-    } finally {
-      try {
-        if (mXsw != null) {
-          mXsw.close();
-          mXsw = null;
-        }
-      } catch (Exception e) {
-        System.err.println("Unable to close the file: " + e.getMessage());
-      }
+    mStrippedWriter.flushAndCloseWriter();
+    if (mCovSubtrahend != null) {
+      mStrippedWriter_Diff.flushAndCloseWriter();
     }
   }
 
@@ -317,13 +280,13 @@ public class CoberturaXMLHandler extends DefaultHandler {
     if (params.length == 0 || params.length > 2) {
       printErrorManual();
       // 2DO Remove the this.. :-)
-      coberturaInputFileName_FeatureA = COBERTURA_XML_FILENAME__BASE;
-      coberturaInputFileName_FeatureB = COBERTURA_XML_FILENAME__MINUS;
+      coberturaInputFileName_FeatureA = COBERTURA_FILENAME__MINUEND;
+      coberturaInputFileName_FeatureB = COBERTURA_FILENAME__SUBTRAHEND;
     } else if (params.length == 1) {
       coberturaInputFileName_FeatureA = params[0];
       if (coberturaInputFileName_FeatureA == null || coberturaInputFileName_FeatureA.isBlank()) {
         printErrorManual();
-        coberturaInputFileName_FeatureA = COBERTURA_XML_FILENAME__BASE;
+        coberturaInputFileName_FeatureA = COBERTURA_FILENAME__MINUEND;
       }
     } else if (params.length == 2) {
       coberturaInputFileName_FeatureA = params[0];
@@ -333,56 +296,20 @@ public class CoberturaXMLHandler extends DefaultHandler {
           || coberturaInputFileName_FeatureB == null
           || coberturaInputFileName_FeatureB.isBlank()) {
         printErrorManual();
-        coberturaInputFileName_FeatureA = COBERTURA_XML_FILENAME__BASE;
-        coberturaInputFileName_FeatureB = COBERTURA_XML_FILENAME__MINUS;
+        coberturaInputFileName_FeatureA = COBERTURA_FILENAME__MINUEND;
+        coberturaInputFileName_FeatureB = COBERTURA_FILENAME__SUBTRAHEND;
       }
     }
-    run(coberturaInputFileName_FeatureA, coberturaInputFileName_FeatureB);
-  }
-
-  private static void run(
-      String coberturaInputFileName_FeatureA, String coberturaInputFileName_FeatureB) {
     try {
-      // e.g. odftoolkit/odfdom/target/test-classes/test-reference/features
-      File inputCoberturaXML_FeatureA = getCoberturaXMLInputFile(coberturaInputFileName_FeatureA);
-      File outputCoberturaXML_FeatureA = getCoberturaXMLOutputFile(coberturaInputFileName_FeatureA);
-      Coverage coverage_FeatureA =
-          readCoberturaFile(
-              inputCoberturaXML_FeatureA,
-              coberturaInputFileName_FeatureA,
-              outputCoberturaXML_FeatureA);
-
-      if (coberturaInputFileName_FeatureB != null) {
-        File inputCoberturaXML_FeatureB = getCoberturaXMLInputFile(coberturaInputFileName_FeatureB);
-        File outputCoberturaXML_FeatureB =
-            getCoberturaXMLOutputFile(coberturaInputFileName_FeatureB);
-        Coverage coverage_FeatureB =
-            diffCoberturaFiles(
-                coverage_FeatureA,
-                inputCoberturaXML_FeatureB,
-                coberturaInputFileName_FeatureB,
-                outputCoberturaXML_FeatureB);
+      if (coberturaInputFileName_FeatureB == null) {
+        readCoberturaFile(coberturaInputFileName_FeatureA);
+      } else {
+        Coverage coverage_FeatureB = readCoberturaFile(coberturaInputFileName_FeatureB);
+        diffCoberturaFiles(coberturaInputFileName_FeatureA, coverage_FeatureB);
       }
     } catch (Exception ex) {
       Logger.getLogger(CoberturaXMLHandler.class.getName()).log(Level.SEVERE, null, ex);
     }
-  }
-
-  private static File getCoberturaXMLInputFile(String coberturaXMLFileName) {
-    return ResourceUtilities.getTestInputFile(
-        "feature" + File.separator + "coverage" + File.separator + coberturaXMLFileName);
-  }
-
-  private static File getCoberturaXMLOutputFile(String coberturaXMLFileName) {
-    String strippedCoberturaFileName = null;
-    if (coberturaXMLFileName.contains(".")) {
-      String suffix = coberturaXMLFileName.substring(coberturaXMLFileName.lastIndexOf('.'));
-      strippedCoberturaFileName = coberturaXMLFileName.replace(suffix, "--stripped" + suffix);
-    } else {
-      strippedCoberturaFileName = coberturaXMLFileName.concat("--stripped.xml");
-    }
-    return ResourceUtilities.getTestReferenceFile(
-        "feature" + File.separator + "coverage" + File.separator + strippedCoberturaFileName);
   }
 
   private static void printErrorManual() {
@@ -401,28 +328,131 @@ public class CoberturaXMLHandler extends DefaultHandler {
   }
 
   public static Coverage diffCoberturaFiles(
-      Coverage firstCoverage, File inputCoberturaXML, String coverageName, File outputCoberturaXML)
-      throws Exception {
+      String inputCoberturaFileName, Coverage coverageSubtrahend) throws Exception {
     System.err.println("\n\n ****************** Starting with DIFF!");
     SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-    Coverage coverage = new Coverage(inputCoberturaXML, outputCoberturaXML);
-    parser.parse(inputCoberturaXML, new CoberturaXMLHandler(coverage, firstCoverage));
+    Coverage coverage = new Coverage(inputCoberturaFileName);
+    parser.parse(
+        coverage.mInputCoberturaXmlFile, new CoberturaXMLHandler(coverage, coverageSubtrahend));
     return coverage;
   }
 
-  public static Coverage readCoberturaFile(
-      File inputCoberturaXML, String coverageName, File outputCoberturaXML) throws Exception {
+  public static Coverage readCoberturaFile(String inputCoberturaFileName) throws Exception {
     SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-    Coverage coverage = new Coverage(inputCoberturaXML, outputCoberturaXML);
-    parser.parse(inputCoberturaXML, new CoberturaXMLHandler(coverage));
+    Coverage coverage = new Coverage(inputCoberturaFileName);
+    parser.parse(coverage.mInputCoberturaXmlFile, new CoberturaXMLHandler(coverage));
     return coverage;
   }
 
-  // temporary static and hie
+  /** As soon a line with coverage was founda all ancestor start elements will be written out */
+  private void flushStartElements(Deque<ElementInfo> startElementStack, StreamWriter streamWriter) {
+    Iterator<ElementInfo> it = startElementStack.descendingIterator();
+    while (it.hasNext()) {
+      ElementInfo elementInfo = it.next();
+      if (!elementInfo.mIsStartElementWritten) {
+        streamWriter.writeStartElement(
+            elementInfo.uri, elementInfo.localName, elementInfo.qName, elementInfo.attributes);
+        // System.out.println("Writing StartElement with qName:" + elementInfo.qName);
+        elementInfo.mIsStartElementWritten = true;
+      }
+    }
+  }
+
+  static class StreamWriter {
+
+    XMLStreamWriter mXsw = null;
+
+    public StreamWriter(File outputFile) {
+
+      XMLOutputFactory xof = XMLOutputFactory.newInstance();
+      try {
+        // make sure the output directories are being created
+
+        outputFile.getParentFile().mkdirs();
+        mXsw = xof.createXMLStreamWriter(new FileWriter(outputFile.getAbsolutePath()));
+        mXsw.writeStartDocument();
+
+      } catch (Exception e) {
+        System.err.println("Unable to write the file: " + e.getMessage());
+      }
+    }
+
+    public void writeStartElement(
+        String uri, String localName, String qName, Attributes attributes) {
+      if (qName == null || qName.isBlank()) {
+        System.err.println("ERROR: Non existent qname: " + qName);
+      }
+      try {
+        mXsw.writeStartElement(qName);
+        for (int i = 0; i < attributes.getLength(); i++) {
+          mXsw.writeAttribute(attributes.getQName(i), attributes.getValue(i));
+        }
+      } catch (XMLStreamException ex) {
+        Logger.getLogger(CoberturaXMLHandler.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+
+    public void writeStartElementWithoutAttribute(
+        String uri,
+        String localName,
+        String qName,
+        Attributes attributes,
+        String qNameOfattributeToOmit) {
+      if (qName == null || qName.isBlank()) {
+        System.err.println("ERROR: Non existent qname: " + qName);
+      }
+      try {
+        mXsw.writeStartElement(qName);
+        for (int i = 0; i < attributes.getLength(); i++) {
+          if (!attributes.getQName(i).equals(qNameOfattributeToOmit)) {
+            mXsw.writeAttribute(attributes.getQName(i), attributes.getValue(i));
+          }
+        }
+      } catch (XMLStreamException ex) {
+        Logger.getLogger(CoberturaXMLHandler.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+
+    public void writeEndElement() {
+      try {
+        mXsw.writeEndElement();
+      } catch (XMLStreamException ex) {
+        Logger.getLogger(CoberturaXMLHandler.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+          if (mXsw != null) {
+            mXsw.close();
+            mXsw = null;
+          }
+        } catch (Exception e) {
+          System.err.println("Unable to close the file: " + e.getMessage());
+        }
+      }
+    }
+
+    public void flushAndCloseWriter() {
+      try {
+        mXsw.writeEndDocument();
+        mXsw.flush();
+      } catch (Exception e) {
+        System.err.println("Unable to write the file: " + e.getMessage());
+      } finally {
+        try {
+          if (mXsw != null) {
+            mXsw.close();
+            mXsw = null;
+          }
+        } catch (Exception e) {
+          System.err.println("Unable to close the file: " + e.getMessage());
+        }
+      }
+    }
+  }
+
   static class Coverage {
 
     public File mInputCoberturaXmlFile;
-    public File mOutputCoberturaXmlFile;
+    public File mOutputCoberturaXmlFile_stripped;
+    public File mOutputCoberturaXmlFile_Diff;
     public String mCurrentClassName;
     public int mLineNo = 0;
     public int mHitCount = 0;
@@ -436,9 +466,9 @@ public class CoberturaXMLHandler extends DefaultHandler {
     private Map<Integer, Integer> mLineHits;
     private Iterator<Integer> mLineIterator = null;
 
-    public Coverage(File inputCoberturaXML, File outputCoberturaXML) {
-      mInputCoberturaXmlFile = inputCoberturaXML;
-      mOutputCoberturaXmlFile = outputCoberturaXML;
+    public Coverage(String inputCoberturaFileName) {
+      initializeInputOutputFiles(inputCoberturaFileName);
+
       mClassCoveragesLines = new HashMap<String, List<Integer>>();
       mClassLineHits = new HashMap<String, List<Integer>>();
       mLineHits = new HashMap<Integer, Integer>();
@@ -514,6 +544,30 @@ public class CoberturaXMLHandler extends DefaultHandler {
       }
       mCurrentClass_CoveredLines.add(lineNo);
     }
+
+    private void initializeInputOutputFiles(String inputFileName) {
+      // e.g. odftoolkit/odfdom/target/test-classes/test-reference/features
+      mInputCoberturaXmlFile = getCoberturaXMLInputFile(inputFileName);
+      mOutputCoberturaXmlFile_stripped = getCoberturaXMLOutputFile(inputFileName, "--stripped");
+      mOutputCoberturaXmlFile_Diff = getCoberturaXMLOutputFile(inputFileName, "--diff");
+    }
+
+    private static File getCoberturaXMLInputFile(String coberturaXMLFileName) {
+      return ResourceUtilities.getTestInputFile(
+          "feature" + File.separator + "coverage" + File.separator + coberturaXMLFileName);
+    }
+
+    private File getCoberturaXMLOutputFile(String coberturaXMLFileName, String newSuffix) {
+      String strippedCoberturaFileName = null;
+      if (coberturaXMLFileName.contains(".")) {
+        String suffix = coberturaXMLFileName.substring(coberturaXMLFileName.lastIndexOf('.'));
+        strippedCoberturaFileName = coberturaXMLFileName.replace(suffix, newSuffix + suffix);
+      } else {
+        strippedCoberturaFileName = coberturaXMLFileName.concat(newSuffix);
+      }
+      return ResourceUtilities.getTestReferenceFile(
+          "feature" + File.separator + "coverage" + File.separator + strippedCoberturaFileName);
+    }
   }
 
   // all relevent information of an XML element (by startElement SAX event)
@@ -526,7 +580,7 @@ public class CoberturaXMLHandler extends DefaultHandler {
     // if there is another subelement e.g. <method>
     // the already writen prarent <methods>
     // will not written out again
-    public boolean isStartElementWritten = false;
+    public boolean mIsStartElementWritten = false;
 
     public ElementInfo(String uri, String localName, String qName, Attributes attributes) {
       this.uri = uri;
