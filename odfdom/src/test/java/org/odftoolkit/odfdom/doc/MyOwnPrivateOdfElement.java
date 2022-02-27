@@ -44,4 +44,5 @@ public class MyOwnPrivateOdfElement extends OdfElement {
   public OdfName getOdfName() {
     return ELEMENT_NAME;
   }
-};
+}
+;

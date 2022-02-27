@@ -63,8 +63,10 @@ public class CoberturaXMLHandler extends DefaultHandler {
   Coverage mCovSubtrahend = null;
 
   // e.g. within odftoolkit/odfdom/target/test-classes/test-input/feature/coverage
-  private static final String COBERTURA_FILENAME__MINUEND = "cobertura_bold__indent.cov";
-  private static final String COBERTURA_FILENAME__SUBTRAHEND = "cobertura_text_italic.cov";
+  // private static final String COBERTURA_FILENAME__MINUEND = "cobertura_bold__indent.cov";
+  private static final String COBERTURA_FILENAME__MINUEND = "coverage_loadBoldTextODT.cov";
+  // private static final String COBERTURA_FILENAME__SUBTRAHEND = "cobertura_text_italic.cov";
+  private static final String COBERTURA_FILENAME__SUBTRAHEND = "coverage_loadPlainODT.cov";
 
   // mStrippedWriter will be filled twice
   StreamWriter mStrippedWriter = null;
@@ -104,12 +106,13 @@ public class CoberturaXMLHandler extends DefaultHandler {
       }
       if (qName.equals("class")) {
         String className = getAttributeValue(attributes, "name");
-        if (className != null && !className.isBlank()) {
+        String fileName = getAttributeValue(attributes, "filename");
+        if (className != null && !className.isBlank() || fileName != null && !fileName.isBlank()) {
           try {
             // sets all dependant state changes
-            mCov.newClassCoverage(className);
+            mCov.newClassCoverage(className, fileName);
             if (mCovSubtrahend != null) {
-              mCovSubtrahend.updateClassName(className);
+              mCovSubtrahend.updateClassId(className, fileName);
               mCovSubtrahend.updateLineAndHitNo();
             }
           } catch (Exception ex) {
@@ -228,9 +231,9 @@ public class CoberturaXMLHandler extends DefaultHandler {
         }
       }
       if (qName.equals("class")) {
-        mCov.updateClassName(null);
+        mCov.updateClassId(null, null);
         if (mCovSubtrahend != null) {
-          mCovSubtrahend.updateClassName(null);
+          mCovSubtrahend.updateClassId(null, null);
         }
       }
 
@@ -453,7 +456,7 @@ public class CoberturaXMLHandler extends DefaultHandler {
     public File mInputCoberturaXmlFile;
     public File mOutputCoberturaXmlFile_stripped;
     public File mOutputCoberturaXmlFile_Diff;
-    public String mCurrentClassName;
+    public String mCurrentClassId;
     public int mLineNo = 0;
     public int mHitCount = 0;
 
@@ -475,31 +478,43 @@ public class CoberturaXMLHandler extends DefaultHandler {
     }
 
     /** @return an ordered list of line numbers */
-    public List getClassCoverage(String className) {
-      return mClassCoveragesLines.get(className);
+    public List getClassCoverage(String className, String fileName) {
+      return mClassCoveragesLines.get(className + "___" + fileName);
     }
 
     /** @return an empty list of line numbers */
-    public void newClassCoverage(String className) throws Exception {
-      if (getClassCoverage(className) != null) {
-        throw new Exception("The input cobertura file has unexpected split class coverage!");
+    public void newClassCoverage(String className, String fileName) throws Exception {
+
+      if (getClassCoverage(className, fileName) != null) {
+        throw new Exception(
+            "The input cobertura file has unexpected split class coverage of class: '"
+                + className
+                + " and file"
+                + fileName
+                + "'!");
       }
-      mCurrentClassName = className;
+      mCurrentClassId = className + "___" + fileName;
       // collection of all upcoming lines (with hit > 0)
       mCurrentClass_CoveredLines = new LinkedList<>();
-      mClassCoveragesLines.put(className, mCurrentClass_CoveredLines);
+      mClassCoveragesLines.put(mCurrentClassId, mCurrentClass_CoveredLines);
 
       // collection of all hits > 1 <- indicated internally by negative line number
       mCurrentClass_LineHits = new LinkedList<>();
-      mClassLineHits.put(className, mCurrentClass_LineHits);
+      mClassLineHits.put(mCurrentClassId, mCurrentClass_LineHits);
     }
 
-    public void updateClassName(String className) {
+    public void updateClassId(String className, String fileName) {
       mLineIterator = null;
-      mCurrentClassName = className;
-      if (className != null) {
-        mCurrentClass_CoveredLines = mClassCoveragesLines.get(className);
-        mCurrentClass_LineHits = mClassLineHits.get(className);
+      mCurrentClassId = className + "___" + fileName;
+      if (className == null && fileName == null) {
+        mCurrentClassId = className + "___" + fileName;
+      } else if (className != null && fileName != null) {
+        mCurrentClassId = className + "___" + fileName;
+        mCurrentClass_CoveredLines = mClassCoveragesLines.get(mCurrentClassId);
+        mCurrentClass_LineHits = mClassLineHits.get(mCurrentClassId);
+      } else {
+        System.err.println(
+            "ClassName '" + className + "' or fileName '" + fileName + "' should not be null!");
       }
     }
 
@@ -530,9 +545,9 @@ public class CoberturaXMLHandler extends DefaultHandler {
                 + "Column"
                 + locator.getColumnNumber()
                 + ": addLineCoverage "
-                + mCurrentClassName
+                + mCurrentClassId
                 + " is empty or null:'"
-                + mCurrentClassName
+                + mCurrentClassId
                 + "'!");
       }
       assert (hitCount > 0);
