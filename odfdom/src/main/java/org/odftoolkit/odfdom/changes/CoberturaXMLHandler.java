@@ -77,24 +77,24 @@ public class CoberturaXMLHandler extends DefaultHandler {
           + File.separator;
   // e.g. within odftoolkit/odfdom/target/test-classes/test-input/feature/coverage
 
-  private static final String COBERTURA_FILENAME__MINUEND =
-      TEST_INPUT_DIR_NAME + "cobertura_bold__indent--stripped-indent.cov";
-
-  private static final String COBERTURA_FILENAME__SUBTRAHEND =
-      TEST_INPUT_DIR_NAME + "cobertura_text_italic--stripped-indent.cov";
   /* empty output
     private static final String COBERTURA_FILENAME__MINUEND =
       TEST_INPUT_DIR_NAME + "cobertura_text_italic--stripped-indent.cov";
 
     private static final String COBERTURA_FILENAME__SUBTRAHEND =
       TEST_INPUT_DIR_NAME + "cobertura_bold__indent--stripped-indent.cov";
+  private static final String COBERTURA_FILENAME__MINUEND =
+    TEST_INPUT_DIR_NAME + "cobertura_bold__indent--stripped-indent.cov";
+
+  private static final String COBERTURA_FILENAME__SUBTRAHEND =
+    TEST_INPUT_DIR_NAME + "cobertura_text_italic--stripped-indent.cov";
   */
 
-  /**
-   * LibreOffice stress test coverage files private static final String COBERTURA_FILENAME__MINUEND
-   * = "coverage_loadBoldTextODT.cov"; private static final String COBERTURA_FILENAME__SUBTRAHEND =
-   * "coverage_loadPlainODT.cov";
-   */
+  /** LibreOffice stress test coverage files */
+  private static final String COBERTURA_FILENAME__MINUEND = "coverage_loadBoldTextODT.cov";
+
+  private static final String COBERTURA_FILENAME__SUBTRAHEND = "coverage_loadPlainODT.cov";
+
   // mStrippedWriter will be filled twice
   StreamWriter mStrippedWriter = null;
 
@@ -135,13 +135,15 @@ public class CoberturaXMLHandler extends DefaultHandler {
       if (qName.equals("class")) {
         String className = getAttributeValue(attributes, "name");
         String fileName = getAttributeValue(attributes, "filename");
+        if (fileName.contains("basegfx/source/matrix/b2dhommatrixtools.cxx")) {
+          System.err.println("xxxx");
+        }
         if (className != null && !className.isBlank() || fileName != null && !fileName.isBlank()) {
           try {
             // sets all dependant state changes
             mCov.newClassCoverage(className, fileName);
             if (mCovSubtrahend != null) {
               mCovSubtrahend.updateClassId(className, fileName);
-              mCovSubtrahend.updateLineAndHitNo(mLocator);
             }
           } catch (Exception ex) {
             Logger.getLogger(CoberturaXMLHandler.class.getName())
@@ -165,27 +167,29 @@ public class CoberturaXMLHandler extends DefaultHandler {
           mCov.addLineCoverage(lineNo, hitCount, mLocator);
           flushStartElements(mStartElementStack, mStrippedWriter);
           if (mCovSubtrahend != null) {
+            // make sure that the subtrahend lineNo is not less the one of the minuend
+            mCovSubtrahend.prepareLineNo(lineNo, mLocator);
             if (mCovSubtrahend.mCurrentClass_CoveredLines == null || mCovSubtrahend.mLineNo == 0) {
               if (hasConditionCoverage) {
                 mIsCoveredCondition_Diff = true;
               }
               flushStartElements(mStartElementStack_Diff, mStrippedWriter_Diff);
-            } else
-            // state is saved in the handler's start-element stack
-            if ((mCovSubtrahend.mLineNo == lineNo && hitCount > mCovSubtrahend.mHitCount)) {
-              // only a feature of the current parsed file mCov
-              int index = attributes.getIndex("hits");
-              mStartElementStack_Diff.pop(); // remove wrong hit attribute
-              Attributes2Impl updatedAttributes = new Attributes2Impl(attributes);
-              updatedAttributes.setValue(
-                  index, Integer.toString(hitCount - mCovSubtrahend.mHitCount));
-              mStartElementStack_Diff.push(
-                  new ElementInfo(uri, localName, qName, updatedAttributes));
-              mCovSubtrahend.updateLineAndHitNo(mLocator);
-              if (hasConditionCoverage) {
-                mIsCoveredCondition_Diff = true;
+            } else {
+              // state is saved in the handler's start-element stack
+              if ((mCovSubtrahend.mLineNo == lineNo && hitCount > mCovSubtrahend.mHitCount)) {
+                // only a feature of the current parsed file mCov
+                int index = attributes.getIndex("hits");
+                mStartElementStack_Diff.pop(); // remove wrong hit attribute
+                Attributes2Impl updatedAttributes = new Attributes2Impl(attributes);
+                updatedAttributes.setValue(
+                    index, Integer.toString(hitCount - mCovSubtrahend.mHitCount));
+                mStartElementStack_Diff.push(
+                    new ElementInfo(uri, localName, qName, updatedAttributes));
+                if (hasConditionCoverage) {
+                  mIsCoveredCondition_Diff = true;
+                }
+                flushStartElements(mStartElementStack_Diff, mStrippedWriter_Diff);
               }
-              flushStartElements(mStartElementStack_Diff, mStrippedWriter_Diff);
             }
           }
         }
@@ -215,6 +219,18 @@ public class CoberturaXMLHandler extends DefaultHandler {
       }
     }
   }
+  /*
+  private void adjustSubtrahendLine(int lineNo){
+    boolean hasMultipleHits = false;
+    int slineNo = mCovSubtrahend.mLineNo;
+    if(slineNo < 0){
+      slineNo*=-1;
+    }
+    while (slineNo != 0 || slineNo < lineNo) {
+      updateLineAndHitNo()
+    }
+  }
+  */
 
   private boolean hasConditionCoverage(Attributes attributes) {
     String conditionCoverage = attributes.getValue("condition-coverage");
@@ -487,8 +503,9 @@ public class CoberturaXMLHandler extends DefaultHandler {
     public File mOutputCoberturaXmlFile_stripped;
     public File mOutputCoberturaXmlFile_Diff;
     public String mCurrentClassId;
-    public int mLineNo = 0;
-    public int mHitCount = 0;
+    public Integer mLineNo = 0;
+    public int mLineIndex = -1;
+    public Integer mHitCount = 0;
 
     public List<Integer> mCurrentClass_CoveredLines;
     private List<Integer> mCurrentClass_LineHits;
@@ -534,8 +551,9 @@ public class CoberturaXMLHandler extends DefaultHandler {
     }
 
     public void updateClassId(String className, String fileName) {
-      mLineIterator = null;
+      mLineIndex = -1;
       mCurrentClassId = null;
+
       if (className != null && fileName != null) {
         mCurrentClassId = className + "___" + fileName;
         mCurrentClass_CoveredLines = mClassCoveragesLines.get(mCurrentClassId);
@@ -549,27 +567,33 @@ public class CoberturaXMLHandler extends DefaultHandler {
     }
 
     // @update mNextLine & mNextHits
-    public void updateLineAndHitNo(Locator locator) {
+    /** @param lineNo the minuend's line no */
+    public void prepareLineNo(int lineNo, Locator locator) {
+      boolean hasLineChanged = false;
+      // if there are any covered lines for this class
       if (mCurrentClass_CoveredLines != null) {
-        if (mLineIterator == null) {
-          mLineIterator = mCurrentClass_CoveredLines.iterator();
+        // initialize line number
+        // if a line index exist and its last line was not read yet
+        if (mLineIndex <= 0 && mCurrentClass_CoveredLines.size() > (mLineIndex + 1)) {
+          mLineIndex++;
+          mLineNo = mCurrentClass_CoveredLines.get(mLineIndex);
+          hasLineChanged = true;
         }
-        if (mLineIterator.hasNext()) {
-          mLineNo = mLineIterator.next();
+        // while the minuend's lineNo is higher than the subtrahend's
+        while (lineNo > Math.abs(mLineNo) && mCurrentClass_CoveredLines.size() > (mLineIndex + 1)) {
+          mLineIndex++;
+          mLineNo = mCurrentClass_CoveredLines.get(mLineIndex);
+          hasLineChanged = true;
+        }
+        // if there is a subtrahend's lineNo found and it is negativ, fetch hit
+        if (hasLineChanged) {
           if (mLineNo < 0) {
             mLineNo *= -1;
             mHitCount = mLineHits.get(mLineNo);
           } else {
             mHitCount = 1;
           }
-        } else {
-          mLineNo = 0;
-          mHitCount = 0;
         }
-        mLineIterator = null;
-      } else { // if there is no class there is no line coverage
-        mLineNo = 0;
-        mHitCount = 0;
       }
     }
 
