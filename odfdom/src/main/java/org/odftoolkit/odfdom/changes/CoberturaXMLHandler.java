@@ -169,27 +169,32 @@ public class CoberturaXMLHandler extends DefaultHandler {
           if (mCovSubtrahend != null) {
             // make sure that the subtrahend lineNo is not less the one of the minuend
             mCovSubtrahend.prepareLineNo(lineNo, mLocator);
-            if (mCovSubtrahend.mCurrentClass_CoveredLines == null || mCovSubtrahend.mLineNo == 0) {
+            if (mCovSubtrahend.mCurrentClass_CoveredLines == null
+                || mCovSubtrahend.mLineNo == 0
+                || mCovSubtrahend.mLineNo != lineNo) {
               if (hasConditionCoverage) {
                 mIsCoveredCondition_Diff = true;
               }
+              // writing start elements
+              // saving fact/state that a start-element was already written into stream in the stack
               flushStartElements(mStartElementStack_Diff, mStrippedWriter_Diff);
-            } else {
-              // state is saved in the handler's start-element stack
-              if ((mCovSubtrahend.mLineNo == lineNo && hitCount > mCovSubtrahend.mHitCount)) {
-                // only a feature of the current parsed file mCov
-                int index = attributes.getIndex("hits");
-                mStartElementStack_Diff.pop(); // remove wrong hit attribute
-                Attributes2Impl updatedAttributes = new Attributes2Impl(attributes);
-                updatedAttributes.setValue(
-                    index, Integer.toString(hitCount - mCovSubtrahend.mHitCount));
-                mStartElementStack_Diff.push(
-                    new ElementInfo(uri, localName, qName, updatedAttributes));
-                if (hasConditionCoverage) {
-                  mIsCoveredCondition_Diff = true;
-                }
-                flushStartElements(mStartElementStack_Diff, mStrippedWriter_Diff);
-              }
+              /*
+              // This line hit difference between minuend and subtrahend is not helpful for the code cognita
+              } else {
+                if ((mCovSubtrahend.mLineNo == lineNo && hitCount > mCovSubtrahend.mHitCount)) {
+                  // only a feature of the current parsed file mCov
+                  int index = attributes.getIndex("hits");
+                  mStartElementStack_Diff.pop(); // remove wrong hit attribute
+                  Attributes2Impl updatedAttributes = new Attributes2Impl(attributes);
+                  updatedAttributes.setValue(
+                      index, Integer.toString(hitCount - mCovSubtrahend.mHitCount));
+                  mStartElementStack_Diff.push(
+                      new ElementInfo(uri, localName, qName, updatedAttributes));
+                  if (hasConditionCoverage) {
+                    mIsCoveredCondition_Diff = true;
+                  }
+                  flushStartElements(mStartElementStack_Diff, mStrippedWriter_Diff);
+                } */
             }
           }
         }
