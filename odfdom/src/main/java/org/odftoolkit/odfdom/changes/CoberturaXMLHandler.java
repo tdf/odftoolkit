@@ -135,9 +135,6 @@ public class CoberturaXMLHandler extends DefaultHandler {
       if (qName.equals("class")) {
         String className = getAttributeValue(attributes, "name");
         String fileName = getAttributeValue(attributes, "filename");
-        if (fileName.contains("basegfx/source/matrix/b2dhommatrixtools.cxx")) {
-          System.err.println("xxxx");
-        }
         if (className != null && !className.isBlank() || fileName != null && !fileName.isBlank()) {
           try {
             // sets all dependant state changes
