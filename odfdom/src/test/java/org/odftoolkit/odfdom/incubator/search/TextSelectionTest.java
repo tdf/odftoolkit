@@ -306,7 +306,7 @@ public class TextSelectionTest {
   @Test
   public void testReplacewithMultispace() {
     final List<String> toSearch =
-        Arrays.asList("multiple\\s\\s", "containing ", "some\\s+words", "some\\s+others", "%>  ");
+        Arrays.asList("multiple   ", "containing ", "some\\s+words", "some\\s+others", "%>  ");
     final List<TextNavigation> navigations =
         toSearch.stream()
             .map(s -> new TextNavigation(Pattern.compile(s), doc2))
@@ -317,10 +317,11 @@ public class TextSelectionTest {
             .map(n -> (TextSelection) n.getCurrentItem())
             .collect(Collectors.toList());
     try {
-      selections.get(0).replaceWith("one space");
-      selections.get(1).replaceWith("why ");
-      selections.get(2).replaceWith("all words");
-      selections.get(3).replaceWith("none");
+      selections.get(0).replaceWith("Xmultiple___X");
+      selections.get(1).replaceWith("Xcontaining_X");
+      selections.get(2).replaceWith("Xsome_+wordsX");
+
+      selections.get(3).replaceWith("Xsome_+othersX");
       selections.get(4).replaceWith("X");
     } catch (final Exception e) {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -329,7 +330,7 @@ public class TextSelectionTest {
     navigations.forEach(
         n -> assertFalse("Navigation " + n + " should not have a next", n.hasNext()));
     try {
-      doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_REPLACE_MULTI_SPACE));
+      doc2.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_REPLACE_MULTI_SPACE));
     } catch (final Exception e) {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
