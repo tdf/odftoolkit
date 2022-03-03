@@ -54,6 +54,7 @@ public class TextSelectionTest {
   public static final String SAVE_FILE_COPYTO1 = "TextSelectionResultCopyTo1.odt";
   public static final String SAVE_FILE_DELETE_PATTERN = "TextSelectionResultPatternDelete.odt";
   OdfTextDocument doc;
+  OdfTextDocument doc2;
   OdfFileDom contentDOM;
   TextNavigation search;
 
@@ -67,6 +68,9 @@ public class TextSelectionTest {
   public void setUp() {
     try {
       doc =
+          (OdfTextDocument)
+              OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEXT_FILE));
+      doc2 =
           (OdfTextDocument)
               OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEXT_FILE));
       contentDOM = doc.getContentDom();
@@ -302,10 +306,10 @@ public class TextSelectionTest {
   @Test
   public void testReplacewithMultispace() {
     final List<String> toSearch =
-        Arrays.asList("multiple\\s+spaces", "some\\s+words", "some\\s+others", "%>  ");
+        Arrays.asList("multiple\\s\\s", "containing ", "some\\s+words", "some\\s+others", "%>  ");
     final List<TextNavigation> navigations =
         toSearch.stream()
-            .map(s -> new TextNavigation(Pattern.compile(s), doc))
+            .map(s -> new TextNavigation(Pattern.compile(s), doc2))
             .collect(Collectors.toList());
     navigations.forEach(n -> assertTrue("Navigation " + n + " should have a next", n.hasNext()));
     final List<TextSelection> selections =
@@ -314,9 +318,10 @@ public class TextSelectionTest {
             .collect(Collectors.toList());
     try {
       selections.get(0).replaceWith("one space");
-      selections.get(1).replaceWith("all words");
-      selections.get(2).replaceWith("none");
-      selections.get(3).replaceWith("X");
+      selections.get(1).replaceWith("why ");
+      selections.get(2).replaceWith("all words");
+      selections.get(3).replaceWith("none");
+      selections.get(4).replaceWith("X");
     } catch (final Exception e) {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
