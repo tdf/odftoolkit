@@ -143,10 +143,10 @@
 {"name":"addParagraph","start":[28],"attrs":{"styleId":"Default_20_Text"}},
 {"name":"addParagraph","start":[29],"attrs":{"styleId":"Default_20_Text"}},
 {"name":"addText","start":[29,1],"text":"This is a paragraph containing multiple "},
-{"name":"addText","start":[29,41],"text":"  "},
-{"name":"addText","start":[29,43],"text":"spaces between some "},
-{"name":"addText","start":[29,63],"text":" "},
-{"name":"addText","start":[29,64],"text":"words, "},
-{"name":"addText","start":[29,71],"text":"and not between some others"},
-{"name":"addText","start":[29,98],"text":"."}
+{"name":"addText","start":[29,41],"text":"     "},
+{"name":"addText","start":[29,46],"text":"spaces between some "},
+{"name":"addText","start":[29,66],"text":" "},
+{"name":"addText","start":[29,67],"text":"words, "},
+{"name":"addText","start":[29,74],"text":"and not between some others"},
+{"name":"addText","start":[29,101],"text":"."}
 ]}
