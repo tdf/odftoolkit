@@ -55,7 +55,6 @@
                     <artifactId>xml-apis</artifactId>
                 </exclusion>
             </exclusions>
-            <version>2.7.2</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -84,28 +83,23 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20190722</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.36</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.7.36</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
-            <version>1.21</version>
         </dependency>
     </dependencies>
     <properties>
@@ -121,14 +115,12 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-webdav-jackrabbit</artifactId>
-                <version>3.5.1</version>
             </extension>
         </extensions>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.2</version>
                 <configuration>
                     <archive>
                         <index>true</index>
@@ -161,7 +153,6 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>5.1.4</version>
                 <executions>
                     <execution>
                         <id>bundle-manifest</id>
@@ -184,7 +175,6 @@
             <plugin>
                 <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-maven-plugin</artifactId>
-                <version>5.0.0</version>
                 <executions>
                     <execution>
                         <id>get-the-git-infos-validate</id>
@@ -211,7 +201,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
                 <configuration>
                     <!--                    <forkCount>3</forkCount>
                     <reuseForks>true</reuseForks>-->
@@ -331,7 +320,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
                 <configuration>
                     <excludes>
                         <exclude>**/PerformanceIT.java</exclude>
@@ -359,7 +347,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
                 <reportSets>
                     <reportSet>
                         <id>integration-tests</id>
@@ -414,7 +401,6 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>wagon-maven-plugin</artifactId>
-                        <version>1.0</version>
                         <executions>
                             <execution>
                                 <id>download-odf-schema-v1.2</id>
@@ -506,7 +492,6 @@
                     <plugin>
                         <groupId>org.odftoolkit</groupId>
                         <artifactId>maven-codegen-plugin</artifactId>
-                        <version>0.8</version>
                         <executions>
                             <execution>
                                 <id>pkg</id>
@@ -540,7 +525,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.22.2</version>
                         <configuration>
                             <systemPropertyVariables>
                                 <testresourcefolder>performance</testresourcefolder>
@@ -562,7 +546,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
                         <configuration>
                             <!--                    <forkCount>3</forkCount>
                             <reuseForks>true</reuseForks>-->

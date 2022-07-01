@@ -45,20 +45,18 @@
         <rnghtml.stylesheet>src/test/resources/xslt/rng/addRefs4rng-html.xsl</rnghtml.stylesheet>
         <rng2docbook.stylesheet>src/test/resources/xslt/rng/rng2docbook.xsl</rng2docbook.stylesheet>
         <odf.defaultvalue.extraction>src/test/resources/xslt/getAttributeDefaults.xsl</odf.defaultvalue.extraction>
-        <version.saxon-he>9.9.1-8</version.saxon-he>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>odfdom-java</artifactId>
-            <version>0.11.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <!-- a reliable XSLT processor -->
             <groupId>net.sf.saxon</groupId>
             <artifactId>Saxon-HE</artifactId>
-            <version>${version.saxon-he}</version>
             <!-- test scope does not work with exec-maven-plugin below -->
             <scope>compile</scope>
         </dependency>
@@ -71,7 +69,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>xml-maven-plugin</artifactId>
-                <version>1.0.2</version>
                 <executions>
                     <execution>
                         <goals>
@@ -171,6 +168,12 @@
                         <groupId>net.sf.saxon</groupId>
                         <artifactId>Saxon-HE</artifactId>
                         <version>${version.saxon-he}</version>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>xml-apis</groupId>
+                                <artifactId>xml-apis</artifactId>
+                            </exclusion>
+                        </exclusions>
                         <scope>runtime</scope>
                     </dependency>
                 </dependencies>
@@ -178,7 +181,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
                 <executions>
                     <execution>
                         <id>defaultvalues-odf1.2</id>
