@@ -3,8 +3,6 @@
  *
  * <p>DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
- * <p>Copyright 2009, 2010 Oracle and/or its affiliates. All rights reserved.
- *
  * <p>Use is subject to license terms.
  *
  * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
@@ -34,34 +32,47 @@ import schema2template.model.XMLModel;
 public class OdfGenerationTest {
 
   private static final Logger LOG = Logger.getLogger(OdfGenerationTest.class.getName());
-  private static final String REF_BASE_DIR =
-      "target"
-          + File.separator
-          + "test-classes"
-          + File.separator
-          + "references"
-          + File.separator
+
+  /**
+   * Via Maven pom.xml (surefire test plugin) received System variable of the absolute path of the
+   * target build directory
+   */
+  private static final String buildDir = System.getProperty("schema2template.build.dir");
+
+  // The Maven default output directory for generated sources: target/generated-sources/
+  private static final String TARGET_REL_DIR =
+      File.separator
           + "generated-sources"
           + File.separator
           + "java"
+          + File.separator
+          + "odf"
+          + File.separator
+          + "odfdom-java"
           + File.separator;
 
-  private static String TARGET_BASE_DIR =
-      "target" + File.separator + "generated-sources" + File.separator + "java" + File.separator;
-
-  private static String CODEGEN_RESOURCE_DIR =
-      ".."
-          + File.separator
-          + ".."
-          + File.separator
-          + "odfdom"
-          + File.separator
-          + "src"
-          + File.separator
-          + "codegen"
-          + File.separator
-          + "resources"
-          + File.separator;
+  private static String ODF_TEMPLATE_DIR =
+      Paths.get(
+              buildDir
+                  + File.separator
+                  + ".."
+                  + File.separator
+                  + "src"
+                  + File.separator
+                  + "test"
+                  + File.separator
+                  + "resources"
+                  + File.separator
+                  + "test-input"
+                  + File.separator
+                  + "odf"
+                  + File.separator
+                  + "template"
+                  + File.separator
+                  + "odfdom-java"
+                  + File.separator)
+          .normalize()
+          .toString();
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test
@@ -70,158 +81,272 @@ public class OdfGenerationTest {
       // user.dir ==> generator/schema2template
       String[] contextInfoDom = new String[1];
       String configDomFile =
-          CODEGEN_RESOURCE_DIR + File.separator + "dom" + File.separator + "config.xml";
+          ODF_TEMPLATE_DIR + File.separator + "dom" + File.separator + "config.xml";
       contextInfoDom[0] = configDomFile;
       String[] contextInfoPkg = new String[1];
       String configPkgFile =
-          CODEGEN_RESOURCE_DIR + File.separator + "pkg" + File.separator + "config.xml";
+          ODF_TEMPLATE_DIR + File.separator + "pkg" + File.separator + "config.xml";
       contextInfoPkg[0] = configPkgFile;
 
       String templateFilePathPkg =
-          CODEGEN_RESOURCE_DIR
-              + File.separator
-              + "pkg"
-              + File.separator
-              + "template"
-              + File.separator;
+          ODF_TEMPLATE_DIR + File.separator + "pkg" + File.separator + "template" + File.separator;
       String templateFilePathDom =
-          CODEGEN_RESOURCE_DIR
-              + File.separator
-              + "dom"
-              + File.separator
-              + "template"
-              + File.separator;
+          ODF_TEMPLATE_DIR + File.separator + "dom" + File.separator + "template" + File.separator;
 
-      templateFilePathDom =
-          Paths.get(System.getProperty("user.dir"), templateFilePathDom).normalize().toString();
       String templateFilePkgManifest = "pkg-manifest-output-files.vm";
       String templateFilePkgSignature = "pkg-dsig-output-files.vm";
       String templateFileDom = "dom-output-files.vm";
 
       String odf13SchemaFile =
-          "src"
-              + File.separator
-              + "main"
-              + File.separator
-              + "resources"
-              + File.separator
-              + "examples"
-              + File.separator
-              + "odf"
-              + File.separator
-              + "odf-schemas"
-              + File.separator
-              + "OpenDocument-v1.3-schema.rng";
+          Paths.get(
+                  buildDir
+                      + File.separator
+                      + ".."
+                      + File.separator
+                      + "src"
+                      + File.separator
+                      + "test"
+                      + File.separator
+                      + "resources"
+                      + File.separator
+                      + "test-input"
+                      + File.separator
+                      + "odf"
+                      + File.separator
+                      + "grammar"
+                      + File.separator
+                      + "OpenDocument-v1.3-schema.rng")
+              .normalize()
+              .toString();
       String odf12SchemaFile =
-          "src"
-              + File.separator
-              + "main"
-              + File.separator
-              + "resources"
-              + File.separator
-              + "examples"
-              + File.separator
-              + "odf"
-              + File.separator
-              + "odf-schemas"
-              + File.separator
-              + "OpenDocument-v1.2-os-schema.rng";
+          Paths.get(
+                  buildDir
+                      + File.separator
+                      + ".."
+                      + File.separator
+                      + "src"
+                      + File.separator
+                      + "test"
+                      + File.separator
+                      + "resources"
+                      + File.separator
+                      + "test-input"
+                      + File.separator
+                      + "odf"
+                      + File.separator
+                      + "grammar"
+                      + File.separator
+                      + "OpenDocument-v1.2-os-schema.rng")
+              .normalize()
+              .toString();
       String odf11SchemaFile =
-          "src"
-              + File.separator
-              + "main"
-              + File.separator
-              + "resources"
-              + File.separator
-              + "examples"
-              + File.separator
-              + "odf"
-              + File.separator
-              + "odf-schemas"
-              + File.separator
-              + "OpenDocument-schema-v1.1.rng";
+          Paths.get(
+                  buildDir
+                      + File.separator
+                      + ".."
+                      + File.separator
+                      + "src"
+                      + File.separator
+                      + "test"
+                      + File.separator
+                      + "resources"
+                      + File.separator
+                      + "test-input"
+                      + File.separator
+                      + "odf"
+                      + File.separator
+                      + "grammar"
+                      + File.separator
+                      + "OpenDocument-schema-v1.1.rng")
+              .normalize()
+              .toString();
+      String odf10SchemaFile =
+          Paths.get(
+                  buildDir
+                      + File.separator
+                      + ".."
+                      + File.separator
+                      + "src"
+                      + File.separator
+                      + "test"
+                      + File.separator
+                      + "resources"
+                      + File.separator
+                      + "test-input"
+                      + File.separator
+                      + "odf"
+                      + File.separator
+                      + "grammar"
+                      + File.separator
+                      + "OpenDocument-schema-v1.0-os.rng")
+              .normalize()
+              .toString();
       String odf13SignatureSchemaFile =
-          "src"
-              + File.separator
-              + "main"
-              + File.separator
-              + "resources"
-              + File.separator
-              + "examples"
-              + File.separator
-              + "odf"
-              + File.separator
-              + "odf-schemas"
-              + File.separator
-              + "OpenDocument-v1.3-dsig-schema.rng";
+          Paths.get(
+                  buildDir
+                      + File.separator
+                      + ".."
+                      + File.separator
+                      + "src"
+                      + File.separator
+                      + "test"
+                      + File.separator
+                      + "resources"
+                      + File.separator
+                      + "test-input"
+                      + File.separator
+                      + "odf"
+                      + File.separator
+                      + "grammar"
+                      + File.separator
+                      + "OpenDocument-v1.3-dsig-schema.rng")
+              .normalize()
+              .toString();
       String odf12SignatureSchemaFile =
-          "src"
-              + File.separator
-              + "main"
-              + File.separator
-              + "resources"
-              + File.separator
-              + "examples"
-              + File.separator
-              + "odf"
-              + File.separator
-              + "odf-schemas"
-              + File.separator
-              + "OpenDocument-v1.2-os-dsig-schema.rng";
+          Paths.get(
+                  buildDir
+                      + File.separator
+                      + ".."
+                      + File.separator
+                      + "src"
+                      + File.separator
+                      + "test"
+                      + File.separator
+                      + "resources"
+                      + File.separator
+                      + "test-input"
+                      + File.separator
+                      + "odf"
+                      + File.separator
+                      + "grammar"
+                      + File.separator
+                      + "OpenDocument-v1.2-os-dsig-schema.rng")
+              .normalize()
+              .toString();
       String odf13ManifestSchemaFile =
-          "src"
-              + File.separator
-              + "main"
-              + File.separator
-              + "resources"
-              + File.separator
-              + "examples"
-              + File.separator
-              + "odf"
-              + File.separator
-              + "odf-schemas"
-              + File.separator
-              + "OpenDocument-v1.3-manifest-schema.rng";
+          Paths.get(
+                  buildDir
+                      + File.separator
+                      + ".."
+                      + File.separator
+                      + "src"
+                      + File.separator
+                      + "test"
+                      + File.separator
+                      + "resources"
+                      + File.separator
+                      + "test-input"
+                      + File.separator
+                      + "odf"
+                      + File.separator
+                      + "grammar"
+                      + File.separator
+                      + "OpenDocument-v1.3-manifest-schema.rng")
+              .normalize()
+              .toString();
       String odf12ManifestSchemaFile =
-          "src"
-              + File.separator
-              + "main"
-              + File.separator
-              + "resources"
-              + File.separator
-              + "examples"
-              + File.separator
-              + "odf"
-              + File.separator
-              + "odf-schemas"
-              + File.separator
-              + "OpenDocument-v1.2-os-manifest-schema.rng";
+          Paths.get(
+                  buildDir
+                      + File.separator
+                      + ".."
+                      + File.separator
+                      + "src"
+                      + File.separator
+                      + "test"
+                      + File.separator
+                      + "resources"
+                      + File.separator
+                      + "test-input"
+                      + File.separator
+                      + "odf"
+                      + File.separator
+                      + "grammar"
+                      + File.separator
+                      + "OpenDocument-v1.2-os-manifest-schema.rng")
+              .normalize()
+              .toString();
+      String odf11ManifestSchemaFile =
+          Paths.get(
+                  buildDir
+                      + File.separator
+                      + ".."
+                      + File.separator
+                      + "src"
+                      + File.separator
+                      + "test"
+                      + File.separator
+                      + "resources"
+                      + File.separator
+                      + "test-input"
+                      + File.separator
+                      + "odf"
+                      + File.separator
+                      + "grammar"
+                      + File.separator
+                      + "OpenDocument-manifest-schema-v1.1.rng")
+              .normalize()
+              .toString();
+      String odf10ManifestSchemaFile =
+          Paths.get(
+                  buildDir
+                      + File.separator
+                      + ".."
+                      + File.separator
+                      + "src"
+                      + File.separator
+                      + "test"
+                      + File.separator
+                      + "resources"
+                      + File.separator
+                      + "test-input"
+                      + File.separator
+                      + "odf"
+                      + File.separator
+                      + "grammar"
+                      + File.separator
+                      + "OpenDocument-manifest-schema-v1.0-os.rng")
+              .normalize()
+              .toString();
       Logger.getLogger(OdfGenerationTest.class.getName())
-          .fine("Generation Code Files Root Directory is " + TARGET_BASE_DIR);
-      Logger.getLogger(OdfGenerationTest.class.getName()).fine("Config File DOM" + contextInfoDom);
-      Logger.getLogger(OdfGenerationTest.class.getName()).fine("Config File PKG" + contextInfoPkg);
+          .info("Generation Code Files Root Directory is " + TARGET_REL_DIR);
+      Logger.getLogger(OdfGenerationTest.class.getName()).info("Config File DOM" + contextInfoDom);
+      Logger.getLogger(OdfGenerationTest.class.getName()).info("Config File PKG" + contextInfoPkg);
       Logger.getLogger(OdfGenerationTest.class.getName())
-          .fine("xmlModelOdf13Dom Template Files Directory " + templateFilePathDom);
+          .info("xmlModelOdf13Dom Template Files Directory " + templateFilePathDom);
       Logger.getLogger(OdfGenerationTest.class.getName())
-          .fine("ODF1.3 Schema File " + odf13SchemaFile);
+          .info("ODF1.3 Schema File " + odf13SchemaFile);
       Logger.getLogger(OdfGenerationTest.class.getName())
-          .fine("ODF1.2 Schema File " + odf12SchemaFile);
+          .info("ODF1.2 Schema File " + odf12SchemaFile);
       Logger.getLogger(OdfGenerationTest.class.getName())
-          .fine("Pkg Template Files Directory " + templateFilePathPkg);
+          .info("Pkg Template Files Directory " + templateFilePathPkg);
       Logger.getLogger(OdfGenerationTest.class.getName())
-          .fine("ODF1.3 Signature Schema File " + odf13SignatureSchemaFile);
+          .info("ODF1.3 Signature Schema File " + odf13SignatureSchemaFile);
       Logger.getLogger(OdfGenerationTest.class.getName())
-          .fine("ODF1.2 Signature Schema File " + odf12SignatureSchemaFile);
+          .info("ODF1.2 Signature Schema File " + odf12SignatureSchemaFile);
       Logger.getLogger(OdfGenerationTest.class.getName())
-          .fine("ODF1.3 Manifest Schema File " + odf13ManifestSchemaFile);
+          .info("ODF1.3 Manifest Schema File " + odf13ManifestSchemaFile);
       Logger.getLogger(OdfGenerationTest.class.getName())
-          .fine("ODF1.2 Manifest Schema File " + odf12ManifestSchemaFile);
+          .info("ODF1.2 Manifest Schema File " + odf12ManifestSchemaFile);
+      Logger.getLogger(OdfGenerationTest.class.getName())
+          .info("ODF1.1 Manifest Schema File " + odf11ManifestSchemaFile);
+      Logger.getLogger(OdfGenerationTest.class.getName())
+          .info("ODF1.0 Manifest Schema File " + odf10ManifestSchemaFile);
 
       XMLModel xmlModelOdf13PkgManifest =
           new XMLModel(new File(odf13ManifestSchemaFile), "Odf 1.3");
       XMLModel xmlModelOdf12PkgManifest =
           new XMLModel(new File(odf12ManifestSchemaFile), "Odf 1.2");
-      XMLModel[] xmlModelPkgManifestHistory13 = {xmlModelOdf12PkgManifest};
+      XMLModel xmlModelOdf11PkgManifest =
+          new XMLModel(new File(odf11ManifestSchemaFile), "Odf 1.1");
+      XMLModel xmlModelOdf10PkgManifest =
+          new XMLModel(new File(odf10ManifestSchemaFile), "Odf 1.0");
+      XMLModel[] xmlModelPkgManifestHistory13 = {
+        xmlModelOdf12PkgManifest, xmlModelOdf11PkgManifest, xmlModelOdf10PkgManifest
+      };
+      XMLModel[] xmlModelPkgManifestHistory12 = {
+        xmlModelOdf11PkgManifest, xmlModelOdf10PkgManifest
+      };
+      XMLModel[] xmlModelPkgManifestHistory11 = {xmlModelOdf10PkgManifest};
 
       XMLModel xmlModelOdf13PkgSignature =
           new XMLModel(new File(odf13SignatureSchemaFile), "Odf 1.3");
@@ -231,55 +356,43 @@ public class OdfGenerationTest {
 
       XMLModel xmlModelOdf13Dom = new XMLModel(new File(odf13SchemaFile), "Odf 1.3");
       XMLModel xmlModelOdf12Dom = new XMLModel(new File(odf12SchemaFile), "Odf 1.2");
-      XMLModel xmlModelOdf11Dom = new XMLModel(new File(odf12SchemaFile), "Odf 1.1");
-      XMLModel xmlModelOdf10Dom = new XMLModel(new File(odf12SchemaFile), "Odf 1.0");
+      XMLModel xmlModelOdf11Dom = new XMLModel(new File(odf11SchemaFile), "Odf 1.1");
+      XMLModel xmlModelOdf10Dom = new XMLModel(new File(odf10SchemaFile), "Odf 1.0");
       XMLModel[] xmlModelDomHistory13 = {xmlModelOdf12Dom, xmlModelOdf11Dom, xmlModelOdf10Dom};
       XMLModel[] xmlModelDomHistory12 = {xmlModelOdf11Dom, xmlModelOdf10Dom};
       XMLModel[] xmlModelDomHistory11 = {xmlModelOdf10Dom};
-      String targetOdf13 =
-          Paths.get(System.getProperty("user.dir"), TARGET_BASE_DIR, "odf1.3")
-              .normalize()
-              .toString();
-      String targetOdf12 =
-          Paths.get(System.getProperty("user.dir"), TARGET_BASE_DIR, "odf1.2")
-              .normalize()
-              .toString();
-      String targetOdf11 =
-          Paths.get(System.getProperty("user.dir"), TARGET_BASE_DIR, "odf1.1")
-              .normalize()
-              .toString();
-      String targetOdf10 =
-          Paths.get(System.getProperty("user.dir"), TARGET_BASE_DIR, "odf1.0")
-              .normalize()
-              .toString();
+      String targetOdf13 = Paths.get(buildDir, TARGET_REL_DIR, "odf1.3").normalize().toString();
+      String targetOdf12 = Paths.get(buildDir, TARGET_REL_DIR, "odf1.2").normalize().toString();
+      String targetOdf11 = Paths.get(buildDir, TARGET_REL_DIR, "odf1.1").normalize().toString();
+      String targetOdf10 = Paths.get(buildDir, TARGET_REL_DIR, "odf1.0").normalize().toString();
 
       // ******** ODF 1.3 *************
-      //      SchemaToTemplate.run(
-      //          templateFilePathDom,
-      //          templateFileDom,
-      //          xmlModelOdf13Dom,
-      //          xmlModelDomHistory13,
-      //          contextInfoDom,
-      //          targetOdf13,
-      //          "dom-output-files.xml");
-      //
-      //      SchemaToTemplate.run(
-      //          templateFilePathPkg,
-      //          templateFilePkgManifest,
-      //          xmlModelOdf13PkgManifest,
-      //          xmlModelPkgManifestHistory13,
-      //          contextInfoPkg,
-      //          targetOdf13,
-      //          "pkg-manifest-output-files.xml");
-      //
-      //      SchemaToTemplate.run(
-      //          templateFilePathPkg,
-      //          templateFilePkgSignature,
-      //          xmlModelOdf13PkgSignature,
-      //          xmlModelPkgSignatureHistory13,
-      //          contextInfoPkg,
-      //          targetOdf13,
-      //          "pkg-dsig-output-files.xml");
+      SchemaToTemplate.run(
+          templateFilePathDom,
+          templateFileDom,
+          xmlModelOdf13Dom,
+          xmlModelDomHistory13,
+          contextInfoDom,
+          targetOdf13,
+          "odf13-dom-output-files.xml");
+
+      SchemaToTemplate.run(
+          templateFilePathPkg,
+          templateFilePkgManifest,
+          xmlModelOdf13PkgManifest,
+          xmlModelPkgManifestHistory13,
+          contextInfoPkg,
+          targetOdf13,
+          "odf13-pkg-manifest-output-files.xml");
+
+      SchemaToTemplate.run(
+          templateFilePathPkg,
+          templateFilePkgSignature,
+          xmlModelOdf13PkgSignature,
+          xmlModelPkgSignatureHistory13,
+          contextInfoPkg,
+          targetOdf13,
+          "odf13-pkg-dsig-output-files.xml");
 
       // ******** ODF 1.2 *************
       SchemaToTemplate.run(
@@ -289,16 +402,16 @@ public class OdfGenerationTest {
           xmlModelDomHistory12,
           contextInfoDom,
           targetOdf12,
-          "dom-output-files.xml");
+          "odf12-dom-output-files.xml");
 
       SchemaToTemplate.run(
           templateFilePathPkg,
           templateFilePkgManifest,
           xmlModelOdf12PkgManifest,
-          null,
+          xmlModelPkgManifestHistory12,
           contextInfoPkg,
           targetOdf12,
-          "pkg-manifest-output-files.xml");
+          "odf12-pkg-manifest-output-files.xml");
 
       SchemaToTemplate.run(
           templateFilePathPkg,
@@ -307,27 +420,27 @@ public class OdfGenerationTest {
           null,
           contextInfoPkg,
           targetOdf12,
-          "pkg-dsig-output-files.xml");
+          "odf12-pkg-dsig-output-files.xml");
 
       // ******** ODF 1.1 *************
-      //      SchemaToTemplate.run(
-      //          templateFilePathDom,
-      //          templateFileDom,
-      //          xmlModelOdf11Dom,
-      //          xmlModelDomHistory11,
-      //          contextInfoDom,
-      //          targetOdf11,
-      //          "dom-output-files.xml");
+      SchemaToTemplate.run(
+          templateFilePathDom,
+          templateFileDom,
+          xmlModelOdf11Dom,
+          xmlModelDomHistory11,
+          contextInfoDom,
+          targetOdf11,
+          "odf11-dom-output-files.xml");
 
       // ******** ODF 1.0 *************
-      //      SchemaToTemplate.run(
-      //          templateFilePathDom,
-      //          templateFileDom,
-      //          xmlModelOdf10Dom,
-      //          null,
-      //          contextInfoDom,
-      //          targetOdf10,
-      //          "dom-output-files.xml");
+      SchemaToTemplate.run(
+          templateFilePathDom,
+          templateFileDom,
+          xmlModelOdf10Dom,
+          xmlModelPkgManifestHistory11,
+          contextInfoDom,
+          targetOdf10,
+          "odf11-dom-output-files.xml");
 
       // ******** Reference Test *************
       // **2DO: Compare text file content, but ignore line breaking. Showing lines with the
@@ -337,9 +450,9 @@ public class OdfGenerationTest {
       //                    "The new generated sources\n\t"
       //                    + Paths.get(targetODF1.2).toAbsolutePath().toString()
       //                    + "\ndiffer from their reference:\n\t"
-      //                    + Paths.get(REF_BASE_DIR).toAbsolutePath().toString(),
+      //                    + Paths.get(TARGET_REL_DIR).toAbsolutePath().toString(),
       //                    DirectoryCompare.directoryContentEquals(
-      //                            Paths.get(targetODF1.2), Paths.get(REF_BASE_DIR)));
+      //                            Paths.get(targetODF1.2), Paths.get(TARGET_REL_DIR)));
     } catch (Exception ex) {
       LOG.log(Level.SEVERE, null, ex);
       Assert.fail(ex.toString());

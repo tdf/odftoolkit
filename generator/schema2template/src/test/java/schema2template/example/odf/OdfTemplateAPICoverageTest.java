@@ -25,7 +25,6 @@ package schema2template.example.odf;
 
 import static org.junit.Assert.*;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import schema2template.TemplateAPICoverageTest;
 import schema2template.TemplateAPICoverageTest.MethodSet;
@@ -42,7 +41,6 @@ public class OdfTemplateAPICoverageTest {
    * <p>The input parameter count of each method will be tested for additional safety.
    */
   @Test
-  @Ignore
   public void testOdfCoverage() {
     MethodSet methods;
 

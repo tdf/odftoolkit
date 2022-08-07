@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Licensed to the Apache Software Foundation (ASF) under one
-  or more contributor license agreements.  See the NOTICE file
-  distributed with this work for additional information
-  regarding copyright ownership.  The ASF licenses this file
-  to you under the Apache License, Version 2.0 (the
-  "License"); you may not use this file except in compliance
-  with the License.  You may obtain a copy of the License at
+     Licensed to the Apache Software Foundation (ASF) under one
+     or more contributor license agreements.  See the NOTICE file
+     distributed with this work for additional information
+     regarding copyright ownership.  The ASF licenses this file
+     to you under the Apache License, Version 2.0 (the
+     "License"); you may not use this file except in compliance
+     with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+     http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing,
-  software distributed under the License is distributed on an
-  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-  KIND, either express or implied.  See the License for the
-  specific language governing permissions and limitations
-  under the License.
+     Unless required by applicable law or agreed to in writing,
+     software distributed under the License is distributed on an
+     "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+     specific language governing permissions and limitations
+     under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -55,6 +55,7 @@
                     <artifactId>xml-apis</artifactId>
                 </exclusion>
             </exclusions>
+            <version>2.7.2</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -83,23 +84,28 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
+            <version>20190722</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+            <version>1.7.36</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
+            <version>1.7.36</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
+            <version>1.22</version>
         </dependency>
     </dependencies>
     <properties>
@@ -115,12 +121,14 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-webdav-jackrabbit</artifactId>
+                <version>3.5.1</version>
             </extension>
         </extensions>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.2</version>
                 <configuration>
                     <archive>
                         <index>true</index>
@@ -153,6 +161,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
+                <version>5.1.4</version>
                 <executions>
                     <execution>
                         <id>bundle-manifest</id>
@@ -163,9 +172,9 @@
                         <configuration>
                             <instructions>
                                 <Import-Package>
-                                   org.odftoolkit.odfdom;version="${osgi.import.range}",
-                                   org.odftoolkit.odfdom.*;version="${osgi.import.range}",
-                                   *
+                                    org.odftoolkit.odfdom;version="${osgi.import.range}",
+                                    org.odftoolkit.odfdom.*;version="${osgi.import.range}",
+                                    *
                                 </Import-Package>
                             </instructions>
                         </configuration>
@@ -175,6 +184,7 @@
             <plugin>
                 <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>5.0.0</version>
                 <executions>
                     <execution>
                         <id>get-the-git-infos-validate</id>
@@ -201,9 +211,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
                 <configuration>
                     <!--                    <forkCount>3</forkCount>
-                    <reuseForks>true</reuseForks>-->
+                         <reuseForks>true</reuseForks>-->
                     <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
                     <systemPropertyVariables>
                         <odfdom.version>${project.version}</odfdom.version>
@@ -221,8 +232,8 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
                     <!-- Workaround: Build the project using the same JDK version as the project is targetting.
-                        see https://issues.apache.org/jira/browse/MJAVADOC-562
-                        see https://bugs.openjdk.java.net/browse/JDK-8212233
+                         see https://issues.apache.org/jira/browse/MJAVADOC-562
+                         see https://bugs.openjdk.java.net/browse/JDK-8212233
                     -->
                     <source>${jdk.version}</source>
                     <doctitle>ODFDOM v${project.version}</doctitle>
@@ -260,9 +271,9 @@
                         <configuration>
                             <doclint>none</doclint>
                             <!-- NullPointerException if not set!
-                            <additionalOptions>
-                                <additionalOption>${javadoc.opts}</additionalOption>
-                            </additionalOptions>
+                                 <additionalOptions>
+                                 <additionalOption>${javadoc.opts}</additionalOption>
+                                 </additionalOptions>
                             -->
                         </configuration>
                     </execution>
@@ -320,6 +331,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.2</version>
                 <configuration>
                     <excludes>
                         <exclude>**/PerformanceIT.java</exclude>
@@ -347,6 +359,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.2</version>
                 <reportSets>
                     <reportSet>
                         <id>integration-tests</id>
@@ -396,11 +409,17 @@
     <profiles>
         <profile>
             <id>codegen</id>
+            <activation>
+                <property>
+                    <name>codegen</name>
+                </property>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>wagon-maven-plugin</artifactId>
+                        <version>1.0</version>
                         <executions>
                             <execution>
                                 <id>download-odf-schema-v1.2</id>
@@ -481,36 +500,37 @@
             </build>
         </profile>
         <!--
-        <profile>
-            <id>codegen-pkg</id>
-            <activation>
-              <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <defaultGoal>install</defaultGoal>
-                <plugins>
-                    <plugin>
-                        <groupId>org.odftoolkit</groupId>
-                        <artifactId>maven-codegen-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>pkg</id>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>codegen</goal>
-                                </goals>
-                                <configuration>
-                                    <sourceRoot>${basedir}/src/main/java</sourceRoot>
-                                    <schemaFile>${basedir}/src/codegen/resources/pkg/OpenDocument-manifest-schema-v1.2-draft7.rng</schemaFile>
-                                    <configFile>${basedir}/src/codegen/resources/pkg/config.xml</configFile>
-                                    <templateFile>${basedir}/src/codegen/resources/pkg/javacodetemplate.xml</templateFile>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+             <profile>
+             <id>codegen-pkg</id>
+             <activation>
+             <activeByDefault>true</activeByDefault>
+             </activation>
+             <build>
+             <defaultGoal>install</defaultGoal>
+             <plugins>
+             <plugin>
+             <groupId>org.odftoolkit</groupId>
+             <artifactId>maven-codegen-plugin</artifactId>
+             <version>0.8</version>
+             <executions>
+             <execution>
+             <id>pkg</id>
+             <phase>generate-sources</phase>
+             <goals>
+             <goal>codegen</goal>
+             </goals>
+             <configuration>
+             <sourceRoot>${basedir}/src/main/java</sourceRoot>
+             <schemaFile>${basedir}/src/codegen/resources/pkg/OpenDocument-manifest-schema-v1.2-draft7.rng</schemaFile>
+             <configFile>${basedir}/src/codegen/resources/pkg/config.xml</configFile>
+             <templateFile>${basedir}/src/codegen/resources/pkg/javacodetemplate.xml</templateFile>
+             </configuration>
+             </execution>
+             </executions>
+             </plugin>
+             </plugins>
+             </build>
+             </profile>
         -->
         <profile>
             <id>integration-test</id>
@@ -525,6 +545,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.22.2</version>
                         <configuration>
                             <systemPropertyVariables>
                                 <testresourcefolder>performance</testresourcefolder>
@@ -546,9 +567,10 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.22.2</version>
                         <configuration>
                             <!--                    <forkCount>3</forkCount>
-                            <reuseForks>true</reuseForks>-->
+                                 <reuseForks>true</reuseForks>-->
                             <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
                             <systemPropertyVariables>
                                 <odfdom.version>${project.version}</odfdom.version>

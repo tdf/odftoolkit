@@ -2,8 +2,8 @@
 
 ## About ODFDOM
 
-ODFDOM is an OpenDocument Format (ODF) framework. Its purpose
-is to provide an easy common way to create, access and
+ODFDOM is an OpenDocument Format (ODF) framework. Its purpose 
+is to provide an easy common way to create, access and 
 manipulate ODF files, without requiring detailed knowledge of
 the ODF specification. It is designed to provide the ODF
 developer community with an easy lightwork programming API
