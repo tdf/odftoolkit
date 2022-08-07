@@ -23,11 +23,8 @@
  */
 package schema2template.example.odf;
 
-import com.sun.msv.grammar.Expression;
-import com.sun.msv.grammar.Grammar;
 import java.io.File;
 import java.io.FileWriter;
-import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
@@ -52,24 +49,6 @@ public class SchemaToTemplate {
   private static final Logger LOG = Logger.getLogger(SchemaToTemplate.class.getName());
   public static final Boolean DEBUG = Boolean.FALSE;
 
-  public static final String ODF_SCHEMA_ROOT =
-      "examples" + File.separator + "odf" + File.separator + "odf-schemas" + File.separator;
-
-  public static final String ODF10_RNG_FILE =
-      ODF_SCHEMA_ROOT + "OpenDocument-strict-schema-v1.0-os.rng";
-  public static final String ODF11_RNG_FILE =
-      ODF_SCHEMA_ROOT + "OpenDocument-strict-schema-v1.1.rng";
-  public static final String ODF12_RNG_FILE = ODF_SCHEMA_ROOT + "OpenDocument-v1.2-os-schema.rng";
-  public static final String ODF12_MANIFEST_RNG_FILE =
-      ODF_SCHEMA_ROOT + "OpenDocument-v1.2-os-manifest-schema.rng";
-  public static final String ODF12_SIGNATURE_RNG_FILE =
-      ODF_SCHEMA_ROOT + "OpenDocument-v1.2-os-dsig-schema.rng";
-  public static final String ODF13_RNG_FILE = ODF_SCHEMA_ROOT + "OpenDocument-v1.3-schema.rng";
-  public static final String ODF13_MANIFEST_RNG_FILE =
-      ODF_SCHEMA_ROOT + "OpenDocument-v1.3-manifest-schema.rng";
-  public static final String ODF13_SIGNATURE_RNG_FILE =
-      ODF_SCHEMA_ROOT + "OpenDocument-v1.3-dsig-schema.rng";
-
   private SchemaToTemplate() {};
 
   public static void run(
@@ -85,7 +64,7 @@ public class SchemaToTemplate {
     LOG.log(Level.INFO, "Template file name{0}", templatefileName);
     LOG.log(Level.INFO, "Output Base Directory {0}", outputBaseDir);
     LOG.log(Level.INFO, "Output File Name  {0}", outputFileName);
-    LOG.log(Level.INFO, "UserDir {0}", System.getProperty("user.dir"));
+
     if (contextInfo != null) {
       for (int i = 0; i < contextInfo.length; i++) {
         String s = contextInfo[i];
@@ -94,9 +73,7 @@ public class SchemaToTemplate {
     }
 
     try {
-
       fillTemplates(
-          xmlModel.mRootExpression,
           templateBaseDir,
           templatefileName,
           outputBaseDir,
@@ -152,7 +129,6 @@ public class SchemaToTemplate {
   }
 
   private static void fillTemplates(
-      Expression root,
       String templateBaseDir,
       String templatefileName,
       String outputBaseDir,
@@ -172,47 +148,34 @@ public class SchemaToTemplate {
     // http://velocity.apache.org/engine/2.3/developer-guide.html#backward-compatible-space-gobbling
     ve.setProperty(RuntimeConstants.SPACE_GOBBLING, "bc");
     ve.init();
-    createOutputFileList(
-        ve,
-        Paths.get(templateBaseDir).normalize().toString(),
-        templatefileName,
-        outputBaseDir,
-        outputFileName,
-        context);
+    createOutputFileList(ve, templatefileName, outputBaseDir, outputFileName, context);
     LOG.info("output-files.xml created done.");
 
     // Process output-files.xml, create output files
     LOG.fine("Processing output files... ");
-    processFileList(ve, root, outputBaseDir, outputFileName, context);
+    processFileList(ve, outputBaseDir, outputFileName, context);
     LOG.fine("DONE.\n");
   }
 
   private static void createOutputFileList(
       VelocityEngine ve,
-      String templateBaseDir,
       String templatefileName,
       String outputBaseDir,
       String outputFileName,
       VelocityContext context)
       throws Exception {
-    File parentPatch = new File(outputBaseDir + outputFileName).getParentFile();
-    if (!parentPatch.exists()) {
-      parentPatch.mkdirs();
+    File outputFileList = new File(outputBaseDir + File.separator + outputFileName);
+    ensureParentFolders(outputFileList);
+    try (FileWriter listout = new FileWriter(outputFileList)) {
+      String encoding = "utf-8";
+      ve.mergeTemplate(templatefileName, encoding, context, listout);
     }
-    FileWriter listout = new FileWriter(new File(outputBaseDir + outputFileName));
-    String encoding = "utf-8";
-    ve.mergeTemplate(templatefileName, encoding, context, listout);
-    listout.close();
   }
 
   private static void processFileList(
-      VelocityEngine ve,
-      Expression root,
-      String outputBaseDir,
-      String outputFileName,
-      VelocityContext context)
+      VelocityEngine ve, String outputBaseDir, String outputFileName, VelocityContext context)
       throws Exception {
-    File outputFileList = new File(outputBaseDir + outputFileName);
+    File outputFileList = new File(outputBaseDir + File.separator + outputFileName);
     List<OutputFileListEntry> fl = OutputFileListHandler.readFileListFile(outputFileList);
 
     for (OutputFileListEntry f : fl) {
@@ -222,18 +185,18 @@ public class SchemaToTemplate {
         case FILE:
           LOG.log(
               Level.INFO,
-              "Processing line {0}: Generating file {1}\n",
+              "Processing line{0}: Generating file {1}\n",
               new Object[] {f.getLineNumber(), generateFilename(f.getAttribute("path"))});
           ;
           String contextAttrValue = f.getAttribute("contextNode");
           if (contextAttrValue != null) {
             context.put("contextNode", contextAttrValue);
-            LOG.info("Added to context: contextNode : " + contextAttrValue);
+            LOG.log(Level.INFO, "Added to context: contextNode : {0}", contextAttrValue);
           }
           String param = f.getAttribute("param");
           if (param != null) {
             context.put("param", param);
-            LOG.info("adding param: " + f.getAttribute("param"));
+            LOG.log(Level.INFO, "adding param: {0}", f.getAttribute("param"));
           }
 
           File out =
@@ -248,60 +211,6 @@ public class SchemaToTemplate {
           break;
       }
     }
-  }
-
-  /**
-   * Load and parse the ODF 1.0 Schema.
-   *
-   * @return MSV Expression Tree of ODF 1.0 RelaxNG schema (more specific: The tree's MSV root
-   *     expression)
-   * @throws Exception
-   */
-  public static Grammar loadSchemaODF10() throws Exception {
-    return XMLModel.loadSchema(getAbsolutePathFromClassloader(ODF10_RNG_FILE));
-  }
-
-  /**
-   * Load and parse the ODF 1.1 Schema.
-   *
-   * @return MSV Expression Tree of ODF 1.1 RelaxNG schema (more specific: The tree's MSV root
-   *     expression)
-   * @throws Exception
-   */
-  public static Grammar loadSchemaODF11() throws Exception {
-    return XMLModel.loadSchema(getAbsolutePathFromClassloader(ODF11_RNG_FILE));
-  }
-
-  /**
-   * Load and parse the ODF 1.2 Schema.
-   *
-   * @return MSV Expression Tree of ODF 1.2 RelaxNG schema (more specific: The tree's MSV root
-   *     expression)
-   * @throws Exception
-   */
-  public static Grammar loadSchemaODF12() throws Exception {
-    return XMLModel.loadSchema(getAbsolutePathFromClassloader(ODF12_RNG_FILE));
-  }
-
-  /**
-   * Load and parse the ODF 1.3 Schema.
-   *
-   * @return MSV Expression Tree of ODF 1.3 RelaxNG schema (more specific: The tree's MSV root
-   *     expression)
-   * @throws Exception
-   */
-  public static Grammar loadSchemaODF13() throws Exception {
-    return XMLModel.loadSchema(getAbsolutePathFromClassloader(ODF13_RNG_FILE));
-  }
-
-  private static String getAbsolutePathFromClassloader(String resourcePath) {
-    String path = null;
-    try {
-      path = SchemaToTemplate.class.getClassLoader().getResource(resourcePath).toURI().getPath();
-    } catch (URISyntaxException ex) {
-      Logger.getLogger(SchemaToTemplate.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    return path;
   }
 
   private static String generateFilename(String rawName) {

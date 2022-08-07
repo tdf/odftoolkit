@@ -58,7 +58,7 @@ public class OdfFamilyPropertiesPatternMatcherTest {
   /** Test of getProperties method, of class OdfFamilyPropertiesPatternMatcher. */
   @Test
   public void testGetProperties() throws Exception {
-    Grammar g = SchemaToTemplate.loadSchemaODF12();
+    Grammar g = PuzzlePieceTest.loadSchemaODF12();
     OdfFamilyPropertiesPatternMatcher instance = new OdfFamilyPropertiesPatternMatcher(g);
 
     String result = OdfFamilyPropertiesPatternMatcher.asString(instance.getFamilyProperties());

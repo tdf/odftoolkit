@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Licensed to the Apache Software Foundation (ASF) under one
-  or more contributor license agreements.  See the NOTICE file
-  distributed with this work for additional information
-  regarding copyright ownership.  The ASF licenses this file
-  to you under the Apache License, Version 2.0 (the
-  "License"); you may not use this file except in compliance
-  with the License.  You may obtain a copy of the License at
+     Licensed to the Apache Software Foundation (ASF) under one
+     or more contributor license agreements.  See the NOTICE file
+     distributed with this work for additional information
+     regarding copyright ownership.  The ASF licenses this file
+     to you under the Apache License, Version 2.0 (the
+     "License"); you may not use this file except in compliance
+     with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+     http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing,
-  software distributed under the License is distributed on an
-  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-  KIND, either express or implied.  See the License for the
-  specific language governing permissions and limitations
-  under the License.
+     Unless required by applicable law or agreed to in writing,
+     software distributed under the License is distributed on an
+     "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+     specific language governing permissions and limitations
+     under the License.
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -29,7 +29,7 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>26</version>
+        <version>27</version>
         <relativePath/>
     </parent>
 
@@ -52,45 +52,22 @@
         <release.zip.doc>odftoolkit-${project.version}-doc.zip</release.zip.doc>
         <release.zip.src>odftoolkit-${project.version}-src.zip</release.zip.src>
         <osgi.import.range>[1.0,2)</osgi.import.range>
-        <version.saxon-he>11.3</version.saxon-he>
     </properties>
 
 
     <!-- At root project level defining dependencies useable across all projects.
-    Making version management easy and consistent! -->
+         Making version management easy and consistent! -->
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>xerces</groupId>
                 <artifactId>xercesImpl</artifactId>
-                <exclusions>
-                    <exclusion>
-                        <groupId>xml-apis</groupId>
-                        <artifactId>xml-apis</artifactId>
-                    </exclusion>
-                </exclusions>
                 <version>2.12.2</version>
-            </dependency>
-            <dependency>
-                <groupId>xalan</groupId>
-                <artifactId>serializer</artifactId>
-                <exclusions>
-                    <exclusion>
-                        <groupId>xml-apis</groupId>
-                        <artifactId>xml-apis</artifactId>
-                    </exclusion>
-                </exclusions>
-                <version>2.7.2</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.13.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>3.12.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.jena</groupId>
@@ -103,21 +80,21 @@
                 <classifier>tests</classifier>
                 <version>4.5.0</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.tinkerpop</groupId>
+                <artifactId>neo4j-gremlin</artifactId>
+                <version>3.6.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tinkerpop</groupId>
+                <artifactId>tinkergraph-gremlin</artifactId>
+                <version>3.6.0</version>
+            </dependency>
             <!-- Jena 3.16 requires the following slf4j API -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.36</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
-                <version>1.7.36</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-compress</artifactId>
-                <version>1.21</version>
+                <version>1.7.31</version>
             </dependency>
             <dependency>
                 <groupId>net.rootdev</groupId>
@@ -134,109 +111,20 @@
                 <artifactId>commons-fileupload</artifactId>
                 <version>1.4</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.jopendocument/isorelax-jaxp-bridge-ILM -->
-            <dependency>
-                <groupId>org.jopendocument</groupId>
-                <artifactId>isorelax-jaxp-bridge-ILM</artifactId>
-                <version>1.1</version>
-            </dependency>
-            <!-- org.iso_relax.verifier.VerifierConfigurationException -->
-            <dependency>
-                <groupId>com.helger</groupId>
-                <artifactId>ph-isorelax</artifactId>
-                <version>1.1.1</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.json/json -->
-            <dependency>
-                <groupId>org.json</groupId>
-                <artifactId>json</artifactId>
-                <version>20190722</version>
-            </dependency>
-            <dependency>
-                <!-- a reliable XSLT processor -->
-                <groupId>net.sf.saxon</groupId>
-                <artifactId>Saxon-HE</artifactId>
-                <version>${version.saxon-he}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>xml-apis</groupId>
-                        <artifactId>xml-apis</artifactId>
-                    </exclusion>
-                </exclusions>
-                <!-- test scope does not work with exec-maven-plugin of XSLT Runner -->
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity-engine-core</artifactId>
-                <version>2.3</version>
-            </dependency>
             <dependency>
                 <groupId>net.java.dev.msv</groupId>
                 <artifactId>msv-core</artifactId>
-                <!--<version>2021.0-SNAPSHOT</version>-->
-                <version>2013.6.1</version>
-                <!--<version>2017.3-SNAPSHOT</version>-->
+                <version>2022.7</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.tinkerpop</groupId>
-                <artifactId>neo4j-gremlin</artifactId>
-                <version>3.6.0</version>
+                <groupId>org.iso_relax.verifier.jaxp.validation</groupId>
+                <artifactId>isorelax-jaxp-bridge</artifactId>
+                <version>1.0</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.tinkerpop</groupId>
-                <artifactId>tinkergraph-gremlin</artifactId>
-                <version>3.6.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-plugin-api</artifactId>
-                <version>3.8.6</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-core</artifactId>
-                <version>3.8.6</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-compat</artifactId>
-                <version>3.8.6</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-artifact</artifactId>
-                <version>3.8.6</version>
-                <scope>provided</scope>
-            </dependency>
-            <!-- dependencies to annotations
-            https://maven.apache.org/plugin-tools/maven-plugin-plugin/examples/using-annotations.html#POM_configuration -->
-            <dependency>
-                <groupId>org.apache.maven.plugin-tools</groupId>
-                <artifactId>maven-plugin-annotations</artifactId>
-                <version>3.6.4</version>
-                <optional>true</optional> <!-- annotations are not used at runtime because @Retention(value=CLASS), they are needed only to build the plugin -->
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven.plugin-tools</groupId>
-                <artifactId>maven-plugin-tools</artifactId>
-                <version>3.6.4</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven.plugin-testing</groupId>
-                <artifactId>maven-plugin-testing-harness</artifactId>
-                <version>3.3.0</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.maven</groupId>
-                <artifactId>maven-project</artifactId>
-                <version>2.2.1</version>
-                <scope>provided</scope>
+                <groupId>org.apache.ant</groupId>
+                <artifactId>ant</artifactId>
+                <version>1.10.11</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -337,9 +225,9 @@
     <mailingLists>
         <mailingList>
             <!--
-            Help: <dev+help@odftoolkit.org>
-            Digest subscription: <dev+subscribe-digest@odftoolkit.org>
-            No-mail subscription: <dev+subscribe-nomail@odftoolkit.org>
+                 Help: <dev+help@odftoolkit.org>
+                 Digest subscription: <dev+subscribe-digest@odftoolkit.org>
+                 No-mail subscription: <dev+subscribe-nomail@odftoolkit.org>
             -->
             <post>dev@odftoolkit.org</post>
             <subscribe>dev+subscribe@odftoolkit.org</subscribe>
@@ -351,19 +239,7 @@
 
 
     <build>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-webdav-jackrabbit</artifactId>
-                <version>3.5.1</version>
-            </extension>
-        </extensions>
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>wagon-maven-plugin</artifactId>
-                <version>1.0</version>
-            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
@@ -375,59 +251,23 @@
                     <testTarget>${jdk.version}</testTarget>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <!--
-                    <compilerArgs>
-                        <arg>-Xlint:unchecked</arg>
-                        <arg>-Xlint:deprecation</arg>
-                    </compilerArgs>
+                         <compilerArgs>
+                         <arg>-Xlint:unchecked</arg>
+                         <arg>-Xlint:deprecation</arg>
+                         </compilerArgs>
                     -->
                     <!--
-                    <compilerArgs>
-                        <arg>-verbose</arg>
-                        <arg>-Xlint:all,-options,-path</arg>
-                    </compilerArgs>
+                         <compilerArgs>
+                         <arg>-verbose</arg>
+                         <arg>-Xlint:all,-options,-path</arg>
+                         </compilerArgs>
                     -->
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>5.1.4</version>
-            </plugin>
-            <plugin>
-                <groupId>io.github.git-commit-id</groupId>
-                <artifactId>git-commit-id-maven-plugin</artifactId>
-                <version>5.0.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.4.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <!-- Explicit version required for fix on systemPropertyVariables -->
-                <version>2.22.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>xml-maven-plugin</artifactId>
-                <version>1.0.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
             </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
@@ -448,10 +288,10 @@
             <plugin>
                 <groupId>com.cosium.code</groupId>
                 <artifactId>git-code-format-maven-plugin</artifactId>
-                <version>2.6</version>
+                <version>2.7</version>
                 <!-- BUG WORKAROUND: unformatted/uncommitted new files break the build
-                    run from command-line to format:
-                    mvn git-code-format:format-code -Dgcf.globPattern=**/*
+                     run from command-line to format:
+                     mvn git-code-format:format-code -D"gcf.globPattern=**/*"
                 -->
                 <executions>
                     <!-- On commit, format the modified java files -->
@@ -462,7 +302,7 @@
                         </goals>
                     </execution>
                     <!-- On Maven verify phase, fail if any file
-                    (including unmodified) is badly formatted -->
+                         (including unmodified) is badly formatted -->
                     <execution>
                         <id>validate-code-format</id>
                         <goals>
@@ -549,7 +389,6 @@
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
     <profiles>
@@ -560,7 +399,6 @@
                     <plugin>
                         <groupId>org.apache.rat</groupId>
                         <artifactId>apache-rat-plugin</artifactId>
-                        <version>0.13</version>
                         <configuration>
                             <excludes>
                                 <!-- for all projects -->
@@ -610,11 +448,11 @@
             </build>
         </profile>
         <!-- Profile for deploying to the Sonatype repository, which
-        requires GPG signatures
-        see
-        https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
-        https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
-        https://issues.sonatype.org/browse/OSSRH-960
+             requires GPG signatures
+             see
+             https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+             https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
+             https://issues.sonatype.org/browse/OSSRH-960
         -->
         <!-- GPG Signature on release -->
         <profile>
@@ -639,7 +477,7 @@
                                 <phase>verify</phase>
                                 <configuration>
                                     <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
-                                    https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
+                                         https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
                                     <keyname>${gpg.keyname}</keyname>
                                     <passphraseServerId>${gpg.passphraseServerId}</passphraseServerId>
                                 </configuration>

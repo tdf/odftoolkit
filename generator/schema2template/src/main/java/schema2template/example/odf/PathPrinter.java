@@ -43,7 +43,6 @@ import schema2template.model.MSVExpressionType;
 import schema2template.model.MSVExpressionVisitorType;
 import schema2template.model.MSVNameClassVisitorList;
 import schema2template.model.PuzzlePiece;
-import schema2template.model.PuzzlePieceSet;
 
 /**
  * ODF example class to print the MSV expressions in between a PuzzlePiece parent element and a
@@ -144,7 +143,7 @@ public class PathPrinter {
     return retval;
   }
 
-  private static Grammar parseOdfSchema(File rngFile) throws Exception {
+  private static Grammar parseOdfGrammar(File rngFile) throws Exception {
     SAXParserFactory factory = SAXParserFactory.newInstance();
     factory.setNamespaceAware(true);
 
@@ -158,12 +157,8 @@ public class PathPrinter {
     return grammar;
   }
 
+  /* @Svante 2DO: Create a test example instead
   public static void main(String[] args) throws Exception {
-    // originally:
-    // schema2template\src\main\resources\examples\odf\odf-schemas\OpenDocument-v1.2-os-schema.rng
-    //
-    // schema2template\src\main\resources\examples\odf\odf-schemas\OpenDocument-v1.2-os-schema.rng
-    // better via classpath: generator\schema2template\target\classes\examples\odf\odf-schemas
     System.out.println(
         "ODF 1.2 RNG file is located at '"
             + System.getProperty(
@@ -171,17 +166,17 @@ public class PathPrinter {
             + File.separator
             + "src\\main\\resources"
             + File.separator
-            + SchemaToTemplate
+            + OdfGrammarToTemplate
                 .ODF12_RNG_FILE // examples\odf\odf-schemas\OpenDocument-v1.2-os-schema.rng'
             + "'");
     Grammar grammar =
-        parseOdfSchema(
+        parseOdfGrammar(
             new File(
                 System.getProperty("user.dir")
                     + File.separator
                     + "src\\main\\resources"
                     + File.separator
-                    + SchemaToTemplate.ODF12_RNG_FILE));
+                    + OdfGrammarToTemplate.ODF12_RNG_FILE));
     PuzzlePieceSet elements = new PuzzlePieceSet();
     PuzzlePieceSet attributes = new PuzzlePieceSet();
     PuzzlePiece.extractPuzzlePieces(grammar, elements, attributes, null);
@@ -223,5 +218,5 @@ public class PathPrinter {
         System.out.println(s);
       }
     }
-  }
+  }*/
 }

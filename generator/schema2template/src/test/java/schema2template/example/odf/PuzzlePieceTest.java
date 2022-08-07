@@ -26,20 +26,23 @@ package schema2template.example.odf;
 import static schema2template.example.odf.SchemaToTemplate.*;
 
 import com.sun.msv.grammar.Expression;
+import com.sun.msv.grammar.Grammar;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 import schema2template.model.MSVExpressionIterator;
 import schema2template.model.PuzzlePiece;
 import schema2template.model.PuzzlePieceSet;
+import schema2template.model.XMLModel;
 
 public class PuzzlePieceTest {
 
@@ -87,40 +90,87 @@ public class PuzzlePieceTest {
   // @office:process-content)
   private static final int ODF13_ATTRIBUTE_NUMBER = 1317;
   private static final int ODF13_ELEMENT_DUPLICATES = 7;
-  private static final int ODF13_ATTRIBUTE_DUPLICATES = 117;
+  private static final int ODF13_ATTRIBUTE_DUPLICATES =
+      519; // 2DO Svante earlier 117 what is correct?
 
-  private static final String OUTPUT_DUMP_ODF10 =
-      System.getProperty("user.dir")
+  /**
+   * Via Maven pom.xml (surefire test plugin) received System variable of the absolute path of the
+   * target build directory
+   */
+  private static String buildDir = System.getProperty("schema2template.build.dir");
+
+  private static final String ODF_GRAMMAR_ROOT =
+      Paths.get(
+              buildDir
+                  + File.separator
+                  + ".."
+                  + File.separator
+                  + "src"
+                  + File.separator
+                  + "test"
+                  + File.separator
+                  + "resources"
+                  + File.separator
+                  + "test-input"
+                  + File.separator
+                  + "odf"
+                  + File.separator
+                  + "grammar")
+          .normalize()
+          .toString();
+
+  public static final String ODF10_RNG_FILE =
+      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-strict-schema-v1.0-os.rng";
+  public static final String ODF11_RNG_FILE =
+      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-strict-schema-v1.1.rng";
+  public static final String ODF12_RNG_FILE =
+      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-v1.2-os-schema.rng";
+  public static final String ODF12_MANIFEST_RNG_FILE =
+      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-v1.2-os-manifest-schema.rng";
+  public static final String ODF12_SIGNATURE_RNG_FILE =
+      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-v1.2-os-dsig-schema.rng";
+  public static final String ODF13_RNG_FILE =
+      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-v1.3-schema.rng";
+  public static final String ODF13_MANIFEST_RNG_FILE =
+      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-v1.3-manifest-schema.rng";
+  public static final String ODF13_SIGNATURE_RNG_FILE =
+      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-v1.3-dsig-schema.rng";
+
+  private static final String TARGET_REL_DIR =
+      "generated-sources"
           + File.separator
-          + "target"
+          + "java"
           + File.separator
-          + "odf10-msvtree.dump";
-  private static final String OUTPUT_DUMP_ODF11 =
-      System.getProperty("user.dir")
+          + "odf"
           + File.separator
-          + "target"
-          + File.separator
-          + "odf11-msvtree.dump";
-  private static final String OUTPUT_DUMP_ODF12 =
-      System.getProperty("user.dir")
-          + File.separator
-          + "target"
-          + File.separator
-          + "odf12-msvtree.dump";
-  private static final String OUTPUT_DUMP_ODF13 =
-      System.getProperty("user.dir")
-          + File.separator
-          + "target"
-          + File.separator
-          + "odf13-msvtree.dump";
+          + "msv-dump"
+          + File.separator;
+
+  private static final String TARGET_ROOT =
+      Paths.get(System.getProperty("schema2template.build.dir"), TARGET_REL_DIR)
+          .normalize()
+          .toString();
+
+  private static final String TARGET_DUMP_FILE_ODF10 =
+      TARGET_ROOT + File.separator + "odf10-msvtree.dump";
+  private static final String TARGET_DUMP_FILE_ODF11 =
+      TARGET_ROOT + File.separator + "odf11-msvtree.dump";
+  private static final String TARGET_DUMP_FILE_ODF12 =
+      TARGET_ROOT + File.separator + "odf12-msvtree.dump";
+  private static final String TARGET_DUMP_FILE_ODF13 =
+      TARGET_ROOT + File.separator + "odf13-msvtree.dump";
+
   private static final String TEST_REFERENCE_DIR =
-      "target"
+      System.getProperty("schema2template.build.dir")
           + File.separator
           + "test-classes"
           + File.separator
-          + "examples"
+          + "test-reference"
           + File.separator
-          + "odf";
+          + "odf"
+          + File.separator
+          + "msv-dump";
+
   private static final String OUTPUT_REF_ODF10 =
       TEST_REFERENCE_DIR + File.separator + "odf10-msvtree.ref";
   private static final String OUTPUT_REF_ODF11 =
@@ -130,6 +180,11 @@ public class PuzzlePieceTest {
   private static final String OUTPUT_REF_ODF13 =
       TEST_REFERENCE_DIR + File.separator + "odf13-msvtree.ref";
 
+  @Before
+  public void intialize() {
+    new File(TARGET_ROOT).mkdirs();
+  }
+
   /**
    * Test: Use the MSV
    *
@@ -137,34 +192,45 @@ public class PuzzlePieceTest {
    * extract PuzzlePieces out of a XML schema
    */
   @Test
-  @Ignore
   public void testMSVExpressionTree() {
     try {
-      Expression odf10Root = SchemaToTemplate.loadSchemaODF10().getTopLevel();
+      Expression odf10Root = loadSchemaODF10().getTopLevel();
       String odf10Dump = MSVExpressionIterator.dumpMSVExpressionTree(odf10Root);
-      LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP_ODF10);
-      PrintWriter out0 = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF10));
-      out0.print(odf10Dump);
-      out0.close();
+      LOG.log(
+          Level.INFO,
+          "Writing MSV RelaxNG tree for ODF 1.0 into file: {0}",
+          TARGET_DUMP_FILE_ODF10);
+      try (PrintWriter out0 = new PrintWriter(new FileWriter(TARGET_DUMP_FILE_ODF10))) {
+        out0.print(odf10Dump);
+      }
 
-      Expression odf11Root = SchemaToTemplate.loadSchemaODF11().getTopLevel();
+      Expression odf11Root = loadSchemaODF11().getTopLevel();
       String odf11Dump = MSVExpressionIterator.dumpMSVExpressionTree(odf11Root);
-      LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP_ODF11);
-      PrintWriter out1 = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF11));
+      LOG.log(
+          Level.INFO,
+          "Writing MSV RelaxNG tree for ODF 1.1 into file: {0}",
+          TARGET_DUMP_FILE_ODF11);
+      PrintWriter out1 = new PrintWriter(new FileWriter(TARGET_DUMP_FILE_ODF11));
       out1.print(odf11Dump);
       out1.close();
 
-      Expression odf12Root = SchemaToTemplate.loadSchemaODF12().getTopLevel();
+      Expression odf12Root = loadSchemaODF12().getTopLevel();
       String odf12Dump = MSVExpressionIterator.dumpMSVExpressionTree(odf12Root);
-      LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP_ODF12);
-      PrintWriter out2 = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF12));
+      LOG.log(
+          Level.INFO,
+          "Writing MSV RelaxNG tree for ODF 1.2 into file: {0}",
+          TARGET_DUMP_FILE_ODF12);
+      PrintWriter out2 = new PrintWriter(new FileWriter(TARGET_DUMP_FILE_ODF12));
       out2.print(odf12Dump);
       out2.close();
 
-      Expression odf13Root = SchemaToTemplate.loadSchemaODF13().getTopLevel();
+      Expression odf13Root = loadSchemaODF13().getTopLevel();
       String odf13Dump = MSVExpressionIterator.dumpMSVExpressionTree(odf13Root);
-      LOG.info("Writing MSV RelaxNG tree into file: " + OUTPUT_DUMP_ODF13);
-      PrintWriter out3 = new PrintWriter(new FileWriter(OUTPUT_DUMP_ODF13));
+      LOG.log(
+          Level.INFO,
+          "Writing MSV RelaxNG tree for ODF 1.3 into file: {0}",
+          TARGET_DUMP_FILE_ODF13);
+      PrintWriter out3 = new PrintWriter(new FileWriter(TARGET_DUMP_FILE_ODF13));
       out3.print(odf13Dump);
       out3.close();
 
@@ -173,7 +239,7 @@ public class PuzzlePieceTest {
         String errorMsg =
             "There is a difference between the expected outcome of the parsed ODF 1.0 tree.\n"
                 + "Please compare the output:\n\t'"
-                + OUTPUT_DUMP_ODF10
+                + TARGET_DUMP_FILE_ODF10
                 + "'\nwith the reference\n\t'"
                 + ODF10_RNG_FILE;
         LOG.severe(errorMsg);
@@ -185,7 +251,7 @@ public class PuzzlePieceTest {
         String errorMsg =
             "There is a difference between the expected outcome of the parsed ODF 1.1 tree.\n"
                 + "Please compare the output:\n\t'"
-                + OUTPUT_DUMP_ODF11
+                + TARGET_DUMP_FILE_ODF11
                 + "'\nwith the reference\n\t'"
                 + ODF11_RNG_FILE;
         LOG.severe(errorMsg);
@@ -197,7 +263,7 @@ public class PuzzlePieceTest {
         String errorMsg =
             "There is a difference between the expected outcome of the parsed ODF 1.2 tree.\n"
                 + "Please compare the output:\n\t'"
-                + OUTPUT_DUMP_ODF12
+                + TARGET_DUMP_FILE_ODF12
                 + "'\nwith the reference\n\t'"
                 + ODF12_RNG_FILE;
         LOG.severe(errorMsg);
@@ -208,7 +274,7 @@ public class PuzzlePieceTest {
         String errorMsg =
             "There is a difference between the expected outcome of the parsed ODF 1.3 tree.\n"
                 + "Please compare the output:\n\t'"
-                + OUTPUT_DUMP_ODF13
+                + TARGET_DUMP_FILE_ODF13
                 + "'\nwith the reference\n\t'"
                 + ODF13_RNG_FILE;
         LOG.severe(errorMsg);
@@ -248,7 +314,6 @@ public class PuzzlePieceTest {
    * extract PuzzlePieces out of a XML schema
    */
   @Test
-  @Ignore
   // due to issue https://issues.apache.org/jira/browse/ODFTOOLKIT-180
   public void testExtractPuzzlePieces() {
     try {
@@ -281,10 +346,7 @@ public class PuzzlePieceTest {
       PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          SchemaToTemplate.loadSchemaODF13(),
-          allElements_ODF13,
-          allAttributes_ODF13,
-          SchemaToTemplate.ODF13_RNG_FILE);
+          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF13_RNG_FILE);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
       checkFoundNumber(allElements_ODF13.withoutMultiples(), ODF13_ELEMENT_NUMBER, "element");
       checkFoundNumber(allAttributes_ODF13.withoutMultiples(), ODF13_ATTRIBUTE_NUMBER, "attribute");
@@ -304,30 +366,21 @@ public class PuzzlePieceTest {
    */
   @Test
   public void testExtractPuzzlePiecesWithDuplicates() {
-    int foundElementDuplicates = -1;
-    int foundAttributeDuplicates = -1;
+    int foundElementDuplicates;
+    int foundAttributeDuplicates;
     try {
       PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          SchemaToTemplate.loadSchemaODF13(),
-          allElements_ODF13,
-          allAttributes_ODF13,
-          SchemaToTemplate.ODF13_RNG_FILE);
+          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF13_RNG_FILE);
       allElements_ODF13 = new PuzzlePieceSet();
       allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          SchemaToTemplate.loadSchemaODF13(),
-          allElements_ODF13,
-          allAttributes_ODF13,
-          SchemaToTemplate.ODF13_RNG_FILE);
+          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF13_RNG_FILE);
       allElements_ODF13 = new PuzzlePieceSet();
       allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          SchemaToTemplate.loadSchemaODF13(),
-          allElements_ODF13,
-          allAttributes_ODF13,
-          SchemaToTemplate.ODF13_RNG_FILE);
+          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF13_RNG_FILE);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
       foundElementDuplicates = allElements_ODF13.size() - ODF13_ELEMENT_NUMBER;
       foundAttributeDuplicates = allAttributes_ODF13.size() - ODF13_ATTRIBUTE_NUMBER;
@@ -337,7 +390,8 @@ public class PuzzlePieceTest {
                 + "Expected: '"
                 + ODF13_ELEMENT_DUPLICATES
                 + "'\tfound:'"
-                + foundElementDuplicates;
+                + foundElementDuplicates
+                + "'";
         LOG.severe(errorMsg);
         Assert.fail(errorMsg);
       }
@@ -388,5 +442,49 @@ public class PuzzlePieceTest {
       LOG.info("********************");
       Assert.fail(errorMsg);
     }
+  }
+
+  /**
+   * Load and parse the ODF 1.0 Schema.
+   *
+   * @return MSV Expression Tree of ODF 1.0 RelaxNG schema (more specific: The tree's MSV root
+   *     expression)
+   * @throws Exception
+   */
+  static Grammar loadSchemaODF10() throws Exception {
+    return XMLModel.loadSchema(ODF10_RNG_FILE);
+  }
+
+  /**
+   * Load and parse the ODF 1.1 Schema.
+   *
+   * @return MSV Expression Tree of ODF 1.1 RelaxNG schema (more specific: The tree's MSV root
+   *     expression)
+   * @throws Exception
+   */
+  static Grammar loadSchemaODF11() throws Exception {
+    return XMLModel.loadSchema(ODF11_RNG_FILE);
+  }
+
+  /**
+   * Load and parse the ODF 1.2 Schema.
+   *
+   * @return MSV Expression Tree of ODF 1.2 RelaxNG schema (more specific: The tree's MSV root
+   *     expression)
+   * @throws Exception
+   */
+  static Grammar loadSchemaODF12() throws Exception {
+    return XMLModel.loadSchema(ODF12_RNG_FILE);
+  }
+
+  /**
+   * Load and parse the ODF 1.3 Schema.
+   *
+   * @return MSV Expression Tree of ODF 1.3 RelaxNG schema (more specific: The tree's MSV root
+   *     expression)
+   * @throws Exception
+   */
+  static Grammar loadSchemaODF13() throws Exception {
+    return XMLModel.loadSchema(ODF13_RNG_FILE);
   }
 }

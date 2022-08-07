@@ -39,11 +39,17 @@
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.msv</groupId>
+            <artifactId>msv-core</artifactId>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.jopendocument/isorelax-jaxp-bridge-ILM -->
         <dependency>
             <groupId>org.jopendocument</groupId>
             <artifactId>isorelax-jaxp-bridge-ILM</artifactId>
+            <version>1.1</version>
         </dependency>
         <dependency>
             <groupId>xerces</groupId>
@@ -54,10 +60,6 @@
                     <artifactId>xml-apis</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>net.java.dev.msv</groupId>
-            <artifactId>msv-core</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -76,6 +78,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-webdav-jackrabbit</artifactId>
+                <version>3.5.2</version>
             </extension>
         </extensions>
         <plugins>
@@ -94,6 +97,7 @@
             <plugin>
                 <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>5.0.0</version>
                 <executions>
                     <execution>
                         <id>get-the-git-infos</id>
@@ -111,6 +115,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
                 <configuration>
                     <archive>
                         <index>true</index>
@@ -143,6 +148,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
                 <configuration>
                     <excludes>
                         <exclude>**/*.java</exclude>
@@ -233,6 +239,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.2</version>
                 <configuration>
                     <includes>
                         <include>**/*.java</include>
@@ -280,6 +287,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.2</version>
                 <reportSets>
                     <reportSet>
                         <id>integration-tests</id>
