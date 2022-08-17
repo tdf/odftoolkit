@@ -36,6 +36,7 @@ import java.util.logging.Logger;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
+import schema2template.GenerationParameters;
 import schema2template.OutputFileListEntry;
 import schema2template.OutputFileListHandler;
 import schema2template.model.XMLModel;
@@ -50,6 +51,19 @@ public class SchemaToTemplate {
   public static final Boolean DEBUG = Boolean.FALSE;
 
   private SchemaToTemplate() {};
+
+  public static void run(List<GenerationParameters> generations) {
+    System.err.println(
+        "Schema2template code generations triggered " + generations.size() + " times!");
+    for (int i = 0; i < generations.size(); i++) {
+      System.err.println("\n");
+      System.err.println("GrammarVersion: " + generations.get(i).getGrammarVersion());
+      System.err.println("GrammarID: " + generations.get(i).getGrammarID());
+      System.err.println("Grammar: " + generations.get(i).getGrammar());
+      System.err.println("GrammarAddOn: " + generations.get(i).getGrammarAddon());
+      System.err.println("Grammar2Templates: " + generations.get(i).getGrammar2Templates());
+    }
+  }
 
   public static void run(
       String templateBaseDir,

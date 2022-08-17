@@ -30,9 +30,10 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
+import schema2template.GenerationParameters;
 
 /**
- * Maven Mojo that triggers the generation of files from XML Grammar into Velocity file templates.
+ * Maven Mojo that triggers the generations of files from XML Grammar into Velocity file templates.
  *
  * @phase generate-sources
  * @description As example and its mjor use case see the ODFDOM Code Generator:
@@ -46,7 +47,7 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 public class CodeGenMojo extends AbstractMojo {
 
   @Parameter(property = "generations")
-  private List<GenerationParameters> generationParameters;
+  private List<GenerationParameters> generations;
 
   /* (non-Javadoc)
    * @see org.apache.maven.plugin.Mojo#execute()
@@ -55,18 +56,18 @@ public class CodeGenMojo extends AbstractMojo {
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
     try {
-      System.out.println(
-          "Schema2template code generation started " + generationParameters.size() + " times!");
-      for (int i = 0; i < generationParameters.size(); i++) {
-        System.out.println("\nn");
-        System.out.println("GrammarVersion" + generationParameters.get(i).getGrammarVersion());
-        System.out.println("GrammarID" + generationParameters.get(i).getGrammarID());
-        System.out.println("Grammar" + generationParameters.get(i).getGrammar());
-        System.out.println("GrammarAddOn" + generationParameters.get(i).getGrammarAddon());
-        System.out.println(
-            "Grammar2Templates" + generationParameters.get(i).getGrammar2Templates());
+      System.err.println(
+          "Schema2template code generation started " + generations.size() + " times!");
+      for (int i = 0; i < generations.size(); i++) {
+        System.err.println("\n");
+        System.err.println("GrammarVersion: " + generations.get(i).getGrammarVersion());
+        System.err.println("GrammarID: " + generations.get(i).getGrammarID());
+        System.err.println("Grammar: " + generations.get(i).getGrammar());
+        System.err.println("GrammarAddOn: " + generations.get(i).getGrammarAddon());
+        System.err.println("Grammar2Templates: " + generations.get(i).getGrammar2Templates());
       }
-
+      schema2template.example.odf.SchemaToTemplate.run(generations);
+      System.err.println("Mojo is started*********!!");
     } catch (Exception ex) {
       getLog().error("Failed to parse template.");
       getLog().error(ex);
