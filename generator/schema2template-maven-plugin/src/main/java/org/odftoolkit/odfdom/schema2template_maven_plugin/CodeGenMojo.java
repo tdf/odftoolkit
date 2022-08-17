@@ -3,6 +3,7 @@
  *
  * Copyright 2009 Benson I. Margulies. All rights reserved.
  * Copyright 2009, 2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright 2022 Svante Schubert. All rights reserved.
  *
  * Use is subject to license terms.
  *
@@ -21,42 +22,55 @@
  */
 package org.odftoolkit.odfdom.schema2template_maven_plugin;
 
+import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 
 /**
- * Generate Java code for ODFDOM.
+ * Maven Mojo that triggers the generation of files from XML Grammar into Velocity file templates.
  *
  * @phase generate-sources
- * @description ODFDOM Code Generator
+ * @description As example and its mjor use case see the ODFDOM Code Generator:
+ *     https://odftoolkit.org/generator/index.html
  */
 @Mojo(
     name = "codegen",
     defaultPhase = LifecyclePhase.GENERATE_SOURCES,
-    threadSafe = true,
+    threadSafe = false,
     requiresDependencyResolution = ResolutionScope.COMPILE)
 public class CodeGenMojo extends AbstractMojo {
 
-  // @Parameter
-  // private GenerationParameters[] generations;
+  @Parameter(property = "generations")
+  private List<GenerationParameters> generationParameters;
 
   /* (non-Javadoc)
    * @see org.apache.maven.plugin.Mojo#execute()
    * @goal codegen
    */
+  @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
     try {
-      getLog().info("Schema2template code generation.");
+      System.out.println(
+          "Schema2template code generation started " + generationParameters.size() + " times!");
+      for (int i = 0; i < generationParameters.size(); i++) {
+        System.out.println("\nn");
+        System.out.println("GrammarVersion" + generationParameters.get(i).getGrammarVersion());
+        System.out.println("GrammarID" + generationParameters.get(i).getGrammarID());
+        System.out.println("Grammar" + generationParameters.get(i).getGrammar());
+        System.out.println("GrammarAddOn" + generationParameters.get(i).getGrammarAddon());
+        System.out.println(
+            "Grammar2Templates" + generationParameters.get(i).getGrammar2Templates());
+      }
 
-      // new schema2template.example.odf.OdfHelper(generations);
     } catch (Exception ex) {
       getLog().error("Failed to parse template.");
       getLog().error(ex);
-      String msg = "Failed to execute ODF schema2template example";
+      String msg = "Failed to execute CodeGenMojo";
       throw new MojoFailureException(ex, msg, msg);
     }
   }

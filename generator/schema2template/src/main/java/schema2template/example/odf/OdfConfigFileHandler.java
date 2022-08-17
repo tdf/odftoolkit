@@ -76,7 +76,7 @@ class OdfConfigFileHandler extends DefaultHandler {
     mProcessedDatatypes = new HashSet<String>();
   }
 
-  private void createElementConfig(Attributes attrs) throws SAXException {
+  private void readElementConfig(Attributes attrs) throws SAXException {
     String name = attrs.getValue("name");
     if (name == null) {
       throw new SAXException("Invalid element line " + mLocator.getLineNumber());
@@ -149,7 +149,7 @@ class OdfConfigFileHandler extends DefaultHandler {
     }
     if (qName.equals("element") && inElements && !inElement) {
       inElement = true;
-      createElementConfig(attributes);
+      readElementConfig(attributes);
       return;
     }
     if (qName.equals("attributes") && inConfig && !inAttributes) {

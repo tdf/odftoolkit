@@ -24,98 +24,69 @@ package org.odftoolkit.odfdom.schema2template_maven_plugin;
 public class GenerationParameters {
 
   /** @Parameter @required */
-  private String mTemplateBaseDir;
+  private String grammarVersion;
 
   /** @Parameter @required */
-  private String mTemplateFileName;
+  private String grammarID;
 
   /** @Parameter @required */
-  private String mXmlGrammarFilePath;
+  private String grammar;
 
   /** @Parameter @optional */
-  private String mContextInfo;
+  private String grammarAddOn;
 
   /** @Parameter @required */
-  private String mTargetBaseDir;
+  private String grammar2Templates;
 
   /** @Parameter @required */
-  private String mTargetFileName;
+  private String targetDir;
 
   public GenerationParameters() {
-    System.err.println("YEIIHAAA!!");
+    System.err.println("GenerationParameters have been created!!");
   }
 
   /**
-   * Capsulates a set of parameter required to do a schema2template transformation and generate
-   * output from given templates and XML grammar.
-   *
-   * @param templateBaseDir
-   * @param templateFileName
-   * @param xmlGrammarFilePath
-   * @param contextInfo
-   * @param targetBaseDir
-   * @param targetFileName
+   * @return the version of the grammar. Helpful to document changes between versions in
+   *     documentation
    */
-  public GenerationParameters(
-      String templateBaseDir,
-      String templateFileName,
-      String xmlGrammarFilePath,
-      String contextInfo,
-      String targetBaseDir,
-      String targetFileName) {
-    mTemplateBaseDir = templateBaseDir;
-    mTemplateFileName = templateFileName;
-    mXmlGrammarFilePath = xmlGrammarFilePath;
-    mContextInfo = contextInfo;
-    mTargetBaseDir = targetBaseDir;
-    mTargetFileName = targetFileName;
+  public String getGrammarVersion() {
+    return grammarVersion;
   }
 
-  public String getTemplateBaseDir() {
-    return mTemplateBaseDir;
+  /**
+   * @return the ID of the grammar file. For instance, in ODF there are different sub-modules like
+   *     package manifest, digitial signature for package and the ODF schema.
+   */
+  public String getGrammarID() {
+    return grammarID;
   }
 
-  public void setTemplateBaseDir(String templateBaseDir) {
-    mTemplateBaseDir = templateBaseDir;
+  /** @return the path to the grammar file */
+  public String getGrammar() {
+    return grammar;
   }
 
-  public String getTemplateFileName() {
-    return mTemplateFileName;
+  /**
+   * @return the path to the grammar-add-on file. This file holds erquired information in the
+   *     specification but not in the XML grammar, e.g. default values (as they were inserted during
+   *     load of the grammar by some XML parser and were blowing up the DOM. Another example for
+   *     add-on information not in the grammar but in the specificaiton are the style families.
+   */
+  public String getGrammarAddon() {
+    return grammarAddOn;
   }
 
-  public void setTemplateFileName(String templateFileName) {
-    mTemplateFileName = templateFileName;
+  /**
+   * @return the path to the grammar2template velocity file. It maps the grammar to a set of
+   *     template files together with the condition and loops that triggering the data
+   *     transformation!
+   */
+  public String getGrammar2Templates() {
+    return grammar2Templates;
   }
 
-  public String getXmlGrammarFilePath() {
-    return mXmlGrammarFilePath;
-  }
-
-  public void setXmlGrammarFilePath(String xmlGrammarFilePath) {
-    mXmlGrammarFilePath = xmlGrammarFilePath;
-  }
-
-  public String getContextInfo() {
-    return mContextInfo;
-  }
-
-  public void getContextInfo(String contextInfo) {
-    mContextInfo = contextInfo;
-  }
-
-  public String getTargetBaseDir() {
-    return mTargetBaseDir;
-  }
-
-  public void setTargetBaseDir(String targetBaseDir) {
-    mTargetBaseDir = targetBaseDir;
-  }
-
-  public String getTargetFileName() {
-    return mTargetFileName;
-  }
-
-  public void setTargetFileName(String targetFileName) {
-    mTargetFileName = targetFileName;
+  /** @return the path to the grammar2template velocity file.! */
+  public String getTargetDir() {
+    return targetDir;
   }
 }
