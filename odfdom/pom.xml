@@ -477,7 +477,7 @@
                                 </goals>
                                 <configuration>
                                     <generations>
-                                        <generationParameter>
+                                        <generation>
                                             <!-- PKG LAYER (Manifest DOM) - typed Java Dom Class Generation -->
                                             <grammarVersion>1.2</grammarVersion>
                                             <grammarID>odf-package-manifest</grammarID>
@@ -485,8 +485,8 @@
                                             <grammarAddOn>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/template/odfdom-java/pkg/config.xml</grammarAddOn>
                                             <grammar2Templates>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/template/odfdom-java/dom/template/pkg-manifest-output-files.vm</grammar2Templates>
                                             <targetDir>${project.build.directory}/generated-sources/java/</targetDir>
-                                        </generationParameter>
-                                        <generationParameter>
+                                        </generation>
+                                        <generation>
                                             <!-- PKG LAYER (Digital Signature DOM) - typed Java Dom Class Generation -->
                                             <grammarVersion>1.2</grammarVersion>
                                             <grammarID>odf-package-digital-signature</grammarID>
@@ -494,8 +494,8 @@
                                             <grammarAddOn>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/template/odfdom-java/pkg/config.xml</grammarAddOn>
                                             <grammar2Templates>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/template/odfdom-java/dom/template/pkg-dsig-output-files.vm</grammar2Templates>
                                             <targetDir>${project.build.directory}/generated-sources/java/</targetDir>
-                                        </generationParameter>
-                                        <generationParameter>
+                                        </generation>
+                                        <generation>
                                             <!-- DOM LAYER Dom Generation - typed Java Dom Class Generation -->
                                             <grammarVersion>1.2</grammarVersion>
                                             <grammarID>odf-schema</grammarID>
@@ -503,7 +503,7 @@
                                             <grammarAddOn>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/template/odfdom-java/dom/config.xml</grammarAddOn>
                                             <grammar2Templates>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/template/odfdom-java/dom/template/dom-output-files.vm</grammar2Templates>
                                             <targetDir>${project.build.directory}/generated-sources/java/</targetDir>
-                                        </generationParameter>
+                                        </generation>
                                     </generations>
                                 </configuration>
                             </execution>
