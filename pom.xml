@@ -320,7 +320,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.4.0</version>
+                    <version>3.4.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
@@ -511,17 +511,19 @@
         <!-- GPG Signature on release -->
         <profile>
             <id>release-sign-artifacts</id>
+            <!-- will ask for gpg passphrase for every build on Windows when gpg.keyname exists!
             <activation>
                 <property>
                     <name>gpg.keyname</name>
                 </property>
-            </activation>
+            </activation> -->
             <build>
                 <plugins>
                     <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.0.1</version>
                         <executions>
                             <execution>
                                 <goals>
