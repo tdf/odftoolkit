@@ -114,7 +114,8 @@
                     <systemPropertyVariables>
                         <odfdom.version>${project.version}</odfdom.version>
                         <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
-                        <schema2template.build.dir>${project.build.directory}</schema2template.build.dir>
+                        <!-- see https://cwiki.apache.org/confluence/display/MAVEN/Maven+Properties+Guide -->
+                        <schema2template.base.dir>${project.basedir}</schema2template.base.dir>
                     </systemPropertyVariables>
                     <excludes>
                         <exclude>**/integrationtest/**</exclude>

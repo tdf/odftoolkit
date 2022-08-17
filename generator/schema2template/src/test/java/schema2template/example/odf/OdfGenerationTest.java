@@ -35,9 +35,11 @@ public class OdfGenerationTest {
 
   /**
    * Via Maven pom.xml (surefire test plugin) received System variable of the absolute path of the
-   * target build directory
+   * base directory
+   *
+   * @see https://cwiki.apache.org/confluence/display/MAVEN/Maven+Properties+Guide
    */
-  private static final String buildDir = System.getProperty("schema2template.build.dir");
+  private static final String BASE_DIR = System.getProperty("schema2template.base.dir");
 
   // The Maven default output directory for generated sources: target/generated-sources/
   private static final String TARGET_REL_DIR =
@@ -53,9 +55,7 @@ public class OdfGenerationTest {
 
   private static String ODF_TEMPLATE_DIR =
       Paths.get(
-              buildDir
-                  + File.separator
-                  + ".."
+              BASE_DIR
                   + File.separator
                   + "src"
                   + File.separator
@@ -99,9 +99,7 @@ public class OdfGenerationTest {
 
       String odf13SchemaFile =
           Paths.get(
-                  buildDir
-                      + File.separator
-                      + ".."
+                  BASE_DIR
                       + File.separator
                       + "src"
                       + File.separator
@@ -120,9 +118,7 @@ public class OdfGenerationTest {
               .toString();
       String odf12SchemaFile =
           Paths.get(
-                  buildDir
-                      + File.separator
-                      + ".."
+                  BASE_DIR
                       + File.separator
                       + "src"
                       + File.separator
@@ -141,9 +137,7 @@ public class OdfGenerationTest {
               .toString();
       String odf11SchemaFile =
           Paths.get(
-                  buildDir
-                      + File.separator
-                      + ".."
+                  BASE_DIR
                       + File.separator
                       + "src"
                       + File.separator
@@ -162,9 +156,7 @@ public class OdfGenerationTest {
               .toString();
       String odf10SchemaFile =
           Paths.get(
-                  buildDir
-                      + File.separator
-                      + ".."
+                  BASE_DIR
                       + File.separator
                       + "src"
                       + File.separator
@@ -183,9 +175,7 @@ public class OdfGenerationTest {
               .toString();
       String odf13SignatureSchemaFile =
           Paths.get(
-                  buildDir
-                      + File.separator
-                      + ".."
+                  BASE_DIR
                       + File.separator
                       + "src"
                       + File.separator
@@ -204,9 +194,7 @@ public class OdfGenerationTest {
               .toString();
       String odf12SignatureSchemaFile =
           Paths.get(
-                  buildDir
-                      + File.separator
-                      + ".."
+                  BASE_DIR
                       + File.separator
                       + "src"
                       + File.separator
@@ -225,9 +213,7 @@ public class OdfGenerationTest {
               .toString();
       String odf13ManifestSchemaFile =
           Paths.get(
-                  buildDir
-                      + File.separator
-                      + ".."
+                  BASE_DIR
                       + File.separator
                       + "src"
                       + File.separator
@@ -246,9 +232,7 @@ public class OdfGenerationTest {
               .toString();
       String odf12ManifestSchemaFile =
           Paths.get(
-                  buildDir
-                      + File.separator
-                      + ".."
+                  BASE_DIR
                       + File.separator
                       + "src"
                       + File.separator
@@ -267,9 +251,7 @@ public class OdfGenerationTest {
               .toString();
       String odf11ManifestSchemaFile =
           Paths.get(
-                  buildDir
-                      + File.separator
-                      + ".."
+                  BASE_DIR
                       + File.separator
                       + "src"
                       + File.separator
@@ -288,9 +270,7 @@ public class OdfGenerationTest {
               .toString();
       String odf10ManifestSchemaFile =
           Paths.get(
-                  buildDir
-                      + File.separator
-                      + ".."
+                  BASE_DIR
                       + File.separator
                       + "src"
                       + File.separator
@@ -361,10 +341,10 @@ public class OdfGenerationTest {
       XMLModel[] xmlModelDomHistory13 = {xmlModelOdf12Dom, xmlModelOdf11Dom, xmlModelOdf10Dom};
       XMLModel[] xmlModelDomHistory12 = {xmlModelOdf11Dom, xmlModelOdf10Dom};
       XMLModel[] xmlModelDomHistory11 = {xmlModelOdf10Dom};
-      String targetOdf13 = Paths.get(buildDir, TARGET_REL_DIR, "odf1.3").normalize().toString();
-      String targetOdf12 = Paths.get(buildDir, TARGET_REL_DIR, "odf1.2").normalize().toString();
-      String targetOdf11 = Paths.get(buildDir, TARGET_REL_DIR, "odf1.1").normalize().toString();
-      String targetOdf10 = Paths.get(buildDir, TARGET_REL_DIR, "odf1.0").normalize().toString();
+      String targetOdf13 = Paths.get(BASE_DIR, TARGET_REL_DIR, "odf1.3").normalize().toString();
+      String targetOdf12 = Paths.get(BASE_DIR, TARGET_REL_DIR, "odf1.2").normalize().toString();
+      String targetOdf11 = Paths.get(BASE_DIR, TARGET_REL_DIR, "odf1.1").normalize().toString();
+      String targetOdf10 = Paths.get(BASE_DIR, TARGET_REL_DIR, "odf1.0").normalize().toString();
 
       // ******** ODF 1.3 *************
       SchemaToTemplate.run(
