@@ -475,16 +475,36 @@
                                 <goals>
                                     <goal>codegen</goal>
                                 </goals>
-                                <!-- DOM LAYER CONFIGURATION -->
                                 <configuration>
-                                    <targetRoot>${basedir}/src/main/java/</targetRoot>
-                                    <domResourceRoot>${basedir}/src/codegen/resources/dom/template</domResourceRoot>
-                                    <pkgResourceRoot>${basedir}/src/codegen/resources/pkg/template</pkgResourceRoot>
-                                    <odf12SchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.2-os-schema.rng</odf12SchemaFile>
-                                    <odf11SchemaFile>${project.build.directory}/odf-schemas/OpenDocument-schema-v1.1.rng</odf11SchemaFile>
-                                    <signatureSchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.2-os-dsig-schema.rng</signatureSchemaFile>
-                                    <manifestSchemaFile>${project.build.directory}/odf-schemas/OpenDocument-v1.2-os-manifest-schema.rng</manifestSchemaFile>
-                                    <configFile>${basedir}/src/codegen/resources/config.xml</configFile>
+                                    <generationParameters>
+                                        <generationParameter>
+                                            <!-- PKG LAYER (Manifest DOM) - typed Java Dom Class Generation -->
+                                            <grammarVersion>1.2</grammarVersion>
+                                            <grammarID>odf-package-manifest</grammarID>
+                                            <grammar>../generator/schema2template/src/test/resources/test-input/odf/grammar/OpenDocument-v1.2-os-manifest-schema.rng</grammar>
+                                            <grammarAddOn>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/template/odfdom-java/pkg/config.xml</grammarAddOn>
+                                            <grammar2Templates>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/template/odfdom-java/dom/template/pkg-manifest-output-files.vm</grammar2Templates>
+                                            <targetDir>${project.build.directory}/generated-sources/java/</targetDir>
+                                        </generationParameter>
+                                        <generationParameter>
+                                            <!-- PKG LAYER (Digital Signature DOM) - typed Java Dom Class Generation -->
+                                            <grammarVersion>1.2</grammarVersion>
+                                            <grammarID>odf-package-digital-signature</grammarID>
+                                            <grammar>../generator/schema2template/src/test/resources/test-input/odf/grammar/OpenDocument-v1.2-os-dsig-schema.rng</grammar>
+                                            <grammarAddOn>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/template/odfdom-java/pkg/config.xml</grammarAddOn>
+                                            <grammar2Templates>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/template/odfdom-java/dom/template/pkg-dsig-output-files.vm</grammar2Templates>
+                                            <targetDir>${project.build.directory}/generated-sources/java/</targetDir>
+                                        </generationParameter>
+                                        <generationParameter>
+                                            <!-- DOM LAYER Dom Generation - typed Java Dom Class Generation -->
+                                            <grammarVersion>1.2</grammarVersion>
+                                            <grammarID>odf-schema</grammarID>
+                                            <grammar>../generator/schema2template/src/test/resources/test-input/odf/grammar/OpenDocument-v1.2-os-schema.rng</grammar>
+                                            <grammarAddOn>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/template/odfdom-java/dom/config.xml</grammarAddOn>
+                                            <grammar2Templates>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/template/odfdom-java/dom/template/dom-output-files.vm</grammar2Templates>
+                                            <targetDir>${project.build.directory}/generated-sources/java/</targetDir>
+                                        </generationParameter>
+                                    </generationParameters>
                                 </configuration>
                             </execution>
                         </executions>
@@ -492,39 +512,6 @@
                 </plugins>
             </build>
         </profile>
-        <!--
-             <profile>
-             <id>codegen-pkg</id>
-             <activation>
-             <activeByDefault>true</activeByDefault>
-             </activation>
-             <build>
-             <defaultGoal>install</defaultGoal>
-             <plugins>
-             <plugin>
-             <groupId>org.odftoolkit</groupId>
-             <artifactId>maven-codegen-plugin</artifactId>
-             <version>0.8</version>
-             <executions>
-             <execution>
-             <id>pkg</id>
-             <phase>generate-sources</phase>
-             <goals>
-             <goal>codegen</goal>
-             </goals>
-             <configuration>
-             <sourceRoot>${basedir}/src/main/java</sourceRoot>
-             <schemaFile>${basedir}/src/codegen/resources/pkg/OpenDocument-manifest-schema-v1.2-draft7.rng</schemaFile>
-             <configFile>${basedir}/src/codegen/resources/pkg/config.xml</configFile>
-             <templateFile>${basedir}/src/codegen/resources/pkg/javacodetemplate.xml</templateFile>
-             </configuration>
-             </execution>
-             </executions>
-             </plugin>
-             </plugins>
-             </build>
-             </profile>
-        -->
         <profile>
             <id>integration-test</id>
             <activation>
