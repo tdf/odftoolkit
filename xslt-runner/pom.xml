@@ -45,6 +45,7 @@
         <rnghtml.stylesheet>src/test/resources/xslt/rng/addRefs4rng-html.xsl</rnghtml.stylesheet>
         <rng2docbook.stylesheet>src/test/resources/xslt/rng/rng2docbook.xsl</rng2docbook.stylesheet>
         <odf.defaultvalue.extraction>src/test/resources/xslt/getAttributeDefaults.xsl</odf.defaultvalue.extraction>
+        <!-- version has to be used twice in pom.xml and can not be handled by dependencyManagement of root pom.xml -->
         <version.saxon-he>9.9.1-8</version.saxon-he>
     </properties>
 
