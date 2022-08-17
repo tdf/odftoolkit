@@ -19,7 +19,7 @@
  *
  * <p>********************************************************************
  */
-package org.odftoolkit.odfdom.schema2template_maven_plugin;
+package schema2template;
 
 public class GenerationParameters {
 

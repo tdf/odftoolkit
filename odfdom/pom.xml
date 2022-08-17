@@ -476,7 +476,7 @@
                                     <goal>codegen</goal>
                                 </goals>
                                 <configuration>
-                                    <generationParameters>
+                                    <generations>
                                         <generationParameter>
                                             <!-- PKG LAYER (Manifest DOM) - typed Java Dom Class Generation -->
                                             <grammarVersion>1.2</grammarVersion>
@@ -504,7 +504,7 @@
                                             <grammar2Templates>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/template/odfdom-java/dom/template/dom-output-files.vm</grammar2Templates>
                                             <targetDir>${project.build.directory}/generated-sources/java/</targetDir>
                                         </generationParameter>
-                                    </generationParameters>
+                                    </generations>
                                 </configuration>
                             </execution>
                         </executions>
