@@ -16,234 +16,22 @@
 5: CHOICE
 6: ELEMENT "office:meta",
 7: REF 'office-meta-content',
-8: REF 'office-meta-content-strict',
+8: REF 'anyElements',
 9: CHOICE
 10: ONEOREMORE
-11: REF 'office-meta-data',
-12: CHOICE
-13: ELEMENT "meta:generator",
-14: REF 'string',
-15: DATA 'string',
-13: ELEMENT "dc:title",
-14: REF 'string',
-15: DATA 'string',
-13: ELEMENT "dc:description",
-14: REF 'string',
-15: DATA 'string',
-13: ELEMENT "dc:subject",
-14: REF 'string',
-15: DATA 'string',
-13: ELEMENT "meta:keyword",
-14: REF 'string',
-15: DATA 'string',
-13: ELEMENT "meta:initial-creator",
-14: REF 'string',
-15: DATA 'string',
-13: REF 'dc-creator',
-14: ELEMENT "dc:creator",
-15: REF 'string',
-16: DATA 'string',
-13: ELEMENT "meta:printed-by",
-14: REF 'string',
-15: DATA 'string',
-13: ELEMENT "meta:creation-date",
-14: REF 'dateTime',
-15: DATA 'dateTime',
-13: REF 'dc-date',
-14: ELEMENT "dc:date",
-15: REF 'dateTime',
-16: DATA 'dateTime',
-13: ELEMENT "meta:print-date",
-14: REF 'dateTime',
-15: DATA 'dateTime',
-13: ELEMENT "meta:template",
-14: SEQUENCE
-15: ATTRIBUTE "xlink:href",
-16: REF 'anyURI',
-17: DATA 'anyURI',
-15: CHOICE
-16: ATTRIBUTE "xlink:type",
-17: VALUE 'simple',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "xlink:actuate",
-17: VALUE 'onRequest',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "xlink:title",
-17: REF 'string',
-18: DATA 'string',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "meta:date",
-17: REF 'dateTime',
-18: DATA 'dateTime',
-16: EPSILON
-13: ELEMENT "meta:auto-reload",
+11: ELEMENT "*",
+12: MIXED
+13: REF 'anyAttListOrElements',
 14: SEQUENCE
 15: CHOICE
-16: ATTRIBUTE "xlink:type",
-17: VALUE 'simple',
+16: ONEOREMORE
+17: ATTRIBUTE "*",
+18: STRING
 16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "xlink:show",
-17: VALUE 'replace',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "xlink:actuate",
-17: VALUE 'onLoad',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "xlink:href",
-17: REF 'anyURI',
-18: DATA 'anyURI',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "meta:delay",
-17: REF 'duration',
-18: DATA 'duration',
-16: EPSILON
-13: ELEMENT "meta:hyperlink-behaviour",
-14: SEQUENCE
-15: CHOICE
-16: ATTRIBUTE "office:target-frame-name",
-17: REF 'targetFrameName',
-18: CHOICE
-19: VALUE '_self',
-19: VALUE '_blank',
-19: VALUE '_parent',
-19: VALUE '_top',
-19: REF 'string',
-20: DATA 'string',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "xlink:show",
-17: CHOICE
-18: VALUE 'new',
-18: VALUE 'replace',
-16: EPSILON
-13: ELEMENT "dc:language",
-14: REF 'language',
-15: DATA 'language',
-13: ELEMENT "meta:editing-cycles",
-14: REF 'nonNegativeInteger',
-15: DATA 'nonNegativeInteger',
-13: ELEMENT "meta:editing-duration",
-14: REF 'duration',
-15: DATA 'duration',
-13: ELEMENT "meta:document-statistic",
-14: SEQUENCE
-15: CHOICE
-16: ATTRIBUTE "meta:page-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "meta:table-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "meta:draw-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "meta:image-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "meta:ole-object-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "meta:object-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "meta:paragraph-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "meta:word-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "meta:character-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "frame-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "sentence-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "syllable-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "non-whitespace-character-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "meta:row-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-15: CHOICE
-16: ATTRIBUTE "meta:cell-count",
-17: REF 'nonNegativeInteger',
-18: DATA 'nonNegativeInteger',
-16: EPSILON
-13: ELEMENT "meta:user-defined",
-14: SEQUENCE
-15: ATTRIBUTE "meta:name",
-16: REF 'string',
-17: DATA 'string',
-15: CHOICE
-16: SEQUENCE
-17: ATTRIBUTE "meta:value-type",
-18: VALUE 'float',
-17: REF 'double',
-18: DATA 'double',
-16: SEQUENCE
-17: ATTRIBUTE "meta:value-type",
-18: VALUE 'date',
-17: REF 'dateOrDateTime',
-18: CHOICE
-19: DATA 'date',
-19: DATA 'dateTime',
-16: SEQUENCE
-17: ATTRIBUTE "meta:value-type",
-18: VALUE 'time',
-17: REF 'duration',
-18: DATA 'duration',
-16: SEQUENCE
-17: ATTRIBUTE "meta:value-type",
-18: VALUE 'boolean',
-17: REF 'boolean',
-18: CHOICE
-19: VALUE 'true',
-19: VALUE 'false',
-16: SEQUENCE
-17: ATTRIBUTE "meta:value-type",
-18: VALUE 'string',
-17: REF 'string',
-18: DATA 'string',
-16: STRING
+15: REF 'anyElements',
+16: CHOICE
+17: ONEOREMORE
+17: EPSILON
 10: EPSILON
 6: EPSILON
 4: REF 'office-settings',
@@ -331,19 +119,6 @@
 14: REF 'anyElements',
 15: CHOICE
 16: ONEOREMORE
-17: ELEMENT "*",
-18: MIXED
-19: REF 'anyAttListOrElements',
-20: SEQUENCE
-21: CHOICE
-22: ONEOREMORE
-23: ATTRIBUTE "*",
-24: STRING
-22: EPSILON
-21: REF 'anyElements',
-22: CHOICE
-23: ONEOREMORE
-23: EPSILON
 16: EPSILON
 9: EPSILON
 8: CHOICE
@@ -889,575 +664,18 @@
 19: REF 'style-text-properties',
 20: ELEMENT "style:text-properties",
 21: REF 'style-text-properties-content',
-22: REF 'style-text-properties-content-strict',
-23: SEQUENCE
-24: REF 'style-text-properties-attlist',
-25: INTERLEAVE
+22: REF 'style-properties-content',
+23: REF 'anyAttListOrElements',
+24: SEQUENCE
+25: CHOICE
+26: ONEOREMORE
+27: ATTRIBUTE "*",
+28: STRING
+26: EPSILON
+25: REF 'anyElements',
 26: CHOICE
-27: ATTRIBUTE "fo:font-variant",
-28: REF 'fontVariant',
-29: CHOICE
-30: VALUE 'normal',
-30: VALUE 'small-caps',
+27: ONEOREMORE
 27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:text-transform",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'lowercase',
-29: VALUE 'uppercase',
-29: VALUE 'capitalize',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:color",
-28: REF 'color',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:use-window-font-color",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-outline",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-line-through-type",
-28: REF 'lineType',
-29: CHOICE
-30: VALUE 'none',
-30: VALUE 'single',
-30: VALUE 'double',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-line-through-style",
-28: REF 'lineStyle',
-29: CHOICE
-30: VALUE 'none',
-30: VALUE 'solid',
-30: VALUE 'dotted',
-30: VALUE 'dash',
-30: VALUE 'long-dash',
-30: VALUE 'dot-dash',
-30: VALUE 'dot-dot-dash',
-30: VALUE 'wave',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-line-through-width",
-28: REF 'lineWidth',
-29: CHOICE
-30: VALUE 'auto',
-30: VALUE 'normal',
-30: VALUE 'bold',
-30: VALUE 'thin',
-30: VALUE 'dash',
-30: VALUE 'medium',
-30: VALUE 'thick',
-30: REF 'positiveInteger',
-31: DATA 'positiveInteger',
-30: REF 'percent',
-31: DATA 'string',
-30: REF 'positiveLength',
-31: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-line-through-color",
-28: CHOICE
-29: VALUE 'font-color',
-29: REF 'color',
-30: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-line-through-text",
-28: REF 'string',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-line-through-text-style",
-28: REF 'styleNameRef',
-29: CHOICE
-30: DATA 'NCName',
-30: EPSILON
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-position",
-28: LIST
-29: SEQUENCE
-30: CHOICE
-31: REF 'percent',
-32: DATA 'string',
-31: VALUE 'super',
-31: VALUE 'sub',
-30: CHOICE
-31: REF 'percent',
-32: DATA 'string',
-31: EPSILON
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "style:font-name",
-29: REF 'string',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-name-asian",
-29: REF 'string',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-name-complex",
-29: REF 'string',
-30: DATA 'string',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "fo:font-family",
-29: REF 'string',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-family-asian",
-29: REF 'string',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-family-complex",
-29: REF 'string',
-30: DATA 'string',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "style:font-family-generic",
-29: REF 'fontFamilyGeneric',
-30: CHOICE
-31: VALUE 'roman',
-31: VALUE 'swiss',
-31: VALUE 'modern',
-31: VALUE 'decorative',
-31: VALUE 'script',
-31: VALUE 'system',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-family-generic-asian",
-29: REF 'fontFamilyGeneric',
-30: CHOICE
-31: VALUE 'roman',
-31: VALUE 'swiss',
-31: VALUE 'modern',
-31: VALUE 'decorative',
-31: VALUE 'script',
-31: VALUE 'system',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-family-generic-complex",
-29: REF 'fontFamilyGeneric',
-30: CHOICE
-31: VALUE 'roman',
-31: VALUE 'swiss',
-31: VALUE 'modern',
-31: VALUE 'decorative',
-31: VALUE 'script',
-31: VALUE 'system',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "style:font-style-name",
-29: REF 'string',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-style-name-asian",
-29: REF 'string',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-style-name-complex",
-29: REF 'string',
-30: DATA 'string',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "style:font-pitch",
-29: REF 'fontPitch',
-30: CHOICE
-31: VALUE 'fixed',
-31: VALUE 'variable',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-pitch-asian",
-29: REF 'fontPitch',
-30: CHOICE
-31: VALUE 'fixed',
-31: VALUE 'variable',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-pitch-complex",
-29: REF 'fontPitch',
-30: CHOICE
-31: VALUE 'fixed',
-31: VALUE 'variable',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "style:font-charset",
-29: REF 'textEncoding',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-charset-asian",
-29: REF 'textEncoding',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-charset-complex",
-29: REF 'textEncoding',
-30: DATA 'string',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "fo:font-size",
-29: CHOICE
-30: REF 'positiveLength',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-size-asian",
-29: CHOICE
-30: REF 'positiveLength',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-size-complex",
-29: CHOICE
-30: REF 'positiveLength',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "style:font-size-rel",
-29: REF 'length',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-size-rel-asian",
-29: REF 'length',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-size-rel-complex",
-29: REF 'length',
-30: DATA 'string',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:script-type",
-28: CHOICE
-29: VALUE 'latin',
-29: VALUE 'asian',
-29: VALUE 'complex',
-29: VALUE 'ignore',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:letter-spacing",
-28: CHOICE
-29: REF 'length',
-30: DATA 'string',
-29: VALUE 'normal',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "fo:language",
-29: REF 'languageCode',
-30: DATA 'token',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:language-asian",
-29: REF 'languageCode',
-30: DATA 'token',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:language-complex",
-29: REF 'languageCode',
-30: DATA 'token',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "fo:country",
-29: REF 'countryCode',
-30: DATA 'token',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:country-asian",
-29: REF 'countryCode',
-30: DATA 'token',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:country-complex",
-29: REF 'countryCode',
-30: DATA 'token',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "fo:font-style",
-29: REF 'fontStyle',
-30: CHOICE
-31: VALUE 'normal',
-31: VALUE 'italic',
-31: VALUE 'oblique',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-style-asian",
-29: REF 'fontStyle',
-30: CHOICE
-31: VALUE 'normal',
-31: VALUE 'italic',
-31: VALUE 'oblique',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-style-complex",
-29: REF 'fontStyle',
-30: CHOICE
-31: VALUE 'normal',
-31: VALUE 'italic',
-31: VALUE 'oblique',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:font-relief",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'embossed',
-29: VALUE 'engraved',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:text-shadow",
-28: REF 'shadowType',
-29: CHOICE
-30: VALUE 'none',
-30: REF 'string',
-31: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-underline-type",
-28: REF 'lineType',
-29: CHOICE
-30: VALUE 'none',
-30: VALUE 'single',
-30: VALUE 'double',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-underline-style",
-28: REF 'lineStyle',
-29: CHOICE
-30: VALUE 'none',
-30: VALUE 'solid',
-30: VALUE 'dotted',
-30: VALUE 'dash',
-30: VALUE 'long-dash',
-30: VALUE 'dot-dash',
-30: VALUE 'dot-dot-dash',
-30: VALUE 'wave',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-underline-width",
-28: REF 'lineWidth',
-29: CHOICE
-30: VALUE 'auto',
-30: VALUE 'normal',
-30: VALUE 'bold',
-30: VALUE 'thin',
-30: VALUE 'dash',
-30: VALUE 'medium',
-30: VALUE 'thick',
-30: REF 'positiveInteger',
-31: DATA 'positiveInteger',
-30: REF 'percent',
-31: DATA 'string',
-30: REF 'positiveLength',
-31: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-underline-color",
-28: CHOICE
-29: VALUE 'font-color',
-29: REF 'color',
-30: DATA 'string',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "fo:font-weight",
-29: REF 'fontWeight',
-30: CHOICE
-31: VALUE 'normal',
-31: VALUE 'bold',
-31: VALUE '100',
-31: VALUE '200',
-31: VALUE '300',
-31: VALUE '400',
-31: VALUE '500',
-31: VALUE '600',
-31: VALUE '700',
-31: VALUE '800',
-31: VALUE '900',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-weight-asian",
-29: REF 'fontWeight',
-30: CHOICE
-31: VALUE 'normal',
-31: VALUE 'bold',
-31: VALUE '100',
-31: VALUE '200',
-31: VALUE '300',
-31: VALUE '400',
-31: VALUE '500',
-31: VALUE '600',
-31: VALUE '700',
-31: VALUE '800',
-31: VALUE '900',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:font-weight-complex",
-29: REF 'fontWeight',
-30: CHOICE
-31: VALUE 'normal',
-31: VALUE 'bold',
-31: VALUE '100',
-31: VALUE '200',
-31: VALUE '300',
-31: VALUE '400',
-31: VALUE '500',
-31: VALUE '600',
-31: VALUE '700',
-31: VALUE '800',
-31: VALUE '900',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-underline-mode",
-28: REF 'lineMode',
-29: CHOICE
-30: VALUE 'continuous',
-30: VALUE 'skip-white-space',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-line-through-mode",
-28: REF 'lineMode',
-29: CHOICE
-30: VALUE 'continuous',
-30: VALUE 'skip-white-space',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:letter-kerning",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-blinking",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: REF 'common-background-color-attlist',
-27: CHOICE
-28: ATTRIBUTE "fo:background-color",
-29: CHOICE
-30: VALUE 'transparent',
-30: REF 'color',
-31: DATA 'string',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-combine",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'letters',
-29: VALUE 'lines',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "style:text-combine-start-char",
-29: REF 'character',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:text-combine-end-char",
-29: REF 'character',
-30: DATA 'string',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-emphasize",
-28: CHOICE
-29: VALUE 'none',
-29: LIST
-30: SEQUENCE
-31: CHOICE
-32: VALUE 'none',
-32: VALUE 'accent',
-32: VALUE 'dot',
-32: VALUE 'circle',
-32: VALUE 'disc',
-31: CHOICE
-32: VALUE 'above',
-32: VALUE 'below',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-scale",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-rotation-angle",
-28: REF 'integer',
-29: DATA 'integer',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-rotation-scale",
-28: CHOICE
-29: VALUE 'fixed',
-29: VALUE 'line-height',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:hyphenate",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:hyphenation-remain-char-count",
-28: REF 'positiveInteger',
-29: DATA 'positiveInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:hyphenation-push-char-count",
-28: REF 'positiveInteger',
-29: DATA 'positiveInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "text:display",
-28: VALUE 'true',
-27: ATTRIBUTE "text:display",
-28: VALUE 'none',
-27: SEQUENCE
-28: ATTRIBUTE "text:display",
-29: VALUE 'condition',
-28: ATTRIBUTE "text:condition",
-29: VALUE 'none',
-27: EPSILON
-24: REF 'style-text-properties-elements',
-25: EPSILON
 19: EPSILON
 17: SEQUENCE
 18: ATTRIBUTE "style:family",
@@ -1466,595 +684,18 @@
 19: REF 'style-paragraph-properties',
 20: ELEMENT "style:paragraph-properties",
 21: REF 'style-paragraph-properties-content',
-22: REF 'style-paragraph-properties-content-strict',
-23: SEQUENCE
-24: REF 'style-paragraph-properties-attlist',
-25: INTERLEAVE
+22: REF 'style-properties-content',
+23: REF 'anyAttListOrElements',
+24: SEQUENCE
+25: CHOICE
+26: ONEOREMORE
+27: ATTRIBUTE "*",
+28: STRING
+26: EPSILON
+25: REF 'anyElements',
 26: CHOICE
-27: ATTRIBUTE "fo:line-height",
-28: CHOICE
-29: VALUE 'normal',
-29: REF 'nonNegativeLength',
-30: DATA 'string',
-29: REF 'percent',
-30: DATA 'string',
+27: ONEOREMORE
 27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:line-height-at-least",
-28: REF 'nonNegativeLength',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:line-spacing",
-28: REF 'length',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:font-independent-line-spacing",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: REF 'common-text-align',
-27: CHOICE
-28: ATTRIBUTE "fo:text-align",
-29: CHOICE
-30: VALUE 'start',
-30: VALUE 'end',
-30: VALUE 'left',
-30: VALUE 'right',
-30: VALUE 'center',
-30: VALUE 'justify',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:text-align-last",
-28: CHOICE
-29: VALUE 'start',
-29: VALUE 'center',
-29: VALUE 'justify',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:justify-single-word",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:keep-together",
-28: CHOICE
-29: VALUE 'auto',
-29: VALUE 'always',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:widows",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:orphans",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:tab-stop-distance",
-28: REF 'nonNegativeLength',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:hyphenation-keep",
-28: CHOICE
-29: VALUE 'auto',
-29: VALUE 'page',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:hyphenation-ladder-count",
-28: CHOICE
-29: VALUE 'no-limit',
-29: REF 'positiveInteger',
-30: DATA 'positiveInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:register-true",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: REF 'common-horizontal-margin-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:margin-left",
-30: CHOICE
-31: REF 'length',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:margin-right",
-30: CHOICE
-31: REF 'length',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:text-indent",
-28: CHOICE
-29: REF 'length',
-30: DATA 'string',
-29: REF 'percent',
-30: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:auto-text-indent",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: REF 'common-vertical-margin-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:margin-top",
-30: CHOICE
-31: REF 'nonNegativeLength',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:margin-bottom",
-30: CHOICE
-31: REF 'nonNegativeLength',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-26: REF 'common-margin-attlist',
-27: CHOICE
-28: ATTRIBUTE "fo:margin",
-29: CHOICE
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-26: REF 'common-break-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:break-before",
-30: CHOICE
-31: VALUE 'auto',
-31: VALUE 'column',
-31: VALUE 'page',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:break-after",
-30: CHOICE
-31: VALUE 'auto',
-31: VALUE 'column',
-31: VALUE 'page',
-29: EPSILON
-26: REF 'common-background-color-attlist',
-27: CHOICE
-28: ATTRIBUTE "fo:background-color",
-29: CHOICE
-30: VALUE 'transparent',
-30: REF 'color',
-31: DATA 'string',
-28: EPSILON
-26: REF 'common-border-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:border",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:border-top",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:border-bottom",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:border-left",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:border-right",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-26: REF 'common-border-line-width-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width-top",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width-bottom",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width-left",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width-right",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-26: REF 'common-padding-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:padding",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:padding-top",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:padding-bottom",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:padding-left",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:padding-right",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-26: REF 'common-shadow-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:shadow",
-29: REF 'shadowType',
-30: CHOICE
-31: VALUE 'none',
-31: REF 'string',
-32: DATA 'string',
-28: EPSILON
-26: REF 'common-keep-with-next-attlist',
-27: CHOICE
-28: ATTRIBUTE "fo:keep-with-next",
-29: CHOICE
-30: VALUE 'auto',
-30: VALUE 'always',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "text:number-lines",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "text:line-number",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-autospace",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'ideograph-alpha',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:punctuation-wrap",
-28: CHOICE
-29: VALUE 'simple',
-29: VALUE 'hanging',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:line-break",
-28: CHOICE
-29: VALUE 'normal',
-29: VALUE 'strict',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:vertical-align",
-28: CHOICE
-29: VALUE 'top',
-29: VALUE 'middle',
-29: VALUE 'bottom',
-29: VALUE 'auto',
-29: VALUE 'baseline',
-27: EPSILON
-26: REF 'common-writing-mode-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:writing-mode",
-29: CHOICE
-30: VALUE 'lr-tb',
-30: VALUE 'rl-tb',
-30: VALUE 'tb-rl',
-30: VALUE 'tb-lr',
-30: VALUE 'lr',
-30: VALUE 'rl',
-30: VALUE 'tb',
-30: VALUE 'page',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:writing-mode-automatic",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:snap-to-layout-grid",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: REF 'common-page-number-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:page-number",
-29: CHOICE
-30: REF 'positiveInteger',
-31: DATA 'positiveInteger',
-30: VALUE 'auto',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:background-transparency",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-24: REF 'style-paragraph-properties-elements',
-25: INTERLEAVE
-26: REF 'style-tab-stops',
-27: CHOICE
-28: ELEMENT "style:tab-stops",
-29: CHOICE
-30: ONEOREMORE
-31: REF 'style-tab-stop',
-32: ELEMENT "style:tab-stop",
-33: REF 'style-tab-stop-attlist',
-34: INTERLEAVE
-35: ATTRIBUTE "style:position",
-36: REF 'nonNegativeLength',
-37: DATA 'string',
-35: CHOICE
-36: ATTRIBUTE "style:type",
-37: CHOICE
-38: VALUE 'left',
-38: VALUE 'center',
-38: VALUE 'right',
-36: EPSILON
-36: SEQUENCE
-37: ATTRIBUTE "style:type",
-38: VALUE 'char',
-37: REF 'style-tab-stop-char-attlist',
-38: ATTRIBUTE "style:char",
-39: REF 'character',
-40: DATA 'string',
-35: CHOICE
-36: ATTRIBUTE "style:leader-type",
-37: REF 'lineType',
-38: CHOICE
-39: VALUE 'none',
-39: VALUE 'single',
-39: VALUE 'double',
-36: EPSILON
-35: CHOICE
-36: ATTRIBUTE "style:leader-style",
-37: REF 'lineStyle',
-38: CHOICE
-39: VALUE 'none',
-39: VALUE 'solid',
-39: VALUE 'dotted',
-39: VALUE 'dash',
-39: VALUE 'long-dash',
-39: VALUE 'dot-dash',
-39: VALUE 'dot-dot-dash',
-39: VALUE 'wave',
-36: EPSILON
-35: CHOICE
-36: ATTRIBUTE "style:leader-width",
-37: REF 'lineWidth',
-38: CHOICE
-39: VALUE 'auto',
-39: VALUE 'normal',
-39: VALUE 'bold',
-39: VALUE 'thin',
-39: VALUE 'dash',
-39: VALUE 'medium',
-39: VALUE 'thick',
-39: REF 'positiveInteger',
-40: DATA 'positiveInteger',
-39: REF 'percent',
-40: DATA 'string',
-39: REF 'positiveLength',
-40: DATA 'string',
-36: EPSILON
-35: CHOICE
-36: ATTRIBUTE "style:leader-color",
-37: CHOICE
-38: VALUE 'font-color',
-38: REF 'color',
-39: DATA 'string',
-36: EPSILON
-35: CHOICE
-36: ATTRIBUTE "style:leader-text",
-37: REF 'string',
-38: DATA 'string',
-36: EPSILON
-35: CHOICE
-36: ATTRIBUTE "style:leader-text-style",
-37: REF 'styleNameRef',
-38: CHOICE
-39: DATA 'NCName',
-39: EPSILON
-36: EPSILON
-30: EPSILON
-28: EPSILON
-26: REF 'style-drop-cap',
-27: CHOICE
-28: ELEMENT "style:drop-cap",
-29: REF 'style-drop-cap-attlist',
-30: INTERLEAVE
-31: CHOICE
-32: ATTRIBUTE "style:length",
-33: CHOICE
-34: VALUE 'word',
-34: REF 'positiveInteger',
-35: DATA 'positiveInteger',
-32: EPSILON
-31: CHOICE
-32: ATTRIBUTE "style:lines",
-33: REF 'positiveInteger',
-34: DATA 'positiveInteger',
-32: EPSILON
-31: CHOICE
-32: ATTRIBUTE "style:distance",
-33: REF 'length',
-34: DATA 'string',
-32: EPSILON
-31: CHOICE
-32: ATTRIBUTE "style:style-name",
-33: REF 'styleNameRef',
-34: CHOICE
-35: DATA 'NCName',
-35: EPSILON
-32: EPSILON
-28: EPSILON
-26: REF 'style-background-image',
-27: CHOICE
-28: ELEMENT "style:background-image",
-29: SEQUENCE
-30: REF 'style-background-image-attlist',
-31: INTERLEAVE
-32: CHOICE
-33: ATTRIBUTE "style:repeat",
-34: CHOICE
-35: VALUE 'no-repeat',
-35: VALUE 'repeat',
-35: VALUE 'stretch',
-33: EPSILON
-32: CHOICE
-33: ATTRIBUTE "style:position",
-34: CHOICE
-35: VALUE 'left',
-35: VALUE 'center',
-35: VALUE 'right',
-35: VALUE 'top',
-35: VALUE 'bottom',
-35: LIST
-36: SEQUENCE
-37: REF 'horiBackPos',
-38: CHOICE
-39: VALUE 'left',
-39: VALUE 'center',
-39: VALUE 'right',
-37: REF 'vertBackPos',
-38: CHOICE
-39: VALUE 'top',
-39: VALUE 'center',
-39: VALUE 'bottom',
-35: LIST
-36: SEQUENCE
-37: REF 'vertBackPos',
-38: CHOICE
-39: VALUE 'top',
-39: VALUE 'center',
-39: VALUE 'bottom',
-37: REF 'horiBackPos',
-38: CHOICE
-39: VALUE 'left',
-39: VALUE 'center',
-39: VALUE 'right',
-33: EPSILON
-32: CHOICE
-33: ATTRIBUTE "style:filter-name",
-34: REF 'string',
-35: DATA 'string',
-33: EPSILON
-32: CHOICE
-33: ATTRIBUTE "draw:opacity",
-34: REF 'percent',
-35: DATA 'string',
-33: EPSILON
-30: CHOICE
-31: REF 'common-draw-data-attlist',
-32: SEQUENCE
-33: ATTRIBUTE "xlink:href",
-34: REF 'anyURI',
-35: DATA 'anyURI',
-33: CHOICE
-34: ATTRIBUTE "xlink:type",
-35: VALUE 'simple',
-34: EPSILON
-33: CHOICE
-34: ATTRIBUTE "xlink:show",
-35: VALUE 'embed',
-34: EPSILON
-33: CHOICE
-34: ATTRIBUTE "xlink:actuate",
-35: VALUE 'onLoad',
-34: EPSILON
-31: REF 'office-binary-data',
-32: ELEMENT "office:binary-data",
-33: REF 'base64Binary',
-34: DATA 'base64Binary',
-31: EPSILON
-28: EPSILON
 19: EPSILON
 18: CHOICE
 19: REF 'style-text-properties',
@@ -2066,254 +707,17 @@
 19: REF 'style-section-properties',
 20: ELEMENT "style:section-properties",
 21: REF 'style-section-properties-content',
-22: REF 'style-section-properties-content-strict',
-23: SEQUENCE
-24: REF 'style-section-properties-attlist',
-25: INTERLEAVE
-26: REF 'common-background-color-attlist',
-27: CHOICE
-28: ATTRIBUTE "fo:background-color",
-29: CHOICE
-30: VALUE 'transparent',
-30: REF 'color',
-31: DATA 'string',
-28: EPSILON
-26: REF 'common-horizontal-margin-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:margin-left",
-30: CHOICE
-31: REF 'length',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:margin-right",
-30: CHOICE
-31: REF 'length',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:protect",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "text:dont-balance-text-columns",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: REF 'common-writing-mode-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:writing-mode",
-29: CHOICE
-30: VALUE 'lr-tb',
-30: VALUE 'rl-tb',
-30: VALUE 'tb-rl',
-30: VALUE 'tb-lr',
-30: VALUE 'lr',
-30: VALUE 'rl',
-30: VALUE 'tb',
-30: VALUE 'page',
-28: EPSILON
-24: REF 'style-section-properties-elements',
-25: INTERLEAVE
-26: REF 'style-background-image',
-27: CHOICE
-28: EPSILON
-26: REF 'style-columns',
-27: CHOICE
-28: ELEMENT "style:columns",
-29: SEQUENCE
-30: REF 'style-columns-attlist',
-31: INTERLEAVE
-32: ATTRIBUTE "fo:column-count",
-33: REF 'positiveInteger',
-34: DATA 'positiveInteger',
-32: CHOICE
-33: ATTRIBUTE "fo:column-gap",
-34: REF 'length',
-35: DATA 'string',
-33: EPSILON
-30: CHOICE
-31: REF 'style-column-sep',
-32: ELEMENT "style:column-sep",
-33: REF 'style-column-sep-attlist',
-34: INTERLEAVE
-35: CHOICE
-36: ATTRIBUTE "style:style",
-37: CHOICE
-38: VALUE 'none',
-38: VALUE 'solid',
-38: VALUE 'dotted',
-38: VALUE 'dashed',
-38: VALUE 'dot-dashed',
-36: EPSILON
-35: ATTRIBUTE "style:width",
-36: REF 'length',
-37: DATA 'string',
-35: CHOICE
-36: ATTRIBUTE "style:height",
-37: REF 'percent',
-38: DATA 'string',
-36: EPSILON
-35: CHOICE
-36: ATTRIBUTE "style:vertical-align",
-37: CHOICE
-38: VALUE 'top',
-38: VALUE 'middle',
-38: VALUE 'bottom',
-36: EPSILON
-35: CHOICE
-36: ATTRIBUTE "style:color",
-37: REF 'color',
-38: DATA 'string',
-36: EPSILON
-31: EPSILON
-30: CHOICE
-31: ONEOREMORE
-32: REF 'style-column',
-33: ELEMENT "style:column",
-34: REF 'style-column-attlist',
-35: INTERLEAVE
-36: ATTRIBUTE "style:rel-width",
-37: REF 'relativeLength',
-38: DATA 'string',
-36: CHOICE
-37: ATTRIBUTE "fo:start-indent",
-38: REF 'length',
-39: DATA 'string',
-37: EPSILON
-36: CHOICE
-37: ATTRIBUTE "fo:end-indent",
-38: REF 'length',
-39: DATA 'string',
-37: EPSILON
-36: CHOICE
-37: ATTRIBUTE "fo:space-before",
-38: REF 'length',
-39: DATA 'string',
-37: EPSILON
-36: CHOICE
-37: ATTRIBUTE "fo:space-after",
-38: REF 'length',
-39: DATA 'string',
-37: EPSILON
-31: EPSILON
-28: EPSILON
+22: REF 'style-properties-content',
+23: REF 'anyAttListOrElements',
+24: SEQUENCE
+25: CHOICE
+26: ONEOREMORE
+27: ATTRIBUTE "*",
+28: STRING
+26: EPSILON
+25: REF 'anyElements',
 26: CHOICE
 27: ONEOREMORE
-28: REF 'text-notes-configuration',
-29: ELEMENT "text:notes-configuration",
-30: REF 'text-notes-configuration-content',
-31: INTERLEAVE
-32: REF 'text-note-class',
-33: ATTRIBUTE "text:note-class",
-34: CHOICE
-35: VALUE 'footnote',
-35: VALUE 'endnote',
-32: CHOICE
-33: ATTRIBUTE "text:citation-style-name",
-34: REF 'styleNameRef',
-35: CHOICE
-36: DATA 'NCName',
-36: EPSILON
-33: EPSILON
-32: CHOICE
-33: ATTRIBUTE "text:citation-body-style-name",
-34: REF 'styleNameRef',
-35: CHOICE
-36: DATA 'NCName',
-36: EPSILON
-33: EPSILON
-32: CHOICE
-33: ATTRIBUTE "text:default-style-name",
-34: REF 'styleNameRef',
-35: CHOICE
-36: DATA 'NCName',
-36: EPSILON
-33: EPSILON
-32: CHOICE
-33: ATTRIBUTE "text:master-page-name",
-34: REF 'styleNameRef',
-35: CHOICE
-36: DATA 'NCName',
-36: EPSILON
-33: EPSILON
-32: CHOICE
-33: ATTRIBUTE "text:start-value",
-34: REF 'nonNegativeInteger',
-35: DATA 'nonNegativeInteger',
-33: EPSILON
-32: SEQUENCE
-33: REF 'common-num-format-prefix-suffix-attlist',
-34: SEQUENCE
-35: CHOICE
-36: ATTRIBUTE "style:num-prefix",
-37: REF 'string',
-38: DATA 'string',
-36: EPSILON
-35: CHOICE
-36: ATTRIBUTE "style:num-suffix",
-37: REF 'string',
-38: DATA 'string',
-36: EPSILON
-33: CHOICE
-34: REF 'common-num-format-attlist',
-35: CHOICE
-36: ATTRIBUTE "style:num-format",
-37: CHOICE
-38: VALUE '1',
-38: VALUE 'i',
-38: VALUE 'I',
-38: REF 'string',
-39: DATA 'string',
-38: EPSILON
-36: SEQUENCE
-37: ATTRIBUTE "style:num-format",
-38: CHOICE
-39: VALUE 'a',
-39: VALUE 'A',
-37: REF 'style-num-letter-sync-attlist',
-38: CHOICE
-39: ATTRIBUTE "style:num-letter-sync",
-40: REF 'boolean',
-41: CHOICE
-42: VALUE 'true',
-42: VALUE 'false',
-39: EPSILON
-36: EPSILON
-34: EPSILON
-32: CHOICE
-33: ATTRIBUTE "text:start-numbering-at",
-34: CHOICE
-35: VALUE 'document',
-35: VALUE 'chapter',
-35: VALUE 'page',
-33: EPSILON
-32: CHOICE
-33: ATTRIBUTE "text:footnotes-position",
-34: CHOICE
-35: VALUE 'text',
-35: VALUE 'page',
-35: VALUE 'section',
-35: VALUE 'document',
-33: EPSILON
-32: CHOICE
-33: ELEMENT "text:note-continuation-notice-forward",
-34: STRING
-33: EPSILON
-32: CHOICE
-33: ELEMENT "text:note-continuation-notice-backward",
-34: STRING
-33: EPSILON
 27: EPSILON
 19: EPSILON
 17: SEQUENCE
@@ -2323,27 +727,18 @@
 19: REF 'style-ruby-properties',
 20: ELEMENT "style:ruby-properties",
 21: REF 'style-ruby-properties-content',
-22: REF 'style-ruby-properties-content-strict',
-23: SEQUENCE
-24: REF 'style-ruby-properties-attlist',
-25: INTERLEAVE
+22: REF 'style-properties-content',
+23: REF 'anyAttListOrElements',
+24: SEQUENCE
+25: CHOICE
+26: ONEOREMORE
+27: ATTRIBUTE "*",
+28: STRING
+26: EPSILON
+25: REF 'anyElements',
 26: CHOICE
-27: ATTRIBUTE "style:ruby-position",
-28: CHOICE
-29: VALUE 'above',
-29: VALUE 'below',
+27: ONEOREMORE
 27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:ruby-align",
-28: CHOICE
-29: VALUE 'left',
-29: VALUE 'center',
-29: VALUE 'right',
-29: VALUE 'distribute-letter',
-29: VALUE 'distribute-space',
-27: EPSILON
-24: REF 'style-ruby-properties-elements',
-25: EPSILON
 19: EPSILON
 17: SEQUENCE
 18: ATTRIBUTE "style:family",
@@ -2352,158 +747,17 @@
 19: REF 'style-table-properties',
 20: ELEMENT "style:table-properties",
 21: REF 'style-table-properties-content',
-22: REF 'style-table-properties-content-strict',
-23: SEQUENCE
-24: REF 'style-table-properties-attlist',
-25: INTERLEAVE
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "style:width",
-29: REF 'positiveLength',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:rel-width",
-29: REF 'percent',
-30: DATA 'string',
-28: EPSILON
+22: REF 'style-properties-content',
+23: REF 'anyAttListOrElements',
+24: SEQUENCE
+25: CHOICE
+26: ONEOREMORE
+27: ATTRIBUTE "*",
+28: STRING
+26: EPSILON
+25: REF 'anyElements',
 26: CHOICE
-27: ATTRIBUTE "table:align",
-28: CHOICE
-29: VALUE 'left',
-29: VALUE 'center',
-29: VALUE 'right',
-29: VALUE 'margins',
-27: EPSILON
-26: REF 'common-horizontal-margin-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:margin-left",
-30: CHOICE
-31: REF 'length',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:margin-right",
-30: CHOICE
-31: REF 'length',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-26: REF 'common-vertical-margin-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:margin-top",
-30: CHOICE
-31: REF 'nonNegativeLength',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:margin-bottom",
-30: CHOICE
-31: REF 'nonNegativeLength',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-26: REF 'common-margin-attlist',
-27: CHOICE
-28: ATTRIBUTE "fo:margin",
-29: CHOICE
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-26: REF 'common-page-number-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:page-number",
-29: CHOICE
-30: REF 'positiveInteger',
-31: DATA 'positiveInteger',
-30: VALUE 'auto',
-28: EPSILON
-26: REF 'common-break-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:break-before",
-30: CHOICE
-31: VALUE 'auto',
-31: VALUE 'column',
-31: VALUE 'page',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:break-after",
-30: CHOICE
-31: VALUE 'auto',
-31: VALUE 'column',
-31: VALUE 'page',
-29: EPSILON
-26: REF 'common-background-color-attlist',
-27: CHOICE
-28: ATTRIBUTE "fo:background-color",
-29: CHOICE
-30: VALUE 'transparent',
-30: REF 'color',
-31: DATA 'string',
-28: EPSILON
-26: REF 'common-shadow-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:shadow",
-29: REF 'shadowType',
-30: CHOICE
-31: VALUE 'none',
-31: REF 'string',
-32: DATA 'string',
-28: EPSILON
-26: REF 'common-keep-with-next-attlist',
-27: CHOICE
-28: ATTRIBUTE "fo:keep-with-next",
-29: CHOICE
-30: VALUE 'auto',
-30: VALUE 'always',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:may-break-between-rows",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "table:border-model",
-28: CHOICE
-29: VALUE 'collapsing',
-29: VALUE 'separating',
-27: EPSILON
-26: REF 'common-writing-mode-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:writing-mode",
-29: CHOICE
-30: VALUE 'lr-tb',
-30: VALUE 'rl-tb',
-30: VALUE 'tb-rl',
-30: VALUE 'tb-lr',
-30: VALUE 'lr',
-30: VALUE 'rl',
-30: VALUE 'tb',
-30: VALUE 'page',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "table:display",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-24: REF 'style-table-properties-elements',
-25: REF 'style-background-image',
-26: CHOICE
+27: ONEOREMORE
 27: EPSILON
 19: EPSILON
 17: SEQUENCE
@@ -2513,46 +767,18 @@
 19: REF 'style-table-column-properties',
 20: ELEMENT "style:table-column-properties",
 21: REF 'style-table-column-properties-content',
-22: REF 'style-table-column-properties-content-strict',
-23: SEQUENCE
-24: REF 'style-table-column-properties-attlist',
-25: INTERLEAVE
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "style:column-width",
-29: REF 'positiveLength',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:rel-column-width",
-29: REF 'relativeLength',
-30: DATA 'string',
-28: EPSILON
+22: REF 'style-properties-content',
+23: REF 'anyAttListOrElements',
+24: SEQUENCE
+25: CHOICE
+26: ONEOREMORE
+27: ATTRIBUTE "*",
+28: STRING
+26: EPSILON
+25: REF 'anyElements',
 26: CHOICE
-27: ATTRIBUTE "style:use-optimal-column-width",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
+27: ONEOREMORE
 27: EPSILON
-26: REF 'common-break-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:break-before",
-30: CHOICE
-31: VALUE 'auto',
-31: VALUE 'column',
-31: VALUE 'page',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:break-after",
-30: CHOICE
-31: VALUE 'auto',
-31: VALUE 'column',
-31: VALUE 'page',
-29: EPSILON
-24: REF 'style-table-column-properties-elements',
-25: EPSILON
 19: EPSILON
 17: SEQUENCE
 18: ATTRIBUTE "style:family",
@@ -2561,61 +787,17 @@
 19: REF 'style-table-row-properties',
 20: ELEMENT "style:table-row-properties",
 21: REF 'style-table-row-properties-content',
-22: REF 'style-table-row-properties-content-strict',
-23: SEQUENCE
-24: REF 'style-table-row-properties-attlist',
-25: INTERLEAVE
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "style:row-height",
-29: REF 'positiveLength',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:min-row-height",
-29: REF 'nonNegativeLength',
-30: DATA 'string',
-28: EPSILON
+22: REF 'style-properties-content',
+23: REF 'anyAttListOrElements',
+24: SEQUENCE
+25: CHOICE
+26: ONEOREMORE
+27: ATTRIBUTE "*",
+28: STRING
+26: EPSILON
+25: REF 'anyElements',
 26: CHOICE
-27: ATTRIBUTE "style:use-optimal-row-height",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: REF 'common-background-color-attlist',
-27: CHOICE
-28: ATTRIBUTE "fo:background-color",
-29: CHOICE
-30: VALUE 'transparent',
-30: REF 'color',
-31: DATA 'string',
-28: EPSILON
-26: REF 'common-break-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:break-before",
-30: CHOICE
-31: VALUE 'auto',
-31: VALUE 'column',
-31: VALUE 'page',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:break-after",
-30: CHOICE
-31: VALUE 'auto',
-31: VALUE 'column',
-31: VALUE 'page',
-29: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:keep-together",
-28: CHOICE
-29: VALUE 'auto',
-29: VALUE 'always',
-27: EPSILON
-24: REF 'style-table-row-properties-elements',
-25: REF 'style-background-image',
-26: CHOICE
+27: ONEOREMORE
 27: EPSILON
 19: EPSILON
 17: SEQUENCE
@@ -2625,265 +807,17 @@
 19: REF 'style-table-cell-properties',
 20: ELEMENT "style:table-cell-properties",
 21: REF 'style-table-cell-properties-content',
-22: REF 'style-table-cell-properties-content-strict',
-23: SEQUENCE
-24: REF 'style-table-cell-properties-attlist',
-25: INTERLEAVE
+22: REF 'style-properties-content',
+23: REF 'anyAttListOrElements',
+24: SEQUENCE
+25: CHOICE
+26: ONEOREMORE
+27: ATTRIBUTE "*",
+28: STRING
+26: EPSILON
+25: REF 'anyElements',
 26: CHOICE
-27: ATTRIBUTE "style:vertical-align",
-28: CHOICE
-29: VALUE 'top',
-29: VALUE 'middle',
-29: VALUE 'bottom',
-29: VALUE 'automatic',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:text-align-source",
-28: CHOICE
-29: VALUE 'fix',
-29: VALUE 'value-type',
-27: EPSILON
-26: REF 'common-style-direction-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:direction",
-29: CHOICE
-30: VALUE 'ltr',
-30: VALUE 'ttb',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:glyph-orientation-vertical",
-28: CHOICE
-29: VALUE 'auto',
-29: VALUE '0',
-27: EPSILON
-26: REF 'common-shadow-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:shadow",
-29: REF 'shadowType',
-30: CHOICE
-31: VALUE 'none',
-31: REF 'string',
-32: DATA 'string',
-28: EPSILON
-26: REF 'common-background-color-attlist',
-27: CHOICE
-28: ATTRIBUTE "fo:background-color",
-29: CHOICE
-30: VALUE 'transparent',
-30: REF 'color',
-31: DATA 'string',
-28: EPSILON
-26: REF 'common-border-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:border",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:border-top",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:border-bottom",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:border-left",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:border-right",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "style:diagonal-tl-br",
-29: REF 'string',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:diagonal-tl-br-widths",
-29: REF 'borderWidths',
-30: LIST
-31: SEQUENCE
-32: REF 'positiveLength',
-33: DATA 'string',
-32: REF 'positiveLength',
-33: DATA 'string',
-32: REF 'positiveLength',
-33: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:diagonal-bl-tr",
-29: REF 'string',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "style:diagonal-bl-tr-widths",
-29: REF 'borderWidths',
-30: LIST
-31: SEQUENCE
-32: REF 'positiveLength',
-33: DATA 'string',
-32: REF 'positiveLength',
-33: DATA 'string',
-32: REF 'positiveLength',
-33: DATA 'string',
-28: EPSILON
-26: REF 'common-border-line-width-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width-top",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width-bottom",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width-left",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width-right",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-26: REF 'common-padding-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:padding",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:padding-top",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:padding-bottom",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:padding-left",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:padding-right",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:wrap-option",
-28: CHOICE
-29: VALUE 'no-wrap',
-29: VALUE 'wrap',
-27: EPSILON
-26: REF 'common-rotation-angle-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:rotation-angle",
-29: REF 'nonNegativeInteger',
-30: DATA 'nonNegativeInteger',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:rotation-align",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'bottom',
-29: VALUE 'top',
-29: VALUE 'center',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:cell-protect",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'hidden-and-protected',
-29: LIST
-30: ONEOREMORE
-31: CHOICE
-32: VALUE 'protected',
-32: VALUE 'formula-hidden',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:print-content",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:decimal-places",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:repeat-content",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:shrink-to-fit",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-24: REF 'style-table-cell-properties-elements',
-25: REF 'style-background-image',
-26: CHOICE
+27: ONEOREMORE
 27: EPSILON
 19: EPSILON
 18: CHOICE
@@ -2901,1466 +835,18 @@
 19: REF 'style-graphic-properties',
 20: ELEMENT "style:graphic-properties",
 21: REF 'style-graphic-properties-content',
-22: REF 'style-graphic-properties-content-strict',
-23: SEQUENCE
-24: REF 'style-graphic-properties-attlist',
-25: INTERLEAVE
-26: CHOICE
-27: ATTRIBUTE "draw:stroke",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'dash',
-29: VALUE 'solid',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:stroke-dash",
-28: REF 'styleNameRef',
-29: CHOICE
-30: DATA 'NCName',
-30: EPSILON
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:stroke-dash-names",
-28: REF 'styleNameRefs',
-29: LIST
-30: CHOICE
-31: ONEOREMORE
-32: DATA 'NCName',
-31: EPSILON
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "svg:stroke-width",
-28: REF 'length',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "svg:stroke-color",
-28: REF 'color',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:marker-start",
-28: REF 'styleNameRef',
-29: CHOICE
-30: DATA 'NCName',
-30: EPSILON
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:marker-end",
-28: REF 'styleNameRef',
-29: CHOICE
-30: DATA 'NCName',
-30: EPSILON
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:marker-start-width",
-28: REF 'length',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:marker-end-width",
-28: REF 'length',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:marker-start-center",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:marker-end-center",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "svg:stroke-opacity",
-28: CHOICE
-29: DATA 'double',
-29: REF 'percent',
-30: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:stroke-linejoin",
-28: CHOICE
-29: VALUE 'miter',
-29: VALUE 'round',
-29: VALUE 'bevel',
-29: VALUE 'middle',
-29: VALUE 'none',
-29: VALUE 'inherit',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:symbol-color",
-28: REF 'color',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "text:animation",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'scroll',
-29: VALUE 'alternate',
-29: VALUE 'slide',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "text:animation-direction",
-28: CHOICE
-29: VALUE 'left',
-29: VALUE 'right',
-29: VALUE 'up',
-29: VALUE 'down',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "text:animation-start-inside",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "text:animation-stop-inside",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "text:animation-repeat",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "text:animation-delay",
-28: REF 'duration',
-29: DATA 'duration',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "text:animation-steps",
-28: REF 'length',
-29: DATA 'string',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "draw:auto-grow-width",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:auto-grow-height",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:fit-to-size",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:fit-to-contour",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:textarea-vertical-align",
-28: CHOICE
-29: VALUE 'top',
-29: VALUE 'middle',
-29: VALUE 'bottom',
-29: VALUE 'justify',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:textarea-horizontal-align",
-28: CHOICE
-29: VALUE 'left',
-29: VALUE 'center',
-29: VALUE 'right',
-29: VALUE 'justify',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:wrap-option",
-28: CHOICE
-29: VALUE 'no-wrap',
-29: VALUE 'wrap',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:color-mode",
-28: CHOICE
-29: VALUE 'greyscale',
-29: VALUE 'mono',
-29: VALUE 'watermark',
-29: VALUE 'standard',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:color-inversion",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:luminance",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:contrast",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:gamma",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:red",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:green",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:blue",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:image-opacity",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:shadow",
-28: CHOICE
-29: VALUE 'visible',
-29: VALUE 'hidden',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "draw:shadow-offset-x",
-29: REF 'length',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:shadow-offset-y",
-29: REF 'length',
-30: DATA 'string',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:shadow-color",
-28: REF 'color',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:shadow-opacity",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "draw:start-line-spacing-horizontal",
-29: REF 'distance',
-30: REF 'length',
-31: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:start-line-spacing-vertical",
-29: REF 'distance',
-30: REF 'length',
-31: DATA 'string',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "draw:end-line-spacing-horizontal",
-29: REF 'distance',
-30: REF 'length',
-31: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:end-line-spacing-vertical",
-29: REF 'distance',
-30: REF 'length',
-31: DATA 'string',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:line-distance",
-28: REF 'distance',
-29: REF 'length',
-30: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:guide-overhang",
-28: REF 'length',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:guide-distance",
-28: REF 'distance',
-29: REF 'length',
-30: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:start-guide",
-28: REF 'length',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:end-guide",
-28: REF 'length',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:placing",
-28: CHOICE
-29: VALUE 'below',
-29: VALUE 'above',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:parallel",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "draw:measure-align",
-29: CHOICE
-30: VALUE 'automatic',
-30: VALUE 'left-outside',
-30: VALUE 'inside',
-30: VALUE 'right-outside',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:measure-vertical-align",
-29: CHOICE
-30: VALUE 'automatic',
-30: VALUE 'above',
-30: VALUE 'below',
-30: VALUE 'center',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:unit",
-28: CHOICE
-29: VALUE 'automatic',
-29: VALUE 'mm',
-29: VALUE 'cm',
-29: VALUE 'm',
-29: VALUE 'km',
-29: VALUE 'pt',
-29: VALUE 'pc',
-29: VALUE 'inch',
-29: VALUE 'ft',
-29: VALUE 'mi',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:show-unit",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:decimal-places",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:caption-type",
-28: CHOICE
-29: VALUE 'straight-line',
-29: VALUE 'angled-line',
-29: VALUE 'angled-connector-line',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:caption-angle-type",
-28: CHOICE
-29: VALUE 'fixed',
-29: VALUE 'free',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:caption-angle",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:caption-gap",
-28: REF 'distance',
-29: REF 'length',
-30: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:caption-escape-direction",
-28: CHOICE
-29: VALUE 'horizontal',
-29: VALUE 'vertical',
-29: VALUE 'auto',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:caption-escape",
-28: CHOICE
-29: REF 'length',
-30: DATA 'string',
-29: REF 'percent',
-30: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:caption-line-length",
-28: REF 'length',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:caption-fit-line-length",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:horizontal-segments",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:vertical-segments",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:edge-rounding",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:edge-rounding-mode",
-28: CHOICE
-29: VALUE 'correct',
-29: VALUE 'attractive',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:back-scale",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:depth",
-28: REF 'length',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:backface-culling",
-28: CHOICE
-29: VALUE 'enabled',
-29: VALUE 'disabled',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:end-angle",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:close-front",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:close-back",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:lighting-mode",
-28: CHOICE
-29: VALUE 'standard',
-29: VALUE 'double-sided',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:normals-kind",
-28: CHOICE
-29: VALUE 'object',
-29: VALUE 'flat',
-29: VALUE 'sphere',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:normals-direction",
-28: CHOICE
-29: VALUE 'normal',
-29: VALUE 'inverse',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "dr3d:texture-generation-mode-x",
-29: CHOICE
-30: VALUE 'object',
-30: VALUE 'parallel',
-30: VALUE 'sphere',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "dr3d:texture-generation-mode-y",
-29: CHOICE
-30: VALUE 'object',
-30: VALUE 'parallel',
-30: VALUE 'sphere',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:texture-kind",
-28: CHOICE
-29: VALUE 'luminance',
-29: VALUE 'intensity',
-29: VALUE 'color',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:texture-filter",
-28: CHOICE
-29: VALUE 'enabled',
-29: VALUE 'disabled',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:texture-mode",
-28: CHOICE
-29: VALUE 'replace',
-29: VALUE 'modulate',
-29: VALUE 'blend',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "dr3d:ambient-color",
-29: REF 'color',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "dr3d:emissive-color",
-29: REF 'color',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "dr3d:specular-color",
-29: REF 'color',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "dr3d:diffuse-color",
-29: REF 'color',
-30: DATA 'string',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:shininess",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "dr3d:shadow",
-28: CHOICE
-29: VALUE 'visible',
-29: VALUE 'hidden',
-27: EPSILON
-26: SEQUENCE
-27: REF 'common-draw-rel-size-attlist',
-28: SEQUENCE
-29: REF 'common-draw-size-attlist',
-30: SEQUENCE
-31: CHOICE
-32: ATTRIBUTE "svg:width",
-33: REF 'length',
-34: DATA 'string',
-32: EPSILON
-31: CHOICE
-32: ATTRIBUTE "svg:height",
-33: REF 'length',
-34: DATA 'string',
-32: EPSILON
-29: CHOICE
-30: ATTRIBUTE "style:rel-width",
-31: CHOICE
-32: REF 'percent',
-33: DATA 'string',
-32: VALUE 'scale',
-32: VALUE 'scale-min',
-30: EPSILON
-29: CHOICE
-30: ATTRIBUTE "style:rel-height",
-31: CHOICE
-32: REF 'percent',
-33: DATA 'string',
-32: VALUE 'scale',
-32: VALUE 'scale-min',
-30: EPSILON
-27: CHOICE
-28: ATTRIBUTE "fo:min-width",
-29: CHOICE
-30: REF 'length',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:min-height",
-28: CHOICE
-29: REF 'length',
-30: DATA 'string',
-29: REF 'percent',
-30: DATA 'string',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "fo:max-height",
-29: CHOICE
-30: REF 'length',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "fo:max-width",
-29: CHOICE
-30: REF 'length',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-26: REF 'common-horizontal-margin-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:margin-left",
-30: CHOICE
-31: REF 'length',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:margin-right",
-30: CHOICE
-31: REF 'length',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-26: REF 'common-vertical-margin-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:margin-top",
-30: CHOICE
-31: REF 'nonNegativeLength',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:margin-bottom",
-30: CHOICE
-31: REF 'nonNegativeLength',
-32: DATA 'string',
-31: REF 'percent',
-32: DATA 'string',
-29: EPSILON
-26: REF 'common-margin-attlist',
-27: CHOICE
-28: ATTRIBUTE "fo:margin",
-29: CHOICE
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:print-content",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:protect",
-28: CHOICE
-29: VALUE 'none',
-29: LIST
-30: ONEOREMORE
-31: CHOICE
-32: VALUE 'content',
-32: VALUE 'position',
-32: VALUE 'size',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "style:horizontal-pos",
-29: CHOICE
-30: VALUE 'left',
-30: VALUE 'center',
-30: VALUE 'right',
-30: VALUE 'from-left',
-30: VALUE 'inside',
-30: VALUE 'outside',
-30: VALUE 'from-inside',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "svg:x",
-29: REF 'coordinate',
-30: REF 'length',
-31: DATA 'string',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:horizontal-rel",
-28: CHOICE
-29: VALUE 'page',
-29: VALUE 'page-content',
-29: VALUE 'page-start-margin',
-29: VALUE 'page-end-margin',
-29: VALUE 'frame',
-29: VALUE 'frame-content',
-29: VALUE 'frame-start-margin',
-29: VALUE 'frame-end-margin',
-29: VALUE 'paragraph',
-29: VALUE 'paragraph-content',
-29: VALUE 'paragraph-start-margin',
-29: VALUE 'paragraph-end-margin',
-29: VALUE 'char',
-27: EPSILON
-26: REF 'common-vertical-pos-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "style:vertical-pos",
-30: CHOICE
-31: VALUE 'top',
-31: VALUE 'middle',
-31: VALUE 'bottom',
-31: VALUE 'from-top',
-31: VALUE 'below',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "svg:y",
-30: REF 'coordinate',
-31: REF 'length',
-32: DATA 'string',
-29: EPSILON
-26: REF 'common-vertical-rel-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:vertical-rel",
-29: CHOICE
-30: VALUE 'page',
-30: VALUE 'page-content',
-30: VALUE 'frame',
-30: VALUE 'frame-content',
-30: VALUE 'paragraph',
-30: VALUE 'paragraph-content',
-30: VALUE 'char',
-30: VALUE 'line',
-30: VALUE 'baseline',
-30: VALUE 'text',
-28: EPSILON
-26: REF 'common-text-anchor-attlist',
-27: INTERLEAVE
-28: CHOICE
-29: ATTRIBUTE "text:anchor-type",
-30: CHOICE
-31: VALUE 'page',
-31: VALUE 'frame',
-31: VALUE 'paragraph',
-31: VALUE 'char',
-31: VALUE 'as-char',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "text:anchor-page-number",
-30: REF 'positiveInteger',
-31: DATA 'positiveInteger',
-29: EPSILON
-26: REF 'common-border-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:border",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:border-top",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:border-bottom",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:border-left",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:border-right",
-30: REF 'string',
-31: DATA 'string',
-29: EPSILON
-26: REF 'common-border-line-width-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width-top",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width-bottom",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width-left",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "style:border-line-width-right",
-30: REF 'borderWidths',
-31: LIST
-32: SEQUENCE
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-33: REF 'positiveLength',
-34: DATA 'string',
-29: EPSILON
-26: REF 'common-padding-attlist',
-27: SEQUENCE
-28: CHOICE
-29: ATTRIBUTE "fo:padding",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:padding-top",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:padding-bottom",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:padding-left",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-28: CHOICE
-29: ATTRIBUTE "fo:padding-right",
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-29: EPSILON
-26: REF 'common-shadow-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:shadow",
-29: REF 'shadowType',
-30: CHOICE
-31: VALUE 'none',
-31: REF 'string',
-32: DATA 'string',
-28: EPSILON
-26: REF 'common-background-color-attlist',
-27: CHOICE
-28: ATTRIBUTE "fo:background-color",
-29: CHOICE
-30: VALUE 'transparent',
-30: REF 'color',
-31: DATA 'string',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:editable",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:wrap",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'left',
-29: VALUE 'right',
-29: VALUE 'parallel',
-29: VALUE 'dynamic',
-29: VALUE 'run-through',
-29: VALUE 'biggest',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:wrap-dynamic-threshold",
-28: REF 'nonNegativeLength',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:number-wrapped-paragraphs",
-28: CHOICE
-29: VALUE 'no-limit',
-29: REF 'positiveInteger',
-30: DATA 'positiveInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:wrap-contour",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:wrap-contour-mode",
-28: CHOICE
-29: VALUE 'full',
-29: VALUE 'outside',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:run-through",
-28: CHOICE
-29: VALUE 'foreground',
-29: VALUE 'background',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:flow-with-text",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:overflow-behavior",
-28: CHOICE
-29: VALUE 'clip',
-29: VALUE 'auto-create-new-frame',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:mirror",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'vertical',
-29: REF 'horizontal-mirror',
-30: CHOICE
-31: VALUE 'horizontal',
-31: VALUE 'horizontal-on-odd',
-31: VALUE 'horizontal-on-even',
-29: LIST
-30: SEQUENCE
-31: VALUE 'vertical',
-31: REF 'horizontal-mirror',
-32: CHOICE
-33: VALUE 'horizontal',
-33: VALUE 'horizontal-on-odd',
-33: VALUE 'horizontal-on-even',
-29: LIST
-30: SEQUENCE
-31: REF 'horizontal-mirror',
-32: CHOICE
-33: VALUE 'horizontal',
-33: VALUE 'horizontal-on-odd',
-33: VALUE 'horizontal-on-even',
-31: VALUE 'vertical',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:clip",
-28: REF 'string',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:wrap-influence-on-position",
-28: CHOICE
-29: VALUE 'iterative',
-29: VALUE 'once-concurrent',
-29: VALUE 'once-successive',
-27: EPSILON
-26: REF 'common-writing-mode-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:writing-mode",
-29: CHOICE
-30: VALUE 'lr-tb',
-30: VALUE 'rl-tb',
-30: VALUE 'tb-rl',
-30: VALUE 'tb-lr',
-30: VALUE 'lr',
-30: VALUE 'rl',
-30: VALUE 'tb',
-30: VALUE 'page',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:frame-display-scrollbar",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:frame-display-border",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "draw:frame-margin-horizontal",
-29: REF 'nonNegativePixelLength',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:frame-margin-vertical",
-29: REF 'nonNegativePixelLength',
-30: DATA 'string',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "draw:visible-area-left",
-29: REF 'nonNegativeLength',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:visible-area-top",
-29: REF 'nonNegativeLength',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:visible-area-width",
-29: REF 'positiveLength',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:visible-area-height",
-29: REF 'positiveLength',
-30: DATA 'string',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:ole-draw-aspect",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-24: REF 'style-graphic-fill-properties-attlist',
-25: INTERLEAVE
-26: CHOICE
-27: ATTRIBUTE "draw:fill",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'solid',
-29: VALUE 'bitmap',
-29: VALUE 'gradient',
-29: VALUE 'hatch',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:fill-color",
-28: REF 'color',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:secondary-fill-color",
-28: REF 'color',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:fill-gradient-name",
-28: REF 'styleNameRef',
-29: CHOICE
-30: DATA 'NCName',
-30: EPSILON
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:gradient-step-count",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:fill-hatch-name",
-28: REF 'styleNameRef',
-29: CHOICE
-30: DATA 'NCName',
-30: EPSILON
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:fill-hatch-solid",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:fill-image-name",
-28: REF 'styleNameRef',
-29: CHOICE
-30: DATA 'NCName',
-30: EPSILON
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:repeat",
-28: CHOICE
-29: VALUE 'no-repeat',
-29: VALUE 'repeat',
-29: VALUE 'stretch',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "draw:fill-image-width",
-29: CHOICE
-30: REF 'length',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:fill-image-height",
-29: CHOICE
-30: REF 'length',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "draw:fill-image-ref-point-x",
-29: REF 'percent',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:fill-image-ref-point-y",
-29: REF 'percent',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:fill-image-ref-point",
-29: CHOICE
-30: VALUE 'top-left',
-30: VALUE 'top',
-30: VALUE 'top-right',
-30: VALUE 'left',
-30: VALUE 'center',
-30: VALUE 'right',
-30: VALUE 'bottom-left',
-30: VALUE 'bottom',
-30: VALUE 'bottom-right',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:tile-repeat-offset",
+22: REF 'style-properties-content',
+23: REF 'anyAttListOrElements',
+24: SEQUENCE
+25: CHOICE
+26: ONEOREMORE
+27: ATTRIBUTE "*",
 28: STRING
-27: EPSILON
+26: EPSILON
+25: REF 'anyElements',
 26: CHOICE
-27: ATTRIBUTE "draw:opacity",
-28: REF 'percent',
-29: DATA 'string',
+27: ONEOREMORE
 27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:opacity-name",
-28: REF 'styleNameRef',
-29: CHOICE
-30: DATA 'NCName',
-30: EPSILON
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "svg:fill-rule",
-28: CHOICE
-29: VALUE 'nonzero',
-29: VALUE 'evenodd',
-27: EPSILON
-24: REF 'style-graphic-properties-elements',
-25: INTERLEAVE
-26: CHOICE
-27: REF 'text-list-style',
-28: ELEMENT "text:list-style",
-29: SEQUENCE
-30: REF 'text-list-style-attr',
-31: INTERLEAVE
-32: ATTRIBUTE "style:name",
-33: REF 'styleName',
-34: DATA 'NCName',
-32: CHOICE
-33: ATTRIBUTE "style:display-name",
-34: REF 'string',
-35: DATA 'string',
-33: EPSILON
-32: CHOICE
-33: ATTRIBUTE "text:consecutive-numbering",
-34: REF 'boolean',
-35: CHOICE
-36: VALUE 'true',
-36: VALUE 'false',
-33: EPSILON
-30: CHOICE
-31: ONEOREMORE
-32: REF 'text-list-style-content',
-33: CHOICE
-34: ELEMENT "text:list-level-style-number",
-35: SEQUENCE
-36: REF 'text-list-level-style-attr',
-37: ATTRIBUTE "text:level",
-38: REF 'positiveInteger',
-39: DATA 'positiveInteger',
-36: REF 'text-list-level-style-number-attr',
-37: INTERLEAVE
-38: CHOICE
-39: ATTRIBUTE "text:style-name",
-40: REF 'styleNameRef',
-41: CHOICE
-42: DATA 'NCName',
-42: EPSILON
-39: EPSILON
-38: SEQUENCE
-39: REF 'common-num-format-attlist',
-40: CHOICE
-41: ATTRIBUTE "style:num-format",
-42: CHOICE
-43: VALUE '1',
-43: VALUE 'i',
-43: VALUE 'I',
-43: REF 'string',
-44: DATA 'string',
-43: EPSILON
-41: SEQUENCE
-42: ATTRIBUTE "style:num-format",
-43: CHOICE
-44: VALUE 'a',
-44: VALUE 'A',
-42: REF 'style-num-letter-sync-attlist',
-43: CHOICE
-44: ATTRIBUTE "style:num-letter-sync",
-45: REF 'boolean',
-46: CHOICE
-47: VALUE 'true',
-47: VALUE 'false',
-44: EPSILON
-41: EPSILON
-39: REF 'common-num-format-prefix-suffix-attlist',
-40: SEQUENCE
-41: CHOICE
-42: ATTRIBUTE "style:num-prefix",
-43: REF 'string',
-44: DATA 'string',
-42: EPSILON
-41: CHOICE
-42: ATTRIBUTE "style:num-suffix",
-43: REF 'string',
-44: DATA 'string',
-42: EPSILON
-38: CHOICE
-39: ATTRIBUTE "text:display-levels",
-40: REF 'positiveInteger',
-41: DATA 'positiveInteger',
-39: EPSILON
-38: CHOICE
-39: ATTRIBUTE "text:start-value",
-40: REF 'positiveInteger',
-41: DATA 'positiveInteger',
-39: EPSILON
-36: CHOICE
-37: REF 'style-list-level-properties',
-38: ELEMENT "style:list-level-properties",
-39: REF 'style-list-level-properties-content',
-40: REF 'style-list-level-properties-content-strict',
-41: SEQUENCE
-42: REF 'style-list-level-properties-attlist',
-43: INTERLEAVE
-44: REF 'common-text-align',
-45: CHOICE
-46: ATTRIBUTE "fo:text-align",
-47: CHOICE
-48: VALUE 'start',
-48: VALUE 'end',
-48: VALUE 'left',
-48: VALUE 'right',
-48: VALUE 'center',
-48: VALUE 'justify',
-46: EPSILON
-44: CHOICE
-45: ATTRIBUTE "text:space-before",
-46: REF 'nonNegativeLength',
-47: DATA 'string',
-45: EPSILON
-44: CHOICE
-45: ATTRIBUTE "text:min-label-width",
-46: REF 'nonNegativeLength',
-47: DATA 'string',
-45: EPSILON
-44: CHOICE
-45: ATTRIBUTE "text:min-label-distance",
-46: REF 'nonNegativeLength',
-47: DATA 'string',
-45: EPSILON
-44: CHOICE
-45: ATTRIBUTE "style:font-name",
-46: REF 'string',
-47: DATA 'string',
-45: EPSILON
-44: SEQUENCE
-45: CHOICE
-46: ATTRIBUTE "fo:width",
-47: REF 'positiveLength',
-48: DATA 'string',
-46: EPSILON
-45: CHOICE
-46: ATTRIBUTE "fo:height",
-47: REF 'positiveLength',
-48: DATA 'string',
-46: EPSILON
-44: SEQUENCE
-45: REF 'common-vertical-rel-attlist',
-46: CHOICE
-47: ATTRIBUTE "style:vertical-rel",
-48: CHOICE
-49: VALUE 'page',
-49: VALUE 'page-content',
-49: VALUE 'frame',
-49: VALUE 'frame-content',
-49: VALUE 'paragraph',
-49: VALUE 'paragraph-content',
-49: VALUE 'char',
-49: VALUE 'line',
-49: VALUE 'baseline',
-49: VALUE 'text',
-47: EPSILON
-45: REF 'common-vertical-pos-attlist',
-46: SEQUENCE
-47: CHOICE
-48: ATTRIBUTE "style:vertical-pos",
-49: CHOICE
-50: VALUE 'top',
-50: VALUE 'middle',
-50: VALUE 'bottom',
-50: VALUE 'from-top',
-50: VALUE 'below',
-48: EPSILON
-47: CHOICE
-48: ATTRIBUTE "svg:y",
-49: REF 'coordinate',
-50: REF 'length',
-51: DATA 'string',
-48: EPSILON
-42: REF 'style-list-level-properties-elements',
-43: EPSILON
-37: EPSILON
-36: CHOICE
-37: REF 'style-text-properties',
-37: EPSILON
-34: ELEMENT "text:list-level-style-bullet",
-35: SEQUENCE
-36: REF 'text-list-level-style-attr',
-37: ATTRIBUTE "text:level",
-38: REF 'positiveInteger',
-39: DATA 'positiveInteger',
-36: REF 'text-list-level-style-bullet-attr',
-37: INTERLEAVE
-38: CHOICE
-39: ATTRIBUTE "text:style-name",
-40: REF 'styleNameRef',
-41: CHOICE
-42: DATA 'NCName',
-42: EPSILON
-39: EPSILON
-38: ATTRIBUTE "text:bullet-char",
-39: REF 'character',
-40: DATA 'string',
-38: REF 'common-num-format-prefix-suffix-attlist',
-39: SEQUENCE
-40: CHOICE
-41: ATTRIBUTE "style:num-prefix",
-42: REF 'string',
-43: DATA 'string',
-41: EPSILON
-40: CHOICE
-41: ATTRIBUTE "style:num-suffix",
-42: REF 'string',
-43: DATA 'string',
-41: EPSILON
-38: CHOICE
-39: ATTRIBUTE "text:bullet-relative-size",
-40: REF 'percent',
-41: DATA 'string',
-39: EPSILON
-36: CHOICE
-37: REF 'style-list-level-properties',
-37: EPSILON
-36: CHOICE
-37: REF 'style-text-properties',
-37: EPSILON
-34: ELEMENT "text:list-level-style-image",
-35: SEQUENCE
-36: REF 'text-list-level-style-attr',
-37: ATTRIBUTE "text:level",
-38: REF 'positiveInteger',
-39: DATA 'positiveInteger',
-36: REF 'text-list-level-style-image-attr',
-37: CHOICE
-38: REF 'common-draw-data-attlist',
-39: SEQUENCE
-40: ATTRIBUTE "xlink:href",
-41: REF 'anyURI',
-42: DATA 'anyURI',
-40: CHOICE
-41: ATTRIBUTE "xlink:type",
-42: VALUE 'simple',
-41: EPSILON
-40: CHOICE
-41: ATTRIBUTE "xlink:show",
-42: VALUE 'embed',
-41: EPSILON
-40: CHOICE
-41: ATTRIBUTE "xlink:actuate",
-42: VALUE 'onLoad',
-41: EPSILON
-38: REF 'office-binary-data',
-36: CHOICE
-37: REF 'style-list-level-properties',
-37: EPSILON
-31: EPSILON
-27: EPSILON
-26: REF 'style-background-image',
-27: CHOICE
-28: EPSILON
-26: REF 'style-columns',
-27: CHOICE
-28: EPSILON
 19: EPSILON
 18: CHOICE
 19: REF 'style-paragraph-properties',
@@ -4375,302 +861,18 @@
 19: REF 'style-drawing-page-properties',
 20: ELEMENT "style:drawing-page-properties",
 21: REF 'style-drawing-page-properties-content',
-22: REF 'style-drawing-page-properties-content-strict',
-23: SEQUENCE
-24: REF 'style-graphic-fill-properties-attlist',
-25: INTERLEAVE
-26: CHOICE
-27: ATTRIBUTE "draw:fill",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'solid',
-29: VALUE 'bitmap',
-29: VALUE 'gradient',
-29: VALUE 'hatch',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:fill-color",
-28: REF 'color',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:secondary-fill-color",
-28: REF 'color',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:fill-gradient-name",
-28: REF 'styleNameRef',
-29: CHOICE
-30: DATA 'NCName',
-30: EPSILON
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:gradient-step-count",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:fill-hatch-name",
-28: REF 'styleNameRef',
-29: CHOICE
-30: DATA 'NCName',
-30: EPSILON
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:fill-hatch-solid",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:fill-image-name",
-28: REF 'styleNameRef',
-29: CHOICE
-30: DATA 'NCName',
-30: EPSILON
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:repeat",
-28: CHOICE
-29: VALUE 'no-repeat',
-29: VALUE 'repeat',
-29: VALUE 'stretch',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "draw:fill-image-width",
-29: CHOICE
-30: REF 'length',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:fill-image-height",
-29: CHOICE
-30: REF 'length',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "draw:fill-image-ref-point-x",
-29: REF 'percent',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:fill-image-ref-point-y",
-29: REF 'percent',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "draw:fill-image-ref-point",
-29: CHOICE
-30: VALUE 'top-left',
-30: VALUE 'top',
-30: VALUE 'top-right',
-30: VALUE 'left',
-30: VALUE 'center',
-30: VALUE 'right',
-30: VALUE 'bottom-left',
-30: VALUE 'bottom',
-30: VALUE 'bottom-right',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:tile-repeat-offset",
-28: STRING
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:opacity",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:opacity-name",
-28: REF 'styleNameRef',
-29: CHOICE
-30: DATA 'NCName',
-30: EPSILON
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "svg:fill-rule",
-28: CHOICE
-29: VALUE 'nonzero',
-29: VALUE 'evenodd',
-27: EPSILON
-24: REF 'style-drawing-page-properties-attlist',
-25: INTERLEAVE
-26: CHOICE
-27: ATTRIBUTE "presentation:transition-type",
-28: CHOICE
-29: VALUE 'manual',
-29: VALUE 'automatic',
-29: VALUE 'semi-automatic',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "presentation:transition-style",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'fade-from-left',
-29: VALUE 'fade-from-top',
-29: VALUE 'fade-from-right',
-29: VALUE 'fade-from-bottom',
-29: VALUE 'fade-from-upperleft',
-29: VALUE 'fade-from-upperright',
-29: VALUE 'fade-from-lowerleft',
-29: VALUE 'fade-from-lowerright',
-29: VALUE 'move-from-left',
-29: VALUE 'move-from-top',
-29: VALUE 'move-from-right',
-29: VALUE 'move-from-bottom',
-29: VALUE 'move-from-upperleft',
-29: VALUE 'move-from-upperright',
-29: VALUE 'move-from-lowerleft',
-29: VALUE 'move-from-lowerright',
-29: VALUE 'uncover-to-left',
-29: VALUE 'uncover-to-top',
-29: VALUE 'uncover-to-right',
-29: VALUE 'uncover-to-bottom',
-29: VALUE 'uncover-to-upperleft',
-29: VALUE 'uncover-to-upperright',
-29: VALUE 'uncover-to-lowerleft',
-29: VALUE 'uncover-to-lowerright',
-29: VALUE 'fade-to-center',
-29: VALUE 'fade-from-center',
-29: VALUE 'vertical-stripes',
-29: VALUE 'horizontal-stripes',
-29: VALUE 'clockwise',
-29: VALUE 'counterclockwise',
-29: VALUE 'open-vertical',
-29: VALUE 'open-horizontal',
-29: VALUE 'close-vertical',
-29: VALUE 'close-horizontal',
-29: VALUE 'wavyline-from-left',
-29: VALUE 'wavyline-from-top',
-29: VALUE 'wavyline-from-right',
-29: VALUE 'wavyline-from-bottom',
-29: VALUE 'spiralin-left',
-29: VALUE 'spiralin-right',
-29: VALUE 'spiralout-left',
-29: VALUE 'spiralout-right',
-29: VALUE 'roll-from-top',
-29: VALUE 'roll-from-left',
-29: VALUE 'roll-from-right',
-29: VALUE 'roll-from-bottom',
-29: VALUE 'stretch-from-left',
-29: VALUE 'stretch-from-top',
-29: VALUE 'stretch-from-right',
-29: VALUE 'stretch-from-bottom',
-29: VALUE 'vertical-lines',
-29: VALUE 'horizontal-lines',
-29: VALUE 'dissolve',
-29: VALUE 'random',
-29: VALUE 'vertical-checkerboard',
-29: VALUE 'horizontal-checkerboard',
-29: VALUE 'interlocking-horizontal-left',
-29: VALUE 'interlocking-horizontal-right',
-29: VALUE 'interlocking-vertical-top',
-29: VALUE 'interlocking-vertical-bottom',
-29: VALUE 'fly-away',
-29: VALUE 'open',
-29: VALUE 'close',
-29: VALUE 'melt',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "presentation:transition-speed",
-28: REF 'presentationSpeeds',
-29: CHOICE
-30: VALUE 'slow',
-30: VALUE 'medium',
-30: VALUE 'fast',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "smil:type",
-28: REF 'string',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "smil:subtype",
-28: REF 'string',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "smil:direction",
-28: CHOICE
-29: VALUE 'forward',
-29: VALUE 'reverse',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "smil:fadeColor",
-28: REF 'color',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "presentation:duration",
-28: REF 'duration',
-29: DATA 'duration',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "presentation:visibility",
-28: CHOICE
-29: VALUE 'visible',
-29: VALUE 'hidden',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "draw:background-size",
-28: CHOICE
-29: VALUE 'full',
-29: VALUE 'border',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "presentation:background-objects-visible",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "presentation:background-visible",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "presentation:display-header",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "presentation:display-footer",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "presentation:display-page-number",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "presentation:display-date-time",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-24: REF 'style-drawing-page-properties-elements',
+22: REF 'style-properties-content',
+23: REF 'anyAttListOrElements',
+24: SEQUENCE
 25: CHOICE
-26: REF 'presentation-sound',
+26: ONEOREMORE
+27: ATTRIBUTE "*",
+28: STRING
 26: EPSILON
+25: REF 'anyElements',
+26: CHOICE
+27: ONEOREMORE
+27: EPSILON
 19: EPSILON
 17: SEQUENCE
 18: ATTRIBUTE "style:family",
@@ -4679,369 +881,18 @@
 19: REF 'style-chart-properties',
 20: ELEMENT "style:chart-properties",
 21: REF 'style-chart-properties-content',
-22: REF 'style-chart-properties-content-strict',
-23: SEQUENCE
-24: REF 'style-chart-properties-attlist',
-25: INTERLEAVE
+22: REF 'style-properties-content',
+23: REF 'anyAttListOrElements',
+24: SEQUENCE
+25: CHOICE
+26: ONEOREMORE
+27: ATTRIBUTE "*",
+28: STRING
+26: EPSILON
+25: REF 'anyElements',
 26: CHOICE
-27: ATTRIBUTE "chart:scale-text",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
+27: ONEOREMORE
 27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:three-dimensional",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:deep",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:symbol-type",
-28: VALUE 'none',
-27: ATTRIBUTE "chart:symbol-type",
-28: VALUE 'automatic',
-27: SEQUENCE
-28: ATTRIBUTE "chart:symbol-type",
-29: VALUE 'named-symbol',
-28: ATTRIBUTE "chart:symbol-name",
-29: CHOICE
-30: VALUE 'square',
-30: VALUE 'diamond',
-30: VALUE 'arrow-down',
-30: VALUE 'arrow-up',
-30: VALUE 'arrow-right',
-30: VALUE 'arrow-left',
-30: VALUE 'bow-tie',
-30: VALUE 'hourglass',
-30: VALUE 'circle',
-30: VALUE 'star',
-30: VALUE 'x',
-30: VALUE 'plus',
-30: VALUE 'asterisk',
-30: VALUE 'horizontal-bar',
-30: VALUE 'vertical-bar',
-27: SEQUENCE
-28: ATTRIBUTE "chart:symbol-type",
-29: VALUE 'image',
-28: ELEMENT "chart:symbol-image",
-29: ATTRIBUTE "xlink:href",
-30: REF 'anyURI',
-31: DATA 'anyURI',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "chart:symbol-width",
-29: REF 'nonNegativeLength',
-30: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:symbol-height",
-29: REF 'nonNegativeLength',
-30: DATA 'string',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:vertical",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:connect-bars",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "chart:gap-width",
-29: REF 'integer',
-30: DATA 'integer',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:overlap",
-29: REF 'integer',
-30: DATA 'integer',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:japanese-candle-stick",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "chart:interpolation",
-29: CHOICE
-30: VALUE 'none',
-30: VALUE 'cubic-spline',
-30: VALUE 'b-spline',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:spline-order",
-29: REF 'positiveInteger',
-30: DATA 'positiveInteger',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:spline-resolution",
-29: REF 'positiveInteger',
-30: DATA 'positiveInteger',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:pie-offset",
-28: REF 'nonNegativeInteger',
-29: DATA 'nonNegativeInteger',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:lines",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:solid-type",
-28: CHOICE
-29: VALUE 'cuboid',
-29: VALUE 'cylinder',
-29: VALUE 'cone',
-29: VALUE 'pyramid',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "chart:stacked",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:percentage",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:link-data-style-to-source",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:visible",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:logarithmic",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "chart:maximum",
-29: REF 'double',
-30: DATA 'double',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:minimum",
-29: REF 'double',
-30: DATA 'double',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:origin",
-29: REF 'double',
-30: DATA 'double',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:interval-major",
-29: REF 'double',
-30: DATA 'double',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:interval-minor-divisor",
-29: REF 'positiveInteger',
-30: DATA 'positiveInteger',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "chart:tick-marks-major-inner",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:tick-marks-major-outer",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:tick-marks-minor-inner",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:tick-marks-minor-outer",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "chart:display-label",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:text-overlap",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "text:line-break",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:label-arrangement",
-29: CHOICE
-30: VALUE 'side-by-side',
-30: VALUE 'stagger-even',
-30: VALUE 'stagger-odd',
-28: EPSILON
-26: REF 'common-style-direction-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:direction",
-29: CHOICE
-30: VALUE 'ltr',
-30: VALUE 'ttb',
-28: EPSILON
-26: REF 'common-rotation-angle-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:rotation-angle",
-29: REF 'nonNegativeInteger',
-30: DATA 'nonNegativeInteger',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:data-label-number",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'value',
-29: VALUE 'percentage',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:data-label-text",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:data-label-symbol",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:mean-value",
-28: REF 'boolean',
-29: CHOICE
-30: VALUE 'true',
-30: VALUE 'false',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:error-category",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'variance',
-29: VALUE 'standard-deviation',
-29: VALUE 'percentage',
-29: VALUE 'error-margin',
-29: VALUE 'constant',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:error-percentage",
-28: REF 'double',
-29: DATA 'double',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:error-margin",
-28: REF 'double',
-29: DATA 'double',
-27: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "chart:error-lower-limit",
-29: REF 'double',
-30: DATA 'double',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:error-upper-limit",
-29: REF 'double',
-30: DATA 'double',
-28: EPSILON
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "chart:error-upper-indicator",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "chart:error-lower-indicator",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:series-source",
-28: CHOICE
-29: VALUE 'columns',
-29: VALUE 'rows',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "chart:regression-type",
-28: CHOICE
-29: VALUE 'none',
-29: VALUE 'linear',
-29: VALUE 'logarithmic',
-29: VALUE 'exponential',
-29: VALUE 'power',
-27: EPSILON
-24: REF 'style-chart-properties-elements',
-25: EPSILON
 19: EPSILON
 18: CHOICE
 19: REF 'style-graphic-properties',
@@ -5076,6 +927,185 @@
 10: CHOICE
 11: ONEOREMORE
 12: REF 'text-list-style',
+13: ELEMENT "text:list-style",
+14: SEQUENCE
+15: REF 'text-list-style-attr',
+16: INTERLEAVE
+17: ATTRIBUTE "style:name",
+18: REF 'styleName',
+19: DATA 'NCName',
+17: CHOICE
+18: ATTRIBUTE "style:display-name",
+19: REF 'string',
+20: DATA 'string',
+18: EPSILON
+17: CHOICE
+18: ATTRIBUTE "text:consecutive-numbering",
+19: REF 'boolean',
+20: CHOICE
+21: VALUE 'true',
+21: VALUE 'false',
+18: EPSILON
+15: CHOICE
+16: ONEOREMORE
+17: REF 'text-list-style-content',
+18: CHOICE
+19: ELEMENT "text:list-level-style-number",
+20: SEQUENCE
+21: REF 'text-list-level-style-attr',
+22: ATTRIBUTE "text:level",
+23: REF 'positiveInteger',
+24: DATA 'positiveInteger',
+21: REF 'text-list-level-style-number-attr',
+22: INTERLEAVE
+23: CHOICE
+24: ATTRIBUTE "text:style-name",
+25: REF 'styleNameRef',
+26: CHOICE
+27: DATA 'NCName',
+27: EPSILON
+24: EPSILON
+23: SEQUENCE
+24: REF 'common-num-format-attlist',
+25: CHOICE
+26: ATTRIBUTE "style:num-format",
+27: CHOICE
+28: VALUE '1',
+28: VALUE 'i',
+28: VALUE 'I',
+28: REF 'string',
+29: DATA 'string',
+28: EPSILON
+26: SEQUENCE
+27: ATTRIBUTE "style:num-format",
+28: CHOICE
+29: VALUE 'a',
+29: VALUE 'A',
+27: REF 'style-num-letter-sync-attlist',
+28: CHOICE
+29: ATTRIBUTE "style:num-letter-sync",
+30: REF 'boolean',
+31: CHOICE
+32: VALUE 'true',
+32: VALUE 'false',
+29: EPSILON
+26: EPSILON
+24: REF 'common-num-format-prefix-suffix-attlist',
+25: SEQUENCE
+26: CHOICE
+27: ATTRIBUTE "style:num-prefix",
+28: REF 'string',
+29: DATA 'string',
+27: EPSILON
+26: CHOICE
+27: ATTRIBUTE "style:num-suffix",
+28: REF 'string',
+29: DATA 'string',
+27: EPSILON
+23: CHOICE
+24: ATTRIBUTE "text:display-levels",
+25: REF 'positiveInteger',
+26: DATA 'positiveInteger',
+24: EPSILON
+23: CHOICE
+24: ATTRIBUTE "text:start-value",
+25: REF 'positiveInteger',
+26: DATA 'positiveInteger',
+24: EPSILON
+21: CHOICE
+22: REF 'style-list-level-properties',
+23: ELEMENT "style:list-level-properties",
+24: REF 'style-list-level-properties-content',
+25: REF 'style-properties-content',
+26: REF 'anyAttListOrElements',
+27: SEQUENCE
+28: CHOICE
+29: ONEOREMORE
+30: ATTRIBUTE "*",
+31: STRING
+29: EPSILON
+28: REF 'anyElements',
+29: CHOICE
+30: ONEOREMORE
+30: EPSILON
+22: EPSILON
+21: CHOICE
+22: REF 'style-text-properties',
+22: EPSILON
+19: ELEMENT "text:list-level-style-bullet",
+20: SEQUENCE
+21: REF 'text-list-level-style-attr',
+22: ATTRIBUTE "text:level",
+23: REF 'positiveInteger',
+24: DATA 'positiveInteger',
+21: REF 'text-list-level-style-bullet-attr',
+22: INTERLEAVE
+23: CHOICE
+24: ATTRIBUTE "text:style-name",
+25: REF 'styleNameRef',
+26: CHOICE
+27: DATA 'NCName',
+27: EPSILON
+24: EPSILON
+23: ATTRIBUTE "text:bullet-char",
+24: REF 'character',
+25: DATA 'string',
+23: REF 'common-num-format-prefix-suffix-attlist',
+24: SEQUENCE
+25: CHOICE
+26: ATTRIBUTE "style:num-prefix",
+27: REF 'string',
+28: DATA 'string',
+26: EPSILON
+25: CHOICE
+26: ATTRIBUTE "style:num-suffix",
+27: REF 'string',
+28: DATA 'string',
+26: EPSILON
+23: CHOICE
+24: ATTRIBUTE "text:bullet-relative-size",
+25: REF 'percent',
+26: DATA 'string',
+24: EPSILON
+21: CHOICE
+22: REF 'style-list-level-properties',
+22: EPSILON
+21: CHOICE
+22: REF 'style-text-properties',
+22: EPSILON
+19: ELEMENT "text:list-level-style-image",
+20: SEQUENCE
+21: REF 'text-list-level-style-attr',
+22: ATTRIBUTE "text:level",
+23: REF 'positiveInteger',
+24: DATA 'positiveInteger',
+21: REF 'text-list-level-style-image-attr',
+22: CHOICE
+23: REF 'common-draw-data-attlist',
+24: SEQUENCE
+25: ATTRIBUTE "xlink:href",
+26: REF 'anyURI',
+27: DATA 'anyURI',
+25: CHOICE
+26: ATTRIBUTE "xlink:type",
+27: VALUE 'simple',
+26: EPSILON
+25: CHOICE
+26: ATTRIBUTE "xlink:show",
+27: VALUE 'embed',
+26: EPSILON
+25: CHOICE
+26: ATTRIBUTE "xlink:actuate",
+27: VALUE 'onLoad',
+26: EPSILON
+23: REF 'office-binary-data',
+24: ELEMENT "office:binary-data",
+25: REF 'base64Binary',
+26: DATA 'base64Binary',
+21: CHOICE
+22: REF 'style-list-level-properties',
+22: EPSILON
+16: EPSILON
 11: EPSILON
 10: CHOICE
 11: ONEOREMORE
@@ -6166,6 +2196,109 @@
 8: CHOICE
 9: ONEOREMORE
 10: REF 'text-notes-configuration',
+11: ELEMENT "text:notes-configuration",
+12: REF 'text-notes-configuration-content',
+13: INTERLEAVE
+14: REF 'text-note-class',
+15: ATTRIBUTE "text:note-class",
+16: CHOICE
+17: VALUE 'footnote',
+17: VALUE 'endnote',
+14: CHOICE
+15: ATTRIBUTE "text:citation-style-name",
+16: REF 'styleNameRef',
+17: CHOICE
+18: DATA 'NCName',
+18: EPSILON
+15: EPSILON
+14: CHOICE
+15: ATTRIBUTE "text:citation-body-style-name",
+16: REF 'styleNameRef',
+17: CHOICE
+18: DATA 'NCName',
+18: EPSILON
+15: EPSILON
+14: CHOICE
+15: ATTRIBUTE "text:default-style-name",
+16: REF 'styleNameRef',
+17: CHOICE
+18: DATA 'NCName',
+18: EPSILON
+15: EPSILON
+14: CHOICE
+15: ATTRIBUTE "text:master-page-name",
+16: REF 'styleNameRef',
+17: CHOICE
+18: DATA 'NCName',
+18: EPSILON
+15: EPSILON
+14: CHOICE
+15: ATTRIBUTE "text:start-value",
+16: REF 'nonNegativeInteger',
+17: DATA 'nonNegativeInteger',
+15: EPSILON
+14: SEQUENCE
+15: REF 'common-num-format-prefix-suffix-attlist',
+16: SEQUENCE
+17: CHOICE
+18: ATTRIBUTE "style:num-prefix",
+19: REF 'string',
+20: DATA 'string',
+18: EPSILON
+17: CHOICE
+18: ATTRIBUTE "style:num-suffix",
+19: REF 'string',
+20: DATA 'string',
+18: EPSILON
+15: CHOICE
+16: REF 'common-num-format-attlist',
+17: CHOICE
+18: ATTRIBUTE "style:num-format",
+19: CHOICE
+20: VALUE '1',
+20: VALUE 'i',
+20: VALUE 'I',
+20: REF 'string',
+21: DATA 'string',
+20: EPSILON
+18: SEQUENCE
+19: ATTRIBUTE "style:num-format",
+20: CHOICE
+21: VALUE 'a',
+21: VALUE 'A',
+19: REF 'style-num-letter-sync-attlist',
+20: CHOICE
+21: ATTRIBUTE "style:num-letter-sync",
+22: REF 'boolean',
+23: CHOICE
+24: VALUE 'true',
+24: VALUE 'false',
+21: EPSILON
+18: EPSILON
+16: EPSILON
+14: CHOICE
+15: ATTRIBUTE "text:start-numbering-at",
+16: CHOICE
+17: VALUE 'document',
+17: VALUE 'chapter',
+17: VALUE 'page',
+15: EPSILON
+14: CHOICE
+15: ATTRIBUTE "text:footnotes-position",
+16: CHOICE
+17: VALUE 'text',
+17: VALUE 'page',
+17: VALUE 'section',
+17: VALUE 'document',
+15: EPSILON
+14: CHOICE
+15: ELEMENT "text:note-continuation-notice-forward",
+16: STRING
+15: EPSILON
+14: CHOICE
+15: ELEMENT "text:note-continuation-notice-backward",
+16: STRING
+15: EPSILON
 9: EPSILON
 8: CHOICE
 9: REF 'text-bibliography-configuration',
@@ -6951,432 +3084,18 @@
 14: REF 'style-page-layout-properties',
 15: ELEMENT "style:page-layout-properties",
 16: REF 'style-page-layout-properties-content',
-17: REF 'style-page-layout-properties-content-strict',
-18: SEQUENCE
-19: REF 'style-page-layout-properties-attlist',
-20: INTERLEAVE
-21: SEQUENCE
-22: CHOICE
-23: ATTRIBUTE "fo:page-width",
-24: REF 'length',
-25: DATA 'string',
-23: EPSILON
-22: CHOICE
-23: ATTRIBUTE "fo:page-height",
-24: REF 'length',
-25: DATA 'string',
-23: EPSILON
-21: SEQUENCE
-22: CHOICE
-23: REF 'common-num-format-attlist',
-24: CHOICE
-25: ATTRIBUTE "style:num-format",
-26: CHOICE
-27: VALUE '1',
-27: VALUE 'i',
-27: VALUE 'I',
-27: REF 'string',
-28: DATA 'string',
-27: EPSILON
-25: SEQUENCE
-26: ATTRIBUTE "style:num-format",
-27: CHOICE
-28: VALUE 'a',
-28: VALUE 'A',
-26: REF 'style-num-letter-sync-attlist',
-27: CHOICE
-28: ATTRIBUTE "style:num-letter-sync",
-29: REF 'boolean',
-30: CHOICE
-31: VALUE 'true',
-31: VALUE 'false',
-28: EPSILON
-25: EPSILON
-23: EPSILON
-22: REF 'common-num-format-prefix-suffix-attlist',
-23: SEQUENCE
-24: CHOICE
-25: ATTRIBUTE "style:num-prefix",
-26: REF 'string',
-27: DATA 'string',
-25: EPSILON
-24: CHOICE
-25: ATTRIBUTE "style:num-suffix",
-26: REF 'string',
-27: DATA 'string',
-25: EPSILON
+17: REF 'style-properties-content',
+18: REF 'anyAttListOrElements',
+19: SEQUENCE
+20: CHOICE
+21: ONEOREMORE
+22: ATTRIBUTE "*",
+23: STRING
+21: EPSILON
+20: REF 'anyElements',
 21: CHOICE
-22: ATTRIBUTE "style:paper-tray-name",
-23: CHOICE
-24: VALUE 'default',
-24: REF 'string',
-25: DATA 'string',
+22: ONEOREMORE
 22: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:print-orientation",
-23: CHOICE
-24: VALUE 'portrait',
-24: VALUE 'landscape',
-22: EPSILON
-21: SEQUENCE
-22: REF 'common-horizontal-margin-attlist',
-23: SEQUENCE
-24: CHOICE
-25: ATTRIBUTE "fo:margin-left",
-26: CHOICE
-27: REF 'length',
-28: DATA 'string',
-27: REF 'percent',
-28: DATA 'string',
-25: EPSILON
-24: CHOICE
-25: ATTRIBUTE "fo:margin-right",
-26: CHOICE
-27: REF 'length',
-28: DATA 'string',
-27: REF 'percent',
-28: DATA 'string',
-25: EPSILON
-22: REF 'common-vertical-margin-attlist',
-23: SEQUENCE
-24: CHOICE
-25: ATTRIBUTE "fo:margin-top",
-26: CHOICE
-27: REF 'nonNegativeLength',
-28: DATA 'string',
-27: REF 'percent',
-28: DATA 'string',
-25: EPSILON
-24: CHOICE
-25: ATTRIBUTE "fo:margin-bottom",
-26: CHOICE
-27: REF 'nonNegativeLength',
-28: DATA 'string',
-27: REF 'percent',
-28: DATA 'string',
-25: EPSILON
-22: REF 'common-margin-attlist',
-23: CHOICE
-24: ATTRIBUTE "fo:margin",
-25: CHOICE
-26: REF 'nonNegativeLength',
-27: DATA 'string',
-26: REF 'percent',
-27: DATA 'string',
-24: EPSILON
-21: REF 'common-border-attlist',
-22: SEQUENCE
-23: CHOICE
-24: ATTRIBUTE "fo:border",
-25: REF 'string',
-26: DATA 'string',
-24: EPSILON
-23: CHOICE
-24: ATTRIBUTE "fo:border-top",
-25: REF 'string',
-26: DATA 'string',
-24: EPSILON
-23: CHOICE
-24: ATTRIBUTE "fo:border-bottom",
-25: REF 'string',
-26: DATA 'string',
-24: EPSILON
-23: CHOICE
-24: ATTRIBUTE "fo:border-left",
-25: REF 'string',
-26: DATA 'string',
-24: EPSILON
-23: CHOICE
-24: ATTRIBUTE "fo:border-right",
-25: REF 'string',
-26: DATA 'string',
-24: EPSILON
-21: REF 'common-border-line-width-attlist',
-22: SEQUENCE
-23: CHOICE
-24: ATTRIBUTE "style:border-line-width",
-25: REF 'borderWidths',
-26: LIST
-27: SEQUENCE
-28: REF 'positiveLength',
-29: DATA 'string',
-28: REF 'positiveLength',
-29: DATA 'string',
-28: REF 'positiveLength',
-29: DATA 'string',
-24: EPSILON
-23: CHOICE
-24: ATTRIBUTE "style:border-line-width-top",
-25: REF 'borderWidths',
-26: LIST
-27: SEQUENCE
-28: REF 'positiveLength',
-29: DATA 'string',
-28: REF 'positiveLength',
-29: DATA 'string',
-28: REF 'positiveLength',
-29: DATA 'string',
-24: EPSILON
-23: CHOICE
-24: ATTRIBUTE "style:border-line-width-bottom",
-25: REF 'borderWidths',
-26: LIST
-27: SEQUENCE
-28: REF 'positiveLength',
-29: DATA 'string',
-28: REF 'positiveLength',
-29: DATA 'string',
-28: REF 'positiveLength',
-29: DATA 'string',
-24: EPSILON
-23: CHOICE
-24: ATTRIBUTE "style:border-line-width-left",
-25: REF 'borderWidths',
-26: LIST
-27: SEQUENCE
-28: REF 'positiveLength',
-29: DATA 'string',
-28: REF 'positiveLength',
-29: DATA 'string',
-28: REF 'positiveLength',
-29: DATA 'string',
-24: EPSILON
-23: CHOICE
-24: ATTRIBUTE "style:border-line-width-right",
-25: REF 'borderWidths',
-26: LIST
-27: SEQUENCE
-28: REF 'positiveLength',
-29: DATA 'string',
-28: REF 'positiveLength',
-29: DATA 'string',
-28: REF 'positiveLength',
-29: DATA 'string',
-24: EPSILON
-21: REF 'common-padding-attlist',
-22: SEQUENCE
-23: CHOICE
-24: ATTRIBUTE "fo:padding",
-25: REF 'nonNegativeLength',
-26: DATA 'string',
-24: EPSILON
-23: CHOICE
-24: ATTRIBUTE "fo:padding-top",
-25: REF 'nonNegativeLength',
-26: DATA 'string',
-24: EPSILON
-23: CHOICE
-24: ATTRIBUTE "fo:padding-bottom",
-25: REF 'nonNegativeLength',
-26: DATA 'string',
-24: EPSILON
-23: CHOICE
-24: ATTRIBUTE "fo:padding-left",
-25: REF 'nonNegativeLength',
-26: DATA 'string',
-24: EPSILON
-23: CHOICE
-24: ATTRIBUTE "fo:padding-right",
-25: REF 'nonNegativeLength',
-26: DATA 'string',
-24: EPSILON
-21: REF 'common-shadow-attlist',
-22: CHOICE
-23: ATTRIBUTE "style:shadow",
-24: REF 'shadowType',
-25: CHOICE
-26: VALUE 'none',
-26: REF 'string',
-27: DATA 'string',
-23: EPSILON
-21: REF 'common-background-color-attlist',
-22: CHOICE
-23: ATTRIBUTE "fo:background-color",
-24: CHOICE
-25: VALUE 'transparent',
-25: REF 'color',
-26: DATA 'string',
-23: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:register-truth-ref-style-name",
-23: REF 'styleNameRef',
-24: CHOICE
-25: DATA 'NCName',
-25: EPSILON
-22: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:print",
-23: LIST
-24: CHOICE
-25: ONEOREMORE
-26: CHOICE
-27: VALUE 'headers',
-27: VALUE 'grid',
-27: VALUE 'annotations',
-27: VALUE 'objects',
-27: VALUE 'charts',
-27: VALUE 'drawings',
-27: VALUE 'formulas',
-27: VALUE 'zero-values',
-25: EPSILON
-22: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:print-page-order",
-23: CHOICE
-24: VALUE 'ttb',
-24: VALUE 'ltr',
-22: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:first-page-number",
-23: CHOICE
-24: REF 'positiveInteger',
-25: DATA 'positiveInteger',
-24: VALUE 'continue',
-22: EPSILON
-21: SEQUENCE
-22: CHOICE
-23: ATTRIBUTE "style:scale-to",
-24: REF 'percent',
-25: DATA 'string',
-23: EPSILON
-22: CHOICE
-23: ATTRIBUTE "style:scale-to-pages",
-24: REF 'positiveInteger',
-25: DATA 'positiveInteger',
-23: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:table-centering",
-23: CHOICE
-24: VALUE 'horizontal',
-24: VALUE 'vertical',
-24: VALUE 'both',
-24: VALUE 'none',
-22: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:footnote-max-height",
-23: REF 'length',
-24: DATA 'string',
-22: EPSILON
-21: REF 'common-writing-mode-attlist',
-22: CHOICE
-23: ATTRIBUTE "style:writing-mode",
-24: CHOICE
-25: VALUE 'lr-tb',
-25: VALUE 'rl-tb',
-25: VALUE 'tb-rl',
-25: VALUE 'tb-lr',
-25: VALUE 'lr',
-25: VALUE 'rl',
-25: VALUE 'tb',
-25: VALUE 'page',
-23: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:layout-grid-mode",
-23: CHOICE
-24: VALUE 'none',
-24: VALUE 'line',
-24: VALUE 'both',
-22: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:layout-grid-base-height",
-23: REF 'length',
-24: DATA 'string',
-22: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:layout-grid-ruby-height",
-23: REF 'length',
-24: DATA 'string',
-22: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:layout-grid-lines",
-23: REF 'positiveInteger',
-24: DATA 'positiveInteger',
-22: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:layout-grid-color",
-23: REF 'color',
-24: DATA 'string',
-22: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:layout-grid-ruby-below",
-23: REF 'boolean',
-24: CHOICE
-25: VALUE 'true',
-25: VALUE 'false',
-22: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:layout-grid-print",
-23: REF 'boolean',
-24: CHOICE
-25: VALUE 'true',
-25: VALUE 'false',
-22: EPSILON
-21: CHOICE
-22: ATTRIBUTE "style:layout-grid-display",
-23: REF 'boolean',
-24: CHOICE
-25: VALUE 'true',
-25: VALUE 'false',
-22: EPSILON
-19: REF 'style-page-layout-properties-elements',
-20: INTERLEAVE
-21: REF 'style-background-image',
-22: CHOICE
-23: EPSILON
-21: REF 'style-columns',
-22: CHOICE
-23: EPSILON
-21: REF 'style-footnote-sep',
-22: CHOICE
-23: ELEMENT "style:footnote-sep",
-24: REF 'style-footnote-sep-attlist',
-25: SEQUENCE
-26: CHOICE
-27: ATTRIBUTE "style:width",
-28: REF 'length',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:rel-width",
-28: REF 'percent',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:color",
-28: REF 'color',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:line-style",
-28: REF 'lineStyle',
-29: CHOICE
-30: VALUE 'none',
-30: VALUE 'solid',
-30: VALUE 'dotted',
-30: VALUE 'dash',
-30: VALUE 'long-dash',
-30: VALUE 'dot-dash',
-30: VALUE 'dot-dot-dash',
-30: VALUE 'wave',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:adjustment",
-28: CHOICE
-29: VALUE 'left',
-29: VALUE 'center',
-29: VALUE 'right',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:distance-before-sep",
-28: REF 'length',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:distance-after-sep",
-28: REF 'length',
-29: DATA 'string',
-27: EPSILON
-23: EPSILON
 14: EPSILON
 13: CHOICE
 14: REF 'style-header-style',
@@ -7385,210 +3104,17 @@
 17: REF 'style-header-footer-properties',
 18: ELEMENT "style:header-footer-properties",
 19: REF 'style-header-footer-properties-content',
-20: REF 'style-header-footer-properties-content-strict',
-21: SEQUENCE
-22: REF 'style-header-footer-properties-attlist',
-23: INTERLEAVE
-24: SEQUENCE
-25: CHOICE
-26: ATTRIBUTE "svg:height",
-27: REF 'length',
-28: DATA 'string',
-26: EPSILON
-25: CHOICE
-26: ATTRIBUTE "fo:min-height",
-27: REF 'length',
-28: DATA 'string',
-26: EPSILON
-24: SEQUENCE
-25: REF 'common-horizontal-margin-attlist',
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "fo:margin-left",
-29: CHOICE
-30: REF 'length',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "fo:margin-right",
-29: CHOICE
-30: REF 'length',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-25: REF 'common-vertical-margin-attlist',
-26: SEQUENCE
-27: CHOICE
-28: ATTRIBUTE "fo:margin-top",
-29: CHOICE
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-27: CHOICE
-28: ATTRIBUTE "fo:margin-bottom",
-29: CHOICE
-30: REF 'nonNegativeLength',
-31: DATA 'string',
-30: REF 'percent',
-31: DATA 'string',
-28: EPSILON
-25: REF 'common-margin-attlist',
-26: CHOICE
-27: ATTRIBUTE "fo:margin",
-28: CHOICE
-29: REF 'nonNegativeLength',
-30: DATA 'string',
-29: REF 'percent',
-30: DATA 'string',
-27: EPSILON
-24: REF 'common-border-attlist',
-25: SEQUENCE
-26: CHOICE
-27: ATTRIBUTE "fo:border",
-28: REF 'string',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:border-top",
-28: REF 'string',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:border-bottom",
-28: REF 'string',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:border-left",
-28: REF 'string',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:border-right",
-28: REF 'string',
-29: DATA 'string',
-27: EPSILON
-24: REF 'common-border-line-width-attlist',
-25: SEQUENCE
-26: CHOICE
-27: ATTRIBUTE "style:border-line-width",
-28: REF 'borderWidths',
-29: LIST
-30: SEQUENCE
-31: REF 'positiveLength',
-32: DATA 'string',
-31: REF 'positiveLength',
-32: DATA 'string',
-31: REF 'positiveLength',
-32: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:border-line-width-top",
-28: REF 'borderWidths',
-29: LIST
-30: SEQUENCE
-31: REF 'positiveLength',
-32: DATA 'string',
-31: REF 'positiveLength',
-32: DATA 'string',
-31: REF 'positiveLength',
-32: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:border-line-width-bottom",
-28: REF 'borderWidths',
-29: LIST
-30: SEQUENCE
-31: REF 'positiveLength',
-32: DATA 'string',
-31: REF 'positiveLength',
-32: DATA 'string',
-31: REF 'positiveLength',
-32: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:border-line-width-left",
-28: REF 'borderWidths',
-29: LIST
-30: SEQUENCE
-31: REF 'positiveLength',
-32: DATA 'string',
-31: REF 'positiveLength',
-32: DATA 'string',
-31: REF 'positiveLength',
-32: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "style:border-line-width-right",
-28: REF 'borderWidths',
-29: LIST
-30: SEQUENCE
-31: REF 'positiveLength',
-32: DATA 'string',
-31: REF 'positiveLength',
-32: DATA 'string',
-31: REF 'positiveLength',
-32: DATA 'string',
-27: EPSILON
-24: REF 'common-padding-attlist',
-25: SEQUENCE
-26: CHOICE
-27: ATTRIBUTE "fo:padding",
-28: REF 'nonNegativeLength',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:padding-top",
-28: REF 'nonNegativeLength',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:padding-bottom",
-28: REF 'nonNegativeLength',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:padding-left",
-28: REF 'nonNegativeLength',
-29: DATA 'string',
-27: EPSILON
-26: CHOICE
-27: ATTRIBUTE "fo:padding-right",
-28: REF 'nonNegativeLength',
-29: DATA 'string',
-27: EPSILON
-24: REF 'common-background-color-attlist',
-25: CHOICE
-26: ATTRIBUTE "fo:background-color",
-27: CHOICE
-28: VALUE 'transparent',
-28: REF 'color',
-29: DATA 'string',
-26: EPSILON
-24: REF 'common-shadow-attlist',
-25: CHOICE
-26: ATTRIBUTE "style:shadow",
-27: REF 'shadowType',
-28: CHOICE
-29: VALUE 'none',
-29: REF 'string',
-30: DATA 'string',
-26: EPSILON
+20: REF 'style-properties-content',
+21: REF 'anyAttListOrElements',
+22: SEQUENCE
+23: CHOICE
+24: ONEOREMORE
+25: ATTRIBUTE "*",
+26: STRING
+24: EPSILON
+23: REF 'anyElements',
 24: CHOICE
-25: ATTRIBUTE "style:dynamic-spacing",
-26: REF 'boolean',
-27: CHOICE
-28: VALUE 'true',
-28: VALUE 'false',
-25: EPSILON
-22: REF 'style-header-footer-properties-elements',
-23: REF 'style-background-image',
-24: CHOICE
+25: ONEOREMORE
 25: EPSILON
 17: EPSILON
 14: EPSILON
@@ -7683,7 +3209,13 @@
 34: ELEMENT "office:change-info",
 35: SEQUENCE
 36: REF 'dc-creator',
+37: ELEMENT "dc:creator",
+38: REF 'string',
+39: DATA 'string',
 36: REF 'dc-date',
+37: ELEMENT "dc:date",
+38: REF 'dateTime',
+39: DATA 'dateTime',
 36: CHOICE
 37: ONEOREMORE
 38: REF 'text-p',

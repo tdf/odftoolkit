@@ -26,6 +26,8 @@ package schema2template.example.odf;
 import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,7 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
@@ -52,59 +55,93 @@ public class SchemaToTemplate {
 
   private SchemaToTemplate() {};
 
+  /**
+   * Iniitial function to trigger a list of generations like all Java classes with change history
+   * from prior versions!
+   *
+   * @param generations each a list of generations of files based on a transformation from XML
+   *     grammar data into Velocity templates!
+   */
   public static void run(List<GenerationParameters> generations) {
-    System.err.println(
-        "Schema2template code generations triggered " + generations.size() + " times!");
+    //    System.err.println(
+    //        "Schema2template code generations triggered " + generations.size() + " times!");
+
+    // sort the generations based on their version to start from the latest and add newer
+    // incremental
+    generations.sort(Comparator.comparing(GenerationParameters::getGrammarVersion));
+    Map<String, List<XMLModel>> modelHistories = new HashMap<>();
+
     for (int i = 0; i < generations.size(); i++) {
-      System.err.println("\n");
-      System.err.println("GrammarVersion: " + generations.get(i).getGrammarVersion());
-      System.err.println("GrammarID: " + generations.get(i).getGrammarID());
-      System.err.println("Grammar: " + generations.get(i).getGrammar());
-      System.err.println("GrammarAddOn: " + generations.get(i).getGrammarAddon());
-      System.err.println("Grammar2Templates: " + generations.get(i).getGrammar2Templates());
-    }
-  }
 
-  public static void run(
-      String templateBaseDir,
-      String templatefileName,
-      XMLModel xmlModel,
-      XMLModel[] xmlModelHistory,
-      String[] contextInfo,
-      String outputBaseDir,
-      String outputFileName) {
+      //      System.out.println("\n");
+      String grammarVersion = generations.get(i).getGrammarVersion();
+      //      System.out.println("GrammarVersion: " + grammarVersion);
 
-    LOG.log(Level.INFO, "Template Base Directory {0}", templateBaseDir);
-    LOG.log(Level.INFO, "Template file name{0}", templatefileName);
-    LOG.log(Level.INFO, "Output Base Directory {0}", outputBaseDir);
-    LOG.log(Level.INFO, "Output File Name  {0}", outputFileName);
+      String grammarID = generations.get(i).getGrammarID();
+      //      System.out.println("GrammarID: " + grammarID);
 
-    if (contextInfo != null) {
-      for (int i = 0; i < contextInfo.length; i++) {
-        String s = contextInfo[i];
-        LOG.log(Level.INFO, "\tContext Info #{0}: {1}\n", new Object[] {i, s});
+      String grammarFilePath = generations.get(i).getGrammarPath();
+      //      System.out.println("GrammarPath: " + grammarFilePath);
+
+      String grammarAdditionsFilePath = generations.get(i).getGrammarAdditionsPath();
+      //      System.out.println("grammarAddOnFilePath: " + grammarAdditionsFilePath);
+
+      String mainTemplateFilePath = generations.get(i).getMainTemplatePath();
+      String mainTemplateFileName = Paths.get(mainTemplateFilePath).getFileName().toString();
+      String templateBaseDir =
+          mainTemplateFilePath.substring(0, mainTemplateFilePath.lastIndexOf(mainTemplateFileName));
+      //      System.out.println("Grammar2Templates: " + mainTemplateFilePath);
+
+      String targetDirPath = generations.get(i).getTargetDir();
+      targetDirPath = targetDirPath + File.separator + grammarID + "-" + grammarVersion;
+      new File(targetDirPath).mkdirs();
+      //      System.out.println("TargetDirPath: " + targetDirPath);
+
+      XMLModel currentModel = new XMLModel(new File(grammarFilePath), grammarVersion, grammarID);
+
+      currentModel.getAttributes().withoutMultiples();
+
+      List<XMLModel> modelHistory;
+      if (modelHistories.containsKey(grammarID)) {
+        modelHistory = modelHistories.get(grammarID);
+        // sort the modelHistory from the latest to the oldest, to quickly identify the first change
+        // from the current version in the past!
+        modelHistory =
+            modelHistory.stream()
+                .sorted(Comparator.comparing(XMLModel::getGrammarVersion).reversed())
+                .collect(Collectors.toList());
+      } else {
+        modelHistory = null;
       }
-    }
 
-    try {
-      fillTemplates(
-          templateBaseDir,
-          templatefileName,
-          outputBaseDir,
-          outputFileName,
-          initContext(xmlModel, xmlModelHistory, contextInfo));
-    } catch (Exception ex) {
-      Logger.getLogger(SchemaToTemplate.class.getName()).log(Level.SEVERE, null, ex);
+      try {
+        fillTemplates(
+            templateBaseDir,
+            mainTemplateFileName,
+            targetDirPath,
+            "generated-main-template_" + grammarID + "-" + grammarVersion + ".xml",
+            initVelocityContext(currentModel, modelHistory, grammarAdditionsFilePath));
+      } catch (Exception ex) {
+        Logger.getLogger(SchemaToTemplate.class.getName()).log(Level.SEVERE, null, ex);
+      }
+
+      if (modelHistory == null) {
+        modelHistory = new ArrayList<>();
+      }
+      // after current model creation add the modelhistory VersionID
+      modelHistory.add(currentModel);
+      modelHistories.put(grammarID, modelHistory);
     }
   }
 
-  private static VelocityContext initContext(
-      XMLModel xmlModel, XMLModel[] xmlModelHistory, String[] contextInfo) throws Exception {
+  private static VelocityContext initVelocityContext(
+      XMLModel xmlModel, List<XMLModel> xmlModelHistory, String grammarAdditionsFilePath)
+      throws Exception {
     LOG.info("Starting initilization of Velocity context..");
 
     VelocityContext context = null;
-    if (contextInfo != null && contextInfo.length > 0) {
-      // Read config.xml
+    if (grammarAdditionsFilePath != null && !grammarAdditionsFilePath.isBlank()) {
+      // Read grammar-additions.xml
       // Manual added Java specific info - Base class for inheritance
       Map<String, String> elementToBaseNameMap = new HashMap<>();
       // Manual added ODF specific info - style family mapping
@@ -113,8 +150,8 @@ public class SchemaToTemplate {
       // datatype  -> {odfValueType, javaConversionClassName}
       Map<String, String[]> datatypeValueAndConversionMap = new HashMap<>();
       Map<String, OdfModel.AttributeDefaults> attributeDefaultMap = new HashMap<>();
-      OdfConfigFileHandler.readConfigFile(
-          new File(contextInfo[0]),
+      GrammarAdditionsFileHandler.readGrammarAdditionsFile(
+          new File(grammarAdditionsFilePath),
           elementToBaseNameMap,
           attributeDefaultMap,
           elementStyleFamiliesMap,
@@ -144,9 +181,9 @@ public class SchemaToTemplate {
 
   private static void fillTemplates(
       String templateBaseDir,
-      String templatefileName,
-      String outputBaseDir,
-      String outputFileName,
+      String templateFileName,
+      String targetDirPath,
+      String targetFileName,
       VelocityContext context)
       throws Exception {
 
@@ -162,34 +199,34 @@ public class SchemaToTemplate {
     // http://velocity.apache.org/engine/2.3/developer-guide.html#backward-compatible-space-gobbling
     ve.setProperty(RuntimeConstants.SPACE_GOBBLING, "bc");
     ve.init();
-    createOutputFileList(ve, templatefileName, outputBaseDir, outputFileName, context);
+    createOutputFileList(ve, templateFileName, targetDirPath, targetFileName, context);
     LOG.info("output-files.xml created done.");
 
     // Process output-files.xml, create output files
     LOG.fine("Processing output files... ");
-    processFileList(ve, outputBaseDir, outputFileName, context);
+    processFileList(ve, targetDirPath, targetFileName, context);
     LOG.fine("DONE.\n");
   }
 
   private static void createOutputFileList(
       VelocityEngine ve,
-      String templatefileName,
-      String outputBaseDir,
-      String outputFileName,
+      String templateFileName,
+      String targetDirPath,
+      String targetFileName,
       VelocityContext context)
       throws Exception {
-    File outputFileList = new File(outputBaseDir + File.separator + outputFileName);
+    File outputFileList = new File(targetDirPath + File.separator + targetFileName);
     ensureParentFolders(outputFileList);
     try (FileWriter listout = new FileWriter(outputFileList)) {
       String encoding = "utf-8";
-      ve.mergeTemplate(templatefileName, encoding, context, listout);
+      ve.mergeTemplate(templateFileName, encoding, context, listout);
     }
   }
 
   private static void processFileList(
-      VelocityEngine ve, String outputBaseDir, String outputFileName, VelocityContext context)
+      VelocityEngine ve, String targetDirPath, String targetFileName, VelocityContext context)
       throws Exception {
-    File outputFileList = new File(outputBaseDir + File.separator + outputFileName);
+    File outputFileList = new File(targetDirPath + File.separator + targetFileName);
     List<OutputFileListEntry> fl = OutputFileListHandler.readFileListFile(outputFileList);
 
     for (OutputFileListEntry f : fl) {
@@ -214,7 +251,7 @@ public class SchemaToTemplate {
           }
 
           File out =
-              new File(outputBaseDir + File.separator + generateFilename(f.getAttribute("path")))
+              new File(targetDirPath + File.separator + generateFilename(f.getAttribute("path")))
                   .getCanonicalFile();
           ensureParentFolders(out);
           FileWriter fileout = new FileWriter(out);

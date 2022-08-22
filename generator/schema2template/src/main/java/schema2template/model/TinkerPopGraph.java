@@ -52,43 +52,43 @@ import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
  *   <li>can it have text content
  * </ul>
  */
-class GraphSupport {
+class TinkerPopGraph {
 
-  public GraphSupport(Expression exp, String schemaFileName) {
-    Graph g = buildGraph(exp);
-    if (exp instanceof ElementExp && schemaFileName != null) {
-      String elementName = getName((NameClassAndExpression) exp);
-      saveGraph(g, elementName, schemaFileName);
-    }
-    // Optimize the graph
+  private final Expression exp;
+  private final String schemaFileName;
+  private final Graph graph;
+
+  public TinkerPopGraph(Expression exp, String schemaFileName) {
+    this.exp = exp;
+    this.schemaFileName = schemaFileName;
+    this.graph = buildGraph(exp);
   }
 
-  private static void saveGraph(Graph g, String elementName, String schemaFileName) {
-    String fileName;
-    if (elementName.equals("*")) {
-      fileName = "ALL_ELEMENTS";
-    } else {
-      fileName = elementName.replace(" | ", "_").replace(":", "_");
-    }
-    try {
-      String directoryName = schemaFileName.replace(".", "_");
-      File f = new File("target" + File.separator + "graphML" + File.separator + directoryName);
-      f.mkdirs();
-      // g.io(IoCore.gryo()).writeGraph("target" + File.separator + "graphML" + File.separator +
-      // directoryName + File.separator + fileName + ".kryo");
-      g.io(IoCore.graphml())
-          .writeGraph(
-              "target"
-                  + File.separator
-                  + "graphML"
-                  + File.separator
-                  + directoryName
-                  + File.separator
-                  + fileName
-                  + ".graphml");
+  public void exportAsGraphML(String targetDirectoryName) {
+    if (exp instanceof ElementExp && schemaFileName != null) {
+      String elementName = getName((NameClassAndExpression) exp);
 
-    } catch (IOException ex) {
-      Logger.getLogger(GraphSupport.class.getName()).log(Level.SEVERE, null, ex);
+      String fileName;
+      if (elementName.equals("*")) {
+        fileName = "ALL_ELEMENTS";
+      } else {
+        fileName = elementName.replace(" | ", "_").replace(":", "_");
+      }
+      try {
+
+        File targetDir = new File(targetDirectoryName);
+        targetDir.mkdirs();
+        // g.io(IoCore.gryo()).writeGraph("target" + File.separator + "graphML" + File.separator +
+        // directoryName + File.separator + fileName + ".kryo");
+        // DREZEIT:
+        // target\graphML\E:\GitHub\odf\odftoolkit-latest_odf-codegen2\generator\schema2template\src\test\resources\test-input\odf\grammar\OpenDocument-v1_3-schema_rng\style_footer-left.graphml
+        graph
+            .io(IoCore.graphml())
+            .writeGraph(targetDirectoryName + File.separator + fileName + ".graphml");
+
+      } catch (IOException ex) {
+        Logger.getLogger(TinkerPopGraph.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
   }
 

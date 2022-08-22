@@ -56,18 +56,18 @@ public class CodeGenMojo extends AbstractMojo {
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
     try {
-      System.err.println(
-          "Schema2template code generation started " + generations.size() + " times!");
-      for (int i = 0; i < generations.size(); i++) {
-        System.err.println("\n");
-        System.err.println("GrammarVersion: " + generations.get(i).getGrammarVersion());
-        System.err.println("GrammarID: " + generations.get(i).getGrammarID());
-        System.err.println("Grammar: " + generations.get(i).getGrammar());
-        System.err.println("GrammarAddOn: " + generations.get(i).getGrammarAddon());
-        System.err.println("Grammar2Templates: " + generations.get(i).getGrammar2Templates());
-      }
+      //      System.err.println(
+      //          "Schema2template code generation started " + generations.size() + " times!");
+      //      for (int i = 0; i < generations.size(); i++) {
+      //        System.err.println("GrammarVersion: " + generations.get(i).getGrammarVersion());
+      //        System.err.println("GrammarID: " + generations.get(i).getGrammarID());
+      //        System.err.println("GrammarPath: " + generations.get(i).getGrammarPath());
+      //        System.err.println("GrammarAdditionsPath: " +
+      // generations.get(i).getGrammarAdditionsPath());
+      //        System.err.println("MainTemplatePath: " + generations.get(i).getMainTemplatePath());
+      //        System.err.println("++++++++\n");
+      //      }
       schema2template.example.odf.SchemaToTemplate.run(generations);
-      System.err.println("Mojo is started*********!!");
     } catch (Exception ex) {
       getLog().error("Failed to parse template.");
       getLog().error(ex);

@@ -31,7 +31,6 @@ import com.sun.msv.writer.relaxng.RELAXNGWriter;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.StringTokenizer;
@@ -59,16 +58,21 @@ public class XMLModel {
   public Expression mRootExpression;
   private Grammar mGrammar;
   public String mLastSchemaFileName;
-  private String mVersionLabel;
+  private String mGrammarID;
+  private String mGrammarVersion;
 
   /**
    * Constructs new model by the grammar and a label
    *
    * @param schemaFile grammar to read into MSV
-   * @param versionLabel identifier of the grammar (used in Velocity template)
+   * @param grammarVersion numbered version used to establish timely order and create a label with
+   *     the grammarID
+   * @param grammarID identifier of the grammar (used in Velocity template and for output
+   *     subdirectories - often concatenated with grammarVersion)
    */
-  public XMLModel(File schemaFile, String versionLabel) {
-    mVersionLabel = versionLabel;
+  public XMLModel(File schemaFile, String grammarVersion, String grammarID) {
+    mGrammarVersion = grammarVersion;
+    mGrammarID = grammarID;
     mGrammar = loadSchema(schemaFile);
     mRootExpression = mGrammar.getTopLevel();
     String absolutePath = schemaFile.getAbsolutePath();
@@ -88,18 +92,21 @@ public class XMLModel {
     return mGrammar;
   }
 
-  /** @return the version label identifying this schema (XML grammar) */
-  public String getVersionLabel() {
-    return mVersionLabel;
+  /** @return the version label identifying this version of this schema (XML grammar) */
+  public String getGrammarVersion() {
+    return mGrammarVersion;
+  }
+
+  /** @return the grammar ID identifying this schema (XML grammar) */
+  public String getGrammarID() {
+    return mGrammarID;
   }
 
   // Create Map Name->PuzzlePiece. Ignore the fact that there may be more than one PuzzlePiece per
   // Name
   private static Map<String, PuzzlePiece> createMap(Collection<PuzzlePiece> definitions) {
-    Map<String, PuzzlePiece> retval = new HashMap<String, PuzzlePiece>();
-    Iterator<PuzzlePiece> iter = definitions.iterator();
-    while (iter.hasNext()) {
-      PuzzlePiece def = iter.next();
+    Map<String, PuzzlePiece> retval = new HashMap<>();
+    for (PuzzlePiece def : definitions) {
       retval.put(def.getQName(), def);
     }
     return retval;
@@ -108,10 +115,8 @@ public class XMLModel {
   /** Map Name to PuzzlePiece(s). */
   static Map<String, SortedSet<PuzzlePiece>> createDefinitionMap(
       Collection<PuzzlePiece> definitions) {
-    Map<String, SortedSet<PuzzlePiece>> retval = new HashMap<String, SortedSet<PuzzlePiece>>();
-    Iterator<PuzzlePiece> iter = definitions.iterator();
-    while (iter.hasNext()) {
-      PuzzlePiece def = iter.next();
+    Map<String, SortedSet<PuzzlePiece>> retval = new HashMap<>();
+    for (PuzzlePiece def : definitions) {
       SortedSet<PuzzlePiece> multiples = retval.get(def.getQName());
       if (multiples == null) {
         multiples = new TreeSet<>();
@@ -149,39 +154,6 @@ public class XMLModel {
     if (rngFilePath.endsWith(".rng")) {
       try {
         grammar = RELAXNGReader.parse(rngFilePath, factory, ignoreController);
-        // reuse the trunk/core name of the grammar file currently loaded
-        String rngFileTrunkName =
-            rngFilePath.substring(
-                rngFilePath.lastIndexOf(File.separatorChar) + 1, rngFilePath.indexOf(".rng"));
-        // create a output path for the run-time MSV grammar model as XML file (dump)
-        String outputFilePath =
-            System.getProperty("user.dir")
-                + File.separator
-                + "target"
-                + File.separator
-                + "msv-dump_"
-                + rngFileTrunkName
-                + ".xml";
-        // writeGrammar(grammar, new PrintStream(new FileOutputStream(outputFilePath)));
-
-        //        OdfFamilyPropertiesPatternMatcher matcher = new
-        // OdfFamilyPropertiesPatternMatcher(grammar);
-        //        Map<String, List<String>> results = matcher.getFamilyProperties();
-        //        if(results != null){
-        //            System.out.println("MAPS: " + results.toString());
-        //        }else System.out.println("MAPS: EMPTY!!");
-
-        //            RELAXNGWriter writer = new RELAXNGWriter();
-        //            writer.setDocumentHandler(new Echo(null));
-        //            writer.write(grammar);
-        //            // adding SAX1 interface documentHandler (also adapting contentHandler SAX2)
-        ////            System.setProperty("org.xml.sax.parser",
-        // "com.sun.msv.writer.relaxng.RELAXNGWriter");
-        ////            ParserAdapter parserAdapter = new ParserAdapter();
-        ////            writer.setDocumentHandler(new
-        // ContentHandlerAdaptor(parserAdapter.getContentHandler()));
-        //            writer.setDocumentHandler(new Echo(null));
-        //            writer.write(grammar);
       } catch (Exception ex) {
         Logger.getLogger(XMLModel.class.getName()).log(Level.SEVERE, null, ex);
       }

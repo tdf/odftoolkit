@@ -1,5 +1,5 @@
 ##################################################################
-## 
+##
 ## Licensed to the Apache Software Foundation (ASF) under one
 ## or more contributor license agreements.  See the NOTICE file
 ## distributed with this work for additional information
@@ -7,9 +7,9 @@
 ## to you under the Apache License, Version 2.0 (the
 ## "License"); you may not use this file except in compliance
 ## with the License.  You may obtain a copy of the License at
-## 
+##
 ##  http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing,
 ## software distributed under the License is distributed on an
 ## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -32,33 +32,20 @@
 ##
 #foreach ($element in ${xmlModel.getElements().withoutMultiples()})
 #if ($element != "*")
-##
 #set($className = "${xmlModel.camelCase($element)}Element")
 	<file path="org/odftoolkit/odfdom/dom/element/${xmlModel.extractNamespace($element)}/${className}.java" contextNode="$element" template="java-odfdom-element-template.vm" />
-##
 #end
 #end
 ##
 #foreach ($base in $codeModel.getBaseClasses())
-##
 #if ($base != "container" && $base != "style" && $base != "styleproperties")
 #set($className = "${xmlModel.camelCase(${base})}ElementBase")
 	<file path="org/odftoolkit/odfdom/dom/element/${xmlModel.extractNamespace(${base})}/${className}.java" contextNode="$base" template="java-odfdom-elementbase-template.vm" />
 #end
-##
 #end
 ##
 #foreach ($attribute in ${xmlModel.getAttributes().withoutMultiples()})
 #if ($attribute != "*")
-##
-#set($className = "${xmlModel.camelCase($attribute)}Attribute")
-	<file path="org/odftoolkit/odfdom/dom/attribute/${xmlModel.extractNamespace($attribute)}/${className}.java" contextNode="$attribute" template="java-odfdom-attribute-template.vm" />
-#end
-#end
-##
-#foreach ($attribute in ${xmlModel.getAttributes().withoutMultiples()})
-#if ($attribute != "*")
-##
 #set($className = "${xmlModel.camelCase($attribute)}Attribute")
 	<file path="org/odftoolkit/odfdom/dom/attribute/${xmlModel.extractNamespace($attribute)}/${className}.java" contextNode="$attribute" template="java-odfdom-attribute-template.vm" />
 #end
