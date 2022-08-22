@@ -28,7 +28,7 @@
     </parent>
 
     <!-- The Basics -->
-    <name>XML Schema to Template Mapping Tool: Maven2 Plugin</name>
+    <name>XML Schema to Template Mapping Tool: Maven Plugin</name>
     <artifactId>schema2template-maven-plugin</artifactId>
     <description>Maven Plugin for XML Schema to Template Mapping Tool</description>
     <version>0.11.0-SNAPSHOT</version>

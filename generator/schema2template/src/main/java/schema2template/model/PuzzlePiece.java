@@ -30,6 +30,7 @@ import com.sun.msv.grammar.Expression;
 import com.sun.msv.grammar.Grammar;
 import com.sun.msv.grammar.NameClassAndExpression;
 import com.sun.msv.grammar.ValueExp;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -58,6 +59,9 @@ import java.util.Set;
  * </ul>
  */
 public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleComponent {
+
+  private static final String BASE_DIR =
+      System.getProperty("schema2template.base.dir") + File.separator;
 
   static final MSVExpressionVisitorType TYPE_VISITOR = new MSVExpressionVisitorType();
   static final MSVNameClassVisitorList NAME_VISITOR = new MSVNameClassVisitorList();
@@ -356,6 +360,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
    *
    * @return The child Definitions of type ELEMENT
    */
+  @Override
   public PuzzlePieceSet getChildElements() {
     return mChildElements;
   }
@@ -418,7 +423,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
    * template usage. Note that the Sets of all elements/attributes can only be made immutable by the
    * caller after this method run.
    *
-   * @param root MSV root Expression
+   * @param grammar the parsed grammar as MSV grammar representation
    * @param newElementSet empty Set. Will be filled with Definitions of Type.ELEMENT
    * @param newAttributeSet empty Set. Will be filled with Definitions of Type.ATTRIBUTE
    * @param schemaFileName file name of the XML grammar file. Used as folder name of GraphML files.
@@ -432,6 +437,58 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
     extractTypedPuzzlePieces(grammar, newElementSet, ElementExp.class);
     extractTypedPuzzlePieces(grammar, newAttributeSet, AttributeExp.class);
 
+    /* original compareTo
+    assert(!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1628);
+    assert(!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1822);
+    assert(!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1837);
+    */
+    //    assert (!schemaFileName.equals(SchemaToTemplate.ODF11_RNG_FILE)
+    //        || newAttributeSet.size() == 1627);
+    //    assert (!schemaFileName.equals(SchemaToTemplate.ODF12_RNG_FILE)
+    //        || newAttributeSet.size() == 1820);
+    //    assert (!schemaFileName.equals(SchemaToTemplate.ODF13_RNG_FILE)
+    //        || newAttributeSet.size() == 1836);
+    configureProperties(newElementSet, newAttributeSet, schemaFileName);
+    reduceDatatypes(newAttributeSet);
+
+    /*
+    assert(!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1628);
+    assert(!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1822);
+    assert(!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1837);
+    */
+    //    assert (!schemaFileName.equals(SchemaToTemplate.ODF11_RNG_FILE)
+    //        || newAttributeSet.size() == 1627);
+    //    assert (!schemaFileName.equals(SchemaToTemplate.ODF12_RNG_FILE)
+    //        || newAttributeSet.size() == 1820);
+    //    assert (!schemaFileName.equals(SchemaToTemplate.ODF13_RNG_FILE)
+    //        || newAttributeSet.size() == 1836);
+    reduceValues(newAttributeSet);
+
+    /*
+    assert(!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1628);
+    assert(!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1822);
+    assert(!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1837);
+    */
+    //    assert (!schemaFileName.equals(SchemaToTemplate.ODF11_RNG_FILE)
+    //        || newAttributeSet.size() == 1627);
+    //    assert (!schemaFileName.equals(SchemaToTemplate.ODF12_RNG_FILE)
+    //        || newAttributeSet.size() == 1820);
+    //    assert (!schemaFileName.equals(SchemaToTemplate.ODF13_RNG_FILE)
+    //        || newAttributeSet.size() == 1836);
+    reduceAttributes(newElementSet, newAttributeSet);
+
+    /*
+    assert(!schemaFileName.equals(OdfHelper.ODF11_RNG_FILE) || newAttributeSet.size() == 1313);
+    assert(!schemaFileName.equals(OdfHelper.ODF12_RNG_FILE) || newAttributeSet.size() == 1461);
+    assert(!schemaFileName.equals(OdfHelper.ODF13_RNG_FILE) || newAttributeSet.size() == 1471);
+    */
+    //    assert (!schemaFileName.equals(SchemaToTemplate.ODF11_RNG_FILE)
+    //        || newAttributeSet.size() == 1270);
+    //    assert (!schemaFileName.equals(SchemaToTemplate.ODF12_RNG_FILE)
+    //        || newAttributeSet.size() == 1417);
+    //    assert (!schemaFileName.equals(SchemaToTemplate.ODF13_RNG_FILE)
+    //        || newAttributeSet.size() == 1434);
+    //
     makePuzzlePiecesImmutable(newElementSet);
     makePuzzlePiecesImmutable(newAttributeSet);
   }
@@ -606,7 +663,24 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
           }
         }
       }
-      GraphSupport graphSupport = new GraphSupport(def.getExpression(), schemaFileName);
+      // 2DO: Better access this via lambda function to be able to inject this functionality by
+      // tests?
+      TinkerPopGraph tinkerPopGraph = new TinkerPopGraph(def.getExpression(), schemaFileName);
+      File f =
+          new File(
+              BASE_DIR
+                  + "target"
+                  + File.separator
+                  + "generated-sources"
+                  + File.separator
+                  + "java"
+                  + File.separator
+                  + "odf"
+                  + File.separator
+                  + "graphML"
+                  + File.separator);
+      f.mkdirs();
+      tinkerPopGraph.exportAsGraphML(f.getAbsolutePath());
       MSVExpressionInformation elementInfo =
           new MSVExpressionInformation(def.getExpression(), schemaFileName);
       def.mCanHaveText = elementInfo.canHaveText();
@@ -656,9 +730,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 
   // Makes all Definitions unmodifiable
   private static void makePuzzlePiecesImmutable(PuzzlePieceSet defs) {
-    Iterator<PuzzlePiece> iter = defs.iterator();
-    while (iter.hasNext()) {
-      PuzzlePiece def = iter.next();
+    for (PuzzlePiece def : defs) {
       def.mAttributes.makeImmutable();
       def.mChildElements.makeImmutable();
       def.mMultiples.makeImmutable();

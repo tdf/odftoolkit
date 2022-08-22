@@ -23,7 +23,16 @@
  */
 package schema2template.example.odf;
 
-import static schema2template.example.odf.SchemaToTemplate.*;
+import static schema2template.example.odf.OdfConstants.BASE_DIR;
+import static schema2template.example.odf.OdfConstants.ODF13_ATTRIBUTE_DUPLICATES;
+import static schema2template.example.odf.OdfConstants.ODF13_ATTRIBUTE_NUMBER;
+import static schema2template.example.odf.OdfConstants.ODF13_ELEMENT_DUPLICATES;
+import static schema2template.example.odf.OdfConstants.ODF13_ELEMENT_NUMBER;
+import static schema2template.example.odf.OdfConstants.ODF_1_0_SCHEMA_GRAMMAR;
+import static schema2template.example.odf.OdfConstants.ODF_1_1_SCHEMA_GRAMMAR;
+import static schema2template.example.odf.OdfConstants.ODF_1_2_SCHEMA_GRAMMAR;
+import static schema2template.example.odf.OdfConstants.ODF_1_3_SCHEMA_GRAMMAR;
+import static schema2template.example.odf.SchemaToTemplate.DEBUG;
 
 import com.sun.msv.grammar.Expression;
 import com.sun.msv.grammar.Grammar;
@@ -33,7 +42,6 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
@@ -44,100 +52,17 @@ import schema2template.model.PuzzlePiece;
 import schema2template.model.PuzzlePieceSet;
 import schema2template.model.XMLModel;
 
+/** Loads each ODF Grammar into the MSV and dumps its model a file. */
 public class PuzzlePieceTest {
 
   private static final Logger LOG = Logger.getLogger(PuzzlePieceTest.class.getName());
-  /**
-   * Expresses the amount of elements in ODF 1.1. There are some issues in the schema that have to
-   * be fixed before the full number can be returned by MSV: Reference table-table-template is never
-   * used, therefore several elements are not taking into account:: "table:body"
-   * "table:even-columns" "table:even-rows" "table:first-column" "table:first-row"
-   * "table:last-column" "table:last-row" "table:odd-columns" "table:odd-rows"
-   * "table:table-template" NOTE: Ignoring the '*' there can be 525 elements parsed, but with fixed
-   * schema it should be 535.
-   */
-  // ToDo: 535 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or
-  // attribute declaration
-  private static final int ODF11_ELEMENT_NUMBER = 526;
 
-  private static final int ODF12_ELEMENT_NUMBER = 599;
-
-  private static final int ODF13_ELEMENT_NUMBER = 606;
-  /**
-   * Expresses the amount of attributes in ODF 1.1. There are some issues in the schema that have to
-   * be fixed before the full number can be returned by MSV: Following references are never used,
-   * therefore its attribute is not taking into account:: draw-glue-points-attlist with
-   * "draw:escape-direction" office-process-content with "office:process-content" (DEPRECATED in
-   * ODF1.2 only on foreign elements)
-   *
-   * <p>Following attributes are member of the not referenced element "table:table-template":
-   * "text:first-row-end-column" "text:first-row-start-column" "text:last-row-end-column"
-   * "text:last-row-start-column" "text:paragraph-style-name"
-   *
-   * <p>NOTE: Ignoring the '*' there can be 1162 elements parsed, but with fixed schema it should be
-   * 1169.
-   */
-
-  // ToDo: 1169 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or
-  // attribute declaration
-  private static final int ODF11_ATTRIBUTE_NUMBER = 1163;
-
-  // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie.
-  // @office:process-content)
-  private static final int ODF12_ATTRIBUTE_NUMBER = 1301;
-
-  // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie.
-  // @office:process-content)
-  private static final int ODF13_ATTRIBUTE_NUMBER = 1317;
-  private static final int ODF13_ELEMENT_DUPLICATES = 7;
-  private static final int ODF13_ATTRIBUTE_DUPLICATES =
-      519; // 2DO Svante earlier 117 what is correct?
-
-  /**
-   * Via Maven pom.xml (surefire test plugin) received System variable of the absolute path of the
-   * target build directory
-   */
-  private static String buildDir = System.getProperty("schema2template.build.dir");
-
-  private static final String ODF_GRAMMAR_ROOT =
-      Paths.get(
-              buildDir
-                  + File.separator
-                  + ".."
-                  + File.separator
-                  + "src"
-                  + File.separator
-                  + "test"
-                  + File.separator
-                  + "resources"
-                  + File.separator
-                  + "test-input"
-                  + File.separator
-                  + "odf"
-                  + File.separator
-                  + "grammar")
-          .normalize()
-          .toString();
-
-  public static final String ODF10_RNG_FILE =
-      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-strict-schema-v1.0-os.rng";
-  public static final String ODF11_RNG_FILE =
-      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-strict-schema-v1.1.rng";
-  public static final String ODF12_RNG_FILE =
-      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-v1.2-os-schema.rng";
-  public static final String ODF12_MANIFEST_RNG_FILE =
-      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-v1.2-os-manifest-schema.rng";
-  public static final String ODF12_SIGNATURE_RNG_FILE =
-      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-v1.2-os-dsig-schema.rng";
-  public static final String ODF13_RNG_FILE =
-      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-v1.3-schema.rng";
-  public static final String ODF13_MANIFEST_RNG_FILE =
-      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-v1.3-manifest-schema.rng";
-  public static final String ODF13_SIGNATURE_RNG_FILE =
-      ODF_GRAMMAR_ROOT + File.separator + "OpenDocument-v1.3-dsig-schema.rng";
-
-  private static final String TARGET_REL_DIR =
-      "generated-sources"
+  private static final String TARGET_ROOT_MSV_DUMP =
+      BASE_DIR
+          + File.separator
+          + "target"
+          + File.separator
+          + "generated-sources"
           + File.separator
           + "java"
           + File.separator
@@ -146,22 +71,20 @@ public class PuzzlePieceTest {
           + "msv-dump"
           + File.separator;
 
-  private static final String TARGET_ROOT =
-      Paths.get(System.getProperty("schema2template.build.dir"), TARGET_REL_DIR)
-          .normalize()
-          .toString();
-
+  // *********** Multi Schema Validator Model Dumps of RunTime
   private static final String TARGET_DUMP_FILE_ODF10 =
-      TARGET_ROOT + File.separator + "odf10-msvtree.dump";
+      TARGET_ROOT_MSV_DUMP + File.separator + "odf10-msvtree.dump";
   private static final String TARGET_DUMP_FILE_ODF11 =
-      TARGET_ROOT + File.separator + "odf11-msvtree.dump";
+      TARGET_ROOT_MSV_DUMP + File.separator + "odf11-msvtree.dump";
   private static final String TARGET_DUMP_FILE_ODF12 =
-      TARGET_ROOT + File.separator + "odf12-msvtree.dump";
+      TARGET_ROOT_MSV_DUMP + File.separator + "odf12-msvtree.dump";
   private static final String TARGET_DUMP_FILE_ODF13 =
-      TARGET_ROOT + File.separator + "odf13-msvtree.dump";
+      TARGET_ROOT_MSV_DUMP + File.separator + "odf13-msvtree.dump";
 
-  private static final String TEST_REFERENCE_DIR =
-      System.getProperty("schema2template.build.dir")
+  private static final String MSV_DUMP_TEST_REFERENCE_DIR =
+      BASE_DIR
+          + File.separator
+          + "target"
           + File.separator
           + "test-classes"
           + File.separator
@@ -172,17 +95,17 @@ public class PuzzlePieceTest {
           + "msv-dump";
 
   private static final String OUTPUT_REF_ODF10 =
-      TEST_REFERENCE_DIR + File.separator + "odf10-msvtree.ref";
+      MSV_DUMP_TEST_REFERENCE_DIR + File.separator + "odf10-msvtree.ref";
   private static final String OUTPUT_REF_ODF11 =
-      TEST_REFERENCE_DIR + File.separator + "odf11-msvtree.ref";
+      MSV_DUMP_TEST_REFERENCE_DIR + File.separator + "odf11-msvtree.ref";
   private static final String OUTPUT_REF_ODF12 =
-      TEST_REFERENCE_DIR + File.separator + "odf12-msvtree.ref";
+      MSV_DUMP_TEST_REFERENCE_DIR + File.separator + "odf12-msvtree.ref";
   private static final String OUTPUT_REF_ODF13 =
-      TEST_REFERENCE_DIR + File.separator + "odf13-msvtree.ref";
+      MSV_DUMP_TEST_REFERENCE_DIR + File.separator + "odf13-msvtree.ref";
 
   @Before
   public void intialize() {
-    new File(TARGET_ROOT).mkdirs();
+    new File(TARGET_ROOT_MSV_DUMP).mkdirs();
   }
 
   /**
@@ -241,7 +164,7 @@ public class PuzzlePieceTest {
                 + "Please compare the output:\n\t'"
                 + TARGET_DUMP_FILE_ODF10
                 + "'\nwith the reference\n\t'"
-                + ODF10_RNG_FILE;
+                + OUTPUT_REF_ODF10;
         LOG.severe(errorMsg);
         Assert.fail(errorMsg);
       }
@@ -253,7 +176,7 @@ public class PuzzlePieceTest {
                 + "Please compare the output:\n\t'"
                 + TARGET_DUMP_FILE_ODF11
                 + "'\nwith the reference\n\t'"
-                + ODF11_RNG_FILE;
+                + OUTPUT_REF_ODF11;
         LOG.severe(errorMsg);
         Assert.fail(errorMsg);
       }
@@ -265,7 +188,7 @@ public class PuzzlePieceTest {
                 + "Please compare the output:\n\t'"
                 + TARGET_DUMP_FILE_ODF12
                 + "'\nwith the reference\n\t'"
-                + ODF12_RNG_FILE;
+                + OUTPUT_REF_ODF12;
         LOG.severe(errorMsg);
         Assert.fail(errorMsg);
       }
@@ -276,7 +199,7 @@ public class PuzzlePieceTest {
                 + "Please compare the output:\n\t'"
                 + TARGET_DUMP_FILE_ODF13
                 + "'\nwith the reference\n\t'"
-                + ODF13_RNG_FILE;
+                + OUTPUT_REF_ODF13;
         LOG.severe(errorMsg);
         Assert.fail(errorMsg);
       }
@@ -293,16 +216,16 @@ public class PuzzlePieceTest {
    */
   private String readFileAsString(String filePath) throws java.io.IOException {
     StringBuilder fileData = new StringBuilder(2000);
-    BufferedReader reader =
-        new BufferedReader(new InputStreamReader(new FileInputStream(filePath)));
-    char[] buf = new char[1024];
-    int numRead = 0;
-    while ((numRead = reader.read(buf)) != -1) {
-      String readData = String.valueOf(buf, 0, numRead);
-      fileData.append(readData);
-      buf = new char[1024];
+    try (BufferedReader reader =
+        new BufferedReader(new InputStreamReader(new FileInputStream(filePath)))) {
+      char[] buf = new char[1024];
+      int numRead = 0;
+      while ((numRead = reader.read(buf)) != -1) {
+        String readData = String.valueOf(buf, 0, numRead);
+        fileData.append(readData);
+        buf = new char[1024];
+      }
     }
-    reader.close();
     return fileData.toString();
   }
 
@@ -336,7 +259,7 @@ public class PuzzlePieceTest {
       //          SchemaToTemplate.loadSchemaODF12(),
       //          allElements_ODF12,
       //          allAttributes_ODF12,
-      //          SchemaToTemplate.ODF12_RNG_FILE);
+      //          SchemaToTemplate.ODF_1_2_SCHEMA_GRAMMAR);
       //      // There is a difference of one wildcard "*" representing anyElement/anyAttribute
       //      checkFoundNumber(allElements_ODF12.withoutMultiples(), ODF12_ELEMENT_NUMBER,
       // "element");
@@ -346,10 +269,12 @@ public class PuzzlePieceTest {
       PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF13_RNG_FILE);
+          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF_1_3_SCHEMA_GRAMMAR);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
-      checkFoundNumber(allElements_ODF13.withoutMultiples(), ODF13_ELEMENT_NUMBER, "element");
-      checkFoundNumber(allAttributes_ODF13.withoutMultiples(), ODF13_ATTRIBUTE_NUMBER, "attribute");
+      checkFoundNumber(
+          allElements_ODF13.withoutMultiples(), ODF13_ELEMENT_NUMBER, "element", "ODF 1.3");
+      checkFoundNumber(
+          allAttributes_ODF13.withoutMultiples(), ODF13_ATTRIBUTE_NUMBER, "attribute", "ODF 1.3");
 
     } catch (Exception ex) {
       Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -372,15 +297,15 @@ public class PuzzlePieceTest {
       PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF13_RNG_FILE);
+          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF_1_3_SCHEMA_GRAMMAR);
       allElements_ODF13 = new PuzzlePieceSet();
       allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF13_RNG_FILE);
+          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF_1_3_SCHEMA_GRAMMAR);
       allElements_ODF13 = new PuzzlePieceSet();
       allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF13_RNG_FILE);
+          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF_1_3_SCHEMA_GRAMMAR);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
       foundElementDuplicates = allElements_ODF13.size() - ODF13_ELEMENT_NUMBER;
       foundAttributeDuplicates = allAttributes_ODF13.size() - ODF13_ATTRIBUTE_NUMBER;
@@ -415,13 +340,16 @@ public class PuzzlePieceTest {
    * Routine to compare the expected number of either attributes or elements with the found amount
    */
   private void checkFoundNumber(
-      PuzzlePieceSet puzzlePieceSet, int expectedAmount, String nodeName) {
+      PuzzlePieceSet puzzlePieceSet, int expectedAmount, String nodeName, String versionLabel) {
     if (expectedAmount == puzzlePieceSet.size()) {
-      LOG.log(Level.INFO, "The expected amount of {0}s could be found", nodeName);
+      LOG.log(
+          Level.FINEST,
+          "The expected amount of {0}s could be found in {1}!",
+          new Object[] {nodeName, versionLabel});
       if (DEBUG) {
         int i = 0;
         for (PuzzlePiece piece : puzzlePieceSet) {
-          LOG.info(piece.getQName() + " was " + nodeName + " #" + ++i);
+          LOG.log(Level.INFO, "{0} was {1} #{2}", new Object[] {piece.getQName(), nodeName, ++i});
         }
         LOG.info("++++++++++++");
       }
@@ -433,11 +361,12 @@ public class PuzzlePieceTest {
               + puzzlePieceSet.size()
               + " "
               + nodeName
-              + "s found";
+              + "s found in "
+              + versionLabel;
       LOG.severe(errorMsg);
       int i = 0;
       for (PuzzlePiece piece : puzzlePieceSet) {
-        LOG.severe(piece.getQName() + " was " + nodeName + " #" + ++i);
+        LOG.log(Level.SEVERE, "{0} was {1} #{2}", new Object[] {piece.getQName(), nodeName, ++i});
       }
       LOG.info("********************");
       Assert.fail(errorMsg);
@@ -452,7 +381,7 @@ public class PuzzlePieceTest {
    * @throws Exception
    */
   static Grammar loadSchemaODF10() throws Exception {
-    return XMLModel.loadSchema(ODF10_RNG_FILE);
+    return XMLModel.loadSchema(ODF_1_0_SCHEMA_GRAMMAR);
   }
 
   /**
@@ -463,7 +392,7 @@ public class PuzzlePieceTest {
    * @throws Exception
    */
   static Grammar loadSchemaODF11() throws Exception {
-    return XMLModel.loadSchema(ODF11_RNG_FILE);
+    return XMLModel.loadSchema(ODF_1_1_SCHEMA_GRAMMAR);
   }
 
   /**
@@ -474,7 +403,7 @@ public class PuzzlePieceTest {
    * @throws Exception
    */
   static Grammar loadSchemaODF12() throws Exception {
-    return XMLModel.loadSchema(ODF12_RNG_FILE);
+    return XMLModel.loadSchema(ODF_1_2_SCHEMA_GRAMMAR);
   }
 
   /**
@@ -485,6 +414,6 @@ public class PuzzlePieceTest {
    * @throws Exception
    */
   static Grammar loadSchemaODF13() throws Exception {
-    return XMLModel.loadSchema(ODF13_RNG_FILE);
+    return XMLModel.loadSchema(ODF_1_3_SCHEMA_GRAMMAR);
   }
 }

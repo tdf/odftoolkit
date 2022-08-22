@@ -1,5 +1,5 @@
 ##################################################################
-## 
+##
 ## Licensed to the Apache Software Foundation (ASF) under one
 ## or more contributor license agreements.  See the NOTICE file
 ## distributed with this work for additional information
@@ -7,9 +7,9 @@
 ## to you under the Apache License, Version 2.0 (the
 ## "License"); you may not use this file except in compliance
 ## with the License.  You may obtain a copy of the License at
-## 
+##
 ##  http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing,
 ## software distributed under the License is distributed on an
 ## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -302,24 +302,24 @@ public class $className extends $baseClassName {
 #end
 #end
 #end
-### VERSION:ODF-NODE - START
+### VERSION:ODF-ELEMENT - START
 ## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
 ## but we can compare by name
-#if ( !$oldModelList)
+#if ( !$xmlModelHistory)
 ## First possible version the node was added is the current version
-#set ($newVersionLabel = ${xmlModel.getVersionLabel()})
-#foreach( $oldModel in $oldModelList )
+#set ($newestVersion = ${xmlModel.getGrammarVersion()})
+#foreach( $oldModel in $xmlModelHistory )
 #set ($oldElement = ${oldModel.getElement($contextNode)})
 #if (!$oldElement || !${oldElement.getChildElements().containsName($child)})
-	 * Child element is new in ${newVersionLabel}
+	 * Child element was added in ODF ${newestVersion}
 	 *
 #break
 #end
 ## Remember this old version as the version the node might be added
-#set ($newVersionLabel = ${oldModel.getVersionLabel()})
+#set ($newestVersion = ${oldModel.getGrammarVersion()})
 #end
 #end
-### NEW ODF NODE - END
+### VERSION:ODF-ELEMENT - END
 #if (${element.isMandatory($child)})
 	 * Child element is mandatory.
 	 *
@@ -343,12 +343,24 @@ public class $className extends $baseClassName {
 	/**
 	 * Create child element {@odf.element ${child}}.
 	 *
+### VERSION:ODF-ELEMENT - START
 ## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
 ## but we can compare by name
-#if (!$oldelement || !${oldelement.getChildElements().containsName($child)})
-	 * Child element is new in Odf 1.2
+#if ( !$xmlModelHistory)
+## First possible version the node was added is the current version
+#set ($newestVersion = ${xmlModel.getGrammarVersion()})
+#foreach( $oldModel in $xmlModelHistory )
+#set ($oldElement = ${oldModel.getElement($contextNode)})
+#if (!$oldElement || !${oldElement.getChildElements().containsName($child)})
+	 * Child element was added in ODF ${newestVersion}
 	 *
+#break
 #end
+## Remember this old version as the version the node might be added
+#set ($newestVersion = ${oldModel.getGrammarVersion()})
+#end
+#end
+### VERSION:ODF-ELEMENT - END
 #if (${element.isMandatory($child)})
 	 * Child element is mandatory.
 	 *

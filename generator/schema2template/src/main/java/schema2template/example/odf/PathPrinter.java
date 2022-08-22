@@ -24,11 +24,8 @@
 package schema2template.example.odf;
 
 import com.sun.msv.grammar.Expression;
-import com.sun.msv.grammar.Grammar;
 import com.sun.msv.grammar.NameClassAndExpression;
 import com.sun.msv.grammar.ReferenceExp;
-import com.sun.msv.reader.trex.ng.RELAXNGReader;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -37,7 +34,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import javax.xml.parsers.SAXParserFactory;
 import schema2template.model.MSVExpressionInformation;
 import schema2template.model.MSVExpressionType;
 import schema2template.model.MSVExpressionVisitorType;
@@ -142,81 +138,46 @@ public class PathPrinter {
     }
     return retval;
   }
-
-  private static Grammar parseOdfGrammar(File rngFile) throws Exception {
-    SAXParserFactory factory = SAXParserFactory.newInstance();
-    factory.setNamespaceAware(true);
-
-    Grammar grammar =
-        RELAXNGReader.parse(
-            rngFile.getAbsolutePath(), factory, new com.sun.msv.reader.util.IgnoreController());
-
-    if (grammar == null) {
-      throw new Exception("Schema could not be parsed.");
-    }
-    return grammar;
-  }
-
-  /* @Svante 2DO: Create a test example instead
-  public static void main(String[] args) throws Exception {
-    System.out.println(
-        "ODF 1.2 RNG file is located at '"
-            + System.getProperty(
-                "user.dir") // E:\GitHub\odf\odftoolkit-latest-0.11.0\generator\schema2template\
-            + File.separator
-            + "src\\main\\resources"
-            + File.separator
-            + OdfGrammarToTemplate
-                .ODF12_RNG_FILE // examples\odf\odf-schemas\OpenDocument-v1.2-os-schema.rng'
-            + "'");
-    Grammar grammar =
-        parseOdfGrammar(
-            new File(
-                System.getProperty("user.dir")
-                    + File.separator
-                    + "src\\main\\resources"
-                    + File.separator
-                    + OdfGrammarToTemplate.ODF12_RNG_FILE));
-    PuzzlePieceSet elements = new PuzzlePieceSet();
-    PuzzlePieceSet attributes = new PuzzlePieceSet();
-    PuzzlePiece.extractPuzzlePieces(grammar, elements, attributes, null);
-    Map<String, SortedSet<PuzzlePiece>> nameToDefinition =
-        createDefinitionMap(new TreeSet<PuzzlePiece>(elements));
-
-    System.out.println(
-        "Print all paths from parent element ("
-            + EXAMPLE_PARENT
-            + ") to direct child element ("
-            + EXAMPLE_CHILD
-            + ")");
-    SortedSet<PuzzlePiece> pieces = nameToDefinition.get(EXAMPLE_PARENT);
-    if (pieces == null) {
-      System.out.println("No parent element found by the given name: " + EXAMPLE_PARENT);
-    }
-
-    PuzzlePiece parent = pieces.first();
-
-    pieces = nameToDefinition.get(EXAMPLE_CHILD);
-
-    if (pieces == null) {
-      System.out.println("No child element found by the given name: " + EXAMPLE_CHILD);
-    }
-
-    PuzzlePiece child = pieces.first();
-
-    if (pieces.size() > 1) {
-      System.out.println(
-          "There were more than one element by this name. Dropped all instances but one.");
-    }
-    System.out.println(
-        "All paths from " + parent.getQName() + " to " + child.getQName() + " are: ");
-    List<String> paths = new PathPrinter(parent).printChildPaths(child);
-    if (paths == null) {
-      System.out.println("No Path found.");
-    } else {
-      for (String s : paths) {
-        System.out.println(s);
-      }
-    }
-  }*/
+  /**
+   * private static Grammar parseOdfGrammar(File rngFile) throws Exception { SAXParserFactory
+   * factory = SAXParserFactory.newInstance(); factory.setNamespaceAware(true);
+   *
+   * <p>Grammar grammar = RELAXNGReader.parse( rngFile.getAbsolutePath(), factory, new
+   * com.sun.msv.reader.util.IgnoreController());
+   *
+   * <p>if (grammar == null) { throw new Exception("Schema could not be parsed."); } return grammar;
+   * }
+   *
+   * <p>// @Svante 2DO: Create a test example instead public static void main(String[] args) throws
+   * Exception { System.out.println( "ODF 1.2 RNG file is located at '" + System.getProperty(
+   * "user.dir") // E:\GitHub\odf\odftoolkit-latest-0.11.0\generator\schema2template\ +
+   * File.separator + "src\\main\\resources" + File.separator + OdfGrammarToTemplate .ODF12_RNG_FILE
+   * // examples\odf\odf-schemas\OpenDocument-v1.2-os-schema.rng' + "'"); Grammar grammar =
+   * parseOdfGrammar( new File( System.getProperty("user.dir") + File.separator +
+   * "src\\main\\resources" + File.separator + OdfGrammarToTemplate.ODF12_RNG_FILE)); PuzzlePieceSet
+   * elements = new PuzzlePieceSet(); PuzzlePieceSet attributes = new PuzzlePieceSet();
+   * PuzzlePiece.extractPuzzlePieces(grammar, elements, attributes, null); Map<String,
+   * SortedSet<PuzzlePiece>> nameToDefinition = createDefinitionMap(new
+   * TreeSet<PuzzlePiece>(elements));
+   *
+   * <p>System.out.println( "Print all paths from parent element (" + EXAMPLE_PARENT + ") to direct
+   * child element (" + EXAMPLE_CHILD + ")"); SortedSet<PuzzlePiece> pieces =
+   * nameToDefinition.get(EXAMPLE_PARENT); if (pieces == null) { System.out.println("No parent
+   * element found by the given name: " + EXAMPLE_PARENT); }
+   *
+   * <p>PuzzlePiece parent = pieces.first();
+   *
+   * <p>pieces = nameToDefinition.get(EXAMPLE_CHILD);
+   *
+   * <p>if (pieces == null) { System.out.println("No child element found by the given name: " +
+   * EXAMPLE_CHILD); }
+   *
+   * <p>PuzzlePiece child = pieces.first();
+   *
+   * <p>if (pieces.size() > 1) { System.out.println( "There were more than one element by this name.
+   * Dropped all instances but one."); } System.out.println( "All paths from " + parent.getQName() +
+   * " to " + child.getQName() + " are: "); List<String> paths = new
+   * PathPrinter(parent).printChildPaths(child); if (paths == null) { System.out.println("No Path
+   * found."); } else { for (String s : paths) { System.out.println(s); } } } }
+   */
 }
