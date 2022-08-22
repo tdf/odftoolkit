@@ -56,7 +56,6 @@ import schema2template.example.odf.SchemaToTemplate;
  *
  * <ul>
  *   <li>which attributes are mandatory
- *   <li>
  *   <li>which child elements are singletons
  *   <li>can it have text content
  * </ul>

@@ -37,14 +37,11 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-// ToDo: Shall we keep one config file or shall we split them?!
-// Java specific + other separating??
-
 /**
- * Often Process the custom configuration data XML Reads only the config.xml Handler for existing
- * config.xml
+ * Often Process the custom configuration data XML Reads only the grammar-additions.xml Handler for
+ * existing grammar-additions.xml
  */
-class OdfConfigFileHandler extends DefaultHandler {
+class GrammarAdditionsFileHandler extends DefaultHandler {
 
   private boolean inConfig = false;
   private boolean inElements = false;
@@ -63,7 +60,7 @@ class OdfConfigFileHandler extends DefaultHandler {
       mAttributeDefaultMap; // Attributename -> {elementname or null, defaultvalue}
   private Set<String> mProcessedDatatypes;
 
-  public OdfConfigFileHandler(
+  public GrammarAdditionsFileHandler(
       Map<String, String> elementBaseNames,
       Map<String, OdfModel.AttributeDefaults> attributeDefaultMap,
       Map<String, List<String>> elementStyleFamilies,
@@ -171,7 +168,7 @@ class OdfConfigFileHandler extends DefaultHandler {
       return;
     }
 
-    throw new SAXException("Malformed config.xml in line " + mLocator.getLineNumber());
+    throw new SAXException("Malformed grammar-additions.xml in line " + mLocator.getLineNumber());
   }
 
   @Override
@@ -205,7 +202,7 @@ class OdfConfigFileHandler extends DefaultHandler {
       return;
     }
 
-    throw new SAXException("Malformed config.xml in line " + mLocator.getLineNumber());
+    throw new SAXException("Malformed grammar-additions.xml in line " + mLocator.getLineNumber());
   }
 
   @Override
@@ -214,11 +211,11 @@ class OdfConfigFileHandler extends DefaultHandler {
   }
 
   /**
-   * Read config.xml. Input Convention: Input empty Maps, Maps will be filled.
+   * Read grammar-additions.xml. Input Convention: Input empty Maps, Maps will be filled.
    *
    * @param cf Config file
    */
-  public static void readConfigFile(
+  public static void readGrammarAdditionsFile(
       File cf,
       Map<String, String> elementBaseNames,
       Map<String, OdfModel.AttributeDefaults> attributeDefaults,
@@ -229,7 +226,7 @@ class OdfConfigFileHandler extends DefaultHandler {
     SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
     parser.parse(
         cf,
-        new OdfConfigFileHandler(
+        new GrammarAdditionsFileHandler(
             elementBaseNames, attributeDefaults, elementStyleFamilies, datatypeValueConversion));
   }
 }

@@ -21,6 +21,8 @@
  */
 package schema2template;
 
+import java.nio.file.Paths;
+
 public class GenerationParameters {
 
   /** @Parameter @required */
@@ -30,19 +32,47 @@ public class GenerationParameters {
   private String grammarID;
 
   /** @Parameter @required */
-  private String grammar;
+  private String grammarPath;
 
   /** @Parameter @optional */
-  private String grammarAddOn;
+  private String grammarAdditionsPath;
 
   /** @Parameter @required */
-  private String grammar2Templates;
+  private String mainTemplatePath;
 
   /** @Parameter @required */
-  private String targetDir;
+  private String targetDirPath;
 
   public GenerationParameters() {
     System.err.println("GenerationParameters have been created!!");
+  }
+
+  /**
+   * @param grammarVersion the version number of grammar
+   * @param grammarID the ID label of the grammar (without the version)
+   * @param grammarPath the path to the grammar file relative to the project base directory (of the
+   *     calling pom.xml)
+   * @param grammarAdditionsPath the path to the file with additional information to the grammar,
+   *     e.g. ODF default values are listed in the ODF specificaiton
+   * @param mainTemplatePath the path to the velocity file that maps the grammar to a list of
+   *     velocity templates and their condition triggering them
+   * @param targetDirPath the output directory of the generation (usually
+   *     target/generated-sources/java)
+   */
+  public GenerationParameters(
+      String grammarVersion,
+      String grammarID,
+      String grammarPath,
+      String grammarAdditionsPath,
+      String mainTemplatePath,
+      String targetDirPath) {
+    this.grammarVersion = grammarVersion;
+    this.grammarID = grammarID;
+    this.grammarPath = Paths.get(grammarPath).normalize().toAbsolutePath().toString();
+    this.grammarAdditionsPath =
+        Paths.get(grammarAdditionsPath).normalize().toAbsolutePath().toString();
+    this.mainTemplatePath = Paths.get(mainTemplatePath).normalize().toAbsolutePath().toString();
+    this.targetDirPath = Paths.get(targetDirPath).normalize().toAbsolutePath().toString();
   }
 
   /**
@@ -62,8 +92,8 @@ public class GenerationParameters {
   }
 
   /** @return the path to the grammar file */
-  public String getGrammar() {
-    return grammar;
+  public String getGrammarPath() {
+    return grammarPath;
   }
 
   /**
@@ -72,8 +102,8 @@ public class GenerationParameters {
    *     load of the grammar by some XML parser and were blowing up the DOM. Another example for
    *     add-on information not in the grammar but in the specificaiton are the style families.
    */
-  public String getGrammarAddon() {
-    return grammarAddOn;
+  public String getGrammarAdditionsPath() {
+    return grammarAdditionsPath;
   }
 
   /**
@@ -81,12 +111,12 @@ public class GenerationParameters {
    *     template files together with the condition and loops that triggering the data
    *     transformation!
    */
-  public String getGrammar2Templates() {
-    return grammar2Templates;
+  public String getMainTemplatePath() {
+    return mainTemplatePath;
   }
 
   /** @return the path to the grammar2template velocity file.! */
   public String getTargetDir() {
-    return targetDir;
+    return targetDirPath;
   }
 }
