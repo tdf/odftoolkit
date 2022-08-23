@@ -37,7 +37,7 @@
         <javadoc.bottom>Copyright © {inceptionYear}–2018 Apache Software Foundation; Copyright © 2018–{currentYear} {organizationName}. All rights reserved.</javadoc.bottom>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- explicitly setting JDK version for compiler source & target -->
-        <jdk.version>11</jdk.version> <!-- all three JDK versions should not differ --> 
+        <jdk.version>11</jdk.version> <!-- all three JDK versions should not differ -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <!-- ANT driven release bundle creation: 3 ZIPs for the complete Toolkit for binaries, documentation and sources -->
