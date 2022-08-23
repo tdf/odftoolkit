@@ -158,7 +158,11 @@ import org.odftoolkit.odfdom.dom.element.${childNS}.$childClassName;
 #if (${childAttribute.getLocalName()} != "*")
 #set ($childNS = ${childAttribute.getNamespace()})
 #set ($childClassName = "${xmlModel.camelCase($childAttribute)}Attribute")
+#if($childNS)
 import org.odftoolkit.odfdom.dom.attribute.${childNS}.$childClassName;
+#else
+import org.odftoolkit.odfdom.dom.attribute.$childClassName;
+#end
 #end
 #end
 ##

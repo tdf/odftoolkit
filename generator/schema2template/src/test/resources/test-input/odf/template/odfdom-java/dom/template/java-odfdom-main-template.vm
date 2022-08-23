@@ -47,7 +47,11 @@
 #foreach ($attribute in ${xmlModel.getAttributes().withoutMultiples()})
 #if ($attribute != "*")
 #set($className = "${xmlModel.camelCase($attribute)}Attribute")
+#if(${xmlModel.extractNamespace($attribute)})
 	<file path="org/odftoolkit/odfdom/dom/attribute/${xmlModel.extractNamespace($attribute)}/${className}.java" contextNode="$attribute" template="java-odfdom-attribute-template.vm" />
+#else
+	<file path="org/odftoolkit/odfdom/dom/attribute/${className}.java" contextNode="$attribute" template="java-odfdom-attribute-template.vm" />
+#end
 #end
 #end
 ##
