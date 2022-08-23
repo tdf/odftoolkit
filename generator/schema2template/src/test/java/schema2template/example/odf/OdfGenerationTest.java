@@ -21,6 +21,7 @@
  */
 package schema2template.example.odf;
 
+import static schema2template.example.odf.OdfConstants.GENERATED_ODFDOM_REFERENCE;
 import static schema2template.example.odf.OdfConstants.GRAMMAR_ADDITIONS_DOM_FILE;
 import static schema2template.example.odf.OdfConstants.GRAMMAR_ADDITIONS_PKG_FILE;
 import static schema2template.example.odf.OdfConstants.MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE;
@@ -45,10 +46,13 @@ import static schema2template.example.odf.OdfConstants.ODF_VERSION_1_2;
 import static schema2template.example.odf.OdfConstants.ODF_VERSION_1_3;
 import static schema2template.example.odf.OdfConstants.TARGET_BASE_DIR;
 
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import schema2template.GenerationParameters;
 
@@ -58,6 +62,7 @@ public class OdfGenerationTest {
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test
+  @Ignore
   public void testAllExampleGenerations() {
     try {
 
@@ -159,17 +164,25 @@ public class OdfGenerationTest {
       SchemaToTemplate.run(generations);
 
       // ******** Reference Test *************
-      // **2DO: Compare text file content, but ignore line breaking. Showing lines with the
-      // difference!!
       // generated sources must be equal to the previously generated reference sources
-      //            Assert.assertTrue(
-      //                    "The new generated sources\n\t"
-      //                    + Paths.get(targetODF1.2).toAbsolutePath().toString()
-      //                    + "\ndiffer from their reference:\n\t"
-      //                    + Paths.get(TARGET_REL_DIR).toAbsolutePath().toString(),
-      //                    DirectoryCompare.directoryContentEquals(
-      //                            Paths.get(targetODF1.2), Paths.get(TARGET_REL_DIR)));
-    } catch (Exception ex) {
+      String targetPath = Paths.get(TARGET_BASE_DIR).toAbsolutePath().toString();
+      String referencePath = Paths.get(GENERATED_ODFDOM_REFERENCE).toAbsolutePath().toString();
+
+      LOG.log(
+          Level.INFO,
+          "\n\nComparing new generated Files:\n\t{0}\nwith their reference:\n\t{1}\n",
+          new Object[] {
+            Paths.get(TARGET_BASE_DIR).toAbsolutePath().toString(),
+            Paths.get(GENERATED_ODFDOM_REFERENCE).toAbsolutePath().toString()
+          });
+      Assert.assertTrue(
+          "The new generated sources\n\t"
+              + targetPath
+              + "\ndiffer from their reference:\n\t"
+              + referencePath,
+          DirectoryCompare.directoryContentEquals(
+              Paths.get(TARGET_BASE_DIR), Paths.get(GENERATED_ODFDOM_REFERENCE)));
+    } catch (IOException ex) {
       LOG.log(Level.SEVERE, null, ex);
       Assert.fail(ex.toString());
     }

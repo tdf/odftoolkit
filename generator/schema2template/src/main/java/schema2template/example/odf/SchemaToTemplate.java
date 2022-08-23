@@ -236,7 +236,7 @@ public class SchemaToTemplate {
         case FILE:
           LOG.log(
               Level.INFO,
-              "Processing line{0}: Generating file {1}\n",
+              "Processing line {0}: Generating file {1}\n",
               new Object[] {f.getLineNumber(), generateFilename(f.getAttribute("path"))});
           ;
           String contextAttrValue = f.getAttribute("contextNode");

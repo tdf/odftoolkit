@@ -23,7 +23,7 @@ package schema2template.example.odf;
 
 import java.io.File;
 
-/** Contains all test relevants constants related to ODF */
+/** Contains all test relevant constants related to ODF */
 class OdfConstants {
 
   /**
@@ -184,4 +184,19 @@ class OdfConstants {
           + "template"
           + File.separator
           + "java-odfdom-main-template.vm";
+
+  static final String GENERATED_ODFDOM_REFERENCE =
+      BASE_DIR
+          + "src"
+          + File.separator
+          + "test"
+          + File.separator
+          + "resources"
+          + File.separator
+          + "test-reference"
+          + File.separator
+          + "odf"
+          + File.separator
+          + "odfdom-java"
+          + File.separator;
 }
