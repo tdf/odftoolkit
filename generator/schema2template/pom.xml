@@ -125,12 +125,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <!-- defined in the parent pom.xml -->
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                    <showDeprecation>true</showDeprecation>
-                </configuration>
+				<!-- configuration defined in the parent pom.xml -->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
