@@ -477,6 +477,7 @@
                                 </goals>
                                 <configuration>
                                     <!-- 10 times file generations for the 10 grammars of ODF of its 4 ODF versions -->
+                                    <!-- NOTE: The generated sources will not compile due to manual overrides, which are being fixed by applying the Git branch odfdom-code-generation-adoptions  -->
                                     <generations>
                                         <!-- ODF 1.0 -->
                                         <generation>

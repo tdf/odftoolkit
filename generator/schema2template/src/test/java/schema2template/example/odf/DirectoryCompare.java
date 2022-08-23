@@ -16,8 +16,8 @@
  */
 package schema2template.example.odf;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,18 +25,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Compares a directory with all its subdirectories if its text files are equal by line. Comparing
+ * our test results with our references, which were once test files of running tests!
+ */
 class DirectoryCompare {
 
   private static final Logger LOG = Logger.getLogger(DirectoryCompare.class.getName());
   /**
-   * Compare the contents of two directories to determine if they are equal or not. If both paths
-   * don't exist, the contents aren't equal and this method returns false.
+   * Compare the contents of two directories to determine if they are equal or not. If one of the
+   * paths don't exist, the contents aren't equal and this method returns false.
    */
   static boolean directoryContentEquals(Path dir1, Path dir2) throws IOException {
     boolean dir1Exists = Files.exists(dir1) && Files.isDirectory(dir1);
     boolean dir2Exists = Files.exists(dir2) && Files.isDirectory(dir2);
+    Boolean areEqual = Boolean.TRUE;
 
     if (dir1Exists && dir2Exists) {
       HashMap<Path, Path> dir1Paths = new HashMap<>();
@@ -53,7 +59,11 @@ class DirectoryCompare {
 
       // The directories cannot be equal if the number of files aren't equal.
       if (dir1Paths.size() != dir2Paths.size()) {
-        return false;
+        LOG.log(
+            Level.SEVERE,
+            "\nThe file size differ:\n{0} files exist in \n{1}\n{2} files exist in\n{3}\n\n",
+            new Object[] {dir1Paths.size(), dir1, dir2Paths.size(), dir2});
+        areEqual = Boolean.FALSE;
       }
 
       // For each file in dir1, check if also dir2 contains this file and if
@@ -62,22 +72,51 @@ class DirectoryCompare {
         Path relativePath = pathEntry.getKey();
         Path absolutePath = pathEntry.getValue();
         if (!dir2Paths.containsKey(relativePath)) {
-          return false;
+          areEqual = Boolean.FALSE;
+          LOG.log(
+              Level.SEVERE,
+              "\nThe file\n{0}\ndoes not exist in\n{1}\n\n",
+              new Object[] {relativePath, dir2});
         } else {
-          if (!contentEquals(absolutePath, dir2Paths.get(relativePath))) {
-            LOG.severe(
-                "There is a difference between:\n\t"
-                    + absolutePath.toString()
-                    + "\n and \n\t"
-                    + relativePath.toAbsolutePath().toString());
-            return false;
+          if (!textFilesEquals(absolutePath, dir2Paths.get(relativePath))) {
+            // error msg within textFilesEquals with line difference
+            // LOG.log(Level.SEVERE, "There is a difference between:\n{0}\n and \n{1}\n\n", new
+            // Object[]{absolutePath.toString(), relativePath.toAbsolutePath().toString()});
+            areEqual = Boolean.FALSE;
           }
+          // remove it to be able to show the superset of dir2Paths in the end
+          dir2Paths.remove(relativePath);
         }
       }
-      return true;
+      // if there is a superset of dir2Paths
+      if (!dir2Paths.isEmpty()) {
+        areEqual = Boolean.FALSE;
+        for (Entry<Path, Path> pathEntry2 : dir2Paths.entrySet()) {
+          Path relativePath2 = pathEntry2.getKey();
+          LOG.log(
+              Level.SEVERE,
+              "\nThe file\n{0}\ndoes not exist in\n{1}\n\n",
+              new Object[] {relativePath2, dir1});
+        }
+      }
+      return areEqual;
+    } else {
+      areEqual = Boolean.FALSE;
+      if (!dir1Exists) {
+        LOG.log(
+            Level.SEVERE,
+            "\nThe following input directory does not exist:\n{0}\n\n",
+            new Object[] {dir1});
+      }
+      if (!dir2Exists) {
+        LOG.log(
+            Level.SEVERE,
+            "\nThe following input directory does not exist:\n{0}",
+            new Object[] {dir2});
+      }
     }
 
-    return false;
+    return areEqual;
   }
 
   /**
@@ -108,17 +147,20 @@ class DirectoryCompare {
     if (Files.isReadable(path)) {
       // If the path is a directory try to read it.
       if (Files.isDirectory(path)) {
-        // The input is a directory. Read its files.
-        DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path);
-        for (Path p : directoryStream) {
-          listPaths(p, result, extensions);
+        if (extensions.length == 0) {
+          result.add(path);
         }
-        directoryStream.close();
+        try ( // The input is a directory. Read its files.
+        DirectoryStream<Path> directoryStream = Files.newDirectoryStream(path)) {
+          for (Path p : directoryStream) {
+            listPaths(p, result, extensions);
+          }
+        }
       } else {
-        String filename = path.getFileName().toString();
         if (extensions.length == 0) {
           result.add(path);
         } else {
+          String filename = path.getFileName().toString();
           for (String extension : extensions) {
             if (filename.toLowerCase().endsWith(extension)) {
               result.add(path);
@@ -127,64 +169,55 @@ class DirectoryCompare {
           }
         }
       }
+    } else {
+      System.err.println("Not readable:" + path);
     }
   }
 
-  /**
-   * Compares the contents of the two given paths. If both paths don't exist, the contents aren't
-   * equal and this method returns false.
-   */
-  private static boolean contentEquals(Path p1, Path p2) throws IOException {
-    if (!Files.exists(p1) || !Files.exists(p2)) {
-      return false;
-    }
-
-    if (Files.isDirectory(p1) && Files.isDirectory(p2)) {
-      return directoryContentEquals(p1, p2);
-    }
-
-    if (p1.equals(p2)) {
-      // same filename => true
-      return true;
-    }
-
-    if (Files.size(p1) != Files.size(p2)) {
-      // different size =>false
-      return false;
-    }
-
-    InputStream in1 = null;
-    InputStream in2 = null;
-    try {
-      in1 = Files.newInputStream(p1);
-      in2 = Files.newInputStream(p2);
-
-      int expectedByte = in1.read();
-      while (expectedByte != -1) {
-        if (expectedByte != in2.read()) {
-          return false;
-        }
-        expectedByte = in1.read();
+  private static boolean textFilesEquals(Path p1, Path p2) throws IOException {
+    boolean areEqual = Boolean.TRUE;
+    if (Files.isDirectory(p1) || Files.isDirectory(p2)) {
+      if (!Files.isDirectory(p1)) {
+        LOG.log(
+            Level.SEVERE,
+            "\nOne file is a directory:\n{0}\nwhile the other is a file:\n{1}\n\n",
+            new Object[] {p2.toString(), p1.toString()});
+        areEqual = Boolean.FALSE;
       }
-      if (in2.read() != -1) {
-        return false;
+      if (!Files.isDirectory(p2)) {
+        LOG.log(
+            Level.SEVERE,
+            "\nOne file is a directory:\n{0}\nwhile the other is a file:\n{1}\n\n",
+            new Object[] {p1.toString(), p2.toString()});
+        areEqual = Boolean.FALSE;
       }
-      return true;
-    } finally {
-      if (in1 != null) {
-        try {
-          in1.close();
-        } catch (IOException e) {
-          return false;
-        }
-      }
-      if (in2 != null) {
-        try {
-          in2.close();
-        } catch (IOException e) {
-          return false;
+    } else {
+      try (BufferedReader reader1 = Files.newBufferedReader(p1)) {
+        try (BufferedReader reader2 = Files.newBufferedReader(p2)) {
+          String line1 = reader1.readLine();
+          String line2 = reader2.readLine();
+          int lineNum = 1;
+          while (line1 != null || line2 != null) {
+            if (line1 == null || line2 == null) {
+              areEqual = Boolean.FALSE;
+              break;
+            } else if (!line1.equals(line2)) {
+              areEqual = Boolean.FALSE;
+              break;
+            }
+            line1 = reader1.readLine();
+            line2 = reader2.readLine();
+            lineNum++;
+          }
+          if (!areEqual) {
+            LOG.log(
+                Level.SEVERE,
+                "\nTwo files have different content:\n{0}\nhas at line {1}:\n{2}\nand\n{3}\nhas at line {4}:\n{5}\n\n",
+                new Object[] {p1.toString(), lineNum, line1, p2.toString(), lineNum, line2});
+          }
         }
       }
     }
+    return areEqual;
   }
 }
