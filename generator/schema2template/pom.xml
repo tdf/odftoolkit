@@ -129,7 +129,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <!-- explicit version required for fix on systemPropertyVariables -->
                 <configuration>
-                    <forkCount>0</forkCount>
+                    <!--<forkCount>0</forkCount>-->
                     <systemPropertyVariables>
                         <odfdom.version>${project.version}</odfdom.version>
                         <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
