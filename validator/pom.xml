@@ -122,7 +122,7 @@
                                     <ODFVALIDATOR-SCM>${git.commit.id}</ODFVALIDATOR-SCM>
                                     <ODFVALIDATOR-Website>${project.url}</ODFVALIDATOR-Website>
                                     <ODFVALIDATOR-Built-Date>${build.timestamp}</ODFVALIDATOR-Built-Date>
-                                    <ODFVALIDATOR-Supported-Odf-Version>1.2</ODFVALIDATOR-Supported-Odf-Version>
+                                    <ODFVALIDATOR-Supported-Odf-Version>${supported-odf-version}</ODFVALIDATOR-Supported-Odf-Version>
                                 </manifestEntries>
                             </manifestSection>
                         </manifestSections>
