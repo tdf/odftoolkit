@@ -513,6 +513,8 @@
                                 <exclude>DEPENDENCIES</exclude>
                                 <exclude>docs/**/*</exclude>
                                 <exclude>manifest.mf</exclude>
+                                <exclude>rat-fails.txt</exclude>
+                                <exclude>rat-works.txt</exclude>
                                 <exclude>nb-configuration.xml</exclude>
                                 <exclude>src/site/**/*</exclude>
                                 <!-- schema2template -->

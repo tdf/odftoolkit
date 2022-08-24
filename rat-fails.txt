@@ -1,0 +1,426 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] The ODF Toolkit                                                    [pom]
+[INFO] XML Schema to Template Mapping Tool: Parent POM                    [pom]
+[INFO] XML Schema to Template Mapping Tool: Library                       [jar]
+[INFO] 
+[INFO] ---------------------< org.odftoolkit:odftoolkit >----------------------
+[INFO] Building The ODF Toolkit 0.11.0-SNAPSHOT                           [1/3]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.2.0:clean (default-clean) @ odftoolkit ---
+[INFO] Deleting /home/svante/dev/odf/odftoolkit-latest/target
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.1.0:enforce (enforce-maven-version) @ odftoolkit ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.1.0:enforce (enforce-java-version) @ odftoolkit ---
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.1:run (default) @ odftoolkit ---
+[INFO] Executing tasks
+     [echo] Displaying value of 'basedir' property at root pom.xml
+     [echo] [basedir] /home/svante/dev/odf/odftoolkit-latest
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- apache-rat-plugin:0.15-Svante:check (default) @ odftoolkit ---
+[INFO] Enabled default license matchers.
+[INFO] Will parse SCM ignores for exclusions...
+[INFO] Parsing exclusions from /home/svante/dev/odf/odftoolkit-latest/.gitignore
+[INFO] Finished adding exclusions from SCM ignore files.
+[INFO] 147 implicit excludes.
+[INFO] 28 explicit excludes.
+[INFO] 7 resources included
+CurrenDirFilesReportable:/home/svante/dev/odf/odftoolkit-latest
+baseDir-A:/home/svante/dev/odf/odftoolkit-latest
+baseDir-B:null
+*******The baseDir:null and the file path is 'pom.xml'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/pom.xml'!
+*******The baseDir:null and the file path is 'legal/LICENSE'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/legal/LICENSE'!
+*******The baseDir:null and the file path is 'legal/NOTICE'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/legal/NOTICE'!
+*******The baseDir:null and the file path is 'KEYS'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/KEYS'!
+*******The baseDir:null and the file path is 'HEADER.txt'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/HEADER.txt'!
+*******The baseDir:null and the file path is 'LICENSE'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/LICENSE'!
+*******The baseDir:null and the file path is 'NOTICE'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/NOTICE'!
+[INFO] Rat check: Summary over all files. Unapproved: 0, unknown: 0, generated: 0, approved: 2 licenses.
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:1.7.0:process (process-resource-bundles) @ odftoolkit ---
+[INFO] Preparing remote bundle org.apache:apache-jar-resource-bundle:1.4
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.0:attach-descriptor (attach-descriptor) @ odftoolkit ---
+[INFO] No site descriptor found: nothing to attach.
+[INFO] 
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ odftoolkit ---
+[INFO] Installing /home/svante/dev/odf/odftoolkit-latest/pom.xml to /home/svante/.m2/repository/org/odftoolkit/odftoolkit/0.11.0-SNAPSHOT/odftoolkit-0.11.0-SNAPSHOT.pom
+[INFO] 
+[INFO] -----------------< org.odftoolkit:schema2template-pom >-----------------
+[INFO] Building XML Schema to Template Mapping Tool: Parent POM 0.11.0-SNAPSHOT [2/3]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.2.0:clean (default-clean) @ schema2template-pom ---
+[INFO] Deleting /home/svante/dev/odf/odftoolkit-latest/generator/target
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.1.0:enforce (enforce-maven-version) @ schema2template-pom ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.1.0:enforce (enforce-java-version) @ schema2template-pom ---
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.1:run (default) @ schema2template-pom ---
+[INFO] Executing tasks
+     [echo] Displaying value of 'basedir' property at generator
+     [echo] [basedir] /home/svante/dev/odf/odftoolkit-latest/generator
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- apache-rat-plugin:0.15-Svante:check (default) @ schema2template-pom ---
+[INFO] Enabled default license matchers.
+[INFO] Will parse SCM ignores for exclusions...
+[INFO] Finished adding exclusions from SCM ignore files.
+[INFO] 63 implicit excludes.
+[INFO] 28 explicit excludes.
+[INFO] 2 resources included
+CurrenDirFilesReportable:/home/svante/dev/odf/odftoolkit-latest
+baseDir-A:/home/svante/dev/odf/odftoolkit-latest/generator
+baseDir-B:/home/svante/dev/odf/odftoolkit-latest/generator
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator and the file path is 'pom.xml'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/pom.xml'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator and the file path is 'LICENSE.txt'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/LICENSE.txt'!
+[INFO] Rat check: Summary over all files. Unapproved: 0, unknown: 0, generated: 0, approved: 1 licenses.
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:1.7.0:process (process-resource-bundles) @ schema2template-pom ---
+[INFO] Preparing remote bundle org.apache:apache-jar-resource-bundle:1.4
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.0:attach-descriptor (attach-descriptor) @ schema2template-pom ---
+[INFO] No site descriptor found: nothing to attach.
+[INFO] 
+[INFO] >>> maven-source-plugin:3.2.1:jar (attach-sources) > generate-sources @ schema2template-pom >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.1.0:enforce (enforce-maven-version) @ schema2template-pom ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.1.0:enforce (enforce-java-version) @ schema2template-pom ---
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.1:run (default) @ schema2template-pom ---
+[INFO] Executing tasks
+     [echo] Displaying value of 'basedir' property at generator
+     [echo] [basedir] /home/svante/dev/odf/odftoolkit-latest/generator
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- apache-rat-plugin:0.15-Svante:check (default) @ schema2template-pom ---
+[INFO] Enabled default license matchers.
+[INFO] Will parse SCM ignores for exclusions...
+[INFO] Finished adding exclusions from SCM ignore files.
+[INFO] 63 implicit excludes.
+[INFO] 28 explicit excludes.
+[INFO] 2 resources included
+CurrenDirFilesReportable:/home/svante/dev/odf/odftoolkit-latest
+baseDir-A:/home/svante/dev/odf/odftoolkit-latest/generator
+baseDir-B:/home/svante/dev/odf/odftoolkit-latest/generator
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator and the file path is 'pom.xml'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/pom.xml'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator and the file path is 'LICENSE.txt'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/LICENSE.txt'!
+[INFO] Rat check: Summary over all files. Unapproved: 0, unknown: 0, generated: 0, approved: 1 licenses.
+[INFO] 
+[INFO] <<< maven-source-plugin:3.2.1:jar (attach-sources) < generate-sources @ schema2template-pom <<<
+[INFO] 
+[INFO] 
+[INFO] --- maven-source-plugin:3.2.1:jar (attach-sources) @ schema2template-pom ---
+[INFO] 
+[INFO] --- maven-javadoc-plugin:3.4.1:jar (attach-javadocs) @ schema2template-pom ---
+[INFO] Not executing Javadoc as the project is not a Java classpath-capable package
+[INFO] 
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ schema2template-pom ---
+[INFO] Installing /home/svante/dev/odf/odftoolkit-latest/generator/pom.xml to /home/svante/.m2/repository/org/odftoolkit/schema2template-pom/0.11.0-SNAPSHOT/schema2template-pom-0.11.0-SNAPSHOT.pom
+[INFO] 
+[INFO] -------------------< org.odftoolkit:schema2template >-------------------
+[INFO] Building XML Schema to Template Mapping Tool: Library 0.11.0-SNAPSHOT [3/3]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.2.0:clean (default-clean) @ schema2template ---
+[INFO] Deleting /home/svante/dev/odf/odftoolkit-latest/generator/schema2template/target
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.1.0:enforce (enforce-maven-version) @ schema2template ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.1.0:enforce (enforce-java-version) @ schema2template ---
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.1:run (default) @ schema2template ---
+[INFO] Executing tasks
+     [echo] Displaying value of 'basedir' property at schema2template profile-Pedantic
+     [echo] [basedir] /home/svante/dev/odf/odftoolkit-latest/generator/schema2template
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- apache-rat-plugin:0.15-Svante:check (default) @ schema2template ---
+[INFO] Enabled default license matchers.
+[INFO] Will parse SCM ignores for exclusions...
+[INFO] Finished adding exclusions from SCM ignore files.
+[INFO] 62 implicit excludes.
+[INFO] 28 explicit excludes.
+[INFO] 38 resources included
+CurrenDirFilesReportable:/home/svante/dev/odf/odftoolkit-latest
+baseDir-A:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template
+baseDir-B:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'pom.xml'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/pom.xml'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/OutputFileListEntry.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/OutputFileListEntry.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/GenerationParameters.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/GenerationParameters.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/example/odf/OdfFamilyPropertiesPatternMatcher.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/example/odf/OdfFamilyPropertiesPatternMatcher.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/example/odf/SourceCodeBaseClass.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/example/odf/SourceCodeBaseClass.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/example/odf/SourceCodeModel.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/example/odf/SourceCodeModel.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/example/odf/SchemaToTemplate.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/example/odf/SchemaToTemplate.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/example/odf/PathPrinter.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/example/odf/PathPrinter.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/example/odf/GrammarAdditionsFileHandler.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/example/odf/GrammarAdditionsFileHandler.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/example/odf/OdfModel.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/example/odf/OdfModel.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/OutputFileListHandler.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/OutputFileListHandler.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/QNamed.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/QNamed.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/PuzzlePiece.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/PuzzlePiece.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/MSVExpressionVisitorChildren.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/MSVExpressionVisitorChildren.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/MSVExpressionInformation.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/MSVExpressionInformation.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/MSVExpressionIterator.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/MSVExpressionIterator.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/NamespaceDictionary.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/NamespaceDictionary.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/MSVExpressionType.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/MSVExpressionType.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/PuzzleComponent.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/PuzzleComponent.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/XMLModel.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/XMLModel.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/TinkerPopGraph.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/TinkerPopGraph.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/QNamedPuzzleComponent.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/QNamedPuzzleComponent.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/QNameValue.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/QNameValue.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/PuzzlePieceSet.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/PuzzlePieceSet.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/MSVNameClassVisitorList.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/MSVNameClassVisitorList.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/model/MSVExpressionVisitorType.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/MSVExpressionVisitorType.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/java/schema2template/Echo.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/Echo.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/javadoc/schema2template/package.html'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/javadoc/schema2template/package.html'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/javadoc/schema2template/example/odf/package.html'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/javadoc/schema2template/example/odf/package.html'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/javadoc/schema2template/model/package.html'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/javadoc/schema2template/model/package.html'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/main/javadoc/overview.html'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/javadoc/overview.html'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/test/java/schema2template/TemplateAPICoverageTest.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/test/java/schema2template/TemplateAPICoverageTest.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/test/java/schema2template/example/odf/OdfConstants.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/test/java/schema2template/example/odf/OdfConstants.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/test/java/schema2template/example/odf/OdfFamilyPropertiesPatternMatcherTest.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/test/java/schema2template/example/odf/OdfFamilyPropertiesPatternMatcherTest.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/test/java/schema2template/example/odf/OdfGenerationTest.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/test/java/schema2template/example/odf/OdfGenerationTest.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/test/java/schema2template/example/odf/DirectoryCompare.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/test/java/schema2template/example/odf/DirectoryCompare.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/test/java/schema2template/example/odf/OdfTemplateAPICoverageTest.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/test/java/schema2template/example/odf/OdfTemplateAPICoverageTest.java'!
+*******The baseDir:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template and the file path is 'src/test/java/schema2template/example/odf/PuzzlePieceTest.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/test/java/schema2template/example/odf/PuzzlePieceTest.java'!
+[INFO] Rat check: Summary over all files. Unapproved: 0, unknown: 0, generated: 0, approved: 38 licenses.
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:1.7.0:process (process-resource-bundles) @ schema2template ---
+[INFO] Preparing remote bundle org.apache:apache-jar-resource-bundle:1.4
+[INFO] Copying 3 resources from 1 bundle.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ schema2template ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] skip non existing resourceDirectory /home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/resources
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ schema2template ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 26 source files to /home/svante/dev/odf/odftoolkit-latest/generator/schema2template/target/classes
+[WARNING] system modules path not set in conjunction with -source 11
+[WARNING] /home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/TinkerPopGraph.java:[86,17] org.apache.tinkerpop.gremlin.structure.io.IoCore in org.apache.tinkerpop.gremlin.structure.io has been deprecated
+[WARNING] /home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/TinkerPopGraph.java:[86,13] <I>io(org.apache.tinkerpop.gremlin.structure.io.Io.Builder<I>) in org.apache.tinkerpop.gremlin.structure.Graph has been deprecated
+[WARNING] /home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/XMLModel.java:[177,35] org.apache.xml.serialize.XMLSerializer in org.apache.xml.serialize has been deprecated
+[WARNING] /home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/XMLModel.java:[177,58] org.apache.xml.serialize.OutputFormat in org.apache.xml.serialize has been deprecated
+[WARNING] /home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/Echo.java:[31,27] org.xml.sax.HandlerBase in org.xml.sax has been deprecated
+[WARNING] /home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/Echo.java:[67,41] org.xml.sax.AttributeList in org.xml.sax has been deprecated
+[INFO] /home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/PuzzlePiece.java: Some input files use unchecked or unsafe operations.
+[INFO] /home/svante/dev/odf/odftoolkit-latest/generator/schema2template/src/main/java/schema2template/model/PuzzlePiece.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ schema2template ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 7146 resources
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ schema2template ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 7 source files to /home/svante/dev/odf/odftoolkit-latest/generator/schema2template/target/test-classes
+[WARNING] system modules path not set in conjunction with -source 11
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ schema2template ---
+[WARNING] useSystemClassloader setting has no effect when not forking
+[INFO] Running schema2template.example.odf.OdfGenerationTest
+[WARNING] Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.03 s - in schema2template.example.odf.OdfGenerationTest
+[INFO] Running schema2template.example.odf.OdfTemplateAPICoverageTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s - in schema2template.example.odf.OdfTemplateAPICoverageTest
+[INFO] Running schema2template.example.odf.OdfFamilyPropertiesPatternMatcherTest
+StyleFamily <=> Properties:
+@style:family = 'chart' = style:chart-properties style:graphic-properties style:paragraph-properties style:text-properties
+@style:family = 'drawing-page' = style:drawing-page-properties
+@style:family = 'graphic' = style:graphic-properties style:paragraph-properties style:text-properties
+@style:family = 'paragraph' = style:paragraph-properties style:text-properties
+@style:family = 'presentation' = style:graphic-properties style:paragraph-properties style:text-properties
+@style:family = 'ruby' = style:ruby-properties
+@style:family = 'section' = style:section-properties
+@style:family = 'table' = style:table-properties
+@style:family = 'table-cell' = style:table-cell-properties style:paragraph-properties style:text-properties
+@style:family = 'table-column' = style:table-column-properties
+@style:family = 'table-row' = style:table-row-properties
+@style:family = 'text' = style:text-properties
+
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.556 s - in schema2template.example.odf.OdfFamilyPropertiesPatternMatcherTest
+[INFO] Running schema2template.example.odf.PuzzlePieceTest
+Aug 24, 2022 8:37:27 PM schema2template.example.odf.PuzzlePieceTest testMSVExpressionTree
+INFO: Writing MSV RelaxNG tree for ODF 1.0 into file: /home/svante/dev/odf/odftoolkit-latest/generator/schema2template//target/generated-sources/java/odf/msv-dump//odf10-msvtree.dump
+Aug 24, 2022 8:37:27 PM schema2template.example.odf.PuzzlePieceTest testMSVExpressionTree
+INFO: Writing MSV RelaxNG tree for ODF 1.1 into file: /home/svante/dev/odf/odftoolkit-latest/generator/schema2template//target/generated-sources/java/odf/msv-dump//odf11-msvtree.dump
+Aug 24, 2022 8:37:27 PM schema2template.example.odf.PuzzlePieceTest testMSVExpressionTree
+INFO: Writing MSV RelaxNG tree for ODF 1.2 into file: /home/svante/dev/odf/odftoolkit-latest/generator/schema2template//target/generated-sources/java/odf/msv-dump//odf12-msvtree.dump
+Aug 24, 2022 8:37:27 PM schema2template.example.odf.PuzzlePieceTest testMSVExpressionTree
+INFO: Writing MSV RelaxNG tree for ODF 1.3 into file: /home/svante/dev/odf/odftoolkit-latest/generator/schema2template//target/generated-sources/java/odf/msv-dump//odf13-msvtree.dump
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.887 s - in schema2template.example.odf.PuzzlePieceTest
+[INFO] Running schema2template.TemplateAPICoverageTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s - in schema2template.TemplateAPICoverageTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[WARNING] Tests run: 7, Failures: 0, Errors: 0, Skipped: 1
+[INFO] 
+[INFO] 
+[INFO] --- maven-jar-plugin:3.2.2:jar (default-jar) @ schema2template ---
+[INFO] Building jar: /home/svante/dev/odf/odftoolkit-latest/generator/schema2template/target/schema2template-0.11.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.12.0:attach-descriptor (attach-descriptor) @ schema2template ---
+[INFO] Skipping because packaging 'jar' is not pom.
+[INFO] 
+[INFO] >>> maven-source-plugin:3.2.1:jar (attach-sources) > generate-sources @ schema2template >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.1.0:enforce (enforce-maven-version) @ schema2template ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:3.1.0:enforce (enforce-java-version) @ schema2template ---
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.1:run (default) @ schema2template ---
+[INFO] Executing tasks
+     [echo] Displaying value of 'basedir' property at schema2template profile-Pedantic
+     [echo] [basedir] /home/svante/dev/odf/odftoolkit-latest/generator/schema2template
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- apache-rat-plugin:0.15-Svante:check (default) @ schema2template ---
+[INFO] Enabled default license matchers.
+[INFO] Will parse SCM ignores for exclusions...
+[INFO] Finished adding exclusions from SCM ignore files.
+[INFO] 62 implicit excludes.
+[INFO] 28 explicit excludes.
+[INFO] 38 resources included
+CurrenDirFilesReportable:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template
+starting debugging
+baseDir-A:/home/svante/dev/odf/odftoolkit-latest/generator/schema2template
+baseDir-B:null
+*******The baseDir:null and the file path is 'pom.xml'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/pom.xml'!
+*******The baseDir:null and the file path is 'src/main/java/schema2template/OutputFileListEntry.java'!
+*******UserDir:'/home/svante/dev/odf/odftoolkit-latest/generator/schema2template'!
+*******newF:'/home/svante/dev/odf/odftoolkit-latest/src/main/java/schema2template/OutputFileListEntry.java'!
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for The ODF Toolkit 0.11.0-SNAPSHOT:
+[INFO] 
+[INFO] The ODF Toolkit .................................... SUCCESS [  3.320 s]
+[INFO] XML Schema to Template Mapping Tool: Parent POM .... SUCCESS [  1.545 s]
+[INFO] XML Schema to Template Mapping Tool: Library ....... FAILURE [ 13.759 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  18.997 s
+[INFO] Finished at: 2022-08-24T20:37:32+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.rat:apache-rat-plugin:0.15-Svante:check (default) on project schema2template: Cannot read header: src/main/java/schema2template/OutputFileListEntry.java (No such file or directory) -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :schema2template
