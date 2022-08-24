@@ -79,7 +79,6 @@
             </extension>
         </extensions>
         <plugins>
-            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -92,13 +91,13 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <echo>Displaying value of 'project.basedir' property at schema2template</echo>
-                                <echo>[basedir] ${project.basedir}</echo>
+                                <echo>Displaying value of 'basedir' property at schema2template</echo>
+                                <echo>[basedir] ${basedir}</echo>
                             </tasks>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
 
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -214,6 +213,7 @@
             <id>pedantic</id>
             <build>
                 <plugins>
+<!--
                     <plugin>
                         <groupId>org.apache.rat</groupId>
                         <artifactId>apache-rat-plugin</artifactId>
@@ -221,6 +221,7 @@
                             <basedir>${basedir}</basedir>
                         </configuration>
                     </plugin>
+-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
