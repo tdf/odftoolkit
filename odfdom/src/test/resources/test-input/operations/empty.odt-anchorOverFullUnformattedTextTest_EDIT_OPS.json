@@ -1,5 +1,0 @@
-{"changes":[
-{"name":"addText","start":[1,1],"opl":1,"osn":16,"text":"eins  zwei"},
-{"name":"addStyle","type":"character","styleId":"Hyperlink","attrs":{"character":{"color":{"type":"scheme","fallbackValue":"0080C0","value":"hyperlink"},"underline":true}},"opl":1,"osn":17,"parent":null,"styleName":"Hyperlink","uiPriority":99},
-{"name":"format","start":[1,1],"end":[1,11],"attrs":{"styleId":"Hyperlink","character":{"url":"http://www.heise.de"}},"opl":1,"osn":18}
-]}

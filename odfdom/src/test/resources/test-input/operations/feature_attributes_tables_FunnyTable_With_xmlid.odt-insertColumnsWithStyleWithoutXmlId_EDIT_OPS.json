@@ -1,4 +1,0 @@
-{"changes":[
-{"name":"addColumn","start":[3],"gridPosition":0,"insertMode":"behind","tableGrid":[20,20,20,20,20]},
-{"name":"format","start":[3],"attrs":{"table":{"tableGrid":[20,20,20,20,20]}}}
-]}

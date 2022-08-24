@@ -1,9 +1,0 @@
-{"changes":[
-{"name":"addParagraph","start":[1],"attrs":{"paragraph":{}}},
-{"name":"addText","start":[1,1],"text":"Courier"},
-{"name":"format","start":[1,1],"end":[1,7],"attrs":{"character":{"fontName":"Courier"}}},
-{"name":"addText","start":[1,8],"text":" subscript"},
-{"name":"format","start":[1,9],"end":[1,17],"attrs":{"character":{"vertAlign":"sub"}}},
-{"name":"addText","start":[1,18],"text":" "},
-{"name":"addText","start":[1,19],"attrs":{"character":{"vertAlign":"super"}},"text":"superscript"}
-]}

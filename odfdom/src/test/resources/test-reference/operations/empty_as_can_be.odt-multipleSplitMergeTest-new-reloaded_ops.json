@@ -1,7 +1,0 @@
-{"changes":[
-{"name":"noOp"},
-{"name":"addParagraph","start":[1]},
-{"name":"addText","start":[1,1],"text":"first"},
-{"name":"addParagraph","start":[2]},
-{"name":"addText","start":[2,1],"text":"second"}
-]}

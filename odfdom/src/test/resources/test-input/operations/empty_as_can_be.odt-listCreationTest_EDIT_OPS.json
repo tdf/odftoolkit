@@ -1,5 +1,0 @@
-{"changes":[
-{"name":"addParagraph","start":[1]},
-{"name":"addText","start":[1,1],"text":"1"},
-{"name":"format","start":[1],"attrs":{"paragraph":{"listLevel":3}}}
-]}

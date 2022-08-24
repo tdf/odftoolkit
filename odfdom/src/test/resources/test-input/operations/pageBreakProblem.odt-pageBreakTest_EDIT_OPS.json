@@ -1,6 +1,0 @@
-{"changes":[
-{"name":"splitParagraph","start":[2,2],"opl":1,"osn":16},
-{"name":"addText","start":[3,1],"opl":1,"osn":17,"text":"C"},
-{"name":"splitParagraph","start":[3,1],"opl":1,"osn":18},
-{"name":"format","start":[4],"attrs":{"paragraph":{"pageBreakBefore":true}},"opl":1,"osn":19}
-]}

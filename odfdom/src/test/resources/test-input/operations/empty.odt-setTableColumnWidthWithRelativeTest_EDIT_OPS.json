@@ -1,6 +1,0 @@
-{"changes":[
-{"name":"addStyle","type":"table","styleId":"TableGrid","attrs":{"wholeTable":{"paragraph":{"lineHeight":{"type":"percent","value":100}},"table":{"borderBottom":{"color":{"type":"auto"},"style":"single","width":17},"borderInsideHor":{"color":{"type":"auto"},"style":"single","width":17},"borderInsideVert":{"color":{"type":"auto"},"style":"single","width":17},"borderLeft":{"color":{"type":"auto"},"style":"single","width":17},"borderRight":{"color":{"type":"auto"},"style":"single","width":17},"borderTop":{"color":{"type":"auto"},"style":"single","width":17},"paddingBottom":0,"paddingLeft":190,"paddingRight":190,"paddingTop":0}}},"opl":1,"osn":16,"styleName":"Table Grid","uiPriority":59},
-{"name":"addTable","start":[2],"attrs":{"styleId":"TableGrid","table":{"exclude":["lastRow","lastCol","bandsVert"],"tableGrid":[1000,1000],"width":"auto"}},"opl":1,"osn":17},
-{"name":"addRows","start":[2,1],"addDefaultCells":true,"count":2,"opl":1,"osn":18},
-{"name":"format","start":[2],"attrs":{"table":{"tableGrid":[1324,680],"width":13309}},"opl":1,"osn":19}
-]}

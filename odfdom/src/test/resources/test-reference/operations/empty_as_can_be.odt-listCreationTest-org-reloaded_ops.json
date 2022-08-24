@@ -1,5 +1,0 @@
-{"changes":[
-{"name":"noOp"},
-{"name":"addParagraph","start":[1],"attrs":{"paragraph":{"listLevel":3,"listStyleId":"OTK_DEFAULT_LIST"}}},
-{"name":"addText","start":[1,1],"text":"1"}
-]}

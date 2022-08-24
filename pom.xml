@@ -30,7 +30,7 @@
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
         <version>27</version>
-        <relativePath/>
+        <relativePath />
     </parent>
 
     <properties>
@@ -183,11 +183,7 @@
     </dependencyManagement>
 
     <modules>
-        <module>taglets</module>
         <module>generator</module>
-        <module>xslt-runner</module>
-        <module>odfdom</module>
-        <module>validator</module>
     </modules>
 
     <name>The ODF Toolkit</name>
@@ -197,7 +193,7 @@
         (ISO/IEC 26300 == ODF) documents. Unlike other approaches which rely on
         runtime manipulation of heavy-weight editors via an automation
         interface, the ODF Toolkit is lightweight and ideal for server use.
-    </description>
+</description>
     <url>https://odftoolkit.org</url>
     <organization>
         <name>The Document Foundation</name>
@@ -228,7 +224,7 @@
         <repository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
-            </url>
+</url>
         </repository>
         <!-- not used for deployment but only for site:stage goal -->
         <site>
@@ -306,7 +302,7 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <showDeprecation>true</showDeprecation>
                         <meminitial>512m</meminitial>
-                    	<maxmem>1024m</maxmem>
+                        <maxmem>1024m</maxmem>
                         <!--
                              <compilerArgs>
                              <arg>-Xlint:unchecked</arg>
@@ -446,8 +442,48 @@
                         <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>1.1</version>
+                    <executions>
+                        <execution>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <configuration>
+                                <tasks>
+                                    <echo>PLUGINMGMT: Displaying value of 'project.basedir' property at root</echo>
+                                    <echo>[basedir] ${project.basedir}</echo>
+                                </tasks>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
-        </pluginManagement>
+        </pluginManagement><!--
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo>Displaying value of 'basedir' property at root</echo>
+                                <echo>[basedir] ${basedir}</echo>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>-->
     </build>
     <profiles>
         <profile>
@@ -457,6 +493,7 @@
                     <plugin>
                         <groupId>org.apache.rat</groupId>
                         <artifactId>apache-rat-plugin</artifactId>
+                        <version>0.15-Svante</version>
                         <configuration>
                             <excludes>
                                 <!-- for all projects -->
@@ -592,94 +629,94 @@
                                 <configuration>
                                     <target>
                                         <!-- MAKE 3 DIRECTORIES -->
-                                        <mkdir dir="${release.dir.bin}"/>
-                                        <mkdir dir="${release.dir.doc}"/>
-                                        <mkdir dir="${release.dir.src}"/>
-                                        <mkdir dir="${release.tmpdir.bin}"/>
-                                        <mkdir dir="${release.tmpdir.doc}"/>
-                                        <mkdir dir="${release.tmpdir.src}"/>
+                                        <mkdir dir="${release.dir.bin}" />
+                                        <mkdir dir="${release.dir.doc}" />
+                                        <mkdir dir="${release.dir.src}" />
+                                        <mkdir dir="${release.tmpdir.bin}" />
+                                        <mkdir dir="${release.tmpdir.doc}" />
+                                        <mkdir dir="${release.tmpdir.src}" />
 
                                         <!-- COLLECT FILES OF BUNDLES -->
                                         <!-- collect binary artefacts -->
                                         <copy todir="${release.tmpdir.bin}" flatten="true">
                                             <fileset dir="${basedir}">
-                                                <include name="*.txt"/>
-                                                <include name="KEYS"/>
-                                                <include name="NOTICE"/>
-                                                <include name="LICENSE"/>
-                                                <include name="odfdom/target/*.jar"/>
-                                                <include name="simple/target/*.jar"/>
-                                                <include name="validator/target/*.war"/>
-                                                <include name="validator/target/*.jar"/>
-                                                <include name="xslt-runner/target/*.jar"/>
-                                                <include name="xslt-runner-task/target/*.jar"/>
-                                                <exclude name="**/target/**-javadoc.jar"/>
-                                                <exclude name="**/target/**-sources.jar"/>
+                                                <include name="*.txt" />
+                                                <include name="KEYS" />
+                                                <include name="NOTICE" />
+                                                <include name="LICENSE" />
+                                                <include name="odfdom/target/*.jar" />
+                                                <include name="simple/target/*.jar" />
+                                                <include name="validator/target/*.war" />
+                                                <include name="validator/target/*.jar" />
+                                                <include name="xslt-runner/target/*.jar" />
+                                                <include name="xslt-runner-task/target/*.jar" />
+                                                <exclude name="**/target/**-javadoc.jar" />
+                                                <exclude name="**/target/**-sources.jar" />
                                             </fileset>
                                         </copy>
                                         <!-- collect documentation artefacts - without directory hierarchy -->
                                         <copy todir="${release.tmpdir.doc}" flatten="true">
                                             <fileset dir="${basedir}">
-                                                <include name="*.txt"/>
-                                                <include name="KEYS"/>
-                                                <include name="NOTICE"/>
-                                                <include name="LICENSE"/>
-                                                <include name="**/target/*-javadoc.jar"/>
+                                                <include name="*.txt" />
+                                                <include name="KEYS" />
+                                                <include name="NOTICE" />
+                                                <include name="LICENSE" />
+                                                <include name="**/target/*-javadoc.jar" />
                                             </fileset>
                                         </copy>
                                         <!-- collect documentation artefacts - keeping directory hierarchy -->
                                         <copy todir="${release.tmpdir.doc}/site">
-                                            <fileset dir="${basedir}/docs"/>
+                                            <fileset dir="${basedir}/docs" />
                                         </copy>
                                         <!-- collect source code -->
                                         <copy todir="${release.tmpdir.src}">
                                             <fileset dir="${basedir}">
-                                                <include name="**"/>
-                                                <exclude name="**/target/**"/>
-                                                <exclude name="**/.vscode/**"/>
-                                                <exclude name="**/.project"/>
-                                                <exclude name="**/.classpath"/>
-                                                <exclude name="**/.nb-configuration.xml"/>
-                                                <exclude name="**/.settings/**"/>
-                                                <exclude name="**/.classes/**"/>
-                                                <exclude name="**/.idea"/>
+                                                <include name="**" />
+                                                <exclude name="**/target/**" />
+                                                <exclude name="**/.vscode/**" />
+                                                <exclude name="**/.project" />
+                                                <exclude name="**/.classpath" />
+                                                <exclude name="**/.nb-configuration.xml" />
+                                                <exclude name="**/.settings/**" />
+                                                <exclude name="**/.classes/**" />
+                                                <exclude name="**/.idea" />
                                             </fileset>
                                         </copy>
 
                                         <!-- ZIP FILES to 3 BUNDLES -->
-                                        <zip basedir="${release.tmpdir.bin}" destfile="${basedir}/target/${release.zip.bin}"/>
-                                        <zip basedir="${release.tmpdir.doc}" destfile="${basedir}/target/${release.zip.doc}"/>
-                                        <zip basedir="${release.tmpdir.src}" destfile="${basedir}/target/${release.zip.src}"/>
+                                        <zip basedir="${release.tmpdir.bin}" destfile="${basedir}/target/${release.zip.bin}" />
+                                        <zip basedir="${release.tmpdir.doc}" destfile="${basedir}/target/${release.zip.doc}" />
+                                        <zip basedir="${release.tmpdir.src}" destfile="${basedir}/target/${release.zip.src}" />
 
                                         <!-- SIGN 3 BUNDLES -->
                                         <checksum algorithm="SHA-512" fileext=".sha">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*.zip"/>
-                                                <include name="*.tar.gz"/>
-                                                <include name="*.tar.bz2"/>
+                                                <include name="*.zip" />
+                                                <include name="*.tar.gz" />
+                                                <include name="*.tar.bz2" />
                                             </fileset>
                                         </checksum>
 
                                         <!-- MOVE THE 3 BUNDLES -->
                                         <move todir="${release.dir.bin}">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-bin.*"/>
+                                                <include name="*-bin.*" />
                                             </fileset>
                                         </move>
                                         <move todir="${release.dir.doc}">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-doc.*"/>
+                                                <include name="*-doc.*" />
                                             </fileset>
                                         </move>
                                         <move todir="${release.dir.src}">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-src.*"/>
+                                                <include name="*-src.*" />
                                             </fileset>
                                         </move>
 
                                         <!-- DELETE TEMPORARY DIRECTORIES>-->
-                                        <delete quiet="true" dir="${basedir}/target/archive-tmp"/>
-                                        <delete quiet="true" dir="${release.tmpdir}"/>
+                                        <delete quiet="true" dir="${basedir}/target/archive-tmp" />
+                                        <delete quiet="true" dir="${release.tmpdir}" />
 
                                         <echo>*** The release has been prepared in:  ${release.dir} ***</echo>
                                     </target>

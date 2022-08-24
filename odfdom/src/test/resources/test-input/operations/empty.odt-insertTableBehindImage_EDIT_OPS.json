@@ -1,7 +1,0 @@
-{"changes":[
-{"name":"addDrawing","start":[1,1],"type":"image","attrs":{"drawing":{"height":16933,"imageUrl":"http://no-real-server/skyline.png","marginBottom":317,"marginLeft":317,"marginRight":317,"marginTop":317,"width":12700}}},
-{"name":"splitParagraph","start":[1,2]},
-{"name":"addStyle","type":"table","styleId":"TableGrid","attrs":{"wholeTable":{"paragraph":{"lineHeight":{"type":"percent","value":100}},"table":{"borderBottom":{"color":{"type":"auto"},"style":"single","width":17},"borderInsideHor":{"color":{"type":"auto"},"style":"single","width":17},"borderInsideVert":{"color":{"type":"auto"},"style":"single","width":17},"borderLeft":{"color":{"type":"auto"},"style":"single","width":17},"borderRight":{"color":{"type":"auto"},"style":"single","width":17},"borderTop":{"color":{"type":"auto"},"style":"single","width":17},"paddingBottom":0,"paddingLeft":190,"paddingRight":190,"paddingTop":0}}},"styleName":"Table Grid","uiPriority":59},
-{"name":"addTable","start":[3],"attrs":{"table":{"exclude":["lastRow","lastCol","bandsVert"],"style":"TableGrid","tableGrid":[1000,1000,1000],"width":"auto"}}},
-{"name":"addRows","start":[3,1],"addDefaultCells":true,"count":3}
-]}

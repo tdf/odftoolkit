@@ -1,5 +1,0 @@
-{"changes":[
-{"name":"addText","start":[1,1],"text":"http://www.sueddeutsche.de/"},
-{"name":"addStyle","type":"character","styleId":"Hyperlink","attrs":{"character":{"color":{"type":"scheme","fallbackValue":"0080C0","value":"hyperlink"},"underline":true}},"parent":null,"styleName":"Hyperlink","uiPriority":99},
-{"name":"format","start":[1,1],"end":[1,20],"attrs":{"styleId":"Hyperlink","character":{"url":"http://www.sueddeutsche.de/"}}}
-]}
