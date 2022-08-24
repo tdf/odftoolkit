@@ -197,20 +197,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
                 <configuration>
-                    <!--                    <forkCount>3</forkCount>
-                         <reuseForks>true</reuseForks>-->
-                    <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
                     <systemPropertyVariables>
-                        <odfdom.version>${project.version}</odfdom.version>
                         <org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
-                        <odfdom.git.branch>${git.branch}</odfdom.git.branch>
-                        <odfdom.git.commit.id.describe>${git.commit.id.describe}</odfdom.git.commit.id.describe>
-                        <odfdom.git.remote.origin.url>${git.remote.origin.url}</odfdom.git.remote.origin.url>
-                        <odfdom.git.commit.time>${git.commit.time}</odfdom.git.commit.time>
                     </systemPropertyVariables>
-                    <skipTests>${skipTests}</skipTests>
+                    <exclude>**/integrationtest/PerformanceIT.java</exclude>
                 </configuration>
             </plugin>
             <plugin>
@@ -609,17 +600,10 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
                         <configuration>
-                            <!--                    <forkCount>3</forkCount>
-                                 <reuseForks>true</reuseForks>-->
-                            <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
                             <systemPropertyVariables>
-                                <odfdom.version>${project.version}</odfdom.version>
-                                <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
                                 <org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
                             </systemPropertyVariables>
-                            <skipTests>${skipTests}</skipTests>
                         </configuration>
                     </plugin>
                 </plugins>

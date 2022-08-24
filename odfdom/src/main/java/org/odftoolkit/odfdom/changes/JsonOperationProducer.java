@@ -79,11 +79,13 @@ public class JsonOperationProducer {
 
   private static final Logger LOG = Logger.getLogger(JsonOperationProducer.class.getName());
   static final String BLACK = "#000000";
-  private static String ODFDOM_GIT_BRANCH = System.getProperty("odfdom.git.branch");
-  private static String ODFDOM_GIT_COMMIT_TIME = System.getProperty("odfdom.git.commit.time");
-  private static String ODFDOM_GIT_COMMIT_DESCRIBE =
-      System.getProperty("odfdom.git.commit.id.describe");
-  private static String ODFDOM_GIT_URL = System.getProperty("odfdom.git.remote.origin.url");
+  private static final String ODFDOM_GIT_BRANCH = System.getProperty("odftoolkit.git.branch");
+  private static final String ODFDOM_GIT_COMMIT_TIME =
+      System.getProperty("odftoolkit.git.commit.time");
+  private static final String ODFDOM_GIT_COMMIT_DESCRIBE =
+      System.getProperty("odftoolkit.git.commit.id.describe");
+  private static final String ODFDOM_GIT_URL =
+      System.getProperty("odftoolkit.git.remote.origin.url");
 
   // line widths constants
   private final JSONArray mOperationQueue = new JSONArray();
