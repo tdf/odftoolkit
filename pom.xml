@@ -53,6 +53,7 @@
         <release.zip.doc>odftoolkit-${project.version}-doc.zip</release.zip.doc>
         <release.zip.src>odftoolkit-${project.version}-src.zip</release.zip.src>
         <osgi.import.range>[1.0,2)</osgi.import.range>
+        <supported-odf-version>1.2</supported-odf-version>
     </properties>
 
     <!-- At root project level defining dependencies useable across all projects.
