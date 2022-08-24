@@ -110,7 +110,6 @@
                 <!-- explicit version required for fix on systemPropertyVariables -->
                 <version>2.22.2</version>
                 <configuration>
-                    <forkCount>0</forkCount>
                     <systemPropertyVariables>
                         <odfdom.version>${project.version}</odfdom.version>
                         <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
