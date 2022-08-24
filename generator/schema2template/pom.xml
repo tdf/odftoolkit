@@ -99,19 +99,13 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <!-- explicit version required for fix on systemPropertyVariables -->
-                <version>2.22.2</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <odfdom.version>${project.version}</odfdom.version>
-                        <odfdom.timestamp>${build.timestamp}</odfdom.timestamp>
                         <!-- see https://cwiki.apache.org/confluence/display/MAVEN/Maven+Properties+Guide -->
                         <schema2template.base.dir>${project.basedir}</schema2template.base.dir>
                     </systemPropertyVariables>
-                    <excludes>
-                        <exclude>**/integrationtest/**</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
             <plugin>

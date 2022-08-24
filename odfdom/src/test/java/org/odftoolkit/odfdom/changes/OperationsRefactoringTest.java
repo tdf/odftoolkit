@@ -48,11 +48,13 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 public class OperationsRefactoringTest {
 
   private static final Logger LOG = Logger.getLogger(OperationsRefactoringTest.class.getName());
-  private static final String ODFDOM_GIT_BRANCH = System.getProperty("odfdom.git.branch");
-  private static final String ODFDOM_GIT_COMMIT_TIME = System.getProperty("odfdom.git.commit.time");
+  private static final String ODFDOM_GIT_BRANCH = System.getProperty("odftoolkit.git.branch");
+  private static final String ODFDOM_GIT_COMMIT_TIME =
+      System.getProperty("odftoolkit.git.commit.time");
   private static final String ODFDOM_GIT_COMMIT_DESCRIBE =
-      System.getProperty("odfdom.git.commit.id.describe");
-  private static final String ODFDOM_GIT_URL = System.getProperty("odfdom.git.remote.origin.url");
+      System.getProperty("odftoolkit.git.commit.id.describe");
+  private static final String ODFDOM_GIT_URL =
+      System.getProperty("odftoolkit.git.remote.origin.url");
   private static Boolean mIsTestInputOpsCreated = Boolean.FALSE;
   private static Boolean mIsTestRefOpsCreated = Boolean.FALSE;
 

@@ -38,6 +38,7 @@ import org.junit.Test;
 public class ITJarTest {
 
   private static final Logger LOG = Logger.getLogger(ITJarTest.class.getName());
+  private static final String BASE_DIR = System.getProperty("validator.base.dir") + File.separator;
   private static final String JAR_NAME_SUFFIX = "-jar-with-dependencies.jar";
   private static final String JAR_NAME_PREFIX = "odfvalidator-";
   private static final String ODT_NAME = "testInvalidPkg2.odt"; // password: hello
@@ -65,7 +66,8 @@ public class ITJarTest {
           new ProcessBuilder(
               javaPath,
               "-jar",
-              "target"
+              BASE_DIR
+                  + "target"
                   + File.separatorChar
                   + JAR_NAME_PREFIX
                   + odfvalidatorVersion

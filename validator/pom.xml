@@ -132,10 +132,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/*.java</exclude>
+                        <exclude>**/IntegrationTest.java</exclude>
+                        <exclude>**/ITJarTest.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -226,9 +226,12 @@
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-                        <include>**/*.java</include>
+                        <include>**/IntegrationTest.java</include>
+                        <include>**/ITJarTest.java</include>
                     </includes>
                     <systemPropertyVariables>
+                        <!-- see https://cwiki.apache.org/confluence/display/MAVEN/Maven+Properties+Guide -->
+                        <validator.base.dir>${project.basedir}</validator.base.dir>
                         <odfvalidator.version>${project.version}</odfvalidator.version>
                         <org.odftoolkit.odfdom.validation>org.odftoolkit.odfdom.pkg.DefaultErrorHandler</org.odftoolkit.odfdom.validation>
                     </systemPropertyVariables>

@@ -36,6 +36,7 @@ import org.junit.Test;
 
 public class IntegrationTest {
 
+  private static final String BASE_DIR = System.getProperty("validator.base.dir") + File.separator;
   private static final Logger LOG = Logger.getLogger(IntegrationTest.class.getName());
   private static final String JAR_NAME_PREFIX = "odfvalidator-";
   private static final String JAR_NAME_SUFFIX_1 = "-jar-with-dependencies.jar";
@@ -57,7 +58,12 @@ public class IntegrationTest {
       // creating the jar path
       String validatorVersion = System.getProperty("odfvalidator.version");
       String jarPath =
-          "target" + File.separatorChar + JAR_NAME_PREFIX + validatorVersion + commandSuffix;
+          BASE_DIR
+              + "target"
+              + File.separatorChar
+              + JAR_NAME_PREFIX
+              + validatorVersion
+              + commandSuffix;
 
       // triggering command line jar execution
       String output = "";
