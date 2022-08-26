@@ -325,7 +325,7 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <showDeprecation>true</showDeprecation>
                         <meminitial>512m</meminitial>
-                    	<maxmem>1024m</maxmem>
+                        <maxmem>1024m</maxmem>
                         <!--
                              <compilerArgs>
                              <arg>-Xlint:unchecked</arg>
@@ -415,6 +415,7 @@
                             <!-- You can exclude further files from processing: -->
                             <!--<exclude>src/main/**/*.whatever</exclude>-->
                             <exclude>target</exclude>
+                            <exclude>src/test/resources/test-reference/**/*.*</exclude>
                         </excludes>
                     </configuration>
                 </plugin>
