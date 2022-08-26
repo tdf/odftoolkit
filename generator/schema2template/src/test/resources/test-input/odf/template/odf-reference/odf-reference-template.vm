@@ -1,5 +1,5 @@
 ##################################################################
-## 
+##
 ## Licensed to the Apache Software Foundation (ASF) under one
 ## or more contributor license agreements.  See the NOTICE file
 ## distributed with this work for additional information
@@ -7,9 +7,9 @@
 ## to you under the Apache License, Version 2.0 (the
 ## "License"); you may not use this file except in compliance
 ## with the License.  You may obtain a copy of the License at
-## 
+##
 ##  http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing,
 ## software distributed under the License is distributed on an
 ## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -21,9 +21,12 @@
 
 ## Template to create the Java class representing an ODF element.
 ##
-## Documentation of template development can be found in local file
-## TemplateHelp.html.
+## Context:
 ##
+## The Velocity context is added up in the SchemaToTemplate.java
+## xmlModel - Represents an ODF grammar parsed by MSV with all relevant informations and usabiltiy functions
+## xmlModelHistory - sorted list from latest to earliest release to assist in finding new XML node additions (see odf-reference-template.vm)
+## But the Velocity context can also be extended by parameters from the calling main-template.
 <html>
 <head>
 <style type="text/css">
@@ -37,11 +40,11 @@ td { text-indent:0em; }
 </style>
 </head>
 <body>
-<h2>ODF 1.2 XML Reference</h2>
+<h2>ODF ${xmlModel.getGrammarVersion()} (${xmlModel.getGrammarID()}) XML Reference</h2>
 
 <p>This is a list of elements defined in ODF-Spec together with allowed parent and child elements and allowed attributes.</p>
 
-<p>Please note that "allowed" has the meaning of "may be allowed" as there might be a condition (like a special attribute value) 
+<p>Please note that "allowed" has the meaning of "may be allowed" as there might be a condition (like a special attribute value)
 for an element to have a special child element.</p>
 
 <p>left displayed in bold blue letters describe a mandatory relationship. All other relationships are optional.</p>
@@ -51,8 +54,7 @@ for an element to have a special child element.</p>
 <p>Here's a shortcut to the content <a href="#element_office:document_0">toplevel</a> element.</p>
 
 #foreach( $element in ${xmlModel.getElements()} )
-#set ($oldelement = "")
-#set ($oldelement = ${oldmodel.getElement($element.getQName())} )
+
 #if ($element != "*")
 ##
 #if (${element.withMultiples().size()} <= 1)
@@ -60,7 +62,25 @@ for an element to have a special child element.</p>
 #else
 #set ($dup = "[${element.getMultipleNumber()}]")
 #end
-<h3><a name="element_${element}_${element.getMultipleNumber()}">${element}${dup} Element</a>#if (${oldelement} == "")&nbsp;(new in Odf 1.2) #end</h3>
+### VERSION:ODF-ELEMENT - START
+## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
+## but we can compare by name
+#if ( $xmlModelHistory)
+	## First possible version the node was added is the current version
+	#set ($addVersion = "")
+	#set ($newestVersion = ${xmlModel.getGrammarVersion()})
+	#foreach( $oldModel in $xmlModelHistory )
+	#set ($oldElement = ${oldModel.getElement($element.getQName())})
+		#if (!$oldElement)
+			#set ($addVersion = ${newestVersion})
+			#break
+		#end
+		## Remember this old version as the version the node might be added
+		#set ($newestVersion = ${oldModel.getGrammarVersion()})
+	#end
+#end
+### VERSION:ODF-ELEMENT - END
+<h3><a name="element_${element}_${element.getMultipleNumber()}">${element}${dup} Element</a>#if (!(${addVersion} == ""))&nbsp;(new in ODF $addVersion) #end</h3>
 #if ( ${element.withMultiples().size()} > 1 )
 <p>There are more than one Definitions by this name.</p>
 #end
@@ -146,8 +166,6 @@ for an element to have a special child element.</p>
 ##
 ##
 #foreach( $attribute in ${xmlModel.getAttributes()} )
-#set ($oldattribute = "")
-#set ($oldattribute = ${oldmodel.getAttribute($attribute.getQName())} )
 #if ($attribute != "*")
 ##
 #if (${attribute.withMultiples().size()} <= 1)
@@ -155,7 +173,25 @@ for an element to have a special child element.</p>
 #else
 #set ($dup = "[${attribute.getMultipleNumber()}]")
 #end
-<h3><a name="attribute_${attribute}_${attribute.getMultipleNumber()}">${attribute}${dup} Attribute</a>#if (${oldattribute} == "")&nbsp;(new in Odf 1.2) #end</h3>
+### VERSION:ODF-ATTRIBUTE - START
+## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
+## but we can compare by name
+#if ( $xmlModelHistory)
+	## First possible version the node was added is the current version
+	#set ($addVersion = "")
+	#set ($newestVersion = ${xmlModel.getGrammarVersion()})
+	#foreach( $oldModel in $xmlModelHistory )
+	#set ($oldElement = ${oldModel.getAttribute($attribute.getQName())})
+		#if (!$oldElement)
+			#set ($addVersion = ${newestVersion})
+			#break
+		#end
+		## Remember this old version as the version the node might be added
+		#set ($newestVersion = ${oldModel.getGrammarVersion()})
+	#end
+#end
+### VERSION:ODF-ATTRIBUTE - END
+<h3><a name="attribute_${attribute}_${attribute.getMultipleNumber()}">${attribute}${dup} Attribute</a>#if (!(${addVersion} == ""))&nbsp;(new in ODF $addVersion) #end</h3>
 #if ( ${attribute.withMultiples().size()} > 1 )
 <p>There are more than one Definitions by this name.</p>
 #end

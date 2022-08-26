@@ -1,0 +1,502 @@
+
+<html>
+<head>
+<style type="text/css">
+<!--
+.left { width: 30%; }
+.right { width: 100%; }
+td { text-indent:0em; }
+.unbreakable { white-space:nowrap; }
+.mandatory { color:navy; font-weight:bold; }
+-->
+</style>
+</head>
+<body>
+<h2>ODF 1.2 (odf-package-manifest) XML Reference</h2>
+
+<p>This is a list of elements defined in ODF-Spec together with allowed parent and child elements and allowed attributes.</p>
+
+<p>Please note that "allowed" has the meaning of "may be allowed" as there might be a condition (like a special attribute value)
+for an element to have a special child element.</p>
+
+<p>left displayed in bold blue letters describe a mandatory relationship. All other relationships are optional.</p>
+
+<p>The asterisk (*) symbol marks child elements which can occur multiple times.</p>
+
+<p>Here's a shortcut to the content <a href="#element_office:document_0">toplevel</a> element.</p>
+
+
+
+												<h3><a name="element_algorithm_0">algorithm Element</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_encryption-data_0" class="unbreakable">encryption-data</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+[any org.w3c.dom.Element]&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+	<a href="#attribute_algorithm-name_0" class="unbreakable mandatory">algorithm-name</a>&nbsp;
+	<a href="#attribute_initialisation-vector_0" class="unbreakable mandatory">initialisation-vector</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+
+												<h3><a name="element_encryption-data_0">encryption-data Element</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_file-entry_0" class="unbreakable">file-entry</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_algorithm_0" class="unbreakable mandatory">algorithm</a>&nbsp;
+	<a href="#element_key-derivation_0" class="unbreakable mandatory">key-derivation</a>&nbsp;
+	<a href="#element_start-key-generation_0" class="unbreakable ">start-key-generation</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+	<a href="#attribute_checksum_0" class="unbreakable mandatory">checksum</a>&nbsp;
+	<a href="#attribute_checksum-type_0" class="unbreakable mandatory">checksum-type</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+
+												<h3><a name="element_file-entry_0">file-entry Element</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest_0" class="unbreakable">manifest</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_encryption-data_0" class="unbreakable ">encryption-data</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+	<a href="#attribute_full-path_0" class="unbreakable mandatory">full-path</a>&nbsp;
+	<a href="#attribute_media-type_0" class="unbreakable mandatory">media-type</a>&nbsp;
+	<a href="#attribute_preferred-view-mode_0" class="unbreakable ">preferred-view-mode</a>&nbsp;
+	<a href="#attribute_size_0" class="unbreakable ">size</a>&nbsp;
+	<a href="#attribute_version_0" class="unbreakable ">version[0]</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+
+												<h3><a name="element_key-derivation_0">key-derivation Element</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_encryption-data_0" class="unbreakable">encryption-data</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+	<a href="#attribute_iteration-count_0" class="unbreakable mandatory">iteration-count</a>&nbsp;
+	<a href="#attribute_key-derivation-name_0" class="unbreakable mandatory">key-derivation-name</a>&nbsp;
+	<a href="#attribute_key-size_0" class="unbreakable ">key-size</a>&nbsp;
+	<a href="#attribute_salt_0" class="unbreakable mandatory">salt</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+
+												<h3><a name="element_manifest_0">manifest Element</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_file-entry_0" class="unbreakable mandatory">file-entry</a>*&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+	<a href="#attribute_version_1" class="unbreakable mandatory">version[1]</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+
+							<h3><a name="element_start-key-generation_0">start-key-generation Element</a>&nbsp;(new in ODF 1.2) </h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_encryption-data_0" class="unbreakable">encryption-data</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+	<a href="#attribute_key-size_0" class="unbreakable ">key-size</a>&nbsp;
+	<a href="#attribute_start-key-generation-name_0" class="unbreakable mandatory">start-key-generation-name</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+												<h3><a name="attribute_algorithm-name_0">algorithm-name Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_algorithm_0" class="unbreakable">algorithm</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">anyURI</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+	<span style="unbreakable">"Blowfish CFB"</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+												<h3><a name="attribute_checksum_0">checksum Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_encryption-data_0" class="unbreakable">encryption-data</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">base64Binary</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+												<h3><a name="attribute_checksum-type_0">checksum-type Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_encryption-data_0" class="unbreakable">encryption-data</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">anyURI</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+	<span style="unbreakable">"SHA1/1K"</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+												<h3><a name="attribute_full-path_0">full-path Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_file-entry_0" class="unbreakable">file-entry</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">string</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+												<h3><a name="attribute_initialisation-vector_0">initialisation-vector Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_algorithm_0" class="unbreakable">algorithm</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">base64Binary</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+												<h3><a name="attribute_iteration-count_0">iteration-count Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_key-derivation_0" class="unbreakable">key-derivation</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">nonNegativeInteger</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+												<h3><a name="attribute_key-derivation-name_0">key-derivation-name Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_key-derivation_0" class="unbreakable">key-derivation</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">anyURI</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+	<span style="unbreakable">"PBKDF2"</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+							<h3><a name="attribute_key-size_0">key-size Attribute</a>&nbsp;(new in ODF 1.2) </h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_key-derivation_0" class="unbreakable">key-derivation</a>&nbsp;
+	<a href="#element_start-key-generation_0" class="unbreakable">start-key-generation</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">nonNegativeInteger</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+												<h3><a name="attribute_media-type_0">media-type Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_file-entry_0" class="unbreakable">file-entry</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">string</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+							<h3><a name="attribute_preferred-view-mode_0">preferred-view-mode Attribute</a>&nbsp;(new in ODF 1.2) </h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_file-entry_0" class="unbreakable">file-entry</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">QName</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+	<span style="unbreakable">"edit"</a>&nbsp;
+	<span style="unbreakable">"presentation-slide-show"</a>&nbsp;
+	<span style="unbreakable">"read-only"</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+												<h3><a name="attribute_salt_0">salt Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_key-derivation_0" class="unbreakable">key-derivation</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">base64Binary</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+												<h3><a name="attribute_size_0">size Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_file-entry_0" class="unbreakable">file-entry</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">nonNegativeInteger</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+							<h3><a name="attribute_start-key-generation-name_0">start-key-generation-name Attribute</a>&nbsp;(new in ODF 1.2) </h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_start-key-generation_0" class="unbreakable">start-key-generation</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">anyURI</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+	<span style="unbreakable">"SHA1"</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+							<h3><a name="attribute_version_0">version[0] Attribute</a>&nbsp;(new in ODF 1.2) </h3>
+<p>There are more than one Definitions by this name.</p>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_file-entry_0" class="unbreakable">file-entry</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">string</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+							<h3><a name="attribute_version_1">version[1] Attribute</a>&nbsp;(new in ODF 1.2) </h3>
+<p>There are more than one Definitions by this name.</p>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest_0" class="unbreakable">manifest</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+	<span style="unbreakable">"1.2"</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+</body>
+</html>

@@ -19,10 +19,12 @@
 ##
 ##################################################################
 <?xml version="1.0" encoding="UTF-8"?>
-## Template to create the list of artefacts which are to be generated
+## Context:
 ##
-## Documentation of template development can be found in local file
-## src/main/resources/documentation/help.html
+## The Velocity context is added up in the SchemaToTemplate.java
+## xmlModel - Represents an ODF grammar parsed by MSV with all relevant informations and usabiltiy functions
+## xmlModelHistory - sorted list from latest to earliest release to assist in finding new XML node additions (see odf-reference-template.vm)
+## But the Velocity context can also be extended by parameters from the calling main-template.
 ##
 <filelist>
 	<file path="org/odftoolkit/odfdom/dom/style/OdfStyleFamily.java" template="java-odfdom-stylefamily.vm" />

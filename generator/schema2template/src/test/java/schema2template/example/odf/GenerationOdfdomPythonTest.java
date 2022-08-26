@@ -21,23 +21,25 @@
  */
 package schema2template.example.odf;
 
-import static schema2template.example.odf.OdfConstants.REFERENCE_BASE_DIR;
 import static schema2template.example.odf.OdfConstants.TARGET_BASE_DIR;
+import static schema2template.example.odf.OdfConstants.TEMPLATE_BASE_DIR;
 
-import java.io.IOException;
-import java.nio.file.Paths;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.Assert;
 import org.junit.Test;
 import schema2template.GenerationParameters;
 import schema2template.example.odf.OdfConstants.OdfSpecificationPart;
 
-public class OdfGenerationTest {
+public class GenerationOdfdomPythonTest {
 
-  private static final Logger LOG = Logger.getLogger(OdfGenerationTest.class.getName());
-  private static final String ODFDOM_JAVA_DIRECTORY = "odfdom-java";
+  private static final Logger LOG = Logger.getLogger(GenerationOdfdomPythonTest.class.getName());
+  private static final String ODFDOM_PYTHON_DIRECTORY = "odfdom-python";
+  private static final String MAIN_TEMPLATE_PATH =
+      TEMPLATE_BASE_DIR
+          + ODFDOM_PYTHON_DIRECTORY
+          + File.separator
+          + "main-template_odfdom-python.vm";
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test
@@ -53,53 +55,26 @@ public class OdfGenerationTest {
               + specPart.grammarID
               + "\n\tgrammarPath: "
               + specPart.grammarPath
-              + "\n\tgrammarAdditionsPath: "
-              + specPart.grammarAdditionsPath
               + "\n\tmainTemplatePath: "
-              + specPart.mainTemplatePath
+              + MAIN_TEMPLATE_PATH
               + "\n\ttargetDirPath: "
               + TARGET_BASE_DIR
-              + ODFDOM_JAVA_DIRECTORY);
+              + ODFDOM_PYTHON_DIRECTORY);
 
       generations.add(
           new GenerationParameters(
               specPart.grammarVersion,
               specPart.grammarID,
               specPart.grammarPath,
-              specPart.grammarAdditionsPath,
-              specPart.mainTemplatePath,
-              TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY));
+              null,
+              MAIN_TEMPLATE_PATH,
+              TARGET_BASE_DIR + ODFDOM_PYTHON_DIRECTORY));
     }
 
     SchemaToTemplate.run(generations);
-    compareDirectories(
-        TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY, REFERENCE_BASE_DIR + ODFDOM_JAVA_DIRECTORY);
-  }
-
-  public static boolean compareDirectories(String newFileDir, String RefFileDir) {
-    boolean directoriesEqual = true;
-    try {
-      // ******** Reference Test *************
-      // generated sources must be equal to the previously generated reference sources
-      String targetPath = Paths.get(newFileDir).toAbsolutePath().toString();
-      String referencePath = Paths.get(RefFileDir).toAbsolutePath().toString();
-
-      LOG.log(
-          Level.INFO,
-          "\n\nComparing new generated Files:\n\t{0}\nwith their reference:\n\t{1}\n",
-          new Object[] {targetPath, referencePath});
-      directoriesEqual =
-          DirectoryCompare.directoryContentEquals(Paths.get(newFileDir), Paths.get(RefFileDir));
-      Assert.assertTrue(
-          "The new generated sources\n\t"
-              + targetPath
-              + "\ndiffer from their reference:\n\t"
-              + referencePath,
-          directoriesEqual);
-    } catch (IOException ex) {
-      LOG.log(Level.SEVERE, null, ex);
-      Assert.fail(ex.toString());
-    }
-    return directoriesEqual;
+    // Changing order of multiple puzzlepieces makes file comparison unuseable
+    //    compareDirectories(
+    //        TARGET_BASE_DIR + ODFDOM_PYTHON_DIRECTORY, REFERENCE_BASE_DIR +
+    // ODFDOM_PYTHON_DIRECTORY);
   }
 }

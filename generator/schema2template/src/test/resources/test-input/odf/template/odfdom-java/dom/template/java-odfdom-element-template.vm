@@ -20,9 +20,12 @@
 ##################################################################
 ## Template to create the Java class representing an ODF element
 ##
-## Documentation of template development can be found in local file
-## TemplateHelp.html.
+## Context:
 ##
+## The Velocity context is added up in the SchemaToTemplate.java
+## xmlModel - Represents an ODF grammar parsed by MSV with all relevant informations and usabiltiy functions
+## xmlModelHistory - sorted list from latest to earliest release to assist in finding new XML node additions (see odf-reference-template.vm)
+## But the Velocity context can also be extended by parameters from the calling main-template.
 #set ($element = ${xmlModel.getElement($contextNode)})
 #set ($NS = ${element.getNamespace()})
 #set ($className = "${xmlModel.camelCase($element)}Element")

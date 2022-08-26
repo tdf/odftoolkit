@@ -23,9 +23,9 @@
  */
 package schema2template.example.odf;
 
+import static schema2template.example.odf.DirectoryCompare.compareDirectories;
 import static schema2template.example.odf.OdfConstants.REFERENCE_BASE_DIR;
 import static schema2template.example.odf.OdfConstants.TARGET_BASE_DIR;
-import static schema2template.example.odf.OdfGenerationTest.compareDirectories;
 import static schema2template.example.odf.SchemaToTemplate.DEBUG;
 
 import com.sun.msv.grammar.Expression;
