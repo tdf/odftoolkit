@@ -143,6 +143,11 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
     }
   }
 
+  /**
+   * Iterates the MSVExpressionTree and dumps it into a string
+   *
+   * @return the MSVExpressionTree serialized into a String
+   */
   public static String dumpMSVExpressionTree(Expression rootExpression) throws Exception {
     MSVExpressionIterator iterator = new MSVExpressionIterator(rootExpression);
     StringBuilder builder = new StringBuilder();

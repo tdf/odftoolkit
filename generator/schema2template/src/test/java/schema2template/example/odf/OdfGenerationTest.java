@@ -21,7 +21,7 @@
  */
 package schema2template.example.odf;
 
-import static schema2template.example.odf.OdfConstants.GENERATED_ODFDOM_REFERENCE;
+import static schema2template.example.odf.OdfConstants.REFERENCE_BASE_DIR;
 import static schema2template.example.odf.OdfConstants.TARGET_BASE_DIR;
 
 import java.io.IOException;
@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import schema2template.GenerationParameters;
 import schema2template.example.odf.OdfConstants.OdfSpecificationPart;
@@ -40,61 +41,64 @@ public class OdfGenerationTest {
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test
+  @Ignore
   public void testAllExampleGenerations() {
+    ArrayList<GenerationParameters> generations = new ArrayList<>();
+
+    for (OdfSpecificationPart specPart : OdfSpecificationPart.values()) {
+      LOG.info(
+          "New ODF transformation with following parameters:"
+              + "\ngrammarVersion "
+              + specPart.grammarVersion
+              + "\ngrammarID: "
+              + specPart.grammarID
+              + "\ngrammarPath: "
+              + specPart.grammarPath
+              + "\ngrammarAdditionsPath: "
+              + specPart.grammarAdditionsPath
+              + "\nmainTemplatePath: "
+              + specPart.mainTemplatePath
+              + "\ntargetDirPath: "
+              + specPart.targetDirPath);
+
+      generations.add(
+          new GenerationParameters(
+              specPart.grammarVersion,
+              specPart.grammarID,
+              specPart.grammarPath,
+              specPart.grammarAdditionsPath,
+              specPart.mainTemplatePath,
+              specPart.targetDirPath));
+    }
+
+    SchemaToTemplate.run(generations);
+    compareDirectories(TARGET_BASE_DIR + "odfdom-java", REFERENCE_BASE_DIR + "odfdom-java");
+  }
+
+  public static boolean compareDirectories(String newFileDir, String RefFileDir) {
+    boolean directoriesEqual = true;
     try {
-
-      ArrayList<GenerationParameters> generations = new ArrayList<>();
-
-      for (OdfSpecificationPart specPart : OdfSpecificationPart.values()) {
-        LOG.info(
-            "New ODF transformation with following parameters:"
-                + "\ngrammarVersion "
-                + specPart.grammarVersion
-                + "\ngrammarID: "
-                + specPart.grammarID
-                + "\ngrammarPath: "
-                + specPart.grammarPath
-                + "\ngrammarAdditionsPath: "
-                + specPart.grammarAdditionsPath
-                + "\nmainTemplatePath: "
-                + specPart.mainTemplatePath
-                + "\ntargetDirPath: "
-                + specPart.targetDirPath);
-
-        generations.add(
-            new GenerationParameters(
-                specPart.grammarVersion,
-                specPart.grammarID,
-                specPart.grammarPath,
-                specPart.grammarAdditionsPath,
-                specPart.mainTemplatePath,
-                specPart.targetDirPath));
-      }
-
-      SchemaToTemplate.run(generations);
-
       // ******** Reference Test *************
       // generated sources must be equal to the previously generated reference sources
-      String targetPath = Paths.get(TARGET_BASE_DIR).toAbsolutePath().toString();
-      String referencePath = Paths.get(GENERATED_ODFDOM_REFERENCE).toAbsolutePath().toString();
+      String targetPath = Paths.get(newFileDir).toAbsolutePath().toString();
+      String referencePath = Paths.get(RefFileDir).toAbsolutePath().toString();
 
       LOG.log(
           Level.INFO,
           "\n\nComparing new generated Files:\n\t{0}\nwith their reference:\n\t{1}\n",
-          new Object[] {
-            Paths.get(TARGET_BASE_DIR).toAbsolutePath().toString(),
-            Paths.get(GENERATED_ODFDOM_REFERENCE).toAbsolutePath().toString()
-          });
+          new Object[] {targetPath, referencePath});
+      directoriesEqual =
+          DirectoryCompare.directoryContentEquals(Paths.get(newFileDir), Paths.get(RefFileDir));
       Assert.assertTrue(
           "The new generated sources\n\t"
               + targetPath
               + "\ndiffer from their reference:\n\t"
               + referencePath,
-          DirectoryCompare.directoryContentEquals(
-              Paths.get(TARGET_BASE_DIR), Paths.get(GENERATED_ODFDOM_REFERENCE)));
+          directoriesEqual);
     } catch (IOException ex) {
       LOG.log(Level.SEVERE, null, ex);
       Assert.fail(ex.toString());
     }
+    return directoriesEqual;
   }
 }

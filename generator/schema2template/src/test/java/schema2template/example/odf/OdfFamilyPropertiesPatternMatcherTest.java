@@ -23,6 +23,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import schema2template.example.odf.OdfConstants.OdfSpecificationPart;
+import schema2template.model.XMLModel;
 
 /** @author Niemand */
 public class OdfFamilyPropertiesPatternMatcherTest {
@@ -57,8 +59,8 @@ public class OdfFamilyPropertiesPatternMatcherTest {
 
   /** Test of getProperties method, of class OdfFamilyPropertiesPatternMatcher. */
   @Test
-  public void testGetProperties() throws Exception {
-    Grammar g = PuzzlePieceTest.loadSchemaODF12();
+  public void testGetProperties() {
+    Grammar g = XMLModel.loadSchema(OdfSpecificationPart.ODF_1_2_SCHEMA.grammarPath);
     OdfFamilyPropertiesPatternMatcher instance = new OdfFamilyPropertiesPatternMatcher(g);
 
     String result = OdfFamilyPropertiesPatternMatcher.asString(instance.getFamilyProperties());

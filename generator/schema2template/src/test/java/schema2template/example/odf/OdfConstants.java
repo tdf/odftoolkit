@@ -36,7 +36,7 @@ class OdfConstants {
    */
   static final String BASE_DIR = System.getProperty("schema2template.base.dir") + File.separator;
 
-  static final String ODF_TEMPLATE_DIR =
+  private static final String ODF_TEMPLATE_DIR =
       BASE_DIR
           + "src"
           + File.separator
@@ -108,11 +108,9 @@ class OdfConstants {
           + "java"
           + File.separator
           + "odf"
-          + File.separator
-          + "odfdom-java"
           + File.separator;
 
-  static final String GENERATED_ODFDOM_REFERENCE =
+  static final String REFERENCE_BASE_DIR =
       BASE_DIR
           + "src"
           + File.separator
@@ -123,8 +121,6 @@ class OdfConstants {
           + "test-reference"
           + File.separator
           + "odf"
-          + File.separator
-          + "odfdom-java"
           + File.separator;
 
   public enum GrammarID {
@@ -151,10 +147,10 @@ class OdfConstants {
         GRAMMAR_ADDITIONS_PACKAGE_FILE,
         MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
         TARGET_BASE_DIR,
-        0,
-        0,
-        0,
-        0),
+        ODF13_MANIFEST_ELEMENT_NUMBER,
+        ODF13_MANIFEST_ATTRIBUTE_NUMBER,
+        ODF13_MANIFEST_ELEMENTS_WITH_DUPLICATES,
+        ODF13_MANIFEST_ATTRIBUTES_WITH_DUPLICATES),
     ODF_1_3_PACKAGE_SIGNATURE(
         "1.3",
         GrammarID.ODF_SIGNATURE,
@@ -162,10 +158,10 @@ class OdfConstants {
         GRAMMAR_ADDITIONS_PACKAGE_FILE,
         MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE,
         TARGET_BASE_DIR,
-        0,
-        0,
-        0,
-        0),
+        ODF13_SIGNATURE_ELEMENT_NUMBER,
+        ODF13_SIGNATURE_ATTRIBUTE_NUMBER,
+        ODF13_SIGNATURE_ELEMENTS_WITH_DUPLICATES,
+        ODF13_SIGNATURE_ATTRIBUTES_WITH_DUPLICATES),
     ODF_1_3_SCHEMA(
         "1.3",
         GrammarID.ODF_SCHEMA,
@@ -175,8 +171,8 @@ class OdfConstants {
         TARGET_BASE_DIR,
         ODF13_ELEMENT_NUMBER,
         ODF13_ATTRIBUTE_NUMBER,
-        ODF13_ELEMENT_DUPLICATES,
-        ODF13_ATTRIBUTE_DUPLICATES),
+        ODF13_ELEMENTS_WITH_DUPLICATES,
+        ODF13_ATTRIBUTES_WITH_DUPLICATES),
     ODF_1_2_PACKAGE_MANIFEST(
         "1.2",
         GrammarID.ODF_MANIFEST,
@@ -184,10 +180,10 @@ class OdfConstants {
         GRAMMAR_ADDITIONS_PACKAGE_FILE,
         MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
         TARGET_BASE_DIR,
-        0,
-        0,
-        0,
-        0),
+        ODF12_MANIFEST_ELEMENT_NUMBER,
+        ODF12_MANIFEST_ATTRIBUTE_NUMBER,
+        ODF12_MANIFEST_ELEMENTS_WITH_DUPLICATES,
+        ODF12_MANIFEST_ATTRIBUTES_WITH_DUPLICATES),
     ODF_1_2_PACKAGE_SIGNATURE(
         "1.2",
         GrammarID.ODF_SIGNATURE,
@@ -195,10 +191,10 @@ class OdfConstants {
         GRAMMAR_ADDITIONS_PACKAGE_FILE,
         MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE,
         TARGET_BASE_DIR,
-        0,
-        0,
-        0,
-        0),
+        ODF12_SIGNATURE_ELEMENT_NUMBER,
+        ODF12_SIGNATURE_ATTRIBUTE_NUMBER,
+        ODF12_SIGNATURE_ELEMENTS_WITH_DUPLICATES,
+        ODF12_SIGNATURE_ATTRIBUTES_WITH_DUPLICATES),
     ODF_1_2_SCHEMA(
         "1.2",
         GrammarID.ODF_SCHEMA,
@@ -208,8 +204,8 @@ class OdfConstants {
         TARGET_BASE_DIR,
         ODF12_ELEMENT_NUMBER,
         ODF12_ATTRIBUTE_NUMBER,
-        0,
-        0),
+        ODF12_ELEMENTS_WITH_DUPLICATES,
+        ODF12_ATTRIBUTES_WITH_DUPLICATES),
     ODF_1_1_PACKAGE_MANIFEST(
         "1.1",
         GrammarID.ODF_MANIFEST,
@@ -217,10 +213,10 @@ class OdfConstants {
         GRAMMAR_ADDITIONS_PACKAGE_FILE,
         MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
         TARGET_BASE_DIR,
-        0,
-        0,
-        0,
-        0),
+        ODF11_MANIFEST_ELEMENT_NUMBER,
+        ODF11_MANIFEST_ATTRIBUTE_NUMBER,
+        ODF11_MANIFEST_ELEMENTS_WITH_DUPLICATES,
+        ODF11_MANIFEST_ATTRIBUTES_WITH_DUPLICATES),
     ODF_1_1_SCHEMA(
         "1.1",
         GrammarID.ODF_SCHEMA,
@@ -230,8 +226,8 @@ class OdfConstants {
         TARGET_BASE_DIR,
         ODF11_ELEMENT_NUMBER,
         ODF11_ATTRIBUTE_NUMBER,
-        0,
-        0),
+        ODF11_ELEMENTS_WITH_DUPLICATES,
+        ODF11_ATTRIBUTES_WITH_DUPLICATES),
     ODF_1_0_PACKAGE_MANIFEST(
         "1.0",
         GrammarID.ODF_MANIFEST,
@@ -239,10 +235,10 @@ class OdfConstants {
         GRAMMAR_ADDITIONS_PACKAGE_FILE,
         MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
         TARGET_BASE_DIR,
-        0,
-        0,
-        0,
-        0),
+        ODF10_MANIFEST_ELEMENT_NUMBER,
+        ODF10_MANIFEST_ATTRIBUTE_NUMBER,
+        ODF10_MANIFEST_ELEMENTS_WITH_DUPLICATES,
+        ODF10_MANIFEST_ATTRIBUTES_WITH_DUPLICATES),
     ODF_1_0_SCHEMA(
         "1.0",
         GrammarID.ODF_SCHEMA,
@@ -250,10 +246,11 @@ class OdfConstants {
         GRAMMAR_ADDITIONS_DOM_FILE,
         MAIN_TEMPLATE_ODF_SCHEMA_FILE,
         TARGET_BASE_DIR,
-        0,
-        0,
-        0,
-        0);
+        ODF10_ELEMENT_NUMBER,
+        ODF10_ATTRIBUTE_NUMBER,
+        ODF10_ELEMENTS_WITH_DUPLICATES,
+        ODF10_ATTRIBUTES_WITH_DUPLICATES);
+
     public final String grammarVersion;
     public final String grammarID;
     public final String grammarPath;
@@ -301,15 +298,51 @@ class OdfConstants {
    */
   // ToDo: 535 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or
   // attribute declaration
-  private static final int ODF11_ELEMENT_NUMBER = 526;
+  private static final int ODF10_ELEMENT_NUMBER = 498;
 
+  private static final int ODF11_ELEMENT_NUMBER = 500;
   private static final int ODF12_ELEMENT_NUMBER = 599;
-
   private static final int ODF13_ELEMENT_NUMBER = 606;
+
+  private static final int ODF10_ELEMENTS_WITH_DUPLICATES = 505;
+  private static final int ODF11_ELEMENTS_WITH_DUPLICATES = 507;
+  private static final int ODF12_ELEMENTS_WITH_DUPLICATES = 606;
+  private static final int ODF13_ELEMENTS_WITH_DUPLICATES = 613;
+
+  private static final int ODF13_MANIFEST_ELEMENT_NUMBER = 15;
+  private static final int ODF13_MANIFEST_ELEMENTS_WITH_DUPLICATES = 15;
+  private static final int ODF13_MANIFEST_ATTRIBUTE_NUMBER = 16;
+  private static final int ODF13_MANIFEST_ATTRIBUTES_WITH_DUPLICATES = 18;
+
+  private static final int ODF13_SIGNATURE_ELEMENT_NUMBER = 3;
+  private static final int ODF13_SIGNATURE_ELEMENTS_WITH_DUPLICATES = 3;
+  private static final int ODF13_SIGNATURE_ATTRIBUTE_NUMBER = 2;
+  private static final int ODF13_SIGNATURE_ATTRIBUTES_WITH_DUPLICATES = 2;
+
+  private static final int ODF12_MANIFEST_ELEMENT_NUMBER = 7;
+  private static final int ODF12_MANIFEST_ELEMENTS_WITH_DUPLICATES = 7;
+  private static final int ODF12_MANIFEST_ATTRIBUTE_NUMBER = 15;
+  private static final int ODF12_MANIFEST_ATTRIBUTES_WITH_DUPLICATES = 16;
+
+  private static final int ODF12_SIGNATURE_ELEMENT_NUMBER = 3;
+  private static final int ODF12_SIGNATURE_ELEMENTS_WITH_DUPLICATES = 3;
+  private static final int ODF12_SIGNATURE_ATTRIBUTE_NUMBER = 2;
+  private static final int ODF12_SIGNATURE_ATTRIBUTES_WITH_DUPLICATES = 2;
+
+  private static final int ODF11_MANIFEST_ELEMENT_NUMBER = 5;
+  private static final int ODF11_MANIFEST_ELEMENTS_WITH_DUPLICATES = 5;
+  private static final int ODF11_MANIFEST_ATTRIBUTE_NUMBER = 10;
+  private static final int ODF11_MANIFEST_ATTRIBUTES_WITH_DUPLICATES = 10;
+
+  private static final int ODF10_MANIFEST_ELEMENT_NUMBER = 5;
+  private static final int ODF10_MANIFEST_ELEMENTS_WITH_DUPLICATES = 5;
+  private static final int ODF10_MANIFEST_ATTRIBUTE_NUMBER = 10;
+  private static final int ODF10_MANIFEST_ATTRIBUTES_WITH_DUPLICATES = 10;
+
   /**
-   * Expresses the amount of attributes in ODF 1.1. There are some issues in the schema that have to
-   * be fixed before the full number can be returned by MSV: Following references are never used,
-   * therefore its attribute is not taking into account:: draw-glue-points-attlist with
+   * /** /** Expresses the amount of attributes in ODF 1.1. There are some issues in the schema that
+   * have to be fixed before the full number can be returned by MSV: Following references are never
+   * used, therefore its attribute is not taking into account:: draw-glue-points-attlist with
    * "draw:escape-direction" office-process-content with "office:process-content" (DEPRECATED in
    * ODF1.2 only on foreign elements)
    *
@@ -320,18 +353,22 @@ class OdfConstants {
    * <p>NOTE: Ignoring the '*' there can be 1162 elements parsed, but with fixed schema it should be
    * 1169.
    */
+  private static final int ODF10_ATTRIBUTE_NUMBER = 752;
+
+  private static final int ODF10_ATTRIBUTES_WITH_DUPLICATES = 835;
 
   // ToDo: 1169 - by search/Replace using RNGSchema and tools, prior exchange <name> to element or
   // attribute declaration
-  private static final int ODF11_ATTRIBUTE_NUMBER = 1163;
+  private static final int ODF11_ATTRIBUTE_NUMBER = 757; // 1163;
+  private static final int ODF11_ATTRIBUTES_WITH_DUPLICATES = 840;
 
   // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie.
   // @office:process-content)
   private static final int ODF12_ATTRIBUTE_NUMBER = 1301;
+  private static final int ODF12_ATTRIBUTES_WITH_DUPLICATES = 1417;
 
   // in RNG 1301 as there is one deprecated attribute on foreign elements not referenced (ie.
   // @office:process-content)
   private static final int ODF13_ATTRIBUTE_NUMBER = 1317;
-  private static final int ODF13_ELEMENT_DUPLICATES = 7;
-  private static final int ODF13_ATTRIBUTE_DUPLICATES = 117;
+  private static final int ODF13_ATTRIBUTES_WITH_DUPLICATES = 1434;
 }
