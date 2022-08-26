@@ -43,7 +43,11 @@ import schema2template.model.PuzzlePiece;
 import schema2template.model.PuzzlePieceSet;
 import schema2template.model.XMLModel;
 
-/** Loads each ODF Grammar into the MSV and dumps its model a file. */
+/**
+ * Uses PuzzlePieceTest to do two tests. Loading each ODF Grammar into the MSV using our PuzzlePiece
+ * class. 1. Dumping each MSV model into a file. 2. Testing the amount of elements and attributes of
+ * each ODF grammar part
+ */
 public class PuzzlePieceTest {
 
   private static final Logger LOG = Logger.getLogger(PuzzlePieceTest.class.getName());
@@ -57,10 +61,8 @@ public class PuzzlePieceTest {
   }
 
   /**
-   * Test: Use the MSV
-   *
-   * <p>This test uses the ODF example, but it's meant to test the general ability to correctly
-   * extract PuzzlePieces out of a XML schema
+   * This test iterates over all ODF grammars loads them into the MSV Validator and dumps the
+   * run-time model (ExpressionTree) into a file.
    */
   @Test
   public void testMSVExpressionTree() {
@@ -105,11 +107,8 @@ public class PuzzlePieceTest {
   }
 
   /**
-   * Test: Create PuzzlePiece elements and attributes with ODF Spec 1.1 (old version, won't be
-   * changed, so it's a good base for a test).
-   *
-   * <p>This test uses the ODF example, but it's meant to test the general ability to correctly
-   * extract PuzzlePieces out of a XML schema
+   * This regression test iterates over all ODF grammars loads them into the MSV Validator and is
+   * comparing the amount of elements and attributes of each ODF grammar part with earlier results.
    */
   @Test
   // due to issue https://issues.apache.org/jira/browse/ODFTOOLKIT-180
