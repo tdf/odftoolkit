@@ -39,11 +39,17 @@ import schema2template.model.PuzzlePiece;
  * instance, style:family="table-cell" has three elements style:text-properties*
  * style:paragraph-properties style:table-cell-properties
  *
- * <p>Interesting fact: All three can have a different @fo:background-color overwriting each other!
+ * <p>A result is Map<String, List<String>> to be accessed via getFamilyProperties(). In the
+ * regression test OdfFamilyPropertiesPatternMatcherTest the map is serialized to proof the
+ * functionality! "@style:family = 'table-cell' = style:table-cell-properties
+ * style:paragraph-properties style:text-properties"
+ *
+ * <p>Interesting side-fact: All three can have a different @fo:background-color overwriting each
+ * other!
  */
 public class OdfFamilyPropertiesPatternMatcher {
 
-  private Grammar mGrammar;
+  private final Grammar mGrammar;
 
   // collect all reachable ElementExps and ReferenceExps.
   final Set<Expression> elementNodes = new HashSet<>();
@@ -143,7 +149,7 @@ public class OdfFamilyPropertiesPatternMatcher {
 
               @Override
               public void onRef(ReferenceExp exp) {
-                String refName = ((ReferenceExp) exp).name;
+                // String refName = ((ReferenceExp) exp).name;
                 // System.out.println("REF NAME" + refName);
                 // we will allow two times nested refs, but than we break
                 if (refNodes.contains(exp)) {
@@ -201,7 +207,15 @@ public class OdfFamilyPropertiesPatternMatcher {
             });
   }
 
-  public static String asString(Map<String, List<String>> results) {
+  /**
+   * A result is the serialized map of a style:family and its property elements, received by
+   * getFamilyProperties() The string looks like the following, there is a regression test poofing
+   * this functionality! "@style:family = 'table-cell' = style:table-cell-properties
+   * style:paragraph-properties style:text-properties"
+   */
+  @Override
+  public String toString() {
+    Map<String, List<String>> results = getFamilyProperties();
     Set<String> families = results.keySet();
     StringBuilder sb = new StringBuilder();
     for (String family : families) {

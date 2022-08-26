@@ -62,8 +62,7 @@ public class OdfFamilyPropertiesPatternMatcherTest {
   public void testGetProperties() {
     Grammar g = XMLModel.loadSchema(OdfSpecificationPart.ODF_1_2_SCHEMA.grammarPath);
     OdfFamilyPropertiesPatternMatcher instance = new OdfFamilyPropertiesPatternMatcher(g);
-
-    String result = OdfFamilyPropertiesPatternMatcher.asString(instance.getFamilyProperties());
+    String result = instance.toString();
     System.out.println("StyleFamily <=> Properties:\n" + result);
     if (!EXPECTED_ODF13_RESULT.equals(result))
       fail(
