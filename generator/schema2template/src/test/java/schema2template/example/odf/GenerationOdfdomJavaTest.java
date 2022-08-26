@@ -50,7 +50,7 @@ public class GenerationOdfdomJavaTest {
           + File.separator
           + "template"
           + File.separator
-          + "java-odfdom-main-template.vm";
+          + "main_template_file-creation_schema.vm";
 
   private static final String MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE =
       TEMPLATE_BASE_DIR
@@ -60,7 +60,7 @@ public class GenerationOdfdomJavaTest {
           + File.separator
           + "template"
           + File.separator
-          + "pkg-manifest-main-template.vm";
+          + "main_template_file-creation_pkg-manifest.vm";
   /**
    * Each ODF part has its own grammar and an own template to create typed Java DOM files from, this
    * is the ODF digital signature
@@ -73,7 +73,7 @@ public class GenerationOdfdomJavaTest {
           + File.separator
           + "template"
           + File.separator
-          + "pkg-dsig-main-template.vm";
+          + "main_template_file-creation_pkg-dsig.vm";
 
   // ***********************************
   // ***** GRAMMAR ADDITIONS

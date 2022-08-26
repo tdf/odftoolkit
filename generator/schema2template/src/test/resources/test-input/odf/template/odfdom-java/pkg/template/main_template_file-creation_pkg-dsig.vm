@@ -24,7 +24,7 @@
 ## Documentation of template development can be found in local file
 ## src/main/resources/documentation/help.html
 ##
-<filelist>
+<file-creation-list>
 #foreach ($element in ${xmlModel.getElements().withoutMultiples()})
 #if ($element != "*")
 ##
@@ -43,4 +43,4 @@
 	<file path="org/odftoolkit/odfdom/pkg/dsig/${className}.java" contextNode="$attribute" template="pkg-dsig-attribute-template.vm" />
 #end
 #end
-</filelist>
+</file-creation-list>

@@ -39,7 +39,7 @@ public class GenerationOdfdomPythonTest {
       TEMPLATE_BASE_DIR
           + ODFDOM_PYTHON_DIRECTORY
           + File.separator
-          + "main-template_odfdom-python.vm";
+          + "main_template_file-creation.vm";
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test

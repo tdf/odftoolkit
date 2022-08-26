@@ -26,7 +26,7 @@
 ## xmlModelHistory - sorted list from latest to earliest release to assist in finding new XML node additions (see odf-reference-template.vm)
 ## But the Velocity context can also be extended by parameters from the calling main-template.
 ##
-<filelist>
+<file-creation-list>
 	<file path="org/odftoolkit/odfdom/dom/style/OdfStyleFamily.java" template="java-odfdom-stylefamily.vm" />
 	<file path="org/odftoolkit/odfdom/dom/style/props/OdfStylePropertiesSet.java" template="java-odfdom-styleset.vm" />
     <file path="org/odftoolkit/odfdom/dom/DefaultElementVisitor.java" template="java-odfdom-element-visitor.vm" />
@@ -65,4 +65,4 @@
 #end
 #end
 #end
-</filelist>
+</file-creation-list>

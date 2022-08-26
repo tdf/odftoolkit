@@ -34,19 +34,19 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * If a template should be used multiple times (e.g. for every element of the schema), For every
- * file we create a line will be created. This class parses this list of the output files to be
+ * If a Velocity template should be used multiple times (e.g. for every element of the schema), For
+ * every file to be created we create a line in the file-creation-list. This file-creation-list XML
+ * is being created from the main-template. This class parses this list of the output files to be
  * created.
  */
-public class OutputFileListHandler extends DefaultHandler {
+public class FileCreationListHandler extends DefaultHandler {
 
-  List<OutputFileListEntry> mFilelist;
+  List<FileCreationListEntry> mFilelist;
   boolean mOpenFlTag = false;
   boolean mOpenFileTag = false;
-  boolean mOpenPathTag = false;
   Locator mLocator;
 
-  OutputFileListHandler(List<OutputFileListEntry> fl) {
+  FileCreationListHandler(List<FileCreationListEntry> fl) {
     mFilelist = fl;
   }
 
@@ -59,14 +59,14 @@ public class OutputFileListHandler extends DefaultHandler {
   @Override
   public void startElement(String uri, String localName, String qName, Attributes attributes)
       throws SAXException {
-    if (qName.equals("filelist") && !mOpenFlTag) {
+    if (qName.equals("file-creation-list") && !mOpenFlTag) {
       mOpenFlTag = true;
       return;
     }
-    if (qName.equals("file") && mOpenFlTag && !mOpenFileTag && !mOpenPathTag) {
+    if (qName.equals("file") && mOpenFlTag && !mOpenFileTag) {
       mOpenFileTag = true;
-      OutputFileListEntry entry =
-          new OutputFileListEntry(OutputFileListEntry.EntryType.FILE, mLocator.getLineNumber());
+      FileCreationListEntry entry =
+          new FileCreationListEntry(FileCreationListEntry.EntryType.FILE, mLocator.getLineNumber());
       String mandatoryPath = attributes.getValue("path");
       if (mandatoryPath == null)
         throw new SAXException(
@@ -80,45 +80,26 @@ public class OutputFileListHandler extends DefaultHandler {
       mFilelist.add(entry);
       return;
     }
-    if (qName.equals("path") && mOpenFlTag && !mOpenFileTag && !mOpenPathTag) {
-      mOpenPathTag = true;
-      OutputFileListEntry entry =
-          new OutputFileListEntry(OutputFileListEntry.EntryType.PATH, mLocator.getLineNumber());
-      String mandatoryPath = attributes.getValue("path");
-      if (mandatoryPath == null)
-        throw new SAXException(
-            "Mandatory attribute path is missing for path element in line "
-                + mLocator.getLineNumber()
-                + ".");
-      entry.setAttribute("path", mandatoryPath);
-      entry.setAttribute("path", mandatoryPath);
-      mFilelist.add(entry);
-      return;
-    }
-    throw new SAXException("Malformed filelist");
+    throw new SAXException("Malformed file-creation-list");
   }
 
   @Override
   public void endElement(String uri, String localName, String qName) throws SAXException {
-    if (qName.equals("filelist") && mOpenFlTag && !mOpenFileTag && !mOpenPathTag) {
+    if (qName.equals("file-creation-list") && mOpenFlTag && !mOpenFileTag) {
       mOpenFlTag = false;
       return;
     }
-    if (qName.equals("file") && mOpenFlTag && mOpenFileTag && !mOpenPathTag) {
+    if (qName.equals("file") && mOpenFlTag && mOpenFileTag) {
       mOpenFileTag = false;
       return;
     }
-    if (qName.equals("path") && mOpenFlTag && mOpenPathTag && !mOpenFileTag) {
-      mOpenPathTag = false;
-      return;
-    }
-    throw new SAXException("Malformed filelist");
+    throw new SAXException("Malformed file-creation-list");
   }
 
-  public static List<OutputFileListEntry> readFileListFile(File flf) throws Exception {
+  public static List<FileCreationListEntry> readFileListFile(File flf) throws Exception {
     SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-    List<OutputFileListEntry> retval = new ArrayList<>();
-    parser.parse(flf, new OutputFileListHandler(retval));
+    List<FileCreationListEntry> retval = new ArrayList<>();
+    parser.parse(flf, new FileCreationListHandler(retval));
     return retval;
   }
 }
