@@ -21,10 +21,10 @@
  */
 package schema2template.example.odf;
 
-import static schema2template.example.odf.BuildEnvConstants.ODF_GRAMMAR_BASE_DIR;
+import static schema2template.example.odf.ConstantsBuildEnv.ODF_GRAMMAR_BASE_DIR;
 
 /** Contains all test relevant constants related to ODF */
-class OdfConstants {
+class ConstantsOdf {
 
   /**
    * The GrammarID defines the part across specifciations to make it comparable (e.g. for API

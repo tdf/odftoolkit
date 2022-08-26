@@ -21,9 +21,9 @@
  */
 package schema2template.example.odf;
 
-import static schema2template.example.odf.BuildEnvConstants.REFERENCE_BASE_DIR;
-import static schema2template.example.odf.BuildEnvConstants.TARGET_BASE_DIR;
-import static schema2template.example.odf.BuildEnvConstants.TEMPLATE_BASE_DIR;
+import static schema2template.example.odf.ConstantsBuildEnv.REFERENCE_BASE_DIR;
+import static schema2template.example.odf.ConstantsBuildEnv.TARGET_BASE_DIR;
+import static schema2template.example.odf.ConstantsBuildEnv.TEMPLATE_BASE_DIR;
 import static schema2template.example.odf.DirectoryCompare.compareDirectories;
 
 import java.io.File;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 import org.junit.Test;
 import schema2template.GenerationParameters;
-import schema2template.example.odf.OdfConstants.OdfSpecificationPart;
+import schema2template.example.odf.ConstantsOdf.OdfSpecificationPart;
 
 public class GenerationOdfdomJavaTest {
 
@@ -106,17 +106,17 @@ public class GenerationOdfdomJavaTest {
     String grammarAdditionsPath = null;
     String mainTemplatePath = null;
     for (OdfSpecificationPart specPart : OdfSpecificationPart.values()) {
-      if (specPart.grammarID.equals(OdfConstants.GrammarID.ODF_MANIFEST.ID)) {
+      if (specPart.grammarID.equals(ConstantsOdf.GrammarID.ODF_MANIFEST.ID)) {
         //  ODF manifest grammar
         grammarAdditionsPath = GRAMMAR_ADDITIONS_FILE__PACKAGE;
         mainTemplatePath = MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE;
 
-      } else if (specPart.grammarID.equals(OdfConstants.GrammarID.ODF_SIGNATURE.ID)) {
+      } else if (specPart.grammarID.equals(ConstantsOdf.GrammarID.ODF_SIGNATURE.ID)) {
         // ODF signature grammar
         grammarAdditionsPath = GRAMMAR_ADDITIONS_FILE__PACKAGE;
         mainTemplatePath = MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE;
 
-      } else if (specPart.grammarID.equals(OdfConstants.GrammarID.ODF_SCHEMA.ID)) {
+      } else if (specPart.grammarID.equals(ConstantsOdf.GrammarID.ODF_SCHEMA.ID)) {
         // ODF schema grammar
         grammarAdditionsPath = GRAMMAR_ADDITIONS_FILE__SCHEMA;
         mainTemplatePath = MAIN_TEMPLATE_ODF_SCHEMA_FILE;

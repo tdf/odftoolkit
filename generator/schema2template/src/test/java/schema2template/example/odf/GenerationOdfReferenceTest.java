@@ -21,15 +21,15 @@
  */
 package schema2template.example.odf;
 
-import static schema2template.example.odf.BuildEnvConstants.TARGET_BASE_DIR;
-import static schema2template.example.odf.BuildEnvConstants.TEMPLATE_BASE_DIR;
+import static schema2template.example.odf.ConstantsBuildEnv.TARGET_BASE_DIR;
+import static schema2template.example.odf.ConstantsBuildEnv.TEMPLATE_BASE_DIR;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import org.junit.Test;
 import schema2template.GenerationParameters;
-import schema2template.example.odf.OdfConstants.OdfSpecificationPart;
+import schema2template.example.odf.ConstantsOdf.OdfSpecificationPart;
 
 public class GenerationOdfReferenceTest {
 
