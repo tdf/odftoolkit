@@ -56,8 +56,7 @@ public class GenerationParameters {
    *     e.g. ODF default values are listed in the ODF specificaiton
    * @param mainTemplatePath the path to the velocity file that maps the grammar to a list of
    *     velocity templates and their condition triggering them
-   * @param targetDirPath the output directory of the generation (usually
-   *     target/generated-sources/java)
+   * @param targetDirPath the output directory of the generation (usually target/generated-sources/)
    */
   public GenerationParameters(
       String grammarVersion,

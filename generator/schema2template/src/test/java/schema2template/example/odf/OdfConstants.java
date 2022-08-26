@@ -52,7 +52,7 @@ class OdfConstants {
           + File.separator;
 
   /** base directory for all ODF specifications grammars in the ODF Toolkit */
-  private static final String ODF_GRAMMAR_PATH =
+  private static final String ODF_GRAMMAR_BASE_DIR =
       BASE_DIR
           + "src"
           + File.separator
@@ -73,8 +73,6 @@ class OdfConstants {
           + "target"
           + File.separator
           + "generated-sources"
-          + File.separator
-          + "java"
           + File.separator
           + "odf"
           + File.separator;
@@ -247,7 +245,7 @@ class OdfConstants {
         int attributeDuplicateNo) {
       this.grammarVersion = grammarVersion;
       this.grammarID = grammarID.ID;
-      this.grammarPath = ODF_GRAMMAR_PATH + grammarPath;
+      this.grammarPath = ODF_GRAMMAR_BASE_DIR + grammarPath;
       this.elementNo = elementNo;
       this.attributeNo = attributeNo;
       this.elementDuplicateNo = elementDuplicateNo;
