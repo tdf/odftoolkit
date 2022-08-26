@@ -24,7 +24,7 @@ package schema2template.example.odf;
 import java.io.File;
 
 /** Contains all test relevant constants related to ODF */
-class BuildEnvConstants {
+class ConstantsBuildEnv {
 
   /**
    * Via Maven pom.xml (surefire test plugin) received System variable of the absolute path of the

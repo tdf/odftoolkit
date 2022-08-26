@@ -30,9 +30,9 @@ import schema2template.TemplateAPICoverageTest;
 import schema2template.TemplateAPICoverageTest.MethodSet;
 import schema2template.model.QNamed;
 
-public class OdfTemplateAPICoverageTest {
+public class VelocityTemplateAPIRegressionTest {
 
-  public OdfTemplateAPICoverageTest() {}
+  public VelocityTemplateAPIRegressionTest() {}
 
   /**
    * Test coverage: Test existense of methods made for template usage. If you rename a method, this

@@ -23,8 +23,8 @@
  */
 package schema2template.example.odf;
 
-import static schema2template.example.odf.BuildEnvConstants.REFERENCE_BASE_DIR;
-import static schema2template.example.odf.BuildEnvConstants.TARGET_BASE_DIR;
+import static schema2template.example.odf.ConstantsBuildEnv.REFERENCE_BASE_DIR;
+import static schema2template.example.odf.ConstantsBuildEnv.TARGET_BASE_DIR;
 import static schema2template.example.odf.DirectoryCompare.compareDirectories;
 
 import com.sun.msv.grammar.Expression;
@@ -36,7 +36,7 @@ import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import schema2template.example.odf.OdfConstants.OdfSpecificationPart;
+import schema2template.example.odf.ConstantsOdf.OdfSpecificationPart;
 import schema2template.model.MSVExpressionIterator;
 import schema2template.model.XMLModel;
 

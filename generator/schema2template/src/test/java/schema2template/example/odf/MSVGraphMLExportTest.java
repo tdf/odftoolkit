@@ -23,7 +23,7 @@
  */
 package schema2template.example.odf;
 
-import static schema2template.example.odf.BuildEnvConstants.TARGET_BASE_DIR;
+import static schema2template.example.odf.ConstantsBuildEnv.TARGET_BASE_DIR;
 import static schema2template.example.odf.SchemaToTemplate.DEBUG;
 
 import java.io.File;
@@ -31,7 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
-import schema2template.example.odf.OdfConstants.OdfSpecificationPart;
+import schema2template.example.odf.ConstantsOdf.OdfSpecificationPart;
 import schema2template.model.PuzzlePiece;
 import schema2template.model.PuzzlePieceSet;
 import schema2template.model.XMLModel;

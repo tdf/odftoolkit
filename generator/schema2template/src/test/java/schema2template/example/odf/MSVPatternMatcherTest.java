@@ -23,11 +23,14 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import schema2template.example.odf.OdfConstants.OdfSpecificationPart;
+import schema2template.example.odf.ConstantsOdf.OdfSpecificationPart;
 import schema2template.model.XMLModel;
 
-/** @author Svante Schubert */
-public class OdfFamilyPropertiesPatternMatcherTest {
+/**
+ * @author Svante Schubert Tests the finding the ODF family pattern of the ODF grammar within the
+ *     MSV expression tree, see <code>OdfFamilyPropertiesPatternMatcher</code> for more details!
+ */
+public class MSVPatternMatcherTest {
 
   /** String was taken previously from OdfFamilyPropertiesPatternMatcher.toString() */
   private static final String EXPECTED_ODF13_RESULT =
@@ -44,7 +47,7 @@ public class OdfFamilyPropertiesPatternMatcherTest {
           + "@style:family = 'table-row' = style:table-row-properties\n"
           + "@style:family = 'text' = style:text-properties\n";
 
-  public OdfFamilyPropertiesPatternMatcherTest() {}
+  public MSVPatternMatcherTest() {}
 
   @BeforeClass
   public static void setUpClass() {}
