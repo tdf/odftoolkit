@@ -23,9 +23,9 @@
  */
 package schema2template.example.odf;
 
+import static schema2template.example.odf.BuildEnvConstants.REFERENCE_BASE_DIR;
+import static schema2template.example.odf.BuildEnvConstants.TARGET_BASE_DIR;
 import static schema2template.example.odf.DirectoryCompare.compareDirectories;
-import static schema2template.example.odf.OdfConstants.REFERENCE_BASE_DIR;
-import static schema2template.example.odf.OdfConstants.TARGET_BASE_DIR;
 
 import com.sun.msv.grammar.Expression;
 import java.io.File;

@@ -21,10 +21,10 @@
  */
 package schema2template.example.odf;
 
+import static schema2template.example.odf.BuildEnvConstants.REFERENCE_BASE_DIR;
+import static schema2template.example.odf.BuildEnvConstants.TARGET_BASE_DIR;
+import static schema2template.example.odf.BuildEnvConstants.TEMPLATE_BASE_DIR;
 import static schema2template.example.odf.DirectoryCompare.compareDirectories;
-import static schema2template.example.odf.OdfConstants.REFERENCE_BASE_DIR;
-import static schema2template.example.odf.OdfConstants.TARGET_BASE_DIR;
-import static schema2template.example.odf.OdfConstants.TEMPLATE_BASE_DIR;
 
 import java.io.File;
 import java.util.ArrayList;

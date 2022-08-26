@@ -26,9 +26,10 @@ import org.junit.Test;
 import schema2template.example.odf.OdfConstants.OdfSpecificationPart;
 import schema2template.model.XMLModel;
 
-/** @author Niemand */
+/** @author Svante Schubert */
 public class OdfFamilyPropertiesPatternMatcherTest {
 
+  /** String was taken previously from OdfFamilyPropertiesPatternMatcher.toString() */
   private static final String EXPECTED_ODF13_RESULT =
       "@style:family = 'chart' = style:chart-properties style:graphic-properties style:paragraph-properties style:text-properties\n"
           + "@style:family = 'drawing-page' = style:drawing-page-properties\n"
