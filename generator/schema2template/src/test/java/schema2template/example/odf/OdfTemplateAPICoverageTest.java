@@ -41,7 +41,7 @@ public class OdfTemplateAPICoverageTest {
    * <p>The input parameter count of each method will be tested for additional safety.
    */
   @Test
-  public void testOdfCoverage() {
+  public void testOdfRelevantCoverage() {
     MethodSet methods;
 
     methods = TemplateAPICoverageTest.getMethods(OdfModel.class);

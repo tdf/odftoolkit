@@ -39,9 +39,9 @@ import java.util.stream.Collectors;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
+import schema2template.FileCreationListEntry;
+import schema2template.FileCreationListHandler;
 import schema2template.GenerationParameters;
-import schema2template.OutputFileListEntry;
-import schema2template.OutputFileListHandler;
 import schema2template.model.XMLModel;
 
 /**
@@ -119,7 +119,7 @@ public class SchemaToTemplate {
             templateBaseDir,
             mainTemplateFileName,
             targetDirPath,
-            "generated-main-template_" + grammarID + "-" + grammarVersion + ".xml",
+            "file-creation-list_" + grammarID + "-" + grammarVersion + ".xml",
             initVelocityContext(currentModel, modelHistory, grammarAdditionsFilePath));
       } catch (Exception ex) {
         Logger.getLogger(SchemaToTemplate.class.getName()).log(Level.SEVERE, null, ex);
@@ -201,7 +201,7 @@ public class SchemaToTemplate {
     ve.setProperty(RuntimeConstants.SPACE_GOBBLING, "bc");
     ve.init();
     createOutputFileList(ve, templateFileName, targetDirPath, targetFileName, context);
-    LOG.info("output-files.xml created done.");
+    LOG.info("file-creation-list.xml has been created!");
 
     // Process output-files.xml, create output files
     LOG.fine("Processing output files... ");
@@ -228,43 +228,36 @@ public class SchemaToTemplate {
       VelocityEngine ve, String targetDirPath, String targetFileName, VelocityContext context)
       throws Exception {
     File outputFileList = new File(targetDirPath + File.separator + targetFileName);
-    List<OutputFileListEntry> fl = OutputFileListHandler.readFileListFile(outputFileList);
+    List<FileCreationListEntry> fl = FileCreationListHandler.readFileListFile(outputFileList);
 
-    for (OutputFileListEntry f : fl) {
-      switch (f.getType()) {
-        case PATH:
-          break;
-        case FILE:
-          LOG.log(
-              Level.INFO,
-              "Processing line {0}: \n\tGenerating file:\n\t\t{1}\n\t\t{2}",
-              new Object[] {
-                f.getLineNumber(),
-                targetDirPath + File.separator,
-                generateFilename(f.getAttribute("path"))
-              });
-          ;
-          String contextAttrValue = f.getAttribute("contextNode");
-          if (contextAttrValue != null) {
-            context.put("contextNode", contextAttrValue);
-            LOG.log(Level.INFO, "Added to context: contextNode : {0}", contextAttrValue);
-          }
-          String param = f.getAttribute("param");
-          if (param != null) {
-            context.put("param", param);
-            LOG.log(Level.INFO, "adding param: {0}", f.getAttribute("param"));
-          }
+    for (FileCreationListEntry f : fl) {
+      LOG.log(
+          Level.INFO,
+          "Processing line {0}: \n\tGenerating file:\n\t\t{1}\n\t\t{2}",
+          new Object[] {
+            f.getLineNumber(),
+            targetDirPath + File.separator,
+            generateFilename(f.getAttribute("path"))
+          });
+      ;
+      String contextAttrValue = f.getAttribute("contextNode");
+      if (contextAttrValue != null) {
+        context.put("contextNode", contextAttrValue);
+        LOG.log(Level.INFO, "Added to context: contextNode : {0}", contextAttrValue);
+      }
+      String param = f.getAttribute("param");
+      if (param != null) {
+        context.put("param", param);
+        LOG.log(Level.INFO, "adding param: {0}", f.getAttribute("param"));
+      }
 
-          File out =
-              new File(targetDirPath + File.separator + generateFilename(f.getAttribute("path")))
-                  .getCanonicalFile();
-          ensureParentFolders(out);
-          FileWriter fileout = new FileWriter(out);
-          String encoding = "utf-8";
-
-          ve.mergeTemplate(f.getAttribute("template"), encoding, context, fileout);
-          fileout.close();
-          break;
+      File out =
+          new File(targetDirPath + File.separator + generateFilename(f.getAttribute("path")))
+              .getCanonicalFile();
+      ensureParentFolders(out);
+      try (FileWriter fileout = new FileWriter(out)) {
+        String encoding = "utf-8";
+        ve.mergeTemplate(f.getAttribute("template"), encoding, context, fileout);
       }
     }
   }

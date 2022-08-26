@@ -19,13 +19,29 @@
 ##
 ##################################################################
 <?xml version="1.0" encoding="UTF-8"?>
-## Context:
+## Template to create the list of artefacts which are to be generated
 ##
-## The Velocity context is added up in the SchemaToTemplate.java
-## xmlModel - Represents an ODF grammar parsed by MSV with all relevant informations and usabiltiy functions
-## xmlModelHistory - sorted list from latest to earliest release to assist in finding new XML node additions (see odf-reference-template.vm)
-## But the Velocity context can also be extended by parameters from the calling main-template.
+## Documentation of template development can be found in local file
+## src/main/resources/documentation/help.html
 ##
-<filelist>
-    <file path="OdfReference.html" template="odf-reference-template.vm" />
-</filelist>
+<file-creation-list>
+#foreach ($element in ${xmlModel.getElements().withoutMultiples()})
+#if ($element != "*")
+##
+
+#set($localName = "${element.getLocalName()}")
+#set($className = "${xmlModel.camelCase($localName)}Element")
+	<file path="org/odftoolkit/odfdom/pkg/manifest/${className}.java" contextNode="$element" template="pkg-manifest-element-template.vm" />
+##
+#end
+#end
+##
+#foreach ($attribute in ${xmlModel.getAttributes().withoutMultiples()})
+#if ($attribute != "*")
+##
+#set($localName = "${attribute.getLocalName()}")
+#set($className = "${xmlModel.camelCase($localName)}Attribute")
+	<file path="org/odftoolkit/odfdom/pkg/manifest/${className}.java" contextNode="$attribute" template="pkg-manifest-attribute-template.vm" />
+#end
+#end
+</file-creation-list>

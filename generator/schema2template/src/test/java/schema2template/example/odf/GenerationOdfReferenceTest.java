@@ -39,7 +39,7 @@ public class GenerationOdfReferenceTest {
       TEMPLATE_BASE_DIR
           + ODF_REFERENCE_DIRECTORY
           + File.separator
-          + "main-template_odf-reference.vm";
+          + "main_template_file-creation.vm";
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test

@@ -26,6 +26,6 @@
 ## xmlModelHistory - sorted list from latest to earliest release to assist in finding new XML node additions (see odf-reference-template.vm)
 ## But the Velocity context can also be extended by parameters from the calling main-template.
 ##
-<filelist>
+<file-creation-list>
     <file path="hierarchy.py" template="pythontest.vm" />
-</filelist>
+</file-creation-list>

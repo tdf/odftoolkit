@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<filelist>
+<file-creation-list>
 	<file path="org/odftoolkit/odfdom/pkg/dsig/SignatureElement.java" contextNode="Signature" template="pkg-dsig-element-template.vm" />
 	<file path="org/odftoolkit/odfdom/pkg/dsig/DocumentSignaturesElement.java" contextNode="document-signatures" template="pkg-dsig-element-template.vm" />
 	<file path="org/odftoolkit/odfdom/pkg/dsig/VersionAttribute.java" contextNode="version" template="pkg-dsig-attribute-template.vm" />
-</filelist>
+</file-creation-list>

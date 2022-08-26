@@ -88,7 +88,10 @@ public class MSVGraphMLExportTest {
 
         foundError |=
             checkFoundNumber(
-                allElements, specPart.elementDuplicateNo, grammarLabel, "elements with duplicates");
+                allElements,
+                specPart.elementNoWithDuplicates,
+                grammarLabel,
+                "elements with duplicates");
         foundError |=
             checkFoundNumber(
                 allElements.withoutMultiples(),
@@ -98,7 +101,7 @@ public class MSVGraphMLExportTest {
         foundError |=
             checkFoundNumber(
                 allAttributes,
-                specPart.attributeDuplicateNo,
+                specPart.attributeNoWithDuplicates,
                 grammarLabel,
                 "attributes with duplicates");
         foundError |=

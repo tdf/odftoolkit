@@ -214,12 +214,12 @@ class OdfConstants {
      * amount of all distinct definitions of XML elements of a certain ODF grammar given by MSV
      * (MultiSchemaValidator)
      */
-    public final int elementDuplicateNo;
+    public final int elementNoWithDuplicates;
     /**
      * amount of all distinct definitions of XML attributes of a certain ODF grammar given by MSV
      * (MultiSchemaValidator)
      */
-    public final int attributeDuplicateNo;
+    public final int attributeNoWithDuplicates;
 
     /**
      * @param grammarVersion Sortable ODF version number, for instance: 1.3, 1.2
@@ -230,10 +230,10 @@ class OdfConstants {
      *     (MultiSchemaValidator)
      * @param attributeNo amount of XML attributes defined by a certain ODF grammar given by MSV
      *     (MultiSchemaValidator)
-     * @param elementDuplicateNo amount of all distinct definitions of XML elements of a certain ODF
-     *     grammar given by MSV (MultiSchemaValidator)
-     * @param attributeDuplicateNo amount of all distinct definitions of XML attributes of a certain
-     *     ODF grammar given by MSV (MultiSchemaValidator)
+     * @param elementNoWithDuplicates amount of all distinct definitions of XML elements of a
+     *     certain ODF grammar given by MSV (MultiSchemaValidator)
+     * @param attributeNoWithDuplicates amount of all distinct definitions of XML attributes of a
+     *     certain ODF grammar given by MSV (MultiSchemaValidator)
      */
     OdfSpecificationPart(
         String grammarVersion,
@@ -241,15 +241,15 @@ class OdfConstants {
         String grammarPath,
         int elementNo,
         int attributeNo,
-        int elementDuplicateNo,
-        int attributeDuplicateNo) {
+        int elementNoWithDuplicates,
+        int attributeNoWithDuplicates) {
       this.grammarVersion = grammarVersion;
       this.grammarID = grammarID.ID;
       this.grammarPath = ODF_GRAMMAR_BASE_DIR + grammarPath;
       this.elementNo = elementNo;
       this.attributeNo = attributeNo;
-      this.elementDuplicateNo = elementDuplicateNo;
-      this.attributeDuplicateNo = attributeDuplicateNo;
+      this.elementNoWithDuplicates = elementNoWithDuplicates;
+      this.attributeNoWithDuplicates = attributeNoWithDuplicates;
     }
   }
 
