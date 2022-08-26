@@ -68,7 +68,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 		m_name = name;
 		m_familyByName.put(name, this);
 	}
-		
+
 	public String getName() {
 		return m_name;
 	}
@@ -81,7 +81,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 		OdfStyleFamily family = getByName(name);
 		if (family == null) {
 			family = new OdfStyleFamily(name);
-		} 
+		}
 		return family;
 	}
 

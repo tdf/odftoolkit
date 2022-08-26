@@ -24,7 +24,9 @@ package schema2template.example.odf;
 import static schema2template.example.odf.DirectoryCompare.compareDirectories;
 import static schema2template.example.odf.OdfConstants.REFERENCE_BASE_DIR;
 import static schema2template.example.odf.OdfConstants.TARGET_BASE_DIR;
+import static schema2template.example.odf.OdfConstants.TEMPLATE_BASE_DIR;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import org.junit.Test;
@@ -36,12 +38,90 @@ public class GenerationOdfdomJavaTest {
   private static final Logger LOG = Logger.getLogger(GenerationOdfdomJavaTest.class.getName());
   private static final String ODFDOM_JAVA_DIRECTORY = "odfdom-java";
 
+  // ***********************************
+  // ***** MAIN TEMPLATES
+  // ***********************************
+  /** The absolute path to inital template that will afterwards a list of all to be created files */
+  private static final String MAIN_TEMPLATE_ODF_SCHEMA_FILE =
+      TEMPLATE_BASE_DIR
+          + ODFDOM_JAVA_DIRECTORY
+          + File.separator
+          + "dom"
+          + File.separator
+          + "template"
+          + File.separator
+          + "java-odfdom-main-template.vm";
+
+  private static final String MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE =
+      TEMPLATE_BASE_DIR
+          + ODFDOM_JAVA_DIRECTORY
+          + File.separator
+          + "pkg"
+          + File.separator
+          + "template"
+          + File.separator
+          + "pkg-manifest-main-template.vm";
+  /**
+   * Each ODF part has its own grammar and an own template to create typed Java DOM files from, this
+   * is the ODF digital signature
+   */
+  private static final String MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE =
+      TEMPLATE_BASE_DIR
+          + ODFDOM_JAVA_DIRECTORY
+          + File.separator
+          + "pkg"
+          + File.separator
+          + "template"
+          + File.separator
+          + "pkg-dsig-main-template.vm";
+
+  // ***********************************
+  // ***** GRAMMAR ADDITIONS
+  // ***********************************
+  /**
+   * the absolute path to the file containing additional information for the generation aside the
+   * grammar
+   */
+  private static final String GRAMMAR_ADDITIONS_FILE__SCHEMA =
+      TEMPLATE_BASE_DIR
+          + ODFDOM_JAVA_DIRECTORY
+          + File.separator
+          + "dom"
+          + File.separator
+          + "grammar-additions.xml";
+
+  private static final String GRAMMAR_ADDITIONS_FILE__PACKAGE =
+      TEMPLATE_BASE_DIR
+          + ODFDOM_JAVA_DIRECTORY
+          + File.separator
+          + "pkg"
+          + File.separator
+          + "grammar-additions.xml";
+
   /** Test: It should be able to generate all examples without a failure. */
   @Test
   public void testAllExampleGenerations() {
     ArrayList<GenerationParameters> generations = new ArrayList<>();
 
+    String grammarAdditionsPath = null;
+    String mainTemplatePath = null;
     for (OdfSpecificationPart specPart : OdfSpecificationPart.values()) {
+      if (specPart.grammarID.equals(OdfConstants.GrammarID.ODF_MANIFEST.ID)) {
+        //  ODF manifest grammar
+        grammarAdditionsPath = GRAMMAR_ADDITIONS_FILE__PACKAGE;
+        mainTemplatePath = MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE;
+
+      } else if (specPart.grammarID.equals(OdfConstants.GrammarID.ODF_SIGNATURE.ID)) {
+        // ODF signature grammar
+        grammarAdditionsPath = GRAMMAR_ADDITIONS_FILE__PACKAGE;
+        mainTemplatePath = MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE;
+
+      } else if (specPart.grammarID.equals(OdfConstants.GrammarID.ODF_SCHEMA.ID)) {
+        // ODF schema grammar
+        grammarAdditionsPath = GRAMMAR_ADDITIONS_FILE__SCHEMA;
+        mainTemplatePath = MAIN_TEMPLATE_ODF_SCHEMA_FILE;
+      }
+
       LOG.info(
           "\n\nNew ODF transformation with following parameters:"
               + "\n\tgrammarVersion "
@@ -51,9 +131,9 @@ public class GenerationOdfdomJavaTest {
               + "\n\tgrammarPath: "
               + specPart.grammarPath
               + "\n\tgrammarAdditionsPath: "
-              + specPart.grammarAdditionsPath
+              + grammarAdditionsPath
               + "\n\tmainTemplatePath: "
-              + specPart.mainTemplatePath
+              + mainTemplatePath
               + "\n\ttargetDirPath: "
               + TARGET_BASE_DIR
               + ODFDOM_JAVA_DIRECTORY);
@@ -63,8 +143,8 @@ public class GenerationOdfdomJavaTest {
               specPart.grammarVersion,
               specPart.grammarID,
               specPart.grammarPath,
-              specPart.grammarAdditionsPath,
-              specPart.mainTemplatePath,
+              grammarAdditionsPath,
+              mainTemplatePath,
               TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY));
     }
 

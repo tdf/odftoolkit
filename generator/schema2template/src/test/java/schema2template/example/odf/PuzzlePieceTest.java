@@ -76,10 +76,6 @@ public class PuzzlePieceTest {
                 + specPart.grammarID
                 + "\n\tgrammarPath: "
                 + specPart.grammarPath
-                + "\n\tgrammarAdditionsPath: "
-                + specPart.grammarAdditionsPath
-                + "\n\tmainTemplatePath: "
-                + specPart.mainTemplatePath
                 + "\n\ttargetDirPath: "
                 + TARGET_BASE_DIR
                 + MSV_DUMP_DIRECTORY);
@@ -124,10 +120,6 @@ public class PuzzlePieceTest {
                 + specPart.grammarID
                 + "\n\tgrammarPath: "
                 + specPart.grammarPath
-                + "\n\tgrammarAdditionsPath: "
-                + specPart.grammarAdditionsPath
-                + "\n\tmainTemplatePath: "
-                + specPart.mainTemplatePath
                 + "\n\ttargetDirPath: "
                 + TARGET_BASE_DIR
                 + GRAPHML_DIRECTORY);
