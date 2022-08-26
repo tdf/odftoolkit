@@ -80,8 +80,7 @@ class TinkerPopGraph {
         targetDir.mkdirs();
         // g.io(IoCore.gryo()).writeGraph("target" + File.separator + "graphML" + File.separator +
         // directoryName + File.separator + fileName + ".kryo");
-        // DREZEIT:
-        // target\graphML\E:\GitHub\odf\odftoolkit-latest_odf-codegen2\generator\schema2template\src\test\resources\test-input\odf\grammar\OpenDocument-v1_3-schema_rng\style_footer-left.graphml
+
         graph
             .io(IoCore.graphml())
             .writeGraph(targetDirectoryName + File.separator + fileName + ".graphml");

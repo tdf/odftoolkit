@@ -48,11 +48,12 @@ public class PuzzlePieceTest {
 
   private static final Logger LOG = Logger.getLogger(PuzzlePieceTest.class.getName());
 
-  private static final String MSV_DUMP_DIRECTORY_SUFFIX = "msv-dump";
+  private static final String MSV_DUMP_DIRECTORY = "msv-dump";
+  private static final String GRAPHML_DIRECTORY = "graphml";
 
   @Before
   public void intialize() {
-    new File(TARGET_BASE_DIR + MSV_DUMP_DIRECTORY_SUFFIX).mkdirs();
+    new File(TARGET_BASE_DIR + MSV_DUMP_DIRECTORY).mkdirs();
   }
 
   /**
@@ -78,18 +79,15 @@ public class PuzzlePieceTest {
                 + "\n\tmainTemplatePath: "
                 + specPart.mainTemplatePath
                 + "\n\ttargetDirPath: "
-                + specPart.targetDirPath);
+                + TARGET_BASE_DIR
+                + MSV_DUMP_DIRECTORY);
         Expression odfRoot = XMLModel.loadSchema(specPart.grammarPath).getTopLevel();
         String odfDump = MSVExpressionIterator.dumpMSVExpressionTree(odfRoot);
 
         String grammarLabel = specPart.grammarID + "-" + specPart.grammarVersion;
 
         String targetMSVDumpFile =
-            TARGET_BASE_DIR
-                + MSV_DUMP_DIRECTORY_SUFFIX
-                + File.separator
-                + grammarLabel
-                + "-msvtree.txt";
+            TARGET_BASE_DIR + MSV_DUMP_DIRECTORY + File.separator + grammarLabel + "-msvtree.txt";
         LOG.log(
             Level.INFO,
             "Writing MSV RelaxNG tree for " + grammarLabel + " + into file: {0}",
@@ -99,8 +97,7 @@ public class PuzzlePieceTest {
         }
       }
       compareDirectories(
-          TARGET_BASE_DIR + MSV_DUMP_DIRECTORY_SUFFIX,
-          REFERENCE_BASE_DIR + MSV_DUMP_DIRECTORY_SUFFIX);
+          TARGET_BASE_DIR + MSV_DUMP_DIRECTORY, REFERENCE_BASE_DIR + MSV_DUMP_DIRECTORY);
     } catch (Exception ex) {
       Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
       Assert.fail(ex.toString());
@@ -133,7 +130,8 @@ public class PuzzlePieceTest {
                 + "\n\tmainTemplatePath: "
                 + specPart.mainTemplatePath
                 + "\n\ttargetDirPath: "
-                + specPart.targetDirPath);
+                + TARGET_BASE_DIR
+                + GRAPHML_DIRECTORY);
 
         PuzzlePieceSet allElements = new PuzzlePieceSet();
         PuzzlePieceSet allAttributes = new PuzzlePieceSet();
@@ -141,7 +139,13 @@ public class PuzzlePieceTest {
             XMLModel.loadSchema(specPart.grammarPath),
             allElements,
             allAttributes,
-            specPart.grammarPath);
+            specPart.grammarPath,
+            TARGET_BASE_DIR
+                + GRAPHML_DIRECTORY
+                + File.separator
+                + specPart.grammarID
+                + "-"
+                + specPart.grammarVersion);
         // There is a difference of one wildcard "*" representing anyElement/anyAttribute
 
         String grammarLabel = "'" + specPart.grammarID + " " + specPart.grammarVersion + "'";
@@ -172,6 +176,11 @@ public class PuzzlePieceTest {
         Assert.fail(
             "The amount of XML nodes were calculated differently by MSV. See earlier error messages!");
 
+      // DISABLED due to the ALL_ELEMENTS.graphml file, which differs due to random ordered
+      // namespace definitions
+      //      compareDirectories(
+      //          TARGET_BASE_DIR + GRAPHML_DIRECTORY,
+      //          REFERENCE_BASE_DIR + GRAPHML_DIRECTORY);
     } catch (Exception ex) {
       Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
       Assert.fail(ex.toString());
