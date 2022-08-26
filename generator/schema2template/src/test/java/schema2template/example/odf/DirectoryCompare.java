@@ -21,12 +21,14 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.junit.Assert;
 
 /**
  * Compares a directory with all its subdirectories if its text files are equal by line. Comparing
@@ -35,11 +37,39 @@ import java.util.logging.Logger;
 class DirectoryCompare {
 
   private static final Logger LOG = Logger.getLogger(DirectoryCompare.class.getName());
+
+  public static boolean compareDirectories(String newFileDir, String RefFileDir) {
+    boolean directoriesEqual = true;
+    try {
+      // ******** Reference Test *************
+      // generated sources must be equal to the previously generated reference sources
+      String targetPath = Paths.get(newFileDir).toAbsolutePath().toString();
+      String referencePath = Paths.get(RefFileDir).toAbsolutePath().toString();
+
+      LOG.log(
+          Level.INFO,
+          "\n\nComparing new generated Files:\n\t{0}\nwith their reference:\n\t{1}\n",
+          new Object[] {targetPath, referencePath});
+      directoriesEqual =
+          DirectoryCompare.compareDirectories(Paths.get(newFileDir), Paths.get(RefFileDir));
+      Assert.assertTrue(
+          "The new generated sources\n\t"
+              + targetPath
+              + "\ndiffer from their reference:\n\t"
+              + referencePath,
+          directoriesEqual);
+    } catch (IOException ex) {
+      LOG.log(Level.SEVERE, null, ex);
+      Assert.fail(ex.toString());
+    }
+    return directoriesEqual;
+  }
+
   /**
    * Compare the contents of two directories to determine if they are equal or not. If one of the
    * paths don't exist, the contents aren't equal and this method returns false.
    */
-  static boolean directoryContentEquals(Path dir1, Path dir2) throws IOException {
+  private static boolean compareDirectories(Path dir1, Path dir2) throws IOException {
     boolean dir1Exists = Files.exists(dir1) && Files.isDirectory(dir1);
     boolean dir2Exists = Files.exists(dir2) && Files.isDirectory(dir2);
     Boolean areEqual = Boolean.TRUE;

@@ -36,8 +36,7 @@ class OdfConstants {
    */
   static final String BASE_DIR = System.getProperty("schema2template.base.dir") + File.separator;
 
-  /** base directory for all Apache Velocity templates in the ODF Toolkit */
-  private static final String ODFDOM_JAVA_TEMPLATE_DIR =
+  private static final String ODF_TEMPLATE_DIR =
       BASE_DIR
           + "src"
           + File.separator
@@ -50,8 +49,6 @@ class OdfConstants {
           + "odf"
           + File.separator
           + "template"
-          + File.separator
-          + "odfdom-java"
           + File.separator;
 
   /** base directory for all ODF specifications grammars in the ODF Toolkit */
@@ -70,22 +67,13 @@ class OdfConstants {
           + "grammar"
           + File.separator;
 
-  /**
-   * These information additional to the XML grammar contains information from the spec in machine
-   * readable form, e.g. default values, base classes, etc.
-   */
-  private static final String GRAMMAR_ADDITIONS_FILE__SCHEMA =
-      ODFDOM_JAVA_TEMPLATE_DIR + File.separator + "dom" + File.separator + "grammar-additions.xml";
+  private static final String GRAMMAR_ADDITIONS_DOM_FILE =
+      ODF_TEMPLATE_DIR + File.separator + "dom" + File.separator + "grammar-additions.xml";
+  private static final String GRAMMAR_ADDITIONS_PACKAGE_FILE =
+      ODF_TEMPLATE_DIR + File.separator + "pkg" + File.separator + "grammar-additions.xml";
 
-  private static final String GRAMMAR_ADDITIONS_FILE__PACKAGE =
-      ODFDOM_JAVA_TEMPLATE_DIR + File.separator + "pkg" + File.separator + "grammar-additions.xml";
-
-  /**
-   * Each ODF part has its own grammar and an own template to create typed Java DOM files from, this
-   * is the ODF manifest
-   */
   private static final String MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE =
-      ODFDOM_JAVA_TEMPLATE_DIR
+      ODF_TEMPLATE_DIR
           + File.separator
           + "pkg"
           + File.separator
@@ -97,7 +85,7 @@ class OdfConstants {
    * is the ODF digital signature
    */
   private static final String MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE =
-      ODFDOM_JAVA_TEMPLATE_DIR
+      ODF_TEMPLATE_DIR
           + File.separator
           + "pkg"
           + File.separator
@@ -109,7 +97,7 @@ class OdfConstants {
    * is the ODF schema
    */
   private static final String MAIN_TEMPLATE_ODF_SCHEMA_FILE =
-      ODFDOM_JAVA_TEMPLATE_DIR
+      ODF_TEMPLATE_DIR
           + File.separator
           + "dom"
           + File.separator

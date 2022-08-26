@@ -69,8 +69,10 @@ public class GenerationParameters {
     this.grammarVersion = grammarVersion;
     this.grammarID = grammarID;
     this.grammarPath = Paths.get(grammarPath).normalize().toAbsolutePath().toString();
-    this.grammarAdditionsPath =
-        Paths.get(grammarAdditionsPath).normalize().toAbsolutePath().toString();
+    if (grammarAdditionsPath != null) {
+      this.grammarAdditionsPath =
+          Paths.get(grammarAdditionsPath).normalize().toAbsolutePath().toString();
+    }
     this.mainTemplatePath = Paths.get(mainTemplatePath).normalize().toAbsolutePath().toString();
     this.targetDirPath = Paths.get(targetDirPath).normalize().toAbsolutePath().toString();
   }

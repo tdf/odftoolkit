@@ -1,5 +1,5 @@
 ##################################################################
-## 
+##
 ## Licensed to the Apache Software Foundation (ASF) under one
 ## or more contributor license agreements.  See the NOTICE file
 ## distributed with this work for additional information
@@ -7,9 +7,9 @@
 ## to you under the Apache License, Version 2.0 (the
 ## "License"); you may not use this file except in compliance
 ## with the License.  You may obtain a copy of the License at
-## 
+##
 ##  http://www.apache.org/licenses/LICENSE-2.0
-## 
+##
 ## Unless required by applicable law or agreed to in writing,
 ## software distributed under the License is distributed on an
 ## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -19,10 +19,12 @@
 ##
 ##################################################################
 <?xml version="1.0" encoding="UTF-8"?>
-## Template to create the list of artefacts which are to be generated
+## Context:
 ##
-## Documentation of template development can be found in local file
-## src/main/resources/documentation/help.html
+## The Velocity context is added up in the SchemaToTemplate.java
+## xmlModel - Represents an ODF grammar parsed by MSV with all relevant informations and usabiltiy functions
+## xmlModelHistory - sorted list from latest to earliest release to assist in finding new XML node additions (see odf-reference-template.vm)
+## But the Velocity context can also be extended by parameters from the calling main-template.
 ##
 <filelist>
     <file path="OdfReference.html" template="odf-reference-template.vm" />

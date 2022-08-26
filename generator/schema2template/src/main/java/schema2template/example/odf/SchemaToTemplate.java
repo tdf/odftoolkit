@@ -138,8 +138,8 @@ public class SchemaToTemplate {
       XMLModel xmlModel, List<XMLModel> xmlModelHistory, String grammarAdditionsFilePath)
       throws Exception {
     LOG.info("Starting initilization of Velocity context..");
+    VelocityContext context = new VelocityContext();
 
-    VelocityContext context = null;
     if (grammarAdditionsFilePath != null && !grammarAdditionsFilePath.isBlank()) {
       // Read grammar-additions.xml
       // Manual added Java specific info - Base class for inheritance
@@ -158,15 +158,14 @@ public class SchemaToTemplate {
           datatypeValueAndConversionMap);
       // odfConstants
       OdfModel odfModel = new OdfModel(elementStyleFamiliesMap, attributeDefaultMap);
+      context.put("odfModel", odfModel);
+
       // Needed for the base classes - common attributes are being moved into the base classes
       SourceCodeModel sourceCodeModel =
           new SourceCodeModel(
               xmlModel, odfModel, elementToBaseNameMap, datatypeValueAndConversionMap);
-      context = new VelocityContext();
-      context.put("xmlModel", xmlModel);
-      context.put("odfModel", odfModel);
       context.put("codeModel", sourceCodeModel);
-      context.put("xmlModelHistory", xmlModelHistory);
+
       Map<String, List<String>> styleFamilyPropertiesMap =
           new OdfFamilyPropertiesPatternMatcher(xmlModel.getGrammar()).getFamilyProperties();
       /* Only works for part 3 schema:
@@ -175,6 +174,8 @@ public class SchemaToTemplate {
       */
       context.put("styleFamilyPropertiesMap", styleFamilyPropertiesMap);
     }
+    context.put("xmlModel", xmlModel);
+    context.put("xmlModelHistory", xmlModelHistory);
     LOG.info("Finished initialization..");
     return context;
   }
@@ -236,8 +237,12 @@ public class SchemaToTemplate {
         case FILE:
           LOG.log(
               Level.INFO,
-              "Processing line {0}: Generating file {1}\n",
-              new Object[] {f.getLineNumber(), generateFilename(f.getAttribute("path"))});
+              "Processing line {0}: \n\tGenerating file:\n\t\t{1}\n\t\t{2}",
+              new Object[] {
+                f.getLineNumber(),
+                targetDirPath + File.separator,
+                generateFilename(f.getAttribute("path"))
+              });
           ;
           String contextAttrValue = f.getAttribute("contextNode");
           if (contextAttrValue != null) {
