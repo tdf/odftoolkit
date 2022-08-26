@@ -28,10 +28,10 @@ import static schema2template.example.odf.OdfConstants.ODF13_ATTRIBUTE_DUPLICATE
 import static schema2template.example.odf.OdfConstants.ODF13_ATTRIBUTE_NUMBER;
 import static schema2template.example.odf.OdfConstants.ODF13_ELEMENT_DUPLICATES;
 import static schema2template.example.odf.OdfConstants.ODF13_ELEMENT_NUMBER;
-import static schema2template.example.odf.OdfConstants.ODF_1_0_SCHEMA_GRAMMAR;
-import static schema2template.example.odf.OdfConstants.ODF_1_1_SCHEMA_GRAMMAR;
-import static schema2template.example.odf.OdfConstants.ODF_1_2_SCHEMA_GRAMMAR;
-import static schema2template.example.odf.OdfConstants.ODF_1_3_SCHEMA_GRAMMAR;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_0_SCHEMA;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_1_SCHEMA;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_2_SCHEMA;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_3_SCHEMA;
 import static schema2template.example.odf.SchemaToTemplate.DEBUG;
 
 import com.sun.msv.grammar.Expression;
@@ -259,7 +259,7 @@ public class PuzzlePieceTest {
       //          SchemaToTemplate.loadSchemaODF12(),
       //          allElements_ODF12,
       //          allAttributes_ODF12,
-      //          SchemaToTemplate.ODF_1_2_SCHEMA_GRAMMAR);
+      //          SchemaToTemplate.ODF_1_2_SCHEMA.grammarPath);
       //      // There is a difference of one wildcard "*" representing anyElement/anyAttribute
       //      checkFoundNumber(allElements_ODF12.withoutMultiples(), ODF12_ELEMENT_NUMBER,
       // "element");
@@ -269,7 +269,7 @@ public class PuzzlePieceTest {
       PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF_1_3_SCHEMA_GRAMMAR);
+          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF_1_3_SCHEMA.grammarPath);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
       checkFoundNumber(
           allElements_ODF13.withoutMultiples(), ODF13_ELEMENT_NUMBER, "element", "ODF 1.3");
@@ -297,15 +297,15 @@ public class PuzzlePieceTest {
       PuzzlePieceSet allElements_ODF13 = new PuzzlePieceSet();
       PuzzlePieceSet allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF_1_3_SCHEMA_GRAMMAR);
+          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF_1_3_SCHEMA.grammarPath);
       allElements_ODF13 = new PuzzlePieceSet();
       allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF_1_3_SCHEMA_GRAMMAR);
+          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF_1_3_SCHEMA.grammarPath);
       allElements_ODF13 = new PuzzlePieceSet();
       allAttributes_ODF13 = new PuzzlePieceSet();
       PuzzlePiece.extractPuzzlePieces(
-          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF_1_3_SCHEMA_GRAMMAR);
+          loadSchemaODF13(), allElements_ODF13, allAttributes_ODF13, ODF_1_3_SCHEMA.grammarPath);
       // There is a difference of one wildcard "*" representing anyElement/anyAttribute
       foundElementDuplicates = allElements_ODF13.size() - ODF13_ELEMENT_NUMBER;
       foundAttributeDuplicates = allAttributes_ODF13.size() - ODF13_ATTRIBUTE_NUMBER;
@@ -381,7 +381,7 @@ public class PuzzlePieceTest {
    * @throws Exception
    */
   static Grammar loadSchemaODF10() throws Exception {
-    return XMLModel.loadSchema(ODF_1_0_SCHEMA_GRAMMAR);
+    return XMLModel.loadSchema(ODF_1_0_SCHEMA.grammarPath);
   }
 
   /**
@@ -392,7 +392,7 @@ public class PuzzlePieceTest {
    * @throws Exception
    */
   static Grammar loadSchemaODF11() throws Exception {
-    return XMLModel.loadSchema(ODF_1_1_SCHEMA_GRAMMAR);
+    return XMLModel.loadSchema(ODF_1_1_SCHEMA.grammarPath);
   }
 
   /**
@@ -403,7 +403,7 @@ public class PuzzlePieceTest {
    * @throws Exception
    */
   static Grammar loadSchemaODF12() throws Exception {
-    return XMLModel.loadSchema(ODF_1_2_SCHEMA_GRAMMAR);
+    return XMLModel.loadSchema(ODF_1_2_SCHEMA.grammarPath);
   }
 
   /**
@@ -414,6 +414,6 @@ public class PuzzlePieceTest {
    * @throws Exception
    */
   static Grammar loadSchemaODF13() throws Exception {
-    return XMLModel.loadSchema(ODF_1_3_SCHEMA_GRAMMAR);
+    return XMLModel.loadSchema(ODF_1_3_SCHEMA.grammarPath);
   }
 }

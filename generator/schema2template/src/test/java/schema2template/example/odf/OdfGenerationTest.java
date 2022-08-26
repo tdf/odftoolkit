@@ -22,28 +22,16 @@
 package schema2template.example.odf;
 
 import static schema2template.example.odf.OdfConstants.GENERATED_ODFDOM_REFERENCE;
-import static schema2template.example.odf.OdfConstants.GRAMMAR_ADDITIONS_DOM_FILE;
-import static schema2template.example.odf.OdfConstants.GRAMMAR_ADDITIONS_PKG_FILE;
-import static schema2template.example.odf.OdfConstants.MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE;
-import static schema2template.example.odf.OdfConstants.MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE;
-import static schema2template.example.odf.OdfConstants.MAIN_TEMPLATE_ODF_SCHEMA_FILE;
-import static schema2template.example.odf.OdfConstants.ODF_1_0_PACKAGE_MANIFEST_GRAMMAR;
-import static schema2template.example.odf.OdfConstants.ODF_1_0_SCHEMA_GRAMMAR;
-import static schema2template.example.odf.OdfConstants.ODF_1_1_PACKAGE_MANIFEST_GRAMMAR;
-import static schema2template.example.odf.OdfConstants.ODF_1_1_SCHEMA_GRAMMAR;
-import static schema2template.example.odf.OdfConstants.ODF_1_2_PACKAGE_MANIFEST_GRAMMAR;
-import static schema2template.example.odf.OdfConstants.ODF_1_2_PACKAGE_SIGNATURE_GRAMMAR;
-import static schema2template.example.odf.OdfConstants.ODF_1_2_SCHEMA_GRAMMAR;
-import static schema2template.example.odf.OdfConstants.ODF_1_3_PACKAGE_MANIFEST_GRAMMAR;
-import static schema2template.example.odf.OdfConstants.ODF_1_3_PACKAGE_SIGNATURE_GRAMMAR;
-import static schema2template.example.odf.OdfConstants.ODF_1_3_SCHEMA_GRAMMAR;
-import static schema2template.example.odf.OdfConstants.ODF_PACKAGE_MANIFEST_ID;
-import static schema2template.example.odf.OdfConstants.ODF_PACKAGE_SIGNATURE_ID;
-import static schema2template.example.odf.OdfConstants.ODF_SCHEMA_ID;
-import static schema2template.example.odf.OdfConstants.ODF_VERSION_1_0;
-import static schema2template.example.odf.OdfConstants.ODF_VERSION_1_1;
-import static schema2template.example.odf.OdfConstants.ODF_VERSION_1_2;
-import static schema2template.example.odf.OdfConstants.ODF_VERSION_1_3;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_0_PACKAGE_MANIFEST;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_0_SCHEMA;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_1_PACKAGE_MANIFEST;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_1_SCHEMA;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_2_PACKAGE_MANIFEST;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_2_PACKAGE_SIGNATURE;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_2_SCHEMA;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_3_PACKAGE_MANIFEST;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_3_PACKAGE_SIGNATURE;
+import static schema2template.example.odf.OdfConstants.OdfSpecificationPart.ODF_1_3_SCHEMA;
 import static schema2template.example.odf.OdfConstants.TARGET_BASE_DIR;
 
 import java.io.IOException;
@@ -52,7 +40,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import schema2template.GenerationParameters;
 
@@ -62,7 +49,6 @@ public class OdfGenerationTest {
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test
-  @Ignore
   public void testAllExampleGenerations() {
     try {
 
@@ -71,95 +57,96 @@ public class OdfGenerationTest {
       // ******** ODF 1.3 *************
       generations.add(
           new GenerationParameters(
-              ODF_VERSION_1_3,
-              ODF_SCHEMA_ID,
-              ODF_1_3_SCHEMA_GRAMMAR,
-              GRAMMAR_ADDITIONS_DOM_FILE,
-              MAIN_TEMPLATE_ODF_SCHEMA_FILE,
-              TARGET_BASE_DIR));
+              ODF_1_3_SCHEMA.grammarVersion,
+              ODF_1_3_SCHEMA.grammarID,
+              ODF_1_3_SCHEMA.grammarPath,
+              ODF_1_3_SCHEMA.grammarAdditionsPath,
+              ODF_1_3_SCHEMA.mainTemplatePath,
+              ODF_1_3_SCHEMA.targetDirPath));
 
       generations.add(
           new GenerationParameters(
-              ODF_VERSION_1_3,
-              ODF_PACKAGE_MANIFEST_ID,
-              ODF_1_3_PACKAGE_MANIFEST_GRAMMAR,
-              GRAMMAR_ADDITIONS_PKG_FILE,
-              MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
-              TARGET_BASE_DIR));
+              ODF_1_3_PACKAGE_MANIFEST.grammarVersion,
+              ODF_1_3_PACKAGE_MANIFEST.grammarID,
+              ODF_1_3_PACKAGE_MANIFEST.grammarPath,
+              ODF_1_3_PACKAGE_MANIFEST.grammarAdditionsPath,
+              ODF_1_3_PACKAGE_MANIFEST.mainTemplatePath,
+              ODF_1_3_PACKAGE_MANIFEST.targetDirPath));
 
       generations.add(
           new GenerationParameters(
-              ODF_VERSION_1_3,
-              ODF_PACKAGE_SIGNATURE_ID,
-              ODF_1_3_PACKAGE_SIGNATURE_GRAMMAR,
-              GRAMMAR_ADDITIONS_PKG_FILE,
-              MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE,
-              TARGET_BASE_DIR));
+              ODF_1_3_PACKAGE_SIGNATURE.grammarVersion,
+              ODF_1_3_PACKAGE_SIGNATURE.grammarID,
+              ODF_1_3_PACKAGE_SIGNATURE.grammarPath,
+              ODF_1_3_PACKAGE_SIGNATURE.grammarAdditionsPath,
+              ODF_1_3_PACKAGE_SIGNATURE.mainTemplatePath,
+              ODF_1_3_PACKAGE_SIGNATURE.targetDirPath));
 
       // ******** ODF 1.2 *************
       generations.add(
           new GenerationParameters(
-              ODF_VERSION_1_2,
-              ODF_SCHEMA_ID,
-              ODF_1_2_SCHEMA_GRAMMAR,
-              GRAMMAR_ADDITIONS_DOM_FILE,
-              MAIN_TEMPLATE_ODF_SCHEMA_FILE,
-              TARGET_BASE_DIR));
+              ODF_1_2_SCHEMA.grammarVersion,
+              ODF_1_2_SCHEMA.grammarID,
+              ODF_1_2_SCHEMA.grammarPath,
+              ODF_1_2_SCHEMA.grammarAdditionsPath,
+              ODF_1_2_SCHEMA.mainTemplatePath,
+              ODF_1_2_SCHEMA.targetDirPath));
 
       generations.add(
           new GenerationParameters(
-              ODF_VERSION_1_2,
-              ODF_PACKAGE_MANIFEST_ID,
-              ODF_1_2_PACKAGE_MANIFEST_GRAMMAR,
-              GRAMMAR_ADDITIONS_PKG_FILE,
-              MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
-              TARGET_BASE_DIR));
+              ODF_1_2_PACKAGE_MANIFEST.grammarVersion,
+              ODF_1_2_PACKAGE_MANIFEST.grammarID,
+              ODF_1_2_PACKAGE_MANIFEST.grammarPath,
+              ODF_1_2_PACKAGE_MANIFEST.grammarAdditionsPath,
+              ODF_1_2_PACKAGE_MANIFEST.mainTemplatePath,
+              ODF_1_2_PACKAGE_MANIFEST.targetDirPath));
 
       generations.add(
           new GenerationParameters(
-              ODF_VERSION_1_2,
-              ODF_PACKAGE_SIGNATURE_ID,
-              ODF_1_2_PACKAGE_SIGNATURE_GRAMMAR,
-              GRAMMAR_ADDITIONS_PKG_FILE,
-              MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE,
-              TARGET_BASE_DIR));
+              ODF_1_2_PACKAGE_SIGNATURE.grammarVersion,
+              ODF_1_2_PACKAGE_SIGNATURE.grammarID,
+              ODF_1_2_PACKAGE_SIGNATURE.grammarPath,
+              ODF_1_2_PACKAGE_SIGNATURE.grammarAdditionsPath,
+              ODF_1_2_PACKAGE_SIGNATURE.mainTemplatePath,
+              ODF_1_2_PACKAGE_SIGNATURE.targetDirPath));
 
       // ******** ODF 1.1 *************
       generations.add(
           new GenerationParameters(
-              ODF_VERSION_1_1,
-              ODF_SCHEMA_ID,
-              ODF_1_1_SCHEMA_GRAMMAR,
-              GRAMMAR_ADDITIONS_DOM_FILE,
-              MAIN_TEMPLATE_ODF_SCHEMA_FILE,
-              TARGET_BASE_DIR));
+              ODF_1_1_SCHEMA.grammarVersion,
+              ODF_1_1_SCHEMA.grammarID,
+              ODF_1_1_SCHEMA.grammarPath,
+              ODF_1_1_SCHEMA.grammarAdditionsPath,
+              ODF_1_1_SCHEMA.mainTemplatePath,
+              ODF_1_1_SCHEMA.targetDirPath));
 
       generations.add(
           new GenerationParameters(
-              ODF_VERSION_1_1,
-              ODF_PACKAGE_MANIFEST_ID,
-              ODF_1_1_PACKAGE_MANIFEST_GRAMMAR,
-              GRAMMAR_ADDITIONS_PKG_FILE,
-              MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
-              TARGET_BASE_DIR));
+              ODF_1_1_PACKAGE_MANIFEST.grammarVersion,
+              ODF_1_1_PACKAGE_MANIFEST.grammarID,
+              ODF_1_1_PACKAGE_MANIFEST.grammarPath,
+              ODF_1_1_PACKAGE_MANIFEST.grammarAdditionsPath,
+              ODF_1_1_PACKAGE_MANIFEST.mainTemplatePath,
+              ODF_1_1_PACKAGE_MANIFEST.targetDirPath));
 
       // ******** ODF 1.0 *************
       generations.add(
           new GenerationParameters(
-              ODF_VERSION_1_0,
-              ODF_SCHEMA_ID,
-              ODF_1_0_SCHEMA_GRAMMAR,
-              GRAMMAR_ADDITIONS_DOM_FILE,
-              MAIN_TEMPLATE_ODF_SCHEMA_FILE,
-              TARGET_BASE_DIR));
+              ODF_1_0_SCHEMA.grammarVersion,
+              ODF_1_0_SCHEMA.grammarID,
+              ODF_1_0_SCHEMA.grammarPath,
+              ODF_1_0_SCHEMA.grammarAdditionsPath,
+              ODF_1_0_SCHEMA.mainTemplatePath,
+              ODF_1_0_SCHEMA.targetDirPath));
+
       generations.add(
           new GenerationParameters(
-              ODF_VERSION_1_0,
-              ODF_PACKAGE_MANIFEST_ID,
-              ODF_1_0_PACKAGE_MANIFEST_GRAMMAR,
-              GRAMMAR_ADDITIONS_PKG_FILE,
-              MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
-              TARGET_BASE_DIR));
+              ODF_1_0_PACKAGE_MANIFEST.grammarVersion,
+              ODF_1_0_PACKAGE_MANIFEST.grammarID,
+              ODF_1_0_PACKAGE_MANIFEST.grammarPath,
+              ODF_1_0_PACKAGE_MANIFEST.grammarAdditionsPath,
+              ODF_1_0_PACKAGE_MANIFEST.mainTemplatePath,
+              ODF_1_0_PACKAGE_MANIFEST.targetDirPath));
 
       SchemaToTemplate.run(generations);
 
