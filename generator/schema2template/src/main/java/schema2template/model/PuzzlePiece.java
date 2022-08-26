@@ -111,6 +111,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
     // evaluateExpression(exp);
   }
 
+  /** @return the name or if no name "null" or a list of names as a string separated by " | "! */
   public static String getName(NameClassAndExpression exp) {
     String name = null;
     List<String> names = (List<String>) exp.getNameClass().visit(NAME_VISITOR);
