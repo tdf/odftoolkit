@@ -146,7 +146,6 @@ class OdfConstants {
         "OpenDocument-v1.3-manifest-schema.rng",
         GRAMMAR_ADDITIONS_PACKAGE_FILE,
         MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
-        TARGET_BASE_DIR,
         ODF13_MANIFEST_ELEMENT_NUMBER,
         ODF13_MANIFEST_ATTRIBUTE_NUMBER,
         ODF13_MANIFEST_ELEMENTS_WITH_DUPLICATES,
@@ -157,7 +156,6 @@ class OdfConstants {
         "OpenDocument-v1.3-dsig-schema.rng",
         GRAMMAR_ADDITIONS_PACKAGE_FILE,
         MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE,
-        TARGET_BASE_DIR,
         ODF13_SIGNATURE_ELEMENT_NUMBER,
         ODF13_SIGNATURE_ATTRIBUTE_NUMBER,
         ODF13_SIGNATURE_ELEMENTS_WITH_DUPLICATES,
@@ -168,7 +166,6 @@ class OdfConstants {
         "OpenDocument-v1.3-schema.rng",
         GRAMMAR_ADDITIONS_DOM_FILE,
         MAIN_TEMPLATE_ODF_SCHEMA_FILE,
-        TARGET_BASE_DIR,
         ODF13_ELEMENT_NUMBER,
         ODF13_ATTRIBUTE_NUMBER,
         ODF13_ELEMENTS_WITH_DUPLICATES,
@@ -179,7 +176,6 @@ class OdfConstants {
         "OpenDocument-v1.2-os-manifest-schema.rng",
         GRAMMAR_ADDITIONS_PACKAGE_FILE,
         MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
-        TARGET_BASE_DIR,
         ODF12_MANIFEST_ELEMENT_NUMBER,
         ODF12_MANIFEST_ATTRIBUTE_NUMBER,
         ODF12_MANIFEST_ELEMENTS_WITH_DUPLICATES,
@@ -190,7 +186,6 @@ class OdfConstants {
         "OpenDocument-v1.2-os-dsig-schema.rng",
         GRAMMAR_ADDITIONS_PACKAGE_FILE,
         MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE,
-        TARGET_BASE_DIR,
         ODF12_SIGNATURE_ELEMENT_NUMBER,
         ODF12_SIGNATURE_ATTRIBUTE_NUMBER,
         ODF12_SIGNATURE_ELEMENTS_WITH_DUPLICATES,
@@ -201,7 +196,6 @@ class OdfConstants {
         "OpenDocument-v1.2-os-schema.rng",
         GRAMMAR_ADDITIONS_DOM_FILE,
         MAIN_TEMPLATE_ODF_SCHEMA_FILE,
-        TARGET_BASE_DIR,
         ODF12_ELEMENT_NUMBER,
         ODF12_ATTRIBUTE_NUMBER,
         ODF12_ELEMENTS_WITH_DUPLICATES,
@@ -212,7 +206,6 @@ class OdfConstants {
         "OpenDocument-manifest-schema-v1.1.rng",
         GRAMMAR_ADDITIONS_PACKAGE_FILE,
         MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
-        TARGET_BASE_DIR,
         ODF11_MANIFEST_ELEMENT_NUMBER,
         ODF11_MANIFEST_ATTRIBUTE_NUMBER,
         ODF11_MANIFEST_ELEMENTS_WITH_DUPLICATES,
@@ -223,7 +216,6 @@ class OdfConstants {
         "OpenDocument-schema-v1.1.rng",
         GRAMMAR_ADDITIONS_DOM_FILE,
         MAIN_TEMPLATE_ODF_SCHEMA_FILE,
-        TARGET_BASE_DIR,
         ODF11_ELEMENT_NUMBER,
         ODF11_ATTRIBUTE_NUMBER,
         ODF11_ELEMENTS_WITH_DUPLICATES,
@@ -234,7 +226,6 @@ class OdfConstants {
         "OpenDocument-manifest-schema-v1.0-os.rng",
         GRAMMAR_ADDITIONS_PACKAGE_FILE,
         MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
-        TARGET_BASE_DIR,
         ODF10_MANIFEST_ELEMENT_NUMBER,
         ODF10_MANIFEST_ATTRIBUTE_NUMBER,
         ODF10_MANIFEST_ELEMENTS_WITH_DUPLICATES,
@@ -245,7 +236,6 @@ class OdfConstants {
         "OpenDocument-schema-v1.0-os.rng",
         GRAMMAR_ADDITIONS_DOM_FILE,
         MAIN_TEMPLATE_ODF_SCHEMA_FILE,
-        TARGET_BASE_DIR,
         ODF10_ELEMENT_NUMBER,
         ODF10_ATTRIBUTE_NUMBER,
         ODF10_ELEMENTS_WITH_DUPLICATES,
@@ -256,7 +246,6 @@ class OdfConstants {
     public final String grammarPath;
     public final String grammarAdditionsPath;
     public final String mainTemplatePath;
-    public final String targetDirPath;
     public final int elementNo;
     public final int attributeNo;
     public final int elementDuplicateNo;
@@ -269,7 +258,6 @@ class OdfConstants {
         String grammarPath,
         String grammarAdditionsPath,
         String mainTemplatePath,
-        String targetDirPath,
         int elementNo,
         int attributeNo,
         int elementDuplicateNo,
@@ -279,7 +267,6 @@ class OdfConstants {
       this.grammarPath = ODF_GRAMMAR_PATH + grammarPath;
       this.grammarAdditionsPath = grammarAdditionsPath;
       this.mainTemplatePath = mainTemplatePath;
-      this.targetDirPath = targetDirPath;
       this.elementNo = elementNo;
       this.attributeNo = attributeNo;
       this.elementDuplicateNo = elementDuplicateNo;

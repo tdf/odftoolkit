@@ -433,6 +433,29 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
       PuzzlePieceSet newElementSet,
       PuzzlePieceSet newAttributeSet,
       String schemaFileName) {
+    extractPuzzlePieces(grammar, newElementSet, newAttributeSet, schemaFileName, null);
+  }
+
+  /**
+   * Creates all PuzzlePiece objects from MSV root tree.
+   *
+   * <p>The PuzzlePiece objects are all made immutable to protect them against changes by naive
+   * template usage. Note that the Sets of all elements/attributes can only be made immutable by the
+   * caller after this method run.
+   *
+   * @param grammar the parsed grammar as MSV grammar representation
+   * @param newElementSet empty Set. Will be filled with Definitions of Type.ELEMENT
+   * @param newAttributeSet empty Set. Will be filled with Definitions of Type.ATTRIBUTE
+   * @param schemaFileName file name of the XML grammar file.
+   * @param graphMLTargetDir if a directory path is given all elements are being saved as GraphML
+   *     file containing childnodes.
+   */
+  public static void extractPuzzlePieces(
+      Grammar grammar,
+      PuzzlePieceSet newElementSet,
+      PuzzlePieceSet newAttributeSet,
+      String schemaFileName,
+      String graphMLTargetDir) {
     // e.g. the newElementSet is the set to iterate later in the template
     extractTypedPuzzlePieces(grammar, newElementSet, ElementExp.class);
     extractTypedPuzzlePieces(grammar, newAttributeSet, AttributeExp.class);
@@ -448,7 +471,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
     //        || newAttributeSet.size() == 1820);
     //    assert (!schemaFileName.equals(SchemaToTemplate.ODF13_RNG_FILE)
     //        || newAttributeSet.size() == 1836);
-    configureProperties(newElementSet, newAttributeSet, schemaFileName);
+    configureProperties(newElementSet, newAttributeSet, schemaFileName, graphMLTargetDir);
     reduceDatatypes(newAttributeSet);
 
     /*
@@ -630,7 +653,10 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
 
   // Sets Children, Attributes and Parents.
   private static void configureProperties(
-      PuzzlePieceSet elements, PuzzlePieceSet attributes, String schemaFileName) {
+      PuzzlePieceSet elements,
+      PuzzlePieceSet attributes,
+      String schemaFileName,
+      String graphMLTargetDir) {
     Map<Expression, List<PuzzlePiece>> reverseElementMap = buildReverseMap(elements);
     Map<Expression, List<PuzzlePiece>> reverseAttributeMap = buildReverseMap(attributes);
 
@@ -663,24 +689,13 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
           }
         }
       }
-      // 2DO: Better access this via lambda function to be able to inject this functionality by
-      // tests?
-      TinkerPopGraph tinkerPopGraph = new TinkerPopGraph(def.getExpression(), schemaFileName);
-      File f =
-          new File(
-              BASE_DIR
-                  + "target"
-                  + File.separator
-                  + "generated-sources"
-                  + File.separator
-                  + "java"
-                  + File.separator
-                  + "odf"
-                  + File.separator
-                  + "graphML"
-                  + File.separator);
-      f.mkdirs();
-      tinkerPopGraph.exportAsGraphML(f.getAbsolutePath());
+
+      if (graphMLTargetDir != null) {
+        TinkerPopGraph tinkerPopGraph = new TinkerPopGraph(def.getExpression(), schemaFileName);
+        File f = new File(graphMLTargetDir);
+        f.mkdirs();
+        tinkerPopGraph.exportAsGraphML(f.getAbsolutePath());
+      }
       MSVExpressionInformation elementInfo =
           new MSVExpressionInformation(def.getExpression(), schemaFileName);
       def.mCanHaveText = elementInfo.canHaveText();

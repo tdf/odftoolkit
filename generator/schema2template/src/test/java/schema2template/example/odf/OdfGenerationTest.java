@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import schema2template.GenerationParameters;
 import schema2template.example.odf.OdfConstants.OdfSpecificationPart;
@@ -38,28 +37,29 @@ import schema2template.example.odf.OdfConstants.OdfSpecificationPart;
 public class OdfGenerationTest {
 
   private static final Logger LOG = Logger.getLogger(OdfGenerationTest.class.getName());
+  private static final String ODFDOM_JAVA_DIRECTORY = "odfdom-java";
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test
-  @Ignore
   public void testAllExampleGenerations() {
     ArrayList<GenerationParameters> generations = new ArrayList<>();
 
     for (OdfSpecificationPart specPart : OdfSpecificationPart.values()) {
       LOG.info(
-          "New ODF transformation with following parameters:"
-              + "\ngrammarVersion "
+          "\n\nNew ODF transformation with following parameters:"
+              + "\n\tgrammarVersion "
               + specPart.grammarVersion
-              + "\ngrammarID: "
+              + "\n\tgrammarID: "
               + specPart.grammarID
-              + "\ngrammarPath: "
+              + "\n\tgrammarPath: "
               + specPart.grammarPath
-              + "\ngrammarAdditionsPath: "
+              + "\n\tgrammarAdditionsPath: "
               + specPart.grammarAdditionsPath
-              + "\nmainTemplatePath: "
+              + "\n\tmainTemplatePath: "
               + specPart.mainTemplatePath
-              + "\ntargetDirPath: "
-              + specPart.targetDirPath);
+              + "\n\ttargetDirPath: "
+              + TARGET_BASE_DIR
+              + ODFDOM_JAVA_DIRECTORY);
 
       generations.add(
           new GenerationParameters(
@@ -68,11 +68,12 @@ public class OdfGenerationTest {
               specPart.grammarPath,
               specPart.grammarAdditionsPath,
               specPart.mainTemplatePath,
-              specPart.targetDirPath));
+              TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY));
     }
 
     SchemaToTemplate.run(generations);
-    compareDirectories(TARGET_BASE_DIR + "odfdom-java", REFERENCE_BASE_DIR + "odfdom-java");
+    compareDirectories(
+        TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY, REFERENCE_BASE_DIR + ODFDOM_JAVA_DIRECTORY);
   }
 
   public static boolean compareDirectories(String newFileDir, String RefFileDir) {
