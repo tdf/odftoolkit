@@ -23,84 +23,29 @@
  */
 package schema2template.example.odf;
 
-import static schema2template.example.odf.DirectoryCompare.compareDirectories;
-import static schema2template.example.odf.OdfConstants.REFERENCE_BASE_DIR;
 import static schema2template.example.odf.OdfConstants.TARGET_BASE_DIR;
 import static schema2template.example.odf.SchemaToTemplate.DEBUG;
 
-import com.sun.msv.grammar.Expression;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import schema2template.example.odf.OdfConstants.OdfSpecificationPart;
-import schema2template.model.MSVExpressionIterator;
 import schema2template.model.PuzzlePiece;
 import schema2template.model.PuzzlePieceSet;
 import schema2template.model.XMLModel;
 
 /**
- * Uses PuzzlePieceTest to do two tests. Loading each ODF Grammar into the MSV using our PuzzlePiece
- * class. 1. Dumping each MSV model into a file. 2. Testing the amount of elements and attributes of
- * each ODF grammar part
+ * Loading each ODF Grammar into the MSV using our PuzzlePiece class and testing the amount of
+ * elements and attributes of each ODF grammar part and generating GraphML serialization of the MSV
+ * Expression Tree.
  */
-public class PuzzlePieceTest {
+public class MSVGraphMLExportTest {
 
-  private static final Logger LOG = Logger.getLogger(PuzzlePieceTest.class.getName());
+  private static final Logger LOG = Logger.getLogger(MSVGraphMLExportTest.class.getName());
 
-  private static final String MSV_DUMP_DIRECTORY = "msv-dump";
   private static final String GRAPHML_DIRECTORY = "graphml";
-
-  @Before
-  public void intialize() {
-    new File(TARGET_BASE_DIR + MSV_DUMP_DIRECTORY).mkdirs();
-  }
-
-  /**
-   * This test iterates over all ODF grammars loads them into the MSV Validator and dumps the
-   * run-time model (ExpressionTree) into a file.
-   */
-  @Test
-  public void testMSVExpressionTree() {
-    try {
-      for (OdfSpecificationPart specPart : OdfSpecificationPart.values()) {
-        LOG.info(
-            "\n\nNew ODF grammar runtime serialization (MSV dump) for regression test:"
-                + "\n\tgrammarVersion "
-                + specPart.grammarVersion
-                + "\n\tgrammarID: "
-                + specPart.grammarID
-                + "\n\tgrammarPath: "
-                + specPart.grammarPath
-                + "\n\ttargetDirPath: "
-                + TARGET_BASE_DIR
-                + MSV_DUMP_DIRECTORY);
-        Expression odfRoot = XMLModel.loadSchema(specPart.grammarPath).getTopLevel();
-        String odfDump = MSVExpressionIterator.dumpMSVExpressionTree(odfRoot);
-
-        String grammarLabel = specPart.grammarID + "-" + specPart.grammarVersion;
-
-        String targetMSVDumpFile =
-            TARGET_BASE_DIR + MSV_DUMP_DIRECTORY + File.separator + grammarLabel + "-msvtree.txt";
-        LOG.log(
-            Level.INFO,
-            "Writing MSV RelaxNG tree for " + grammarLabel + " + into file: {0}",
-            targetMSVDumpFile);
-        try (PrintWriter out = new PrintWriter(new FileWriter(targetMSVDumpFile))) {
-          out.print(odfDump);
-        }
-      }
-      compareDirectories(
-          TARGET_BASE_DIR + MSV_DUMP_DIRECTORY, REFERENCE_BASE_DIR + MSV_DUMP_DIRECTORY);
-    } catch (Exception ex) {
-      Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
-      Assert.fail(ex.toString());
-    }
-  }
 
   /**
    * This regression test iterates over all ODF grammars loads them into the MSV Validator and is
@@ -173,7 +118,7 @@ public class PuzzlePieceTest {
       //          TARGET_BASE_DIR + GRAPHML_DIRECTORY,
       //          REFERENCE_BASE_DIR + GRAPHML_DIRECTORY);
     } catch (Exception ex) {
-      Logger.getLogger(PuzzlePieceTest.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(MSVGraphMLExportTest.class.getName()).log(Level.SEVERE, null, ex);
       Assert.fail(ex.toString());
     }
   }
