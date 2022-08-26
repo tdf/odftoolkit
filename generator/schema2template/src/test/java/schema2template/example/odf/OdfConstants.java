@@ -21,75 +21,10 @@
  */
 package schema2template.example.odf;
 
-import java.io.File;
+import static schema2template.example.odf.BuildEnvConstants.ODF_GRAMMAR_BASE_DIR;
 
 /** Contains all test relevant constants related to ODF */
 class OdfConstants {
-
-  /**
-   * Via Maven pom.xml (surefire test plugin) received System variable of the absolute path of the
-   * base directory
-   *
-   * @see https://cwiki.apache.org/confluence/display/MAVEN/Maven+Properties+Guide
-   *     <p>The absolute path to the pom directory of this submodule, which is relative to project
-   *     root ./generator/schema2template
-   */
-  static final String BASE_DIR = System.getProperty("schema2template.base.dir") + File.separator;
-
-  static final String TEMPLATE_BASE_DIR =
-      BASE_DIR
-          + "src"
-          + File.separator
-          + "test"
-          + File.separator
-          + "resources"
-          + File.separator
-          + "test-input"
-          + File.separator
-          + "odf"
-          + File.separator
-          + "template"
-          + File.separator;
-
-  /** base directory for all ODF specifications grammars in the ODF Toolkit */
-  private static final String ODF_GRAMMAR_BASE_DIR =
-      BASE_DIR
-          + "src"
-          + File.separator
-          + "test"
-          + File.separator
-          + "resources"
-          + File.separator
-          + "test-input"
-          + File.separator
-          + "odf"
-          + File.separator
-          + "grammar"
-          + File.separator;
-
-  // BTW the Maven default output directory for generated sources is target/generated-sources/
-  static final String TARGET_BASE_DIR =
-      BASE_DIR
-          + "target"
-          + File.separator
-          + "generated-sources"
-          + File.separator
-          + "odf"
-          + File.separator;
-
-  /** The base dir of all references to be compared with the new created test artefacts */
-  static final String REFERENCE_BASE_DIR =
-      BASE_DIR
-          + "src"
-          + File.separator
-          + "test"
-          + File.separator
-          + "resources"
-          + File.separator
-          + "test-reference"
-          + File.separator
-          + "odf"
-          + File.separator;
 
   /**
    * The GrammarID defines the part across specifciations to make it comparable (e.g. for API
