@@ -36,7 +36,7 @@ class OdfConstants {
    */
   static final String BASE_DIR = System.getProperty("schema2template.base.dir") + File.separator;
 
-  private static final String ODF_TEMPLATE_DIR =
+  static final String TEMPLATE_BASE_DIR =
       BASE_DIR
           + "src"
           + File.separator
@@ -66,44 +66,6 @@ class OdfConstants {
           + File.separator
           + "grammar"
           + File.separator;
-
-  private static final String GRAMMAR_ADDITIONS_DOM_FILE =
-      ODF_TEMPLATE_DIR + File.separator + "dom" + File.separator + "grammar-additions.xml";
-  private static final String GRAMMAR_ADDITIONS_PACKAGE_FILE =
-      ODF_TEMPLATE_DIR + File.separator + "pkg" + File.separator + "grammar-additions.xml";
-
-  private static final String MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE =
-      ODF_TEMPLATE_DIR
-          + File.separator
-          + "pkg"
-          + File.separator
-          + "template"
-          + File.separator
-          + "pkg-manifest-main-template.vm";
-  /**
-   * Each ODF part has its own grammar and an own template to create typed Java DOM files from, this
-   * is the ODF digital signature
-   */
-  private static final String MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE =
-      ODF_TEMPLATE_DIR
-          + File.separator
-          + "pkg"
-          + File.separator
-          + "template"
-          + File.separator
-          + "pkg-dsig-main-template.vm";
-  /**
-   * Each ODF part has its own grammar and an own template to create typed Java DOM files from, this
-   * is the ODF schema
-   */
-  private static final String MAIN_TEMPLATE_ODF_SCHEMA_FILE =
-      ODF_TEMPLATE_DIR
-          + File.separator
-          + "dom"
-          + File.separator
-          + "template"
-          + File.separator
-          + "java-odfdom-main-template.vm";
 
   // BTW the Maven default output directory for generated sources is target/generated-sources/
   static final String TARGET_BASE_DIR =
@@ -157,8 +119,6 @@ class OdfConstants {
         "1.3",
         GrammarID.ODF_MANIFEST,
         "OpenDocument-v1.3-manifest-schema.rng",
-        GRAMMAR_ADDITIONS_FILE__PACKAGE,
-        MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
         ODF13_MANIFEST_ELEMENT_NUMBER,
         ODF13_MANIFEST_ATTRIBUTE_NUMBER,
         ODF13_MANIFEST_ELEMENTS_WITH_DUPLICATES,
@@ -167,8 +127,6 @@ class OdfConstants {
         "1.3",
         GrammarID.ODF_SIGNATURE,
         "OpenDocument-v1.3-dsig-schema.rng",
-        GRAMMAR_ADDITIONS_FILE__PACKAGE,
-        MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE,
         ODF13_SIGNATURE_ELEMENT_NUMBER,
         ODF13_SIGNATURE_ATTRIBUTE_NUMBER,
         ODF13_SIGNATURE_ELEMENTS_WITH_DUPLICATES,
@@ -177,8 +135,6 @@ class OdfConstants {
         "1.3",
         GrammarID.ODF_SCHEMA,
         "OpenDocument-v1.3-schema.rng",
-        GRAMMAR_ADDITIONS_FILE__SCHEMA,
-        MAIN_TEMPLATE_ODF_SCHEMA_FILE,
         ODF13_ELEMENT_NUMBER,
         ODF13_ATTRIBUTE_NUMBER,
         ODF13_ELEMENTS_WITH_DUPLICATES,
@@ -187,8 +143,6 @@ class OdfConstants {
         "1.2",
         GrammarID.ODF_MANIFEST,
         "OpenDocument-v1.2-os-manifest-schema.rng",
-        GRAMMAR_ADDITIONS_FILE__PACKAGE,
-        MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
         ODF12_MANIFEST_ELEMENT_NUMBER,
         ODF12_MANIFEST_ATTRIBUTE_NUMBER,
         ODF12_MANIFEST_ELEMENTS_WITH_DUPLICATES,
@@ -197,8 +151,6 @@ class OdfConstants {
         "1.2",
         GrammarID.ODF_SIGNATURE,
         "OpenDocument-v1.2-os-dsig-schema.rng",
-        GRAMMAR_ADDITIONS_FILE__PACKAGE,
-        MAIN_TEMPLATE_ODF_PACKAGE_SIGNATURE_FILE,
         ODF12_SIGNATURE_ELEMENT_NUMBER,
         ODF12_SIGNATURE_ATTRIBUTE_NUMBER,
         ODF12_SIGNATURE_ELEMENTS_WITH_DUPLICATES,
@@ -207,8 +159,6 @@ class OdfConstants {
         "1.2",
         GrammarID.ODF_SCHEMA,
         "OpenDocument-v1.2-os-schema.rng",
-        GRAMMAR_ADDITIONS_FILE__SCHEMA,
-        MAIN_TEMPLATE_ODF_SCHEMA_FILE,
         ODF12_ELEMENT_NUMBER,
         ODF12_ATTRIBUTE_NUMBER,
         ODF12_ELEMENTS_WITH_DUPLICATES,
@@ -217,8 +167,6 @@ class OdfConstants {
         "1.1",
         GrammarID.ODF_MANIFEST,
         "OpenDocument-manifest-schema-v1.1.rng",
-        GRAMMAR_ADDITIONS_FILE__PACKAGE,
-        MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
         ODF11_MANIFEST_ELEMENT_NUMBER,
         ODF11_MANIFEST_ATTRIBUTE_NUMBER,
         ODF11_MANIFEST_ELEMENTS_WITH_DUPLICATES,
@@ -227,8 +175,6 @@ class OdfConstants {
         "1.1",
         GrammarID.ODF_SCHEMA,
         "OpenDocument-schema-v1.1.rng",
-        GRAMMAR_ADDITIONS_FILE__SCHEMA,
-        MAIN_TEMPLATE_ODF_SCHEMA_FILE,
         ODF11_ELEMENT_NUMBER,
         ODF11_ATTRIBUTE_NUMBER,
         ODF11_ELEMENTS_WITH_DUPLICATES,
@@ -237,8 +183,6 @@ class OdfConstants {
         "1.0",
         GrammarID.ODF_MANIFEST,
         "OpenDocument-manifest-schema-v1.0-os.rng",
-        GRAMMAR_ADDITIONS_FILE__PACKAGE,
-        MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE,
         ODF10_MANIFEST_ELEMENT_NUMBER,
         ODF10_MANIFEST_ATTRIBUTE_NUMBER,
         ODF10_MANIFEST_ELEMENTS_WITH_DUPLICATES,
@@ -247,8 +191,6 @@ class OdfConstants {
         "1.0",
         GrammarID.ODF_SCHEMA,
         "OpenDocument-schema-v1.0-os.rng",
-        GRAMMAR_ADDITIONS_FILE__SCHEMA,
-        MAIN_TEMPLATE_ODF_SCHEMA_FILE,
         ODF10_ELEMENT_NUMBER,
         ODF10_ATTRIBUTE_NUMBER,
         ODF10_ELEMENTS_WITH_DUPLICATES,
@@ -262,15 +204,6 @@ class OdfConstants {
     public final String grammarID;
     /** the absolute path to the ODF grammar */
     public final String grammarPath;
-    /**
-     * the absolute path to the file containing additional information for the generation aside the
-     * grammar
-     */
-    public final String grammarAdditionsPath;
-    /**
-     * the absolute path to inital template that will afterwards a list of all to be created files
-     */
-    public final String mainTemplatePath;
     /**
      * amount of XML elements defined by a certain ODF grammar given by MSV (MultiSchemaValidator)
      */
@@ -295,10 +228,6 @@ class OdfConstants {
      * @param grammarID defines the part across specifciations to make it comparable (e.g. for API
      *     history)
      * @param grammarPath the absolute path to the ODF grammar
-     * @param grammarAdditionsPath the absolute path to the file containing additional information
-     *     for the generation aside the grammar
-     * @param mainTemplatePath the absolute path to inital template that will afterwards a list of
-     *     all to be created files
      * @param elementNo amount of XML elements defined by a certain ODF grammar given by MSV
      *     (MultiSchemaValidator)
      * @param attributeNo amount of XML attributes defined by a certain ODF grammar given by MSV
@@ -312,8 +241,6 @@ class OdfConstants {
         String grammarVersion,
         GrammarID grammarID,
         String grammarPath,
-        String grammarAdditionsPath,
-        String mainTemplatePath,
         int elementNo,
         int attributeNo,
         int elementDuplicateNo,
@@ -321,8 +248,6 @@ class OdfConstants {
       this.grammarVersion = grammarVersion;
       this.grammarID = grammarID.ID;
       this.grammarPath = ODF_GRAMMAR_PATH + grammarPath;
-      this.grammarAdditionsPath = grammarAdditionsPath;
-      this.mainTemplatePath = mainTemplatePath;
       this.elementNo = elementNo;
       this.attributeNo = attributeNo;
       this.elementDuplicateNo = elementDuplicateNo;
