@@ -26,7 +26,6 @@ package schema2template.model;
 import static schema2template.model.PuzzlePiece.CHILD_VISITOR;
 import static schema2template.model.PuzzlePiece.TYPE_VISITOR;
 import static schema2template.model.PuzzlePiece.getName;
-import static schema2template.model.PuzzlePiece.getType;
 
 import com.sun.msv.grammar.AttributeExp;
 import com.sun.msv.grammar.ChoiceExp;
@@ -34,8 +33,6 @@ import com.sun.msv.grammar.ElementExp;
 import com.sun.msv.grammar.Expression;
 import com.sun.msv.grammar.NameClassAndExpression;
 import com.sun.msv.grammar.OneOrMoreExp;
-import com.sun.msv.grammar.ReferenceExp;
-import com.sun.msv.grammar.SequenceExp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -45,9 +42,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.tinkerpop.gremlin.structure.Graph;
-import org.apache.tinkerpop.gremlin.structure.Vertex;
-import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
 import schema2template.SchemaToTemplate;
 
 /**
@@ -86,7 +80,6 @@ public class MSVExpressionInformation {
     start.add(exp);
     paths.add(start);
     buildPaths(paths);
-    Graph g = buildGraph(exp);
     if (exp instanceof ElementExp && schemaFileName != null) {
       String elementName = getName((NameClassAndExpression) exp);
     }
@@ -304,83 +297,6 @@ public class MSVExpressionInformation {
           buildPaths(paths);
         }
       }
-    }
-  }
-
-  /**
-   * Creates a sub graph for elements & attributes with their element children as last descendant
-   * nodes
-   */
-  static Graph buildGraph(Expression exp) {
-    return buildGraph(null, null, null, exp, null);
-  }
-
-  /* Starting from every XML attribute and element (ie. ElementExp or AttributeExp) a subgraph of the XML RelaxNG schema is being created.
-
-  */
-  private static Graph buildGraph(
-      Graph g, Vertex v, Vertex parentV, Expression exp, Expression parentExp) {
-    if (g == null) {
-      g = TinkerGraph.open();
-      v = g.addVertex(); // for the root element
-    }
-
-    // stop building the graph at element and attribtue children
-    addGraphProperties(exp, parentExp, v, parentV);
-    if (!(exp instanceof NameClassAndExpression) || parentExp == null) {
-      List<Expression> children = (List<Expression>) exp.visit(CHILD_VISITOR);
-      Integer newChildNo = 0;
-      for (Expression newChildExp : children) {
-        Vertex newChildV = g.addVertex();
-        // only for sequences the order of children is important
-        if (exp instanceof SequenceExp && parentV != null) {
-          newChildNo++;
-          v.addEdge(
-              "has",
-              newChildV,
-              "order",
-              newChildNo.toString(),
-              "color",
-              "#00ee00"); // sequence edges using color green2 see
-          // http://www.farb-tabelle.de/de/rgb2hex.htm?q=green2
-        }
-        g = buildGraph(g, newChildV, v, newChildExp, exp);
-      }
-    }
-    return g;
-  }
-
-  private static void addGraphProperties(
-      Expression exp, Expression parentExp, Vertex v, Vertex parentVertex) {
-
-    // property: type
-    String type = getType(exp).toString();
-    if (type != null && !type.isEmpty()) {
-      v.property("type", type);
-    }
-
-    // property: name
-    // only for all ElementExp || AttributeExp
-    if (exp instanceof NameClassAndExpression) {
-      String name = getName((NameClassAndExpression) exp);
-      v.property("name", name);
-      v.property("label", name);
-      if (exp instanceof ElementExp) {
-        v.property("color", "#6495ed"); // elements using CornflowerBlue
-      } else { // attribute}
-        v.property("color", "#ee0000"); // attributes using red2 see
-        // http://www.farb-tabelle.de/de/rgb2hex.htm?q=red2
-      }
-    } else if (exp instanceof ReferenceExp) {
-      v.property("label", "Ref: " + ((ReferenceExp) exp).name);
-      v.property("color", "#ffd700"); // gold1
-    } else {
-      v.property("label", type);
-    }
-
-    // if not already added an edge for the sequence
-    if (parentVertex != null && !(parentExp instanceof SequenceExp)) {
-      parentVertex.addEdge("has", v);
     }
   }
 
