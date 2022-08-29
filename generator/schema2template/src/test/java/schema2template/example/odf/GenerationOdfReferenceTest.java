@@ -21,7 +21,7 @@
  */
 package schema2template.example.odf;
 
-import static schema2template.example.odf.ConstantsBuildEnv.TARGET_BASE_DIR;
+import static schema2template.example.odf.ConstantsBuildEnv.GENERATION_TARGET_BASE_DIR;
 import static schema2template.example.odf.ConstantsBuildEnv.TEMPLATE_BASE_DIR;
 
 import java.io.File;
@@ -36,10 +36,7 @@ public class GenerationOdfReferenceTest {
   private static final Logger LOG = Logger.getLogger(GenerationOdfReferenceTest.class.getName());
   private static final String ODF_REFERENCE_DIRECTORY = "odf-reference";
   private static final String MAIN_TEMPLATE_PATH =
-      TEMPLATE_BASE_DIR
-          + ODF_REFERENCE_DIRECTORY
-          + File.separator
-          + "main_template_file-creation.vm";
+      TEMPLATE_BASE_DIR + ODF_REFERENCE_DIRECTORY + File.separator + "file-creation-list.vm";
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test
@@ -58,7 +55,7 @@ public class GenerationOdfReferenceTest {
               + "\n\tmainTemplatePath: "
               + MAIN_TEMPLATE_PATH
               + "\n\ttargetDirPath: "
-              + TARGET_BASE_DIR
+              + GENERATION_TARGET_BASE_DIR
               + ODF_REFERENCE_DIRECTORY);
 
       generations.add(
@@ -68,13 +65,13 @@ public class GenerationOdfReferenceTest {
               specPart.grammarPath,
               null,
               MAIN_TEMPLATE_PATH,
-              TARGET_BASE_DIR + ODF_REFERENCE_DIRECTORY));
+              GENERATION_TARGET_BASE_DIR + ODF_REFERENCE_DIRECTORY));
     }
 
     SchemaToTemplate.run(generations);
     // Changing order of multiple puzzlepieces makes file comparison unuseable
     //    compareDirectories(
-    //        TARGET_BASE_DIR + ODF_REFERENCE_DIRECTORY, REFERENCE_BASE_DIR +
+    //        GENERATION_TARGET_BASE_DIR + ODF_REFERENCE_DIRECTORY, GENERATION_REFERENCE_BASE_DIR +
     // ODF_REFERENCE_DIRECTORY);
   }
 }

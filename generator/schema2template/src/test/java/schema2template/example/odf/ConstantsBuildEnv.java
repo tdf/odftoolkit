@@ -48,7 +48,7 @@ class ConstantsBuildEnv {
           + File.separator
           + "odf"
           + File.separator
-          + "template"
+          + "generation"
           + File.separator;
 
   /** base directory for all ODF specifications grammars in the ODF Toolkit */
@@ -77,6 +77,9 @@ class ConstantsBuildEnv {
           + "odf"
           + File.separator;
 
+  // BTW the Maven default output directory for generated sources is target/generated-sources/
+  static final String GENERATION_TARGET_BASE_DIR = TARGET_BASE_DIR + "generation" + File.separator;
+
   /** The base dir of all references to be compared with the new created test artefacts */
   static final String REFERENCE_BASE_DIR =
       BASE_DIR
@@ -90,4 +93,7 @@ class ConstantsBuildEnv {
           + File.separator
           + "odf"
           + File.separator;
+
+  static final String GENERATION_REFERENCE_BASE_DIR =
+      REFERENCE_BASE_DIR + "generation" + File.separator;
 }

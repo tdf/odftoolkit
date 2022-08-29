@@ -21,7 +21,7 @@
  */
 package schema2template.example.odf;
 
-import static schema2template.example.odf.ConstantsBuildEnv.TARGET_BASE_DIR;
+import static schema2template.example.odf.ConstantsBuildEnv.GENERATION_TARGET_BASE_DIR;
 import static schema2template.example.odf.ConstantsBuildEnv.TEMPLATE_BASE_DIR;
 
 import java.io.File;
@@ -58,7 +58,7 @@ public class GenerationOdfdomPythonTest {
               + "\n\tmainTemplatePath: "
               + MAIN_TEMPLATE_PATH
               + "\n\ttargetDirPath: "
-              + TARGET_BASE_DIR
+              + GENERATION_TARGET_BASE_DIR
               + ODFDOM_PYTHON_DIRECTORY);
 
       generations.add(
@@ -68,13 +68,14 @@ public class GenerationOdfdomPythonTest {
               specPart.grammarPath,
               null,
               MAIN_TEMPLATE_PATH,
-              TARGET_BASE_DIR + ODFDOM_PYTHON_DIRECTORY));
+              GENERATION_TARGET_BASE_DIR + ODFDOM_PYTHON_DIRECTORY));
     }
 
     SchemaToTemplate.run(generations);
     // Changing order of multiple puzzlepieces makes file comparison unuseable
     //    compareDirectories(
-    //        TARGET_BASE_DIR + ODFDOM_PYTHON_DIRECTORY, REFERENCE_BASE_DIR +
+    //        GENERATION_TARGET_BASE_DIR + ODFDOM_PYTHON_DIRECTORY, GENERATION_REFERENCE_BASE_DIR
+    // +
     // ODFDOM_PYTHON_DIRECTORY);
   }
 }

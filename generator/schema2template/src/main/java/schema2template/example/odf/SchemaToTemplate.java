@@ -168,10 +168,6 @@ public class SchemaToTemplate {
 
       Map<String, List<String>> styleFamilyPropertiesMap =
           new OdfFamilyPropertiesPatternMatcher(xmlModel.getGrammar()).getFamilyProperties();
-      /* Only works for part 3 schema:
-        assert styleFamilyPropertiesMap != null && !styleFamilyPropertiesMap.isEmpty()
-          : "The @style:family<->'properties elements' map must not be empty!";
-      */
       context.put("styleFamilyPropertiesMap", styleFamilyPropertiesMap);
     }
     context.put("xmlModel", xmlModel);
