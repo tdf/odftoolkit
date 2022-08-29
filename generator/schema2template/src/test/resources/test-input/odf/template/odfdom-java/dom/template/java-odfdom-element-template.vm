@@ -290,7 +290,11 @@ public class $className extends $baseClassName {
 	 * @return - the <code>$valueObject</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
 	public $valueObject get${aClassName}() {
+#if ($aNS)
 		$aClassName attr = ($aClassName) getOdfAttribute(OdfDocumentNamespace.${aNS.toUpperCase()}, "${attribute.getLocalName()}");
+#else
+		$aClassName attr = ($aClassName) getOdfAttribute("${attribute.getLocalName()}");
+#end
 		if (attr != null) {
 #if ($simpleValue!="")
 			return ${valueObject}.valueOf(attr.${simpleValue}Value());

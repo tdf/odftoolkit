@@ -34,7 +34,11 @@ import org.odftoolkit.odfdom.pkg.OdfAttribute;
 #if ($attribute != "*")
 #set ($NS = ${attribute.getNamespace()})
 #set($className = "${xmlModel.camelCase($attribute)}Attribute")
+#if ($NS)
 import org.odftoolkit.odfdom.dom.attribute.${NS}.${className};
+#else
+import org.odftoolkit.odfdom.dom.attribute.${className};
+#end
 #end
 #end
 ##
@@ -48,7 +52,6 @@ public abstract class DefaultAttributeVisitor implements AttributeVisitor {
 
 #foreach ($attribute in ${xmlModel.getAttributes().withoutMultiples()})
 #if ($attribute != "*")
-#set ($NS = ${attribute.getNamespace()})
 #set ($className = "${xmlModel.camelCase($attribute)}Attribute")
 	/**
 	 * A method to visit "${attribute.getQName()}" attribute
