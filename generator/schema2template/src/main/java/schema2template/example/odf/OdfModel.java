@@ -34,6 +34,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import schema2template.model.QNameValue;
 import schema2template.model.QNamed;
+import schema2template.model.XMLModel;
 
 /**
  * Model for ODF specific enhancements. Capsulates information from the from the config file. For
@@ -78,14 +79,18 @@ public class OdfModel {
     }
   }
 
-  Map<String, List<String>> mNameToFamiliesMap;
-  Map<String, AttributeDefaults> mNameToDefaultsMap;
+  final Map<String, List<String>> mNameToFamiliesMap;
+  final Map<String, AttributeDefaults> mNameToDefaultsMap;
+  final Map<String, List<String>> mStyleFamilyPropertiesMap;
 
   public OdfModel(
       Map<String, List<String>> nameToFamiliesMap,
-      Map<String, AttributeDefaults> attributeDefaults) {
+      Map<String, AttributeDefaults> attributeDefaults,
+      XMLModel xmlModel) {
     mNameToFamiliesMap = nameToFamiliesMap;
     mNameToDefaultsMap = attributeDefaults;
+    mStyleFamilyPropertiesMap =
+        new OdfFamilyPropertiesPatternMatcher(xmlModel.getGrammar()).getFamilyProperties();
   }
 
   /**
@@ -162,5 +167,15 @@ public class OdfModel {
         return defaults.getDefaults();
       }
     }
+  }
+
+  /**
+   * Get default values of ODF attribute.
+   *
+   * @param attribute Attribute
+   * @return Default values for attribute
+   */
+  public Map<String, List<String>> getStyleFamilyPropertiesMap() {
+    return mStyleFamilyPropertiesMap;
   }
 }

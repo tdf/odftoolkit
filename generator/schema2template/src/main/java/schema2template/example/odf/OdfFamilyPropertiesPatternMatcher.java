@@ -47,7 +47,7 @@ import schema2template.model.PuzzlePiece;
  * <p>Interesting side-fact: All three can have a different @fo:background-color overwriting each
  * other!
  */
-public class OdfFamilyPropertiesPatternMatcher {
+class OdfFamilyPropertiesPatternMatcher {
 
   private final Grammar mGrammar;
 
