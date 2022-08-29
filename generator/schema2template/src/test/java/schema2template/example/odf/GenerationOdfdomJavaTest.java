@@ -21,8 +21,8 @@
  */
 package schema2template.example.odf;
 
-import static schema2template.example.odf.ConstantsBuildEnv.REFERENCE_BASE_DIR;
-import static schema2template.example.odf.ConstantsBuildEnv.TARGET_BASE_DIR;
+import static schema2template.example.odf.ConstantsBuildEnv.GENERATION_REFERENCE_BASE_DIR;
+import static schema2template.example.odf.ConstantsBuildEnv.GENERATION_TARGET_BASE_DIR;
 import static schema2template.example.odf.ConstantsBuildEnv.TEMPLATE_BASE_DIR;
 import static schema2template.example.odf.DirectoryCompare.compareDirectories;
 
@@ -50,7 +50,7 @@ public class GenerationOdfdomJavaTest {
           + File.separator
           + "template"
           + File.separator
-          + "main_template_file-creation_schema.vm";
+          + "file-creation-list_odf-schema.vm";
 
   private static final String MAIN_TEMPLATE_ODF_PACKAGE_MANIFEST_FILE =
       TEMPLATE_BASE_DIR
@@ -60,7 +60,7 @@ public class GenerationOdfdomJavaTest {
           + File.separator
           + "template"
           + File.separator
-          + "main_template_file-creation_pkg-manifest.vm";
+          + "file-creation-list_odf-package-manifest.vm";
   /**
    * Each ODF part has its own grammar and an own template to create typed Java DOM files from, this
    * is the ODF digital signature
@@ -73,7 +73,7 @@ public class GenerationOdfdomJavaTest {
           + File.separator
           + "template"
           + File.separator
-          + "main_template_file-creation_pkg-dsig.vm";
+          + "file-creation-list_odf-package-digital-signature.vm";
 
   // ***********************************
   // ***** GRAMMAR ADDITIONS
@@ -135,7 +135,7 @@ public class GenerationOdfdomJavaTest {
               + "\n\tmainTemplatePath: "
               + mainTemplatePath
               + "\n\ttargetDirPath: "
-              + TARGET_BASE_DIR
+              + GENERATION_TARGET_BASE_DIR
               + ODFDOM_JAVA_DIRECTORY);
 
       generations.add(
@@ -145,11 +145,12 @@ public class GenerationOdfdomJavaTest {
               specPart.grammarPath,
               grammarAdditionsPath,
               mainTemplatePath,
-              TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY));
+              GENERATION_TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY));
     }
 
     SchemaToTemplate.run(generations);
     compareDirectories(
-        TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY, REFERENCE_BASE_DIR + ODFDOM_JAVA_DIRECTORY);
+        GENERATION_TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY,
+        GENERATION_REFERENCE_BASE_DIR + ODFDOM_JAVA_DIRECTORY);
   }
 }

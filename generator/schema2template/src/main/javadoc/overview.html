@@ -32,164 +32,223 @@ by specifying it in an ant task, like:
 />
 -->
 <html>
+
 <head>
-    <title>Schema2Template Overview</title>
+  <title>Schema2Template Overview</title>
 </head>
-<body> 
-<p>The schema2template project's goal is to provide an API for easily filling user templates from arbitrary XML schematas.</p>
-            
-<h2>Introduction</h2>
 
-<p>This project allows you to process a RelaxNG schema file and to convert the definitions to any text based format you like. E.g.
-you can produce one source code file for each element defined in schema file. Or maybe you want to produce one single text or HTML
-based overview of the schema.</p>
+<body>
+  <p>The schema2template project's goal is to provide an API for easily filling user templates from arbitrary XML
+    schematas.</p>
 
-<p>Since this project is based on the - former Sun - Multi Schema Validator, it should be able to process multiple schema formats. However up to now it has only being used with RelaxNG.</p>
+  <h2>Introduction</h2>
 
-<p>Several examples are delivered together with this project:</p>
-<ol>
-<li>Read the OpenDocument Schema and produce a Java based DOM API</li>
-<li>Read the OpenDocument Schema and produce an HTML overview of all ODF elements and attributes</li>
-<li>Read the OpenDocument Schema and produce one single Python file which represents the element hierarchy</li>
-</ol>
+  <p>This project allows you to process a RelaxNG schema file and to convert the definitions to any text based format
+    you like. For example, you can produce one source code file for each element defined in schema file. Or maybe you
+    want to produce one single text or HTML
+    based overview of the schema.</p>
 
-<p>A non-trivial topic is the concept of multiple definitions for a single element or attribute, which is possible in RelaxNG. 
-The easiest way would be to unite these definitions (we call them Multiples) to one common definition. However this way important information would be lost.
-E.g. one element may have the attribute foo whith possible value <em>left</em>. This attribute may also be possible in another element, but then with 
-possible values <em>left</em> and <em>right</em>. That's why we decided to keep the distinction, even if it may make it harder to understand the API of this project. 
-We might enhance this concept in the future, e.g. to exactly determine which of the multiple definitions holds for the current element in an ODF element tree.
-</p>
+  <p>Since this project is based on the - former Sun - Multi Schema Validator, it should be able to process multiple
+    schema formats. However up to now it has only being used with RelaxNG.</p>
 
-<h2>Velocity Help</h2>
+  <p>Several examples are delivered together with this project:</p>
+  <ol>
+    <li>Read the OpenDocument Schema and produce a Java based DOM API</li>
+    <li>Read the OpenDocument Schema and produce an HTML overview of all ODF elements and attributes</li>
+    <li>Read the OpenDocument Schema and produce one single Python file which represents the element hierarchy</li>
+  </ol>
 
-Go to the "Engine" section of the the Velocity <a href="http://velocity.apache.org/">project site</a> to find the Velocity User Guide.
+  <p>A non-trivial topic is the concept of multiple definitions for a single element or attribute, which is possible in
+    RelaxNG.
+    The easiest way would be to unite these definitions (we call them Multiples) to one common definition. However this
+    way important information would be lost.
+    E.g. one element may have the attribute foo with possible value <em>left</em>. This attribute may also be possible
+    in another element, but then with
+    possible values <em>left</em> and <em>right</em>. That's why we decided to keep the distinction, even if it may make
+    it harder to understand the API of this project.
+    We might enhance this concept in the future, e.g. to exactly determine which of the multiple definitions holds for
+    the current element in an ODF element tree.
+  </p>
 
-The velocity template structure and commands are explained there.
+  <h2>Velocity Help</h2>
 
-<h2>Schema2Template file structure</h2>
+  Go to the "Engine" section of the the Velocity <a href="http://velocity.apache.org/">project site</a> to find the
+  Velocity User Guide.
 
-<p>We use a 2-step procedure: First we generate a list of files we'd like to create. While we could write this list manually, the generation of this
-list frees us from having to write an entry for each schema element or attribute.
+  The velocity template structure and commands are explained there.
 
-The template to generate this list is called output-files.vm, the list itself (i.e. the result of running output-files.vm) is called output-files.xml.</p>
+  <h2>Schema2Template file structure</h2>
 
-<p>Here's an example output-files.xml:</p>
+  <p>We use a 2-step procedure: First we generate a list of files we'd like to create. While we could write this list
+    manually, the generation of this
+    list frees us from having to write an entry for each schema element or attribute.
 
-<pre>
+    The initial main template to generate this list is called file-creation-list.vm, the list itself (i.e. the result of
+    running
+    file-creation-list.vm) is called file-creation-list.xml.</p>
+
+  <p>Here's an example file-creation-list.xml:</p>
+
+  <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;filelist&gt;
-    &lt;file path=&quot;OdfHtmlSpecification.html&quot; template=&quot;odf-reference-template.vm&quot; /&gt;
-    &lt;file path=&quot;element/anim/AnimAnimateElement.java&quot; 
-    	     context=&quot;anim:animate&quot; 
+&lt;file-creation-list&gt;
+    &lt;file path=&quot;ODF${xmlModel.getGrammarVersion()}Reference.html&quot; template=&quot;odf-reference-template.vm&quot; /&gt;
+    &lt;file path=&quot;element/anim/AnimAnimateElement.java&quot;
+    	     context=&quot;anim:animate&quot;
 	     template=&quot;java-odfdom-element-template.vm&quot; /&gt;
     ...
-&lt;/filelist&gt;
+&lt;/file-creation-list&gt;
 </pre>
 
-<p>In the second step we parse output-files.xml. For every "file" entry we run the given Velocity "template", fill its context with the optional "context"
-property and write the output to the given "path". 
-The "context" property (and as seen later - the optional "param" property as well) is used in templates which process only one element or attribute - 
-to provide them with the name of this element or attribute. 
-In the above example the template for the generation of a Java class is such a template, while the template to produce the whole 
-OdfHtmlSpecification.html is a template with a global context, i.e. it processes the whole Schema.</p>
+  <p>In the second step we parse file-creation-list.xml. For every line - "file" entry - we run the as attribute given
+    Velocity "template". The template is provided with an additional context by the optional "context"
+    attribute and the output file is written to the given "path" attribute.
+    The "context" property (and as seen later - the optional "param" property as well) is used in templates which
+    process only one element or attribute -
+    to provide them with the name of this element or attribute.
+    In the above example the template odf-reference-template.vm for the generation of the OdfReference.html is such a
+    template, while the template to produce the whole OdfReference.html is a template with a global context, i.e. it
+    processes the whole Schema.
+  </p>
 
-<h2>Schema2Template specific template help</h2>
+  <h2>Schema2Template specific template help</h2>
 
-<p>In velocity templates, you have context objects, provided by the Java Velocity Runner Class. These are Java objects and you can call any method 
-of these objects like you would do in Java. In Schema2Template we provide the following context objects (see JavaDoc of the given Classes):</p>
+  <p>In velocity templates, you have context objects, provided by the Java Velocity Runner Class. These are Java objects
+    and you can call any method
+    of these objects like you would do in Java. In Schema2Template we provide the following context objects (see JavaDoc
+    of the given Classes):</p>
 
-<a name="contextObjects" />
+  <a name="contextObjects" />
 
-<ul>
-<li>SchemaModel model: Provides the elements and attributes defined in the schema.</li>
-<li>OdfModel odfmodel: Provides additional information from the Odf Specification, like attribute standard values or element style families.</li>
-<li>SourceCodeModel javamodel: Provides additional information for generation of Source Code, like common base classes for elements.</li>
-<li>String context: The (optional) name of the current element. You can use model to get the element or attribute described by this name</li>
-<li>String param: A freely usable (optional) argument. An example usage is to provide a number to distinguish between elements (or attributes) sharing the same name.</li>
-</ul>
+  <ul>
+    <li>XmlModel as xmlModel: Provides the elements and attributes defined in the schema.</li>
+    <li>OdfModel as odfmodel: Provides additional information from the Odf Specification, like attribute standard values
+      or element style families.</li>
+    <li>SourceCodeModel codeModel: Provides additional information for generation of Source Code, like common base
+      classes for elements.</li>
+    <li>String context: The (optional) name of the current element. You can use model to get the element or attribute
+      described by this name</li>
+    <li>String param: A freely usable (optional) argument. An example usage is to provide a number to distinguish
+      between elements (or attributes) sharing the same name.</li>
+  </ul>
 
-<p>It should be noted that the context of output-files.vm behaves like the context of all templates which are started from there. Of course in the
-context of output-files.vm the optional context Objects "context" and "param" are null.</p>
+  <p>It should be noted that the context of file-creation-list.vm behaves like the context of all templates which are
+    started
+    from there. Of course in the
+    context of file-creation-list.vm the optional context Objects "context" and "param" are null.</p>
 
-<h3>PuzzlePiece Class</h3>
+  <h3>PuzzlePiece Class</h3>
 
-<p>The PuzzlePiece class provides some sort of "piece of a puzzle", containing the definition of an Odf element, attribute, datatype or
-constant attribute value. This class contains methods for querying the relationship between definitions, e.g. to get all child elements,
-attributes, parent elements, datatypes, values, etc... PuzzlePieces are
-sorted by their name (which has the form "ns:localname").</p>
+  <p>The PuzzlePiece class provides some sort of "piece of a puzzle", containing the definition of an Odf element,
+    attribute, datatype or
+    constant attribute value. This class contains methods for querying the relationship between definitions, e.g. to get
+    all child elements,
+    attributes, parent elements, datatypes, values, etc... PuzzlePieces are
+    sorted by their name (which has the form "ns:localname").</p>
 
-<p>Some of these return parameters are collections. For these there is the class PuzzlePieceSet, which is a SortedSet of PuzzlePieces. PuzzlePiece
-and PuzzlePieceSet both implement the interface QNamedPuzzleComponent, and therefore have many methods in common (you can query all child elements
-for a PuzzlePiece as well as for a whole PuzzlePieceSet. And you can get the name for a PuzzlePiece as well as for a whole PuzzlePieceSet - provided all PuzzlePieces
-are equally named, ...)</p>
+  <p>Some of these return parameters are collections. For these there is the class PuzzlePieceSet, which is a SortedSet
+    of PuzzlePieces. PuzzlePiece
+    and PuzzlePieceSet both implement the interface QNamedPuzzleComponent, and therefore have many methods in common
+    (you can query all child elements
+    for a PuzzlePiece as well as for a whole PuzzlePieceSet. And you can get the name for a PuzzlePiece as well as for a
+    whole PuzzlePieceSet - provided all PuzzlePieces
+    are equally named, ...)</p>
 
-<p>Before we come to the point on how to use PuzzlePieces and how to get them, there's one more important thing to know: </p>
+  <p>Before we come to the point on how to use PuzzlePieces and how to get them, there's one more important thing to
+    know: </p>
 
-<h3>Multiples and Multiple Number</h3>
+  <h3>Multiples and Multiple Number</h3>
 
-<p>One element (form:list-value) and many attributes (chart-symbol-type, text:outline-level, etc...) are defined multiple times in Odf Schema. 
-Each definition is represented by a PuzzlePiece object. Those PuzzlePieces sharing the same name are called Multiples.
-Each Multiple may differ in parent elements, child elements and attributes.
-From a PuzzlePiece you can get all PuzzlePieces sharing the same name as the PuzzlePiece
-by its method withMultiples(). If there are no other PuzzlePieces you get at least a singleton PuzzlePieceSet containing only this PuzzlePiece.</p>
+  <p>One element (form:list-value) and many attributes (chart-symbol-type, text:outline-level, etc...) are defined
+    multiple times in Odf Schema.
+    Each definition is represented by a PuzzlePiece object. Those PuzzlePieces sharing the same name are called
+    Multiples.
+    Each Multiple may differ in parent elements, child elements and attributes.
+    From a PuzzlePiece you can get all PuzzlePieces sharing the same name as the PuzzlePiece
+    by its method withMultiples(). If there are no other PuzzlePieces you get at least a singleton PuzzlePieceSet
+    containing only this PuzzlePiece.</p>
 
-<h3>How to get QNamedPuzzleComponent (PuzzlePiece and PuzzlePieceSets)</h3>
+  <h3>How to get QNamedPuzzleComponent (PuzzlePiece and PuzzlePieceSets)</h3>
 
-<p>If you do not want to distinguish between elements (or attributes) sharing the same name you can use in templates processing only one element:<br />
-$model.getElement($context) or $model.getAttribute($context). By this you get a PuzzlePieceSet of PuzzlePieces sharing the same name. Since both
-classes share most methods, you can go on with your template like you'd use one single PuzzlePiece.</p>
+  <p>If you do not want to distinguish between elements (or attributes) sharing the same name you can use in templates
+    processing only one element:<br />
+    $model.getElement($context) or $model.getAttribute($context). By this you get a PuzzlePieceSet of PuzzlePieces
+    sharing the same name. Since both
+    classes share most methods, you can go on with your template like you'd use one single PuzzlePiece.</p>
 
-<p>If you want to distinguish between elements (or attributes) sharing the same name you can use in templates processing only one element:<br />
-$model.getElement($context, $param) or $model.getAttribute($context, $param), provided that context contains the name of the PuzzlePiece and param
-contains the multiple number to distinguish between these PuzzlePieces. In other words you have to fill both properties in output-files.vm with the needed values.
-You get the name of a PuzzlePiece by ${aDefinition.getQName()} or directly by $aDefinition and the multiple number by ${aDefinition.getMultipleNumber()}.<br />
-<em>It should be noted that this is a very rare use case (e.g. if you want to produce one file per PuzzlePiece and not - as usual - per PuzzlePiece name).</em>
-</p> 
+  <p>If you want to distinguish between elements (or attributes) sharing the same name you can use in templates
+    processing only one element:<br />
+    $model.getElement($context, $param) or $model.getAttribute($context, $param), provided that context contains the
+    name of the PuzzlePiece and param
+    contains the multiple number to distinguish between these PuzzlePieces. In other words you have to fill both
+    properties in file-creation-list.vm with the needed values.
+    You get the name of a PuzzlePiece by ${aDefinition.getQName()} or directly by $aDefinition and the multiple number
+    by ${aDefinition.getMultipleNumber()}.<br />
+    <em>It should be noted that this is a very rare use case (e.g. if you want to produce one file per PuzzlePiece and
+      not - as usual - per PuzzlePiece name).</em>
+  </p>
 
-<p>If you loop over a Set of PuzzlePieces, this Set will contain Multiples. If you want to distinguish between these elements/attributes, there's nothing special to do.
-But if you do not want to distinguish between elements/attributes sharing the same name, you have two steps to do: <br />
-First, you have to create a new PuzzlePieceSet without
-these Multiples by myPuzzlePiece.withoutMultiples(). Now you have a reduced Set of PuzzlePieces, where only one random PuzzlePiece per name remains. <br />
-If you'd process only the random remaining PuzzlePiece for a name, and you're processing more than just the PuzzlePiece name, you might miss some information
-contained in the removed multiples. Even more, since you distinguish only between names, there might be some information contained in 
-Multiples which weren't even in the list before. (like an attribute Multiple
-which wasn't in the $element.getAttributes() list as it's only defined for another element). So to get all
-Multiples (not only those which were contained in the Set) of a PuzzlePiece, you use myPizzlePiece.withMultiples() for each
-PuzzlePiece of the reduced PuzzlePieceSet your're looping over.</p>
+  <p>If you loop over a Set of PuzzlePieces, this Set will contain Multiples. If you want to distinguish between these
+    elements/attributes, there's nothing special to do.
+    But if you do not want to distinguish between elements/attributes sharing the same name, you have two steps to do:
+    <br />
+    First, you have to create a new PuzzlePieceSet without
+    these Multiples by myPuzzlePiece.withoutMultiples(). Now you have a reduced Set of PuzzlePieces, where only one
+    random PuzzlePiece per name remains. <br />
+    If you'd process only the random remaining PuzzlePiece for a name, and you're processing more than just the
+    PuzzlePiece name, you might miss some information
+    contained in the removed multiples. Even more, since you distinguish only between names, there might be some
+    information contained in
+    Multiples which weren't even in the list before. (like an attribute Multiple
+    which wasn't in the $element.getAttributes() list as it's only defined for another element). So to get all
+    Multiples (not only those which were contained in the Set) of a PuzzlePiece, you use myPizzlePiece.withMultiples()
+    for each
+    PuzzlePiece of the reduced PuzzlePieceSet your're looping over.
+  </p>
 
-<h3>How to use QNamedPuzzleComponent (PuzzlePieces and PuzzlePieceSets)</h3>
+  <h3>How to use QNamedPuzzleComponent (PuzzlePieces and PuzzlePieceSets)</h3>
 
-<p>Mostly you might want to use a PuzzlePiece by inserting it directly into the template, like "this element is called $element", or
-like "the namespace of this element is ${element.getNamespace()}". It doesn't matter if $element is a PuzzlePiece as returned by model.getElement($context, $param),
-or a PuzzlePieceSet of equally named PuzzlePieces as returned by model.getElement($context).</p>
+  <p>Mostly you might want to use a PuzzlePiece by inserting it directly into the template, like "this element is called
+    $element", or
+    like "the namespace of this element is ${element.getNamespace()}". It doesn't matter if $element is a PuzzlePiece as
+    returned by model.getElement($context, $param),
+    or a PuzzlePieceSet of equally named PuzzlePieces as returned by model.getElement($context).</p>
 
-<p>The model provides a few additional functions for String formatting like model.camelCase($element) for text:p -&gt; TextP or model.javaCase($element) 
-for text:p -&gt; textP.</p>
+  <p>The model provides a few additional functions for String formatting like model.camelCase($element) for text:p -&gt;
+    TextP or model.javaCase($element)
+    for text:p -&gt; textP.</p>
 
-<p>Another usage of QNamedPuzzleComponents is to get other QNamedPuzzleComponents, e.g. by $element.getParents(), $attribute.getDatatypes(), $attribute.getValues(),
-$element.getChildElements(), $element.getAttributes().</p>
+  <p>Another usage of QNamedPuzzleComponents is to get other QNamedPuzzleComponents, e.g. by $element.getParents(),
+    $attribute.getDatatypes(), $attribute.getValues(),
+    $element.getChildElements(), $element.getAttributes().</p>
 
-<p>To restrict a PuzzlePieceSet only to the PuzzlePieces which have a common parent, there is $elements.byParent($equallyNamedParents). With this method
-you can implement very distinct validation method in attribute classes. See the byParent-example below.</p>
+  <p>To restrict a PuzzlePieceSet only to the PuzzlePieces which have a common parent, there is
+    $elements.byParent($equallyNamedParents). With this method
+    you can implement very distinct validation method in attribute classes. See the byParent-example below.</p>
 
-<h3>How to read the Javadoc for Template Usage</h3>
+  <h3>How to read the Javadoc for Template Usage</h3>
 
-<p>Basically you could use every public method from the <a href="#contextObjects">context objects</a> in a Velocity template. But
-this is not in our intention. There are quite a few public methods which are only to be used internally, e.g. to extract
-our model from the Schema file.</p>
+  <p>Basically you could use every public method from the <a href="#contextObjects">context objects</a> in a Velocity
+    template. But
+    this is not in our intention. There are quite a few public methods which are only to be used internally, e.g. to
+    extract
+    our model from the Schema file.</p>
 
-<p>To see the list of template-ready methods, you might want to look at the TemplateAPICoverageTest and the
-OdfTemplateAPICoverageTest from the source code bundle.</p>
+  <p>To see the list of template-ready methods, you might want to look at the TemplateAPICoverageTest and the
+    OdfTemplateAPICoverageTest from the source code bundle.</p>
 
-<p>To give an example you will see that the PuzzleComponent method "canHaveText" is meant for template usage. On the other hand
-you wont find neither method compareTo nor extractPuzzlePieces from class PuzzlePiece there, so those methods are not
-meant to be used in templates. Only the methods covered by the two mentioned tests are protected against internal
-refactoring (especially against renaming).</p>
+  <p>To give an example you will see that the PuzzleComponent method "canHaveText" is meant for template usage. On the
+    other hand
+    you wont find neither method compareTo nor extractPuzzlePieces from class PuzzlePiece there, so those methods are
+    not
+    meant to be used in templates. Only the methods covered by the two mentioned tests are protected against internal
+    refactoring (especially against renaming).</p>
 
-<h3>Examples</h3>
+  <h3>Examples</h3>
 
-<h4>Here's an example template to generate a ODF reference of attribute / elements. Here the PuzzlePieces are distinguished:</h4>
-<pre>
+  <h4>Here's an example template to generate a ODF reference of attribute / elements. Here the PuzzlePieces are
+    distinguished:</h4>
+  <pre>
 #foreach( $element in ${model.getElements()} )
 #if (${element.withMultiples().size()} == 1)
 #set ($duptext = "")
@@ -205,28 +264,31 @@ refactoring (especially against renaming).</p>
 #end
 </pre>
 
-<h4>Here's an example output-files.vm which only produces one entry per name (processing just the element name so the Multiples can safely be removed):</h4>
+  <h4>Here's an example file-creation-list.vm which only produces one entry per name (processing just the element name
+    so the Multiples can safely be removed):</h4>
 
-<pre>
+  <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;filelist&gt;
-    &lt;file path=&quot;OdfHtmlSpecification.html&quot; template=&quot;odf-reference-template.vm&quot; /&gt;
+    &lt;file path=&quot;OdfReference.html&quot; template=&quot;odf-reference-template.vm&quot; /&gt;
 ##
 #foreach ( $element in ${model.getElements().withoutMultiples()} )
 ##
 #set($classname = &quot;${model.camelCase($element)}Element&quot; )
-    &lt;file path=&quot;element/${element.getNamespace()}/${classname}.java&quot; 
-             context=&quot;$element&quot; 
+    &lt;file path=&quot;element/${element.getNamespace()}/${classname}.java&quot;
+             context=&quot;$element&quot;
 	     template=&quot;java-odfdom-element-template.vm&quot; /&gt;
 ##
 #end
 &lt;/filelist&gt;
 </pre>
 
-<h4>Here's an example template to generate a Java class for an element name (by looking at all element Multiples at once).</h4> 
+  <h4>Here's an example template to generate a Java class for an element name (by looking at all element Multiples at
+    once).</h4>
 
-<p>To keep it short only the part where the Getter-Methods for all attribute names (by looking at all attribute multiples at once) are generated is shown:</p>
-<pre>
+  <p>To keep it short only the part where the Getter-Methods for all attribute names (by looking at all attribute
+    multiples at once) are generated is shown:</p>
+  <pre>
 ## This will return a PuzzlePieceSet containing all element PuzzlePieces with name $context
 #set($element = ${model.getElement($context)})
 ...
@@ -234,13 +296,13 @@ refactoring (especially against renaming).</p>
 ## Step 1: Iterate over all attributes with one random attribute PuzzlePiece per attribute name
 #foreach ( $singleattr in ${element.getAttributes().withoutMultiples()} )
 ##
-## Step 2: Get all attribute definitions for one attribute name. 
+## Step 2: Get all attribute definitions for one attribute name.
 ## Not needed if we're just processing the attribute name
 #set($attribute = ${singleattr.withMultiples()}
 ##
 #set($aClassname = &quot;${model.camelCase($attribute)}Attribute&quot; )
 	/**
-	 * Gets the value of the &lt;code&gt;$aClassname&lt;/code&gt; attribute, 
+	 * Gets the value of the &lt;code&gt;$aClassname&lt;/code&gt; attribute,
 	 * see {&#64;odf.attribute ${attribute}}
 	 *
 	 * @return - the &lt;code&gt;String&lt;/code&gt; attribute value
@@ -252,13 +314,13 @@ refactoring (especially against renaming).</p>
 ...
 </pre>
 
-<h4>Example for the byParent method: Input value validation in attribute template</h4>
+  <h4>Example for the byParent method: Input value validation in attribute template</h4>
 
-<p>Implementation detail: one attribute and one parent class implemented per name -
-thus ignoring PuzzlePiece multiples at Java class level.
-However differences between attribute PuzzlePieces are respected by using a different validation:</p>
+  <p>Implementation detail: one attribute and one parent class implemented per name -
+    thus ignoring PuzzlePiece multiples at Java class level.
+    However differences between attribute PuzzlePieces are respected by using a different validation:</p>
 
-<pre>
+  <pre>
   ## This will return a PuzzlePieceSet containing all attribute PuzzlePieces with name $context
   #set($attribute = ${model.getAttribute($context)})
   ...
@@ -287,4 +349,5 @@ However differences between attribute PuzzlePieces are respected by using a diff
 </pre>
 
 </body>
+
 </html>

@@ -44,7 +44,7 @@ public class GenerationParameters {
   private String targetDirPath;
 
   public GenerationParameters() {
-    System.err.println("GenerationParameters have been created!!");
+    // System.err.println("GenerationParameters have been created!!");
   }
 
   /**
