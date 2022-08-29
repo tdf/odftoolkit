@@ -23,7 +23,7 @@
  */
 package schema2template.model;
 
-import static schema2template.example.odf.SchemaToTemplate.DEBUG;
+import static schema2template.SchemaToTemplate.DEBUG;
 
 import com.sun.msv.grammar.DataExp;
 import com.sun.msv.grammar.ElementExp;

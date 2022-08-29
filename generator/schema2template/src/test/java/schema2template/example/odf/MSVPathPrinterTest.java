@@ -29,6 +29,7 @@ import java.io.File;
 import java.util.List;
 import java.util.logging.Logger;
 import org.junit.Test;
+import schema2template.model.PathPrinter;
 import schema2template.model.XMLModel;
 
 /**

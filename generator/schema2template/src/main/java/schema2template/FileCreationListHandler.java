@@ -24,8 +24,10 @@
 package schema2template;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
@@ -96,7 +98,8 @@ public class FileCreationListHandler extends DefaultHandler {
     throw new SAXException("Malformed file-creation-list");
   }
 
-  public static List<FileCreationListEntry> readFileListFile(File flf) throws Exception {
+  public static List<FileCreationListEntry> readFileListFile(File flf)
+      throws ParserConfigurationException, SAXException, IOException {
     SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
     List<FileCreationListEntry> retval = new ArrayList<>();
     parser.parse(flf, new FileCreationListHandler(retval));

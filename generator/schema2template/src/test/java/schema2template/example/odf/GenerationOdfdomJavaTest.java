@@ -29,8 +29,10 @@ import static schema2template.example.odf.DirectoryCompare.compareDirectories;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import schema2template.GenerationParameters;
+import schema2template.SchemaToTemplate;
 import schema2template.example.odf.ConstantsOdf.OdfSpecificationPart;
 
 public class GenerationOdfdomJavaTest {
@@ -148,7 +150,12 @@ public class GenerationOdfdomJavaTest {
               GENERATION_TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY));
     }
 
-    SchemaToTemplate.run(generations);
+    try {
+      SchemaToTemplate.run(generations);
+    } catch (Exception e) {
+      Assert.fail("Exception during test run: " + e.toString());
+      throw new RuntimeException(e);
+    }
     compareDirectories(
         GENERATION_TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY,
         GENERATION_REFERENCE_BASE_DIR + ODFDOM_JAVA_DIRECTORY);

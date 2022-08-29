@@ -30,7 +30,7 @@
 #set ($className = "${xmlModel.camelCase($base)}ElementBase")
 ##
 ## Set Superclass
-#if (${base.isStylable()})
+#if (${odfModel.isStylable($base)})
 #set ($stylable = true)
 #set ($superclass = "OdfStylableElement")
 #if (${baseElement})
@@ -104,7 +104,7 @@ public abstract class $className extends $superclass {
 	 *
 	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
 	 * @param  elementName	The type is <code>OdfName</code>
-#if (${base.isStylable()} && ($useOdfStyleableShapeElement == false) || $className == "TextParagraphElementBase")
+#if (${odfModel.isStylable($base)} && ($useOdfStyleableShapeElement == false) || $className == "TextParagraphElementBase")
 	 * @param  styleFamily	The type is <code>OdfStyleFamily</code>
 	 * @param  styleAttrName	The type is <code>OdfName</code>
 	 */

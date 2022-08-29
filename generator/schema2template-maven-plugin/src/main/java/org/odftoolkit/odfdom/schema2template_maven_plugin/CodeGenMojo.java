@@ -31,6 +31,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import schema2template.GenerationParameters;
+import schema2template.SchemaToTemplate;
 
 /**
  * Maven Mojo that triggers the generations of files from XML Grammar into Velocity file templates.
@@ -67,7 +68,7 @@ public class CodeGenMojo extends AbstractMojo {
       //        System.err.println("MainTemplatePath: " + generations.get(i).getMainTemplatePath());
       //        System.err.println("++++++++\n");
       //      }
-      schema2template.example.odf.SchemaToTemplate.run(generations);
+      SchemaToTemplate.run(generations);
     } catch (Exception ex) {
       getLog().error("Failed to parse template.");
       getLog().error(ex);

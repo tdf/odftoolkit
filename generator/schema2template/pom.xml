@@ -78,7 +78,7 @@
                     <archive>
                         <index>true</index>
                         <manifest>
-                            <mainClass>schema2template.example.odf.SchemaToTemplate</mainClass>
+                            <mainClass>schema2template.SchemaToTemplate</mainClass>
                         </manifest>
                         <manifestEntries>
                             <version>${project.version}</version>

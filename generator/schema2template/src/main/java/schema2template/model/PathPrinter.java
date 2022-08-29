@@ -21,7 +21,7 @@
  *
  * <p>**********************************************************************
  */
-package schema2template.example.odf;
+package schema2template.model;
 
 import com.sun.msv.grammar.Expression;
 import com.sun.msv.grammar.NameClassAndExpression;
@@ -30,12 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.logging.Logger;
-import schema2template.model.MSVExpressionInformation;
-import schema2template.model.MSVExpressionType;
-import schema2template.model.MSVExpressionVisitorType;
-import schema2template.model.MSVNameClassVisitorList;
-import schema2template.model.PuzzlePiece;
-import schema2template.model.XMLModel;
 
 /**
  * ODF example class to print the MSV expressions in between a PuzzlePiece parent element and a
@@ -52,7 +46,7 @@ public class PathPrinter {
   private static final Logger LOG = Logger.getLogger(PathPrinter.class.getName());
   XMLModel xmlModel;
 
-  PathPrinter(XMLModel xmlModel) {
+  public PathPrinter(XMLModel xmlModel) {
     this.xmlModel = xmlModel;
   }
 

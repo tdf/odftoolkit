@@ -27,8 +27,10 @@ import static schema2template.example.odf.ConstantsBuildEnv.TEMPLATE_BASE_DIR;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import schema2template.GenerationParameters;
+import schema2template.SchemaToTemplate;
 import schema2template.example.odf.ConstantsOdf.OdfSpecificationPart;
 
 public class GenerationOdfReferenceTest {
@@ -68,7 +70,13 @@ public class GenerationOdfReferenceTest {
               GENERATION_TARGET_BASE_DIR + ODF_REFERENCE_DIRECTORY));
     }
 
-    SchemaToTemplate.run(generations);
+    try {
+      SchemaToTemplate.run(generations);
+    } catch (Exception e) {
+      Assert.fail("Exception during test run: " + e.toString());
+      throw new RuntimeException(e);
+    }
+
     // Changing order of multiple puzzlepieces makes file comparison unuseable
     //    compareDirectories(
     //        GENERATION_TARGET_BASE_DIR + ODF_REFERENCE_DIRECTORY, GENERATION_REFERENCE_BASE_DIR +

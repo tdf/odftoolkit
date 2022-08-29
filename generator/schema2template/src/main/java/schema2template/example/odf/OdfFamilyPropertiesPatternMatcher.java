@@ -69,8 +69,7 @@ class OdfFamilyPropertiesPatternMatcher {
 
   /**
    * @return Map key is @style:family attribute the Map value is a list of all style:X-properties
-   *     elements related to this family
-   * @see OdfFamilyPropertiesPatternMatcherTest for expected ODF 1.3 output!
+   *     elements related to this family Tested by "MSVPatternMatcherTest"
    */
   public Map<String, List<String>> getFamilyProperties() {
     if (propertiesByFamily == null) {
