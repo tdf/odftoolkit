@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -227,10 +226,8 @@ public class SchemaToTemplate {
             f.getLineNumber(),
             targetDirPath + File.separator,
             // receives the path attribute from the Velocity template
-            getTargetFileName(f.getAttribute("path"))
+            Paths.get(f.getAttribute("path")).normalize()
           });
-
-      LOG.info("By Paths: " + Paths.get(f.getAttribute("path")).normalize());
 
       String contextAttrValue = f.getAttribute("contextNode");
       if (contextAttrValue != null) {
@@ -244,7 +241,7 @@ public class SchemaToTemplate {
       }
 
       File out =
-          new File(targetDirPath + File.separator + getTargetFileName(f.getAttribute("path")))
+          new File(targetDirPath + File.separator + Paths.get(f.getAttribute("path")).normalize())
               .getCanonicalFile();
       ensureParentFolders(out);
       try (FileWriter fileout = new FileWriter(out)) {
@@ -252,22 +249,6 @@ public class SchemaToTemplate {
         ve.mergeTemplate(f.getAttribute("template"), encoding, context, fileout);
       }
     }
-  }
-
-  // receives the path attribute from the Velocity template, replacing each ':' with '_', expecting
-  // Linux separators
-  private static String getTargetFileName(String rawName) {
-    String retFilePath = null;
-    StringTokenizer toktok = new StringTokenizer(rawName.replaceAll(":", "_"), "/");
-    if (toktok.hasMoreTokens()) {
-      File retfile = null;
-      retfile = new File(toktok.nextToken());
-      while (toktok.hasMoreTokens()) {
-        retfile = new File(retfile, toktok.nextToken());
-      }
-      retFilePath = retfile.getPath();
-    }
-    return retFilePath;
   }
 
   private static void ensureParentFolders(File newFile) {
