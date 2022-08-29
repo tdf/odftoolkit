@@ -105,7 +105,11 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 #if ($hasDefaultValue and $defaultValueSet.size()>1)
 #foreach ($parent in ${attribute.getParents().withoutMultiples()})
 #if ($odfModel.getDefaultAttributeValue($attribute, $parent))
+#if (${parent.getNamespace()})
 import org.odftoolkit.odfdom.dom.element.${parent.getNamespace()}.${xmlModel.camelCase($parent)}Element;
+#else
+import org.odftoolkit.odfdom.dom.element.${xmlModel.camelCase($parent)}Element;
+#end
 #end
 #end
 #end

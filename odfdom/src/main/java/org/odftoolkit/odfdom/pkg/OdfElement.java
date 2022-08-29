@@ -206,6 +206,15 @@ public abstract class OdfElement extends ElementNSImpl {
   }
 
   /**
+   * Set an ODF attribute to this element
+   *
+   * @param name name of the attribute to be set
+   * @param value
+   */
+  public void setOdfAttribute(String name, String value) {
+    setAttribute(name, value);
+  }
+  /**
    * Retrieves a value of an ODF attribute by <code>OdfName</code>.
    *
    * @param name The qualified name of the ODF attribute.
@@ -235,6 +244,16 @@ public abstract class OdfElement extends ElementNSImpl {
    */
   public OdfAttribute getOdfAttribute(NamespaceName namespace, String localname) {
     return (OdfAttribute) getAttributeNodeNS(namespace.getUri(), localname);
+  }
+
+  /**
+   * Retrieves an ODF attribute by local name.
+   *
+   * @param localname The local name of the ODF attribute.
+   * @return The <code>OdfAttribute</code> or <code>null</code> if the attribute does not exist.
+   */
+  public OdfAttribute getOdfAttribute(String localname) {
+    return (OdfAttribute) getAttributeNode(localname);
   }
 
   /**

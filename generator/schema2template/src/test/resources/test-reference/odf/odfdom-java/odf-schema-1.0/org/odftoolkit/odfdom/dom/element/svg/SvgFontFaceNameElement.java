@@ -67,7 +67,7 @@ public class SvgFontFaceNameElement extends OdfElement {
 	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
 	public String getNameAttribute() {
-		NameAttribute attr = (NameAttribute) getOdfAttribute(OdfDocumentNamespace.${aNS.toUpperCase()}, "name");
+		NameAttribute attr = (NameAttribute) getOdfAttribute("name");
 		if (attr != null) {
 			return String.valueOf(attr.getValue());
 		}
