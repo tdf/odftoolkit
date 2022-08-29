@@ -664,10 +664,10 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
     // Handle Element Definitions
     Iterator<PuzzlePiece> iter = elements.iterator();
     while (iter.hasNext()) {
-      PuzzlePiece def = iter.next();
+      PuzzlePiece puzzlePiece = iter.next();
       MSVExpressionIterator childFinder =
           new MSVExpressionIterator(
-              def.getExpression(),
+              puzzlePiece.getExpression(),
               NameClassAndExpression.class,
               MSVExpressionIterator.DIRECT_CHILDREN_ONLY);
       while (childFinder.hasNext()) {
@@ -678,45 +678,47 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
         PuzzlePieceSet whereToAdd = null;
         if (child_exp instanceof ElementExp) {
           child_defs = reverseElementMap.get(child_exp);
-          whereToAdd = def.mChildElements;
+          whereToAdd = puzzlePiece.mChildElements;
         } else if (child_exp instanceof AttributeExp) {
           child_defs = reverseAttributeMap.get(child_exp);
-          whereToAdd = def.mAttributes;
+          whereToAdd = puzzlePiece.mAttributes;
         }
         if (child_defs != null) {
           whereToAdd.addAll(child_defs);
           for (PuzzlePiece child_def : child_defs) {
-            child_def.mParents.add(def);
+            child_def.mParents.add(puzzlePiece);
           }
         }
       }
 
       if (graphMLTargetDir != null) {
-        TinkerPopGraph tinkerPopGraph = new TinkerPopGraph(def.getExpression(), schemaFileName);
+        TinkerPopGraph tinkerPopGraph =
+            new TinkerPopGraph(puzzlePiece.getExpression(), schemaFileName);
         File f = new File(graphMLTargetDir);
         f.mkdirs();
         tinkerPopGraph.exportAsGraphML(f.getAbsolutePath());
       }
       MSVExpressionInformation elementInfo =
-          new MSVExpressionInformation(def.getExpression(), schemaFileName);
-      def.mCanHaveText = elementInfo.canHaveText();
+          new MSVExpressionInformation(puzzlePiece.getExpression(), schemaFileName);
+      puzzlePiece.mCanHaveText = elementInfo.canHaveText();
 
-      Map<String, List<Expression>> atnameToDefs = buildNameExpressionsMap(def.mAttributes);
+      Map<String, List<Expression>> atnameToDefs = buildNameExpressionsMap(puzzlePiece.mAttributes);
       for (String name : atnameToDefs.keySet()) {
         if (elementInfo.isMandatory(atnameToDefs.get(name))) {
-          def.mMandatoryChildAttributeNames.add(name);
+          puzzlePiece.mMandatoryChildAttributeNames.add(name);
         }
       }
 
-      Map<String, List<Expression>> elnameToDefs = buildNameExpressionsMap(def.mChildElements);
+      Map<String, List<Expression>> elnameToDefs =
+          buildNameExpressionsMap(puzzlePiece.mChildElements);
       for (String name : elnameToDefs.keySet()) {
         if (elementInfo.isMandatory(elnameToDefs.get(name))) {
-          def.mMandatoryChildElementNames.add(name);
+          puzzlePiece.mMandatoryChildElementNames.add(name);
         }
       }
 
-      def.mSingletonChildExpressions = elementInfo.getSingletons();
-      def.mMultipleChildExpressions = elementInfo.getMultiples();
+      puzzlePiece.mSingletonChildExpressions = elementInfo.getSingletons();
+      puzzlePiece.mMultipleChildExpressions = elementInfo.getMultiples();
     }
 
     // Handle Attribute Definitions

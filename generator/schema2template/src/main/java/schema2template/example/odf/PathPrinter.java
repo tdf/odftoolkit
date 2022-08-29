@@ -27,18 +27,15 @@ import com.sun.msv.grammar.Expression;
 import com.sun.msv.grammar.NameClassAndExpression;
 import com.sun.msv.grammar.ReferenceExp;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.logging.Logger;
 import schema2template.model.MSVExpressionInformation;
 import schema2template.model.MSVExpressionType;
 import schema2template.model.MSVExpressionVisitorType;
 import schema2template.model.MSVNameClassVisitorList;
 import schema2template.model.PuzzlePiece;
+import schema2template.model.XMLModel;
 
 /**
  * ODF example class to print the MSV expressions in between a PuzzlePiece parent element and a
@@ -52,39 +49,53 @@ import schema2template.model.PuzzlePiece;
  */
 public class PathPrinter {
 
-  // CHANGE THIS...
-  public static final String EXAMPLE_PARENT = "table:table";
-  public static final String EXAMPLE_CHILD = "table:table-row";
-  PuzzlePiece mParent;
-  MSVExpressionInformation mInfo;
+  private static final Logger LOG = Logger.getLogger(PathPrinter.class.getName());
+  XMLModel xmlModel;
 
-  PathPrinter(PuzzlePiece parent) {
-    mParent = parent;
-    mInfo = new MSVExpressionInformation(parent.getExpression(), null);
+  PathPrinter(XMLModel xmlModel) {
+    this.xmlModel = xmlModel;
   }
 
-  /** Map Name to PuzzlePiece(s). */
-  static Map<String, SortedSet<PuzzlePiece>> createDefinitionMap(Set<PuzzlePiece> definitions) {
-    Map<String, SortedSet<PuzzlePiece>> retval = new HashMap<String, SortedSet<PuzzlePiece>>();
-    Iterator<PuzzlePiece> iter = definitions.iterator();
-    while (iter.hasNext()) {
-      PuzzlePiece def = iter.next();
-      SortedSet<PuzzlePiece> multiples = retval.get(def.getQName());
-      if (multiples == null) {
-        multiples = new TreeSet<PuzzlePiece>();
-        retval.put(def.getQName(), multiples);
+  public List<String> printChildPaths(String parentElementName, String childElementName) {
+    SortedSet<PuzzlePiece> pieces = xmlModel.getElements(parentElementName);
+    if (pieces == null) {
+      LOG.severe("No parent element found by the given name: " + parentElementName);
+      return null;
+    } else {
+      if (pieces.size() > 1) {
+        LOG.severe(
+            "There were more than one element by the parent name '"
+                + parentElementName
+                + "'. Dropped all instances but one.");
       }
-      multiples.add(def);
     }
-    return retval;
+    PuzzlePiece parent = pieces.first();
+
+    pieces = xmlModel.getElements(childElementName);
+    if (pieces == null) {
+      LOG.severe("No child element found by the given name: " + childElementName);
+      return null;
+    } else {
+      if (pieces.size() > 1) {
+        LOG.severe(
+            "There were more than one element by the child name '"
+                + childElementName
+                + "'. Dropped all instances but one.");
+      }
+    }
+    PuzzlePiece child = pieces.first();
+    return printChildPaths(parent, child);
   }
 
-  List<String> printChildPaths(PuzzlePiece child) {
+  public List<String> printChildPaths(PuzzlePiece parent, PuzzlePiece child) {
+
+    MSVExpressionInformation info = new MSVExpressionInformation(parent.getExpression(), null);
+
     List<List<Expression>> paths = null;
     if (child != null) {
-      paths = mInfo.getPathsContaining(child.getExpression());
+      paths = info.getPathsContaining(child.getExpression());
     } else {
-      paths = mInfo.getPathsContaining(mParent.getExpression());
+      paths = info.getPathsContaining(parent.getExpression());
     }
     if (paths == null) {
       return null;
@@ -138,46 +149,4 @@ public class PathPrinter {
     }
     return retval;
   }
-  /**
-   * private static Grammar parseOdfGrammar(File rngFile) throws Exception { SAXParserFactory
-   * factory = SAXParserFactory.newInstance(); factory.setNamespaceAware(true);
-   *
-   * <p>Grammar grammar = RELAXNGReader.parse( rngFile.getAbsolutePath(), factory, new
-   * com.sun.msv.reader.util.IgnoreController());
-   *
-   * <p>if (grammar == null) { throw new Exception("Schema could not be parsed."); } return grammar;
-   * }
-   *
-   * <p>// @Svante 2DO: Create a test example instead public static void main(String[] args) throws
-   * Exception { System.out.println( "ODF 1.2 RNG file is located at '" + System.getProperty(
-   * "user.dir") // E:\GitHub\odf\odftoolkit-latest-0.11.0\generator\schema2template\ +
-   * File.separator + "src\\main\\resources" + File.separator + OdfGrammarToTemplate .ODF12_RNG_FILE
-   * // examples\odf\odf-schemas\OpenDocument-v1.2-os-schema.rng' + "'"); Grammar grammar =
-   * parseOdfGrammar( new File( System.getProperty("user.dir") + File.separator +
-   * "src\\main\\resources" + File.separator + OdfGrammarToTemplate.ODF12_RNG_FILE)); PuzzlePieceSet
-   * elements = new PuzzlePieceSet(); PuzzlePieceSet attributes = new PuzzlePieceSet();
-   * PuzzlePiece.extractPuzzlePieces(grammar, elements, attributes, null); Map<String,
-   * SortedSet<PuzzlePiece>> nameToDefinition = createDefinitionMap(new
-   * TreeSet<PuzzlePiece>(elements));
-   *
-   * <p>System.out.println( "Print all paths from parent element (" + EXAMPLE_PARENT + ") to direct
-   * child element (" + EXAMPLE_CHILD + ")"); SortedSet<PuzzlePiece> pieces =
-   * nameToDefinition.get(EXAMPLE_PARENT); if (pieces == null) { System.out.println("No parent
-   * element found by the given name: " + EXAMPLE_PARENT); }
-   *
-   * <p>PuzzlePiece parent = pieces.first();
-   *
-   * <p>pieces = nameToDefinition.get(EXAMPLE_CHILD);
-   *
-   * <p>if (pieces == null) { System.out.println("No child element found by the given name: " +
-   * EXAMPLE_CHILD); }
-   *
-   * <p>PuzzlePiece child = pieces.first();
-   *
-   * <p>if (pieces.size() > 1) { System.out.println( "There were more than one element by this name.
-   * Dropped all instances but one."); } System.out.println( "All paths from " + parent.getQName() +
-   * " to " + child.getQName() + " are: "); List<String> paths = new
-   * PathPrinter(parent).printChildPaths(child); if (paths == null) { System.out.println("No Path
-   * found."); } else { for (String s : paths) { System.out.println(s); } } } }
-   */
 }
