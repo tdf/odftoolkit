@@ -23,8 +23,8 @@
  */
 package schema2template.example.odf;
 
+import static schema2template.SchemaToTemplate.DEBUG;
 import static schema2template.example.odf.ConstantsBuildEnv.TARGET_BASE_DIR;
-import static schema2template.example.odf.SchemaToTemplate.DEBUG;
 
 import java.io.File;
 import java.util.logging.Level;

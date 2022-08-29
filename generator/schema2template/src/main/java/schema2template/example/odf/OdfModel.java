@@ -32,9 +32,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import schema2template.model.QNameValue;
-import schema2template.model.QNamed;
-import schema2template.model.XMLModel;
+import schema2template.SourceCodeBaseClass;
+import schema2template.model.*;
 
 /**
  * Model for ODF specific enhancements. Capsulates information from the from the config file. For
@@ -43,7 +42,7 @@ import schema2template.model.XMLModel;
 public class OdfModel {
 
   /** This inner class is not meant for use in templates. */
-  static class AttributeDefaults {
+  public static class AttributeDefaults {
     private Map<String, String> elementDefault = new HashMap<String, String>();
 
     public void addDefault(String defaultvalue) {
@@ -102,6 +101,34 @@ public class OdfModel {
    */
   public boolean isStylable(QNamed element) {
     return mNameToFamiliesMap.containsKey(element.getQName());
+  }
+
+  /**
+   * Determines whether all subclasses of this JavaBaseClass are stylable or not stylable.
+   *
+   * @return whether all subclasses are stylable (true) or none (false).
+   * @throws RuntimeException if some subclasses are stylable and some are not
+   */
+  public boolean isStylable(SourceCodeBaseClass base) {
+    boolean notStylable = false;
+    boolean stylable = false;
+    for (PuzzlePiece def : base.getSubElements()) {
+      if (isStylable(def)) {
+        stylable = true;
+      } else {
+        notStylable = true;
+      }
+    }
+    if (stylable && !notStylable) {
+      return true;
+    }
+    if (notStylable && !stylable) {
+      return false;
+    }
+    throw new RuntimeException(
+        "Base Class "
+            + base.getQName()
+            + " used for stylable AND not stylable elements. This is not possible.");
   }
 
   /**
@@ -170,10 +197,12 @@ public class OdfModel {
   }
 
   /**
-   * Get default values of ODF attribute.
+   * Get the relation between @style:family value and child property elements, which is being
+   * extracted with MSV from the grammar: For instance: <style:style style:family="paragraph">
+   * <style:paragraph-properties /> <style:text-properties /> </style:style>
    *
-   * @param attribute Attribute
-   * @return Default values for attribute
+   * @return the map showing the realtion between style:family attribute value as key and the
+   *     style:*-properties element names as values.
    */
   public Map<String, List<String>> getStyleFamilyPropertiesMap() {
     return mStyleFamilyPropertiesMap;

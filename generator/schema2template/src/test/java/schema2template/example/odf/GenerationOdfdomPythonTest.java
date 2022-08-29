@@ -27,8 +27,10 @@ import static schema2template.example.odf.ConstantsBuildEnv.TEMPLATE_BASE_DIR;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 import schema2template.GenerationParameters;
+import schema2template.SchemaToTemplate;
 import schema2template.example.odf.ConstantsOdf.OdfSpecificationPart;
 
 public class GenerationOdfdomPythonTest {
@@ -36,10 +38,7 @@ public class GenerationOdfdomPythonTest {
   private static final Logger LOG = Logger.getLogger(GenerationOdfdomPythonTest.class.getName());
   private static final String ODFDOM_PYTHON_DIRECTORY = "odfdom-python";
   private static final String MAIN_TEMPLATE_PATH =
-      TEMPLATE_BASE_DIR
-          + ODFDOM_PYTHON_DIRECTORY
-          + File.separator
-          + "main_template_file-creation.vm";
+      TEMPLATE_BASE_DIR + ODFDOM_PYTHON_DIRECTORY + File.separator + "file-creation-list.vm";
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test
@@ -71,7 +70,12 @@ public class GenerationOdfdomPythonTest {
               GENERATION_TARGET_BASE_DIR + ODFDOM_PYTHON_DIRECTORY));
     }
 
-    SchemaToTemplate.run(generations);
+    try {
+      SchemaToTemplate.run(generations);
+    } catch (Exception e) {
+      Assert.fail("Exception during test run: " + e.toString());
+      throw new RuntimeException(e);
+    }
     // Changing order of multiple puzzlepieces makes file comparison unuseable
     //    compareDirectories(
     //        GENERATION_TARGET_BASE_DIR + ODFDOM_PYTHON_DIRECTORY, GENERATION_REFERENCE_BASE_DIR

@@ -21,10 +21,11 @@
  *
  * <p>*******************************************************************
  */
-package schema2template.example.odf;
+package schema2template;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -36,12 +37,12 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javax.xml.parsers.ParserConfigurationException;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
-import schema2template.FileCreationListEntry;
-import schema2template.FileCreationListHandler;
-import schema2template.GenerationParameters;
+import org.xml.sax.SAXException;
+import schema2template.example.odf.OdfModel;
 import schema2template.model.XMLModel;
 
 /**
@@ -62,7 +63,8 @@ public class SchemaToTemplate {
    * @param generations each a list of generations of files based on a transformation from XML
    *     grammar data into Velocity templates!
    */
-  public static void run(List<GenerationParameters> generations) {
+  public static void run(List<GenerationParameters> generations)
+      throws ParserConfigurationException, IOException, SAXException {
     //    System.err.println(
     //        "Schema2template code generations triggered " + generations.size() + " times!");
 
@@ -114,16 +116,12 @@ public class SchemaToTemplate {
         modelHistory = null;
       }
 
-      try {
-        fillTemplates(
-            templateBaseDir,
-            mainTemplateFileName,
-            targetDirPath,
-            "file-creation-list_" + grammarID + "-" + grammarVersion + ".xml",
-            initVelocityContext(currentModel, modelHistory, grammarAdditionsFilePath));
-      } catch (Exception ex) {
-        Logger.getLogger(SchemaToTemplate.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      startGeneration(
+          templateBaseDir,
+          mainTemplateFileName,
+          targetDirPath,
+          "file-creation-list_" + grammarID + "-" + grammarVersion + ".xml",
+          initVelocityContext(currentModel, modelHistory, grammarAdditionsFilePath));
 
       if (modelHistory == null) {
         modelHistory = new ArrayList<>();
@@ -136,7 +134,7 @@ public class SchemaToTemplate {
 
   private static VelocityContext initVelocityContext(
       XMLModel xmlModel, List<XMLModel> xmlModelHistory, String grammarAdditionsFilePath)
-      throws Exception {
+      throws ParserConfigurationException, IOException, SAXException {
     LOG.info("Starting initilization of Velocity context..");
     VelocityContext context = new VelocityContext();
 
@@ -162,8 +160,7 @@ public class SchemaToTemplate {
 
       // Needed for the base classes - common attributes are being moved into the base classes
       SourceCodeModel sourceCodeModel =
-          new SourceCodeModel(
-              xmlModel, odfModel, elementToBaseNameMap, datatypeValueAndConversionMap);
+          new SourceCodeModel(xmlModel, elementToBaseNameMap, datatypeValueAndConversionMap);
       context.put("codeModel", sourceCodeModel);
     }
     context.put("xmlModel", xmlModel);
@@ -172,13 +169,13 @@ public class SchemaToTemplate {
     return context;
   }
 
-  private static void fillTemplates(
+  private static void startGeneration(
       String templateBaseDir,
       String templateFileName,
       String targetDirPath,
       String targetFileName,
       VelocityContext context)
-      throws Exception {
+      throws ParserConfigurationException, IOException, SAXException {
 
     // initializing template engine instance (ie. Velocity engine)
     LOG.info("Starting code generation:");
@@ -192,33 +189,33 @@ public class SchemaToTemplate {
     // http://velocity.apache.org/engine/2.3/developer-guide.html#backward-compatible-space-gobbling
     ve.setProperty(RuntimeConstants.SPACE_GOBBLING, "bc");
     ve.init();
-    createOutputFileList(ve, templateFileName, targetDirPath, targetFileName, context);
+    generateFileCreationList(ve, templateFileName, targetDirPath, targetFileName, context);
     LOG.info("file-creation-list.xml has been created!");
 
     // Process output-files.xml, create output files
     LOG.fine("Processing output files... ");
-    processFileList(ve, targetDirPath, targetFileName, context);
+    processFileCreationList(ve, targetDirPath, targetFileName, context);
     LOG.fine("DONE.\n");
   }
 
-  private static void createOutputFileList(
+  private static void generateFileCreationList(
       VelocityEngine ve,
       String templateFileName,
       String targetDirPath,
       String targetFileName,
       VelocityContext context)
-      throws Exception {
-    File outputFileList = new File(targetDirPath + File.separator + targetFileName);
-    ensureParentFolders(outputFileList);
-    try (FileWriter listout = new FileWriter(outputFileList)) {
+      throws IOException {
+    File fileCreationList = new File(targetDirPath + File.separator + targetFileName);
+    ensureParentFolders(fileCreationList);
+    try (FileWriter listout = new FileWriter(fileCreationList)) {
       String encoding = "utf-8";
       ve.mergeTemplate(templateFileName, encoding, context, listout);
     }
   }
 
-  private static void processFileList(
+  private static void processFileCreationList(
       VelocityEngine ve, String targetDirPath, String targetFileName, VelocityContext context)
-      throws Exception {
+      throws ParserConfigurationException, IOException, SAXException {
     File outputFileList = new File(targetDirPath + File.separator + targetFileName);
     List<FileCreationListEntry> fl = FileCreationListHandler.readFileListFile(outputFileList);
 
@@ -229,9 +226,12 @@ public class SchemaToTemplate {
           new Object[] {
             f.getLineNumber(),
             targetDirPath + File.separator,
-            generateFilename(f.getAttribute("path"))
+            // receives the path attribute from the Velocity template
+            getTargetFileName(f.getAttribute("path"))
           });
-      ;
+
+      LOG.info("By Paths: " + Paths.get(f.getAttribute("path")).normalize());
+
       String contextAttrValue = f.getAttribute("contextNode");
       if (contextAttrValue != null) {
         context.put("contextNode", contextAttrValue);
@@ -244,7 +244,7 @@ public class SchemaToTemplate {
       }
 
       File out =
-          new File(targetDirPath + File.separator + generateFilename(f.getAttribute("path")))
+          new File(targetDirPath + File.separator + getTargetFileName(f.getAttribute("path")))
               .getCanonicalFile();
       ensureParentFolders(out);
       try (FileWriter fileout = new FileWriter(out)) {
@@ -254,7 +254,9 @@ public class SchemaToTemplate {
     }
   }
 
-  private static String generateFilename(String rawName) {
+  // receives the path attribute from the Velocity template, replacing each ':' with '_', expecting
+  // Linux separators
+  private static String getTargetFileName(String rawName) {
     String retFilePath = null;
     StringTokenizer toktok = new StringTokenizer(rawName.replaceAll(":", "_"), "/");
     if (toktok.hasMoreTokens()) {

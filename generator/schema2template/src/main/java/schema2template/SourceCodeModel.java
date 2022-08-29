@@ -21,7 +21,7 @@
  *
  * <p>*********************************************************************
  */
-package schema2template.example.odf;
+package schema2template;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ import schema2template.model.XMLModel;
 
 /**
  * Model for Java specific enhancements like common base classes for elements and Java valuetypes
- * for valuetypes used in schema. Capsulates information from the from the config file.
+ * for valuetypes used in schema. Encapsulates information from the grammar-additions.xml file.
  */
 public class SourceCodeModel {
 
@@ -50,14 +50,12 @@ public class SourceCodeModel {
    * Construct SourceCodeModel. Not meant for template usage.
    *
    * @param schemaModel he XMLModel (grammar model)
-   * @param odfModel the OdfModel
    * @param elementNameBaseNameMap the mapping from element names to source code base class names
    * @param datatypeValueAndConversionMap the mapping from schema datatype to {source code types,
    *     name of conversion class}
    */
   public SourceCodeModel(
       XMLModel schemaModel,
-      OdfModel odfModel,
       Map<String, String> elementNameBaseNameMap,
       Map<String, String[]> datatypeValueAndConversionMap) {
     mDataTypeValueAndConversionMap = datatypeValueAndConversionMap;
@@ -92,7 +90,7 @@ public class SourceCodeModel {
     mBaseClasses = new TreeSet<SourceCodeBaseClass>();
     for (String baseName : baseNames) {
       SourceCodeBaseClass javabaseclass =
-          new SourceCodeBaseClass(odfModel, baseName, baseNameElementsMap.get(baseName));
+          new SourceCodeBaseClass(baseName, baseNameElementsMap.get(baseName));
       mBaseClasses.add(javabaseclass);
       mBaseNameToBaseClass.put(baseName, javabaseclass);
     }

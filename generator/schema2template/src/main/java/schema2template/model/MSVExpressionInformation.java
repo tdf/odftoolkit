@@ -48,8 +48,7 @@ import java.util.logging.Logger;
 import org.apache.tinkerpop.gremlin.structure.Graph;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
-import schema2template.example.odf.PathPrinter;
-import schema2template.example.odf.SchemaToTemplate;
+import schema2template.SchemaToTemplate;
 
 /**
  * Gather information from one MSV expression like:

@@ -21,7 +21,7 @@
  *
  * <p>**********************************************************************
  */
-package schema2template.example.odf;
+package schema2template;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -40,13 +40,10 @@ public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass>, QNa
 
   private SortedSet<PuzzlePiece> mSubElements;
   private String mBaseName;
-  private OdfModel mOdfModel;
 
-  protected SourceCodeBaseClass(
-      OdfModel odfModel, String baseName, SortedSet<PuzzlePiece> subElements) {
+  protected SourceCodeBaseClass(String baseName, SortedSet<PuzzlePiece> subElements) {
     mSubElements = subElements;
     mBaseName = baseName;
-    mOdfModel = odfModel;
   }
 
   public int compareTo(SourceCodeBaseClass o) {
@@ -83,7 +80,7 @@ public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass>, QNa
    *
    * @return subclasses
    */
-  public PuzzlePieceSet getElements() {
+  public PuzzlePieceSet getSubElements() {
     return new PuzzlePieceSet(mSubElements);
   }
 
@@ -99,33 +96,5 @@ public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass>, QNa
       attributes.retainAll(subelement.getAttributes());
     }
     return new PuzzlePieceSet(attributes);
-  }
-
-  /**
-   * Determines whether all subclasses of this JavaBaseClass are stylable or not stylable.
-   *
-   * @return whether all subclasses are stylable (true) or none (false).
-   * @throws RuntimeException if some subclasses are stylable and some are not
-   */
-  public boolean isStylable() {
-    boolean notStylable = false;
-    boolean stylable = false;
-    for (PuzzlePiece def : getElements()) {
-      if (mOdfModel.isStylable(def)) {
-        stylable = true;
-      } else {
-        notStylable = true;
-      }
-    }
-    if (stylable && !notStylable) {
-      return true;
-    }
-    if (notStylable && !stylable) {
-      return false;
-    }
-    throw new RuntimeException(
-        "Base Class "
-            + getQName()
-            + " used for stylable AND not stylable elements. This is not possible.");
   }
 }

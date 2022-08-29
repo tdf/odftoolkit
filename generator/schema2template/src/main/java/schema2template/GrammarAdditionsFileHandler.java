@@ -21,27 +21,30 @@
  *
  * <p>**********************************************************************
  */
-package schema2template.example.odf;
+package schema2template;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import schema2template.example.odf.OdfModel;
 
 /**
  * Often Process the custom configuration data XML Reads only the grammar-additions.xml Handler for
  * existing grammar-additions.xml
  */
-class GrammarAdditionsFileHandler extends DefaultHandler {
+public class GrammarAdditionsFileHandler extends DefaultHandler {
 
   private boolean inConfig = false;
   private boolean inElements = false;
@@ -221,7 +224,7 @@ class GrammarAdditionsFileHandler extends DefaultHandler {
       Map<String, OdfModel.AttributeDefaults> attributeDefaults,
       Map<String, List<String>> elementStyleFamilies,
       Map<String, String[]> datatypeValueConversion)
-      throws Exception {
+      throws ParserConfigurationException, SAXException, IOException {
 
     SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
     parser.parse(

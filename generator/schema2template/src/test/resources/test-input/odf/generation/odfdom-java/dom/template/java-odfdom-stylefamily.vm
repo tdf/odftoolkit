@@ -110,10 +110,10 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 	public Set<OdfStyleProperty> getProperties() {
 		return Collections.unmodifiableSet(m_properties);
 	}
-#foreach ($styleFamilyName in ${styleFamilyPropertiesMap.keySet()})
+#foreach ($styleFamilyName in ${odfModel.getStyleFamilyPropertiesMap().keySet()})
 	public final static OdfStyleFamily ${xmlModel.camelCase($styleFamilyName)} = new OdfStyleFamily("${styleFamilyName}",
 			new OdfStyleProperty[]{
-#foreach ($stylePropertiesElementName in ${styleFamilyPropertiesMap.get($styleFamilyName)})
+#foreach ($stylePropertiesElementName in ${odfModel.getStyleFamilyPropertiesMap().get($styleFamilyName)})
 ## stylePropertiesElement-endswith $stylePropertiesElementName
 #foreach ($stylePropertiesElement in ${xmlModel.getElements().withoutMultiples()})
 ##stylePropertiesElement.getLocalName ${stylePropertiesElement.getLocalName()}

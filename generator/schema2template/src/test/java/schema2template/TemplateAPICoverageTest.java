@@ -88,7 +88,7 @@ public class TemplateAPICoverageTest {
   }
 
   /**
-   * Test coverage: Test existance of methods made for template usage. If you rename a method, this
+   * Test coverage: Test existence of methods made for template usage. If you rename a method, this
    * test will fail to show that all templates using this method have to be adapted.
    *
    * <p>The input parameter count of each method will be tested for additional safety.

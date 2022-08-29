@@ -26,6 +26,8 @@ package schema2template.example.odf;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import schema2template.SourceCodeBaseClass;
+import schema2template.SourceCodeModel;
 import schema2template.TemplateAPICoverageTest;
 import schema2template.TemplateAPICoverageTest.MethodSet;
 import schema2template.model.QNamed;
@@ -60,9 +62,8 @@ public class VelocityTemplateAPIRegressionTest {
     assertTrue(methods.contains("getValuetypes", 1));
 
     methods = TemplateAPICoverageTest.getMethods(SourceCodeBaseClass.class);
-    assertTrue(methods.contains("isStylable", 0));
     assertTrue(methods.contains("getBaseAttributes", 0));
-    assertTrue(methods.contains("getElements", 0));
+    assertTrue(methods.contains("getSubElements", 0));
 
     // Test inheritance -> so there's no need to test inherited methods
     assertTrue(QNamed.class.isAssignableFrom(SourceCodeBaseClass.class));
