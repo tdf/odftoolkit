@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<filelist>
+<file-creation-list>
     <file path="hierarchy.py" template="pythontest.vm" />
-</filelist>
+</file-creation-list>
