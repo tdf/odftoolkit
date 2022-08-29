@@ -157,7 +157,7 @@ public class SchemaToTemplate {
           elementStyleFamiliesMap,
           datatypeValueAndConversionMap);
       // odfConstants
-      OdfModel odfModel = new OdfModel(elementStyleFamiliesMap, attributeDefaultMap);
+      OdfModel odfModel = new OdfModel(elementStyleFamiliesMap, attributeDefaultMap, xmlModel);
       context.put("odfModel", odfModel);
 
       // Needed for the base classes - common attributes are being moved into the base classes
@@ -165,10 +165,6 @@ public class SchemaToTemplate {
           new SourceCodeModel(
               xmlModel, odfModel, elementToBaseNameMap, datatypeValueAndConversionMap);
       context.put("codeModel", sourceCodeModel);
-
-      Map<String, List<String>> styleFamilyPropertiesMap =
-          new OdfFamilyPropertiesPatternMatcher(xmlModel.getGrammar()).getFamilyProperties();
-      context.put("styleFamilyPropertiesMap", styleFamilyPropertiesMap);
     }
     context.put("xmlModel", xmlModel);
     context.put("xmlModelHistory", xmlModelHistory);
