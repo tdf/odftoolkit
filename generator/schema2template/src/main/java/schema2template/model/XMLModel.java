@@ -32,6 +32,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
@@ -53,6 +54,10 @@ public class XMLModel {
 
   PuzzlePieceSet mElements = new PuzzlePieceSet();
   PuzzlePieceSet mAttributes = new PuzzlePieceSet();
+  private Map<String, SortedSet<PuzzlePiece>> elementNameToPuzzlePieces;
+  private Map<String, SortedSet<PuzzlePiece>> attributeNameToPuzzlePieces;
+  // Creates a Map Name->PuzzlePiece.
+  // Ignoring the fact that there may be more than one PuzzlePiece per Name
   Map<String, PuzzlePiece> mNameElementMap;
   Map<String, PuzzlePiece> mNameAttributeMap;
   public Expression mRootExpression;
@@ -60,6 +65,15 @@ public class XMLModel {
   public String mLastSchemaFileName;
   private String mGrammarID;
   private String mGrammarVersion;
+
+  /**
+   * Constructs new model by the grammar and a label
+   *
+   * @param schemaFile grammar to read into MSV
+   */
+  public XMLModel(File schemaFile) {
+    this(schemaFile, null, null);
+  }
 
   /**
    * Constructs new model by the grammar and a label
@@ -85,6 +99,49 @@ public class XMLModel {
     mAttributes.makeImmutable();
     mNameElementMap = createMap(mElements);
     mNameAttributeMap = createMap(mAttributes);
+  }
+
+  /** @return a set of one or more elements, which might exist in the grammar for this qName */
+  public SortedSet<PuzzlePiece> getElements(String qName) {
+    if (this.elementNameToPuzzlePieces == null) {
+      // create a map from the qName to the PuzzlePiece(s) - multiple if there are multiple
+      // definitions for the qName in the grammar
+      this.elementNameToPuzzlePieces =
+          createMapQNameToPuzzlePiece(new TreeSet<PuzzlePiece>(this.getElements()));
+    }
+    return this.elementNameToPuzzlePieces.get(qName);
+  }
+
+  /** @return a set of one or more elements, which might exist in the grammar for this qName */
+  public SortedSet<PuzzlePiece> getAttributes(String qName) {
+    if (this.attributeNameToPuzzlePieces == null) {
+      // create a map from the qName to the PuzzlePiece(s) - multiple if there are multiple
+      // definitions for the qName in the grammar
+      this.attributeNameToPuzzlePieces =
+          createMapQNameToPuzzlePiece(new TreeSet<PuzzlePiece>(this.getElements()));
+    }
+    return this.attributeNameToPuzzlePieces.get(qName);
+  }
+
+  /**
+   * Creates a Map, which maps the QName to PuzzlePiece(s), in case there are multiples the
+   * SortedSet has more than one.
+   *
+   * @return one or multiple definitions within the set, in case of multiple definitions in grammar
+   *     for the same QName.
+   */
+  private static Map<String, SortedSet<PuzzlePiece>> createMapQNameToPuzzlePiece(
+      Set<PuzzlePiece> definitions) {
+    Map<String, SortedSet<PuzzlePiece>> retval = new HashMap<String, SortedSet<PuzzlePiece>>();
+    for (PuzzlePiece def : definitions) {
+      SortedSet<PuzzlePiece> multiples = retval.get(def.getQName());
+      if (multiples == null) {
+        multiples = new TreeSet<PuzzlePiece>();
+        retval.put(def.getQName(), multiples);
+      }
+      multiples.add(def);
+    }
+    return retval;
   }
 
   /** @return the MSV Grammar this model is based upon. */
