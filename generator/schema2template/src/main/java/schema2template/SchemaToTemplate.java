@@ -41,8 +41,12 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.xml.sax.SAXException;
+import schema2template.grammar.XMLModel;
 import schema2template.grammar.odf.OdfModel;
-import schema2template.model.XMLModel;
+import schema2template.template.FileCreationListEntry;
+import schema2template.template.FileCreationListHandler;
+import schema2template.template.GrammarAdditionsFileHandler;
+import schema2template.template.SourceCodeModel;
 
 /**
  * Three ODF examples in one: 1) Create an ODF Reference in HTMLl 2) Create Source Code 3) Create
