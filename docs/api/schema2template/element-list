@@ -1,3 +1,4 @@
 schema2template
-schema2template.example.odf
-schema2template.model
+schema2template.grammar
+schema2template.grammar.odf
+schema2template.template
