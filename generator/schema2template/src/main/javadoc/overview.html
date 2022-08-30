@@ -106,10 +106,10 @@ by specifying it in an ant task, like:
 
   <p>In the second step we parse file-creation-list.xml. For every line - "file" entry - we run the as attribute given
     Velocity "template". The template is provided with an additional contextNode by the optional "contextNode"
-    attribute and the output file is written to the given "path" attribute.
-    The "contextNode" property (and as seen later - the optional "param" property as well) is used in templates which
-    process only one element or attribute -
-    to provide them with the name of this element or attribute.
+    XML attribute and the output file is written to the given "path" XML attribute in the template.
+    The "contextNode" property (and as seen later - the optional "param" property as well) is used in templates with
+    varying object.
+    Sometimes representing an element or attribute as PuzzlePiece sometimes a SourceBaseClass.
   </p>
 
   <h2>Schema2Template specific template help</h2>
@@ -254,14 +254,14 @@ by specifying it in an ant task, like:
 
 #if ($element != "*")
 ##
-#if (${element.withMultiples().size()} <= 1)
-#set ($dup = "")
+#if (${element.withMultiples().size()} &lt;= 1)
+#set ($duplicates = "")
 #else
-#set ($dup = "[${element.getMultipleNumber()}]")
+#set ($duplicates = "[${element.getMultipleNumber()}]")
 #end
-<h3><a name="element_${element}_${element.getMultipleNumber()}">${element}${dup} Element</a></h3>
-#if ( ${element.withMultiples().size()} > 1 )
-<p>There are more than one Definitions by this name.</p>
+&lt;h3&gt;&lt;a name="element_${element}_${element.getMultipleNumber()}"&gt;${element}${duplicates} Element&lt;/a&gt;&lt;/h3&gt;
+#if ( ${element.withMultiples().size()} &gt; 1 )
+&lt;p&gt;There are more than one Definitions by this name.&lt;/p&gt;
 #end
 </pre>
 
@@ -322,10 +322,11 @@ by specifying it in an ant task, like:
     However differences between attribute PuzzlePieces are respected by using a different validation:</p>
 
   <pre>
+
 ## Returns PuzzleComponent covering a PuzzlePiece or PuzzlePieceSet dependent if attribute is multiple times defined with $contextNode (given as parameter from the initial file-create-list.vm template)
 #set($attribute = $xmlModel.getAttribute($contextNode))
-<td class="left">Attributes</td>
-<td class="right">
+&lt;td class="left"&gt;Attributes&lt;/td&gt;
+&lt;td class="right"&gt;
 #foreach( $attribute in ${element.getAttributes()} )
 #if ($attribute == "*")
 [any org.w3c.dom.Attribute]&nbsp;
@@ -342,10 +343,10 @@ by specifying it in an ant task, like:
 #set ($mandatory = "")
 #end
 ##
-
   &nbsp;&lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
+
 </pre>
 
 </body>
