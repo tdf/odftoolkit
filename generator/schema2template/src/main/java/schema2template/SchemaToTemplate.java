@@ -41,7 +41,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.xml.sax.SAXException;
-import schema2template.example.odf.OdfModel;
+import schema2template.grammar.odf.OdfModel;
 import schema2template.model.XMLModel;
 
 /**
@@ -187,6 +187,9 @@ public class SchemaToTemplate {
     // Using backward compatible whitespace gobbling/eating
     // http://velocity.apache.org/engine/2.3/developer-guide.html#backward-compatible-space-gobbling
     ve.setProperty(RuntimeConstants.SPACE_GOBBLING, "bc");
+    // https://velocity.apache.org/engine/2.0/user-guide.html#strict-reference-mode (works in 2.3,
+    // but is no longer documented)
+    ve.setProperty(RuntimeConstants.RUNTIME_REFERENCES_STRICT, "true");
     ve.init();
     generateFileCreationList(ve, templateFileName, targetDirPath, targetFileName, context);
     LOG.info("file-creation-list.xml has been created!");
