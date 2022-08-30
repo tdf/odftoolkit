@@ -146,7 +146,7 @@ public class SchemaToTemplate {
       // 2DO - still existent? -- Manual added Java specific info - mapping ODF datatype to Java
       // datatype  -> {odfValueType, javaConversionClassName}
       Map<String, String[]> datatypeValueAndConversionMap = new HashMap<>();
-      Map<String, OdfModel.AttributeDefaults> attributeDefaultMap = new HashMap<>();
+      Map<String, Map<String, String>> attributeDefaultMap = new HashMap<>();
       GrammarAdditionsFileHandler.readGrammarAdditionsFile(
           new File(grammarAdditionsFilePath),
           elementToBaseNameMap,

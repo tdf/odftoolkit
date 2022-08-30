@@ -30,8 +30,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import schema2template.model.PuzzleComponent;
 import schema2template.model.PuzzlePiece;
-import schema2template.model.QNamed;
-import schema2template.model.QNamedPuzzleComponent;
 import schema2template.model.XMLModel;
 
 /**
@@ -73,7 +71,7 @@ public class SourceCodeModel {
         elements = new TreeSet<PuzzlePiece>();
         baseNameElementsMap.put(baseName, elements);
       }
-      QNamedPuzzleComponent subElement = schemaModel.getElement(elementName);
+      PuzzleComponent subElement = schemaModel.getElement(elementName);
       if (subElement != null) {
         if (subElement instanceof Collection) {
           elements.addAll((Collection) subElement);
@@ -110,7 +108,7 @@ public class SourceCodeModel {
    * @param subElement element
    * @return baseclass
    */
-  public SourceCodeBaseClass getBaseClassOf(QNamed subElement) {
+  public SourceCodeBaseClass getBaseClassOf(PuzzleComponent subElement) {
     SourceCodeBaseClass c = null;
     if (subElement != null) {
       if (mElementBaseMap.containsKey(subElement.getQName())) {
@@ -145,7 +143,7 @@ public class SourceCodeModel {
    * @param base name of baseclass
    * @return baseclass object
    */
-  public SourceCodeBaseClass getBaseClass(QNamed base) {
+  public SourceCodeBaseClass getBaseClass(PuzzleComponent base) {
     return getBaseClass(base.getQName());
   }
 
@@ -155,7 +153,7 @@ public class SourceCodeModel {
    * @param datatype
    * @return source code value type
    */
-  public String getValuetype(QNamed datatype) {
+  public String getValuetype(PuzzleComponent datatype) {
     String datatypename = datatype.getQName();
     String[] tuple = mDataTypeValueAndConversionMap.get(datatypename);
     if (tuple == null) {
@@ -216,7 +214,7 @@ public class SourceCodeModel {
    * @param datatype Source code datatype
    * @return name of source code conversion class for this datatype
    */
-  public String getConversiontype(QNamed datatype) {
+  public String getConversiontype(PuzzleComponent datatype) {
     String datatypename = datatype.getQName();
     String[] tuple = mDataTypeValueAndConversionMap.get(datatypename);
     if (tuple == null) {

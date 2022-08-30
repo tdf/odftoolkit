@@ -31,9 +31,6 @@ import org.junit.Test;
 import schema2template.model.PuzzleComponent;
 import schema2template.model.PuzzlePiece;
 import schema2template.model.PuzzlePieceSet;
-import schema2template.model.QNameValue;
-import schema2template.model.QNamed;
-import schema2template.model.QNamedPuzzleComponent;
 import schema2template.model.XMLModel;
 
 /** Regression test to make sure that API used by templates still exists */
@@ -108,7 +105,7 @@ public class TemplateAPICoverageTest {
     assertTrue(methods.contains("getValues", 0));
     assertTrue(methods.contains("isSingleton", 1));
 
-    methods = getMethods(QNamed.class);
+    methods = getMethods(PuzzleComponent.class);
     assertTrue(methods.contains("getLocalName", 0));
     assertTrue(methods.contains("getNamespace", 0));
     assertTrue(methods.contains("getQName", 0));
@@ -131,12 +128,8 @@ public class TemplateAPICoverageTest {
     assertTrue(methods.contains("lastWord", 1));
 
     // Test inheritance -> so there's no need to test inherited methods
-    assertTrue(QNamed.class.isAssignableFrom(PuzzlePiece.class));
-    assertTrue(QNamed.class.isAssignableFrom(PuzzlePieceSet.class));
-    assertTrue(QNamed.class.isAssignableFrom(QNameValue.class));
-    assertTrue(QNamed.class.isAssignableFrom(QNamedPuzzleComponent.class));
-    assertTrue(PuzzleComponent.class.isAssignableFrom(QNamedPuzzleComponent.class));
-    assertTrue(QNamedPuzzleComponent.class.isAssignableFrom(PuzzlePiece.class));
-    assertTrue(QNamedPuzzleComponent.class.isAssignableFrom(PuzzlePieceSet.class));
+    assertTrue(PuzzleComponent.class.isAssignableFrom(PuzzlePiece.class));
+    assertTrue(PuzzleComponent.class.isAssignableFrom(PuzzlePieceSet.class));
+    assertTrue(PuzzleComponent.class.isAssignableFrom(PuzzleComponent.class));
   }
 }

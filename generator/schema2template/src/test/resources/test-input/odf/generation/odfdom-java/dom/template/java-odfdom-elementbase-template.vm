@@ -36,8 +36,8 @@
 #if (${baseElement})
 #set ($elementStyleFamily=${odfModel.getStyleFamilies($baseElement)})
 #set ($useOdfStyleableShapeElement = false)
-#foreach($f in $elementStyleFamily)
-#if (${f.getQName()}=="draw:graphic" || ${f.getQName()}=="presentation:presentation")
+#foreach($familyName in $elementStyleFamily)
+#if (${familyName}=="draw:graphic" || ${familyName}=="presentation:presentation")
 #set ($useOdfStyleableShapeElement = true)
 #end
 #end

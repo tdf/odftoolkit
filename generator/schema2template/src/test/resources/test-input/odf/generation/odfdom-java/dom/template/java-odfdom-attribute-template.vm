@@ -26,7 +26,7 @@
 ## xmlModelHistory - sorted list from latest to earliest release to assist in finding new XML node additions (see odf-reference-template.vm)
 ## But the Velocity context can also be extended by parameters from the calling main-template.
 ##
-## Returns PuzzleComponent covering a PuzzlePiece or PuzzlePieceSet dependent if attribute is multiple times defined
+## Returns PuzzleComponent covering a PuzzlePiece or PuzzlePieceSetQNamed dependent if attribute is multiple times defined with name $contextNode (given as parameter from the initial file-create-list.vm template)
 #set($attribute = $xmlModel.getAttribute($contextNode))
 #set($NS = $attribute.getNamespace())
 #set($localname = ${xmlModel.extractLocalName($attribute)})
@@ -130,9 +130,9 @@ public static final OdfName ATTRIBUTE_NAME = OdfName.newName("$localname");
 #foreach ($defaultValue in $defaultValueSet)
 #set ($constant = $xmlModel.constantCase($defaultValue))
 #if (($defaultValue=="true" or $defaultValue=="false") and $enum == false)
-	public static final String DEFAULT_VALUE_${xmlModel.escapeKeyword($constant)}= "$defaultValue";
+	public static final String DEFAULT_VALUE_${xmlModel.escapeKeyword($constant)} = "$defaultValue";
 #else
-	public static final String DEFAULT_VALUE_${xmlModel.escapeKeyword($constant)}=	Value.${xmlModel.escapeKeyword($constant)}.toString();
+	public static final String DEFAULT_VALUE_${xmlModel.escapeKeyword($constant)} = Value.${xmlModel.escapeKeyword($constant)}.toString();
 #end
 #end
 #else

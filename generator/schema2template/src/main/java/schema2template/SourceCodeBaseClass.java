@@ -27,7 +27,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import schema2template.model.PuzzlePiece;
 import schema2template.model.PuzzlePieceSet;
-import schema2template.model.QNamed;
 import schema2template.model.XMLModel;
 
 /**
@@ -36,7 +35,7 @@ import schema2template.model.XMLModel;
  * <p>Convention: Unique key is the name of the baseClass. So name is used for compareTo(o),
  * equals(o) and hashCode().
  */
-public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass>, QNamed {
+public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass> {
 
   private SortedSet<PuzzlePiece> mSubElements;
   private String mBaseName;

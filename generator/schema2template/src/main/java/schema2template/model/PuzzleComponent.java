@@ -39,6 +39,27 @@ import java.util.Collection;
  * <p>The second purpose of this interface is to hide the differences between one definition and a
  * Collection of definitions. By this you will be able to use single definitions and collections of
  * definitions as method parameters. The method getCollection() is a helper method for this.
+ *
+ * <p>By using this interface you declare that:
+ *
+ * <ul>
+ *   <li>you don't care if a PuzzleComponent is a Collection of Jigsaw pieces or one single Jigsaw
+ *       piece.
+ *   <li>you expect one single name. If the PuzzleComponent is a Collection of definitions, all
+ *       definitions have to be equally named. Calling getQName(), toString(), getLocalName() or
+ *       getNamespace() on a Collection of differently named definitions will throw a
+ *       RuntimeException. For example: A multiple definition of an attribute is frequently used in
+ *       an XML schema.
+ * </ul>
+ *
+ * Unambiguously named (ns:localname) object.
+ *
+ * <p>Contract: Every object implementing hasQName should overwrite the toString() method and return
+ * the QName.
+ *
+ * <p>Warning: Using this interface does not imply any information about the equals() or hashCode()
+ * methods. So for using objects with qualified names in a Collection, you need information from the
+ * implementing class.
  */
 public interface PuzzleComponent {
 
@@ -104,9 +125,47 @@ public interface PuzzleComponent {
   public boolean isSingleton(PuzzleComponent child);
 
   /**
+   * ELEMENT Definition only: Determine solely by child type and name whether child is mandatory.
+   *
+   * <p>Here's why we're not using the child Definition object(s) for this: An element often has a
+   * mandatory attribute, but two (or more) different content definitions for this attribute. This
+   * is done by defining this attribute twice and creating a CHOICE between both Definitions. If
+   * you'd ask whether one of these definitions is mandatory, you'd always get false as answer as
+   * you have the choice between the two definitions. Mostly this is not the answer you're looking
+   * for.
+   *
+   * <p>Contract: If 'this' is a Collection, mandatory means mandatory for one member of 'this'.
+   *
+   * @param child The child Definition(s) of type ELEMENT or ATTRIBUTE
+   * @return true if child is a defined child of this and if it's mandatory. False otherwise.
+   */
+  public boolean isMandatory(PuzzleComponent child);
+
+  /**
    * Method to treat NamedDefined as a Collection of PuzzlePiece
    *
    * @return Collection of PuzzlePiece objects
    */
   public Collection<PuzzlePiece> getCollection();
+
+  /**
+   * Get the QName (i.e. namespace:localname ) or without namespace just the local name as fallback
+   *
+   * @return full name
+   */
+  public String getQName();
+
+  /**
+   * Get only namespace
+   *
+   * @return namespace
+   */
+  public String getNamespace();
+
+  /**
+   * Get only localname
+   *
+   * @return localname
+   */
+  public String getLocalName();
 }

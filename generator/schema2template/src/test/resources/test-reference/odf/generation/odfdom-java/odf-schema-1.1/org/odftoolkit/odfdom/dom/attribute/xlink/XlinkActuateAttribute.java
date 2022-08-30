@@ -59,8 +59,8 @@ public class XlinkActuateAttribute extends OdfAttribute {
 
 public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespace.XLINK, "actuate");
 
-	public static final String DEFAULT_VALUE_ONREQUEST=	Value.ONREQUEST.toString();
-	public static final String DEFAULT_VALUE_ONLOAD=	Value.ONLOAD.toString();
+	public static final String DEFAULT_VALUE_ONLOAD = Value.ONLOAD.toString();
+	public static final String DEFAULT_VALUE_ONREQUEST = Value.ONREQUEST.toString();
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute xlink:actuate}.

@@ -24,8 +24,6 @@
 package schema2template.example.odf;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +31,9 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import schema2template.SourceCodeBaseClass;
-import schema2template.model.*;
+import schema2template.model.PuzzleComponent;
+import schema2template.model.PuzzlePiece;
+import schema2template.model.XMLModel;
 
 /**
  * Model for ODF specific enhancements. Capsulates information from the from the config file. For
@@ -41,53 +41,24 @@ import schema2template.model.*;
  */
 public class OdfModel {
 
-  /** This inner class is not meant for use in templates. */
-  public static class AttributeDefaults {
-    private Map<String, String> elementDefault = new HashMap<String, String>();
+  private final Map<String, List<String>> mNameToFamiliesMap;
+  /**
+   * The attribute name is the key to another map having the default as value with element parent as
+   * key
+   */
+  private final Map<String, Map<String, String>> mAttributeDefaults;
 
-    public void addDefault(String defaultvalue) {
-      addDefault(null, defaultvalue);
-    }
-
-    public void addDefault(String elementname, String defaultvalue) {
-      elementDefault.put(elementname, defaultvalue);
-    }
-
-    public String getDefault() {
-      return getDefault(null);
-    }
-
-    public String getDefault(String elementname) {
-      String retval = elementDefault.get(elementname);
-      // Fallback: Look for global default
-      if (retval == null && elementname != null) {
-        retval = elementDefault.get(null);
-      }
-      return retval;
-    }
-
-    public Set<String> getDefaults() {
-      Set<String> defaults = new HashSet<String>();
-      for (String elementname : elementDefault.keySet()) {
-        String retval = elementDefault.get(elementname);
-        if (retval != null) {
-          defaults.add(retval);
-        }
-      }
-      return defaults;
-    }
-  }
-
-  final Map<String, List<String>> mNameToFamiliesMap;
-  final Map<String, AttributeDefaults> mNameToDefaultsMap;
-  final Map<String, List<String>> mStyleFamilyPropertiesMap;
+  private final Map<String, List<String>> mStyleFamilyPropertiesMap;
+  // work-around for an element name (key) for attributes with default value not having specified a
+  // parent element
+  private final String ALL_ELEMENTS = "*";
 
   public OdfModel(
       Map<String, List<String>> nameToFamiliesMap,
-      Map<String, AttributeDefaults> attributeDefaults,
+      Map<String, Map<String, String>> attributeDefaults,
       XMLModel xmlModel) {
     mNameToFamiliesMap = nameToFamiliesMap;
-    mNameToDefaultsMap = attributeDefaults;
+    mAttributeDefaults = attributeDefaults;
     mStyleFamilyPropertiesMap =
         new OdfFamilyPropertiesPatternMatcher(xmlModel.getGrammar()).getFamilyProperties();
   }
@@ -99,7 +70,7 @@ public class OdfModel {
    * @param element stylable element name
    * @return whether there are style families defined for this Definition
    */
-  public boolean isStylable(QNamed element) {
+  public boolean isStylable(PuzzleComponent element) {
     return mNameToFamiliesMap.containsKey(element.getQName());
   }
 
@@ -138,10 +109,10 @@ public class OdfModel {
    * @param element Element
    * @return list of style family names
    */
-  public List<QNamed> getStyleFamilies(QNamed element) {
-    List<QNamed> retval = new ArrayList<QNamed>();
+  public List<String> getStyleFamilies(PuzzleComponent element) {
+    List<String> retval = new ArrayList<String>();
     for (String family : mNameToFamiliesMap.get(element.getQName())) {
-      retval.add(new QNameValue(family));
+      retval.add(family);
     }
     return retval;
   }
@@ -151,48 +122,59 @@ public class OdfModel {
    *
    * @return SortedSet of Style Family Names
    */
-  public SortedSet<QNamed> getStyleFamilies() {
+  public SortedSet<String> getStyleFamilies() {
     Iterator<List<String>> iter = mNameToFamiliesMap.values().iterator();
-    List<QNamed> families = new ArrayList<QNamed>();
+    List<String> families = new ArrayList<String>();
     while (iter.hasNext()) {
       for (String family : iter.next()) {
-        families.add(new QNameValue(family));
+        families.add(family);
       }
     }
-    return new TreeSet<QNamed>(families);
+    return new TreeSet<String>(families);
   }
 
   /**
    * Get default value of ODF attribute, depending on the ODF element which contains this attribute.
    *
-   * @param attribute Attribute
-   * @param parentelement Parent element
+   * @param attributeName Attribute's qualified name
+   * @param parentElementName Parent element's qualified name
    * @return Default value for attribute of parent
    */
-  public String getDefaultAttributeValue(QNamed attribute, QNamed parentelement) {
-    AttributeDefaults defaults = mNameToDefaultsMap.get(attribute.getQName());
-    if (defaults == null) {
-      return null;
+  public String getDefaultAttributeValue(String attributeName, String parentElementName) {
+    String defaultValue = null;
+    if (parentElementName.equals("table:table-cell") && attributeName.equals("table:protect")) {
+      System.err.println("YEAH!");
     }
-    return defaults.getDefault(parentelement.getQName());
+    if (mAttributeDefaults == null || attributeName == null || attributeName.isBlank()) {
+      return null;
+    } else {
+      Map<String, String> defaultValueByElementParents = mAttributeDefaults.get(attributeName);
+      if (defaultValueByElementParents == null) {
+        return null;
+      }
+      defaultValue = defaultValueByElementParents.get(parentElementName);
+      if (defaultValue == null) {
+        defaultValue = defaultValueByElementParents.get(ALL_ELEMENTS);
+      }
+    }
+    return defaultValue;
   }
 
   /**
    * Get default values of ODF attribute.
    *
-   * @param attribute Attribute
+   * @param attributeName Attribute qualified name
    * @return Default values for attribute
    */
-  public Set<String> getDefaultAttributeValues(QNamed attribute) {
-    if (mNameToDefaultsMap == null || attribute == null) {
+  public Set<String> getDefaultAttributeValues(String attributeName) {
+    if (mAttributeDefaults == null || attributeName == null || attributeName.isBlank()) {
       return null;
     } else {
-      AttributeDefaults defaults = mNameToDefaultsMap.get(attribute.getQName());
-      if (defaults == null) {
+      Map<String, String> defaultValueByElementParents = mAttributeDefaults.get(attributeName);
+      if (defaultValueByElementParents == null) {
         return null;
-      } else {
-        return defaults.getDefaults();
       }
+      return new TreeSet<>(defaultValueByElementParents.values());
     }
   }
 

@@ -44,7 +44,7 @@ import java.util.TreeSet;
  *       velocity templates
  * </ul>
  */
-public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzlePiece> {
+public class PuzzlePieceSet implements PuzzleComponent, Collection<PuzzlePiece> {
 
   private boolean mImmutable = false;
   private SortedSet<PuzzlePiece> mDefinitions;
@@ -188,11 +188,11 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
    * <p>Template Usage: #set ($non_base_attributes =
    * $element.getAttributes().without($baseclass.getAttributes())
    *
-   * @param removeAll QNamedPuzzleComponent which (or which elements) should be removed from the new
+   * @param removeAll PuzzleComponent which (or which elements) should be removed from the new
    *     PuzzlePieceSet
    * @return new PuzzlePieceSet
    */
-  public PuzzlePieceSet without(QNamedPuzzleComponent removeAll) {
+  public PuzzlePieceSet without(PuzzleComponent removeAll) {
     PuzzlePieceSet retval = new PuzzlePieceSet(this);
     if (removeAll != null) {
       retval.removeAll(removeAll.getCollection());
@@ -202,7 +202,7 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
 
   /**
    * Returns new PuzzlePieceSet containing the elements of this PuzzlePieceSet, but only those which
-   * have at least one element from the QNamedPuzzleComponent parameter as one of their parent
+   * have at least one element from the PuzzleComponent parameter as one of their parent
    * Definitions.
    *
    * <p>Template Usage: Imagine we have one attribute name and we're not interested in the
@@ -222,7 +222,7 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
    * @param parents
    * @return new PuzzlePieceSet
    */
-  public PuzzlePieceSet byParent(QNamedPuzzleComponent parents) {
+  public PuzzlePieceSet byParent(PuzzleComponent parents) {
     PuzzlePieceSet retval = new PuzzlePieceSet();
     for (PuzzlePiece def : this) {
       PuzzlePieceSet defparents = def.getParents();
@@ -257,13 +257,13 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
    * @param aNamed
    * @return True if an element by this name exists
    */
-  public boolean containsName(QNamed aNamed) {
+  public boolean containsName(PuzzleComponent aNamed) {
     return containsName(aNamed.getQName());
   }
 
   /*
    * -----------------------------------------------------
-   *  Interface QNamed
+   *  Interface PuzzleComponent
    * -----------------------------------------------------
    */
 
@@ -393,7 +393,7 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
 
   /*
    * -----------------------------------------------------
-   *  Interface QNamedPuzzleComponent
+   *  Interface PuzzleComponent
    * -----------------------------------------------------
    */
 
@@ -405,7 +405,7 @@ public class PuzzlePieceSet implements QNamedPuzzleComponent, Collection<PuzzleP
     return retval;
   }
 
-  public boolean isMandatory(QNamedPuzzleComponent child) {
+  public boolean isMandatory(PuzzleComponent child) {
     for (PuzzlePiece def : this) {
       if (def.isMandatory(child)) {
         return true;
