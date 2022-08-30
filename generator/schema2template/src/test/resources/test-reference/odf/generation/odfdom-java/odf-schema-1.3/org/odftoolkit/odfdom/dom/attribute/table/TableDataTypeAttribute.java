@@ -127,13 +127,13 @@ public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespac
 		String defaultValue = null;
 		if (parentElement != null) {
 			if (parentElement instanceof TableFilterConditionElement) {
-				defaultValue = "text";
+				defaultValue = DEFAULT_VALUE_TEXT;
 			}
 			if (parentElement instanceof TableSortByElement) {
-				defaultValue = "automatic";
+				defaultValue = DEFAULT_VALUE_AUTOMATIC;
 			}
 			if (parentElement instanceof TableSortGroupsElement) {
-				defaultValue = "automatic";
+				defaultValue = DEFAULT_VALUE_AUTOMATIC;
 			}
 		}
 		return defaultValue;

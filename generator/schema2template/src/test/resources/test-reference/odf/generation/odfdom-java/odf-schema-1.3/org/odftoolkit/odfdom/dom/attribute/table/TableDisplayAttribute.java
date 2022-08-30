@@ -107,16 +107,16 @@ public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespac
 		String defaultValue = null;
 		if (parentElement != null) {
 			if (parentElement instanceof TableErrorMessageElement) {
-				defaultValue = "false";
+				defaultValue = DEFAULT_VALUE_FALSE;
 			}
 			if (parentElement instanceof TableHelpMessageElement) {
-				defaultValue = "false";
+				defaultValue = DEFAULT_VALUE_FALSE;
 			}
 			if (parentElement instanceof TableTableColumnGroupElement) {
-				defaultValue = "true";
+				defaultValue = DEFAULT_VALUE_TRUE;
 			}
 			if (parentElement instanceof TableTableRowGroupElement) {
-				defaultValue = "true";
+				defaultValue = DEFAULT_VALUE_TRUE;
 			}
 		}
 		return defaultValue;

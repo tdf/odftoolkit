@@ -259,7 +259,8 @@ public class $className extends OdfAttribute {
 #foreach ($parent in ${attribute.getParents().withoutMultiples()})
 #if ($odfModel.getDefaultAttributeValue($attribute, $parent))
 			if (parentElement instanceof ${xmlModel.camelCase($parent)}Element) {
-				defaultValue = "${xmlModel.escapeLiteral($odfModel.getDefaultAttributeValue($attribute, $parent))}";
+#set ($constant = $xmlModel.constantCase($odfModel.getDefaultAttributeValue($attribute, $parent)))
+				defaultValue = DEFAULT_VALUE_${xmlModel.escapeKeyword($constant)};
 			}
 #end
 #end

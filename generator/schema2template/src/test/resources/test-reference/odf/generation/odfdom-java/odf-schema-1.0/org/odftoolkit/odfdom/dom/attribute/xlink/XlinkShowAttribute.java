@@ -135,34 +135,34 @@ public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespac
 		String defaultValue = null;
 		if (parentElement != null) {
 			if (parentElement instanceof DrawAppletElement) {
-				defaultValue = "embed";
+				defaultValue = DEFAULT_VALUE_EMBED;
 			}
 			if (parentElement instanceof DrawFillImageElement) {
-				defaultValue = "embed";
+				defaultValue = DEFAULT_VALUE_EMBED;
 			}
 			if (parentElement instanceof DrawFloatingFrameElement) {
-				defaultValue = "embed";
+				defaultValue = DEFAULT_VALUE_EMBED;
 			}
 			if (parentElement instanceof DrawImageElement) {
-				defaultValue = "embed";
+				defaultValue = DEFAULT_VALUE_EMBED;
 			}
 			if (parentElement instanceof DrawObjectElement) {
-				defaultValue = "embed";
+				defaultValue = DEFAULT_VALUE_EMBED;
 			}
 			if (parentElement instanceof DrawObjectOleElement) {
-				defaultValue = "embed";
+				defaultValue = DEFAULT_VALUE_EMBED;
 			}
 			if (parentElement instanceof DrawPluginElement) {
-				defaultValue = "embed";
+				defaultValue = DEFAULT_VALUE_EMBED;
 			}
 			if (parentElement instanceof PresentationEventListenerElement) {
-				defaultValue = "embed";
+				defaultValue = DEFAULT_VALUE_EMBED;
 			}
 			if (parentElement instanceof TextListLevelStyleImageElement) {
-				defaultValue = "embed";
+				defaultValue = DEFAULT_VALUE_EMBED;
 			}
 			if (parentElement instanceof TextSectionSourceElement) {
-				defaultValue = "embed";
+				defaultValue = DEFAULT_VALUE_EMBED;
 			}
 		}
 		return defaultValue;

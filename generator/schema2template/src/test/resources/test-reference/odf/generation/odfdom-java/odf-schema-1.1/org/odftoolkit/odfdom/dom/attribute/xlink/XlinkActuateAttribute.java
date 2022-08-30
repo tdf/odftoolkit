@@ -142,58 +142,58 @@ public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespac
 		String defaultValue = null;
 		if (parentElement != null) {
 			if (parentElement instanceof DrawAElement) {
-				defaultValue = "onRequest";
+				defaultValue = DEFAULT_VALUE_ONREQUEST;
 			}
 			if (parentElement instanceof DrawAppletElement) {
-				defaultValue = "onLoad";
+				defaultValue = DEFAULT_VALUE_ONLOAD;
 			}
 			if (parentElement instanceof DrawFillImageElement) {
-				defaultValue = "onLoad";
+				defaultValue = DEFAULT_VALUE_ONLOAD;
 			}
 			if (parentElement instanceof DrawFloatingFrameElement) {
-				defaultValue = "onLoad";
+				defaultValue = DEFAULT_VALUE_ONLOAD;
 			}
 			if (parentElement instanceof DrawImageElement) {
-				defaultValue = "onLoad";
+				defaultValue = DEFAULT_VALUE_ONLOAD;
 			}
 			if (parentElement instanceof DrawObjectElement) {
-				defaultValue = "onLoad";
+				defaultValue = DEFAULT_VALUE_ONLOAD;
 			}
 			if (parentElement instanceof DrawObjectOleElement) {
-				defaultValue = "onLoad";
+				defaultValue = DEFAULT_VALUE_ONLOAD;
 			}
 			if (parentElement instanceof DrawPluginElement) {
-				defaultValue = "onLoad";
+				defaultValue = DEFAULT_VALUE_ONLOAD;
 			}
 			if (parentElement instanceof FormFormElement) {
-				defaultValue = "onRequest";
+				defaultValue = DEFAULT_VALUE_ONREQUEST;
 			}
 			if (parentElement instanceof PresentationEventListenerElement) {
-				defaultValue = "onRequest";
+				defaultValue = DEFAULT_VALUE_ONREQUEST;
 			}
 			if (parentElement instanceof PresentationSoundElement) {
-				defaultValue = "onRequest";
+				defaultValue = DEFAULT_VALUE_ONREQUEST;
 			}
 			if (parentElement instanceof ScriptEventListenerElement) {
-				defaultValue = "onRequest";
+				defaultValue = DEFAULT_VALUE_ONREQUEST;
 			}
 			if (parentElement instanceof SvgDefinitionSrcElement) {
-				defaultValue = "onRequest";
+				defaultValue = DEFAULT_VALUE_ONREQUEST;
 			}
 			if (parentElement instanceof SvgFontFaceUriElement) {
-				defaultValue = "onRequest";
+				defaultValue = DEFAULT_VALUE_ONREQUEST;
 			}
 			if (parentElement instanceof TableCellRangeSourceElement) {
-				defaultValue = "onRequest";
+				defaultValue = DEFAULT_VALUE_ONREQUEST;
 			}
 			if (parentElement instanceof TableTableSourceElement) {
-				defaultValue = "onRequest";
+				defaultValue = DEFAULT_VALUE_ONREQUEST;
 			}
 			if (parentElement instanceof TextAElement) {
-				defaultValue = "onRequest";
+				defaultValue = DEFAULT_VALUE_ONREQUEST;
 			}
 			if (parentElement instanceof TextListLevelStyleImageElement) {
-				defaultValue = "onLoad";
+				defaultValue = DEFAULT_VALUE_ONLOAD;
 			}
 		}
 		return defaultValue;
