@@ -26,6 +26,7 @@ package schema2template;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import schema2template.example.odf.OdfModel;
 
 /**
  * Often Process the custom configuration data XML Reads only the grammar-additions.xml Handler for
@@ -46,6 +46,9 @@ import schema2template.example.odf.OdfModel;
  */
 public class GrammarAdditionsFileHandler extends DefaultHandler {
 
+  // work-around for an element name (key) for attributes with default value not having specified a
+  // parent element
+  private static final String ALL_ELEMENTS = "*";
   private boolean inConfig = false;
   private boolean inElements = false;
   private boolean inElement = false;
@@ -59,17 +62,17 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
   private Set<String> mProcessedElements;
   private Map<String, String[]>
       mDatatypeValueConversion; // Datatype -> {value-type, conversion-classname}
-  private Map<String, OdfModel.AttributeDefaults>
-      mAttributeDefaultMap; // Attributename -> {elementname or null, defaultvalue}
+  private Map<String, Map<String, String>>
+      mAttributeDefaults; // Attributename -> {elementname or null, defaultValue}
   private Set<String> mProcessedDatatypes;
 
   public GrammarAdditionsFileHandler(
       Map<String, String> elementBaseNames,
-      Map<String, OdfModel.AttributeDefaults> attributeDefaultMap,
+      Map<String, Map<String, String>> attributeDefaultMap,
       Map<String, List<String>> elementStyleFamilies,
       Map<String, String[]> datatypeValueConversion) {
     mElementBaseNames = elementBaseNames;
-    mAttributeDefaultMap = attributeDefaultMap;
+    mAttributeDefaults = attributeDefaultMap;
     mDatatypeValueConversion = datatypeValueConversion;
     mElementStyleFamilies = elementStyleFamilies;
     mProcessedElements = new HashSet<String>();
@@ -77,17 +80,17 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
   }
 
   private void readElementConfig(Attributes attrs) throws SAXException {
-    String name = attrs.getValue("name");
-    if (name == null) {
+    String attrName = attrs.getValue("name");
+    if (attrName == null) {
       throw new SAXException("Invalid element line " + mLocator.getLineNumber());
     }
-    if (mProcessedElements.contains(name)) {
+    if (mProcessedElements.contains(attrName)) {
       throw new SAXException("Multiple definition of element in line " + mLocator.getLineNumber());
     }
-    mProcessedElements.add(name);
+    mProcessedElements.add(attrName);
     String base = attrs.getValue("base");
     if (base != null && base.length() > 0) {
-      mElementBaseNames.put(name, base);
+      mElementBaseNames.put(attrName, base);
     }
     String commaSeparatedStyleFamilies = attrs.getValue("family");
     if (commaSeparatedStyleFamilies != null) {
@@ -100,40 +103,43 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
         }
       }
       if (families.size() > 0) {
-        mElementStyleFamilies.put(name, families);
+        mElementStyleFamilies.put(attrName, families);
       }
     }
   }
 
   private void createDatatypeConfig(Attributes attrs) throws SAXException {
-    String name = attrs.getValue("name");
-    if (name == null) {
+    String attrName = attrs.getValue("name");
+    if (attrName == null) {
       throw new SAXException("Invalid datatype line " + mLocator.getLineNumber());
     }
-    if (mProcessedDatatypes.contains(name)) {
+    if (mProcessedDatatypes.contains(attrName)) {
       throw new SAXException("Multiple definition of datatype in line " + mLocator.getLineNumber());
     }
-    mProcessedDatatypes.add(name);
+    mProcessedDatatypes.add(attrName);
     String[] tuple = new String[2];
     tuple[0] = attrs.getValue("value-type");
     tuple[1] = attrs.getValue("conversion-type");
-    mDatatypeValueConversion.put(name, tuple);
+    mDatatypeValueConversion.put(attrName, tuple);
   }
 
   private void createAttributeConfig(Attributes attrs) throws SAXException {
-    String name = attrs.getValue("name");
-    if (name == null) {
+    String attrName = attrs.getValue("name");
+    if (attrName == null) {
       throw new SAXException("Invalid attribute line " + mLocator.getLineNumber());
     }
 
-    String elementname = attrs.getValue("element");
-    String defaultvalue = attrs.getValue("defaultValue");
-    OdfModel.AttributeDefaults defaults = mAttributeDefaultMap.get(name);
-    if (defaults == null) {
-      defaults = new OdfModel.AttributeDefaults();
-      mAttributeDefaultMap.put(name, defaults);
+    String elementName = attrs.getValue("element");
+    String defaultValue = attrs.getValue("defaultValue");
+    Map<String, String> defaultValueByParentElement = mAttributeDefaults.get(attrName);
+    if (defaultValueByParentElement == null) {
+      defaultValueByParentElement = new HashMap<String, String>();
+      mAttributeDefaults.put(attrName, defaultValueByParentElement);
     }
-    defaults.addDefault(elementname, defaultvalue);
+    if (elementName == null) {
+      elementName = ALL_ELEMENTS;
+    }
+    defaultValueByParentElement.put(elementName, defaultValue);
   }
 
   @Override
@@ -221,7 +227,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
   public static void readGrammarAdditionsFile(
       File cf,
       Map<String, String> elementBaseNames,
-      Map<String, OdfModel.AttributeDefaults> attributeDefaults,
+      Map<String, Map<String, String>> attributeDefaults,
       Map<String, List<String>> elementStyleFamilies,
       Map<String, String[]> datatypeValueConversion)
       throws ParserConfigurationException, SAXException, IOException {

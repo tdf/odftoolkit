@@ -45,8 +45,8 @@ public class TableDisplayAttribute extends OdfAttribute {
 
 public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "display");
 
-	public static final String DEFAULT_VALUE_FALSE= "false";
-	public static final String DEFAULT_VALUE_TRUE= "true";
+	public static final String DEFAULT_VALUE_FALSE = "false";
+	public static final String DEFAULT_VALUE_TRUE = "true";
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute table:display}.

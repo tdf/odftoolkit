@@ -261,7 +261,7 @@ public class XMLModel {
    * @param name
    * @return Element PuzzlePiece(s)
    */
-  public QNamedPuzzleComponent getElement(String name) {
+  public PuzzleComponent getElement(String name) {
     PuzzlePiece element = mNameElementMap.get(name);
     if (element == null) {
       return null;
@@ -297,7 +297,7 @@ public class XMLModel {
    * @param name
    * @return Attribute PuzzlePiece(s)
    */
-  public QNamedPuzzleComponent getAttribute(String name) {
+  public PuzzleComponent getAttribute(String name) {
     PuzzlePiece attribute = mNameAttributeMap.get(name);
     if (attribute == null) {
       return null;
@@ -350,7 +350,7 @@ public class XMLModel {
    * @param def input
    * @return filtered output String
    */
-  public static String camelCase(QNamed def) {
+  public static String camelCase(PuzzleComponent def) {
     return camelCase(def.getQName());
   }
 
@@ -374,7 +374,7 @@ public class XMLModel {
    * @param def input
    * @return filtered output String
    */
-  public static String javaCase(QNamed def) {
+  public static String javaCase(PuzzleComponent def) {
     return javaCase(def.getQName());
   }
 
@@ -404,7 +404,7 @@ public class XMLModel {
    * @param def input
    * @return filtered output String
    */
-  public static String constantCase(QNamed def) {
+  public static String constantCase(PuzzleComponent def) {
     return constantCase(def.getQName());
   }
 
@@ -424,13 +424,13 @@ public class XMLModel {
   }
 
   /**
-   * Maybe not used anymore: Get first word out of a QNamed object containing delimiters like "-:/
-   * _.,"
+   * Maybe not used anymore: Get first word out of a PuzzleComponent object containing delimiters
+   * like "-:/ _.,"
    *
    * @param def input
    * @return first word
    */
-  public static String firstWord(QNamed def) {
+  public static String firstWord(PuzzleComponent def) {
     return firstWord(def.getQName());
   }
 
@@ -455,7 +455,7 @@ public class XMLModel {
    * @param def input
    * @return last word
    */
-  public static String lastWord(QNamed def) {
+  public static String lastWord(PuzzleComponent def) {
     return lastWord(def.getQName());
   }
 
@@ -465,7 +465,7 @@ public class XMLModel {
    * @param in raw input
    * @return filtered output, starting with a literal
    */
-  public static String escapeKeyword(QNamed in) {
+  public static String escapeKeyword(PuzzleComponent in) {
     return escapeKeyword(in.getQName());
   }
 
@@ -493,7 +493,7 @@ public class XMLModel {
    * @param in raw input
    * @return filtered output, with escaped quotation marks
    */
-  public static String escapeLiteral(QNamed in) {
+  public static String escapeLiteral(PuzzleComponent in) {
     return escapeLiteral(in.getQName());
   }
 
@@ -531,10 +531,10 @@ public class XMLModel {
   /**
    * Extract namespace ns from ns:local name
    *
-   * @param def QNamed object
+   * @param def PuzzleComponent object
    * @return ns part from ns:local name
    */
-  public static String extractNamespace(QNamed def) {
+  public static String extractNamespace(PuzzleComponent def) {
     return extractNamespace(def.getQName());
   }
 
@@ -559,10 +559,10 @@ public class XMLModel {
   /**
    * Extract localname local from ns:local name
    *
-   * @param def QNamed object
+   * @param def PuzzleComponent object
    * @return local part from ns:local name
    */
-  public static String extractLocalName(QNamed def) {
+  public static String extractLocalName(PuzzleComponent def) {
     return extractLocalName(def.getQName());
   }
 }

@@ -30,5 +30,5 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 
 public interface OdfTextProperties {
 	public final static OdfStyleProperty * =
-		OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName(OdfDocumentNamespace.${property.getNamespace().toUpperCase()}, "*"));
+		OdfStyleProperty.get(OdfStylePropertiesSet.TextProperties, OdfName.newName("*"));
 }

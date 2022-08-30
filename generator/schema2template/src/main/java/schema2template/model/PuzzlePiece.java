@@ -58,7 +58,7 @@ import java.util.Set;
  *       velocity templates
  * </ul>
  */
-public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleComponent {
+public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
 
   private static final String BASE_DIR =
       System.getProperty("schema2template.base.dir") + File.separator;
@@ -250,7 +250,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
   }
 
   /**
-   * Gets the ns:local tag name of this PuzzlePiece
+   * Gets the &lt;ns:local&gt; tag name of this PuzzlePiece
    *
    * @return The tag name
    */
@@ -366,7 +366,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
     return mChildElements;
   }
 
-  public boolean isMandatory(QNamedPuzzleComponent child) {
+  public boolean isMandatory(PuzzleComponent child) {
     switch (child.getType()) {
       case ATTRIBUTE:
         if (mMandatoryChildAttributeNames.contains(child.getQName())) {
@@ -472,7 +472,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
     //        || newAttributeSet.size() == 1820);
     //    assert (!schemaFileName.equals(SchemaToTemplate.ODF13_RNG_FILE)
     //        || newAttributeSet.size() == 1836);
-    configureProperties(newElementSet, newAttributeSet, schemaFileName, graphMLTargetDir);
+    addChildExpression(newElementSet, newAttributeSet, schemaFileName, graphMLTargetDir);
     reduceDatatypes(newAttributeSet);
 
     /*
@@ -653,7 +653,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
   }
 
   // Sets Children, Attributes and Parents.
-  private static void configureProperties(
+  private static void addChildExpression(
       PuzzlePieceSet elements,
       PuzzlePieceSet attributes,
       String schemaFileName,
@@ -672,8 +672,6 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, QNamedPuzzleCompone
               MSVExpressionIterator.DIRECT_CHILDREN_ONLY);
       while (childFinder.hasNext()) {
         Expression child_exp = childFinder.next();
-        // 2DO: IS CHILDEXPR BEREITS VORGEKOMMEN
-        // OR UNIQUE NEXT
         List<PuzzlePiece> child_defs = null;
         PuzzlePieceSet whereToAdd = null;
         if (child_exp instanceof ElementExp) {

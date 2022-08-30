@@ -45,13 +45,13 @@
 ## ...or configured base class
 #if (${codeModel.getBaseClassOf($element)})
 #set ($base = ${codeModel.getBaseClassOf($element)})
-#end
 ## Configured manually generated base class?
 #if ($base == "container")
 #set ($_specialbase = true)
 #set ($baseClassName = "OdfContainerElementBase")
 #set ($baseimport = "org.odftoolkit.odfdom.pkg.$baseClassName")
 #set ($baseHasMandatoryAttr = false)
+#end
 #end
 ##
 ## Test if this element has mandatory (non optional) attributes

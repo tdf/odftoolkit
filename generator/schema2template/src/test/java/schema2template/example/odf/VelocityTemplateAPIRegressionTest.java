@@ -30,14 +30,13 @@ import schema2template.SourceCodeBaseClass;
 import schema2template.SourceCodeModel;
 import schema2template.TemplateAPICoverageTest;
 import schema2template.TemplateAPICoverageTest.MethodSet;
-import schema2template.model.QNamed;
 
 public class VelocityTemplateAPIRegressionTest {
 
   public VelocityTemplateAPIRegressionTest() {}
 
   /**
-   * Test coverage: Test existense of methods made for template usage. If you rename a method, this
+   * Test coverage: Test existence of methods made for template usage. If you rename a method, this
    * test will fail to show that all templates using this method have to be adapted.
    *
    * <p>The input parameter count of each method will be tested for additional safety.
@@ -64,8 +63,5 @@ public class VelocityTemplateAPIRegressionTest {
     methods = TemplateAPICoverageTest.getMethods(SourceCodeBaseClass.class);
     assertTrue(methods.contains("getBaseAttributes", 0));
     assertTrue(methods.contains("getSubElements", 0));
-
-    // Test inheritance -> so there's no need to test inherited methods
-    assertTrue(QNamed.class.isAssignableFrom(SourceCodeBaseClass.class));
   }
 }

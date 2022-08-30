@@ -40,8 +40,8 @@
 #set ($baseClassName = "OdfStylableElement")
 #set ($elementStyleFamily=${odfModel.getStyleFamilies($element)})
 #set ($useOdfStyleableShapeElement = false)
-#foreach($f in $elementStyleFamily)
-#if (${f.getQName()}=="draw:graphic" || ${f.getQName()}=="presentation:presentation")
+#foreach($familyName in $elementStyleFamily)
+#if (${familyName}=="draw:graphic" || ${familyName}=="presentation:presentation")
 #set ($useOdfStyleableShapeElement = true)
 #end
 #end
@@ -90,10 +90,12 @@
 #end
 #set ($attributes = $attributes.without($base.getBaseAttributes()))
 #set ($baseElement = ${xmlModel.getElement($base.getQName())})
+#if ($baseElement)
 #set ($bAttributes = ${baseElement.getAttributes().withoutMultiples()})
 #foreach ($bAttribute in $bAttributes)
 #if (${baseElement.isMandatory($bAttribute)})
 #set ($baseHasMandatoryAttr = true)
+#end
 #end
 #end
 #end

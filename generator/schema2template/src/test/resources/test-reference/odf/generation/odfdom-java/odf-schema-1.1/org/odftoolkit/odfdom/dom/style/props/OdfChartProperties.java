@@ -30,5 +30,5 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 
 public interface OdfChartProperties {
 	public final static OdfStyleProperty * =
-		OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.newName(OdfDocumentNamespace.${property.getNamespace().toUpperCase()}, "*"));
+		OdfStyleProperty.get(OdfStylePropertiesSet.ChartProperties, OdfName.newName("*"));
 }

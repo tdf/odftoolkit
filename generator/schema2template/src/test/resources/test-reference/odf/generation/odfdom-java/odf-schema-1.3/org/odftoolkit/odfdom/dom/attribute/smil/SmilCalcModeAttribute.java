@@ -44,8 +44,8 @@ public class SmilCalcModeAttribute extends OdfAttribute {
 
 public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespace.SMIL, "calcMode");
 
-	public static final String DEFAULT_VALUE_DISCRETE=	Value.DISCRETE.toString();
-	public static final String DEFAULT_VALUE_PACED=	Value.PACED.toString();
+	public static final String DEFAULT_VALUE_DISCRETE = Value.DISCRETE.toString();
+	public static final String DEFAULT_VALUE_PACED = Value.PACED.toString();
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute smil:calcMode}.
