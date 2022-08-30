@@ -126,10 +126,10 @@ public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespac
 		String defaultValue = null;
 		if (parentElement != null) {
 			if (parentElement instanceof DrawConnectorElement) {
-				defaultValue = "standard";
+				defaultValue = DEFAULT_VALUE_STANDARD;
 			}
 			if (parentElement instanceof DrawEnhancedGeometryElement) {
-				defaultValue = "non-primitive";
+				defaultValue = DEFAULT_VALUE_NON_PRIMITIVE;
 			}
 		}
 		return defaultValue;
