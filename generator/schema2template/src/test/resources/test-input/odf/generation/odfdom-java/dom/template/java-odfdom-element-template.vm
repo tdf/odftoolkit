@@ -43,10 +43,9 @@
 #foreach($familyName in $elementStyleFamily)
 #if (${familyName}=="draw:graphic" || ${familyName}=="presentation:presentation")
 #set ($useOdfStyleableShapeElement = true)
-#end
-#end
-#if ($useOdfStyleableShapeElement)
 #set ($baseClassName = "OdfStyleableShapeElement")
+#break
+#end
 #end
 #set ($baseHasMandatoryAttr = false)
 #set ($firstfamily = ${xmlModel.camelCase($xmlModel.extractLocalName($odfModel.getStyleFamilies($element).get(0)))})
