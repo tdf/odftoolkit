@@ -69,12 +69,12 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
   public GrammarAdditionsFileHandler(
       Map<String, String> elementBaseNames,
       Map<String, Map<String, String>> attributeDefaultMap,
-      Map<String, List<String>> elementStyleFamilies,
+      Map<String, List<String>> elementNameToFamilyMap,
       Map<String, String[]> datatypeValueConversion) {
     mElementBaseNames = elementBaseNames;
     mAttributeDefaults = attributeDefaultMap;
     mDatatypeValueConversion = datatypeValueConversion;
-    mElementStyleFamilies = elementStyleFamilies;
+    mElementStyleFamilies = elementNameToFamilyMap;
     mProcessedElements = new HashSet<String>();
     mProcessedDatatypes = new HashSet<String>();
   }
@@ -228,7 +228,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
       File cf,
       Map<String, String> elementBaseNames,
       Map<String, Map<String, String>> attributeDefaults,
-      Map<String, List<String>> elementStyleFamilies,
+      Map<String, List<String>> elementNameToFamilyMap,
       Map<String, String[]> datatypeValueConversion)
       throws ParserConfigurationException, SAXException, IOException {
 
@@ -236,6 +236,6 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
     parser.parse(
         cf,
         new GrammarAdditionsFileHandler(
-            elementBaseNames, attributeDefaults, elementStyleFamilies, datatypeValueConversion));
+            elementBaseNames, attributeDefaults, elementNameToFamilyMap, datatypeValueConversion));
   }
 }

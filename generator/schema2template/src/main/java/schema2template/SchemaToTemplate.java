@@ -146,7 +146,7 @@ public class SchemaToTemplate {
       // Manual added Java specific info - Base class for inheritance
       Map<String, String> elementToBaseNameMap = new HashMap<>();
       // Manual added ODF specific info - style family mapping
-      Map<String, List<String>> elementStyleFamiliesMap = new HashMap<>();
+      Map<String, List<String>> elementNameToFamilyMap = new HashMap<>();
       // 2DO - still existent? -- Manual added Java specific info - mapping ODF datatype to Java
       // datatype  -> {odfValueType, javaConversionClassName}
       Map<String, String[]> datatypeValueAndConversionMap = new HashMap<>();
@@ -155,10 +155,10 @@ public class SchemaToTemplate {
           new File(grammarAdditionsFilePath),
           elementToBaseNameMap,
           attributeDefaultMap,
-          elementStyleFamiliesMap,
+          elementNameToFamilyMap,
           datatypeValueAndConversionMap);
       // odfConstants
-      OdfModel odfModel = new OdfModel(elementStyleFamiliesMap, attributeDefaultMap, xmlModel);
+      OdfModel odfModel = new OdfModel(elementNameToFamilyMap, attributeDefaultMap, xmlModel);
       context.put("odfModel", odfModel);
 
       // Needed for the base classes - common attributes are being moved into the base classes
