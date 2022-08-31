@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNumLetterSyncAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextFixedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextPageAdjustAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextSelectPageAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:page-number}.

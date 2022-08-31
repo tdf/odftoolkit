@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeChangeInfoElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAcceptanceStateAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableRejectingChangeIdAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:movement}.

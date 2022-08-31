@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextFixedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextTimeAdjustAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextTimeValueAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:time}.

@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextSectionNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:section-source}.

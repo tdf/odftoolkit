@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleApplyStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleBaseCellAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleConditionAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:map}.

@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextFormulaAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:table-formula}.

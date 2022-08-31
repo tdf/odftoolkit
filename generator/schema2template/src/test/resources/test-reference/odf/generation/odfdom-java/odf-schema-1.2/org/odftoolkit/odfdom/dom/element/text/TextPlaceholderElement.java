@@ -34,7 +34,6 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextDescriptionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextPlaceholderTypeAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:placeholder}.

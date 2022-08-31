@@ -41,7 +41,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableLanguageAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableRfcLanguageTagAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableScriptAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTargetRangeAddressAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:sort}.

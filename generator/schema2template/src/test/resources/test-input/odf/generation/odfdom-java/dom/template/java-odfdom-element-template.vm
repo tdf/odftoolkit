@@ -38,12 +38,14 @@
 #if ($odfModel.isStylable($element))
 #set ($stylable = true)
 #set ($baseClassName = "OdfStylableElement")
+#set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseClassName")
 #set ($elementStyleFamily=${odfModel.getStyleFamilies($element)})
 #set ($useOdfStyleableShapeElement = false)
 #foreach($familyName in $elementStyleFamily)
 #if (${familyName}=="draw:graphic" || ${familyName}=="presentation:presentation")
 #set ($useOdfStyleableShapeElement = true)
 #set ($baseClassName = "OdfStyleableShapeElement")
+#set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseClassName")
 #break
 #end
 #end
@@ -52,6 +54,7 @@
 #else
 #set ($stylable = false)
 #set ($baseClassName = "OdfElement")
+#set ($baseimport = "org.odftoolkit.odfdom.pkg.$baseClassName")
 #set ($baseHasMandatoryAttr = false)
 #end
 ##
@@ -77,15 +80,36 @@
 #set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseClassName")
 #set ($baseHasMandatoryAttr = false)
 #end
+#if ($base == "OdfOfficeAutomaticStyles")
+#set ($_specialbase = true)
+#set ($baseClassName = "OdfOfficeAutomaticStyles")
+#set ($baseimport = "org.odftoolkit.odfdom.incubator.doc.office.$baseClassName")
+#set ($baseHasMandatoryAttr = false)
+#end
+#if ($base == "OdfOfficeMasterStyles")
+#set ($_specialbase = true)
+#set ($baseClassName = "OdfOfficeMasterStyles")
+#set ($baseimport = "org.odftoolkit.odfdom.incubator.doc.office.$baseClassName")
+#set ($baseHasMandatoryAttr = false)
+#end
+#if ($base == "OdfOfficeStyles")
+#set ($_specialbase = true)
+#set ($baseClassName = "OdfOfficeStyles")
+#set ($baseimport = "org.odftoolkit.odfdom.incubator.doc.office.$baseClassName")
+#set ($baseHasMandatoryAttr = false)
+#end
 #if ($base == "DataStyle")
 #set ($_specialbase = true)
 #set ($baseClassName = "DataStyleElement") ## to be made consistent by API change
+#set ($baseimport = "org.odftoolkit.odfdom.dom.element.number.$baseClassName")
 #end
 ## Configured automatic generated base class. If so, remove all attributes defined in base class
 #if (!$_specialbase)
 #set ($baseClassName = "${xmlModel.camelCase($base)}ElementBase")
 #if ($base.getNamespace() != $NS)
 #set ($baseimport = "org.odftoolkit.odfdom.dom.element.${base.getNamespace()}.$baseClassName")
+#else
+#set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseClassName")
 #end
 #set ($attributes = $attributes.without($base.getBaseAttributes()))
 #set ($baseElement = ${xmlModel.getElement($base.getQName())})
@@ -171,7 +195,7 @@ import org.odftoolkit.odfdom.dom.attribute.$childClassName;
 #end
 ##
 ## If there is a base class which is not in the current package
-#if ($baseimport)
+#if ($baseimport && $baseimport != "org.odftoolkit.odfdom.pkg.OdfElement" && $baseimport != "org.odftoolkit.odfdom.dom.element.OdfStylableElement")
 import ${baseimport};
 #end
 

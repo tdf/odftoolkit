@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.fo.FoSpaceAfterAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoSpaceBeforeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.fo.FoStartIndentAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleRelWidthAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:column}.

@@ -40,7 +40,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableTableNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:table-source}.

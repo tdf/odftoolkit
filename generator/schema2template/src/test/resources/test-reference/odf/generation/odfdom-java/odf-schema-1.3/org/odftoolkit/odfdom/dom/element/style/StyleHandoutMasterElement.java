@@ -58,7 +58,6 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationUseDateTimeN
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationUseFooterNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationUseHeaderNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StylePageLayoutNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:handout-master}.

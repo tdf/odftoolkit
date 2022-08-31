@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDataTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableFieldNumberAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableOperatorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableValueAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:filter-condition}.

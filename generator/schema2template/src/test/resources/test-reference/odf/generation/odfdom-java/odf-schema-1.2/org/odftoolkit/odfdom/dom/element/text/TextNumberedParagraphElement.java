@@ -40,7 +40,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextListIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStartValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:numbered-paragraph}.

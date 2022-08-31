@@ -62,6 +62,7 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableEndYAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTableBackgroundAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorPageNumberAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
+import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element dr3d:scene}.

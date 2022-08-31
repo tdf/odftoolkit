@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDatabaseNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextTableNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextTableTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextValueAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:database-row-number}.

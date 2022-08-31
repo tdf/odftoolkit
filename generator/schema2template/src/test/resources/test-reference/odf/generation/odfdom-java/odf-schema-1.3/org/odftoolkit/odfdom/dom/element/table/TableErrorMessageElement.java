@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableMessageTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTitleAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:error-message}.

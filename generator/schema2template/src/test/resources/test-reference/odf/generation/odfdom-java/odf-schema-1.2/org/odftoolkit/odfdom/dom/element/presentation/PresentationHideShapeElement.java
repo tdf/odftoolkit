@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationEffectAttrib
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationPathIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationSpeedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationStartScaleAttribute;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element presentation:hide-shape}.

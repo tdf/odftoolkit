@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextProtectedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextProtectionKeyAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:illustration-index}.

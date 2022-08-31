@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextPrefixAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextSortAlgorithmAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextSortByPositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextSuffixAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:bibliography-configuration}.

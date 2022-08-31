@@ -45,7 +45,6 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationStartPageAtt
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationStartWithNavigatorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationStayOnTopAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationTransitionOnClickAttribute;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element presentation:settings}.

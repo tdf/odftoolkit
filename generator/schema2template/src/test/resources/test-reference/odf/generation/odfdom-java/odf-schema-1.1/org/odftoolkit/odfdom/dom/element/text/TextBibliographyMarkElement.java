@@ -64,7 +64,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextTitleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextUrlAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextVolumeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextYearAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:bibliography-mark}.

@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableCaseSensitiveAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableCountryAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableLanguageAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTargetRangeAddressAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:sort}.

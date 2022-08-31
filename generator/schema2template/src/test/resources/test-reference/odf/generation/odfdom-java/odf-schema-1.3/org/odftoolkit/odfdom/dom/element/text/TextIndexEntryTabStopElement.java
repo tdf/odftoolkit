@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleLeaderCharAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StylePositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:index-entry-tab-stop}.

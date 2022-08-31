@@ -72,7 +72,6 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgVIdeographicAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgVMathematicalAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgWidthsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgXHeightAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:font-face}.

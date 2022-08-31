@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationSourceAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element presentation:date-time-decl}.

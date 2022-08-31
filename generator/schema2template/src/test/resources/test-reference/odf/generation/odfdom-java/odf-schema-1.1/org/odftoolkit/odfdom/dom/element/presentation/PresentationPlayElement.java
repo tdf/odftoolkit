@@ -34,7 +34,6 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawShapeIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationSpeedAttribute;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element presentation:play}.

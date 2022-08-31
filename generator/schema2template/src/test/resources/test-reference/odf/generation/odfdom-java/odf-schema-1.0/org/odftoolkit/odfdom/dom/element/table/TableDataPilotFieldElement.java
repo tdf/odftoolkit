@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableOrientationAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableSelectedPageAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableSourceFieldNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableUsedHierarchyAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-field}.

@@ -46,7 +46,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextMainEntryStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextRelativeTabStopPositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextSortAlgorithmAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextUseKeysAsEntriesAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:alphabetical-index-source}.

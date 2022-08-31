@@ -44,7 +44,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextNumberPositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextOffsetAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextRestartOnPageAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:linenumbering-configuration}.

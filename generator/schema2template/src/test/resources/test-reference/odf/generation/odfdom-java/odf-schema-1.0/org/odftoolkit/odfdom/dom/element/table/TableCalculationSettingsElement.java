@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableNullYearAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TablePrecisionAsShownAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableSearchCriteriaMustApplyToWholeCellAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableUseRegularExpressionsAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:calculation-settings}.

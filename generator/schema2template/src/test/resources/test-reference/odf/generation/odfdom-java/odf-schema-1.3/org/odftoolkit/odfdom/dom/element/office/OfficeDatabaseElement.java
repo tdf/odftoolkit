@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.element.db.DbQueriesElement;
 import org.odftoolkit.odfdom.dom.element.db.DbReportsElement;
 import org.odftoolkit.odfdom.dom.element.db.DbSchemaDefinitionElement;
 import org.odftoolkit.odfdom.dom.element.db.DbTableRepresentationsElement;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:database}.

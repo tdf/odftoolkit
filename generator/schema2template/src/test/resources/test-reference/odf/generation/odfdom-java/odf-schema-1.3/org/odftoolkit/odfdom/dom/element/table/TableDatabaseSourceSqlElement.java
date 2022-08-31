@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDatabaseNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableParseSqlStatementAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableSqlStatementAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:database-source-sql}.

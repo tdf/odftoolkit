@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableLinkToSourceDataAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableSourceCellRangeAddressesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTargetCellAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableUseLabelsAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:consolidation}.

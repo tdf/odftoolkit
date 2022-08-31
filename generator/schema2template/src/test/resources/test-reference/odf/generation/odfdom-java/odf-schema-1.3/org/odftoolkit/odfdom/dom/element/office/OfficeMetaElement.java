@@ -51,7 +51,6 @@ import org.odftoolkit.odfdom.dom.element.meta.MetaPrintDateElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaPrintedByElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaTemplateElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaUserDefinedElement;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:meta}.

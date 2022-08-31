@@ -46,7 +46,6 @@ import org.odftoolkit.odfdom.dom.element.text.TextDdeConnectionDeclsElement;
 import org.odftoolkit.odfdom.dom.element.text.TextSequenceDeclsElement;
 import org.odftoolkit.odfdom.dom.element.text.TextUserFieldDeclsElement;
 import org.odftoolkit.odfdom.dom.element.text.TextVariableDeclsElement;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:chart}.

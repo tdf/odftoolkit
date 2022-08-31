@@ -42,7 +42,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextUseIndexMarksAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextUseIndexSourceStylesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextUseObjectsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextUseTablesAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:user-index-source}.

@@ -42,7 +42,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayLevelsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextLevelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStartValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:list-level-style-number}.

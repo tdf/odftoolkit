@@ -41,7 +41,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayBorderAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableIsActiveAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableProtectedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableScenarioRangesAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:scenario}.

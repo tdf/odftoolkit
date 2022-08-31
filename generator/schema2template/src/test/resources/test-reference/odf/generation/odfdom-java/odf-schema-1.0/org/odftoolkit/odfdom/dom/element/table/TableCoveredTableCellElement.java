@@ -80,7 +80,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableFormulaAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNumberColumnsRepeatedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableProtectAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:covered-table-cell}.

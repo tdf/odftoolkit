@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleHeightAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleStyleAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleVerticalAlignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleWidthAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:column-sep}.

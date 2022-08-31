@@ -49,7 +49,6 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawPolygonElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawPolylineElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRectElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRegularPolygonElement;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:shapes}.

@@ -40,7 +40,6 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextFixedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:user-defined}.

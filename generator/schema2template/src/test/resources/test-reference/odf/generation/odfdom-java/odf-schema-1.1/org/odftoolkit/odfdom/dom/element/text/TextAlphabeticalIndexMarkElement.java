@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextKey2PhoneticAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextMainEntryAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStringValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStringValuePhoneticAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:alphabetical-index-mark}.

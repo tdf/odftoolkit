@@ -55,7 +55,6 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationEndElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationDateTimeElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationFooterElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationHeaderElement;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:ruby-base}.

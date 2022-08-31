@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextRelativeTabStopPositionAttri
 import org.odftoolkit.odfdom.dom.attribute.text.TextUseIndexMarksAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextUseIndexSourceStylesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextUseOutlineLevelAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:table-of-content-source}.

@@ -82,7 +82,6 @@ import org.odftoolkit.odfdom.dom.element.text.TextUserFieldDeclsElement;
 import org.odftoolkit.odfdom.dom.element.text.TextUserIndexElement;
 import org.odftoolkit.odfdom.dom.element.text.TextVariableDeclsElement;
 import org.odftoolkit.odfdom.dom.attribute.text.TextGlobalAttribute;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:text}.

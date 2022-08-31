@@ -57,7 +57,6 @@ import org.odftoolkit.odfdom.dom.element.presentation.PresentationFooterElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationHeaderElement;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:meta-field}.

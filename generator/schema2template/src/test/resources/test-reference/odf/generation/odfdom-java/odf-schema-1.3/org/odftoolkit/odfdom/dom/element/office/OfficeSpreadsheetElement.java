@@ -50,7 +50,6 @@ import org.odftoolkit.odfdom.dom.element.text.TextVariableDeclsElement;
 import org.odftoolkit.odfdom.dom.attribute.table.TableProtectionKeyAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableProtectionKeyDigestAlgorithmAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStructureProtectedAttribute;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:spreadsheet}.

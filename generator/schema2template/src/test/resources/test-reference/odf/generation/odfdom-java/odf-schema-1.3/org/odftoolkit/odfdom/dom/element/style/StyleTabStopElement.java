@@ -41,7 +41,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleLeaderTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleLeaderWidthAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StylePositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleTypeAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:tab-stop}.
