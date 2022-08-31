@@ -40,7 +40,6 @@ import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
 import org.odftoolkit.odfdom.dom.element.svg.SvgTitleElement;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawCaptionIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
-import org.odftoolkit.odfdom.dom.element.DrawShapeElementBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:g}.

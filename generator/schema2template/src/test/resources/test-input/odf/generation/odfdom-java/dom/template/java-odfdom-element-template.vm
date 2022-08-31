@@ -39,8 +39,9 @@
 #set ($stylable = true)
 #set ($baseClassName = "OdfStylableElement")
 #set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseClassName")
-#set ($elementStyleFamily=${odfModel.getStyleFamilies($element)})
+## The following draw:graphic and presentation:presentation share the same elements, but were used in different applications
 #set ($useOdfStyleableShapeElement = false)
+#set ($elementStyleFamily=${odfModel.getStyleFamilies($element)})
 #foreach($familyName in $elementStyleFamily)
 #if (${familyName}=="draw:graphic" || ${familyName}=="presentation:presentation")
 #set ($useOdfStyleableShapeElement = true)
@@ -106,10 +107,8 @@
 ## Configured automatic generated base class. If so, remove all attributes defined in base class
 #if (!$_specialbase)
 #set ($baseClassName = "${xmlModel.camelCase($base)}ElementBase")
-#if ($base.getNamespace() != $NS)
+#if (${base.getNamespace()} != $NS)## Heuristic: Instead we should compare the Java package
 #set ($baseimport = "org.odftoolkit.odfdom.dom.element.${base.getNamespace()}.$baseClassName")
-#else
-#set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseClassName")
 #end
 #set ($attributes = $attributes.without($base.getBaseAttributes()))
 #set ($baseElement = ${xmlModel.getElement($base.getQName())})
@@ -195,7 +194,7 @@ import org.odftoolkit.odfdom.dom.attribute.$childClassName;
 #end
 ##
 ## If there is a base class which is not in the current package
-#if ($baseimport && $baseimport != "org.odftoolkit.odfdom.pkg.OdfElement" && $baseimport != "org.odftoolkit.odfdom.dom.element.OdfStylableElement")
+#if ($baseimport && $baseimport != "org.odftoolkit.odfdom.pkg.OdfElement" && $baseimport != "org.odftoolkit.odfdom.dom.element.OdfStylableElement" && $baseimport != "org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement")
 import ${baseimport};
 #end
 
@@ -226,7 +225,7 @@ public class $className extends $baseClassName {
 	public ${className}(OdfFileDom ownerDoc) {
 #if (($stylable && ($useOdfStyleableShapeElement == false)))
 		super(ownerDoc, ELEMENT_NAME, OdfStyleFamily.${firstfamily}, OdfName.newName(OdfDocumentNamespace.${NS.toUpperCase()}, "style-name"));
-#else
+#else## OdfStyleableShapeElement will provide the style:family
 		super(ownerDoc, ELEMENT_NAME);
 #end
 	}
