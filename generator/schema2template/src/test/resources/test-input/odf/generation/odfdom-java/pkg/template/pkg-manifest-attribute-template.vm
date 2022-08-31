@@ -89,7 +89,7 @@
  */
 package org.odftoolkit.odfdom.pkg.manifest;
 
-import org.odftoolkit.odfdom.dom.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
 #if ($hasDefaultValue)
 import org.odftoolkit.odfdom.pkg.OdfElement;
