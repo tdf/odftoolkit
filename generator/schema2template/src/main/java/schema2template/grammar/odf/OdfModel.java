@@ -48,7 +48,7 @@ public class OdfModel {
    */
   private final Map<String, Map<String, String>> mAttributeDefaults;
 
-  private final Map<String, List<String>> mStyleFamilyPropertiesMap;
+  private final Map<String, List<String>> mStyleFamilyToPropertiesMap;
   // work-around for an element name (key) for attributes with default value not having specified a
   // parent element
   private final String ALL_ELEMENTS = "*";
@@ -59,7 +59,7 @@ public class OdfModel {
       XMLModel xmlModel) {
     mNameToFamiliesMap = nameToFamiliesMap;
     mAttributeDefaults = attributeDefaults;
-    mStyleFamilyPropertiesMap =
+    mStyleFamilyToPropertiesMap =
         new OdfFamilyPropertiesPatternMatcher(xmlModel.getGrammar()).getFamilyProperties();
   }
 
@@ -111,8 +111,10 @@ public class OdfModel {
    */
   public List<String> getStyleFamilies(PuzzleComponent element) {
     List<String> retval = new ArrayList<String>();
-    for (String family : mNameToFamiliesMap.get(element.getQName())) {
-      retval.add(family);
+    if (mNameToFamiliesMap.containsKey(element.getQName())) {
+      for (String family : mNameToFamiliesMap.get(element.getQName())) {
+        retval.add(family);
+      }
     }
     return retval;
   }
@@ -187,6 +189,6 @@ public class OdfModel {
    *     style:*-properties element names as values.
    */
   public Map<String, List<String>> getStyleFamilyPropertiesMap() {
-    return mStyleFamilyPropertiesMap;
+    return mStyleFamilyToPropertiesMap;
   }
 }
