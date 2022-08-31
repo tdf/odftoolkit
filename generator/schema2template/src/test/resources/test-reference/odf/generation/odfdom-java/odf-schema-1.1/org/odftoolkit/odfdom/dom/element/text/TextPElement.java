@@ -60,7 +60,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextClassNamesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextCondStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:p}.

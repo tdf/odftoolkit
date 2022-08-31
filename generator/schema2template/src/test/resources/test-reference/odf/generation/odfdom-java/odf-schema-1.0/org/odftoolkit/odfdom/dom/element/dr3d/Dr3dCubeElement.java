@@ -44,6 +44,7 @@ import org.odftoolkit.odfdom.dom.attribute.draw.DrawStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawZIndexAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationClassNamesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationStyleNameAttribute;
+import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element dr3d:cube}.

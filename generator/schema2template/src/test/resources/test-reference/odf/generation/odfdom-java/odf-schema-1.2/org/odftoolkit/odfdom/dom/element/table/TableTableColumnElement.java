@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableNumberColumnsRepeatedAttri
 import org.odftoolkit.odfdom.dom.attribute.table.TableStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableVisibilityAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:table-column}.

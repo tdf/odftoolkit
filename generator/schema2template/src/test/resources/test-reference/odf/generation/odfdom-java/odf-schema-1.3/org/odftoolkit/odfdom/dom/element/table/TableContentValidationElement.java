@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableBaseCellAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableConditionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayListAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:content-validation}.

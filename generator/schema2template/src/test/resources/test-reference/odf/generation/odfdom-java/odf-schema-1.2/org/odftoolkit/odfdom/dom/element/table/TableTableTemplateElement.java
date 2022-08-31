@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableFirstRowStartColumnAttribu
 import org.odftoolkit.odfdom.dom.attribute.table.TableLastRowEndColumnAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableLastRowStartColumnAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:table-template}.

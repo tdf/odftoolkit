@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableCellRangeAddressAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableContainsErrorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDirectionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableMarkedInvalidAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:highlighted-range}.

@@ -54,7 +54,6 @@ import org.odftoolkit.odfdom.dom.element.text.TextUserFieldDeclsElement;
 import org.odftoolkit.odfdom.dom.element.text.TextUserIndexElement;
 import org.odftoolkit.odfdom.dom.element.text.TextVariableDeclsElement;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDisplayAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:footer-left}.

@@ -52,7 +52,6 @@ import org.odftoolkit.odfdom.dom.element.draw.DrawRectElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawRegularPolygonElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeChangeInfoElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:deletion}.

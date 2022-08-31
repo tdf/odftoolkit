@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.table.TableEndPositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TablePositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStartPositionAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:movement-cut-off}.

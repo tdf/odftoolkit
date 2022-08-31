@@ -57,13 +57,13 @@ import org.odftoolkit.odfdom.dom.element.text.TextLinenumberingConfigurationElem
 import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;
 import org.odftoolkit.odfdom.dom.element.text.TextNotesConfigurationElement;
 import org.odftoolkit.odfdom.dom.element.text.TextOutlineStyleElement;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:styles}.
  *
  */
-public class OfficeStylesElement extends OdfContainerElementBase {
+public class OfficeStylesElement extends OdfOfficeStyles {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.OFFICE, "styles");
 

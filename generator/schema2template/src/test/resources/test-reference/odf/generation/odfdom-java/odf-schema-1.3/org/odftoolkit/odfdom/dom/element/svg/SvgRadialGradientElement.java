@@ -42,7 +42,6 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgGradientTransformAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgGradientUnitsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgRAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgSpreadMethodAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element svg:radialGradient}.

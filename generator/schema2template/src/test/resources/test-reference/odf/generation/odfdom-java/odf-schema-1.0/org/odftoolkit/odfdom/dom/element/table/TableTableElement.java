@@ -43,7 +43,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TablePrintRangesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableProtectedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableProtectionKeyAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:table}.

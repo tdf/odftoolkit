@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableGroupedByAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableSourceFieldNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStartAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStepAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:data-pilot-groups}.

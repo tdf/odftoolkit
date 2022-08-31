@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleDistanceAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleLengthAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleLinesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element style:drop-cap}.

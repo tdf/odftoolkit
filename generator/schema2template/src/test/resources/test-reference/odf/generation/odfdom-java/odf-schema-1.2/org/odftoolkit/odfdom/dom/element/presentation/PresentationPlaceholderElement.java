@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgHeightAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgWidthAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgXAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element presentation:placeholder}.

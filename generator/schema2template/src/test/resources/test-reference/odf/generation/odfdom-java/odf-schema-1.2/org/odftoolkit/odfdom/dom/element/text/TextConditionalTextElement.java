@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextConditionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextCurrentValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStringValueIfFalseAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStringValueIfTrueAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:conditional-text}.

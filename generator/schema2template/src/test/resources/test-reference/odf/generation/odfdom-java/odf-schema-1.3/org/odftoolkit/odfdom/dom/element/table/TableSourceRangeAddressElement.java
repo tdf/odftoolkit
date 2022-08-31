@@ -41,7 +41,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableStartColumnAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStartRowAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStartTableAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTableAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:source-range-address}.

@@ -44,7 +44,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextMasterPageNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextNoteClassAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStartNumberingAtAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStartValueAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:notes-configuration}.

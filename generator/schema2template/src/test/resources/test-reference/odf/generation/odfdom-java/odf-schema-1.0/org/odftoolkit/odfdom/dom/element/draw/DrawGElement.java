@@ -37,6 +37,7 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
 import org.odftoolkit.odfdom.dom.element.office.OfficeEventListenersElement;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
+import org.odftoolkit.odfdom.dom.element.DrawShapeElementBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element draw:g}.

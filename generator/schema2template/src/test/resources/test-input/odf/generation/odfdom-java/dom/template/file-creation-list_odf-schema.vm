@@ -40,7 +40,7 @@
 #end
 ##
 #foreach ($base in $codeModel.getBaseClasses())
-#if ($base != "container" && $base != "style" && $base != "styleproperties")
+#if ($base != "container" && $base != "style" && $base != "styleproperties" && $base != "OdfOfficeAutomaticStyles" && $base != "OdfOfficeMasterStyles" && $base != "OdfOfficeStyles")
 #set($className = "${xmlModel.camelCase(${base})}ElementBase")
 	<file path="org/odftoolkit/odfdom/dom/element/${xmlModel.extractNamespace(${base})}/${className}.java" contextNode="$base" template="java-odfdom-elementbase-template.vm" />
 #end

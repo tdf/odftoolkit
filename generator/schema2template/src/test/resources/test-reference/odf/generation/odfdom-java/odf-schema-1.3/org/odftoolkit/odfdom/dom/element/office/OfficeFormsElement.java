@@ -36,7 +36,6 @@ import org.odftoolkit.odfdom.dom.element.form.FormFormElement;
 import org.odftoolkit.odfdom.dom.element.xforms.XformsModelElement;
 import org.odftoolkit.odfdom.dom.attribute.form.FormApplyDesignModeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.form.FormAutomaticFocusAttribute;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:forms}.

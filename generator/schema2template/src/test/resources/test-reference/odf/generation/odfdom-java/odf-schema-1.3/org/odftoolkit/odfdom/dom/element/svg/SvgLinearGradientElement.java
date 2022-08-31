@@ -41,7 +41,6 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgX1Attribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgX2Attribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgY1Attribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgY2Attribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element svg:linearGradient}.

@@ -42,7 +42,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableOnUpdateKeepStylesAttribut
 import org.odftoolkit.odfdom.dom.attribute.table.TableOrientationAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableRefreshDelayAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTargetRangeAddressAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:database-range}.

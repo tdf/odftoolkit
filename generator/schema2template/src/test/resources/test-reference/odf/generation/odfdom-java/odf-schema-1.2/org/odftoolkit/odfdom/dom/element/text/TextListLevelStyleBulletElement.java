@@ -40,7 +40,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextBulletCharAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextBulletRelativeSizeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextLevelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:list-level-style-bullet}.

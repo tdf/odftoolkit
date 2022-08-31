@@ -85,7 +85,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableNumberMatrixRowsSpannedAtt
 import org.odftoolkit.odfdom.dom.attribute.table.TableNumberRowsSpannedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableProtectAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:table-cell}.

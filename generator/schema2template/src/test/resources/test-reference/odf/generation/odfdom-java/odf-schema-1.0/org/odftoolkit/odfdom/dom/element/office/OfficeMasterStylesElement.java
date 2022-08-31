@@ -35,13 +35,13 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawLayerSetElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHandoutMasterElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:master-styles}.
  *
  */
-public class OfficeMasterStylesElement extends OdfContainerElementBase {
+public class OfficeMasterStylesElement extends OdfOfficeMasterStyles {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.OFFICE, "master-styles");
 

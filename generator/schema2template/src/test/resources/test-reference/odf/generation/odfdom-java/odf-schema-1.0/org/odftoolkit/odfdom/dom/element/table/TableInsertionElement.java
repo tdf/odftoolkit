@@ -40,7 +40,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TablePositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableRejectingChangeIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTableAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableTypeAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:insertion}.

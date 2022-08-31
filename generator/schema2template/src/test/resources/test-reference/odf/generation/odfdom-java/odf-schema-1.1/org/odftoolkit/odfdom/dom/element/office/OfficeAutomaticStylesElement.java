@@ -42,13 +42,13 @@ import org.odftoolkit.odfdom.dom.element.number.NumberTimeStyleElement;
 import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;
-import org.odftoolkit.odfdom.pkg.OdfContainerElementBase;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element office:automatic-styles}.
  *
  */
-public class OfficeAutomaticStylesElement extends OdfContainerElementBase {
+public class OfficeAutomaticStylesElement extends OdfOfficeAutomaticStyles {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.OFFICE, "automatic-styles");
 

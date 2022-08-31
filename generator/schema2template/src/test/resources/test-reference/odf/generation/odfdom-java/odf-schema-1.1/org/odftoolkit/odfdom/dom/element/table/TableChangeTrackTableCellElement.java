@@ -45,7 +45,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableFormulaAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableMatrixCoveredAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNumberMatrixColumnsSpannedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNumberMatrixRowsSpannedAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:change-track-table-cell}.

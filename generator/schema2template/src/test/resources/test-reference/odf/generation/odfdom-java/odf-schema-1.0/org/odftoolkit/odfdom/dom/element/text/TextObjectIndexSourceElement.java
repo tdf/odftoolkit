@@ -39,7 +39,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextUseDrawObjectsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextUseMathObjectsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextUseOtherObjectsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextUseSpreadsheetObjectsAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:object-index-source}.

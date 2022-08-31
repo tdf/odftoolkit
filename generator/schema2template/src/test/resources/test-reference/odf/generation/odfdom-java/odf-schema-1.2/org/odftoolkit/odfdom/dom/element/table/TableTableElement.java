@@ -53,7 +53,6 @@ import org.odftoolkit.odfdom.dom.attribute.table.TableUseFirstRowStylesAttribute
 import org.odftoolkit.odfdom.dom.attribute.table.TableUseLastColumnStylesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableUseLastRowStylesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element table:table}.
