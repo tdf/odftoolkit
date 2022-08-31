@@ -28,6 +28,7 @@
  */
 package org.odftoolkit.odfdom.pkg.manifest;
 
+import org.odftoolkit.odfdom.dom.OdfNamespace;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
@@ -38,7 +39,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class PreferredViewModeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:preferred-view-mode");
+public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfNamespace.MANIFEST, preferred-view-mode);
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute manifest:preferred-view-mode}.
