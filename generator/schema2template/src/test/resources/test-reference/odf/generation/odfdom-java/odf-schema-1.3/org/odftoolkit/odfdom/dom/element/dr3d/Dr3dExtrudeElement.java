@@ -45,7 +45,6 @@ import org.odftoolkit.odfdom.dom.attribute.presentation.PresentationStyleNameAtt
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgDAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgViewBoxAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
-import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element dr3d:extrude}.
