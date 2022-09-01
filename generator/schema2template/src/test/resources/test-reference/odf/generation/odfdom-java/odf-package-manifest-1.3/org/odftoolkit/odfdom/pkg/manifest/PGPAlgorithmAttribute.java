@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class PGPAlgorithmAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, PGPAlgorithm);
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "PGPAlgorithm");
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute manifest:PGPAlgorithm}.

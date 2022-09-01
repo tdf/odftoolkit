@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class FileEntryElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, file-entry);
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "file-entry");
 
 	/**
 	 * Create the instance of <code>FileEntryElement</code>

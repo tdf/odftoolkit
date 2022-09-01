@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class DocumentSignaturesElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.DSIG, document-signatures);
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.DSIG, "document-signatures");
 
 	/**
 	 * Create the instance of <code>DocumentSignaturesElement</code>

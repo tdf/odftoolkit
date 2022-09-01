@@ -101,9 +101,9 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 public class $className extends OdfAttribute {
 
 #if (${attribute.getNamespacePrefix()})
-public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfNamespace.${attribute.getNamespacePrefix().toUpperCase()}, ${attribute.getLocalName()});
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.${attribute.getNamespacePrefix().toUpperCase()}, "${attribute.getLocalName()}");
 #else
-public static final OdfName ATTRIBUTE_NAME = OdfName.newName("$localName");
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName("$localName");
 #end
 #if ($hasDefaultValue)
 #if ($defaultValueSet.size()>1)

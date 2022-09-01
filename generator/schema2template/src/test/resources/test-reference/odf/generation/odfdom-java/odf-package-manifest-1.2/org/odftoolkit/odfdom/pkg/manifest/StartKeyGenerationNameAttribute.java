@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class StartKeyGenerationNameAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, start-key-generation-name);
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "start-key-generation-name");
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute manifest:start-key-generation-name}.
