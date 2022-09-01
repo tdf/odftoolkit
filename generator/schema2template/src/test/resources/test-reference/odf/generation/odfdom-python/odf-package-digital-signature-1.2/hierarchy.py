@@ -5,11 +5,11 @@ CHILD_ELEMENTS = {
 	'*' : ( \
 		'*', \
 ),
-	'Signature' : ( \
+	'ds:Signature' : ( \
 		'*', \
 ),
-	'document-signatures' : ( \
-		'Signature', \
+	'dsig:document-signatures' : ( \
+		'ds:Signature', \
 ),
 }
 
@@ -17,11 +17,11 @@ CHILD_ATTRIBUTES = {
 	'*' : ( \
 		'*', \
 ),
-	'Signature' : ( \
+	'ds:Signature' : ( \
 		'*', \
 ),
-	'document-signatures' : ( \
-		'version', \
+	'dsig:document-signatures' : ( \
+		'dsig:version', \
 ),
 }
 

@@ -76,39 +76,46 @@ public class NamespaceDictionary {
    */
   public static NamespaceDictionary getStandardDictionary() {
     NamespaceDictionary dict = new NamespaceDictionary();
-    // todo Exchange the static list with a dynamic approach!!
-    dict.put("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
-    dict.put("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
-    dict.put("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
-    dict.put("table", "urn:oasis:names:tc:opendocument:xmlns:table:1.0");
+    // todo Exchange the static list with a dynamic approach!! Better: Evaluate Prefix handling in
+    // MSV to allow generic solution! How do XSD cope with it, e.g. CII?
+    // ODF Schema (based on ODF 1.3 RNG root element manual NS extraction)
+    dict.put("anim", "urn:oasis:names:tc:opendocument:xmlns:animation:1.0");
+    dict.put("chart", "urn:oasis:names:tc:opendocument:xmlns:chart:1.0");
+    dict.put("config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0");
+    dict.put("db", "urn:oasis:names:tc:opendocument:xmlns:database:1.0");
+    dict.put("dc", "http://purl.org/dc/elements/1.1/");
+    dict.put("dr3d", "urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0");
     dict.put("draw", "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0");
     dict.put("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
-    dict.put("xlink", "http://www.w3.org/1999/xlink");
-    dict.put("dc", "http://purl.org/dc/elements/1.1/");
+    dict.put("form", "urn:oasis:names:tc:opendocument:xmlns:form:1.0");
+    dict.put("grddl", "http://www.w3.org/2003/g/data-view#");
+    dict.put("math", "http://www.w3.org/1998/Math/MathML");
     dict.put("meta", "urn:oasis:names:tc:opendocument:xmlns:meta:1.0");
     dict.put("number", "urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0");
-    dict.put("svg", "urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0");
-    dict.put("chart", "urn:oasis:names:tc:opendocument:xmlns:chart:1.0");
-    dict.put("dr3d", "urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0");
-    dict.put("math", "http://www.w3.org/1998/Math/MathML");
-    dict.put("form", "urn:oasis:names:tc:opendocument:xmlns:form:1.0");
+    dict.put("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+    dict.put("presentation", "urn:oasis:names:tc:opendocument:xmlns:presentation:1.0");
     dict.put("script", "urn:oasis:names:tc:opendocument:xmlns:script:1.0");
-    dict.put("dom", "http://www.w3.org/2001/xml-events");
+    dict.put("smil", "urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0");
+    dict.put("style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
+    dict.put("svg", "urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0");
+    dict.put("table", "urn:oasis:names:tc:opendocument:xmlns:table:1.0");
+    dict.put("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
     dict.put("xforms", "http://www.w3.org/2002/xforms");
-    dict.put("xsd", "http://www.w3.org/2001/XMLSchema");
-    dict.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+    dict.put("xhtml", "http://www.w3.org/1999/xhtml");
+    dict.put("xlink", "http://www.w3.org/1999/xlink");
+    // Namespaces from ODF Spec (e.g. for Formular) and other XML related specs
+    dict.put("dom", "http://www.w3.org/2001/xml-events");
+    dict.put("field", "urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0");
     dict.put("of", "urn:oasis:names:tc:opendocument:xmlns:of:1.2");
     dict.put("rdfa", "http://docs.oasis-open.org/opendocument/meta/rdfa#");
-    dict.put("field", "urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0");
-    dict.put("config", "urn:oasis:names:tc:opendocument:xmlns:config:1.0");
-    dict.put("presentation", "urn:oasis:names:tc:opendocument:xmlns:presentation:1.0");
-    dict.put("db", "urn:oasis:names:tc:opendocument:xmlns:database:1.0");
-    dict.put("anim", "urn:oasis:names:tc:opendocument:xmlns:animation:1.0");
-    dict.put("grddl", "http://www.w3.org/2003/g/data-view#");
-    dict.put("xhtml", "http://www.w3.org/1999/xhtml");
-    dict.put("smil", "urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0");
     dict.put("xml", "http://www.w3.org/XML/1998/namespace");
-
+    dict.put("xsd", "http://www.w3.org/2001/XMLSchema");
+    dict.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+    // ODF MANIFEST (based on ODF 1.3 RNG root element manual NS extraction)
+    dict.put("manifest", "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0");
+    // ODF DIGITAL SIGNATURE NAMESPACES (based on ODF 1.3 RNG root element manual NS extraction)
+    dict.put("ds", "http://www.w3.org/2000/09/xmldsig#");
+    dict.put("dsig", "urn:oasis:names:tc:opendocument:xmlns:digitalsignature:1.0");
     return dict;
   }
 }

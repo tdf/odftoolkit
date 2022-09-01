@@ -1,12 +1,12 @@
 0: REF 'dsig-document-signatures',
-1: ELEMENT "document-signatures",
+1: ELEMENT "dsig:document-signatures",
 2: SEQUENCE
 3: REF 'dsig-document-signatures-attlist',
-4: ATTRIBUTE "version",
+4: ATTRIBUTE "dsig:version",
 5: VALUE '1.3',
 3: ONEOREMORE
 4: REF 'ds-signature',
-5: ELEMENT "Signature",
+5: ELEMENT "ds:Signature",
 6: REF 'dsMarkup',
 7: ONEOREMORE
 8: CHOICE

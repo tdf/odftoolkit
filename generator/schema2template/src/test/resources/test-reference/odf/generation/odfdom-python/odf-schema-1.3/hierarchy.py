@@ -5477,7 +5477,8 @@ CHILD_ATTRIBUTES = {
 		'office:value-type', \
 ),
 	'form:list-value' : ( \
-		'office:time-value', \
+		'office:currency', \
+		'office:value', \
 ),
 	'form:list-value' : ( \
 		'office:boolean-value', \
@@ -5486,17 +5487,16 @@ CHILD_ATTRIBUTES = {
 		'office:string-value', \
 ),
 	'form:list-value' : ( \
+		'office:value', \
+),
+	'form:list-value' : ( \
+		'office:value', \
+),
+	'form:list-value' : ( \
 		'office:date-value', \
 ),
 	'form:list-value' : ( \
-		'office:value', \
-),
-	'form:list-value' : ( \
-		'office:value', \
-),
-	'form:list-value' : ( \
-		'office:currency', \
-		'office:value', \
+		'office:time-value', \
 ),
 	'form:listbox' : ( \
 		'form:bound-column', \
