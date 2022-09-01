@@ -5,47 +5,47 @@ CHILD_ELEMENTS = {
 	'*' : ( \
 		'*', \
 ),
-	'CipherData' : ( \
-		'CipherValue', \
+	'manifest:CipherData' : ( \
+		'manifest:CipherValue', \
 ),
-	'CipherValue' : ( \
+	'manifest:CipherValue' : ( \
 ),
-	'PGPData' : ( \
-		'PGPKeyID', \
-		'PGPKeyPacket', \
+	'manifest:PGPData' : ( \
+		'manifest:PGPKeyID', \
+		'manifest:PGPKeyPacket', \
 ),
-	'PGPKeyID' : ( \
+	'manifest:PGPKeyID' : ( \
 ),
-	'PGPKeyPacket' : ( \
+	'manifest:PGPKeyPacket' : ( \
 ),
-	'algorithm' : ( \
+	'manifest:algorithm' : ( \
 		'*', \
 ),
-	'encrypted-key' : ( \
-		'CipherData', \
-		'encryption-method', \
-		'keyinfo', \
+	'manifest:encrypted-key' : ( \
+		'manifest:CipherData', \
+		'manifest:encryption-method', \
+		'manifest:keyinfo', \
 ),
-	'encryption-data' : ( \
-		'algorithm', \
-		'key-derivation', \
-		'start-key-generation', \
+	'manifest:encryption-data' : ( \
+		'manifest:algorithm', \
+		'manifest:key-derivation', \
+		'manifest:start-key-generation', \
 ),
-	'encryption-method' : ( \
+	'manifest:encryption-method' : ( \
 ),
-	'file-entry' : ( \
-		'encryption-data', \
+	'manifest:file-entry' : ( \
+		'manifest:encryption-data', \
 ),
-	'key-derivation' : ( \
+	'manifest:key-derivation' : ( \
 ),
-	'keyinfo' : ( \
-		'PGPData', \
+	'manifest:keyinfo' : ( \
+		'manifest:PGPData', \
 ),
-	'manifest' : ( \
-		'encrypted-key', \
-		'file-entry', \
+	'manifest:manifest' : ( \
+		'manifest:encrypted-key', \
+		'manifest:file-entry', \
 ),
-	'start-key-generation' : ( \
+	'manifest:start-key-generation' : ( \
 ),
 }
 
@@ -53,51 +53,51 @@ CHILD_ATTRIBUTES = {
 	'*' : ( \
 		'*', \
 ),
-	'CipherData' : ( \
+	'manifest:CipherData' : ( \
 ),
-	'CipherValue' : ( \
+	'manifest:CipherValue' : ( \
 ),
-	'PGPData' : ( \
+	'manifest:PGPData' : ( \
 ),
-	'PGPKeyID' : ( \
+	'manifest:PGPKeyID' : ( \
 ),
-	'PGPKeyPacket' : ( \
+	'manifest:PGPKeyPacket' : ( \
 ),
-	'algorithm' : ( \
-		'algorithm-name', \
-		'initialisation-vector', \
+	'manifest:algorithm' : ( \
+		'manifest:algorithm-name', \
+		'manifest:initialisation-vector', \
 ),
-	'encrypted-key' : ( \
+	'manifest:encrypted-key' : ( \
 ),
-	'encryption-data' : ( \
-		'checksum', \
-		'checksum-type', \
+	'manifest:encryption-data' : ( \
+		'manifest:checksum', \
+		'manifest:checksum-type', \
 ),
-	'encryption-method' : ( \
-		'PGPAlgorithm', \
+	'manifest:encryption-method' : ( \
+		'manifest:PGPAlgorithm', \
 ),
-	'file-entry' : ( \
-		'full-path', \
-		'media-type', \
-		'preferred-view-mode', \
-		'size', \
-		'version', \
+	'manifest:file-entry' : ( \
+		'manifest:full-path', \
+		'manifest:media-type', \
+		'manifest:preferred-view-mode', \
+		'manifest:size', \
+		'manifest:version', \
 ),
-	'key-derivation' : ( \
-		'iteration-count', \
-		'key-derivation-name', \
-		'key-derivation-name', \
-		'key-size', \
-		'salt', \
+	'manifest:key-derivation' : ( \
+		'manifest:iteration-count', \
+		'manifest:key-derivation-name', \
+		'manifest:key-derivation-name', \
+		'manifest:key-size', \
+		'manifest:salt', \
 ),
-	'keyinfo' : ( \
+	'manifest:keyinfo' : ( \
 ),
-	'manifest' : ( \
-		'version', \
+	'manifest:manifest' : ( \
+		'manifest:version', \
 ),
-	'start-key-generation' : ( \
-		'key-size', \
-		'start-key-generation-name', \
+	'manifest:start-key-generation' : ( \
+		'manifest:key-size', \
+		'manifest:start-key-generation-name', \
 ),
 }
 

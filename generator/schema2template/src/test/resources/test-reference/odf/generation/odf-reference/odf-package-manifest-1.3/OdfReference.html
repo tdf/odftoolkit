@@ -27,18 +27,18 @@ for an element to have a special child element.</p>
 
 
 
-							<h3><a name="element_CipherData_0">CipherData Element</a>&nbsp;(new in ODF 1.3) </h3>
+							<h3><a name="element_manifest:CipherData_0">manifest:CipherData Element</a>&nbsp;(new in ODF 1.3) </h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_encrypted-key_0" class="unbreakable">encrypted-key</a>&nbsp;
+	<a href="#element_manifest:encrypted-key_0" class="unbreakable">manifest:encrypted-key</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Child Elements</td>
 <td class="right">
-	<a href="#element_CipherValue_0" class="unbreakable mandatory">CipherValue</a>&nbsp;
+	<a href="#element_manifest:CipherValue_0" class="unbreakable mandatory">manifest:CipherValue</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -49,56 +49,12 @@ for an element to have a special child element.</p>
 </table>
 <br />
 
-							<h3><a name="element_CipherValue_0">CipherValue Element</a>&nbsp;(new in ODF 1.3) </h3>
+							<h3><a name="element_manifest:CipherValue_0">manifest:CipherValue Element</a>&nbsp;(new in ODF 1.3) </h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_CipherData_0" class="unbreakable">CipherData</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Attributes</td>
-<td class="right">
-&nbsp;</td>
-</tr>
-</table>
-<br />
-
-							<h3><a name="element_PGPData_0">PGPData Element</a>&nbsp;(new in ODF 1.3) </h3>
-<table border="1" width="100%">
-<tr>
-<td class="left">Parent Elements</td>
-<td class="right">
-	<a href="#element_keyinfo_0" class="unbreakable">keyinfo</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
-	<a href="#element_PGPKeyID_0" class="unbreakable mandatory">PGPKeyID</a>&nbsp;
-	<a href="#element_PGPKeyPacket_0" class="unbreakable ">PGPKeyPacket</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Attributes</td>
-<td class="right">
-&nbsp;</td>
-</tr>
-</table>
-<br />
-
-							<h3><a name="element_PGPKeyID_0">PGPKeyID Element</a>&nbsp;(new in ODF 1.3) </h3>
-<table border="1" width="100%">
-<tr>
-<td class="left">Parent Elements</td>
-<td class="right">
-	<a href="#element_PGPData_0" class="unbreakable">PGPData</a>&nbsp;
+	<a href="#element_manifest:CipherData_0" class="unbreakable">manifest:CipherData</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -114,12 +70,35 @@ for an element to have a special child element.</p>
 </table>
 <br />
 
-							<h3><a name="element_PGPKeyPacket_0">PGPKeyPacket Element</a>&nbsp;(new in ODF 1.3) </h3>
+							<h3><a name="element_manifest:PGPData_0">manifest:PGPData Element</a>&nbsp;(new in ODF 1.3) </h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_PGPData_0" class="unbreakable">PGPData</a>&nbsp;
+	<a href="#element_manifest:keyinfo_0" class="unbreakable">manifest:keyinfo</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_manifest:PGPKeyID_0" class="unbreakable mandatory">manifest:PGPKeyID</a>&nbsp;
+	<a href="#element_manifest:PGPKeyPacket_0" class="unbreakable ">manifest:PGPKeyPacket</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+
+							<h3><a name="element_manifest:PGPKeyID_0">manifest:PGPKeyID Element</a>&nbsp;(new in ODF 1.3) </h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:PGPData_0" class="unbreakable">manifest:PGPData</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -135,12 +114,33 @@ for an element to have a special child element.</p>
 </table>
 <br />
 
-																	<h3><a name="element_algorithm_0">algorithm Element</a></h3>
+							<h3><a name="element_manifest:PGPKeyPacket_0">manifest:PGPKeyPacket Element</a>&nbsp;(new in ODF 1.3) </h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_encryption-data_0" class="unbreakable">encryption-data</a>&nbsp;
+	<a href="#element_manifest:PGPData_0" class="unbreakable">manifest:PGPData</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+
+																	<h3><a name="element_manifest:algorithm_0">manifest:algorithm Element</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:encryption-data_0" class="unbreakable">manifest:encryption-data</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -152,27 +152,27 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Attributes</td>
 <td class="right">
-	<a href="#attribute_algorithm-name_0" class="unbreakable mandatory">algorithm-name</a>&nbsp;
-	<a href="#attribute_initialisation-vector_0" class="unbreakable mandatory">initialisation-vector</a>&nbsp;
+	<a href="#attribute_manifest:algorithm-name_0" class="unbreakable mandatory">manifest:algorithm-name</a>&nbsp;
+	<a href="#attribute_manifest:initialisation-vector_0" class="unbreakable mandatory">manifest:initialisation-vector</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>
 <br />
 
-							<h3><a name="element_encrypted-key_0">encrypted-key Element</a>&nbsp;(new in ODF 1.3) </h3>
+							<h3><a name="element_manifest:encrypted-key_0">manifest:encrypted-key Element</a>&nbsp;(new in ODF 1.3) </h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest_0" class="unbreakable">manifest</a>&nbsp;
+	<a href="#element_manifest:manifest_0" class="unbreakable">manifest:manifest</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Child Elements</td>
 <td class="right">
-	<a href="#element_CipherData_0" class="unbreakable mandatory">CipherData</a>&nbsp;
-	<a href="#element_encryption-method_0" class="unbreakable ">encryption-method</a>&nbsp;
-	<a href="#element_keyinfo_0" class="unbreakable mandatory">keyinfo</a>&nbsp;
+	<a href="#element_manifest:CipherData_0" class="unbreakable mandatory">manifest:CipherData</a>&nbsp;
+	<a href="#element_manifest:encryption-method_0" class="unbreakable ">manifest:encryption-method</a>&nbsp;
+	<a href="#element_manifest:keyinfo_0" class="unbreakable mandatory">manifest:keyinfo</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -183,38 +183,38 @@ for an element to have a special child element.</p>
 </table>
 <br />
 
-																	<h3><a name="element_encryption-data_0">encryption-data Element</a></h3>
+																	<h3><a name="element_manifest:encryption-data_0">manifest:encryption-data Element</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_file-entry_0" class="unbreakable">file-entry</a>&nbsp;
+	<a href="#element_manifest:file-entry_0" class="unbreakable">manifest:file-entry</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Child Elements</td>
 <td class="right">
-	<a href="#element_algorithm_0" class="unbreakable mandatory">algorithm</a>&nbsp;
-	<a href="#element_key-derivation_0" class="unbreakable mandatory">key-derivation</a>&nbsp;
-	<a href="#element_start-key-generation_0" class="unbreakable ">start-key-generation</a>&nbsp;
+	<a href="#element_manifest:algorithm_0" class="unbreakable mandatory">manifest:algorithm</a>&nbsp;
+	<a href="#element_manifest:key-derivation_0" class="unbreakable mandatory">manifest:key-derivation</a>&nbsp;
+	<a href="#element_manifest:start-key-generation_0" class="unbreakable ">manifest:start-key-generation</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Attributes</td>
 <td class="right">
-	<a href="#attribute_checksum_0" class="unbreakable mandatory">checksum</a>&nbsp;
-	<a href="#attribute_checksum-type_0" class="unbreakable mandatory">checksum-type</a>&nbsp;
+	<a href="#attribute_manifest:checksum_0" class="unbreakable mandatory">manifest:checksum</a>&nbsp;
+	<a href="#attribute_manifest:checksum-type_0" class="unbreakable mandatory">manifest:checksum-type</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>
 <br />
 
-							<h3><a name="element_encryption-method_0">encryption-method Element</a>&nbsp;(new in ODF 1.3) </h3>
+							<h3><a name="element_manifest:encryption-method_0">manifest:encryption-method Element</a>&nbsp;(new in ODF 1.3) </h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_encrypted-key_0" class="unbreakable">encrypted-key</a>&nbsp;
+	<a href="#element_manifest:encrypted-key_0" class="unbreakable">manifest:encrypted-key</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -225,45 +225,45 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Attributes</td>
 <td class="right">
-	<a href="#attribute_PGPAlgorithm_0" class="unbreakable mandatory">PGPAlgorithm</a>&nbsp;
+	<a href="#attribute_manifest:PGPAlgorithm_0" class="unbreakable mandatory">manifest:PGPAlgorithm</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>
 <br />
 
-																	<h3><a name="element_file-entry_0">file-entry Element</a></h3>
+																	<h3><a name="element_manifest:file-entry_0">manifest:file-entry Element</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest_0" class="unbreakable">manifest</a>&nbsp;
+	<a href="#element_manifest:manifest_0" class="unbreakable">manifest:manifest</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Child Elements</td>
 <td class="right">
-	<a href="#element_encryption-data_0" class="unbreakable ">encryption-data</a>&nbsp;
+	<a href="#element_manifest:encryption-data_0" class="unbreakable ">manifest:encryption-data</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Attributes</td>
 <td class="right">
-	<a href="#attribute_full-path_0" class="unbreakable mandatory">full-path</a>&nbsp;
-	<a href="#attribute_media-type_0" class="unbreakable mandatory">media-type</a>&nbsp;
-	<a href="#attribute_preferred-view-mode_0" class="unbreakable ">preferred-view-mode</a>&nbsp;
-	<a href="#attribute_size_0" class="unbreakable ">size</a>&nbsp;
-	<a href="#attribute_version_1" class="unbreakable ">version[1]</a>&nbsp;
+	<a href="#attribute_manifest:full-path_0" class="unbreakable mandatory">manifest:full-path</a>&nbsp;
+	<a href="#attribute_manifest:media-type_0" class="unbreakable mandatory">manifest:media-type</a>&nbsp;
+	<a href="#attribute_manifest:preferred-view-mode_0" class="unbreakable ">manifest:preferred-view-mode</a>&nbsp;
+	<a href="#attribute_manifest:size_0" class="unbreakable ">manifest:size</a>&nbsp;
+	<a href="#attribute_manifest:version_0" class="unbreakable ">manifest:version[0]</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>
 <br />
 
-																	<h3><a name="element_key-derivation_0">key-derivation Element</a></h3>
+																	<h3><a name="element_manifest:key-derivation_0">manifest:key-derivation Element</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_encryption-data_0" class="unbreakable">encryption-data</a>&nbsp;
+	<a href="#element_manifest:encryption-data_0" class="unbreakable">manifest:encryption-data</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -274,28 +274,28 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Attributes</td>
 <td class="right">
-	<a href="#attribute_iteration-count_0" class="unbreakable ">iteration-count</a>&nbsp;
-	<a href="#attribute_key-derivation-name_0" class="unbreakable mandatory">key-derivation-name[0]</a>&nbsp;
-	<a href="#attribute_key-derivation-name_1" class="unbreakable mandatory">key-derivation-name[1]</a>&nbsp;
-	<a href="#attribute_key-size_0" class="unbreakable ">key-size</a>&nbsp;
-	<a href="#attribute_salt_0" class="unbreakable ">salt</a>&nbsp;
+	<a href="#attribute_manifest:iteration-count_0" class="unbreakable ">manifest:iteration-count</a>&nbsp;
+	<a href="#attribute_manifest:key-derivation-name_0" class="unbreakable mandatory">manifest:key-derivation-name[0]</a>&nbsp;
+	<a href="#attribute_manifest:key-derivation-name_1" class="unbreakable mandatory">manifest:key-derivation-name[1]</a>&nbsp;
+	<a href="#attribute_manifest:key-size_0" class="unbreakable ">manifest:key-size</a>&nbsp;
+	<a href="#attribute_manifest:salt_0" class="unbreakable ">manifest:salt</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>
 <br />
 
-							<h3><a name="element_keyinfo_0">keyinfo Element</a>&nbsp;(new in ODF 1.3) </h3>
+							<h3><a name="element_manifest:keyinfo_0">manifest:keyinfo Element</a>&nbsp;(new in ODF 1.3) </h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_encrypted-key_0" class="unbreakable">encrypted-key</a>&nbsp;
+	<a href="#element_manifest:encrypted-key_0" class="unbreakable">manifest:encrypted-key</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Child Elements</td>
 <td class="right">
-	<a href="#element_PGPData_0" class="unbreakable mandatory">PGPData</a>&nbsp;
+	<a href="#element_manifest:PGPData_0" class="unbreakable mandatory">manifest:PGPData</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -306,7 +306,7 @@ for an element to have a special child element.</p>
 </table>
 <br />
 
-																	<h3><a name="element_manifest_0">manifest Element</a></h3>
+																	<h3><a name="element_manifest:manifest_0">manifest:manifest Element</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
@@ -316,25 +316,25 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Child Elements</td>
 <td class="right">
-	<a href="#element_encrypted-key_0" class="unbreakable ">encrypted-key</a>*&nbsp;
-	<a href="#element_file-entry_0" class="unbreakable mandatory">file-entry</a>*&nbsp;
+	<a href="#element_manifest:encrypted-key_0" class="unbreakable ">manifest:encrypted-key</a>*&nbsp;
+	<a href="#element_manifest:file-entry_0" class="unbreakable mandatory">manifest:file-entry</a>*&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Attributes</td>
 <td class="right">
-	<a href="#attribute_version_0" class="unbreakable mandatory">version[0]</a>&nbsp;
+	<a href="#attribute_manifest:version_1" class="unbreakable mandatory">manifest:version[1]</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>
 <br />
 
-												<h3><a name="element_start-key-generation_0">start-key-generation Element</a>&nbsp;(new in ODF 1.2) </h3>
+												<h3><a name="element_manifest:start-key-generation_0">manifest:start-key-generation Element</a>&nbsp;(new in ODF 1.2) </h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_encryption-data_0" class="unbreakable">encryption-data</a>&nbsp;
+	<a href="#element_manifest:encryption-data_0" class="unbreakable">manifest:encryption-data</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -345,18 +345,18 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Attributes</td>
 <td class="right">
-	<a href="#attribute_key-size_0" class="unbreakable ">key-size</a>&nbsp;
-	<a href="#attribute_start-key-generation-name_0" class="unbreakable mandatory">start-key-generation-name</a>&nbsp;
+	<a href="#attribute_manifest:key-size_0" class="unbreakable ">manifest:key-size</a>&nbsp;
+	<a href="#attribute_manifest:start-key-generation-name_0" class="unbreakable mandatory">manifest:start-key-generation-name</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>
 <br />
-							<h3><a name="attribute_PGPAlgorithm_0">PGPAlgorithm Attribute</a>&nbsp;(new in ODF 1.3) </h3>
+							<h3><a name="attribute_manifest:PGPAlgorithm_0">manifest:PGPAlgorithm Attribute</a>&nbsp;(new in ODF 1.3) </h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_encryption-method_0" class="unbreakable">encryption-method</a>&nbsp;
+	<a href="#element_manifest:encryption-method_0" class="unbreakable">manifest:encryption-method</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -372,12 +372,12 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-																	<h3><a name="attribute_algorithm-name_0">algorithm-name Attribute</a></h3>
+																	<h3><a name="attribute_manifest:algorithm-name_0">manifest:algorithm-name Attribute</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_algorithm_0" class="unbreakable">algorithm</a>&nbsp;
+	<a href="#element_manifest:algorithm_0" class="unbreakable">manifest:algorithm</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -394,12 +394,12 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-																	<h3><a name="attribute_checksum_0">checksum Attribute</a></h3>
+																	<h3><a name="attribute_manifest:checksum_0">manifest:checksum Attribute</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_encryption-data_0" class="unbreakable">encryption-data</a>&nbsp;
+	<a href="#element_manifest:encryption-data_0" class="unbreakable">manifest:encryption-data</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -415,12 +415,12 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-																	<h3><a name="attribute_checksum-type_0">checksum-type Attribute</a></h3>
+																	<h3><a name="attribute_manifest:checksum-type_0">manifest:checksum-type Attribute</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_encryption-data_0" class="unbreakable">encryption-data</a>&nbsp;
+	<a href="#element_manifest:encryption-data_0" class="unbreakable">manifest:encryption-data</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -437,12 +437,12 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-																	<h3><a name="attribute_full-path_0">full-path Attribute</a></h3>
+																	<h3><a name="attribute_manifest:full-path_0">manifest:full-path Attribute</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_file-entry_0" class="unbreakable">file-entry</a>&nbsp;
+	<a href="#element_manifest:file-entry_0" class="unbreakable">manifest:file-entry</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -458,12 +458,12 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-																	<h3><a name="attribute_initialisation-vector_0">initialisation-vector Attribute</a></h3>
+																	<h3><a name="attribute_manifest:initialisation-vector_0">manifest:initialisation-vector Attribute</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_algorithm_0" class="unbreakable">algorithm</a>&nbsp;
+	<a href="#element_manifest:algorithm_0" class="unbreakable">manifest:algorithm</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -479,12 +479,12 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-																	<h3><a name="attribute_iteration-count_0">iteration-count Attribute</a></h3>
+																	<h3><a name="attribute_manifest:iteration-count_0">manifest:iteration-count Attribute</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_key-derivation_0" class="unbreakable">key-derivation</a>&nbsp;
+	<a href="#element_manifest:key-derivation_0" class="unbreakable">manifest:key-derivation</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -500,13 +500,35 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-																	<h3><a name="attribute_key-derivation-name_0">key-derivation-name[0] Attribute</a></h3>
+																	<h3><a name="attribute_manifest:key-derivation-name_0">manifest:key-derivation-name[0] Attribute</a></h3>
 <p>There are more than one Definitions by this name.</p>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_key-derivation_0" class="unbreakable">key-derivation</a>&nbsp;
+	<a href="#element_manifest:key-derivation_0" class="unbreakable">manifest:key-derivation</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+	<span style="unbreakable">"PGP"</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+																	<h3><a name="attribute_manifest:key-derivation-name_1">manifest:key-derivation-name[1] Attribute</a></h3>
+<p>There are more than one Definitions by this name.</p>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:key-derivation_0" class="unbreakable">manifest:key-derivation</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -523,35 +545,13 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-																	<h3><a name="attribute_key-derivation-name_1">key-derivation-name[1] Attribute</a></h3>
-<p>There are more than one Definitions by this name.</p>
+												<h3><a name="attribute_manifest:key-size_0">manifest:key-size Attribute</a>&nbsp;(new in ODF 1.2) </h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_key-derivation_0" class="unbreakable">key-derivation</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Datatypes</td>
-<td class="right">
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Values</td>
-<td class="right">
-	<span style="unbreakable">"PGP"</a>&nbsp;
-&nbsp;</td>
-</tr>
-</table>
-<br />
-												<h3><a name="attribute_key-size_0">key-size Attribute</a>&nbsp;(new in ODF 1.2) </h3>
-<table border="1" width="100%">
-<tr>
-<td class="left">Parent Elements</td>
-<td class="right">
-	<a href="#element_key-derivation_0" class="unbreakable">key-derivation</a>&nbsp;
-	<a href="#element_start-key-generation_0" class="unbreakable">start-key-generation</a>&nbsp;
+	<a href="#element_manifest:key-derivation_0" class="unbreakable">manifest:key-derivation</a>&nbsp;
+	<a href="#element_manifest:start-key-generation_0" class="unbreakable">manifest:start-key-generation</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -567,12 +567,12 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-																	<h3><a name="attribute_media-type_0">media-type Attribute</a></h3>
+																	<h3><a name="attribute_manifest:media-type_0">manifest:media-type Attribute</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_file-entry_0" class="unbreakable">file-entry</a>&nbsp;
+	<a href="#element_manifest:file-entry_0" class="unbreakable">manifest:file-entry</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -588,12 +588,12 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-												<h3><a name="attribute_preferred-view-mode_0">preferred-view-mode Attribute</a>&nbsp;(new in ODF 1.2) </h3>
+												<h3><a name="attribute_manifest:preferred-view-mode_0">manifest:preferred-view-mode Attribute</a>&nbsp;(new in ODF 1.2) </h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_file-entry_0" class="unbreakable">file-entry</a>&nbsp;
+	<a href="#element_manifest:file-entry_0" class="unbreakable">manifest:file-entry</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -612,12 +612,12 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-																	<h3><a name="attribute_salt_0">salt Attribute</a></h3>
+																	<h3><a name="attribute_manifest:salt_0">manifest:salt Attribute</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_key-derivation_0" class="unbreakable">key-derivation</a>&nbsp;
+	<a href="#element_manifest:key-derivation_0" class="unbreakable">manifest:key-derivation</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -633,12 +633,12 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-																	<h3><a name="attribute_size_0">size Attribute</a></h3>
+																	<h3><a name="attribute_manifest:size_0">manifest:size Attribute</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_file-entry_0" class="unbreakable">file-entry</a>&nbsp;
+	<a href="#element_manifest:file-entry_0" class="unbreakable">manifest:file-entry</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -654,12 +654,12 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-												<h3><a name="attribute_start-key-generation-name_0">start-key-generation-name Attribute</a>&nbsp;(new in ODF 1.2) </h3>
+												<h3><a name="attribute_manifest:start-key-generation-name_0">manifest:start-key-generation-name Attribute</a>&nbsp;(new in ODF 1.2) </h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_start-key-generation_0" class="unbreakable">start-key-generation</a>&nbsp;
+	<a href="#element_manifest:start-key-generation_0" class="unbreakable">manifest:start-key-generation</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -676,35 +676,13 @@ for an element to have a special child element.</p>
 </tr>
 </table>
 <br />
-												<h3><a name="attribute_version_0">version[0] Attribute</a>&nbsp;(new in ODF 1.2) </h3>
+												<h3><a name="attribute_manifest:version_0">manifest:version[0] Attribute</a>&nbsp;(new in ODF 1.2) </h3>
 <p>There are more than one Definitions by this name.</p>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest_0" class="unbreakable">manifest</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Datatypes</td>
-<td class="right">
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Values</td>
-<td class="right">
-	<span style="unbreakable">"1.3"</a>&nbsp;
-&nbsp;</td>
-</tr>
-</table>
-<br />
-												<h3><a name="attribute_version_1">version[1] Attribute</a>&nbsp;(new in ODF 1.2) </h3>
-<p>There are more than one Definitions by this name.</p>
-<table border="1" width="100%">
-<tr>
-<td class="left">Parent Elements</td>
-<td class="right">
-	<a href="#element_file-entry_0" class="unbreakable">file-entry</a>&nbsp;
+	<a href="#element_manifest:file-entry_0" class="unbreakable">manifest:file-entry</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -716,6 +694,28 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Values</td>
 <td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+												<h3><a name="attribute_manifest:version_1">manifest:version[1] Attribute</a>&nbsp;(new in ODF 1.2) </h3>
+<p>There are more than one Definitions by this name.</p>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:manifest_0" class="unbreakable">manifest:manifest</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+	<span style="unbreakable">"1.3"</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>

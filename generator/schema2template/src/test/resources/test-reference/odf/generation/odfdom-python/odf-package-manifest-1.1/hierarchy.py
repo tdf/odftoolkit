@@ -2,42 +2,42 @@
 # /usr/bin/python
 
 CHILD_ELEMENTS = {
-	'algorithm' : ( \
+	'manifest:algorithm' : ( \
 ),
-	'encryption-data' : ( \
-		'algorithm', \
-		'key-derivation', \
+	'manifest:encryption-data' : ( \
+		'manifest:algorithm', \
+		'manifest:key-derivation', \
 ),
-	'file-entry' : ( \
-		'encryption-data', \
+	'manifest:file-entry' : ( \
+		'manifest:encryption-data', \
 ),
-	'key-derivation' : ( \
+	'manifest:key-derivation' : ( \
 ),
-	'manifest' : ( \
-		'file-entry', \
+	'manifest:manifest' : ( \
+		'manifest:file-entry', \
 ),
 }
 
 CHILD_ATTRIBUTES = {
-	'algorithm' : ( \
-		'algorithm-name', \
-		'initialisation-vector', \
+	'manifest:algorithm' : ( \
+		'manifest:algorithm-name', \
+		'manifest:initialisation-vector', \
 ),
-	'encryption-data' : ( \
-		'checksum', \
-		'checksum-type', \
+	'manifest:encryption-data' : ( \
+		'manifest:checksum', \
+		'manifest:checksum-type', \
 ),
-	'file-entry' : ( \
-		'full-path', \
-		'media-type', \
-		'size', \
+	'manifest:file-entry' : ( \
+		'manifest:full-path', \
+		'manifest:media-type', \
+		'manifest:size', \
 ),
-	'key-derivation' : ( \
-		'iteration-count', \
-		'key-derivation-name', \
-		'salt', \
+	'manifest:key-derivation' : ( \
+		'manifest:iteration-count', \
+		'manifest:key-derivation-name', \
+		'manifest:salt', \
 ),
-	'manifest' : ( \
+	'manifest:manifest' : ( \
 ),
 }
 

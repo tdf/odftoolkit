@@ -1,45 +1,45 @@
 0: REF 'manifest',
-1: ELEMENT "manifest",
+1: ELEMENT "manifest:manifest",
 2: ONEOREMORE
 3: REF 'file-entry',
-4: ELEMENT "file-entry",
+4: ELEMENT "manifest:file-entry",
 5: SEQUENCE
 6: REF 'file-entry-attlist',
 7: INTERLEAVE
-8: ATTRIBUTE "full-path",
+8: ATTRIBUTE "manifest:full-path",
 9: DATA 'string',
 8: CHOICE
-9: ATTRIBUTE "size",
+9: ATTRIBUTE "manifest:size",
 10: DATA 'nonNegativeInteger',
 9: EPSILON
-8: ATTRIBUTE "media-type",
+8: ATTRIBUTE "manifest:media-type",
 9: DATA 'string',
 6: CHOICE
 7: REF 'encryption-data',
-8: ELEMENT "encryption-data",
+8: ELEMENT "manifest:encryption-data",
 9: SEQUENCE
 10: REF 'encryption-data-attlist',
 11: INTERLEAVE
-12: ATTRIBUTE "checksum-type",
+12: ATTRIBUTE "manifest:checksum-type",
 13: DATA 'string',
-12: ATTRIBUTE "checksum",
+12: ATTRIBUTE "manifest:checksum",
 13: DATA 'base64Binary',
 10: REF 'algorithm',
-11: ELEMENT "algorithm",
+11: ELEMENT "manifest:algorithm",
 12: REF 'algorithm-attlist',
 13: INTERLEAVE
-14: ATTRIBUTE "algorithm-name",
+14: ATTRIBUTE "manifest:algorithm-name",
 15: DATA 'string',
-14: ATTRIBUTE "initialisation-vector",
+14: ATTRIBUTE "manifest:initialisation-vector",
 15: DATA 'base64Binary',
 10: REF 'key-derivation',
-11: ELEMENT "key-derivation",
+11: ELEMENT "manifest:key-derivation",
 12: REF 'key-derivation-attlist',
 13: INTERLEAVE
-14: ATTRIBUTE "key-derivation-name",
+14: ATTRIBUTE "manifest:key-derivation-name",
 15: DATA 'string',
-14: ATTRIBUTE "salt",
+14: ATTRIBUTE "manifest:salt",
 15: DATA 'base64Binary',
-14: ATTRIBUTE "iteration-count",
+14: ATTRIBUTE "manifest:iteration-count",
 15: DATA 'nonNegativeInteger',
 7: EPSILON
