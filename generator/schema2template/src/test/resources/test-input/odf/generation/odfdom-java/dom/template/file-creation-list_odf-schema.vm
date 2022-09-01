@@ -35,22 +35,22 @@
 #foreach ($element in ${xmlModel.getElements().withoutMultiples()})
 #if ($element != "*")
 #set($className = "${xmlModel.camelCase($element)}Element")
-	<file path="org/odftoolkit/odfdom/dom/element/${xmlModel.extractNamespace($element)}/${className}.java" contextNode="$element" template="java-odfdom-element-template.vm" />
+	<file path="org/odftoolkit/odfdom/dom/element/${xmlModel.extractNamespacePrefix($element)}/${className}.java" contextNode="$element" template="java-odfdom-element-template.vm" />
 #end
 #end
 ##
 #foreach ($base in $codeModel.getBaseClasses())
 #if ($base != "container" && $base != "style" && $base != "styleproperties" && $base != "OdfOfficeAutomaticStyles" && $base != "OdfOfficeMasterStyles" && $base != "OdfOfficeStyles")
 #set($className = "${xmlModel.camelCase(${base})}ElementBase")
-	<file path="org/odftoolkit/odfdom/dom/element/${xmlModel.extractNamespace(${base})}/${className}.java" contextNode="$base" template="java-odfdom-elementbase-template.vm" />
+	<file path="org/odftoolkit/odfdom/dom/element/${xmlModel.extractNamespacePrefix(${base})}/${className}.java" contextNode="$base" template="java-odfdom-elementbase-template.vm" />
 #end
 #end
 ##
 #foreach ($attribute in ${xmlModel.getAttributes().withoutMultiples()})
 #if ($attribute != "*")
 #set($className = "${xmlModel.camelCase($attribute)}Attribute")
-#if(${xmlModel.extractNamespace($attribute)})
-	<file path="org/odftoolkit/odfdom/dom/attribute/${xmlModel.extractNamespace($attribute)}/${className}.java" contextNode="$attribute" template="java-odfdom-attribute-template.vm" />
+#if(${xmlModel.extractNamespacePrefix($attribute)})
+	<file path="org/odftoolkit/odfdom/dom/attribute/${xmlModel.extractNamespacePrefix($attribute)}/${className}.java" contextNode="$attribute" template="java-odfdom-attribute-template.vm" />
 #else
 	<file path="org/odftoolkit/odfdom/dom/attribute/${className}.java" contextNode="$attribute" template="java-odfdom-attribute-template.vm" />
 #end
@@ -58,7 +58,7 @@
 #end
 ##
 #foreach ($styleElement in ${xmlModel.getElements().withoutMultiples()})
-#if ($styleElement.getNamespace() == "style" && ${styleElement.getLocalName().endsWith("properties")})
+#if ($styleElement.getNamespacePrefix() == "style" && ${styleElement.getLocalName().endsWith("properties")})
 #set ($properties=${styleElement.withMultiples().getAttributes()})
 #if ($properties.size()>0)
 	<file path="org/odftoolkit/odfdom/dom/style/props/Odf${xmlModel.camelCase(${styleElement.getLocalName()})}.java" contextNode="$styleElement" template="java-odfdom-styleproperties.vm" />

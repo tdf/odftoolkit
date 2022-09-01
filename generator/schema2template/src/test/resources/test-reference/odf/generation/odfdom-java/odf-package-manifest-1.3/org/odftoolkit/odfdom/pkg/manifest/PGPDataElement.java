@@ -28,16 +28,17 @@
  */
 package org.odftoolkit.odfdom.pkg.manifest;
 
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 /**
- * Manifest implementation of OpenDocument element  {@odf.element PGPData}.
+ * Manifest implementation of OpenDocument element  {@odf.element manifest:PGPData}.
  *
  */
 public class PGPDataElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:PGPData");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, PGPData);
 
 	/**
 	 * Create the instance of <code>PGPDataElement</code>
@@ -51,18 +52,18 @@ public class PGPDataElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element PGPData}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:PGPData}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
 	/**
-	 * Create child element {@odf.element PGPKeyID}.
+	 * Create child element {@odf.element manifest:PGPKeyID}.
 	 *
 	 * Child element is mandatory.
 	 *
-	 * @return the element {@odf.element PGPKeyID}
+	 * @return the element {@odf.element manifest:PGPKeyID}
 	 */
 	public PGPKeyIDElement newPGPKeyIDElement() {
 		PGPKeyIDElement pGPKeyID = ((OdfFileDom) this.ownerDocument).newOdfElement(PGPKeyIDElement.class);
@@ -71,9 +72,9 @@ public class PGPDataElement extends OdfElement {
 	}
 
 	/**
-	 * Create child element {@odf.element PGPKeyPacket}.
+	 * Create child element {@odf.element manifest:PGPKeyPacket}.
 	 *
-	 * @return the element {@odf.element PGPKeyPacket}
+	 * @return the element {@odf.element manifest:PGPKeyPacket}
 	 */
 	public PGPKeyPacketElement newPGPKeyPacketElement() {
 		PGPKeyPacketElement pGPKeyPacket = ((OdfFileDom) this.ownerDocument).newOdfElement(PGPKeyPacketElement.class);

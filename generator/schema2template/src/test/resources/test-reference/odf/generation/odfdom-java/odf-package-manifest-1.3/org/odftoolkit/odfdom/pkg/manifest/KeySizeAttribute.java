@@ -28,7 +28,7 @@
  */
 package org.odftoolkit.odfdom.pkg.manifest;
 
-import org.odftoolkit.odfdom.pkg.OdfNamespace;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class KeySizeAttribute extends OdfAttribute {
 
-public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfNamespace.MANIFEST, key-size);
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, key-size);
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute manifest:key-size}.

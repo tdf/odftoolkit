@@ -20,12 +20,9 @@
 ##################################################################
 ## Template to create the Java class representing an ODF manifest element
 ##
-## Documentation of template development can be found in local file
-## TemplateHelp.html.
-##
 #set ($element = ${xmlModel.getElement($contextNode)})
-###set ($NS = ${element.getNamespace()})
-#set ($className = "${xmlModel.camelCase($element)}Element")
+#set ($localName = ${xmlModel.extractLocalName($element)})
+#set ($className = "${xmlModel.camelCase($localName)}Element")
 ##
 ## Set child element and child attributes
 #set ($children = ${element.getChildElements().withoutMultiples()})
@@ -56,6 +53,7 @@ package org.odftoolkit.odfdom.pkg.manifest;
 ##  Imports
 ## ---------------------------------------------------
 ##
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
@@ -65,7 +63,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 ## ---------------------------------------------------
 ##
 /**
- * Manifest implementation of OpenDocument element  {@odf.element ${contextNode}}.
+ * Manifest implementation of OpenDocument element  {@odf.element $element}.
  *
 #if ($anychild)
  * This class can have any org.w3c.dom.Element child element.
@@ -76,7 +74,11 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class $className extends $baseClassName {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:${element}");
+#if (${element.getNamespacePrefix()})
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.${element.getNamespacePrefix().toUpperCase()}, ${element.getLocalName()});
+#else
+	public static final OdfName ELEMENT_NAME = OdfName.newName("$localName");
+#end
 
 	/**
 	 * Create the instance of <code>$className</code>
@@ -90,7 +92,7 @@ public class $className extends $baseClassName {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element ${contextNode}}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element $element}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
@@ -141,9 +143,8 @@ public class $className extends $baseClassName {
 #end
 #if ($attr != "*")
 #set ($attribute = ${attr.withMultiples()})
-#set ($aNS = ${attribute.getNamespace()})
-#set ($aClassName = "${xmlModel.camelCase($attribute)}Attribute")
-#set ($aParam = "${xmlModel.javaCase($attribute)}Value")
+#set ($aClassName = "${xmlModel.camelCase(${attribute.getLocalName()})}Attribute")
+#set ($aParam = "${xmlModel.javaCase(${attribute.getLocalName()})}Value")
 
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>$aClassName</code> , See {@odf.attribute ${attribute.getQName()}}
@@ -210,8 +211,8 @@ public class $className extends $baseClassName {
 #foreach($ch in $children)
 #if ($ch != "*")
 #set ($child = ${ch.withMultiples()})
-#set ($cClassName = "${xmlModel.camelCase($child)}Element")
-#set ($cVar = ${xmlModel.javaCase($child)})
+#set ($cClassName = "${xmlModel.camelCase(${child.getLocalName()})}Element")
+#set ($cVar = ${xmlModel.javaCase(${child.getLocalName()})})
 #set ($ch_attributes = ${child.getAttributes().withoutMultiples()})
 ##set has parameter flag
 #set ($hasParams = false)
@@ -262,9 +263,8 @@ public class $className extends $baseClassName {
 #end
 #if ($ch_attr != "*")
 #set ($attribute = ${ch_attr.withMultiples()})
-#set ($aNS = ${attribute.getNamespace()})
-#set ($aClassName = "${xmlModel.camelCase($attribute)}Attribute")
-#set ($aParam = "${xmlModel.javaCase($attribute)}Value")
+#set ($aClassName = "${xmlModel.camelCase(${attribute.getLocalName()})}Attribute")
+#set ($aParam = "${xmlModel.javaCase(${attribute.getLocalName()})}Value")
 	 * @param $aParam  the <code>$ch_ValueObject</code> value of <code>$aClassName</code>, see {@odf.attribute  ${attribute.getQName()}} at specification
 #if ($ch_SimpleValue!="")
 #set ($params="${params}${seperateFlag}${ch_SimpleValue} ${aParam}")
@@ -297,14 +297,14 @@ public class $className extends $baseClassName {
 	 * Child element is mandatory.
 	 *
 #end
-	 * @return the element {@odf.element ${child}}
+	 * @return the element {@odf.element $child}
 	 */
 	 public $cClassName new${cClassName}($params) {
 		$cClassName $cVar = ((OdfFileDom) this.ownerDocument).newOdfElement(${cClassName}.class);
 #foreach ($ch_attr in $ch_attributes)
 #if ($ch_attr != "*" && ${child.isMandatory($ch_attr)})
-#set ($aClassName = "${xmlModel.camelCase($ch_attr)}Attribute")
-#set ($aParam = "${xmlModel.javaCase($ch_attr)}Value")
+#set ($aClassName = "${xmlModel.camelCase(${ch_attr.getLocalName()})}Attribute")
+#set ($aParam = "${xmlModel.javaCase(${ch_attr.getLocalName()})}Value")
 		${cVar}.set$aClassName($aParam);
 #end
 #end
@@ -314,7 +314,7 @@ public class $className extends $baseClassName {
 
 #else
 	/**
-	 * Create child element {@odf.element ${child}}.
+	 * Create child element {@odf.element $child}.
 	 *
 ### VERSION:ODF-ELEMENT - START
 ## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)

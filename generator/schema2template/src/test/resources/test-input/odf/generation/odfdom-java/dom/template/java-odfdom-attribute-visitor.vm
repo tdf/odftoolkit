@@ -32,10 +32,10 @@ import org.odftoolkit.odfdom.pkg.OdfAttribute;
 ##
 #foreach ($attribute in ${xmlModel.getAttributes().withoutMultiples()})
 #if ($attribute != "*")
-#set ($NS = ${attribute.getNamespace()})
+#set ($namespacePrefix = ${attribute.getNamespacePrefix()})
 #set($className = "${xmlModel.camelCase($attribute)}Attribute")
-#if ($NS)
-import org.odftoolkit.odfdom.dom.attribute.${NS}.${className};
+#if ($namespacePrefix)
+import org.odftoolkit.odfdom.dom.attribute.${namespacePrefix}.${className};
 #else
 import org.odftoolkit.odfdom.dom.attribute.${className};
 #end

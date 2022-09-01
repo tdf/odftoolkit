@@ -28,16 +28,17 @@
  */
 package org.odftoolkit.odfdom.pkg.manifest;
 
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 /**
- * Manifest implementation of OpenDocument element  {@odf.element encryption-method}.
+ * Manifest implementation of OpenDocument element  {@odf.element manifest:encryption-method}.
  *
  */
 public class EncryptionMethodElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:encryption-method");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, encryption-method);
 
 	/**
 	 * Create the instance of <code>EncryptionMethodElement</code>
@@ -51,14 +52,14 @@ public class EncryptionMethodElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element encryption-method}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:encryption-method}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>PGPAlgorithmAttribute</code> , See {@odf.attribute PGPAlgorithm}
+	 * Receives the value of the ODFDOM attribute representation <code>PGPAlgorithmAttribute</code> , See {@odf.attribute manifest:PGPAlgorithm}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -73,7 +74,7 @@ public class EncryptionMethodElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>PGPAlgorithmAttribute</code> , See {@odf.attribute PGPAlgorithm}
+	 * Sets the value of ODFDOM attribute representation <code>PGPAlgorithmAttribute</code> , See {@odf.attribute manifest:PGPAlgorithm}
 	 *
 	 * @param pGPAlgorithmValue   The type is <code>String</code>
 	 */

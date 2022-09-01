@@ -28,16 +28,17 @@
  */
 package org.odftoolkit.odfdom.pkg.manifest;
 
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 /**
- * Manifest implementation of OpenDocument element  {@odf.element CipherData}.
+ * Manifest implementation of OpenDocument element  {@odf.element manifest:CipherData}.
  *
  */
 public class CipherDataElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:CipherData");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, CipherData);
 
 	/**
 	 * Create the instance of <code>CipherDataElement</code>
@@ -51,18 +52,18 @@ public class CipherDataElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element CipherData}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:CipherData}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
 	/**
-	 * Create child element {@odf.element CipherValue}.
+	 * Create child element {@odf.element manifest:CipherValue}.
 	 *
 	 * Child element is mandatory.
 	 *
-	 * @return the element {@odf.element CipherValue}
+	 * @return the element {@odf.element manifest:CipherValue}
 	 */
 	public CipherValueElement newCipherValueElement() {
 		CipherValueElement cipherValue = ((OdfFileDom) this.ownerDocument).newOdfElement(CipherValueElement.class);

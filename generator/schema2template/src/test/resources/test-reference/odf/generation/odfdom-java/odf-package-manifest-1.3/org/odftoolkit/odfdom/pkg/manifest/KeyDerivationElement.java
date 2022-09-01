@@ -28,16 +28,17 @@
  */
 package org.odftoolkit.odfdom.pkg.manifest;
 
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 /**
- * Manifest implementation of OpenDocument element  {@odf.element key-derivation}.
+ * Manifest implementation of OpenDocument element  {@odf.element manifest:key-derivation}.
  *
  */
 public class KeyDerivationElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:key-derivation");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, key-derivation);
 
 	/**
 	 * Create the instance of <code>KeyDerivationElement</code>
@@ -51,14 +52,14 @@ public class KeyDerivationElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element key-derivation}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:key-derivation}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>IterationCountAttribute</code> , See {@odf.attribute iteration-count}
+	 * Receives the value of the ODFDOM attribute representation <code>IterationCountAttribute</code> , See {@odf.attribute manifest:iteration-count}
 	 *
 	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
@@ -71,7 +72,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>IterationCountAttribute</code> , See {@odf.attribute iteration-count}
+	 * Sets the value of ODFDOM attribute representation <code>IterationCountAttribute</code> , See {@odf.attribute manifest:iteration-count}
 	 *
 	 * @param iterationCountValue   The type is <code>Integer</code>
 	 */
@@ -82,7 +83,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>KeyDerivationNameAttribute</code> , See {@odf.attribute key-derivation-name}
+	 * Receives the value of the ODFDOM attribute representation <code>KeyDerivationNameAttribute</code> , See {@odf.attribute manifest:key-derivation-name}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -97,7 +98,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>KeyDerivationNameAttribute</code> , See {@odf.attribute key-derivation-name}
+	 * Sets the value of ODFDOM attribute representation <code>KeyDerivationNameAttribute</code> , See {@odf.attribute manifest:key-derivation-name}
 	 *
 	 * @param keyDerivationNameValue   The type is <code>String</code>
 	 */
@@ -108,7 +109,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>KeySizeAttribute</code> , See {@odf.attribute key-size}
+	 * Receives the value of the ODFDOM attribute representation <code>KeySizeAttribute</code> , See {@odf.attribute manifest:key-size}
 	 *
 	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
@@ -121,7 +122,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>KeySizeAttribute</code> , See {@odf.attribute key-size}
+	 * Sets the value of ODFDOM attribute representation <code>KeySizeAttribute</code> , See {@odf.attribute manifest:key-size}
 	 *
 	 * @param keySizeValue   The type is <code>Integer</code>
 	 */
@@ -132,7 +133,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>SaltAttribute</code> , See {@odf.attribute salt}
+	 * Receives the value of the ODFDOM attribute representation <code>SaltAttribute</code> , See {@odf.attribute manifest:salt}
 	 *
 	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
@@ -145,7 +146,7 @@ public class KeyDerivationElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>SaltAttribute</code> , See {@odf.attribute salt}
+	 * Sets the value of ODFDOM attribute representation <code>SaltAttribute</code> , See {@odf.attribute manifest:salt}
 	 *
 	 * @param saltValue   The type is <code>String</code>
 	 */

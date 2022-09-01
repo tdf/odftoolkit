@@ -314,8 +314,8 @@ public class PuzzlePieceSet implements PuzzleComponent, Collection<PuzzlePiece> 
     return XMLModel.extractLocalName(getQName());
   }
 
-  public String getNamespace() {
-    return XMLModel.extractNamespace(getQName());
+  public String getNamespacePrefix() {
+    return XMLModel.extractNamespacePrefix(getQName());
   }
 
   /**
