@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class KeyinfoElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, keyinfo);
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "keyinfo");
 
 	/**
 	 * Create the instance of <code>KeyinfoElement</code>

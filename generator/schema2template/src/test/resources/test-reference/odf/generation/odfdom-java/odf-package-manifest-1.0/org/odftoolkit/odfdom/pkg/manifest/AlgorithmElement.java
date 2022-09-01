@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class AlgorithmElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, algorithm);
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "algorithm");
 
 	/**
 	 * Create the instance of <code>AlgorithmElement</code>

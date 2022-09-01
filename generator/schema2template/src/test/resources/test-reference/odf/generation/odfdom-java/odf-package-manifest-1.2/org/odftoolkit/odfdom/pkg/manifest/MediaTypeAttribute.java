@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class MediaTypeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, media-type);
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "media-type");
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute manifest:media-type}.

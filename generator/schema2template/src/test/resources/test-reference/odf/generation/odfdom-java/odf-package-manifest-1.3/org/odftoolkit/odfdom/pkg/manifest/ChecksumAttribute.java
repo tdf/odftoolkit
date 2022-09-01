@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class ChecksumAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, checksum);
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "checksum");
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute manifest:checksum}.

@@ -94,7 +94,7 @@ import ${baseimport};
 public class $className extends $baseClassName {
 
 #if (${element.getNamespacePrefix()})
-	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.${element.getNamespacePrefix().toUpperCase()}, ${element.getLocalName()});
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.${element.getNamespacePrefix().toUpperCase()}, "${element.getLocalName()}");
 #else
 	public static final OdfName ELEMENT_NAME = OdfName.newName("$localName");
 #end

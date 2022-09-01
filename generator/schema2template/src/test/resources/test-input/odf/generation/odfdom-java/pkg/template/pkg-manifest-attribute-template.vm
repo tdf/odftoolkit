@@ -108,7 +108,7 @@ import org.odftoolkit.odfdom.pkg.${parent.getNamespacePrefix()}.${xmlModel.camel
 public class $className extends OdfAttribute {
 
 #if (${attribute.getNamespacePrefix()})
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.${attribute.getNamespacePrefix().toUpperCase()}, ${attribute.getLocalName()});
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.${attribute.getNamespacePrefix().toUpperCase()}, "${attribute.getLocalName()}");
 #else
 	public static final OdfName ATTRIBUTE_NAME = OdfName.newName("$localName");
 #end

@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class PGPKeyIDElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, PGPKeyID);
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "PGPKeyID");
 
 	/**
 	 * Create the instance of <code>PGPKeyIDElement</code>

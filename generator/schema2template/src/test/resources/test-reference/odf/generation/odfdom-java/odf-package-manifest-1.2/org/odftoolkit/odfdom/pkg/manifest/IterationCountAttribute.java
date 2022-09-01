@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class IterationCountAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, iteration-count);
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "iteration-count");
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute manifest:iteration-count}.

@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class VersionAttribute extends OdfAttribute {
 
-public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfNamespace.DSIG, version);
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.DSIG, "version");
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute dsig:version}.

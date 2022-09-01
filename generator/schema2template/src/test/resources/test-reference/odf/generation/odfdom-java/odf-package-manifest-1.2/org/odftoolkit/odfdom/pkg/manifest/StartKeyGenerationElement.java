@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class StartKeyGenerationElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, start-key-generation);
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "start-key-generation");
 
 	/**
 	 * Create the instance of <code>StartKeyGenerationElement</code>

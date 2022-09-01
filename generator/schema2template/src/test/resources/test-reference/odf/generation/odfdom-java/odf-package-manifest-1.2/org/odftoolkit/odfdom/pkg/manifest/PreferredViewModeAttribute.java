@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class PreferredViewModeAttribute extends OdfAttribute {
 
-	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, preferred-view-mode);
+	public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, "preferred-view-mode");
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute manifest:preferred-view-mode}.
