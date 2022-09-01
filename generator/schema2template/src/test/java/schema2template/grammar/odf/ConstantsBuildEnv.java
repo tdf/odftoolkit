@@ -30,9 +30,10 @@ class ConstantsBuildEnv {
    * Via Maven pom.xml (surefire test plugin) received System variable of the absolute path of the
    * base directory
    *
-   * @see https://cwiki.apache.org/confluence/display/MAVEN/Maven+Properties+Guide
-   *     <p>The absolute path to the pom directory of this submodule, which is relative to project
-   *     root ./generator/schema2template
+   * <p>{@ref https://cwiki.apache.org/confluence/display/MAVEN/Maven+Properties+Guide}
+   *
+   * <p>The absolute path to the pom directory of this submodule, which is relative to project root
+   * ./generator/schema2template
    */
   static final String BASE_DIR = System.getProperty("schema2template.base.dir") + File.separator;
 
@@ -67,15 +68,11 @@ class ConstantsBuildEnv {
           + "grammar"
           + File.separator;
 
-  // BTW the Maven default output directory for generated sources is target/generated-sources/
+  // The Maven default output directory for generated sources is target/generated-sources/
+  // But the generated Java files still need context not being generated and want compile t
+  // Therefore, target/odf
   static final String TARGET_BASE_DIR =
-      BASE_DIR
-          + "target"
-          + File.separator
-          + "generated-sources"
-          + File.separator
-          + "odf"
-          + File.separator;
+      BASE_DIR + "target" + File.separator + "odf" + File.separator;
 
   // BTW the Maven default output directory for generated sources is target/generated-sources/
   static final String GENERATION_TARGET_BASE_DIR = TARGET_BASE_DIR + "generation" + File.separator;

@@ -111,7 +111,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-				<!-- configuration defined in the parent pom.xml -->
+                <!-- default configuration defined in the parent pom.xml -->
+                <!-- ignore generated Java sources as they still need the context of given ODFDOM Java classes and will not compile -->
+                <configuration>
+                    <excludes>
+                        <exclude>${project.basedir}/target/odf/generation/**/*.java</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
