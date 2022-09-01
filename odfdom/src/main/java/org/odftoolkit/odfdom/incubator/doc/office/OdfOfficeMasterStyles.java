@@ -53,6 +53,11 @@ public abstract class OdfOfficeMasterStyles extends OdfStylesBase
     super(ownerDoc, ELEMENT_NAME);
   }
 
+  /** Used by generated subclass OfficeMasterStylesElement */
+  protected OdfOfficeMasterStyles(OdfFileDom ownerDoc, OdfName elementName) {
+    super(ownerDoc, elementName);
+  }
+
   @Override
   public OdfName getOdfName() {
     // TODO Auto-generated method stub
