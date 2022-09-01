@@ -113,6 +113,17 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <!-- default configuration defined in the parent pom.xml -->
+                <!-- ignore generated Java sources as they still need the context of given ODFDOM Java classes and will not compile -->
+                <configuration>
+                    <excludes>
+                        <exclude>${project.basedir}/target/odf/generation/**/*.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.2.2</version>
                 <configuration>
@@ -416,7 +427,7 @@
                                             <grammarPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/grammar/OpenDocument-manifest-schema-v1.0-os.rng</grammarPath>
                                             <grammarAdditionsPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/pkg/grammar-additions.xml</grammarAdditionsPath>
                                             <mainTemplatePath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/pkg/template/file-creation-list_odf-package-manifest.vm</mainTemplatePath>
-                                            <targetDirPath>${project.build.directory}/generated-sources/odf/generation/odfdom-java/</targetDirPath>
+                                            <targetDirPath>${project.build.directory}/odf/generation/odfdom-java/</targetDirPath>
                                         </generation>
                                         <generation>
                                             <!-- DOM LAYER (ODF Schema DOM) - typed Java Dom Class Generation -->
@@ -425,7 +436,7 @@
                                             <grammarPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/grammar/OpenDocument-schema-v1.0-os.rng</grammarPath>
                                             <grammarAdditionsPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/dom/grammar-additions.xml</grammarAdditionsPath>
                                             <mainTemplatePath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/dom/template/file-creation-list_odf-schema.vm</mainTemplatePath>
-                                            <targetDirPath>${project.build.directory}/generated-sources/odf/generation/odfdom-java/</targetDirPath>
+                                            <targetDirPath>${project.build.directory}/odf/generation/odfdom-java/</targetDirPath>
                                         </generation>
                                         <!-- ODF 1.1 -->
                                         <generation>
@@ -435,7 +446,7 @@
                                             <grammarPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/grammar/OpenDocument-manifest-schema-v1.1.rng</grammarPath>
                                             <grammarAdditionsPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/pkg/grammar-additions.xml</grammarAdditionsPath>
                                             <mainTemplatePath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/pkg/template/file-creation-list_odf-package-manifest.vm</mainTemplatePath>
-                                            <targetDirPath>${project.build.directory}/generated-sources/odf/generation/odfdom-java/</targetDirPath>
+                                            <targetDirPath>${project.build.directory}/odf/generation/odfdom-java/</targetDirPath>
                                         </generation>
                                         <generation>
                                             <!-- DOM LAYER (ODF Schema DOM) - typed Java Dom Class Generation -->
@@ -444,7 +455,7 @@
                                             <grammarPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/grammar/OpenDocument-schema-v1.1.rng</grammarPath>
                                             <grammarAdditionsPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/dom/grammar-additions.xml</grammarAdditionsPath>
                                             <mainTemplatePath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/dom/template/file-creation-list_odf-schema.vm</mainTemplatePath>
-                                            <targetDirPath>${project.build.directory}/generated-sources/odf/generation/odfdom-java/</targetDirPath>
+                                            <targetDirPath>${project.build.directory}/odf/generation/odfdom-java/</targetDirPath>
                                         </generation>
                                         <!-- ODF 1.2 -->
                                         <generation>
@@ -454,7 +465,7 @@
                                             <grammarPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/grammar/OpenDocument-v1.2-os-manifest-schema.rng</grammarPath>
                                             <grammarAdditionsPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/pkg/grammar-additions.xml</grammarAdditionsPath>
                                             <mainTemplatePath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/pkg/template/file-creation-list_odf-package-manifest.vm</mainTemplatePath>
-                                            <targetDirPath>${project.build.directory}/generated-sources/odf/generation/odfdom-java/</targetDirPath>
+                                            <targetDirPath>${project.build.directory}/odf/generation/odfdom-java/</targetDirPath>
                                         </generation>
                                         <generation>
                                             <!-- PKG LAYER (Digital Signature DOM) - typed Java Dom Class Generation -->
@@ -463,7 +474,7 @@
                                             <grammarPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/grammar/OpenDocument-v1.2-os-dsig-schema.rng</grammarPath>
                                             <grammarAdditionsPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/pkg/grammar-additions.xml</grammarAdditionsPath>
                                             <mainTemplatePath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/pkg/template/file-creation-list_odf-package-digital-signature.vm</mainTemplatePath>
-                                            <targetDirPath>${project.build.directory}/generated-sources/odf/generation/odfdom-java/</targetDirPath>
+                                            <targetDirPath>${project.build.directory}/odf/generation/odfdom-java/</targetDirPath>
                                         </generation>
                                         <generation>
                                             <!-- DOM LAYER (ODF Schema DOM) - typed Java Dom Class Generation -->
@@ -472,7 +483,7 @@
                                             <grammarPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/grammar/OpenDocument-v1.2-os-schema.rng</grammarPath>
                                             <grammarAdditionsPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/dom/grammar-additions.xml</grammarAdditionsPath>
                                             <mainTemplatePath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/dom/template/file-creation-list_odf-schema.vm</mainTemplatePath>
-                                            <targetDirPath>${project.build.directory}/generated-sources/odf/generation/odfdom-java/</targetDirPath>
+                                            <targetDirPath>${project.build.directory}/odf/generation/odfdom-java/</targetDirPath>
                                         </generation>
                                         <!-- ODF 1.3 -->
                                         <generation>
@@ -482,7 +493,7 @@
                                             <grammarPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/grammar/OpenDocument-v1.3-manifest-schema.rng</grammarPath>
                                             <grammarAdditionsPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/pkg/grammar-additions.xml</grammarAdditionsPath>
                                             <mainTemplatePath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/pkg/template/file-creation-list_odf-package-manifest.vm</mainTemplatePath>
-                                            <targetDirPath>${project.build.directory}/generated-sources/odf/generation/odfdom-java/</targetDirPath>
+                                            <targetDirPath>${project.build.directory}/odf/generation/odfdom-java/</targetDirPath>
                                         </generation>
                                         <generation>
                                             <!-- PKG LAYER (Digital Signature DOM) - typed Java Dom Class Generation -->
@@ -491,7 +502,7 @@
                                             <grammarPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/grammar/OpenDocument-v1.3-dsig-schema.rng</grammarPath>
                                             <grammarAdditionsPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/pkg/grammar-additions.xml</grammarAdditionsPath>
                                             <mainTemplatePath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/pkg/template/file-creation-list_odf-package-digital-signature.vm</mainTemplatePath>
-                                            <targetDirPath>${project.build.directory}/generated-sources/odf/generation/odfdom-java/</targetDirPath>
+                                            <targetDirPath>${project.build.directory}/odf/generation/odfdom-java/</targetDirPath>
                                         </generation>
                                         <generation>
                                             <!-- DOM LAYER (ODF Schema DOM) - typed Java Dom Class Generation -->
@@ -500,7 +511,7 @@
                                             <grammarPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/grammar/OpenDocument-v1.3-schema.rng</grammarPath>
                                             <grammarAdditionsPath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/dom/grammar-additions.xml</grammarAdditionsPath>
                                             <mainTemplatePath>${basedir}/../generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/dom/template/file-creation-list_odf-schema.vm</mainTemplatePath>
-                                            <targetDirPath>${project.build.directory}/generated-sources/odf/generation/odfdom-java/</targetDirPath>
+                                            <targetDirPath>${project.build.directory}/odf/generation/odfdom-java/</targetDirPath>
                                         </generation>
                                     </generations>
                                 </configuration>
