@@ -275,7 +275,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
   }
 
   // For documentation see OdfAutomaticStyles or OdfStyles.
-  NumberTextStyleElement getTextStyle(String name) {
+  public NumberTextStyleElement getTextStyle(String name) {
     if (mTextStyles != null) {
       return mTextStyles.get(name);
     } else {
