@@ -83,6 +83,11 @@ public abstract class OdfOfficeStyles extends OdfStylesBase {
     //        mStylesBaseImpl = new OdfStylesBase();
   }
 
+  /** Used by generated subclass OdfOfficeStylesElement */
+  protected OdfOfficeStyles(OdfFileDom ownerDoc, OdfName elementName) {
+    super(ownerDoc, elementName);
+  }
+
   @Override
   public OdfName getOdfName() {
     return ELEMENT_NAME;

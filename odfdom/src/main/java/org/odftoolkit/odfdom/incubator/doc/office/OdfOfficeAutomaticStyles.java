@@ -78,6 +78,11 @@ public abstract class OdfOfficeAutomaticStyles extends OdfStylesBase {
     //        mStylesBaseImpl = new OdfStylesBase();
   }
 
+  /** Used by generated subclass OfficeAutomaticStylesElement */
+  protected OdfOfficeAutomaticStyles(OdfFileDom ownerDoc, OdfName elementName) {
+    super(ownerDoc, elementName);
+  }
+
   public OdfName getOdfName() {
     return ELEMENT_NAME;
   }
