@@ -107,7 +107,7 @@ public class TemplateAPIRegressionTest {
 
     methods = getMethods(PuzzleComponent.class);
     assertTrue(methods.contains("getLocalName", 0));
-    assertTrue(methods.contains("getNamespace", 0));
+    assertTrue(methods.contains("getNamespacePrefix", 0));
     assertTrue(methods.contains("getQName", 0));
 
     methods = getMethods(XMLModel.class);
@@ -116,7 +116,7 @@ public class TemplateAPIRegressionTest {
     assertTrue(methods.contains("escapeKeyword", 1));
     assertTrue(methods.contains("escapeLiteral", 1));
     assertTrue(methods.contains("extractLocalName", 1));
-    assertTrue(methods.contains("extractNamespace", 1));
+    assertTrue(methods.contains("extractNamespacePrefix", 1));
     assertTrue(methods.contains("firstWord", 1));
     assertTrue(methods.contains("getAttribute", 1));
     assertTrue(methods.contains("getAttribute", 2));
