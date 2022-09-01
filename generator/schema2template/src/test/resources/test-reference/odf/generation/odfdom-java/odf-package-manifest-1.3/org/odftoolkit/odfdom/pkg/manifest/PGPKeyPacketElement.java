@@ -28,16 +28,17 @@
  */
 package org.odftoolkit.odfdom.pkg.manifest;
 
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 /**
- * Manifest implementation of OpenDocument element  {@odf.element PGPKeyPacket}.
+ * Manifest implementation of OpenDocument element  {@odf.element manifest:PGPKeyPacket}.
  *
  */
 public class PGPKeyPacketElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:PGPKeyPacket");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, PGPKeyPacket);
 
 	/**
 	 * Create the instance of <code>PGPKeyPacketElement</code>
@@ -51,7 +52,7 @@ public class PGPKeyPacketElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element PGPKeyPacket}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:PGPKeyPacket}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;

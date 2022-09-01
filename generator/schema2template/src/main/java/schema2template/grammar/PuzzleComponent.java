@@ -156,11 +156,11 @@ public interface PuzzleComponent {
   public String getQName();
 
   /**
-   * Get only namespace
+   * Get only namespace prefix of the qualified name
    *
-   * @return namespace
+   * @return namespacePrefix
    */
-  public String getNamespace();
+  public String getNamespacePrefix();
 
   /**
    * Get only localname

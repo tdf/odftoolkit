@@ -34,12 +34,12 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 
 
 /**
- * Data signature implementation of OpenDocument element  {@odf.element Signature}.
+ * Data signature implementation of OpenDocument element  {@odf.element ds:Signature}.
  *
  */
 public class SignatureElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("http://www.w3.org/2000/09/xmldsig#", "ds:Signature");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.DS, Signature);
 
 	/**
 	 * Create the instance of <code>SignatureElement</code>
@@ -53,7 +53,7 @@ public class SignatureElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element Signature}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element ds:Signature}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;

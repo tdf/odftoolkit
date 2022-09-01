@@ -28,7 +28,6 @@
 #foreach ($element in ${xmlModel.getElements().withoutMultiples()})
 #if ($element != "*")
 ##
-
 #set($localName = "${element.getLocalName()}")
 #set($className = "${xmlModel.camelCase($localName)}Element")
 	<file path="org/odftoolkit/odfdom/pkg/manifest/${className}.java" contextNode="$element" template="pkg-manifest-element-template.vm" />

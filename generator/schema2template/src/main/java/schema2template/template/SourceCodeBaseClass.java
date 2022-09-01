@@ -66,8 +66,8 @@ public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass> {
     return mBaseName;
   }
 
-  public String getNamespace() {
-    return XMLModel.extractNamespace(mBaseName);
+  public String getNamespacePrefix() {
+    return XMLModel.extractNamespacePrefix(mBaseName);
   }
 
   public String toString() {

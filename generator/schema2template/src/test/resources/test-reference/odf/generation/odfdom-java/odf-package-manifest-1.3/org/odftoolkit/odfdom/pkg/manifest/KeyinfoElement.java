@@ -28,16 +28,17 @@
  */
 package org.odftoolkit.odfdom.pkg.manifest;
 
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 /**
- * Manifest implementation of OpenDocument element  {@odf.element keyinfo}.
+ * Manifest implementation of OpenDocument element  {@odf.element manifest:keyinfo}.
  *
  */
 public class KeyinfoElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:keyinfo");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, keyinfo);
 
 	/**
 	 * Create the instance of <code>KeyinfoElement</code>
@@ -51,18 +52,18 @@ public class KeyinfoElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element keyinfo}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:keyinfo}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
 	/**
-	 * Create child element {@odf.element PGPData}.
+	 * Create child element {@odf.element manifest:PGPData}.
 	 *
 	 * Child element is mandatory.
 	 *
-	 * @return the element {@odf.element PGPData}
+	 * @return the element {@odf.element manifest:PGPData}
 	 */
 	public PGPDataElement newPGPDataElement() {
 		PGPDataElement pGPData = ((OdfFileDom) this.ownerDocument).newOdfElement(PGPDataElement.class);

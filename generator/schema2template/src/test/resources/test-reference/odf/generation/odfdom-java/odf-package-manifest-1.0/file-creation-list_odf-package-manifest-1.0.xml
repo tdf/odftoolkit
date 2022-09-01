@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <file-creation-list>
-
-	<file path="org/odftoolkit/odfdom/pkg/manifest/AlgorithmElement.java" contextNode="algorithm" template="pkg-manifest-element-template.vm" />
-
-	<file path="org/odftoolkit/odfdom/pkg/manifest/EncryptionDataElement.java" contextNode="encryption-data" template="pkg-manifest-element-template.vm" />
-
-	<file path="org/odftoolkit/odfdom/pkg/manifest/FileEntryElement.java" contextNode="file-entry" template="pkg-manifest-element-template.vm" />
-
-	<file path="org/odftoolkit/odfdom/pkg/manifest/KeyDerivationElement.java" contextNode="key-derivation" template="pkg-manifest-element-template.vm" />
-
-	<file path="org/odftoolkit/odfdom/pkg/manifest/ManifestElement.java" contextNode="manifest" template="pkg-manifest-element-template.vm" />
-	<file path="org/odftoolkit/odfdom/pkg/manifest/AlgorithmNameAttribute.java" contextNode="algorithm-name" template="pkg-manifest-attribute-template.vm" />
-	<file path="org/odftoolkit/odfdom/pkg/manifest/ChecksumAttribute.java" contextNode="checksum" template="pkg-manifest-attribute-template.vm" />
-	<file path="org/odftoolkit/odfdom/pkg/manifest/ChecksumTypeAttribute.java" contextNode="checksum-type" template="pkg-manifest-attribute-template.vm" />
-	<file path="org/odftoolkit/odfdom/pkg/manifest/FullPathAttribute.java" contextNode="full-path" template="pkg-manifest-attribute-template.vm" />
-	<file path="org/odftoolkit/odfdom/pkg/manifest/InitialisationVectorAttribute.java" contextNode="initialisation-vector" template="pkg-manifest-attribute-template.vm" />
-	<file path="org/odftoolkit/odfdom/pkg/manifest/IterationCountAttribute.java" contextNode="iteration-count" template="pkg-manifest-attribute-template.vm" />
-	<file path="org/odftoolkit/odfdom/pkg/manifest/KeyDerivationNameAttribute.java" contextNode="key-derivation-name" template="pkg-manifest-attribute-template.vm" />
-	<file path="org/odftoolkit/odfdom/pkg/manifest/MediaTypeAttribute.java" contextNode="media-type" template="pkg-manifest-attribute-template.vm" />
-	<file path="org/odftoolkit/odfdom/pkg/manifest/SaltAttribute.java" contextNode="salt" template="pkg-manifest-attribute-template.vm" />
-	<file path="org/odftoolkit/odfdom/pkg/manifest/SizeAttribute.java" contextNode="size" template="pkg-manifest-attribute-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/AlgorithmElement.java" contextNode="manifest:algorithm" template="pkg-manifest-element-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/EncryptionDataElement.java" contextNode="manifest:encryption-data" template="pkg-manifest-element-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/FileEntryElement.java" contextNode="manifest:file-entry" template="pkg-manifest-element-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/KeyDerivationElement.java" contextNode="manifest:key-derivation" template="pkg-manifest-element-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/ManifestElement.java" contextNode="manifest:manifest" template="pkg-manifest-element-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/AlgorithmNameAttribute.java" contextNode="manifest:algorithm-name" template="pkg-manifest-attribute-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/ChecksumAttribute.java" contextNode="manifest:checksum" template="pkg-manifest-attribute-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/ChecksumTypeAttribute.java" contextNode="manifest:checksum-type" template="pkg-manifest-attribute-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/FullPathAttribute.java" contextNode="manifest:full-path" template="pkg-manifest-attribute-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/InitialisationVectorAttribute.java" contextNode="manifest:initialisation-vector" template="pkg-manifest-attribute-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/IterationCountAttribute.java" contextNode="manifest:iteration-count" template="pkg-manifest-attribute-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/KeyDerivationNameAttribute.java" contextNode="manifest:key-derivation-name" template="pkg-manifest-attribute-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/MediaTypeAttribute.java" contextNode="manifest:media-type" template="pkg-manifest-attribute-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/SaltAttribute.java" contextNode="manifest:salt" template="pkg-manifest-attribute-template.vm" />
+	<file path="org/odftoolkit/odfdom/pkg/manifest/SizeAttribute.java" contextNode="manifest:size" template="pkg-manifest-attribute-template.vm" />
 </file-creation-list>

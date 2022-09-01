@@ -519,7 +519,7 @@ public class XMLModel {
    * @param name in form ns:local
    * @return ns part from ns:local name
    */
-  public static String extractNamespace(String name) {
+  public static String extractNamespacePrefix(String name) {
     int pos = name.lastIndexOf(":");
     if (pos > 0 && pos < name.length() - 1) {
       return name.substring(0, pos);
@@ -534,8 +534,8 @@ public class XMLModel {
    * @param def PuzzleComponent object
    * @return ns part from ns:local name
    */
-  public static String extractNamespace(PuzzleComponent def) {
-    return extractNamespace(def.getQName());
+  public static String extractNamespacePrefix(PuzzleComponent def) {
+    return extractNamespacePrefix(def.getQName());
   }
 
   /**

@@ -32,7 +32,7 @@
 package	org.odftoolkit.odfdom.dom.style.props;
 public enum	OdfStylePropertiesSet {
 #foreach ($styleElement	in ${xmlModel.getElements().withoutMultiples()})
-#if($styleElement.getNamespace() == "style" && ${styleElement.getLocalName().endsWith("properties")})
+#if($styleElement.getNamespacePrefix() == "style" && ${styleElement.getLocalName().endsWith("properties")})
 	// style-${styleElement.getLocalName()}-attlist
 	${xmlModel.camelCase($styleElement.getLocalName())},
 #end

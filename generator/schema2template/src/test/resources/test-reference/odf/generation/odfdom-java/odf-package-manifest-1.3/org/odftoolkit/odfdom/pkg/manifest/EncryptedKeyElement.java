@@ -28,16 +28,17 @@
  */
 package org.odftoolkit.odfdom.pkg.manifest;
 
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 /**
- * Manifest implementation of OpenDocument element  {@odf.element encrypted-key}.
+ * Manifest implementation of OpenDocument element  {@odf.element manifest:encrypted-key}.
  *
  */
 public class EncryptedKeyElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:manifest:1.0", "manifest:encrypted-key");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.MANIFEST, encrypted-key);
 
 	/**
 	 * Create the instance of <code>EncryptedKeyElement</code>
@@ -51,18 +52,18 @@ public class EncryptedKeyElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element encrypted-key}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:encrypted-key}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
 	/**
-	 * Create child element {@odf.element CipherData}.
+	 * Create child element {@odf.element manifest:CipherData}.
 	 *
 	 * Child element is mandatory.
 	 *
-	 * @return the element {@odf.element CipherData}
+	 * @return the element {@odf.element manifest:CipherData}
 	 */
 	public CipherDataElement newCipherDataElement() {
 		CipherDataElement cipherData = ((OdfFileDom) this.ownerDocument).newOdfElement(CipherDataElement.class);
@@ -71,10 +72,10 @@ public class EncryptedKeyElement extends OdfElement {
 	}
 
 	/**
-	 * Create child element {@odf.element encryption-method}.
+	 * Create child element {@odf.element manifest:encryption-method}.
 	 *
-	 * @param pGPAlgorithmValue  the <code>String</code> value of <code>PGPAlgorithmAttribute</code>, see {@odf.attribute  PGPAlgorithm} at specification
-	 * @return the element {@odf.element encryption-method}
+	 * @param pGPAlgorithmValue  the <code>String</code> value of <code>PGPAlgorithmAttribute</code>, see {@odf.attribute  manifest:PGPAlgorithm} at specification
+	 * @return the element {@odf.element manifest:encryption-method}
 	 */
 	 public EncryptionMethodElement newEncryptionMethodElement(String pGPAlgorithmValue) {
 		EncryptionMethodElement encryptionMethod = ((OdfFileDom) this.ownerDocument).newOdfElement(EncryptionMethodElement.class);
@@ -84,11 +85,11 @@ public class EncryptedKeyElement extends OdfElement {
 	}
 
 	/**
-	 * Create child element {@odf.element keyinfo}.
+	 * Create child element {@odf.element manifest:keyinfo}.
 	 *
 	 * Child element is mandatory.
 	 *
-	 * @return the element {@odf.element keyinfo}
+	 * @return the element {@odf.element manifest:keyinfo}
 	 */
 	public KeyinfoElement newKeyinfoElement() {
 		KeyinfoElement keyinfo = ((OdfFileDom) this.ownerDocument).newOdfElement(KeyinfoElement.class);

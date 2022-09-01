@@ -262,8 +262,8 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
     return XMLModel.extractLocalName(mName);
   }
 
-  public String getNamespace() {
-    return XMLModel.extractNamespace(mName);
+  public String getNamespacePrefix() {
+    return XMLModel.extractNamespacePrefix(mName);
   }
 
   /**

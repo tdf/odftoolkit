@@ -36,8 +36,8 @@ public interface $className {
 #set($propertyName = ${property.getQName()})
 #end
 	public final static OdfStyleProperty ${xmlModel.camelCase($propertyName)} =
-#if(${property.getNamespace()})
-		OdfStyleProperty.get(OdfStylePropertiesSet.${xmlModel.camelCase($element.getLocalName())}, OdfName.newName(OdfDocumentNamespace.${property.getNamespace().toUpperCase()}, "${property.getLocalName()}"));
+#if(${property.getNamespacePrefix()})
+		OdfStyleProperty.get(OdfStylePropertiesSet.${xmlModel.camelCase($element.getLocalName())}, OdfName.newName(OdfDocumentNamespace.${property.getNamespacePrefix().toUpperCase()}, "${property.getLocalName()}"));
 #else
 		OdfStyleProperty.get(OdfStylePropertiesSet.${xmlModel.camelCase($element.getLocalName())}, OdfName.newName("${property.getLocalName()}"));
 #end

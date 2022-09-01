@@ -34,12 +34,12 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 
 
 /**
- * Data signature implementation of OpenDocument element  {@odf.element document-signatures}.
+ * Data signature implementation of OpenDocument element  {@odf.element dsig:document-signatures}.
  *
  */
 public class DocumentSignaturesElement extends OdfElement {
 
-	public static final OdfName ELEMENT_NAME = OdfName.newName("urn:oasis:names:tc:opendocument:xmlns:digitalsignature:1.0", "dsig:document-signatures");
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfPackageNamespace.DSIG, document-signatures);
 
 	/**
 	 * Create the instance of <code>DocumentSignaturesElement</code>
@@ -53,14 +53,14 @@ public class DocumentSignaturesElement extends OdfElement {
 	/**
 	 * Get the element name
 	 *
-	 * @return  return   <code>OdfName</code> the name of element {@odf.element document-signatures}.
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element dsig:document-signatures}.
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>VersionAttribute</code> , See {@odf.attribute version}
+	 * Receives the value of the ODFDOM attribute representation <code>VersionAttribute</code> , See {@odf.attribute dsig:version}
 	 *
 	 * Attribute is mandatory.
 	 *
@@ -75,7 +75,7 @@ public class DocumentSignaturesElement extends OdfElement {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>VersionAttribute</code> , See {@odf.attribute version}
+	 * Sets the value of ODFDOM attribute representation <code>VersionAttribute</code> , See {@odf.attribute dsig:version}
 	 *
 	 * @param versionValue   The type is <code>String</code>
 	 */
@@ -86,7 +86,7 @@ public class DocumentSignaturesElement extends OdfElement {
 	}
 
 	/**
-	 * Create child element {@odf.element Signature}.
+	 * Create child element {@odf.element ds:Signature}.
 	 *
 	 * Child element is mandatory.
 	 *
