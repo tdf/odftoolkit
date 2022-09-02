@@ -478,6 +478,22 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <plugin>
+                        <groupId>com.cosium.code</groupId>
+                        <artifactId>git-code-format-maven-plugin</artifactId>                        
+                        <executions>
+                            <execution>
+                                <id>formatting-generated-code</id>
+                                <phase>process-sources</phase>
+                                <goals>
+                                    <goal>format-code</goal>
+                                </goals>
+                                <configuration>
+                                    <gcf.globPattern>**/*</gcf.globPattern>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
