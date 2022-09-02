@@ -57,6 +57,7 @@ import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 ##
 ## ---------------------------------------------------
 ##  Class
@@ -94,6 +95,7 @@ public class $className extends $baseClassName {
 	 *
 	 * @return  return   <code>OdfName</code> the name of element {@odf.element $element}.
 	 */
+	@Override
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
