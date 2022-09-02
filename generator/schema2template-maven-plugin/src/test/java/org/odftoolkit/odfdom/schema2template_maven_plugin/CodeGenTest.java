@@ -51,7 +51,6 @@ public class CodeGenTest extends AbstractMojoTestCase {
 
   /** @throws Exception */
   public void testMojoGoal() throws Exception {
-    System.err.println("getBasedir" + getBasedir());
     File testPom = new File(getBasedir(), CONFIG_PATH);
 
     CodeGenMojo mojo = (CodeGenMojo) lookupMojo("codegen", testPom);
