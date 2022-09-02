@@ -518,6 +518,38 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <plugin>
+                        <!-- https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/ -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-resources</id>
+                                <!-- right after generation, copy them, see https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html -->
+                                <phase>process-sources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/src/main/java/org</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.build.directory}/odf/generation/odfdom-java/odf-schema-1.2/org </directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.build.directory}/odf/generation/odfdom-java/odf-package-manifest-1.2/org </directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.build.directory}/odf/generation/odfdom-java/odf-package-digital-signature-1.2/org </directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
