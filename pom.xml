@@ -54,6 +54,12 @@
         <release.zip.src>odftoolkit-${project.version}-src.zip</release.zip.src>
         <osgi.import.range>[1.0,2)</osgi.import.range>
         <supported-odf-version>1.2</supported-odf-version>
+        <skipTests>false</skipTests>
+        <!-- to skip even compiling the tests is honored by Surefire, Failsafe and Compiler Plugin -->
+        <maven.test.skip>${skipTests}</maven.test.skip>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
+        <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
     </properties>
 
     <!-- At root project level defining dependencies useable across all projects.
