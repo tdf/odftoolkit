@@ -66,8 +66,19 @@ import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 /**
  * Manifest implementation of OpenDocument element  {@odf.element $element}.
  *
+#if (${children.containsName("*")})
+#set ($anychild = true)
+#else
+#set ($anychild = false)## if not explicitly set to false, later condition will be postive :/
+#end
 #if ($anychild)
  * This class can have any org.w3c.dom.Element child element.
+#end
+##
+#if (${attributes.containsName("*")})
+#set ($anyattribute = true)
+#else
+#set ($anyattribute = false)## if not explicitly set to false, later condition will be postive :/
 #end
 #if ($anyattribute)
  * This class can have any org.w3c.dom.Attribute attribute.
@@ -361,7 +372,7 @@ public class $className extends $baseClassName {
 	 * Add text content. Only elements which are allowed to have text content offer this method.
 	 */
 	 public void newTextNode(String content) {
-		if (content != null && !content.equals("")) {
+		if (content != null && !content.isEmpty()) {
 			this.appendChild(this.getOwnerDocument().createTextNode(content));
 		}
 	 }
