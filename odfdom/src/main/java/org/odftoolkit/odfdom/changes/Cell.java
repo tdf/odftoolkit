@@ -262,11 +262,11 @@ class Cell<T> extends Component {
               Boolean oldBooleanValue = cell.getOfficeBooleanValueAttribute();
               Double newValue = null;
               if (oldDateValue != null) {
-                newValue = new Double(MapHelper.dateToDouble(oldDateValue));
+                newValue = MapHelper.dateToDouble(oldDateValue);
               } else if (oldTimeValue != null) {
-                newValue = new Double(MapHelper.timeToDouble(oldTimeValue));
+                newValue = MapHelper.timeToDouble(oldTimeValue);
               } else if (oldBooleanValue != null) {
-                newValue = new Double(oldBooleanValue.booleanValue() ? 1 : 0);
+                newValue = Double.valueOf(oldBooleanValue ? 1 : 0);
               }
 
               if (newValue != null) {
