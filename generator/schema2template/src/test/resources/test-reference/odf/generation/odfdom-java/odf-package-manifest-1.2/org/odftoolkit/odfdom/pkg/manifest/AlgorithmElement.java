@@ -32,9 +32,11 @@ import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 /**
  * Manifest implementation of OpenDocument element  {@odf.element manifest:algorithm}.
  *
+ * This class can have any org.w3c.dom.Element child element.
  */
 public class AlgorithmElement extends OdfElement {
 
@@ -54,6 +56,7 @@ public class AlgorithmElement extends OdfElement {
 	 *
 	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:algorithm}.
 	 */
+	@Override
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}

@@ -31,6 +31,7 @@ package org.odftoolkit.odfdom.pkg.dsig;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
 
 /**
@@ -55,6 +56,7 @@ public class DocumentSignaturesElement extends OdfElement {
 	 *
 	 * @return  return   <code>OdfName</code> the name of element {@odf.element dsig:document-signatures}.
 	 */
+	@Override
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}

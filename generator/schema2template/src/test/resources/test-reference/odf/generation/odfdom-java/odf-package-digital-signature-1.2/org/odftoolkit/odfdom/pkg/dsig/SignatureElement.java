@@ -31,11 +31,14 @@ package org.odftoolkit.odfdom.pkg.dsig;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
 
 /**
  * Data signature implementation of OpenDocument element  {@odf.element ds:Signature}.
  *
+ * This class can have any org.w3c.dom.Element child element.
+ * This class can have any org.w3c.dom.Attribute attribute.
  */
 public class SignatureElement extends OdfElement {
 
@@ -55,6 +58,7 @@ public class SignatureElement extends OdfElement {
 	 *
 	 * @return  return   <code>OdfName</code> the name of element {@odf.element ds:Signature}.
 	 */
+	@Override
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
@@ -63,7 +67,7 @@ public class SignatureElement extends OdfElement {
 	 * Add text content. Only elements which are allowed to have text content offer this method.
 	 */
 	 public void newTextNode(String content) {
-		if (content != null && !content.equals("")) {
+		if (content != null && !content.isEmpty()) {
 			this.appendChild(this.getOwnerDocument().createTextNode(content));
 		}
 	 }
