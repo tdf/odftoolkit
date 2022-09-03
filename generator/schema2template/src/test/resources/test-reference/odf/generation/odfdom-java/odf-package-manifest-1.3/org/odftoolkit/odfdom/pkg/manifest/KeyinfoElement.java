@@ -32,6 +32,7 @@ import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 /**
  * Manifest implementation of OpenDocument element  {@odf.element manifest:keyinfo}.
  *
@@ -54,6 +55,7 @@ public class KeyinfoElement extends OdfElement {
 	 *
 	 * @return  return   <code>OdfName</code> the name of element {@odf.element manifest:keyinfo}.
 	 */
+	@Override
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
 	}
