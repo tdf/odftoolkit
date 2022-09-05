@@ -70,7 +70,7 @@ public class KeyDerivationElement extends OdfElement {
    */
   public Integer getIterationCountAttribute() {
     IterationCountAttribute attr =
-        (IterationCountAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "iteration-count");
+        (IterationCountAttribute) getOdfAttribute(IterationCountAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return Integer.valueOf(attr.intValue());
     }
@@ -100,8 +100,7 @@ public class KeyDerivationElement extends OdfElement {
    */
   public String getKeyDerivationNameAttribute() {
     KeyDerivationNameAttribute attr =
-        (KeyDerivationNameAttribute)
-            getOdfAttribute(OdfPackageNamespace.MANIFEST, "key-derivation-name");
+        (KeyDerivationNameAttribute) getOdfAttribute(KeyDerivationNameAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -129,8 +128,7 @@ public class KeyDerivationElement extends OdfElement {
    *     set and no default value defined.
    */
   public Integer getKeySizeAttribute() {
-    KeySizeAttribute attr =
-        (KeySizeAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "key-size");
+    KeySizeAttribute attr = (KeySizeAttribute) getOdfAttribute(KeySizeAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return Integer.valueOf(attr.intValue());
     }
@@ -159,7 +157,7 @@ public class KeyDerivationElement extends OdfElement {
    *     and no default value defined.
    */
   public String getSaltAttribute() {
-    SaltAttribute attr = (SaltAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "salt");
+    SaltAttribute attr = (SaltAttribute) getOdfAttribute(SaltAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
