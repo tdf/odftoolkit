@@ -206,7 +206,7 @@ public class $className extends $superClassName {
 	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
 	 */
 	public ${className}(OdfFileDom ownerDoc) {
-#if (($stylable && ($useOdfStyleableShapeElement == false)))
+#if ($stylable && ($useOdfStyleableShapeElement == false))
 		super(ownerDoc, ELEMENT_NAME, OdfStyleFamily.${firstfamily}, OdfName.newName(OdfDocumentNamespace.${namespacePrefix.toUpperCase()}, "style-name"));
 #else## OdfStyleableShapeElement will provide the style:family
 		super(ownerDoc, ELEMENT_NAME);

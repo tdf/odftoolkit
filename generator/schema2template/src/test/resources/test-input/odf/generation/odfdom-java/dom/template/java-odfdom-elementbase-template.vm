@@ -25,37 +25,51 @@
 ## xmlModelHistory - sorted list from latest to earliest release to assist in finding new XML node additions (see odf-reference-template.vm)
 ## But the Velocity context can also be extended by parameters from the calling main-template.
 ##
-#set ($base = ${codeModel.getBaseClass($contextNode)})
-#set ($baseElement = ${xmlModel.getElement($base.getQName())})
+#set ($element = ${xmlModel.getElement($contextNode)})
+#set ($baseName = ${codeModel.getBaseName($contextNode)})
+#set ($base = ${codeModel.getBaseClass($baseName)})
 #set ($className = "${xmlModel.camelCase($base)}ElementBase")
 ##
 ## Set Superclass
-#if (${odfModel.isStylable($base)})
+## STYLE SETTING (START)
+## ToDo: Move the following complexity "BASE CLASS STYLABLE" into SourceCodeModel.getBaseClass()
+## 1) Every stylable element inherits from "OdfStylableElement"
+## 2) Unless the stylable element is from @style:family="draw:graphc" or "presentation:presenation" than inherits from "OdfStyleableShapeElement"
+## 3) Otherwise ever ODF element inherits from "OdfElement"
+#if ($odfModel.isStylable($element))
+## 1) Every stylable element inherits from "OdfStylableElement"
 #set ($stylable = true)
+#if (!${codeModel.hasSuperClass($contextNode)} && !${codeModel.hasSuperClass($baseName)})
 #set ($superClassName = "OdfStylableElement")
-#if (${baseElement})
-#set ($elementStyleFamily=${odfModel.getStyleFamilies($baseElement)})
+#set ($superClassPackageName = "org.odftoolkit.odfdom.dom.element")
+#end
+## The following draw:graphic and presentation:presentation share the same elements, but were used in different applications
+## 2) Unless the stylable element is from @style:family="draw:graphc" or "presentation:presenation" than inherits from "OdfStyleableShapeElement"
 #set ($useOdfStyleableShapeElement = false)
+#set ($elementStyleFamily=${odfModel.getStyleFamilies($element)})
 #foreach($familyName in $elementStyleFamily)
 #if (${familyName}=="draw:graphic" || ${familyName}=="presentation:presentation")
+## 3) Otherwise ever ODF element inherits from "OdfElement"
 #set ($useOdfStyleableShapeElement = true)
-#end
-#end
-#end
-#else
-#set ($superClassName = 'OdfElement')
-#end
-##
-#if ($contextNode== "text:list-level-style")
-#set ($superClassName = 'OdfStyleBase')
-#end
-#if ($useOdfStyleableShapeElement || $className=="DrawShapeElementBase")
+#if (!${codeModel.hasSuperClass($contextNode)} && !${codeModel.hasSuperClass($baseName)})
 #set ($superClassName = "OdfStyleableShapeElement")
-#set ($useOdfStyleableShapeElement = true) ## DrawShapeElementBase.java contextNode="draw:shape"
+#set ($superClassPackageName = "org.odftoolkit.odfdom.dom.element")
 #end
-#if ($contextNode== "number:data-style")
-#set ($superClassName = 'DataStyleElement')
+#break
 #end
+#end##loop-end
+#set ($firstfamily = ${xmlModel.camelCase($xmlModel.extractLocalName($odfModel.getStyleFamilies($element).get(0)))})
+#else##styleable-else
+#set ($stylable = false)
+#if (!${codeModel.hasSuperClass($contextNode)} && !${codeModel.hasSuperClass($baseName)})
+contextNode $contextNode
+!{codeModel.hasSuperClass(contextNode)} !${codeModel.hasSuperClass($contextNode)}
+!{codeModel.hasSuperClass(baseName)} !${codeModel.hasSuperClass($baseName)}
+#set ($superClassName = "OdfElement")
+#set ($superClassPackageName = "org.odftoolkit.odfdom.pkg")
+#end
+#end
+## STYLE SETTING (END)
 ##
 ## Begin Code
 #include('copyright.txt')
@@ -82,15 +96,21 @@ import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 #set ($anyattribute = true)
 #else
 import org.odftoolkit.odfdom.dom.attribute.${attribute.getNamespacePrefix()}.${xmlModel.camelCase($attribute)}Attribute;
-## finding superclass
+#end
+#end
+## evaluating super class for class "extends"
+## super class takes precedence over implicit/default base classes
+## super class of base takes precedence over child superclass
 #if (${codeModel.hasSuperClass($contextNode)})
-#set ($superClassName = ${codeModel.getSuperClassName($contextNode)})
 #set ($superClassPackageName = ${codeModel.getSuperClassPackageName($contextNode)})
-#if($superClassPackageName != "org.odftoolkit.odfdom.dom.element.${namespacePrefix}")
+#set ($superClassName = ${codeModel.getSuperClassName($contextNode)})
+#end
+#if (${codeModel.hasSuperClass($baseName)})
+#set ($superClassPackageName = ${codeModel.getSuperClassPackageName($baseName)})
+#set ($superClassName = ${codeModel.getSuperClassName($baseName)})
+#end
+#if((${codeModel.hasSuperClass($contextNode)} || ${codeModel.hasSuperClass($baseName)}) && $superClassPackageName != "org.odftoolkit.odfdom.dom.element.${base.getNamespacePrefix()}")
 import ${superClassPackageName}.${superClassName};
-#end
-#end
-#end
 #end
 
 ##
@@ -112,7 +132,7 @@ public abstract class $className extends $superClassName {
 	 *
 	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
 	 * @param  elementName	The type is <code>OdfName</code>
-#if (${odfModel.isStylable($base)} && ($useOdfStyleableShapeElement == false) || $className == "TextParagraphElementBase")
+#if ($stylable && ($useOdfStyleableShapeElement == false))
 	 * @param  styleFamily	The type is <code>OdfStyleFamily</code>
 	 * @param  styleAttrName	The type is <code>OdfName</code>
 	 */

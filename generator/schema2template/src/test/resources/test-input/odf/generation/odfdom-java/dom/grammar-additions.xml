@@ -65,13 +65,13 @@
         <element name="draw:polyline" base="draw:shape" family="draw:graphic,presentation:presentation"/>
         <element name="draw:rect" base="draw:shape" family="draw:graphic,presentation:presentation"/>
         <element name="draw:regular-polygon" base="draw:shape" family="draw:graphic,presentation:presentation"/>
-        <element name="number:boolean-style" base="number:data-style"/><!-- base currently only works with prefix-->
-        <element name="number:currency-style" base="number:data-style"/>
-        <element name="number:date-style" base="number:data-style"/>
-        <element name="number:number-style" base="number:data-style"/>
-        <element name="number:percentage-style" base="number:data-style"/>
-        <element name="number:text-style" base="number:data-style"/>
-        <element name="number:time-style" base="number:data-style"/>
+        <element name="number:boolean-style" base="number:data-style" extends="org.odftoolkit.odfdom.dom.element.number.DataStyleElement"/><!-- base currently only works with prefix-->
+        <element name="number:currency-style" base="number:data-style" extends="org.odftoolkit.odfdom.dom.element.number.DataStyleElement"/>
+        <element name="number:date-style" base="number:data-style" extends="org.odftoolkit.odfdom.dom.element.number.DataStyleElement"/>
+        <element name="number:number-style" base="number:data-style" extends="org.odftoolkit.odfdom.dom.element.number.DataStyleElement"/>
+        <element name="number:percentage-style" base="number:data-style" extends="org.odftoolkit.odfdom.dom.element.number.DataStyleElement"/>
+        <element name="number:text-style" base="number:data-style" extends="org.odftoolkit.odfdom.dom.element.number.DataStyleElement"/>
+        <element name="number:time-style" base="number:data-style" extends="org.odftoolkit.odfdom.dom.element.number.DataStyleElement"/>
         <element name="office:annotation" base="draw:shape" family="draw:graphic,presentation:presentation"/>
         <element name="text:alphabetical-index-entry-template" family="text:paragraph"/>
         <element name="text:bibliography-entry-template" family="text:paragraph"/>

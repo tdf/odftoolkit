@@ -39,6 +39,8 @@ import schema2template.grammar.XMLModel;
 public class SourceCodeModel {
 
   Map<String, String> mElementSuperClassNameMap;
+  Map<String, String> mElementNameBaseNameMap;
+  Map<String, String> mBaseNameElementNameMap;
   Map<String, SourceCodeBaseClass> mElementBaseMap;
   SortedSet<SourceCodeBaseClass> mBaseClasses;
   Map<String, SourceCodeBaseClass> mBaseNameToBaseClass;
@@ -60,7 +62,8 @@ public class SourceCodeModel {
       Map<String, String[]> datatypeValueAndConversionMap) {
     mDataTypeValueAndConversionMap = datatypeValueAndConversionMap;
     mElementSuperClassNameMap = elementSuperClassNameMap;
-
+    mElementNameBaseNameMap = elementNameBaseNameMap;
+    mBaseNameElementNameMap = invertMap(elementNameBaseNameMap);
     // Intermediate Step -> get all baseNames
     SortedSet<String> baseNames = new TreeSet<String>(elementNameBaseNameMap.values());
 
@@ -103,6 +106,51 @@ public class SourceCodeModel {
       SourceCodeBaseClass baseclass = mBaseNameToBaseClass.get(baseName);
       mElementBaseMap.put(elementName, baseclass);
     }
+  }
+  /**
+   * Use in templates: Get base name for the element name, which shared attributes are being moved
+   * into base
+   *
+   * @param ´elementName baseChildName of the base
+   * @return base name
+   */
+  public String getBaseName(String elementName) {
+    String b = null;
+    if (mElementNameBaseNameMap != null) {
+      b = mElementNameBaseNameMap.get(elementName);
+    }
+    return b;
+  }
+
+  /**
+   * Use in templates: Get base name for the element name, which shared attributes are being moved
+   * into base
+   *
+   * @param ´childName baseChildName of the base
+   * @return base name
+   */
+  public String getBaseChild(String childName) {
+    String b = null;
+    if (mBaseNameElementNameMap != null) {
+      b = mBaseNameElementNameMap.get(childName);
+    }
+    if (b == null) {
+      System.out.println("ARGH");
+    }
+    return b;
+  }
+
+  private static <V, K> Map<V, K> invertMap(Map<K, V> map) {
+    Map<V, K> inversedMap = null;
+    if (map != null && !map.isEmpty()) {
+      inversedMap = new HashMap<V, K>();
+      for (Map.Entry<K, V> entry : map.entrySet()) {
+        if (!inversedMap.containsKey(entry.getKey())) {
+          inversedMap.put(entry.getValue(), entry.getKey());
+        }
+      }
+    }
+    return inversedMap;
   }
 
   /**
@@ -169,14 +217,14 @@ public class SourceCodeModel {
   /**
    * Use in templates: Check for super class
    *
-   * @param nodeName the name of the defined XML element or attribute
+   * @param childName the name of the defined XML element or attribute
    * @return if there has been a super class being specified via 'extends' attribute in the
    *     grammar-additions.xml
    */
-  public boolean hasSuperClass(String nodeName) {
+  public boolean hasSuperClass(String childName) {
     boolean hasSuperClassName = false;
-    if (mElementSuperClassNameMap != null && nodeName != null) {
-      hasSuperClassName = mElementSuperClassNameMap.containsKey(nodeName);
+    if (mElementSuperClassNameMap != null && childName != null) {
+      hasSuperClassName = mElementSuperClassNameMap.containsKey(childName);
     }
     return hasSuperClassName;
   }
@@ -184,14 +232,14 @@ public class SourceCodeModel {
   /**
    * Use in templates: Get fully qualified super class name
    *
-   * @param nodeName the name of the defined XML element or attribute
+   * @param childName the name of the defined XML element or attribute
    * @return the super class name fully qualified with Java Package as the one being set via
    *     'extends' attribute in the grammar-additions.xml
    */
-  public String getSuperClass(String nodeName) {
+  public String getSuperClass(String childName) {
     String superClassName = null;
-    if (mElementSuperClassNameMap != null && nodeName != null) {
-      superClassName = mElementSuperClassNameMap.get(nodeName);
+    if (mElementSuperClassNameMap != null && childName != null) {
+      superClassName = mElementSuperClassNameMap.get(childName);
     }
     return superClassName;
   }
@@ -199,13 +247,13 @@ public class SourceCodeModel {
   /**
    * Use in templates: Get super class name (without Java package)
    *
-   * @param nodeName the name of the defined XML element or attribute
+   * @param childName the name of the defined XML element or attribute
    * @return the super class name if one was set via 'extends' in the grammar-additions.xml
    */
-  public String getSuperClassName(String nodeName) {
+  public String getSuperClassName(String childName) {
     String superClassName = null;
-    if (mElementSuperClassNameMap != null && nodeName != null) {
-      superClassName = mElementSuperClassNameMap.get(nodeName);
+    if (mElementSuperClassNameMap != null && childName != null) {
+      superClassName = mElementSuperClassNameMap.get(childName);
       if (superClassName != null & superClassName.contains(".")) {
         superClassName =
             superClassName.substring(superClassName.lastIndexOf(".") + 1, superClassName.length());
@@ -216,13 +264,13 @@ public class SourceCodeModel {
   /**
    * Use in templates: Get Source code value type for datatype used in schema
    *
-   * @param nodeName the name of the defined XML element or attribute
+   * @param childName the name of the defined XML element or attribute
    * @return the package name of the super class
    */
-  public String getSuperClassPackageName(String nodeName) {
+  public String getSuperClassPackageName(String childName) {
     String superClassName = null;
-    if (mElementSuperClassNameMap != null && nodeName != null) {
-      superClassName = mElementSuperClassNameMap.get(nodeName);
+    if (mElementSuperClassNameMap != null && childName != null) {
+      superClassName = mElementSuperClassNameMap.get(childName);
       if (superClassName != null & superClassName.contains(".")) {
         superClassName = superClassName.substring(0, superClassName.lastIndexOf("."));
       }
