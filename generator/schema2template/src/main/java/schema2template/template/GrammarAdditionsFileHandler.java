@@ -57,6 +57,8 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
   private boolean inAttributes = false;
   private boolean inAttribute = false;
   private Locator mLocator;
+
+  private Map<String, String> mElementSuperClassNames;
   private Map<String, String> mElementBaseNames;
   private Map<String, List<String>> mElementStyleFamilies;
   private Set<String> mProcessedElements;
@@ -68,10 +70,12 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
 
   public GrammarAdditionsFileHandler(
       Map<String, String> elementBaseNames,
+      Map<String, String> elementSuperClassNames,
       Map<String, Map<String, String>> attributeDefaultMap,
       Map<String, List<String>> elementNameToFamilyMap,
       Map<String, String[]> datatypeValueConversion) {
     mElementBaseNames = elementBaseNames;
+    mElementSuperClassNames = elementSuperClassNames;
     mAttributeDefaults = attributeDefaultMap;
     mDatatypeValueConversion = datatypeValueConversion;
     mElementStyleFamilies = elementNameToFamilyMap;
@@ -80,17 +84,21 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
   }
 
   private void readElementConfig(Attributes attrs) throws SAXException {
-    String attrName = attrs.getValue("name");
-    if (attrName == null) {
+    String nodeName = attrs.getValue("name");
+    if (nodeName == null) {
       throw new SAXException("Invalid element line " + mLocator.getLineNumber());
     }
-    if (mProcessedElements.contains(attrName)) {
+    if (mProcessedElements.contains(nodeName)) {
       throw new SAXException("Multiple definition of element in line " + mLocator.getLineNumber());
     }
-    mProcessedElements.add(attrName);
+    mProcessedElements.add(nodeName);
     String base = attrs.getValue("base");
     if (base != null && base.length() > 0) {
-      mElementBaseNames.put(attrName, base);
+      mElementBaseNames.put(nodeName, base);
+    }
+    String sc = attrs.getValue("extends");
+    if (sc != null && sc.length() > 0) {
+      mElementSuperClassNames.put(nodeName, sc);
     }
     String commaSeparatedStyleFamilies = attrs.getValue("family");
     if (commaSeparatedStyleFamilies != null) {
@@ -103,7 +111,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
         }
       }
       if (families.size() > 0) {
-        mElementStyleFamilies.put(attrName, families);
+        mElementStyleFamilies.put(nodeName, families);
       }
     }
   }
@@ -227,6 +235,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
   public static void readGrammarAdditionsFile(
       File cf,
       Map<String, String> elementBaseNames,
+      Map<String, String> elementSuperClassNamesNames,
       Map<String, Map<String, String>> attributeDefaults,
       Map<String, List<String>> elementNameToFamilyMap,
       Map<String, String[]> datatypeValueConversion)
@@ -236,6 +245,10 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
     parser.parse(
         cf,
         new GrammarAdditionsFileHandler(
-            elementBaseNames, attributeDefaults, elementNameToFamilyMap, datatypeValueConversion));
+            elementBaseNames,
+            elementSuperClassNamesNames,
+            attributeDefaults,
+            elementNameToFamilyMap,
+            datatypeValueConversion));
   }
 }

@@ -34,7 +34,6 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextLevelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
@@ -44,7 +43,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
  * DOM implementation of OpenDocument element  {@odf.element text:list-level-style-image}.
  *
  */
-public class TextListLevelStyleImageElement extends OdfElement {
+public class TextListLevelStyleImageElement extends TextListLevelStyleElementBase {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "list-level-style-image");
 
@@ -64,32 +63,6 @@ public class TextListLevelStyleImageElement extends OdfElement {
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>TextLevelAttribute</code> , See {@odf.attribute text:level}
-	 *
-	 * Attribute is mandatory.
-	 *
-	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public Integer getTextLevelAttribute() {
-		TextLevelAttribute attr = (TextLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "level");
-		if (attr != null) {
-			return Integer.valueOf(attr.intValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>TextLevelAttribute</code> , See {@odf.attribute text:level}
-	 *
-	 * @param textLevelValue   The type is <code>Integer</code>
-	 */
-	public void setTextLevelAttribute(Integer textLevelValue) {
-		TextLevelAttribute attr = new TextLevelAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setIntValue(textLevelValue.intValue());
 	}
 
 	/**

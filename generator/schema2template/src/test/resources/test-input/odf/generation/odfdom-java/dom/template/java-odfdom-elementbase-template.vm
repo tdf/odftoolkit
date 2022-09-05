@@ -32,7 +32,7 @@
 ## Set Superclass
 #if (${odfModel.isStylable($base)})
 #set ($stylable = true)
-#set ($superclass = "OdfStylableElement")
+#set ($superClassName = "OdfStylableElement")
 #if (${baseElement})
 #set ($elementStyleFamily=${odfModel.getStyleFamilies($baseElement)})
 #set ($useOdfStyleableShapeElement = false)
@@ -43,18 +43,18 @@
 #end
 #end
 #else
-#set ($superclass = 'OdfElement')
+#set ($superClassName = 'OdfElement')
 #end
 ##
 #if ($contextNode== "text:list-level-style")
-#set ($superclass = 'OdfStyleBase')
+#set ($superClassName = 'OdfStyleBase')
 #end
 #if ($useOdfStyleableShapeElement || $className=="DrawShapeElementBase")
-#set ($superclass = "OdfStyleableShapeElement")
+#set ($superClassName = "OdfStyleableShapeElement")
 #set ($useOdfStyleableShapeElement = true) ## DrawShapeElementBase.java contextNode="draw:shape"
 #end
 #if ($contextNode== "number:data-style")
-#set ($superclass = 'DataStyleElement')
+#set ($superClassName = 'DataStyleElement')
 #end
 ##
 ## Begin Code
@@ -82,6 +82,14 @@ import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 #set ($anyattribute = true)
 #else
 import org.odftoolkit.odfdom.dom.attribute.${attribute.getNamespacePrefix()}.${xmlModel.camelCase($attribute)}Attribute;
+## finding superclass
+#if (${codeModel.hasSuperClass($contextNode)})
+#set ($superClassName = ${codeModel.getSuperClassName($contextNode)})
+#set ($superClassPackageName = ${codeModel.getSuperClassPackageName($contextNode)})
+#if($superClassPackageName != "org.odftoolkit.odfdom.dom.element.${namespacePrefix}")
+import ${superClassPackageName}.${superClassName};
+#end
+#end
 #end
 #end
 
@@ -97,7 +105,7 @@ import org.odftoolkit.odfdom.dom.attribute.${attribute.getNamespacePrefix()}.${x
  * This class can have any org.w3c.dom.Attribute attribute.
 #end
  */
-public abstract class $className extends $superclass {
+public abstract class $className extends $superClassName {
 
 	/**
 	 * Create the instance of <code>$className</code>

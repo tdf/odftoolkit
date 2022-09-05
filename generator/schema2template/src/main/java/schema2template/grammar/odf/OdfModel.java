@@ -83,7 +83,7 @@ public class OdfModel {
   public boolean isStylable(SourceCodeBaseClass base) {
     boolean notStylable = false;
     boolean stylable = false;
-    for (PuzzlePiece def : base.getSubElements()) {
+    for (PuzzlePiece def : base.getChildElementsOfBaseClass()) {
       if (isStylable(def)) {
         stylable = true;
       } else {

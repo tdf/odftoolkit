@@ -37,11 +37,11 @@ import schema2template.grammar.XMLModel;
  */
 public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass> {
 
-  private SortedSet<PuzzlePiece> mSubElements;
+  private SortedSet<PuzzlePiece> mChildElementsOfBaseClass;
   private String mBaseName;
 
-  protected SourceCodeBaseClass(String baseName, SortedSet<PuzzlePiece> subElements) {
-    mSubElements = subElements;
+  protected SourceCodeBaseClass(String baseName, SortedSet<PuzzlePiece> childElementsOfBaseClass) {
+    mChildElementsOfBaseClass = childElementsOfBaseClass;
     mBaseName = baseName;
   }
 
@@ -79,8 +79,8 @@ public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass> {
    *
    * @return subclasses
    */
-  public PuzzlePieceSet getSubElements() {
-    return new PuzzlePieceSet(mSubElements);
+  public PuzzlePieceSet getChildElementsOfBaseClass() {
+    return new PuzzlePieceSet(mChildElementsOfBaseClass);
   }
 
   /**
@@ -90,8 +90,9 @@ public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass> {
    */
   public PuzzlePieceSet getBaseAttributes() {
     SortedSet<PuzzlePiece> attributes =
-        new TreeSet<PuzzlePiece>(mSubElements.last().getAttributes());
-    for (PuzzlePiece subelement : mSubElements.headSet(mSubElements.last())) {
+        new TreeSet<PuzzlePiece>(mChildElementsOfBaseClass.last().getAttributes());
+    for (PuzzlePiece subelement :
+        mChildElementsOfBaseClass.headSet(mChildElementsOfBaseClass.last())) {
       attributes.retainAll(subelement.getAttributes());
     }
     return new PuzzlePieceSet(attributes);

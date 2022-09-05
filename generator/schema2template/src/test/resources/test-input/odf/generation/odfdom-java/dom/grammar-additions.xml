@@ -75,12 +75,12 @@
         <element name="office:annotation" base="draw:shape" family="draw:graphic,presentation:presentation"/>
         <element name="text:alphabetical-index-entry-template" family="text:paragraph"/>
         <element name="text:bibliography-entry-template" family="text:paragraph"/>
-        <element name="text:h" rename="text:heading" base="text:paragraph" family="text:paragraph"/>
+        <element name="text:h" rename="text:heading" base="text:paragraph" extends="org.odftoolkit.odfdom.changes.TextContainingElement" family="text:paragraph"/>
         <element name="text:illustration-index-entry-template" family="text:paragraph"/>
         <element name="text:index-source-style" family="text:paragraph"/>
         <element name="text:index-title-template" family="text:paragraph"/>
         <element name="text:object-index-entry-template" family="text:paragraph"/>
-        <element name="text:p" rename="text:paragraph" base="text:paragraph" family="text:paragraph"/>
+        <element name="text:p" rename="text:paragraph" extends="org.odftoolkit.odfdom.changes.TextContainingElement" base="text:paragraph" family="text:paragraph"/>
         <element name="text:table-index-entry-template" family="text:paragraph"/>
         <element name="text:table-of-content-entry-template" family="text:paragraph"/>
         <element name="text:user-index-entry-template" family="text:paragraph"/>
@@ -126,37 +126,37 @@
         <element name="text:linenumbering-configuration" family="text:text"/>
 
 		<!-- does not exist as element only as baseclass -->
-        <element name="text:list-level-style" base="style"/>
+        <element name="text:list-level-style" extends="org.odftoolkit.odfdom.dom.element.OdfStyleBase"/>
         <element name="text:list-level-style-number" base="text:list-level-style"/>
         <element name="text:list-level-style-bullet" base="text:list-level-style"/>
         <element name="text:list-level-style-image" base="text:list-level-style"/>
 
         <element name="text:numbered-paragraph" family="text:list"/>
-        <element name="office:automatic-styles" base="OdfOfficeAutomaticStyles"/>
-        <element name="office:master-styles" base="OdfOfficeMasterStyles"/>
-        <element name="office:styles" base="OdfOfficeStyles"/>        
-        <!--element name="office:presentation" base="container"/-->
+        <element name="office:automatic-styles" extends="org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles"/>
+        <element name="office:master-styles" extends="org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles"/>
+        <element name="office:styles" extends="org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles"/>        
+        <!--element name="office:presentation" extends="org.odftoolkit.odfdom.pkg.OdfContainerElementBase"/-->
 
-        <element name="style:style" base="style"/>
-        <element name="style:default-style" base="style"/>
-        <element name="style:page-layout" base="style"/>
-        <element name="text:outline-level-style" base="style"/>
-        <element name="text:list-style" base="style"/>
+        <element name="style:style" extends="org.odftoolkit.odfdom.dom.element.OdfStyleBase"/>
+        <element name="style:default-style" extends="org.odftoolkit.odfdom.dom.element.OdfStyleBase"/>
+        <element name="style:page-layout" extends="org.odftoolkit.odfdom.dom.element.OdfStyleBase"/>
+        <element name="text:outline-level-style" extends="org.odftoolkit.odfdom.dom.element.OdfStyleBase"/>
+        <element name="text:list-style" extends="org.odftoolkit.odfdom.dom.element.OdfStyleBase"/>
 
-        <element name="style:chart-properties" base="styleproperties"/>
-        <element name="style:drawing-page-properties" base="styleproperties"/>
-        <element name="style:graphic-properties" base="styleproperties"/>
-        <element name="style:list-level-properties" base="styleproperties"/>
-        <element name="style:paragraph-properties" base="styleproperties"/>
-        <element name="style:ruby-properties" base="styleproperties"/>
-        <element name="style:section-properties" base="styleproperties"/>
-        <element name="style:page-layout-properties" base="styleproperties"/>
-        <element name="style:header-footer-properties" base="styleproperties"/>
-        <element name="style:text-properties" base="styleproperties"/>
-        <element name="style:table-properties" base="styleproperties"/>
-        <element name="style:table-column-properties" base="styleproperties"/>
-        <element name="style:table-row-properties" base="styleproperties"/>
-        <element name="style:table-cell-properties" base="styleproperties"/>
+        <element name="style:chart-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
+        <element name="style:drawing-page-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
+        <element name="style:graphic-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
+        <element name="style:list-level-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
+        <element name="style:paragraph-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
+        <element name="style:ruby-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
+        <element name="style:section-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
+        <element name="style:page-layout-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
+        <element name="style:header-footer-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
+        <element name="style:text-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
+        <element name="style:table-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
+        <element name="style:table-column-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
+        <element name="style:table-row-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
+        <element name="style:table-cell-properties" extends="org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase"/>
     </elements>
     <data-types>
         <data name="anyURI" value-type="java.net.URI" conversion-type="org.odftoolkit.odfdom.type.AnyURI"/>

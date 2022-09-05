@@ -39,8 +39,8 @@
 #end
 #end
 ##
-#foreach ($base in $codeModel.getBaseClasses())
-#if ($base != "container" && $base != "style" && $base != "styleproperties" && $base != "OdfOfficeAutomaticStyles" && $base != "OdfOfficeMasterStyles" && $base != "OdfOfficeStyles")
+#foreach ($base in ${codeModel.getBaseClasses()})
+#if (${base.toString().contains(":")})## only create the base class if it has a prefix like an XML node with an existing namespace (should have an ODF prefix)
 #set($className = "${xmlModel.camelCase(${base})}ElementBase")
 	<file path="org/odftoolkit/odfdom/dom/element/${xmlModel.extractNamespacePrefix(${base})}/${className}.java" contextNode="$base" template="java-odfdom-elementbase-template.vm" />
 #end
@@ -58,9 +58,9 @@
 #end
 ##
 #foreach ($styleElement in ${xmlModel.getElements().withoutMultiples()})
-#if ($styleElement.getNamespacePrefix() == "style" && ${styleElement.getLocalName().endsWith("properties")})
+#if (${styleElement.getNamespacePrefix()} == "style" && ${styleElement.getLocalName().endsWith("properties")})
 #set ($properties=${styleElement.withMultiples().getAttributes()})
-#if ($properties.size()>0)
+#if (${properties.size()}>0)
 	<file path="org/odftoolkit/odfdom/dom/style/props/Odf${xmlModel.camelCase(${styleElement.getLocalName()})}.java" contextNode="$styleElement" template="java-odfdom-styleproperties.vm" />
 #end
 #end

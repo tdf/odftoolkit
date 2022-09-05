@@ -38,6 +38,7 @@ import schema2template.grammar.XMLModel;
  */
 public class SourceCodeModel {
 
+  Map<String, String> mElementSuperClassNameMap;
   Map<String, SourceCodeBaseClass> mElementBaseMap;
   SortedSet<SourceCodeBaseClass> mBaseClasses;
   Map<String, SourceCodeBaseClass> mBaseNameToBaseClass;
@@ -55,13 +56,15 @@ public class SourceCodeModel {
   public SourceCodeModel(
       XMLModel schemaModel,
       Map<String, String> elementNameBaseNameMap,
+      Map<String, String> elementSuperClassNameMap,
       Map<String, String[]> datatypeValueAndConversionMap) {
     mDataTypeValueAndConversionMap = datatypeValueAndConversionMap;
+    mElementSuperClassNameMap = elementSuperClassNameMap;
 
     // Intermediate Step -> get all baseNames
     SortedSet<String> baseNames = new TreeSet<String>(elementNameBaseNameMap.values());
 
-    // Intermediate Step -> get all subElement Definitions for each baseName
+    // Intermediate Step -> get all childOfBaseElement Definitions for each baseName
     Map<String, SortedSet<PuzzlePiece>> baseNameElementsMap =
         new HashMap<String, SortedSet<PuzzlePiece>>(baseNames.size());
     for (String elementName : elementNameBaseNameMap.keySet()) {
@@ -71,19 +74,19 @@ public class SourceCodeModel {
         elements = new TreeSet<PuzzlePiece>();
         baseNameElementsMap.put(baseName, elements);
       }
-      PuzzleComponent subElement = schemaModel.getElement(elementName);
-      if (subElement != null) {
-        if (subElement instanceof Collection) {
-          elements.addAll((Collection) subElement);
+      PuzzleComponent childElement = schemaModel.getElement(elementName);
+      if (childElement != null) {
+        if (childElement instanceof Collection) {
+          elements.addAll((Collection) childElement);
         } else {
-          elements.add((PuzzlePiece) subElement);
+          elements.add((PuzzlePiece) childElement);
         }
       } else {
         System.err.println("Warning: BaseClass definition for unknown element " + elementName);
       }
     }
 
-    // Generate all baseclasses (additional intermediate step: register them)
+    // Generate all base classes (additional intermediate step: register them)
     mBaseNameToBaseClass = new HashMap<String, SourceCodeBaseClass>(baseNames.size());
     mBaseClasses = new TreeSet<SourceCodeBaseClass>();
     for (String baseName : baseNames) {
@@ -105,14 +108,14 @@ public class SourceCodeModel {
   /**
    * Use in templates: Get base class of one element
    *
-   * @param subElement element
+   * @param childElement element
    * @return baseclass
    */
-  public SourceCodeBaseClass getBaseClassOf(PuzzleComponent subElement) {
+  public SourceCodeBaseClass getBaseClassOf(PuzzleComponent childElement) {
     SourceCodeBaseClass c = null;
-    if (subElement != null) {
-      if (mElementBaseMap.containsKey(subElement.getQName())) {
-        c = mElementBaseMap.get(subElement.getQName());
+    if (childElement != null) {
+      if (mElementBaseMap.containsKey(childElement.getQName())) {
+        c = mElementBaseMap.get(childElement.getQName());
       }
     }
     return c;
@@ -131,7 +134,7 @@ public class SourceCodeModel {
    * Use in templates: Get baseclass by name
    *
    * @param baseName name of baseclass
-   * @return baseclass object
+   * @return sourceCodeBaseClass object
    */
   public SourceCodeBaseClass getBaseClass(String baseName) {
     return mBaseNameToBaseClass.get(baseName);
@@ -161,6 +164,70 @@ public class SourceCodeModel {
     }
     String retval = tuple[0];
     return (retval == null) ? "" : retval;
+  }
+
+  /**
+   * Use in templates: Check for super class
+   *
+   * @param nodeName the name of the defined XML element or attribute
+   * @return if there has been a super class being specified via 'extends' attribute in the
+   *     grammar-additions.xml
+   */
+  public boolean hasSuperClass(String nodeName) {
+    boolean hasSuperClassName = false;
+    if (mElementSuperClassNameMap != null && nodeName != null) {
+      hasSuperClassName = mElementSuperClassNameMap.containsKey(nodeName);
+    }
+    return hasSuperClassName;
+  }
+
+  /**
+   * Use in templates: Get fully qualified super class name
+   *
+   * @param nodeName the name of the defined XML element or attribute
+   * @return the super class name fully qualified with Java Package as the one being set via
+   *     'extends' attribute in the grammar-additions.xml
+   */
+  public String getSuperClass(String nodeName) {
+    String superClassName = null;
+    if (mElementSuperClassNameMap != null && nodeName != null) {
+      superClassName = mElementSuperClassNameMap.get(nodeName);
+    }
+    return superClassName;
+  }
+
+  /**
+   * Use in templates: Get super class name (without Java package)
+   *
+   * @param nodeName the name of the defined XML element or attribute
+   * @return the super class name if one was set via 'extends' in the grammar-additions.xml
+   */
+  public String getSuperClassName(String nodeName) {
+    String superClassName = null;
+    if (mElementSuperClassNameMap != null && nodeName != null) {
+      superClassName = mElementSuperClassNameMap.get(nodeName);
+      if (superClassName != null & superClassName.contains(".")) {
+        superClassName =
+            superClassName.substring(superClassName.lastIndexOf(".") + 1, superClassName.length());
+      }
+    }
+    return superClassName;
+  }
+  /**
+   * Use in templates: Get Source code value type for datatype used in schema
+   *
+   * @param nodeName the name of the defined XML element or attribute
+   * @return the package name of the super class
+   */
+  public String getSuperClassPackageName(String nodeName) {
+    String superClassName = null;
+    if (mElementSuperClassNameMap != null && nodeName != null) {
+      superClassName = mElementSuperClassNameMap.get(nodeName);
+      if (superClassName != null & superClassName.contains(".")) {
+        superClassName = superClassName.substring(0, superClassName.lastIndexOf("."));
+      }
+    }
+    return superClassName;
   }
 
   /**
