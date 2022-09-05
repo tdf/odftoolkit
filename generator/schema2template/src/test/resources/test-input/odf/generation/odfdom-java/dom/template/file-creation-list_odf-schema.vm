@@ -42,7 +42,8 @@
 #foreach ($base in ${codeModel.getBaseClasses()})
 #if (${base.toString().contains(":")})## only create the base class if it has a prefix like an XML node with an existing namespace (should have an ODF prefix)
 #set($className = "${xmlModel.camelCase(${base})}ElementBase")
-	<file path="org/odftoolkit/odfdom/dom/element/${xmlModel.extractNamespacePrefix(${base})}/${className}.java" contextNode="$base" template="java-odfdom-elementbase-template.vm" />
+#set($elementName = "${codeModel.getBaseChild(${base})}")
+	<file path="org/odftoolkit/odfdom/dom/element/${xmlModel.extractNamespacePrefix(${base})}/${className}.java" contextNode="$elementName" template="java-odfdom-elementbase-template.vm" />
 #end
 #end
 ##

@@ -37,13 +37,14 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextClassNamesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextCondStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
+import org.odftoolkit.odfdom.changes.TextContainingElement;
 
 /**
  * DOM implementation of OpenDocument base element
  *
  * This class can have any org.w3c.dom.Attribute attribute.
  */
-public abstract class TextParagraphElementBase extends OdfStylableElement {
+public abstract class TextParagraphElementBase extends TextContainingElement {
 
 	/**
 	 * Create the instance of <code>TextParagraphElementBase</code>

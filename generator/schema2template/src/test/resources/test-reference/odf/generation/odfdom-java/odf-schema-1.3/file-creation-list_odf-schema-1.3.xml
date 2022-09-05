@@ -608,11 +608,11 @@
 	<file path="org/odftoolkit/odfdom/dom/element/text/TextVariableSetElement.java" contextNode="text:variable-set" template="java-odfdom-element-template.vm" />
 	<file path="org/odftoolkit/odfdom/dom/element/text/TextWordCountElement.java" contextNode="text:word-count" template="java-odfdom-element-template.vm" />
 	<file path="org/odftoolkit/odfdom/dom/element/xforms/XformsModelElement.java" contextNode="xforms:model" template="java-odfdom-element-template.vm" />
-	<file path="org/odftoolkit/odfdom/dom/element/draw/DrawShapeElementBase.java" contextNode="draw:shape" template="java-odfdom-elementbase-template.vm" />
-	<file path="org/odftoolkit/odfdom/dom/element/number/NumberDataStyleElementBase.java" contextNode="number:data-style" template="java-odfdom-elementbase-template.vm" />
-	<file path="org/odftoolkit/odfdom/dom/element/table/TableTableCellElementBase.java" contextNode="table:table-cell" template="java-odfdom-elementbase-template.vm" />
-	<file path="org/odftoolkit/odfdom/dom/element/text/TextListLevelStyleElementBase.java" contextNode="text:list-level-style" template="java-odfdom-elementbase-template.vm" />
-	<file path="org/odftoolkit/odfdom/dom/element/text/TextParagraphElementBase.java" contextNode="text:paragraph" template="java-odfdom-elementbase-template.vm" />
+	<file path="org/odftoolkit/odfdom/dom/element/draw/DrawShapeElementBase.java" contextNode="draw:control" template="java-odfdom-elementbase-template.vm" />
+	<file path="org/odftoolkit/odfdom/dom/element/number/NumberDataStyleElementBase.java" contextNode="number:time-style" template="java-odfdom-elementbase-template.vm" />
+	<file path="org/odftoolkit/odfdom/dom/element/table/TableTableCellElementBase.java" contextNode="table:covered-table-cell" template="java-odfdom-elementbase-template.vm" />
+	<file path="org/odftoolkit/odfdom/dom/element/text/TextListLevelStyleElementBase.java" contextNode="text:list-level-style-bullet" template="java-odfdom-elementbase-template.vm" />
+	<file path="org/odftoolkit/odfdom/dom/element/text/TextParagraphElementBase.java" contextNode="text:h" template="java-odfdom-elementbase-template.vm" />
 	<file path="org/odftoolkit/odfdom/dom/attribute/anim/AnimAudioLevelAttribute.java" contextNode="anim:audio-level" template="java-odfdom-attribute-template.vm" />
 	<file path="org/odftoolkit/odfdom/dom/attribute/anim/AnimColorInterpolationAttribute.java" contextNode="anim:color-interpolation" template="java-odfdom-attribute-template.vm" />
 	<file path="org/odftoolkit/odfdom/dom/attribute/anim/AnimColorInterpolationDirectionAttribute.java" contextNode="anim:color-interpolation-direction" template="java-odfdom-attribute-template.vm" />
