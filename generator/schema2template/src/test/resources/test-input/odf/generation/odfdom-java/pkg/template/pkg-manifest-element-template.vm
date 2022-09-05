@@ -160,7 +160,7 @@ public class $className extends $baseClassName {
 #set ($aParam = "${xmlModel.javaCase(${attribute.getLocalName()})}Value")
 
 	/**
-	 * Receives the value of the ODFDOM attribute representation <code>$aClassName</code> , See {@odf.attribute ${attribute.getQName()}}
+	 * Receives the value of the ODFDOM attribute representation <code>$aClassName</code> , See {@odf.attribute ${attribute}}
 	 *
 #if (${element.isMandatory($attribute)})
 	 * Attribute is mandatory.
@@ -200,7 +200,7 @@ public class $className extends $baseClassName {
 	}
 
 	/**
-	 * Sets the value of ODFDOM attribute representation <code>$aClassName</code> , See {@odf.attribute ${attribute.getQName()}}
+	 * Sets the value of ODFDOM attribute representation <code>$aClassName</code> , See {@odf.attribute ${attribute}}
 	 *
 	 * @param $aParam   The type is <code>$valueObject</code>
 	 */
@@ -278,7 +278,7 @@ public class $className extends $baseClassName {
 #set ($attribute = ${ch_attr.withMultiples()})
 #set ($aClassName = "${xmlModel.camelCase(${attribute.getLocalName()})}Attribute")
 #set ($aParam = "${xmlModel.javaCase(${attribute.getLocalName()})}Value")
-	 * @param $aParam  the <code>$ch_ValueObject</code> value of <code>$aClassName</code>, see {@odf.attribute  ${attribute.getQName()}} at specification
+	 * @param $aParam  the <code>$ch_ValueObject</code> value of <code>$aClassName</code>, see {@odf.attribute  ${attribute}} at specification
 #if ($ch_SimpleValue!="")
 #set ($params="${params}${seperateFlag}${ch_SimpleValue} ${aParam}")
 #else

@@ -297,7 +297,7 @@ public class $className extends $baseClassName {
 #set ($attribute = ${ch_attr.withMultiples()})
 #set ($aClassName = "${xmlModel.camelCase(${attribute.getLocalName()})}Attribute")
 #set ($aParam = "${xmlModel.javaCase($attribute)}Value")
-	 * @param $aParam  the <code>$ch_ValueObject</code> value of <code>$aClassName</code>, see {@odf.attribute  ${attribute.getQName()}} at specification
+	 * @param $aParam  the <code>$ch_ValueObject</code> value of <code>$aClassName</code>, see {@odf.attribute  ${attribute}} at specification
 #if ($ch_SimpleValue!="")
 #set ($params="${params}${seperateFlag}${ch_SimpleValue} ${aParam}")
 #else
@@ -329,7 +329,7 @@ public class $className extends $baseClassName {
 	 * Child element is mandatory.
 	 *
 #end
-	 * @return the element {@odf.element ${child.getLocalName()}}
+	 * @return the element {@odf.element ${child}}
 	 */
 	 public $cClassName new${cClassName}($params) {
 		$cClassName $cVar = ((OdfFileDom) this.ownerDocument).newOdfElement(${cClassName}.class);
@@ -370,7 +370,7 @@ public class $className extends $baseClassName {
 	 * Child element is mandatory.
 	 *
 #end
-	 * @return the element {@odf.element ${child.getLocalName()}}
+	 * @return the element {@odf.element ${child}}
 	 */
 	public $cClassName new${cClassName}() {
 		$cClassName $cVar = ((OdfFileDom) this.ownerDocument).newOdfElement(${cClassName}.class);
