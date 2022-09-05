@@ -335,28 +335,6 @@
             </plugin>
         </plugins>
     </build>
-    <reporting>
-        <plugins>
-            <!-- Reporting integration test results -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
-                <reportSets>
-                    <reportSet>
-                        <id>integration-tests</id>
-                        <reports>
-                            <report>report-only</report>
-                        </reports>
-                        <configuration>
-                            <outputName>failsafe-report</outputName>
-                        </configuration>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
-
     <!-- More Project Information -->
     <name>ODFDOM</name>
     <description>
@@ -480,7 +458,7 @@
                     </plugin>
                     <plugin>
                         <groupId>com.cosium.code</groupId>
-                        <artifactId>git-code-format-maven-plugin</artifactId>                        
+                        <artifactId>git-code-format-maven-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>formatting-generated-code</id>
