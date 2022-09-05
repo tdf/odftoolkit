@@ -32,6 +32,7 @@ import org.odftoolkit.odfdom.pkg.OdfNamespace;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute dsig:version}.
@@ -44,7 +45,7 @@ public class VersionAttribute extends OdfAttribute {
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute dsig:version}.
 	 *
-	 * @param ownerDocument       The type is <code>OdfFileDom</code>
+	 * @param ownerDocument The type is <code>OdfFileDom</code>
 	 */
 	public VersionAttribute(OdfFileDom ownerDocument) {
 		super(ownerDocument, ATTRIBUTE_NAME);

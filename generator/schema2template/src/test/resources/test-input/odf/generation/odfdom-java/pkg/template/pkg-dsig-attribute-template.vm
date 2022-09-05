@@ -93,6 +93,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 #end
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
 /**
  * DOM implementation of OpenDocument attribute  {@odf.attribute ${attribute}}.
@@ -127,7 +128,7 @@ public class $className extends OdfAttribute {
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute ${attribute}}.
 	 *
-	 * @param ownerDocument       The type is <code>OdfFileDom</code>
+	 * @param ownerDocument The type is <code>OdfFileDom</code>
 	 */
 	public $className(OdfFileDom ownerDocument) {
 		super(ownerDocument, ATTRIBUTE_NAME);
