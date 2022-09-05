@@ -797,8 +797,8 @@ public class Component {
   /**
    * Adds the given component as new child component. No XML elements are being changed!
    *
-   * @param index starting with 0 representing the position of the child, if -1 the new child will
-   *     be appended
+   * @param pos starting with 0 representing the position of the child, if -1 the new child will be
+   *     appended
    */
   static void addComponent(int pos, Component parent, Component child) {
     parent.addChild(pos, child);
@@ -1013,8 +1013,6 @@ public class Component {
       familyProperties.put("column", OdfStylePropertiesSet.TableColumnProperties);
     } else if (styleFamily.equals(OdfStyleFamily.Section)) {
       familyProperties.put("section", OdfStylePropertiesSet.SectionProperties);
-    } else if (styleFamily.equals(OdfStyleFamily.List)) {
-      familyProperties.put("list", OdfStylePropertiesSet.ListLevelProperties);
     } else if (styleFamily.equals(OdfStyleFamily.Chart)) {
       familyProperties.put("chart", OdfStylePropertiesSet.ChartProperties);
       familyProperties.put(
@@ -1069,8 +1067,6 @@ public class Component {
       familyID = "column";
     } else if (styleFamily.equals(OdfStyleFamily.Section)) {
       familyID = "section";
-    } else if (styleFamily.equals(OdfStyleFamily.List)) {
-      familyID = "list";
     } else if (styleFamily.equals(OdfStyleFamily.Chart)) {
       familyID = "chart";
     } else if (styleFamily.equals(OdfStyleFamily.Graphic)
@@ -1090,7 +1086,6 @@ public class Component {
     if (styleFamily.equals(OdfStyleFamily.Paragraph)
         || styleFamily.equals(OdfStyleFamily.Text)
         || styleFamily.equals(OdfStyleFamily.Section)
-        || styleFamily.equals(OdfStyleFamily.List)
         || styleFamily.equals(OdfStyleFamily.Ruby)) {
       familyID = "text";
     } else if (styleFamily.equals(OdfStyleFamily.Table)
@@ -1127,8 +1122,6 @@ public class Component {
       familyID = "column";
     } else if (styleFamily.equals(OdfStyleFamily.Section)) {
       familyID = "section";
-    } else if (styleFamily.equals(OdfStyleFamily.List)) {
-      familyID = "list";
     } else if (styleFamily.equals(OdfStyleFamily.Chart)) {
       familyID = "chart";
     } else if (styleFamily.equals(OdfStyleFamily.Graphic)
@@ -1159,8 +1152,6 @@ public class Component {
       familyID = "Column";
     } else if (styleFamily.equals(OdfStyleFamily.Section)) {
       familyID = "Section";
-    } else if (styleFamily.equals(OdfStyleFamily.List)) {
-      familyID = "List";
     } else if (styleFamily.equals(OdfStyleFamily.Presentation)) {
       familyID = "Presentation";
     } else if (styleFamily.equals(OdfStyleFamily.Chart)) {

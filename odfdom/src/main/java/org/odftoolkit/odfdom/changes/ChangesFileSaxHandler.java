@@ -682,7 +682,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                 }
                 // Add heading outline numbering
                 if (element instanceof TextHElement) {
-                  Integer outlineLevel = ((TextHElement) p).getTextOutlineLevelAttribute();
+                  Integer outlineLevel = ((TextHElement) element).getTextOutlineLevelAttribute();
                   if (outlineLevel != null) {
                     paraProps.put("outlineLevel", outlineLevel);
                   }
@@ -1749,15 +1749,13 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
           if (shapeProps.isGroupShape()) {
             mCurrentNode.setUserData(
                 "groupWidth",
-                new Integer(
-                    shapeProps.mHoriOffsetMax
-                        - (shapeProps.mHoriOffsetMin == null ? 0 : shapeProps.mHoriOffsetMin)),
+                (shapeProps.mHoriOffsetMax
+                    - (shapeProps.mHoriOffsetMin == null ? 0 : shapeProps.mHoriOffsetMin)),
                 null);
             mCurrentNode.setUserData(
                 "groupHeight",
-                new Integer(
-                    shapeProps.mVertOffsetMax
-                        - (shapeProps.mVertOffsetMin == null ? 0 : shapeProps.mVertOffsetMin)),
+                (shapeProps.mVertOffsetMax
+                    - (shapeProps.mVertOffsetMin == null ? 0 : shapeProps.mVertOffsetMin)),
                 null);
           }
           // flush the inner operations of the shape
