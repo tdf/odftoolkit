@@ -29,7 +29,6 @@
 #set ($attributes = ${element.getAttributes().withoutMultiples()})
 ##
 #set ($baseClassName = "OdfElement")
-#set ($baseHasMandatoryAttr = false)
 ##
 ## Test if this element has mandatory (non optional) attributes
 #set ($hasMandatoryAttr = false)

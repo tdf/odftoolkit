@@ -38,14 +38,13 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNumPrefixAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNumSuffixAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextBulletCharAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextBulletRelativeSizeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextLevelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:list-level-style-bullet}.
  *
  */
-public class TextListLevelStyleBulletElement extends OdfElement {
+public class TextListLevelStyleBulletElement extends TextListLevelStyleElementBase {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "list-level-style-bullet");
 
@@ -163,32 +162,6 @@ public class TextListLevelStyleBulletElement extends OdfElement {
 		TextBulletRelativeSizeAttribute attr = new TextBulletRelativeSizeAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(textBulletRelativeSizeValue);
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>TextLevelAttribute</code> , See {@odf.attribute text:level}
-	 *
-	 * Attribute is mandatory.
-	 *
-	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public Integer getTextLevelAttribute() {
-		TextLevelAttribute attr = (TextLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "level");
-		if (attr != null) {
-			return Integer.valueOf(attr.intValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>TextLevelAttribute</code> , See {@odf.attribute text:level}
-	 *
-	 * @param textLevelValue   The type is <code>Integer</code>
-	 */
-	public void setTextLevelAttribute(Integer textLevelValue) {
-		TextLevelAttribute attr = new TextLevelAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setIntValue(textLevelValue.intValue());
 	}
 
 	/**

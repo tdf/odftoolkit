@@ -92,7 +92,7 @@ class OdfFamilyPropertiesPatternMatcher {
               // Whenever visiting elements and RefExps, they are memorized
               // to identify head of islands.
               int depth = 1;
-              List result = null;
+              List resultList = null;
 
               @Override
               public void onElement(ElementExp exp) {
@@ -117,19 +117,19 @@ class OdfFamilyPropertiesPatternMatcher {
                   // System.out.println("NEW FAMILY" + asString(propertiesByFamily));
                   collectingState = Boolean.TRUE;
                   depthCollecting = depth;
-                  result = new ArrayList();
+                  resultList = new ArrayList();
                   if (exp.exp instanceof ValueExp) {
                     // System.out.println("style:family-1" + ((ValueExp) exp.exp).value.toString());
-                    propertiesByFamily.put(((ValueExp) exp.exp).value.toString(), result);
+                    propertiesByFamily.put(((ValueExp) exp.exp).value.toString(), resultList);
                   } else if (exp.exp instanceof ChoiceExp) {
                     // System.out.println("style:family-A" + ((ValueExp) ((ChoiceExp)
                     // exp.exp).exp1).value.toString());
                     // System.out.println("style:family-B" + ((ValueExp) ((ChoiceExp)
                     // exp.exp).exp2).value.toString());
                     propertiesByFamily.put(
-                        ((ValueExp) ((ChoiceExp) exp.exp).exp1).value.toString(), result);
+                        ((ValueExp) ((ChoiceExp) exp.exp).exp1).value.toString(), resultList);
                     propertiesByFamily.put(
-                        ((ValueExp) ((ChoiceExp) exp.exp).exp2).value.toString(), result);
+                        ((ValueExp) ((ChoiceExp) exp.exp).exp2).value.toString(), resultList);
 
                   } else {
                     // System.out.println("NOT FAMILY '" + attrName + "'");
@@ -185,7 +185,7 @@ class OdfFamilyPropertiesPatternMatcher {
                       && elementName.endsWith("properties")) {
                     // 2DO: as long MSV does not preserve (default) namespace prefix, we skip for
                     // now prefix
-                    result.add(elementName);
+                    resultList.add(elementName);
                   } else {
                     if (collectingState) {
                       if (depthCollecting >= depth) {

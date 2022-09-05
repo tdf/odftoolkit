@@ -32,7 +32,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -57,7 +56,7 @@ public class SchemaToTemplate {
   private static final Logger LOG = Logger.getLogger(SchemaToTemplate.class.getName());
   public static final Boolean DEBUG = Boolean.FALSE;
 
-  private SchemaToTemplate() {};
+  private SchemaToTemplate() {}
 
   /**
    * Iniitial function to trigger a list of generations like all Java classes with change history
@@ -76,28 +75,28 @@ public class SchemaToTemplate {
     generations.sort(Comparator.comparing(GenerationParameters::getGrammarVersion));
     Map<String, List<XMLModel>> modelHistories = new HashMap<>();
 
-    for (int i = 0; i < generations.size(); i++) {
+    for (GenerationParameters generation : generations) {
 
       //      System.out.println("\n");
-      String grammarVersion = generations.get(i).getGrammarVersion();
+      String grammarVersion = generation.getGrammarVersion();
       //      System.out.println("GrammarVersion: " + grammarVersion);
 
-      String grammarID = generations.get(i).getGrammarID();
+      String grammarID = generation.getGrammarID();
       //      System.out.println("GrammarID: " + grammarID);
 
-      String grammarFilePath = generations.get(i).getGrammarPath();
+      String grammarFilePath = generation.getGrammarPath();
       //      System.out.println("GrammarPath: " + grammarFilePath);
 
-      String grammarAdditionsFilePath = generations.get(i).getGrammarAdditionsPath();
+      String grammarAdditionsFilePath = generation.getGrammarAdditionsPath();
       //      System.out.println("grammarAddOnFilePath: " + grammarAdditionsFilePath);
 
-      String mainTemplateFilePath = generations.get(i).getMainTemplatePath();
+      String mainTemplateFilePath = generation.getMainTemplatePath();
       String mainTemplateFileName = Paths.get(mainTemplateFilePath).getFileName().toString();
       String templateBaseDir =
           mainTemplateFilePath.substring(0, mainTemplateFilePath.lastIndexOf(mainTemplateFileName));
       //      System.out.println("Grammar2Templates: " + mainTemplateFilePath);
 
-      String targetDirPath = generations.get(i).getTargetDir();
+      String targetDirPath = generation.getTargetDir();
       targetDirPath = targetDirPath + File.separator + grammarID + "-" + grammarVersion;
       new File(targetDirPath).mkdirs();
       //      System.out.println("TargetDirPath: " + targetDirPath);
@@ -143,8 +142,12 @@ public class SchemaToTemplate {
 
     if (grammarAdditionsFilePath != null && !grammarAdditionsFilePath.isBlank()) {
       // Read grammar-additions.xml
-      // Manual added Java specific info - Base class for inheritance
+      // Manual added Java specific info - Base class for inheritance of shared attributes from
+      // element
       Map<String, String> elementToBaseNameMap = new HashMap<>();
+      // Manual added Java specific info - extension class for inheritance added base or generated
+      // node class
+      Map<String, String> elementSuperClassNameMap = new HashMap<>();
       // Manual added ODF specific info - style family mapping
       Map<String, List<String>> elementNameToFamilyMap = new HashMap<>();
       // 2DO - still existent? -- Manual added Java specific info - mapping ODF datatype to Java
@@ -154,6 +157,7 @@ public class SchemaToTemplate {
       GrammarAdditionsFileHandler.readGrammarAdditionsFile(
           new File(grammarAdditionsFilePath),
           elementToBaseNameMap,
+          elementSuperClassNameMap,
           attributeDefaultMap,
           elementNameToFamilyMap,
           datatypeValueAndConversionMap);
@@ -163,7 +167,11 @@ public class SchemaToTemplate {
 
       // Needed for the base classes - common attributes are being moved into the base classes
       SourceCodeModel sourceCodeModel =
-          new SourceCodeModel(xmlModel, elementToBaseNameMap, datatypeValueAndConversionMap);
+          new SourceCodeModel(
+              xmlModel,
+              elementToBaseNameMap,
+              elementSuperClassNameMap,
+              datatypeValueAndConversionMap);
       context.put("codeModel", sourceCodeModel);
     }
     context.put("xmlModel", xmlModel);
@@ -182,7 +190,6 @@ public class SchemaToTemplate {
 
     // initializing template engine instance (ie. Velocity engine)
     LOG.info("Starting code generation:");
-    Properties props = new Properties();
     VelocityEngine ve = new VelocityEngine();
     ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "file");
     ve.setProperty(

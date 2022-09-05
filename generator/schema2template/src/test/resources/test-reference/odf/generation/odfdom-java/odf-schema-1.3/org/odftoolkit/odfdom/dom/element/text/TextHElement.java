@@ -57,25 +57,16 @@ import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationEndElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationDateTimeElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationFooterElement;
 import org.odftoolkit.odfdom.dom.element.presentation.PresentationHeaderElement;
-import org.odftoolkit.odfdom.dom.attribute.text.TextClassNamesAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextCondStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextIdAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextIsListHeaderAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextRestartNumberingAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStartValueAttribute;
-import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlAboutAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlContentAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlDatatypeAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlPropertyAttribute;
-import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 
 /**
  * DOM implementation of OpenDocument element  {@odf.element text:h}.
  *
  */
-public class TextHElement extends OdfStylableElement {
+public class TextHElement extends TextParagraphElementBase {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "h");
 
@@ -95,78 +86,6 @@ public class TextHElement extends OdfStylableElement {
 	 */
 	public OdfName getOdfName() {
 		return ELEMENT_NAME;
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>TextClassNamesAttribute</code> , See {@odf.attribute text:class-names}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getTextClassNamesAttribute() {
-		TextClassNamesAttribute attr = (TextClassNamesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "class-names");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>TextClassNamesAttribute</code> , See {@odf.attribute text:class-names}
-	 *
-	 * @param textClassNamesValue   The type is <code>String</code>
-	 */
-	public void setTextClassNamesAttribute(String textClassNamesValue) {
-		TextClassNamesAttribute attr = new TextClassNamesAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setValue(textClassNamesValue);
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>TextCondStyleNameAttribute</code> , See {@odf.attribute text:cond-style-name}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getTextCondStyleNameAttribute() {
-		TextCondStyleNameAttribute attr = (TextCondStyleNameAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "cond-style-name");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>TextCondStyleNameAttribute</code> , See {@odf.attribute text:cond-style-name}
-	 *
-	 * @param textCondStyleNameValue   The type is <code>String</code>
-	 */
-	public void setTextCondStyleNameAttribute(String textCondStyleNameValue) {
-		TextCondStyleNameAttribute attr = new TextCondStyleNameAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setValue(textCondStyleNameValue);
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>TextIdAttribute</code> , See {@odf.attribute text:id}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getTextIdAttribute() {
-		TextIdAttribute attr = (TextIdAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "id");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>TextIdAttribute</code> , See {@odf.attribute text:id}
-	 *
-	 * @param textIdValue   The type is <code>String</code>
-	 */
-	public void setTextIdAttribute(String textIdValue) {
-		TextIdAttribute attr = new TextIdAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setValue(textIdValue);
 	}
 
 	/**
@@ -265,150 +184,6 @@ public class TextHElement extends OdfStylableElement {
 		TextStartValueAttribute attr = new TextStartValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setIntValue(textStartValueValue.intValue());
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>TextStyleNameAttribute</code> , See {@odf.attribute text:style-name}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getTextStyleNameAttribute() {
-		TextStyleNameAttribute attr = (TextStyleNameAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "style-name");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>TextStyleNameAttribute</code> , See {@odf.attribute text:style-name}
-	 *
-	 * @param textStyleNameValue   The type is <code>String</code>
-	 */
-	public void setTextStyleNameAttribute(String textStyleNameValue) {
-		TextStyleNameAttribute attr = new TextStyleNameAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setValue(textStyleNameValue);
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>XhtmlAboutAttribute</code> , See {@odf.attribute xhtml:about}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getXhtmlAboutAttribute() {
-		XhtmlAboutAttribute attr = (XhtmlAboutAttribute) getOdfAttribute(OdfDocumentNamespace.XHTML, "about");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>XhtmlAboutAttribute</code> , See {@odf.attribute xhtml:about}
-	 *
-	 * @param xhtmlAboutValue   The type is <code>String</code>
-	 */
-	public void setXhtmlAboutAttribute(String xhtmlAboutValue) {
-		XhtmlAboutAttribute attr = new XhtmlAboutAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setValue(xhtmlAboutValue);
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>XhtmlContentAttribute</code> , See {@odf.attribute xhtml:content}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getXhtmlContentAttribute() {
-		XhtmlContentAttribute attr = (XhtmlContentAttribute) getOdfAttribute(OdfDocumentNamespace.XHTML, "content");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>XhtmlContentAttribute</code> , See {@odf.attribute xhtml:content}
-	 *
-	 * @param xhtmlContentValue   The type is <code>String</code>
-	 */
-	public void setXhtmlContentAttribute(String xhtmlContentValue) {
-		XhtmlContentAttribute attr = new XhtmlContentAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setValue(xhtmlContentValue);
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>XhtmlDatatypeAttribute</code> , See {@odf.attribute xhtml:datatype}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getXhtmlDatatypeAttribute() {
-		XhtmlDatatypeAttribute attr = (XhtmlDatatypeAttribute) getOdfAttribute(OdfDocumentNamespace.XHTML, "datatype");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>XhtmlDatatypeAttribute</code> , See {@odf.attribute xhtml:datatype}
-	 *
-	 * @param xhtmlDatatypeValue   The type is <code>String</code>
-	 */
-	public void setXhtmlDatatypeAttribute(String xhtmlDatatypeValue) {
-		XhtmlDatatypeAttribute attr = new XhtmlDatatypeAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setValue(xhtmlDatatypeValue);
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>XhtmlPropertyAttribute</code> , See {@odf.attribute xhtml:property}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getXhtmlPropertyAttribute() {
-		XhtmlPropertyAttribute attr = (XhtmlPropertyAttribute) getOdfAttribute(OdfDocumentNamespace.XHTML, "property");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>XhtmlPropertyAttribute</code> , See {@odf.attribute xhtml:property}
-	 *
-	 * @param xhtmlPropertyValue   The type is <code>String</code>
-	 */
-	public void setXhtmlPropertyAttribute(String xhtmlPropertyValue) {
-		XhtmlPropertyAttribute attr = new XhtmlPropertyAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setValue(xhtmlPropertyValue);
-	}
-
-	/**
-	 * Receives the value of the ODFDOM attribute representation <code>XmlIdAttribute</code> , See {@odf.attribute xml:id}
-	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
-	 */
-	public String getXmlIdAttribute() {
-		XmlIdAttribute attr = (XmlIdAttribute) getOdfAttribute(OdfDocumentNamespace.XML, "id");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the value of ODFDOM attribute representation <code>XmlIdAttribute</code> , See {@odf.attribute xml:id}
-	 *
-	 * @param xmlIdValue   The type is <code>String</code>
-	 */
-	public void setXmlIdAttribute(String xmlIdValue) {
-		XmlIdAttribute attr = new XmlIdAttribute((OdfFileDom) this.ownerDocument);
-		setOdfAttribute(attr);
-		attr.setValue(xmlIdValue);
 	}
 
 	/**

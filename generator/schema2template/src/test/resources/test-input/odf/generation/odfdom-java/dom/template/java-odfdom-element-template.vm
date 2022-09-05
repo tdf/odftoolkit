@@ -34,94 +34,63 @@
 #set ($children = ${element.getChildElements().withoutMultiples()})
 #set ($attributes = ${element.getAttributes().withoutMultiples()})
 ##
-## Determine whether element is stylable. Set base class OdfElement, OdfStylableElement, or...
-#if ($odfModel.isStylable($element))
-#set ($stylable = true)
-#set ($baseClassName = "OdfStylableElement")
-#set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseClassName")
-## The following draw:graphic and presentation:presentation share the same elements, but were used in different applications
-#set ($useOdfStyleableShapeElement = false)
-#set ($elementStyleFamily=${odfModel.getStyleFamilies($element)})
-#foreach($familyName in $elementStyleFamily)
-#if (${familyName}=="draw:graphic" || ${familyName}=="presentation:presentation")
-#set ($useOdfStyleableShapeElement = true)
-#set ($baseClassName = "OdfStyleableShapeElement")
-#set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseClassName")
-#break
-#end
-#end
-#set ($baseHasMandatoryAttr = false)
-#set ($firstfamily = ${xmlModel.camelCase($xmlModel.extractLocalName($odfModel.getStyleFamilies($element).get(0)))})
-#else
-#set ($stylable = false)
-#set ($baseClassName = "OdfElement")
-#set ($baseimport = "org.odftoolkit.odfdom.pkg.$baseClassName")
-#set ($baseHasMandatoryAttr = false)
-#end
-##
-## ...or configured base class
+## BASE CLASS PROVIDED (START)
+##...or configured base class overwriting the previous base settings
 #set ($base = ${codeModel.getBaseClassOf($element)})
 #if (${base})
-## Configured manually generated base class?
-#if ($base == "container")
-#set ($_specialbase = true)
-#set ($baseClassName = "OdfContainerElementBase")
-#set ($baseimport = "org.odftoolkit.odfdom.pkg.$baseClassName")
-#set ($baseHasMandatoryAttr = false)
-#end
-#if ($base == "style")
-#set ($_specialbase = true)
-#set ($baseClassName = "OdfStyleBase")
-#set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseClassName")
-#set ($baseHasMandatoryAttr = false)
-#end
-#if ($base == "styleproperties")
-#set ($_specialbase = true)
-#set ($baseClassName = "OdfStylePropertiesBase")
-#set ($baseimport = "org.odftoolkit.odfdom.dom.element.$baseClassName")
-#set ($baseHasMandatoryAttr = false)
-#end
-#if ($base == "OdfOfficeAutomaticStyles")
-#set ($_specialbase = true)
-#set ($baseClassName = "OdfOfficeAutomaticStyles")
-#set ($baseimport = "org.odftoolkit.odfdom.incubator.doc.office.$baseClassName")
-#set ($baseHasMandatoryAttr = false)
-#end
-#if ($base == "OdfOfficeMasterStyles")
-#set ($_specialbase = true)
-#set ($baseClassName = "OdfOfficeMasterStyles")
-#set ($baseimport = "org.odftoolkit.odfdom.incubator.doc.office.$baseClassName")
-#set ($baseHasMandatoryAttr = false)
-#end
-#if ($base == "OdfOfficeStyles")
-#set ($_specialbase = true)
-#set ($baseClassName = "OdfOfficeStyles")
-#set ($baseimport = "org.odftoolkit.odfdom.incubator.doc.office.$baseClassName")
-#set ($baseHasMandatoryAttr = false)
-#end
-#if ($base == "DataStyle")
-#set ($_specialbase = true)
-#set ($baseClassName = "DataStyleElement") ## to be made consistent by API change
-#set ($baseimport = "org.odftoolkit.odfdom.dom.element.number.$baseClassName")
-#end
 ## Configured automatic generated base class. If so, remove all attributes defined in base class
-#if (!$_specialbase)
-#set ($baseClassName = "${xmlModel.camelCase($base)}ElementBase")
-#if (${base.getNamespacePrefix()} != $namespacePrefix)## Heuristic: Instead we should compare the Java package
-#set ($baseimport = "org.odftoolkit.odfdom.dom.element.${base.getNamespacePrefix()}.$baseClassName")
-#end
-#set ($attributes = $attributes.without($base.getBaseAttributes()))
+#set ($superClassName = "${xmlModel.camelCase($base)}ElementBase")
+#set ($superClassPackageName = "org.odftoolkit.odfdom.dom.element.${base.getNamespacePrefix()}")
+#set ($attributes = $attributes.without(${base.getBaseAttributes()}))## remove the base attributes from this class
 #set ($baseElement = ${xmlModel.getElement($base.getQName())})
 #if ($baseElement)
 #set ($bAttributes = ${baseElement.getAttributes().withoutMultiples()})
 #foreach ($bAttribute in $bAttributes)
 #if (${baseElement.isMandatory($bAttribute)})
-#set ($baseHasMandatoryAttr = true)
 #end
 #end
 #end
 #end
+## BASE CLASS PROVIDED (END)
+##
+## implicit base style is only set if there is not explicit "base" nor "extends" being set in the grammar-additions.xml
+## STYLE SETTING (START)
+## ToDo: Move the following complexity "BASE CLASS STYLABLE" into SourceCodeModel.getBaseClass()
+## 1) Every stylable element inherits from "OdfStylableElement"
+## 2) Unless the stylable element is from @style:family="draw:graphc" or "presentation:presenation" than inherits from "OdfStyleableShapeElement"
+## 3) Otherwise ever ODF element inherits from "OdfElement"
+#if ($odfModel.isStylable($element))
+## 1) Every stylable element inherits from "OdfStylableElement"
+#set ($stylable = true)
+#if (!$base && !${codeModel.hasSuperClass($contextNode)})
+#set ($superClassName = "OdfStylableElement")
+#set ($superClassPackageName = "org.odftoolkit.odfdom.dom.element")
 #end
+## The following draw:graphic and presentation:presentation share the same elements, but were used in different applications
+## 2) Unless the stylable element is from @style:family="draw:graphc" or "presentation:presenation" than inherits from "OdfStyleableShapeElement"
+#set ($useOdfStyleableShapeElement = false)
+#set ($elementStyleFamily=${odfModel.getStyleFamilies($element)})
+#foreach($familyName in $elementStyleFamily)
+#if (${familyName}=="draw:graphic" || ${familyName}=="presentation:presentation")
+## 3) Otherwise ever ODF element inherits from "OdfElement"
+#set ($useOdfStyleableShapeElement = true)
+#if (!$base && !${codeModel.hasSuperClass($contextNode)})
+#set ($superClassName = "OdfStyleableShapeElement")
+#set ($superClassPackageName = "org.odftoolkit.odfdom.dom.element")
+#end
+#break
+#end
+#end
+#set ($firstfamily = ${xmlModel.camelCase($xmlModel.extractLocalName($odfModel.getStyleFamilies($element).get(0)))})
+#else
+#set ($stylable = false)
+#if (!$base && !${codeModel.hasSuperClass($contextNode)})
+#set ($superClassName = "OdfElement")
+#set ($superClassPackageName = "org.odftoolkit.odfdom.pkg")
+#end
+#end
+## STYLE SETTING (END)
+##
 ##
 ## Test if this element has mandatory (non optional) attributes
 #set ($hasMandatoryAttr = false)
@@ -152,7 +121,7 @@ import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 #else
 import org.odftoolkit.odfdom.pkg.OdfElement;
 #end
-#if ($base == "styleproperties")
+#if (${codeModel.getSuperClass($contextNode)} == "org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase")
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 #end
@@ -192,10 +161,24 @@ import org.odftoolkit.odfdom.dom.attribute.$childClassName;
 #end
 #end
 #end
-##
-## If there is a base class which is not in the current package
-#if ($baseimport && $baseimport != "org.odftoolkit.odfdom.pkg.OdfElement" && $baseimport != "org.odftoolkit.odfdom.dom.element.OdfStylableElement" && $baseimport != "org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement")
-import ${baseimport};
+## evaluating super class for class "extends"
+#if ($base)
+## but base base class
+#if ($superClassName && $superClassName != "OdfElement" && $superClassName != "OdfStylableElement" && $superClassName != "OdfStyleableShapeElement")
+#if($superClassPackageName != "org.odftoolkit.odfdom.dom.element.${namespacePrefix}")
+import ${superClassPackageName}.${superClassName};
+#end
+#end
+#else## if base class not being set
+## finding superclass
+#if (${codeModel.hasSuperClass($contextNode)})
+#set ($superClassPackageName = ${codeModel.getSuperClassPackageName($contextNode)})
+#set ($superClassName = ${codeModel.getSuperClassName($contextNode)})
+#if($superClassPackageName != "org.odftoolkit.odfdom.dom.element.${namespacePrefix}")
+import ${superClassPackageName}.${superClassName};
+#else
+#end
+#end
 #end
 
 ##
@@ -213,7 +196,7 @@ import ${baseimport};
  * This class can have any org.w3c.dom.Attribute attribute.
 #end
  */
-public class $className extends $baseClassName {
+public class $className extends $superClassName {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.${namespacePrefix.toUpperCase()}, "${element.getLocalName()}");
 
@@ -241,7 +224,7 @@ public class $className extends $baseClassName {
 ## ---------------------------------------------------
 ##  Only for base = styleproperties
 ## ---------------------------------------------------
-#if ($base == "styleproperties")
+#if (${codeModel.getSuperClass($contextNode)} == "org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase")
 #foreach ($attribute in $attributes)
 #if ($attribute != "*")
 #set($propertyName = ${attribute.getLocalName()})
