@@ -92,7 +92,7 @@ public class DocumentSignaturesElement extends OdfElement {
 	 *
 	 * Child element is mandatory.
 	 *
-	 * @return the element {@odf.element Signature}
+	 * @return the element {@odf.element ds:Signature}
 	 */
 	public SignatureElement newSignatureElement() {
 		SignatureElement signature = ((OdfFileDom) this.ownerDocument).newOdfElement(SignatureElement.class);
