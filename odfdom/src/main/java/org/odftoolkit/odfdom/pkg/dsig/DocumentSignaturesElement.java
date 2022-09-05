@@ -72,7 +72,7 @@ public class DocumentSignaturesElement extends OdfElement {
    *     and no default value defined.
    */
   public String getVersionAttribute() {
-    VersionAttribute attr = (VersionAttribute) getOdfAttribute(OdfPackageNamespace.DSIG, "version");
+    VersionAttribute attr = (VersionAttribute) getOdfAttribute(VersionAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -94,16 +94,14 @@ public class DocumentSignaturesElement extends OdfElement {
   /**
    * Create child element {@odf.element ds:Signature}.
    *
-   * <p>Child element is new in Odf 1.2
-   *
    * <p>Child element is mandatory.
    *
    * @return the element {@odf.element ds:Signature}
    */
   public SignatureElement newSignatureElement() {
-    SignatureElement dsSignature =
+    SignatureElement signature =
         ((OdfFileDom) this.ownerDocument).newOdfElement(SignatureElement.class);
-    this.appendChild(dsSignature);
-    return dsSignature;
+    this.appendChild(signature);
+    return signature;
   }
 }

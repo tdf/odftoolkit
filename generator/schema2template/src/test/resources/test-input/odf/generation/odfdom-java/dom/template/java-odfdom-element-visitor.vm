@@ -18,7 +18,9 @@
 ## under the License.
 ##
 ##################################################################
-
+##
+## Begin Code
+#include('copyright.txt')
 package org.odftoolkit.odfdom.dom;
 
 import org.odftoolkit.odfdom.pkg.ElementVisitor;

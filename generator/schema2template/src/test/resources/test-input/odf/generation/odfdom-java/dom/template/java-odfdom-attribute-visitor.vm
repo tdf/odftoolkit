@@ -24,6 +24,9 @@
 ## xmlModel - Represents an ODF grammar parsed by MSV with all relevant informations and usabiltiy functions
 ## xmlModelHistory - sorted list from latest to earliest release to assist in finding new XML node additions (see odf-reference-template.vm)
 ## But the Velocity context can also be extended by parameters from the calling main-template.
+##
+## Begin Code
+#include('copyright.txt')
 package org.odftoolkit.odfdom.dom;
 
 import org.odftoolkit.odfdom.dom.attribute.text.TextCAttribute;

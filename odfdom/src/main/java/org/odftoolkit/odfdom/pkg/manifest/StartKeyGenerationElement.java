@@ -68,8 +68,7 @@ public class StartKeyGenerationElement extends OdfElement {
    *     set and no default value defined.
    */
   public Integer getKeySizeAttribute() {
-    KeySizeAttribute attr =
-        (KeySizeAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "key-size");
+    KeySizeAttribute attr = (KeySizeAttribute) getOdfAttribute(KeySizeAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return Integer.valueOf(attr.intValue());
     }
@@ -100,7 +99,7 @@ public class StartKeyGenerationElement extends OdfElement {
   public String getStartKeyGenerationNameAttribute() {
     StartKeyGenerationNameAttribute attr =
         (StartKeyGenerationNameAttribute)
-            getOdfAttribute(OdfPackageNamespace.MANIFEST, "start-key-generation-name");
+            getOdfAttribute(StartKeyGenerationNameAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
