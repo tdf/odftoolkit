@@ -131,7 +131,7 @@
         <element name="text:list-level-style-bullet" base="text:list-level-style"/>
         <element name="text:list-level-style-image" base="text:list-level-style"/>
 
-        <element name="text:numbered-paragraph" family="text:list"/>
+        <element name="text:numbered-paragraph" family="text:list"/><!-- precisly there is no style:family list in ODF -->
         <element name="office:automatic-styles" extends="org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles"/>
         <element name="office:master-styles" extends="org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles"/>
         <element name="office:styles" extends="org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles"/>        
