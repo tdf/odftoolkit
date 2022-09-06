@@ -1594,6 +1594,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleTextPropertiesElement.Condition,
 				StyleTextPropertiesElement.Display});
 
+	/** page is not a style:family but by adding it here, these properties can be handled in a consistent way */
 	public final static OdfStyleFamily Page = new OdfStyleFamily("page",
 			new OdfStyleProperty[]{
 				StylePageLayoutPropertiesElement.BackgroundColor,
@@ -1646,4 +1647,18 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StylePageLayoutPropertiesElement.Shadow,
 				StylePageLayoutPropertiesElement.TableCentering,
 				StylePageLayoutPropertiesElement.WritingMode});
+	/** list is not a style:family but by adding it here, these properties can be handled in a consistent way */
+	public final static OdfStyleFamily List = new OdfStyleFamily("list",
+			new OdfStyleProperty[]{
+				StyleListLevelPropertiesElement.Height,
+				StyleListLevelPropertiesElement.TextAlign,
+				StyleListLevelPropertiesElement.Width,
+				StyleListLevelPropertiesElement.FontName,
+				StyleListLevelPropertiesElement.VerticalPos,
+				StyleListLevelPropertiesElement.VerticalRel,
+				StyleListLevelPropertiesElement.Y,
+				StyleListLevelPropertiesElement.ListLevelPositionAndSpaceMode,
+				StyleListLevelPropertiesElement.MinLabelDistance,
+				StyleListLevelPropertiesElement.MinLabelWidth,
+				StyleListLevelPropertiesElement.SpaceBefore});
 }
