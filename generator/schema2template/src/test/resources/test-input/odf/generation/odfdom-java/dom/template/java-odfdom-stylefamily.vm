@@ -128,22 +128,33 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 
 #end##END-foreach-getStyleFamilyPropertiesMap
 ## PAGE STYLE FAMILY (start)
+	/** page is not a style:family but by adding it here, these properties can be handled in a consistent way */
 	public final static OdfStyleFamily Page = new OdfStyleFamily("page",
 			new OdfStyleProperty[]{
 #set ($stylePropertiesElementName = "page-layout-properties")
-## element-endswith $stylePropertiesElementName
-#foreach ($element in ${xmlModel.getElements().withoutMultiples()})
-##element.getLocalName ${element.getLocalName()}
-#if (${element.getLocalName().endsWith($stylePropertiesElementName)})
-##stylePropertiesElementName.getLocalName ${stylePropertiesElementName.getLocalName()}
-#foreach ($property in ${element.withMultiples().getAttributes().withoutMultiples()})
+#set ($element = ${xmlModel.getElement("style:page-layout-properties")})
+#foreach ($property in ${element.getAttributes().withoutMultiples()})
 ## for ease of use all Java variables of ODF properties are without localname.
 ## But 'shadow' exist once twice with 'dr3d' & 'draw' prefix!
 #set($propertyName = ${property.getLocalName()})
 				Style${xmlModel.camelCase($stylePropertiesElementName)}Element.${xmlModel.camelCase($propertyName)}#if($foreach.hasNext),
 #end##if-foreach-,
 #end##foreeach-property
-#end##if-correctProperty
-#end##end-loop
-});
+});## PAGE STYLE FAMILY (END)
+
+## LIST STYLE FAMILY (start)
+	/** list is not a style:family but by adding it here, these properties can be handled in a consistent way */
+	public final static OdfStyleFamily List = new OdfStyleFamily("list",
+			new OdfStyleProperty[]{
+#set ($stylePropertiesElementName = "list-level-properties")
+#set ($element = ${xmlModel.getElement("style:list-level-properties")})
+#foreach ($property in ${element.getAttributes().withoutMultiples()})
+## for ease of use all Java variables of ODF properties are without localname.
+## But 'shadow' exist once twice with 'dr3d' & 'draw' prefix!
+#set($propertyName = ${property.getLocalName()})
+				Style${xmlModel.camelCase($stylePropertiesElementName)}Element.${xmlModel.camelCase($propertyName)}#if($foreach.hasNext),
+#end##if-foreach-,
+#end##foreeach-property
+});## LIST STYLE FAMILY (END)
+
 }

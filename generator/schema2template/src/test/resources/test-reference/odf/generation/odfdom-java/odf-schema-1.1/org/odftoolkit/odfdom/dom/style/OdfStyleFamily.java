@@ -150,7 +150,12 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 			new OdfStyleProperty[]{
 				StyleTextPropertiesElement.*});
 
+	/** page is not a style:family but by adding it here, these properties can be handled in a consistent way */
 	public final static OdfStyleFamily Page = new OdfStyleFamily("page",
 			new OdfStyleProperty[]{
 				StylePageLayoutPropertiesElement.*});
+	/** list is not a style:family but by adding it here, these properties can be handled in a consistent way */
+	public final static OdfStyleFamily List = new OdfStyleFamily("list",
+			new OdfStyleProperty[]{
+				StyleListLevelPropertiesElement.*});
 }
