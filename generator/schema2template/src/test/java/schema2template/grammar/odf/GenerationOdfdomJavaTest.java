@@ -117,7 +117,7 @@ public class GenerationOdfdomJavaTest {
         grammarAdditionsPath = GRAMMAR_ADDITIONS_FILE__SCHEMA;
         mainTemplatePath = MAIN_TEMPLATE_ODF_SCHEMA_FILE;
       }
-
+      // if (specPart.grammarID.equals(ConstantsOdf.GrammarID.ODF_SCHEMA.ID)) {
       LOG.info(
           "\n\nNew ODF transformation with following parameters:"
               + "\n\tgrammarVersion "
@@ -143,6 +143,7 @@ public class GenerationOdfdomJavaTest {
               mainTemplatePath,
               ConstantsBuildEnv.GENERATION_TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY));
     }
+    // }
 
     try {
       SchemaToTemplate.run(generations);
