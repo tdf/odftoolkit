@@ -421,7 +421,8 @@ public class JsonOperationConsumer {
    * text:style-name="Text_20_body"/>
    *
    * @param rootComponent high level document structure
-   * @param paraPos position of the paragraph starting with 0 and one over the existing is allowed
+   * @param start position of the paragraph starting with 0 and one over the existing is allowed
+   * @param attrs ODF attributes to be set on the paragraph
    * @throws IndexOutOfBoundsException - if index is out of range (index < 0 || index > size()). One
    *     over size is allowed to append a paragraph.
    */
@@ -443,8 +444,10 @@ public class JsonOperationConsumer {
    * For the demo document "FruitDepot-SeasonalFruits.odt" the tableElement looks like <text:p
    * text:style-name="Text_20_body"/>
    *
-   * @param rootComponent high level document structure
-   * @param paraPos position of the paragraph starting with 0 and one over the existing is allowed
+   * @param parentComponent high level document structure
+   * @param newPosition position of the paragraph starting with 0 and one over the existing is
+   *     allowed
+   * @param attrs the new ODF attributes to be set
    * @throws IndexOutOfBoundsException - if index is out of range (index < 0 || index > size()). One
    *     over size is allowed to append a paragraph.
    */
@@ -834,8 +837,9 @@ public class JsonOperationConsumer {
   /**
    * Move the pointed component to its new destination.
    *
-   * @param from the origin of the component to be moved
-   * @param the the new destination
+   * @param rootComponent the component to be moved
+   * @param start the origin of the component to be moved
+   * @param to the new destination
    */
   public static void move(Component rootComponent, JSONArray start, JSONArray to) {
     try {
@@ -851,8 +855,9 @@ public class JsonOperationConsumer {
   /**
    * Copy the pointed component to its new destination.
    *
-   * @param from the origin of the component to be moved
-   * @param the the new destination
+   * @param rootComponent the component to be moved
+   * @param start origin of the component to be moved
+   * @param to the new destination
    */
   static OdfElement copy(Component rootComponent, JSONArray start, JSONArray to) {
     Component sourceComponent = rootComponent.get(start);
@@ -918,13 +923,13 @@ public class JsonOperationConsumer {
             TableTableElement tableElement = (TableTableElement) tableComponent.mRootElement;
 
             // WORK AROUND for "UNDO COLUMN WIDTH" problem
-            if (tableElement.isWidthChangeRequired()) {
+            if (((Table) tableElement.getComponent()).isWidthChangeRequired()) {
               // INSERT COLUMN
               // Returns all TableTableColumn descendants that exist within the tableElement, even
               // within groups, columns and header elements
               OdfTable table = OdfTable.getInstance(tableElement);
               table.removeColumnsByIndex(endPos, deletionCount - 1 + endPos, Boolean.TRUE);
-              tableElement.hasChangedWidth();
+              ((Table) tableElement.getComponent()).hasChangedWidth();
             }
           }
           if (repetition > 1) {
@@ -994,7 +999,7 @@ public class JsonOperationConsumer {
    * element, there have to be boilerplate elements in-between that might have to be deleted as
    * well, if the last sibling was deleted.
    *
-   * @param componentParent The element representing the next higher component
+   * @param parentComponentElement The element representing the next higher component
    * @param targetElement the element to be deleted. Bottom-up will be all parents traversed and
    *     deleted in case the original element to be deleted had no other siblings being components.
    */
@@ -1248,17 +1253,17 @@ public class JsonOperationConsumer {
       OdfTable table = OdfTable.getInstance(tableElement);
 
       // WORK AROUND for "UNDO COLUMN WIDTH" problem
-      if (!tableElement.isWidthChangeRequired()) {
+      if (!((Table) tableElement.getComponent()).isWidthChangeRequired()) {
         Table.stashColumnWidths(tableElement);
       }
       table.removeColumnsByIndex(startGrid, endGrid - startGrid + 1);
 
       // WORK AROUND for "UNDO COLUMN WIDTH" problem (see JsonOperationConsumer for further changes)
-      if (tableElement.isWidthChangeRequired()) {
+      if (((Table) tableElement.getComponent()).isWidthChangeRequired()) {
         JsonOperationConsumer.setColumnsWidth(
             tableElement.getComponent(),
-            tableElement.getPosition(),
-            tableElement.popTableGrid(),
+            ((Table) tableElement.getComponent()).getPosition(),
+            ((Table) tableElement.getComponent()).popTableGrid(),
             Boolean.TRUE);
       }
     }
@@ -1729,11 +1734,11 @@ public class JsonOperationConsumer {
             double widthFactor = 1;
             if (newHeight > 0 && newHeight != gHeight.intValue()) {
               heightFactor = (double) newHeight / (double) gHeight.intValue();
-              targetNode.setUserData("groupHeight", new Integer(newHeight), null);
+              targetNode.setUserData("groupHeight", newHeight, null);
             }
             if (newWidth > 0 && newWidth != gWidth.intValue()) {
               widthFactor = (double) newWidth / (double) gWidth.intValue();
-              targetNode.setUserData("groupWidth", new Integer(newHeight), null);
+              targetNode.setUserData("groupWidth", newHeight, null);
             }
             Node child = targetNode.getFirstChild();
             changeDrawingSizeAndPos(child, heightFactor, widthFactor);
@@ -3650,7 +3655,7 @@ public class JsonOperationConsumer {
 
   /**
    * @param rootComponent high level document structure
-   * @param pos position of the tableElement starting with 0 and one over the existing is allowed
+   * @param start position of the tableElement starting with 0 and one over the existing is allowed
    * @throws IndexOutOfBoundsException - if index is out of range (index < 0 || index > size()). One
    *     over size is allowed to append a tableElement.
    */
@@ -3934,8 +3939,8 @@ public class JsonOperationConsumer {
       }
       if (tableGrid.length() != columnCount) {
         // reuse the width from later caching
-        tableElement.pushTableGrid(tableGrid);
-        tableElement.requireLaterWidthChange(start);
+        ((Table) tableElement.getComponent()).pushTableGrid(tableGrid);
+        ((Table) tableElement.getComponent()).requireLaterWidthChange(start);
       } else {
         addColumnAndCellElements(
             tableComponent,
@@ -4021,7 +4026,7 @@ public class JsonOperationConsumer {
         TableTableElement tableElement = (TableTableElement) parentComponent.mRootElement;
 
         // WORK AROUND for "UNDO COLUMN WIDTH" problem
-        if (!tableElement.isWidthChangeRequired()) {
+        if (!((Table) tableElement.getComponent()).isWidthChangeRequired()) {
           Table.stashColumnWidths(tableElement);
         }
         // INSERT COLUMN
@@ -4042,11 +4047,11 @@ public class JsonOperationConsumer {
             Boolean.FALSE);
         // WORK AROUND for "UNDO COLUMN WIDTH" problem (see JsonOperationConsumer for further
         // changes)
-        if (tableElement.isWidthChangeRequired()) {
+        if (((Table) tableElement.getComponent()).isWidthChangeRequired()) {
           JsonOperationConsumer.setColumnsWidth(
               tableElement.getComponent(),
-              tableElement.getPosition(),
-              tableElement.popTableGrid(),
+              ((Table) tableElement.getComponent()).getPosition(),
+              ((Table) tableElement.getComponent()).popTableGrid(),
               Boolean.TRUE);
         }
       } else {
@@ -4472,7 +4477,7 @@ public class JsonOperationConsumer {
   /**
    * addRows Inserts one or more new rows into a tableElement.
    *
-   * @param name 'addRows'
+   * @param rootComponent the root of all components
    * @param start The logical position of the new row. The row will be inserted before a row that is
    *     currently located at this position.
    * @param count (optional) The number of rows that will be inserted, default is 1.
@@ -4625,7 +4630,7 @@ public class JsonOperationConsumer {
       TableTableElement tableElement = (TableTableElement) tableComponent.mRootElement;
 
       // WORK AROUND for "UNDO COLUMN WIDTH" problem
-      if (tableElement.isWidthChangeRequired()) {
+      if (((Table) tableElement.getComponent()).isWidthChangeRequired()) {
         // INSERT COLUMN
         // Returns all TableTableColumn descendants that exist within the tableElement, even within
         // groups, columns and header elements
@@ -4635,14 +4640,14 @@ public class JsonOperationConsumer {
         addColumnAndCellElements(
             tableElement.getComponent(),
             start,
-            tableElement.popTableGrid(),
+            ((Table) tableElement.getComponent()).popTableGrid(),
             cellPosition,
             INSERT_AFTER,
             -1,
             true,
             existingColumnList,
             Boolean.TRUE);
-        tableElement.hasChangedWidth();
+        ((Table) tableElement.getComponent()).hasChangedWidth();
       }
 
     } else {
