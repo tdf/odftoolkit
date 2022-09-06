@@ -33,17 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import org.odftoolkit.odfdom.dom.element.style.StyleChartPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleDrawingPagePropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleRubyPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleSectionPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTableColumnPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTableRowPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.*;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 
 
@@ -482,7 +472,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleTextPropertiesElement.TextUnderlineWidth,
 				StyleTextPropertiesElement.UseWindowFontColor,
 				StyleTextPropertiesElement.Condition,
-				StyleTextPropertiesElement.Display			});
+				StyleTextPropertiesElement.Display});
 
 	public final static OdfStyleFamily DrawingPage = new OdfStyleFamily("drawing-page",
 			new OdfStyleProperty[]{
@@ -519,7 +509,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleDrawingPagePropertiesElement.Subtype,
 				StyleDrawingPagePropertiesElement.Type,
 				StyleDrawingPagePropertiesElement.Repeat,
-				StyleDrawingPagePropertiesElement.FillRule			});
+				StyleDrawingPagePropertiesElement.FillRule});
 
 	public final static OdfStyleFamily Graphic = new OdfStyleFamily("graphic",
 			new OdfStyleProperty[]{
@@ -833,7 +823,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleTextPropertiesElement.TextUnderlineWidth,
 				StyleTextPropertiesElement.UseWindowFontColor,
 				StyleTextPropertiesElement.Condition,
-				StyleTextPropertiesElement.Display			});
+				StyleTextPropertiesElement.Display});
 
 	public final static OdfStyleFamily Paragraph = new OdfStyleFamily("paragraph",
 			new OdfStyleProperty[]{
@@ -973,7 +963,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleTextPropertiesElement.TextUnderlineWidth,
 				StyleTextPropertiesElement.UseWindowFontColor,
 				StyleTextPropertiesElement.Condition,
-				StyleTextPropertiesElement.Display			});
+				StyleTextPropertiesElement.Display});
 
 	public final static OdfStyleFamily Presentation = new OdfStyleFamily("presentation",
 			new OdfStyleProperty[]{
@@ -1287,12 +1277,12 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleTextPropertiesElement.TextUnderlineWidth,
 				StyleTextPropertiesElement.UseWindowFontColor,
 				StyleTextPropertiesElement.Condition,
-				StyleTextPropertiesElement.Display			});
+				StyleTextPropertiesElement.Display});
 
 	public final static OdfStyleFamily Ruby = new OdfStyleFamily("ruby",
 			new OdfStyleProperty[]{
 				StyleRubyPropertiesElement.RubyAlign,
-				StyleRubyPropertiesElement.RubyPosition			});
+				StyleRubyPropertiesElement.RubyPosition});
 
 	public final static OdfStyleFamily Section = new OdfStyleFamily("section",
 			new OdfStyleProperty[]{
@@ -1302,7 +1292,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleSectionPropertiesElement.Editable,
 				StyleSectionPropertiesElement.Protect,
 				StyleSectionPropertiesElement.WritingMode,
-				StyleSectionPropertiesElement.DontBalanceTextColumns			});
+				StyleSectionPropertiesElement.DontBalanceTextColumns});
 
 	public final static OdfStyleFamily Table = new OdfStyleFamily("table",
 			new OdfStyleProperty[]{
@@ -1323,7 +1313,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleTablePropertiesElement.WritingMode,
 				StyleTablePropertiesElement.Align,
 				StyleTablePropertiesElement.BorderModel,
-				StyleTablePropertiesElement.Display			});
+				StyleTablePropertiesElement.Display});
 
 	public final static OdfStyleFamily TableCell = new OdfStyleFamily("table-cell",
 			new OdfStyleProperty[]{
@@ -1497,7 +1487,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleTextPropertiesElement.TextUnderlineWidth,
 				StyleTextPropertiesElement.UseWindowFontColor,
 				StyleTextPropertiesElement.Condition,
-				StyleTextPropertiesElement.Display			});
+				StyleTextPropertiesElement.Display});
 
 	public final static OdfStyleFamily TableColumn = new OdfStyleFamily("table-column",
 			new OdfStyleProperty[]{
@@ -1505,7 +1495,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleTableColumnPropertiesElement.BreakBefore,
 				StyleTableColumnPropertiesElement.ColumnWidth,
 				StyleTableColumnPropertiesElement.RelColumnWidth,
-				StyleTableColumnPropertiesElement.UseOptimalColumnWidth			});
+				StyleTableColumnPropertiesElement.UseOptimalColumnWidth});
 
 	public final static OdfStyleFamily TableRow = new OdfStyleFamily("table-row",
 			new OdfStyleProperty[]{
@@ -1515,7 +1505,7 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleTableRowPropertiesElement.KeepTogether,
 				StyleTableRowPropertiesElement.MinRowHeight,
 				StyleTableRowPropertiesElement.RowHeight,
-				StyleTableRowPropertiesElement.UseOptimalRowHeight			});
+				StyleTableRowPropertiesElement.UseOptimalRowHeight});
 
 	public final static OdfStyleFamily Text = new OdfStyleFamily("text",
 			new OdfStyleProperty[]{
@@ -1602,6 +1592,58 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleTextPropertiesElement.TextUnderlineWidth,
 				StyleTextPropertiesElement.UseWindowFontColor,
 				StyleTextPropertiesElement.Condition,
-				StyleTextPropertiesElement.Display			});
+				StyleTextPropertiesElement.Display});
 
+	public final static OdfStyleFamily Page = new OdfStyleFamily("page",
+			new OdfStyleProperty[]{
+				StylePageLayoutPropertiesElement.BackgroundColor,
+				StylePageLayoutPropertiesElement.Border,
+				StylePageLayoutPropertiesElement.BorderBottom,
+				StylePageLayoutPropertiesElement.BorderLeft,
+				StylePageLayoutPropertiesElement.BorderRight,
+				StylePageLayoutPropertiesElement.BorderTop,
+				StylePageLayoutPropertiesElement.Margin,
+				StylePageLayoutPropertiesElement.MarginBottom,
+				StylePageLayoutPropertiesElement.MarginLeft,
+				StylePageLayoutPropertiesElement.MarginRight,
+				StylePageLayoutPropertiesElement.MarginTop,
+				StylePageLayoutPropertiesElement.Padding,
+				StylePageLayoutPropertiesElement.PaddingBottom,
+				StylePageLayoutPropertiesElement.PaddingLeft,
+				StylePageLayoutPropertiesElement.PaddingRight,
+				StylePageLayoutPropertiesElement.PaddingTop,
+				StylePageLayoutPropertiesElement.PageHeight,
+				StylePageLayoutPropertiesElement.PageWidth,
+				StylePageLayoutPropertiesElement.BorderLineWidth,
+				StylePageLayoutPropertiesElement.BorderLineWidthBottom,
+				StylePageLayoutPropertiesElement.BorderLineWidthLeft,
+				StylePageLayoutPropertiesElement.BorderLineWidthRight,
+				StylePageLayoutPropertiesElement.BorderLineWidthTop,
+				StylePageLayoutPropertiesElement.FirstPageNumber,
+				StylePageLayoutPropertiesElement.FootnoteMaxHeight,
+				StylePageLayoutPropertiesElement.LayoutGridBaseHeight,
+				StylePageLayoutPropertiesElement.LayoutGridBaseWidth,
+				StylePageLayoutPropertiesElement.LayoutGridColor,
+				StylePageLayoutPropertiesElement.LayoutGridDisplay,
+				StylePageLayoutPropertiesElement.LayoutGridLines,
+				StylePageLayoutPropertiesElement.LayoutGridMode,
+				StylePageLayoutPropertiesElement.LayoutGridPrint,
+				StylePageLayoutPropertiesElement.LayoutGridRubyBelow,
+				StylePageLayoutPropertiesElement.LayoutGridRubyHeight,
+				StylePageLayoutPropertiesElement.LayoutGridSnapTo,
+				StylePageLayoutPropertiesElement.LayoutGridStandardMode,
+				StylePageLayoutPropertiesElement.NumFormat,
+				StylePageLayoutPropertiesElement.NumLetterSync,
+				StylePageLayoutPropertiesElement.NumPrefix,
+				StylePageLayoutPropertiesElement.NumSuffix,
+				StylePageLayoutPropertiesElement.PaperTrayName,
+				StylePageLayoutPropertiesElement.Print,
+				StylePageLayoutPropertiesElement.PrintOrientation,
+				StylePageLayoutPropertiesElement.PrintPageOrder,
+				StylePageLayoutPropertiesElement.RegisterTruthRefStyleName,
+				StylePageLayoutPropertiesElement.ScaleTo,
+				StylePageLayoutPropertiesElement.ScaleToPages,
+				StylePageLayoutPropertiesElement.Shadow,
+				StylePageLayoutPropertiesElement.TableCentering,
+				StylePageLayoutPropertiesElement.WritingMode});
 }

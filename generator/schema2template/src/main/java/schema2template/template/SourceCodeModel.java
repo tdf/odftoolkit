@@ -134,9 +134,6 @@ public class SourceCodeModel {
     if (mBaseNameElementNameMap != null) {
       b = mBaseNameElementNameMap.get(childName);
     }
-    if (b == null) {
-      System.out.println("ARGH");
-    }
     return b;
   }
 

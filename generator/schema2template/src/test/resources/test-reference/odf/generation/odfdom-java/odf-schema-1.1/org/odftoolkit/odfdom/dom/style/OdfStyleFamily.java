@@ -33,17 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import org.odftoolkit.odfdom.dom.element.style.StyleChartPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleDrawingPagePropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleParagraphPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleRubyPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleSectionPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTableCellPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTableColumnPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTablePropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTableRowPropertiesElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
+import org.odftoolkit.odfdom.dom.element.style.*;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 
 
@@ -107,57 +97,60 @@ public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 				StyleChartPropertiesElement.*,
 				StyleGraphicPropertiesElement.*,
 				StyleParagraphPropertiesElement.*,
-				StyleTextPropertiesElement.*			});
+				StyleTextPropertiesElement.*});
 
 	public final static OdfStyleFamily DrawingPage = new OdfStyleFamily("drawing-page",
 			new OdfStyleProperty[]{
-				StyleDrawingPagePropertiesElement.*			});
+				StyleDrawingPagePropertiesElement.*});
 
 	public final static OdfStyleFamily Graphic = new OdfStyleFamily("graphic",
 			new OdfStyleProperty[]{
 				StyleGraphicPropertiesElement.*,
 				StyleParagraphPropertiesElement.*,
-				StyleTextPropertiesElement.*			});
+				StyleTextPropertiesElement.*});
 
 	public final static OdfStyleFamily Paragraph = new OdfStyleFamily("paragraph",
 			new OdfStyleProperty[]{
 				StyleParagraphPropertiesElement.*,
-				StyleTextPropertiesElement.*			});
+				StyleTextPropertiesElement.*});
 
 	public final static OdfStyleFamily Presentation = new OdfStyleFamily("presentation",
 			new OdfStyleProperty[]{
 				StyleGraphicPropertiesElement.*,
 				StyleParagraphPropertiesElement.*,
-				StyleTextPropertiesElement.*			});
+				StyleTextPropertiesElement.*});
 
 	public final static OdfStyleFamily Ruby = new OdfStyleFamily("ruby",
 			new OdfStyleProperty[]{
-				StyleRubyPropertiesElement.*			});
+				StyleRubyPropertiesElement.*});
 
 	public final static OdfStyleFamily Section = new OdfStyleFamily("section",
 			new OdfStyleProperty[]{
-				StyleSectionPropertiesElement.*			});
+				StyleSectionPropertiesElement.*});
 
 	public final static OdfStyleFamily Table = new OdfStyleFamily("table",
 			new OdfStyleProperty[]{
-				StyleTablePropertiesElement.*			});
+				StyleTablePropertiesElement.*});
 
 	public final static OdfStyleFamily TableCell = new OdfStyleFamily("table-cell",
 			new OdfStyleProperty[]{
 				StyleTableCellPropertiesElement.*,
 				StyleParagraphPropertiesElement.*,
-				StyleTextPropertiesElement.*			});
+				StyleTextPropertiesElement.*});
 
 	public final static OdfStyleFamily TableColumn = new OdfStyleFamily("table-column",
 			new OdfStyleProperty[]{
-				StyleTableColumnPropertiesElement.*			});
+				StyleTableColumnPropertiesElement.*});
 
 	public final static OdfStyleFamily TableRow = new OdfStyleFamily("table-row",
 			new OdfStyleProperty[]{
-				StyleTableRowPropertiesElement.*			});
+				StyleTableRowPropertiesElement.*});
 
 	public final static OdfStyleFamily Text = new OdfStyleFamily("text",
 			new OdfStyleProperty[]{
-				StyleTextPropertiesElement.*			});
+				StyleTextPropertiesElement.*});
 
+	public final static OdfStyleFamily Page = new OdfStyleFamily("page",
+			new OdfStyleProperty[]{
+				StylePageLayoutPropertiesElement.*});
 }
