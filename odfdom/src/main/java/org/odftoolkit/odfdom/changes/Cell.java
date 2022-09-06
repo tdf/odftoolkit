@@ -253,7 +253,8 @@ class Cell<T> extends Component {
           }
           if (!valueType.isEmpty()) {
             cell.setOfficeValueTypeAttribute(valueType);
-            cell.setCalcextValueTypeAttribute(valueType);
+            cell.setAttributeNS(
+                OdfDocumentNamespace.CALCEXT.getUri(), "calcext:value-type", valueType);
             cell.setOfficeCurrencyAttribute(currencySymbol);
             // make sure that an appropriate value is available:
             if (value == null && cell.getOfficeValueAttribute() == null) {
