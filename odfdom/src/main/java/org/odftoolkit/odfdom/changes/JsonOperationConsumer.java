@@ -105,6 +105,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextParagraphElementBase;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 import org.odftoolkit.odfdom.dom.element.text.TextTabElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.dom.style.props.OdfGraphicProperties;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
@@ -117,10 +118,7 @@ import org.odftoolkit.odfdom.incubator.doc.style.OdfDefaultStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
-import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.OdfPackage;
-import org.odftoolkit.odfdom.pkg.OdfValidationException;
+import org.odftoolkit.odfdom.pkg.*;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.odftoolkit.odfdom.type.Base64Binary;
 import org.odftoolkit.odfdom.type.StyleName;
@@ -1804,31 +1802,35 @@ public class JsonOperationConsumer {
       } else {
         DrawShapeElementBase drawElementBase = (DrawShapeElementBase) child;
         if (heightFactor != 1.) {
-          String heightAttr = drawElementBase.getSvgHeightAttribute();
+          OdfAttribute heightAttr =
+              ((DrawShapeElementBase) child).getOdfAttribute(OdfGraphicProperties.Height.getName());
           if (heightAttr != null) {
-            int height = MapHelper.normalizeLength(heightAttr);
+            int height = MapHelper.normalizeLength(heightAttr.getValue());
             height *= heightFactor;
-            drawElementBase.setSvgHeightAttribute(height / 100.0 + "mm");
+            heightAttr.setValue(height / 100.0 + "mm");
           }
-          String yAttr = drawElementBase.getSvgYAttribute();
+          OdfAttribute yAttr =
+              ((DrawShapeElementBase) child).getOdfAttribute(OdfGraphicProperties.Y.getName());
           if (yAttr != null) {
-            int y = MapHelper.normalizeLength(yAttr);
+            int y = MapHelper.normalizeLength(yAttr.getValue());
             y *= heightFactor;
-            drawElementBase.setSvgYAttribute(y / 100.0 + "mm");
+            yAttr.setValue(y / 100.0 + "mm");
           }
         }
         if (widthFactor != 1.) {
-          String widthAttr = drawElementBase.getSvgWidthAttribute();
+          OdfAttribute widthAttr =
+              ((DrawShapeElementBase) child).getOdfAttribute(OdfGraphicProperties.Width.getName());
           if (widthAttr != null) {
-            int width = MapHelper.normalizeLength(widthAttr);
+            int width = MapHelper.normalizeLength(widthAttr.getValue());
             width *= widthFactor;
-            drawElementBase.setSvgWidthAttribute(width / 100.0 + "mm");
+            widthAttr.setValue(width / 100.0 + "mm");
           }
-          String xAttr = drawElementBase.getSvgXAttribute();
+          OdfAttribute xAttr =
+              ((DrawShapeElementBase) child).getOdfAttribute(OdfGraphicProperties.X.getName());
           if (xAttr != null) {
-            int x = MapHelper.normalizeLength(xAttr);
-            x *= widthFactor;
-            drawElementBase.setSvgXAttribute(x / 100.0 + "mm");
+            int x = MapHelper.normalizeLength(xAttr.getValue());
+            x *= heightFactor;
+            xAttr.setValue(x / 100.0 + "mm");
           }
         }
       }
@@ -2440,8 +2442,8 @@ public class JsonOperationConsumer {
    * All paragraph references from the original list to components that occur paragraphs AFTER the
    * selected paragraph have to be moved to the clonedList paragraphs.
    *
-   * @param originalListElement Within this list, every paragraph holds a reference to its component
-   *     and vice versa
+   * @param selectedParagraphComponent Within this list, every paragraph holds a reference to its
+   *     component and vice versa
    * @param clonedListElement Within this list, NO paragraph holds a reference to its component and
    *     vice versa *
    */
@@ -3574,11 +3576,15 @@ public class JsonOperationConsumer {
     if (drawingProps != null) {
       if (drawingProps.has("width")) {
         int width = drawingProps.optInt("width");
-        frameElement.setSvgWidthAttribute(width / 100.0 + "mm");
+        frameElement
+            .getOdfAttribute(OdfGraphicProperties.Width.getName())
+            .setValue(width / 100.0 + "mm");
       }
       if (drawingProps.has("height")) {
         int height = drawingProps.optInt("height");
-        frameElement.setSvgHeightAttribute(height / 100.0 + "mm");
+        frameElement
+            .getOdfAttribute(OdfGraphicProperties.Height.getName())
+            .setValue(height / 100.0 + "mm");
       }
       if (drawingProps.has(OPK_NAME)) {
         String name = drawingProps.optString(OPK_NAME);
@@ -3588,11 +3594,11 @@ public class JsonOperationConsumer {
       }
       if (drawingProps.has("anchorHorOffset")) {
         int x = drawingProps.optInt("anchorHorOffset");
-        frameElement.setSvgXAttribute(x / 100.0 + "mm");
+        frameElement.getOdfAttribute(OdfGraphicProperties.X.getName()).setValue(x / 100.0 + "mm");
       }
       if (drawingProps.has("anchorVertOffset")) {
         int y = drawingProps.optInt("anchorVertOffset");
-        frameElement.setSvgYAttribute(y / 100.0 + "mm");
+        frameElement.getOdfAttribute(OdfGraphicProperties.Y.getName()).setValue(y / 100.0 + "mm");
       }
       if (drawingProps.has("inline")
           && !drawingProps.get("inline").equals(JSONObject.NULL)
