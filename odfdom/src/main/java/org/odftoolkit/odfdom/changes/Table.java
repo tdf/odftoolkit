@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
+import org.json.JSONArray;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.doc.table.OdfTableRow;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -296,7 +297,7 @@ public class Table<T> extends Component {
     List<TableTableColumnElement> existingColumnList =
         Table.getTableColumnElements(tableElement, new LinkedList<TableTableColumnElement>());
     List<Integer> tableColumWidths = collectColumnWidths(tableElement, existingColumnList);
-    tableElement.pushTableGrid(tableColumWidths);
+    ((Table) tableElement.getComponent()).pushTableGrid(tableColumWidths);
   }
 
   /**
@@ -323,5 +324,61 @@ public class Table<T> extends Component {
       }
     }
     return columns;
+  }
+  /**
+   * Caching the width of columns during insert/delete column as after an UNDO setAttributes is
+   * called too early even before the column was undone
+   */
+  // WORK AROUND for "UNDO COLUMN WIDTH" problem (see JsonOperationConsumer for further changes)
+  private List<JSONArray> mColumnWidthCache = null;
+  /** OH PLEASE DELETE ME AFTER THE API WAS FIXED */
+  public void pushTableGrid(JSONArray tableGrid) {
+    if (mColumnWidthCache == null) {
+      mColumnWidthCache = new ArrayList<JSONArray>();
+    }
+    mColumnWidthCache.add(tableGrid);
+  }
+
+  private JSONArray mTablePositionOfColumnChange;
+
+  public void requireLaterWidthChange(JSONArray start) {
+    mTablePositionOfColumnChange = start;
+  }
+
+  public boolean isWidthChangeRequired() {
+    return mTablePositionOfColumnChange != null;
+  }
+
+  public void hasChangedWidth() {
+    mTablePositionOfColumnChange = null;
+  }
+
+  public JSONArray getPosition() {
+    return mTablePositionOfColumnChange;
+  }
+
+  public void pushTableGrid(List<Integer> columnWidths) {
+    if (columnWidths != null && !columnWidths.isEmpty()) {
+      this.pushTableGrid(new JSONArray(columnWidths));
+    }
+  }
+
+  public JSONArray popTableGrid() {
+    JSONArray previousColumnWidth = null;
+    if (mColumnWidthCache != null && mColumnWidthCache.size() > 0) {
+      previousColumnWidth = mColumnWidthCache.remove(mColumnWidthCache.size() - 1);
+      mTablePositionOfColumnChange = null;
+    }
+    return previousColumnWidth;
+  }
+
+  public void replaceLastTableGrid(JSONArray tableGrid) {
+    if (mColumnWidthCache == null) {
+      mColumnWidthCache = new ArrayList<JSONArray>();
+      mColumnWidthCache.add(tableGrid);
+    } else if (mColumnWidthCache.size() > 0) {
+      mColumnWidthCache.remove(mColumnWidthCache.size() - 1);
+    }
+    mColumnWidthCache.add(tableGrid);
   }
 }
