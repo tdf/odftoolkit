@@ -32,8 +32,6 @@ import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberAutomaticOrderAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberFormatSourceAttribute;
 
@@ -211,17 +209,6 @@ public class NumberDateStyleElement extends NumberDataStyleElementBase {
 	}
 
 	/**
-	 * Create child element {@odf.element number:text}.
-	 *
-	 * @return the element {@odf.element number:text}
-	 */
-	public NumberTextElement newNumberTextElement() {
-		NumberTextElement numberText = ((OdfFileDom) this.ownerDocument).newOdfElement(NumberTextElement.class);
-		this.appendChild(numberText);
-		return numberText;
-	}
-
-	/**
 	 * Create child element {@odf.element number:week-of-year}.
 	 *
 	 * @return the element {@odf.element number:week-of-year}
@@ -241,34 +228,6 @@ public class NumberDateStyleElement extends NumberDataStyleElementBase {
 		NumberYearElement numberYear = ((OdfFileDom) this.ownerDocument).newOdfElement(NumberYearElement.class);
 		this.appendChild(numberYear);
 		return numberYear;
-	}
-
-	/**
-	 * Create child element {@odf.element style:map}.
-	 *
-	 * @param styleApplyStyleNameValue  the <code>String</code> value of <code>StyleApplyStyleNameAttribute</code>, see {@odf.attribute  style:apply-style-name} at specification
-	 * @param styleConditionValue  the <code>String</code> value of <code>StyleConditionAttribute</code>, see {@odf.attribute  style:condition} at specification
-	 * @return the element {@odf.element style:map}
-	 */
-	 public StyleMapElement newStyleMapElement(String styleApplyStyleNameValue, String styleConditionValue) {
-		StyleMapElement styleMap = ((OdfFileDom) this.ownerDocument).newOdfElement(StyleMapElement.class);
-		styleMap.setStyleApplyStyleNameAttribute(styleApplyStyleNameValue);
-		styleMap.setStyleConditionAttribute(styleConditionValue);
-		this.appendChild(styleMap);
-		return styleMap;
-	}
-
-	/**
-	 * Create child element {@odf.element style:text-properties}.
-	 *
-	 * @param textDisplayValue  the <code>String</code> value of <code>TextDisplayAttribute</code>, see {@odf.attribute  text:display} at specification
-	 * @return the element {@odf.element style:text-properties}
-	 */
-	 public StyleTextPropertiesElement newStyleTextPropertiesElement(String textDisplayValue) {
-		StyleTextPropertiesElement styleTextProperties = ((OdfFileDom) this.ownerDocument).newOdfElement(StyleTextPropertiesElement.class);
-		styleTextProperties.setTextDisplayAttribute(textDisplayValue);
-		this.appendChild(styleTextProperties);
-		return styleTextProperties;
 	}
 
   /**

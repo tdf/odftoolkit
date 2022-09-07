@@ -30,10 +30,21 @@ import schema2template.grammar.PuzzlePieceSet;
 import schema2template.grammar.XMLModel;
 
 /**
- * Encapsulates the name of the java base class
+ * This calss encapsulates the name of the java base class, which is a Java super class where shared
+ * attributes and elements are being moved to. This class also offers functionality to find the
+ * common attributes and elements via getBaseElements() and getBaseAttributes(). The base class
+ * feature (its existence) is enabled by adding the attribute "base" one or more XML element named
+ * in the grammar-additions.xml The base attributes holds the name of the base class feature is
+ * stated like an XML node with a prefix. Like for the elements the prefix will become a subfolder
+ * within "org.odftoolkit.odfdom.dom.element" as the base functionality is being placed aside of the
+ * element class. The additional attribute "extends" for XML elements (and attributes) defines an
+ * additional super class, which will be added to the XML class or if base exists within the base
+ * class. The class path of the "extends" have to be a fully qualified Java package name, as the
+ * Class can be anywhere. All elements with the same base class have to have the same extends super
+ * class as all share these two as parent classes and there is no multiple inheritance in Java.
  *
- * <p>Convention: Unique key is the name of the baseClass. So name is used for compareTo(o),
- * equals(o) and hashCode().
+ * <p>Convention: Unique key is the hash of the name of the baseClass. This hash is used for
+ * compareTo(o) equals(o) and hashCode().
  */
 public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass> {
 
@@ -91,10 +102,25 @@ public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass> {
   public PuzzlePieceSet getBaseAttributes() {
     SortedSet<PuzzlePiece> attributes =
         new TreeSet<PuzzlePiece>(mChildElementsOfBaseClass.last().getAttributes());
-    for (PuzzlePiece subelement :
+    for (PuzzlePiece childElement :
         mChildElementsOfBaseClass.headSet(mChildElementsOfBaseClass.last())) {
-      attributes.retainAll(subelement.getAttributes());
+      attributes.retainAll(childElement.getAttributes());
     }
     return new PuzzlePieceSet(attributes);
+  }
+
+  /**
+   * Returns the element Definitions which are shared by all subclasses of this JavaBaseClass
+   *
+   * @return elements
+   */
+  public PuzzlePieceSet getBaseElements() {
+    SortedSet<PuzzlePiece> elements =
+        new TreeSet<PuzzlePiece>(mChildElementsOfBaseClass.last().getChildElements());
+    for (PuzzlePiece childElement :
+        mChildElementsOfBaseClass.headSet(mChildElementsOfBaseClass.last())) {
+      elements.retainAll(childElement.getChildElements());
+    }
+    return new PuzzlePieceSet(elements);
   }
 }
