@@ -32,8 +32,6 @@ import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberAutomaticOrderAttribute;
 
 /**
@@ -106,43 +104,6 @@ public class NumberCurrencyStyleElement extends NumberDataStyleElementBase {
 		NumberNumberElement numberNumber = ((OdfFileDom) this.ownerDocument).newOdfElement(NumberNumberElement.class);
 		this.appendChild(numberNumber);
 		return numberNumber;
-	}
-
-	/**
-	 * Create child element {@odf.element number:text}.
-	 *
-	 * @return the element {@odf.element number:text}
-	 */
-	public NumberTextElement newNumberTextElement() {
-		NumberTextElement numberText = ((OdfFileDom) this.ownerDocument).newOdfElement(NumberTextElement.class);
-		this.appendChild(numberText);
-		return numberText;
-	}
-
-	/**
-	 * Create child element {@odf.element style:map}.
-	 *
-	 * @param styleApplyStyleNameValue  the <code>String</code> value of <code>StyleApplyStyleNameAttribute</code>, see {@odf.attribute  style:apply-style-name} at specification
-	 * @param styleConditionValue  the <code>String</code> value of <code>StyleConditionAttribute</code>, see {@odf.attribute  style:condition} at specification
-	 * @return the element {@odf.element style:map}
-	 */
-	 public StyleMapElement newStyleMapElement(String styleApplyStyleNameValue, String styleConditionValue) {
-		StyleMapElement styleMap = ((OdfFileDom) this.ownerDocument).newOdfElement(StyleMapElement.class);
-		styleMap.setStyleApplyStyleNameAttribute(styleApplyStyleNameValue);
-		styleMap.setStyleConditionAttribute(styleConditionValue);
-		this.appendChild(styleMap);
-		return styleMap;
-	}
-
-	/**
-	 * Create child element {@odf.element style:text-properties}.
-	 *
-	 * @return the element {@odf.element style:text-properties}
-	 */
-	public StyleTextPropertiesElement newStyleTextPropertiesElement() {
-		StyleTextPropertiesElement styleTextProperties = ((OdfFileDom) this.ownerDocument).newOdfElement(StyleTextPropertiesElement.class);
-		this.appendChild(styleTextProperties);
-		return styleTextProperties;
 	}
 
   /**

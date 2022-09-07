@@ -33,7 +33,6 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
@@ -170,17 +169,6 @@ public class TextListLevelStyleImageElement extends TextListLevelStyleElementBas
 		OfficeBinaryDataElement officeBinaryData = ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeBinaryDataElement.class);
 		this.appendChild(officeBinaryData);
 		return officeBinaryData;
-	}
-
-	/**
-	 * Create child element {@odf.element style:list-level-properties}.
-	 *
-	 * @return the element {@odf.element style:list-level-properties}
-	 */
-	public StyleListLevelPropertiesElement newStyleListLevelPropertiesElement() {
-		StyleListLevelPropertiesElement styleListLevelProperties = ((OdfFileDom) this.ownerDocument).newOdfElement(StyleListLevelPropertiesElement.class);
-		this.appendChild(styleListLevelProperties);
-		return styleListLevelProperties;
 	}
 
   /**

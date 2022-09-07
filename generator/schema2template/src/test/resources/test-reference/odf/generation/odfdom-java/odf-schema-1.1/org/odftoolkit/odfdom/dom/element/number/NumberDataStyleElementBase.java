@@ -1,4 +1,4 @@
-/************************************************************************
+	/************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
@@ -33,6 +33,8 @@ import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleMapElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberCountryAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberLanguageAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberTitleAttribute;
@@ -46,7 +48,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleVolatileAttribute;
 /**
  * DOM implementation of OpenDocument base element
  *
- * This class can have any org.w3c.dom.Attribute attribute.
  */
 public abstract class NumberDataStyleElementBase extends DataStyleElement {
 
@@ -275,5 +276,42 @@ public abstract class NumberDataStyleElementBase extends DataStyleElement {
 		StyleVolatileAttribute attr = new StyleVolatileAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setBooleanValue(styleVolatileValue.booleanValue());
+	}
+
+	/**
+	 * Create child element {@odf.element number:text}.
+	 *
+	 * @return the element {@odf.element number:text}
+	 */
+	public NumberTextElement newNumberTextElement() {
+		NumberTextElement numberText = ((OdfFileDom) this.ownerDocument).newOdfElement(NumberTextElement.class);
+		this.appendChild(numberText);
+		return numberText;
+	}
+
+	/**
+	 * Create child element {@odf.element style:map}.
+	 *
+	 * @param styleApplyStyleNameValue  the <code>String</code> value of <code>StyleApplyStyleNameAttribute</code>, see {@odf.attribute  style:apply-style-name} at specification
+	 * @param styleConditionValue  the <code>String</code> value of <code>StyleConditionAttribute</code>, see {@odf.attribute  style:condition} at specification
+	 * @return the element {@odf.element style:map}
+	 */
+	 public StyleMapElement newStyleMapElement(String styleApplyStyleNameValue, String styleConditionValue) {
+		StyleMapElement styleMap = ((OdfFileDom) this.ownerDocument).newOdfElement(StyleMapElement.class);
+		styleMap.setStyleApplyStyleNameAttribute(styleApplyStyleNameValue);
+		styleMap.setStyleConditionAttribute(styleConditionValue);
+		this.appendChild(styleMap);
+		return styleMap;
+	}
+
+	/**
+	 * Create child element {@odf.element style:text-properties}.
+	 *
+	 * @return the element {@odf.element style:text-properties}
+	 */
+	public StyleTextPropertiesElement newStyleTextPropertiesElement() {
+		StyleTextPropertiesElement styleTextProperties = ((OdfFileDom) this.ownerDocument).newOdfElement(StyleTextPropertiesElement.class);
+		this.appendChild(styleTextProperties);
+		return styleTextProperties;
 	}
 }

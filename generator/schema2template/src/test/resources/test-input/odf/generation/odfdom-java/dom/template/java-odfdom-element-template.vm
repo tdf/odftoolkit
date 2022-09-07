@@ -31,25 +31,18 @@
 #set ($className = "${xmlModel.camelCase($element)}Element")
 ##
 ## Set child element and child attributes
-#set ($children = ${element.getChildElements().withoutMultiples()})
+#set ($childElements = ${element.getChildElements().withoutMultiples()})
 #set ($attributes = ${element.getAttributes().withoutMultiples()})
 ##
 ## BASE CLASS PROVIDED (START)
 ##...or configured base class overwriting the previous base settings
 #set ($base = ${codeModel.getBaseClassOf($element)})
 #if (${base})
-## Configured automatic generated base class. If so, remove all attributes defined in base class
+## Configured automatic generated base class. If so, remove all attributes and elemend shared/defined in base class
 #set ($superClassName = "${xmlModel.camelCase($base)}ElementBase")
 #set ($superClassPackageName = "org.odftoolkit.odfdom.dom.element.${base.getNamespacePrefix()}")
 #set ($attributes = $attributes.without(${base.getBaseAttributes()}))## remove the base attributes from this class
-#set ($baseElement = ${xmlModel.getElement($base.getQName())})
-#if ($baseElement)
-#set ($bAttributes = ${baseElement.getAttributes().withoutMultiples()})
-#foreach ($bAttribute in $bAttributes)
-#if (${baseElement.isMandatory($bAttribute)})
-#end
-#end
-#end
+#set ($childElements = $childElements.without(${base.getBaseElements()}))## remove the base elements from this class
 #end
 ## BASE CLASS PROVIDED (END)
 ##
@@ -130,21 +123,26 @@ import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-#if (${children.containsName("*")})
-#set ($anychild = true)
+### ELEMENT IMPORTS (start)
+#if (${childElements.containsName("*")})
+#set ($anyelement = true)
 #else
-#set ($anychild = false)## if not explicitly set to false, later condition will be postive :/
+#set ($anyelement = false)## if not explicitly set to false, later condition will be postive :/
 #end
-#foreach ($childElement in $children)
+#foreach ($childElement in $childElements)
 #if (${childElement} != "*")
 #set ($childNamespacePrefix = ${childElement.getNamespacePrefix()})
 #set ($childClassName = "${xmlModel.camelCase($childElement)}Element")
+#if ($childNamespacePrefix)## if with prefix
 #if ($childNamespacePrefix != $namespacePrefix)
 import org.odftoolkit.odfdom.dom.element.${childNamespacePrefix}.$childClassName;
 #end
+#else
+import org.odftoolkit.odfdom.dom.element.$childClassName;
 #end
 #end
-##
+#end### ELEMENT IMPORTS (end)
+### ATTRIBUTE IMPORTS (start)
 #if (${attributes.containsName("*")})
 #set ($anyattribute = true)
 #else
@@ -154,13 +152,14 @@ import org.odftoolkit.odfdom.dom.element.${childNamespacePrefix}.$childClassName
 #if (${childAttribute.getLocalName()} != "*")
 #set ($childNamespacePrefix = ${childAttribute.getNamespacePrefix()})
 #set ($childClassName = "${xmlModel.camelCase($childAttribute)}Attribute")
-#if($childNamespacePrefix)
+#if ($childNamespacePrefix)## if with prefix
+## all attributes are being written as in a different package than elements
 import org.odftoolkit.odfdom.dom.attribute.${childNamespacePrefix}.$childClassName;
 #else
 import org.odftoolkit.odfdom.dom.attribute.$childClassName;
 #end
 #end
-#end
+#end### ATTRIBUTE IMPORTS (END)
 ## evaluating super class for class "extends"
 #if ($base)
 ## but base base class
@@ -189,7 +188,7 @@ import ${superClassPackageName}.${superClassName};
 /**
  * DOM implementation of OpenDocument element  {@odf.element ${contextNode}}.
  *
-#if ($anychild)
+#if ($anyelement)
  * This class can have any org.w3c.dom.Element child element.
 #end
 #if ($anyattribute)
@@ -352,7 +351,7 @@ public class $className extends $superClassName {
 ##  Methods for child element creation
 ## ---------------------------------------------------
 ##
-#foreach($ch in $children)
+#foreach($ch in $childElements)
 #if ($ch != "*")
 #set ($child = ${ch.withMultiples()})
 #set ($cClassName = "${xmlModel.camelCase($child)}Element")

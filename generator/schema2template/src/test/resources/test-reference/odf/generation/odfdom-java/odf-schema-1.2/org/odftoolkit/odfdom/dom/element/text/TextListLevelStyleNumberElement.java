@@ -32,7 +32,6 @@ import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNumFormatAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleNumLetterSyncAttribute;
@@ -236,17 +235,6 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
 		TextStyleNameAttribute attr = new TextStyleNameAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
 		attr.setValue(textStyleNameValue);
-	}
-
-	/**
-	 * Create child element {@odf.element style:list-level-properties}.
-	 *
-	 * @return the element {@odf.element style:list-level-properties}
-	 */
-	public StyleListLevelPropertiesElement newStyleListLevelPropertiesElement() {
-		StyleListLevelPropertiesElement styleListLevelProperties = ((OdfFileDom) this.ownerDocument).newOdfElement(StyleListLevelPropertiesElement.class);
-		this.appendChild(styleListLevelProperties);
-		return styleListLevelProperties;
 	}
 
 	/**

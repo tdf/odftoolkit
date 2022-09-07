@@ -1,4 +1,4 @@
-/************************************************************************
+	/************************************************************************
  *
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER
  *
@@ -50,7 +50,6 @@ import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 /**
  * DOM implementation of OpenDocument base element
  *
- * This class can have any org.w3c.dom.Attribute attribute.
  */
 public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
 
