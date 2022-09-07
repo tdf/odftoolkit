@@ -37,7 +37,7 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
  * DOM implementation of OpenDocument element  {@odf.element number:text-style}.
  *
  */
-public class NumberTextStyleElement extends NumberDataStyleElementBase {
+public abstract class NumberTextStyleElement extends NumberDataStyleElementBase {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.NUMBER, "text-style");
 

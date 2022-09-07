@@ -180,6 +180,11 @@ import ${superClassPackageName}.${superClassName};
 #end
 #end
 
+## Work around where once none-generated number style functionality, e.g. OdfCurrencyStyle.java is inheriting from generated class (instead the other way around). Keeping it due to many API changes otherwise.
+#set ($abstract="")
+#if ($contextNode == "number:boolean-style" || $contextNode == "number:currency-style" || $contextNode == "number:date-style" || $contextNode == "number:number-style" || $contextNode == "number:percentage-style" || $contextNode == "number:text-style" || $contextNode == "number:time-style")
+#set ($abstract="abstract ")
+#end
 ##
 ## ---------------------------------------------------
 ##  Class
@@ -195,7 +200,7 @@ import ${superClassPackageName}.${superClassName};
  * This class can have any org.w3c.dom.Attribute attribute.
 #end
  */
-public class $className extends $superClassName {
+public ${abstract}class $className extends $superClassName {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.${namespacePrefix.toUpperCase()}, "${element.getLocalName()}");
 

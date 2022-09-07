@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberFormatSourceAttribute;
  * DOM implementation of OpenDocument element  {@odf.element number:date-style}.
  *
  */
-public class NumberDateStyleElement extends NumberDataStyleElementBase {
+public abstract class NumberDateStyleElement extends NumberDataStyleElementBase {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.NUMBER, "date-style");
 
