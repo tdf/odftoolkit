@@ -31,7 +31,7 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
 /**
- * This DOM container can be used for all ODF element with an text:style-name.
+ * DOM container to be used for all ODF elements containing "stylable text"
  *
  * <p>All text handling is capsulated into this class.
  *
@@ -46,6 +46,10 @@ public abstract class TextContainingElement extends OdfStylableElement {
    * Create the instance of <code>TextParagraphElementBase</code>
    *
    * @param ownerDoc The type is <code>OdfFileDom</code>
+   * @param elementName name of the stylable element containing text
+   * @param styleFamily the style family of the element
+   * @param styleAttrName e.g. depends on the related @style:family for <text:p> it
+   *     is @text:style-name
    */
   public TextContainingElement(
       OdfFileDom ownerDoc, OdfName elementName, OdfStyleFamily styleFamily, OdfName styleAttrName) {
@@ -71,9 +75,9 @@ public abstract class TextContainingElement extends OdfStylableElement {
   }
 
   /**
-   * @param outSelection as the end position was prior just given for a merge the an outer selection
-   *     will be added. Earlier added selection as similar positions are therefore called "inner"
-   *     selections and do have a higher priority (as inner overwrites outer)
+   * @param outerSelection as the end position was prior just given for a merge the an outer
+   *     selection will be added. Earlier added selection as similar positions are therefore called
+   *     "inner" selections and do have a higher priority (as inner overwrites outer)
    * @return the element that is being kept (sometimes the element of the given selection had to be
    *     dismissed, sometimes even the parent, when an empty element was deleted).
    */
