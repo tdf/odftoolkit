@@ -39,7 +39,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberTruncateOnOverflowAttrib
  * DOM implementation of OpenDocument element  {@odf.element number:time-style}.
  *
  */
-public class NumberTimeStyleElement extends NumberDataStyleElementBase {
+public abstract class NumberTimeStyleElement extends NumberDataStyleElementBase {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.NUMBER, "time-style");
 
