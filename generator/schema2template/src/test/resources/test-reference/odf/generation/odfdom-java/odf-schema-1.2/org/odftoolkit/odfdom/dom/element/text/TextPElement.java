@@ -85,4 +85,10 @@ public class TextPElement extends TextParagraphElementBase {
 			this.appendChild(this.getOwnerDocument().createTextNode(content));
 		}
 	 }
+
+  @Override
+  public boolean isComponentRoot() {
+    return true;
+  }
+
 }

@@ -1,0 +1,16 @@
+## see https://velocity.apache.org/engine/2.3/user-guide.html#velocimacros
+## For highlighting use VisualStudioCode plugin - https://marketplace.visualstudio.com/items?itemName=Quidgest.vscode-velocity
+## Using .vm file suffix instead of .vtl suffix for the above plugin
+##
+##
+## Add is Component Root functionality
+#macro( add_isComponentRoot_Method )
+
+/**
+  * Marks this element as the root of a semantic component known to the user.
+  */
+  @Override
+  public boolean isComponentRoot() {
+    return true;
+  }
+#end

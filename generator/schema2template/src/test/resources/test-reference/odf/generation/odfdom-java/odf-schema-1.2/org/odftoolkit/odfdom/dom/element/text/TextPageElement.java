@@ -101,4 +101,10 @@ public class TextPageElement extends OdfElement {
 			visitor.visit(this);
 		}
 	}
+
+  @Override
+  public boolean isComponentRoot() {
+    return true;
+  }
+
 }

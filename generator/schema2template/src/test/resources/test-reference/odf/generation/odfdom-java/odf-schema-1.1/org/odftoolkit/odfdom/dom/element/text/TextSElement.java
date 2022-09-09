@@ -99,4 +99,10 @@ public class TextSElement extends OdfElement {
 			visitor.visit(this);
 		}
 	}
+
+  @Override
+  public boolean isComponentRoot() {
+    return true;
+  }
+
 }
