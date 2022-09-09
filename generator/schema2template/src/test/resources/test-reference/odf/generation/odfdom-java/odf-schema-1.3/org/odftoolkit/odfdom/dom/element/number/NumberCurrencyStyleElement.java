@@ -38,7 +38,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberAutomaticOrderAttribute;
  * DOM implementation of OpenDocument element  {@odf.element number:currency-style}.
  *
  */
-public class NumberCurrencyStyleElement extends NumberDataStyleElementBase {
+public abstract class NumberCurrencyStyleElement extends NumberDataStyleElementBase {
 
 	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.NUMBER, "currency-style");
 
