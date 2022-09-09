@@ -58,6 +58,13 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
   private boolean inAttribute = false;
   private Locator mLocator;
 
+  /**
+   * Every XML element that represents the root of a semantic entity (even consisting of multiple
+   * XML elements like &lt;table:table&gt; will be annotated by this. The string is the name known
+   * by user (semantic).
+   */
+  private Map<String, String> mComponentRootElementNames;
+
   private Map<String, String> mElementSuperClassNames;
   private Map<String, String> mElementBaseNames;
   private Map<String, List<String>> mElementStyleFamilies;
@@ -71,11 +78,13 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
   public GrammarAdditionsFileHandler(
       Map<String, String> elementBaseNames,
       Map<String, String> elementSuperClassNames,
+      Map<String, String> componentRootElementNames,
       Map<String, Map<String, String>> attributeDefaultMap,
       Map<String, List<String>> elementNameToFamilyMap,
       Map<String, String[]> datatypeValueConversion) {
     mElementBaseNames = elementBaseNames;
     mElementSuperClassNames = elementSuperClassNames;
+    mComponentRootElementNames = componentRootElementNames;
     mAttributeDefaults = attributeDefaultMap;
     mDatatypeValueConversion = datatypeValueConversion;
     mElementStyleFamilies = elementNameToFamilyMap;
@@ -113,6 +122,10 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
       if (families.size() > 0) {
         mElementStyleFamilies.put(nodeName, families);
       }
+    }
+    String componentRooTof = attrs.getValue("component-root-of");
+    if (componentRooTof != null && componentRooTof.length() > 0) {
+      mComponentRootElementNames.put(nodeName, componentRooTof);
     }
   }
 
@@ -236,6 +249,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
       File cf,
       Map<String, String> elementBaseNames,
       Map<String, String> elementSuperClassNamesNames,
+      Map<String, String> componentRootElementNames,
       Map<String, Map<String, String>> attributeDefaults,
       Map<String, List<String>> elementNameToFamilyMap,
       Map<String, String[]> datatypeValueConversion)
@@ -247,6 +261,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
         new GrammarAdditionsFileHandler(
             elementBaseNames,
             elementSuperClassNamesNames,
+            componentRootElementNames,
             attributeDefaults,
             elementNameToFamilyMap,
             datatypeValueConversion));

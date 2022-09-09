@@ -176,4 +176,10 @@ public class TableTableCellElement extends TableTableCellElementBase {
 			visitor.visit(this);
 		}
 	}
+
+  @Override
+  public boolean isComponentRoot() {
+    return true;
+  }
+
 }

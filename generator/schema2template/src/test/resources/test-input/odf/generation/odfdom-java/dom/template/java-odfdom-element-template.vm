@@ -530,4 +530,7 @@ public ${abstract}class $className extends $superClassName {
 		}
 	 }
 #end
+#if ($odfModel.isRootOfComponent($element))
+#add_isComponentRoot_Method
+#end
 }

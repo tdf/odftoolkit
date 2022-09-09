@@ -42,6 +42,8 @@ import schema2template.template.SourceCodeBaseClass;
 public class OdfModel {
 
   private final Map<String, List<String>> mNameToFamiliesMap;
+
+  private final Map<String, String> mComponentRootElementNames;
   /**
    * The attribute name is the key to another map having the default as value with element parent as
    * key
@@ -55,9 +57,11 @@ public class OdfModel {
 
   public OdfModel(
       Map<String, List<String>> nameToFamiliesMap,
+      Map<String, String> componentRootElementNames,
       Map<String, Map<String, String>> attributeDefaults,
       XMLModel xmlModel) {
     mNameToFamiliesMap = nameToFamiliesMap;
+    mComponentRootElementNames = componentRootElementNames;
     mAttributeDefaults = attributeDefaults;
     mStyleFamilyToPropertiesMap =
         new OdfFamilyPropertiesPatternMatcher(xmlModel.getGrammar()).getFamilyProperties();
@@ -190,5 +194,13 @@ public class OdfModel {
    */
   public Map<String, List<String>> getStyleFamilyPropertiesMap() {
     return mStyleFamilyToPropertiesMap;
+  }
+
+  /**
+   * The name of all elements that are the beginning of a semantic user component, which is usually
+   * added/deleted by user aligned with the common user given name!
+   */
+  public boolean isRootOfComponent(String qualifiedElementName) {
+    return mComponentRootElementNames.containsKey(qualifiedElementName);
   }
 }

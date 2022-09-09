@@ -408,4 +408,10 @@ public class TableTableElement extends OdfStylableElement {
 			visitor.visit(this);
 		}
 	}
+
+  @Override
+  public boolean isComponentRoot() {
+    return true;
+  }
+
 }

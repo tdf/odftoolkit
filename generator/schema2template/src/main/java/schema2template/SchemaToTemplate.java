@@ -56,6 +56,9 @@ public class SchemaToTemplate {
   private static final Logger LOG = Logger.getLogger(SchemaToTemplate.class.getName());
   public static final Boolean DEBUG = Boolean.FALSE;
 
+  /** This optional Velocity Macro file is loaded from the template directory */
+  private static final String VELOCITY_MACRO_FILE = "velocity-macros.vm";
+
   private SchemaToTemplate() {}
 
   /**
@@ -117,7 +120,6 @@ public class SchemaToTemplate {
       } else {
         modelHistory = null;
       }
-
       startGeneration(
           templateBaseDir,
           mainTemplateFileName,
@@ -148,6 +150,12 @@ public class SchemaToTemplate {
       // Manual added Java specific info - extension class for inheritance added base or generated
       // node class
       Map<String, String> elementSuperClassNameMap = new HashMap<>();
+
+      /**
+       * Marks the element that start a (possible larger) semantic component (e.g.
+       * &lt;table:table&gt; for table
+       */
+      Map<String, String> componentRootElementNames = new HashMap<>();
       // Manual added ODF specific info - style family mapping
       Map<String, List<String>> elementNameToFamilyMap = new HashMap<>();
       // 2DO - still existent? -- Manual added Java specific info - mapping ODF datatype to Java
@@ -158,11 +166,14 @@ public class SchemaToTemplate {
           new File(grammarAdditionsFilePath),
           elementToBaseNameMap,
           elementSuperClassNameMap,
+          componentRootElementNames,
           attributeDefaultMap,
           elementNameToFamilyMap,
           datatypeValueAndConversionMap);
       // odfConstants
-      OdfModel odfModel = new OdfModel(elementNameToFamilyMap, attributeDefaultMap, xmlModel);
+      OdfModel odfModel =
+          new OdfModel(
+              elementNameToFamilyMap, componentRootElementNames, attributeDefaultMap, xmlModel);
       context.put("odfModel", odfModel);
 
       // Needed for the base classes - common attributes are being moved into the base classes
@@ -201,6 +212,11 @@ public class SchemaToTemplate {
     // https://velocity.apache.org/engine/2.0/user-guide.html#strict-reference-mode (works in 2.3,
     // but is no longer documented)
     ve.setProperty(RuntimeConstants.RUNTIME_REFERENCES_STRICT, "true");
+    if (VELOCITY_MACRO_FILE != null
+        && !VELOCITY_MACRO_FILE.isEmpty()
+        && Paths.get(templateBaseDir + File.separator + VELOCITY_MACRO_FILE).toFile().exists()) {
+      ve.setProperty(RuntimeConstants.VM_LIBRARY, VELOCITY_MACRO_FILE);
+    }
     ve.init();
     generateFileCreationList(ve, templateFileName, targetDirPath, targetFileName, context);
     LOG.info("file-creation-list.xml has been created!");
