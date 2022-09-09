@@ -2086,4 +2086,27 @@ public class TextMetaElement extends OdfElement {
 			this.appendChild(this.getOwnerDocument().createTextNode(content));
 		}
 	 }
+
+	/**
+	* Replaces all content with given text content. Only elements which are allowed to have text content offer this method.
+	*
+	* @param new text content to replace the existing children (or removes all if null)
+	*/
+	@Override
+	public void setTextContent(String content) {
+		super.setTextContent(content);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
+	}
+
+	@Override
+	protected void onRemoveNode() {
+		super.onRemoveNode();
+		((OdfFileDom) this.ownerDocument).getInContentMetadataCache().remove(this);
+	}
+
+	@Override
+	protected void onInsertNode() {
+		super.onInsertNode();
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
+	}
 }

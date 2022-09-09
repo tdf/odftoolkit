@@ -123,9 +123,9 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
         mElementStyleFamilies.put(nodeName, families);
       }
     }
-    String componentRooTof = attrs.getValue("component-root-of");
-    if (componentRooTof != null && componentRooTof.length() > 0) {
-      mComponentRootElementNames.put(nodeName, componentRooTof);
+    String componentRoot = attrs.getValue("root-of-component");
+    if (componentRoot != null && componentRoot.length() > 0) {
+      mComponentRootElementNames.put(nodeName, componentRoot);
     }
   }
 

@@ -74,12 +74,12 @@
     <element name="office:annotation" base="draw:shape" family="draw:graphic,presentation:presentation"/>
     <element name="text:alphabetical-index-entry-template" family="text:paragraph"/>
     <element name="text:bibliography-entry-template" family="text:paragraph"/>
-    <element name="text:h" component-root-of="heading" base="text:paragraph" extends="org.odftoolkit.odfdom.changes.TextContainingElement" family="text:paragraph"/>
+    <element name="text:h" root-of-component="heading" base="text:paragraph" extends="org.odftoolkit.odfdom.changes.TextContainingElement" family="text:paragraph"/>
     <element name="text:illustration-index-entry-template" family="text:paragraph"/>
     <element name="text:index-source-style" family="text:paragraph"/>
     <element name="text:index-title-template" family="text:paragraph"/>
     <element name="text:object-index-entry-template" family="text:paragraph"/>
-    <element name="text:p" component-root-of="paragraph" extends="org.odftoolkit.odfdom.changes.TextContainingElement" base="text:paragraph" family="text:paragraph"/>
+    <element name="text:p" root-of-component="paragraph" extends="org.odftoolkit.odfdom.changes.TextContainingElement" base="text:paragraph" family="text:paragraph"/>
     <element name="text:table-index-entry-template" family="text:paragraph"/>
     <element name="text:table-of-content-entry-template" family="text:paragraph"/>
     <element name="text:user-index-entry-template" family="text:paragraph"/>
@@ -90,17 +90,17 @@
     <element name="text:illustration-index" family="text:section"/>
     <element name="text:index-title" family="text:section"/>
     <element name="text:object-index" family="text:section"/>
-    <element name="text:page" component-root-of="page" />
+    <element name="text:page" root-of-component="page" />
     <element name="text:section" family="text:section"/>
-    <element name="text:s" component-root-of="space"/>
+    <element name="text:s" root-of-component="space"/>
     <element name="text:table-index" family="text:section"/>
     <element name="text:table-of-content" family="text:section"/>
     <element name="text:user-index" family="text:section"/>
-    <element name="table:table" component-root-of="table" family="table:table"/>
+    <element name="table:table" root-of-component="table" family="table:table"/>
     <element name="table:covered-table-cell" base="table:table-cell" family="table:table-cell"/>
-    <element name="table:table-cell" component-root-of="cell"  base="table:table-cell" family="table:table-cell"/>
+    <element name="table:table-cell" root-of-component="cell"  base="table:table-cell" family="table:table-cell"/>
     <element name="table:table-column" family="table:table-column"/>
-    <element name="table:table-row" component-root-of="row" family="table:table-row"/>
+    <element name="table:table-row" root-of-component="row" family="table:table-row"/>
     <element name="text:a" family="text:text"/>
     <element name="text:index-entry-bibliography" family="text:text"/>
     <element name="text:index-entry-chapter" family="text:text"/>
@@ -123,8 +123,8 @@
     <element name="table:odd-columns" family="table:table-cell"/>
     <element name="table:odd-rows" family="table:table-cell"/>
     <element name="style:drop-cap" family="text:text"/>
-    <element name="text:line-break" component-root-of="line-break" />
-    <element name="text:tab" component-root-of="tabulation" />
+    <element name="text:line-break" root-of-component="line-break" />
+    <element name="text:tab" root-of-component="tabulation" />
     <element name="text:linenumbering-configuration" family="text:text"/>
     
     <!-- does not exist as element only as baseclass -->
