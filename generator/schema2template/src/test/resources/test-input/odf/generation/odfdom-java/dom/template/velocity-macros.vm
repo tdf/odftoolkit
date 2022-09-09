@@ -6,9 +6,6 @@
 ## Add is Component Root functionality
 #macro( add_isComponentRoot_Method )
 
-/**
-  * Marks this element as the root of a semantic component known to the user.
-  */
   @Override
   public boolean isComponentRoot() {
     return true;

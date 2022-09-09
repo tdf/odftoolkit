@@ -41,8 +41,10 @@
 ## Configured automatic generated base class. If so, remove all attributes and elemend shared/defined in base class
 #set ($superClassName = "${xmlModel.camelCase($base)}ElementBase")
 #set ($superClassPackageName = "org.odftoolkit.odfdom.dom.element.${base.getNamespacePrefix()}")
-#set ($attributes = $attributes.without(${base.getBaseAttributes()}))## remove the base attributes from this class
+#set ($remainingAttributes = $attributes.without(${base.getBaseAttributes()}))## remove the base attributes from this class
 #set ($childElements = $childElements.without(${base.getBaseElements()}))## remove the base elements from this class
+#else
+#set ($remainingAttributes = $attributes )
 #end
 ## BASE CLASS PROVIDED (END)
 ##
@@ -87,7 +89,7 @@
 ##
 ## Test if this element has mandatory (non optional) attributes
 #set ($hasMandatoryAttr = false)
-#foreach ($attribute in $attributes)
+#foreach ($attribute in $remainingAttributes)
 #if (${element.isMandatory($attribute)})
 #set ($hasMandatoryAttr = true)
 #set ($mandatoryAttr = $attribute)
@@ -143,17 +145,17 @@ import org.odftoolkit.odfdom.dom.element.$childClassName;
 #end
 #end### ELEMENT IMPORTS (end)
 ### ATTRIBUTE IMPORTS (start)
-#if (${attributes.containsName("*")})
+#if (${remainingAttributes.containsName("*")})
 #set ($anyattribute = true)
 #else
 #set ($anyattribute = false)## if not explicitly set to false, later condition will be postive :/
 #end
-#foreach ($childAttribute in $attributes)
+#foreach ($childAttribute in $remainingAttributes)
 #if (${childAttribute.getLocalName()} != "*")
 #set ($childNamespacePrefix = ${childAttribute.getNamespacePrefix()})
 #set ($childClassName = "${xmlModel.camelCase($childAttribute)}Attribute")
 #if ($childNamespacePrefix)## if with prefix
-## all attributes are being written as in a different package than elements
+## all remainingAttributes are being written as in a different package than elements
 import org.odftoolkit.odfdom.dom.attribute.${childNamespacePrefix}.$childClassName;
 #else
 import org.odftoolkit.odfdom.dom.attribute.$childClassName;
@@ -229,7 +231,7 @@ public ${abstract}class $className extends $superClassName {
 ##  Only for base = styleproperties
 ## ---------------------------------------------------
 #if (${codeModel.getSuperClass($contextNode)} == "org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase")
-#foreach ($attribute in $attributes)
+#foreach ($attribute in $remainingAttributes)
 #if ($attribute != "*")
 #set($propertyName = ${attribute.getLocalName()})
 #if (${element.getLocalName()}=="graphic-properties" && $propertyName =="shadow")
@@ -252,7 +254,7 @@ public ${abstract}class $className extends $superClassName {
 ##  Attribute getters and setters
 ## ---------------------------------------------------
 ##
-#foreach ($attr in $attributes)
+#foreach ($attr in $remainingAttributes)
 #set($attri = ${xmlModel.getAttribute($attr.getQName())})
 #set ($valueObject = "String")
 #set ($simpleValue = "")
@@ -529,6 +531,33 @@ public ${abstract}class $className extends $superClassName {
 			this.appendChild(this.getOwnerDocument().createTextNode(content));
 		}
 	 }
+#if ($attributes.containsName("xhtml:content"))## in this case there might be RDF in-content metadata
+
+	/**
+	* Replaces all content with given text content. Only elements which are allowed to have text content offer this method.
+	*
+	* @param new text content to replace the existing children (or removes all if null)
+	*/
+	@Override
+	public void setTextContent(String content) {
+		super.setTextContent(content);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
+	}
+#end
+#end
+#if ($attributes.containsName("xhtml:content"))## in this case there might be RDF in-content metadata
+
+	@Override
+	protected void onRemoveNode() {
+		super.onRemoveNode();
+		((OdfFileDom) this.ownerDocument).getInContentMetadataCache().remove(this);
+	}
+
+	@Override
+	protected void onInsertNode() {
+		super.onInsertNode();
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
+	}
 #end
 #if ($odfModel.isRootOfComponent($element))
 #add_isComponentRoot_Method

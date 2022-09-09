@@ -226,4 +226,16 @@ public class TextBookmarkStartElement extends OdfElement {
 			visitor.visit(this);
 		}
 	}
+
+	@Override
+	protected void onRemoveNode() {
+		super.onRemoveNode();
+		((OdfFileDom) this.ownerDocument).getInContentMetadataCache().remove(this);
+	}
+
+	@Override
+	protected void onInsertNode() {
+		super.onInsertNode();
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
+	}
 }

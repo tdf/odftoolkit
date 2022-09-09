@@ -177,6 +177,18 @@ public class TableTableCellElement extends TableTableCellElementBase {
 		}
 	}
 
+	@Override
+	protected void onRemoveNode() {
+		super.onRemoveNode();
+		((OdfFileDom) this.ownerDocument).getInContentMetadataCache().remove(this);
+	}
+
+	@Override
+	protected void onInsertNode() {
+		super.onInsertNode();
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
+	}
+
   @Override
   public boolean isComponentRoot() {
     return true;
