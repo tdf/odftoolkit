@@ -69,7 +69,7 @@ public class DbDataSourceSettingElement extends OdfElement {
 	 */
 	public Boolean getDbDataSourceSettingIsListAttribute() {
 		DbDataSourceSettingIsListAttribute attr = (DbDataSourceSettingIsListAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "data-source-setting-is-list");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

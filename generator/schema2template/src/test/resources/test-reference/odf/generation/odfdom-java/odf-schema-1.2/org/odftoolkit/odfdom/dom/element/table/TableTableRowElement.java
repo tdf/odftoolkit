@@ -29,11 +29,13 @@ package org.odftoolkit.odfdom.dom.element.table;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.w3c.dom.Node;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDefaultCellStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableNumberRowsRepeatedAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableStyleNameAttribute;
@@ -97,7 +99,7 @@ public class TableTableRowElement extends OdfStylableElement {
 	 */
 	public Integer getTableNumberRowsRepeatedAttribute() {
 		TableNumberRowsRepeatedAttribute attr = (TableNumberRowsRepeatedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "number-rows-repeated");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(TableNumberRowsRepeatedAttribute.DEFAULT_VALUE);
@@ -236,5 +238,4 @@ public class TableTableRowElement extends OdfStylableElement {
   public boolean isComponentRoot() {
     return true;
   }
-
 }

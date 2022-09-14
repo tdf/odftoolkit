@@ -95,7 +95,7 @@ public class TableDatabaseSourceSqlElement extends OdfElement {
 	 */
 	public Boolean getTableParseSqlStatementAttribute() {
 		TableParseSqlStatementAttribute attr = (TableParseSqlStatementAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "parse-sql-statement");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableParseSqlStatementAttribute.DEFAULT_VALUE);

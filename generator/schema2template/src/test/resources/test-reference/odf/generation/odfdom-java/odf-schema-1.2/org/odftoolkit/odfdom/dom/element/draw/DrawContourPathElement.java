@@ -73,7 +73,7 @@ public class DrawContourPathElement extends OdfElement {
 	 */
 	public Boolean getDrawRecreateOnEditAttribute() {
 		DrawRecreateOnEditAttribute attr = (DrawRecreateOnEditAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "recreate-on-edit");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -149,7 +149,7 @@ public class DrawContourPathElement extends OdfElement {
 	 */
 	public Integer getSvgViewBoxAttribute() {
 		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "viewBox");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

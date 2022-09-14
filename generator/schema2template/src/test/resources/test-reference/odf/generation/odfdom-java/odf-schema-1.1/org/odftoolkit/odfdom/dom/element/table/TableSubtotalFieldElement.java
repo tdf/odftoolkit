@@ -70,7 +70,7 @@ public class TableSubtotalFieldElement extends OdfElement {
 	 */
 	public Integer getTableFieldNumberAttribute() {
 		TableFieldNumberAttribute attr = (TableFieldNumberAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "field-number");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

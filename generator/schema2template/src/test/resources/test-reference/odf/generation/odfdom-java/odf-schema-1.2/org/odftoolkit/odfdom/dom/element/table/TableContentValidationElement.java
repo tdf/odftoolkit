@@ -72,7 +72,7 @@ public class TableContentValidationElement extends OdfElement {
 	 */
 	public Boolean getTableAllowEmptyCellAttribute() {
 		TableAllowEmptyCellAttribute attr = (TableAllowEmptyCellAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "allow-empty-cell");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableAllowEmptyCellAttribute.DEFAULT_VALUE);

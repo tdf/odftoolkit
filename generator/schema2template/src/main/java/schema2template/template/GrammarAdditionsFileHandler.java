@@ -49,7 +49,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
   // work-around for an element name (key) for attributes with default value not having specified a
   // parent element
   private static final String ALL_ELEMENTS = "*";
-  private boolean inConfig = false;
+  private boolean inGrammarAdditions = false;
   private boolean inElements = false;
   private boolean inElement = false;
   private boolean inDatatypes = false;
@@ -65,6 +65,8 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
    */
   private Map<String, String> mComponentRootElementNames;
 
+  private Set<String> mRepetitionAttributeNames;
+
   private Map<String, String> mElementSuperClassNames;
   private Map<String, String> mElementBaseNames;
   private Map<String, List<String>> mElementStyleFamilies;
@@ -79,12 +81,14 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
       Map<String, String> elementBaseNames,
       Map<String, String> elementSuperClassNames,
       Map<String, String> componentRootElementNames,
+      Set<String> repetitionAttributeNames,
       Map<String, Map<String, String>> attributeDefaultMap,
       Map<String, List<String>> elementNameToFamilyMap,
       Map<String, String[]> datatypeValueConversion) {
     mElementBaseNames = elementBaseNames;
     mElementSuperClassNames = elementSuperClassNames;
     mComponentRootElementNames = componentRootElementNames;
+    mRepetitionAttributeNames = repetitionAttributeNames;
     mAttributeDefaults = attributeDefaultMap;
     mDatatypeValueConversion = datatypeValueConversion;
     mElementStyleFamilies = elementNameToFamilyMap;
@@ -92,7 +96,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
     mProcessedDatatypes = new HashSet<String>();
   }
 
-  private void readElementConfig(Attributes attrs) throws SAXException {
+  private void readElementSettings(Attributes attrs) throws SAXException {
     String nodeName = attrs.getValue("name");
     if (nodeName == null) {
       throw new SAXException("Invalid element line " + mLocator.getLineNumber());
@@ -129,7 +133,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
     }
   }
 
-  private void createDatatypeConfig(Attributes attrs) throws SAXException {
+  private void readDatatypeSettings(Attributes attrs) throws SAXException {
     String attrName = attrs.getValue("name");
     if (attrName == null) {
       throw new SAXException("Invalid datatype line " + mLocator.getLineNumber());
@@ -144,7 +148,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
     mDatatypeValueConversion.put(attrName, tuple);
   }
 
-  private void createAttributeConfig(Attributes attrs) throws SAXException {
+  private void readAttributeSettings(Attributes attrs) throws SAXException {
     String attrName = attrs.getValue("name");
     if (attrName == null) {
       throw new SAXException("Invalid attribute line " + mLocator.getLineNumber());
@@ -161,40 +165,45 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
       elementName = ALL_ELEMENTS;
     }
     defaultValueByParentElement.put(elementName, defaultValue);
+
+    String repetition = attrs.getValue("repetition");
+    if (repetition != null && repetition.length() > 0 && Boolean.valueOf(repetition)) {
+      mRepetitionAttributeNames.add(attrName);
+    }
   }
 
   @Override
   public void startElement(String uri, String localName, String qName, Attributes attributes)
       throws SAXException {
-    if (qName.equals("config") && !inConfig) {
-      inConfig = true;
+    if (qName.equals("grammar-additions") && !inGrammarAdditions) {
+      inGrammarAdditions = true;
       return;
     }
-    if (qName.equals("elements") && inConfig && !inElements) {
+    if (qName.equals("elements") && inGrammarAdditions && !inElements) {
       inElements = true;
       return;
     }
     if (qName.equals("element") && inElements && !inElement) {
       inElement = true;
-      readElementConfig(attributes);
+      readElementSettings(attributes);
       return;
     }
-    if (qName.equals("attributes") && inConfig && !inAttributes) {
+    if (qName.equals("attributes") && inGrammarAdditions && !inAttributes) {
       inAttributes = true;
       return;
     }
     if (qName.equals("attribute") && inAttributes && !inAttribute) {
       inAttribute = true;
-      createAttributeConfig(attributes);
+      readAttributeSettings(attributes);
       return;
     }
-    if (qName.equals("data-types") && inConfig && !inDatatypes) {
+    if (qName.equals("data-types") && inGrammarAdditions && !inDatatypes) {
       inDatatypes = true;
       return;
     }
     if (qName.equals("data") && inDatatypes && !inData) {
       inData = true;
-      createDatatypeConfig(attributes);
+      readDatatypeSettings(attributes);
       return;
     }
 
@@ -203,8 +212,8 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
 
   @Override
   public void endElement(String uri, String localName, String qName) throws SAXException {
-    if (qName.equals("config") && inConfig) {
-      inConfig = false;
+    if (qName.equals("grammar-additions") && inGrammarAdditions) {
+      inGrammarAdditions = false;
       return;
     }
     if (qName.equals("elements") && inElements) {
@@ -250,6 +259,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
       Map<String, String> elementBaseNames,
       Map<String, String> elementSuperClassNamesNames,
       Map<String, String> componentRootElementNames,
+      Set<String> repetitionAttributeNames,
       Map<String, Map<String, String>> attributeDefaults,
       Map<String, List<String>> elementNameToFamilyMap,
       Map<String, String[]> datatypeValueConversion)
@@ -262,6 +272,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
             elementBaseNames,
             elementSuperClassNamesNames,
             componentRootElementNames,
+            repetitionAttributeNames,
             attributeDefaults,
             elementNameToFamilyMap,
             datatypeValueConversion));

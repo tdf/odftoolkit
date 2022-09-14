@@ -170,7 +170,7 @@ public class DrawHatchElement extends OdfElement {
 	 */
 	public Integer getDrawRotationAttribute() {
 		DrawRotationAttribute attr = (DrawRotationAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "rotation");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

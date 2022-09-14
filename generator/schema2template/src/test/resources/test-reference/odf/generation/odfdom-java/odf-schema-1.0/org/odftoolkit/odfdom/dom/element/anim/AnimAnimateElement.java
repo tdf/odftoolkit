@@ -348,7 +348,7 @@ public class AnimAnimateElement extends OdfElement {
 	 */
 	public Integer getSmilRepeatCountAttribute() {
 		SmilRepeatCountAttribute attr = (SmilRepeatCountAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "repeatCount");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

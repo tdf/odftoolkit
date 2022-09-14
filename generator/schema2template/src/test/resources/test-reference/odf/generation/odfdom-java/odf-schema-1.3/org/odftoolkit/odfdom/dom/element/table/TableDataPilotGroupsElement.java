@@ -121,7 +121,7 @@ public class TableDataPilotGroupsElement extends OdfElement {
 	 */
 	public Double getTableEndAttribute() {
 		TableEndAttribute attr = (TableEndAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "end");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return null;
@@ -195,7 +195,7 @@ public class TableDataPilotGroupsElement extends OdfElement {
 	 */
 	public Double getTableStartAttribute() {
 		TableStartAttribute attr = (TableStartAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "start");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return null;
@@ -219,7 +219,7 @@ public class TableDataPilotGroupsElement extends OdfElement {
 	 */
 	public Double getTableStepAttribute() {
 		TableStepAttribute attr = (TableStepAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "step");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return null;

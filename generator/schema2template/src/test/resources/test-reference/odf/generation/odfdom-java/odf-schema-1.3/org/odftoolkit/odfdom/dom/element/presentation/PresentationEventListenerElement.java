@@ -199,7 +199,7 @@ public class PresentationEventListenerElement extends OdfElement {
 	 */
 	public Integer getPresentationVerbAttribute() {
 		PresentationVerbAttribute attr = (PresentationVerbAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "verb");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

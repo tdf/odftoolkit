@@ -28,6 +28,8 @@ package org.odftoolkit.odfdom.dom.element.table;
 
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.w3c.dom.Node;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
@@ -107,7 +109,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	 */
 	public Boolean getOfficeBooleanValueAttribute() {
 		OfficeBooleanValueAttribute attr = (OfficeBooleanValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "boolean-value");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -227,7 +229,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	 */
 	public Double getOfficeValueAttribute() {
 		OfficeValueAttribute attr = (OfficeValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "value");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return null;
@@ -323,7 +325,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	 */
 	public Integer getTableNumberColumnsRepeatedAttribute() {
 		TableNumberColumnsRepeatedAttribute attr = (TableNumberColumnsRepeatedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "number-columns-repeated");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(TableNumberColumnsRepeatedAttribute.DEFAULT_VALUE);
@@ -347,7 +349,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	 */
 	public Boolean getTableProtectAttribute() {
 		TableProtectAttribute attr = (TableProtectAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "protect");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableProtectAttribute.DEFAULT_VALUE);

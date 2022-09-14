@@ -27,11 +27,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -40,8 +36,8 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.xml.sax.SAXException;
+import schema2template.grammar.OdfModel;
 import schema2template.grammar.XMLModel;
-import schema2template.grammar.odf.OdfModel;
 import schema2template.template.FileCreationListEntry;
 import schema2template.template.FileCreationListHandler;
 import schema2template.template.GrammarAdditionsFileHandler;
@@ -156,6 +152,8 @@ public class SchemaToTemplate {
        * &lt;table:table&gt; for table
        */
       Map<String, String> componentRootElementNames = new HashMap<>();
+      Set<String> repetitionAttributeNames = new HashSet<>();
+
       // Manual added ODF specific info - style family mapping
       Map<String, List<String>> elementNameToFamilyMap = new HashMap<>();
       // 2DO - still existent? -- Manual added Java specific info - mapping ODF datatype to Java
@@ -167,13 +165,18 @@ public class SchemaToTemplate {
           elementToBaseNameMap,
           elementSuperClassNameMap,
           componentRootElementNames,
+          repetitionAttributeNames,
           attributeDefaultMap,
           elementNameToFamilyMap,
           datatypeValueAndConversionMap);
       // odfConstants
       OdfModel odfModel =
           new OdfModel(
-              elementNameToFamilyMap, componentRootElementNames, attributeDefaultMap, xmlModel);
+              elementNameToFamilyMap,
+              componentRootElementNames,
+              repetitionAttributeNames,
+              attributeDefaultMap,
+              xmlModel);
       context.put("odfModel", odfModel);
 
       // Needed for the base classes - common attributes are being moved into the base classes

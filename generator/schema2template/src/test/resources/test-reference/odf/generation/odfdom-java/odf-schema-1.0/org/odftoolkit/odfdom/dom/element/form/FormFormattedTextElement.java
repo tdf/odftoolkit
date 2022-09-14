@@ -109,7 +109,7 @@ public class FormFormattedTextElement extends OdfElement {
 	 */
 	public Boolean getFormConvertEmptyToNullAttribute() {
 		FormConvertEmptyToNullAttribute attr = (FormConvertEmptyToNullAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "convert-empty-to-null");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormConvertEmptyToNullAttribute.DEFAULT_VALUE);
@@ -181,7 +181,7 @@ public class FormFormattedTextElement extends OdfElement {
 	 */
 	public Boolean getFormDisabledAttribute() {
 		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
@@ -231,7 +231,7 @@ public class FormFormattedTextElement extends OdfElement {
 	 */
 	public Integer getFormMaxLengthAttribute() {
 		FormMaxLengthAttribute attr = (FormMaxLengthAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "max-length");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -327,7 +327,7 @@ public class FormFormattedTextElement extends OdfElement {
 	 */
 	public Boolean getFormPrintableAttribute() {
 		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);
@@ -351,7 +351,7 @@ public class FormFormattedTextElement extends OdfElement {
 	 */
 	public Boolean getFormReadonlyAttribute() {
 		FormReadonlyAttribute attr = (FormReadonlyAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "readonly");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormReadonlyAttribute.DEFAULT_VALUE);
@@ -375,7 +375,7 @@ public class FormFormattedTextElement extends OdfElement {
 	 */
 	public Integer getFormTabIndexAttribute() {
 		FormTabIndexAttribute attr = (FormTabIndexAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-index");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(FormTabIndexAttribute.DEFAULT_VALUE);
@@ -399,7 +399,7 @@ public class FormFormattedTextElement extends OdfElement {
 	 */
 	public Boolean getFormTabStopAttribute() {
 		FormTabStopAttribute attr = (FormTabStopAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-stop");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormTabStopAttribute.DEFAULT_VALUE);
@@ -447,7 +447,7 @@ public class FormFormattedTextElement extends OdfElement {
 	 */
 	public Boolean getFormValidationAttribute() {
 		FormValidationAttribute attr = (FormValidationAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "validation");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormValidationAttribute.DEFAULT_VALUE);

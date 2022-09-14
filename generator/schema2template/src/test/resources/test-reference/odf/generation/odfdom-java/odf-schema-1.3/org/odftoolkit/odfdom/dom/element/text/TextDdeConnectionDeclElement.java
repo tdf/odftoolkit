@@ -71,7 +71,7 @@ public class TextDdeConnectionDeclElement extends OdfElement {
 	 */
 	public Boolean getOfficeAutomaticUpdateAttribute() {
 		OfficeAutomaticUpdateAttribute attr = (OfficeAutomaticUpdateAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "automatic-update");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(OfficeAutomaticUpdateAttribute.DEFAULT_VALUE);

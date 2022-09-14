@@ -67,7 +67,7 @@ public class TableDataPilotLevelElement extends OdfElement {
 	 */
 	public Boolean getTableShowEmptyAttribute() {
 		TableShowEmptyAttribute attr = (TableShowEmptyAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "show-empty");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

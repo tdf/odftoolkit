@@ -32,6 +32,7 @@ import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.w3c.dom.Node;
 import org.odftoolkit.odfdom.dom.attribute.text.TextCAttribute;
 
 /**
@@ -67,10 +68,10 @@ public class TextSElement extends OdfElement {
 	 */
 	public Integer getTextCAttribute() {
 		TextCAttribute attr = (TextCAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "c");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
-		return null;
+		return Integer.valueOf(TextCAttribute.DEFAULT_VALUE);
 	}
 
 	/**
@@ -104,5 +105,4 @@ public class TextSElement extends OdfElement {
   public boolean isComponentRoot() {
     return true;
   }
-
 }

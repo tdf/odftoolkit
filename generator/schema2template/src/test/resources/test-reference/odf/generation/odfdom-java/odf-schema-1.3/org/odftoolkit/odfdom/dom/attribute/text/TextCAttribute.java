@@ -29,6 +29,7 @@ package org.odftoolkit.odfdom.dom.attribute.text;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
@@ -40,6 +41,7 @@ public class TextCAttribute extends OdfAttribute {
 
 public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "c");
 
+	public static final String DEFAULT_VALUE = "1";
 
 	/**
 	 * Create the instance of OpenDocument attribute {@odf.attribute text:c}.
@@ -80,12 +82,7 @@ public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespac
 	 */
 	public int intValue() {
 		String val = super.getValue();
-		try {
-			return Integer.parseInt(val);
-		} catch (NumberFormatException e) {
-			// TODO: validation handling/logging
-			throw (e);
-		}
+		return Integer.parseInt(val);
 	}
 
 	/**
@@ -96,7 +93,7 @@ public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespac
 	 */
 	@Override
 	public String getDefault() {
-		return null;
+		return DEFAULT_VALUE;
 	}
 
 	/**
@@ -107,7 +104,7 @@ public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespac
 	 */
 	@Override
 	public boolean hasDefault() {
-		return false;
+		return getOwnerElement() == null ? false : true;
 	}
 
 	/**

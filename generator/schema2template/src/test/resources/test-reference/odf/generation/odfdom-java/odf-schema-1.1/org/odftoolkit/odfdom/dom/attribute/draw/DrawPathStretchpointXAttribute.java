@@ -80,12 +80,7 @@ public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespac
 	 */
 	public double doubleValue() {
 		String val = super.getValue();
-		try {
-			return Double.parseDouble(val);
-		} catch (NumberFormatException e) {
-			// TODO: validation handling/logging
-			throw (e);
-		}
+		return Double.parseDouble(val);
 	}
 
 	/**

@@ -96,7 +96,7 @@ public class TableInsertionCutOffElement extends OdfElement {
 	 */
 	public Integer getTablePositionAttribute() {
 		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "position");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

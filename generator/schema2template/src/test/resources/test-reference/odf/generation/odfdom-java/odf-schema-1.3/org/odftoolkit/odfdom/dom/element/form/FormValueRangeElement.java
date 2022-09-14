@@ -134,7 +134,7 @@ public class FormValueRangeElement extends OdfElement {
 	 */
 	public Boolean getFormDisabledAttribute() {
 		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
@@ -302,7 +302,7 @@ public class FormValueRangeElement extends OdfElement {
 	 */
 	public Integer getFormPageStepSizeAttribute() {
 		FormPageStepSizeAttribute attr = (FormPageStepSizeAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "page-step-size");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -326,7 +326,7 @@ public class FormValueRangeElement extends OdfElement {
 	 */
 	public Boolean getFormPrintableAttribute() {
 		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);
@@ -350,7 +350,7 @@ public class FormValueRangeElement extends OdfElement {
 	 */
 	public Boolean getFormRepeatAttribute() {
 		FormRepeatAttribute attr = (FormRepeatAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "repeat");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -374,7 +374,7 @@ public class FormValueRangeElement extends OdfElement {
 	 */
 	public Integer getFormStepSizeAttribute() {
 		FormStepSizeAttribute attr = (FormStepSizeAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "step-size");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(FormStepSizeAttribute.DEFAULT_VALUE);
@@ -398,7 +398,7 @@ public class FormValueRangeElement extends OdfElement {
 	 */
 	public Integer getFormTabIndexAttribute() {
 		FormTabIndexAttribute attr = (FormTabIndexAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-index");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(FormTabIndexAttribute.DEFAULT_VALUE);
@@ -422,7 +422,7 @@ public class FormValueRangeElement extends OdfElement {
 	 */
 	public Boolean getFormTabStopAttribute() {
 		FormTabStopAttribute attr = (FormTabStopAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-stop");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormTabStopAttribute.DEFAULT_VALUE);

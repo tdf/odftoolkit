@@ -69,7 +69,7 @@ public class TableSubtotalRuleElement extends OdfElement {
 	 */
 	public Integer getTableGroupByFieldNumberAttribute() {
 		TableGroupByFieldNumberAttribute attr = (TableGroupByFieldNumberAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "group-by-field-number");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

@@ -68,7 +68,7 @@ public class TextListElement extends OdfElement {
 	 */
 	public Boolean getTextContinueNumberingAttribute() {
 		TextContinueNumberingAttribute attr = (TextContinueNumberingAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "continue-numbering");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

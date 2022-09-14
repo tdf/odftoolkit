@@ -77,7 +77,7 @@ public class DrawHandleElement extends OdfElement {
 	 */
 	public Boolean getDrawHandleMirrorHorizontalAttribute() {
 		DrawHandleMirrorHorizontalAttribute attr = (DrawHandleMirrorHorizontalAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "handle-mirror-horizontal");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawHandleMirrorHorizontalAttribute.DEFAULT_VALUE);
@@ -101,7 +101,7 @@ public class DrawHandleElement extends OdfElement {
 	 */
 	public Boolean getDrawHandleMirrorVerticalAttribute() {
 		DrawHandleMirrorVerticalAttribute attr = (DrawHandleMirrorVerticalAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "handle-mirror-vertical");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawHandleMirrorVerticalAttribute.DEFAULT_VALUE);
@@ -319,7 +319,7 @@ public class DrawHandleElement extends OdfElement {
 	 */
 	public Boolean getDrawHandleSwitchedAttribute() {
 		DrawHandleSwitchedAttribute attr = (DrawHandleSwitchedAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "handle-switched");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawHandleSwitchedAttribute.DEFAULT_VALUE);

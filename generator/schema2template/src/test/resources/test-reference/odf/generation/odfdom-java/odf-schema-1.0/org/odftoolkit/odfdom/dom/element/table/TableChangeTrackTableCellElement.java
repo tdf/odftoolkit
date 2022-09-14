@@ -79,7 +79,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	 */
 	public Boolean getOfficeBooleanValueAttribute() {
 		OfficeBooleanValueAttribute attr = (OfficeBooleanValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "boolean-value");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -201,7 +201,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	 */
 	public Double getOfficeValueAttribute() {
 		OfficeValueAttribute attr = (OfficeValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "value");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return null;
@@ -299,7 +299,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	 */
 	public Boolean getTableMatrixCoveredAttribute() {
 		TableMatrixCoveredAttribute attr = (TableMatrixCoveredAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "matrix-covered");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableMatrixCoveredAttribute.DEFAULT_VALUE);
@@ -323,7 +323,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	 */
 	public Integer getTableNumberMatrixColumnsSpannedAttribute() {
 		TableNumberMatrixColumnsSpannedAttribute attr = (TableNumberMatrixColumnsSpannedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "number-matrix-columns-spanned");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -347,7 +347,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	 */
 	public Integer getTableNumberMatrixRowsSpannedAttribute() {
 		TableNumberMatrixRowsSpannedAttribute attr = (TableNumberMatrixRowsSpannedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "number-matrix-rows-spanned");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

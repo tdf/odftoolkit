@@ -185,7 +185,7 @@ public class StyleTableColumnPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleUseOptimalColumnWidthAttribute() {
 		StyleUseOptimalColumnWidthAttribute attr = (StyleUseOptimalColumnWidthAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "use-optimal-column-width");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

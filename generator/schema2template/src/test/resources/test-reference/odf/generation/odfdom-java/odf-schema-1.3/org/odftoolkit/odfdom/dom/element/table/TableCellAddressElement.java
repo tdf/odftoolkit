@@ -71,7 +71,7 @@ public class TableCellAddressElement extends OdfElement {
 	 */
 	public Integer getTableColumnAttribute() {
 		TableColumnAttribute attr = (TableColumnAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "column");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -97,7 +97,7 @@ public class TableCellAddressElement extends OdfElement {
 	 */
 	public Integer getTableRowAttribute() {
 		TableRowAttribute attr = (TableRowAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "row");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -123,7 +123,7 @@ public class TableCellAddressElement extends OdfElement {
 	 */
 	public Integer getTableTableAttribute() {
 		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "table");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

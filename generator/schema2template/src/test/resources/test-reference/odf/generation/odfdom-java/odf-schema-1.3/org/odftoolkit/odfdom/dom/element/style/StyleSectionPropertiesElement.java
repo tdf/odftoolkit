@@ -170,7 +170,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleEditableAttribute() {
 		StyleEditableAttribute attr = (StyleEditableAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "editable");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -242,7 +242,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getTextDontBalanceTextColumnsAttribute() {
 		TextDontBalanceTextColumnsAttribute attr = (TextDontBalanceTextColumnsAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "dont-balance-text-columns");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

@@ -143,7 +143,7 @@ public class DbServerDatabaseElement extends OdfElement {
 	 */
 	public Integer getDbPortAttribute() {
 		DbPortAttribute attr = (DbPortAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "port");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

@@ -279,7 +279,7 @@ public class AnimParElement extends OdfElement {
 	 */
 	public Boolean getSmilAutoReverseAttribute() {
 		SmilAutoReverseAttribute attr = (SmilAutoReverseAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "autoReverse");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(SmilAutoReverseAttribute.DEFAULT_VALUE);

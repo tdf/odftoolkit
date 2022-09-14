@@ -189,7 +189,7 @@ public class AnimAnimateColorElement extends OdfElement {
 	 */
 	public Double getSmilAccelerateAttribute() {
 		SmilAccelerateAttribute attr = (SmilAccelerateAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "accelerate");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return Double.valueOf(SmilAccelerateAttribute.DEFAULT_VALUE);
@@ -287,7 +287,7 @@ public class AnimAnimateColorElement extends OdfElement {
 	 */
 	public Boolean getSmilAutoReverseAttribute() {
 		SmilAutoReverseAttribute attr = (SmilAutoReverseAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "autoReverse");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(SmilAutoReverseAttribute.DEFAULT_VALUE);
@@ -383,7 +383,7 @@ public class AnimAnimateColorElement extends OdfElement {
 	 */
 	public Double getSmilDecelerateAttribute() {
 		SmilDecelerateAttribute attr = (SmilDecelerateAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "decelerate");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return Double.valueOf(SmilDecelerateAttribute.DEFAULT_VALUE);
@@ -575,7 +575,7 @@ public class AnimAnimateColorElement extends OdfElement {
 	 */
 	public Integer getSmilRepeatCountAttribute() {
 		SmilRepeatCountAttribute attr = (SmilRepeatCountAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "repeatCount");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

@@ -597,7 +597,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getFoHyphenateAttribute() {
 		FoHyphenateAttribute attr = (FoHyphenateAttribute) getOdfAttribute(OdfDocumentNamespace.FO, "hyphenate");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -621,7 +621,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getFoHyphenationPushCharCountAttribute() {
 		FoHyphenationPushCharCountAttribute attr = (FoHyphenationPushCharCountAttribute) getOdfAttribute(OdfDocumentNamespace.FO, "hyphenation-push-char-count");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -645,7 +645,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getFoHyphenationRemainCharCountAttribute() {
 		FoHyphenationRemainCharCountAttribute attr = (FoHyphenationRemainCharCountAttribute) getOdfAttribute(OdfDocumentNamespace.FO, "hyphenation-remain-char-count");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -1533,7 +1533,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleLetterKerningAttribute() {
 		StyleLetterKerningAttribute attr = (StyleLetterKerningAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "letter-kerning");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1701,7 +1701,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleTextBlinkingAttribute() {
 		StyleTextBlinkingAttribute attr = (StyleTextBlinkingAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "text-blinking");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1989,7 +1989,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleTextOutlineAttribute() {
 		StyleTextOutlineAttribute attr = (StyleTextOutlineAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "text-outline");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -2349,7 +2349,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleUseWindowFontColorAttribute() {
 		StyleUseWindowFontColorAttribute attr = (StyleUseWindowFontColorAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "use-window-font-color");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

@@ -68,7 +68,7 @@ public class TextTocMarkElement extends OdfElement {
 	 */
 	public Integer getTextOutlineLevelAttribute() {
 		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "outline-level");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

@@ -70,7 +70,7 @@ public class DbLoginElement extends OdfElement {
 	 */
 	public Boolean getDbIsPasswordRequiredAttribute() {
 		DbIsPasswordRequiredAttribute attr = (DbIsPasswordRequiredAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "is-password-required");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DbIsPasswordRequiredAttribute.DEFAULT_VALUE);
@@ -94,7 +94,7 @@ public class DbLoginElement extends OdfElement {
 	 */
 	public Integer getDbLoginTimeoutAttribute() {
 		DbLoginTimeoutAttribute attr = (DbLoginTimeoutAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "login-timeout");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -118,7 +118,7 @@ public class DbLoginElement extends OdfElement {
 	 */
 	public Boolean getDbUseSystemUserAttribute() {
 		DbUseSystemUserAttribute attr = (DbUseSystemUserAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "use-system-user");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

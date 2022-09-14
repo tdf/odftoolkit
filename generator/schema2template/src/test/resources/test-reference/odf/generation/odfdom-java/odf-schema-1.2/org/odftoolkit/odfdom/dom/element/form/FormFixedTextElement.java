@@ -102,7 +102,7 @@ public class FormFixedTextElement extends OdfElement {
 	 */
 	public Boolean getFormDisabledAttribute() {
 		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
@@ -198,7 +198,7 @@ public class FormFixedTextElement extends OdfElement {
 	 */
 	public Boolean getFormMultiLineAttribute() {
 		FormMultiLineAttribute attr = (FormMultiLineAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "multi-line");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormMultiLineAttribute.DEFAULT_VALUE);
@@ -246,7 +246,7 @@ public class FormFixedTextElement extends OdfElement {
 	 */
 	public Boolean getFormPrintableAttribute() {
 		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);

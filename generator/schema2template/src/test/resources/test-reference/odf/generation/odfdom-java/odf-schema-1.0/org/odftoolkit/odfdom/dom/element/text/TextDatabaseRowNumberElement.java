@@ -99,7 +99,7 @@ public class TextDatabaseRowNumberElement extends OdfElement {
 	 */
 	public Boolean getStyleNumLetterSyncAttribute() {
 		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -197,7 +197,7 @@ public class TextDatabaseRowNumberElement extends OdfElement {
 	 */
 	public Integer getTextValueAttribute() {
 		TextValueAttribute attr = (TextValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "value");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

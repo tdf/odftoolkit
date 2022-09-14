@@ -78,7 +78,7 @@ public class StyleStyleElement extends OdfStyleBase {
 	 */
 	public Boolean getStyleAutoUpdateAttribute() {
 		StyleAutoUpdateAttribute attr = (StyleAutoUpdateAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "auto-update");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(StyleAutoUpdateAttribute.DEFAULT_VALUE);
@@ -150,7 +150,7 @@ public class StyleStyleElement extends OdfStyleBase {
 	 */
 	public Integer getStyleDefaultOutlineLevelAttribute() {
 		StyleDefaultOutlineLevelAttribute attr = (StyleDefaultOutlineLevelAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "default-outline-level");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

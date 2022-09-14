@@ -19,7 +19,7 @@
  *
  * <p>*****************************************************************
  */
-package schema2template.grammar.odf;
+package schema2template.grammar;
 
 import java.io.File;
 

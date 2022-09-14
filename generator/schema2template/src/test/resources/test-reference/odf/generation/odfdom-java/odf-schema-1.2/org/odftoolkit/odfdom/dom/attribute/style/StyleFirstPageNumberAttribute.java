@@ -121,12 +121,7 @@ public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespac
 	 */
 	public int intValue() {
 		String val = super.getValue();
-		try {
-			return Integer.parseInt(val);
-		} catch (NumberFormatException e) {
-			// TODO: validation handling/logging
-			throw (e);
-		}
+		return Integer.parseInt(val);
 	}
 
 	/**

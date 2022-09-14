@@ -107,7 +107,7 @@ public class OfficeSpreadsheetElement extends OdfElement {
 	 */
 	public Boolean getTableStructureProtectedAttribute() {
 		TableStructureProtectedAttribute attr = (TableStructureProtectedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "structure-protected");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableStructureProtectedAttribute.DEFAULT_VALUE);

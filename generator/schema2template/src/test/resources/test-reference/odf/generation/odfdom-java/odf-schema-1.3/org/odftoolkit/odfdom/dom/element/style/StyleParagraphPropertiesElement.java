@@ -501,7 +501,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getFoHyphenationLadderCountAttribute() {
 		FoHyphenationLadderCountAttribute attr = (FoHyphenationLadderCountAttribute) getOdfAttribute(OdfDocumentNamespace.FO, "hyphenation-ladder-count");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -717,7 +717,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getFoOrphansAttribute() {
 		FoOrphansAttribute attr = (FoOrphansAttribute) getOdfAttribute(OdfDocumentNamespace.FO, "orphans");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -933,7 +933,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getFoWidowsAttribute() {
 		FoWidowsAttribute attr = (FoWidowsAttribute) getOdfAttribute(OdfDocumentNamespace.FO, "widows");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -957,7 +957,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleAutoTextIndentAttribute() {
 		StyleAutoTextIndentAttribute attr = (StyleAutoTextIndentAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "auto-text-indent");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1125,7 +1125,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleContextualSpacingAttribute() {
 		StyleContextualSpacingAttribute attr = (StyleContextualSpacingAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "contextual-spacing");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1149,7 +1149,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleFontIndependentLineSpacingAttribute() {
 		StyleFontIndependentLineSpacingAttribute attr = (StyleFontIndependentLineSpacingAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "font-independent-line-spacing");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1173,7 +1173,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleJoinBorderAttribute() {
 		StyleJoinBorderAttribute attr = (StyleJoinBorderAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "join-border");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1197,7 +1197,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleJustifySingleWordAttribute() {
 		StyleJustifySingleWordAttribute attr = (StyleJustifySingleWordAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "justify-single-word");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1293,7 +1293,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getStylePageNumberAttribute() {
 		StylePageNumberAttribute attr = (StylePageNumberAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "page-number");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -1341,7 +1341,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleRegisterTrueAttribute() {
 		StyleRegisterTrueAttribute attr = (StyleRegisterTrueAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "register-true");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1389,7 +1389,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleSnapToLayoutGridAttribute() {
 		StyleSnapToLayoutGridAttribute attr = (StyleSnapToLayoutGridAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "snap-to-layout-grid");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1509,7 +1509,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleWritingModeAutomaticAttribute() {
 		StyleWritingModeAutomaticAttribute attr = (StyleWritingModeAutomaticAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "writing-mode-automatic");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1533,7 +1533,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getTextLineNumberAttribute() {
 		TextLineNumberAttribute attr = (TextLineNumberAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "line-number");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -1557,7 +1557,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getTextNumberLinesAttribute() {
 		TextNumberLinesAttribute attr = (TextNumberLinesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "number-lines");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

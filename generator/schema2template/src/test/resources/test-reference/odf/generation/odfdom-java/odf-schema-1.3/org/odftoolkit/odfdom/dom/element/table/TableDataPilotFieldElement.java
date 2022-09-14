@@ -196,7 +196,7 @@ public class TableDataPilotFieldElement extends OdfElement {
 	 */
 	public Integer getTableUsedHierarchyAttribute() {
 		TableUsedHierarchyAttribute attr = (TableUsedHierarchyAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "used-hierarchy");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(TableUsedHierarchyAttribute.DEFAULT_VALUE);

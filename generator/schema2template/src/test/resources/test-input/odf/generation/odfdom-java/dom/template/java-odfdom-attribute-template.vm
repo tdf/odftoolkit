@@ -248,12 +248,7 @@ public static final OdfName ATTRIBUTE_NAME = OdfName.newName("$localname");
 	 */
 	public ${simplevalue} ${simplevalue}Value() {
 		String val = super.getValue();
-		try {
-			return ${valueobject}.parse${xmlModel.camelCase($simplevalue)}(val);
-		} catch (NumberFormatException e) {
-			// TODO: validation handling/logging
-			throw (e);
-		}
+		return ${valueobject}.parse${xmlModel.camelCase($simplevalue)}(val);
 	}
 #end
 ##

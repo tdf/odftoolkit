@@ -70,7 +70,7 @@ public class TableDataPilotLayoutInfoElement extends OdfElement {
 	 */
 	public Boolean getTableAddEmptyLinesAttribute() {
 		TableAddEmptyLinesAttribute attr = (TableAddEmptyLinesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "add-empty-lines");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

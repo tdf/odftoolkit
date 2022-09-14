@@ -96,7 +96,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
 	 */
 	public Integer getTextOutlineLevelAttribute() {
 		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "outline-level");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -120,7 +120,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
 	 */
 	public Boolean getTextRelativeTabStopPositionAttribute() {
 		TextRelativeTabStopPositionAttribute attr = (TextRelativeTabStopPositionAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "relative-tab-stop-position");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -144,7 +144,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
 	 */
 	public Boolean getTextUseIndexMarksAttribute() {
 		TextUseIndexMarksAttribute attr = (TextUseIndexMarksAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-index-marks");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -168,7 +168,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
 	 */
 	public Boolean getTextUseIndexSourceStylesAttribute() {
 		TextUseIndexSourceStylesAttribute attr = (TextUseIndexSourceStylesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-index-source-styles");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -192,7 +192,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
 	 */
 	public Boolean getTextUseOutlineLevelAttribute() {
 		TextUseOutlineLevelAttribute attr = (TextUseOutlineLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-outline-level");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TextUseOutlineLevelAttribute.DEFAULT_VALUE);

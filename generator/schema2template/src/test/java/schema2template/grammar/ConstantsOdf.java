@@ -19,7 +19,7 @@
  *
  * <p>*****************************************************************
  */
-package schema2template.grammar.odf;
+package schema2template.grammar;
 
 /** Contains all test relevant constants related to ODF */
 class ConstantsOdf {

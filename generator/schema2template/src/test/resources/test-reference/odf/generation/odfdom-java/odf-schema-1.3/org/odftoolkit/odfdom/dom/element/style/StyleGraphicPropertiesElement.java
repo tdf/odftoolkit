@@ -838,7 +838,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDr3dCloseBackAttribute() {
 		Dr3dCloseBackAttribute attr = (Dr3dCloseBackAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "close-back");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -862,7 +862,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDr3dCloseFrontAttribute() {
 		Dr3dCloseFrontAttribute attr = (Dr3dCloseFrontAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "close-front");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1030,7 +1030,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getDr3dHorizontalSegmentsAttribute() {
 		Dr3dHorizontalSegmentsAttribute attr = (Dr3dHorizontalSegmentsAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "horizontal-segments");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -1318,7 +1318,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getDr3dVerticalSegmentsAttribute() {
 		Dr3dVerticalSegmentsAttribute attr = (Dr3dVerticalSegmentsAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "vertical-segments");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -1342,7 +1342,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDrawAutoGrowHeightAttribute() {
 		DrawAutoGrowHeightAttribute attr = (DrawAutoGrowHeightAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "auto-grow-height");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1366,7 +1366,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDrawAutoGrowWidthAttribute() {
 		DrawAutoGrowWidthAttribute attr = (DrawAutoGrowWidthAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "auto-grow-width");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1510,7 +1510,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDrawCaptionFitLineLengthAttribute() {
 		DrawCaptionFitLineLengthAttribute attr = (DrawCaptionFitLineLengthAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "caption-fit-line-length");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1606,7 +1606,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDrawColorInversionAttribute() {
 		DrawColorInversionAttribute attr = (DrawColorInversionAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "color-inversion");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1678,7 +1678,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getDrawDecimalPlacesAttribute() {
 		DrawDecimalPlacesAttribute attr = (DrawDecimalPlacesAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "decimal-places");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -1894,7 +1894,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDrawFillHatchSolidAttribute() {
 		DrawFillHatchSolidAttribute attr = (DrawFillHatchSolidAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "fill-hatch-solid");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -2062,7 +2062,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDrawFitToContourAttribute() {
 		DrawFitToContourAttribute attr = (DrawFitToContourAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "fit-to-contour");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -2086,7 +2086,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDrawFitToSizeAttribute() {
 		DrawFitToSizeAttribute attr = (DrawFitToSizeAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "fit-to-size");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -2110,7 +2110,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDrawFrameDisplayBorderAttribute() {
 		DrawFrameDisplayBorderAttribute attr = (DrawFrameDisplayBorderAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "frame-display-border");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -2134,7 +2134,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDrawFrameDisplayScrollbarAttribute() {
 		DrawFrameDisplayScrollbarAttribute attr = (DrawFrameDisplayScrollbarAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "frame-display-scrollbar");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -2230,7 +2230,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getDrawGradientStepCountAttribute() {
 		DrawGradientStepCountAttribute attr = (DrawGradientStepCountAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "gradient-step-count");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -2422,7 +2422,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDrawMarkerEndCenterAttribute() {
 		DrawMarkerEndCenterAttribute attr = (DrawMarkerEndCenterAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "marker-end-center");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -2494,7 +2494,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDrawMarkerStartCenterAttribute() {
 		DrawMarkerStartCenterAttribute attr = (DrawMarkerStartCenterAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "marker-start-center");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -2590,7 +2590,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getDrawOleDrawAspectAttribute() {
 		DrawOleDrawAspectAttribute attr = (DrawOleDrawAspectAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "ole-draw-aspect");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -2662,7 +2662,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDrawParallelAttribute() {
 		DrawParallelAttribute attr = (DrawParallelAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "parallel");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -2878,7 +2878,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getDrawShowUnitAttribute() {
 		DrawShowUnitAttribute attr = (DrawShowUnitAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "show-unit");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -3982,7 +3982,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleEditableAttribute() {
 		StyleEditableAttribute attr = (StyleEditableAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "editable");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -4006,7 +4006,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleFlowWithTextAttribute() {
 		StyleFlowWithTextAttribute attr = (StyleFlowWithTextAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "flow-with-text");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -4102,7 +4102,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getStyleNumberWrappedParagraphsAttribute() {
 		StyleNumberWrappedParagraphsAttribute attr = (StyleNumberWrappedParagraphsAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "number-wrapped-paragraphs");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -4150,7 +4150,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStylePrintContentAttribute() {
 		StylePrintContentAttribute attr = (StylePrintContentAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "print-content");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -4318,7 +4318,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleShrinkToFitAttribute() {
 		StyleShrinkToFitAttribute attr = (StyleShrinkToFitAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "shrink-to-fit");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -4414,7 +4414,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleWrapContourAttribute() {
 		StyleWrapContourAttribute attr = (StyleWrapContourAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "wrap-contour");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -4726,7 +4726,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getTextAnchorPageNumberAttribute() {
 		TextAnchorPageNumberAttribute attr = (TextAnchorPageNumberAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "anchor-page-number");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -4846,7 +4846,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getTextAnimationRepeatAttribute() {
 		TextAnimationRepeatAttribute attr = (TextAnimationRepeatAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "animation-repeat");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -4870,7 +4870,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getTextAnimationStartInsideAttribute() {
 		TextAnimationStartInsideAttribute attr = (TextAnimationStartInsideAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "animation-start-inside");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -4918,7 +4918,7 @@ public class StyleGraphicPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getTextAnimationStopInsideAttribute() {
 		TextAnimationStopInsideAttribute attr = (TextAnimationStopInsideAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "animation-stop-inside");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

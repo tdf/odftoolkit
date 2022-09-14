@@ -94,7 +94,7 @@ public class DbIndexElement extends OdfElement {
 	 */
 	public Boolean getDbIsClusteredAttribute() {
 		DbIsClusteredAttribute attr = (DbIsClusteredAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "is-clustered");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -118,7 +118,7 @@ public class DbIndexElement extends OdfElement {
 	 */
 	public Boolean getDbIsUniqueAttribute() {
 		DbIsUniqueAttribute attr = (DbIsUniqueAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "is-unique");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

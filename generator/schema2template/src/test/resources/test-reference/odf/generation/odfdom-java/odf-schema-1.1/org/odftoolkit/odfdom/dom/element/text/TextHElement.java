@@ -34,6 +34,13 @@ import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
+import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextIsListHeaderAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextOutlineLevelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextRestartNumberingAttribute;
@@ -72,7 +79,7 @@ public class TextHElement extends TextParagraphElementBase {
 	 */
 	public Boolean getTextIsListHeaderAttribute() {
 		TextIsListHeaderAttribute attr = (TextIsListHeaderAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "is-list-header");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TextIsListHeaderAttribute.DEFAULT_VALUE);
@@ -98,7 +105,7 @@ public class TextHElement extends TextParagraphElementBase {
 	 */
 	public Integer getTextOutlineLevelAttribute() {
 		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "outline-level");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -122,7 +129,7 @@ public class TextHElement extends TextParagraphElementBase {
 	 */
 	public Boolean getTextRestartNumberingAttribute() {
 		TextRestartNumberingAttribute attr = (TextRestartNumberingAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "restart-numbering");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TextRestartNumberingAttribute.DEFAULT_VALUE);
@@ -146,7 +153,7 @@ public class TextHElement extends TextParagraphElementBase {
 	 */
 	public Integer getTextStartValueAttribute() {
 		TextStartValueAttribute attr = (TextStartValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "start-value");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -203,5 +210,4 @@ public class TextHElement extends TextParagraphElementBase {
   public boolean isComponentRoot() {
     return true;
   }
-
 }

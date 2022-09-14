@@ -106,5 +106,4 @@ public class TextPageElement extends OdfElement {
   public boolean isComponentRoot() {
     return true;
   }
-
 }

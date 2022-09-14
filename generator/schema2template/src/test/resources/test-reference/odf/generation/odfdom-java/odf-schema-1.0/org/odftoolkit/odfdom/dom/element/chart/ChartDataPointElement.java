@@ -70,7 +70,7 @@ public class ChartDataPointElement extends OdfStylableElement {
 	 */
 	public Integer getChartRepeatedAttribute() {
 		ChartRepeatedAttribute attr = (ChartRepeatedAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "repeated");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

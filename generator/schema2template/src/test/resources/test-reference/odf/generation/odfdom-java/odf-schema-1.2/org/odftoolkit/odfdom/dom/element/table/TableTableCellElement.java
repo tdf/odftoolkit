@@ -72,7 +72,7 @@ public class TableTableCellElement extends TableTableCellElementBase {
 	 */
 	public Integer getTableNumberColumnsSpannedAttribute() {
 		TableNumberColumnsSpannedAttribute attr = (TableNumberColumnsSpannedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "number-columns-spanned");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(TableNumberColumnsSpannedAttribute.DEFAULT_VALUE);
@@ -96,7 +96,7 @@ public class TableTableCellElement extends TableTableCellElementBase {
 	 */
 	public Integer getTableNumberMatrixColumnsSpannedAttribute() {
 		TableNumberMatrixColumnsSpannedAttribute attr = (TableNumberMatrixColumnsSpannedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "number-matrix-columns-spanned");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -120,7 +120,7 @@ public class TableTableCellElement extends TableTableCellElementBase {
 	 */
 	public Integer getTableNumberMatrixRowsSpannedAttribute() {
 		TableNumberMatrixRowsSpannedAttribute attr = (TableNumberMatrixRowsSpannedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "number-matrix-rows-spanned");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -144,7 +144,7 @@ public class TableTableCellElement extends TableTableCellElementBase {
 	 */
 	public Integer getTableNumberRowsSpannedAttribute() {
 		TableNumberRowsSpannedAttribute attr = (TableNumberRowsSpannedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "number-rows-spanned");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(TableNumberRowsSpannedAttribute.DEFAULT_VALUE);
@@ -193,5 +193,4 @@ public class TableTableCellElement extends TableTableCellElementBase {
   public boolean isComponentRoot() {
     return true;
   }
-
 }

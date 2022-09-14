@@ -21,7 +21,7 @@
  *
  * <p>**********************************************************************
  */
-package schema2template.grammar.odf;
+package schema2template.grammar;
 
 import static org.junit.Assert.assertTrue;
 
@@ -29,8 +29,6 @@ import java.io.File;
 import java.util.List;
 import java.util.logging.Logger;
 import org.junit.Test;
-import schema2template.grammar.PathPrinter;
-import schema2template.grammar.XMLModel;
 
 /**
  * ODF example class to print the MSV expressions in between a PuzzlePiece parent element and a
