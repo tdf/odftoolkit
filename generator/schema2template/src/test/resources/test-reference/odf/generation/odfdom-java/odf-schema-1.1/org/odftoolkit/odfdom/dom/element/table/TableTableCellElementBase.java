@@ -941,4 +941,17 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
     }
     return newElement;
   }
+
+  /** Removes all the content from the element */
+  @Override
+  public void removeContent() {
+    super.removeContent();
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "value");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "value-type");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "time-value");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "date-value");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "boolean-value");
+    this.removeAttributeNS("urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0", "value-type");
+    this.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "formula");
+  }
 }
