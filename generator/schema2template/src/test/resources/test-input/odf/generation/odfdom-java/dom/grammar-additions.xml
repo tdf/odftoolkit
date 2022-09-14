@@ -21,6 +21,23 @@
      limitations under the License.
      
 -->
+<!-- These additions to the RNG grammar given by the ODF TC consists of three parts:
+     1. ELEMENTS
+     a) providing the style family name (via attribute family) as written in the specification (not extracted yet)
+     b) providing the base (super) class name (via attribute base) where common attributes and child elements are being collected. Value expected to be added by an XML qualified name.
+     c) providing the extension class name (via attribute extension). A given base class would extend from that. Have to be added by full qualifed Java package name.
+     d) Semantic component expressing the known semantic user entity is expressed (via root-of-component extension)
+     
+     2. DATA TYPES
+     a) Providing the mapping between RNG/XSD and ODF datatypes to Java classes
+     
+     3. ATTRIBUTES
+     a) Default values extracted from the sepcification by default character style using XSLT, e.g.
+     https://github.com/oasis-tcs/odf-tc/blob/master/src/test/resources/odf1.4/tools/getAttributeDefaults.xsl
+     and as extracted file
+     https://github.com/oasis-tcs/odf-tc/blob/master/src/test/resources/odf1.4/references/xslt-default/content.odf14-default-values.xml
+     b) attributes which represents the repetition of its attribute (e.g. for column, cells and spaces)
+-->
 <grammar-additions>
   <elements>
     <element name="chart:axis" family="chart:chart"/>
@@ -458,7 +475,7 @@
     <attribute name="table:copy-formulas" defaultValue="true"/>
     <attribute name="table:copy-styles" defaultValue="true"/>
     <!--The following attribute default value is listed in the ODF schema-->
-    <attribute name="text:c" defaultValue="1" repetition="true"/><!-- not yet explicitly declared as default value in ODF 1.3 -->
+    <attribute name="text:c" defaultValue="1" repetition="true"/><!-- not yet explicitly declared as default value in ODF specification (ODF 1.3)-->
     <attribute name="table:count" defaultValue="1"/>
     <attribute name="table:data-type" defaultValue="text" element="table:filter-condition"/>
     <attribute name="table:data-type" defaultValue="automatic" element="table:sort-by"/>
@@ -493,7 +510,7 @@
     <attribute name="table:null-year" defaultValue="1930"/>
     <!--The following attribute default value is listed in the ODF schema-->
     <attribute name="table:number-columns-repeated" defaultValue="1"
-               repetition="true" element="table:covered-table-cell"/>
+               repetition="true" element="table:covered-table-cell"/><!-- repetition was manually edit to the from ODF-TC generated default values (see header)-->
     <!--The following attribute default value is listed in the ODF schema-->
     <attribute name="table:number-columns-repeated" defaultValue="1"
                repetition="true" element="table:table-cell"/>

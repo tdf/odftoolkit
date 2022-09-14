@@ -585,4 +585,9 @@ public ${abstract}class $className extends $superClassName {
 #if ($odfModel.isRootOfComponent($element))
 #add_isComponentRoot_method()
 #end
+#if ($odfModel.getRepetionAttribute($element))
+#if ($remainingAttributes.containsName(${odfModel.getRepetionAttribute($element).getQName()}))
+#add_repeated_methods($className $odfModel.getRepetionAttribute($element))
+#end
+#end
 }

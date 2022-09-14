@@ -3,9 +3,79 @@
 ## Using .vm file suffix instead of .vtl suffix for the above plugin
 ##
 ##
-## Add is Component Root functionality
-#macro( add_isComponentRoot_Method )
+## Addes the functionality of ODF repetition
+#macro( add_repeated_methods $elementClassName $repetitionAttribute)
+#set ($attrClassName = "${xmlModel.camelCase($repetitionAttribute)}Attribute")
+#set ($attrNamespacePrefix = ${repetitionAttribute.getNamespacePrefix()})
 
+@Override
+  /** @return the repeation of this element, the default is in ODF always 1 */
+  public int getRepetition() {
+    Integer repeated = get${attrClassName}();
+    if (repeated == null) {
+      repeated = 1;
+    }
+    return repeated;
+  }
+
+  @Override
+  /** @return if this element is repeatable, by having a repeatable attribute */
+  public boolean isRepeatable() {
+    return true;
+  }
+
+  @Override
+  /** @repetition the repetition number of this attribute */
+  public void setRepetition(int repetition) {
+    set${attrClassName}(repetition);
+  }
+
+  /**
+   * Splitting the element at the given position into two halves
+   *
+   * @param posStart The split position. Counting is starting with zero. The start of the second
+   *     half.
+   * @return the new created second element (or if posStart was less than 1 the original element)
+   */
+  @Override
+  public ${elementClassName} split(int posStart) {
+    ${elementClassName} newElement = this;
+    // 0 would not leave anything left on the left side, would not change anything!
+    if (posStart > 0) {
+      newElement = (${elementClassName}) this.cloneNode(true);
+      int repeated = get${attrClassName}();
+      if (repeated > 1) {
+        if (posStart > 1) {
+          this.set${attrClassName}(posStart);
+        } else {
+
+          this.removeAttributeNS(OdfDocumentNamespace.${attrNamespacePrefix.toUpperCase()}.getUri(), "${repetitionAttribute.getLocalName()}");
+        }
+        // any higher value one for repeated write out.
+        // 1 is the default and has not to be written out
+        if (repeated - posStart > 1) {
+          newElement.set${attrClassName}(repeated - posStart);
+        } else {
+          newElement.removeAttributeNS(OdfDocumentNamespace.${attrNamespacePrefix.toUpperCase()}.getUri(), "${repetitionAttribute.getLocalName()}");
+        }
+      }
+      Node nextNodeSibling = this.getNextSibling();
+      OdfElement parent = (OdfElement) this.getParentNode();
+      if (nextNodeSibling == null) {
+        parent.appendChild(newElement);
+      } else {
+        parent.insertBefore(newElement, nextNodeSibling);
+      }
+    }
+    return newElement;
+  }
+#end
+## Add is Component Root functionality
+#macro( add_isComponentRoot_method )
+
+##  /**
+##  * Marks this element as the root of a semantic component known to the user.
+##  */
   @Override
   public boolean isComponentRoot() {
     return true;
