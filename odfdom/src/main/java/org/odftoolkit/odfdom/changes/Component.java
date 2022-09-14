@@ -600,6 +600,11 @@ public class Component {
     return mRootElement.getOwnerDocument();
   }
 
+  /** @return the child starting from the given position and at cut at the endPosition */
+  public Node getChildNode(int startPosition, int endPosition) {
+    return getChildNode(startPosition);
+  }
+
   /** @return the child at the given position */
   public Node getChildNode(int position) {
     Node rootElement = null;

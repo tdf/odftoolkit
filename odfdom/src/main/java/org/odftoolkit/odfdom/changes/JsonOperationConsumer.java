@@ -1444,8 +1444,19 @@ public class JsonOperationConsumer {
       final Component parentComponent = rootComponent.getParentOf(start);
       if (parentComponent != null) {
         // the targetComponent might be either text or an element
-        int targetPos = start.optInt(start.length() - 1);
-        Node targetNode = parentComponent.getChildNode(targetPos);
+        int startPos = start.optInt(start.length() - 1);
+        Node targetNode;
+        if (end == null) {
+          targetNode = parentComponent.getChildNode(startPos);
+        } else { // if the end is not in same parent component take all the siblings
+          int targetPos = -1; // -1 means to the end of the parent element
+          // if it is the same parent provide the given number, otherwise -1 for till end
+          if (start.length() == end.length()
+              && start.optInt(start.length() - 2) == end.optInt(end.length() - 2)) {
+            targetPos = end.optInt(end.length() - 1);
+          }
+          targetNode = parentComponent.getChildNode(startPos, targetPos);
+        }
         format(parentComponent.mRootElement, targetNode, start, end, attrs, Boolean.FALSE);
       } else {
         LOG.log(

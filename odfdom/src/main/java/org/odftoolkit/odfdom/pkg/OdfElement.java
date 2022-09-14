@@ -1232,6 +1232,17 @@ public abstract class OdfElement extends ElementNSImpl {
    * @return the child node might be text or element
    */
   public Node receiveNode(int textPosStart) {
+    return this.receiveNode(textPosStart, textPosStart + 1);
+  }
+
+  /** ******************************************************** */
+  /**
+   * Receives node from this text container element.
+   *
+   * @param textPosStart The start delimiter for the child
+   * @return the child node might be text or element
+   */
+  public Node receiveNode(int textPosStart, int textPosEnd) {
     if (textPosStart < 0) {
       Logger.getLogger(OdfElement.class.getName())
           .warning(
@@ -1244,7 +1255,7 @@ public abstract class OdfElement extends ElementNSImpl {
         this.getFirstChild(),
         0,
         textPosStart,
-        textPosStart + 1,
+        textPosEnd,
         TextContentTraverser.Algorithm.RECEIVE,
         nodeContainer,
         withinTextContainer);
@@ -1544,11 +1555,11 @@ public abstract class OdfElement extends ElementNSImpl {
           currentPos = algorithm.execute(node, currentPos, posStart, posEnd, data[0], data[1]);
           node = _nextSibling;
         }
-      } else {
+      } else if (algorithm.equals(Algorithm.RECEIVE)) {
         boolean withinTextContainer = (Boolean) data[1];
-        while (node != null && currentPos < posEnd) {
+        while (node != null && (posEnd < 0 || currentPos < posEnd)) {
           // IMPORTANT: get next sibling first, otherwise references get lost by Xerces during
-          // splitting
+          // splitting later in the recursion traversing from one sibling to the next
           Node _nextSibling = node.getNextSibling();
           // ToDo: || algorithm.equals(Algorithm.MOVE)
           if (node instanceof Element) {
@@ -1567,6 +1578,9 @@ public abstract class OdfElement extends ElementNSImpl {
           // next sibling will be checked
           node = _nextSibling;
         }
+      } else {
+        throw new RuntimeException(
+            "OdfElement: Algorithm not implemented: " + algorithm.toString());
       }
       return currentPos;
     }
@@ -2230,22 +2244,23 @@ public abstract class OdfElement extends ElementNSImpl {
             contentLength = ((OdfElement) currentNode).getRepetition();
           }
 
-          // if the current node is selected
-          if (currentPos == posStart && (contentLength == 1 || currentNode instanceof Text)) {
+          // if the current node is selected & does not have to be cut
+          if (currentPos == posStart && (posEnd < 0 || (contentLength + posStart - 1) <= posEnd)) {
             newNodeContainer.add(currentNode);
             currentPos = posEnd;
-          } else if (currentPos + contentLength
-              > posStart) { // else if only a part of the text node is selected
+          } else if (posEnd > 0
+              && (currentPos + contentLength - 1)
+                  > posEnd) { // else if only a part of the text node is selected
             Node secondPart = null;
             if (currentNode instanceof Text) {
               // splitCursor is the first character of second part (counting starts with 0)
-              secondPart = ((Text) currentNode).splitText(posStart - currentPos);
+              secondPart = ((Text) currentNode).splitText(posEnd - currentPos);
               newNodeContainer.add(secondPart);
             } else {
               // handle component split...
               Node thirdPart = null;
               Node parent = ((OdfElement) currentNode).getParentNode();
-              secondPart = ((OdfElement) currentNode).split(posStart - currentPos);
+              secondPart = ((OdfElement) currentNode).split(posEnd - currentPos);
               if (((OdfElement) secondPart).getRepetition() > 1) {
                 thirdPart = ((OdfElement) secondPart).split(1);
               }

@@ -200,7 +200,7 @@
 {"name":"addText","start":[35,1],"text":"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean"},
 {"name":"addText","start":[35,215],"text":"."},
 {"name":"format","start":[35,1],"end":[35,214],"attrs":{"character":{"bold":true,"boldAsian":true,"fontName":"Open Sans","fontNameComplex":"Open Sans3","language":"en-US"}}},
-{"name":"format","start":[35,215],"end":[35,215],"attrs":{"character":{"fontName":"Open Sans2","language":"en-US"}}},
+{"name":"format","start":[35,215],"end":[35,215],"attrs":{"character":{"bold":true,"boldAsian":true,"fontName":"Open Sans2","fontNameComplex":"Open Sans3","language":"en-US"}}},
 {"name":"addParagraph","start":[36],"attrs":{"styleId":"Text_20_body","character":{"bold":true,"boldAsian":true,"fontName":"Open Sans","fontNameComplex":"Open Sans3","language":"de-DE"},"paragraph":{"alignment":"center"}}},
 {"name":"addParagraph","start":[37],"attrs":{"styleId":"Text_20_body","character":{"bold":true,"boldAsian":true,"fontName":"Open Sans","fontNameComplex":"Open Sans3","language":"de-DE"}}},
 {"name":"addParagraph","start":[38],"attrs":{"styleId":"Text_20_body","character":{"fontName":"Open Sans2","fontNameComplex":"Open Sans3","fontSize":12,"fontSizeAsian":12,"italic":true,"italicAsian":true,"language":"en-US"},"paragraph":{"alignment":"right","lineHeight":{"type":"percent","value":150}}}},

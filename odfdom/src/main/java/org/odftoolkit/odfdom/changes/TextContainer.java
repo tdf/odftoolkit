@@ -60,6 +60,14 @@ public class TextContainer<T> extends Component {
   }
 
   /**
+   * @return either a text node from start index and cut after endIndex) or an element being the
+   *     root element of a component
+   */
+  public Node getChildNode(int startIndex, int endIndex) {
+    return ((OdfElement) mRootElement).receiveNode(startIndex, endIndex);
+  }
+
+  /**
    * Removes a component from the text element container. Removes either an element representing a
    * component or text node of size 1
    *
