@@ -300,6 +300,7 @@
 {"name":"addText","start":[2,10,2,2,1],"text":"SOS"},
 {"name":"addText","start":[2,10,2,2,4],"text":" "},
 {"name":"format","start":[2,10,2,2,1],"end":[2,10,2,2,3],"attrs":{"character":{"fontNameAsian":"Arial","language":"en-US"}}},
+{"name":"format","start":[2,10,2,2,4],"end":[2,10,2,2,4],"attrs":{"character":{"language":"en-US"}}},
 {"name":"addParagraph","start":[2,10,2,3],"attrs":{"styleId":"Standard","paragraph":{"marginBottom":212,"marginTop":212,"tabStops":[{"pos":6251},{"pos":13503}]}}},
 {"name":"addCells","start":[2,10,3],"attrs":{"cell":{"alignVert":"top","borderBottom":{"color":{"type":"rgb","value":"000000"},"space":0,"style":"single","width":26},"borderLeft":{"color":{"type":"rgb","value":"000000"},"space":123,"style":"single","width":26},"borderRight":{"space":123,"style":"none"},"borderTop":{"space":0,"style":"none"},"paddingBottom":0,"paddingLeft":123,"paddingRight":123,"paddingTop":0}}},
 {"name":"addParagraph","start":[2,10,3,1],"attrs":{"styleId":"Standard","paragraph":{"indentFirstLine":-1251,"indentLeft":1251,"indentRight":0,"marginBottom":0,"marginLeft":1251,"marginRight":0,"marginTop":212,"tabStops":[{"pos":7502},{"pos":14754}]}}},
