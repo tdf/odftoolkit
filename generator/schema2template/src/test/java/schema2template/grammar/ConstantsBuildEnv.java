@@ -72,7 +72,7 @@ class ConstantsBuildEnv {
   // But the generated Java files still need context not being generated and want compile t
   // Therefore, target/odf
   static final String TARGET_BASE_DIR =
-      BASE_DIR + "target" + File.separator + "odf" + File.separator;
+      BASE_DIR + "target" + File.separator + "odf-generation" + File.separator;
 
   // BTW the Maven default output directory for generated sources is target/generated-sources/
   static final String GENERATION_TARGET_BASE_DIR = TARGET_BASE_DIR + "generation" + File.separator;
