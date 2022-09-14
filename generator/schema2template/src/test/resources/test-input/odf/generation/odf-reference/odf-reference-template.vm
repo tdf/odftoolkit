@@ -106,6 +106,30 @@ for an element to have a special child element.</p>
 &nbsp;</td>
 </tr>
 <tr>
+<td class="left">Attributes</td>
+<td class="right">
+#foreach( $attribute in ${element.getAttributes()} )
+#if ($attribute == "*")
+[any org.w3c.dom.Attribute]&nbsp;
+#else
+#if (${attribute.withMultiples().size()} <= 1)
+#set ($duplicates = "")
+#else
+#set ($duplicates = "[${attribute.getMultipleNumber()}]")
+#end
+##
+#if (${element.isMandatory($attribute)})
+#set ($mandatory = "mandatory")
+#else
+#set ($mandatory = "")
+#end
+##
+	<a href="#attribute_${attribute}_${attribute.getMultipleNumber()}" class="unbreakable ${mandatory}">${attribute}${duplicates}</a>&nbsp;
+#end
+#end
+&nbsp;</td>
+</tr>
+<tr>
 <td class="left">Child Elements</td>
 <td class="right">
 #foreach($child in ${element.getChildElements()})
@@ -131,30 +155,6 @@ for an element to have a special child element.</p>
 #end
 ##
 	<a href="#element_${child}_${child.getMultipleNumber()}" class="unbreakable ${mandatory}">${child}${duplicates}</a>${multiple}&nbsp;
-#end
-#end
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Attributes</td>
-<td class="right">
-#foreach( $attribute in ${element.getAttributes()} )
-#if ($attribute == "*")
-[any org.w3c.dom.Attribute]&nbsp;
-#else
-#if (${attribute.withMultiples().size()} <= 1)
-#set ($duplicates = "")
-#else
-#set ($duplicates = "[${attribute.getMultipleNumber()}]")
-#end
-##
-#if (${element.isMandatory($attribute)})
-#set ($mandatory = "mandatory")
-#else
-#set ($mandatory = "")
-#end
-##
-	<a href="#attribute_${attribute}_${attribute.getMultipleNumber()}" class="unbreakable ${mandatory}">${attribute}${duplicates}</a>&nbsp;
 #end
 #end
 &nbsp;</td>
