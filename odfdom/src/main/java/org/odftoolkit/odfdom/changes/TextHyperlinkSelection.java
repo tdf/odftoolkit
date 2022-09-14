@@ -26,7 +26,7 @@ public class TextHyperlinkSelection extends TextSelection implements Comparable 
   /**
    * Constructor.
    *
-   * @param AnchorElement the AnchorElement of the Anchor element.
+   * @param anchorElement the AnchorElement of the Anchor element.
    * @param startPosition the startPosition of the Anchor element.
    */
   public TextHyperlinkSelection(TextAElement anchorElement, List<Integer> startPosition) {
@@ -38,7 +38,7 @@ public class TextHyperlinkSelection extends TextSelection implements Comparable 
   /**
    * Constructor.
    *
-   * @param AnchorElement the AnchorElement of the Anchor element.
+   * @param anchorElement the AnchorElement of the Anchor element.
    * @param startPosition the startPosition of the Anchor element.
    */
   public TextHyperlinkSelection(
@@ -59,7 +59,7 @@ public class TextHyperlinkSelection extends TextSelection implements Comparable 
   }
 
   /**
-   * @param TreeSet of TextSelections, it is assumed there is only one anchor in such set.
+   * @param set of TextSelections, it is assumed there is only one anchor in such set.
    * @return the first overlapping text Element in the given set (ascending searched).
    */
   public TextHyperlinkSelection getOverLappingHyperlinkSelection(TreeSet<TextSelection> set) {
