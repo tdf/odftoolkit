@@ -100,7 +100,7 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
 	 */
 	public Boolean getStyleNumLetterSyncAttribute() {
 		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -172,7 +172,7 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
 	 */
 	public Integer getTextDisplayLevelsAttribute() {
 		TextDisplayLevelsAttribute attr = (TextDisplayLevelsAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "display-levels");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(TextDisplayLevelsAttribute.DEFAULT_VALUE);
@@ -196,7 +196,7 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
 	 */
 	public Integer getTextStartValueAttribute() {
 		TextStartValueAttribute attr = (TextStartValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "start-value");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(TextStartValueAttribute.DEFAULT_VALUE);

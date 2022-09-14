@@ -70,7 +70,7 @@ public class TableOperationElement extends OdfElement {
 	 */
 	public Integer getTableIndexAttribute() {
 		TableIndexAttribute attr = (TableIndexAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "index");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

@@ -637,7 +637,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getStyleDecimalPlacesAttribute() {
 		StyleDecimalPlacesAttribute attr = (StyleDecimalPlacesAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "decimal-places");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -805,7 +805,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStylePrintContentAttribute() {
 		StylePrintContentAttribute attr = (StylePrintContentAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "print-content");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -829,7 +829,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleRepeatContentAttribute() {
 		StyleRepeatContentAttribute attr = (StyleRepeatContentAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "repeat-content");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -925,7 +925,7 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleShrinkToFitAttribute() {
 		StyleShrinkToFitAttribute attr = (StyleShrinkToFitAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "shrink-to-fit");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

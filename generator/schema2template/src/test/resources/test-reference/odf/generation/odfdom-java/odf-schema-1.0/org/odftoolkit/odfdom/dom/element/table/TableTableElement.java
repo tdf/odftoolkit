@@ -77,7 +77,7 @@ public class TableTableElement extends OdfStylableElement {
 	 */
 	public Boolean getTableIsSubTableAttribute() {
 		TableIsSubTableAttribute attr = (TableIsSubTableAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "is-sub-table");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableIsSubTableAttribute.DEFAULT_VALUE);
@@ -125,7 +125,7 @@ public class TableTableElement extends OdfStylableElement {
 	 */
 	public Boolean getTablePrintAttribute() {
 		TablePrintAttribute attr = (TablePrintAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "print");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TablePrintAttribute.DEFAULT_VALUE);
@@ -173,7 +173,7 @@ public class TableTableElement extends OdfStylableElement {
 	 */
 	public Boolean getTableProtectedAttribute() {
 		TableProtectedAttribute attr = (TableProtectedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "protected");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableProtectedAttribute.DEFAULT_VALUE);
@@ -413,5 +413,4 @@ public class TableTableElement extends OdfStylableElement {
   public boolean isComponentRoot() {
     return true;
   }
-
 }

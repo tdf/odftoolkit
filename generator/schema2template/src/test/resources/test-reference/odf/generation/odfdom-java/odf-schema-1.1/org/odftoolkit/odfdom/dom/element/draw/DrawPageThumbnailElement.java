@@ -129,7 +129,7 @@ public class DrawPageThumbnailElement extends DrawShapeElementBase {
 	 */
 	public Integer getDrawPageNumberAttribute() {
 		DrawPageNumberAttribute attr = (DrawPageNumberAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "page-number");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -201,7 +201,7 @@ public class DrawPageThumbnailElement extends DrawShapeElementBase {
 	 */
 	public Boolean getPresentationPlaceholderAttribute() {
 		PresentationPlaceholderAttribute attr = (PresentationPlaceholderAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "placeholder");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -225,7 +225,7 @@ public class DrawPageThumbnailElement extends DrawShapeElementBase {
 	 */
 	public Boolean getPresentationUserTransformedAttribute() {
 		PresentationUserTransformedAttribute attr = (PresentationUserTransformedAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "user-transformed");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

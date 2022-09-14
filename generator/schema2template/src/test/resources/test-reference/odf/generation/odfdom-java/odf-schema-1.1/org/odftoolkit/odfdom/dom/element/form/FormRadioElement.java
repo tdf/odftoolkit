@@ -108,7 +108,7 @@ public class FormRadioElement extends OdfElement {
 	 */
 	public Boolean getFormCurrentSelectedAttribute() {
 		FormCurrentSelectedAttribute attr = (FormCurrentSelectedAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "current-selected");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormCurrentSelectedAttribute.DEFAULT_VALUE);
@@ -156,7 +156,7 @@ public class FormRadioElement extends OdfElement {
 	 */
 	public Boolean getFormDisabledAttribute() {
 		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
@@ -304,7 +304,7 @@ public class FormRadioElement extends OdfElement {
 	 */
 	public Boolean getFormPrintableAttribute() {
 		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);
@@ -328,7 +328,7 @@ public class FormRadioElement extends OdfElement {
 	 */
 	public Boolean getFormSelectedAttribute() {
 		FormSelectedAttribute attr = (FormSelectedAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "selected");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormSelectedAttribute.DEFAULT_VALUE);
@@ -352,7 +352,7 @@ public class FormRadioElement extends OdfElement {
 	 */
 	public Integer getFormTabIndexAttribute() {
 		FormTabIndexAttribute attr = (FormTabIndexAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-index");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(FormTabIndexAttribute.DEFAULT_VALUE);
@@ -376,7 +376,7 @@ public class FormRadioElement extends OdfElement {
 	 */
 	public Boolean getFormTabStopAttribute() {
 		FormTabStopAttribute attr = (FormTabStopAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-stop");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormTabStopAttribute.DEFAULT_VALUE);

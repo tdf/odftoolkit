@@ -98,7 +98,7 @@ public class TextBibliographyElement extends OdfStylableElement {
 	 */
 	public Boolean getTextProtectedAttribute() {
 		TextProtectedAttribute attr = (TextProtectedAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "protected");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

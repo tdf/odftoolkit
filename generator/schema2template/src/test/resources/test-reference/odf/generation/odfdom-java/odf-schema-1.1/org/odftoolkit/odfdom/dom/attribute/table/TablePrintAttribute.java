@@ -82,12 +82,7 @@ public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespac
 	 */
 	public boolean booleanValue() {
 		String val = super.getValue();
-		try {
-			return Boolean.parseBoolean(val);
-		} catch (NumberFormatException e) {
-			// TODO: validation handling/logging
-			throw (e);
-		}
+		return Boolean.parseBoolean(val);
 	}
 
 	/**

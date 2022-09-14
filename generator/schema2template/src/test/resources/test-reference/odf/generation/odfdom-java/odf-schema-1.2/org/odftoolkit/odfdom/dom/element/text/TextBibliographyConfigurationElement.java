@@ -171,7 +171,7 @@ public class TextBibliographyConfigurationElement extends OdfElement {
 	 */
 	public Boolean getTextNumberedEntriesAttribute() {
 		TextNumberedEntriesAttribute attr = (TextNumberedEntriesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "numbered-entries");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TextNumberedEntriesAttribute.DEFAULT_VALUE);
@@ -243,7 +243,7 @@ public class TextBibliographyConfigurationElement extends OdfElement {
 	 */
 	public Boolean getTextSortByPositionAttribute() {
 		TextSortByPositionAttribute attr = (TextSortByPositionAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "sort-by-position");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TextSortByPositionAttribute.DEFAULT_VALUE);

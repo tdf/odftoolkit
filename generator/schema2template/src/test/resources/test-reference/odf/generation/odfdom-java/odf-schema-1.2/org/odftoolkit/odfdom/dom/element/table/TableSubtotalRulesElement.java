@@ -69,7 +69,7 @@ public class TableSubtotalRulesElement extends OdfElement {
 	 */
 	public Boolean getTableBindStylesToContentAttribute() {
 		TableBindStylesToContentAttribute attr = (TableBindStylesToContentAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "bind-styles-to-content");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableBindStylesToContentAttribute.DEFAULT_VALUE);
@@ -117,7 +117,7 @@ public class TableSubtotalRulesElement extends OdfElement {
 	 */
 	public Boolean getTablePageBreaksOnGroupChangeAttribute() {
 		TablePageBreaksOnGroupChangeAttribute attr = (TablePageBreaksOnGroupChangeAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "page-breaks-on-group-change");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TablePageBreaksOnGroupChangeAttribute.DEFAULT_VALUE);

@@ -178,7 +178,7 @@ public class ChartLegendElement extends OdfStylableElement {
 	 */
 	public Double getStyleLegendExpansionAspectRatioAttribute() {
 		StyleLegendExpansionAspectRatioAttribute attr = (StyleLegendExpansionAspectRatioAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "legend-expansion-aspect-ratio");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return null;

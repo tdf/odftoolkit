@@ -97,7 +97,7 @@ public class DrawAElement extends OdfElement {
 	 */
 	public Boolean getOfficeServerMapAttribute() {
 		OfficeServerMapAttribute attr = (OfficeServerMapAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "server-map");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(OfficeServerMapAttribute.DEFAULT_VALUE);

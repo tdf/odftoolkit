@@ -21,7 +21,7 @@
  *
  * <p>**********************************************************************
  */
-package schema2template.grammar.odf;
+package schema2template.grammar;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,9 +30,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import schema2template.grammar.PuzzleComponent;
-import schema2template.grammar.PuzzlePiece;
-import schema2template.grammar.XMLModel;
 import schema2template.template.SourceCodeBaseClass;
 
 /**
@@ -44,6 +41,10 @@ public class OdfModel {
   private final Map<String, List<String>> mNameToFamiliesMap;
 
   private final Map<String, String> mComponentRootElementNames;
+
+  /** Contains all attributes names that cause a repetition of it's element! */
+  private final Set<String> mRepetitionAttributeNames;
+
   /**
    * The attribute name is the key to another map having the default as value with element parent as
    * key
@@ -55,14 +56,20 @@ public class OdfModel {
   // parent element
   private final String ALL_ELEMENTS = "*";
 
+  /** the easy user access to the parsed grammar */
+  private final XMLModel mXmlModel;
+
   public OdfModel(
       Map<String, List<String>> nameToFamiliesMap,
       Map<String, String> componentRootElementNames,
+      Set<String> repetitionAttributeNames,
       Map<String, Map<String, String>> attributeDefaults,
       XMLModel xmlModel) {
     mNameToFamiliesMap = nameToFamiliesMap;
     mComponentRootElementNames = componentRootElementNames;
+    mRepetitionAttributeNames = repetitionAttributeNames;
     mAttributeDefaults = attributeDefaults;
+    mXmlModel = xmlModel;
     mStyleFamilyToPropertiesMap =
         new OdfFamilyPropertiesPatternMatcher(xmlModel.getGrammar()).getFamilyProperties();
   }
@@ -199,8 +206,48 @@ public class OdfModel {
   /**
    * The name of all elements that are the beginning of a semantic user component, which is usually
    * added/deleted by user aligned with the common user given name!
+   *
+   * @param qualifiedElementName the QName of the element
    */
   public boolean isRootOfComponent(String qualifiedElementName) {
     return mComponentRootElementNames.containsKey(qualifiedElementName);
+  }
+
+  /**
+   * Some attribute represents the number of repetition of its parent element. This method
+   * identifies those.
+   *
+   * @param qualifiedAttributeName the QName of the attribute
+   * @return true if the attribute represents the semantic of the repetition of its parent element!
+   */
+  public boolean isRepetionAttribute(String qualifiedAttributeName) {
+    return mRepetitionAttributeNames.contains(qualifiedAttributeName);
+  }
+
+  /**
+   * Some attribute represents the number of repetition of its parent element. This method returns
+   * such an attribute for a given element.
+   *
+   * @param qualifiedElementName the QName of the element
+   * @return the attribute with the repetition function as PuzzlePiece
+   */
+  public PuzzlePiece getRepetionAttribute(String qualifiedElementName) {
+    PuzzlePiece repetitionAttributeName = null;
+    for (PuzzlePiece attribute : mXmlModel.getElement(qualifiedElementName).getAttributes()) {
+      if (mRepetitionAttributeNames.contains(attribute.getQName())) {
+        if (repetitionAttributeName != null) {
+          throw new RuntimeException(
+              "In element '"
+                  + qualifiedElementName
+                  + "' should be only one repetition attribute, but there are '"
+                  + repetitionAttributeName
+                  + "' and '"
+                  + attribute.getQName()
+                  + "'!");
+        }
+        repetitionAttributeName = attribute;
+      }
+    }
+    return repetitionAttributeName;
   }
 }

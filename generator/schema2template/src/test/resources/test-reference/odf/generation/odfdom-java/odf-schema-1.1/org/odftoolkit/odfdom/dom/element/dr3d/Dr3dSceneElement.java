@@ -171,7 +171,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	 */
 	public Boolean getDr3dLightingModeAttribute() {
 		Dr3dLightingModeAttribute attr = (Dr3dLightingModeAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "lighting-mode");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -243,7 +243,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	 */
 	public Integer getDr3dShadowSlantAttribute() {
 		Dr3dShadowSlantAttribute attr = (Dr3dShadowSlantAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "shadow-slant");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -483,7 +483,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	 */
 	public Integer getDrawZIndexAttribute() {
 		DrawZIndexAttribute attr = (DrawZIndexAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "z-index");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -723,7 +723,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	 */
 	public Boolean getTableTableBackgroundAttribute() {
 		TableTableBackgroundAttribute attr = (TableTableBackgroundAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "table-background");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -747,7 +747,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	 */
 	public Integer getTextAnchorPageNumberAttribute() {
 		TextAnchorPageNumberAttribute attr = (TextAnchorPageNumberAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "anchor-page-number");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

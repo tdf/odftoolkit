@@ -72,7 +72,7 @@ public class PresentationSoundElement extends OdfElement {
 	 */
 	public Boolean getPresentationPlayFullAttribute() {
 		PresentationPlayFullAttribute attr = (PresentationPlayFullAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "play-full");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

@@ -76,7 +76,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	 */
 	public Boolean getTableContainsHeaderAttribute() {
 		TableContainsHeaderAttribute attr = (TableContainsHeaderAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "contains-header");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableContainsHeaderAttribute.DEFAULT_VALUE);
@@ -100,7 +100,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	 */
 	public Boolean getTableDisplayFilterButtonsAttribute() {
 		TableDisplayFilterButtonsAttribute attr = (TableDisplayFilterButtonsAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "display-filter-buttons");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableDisplayFilterButtonsAttribute.DEFAULT_VALUE);
@@ -124,7 +124,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	 */
 	public Boolean getTableHasPersistentDataAttribute() {
 		TableHasPersistentDataAttribute attr = (TableHasPersistentDataAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "has-persistent-data");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableHasPersistentDataAttribute.DEFAULT_VALUE);
@@ -148,7 +148,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	 */
 	public Boolean getTableIsSelectionAttribute() {
 		TableIsSelectionAttribute attr = (TableIsSelectionAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "is-selection");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableIsSelectionAttribute.DEFAULT_VALUE);
@@ -196,7 +196,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	 */
 	public Boolean getTableOnUpdateKeepSizeAttribute() {
 		TableOnUpdateKeepSizeAttribute attr = (TableOnUpdateKeepSizeAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "on-update-keep-size");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableOnUpdateKeepSizeAttribute.DEFAULT_VALUE);
@@ -220,7 +220,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	 */
 	public Boolean getTableOnUpdateKeepStylesAttribute() {
 		TableOnUpdateKeepStylesAttribute attr = (TableOnUpdateKeepStylesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "on-update-keep-styles");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableOnUpdateKeepStylesAttribute.DEFAULT_VALUE);

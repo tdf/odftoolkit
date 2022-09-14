@@ -231,7 +231,7 @@ public class DrawPathElement extends DrawShapeElementBase {
 	 */
 	public Integer getSvgViewBoxAttribute() {
 		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "viewBox");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

@@ -77,7 +77,7 @@ public class DrawGradientElement extends OdfElement {
 	 */
 	public Integer getDrawAngleAttribute() {
 		DrawAngleAttribute attr = (DrawAngleAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "angle");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

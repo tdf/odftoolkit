@@ -73,7 +73,7 @@ public class NumberScientificNumberElement extends OdfElement {
 	 */
 	public Integer getNumberDecimalPlacesAttribute() {
 		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "decimal-places");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -97,7 +97,7 @@ public class NumberScientificNumberElement extends OdfElement {
 	 */
 	public Integer getNumberExponentIntervalAttribute() {
 		NumberExponentIntervalAttribute attr = (NumberExponentIntervalAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "exponent-interval");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -121,7 +121,7 @@ public class NumberScientificNumberElement extends OdfElement {
 	 */
 	public Boolean getNumberForcedExponentSignAttribute() {
 		NumberForcedExponentSignAttribute attr = (NumberForcedExponentSignAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "forced-exponent-sign");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -145,7 +145,7 @@ public class NumberScientificNumberElement extends OdfElement {
 	 */
 	public Boolean getNumberGroupingAttribute() {
 		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "grouping");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(NumberGroupingAttribute.DEFAULT_VALUE);
@@ -169,7 +169,7 @@ public class NumberScientificNumberElement extends OdfElement {
 	 */
 	public Integer getNumberMinDecimalPlacesAttribute() {
 		NumberMinDecimalPlacesAttribute attr = (NumberMinDecimalPlacesAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-decimal-places");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -193,7 +193,7 @@ public class NumberScientificNumberElement extends OdfElement {
 	 */
 	public Integer getNumberMinExponentDigitsAttribute() {
 		NumberMinExponentDigitsAttribute attr = (NumberMinExponentDigitsAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-exponent-digits");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -217,7 +217,7 @@ public class NumberScientificNumberElement extends OdfElement {
 	 */
 	public Integer getNumberMinIntegerDigitsAttribute() {
 		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-integer-digits");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

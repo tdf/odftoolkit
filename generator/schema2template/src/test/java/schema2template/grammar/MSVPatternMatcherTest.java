@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package schema2template.grammar.odf;
+package schema2template.grammar;
 
 import static org.junit.Assert.fail;
 
@@ -23,8 +23,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import schema2template.grammar.XMLModel;
-import schema2template.grammar.odf.ConstantsOdf.OdfSpecificationPart;
+import schema2template.grammar.ConstantsOdf.OdfSpecificationPart;
 
 /**
  * @author Svante Schubert Tests the finding the ODF family pattern of the ODF grammar within the

@@ -83,7 +83,7 @@ public class DrawRegularPolygonElement extends DrawShapeElementBase {
 	 */
 	public Boolean getDrawConcaveAttribute() {
 		DrawConcaveAttribute attr = (DrawConcaveAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "concave");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -109,7 +109,7 @@ public class DrawRegularPolygonElement extends DrawShapeElementBase {
 	 */
 	public Integer getDrawCornersAttribute() {
 		DrawCornersAttribute attr = (DrawCornersAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "corners");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

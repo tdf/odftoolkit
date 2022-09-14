@@ -124,7 +124,7 @@ public class TableDataPilotDisplayInfoElement extends OdfElement {
 	 */
 	public Boolean getTableEnabledAttribute() {
 		TableEnabledAttribute attr = (TableEnabledAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "enabled");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -150,7 +150,7 @@ public class TableDataPilotDisplayInfoElement extends OdfElement {
 	 */
 	public Integer getTableMemberCountAttribute() {
 		TableMemberCountAttribute attr = (TableMemberCountAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "member-count");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

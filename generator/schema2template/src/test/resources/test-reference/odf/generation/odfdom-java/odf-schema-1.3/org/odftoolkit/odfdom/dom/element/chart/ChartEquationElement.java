@@ -73,7 +73,7 @@ public class ChartEquationElement extends OdfElement {
 	 */
 	public Boolean getChartAutomaticContentAttribute() {
 		ChartAutomaticContentAttribute attr = (ChartAutomaticContentAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "automatic-content");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(ChartAutomaticContentAttribute.DEFAULT_VALUE);
@@ -97,7 +97,7 @@ public class ChartEquationElement extends OdfElement {
 	 */
 	public Boolean getChartDisplayEquationAttribute() {
 		ChartDisplayEquationAttribute attr = (ChartDisplayEquationAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "display-equation");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(ChartDisplayEquationAttribute.DEFAULT_VALUE);
@@ -121,7 +121,7 @@ public class ChartEquationElement extends OdfElement {
 	 */
 	public Boolean getChartDisplayRSquareAttribute() {
 		ChartDisplayRSquareAttribute attr = (ChartDisplayRSquareAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "display-r-square");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(ChartDisplayRSquareAttribute.DEFAULT_VALUE);

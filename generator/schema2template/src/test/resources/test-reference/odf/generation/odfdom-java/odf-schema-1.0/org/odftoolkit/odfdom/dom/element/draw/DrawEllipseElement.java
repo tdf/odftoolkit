@@ -85,7 +85,7 @@ public class DrawEllipseElement extends DrawShapeElementBase {
 	 */
 	public Double getDrawEndAngleAttribute() {
 		DrawEndAngleAttribute attr = (DrawEndAngleAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "end-angle");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return null;
@@ -157,7 +157,7 @@ public class DrawEllipseElement extends DrawShapeElementBase {
 	 */
 	public Double getDrawStartAngleAttribute() {
 		DrawStartAngleAttribute attr = (DrawStartAngleAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "start-angle");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return null;

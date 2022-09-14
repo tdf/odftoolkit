@@ -201,7 +201,7 @@ public class DbColumnElement extends OdfElement {
 	 */
 	public Boolean getDbVisibleAttribute() {
 		DbVisibleAttribute attr = (DbVisibleAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "visible");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DbVisibleAttribute.DEFAULT_VALUE);
@@ -225,7 +225,7 @@ public class DbColumnElement extends OdfElement {
 	 */
 	public Boolean getOfficeBooleanValueAttribute() {
 		OfficeBooleanValueAttribute attr = (OfficeBooleanValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "boolean-value");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -347,7 +347,7 @@ public class DbColumnElement extends OdfElement {
 	 */
 	public Double getOfficeValueAttribute() {
 		OfficeValueAttribute attr = (OfficeValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "value");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return null;

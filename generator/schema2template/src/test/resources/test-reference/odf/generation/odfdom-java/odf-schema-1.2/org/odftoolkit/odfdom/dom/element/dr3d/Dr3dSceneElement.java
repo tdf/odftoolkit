@@ -485,7 +485,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	 */
 	public Integer getDrawZIndexAttribute() {
 		DrawZIndexAttribute attr = (DrawZIndexAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "z-index");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -725,7 +725,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	 */
 	public Boolean getTableTableBackgroundAttribute() {
 		TableTableBackgroundAttribute attr = (TableTableBackgroundAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "table-background");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -749,7 +749,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	 */
 	public Integer getTextAnchorPageNumberAttribute() {
 		TextAnchorPageNumberAttribute attr = (TextAnchorPageNumberAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "anchor-page-number");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

@@ -19,7 +19,7 @@
  *
  * <p>******************************************************************
  */
-package schema2template.grammar.odf;
+package schema2template.grammar;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import schema2template.GenerationParameters;
 import schema2template.SchemaToTemplate;
-import schema2template.grammar.odf.ConstantsOdf.OdfSpecificationPart;
+import schema2template.grammar.ConstantsOdf.OdfSpecificationPart;
 
 public class GenerationOdfReferenceTest {
 

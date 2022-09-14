@@ -19,7 +19,7 @@
  *
  * <p>******************************************************************
  */
-package schema2template.grammar.odf;
+package schema2template.grammar;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -149,6 +149,7 @@ public class GenerationOdfdomJavaTest {
       SchemaToTemplate.run(generations);
     } catch (Exception e) {
       Assert.fail("Exception during test run: " + e.toString());
+      e.printStackTrace();
       throw new RuntimeException(e);
     }
     DirectoryCompare.compareDirectories(

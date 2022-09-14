@@ -94,7 +94,7 @@ public class TextHiddenParagraphElement extends OdfElement {
 	 */
 	public Boolean getTextIsHiddenAttribute() {
 		TextIsHiddenAttribute attr = (TextIsHiddenAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "is-hidden");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

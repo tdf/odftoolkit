@@ -79,5 +79,4 @@ public class TextLineBreakElement extends OdfElement {
   public boolean isComponentRoot() {
     return true;
   }
-
 }

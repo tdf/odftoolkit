@@ -21,7 +21,7 @@
  *
  * <p>*********************************************************************
  */
-package schema2template.grammar.odf;
+package schema2template.grammar;
 
 import com.sun.msv.grammar.Expression;
 import java.io.File;
@@ -32,8 +32,6 @@ import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import schema2template.grammar.MSVExpressionIterator;
-import schema2template.grammar.XMLModel;
 
 /**
  * MSVRunTimeDumpTest is loading each ODF Grammar into the MSV using our PuzzlePiece class and

@@ -68,7 +68,7 @@ public abstract class NumberDateStyleElement extends NumberDataStyleElementBase 
 	 */
 	public Boolean getNumberAutomaticOrderAttribute() {
 		NumberAutomaticOrderAttribute attr = (NumberAutomaticOrderAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "automatic-order");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(NumberAutomaticOrderAttribute.DEFAULT_VALUE);

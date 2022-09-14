@@ -70,7 +70,7 @@ public class FormOptionElement extends OdfElement {
 	 */
 	public Boolean getFormCurrentSelectedAttribute() {
 		FormCurrentSelectedAttribute attr = (FormCurrentSelectedAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "current-selected");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormCurrentSelectedAttribute.DEFAULT_VALUE);
@@ -118,7 +118,7 @@ public class FormOptionElement extends OdfElement {
 	 */
 	public Boolean getFormSelectedAttribute() {
 		FormSelectedAttribute attr = (FormSelectedAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "selected");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormSelectedAttribute.DEFAULT_VALUE);

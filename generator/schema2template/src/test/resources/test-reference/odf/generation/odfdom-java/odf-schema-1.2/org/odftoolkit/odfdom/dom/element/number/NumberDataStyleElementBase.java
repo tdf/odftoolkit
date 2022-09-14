@@ -336,7 +336,7 @@ public abstract class NumberDataStyleElementBase extends DataStyleElement {
 	 */
 	public Boolean getStyleVolatileAttribute() {
 		StyleVolatileAttribute attr = (StyleVolatileAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "volatile");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

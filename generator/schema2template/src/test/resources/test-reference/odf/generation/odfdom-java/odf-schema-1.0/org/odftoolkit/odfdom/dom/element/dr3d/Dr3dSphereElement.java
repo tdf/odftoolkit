@@ -246,7 +246,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement {
 	 */
 	public Integer getDrawZIndexAttribute() {
 		DrawZIndexAttribute attr = (DrawZIndexAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "z-index");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

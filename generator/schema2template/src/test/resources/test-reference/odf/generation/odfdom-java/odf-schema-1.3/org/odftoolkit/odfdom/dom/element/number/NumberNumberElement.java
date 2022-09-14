@@ -72,7 +72,7 @@ public class NumberNumberElement extends OdfElement {
 	 */
 	public Integer getNumberDecimalPlacesAttribute() {
 		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "decimal-places");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -120,7 +120,7 @@ public class NumberNumberElement extends OdfElement {
 	 */
 	public Double getNumberDisplayFactorAttribute() {
 		NumberDisplayFactorAttribute attr = (NumberDisplayFactorAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "display-factor");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return Double.valueOf(NumberDisplayFactorAttribute.DEFAULT_VALUE);
@@ -144,7 +144,7 @@ public class NumberNumberElement extends OdfElement {
 	 */
 	public Boolean getNumberGroupingAttribute() {
 		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "grouping");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(NumberGroupingAttribute.DEFAULT_VALUE);
@@ -168,7 +168,7 @@ public class NumberNumberElement extends OdfElement {
 	 */
 	public Integer getNumberMinDecimalPlacesAttribute() {
 		NumberMinDecimalPlacesAttribute attr = (NumberMinDecimalPlacesAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-decimal-places");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -192,7 +192,7 @@ public class NumberNumberElement extends OdfElement {
 	 */
 	public Integer getNumberMinIntegerDigitsAttribute() {
 		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-integer-digits");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

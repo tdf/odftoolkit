@@ -68,7 +68,7 @@ public class TableTableRowGroupElement extends OdfElement {
 	 */
 	public Boolean getTableDisplayAttribute() {
 		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "display");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableDisplayAttribute.DEFAULT_VALUE_TRUE);

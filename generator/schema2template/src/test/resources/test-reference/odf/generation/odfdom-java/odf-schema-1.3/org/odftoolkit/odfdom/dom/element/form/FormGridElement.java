@@ -101,7 +101,7 @@ public class FormGridElement extends OdfElement {
 	 */
 	public Boolean getFormDisabledAttribute() {
 		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
@@ -173,7 +173,7 @@ public class FormGridElement extends OdfElement {
 	 */
 	public Boolean getFormPrintableAttribute() {
 		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);
@@ -197,7 +197,7 @@ public class FormGridElement extends OdfElement {
 	 */
 	public Integer getFormTabIndexAttribute() {
 		FormTabIndexAttribute attr = (FormTabIndexAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-index");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(FormTabIndexAttribute.DEFAULT_VALUE);
@@ -221,7 +221,7 @@ public class FormGridElement extends OdfElement {
 	 */
 	public Boolean getFormTabStopAttribute() {
 		FormTabStopAttribute attr = (FormTabStopAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-stop");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormTabStopAttribute.DEFAULT_VALUE);

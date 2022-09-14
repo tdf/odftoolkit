@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package schema2template.grammar.odf;
+package schema2template.grammar;
 
 import com.sun.msv.grammar.AttributeExp;
 import com.sun.msv.grammar.ChoiceExp;
@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import schema2template.grammar.PuzzlePiece;
 
 /**
  * This class searches for a certain Pattern in the ODF grammar and returns the results.

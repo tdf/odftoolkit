@@ -143,7 +143,7 @@ public class TextIllustrationIndexSourceElement extends OdfElement {
 	 */
 	public Boolean getTextRelativeTabStopPositionAttribute() {
 		TextRelativeTabStopPositionAttribute attr = (TextRelativeTabStopPositionAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "relative-tab-stop-position");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TextRelativeTabStopPositionAttribute.DEFAULT_VALUE);
@@ -167,7 +167,7 @@ public class TextIllustrationIndexSourceElement extends OdfElement {
 	 */
 	public Boolean getTextUseCaptionAttribute() {
 		TextUseCaptionAttribute attr = (TextUseCaptionAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-caption");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TextUseCaptionAttribute.DEFAULT_VALUE);

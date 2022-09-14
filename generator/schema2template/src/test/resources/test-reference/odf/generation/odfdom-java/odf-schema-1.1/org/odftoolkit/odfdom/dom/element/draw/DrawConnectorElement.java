@@ -111,7 +111,7 @@ public class DrawConnectorElement extends DrawShapeElementBase {
 	 */
 	public Integer getDrawEndGluePointAttribute() {
 		DrawEndGluePointAttribute attr = (DrawEndGluePointAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "end-glue-point");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -207,7 +207,7 @@ public class DrawConnectorElement extends DrawShapeElementBase {
 	 */
 	public Integer getDrawStartGluePointAttribute() {
 		DrawStartGluePointAttribute attr = (DrawStartGluePointAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "start-glue-point");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

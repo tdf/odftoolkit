@@ -14,7 +14,7 @@
  * License.
  *
  */
-package schema2template.grammar.odf;
+package schema2template.grammar;
 
 import java.io.BufferedReader;
 import java.io.IOException;

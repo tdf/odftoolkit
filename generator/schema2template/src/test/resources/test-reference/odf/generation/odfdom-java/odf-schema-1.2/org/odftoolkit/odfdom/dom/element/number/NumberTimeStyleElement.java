@@ -92,7 +92,7 @@ public abstract class NumberTimeStyleElement extends NumberDataStyleElementBase 
 	 */
 	public Boolean getNumberTruncateOnOverflowAttribute() {
 		NumberTruncateOnOverflowAttribute attr = (NumberTruncateOnOverflowAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "truncate-on-overflow");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(NumberTruncateOnOverflowAttribute.DEFAULT_VALUE);

@@ -96,7 +96,7 @@ public class TableSortElement extends OdfElement {
 	 */
 	public Boolean getTableBindStylesToContentAttribute() {
 		TableBindStylesToContentAttribute attr = (TableBindStylesToContentAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "bind-styles-to-content");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableBindStylesToContentAttribute.DEFAULT_VALUE);

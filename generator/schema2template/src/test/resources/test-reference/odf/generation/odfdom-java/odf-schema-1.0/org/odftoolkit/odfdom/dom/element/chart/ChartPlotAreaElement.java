@@ -207,7 +207,7 @@ public class ChartPlotAreaElement extends OdfStylableElement {
 	 */
 	public Boolean getDr3dLightingModeAttribute() {
 		Dr3dLightingModeAttribute attr = (Dr3dLightingModeAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "lighting-mode");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -279,7 +279,7 @@ public class ChartPlotAreaElement extends OdfStylableElement {
 	 */
 	public Integer getDr3dShadowSlantAttribute() {
 		Dr3dShadowSlantAttribute attr = (Dr3dShadowSlantAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "shadow-slant");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

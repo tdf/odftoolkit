@@ -120,7 +120,7 @@ public class Dr3dLightElement extends OdfElement {
 	 */
 	public Boolean getDr3dEnabledAttribute() {
 		Dr3dEnabledAttribute attr = (Dr3dEnabledAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "enabled");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -144,7 +144,7 @@ public class Dr3dLightElement extends OdfElement {
 	 */
 	public Boolean getDr3dSpecularAttribute() {
 		Dr3dSpecularAttribute attr = (Dr3dSpecularAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "specular");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

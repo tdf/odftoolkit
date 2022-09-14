@@ -88,7 +88,7 @@ public class StyleFooterLeftElement extends OdfElement {
 	 */
 	public Boolean getStyleDisplayAttribute() {
 		StyleDisplayAttribute attr = (StyleDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "display");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(StyleDisplayAttribute.DEFAULT_VALUE);

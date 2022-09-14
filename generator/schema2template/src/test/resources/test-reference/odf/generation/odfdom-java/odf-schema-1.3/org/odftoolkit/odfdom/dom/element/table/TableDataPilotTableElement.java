@@ -123,7 +123,7 @@ public class TableDataPilotTableElement extends OdfElement {
 	 */
 	public Boolean getTableDrillDownOnDoubleClickAttribute() {
 		TableDrillDownOnDoubleClickAttribute attr = (TableDrillDownOnDoubleClickAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "drill-down-on-double-click");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableDrillDownOnDoubleClickAttribute.DEFAULT_VALUE);
@@ -171,7 +171,7 @@ public class TableDataPilotTableElement extends OdfElement {
 	 */
 	public Boolean getTableIdentifyCategoriesAttribute() {
 		TableIdentifyCategoriesAttribute attr = (TableIdentifyCategoriesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "identify-categories");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableIdentifyCategoriesAttribute.DEFAULT_VALUE);
@@ -195,7 +195,7 @@ public class TableDataPilotTableElement extends OdfElement {
 	 */
 	public Boolean getTableIgnoreEmptyRowsAttribute() {
 		TableIgnoreEmptyRowsAttribute attr = (TableIgnoreEmptyRowsAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "ignore-empty-rows");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableIgnoreEmptyRowsAttribute.DEFAULT_VALUE);
@@ -245,7 +245,7 @@ public class TableDataPilotTableElement extends OdfElement {
 	 */
 	public Boolean getTableShowFilterButtonAttribute() {
 		TableShowFilterButtonAttribute attr = (TableShowFilterButtonAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "show-filter-button");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableShowFilterButtonAttribute.DEFAULT_VALUE);

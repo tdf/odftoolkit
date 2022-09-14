@@ -97,7 +97,7 @@ public class TextPageNumberElement extends OdfElement {
 	 */
 	public Boolean getStyleNumLetterSyncAttribute() {
 		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -121,7 +121,7 @@ public class TextPageNumberElement extends OdfElement {
 	 */
 	public Boolean getTextFixedAttribute() {
 		TextFixedAttribute attr = (TextFixedAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "fixed");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -145,7 +145,7 @@ public class TextPageNumberElement extends OdfElement {
 	 */
 	public Integer getTextPageAdjustAttribute() {
 		TextPageAdjustAttribute attr = (TextPageAdjustAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "page-adjust");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

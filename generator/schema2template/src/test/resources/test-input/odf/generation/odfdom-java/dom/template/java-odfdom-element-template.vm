@@ -113,6 +113,11 @@ package org.odftoolkit.odfdom.dom.element.${namespacePrefix};
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
 import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+#if ($odfModel.getRepetionAttribute($element))
+#if ($remainingAttributes.containsName(${odfModel.getRepetionAttribute($element).getQName()}))
+import org.odftoolkit.odfdom.pkg.OdfElement;
+#end
+#end
 #else
 import org.odftoolkit.odfdom.pkg.OdfElement;
 #end
@@ -125,6 +130,20 @@ import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+#if (${odfModel.getStyleFamilies($element).contains("text:paragraph")} && $element.canHaveText())
+import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
+import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+#end
+#if ($odfModel.getRepetionAttribute($element))
+#if ($remainingAttributes.containsName(${odfModel.getRepetionAttribute($element).getQName()}))
+import org.w3c.dom.Node;
+#end
+#end
 ### ELEMENT IMPORTS (start)
 #if (${childElements.containsName("*")})
 #set ($anyelement = true)
@@ -308,7 +327,11 @@ public ${abstract}class $className extends $superClassName {
 #else
 		$aClassName attr = ($aClassName) getOdfAttribute("${attribute.getLocalName()}");
 #end
+#if ($simpleValue != "")##because an empty string has a semantic and will not throw a format exception
+		if (attr != null && !attr.getValue().isEmpty()) {
+#else
 		if (attr != null) {
+#end
 #if ($simpleValue!="")
 			return ${valueObject}.valueOf(attr.${simpleValue}Value());
 #else
@@ -560,6 +583,6 @@ public ${abstract}class $className extends $superClassName {
 	}
 #end
 #if ($odfModel.isRootOfComponent($element))
-#add_isComponentRoot_Method
+#add_isComponentRoot_method()
 #end
 }

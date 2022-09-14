@@ -21,7 +21,7 @@
      limitations under the License.
      
 -->
-<config>
+<grammar-additions>
   <elements>
     <element name="chart:axis" family="chart:chart"/>
     <element name="chart:chart" family="chart:chart"/>
@@ -92,7 +92,7 @@
     <element name="text:object-index" family="text:section"/>
     <element name="text:page" root-of-component="page" />
     <element name="text:section" family="text:section"/>
-    <element name="text:s" root-of-component="space"/>
+    <element name="text:s" root-of-component="space" />
     <element name="text:table-index" family="text:section"/>
     <element name="text:table-of-content" family="text:section"/>
     <element name="text:user-index" family="text:section"/>
@@ -458,6 +458,7 @@
     <attribute name="table:copy-formulas" defaultValue="true"/>
     <attribute name="table:copy-styles" defaultValue="true"/>
     <!--The following attribute default value is listed in the ODF schema-->
+    <attribute name="text:c" defaultValue="1" repetition="true"/><!-- not yet explicitly declared as default value in ODF 1.3 -->
     <attribute name="table:count" defaultValue="1"/>
     <attribute name="table:data-type" defaultValue="text" element="table:filter-condition"/>
     <attribute name="table:data-type" defaultValue="automatic" element="table:sort-by"/>
@@ -492,17 +493,17 @@
     <attribute name="table:null-year" defaultValue="1930"/>
     <!--The following attribute default value is listed in the ODF schema-->
     <attribute name="table:number-columns-repeated" defaultValue="1"
-               element="table:covered-table-cell"/>
+               repetition="true" element="table:covered-table-cell"/>
     <!--The following attribute default value is listed in the ODF schema-->
     <attribute name="table:number-columns-repeated" defaultValue="1"
-               element="table:table-cell"/>
+               repetition="true" element="table:table-cell"/>
     <!--The following attribute default value is listed in the ODF schema-->
     <attribute name="table:number-columns-repeated" defaultValue="1"
-               element="table:table-column"/>
+               repetition="true" element="table:table-column"/>
     <!--The following attribute default value is listed in the ODF schema-->
     <attribute name="table:number-columns-spanned" defaultValue="1"/>
     <!--The following attribute default value is listed in the ODF schema-->
-    <attribute name="table:number-rows-repeated" defaultValue="1"/>
+    <attribute name="table:number-rows-repeated" defaultValue="1" repetition="true"/>
     <!--The following attribute default value is listed in the ODF schema-->
     <attribute name="table:number-rows-spanned" defaultValue="1"/>
     <attribute name="table:on-update-keep-size" defaultValue="true"/>
@@ -684,4 +685,4 @@
     <attribute name="xlink:type" defaultValue="simple" element="text:script"/>
     <attribute name="xlink:type" defaultValue="simple" element="text:section-source"/>
   </attributes>
-</config>
+</grammar-additions>

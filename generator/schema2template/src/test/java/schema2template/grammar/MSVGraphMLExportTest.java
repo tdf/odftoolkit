@@ -21,7 +21,7 @@
  *
  * <p>*********************************************************************
  */
-package schema2template.grammar.odf;
+package schema2template.grammar;
 
 import static schema2template.SchemaToTemplate.DEBUG;
 
@@ -30,10 +30,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
-import schema2template.grammar.PuzzlePiece;
-import schema2template.grammar.PuzzlePieceSet;
-import schema2template.grammar.XMLModel;
-import schema2template.grammar.odf.ConstantsOdf.OdfSpecificationPart;
+import schema2template.grammar.ConstantsOdf.OdfSpecificationPart;
 
 /**
  * Loading each ODF Grammar into the MSV using our PuzzlePiece class and testing the amount of

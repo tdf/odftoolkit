@@ -73,7 +73,7 @@ public class TableCalculationSettingsElement extends OdfElement {
 	 */
 	public Boolean getTableAutomaticFindLabelsAttribute() {
 		TableAutomaticFindLabelsAttribute attr = (TableAutomaticFindLabelsAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "automatic-find-labels");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableAutomaticFindLabelsAttribute.DEFAULT_VALUE);
@@ -121,7 +121,7 @@ public class TableCalculationSettingsElement extends OdfElement {
 	 */
 	public Integer getTableNullYearAttribute() {
 		TableNullYearAttribute attr = (TableNullYearAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "null-year");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(TableNullYearAttribute.DEFAULT_VALUE);
@@ -145,7 +145,7 @@ public class TableCalculationSettingsElement extends OdfElement {
 	 */
 	public Boolean getTablePrecisionAsShownAttribute() {
 		TablePrecisionAsShownAttribute attr = (TablePrecisionAsShownAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "precision-as-shown");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TablePrecisionAsShownAttribute.DEFAULT_VALUE);
@@ -169,7 +169,7 @@ public class TableCalculationSettingsElement extends OdfElement {
 	 */
 	public Boolean getTableSearchCriteriaMustApplyToWholeCellAttribute() {
 		TableSearchCriteriaMustApplyToWholeCellAttribute attr = (TableSearchCriteriaMustApplyToWholeCellAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "search-criteria-must-apply-to-whole-cell");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableSearchCriteriaMustApplyToWholeCellAttribute.DEFAULT_VALUE);
@@ -193,7 +193,7 @@ public class TableCalculationSettingsElement extends OdfElement {
 	 */
 	public Boolean getTableUseRegularExpressionsAttribute() {
 		TableUseRegularExpressionsAttribute attr = (TableUseRegularExpressionsAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "use-regular-expressions");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableUseRegularExpressionsAttribute.DEFAULT_VALUE);
@@ -217,7 +217,7 @@ public class TableCalculationSettingsElement extends OdfElement {
 	 */
 	public Boolean getTableUseWildcardsAttribute() {
 		TableUseWildcardsAttribute attr = (TableUseWildcardsAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "use-wildcards");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableUseWildcardsAttribute.DEFAULT_VALUE);

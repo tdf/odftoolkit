@@ -157,7 +157,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Boolean getDrawConcentricGradientFillAllowedAttribute() {
 		DrawConcentricGradientFillAllowedAttribute attr = (DrawConcentricGradientFillAllowedAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "concentric-gradient-fill-allowed");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawConcentricGradientFillAllowedAttribute.DEFAULT_VALUE);
@@ -205,7 +205,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Boolean getDrawExtrusionAttribute() {
 		DrawExtrusionAttribute attr = (DrawExtrusionAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "extrusion");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawExtrusionAttribute.DEFAULT_VALUE);
@@ -229,7 +229,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Boolean getDrawExtrusionAllowedAttribute() {
 		DrawExtrusionAllowedAttribute attr = (DrawExtrusionAllowedAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "extrusion-allowed");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawExtrusionAllowedAttribute.DEFAULT_VALUE);
@@ -277,7 +277,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Boolean getDrawExtrusionColorAttribute() {
 		DrawExtrusionColorAttribute attr = (DrawExtrusionColorAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "extrusion-color");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawExtrusionColorAttribute.DEFAULT_VALUE);
@@ -373,7 +373,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Boolean getDrawExtrusionFirstLightHarshAttribute() {
 		DrawExtrusionFirstLightHarshAttribute attr = (DrawExtrusionFirstLightHarshAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "extrusion-first-light-harsh");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawExtrusionFirstLightHarshAttribute.DEFAULT_VALUE);
@@ -421,7 +421,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Boolean getDrawExtrusionLightFaceAttribute() {
 		DrawExtrusionLightFaceAttribute attr = (DrawExtrusionLightFaceAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "extrusion-light-face");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawExtrusionLightFaceAttribute.DEFAULT_VALUE);
@@ -445,7 +445,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Boolean getDrawExtrusionMetalAttribute() {
 		DrawExtrusionMetalAttribute attr = (DrawExtrusionMetalAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "extrusion-metal");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawExtrusionMetalAttribute.DEFAULT_VALUE);
@@ -469,7 +469,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Integer getDrawExtrusionNumberOfLineSegmentsAttribute() {
 		DrawExtrusionNumberOfLineSegmentsAttribute attr = (DrawExtrusionNumberOfLineSegmentsAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "extrusion-number-of-line-segments");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return Integer.valueOf(DrawExtrusionNumberOfLineSegmentsAttribute.DEFAULT_VALUE);
@@ -493,7 +493,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Double getDrawExtrusionOriginAttribute() {
 		DrawExtrusionOriginAttribute attr = (DrawExtrusionOriginAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "extrusion-origin");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return Double.valueOf(DrawExtrusionOriginAttribute.DEFAULT_VALUE);
@@ -589,7 +589,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Boolean getDrawExtrusionSecondLightHarshAttribute() {
 		DrawExtrusionSecondLightHarshAttribute attr = (DrawExtrusionSecondLightHarshAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "extrusion-second-light-harsh");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawExtrusionSecondLightHarshAttribute.DEFAULT_VALUE);
@@ -805,7 +805,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Boolean getDrawMirrorHorizontalAttribute() {
 		DrawMirrorHorizontalAttribute attr = (DrawMirrorHorizontalAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "mirror-horizontal");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawMirrorHorizontalAttribute.DEFAULT_VALUE);
@@ -829,7 +829,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Boolean getDrawMirrorVerticalAttribute() {
 		DrawMirrorVerticalAttribute attr = (DrawMirrorVerticalAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "mirror-vertical");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawMirrorVerticalAttribute.DEFAULT_VALUE);
@@ -877,7 +877,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Double getDrawPathStretchpointXAttribute() {
 		DrawPathStretchpointXAttribute attr = (DrawPathStretchpointXAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "path-stretchpoint-x");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return null;
@@ -901,7 +901,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Double getDrawPathStretchpointYAttribute() {
 		DrawPathStretchpointYAttribute attr = (DrawPathStretchpointYAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "path-stretchpoint-y");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Double.valueOf(attr.doubleValue());
 		}
 		return null;
@@ -949,7 +949,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Boolean getDrawTextPathAttribute() {
 		DrawTextPathAttribute attr = (DrawTextPathAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "text-path");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawTextPathAttribute.DEFAULT_VALUE);
@@ -973,7 +973,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Boolean getDrawTextPathAllowedAttribute() {
 		DrawTextPathAllowedAttribute attr = (DrawTextPathAllowedAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "text-path-allowed");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawTextPathAllowedAttribute.DEFAULT_VALUE);
@@ -1021,7 +1021,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Boolean getDrawTextPathSameLetterHeightsAttribute() {
 		DrawTextPathSameLetterHeightsAttribute attr = (DrawTextPathSameLetterHeightsAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "text-path-same-letter-heights");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawTextPathSameLetterHeightsAttribute.DEFAULT_VALUE);
@@ -1117,7 +1117,7 @@ public class DrawEnhancedGeometryElement extends OdfElement {
 	 */
 	public Integer getSvgViewBoxAttribute() {
 		SvgViewBoxAttribute attr = (SvgViewBoxAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "viewBox");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

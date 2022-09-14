@@ -147,7 +147,7 @@ public class DbQueryElement extends OdfElement {
 	 */
 	public Boolean getDbEscapeProcessingAttribute() {
 		DbEscapeProcessingAttribute attr = (DbEscapeProcessingAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "escape-processing");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DbEscapeProcessingAttribute.DEFAULT_VALUE);

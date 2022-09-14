@@ -104,7 +104,7 @@ public class PresentationSettingsElement extends OdfElement {
 	 */
 	public Boolean getPresentationEndlessAttribute() {
 		PresentationEndlessAttribute attr = (PresentationEndlessAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "endless");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(PresentationEndlessAttribute.DEFAULT_VALUE);
@@ -128,7 +128,7 @@ public class PresentationSettingsElement extends OdfElement {
 	 */
 	public Boolean getPresentationForceManualAttribute() {
 		PresentationForceManualAttribute attr = (PresentationForceManualAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "force-manual");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(PresentationForceManualAttribute.DEFAULT_VALUE);
@@ -152,7 +152,7 @@ public class PresentationSettingsElement extends OdfElement {
 	 */
 	public Boolean getPresentationFullScreenAttribute() {
 		PresentationFullScreenAttribute attr = (PresentationFullScreenAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "full-screen");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(PresentationFullScreenAttribute.DEFAULT_VALUE);
@@ -176,7 +176,7 @@ public class PresentationSettingsElement extends OdfElement {
 	 */
 	public Boolean getPresentationMouseAsPenAttribute() {
 		PresentationMouseAsPenAttribute attr = (PresentationMouseAsPenAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "mouse-as-pen");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(PresentationMouseAsPenAttribute.DEFAULT_VALUE);
@@ -200,7 +200,7 @@ public class PresentationSettingsElement extends OdfElement {
 	 */
 	public Boolean getPresentationMouseVisibleAttribute() {
 		PresentationMouseVisibleAttribute attr = (PresentationMouseVisibleAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "mouse-visible");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(PresentationMouseVisibleAttribute.DEFAULT_VALUE);
@@ -272,7 +272,7 @@ public class PresentationSettingsElement extends OdfElement {
 	 */
 	public Boolean getPresentationShowEndOfPresentationSlideAttribute() {
 		PresentationShowEndOfPresentationSlideAttribute attr = (PresentationShowEndOfPresentationSlideAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "show-end-of-presentation-slide");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(PresentationShowEndOfPresentationSlideAttribute.DEFAULT_VALUE);
@@ -296,7 +296,7 @@ public class PresentationSettingsElement extends OdfElement {
 	 */
 	public Boolean getPresentationShowLogoAttribute() {
 		PresentationShowLogoAttribute attr = (PresentationShowLogoAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "show-logo");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(PresentationShowLogoAttribute.DEFAULT_VALUE);
@@ -344,7 +344,7 @@ public class PresentationSettingsElement extends OdfElement {
 	 */
 	public Boolean getPresentationStartWithNavigatorAttribute() {
 		PresentationStartWithNavigatorAttribute attr = (PresentationStartWithNavigatorAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "start-with-navigator");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(PresentationStartWithNavigatorAttribute.DEFAULT_VALUE);
@@ -368,7 +368,7 @@ public class PresentationSettingsElement extends OdfElement {
 	 */
 	public Boolean getPresentationStayOnTopAttribute() {
 		PresentationStayOnTopAttribute attr = (PresentationStayOnTopAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "stay-on-top");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(PresentationStayOnTopAttribute.DEFAULT_VALUE);

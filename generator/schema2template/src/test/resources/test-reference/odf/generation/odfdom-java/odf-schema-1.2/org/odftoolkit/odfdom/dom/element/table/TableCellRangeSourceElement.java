@@ -125,7 +125,7 @@ public class TableCellRangeSourceElement extends OdfElement {
 	 */
 	public Integer getTableLastColumnSpannedAttribute() {
 		TableLastColumnSpannedAttribute attr = (TableLastColumnSpannedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "last-column-spanned");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -151,7 +151,7 @@ public class TableCellRangeSourceElement extends OdfElement {
 	 */
 	public Integer getTableLastRowSpannedAttribute() {
 		TableLastRowSpannedAttribute attr = (TableLastRowSpannedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "last-row-spanned");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

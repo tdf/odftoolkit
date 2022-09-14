@@ -118,7 +118,7 @@ public class TableFilterElement extends OdfElement {
 	 */
 	public Boolean getTableDisplayDuplicatesAttribute() {
 		TableDisplayDuplicatesAttribute attr = (TableDisplayDuplicatesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "display-duplicates");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TableDisplayDuplicatesAttribute.DEFAULT_VALUE);

@@ -203,7 +203,7 @@ public class DrawFrameElement extends DrawShapeElementBase {
 	 */
 	public Boolean getPresentationPlaceholderAttribute() {
 		PresentationPlaceholderAttribute attr = (PresentationPlaceholderAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "placeholder");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -227,7 +227,7 @@ public class DrawFrameElement extends DrawShapeElementBase {
 	 */
 	public Boolean getPresentationUserTransformedAttribute() {
 		PresentationUserTransformedAttribute attr = (PresentationUserTransformedAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "user-transformed");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

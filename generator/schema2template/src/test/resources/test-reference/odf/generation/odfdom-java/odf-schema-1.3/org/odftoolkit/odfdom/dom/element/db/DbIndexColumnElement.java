@@ -68,7 +68,7 @@ public class DbIndexColumnElement extends OdfElement {
 	 */
 	public Boolean getDbIsAscendingAttribute() {
 		DbIsAscendingAttribute attr = (DbIsAscendingAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "is-ascending");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;

@@ -829,7 +829,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getStyleFirstPageNumberAttribute() {
 		StyleFirstPageNumberAttribute attr = (StyleFirstPageNumberAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "first-page-number");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -949,7 +949,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleLayoutGridDisplayAttribute() {
 		StyleLayoutGridDisplayAttribute attr = (StyleLayoutGridDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-display");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -973,7 +973,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getStyleLayoutGridLinesAttribute() {
 		StyleLayoutGridLinesAttribute attr = (StyleLayoutGridLinesAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-lines");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -1021,7 +1021,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleLayoutGridPrintAttribute() {
 		StyleLayoutGridPrintAttribute attr = (StyleLayoutGridPrintAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-print");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1045,7 +1045,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleLayoutGridRubyBelowAttribute() {
 		StyleLayoutGridRubyBelowAttribute attr = (StyleLayoutGridRubyBelowAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-ruby-below");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1093,7 +1093,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleLayoutGridSnapToAttribute() {
 		StyleLayoutGridSnapToAttribute attr = (StyleLayoutGridSnapToAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-snap-to");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1117,7 +1117,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleLayoutGridStandardModeAttribute() {
 		StyleLayoutGridStandardModeAttribute attr = (StyleLayoutGridStandardModeAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-standard-mode");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1167,7 +1167,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Boolean getStyleNumLetterSyncAttribute() {
 		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
@@ -1383,7 +1383,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getStyleScaleToXAttribute() {
 		StyleScaleToXAttribute attr = (StyleScaleToXAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "scale-to-X");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -1407,7 +1407,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getStyleScaleToYAttribute() {
 		StyleScaleToYAttribute attr = (StyleScaleToYAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "scale-to-Y");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;
@@ -1431,7 +1431,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
 	 */
 	public Integer getStyleScaleToPagesAttribute() {
 		StyleScaleToPagesAttribute attr = (StyleScaleToPagesAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "scale-to-pages");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

@@ -120,7 +120,7 @@ public class TextDatabaseRowSelectElement extends OdfElement {
 	 */
 	public Integer getTextRowNumberAttribute() {
 		TextRowNumberAttribute attr = (TextRowNumberAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "row-number");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Integer.valueOf(attr.intValue());
 		}
 		return null;

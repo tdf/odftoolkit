@@ -70,7 +70,7 @@ public class OfficeFormsElement extends OdfElement {
 	 */
 	public Boolean getFormApplyDesignModeAttribute() {
 		FormApplyDesignModeAttribute attr = (FormApplyDesignModeAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "apply-design-mode");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormApplyDesignModeAttribute.DEFAULT_VALUE);
@@ -94,7 +94,7 @@ public class OfficeFormsElement extends OdfElement {
 	 */
 	public Boolean getFormAutomaticFocusAttribute() {
 		FormAutomaticFocusAttribute attr = (FormAutomaticFocusAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "automatic-focus");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(FormAutomaticFocusAttribute.DEFAULT_VALUE);

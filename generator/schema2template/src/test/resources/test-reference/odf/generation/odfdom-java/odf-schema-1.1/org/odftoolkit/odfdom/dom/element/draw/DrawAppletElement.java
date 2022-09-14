@@ -122,7 +122,7 @@ public class DrawAppletElement extends OdfElement {
 	 */
 	public Boolean getDrawMayScriptAttribute() {
 		DrawMayScriptAttribute attr = (DrawMayScriptAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "may-script");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(DrawMayScriptAttribute.DEFAULT_VALUE);

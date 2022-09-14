@@ -116,7 +116,7 @@ public class OfficeTextElement extends OdfElement {
 	 */
 	public Boolean getTextGlobalAttribute() {
 		TextGlobalAttribute attr = (TextGlobalAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "global");
-		if (attr != null) {
+		if (attr != null && !attr.getValue().isEmpty()) {
 			return Boolean.valueOf(attr.booleanValue());
 		}
 		return Boolean.valueOf(TextGlobalAttribute.DEFAULT_VALUE);
