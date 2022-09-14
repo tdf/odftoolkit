@@ -203,4 +203,66 @@ public class TableTableColumnElement extends OdfStylableElement {
 			visitor.visit(this);
 		}
 	}
+
+@Override
+  /** @return the repeation of this element, the default is in ODF always 1 */
+  public int getRepetition() {
+    Integer repeated = getTableNumberColumnsRepeatedAttribute();
+    if (repeated == null) {
+      repeated = 1;
+    }
+    return repeated;
+  }
+
+  @Override
+  /** @return if this element is repeatable, by having a repeatable attribute */
+  public boolean isRepeatable() {
+    return true;
+  }
+
+  @Override
+  /** @repetition the repetition number of this attribute */
+  public void setRepetition(int repetition) {
+    setTableNumberColumnsRepeatedAttribute(repetition);
+  }
+
+  /**
+   * Splitting the element at the given position into two halves
+   *
+   * @param posStart The split position. Counting is starting with zero. The start of the second
+   *     half.
+   * @return the new created second element (or if posStart was less than 1 the original element)
+   */
+  @Override
+  public TableTableColumnElement split(int posStart) {
+    TableTableColumnElement newElement = this;
+    // 0 would not leave anything left on the left side, would not change anything!
+    if (posStart > 0) {
+      newElement = (TableTableColumnElement) this.cloneNode(true);
+      int repeated = getTableNumberColumnsRepeatedAttribute();
+      if (repeated > 1) {
+        if (posStart > 1) {
+          this.setTableNumberColumnsRepeatedAttribute(posStart);
+        } else {
+
+          this.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
+        }
+        // any higher value one for repeated write out.
+        // 1 is the default and has not to be written out
+        if (repeated - posStart > 1) {
+          newElement.setTableNumberColumnsRepeatedAttribute(repeated - posStart);
+        } else {
+          newElement.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
+        }
+      }
+      Node nextNodeSibling = this.getNextSibling();
+      OdfElement parent = (OdfElement) this.getParentNode();
+      if (nextNodeSibling == null) {
+        parent.appendChild(newElement);
+      } else {
+        parent.insertBefore(newElement, nextNodeSibling);
+      }
+    }
+    return newElement;
+  }
 }
