@@ -30,6 +30,10 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 public class OdfNumberBooleanStyle extends NumberBooleanStyleElement {
   private static final String BOOLEAN = "BOOLEAN";
 
+  public OdfNumberBooleanStyle(OdfFileDom ownerDoc) {
+    super(ownerDoc);
+  }
+
   public OdfNumberBooleanStyle(OdfFileDom ownerDoc, String styleName) {
     super(ownerDoc);
     this.setStyleNameAttribute(styleName);

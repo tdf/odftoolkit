@@ -66,10 +66,12 @@ public class OdfXMLFactory {
 
     mHandwrittenElementClasses.add("draw:frame");
     mHandwrittenElementClasses.add("draw:image");
+    mHandwrittenElementClasses.add("number:boolean-style");
     mHandwrittenElementClasses.add("number:currency-style");
     mHandwrittenElementClasses.add("number:date-style");
     mHandwrittenElementClasses.add("number:percentage-style");
     mHandwrittenElementClasses.add("number:number-style");
+    mHandwrittenElementClasses.add("number:text-style");
     mHandwrittenElementClasses.add("number:time-style");
     // Starting Refactoring. Goal: using XML DOM classes with sets for styles instead of own layer
     // mHandwrittenElements.add("office:automatic-styles");
