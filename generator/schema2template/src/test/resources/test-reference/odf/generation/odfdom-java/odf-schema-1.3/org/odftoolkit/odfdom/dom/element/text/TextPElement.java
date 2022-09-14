@@ -120,4 +120,40 @@ public class TextPElement extends TextParagraphElementBase {
   public boolean isComponentRoot() {
     return true;
   }
+
+  /**
+   * Splitting the element at the given position into two halves
+   *
+   * <p>If the paragraph does have an automatic style with a master-page, which results into a page
+   * break before the paragraph, this page break will be removed for the new second half. For
+   * paragraph containing template styles the follow-up style should be chosen.
+   *
+   * @param posStart The logical position of the first character (or other paragraph child
+   *     component) that will be moved to the beginning of the new paragraph.
+   * @return the new created second text container
+   */
+  @Override
+  public OdfElement split(int posStart) {
+    TextParagraphElementBase newSecondElement = (TextParagraphElementBase) super.split(posStart);
+    OdfStyle autoStyle = newSecondElement.getAutomaticStyle();
+
+    if (autoStyle != null) {
+      OdfStylePropertiesBase paragraphProps =
+          autoStyle.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties);
+      if (autoStyle.getStyleMasterPageNameAttribute() != null || paragraphProps != null) {
+        StyleStyleElement newStyle = newSecondElement.getOrCreateUnqiueAutomaticStyle();
+        if (autoStyle.getStyleMasterPageNameAttribute() != null) {
+          newStyle.removeAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "master-page-name");
+        }
+        // overwrite the paragraph properties from the source one, with the cloned element's
+        paragraphProps = newStyle.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties);
+        // no paragraph page break should be inherited
+        if (paragraphProps != null) {
+          paragraphProps.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "break-before");
+          paragraphProps.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "break-after");
+        }
+      }
+    }
+    return newSecondElement;
+  }
 }

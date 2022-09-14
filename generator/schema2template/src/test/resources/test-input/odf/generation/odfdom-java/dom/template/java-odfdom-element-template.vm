@@ -593,4 +593,7 @@ public ${abstract}class $className extends $superClassName {
 #if ($remainingAttributes.containsName("office:value"))
 #add_removeContent_method()
 #end
+#if (${odfModel.getStyleFamilies($element).contains("text:paragraph")} && $element.canHaveText())
+#add_paragraphBase_split_method()
+#end
 }
