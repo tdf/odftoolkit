@@ -1829,7 +1829,7 @@ public class JsonOperationConsumer {
               ((DrawShapeElementBase) child).getOdfAttribute(OdfGraphicProperties.X.getName());
           if (xAttr != null) {
             int x = MapHelper.normalizeLength(xAttr.getValue());
-            x *= heightFactor;
+            x *= widthFactor;
             xAttr.setValue(x / 100.0 + "mm");
           }
         }
@@ -3576,15 +3576,15 @@ public class JsonOperationConsumer {
     if (drawingProps != null) {
       if (drawingProps.has("width")) {
         int width = drawingProps.optInt("width");
-        frameElement
-            .getOdfAttribute(OdfGraphicProperties.Width.getName())
-            .setValue(width / 100.0 + "mm");
+        frameElement.setOdfAttributeValue(
+            OdfName.newName(OdfDocumentNamespace.SVG, OdfGraphicProperties.Width.toString()),
+            width / 100.0 + "mm");
       }
       if (drawingProps.has("height")) {
         int height = drawingProps.optInt("height");
-        frameElement
-            .getOdfAttribute(OdfGraphicProperties.Height.getName())
-            .setValue(height / 100.0 + "mm");
+        frameElement.setOdfAttributeValue(
+            OdfName.newName(OdfDocumentNamespace.SVG, OdfGraphicProperties.Height.toString()),
+            height / 100.0 + "mm");
       }
       if (drawingProps.has(OPK_NAME)) {
         String name = drawingProps.optString(OPK_NAME);
@@ -3594,11 +3594,15 @@ public class JsonOperationConsumer {
       }
       if (drawingProps.has("anchorHorOffset")) {
         int x = drawingProps.optInt("anchorHorOffset");
-        frameElement.getOdfAttribute(OdfGraphicProperties.X.getName()).setValue(x / 100.0 + "mm");
+        frameElement.setOdfAttributeValue(
+            OdfName.newName(OdfDocumentNamespace.SVG, OdfGraphicProperties.X.toString()),
+            x / 100.0 + "mm");
       }
       if (drawingProps.has("anchorVertOffset")) {
         int y = drawingProps.optInt("anchorVertOffset");
-        frameElement.getOdfAttribute(OdfGraphicProperties.Y.getName()).setValue(y / 100.0 + "mm");
+        frameElement.setOdfAttributeValue(
+            OdfName.newName(OdfDocumentNamespace.SVG, OdfGraphicProperties.Y.toString()),
+            y / 100.0 + "mm");
       }
       if (drawingProps.has("inline")
           && !drawingProps.get("inline").equals(JSONObject.NULL)
