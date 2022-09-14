@@ -440,4 +440,7 @@ public abstract class $className extends $superClassName {
 #if ($odfModel.getRepetionAttribute($element) && $attributes.containsName(${odfModel.getRepetionAttribute($element).getQName()}))
 #add_repeated_methods($className $odfModel.getRepetionAttribute($element))
 #end
+#if ($attributes.containsName("office:value"))
+#add_removeContent_method()
+#end
 }

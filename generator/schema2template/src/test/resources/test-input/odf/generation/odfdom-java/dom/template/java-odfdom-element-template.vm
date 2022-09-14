@@ -590,4 +590,7 @@ public ${abstract}class $className extends $superClassName {
 #add_repeated_methods($className $odfModel.getRepetionAttribute($element))
 #end
 #end
+#if ($remainingAttributes.containsName("office:value"))
+#add_removeContent_method()
+#end
 }
