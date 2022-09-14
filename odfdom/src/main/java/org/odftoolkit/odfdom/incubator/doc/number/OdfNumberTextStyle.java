@@ -32,6 +32,10 @@ import org.w3c.dom.Node;
 public class OdfNumberTextStyle extends NumberTextStyleElement {
   private static final String BOOLEAN = "BOOLEAN";
 
+  public OdfNumberTextStyle(OdfFileDom ownerDoc) {
+    super(ownerDoc);
+  }
+
   public OdfNumberTextStyle(OdfFileDom ownerDoc, String format, String styleName) {
     super(ownerDoc);
     this.setStyleNameAttribute(styleName);
