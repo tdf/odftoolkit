@@ -51,8 +51,7 @@
 {"name":"addParagraph","start":[4],"attrs":{"styleId":"Standard","character":{"fontName":"Verdana","fontNameComplex":"Verdana"},"paragraph":{"indentFirstLine":-750,"indentLeft":750,"indentRight":0,"marginLeft":750,"marginRight":0}}},
 {"name":"addParagraph","start":[5],"attrs":{"styleId":"Standard","character":{"fontName":"Verdana","fontNameComplex":"Verdana"},"paragraph":{"indentFirstLine":-750,"indentLeft":750,"indentRight":0,"marginLeft":750,"marginRight":0}}},
 {"name":"addParagraph","start":[6],"attrs":{"styleId":"Standard","paragraph":{"indentFirstLine":-750,"indentLeft":750,"indentRight":0,"marginLeft":750,"marginRight":0}}},
-{"name":"addText","start":[6,1],"text":"Kapi"},
-{"name":"addText","start":[6,5],"text":"tel"},
+{"name":"addText","start":[6,1],"text":"Kapitel"},
 {"name":"addText","start":[6,8],"text":" "},
 {"name":"addText","start":[6,9],"text":" "},
 {"name":"addText","start":[6,10],"text":" "},
@@ -64,10 +63,9 @@
 {"name":"addText","start":[6,28],"text":"      "},
 {"name":"addText","start":[6,34],"text":"  "},
 {"name":"addText","start":[6,36],"text":"10"},
-{"name":"format","start":[6,1],"end":[6,4],"attrs":{"styleId":"Hyperlink","character":{"bold":true,"boldAsian":true,"fontName":"Verdana","fontNameComplex":"Verdana","fontSize":14,"fontSizeAsian":14,"underline":true,"url":"http://www.eins.de"}}},
-{"name":"format","start":[6,5],"end":[6,7],"attrs":{"styleId":"Hyperlink","character":{"url":"http://www.eins.de"}}},
-{"name":"format","start":[6,8],"end":[6,35],"attrs":{"styleId":"Hyperlink","character":{"underline":false,"url":"http://www.eins.de"}}},
-{"name":"format","start":[6,36],"end":[6,37],"attrs":{"styleId":"Hyperlink","character":{"url":"http://www.zwei.de"}}},
+{"name":"format","start":[6,1],"end":[6,7],"attrs":{"styleId":"Hyperlink","character":{"bold":true,"boldAsian":true,"fontName":"Verdana","fontNameComplex":"Verdana","fontSize":14,"fontSizeAsian":14,"underline":true,"url":"http://www.eins.de"}}},
+{"name":"format","start":[6,8],"end":[6,35],"attrs":{"character":{"bold":true,"boldAsian":true,"fontName":"Verdana","fontNameComplex":"Verdana","fontSize":14,"fontSizeAsian":14,"underline":false,"url":"http://www.eins.de"}}},
+{"name":"format","start":[6,36],"end":[6,37],"attrs":{"styleId":"Hyperlink","character":{"bold":true,"boldAsian":true,"fontName":"Verdana","fontNameComplex":"Verdana","fontSize":14,"fontSizeAsian":14,"underline":true,"url":"http://www.zwei.de"}}},
 {"name":"addParagraph","start":[7],"attrs":{"styleId":"Standard","character":{"fontName":"Verdana","fontNameComplex":"Verdana"},"paragraph":{"indentFirstLine":-750,"indentLeft":750,"indentRight":0,"marginLeft":750,"marginRight":0}}},
 {"name":"addParagraph","start":[8],"attrs":{"styleId":"Standard"}}
 ]}

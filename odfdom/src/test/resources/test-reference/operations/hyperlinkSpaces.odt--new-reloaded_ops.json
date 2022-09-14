@@ -63,9 +63,7 @@
 {"name":"addText","start":[6,34],"text":"  "},
 {"name":"addText","start":[6,36],"text":"10"},
 {"name":"format","start":[6,1],"end":[6,7],"attrs":{"styleId":"Hyperlink","character":{"url":"http://www.eins.de"}}},
-{"name":"format","start":[6,8],"end":[6,13],"attrs":{"styleId":"Hyperlink"}},
-{"name":"format","start":[6,8],"end":[6,35],"attrs":{"character":{"url":"http://www.eins.de"}}},
-{"name":"format","start":[6,14],"end":[6,35],"attrs":{"styleId":"Hyperlink"}},
+{"name":"format","start":[6,8],"end":[6,35],"attrs":{"styleId":"Hyperlink","character":{"url":"http://www.eins.de"}}},
 {"name":"format","start":[6,36],"end":[6,37],"attrs":{"styleId":"Hyperlink","character":{"url":"http://www.zwei.de"}}},
 {"name":"addParagraph","start":[7],"attrs":{"styleId":"Standard","character":{"fontName":"Verdana","fontNameComplex":"Verdana"},"paragraph":{"indentFirstLine":-750,"indentLeft":750,"indentRight":0,"marginLeft":750,"marginRight":0}}},
 {"name":"addParagraph","start":[8],"attrs":{"styleId":"Standard"}}

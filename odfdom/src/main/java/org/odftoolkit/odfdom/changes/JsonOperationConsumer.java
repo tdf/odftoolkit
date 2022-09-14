@@ -1782,7 +1782,11 @@ public class JsonOperationConsumer {
                   newAttrs.put("character", charProps);
                 } catch (JSONException e) {
                 }
-                applyStyleOnText(parentElement, 0, parentElement.getLength(), newAttrs);
+                applyStyleOnText(
+                    parentElement,
+                    0,
+                    parentElement.getComponentRoot().componentSize() - 1,
+                    newAttrs);
               }
               StyleStyleElement newAutoStyle = paraStylable.getOrCreateUnqiueAutomaticStyle();
               newAutoStyle.removeChild(
