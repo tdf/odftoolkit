@@ -21,6 +21,10 @@
  */
 package schema2template.grammar;
 
+import static schema2template.grammar.ConstantsBuildEnv.GENERATION_REFERENCE_BASE_DIR;
+import static schema2template.grammar.ConstantsBuildEnv.GENERATION_TARGET_BASE_DIR;
+import static schema2template.grammar.DirectoryCompare.compareDirectories;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -57,7 +61,7 @@ public class GenerationOdfReferenceTest {
               + "\n\tmainTemplatePath: "
               + MAIN_TEMPLATE_PATH
               + "\n\ttargetDirPath: "
-              + ConstantsBuildEnv.GENERATION_TARGET_BASE_DIR
+              + GENERATION_TARGET_BASE_DIR
               + ODF_REFERENCE_DIRECTORY);
 
       generations.add(
@@ -67,7 +71,7 @@ public class GenerationOdfReferenceTest {
               specPart.grammarPath,
               null,
               MAIN_TEMPLATE_PATH,
-              ConstantsBuildEnv.GENERATION_TARGET_BASE_DIR + ODF_REFERENCE_DIRECTORY));
+              GENERATION_TARGET_BASE_DIR + ODF_REFERENCE_DIRECTORY));
     }
 
     try {
@@ -78,8 +82,8 @@ public class GenerationOdfReferenceTest {
     }
 
     // Changing order of multiple puzzlepieces makes file comparison unuseable
-    //    compareDirectories(
-    //        GENERATION_TARGET_BASE_DIR + ODF_REFERENCE_DIRECTORY, GENERATION_REFERENCE_BASE_DIR +
-    // ODF_REFERENCE_DIRECTORY);
+    compareDirectories(
+        GENERATION_TARGET_BASE_DIR + ODF_REFERENCE_DIRECTORY,
+        GENERATION_REFERENCE_BASE_DIR + ODF_REFERENCE_DIRECTORY);
   }
 }
