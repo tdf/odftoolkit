@@ -71,11 +71,7 @@ import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
-/**
- * DOM implementation of OpenDocument element {
- *
- * @odf.element style:table-cell-properties}.
- */
+/** DOM implementation of OpenDocument element {@odf.element style:table-cell-properties}. */
 public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   public static final OdfName ELEMENT_NAME =
@@ -93,8 +89,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   /**
    * Get the element name
    *
-   * @return return <code>OdfName</code> the name of element {
-   * @odf.element style:table-cell-properties}.
+   * @return return <code>OdfName</code> the name of element {@odf.element
+   *     style:table-cell-properties}.
    */
   public OdfName getOdfName() {
     return ELEMENT_NAME;
@@ -272,9 +268,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoBackgroundColorAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute fo:background-color}
    *
-   * @odf.attribute fo:background-color}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -289,9 +284,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>FoBackgroundColorAttribute</code> , See
-   * {
+   * {@odf.attribute fo:background-color}
    *
-   * @odf.attribute fo:background-color}
    * @param foBackgroundColorValue The type is <code>String</code>
    */
   public void setFoBackgroundColorAttribute(String foBackgroundColorValue) {
@@ -303,9 +297,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoBorderAttribute</code> , See
-   * {
+   * {@odf.attribute fo:border}
    *
-   * @odf.attribute fo:border}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -318,9 +311,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>FoBorderAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>FoBorderAttribute</code> , See
+   * {@odf.attribute fo:border}
    *
-   * @odf.attribute fo:border}
    * @param foBorderValue The type is <code>String</code>
    */
   public void setFoBorderAttribute(String foBorderValue) {
@@ -331,9 +324,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoBorderBottomAttribute</code>
-   * , See {
+   * , See {@odf.attribute fo:border-bottom}
    *
-   * @odf.attribute fo:border-bottom}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -347,9 +339,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>FoBorderBottomAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>FoBorderBottomAttribute</code> , See
+   * {@odf.attribute fo:border-bottom}
    *
-   * @odf.attribute fo:border-bottom}
    * @param foBorderBottomValue The type is <code>String</code>
    */
   public void setFoBorderBottomAttribute(String foBorderBottomValue) {
@@ -360,9 +352,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoBorderLeftAttribute</code> ,
-   * See {
+   * See {@odf.attribute fo:border-left}
    *
-   * @odf.attribute fo:border-left}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -376,9 +367,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>FoBorderLeftAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>FoBorderLeftAttribute</code> , See
+   * {@odf.attribute fo:border-left}
    *
-   * @odf.attribute fo:border-left}
    * @param foBorderLeftValue The type is <code>String</code>
    */
   public void setFoBorderLeftAttribute(String foBorderLeftValue) {
@@ -389,9 +380,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoBorderRightAttribute</code> ,
-   * See {
+   * See {@odf.attribute fo:border-right}
    *
-   * @odf.attribute fo:border-right}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -405,9 +395,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>FoBorderRightAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>FoBorderRightAttribute</code> , See
+   * {@odf.attribute fo:border-right}
    *
-   * @odf.attribute fo:border-right}
    * @param foBorderRightValue The type is <code>String</code>
    */
   public void setFoBorderRightAttribute(String foBorderRightValue) {
@@ -418,9 +408,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoBorderTopAttribute</code> ,
-   * See {
+   * See {@odf.attribute fo:border-top}
    *
-   * @odf.attribute fo:border-top}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -434,9 +423,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>FoBorderTopAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>FoBorderTopAttribute</code> , See
+   * {@odf.attribute fo:border-top}
    *
-   * @odf.attribute fo:border-top}
    * @param foBorderTopValue The type is <code>String</code>
    */
   public void setFoBorderTopAttribute(String foBorderTopValue) {
@@ -447,9 +436,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoPaddingAttribute</code> , See
-   * {
+   * {@odf.attribute fo:padding}
    *
-   * @odf.attribute fo:padding}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -463,9 +451,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>FoPaddingAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>FoPaddingAttribute</code> , See
+   * {@odf.attribute fo:padding}
    *
-   * @odf.attribute fo:padding}
    * @param foPaddingValue The type is <code>String</code>
    */
   public void setFoPaddingAttribute(String foPaddingValue) {
@@ -476,9 +464,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoPaddingBottomAttribute</code>
-   * , See {
+   * , See {@odf.attribute fo:padding-bottom}
    *
-   * @odf.attribute fo:padding-bottom}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -492,9 +479,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>FoPaddingBottomAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>FoPaddingBottomAttribute</code> , See
+   * {@odf.attribute fo:padding-bottom}
    *
-   * @odf.attribute fo:padding-bottom}
    * @param foPaddingBottomValue The type is <code>String</code>
    */
   public void setFoPaddingBottomAttribute(String foPaddingBottomValue) {
@@ -505,9 +492,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoPaddingLeftAttribute</code> ,
-   * See {
+   * See {@odf.attribute fo:padding-left}
    *
-   * @odf.attribute fo:padding-left}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -521,9 +507,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>FoPaddingLeftAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>FoPaddingLeftAttribute</code> , See
+   * {@odf.attribute fo:padding-left}
    *
-   * @odf.attribute fo:padding-left}
    * @param foPaddingLeftValue The type is <code>String</code>
    */
   public void setFoPaddingLeftAttribute(String foPaddingLeftValue) {
@@ -534,9 +520,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoPaddingRightAttribute</code>
-   * , See {
+   * , See {@odf.attribute fo:padding-right}
    *
-   * @odf.attribute fo:padding-right}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -550,9 +535,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>FoPaddingRightAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>FoPaddingRightAttribute</code> , See
+   * {@odf.attribute fo:padding-right}
    *
-   * @odf.attribute fo:padding-right}
    * @param foPaddingRightValue The type is <code>String</code>
    */
   public void setFoPaddingRightAttribute(String foPaddingRightValue) {
@@ -563,9 +548,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoPaddingTopAttribute</code> ,
-   * See {
+   * See {@odf.attribute fo:padding-top}
    *
-   * @odf.attribute fo:padding-top}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -579,9 +563,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>FoPaddingTopAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>FoPaddingTopAttribute</code> , See
+   * {@odf.attribute fo:padding-top}
    *
-   * @odf.attribute fo:padding-top}
    * @param foPaddingTopValue The type is <code>String</code>
    */
   public void setFoPaddingTopAttribute(String foPaddingTopValue) {
@@ -592,9 +576,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoWrapOptionAttribute</code> ,
-   * See {
+   * See {@odf.attribute fo:wrap-option}
    *
-   * @odf.attribute fo:wrap-option}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -608,9 +591,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>FoWrapOptionAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>FoWrapOptionAttribute</code> , See
+   * {@odf.attribute fo:wrap-option}
    *
-   * @odf.attribute fo:wrap-option}
    * @param foWrapOptionValue The type is <code>String</code>
    */
   public void setFoWrapOptionAttribute(String foWrapOptionValue) {
@@ -621,9 +604,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleBorderLineWidthAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:border-line-width}
    *
-   * @odf.attribute style:border-line-width}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -639,9 +621,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleBorderLineWidthAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:border-line-width}
    *
-   * @odf.attribute style:border-line-width}
    * @param styleBorderLineWidthValue The type is <code>String</code>
    */
   public void setStyleBorderLineWidthAttribute(String styleBorderLineWidthValue) {
@@ -653,9 +634,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * StyleBorderLineWidthBottomAttribute</code> , See {
+   * StyleBorderLineWidthBottomAttribute</code> , See {@odf.attribute
+   * style:border-line-width-bottom}
    *
-   * @odf.attribute style:border-line-width-bottom}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -671,9 +652,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleBorderLineWidthBottomAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:border-line-width-bottom}
    *
-   * @odf.attribute style:border-line-width-bottom}
    * @param styleBorderLineWidthBottomValue The type is <code>String</code>
    */
   public void setStyleBorderLineWidthBottomAttribute(String styleBorderLineWidthBottomValue) {
@@ -685,9 +665,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * StyleBorderLineWidthLeftAttribute</code> , See {
+   * StyleBorderLineWidthLeftAttribute</code> , See {@odf.attribute style:border-line-width-left}
    *
-   * @odf.attribute style:border-line-width-left}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -703,9 +682,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleBorderLineWidthLeftAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:border-line-width-left}
    *
-   * @odf.attribute style:border-line-width-left}
    * @param styleBorderLineWidthLeftValue The type is <code>String</code>
    */
   public void setStyleBorderLineWidthLeftAttribute(String styleBorderLineWidthLeftValue) {
@@ -717,9 +695,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * StyleBorderLineWidthRightAttribute</code> , See {
+   * StyleBorderLineWidthRightAttribute</code> , See {@odf.attribute style:border-line-width-right}
    *
-   * @odf.attribute style:border-line-width-right}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -735,9 +712,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleBorderLineWidthRightAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:border-line-width-right}
    *
-   * @odf.attribute style:border-line-width-right}
    * @param styleBorderLineWidthRightValue The type is <code>String</code>
    */
   public void setStyleBorderLineWidthRightAttribute(String styleBorderLineWidthRightValue) {
@@ -749,9 +725,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * StyleBorderLineWidthTopAttribute</code> , See {
+   * StyleBorderLineWidthTopAttribute</code> , See {@odf.attribute style:border-line-width-top}
    *
-   * @odf.attribute style:border-line-width-top}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -767,9 +742,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleBorderLineWidthTopAttribute</code>
-   * , See {
+   * , See {@odf.attribute style:border-line-width-top}
    *
-   * @odf.attribute style:border-line-width-top}
    * @param styleBorderLineWidthTopValue The type is <code>String</code>
    */
   public void setStyleBorderLineWidthTopAttribute(String styleBorderLineWidthTopValue) {
@@ -781,9 +755,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleCellProtectAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:cell-protect}
    *
-   * @odf.attribute style:cell-protect}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -798,9 +771,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleCellProtectAttribute</code> , See
-   * {
+   * {@odf.attribute style:cell-protect}
    *
-   * @odf.attribute style:cell-protect}
    * @param styleCellProtectValue The type is <code>String</code>
    */
   public void setStyleCellProtectAttribute(String styleCellProtectValue) {
@@ -811,16 +783,15 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleDecimalPlacesAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:decimal-places}
    *
-   * @odf.attribute style:decimal-places}
    * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
   public Integer getStyleDecimalPlacesAttribute() {
     StyleDecimalPlacesAttribute attr =
         (StyleDecimalPlacesAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "decimal-places");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -828,9 +799,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleDecimalPlacesAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:decimal-places}
    *
-   * @odf.attribute style:decimal-places}
    * @param styleDecimalPlacesValue The type is <code>Integer</code>
    */
   public void setStyleDecimalPlacesAttribute(Integer styleDecimalPlacesValue) {
@@ -842,9 +812,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleDiagonalBlTrAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:diagonal-bl-tr}
    *
-   * @odf.attribute style:diagonal-bl-tr}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -859,9 +828,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleDiagonalBlTrAttribute</code> , See
-   * {
+   * {@odf.attribute style:diagonal-bl-tr}
    *
-   * @odf.attribute style:diagonal-bl-tr}
    * @param styleDiagonalBlTrValue The type is <code>String</code>
    */
   public void setStyleDiagonalBlTrAttribute(String styleDiagonalBlTrValue) {
@@ -873,9 +841,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * StyleDiagonalBlTrWidthsAttribute</code> , See {
+   * StyleDiagonalBlTrWidthsAttribute</code> , See {@odf.attribute style:diagonal-bl-tr-widths}
    *
-   * @odf.attribute style:diagonal-bl-tr-widths}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -891,9 +858,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleDiagonalBlTrWidthsAttribute</code>
-   * , See {
+   * , See {@odf.attribute style:diagonal-bl-tr-widths}
    *
-   * @odf.attribute style:diagonal-bl-tr-widths}
    * @param styleDiagonalBlTrWidthsValue The type is <code>String</code>
    */
   public void setStyleDiagonalBlTrWidthsAttribute(String styleDiagonalBlTrWidthsValue) {
@@ -905,9 +871,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleDiagonalTlBrAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:diagonal-tl-br}
    *
-   * @odf.attribute style:diagonal-tl-br}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -922,9 +887,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleDiagonalTlBrAttribute</code> , See
-   * {
+   * {@odf.attribute style:diagonal-tl-br}
    *
-   * @odf.attribute style:diagonal-tl-br}
    * @param styleDiagonalTlBrValue The type is <code>String</code>
    */
   public void setStyleDiagonalTlBrAttribute(String styleDiagonalTlBrValue) {
@@ -936,9 +900,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * StyleDiagonalTlBrWidthsAttribute</code> , See {
+   * StyleDiagonalTlBrWidthsAttribute</code> , See {@odf.attribute style:diagonal-tl-br-widths}
    *
-   * @odf.attribute style:diagonal-tl-br-widths}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -954,9 +917,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleDiagonalTlBrWidthsAttribute</code>
-   * , See {
+   * , See {@odf.attribute style:diagonal-tl-br-widths}
    *
-   * @odf.attribute style:diagonal-tl-br-widths}
    * @param styleDiagonalTlBrWidthsValue The type is <code>String</code>
    */
   public void setStyleDiagonalTlBrWidthsAttribute(String styleDiagonalTlBrWidthsValue) {
@@ -968,9 +930,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleDirectionAttribute</code>
-   * , See {
+   * , See {@odf.attribute style:direction}
    *
-   * @odf.attribute style:direction}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -984,9 +945,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>StyleDirectionAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>StyleDirectionAttribute</code> , See
+   * {@odf.attribute style:direction}
    *
-   * @odf.attribute style:direction}
    * @param styleDirectionValue The type is <code>String</code>
    */
   public void setStyleDirectionAttribute(String styleDirectionValue) {
@@ -997,9 +958,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * StyleGlyphOrientationVerticalAttribute</code> , See {
+   * StyleGlyphOrientationVerticalAttribute</code> , See {@odf.attribute
+   * style:glyph-orientation-vertical}
    *
-   * @odf.attribute style:glyph-orientation-vertical}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -1015,9 +976,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleGlyphOrientationVerticalAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:glyph-orientation-vertical}
    *
-   * @odf.attribute style:glyph-orientation-vertical}
    * @param styleGlyphOrientationVerticalValue The type is <code>String</code>
    */
   public void setStyleGlyphOrientationVerticalAttribute(String styleGlyphOrientationVerticalValue) {
@@ -1029,16 +989,15 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StylePrintContentAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:print-content}
    *
-   * @odf.attribute style:print-content}
    * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
   public Boolean getStylePrintContentAttribute() {
     StylePrintContentAttribute attr =
         (StylePrintContentAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "print-content");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -1046,9 +1005,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StylePrintContentAttribute</code> , See
-   * {
+   * {@odf.attribute style:print-content}
    *
-   * @odf.attribute style:print-content}
    * @param stylePrintContentValue The type is <code>Boolean</code>
    */
   public void setStylePrintContentAttribute(Boolean stylePrintContentValue) {
@@ -1060,16 +1018,15 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleRepeatContentAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:repeat-content}
    *
-   * @odf.attribute style:repeat-content}
    * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
   public Boolean getStyleRepeatContentAttribute() {
     StyleRepeatContentAttribute attr =
         (StyleRepeatContentAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "repeat-content");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -1077,9 +1034,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleRepeatContentAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:repeat-content}
    *
-   * @odf.attribute style:repeat-content}
    * @param styleRepeatContentValue The type is <code>Boolean</code>
    */
   public void setStyleRepeatContentAttribute(Boolean styleRepeatContentValue) {
@@ -1091,9 +1047,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleRotationAlignAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:rotation-align}
    *
-   * @odf.attribute style:rotation-align}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -1108,9 +1063,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleRotationAlignAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:rotation-align}
    *
-   * @odf.attribute style:rotation-align}
    * @param styleRotationAlignValue The type is <code>String</code>
    */
   public void setStyleRotationAlignAttribute(String styleRotationAlignValue) {
@@ -1122,9 +1076,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleRotationAngleAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:rotation-angle}
    *
-   * @odf.attribute style:rotation-angle}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -1139,9 +1092,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleRotationAngleAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:rotation-angle}
    *
-   * @odf.attribute style:rotation-angle}
    * @param styleRotationAngleValue The type is <code>String</code>
    */
   public void setStyleRotationAngleAttribute(String styleRotationAngleValue) {
@@ -1153,9 +1105,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleShadowAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:shadow}
    *
-   * @odf.attribute style:shadow}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -1169,9 +1120,9 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>StyleShadowAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>StyleShadowAttribute</code> , See
+   * {@odf.attribute style:shadow}
    *
-   * @odf.attribute style:shadow}
    * @param styleShadowValue The type is <code>String</code>
    */
   public void setStyleShadowAttribute(String styleShadowValue) {
@@ -1182,16 +1133,15 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleShrinkToFitAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:shrink-to-fit}
    *
-   * @odf.attribute style:shrink-to-fit}
    * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
   public Boolean getStyleShrinkToFitAttribute() {
     StyleShrinkToFitAttribute attr =
         (StyleShrinkToFitAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "shrink-to-fit");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -1199,9 +1149,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleShrinkToFitAttribute</code> , See
-   * {
+   * {@odf.attribute style:shrink-to-fit}
    *
-   * @odf.attribute style:shrink-to-fit}
    * @param styleShrinkToFitValue The type is <code>Boolean</code>
    */
   public void setStyleShrinkToFitAttribute(Boolean styleShrinkToFitValue) {
@@ -1212,9 +1161,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleTextAlignSourceAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:text-align-source}
    *
-   * @odf.attribute style:text-align-source}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -1230,9 +1178,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleTextAlignSourceAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:text-align-source}
    *
-   * @odf.attribute style:text-align-source}
    * @param styleTextAlignSourceValue The type is <code>String</code>
    */
   public void setStyleTextAlignSourceAttribute(String styleTextAlignSourceValue) {
@@ -1244,9 +1191,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleVerticalAlignAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:vertical-align}
    *
-   * @odf.attribute style:vertical-align}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -1261,9 +1207,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleVerticalAlignAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:vertical-align}
    *
-   * @odf.attribute style:vertical-align}
    * @param styleVerticalAlignValue The type is <code>String</code>
    */
   public void setStyleVerticalAlignAttribute(String styleVerticalAlignValue) {
@@ -1275,9 +1220,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleWritingModeAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:writing-mode}
    *
-   * @odf.attribute style:writing-mode}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -1292,9 +1236,8 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleWritingModeAttribute</code> , See
-   * {
+   * {@odf.attribute style:writing-mode}
    *
-   * @odf.attribute style:writing-mode}
    * @param styleWritingModeValue The type is <code>String</code>
    */
   public void setStyleWritingModeAttribute(String styleWritingModeValue) {
@@ -1304,12 +1247,11 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element style:background-image}.
    *
-   * @odf.element style:background-image}.
-   *     <p>Child element is new in Odf 1.2
-   * @return the element {
-   * @odf.element style:background-image}
+   * <p>Child element was added in ODF 1.2
+   *
+   * @return the element {@odf.element style:background-image}
    */
   public StyleBackgroundImageElement newStyleBackgroundImageElement() {
     StyleBackgroundImageElement styleBackgroundImage =
@@ -1318,6 +1260,12 @@ public class StyleTableCellPropertiesElement extends OdfStylePropertiesBase {
     return styleBackgroundImage;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

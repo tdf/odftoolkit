@@ -421,7 +421,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     DrawFillHatchSolidAttribute attr =
         (DrawFillHatchSolidAttribute)
             getOdfAttribute(OdfDocumentNamespace.DRAW, "fill-hatch-solid");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -630,7 +630,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     DrawGradientStepCountAttribute attr =
         (DrawGradientStepCountAttribute)
             getOdfAttribute(OdfDocumentNamespace.DRAW, "gradient-step-count");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -777,7 +777,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     PresentationBackgroundObjectsVisibleAttribute attr =
         (PresentationBackgroundObjectsVisibleAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "background-objects-visible");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -810,7 +810,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     PresentationBackgroundVisibleAttribute attr =
         (PresentationBackgroundVisibleAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "background-visible");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -842,7 +842,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     PresentationDisplayDateTimeAttribute attr =
         (PresentationDisplayDateTimeAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "display-date-time");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -872,7 +872,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     PresentationDisplayFooterAttribute attr =
         (PresentationDisplayFooterAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "display-footer");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -902,7 +902,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     PresentationDisplayHeaderAttribute attr =
         (PresentationDisplayHeaderAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "display-header");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -933,7 +933,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     PresentationDisplayPageNumberAttribute attr =
         (PresentationDisplayPageNumberAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "display-page-number");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -1278,7 +1278,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
    * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
    *     {@odf.attribute xlink:href} at specification
    * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
-   *     {@odf.attribute xlink:type} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute xlink:type} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element presentation:sound}
    */
   public PresentationSoundElement newPresentationSoundElement(
@@ -1291,6 +1291,12 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     return presentationSound;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

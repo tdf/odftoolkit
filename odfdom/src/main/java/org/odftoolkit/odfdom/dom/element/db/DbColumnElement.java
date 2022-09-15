@@ -223,7 +223,7 @@ public class DbColumnElement extends OdfElement {
   public Boolean getDbVisibleAttribute() {
     DbVisibleAttribute attr =
         (DbVisibleAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "visible");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(DbVisibleAttribute.DEFAULT_VALUE);
@@ -251,7 +251,7 @@ public class DbColumnElement extends OdfElement {
   public Boolean getOfficeBooleanValueAttribute() {
     OfficeBooleanValueAttribute attr =
         (OfficeBooleanValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "boolean-value");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -395,7 +395,7 @@ public class DbColumnElement extends OdfElement {
   public Double getOfficeValueAttribute() {
     OfficeValueAttribute attr =
         (OfficeValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "value");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Double.valueOf(attr.doubleValue());
     }
     return null;
@@ -443,6 +443,12 @@ public class DbColumnElement extends OdfElement {
     attr.setValue(officeValueTypeValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -451,5 +457,19 @@ public class DbColumnElement extends OdfElement {
     } else {
       visitor.visit(this);
     }
+  }
+
+  /** Removes all the content from the element */
+  @Override
+  public void removeContent() {
+    super.removeContent();
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "value");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "value-type");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "time-value");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "date-value");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "boolean-value");
+    this.removeAttributeNS(
+        "urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0", "value-type");
+    this.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "formula");
   }
 }

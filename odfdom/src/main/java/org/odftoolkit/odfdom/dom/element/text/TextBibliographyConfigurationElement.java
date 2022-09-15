@@ -193,7 +193,7 @@ public class TextBibliographyConfigurationElement extends OdfElement {
     TextNumberedEntriesAttribute attr =
         (TextNumberedEntriesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "numbered-entries");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextNumberedEntriesAttribute.DEFAULT_VALUE);
@@ -280,7 +280,7 @@ public class TextBibliographyConfigurationElement extends OdfElement {
     TextSortByPositionAttribute attr =
         (TextSortByPositionAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "sort-by-position");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextSortByPositionAttribute.DEFAULT_VALUE);
@@ -342,6 +342,12 @@ public class TextBibliographyConfigurationElement extends OdfElement {
     return textSortKey;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

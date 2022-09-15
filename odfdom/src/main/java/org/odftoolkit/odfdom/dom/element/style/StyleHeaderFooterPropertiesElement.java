@@ -849,7 +849,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase {
     StyleDynamicSpacingAttribute attr =
         (StyleDynamicSpacingAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "dynamic-spacing");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -927,7 +927,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase {
   /**
    * Create child element {@odf.element style:background-image}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element style:background-image}
    */
@@ -938,6 +938,12 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase {
     return styleBackgroundImage;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

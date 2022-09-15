@@ -354,6 +354,8 @@ public class DrawAreaCircleElement extends OdfElement {
   /**
    * Create child element {@odf.element svg:title}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element svg:title}
    */
   public SvgTitleElement newSvgTitleElement() {
@@ -363,6 +365,12 @@ public class DrawAreaCircleElement extends OdfElement {
     return svgTitle;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -75,7 +75,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberDecimalPlacesAttribute attr =
         (NumberDecimalPlacesAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "decimal-places");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -104,7 +104,7 @@ public class NumberScientificNumberElement extends OdfElement {
   public Boolean getNumberGroupingAttribute() {
     NumberGroupingAttribute attr =
         (NumberGroupingAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "grouping");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(NumberGroupingAttribute.DEFAULT_VALUE);
@@ -133,7 +133,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberMinExponentDigitsAttribute attr =
         (NumberMinExponentDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-exponent-digits");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -163,7 +163,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberMinIntegerDigitsAttribute attr =
         (NumberMinIntegerDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-integer-digits");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -182,6 +182,12 @@ public class NumberScientificNumberElement extends OdfElement {
     attr.setIntValue(numberMinIntegerDigitsValue.intValue());
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

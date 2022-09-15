@@ -70,7 +70,7 @@ public class TextTrackedChangesElement extends OdfElement {
   public Boolean getTextTrackChangesAttribute() {
     TextTrackChangesAttribute attr =
         (TextTrackChangesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "track-changes");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextTrackChangesAttribute.DEFAULT_VALUE);
@@ -103,6 +103,12 @@ public class TextTrackedChangesElement extends OdfElement {
     return textChangedRegion;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

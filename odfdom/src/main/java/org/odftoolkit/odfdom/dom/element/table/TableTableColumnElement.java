@@ -41,14 +41,13 @@ import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.w3c.dom.Node;
 
 /** DOM implementation of OpenDocument element {@odf.element table:table-column}. */
 public class TableTableColumnElement extends OdfStylableElement {
 
   public static final OdfName ELEMENT_NAME =
       OdfName.newName(OdfDocumentNamespace.TABLE, "table-column");
-  private static final String VISIBLE = "visible";
-  private static final String COLLAPSE = "collapse";
 
   /**
    * Create the instance of <code>TableTableColumnElement</code>
@@ -113,7 +112,7 @@ public class TableTableColumnElement extends OdfStylableElement {
     TableNumberColumnsRepeatedAttribute attr =
         (TableNumberColumnsRepeatedAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "number-columns-repeated");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(TableNumberColumnsRepeatedAttribute.DEFAULT_VALUE);
@@ -215,6 +214,12 @@ public class TableTableColumnElement extends OdfStylableElement {
     attr.setValue(xmlIdValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -226,8 +231,7 @@ public class TableTableColumnElement extends OdfStylableElement {
   }
 
   @Override
-  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
-  /** @return the component size of a heading, which is always 1 */
+  /** @return the repeation of this element, the default is in ODF always 1 */
   public int getRepetition() {
     Integer repeated = getTableNumberColumnsRepeatedAttribute();
     if (repeated == null) {
@@ -237,15 +241,13 @@ public class TableTableColumnElement extends OdfStylableElement {
   }
 
   @Override
-  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
-  /** @return the component size of a heading, which is always 1 */
+  /** @return if this element is repeatable, by having a repeatable attribute */
   public boolean isRepeatable() {
     return true;
   }
 
   @Override
-  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
-  /** @return the component size of a heading, which is always 1 */
+  /** @repetition the repetition number of this attribute */
   public void setRepetition(int repetition) {
     setTableNumberColumnsRepeatedAttribute(repetition);
   }
@@ -260,7 +262,7 @@ public class TableTableColumnElement extends OdfStylableElement {
   @Override
   public TableTableColumnElement split(int posStart) {
     TableTableColumnElement newElement = this;
-    // 0 would not leave anything left on the left side
+    // 0 would not leave anything left on the left side, would not change anything!
     if (posStart > 0) {
       newElement = (TableTableColumnElement) this.cloneNode(true);
       int repeated = getTableNumberColumnsRepeatedAttribute();
@@ -268,6 +270,7 @@ public class TableTableColumnElement extends OdfStylableElement {
         if (posStart > 1) {
           this.setTableNumberColumnsRepeatedAttribute(posStart);
         } else {
+
           this.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
         }
         // any higher value one for repeated write out.
@@ -279,30 +282,14 @@ public class TableTableColumnElement extends OdfStylableElement {
               OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
         }
       }
-      OdfElement nextElementSibling = OdfElement.getNextSiblingElement(this);
+      Node nextNodeSibling = this.getNextSibling();
       OdfElement parent = (OdfElement) this.getParentNode();
-      if (nextElementSibling == null) {
+      if (nextNodeSibling == null) {
         parent.appendChild(newElement);
       } else {
-        parent.insertBefore(newElement, nextElementSibling);
+        parent.insertBefore(newElement, nextNodeSibling);
       }
     }
     return newElement;
-  }
-
-  /** Changes the visibility of the @table:visibility attributes */
-  public void setVisiblity(Boolean show) {
-    // the default is visible ("true")
-    boolean isVisible = Boolean.TRUE;
-    if (hasAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "visibility")) {
-      isVisible = VISIBLE.equals(getAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "visibility"));
-    }
-    if (show && !isVisible || !show && isVisible) {
-      if (show) {
-        removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "visible");
-      } else {
-        setAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "table:visibility", COLLAPSE);
-      }
-    }
   }
 }

@@ -132,7 +132,7 @@ public class TextDatabaseRowSelectElement extends OdfElement {
   public Integer getTextRowNumberAttribute() {
     TextRowNumberAttribute attr =
         (TextRowNumberAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "row-number");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -223,6 +223,12 @@ public class TextDatabaseRowSelectElement extends OdfElement {
     return formConnectionResource;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

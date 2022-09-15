@@ -38,6 +38,8 @@ public class TextCAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "c");
 
+  public static final String DEFAULT_VALUE = "1";
+
   /**
    * Create the instance of OpenDocument attribute {@odf.attribute text:c}.
    *
@@ -71,12 +73,7 @@ public class TextCAttribute extends OdfAttribute {
   /** @return Returns the <code>int</code> value of the attribute */
   public int intValue() {
     String val = super.getValue();
-    try {
-      return Integer.parseInt(val);
-    } catch (NumberFormatException e) {
-      // TODO: validation handling/logging
-      throw (e);
-    }
+    return Integer.parseInt(val);
   }
 
   /**
@@ -87,7 +84,7 @@ public class TextCAttribute extends OdfAttribute {
    */
   @Override
   public String getDefault() {
-    return null;
+    return DEFAULT_VALUE;
   }
 
   /**
@@ -99,7 +96,7 @@ public class TextCAttribute extends OdfAttribute {
    */
   @Override
   public boolean hasDefault() {
-    return false;
+    return getOwnerElement() == null ? false : true;
   }
 
   /** @return Returns whether this attribute is known to be of type ID (i.e. xml:id ?) */

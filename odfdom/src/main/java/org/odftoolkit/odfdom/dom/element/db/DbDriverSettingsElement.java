@@ -103,7 +103,7 @@ public class DbDriverSettingsElement extends OdfElement {
     DbIsFirstRowHeaderLineAttribute attr =
         (DbIsFirstRowHeaderLineAttribute)
             getOdfAttribute(OdfDocumentNamespace.DB, "is-first-row-header-line");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(DbIsFirstRowHeaderLineAttribute.DEFAULT_VALUE);
@@ -134,7 +134,7 @@ public class DbDriverSettingsElement extends OdfElement {
     DbParameterNameSubstitutionAttribute attr =
         (DbParameterNameSubstitutionAttribute)
             getOdfAttribute(OdfDocumentNamespace.DB, "parameter-name-substitution");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(DbParameterNameSubstitutionAttribute.DEFAULT_VALUE);
@@ -163,7 +163,7 @@ public class DbDriverSettingsElement extends OdfElement {
   public Boolean getDbShowDeletedAttribute() {
     DbShowDeletedAttribute attr =
         (DbShowDeletedAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "show-deleted");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(DbShowDeletedAttribute.DEFAULT_VALUE);
@@ -214,7 +214,7 @@ public class DbDriverSettingsElement extends OdfElement {
   /**
    * Create child element {@odf.element db:auto-increment}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:auto-increment}
    */
@@ -228,7 +228,7 @@ public class DbDriverSettingsElement extends OdfElement {
   /**
    * Create child element {@odf.element db:character-set}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:character-set}
    */
@@ -242,7 +242,7 @@ public class DbDriverSettingsElement extends OdfElement {
   /**
    * Create child element {@odf.element db:delimiter}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:delimiter}
    */
@@ -256,7 +256,7 @@ public class DbDriverSettingsElement extends OdfElement {
   /**
    * Create child element {@odf.element db:table-settings}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:table-settings}
    */
@@ -267,6 +267,12 @@ public class DbDriverSettingsElement extends OdfElement {
     return dbTableSettings;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

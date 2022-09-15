@@ -257,7 +257,7 @@ public class OfficeAnnotationElement extends DrawShapeElementBase {
   public Boolean getOfficeDisplayAttribute() {
     OfficeDisplayAttribute attr =
         (OfficeDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "display");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -470,6 +470,12 @@ public class OfficeAnnotationElement extends DrawShapeElementBase {
     return textP;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

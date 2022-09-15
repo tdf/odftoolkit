@@ -62,7 +62,7 @@ public class DbTableSettingsElement extends OdfElement {
   /**
    * Create child element {@odf.element db:table-setting}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:table-setting}
    */
@@ -73,6 +73,12 @@ public class DbTableSettingsElement extends OdfElement {
     return dbTableSetting;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

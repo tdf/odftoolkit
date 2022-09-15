@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.attribute.office;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
@@ -39,6 +38,7 @@ public class OfficeTargetFrameAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME =
       OdfName.newName(OdfDocumentNamespace.OFFICE, "target-frame");
+
   public static final String DEFAULT_VALUE = "_blank";
 
   /**
@@ -112,12 +112,7 @@ public class OfficeTargetFrameAttribute extends OdfAttribute {
    */
   @Override
   public String getDefault() {
-    OdfElement parentElement = (OdfElement) getOwnerElement();
-    String defaultValue = null;
-    if (parentElement != null) {
-      defaultValue = DEFAULT_VALUE;
-    }
-    return defaultValue;
+    return DEFAULT_VALUE;
   }
 
   /**

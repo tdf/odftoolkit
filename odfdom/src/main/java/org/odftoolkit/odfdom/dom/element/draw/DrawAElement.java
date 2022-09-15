@@ -106,7 +106,7 @@ public class DrawAElement extends OdfElement {
   public Boolean getOfficeServerMapAttribute() {
     OfficeServerMapAttribute attr =
         (OfficeServerMapAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "server-map");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(OfficeServerMapAttribute.DEFAULT_VALUE);
@@ -328,7 +328,7 @@ public class DrawAElement extends OdfElement {
   /**
    * Create child element {@odf.element dr3d:scene}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element dr3d:scene}
    */
@@ -342,7 +342,7 @@ public class DrawAElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:caption}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:caption}
    */
@@ -356,7 +356,7 @@ public class DrawAElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:circle}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:circle}
    */
@@ -371,7 +371,7 @@ public class DrawAElement extends OdfElement {
    * Create child element {@odf.element draw:connector}.
    *
    * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
-   *     {@odf.attribute svg:viewBox} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute svg:viewBox} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:connector}
    */
   public DrawConnectorElement newDrawConnectorElement(int svgViewBoxValue) {
@@ -386,7 +386,7 @@ public class DrawAElement extends OdfElement {
    * Create child element {@odf.element draw:control}.
    *
    * @param drawControlValue the <code>String</code> value of <code>DrawControlAttribute</code>, see
-   *     {@odf.attribute draw:control} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute draw:control} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:control}
    */
   public DrawControlElement newDrawControlElement(String drawControlValue) {
@@ -400,7 +400,7 @@ public class DrawAElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:custom-shape}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:custom-shape}
    */
@@ -414,7 +414,7 @@ public class DrawAElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:ellipse}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:ellipse}
    */
@@ -440,7 +440,7 @@ public class DrawAElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:g}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:g}
    */
@@ -460,7 +460,7 @@ public class DrawAElement extends OdfElement {
    * @param svgY1Value the <code>String</code> value of <code>SvgY1Attribute</code>, see
    *     {@odf.attribute svg:y1} at specification
    * @param svgY2Value the <code>String</code> value of <code>SvgY2Attribute</code>, see
-   *     {@odf.attribute svg:y2} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute svg:y2} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:line}
    */
   public DrawLineElement newDrawLineElement(
@@ -485,7 +485,7 @@ public class DrawAElement extends OdfElement {
    * @param svgY1Value the <code>String</code> value of <code>SvgY1Attribute</code>, see
    *     {@odf.attribute svg:y1} at specification
    * @param svgY2Value the <code>String</code> value of <code>SvgY2Attribute</code>, see
-   *     {@odf.attribute svg:y2} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute svg:y2} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:measure}
    */
   public DrawMeasureElement newDrawMeasureElement(
@@ -503,7 +503,7 @@ public class DrawAElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:page-thumbnail}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:page-thumbnail}
    */
@@ -520,7 +520,7 @@ public class DrawAElement extends OdfElement {
    * @param svgDValue the <code>String</code> value of <code>SvgDAttribute</code>, see
    *     {@odf.attribute svg:d} at specification
    * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
-   *     {@odf.attribute svg:viewBox} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute svg:viewBox} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:path}
    */
   public DrawPathElement newDrawPathElement(String svgDValue, int svgViewBoxValue) {
@@ -538,7 +538,7 @@ public class DrawAElement extends OdfElement {
    * @param drawPointsValue the <code>String</code> value of <code>DrawPointsAttribute</code>, see
    *     {@odf.attribute draw:points} at specification
    * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
-   *     {@odf.attribute svg:viewBox} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute svg:viewBox} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:polygon}
    */
   public DrawPolygonElement newDrawPolygonElement(String drawPointsValue, int svgViewBoxValue) {
@@ -556,7 +556,7 @@ public class DrawAElement extends OdfElement {
    * @param drawPointsValue the <code>String</code> value of <code>DrawPointsAttribute</code>, see
    *     {@odf.attribute draw:points} at specification
    * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
-   *     {@odf.attribute svg:viewBox} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute svg:viewBox} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:polyline}
    */
   public DrawPolylineElement newDrawPolylineElement(String drawPointsValue, int svgViewBoxValue) {
@@ -571,7 +571,7 @@ public class DrawAElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:rect}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:rect}
    */
@@ -588,7 +588,7 @@ public class DrawAElement extends OdfElement {
    * @param drawConcaveValue the <code>Boolean</code> value of <code>DrawConcaveAttribute</code>,
    *     see {@odf.attribute draw:concave} at specification
    * @param drawCornersValue the <code>Integer</code> value of <code>DrawCornersAttribute</code>,
-   *     see {@odf.attribute draw:corners} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute draw:corners} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:regular-polygon}
    */
   public DrawRegularPolygonElement newDrawRegularPolygonElement(
@@ -601,6 +601,12 @@ public class DrawAElement extends OdfElement {
     return drawRegularPolygon;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

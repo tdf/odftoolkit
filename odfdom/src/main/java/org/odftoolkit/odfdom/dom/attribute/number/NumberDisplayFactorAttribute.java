@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.attribute.number;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
@@ -39,6 +38,7 @@ public class NumberDisplayFactorAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME =
       OdfName.newName(OdfDocumentNamespace.NUMBER, "display-factor");
+
   public static final String DEFAULT_VALUE = "1";
 
   /**
@@ -74,12 +74,7 @@ public class NumberDisplayFactorAttribute extends OdfAttribute {
   /** @return Returns the <code>double</code> value of the attribute */
   public double doubleValue() {
     String val = super.getValue();
-    try {
-      return Double.parseDouble(val);
-    } catch (NumberFormatException e) {
-      // TODO: validation handling/logging
-      throw (e);
-    }
+    return Double.parseDouble(val);
   }
 
   /**
@@ -90,12 +85,7 @@ public class NumberDisplayFactorAttribute extends OdfAttribute {
    */
   @Override
   public String getDefault() {
-    OdfElement parentElement = (OdfElement) getOwnerElement();
-    String defaultValue = null;
-    if (parentElement != null) {
-      defaultValue = DEFAULT_VALUE;
-    }
-    return defaultValue;
+    return DEFAULT_VALUE;
   }
 
   /**

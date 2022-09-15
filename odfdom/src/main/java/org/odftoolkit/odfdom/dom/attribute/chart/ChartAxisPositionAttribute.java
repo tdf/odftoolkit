@@ -108,12 +108,7 @@ public class ChartAxisPositionAttribute extends OdfAttribute {
   /** @return Returns the <code>double</code> value of the attribute */
   public double doubleValue() {
     String val = super.getValue();
-    try {
-      return Double.parseDouble(val);
-    } catch (NumberFormatException e) {
-      // TODO: validation handling/logging
-      throw (e);
-    }
+    return Double.parseDouble(val);
   }
 
   /**

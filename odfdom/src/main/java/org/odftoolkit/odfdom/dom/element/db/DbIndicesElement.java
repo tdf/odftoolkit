@@ -62,7 +62,7 @@ public class DbIndicesElement extends OdfElement {
    * Create child element {@odf.element db:index}.
    *
    * @param dbNameValue the <code>String</code> value of <code>DbNameAttribute</code>, see
-   *     {@odf.attribute db:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute db:name} at specification Child element was added in ODF 1.2
    *     <p>Child element is mandatory.
    * @return the element {@odf.element db:index}
    */
@@ -73,6 +73,12 @@ public class DbIndicesElement extends OdfElement {
     return dbIndex;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

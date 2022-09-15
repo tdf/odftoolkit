@@ -304,7 +304,7 @@ public class FormColumnElement extends OdfElement {
    * Create child element {@odf.element form:time}.
    *
    * @param xmlIdValue the <code>String</code> value of <code>XmlIdAttribute</code>, see
-   *     {@odf.attribute xml:id} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute xml:id} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element form:time}
    */
   public FormTimeElement newFormTimeElement(String xmlIdValue) {
@@ -315,6 +315,12 @@ public class FormColumnElement extends OdfElement {
     return formTime;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -28,7 +28,6 @@
  */
 package org.odftoolkit.odfdom.dom.element.text;
 
-import java.util.logging.Logger;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextCAttribute;
@@ -38,15 +37,10 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.w3c.dom.Node;
 
-/**
- * DOM implementation of OpenDocument element {
- *
- * @odf.element text:s}.
- */
+/** DOM implementation of OpenDocument element {@odf.element text:s}. */
 public class TextSElement extends OdfElement {
 
   public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.TEXT, "s");
-  private static final Logger LOG = Logger.getLogger(TextSElement.class.getName());
 
   /**
    * Create the instance of <code>TextSElement</code>
@@ -60,32 +54,31 @@ public class TextSElement extends OdfElement {
   /**
    * Get the element name
    *
-   * @return return <code>OdfName</code> the name of element {
-   * @odf.element text:s}.
+   * @return return <code>OdfName</code> the name of element {@odf.element text:s}.
    */
   public OdfName getOdfName() {
     return ELEMENT_NAME;
   }
 
   /**
-   * Receives the value of the ODFDOM attribute representation <code>TextCAttribute</code> , See {
+   * Receives the value of the ODFDOM attribute representation <code>TextCAttribute</code> , See
+   * {@odf.attribute text:c}
    *
-   * @odf.attribute text:c}
    * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
   public Integer getTextCAttribute() {
     TextCAttribute attr = (TextCAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "c");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
-    return null;
+    return Integer.valueOf(TextCAttribute.DEFAULT_VALUE);
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TextCAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>TextCAttribute</code> , See
+   * {@odf.attribute text:c}
    *
-   * @odf.attribute text:c}
    * @param textCValue The type is <code>Integer</code>
    */
   public void setTextCAttribute(Integer textCValue) {
@@ -94,6 +87,12 @@ public class TextSElement extends OdfElement {
     attr.setIntValue(textCValue.intValue());
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -105,15 +104,43 @@ public class TextSElement extends OdfElement {
   }
 
   @Override
+  public boolean isComponentRoot() {
+    return true;
+  }
+
+  @Override
+  /** @return the repeation of this element, the default is in ODF always 1 */
+  public int getRepetition() {
+    Integer repeated = getTextCAttribute();
+    if (repeated == null) {
+      repeated = 1;
+    }
+    return repeated;
+  }
+
+  @Override
+  /** @return if this element is repeatable, by having a repeatable attribute */
+  public boolean isRepeatable() {
+    return true;
+  }
+
+  @Override
+  /** @repetition the repetition number of this attribute */
+  public void setRepetition(int repetition) {
+    setTextCAttribute(repetition);
+  }
+
   /**
    * Splitting the element at the given position into two halves
    *
-   * @param posStart The split position. The start of the second half.
-   * @return the new created second space element or null if the element had a count of 1 or the
-   *     given position was larger than the space
+   * @param posStart The split position. Counting is starting with zero. The start of the second
+   *     half.
+   * @return the new created second element (or if posStart was less than 1 the original element)
    */
-  public OdfElement split(int posStart) {
+  @Override
+  public TextSElement split(int posStart) {
     TextSElement newElement = this;
+    // 0 would not leave anything left on the left side, would not change anything!
     if (posStart > 0) {
       newElement = (TextSElement) this.cloneNode(true);
       int repeated = getTextCAttribute();
@@ -121,8 +148,11 @@ public class TextSElement extends OdfElement {
         if (posStart > 1) {
           this.setTextCAttribute(posStart);
         } else {
+
           this.removeAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c");
         }
+        // any higher value one for repeated write out.
+        // 1 is the default and has not to be written out
         if (repeated - posStart > 1) {
           newElement.setTextCAttribute(repeated - posStart);
         } else {
@@ -136,46 +166,7 @@ public class TextSElement extends OdfElement {
       } else {
         parent.insertBefore(newElement, nextNodeSibling);
       }
-    } else {
-      LOG.fine(
-          "The result from a split at the beginning is equal its input! "
-              + "Likely nested <text:spans> having template and hard style...");
     }
     return newElement;
-  }
-  //		return this;
-  //
-  //		TextSElement previousSpace = null;
-  //		if (spaces != 1 && spaces != posStart) {
-  //			if(posStart > 1){
-  //				setTextCAttribute(spaces - posStart);
-  //			}else{
-  //				this.removeAttributeNS(OdfDocumentNamespace.TEXT.getUri(), "c");
-  //			}
-  //			previousSpace = new TextSElement((OdfFileDom) getOwnerDocument());
-  //			if ((spaces - posStart) > 1) {
-  //				previousSpace.setTextCAttribute(spaces - posStart);
-  //			}
-  //			getParentNode().insertBefore(previousSpace, this);
-  //		}
-  //		return this;
-  //	}
-
-  @Override
-  public int getRepetition() {
-    Integer spaces = getTextCAttribute();
-    if (spaces == null) {
-      spaces = 1;
-    }
-    return spaces;
-  }
-
-  @Override
-  /**
-   * If this element is the first - perhaps only - element of a logical group of XML elements. For
-   * instance: table, paragraph
-   */
-  public boolean isComponentRoot() {
-    return true;
   }
 }

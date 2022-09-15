@@ -102,7 +102,7 @@ public class TextHiddenTextElement extends OdfElement {
   public Boolean getTextIsHiddenAttribute() {
     TextIsHiddenAttribute attr =
         (TextIsHiddenAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "is-hidden");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -150,6 +150,12 @@ public class TextHiddenTextElement extends OdfElement {
     attr.setValue(textStringValueValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -159,6 +165,7 @@ public class TextHiddenTextElement extends OdfElement {
       visitor.visit(this);
     }
   }
+
   /** Add text content. Only elements which are allowed to have text content offer this method. */
   public void newTextNode(String content) {
     if (content != null && !content.equals("")) {

@@ -79,7 +79,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public Integer getTableColumnAttribute() {
     TableColumnAttribute attr =
         (TableColumnAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "column");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -107,7 +107,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public Integer getTableEndColumnAttribute() {
     TableEndColumnAttribute attr =
         (TableEndColumnAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "end-column");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -135,7 +135,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public Integer getTableEndRowAttribute() {
     TableEndRowAttribute attr =
         (TableEndRowAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "end-row");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -163,7 +163,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public Integer getTableEndTableAttribute() {
     TableEndTableAttribute attr =
         (TableEndTableAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "end-table");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -190,7 +190,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
    */
   public Integer getTableRowAttribute() {
     TableRowAttribute attr = (TableRowAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "row");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -218,7 +218,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public Integer getTableStartColumnAttribute() {
     TableStartColumnAttribute attr =
         (TableStartColumnAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "start-column");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -246,7 +246,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public Integer getTableStartRowAttribute() {
     TableStartRowAttribute attr =
         (TableStartRowAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "start-row");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -274,7 +274,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public Integer getTableStartTableAttribute() {
     TableStartTableAttribute attr =
         (TableStartTableAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "start-table");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -302,7 +302,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public Integer getTableTableAttribute() {
     TableTableAttribute attr =
         (TableTableAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "table");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -320,6 +320,12 @@ public class TableTargetRangeAddressElement extends OdfElement {
     attr.setIntValue(tableTableValue.intValue());
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

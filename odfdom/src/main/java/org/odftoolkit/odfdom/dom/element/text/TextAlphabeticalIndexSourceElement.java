@@ -200,7 +200,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextAlphabeticalSeparatorsAttribute attr =
         (TextAlphabeticalSeparatorsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "alphabetical-separators");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextAlphabeticalSeparatorsAttribute.DEFAULT_VALUE);
@@ -230,7 +230,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextCapitalizeEntriesAttribute attr =
         (TextCapitalizeEntriesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "capitalize-entries");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextCapitalizeEntriesAttribute.DEFAULT_VALUE);
@@ -259,7 +259,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
   public Boolean getTextCombineEntriesAttribute() {
     TextCombineEntriesAttribute attr =
         (TextCombineEntriesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "combine-entries");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextCombineEntriesAttribute.DEFAULT_VALUE);
@@ -290,7 +290,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextCombineEntriesWithDashAttribute attr =
         (TextCombineEntriesWithDashAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "combine-entries-with-dash");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextCombineEntriesWithDashAttribute.DEFAULT_VALUE);
@@ -320,7 +320,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextCombineEntriesWithPpAttribute attr =
         (TextCombineEntriesWithPpAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "combine-entries-with-pp");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextCombineEntriesWithPpAttribute.DEFAULT_VALUE);
@@ -349,7 +349,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
   public Boolean getTextCommaSeparatedAttribute() {
     TextCommaSeparatedAttribute attr =
         (TextCommaSeparatedAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "comma-separated");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextCommaSeparatedAttribute.DEFAULT_VALUE);
@@ -378,7 +378,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
   public Boolean getTextIgnoreCaseAttribute() {
     TextIgnoreCaseAttribute attr =
         (TextIgnoreCaseAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "ignore-case");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextIgnoreCaseAttribute.DEFAULT_VALUE);
@@ -466,7 +466,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextRelativeTabStopPositionAttribute attr =
         (TextRelativeTabStopPositionAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "relative-tab-stop-position");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextRelativeTabStopPositionAttribute.DEFAULT_VALUE);
@@ -525,7 +525,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextUseKeysAsEntriesAttribute attr =
         (TextUseKeysAsEntriesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-keys-as-entries");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextUseKeysAsEntriesAttribute.DEFAULT_VALUE);
@@ -576,6 +576,12 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     return textIndexTitleTemplate;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

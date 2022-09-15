@@ -71,7 +71,7 @@ public class TableTableRowGroupElement extends OdfElement {
   public Boolean getTableDisplayAttribute() {
     TableDisplayAttribute attr =
         (TableDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "display");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableDisplayAttribute.DEFAULT_VALUE_TRUE);
@@ -140,6 +140,8 @@ public class TableTableRowGroupElement extends OdfElement {
   /**
    * Create child element {@odf.element text:soft-page-break}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element text:soft-page-break}
    */
   public TextSoftPageBreakElement newTextSoftPageBreakElement() {
@@ -149,6 +151,12 @@ public class TableTableRowGroupElement extends OdfElement {
     return textSoftPageBreak;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

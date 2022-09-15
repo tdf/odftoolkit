@@ -136,7 +136,7 @@ public class TableFilterElement extends OdfElement {
     TableDisplayDuplicatesAttribute attr =
         (TableDisplayDuplicatesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "display-duplicates");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableDisplayDuplicatesAttribute.DEFAULT_VALUE);
@@ -231,6 +231,12 @@ public class TableFilterElement extends OdfElement {
     return tableFilterOr;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

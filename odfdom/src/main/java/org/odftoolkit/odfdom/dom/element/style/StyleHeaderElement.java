@@ -91,7 +91,7 @@ public class StyleHeaderElement extends OdfElement {
   public Boolean getStyleDisplayAttribute() {
     StyleDisplayAttribute attr =
         (StyleDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "display");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(StyleDisplayAttribute.DEFAULT_VALUE);
@@ -409,6 +409,8 @@ public class StyleHeaderElement extends OdfElement {
   /**
    * Create child element {@odf.element text:tracked-changes}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element text:tracked-changes}
    */
   public TextTrackedChangesElement newTextTrackedChangesElement() {
@@ -457,6 +459,12 @@ public class StyleHeaderElement extends OdfElement {
     return textVariableDecls;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

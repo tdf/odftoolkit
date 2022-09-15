@@ -72,7 +72,7 @@ public class DbTableSettingElement extends OdfElement {
     DbIsFirstRowHeaderLineAttribute attr =
         (DbIsFirstRowHeaderLineAttribute)
             getOdfAttribute(OdfDocumentNamespace.DB, "is-first-row-header-line");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(DbIsFirstRowHeaderLineAttribute.DEFAULT_VALUE);
@@ -101,7 +101,7 @@ public class DbTableSettingElement extends OdfElement {
   public Boolean getDbShowDeletedAttribute() {
     DbShowDeletedAttribute attr =
         (DbShowDeletedAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "show-deleted");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(DbShowDeletedAttribute.DEFAULT_VALUE);
@@ -122,7 +122,7 @@ public class DbTableSettingElement extends OdfElement {
   /**
    * Create child element {@odf.element db:character-set}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:character-set}
    */
@@ -136,7 +136,7 @@ public class DbTableSettingElement extends OdfElement {
   /**
    * Create child element {@odf.element db:delimiter}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:delimiter}
    */
@@ -147,6 +147,12 @@ public class DbTableSettingElement extends OdfElement {
     return dbDelimiter;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

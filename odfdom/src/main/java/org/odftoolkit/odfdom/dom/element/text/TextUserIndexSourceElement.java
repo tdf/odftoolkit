@@ -80,7 +80,7 @@ public class TextUserIndexSourceElement extends OdfElement {
     TextCopyOutlineLevelsAttribute attr =
         (TextCopyOutlineLevelsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "copy-outline-levels");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextCopyOutlineLevelsAttribute.DEFAULT_VALUE);
@@ -169,7 +169,7 @@ public class TextUserIndexSourceElement extends OdfElement {
     TextRelativeTabStopPositionAttribute attr =
         (TextRelativeTabStopPositionAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "relative-tab-stop-position");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextRelativeTabStopPositionAttribute.DEFAULT_VALUE);
@@ -199,7 +199,7 @@ public class TextUserIndexSourceElement extends OdfElement {
     TextUseFloatingFramesAttribute attr =
         (TextUseFloatingFramesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-floating-frames");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextUseFloatingFramesAttribute.DEFAULT_VALUE);
@@ -228,7 +228,7 @@ public class TextUserIndexSourceElement extends OdfElement {
   public Boolean getTextUseGraphicsAttribute() {
     TextUseGraphicsAttribute attr =
         (TextUseGraphicsAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-graphics");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextUseGraphicsAttribute.DEFAULT_VALUE);
@@ -256,7 +256,7 @@ public class TextUserIndexSourceElement extends OdfElement {
   public Boolean getTextUseIndexMarksAttribute() {
     TextUseIndexMarksAttribute attr =
         (TextUseIndexMarksAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-index-marks");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextUseIndexMarksAttribute.DEFAULT_VALUE);
@@ -286,7 +286,7 @@ public class TextUserIndexSourceElement extends OdfElement {
     TextUseIndexSourceStylesAttribute attr =
         (TextUseIndexSourceStylesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-index-source-styles");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextUseIndexSourceStylesAttribute.DEFAULT_VALUE);
@@ -315,7 +315,7 @@ public class TextUserIndexSourceElement extends OdfElement {
   public Boolean getTextUseObjectsAttribute() {
     TextUseObjectsAttribute attr =
         (TextUseObjectsAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-objects");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextUseObjectsAttribute.DEFAULT_VALUE);
@@ -343,7 +343,7 @@ public class TextUserIndexSourceElement extends OdfElement {
   public Boolean getTextUseTablesAttribute() {
     TextUseTablesAttribute attr =
         (TextUseTablesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-tables");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextUseTablesAttribute.DEFAULT_VALUE);
@@ -407,6 +407,12 @@ public class TextUserIndexSourceElement extends OdfElement {
     return textUserIndexEntryTemplate;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

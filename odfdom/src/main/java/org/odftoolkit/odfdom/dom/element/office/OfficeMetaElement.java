@@ -80,7 +80,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element dc:creator}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element dc:creator}
    */
@@ -94,7 +94,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element dc:date}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element dc:date}
    */
@@ -107,7 +107,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element dc:description}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element dc:description}
    */
@@ -121,7 +121,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element dc:language}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element dc:language}
    */
@@ -135,7 +135,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element dc:subject}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element dc:subject}
    */
@@ -149,7 +149,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element dc:title}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element dc:title}
    */
@@ -162,7 +162,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element meta:auto-reload}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element meta:auto-reload}
    */
@@ -176,7 +176,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element meta:creation-date}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element meta:creation-date}
    */
@@ -190,7 +190,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element meta:document-statistic}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element meta:document-statistic}
    */
@@ -204,7 +204,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element meta:editing-cycles}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element meta:editing-cycles}
    */
@@ -218,7 +218,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element meta:editing-duration}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element meta:editing-duration}
    */
@@ -232,7 +232,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element meta:generator}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element meta:generator}
    */
@@ -246,7 +246,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element meta:hyperlink-behaviour}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element meta:hyperlink-behaviour}
    */
@@ -260,7 +260,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element meta:initial-creator}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element meta:initial-creator}
    */
@@ -274,7 +274,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element meta:keyword}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element meta:keyword}
    */
@@ -288,7 +288,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element meta:print-date}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element meta:print-date}
    */
@@ -302,7 +302,7 @@ public class OfficeMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element meta:printed-by}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element meta:printed-by}
    */
@@ -319,7 +319,7 @@ public class OfficeMetaElement extends OdfElement {
    * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
    *     {@odf.attribute xlink:href} at specification
    * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
-   *     {@odf.attribute xlink:type} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute xlink:type} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element meta:template}
    */
   public MetaTemplateElement newMetaTemplateElement(String xlinkHrefValue, String xlinkTypeValue) {
@@ -337,7 +337,7 @@ public class OfficeMetaElement extends OdfElement {
    * @param metaNameValue the <code>String</code> value of <code>MetaNameAttribute</code>, see
    *     {@odf.attribute meta:name} at specification
    * @param metaValueTypeValue the <code>String</code> value of <code>MetaValueTypeAttribute</code>,
-   *     see {@odf.attribute meta:value-type} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute meta:value-type} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element meta:user-defined}
    */
   public MetaUserDefinedElement newMetaUserDefinedElement(
@@ -350,6 +350,12 @@ public class OfficeMetaElement extends OdfElement {
     return metaUserDefined;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

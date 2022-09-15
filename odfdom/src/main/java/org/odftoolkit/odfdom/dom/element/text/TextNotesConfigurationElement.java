@@ -113,7 +113,7 @@ public class TextNotesConfigurationElement extends OdfElement {
     StyleNumLetterSyncAttribute attr =
         (StyleNumLetterSyncAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -408,7 +408,7 @@ public class TextNotesConfigurationElement extends OdfElement {
   public Integer getTextStartValueAttribute() {
     TextStartValueAttribute attr =
         (TextStartValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "start-value");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(TextStartValueAttribute.DEFAULT_VALUE);
@@ -452,6 +452,12 @@ public class TextNotesConfigurationElement extends OdfElement {
     return textNoteContinuationNoticeForward;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -340,6 +340,8 @@ public class DrawMeasureElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element svg:desc}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element svg:desc}
    */
   public SvgDescElement newSvgDescElement() {
@@ -350,6 +352,8 @@ public class DrawMeasureElement extends DrawShapeElementBase {
 
   /**
    * Create child element {@odf.element svg:title}.
+   *
+   * <p>Child element was added in ODF 1.1
    *
    * @return the element {@odf.element svg:title}
    */
@@ -383,6 +387,12 @@ public class DrawMeasureElement extends DrawShapeElementBase {
     return textP;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

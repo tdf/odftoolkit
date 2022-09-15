@@ -77,7 +77,7 @@ public class ChartEquationElement extends OdfElement {
     ChartAutomaticContentAttribute attr =
         (ChartAutomaticContentAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "automatic-content");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(ChartAutomaticContentAttribute.DEFAULT_VALUE);
@@ -107,7 +107,7 @@ public class ChartEquationElement extends OdfElement {
     ChartDisplayEquationAttribute attr =
         (ChartDisplayEquationAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "display-equation");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(ChartDisplayEquationAttribute.DEFAULT_VALUE);
@@ -137,7 +137,7 @@ public class ChartEquationElement extends OdfElement {
     ChartDisplayRSquareAttribute attr =
         (ChartDisplayRSquareAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "display-r-square");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(ChartDisplayRSquareAttribute.DEFAULT_VALUE);
@@ -241,7 +241,7 @@ public class ChartEquationElement extends OdfElement {
   /**
    * Create child element {@odf.element text:p}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:p}
    */
@@ -251,6 +251,12 @@ public class ChartEquationElement extends OdfElement {
     return textP;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

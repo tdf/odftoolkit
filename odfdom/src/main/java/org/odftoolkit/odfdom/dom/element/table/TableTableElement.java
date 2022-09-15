@@ -28,9 +28,6 @@
  */
 package org.odftoolkit.odfdom.dom.element.table;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.json.JSONArray;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.table.TableIsSubTableAttribute;
@@ -95,7 +92,7 @@ public class TableTableElement extends OdfStylableElement {
   public Boolean getTableIsSubTableAttribute() {
     TableIsSubTableAttribute attr =
         (TableIsSubTableAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "is-sub-table");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableIsSubTableAttribute.DEFAULT_VALUE);
@@ -151,7 +148,7 @@ public class TableTableElement extends OdfStylableElement {
   public Boolean getTablePrintAttribute() {
     TablePrintAttribute attr =
         (TablePrintAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "print");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TablePrintAttribute.DEFAULT_VALUE);
@@ -207,7 +204,7 @@ public class TableTableElement extends OdfStylableElement {
   public Boolean getTableProtectedAttribute() {
     TableProtectedAttribute attr =
         (TableProtectedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "protected");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableProtectedAttribute.DEFAULT_VALUE);
@@ -356,7 +353,7 @@ public class TableTableElement extends OdfStylableElement {
     TableUseBandingColumnsStylesAttribute attr =
         (TableUseBandingColumnsStylesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "use-banding-columns-styles");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableUseBandingColumnsStylesAttribute.DEFAULT_VALUE);
@@ -386,7 +383,7 @@ public class TableTableElement extends OdfStylableElement {
     TableUseBandingRowsStylesAttribute attr =
         (TableUseBandingRowsStylesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "use-banding-rows-styles");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableUseBandingRowsStylesAttribute.DEFAULT_VALUE);
@@ -416,7 +413,7 @@ public class TableTableElement extends OdfStylableElement {
     TableUseFirstColumnStylesAttribute attr =
         (TableUseFirstColumnStylesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "use-first-column-styles");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableUseFirstColumnStylesAttribute.DEFAULT_VALUE);
@@ -446,7 +443,7 @@ public class TableTableElement extends OdfStylableElement {
     TableUseFirstRowStylesAttribute attr =
         (TableUseFirstRowStylesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "use-first-row-styles");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableUseFirstRowStylesAttribute.DEFAULT_VALUE);
@@ -476,7 +473,7 @@ public class TableTableElement extends OdfStylableElement {
     TableUseLastColumnStylesAttribute attr =
         (TableUseLastColumnStylesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "use-last-column-styles");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableUseLastColumnStylesAttribute.DEFAULT_VALUE);
@@ -506,7 +503,7 @@ public class TableTableElement extends OdfStylableElement {
     TableUseLastRowStylesAttribute attr =
         (TableUseLastRowStylesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "use-last-row-styles");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableUseLastRowStylesAttribute.DEFAULT_VALUE);
@@ -590,7 +587,7 @@ public class TableTableElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element table:desc}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element table:desc}
    */
@@ -604,7 +601,7 @@ public class TableTableElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element table:named-expressions}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element table:named-expressions}
    */
@@ -765,7 +762,7 @@ public class TableTableElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element table:title}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element table:title}
    */
@@ -779,6 +776,8 @@ public class TableTableElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:soft-page-break}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element text:soft-page-break}
    */
   public TextSoftPageBreakElement newTextSoftPageBreakElement() {
@@ -788,6 +787,12 @@ public class TableTableElement extends OdfStylableElement {
     return textSoftPageBreak;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -799,70 +804,7 @@ public class TableTableElement extends OdfStylableElement {
   }
 
   @Override
-  /**
-   * If this element is the first - perhaps only - element of a logical group of XML elements. For
-   * instance: table, paragraph
-   */
   public boolean isComponentRoot() {
     return true;
-  }
-  /**
-   * Caching the width of columns during insert/delete column as after an UNDO setAttributes is
-   * called too early even before the column was undone
-   */
-  // WORK AROUND for "UNDO COLUMN WIDTH" problem (see JsonOperationConsumer for further changes)
-  private List<JSONArray> mColumnWidthCache = null;
-  /** OH PLEASE DELETE ME AFTER THE API WAS FIXED */
-  public void pushTableGrid(JSONArray tableGrid) {
-    if (mColumnWidthCache == null) {
-      mColumnWidthCache = new ArrayList<JSONArray>();
-    }
-    mColumnWidthCache.add(tableGrid);
-  }
-
-  private JSONArray mTablePositionOfColumnChange;
-
-  public void requireLaterWidthChange(JSONArray start) {
-    mTablePositionOfColumnChange = start;
-  }
-
-  public boolean isWidthChangeRequired() {
-    return mTablePositionOfColumnChange != null;
-  }
-
-  public void hasChangedWidth() {
-    mTablePositionOfColumnChange = null;
-  }
-
-  public JSONArray getPosition() {
-    return mTablePositionOfColumnChange;
-  }
-
-  /** OH PLEASE DELETE ME AFTER THE API WAS FIXED */
-  public void pushTableGrid(List<Integer> columnWidths) {
-    if (columnWidths != null && !columnWidths.isEmpty()) {
-      this.pushTableGrid(new JSONArray(columnWidths));
-    }
-  }
-
-  /** OH PLEASE DELETE ME AFTER THE API WAS FIXED */
-  public JSONArray popTableGrid() {
-    JSONArray previousColumnWidth = null;
-    if (mColumnWidthCache != null && mColumnWidthCache.size() > 0) {
-      previousColumnWidth = mColumnWidthCache.remove(mColumnWidthCache.size() - 1);
-      mTablePositionOfColumnChange = null;
-    }
-    return previousColumnWidth;
-  }
-
-  /** OH PLEASE DELETE ME AFTER THE API WAS FIXED */
-  public void replaceLastTableGrid(JSONArray tableGrid) {
-    if (mColumnWidthCache == null) {
-      mColumnWidthCache = new ArrayList<JSONArray>();
-      mColumnWidthCache.add(tableGrid);
-    } else if (mColumnWidthCache.size() > 0) {
-      mColumnWidthCache.remove(mColumnWidthCache.size() - 1);
-    }
-    mColumnWidthCache.add(tableGrid);
   }
 }

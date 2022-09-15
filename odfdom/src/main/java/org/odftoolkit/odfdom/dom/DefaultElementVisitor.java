@@ -630,14 +630,15 @@ import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 /**
- * The default visitor for ODF XML sSchema elements.
- * The default behavior of all specific elements is to dispatch to the visit call
- * to their super class <code>OdfElement<code>.
- * This default method is abstract and have to be overridden.
- * The method is the only method of <code>ElementVisitor<code> interface from the package layer.
+ * A default visitor for DOM layer elements.
+ *
+ * <p>It implements the interface of DomVisitor in package layer.
+ *
+ * <p>It provides element process method for some special elements.
  */
 public abstract class DefaultElementVisitor implements ElementVisitor {
 
+  @Override
   public abstract void visit(OdfElement element);
 
   /**

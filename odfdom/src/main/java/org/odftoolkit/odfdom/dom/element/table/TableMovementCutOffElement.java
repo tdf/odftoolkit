@@ -72,7 +72,7 @@ public class TableMovementCutOffElement extends OdfElement {
   public Integer getTableEndPositionAttribute() {
     TableEndPositionAttribute attr =
         (TableEndPositionAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "end-position");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -100,7 +100,7 @@ public class TableMovementCutOffElement extends OdfElement {
   public Integer getTablePositionAttribute() {
     TablePositionAttribute attr =
         (TablePositionAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "position");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -128,7 +128,7 @@ public class TableMovementCutOffElement extends OdfElement {
   public Integer getTableStartPositionAttribute() {
     TableStartPositionAttribute attr =
         (TableStartPositionAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "start-position");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -147,6 +147,12 @@ public class TableMovementCutOffElement extends OdfElement {
     attr.setIntValue(tableStartPositionValue.intValue());
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
