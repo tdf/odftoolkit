@@ -59,7 +59,7 @@ public class MSVExpressionInformation {
    * For each Named Expression (i.e. of the type "Element" or "Attribute") we build a path
    *    thisNamedExpression -> Expression subEx -> Expression subsubEx -> ... -> childNamedExpression
    * All Expressions (thisNamedExpression, childNamedExpression and all in between) can be members of
-   * multiple paths. Therefore we create a Map Expression->List<path>.
+   * multiple paths. Therefore, we create a Map Expression->List<path>.
    *
    * If we query this Map for thisNamedExpression, we get all paths. If we query this Map for
    * childNamedExpression, we get all paths from this to the child. To display groups containing
