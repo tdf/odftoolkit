@@ -1,11 +1,11 @@
 dependencies {
-    compile project(':odftoolkit-website-core')
+    implementation project(':odftoolkit-website-core')
 
-    compile 'de.topobyte:commons-cli-helper:0.1.0'
-    compile 'de.topobyte:system-utils:0.0.1'
+    implementation 'de.topobyte:commons-cli-helper:0.1.0'
+    implementation 'de.topobyte:system-utils:0.0.1'
 
-    runtime 'org.slf4j:slf4j-log4j12:1.6.1'
-    runtime 'log4j:log4j:1.2.16'
+    runtimeOnly 'org.slf4j:slf4j-log4j12:1.6.1'
+    runtimeOnly 'log4j:log4j:1.2.16'
 }
 
 task copyJars(type: Copy) {
@@ -15,7 +15,7 @@ task copyJars(type: Copy) {
 
 task copyDeps(type: Copy) {
     into "$buildDir/lib-run"
-    from configurations.runtime
+    from configurations.runtimeClasspath
 }
 
 task createRuntime(dependsOn: [copyJars, copyDeps]) {
