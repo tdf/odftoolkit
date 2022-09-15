@@ -437,9 +437,11 @@ public abstract class $className extends $superClassName {
 #end
 #end
 #end
+## adding functionality for repeated elements (e.g. row, column, cell and spaces)
 #if ($odfModel.getRepetionAttribute($element) && $attributes.containsName(${odfModel.getRepetionAttribute($element).getQName()}))
 #add_repeated_methods($className $odfModel.getRepetionAttribute($element))
 #end
+## adding DOM change-event listening for ODF nodes with RDF metadata
 #if ($attributes.containsName("office:value"))
 #add_removeContent_method()
 #end

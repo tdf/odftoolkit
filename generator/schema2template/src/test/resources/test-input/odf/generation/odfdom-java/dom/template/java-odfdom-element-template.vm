@@ -582,18 +582,26 @@ public ${abstract}class $className extends $superClassName {
 		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
 	}
 #end
+## adding functionality for the root of XML puzzles being a semantic user entity (e.g. table, image)
 #if ($odfModel.isRootOfComponent($element))
 #add_isComponentRoot_method()
 #end
+## adding functionality for repeated elements (e.g. row, column, cell and spaces)
 #if ($odfModel.getRepetionAttribute($element))
 #if ($remainingAttributes.containsName(${odfModel.getRepetionAttribute($element).getQName()}))
 #add_repeated_methods($className $odfModel.getRepetionAttribute($element))
 #end
 #end
+## adding DOM change-event listening for ODF nodes with RDF metadata
 #if ($remainingAttributes.containsName("office:value"))
 #add_removeContent_method()
 #end
+## adding special split handling to remove potential page breaks from the cloned paragraph
 #if (${odfModel.getStyleFamilies($element).contains("text:paragraph")} && $element.canHaveText())
 #add_paragraphBase_split_method()
+#end
+## adding table cell helper functionality once manually added
+#if ($element == "style:table-cell-properties")
+#add_tableCellHelper_methods()
 #end
 }
