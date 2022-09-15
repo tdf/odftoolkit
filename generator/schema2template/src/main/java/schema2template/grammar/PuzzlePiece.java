@@ -198,7 +198,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
     if (retval != 0) {
       return retval;
     }
-    return Integer.compare(this.mExpression.hashCode(), o.getExpression().hashCode());
+    return Integer.compare(this.hashCode(), o.hashCode());
   }
 
   /*
