@@ -331,7 +331,7 @@ by specifying it in an ant task, like:
 #if ($attribute == "*")
 [any org.w3c.dom.Attribute]&nbsp;
 #else
-#if (${attribute.withMultiples().size()} <= 1)
+#if (${attribute.withMultiples().size()} &lt;= 1)
 #set ($duplicates = "")
 #else
 #set ($duplicates = "[${attribute.getMultipleNumber()}]")
