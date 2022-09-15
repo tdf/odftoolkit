@@ -342,7 +342,7 @@ loadScripts(document, 'script');</script>
 #if ($attribute == "*")
 [any org.w3c.dom.Attribute]&nbsp;
 #else
-#if (${attribute.withMultiples().size()} <span class="invalid-tag">invalid input: '&lt;'</span>= 1)
+#if (${attribute.withMultiples().size()} &lt;= 1)
 #set ($duplicates = "")
 #else
 #set ($duplicates = "[${attribute.getMultipleNumber()}]")
