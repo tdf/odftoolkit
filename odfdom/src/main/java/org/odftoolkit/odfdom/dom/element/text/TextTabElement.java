@@ -69,7 +69,7 @@ public class TextTabElement extends OdfElement {
   public Integer getTextTabRefAttribute() {
     TextTabRefAttribute attr =
         (TextTabRefAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "tab-ref");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -87,6 +87,12 @@ public class TextTabElement extends OdfElement {
     attr.setIntValue(textTabRefValue.intValue());
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

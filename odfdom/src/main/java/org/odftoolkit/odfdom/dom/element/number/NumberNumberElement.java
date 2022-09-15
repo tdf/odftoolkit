@@ -74,7 +74,7 @@ public class NumberNumberElement extends OdfElement {
     NumberDecimalPlacesAttribute attr =
         (NumberDecimalPlacesAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "decimal-places");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -134,7 +134,7 @@ public class NumberNumberElement extends OdfElement {
     NumberDisplayFactorAttribute attr =
         (NumberDisplayFactorAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "display-factor");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Double.valueOf(attr.doubleValue());
     }
     return Double.valueOf(NumberDisplayFactorAttribute.DEFAULT_VALUE);
@@ -163,7 +163,7 @@ public class NumberNumberElement extends OdfElement {
   public Boolean getNumberGroupingAttribute() {
     NumberGroupingAttribute attr =
         (NumberGroupingAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "grouping");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(NumberGroupingAttribute.DEFAULT_VALUE);
@@ -192,7 +192,7 @@ public class NumberNumberElement extends OdfElement {
     NumberMinIntegerDigitsAttribute attr =
         (NumberMinIntegerDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-integer-digits");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -226,6 +226,12 @@ public class NumberNumberElement extends OdfElement {
     return numberEmbeddedText;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.attribute.table;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
@@ -38,6 +37,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 public class TablePrintAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespace.TABLE, "print");
+
   public static final String DEFAULT_VALUE = "true";
 
   /**
@@ -73,12 +73,7 @@ public class TablePrintAttribute extends OdfAttribute {
   /** @return Returns the <code>boolean</code> value of the attribute */
   public boolean booleanValue() {
     String val = super.getValue();
-    try {
-      return Boolean.parseBoolean(val);
-    } catch (NumberFormatException e) {
-      // TODO: validation handling/logging
-      throw (e);
-    }
+    return Boolean.parseBoolean(val);
   }
 
   /**
@@ -89,12 +84,7 @@ public class TablePrintAttribute extends OdfAttribute {
    */
   @Override
   public String getDefault() {
-    OdfElement parentElement = (OdfElement) getOwnerElement();
-    String defaultValue = null;
-    if (parentElement != null) {
-      defaultValue = DEFAULT_VALUE;
-    }
-    return defaultValue;
+    return DEFAULT_VALUE;
   }
 
   /**

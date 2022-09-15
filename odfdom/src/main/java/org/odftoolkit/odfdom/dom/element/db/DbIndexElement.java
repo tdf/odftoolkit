@@ -100,7 +100,7 @@ public class DbIndexElement extends OdfElement {
   public Boolean getDbIsClusteredAttribute() {
     DbIsClusteredAttribute attr =
         (DbIsClusteredAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "is-clustered");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -128,7 +128,7 @@ public class DbIndexElement extends OdfElement {
   public Boolean getDbIsUniqueAttribute() {
     DbIsUniqueAttribute attr =
         (DbIsUniqueAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "is-unique");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -178,7 +178,7 @@ public class DbIndexElement extends OdfElement {
   /**
    * Create child element {@odf.element db:index-columns}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * <p>Child element is mandatory.
    *
@@ -191,6 +191,12 @@ public class DbIndexElement extends OdfElement {
     return dbIndexColumns;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -138,7 +138,7 @@ public class TableDataPilotTableElement extends OdfElement {
     TableDrillDownOnDoubleClickAttribute attr =
         (TableDrillDownOnDoubleClickAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "drill-down-on-double-click");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableDrillDownOnDoubleClickAttribute.DEFAULT_VALUE);
@@ -196,7 +196,7 @@ public class TableDataPilotTableElement extends OdfElement {
     TableIdentifyCategoriesAttribute attr =
         (TableIdentifyCategoriesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "identify-categories");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableIdentifyCategoriesAttribute.DEFAULT_VALUE);
@@ -226,7 +226,7 @@ public class TableDataPilotTableElement extends OdfElement {
     TableIgnoreEmptyRowsAttribute attr =
         (TableIgnoreEmptyRowsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "ignore-empty-rows");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableIgnoreEmptyRowsAttribute.DEFAULT_VALUE);
@@ -286,7 +286,7 @@ public class TableDataPilotTableElement extends OdfElement {
     TableShowFilterButtonAttribute attr =
         (TableShowFilterButtonAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "show-filter-button");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableShowFilterButtonAttribute.DEFAULT_VALUE);
@@ -454,6 +454,12 @@ public class TableDataPilotTableElement extends OdfElement {
     return tableSourceService;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -35,7 +35,6 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
@@ -190,17 +189,11 @@ public class TextListLevelStyleImageElement extends TextListLevelStyleElementBas
   }
 
   /**
-   * Create child element {@odf.element style:list-level-properties}.
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
    *
-   * @return the element {@odf.element style:list-level-properties}
+   * @param visitor an instance of DefaultElementVisitor
    */
-  public StyleListLevelPropertiesElement newStyleListLevelPropertiesElement() {
-    StyleListLevelPropertiesElement styleListLevelProperties =
-        ((OdfFileDom) this.ownerDocument).newOdfElement(StyleListLevelPropertiesElement.class);
-    this.appendChild(styleListLevelProperties);
-    return styleListLevelProperties;
-  }
-
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

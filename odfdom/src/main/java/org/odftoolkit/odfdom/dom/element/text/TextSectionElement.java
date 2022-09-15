@@ -188,7 +188,7 @@ public class TextSectionElement extends OdfStylableElement {
   public Boolean getTextProtectedAttribute() {
     TextProtectedAttribute attr =
         (TextProtectedAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "protected");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -825,6 +825,8 @@ public class TextSectionElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:soft-page-break}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element text:soft-page-break}
    */
   public TextSoftPageBreakElement newTextSoftPageBreakElement() {
@@ -879,6 +881,12 @@ public class TextSectionElement extends OdfStylableElement {
     return textUserIndex;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -81,7 +81,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement {
     TextContinueNumberingAttribute attr =
         (TextContinueNumberingAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "continue-numbering");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -110,7 +110,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement {
   public Integer getTextLevelAttribute() {
     TextLevelAttribute attr =
         (TextLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "level");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(TextLevelAttribute.DEFAULT_VALUE);
@@ -168,7 +168,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement {
   public Integer getTextStartValueAttribute() {
     TextStartValueAttribute attr =
         (TextStartValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "start-value");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -278,6 +278,12 @@ public class TextNumberedParagraphElement extends OdfStylableElement {
     return textP;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

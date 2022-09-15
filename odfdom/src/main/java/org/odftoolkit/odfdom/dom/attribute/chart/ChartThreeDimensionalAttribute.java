@@ -72,12 +72,7 @@ public class ChartThreeDimensionalAttribute extends OdfAttribute {
   /** @return Returns the <code>boolean</code> value of the attribute */
   public boolean booleanValue() {
     String val = super.getValue();
-    try {
-      return Boolean.parseBoolean(val);
-    } catch (NumberFormatException e) {
-      // TODO: validation handling/logging
-      throw (e);
-    }
+    return Boolean.parseBoolean(val);
   }
 
   /**

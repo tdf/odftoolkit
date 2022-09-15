@@ -62,7 +62,7 @@ public class DbDataSourceElement extends OdfElement {
   /**
    * Create child element {@odf.element db:application-connection-settings}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:application-connection-settings}
    */
@@ -77,7 +77,7 @@ public class DbDataSourceElement extends OdfElement {
   /**
    * Create child element {@odf.element db:connection-data}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * <p>Child element is mandatory.
    *
@@ -93,7 +93,7 @@ public class DbDataSourceElement extends OdfElement {
   /**
    * Create child element {@odf.element db:driver-settings}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:driver-settings}
    */
@@ -104,6 +104,12 @@ public class DbDataSourceElement extends OdfElement {
     return dbDriverSettings;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

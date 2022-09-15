@@ -66,8 +66,8 @@ public class DbColumnsElement extends OdfElement {
    * @param officeValueValue the <code>Double</code> value of <code>OfficeValueAttribute</code>, see
    *     {@odf.attribute office:value} at specification
    * @param officeValueTypeValue the <code>String</code> value of <code>OfficeValueTypeAttribute
-   *     </code>, see {@odf.attribute office:value-type} at specification Child element is new in
-   *     Odf 1.2
+   *     </code>, see {@odf.attribute office:value-type} at specification Child element was added in
+   *     ODF 1.2
    *     <p>Child element is mandatory.
    * @return the element {@odf.element db:column}
    */
@@ -82,6 +82,12 @@ public class DbColumnsElement extends OdfElement {
     return dbColumn;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

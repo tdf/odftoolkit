@@ -77,7 +77,7 @@ public class ChartDataPointElement extends OdfStylableElement {
   public Integer getChartRepeatedAttribute() {
     ChartRepeatedAttribute attr =
         (ChartRepeatedAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "repeated");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -153,7 +153,7 @@ public class ChartDataPointElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element chart:data-label}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element chart:data-label}
    */
@@ -164,6 +164,12 @@ public class ChartDataPointElement extends OdfStylableElement {
     return chartDataLabel;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

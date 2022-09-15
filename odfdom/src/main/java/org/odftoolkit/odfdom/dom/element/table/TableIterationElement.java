@@ -73,7 +73,7 @@ public class TableIterationElement extends OdfElement {
     TableMaximumDifferenceAttribute attr =
         (TableMaximumDifferenceAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "maximum-difference");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Double.valueOf(attr.doubleValue());
     }
     return Double.valueOf(TableMaximumDifferenceAttribute.DEFAULT_VALUE);
@@ -130,7 +130,7 @@ public class TableIterationElement extends OdfElement {
   public Integer getTableStepsAttribute() {
     TableStepsAttribute attr =
         (TableStepsAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "steps");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(TableStepsAttribute.DEFAULT_VALUE);
@@ -148,6 +148,12 @@ public class TableIterationElement extends OdfElement {
     attr.setIntValue(tableStepsValue.intValue());
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

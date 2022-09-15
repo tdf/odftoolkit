@@ -75,7 +75,7 @@ public class NumberFractionElement extends OdfElement {
     NumberDenominatorValueAttribute attr =
         (NumberDenominatorValueAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "denominator-value");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -104,7 +104,7 @@ public class NumberFractionElement extends OdfElement {
   public Boolean getNumberGroupingAttribute() {
     NumberGroupingAttribute attr =
         (NumberGroupingAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "grouping");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(NumberGroupingAttribute.DEFAULT_VALUE);
@@ -133,7 +133,7 @@ public class NumberFractionElement extends OdfElement {
     NumberMinDenominatorDigitsAttribute attr =
         (NumberMinDenominatorDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-denominator-digits");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -163,7 +163,7 @@ public class NumberFractionElement extends OdfElement {
     NumberMinIntegerDigitsAttribute attr =
         (NumberMinIntegerDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-integer-digits");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -193,7 +193,7 @@ public class NumberFractionElement extends OdfElement {
     NumberMinNumeratorDigitsAttribute attr =
         (NumberMinNumeratorDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-numerator-digits");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -212,6 +212,12 @@ public class NumberFractionElement extends OdfElement {
     attr.setIntValue(numberMinNumeratorDigitsValue.intValue());
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

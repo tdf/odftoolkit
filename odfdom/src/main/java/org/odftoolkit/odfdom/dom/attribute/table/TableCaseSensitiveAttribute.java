@@ -43,6 +43,7 @@ public class TableCaseSensitiveAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME =
       OdfName.newName(OdfDocumentNamespace.TABLE, "case-sensitive");
+
   public static final String DEFAULT_VALUE_FALSE = Value.FALSE.toString();
   public static final String DEFAULT_VALUE_TRUE = Value.TRUE.toString();
 

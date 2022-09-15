@@ -72,7 +72,7 @@ public class NumberSecondsElement extends OdfElement {
     NumberDecimalPlacesAttribute attr =
         (NumberDecimalPlacesAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "decimal-places");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(NumberDecimalPlacesAttribute.DEFAULT_VALUE);
@@ -119,6 +119,12 @@ public class NumberSecondsElement extends OdfElement {
     attr.setValue(numberStyleValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

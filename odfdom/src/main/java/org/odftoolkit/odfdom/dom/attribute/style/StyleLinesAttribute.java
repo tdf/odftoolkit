@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.attribute.style;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
@@ -38,6 +37,7 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 public class StyleLinesAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespace.STYLE, "lines");
+
   public static final String DEFAULT_VALUE = "1";
 
   /**
@@ -73,12 +73,7 @@ public class StyleLinesAttribute extends OdfAttribute {
   /** @return Returns the <code>int</code> value of the attribute */
   public int intValue() {
     String val = super.getValue();
-    try {
-      return Integer.parseInt(val);
-    } catch (NumberFormatException e) {
-      // TODO: validation handling/logging
-      throw (e);
-    }
+    return Integer.parseInt(val);
   }
 
   /**
@@ -89,12 +84,7 @@ public class StyleLinesAttribute extends OdfAttribute {
    */
   @Override
   public String getDefault() {
-    OdfElement parentElement = (OdfElement) getOwnerElement();
-    String defaultValue = null;
-    if (parentElement != null) {
-      defaultValue = DEFAULT_VALUE;
-    }
-    return defaultValue;
+    return DEFAULT_VALUE;
   }
 
   /**

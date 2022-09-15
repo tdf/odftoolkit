@@ -87,7 +87,7 @@ public class AnimAudioElement extends OdfElement {
   public Double getAnimAudioLevelAttribute() {
     AnimAudioLevelAttribute attr =
         (AnimAudioLevelAttribute) getOdfAttribute(OdfDocumentNamespace.ANIM, "audio-level");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Double.valueOf(attr.doubleValue());
     }
     return null;
@@ -617,6 +617,12 @@ public class AnimAudioElement extends OdfElement {
     attr.setValue(xmlIdValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

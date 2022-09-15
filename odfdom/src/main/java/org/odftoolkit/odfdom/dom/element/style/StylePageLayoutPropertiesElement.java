@@ -1027,7 +1027,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleFirstPageNumberAttribute attr =
         (StyleFirstPageNumberAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "first-page-number");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -1177,7 +1177,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleLayoutGridDisplayAttribute attr =
         (StyleLayoutGridDisplayAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-display");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -1207,7 +1207,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleLayoutGridLinesAttribute attr =
         (StyleLayoutGridLinesAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-lines");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -1267,7 +1267,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleLayoutGridPrintAttribute attr =
         (StyleLayoutGridPrintAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-print");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -1297,7 +1297,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleLayoutGridRubyBelowAttribute attr =
         (StyleLayoutGridRubyBelowAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-ruby-below");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -1357,7 +1357,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleLayoutGridSnapToAttribute attr =
         (StyleLayoutGridSnapToAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-snap-to");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -1388,7 +1388,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleLayoutGridStandardModeAttribute attr =
         (StyleLayoutGridStandardModeAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-standard-mode");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -1448,7 +1448,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleNumLetterSyncAttribute attr =
         (StyleNumLetterSyncAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -1711,7 +1711,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
   public Integer getStyleScaleToPagesAttribute() {
     StyleScaleToPagesAttribute attr =
         (StyleScaleToPagesAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "scale-to-pages");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -1819,7 +1819,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
   /**
    * Create child element {@odf.element style:background-image}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element style:background-image}
    */
@@ -1834,7 +1834,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
    * Create child element {@odf.element style:columns}.
    *
    * @param foColumnCountValue the <code>Integer</code> value of <code>FoColumnCountAttribute</code>
-   *     , see {@odf.attribute fo:column-count} at specification Child element is new in Odf 1.2
+   *     , see {@odf.attribute fo:column-count} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element style:columns}
    */
   public StyleColumnsElement newStyleColumnsElement(int foColumnCountValue) {
@@ -1848,7 +1848,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
   /**
    * Create child element {@odf.element style:footnote-sep}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element style:footnote-sep}
    */
@@ -1859,6 +1859,12 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     return styleFootnoteSep;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

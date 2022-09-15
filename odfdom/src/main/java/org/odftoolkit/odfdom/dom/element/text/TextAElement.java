@@ -649,7 +649,7 @@ public class TextAElement extends OdfStylableElement {
    * Create child element {@odf.element office:annotation-end}.
    *
    * @param officeNameValue the <code>String</code> value of <code>OfficeNameAttribute</code>, see
-   *     {@odf.attribute office:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute office:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element office:annotation-end}
    */
   public OfficeAnnotationEndElement newOfficeAnnotationEndElement(String officeNameValue) {
@@ -1289,7 +1289,7 @@ public class TextAElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:meta}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:meta}
    */
@@ -1304,7 +1304,7 @@ public class TextAElement extends OdfStylableElement {
    * Create child element {@odf.element text:meta-field}.
    *
    * @param xmlIdValue the <code>String</code> value of <code>XmlIdAttribute</code>, see
-   *     {@odf.attribute xml:id} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute xml:id} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:meta-field}
    */
   public TextMetaFieldElement newTextMetaFieldElement(String xmlIdValue) {
@@ -1841,6 +1841,8 @@ public class TextAElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:soft-page-break}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element text:soft-page-break}
    */
   public TextSoftPageBreakElement newTextSoftPageBreakElement() {
@@ -2174,6 +2176,12 @@ public class TextAElement extends OdfStylableElement {
     return textWordCount;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -2183,6 +2191,7 @@ public class TextAElement extends OdfStylableElement {
       visitor.visit(this);
     }
   }
+
   /** Add text content. Only elements which are allowed to have text content offer this method. */
   public void newTextNode(String content) {
     if (content != null && !content.equals("")) {

@@ -62,7 +62,7 @@ public class DbKeyColumnsElement extends OdfElement {
   /**
    * Create child element {@odf.element db:key-column}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * <p>Child element is mandatory.
    *
@@ -75,6 +75,12 @@ public class DbKeyColumnsElement extends OdfElement {
     return dbKeyColumn;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -132,7 +132,7 @@ public class DrawAppletElement extends OdfElement {
   public Boolean getDrawMayScriptAttribute() {
     DrawMayScriptAttribute attr =
         (DrawMayScriptAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "may-script");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(DrawMayScriptAttribute.DEFAULT_VALUE);
@@ -329,6 +329,12 @@ public class DrawAppletElement extends OdfElement {
     return drawParam;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -71,7 +71,7 @@ public class DbOrderStatementElement extends OdfElement {
   public Boolean getDbApplyCommandAttribute() {
     DbApplyCommandAttribute attr =
         (DbApplyCommandAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "apply-command");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(DbApplyCommandAttribute.DEFAULT_VALUE);
@@ -119,6 +119,12 @@ public class DbOrderStatementElement extends OdfElement {
     attr.setValue(dbCommandValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

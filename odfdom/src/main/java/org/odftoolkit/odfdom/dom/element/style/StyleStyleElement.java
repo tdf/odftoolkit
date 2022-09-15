@@ -28,11 +28,8 @@
  */
 package org.odftoolkit.odfdom.dom.element.style;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
-import org.odftoolkit.odfdom.dom.OdfSchemaConstraint;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleAutoUpdateAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleClassAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleDataStyleNameAttribute;
@@ -50,17 +47,8 @@ import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
-import org.odftoolkit.odfdom.pkg.OdfValidationException;
-import org.odftoolkit.odfdom.type.StyleName;
-import org.odftoolkit.odfdom.type.StyleNameRef;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException;
 
-/**
- * DOM implementation of OpenDocument element {
- *
- * @odf.element style:style}.
- */
+/** DOM implementation of OpenDocument element {@odf.element style:style}. */
 public class StyleStyleElement extends OdfStyleBase {
 
   public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.STYLE, "style");
@@ -72,43 +60,37 @@ public class StyleStyleElement extends OdfStyleBase {
    */
   public StyleStyleElement(OdfFileDom ownerDoc) {
     super(ownerDoc, ELEMENT_NAME);
-    mErrorHandler = ((OdfFileDom) this.ownerDocument).getDocument().getPackage().getErrorHandler();
   }
 
   /**
    * Get the element name
    *
-   * @return return <code>OdfName</code> the name of element {
-   * @odf.element style:style}.
+   * @return return <code>OdfName</code> the name of element {@odf.element style:style}.
    */
   public OdfName getOdfName() {
     return ELEMENT_NAME;
   }
 
-  /** Used for the validation of XML */
-  ErrorHandler mErrorHandler;
-
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleAutoUpdateAttribute</code>
-   * , See {
+   * , See {@odf.attribute style:auto-update}
    *
-   * @odf.attribute style:auto-update}
    * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
   public Boolean getStyleAutoUpdateAttribute() {
     StyleAutoUpdateAttribute attr =
         (StyleAutoUpdateAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "auto-update");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(StyleAutoUpdateAttribute.DEFAULT_VALUE);
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>StyleAutoUpdateAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>StyleAutoUpdateAttribute</code> , See
+   * {@odf.attribute style:auto-update}
    *
-   * @odf.attribute style:auto-update}
    * @param styleAutoUpdateValue The type is <code>Boolean</code>
    */
   public void setStyleAutoUpdateAttribute(Boolean styleAutoUpdateValue) {
@@ -119,9 +101,8 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleClassAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:class}
    *
-   * @odf.attribute style:class}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -135,9 +116,9 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>StyleClassAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>StyleClassAttribute</code> , See
+   * {@odf.attribute style:class}
    *
-   * @odf.attribute style:class}
    * @param styleClassValue The type is <code>String</code>
    */
   public void setStyleClassAttribute(String styleClassValue) {
@@ -148,9 +129,8 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleDataStyleNameAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:data-style-name}
    *
-   * @odf.attribute style:data-style-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -166,9 +146,8 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleDataStyleNameAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:data-style-name}
    *
-   * @odf.attribute style:data-style-name}
    * @param styleDataStyleNameValue The type is <code>String</code>
    */
   public void setStyleDataStyleNameAttribute(String styleDataStyleNameValue) {
@@ -180,9 +159,8 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * StyleDefaultOutlineLevelAttribute</code> , See {
+   * StyleDefaultOutlineLevelAttribute</code> , See {@odf.attribute style:default-outline-level}
    *
-   * @odf.attribute style:default-outline-level}
    * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
@@ -190,20 +168,16 @@ public class StyleStyleElement extends OdfStyleBase {
     StyleDefaultOutlineLevelAttribute attr =
         (StyleDefaultOutlineLevelAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "default-outline-level");
-    if (attr != null) {
-      String val = attr.getValue();
-      if (val != null && !val.isEmpty()) {
-        return Integer.valueOf(attr.intValue());
-      }
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Integer.valueOf(attr.intValue());
     }
     return null;
   }
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleDefaultOutlineLevelAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:default-outline-level}
    *
-   * @odf.attribute style:default-outline-level}
    * @param styleDefaultOutlineLevelValue The type is <code>Integer</code>
    */
   public void setStyleDefaultOutlineLevelAttribute(Integer styleDefaultOutlineLevelValue) {
@@ -215,9 +189,8 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleDisplayNameAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:display-name}
    *
-   * @odf.attribute style:display-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -232,9 +205,8 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleDisplayNameAttribute</code> , See
-   * {
+   * {@odf.attribute style:display-name}
    *
-   * @odf.attribute style:display-name}
    * @param styleDisplayNameValue The type is <code>String</code>
    */
   public void setStyleDisplayNameAttribute(String styleDisplayNameValue) {
@@ -245,10 +217,10 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleFamilyAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:family}
    *
-   * @odf.attribute style:family}
-   *     <p>Attribute is mandatory.
+   * <p>Attribute is mandatory.
+   *
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -262,9 +234,9 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>StyleFamilyAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>StyleFamilyAttribute</code> , See
+   * {@odf.attribute style:family}
    *
-   * @odf.attribute style:family}
    * @param styleFamilyValue The type is <code>String</code>
    */
   public void setStyleFamilyAttribute(String styleFamilyValue) {
@@ -275,25 +247,24 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleListLevelAttribute</code>
-   * , See {
+   * , See {@odf.attribute style:list-level}
    *
-   * @odf.attribute style:list-level}
    * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
   public Integer getStyleListLevelAttribute() {
     StyleListLevelAttribute attr =
         (StyleListLevelAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "list-level");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>StyleListLevelAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>StyleListLevelAttribute</code> , See
+   * {@odf.attribute style:list-level}
    *
-   * @odf.attribute style:list-level}
    * @param styleListLevelValue The type is <code>Integer</code>
    */
   public void setStyleListLevelAttribute(Integer styleListLevelValue) {
@@ -304,9 +275,8 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleListStyleNameAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:list-style-name}
    *
-   * @odf.attribute style:list-style-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -322,25 +292,21 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleListStyleNameAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:list-style-name}
    *
-   * @odf.attribute style:list-style-name}
    * @param styleListStyleNameValue The type is <code>String</code>
    */
   public void setStyleListStyleNameAttribute(String styleListStyleNameValue) {
-    if (styleListStyleNameValue != null && !styleListStyleNameValue.isEmpty()) {
-      StyleListStyleNameAttribute attr =
-          new StyleListStyleNameAttribute((OdfFileDom) this.ownerDocument);
-      setOdfAttribute(attr);
-      attr.setValue(styleListStyleNameValue);
-    }
+    StyleListStyleNameAttribute attr =
+        new StyleListStyleNameAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setValue(styleListStyleNameValue);
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleMasterPageNameAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:master-page-name}
    *
-   * @odf.attribute style:master-page-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -356,9 +322,8 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleMasterPageNameAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:master-page-name}
    *
-   * @odf.attribute style:master-page-name}
    * @param styleMasterPageNameValue The type is <code>String</code>
    */
   public void setStyleMasterPageNameAttribute(String styleMasterPageNameValue) {
@@ -370,10 +335,10 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleNameAttribute</code> , See
-   * {
+   * {@odf.attribute style:name}
    *
-   * @odf.attribute style:name}
-   *     <p>Attribute is mandatory.
+   * <p>Attribute is mandatory.
+   *
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -387,36 +352,21 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>StyleNameAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>StyleNameAttribute</code> , See
+   * {@odf.attribute style:name}
    *
-   * @odf.attribute style:name}
    * @param styleNameValue The type is <code>String</code>
    */
   public void setStyleNameAttribute(String styleNameValue) {
     StyleNameAttribute attr = new StyleNameAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(styleNameValue);
-    if (mErrorHandler != null) {
-      // Is String from type NCName? == http://www.w3.org/TR/xmlschema-2/#NCName
-      if (!StyleNameRef.isValid(styleNameValue)) {
-        try {
-          mErrorHandler.error(
-              new OdfValidationException(
-                  OdfSchemaConstraint.DOCUMENT_XML_INVALID_ATTRIBUTE_VALUE,
-                  styleNameValue,
-                  "style:name"));
-        } catch (SAXException ex) {
-          Logger.getLogger(StyleStyleElement.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      }
-    }
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleNextStyleNameAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:next-style-name}
    *
-   * @odf.attribute style:next-style-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -432,9 +382,8 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleNextStyleNameAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:next-style-name}
    *
-   * @odf.attribute style:next-style-name}
    * @param styleNextStyleNameValue The type is <code>String</code>
    */
   public void setStyleNextStyleNameAttribute(String styleNextStyleNameValue) {
@@ -442,27 +391,12 @@ public class StyleStyleElement extends OdfStyleBase {
         new StyleNextStyleNameAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(styleNextStyleNameValue);
-    if (mErrorHandler != null) {
-      // Is String from type NCName? == http://www.w3.org/TR/xmlschema-2/#NCName
-      if (!StyleNameRef.isValid(styleNextStyleNameValue)) {
-        try {
-          mErrorHandler.error(
-              new OdfValidationException(
-                  OdfSchemaConstraint.DOCUMENT_XML_INVALID_ATTRIBUTE_VALUE,
-                  styleNextStyleNameValue,
-                  "style:next-style-name"));
-        } catch (SAXException ex) {
-          Logger.getLogger(StyleStyleElement.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      }
-    }
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleParentStyleNameAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:parent-style-name}
    *
-   * @odf.attribute style:parent-style-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -478,9 +412,8 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StyleParentStyleNameAttribute</code> ,
-   * See {
+   * See {@odf.attribute style:parent-style-name}
    *
-   * @odf.attribute style:parent-style-name}
    * @param styleParentStyleNameValue The type is <code>String</code>
    */
   public void setStyleParentStyleNameAttribute(String styleParentStyleNameValue) {
@@ -488,27 +421,13 @@ public class StyleStyleElement extends OdfStyleBase {
         new StyleParentStyleNameAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(styleParentStyleNameValue);
-    if (mErrorHandler != null) {
-      // Is String from type NCName? == http://www.w3.org/TR/xmlschema-2/#NCName
-      if (!StyleName.isValid(styleParentStyleNameValue)) {
-        try {
-          mErrorHandler.error(
-              new OdfValidationException(
-                  OdfSchemaConstraint.DOCUMENT_XML_INVALID_ATTRIBUTE_VALUE,
-                  styleParentStyleNameValue,
-                  "style:parent-style-name"));
-        } catch (SAXException ex) {
-          Logger.getLogger(StyleStyleElement.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      }
-    }
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * StylePercentageDataStyleNameAttribute</code> , See {
+   * StylePercentageDataStyleNameAttribute</code> , See {@odf.attribute
+   * style:percentage-data-style-name}
    *
-   * @odf.attribute style:percentage-data-style-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -524,9 +443,8 @@ public class StyleStyleElement extends OdfStyleBase {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>StylePercentageDataStyleNameAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute style:percentage-data-style-name}
    *
-   * @odf.attribute style:percentage-data-style-name}
    * @param stylePercentageDataStyleNameValue The type is <code>String</code>
    */
   public void setStylePercentageDataStyleNameAttribute(String stylePercentageDataStyleNameValue) {
@@ -537,14 +455,11 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element style:chart-properties}.
    *
-   * @odf.element style:chart-properties}.
    * @param chartSymbolTypeValue the <code>String</code> value of <code>ChartSymbolTypeAttribute
-   *     </code>, see {
-   * @odf.attribute chart:symbol-type} at specification
-   * @return the element {
-   * @odf.element style:chart-properties}
+   *     </code>, see {@odf.attribute chart:symbol-type} at specification
+   * @return the element {@odf.element style:chart-properties}
    */
   public StyleChartPropertiesElement newStyleChartPropertiesElement(String chartSymbolTypeValue) {
     StyleChartPropertiesElement styleChartProperties =
@@ -555,11 +470,9 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element style:drawing-page-properties}.
    *
-   * @odf.element style:drawing-page-properties}.
-   * @return the element {
-   * @odf.element style:drawing-page-properties}
+   * @return the element {@odf.element style:drawing-page-properties}
    */
   public StyleDrawingPagePropertiesElement newStyleDrawingPagePropertiesElement() {
     StyleDrawingPagePropertiesElement styleDrawingPageProperties =
@@ -569,11 +482,9 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element style:graphic-properties}.
    *
-   * @odf.element style:graphic-properties}.
-   * @return the element {
-   * @odf.element style:graphic-properties}
+   * @return the element {@odf.element style:graphic-properties}
    */
   public StyleGraphicPropertiesElement newStyleGraphicPropertiesElement() {
     StyleGraphicPropertiesElement styleGraphicProperties =
@@ -583,17 +494,14 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element style:map}.
    *
-   * @odf.element style:map}.
    * @param styleApplyStyleNameValue the <code>String</code> value of <code>
-   *     StyleApplyStyleNameAttribute</code>, see {
-   * @odf.attribute style:apply-style-name} at specification
+   *     StyleApplyStyleNameAttribute</code>, see {@odf.attribute style:apply-style-name} at
+   *     specification
    * @param styleConditionValue the <code>String</code> value of <code>StyleConditionAttribute
-   *     </code>, see {
-   * @odf.attribute style:condition} at specification
-   * @return the element {
-   * @odf.element style:map}
+   *     </code>, see {@odf.attribute style:condition} at specification
+   * @return the element {@odf.element style:map}
    */
   public StyleMapElement newStyleMapElement(
       String styleApplyStyleNameValue, String styleConditionValue) {
@@ -606,11 +514,9 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element style:paragraph-properties}.
    *
-   * @odf.element style:paragraph-properties}.
-   * @return the element {
-   * @odf.element style:paragraph-properties}
+   * @return the element {@odf.element style:paragraph-properties}
    */
   public StyleParagraphPropertiesElement newStyleParagraphPropertiesElement() {
     StyleParagraphPropertiesElement styleParagraphProperties =
@@ -620,11 +526,9 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element style:ruby-properties}.
    *
-   * @odf.element style:ruby-properties}.
-   * @return the element {
-   * @odf.element style:ruby-properties}
+   * @return the element {@odf.element style:ruby-properties}
    */
   public StyleRubyPropertiesElement newStyleRubyPropertiesElement() {
     StyleRubyPropertiesElement styleRubyProperties =
@@ -634,11 +538,9 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element style:section-properties}.
    *
-   * @odf.element style:section-properties}.
-   * @return the element {
-   * @odf.element style:section-properties}
+   * @return the element {@odf.element style:section-properties}
    */
   public StyleSectionPropertiesElement newStyleSectionPropertiesElement() {
     StyleSectionPropertiesElement styleSectionProperties =
@@ -648,11 +550,9 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element style:table-cell-properties}.
    *
-   * @odf.element style:table-cell-properties}.
-   * @return the element {
-   * @odf.element style:table-cell-properties}
+   * @return the element {@odf.element style:table-cell-properties}
    */
   public StyleTableCellPropertiesElement newStyleTableCellPropertiesElement() {
     StyleTableCellPropertiesElement styleTableCellProperties =
@@ -662,11 +562,9 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element style:table-column-properties}.
    *
-   * @odf.element style:table-column-properties}.
-   * @return the element {
-   * @odf.element style:table-column-properties}
+   * @return the element {@odf.element style:table-column-properties}
    */
   public StyleTableColumnPropertiesElement newStyleTableColumnPropertiesElement() {
     StyleTableColumnPropertiesElement styleTableColumnProperties =
@@ -676,11 +574,9 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element style:table-properties}.
    *
-   * @odf.element style:table-properties}.
-   * @return the element {
-   * @odf.element style:table-properties}
+   * @return the element {@odf.element style:table-properties}
    */
   public StyleTablePropertiesElement newStyleTablePropertiesElement() {
     StyleTablePropertiesElement styleTableProperties =
@@ -690,11 +586,9 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element style:table-row-properties}.
    *
-   * @odf.element style:table-row-properties}.
-   * @return the element {
-   * @odf.element style:table-row-properties}
+   * @return the element {@odf.element style:table-row-properties}
    */
   public StyleTableRowPropertiesElement newStyleTableRowPropertiesElement() {
     StyleTableRowPropertiesElement styleTableRowProperties =
@@ -704,14 +598,11 @@ public class StyleStyleElement extends OdfStyleBase {
   }
 
   /**
-   * Create child element {
+   * Create child element {@odf.element style:text-properties}.
    *
-   * @odf.element style:text-properties}.
    * @param textDisplayValue the <code>String</code> value of <code>TextDisplayAttribute</code>, see
-   *     {
-   * @odf.attribute text:display} at specification
-   * @return the element {
-   * @odf.element style:text-properties}
+   *     {@odf.attribute text:display} at specification
+   * @return the element {@odf.element style:text-properties}
    */
   public StyleTextPropertiesElement newStyleTextPropertiesElement(String textDisplayValue) {
     StyleTextPropertiesElement styleTextProperties =
@@ -721,6 +612,12 @@ public class StyleStyleElement extends OdfStyleBase {
     return styleTextProperties;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

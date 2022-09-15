@@ -68,7 +68,7 @@ public class OfficeDatabaseElement extends OdfElement {
   /**
    * Create child element {@odf.element db:data-source}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * <p>Child element is mandatory.
    *
@@ -84,7 +84,7 @@ public class OfficeDatabaseElement extends OdfElement {
   /**
    * Create child element {@odf.element db:forms}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:forms}
    */
@@ -97,7 +97,7 @@ public class OfficeDatabaseElement extends OdfElement {
   /**
    * Create child element {@odf.element db:queries}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:queries}
    */
@@ -111,7 +111,7 @@ public class OfficeDatabaseElement extends OdfElement {
   /**
    * Create child element {@odf.element db:reports}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:reports}
    */
@@ -125,7 +125,7 @@ public class OfficeDatabaseElement extends OdfElement {
   /**
    * Create child element {@odf.element db:schema-definition}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:schema-definition}
    */
@@ -139,7 +139,7 @@ public class OfficeDatabaseElement extends OdfElement {
   /**
    * Create child element {@odf.element db:table-representations}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:table-representations}
    */
@@ -150,6 +150,12 @@ public class OfficeDatabaseElement extends OdfElement {
     return dbTableRepresentations;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

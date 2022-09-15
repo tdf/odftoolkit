@@ -112,7 +112,6 @@ public class TextMetaElement extends OdfElement {
     XhtmlAboutAttribute attr = new XhtmlAboutAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlAboutValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
@@ -141,7 +140,6 @@ public class TextMetaElement extends OdfElement {
     XhtmlContentAttribute attr = new XhtmlContentAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlContentValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
@@ -170,7 +168,6 @@ public class TextMetaElement extends OdfElement {
     XhtmlDatatypeAttribute attr = new XhtmlDatatypeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlDatatypeValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
@@ -199,7 +196,6 @@ public class TextMetaElement extends OdfElement {
     XhtmlPropertyAttribute attr = new XhtmlPropertyAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlPropertyValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
@@ -232,7 +228,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element dr3d:scene}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element dr3d:scene}
    */
@@ -249,7 +245,7 @@ public class TextMetaElement extends OdfElement {
    * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
    *     {@odf.attribute xlink:href} at specification
    * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
-   *     {@odf.attribute xlink:type} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute xlink:type} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:a}
    */
   public DrawAElement newDrawAElement(String xlinkHrefValue, String xlinkTypeValue) {
@@ -263,7 +259,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:caption}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:caption}
    */
@@ -277,7 +273,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:circle}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:circle}
    */
@@ -292,7 +288,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element draw:connector}.
    *
    * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
-   *     {@odf.attribute svg:viewBox} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute svg:viewBox} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:connector}
    */
   public DrawConnectorElement newDrawConnectorElement(int svgViewBoxValue) {
@@ -307,7 +303,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element draw:control}.
    *
    * @param drawControlValue the <code>String</code> value of <code>DrawControlAttribute</code>, see
-   *     {@odf.attribute draw:control} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute draw:control} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:control}
    */
   public DrawControlElement newDrawControlElement(String drawControlValue) {
@@ -321,7 +317,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:custom-shape}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:custom-shape}
    */
@@ -335,7 +331,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:ellipse}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:ellipse}
    */
@@ -349,7 +345,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:frame}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:frame}
    */
@@ -363,7 +359,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:g}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:g}
    */
@@ -383,7 +379,7 @@ public class TextMetaElement extends OdfElement {
    * @param svgY1Value the <code>String</code> value of <code>SvgY1Attribute</code>, see
    *     {@odf.attribute svg:y1} at specification
    * @param svgY2Value the <code>String</code> value of <code>SvgY2Attribute</code>, see
-   *     {@odf.attribute svg:y2} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute svg:y2} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:line}
    */
   public DrawLineElement newDrawLineElement(
@@ -408,7 +404,7 @@ public class TextMetaElement extends OdfElement {
    * @param svgY1Value the <code>String</code> value of <code>SvgY1Attribute</code>, see
    *     {@odf.attribute svg:y1} at specification
    * @param svgY2Value the <code>String</code> value of <code>SvgY2Attribute</code>, see
-   *     {@odf.attribute svg:y2} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute svg:y2} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:measure}
    */
   public DrawMeasureElement newDrawMeasureElement(
@@ -426,7 +422,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:page-thumbnail}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:page-thumbnail}
    */
@@ -443,7 +439,7 @@ public class TextMetaElement extends OdfElement {
    * @param svgDValue the <code>String</code> value of <code>SvgDAttribute</code>, see
    *     {@odf.attribute svg:d} at specification
    * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
-   *     {@odf.attribute svg:viewBox} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute svg:viewBox} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:path}
    */
   public DrawPathElement newDrawPathElement(String svgDValue, int svgViewBoxValue) {
@@ -461,7 +457,7 @@ public class TextMetaElement extends OdfElement {
    * @param drawPointsValue the <code>String</code> value of <code>DrawPointsAttribute</code>, see
    *     {@odf.attribute draw:points} at specification
    * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
-   *     {@odf.attribute svg:viewBox} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute svg:viewBox} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:polygon}
    */
   public DrawPolygonElement newDrawPolygonElement(String drawPointsValue, int svgViewBoxValue) {
@@ -479,7 +475,7 @@ public class TextMetaElement extends OdfElement {
    * @param drawPointsValue the <code>String</code> value of <code>DrawPointsAttribute</code>, see
    *     {@odf.attribute draw:points} at specification
    * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
-   *     {@odf.attribute svg:viewBox} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute svg:viewBox} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:polyline}
    */
   public DrawPolylineElement newDrawPolylineElement(String drawPointsValue, int svgViewBoxValue) {
@@ -494,7 +490,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element draw:rect}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element draw:rect}
    */
@@ -511,7 +507,7 @@ public class TextMetaElement extends OdfElement {
    * @param drawConcaveValue the <code>Boolean</code> value of <code>DrawConcaveAttribute</code>,
    *     see {@odf.attribute draw:concave} at specification
    * @param drawCornersValue the <code>Integer</code> value of <code>DrawCornersAttribute</code>,
-   *     see {@odf.attribute draw:corners} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute draw:corners} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:regular-polygon}
    */
   public DrawRegularPolygonElement newDrawRegularPolygonElement(
@@ -527,7 +523,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element office:annotation}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element office:annotation}
    */
@@ -542,7 +538,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element office:annotation-end}.
    *
    * @param officeNameValue the <code>String</code> value of <code>OfficeNameAttribute</code>, see
-   *     {@odf.attribute office:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute office:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element office:annotation-end}
    */
   public OfficeAnnotationEndElement newOfficeAnnotationEndElement(String officeNameValue) {
@@ -556,7 +552,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element presentation:date-time}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element presentation:date-time}
    */
@@ -570,7 +566,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element presentation:footer}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element presentation:footer}
    */
@@ -584,7 +580,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element presentation:header}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element presentation:header}
    */
@@ -601,7 +597,7 @@ public class TextMetaElement extends OdfElement {
    * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
    *     {@odf.attribute xlink:href} at specification
    * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
-   *     {@odf.attribute xlink:type} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute xlink:type} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:a}
    */
   public TextAElement newTextAElement(String xlinkHrefValue, String xlinkTypeValue) {
@@ -616,8 +612,8 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:alphabetical-index-mark}.
    *
    * @param textStringValueValue the <code>String</code> value of <code>TextStringValueAttribute
-   *     </code>, see {@odf.attribute text:string-value} at specification Child element is new in
-   *     Odf 1.2
+   *     </code>, see {@odf.attribute text:string-value} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:alphabetical-index-mark}
    */
   public TextAlphabeticalIndexMarkElement newTextAlphabeticalIndexMarkElement(
@@ -633,7 +629,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:alphabetical-index-mark-end}.
    *
    * @param textIdValue the <code>String</code> value of <code>TextIdAttribute</code>, see
-   *     {@odf.attribute text:id} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:id} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:alphabetical-index-mark-end}
    */
   public TextAlphabeticalIndexMarkEndElement newTextAlphabeticalIndexMarkEndElement(
@@ -649,7 +645,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:alphabetical-index-mark-start}.
    *
    * @param textIdValue the <code>String</code> value of <code>TextIdAttribute</code>, see
-   *     {@odf.attribute text:id} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:id} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:alphabetical-index-mark-start}
    */
   public TextAlphabeticalIndexMarkStartElement newTextAlphabeticalIndexMarkStartElement(
@@ -665,7 +661,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:author-initials}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:author-initials}
    */
@@ -679,7 +675,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:author-name}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:author-name}
    */
@@ -695,7 +691,7 @@ public class TextMetaElement extends OdfElement {
    *
    * @param textBibliographyTypeValue the <code>String</code> value of <code>
    *     TextBibliographyTypeAttribute</code>, see {@odf.attribute text:bibliography-type} at
-   *     specification Child element is new in Odf 1.2
+   *     specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:bibliography-mark}
    */
   public TextBibliographyMarkElement newTextBibliographyMarkElement(
@@ -711,7 +707,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:bookmark}.
    *
    * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
-   *     {@odf.attribute text:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:bookmark}
    */
   public TextBookmarkElement newTextBookmarkElement(String textNameValue) {
@@ -726,7 +722,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:bookmark-end}.
    *
    * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
-   *     {@odf.attribute text:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:bookmark-end}
    */
   public TextBookmarkEndElement newTextBookmarkEndElement(String textNameValue) {
@@ -740,7 +736,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:bookmark-ref}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:bookmark-ref}
    */
@@ -755,7 +751,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:bookmark-start}.
    *
    * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
-   *     {@odf.attribute text:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:bookmark-start}
    */
   public TextBookmarkStartElement newTextBookmarkStartElement(String textNameValue) {
@@ -770,7 +766,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:change}.
    *
    * @param textChangeIdValue the <code>String</code> value of <code>TextChangeIdAttribute</code>,
-   *     see {@odf.attribute text:change-id} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute text:change-id} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:change}
    */
   public TextChangeElement newTextChangeElement(String textChangeIdValue) {
@@ -785,7 +781,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:change-end}.
    *
    * @param textChangeIdValue the <code>String</code> value of <code>TextChangeIdAttribute</code>,
-   *     see {@odf.attribute text:change-id} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute text:change-id} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:change-end}
    */
   public TextChangeEndElement newTextChangeEndElement(String textChangeIdValue) {
@@ -800,7 +796,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:change-start}.
    *
    * @param textChangeIdValue the <code>String</code> value of <code>TextChangeIdAttribute</code>,
-   *     see {@odf.attribute text:change-id} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute text:change-id} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:change-start}
    */
   public TextChangeStartElement newTextChangeStartElement(String textChangeIdValue) {
@@ -817,8 +813,8 @@ public class TextMetaElement extends OdfElement {
    * @param textDisplayValue the <code>String</code> value of <code>TextDisplayAttribute</code>, see
    *     {@odf.attribute text:display} at specification
    * @param textOutlineLevelValue the <code>Integer</code> value of <code>TextOutlineLevelAttribute
-   *     </code>, see {@odf.attribute text:outline-level} at specification Child element is new in
-   *     Odf 1.2
+   *     </code>, see {@odf.attribute text:outline-level} at specification Child element was added
+   *     in ODF 1.2
    * @return the element {@odf.element text:chapter}
    */
   public TextChapterElement newTextChapterElement(
@@ -835,8 +831,8 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:character-count}.
    *
    * @param styleNumFormatValue the <code>String</code> value of <code>StyleNumFormatAttribute
-   *     </code>, see {@odf.attribute style:num-format} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute style:num-format} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:character-count}
    */
   public TextCharacterCountElement newTextCharacterCountElement(String styleNumFormatValue) {
@@ -857,7 +853,7 @@ public class TextMetaElement extends OdfElement {
    *     specification
    * @param textStringValueIfTrueValue the <code>String</code> value of <code>
    *     TextStringValueIfTrueAttribute</code>, see {@odf.attribute text:string-value-if-true} at
-   *     specification Child element is new in Odf 1.2
+   *     specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:conditional-text}
    */
   public TextConditionalTextElement newTextConditionalTextElement(
@@ -876,7 +872,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:creation-date}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:creation-date}
    */
@@ -890,7 +886,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:creation-time}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:creation-time}
    */
@@ -904,7 +900,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:creator}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:creator}
    */
@@ -921,7 +917,7 @@ public class TextMetaElement extends OdfElement {
    * @param textColumnNameValue the <code>String</code> value of <code>TextColumnNameAttribute
    *     </code>, see {@odf.attribute text:column-name} at specification
    * @param textTableNameValue the <code>String</code> value of <code>TextTableNameAttribute</code>,
-   *     see {@odf.attribute text:table-name} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute text:table-name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:database-display}
    */
   public TextDatabaseDisplayElement newTextDatabaseDisplayElement(
@@ -938,7 +934,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:database-name}.
    *
    * @param textTableNameValue the <code>String</code> value of <code>TextTableNameAttribute</code>,
-   *     see {@odf.attribute text:table-name} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute text:table-name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:database-name}
    */
   public TextDatabaseNameElement newTextDatabaseNameElement(String textTableNameValue) {
@@ -953,7 +949,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:database-next}.
    *
    * @param textTableNameValue the <code>String</code> value of <code>TextTableNameAttribute</code>,
-   *     see {@odf.attribute text:table-name} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute text:table-name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:database-next}
    */
   public TextDatabaseNextElement newTextDatabaseNextElement(String textTableNameValue) {
@@ -970,7 +966,7 @@ public class TextMetaElement extends OdfElement {
    * @param styleNumFormatValue the <code>String</code> value of <code>StyleNumFormatAttribute
    *     </code>, see {@odf.attribute style:num-format} at specification
    * @param textTableNameValue the <code>String</code> value of <code>TextTableNameAttribute</code>,
-   *     see {@odf.attribute text:table-name} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute text:table-name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:database-row-number}
    */
   public TextDatabaseRowNumberElement newTextDatabaseRowNumberElement(
@@ -987,7 +983,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:database-row-select}.
    *
    * @param textTableNameValue the <code>String</code> value of <code>TextTableNameAttribute</code>,
-   *     see {@odf.attribute text:table-name} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute text:table-name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:database-row-select}
    */
   public TextDatabaseRowSelectElement newTextDatabaseRowSelectElement(String textTableNameValue) {
@@ -1001,7 +997,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:date}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:date}
    */
@@ -1017,7 +1013,7 @@ public class TextMetaElement extends OdfElement {
    *
    * @param textConnectionNameValue the <code>String</code> value of <code>
    *     TextConnectionNameAttribute</code>, see {@odf.attribute text:connection-name} at
-   *     specification Child element is new in Odf 1.2
+   *     specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:dde-connection}
    */
   public TextDdeConnectionElement newTextDdeConnectionElement(String textConnectionNameValue) {
@@ -1031,7 +1027,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:description}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:description}
    */
@@ -1045,7 +1041,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:editing-cycles}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:editing-cycles}
    */
@@ -1059,7 +1055,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:editing-duration}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:editing-duration}
    */
@@ -1073,7 +1069,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:execute-macro}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:execute-macro}
    */
@@ -1090,8 +1086,8 @@ public class TextMetaElement extends OdfElement {
    * @param officeValueValue the <code>Double</code> value of <code>OfficeValueAttribute</code>, see
    *     {@odf.attribute office:value} at specification
    * @param officeValueTypeValue the <code>String</code> value of <code>OfficeValueTypeAttribute
-   *     </code>, see {@odf.attribute office:value-type} at specification Child element is new in
-   *     Odf 1.2
+   *     </code>, see {@odf.attribute office:value-type} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:expression}
    */
   public TextExpressionElement newTextExpressionElement(
@@ -1107,7 +1103,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:file-name}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:file-name}
    */
@@ -1122,7 +1118,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:hidden-paragraph}.
    *
    * @param textConditionValue the <code>String</code> value of <code>TextConditionAttribute</code>,
-   *     see {@odf.attribute text:condition} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute text:condition} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:hidden-paragraph}
    */
   public TextHiddenParagraphElement newTextHiddenParagraphElement(String textConditionValue) {
@@ -1139,8 +1135,8 @@ public class TextMetaElement extends OdfElement {
    * @param textConditionValue the <code>String</code> value of <code>TextConditionAttribute</code>,
    *     see {@odf.attribute text:condition} at specification
    * @param textStringValueValue the <code>String</code> value of <code>TextStringValueAttribute
-   *     </code>, see {@odf.attribute text:string-value} at specification Child element is new in
-   *     Odf 1.2
+   *     </code>, see {@odf.attribute text:string-value} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:hidden-text}
    */
   public TextHiddenTextElement newTextHiddenTextElement(
@@ -1157,8 +1153,8 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:image-count}.
    *
    * @param styleNumFormatValue the <code>String</code> value of <code>StyleNumFormatAttribute
-   *     </code>, see {@odf.attribute style:num-format} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute style:num-format} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:image-count}
    */
   public TextImageCountElement newTextImageCountElement(String styleNumFormatValue) {
@@ -1172,7 +1168,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:initial-creator}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:initial-creator}
    */
@@ -1186,7 +1182,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:keywords}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:keywords}
    */
@@ -1200,7 +1196,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:line-break}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:line-break}
    */
@@ -1215,7 +1211,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:measure}.
    *
    * @param textKindValue the <code>String</code> value of <code>TextKindAttribute</code>, see
-   *     {@odf.attribute text:kind} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:kind} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:measure}
    */
   public TextMeasureElement newTextMeasureElement(String textKindValue) {
@@ -1229,7 +1225,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:meta}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:meta}
    */
@@ -1244,7 +1240,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:meta-field}.
    *
    * @param xmlIdValue the <code>String</code> value of <code>XmlIdAttribute</code>, see
-   *     {@odf.attribute xml:id} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute xml:id} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:meta-field}
    */
   public TextMetaFieldElement newTextMetaFieldElement(String xmlIdValue) {
@@ -1258,7 +1254,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:modification-date}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:modification-date}
    */
@@ -1272,7 +1268,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:modification-time}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:modification-time}
    */
@@ -1287,7 +1283,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:note}.
    *
    * @param textNoteClassValue the <code>String</code> value of <code>TextNoteClassAttribute</code>,
-   *     see {@odf.attribute text:note-class} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute text:note-class} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:note}
    */
   public TextNoteElement newTextNoteElement(String textNoteClassValue) {
@@ -1302,7 +1298,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:note-ref}.
    *
    * @param textNoteClassValue the <code>String</code> value of <code>TextNoteClassAttribute</code>,
-   *     see {@odf.attribute text:note-class} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute text:note-class} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:note-ref}
    */
   public TextNoteRefElement newTextNoteRefElement(String textNoteClassValue) {
@@ -1317,8 +1313,8 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:object-count}.
    *
    * @param styleNumFormatValue the <code>String</code> value of <code>StyleNumFormatAttribute
-   *     </code>, see {@odf.attribute style:num-format} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute style:num-format} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:object-count}
    */
   public TextObjectCountElement newTextObjectCountElement(String styleNumFormatValue) {
@@ -1333,8 +1329,8 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:page-continuation}.
    *
    * @param textSelectPageValue the <code>String</code> value of <code>TextSelectPageAttribute
-   *     </code>, see {@odf.attribute text:select-page} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute text:select-page} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:page-continuation}
    */
   public TextPageContinuationElement newTextPageContinuationElement(String textSelectPageValue) {
@@ -1349,8 +1345,8 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:page-count}.
    *
    * @param styleNumFormatValue the <code>String</code> value of <code>StyleNumFormatAttribute
-   *     </code>, see {@odf.attribute style:num-format} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute style:num-format} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:page-count}
    */
   public TextPageCountElement newTextPageCountElement(String styleNumFormatValue) {
@@ -1365,8 +1361,8 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:page-number}.
    *
    * @param styleNumFormatValue the <code>String</code> value of <code>StyleNumFormatAttribute
-   *     </code>, see {@odf.attribute style:num-format} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute style:num-format} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:page-number}
    */
   public TextPageNumberElement newTextPageNumberElement(String styleNumFormatValue) {
@@ -1381,8 +1377,8 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:page-variable-get}.
    *
    * @param styleNumFormatValue the <code>String</code> value of <code>StyleNumFormatAttribute
-   *     </code>, see {@odf.attribute style:num-format} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute style:num-format} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:page-variable-get}
    */
   public TextPageVariableGetElement newTextPageVariableGetElement(String styleNumFormatValue) {
@@ -1396,7 +1392,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:page-variable-set}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:page-variable-set}
    */
@@ -1411,8 +1407,8 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:paragraph-count}.
    *
    * @param styleNumFormatValue the <code>String</code> value of <code>StyleNumFormatAttribute
-   *     </code>, see {@odf.attribute style:num-format} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute style:num-format} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:paragraph-count}
    */
   public TextParagraphCountElement newTextParagraphCountElement(String styleNumFormatValue) {
@@ -1428,7 +1424,7 @@ public class TextMetaElement extends OdfElement {
    *
    * @param textPlaceholderTypeValue the <code>String</code> value of <code>
    *     TextPlaceholderTypeAttribute</code>, see {@odf.attribute text:placeholder-type} at
-   *     specification Child element is new in Odf 1.2
+   *     specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:placeholder}
    */
   public TextPlaceholderElement newTextPlaceholderElement(String textPlaceholderTypeValue) {
@@ -1442,7 +1438,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:print-date}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:print-date}
    */
@@ -1456,7 +1452,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:print-time}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:print-time}
    */
@@ -1470,7 +1466,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:printed-by}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:printed-by}
    */
@@ -1485,7 +1481,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:reference-mark}.
    *
    * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
-   *     {@odf.attribute text:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:reference-mark}
    */
   public TextReferenceMarkElement newTextReferenceMarkElement(String textNameValue) {
@@ -1500,7 +1496,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:reference-mark-end}.
    *
    * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
-   *     {@odf.attribute text:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:reference-mark-end}
    */
   public TextReferenceMarkEndElement newTextReferenceMarkEndElement(String textNameValue) {
@@ -1515,7 +1511,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:reference-mark-start}.
    *
    * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
-   *     {@odf.attribute text:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:reference-mark-start}
    */
   public TextReferenceMarkStartElement newTextReferenceMarkStartElement(String textNameValue) {
@@ -1529,7 +1525,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:reference-ref}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:reference-ref}
    */
@@ -1543,7 +1539,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:ruby}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:ruby}
    */
@@ -1557,7 +1553,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:s}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:s}
    */
@@ -1570,7 +1566,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:script}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:script}
    */
@@ -1584,7 +1580,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-city}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-city}
    */
@@ -1598,7 +1594,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-company}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-company}
    */
@@ -1612,7 +1608,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-country}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-country}
    */
@@ -1626,7 +1622,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-email}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-email}
    */
@@ -1640,7 +1636,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-fax}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-fax}
    */
@@ -1654,7 +1650,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-firstname}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-firstname}
    */
@@ -1668,7 +1664,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-initials}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-initials}
    */
@@ -1682,7 +1678,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-lastname}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-lastname}
    */
@@ -1696,7 +1692,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-phone-private}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-phone-private}
    */
@@ -1710,7 +1706,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-phone-work}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-phone-work}
    */
@@ -1724,7 +1720,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-position}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-position}
    */
@@ -1738,7 +1734,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-postal-code}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-postal-code}
    */
@@ -1752,7 +1748,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-state-or-province}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-state-or-province}
    */
@@ -1766,7 +1762,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-street}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-street}
    */
@@ -1780,7 +1776,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sender-title}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sender-title}
    */
@@ -1797,7 +1793,7 @@ public class TextMetaElement extends OdfElement {
    * @param styleNumFormatValue the <code>String</code> value of <code>StyleNumFormatAttribute
    *     </code>, see {@odf.attribute style:num-format} at specification
    * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
-   *     {@odf.attribute text:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:sequence}
    */
   public TextSequenceElement newTextSequenceElement(
@@ -1813,7 +1809,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sequence-ref}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sequence-ref}
    */
@@ -1827,7 +1823,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:sheet-name}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:sheet-name}
    */
@@ -1841,7 +1837,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:soft-page-break}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:soft-page-break}
    */
@@ -1855,7 +1851,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:span}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:span}
    */
@@ -1869,7 +1865,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:subject}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:subject}
    */
@@ -1883,7 +1879,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:tab}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:tab}
    */
@@ -1897,8 +1893,8 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:table-count}.
    *
    * @param styleNumFormatValue the <code>String</code> value of <code>StyleNumFormatAttribute
-   *     </code>, see {@odf.attribute style:num-format} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute style:num-format} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:table-count}
    */
   public TextTableCountElement newTextTableCountElement(String styleNumFormatValue) {
@@ -1912,7 +1908,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:table-formula}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:table-formula}
    */
@@ -1926,7 +1922,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:template-name}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:template-name}
    */
@@ -1940,7 +1936,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:text-input}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:text-input}
    */
@@ -1954,7 +1950,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:time}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:time}
    */
@@ -1968,7 +1964,7 @@ public class TextMetaElement extends OdfElement {
   /**
    * Create child element {@odf.element text:title}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:title}
    */
@@ -1983,8 +1979,8 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:toc-mark}.
    *
    * @param textStringValueValue the <code>String</code> value of <code>TextStringValueAttribute
-   *     </code>, see {@odf.attribute text:string-value} at specification Child element is new in
-   *     Odf 1.2
+   *     </code>, see {@odf.attribute text:string-value} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:toc-mark}
    */
   public TextTocMarkElement newTextTocMarkElement(String textStringValueValue) {
@@ -1999,7 +1995,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:toc-mark-end}.
    *
    * @param textIdValue the <code>String</code> value of <code>TextIdAttribute</code>, see
-   *     {@odf.attribute text:id} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:id} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:toc-mark-end}
    */
   public TextTocMarkEndElement newTextTocMarkEndElement(String textIdValue) {
@@ -2014,7 +2010,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:toc-mark-start}.
    *
    * @param textIdValue the <code>String</code> value of <code>TextIdAttribute</code>, see
-   *     {@odf.attribute text:id} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:id} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:toc-mark-start}
    */
   public TextTocMarkStartElement newTextTocMarkStartElement(String textIdValue) {
@@ -2029,7 +2025,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:user-defined}.
    *
    * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
-   *     {@odf.attribute text:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:user-defined}
    */
   public TextUserDefinedElement newTextUserDefinedElement(String textNameValue) {
@@ -2044,7 +2040,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:user-field-get}.
    *
    * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
-   *     {@odf.attribute text:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:user-field-get}
    */
   public TextUserFieldGetElement newTextUserFieldGetElement(String textNameValue) {
@@ -2059,7 +2055,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:user-field-input}.
    *
    * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
-   *     {@odf.attribute text:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:user-field-input}
    */
   public TextUserFieldInputElement newTextUserFieldInputElement(String textNameValue) {
@@ -2076,8 +2072,8 @@ public class TextMetaElement extends OdfElement {
    * @param textIndexNameValue the <code>String</code> value of <code>TextIndexNameAttribute</code>,
    *     see {@odf.attribute text:index-name} at specification
    * @param textStringValueValue the <code>String</code> value of <code>TextStringValueAttribute
-   *     </code>, see {@odf.attribute text:string-value} at specification Child element is new in
-   *     Odf 1.2
+   *     </code>, see {@odf.attribute text:string-value} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:user-index-mark}
    */
   public TextUserIndexMarkElement newTextUserIndexMarkElement(
@@ -2094,7 +2090,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:user-index-mark-end}.
    *
    * @param textIdValue the <code>String</code> value of <code>TextIdAttribute</code>, see
-   *     {@odf.attribute text:id} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:id} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:user-index-mark-end}
    */
   public TextUserIndexMarkEndElement newTextUserIndexMarkEndElement(String textIdValue) {
@@ -2111,7 +2107,7 @@ public class TextMetaElement extends OdfElement {
    * @param textIdValue the <code>String</code> value of <code>TextIdAttribute</code>, see
    *     {@odf.attribute text:id} at specification
    * @param textIndexNameValue the <code>String</code> value of <code>TextIndexNameAttribute</code>,
-   *     see {@odf.attribute text:index-name} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute text:index-name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:user-index-mark-start}
    */
   public TextUserIndexMarkStartElement newTextUserIndexMarkStartElement(
@@ -2128,7 +2124,7 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:variable-get}.
    *
    * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
-   *     {@odf.attribute text:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:variable-get}
    */
   public TextVariableGetElement newTextVariableGetElement(String textNameValue) {
@@ -2145,7 +2141,7 @@ public class TextMetaElement extends OdfElement {
    * @param officeValueTypeValue the <code>String</code> value of <code>OfficeValueTypeAttribute
    *     </code>, see {@odf.attribute office:value-type} at specification
    * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
-   *     {@odf.attribute text:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:variable-input}
    */
   public TextVariableInputElement newTextVariableInputElement(
@@ -2166,7 +2162,7 @@ public class TextMetaElement extends OdfElement {
    * @param officeValueTypeValue the <code>String</code> value of <code>OfficeValueTypeAttribute
    *     </code>, see {@odf.attribute office:value-type} at specification
    * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
-   *     {@odf.attribute text:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element text:variable-set}
    */
   public TextVariableSetElement newTextVariableSetElement(
@@ -2184,8 +2180,8 @@ public class TextMetaElement extends OdfElement {
    * Create child element {@odf.element text:word-count}.
    *
    * @param styleNumFormatValue the <code>String</code> value of <code>StyleNumFormatAttribute
-   *     </code>, see {@odf.attribute style:num-format} at specification Child element is new in Odf
-   *     1.2
+   *     </code>, see {@odf.attribute style:num-format} at specification Child element was added in
+   *     ODF 1.2
    * @return the element {@odf.element text:word-count}
    */
   public TextWordCountElement newTextWordCountElement(String styleNumFormatValue) {
@@ -2196,6 +2192,12 @@ public class TextMetaElement extends OdfElement {
     return textWordCount;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -2205,6 +2207,7 @@ public class TextMetaElement extends OdfElement {
       visitor.visit(this);
     }
   }
+
   /** Add text content. Only elements which are allowed to have text content offer this method. */
   public void newTextNode(String content) {
     if (content != null && !content.equals("")) {
@@ -2212,17 +2215,25 @@ public class TextMetaElement extends OdfElement {
     }
   }
 
-  /** Set text content. Only elements which are allowed to have text content offer this method. */
+  /**
+   * Replaces all content with given text content. Only elements which are allowed to have text
+   * content offer this method.
+   *
+   * @param new text content to replace the existing children (or removes all if null)
+   */
+  @Override
   public void setTextContent(String content) {
     super.setTextContent(content);
     ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
+  @Override
   protected void onRemoveNode() {
     super.onRemoveNode();
     ((OdfFileDom) this.ownerDocument).getInContentMetadataCache().remove(this);
   }
 
+  @Override
   protected void onInsertNode() {
     super.onInsertNode();
     ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);

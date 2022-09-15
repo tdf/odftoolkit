@@ -92,7 +92,7 @@ public class FormFormElement extends OdfElement {
   public Boolean getFormAllowDeletesAttribute() {
     FormAllowDeletesAttribute attr =
         (FormAllowDeletesAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "allow-deletes");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(FormAllowDeletesAttribute.DEFAULT_VALUE);
@@ -120,7 +120,7 @@ public class FormFormElement extends OdfElement {
   public Boolean getFormAllowInsertsAttribute() {
     FormAllowInsertsAttribute attr =
         (FormAllowInsertsAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "allow-inserts");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(FormAllowInsertsAttribute.DEFAULT_VALUE);
@@ -148,7 +148,7 @@ public class FormFormElement extends OdfElement {
   public Boolean getFormAllowUpdatesAttribute() {
     FormAllowUpdatesAttribute attr =
         (FormAllowUpdatesAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "allow-updates");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(FormAllowUpdatesAttribute.DEFAULT_VALUE);
@@ -176,7 +176,7 @@ public class FormFormElement extends OdfElement {
   public Boolean getFormApplyFilterAttribute() {
     FormApplyFilterAttribute attr =
         (FormApplyFilterAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "apply-filter");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(FormApplyFilterAttribute.DEFAULT_VALUE);
@@ -375,7 +375,7 @@ public class FormFormElement extends OdfElement {
     FormEscapeProcessingAttribute attr =
         (FormEscapeProcessingAttribute)
             getOdfAttribute(OdfDocumentNamespace.FORM, "escape-processing");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(FormEscapeProcessingAttribute.DEFAULT_VALUE);
@@ -432,7 +432,7 @@ public class FormFormElement extends OdfElement {
   public Boolean getFormIgnoreResultAttribute() {
     FormIgnoreResultAttribute attr =
         (FormIgnoreResultAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "ignore-result");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(FormIgnoreResultAttribute.DEFAULT_VALUE);
@@ -1107,6 +1107,12 @@ public class FormFormElement extends OdfElement {
     return officeEventListeners;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

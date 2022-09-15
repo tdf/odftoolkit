@@ -165,7 +165,7 @@ public class TextIllustrationIndexSourceElement extends OdfElement {
     TextRelativeTabStopPositionAttribute attr =
         (TextRelativeTabStopPositionAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "relative-tab-stop-position");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextRelativeTabStopPositionAttribute.DEFAULT_VALUE);
@@ -194,7 +194,7 @@ public class TextIllustrationIndexSourceElement extends OdfElement {
   public Boolean getTextUseCaptionAttribute() {
     TextUseCaptionAttribute attr =
         (TextUseCaptionAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-caption");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextUseCaptionAttribute.DEFAULT_VALUE);
@@ -241,6 +241,12 @@ public class TextIllustrationIndexSourceElement extends OdfElement {
     return textIndexTitleTemplate;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

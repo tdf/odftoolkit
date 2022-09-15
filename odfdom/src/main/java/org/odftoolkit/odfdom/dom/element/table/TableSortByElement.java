@@ -101,7 +101,7 @@ public class TableSortByElement extends OdfElement {
   public Integer getTableFieldNumberAttribute() {
     TableFieldNumberAttribute attr =
         (TableFieldNumberAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "field-number");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -147,6 +147,12 @@ public class TableSortByElement extends OdfElement {
     attr.setValue(tableOrderValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -114,7 +114,7 @@ public class PresentationSettingsElement extends OdfElement {
     PresentationEndlessAttribute attr =
         (PresentationEndlessAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "endless");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(PresentationEndlessAttribute.DEFAULT_VALUE);
@@ -144,7 +144,7 @@ public class PresentationSettingsElement extends OdfElement {
     PresentationForceManualAttribute attr =
         (PresentationForceManualAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "force-manual");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(PresentationForceManualAttribute.DEFAULT_VALUE);
@@ -174,7 +174,7 @@ public class PresentationSettingsElement extends OdfElement {
     PresentationFullScreenAttribute attr =
         (PresentationFullScreenAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "full-screen");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(PresentationFullScreenAttribute.DEFAULT_VALUE);
@@ -204,7 +204,7 @@ public class PresentationSettingsElement extends OdfElement {
     PresentationMouseAsPenAttribute attr =
         (PresentationMouseAsPenAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "mouse-as-pen");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(PresentationMouseAsPenAttribute.DEFAULT_VALUE);
@@ -234,7 +234,7 @@ public class PresentationSettingsElement extends OdfElement {
     PresentationMouseVisibleAttribute attr =
         (PresentationMouseVisibleAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "mouse-visible");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(PresentationMouseVisibleAttribute.DEFAULT_VALUE);
@@ -322,7 +322,7 @@ public class PresentationSettingsElement extends OdfElement {
     PresentationShowEndOfPresentationSlideAttribute attr =
         (PresentationShowEndOfPresentationSlideAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "show-end-of-presentation-slide");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(PresentationShowEndOfPresentationSlideAttribute.DEFAULT_VALUE);
@@ -354,7 +354,7 @@ public class PresentationSettingsElement extends OdfElement {
     PresentationShowLogoAttribute attr =
         (PresentationShowLogoAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "show-logo");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(PresentationShowLogoAttribute.DEFAULT_VALUE);
@@ -415,7 +415,7 @@ public class PresentationSettingsElement extends OdfElement {
     PresentationStartWithNavigatorAttribute attr =
         (PresentationStartWithNavigatorAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "start-with-navigator");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(PresentationStartWithNavigatorAttribute.DEFAULT_VALUE);
@@ -446,7 +446,7 @@ public class PresentationSettingsElement extends OdfElement {
     PresentationStayOnTopAttribute attr =
         (PresentationStayOnTopAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "stay-on-top");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(PresentationStayOnTopAttribute.DEFAULT_VALUE);
@@ -515,6 +515,12 @@ public class PresentationSettingsElement extends OdfElement {
     return presentationShow;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

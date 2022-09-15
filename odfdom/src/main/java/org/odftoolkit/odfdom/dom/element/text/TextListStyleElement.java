@@ -131,7 +131,7 @@ public class TextListStyleElement extends OdfStyleBase {
     TextConsecutiveNumberingAttribute attr =
         (TextConsecutiveNumberingAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "consecutive-numbering");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextConsecutiveNumberingAttribute.DEFAULT_VALUE);
@@ -203,6 +203,12 @@ public class TextListStyleElement extends OdfStyleBase {
     return textListLevelStyleNumber;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

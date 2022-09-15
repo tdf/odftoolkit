@@ -136,7 +136,7 @@ public class DrawGElement extends DrawShapeElementBase {
    * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
    *     {@odf.attribute xlink:href} at specification
    * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
-   *     {@odf.attribute xlink:type} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute xlink:type} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:a}
    */
   public DrawAElement newDrawAElement(String xlinkHrefValue, String xlinkTypeValue) {
@@ -436,6 +436,8 @@ public class DrawGElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element svg:desc}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element svg:desc}
    */
   public SvgDescElement newSvgDescElement() {
@@ -447,6 +449,8 @@ public class DrawGElement extends DrawShapeElementBase {
   /**
    * Create child element {@odf.element svg:title}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element svg:title}
    */
   public SvgTitleElement newSvgTitleElement() {
@@ -456,6 +460,12 @@ public class DrawGElement extends DrawShapeElementBase {
     return svgTitle;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
