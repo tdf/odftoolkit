@@ -5,7 +5,8 @@
 <!--
 .left { width: 30%; }
 .right { width: 100%; }
-td { text-indent:0em; }
+td { text-indent:0em;
+    font-family: 'Liberation Mono';}
 .unbreakable { white-space:nowrap; }
 .mandatory { color:navy; font-weight:bold; }
 -->
@@ -14,17 +15,19 @@ td { text-indent:0em; }
 <body>
 <h2>ODF 1.3 (odf-package-manifest) XML Reference</h2>
 
-<p>This is a list of elements defined in ODF-Spec together with allowed parent and child elements and allowed attributes.</p>
 
-<p>Please note that "allowed" has the meaning of "may be allowed" as there might be a condition (like a special attribute value)
-for an element to have a special child element.</p>
+<p>This is an alphabetical ordered list of the XML defined in ODF 1.3 (odf-package-manifest) together with allowed parent, child elements and allowed attributes.</p>
 
-<p>left displayed in bold blue letters describe a mandatory relationship. All other relationships are optional.</p>
+<h3>Explanation</h3>
+<ol>
+<li><span class="mandatory">Bold blue letters</span> describe a mandatory XML node.</li>
+<li>The asterisk * symbol marks child elements which can occur multiple times.</li>
+<li>The square brackets with a number within [0] after an XML node like <a href="#attribute_office:value-type_0">office:value-type[0]</a> mark different grammar definitions.</li>
+</ol>
 
-<p>The asterisk (*) symbol marks child elements which can occur multiple times.</p>
+<p>Here's a shortcut to the content's <a href="#element_office:document_0">toplevel</a> element.</p>
 
-<p>Here's a shortcut to the content <a href="#element_office:document_0">toplevel</a> element.</p>
-
+</br/>
 
 
 							<h3><a name="element_manifest:CipherData_0">manifest:CipherData Element</a>&nbsp;(new in ODF 1.3) </h3>
@@ -32,18 +35,18 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:encrypted-key_0" class="unbreakable">manifest:encrypted-key</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
-	<a href="#element_manifest:CipherValue_0" class="unbreakable mandatory">manifest:CipherValue</a>&nbsp;
+	<a href="#element_manifest:encrypted-key_0" class="unbreakable">&lt;manifest:encrypted-key&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Attributes</td>
 <td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_manifest:CipherValue_0" class="unbreakable mandatory">&lt;manifest:CipherValue&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>
@@ -54,16 +57,16 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:CipherData_0" class="unbreakable">manifest:CipherData</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
+	<a href="#element_manifest:CipherData_0" class="unbreakable">&lt;manifest:CipherData&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Attributes</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
 <td class="right">
 &nbsp;</td>
 </tr>
@@ -75,19 +78,19 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:keyinfo_0" class="unbreakable">manifest:keyinfo</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
-	<a href="#element_manifest:PGPKeyID_0" class="unbreakable mandatory">manifest:PGPKeyID</a>&nbsp;
-	<a href="#element_manifest:PGPKeyPacket_0" class="unbreakable ">manifest:PGPKeyPacket</a>&nbsp;
+	<a href="#element_manifest:keyinfo_0" class="unbreakable">&lt;manifest:keyinfo&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Attributes</td>
 <td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_manifest:PGPKeyID_0" class="unbreakable mandatory">&lt;manifest:PGPKeyID&gt;</a>&nbsp;
+	<a href="#element_manifest:PGPKeyPacket_0" class="unbreakable ">&lt;manifest:PGPKeyPacket&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>
@@ -98,16 +101,16 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:PGPData_0" class="unbreakable">manifest:PGPData</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
+	<a href="#element_manifest:PGPData_0" class="unbreakable">&lt;manifest:PGPData&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Attributes</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
 <td class="right">
 &nbsp;</td>
 </tr>
@@ -119,16 +122,16 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:PGPData_0" class="unbreakable">manifest:PGPData</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
+	<a href="#element_manifest:PGPData_0" class="unbreakable">&lt;manifest:PGPData&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Attributes</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
 <td class="right">
 &nbsp;</td>
 </tr>
@@ -140,13 +143,7 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:encryption-data_0" class="unbreakable">manifest:encryption-data</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
-[any org.w3c.dom.Element]&nbsp;
+	<a href="#element_manifest:encryption-data_0" class="unbreakable">&lt;manifest:encryption-data&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -154,6 +151,12 @@ for an element to have a special child element.</p>
 <td class="right">
 	<a href="#attribute_manifest:algorithm-name_0" class="unbreakable mandatory">manifest:algorithm-name</a>&nbsp;
 	<a href="#attribute_manifest:initialisation-vector_0" class="unbreakable mandatory">manifest:initialisation-vector</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+[any org.w3c.dom.Element]&nbsp;
 &nbsp;</td>
 </tr>
 </table>
@@ -164,20 +167,20 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:manifest_0" class="unbreakable">manifest:manifest</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
-	<a href="#element_manifest:CipherData_0" class="unbreakable mandatory">manifest:CipherData</a>&nbsp;
-	<a href="#element_manifest:encryption-method_0" class="unbreakable ">manifest:encryption-method</a>&nbsp;
-	<a href="#element_manifest:keyinfo_0" class="unbreakable mandatory">manifest:keyinfo</a>&nbsp;
+	<a href="#element_manifest:manifest_0" class="unbreakable">&lt;manifest:manifest&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Attributes</td>
 <td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_manifest:CipherData_0" class="unbreakable mandatory">&lt;manifest:CipherData&gt;</a>&nbsp;
+	<a href="#element_manifest:encryption-method_0" class="unbreakable ">&lt;manifest:encryption-method&gt;</a>&nbsp;
+	<a href="#element_manifest:keyinfo_0" class="unbreakable mandatory">&lt;manifest:keyinfo&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>
@@ -188,15 +191,7 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:file-entry_0" class="unbreakable">manifest:file-entry</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
-	<a href="#element_manifest:algorithm_0" class="unbreakable mandatory">manifest:algorithm</a>&nbsp;
-	<a href="#element_manifest:key-derivation_0" class="unbreakable mandatory">manifest:key-derivation</a>&nbsp;
-	<a href="#element_manifest:start-key-generation_0" class="unbreakable ">manifest:start-key-generation</a>&nbsp;
+	<a href="#element_manifest:file-entry_0" class="unbreakable">&lt;manifest:file-entry&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -204,6 +199,14 @@ for an element to have a special child element.</p>
 <td class="right">
 	<a href="#attribute_manifest:checksum_0" class="unbreakable mandatory">manifest:checksum</a>&nbsp;
 	<a href="#attribute_manifest:checksum-type_0" class="unbreakable mandatory">manifest:checksum-type</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_manifest:algorithm_0" class="unbreakable mandatory">&lt;manifest:algorithm&gt;</a>&nbsp;
+	<a href="#element_manifest:key-derivation_0" class="unbreakable mandatory">&lt;manifest:key-derivation&gt;</a>&nbsp;
+	<a href="#element_manifest:start-key-generation_0" class="unbreakable ">&lt;manifest:start-key-generation&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>
@@ -214,18 +217,18 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:encrypted-key_0" class="unbreakable">manifest:encrypted-key</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
+	<a href="#element_manifest:encrypted-key_0" class="unbreakable">&lt;manifest:encrypted-key&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Attributes</td>
 <td class="right">
 	<a href="#attribute_manifest:PGPAlgorithm_0" class="unbreakable mandatory">manifest:PGPAlgorithm</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
 &nbsp;</td>
 </tr>
 </table>
@@ -236,13 +239,7 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:manifest_0" class="unbreakable">manifest:manifest</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
-	<a href="#element_manifest:encryption-data_0" class="unbreakable ">manifest:encryption-data</a>&nbsp;
+	<a href="#element_manifest:manifest_0" class="unbreakable">&lt;manifest:manifest&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -255,6 +252,12 @@ for an element to have a special child element.</p>
 	<a href="#attribute_manifest:version_0" class="unbreakable ">manifest:version[0]</a>&nbsp;
 &nbsp;</td>
 </tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_manifest:encryption-data_0" class="unbreakable ">&lt;manifest:encryption-data&gt;</a>&nbsp;
+&nbsp;</td>
+</tr>
 </table>
 <br />
 
@@ -263,12 +266,7 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:encryption-data_0" class="unbreakable">manifest:encryption-data</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
+	<a href="#element_manifest:encryption-data_0" class="unbreakable">&lt;manifest:encryption-data&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -281,6 +279,11 @@ for an element to have a special child element.</p>
 	<a href="#attribute_manifest:salt_0" class="unbreakable ">manifest:salt</a>&nbsp;
 &nbsp;</td>
 </tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+&nbsp;</td>
+</tr>
 </table>
 <br />
 
@@ -289,18 +292,18 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:encrypted-key_0" class="unbreakable">manifest:encrypted-key</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
-	<a href="#element_manifest:PGPData_0" class="unbreakable mandatory">manifest:PGPData</a>&nbsp;
+	<a href="#element_manifest:encrypted-key_0" class="unbreakable">&lt;manifest:encrypted-key&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Attributes</td>
 <td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_manifest:PGPData_0" class="unbreakable mandatory">&lt;manifest:PGPData&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>
@@ -314,16 +317,16 @@ for an element to have a special child element.</p>
 &nbsp;</td>
 </tr>
 <tr>
-<td class="left">Child Elements</td>
-<td class="right">
-	<a href="#element_manifest:encrypted-key_0" class="unbreakable ">manifest:encrypted-key</a>*&nbsp;
-	<a href="#element_manifest:file-entry_0" class="unbreakable mandatory">manifest:file-entry</a>*&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
 <td class="left">Attributes</td>
 <td class="right">
 	<a href="#attribute_manifest:version_1" class="unbreakable mandatory">manifest:version[1]</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_manifest:encrypted-key_0" class="unbreakable ">&lt;manifest:encrypted-key&gt;</a>*&nbsp;
+	<a href="#element_manifest:file-entry_0" class="unbreakable mandatory">&lt;manifest:file-entry&gt;</a>*&nbsp;
 &nbsp;</td>
 </tr>
 </table>
@@ -334,12 +337,7 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:encryption-data_0" class="unbreakable">manifest:encryption-data</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
+	<a href="#element_manifest:encryption-data_0" class="unbreakable">&lt;manifest:encryption-data&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -347,6 +345,11 @@ for an element to have a special child element.</p>
 <td class="right">
 	<a href="#attribute_manifest:key-size_0" class="unbreakable ">manifest:key-size</a>&nbsp;
 	<a href="#attribute_manifest:start-key-generation-name_0" class="unbreakable mandatory">manifest:start-key-generation-name</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
 &nbsp;</td>
 </tr>
 </table>

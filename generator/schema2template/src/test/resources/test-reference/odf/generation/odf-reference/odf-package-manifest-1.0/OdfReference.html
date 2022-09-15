@@ -5,7 +5,8 @@
 <!--
 .left { width: 30%; }
 .right { width: 100%; }
-td { text-indent:0em; }
+td { text-indent:0em;
+    font-family: 'Liberation Mono';}
 .unbreakable { white-space:nowrap; }
 .mandatory { color:navy; font-weight:bold; }
 -->
@@ -14,29 +15,26 @@ td { text-indent:0em; }
 <body>
 <h2>ODF 1.0 (odf-package-manifest) XML Reference</h2>
 
-<p>This is a list of elements defined in ODF-Spec together with allowed parent and child elements and allowed attributes.</p>
 
-<p>Please note that "allowed" has the meaning of "may be allowed" as there might be a condition (like a special attribute value)
-for an element to have a special child element.</p>
+<p>This is an alphabetical ordered list of the XML defined in ODF 1.0 (odf-package-manifest) together with allowed parent, child elements and allowed attributes.</p>
 
-<p>left displayed in bold blue letters describe a mandatory relationship. All other relationships are optional.</p>
+<h3>Explanation</h3>
+<ol>
+<li><span class="mandatory">Bold blue letters</span> describe a mandatory XML node.</li>
+<li>The asterisk * symbol marks child elements which can occur multiple times.</li>
+<li>The square brackets with a number within [0] after an XML node like <a href="#attribute_office:value-type_0">office:value-type[0]</a> mark different grammar definitions.</li>
+</ol>
 
-<p>The asterisk (*) symbol marks child elements which can occur multiple times.</p>
+<p>Here's a shortcut to the content's <a href="#element_office:document_0">toplevel</a> element.</p>
 
-<p>Here's a shortcut to the content <a href="#element_office:document_0">toplevel</a> element.</p>
-
+</br/>
 
 <h3><a name="element_manifest:algorithm_0">manifest:algorithm Element</a></h3>
 <table border="1" width="100%">
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:encryption-data_0" class="unbreakable">manifest:encryption-data</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
+	<a href="#element_manifest:encryption-data_0" class="unbreakable">&lt;manifest:encryption-data&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -44,6 +42,11 @@ for an element to have a special child element.</p>
 <td class="right">
 	<a href="#attribute_manifest:algorithm-name_0" class="unbreakable mandatory">manifest:algorithm-name</a>&nbsp;
 	<a href="#attribute_manifest:initialisation-vector_0" class="unbreakable mandatory">manifest:initialisation-vector</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
 &nbsp;</td>
 </tr>
 </table>
@@ -54,14 +57,7 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:file-entry_0" class="unbreakable">manifest:file-entry</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
-	<a href="#element_manifest:algorithm_0" class="unbreakable mandatory">manifest:algorithm</a>&nbsp;
-	<a href="#element_manifest:key-derivation_0" class="unbreakable mandatory">manifest:key-derivation</a>&nbsp;
+	<a href="#element_manifest:file-entry_0" class="unbreakable">&lt;manifest:file-entry&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -69,6 +65,13 @@ for an element to have a special child element.</p>
 <td class="right">
 	<a href="#attribute_manifest:checksum_0" class="unbreakable mandatory">manifest:checksum</a>&nbsp;
 	<a href="#attribute_manifest:checksum-type_0" class="unbreakable mandatory">manifest:checksum-type</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_manifest:algorithm_0" class="unbreakable mandatory">&lt;manifest:algorithm&gt;</a>&nbsp;
+	<a href="#element_manifest:key-derivation_0" class="unbreakable mandatory">&lt;manifest:key-derivation&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 </table>
@@ -79,13 +82,7 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:manifest_0" class="unbreakable">manifest:manifest</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
-	<a href="#element_manifest:encryption-data_0" class="unbreakable ">manifest:encryption-data</a>&nbsp;
+	<a href="#element_manifest:manifest_0" class="unbreakable">&lt;manifest:manifest&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -96,6 +93,12 @@ for an element to have a special child element.</p>
 	<a href="#attribute_manifest:size_0" class="unbreakable ">manifest:size</a>&nbsp;
 &nbsp;</td>
 </tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_manifest:encryption-data_0" class="unbreakable ">&lt;manifest:encryption-data&gt;</a>&nbsp;
+&nbsp;</td>
+</tr>
 </table>
 <br />
 
@@ -104,12 +107,7 @@ for an element to have a special child element.</p>
 <tr>
 <td class="left">Parent Elements</td>
 <td class="right">
-	<a href="#element_manifest:encryption-data_0" class="unbreakable">manifest:encryption-data</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Child Elements</td>
-<td class="right">
+	<a href="#element_manifest:encryption-data_0" class="unbreakable">&lt;manifest:encryption-data&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -118,6 +116,11 @@ for an element to have a special child element.</p>
 	<a href="#attribute_manifest:iteration-count_0" class="unbreakable mandatory">manifest:iteration-count</a>&nbsp;
 	<a href="#attribute_manifest:key-derivation-name_0" class="unbreakable mandatory">manifest:key-derivation-name</a>&nbsp;
 	<a href="#attribute_manifest:salt_0" class="unbreakable mandatory">manifest:salt</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
 &nbsp;</td>
 </tr>
 </table>
@@ -131,14 +134,14 @@ for an element to have a special child element.</p>
 &nbsp;</td>
 </tr>
 <tr>
-<td class="left">Child Elements</td>
+<td class="left">Attributes</td>
 <td class="right">
-	<a href="#element_manifest:file-entry_0" class="unbreakable mandatory">manifest:file-entry</a>*&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
-<td class="left">Attributes</td>
+<td class="left">Child Elements</td>
 <td class="right">
+	<a href="#element_manifest:file-entry_0" class="unbreakable mandatory">&lt;manifest:file-entry&gt;</a>*&nbsp;
 &nbsp;</td>
 </tr>
 </table>
