@@ -136,4 +136,8 @@
     this.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "formula");
   }
 #end
+## Add table cell border helper functionality
+#macro( add_tableCellHelper_methods )
+#include('java-odfdom-table-cell-helper.txt')
+#end
 
