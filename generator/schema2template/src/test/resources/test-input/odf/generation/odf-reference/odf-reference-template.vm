@@ -50,10 +50,10 @@ td { text-indent:0em;
 <ol>
 <li><span class="mandatory">Bold blue letters</span> describe a mandatory XML node.</li>
 <li>The asterisk * symbol marks child elements which can occur multiple times.</li>
-<li>The square brackets with a number within [0] after an XML node like <a href="#attribute_office:value-type_0">office:value-type[0]</a> mark different grammar definitions.</li>
+<li>The square brackets with a number within [1] after an XML node like <a href="#attribute_office:value-type_1">office:value-type[1]</a> mark different grammar definitions.</li>
 </ol>
 
-<p>Here's a shortcut to the content's <a href="#element_office:document_0">toplevel</a> element.</p>
+<p>Here's a shortcut to the content's <a href="#element_office:document_1">toplevel</a> element.</p>
 
 </br/>
 #foreach( $element in ${xmlModel.getElements()} )
@@ -62,8 +62,10 @@ td { text-indent:0em;
 ##
 #if (${element.withMultiples().size()} <= 1)
 #set ($duplicates = "")
+#set ($duplicateNo = 1)
 #else
-#set ($duplicates = "[${element.getMultipleNumber()}]")
+#set ($duplicateNo = ${element.getMultipleNumber()} + 1)
+#set ($duplicates = "[$duplicateNo]")
 #end
 ### VERSION:ODF-ELEMENT - START
 ## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
@@ -83,7 +85,7 @@ td { text-indent:0em;
 	#end
 #end
 ### VERSION:ODF-ELEMENT - END
-<h3><a name="element_${element}_${element.getMultipleNumber()}">${element}${duplicates} Element</a>#if ($xmlModelHistory && !(${addVersion} == ""))&nbsp;(new in ODF $addVersion) #end</h3>
+<h3><a name="element_${element}_$duplicateNo">${element}${duplicates} Element</a>#if ($xmlModelHistory && !(${addVersion} == ""))&nbsp;(new in ODF $addVersion) #end</h3>
 #if ( ${element.withMultiples().size()} > 1 )
 <p>There are more than one Definitions by this name.</p>
 #end
@@ -100,10 +102,12 @@ td { text-indent:0em;
 #else
 #if (${parent.withMultiples().size()} <= 1)
 #set ($duplicates = "")
+#set ($duplicateNo = 1)
 #else
-#set ($duplicates = "[${parent.getMultipleNumber()}]")
+#set ($duplicateNo = ${parent.getMultipleNumber()} + 1)
+#set ($duplicates = "[$duplicateNo]")
 #end
-	<a href="#element_${parent}_${parent.getMultipleNumber()}" class="unbreakable">&lt;${parent}${duplicates}&gt;</a>&nbsp;
+	<a href="#element_${parent}_$duplicateNo" class="unbreakable">&lt;${parent}${duplicates}&gt;</a>&nbsp;
 #end
 #end
 &nbsp;</td>
@@ -117,8 +121,10 @@ td { text-indent:0em;
 #else
 #if (${attribute.withMultiples().size()} <= 1)
 #set ($duplicates = "")
+#set ($duplicateNo = 1)
 #else
-#set ($duplicates = "[${attribute.getMultipleNumber()}]")
+#set ($duplicateNo = ${attribute.getMultipleNumber()} + 1)
+#set ($duplicates = "[$duplicateNo]")
 #end
 ##
 #if (${element.isMandatory($attribute)})
@@ -127,7 +133,7 @@ td { text-indent:0em;
 #set ($mandatory = "")
 #end
 ##
-	<a href="#attribute_${attribute}_${attribute.getMultipleNumber()}" class="unbreakable ${mandatory}">${attribute}${duplicates}</a>&nbsp;
+	<a href="#attribute_${attribute}_$duplicateNo" class="unbreakable ${mandatory}">${attribute}${duplicates}</a>&nbsp;
 #end
 #end
 &nbsp;</td>
@@ -141,8 +147,10 @@ td { text-indent:0em;
 #else
 #if (${child.withMultiples().size()} <= 1)
 #set ($duplicates = "")
+#set ($duplicateNo = 1)
 #else
-#set ($duplicates = "[${child.getMultipleNumber()}]")
+#set ($duplicateNo = ${child.getMultipleNumber()} + 1)
+#set ($duplicates = "[$duplicateNo]")
 #end
 ##
 #if (${element.isMandatory($child)})
@@ -157,7 +165,7 @@ td { text-indent:0em;
 #set ($multiple = "*")
 #end
 ##
-	<a href="#element_${child}_${child.getMultipleNumber()}" class="unbreakable ${mandatory}">&lt;${child}${duplicates}&gt;</a>${multiple}&nbsp;
+	<a href="#element_${child}_$duplicateNo" class="unbreakable ${mandatory}">&lt;${child}${duplicates}&gt;</a>${multiple}&nbsp;
 #end
 #end
 &nbsp;</td>
@@ -173,8 +181,10 @@ td { text-indent:0em;
 ##
 #if (${attribute.withMultiples().size()} <= 1)
 #set ($duplicates = "")
+#set ($duplicateNo = 1)
 #else
-#set ($duplicates = "[${attribute.getMultipleNumber()}]")
+#set ($duplicateNo = ${attribute.getMultipleNumber()} + 1)
+#set ($duplicates = "[$duplicateNo]")
 #end
 ### VERSION:ODF-ATTRIBUTE - START
 ## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
@@ -194,7 +204,7 @@ td { text-indent:0em;
 	#end
 #end
 ### VERSION:ODF-ATTRIBUTE - END
-<h3><a name="attribute_${attribute}_${attribute.getMultipleNumber()}">${attribute}${duplicates} Attribute</a>#if ($xmlModelHistory && !(${addVersion} == ""))&nbsp;(new in ODF $addVersion) #end</h3>
+<h3><a name="attribute_${attribute}_${duplicateNo}">${attribute}${duplicates} Attribute</a>#if ($xmlModelHistory && !(${addVersion} == ""))&nbsp;(new in ODF $addVersion) #end</h3>
 #if ( ${attribute.withMultiples().size()} > 1 )
 <p>There are more than one Definitions by this name.</p>
 #end
@@ -208,10 +218,12 @@ td { text-indent:0em;
 #else
 #if (${parent.withMultiples().size()} <= 1)
 #set ($duplicates = "")
+#set ($duplicateNo = 1)
 #else
-#set ($duplicates = "[${parent.getMultipleNumber()}]")
+#set ($duplicateNo = ${parent.getMultipleNumber()} + 1)
+#set ($duplicates = "[$duplicateNo]")
 #end
-	<a href="#element_${parent}_${parent.getMultipleNumber()}" class="unbreakable">${parent}${duplicates}</a>&nbsp;
+	<a href="#element_${parent}_${duplicateNo}" class="unbreakable">${parent}${duplicates}</a>&nbsp;
 #end
 #end
 &nbsp;</td>
