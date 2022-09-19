@@ -23,10 +23,13 @@
  */
 package schema2template.grammar;
 
-import com.sun.msv.grammar.Expression;
+import static schema2template.SchemaToTemplate.DEBUG;
+
+import com.sun.msv.grammar.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
@@ -69,7 +72,7 @@ public class MSVRunTimeDumpTest {
                 + ConstantsBuildEnv.TARGET_BASE_DIR
                 + MSV_DUMP_DIRECTORY);
         Expression odfRoot = XMLModel.loadSchema(specPart.grammarPath).getTopLevel();
-        String odfDump = MSVExpressionIterator.dumpMSVExpressionTree(odfRoot);
+        String odfDump = dumpMSVExpressionTree(odfRoot);
 
         String grammarLabel = specPart.grammarID + "-" + specPart.grammarVersion;
 
@@ -94,5 +97,49 @@ public class MSVRunTimeDumpTest {
       Logger.getLogger(MSVRunTimeDumpTest.class.getName()).log(Level.SEVERE, null, ex);
       Assert.fail(ex.toString());
     }
+  }
+  /**
+   * Iterates the MSVExpressionTree and dumps it into a string
+   *
+   * @return the MSVExpressionTree serialized into a String
+   */
+  public static String dumpMSVExpressionTree(Expression rootExpression) throws Exception {
+    MSVExpressionIterator iterator = new MSVExpressionIterator(rootExpression);
+    StringBuilder builder = new StringBuilder();
+    while (iterator.hasNext()) {
+      Expression expr = iterator.next();
+      builder.append(dumpMSVExpression(expr, iterator.getDepth())).append("\n");
+    }
+    return builder.toString();
+  }
+
+  private static String dumpMSVExpression(Expression expr, int depth) {
+    String returnValue = null;
+    MSVExpressionVisitorType typeVisitor = new MSVExpressionVisitorType();
+    MSVNameClassVisitorList nameVisitor = new MSVNameClassVisitorList();
+    MSVExpressionType type = (MSVExpressionType) expr.visit(typeVisitor);
+    returnValue = (depth + ": " + type.toString());
+
+    // AttributeExp, ElementExp
+    if (expr instanceof NameClassAndExpression) {
+      List<String> names =
+          (List<String>) ((NameClassAndExpression) expr).getNameClass().visit(nameVisitor);
+      for (String name : names) {
+        returnValue += (" \"" + name + "\",");
+        if (DEBUG) System.out.println(returnValue);
+      }
+    } else if (expr instanceof ReferenceExp) {
+      returnValue += (" '" + ((ReferenceExp) expr).name + "',");
+      if (DEBUG) System.out.println(returnValue);
+    } else if (type == MSVExpressionType.VALUE) {
+      returnValue += (" '" + ((ValueExp) expr).value.toString() + "',");
+      if (DEBUG) System.out.println(returnValue);
+    } else if (type == MSVExpressionType.DATA) {
+      returnValue += (" '" + ((DataExp) expr).getName().localName + "',");
+      if (DEBUG) System.out.println(returnValue);
+    } else {
+      if (DEBUG) System.out.println(returnValue);
+    }
+    return returnValue;
   }
 }
