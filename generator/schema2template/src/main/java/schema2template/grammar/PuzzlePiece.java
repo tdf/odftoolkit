@@ -182,7 +182,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
    * a distinct Hash Code.
    */
   public int hashCode() {
-    return 1013 * (mName.hashCode()) ^ 1009 * (mExpression.hashCode());
+    return (31 * mName.hashCode()) + mExpression.hashCode();
   }
 
   /**
