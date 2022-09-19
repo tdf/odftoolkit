@@ -23,14 +23,8 @@
  */
 package schema2template.grammar;
 
-import static schema2template.SchemaToTemplate.DEBUG;
-
-import com.sun.msv.grammar.DataExp;
 import com.sun.msv.grammar.ElementExp;
 import com.sun.msv.grammar.Expression;
-import com.sun.msv.grammar.NameClassAndExpression;
-import com.sun.msv.grammar.ReferenceExp;
-import com.sun.msv.grammar.ValueExp;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -38,11 +32,17 @@ import java.util.Stack;
 import java.util.logging.Logger;
 
 /**
- * Iterates through the MSV expression tree.
+ * Traversing through the MSV expression tree using <a
+ * href="https://en.wikipedia.org/wiki/Depth-first_search">See depth-first_search</a> similar to
+ * reading the grammar in XML document order.
  *
- * <p>Traversing the MSV Tree structure by 1) First trying to get the child (going as deep as
- * possible) 2) Second if no child is available, trying to get the next sibling 3) If no sibling
- * available, get a sibling of the parent (going back to step 1)
+ * <p>
+ *
+ * <ol>
+ *   <li>First trying to get the child (going as deep as possible)
+ *   <li>Second if no child is available, trying to get the next sibling
+ *   <li>If no sibling available, get a sibling of the parent (going back to step 1)
+ * </ol>
  *
  * <p>Also has the ability to limit iteration to given subclasses and to limit subtree to the next
  * element expressions below.
@@ -57,7 +57,7 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
   // The stack assists the iteration to go back up (usually done in by recursion)
   // The stack contains the next expression, parent, grandparent, ...
   private Stack<UniqueAncestor> mAncestorsAndCurrent;
-  // to prevent enless loops, known Element expression will be remembered and not again reentered
+  // to prevent endless loops, known Element expression will be remembered and not again reentered
   // Situation: Element a contains Element b contains Element a, will stop after the second and not
   // continuing with b
   private HashSet<Expression> mKnownElementExpressions;
@@ -143,51 +143,6 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
     }
   }
 
-  /**
-   * Iterates the MSVExpressionTree and dumps it into a string
-   *
-   * @return the MSVExpressionTree serialized into a String
-   */
-  public static String dumpMSVExpressionTree(Expression rootExpression) throws Exception {
-    MSVExpressionIterator iterator = new MSVExpressionIterator(rootExpression);
-    StringBuilder builder = new StringBuilder();
-    while (iterator.hasNext()) {
-      Expression expr = iterator.next();
-      builder.append(dumpMSVExpression(expr, iterator.getDepth())).append("\n");
-    }
-    return builder.toString();
-  }
-
-  private static String dumpMSVExpression(Expression expr, int depth) {
-    String returnValue = null;
-    MSVExpressionVisitorType typeVisitor = new MSVExpressionVisitorType();
-    MSVNameClassVisitorList nameVisitor = new MSVNameClassVisitorList();
-    MSVExpressionType type = (MSVExpressionType) expr.visit(typeVisitor);
-    returnValue = (depth + ": " + type.toString());
-
-    // AttributeExp, ElementExp
-    if (expr instanceof NameClassAndExpression) {
-      List<String> names =
-          (List<String>) ((NameClassAndExpression) expr).getNameClass().visit(nameVisitor);
-      for (String name : names) {
-        returnValue += (" \"" + name + "\",");
-        if (DEBUG) System.out.println(returnValue);
-      }
-    } else if (expr instanceof ReferenceExp) {
-      returnValue += (" '" + ((ReferenceExp) expr).name + "',");
-      if (DEBUG) System.out.println(returnValue);
-    } else if (type == MSVExpressionType.VALUE) {
-      returnValue += (" '" + ((ValueExp) expr).value.toString() + "',");
-      if (DEBUG) System.out.println(returnValue);
-    } else if (type == MSVExpressionType.DATA) {
-      returnValue += (" '" + ((DataExp) expr).getName().localName + "',");
-      if (DEBUG) System.out.println(returnValue);
-    } else {
-      if (DEBUG) System.out.println(returnValue);
-    }
-    return returnValue;
-  }
-
   public boolean hasNext() {
     return (mCurrentExpression != null) ? true : false;
   }
@@ -219,7 +174,7 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
         }
       }
 
-      // if you could not get depper, but you can go up
+      // if you could not get deeper, but you can go up
       // if there was no first child for the next expression and still some parent not being the
       // root
       while (nextExpression == null && mAncestorsAndCurrent.size() > 1) {

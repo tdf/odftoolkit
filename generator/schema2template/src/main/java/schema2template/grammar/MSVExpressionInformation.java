@@ -337,7 +337,7 @@ public class MSVExpressionInformation {
    *
    * <p>If there are multiples of child (other equally named expressions) providing only one of
    * those Expressions will determine whether exactly this expression is mandatory. In most cases
-   * this will return false, and in most cases this is not what you want to know. Therefore you can
+   * this will return false, and in most cases this is not what you want to know. Therefore, you can
    * provide a Collection of (equally named) child expressions.
    *
    * @return whether child is mandatory
@@ -366,12 +366,12 @@ public class MSVExpressionInformation {
      * We assume the subnode is mandatory until proven otherwise. The prove is done by examining CHOICE elements.
      *
      * A CHOICE splits a path in exactly _two_ parts:
-     * If the CHOICE is only contained in the current path, the other part does not lead to the subnode. Therefore the subnode is optional.
+     * If the CHOICE is only contained in the current path, the other part does not lead to the subnode. Therefore, the subnode is optional.
      * A CHOICE which is shared by two twins (see above) means that CHILD can still be assumed as mandatory.
      *
      * However, there's a MSV implementation detail:
      * All twins share the parent element and are identically before some CHOICE splits two of them. Once two paths are split, by logic
-     * they cannot share a CHOICE anymore. At least you would think so... However MSV does some optimization to merge two
+     * they cannot share a CHOICE anymore. At least you would think so... However, MSV does some optimization to merge two
      * identical CHOICES, even if they are in different places. In the following example the two inner CHOICE elements have the same MSV instance:
      *      <CHOICE><CHOICE>A,B</CHOICE><CHOICE>A,B</CHOICE></CHOICE>
      * So both twins do not really share such a CHOICE. You have to look for another path which _really_ shares this choice or - if you find none -
