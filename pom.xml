@@ -84,7 +84,9 @@
             <dependency>
                 <groupId>net.java.dev.msv</groupId>
                 <artifactId>msv-core</artifactId>
-                <version>2022.7</version>
+                <!-- 2DO: for this branch we need the build of the Git branch namespace-prefix2 in order to receive prefixes
+                otherwise comment the none building line accessing the prefix -->
+                <version>2022.8-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.rootdev</groupId>
