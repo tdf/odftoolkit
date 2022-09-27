@@ -23,19 +23,16 @@
  */
 package schema2template.grammar;
 
+import com.sun.msv.grammar.ElementExp;
 import com.sun.msv.grammar.Expression;
 import com.sun.msv.grammar.Grammar;
+import com.sun.msv.grammar.ReferenceExp;
+import com.sun.msv.grammar.util.ExpressionWalker;
 import com.sun.msv.reader.trex.ng.RELAXNGReader;
 import com.sun.msv.reader.xmlschema.XMLSchemaReader;
 import com.sun.msv.writer.relaxng.RELAXNGWriter;
 import java.io.File;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.StringTokenizer;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.SAXParserFactory;
@@ -564,5 +561,47 @@ public class XMLModel {
    */
   public static String extractLocalName(PuzzleComponent def) {
     return extractLocalName(def.getQName());
+  }
+
+  /**
+   * Identifies heads of islands of grammars, which are multiple used and must be identified to
+   * avoid infinite loops when traversing the grammar
+   */
+  public static Set<Expression> getHeadsOfIslands(Grammar grammar) {
+    // collect all reachable ElementExps and ReferenceExps.
+    final Set<Expression> nodes = new HashSet<Expression>();
+    // ElementExps and ReferenceExps who are referenced more than once.
+    final Set<Expression> heads = new HashSet<Expression>();
+
+    grammar
+        .getTopLevel()
+        .visit(
+            new ExpressionWalker() {
+              // ExpressionWalker class traverses expressions in depth-first order.
+              // So this invokation traverses the all reachable expressions from
+              // the top level expression.
+
+              // Whenever visiting elements and RefExps, they are memorized
+              // to identify head of islands.
+              public void onElement(ElementExp exp) {
+                if (nodes.contains(exp)) {
+                  heads.add(exp);
+                  return; // prevent infinite recursion.
+                }
+                nodes.add(exp);
+                super.onElement(exp);
+              }
+
+              public void onRef(ReferenceExp exp) {
+                if (nodes.contains(exp)) {
+                  heads.add(exp);
+                  return; // prevent infinite recursion.
+                }
+                nodes.add(exp);
+                super.onRef(exp);
+              }
+            });
+
+    return heads;
   }
 }
