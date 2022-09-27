@@ -253,7 +253,8 @@ public class MSVExpressionVisitorDescendantsAsHTMLString extends ExpressionWalke
 
     if (dt instanceof XSDatatypeImpl) {
       XSDatatypeImpl dti = (XSDatatypeImpl) dt;
-      if (isPrimitiveDatatypeType(dti.getName()) || isDerivedDataType(dti.getName())) {
+      if (dti.getName() != null
+          && (isPrimitiveDatatypeType(dti.getName()) || isDerivedDataType(dti.getName()))) {
         builder.append(
             "<a href=\"https://www.w3.org/TR/xmlschema-2/#"
                 + dti.getName()
@@ -263,7 +264,7 @@ public class MSVExpressionVisitorDescendantsAsHTMLString extends ExpressionWalke
       } else if (exp.name.equals("anyIRI")) {
         builder.append("<a href=\"https://www.rfc-editor.org/rfc/rfc3987\">&lt;anyIRI\"&gt;</a>");
       } else if (isPredefinedType(dt)) {
-        // it's a pre-defined types.
+        // it's a MSV pre-defined type.
         builder.append("<!" + dti.getName() + "!>");
       } else {
         serializeDataType(dti);
