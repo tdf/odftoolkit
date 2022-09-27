@@ -51,7 +51,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">Child Relations</td>
-	<td class="right">&lt;manifest:algorithm manifest:algorithm-name="<a href="https://www.w3.org/TR/xmlschema-2/#string">&lt;string&gt;</a>" manifest:initialisation-vector="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">&lt;base64Binary&gt;</a>" &gt;&nbsp;</td>
+	<td class="right">&lt;manifest:algorithm manifest:algorithm-name="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>" manifest:initialisation-vector="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">#base64Binary</a>" &gt;&nbsp;</td>
 </tr>
 </table>
 <br />
@@ -80,7 +80,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">Child Relations</td>
-	<td class="right">&lt;manifest:encryption-data manifest:checksum-type="<a href="https://www.w3.org/TR/xmlschema-2/#string">&lt;string&gt;</a>" manifest:checksum="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">&lt;base64Binary&gt;</a>" &lt;manifest:algorithm  ... &gt;&lt;manifest:key-derivation  ... &gt;&gt;&nbsp;</td>
+	<td class="right">&lt;manifest:encryption-data manifest:checksum-type="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>" manifest:checksum="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">#base64Binary</a>" &lt;manifest:algorithm  ... &gt;&lt;manifest:key-derivation  ... &gt;&gt;&nbsp;</td>
 </tr>
 </table>
 <br />
@@ -109,8 +109,8 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">Child Relations</td>
-	<td class="right">&lt;manifest:file-entry manifest:full-path="<a href="https://www.w3.org/TR/xmlschema-2/#string">&lt;string&gt;</a>"  (manifest:size="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">&lt;nonNegativeInteger&gt;</a>" )?
-	manifest:media-type="<a href="https://www.w3.org/TR/xmlschema-2/#string">&lt;string&gt;</a>"  (&lt;manifest:encryption-data  ... &gt;)?
+	<td class="right">&lt;manifest:file-entry manifest:full-path="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>"  (manifest:size="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">#nonNegativeInteger</a>" )?
+	manifest:media-type="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>"  (&lt;manifest:encryption-data  ... &gt;)?
 	&gt;&nbsp;</td>
 </tr>
 </table>
@@ -139,7 +139,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">Child Relations</td>
-	<td class="right">&lt;manifest:key-derivation manifest:key-derivation-name="<a href="https://www.w3.org/TR/xmlschema-2/#string">&lt;string&gt;</a>" manifest:salt="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">&lt;base64Binary&gt;</a>" manifest:iteration-count="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">&lt;nonNegativeInteger&gt;</a>" &gt;&nbsp;</td>
+	<td class="right">&lt;manifest:key-derivation manifest:key-derivation-name="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>" manifest:salt="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">#base64Binary</a>" manifest:iteration-count="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">#nonNegativeInteger</a>" &gt;&nbsp;</td>
 </tr>
 </table>
 <br />
@@ -189,7 +189,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">RNG Relations</td>
-	<td class="right">manifest:algorithm-name="<a href="https://www.w3.org/TR/xmlschema-2/#string">&lt;string&gt;</a>" &nbsp;</td>
+	<td class="right">manifest:algorithm-name="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -214,7 +214,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">RNG Relations</td>
-	<td class="right">manifest:checksum="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">&lt;base64Binary&gt;</a>" &nbsp;</td>
+	<td class="right">manifest:checksum="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">#base64Binary</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -239,7 +239,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">RNG Relations</td>
-	<td class="right">manifest:checksum-type="<a href="https://www.w3.org/TR/xmlschema-2/#string">&lt;string&gt;</a>" &nbsp;</td>
+	<td class="right">manifest:checksum-type="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -264,7 +264,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">RNG Relations</td>
-	<td class="right">manifest:full-path="<a href="https://www.w3.org/TR/xmlschema-2/#string">&lt;string&gt;</a>" &nbsp;</td>
+	<td class="right">manifest:full-path="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -289,7 +289,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">RNG Relations</td>
-	<td class="right">manifest:initialisation-vector="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">&lt;base64Binary&gt;</a>" &nbsp;</td>
+	<td class="right">manifest:initialisation-vector="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">#base64Binary</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -314,7 +314,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">RNG Relations</td>
-	<td class="right">manifest:iteration-count="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">&lt;nonNegativeInteger&gt;</a>" &nbsp;</td>
+	<td class="right">manifest:iteration-count="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">#nonNegativeInteger</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -339,7 +339,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">RNG Relations</td>
-	<td class="right">manifest:key-derivation-name="<a href="https://www.w3.org/TR/xmlschema-2/#string">&lt;string&gt;</a>" &nbsp;</td>
+	<td class="right">manifest:key-derivation-name="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -364,7 +364,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">RNG Relations</td>
-	<td class="right">manifest:media-type="<a href="https://www.w3.org/TR/xmlschema-2/#string">&lt;string&gt;</a>" &nbsp;</td>
+	<td class="right">manifest:media-type="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -389,7 +389,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">RNG Relations</td>
-	<td class="right">manifest:salt="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">&lt;base64Binary&gt;</a>" &nbsp;</td>
+	<td class="right">manifest:salt="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">#base64Binary</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -414,7 +414,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 </tr>
 <tr>
 	<td class="left">RNG Relations</td>
-	<td class="right">manifest:size="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">&lt;nonNegativeInteger&gt;</a>" &nbsp;</td>
+	<td class="right">manifest:size="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">#nonNegativeInteger</a>" &nbsp;</td>
 </tr>
 </table>
 <br />

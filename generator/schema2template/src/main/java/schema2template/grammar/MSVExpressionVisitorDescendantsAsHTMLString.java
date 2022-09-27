@@ -258,11 +258,11 @@ public class MSVExpressionVisitorDescendantsAsHTMLString extends ExpressionWalke
         builder.append(
             "<a href=\"https://www.w3.org/TR/xmlschema-2/#"
                 + dti.getName()
-                + "\">&lt;"
+                + "\">#"
                 + dti.getName()
-                + "&gt;</a>");
+                + "</a>");
       } else if (exp.name.equals("anyIRI")) {
-        builder.append("<a href=\"https://www.rfc-editor.org/rfc/rfc3987\">&lt;anyIRI\"&gt;</a>");
+        builder.append("<a href=\"https://www.rfc-editor.org/rfc/rfc3987\">#anyIRI</a>");
       } else if (isPredefinedType(dt)) {
         // it's a MSV pre-defined type.
         builder.append("<!" + dti.getName() + "!>");
@@ -294,11 +294,11 @@ public class MSVExpressionVisitorDescendantsAsHTMLString extends ExpressionWalke
         builder.append(
             "<a href=\"https://www.w3.org/TR/xmlschema-2/#"
                 + exp.name
-                + "\">&lt;"
+                + "\">#"
                 + exp.name
-                + "&gt;</a>");
+                + "</a>");
       } else if (exp.name.equals("anyIRI")) {
-        builder.append("<a href=\"https://www.rfc-editor.org/rfc/rfc3987\">&lt;anyIRI&gt;</a>");
+        builder.append("<a href=\"https://www.rfc-editor.org/rfc/rfc3987\">#anyIRI</a>");
       } else {
         exp.exp.visit(this);
       }
@@ -311,11 +311,11 @@ public class MSVExpressionVisitorDescendantsAsHTMLString extends ExpressionWalke
         builder.append(
             "<a href=\"https://www.w3.org/TR/xmlschema-2/#"
                 + exp.name
-                + "\">&lt;"
+                + "\">#"
                 + exp.name
-                + "&gt;</a>");
+                + "</a>");
       } else if (exp.name.equals("anyIRI")) {
-        builder.append("<a href=\"https://www.rfc-editor.org/rfc/rfc3987\">&lt;anyIRI&gt;</a>");
+        builder.append("<a href=\"https://www.rfc-editor.org/rfc/rfc3987\">#anyIRI</a>");
       } else {
         builder.append("&lt;xsd:ref name=\"" + exp.name + "\"/&gt;");
       }
