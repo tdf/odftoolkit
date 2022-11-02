@@ -404,6 +404,7 @@
                                 <exclude>**/target/**</exclude>
                                 <exclude>.travis.yml</exclude>
                                 <exclude>CHANGES.txt</exclude>
+                                <exclude>CODE_OF_CONDUCT.md</exclude>
                                 <exclude>README.md</exclude>
                                 <exclude>DEPENDENCIES</exclude>
                                 <exclude>docs/**/*</exclude>
