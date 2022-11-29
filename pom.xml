@@ -119,7 +119,7 @@
             <dependency>
                 <groupId>org.apache.tinkerpop</groupId>
                 <artifactId>tinkergraph-gremlin</artifactId>
-                <version>3.6.0</version>
+                <version>3.6.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
