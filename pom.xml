@@ -511,9 +511,15 @@
                                 <exclude>nb-configuration.xml</exclude>
                                 <exclude>src/site/**/*</exclude>
                                 <!-- schema2template -->
+                                <exclude>META-INF/MANIFEST.MF</exclude>
+                                <exclude>META-INF/INDEX.LIST</exclude>
+                                <exclude>META-INF/maven/org.odftoolkit/schema2template/pom.properties</exclude>
                                 <exclude>src/test/resources/examples/odf/*.ref</exclude>
                                 <exclude>src/main/resources/examples/odf/odfdom-python/OdfTextDocument.odt</exclude>
-                                <exclude>src/main/resources/examples/odf/odf-schemas/*.rng</exclude>
+                                <exclude>examples/odf/odf-reference/reference-output-files.xml</exclude>
+                                <exclude>examples/odf/odf-schemas/*.rng</exclude>
+                                <exclude>examples/odf/odf-schemas/*.owl</exclude>
+                                <exclude>examples/odf/odf-schemas/*.html</exclude>
                                 <exclude>src/main/resources/examples/odf/graphml/*.graphml</exclude>
                                 <!-- odfdom -->
                                 <exclude>src/main/resources/**</exclude>
