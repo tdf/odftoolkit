@@ -1,0 +1,69 @@
+##################################################################
+##
+## Licensed to the Apache Software Foundation (ASF) under one
+## or more contributor license agreements.  See the NOTICE file
+## distributed with this work for additional information
+## regarding copyright ownership.  The ASF licenses this file
+## to you under the Apache License, Version 2.0 (the
+## "License"); you may not use this file except in compliance
+## with the License.  You may obtain a copy of the License at
+##
+##  http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing,
+## software distributed under the License is distributed on an
+## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+## KIND, either express or implied.  See the License for the
+## specific language governing permissions and limitations
+## under the License.
+##
+##################################################################
+<?xml version="1.0" encoding="UTF-8"?>
+## Context:
+##
+## The Velocity context is added up in the SchemaToTemplate.java
+## xmlModel - Represents an ODF grammar parsed by MSV with all relevant informations and usabiltiy functions
+## xmlModelHistory - sorted list from latest to earliest release to assist in finding new XML node additions (see odf-reference-template.vm)
+## But the Velocity context can also be extended by parameters from the calling main-template.
+##
+<file-creation-list>
+	<file path="org/odftoolkit/odfdom/dom/style/OdfStyleFamily.java" template="java-odfdom-stylefamily.vm" />
+	<file path="org/odftoolkit/odfdom/dom/style/props/OdfStylePropertiesSet.java" template="java-odfdom-styleset.vm" />
+    <file path="org/odftoolkit/odfdom/dom/DefaultElementVisitor.java" template="java-odfdom-element-visitor.vm" />
+### <file path="org/odftoolkit/odfdom/dom/DefaultAttributeVisitor.java" template="java-odfdom-attribute-visitor.vm" />
+##
+#foreach ($element in ${xmlModel.getElements().withoutMultiples()})
+#if ($element != "*")
+#set($className = "${xmlModel.camelCase($element)}Element")
+	<file path="org/odftoolkit/odfdom/dom/element/${xmlModel.extractNamespacePrefix($element)}/${className}.java" contextNode="$element" template="java-odfdom-element-template.vm" />
+#end
+#end
+##
+#foreach ($base in ${codeModel.getBaseClasses()})
+#if (${base.toString().contains(":")})## only create the base class if it has a prefix like an XML node with an existing namespace (should have an ODF prefix)
+#set($className = "${xmlModel.camelCase(${base})}ElementBase")
+#set($elementName = "${codeModel.getBaseChild(${base})}")
+	<file path="org/odftoolkit/odfdom/dom/element/${xmlModel.extractNamespacePrefix(${base})}/${className}.java" contextNode="$elementName" template="java-odfdom-elementbase-template.vm" />
+#end
+#end
+##
+#foreach ($attribute in ${xmlModel.getAttributes().withoutMultiples()})
+#if ($attribute != "*")
+#set($className = "${xmlModel.camelCase($attribute)}Attribute")
+#if(${xmlModel.extractNamespacePrefix($attribute)})
+	<file path="org/odftoolkit/odfdom/dom/attribute/${xmlModel.extractNamespacePrefix($attribute)}/${className}.java" contextNode="$attribute" template="java-odfdom-attribute-template.vm" />
+#else
+	<file path="org/odftoolkit/odfdom/dom/attribute/${className}.java" contextNode="$attribute" template="java-odfdom-attribute-template.vm" />
+#end
+#end
+#end
+##
+#foreach ($styleElement in ${xmlModel.getElements().withoutMultiples()})
+#if (${styleElement.getNamespacePrefix()} == "style" && ${styleElement.getLocalName().endsWith("properties")})
+#set ($properties=${styleElement.withMultiples().getAttributes()})
+#if (${properties.size()}>0)
+	<file path="org/odftoolkit/odfdom/dom/style/props/Odf${xmlModel.camelCase(${styleElement.getLocalName()})}.java" contextNode="$styleElement" template="java-odfdom-styleproperties.vm" />
+#end
+#end
+#end
+</file-creation-list>

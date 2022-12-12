@@ -324,7 +324,7 @@ public class AnimSeqElement extends OdfElement {
   public Boolean getSmilAutoReverseAttribute() {
     SmilAutoReverseAttribute attr =
         (SmilAutoReverseAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "autoReverse");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(SmilAutoReverseAttribute.DEFAULT_VALUE);
@@ -679,7 +679,8 @@ public class AnimSeqElement extends OdfElement {
    * Create child element {@odf.element anim:animate}.
    *
    * @param smilAttributeNameValue the <code>String</code> value of <code>SmilAttributeNameAttribute
-   *     </code>, see {@odf.attribute smil:attributeName} at specification
+   *     </code>, see {@odf.attribute smil:attributeName} at specification Child element was added
+   *     in ODF 1.1
    * @return the element {@odf.element anim:animate}
    */
   public AnimAnimateElement newAnimAnimateElement(String smilAttributeNameValue) {
@@ -694,7 +695,8 @@ public class AnimSeqElement extends OdfElement {
    * Create child element {@odf.element anim:animateColor}.
    *
    * @param smilAttributeNameValue the <code>String</code> value of <code>SmilAttributeNameAttribute
-   *     </code>, see {@odf.attribute smil:attributeName} at specification
+   *     </code>, see {@odf.attribute smil:attributeName} at specification Child element was added
+   *     in ODF 1.1
    * @return the element {@odf.element anim:animateColor}
    */
   public AnimAnimateColorElement newAnimAnimateColorElement(String smilAttributeNameValue) {
@@ -709,7 +711,8 @@ public class AnimSeqElement extends OdfElement {
    * Create child element {@odf.element anim:animateMotion}.
    *
    * @param smilAttributeNameValue the <code>String</code> value of <code>SmilAttributeNameAttribute
-   *     </code>, see {@odf.attribute smil:attributeName} at specification
+   *     </code>, see {@odf.attribute smil:attributeName} at specification Child element was added
+   *     in ODF 1.1
    * @return the element {@odf.element anim:animateMotion}
    */
   public AnimAnimateMotionElement newAnimAnimateMotionElement(String smilAttributeNameValue) {
@@ -726,7 +729,7 @@ public class AnimSeqElement extends OdfElement {
    * @param smilAttributeNameValue the <code>String</code> value of <code>SmilAttributeNameAttribute
    *     </code>, see {@odf.attribute smil:attributeName} at specification
    * @param svgTypeValue the <code>String</code> value of <code>SvgTypeAttribute</code>, see
-   *     {@odf.attribute svg:type} at specification
+   *     {@odf.attribute svg:type} at specification Child element was added in ODF 1.1
    * @return the element {@odf.element anim:animateTransform}
    */
   public AnimAnimateTransformElement newAnimAnimateTransformElement(
@@ -742,6 +745,8 @@ public class AnimSeqElement extends OdfElement {
   /**
    * Create child element {@odf.element anim:audio}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element anim:audio}
    */
   public AnimAudioElement newAnimAudioElement() {
@@ -755,7 +760,7 @@ public class AnimSeqElement extends OdfElement {
    * Create child element {@odf.element anim:command}.
    *
    * @param animCommandValue the <code>String</code> value of <code>AnimCommandAttribute</code>, see
-   *     {@odf.attribute anim:command} at specification
+   *     {@odf.attribute anim:command} at specification Child element was added in ODF 1.1
    * @return the element {@odf.element anim:command}
    */
   public AnimCommandElement newAnimCommandElement(String animCommandValue) {
@@ -769,6 +774,8 @@ public class AnimSeqElement extends OdfElement {
   /**
    * Create child element {@odf.element anim:iterate}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element anim:iterate}
    */
   public AnimIterateElement newAnimIterateElement() {
@@ -781,6 +788,8 @@ public class AnimSeqElement extends OdfElement {
   /**
    * Create child element {@odf.element anim:par}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element anim:par}
    */
   public AnimParElement newAnimParElement() {
@@ -791,6 +800,8 @@ public class AnimSeqElement extends OdfElement {
 
   /**
    * Create child element {@odf.element anim:seq}.
+   *
+   * <p>Child element was added in ODF 1.1
    *
    * @return the element {@odf.element anim:seq}
    */
@@ -804,7 +815,8 @@ public class AnimSeqElement extends OdfElement {
    * Create child element {@odf.element anim:set}.
    *
    * @param smilAttributeNameValue the <code>String</code> value of <code>SmilAttributeNameAttribute
-   *     </code>, see {@odf.attribute smil:attributeName} at specification
+   *     </code>, see {@odf.attribute smil:attributeName} at specification Child element was added
+   *     in ODF 1.1
    * @return the element {@odf.element anim:set}
    */
   public AnimSetElement newAnimSetElement(String smilAttributeNameValue) {
@@ -818,7 +830,7 @@ public class AnimSeqElement extends OdfElement {
    * Create child element {@odf.element anim:transitionFilter}.
    *
    * @param smilTypeValue the <code>String</code> value of <code>SmilTypeAttribute</code>, see
-   *     {@odf.attribute smil:type} at specification
+   *     {@odf.attribute smil:type} at specification Child element was added in ODF 1.1
    * @return the element {@odf.element anim:transitionFilter}
    */
   public AnimTransitionFilterElement newAnimTransitionFilterElement(String smilTypeValue) {
@@ -829,6 +841,12 @@ public class AnimSeqElement extends OdfElement {
     return animTransitionFilter;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -42,8 +42,9 @@ public class TableDataTypeAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME =
       OdfName.newName(OdfDocumentNamespace.TABLE, "data-type");
-  public static final String DEFAULT_VALUE_TEXT = Value.TEXT.toString();
+
   public static final String DEFAULT_VALUE_AUTOMATIC = Value.AUTOMATIC.toString();
+  public static final String DEFAULT_VALUE_TEXT = Value.TEXT.toString();
 
   /**
    * Create the instance of OpenDocument attribute {@odf.attribute table:data-type}.

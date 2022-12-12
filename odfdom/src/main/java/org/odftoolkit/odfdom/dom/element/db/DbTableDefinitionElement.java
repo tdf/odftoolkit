@@ -178,7 +178,7 @@ public class DbTableDefinitionElement extends OdfElement {
   /**
    * Create child element {@odf.element db:column-definitions}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * <p>Child element is mandatory.
    *
@@ -194,7 +194,7 @@ public class DbTableDefinitionElement extends OdfElement {
   /**
    * Create child element {@odf.element db:indices}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:indices}
    */
@@ -208,7 +208,7 @@ public class DbTableDefinitionElement extends OdfElement {
   /**
    * Create child element {@odf.element db:keys}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:keys}
    */
@@ -218,6 +218,12 @@ public class DbTableDefinitionElement extends OdfElement {
     return dbKeys;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

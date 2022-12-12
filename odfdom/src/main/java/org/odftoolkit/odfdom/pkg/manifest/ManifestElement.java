@@ -69,8 +69,7 @@ public class ManifestElement extends OdfElement {
    *     and no default value defined.
    */
   public String getVersionAttribute() {
-    VersionAttribute attr =
-        (VersionAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "version");
+    VersionAttribute attr = (VersionAttribute) getOdfAttribute(VersionAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -95,16 +94,15 @@ public class ManifestElement extends OdfElement {
    * @param fullPathValue the <code>String</code> value of <code>FullPathAttribute</code>, see
    *     {@odf.attribute manifest:full-path} at specification
    * @param mediaTypeValue the <code>String</code> value of <code>MediaTypeAttribute</code>, see
-   *     {@odf.attribute manifest:media-type} at specification Child element is new in Odf 1.2
-   *     <p>Child element is mandatory.
+   *     {@odf.attribute manifest:media-type} at specification Child element is mandatory.
    * @return the element {@odf.element manifest:file-entry}
    */
   public FileEntryElement newFileEntryElement(String fullPathValue, String mediaTypeValue) {
-    FileEntryElement manifestFileEntry =
+    FileEntryElement fileEntry =
         ((OdfFileDom) this.ownerDocument).newOdfElement(FileEntryElement.class);
-    manifestFileEntry.setFullPathAttribute(fullPathValue);
-    manifestFileEntry.setMediaTypeAttribute(mediaTypeValue);
-    this.appendChild(manifestFileEntry);
-    return manifestFileEntry;
+    fileEntry.setFullPathAttribute(fullPathValue);
+    fileEntry.setMediaTypeAttribute(mediaTypeValue);
+    this.appendChild(fileEntry);
+    return fileEntry;
   }
 }

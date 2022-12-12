@@ -224,7 +224,7 @@ public class TableDataPilotFieldElement extends OdfElement {
   public Integer getTableUsedHierarchyAttribute() {
     TableUsedHierarchyAttribute attr =
         (TableUsedHierarchyAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "used-hierarchy");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(TableUsedHierarchyAttribute.DEFAULT_VALUE);
@@ -300,6 +300,12 @@ public class TableDataPilotFieldElement extends OdfElement {
     return tableDataPilotLevel;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

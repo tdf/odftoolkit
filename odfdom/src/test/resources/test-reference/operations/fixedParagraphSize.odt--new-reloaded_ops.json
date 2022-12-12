@@ -233,10 +233,9 @@
 {"name":"addParagraph","start":[10,3,3,1],"attrs":{"styleId":"Text_20_body","paragraph":{"indentFirstLine":0,"indentLeft":0,"indentRight":0,"marginLeft":0,"marginRight":0}}},
 {"name":"addCells","start":[10,3,4],"attrs":{"cell":{"alignVert":"top","borderBottom":{"color":{"type":"rgb","value":"000000"},"space":0,"style":"single","width":18},"borderLeft":{"space":191,"style":"none"},"borderRight":{"space":191,"style":"none"},"borderTop":{"color":{"type":"rgb","value":"000000"},"space":0,"style":"single","width":18},"paddingBottom":0,"paddingLeft":191,"paddingRight":191,"paddingTop":0}}},
 {"name":"addParagraph","start":[10,3,4,1],"attrs":{"styleId":"Text_20_body","paragraph":{"indentFirstLine":0,"indentLeft":0,"indentRight":0,"marginLeft":0,"marginRight":0}}},
-{"name":"addText","start":[10,3,4,1,1],"text":"\u2002\u2002"},
-{"name":"addText","start":[10,3,4,1,3],"text":"\u2002\u2002"},
+{"name":"addText","start":[10,3,4,1,1],"text":"\u2002\u2002\u2002\u2002"},
 {"name":"addText","start":[10,3,4,1,5],"text":"\u2002"},
-{"name":"format","start":[10,3,4,1,1],"end":[10,3,4,1,2],"attrs":{"character":{"fontNameAsian":"Arial","language":"en-US"}}},
-{"name":"format","start":[10,3,4,1,3],"end":[10,3,4,1,4],"attrs":{"character":{"fontNameAsian":"Arial"}}},
+{"name":"format","start":[10,3,4,1,1],"end":[10,3,4,1,4],"attrs":{"character":{"fontNameAsian":"Arial","language":"en-US"}}},
+{"name":"format","start":[10,3,4,1,5],"end":[10,3,4,1,5],"attrs":{"character":{"language":"en-US"}}},
 {"name":"addParagraph","start":[11],"attrs":{"styleId":"Text_20_body","character":{"fontNameComplex":"Arial"}}}
 ]}

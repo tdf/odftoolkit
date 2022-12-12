@@ -545,7 +545,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
   public Integer getDrawZIndexAttribute() {
     DrawZIndexAttribute attr =
         (DrawZIndexAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "z-index");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -829,7 +829,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
     TableTableBackgroundAttribute attr =
         (TableTableBackgroundAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "table-background");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -859,7 +859,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
     TextAnchorPageNumberAttribute attr =
         (TextAnchorPageNumberAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "anchor-page-number");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -1031,7 +1031,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
    * @param svgXValue the <code>String</code> value of <code>SvgXAttribute</code>, see
    *     {@odf.attribute svg:x} at specification
    * @param svgYValue the <code>String</code> value of <code>SvgYAttribute</code>, see
-   *     {@odf.attribute svg:y} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute svg:y} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element draw:glue-point}
    */
   public DrawGluePointElement newDrawGluePointElement(
@@ -1049,6 +1049,8 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
   /**
    * Create child element {@odf.element svg:desc}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element svg:desc}
    */
   public SvgDescElement newSvgDescElement() {
@@ -1060,6 +1062,8 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
   /**
    * Create child element {@odf.element svg:title}.
    *
+   * <p>Child element was added in ODF 1.1
+   *
    * @return the element {@odf.element svg:title}
    */
   public SvgTitleElement newSvgTitleElement() {
@@ -1069,6 +1073,12 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
     return svgTitle;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

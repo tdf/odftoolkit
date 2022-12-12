@@ -1,0 +1,607 @@
+##################################################################
+##
+## Licensed to the Apache Software Foundation (ASF) under one
+## or more contributor license agreements.  See the NOTICE file
+## distributed with this work for additional information
+## regarding copyright ownership.  The ASF licenses this file
+## to you under the Apache License, Version 2.0 (the
+## "License"); you may not use this file except in compliance
+## with the License.  You may obtain a copy of the License at
+##
+##  http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing,
+## software distributed under the License is distributed on an
+## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+## KIND, either express or implied.  See the License for the
+## specific language governing permissions and limitations
+## under the License.
+##
+##################################################################
+## Template to create the Java class representing an ODF element
+##
+## Context:
+##
+## The Velocity context is added up in the SchemaToTemplate.java
+## xmlModel - Represents an ODF grammar parsed by MSV with all relevant informations and usabiltiy functions
+## xmlModelHistory - sorted list from latest to earliest release to assist in finding new XML node additions (see odf-reference-template.vm)
+## But the Velocity context can also be extended by parameters from the calling main-template.
+#set ($element = ${xmlModel.getElement($contextNode)})
+#set ($namespacePrefix = ${element.getNamespacePrefix()})
+#set ($className = "${xmlModel.camelCase($element)}Element")
+##
+## Set child element and child attributes
+#set ($childElements = ${element.getChildElements().withoutMultiples()})
+#set ($attributes = ${element.getAttributes().withoutMultiples()})
+##
+## BASE CLASS PROVIDED (START)
+##...or configured base class overwriting the previous base settings
+#set ($base = ${codeModel.getBaseClassOf($element)})
+#if (${base})
+## Configured automatic generated base class. If so, remove all attributes and elemend shared/defined in base class
+#set ($superClassName = "${xmlModel.camelCase($base)}ElementBase")
+#set ($superClassPackageName = "org.odftoolkit.odfdom.dom.element.${base.getNamespacePrefix()}")
+#set ($remainingAttributes = $attributes.without(${base.getBaseAttributes()}))## remove the base attributes from this class
+#set ($childElements = $childElements.without(${base.getBaseElements()}))## remove the base elements from this class
+#else
+#set ($remainingAttributes = $attributes )
+#end
+## BASE CLASS PROVIDED (END)
+##
+## implicit base style is only set if there is not explicit "base" nor "extends" being set in the grammar-additions.xml
+## STYLE SETTING (START)
+## ToDo: Move the following complexity "BASE CLASS STYLABLE" into SourceCodeModel.getBaseClass()
+## 1) Every stylable element inherits from "OdfStylableElement"
+## 2) Unless the stylable element is from @style:family="draw:graphc" or "presentation:presenation" than inherits from "OdfStyleableShapeElement"
+## 3) Otherwise ever ODF element inherits from "OdfElement"
+#if ($odfModel.isStylable($element))
+## 1) Every stylable element inherits from "OdfStylableElement"
+#set ($stylable = true)
+#if (!$base && !${codeModel.hasSuperClass($contextNode)})
+#set ($superClassName = "OdfStylableElement")
+#set ($superClassPackageName = "org.odftoolkit.odfdom.dom.element")
+#end
+## The following draw:graphic and presentation:presentation share the same elements, but were used in different applications
+## 2) Unless the stylable element is from @style:family="draw:graphc" or "presentation:presenation" than inherits from "OdfStyleableShapeElement"
+#set ($useOdfStyleableShapeElement = false)
+#set ($elementStyleFamily=${odfModel.getStyleFamilies($element)})
+#foreach($familyName in $elementStyleFamily)
+#if (${familyName}=="draw:graphic" || ${familyName}=="presentation:presentation")
+## 3) Otherwise ever ODF element inherits from "OdfElement"
+#set ($useOdfStyleableShapeElement = true)
+#if (!$base && !${codeModel.hasSuperClass($contextNode)})
+#set ($superClassName = "OdfStyleableShapeElement")
+#set ($superClassPackageName = "org.odftoolkit.odfdom.dom.element")
+#end
+#break
+#end
+#end
+#set ($firstfamily = ${xmlModel.camelCase($xmlModel.extractLocalName($odfModel.getStyleFamilies($element).get(0)))})
+#else
+#set ($stylable = false)
+#if (!$base && !${codeModel.hasSuperClass($contextNode)})
+#set ($superClassName = "OdfElement")
+#set ($superClassPackageName = "org.odftoolkit.odfdom.pkg")
+#end
+#end
+## STYLE SETTING (END)
+##
+##
+## Test if this element has mandatory (non optional) attributes
+#set ($hasMandatoryAttr = false)
+#foreach ($attribute in $remainingAttributes)
+#if (${element.isMandatory($attribute)})
+#set ($hasMandatoryAttr = true)
+#set ($mandatoryAttr = $attribute)
+#end
+#end
+##
+## Begin Code
+#include('copyright.txt')
+/*
+ * This file is automatically generated.
+ * Don't edit manually.
+ */
+package org.odftoolkit.odfdom.dom.element.${namespacePrefix};
+
+##
+## ---------------------------------------------------
+##  Imports
+## ---------------------------------------------------
+##
+#if ($stylable)
+import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.dom.element.OdfStyleableShapeElement;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
+#if ($odfModel.getRepetionAttribute($element))
+#if ($remainingAttributes.containsName(${odfModel.getRepetionAttribute($element).getQName()}))
+import org.odftoolkit.odfdom.pkg.OdfElement;
+#end
+#end
+#else
+import org.odftoolkit.odfdom.pkg.OdfElement;
+#end
+#if (${codeModel.getSuperClass($contextNode)} == "org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase")
+import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
+#end
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
+import org.odftoolkit.odfdom.pkg.ElementVisitor;
+import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.pkg.OdfName;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+#if (${odfModel.getStyleFamilies($element).contains("text:paragraph")} && $element.canHaveText())
+import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
+import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
+import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
+import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
+import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+#end
+#if ($odfModel.getRepetionAttribute($element))
+#if ($remainingAttributes.containsName(${odfModel.getRepetionAttribute($element).getQName()}))
+import org.w3c.dom.Node;
+#end
+#end
+### ELEMENT IMPORTS (start)
+#if (${childElements.containsName("*")})
+#set ($anyelement = true)
+#else
+#set ($anyelement = false)## if not explicitly set to false, later condition will be postive :/
+#end
+#foreach ($childElement in $childElements)
+#if (${childElement} != "*")
+#set ($childNamespacePrefix = ${childElement.getNamespacePrefix()})
+#set ($childClassName = "${xmlModel.camelCase($childElement)}Element")
+#if ($childNamespacePrefix)## if with prefix
+#if ($childNamespacePrefix != $namespacePrefix)
+import org.odftoolkit.odfdom.dom.element.${childNamespacePrefix}.$childClassName;
+#end
+#else
+import org.odftoolkit.odfdom.dom.element.$childClassName;
+#end
+#end
+#end### ELEMENT IMPORTS (end)
+### ATTRIBUTE IMPORTS (start)
+#if (${remainingAttributes.containsName("*")})
+#set ($anyattribute = true)
+#else
+#set ($anyattribute = false)## if not explicitly set to false, later condition will be postive :/
+#end
+#foreach ($childAttribute in $remainingAttributes)
+#if (${childAttribute.getLocalName()} != "*")
+#set ($childNamespacePrefix = ${childAttribute.getNamespacePrefix()})
+#set ($childClassName = "${xmlModel.camelCase($childAttribute)}Attribute")
+#if ($childNamespacePrefix)## if with prefix
+## all remainingAttributes are being written as in a different package than elements
+import org.odftoolkit.odfdom.dom.attribute.${childNamespacePrefix}.$childClassName;
+#else
+import org.odftoolkit.odfdom.dom.attribute.$childClassName;
+#end
+#end
+#end### ATTRIBUTE IMPORTS (END)
+## evaluating super class for class "extends"
+#if ($base)
+## but base base class
+#if ($superClassName && $superClassName != "OdfElement" && $superClassName != "OdfStylableElement" && $superClassName != "OdfStyleableShapeElement")
+#if($superClassPackageName != "org.odftoolkit.odfdom.dom.element.${namespacePrefix}")
+import ${superClassPackageName}.${superClassName};
+#end
+#end
+#else## if base class not being set
+## finding superclass
+#if (${codeModel.hasSuperClass($contextNode)})
+#set ($superClassPackageName = ${codeModel.getSuperClassPackageName($contextNode)})
+#set ($superClassName = ${codeModel.getSuperClassName($contextNode)})
+#if($superClassPackageName != "org.odftoolkit.odfdom.dom.element.${namespacePrefix}")
+import ${superClassPackageName}.${superClassName};
+#else
+#end
+#end
+#end
+
+## Work around where once none-generated number style functionality, e.g. OdfCurrencyStyle.java is inheriting from generated class (instead the other way around). Keeping it due to many API changes otherwise.
+#set ($abstract="")
+#if ($contextNode == "number:boolean-style" || $contextNode == "number:currency-style" || $contextNode == "number:date-style" || $contextNode == "number:number-style" || $contextNode == "number:percentage-style" || $contextNode == "number:text-style" || $contextNode == "number:time-style")
+#set ($abstract="abstract ")
+#end
+##
+## ---------------------------------------------------
+##  Class
+## ---------------------------------------------------
+##
+/**
+ * DOM implementation of OpenDocument element  {@odf.element ${contextNode}}.
+ *
+#if ($anyelement)
+ * This class can have any org.w3c.dom.Element child element.
+#end
+#if ($anyattribute)
+ * This class can have any org.w3c.dom.Attribute attribute.
+#end
+ */
+public ${abstract}class $className extends $superClassName {
+
+	public static final OdfName ELEMENT_NAME = OdfName.newName(OdfDocumentNamespace.${namespacePrefix.toUpperCase()}, "${element.getLocalName()}");
+
+	/**
+	 * Create the instance of <code>$className</code>
+	 *
+	 * @param  ownerDoc     The type is <code>OdfFileDom</code>
+	 */
+	public ${className}(OdfFileDom ownerDoc) {
+#if ($stylable && ($useOdfStyleableShapeElement == false))
+		super(ownerDoc, ELEMENT_NAME, OdfStyleFamily.${firstfamily}, OdfName.newName(OdfDocumentNamespace.${namespacePrefix.toUpperCase()}, "style-name"));
+#else## OdfStyleableShapeElement will provide the style:family
+		super(ownerDoc, ELEMENT_NAME);
+#end
+	}
+
+	/**
+	 * Get the element name
+	 *
+	 * @return  return   <code>OdfName</code> the name of element {@odf.element ${contextNode}}.
+	 */
+	public OdfName getOdfName() {
+		return ELEMENT_NAME;
+	}
+## ---------------------------------------------------
+##  Only for base = styleproperties
+## ---------------------------------------------------
+#if (${codeModel.getSuperClass($contextNode)} == "org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase")
+#foreach ($attribute in $remainingAttributes)
+#if ($attribute != "*")
+#set($propertyName = ${attribute.getLocalName()})
+#if (${element.getLocalName()}=="graphic-properties" && $propertyName =="shadow")
+#set($propertyName = ${attribute.getQName()})
+#end
+
+	public final static OdfStyleProperty ${xmlModel.camelCase($propertyName)} =
+		OdfStyleProperty.get(OdfStylePropertiesSet.${xmlModel.camelCase($element.getLocalName())}, OdfName.newName(OdfDocumentNamespace.${xmlModel.firstWord($attribute).toUpperCase()}, "${attribute.getLocalName()}"));
+#end
+#end
+#end
+##
+## ---------------------------------------------------
+##  Add init method if this element or the base
+##  element has mandatory attributes
+##  TODO: NO caller use this method.
+## ---------------------------------------------------
+##
+## ---------------------------------------------------
+##  Attribute getters and setters
+## ---------------------------------------------------
+##
+#foreach ($attr in $remainingAttributes)
+#set($attri = ${xmlModel.getAttribute($attr.getQName())})
+#set ($valueObject = "String")
+#set ($simpleValue = "")
+#set ($dataTypes = ${attri.getDatatypes().withoutMultiples()})
+#set ($valueTypes = ${codeModel.getValuetypes($dataTypes)})
+#foreach ($valueType in $valueTypes)
+#set ($valueObject = $valueType)
+#end
+## use attri get all of the values.
+#set($values = ${attri.getValues().withoutMultiples()})
+#if ($values.size() ==2 && $dataTypes.size()==0)
+#set ($trueFlag = false)
+#set ($falseFlag = false)
+#foreach ($value in $values)
+#if ($value==true)
+#set ($trueFlag = true)
+#end
+#if ($value==false)
+#set ($falseFlag = true)
+#end
+#end
+#if ($trueFlag and $falseFlag)
+#set ($hasdatatype = true)
+#set ($valueObject = "Boolean")
+#end
+#end
+#if ($valueObject != "String" && $valueObject != "Double" && $valueObject != "Integer" && $valueObject != "Boolean")
+#set ($valueObject = "String")
+#end
+#if ($valueObject != "String")
+#set ($simpleValue = ${codeModel.getPrimitiveType($valueObject)})
+#end
+#if ($attr != "*")
+#set ($attribute = ${attr.withMultiples()})
+#set ($aNamespacePrefix = ${attribute.getNamespacePrefix()})
+#set ($aClassName = "${xmlModel.camelCase($attribute)}Attribute")
+#set ($aParam = "${xmlModel.javaCase($attribute)}Value")
+
+	/**
+	 * Receives the value of the ODFDOM attribute representation <code>$aClassName</code> , See {@odf.attribute ${attribute.getQName()}}
+	 *
+#if (${element.isMandatory($attribute)})
+	 * Attribute is mandatory.
+	 *
+#end
+	 * @return - the <code>$valueObject</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 */
+	public $valueObject get${aClassName}() {
+#if ($aNamespacePrefix)
+		$aClassName attr = ($aClassName) getOdfAttribute(OdfDocumentNamespace.${aNamespacePrefix.toUpperCase()}, "${attribute.getLocalName()}");
+#else
+		$aClassName attr = ($aClassName) getOdfAttribute("${attribute.getLocalName()}");
+#end
+#if ($simpleValue != "")##because an empty string has a semantic and will not throw a format exception
+		if (attr != null && !attr.getValue().isEmpty()) {
+#else
+		if (attr != null) {
+#end
+#if ($simpleValue!="")
+			return ${valueObject}.valueOf(attr.${simpleValue}Value());
+#else
+			return ${valueObject}.valueOf(attr.getValue());
+#end
+		}
+#if ($odfModel.getDefaultAttributeValue($attribute, $element))
+#set ($defaultValue = ${xmlModel.escapeLiteral($odfModel.getDefaultAttributeValue($attribute, $element))})
+#set ($defaultValueSet = $odfModel.getDefaultAttributeValues($attribute))
+#if ($defaultValueSet.size()>1)
+#set ($constant = $xmlModel.constantCase($defaultValue))
+#if ($valueObject == "String")
+		return ${aClassName}.DEFAULT_VALUE_${xmlModel.escapeKeyword($constant)};
+#else
+		return ${valueObject}.valueOf(${aClassName}.DEFAULT_VALUE_${xmlModel.escapeKeyword($constant)});
+#end
+#else
+#if ($valueObject == "String")
+		return ${aClassName}.DEFAULT_VALUE;
+#else
+		return ${valueObject}.valueOf(${aClassName}.DEFAULT_VALUE);
+#end
+#end
+#else
+		return null;
+#end
+	}
+
+	/**
+	 * Sets the value of ODFDOM attribute representation <code>$aClassName</code> , See {@odf.attribute ${attribute.getQName()}}
+	 *
+	 * @param $aParam   The type is <code>$valueObject</code>
+	 */
+	public void set${aClassName}($valueObject $aParam) {
+		$aClassName attr = new ${aClassName}((OdfFileDom) this.ownerDocument);
+		setOdfAttribute(attr);
+#if ($valueObject == "String")
+		attr.setValue($aParam);
+#else
+		attr.set${xmlModel.camelCase($simpleValue)}Value(${aParam}.${simpleValue}Value());
+#end
+	}
+#end
+#end
+##
+## ---------------------------------------------------
+##  Methods for child element creation
+## ---------------------------------------------------
+##
+#foreach($ch in $childElements)
+#if ($ch != "*")
+#set ($child = ${ch.withMultiples()})
+#set ($cClassName = "${xmlModel.camelCase($child)}Element")
+#set ($cVar = ${xmlModel.javaCase($child)})
+#set ($ch_attributes = ${child.getAttributes().withoutMultiples()})
+##set has parameter flag
+#set ($hasParams = false)
+#foreach ($ch_attribute in $ch_attributes)
+#if (${child.isMandatory($ch_attribute)})
+#set ($hasParams = true)
+#end
+#end
+#if ($hasParams)
+
+	/**
+	 * Create child element {@odf.element ${child}}.
+	 *
+#set ($seperateFlag="")
+#set ($params="")
+#foreach ($ch_attr in $ch_attributes)
+#if (${child.isMandatory($ch_attr)})
+#set($ch_attri = ${xmlModel.getAttribute($ch_attr.getQName())})
+#set ($ch_ValueObject = "String")
+#set ($ch_SimpleValue = "")
+#set ($ch_DataTypes = ${ch_attri.getDatatypes().withoutMultiples()})
+#set ($ch_ValueTypes = ${codeModel.getValuetypes($ch_DataTypes)})
+#foreach ($ch_ValueType in $ch_ValueTypes)
+#set ($ch_ValueObject = $ch_ValueType)
+#end
+## use ch_attri get all of the values.
+#set($ch_Values = ${ch_attri.getValues().withoutMultiples()})
+#if ($ch_Values.size() ==2 && $ch_DataTypes.size()==0)
+#set ($trueFlag = false)
+#set ($falseFlag = false)
+#foreach ($ch_Value in $ch_Values)
+#if ($ch_Value==true)
+#set ($trueFlag = true)
+#end
+#if ($ch_Value==false)
+#set ($falseFlag = true)
+#end
+#end
+#if ($trueFlag and $falseFlag)
+#set ($ch_Hasdatatype = true)
+#set ($ch_ValueObject = "Boolean")
+#end
+#end
+#if ($ch_ValueObject != "String" && $ch_ValueObject != "Double" && $ch_ValueObject != "Integer" && $ch_ValueObject != "Boolean")
+#set ($ch_ValueObject = "String")
+#end
+#if ($ch_ValueObject != "String")
+#set ($ch_SimpleValue = ${codeModel.getPrimitiveType($ch_ValueObject)})
+#end
+#if ($ch_attr != "*")
+#set ($attribute = ${ch_attr.withMultiples()})
+#set ($aNamespacePrefix = ${attribute.getNamespacePrefix()})
+#set ($aClassName = "${xmlModel.camelCase($attribute)}Attribute")
+#set ($aParam = "${xmlModel.javaCase($attribute)}Value")
+	 * @param $aParam  the <code>$ch_ValueObject</code> value of <code>$aClassName</code>, see {@odf.attribute  ${attribute.getQName()}} at specification
+#if ($ch_SimpleValue!="")
+#set ($params="${params}${seperateFlag}${ch_SimpleValue} ${aParam}")
+#else
+#set ($params="${params}${seperateFlag}${ch_ValueObject} ${aParam}")
+#end
+#set ($seperateFlag=", ")
+#end
+#end
+#end
+### VERSION:ODF-ELEMENT - START
+## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
+## but we can compare by name
+#if ($xmlModelHistory)
+## First possible version the node was added is the current version
+#set ($newestVersion = ${xmlModel.getGrammarVersion()})
+#foreach( $oldModel in $xmlModelHistory )
+#set ($oldElement = ${oldModel.getElement($contextNode)})
+#if (!$oldElement || !${oldElement.getChildElements().containsName($child)})
+	 * Child element was added in ODF ${newestVersion}
+	 *
+#break
+#end
+## Remember this old version as the version the node might be added
+#set ($newestVersion = ${oldModel.getGrammarVersion()})
+#end
+#end
+### VERSION:ODF-ELEMENT - END
+#if (${element.isMandatory($child)})
+	 * Child element is mandatory.
+	 *
+#end
+	 * @return the element {@odf.element ${child}}
+	 */
+	 public $cClassName new${cClassName}($params) {
+		$cClassName $cVar = ((OdfFileDom) this.ownerDocument).newOdfElement(${cClassName}.class);
+#foreach ($ch_attr in $ch_attributes)
+#if ($ch_attr != "*" && ${child.isMandatory($ch_attr)})
+#set ($aClassName = "${xmlModel.camelCase($ch_attr)}Attribute")
+#set ($aParam = "${xmlModel.javaCase($ch_attr)}Value")
+		${cVar}.set${aClassName}(${aParam});
+#end
+#end
+		this.appendChild($cVar);
+		return $cVar;
+	}
+#else
+
+	/**
+	 * Create child element {@odf.element ${child}}.
+	 *
+### VERSION:ODF-ELEMENT - START
+## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
+## but we can compare by name
+#if ( $xmlModelHistory)
+## First possible version the node was added is the current version
+#set ($newestVersion = ${xmlModel.getGrammarVersion()})
+#foreach( $oldModel in $xmlModelHistory )
+#set ($oldElement = ${oldModel.getElement($contextNode)})
+#if (!$oldElement || !${oldElement.getChildElements().containsName($child)})
+	 * Child element was added in ODF ${newestVersion}
+	 *
+#break
+#end
+## Remember this old version as the version the node might be added
+#set ($newestVersion = ${oldModel.getGrammarVersion()})
+#end
+#end
+### VERSION:ODF-ELEMENT - END
+#if (${element.isMandatory($child)})
+	 * Child element is mandatory.
+	 *
+#end
+	 * @return the element {@odf.element ${child}}
+	 */
+	public $cClassName new${cClassName}() {
+		$cClassName $cVar = ((OdfFileDom) this.ownerDocument).newOdfElement(${cClassName}.class);
+		this.appendChild($cVar);
+		return $cVar;
+	}
+#end
+#end
+#end
+
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
+	@Override
+	public void accept(ElementVisitor visitor) {
+		if (visitor instanceof DefaultElementVisitor) {
+			DefaultElementVisitor defaultVisitor = (DefaultElementVisitor) visitor;
+			defaultVisitor.visit(this);
+		} else {
+			visitor.visit(this);
+		}
+	}
+##
+## -----------------------------------------------------
+##  New: newTextNode
+## -----------------------------------------------------
+##
+#if ($element.canHaveText())
+
+	/**
+	 * Add text content. Only elements which are allowed to have text content offer this method.
+	 */
+	 public void newTextNode(String content) {
+		if (content != null && !content.equals("")) {
+			this.appendChild(this.getOwnerDocument().createTextNode(content));
+		}
+	 }
+#if ($attributes.containsName("xhtml:content"))## in this case there might be RDF in-content metadata
+
+	/**
+	* Replaces all content with given text content. Only elements which are allowed to have text content offer this method.
+	*
+	* @param new text content to replace the existing children (or removes all if null)
+	*/
+	@Override
+	public void setTextContent(String content) {
+		super.setTextContent(content);
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
+	}
+#end
+#end
+#if ($attributes.containsName("xhtml:content"))## in this case there might be RDF in-content metadata
+
+	@Override
+	protected void onRemoveNode() {
+		super.onRemoveNode();
+		((OdfFileDom) this.ownerDocument).getInContentMetadataCache().remove(this);
+	}
+
+	@Override
+	protected void onInsertNode() {
+		super.onInsertNode();
+		((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
+	}
+#end
+## adding functionality for the root of XML puzzles being a semantic user entity (e.g. table, image)
+#if ($odfModel.isRootOfComponent($element))
+#add_isComponentRoot_method()
+#end
+## adding functionality for repeated elements (e.g. row, column, cell and spaces)
+#if ($odfModel.getRepetionAttribute($element))
+#if ($remainingAttributes.containsName(${odfModel.getRepetionAttribute($element).getQName()}))
+#add_repeated_methods($className $odfModel.getRepetionAttribute($element))
+#end
+#end
+## adding DOM change-event listening for ODF nodes with RDF metadata
+#if ($remainingAttributes.containsName("office:value"))
+#add_removeContent_method()
+#end
+## adding special split handling to remove potential page breaks from the cloned paragraph
+#if (${odfModel.getStyleFamilies($element).contains("text:paragraph")} && $element.canHaveText())
+#add_paragraphBase_split_method()
+#end
+## adding table cell helper functionality once manually added
+#if ($element == "style:table-cell-properties")
+#add_tableCellHelper_methods()
+#end
+}

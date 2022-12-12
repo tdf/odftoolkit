@@ -76,7 +76,7 @@ public class TextDdeConnectionDeclElement extends OdfElement {
     OfficeAutomaticUpdateAttribute attr =
         (OfficeAutomaticUpdateAttribute)
             getOdfAttribute(OdfDocumentNamespace.OFFICE, "automatic-update");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(OfficeAutomaticUpdateAttribute.DEFAULT_VALUE);
@@ -217,6 +217,12 @@ public class TextDdeConnectionDeclElement extends OdfElement {
     attr.setValue(officeNameValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

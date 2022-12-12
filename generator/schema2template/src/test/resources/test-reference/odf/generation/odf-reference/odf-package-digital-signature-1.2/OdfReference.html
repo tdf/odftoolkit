@@ -1,0 +1,99 @@
+
+<html>
+<head>
+<title>ODF 1.2 Ref (odf-package-digital-signature)</title>
+<style type="text/css">
+<!--
+.left { width: 30%; }
+.right { width: 100%; }
+td { text-indent:0em;
+    font-family: 'Liberation Mono';}
+.unbreakable { white-space:nowrap; }
+.mandatory { color:navy; font-weight:bold; }
+-->
+</style>
+</head>
+<body>
+<h2>ODF 1.2 (odf-package-digital-signature) XML Reference</h2>
+
+
+<p>This is an alphabetical ordered list of the XML defined in ODF 1.2 (odf-package-digital-signature) together with allowed parent, child elements and allowed attributes.</p>
+
+<h3>Explanation</h3>
+<ol>
+<li><span class="mandatory">Bold blue letters</span> describe a mandatory XML node.</li>
+<li>The asterisk * symbol marks child elements which can occur multiple times.</li>
+</li>
+</ol>
+
+</br/>
+
+
+<h3><a name="element_ds:Signature_1">ds:Signature Element</a></h3>
+<p>This element can have a text node child.</p>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_dsig:document-signatures_1" class="unbreakable">&lt;dsig:document-signatures&gt;</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+[any org.w3c.dom.Attribute]&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+[any org.w3c.dom.Element]&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+
+<h3><a name="element_dsig:document-signatures_1">dsig:document-signatures Element</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+	<a href="#attribute_dsig:version_1" class="unbreakable mandatory">dsig:version</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_ds:Signature_1" class="unbreakable mandatory">&lt;ds:Signature&gt;</a>*&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+<h3><a name="attribute_dsig:version_1">dsig:version Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_dsig:document-signatures_1" class="unbreakable">dsig:document-signatures</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+	<span style="unbreakable">"1.2"</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+</body>
+</html>

@@ -432,7 +432,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
     StyleMayBreakBetweenRowsAttribute attr =
         (StyleMayBreakBetweenRowsAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "may-break-between-rows");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -461,7 +461,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
   public Integer getStylePageNumberAttribute() {
     StylePageNumberAttribute attr =
         (StylePageNumberAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "page-number");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -657,7 +657,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
   public Boolean getTableDisplayAttribute() {
     TableDisplayAttribute attr =
         (TableDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "display");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -678,7 +678,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
   /**
    * Create child element {@odf.element style:background-image}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element style:background-image}
    */
@@ -689,6 +689,12 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
     return styleBackgroundImage;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

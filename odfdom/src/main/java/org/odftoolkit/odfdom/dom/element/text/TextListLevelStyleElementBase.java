@@ -42,6 +42,7 @@ public abstract class TextListLevelStyleElementBase extends OdfStyleBase {
    * Create the instance of <code>TextListLevelStyleElementBase</code>
    *
    * @param ownerDoc The type is <code>OdfFileDom</code>
+   * @param elementName The type is <code>OdfName</code>
    */
   public TextListLevelStyleElementBase(OdfFileDom ownerDoc, OdfName elementName) {
     super(ownerDoc, elementName);
@@ -57,7 +58,7 @@ public abstract class TextListLevelStyleElementBase extends OdfStyleBase {
   public Integer getTextLevelAttribute() {
     TextLevelAttribute attr =
         (TextLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "level");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;

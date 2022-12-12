@@ -107,7 +107,7 @@ public class TableInsertionElement extends OdfElement {
   public Integer getTableCountAttribute() {
     TableCountAttribute attr =
         (TableCountAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "count");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(TableCountAttribute.DEFAULT_VALUE);
@@ -166,7 +166,7 @@ public class TableInsertionElement extends OdfElement {
   public Integer getTablePositionAttribute() {
     TablePositionAttribute attr =
         (TablePositionAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "position");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -224,7 +224,7 @@ public class TableInsertionElement extends OdfElement {
   public Integer getTableTableAttribute() {
     TableTableAttribute attr =
         (TableTableAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "table");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -310,6 +310,12 @@ public class TableInsertionElement extends OdfElement {
     return tableDependencies;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

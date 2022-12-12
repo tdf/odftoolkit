@@ -80,7 +80,7 @@ public class DrawHandleElement extends OdfElement {
     DrawHandleMirrorHorizontalAttribute attr =
         (DrawHandleMirrorHorizontalAttribute)
             getOdfAttribute(OdfDocumentNamespace.DRAW, "handle-mirror-horizontal");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(DrawHandleMirrorHorizontalAttribute.DEFAULT_VALUE);
@@ -110,7 +110,7 @@ public class DrawHandleElement extends OdfElement {
     DrawHandleMirrorVerticalAttribute attr =
         (DrawHandleMirrorVerticalAttribute)
             getOdfAttribute(OdfDocumentNamespace.DRAW, "handle-mirror-vertical");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(DrawHandleMirrorVerticalAttribute.DEFAULT_VALUE);
@@ -380,7 +380,7 @@ public class DrawHandleElement extends OdfElement {
   public Boolean getDrawHandleSwitchedAttribute() {
     DrawHandleSwitchedAttribute attr =
         (DrawHandleSwitchedAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "handle-switched");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(DrawHandleSwitchedAttribute.DEFAULT_VALUE);
@@ -399,6 +399,12 @@ public class DrawHandleElement extends OdfElement {
     attr.setBooleanValue(drawHandleSwitchedValue.booleanValue());
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

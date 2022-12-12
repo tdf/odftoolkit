@@ -73,7 +73,7 @@ public class TableSubtotalRuleElement extends OdfElement {
     TableGroupByFieldNumberAttribute attr =
         (TableGroupByFieldNumberAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "group-by-field-number");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -111,6 +111,12 @@ public class TableSubtotalRuleElement extends OdfElement {
     return tableSubtotalField;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

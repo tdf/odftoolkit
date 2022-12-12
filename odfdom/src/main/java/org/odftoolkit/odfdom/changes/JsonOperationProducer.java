@@ -79,11 +79,13 @@ public class JsonOperationProducer {
 
   private static final Logger LOG = Logger.getLogger(JsonOperationProducer.class.getName());
   static final String BLACK = "#000000";
-  private static String ODFDOM_GIT_BRANCH = System.getProperty("odfdom.git.branch");
-  private static String ODFDOM_GIT_COMMIT_TIME = System.getProperty("odfdom.git.commit.time");
-  private static String ODFDOM_GIT_COMMIT_DESCRIBE =
-      System.getProperty("odfdom.git.commit.id.describe");
-  private static String ODFDOM_GIT_URL = System.getProperty("odfdom.git.remote.origin.url");
+  private static final String ODFDOM_GIT_BRANCH = System.getProperty("odftoolkit.git.branch");
+  private static final String ODFDOM_GIT_COMMIT_TIME =
+      System.getProperty("odftoolkit.git.commit.time");
+  private static final String ODFDOM_GIT_COMMIT_DESCRIBE =
+      System.getProperty("odftoolkit.git.commit.id.describe");
+  private static final String ODFDOM_GIT_URL =
+      System.getProperty("odftoolkit.git.remote.origin.url");
 
   // line widths constants
   private final JSONArray mOperationQueue = new JSONArray();
@@ -373,10 +375,8 @@ public class JsonOperationProducer {
    * Writes a range of the spreadsheet with various values. Will be called only indirectly after a
    * spreadsheet row has checked for optimization.
    *
-   * @param name String 'setCellContents'
    * @param sheet Integer The zero-based index of the sheet containing the cell range.
-   * @param firstRow Integer The next row number being written
-   * @param lastRow Integer The last row number being written (different when the row was repeated)
+   * @param rangeStart Integer The starting position: where next row number is being written
    * @param spreadsheetRange Object[][] The values and attribute sets to be written into the cell
    *     range. The outer array contains rows of cell contents, and the inner row arrays contain the
    *     cell contents for each single row. The lengths of the inner arrays may be different. Cells
@@ -389,7 +389,7 @@ public class JsonOperationProducer {
       newOperation.put(OPK_NAME, "setCellContents");
       newOperation.put(OPK_SHEET, sheet);
       newOperation.put(OPK_START, rangeStart);
-      // Although we only deliver a single row, the range have to be two dimensional
+      // Although we only deliver a single row, the range have to be two-dimensional
       newOperation.put("contents", new JSONArray().put(spreadsheetRange));
       mOperationQueue.put(newOperation);
       LOG.log(Level.FINEST, "setCellContents - component:{0}", newOperation);
@@ -425,15 +425,14 @@ public class JsonOperationProducer {
    *
    * <p>Will be called only indirectly after a spreadsheet row has checked for optimization.
    *
-   * @param name String 'fillCellRange'
    * @param sheet Integer The zero-based index of the sheet containing the cell range.
    * @param start Integer[2] The logical cell position of the upper-left cell in the range.
    * @param end Integer[2] (optional) The logical cell position of the bottom-right cell in the
    *     range. If omitted, the operation addresses a single cell.
-   * @param value CellValue (optional) The value used to fill the specified cell range. The value
-   *     null will clear the cell range. If omitted, the current values will not change (e.g., to
-   *     change the formatting only), except for shared formulas referred by the shared attribute of
-   *     this operation. If the parse property is set in the operation, the value must be a string.
+   * @param cell (optional) The value used to fill the specified cell range. The value null will
+   *     clear the cell range. If omitted, the current values will not change (e.g., to change the
+   *     formatting only), except for shared formulas referred by the shared attribute of this
+   *     operation. If the parse property is set in the operation, the value must be a string.
    */
   private void fillCellRange(
       int sheet, final List<Integer> start, final List<Integer> end, JSONObject cell) {
@@ -487,23 +486,11 @@ public class JsonOperationProducer {
   }
 
   // -------------------------------------------------------------------------
-  /**
-   * @param para
-   * @param start
-   * @param end
-   * @return
-   */
   void format(final List<Integer> start, Map<String, Object> attrs, String context) {
     JsonOperationProducer.this.format(start, null, attrs, context);
   }
 
   // -------------------------------------------------------------------------
-  /**
-   * @param para
-   * @param start
-   * @param end
-   * @return
-   */
   public void format(
       final List<Integer> start,
       final List<Integer> end,
@@ -958,7 +945,7 @@ public class JsonOperationProducer {
   }
 
   /**
-   * @param the componentProps is a JSONObject that has the family ID as key (e.g 'page') and the
+   * @param componentProps is a JSONObject that has the family ID as key (e.g 'page') and the
    *     properties as JSON object as value
    */
   public void addDocumentData(JSONObject componentProps) {

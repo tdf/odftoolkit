@@ -50,7 +50,7 @@ public class OfficeMasterStylesElement extends OdfOfficeMasterStyles {
    * @param ownerDoc The type is <code>OdfFileDom</code>
    */
   public OfficeMasterStylesElement(OdfFileDom ownerDoc) {
-    super(ownerDoc);
+    super(ownerDoc, ELEMENT_NAME);
   }
 
   /**
@@ -110,6 +110,12 @@ public class OfficeMasterStylesElement extends OdfOfficeMasterStyles {
     return styleMasterPage;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

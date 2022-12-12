@@ -73,7 +73,7 @@ public class FormOptionElement extends OdfElement {
     FormCurrentSelectedAttribute attr =
         (FormCurrentSelectedAttribute)
             getOdfAttribute(OdfDocumentNamespace.FORM, "current-selected");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(FormCurrentSelectedAttribute.DEFAULT_VALUE);
@@ -130,7 +130,7 @@ public class FormOptionElement extends OdfElement {
   public Boolean getFormSelectedAttribute() {
     FormSelectedAttribute attr =
         (FormSelectedAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "selected");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(FormSelectedAttribute.DEFAULT_VALUE);
@@ -176,6 +176,12 @@ public class FormOptionElement extends OdfElement {
     attr.setValue(formValueValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -185,6 +191,7 @@ public class FormOptionElement extends OdfElement {
       visitor.visit(this);
     }
   }
+
   /** Add text content. Only elements which are allowed to have text content offer this method. */
   public void newTextNode(String content) {
     if (content != null && !content.equals("")) {

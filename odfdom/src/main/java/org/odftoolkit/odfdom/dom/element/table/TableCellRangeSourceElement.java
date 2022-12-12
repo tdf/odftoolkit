@@ -138,7 +138,7 @@ public class TableCellRangeSourceElement extends OdfElement {
     TableLastColumnSpannedAttribute attr =
         (TableLastColumnSpannedAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "last-column-spanned");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -170,7 +170,7 @@ public class TableCellRangeSourceElement extends OdfElement {
     TableLastRowSpannedAttribute attr =
         (TableLastRowSpannedAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "last-row-spanned");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -336,6 +336,12 @@ public class TableCellRangeSourceElement extends OdfElement {
     attr.setValue(xlinkTypeValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

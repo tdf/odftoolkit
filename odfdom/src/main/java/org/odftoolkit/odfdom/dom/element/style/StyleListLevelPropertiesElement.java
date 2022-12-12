@@ -446,7 +446,7 @@ public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase {
    *
    * @param textLabelFollowedByValue the <code>String</code> value of <code>
    *     TextLabelFollowedByAttribute</code>, see {@odf.attribute text:label-followed-by} at
-   *     specification Child element is new in Odf 1.2
+   *     specification Child element was added in ODF 1.2
    * @return the element {@odf.element style:list-level-label-alignment}
    */
   public StyleListLevelLabelAlignmentElement newStyleListLevelLabelAlignmentElement(
@@ -458,6 +458,12 @@ public class StyleListLevelPropertiesElement extends OdfStylePropertiesBase {
     return styleListLevelLabelAlignment;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

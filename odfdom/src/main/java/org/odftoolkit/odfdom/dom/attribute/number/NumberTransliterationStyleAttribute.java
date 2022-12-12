@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.dom.attribute.number;
 
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
-import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
@@ -39,6 +38,7 @@ public class NumberTransliterationStyleAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME =
       OdfName.newName(OdfDocumentNamespace.NUMBER, "transliteration-style");
+
   public static final String DEFAULT_VALUE = "short";
 
   /**
@@ -111,12 +111,7 @@ public class NumberTransliterationStyleAttribute extends OdfAttribute {
    */
   @Override
   public String getDefault() {
-    OdfElement parentElement = (OdfElement) getOwnerElement();
-    String defaultValue = null;
-    if (parentElement != null) {
-      defaultValue = DEFAULT_VALUE;
-    }
-    return defaultValue;
+    return DEFAULT_VALUE;
   }
 
   /**

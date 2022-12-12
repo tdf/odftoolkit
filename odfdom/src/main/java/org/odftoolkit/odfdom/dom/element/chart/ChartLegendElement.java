@@ -203,7 +203,7 @@ public class ChartLegendElement extends OdfStylableElement {
     StyleLegendExpansionAspectRatioAttribute attr =
         (StyleLegendExpansionAspectRatioAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "legend-expansion-aspect-ratio");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Double.valueOf(attr.doubleValue());
     }
     return null;
@@ -281,7 +281,7 @@ public class ChartLegendElement extends OdfStylableElement {
   /**
    * Create child element {@odf.element text:p}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element text:p}
    */
@@ -291,6 +291,12 @@ public class ChartLegendElement extends OdfStylableElement {
     return textP;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

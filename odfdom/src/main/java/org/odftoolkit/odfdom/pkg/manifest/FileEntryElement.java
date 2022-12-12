@@ -69,8 +69,7 @@ public class FileEntryElement extends OdfElement {
    *     and no default value defined.
    */
   public String getFullPathAttribute() {
-    FullPathAttribute attr =
-        (FullPathAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "full-path");
+    FullPathAttribute attr = (FullPathAttribute) getOdfAttribute(FullPathAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -100,7 +99,7 @@ public class FileEntryElement extends OdfElement {
    */
   public String getMediaTypeAttribute() {
     MediaTypeAttribute attr =
-        (MediaTypeAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "media-type");
+        (MediaTypeAttribute) getOdfAttribute(MediaTypeAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -128,8 +127,7 @@ public class FileEntryElement extends OdfElement {
    */
   public String getPreferredViewModeAttribute() {
     PreferredViewModeAttribute attr =
-        (PreferredViewModeAttribute)
-            getOdfAttribute(OdfPackageNamespace.MANIFEST, "preferred-view-mode");
+        (PreferredViewModeAttribute) getOdfAttribute(PreferredViewModeAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -157,7 +155,7 @@ public class FileEntryElement extends OdfElement {
    *     set and no default value defined.
    */
   public Integer getSizeAttribute() {
-    SizeAttribute attr = (SizeAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "size");
+    SizeAttribute attr = (SizeAttribute) getOdfAttribute(SizeAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return Integer.valueOf(attr.intValue());
     }
@@ -184,8 +182,7 @@ public class FileEntryElement extends OdfElement {
    *     and no default value defined.
    */
   public String getVersionAttribute() {
-    VersionAttribute attr =
-        (VersionAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "version");
+    VersionAttribute attr = (VersionAttribute) getOdfAttribute(VersionAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -210,17 +207,16 @@ public class FileEntryElement extends OdfElement {
    * @param checksumValue the <code>String</code> value of <code>ChecksumAttribute</code>, see
    *     {@odf.attribute manifest:checksum} at specification
    * @param checksumTypeValue the <code>String</code> value of <code>ChecksumTypeAttribute</code>,
-   *     see {@odf.attribute manifest:checksum-type} at specification Child element is new in Odf
-   *     1.2
+   *     see {@odf.attribute manifest:checksum-type} at specification
    * @return the element {@odf.element manifest:encryption-data}
    */
   public EncryptionDataElement newEncryptionDataElement(
       String checksumValue, String checksumTypeValue) {
-    EncryptionDataElement manifestEncryptionData =
+    EncryptionDataElement encryptionData =
         ((OdfFileDom) this.ownerDocument).newOdfElement(EncryptionDataElement.class);
-    manifestEncryptionData.setChecksumAttribute(checksumValue);
-    manifestEncryptionData.setChecksumTypeAttribute(checksumTypeValue);
-    this.appendChild(manifestEncryptionData);
-    return manifestEncryptionData;
+    encryptionData.setChecksumAttribute(checksumValue);
+    encryptionData.setChecksumTypeAttribute(checksumTypeValue);
+    this.appendChild(encryptionData);
+    return encryptionData;
   }
 }

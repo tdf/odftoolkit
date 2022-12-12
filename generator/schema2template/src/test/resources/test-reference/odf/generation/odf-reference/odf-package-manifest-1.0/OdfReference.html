@@ -1,0 +1,360 @@
+
+<html>
+<head>
+<title>ODF 1.0 Ref (odf-package-manifest)</title>
+<style type="text/css">
+<!--
+.left { width: 30%; }
+.right { width: 100%; }
+td { text-indent:0em;
+    font-family: 'Liberation Mono';}
+.unbreakable { white-space:nowrap; }
+.mandatory { color:navy; font-weight:bold; }
+-->
+</style>
+</head>
+<body>
+<h2>ODF 1.0 (odf-package-manifest) XML Reference</h2>
+
+
+<p>This is an alphabetical ordered list of the XML defined in ODF 1.0 (odf-package-manifest) together with allowed parent, child elements and allowed attributes.</p>
+
+<h3>Explanation</h3>
+<ol>
+<li><span class="mandatory">Bold blue letters</span> describe a mandatory XML node.</li>
+<li>The asterisk * symbol marks child elements which can occur multiple times.</li>
+<li>A tailing square brackets with a number within (e.g [1]) marks one of multiple grammar definitions for the same node.
+For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-derivation-name[1]</a></li>
+</ol>
+
+</br/>
+
+<h3><a name="element_manifest:algorithm_1">manifest:algorithm Element</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:encryption-data_1" class="unbreakable">&lt;manifest:encryption-data&gt;</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+	<a href="#attribute_manifest:algorithm-name_1" class="unbreakable mandatory">manifest:algorithm-name</a>&nbsp;
+	<a href="#attribute_manifest:initialisation-vector_1" class="unbreakable mandatory">manifest:initialisation-vector</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+
+<h3><a name="element_manifest:encryption-data_1">manifest:encryption-data Element</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:file-entry_1" class="unbreakable">&lt;manifest:file-entry&gt;</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+	<a href="#attribute_manifest:checksum_1" class="unbreakable mandatory">manifest:checksum</a>&nbsp;
+	<a href="#attribute_manifest:checksum-type_1" class="unbreakable mandatory">manifest:checksum-type</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_manifest:algorithm_1" class="unbreakable mandatory">&lt;manifest:algorithm&gt;</a>&nbsp;
+	<a href="#element_manifest:key-derivation_1" class="unbreakable mandatory">&lt;manifest:key-derivation&gt;</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+
+<h3><a name="element_manifest:file-entry_1">manifest:file-entry Element</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:manifest_1" class="unbreakable">&lt;manifest:manifest&gt;</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+	<a href="#attribute_manifest:full-path_1" class="unbreakable mandatory">manifest:full-path</a>&nbsp;
+	<a href="#attribute_manifest:media-type_1" class="unbreakable mandatory">manifest:media-type</a>&nbsp;
+	<a href="#attribute_manifest:size_1" class="unbreakable ">manifest:size</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_manifest:encryption-data_1" class="unbreakable ">&lt;manifest:encryption-data&gt;</a>&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+
+<h3><a name="element_manifest:key-derivation_1">manifest:key-derivation Element</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:encryption-data_1" class="unbreakable">&lt;manifest:encryption-data&gt;</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+	<a href="#attribute_manifest:iteration-count_1" class="unbreakable mandatory">manifest:iteration-count</a>&nbsp;
+	<a href="#attribute_manifest:key-derivation-name_1" class="unbreakable mandatory">manifest:key-derivation-name</a>&nbsp;
+	<a href="#attribute_manifest:salt_1" class="unbreakable mandatory">manifest:salt</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+
+<h3><a name="element_manifest:manifest_1">manifest:manifest Element</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+	<a href="#element_manifest:file-entry_1" class="unbreakable mandatory">&lt;manifest:file-entry&gt;</a>*&nbsp;
+&nbsp;</td>
+</tr>
+</table>
+<br />
+<h3><a name="attribute_manifest:algorithm-name_1">manifest:algorithm-name Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:algorithm_1" class="unbreakable">manifest:algorithm</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">string</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+<h3><a name="attribute_manifest:checksum_1">manifest:checksum Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:encryption-data_1" class="unbreakable">manifest:encryption-data</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">base64Binary</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+<h3><a name="attribute_manifest:checksum-type_1">manifest:checksum-type Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:encryption-data_1" class="unbreakable">manifest:encryption-data</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">string</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+<h3><a name="attribute_manifest:full-path_1">manifest:full-path Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:file-entry_1" class="unbreakable">manifest:file-entry</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">string</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+<h3><a name="attribute_manifest:initialisation-vector_1">manifest:initialisation-vector Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:algorithm_1" class="unbreakable">manifest:algorithm</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">base64Binary</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+<h3><a name="attribute_manifest:iteration-count_1">manifest:iteration-count Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:key-derivation_1" class="unbreakable">manifest:key-derivation</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">nonNegativeInteger</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+<h3><a name="attribute_manifest:key-derivation-name_1">manifest:key-derivation-name Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:key-derivation_1" class="unbreakable">manifest:key-derivation</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">string</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+<h3><a name="attribute_manifest:media-type_1">manifest:media-type Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:file-entry_1" class="unbreakable">manifest:file-entry</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">string</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+<h3><a name="attribute_manifest:salt_1">manifest:salt Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:key-derivation_1" class="unbreakable">manifest:key-derivation</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">base64Binary</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+<h3><a name="attribute_manifest:size_1">manifest:size Attribute</a></h3>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:file-entry_1" class="unbreakable">manifest:file-entry</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">nonNegativeInteger</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+</table>
+<br />
+</body>
+</html>

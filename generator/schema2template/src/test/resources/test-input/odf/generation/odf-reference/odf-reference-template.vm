@@ -1,0 +1,264 @@
+##################################################################
+##
+## Licensed to the Apache Software Foundation (ASF) under one
+## or more contributor license agreements.  See the NOTICE file
+## distributed with this work for additional information
+## regarding copyright ownership.  The ASF licenses this file
+## to you under the Apache License, Version 2.0 (the
+## "License"); you may not use this file except in compliance
+## with the License.  You may obtain a copy of the License at
+##
+##  http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing,
+## software distributed under the License is distributed on an
+## "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+## KIND, either express or implied.  See the License for the
+## specific language governing permissions and limitations
+## under the License.
+##
+##################################################################
+
+## Template to create the Java class representing an ODF element.
+##
+## Context:
+##
+## The Velocity context is added up in the SchemaToTemplate.java
+## xmlModel - Represents an ODF grammar parsed by MSV with all relevant informations and usabiltiy functions
+## xmlModelHistory - sorted list from latest to earliest release to assist in finding new XML node additions (see odf-reference-template.vm)
+## But the Velocity context can also be extended by parameters from the calling main-template.
+<html>
+<head>
+<title>ODF ${xmlModel.getGrammarVersion()} Ref (${xmlModel.getGrammarID()})</title>
+<style type="text/css">
+<!--
+.left { width: 30%; }
+.right { width: 100%; }
+td { text-indent:0em;
+    font-family: 'Liberation Mono';}
+.unbreakable { white-space:nowrap; }
+.mandatory { color:navy; font-weight:bold; }
+-->
+</style>
+</head>
+<body>
+<h2>ODF ${xmlModel.getGrammarVersion()} (${xmlModel.getGrammarID()}) XML Reference</h2>
+
+
+<p>This is an alphabetical ordered list of the XML defined in ODF ${xmlModel.getGrammarVersion()} (${xmlModel.getGrammarID()}) together with allowed parent, child elements and allowed attributes.</p>
+
+<h3>Explanation</h3>
+<ol>
+<li><span class="mandatory">Bold blue letters</span> describe a mandatory XML node.</li>
+<li>The asterisk * symbol marks child elements which can occur multiple times.</li>
+#if (${xmlModel.getGrammarID()} == "odf-schema" ||  ${xmlModel.getGrammarID()} == "odf-package-manifest")
+<li>A tailing square brackets with a number within (e.g [1]) marks one of multiple grammar definitions for the same node.
+#if (${xmlModel.getGrammarID()} == "odf-schema")
+For example, <a href="#attribute_office:value-type_1">office:value-type[1]</a></li>
+#end
+#if (${xmlModel.getGrammarID()} == "odf-package-manifest")
+For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-derivation-name[1]</a></li>
+#end
+#else
+</li>
+#end
+</ol>
+#if (${xmlModel.getGrammarID()} == "odf-schema")
+<p>Here's a shortcut to the content's toplevel <a href="#element_office:document_1">&lt;office:document&gt;</a> element.</p>
+#end
+
+</br/>
+#foreach( $element in ${xmlModel.getElements()} )
+
+#if ($element != "*")
+##
+#if (${element.withMultiples().size()} <= 1)
+#set ($duplicates = "")
+#set ($duplicateNo = 1)
+#else
+#set ($duplicateNo = ${element.getMultipleNumber()} + 1)
+#set ($duplicates = "[$duplicateNo]")
+#end
+### VERSION:ODF-ELEMENT - START
+## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
+## but we can compare by name
+#if ( $xmlModelHistory)
+	## First possible version the node was added is the current version
+	#set ($addVersion = "")
+	#set ($newestVersion = ${xmlModel.getGrammarVersion()})
+	#foreach( $oldModel in $xmlModelHistory )
+	#set ($oldElement = ${oldModel.getElement($element.getQName())})
+		#if (!$oldElement)
+			#set ($addVersion = ${newestVersion})
+			#break
+		#end
+		## Remember this old version as the version the node might be added
+		#set ($newestVersion = ${oldModel.getGrammarVersion()})
+	#end
+#end
+### VERSION:ODF-ELEMENT - END
+<h3><a name="element_${element}_$duplicateNo">${element}${duplicates} Element</a>#if ($xmlModelHistory && !(${addVersion} == ""))&nbsp;(new in ODF $addVersion) #end</h3>
+#if ( ${element.withMultiples().size()} > 1 )
+<p>There are more than one Definitions by this name.</p>
+#end
+#if (${element.canHaveText()})
+<p>This element can have a text node child.</p>
+#end
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+#foreach ($parent in ${element.getParents()})
+#if ($parent == "*")
+[any org.w3c.dom.Element]&nbsp;
+#else
+#if (${parent.withMultiples().size()} <= 1)
+#set ($duplicates = "")
+#set ($duplicateNo = 1)
+#else
+#set ($duplicateNo = ${parent.getMultipleNumber()} + 1)
+#set ($duplicates = "[$duplicateNo]")
+#end
+	<a href="#element_${parent}_$duplicateNo" class="unbreakable">&lt;${parent}${duplicates}&gt;</a>&nbsp;
+#end
+#end
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Attributes</td>
+<td class="right">
+#foreach( $attribute in ${element.getAttributes()} )
+#if ($attribute == "*")
+[any org.w3c.dom.Attribute]&nbsp;
+#else
+#if (${attribute.withMultiples().size()} <= 1)
+#set ($duplicates = "")
+#set ($duplicateNo = 1)
+#else
+#set ($duplicateNo = ${attribute.getMultipleNumber()} + 1)
+#set ($duplicates = "[$duplicateNo]")
+#end
+##
+#if (${element.isMandatory($attribute)})
+#set ($mandatory = "mandatory")
+#else
+#set ($mandatory = "")
+#end
+##
+	<a href="#attribute_${attribute}_$duplicateNo" class="unbreakable ${mandatory}">${attribute}${duplicates}</a>&nbsp;
+#end
+#end
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Child Elements</td>
+<td class="right">
+#foreach($child in ${element.getChildElements()})
+#if ($child == "*")
+[any org.w3c.dom.Element]&nbsp;
+#else
+#if (${child.withMultiples().size()} <= 1)
+#set ($duplicates = "")
+#set ($duplicateNo = 1)
+#else
+#set ($duplicateNo = ${child.getMultipleNumber()} + 1)
+#set ($duplicates = "[$duplicateNo]")
+#end
+##
+#if (${element.isMandatory($child)})
+#set ($mandatory = "mandatory")
+#else
+#set ($mandatory = "")
+#end
+##
+#if (${element.isSingleton($child)})
+#set ($multiple = "")
+#else
+#set ($multiple = "*")
+#end
+##
+	<a href="#element_${child}_$duplicateNo" class="unbreakable ${mandatory}">&lt;${child}${duplicates}&gt;</a>${multiple}&nbsp;
+#end
+#end
+&nbsp;</td>
+</tr>
+</table>
+<br />
+#end
+#end
+##
+##
+#foreach( $attribute in ${xmlModel.getAttributes()} )
+#if ($attribute != "*")
+##
+#if (${attribute.withMultiples().size()} <= 1)
+#set ($duplicates = "")
+#set ($duplicateNo = 1)
+#else
+#set ($duplicateNo = ${attribute.getMultipleNumber()} + 1)
+#set ($duplicates = "[$duplicateNo]")
+#end
+### VERSION:ODF-ATTRIBUTE - START
+## Compare element from old and new Spec. A direct comparison is not possible (both encapsulate different RelaxNG Expressions)
+## but we can compare by name
+#if ( $xmlModelHistory)
+	## First possible version the node was added is the current version
+	#set ($addVersion = "")
+	#set ($newestVersion = ${xmlModel.getGrammarVersion()})
+	#foreach( $oldModel in $xmlModelHistory )
+	#set ($oldElement = ${oldModel.getAttribute($attribute.getQName())})
+		#if (!$oldElement)
+			#set ($addVersion = ${newestVersion})
+			#break
+		#end
+		## Remember this old version as the version the node might be added
+		#set ($newestVersion = ${oldModel.getGrammarVersion()})
+	#end
+#end
+### VERSION:ODF-ATTRIBUTE - END
+<h3><a name="attribute_${attribute}_${duplicateNo}">${attribute}${duplicates} Attribute</a>#if ($xmlModelHistory && !(${addVersion} == ""))&nbsp;(new in ODF $addVersion) #end</h3>
+#if ( ${attribute.withMultiples().size()} > 1 )
+<p>There are more than one Definitions by this name.</p>
+#end
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+#foreach ($parent in ${attribute.getParents()})
+#if ($parent == "*")
+[any org.w3c.dom.Element]&nbsp;
+#else
+#if (${parent.withMultiples().size()} <= 1)
+#set ($duplicates = "")
+#set ($duplicateNo = 1)
+#else
+#set ($duplicateNo = ${parent.getMultipleNumber()} + 1)
+#set ($duplicates = "[$duplicateNo]")
+#end
+	<a href="#element_${parent}_${duplicateNo}" class="unbreakable">${parent}${duplicates}</a>&nbsp;
+#end
+#end
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+#foreach ($datatype in ${attribute.getDatatypes()})
+	<span style="unbreakable">${datatype}</a>&nbsp;
+#end
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+#foreach ($value in ${attribute.getValues()})
+	<span style="unbreakable">"${value}"</a>&nbsp;
+#end
+&nbsp;</td>
+</tr>
+</table>
+<br />
+#end
+#end
+</body>
+</html>

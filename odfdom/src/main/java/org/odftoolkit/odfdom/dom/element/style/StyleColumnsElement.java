@@ -72,7 +72,7 @@ public class StyleColumnsElement extends OdfElement {
   public Integer getFoColumnCountAttribute() {
     FoColumnCountAttribute attr =
         (FoColumnCountAttribute) getOdfAttribute(OdfDocumentNamespace.FO, "column-count");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -122,7 +122,7 @@ public class StyleColumnsElement extends OdfElement {
    * Create child element {@odf.element style:column}.
    *
    * @param styleRelWidthValue the <code>String</code> value of <code>StyleRelWidthAttribute</code>,
-   *     see {@odf.attribute style:rel-width} at specification Child element is new in Odf 1.2
+   *     see {@odf.attribute style:rel-width} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element style:column}
    */
   public StyleColumnElement newStyleColumnElement(String styleRelWidthValue) {
@@ -137,7 +137,7 @@ public class StyleColumnsElement extends OdfElement {
    * Create child element {@odf.element style:column-sep}.
    *
    * @param styleWidthValue the <code>String</code> value of <code>StyleWidthAttribute</code>, see
-   *     {@odf.attribute style:width} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute style:width} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element style:column-sep}
    */
   public StyleColumnSepElement newStyleColumnSepElement(String styleWidthValue) {
@@ -148,6 +148,12 @@ public class StyleColumnsElement extends OdfElement {
     return styleColumnSep;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

@@ -25,7 +25,7 @@
 {"name":"format","start":[1,8],"end":[1,8],"attrs":{"styleId":"Internet_20_link","character":{"url":"http://www.heise.de/"}}},
 {"name":"format","start":[1,8],"end":[1,13],"attrs":{"character":{"fontName":"Courier","vertAlign":"sub"}}},
 {"name":"format","start":[1,14],"end":[1,14],"attrs":{"character":{"color":{"type":"rgb","value":"800000"},"fontName":"Courier","url":"http://www.spiegel.de/","vertAlign":"sub"}}},
-{"name":"format","start":[1,15],"end":[1,15],"attrs":{"character":{"color":{"type":"rgb","value":"800000"},"fillColor":{"type":"rgb","value":"ffff00"},"url":"http://www.spiegel.de/","vertAlign":"sub"}}},
-{"name":"format","start":[1,16],"end":[1,16],"attrs":{"character":{"color":{"type":"rgb","value":"800000"},"url":"http://www.spiegel.de/","vertAlign":"sub"}}},
-{"name":"format","start":[1,17],"end":[1,19],"attrs":{"character":{"vertAlign":"sub"}}}
+{"name":"format","start":[1,15],"end":[1,15],"attrs":{"character":{"color":{"type":"rgb","value":"800000"},"fillColor":{"type":"rgb","value":"ffff00"},"fontName":"Courier","url":"http://www.spiegel.de/","vertAlign":"sub"}}},
+{"name":"format","start":[1,16],"end":[1,16],"attrs":{"character":{"color":{"type":"rgb","value":"800000"},"fontName":"Courier","url":"http://www.spiegel.de/","vertAlign":"sub"}}},
+{"name":"format","start":[1,17],"end":[1,19],"attrs":{"character":{"fontName":"Courier","vertAlign":"sub"}}}
 ]}

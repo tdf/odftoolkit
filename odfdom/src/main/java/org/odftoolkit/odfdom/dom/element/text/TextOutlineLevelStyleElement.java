@@ -111,7 +111,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
     StyleNumLetterSyncAttribute attr =
         (StyleNumLetterSyncAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -196,7 +196,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
   public Integer getTextDisplayLevelsAttribute() {
     TextDisplayLevelsAttribute attr =
         (TextDisplayLevelsAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "display-levels");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(TextDisplayLevelsAttribute.DEFAULT_VALUE);
@@ -227,7 +227,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
   public Integer getTextLevelAttribute() {
     TextLevelAttribute attr =
         (TextLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "level");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -255,7 +255,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
   public Integer getTextStartValueAttribute() {
     TextStartValueAttribute attr =
         (TextStartValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "start-value");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(TextStartValueAttribute.DEFAULT_VALUE);
@@ -328,6 +328,12 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
     return styleTextProperties;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

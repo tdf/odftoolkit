@@ -105,7 +105,7 @@ public class TextPageNumberElement extends OdfElement {
     StyleNumLetterSyncAttribute attr =
         (StyleNumLetterSyncAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -134,7 +134,7 @@ public class TextPageNumberElement extends OdfElement {
   public Boolean getTextFixedAttribute() {
     TextFixedAttribute attr =
         (TextFixedAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "fixed");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -162,7 +162,7 @@ public class TextPageNumberElement extends OdfElement {
   public Integer getTextPageAdjustAttribute() {
     TextPageAdjustAttribute attr =
         (TextPageAdjustAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "page-adjust");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -208,6 +208,12 @@ public class TextPageNumberElement extends OdfElement {
     attr.setValue(textSelectPageValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -217,6 +223,7 @@ public class TextPageNumberElement extends OdfElement {
       visitor.visit(this);
     }
   }
+
   /** Add text content. Only elements which are allowed to have text content offer this method. */
   public void newTextNode(String content) {
     if (content != null && !content.equals("")) {

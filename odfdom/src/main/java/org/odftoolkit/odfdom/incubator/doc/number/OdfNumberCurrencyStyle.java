@@ -239,7 +239,7 @@ public class OdfNumberCurrencyStyle extends NumberCurrencyStyleElement {
       nDigits = 0;
       for (pos = 0; pos < numberSpec.length() && (ch = numberSpec.charAt(pos)) != '.'; pos++) {
         if (ch == ',') {
-          number.setNumberGroupingAttribute(new Boolean(true));
+          number.setNumberGroupingAttribute(true);
         } else if (ch == '0') {
           nDigits++;
         }

@@ -37,7 +37,6 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleNumSuffixAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextDisplayLevelsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStartValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.text.TextStyleNameAttribute;
-import org.odftoolkit.odfdom.dom.element.style.StyleListLevelPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleTextPropertiesElement;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
@@ -109,7 +108,7 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
     StyleNumLetterSyncAttribute attr =
         (StyleNumLetterSyncAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -194,7 +193,7 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
   public Integer getTextDisplayLevelsAttribute() {
     TextDisplayLevelsAttribute attr =
         (TextDisplayLevelsAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "display-levels");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(TextDisplayLevelsAttribute.DEFAULT_VALUE);
@@ -223,7 +222,7 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
   public Integer getTextStartValueAttribute() {
     TextStartValueAttribute attr =
         (TextStartValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "start-value");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(TextStartValueAttribute.DEFAULT_VALUE);
@@ -270,18 +269,6 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
   }
 
   /**
-   * Create child element {@odf.element style:list-level-properties}.
-   *
-   * @return the element {@odf.element style:list-level-properties}
-   */
-  public StyleListLevelPropertiesElement newStyleListLevelPropertiesElement() {
-    StyleListLevelPropertiesElement styleListLevelProperties =
-        ((OdfFileDom) this.ownerDocument).newOdfElement(StyleListLevelPropertiesElement.class);
-    this.appendChild(styleListLevelProperties);
-    return styleListLevelProperties;
-  }
-
-  /**
    * Create child element {@odf.element style:text-properties}.
    *
    * @param textDisplayValue the <code>String</code> value of <code>TextDisplayAttribute</code>, see
@@ -296,6 +283,12 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
     return styleTextProperties;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

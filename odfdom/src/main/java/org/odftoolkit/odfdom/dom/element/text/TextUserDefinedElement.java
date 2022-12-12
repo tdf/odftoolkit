@@ -77,7 +77,7 @@ public class TextUserDefinedElement extends OdfElement {
   public Boolean getOfficeBooleanValueAttribute() {
     OfficeBooleanValueAttribute attr =
         (OfficeBooleanValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "boolean-value");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -191,7 +191,7 @@ public class TextUserDefinedElement extends OdfElement {
   public Double getOfficeValueAttribute() {
     OfficeValueAttribute attr =
         (OfficeValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "value");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Double.valueOf(attr.doubleValue());
     }
     return null;
@@ -249,7 +249,7 @@ public class TextUserDefinedElement extends OdfElement {
   public Boolean getTextFixedAttribute() {
     TextFixedAttribute attr =
         (TextFixedAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "fixed");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -296,6 +296,12 @@ public class TextUserDefinedElement extends OdfElement {
     attr.setValue(textNameValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -305,10 +311,25 @@ public class TextUserDefinedElement extends OdfElement {
       visitor.visit(this);
     }
   }
+
   /** Add text content. Only elements which are allowed to have text content offer this method. */
   public void newTextNode(String content) {
     if (content != null && !content.equals("")) {
       this.appendChild(this.getOwnerDocument().createTextNode(content));
     }
+  }
+
+  /** Removes all the content from the element */
+  @Override
+  public void removeContent() {
+    super.removeContent();
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "value");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "value-type");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "time-value");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "date-value");
+    this.removeAttributeNS(OdfDocumentNamespace.OFFICE.getUri(), "boolean-value");
+    this.removeAttributeNS(
+        "urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0", "value-type");
+    this.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "formula");
   }
 }

@@ -45,6 +45,7 @@
         <rnghtml.stylesheet>src/test/resources/xslt/rng/addRefs4rng-html.xsl</rnghtml.stylesheet>
         <rng2docbook.stylesheet>src/test/resources/xslt/rng/rng2docbook.xsl</rng2docbook.stylesheet>
         <odf.defaultvalue.extraction>src/test/resources/xslt/getAttributeDefaults.xsl</odf.defaultvalue.extraction>
+        <!-- version has to be used twice in pom.xml and can not be handled by dependencyManagement of root pom.xml -->
         <version.saxon-he>9.9.1-8</version.saxon-he>
     </properties>
 
@@ -240,14 +241,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <!-- defined in the parent pom.xml -->
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                    <meminitial>512m</meminitial>
-                    <maxmem>1024m</maxmem>
-                    <showDeprecation>true</showDeprecation>
-                </configuration>
+                <!-- configuration defined in the parent pom.xml -->
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>

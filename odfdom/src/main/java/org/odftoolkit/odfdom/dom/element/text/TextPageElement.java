@@ -91,6 +91,12 @@ public class TextPageElement extends OdfElement {
     attr.setValue(textMasterPageNameValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {
@@ -102,10 +108,6 @@ public class TextPageElement extends OdfElement {
   }
 
   @Override
-  /**
-   * If this element is the first - perhaps only - element of a logical group of XML elements. For
-   * instance: table, paragraph
-   */
   public boolean isComponentRoot() {
     return true;
   }

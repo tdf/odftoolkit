@@ -20,29 +20,36 @@ import static org.odftoolkit.odfdom.changes.JsonOperationConsumer.addStyle;
 import static org.odftoolkit.odfdom.changes.JsonOperationConsumer.addText;
 import static org.odftoolkit.odfdom.changes.OperationConstants.OPK_STYLE_ID;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.number.DataStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberBooleanStyleElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberTextStyleElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
+import org.odftoolkit.odfdom.dom.element.table.TableTableRowElement;
 import org.odftoolkit.odfdom.dom.element.text.TextAElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextParagraphElementBase;
+import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberCurrencyStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberDateStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberPercentageStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberStyle;
 import org.odftoolkit.odfdom.incubator.doc.number.OdfNumberTimeStyle;
+import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  * A MultiCoomponent uses a single XML element to represent multiple components. This container can
@@ -230,7 +237,7 @@ class Cell<T> extends Component {
         }
       }
       if (currentValueType == null || changedToNumber || numberFormatChanged) {
-        DataStyleElement dataStyle = cell.getOwnDataStyle();
+        DataStyleElement dataStyle = getCellDataStyle(cell);
         if (dataStyle != null) {
           String valueType = "";
           String currencySymbol = "";
@@ -253,7 +260,8 @@ class Cell<T> extends Component {
           }
           if (!valueType.isEmpty()) {
             cell.setOfficeValueTypeAttribute(valueType);
-            cell.setCalcextValueTypeAttribute(valueType);
+            cell.setAttributeNS(
+                OdfDocumentNamespace.CALCEXT.getUri(), "calcext:value-type", valueType);
             cell.setOfficeCurrencyAttribute(currencySymbol);
             // make sure that an appropriate value is available:
             if (value == null && cell.getOfficeValueAttribute() == null) {
@@ -262,11 +270,11 @@ class Cell<T> extends Component {
               Boolean oldBooleanValue = cell.getOfficeBooleanValueAttribute();
               Double newValue = null;
               if (oldDateValue != null) {
-                newValue = new Double(MapHelper.dateToDouble(oldDateValue));
+                newValue = MapHelper.dateToDouble(oldDateValue);
               } else if (oldTimeValue != null) {
-                newValue = new Double(MapHelper.timeToDouble(oldTimeValue));
+                newValue = MapHelper.timeToDouble(oldTimeValue);
               } else if (oldBooleanValue != null) {
-                newValue = new Double(oldBooleanValue.booleanValue() ? 1 : 0);
+                newValue = Double.valueOf(oldBooleanValue ? 1 : 0);
               }
 
               if (newValue != null) {
@@ -337,5 +345,63 @@ class Cell<T> extends Component {
       }
     }
     return attrs;
+  }
+
+  public static DataStyleElement getCellDataStyle(TableTableCellElement cell) {
+    try {
+      String styleName = cell.getAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name");
+      String dataStyleName = "";
+      OdfFileDom xDoc = (OdfFileDom) cell.getOwnerDocument();
+      OdfDocument odfDoc = (OdfDocument) xDoc.getDocument();
+      OdfOfficeStyles officeStyles = odfDoc.getStylesDom().getOfficeStyles();
+      if (styleName == null || styleName.isEmpty()) {
+        TableTableRowElement row = (TableTableRowElement) cell.getParentNode();
+        TableTableCellElement rowCell = (TableTableCellElement) row.getFirstChild();
+        int cellIndex = 0;
+        while (rowCell != null) {
+          if (rowCell.equals(cell)) {
+            break;
+          }
+          cellIndex += rowCell.getRepetition();
+          rowCell = (TableTableCellElement) rowCell.getNextSibling();
+        }
+
+        Node tableNode = row.getParentNode();
+        TableTableColumnElement columnNode =
+            OdfElement.findFirstChildNode(TableTableColumnElement.class, tableNode);
+        int colIndex = 0;
+        while (columnNode != null) {
+          TableTableColumnElement column = columnNode;
+          if (colIndex <= cellIndex && cellIndex <= colIndex + column.getRepetition() - 1) {
+            styleName = column.getTableDefaultCellStyleNameAttribute();
+            break;
+          }
+          columnNode = (TableTableColumnElement) columnNode.getNextSibling();
+        }
+      }
+      OdfStyle ownStyle = officeStyles.getStyle(styleName, OdfStyleFamily.TableCell);
+      if (ownStyle == null) {
+        ownStyle =
+            odfDoc
+                .getContentDom()
+                .getAutomaticStyles()
+                .getStyle(styleName, OdfStyleFamily.TableCell);
+      }
+      dataStyleName =
+          ownStyle.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "data-style-name");
+      if (dataStyleName != null) {
+        DataStyleElement dataStyle = officeStyles.getAllDataStyles().get(dataStyleName);
+        if (dataStyle == null) {
+          dataStyle =
+              odfDoc.getContentDom().getAutomaticStyles().getAllDataStyles().get(dataStyleName);
+        }
+        return dataStyle;
+      }
+    } catch (SAXException e) {
+      Logger.getLogger(TableTableCellElement.class.getName()).log(Level.SEVERE, null, e);
+    } catch (IOException ex) {
+      Logger.getLogger(TableTableCellElement.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return null;
   }
 }

@@ -133,7 +133,7 @@ public class DrawStrokeDashElement extends OdfElement {
   public Integer getDrawDots1Attribute() {
     DrawDots1Attribute attr =
         (DrawDots1Attribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "dots1");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -189,7 +189,7 @@ public class DrawStrokeDashElement extends OdfElement {
   public Integer getDrawDots2Attribute() {
     DrawDots2Attribute attr =
         (DrawDots2Attribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "dots2");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return null;
@@ -292,6 +292,12 @@ public class DrawStrokeDashElement extends OdfElement {
     attr.setValue(drawStyleValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

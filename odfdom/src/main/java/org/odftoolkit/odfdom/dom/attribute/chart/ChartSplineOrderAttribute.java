@@ -72,12 +72,7 @@ public class ChartSplineOrderAttribute extends OdfAttribute {
   /** @return Returns the <code>int</code> value of the attribute */
   public int intValue() {
     String val = super.getValue();
-    try {
-      return Integer.parseInt(val);
-    } catch (NumberFormatException e) {
-      // TODO: validation handling/logging
-      throw (e);
-    }
+    return Integer.parseInt(val);
   }
 
   /**

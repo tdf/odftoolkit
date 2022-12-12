@@ -62,7 +62,7 @@ public class DbTableFilterElement extends OdfElement {
   /**
    * Create child element {@odf.element db:table-exclude-filter}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:table-exclude-filter}
    */
@@ -76,7 +76,7 @@ public class DbTableFilterElement extends OdfElement {
   /**
    * Create child element {@odf.element db:table-include-filter}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element db:table-include-filter}
    */
@@ -87,6 +87,12 @@ public class DbTableFilterElement extends OdfElement {
     return dbTableIncludeFilter;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

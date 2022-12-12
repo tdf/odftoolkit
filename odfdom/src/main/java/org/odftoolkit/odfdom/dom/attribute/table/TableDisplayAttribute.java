@@ -43,8 +43,9 @@ public class TableDisplayAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME =
       OdfName.newName(OdfDocumentNamespace.TABLE, "display");
-  public static final String DEFAULT_VALUE_TRUE = "true";
+
   public static final String DEFAULT_VALUE_FALSE = "false";
+  public static final String DEFAULT_VALUE_TRUE = "true";
 
   /**
    * Create the instance of OpenDocument attribute {@odf.attribute table:display}.
@@ -79,12 +80,7 @@ public class TableDisplayAttribute extends OdfAttribute {
   /** @return Returns the <code>boolean</code> value of the attribute */
   public boolean booleanValue() {
     String val = super.getValue();
-    try {
-      return Boolean.parseBoolean(val);
-    } catch (NumberFormatException e) {
-      // TODO: validation handling/logging
-      throw (e);
-    }
+    return Boolean.parseBoolean(val);
   }
 
   /**

@@ -34,7 +34,11 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
 import org.odftoolkit.odfdom.pkg.OdfPackageNamespace;
 
-/** Manifest implementation of OpenDocument element {@odf.element manifest:algorithm}. */
+/**
+ * Manifest implementation of OpenDocument element {@odf.element manifest:algorithm}.
+ *
+ * <p>This class can have any org.w3c.dom.Element child element.
+ */
 public class AlgorithmElement extends OdfElement {
 
   public static final OdfName ELEMENT_NAME =
@@ -70,7 +74,7 @@ public class AlgorithmElement extends OdfElement {
    */
   public String getAlgorithmNameAttribute() {
     AlgorithmNameAttribute attr =
-        (AlgorithmNameAttribute) getOdfAttribute(OdfPackageNamespace.MANIFEST, "algorithm-name");
+        (AlgorithmNameAttribute) getOdfAttribute(AlgorithmNameAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }
@@ -101,7 +105,7 @@ public class AlgorithmElement extends OdfElement {
   public String getInitialisationVectorAttribute() {
     InitialisationVectorAttribute attr =
         (InitialisationVectorAttribute)
-            getOdfAttribute(OdfPackageNamespace.MANIFEST, "initialisation-vector");
+            getOdfAttribute(InitialisationVectorAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
       return String.valueOf(attr.getValue());
     }

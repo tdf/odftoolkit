@@ -107,7 +107,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
     TextRelativeTabStopPositionAttribute attr =
         (TextRelativeTabStopPositionAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "relative-tab-stop-position");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextRelativeTabStopPositionAttribute.DEFAULT_VALUE);
@@ -137,7 +137,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
     TextUseChartObjectsAttribute attr =
         (TextUseChartObjectsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-chart-objects");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextUseChartObjectsAttribute.DEFAULT_VALUE);
@@ -167,7 +167,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
     TextUseDrawObjectsAttribute attr =
         (TextUseDrawObjectsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-draw-objects");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextUseDrawObjectsAttribute.DEFAULT_VALUE);
@@ -197,7 +197,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
     TextUseMathObjectsAttribute attr =
         (TextUseMathObjectsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-math-objects");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextUseMathObjectsAttribute.DEFAULT_VALUE);
@@ -227,7 +227,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
     TextUseOtherObjectsAttribute attr =
         (TextUseOtherObjectsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-other-objects");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextUseOtherObjectsAttribute.DEFAULT_VALUE);
@@ -257,7 +257,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
     TextUseSpreadsheetObjectsAttribute attr =
         (TextUseSpreadsheetObjectsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-spreadsheet-objects");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TextUseSpreadsheetObjectsAttribute.DEFAULT_VALUE);
@@ -304,6 +304,12 @@ public class TextObjectIndexSourceElement extends OdfElement {
     return textObjectIndexEntryTemplate;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

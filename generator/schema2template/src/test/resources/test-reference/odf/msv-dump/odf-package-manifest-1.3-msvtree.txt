@@ -1,0 +1,148 @@
+0: REF 'manifest',
+1: ELEMENT "manifest:manifest",
+2: SEQUENCE
+3: REF 'manifest-attlist',
+4: ATTRIBUTE "manifest:version",
+5: VALUE '1.3',
+3: CHOICE
+4: ONEOREMORE
+5: REF 'encrypted-key',
+6: ELEMENT "manifest:encrypted-key",
+7: SEQUENCE
+8: CHOICE
+9: ELEMENT "manifest:encryption-method",
+10: ATTRIBUTE "manifest:PGPAlgorithm",
+11: REF 'anyURI',
+12: DATA 'anyURI',
+9: EPSILON
+8: ELEMENT "manifest:keyinfo",
+9: ELEMENT "manifest:PGPData",
+10: SEQUENCE
+11: ELEMENT "manifest:PGPKeyID",
+12: REF 'base64Binary',
+13: DATA 'base64Binary',
+11: CHOICE
+12: ELEMENT "manifest:PGPKeyPacket",
+13: REF 'base64Binary',
+14: DATA 'base64Binary',
+12: EPSILON
+8: ELEMENT "manifest:CipherData",
+9: ELEMENT "manifest:CipherValue",
+10: REF 'base64Binary',
+11: DATA 'base64Binary',
+4: EPSILON
+3: ONEOREMORE
+4: REF 'file-entry',
+5: ELEMENT "manifest:file-entry",
+6: SEQUENCE
+7: REF 'file-entry-attlist',
+8: INTERLEAVE
+9: ATTRIBUTE "manifest:full-path",
+10: REF 'string',
+11: DATA 'string',
+9: CHOICE
+10: ATTRIBUTE "manifest:size",
+11: REF 'nonNegativeInteger',
+12: DATA 'nonNegativeInteger',
+10: EPSILON
+9: ATTRIBUTE "manifest:media-type",
+10: REF 'string',
+11: DATA 'string',
+9: CHOICE
+10: ATTRIBUTE "manifest:preferred-view-mode",
+11: CHOICE
+12: VALUE 'edit',
+12: VALUE 'presentation-slide-show',
+12: VALUE 'read-only',
+12: REF 'namespacedToken',
+13: DATA 'QName',
+10: EPSILON
+9: CHOICE
+10: ATTRIBUTE "manifest:version",
+11: REF 'string',
+12: DATA 'string',
+10: EPSILON
+7: CHOICE
+8: REF 'encryption-data',
+9: ELEMENT "manifest:encryption-data",
+10: SEQUENCE
+11: REF 'encryption-data-attlist',
+12: INTERLEAVE
+13: ATTRIBUTE "manifest:checksum-type",
+14: CHOICE
+15: VALUE 'SHA1/1K',
+15: REF 'anyURI',
+16: DATA 'anyURI',
+13: ATTRIBUTE "manifest:checksum",
+14: REF 'base64Binary',
+15: DATA 'base64Binary',
+11: REF 'algorithm',
+12: ELEMENT "manifest:algorithm",
+13: SEQUENCE
+14: REF 'algorithm-attlist',
+15: INTERLEAVE
+16: ATTRIBUTE "manifest:algorithm-name",
+17: CHOICE
+18: VALUE 'Blowfish CFB',
+18: REF 'anyURI',
+19: DATA 'anyURI',
+16: ATTRIBUTE "manifest:initialisation-vector",
+17: REF 'base64Binary',
+18: DATA 'base64Binary',
+14: REF 'anyElements',
+15: CHOICE
+16: ONEOREMORE
+17: ELEMENT "*",
+18: MIXED
+19: REF 'anyAttListOrElements',
+20: SEQUENCE
+21: CHOICE
+22: ONEOREMORE
+23: ATTRIBUTE "*",
+24: STRING
+22: EPSILON
+21: REF 'anyElements',
+22: CHOICE
+23: ONEOREMORE
+23: EPSILON
+16: EPSILON
+11: CHOICE
+12: REF 'start-key-generation',
+13: ELEMENT "manifest:start-key-generation",
+14: REF 'start-key-generation-attlist',
+15: INTERLEAVE
+16: ATTRIBUTE "manifest:start-key-generation-name",
+17: CHOICE
+18: VALUE 'SHA1',
+18: REF 'anyURI',
+19: DATA 'anyURI',
+16: CHOICE
+17: ATTRIBUTE "manifest:key-size",
+18: REF 'nonNegativeInteger',
+19: DATA 'nonNegativeInteger',
+17: EPSILON
+12: EPSILON
+11: REF 'key-derivation',
+12: ELEMENT "manifest:key-derivation",
+13: REF 'key-derivation-attlist',
+14: CHOICE
+15: ATTRIBUTE "manifest:key-derivation-name",
+16: VALUE 'PGP',
+15: INTERLEAVE
+16: ATTRIBUTE "manifest:key-derivation-name",
+17: CHOICE
+18: VALUE 'PBKDF2',
+18: REF 'anyURI',
+19: DATA 'anyURI',
+16: ATTRIBUTE "manifest:salt",
+17: REF 'base64Binary',
+18: DATA 'base64Binary',
+16: ATTRIBUTE "manifest:iteration-count",
+17: REF 'nonNegativeInteger',
+18: DATA 'nonNegativeInteger',
+16: CHOICE
+17: ATTRIBUTE "manifest:key-size",
+18: REF 'nonNegativeInteger',
+19: DATA 'nonNegativeInteger',
+17: EPSILON
+8: EPSILON

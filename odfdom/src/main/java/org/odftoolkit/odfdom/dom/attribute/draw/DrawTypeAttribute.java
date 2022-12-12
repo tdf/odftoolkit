@@ -40,8 +40,9 @@ import org.odftoolkit.odfdom.pkg.OdfName;
 public class DrawTypeAttribute extends OdfAttribute {
 
   public static final OdfName ATTRIBUTE_NAME = OdfName.newName(OdfDocumentNamespace.DRAW, "type");
-  public static final String DEFAULT_VALUE_STANDARD = Value.STANDARD.toString();
+
   public static final String DEFAULT_VALUE_NON_PRIMITIVE = Value.NON_PRIMITIVE.toString();
+  public static final String DEFAULT_VALUE_STANDARD = Value.STANDARD.toString();
 
   /**
    * Create the instance of OpenDocument attribute {@odf.attribute draw:type}.

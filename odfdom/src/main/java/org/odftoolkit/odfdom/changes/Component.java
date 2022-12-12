@@ -600,6 +600,11 @@ public class Component {
     return mRootElement.getOwnerDocument();
   }
 
+  /** @return the child starting from the given position and at cut at the endPosition */
+  public Node getChildNode(int startPosition, int endPosition) {
+    return getChildNode(startPosition);
+  }
+
   /** @return the child at the given position */
   public Node getChildNode(int position) {
     Node rootElement = null;
@@ -797,8 +802,8 @@ public class Component {
   /**
    * Adds the given component as new child component. No XML elements are being changed!
    *
-   * @param index starting with 0 representing the position of the child, if -1 the new child will
-   *     be appended
+   * @param pos starting with 0 representing the position of the child, if -1 the new child will be
+   *     appended
    */
   static void addComponent(int pos, Component parent, Component child) {
     parent.addChild(pos, child);

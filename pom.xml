@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Licensed to the Apache Software Foundation (ASF) under one
-  or more contributor license agreements.  See the NOTICE file
-  distributed with this work for additional information
-  regarding copyright ownership.  The ASF licenses this file
-  to you under the Apache License, Version 2.0 (the
-  "License"); you may not use this file except in compliance
-  with the License.  You may obtain a copy of the License at
+     Licensed to the Apache Software Foundation (ASF) under one
+     or more contributor license agreements.  See the NOTICE file
+     distributed with this work for additional information
+     regarding copyright ownership.  The ASF licenses this file
+     to you under the Apache License, Version 2.0 (the
+     "License"); you may not use this file except in compliance
+     with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+     http://www.apache.org/licenses/LICENSE-2.0
 
-  Unless required by applicable law or agreed to in writing,
-  software distributed under the License is distributed on an
-  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-  KIND, either express or implied.  See the License for the
-  specific language governing permissions and limitations
-  under the License.
+     Unless required by applicable law or agreed to in writing,
+     software distributed under the License is distributed on an
+     "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+     specific language governing permissions and limitations
+     under the License.
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -29,14 +29,15 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>26</version>
+        <version>27</version>
         <relativePath/>
     </parent>
 
     <properties>
-        <jdk.version>11</jdk.version>
         <javadoc.bottom>Copyright © {inceptionYear}–2018 Apache Software Foundation; Copyright © 2018–{currentYear} {organizationName}. All rights reserved.</javadoc.bottom>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- explicitly setting JDK version for compiler source & target -->
+        <jdk.version>11</jdk.version> <!-- all three JDK versions should not differ -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <!-- ANT driven release bundle creation: 3 ZIPs for the complete Toolkit for binaries, documentation and sources -->
@@ -52,45 +53,19 @@
         <release.zip.doc>odftoolkit-${project.version}-doc.zip</release.zip.doc>
         <release.zip.src>odftoolkit-${project.version}-src.zip</release.zip.src>
         <osgi.import.range>[1.0,2)</osgi.import.range>
+        <supported-odf-version>1.2</supported-odf-version>
+        <skipTests>false</skipTests>
+        <!-- to skip even compiling the tests is honored by Surefire, Failsafe and Compiler Plugin -->
+        <maven.test.skip>${skipTests}</maven.test.skip>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
+        <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
     </properties>
 
-
     <!-- At root project level defining dependencies useable across all projects.
-    Making version management easy and consistent! -->
+         Making version management easy and consistent! -->
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>xerces</groupId>
-                <artifactId>xercesImpl</artifactId>
-                <version>2.12.2</version>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.13.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.jena</groupId>
-                <artifactId>jena-core</artifactId>
-                <version>4.6.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.jena</groupId>
-                <artifactId>jena-core</artifactId>
-                <classifier>tests</classifier>
-                <version>4.6.0</version>
-            </dependency>
-            <!-- Jena 3.16 requires the following slf4j API -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.7.31</version>
-            </dependency>
-            <dependency>
-                <groupId>net.rootdev</groupId>
-                <artifactId>java-rdfa</artifactId>
-                <version>1.0.0-BETA1</version>
-            </dependency>
             <dependency>
                 <groupId>commons-validator</groupId>
                 <artifactId>commons-validator</artifactId>
@@ -102,19 +77,114 @@
                 <version>1.4</version>
             </dependency>
             <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.13.2</version>
+            </dependency>
+            <dependency>
                 <groupId>net.java.dev.msv</groupId>
                 <artifactId>msv-core</artifactId>
                 <version>2022.7</version>
+            </dependency>
+            <dependency>
+                <groupId>net.rootdev</groupId>
+                <artifactId>java-rdfa</artifactId>
+                <version>1.0.0-BETA1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.ant</groupId>
+                <artifactId>ant</artifactId>
+                <version>1.10.11</version>
+            </dependency>
+            <!-- used by ODFDOM for metadata -->
+            <dependency>
+                <groupId>org.apache.jena</groupId>
+                <artifactId>jena-core</artifactId>
+                <version>4.6.0</version>
+            </dependency>
+            <!-- used by ODFDOM for metadata -->
+            <dependency>
+                <groupId>org.apache.jena</groupId>
+                <artifactId>jena-core</artifactId>
+                <classifier>tests</classifier>
+                <version>4.6.0</version>
+            </dependency>
+            <!-- used by schema2template for XML grammar to graph functionality -->
+            <dependency>
+                <groupId>org.apache.tinkerpop</groupId>
+                <artifactId>neo4j-gremlin</artifactId>
+                <version>3.6.1</version>
+            </dependency>
+            <!-- used by schema2template for XML grammar to graph functionality -->
+            <dependency>
+                <groupId>org.apache.tinkerpop</groupId>
+                <artifactId>tinkergraph-gremlin</artifactId>
+                <version>3.6.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>1.22</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.12.0</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.json/json -->
+            <!-- used by ODFDOM for serializing user changes to JSON stack (e.g. for web offices)  -->
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>20190722</version>
+            </dependency>
+            <!-- used by schema2template for filling various templates with grammar data -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>2.3</version>
             </dependency>
             <dependency>
                 <groupId>org.iso_relax.verifier.jaxp.validation</groupId>
                 <artifactId>isorelax-jaxp-bridge</artifactId>
                 <version>1.0</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.jopendocument/isorelax-jaxp-bridge-ILM -->
             <dependency>
-                <groupId>org.apache.ant</groupId>
-                <artifactId>ant</artifactId>
-                <version>1.10.11</version>
+                <groupId>org.jopendocument</groupId>
+                <artifactId>isorelax-jaxp-bridge-ILM</artifactId>
+                <version>1.1</version>
+            </dependency>
+            <!-- Jena 3.16 requires the following slf4j logging API (therefore our ODFDOM) -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.36</version>
+            </dependency>
+            <!-- Jena 3.16 requires the following slf4j logging API (therefore our ODFDOM) -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>1.7.36</version>
+            </dependency>
+            <!-- Used by ODFDOM, i.e. org/odftoolkit/odfdom/IElementWriter.java -->
+            <dependency>
+                <groupId>xalan</groupId>
+                <artifactId>serializer</artifactId>
+                <exclusions>
+                    <exclusion>
+                        <groupId>xml-apis</groupId>
+                        <artifactId>xml-apis</artifactId>
+                    </exclusion>
+                </exclusions>
+                <version>2.7.2</version>
+            </dependency>
+            <!-- used by generator, validator and odfdom module -->
+            <dependency>
+                <groupId>xerces</groupId>
+                <artifactId>xercesImpl</artifactId>
+                <version>2.12.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -215,9 +285,9 @@
     <mailingLists>
         <mailingList>
             <!--
-            Help: <dev+help@odftoolkit.org>
-            Digest subscription: <dev+subscribe-digest@odftoolkit.org>
-            No-mail subscription: <dev+subscribe-nomail@odftoolkit.org>
+                 Help: <dev+help@odftoolkit.org>
+                 Digest subscription: <dev+subscribe-digest@odftoolkit.org>
+                 No-mail subscription: <dev+subscribe-nomail@odftoolkit.org>
             -->
             <post>dev@odftoolkit.org</post>
             <subscribe>dev+subscribe@odftoolkit.org</subscribe>
@@ -229,157 +299,187 @@
 
 
     <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
-                <configuration>
-                    <!-- defined in the parent pom.xml -->
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                    <testSource>${jdk.version}</testSource>
-                    <testTarget>${jdk.version}</testTarget>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <!--
-                    <compilerArgs>
-                        <arg>-Xlint:unchecked</arg>
-                        <arg>-Xlint:deprecation</arg>
-                    </compilerArgs>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.2</version>
+                    <configuration>
+                        <!-- <forkCount>3</forkCount>
+                            <reuseForks>true</reuseForks>-->
+                        <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
+                        <systemPropertyVariables>
+                            <odftoolkit.version>${project.version}</odftoolkit.version>
+                            <odftoolkit.git.branch>${git.branch}</odftoolkit.git.branch>
+                            <odftoolkit.git.commit.id.describe>${git.commit.id.describe}</odftoolkit.git.commit.id.describe>
+                            <odftoolkit.git.remote.origin.url>${git.remote.origin.url}</odftoolkit.git.remote.origin.url>
+                            <odftoolkit.git.commit.time>${git.commit.time}</odftoolkit.git.commit.time>
+                        </systemPropertyVariables>
+                        <skipTests>${skipTests}</skipTests>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.10.1</version>
+                    <configuration>
+                        <!-- defined in the parent pom.xml -->
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                        <testSource>${jdk.version}</testSource>
+                        <testTarget>${jdk.version}</testTarget>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <showDeprecation>true</showDeprecation>
+                        <meminitial>512m</meminitial>
+                        <maxmem>1024m</maxmem>
+                        <!--
+                             <compilerArgs>
+                             <arg>-Xlint:unchecked</arg>
+                             <arg>-Xlint:deprecation</arg>
+                             </compilerArgs>
+                        -->
+                        <!--
+                             <compilerArgs>
+                             <arg>-verbose</arg>
+                             <arg>-Xlint:all,-options,-path</arg>
+                             </compilerArgs>
+                        -->
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.4.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.2.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.2.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.cosium.code</groupId>
+                    <artifactId>git-code-format-maven-plugin</artifactId>
+                    <version>2.7</version>
+                    <!-- BUG WORKAROUND: unformatted/uncommitted new files break the build
+                         run from command-line to format:
+                         mvn git-code-format:format-code -D"gcf.globPattern=**/*"
                     -->
-                    <!--
-                    <compilerArgs>
-                        <arg>-verbose</arg>
-                        <arg>-Xlint:all,-options,-path</arg>
-                    </compilerArgs>
-                    -->
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.4.0</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.2</version>
-            </plugin>
-            <plugin>
-                <groupId>com.cosium.code</groupId>
-                <artifactId>git-code-format-maven-plugin</artifactId>
-                <version>2.6</version>
-                <!-- BUG WORKAROUND: unformatted/uncommitted new files break the build
-                    run from command-line to format:
-                    mvn git-code-format:format-code -Dgcf.globPattern=**/*
-                -->
-                <executions>
-                    <!-- On commit, format the modified java files -->
-                    <execution>
-                        <id>install-formatter-hook</id>
-                        <goals>
-                            <goal>install-hooks</goal>
-                        </goals>
-                    </execution>
-                    <!-- On Maven verify phase, fail if any file
-                    (including unmodified) is badly formatted -->
-                    <execution>
-                        <id>validate-code-format</id>
-                        <goals>
-                            <goal>validate-code-format</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.ec4j.maven</groupId>
-                <artifactId>editorconfig-maven-plugin</artifactId>
-                <version>0.0.11</version>
-                <executions>
-                    <execution>
-                        <id>check</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>format</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <!-- All files are included by default: -->
-                    <includes>
-                        <include>**</include>
-                    </includes>
-                    <excludes>
-                        <!-- +++++++++++ https://ec4j.github.io/editorconfig-maven-plugin/ +++++++++++-->
-                        <!-- Note that maven submodule directories and many non-source file patterns are excluded by default -->
-                        <!--     see https://github.com/ec4j/editorconfig-maven-plugin/blob/master/ec4j-lint-api/src/main/java/org/ec4j/maven/lint/api/Constants.java#L37 -->
-                        <!--      See https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties -->
-                        <!--      !!! 'mvn editorconfig:format' fixes format via command line!!! -->
+                    <executions>
+                        <!-- On commit, format the modified java files -->
+                        <execution>
+                            <id>install-formatter-hook</id>
+                            <goals>
+                                <goal>install-hooks</goal>
+                            </goals>
+                        </execution>
+                        <!-- On Maven verify phase, fail if any file
+                             (including unmodified) is badly formatted -->
+                        <execution>
+                            <id>validate-code-format</id>
+                            <goals>
+                                <goal>validate-code-format</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.ec4j.maven</groupId>
+                    <artifactId>editorconfig-maven-plugin</artifactId>
+                    <version>0.0.11</version>
+                    <executions>
+                        <execution>
+                            <id>check</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>format</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <!-- All files are included by default: -->
+                        <includes>
+                            <include>**</include>
+                        </includes>
+                        <excludes>
+                            <!-- +++++++++++ https://ec4j.github.io/editorconfig-maven-plugin/ +++++++++++-->
+                            <!-- Note that maven submodule directories and many non-source file patterns are excluded by default -->
+                            <!--     see https://github.com/ec4j/editorconfig-maven-plugin/blob/master/ec4j-lint-api/src/main/java/org/ec4j/maven/lint/api/Constants.java#L37 -->
+                            <!--      See https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties -->
+                            <!--      !!! 'mvn editorconfig:format' fixes format via command line!!! -->
 
-                        <!-- You can exclude further files from processing: -->
-                        <!--<exclude>src/main/**/*.whatever</exclude>-->
-                        <exclude>target</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.8.2</version>
-                <executions>
-                    <execution>
-                        <id>maven-deploy</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <localCheckout>true</localCheckout>
-                    <pushChanges>false</pushChanges>
-                    <mavenExecutorId>forked-path</mavenExecutorId>
-                    <arguments>-Dgpg.passphrase=${gpg.passphraseServerId}</arguments>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.scm</groupId>
-                        <artifactId>maven-scm-provider-gitexe</artifactId>
-                        <version>1.11.2</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.maven.scm</groupId>
-                        <artifactId>maven-scm-api</artifactId>
-                        <version>1.11.2</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.8</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
-        </plugins>
+                            <!-- You can exclude further files from processing: -->
+                            <!--<exclude>src/main/**/*.whatever</exclude>-->
+                            <exclude>target</exclude>
+                            <exclude>src/test/resources/test-reference/**/*.*</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                    <executions>
+                        <execution>
+                            <id>maven-deploy</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>deploy</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.3</version>
+                    <configuration>
+                        <localCheckout>true</localCheckout>
+                        <pushChanges>false</pushChanges>
+                        <mavenExecutorId>forked-path</mavenExecutorId>
+                        <arguments>-Dgpg.passphrase=${gpg.passphraseServerId}</arguments>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.scm</groupId>
+                            <artifactId>maven-scm-provider-gitexe</artifactId>
+                            <version>1.11.2</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.maven.scm</groupId>
+                            <artifactId>maven-scm-api</artifactId>
+                            <version>1.11.2</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.8</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <serverId>ossrh</serverId>
+                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <!-- https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/ -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
     <profiles>
         <profile>
@@ -389,7 +489,6 @@
                     <plugin>
                         <groupId>org.apache.rat</groupId>
                         <artifactId>apache-rat-plugin</artifactId>
-                        <version>0.13</version>
                         <configuration>
                             <excludes>
                                 <!-- for all projects -->
@@ -404,7 +503,8 @@
                                 <exclude>**/target/**</exclude>
                                 <exclude>.travis.yml</exclude>
                                 <exclude>CHANGES.txt</exclude>
-                                <exclude>README.md</exclude>
+                                <exclude>CODE_OF_CONDUCT.md</exclude>
+                                <exclude>**/README.md</exclude>
                                 <exclude>DEPENDENCIES</exclude>
                                 <exclude>docs/**/*</exclude>
                                 <exclude>manifest.mf</exclude>
@@ -439,26 +539,28 @@
             </build>
         </profile>
         <!-- Profile for deploying to the Sonatype repository, which
-        requires GPG signatures
-        see
-        https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
-        https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
-        https://issues.sonatype.org/browse/OSSRH-960
+             requires GPG signatures
+             see
+             https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+             https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
+             https://issues.sonatype.org/browse/OSSRH-960
         -->
         <!-- GPG Signature on release -->
         <profile>
             <id>release-sign-artifacts</id>
+            <!-- will ask for gpg passphrase for every build on Windows when gpg.keyname exists!
             <activation>
                 <property>
                     <name>gpg.keyname</name>
                 </property>
-            </activation>
+            </activation> -->
             <build>
                 <plugins>
                     <!-- see http://maven.apache.org/plugins/maven-gpg-plugin/usage.html -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.0.1</version>
                         <executions>
                             <execution>
                                 <goals>
@@ -468,7 +570,7 @@
                                 <phase>verify</phase>
                                 <configuration>
                                     <!-- Add GPG passphrase in Maven settings.xml under .m2 home, see
-                                    https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
+                                         https://dzone.com/articles/publish-your-artifacts-to-maven-central -->
                                     <keyname>${gpg.keyname}</keyname>
                                     <passphraseServerId>${gpg.passphraseServerId}</passphraseServerId>
                                 </configuration>

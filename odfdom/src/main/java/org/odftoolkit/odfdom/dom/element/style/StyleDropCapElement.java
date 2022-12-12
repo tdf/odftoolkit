@@ -106,7 +106,7 @@ public class StyleDropCapElement extends OdfStylableElement {
   public Integer getStyleLengthAttribute() {
     StyleLengthAttribute attr =
         (StyleLengthAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "length");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(StyleLengthAttribute.DEFAULT_VALUE);
@@ -134,7 +134,7 @@ public class StyleDropCapElement extends OdfStylableElement {
   public Integer getStyleLinesAttribute() {
     StyleLinesAttribute attr =
         (StyleLinesAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "lines");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(StyleLinesAttribute.DEFAULT_VALUE);
@@ -180,6 +180,12 @@ public class StyleDropCapElement extends OdfStylableElement {
     attr.setValue(styleStyleNameValue);
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

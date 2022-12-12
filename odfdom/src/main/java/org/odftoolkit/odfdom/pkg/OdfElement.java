@@ -206,6 +206,15 @@ public abstract class OdfElement extends ElementNSImpl {
   }
 
   /**
+   * Set an ODF attribute to this element
+   *
+   * @param name name of the attribute to be set
+   * @param value
+   */
+  public void setOdfAttribute(String name, String value) {
+    setAttribute(name, value);
+  }
+  /**
    * Retrieves a value of an ODF attribute by <code>OdfName</code>.
    *
    * @param name The qualified name of the ODF attribute.
@@ -235,6 +244,16 @@ public abstract class OdfElement extends ElementNSImpl {
    */
   public OdfAttribute getOdfAttribute(NamespaceName namespace, String localname) {
     return (OdfAttribute) getAttributeNodeNS(namespace.getUri(), localname);
+  }
+
+  /**
+   * Retrieves an ODF attribute by local name.
+   *
+   * @param localname The local name of the ODF attribute.
+   * @return The <code>OdfAttribute</code> or <code>null</code> if the attribute does not exist.
+   */
+  public OdfAttribute getOdfAttribute(String localname) {
+    return (OdfAttribute) getAttributeNode(localname);
   }
 
   /**
@@ -998,9 +1017,10 @@ public abstract class OdfElement extends ElementNSImpl {
   }
 
   /**
-   * @param true if the text should not count as for component path nor the element root itself.
-   *     This might occur for nested paragraphs or ignored text element (e.g. text:note-citation).
-   *     For instance called by a SAX Component parser, * * * * * * * see <code>
+   * @param isIngoredComponent true if the text should not count as for component path nor the
+   *     element root itself. This might occur for nested paragraphs or ignored text element (e.g.
+   *     text:note-citation). For instance called by a SAX Component parser, * * * * * * * see
+   *     <code>
    *     org.odftoolkit.odfdom.component.OdfFileSaxHandler</code>
    */
   public void ignoredComponent(boolean isIngoredComponent) {
@@ -1212,6 +1232,17 @@ public abstract class OdfElement extends ElementNSImpl {
    * @return the child node might be text or element
    */
   public Node receiveNode(int textPosStart) {
+    return this.receiveNode(textPosStart, textPosStart + 1);
+  }
+
+  /** ******************************************************** */
+  /**
+   * Receives node from this text container element.
+   *
+   * @param textPosStart The start delimiter for the child
+   * @return the child node might be text or element
+   */
+  public Node receiveNode(int textPosStart, int textPosEnd) {
     if (textPosStart < 0) {
       Logger.getLogger(OdfElement.class.getName())
           .warning(
@@ -1224,7 +1255,7 @@ public abstract class OdfElement extends ElementNSImpl {
         this.getFirstChild(),
         0,
         textPosStart,
-        textPosStart + 1,
+        textPosEnd,
         TextContentTraverser.Algorithm.RECEIVE,
         nodeContainer,
         withinTextContainer);
@@ -1239,7 +1270,7 @@ public abstract class OdfElement extends ElementNSImpl {
   /**
    * @param textPosStart the first text level component to be marked, start counting with 0
    * @param textPosEnd the last text level component to be marked, start counting with 0
-   * @param newSelection the element that should embrace the text defined by the positions provided
+   * @param formatChanges the changes to be applied to the text
    */
   public void markText(int textPosStart, int textPosEnd, JSONObject formatChanges) {
     if (formatChanges != null) {
@@ -1332,7 +1363,7 @@ public abstract class OdfElement extends ElementNSImpl {
    * the span of the previous character will be expanded
    *
    * @param newString string to be inserted
-   * @param position text index of the new string
+   * @param textPosStart text index of the new string
    */
   public void insert(String newString, int textPosStart) {
     if (newString != null && !newString.isEmpty()) {
@@ -1350,8 +1381,8 @@ public abstract class OdfElement extends ElementNSImpl {
    * Insert text to a certain position. The text will be appended to the previous position text, so
    * the span of the previous character will be expanded
    *
-   * @param newString string to be inserted
-   * @param position text index of the new string
+   * @param content content to be inserted
+   * @param textPosStart text index of the new content
    */
   private void insertContent(Object content, int textPosStart) { // parameter order?
     if (textPosStart < 0) {
@@ -1524,11 +1555,11 @@ public abstract class OdfElement extends ElementNSImpl {
           currentPos = algorithm.execute(node, currentPos, posStart, posEnd, data[0], data[1]);
           node = _nextSibling;
         }
-      } else {
+      } else if (algorithm.equals(Algorithm.RECEIVE)) {
         boolean withinTextContainer = (Boolean) data[1];
-        while (node != null && currentPos < posEnd) {
+        while (node != null && (posEnd < 0 || currentPos < posEnd)) {
           // IMPORTANT: get next sibling first, otherwise references get lost by Xerces during
-          // splitting
+          // splitting later in the recursion traversing from one sibling to the next
           Node _nextSibling = node.getNextSibling();
           // ToDo: || algorithm.equals(Algorithm.MOVE)
           if (node instanceof Element) {
@@ -1547,6 +1578,9 @@ public abstract class OdfElement extends ElementNSImpl {
           // next sibling will be checked
           node = _nextSibling;
         }
+      } else {
+        throw new RuntimeException(
+            "OdfElement: Algorithm not implemented: " + algorithm.toString());
       }
       return currentPos;
     }
@@ -1558,8 +1592,9 @@ public abstract class OdfElement extends ElementNSImpl {
      * @param posStart the text position where the span starts
      * @param posEnd the text position, where the span ends (one higher as the last component number
      *     to be included)
-     * @param newSpan the span collecting the marked components
-     * @return
+     * @param algorithm is modifying the
+     * @param data optional for the algorithm
+     * @return new adopted currentNode
      */
     private static int checkElementNode(
         Element currentNode,
@@ -1824,7 +1859,7 @@ public abstract class OdfElement extends ElementNSImpl {
        * @param posStart the start position of the span.
        * @param posEnd the end position of the span as string position. NOTE: One higher than the
        *     originally given component position. Therefore always one higher than posStart.
-       * @param newNode
+       * @param formatChanges the changes to be applied to the text
        * @return the position of the next component to be checked
        */
       int mark(
@@ -2209,22 +2244,23 @@ public abstract class OdfElement extends ElementNSImpl {
             contentLength = ((OdfElement) currentNode).getRepetition();
           }
 
-          // if the current node is selected
-          if (currentPos == posStart && (contentLength == 1 || currentNode instanceof Text)) {
+          // if the current node is selected & does not have to be cut
+          if (currentPos == posStart && (posEnd < 0 || (contentLength + posStart - 1) <= posEnd)) {
             newNodeContainer.add(currentNode);
             currentPos = posEnd;
-          } else if (currentPos + contentLength
-              > posStart) { // else if only a part of the text node is selected
+          } else if (posEnd > 0
+              && (currentPos + contentLength - 1)
+                  > posEnd) { // else if only a part of the text node is selected
             Node secondPart = null;
             if (currentNode instanceof Text) {
               // splitCursor is the first character of second part (counting starts with 0)
-              secondPart = ((Text) currentNode).splitText(posStart - currentPos);
+              secondPart = ((Text) currentNode).splitText(posEnd - currentPos);
               newNodeContainer.add(secondPart);
             } else {
               // handle component split...
               Node thirdPart = null;
               Node parent = ((OdfElement) currentNode).getParentNode();
-              secondPart = ((OdfElement) currentNode).split(posStart - currentPos);
+              secondPart = ((OdfElement) currentNode).split(posEnd - currentPos);
               if (((OdfElement) secondPart).getRepetition() > 1) {
                 thirdPart = ((OdfElement) secondPart).split(1);
               }

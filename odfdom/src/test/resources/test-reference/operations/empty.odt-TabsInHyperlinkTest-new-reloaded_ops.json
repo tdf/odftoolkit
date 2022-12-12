@@ -16,10 +16,10 @@
 {"name":"addStyle","type":"paragraph","styleId":"Text_20_body","attrs":{"paragraph":{"marginBottom":212,"marginTop":0}},"parent":"Standard","styleName":"Text body"},
 {"name":"addParagraph","start":[1],"attrs":{"styleId":"Standard"}},
 {"name":"addText","start":[1,1],"text":"Empty "},
-{"name":"addText","start":[1,7],"text":"D"},
-{"name":"addTab","start":[1,8]},
+{"name":"addText","start":[1,7],"text":"Do"},
 {"name":"addTab","start":[1,9]},
-{"name":"addText","start":[1,10],"text":"o"},
-{"name":"addText","start":[1,11],"text":"cument"},
+{"name":"addText","start":[1,10],"text":"c"},
+{"name":"addText","start":[1,11],"text":"ument"},
+{"name":"addTab","start":[1,16]},
 {"name":"format","start":[1,7],"end":[1,10],"attrs":{"character":{"url":"http://www.heise.de"}}}
 ]}

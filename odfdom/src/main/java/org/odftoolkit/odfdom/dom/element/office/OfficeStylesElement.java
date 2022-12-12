@@ -71,7 +71,7 @@ public class OfficeStylesElement extends OdfOfficeStyles {
    * @param ownerDoc The type is <code>OdfFileDom</code>
    */
   public OfficeStylesElement(OdfFileDom ownerDoc) {
-    super(ownerDoc);
+    super(ownerDoc, ELEMENT_NAME);
   }
 
   /**
@@ -298,7 +298,7 @@ public class OfficeStylesElement extends OdfOfficeStyles {
   /**
    * Create child element {@odf.element style:default-page-layout}.
    *
-   * <p>Child element is new in Odf 1.2
+   * <p>Child element was added in ODF 1.2
    *
    * @return the element {@odf.element style:default-page-layout}
    */
@@ -404,7 +404,7 @@ public class OfficeStylesElement extends OdfOfficeStyles {
    *     TableLastRowStartColumnAttribute</code>, see {@odf.attribute table:last-row-start-column}
    *     at specification
    * @param tableNameValue the <code>String</code> value of <code>TableNameAttribute</code>, see
-   *     {@odf.attribute table:name} at specification Child element is new in Odf 1.2
+   *     {@odf.attribute table:name} at specification Child element was added in ODF 1.2
    * @return the element {@odf.element table:table-template}
    */
   public TableTableTemplateElement newTableTableTemplateElement(
@@ -502,6 +502,12 @@ public class OfficeStylesElement extends OdfOfficeStyles {
     return textOutlineStyle;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

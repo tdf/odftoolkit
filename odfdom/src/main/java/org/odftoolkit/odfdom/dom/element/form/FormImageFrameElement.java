@@ -139,7 +139,7 @@ public class FormImageFrameElement extends OdfElement {
   public Boolean getFormDisabledAttribute() {
     FormDisabledAttribute attr =
         (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
@@ -249,7 +249,7 @@ public class FormImageFrameElement extends OdfElement {
   public Boolean getFormPrintableAttribute() {
     FormPrintableAttribute attr =
         (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);
@@ -277,7 +277,7 @@ public class FormImageFrameElement extends OdfElement {
   public Boolean getFormReadonlyAttribute() {
     FormReadonlyAttribute attr =
         (FormReadonlyAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "readonly");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(FormReadonlyAttribute.DEFAULT_VALUE);
@@ -404,6 +404,12 @@ public class FormImageFrameElement extends OdfElement {
     return officeEventListeners;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

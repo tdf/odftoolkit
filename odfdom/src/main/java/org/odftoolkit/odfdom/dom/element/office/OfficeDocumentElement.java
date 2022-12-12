@@ -33,8 +33,6 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.grddl.GrddlTransformationAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeMimetypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.office.OfficeVersionAttribute;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
-import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
@@ -159,9 +157,9 @@ public class OfficeDocumentElement extends OdfElement {
    *
    * @return the element {@odf.element office:automatic-styles}
    */
-  public OdfOfficeAutomaticStyles newOfficeAutomaticStylesElement() {
-    OdfOfficeAutomaticStyles officeAutomaticStyles =
-        ((OdfFileDom) this.ownerDocument).newOdfElement(OdfOfficeAutomaticStyles.class);
+  public OfficeAutomaticStylesElement newOfficeAutomaticStylesElement() {
+    OfficeAutomaticStylesElement officeAutomaticStyles =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeAutomaticStylesElement.class);
     this.appendChild(officeAutomaticStyles);
     return officeAutomaticStyles;
   }
@@ -245,13 +243,19 @@ public class OfficeDocumentElement extends OdfElement {
    *
    * @return the element {@odf.element office:styles}
    */
-  public OdfOfficeStyles newOfficeStylesElement() {
-    OdfOfficeStyles officeStyles =
-        ((OdfFileDom) this.ownerDocument).newOdfElement(OdfOfficeStyles.class);
+  public OfficeStylesElement newOfficeStylesElement() {
+    OfficeStylesElement officeStyles =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeStylesElement.class);
     this.appendChild(officeStyles);
     return officeStyles;
   }
 
+  /**
+   * Accept an visitor instance to allow the visitor to do some operations. Refer to visitor design
+   * pattern to get a better understanding.
+   *
+   * @param visitor an instance of DefaultElementVisitor
+   */
   @Override
   public void accept(ElementVisitor visitor) {
     if (visitor instanceof DefaultElementVisitor) {

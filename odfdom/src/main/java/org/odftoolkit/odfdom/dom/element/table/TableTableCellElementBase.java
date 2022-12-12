@@ -48,10 +48,46 @@ import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlDatatypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xhtml.XhtmlPropertyAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawCaptionElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawCircleElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawConnectorElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawControlElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawCustomShapeElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawEllipseElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawGElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawLineElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawMeasureElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawPageThumbnailElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawPathElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawPolygonElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawPolylineElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawRectElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawRegularPolygonElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeAnnotationElement;
+import org.odftoolkit.odfdom.dom.element.text.TextAlphabeticalIndexElement;
+import org.odftoolkit.odfdom.dom.element.text.TextBibliographyElement;
+import org.odftoolkit.odfdom.dom.element.text.TextChangeElement;
+import org.odftoolkit.odfdom.dom.element.text.TextChangeEndElement;
+import org.odftoolkit.odfdom.dom.element.text.TextChangeStartElement;
+import org.odftoolkit.odfdom.dom.element.text.TextHElement;
+import org.odftoolkit.odfdom.dom.element.text.TextIllustrationIndexElement;
+import org.odftoolkit.odfdom.dom.element.text.TextListElement;
+import org.odftoolkit.odfdom.dom.element.text.TextNumberedParagraphElement;
+import org.odftoolkit.odfdom.dom.element.text.TextObjectIndexElement;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
+import org.odftoolkit.odfdom.dom.element.text.TextSectionElement;
+import org.odftoolkit.odfdom.dom.element.text.TextSoftPageBreakElement;
+import org.odftoolkit.odfdom.dom.element.text.TextTableIndexElement;
+import org.odftoolkit.odfdom.dom.element.text.TextTableOfContentElement;
+import org.odftoolkit.odfdom.dom.element.text.TextUserIndexElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfName;
+import org.w3c.dom.Node;
 
 /** DOM implementation of OpenDocument base element */
 public abstract class TableTableCellElementBase extends OdfStylableElement {
@@ -60,6 +96,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
    * Create the instance of <code>TableTableCellElementBase</code>
    *
    * @param ownerDoc The type is <code>OdfFileDom</code>
+   * @param elementName The type is <code>OdfName</code>
+   * @param styleFamily The type is <code>OdfStyleFamily</code>
+   * @param styleAttrName The type is <code>OdfName</code>
    */
   public TableTableCellElementBase(
       OdfFileDom ownerDoc, OdfName elementName, OdfStyleFamily styleFamily, OdfName styleAttrName) {
@@ -68,16 +107,15 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeBooleanValueAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute office:boolean-value}
    *
-   * @odf.attribute office:boolean-value}
    * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
   public Boolean getOfficeBooleanValueAttribute() {
     OfficeBooleanValueAttribute attr =
         (OfficeBooleanValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "boolean-value");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return null;
@@ -85,9 +123,8 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>OfficeBooleanValueAttribute</code> ,
-   * See {
+   * See {@odf.attribute office:boolean-value}
    *
-   * @odf.attribute office:boolean-value}
    * @param officeBooleanValueValue The type is <code>Boolean</code>
    */
   public void setOfficeBooleanValueAttribute(Boolean officeBooleanValueValue) {
@@ -99,9 +136,8 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeCurrencyAttribute</code>
-   * , See {
+   * , See {@odf.attribute office:currency}
    *
-   * @odf.attribute office:currency}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -115,9 +151,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>OfficeCurrencyAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>OfficeCurrencyAttribute</code> , See
+   * {@odf.attribute office:currency}
    *
-   * @odf.attribute office:currency}
    * @param officeCurrencyValue The type is <code>String</code>
    */
   public void setOfficeCurrencyAttribute(String officeCurrencyValue) {
@@ -128,9 +164,8 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeDateValueAttribute</code>
-   * , See {
+   * , See {@odf.attribute office:date-value}
    *
-   * @odf.attribute office:date-value}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -144,9 +179,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>OfficeDateValueAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>OfficeDateValueAttribute</code> , See
+   * {@odf.attribute office:date-value}
    *
-   * @odf.attribute office:date-value}
    * @param officeDateValueValue The type is <code>String</code>
    */
   public void setOfficeDateValueAttribute(String officeDateValueValue) {
@@ -157,9 +192,8 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeStringValueAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute office:string-value}
    *
-   * @odf.attribute office:string-value}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -174,9 +208,8 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>OfficeStringValueAttribute</code> , See
-   * {
+   * {@odf.attribute office:string-value}
    *
-   * @odf.attribute office:string-value}
    * @param officeStringValueValue The type is <code>String</code>
    */
   public void setOfficeStringValueAttribute(String officeStringValueValue) {
@@ -188,9 +221,8 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeTimeValueAttribute</code>
-   * , See {
+   * , See {@odf.attribute office:time-value}
    *
-   * @odf.attribute office:time-value}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -204,9 +236,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>OfficeTimeValueAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>OfficeTimeValueAttribute</code> , See
+   * {@odf.attribute office:time-value}
    *
-   * @odf.attribute office:time-value}
    * @param officeTimeValueValue The type is <code>String</code>
    */
   public void setOfficeTimeValueAttribute(String officeTimeValueValue) {
@@ -217,25 +249,24 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeValueAttribute</code> ,
-   * See {
+   * See {@odf.attribute office:value}
    *
-   * @odf.attribute office:value}
    * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
   public Double getOfficeValueAttribute() {
     OfficeValueAttribute attr =
         (OfficeValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "value");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Double.valueOf(attr.doubleValue());
     }
     return null;
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>OfficeValueAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>OfficeValueAttribute</code> , See
+   * {@odf.attribute office:value}
    *
-   * @odf.attribute office:value}
    * @param officeValueValue The type is <code>Double</code>
    */
   public void setOfficeValueAttribute(Double officeValueValue) {
@@ -246,9 +277,8 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>OfficeValueTypeAttribute</code>
-   * , See {
+   * , See {@odf.attribute office:value-type}
    *
-   * @odf.attribute office:value-type}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -262,9 +292,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>OfficeValueTypeAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>OfficeValueTypeAttribute</code> , See
+   * {@odf.attribute office:value-type}
    *
-   * @odf.attribute office:value-type}
    * @param officeValueTypeValue The type is <code>String</code>
    */
   public void setOfficeValueTypeAttribute(String officeValueTypeValue) {
@@ -272,16 +302,11 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
     setOdfAttribute(attr);
     attr.setValue(officeValueTypeValue);
   }
-  /** @param officeValueTypeValue The type is <code>String</code> */
-  public void setCalcextValueTypeAttribute(String valueTypeValue) {
-    setAttributeNS(OdfDocumentNamespace.CALCEXT.getUri(), "calcext:value-type", valueTypeValue);
-  }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * TableContentValidationNameAttribute</code> , See {
+   * TableContentValidationNameAttribute</code> , See {@odf.attribute table:content-validation-name}
    *
-   * @odf.attribute table:content-validation-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -297,9 +322,8 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>TableContentValidationNameAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute table:content-validation-name}
    *
-   * @odf.attribute table:content-validation-name}
    * @param tableContentValidationNameValue The type is <code>String</code>
    */
   public void setTableContentValidationNameAttribute(String tableContentValidationNameValue) {
@@ -311,9 +335,8 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableFormulaAttribute</code> ,
-   * See {
+   * See {@odf.attribute table:formula}
    *
-   * @odf.attribute table:formula}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -327,9 +350,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TableFormulaAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>TableFormulaAttribute</code> , See
+   * {@odf.attribute table:formula}
    *
-   * @odf.attribute table:formula}
    * @param tableFormulaValue The type is <code>String</code>
    */
   public void setTableFormulaAttribute(String tableFormulaValue) {
@@ -340,9 +363,8 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>
-   * TableNumberColumnsRepeatedAttribute</code> , See {
+   * TableNumberColumnsRepeatedAttribute</code> , See {@odf.attribute table:number-columns-repeated}
    *
-   * @odf.attribute table:number-columns-repeated}
    * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
@@ -350,7 +372,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
     TableNumberColumnsRepeatedAttribute attr =
         (TableNumberColumnsRepeatedAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "number-columns-repeated");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Integer.valueOf(attr.intValue());
     }
     return Integer.valueOf(TableNumberColumnsRepeatedAttribute.DEFAULT_VALUE);
@@ -358,9 +380,8 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Sets the value of ODFDOM attribute representation <code>TableNumberColumnsRepeatedAttribute
-   * </code> , See {
+   * </code> , See {@odf.attribute table:number-columns-repeated}
    *
-   * @odf.attribute table:number-columns-repeated}
    * @param tableNumberColumnsRepeatedValue The type is <code>Integer</code>
    */
   public void setTableNumberColumnsRepeatedAttribute(Integer tableNumberColumnsRepeatedValue) {
@@ -372,25 +393,24 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableProtectAttribute</code> ,
-   * See {
+   * See {@odf.attribute table:protect}
    *
-   * @odf.attribute table:protect}
    * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
   public Boolean getTableProtectAttribute() {
     TableProtectAttribute attr =
         (TableProtectAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "protect");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableProtectAttribute.DEFAULT_VALUE);
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TableProtectAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>TableProtectAttribute</code> , See
+   * {@odf.attribute table:protect}
    *
-   * @odf.attribute table:protect}
    * @param tableProtectValue The type is <code>Boolean</code>
    */
   public void setTableProtectAttribute(Boolean tableProtectValue) {
@@ -401,25 +421,24 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableProtectedAttribute</code>
-   * , See {
+   * , See {@odf.attribute table:protected}
    *
-   * @odf.attribute table:protected}
    * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
   public Boolean getTableProtectedAttribute() {
     TableProtectedAttribute attr =
         (TableProtectedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "protected");
-    if (attr != null) {
+    if (attr != null && !attr.getValue().isEmpty()) {
       return Boolean.valueOf(attr.booleanValue());
     }
     return Boolean.valueOf(TableProtectedAttribute.DEFAULT_VALUE);
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TableProtectedAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>TableProtectedAttribute</code> , See
+   * {@odf.attribute table:protected}
    *
-   * @odf.attribute table:protected}
    * @param tableProtectedValue The type is <code>Boolean</code>
    */
   public void setTableProtectedAttribute(Boolean tableProtectedValue) {
@@ -430,9 +449,8 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableStyleNameAttribute</code>
-   * , See {
+   * , See {@odf.attribute table:style-name}
    *
-   * @odf.attribute table:style-name}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -446,9 +464,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>TableStyleNameAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>TableStyleNameAttribute</code> , See
+   * {@odf.attribute table:style-name}
    *
-   * @odf.attribute table:style-name}
    * @param tableStyleNameValue The type is <code>String</code>
    */
   public void setTableStyleNameAttribute(String tableStyleNameValue) {
@@ -459,9 +477,8 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>XhtmlAboutAttribute</code> ,
-   * See {
+   * See {@odf.attribute xhtml:about}
    *
-   * @odf.attribute xhtml:about}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -475,23 +492,21 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlAboutAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>XhtmlAboutAttribute</code> , See
+   * {@odf.attribute xhtml:about}
    *
-   * @odf.attribute xhtml:about}
    * @param xhtmlAboutValue The type is <code>String</code>
    */
   public void setXhtmlAboutAttribute(String xhtmlAboutValue) {
     XhtmlAboutAttribute attr = new XhtmlAboutAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlAboutValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>XhtmlContentAttribute</code> ,
-   * See {
+   * See {@odf.attribute xhtml:content}
    *
-   * @odf.attribute xhtml:content}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -505,23 +520,21 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlContentAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>XhtmlContentAttribute</code> , See
+   * {@odf.attribute xhtml:content}
    *
-   * @odf.attribute xhtml:content}
    * @param xhtmlContentValue The type is <code>String</code>
    */
   public void setXhtmlContentAttribute(String xhtmlContentValue) {
     XhtmlContentAttribute attr = new XhtmlContentAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlContentValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>XhtmlDatatypeAttribute</code> ,
-   * See {
+   * See {@odf.attribute xhtml:datatype}
    *
-   * @odf.attribute xhtml:datatype}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -535,23 +548,21 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlDatatypeAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>XhtmlDatatypeAttribute</code> , See
+   * {@odf.attribute xhtml:datatype}
    *
-   * @odf.attribute xhtml:datatype}
    * @param xhtmlDatatypeValue The type is <code>String</code>
    */
   public void setXhtmlDatatypeAttribute(String xhtmlDatatypeValue) {
     XhtmlDatatypeAttribute attr = new XhtmlDatatypeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlDatatypeValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>XhtmlPropertyAttribute</code> ,
-   * See {
+   * See {@odf.attribute xhtml:property}
    *
-   * @odf.attribute xhtml:property}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -565,22 +576,21 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XhtmlPropertyAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>XhtmlPropertyAttribute</code> , See
+   * {@odf.attribute xhtml:property}
    *
-   * @odf.attribute xhtml:property}
    * @param xhtmlPropertyValue The type is <code>String</code>
    */
   public void setXhtmlPropertyAttribute(String xhtmlPropertyValue) {
     XhtmlPropertyAttribute attr = new XhtmlPropertyAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xhtmlPropertyValue);
-    ((OdfFileDom) this.ownerDocument).updateInContentMetadataCache(this);
   }
 
   /**
-   * Receives the value of the ODFDOM attribute representation <code>XmlIdAttribute</code> , See {
+   * Receives the value of the ODFDOM attribute representation <code>XmlIdAttribute</code> , See
+   * {@odf.attribute xml:id}
    *
-   * @odf.attribute xml:id}
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -593,9 +603,9 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
   }
 
   /**
-   * Sets the value of ODFDOM attribute representation <code>XmlIdAttribute</code> , See {
+   * Sets the value of ODFDOM attribute representation <code>XmlIdAttribute</code> , See
+   * {@odf.attribute xml:id}
    *
-   * @odf.attribute xml:id}
    * @param xmlIdValue The type is <code>String</code>
    */
   public void setXmlIdAttribute(String xmlIdValue) {
@@ -604,25 +614,589 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
     attr.setValue(xmlIdValue);
   }
 
-  @Override
-  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
-  /** @return the component size of a heading, which is always 1 */
-  public boolean isRepeatable() {
-    return true;
+  /**
+   * Create child element {@odf.element dr3d:scene}.
+   *
+   * @return the element {@odf.element dr3d:scene}
+   */
+  public Dr3dSceneElement newDr3dSceneElement() {
+    Dr3dSceneElement dr3dScene =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(Dr3dSceneElement.class);
+    this.appendChild(dr3dScene);
+    return dr3dScene;
+  }
+
+  /**
+   * Create child element {@odf.element draw:a}.
+   *
+   * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
+   *     {@odf.attribute xlink:href} at specification
+   * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
+   *     {@odf.attribute xlink:type} at specification
+   * @return the element {@odf.element draw:a}
+   */
+  public DrawAElement newDrawAElement(String xlinkHrefValue, String xlinkTypeValue) {
+    DrawAElement drawA = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawAElement.class);
+    drawA.setXlinkHrefAttribute(xlinkHrefValue);
+    drawA.setXlinkTypeAttribute(xlinkTypeValue);
+    this.appendChild(drawA);
+    return drawA;
+  }
+
+  /**
+   * Create child element {@odf.element draw:caption}.
+   *
+   * @return the element {@odf.element draw:caption}
+   */
+  public DrawCaptionElement newDrawCaptionElement() {
+    DrawCaptionElement drawCaption =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawCaptionElement.class);
+    this.appendChild(drawCaption);
+    return drawCaption;
+  }
+
+  /**
+   * Create child element {@odf.element draw:circle}.
+   *
+   * @return the element {@odf.element draw:circle}
+   */
+  public DrawCircleElement newDrawCircleElement() {
+    DrawCircleElement drawCircle =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawCircleElement.class);
+    this.appendChild(drawCircle);
+    return drawCircle;
+  }
+
+  /**
+   * Create child element {@odf.element draw:connector}.
+   *
+   * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
+   *     {@odf.attribute svg:viewBox} at specification
+   * @return the element {@odf.element draw:connector}
+   */
+  public DrawConnectorElement newDrawConnectorElement(int svgViewBoxValue) {
+    DrawConnectorElement drawConnector =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawConnectorElement.class);
+    drawConnector.setSvgViewBoxAttribute(svgViewBoxValue);
+    this.appendChild(drawConnector);
+    return drawConnector;
+  }
+
+  /**
+   * Create child element {@odf.element draw:control}.
+   *
+   * @param drawControlValue the <code>String</code> value of <code>DrawControlAttribute</code>, see
+   *     {@odf.attribute draw:control} at specification
+   * @return the element {@odf.element draw:control}
+   */
+  public DrawControlElement newDrawControlElement(String drawControlValue) {
+    DrawControlElement drawControl =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawControlElement.class);
+    drawControl.setDrawControlAttribute(drawControlValue);
+    this.appendChild(drawControl);
+    return drawControl;
+  }
+
+  /**
+   * Create child element {@odf.element draw:custom-shape}.
+   *
+   * @return the element {@odf.element draw:custom-shape}
+   */
+  public DrawCustomShapeElement newDrawCustomShapeElement() {
+    DrawCustomShapeElement drawCustomShape =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawCustomShapeElement.class);
+    this.appendChild(drawCustomShape);
+    return drawCustomShape;
+  }
+
+  /**
+   * Create child element {@odf.element draw:ellipse}.
+   *
+   * @return the element {@odf.element draw:ellipse}
+   */
+  public DrawEllipseElement newDrawEllipseElement() {
+    DrawEllipseElement drawEllipse =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawEllipseElement.class);
+    this.appendChild(drawEllipse);
+    return drawEllipse;
+  }
+
+  /**
+   * Create child element {@odf.element draw:frame}.
+   *
+   * @return the element {@odf.element draw:frame}
+   */
+  public DrawFrameElement newDrawFrameElement() {
+    DrawFrameElement drawFrame =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawFrameElement.class);
+    this.appendChild(drawFrame);
+    return drawFrame;
+  }
+
+  /**
+   * Create child element {@odf.element draw:g}.
+   *
+   * @return the element {@odf.element draw:g}
+   */
+  public DrawGElement newDrawGElement() {
+    DrawGElement drawG = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawGElement.class);
+    this.appendChild(drawG);
+    return drawG;
+  }
+
+  /**
+   * Create child element {@odf.element draw:line}.
+   *
+   * @param svgX1Value the <code>String</code> value of <code>SvgX1Attribute</code>, see
+   *     {@odf.attribute svg:x1} at specification
+   * @param svgX2Value the <code>String</code> value of <code>SvgX2Attribute</code>, see
+   *     {@odf.attribute svg:x2} at specification
+   * @param svgY1Value the <code>String</code> value of <code>SvgY1Attribute</code>, see
+   *     {@odf.attribute svg:y1} at specification
+   * @param svgY2Value the <code>String</code> value of <code>SvgY2Attribute</code>, see
+   *     {@odf.attribute svg:y2} at specification
+   * @return the element {@odf.element draw:line}
+   */
+  public DrawLineElement newDrawLineElement(
+      String svgX1Value, String svgX2Value, String svgY1Value, String svgY2Value) {
+    DrawLineElement drawLine =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawLineElement.class);
+    drawLine.setSvgX1Attribute(svgX1Value);
+    drawLine.setSvgX2Attribute(svgX2Value);
+    drawLine.setSvgY1Attribute(svgY1Value);
+    drawLine.setSvgY2Attribute(svgY2Value);
+    this.appendChild(drawLine);
+    return drawLine;
+  }
+
+  /**
+   * Create child element {@odf.element draw:measure}.
+   *
+   * @param svgX1Value the <code>String</code> value of <code>SvgX1Attribute</code>, see
+   *     {@odf.attribute svg:x1} at specification
+   * @param svgX2Value the <code>String</code> value of <code>SvgX2Attribute</code>, see
+   *     {@odf.attribute svg:x2} at specification
+   * @param svgY1Value the <code>String</code> value of <code>SvgY1Attribute</code>, see
+   *     {@odf.attribute svg:y1} at specification
+   * @param svgY2Value the <code>String</code> value of <code>SvgY2Attribute</code>, see
+   *     {@odf.attribute svg:y2} at specification
+   * @return the element {@odf.element draw:measure}
+   */
+  public DrawMeasureElement newDrawMeasureElement(
+      String svgX1Value, String svgX2Value, String svgY1Value, String svgY2Value) {
+    DrawMeasureElement drawMeasure =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawMeasureElement.class);
+    drawMeasure.setSvgX1Attribute(svgX1Value);
+    drawMeasure.setSvgX2Attribute(svgX2Value);
+    drawMeasure.setSvgY1Attribute(svgY1Value);
+    drawMeasure.setSvgY2Attribute(svgY2Value);
+    this.appendChild(drawMeasure);
+    return drawMeasure;
+  }
+
+  /**
+   * Create child element {@odf.element draw:page-thumbnail}.
+   *
+   * @return the element {@odf.element draw:page-thumbnail}
+   */
+  public DrawPageThumbnailElement newDrawPageThumbnailElement() {
+    DrawPageThumbnailElement drawPageThumbnail =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPageThumbnailElement.class);
+    this.appendChild(drawPageThumbnail);
+    return drawPageThumbnail;
+  }
+
+  /**
+   * Create child element {@odf.element draw:path}.
+   *
+   * @param svgDValue the <code>String</code> value of <code>SvgDAttribute</code>, see
+   *     {@odf.attribute svg:d} at specification
+   * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
+   *     {@odf.attribute svg:viewBox} at specification
+   * @return the element {@odf.element draw:path}
+   */
+  public DrawPathElement newDrawPathElement(String svgDValue, int svgViewBoxValue) {
+    DrawPathElement drawPath =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPathElement.class);
+    drawPath.setSvgDAttribute(svgDValue);
+    drawPath.setSvgViewBoxAttribute(svgViewBoxValue);
+    this.appendChild(drawPath);
+    return drawPath;
+  }
+
+  /**
+   * Create child element {@odf.element draw:polygon}.
+   *
+   * @param drawPointsValue the <code>String</code> value of <code>DrawPointsAttribute</code>, see
+   *     {@odf.attribute draw:points} at specification
+   * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
+   *     {@odf.attribute svg:viewBox} at specification
+   * @return the element {@odf.element draw:polygon}
+   */
+  public DrawPolygonElement newDrawPolygonElement(String drawPointsValue, int svgViewBoxValue) {
+    DrawPolygonElement drawPolygon =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPolygonElement.class);
+    drawPolygon.setDrawPointsAttribute(drawPointsValue);
+    drawPolygon.setSvgViewBoxAttribute(svgViewBoxValue);
+    this.appendChild(drawPolygon);
+    return drawPolygon;
+  }
+
+  /**
+   * Create child element {@odf.element draw:polyline}.
+   *
+   * @param drawPointsValue the <code>String</code> value of <code>DrawPointsAttribute</code>, see
+   *     {@odf.attribute draw:points} at specification
+   * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
+   *     {@odf.attribute svg:viewBox} at specification
+   * @return the element {@odf.element draw:polyline}
+   */
+  public DrawPolylineElement newDrawPolylineElement(String drawPointsValue, int svgViewBoxValue) {
+    DrawPolylineElement drawPolyline =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPolylineElement.class);
+    drawPolyline.setDrawPointsAttribute(drawPointsValue);
+    drawPolyline.setSvgViewBoxAttribute(svgViewBoxValue);
+    this.appendChild(drawPolyline);
+    return drawPolyline;
+  }
+
+  /**
+   * Create child element {@odf.element draw:rect}.
+   *
+   * @return the element {@odf.element draw:rect}
+   */
+  public DrawRectElement newDrawRectElement() {
+    DrawRectElement drawRect =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawRectElement.class);
+    this.appendChild(drawRect);
+    return drawRect;
+  }
+
+  /**
+   * Create child element {@odf.element draw:regular-polygon}.
+   *
+   * @param drawConcaveValue the <code>Boolean</code> value of <code>DrawConcaveAttribute</code>,
+   *     see {@odf.attribute draw:concave} at specification
+   * @param drawCornersValue the <code>Integer</code> value of <code>DrawCornersAttribute</code>,
+   *     see {@odf.attribute draw:corners} at specification
+   * @return the element {@odf.element draw:regular-polygon}
+   */
+  public DrawRegularPolygonElement newDrawRegularPolygonElement(
+      boolean drawConcaveValue, int drawCornersValue) {
+    DrawRegularPolygonElement drawRegularPolygon =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawRegularPolygonElement.class);
+    drawRegularPolygon.setDrawConcaveAttribute(drawConcaveValue);
+    drawRegularPolygon.setDrawCornersAttribute(drawCornersValue);
+    this.appendChild(drawRegularPolygon);
+    return drawRegularPolygon;
+  }
+
+  /**
+   * Create child element {@odf.element office:annotation}.
+   *
+   * @return the element {@odf.element office:annotation}
+   */
+  public OfficeAnnotationElement newOfficeAnnotationElement() {
+    OfficeAnnotationElement officeAnnotation =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeAnnotationElement.class);
+    this.appendChild(officeAnnotation);
+    return officeAnnotation;
+  }
+
+  /**
+   * Create child element {@odf.element table:cell-range-source}.
+   *
+   * @param tableLastColumnSpannedValue the <code>Integer</code> value of <code>
+   *     TableLastColumnSpannedAttribute</code>, see {@odf.attribute table:last-column-spanned} at
+   *     specification
+   * @param tableLastRowSpannedValue the <code>Integer</code> value of <code>
+   *     TableLastRowSpannedAttribute</code>, see {@odf.attribute table:last-row-spanned} at
+   *     specification
+   * @param tableNameValue the <code>String</code> value of <code>TableNameAttribute</code>, see
+   *     {@odf.attribute table:name} at specification
+   * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
+   *     {@odf.attribute xlink:href} at specification
+   * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
+   *     {@odf.attribute xlink:type} at specification
+   * @return the element {@odf.element table:cell-range-source}
+   */
+  public TableCellRangeSourceElement newTableCellRangeSourceElement(
+      int tableLastColumnSpannedValue,
+      int tableLastRowSpannedValue,
+      String tableNameValue,
+      String xlinkHrefValue,
+      String xlinkTypeValue) {
+    TableCellRangeSourceElement tableCellRangeSource =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TableCellRangeSourceElement.class);
+    tableCellRangeSource.setTableLastColumnSpannedAttribute(tableLastColumnSpannedValue);
+    tableCellRangeSource.setTableLastRowSpannedAttribute(tableLastRowSpannedValue);
+    tableCellRangeSource.setTableNameAttribute(tableNameValue);
+    tableCellRangeSource.setXlinkHrefAttribute(xlinkHrefValue);
+    tableCellRangeSource.setXlinkTypeAttribute(xlinkTypeValue);
+    this.appendChild(tableCellRangeSource);
+    return tableCellRangeSource;
+  }
+
+  /**
+   * Create child element {@odf.element table:detective}.
+   *
+   * @return the element {@odf.element table:detective}
+   */
+  public TableDetectiveElement newTableDetectiveElement() {
+    TableDetectiveElement tableDetective =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TableDetectiveElement.class);
+    this.appendChild(tableDetective);
+    return tableDetective;
+  }
+
+  /**
+   * Create child element {@odf.element table:table}.
+   *
+   * @return the element {@odf.element table:table}
+   */
+  public TableTableElement newTableTableElement() {
+    TableTableElement tableTable =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TableTableElement.class);
+    this.appendChild(tableTable);
+    return tableTable;
+  }
+
+  /**
+   * Create child element {@odf.element text:alphabetical-index}.
+   *
+   * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
+   *     {@odf.attribute text:name} at specification
+   * @return the element {@odf.element text:alphabetical-index}
+   */
+  public TextAlphabeticalIndexElement newTextAlphabeticalIndexElement(String textNameValue) {
+    TextAlphabeticalIndexElement textAlphabeticalIndex =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextAlphabeticalIndexElement.class);
+    textAlphabeticalIndex.setTextNameAttribute(textNameValue);
+    this.appendChild(textAlphabeticalIndex);
+    return textAlphabeticalIndex;
+  }
+
+  /**
+   * Create child element {@odf.element text:bibliography}.
+   *
+   * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
+   *     {@odf.attribute text:name} at specification
+   * @return the element {@odf.element text:bibliography}
+   */
+  public TextBibliographyElement newTextBibliographyElement(String textNameValue) {
+    TextBibliographyElement textBibliography =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextBibliographyElement.class);
+    textBibliography.setTextNameAttribute(textNameValue);
+    this.appendChild(textBibliography);
+    return textBibliography;
+  }
+
+  /**
+   * Create child element {@odf.element text:change}.
+   *
+   * @param textChangeIdValue the <code>String</code> value of <code>TextChangeIdAttribute</code>,
+   *     see {@odf.attribute text:change-id} at specification
+   * @return the element {@odf.element text:change}
+   */
+  public TextChangeElement newTextChangeElement(String textChangeIdValue) {
+    TextChangeElement textChange =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextChangeElement.class);
+    textChange.setTextChangeIdAttribute(textChangeIdValue);
+    this.appendChild(textChange);
+    return textChange;
+  }
+
+  /**
+   * Create child element {@odf.element text:change-end}.
+   *
+   * @param textChangeIdValue the <code>String</code> value of <code>TextChangeIdAttribute</code>,
+   *     see {@odf.attribute text:change-id} at specification
+   * @return the element {@odf.element text:change-end}
+   */
+  public TextChangeEndElement newTextChangeEndElement(String textChangeIdValue) {
+    TextChangeEndElement textChangeEnd =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextChangeEndElement.class);
+    textChangeEnd.setTextChangeIdAttribute(textChangeIdValue);
+    this.appendChild(textChangeEnd);
+    return textChangeEnd;
+  }
+
+  /**
+   * Create child element {@odf.element text:change-start}.
+   *
+   * @param textChangeIdValue the <code>String</code> value of <code>TextChangeIdAttribute</code>,
+   *     see {@odf.attribute text:change-id} at specification
+   * @return the element {@odf.element text:change-start}
+   */
+  public TextChangeStartElement newTextChangeStartElement(String textChangeIdValue) {
+    TextChangeStartElement textChangeStart =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextChangeStartElement.class);
+    textChangeStart.setTextChangeIdAttribute(textChangeIdValue);
+    this.appendChild(textChangeStart);
+    return textChangeStart;
+  }
+
+  /**
+   * Create child element {@odf.element text:h}.
+   *
+   * @param textOutlineLevelValue the <code>Integer</code> value of <code>TextOutlineLevelAttribute
+   *     </code>, see {@odf.attribute text:outline-level} at specification
+   * @return the element {@odf.element text:h}
+   */
+  public TextHElement newTextHElement(int textOutlineLevelValue) {
+    TextHElement textH = ((OdfFileDom) this.ownerDocument).newOdfElement(TextHElement.class);
+    textH.setTextOutlineLevelAttribute(textOutlineLevelValue);
+    this.appendChild(textH);
+    return textH;
+  }
+
+  /**
+   * Create child element {@odf.element text:illustration-index}.
+   *
+   * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
+   *     {@odf.attribute text:name} at specification
+   * @return the element {@odf.element text:illustration-index}
+   */
+  public TextIllustrationIndexElement newTextIllustrationIndexElement(String textNameValue) {
+    TextIllustrationIndexElement textIllustrationIndex =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextIllustrationIndexElement.class);
+    textIllustrationIndex.setTextNameAttribute(textNameValue);
+    this.appendChild(textIllustrationIndex);
+    return textIllustrationIndex;
+  }
+
+  /**
+   * Create child element {@odf.element text:list}.
+   *
+   * @return the element {@odf.element text:list}
+   */
+  public TextListElement newTextListElement() {
+    TextListElement textList =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextListElement.class);
+    this.appendChild(textList);
+    return textList;
+  }
+
+  /**
+   * Create child element {@odf.element text:numbered-paragraph}.
+   *
+   * @param textListIdValue the <code>String</code> value of <code>TextListIdAttribute</code>, see
+   *     {@odf.attribute text:list-id} at specification
+   * @return the element {@odf.element text:numbered-paragraph}
+   */
+  public TextNumberedParagraphElement newTextNumberedParagraphElement(String textListIdValue) {
+    TextNumberedParagraphElement textNumberedParagraph =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextNumberedParagraphElement.class);
+    textNumberedParagraph.setTextListIdAttribute(textListIdValue);
+    this.appendChild(textNumberedParagraph);
+    return textNumberedParagraph;
+  }
+
+  /**
+   * Create child element {@odf.element text:object-index}.
+   *
+   * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
+   *     {@odf.attribute text:name} at specification
+   * @return the element {@odf.element text:object-index}
+   */
+  public TextObjectIndexElement newTextObjectIndexElement(String textNameValue) {
+    TextObjectIndexElement textObjectIndex =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextObjectIndexElement.class);
+    textObjectIndex.setTextNameAttribute(textNameValue);
+    this.appendChild(textObjectIndex);
+    return textObjectIndex;
+  }
+
+  /**
+   * Create child element {@odf.element text:p}.
+   *
+   * @return the element {@odf.element text:p}
+   */
+  public TextPElement newTextPElement() {
+    TextPElement textP = ((OdfFileDom) this.ownerDocument).newOdfElement(TextPElement.class);
+    this.appendChild(textP);
+    return textP;
+  }
+
+  /**
+   * Create child element {@odf.element text:section}.
+   *
+   * @param textDisplayValue the <code>String</code> value of <code>TextDisplayAttribute</code>, see
+   *     {@odf.attribute text:display} at specification
+   * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
+   *     {@odf.attribute text:name} at specification
+   * @return the element {@odf.element text:section}
+   */
+  public TextSectionElement newTextSectionElement(String textDisplayValue, String textNameValue) {
+    TextSectionElement textSection =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextSectionElement.class);
+    textSection.setTextDisplayAttribute(textDisplayValue);
+    textSection.setTextNameAttribute(textNameValue);
+    this.appendChild(textSection);
+    return textSection;
+  }
+
+  /**
+   * Create child element {@odf.element text:soft-page-break}.
+   *
+   * <p>Child element was added in ODF 1.1
+   *
+   * @return the element {@odf.element text:soft-page-break}
+   */
+  public TextSoftPageBreakElement newTextSoftPageBreakElement() {
+    TextSoftPageBreakElement textSoftPageBreak =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextSoftPageBreakElement.class);
+    this.appendChild(textSoftPageBreak);
+    return textSoftPageBreak;
+  }
+
+  /**
+   * Create child element {@odf.element text:table-index}.
+   *
+   * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
+   *     {@odf.attribute text:name} at specification
+   * @return the element {@odf.element text:table-index}
+   */
+  public TextTableIndexElement newTextTableIndexElement(String textNameValue) {
+    TextTableIndexElement textTableIndex =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextTableIndexElement.class);
+    textTableIndex.setTextNameAttribute(textNameValue);
+    this.appendChild(textTableIndex);
+    return textTableIndex;
+  }
+
+  /**
+   * Create child element {@odf.element text:table-of-content}.
+   *
+   * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
+   *     {@odf.attribute text:name} at specification
+   * @return the element {@odf.element text:table-of-content}
+   */
+  public TextTableOfContentElement newTextTableOfContentElement(String textNameValue) {
+    TextTableOfContentElement textTableOfContent =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextTableOfContentElement.class);
+    textTableOfContent.setTextNameAttribute(textNameValue);
+    this.appendChild(textTableOfContent);
+    return textTableOfContent;
+  }
+
+  /**
+   * Create child element {@odf.element text:user-index}.
+   *
+   * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
+   *     {@odf.attribute text:name} at specification
+   * @return the element {@odf.element text:user-index}
+   */
+  public TextUserIndexElement newTextUserIndexElement(String textNameValue) {
+    TextUserIndexElement textUserIndex =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextUserIndexElement.class);
+    textUserIndex.setTextNameAttribute(textNameValue);
+    this.appendChild(textUserIndex);
+    return textUserIndex;
   }
 
   @Override
-  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
-  /** @return the component size of a heading, which is always 1 */
-  public void setRepetition(int repetition) {
-    if (repetition >= 0) {
-      setTableNumberColumnsRepeatedAttribute(repetition);
-    }
-  }
-
-  @Override
-  // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
-  /** @return the component size of a heading, which is always 1 */
+  /** @return the repeation of this element, the default is in ODF always 1 */
   public int getRepetition() {
     Integer repeated = getTableNumberColumnsRepeatedAttribute();
     if (repeated == null) {
@@ -631,16 +1205,29 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
     return repeated;
   }
 
+  @Override
+  /** @return if this element is repeatable, by having a repeatable attribute */
+  public boolean isRepeatable() {
+    return true;
+  }
+
+  @Override
+  /** @repetition the repetition number of this attribute */
+  public void setRepetition(int repetition) {
+    setTableNumberColumnsRepeatedAttribute(repetition);
+  }
+
   /**
    * Splitting the element at the given position into two halves
    *
-   * @param posStart The split position. The start of the second half.
+   * @param posStart The split position. Counting is starting with zero. The start of the second
+   *     half.
    * @return the new created second element (or if posStart was less than 1 the original element)
    */
   @Override
-  public OdfElement split(int posStart) {
+  public TableTableCellElementBase split(int posStart) {
     TableTableCellElementBase newElement = this;
-    // 0 would not leave anything left on the right side
+    // 0 would not leave anything left on the left side, would not change anything!
     if (posStart > 0) {
       newElement = (TableTableCellElementBase) this.cloneNode(true);
       int repeated = getTableNumberColumnsRepeatedAttribute();
@@ -648,6 +1235,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
         if (posStart > 1) {
           this.setTableNumberColumnsRepeatedAttribute(posStart);
         } else {
+
           this.removeAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
         }
         // any higher value one for repeated write out.
@@ -659,12 +1247,12 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
               OdfDocumentNamespace.TABLE.getUri(), "number-columns-repeated");
         }
       }
-      OdfElement nextElementSibling = OdfElement.getNextSiblingElement(this);
+      Node nextNodeSibling = this.getNextSibling();
       OdfElement parent = (OdfElement) this.getParentNode();
-      if (nextElementSibling == null) {
+      if (nextNodeSibling == null) {
         parent.appendChild(newElement);
       } else {
-        parent.insertBefore(newElement, nextElementSibling);
+        parent.insertBefore(newElement, nextNodeSibling);
       }
     }
     return newElement;
