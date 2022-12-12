@@ -35,7 +35,6 @@ public class OdfName implements Comparable<OdfName> {
   private String mLocalName;
   private String mExpandedName; // i.e. {nsURI}localName
   private static HashMap<String, OdfName> mOdfNames = new HashMap<String, OdfName>();
-  private static StringBuilder mSB;
 
   private OdfName(OdfNamespace ns, String localname, String expandedName) {
     mNS = ns;
@@ -103,24 +102,22 @@ public class OdfName implements Comparable<OdfName> {
     } else {
       expandedName = localName;
     }
-    // return a similar OdfName if one was already created before..
-    OdfName odfName = mOdfNames.get(expandedName);
-    if (odfName != null) {
-      return odfName;
-    } else {
-      // otherwise create a new OdfName, store it in the map and return it..
-      odfName = new OdfName(odfNamespace, localName, expandedName);
-      mOdfNames.put(expandedName, odfName);
-      return odfName;
+    synchronized (mOdfNames) {
+        // return a similar OdfName if one was already created before..
+        OdfName odfName = mOdfNames.get(expandedName);
+        if (odfName != null) {
+          return odfName;
+        } else {
+          // otherwise create a new OdfName, store it in the map and return it..
+          odfName = new OdfName(odfNamespace, localName, expandedName);
+          mOdfNames.put(expandedName, odfName);
+          return odfName;
+        }
     }
   }
 
   private static String createExpandedName(String nsUri, String localName) {
-    if (mSB == null) {
-      mSB = new StringBuilder();
-    } else {
-      mSB.delete(0, mSB.length());
-    }
+    StringBuilder mSB = new StringBuilder();
     mSB.append('{');
     mSB.append(nsUri);
     mSB.append('}');
