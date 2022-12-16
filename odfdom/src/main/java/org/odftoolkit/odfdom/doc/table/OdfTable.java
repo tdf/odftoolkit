@@ -31,6 +31,7 @@ import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfContentDomBase;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
@@ -84,9 +85,7 @@ public class OdfTable {
   private static final double DEFAULT_TABLE_WIDTH = 6;
   private static final int DEFAULT_REL_TABLE_WIDTH = 65535;
   private static final String DEFAULT_TABLE_ALIGN = "margins";
-  // TODO: should save seperately for different dom tree
-  static IdentityHashMap<TableTableElement, OdfTable> mTableRepository =
-      new IdentityHashMap<TableTableElement, OdfTable>();
+
   IdentityHashMap<TableTableCellElementBase, Vector<OdfTableCell>> mCellRepository =
       new IdentityHashMap<TableTableCellElementBase, Vector<OdfTableCell>>();
   IdentityHashMap<TableTableRowElement, Vector<OdfTableRow>> mRowRepository =
@@ -110,12 +109,14 @@ public class OdfTable {
    * @param odfElement an instance of <code>TableTableElement</code>
    * @return an instance of <code>OdfTable</code> that can represent <code>odfElement</code>
    */
-  public static synchronized OdfTable getInstance(TableTableElement odfElement) {
-    if (mTableRepository.containsKey(odfElement)) {
-      return mTableRepository.get(odfElement);
+  public static OdfTable getInstance(TableTableElement odfElement) {
+    IdentityHashMap<TableTableElement, OdfTable> tableRepository =
+        ((OdfContentDomBase) odfElement.getOwnerDocument()).getTableRepository();
+    if (tableRepository.containsKey(odfElement)) {
+      return tableRepository.get(odfElement);
     } else {
       OdfTable newTable = new OdfTable(odfElement);
-      mTableRepository.put(odfElement, newTable);
+      tableRepository.put(odfElement, newTable);
       return newTable;
     }
   }
