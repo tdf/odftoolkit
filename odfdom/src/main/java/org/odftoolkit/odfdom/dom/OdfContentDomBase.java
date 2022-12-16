@@ -23,8 +23,11 @@
  */
 package org.odftoolkit.odfdom.dom;
 
+import java.util.IdentityHashMap;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
+import org.odftoolkit.odfdom.doc.table.OdfTable;
+import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.pkg.NamespaceName;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
@@ -34,6 +37,9 @@ import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 public class OdfContentDomBase extends OdfFileDom {
 
   private static final long serialVersionUID = 6823264460360047745L;
+
+  IdentityHashMap<TableTableElement, OdfTable> mTableRepository =
+      new IdentityHashMap<TableTableElement, OdfTable>();
 
   public OdfContentDomBase(OdfPackageDocument packageDocument, String packagePath) {
     super(packageDocument, packagePath);
@@ -70,5 +76,9 @@ public class OdfContentDomBase extends OdfFileDom {
       }
     }
     return mXPath;
+  }
+
+  public IdentityHashMap<TableTableElement, OdfTable> getTableRepository() {
+    return mTableRepository;
   }
 }
