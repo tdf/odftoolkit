@@ -34,6 +34,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.odftoolkit.junit.AlphabeticalOrderedRunner;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfContentDomBase;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.text.TextAnchorTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
@@ -512,7 +513,7 @@ public class DocumentCreationTest {
     }
   }
 
-  private void addImageToDocument(OdfContentDom dom, TextPElement para) throws Exception {
+  private void addImageToDocument(OdfContentDomBase dom, TextPElement para) throws Exception {
     OdfDrawFrame drawFrame = new OdfDrawFrame(dom);
     drawFrame.setDrawNameAttribute("graphics1");
     drawFrame.setTextAnchorTypeAttribute(TextAnchorTypeAttribute.Value.PARAGRAPH.toString());
@@ -526,7 +527,7 @@ public class DocumentCreationTest {
     image.newImage(ResourceUtilities.getURI("test-input" + File.separatorChar + TEST_PIC));
   }
 
-  private void addFrameForEmbeddedDoc(OdfContentDom dom, TextPElement para, String path)
+  private void addFrameForEmbeddedDoc(OdfContentDomBase dom, TextPElement para, String path)
       throws Exception {
     OdfDrawFrame drawFrame = new OdfDrawFrame(dom);
     drawFrame.setDrawNameAttribute(path);

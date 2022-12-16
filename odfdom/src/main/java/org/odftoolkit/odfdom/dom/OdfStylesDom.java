@@ -27,8 +27,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathFactory;
 import org.odftoolkit.odfdom.changes.ChangesFileSaxHandler;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
@@ -41,7 +39,6 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.pkg.NamespaceName;
 import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfFileSaxHandler;
 import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.pkg.OdfValidationException;
@@ -50,7 +47,7 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
 /** The DOM representation of the ODF styles.xml file of an ODF document. */
-public class OdfStylesDom extends OdfFileDom {
+public class OdfStylesDom extends OdfContentDomBase {
 
   private static final long serialVersionUID = 766167617530147886L;
 
@@ -99,41 +96,12 @@ public class OdfStylesDom extends OdfFileDom {
   }
 
   /**
-   * Retrieves the Odf Document
-   *
-   * @return The <code>OdfDocument</code>
-   */
-  @Override
-  public OdfSchemaDocument getDocument() {
-    return (OdfSchemaDocument) mPackageDocument;
-  }
-
-  /**
    * * @return The root element <office:document-styles> of the styles.xml file as <code>
    * OfficeDocumentStylesElement</code>.
    */
   @Override
   public OfficeDocumentStylesElement getRootElement() {
     return (OfficeDocumentStylesElement) getDocumentElement();
-  }
-
-  /**
-   * Creates an JDK <code>XPath</code> instance. Initialized with ODF namespaces from <code>
-   * OdfDocumentNamespace</code>. Updated with all namespace of the XML file.
-   *
-   * @return an XPath instance with namespace context set to include the standard ODFDOM prefixes.
-   */
-  @Override
-  public XPath getXPath() {
-    if (mXPath == null) {
-      mXPath = XPathFactory.newInstance().newXPath();
-      mXPath.setNamespaceContext(this);
-      for (NamespaceName name : OdfDocumentNamespace.values()) {
-        mUriByPrefix.put(name.getPrefix(), name.getUri());
-        mPrefixByUri.put(name.getUri(), name.getPrefix());
-      }
-    }
-    return mXPath;
   }
 
   // ToDo bug 72 - STYLE REFACTORING - THE FOLLOWING METHODS WILL BE RE/MOVED
