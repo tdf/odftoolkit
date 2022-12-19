@@ -48,6 +48,49 @@
     </div>
     <div id="contenta">
       <h1 id="odf-toolkit-release-notes">ODF Toolkit Release Notes</h1> 
+      <h2 id="release-0.11.0">Release 0.11.0</h2> 
+      <p><a href="https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/">ODFDOM 0.11.0</a> is released on December 21th, 2022. Git tag: "odftoolkit-0.11.0".</p> 
+      <h3 id="github-issues-fixed-in-this-release-0.11.0">GitHub issues fixed in this release 0.11.0</h3> 
+      <ul> 
+        <li><a href="https://github.com/tdf/odftoolkit/issues/135">#135</a> Regeneration of ODFDOM DOM sources for ODF 1.2</li> 
+        <li><a href="https://github.com/tdf/odftoolkit/issues/141">#141</a> setStyleNumberWrappedParagraphsAttribute("no-limit") not valid</li> 
+        <li><a href="https://github.com/tdf/odftoolkit/issues/142">#142</a> Many unneeded compile time dependencies declared in pom.xml</li> 
+        <li><a href="https://github.com/tdf/odftoolkit/issues/146">#146</a> getLastChildElement() always returns first element or null</li> 
+        <li><a href="https://github.com/tdf/odftoolkit/issues/152">#152</a> Javadoc: The search bar takes the user to an incorrect url, resulting in 404 error</li> 
+        <li><a href="https://github.com/tdf/odftoolkit/issues/173">#173</a> Large memory consumption even after running Garbage Collection</li> 
+        <li><a href="https://github.com/tdf/odftoolkit/issues/176">#176</a> OutOfMemory occurs on many OdfTable creations.</li> 
+        <li><a href="https://github.com/tdf/odftoolkit/issues/180">#180</a> getTextStyle has not public function visibility</li> 
+        <li><a href="https://github.com/tdf/odftoolkit/pull/182">#182</a> Reactivate Code Generation of ODFDOM</li> 
+        <li><a href="https://github.com/tdf/odftoolkit/pull/185">#185</a> Create CODE_OF_CONDUCT.md</li> 
+        <li><a href="https://github.com/tdf/odftoolkit/issues/189">#189</a> org.odftoolkit.odfdom.pkg.OdfName declares static StringBuilder -&gt; potential problem in multi-threaded environments</li> 
+        <li><a href="https://github.com/tdf/odftoolkit/pull/198">#198</a> clean up static Map/Set/etc to avoid races and leaks</li> 
+      </ul> 
+      <h3 id="major-updates-with-this-version">Major updates with this version</h3> 
+      <h4 id="generation-&amp;-templates">Generation &amp; Templates</h4> 
+      <ul> 
+        <li>ODFDOM source generation (generator project) was <a href="https://github.com/tdf/odftoolkit/pull/182">completely refactored</a>, allowing to trigger generation from the ODFDOM project (<em><strong>mvn install -Dcodegen</strong></em>) to generate, copy and format the Java classes of the 3 XML grammars: 
+          <ol> 
+            <li>ODF XML manifest</li> 
+            <li>ODF XML digital signature</li> 
+            <li>ODF XML schema</li> 
+          </ol> </li> 
+        <li><strong>API changes</strong> due to former code generation issues have been addressed in <a href="https://listarchives.odftoolkit.org/dev/msg00062.html">this email on the ODF dev list</a>. But there is also a lot of "noise" as the the base class feature was fixed (see below). The API Changes between ODFDOM 0.10.0 and 0.11.0 are listed <a href="./api/odfdom-api-changes-0.10.0-0.11.0.html">here</a>.</li> 
+        <li>There are now <a href="https://github.com/tdf/odftoolkit/tree/master/generator/schema2template/src/test/java/schema2template/grammar">tests for all ODF generation examples</a> (<a href="https://github.com/tdf/odftoolkit/tree/master/generator/schema2template/src/test/resources/test-reference/odf/generation">ODFDOM Java, OdfReference and some Python alpha work</a>). Only all ODFDOM Java sources are being compared by line with the references, as others have still some variations with the numbering of multiple definitions. Likely, not all tests will be kept active to allow quick build/tests and must only be activated when generator, grammar, XML dependencies (as MSV) is being altered (or before releases).</li> 
+        <li>The history feature has been fixed. Allowing the tagging/versioning of newly inserted ODF XML nodes in the documentation. That is the reason why all ODF versions are being generated - I realized the need for previous grammar for this feature late, otherwise, the Maven plugin might allow a list of grammar. Nevertheless, the given list of generations is being ordered by module and version tag from the generator.</li> 
+        <li>The base class feature has been fixed. When a base class is defined in the generation configuration, which is required in addition to the XML grammar, all elements with the same base class will have their union attributes and child elements moved into that base class.</li> 
+        <li>Prior manual added functionality to the generated source has been moved into a <a href="https://github.com/tdf/odftoolkit/blob/master/generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/dom/template/velocity-macros.vm">Velocity Macro file</a> (to ease reading the template - likely best done with <a href="https://marketplace.visualstudio.com/items?itemName=Quidgest.vscode-velocity">VSCode extension for Velocity</a>) and is triggered by certain attributes (e.g. <a href="https://tdf.github.io/odftoolkit/odf1.2/OpenDocument-v1.2-reference.html#attribute_xhtml:content_0">elements with xhtml:content</a> require special handling for RDF metadata) or by configuration (e.g. some elements are being duplicated by a repetition attribute, which is now being explicitly named) to allow to add the functionality for repetition and split to the XML classes. ODF JSON Chang</li> 
+      </ul> 
+      <h4 id="maven">Maven</h4> 
+      <ul> 
+        <li>For Maven the dependencyManagement and pluginManagement functionality is being used more strictly to define version numbers for Maven dependencies and plugins only once in the root project.</li> 
+        <li>The signing of artifacts is no longer required for every build only for releases.</li> 
+        <li>The latest released &amp; overworked <a href="https://github.com/xmlark/msv/">Multi Schema Validator (MSV)</a> is being used. ODF element children as <a href="https://github.com/tdf/odftoolkit/tree/master/generator/schema2template/src/test/resources/test-reference/odf/graphml">GraphML</a> and <a href="https://github.com/tdf/odftoolkit/tree/master/generator/schema2template/src/test/resources/test-reference/odf/msv-dump">MSV RunTime dumps</a> are additional regression tests of the Toolkit's generator.</li> 
+      </ul> 
+      <h4 id="odf-json-changes-(collaboration)">ODF JSON Changes (Collaboration)</h4> 
+      <ul> 
+        <li>Text styles/format as part of the ODF Paragraph style (style:text-properties) are overtaken during a merge as span element as long as the paragraph. Unfortunately, only a few nodes were added to this span, as the logical length of ODF was mixed up with the length of XML nodes.</li> 
+        <li>When the prior described merge was initiated the first node (often a text node) was unnecessary split. This was fixed by adding a second end parameter when the sequence have to end. These fixes lead to several positive side effects and updates of the JSON references.</li> 
+      </ul> 
       <h2 id="release-0.10.0">Release 0.10.0</h2> 
       <p><a href="https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.10.0/">ODFDOM 0.10.0</a> is released on November 26th, 2021. Git tag: "odftoolkit-0.10.0". Major updates are coming with this version:</p> 
       <ul> 
