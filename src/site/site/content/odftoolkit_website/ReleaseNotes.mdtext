@@ -1,5 +1,51 @@
 # ODF Toolkit Release Notes
 
+## Release 0.11.0
+
+[ODFDOM 0.11.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/) is released on December 21th, 2022. Git tag: "odftoolkit-0.11.0".
+
+### GitHub issues fixed in this release 0.11.0
+
+* [#135](https://github.com/tdf/odftoolkit/issues/135) Regeneration of ODFDOM DOM sources for ODF 1.2
+* [#141](https://github.com/tdf/odftoolkit/issues/141) setStyleNumberWrappedParagraphsAttribute("no-limit") not valid
+* [#142](https://github.com/tdf/odftoolkit/issues/142) Many unneeded compile time dependencies declared in pom.xml
+* [#146](https://github.com/tdf/odftoolkit/issues/146) getLastChildElement() always returns first element or null
+* [#152](https://github.com/tdf/odftoolkit/issues/152) Javadoc: The search bar takes the user to an incorrect url, resulting in 404 error
+* [#173](https://github.com/tdf/odftoolkit/issues/173) Large memory consumption even after running Garbage Collection
+* [#176](https://github.com/tdf/odftoolkit/issues/176) OutOfMemory occurs on many OdfTable creations.
+* [#180](https://github.com/tdf/odftoolkit/issues/180) getTextStyle has not public function visibility
+* [#182](https://github.com/tdf/odftoolkit/pull/182) Reactivate Code Generation of ODFDOM
+* [#185](https://github.com/tdf/odftoolkit/pull/185) Create CODE_OF_CONDUCT.md
+* [#189](https://github.com/tdf/odftoolkit/issues/189) org.odftoolkit.odfdom.pkg.OdfName declares static StringBuilder -> potential problem in multi-threaded environments
+* [#198](https://github.com/tdf/odftoolkit/pull/198) clean up static Map/Set/etc to avoid races and leaks
+
+### Major updates with this version
+
+#### Generation & Templates
+
+* ODFDOM source generation (generator project) was [completely refactored](https://github.com/tdf/odftoolkit/pull/182), allowing to trigger generation from the ODFDOM project (***mvn install -Dcodegen***) to generate, copy and format the Java classes of the 3 XML grammars:
+    1. ODF XML manifest
+    2. ODF XML digital signature
+    3. ODF XML schema
+* API changes due to former code generation issues have been addressed in [this email on the ODF dev list](https://listarchives.odftoolkit.org/dev/msg00062.html).
+* There are now [tests for all ODF generation examples](https://github.com/tdf/odftoolkit/tree/master/generator/schema2template/src/test/java/schema2template/grammar) ([ODFDOM Java, OdfReference and some Python alpha work](https://github.com/tdf/odftoolkit/tree/master/generator/schema2template/src/test/resources/test-reference/odf/generation)).
+    Only all ODFDOM Java sources are being compared by line with the references, as others have still some variations with the numbering of multiple definitions. Likely, not all tests will be kept active to allow quick build/tests and must only be activated when generator, grammar, XML dependencies (as MSV) is being altered (or before releases).
+* The history feature has been fixed. Allowing the tagging/versioning of newly inserted ODF XML nodes in the documentation. That is the reason why all ODF versions are being generated - I realized the need for previous grammar for this feature late, otherwise, the Maven plugin might allow a list of grammar. Nevertheless, the given list of generations is being ordered by module and version tag from the generator.
+* The base class feature has been fixed. When a base class is defined in the generation configuration, which is required in addition to the XML grammar, all elements with the same base class will have their union attributes and child elements moved into that base class.
+* Prior manual added functionality to the generated source has been moved into a [Velocity Macro file](https://github.com/tdf/odftoolkit/blob/master/generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/dom/template/velocity-macros.vm) (to ease reading the template - likely best done with [VSCode extension for Velocity](https://marketplace.visualstudio.com/items?itemName=Quidgest.vscode-velocity)) and is triggered by certain attributes (e.g. [elements with xhtml:content](https://tdf.github.io/odftoolkit/odf1.2/OpenDocument-v1.2-reference.html#attribute_xhtml:content_0) require special handling for RDF metadata) or by configuration (e.g. some elements are being duplicated by a repetition attribute, which is now being explicitly named) to allow to add the functionality for repetition and split to the XML classes.
+ODF JSON Chang
+
+#### Maven
+
+* For Maven the dependencyManagement and pluginManagement functionality is being used more strictly to define version numbers for Maven dependencies and plugins only once in the root project.
+* The signing of artifacts is no longer required for every build only for releases.
+* The latest released & overworked [Multi Schema Validator (MSV)](https://github.com/xmlark/msv/) is being used. ODF element children as [GraphML](https://github.com/tdf/odftoolkit/tree/master/generator/schema2template/src/test/resources/test-reference/odf/graphml) and [MSV RunTime dumps](https://github.com/tdf/odftoolkit/tree/master/generator/schema2template/src/test/resources/test-reference/odf/msv-dump) are additional regression tests of the Toolkit's generator.
+
+#### ODF JSON Changes (Collaboration)
+
+* Text styles/format as part of the ODF Paragraph style (style:text-properties) are overtaken during a merge as span element as long as the paragraph. Unfortunately, only a few nodes were added to this span, as the logical length of ODF was mixed up with the length of XML nodes.
+* When the prior described merge was initiated the first node (often a text node) was unnecessary split. This was fixed by adding a second end parameter when the sequence have to end. These fixes lead to several positive side effects and updates of the JSON references.
+
 ## Release 0.10.0
 
 [ODFDOM 0.10.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.10.0/) is released on November 26th, 2021. Git tag: "odftoolkit-0.10.0". Major updates are coming with this version:
