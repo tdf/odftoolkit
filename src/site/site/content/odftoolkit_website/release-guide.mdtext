@@ -11,7 +11,7 @@ The release jars for each project are deployed to the Maven repository. Making r
 
 1. **Maven Repro Access**</br>Make sure you got access to Maven repro via our [Sonatype JIRA issue](https://issues.sonatype.org/browse/OSSRH-960). Add your userID & password to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html).
 
-2. **Install GNU PG**</br>Install in your OS. [See details in tutorial 'publish your artifacts to Maven'](https://dzone.com/articles/      publish-your-artifacts-to-maven-central)
+2. **Install GNU PG**</br>Install in your OS. [See details in tutorial 'publish your artifacts to Maven'](https://dzone.com/articles/publish-your-artifacts-to-maven-central)
 
 3. **Configure GNU PG**</br>Add your GNU and JIRA credentials to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html).
 See [our example settings.xml](docs/settings-example.xml) and search & replace the placeholders starting with 'YOUR_'.
@@ -111,8 +111,3 @@ The output will be created in the directory: 'ODF_TOOLKIT_BASE/target/release/'.
 1. [How to Publish Your Artifacts to Maven Central][1]
 
   [1]: https://dzone.com/articles/publish-your-artifacts-to-maven-central
-  [2]: www.gnupg.org
-  [3]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
-  [4]: http://openjdk.java.net/
-  [5]: http://maven.apache.org/
-  [6]: http://www.apache.org/dev/crypto.html
