@@ -83,14 +83,16 @@ public class OdfNamespace implements Comparable<OdfNamespace>, NamespaceName {
       prefix = mUrlToPrefix.get(uri);
     }
     if (uri != null && uri.length() > 0) {
-      odfNamespace = mNamespacesByURI.get(uri);
-      if (odfNamespace == null) {
-        odfNamespace = new OdfNamespace(prefix, uri);
-        mNamespacesByURI.put(uri, odfNamespace);
-      } else {
-        if (prefix != null) {
-          // prefix will be adapted for all OdfNamespaces (last wins)
-          odfNamespace.mPrefix = prefix;
+      synchronized (mNamespacesByURI) {
+        odfNamespace = mNamespacesByURI.get(uri);
+        if (odfNamespace == null) {
+          odfNamespace = new OdfNamespace(prefix, uri);
+          mNamespacesByURI.put(uri, odfNamespace);
+        } else {
+          if (prefix != null) {
+            // prefix will be adapted for all OdfNamespaces (last wins)
+            odfNamespace.mPrefix = prefix;
+          }
         }
       }
     }
@@ -122,7 +124,9 @@ public class OdfNamespace implements Comparable<OdfNamespace>, NamespaceName {
   public static OdfNamespace getNamespace(String uri) {
     OdfNamespace ns = null;
     if (uri != null) {
-      ns = mNamespacesByURI.get(uri);
+      synchronized (mNamespacesByURI) {
+        ns = mNamespacesByURI.get(uri);
+      }
     }
     return ns;
   }
