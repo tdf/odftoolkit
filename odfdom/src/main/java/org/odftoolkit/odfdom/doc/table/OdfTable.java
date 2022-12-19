@@ -31,7 +31,7 @@ import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
-import org.odftoolkit.odfdom.dom.OdfContentDomBase;
+import org.odftoolkit.odfdom.dom.OdfContentOrStylesDomBase;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
@@ -111,7 +111,7 @@ public class OdfTable {
    */
   public static OdfTable getInstance(TableTableElement odfElement) {
     IdentityHashMap<TableTableElement, OdfTable> tableRepository =
-        ((OdfContentDomBase) odfElement.getOwnerDocument()).getTableRepository();
+        ((OdfContentOrStylesDomBase) odfElement.getOwnerDocument()).getTableRepository();
     if (tableRepository.containsKey(odfElement)) {
       return tableRepository.get(odfElement);
     } else {

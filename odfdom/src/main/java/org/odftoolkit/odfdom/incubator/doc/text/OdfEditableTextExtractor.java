@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.doc.table.OdfTableRow;
-import org.odftoolkit.odfdom.dom.OdfContentDomBase;
+import org.odftoolkit.odfdom.dom.OdfContentOrStylesDomBase;
 import org.odftoolkit.odfdom.dom.OdfMetaDom;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.draw.DrawObjectElement;
@@ -100,7 +100,7 @@ public class OdfEditableTextExtractor extends OdfTextExtractor {
   public void visit(DrawObjectElement element) {
     String embedDocPath = element.getXlinkHrefAttribute();
     OdfDocument embedDoc =
-        ((OdfDocument) (((OdfContentDomBase) element.getOwnerDocument()).getDocument()))
+        ((OdfDocument) (((OdfContentOrStylesDomBase) element.getOwnerDocument()).getDocument()))
             .loadSubDocument(embedDocPath);
     if (embedDoc != null) {
       try {

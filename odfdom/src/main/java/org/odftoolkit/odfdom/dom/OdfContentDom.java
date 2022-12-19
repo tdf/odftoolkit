@@ -45,7 +45,7 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
 /** The DOM representation of the ODF content.xml file of an ODF document. */
-public class OdfContentDom extends OdfContentDomBase {
+public class OdfContentDom extends OdfContentOrStylesDomBase {
 
   private static final long serialVersionUID = 766167617530147883L;
 

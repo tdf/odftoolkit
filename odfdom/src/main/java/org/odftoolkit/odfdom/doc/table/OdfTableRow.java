@@ -27,7 +27,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import org.odftoolkit.odfdom.doc.OdfDocument;
-import org.odftoolkit.odfdom.dom.OdfContentDomBase;
+import org.odftoolkit.odfdom.dom.OdfContentOrStylesDomBase;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;
@@ -341,7 +341,7 @@ public class OdfTableRow {
           } else if (aPrevNode instanceof TableTableRowsElement
               || aPrevNode instanceof TableTableHeaderRowsElement
               || aPrevNode instanceof TableTableRowGroupElement) {
-            XPath xpath = ((OdfContentDomBase) aPrevNode.getOwnerDocument()).getXPath();
+            XPath xpath = ((OdfContentOrStylesDomBase) aPrevNode.getOwnerDocument()).getXPath();
             synchronized (mDocument) {
               lastRow =
                   (TableTableRowElement)
@@ -400,7 +400,7 @@ public class OdfTableRow {
           } else if (aNextNode instanceof TableTableRowsElement
               || aNextNode instanceof TableTableHeaderRowsElement
               || aNextNode instanceof TableTableRowGroupElement) {
-            XPath xpath = ((OdfContentDomBase) aNextNode.getOwnerDocument()).getXPath();
+            XPath xpath = ((OdfContentOrStylesDomBase) aNextNode.getOwnerDocument()).getXPath();
             synchronized (mDocument) {
               firstRow =
                   (TableTableRowElement)

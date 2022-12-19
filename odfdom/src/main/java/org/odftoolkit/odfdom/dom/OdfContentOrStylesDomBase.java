@@ -34,18 +34,18 @@ import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 
 /** Base class for an XML stream that contains document content, i.e., styles.xml or content.xml. */
-public class OdfContentDomBase extends OdfFileDom {
+public class OdfContentOrStylesDomBase extends OdfFileDom {
 
   private static final long serialVersionUID = 6823264460360047745L;
 
   IdentityHashMap<TableTableElement, OdfTable> mTableRepository =
       new IdentityHashMap<TableTableElement, OdfTable>();
 
-  public OdfContentDomBase(OdfPackageDocument packageDocument, String packagePath) {
+  public OdfContentOrStylesDomBase(OdfPackageDocument packageDocument, String packagePath) {
     super(packageDocument, packagePath);
   }
 
-  public OdfContentDomBase(OdfPackage pkg, String packagePath) {
+  public OdfContentOrStylesDomBase(OdfPackage pkg, String packagePath) {
     super(pkg, packagePath);
   }
 
