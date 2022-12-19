@@ -30,7 +30,6 @@ package org.odftoolkit.odfdom.pkg;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -111,35 +110,38 @@ public class OdfXMLFactory {
       OdfName odfName, String nodeType, Map<OdfName, Class> classCache) {
     Class c = null;
     String className = "";
-    c = classCache.get(odfName);
-    if (c == null) {
-      String prefix = odfName.getPrefix();
-      if (prefix != null && !(nodeType.equals(ATTRIBUTE_PACKAGE_NAME) && prefix.equals("xmlns"))) {
-        String qName = odfName.getQName();
-        String localName = odfName.getLocalName();
-        // judge whether the element need to load class from incubator package.
-        if (mHandwrittenElementClasses.contains(qName)) {
-          // judge whether the element need to rename before find class name.
-          if (mElementRenames.containsKey(qName)) {
-            String renameName = mElementRenames.get(qName);
-            StringTokenizer stok = new StringTokenizer(renameName, ELEMENT_NAME_DELIMITER);
-            prefix = stok.nextToken();
-            localName = stok.nextToken();
+    synchronized (classCache) {
+      c = classCache.get(odfName);
+      if (c == null) {
+        String prefix = odfName.getPrefix();
+        if (prefix != null
+            && !(nodeType.equals(ATTRIBUTE_PACKAGE_NAME) && prefix.equals("xmlns"))) {
+          String qName = odfName.getQName();
+          String localName = odfName.getLocalName();
+          // judge whether the element need to load class from incubator package.
+          if (mHandwrittenElementClasses.contains(qName)) {
+            // judge whether the element need to rename before find class name.
+            if (mElementRenames.containsKey(qName)) {
+              String renameName = mElementRenames.get(qName);
+              StringTokenizer stok = new StringTokenizer(renameName, ELEMENT_NAME_DELIMITER);
+              prefix = stok.nextToken();
+              localName = stok.nextToken();
+            }
+            className = getOdfIncubatorNodeClassName(prefix, localName);
+          } else if ("manifest".equals(prefix)) {
+            className = getOdfPKGNodeClassName(prefix, localName, nodeType);
+          } else {
+            className = getOdfDOMNodeClassName(prefix, localName, nodeType);
           }
-          className = getOdfIncubatorNodeClassName(prefix, localName);
-        } else if ("manifest".equals(prefix)) {
-          className = getOdfPKGNodeClassName(prefix, localName, nodeType);
-        } else {
-          className = getOdfDOMNodeClassName(prefix, localName, nodeType);
-        }
-        try {
-          c = Class.forName(className);
-          classCache.put(odfName, c);
-        } catch (ClassNotFoundException ex) {
-          // all classes are first tring to load and warning is given later
-        } catch (NoClassDefFoundError dex) {
-          Logger.getLogger(OdfXMLFactory.class.getName())
-              .log(Level.FINER, "NoClassDefFoundError: " + className, dex.getMessage());
+          try {
+            c = Class.forName(className);
+            classCache.put(odfName, c);
+          } catch (ClassNotFoundException ex) {
+            // all classes are first tring to load and warning is given later
+          } catch (NoClassDefFoundError dex) {
+            Logger.getLogger(OdfXMLFactory.class.getName())
+                .log(Level.FINER, "NoClassDefFoundError: " + className, dex.getMessage());
+          }
         }
       }
     }
