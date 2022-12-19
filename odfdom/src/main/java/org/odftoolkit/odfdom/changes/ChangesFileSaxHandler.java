@@ -130,7 +130,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
   private static final String LIBRE_OFFICE_MS_INTEROP_CHECKBOX_UNICODE = "\u25A1";
   private static final Integer ONE = 1;
 
-  public static String COMMENT_PREFIX = "cmt";
+  public static final String COMMENT_PREFIX = "cmt";
   // the empty XML file to which nodes will be added
   private OdfFileDom mFileDom;
   private JsonOperationProducer mJsonOperationProducer;

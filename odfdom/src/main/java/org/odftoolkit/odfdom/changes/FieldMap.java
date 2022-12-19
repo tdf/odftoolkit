@@ -15,6 +15,7 @@
  */
 package org.odftoolkit.odfdom.changes;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,7 +68,7 @@ class FieldMap {
   public String type;
   private final String className;
   private final long propertyFlags;
-  public static Map<String, FieldMap> fieldMap = createMap();
+  public static final Map<String, FieldMap> fieldMap = createMap();
 
   public FieldMap(String t, String c, long flags) {
     type = t;
@@ -525,6 +526,6 @@ class FieldMap {
         new FieldMap(
             "word-count", "TextWordCountElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC));
 
-    return map;
+    return Collections.unmodifiableMap(map);
   }
 }

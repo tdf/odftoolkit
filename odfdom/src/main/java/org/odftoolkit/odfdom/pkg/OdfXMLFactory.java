@@ -52,45 +52,44 @@ public class OdfXMLFactory {
 
   private static Map<OdfName, Class> mElementTypes = new HashMap<OdfName, Class>();
   private static Map<OdfName, Class> mAttributeTypes = new HashMap<OdfName, Class>();
-  private static Map<String, String> mElementRenames = new HashMap<String, String>();
+  private static final Map<String, String> mElementRenames =
+      Map.of(
+          "text:h", "text:heading",
+          "text:p", "text:paragraph");
   // a set for the element which need to load a none generated manual written class
-  private static Set<String> mHandwrittenElementClasses = new HashSet<String>();
+  private static final Set<String> mHandwrittenElementClasses =
+      Set.of(
+          "draw:frame",
+          "draw:image",
+          "number:boolean-style",
+          "number:currency-style",
+          "number:date-style",
+          "number:percentage-style",
+          "number:number-style",
+          "number:text-style",
+          "number:time-style",
+          // Starting Refactoring. Goal: using XML DOM classes with sets for styles instead of own
+          // layer
+          // mHandwrittenElements.add("office:automatic-styles");
+          // mHandwrittenElements.add("office:master-styles");
+          // mHandwrittenElements.add("office:styles");
+          "style:default-style",
+          "style:style",
+          "style:page-layout",
+          "text:h",
+          "text:list",
+          "text:list-level-style-bullet",
+          "text:list-level-style-image",
+          "text:list-level-style-number",
+          "text:list-style",
+          "text:outline-level-style",
+          "text:outline-style",
+          "text:p",
+          "text:span");
   private static final String LOCAL_NAME_DELIMITER = "-";
   private static final String ELEMENT_NAME_DELIMITER = ":";
   private static final String ELEMENT_PACKAGE_NAME = "element";
   private static final String ATTRIBUTE_PACKAGE_NAME = "attribute";
-
-  static {
-    mElementRenames.put("text:h", "text:heading");
-    mElementRenames.put("text:p", "text:paragraph");
-
-    mHandwrittenElementClasses.add("draw:frame");
-    mHandwrittenElementClasses.add("draw:image");
-    mHandwrittenElementClasses.add("number:boolean-style");
-    mHandwrittenElementClasses.add("number:currency-style");
-    mHandwrittenElementClasses.add("number:date-style");
-    mHandwrittenElementClasses.add("number:percentage-style");
-    mHandwrittenElementClasses.add("number:number-style");
-    mHandwrittenElementClasses.add("number:text-style");
-    mHandwrittenElementClasses.add("number:time-style");
-    // Starting Refactoring. Goal: using XML DOM classes with sets for styles instead of own layer
-    // mHandwrittenElements.add("office:automatic-styles");
-    // mHandwrittenElements.add("office:master-styles");
-    // mHandwrittenElements.add("office:styles");
-    mHandwrittenElementClasses.add("style:default-style");
-    mHandwrittenElementClasses.add("style:style");
-    mHandwrittenElementClasses.add("style:page-layout");
-    mHandwrittenElementClasses.add("text:h");
-    mHandwrittenElementClasses.add("text:list");
-    mHandwrittenElementClasses.add("text:list-level-style-bullet");
-    mHandwrittenElementClasses.add("text:list-level-style-image");
-    mHandwrittenElementClasses.add("text:list-level-style-number");
-    mHandwrittenElementClasses.add("text:list-style");
-    mHandwrittenElementClasses.add("text:outline-level-style");
-    mHandwrittenElementClasses.add("text:outline-style");
-    mHandwrittenElementClasses.add("text:p");
-    mHandwrittenElementClasses.add("text:span");
-  }
 
   /**
    * @param odfName the name of the ODF attribute the desired DOM class should represent.
