@@ -43,8 +43,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -121,7 +119,10 @@ public class OdfPackage implements Closeable {
   private static final Pattern QUOTATION_PATTERN = Pattern.compile("\"");
   private static final Pattern APOSTROPHE_PATTERN = Pattern.compile("'");
   private static final Pattern CONTROL_CHAR_PATTERN = Pattern.compile("\\p{Cntrl}");
-  private static final Set<String> COMPRESSED_FILETYPES;
+  private static final Set<String> COMPRESSED_FILETYPES =
+      Set.of(
+          "jpg", "gif", "png", "zip", "rar", "jpeg", "mpe", "mpg", "mpeg", "mpeg4", "mp4", "7z",
+          "ari", "arj", "jar", "gz", "tar", "war", "mov", "avi");
   private static final byte[] HREF_PATTERN = {
     'x', 'l', 'i', 'n', 'k', ':', 'h', 'r', 'e', 'f', '=', '"'
   }; // xlink:href="
@@ -180,17 +181,6 @@ public class OdfPackage implements Closeable {
     public String getPath() {
       return internalPath;
     }
-  }
-
-  static {
-    HashSet<String> compressedFileTypes = new HashSet<String>();
-    String[] typelist =
-        new String[] {
-          "jpg", "gif", "png", "zip", "rar", "jpeg", "mpe", "mpg", "mpeg", "mpeg4", "mp4", "7z",
-          "ari", "arj", "jar", "gz", "tar", "war", "mov", "avi"
-        };
-    compressedFileTypes.addAll(Arrays.asList(typelist));
-    COMPRESSED_FILETYPES = Collections.unmodifiableSet(compressedFileTypes);
   }
 
   /** Creates the ODFPackage as an empty Package. */

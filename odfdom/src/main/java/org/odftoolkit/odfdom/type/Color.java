@@ -18,7 +18,6 @@
  */
 package org.odftoolkit.odfdom.type;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -31,27 +30,25 @@ public class Color implements OdfDataType {
 
   private static final Pattern sixHexRGBPattern = Pattern.compile("^#[0-9a-fA-F]{6}$");
   private static final Pattern threeHexRGBPattern = Pattern.compile("^#[0-9a-fA-F]{3}$");
-  private static final Map<String, String> labeledColors = new HashMap<String, String>();
-
-  static {
-    labeledColors.put("aqua", "#00ffff");
-    labeledColors.put("black", "#000000");
-    labeledColors.put("blue", "#0000ff");
-    labeledColors.put("fuchsia", "#ff00ff");
-    labeledColors.put("gray", "#808080");
-    labeledColors.put("green", "#008000");
-    labeledColors.put("lime", "#00ff00");
-    labeledColors.put("maroon", "#800000");
-    labeledColors.put("navy", "#000080");
-    labeledColors.put("olive", "#808000");
-    labeledColors.put("orange", "#ffA500");
-    labeledColors.put("purple", "#800080");
-    labeledColors.put("red", "#ff0000");
-    labeledColors.put("silver", "#c0c0c0");
-    labeledColors.put("teal", "#008080");
-    labeledColors.put("white", "#ffffff");
-    labeledColors.put("yellow", "#ffff00");
-  }
+  private static final Map<String, String> labeledColors =
+      Map.ofEntries(
+          Map.entry("aqua", "#00ffff"),
+          Map.entry("black", "#000000"),
+          Map.entry("blue", "#0000ff"),
+          Map.entry("fuchsia", "#ff00ff"),
+          Map.entry("gray", "#808080"),
+          Map.entry("green", "#008000"),
+          Map.entry("lime", "#00ff00"),
+          Map.entry("maroon", "#800000"),
+          Map.entry("navy", "#000080"),
+          Map.entry("olive", "#808000"),
+          Map.entry("orange", "#ffA500"),
+          Map.entry("purple", "#800080"),
+          Map.entry("red", "#ff0000"),
+          Map.entry("silver", "#c0c0c0"),
+          Map.entry("teal", "#008080"),
+          Map.entry("white", "#ffffff"),
+          Map.entry("yellow", "#ffff00"));
 
   private static final String COLOR_PREFIX = "#";
 

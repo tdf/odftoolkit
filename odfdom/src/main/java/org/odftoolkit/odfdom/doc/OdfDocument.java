@@ -943,52 +943,50 @@ public abstract class OdfDocument extends OdfSchemaDocument {
     CTL;
   }
 
-  private static final HashSet<String> CJKLanguage = new HashSet<String>();
-  private static final HashSet<String> CTLLanguage = new HashSet<String>();
-
-  {
-    CJKLanguage.add("zh"); // LANGUAGE_CHINES
-    CJKLanguage.add("ja"); // LANGUAGE_JAPANESE
-    CJKLanguage.add("ko"); // LANGUAGE_KOREANE
-
-    CTLLanguage.add("am"); // LANGUAGE_AMHARIC_ETHIOPIA
-    CTLLanguage.add("ar"); // LANGUAGE_ARABIC_SAUDI_ARABIA
-    CTLLanguage.add("as"); // LANGUAGE_ASSAMESE
-    CTLLanguage.add("bn"); // LANGUAGE_BENGALI
-    CTLLanguage.add("bo"); // LANGUAGE_TIBETAN
-    CTLLanguage.add("brx"); // LANGUAGE_USER_BODO_INDIA
-    CTLLanguage.add("dgo"); // LANGUAGE_USER_DOGRI_INDIA
-    CTLLanguage.add("dv"); // LANGUAGE_DHIVEHI
-    CTLLanguage.add("dz"); // LANGUAGE_DZONGKHA
-    CTLLanguage.add("fa"); // LANGUAGE_FARSI
-    CTLLanguage.add("gu"); // LANGUAGE_GUJARATI
-    CTLLanguage.add("he"); // LANGUAGE_HEBREW
-    CTLLanguage.add("hi"); // LANGUAGE_HINDI
-    CTLLanguage.add("km"); // LANGUAGE_KHMER
-    CTLLanguage.add("kn"); // LANGUAGE_KANNADA
-    CTLLanguage.add("ks"); // LANGUAGE_KASHMIRI
-    CTLLanguage.add("ku"); // LANGUAGE_USER_KURDISH_IRAQ
-    CTLLanguage.add("lo"); // LANGUAGE_LAO
-    CTLLanguage.add("mai"); // LANGUAGE_USER_MAITHILI_INDIA
-    CTLLanguage.add("ml"); // LANGUAGE_MALAYALAM
-    CTLLanguage.add("mn"); // LANGUAGE_MONGOLIAN_MONGOLIAN
-    CTLLanguage.add("mni"); // LANGUAGE_MANIPURI
-    CTLLanguage.add("mr"); // LANGUAGE_MARATHI
-    CTLLanguage.add("my"); // LANGUAGE_BURMESE
-    CTLLanguage.add("ne"); // LANGUAGE_NEPALI
-    CTLLanguage.add("or"); // LANGUAGE_ORIYA
-    CTLLanguage.add("pa"); // LANGUAGE_PUNJABI
-    CTLLanguage.add("sa"); // LANGUAGE_SANSKRIT
-    CTLLanguage.add("sd"); // LANGUAGE_SINDHI
-    CTLLanguage.add("si"); // LANGUAGE_SINHALESE_SRI_LANKA
-    CTLLanguage.add("syr"); // LANGUAGE_SYRIAC
-    CTLLanguage.add("ta"); // LANGUAGE_TAMIL
-    CTLLanguage.add("te"); // LANGUAGE_TELUGU
-    CTLLanguage.add("th"); // LANGUAGE_THAI
-    CTLLanguage.add("ug"); // LANGUAGE_UIGHUR_CHINA
-    CTLLanguage.add("ur"); // LANGUAGE_URDU
-    CTLLanguage.add("yi"); // LANGUAGE_YIDDISH
-  }
+  private static final Set<String> CJKLanguage =
+      Set.of(
+          "zh", // LANGUAGE_CHINES
+          "ja", // LANGUAGE_JAPANESE
+          "ko"); // LANGUAGE_KOREANE
+  private static final Set<String> CTLLanguage =
+      Set.of(
+          "am", // LANGUAGE_AMHARIC_ETHIOPIA
+          "ar", // LANGUAGE_ARABIC_SAUDI_ARABIA
+          "as", // LANGUAGE_ASSAMESE
+          "bn", // LANGUAGE_BENGALI
+          "bo", // LANGUAGE_TIBETAN
+          "brx", // LANGUAGE_USER_BODO_INDIA
+          "dgo", // LANGUAGE_USER_DOGRI_INDIA
+          "dv", // LANGUAGE_DHIVEHI
+          "dz", // LANGUAGE_DZONGKHA
+          "fa", // LANGUAGE_FARSI
+          "gu", // LANGUAGE_GUJARATI
+          "he", // LANGUAGE_HEBREW
+          "hi", // LANGUAGE_HINDI
+          "km", // LANGUAGE_KHMER
+          "kn", // LANGUAGE_KANNADA
+          "ks", // LANGUAGE_KASHMIRI
+          "ku", // LANGUAGE_USER_KURDISH_IRAQ
+          "lo", // LANGUAGE_LAO
+          "mai", // LANGUAGE_USER_MAITHILI_INDIA
+          "ml", // LANGUAGE_MALAYALAM
+          "mn", // LANGUAGE_MONGOLIAN_MONGOLIAN
+          "mni", // LANGUAGE_MANIPURI
+          "mr", // LANGUAGE_MARATHI
+          "my", // LANGUAGE_BURMESE
+          "ne", // LANGUAGE_NEPALI
+          "or", // LANGUAGE_ORIYA
+          "pa", // LANGUAGE_PUNJABI
+          "sa", // LANGUAGE_SANSKRIT
+          "sd", // LANGUAGE_SINDHI
+          "si", // LANGUAGE_SINHALESE_SRI_LANKA
+          "syr", // LANGUAGE_SYRIAC
+          "ta", // LANGUAGE_TAMIL
+          "te", // LANGUAGE_TELUGU
+          "th", // LANGUAGE_THAI
+          "ug", // LANGUAGE_UIGHUR_CHINA
+          "ur", // LANGUAGE_URDU
+          "yi"); // LANGUAGE_YIDDISH
 
   /**
    * Set a locale information.

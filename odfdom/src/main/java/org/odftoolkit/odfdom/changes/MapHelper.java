@@ -26,6 +26,7 @@ package org.odftoolkit.odfdom.changes;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -186,7 +187,7 @@ public class MapHelper {
     } else if (rgbValue.equals(TRANSPARENT) || rgbValue.equals(AUTO)) {
       color.put("type", AUTO);
     }
-    return color;
+    return Collections.unmodifiableMap(color);
   }
 
   /**
@@ -2440,6 +2441,8 @@ public class MapHelper {
         languageToLocaleMap.put(mapping[index].msValue, mapping[index].locale);
         ++index;
       }
+      localeToLanguageMap = Collections.unmodifiableMap(localeToLanguageMap);
+      languageToLocaleMap = Collections.unmodifiableMap(languageToLocaleMap);
     }
   }
 
