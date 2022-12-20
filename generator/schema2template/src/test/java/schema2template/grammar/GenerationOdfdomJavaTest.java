@@ -29,6 +29,11 @@ import org.junit.Test;
 import schema2template.GenerationParameters;
 import schema2template.SchemaToTemplate;
 
+/** 
+    Generates ODFDOM Java sources for all released ODF Schema into the 
+    build directory: target/odf-generation/generation/odfdom-java
+    and compares the results with previous created files (references).
+ */
 public class GenerationOdfdomJavaTest {
 
   private static final Logger LOG = Logger.getLogger(GenerationOdfdomJavaTest.class.getName());
