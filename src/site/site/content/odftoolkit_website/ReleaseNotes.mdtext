@@ -107,6 +107,6 @@ ODF JSON Chang
 * ODFTOOLKIT-474 list decorators with different bullet points
 * ODFTOOLKIT-475 validator applies ODF 1.1 rules to ODF 1.2 documents when checking character content in foreign elements, part 2: ODF elements that don't allow character content
 
-[Historic release notes from ASF incubator times can be found here](https://github.com/tdf/odftoolkit/blob/master/CHANGES.txt)
+[Historic release notes from ASF incubator times can be found here](./CHANGES.txt)
 
 [Historic release notes of ODFDOM can be found here](./odfdom/HistoricReleaseNotes.html)
