@@ -47,20 +47,12 @@ build system. To build ODF Toolkit, use the following command in this directory:
 
 ## Recent Releases
 
-1. We have a *release 0.10.0* using >=JDK 11 and providing the [new collaboration API](https://tdf.github.io/odftoolkit/odfdom/operations/operations.html):
-    *RELEASE (0.10.0)*:
-    (*Note*: the release branch was earlier called 1.0.0-BETA, but it lacks JDK module API, therefore 1.0.0 was renamed 0.10.0)
-    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.10.0/)
-    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.10.0/)
-    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.10.0/)
-
-2. We have a *release 0.9.0* using JDK 8 and for the final time including the Simple API:
-
-    *RELEASE (0.9.0)*:
-    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.9.0/)
-    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.9.0/)
-    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.9.0/)
-    * [Simple API (deprecated)](https://repo1.maven.org/maven2/org/odftoolkit/simple-odf/0.9.0/)
+1. We have a *release 0.11.0* using >=JDK 11 for ODF 1.2-
+   Doing a full refactoring of the ODFDOM code generation and containing updates to the [new collaboration API](https://tdf.github.io/odftoolkit/odfdom/operations/operations.html):
+    *RELEASE (0.11.0)*:
+    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/)
+    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.11.0/)
+    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.11.0/)
 
 For more details see the [release notes](https://tdf.github.io/odftoolkit/ReleaseNotes.html).
 
