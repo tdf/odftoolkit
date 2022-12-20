@@ -49,22 +49,56 @@
     <div id="contenta">
       <h1 id="downloads">Downloads</h1> 
       <h2 id="current-version">Current Version</h2> 
-      <p>The current version is the 0.10.0 supporting ODF 1.2. The future development is based on the <a href="https://github.com/tdf/odftoolkit">master branch</a>.<br> The releases of 0.9.0 and 0.10.0 were both on Novmenber 26th, 2021.</p> 
+      <p>The current version is the 0.11.0 supporting ODF 1.2. The future development is based on the <a href="https://github.com/tdf/odftoolkit">master branch</a>.<br> The releases of 0.11.0 was on December 21th, 2021.</p> 
       <h2 id="releases-(latest)">Releases (latest)</h2> 
-      <ol> 
-        <li>The release 0.10.0 is using &gt;=JDK 9 implementing <a href="http://docs.oasis-open.org/office/v1.2/os/">ODF 1.2</a>.<br> It is <a href="./odfdom/operations/operations.html">providing the new collaboration feature</a> and adding more than half a dozen years of development by merging the ODFDOM fork of <a href="https://www.open-xchange.com/products/ox-documents/">Open-XChange's browser office OX Documents</a>.</li> 
-        <li>The release 0.9.0 is using JDK 8 implementing <a href="http://docs.oasis-open.org/office/v1.2/os/">ODF 1.2</a>.<br> It is for the final time including the Simple API - a fork once made by IBM but no longer maintained, containing too much copy/pasted functionality. Its purpose was to be the first release of the TDF being close to the latest Apache sources as possible.</li> 
-      </ol> 
-      <p>For more details see the <a href="./ReleaseNotes.html">release notes</a>. People interested should also follow the <a href="mailing-lists.html">mail list</a> to track progress.</p> 
+      <p>The release 0.11.0 is using JDK 11 implementing <a href="http://docs.oasis-open.org/office/v1.2/os/">ODF 1.2</a>.<br> For more details see the <a href="./ReleaseNotes.html">release notes</a>. People interested should also follow the <a href="mailing-lists.html">mail list</a> to track progress.</p> 
       <h2 id="project-releases-for-maven-(latest)">Project Releases for Maven (latest)</h2> 
       <h3 id="project-releases-for-maven-on-odf-1.2">Project Releases for Maven on ODF 1.2</h3> 
       <ul> 
-        <li>ODFDOM: <a href="https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.10.0/">0.10.0</a> or <a href="https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.9.0/">0.9.0</a></li> 
-        <li>ODF Validator: <a href="https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.10.0/">0.10.0</a> or <a href="https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.9.0/">0.9.0</a></li> 
-        <li>XSLT Runner: <a href="https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.10.0/">0.10.0</a> or <a href="https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.9.0/">0.9.0</a></li> 
-        <li>Simple API (deprecated): <a href="https://repo1.maven.org/maven2/org/odftoolkit/simple-odf/0.9.0/">0.9.0</a></li> 
+        <li><strong>ODFDOM: <a href="https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/">0.11.0</a></strong></li> 
       </ul> 
+      <div class="codehilite">
+        <pre><code class="language-shell">&lt;!-- https://mvnrepository.com/artifact/org.odftoolkit/odfdom-java --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.odftoolkit&lt;/groupId&gt;
+    &lt;artifactId&gt;odfdom-java&lt;/artifactId&gt;
+    &lt;version&gt;0.11.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+      </div> 
+      <ul> 
+        <li><strong>ODF Validator: <a href="https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.11.0/">0.11.0</a></strong></li> 
+      </ul> 
+      <div class="codehilite">
+        <pre><code class="language-shell">&lt;!-- https://mvnrepository.com/artifact/org.odftoolkit/odfvalidator --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.odftoolkit&lt;/groupId&gt;
+    &lt;artifactId&gt;odfvalidator&lt;/artifactId&gt;
+    &lt;version&gt;0.11.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+      </div> 
+      <ul> 
+        <li><strong>XSLT Runner: <a href="https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.11.0/">0.11.0</a></strong></li> 
+      </ul> 
+      <div class="codehilite">
+        <pre><code class="language-shell">&lt;!-- https://mvnrepository.com/artifact/org.odftoolkit/xslt-runner --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.odftoolkit&lt;/groupId&gt;
+    &lt;artifactId&gt;xslt-runner&lt;/artifactId&gt;
+    &lt;version&gt;0.11.0&lt;/version&gt;
+&lt;/dependency&gt;
+
+</code></pre>
+      </div> 
       <h2 id="odf-toolkit-release-bundles-(latest)">ODF Toolkit Release Bundles (latest)</h2> 
+      <h3 id="odf-toolkit-0.11.0-release-bundle-(odf-1.2-using-jdk-11)">ODF Toolkit 0.11.0 Release Bundle (ODF 1.2 using JDK 11)</h3> 
+      <ul> 
+        <li>Sources: <a href="https://github.com/tdf/odftoolkit/releases/download/v0.11.0/odftoolkit-0.11.0-src.zip">odftoolkit-0.11.0-src.zip</a> [<a href="https://github.com/tdf/odftoolkit/releases/download/v0.11.0/odftoolkit-0.11.0-src.zip.sha">sha</a>]</li> 
+        <li>Binaries: <a href="https://github.com/tdf/odftoolkit/releases/download/v0.11.0/odftoolkit-0.11.0-bin.zip">odftoolkit-0.11.0-bin.zip</a> [<a href="https://github.com/tdf/odftoolkit/releases/download/v0.11.0/odftoolkit-0.11.0-bin.zip.sha">sha</a>]</li> 
+        <li>Documentation: <a href="https://github.com/tdf/odftoolkit/releases/download/v0.11.0/odftoolkit-0.11.0-doc.zip">odftoolkit-0.11.0-doc.zip</a> [<a href="https://github.com/tdf/odftoolkit/releases/download/v0.11.0/odftoolkit-0.11.0-doc.zip.sha">sha</a>]</li> 
+      </ul> 
+      <h2 id="former-odf-toolkit-release-bundles">Former ODF Toolkit Release Bundles</h2> 
       <h3 id="odf-toolkit-0.10.0-release-bundle-(odf-1.2-using-jdk-11)">ODF Toolkit 0.10.0 Release Bundle (ODF 1.2 using JDK 11)</h3> 
       <ul> 
         <li>Sources: <a href="https://github.com/tdf/odftoolkit/releases/download/v0.10.0/odftoolkit-0.10.0-src.zip">odftoolkit-0.10.0-src.zip</a> [<a href="https://github.com/tdf/odftoolkit/releases/download/v0.10.0/odftoolkit-0.10.0-src.zip.sha">sha</a>]</li> 
