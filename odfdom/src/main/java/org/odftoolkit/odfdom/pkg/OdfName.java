@@ -103,16 +103,16 @@ public class OdfName implements Comparable<OdfName> {
       expandedName = localName;
     }
     synchronized (mOdfNames) {
-        // return a similar OdfName if one was already created before..
-        OdfName odfName = mOdfNames.get(expandedName);
-        if (odfName != null) {
-          return odfName;
-        } else {
-          // otherwise create a new OdfName, store it in the map and return it..
-          odfName = new OdfName(odfNamespace, localName, expandedName);
-          mOdfNames.put(expandedName, odfName);
-          return odfName;
-        }
+      // return a similar OdfName if one was already created before..
+      OdfName odfName = mOdfNames.get(expandedName);
+      if (odfName != null) {
+        return odfName;
+      } else {
+        // otherwise create a new OdfName, store it in the map and return it..
+        odfName = new OdfName(odfNamespace, localName, expandedName);
+        mOdfNames.put(expandedName, odfName);
+        return odfName;
+      }
     }
   }
 
