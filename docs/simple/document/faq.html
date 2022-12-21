@@ -50,7 +50,7 @@
       <h1 id="frequently-asked-questions">Frequently Asked Questions</h1> 
       <h2 id="for-users">For Users</h2> 
       <p><strong>How to download and install</strong></p> 
-      <p>You can get Simple Java API for ODF as binary distribution from the <a href="../download.html">download</a> area. There you'll find Javadocs as well. To obtain source code, please refer to development section.</p> 
+      <p>You can get Simple Java API for ODF as binary distribution from the <a href="../../downloads.html">download</a> area. There you'll find Javadocs as well. To obtain source code, please refer to development section.</p> 
       <p><strong>How to start development</strong></p> 
       <p>I suggest you to start from an overview of this project. <a href="PackageLayer.html">This page</a> will give you an overall introduction of the package structures. After that, you can go to the <a href="cookbook/index.html">Cookbook</a> and <a href="../demo/index.html">Demos</a> to read some code samples. And then, you can start your own program to manipulate ODF document.</p> 
       <p>If you are familar with ODFDOM, <a href="PackageLayer.html">Here</a> are the API changes from ODFDOM.</p> 
@@ -58,7 +58,7 @@
       <p>In addition to the Simple Java API JAR file you will need to download and install the following runtime prerequisite:</p> 
       <ul> 
         <li>JDK version 1.6</li> 
-        <li><a href="http://odftoolkit-extra.apache-extras.org.codespot.com/files/odfdom-0.8.7.jar">ODFDOM 0.8.7</a></li> 
+        <li><a href="../../downloads.html">ODFDOM 0.8.7</a></li> 
         <li>The Apache Xerces 2.9.1 or higher version. (download from <a href="http://xerces.apache.org/mirrors.cgi">Apache Xerces web site</a>)</li> 
       </ul> 
       <p><strong>Code examples</strong> You can find sample codes from our <a href="cookbook/index.html">Cookbook</a> and <a href="../demo/index.html">Demos</a>.</p> 
@@ -99,13 +99,13 @@ only-consistent = False
       <p>will download the repository into a new directory.</p> 
       <p>Please note that by this you'll get the latest changeset. If you for example want stable release 0.2, you may want to use<br></p>
       <div class="codehilite">
-        <pre>hg clone https://odftoolkit.org/hg/simple~code-base -r v0.2</pre>
+        <pre>hg clone <a href="https://odftoolkit.org/hg/simple~code-base">https://odftoolkit.org/hg/simple~code-base</a> -r v0.2</pre>
       </div>Developers however always work on the latest changeset.
       <p></p> 
       <p><strong>How to build and run the unit tests</strong> After the source code is checked out, now get and install <a href="http://maven.apache.org/">Apache Maven</a>. On command line test your installation with <code>"mvn -v"</code>.</p> 
       <p>If Maven is correctly installed, change into the project directory and build with command <code>"mvn"</code>.</p> 
       <h2 id="communications">Communications</h2> 
-      <p>You can subscribe to the project's mailing lists from <a href="http://incubator.apache.org/odftoolkit/mailing-lists.html">this page</a>. The "users" list is for discussions about using the toolkit, and the "dev" list is for discussing the development of the toolkit. Active developers should also subscribe to the "commit" mailing list so they will receive those automatic notifications.</p> 
+      <p>You can subscribe to the project's mailing lists from <a href="https://odftoolkit.org/mailing-lists.html">this page</a>. The "users" list is for discussions about using the toolkit, and the "dev" list is for discussing the development of the toolkit. Active developers should also subscribe to the "commit" mailing list so they will receive those automatic notifications.</p> 
       <h2 id="easy-entry-level-tasks">Easy entry level tasks</h2> 
       <p>TBD</p> 
       <h2 id="design-of-the-api">Design of the API</h2> 
@@ -119,7 +119,7 @@ only-consistent = False
       <ul> 
         <li> <p>Step 1. Create an issue in <a href="http://odftoolkit.org/bugzilla/buglist.cgi?product=simple&amp;order=bugs.bug_id">bugzilla</a>, or write a comment to a related open issue, to describe what functions you want to provide.</p> </li> 
         <li> <p>Step 2. Go through "Design of the API" to make sure your contribution will follow it.</p> </li> 
-        <li> <p>Step 3. Check out the source code following the steps in development selection, and add your contribution codes, including the source code and the unit tests. Every public method should have a corresponding unit test method. The <a href="http://incubator.apache.org/odftoolkit/odfdom/Development.html">code guidelines</a> are same as ODFDOM.</p> </li> 
+        <li> <p>Step 3. Check out the source code following the steps in development selection, and add your contribution codes, including the source code and the unit tests. Every public method should have a corresponding unit test method. The <a href="https://odftoolkit.org/odfdom/index.html">code guidelines</a> are same as ODFDOM.</p> </li> 
         <li> <p>Step 4. Test your contribution with Mecurial command to make sure all the unit tests pass. <code>mvn</code></p> </li> 
         <li> <p>Step 5. Generate a patch with hg commands.</p> <p><code>hg commit -A -u "Developer:xxx" -m "#bug XY# Description of changes"</code> <code>hg export -a -g -o ../myChanges.patch</code></p> </li> 
         <li> <p>Step 6. Upload your patch to bugzilla.</p> </li> 
@@ -143,8 +143,8 @@ only-consistent = False
       <p>The current draft of the OASIS ODF 1.2 standard can be downloaded <a href="http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office#odf12">here</a>.</p> 
       <p><strong>Commands line tools</strong></p> 
       <ul> 
-        <li><a href="http://incubator.apache.org/odftoolkit/odfdom/Development.html">Here</a> is a list of the most frequently used commands for Mercurial.</li> 
-        <li><a href="http://incubator.apache.org/odftoolkit/odfdom/Development.html">Here</a> is a list of the most frequently used commands for Maven.</li> 
+        <li> <p><a href="https://odftoolkit.org/odfdom/index.html">Here</a> is a list of the most frequently used commands for Mercurial.</p> </li> 
+        <li> <p><a href="https://odftoolkit.org/odfdom/index.html">Here</a> is a list of the most frequently used commands for Maven.</p> </li> 
       </ul> 
     </div>
     <html>

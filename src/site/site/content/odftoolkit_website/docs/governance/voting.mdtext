@@ -90,8 +90,8 @@ The notation used in voting is:
 [See for more information on new committers from its original Apache process][3]
 [See for more information on voting][4] [derived from its original Apache process][5]
 
-  [1]: /odftoolkit_website/docs/governance/consensusBuilding.html
+  [1]: ./consensusBuilding.html
   [2]: https://community.apache.org/committers/consensusBuilding.html
   [3]: http://community.apache.org/newcommitter.html
-  [4]: /odftoolkit_website/docs/governance/voting.html
+  [4]: ./voting.html
   [5]: https://community.apache.org/committers/voting.html

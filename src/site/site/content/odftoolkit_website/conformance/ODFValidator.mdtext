@@ -308,6 +308,6 @@ help for instruction how to use Mercurial.
 [6]: http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum
 [8]: https://github.com/xmlark/msv
 [9]: https://mvnrepository.com/artifact/org.jopendocument/isorelax-jaxp-bridge-ILM
-[10]: http://xml.apache.org/dist/xerces-j/
+[10]: https://xerces.apache.org/xerces2-j/
 [11]: https://github.com/tdf/odftoolkit/tree/master/validator
 [12]: http://docs.oasis-open.org/office/v1.1/OS/OpenDocument-v1.1.odt
