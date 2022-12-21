@@ -79,9 +79,9 @@
 </code></pre>
           </div> <p>The following documents need currently manual adjustment:</p> 
           <div class="codehilite">
-            <pre><code class="language-shell">    ./README.md
-    ./src/site/content/odftoolkit_website/ReleaseNotes.mdtext
-    ./src/site/content/odftoolkit_website/downloads.mdtext
+            <pre><code class="language-shell">./README.md
+./src/site/content/odftoolkit_website/ReleaseNotes.mdtext
+./src/site/content/odftoolkit_website/downloads.mdtext
 </code></pre>
           </div> <p>The mdtext files are being converted to HTML doing (on Linux)</p> 
           <div class="codehilite">
@@ -117,7 +117,23 @@ mvn release:clean
             <pre><code class="language-shell">mvn release:perform
 </code></pre>
           </div> <p>This will checkout the tag to the target directory, build and package everything and upload the artifacts to the staging repository. Users will download the mirrored release artifacts from machines outside TDF control. Users need to verify that the copy downloaded is identical to the original. Mirrored copies of checksums, KEYS and signature files (.asc and .md5 files) will be present on the mirrors but must never be used for verification. So, all links from the podling website to signatures, sums and <a href="https://github.com/tdf/odftoolkit/blob/master/KEYS">KEYS</a> need to refer to the original documents on GitHub. See release signing guide for more information.</p> </li> 
-        <li> <p><strong>Add the Git tag manually after branch rebase</strong> Push the branch and if the branch is rebased the tag has to be added and pushed on the correct commit manually.</p> </li> 
+        <li> <p><strong>Add the Git tag manually after branch rebase</strong> Push the branch and if the branch is rebased the tag has to be added and pushed on the correct commit manually. For instance for 0.11.0 release the git commands looked like:</p> 
+          <ul> 
+            <li>Adding tag (signed -s, annotated -m, previous commit -a)</li> 
+          </ul> 
+          <div class="codehilite">
+            <pre><code class="language-shell">git tag -s -a v0.11.0 4baf275b33 -m"odftoolkit-0.11.0"
+git push origin v0.11.0
+</code></pre>
+          </div> 
+          <ul> 
+            <li>Deleting tag</li> 
+          </ul> 
+          <div class="codehilite">
+            <pre><code class="language-shell">git tag -d v0.11.0
+git push origin --delete v0.11.0
+</code></pre>
+          </div> </li> 
         <li> <p><strong>What to Do If Something Goes Wrong</strong></p> 
           <ul> 
             <li><strong>Step 1:</strong> Undo the release:</li> 
@@ -154,14 +170,15 @@ git push origin :refs/tags/tagName
    Or in the central Maven repository under group ID "org.odftoolkit" and version "0.11.0" [3,4,5].
 
    [1] ./ReleaseNotes.html
-   [2] https://github.com/tdf/odftoolkit/releases
+   [2] https://github.com/tdf/odftoolkit/releases/tag/v0.11.0
    [3] https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/
    [4] https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.11.0/
    [5] https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.11.0/
 </code></pre>
           </div> </li> 
       </ol> 
-      <h2 id="github-release-guide">GitHub Release Guide</h2> 
+      <h2 id="manual-github-release-guide">Manual GitHub Release Guide</h2> 
+      <p>NOTE: This manual is just a fallback in case the automatic upload to GitHub does not work correctly. We have added a deployment GitHub action, that is being triggered, whenever a tag is being added, see see <a href="https://github.com/tdf/odftoolkit/blob/master/.github/workflows/deployment.yml">https://github.com/tdf/odftoolkit/blob/master/.github/workflows/deployment.yml</a></p> 
       <h3 id="the-six-release-artefacts-(downloadable-from-github)">The Six Release Artefacts (downloadable from GitHub)</h3> 
       <p>The <strong>GitHub release</strong> has always <strong>six files</strong>:</p> 
       <ul> 

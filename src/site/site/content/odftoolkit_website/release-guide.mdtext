@@ -41,9 +41,9 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
    The following documents need currently manual adjustment:
 
     ```shell
-        ./README.md
-        ./src/site/content/odftoolkit_website/ReleaseNotes.mdtext
-        ./src/site/content/odftoolkit_website/downloads.mdtext
+    ./README.md
+    ./src/site/content/odftoolkit_website/ReleaseNotes.mdtext
+    ./src/site/content/odftoolkit_website/downloads.mdtext
     ```
 
     The mdtext files are being converted to HTML doing (on Linux)
@@ -95,6 +95,21 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
 
 1. **Add the Git tag manually after branch rebase**
     Push the branch and if the branch is rebased the tag has to be added and pushed on the correct commit manually.
+    For instance for 0.11.0 release the git commands looked like:
+
+    * Adding tag (signed -s, annotated -m, previous commit -a)
+
+    ```shell
+    git tag -s -a v0.11.0 4baf275b33 -m"odftoolkit-0.11.0"
+    git push origin v0.11.0
+    ```
+
+    * Deleting tag
+
+    ```shell
+    git tag -d v0.11.0
+    git push origin --delete v0.11.0
+    ```
 
 1. **What to Do If Something Goes Wrong**
 
@@ -133,13 +148,17 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
       Or in the central Maven repository under group ID "org.odftoolkit" and version "0.11.0" [3,4,5].
 
       [1] ./ReleaseNotes.html
-      [2] https://github.com/tdf/odftoolkit/releases
+      [2] https://github.com/tdf/odftoolkit/releases/tag/v0.11.0
       [3] https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/
       [4] https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.11.0/
       [5] https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.11.0/
    ```
 
-## GitHub Release Guide
+## Manual GitHub Release Guide
+
+NOTE: This manual is just a fallback in case the automatic upload to GitHub does not work correctly.
+We have added a deployment GitHub action, that is being triggered, whenever a tag is being added, see
+see <https://github.com/tdf/odftoolkit/blob/master/.github/workflows/deployment.yml>
 
 ### The Six Release Artefacts (downloadable from GitHub)
 
