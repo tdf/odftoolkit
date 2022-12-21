@@ -230,7 +230,7 @@ The following actions take place before or during the validation:
     OpenOffice.org wrongly included a document type declaration.
     Ignoring the document type enables the validation of the manifest
     despite of this error.
-* A namespace &quot;<http://openoffice.org/2001/manifest>&quot; within a
+* A namespace ```http://openoffice.org/2001/manifest``` within a
     *manifest.xml* file is changed to &quot;urn:oasis:names:tc:opendocument:xmlns:manifest:1.0&quot;. For
     the logging level **all**, an information is displayed if this
     happens.
@@ -249,9 +249,9 @@ The following actions take place before or during the validation:
     **Note:** The truncation of this
     attribute value avoids a stack overflow in MSV while validating the
     attribute value against a regular expression.
-* A namespace &quot;<http://openoffice.org/2004/database>&quot; within a
+* A namespace ```http://openoffice.org/2004/database``` within a
     *content.xml* file is changed to &quot;urn:oasis:names:tc:opendocument:xmlns:database:1.0&quot;, and
-    a namespace &quot;<http://openoffice.org/2004/office>&quot; within a
+    a namespace ```http://openoffice.org/2004/office``` within a
     *content.xml* file is changed to &quot;urn:oasis:names:tc:opendocument:xmlns:office:1.0&quot;. For
     the logging level **all**, an information is displayed if this
     happens.
@@ -306,11 +306,8 @@ help for instruction how to use Mercurial.
 [4]: http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum
 [5]: http://docs.oracle.com/javase/8/docs/api/java/util/Properties.html
 [6]: http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum
-[7]: http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office
 [8]: https://github.com/xmlark/msv
 [9]: https://mvnrepository.com/artifact/org.jopendocument/isorelax-jaxp-bridge-ILM
 [10]: http://xml.apache.org/dist/xerces-j/
 [11]: https://github.com/tdf/odftoolkit/tree/master/validator
 [12]: http://docs.oasis-open.org/office/v1.1/OS/OpenDocument-v1.1.odt
-[13]: http://www.oasis-open.org/committees/download.php/10765/office-spec-1.0-cd-2.pdf
-[14]: http://www.oasis-open.org/specs/index.php#opendocumentv1.0

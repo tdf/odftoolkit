@@ -61,7 +61,6 @@ Example of the ODF XML representing a table in ODF:
 
 ***Note:*** In the OpenDocument standard the ODF elements are reused among all document types. The above XML of a table is for instance equally usable in Text and Spreadsheet documents.
 
-
 This XML would be mapped to a W3C derived ODF DOM class structure:
 
 ![alt text][12]
@@ -173,4 +172,4 @@ Go on reading about [how to set up a building environment and where to get the s
 [10]: http://www.w3.org/DOM/
 [11]: FruitTable_code.jpg
 [12]: Table_fruits_diagramm.jpg
-[13]: Development.html
+[13]: ../source.html
