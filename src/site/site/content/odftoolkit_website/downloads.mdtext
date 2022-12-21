@@ -14,7 +14,7 @@ For more details see the [release notes](./ReleaseNotes.html). People interested
 
 ### Project Releases for Maven on ODF 1.2
 
-* **ODFDOM: [0.11.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/)**
+* **[ODFDOM](./odfdom/index.html): [0.11.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/)**
 
 ```shell
 <dependency>
@@ -24,7 +24,7 @@ For more details see the [release notes](./ReleaseNotes.html). People interested
 </dependency>
 ```
 
-* **ODF Validator: [0.11.0](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.11.0/)**
+* **[ODF Validator](./conformance/ODFValidator.html): [0.11.0](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.11.0/)**
 
 ```shell
 <dependency>
@@ -34,7 +34,7 @@ For more details see the [release notes](./ReleaseNotes.html). People interested
 </dependency>
 ```
 
-* **XSLT Runner: [0.11.0](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.11.0/)**
+* **[XSLT Runner](./xsltrunner/ODFXSLTRunner.html): [0.11.0](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.11.0/)**
 
 ```shell
 <dependency>
