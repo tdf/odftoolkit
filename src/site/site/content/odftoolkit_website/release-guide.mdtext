@@ -24,9 +24,11 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
 
 #### Snapshot Release
 
-```shell
-   mvn deploy
-```
+1. **Deploy Snapshot**</br>
+
+    ```shell
+    mvn deploy
+    ```
 
 #### Final Release
 
@@ -99,8 +101,7 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
     * **Step 1:** Undo the release:
 
     ```shell
-    git reset –hard HEAD~1 (You may have to do it a second time, depending upon when the error occurred.)
-    git reset –hard HEAD~1
+    git reset –hard HEAD~1 (Depending upon when the error occurred, you might undo multiple commits)
     ```
 
     * **Step 2:** Delete the tag.

@@ -64,10 +64,13 @@
       <h3 id="recipe-for-every-release">Recipe for every release</h3> 
       <p>There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT will be exchanged by a timestamp or the final release.</p> 
       <h4 id="snapshot-release">Snapshot Release</h4> 
-      <div class="codehilite">
-        <pre><code class="language-shell">   mvn deploy
+      <ol> 
+        <li> <p><strong>Deploy Snapshot</strong><br></p> 
+          <div class="codehilite">
+            <pre><code class="language-shell">mvn deploy
 </code></pre>
-      </div> 
+          </div> </li> 
+      </ol> 
       <h4 id="final-release">Final Release</h4> 
       <ol> 
         <li> <p><strong>Prepare documentation</strong><br>Working on a release git branch and using a GitHub fork to test the new GitHub pages helps a lot!</p> 
@@ -120,8 +123,7 @@ mvn release:clean
             <li><strong>Step 1:</strong> Undo the release:</li> 
           </ul> 
           <div class="codehilite">
-            <pre><code class="language-shell">git reset –hard HEAD~1 (You may have to do it a second time, depending upon when the error occurred.)
-git reset –hard HEAD~1
+            <pre><code class="language-shell">git reset –hard HEAD~1 (Depending upon when the error occurred, you might undo multiple commits)
 </code></pre>
           </div> 
           <ul> 
