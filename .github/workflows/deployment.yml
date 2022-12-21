@@ -3,7 +3,7 @@ name: Publish JAR on tagging
 on:
   push:
     tags:
-      - '*'
+      - 'v[0-9]+.[0-9]+.[0-9]*'
 
 jobs:
   build:
@@ -16,8 +16,10 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         cache: maven
+    - name: Checkout tag
+      run: git checkout ${{ env.GITHUB_REF }}
     - name: Build with Maven # build, test & package sources & create 3 ZIP for all bin, doc and src deliverables!
-      run: mvn -B install -Ppedantic,prepare-release --file pom.xml
+      run: mvn -B install antrun:run@prepare-github-release -Ppedantic,prepare-release -e --file pom.xml
     - name: Read pom.xml to get version for new release # The following step reads the pom.xml from repo and use its version for the release
       run: |
         echo "release_version=$(cat pom.xml | grep -a -m 1 "<version>" | sed 's/.*<version>//p' | head -1 | sed 's/<\/version>//p' | head -1)" >> $GITHUB_ENV
