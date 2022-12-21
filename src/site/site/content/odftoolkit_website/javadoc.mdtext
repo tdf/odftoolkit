@@ -5,6 +5,11 @@ Some Java projects of the ODF TOOLKIT offer a JavaDoc API:
 * [ODFDOM API](api/odfdom/index.html)
 * [Generator - based on ODF Grammar data](api/schema2template/index.html)
 
+Older version 0.10:
+
+* [ODFDOM 0.10 API](https://odftoolkit.org/api-0.10/odfdom/index.html)
+* [Generator 0.10 API](https://odftoolkit.org/api-0.10/schema2template/index.html)
+
 Older version 0.9:
 
 * [ODFDOM 0.9 API](https://odftoolkit.org/api-0.9/odfdom/index.html)

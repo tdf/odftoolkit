@@ -15,6 +15,9 @@ dir="$(mktemp -d)"
 echo using "${dir}"
 
 git archive --format=tar origin/master | tar -x -C "${dir}" docs/
+git archive --format=tar --prefix=0.10/ odftoolkit-0.10.0-docs | tar -x -C "${dir}" 0.10/docs/api
+mv "${dir}/0.10/docs/api" "${dir}/docs/api-0.10"
+rm -r "${dir}/0.10"
 git archive --format=tar --prefix=0.9/ origin/0.9 | tar -x -C "${dir}" 0.9/docs/api
 mv "${dir}/0.9/docs/api" "${dir}/docs/api-0.9"
 rm -r "${dir}/0.9"
