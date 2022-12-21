@@ -7,19 +7,74 @@ We are doing two kind of releases at the same time:
 
 ## Maven Release Guide
 
-The release jars for each project are deployed to the Maven repository. Making release artefacts should follow the following steps:
+The release artifacts for each project are deployed to the Maven repository. Making release artefacts should follow the following steps:
 
-1. **Maven Repro Access**</br>Make sure you got access to Maven repro via our [Sonatype JIRA issue](https://issues.sonatype.org/browse/OSSRH-960). Add your userID & password to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html).
+### Only once your configuration Setup
+
+1. **Maven Repro Access**</br>Make sure you have access to Maven repro via our [Sonatype JIRA issue](https://issues.sonatype.org/browse/OSSRH-960). Add your userID & password to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html). In the end, you should be able to log in at <https://oss.sonatype.org/#welcome>.
 
 2. **Install GNU PG**</br>Install in your OS. [See details in tutorial 'publish your artifacts to Maven'](https://dzone.com/articles/publish-your-artifacts-to-maven-central)
 
 3. **Configure GNU PG**</br>Add your GNU and JIRA credentials to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html).
 See [our example settings.xml](docs/settings-example.xml) and search & replace the placeholders starting with 'YOUR_'.
 
-4. **Clean start**</br>Make sure that your working copy is clean.
-   Preferrably check out a clean version from [GitHub](https://github.com/tdf/odftoolkit).
+### Recipe for every release
 
-5. **Prepare the release**
+There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT will be exchanged by a timestamp or the final release.
+
+#### Snapshot Release
+
+```shell
+   mvn deploy
+```
+
+#### Final Release
+
+1. **Prepare documentation**</br>Working on a release git branch and using a GitHub fork to test the new GitHub pages helps a lot!
+
+```shell
+   git checkout -b release-candidate
+```
+
+   The following documents need currently manual adjustment:
+
+```shell
+    ./README.md
+    ./src/site/content/odftoolkit_website/ReleaseNotes.mdtext
+    ./src/site/content/odftoolkit_website/downloads.mdtext
+```
+
+    The mdtext files are being converted to HTML doing (on Linux)
+
+```shell
+   cd src/site
+   build-html.sh
+   git add ../..
+   git commit -m"Documentation update for the upcoming release"
+```
+
+1. **Prepare JavaDoc**
+
+    JavaDoc has to be generated with the upcoming release number already set. Therefore instead of doing it manually I do a
+
+```shell
+   mvn release:prepare # should generate the javadoc - otherwise 'mvn install'
+   git stash # to remove the changed pom.xml
+   cd src/site
+   copy-javadoc.sh
+   git add ../..
+   git commit -m"New JavaDoc for the upcoming release"
+```
+
+1. **A clean start**</br>Make sure that your working copy is clean.
+   Preferably check out a clean version from [GitHub](https://github.com/tdf/odftoolkit).
+
+```shell
+   mvn clean
+   mvn release:clean
+```
+
+1. **Prepare the release**
 
    ```shell
    mvn release:prepare
@@ -27,7 +82,7 @@ See [our example settings.xml](docs/settings-example.xml) and search & replace t
 
    This will start the interactive release preparation. You need to supply Maven with the versions of the release. "release version" should be the version of the intended release (recommended value should be fine). "SCM release tag or label" should include the RC version (e.g. odftoolkit-0.10.0). "new development version" should be the current SNAPSHOT version.
 
-6. **Perform the release**
+1. **Perform the release**
 
    ```shell
    mvn release:perform
@@ -36,19 +91,45 @@ See [our example settings.xml](docs/settings-example.xml) and search & replace t
    This will checkout the tag to the target directory, build and package everything and upload the artifacts to the staging repository.
    Users will download the mirrored release artifacts from machines outside TDF control. Users need to verify that the copy downloaded is identical to the original. Mirrored copies of checksums, KEYS and signature files (.asc and .md5 files) will be present on the mirrors but must never be used for verification. So, all links from the podling website to signatures, sums and [KEYS](https://github.com/tdf/odftoolkit/blob/master/KEYS) need to refer to the original documents on GitHub. See release signing guide for more information.
 
-7. **Publish Document**</br> Publish all of the prepared document on the website and update the download page.
-8. **Send Announcements**</br> The release manager need to send announcements to odf-dev list. The sample looks like:
+1. **Add the Git tag manually after branch rebase**
+    Push the branch and if the branch is rebased the tag has to be added and pushed on the correct commit manually.
+
+1. **What to Do If Something Goes Wrong**
+
+    * **Step 1:** Undo the release:
+
+    ```shell
+    git reset –hard HEAD~1 (You may have to do it a second time, depending upon when the error occurred.)
+    git reset –hard HEAD~1
+    ```
+
+    * **Step 2:** Delete the tag.
+
+    ```shell
+    git tag -d tagName
+    git push origin :refs/tags/tagName
+    ```
+
+1. **Review and approve the Maven Nexus Deliverables**
+
+    Log into <https://oss.sonatype.org/#welcome> and review the artefacts of the release, if it is erroneous drop it.
+    1. If the release artefacts are correct, [close the repository](https://help.sonatype.com/repomanager2/staging-releases/managing-staging-repositories).
+    2. After the closing process is done, you may release the repository.
+    3. You may find the artefacts of the release among on Maven, e.g.: <https://repo1.maven.org/maven2/org/odftoolkit/odftoolkit/>
+
+1. **Publish Document**</br> Publish all of the prepared document on the website and update the download page.
+1. **Send Announcements**</br> The release manager need to send announcements to odf-dev list. The sample looks like:
 
    ```shell
-      Subject:[ANNOUNCEMENT] "ODF Toolkit 0.10.0" & "ODF Toolkit 0.9.0 Release"
+      Subject:[ANNOUNCEMENT] "ODF Toolkit 0.11.0 Release"
       To: dev@odftoolkit.org
       Hi all,
 
-      The ODF Toolkit team is pleased to announce the release of 0.10.0 (>=JDK 9) and in addition a release of 0.9.0 (JDK 8).
+      The ODF Toolkit team is pleased to announce the release of 0.11.0 (>=JDK 11) supporting ODF 1.2.
       The list of changes is available in the release notes[1].
 
       All new ODF Toolkit components (binary, source and JavaDoc bundles) are available as GitHub Releases [2].
-      Or in the central Maven repository under Group ID "org.apache.odftoolkit" and Version "0.10.0" and "0.9.0".
+      Or in the central Maven repository under Group ID "org.apache.odftoolkit" and Version "0.11.0".
 
       [1] ./ReleaseNotes.html
       [2] https://github.com/tdf/odftoolkit/releases
@@ -56,7 +137,7 @@ See [our example settings.xml](docs/settings-example.xml) and search & replace t
 
 ## GitHub Release Guide
 
-### The Six Release Artefacts
+### The Six Release Artefacts (downloadable from GitHub)
 
 The **GitHub release** has always **six files**:
 
