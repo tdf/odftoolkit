@@ -36,12 +36,8 @@ If you need the earlier versions before moved to Apache, please download [here][
 
 If you want to supply suggestion or feedback, please send [e-mail][11] to us.
 
-If you want to contribute code, please read the [developer guide document][13], which introduces how to build the development environment.
-
 If you want to dive into this project, please reference the [document page][14], which lists lots of useful materials.
 
-  [1]: downloads.html
-  [2]: document/ReleaseNotes.html
   [3]: http://en.wikipedia.org/wiki/OpenDocument
   [4]: ../odfdom/index.html
   [5]: demo/index.html
@@ -51,6 +47,5 @@ If you want to dive into this project, please reference the [document page][14],
   [9]: https://odftoolkit.org/api-0.9/simple/index.html
   [10]: ../downloads.html
   [11]: mailto:dev@odftoolkit.org
-  [13]: document/faq.html
   [14]: document/index.html
   [15]: downloads.html

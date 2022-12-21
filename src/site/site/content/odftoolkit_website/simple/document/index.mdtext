@@ -6,7 +6,7 @@
 
 Javadoc is a documentation generator for generating API documentation in HTML format from Java source code.
 
-<a href="javadoc/index.html" target="_blank"> Simple API <span id="versionNo">0.6.6</span> Online Version</a>
+<a href="https://odftoolkit.org/api-0.9/simple/index.html" target="_blank"> Simple API <span id="versionNo">0.9.0</span> Online Version</a>
 
 You can download the Javadoc of different versions on the [Downloads Page][1].
 
@@ -14,17 +14,13 @@ You can download the Javadoc of different versions on the [Downloads Page][1].
 
 [Cookbook][2] provides simple codes to help developers know how to use Simple API.</p>
 
-**Frequently Asked Questions**
-
-[This page][3] lists the frequently asked questions.
-
 **Article and Paper**
 
 - [ODFDOM for Java: Simplifying programmatic control of documents and their data, Part 1][4]
 - [ODFDOM for Java: Simplifying programmatic control of documents and their data, Part 2][5]
 - [ODFDOM for Java: Simplifying programmatic control of documents and their data, Part 3][6]
-- [Open Document Processing with ODFDOM in an insurance solution][7]
-- [ODF Template Engine -- An easy document generation tool built with ODFDOM][8]
+- Open Document Processing with ODFDOM in an insurance solution (OpenOffice.org Conference (ooocon) 2010)
+- ODF Template Engine -- An easy document generation tool built with ODFDOM (OpenOffice.org Conference (ooocon) 2019)
 
 **More Documents for Developer**
 
@@ -33,14 +29,11 @@ You can download the Javadoc of different versions on the [Downloads Page][1].
 - [Architecture][11]
 - [API Changes From ODFDOM 0.8.6][12]
 
-  [1]: ../downloads.html
+  [1]: ../../downloads.html
   [2]: cookbook/index.html
-  [3]: faq.html
   [4]: http://www.ibm.com/developerworks/lotus/library/symphony-odfdom-pt1/index.html
   [5]: http://www.ibm.com/developerworks/lotus/library/symphony-odfdom-pt2/index.html
   [6]: http://www.ibm.com/developerworks/lotus/library/symphony-odfdom-pt3/index.html
-  [7]: http://www.ooocon.org/index.php/ooocon/2010/paper/view/264/164
-  [8]: http://conference.services.openoffice.org/index.php/ooocon/2009/paper/viewFile/82/44
   [9]: ProjectRoadmap.html
   [10]: Requirements.html
   [11]: PackageLayer.html
