@@ -1984,7 +1984,10 @@ public class OdfPackage implements Closeable {
       if (keyDerivationElement != null) {
         encryptionDataElement.removeChild(keyDerivationElement);
       }
-      keyDerivationElement = encryptionDataElement.newKeyDerivationElement(1024, "PBKDF2", saltStr);
+      keyDerivationElement = encryptionDataElement.newKeyDerivationElement("PBKDF2");
+      keyDerivationElement.setIterationCountAttribute(1024);
+      keyDerivationElement.setSaltAttribute(saltStr);
+
       StartKeyGenerationElement startKeyGenerationElement =
           OdfElement.findFirstChildNode(StartKeyGenerationElement.class, encryptionDataElement);
       if (startKeyGenerationElement != null) {
