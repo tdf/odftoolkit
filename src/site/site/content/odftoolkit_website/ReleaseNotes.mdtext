@@ -1,5 +1,18 @@
 # ODF Toolkit Release Notes
 
+## Release 0.12.0
+
+[ODFDOM 0.12.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.12.0/) is released on December 22th, 2022. Git tag: "odftoolkit-0.12.0".
+
+### GitHub issues fixed in this release 0.12.0
+
+* [#26](https://github.com/tdf/odftoolkit/issues/26) Adding ODF 1.3 support to the ODF Toolkit
+
+### Major updates with 0.12.0
+
+The typed ODFDOM DOM model is now based on the XML grammar of the [OASIS ODF 1.3 standard](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office).
+[All deliverables of the OASIS 1.3 standard are downloadable from OASIS](https://docs.oasis-open.org/office/OpenDocument/v1.3/os/).
+
 ## Release 0.11.0
 
 [ODFDOM 0.11.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/) is released on December 21th, 2022. Git tag: "odftoolkit-0.11.0".
@@ -19,7 +32,7 @@
 * [#189](https://github.com/tdf/odftoolkit/issues/189) org.odftoolkit.odfdom.pkg.OdfName declares static StringBuilder -> potential problem in multi-threaded environments
 * [#198](https://github.com/tdf/odftoolkit/pull/198) clean up static Map/Set/etc to avoid races and leaks
 
-### Major updates with this version
+### Major updates with 0.11.0
 
 #### Generation & Templates
 

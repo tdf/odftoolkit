@@ -47,6 +47,13 @@ build system. To build ODF Toolkit, use the following command in this directory:
 
 ## Recent Releases
 
+1. We have a *release 0.12.0* using >=JDK 11 for ODF 1.3-
+   Doing a full refactoring of the ODFDOM code generation and containing updates to the [new collaboration API](https://tdf.github.io/odftoolkit/odfdom/operations/operations.html):
+    *RELEASE (0.12.0)*:
+    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.12.0/)
+    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.12.0/)
+    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.12.0/)
+
 1. We have a *release 0.11.0* using >=JDK 11 for ODF 1.2-
    Doing a full refactoring of the ODFDOM code generation and containing updates to the [new collaboration API](https://tdf.github.io/odftoolkit/odfdom/operations/operations.html):
     *RELEASE (0.11.0)*:
