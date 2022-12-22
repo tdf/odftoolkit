@@ -48,6 +48,14 @@
     </div>
     <div id="contenta">
       <h1 id="odf-toolkit-release-notes">ODF Toolkit Release Notes</h1> 
+      <h2 id="release-0.12.0">Release 0.12.0</h2> 
+      <p><a href="https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.12.0/">ODFDOM 0.12.0</a> is released on December 22th, 2022. Git tag: "odftoolkit-0.12.0".</p> 
+      <h3 id="github-issues-fixed-in-this-release-0.12.0">GitHub issues fixed in this release 0.12.0</h3> 
+      <ul> 
+        <li><a href="https://github.com/tdf/odftoolkit/issues/26">#26</a> Adding ODF 1.3 support to the ODF Toolkit</li> 
+      </ul> 
+      <h3 id="major-updates-with-0.12.0">Major updates with 0.12.0</h3> 
+      <p>The typed ODFDOM DOM model is now based on the XML grammar of the <a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office">OASIS ODF 1.3 standard</a>. <a href="https://docs.oasis-open.org/office/OpenDocument/v1.3/os/">All deliverables of the OASIS 1.3 standard are downloadable from OASIS</a>.</p> 
       <h2 id="release-0.11.0">Release 0.11.0</h2> 
       <p><a href="https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/">ODFDOM 0.11.0</a> is released on December 21th, 2022. Git tag: "odftoolkit-0.11.0".</p> 
       <h3 id="github-issues-fixed-in-this-release-0.11.0">GitHub issues fixed in this release 0.11.0</h3> 
@@ -65,7 +73,7 @@
         <li><a href="https://github.com/tdf/odftoolkit/issues/189">#189</a> org.odftoolkit.odfdom.pkg.OdfName declares static StringBuilder -&gt; potential problem in multi-threaded environments</li> 
         <li><a href="https://github.com/tdf/odftoolkit/pull/198">#198</a> clean up static Map/Set/etc to avoid races and leaks</li> 
       </ul> 
-      <h3 id="major-updates-with-this-version">Major updates with this version</h3> 
+      <h3 id="major-updates-with-0.11.0">Major updates with 0.11.0</h3> 
       <h4 id="generation-&amp;-templates">Generation &amp; Templates</h4> 
       <ul> 
         <li>ODFDOM source generation (generator project) was <a href="https://github.com/tdf/odftoolkit/pull/182">completely refactored</a>, allowing to trigger generation from the ODFDOM project (<em><strong>mvn install -Dcodegen</strong></em>) to generate, copy and format the Java classes of the 3 XML grammars: 

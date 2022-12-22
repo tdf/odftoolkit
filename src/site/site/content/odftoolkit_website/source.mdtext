@@ -19,7 +19,7 @@ sudo apt-get install openjdk-8-jdk
 sudo apt-get install maven
 ```
 
-### ODF Toolkit >= 0.10.0 using JDK >= 9
+### ODF Toolkit >= 0.10.0 using JDK >=11
 
 ```shell
 sudo apt-get install openjdk-11-jdk
@@ -27,7 +27,7 @@ sudo apt-get install maven
 ```
 
 **Note:**
-The previous instructions has been tested with an Ubuntu 20.04 installation.
+The previous instructions has been tested with an Ubuntu 22.04 installation.
 Other distros and versions should work fine, but might require some slight
 modifications.
 
