@@ -89,6 +89,18 @@ public class ManifestElement extends OdfElement {
   }
 
   /**
+   * Create child element {@odf.element manifest:encrypted-key}.
+   *
+   * @return the element {@odf.element manifest:encrypted-key}
+   */
+  public EncryptedKeyElement newEncryptedKeyElement() {
+    EncryptedKeyElement encryptedKey =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(EncryptedKeyElement.class);
+    this.appendChild(encryptedKey);
+    return encryptedKey;
+  }
+
+  /**
    * Create child element {@odf.element manifest:file-entry}.
    *
    * @param fullPathValue the <code>String</code> value of <code>FullPathAttribute</code>, see

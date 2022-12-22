@@ -37,6 +37,7 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartAxisLabelPositionAttribute
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartAxisPositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartConnectBarsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartDataLabelNumberAttribute;
+import org.odftoolkit.odfdom.dom.attribute.chart.ChartDataLabelSeriesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartDataLabelSymbolAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartDataLabelTextAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartDeepAttribute;
@@ -71,6 +72,12 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartOriginAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartOverlapAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartPercentageAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartPieOffsetAttribute;
+import org.odftoolkit.odfdom.dom.attribute.chart.ChartRegressionForceInterceptAttribute;
+import org.odftoolkit.odfdom.dom.attribute.chart.ChartRegressionInterceptValueAttribute;
+import org.odftoolkit.odfdom.dom.attribute.chart.ChartRegressionMaxDegreeAttribute;
+import org.odftoolkit.odfdom.dom.attribute.chart.ChartRegressionMovingTypeAttribute;
+import org.odftoolkit.odfdom.dom.attribute.chart.ChartRegressionNameAttribute;
+import org.odftoolkit.odfdom.dom.attribute.chart.ChartRegressionPeriodAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartRegressionTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartReverseDirectionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartRightAngledAxesAttribute;
@@ -165,6 +172,11 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
       OdfStyleProperty.get(
           OdfStylePropertiesSet.ChartProperties,
           OdfName.newName(OdfDocumentNamespace.CHART, "data-label-number"));
+
+  public static final OdfStyleProperty DataLabelSeries =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "data-label-series"));
 
   public static final OdfStyleProperty DataLabelSymbol =
       OdfStyleProperty.get(
@@ -335,6 +347,36 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
       OdfStyleProperty.get(
           OdfStylePropertiesSet.ChartProperties,
           OdfName.newName(OdfDocumentNamespace.CHART, "pie-offset"));
+
+  public static final OdfStyleProperty RegressionForceIntercept =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "regression-force-intercept"));
+
+  public static final OdfStyleProperty RegressionInterceptValue =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "regression-intercept-value"));
+
+  public static final OdfStyleProperty RegressionMaxDegree =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "regression-max-degree"));
+
+  public static final OdfStyleProperty RegressionMovingType =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "regression-moving-type"));
+
+  public static final OdfStyleProperty RegressionName =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "regression-name"));
+
+  public static final OdfStyleProperty RegressionPeriod =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "regression-period"));
 
   public static final OdfStyleProperty RegressionType =
       OdfStyleProperty.get(
@@ -671,6 +713,36 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         new ChartDataLabelNumberAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(chartDataLabelNumberValue);
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>ChartDataLabelSeriesAttribute
+   * </code> , See {@odf.attribute chart:data-label-series}
+   *
+   * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Boolean getChartDataLabelSeriesAttribute() {
+    ChartDataLabelSeriesAttribute attr =
+        (ChartDataLabelSeriesAttribute)
+            getOdfAttribute(OdfDocumentNamespace.CHART, "data-label-series");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Boolean.valueOf(attr.booleanValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>ChartDataLabelSeriesAttribute</code> ,
+   * See {@odf.attribute chart:data-label-series}
+   *
+   * @param chartDataLabelSeriesValue The type is <code>Boolean</code>
+   */
+  public void setChartDataLabelSeriesAttribute(Boolean chartDataLabelSeriesValue) {
+    ChartDataLabelSeriesAttribute attr =
+        new ChartDataLabelSeriesAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setBooleanValue(chartDataLabelSeriesValue.booleanValue());
   }
 
   /**
@@ -1661,6 +1733,189 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartPieOffsetAttribute attr = new ChartPieOffsetAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setIntValue(chartPieOffsetValue.intValue());
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>
+   * ChartRegressionForceInterceptAttribute</code> , See {@odf.attribute
+   * chart:regression-force-intercept}
+   *
+   * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Boolean getChartRegressionForceInterceptAttribute() {
+    ChartRegressionForceInterceptAttribute attr =
+        (ChartRegressionForceInterceptAttribute)
+            getOdfAttribute(OdfDocumentNamespace.CHART, "regression-force-intercept");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Boolean.valueOf(attr.booleanValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>ChartRegressionForceInterceptAttribute
+   * </code> , See {@odf.attribute chart:regression-force-intercept}
+   *
+   * @param chartRegressionForceInterceptValue The type is <code>Boolean</code>
+   */
+  public void setChartRegressionForceInterceptAttribute(
+      Boolean chartRegressionForceInterceptValue) {
+    ChartRegressionForceInterceptAttribute attr =
+        new ChartRegressionForceInterceptAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setBooleanValue(chartRegressionForceInterceptValue.booleanValue());
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>
+   * ChartRegressionInterceptValueAttribute</code> , See {@odf.attribute
+   * chart:regression-intercept-value}
+   *
+   * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set
+   *     and no default value defined.
+   */
+  public Double getChartRegressionInterceptValueAttribute() {
+    ChartRegressionInterceptValueAttribute attr =
+        (ChartRegressionInterceptValueAttribute)
+            getOdfAttribute(OdfDocumentNamespace.CHART, "regression-intercept-value");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Double.valueOf(attr.doubleValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>ChartRegressionInterceptValueAttribute
+   * </code> , See {@odf.attribute chart:regression-intercept-value}
+   *
+   * @param chartRegressionInterceptValueValue The type is <code>Double</code>
+   */
+  public void setChartRegressionInterceptValueAttribute(Double chartRegressionInterceptValueValue) {
+    ChartRegressionInterceptValueAttribute attr =
+        new ChartRegressionInterceptValueAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setDoubleValue(chartRegressionInterceptValueValue.doubleValue());
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>
+   * ChartRegressionMaxDegreeAttribute</code> , See {@odf.attribute chart:regression-max-degree}
+   *
+   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Integer getChartRegressionMaxDegreeAttribute() {
+    ChartRegressionMaxDegreeAttribute attr =
+        (ChartRegressionMaxDegreeAttribute)
+            getOdfAttribute(OdfDocumentNamespace.CHART, "regression-max-degree");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Integer.valueOf(attr.intValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>ChartRegressionMaxDegreeAttribute
+   * </code> , See {@odf.attribute chart:regression-max-degree}
+   *
+   * @param chartRegressionMaxDegreeValue The type is <code>Integer</code>
+   */
+  public void setChartRegressionMaxDegreeAttribute(Integer chartRegressionMaxDegreeValue) {
+    ChartRegressionMaxDegreeAttribute attr =
+        new ChartRegressionMaxDegreeAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setIntValue(chartRegressionMaxDegreeValue.intValue());
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>
+   * ChartRegressionMovingTypeAttribute</code> , See {@odf.attribute chart:regression-moving-type}
+   *
+   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
+   *     and no default value defined.
+   */
+  public String getChartRegressionMovingTypeAttribute() {
+    ChartRegressionMovingTypeAttribute attr =
+        (ChartRegressionMovingTypeAttribute)
+            getOdfAttribute(OdfDocumentNamespace.CHART, "regression-moving-type");
+    if (attr != null) {
+      return String.valueOf(attr.getValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>ChartRegressionMovingTypeAttribute
+   * </code> , See {@odf.attribute chart:regression-moving-type}
+   *
+   * @param chartRegressionMovingTypeValue The type is <code>String</code>
+   */
+  public void setChartRegressionMovingTypeAttribute(String chartRegressionMovingTypeValue) {
+    ChartRegressionMovingTypeAttribute attr =
+        new ChartRegressionMovingTypeAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setValue(chartRegressionMovingTypeValue);
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>ChartRegressionNameAttribute
+   * </code> , See {@odf.attribute chart:regression-name}
+   *
+   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
+   *     and no default value defined.
+   */
+  public String getChartRegressionNameAttribute() {
+    ChartRegressionNameAttribute attr =
+        (ChartRegressionNameAttribute)
+            getOdfAttribute(OdfDocumentNamespace.CHART, "regression-name");
+    if (attr != null) {
+      return String.valueOf(attr.getValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>ChartRegressionNameAttribute</code> ,
+   * See {@odf.attribute chart:regression-name}
+   *
+   * @param chartRegressionNameValue The type is <code>String</code>
+   */
+  public void setChartRegressionNameAttribute(String chartRegressionNameValue) {
+    ChartRegressionNameAttribute attr =
+        new ChartRegressionNameAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setValue(chartRegressionNameValue);
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>ChartRegressionPeriodAttribute
+   * </code> , See {@odf.attribute chart:regression-period}
+   *
+   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Integer getChartRegressionPeriodAttribute() {
+    ChartRegressionPeriodAttribute attr =
+        (ChartRegressionPeriodAttribute)
+            getOdfAttribute(OdfDocumentNamespace.CHART, "regression-period");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Integer.valueOf(attr.intValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>ChartRegressionPeriodAttribute</code> ,
+   * See {@odf.attribute chart:regression-period}
+   *
+   * @param chartRegressionPeriodValue The type is <code>Integer</code>
+   */
+  public void setChartRegressionPeriodAttribute(Integer chartRegressionPeriodValue) {
+    ChartRegressionPeriodAttribute attr =
+        new ChartRegressionPeriodAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setIntValue(chartRegressionPeriodValue.intValue());
   }
 
   /**

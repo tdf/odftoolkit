@@ -32,6 +32,7 @@ import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberDenominatorValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberGroupingAttribute;
+import org.odftoolkit.odfdom.dom.attribute.number.NumberMaxDenominatorValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberMinDenominatorDigitsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberMinIntegerDigitsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberMinNumeratorDigitsAttribute;
@@ -120,6 +121,36 @@ public class NumberFractionElement extends OdfElement {
     NumberGroupingAttribute attr = new NumberGroupingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setBooleanValue(numberGroupingValue.booleanValue());
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>
+   * NumberMaxDenominatorValueAttribute</code> , See {@odf.attribute number:max-denominator-value}
+   *
+   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Integer getNumberMaxDenominatorValueAttribute() {
+    NumberMaxDenominatorValueAttribute attr =
+        (NumberMaxDenominatorValueAttribute)
+            getOdfAttribute(OdfDocumentNamespace.NUMBER, "max-denominator-value");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Integer.valueOf(attr.intValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>NumberMaxDenominatorValueAttribute
+   * </code> , See {@odf.attribute number:max-denominator-value}
+   *
+   * @param numberMaxDenominatorValueValue The type is <code>Integer</code>
+   */
+  public void setNumberMaxDenominatorValueAttribute(Integer numberMaxDenominatorValueValue) {
+    NumberMaxDenominatorValueAttribute attr =
+        new NumberMaxDenominatorValueAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setIntValue(numberMaxDenominatorValueValue.intValue());
   }
 
   /**

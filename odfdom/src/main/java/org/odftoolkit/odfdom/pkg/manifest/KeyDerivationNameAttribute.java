@@ -69,7 +69,8 @@ public class KeyDerivationNameAttribute extends OdfAttribute {
 
   /** The value set of {@odf.attribute manifest:key-derivation-name}. */
   public enum Value {
-    PBKDF2("PBKDF2");
+    PBKDF2("PBKDF2"),
+    PGP("PGP");
 
     private String mValue;
 

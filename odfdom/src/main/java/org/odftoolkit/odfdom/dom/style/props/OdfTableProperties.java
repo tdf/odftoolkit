@@ -101,4 +101,8 @@ public interface OdfTableProperties {
       OdfStyleProperty.get(
           OdfStylePropertiesSet.TableProperties,
           OdfName.newName(OdfDocumentNamespace.TABLE, "display"));
+  public static final OdfStyleProperty TabColor =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.TableProperties,
+          OdfName.newName(OdfDocumentNamespace.TABLE, "tab-color"));
 }

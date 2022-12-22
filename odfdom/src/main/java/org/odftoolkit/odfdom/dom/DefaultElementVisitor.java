@@ -43,6 +43,7 @@ import org.odftoolkit.odfdom.dom.element.anim.AnimTransitionFilterElement;
 import org.odftoolkit.odfdom.dom.element.chart.ChartAxisElement;
 import org.odftoolkit.odfdom.dom.element.chart.ChartCategoriesElement;
 import org.odftoolkit.odfdom.dom.element.chart.ChartChartElement;
+import org.odftoolkit.odfdom.dom.element.chart.ChartCoordinateRegionElement;
 import org.odftoolkit.odfdom.dom.element.chart.ChartDataLabelElement;
 import org.odftoolkit.odfdom.dom.element.chart.ChartDataPointElement;
 import org.odftoolkit.odfdom.dom.element.chart.ChartDomainElement;
@@ -208,6 +209,7 @@ import org.odftoolkit.odfdom.dom.element.form.FormValueRangeElement;
 import org.odftoolkit.odfdom.dom.element.math.MathMathElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaAutoReloadElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaCreationDateElement;
+import org.odftoolkit.odfdom.dom.element.meta.MetaCreatorInitialsElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaDateStringElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaDocumentStatisticElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaEditingCyclesElement;
@@ -230,6 +232,7 @@ import org.odftoolkit.odfdom.dom.element.number.NumberDayElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberDayOfWeekElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberEmbeddedTextElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberEraElement;
+import org.odftoolkit.odfdom.dom.element.number.NumberFillCharacterElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberFractionElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberHoursElement;
 import org.odftoolkit.odfdom.dom.element.number.NumberMinutesElement;
@@ -306,12 +309,14 @@ import org.odftoolkit.odfdom.dom.element.style.StyleDrawingPagePropertiesElement
 import org.odftoolkit.odfdom.dom.element.style.StyleDropCapElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleFontFaceElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleFooterFirstElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleFooterLeftElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleFooterStyleElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleFootnoteSepElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleGraphicPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHandoutMasterElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderElement;
+import org.odftoolkit.odfdom.dom.element.style.StyleHeaderFirstElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderFooterPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderLeftElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderStyleElement;
@@ -484,6 +489,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextDdeConnectionDeclsElement;
 import org.odftoolkit.odfdom.dom.element.text.TextDdeConnectionElement;
 import org.odftoolkit.odfdom.dom.element.text.TextDeletionElement;
 import org.odftoolkit.odfdom.dom.element.text.TextDescriptionElement;
+import org.odftoolkit.odfdom.dom.element.text.TextDropDownElement;
 import org.odftoolkit.odfdom.dom.element.text.TextEditingCyclesElement;
 import org.odftoolkit.odfdom.dom.element.text.TextEditingDurationElement;
 import org.odftoolkit.odfdom.dom.element.text.TextExecuteMacroElement;
@@ -513,6 +519,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextIndexTitleTemplateElement;
 import org.odftoolkit.odfdom.dom.element.text.TextInitialCreatorElement;
 import org.odftoolkit.odfdom.dom.element.text.TextInsertionElement;
 import org.odftoolkit.odfdom.dom.element.text.TextKeywordsElement;
+import org.odftoolkit.odfdom.dom.element.text.TextLabelElement;
 import org.odftoolkit.odfdom.dom.element.text.TextLineBreakElement;
 import org.odftoolkit.odfdom.dom.element.text.TextLinenumberingConfigurationElement;
 import org.odftoolkit.odfdom.dom.element.text.TextLinenumberingSeparatorElement;
@@ -773,6 +780,15 @@ public abstract class DefaultElementVisitor implements ElementVisitor {
    * @param ele - an instance of ChartChartElement
    */
   public void visit(ChartChartElement ele) {
+    visit((OdfElement) ele);
+  }
+
+  /**
+   * A method to visit "chart:coordinate-region" elements
+   *
+   * @param ele - an instance of ChartCoordinateRegionElement
+   */
+  public void visit(ChartCoordinateRegionElement ele) {
     visit((OdfElement) ele);
   }
 
@@ -2262,6 +2278,15 @@ public abstract class DefaultElementVisitor implements ElementVisitor {
   }
 
   /**
+   * A method to visit "meta:creator-initials" elements
+   *
+   * @param ele - an instance of MetaCreatorInitialsElement
+   */
+  public void visit(MetaCreatorInitialsElement ele) {
+    visit((OdfElement) ele);
+  }
+
+  /**
    * A method to visit "meta:date-string" elements
    *
    * @param ele - an instance of MetaDateStringElement
@@ -2456,6 +2481,15 @@ public abstract class DefaultElementVisitor implements ElementVisitor {
    * @param ele - an instance of NumberEraElement
    */
   public void visit(NumberEraElement ele) {
+    visit((OdfElement) ele);
+  }
+
+  /**
+   * A method to visit "number:fill-character" elements
+   *
+   * @param ele - an instance of NumberFillCharacterElement
+   */
+  public void visit(NumberFillCharacterElement ele) {
     visit((OdfElement) ele);
   }
 
@@ -3144,6 +3178,15 @@ public abstract class DefaultElementVisitor implements ElementVisitor {
   }
 
   /**
+   * A method to visit "style:footer-first" elements
+   *
+   * @param ele - an instance of StyleFooterFirstElement
+   */
+  public void visit(StyleFooterFirstElement ele) {
+    visit((OdfElement) ele);
+  }
+
+  /**
    * A method to visit "style:footer-left" elements
    *
    * @param ele - an instance of StyleFooterLeftElement
@@ -3194,6 +3237,15 @@ public abstract class DefaultElementVisitor implements ElementVisitor {
    * @param ele - an instance of StyleHeaderElement
    */
   public void visit(StyleHeaderElement ele) {
+    visit((OdfElement) ele);
+  }
+
+  /**
+   * A method to visit "style:header-first" elements
+   *
+   * @param ele - an instance of StyleHeaderFirstElement
+   */
+  public void visit(StyleHeaderFirstElement ele) {
     visit((OdfElement) ele);
   }
 
@@ -4746,6 +4798,15 @@ public abstract class DefaultElementVisitor implements ElementVisitor {
   }
 
   /**
+   * A method to visit "text:drop-down" elements
+   *
+   * @param ele - an instance of TextDropDownElement
+   */
+  public void visit(TextDropDownElement ele) {
+    visit((OdfElement) ele);
+  }
+
+  /**
    * A method to visit "text:editing-cycles" elements
    *
    * @param ele - an instance of TextEditingCyclesElement
@@ -5003,6 +5064,15 @@ public abstract class DefaultElementVisitor implements ElementVisitor {
    * @param ele - an instance of TextKeywordsElement
    */
   public void visit(TextKeywordsElement ele) {
+    visit((OdfElement) ele);
+  }
+
+  /**
+   * A method to visit "text:label" elements
+   *
+   * @param ele - an instance of TextLabelElement
+   */
+  public void visit(TextLabelElement ele) {
     visit((OdfElement) ele);
   }
 

@@ -77,6 +77,8 @@ import org.odftoolkit.odfdom.dom.attribute.style.StylePrintPageOrderAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleRegisterTruthRefStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleScaleToAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleScaleToPagesAttribute;
+import org.odftoolkit.odfdom.dom.attribute.style.StyleScaleToXAttribute;
+import org.odftoolkit.odfdom.dom.attribute.style.StyleScaleToYAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleShadowAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleTableCenteringAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleWritingModeAttribute;
@@ -341,6 +343,16 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
       OdfStyleProperty.get(
           OdfStylePropertiesSet.PageLayoutProperties,
           OdfName.newName(OdfDocumentNamespace.STYLE, "scale-to"));
+
+  public static final OdfStyleProperty ScaleToX =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.PageLayoutProperties,
+          OdfName.newName(OdfDocumentNamespace.STYLE, "scale-to-X"));
+
+  public static final OdfStyleProperty ScaleToY =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.PageLayoutProperties,
+          OdfName.newName(OdfDocumentNamespace.STYLE, "scale-to-Y"));
 
   public static final OdfStyleProperty ScaleToPages =
       OdfStyleProperty.get(
@@ -1699,6 +1711,62 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleScaleToAttribute attr = new StyleScaleToAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(styleScaleToValue);
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>StyleScaleToXAttribute</code> ,
+   * See {@odf.attribute style:scale-to-X}
+   *
+   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Integer getStyleScaleToXAttribute() {
+    StyleScaleToXAttribute attr =
+        (StyleScaleToXAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "scale-to-X");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Integer.valueOf(attr.intValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>StyleScaleToXAttribute</code> , See
+   * {@odf.attribute style:scale-to-X}
+   *
+   * @param styleScaleToXValue The type is <code>Integer</code>
+   */
+  public void setStyleScaleToXAttribute(Integer styleScaleToXValue) {
+    StyleScaleToXAttribute attr = new StyleScaleToXAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setIntValue(styleScaleToXValue.intValue());
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>StyleScaleToYAttribute</code> ,
+   * See {@odf.attribute style:scale-to-Y}
+   *
+   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Integer getStyleScaleToYAttribute() {
+    StyleScaleToYAttribute attr =
+        (StyleScaleToYAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "scale-to-Y");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Integer.valueOf(attr.intValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>StyleScaleToYAttribute</code> , See
+   * {@odf.attribute style:scale-to-Y}
+   *
+   * @param styleScaleToYValue The type is <code>Integer</code>
+   */
+  public void setStyleScaleToYAttribute(Integer styleScaleToYValue) {
+    StyleScaleToYAttribute attr = new StyleScaleToYAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setIntValue(styleScaleToYValue.intValue());
   }
 
   /**

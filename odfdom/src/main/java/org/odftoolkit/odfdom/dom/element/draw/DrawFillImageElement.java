@@ -38,6 +38,7 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
+import org.odftoolkit.odfdom.dom.element.office.OfficeBinaryDataElement;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
@@ -211,8 +212,6 @@ public class DrawFillImageElement extends OdfElement {
    * Receives the value of the ODFDOM attribute representation <code>XlinkHrefAttribute</code> , See
    * {@odf.attribute xlink:href}
    *
-   * <p>Attribute is mandatory.
-   *
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -269,8 +268,6 @@ public class DrawFillImageElement extends OdfElement {
    * Receives the value of the ODFDOM attribute representation <code>XlinkTypeAttribute</code> , See
    * {@odf.attribute xlink:type}
    *
-   * <p>Attribute is mandatory.
-   *
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -293,6 +290,20 @@ public class DrawFillImageElement extends OdfElement {
     XlinkTypeAttribute attr = new XlinkTypeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(xlinkTypeValue);
+  }
+
+  /**
+   * Create child element {@odf.element office:binary-data}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element office:binary-data}
+   */
+  public OfficeBinaryDataElement newOfficeBinaryDataElement() {
+    OfficeBinaryDataElement officeBinaryData =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(OfficeBinaryDataElement.class);
+    this.appendChild(officeBinaryData);
+    return officeBinaryData;
   }
 
   /**

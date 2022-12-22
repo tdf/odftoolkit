@@ -48,6 +48,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleWritingModeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableBorderModelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayAttribute;
+import org.odftoolkit.odfdom.dom.attribute.table.TableTabColorAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
@@ -168,6 +169,11 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
       OdfStyleProperty.get(
           OdfStylePropertiesSet.TableProperties,
           OdfName.newName(OdfDocumentNamespace.TABLE, "display"));
+
+  public static final OdfStyleProperty TabColor =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.TableProperties,
+          OdfName.newName(OdfDocumentNamespace.TABLE, "tab-color"));
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoBackgroundColorAttribute
@@ -673,6 +679,34 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
     TableDisplayAttribute attr = new TableDisplayAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setBooleanValue(tableDisplayValue.booleanValue());
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>TableTabColorAttribute</code> ,
+   * See {@odf.attribute table:tab-color}
+   *
+   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
+   *     and no default value defined.
+   */
+  public String getTableTabColorAttribute() {
+    TableTabColorAttribute attr =
+        (TableTabColorAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "tab-color");
+    if (attr != null) {
+      return String.valueOf(attr.getValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>TableTabColorAttribute</code> , See
+   * {@odf.attribute table:tab-color}
+   *
+   * @param tableTabColorValue The type is <code>String</code>
+   */
+  public void setTableTabColorAttribute(String tableTabColorValue) {
+    TableTabColorAttribute attr = new TableTabColorAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setValue(tableTabColorValue);
   }
 
   /**

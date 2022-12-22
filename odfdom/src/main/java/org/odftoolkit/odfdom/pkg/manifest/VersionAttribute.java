@@ -67,7 +67,7 @@ public class VersionAttribute extends OdfAttribute {
 
   /** The value set of {@odf.attribute manifest:version}. */
   public enum Value {
-    _1_2("1.2");
+    _1_3("1.3");
 
     private String mValue;
 

@@ -418,16 +418,11 @@ public class TableDataPilotTableElement extends OdfElement {
   /**
    * Create child element {@odf.element table:source-cell-range}.
    *
-   * @param tableCellRangeAddressValue the <code>String</code> value of <code>
-   *     TableCellRangeAddressAttribute</code>, see {@odf.attribute table:cell-range-address} at
-   *     specification
    * @return the element {@odf.element table:source-cell-range}
    */
-  public TableSourceCellRangeElement newTableSourceCellRangeElement(
-      String tableCellRangeAddressValue) {
+  public TableSourceCellRangeElement newTableSourceCellRangeElement() {
     TableSourceCellRangeElement tableSourceCellRange =
         ((OdfFileDom) this.ownerDocument).newOdfElement(TableSourceCellRangeElement.class);
-    tableSourceCellRange.setTableCellRangeAddressAttribute(tableCellRangeAddressValue);
     this.appendChild(tableSourceCellRange);
     return tableSourceCellRange;
   }

@@ -743,6 +743,20 @@ public class StyleMasterPageElement extends OdfStylableElement {
   }
 
   /**
+   * Create child element {@odf.element style:footer-first}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element style:footer-first}
+   */
+  public StyleFooterFirstElement newStyleFooterFirstElement() {
+    StyleFooterFirstElement styleFooterFirst =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(StyleFooterFirstElement.class);
+    this.appendChild(styleFooterFirst);
+    return styleFooterFirst;
+  }
+
+  /**
    * Create child element {@odf.element style:footer-left}.
    *
    * @return the element {@odf.element style:footer-left}
@@ -764,6 +778,20 @@ public class StyleMasterPageElement extends OdfStylableElement {
         ((OdfFileDom) this.ownerDocument).newOdfElement(StyleHeaderElement.class);
     this.appendChild(styleHeader);
     return styleHeader;
+  }
+
+  /**
+   * Create child element {@odf.element style:header-first}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element style:header-first}
+   */
+  public StyleHeaderFirstElement newStyleHeaderFirstElement() {
+    StyleHeaderFirstElement styleHeaderFirst =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(StyleHeaderFirstElement.class);
+    this.appendChild(styleHeaderFirst);
+    return styleHeaderFirst;
   }
 
   /**

@@ -153,8 +153,6 @@ public class TableDataPilotGroupsElement extends OdfElement {
    * Receives the value of the ODFDOM attribute representation <code>TableGroupedByAttribute</code>
    * , See {@odf.attribute table:grouped-by}
    *
-   * <p>Attribute is mandatory.
-   *
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -242,8 +240,6 @@ public class TableDataPilotGroupsElement extends OdfElement {
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableStepAttribute</code> , See
    * {@odf.attribute table:step}
-   *
-   * <p>Attribute is mandatory.
    *
    * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.

@@ -65,6 +65,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleBorderLineWidthBottomAttri
 import org.odftoolkit.odfdom.dom.attribute.style.StyleBorderLineWidthLeftAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleBorderLineWidthRightAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleBorderLineWidthTopAttribute;
+import org.odftoolkit.odfdom.dom.attribute.style.StyleContextualSpacingAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleFontIndependentLineSpacingAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleJoinBorderAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleJustifySingleWordAttribute;
@@ -289,6 +290,11 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
       OdfStyleProperty.get(
           OdfStylePropertiesSet.ParagraphProperties,
           OdfName.newName(OdfDocumentNamespace.STYLE, "border-line-width-top"));
+
+  public static final OdfStyleProperty ContextualSpacing =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ParagraphProperties,
+          OdfName.newName(OdfDocumentNamespace.STYLE, "contextual-spacing"));
 
   public static final OdfStyleProperty FontIndependentLineSpacing =
       OdfStyleProperty.get(
@@ -1375,6 +1381,36 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
         new StyleBorderLineWidthTopAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(styleBorderLineWidthTopValue);
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>StyleContextualSpacingAttribute
+   * </code> , See {@odf.attribute style:contextual-spacing}
+   *
+   * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Boolean getStyleContextualSpacingAttribute() {
+    StyleContextualSpacingAttribute attr =
+        (StyleContextualSpacingAttribute)
+            getOdfAttribute(OdfDocumentNamespace.STYLE, "contextual-spacing");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Boolean.valueOf(attr.booleanValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>StyleContextualSpacingAttribute</code>
+   * , See {@odf.attribute style:contextual-spacing}
+   *
+   * @param styleContextualSpacingValue The type is <code>Boolean</code>
+   */
+  public void setStyleContextualSpacingAttribute(Boolean styleContextualSpacingValue) {
+    StyleContextualSpacingAttribute attr =
+        new StyleContextualSpacingAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setBooleanValue(styleContextualSpacingValue.booleanValue());
   }
 
   /**

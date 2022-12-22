@@ -88,19 +88,12 @@ public class OfficeStylesElement extends OdfOfficeStyles {
    *
    * @param drawNameValue the <code>String</code> value of <code>DrawNameAttribute</code>, see
    *     {@odf.attribute draw:name} at specification
-   * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
-   *     {@odf.attribute xlink:href} at specification
-   * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
-   *     {@odf.attribute xlink:type} at specification
    * @return the element {@odf.element draw:fill-image}
    */
-  public DrawFillImageElement newDrawFillImageElement(
-      String drawNameValue, String xlinkHrefValue, String xlinkTypeValue) {
+  public DrawFillImageElement newDrawFillImageElement(String drawNameValue) {
     DrawFillImageElement drawFillImage =
         ((OdfFileDom) this.ownerDocument).newOdfElement(DrawFillImageElement.class);
     drawFillImage.setDrawNameAttribute(drawNameValue);
-    drawFillImage.setXlinkHrefAttribute(xlinkHrefValue);
-    drawFillImage.setXlinkTypeAttribute(xlinkTypeValue);
     this.appendChild(drawFillImage);
     return drawFillImage;
   }

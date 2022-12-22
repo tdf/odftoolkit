@@ -217,14 +217,14 @@ public class TextDatabaseRowNumberElement extends OdfElement {
    * Receives the value of the ODFDOM attribute representation <code>TextValueAttribute</code> , See
    * {@odf.attribute text:value}
    *
-   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
-   *     set and no default value defined.
+   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
+   *     and no default value defined.
    */
-  public Integer getTextValueAttribute() {
+  public String getTextValueAttribute() {
     TextValueAttribute attr =
         (TextValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "value");
-    if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+    if (attr != null) {
+      return String.valueOf(attr.getValue());
     }
     return null;
   }
@@ -233,12 +233,12 @@ public class TextDatabaseRowNumberElement extends OdfElement {
    * Sets the value of ODFDOM attribute representation <code>TextValueAttribute</code> , See
    * {@odf.attribute text:value}
    *
-   * @param textValueValue The type is <code>Integer</code>
+   * @param textValueValue The type is <code>String</code>
    */
-  public void setTextValueAttribute(Integer textValueValue) {
+  public void setTextValueAttribute(String textValueValue) {
     TextValueAttribute attr = new TextValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textValueValue.intValue());
+    attr.setValue(textValueValue);
   }
 
   /**

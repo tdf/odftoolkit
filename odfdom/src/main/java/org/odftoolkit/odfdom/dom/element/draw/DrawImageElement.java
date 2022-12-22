@@ -31,6 +31,7 @@ package org.odftoolkit.odfdom.dom.element.draw;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawFilterNameAttribute;
+import org.odftoolkit.odfdom.dom.attribute.draw.DrawMimeTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkActuateAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkShowAttribute;
@@ -93,6 +94,34 @@ public class DrawImageElement extends OdfElement {
     DrawFilterNameAttribute attr = new DrawFilterNameAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(drawFilterNameValue);
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>DrawMimeTypeAttribute</code> ,
+   * See {@odf.attribute draw:mime-type}
+   *
+   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
+   *     and no default value defined.
+   */
+  public String getDrawMimeTypeAttribute() {
+    DrawMimeTypeAttribute attr =
+        (DrawMimeTypeAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "mime-type");
+    if (attr != null) {
+      return String.valueOf(attr.getValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>DrawMimeTypeAttribute</code> , See
+   * {@odf.attribute draw:mime-type}
+   *
+   * @param drawMimeTypeValue The type is <code>String</code>
+   */
+  public void setDrawMimeTypeAttribute(String drawMimeTypeValue) {
+    DrawMimeTypeAttribute attr = new DrawMimeTypeAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setValue(drawMimeTypeValue);
   }
 
   /**

@@ -31,7 +31,10 @@ package org.odftoolkit.odfdom.dom.element.number;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberDecimalPlacesAttribute;
+import org.odftoolkit.odfdom.dom.attribute.number.NumberExponentIntervalAttribute;
+import org.odftoolkit.odfdom.dom.attribute.number.NumberForcedExponentSignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberGroupingAttribute;
+import org.odftoolkit.odfdom.dom.attribute.number.NumberMinDecimalPlacesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberMinExponentDigitsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberMinIntegerDigitsAttribute;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
@@ -95,6 +98,66 @@ public class NumberScientificNumberElement extends OdfElement {
   }
 
   /**
+   * Receives the value of the ODFDOM attribute representation <code>NumberExponentIntervalAttribute
+   * </code> , See {@odf.attribute number:exponent-interval}
+   *
+   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Integer getNumberExponentIntervalAttribute() {
+    NumberExponentIntervalAttribute attr =
+        (NumberExponentIntervalAttribute)
+            getOdfAttribute(OdfDocumentNamespace.NUMBER, "exponent-interval");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Integer.valueOf(attr.intValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>NumberExponentIntervalAttribute</code>
+   * , See {@odf.attribute number:exponent-interval}
+   *
+   * @param numberExponentIntervalValue The type is <code>Integer</code>
+   */
+  public void setNumberExponentIntervalAttribute(Integer numberExponentIntervalValue) {
+    NumberExponentIntervalAttribute attr =
+        new NumberExponentIntervalAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setIntValue(numberExponentIntervalValue.intValue());
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>
+   * NumberForcedExponentSignAttribute</code> , See {@odf.attribute number:forced-exponent-sign}
+   *
+   * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Boolean getNumberForcedExponentSignAttribute() {
+    NumberForcedExponentSignAttribute attr =
+        (NumberForcedExponentSignAttribute)
+            getOdfAttribute(OdfDocumentNamespace.NUMBER, "forced-exponent-sign");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Boolean.valueOf(attr.booleanValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>NumberForcedExponentSignAttribute
+   * </code> , See {@odf.attribute number:forced-exponent-sign}
+   *
+   * @param numberForcedExponentSignValue The type is <code>Boolean</code>
+   */
+  public void setNumberForcedExponentSignAttribute(Boolean numberForcedExponentSignValue) {
+    NumberForcedExponentSignAttribute attr =
+        new NumberForcedExponentSignAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setBooleanValue(numberForcedExponentSignValue.booleanValue());
+  }
+
+  /**
    * Receives the value of the ODFDOM attribute representation <code>NumberGroupingAttribute</code>
    * , See {@odf.attribute number:grouping}
    *
@@ -120,6 +183,36 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberGroupingAttribute attr = new NumberGroupingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setBooleanValue(numberGroupingValue.booleanValue());
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>NumberMinDecimalPlacesAttribute
+   * </code> , See {@odf.attribute number:min-decimal-places}
+   *
+   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Integer getNumberMinDecimalPlacesAttribute() {
+    NumberMinDecimalPlacesAttribute attr =
+        (NumberMinDecimalPlacesAttribute)
+            getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-decimal-places");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Integer.valueOf(attr.intValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>NumberMinDecimalPlacesAttribute</code>
+   * , See {@odf.attribute number:min-decimal-places}
+   *
+   * @param numberMinDecimalPlacesValue The type is <code>Integer</code>
+   */
+  public void setNumberMinDecimalPlacesAttribute(Integer numberMinDecimalPlacesValue) {
+    NumberMinDecimalPlacesAttribute attr =
+        new NumberMinDecimalPlacesAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setIntValue(numberMinDecimalPlacesValue.intValue());
   }
 
   /**

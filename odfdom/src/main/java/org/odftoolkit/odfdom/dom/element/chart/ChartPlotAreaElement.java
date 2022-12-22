@@ -629,6 +629,20 @@ public class ChartPlotAreaElement extends OdfStylableElement {
   }
 
   /**
+   * Create child element {@odf.element chart:coordinate-region}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element chart:coordinate-region}
+   */
+  public ChartCoordinateRegionElement newChartCoordinateRegionElement() {
+    ChartCoordinateRegionElement chartCoordinateRegion =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(ChartCoordinateRegionElement.class);
+    this.appendChild(chartCoordinateRegion);
+    return chartCoordinateRegion;
+  }
+
+  /**
    * Create child element {@odf.element chart:floor}.
    *
    * @return the element {@odf.element chart:floor}

@@ -34,6 +34,7 @@ import org.odftoolkit.odfdom.dom.attribute.number.NumberDecimalPlacesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberDecimalReplacementAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberDisplayFactorAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberGroupingAttribute;
+import org.odftoolkit.odfdom.dom.attribute.number.NumberMinDecimalPlacesAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberMinIntegerDigitsAttribute;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfElement;
@@ -179,6 +180,36 @@ public class NumberNumberElement extends OdfElement {
     NumberGroupingAttribute attr = new NumberGroupingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setBooleanValue(numberGroupingValue.booleanValue());
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>NumberMinDecimalPlacesAttribute
+   * </code> , See {@odf.attribute number:min-decimal-places}
+   *
+   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Integer getNumberMinDecimalPlacesAttribute() {
+    NumberMinDecimalPlacesAttribute attr =
+        (NumberMinDecimalPlacesAttribute)
+            getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-decimal-places");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Integer.valueOf(attr.intValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>NumberMinDecimalPlacesAttribute</code>
+   * , See {@odf.attribute number:min-decimal-places}
+   *
+   * @param numberMinDecimalPlacesValue The type is <code>Integer</code>
+   */
+  public void setNumberMinDecimalPlacesAttribute(Integer numberMinDecimalPlacesValue) {
+    NumberMinDecimalPlacesAttribute attr =
+        new NumberMinDecimalPlacesAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setIntValue(numberMinDecimalPlacesValue.intValue());
   }
 
   /**

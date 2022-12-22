@@ -268,22 +268,16 @@ public class TableDataPilotFieldElement extends OdfElement {
   /**
    * Create child element {@odf.element table:data-pilot-groups}.
    *
-   * @param tableGroupedByValue the <code>String</code> value of <code>TableGroupedByAttribute
-   *     </code>, see {@odf.attribute table:grouped-by} at specification
    * @param tableSourceFieldNameValue the <code>String</code> value of <code>
    *     TableSourceFieldNameAttribute</code>, see {@odf.attribute table:source-field-name} at
    *     specification
-   * @param tableStepValue the <code>Double</code> value of <code>TableStepAttribute</code>, see
-   *     {@odf.attribute table:step} at specification
    * @return the element {@odf.element table:data-pilot-groups}
    */
   public TableDataPilotGroupsElement newTableDataPilotGroupsElement(
-      String tableGroupedByValue, String tableSourceFieldNameValue, double tableStepValue) {
+      String tableSourceFieldNameValue) {
     TableDataPilotGroupsElement tableDataPilotGroups =
         ((OdfFileDom) this.ownerDocument).newOdfElement(TableDataPilotGroupsElement.class);
-    tableDataPilotGroups.setTableGroupedByAttribute(tableGroupedByValue);
     tableDataPilotGroups.setTableSourceFieldNameAttribute(tableSourceFieldNameValue);
-    tableDataPilotGroups.setTableStepAttribute(tableStepValue);
     this.appendChild(tableDataPilotGroups);
     return tableDataPilotGroups;
   }

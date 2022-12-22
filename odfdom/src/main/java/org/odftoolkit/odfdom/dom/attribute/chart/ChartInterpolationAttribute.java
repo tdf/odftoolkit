@@ -68,7 +68,11 @@ public class ChartInterpolationAttribute extends OdfAttribute {
   public enum Value {
     B_SPLINE("b-spline"),
     CUBIC_SPLINE("cubic-spline"),
-    NONE("none");
+    NONE("none"),
+    STEP_CENTER_X("step-center-x"),
+    STEP_CENTER_Y("step-center-y"),
+    STEP_END("step-end"),
+    STEP_START("step-start");
 
     private String mValue;
 

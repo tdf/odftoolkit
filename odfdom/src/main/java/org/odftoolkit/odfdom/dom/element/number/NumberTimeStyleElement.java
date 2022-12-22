@@ -132,6 +132,20 @@ public abstract class NumberTimeStyleElement extends NumberDataStyleElementBase 
   }
 
   /**
+   * Create child element {@odf.element number:fill-character}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element number:fill-character}
+   */
+  public NumberFillCharacterElement newNumberFillCharacterElement() {
+    NumberFillCharacterElement numberFillCharacter =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(NumberFillCharacterElement.class);
+    this.appendChild(numberFillCharacter);
+    return numberFillCharacter;
+  }
+
+  /**
    * Create child element {@odf.element number:hours}.
    *
    * @return the element {@odf.element number:hours}

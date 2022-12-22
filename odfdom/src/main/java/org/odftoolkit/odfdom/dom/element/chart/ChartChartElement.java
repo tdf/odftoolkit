@@ -40,6 +40,24 @@ import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkHrefAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xlink.XlinkTypeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.xml.XmlIdAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
+import org.odftoolkit.odfdom.dom.element.dr3d.Dr3dSceneElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawAElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawCaptionElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawCircleElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawConnectorElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawControlElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawCustomShapeElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawEllipseElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawFrameElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawGElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawLineElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawMeasureElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawPageThumbnailElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawPathElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawPolygonElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawPolylineElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawRectElement;
+import org.odftoolkit.odfdom.dom.element.draw.DrawRegularPolygonElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
@@ -395,6 +413,301 @@ public class ChartChartElement extends OdfStylableElement {
         ((OdfFileDom) this.ownerDocument).newOdfElement(ChartTitleElement.class);
     this.appendChild(chartTitle);
     return chartTitle;
+  }
+
+  /**
+   * Create child element {@odf.element dr3d:scene}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element dr3d:scene}
+   */
+  public Dr3dSceneElement newDr3dSceneElement() {
+    Dr3dSceneElement dr3dScene =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(Dr3dSceneElement.class);
+    this.appendChild(dr3dScene);
+    return dr3dScene;
+  }
+
+  /**
+   * Create child element {@odf.element draw:a}.
+   *
+   * @param xlinkHrefValue the <code>String</code> value of <code>XlinkHrefAttribute</code>, see
+   *     {@odf.attribute xlink:href} at specification
+   * @param xlinkTypeValue the <code>String</code> value of <code>XlinkTypeAttribute</code>, see
+   *     {@odf.attribute xlink:type} at specification Child element was added in ODF 1.3
+   * @return the element {@odf.element draw:a}
+   */
+  public DrawAElement newDrawAElement(String xlinkHrefValue, String xlinkTypeValue) {
+    DrawAElement drawA = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawAElement.class);
+    drawA.setXlinkHrefAttribute(xlinkHrefValue);
+    drawA.setXlinkTypeAttribute(xlinkTypeValue);
+    this.appendChild(drawA);
+    return drawA;
+  }
+
+  /**
+   * Create child element {@odf.element draw:caption}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element draw:caption}
+   */
+  public DrawCaptionElement newDrawCaptionElement() {
+    DrawCaptionElement drawCaption =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawCaptionElement.class);
+    this.appendChild(drawCaption);
+    return drawCaption;
+  }
+
+  /**
+   * Create child element {@odf.element draw:circle}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element draw:circle}
+   */
+  public DrawCircleElement newDrawCircleElement() {
+    DrawCircleElement drawCircle =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawCircleElement.class);
+    this.appendChild(drawCircle);
+    return drawCircle;
+  }
+
+  /**
+   * Create child element {@odf.element draw:connector}.
+   *
+   * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
+   *     {@odf.attribute svg:viewBox} at specification Child element was added in ODF 1.3
+   * @return the element {@odf.element draw:connector}
+   */
+  public DrawConnectorElement newDrawConnectorElement(int svgViewBoxValue) {
+    DrawConnectorElement drawConnector =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawConnectorElement.class);
+    drawConnector.setSvgViewBoxAttribute(svgViewBoxValue);
+    this.appendChild(drawConnector);
+    return drawConnector;
+  }
+
+  /**
+   * Create child element {@odf.element draw:control}.
+   *
+   * @param drawControlValue the <code>String</code> value of <code>DrawControlAttribute</code>, see
+   *     {@odf.attribute draw:control} at specification Child element was added in ODF 1.3
+   * @return the element {@odf.element draw:control}
+   */
+  public DrawControlElement newDrawControlElement(String drawControlValue) {
+    DrawControlElement drawControl =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawControlElement.class);
+    drawControl.setDrawControlAttribute(drawControlValue);
+    this.appendChild(drawControl);
+    return drawControl;
+  }
+
+  /**
+   * Create child element {@odf.element draw:custom-shape}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element draw:custom-shape}
+   */
+  public DrawCustomShapeElement newDrawCustomShapeElement() {
+    DrawCustomShapeElement drawCustomShape =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawCustomShapeElement.class);
+    this.appendChild(drawCustomShape);
+    return drawCustomShape;
+  }
+
+  /**
+   * Create child element {@odf.element draw:ellipse}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element draw:ellipse}
+   */
+  public DrawEllipseElement newDrawEllipseElement() {
+    DrawEllipseElement drawEllipse =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawEllipseElement.class);
+    this.appendChild(drawEllipse);
+    return drawEllipse;
+  }
+
+  /**
+   * Create child element {@odf.element draw:frame}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element draw:frame}
+   */
+  public DrawFrameElement newDrawFrameElement() {
+    DrawFrameElement drawFrame =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawFrameElement.class);
+    this.appendChild(drawFrame);
+    return drawFrame;
+  }
+
+  /**
+   * Create child element {@odf.element draw:g}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element draw:g}
+   */
+  public DrawGElement newDrawGElement() {
+    DrawGElement drawG = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawGElement.class);
+    this.appendChild(drawG);
+    return drawG;
+  }
+
+  /**
+   * Create child element {@odf.element draw:line}.
+   *
+   * @param svgX1Value the <code>String</code> value of <code>SvgX1Attribute</code>, see
+   *     {@odf.attribute svg:x1} at specification
+   * @param svgX2Value the <code>String</code> value of <code>SvgX2Attribute</code>, see
+   *     {@odf.attribute svg:x2} at specification
+   * @param svgY1Value the <code>String</code> value of <code>SvgY1Attribute</code>, see
+   *     {@odf.attribute svg:y1} at specification
+   * @param svgY2Value the <code>String</code> value of <code>SvgY2Attribute</code>, see
+   *     {@odf.attribute svg:y2} at specification Child element was added in ODF 1.3
+   * @return the element {@odf.element draw:line}
+   */
+  public DrawLineElement newDrawLineElement(
+      String svgX1Value, String svgX2Value, String svgY1Value, String svgY2Value) {
+    DrawLineElement drawLine =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawLineElement.class);
+    drawLine.setSvgX1Attribute(svgX1Value);
+    drawLine.setSvgX2Attribute(svgX2Value);
+    drawLine.setSvgY1Attribute(svgY1Value);
+    drawLine.setSvgY2Attribute(svgY2Value);
+    this.appendChild(drawLine);
+    return drawLine;
+  }
+
+  /**
+   * Create child element {@odf.element draw:measure}.
+   *
+   * @param svgX1Value the <code>String</code> value of <code>SvgX1Attribute</code>, see
+   *     {@odf.attribute svg:x1} at specification
+   * @param svgX2Value the <code>String</code> value of <code>SvgX2Attribute</code>, see
+   *     {@odf.attribute svg:x2} at specification
+   * @param svgY1Value the <code>String</code> value of <code>SvgY1Attribute</code>, see
+   *     {@odf.attribute svg:y1} at specification
+   * @param svgY2Value the <code>String</code> value of <code>SvgY2Attribute</code>, see
+   *     {@odf.attribute svg:y2} at specification Child element was added in ODF 1.3
+   * @return the element {@odf.element draw:measure}
+   */
+  public DrawMeasureElement newDrawMeasureElement(
+      String svgX1Value, String svgX2Value, String svgY1Value, String svgY2Value) {
+    DrawMeasureElement drawMeasure =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawMeasureElement.class);
+    drawMeasure.setSvgX1Attribute(svgX1Value);
+    drawMeasure.setSvgX2Attribute(svgX2Value);
+    drawMeasure.setSvgY1Attribute(svgY1Value);
+    drawMeasure.setSvgY2Attribute(svgY2Value);
+    this.appendChild(drawMeasure);
+    return drawMeasure;
+  }
+
+  /**
+   * Create child element {@odf.element draw:page-thumbnail}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element draw:page-thumbnail}
+   */
+  public DrawPageThumbnailElement newDrawPageThumbnailElement() {
+    DrawPageThumbnailElement drawPageThumbnail =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPageThumbnailElement.class);
+    this.appendChild(drawPageThumbnail);
+    return drawPageThumbnail;
+  }
+
+  /**
+   * Create child element {@odf.element draw:path}.
+   *
+   * @param svgDValue the <code>String</code> value of <code>SvgDAttribute</code>, see
+   *     {@odf.attribute svg:d} at specification
+   * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
+   *     {@odf.attribute svg:viewBox} at specification Child element was added in ODF 1.3
+   * @return the element {@odf.element draw:path}
+   */
+  public DrawPathElement newDrawPathElement(String svgDValue, int svgViewBoxValue) {
+    DrawPathElement drawPath =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPathElement.class);
+    drawPath.setSvgDAttribute(svgDValue);
+    drawPath.setSvgViewBoxAttribute(svgViewBoxValue);
+    this.appendChild(drawPath);
+    return drawPath;
+  }
+
+  /**
+   * Create child element {@odf.element draw:polygon}.
+   *
+   * @param drawPointsValue the <code>String</code> value of <code>DrawPointsAttribute</code>, see
+   *     {@odf.attribute draw:points} at specification
+   * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
+   *     {@odf.attribute svg:viewBox} at specification Child element was added in ODF 1.3
+   * @return the element {@odf.element draw:polygon}
+   */
+  public DrawPolygonElement newDrawPolygonElement(String drawPointsValue, int svgViewBoxValue) {
+    DrawPolygonElement drawPolygon =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPolygonElement.class);
+    drawPolygon.setDrawPointsAttribute(drawPointsValue);
+    drawPolygon.setSvgViewBoxAttribute(svgViewBoxValue);
+    this.appendChild(drawPolygon);
+    return drawPolygon;
+  }
+
+  /**
+   * Create child element {@odf.element draw:polyline}.
+   *
+   * @param drawPointsValue the <code>String</code> value of <code>DrawPointsAttribute</code>, see
+   *     {@odf.attribute draw:points} at specification
+   * @param svgViewBoxValue the <code>Integer</code> value of <code>SvgViewBoxAttribute</code>, see
+   *     {@odf.attribute svg:viewBox} at specification Child element was added in ODF 1.3
+   * @return the element {@odf.element draw:polyline}
+   */
+  public DrawPolylineElement newDrawPolylineElement(String drawPointsValue, int svgViewBoxValue) {
+    DrawPolylineElement drawPolyline =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawPolylineElement.class);
+    drawPolyline.setDrawPointsAttribute(drawPointsValue);
+    drawPolyline.setSvgViewBoxAttribute(svgViewBoxValue);
+    this.appendChild(drawPolyline);
+    return drawPolyline;
+  }
+
+  /**
+   * Create child element {@odf.element draw:rect}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element draw:rect}
+   */
+  public DrawRectElement newDrawRectElement() {
+    DrawRectElement drawRect =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawRectElement.class);
+    this.appendChild(drawRect);
+    return drawRect;
+  }
+
+  /**
+   * Create child element {@odf.element draw:regular-polygon}.
+   *
+   * @param drawConcaveValue the <code>Boolean</code> value of <code>DrawConcaveAttribute</code>,
+   *     see {@odf.attribute draw:concave} at specification
+   * @param drawCornersValue the <code>Integer</code> value of <code>DrawCornersAttribute</code>,
+   *     see {@odf.attribute draw:corners} at specification Child element was added in ODF 1.3
+   * @return the element {@odf.element draw:regular-polygon}
+   */
+  public DrawRegularPolygonElement newDrawRegularPolygonElement(
+      boolean drawConcaveValue, int drawCornersValue) {
+    DrawRegularPolygonElement drawRegularPolygon =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(DrawRegularPolygonElement.class);
+    drawRegularPolygon.setDrawConcaveAttribute(drawConcaveValue);
+    drawRegularPolygon.setDrawCornersAttribute(drawCornersValue);
+    this.appendChild(drawRegularPolygon);
+    return drawRegularPolygon;
   }
 
   /**
