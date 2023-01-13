@@ -46,7 +46,7 @@ The **ODF Validator** may be called with the following options:
     odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>]
                   [-o outputfile] -S <schemafile> <odffiles>
     odfvalidator [-r] [-c|-e|-s] [-v|-w] -O <rngfile> -M <rngfile> -D <rngfile>
-                  -m <xsdfile> [-f <filterfile>] [-x <regexp>] [-o outputfile]
+                  -m <rngfile> [-f <filterfile>] [-x <regexp>] [-o outputfile]
                   <odffiles>
     odfvalidator [-c|-s] [-v|-w] [-d] [-o outputfile] -C <configfile>
     odfvalidator -g <odffiles>
@@ -70,7 +70,7 @@ The options have the following meaning:
 
 **-e**: Apply extended ODF conformance rules (ODF 1.2 or later documents only): Unknown markup is ignored during validation. For ODF 1.0/1.1 documents this option does not have any effect.
 
-**-d**: Use MathML 1.01 DTD rather than MathML 3 schema for content.xml of formula documents.
+**-d**: deprecated and ignored; Whether to use MathML 1.01 DTD or MathML 3 schema for validation is auto-detected.
 
 **-g**: Show the generator information of the specified *&lt;odffiles&gt;* without validation.
 
@@ -86,11 +86,21 @@ The options have the following meaning:
 
 **-w**: Print warnings.
 
-**-x**: Exclude files that match the specified [regular expression] [3] from validation.
+**-x**: Exclude files that match the specified [regular expression][3] from validation.
 
 **-C**: Validate using configuration file **&lt;configfile&gt;**.
 
-**-S**: Use the specified **&lt;schemafile&gt;** for validation.
+**-S**: Use the specified strict ODF **&lt;schemafile&gt;** for validation with **-s**.
+
+**-O**: Use ODF schema **&lt;schemafile**&gt; for validation.
+
+**-M**: Use ODF manifest schema **&lt;schemafile**&gt; for validation.
+
+**-D**: Use ODF dsig schema **&lt;schemafile**&gt; for validation.
+
+**-m**: Use MathML schema **&lt;schemafile**&gt; for validation.
+
+**-f**: Use filterfile **&lt;filterfile**&gt;.
 
 **-V**: Print version information.
 
@@ -116,9 +126,9 @@ options **-1.0**, **-1.1**, **-1.2**, etc. can be used to specify that the
 schemas of a particular ODF version should be used for all files,
 regardless of the version they specify themselves.
 
-The command line option **-d** specifies that the MathML 1.01 DTD should
-be used for the validation of the **content.xml** of formula documents.
-Default is to use the MathML 3 schema.
+The validator automatically detects whether the MathML 1.01 DTD or the MathML 3
+schema should be used for the validation of the **content.xml** of formula
+documents.
 
 If the **-c** command line option is specified and if the validated document
 is an ODF 1.0 or ODF 1.1 document, unknown markup is ignored as specified
@@ -148,18 +158,24 @@ If **-v** is specified additionally, not only validation errors and warnings are
 
 If the **-o** option is present, all messages go into the specified file. Otherwise, they are printed to standard out.
 
-### Validation using a non-default schema
+### Validation using non-default schemas
 
-To specify the schema that is used for **meta-xml**, **content.xml**,
-**styles.xml** and **settings.xml** on the command line,
+To specify the schemas that are used on the command line,
 **ODF Validator** has to be called with the following parameters:
 
 ```shell
-    odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>]
-        [-o outputfile] -S <schemafile> <odffiles>
+    odfvalidator [-r] [-c|-e|-s] [-v|-w] -O <rngfile> -M <rngfile> -D <rngfile>
+                  -m <rngfile> [-f <filterfile>] [-x <regexp>] [-o outputfile]
+                  <odffiles>
 ```
 
-**&lt;schemafile&gt;** is the schema that shall be used.
+**-O**: **&lt;rngfile&gt;** is the schema to be used for the **meta-xml**, **content.xml**, **styles.xml** and **settings.xml** of embedded ODF documents.
+
+**-M**: **&lt;rngfile&gt;** is the schema to be used for **manifest.xml** of the ODF package.
+
+**-D**: **&lt;rngfile&gt;** is the schema to be used for  for any digital signature files of the ODF package.
+
+**-m**: **&lt;rngfile&gt;** is the schema to be used for **content.xml** of any embedded MathML documents.
 
 All other command line option are as described in *Validation using default schemas*.
 
@@ -170,14 +186,17 @@ configuration file. A configuration file is a Java XML properties file as
 described in the [Java API documentation][5]. The following properties
 are supported:
 
-* **strict-schema**: Specifies the strict schema to be used.
-* **manifest-schema**: Specifies the manifest schema to be used.
+* **schema**: Specifies the ODF schema to be used.
+* **strict-schema**: Specifies the strict ODF schema to be used.
+* **manifest-schema**: Specifies the ODF manifest schema to be used.
 * **mathml1.01-schema**: Specifies the MathML 1.01 schema to be used.
 * **mathml3-schema**: Specifies the MathML 3 schema to be used.
+* **dsig-schema**: Specifies the ODF digital signature schema to be used.
 * **path***: All properties whose names start with "path" are considered to be files or directories that shall be validated.
 * **recursive**: This boolean property specifies whether directories are scanned recursively. It takes the values **true** and **false**.
 * **exclude**: Specifies files and directories that shall be excluded as
 a [regular expression][6]. See description of **-x** option.
+* **filter**: See description of **-f** option.
 
 A sample configuration file looks like this:
 
@@ -252,17 +271,15 @@ The following actions take place before or during the validation:
 ## Where are the ODF schemas
 
 The OpenDocument schemas are available on the [OASIS OpenDocument Technical
-Committee][7] page. The ODF 1.0 and 1.1 schemas can be downloaded directly
-from that page]. A zip file containing the most recent ODF 1.2 schemas is
-available in the document section.
+Committee][7] page. The ODF schemas can be downloaded directly from that page.
 
-The MathML DTD that is included in the ODF Validator is the one that used to be
-included in the **/share/dtd/math/1_01/** folder of each
+The MathML 1.01 DTD that is included in the ODF Validator is the one that used
+to be included in the ```/share/dtd/math/1_01/``` folder of each
 OpenOffice.org installation.
 
 ## Requirements
 
-**ODF Validator** requires JRE 11. The properties required to find necessary classes javax.xml.validation.SchemaFactory and org.iso_relax.verifier.VerifierFactoryLoader are automatically set up by the build process in META-INF/services/ of odfvalidator-<VERSION>-jar-with-dependencies.jar so this jar file can be run without additional settings.
+**ODF Validator** requires JRE 11. The properties required to find necessary classes ```javax.xml.validation.SchemaFactory``` and ```org.iso_relax.verifier.VerifierFactoryLoader``` are automatically set up by the build process in ```META-INF/services/``` of ```odfvalidator-<VERSION>-jar-with-dependencies.jar``` so this jar file can be run without additional settings.
 
 **ODF Validator** further requires the following packages:
 
@@ -281,8 +298,10 @@ The **ODF Validator** source code is located [here][11]. **ODF Validator** uses 
 [4]: http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum
 [5]: http://docs.oracle.com/javase/8/docs/api/java/util/Properties.html
 [6]: http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum
+[7]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office
 [8]: https://github.com/xmlark/msv
 [9]: https://mvnrepository.com/artifact/org.jopendocument/isorelax-jaxp-bridge-ILM
 [10]: https://xerces.apache.org/xerces2-j/
 [11]: https://github.com/tdf/odftoolkit/tree/master/validator
 [12]: http://docs.oasis-open.org/office/v1.1/OS/OpenDocument-v1.1.odt
+[14]: http://www.oasis-open.org/committees/download.php/12573/OpenDocument-v1.0-os.sxw

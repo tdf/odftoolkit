@@ -86,7 +86,7 @@
     odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f &lt;filterfile&gt;] [-x &lt;regexp&gt;]
                   [-o outputfile] -S &lt;schemafile&gt; &lt;odffiles&gt;
     odfvalidator [-r] [-c|-e|-s] [-v|-w] -O &lt;rngfile&gt; -M &lt;rngfile&gt; -D &lt;rngfile&gt;
-                  -m &lt;xsdfile&gt; [-f &lt;filterfile&gt;] [-x &lt;regexp&gt;] [-o outputfile]
+                  -m &lt;rngfile&gt; [-f &lt;filterfile&gt;] [-x &lt;regexp&gt;] [-o outputfile]
                   &lt;odffiles&gt;
     odfvalidator [-c|-s] [-v|-w] [-d] [-o outputfile] -C &lt;configfile&gt;
     odfvalidator -g &lt;odffiles&gt;
@@ -102,7 +102,7 @@
       <p><strong>-1.3</strong>: Use the ODF 1.3 schemas regardless of the version specified by the validated document.</p> 
       <p><strong>-c</strong>: Apply ODF conformance rules (ODF 1.0 and 1.1 documents only): Unknown markup is ignored during validation. For ODF 1.2 or later documents this option does not have any effect.</p> 
       <p><strong>-e</strong>: Apply extended ODF conformance rules (ODF 1.2 or later documents only): Unknown markup is ignored during validation. For ODF 1.0/1.1 documents this option does not have any effect.</p> 
-      <p><strong>-d</strong>: Use MathML 1.01 DTD rather than MathML 3 schema for content.xml of formula documents.</p> 
+      <p><strong>-d</strong>: deprecated and ignored; Whether to use MathML 1.01 DTD or MathML 3 schema for validation is auto-detected.</p> 
       <p><strong>-g</strong>: Show the generator information of the specified <em>&lt;odffiles&gt;</em> without validation.</p> 
       <p><strong>-h</strong>: Print a short help.</p> 
       <p><strong>-o</strong>: Print output into specified file rather than standard output.</p> 
@@ -110,9 +110,14 @@
       <p><strong>-s</strong>: Use the strict schema for validation (ODF 1.0/1.1 documents only).</p> 
       <p><strong>-v</strong>: Verbose: print information like the generator or the documents that are processed.</p> 
       <p><strong>-w</strong>: Print warnings.</p> 
-      <p><strong>-x</strong>: Exclude files that match the specified [regular expression] <a href="http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum">3</a> from validation.</p> 
+      <p><strong>-x</strong>: Exclude files that match the specified <a href="http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum">regular expression</a> from validation.</p> 
       <p><strong>-C</strong>: Validate using configuration file <strong>&lt;configfile&gt;</strong>.</p> 
-      <p><strong>-S</strong>: Use the specified <strong>&lt;schemafile&gt;</strong> for validation.</p> 
+      <p><strong>-S</strong>: Use the specified strict ODF <strong>&lt;schemafile&gt;</strong> for validation with <strong>-s</strong>.</p> 
+      <p><strong>-O</strong>: Use ODF schema <strong>&lt;schemafile</strong>&gt; for validation.</p> 
+      <p><strong>-M</strong>: Use ODF manifest schema <strong>&lt;schemafile</strong>&gt; for validation.</p> 
+      <p><strong>-D</strong>: Use ODF dsig schema <strong>&lt;schemafile</strong>&gt; for validation.</p> 
+      <p><strong>-m</strong>: Use MathML schema <strong>&lt;schemafile</strong>&gt; for validation.</p> 
+      <p><strong>-f</strong>: Use filterfile <strong>&lt;filterfile</strong>&gt;.</p> 
       <p><strong>-V</strong>: Print version information.</p> 
       <h3 id="validation-using-default-schemas">Validation using default schemas</h3> 
       <p>The schemas for supported ODF and MathML versions are contained in the git repository and automatically bundled into the jar file during the build. If the ODFValidator is called without the <strong>-S</strong> or <strong>-C</strong> options, these schemas are used for validation.</p> 
@@ -123,31 +128,38 @@
       </div> 
       <p><strong>&lt;odffiles&gt;</strong> is the list of files and directories that should be validated. If a directory is specified, all files that have an OpenDocument extension (like <strong>odt</strong>, <strong>ods</strong> or <strong>ott</strong>) are validated. If <strong>-r</strong> is specified additionally, all directories are processed recursively.</p> 
       <p>By default, the <strong>ODF Validator</strong> detects the version of the files that shall be validated and chooses the corresponding schema. The command line options <strong>-1.0</strong>, <strong>-1.1</strong>, <strong>-1.2</strong>, etc. can be used to specify that the schemas of a particular ODF version should be used for all files, regardless of the version they specify themselves.</p> 
-      <p>The command line option <strong>-d</strong> specifies that the MathML 1.01 DTD should be used for the validation of the <strong>content.xml</strong> of formula documents. Default is to use the MathML 3 schema.</p> 
+      <p>The validator automatically detects whether the MathML 1.01 DTD or the MathML 3 schema should be used for the validation of the <strong>content.xml</strong> of formula documents.</p> 
       <p>If the <strong>-c</strong> command line option is specified and if the validated document is an ODF 1.0 or ODF 1.1 document, unknown markup is ignored as specified in the conformance rules for ODF 1.0/1.1. If the <strong>-s</strong> command line option is specified and if the validated document is an ODF 1.0 or ODF 1.1 document, the strict schema is used for validation. If the <strong>-e</strong> command line option is specified and if the validated document is an ODF 1.2 or later document, unknown markup is ignored as specified in the extended conformance class rules for ODF 1.2 or later. If neither <strong>-c</strong> nor <strong>-e</strong> nor <strong>-s</strong> are specified, the regular ODF schemas are used and errors are reported for unknown markup, unless it appears in styles or metadata of ODF 1.0/1.1 documents.</p> 
       <p>The optional <strong>-x</strong> switch allows to exclude certain files or directories from the validation. The files that shall be excluded are specified by a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum">regular expression</a>. Please note that the full absolute path names of directories and files are matched against this pattern. This means that the regular expression either must include the absolute path of the files and directories that shall be excluded, or must start with <strong>.</strong>*. The <strong>-x</strong> option can be specified only once. If several paths shall be excluded, these paths have to be specified in a single regular expression using the <strong>|</strong> operator.</p> 
       <p>If <strong>-w</strong> is specified additionally, not only validation errors are reported, but also warnings.</p> 
       <p>If <strong>-v</strong> is specified additionally, not only validation errors and warnings are reported, but also the generator stored in the manifest, MIME types, the files that are processed, etc.</p> 
       <p>If the <strong>-o</strong> option is present, all messages go into the specified file. Otherwise, they are printed to standard out.</p> 
-      <h3 id="validation-using-a-non-default-schema">Validation using a non-default schema</h3> 
-      <p>To specify the schema that is used for <strong>meta-xml</strong>, <strong>content.xml</strong>, <strong>styles.xml</strong> and <strong>settings.xml</strong> on the command line, <strong>ODF Validator</strong> has to be called with the following parameters:</p> 
+      <h3 id="validation-using-non-default-schemas">Validation using non-default schemas</h3> 
+      <p>To specify the schemas that are used on the command line, <strong>ODF Validator</strong> has to be called with the following parameters:</p> 
       <div class="codehilite">
-        <pre><code class="language-shell">    odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f &lt;filterfile&gt;] [-x &lt;regexp&gt;]
-        [-o outputfile] -S &lt;schemafile&gt; &lt;odffiles&gt;
+        <pre><code class="language-shell">    odfvalidator [-r] [-c|-e|-s] [-v|-w] -O &lt;rngfile&gt; -M &lt;rngfile&gt; -D &lt;rngfile&gt;
+                  -m &lt;rngfile&gt; [-f &lt;filterfile&gt;] [-x &lt;regexp&gt;] [-o outputfile]
+                  &lt;odffiles&gt;
 </code></pre>
       </div> 
-      <p><strong>&lt;schemafile&gt;</strong> is the schema that shall be used.</p> 
+      <p><strong>-O</strong>: <strong>&lt;rngfile&gt;</strong> is the schema to be used for the <strong>meta-xml</strong>, <strong>content.xml</strong>, <strong>styles.xml</strong> and <strong>settings.xml</strong> of embedded ODF documents.</p> 
+      <p><strong>-M</strong>: <strong>&lt;rngfile&gt;</strong> is the schema to be used for <strong>manifest.xml</strong> of the ODF package.</p> 
+      <p><strong>-D</strong>: <strong>&lt;rngfile&gt;</strong> is the schema to be used for for any digital signature files of the ODF package.</p> 
+      <p><strong>-m</strong>: <strong>&lt;rngfile&gt;</strong> is the schema to be used for <strong>content.xml</strong> of any embedded MathML documents.</p> 
       <p>All other command line option are as described in <em>Validation using default schemas</em>.</p> 
       <h3 id="validation-using-a-configuration-file">Validation using a configuration file</h3> 
       <p>The schemas and the files that should be validated can be specified in a configuration file. A configuration file is a Java XML properties file as described in the <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Properties.html">Java API documentation</a>. The following properties are supported:</p> 
       <ul> 
-        <li><strong>strict-schema</strong>: Specifies the strict schema to be used.</li> 
-        <li><strong>manifest-schema</strong>: Specifies the manifest schema to be used.</li> 
+        <li><strong>schema</strong>: Specifies the ODF schema to be used.</li> 
+        <li><strong>strict-schema</strong>: Specifies the strict ODF schema to be used.</li> 
+        <li><strong>manifest-schema</strong>: Specifies the ODF manifest schema to be used.</li> 
         <li><strong>mathml1.01-schema</strong>: Specifies the MathML 1.01 schema to be used.</li> 
         <li><strong>mathml3-schema</strong>: Specifies the MathML 3 schema to be used.</li> 
+        <li><strong>dsig-schema</strong>: Specifies the ODF digital signature schema to be used.</li> 
         <li><strong>path</strong>*: All properties whose names start with "path" are considered to be files or directories that shall be validated.</li> 
         <li><strong>recursive</strong>: This boolean property specifies whether directories are scanned recursively. It takes the values <strong>true</strong> and <strong>false</strong>.</li> 
         <li><strong>exclude</strong>: Specifies files and directories that shall be excluded as a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum">regular expression</a>. See description of <strong>-x</strong> option.</li> 
+        <li><strong>filter</strong>: See description of <strong>-f</strong> option.</li> 
       </ul> 
       <p>A sample configuration file looks like this:</p> 
       <div class="codehilite">
@@ -189,18 +201,15 @@
       <ul> 
         <li>A DTD document declaration within a <em>manifest.xml</em> file is ignored. For the logging level <strong>all</strong>, an information is displayed if this happens. <strong>Note:</strong> Very early ODF implementations in OpenOffice.org wrongly included a document type declaration. Ignoring the document type enables the validation of the manifest despite of this error.</li> 
         <li>A namespace <code>http://openoffice.org/2001/manifest</code> within a <em>manifest.xml</em> file is changed to "urn:oasis:names:tc:opendocument:xmlns:manifest:1.0". For the logging level <strong>all</strong>, an information is displayed if this happens. <strong>Note:</strong> Early ODF implementations in OpenOffice.org used the wrong namespace. Changing it to the correct one enables the validation of the manifest despite the wrong namespace.</li> 
-        <li>Namespaces defined in the [ODF v1.0 Committee Draft 2][13] are replaced with those of the [ODF v1.0 OASIS Standard][14]. For the logging level <strong>all</strong>, an information is displayed if this happens. <strong>Note:</strong> Changing the namespaces enables the validation of documents that conform to the ODF v1.0 CD2. Such documents have been saved by OpenOffice.org 1.0 beta versions.</li> 
+        <li>Namespaces defined in the [ODF v1.0 Committee Draft 2][13] are replaced with those of the <a href="http://www.oasis-open.org/committees/download.php/12573/OpenDocument-v1.0-os.sxw">ODF v1.0 OASIS Standard</a>. For the logging level <strong>all</strong>, an information is displayed if this happens. <strong>Note:</strong> Changing the namespaces enables the validation of documents that conform to the ODF v1.0 CD2. Such documents have been saved by OpenOffice.org 1.0 beta versions.</li> 
         <li>The value of <em>draw:points</em> attributes is truncated to 2048 characters. For the logging level <strong>all</strong>, an information is displayed if this happens. <strong>Note:</strong> The truncation of this attribute value avoids a stack overflow in MSV while validating the attribute value against a regular expression.</li> 
         <li>A namespace <code>http://openoffice.org/2004/database</code> within a <em>content.xml</em> file is changed to "urn:oasis:names:tc:opendocument:xmlns:database:1.0", and a namespace <code>http://openoffice.org/2004/office</code> within a <em>content.xml</em> file is changed to "urn:oasis:names:tc:opendocument:xmlns:office:1.0". For the logging level <strong>all</strong>, an information is displayed if this happens. <strong>Note:</strong> These namespaces were used in OpenOffice.org 2.x database documents, because database documents are included in OpenDocument since version 1.2 only. Changing them enables the validation of OpenOffice.org 2.x database documents.</li> 
       </ul> 
       <h2 id="where-are-the-odf-schemas">Where are the ODF schemas</h2> 
-      <p>The OpenDocument schemas are available on the [OASIS OpenDocument Technical Committee][7] page. The ODF 1.0 and 1.1 schemas can be downloaded directly from that page]. A zip file containing the most recent ODF 1.2 schemas is available in the document section.</p> 
-      <p>The MathML DTD that is included in the ODF Validator is the one that used to be included in the <strong>/share/dtd/math/1_01/</strong> folder of each OpenOffice.org installation.</p> 
+      <p>The OpenDocument schemas are available on the <a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=office">OASIS OpenDocument Technical Committee</a> page. The ODF schemas can be downloaded directly from that page.</p> 
+      <p>The MathML 1.01 DTD that is included in the ODF Validator is the one that used to be included in the <code>/share/dtd/math/1_01/</code> folder of each OpenOffice.org installation.</p> 
       <h2 id="requirements">Requirements</h2> 
-      <p><strong>ODF Validator</strong> requires JRE 11. The properties required to find necessary classes javax.xml.validation.SchemaFactory and org.iso_relax.verifier.VerifierFactoryLoader are automatically set up by the build process in META-INF/services/ of odfvalidator-
-        <version>
-          -jar-with-dependencies.jar so this jar file can be run without additional settings.
-        </version></p> 
+      <p><strong>ODF Validator</strong> requires JRE 11. The properties required to find necessary classes <code>javax.xml.validation.SchemaFactory</code> and <code>org.iso_relax.verifier.VerifierFactoryLoader</code> are automatically set up by the build process in <code>META-INF/services/</code> of <code>odfvalidator-&lt;VERSION&gt;-jar-with-dependencies.jar</code> so this jar file can be run without additional settings.</p> 
       <p><strong>ODF Validator</strong> further requires the following packages:</p> 
       <ul> 
         <li><a href="https://github.com/xmlark/msv">MSV</a>. <strong>msv-core.jar</strong>, <strong>isorelax.jar</strong>, <strong>relaxngDatatype.jar</strong> and <strong>xsdlib.jar</strong> included in the MSV distribution are fetched automatically by the maven build.</li> 

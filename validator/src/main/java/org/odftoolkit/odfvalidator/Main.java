@@ -249,22 +249,24 @@ public class Main {
     System.out.println(
         "       odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>] [-o outputfile] -S <schemafile> <odffiles>");
     System.out.println(
-        "       odfvalidator [-r] [-c|-e|-s] [-v|-w] -O <rngfile> -M <rngfile> -D <rngfile> -m <xsdfile> [-f <filterfile>] [-x <regexp>] [-o outputfile] <odffiles>");
+        "       odfvalidator [-r] [-c|-e|-s] [-v|-w] -O <rngfile> -M <rngfile> -D <rngfile> -m <rngfile> [-f <filterfile>] [-x <regexp>] [-o outputfile] <odffiles>");
     System.out.println("       odfvalidator [-c|-s] [-v|-w] [-d] [-o outputfile] -C <configfile>");
     System.out.println("       odfvalidator -h");
     System.out.println("       odfvalidator -V");
     System.out.println();
     System.out.println("-C: Validate using configuration file <configfile>");
-    System.out.println("-S: Use strict ODF schema <schemafile> for validation");
+    System.out.println(
+        "-1.0|-1.1|-1.2|-1.3: Validate using the ODF schemas of this version regardless of the version specified by the validated document");
+    System.out.println("-S: Use ODF schema <schemafile> for strict validation (-s)");
     System.out.println("-O: Use ODF schema <schemafile> for validation");
     System.out.println("-M: Use ODF manifest schema <schemafile> for validation");
     System.out.println("-D: Use ODF dsig schema <schemafile> for validation");
-    System.out.println("-m: Use specific MathML schema <schemafile> for validation");
+    System.out.println("-m: Use MathML schema <schemafile> for validation");
     System.out.println("-V: Print version");
     System.out.println("-c: Check conformance (default for ODF 1.2 and 1.3 documents)");
     System.out.println("-e: Check extended conformance (ODF 1.2 and 1.3 documents only)");
     System.out.println(
-        "-d: deprecated and ignored; Whether to use MathML DTD or MathML2 schema for validation is auto-detected");
+        "-d: deprecated and ignored; Whether to use MathML 1.01 DTD or MathML 3 schema for validation is auto-detected");
     System.out.println("-f: Use filterfile <filterfile>");
     System.out.println("-g: Show <odffiles> generators and exit");
     System.out.println("-h: Print this help and exit");
