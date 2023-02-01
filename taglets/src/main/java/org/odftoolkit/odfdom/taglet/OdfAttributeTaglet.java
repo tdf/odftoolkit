@@ -40,7 +40,8 @@ import jdk.javadoc.doclet.Taglet;
  * In case nothing is been a default path within the JavaDoc resources directory is being used.
  *
  * <p>For example the taglet <code>{&#64;odf.attribute xml:id}</code> would be resolved without
- * variable settings to <code>JAVA_DOC_BASE/resources/OpenDocument-v1.3-os-part3-schema.html#attribute-xml_id
+ * variable settings to <code>
+ * JAVA_DOC_BASE/resources/OpenDocument-v1.3-os-part3-schema.html#attribute-xml_id
  * </code> .
  */
 public class OdfAttributeTaglet implements Taglet {

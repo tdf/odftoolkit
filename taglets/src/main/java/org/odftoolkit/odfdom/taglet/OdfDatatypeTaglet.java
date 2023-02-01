@@ -46,7 +46,8 @@ public class OdfDatatypeTaglet implements Taglet {
 
   private static final Logger LOG = Logger.getLogger(OdfDatatypeTaglet.class.getName());
   private static final String NAME = "odf.datatype";
-  private static final String ODF_SPEC_PATH = "../../../../resources/OpenDocument-v1.3-os-part3-schema.html";
+  private static final String ODF_SPEC_PATH =
+      "../../../../resources/OpenDocument-v1.3-os-part3-schema.html";
   private static String mOdfSpecPath = null;
 
   /* FINDING THE ABSOLUTE PATH TO THE ODF SPEC IN HTML:
