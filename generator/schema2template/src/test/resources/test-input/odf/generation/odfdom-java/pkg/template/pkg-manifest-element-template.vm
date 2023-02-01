@@ -221,7 +221,10 @@ public class $className extends $baseClassName {
 ## ---------------------------------------------------
 ##
 #foreach($ch in $children)
-#if ($ch == "manifest:key-derivation")
+## There should be three constructors generated for <manifest:key-derivation>
+## As there are three possible values for @manifest:key-derivation-name - twice strings or URI!
+## see https://docs.oasis-open.org/office/OpenDocument/v1.3/os/schemas/OpenDocument-v1.3-manifest-schema-rng.html#key-derivation-attlist
+#if ($ch == "manifest:key-derivation" && "1.3" == ${xmlModel.getGrammarVersion()})
 	/**
 	 * Create child element {@odf.element manifest:key-derivation}.
 	 *
@@ -276,7 +279,8 @@ public class $className extends $baseClassName {
 	 }
 
 #end
-#if ($ch != "*" && $ch != "manifest:key-derivation")
+## Do not create the any attribute and neither create the already added constructors of <manifest:key-derivation>
+#if ($ch != "*" && !($ch == "manifest:key-derivation" && "1.3" == ${xmlModel.getGrammarVersion()}))
 #set ($child = ${ch.withMultiples()})
 #set ($cClassName = "${xmlModel.camelCase(${child.getLocalName()})}Element")
 #set ($cVar = ${xmlModel.javaCase(${child.getLocalName()})})
