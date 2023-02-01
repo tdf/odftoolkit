@@ -142,15 +142,54 @@ public class EncryptionDataElement extends OdfElement {
   /**
    * Create child element {@odf.element manifest:key-derivation}.
    *
-   * @param keyDerivationNameValue the <code>String</code> value of <code>KeyDerivationNameAttribute
-   *     </code>, see {@odf.attribute manifest:key-derivation-name} at specification Child element
-   *     is mandatory.
    * @return the element {@odf.element manifest:key-derivation}
    */
-  public KeyDerivationElement newKeyDerivationElement(String keyDerivationNameValue) {
+  public KeyDerivationElement newKeyDerivationElement() {
     KeyDerivationElement keyDerivation =
         ((OdfFileDom) this.ownerDocument).newOdfElement(KeyDerivationElement.class);
+    keyDerivation.setKeyDerivationNameAttribute("PGP");
+    this.appendChild(keyDerivation);
+    return keyDerivation;
+  }
+
+  /**
+   * Create child element {@odf.element manifest:key-derivation} with
+   * keyDerivationNameValue="PGPBKDF2"
+   *
+   * @param iterationCountValue the <code>Integer</code> value of <code>IterationCountAttribute
+   *     </code>, see {@odf.attribute manifest:iteration-count} at specification
+   * @param saltValue the <code>String</code> value of <code>SaltAttribute</code>, see
+   *     {@odf.attribute manifest:salt} at specification Child element is mandatory.
+   * @return the element {@odf.element manifest:key-derivation}
+   */
+  public KeyDerivationElement newKeyDerivationElement(int iterationCountValue, String saltValue) {
+    KeyDerivationElement keyDerivation =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(KeyDerivationElement.class);
+    keyDerivation.setIterationCountAttribute(iterationCountValue);
+    keyDerivation.setKeyDerivationNameAttribute("PBKDF2");
+    keyDerivation.setSaltAttribute(saltValue);
+    this.appendChild(keyDerivation);
+    return keyDerivation;
+  }
+
+  /**
+   * Create child element {@odf.element manifest:key-derivation}.
+   *
+   * @param iterationCountValue the <code>Integer</code> value of <code>IterationCountAttribute
+   *     </code>, see {@odf.attribute manifest:iteration-count} at specification
+   * @param keyDerivationNameValue the <code>String</code> value of <code>KeyDerivationNameAttribute
+   *     </code>, see {@odf.attribute manifest:key-derivation-name} at specification
+   * @param saltValue the <code>String</code> value of <code>SaltAttribute</code>, see
+   *     {@odf.attribute manifest:salt} at specification Child element is mandatory.
+   * @return the element {@odf.element manifest:key-derivation}
+   */
+  public KeyDerivationElement newKeyDerivationElement(
+      int iterationCountValue, String keyDerivationNameValue, String saltValue) {
+    KeyDerivationElement keyDerivation =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(KeyDerivationElement.class);
+    keyDerivation.setIterationCountAttribute(iterationCountValue);
     keyDerivation.setKeyDerivationNameAttribute(keyDerivationNameValue);
+    keyDerivation.setSaltAttribute(saltValue);
     this.appendChild(keyDerivation);
     return keyDerivation;
   }
