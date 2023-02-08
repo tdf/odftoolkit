@@ -91,10 +91,12 @@ public class PuzzlePieceSet implements PuzzleComponent, Collection<PuzzlePiece> 
     }
   }
 
+  @Override
   public boolean equals(Object o) {
     return (o instanceof PuzzlePieceSet && ((PuzzlePieceSet) o).mDefinitions.equals(mDefinitions));
   }
 
+  @Override
   public int hashCode() {
     return mDefinitions.hashCode();
   }

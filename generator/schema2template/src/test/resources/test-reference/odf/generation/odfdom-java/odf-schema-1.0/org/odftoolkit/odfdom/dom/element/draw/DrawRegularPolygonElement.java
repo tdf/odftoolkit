@@ -79,12 +79,12 @@ public class DrawRegularPolygonElement extends DrawShapeElementBase {
 	 *
 	 * Attribute is mandatory.
 	 *
-	 * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public Boolean getDrawConcaveAttribute() {
+	public String getDrawConcaveAttribute() {
 		DrawConcaveAttribute attr = (DrawConcaveAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "concave");
-		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+		if (attr != null) {
+			return String.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -92,12 +92,12 @@ public class DrawRegularPolygonElement extends DrawShapeElementBase {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>DrawConcaveAttribute</code> , See {@odf.attribute draw:concave}
 	 *
-	 * @param drawConcaveValue   The type is <code>Boolean</code>
+	 * @param drawConcaveValue   The type is <code>String</code>
 	 */
-	public void setDrawConcaveAttribute(Boolean drawConcaveValue) {
+	public void setDrawConcaveAttribute(String drawConcaveValue) {
 		DrawConcaveAttribute attr = new DrawConcaveAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(drawConcaveValue.booleanValue());
+		attr.setValue(drawConcaveValue);
 	}
 
 	/**

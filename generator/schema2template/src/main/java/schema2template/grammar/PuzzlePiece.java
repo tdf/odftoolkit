@@ -71,6 +71,8 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
   private PuzzlePieceSet mMultiples = new PuzzlePieceSet();
   // definitions of elements which can have this as children
   private PuzzlePieceSet mParents = new PuzzlePieceSet();
+  private Expression mParentExpression = null;
+
   // DEFINITION CONTENT
   // ns:local tagname
   private String mName;
@@ -182,7 +184,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
    * a distinct Hash Code.
    */
   public int hashCode() {
-    return (31 * mName.hashCode()) + mExpression.hashCode();
+    return (mName.hashCode()) ^ mExpression.hashCode();
   }
 
   /**
@@ -353,6 +355,15 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
    */
   public PuzzlePieceSet getParents() {
     return mParents;
+  }
+
+  /**
+   * Gets the Parent Expression which can contain this PuzzlePiece as a child
+   *
+   * @return The parent expression
+   */
+  public Expression getParent() {
+    return mParentExpression;
   }
 
   /**
@@ -550,7 +561,6 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
         }
       }
     }
-
     // Fills multiple information
     Iterator<PuzzlePiece> defIter = setToBeFilled.iterator();
     while (defIter.hasNext()) {
@@ -664,59 +674,59 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
     // Handle Element Definitions
     Iterator<PuzzlePiece> iter = elements.iterator();
     while (iter.hasNext()) {
-      PuzzlePiece puzzlePiece = iter.next();
-      MSVExpressionIterator childFinder =
+      PuzzlePiece ppElement = iter.next();
+      MSVExpressionIterator childIterator =
           new MSVExpressionIterator(
-              puzzlePiece.getExpression(),
+              ppElement.getExpression(),
               NameClassAndExpression.class,
               MSVExpressionIterator.DIRECT_CHILDREN_ONLY);
-      while (childFinder.hasNext()) {
-        Expression child_exp = childFinder.next();
+      while (childIterator.hasNext()) {
+        Expression child_exp = childIterator.next();
         List<PuzzlePiece> child_defs = null;
         PuzzlePieceSet whereToAdd = null;
         if (child_exp instanceof ElementExp) {
           child_defs = reverseElementMap.get(child_exp);
-          whereToAdd = puzzlePiece.mChildElements;
+          whereToAdd = ppElement.mChildElements;
         } else if (child_exp instanceof AttributeExp) {
           child_defs = reverseAttributeMap.get(child_exp);
-          whereToAdd = puzzlePiece.mAttributes;
+          whereToAdd = ppElement.mAttributes;
         }
         if (child_defs != null) {
           whereToAdd.addAll(child_defs);
           for (PuzzlePiece child_def : child_defs) {
-            child_def.mParents.add(puzzlePiece);
+            child_def.mParents.add(ppElement);
           }
         }
       }
 
       if (graphMLTargetDir != null) {
         TinkerPopGraph tinkerPopGraph =
-            new TinkerPopGraph(puzzlePiece.getExpression(), schemaFileName);
+            new TinkerPopGraph(ppElement.getExpression(), schemaFileName);
         File f = new File(graphMLTargetDir);
         f.mkdirs();
         tinkerPopGraph.exportAsGraphML(f.getAbsolutePath());
       }
       MSVExpressionInformation elementInfo =
-          new MSVExpressionInformation(puzzlePiece.getExpression(), schemaFileName);
-      puzzlePiece.mCanHaveText = elementInfo.canHaveText();
+          new MSVExpressionInformation(ppElement.getExpression(), schemaFileName);
+      ppElement.mCanHaveText = elementInfo.canHaveText();
 
-      Map<String, List<Expression>> atnameToDefs = buildNameExpressionsMap(puzzlePiece.mAttributes);
+      Map<String, List<Expression>> atnameToDefs = buildNameExpressionsMap(ppElement.mAttributes);
       for (String name : atnameToDefs.keySet()) {
         if (elementInfo.isMandatory(atnameToDefs.get(name))) {
-          puzzlePiece.mMandatoryChildAttributeNames.add(name);
+          ppElement.mMandatoryChildAttributeNames.add(name);
         }
       }
 
       Map<String, List<Expression>> elnameToDefs =
-          buildNameExpressionsMap(puzzlePiece.mChildElements);
+          buildNameExpressionsMap(ppElement.mChildElements);
       for (String name : elnameToDefs.keySet()) {
         if (elementInfo.isMandatory(elnameToDefs.get(name))) {
-          puzzlePiece.mMandatoryChildElementNames.add(name);
+          ppElement.mMandatoryChildElementNames.add(name);
         }
       }
 
-      puzzlePiece.mSingletonChildExpressions = elementInfo.getSingletons();
-      puzzlePiece.mMultipleChildExpressions = elementInfo.getMultiples();
+      ppElement.mSingletonChildExpressions = elementInfo.getSingletons();
+      ppElement.mMultipleChildExpressions = elementInfo.getMultiples();
     }
 
     // Handle Attribute Definitions

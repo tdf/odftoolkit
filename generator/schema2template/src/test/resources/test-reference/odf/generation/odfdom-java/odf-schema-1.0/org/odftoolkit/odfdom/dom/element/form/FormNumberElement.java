@@ -128,12 +128,12 @@ public class FormNumberElement extends OdfElement {
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>FormCurrentValueAttribute</code> , See {@odf.attribute form:current-value}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getFormCurrentValueAttribute() {
+	public Double getFormCurrentValueAttribute() {
 		FormCurrentValueAttribute attr = (FormCurrentValueAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "current-value");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Double.valueOf(attr.doubleValue());
 		}
 		return null;
 	}
@@ -141,12 +141,12 @@ public class FormNumberElement extends OdfElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>FormCurrentValueAttribute</code> , See {@odf.attribute form:current-value}
 	 *
-	 * @param formCurrentValueValue   The type is <code>String</code>
+	 * @param formCurrentValueValue   The type is <code>Double</code>
 	 */
-	public void setFormCurrentValueAttribute(String formCurrentValueValue) {
+	public void setFormCurrentValueAttribute(Double formCurrentValueValue) {
 		FormCurrentValueAttribute attr = new FormCurrentValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(formCurrentValueValue);
+		attr.setDoubleValue(formCurrentValueValue.doubleValue());
 	}
 
 	/**
@@ -250,12 +250,12 @@ public class FormNumberElement extends OdfElement {
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>FormMaxValueAttribute</code> , See {@odf.attribute form:max-value}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getFormMaxValueAttribute() {
+	public Double getFormMaxValueAttribute() {
 		FormMaxValueAttribute attr = (FormMaxValueAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "max-value");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Double.valueOf(attr.doubleValue());
 		}
 		return null;
 	}
@@ -263,23 +263,23 @@ public class FormNumberElement extends OdfElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>FormMaxValueAttribute</code> , See {@odf.attribute form:max-value}
 	 *
-	 * @param formMaxValueValue   The type is <code>String</code>
+	 * @param formMaxValueValue   The type is <code>Double</code>
 	 */
-	public void setFormMaxValueAttribute(String formMaxValueValue) {
+	public void setFormMaxValueAttribute(Double formMaxValueValue) {
 		FormMaxValueAttribute attr = new FormMaxValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(formMaxValueValue);
+		attr.setDoubleValue(formMaxValueValue.doubleValue());
 	}
 
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>FormMinValueAttribute</code> , See {@odf.attribute form:min-value}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getFormMinValueAttribute() {
+	public Double getFormMinValueAttribute() {
 		FormMinValueAttribute attr = (FormMinValueAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "min-value");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Double.valueOf(attr.doubleValue());
 		}
 		return null;
 	}
@@ -287,12 +287,12 @@ public class FormNumberElement extends OdfElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>FormMinValueAttribute</code> , See {@odf.attribute form:min-value}
 	 *
-	 * @param formMinValueValue   The type is <code>String</code>
+	 * @param formMinValueValue   The type is <code>Double</code>
 	 */
-	public void setFormMinValueAttribute(String formMinValueValue) {
+	public void setFormMinValueAttribute(Double formMinValueValue) {
 		FormMinValueAttribute attr = new FormMinValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(formMinValueValue);
+		attr.setDoubleValue(formMinValueValue.doubleValue());
 	}
 
 	/**
@@ -442,12 +442,12 @@ public class FormNumberElement extends OdfElement {
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>FormValueAttribute</code> , See {@odf.attribute form:value}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getFormValueAttribute() {
+	public Double getFormValueAttribute() {
 		FormValueAttribute attr = (FormValueAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "value");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Double.valueOf(attr.doubleValue());
 		}
 		return null;
 	}
@@ -455,12 +455,12 @@ public class FormNumberElement extends OdfElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>FormValueAttribute</code> , See {@odf.attribute form:value}
 	 *
-	 * @param formValueValue   The type is <code>String</code>
+	 * @param formValueValue   The type is <code>Double</code>
 	 */
-	public void setFormValueAttribute(String formValueValue) {
+	public void setFormValueAttribute(Double formValueValue) {
 		FormValueAttribute attr = new FormValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(formValueValue);
+		attr.setDoubleValue(formValueValue.doubleValue());
 	}
 
 	/**

@@ -92,25 +92,25 @@ public class TableCalculationSettingsElement extends OdfElement {
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>TableCaseSensitiveAttribute</code> , See {@odf.attribute table:case-sensitive}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getTableCaseSensitiveAttribute() {
+	public Boolean getTableCaseSensitiveAttribute() {
 		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "case-sensitive");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Boolean.valueOf(attr.booleanValue());
 		}
-		return TableCaseSensitiveAttribute.DEFAULT_VALUE_TRUE;
+		return Boolean.valueOf(TableCaseSensitiveAttribute.DEFAULT_VALUE_TRUE);
 	}
 
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>TableCaseSensitiveAttribute</code> , See {@odf.attribute table:case-sensitive}
 	 *
-	 * @param tableCaseSensitiveValue   The type is <code>String</code>
+	 * @param tableCaseSensitiveValue   The type is <code>Boolean</code>
 	 */
-	public void setTableCaseSensitiveAttribute(String tableCaseSensitiveValue) {
+	public void setTableCaseSensitiveAttribute(Boolean tableCaseSensitiveValue) {
 		TableCaseSensitiveAttribute attr = new TableCaseSensitiveAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(tableCaseSensitiveValue);
+		attr.setBooleanValue(tableCaseSensitiveValue.booleanValue());
 	}
 
 	/**

@@ -22,10 +22,13 @@
 package schema2template.grammar;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
 import org.junit.Assert;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 import schema2template.GenerationParameters;
 import schema2template.SchemaToTemplate;
 
@@ -154,7 +157,6 @@ public class GenerationOdfdomJavaTest {
       SchemaToTemplate.run(generations);
     } catch (Exception e) {
       Assert.fail("Exception during test run: " + e.toString());
-      e.printStackTrace();
       throw new RuntimeException(e);
     }
     DirectoryCompare.compareDirectories(

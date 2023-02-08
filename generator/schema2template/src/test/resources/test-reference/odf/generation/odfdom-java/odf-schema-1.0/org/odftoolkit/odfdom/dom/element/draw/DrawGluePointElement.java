@@ -94,12 +94,12 @@ public class DrawGluePointElement extends OdfElement {
 	 *
 	 * Attribute is mandatory.
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getDrawIdAttribute() {
+	public Integer getDrawIdAttribute() {
 		DrawIdAttribute attr = (DrawIdAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "id");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Integer.valueOf(attr.intValue());
 		}
 		return null;
 	}
@@ -107,12 +107,12 @@ public class DrawGluePointElement extends OdfElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>DrawIdAttribute</code> , See {@odf.attribute draw:id}
 	 *
-	 * @param drawIdValue   The type is <code>String</code>
+	 * @param drawIdValue   The type is <code>Integer</code>
 	 */
-	public void setDrawIdAttribute(String drawIdValue) {
+	public void setDrawIdAttribute(Integer drawIdValue) {
 		DrawIdAttribute attr = new DrawIdAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(drawIdValue);
+		attr.setIntValue(drawIdValue.intValue());
 	}
 
 	/**

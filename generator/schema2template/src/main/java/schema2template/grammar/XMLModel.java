@@ -25,12 +25,15 @@ package schema2template.grammar;
 
 import com.sun.msv.grammar.Expression;
 import com.sun.msv.grammar.Grammar;
+import com.sun.msv.grammar.NameClassAndExpression;
 import com.sun.msv.reader.trex.ng.RELAXNGReader;
 import com.sun.msv.reader.xmlschema.XMLSchemaReader;
 import com.sun.msv.writer.relaxng.RELAXNGWriter;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
@@ -42,6 +45,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.xml.sax.SAXException;
+import static schema2template.grammar.PuzzlePiece.NAME_VISITOR;
 
 /**
  * The most important model, the first access to the XML Schema information.
@@ -294,15 +298,44 @@ public class XMLModel {
    * Get attribute by tag name. If there are multiple attributes sharing the same tag name, a
    * PuzzlePieceSet is returned. If not, a single PuzzlePiece is returned.
    *
-   * @param name
+   * @param qName
    * @return Attribute PuzzlePiece(s)
    */
-  public PuzzleComponent getAttribute(String name) {
-    PuzzlePiece attribute = mNameAttributeMap.get(name);
+  public PuzzleComponent getAttribute(String qName) {
+    PuzzlePiece attribute = mNameAttributeMap.get(qName);
     if (attribute == null) {
       return null;
     }
     return attribute.withMultiples();
+  }
+
+  /**
+   * Get attribute by tag name. If there are multiple attributes sharing the same tag name, a
+   * PuzzlePieceSet is returned. If not, a single PuzzlePiece is returned.
+   *
+   * @param qName
+   * @param qParentName
+   * @return Attribute PuzzlePiece(s)
+   */
+  public PuzzlePiece getAttribute(String qName, String qParentName) {
+    PuzzlePiece attributes = mNameAttributeMap.get(qName);
+    PuzzlePiece attribute = null;
+    if (attributes == null) {
+      return null;
+    }else {
+        for (PuzzlePiece ppAttribute : attributes.withMultiples().getCollection()) {
+            // If there is more than one name for this expression, create more than one PuzzlePiece
+            for (PuzzlePiece ppElement : ppAttribute.getParents().getCollection()) {
+                List<String> names =
+                  (List<String>) ((NameClassAndExpression) ppElement.getExpression()).getNameClass().visit(NAME_VISITOR);
+                if(names != null && names.contains(qParentName)){
+                     attribute = ppAttribute;
+                     break;
+                }
+            }
+        }
+    }
+    return attribute;
   }
 
   /**

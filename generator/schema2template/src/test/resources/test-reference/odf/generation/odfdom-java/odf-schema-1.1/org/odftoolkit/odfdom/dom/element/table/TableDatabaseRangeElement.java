@@ -264,12 +264,12 @@ public class TableDatabaseRangeElement extends OdfElement {
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>TableRefreshDelayAttribute</code> , See {@odf.attribute table:refresh-delay}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getTableRefreshDelayAttribute() {
+	public Boolean getTableRefreshDelayAttribute() {
 		TableRefreshDelayAttribute attr = (TableRefreshDelayAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "refresh-delay");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Boolean.valueOf(attr.booleanValue());
 		}
 		return null;
 	}
@@ -277,12 +277,12 @@ public class TableDatabaseRangeElement extends OdfElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>TableRefreshDelayAttribute</code> , See {@odf.attribute table:refresh-delay}
 	 *
-	 * @param tableRefreshDelayValue   The type is <code>String</code>
+	 * @param tableRefreshDelayValue   The type is <code>Boolean</code>
 	 */
-	public void setTableRefreshDelayAttribute(String tableRefreshDelayValue) {
+	public void setTableRefreshDelayAttribute(Boolean tableRefreshDelayValue) {
 		TableRefreshDelayAttribute attr = new TableRefreshDelayAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(tableRefreshDelayValue);
+		attr.setBooleanValue(tableRefreshDelayValue.booleanValue());
 	}
 
 	/**
