@@ -339,6 +339,43 @@ public class XMLModel {
   }
 
   /**
+   * Get attribute by tag name. If there are multiple attributes sharing the same tag name, a
+   * PuzzlePieceSet is returned. If not, a single PuzzlePiece is returned.
+   *
+   * @param qName
+   * @param qParentName
+   * @return String of given Datatype
+   */
+  public String getAttributeDataType(String qName, String qParentName) {
+      String dataType = "String";
+      PuzzlePiece attr = getAttribute(qName, qParentName);
+      Collection<PuzzlePiece>  d = attr.getDatatypes().getCollection();
+      Boolean isBoolean = null;
+      if(d.size() == 1){
+          dataType = d.iterator().next().getQName();
+      }else if(!d.isEmpty()){
+          System.out.println("There are multiple datatypes!");
+      } else {
+       Iterator valueIterator  = attr.getValues().getCollection().iterator();
+
+       while(valueIterator.hasNext()){
+           String value =  valueIterator.next().toString();
+           if(value.equals("true") || value.equals("false")){
+               isBoolean = Boolean.TRUE;
+           }else{
+               isBoolean = null;
+               break;
+           }
+       }
+       if(isBoolean != null && isBoolean){
+          dataType = "Boolean";
+       }
+      }
+      return dataType;
+  }
+
+
+  /**
    * Get attribute by tag name and hash code. The hash code distincts Attributes sharing the same
    * tag name.
    *

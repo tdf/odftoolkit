@@ -276,7 +276,7 @@ public ${abstract}class $className extends $superClassName {
 #foreach ($attr in $remainingAttributes)
 ## receiving the attribute that has this element as parent (@text:value has different types dependent on parent element)
 #set($attri = ${xmlModel.getAttribute($attr.getQName(), $element.getQName())})
-#set ($valueObject = "String")
+#set($valueObject = ${xmlModel.getAttributeDataType($attr.getQName(), $element.getQName())})
 #set ($simpleValue = "")
 #set ($dataTypes = ${attri.getDatatypes().withoutMultiples()})
 #set ($valueTypes = ${codeModel.getValuetypes($dataTypes)})
