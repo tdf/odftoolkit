@@ -162,8 +162,8 @@ public class OdfModel {
       if (defaultValueByElementParents == null) {
         return null;
       }
-        // Not for ODF, but need extension if there are two attributes (same name)
-        // with different defaults in same named parent?
+      // Not for ODF, but need extension if there are two attributes (same name)
+      // with different defaults in same named parent?
       defaultValue = defaultValueByElementParents.get(parentElementName);
       if (defaultValue == null) {
         defaultValue = defaultValueByElementParents.get(ALL_ELEMENTS);

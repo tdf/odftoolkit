@@ -23,6 +23,8 @@
  */
 package schema2template.grammar;
 
+import static schema2template.grammar.PuzzlePiece.NAME_VISITOR;
+
 import com.sun.msv.grammar.Expression;
 import com.sun.msv.grammar.Grammar;
 import com.sun.msv.grammar.NameClassAndExpression;
@@ -30,6 +32,7 @@ import com.sun.msv.reader.trex.ng.RELAXNGReader;
 import com.sun.msv.reader.xmlschema.XMLSchemaReader;
 import com.sun.msv.writer.relaxng.RELAXNGWriter;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -45,7 +48,6 @@ import javax.xml.parsers.SAXParserFactory;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.xml.sax.SAXException;
-import static schema2template.grammar.PuzzlePiece.NAME_VISITOR;
 
 /**
  * The most important model, the first access to the XML Schema information.
@@ -322,18 +324,22 @@ public class XMLModel {
     PuzzlePiece attribute = null;
     if (attributes == null) {
       return null;
-    }else {
-        for (PuzzlePiece ppAttribute : attributes.withMultiples().getCollection()) {
-            // If there is more than one name for this expression, create more than one PuzzlePiece
-            for (PuzzlePiece ppElement : ppAttribute.getParents().getCollection()) {
-                List<String> names =
-                  (List<String>) ((NameClassAndExpression) ppElement.getExpression()).getNameClass().visit(NAME_VISITOR);
-                if(names != null && names.contains(qParentName)){
-                     attribute = ppAttribute;
-                     break;
-                }
-            }
+    } else {
+      for (PuzzlePiece ppAttribute : attributes.withMultiples().getCollection()) {
+        // If there is more than one name for this expression, create more than one PuzzlePiece
+        for (PuzzlePiece ppElement : ppAttribute.getParents().getCollection()) {
+          List<String> names =
+              (List<String>)
+                  ((NameClassAndExpression) ppElement.getExpression())
+                      .getNameClass()
+                      .visit(NAME_VISITOR);
+          // takes the first attribute definition with a correct parent
+          if (names != null && names.contains(qParentName)) {
+            attribute = ppAttribute;
+            break;
+          }
         }
+      }
     }
     return attribute;
   }
@@ -347,33 +353,57 @@ public class XMLModel {
    * @return String of given Datatype
    */
   public String getAttributeDataType(String qName, String qParentName) {
-      String dataType = "String";
-      PuzzlePiece attr = getAttribute(qName, qParentName);
-      Collection<PuzzlePiece>  d = attr.getDatatypes().getCollection();
-      Boolean isBoolean = null;
-      if(d.size() == 1){
-          dataType = d.iterator().next().getQName();
-      }else if(!d.isEmpty()){
-          System.out.println("There are multiple datatypes!");
-      } else {
-       Iterator valueIterator  = attr.getValues().getCollection().iterator();
-
-       while(valueIterator.hasNext()){
-           String value =  valueIterator.next().toString();
-           if(value.equals("true") || value.equals("false")){
-               isBoolean = Boolean.TRUE;
-           }else{
-               isBoolean = null;
-               break;
-           }
-       }
-       if(isBoolean != null && isBoolean){
-          dataType = "Boolean";
-       }
+    String dataType = "String";
+    PuzzlePiece attr = getAttribute(qName, qParentName);
+    Collection<PuzzlePiece> d = attr.getDatatypes().getCollection();
+    Boolean isBoolean = null;
+    if (d.size() == 1) {
+      dataType = d.iterator().next().getQName();
+    } else if (!d.isEmpty()) {
+      System.err.println(
+          "\n***********\nThere are multiple datatypes for attribute '" + qName + "'\n");
+      Iterator dataTypesIter = d.iterator();
+      while (dataTypesIter.hasNext()) {
+        System.err.println(dataTypesIter.next().toString());
       }
-      return dataType;
+    } else { // @draw:concave just uses 'false' and 'true' without datatype
+        /** As there are sometimes multiple times definitions of the same attribute for an element 
+         * for an example https://docs.oasis-open.org/office/OpenDocument/v1.3/os/schemas/OpenDocument-v1.3-schema-rng.html#13591
+         * which was taken as boolean, all attributes definitions of all elements of the same name are now takin into account!
+         * BETTER FOR THE FUTURE: If the attribute definitons only for a certain element would be taken into account, e.g.
+         * https://docs.oasis-open.org/office/OpenDocument/v1.3/os/schemas/OpenDocument-v1.3-schema-rng.html#6508
+        */
+        PuzzleComponent elements = getElement(qParentName);
+        List<String> attributeValues = null;
+        if(elements != null && elements.getCollection().size() > 0){
+            attributeValues = new ArrayList<String>();
+        }
+        for(PuzzlePiece ppElement : elements.getCollection()){
+            PuzzlePieceSet attributes = ppElement.getAttributes();
+            for(PuzzlePiece ppAttribute : attributes.getCollection()){
+                if(ppAttribute.getQName().equals(qName)){
+                    for(PuzzlePiece ppValue : ppAttribute.getValues().getCollection()){
+                        // strange that the value has a localName (but the puzzlePiece abstraction should be overworked anyway)
+                        attributeValues.add(ppValue.getLocalName());
+                    }
+                }
+            }
+        }        
+        
+      for (String value : attributeValues) {        
+        if (value.equals("true") || value.equals("false")) {
+          isBoolean = Boolean.TRUE;
+        } else {
+          isBoolean = null;
+          break;
+        }
+      }
+      if (isBoolean != null && isBoolean) {
+        dataType = "Boolean";
+      }
+    }
+    return dataType;
   }
-
 
   /**
    * Get attribute by tag name and hash code. The hash code distincts Attributes sharing the same

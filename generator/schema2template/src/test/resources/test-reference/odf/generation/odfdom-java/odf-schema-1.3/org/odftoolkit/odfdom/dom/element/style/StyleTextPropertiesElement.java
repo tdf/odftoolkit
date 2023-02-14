@@ -2395,12 +2395,12 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
 	 *
 	 * Attribute is mandatory.
 	 *
-	 * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public Boolean getTextDisplayAttribute() {
+	public String getTextDisplayAttribute() {
 		TextDisplayAttribute attr = (TextDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "display");
-		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+		if (attr != null) {
+			return String.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -2408,12 +2408,12 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>TextDisplayAttribute</code> , See {@odf.attribute text:display}
 	 *
-	 * @param textDisplayValue   The type is <code>Boolean</code>
+	 * @param textDisplayValue   The type is <code>String</code>
 	 */
-	public void setTextDisplayAttribute(Boolean textDisplayValue) {
+	public void setTextDisplayAttribute(String textDisplayValue) {
 		TextDisplayAttribute attr = new TextDisplayAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textDisplayValue.booleanValue());
+		attr.setValue(textDisplayValue);
 	}
 
   /**
