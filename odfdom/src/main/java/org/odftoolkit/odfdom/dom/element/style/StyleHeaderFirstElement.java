@@ -93,7 +93,7 @@ public class StyleHeaderFirstElement extends OdfElement {
     StyleDisplayAttribute attr =
         (StyleDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "display");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(StyleDisplayAttribute.DEFAULT_VALUE);
   }
@@ -107,7 +107,7 @@ public class StyleHeaderFirstElement extends OdfElement {
   public void setStyleDisplayAttribute(Boolean styleDisplayValue) {
     StyleDisplayAttribute attr = new StyleDisplayAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleDisplayValue.booleanValue());
+    attr.setValue(styleDisplayValue.toString());
   }
 
   /**

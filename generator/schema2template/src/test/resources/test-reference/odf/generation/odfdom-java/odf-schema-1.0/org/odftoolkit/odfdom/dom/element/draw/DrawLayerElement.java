@@ -120,7 +120,7 @@ public class DrawLayerElement extends OdfElement {
 	public Boolean getDrawProtectedAttribute() {
 		DrawProtectedAttribute attr = (DrawProtectedAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "protected");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(DrawProtectedAttribute.DEFAULT_VALUE);
 	}
@@ -133,7 +133,7 @@ public class DrawLayerElement extends OdfElement {
 	public void setDrawProtectedAttribute(Boolean drawProtectedValue) {
 		DrawProtectedAttribute attr = new DrawProtectedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(drawProtectedValue.booleanValue());
+		attr.setValue(drawProtectedValue.toString());
 	}
 
   /**

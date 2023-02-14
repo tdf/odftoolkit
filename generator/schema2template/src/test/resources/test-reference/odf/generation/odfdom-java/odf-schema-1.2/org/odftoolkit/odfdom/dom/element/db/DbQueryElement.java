@@ -148,7 +148,7 @@ public class DbQueryElement extends OdfElement {
 	public Boolean getDbEscapeProcessingAttribute() {
 		DbEscapeProcessingAttribute attr = (DbEscapeProcessingAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "escape-processing");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(DbEscapeProcessingAttribute.DEFAULT_VALUE);
 	}
@@ -161,7 +161,7 @@ public class DbQueryElement extends OdfElement {
 	public void setDbEscapeProcessingAttribute(Boolean dbEscapeProcessingValue) {
 		DbEscapeProcessingAttribute attr = new DbEscapeProcessingAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(dbEscapeProcessingValue.booleanValue());
+		attr.setValue(dbEscapeProcessingValue.toString());
 	}
 
 	/**

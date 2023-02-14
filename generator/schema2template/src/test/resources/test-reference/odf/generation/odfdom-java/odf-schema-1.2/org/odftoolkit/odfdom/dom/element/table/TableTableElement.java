@@ -88,7 +88,7 @@ public class TableTableElement extends OdfStylableElement {
 	public Boolean getTableIsSubTableAttribute() {
 		TableIsSubTableAttribute attr = (TableIsSubTableAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "is-sub-table");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableIsSubTableAttribute.DEFAULT_VALUE);
 	}
@@ -101,7 +101,7 @@ public class TableTableElement extends OdfStylableElement {
 	public void setTableIsSubTableAttribute(Boolean tableIsSubTableValue) {
 		TableIsSubTableAttribute attr = new TableIsSubTableAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableIsSubTableValue.booleanValue());
+		attr.setValue(tableIsSubTableValue.toString());
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class TableTableElement extends OdfStylableElement {
 	public Boolean getTablePrintAttribute() {
 		TablePrintAttribute attr = (TablePrintAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "print");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TablePrintAttribute.DEFAULT_VALUE);
 	}
@@ -149,7 +149,7 @@ public class TableTableElement extends OdfStylableElement {
 	public void setTablePrintAttribute(Boolean tablePrintValue) {
 		TablePrintAttribute attr = new TablePrintAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tablePrintValue.booleanValue());
+		attr.setValue(tablePrintValue.toString());
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class TableTableElement extends OdfStylableElement {
 	public Boolean getTableProtectedAttribute() {
 		TableProtectedAttribute attr = (TableProtectedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "protected");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableProtectedAttribute.DEFAULT_VALUE);
 	}
@@ -197,7 +197,7 @@ public class TableTableElement extends OdfStylableElement {
 	public void setTableProtectedAttribute(Boolean tableProtectedValue) {
 		TableProtectedAttribute attr = new TableProtectedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableProtectedValue.booleanValue());
+		attr.setValue(tableProtectedValue.toString());
 	}
 
 	/**
@@ -304,7 +304,7 @@ public class TableTableElement extends OdfStylableElement {
 	public Boolean getTableUseBandingColumnsStylesAttribute() {
 		TableUseBandingColumnsStylesAttribute attr = (TableUseBandingColumnsStylesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "use-banding-columns-styles");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableUseBandingColumnsStylesAttribute.DEFAULT_VALUE);
 	}
@@ -317,7 +317,7 @@ public class TableTableElement extends OdfStylableElement {
 	public void setTableUseBandingColumnsStylesAttribute(Boolean tableUseBandingColumnsStylesValue) {
 		TableUseBandingColumnsStylesAttribute attr = new TableUseBandingColumnsStylesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableUseBandingColumnsStylesValue.booleanValue());
+		attr.setValue(tableUseBandingColumnsStylesValue.toString());
 	}
 
 	/**
@@ -328,7 +328,7 @@ public class TableTableElement extends OdfStylableElement {
 	public Boolean getTableUseBandingRowsStylesAttribute() {
 		TableUseBandingRowsStylesAttribute attr = (TableUseBandingRowsStylesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "use-banding-rows-styles");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableUseBandingRowsStylesAttribute.DEFAULT_VALUE);
 	}
@@ -341,7 +341,7 @@ public class TableTableElement extends OdfStylableElement {
 	public void setTableUseBandingRowsStylesAttribute(Boolean tableUseBandingRowsStylesValue) {
 		TableUseBandingRowsStylesAttribute attr = new TableUseBandingRowsStylesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableUseBandingRowsStylesValue.booleanValue());
+		attr.setValue(tableUseBandingRowsStylesValue.toString());
 	}
 
 	/**
@@ -352,7 +352,7 @@ public class TableTableElement extends OdfStylableElement {
 	public Boolean getTableUseFirstColumnStylesAttribute() {
 		TableUseFirstColumnStylesAttribute attr = (TableUseFirstColumnStylesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "use-first-column-styles");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableUseFirstColumnStylesAttribute.DEFAULT_VALUE);
 	}
@@ -365,7 +365,7 @@ public class TableTableElement extends OdfStylableElement {
 	public void setTableUseFirstColumnStylesAttribute(Boolean tableUseFirstColumnStylesValue) {
 		TableUseFirstColumnStylesAttribute attr = new TableUseFirstColumnStylesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableUseFirstColumnStylesValue.booleanValue());
+		attr.setValue(tableUseFirstColumnStylesValue.toString());
 	}
 
 	/**
@@ -376,7 +376,7 @@ public class TableTableElement extends OdfStylableElement {
 	public Boolean getTableUseFirstRowStylesAttribute() {
 		TableUseFirstRowStylesAttribute attr = (TableUseFirstRowStylesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "use-first-row-styles");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableUseFirstRowStylesAttribute.DEFAULT_VALUE);
 	}
@@ -389,7 +389,7 @@ public class TableTableElement extends OdfStylableElement {
 	public void setTableUseFirstRowStylesAttribute(Boolean tableUseFirstRowStylesValue) {
 		TableUseFirstRowStylesAttribute attr = new TableUseFirstRowStylesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableUseFirstRowStylesValue.booleanValue());
+		attr.setValue(tableUseFirstRowStylesValue.toString());
 	}
 
 	/**
@@ -400,7 +400,7 @@ public class TableTableElement extends OdfStylableElement {
 	public Boolean getTableUseLastColumnStylesAttribute() {
 		TableUseLastColumnStylesAttribute attr = (TableUseLastColumnStylesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "use-last-column-styles");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableUseLastColumnStylesAttribute.DEFAULT_VALUE);
 	}
@@ -413,7 +413,7 @@ public class TableTableElement extends OdfStylableElement {
 	public void setTableUseLastColumnStylesAttribute(Boolean tableUseLastColumnStylesValue) {
 		TableUseLastColumnStylesAttribute attr = new TableUseLastColumnStylesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableUseLastColumnStylesValue.booleanValue());
+		attr.setValue(tableUseLastColumnStylesValue.toString());
 	}
 
 	/**
@@ -424,7 +424,7 @@ public class TableTableElement extends OdfStylableElement {
 	public Boolean getTableUseLastRowStylesAttribute() {
 		TableUseLastRowStylesAttribute attr = (TableUseLastRowStylesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "use-last-row-styles");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableUseLastRowStylesAttribute.DEFAULT_VALUE);
 	}
@@ -437,7 +437,7 @@ public class TableTableElement extends OdfStylableElement {
 	public void setTableUseLastRowStylesAttribute(Boolean tableUseLastRowStylesValue) {
 		TableUseLastRowStylesAttribute attr = new TableUseLastRowStylesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableUseLastRowStylesValue.booleanValue());
+		attr.setValue(tableUseLastRowStylesValue.toString());
 	}
 
 	/**

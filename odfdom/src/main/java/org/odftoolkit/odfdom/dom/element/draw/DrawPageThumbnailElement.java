@@ -138,7 +138,7 @@ public class DrawPageThumbnailElement extends DrawShapeElementBase {
     DrawPageNumberAttribute attr =
         (DrawPageNumberAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "page-number");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -152,7 +152,7 @@ public class DrawPageThumbnailElement extends DrawShapeElementBase {
   public void setDrawPageNumberAttribute(Integer drawPageNumberValue) {
     DrawPageNumberAttribute attr = new DrawPageNumberAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(drawPageNumberValue.intValue());
+    attr.setValue(drawPageNumberValue.toString());
   }
 
   /**
@@ -224,7 +224,7 @@ public class DrawPageThumbnailElement extends DrawShapeElementBase {
         (PresentationPlaceholderAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "placeholder");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -239,7 +239,7 @@ public class DrawPageThumbnailElement extends DrawShapeElementBase {
     PresentationPlaceholderAttribute attr =
         new PresentationPlaceholderAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(presentationPlaceholderValue.booleanValue());
+    attr.setValue(presentationPlaceholderValue.toString());
   }
 
   /**
@@ -255,7 +255,7 @@ public class DrawPageThumbnailElement extends DrawShapeElementBase {
         (PresentationUserTransformedAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "user-transformed");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -270,7 +270,7 @@ public class DrawPageThumbnailElement extends DrawShapeElementBase {
     PresentationUserTransformedAttribute attr =
         new PresentationUserTransformedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(presentationUserTransformedValue.booleanValue());
+    attr.setValue(presentationUserTransformedValue.toString());
   }
 
   /**

@@ -80,7 +80,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	public Boolean getOfficeBooleanValueAttribute() {
 		OfficeBooleanValueAttribute attr = (OfficeBooleanValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "boolean-value");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -93,7 +93,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	public void setOfficeBooleanValueAttribute(Boolean officeBooleanValueValue) {
 		OfficeBooleanValueAttribute attr = new OfficeBooleanValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(officeBooleanValueValue.booleanValue());
+		attr.setValue(officeBooleanValueValue.toString());
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	public Double getOfficeValueAttribute() {
 		OfficeValueAttribute attr = (OfficeValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "value");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Double.valueOf(attr.doubleValue());
+			return Double.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -215,7 +215,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	public void setOfficeValueAttribute(Double officeValueValue) {
 		OfficeValueAttribute attr = new OfficeValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setDoubleValue(officeValueValue.doubleValue());
+		attr.setValue(officeValueValue.toString());
 	}
 
 	/**
@@ -300,7 +300,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	public Boolean getTableMatrixCoveredAttribute() {
 		TableMatrixCoveredAttribute attr = (TableMatrixCoveredAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "matrix-covered");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableMatrixCoveredAttribute.DEFAULT_VALUE);
 	}
@@ -313,7 +313,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	public void setTableMatrixCoveredAttribute(Boolean tableMatrixCoveredValue) {
 		TableMatrixCoveredAttribute attr = new TableMatrixCoveredAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableMatrixCoveredValue.booleanValue());
+		attr.setValue(tableMatrixCoveredValue.toString());
 	}
 
 	/**
@@ -324,7 +324,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	public Integer getTableNumberMatrixColumnsSpannedAttribute() {
 		TableNumberMatrixColumnsSpannedAttribute attr = (TableNumberMatrixColumnsSpannedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "number-matrix-columns-spanned");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -337,7 +337,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	public void setTableNumberMatrixColumnsSpannedAttribute(Integer tableNumberMatrixColumnsSpannedValue) {
 		TableNumberMatrixColumnsSpannedAttribute attr = new TableNumberMatrixColumnsSpannedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(tableNumberMatrixColumnsSpannedValue.intValue());
+		attr.setValue(tableNumberMatrixColumnsSpannedValue.toString());
 	}
 
 	/**
@@ -348,7 +348,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	public Integer getTableNumberMatrixRowsSpannedAttribute() {
 		TableNumberMatrixRowsSpannedAttribute attr = (TableNumberMatrixRowsSpannedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "number-matrix-rows-spanned");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -361,7 +361,7 @@ public class TableChangeTrackTableCellElement extends OdfElement {
 	public void setTableNumberMatrixRowsSpannedAttribute(Integer tableNumberMatrixRowsSpannedValue) {
 		TableNumberMatrixRowsSpannedAttribute attr = new TableNumberMatrixRowsSpannedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(tableNumberMatrixRowsSpannedValue.intValue());
+		attr.setValue(tableNumberMatrixRowsSpannedValue.toString());
 	}
 
 	/**

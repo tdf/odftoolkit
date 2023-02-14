@@ -69,7 +69,7 @@ public class TextListElement extends OdfElement {
 	public Boolean getTextContinueNumberingAttribute() {
 		TextContinueNumberingAttribute attr = (TextContinueNumberingAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "continue-numbering");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -82,7 +82,7 @@ public class TextListElement extends OdfElement {
 	public void setTextContinueNumberingAttribute(Boolean textContinueNumberingValue) {
 		TextContinueNumberingAttribute attr = new TextContinueNumberingAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textContinueNumberingValue.booleanValue());
+		attr.setValue(textContinueNumberingValue.toString());
 	}
 
 	/**

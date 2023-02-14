@@ -68,7 +68,7 @@ public class TextListItemElement extends OdfElement {
 	public Integer getTextStartValueAttribute() {
 		TextStartValueAttribute attr = (TextStartValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "start-value");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -81,7 +81,7 @@ public class TextListItemElement extends OdfElement {
 	public void setTextStartValueAttribute(Integer textStartValueValue) {
 		TextStartValueAttribute attr = new TextStartValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(textStartValueValue.intValue());
+		attr.setValue(textStartValueValue.toString());
 	}
 
 	/**

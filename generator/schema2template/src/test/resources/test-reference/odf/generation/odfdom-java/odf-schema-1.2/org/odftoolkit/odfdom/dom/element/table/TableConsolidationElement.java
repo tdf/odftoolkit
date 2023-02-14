@@ -98,7 +98,7 @@ public class TableConsolidationElement extends OdfElement {
 	public Boolean getTableLinkToSourceDataAttribute() {
 		TableLinkToSourceDataAttribute attr = (TableLinkToSourceDataAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "link-to-source-data");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableLinkToSourceDataAttribute.DEFAULT_VALUE);
 	}
@@ -111,7 +111,7 @@ public class TableConsolidationElement extends OdfElement {
 	public void setTableLinkToSourceDataAttribute(Boolean tableLinkToSourceDataValue) {
 		TableLinkToSourceDataAttribute attr = new TableLinkToSourceDataAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableLinkToSourceDataValue.booleanValue());
+		attr.setValue(tableLinkToSourceDataValue.toString());
 	}
 
 	/**

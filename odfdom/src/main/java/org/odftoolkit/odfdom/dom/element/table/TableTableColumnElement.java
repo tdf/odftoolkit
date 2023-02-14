@@ -113,7 +113,7 @@ public class TableTableColumnElement extends OdfStylableElement {
         (TableNumberColumnsRepeatedAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "number-columns-repeated");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return Integer.valueOf(TableNumberColumnsRepeatedAttribute.DEFAULT_VALUE);
   }
@@ -128,7 +128,7 @@ public class TableTableColumnElement extends OdfStylableElement {
     TableNumberColumnsRepeatedAttribute attr =
         new TableNumberColumnsRepeatedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableNumberColumnsRepeatedValue.intValue());
+    attr.setValue(tableNumberColumnsRepeatedValue.toString());
   }
 
   /**

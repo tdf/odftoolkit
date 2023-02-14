@@ -79,7 +79,7 @@ public class TableTableCellElement extends TableTableCellElementBase {
         (TableNumberColumnsSpannedAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "number-columns-spanned");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return Integer.valueOf(TableNumberColumnsSpannedAttribute.DEFAULT_VALUE);
   }
@@ -94,7 +94,7 @@ public class TableTableCellElement extends TableTableCellElementBase {
     TableNumberColumnsSpannedAttribute attr =
         new TableNumberColumnsSpannedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableNumberColumnsSpannedValue.intValue());
+    attr.setValue(tableNumberColumnsSpannedValue.toString());
   }
 
   /**
@@ -110,7 +110,7 @@ public class TableTableCellElement extends TableTableCellElementBase {
         (TableNumberMatrixColumnsSpannedAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "number-matrix-columns-spanned");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -127,7 +127,7 @@ public class TableTableCellElement extends TableTableCellElementBase {
     TableNumberMatrixColumnsSpannedAttribute attr =
         new TableNumberMatrixColumnsSpannedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableNumberMatrixColumnsSpannedValue.intValue());
+    attr.setValue(tableNumberMatrixColumnsSpannedValue.toString());
   }
 
   /**
@@ -143,7 +143,7 @@ public class TableTableCellElement extends TableTableCellElementBase {
         (TableNumberMatrixRowsSpannedAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "number-matrix-rows-spanned");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -158,7 +158,7 @@ public class TableTableCellElement extends TableTableCellElementBase {
     TableNumberMatrixRowsSpannedAttribute attr =
         new TableNumberMatrixRowsSpannedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableNumberMatrixRowsSpannedValue.intValue());
+    attr.setValue(tableNumberMatrixRowsSpannedValue.toString());
   }
 
   /**
@@ -173,7 +173,7 @@ public class TableTableCellElement extends TableTableCellElementBase {
         (TableNumberRowsSpannedAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "number-rows-spanned");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return Integer.valueOf(TableNumberRowsSpannedAttribute.DEFAULT_VALUE);
   }
@@ -188,7 +188,7 @@ public class TableTableCellElement extends TableTableCellElementBase {
     TableNumberRowsSpannedAttribute attr =
         new TableNumberRowsSpannedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableNumberRowsSpannedValue.intValue());
+    attr.setValue(tableNumberRowsSpannedValue.toString());
   }
 
   /**

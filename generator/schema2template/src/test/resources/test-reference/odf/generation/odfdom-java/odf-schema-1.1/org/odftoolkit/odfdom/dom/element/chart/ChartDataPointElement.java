@@ -71,7 +71,7 @@ public class ChartDataPointElement extends OdfStylableElement {
 	public Integer getChartRepeatedAttribute() {
 		ChartRepeatedAttribute attr = (ChartRepeatedAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "repeated");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -84,7 +84,7 @@ public class ChartDataPointElement extends OdfStylableElement {
 	public void setChartRepeatedAttribute(Integer chartRepeatedValue) {
 		ChartRepeatedAttribute attr = new ChartRepeatedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(chartRepeatedValue.intValue());
+		attr.setValue(chartRepeatedValue.toString());
 	}
 
 	/**

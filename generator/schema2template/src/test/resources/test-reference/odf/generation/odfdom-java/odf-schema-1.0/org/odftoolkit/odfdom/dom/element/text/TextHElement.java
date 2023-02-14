@@ -80,7 +80,7 @@ public class TextHElement extends TextParagraphElementBase {
 	public Boolean getTextIsListHeaderAttribute() {
 		TextIsListHeaderAttribute attr = (TextIsListHeaderAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "is-list-header");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextIsListHeaderAttribute.DEFAULT_VALUE);
 	}
@@ -93,7 +93,7 @@ public class TextHElement extends TextParagraphElementBase {
 	public void setTextIsListHeaderAttribute(Boolean textIsListHeaderValue) {
 		TextIsListHeaderAttribute attr = new TextIsListHeaderAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textIsListHeaderValue.booleanValue());
+		attr.setValue(textIsListHeaderValue.toString());
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class TextHElement extends TextParagraphElementBase {
 	public Integer getTextOutlineLevelAttribute() {
 		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "outline-level");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -119,7 +119,7 @@ public class TextHElement extends TextParagraphElementBase {
 	public void setTextOutlineLevelAttribute(Integer textOutlineLevelValue) {
 		TextOutlineLevelAttribute attr = new TextOutlineLevelAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(textOutlineLevelValue.intValue());
+		attr.setValue(textOutlineLevelValue.toString());
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class TextHElement extends TextParagraphElementBase {
 	public Boolean getTextRestartNumberingAttribute() {
 		TextRestartNumberingAttribute attr = (TextRestartNumberingAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "restart-numbering");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextRestartNumberingAttribute.DEFAULT_VALUE);
 	}
@@ -143,7 +143,7 @@ public class TextHElement extends TextParagraphElementBase {
 	public void setTextRestartNumberingAttribute(Boolean textRestartNumberingValue) {
 		TextRestartNumberingAttribute attr = new TextRestartNumberingAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textRestartNumberingValue.booleanValue());
+		attr.setValue(textRestartNumberingValue.toString());
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class TextHElement extends TextParagraphElementBase {
 	public Integer getTextStartValueAttribute() {
 		TextStartValueAttribute attr = (TextStartValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "start-value");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -167,7 +167,7 @@ public class TextHElement extends TextParagraphElementBase {
 	public void setTextStartValueAttribute(Integer textStartValueValue) {
 		TextStartValueAttribute attr = new TextStartValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(textStartValueValue.intValue());
+		attr.setValue(textStartValueValue.toString());
 	}
 
 	/**

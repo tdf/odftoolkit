@@ -74,7 +74,7 @@ public class TableOperationElement extends OdfElement {
     TableIndexAttribute attr =
         (TableIndexAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "index");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -88,7 +88,7 @@ public class TableOperationElement extends OdfElement {
   public void setTableIndexAttribute(Integer tableIndexValue) {
     TableIndexAttribute attr = new TableIndexAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableIndexValue.intValue());
+    attr.setValue(tableIndexValue.toString());
   }
 
   /**

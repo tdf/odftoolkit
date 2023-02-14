@@ -104,7 +104,7 @@ public class TableHighlightedRangeElement extends OdfElement {
     TableContainsErrorAttribute attr =
         (TableContainsErrorAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "contains-error");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TableContainsErrorAttribute.DEFAULT_VALUE);
   }
@@ -119,7 +119,7 @@ public class TableHighlightedRangeElement extends OdfElement {
     TableContainsErrorAttribute attr =
         new TableContainsErrorAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableContainsErrorValue.booleanValue());
+    attr.setValue(tableContainsErrorValue.toString());
   }
 
   /**
@@ -161,7 +161,7 @@ public class TableHighlightedRangeElement extends OdfElement {
     TableMarkedInvalidAttribute attr =
         (TableMarkedInvalidAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "marked-invalid");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -176,7 +176,7 @@ public class TableHighlightedRangeElement extends OdfElement {
     TableMarkedInvalidAttribute attr =
         new TableMarkedInvalidAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableMarkedInvalidValue.booleanValue());
+    attr.setValue(tableMarkedInvalidValue.toString());
   }
 
   /**

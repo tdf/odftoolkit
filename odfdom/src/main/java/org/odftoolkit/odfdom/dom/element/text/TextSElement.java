@@ -70,7 +70,7 @@ public class TextSElement extends OdfElement {
   public Integer getTextCAttribute() {
     TextCAttribute attr = (TextCAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "c");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return Integer.valueOf(TextCAttribute.DEFAULT_VALUE);
   }
@@ -84,7 +84,7 @@ public class TextSElement extends OdfElement {
   public void setTextCAttribute(Integer textCValue) {
     TextCAttribute attr = new TextCAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textCValue.intValue());
+    attr.setValue(textCValue.toString());
   }
 
   /**

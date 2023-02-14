@@ -70,7 +70,7 @@ public class TableDataPilotMemberElement extends OdfElement {
 	public Boolean getTableDisplayAttribute() {
 		TableDisplayAttribute attr = (TableDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "display");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -83,7 +83,7 @@ public class TableDataPilotMemberElement extends OdfElement {
 	public void setTableDisplayAttribute(Boolean tableDisplayValue) {
 		TableDisplayAttribute attr = new TableDisplayAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableDisplayValue.booleanValue());
+		attr.setValue(tableDisplayValue.toString());
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class TableDataPilotMemberElement extends OdfElement {
 	public Boolean getTableShowDetailsAttribute() {
 		TableShowDetailsAttribute attr = (TableShowDetailsAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "show-details");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -133,7 +133,7 @@ public class TableDataPilotMemberElement extends OdfElement {
 	public void setTableShowDetailsAttribute(Boolean tableShowDetailsValue) {
 		TableShowDetailsAttribute attr = new TableShowDetailsAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableShowDetailsValue.booleanValue());
+		attr.setValue(tableShowDetailsValue.toString());
 	}
 
   /**

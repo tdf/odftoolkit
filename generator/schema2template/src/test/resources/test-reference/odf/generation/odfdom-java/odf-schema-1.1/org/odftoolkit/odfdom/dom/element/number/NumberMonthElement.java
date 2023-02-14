@@ -95,7 +95,7 @@ public class NumberMonthElement extends OdfElement {
 	public Boolean getNumberPossessiveFormAttribute() {
 		NumberPossessiveFormAttribute attr = (NumberPossessiveFormAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "possessive-form");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -108,7 +108,7 @@ public class NumberMonthElement extends OdfElement {
 	public void setNumberPossessiveFormAttribute(Boolean numberPossessiveFormValue) {
 		NumberPossessiveFormAttribute attr = new NumberPossessiveFormAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(numberPossessiveFormValue.booleanValue());
+		attr.setValue(numberPossessiveFormValue.toString());
 	}
 
 	/**
@@ -143,7 +143,7 @@ public class NumberMonthElement extends OdfElement {
 	public Boolean getNumberTextualAttribute() {
 		NumberTextualAttribute attr = (NumberTextualAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "textual");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(NumberTextualAttribute.DEFAULT_VALUE);
 	}
@@ -156,7 +156,7 @@ public class NumberMonthElement extends OdfElement {
 	public void setNumberTextualAttribute(Boolean numberTextualValue) {
 		NumberTextualAttribute attr = new NumberTextualAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(numberTextualValue.booleanValue());
+		attr.setValue(numberTextualValue.toString());
 	}
 
   /**

@@ -69,7 +69,7 @@ public abstract class NumberDateStyleElement extends NumberDataStyleElementBase 
 	public Boolean getNumberAutomaticOrderAttribute() {
 		NumberAutomaticOrderAttribute attr = (NumberAutomaticOrderAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "automatic-order");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(NumberAutomaticOrderAttribute.DEFAULT_VALUE);
 	}
@@ -82,7 +82,7 @@ public abstract class NumberDateStyleElement extends NumberDataStyleElementBase 
 	public void setNumberAutomaticOrderAttribute(Boolean numberAutomaticOrderValue) {
 		NumberAutomaticOrderAttribute attr = new NumberAutomaticOrderAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(numberAutomaticOrderValue.booleanValue());
+		attr.setValue(numberAutomaticOrderValue.toString());
 	}
 
 	/**

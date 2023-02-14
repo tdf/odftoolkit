@@ -97,7 +97,7 @@ public class DrawGluePointElement extends OdfElement {
 	public Integer getDrawIdAttribute() {
 		DrawIdAttribute attr = (DrawIdAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "id");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -110,7 +110,7 @@ public class DrawGluePointElement extends OdfElement {
 	public void setDrawIdAttribute(Integer drawIdValue) {
 		DrawIdAttribute attr = new DrawIdAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(drawIdValue.intValue());
+		attr.setValue(drawIdValue.toString());
 	}
 
 	/**

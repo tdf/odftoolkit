@@ -72,7 +72,7 @@ public class TableCellAddressElement extends OdfElement {
 	public Integer getTableColumnAttribute() {
 		TableColumnAttribute attr = (TableColumnAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "column");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -85,7 +85,7 @@ public class TableCellAddressElement extends OdfElement {
 	public void setTableColumnAttribute(Integer tableColumnValue) {
 		TableColumnAttribute attr = new TableColumnAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(tableColumnValue.intValue());
+		attr.setValue(tableColumnValue.toString());
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class TableCellAddressElement extends OdfElement {
 	public Integer getTableRowAttribute() {
 		TableRowAttribute attr = (TableRowAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "row");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -111,7 +111,7 @@ public class TableCellAddressElement extends OdfElement {
 	public void setTableRowAttribute(Integer tableRowValue) {
 		TableRowAttribute attr = new TableRowAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(tableRowValue.intValue());
+		attr.setValue(tableRowValue.toString());
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class TableCellAddressElement extends OdfElement {
 	public Integer getTableTableAttribute() {
 		TableTableAttribute attr = (TableTableAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "table");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -137,7 +137,7 @@ public class TableCellAddressElement extends OdfElement {
 	public void setTableTableAttribute(Integer tableTableValue) {
 		TableTableAttribute attr = new TableTableAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(tableTableValue.intValue());
+		attr.setValue(tableTableValue.toString());
 	}
 
   /**

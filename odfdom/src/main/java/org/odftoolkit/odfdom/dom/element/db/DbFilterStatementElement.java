@@ -72,7 +72,7 @@ public class DbFilterStatementElement extends OdfElement {
     DbApplyCommandAttribute attr =
         (DbApplyCommandAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "apply-command");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(DbApplyCommandAttribute.DEFAULT_VALUE);
   }
@@ -86,7 +86,7 @@ public class DbFilterStatementElement extends OdfElement {
   public void setDbApplyCommandAttribute(Boolean dbApplyCommandValue) {
     DbApplyCommandAttribute attr = new DbApplyCommandAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dbApplyCommandValue.booleanValue());
+    attr.setValue(dbApplyCommandValue.toString());
   }
 
   /**

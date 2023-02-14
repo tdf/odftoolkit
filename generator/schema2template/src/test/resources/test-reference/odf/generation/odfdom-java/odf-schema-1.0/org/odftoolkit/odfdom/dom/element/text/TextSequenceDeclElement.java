@@ -72,7 +72,7 @@ public class TextSequenceDeclElement extends OdfElement {
 	public Integer getTextDisplayOutlineLevelAttribute() {
 		TextDisplayOutlineLevelAttribute attr = (TextDisplayOutlineLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "display-outline-level");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -85,7 +85,7 @@ public class TextSequenceDeclElement extends OdfElement {
 	public void setTextDisplayOutlineLevelAttribute(Integer textDisplayOutlineLevelValue) {
 		TextDisplayOutlineLevelAttribute attr = new TextDisplayOutlineLevelAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(textDisplayOutlineLevelValue.intValue());
+		attr.setValue(textDisplayOutlineLevelValue.toString());
 	}
 
 	/**

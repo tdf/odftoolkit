@@ -265,7 +265,7 @@ public class AnimAnimateElement extends OdfElement {
     SmilAutoReverseAttribute attr =
         (SmilAutoReverseAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "autoReverse");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(SmilAutoReverseAttribute.DEFAULT_VALUE);
   }
@@ -279,7 +279,7 @@ public class AnimAnimateElement extends OdfElement {
   public void setSmilAutoReverseAttribute(Boolean smilAutoReverseValue) {
     SmilAutoReverseAttribute attr = new SmilAutoReverseAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(smilAutoReverseValue.booleanValue());
+    attr.setValue(smilAutoReverseValue.toString());
   }
 
   /**

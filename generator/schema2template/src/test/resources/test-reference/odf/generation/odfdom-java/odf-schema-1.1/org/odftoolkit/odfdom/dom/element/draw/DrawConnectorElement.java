@@ -112,7 +112,7 @@ public class DrawConnectorElement extends DrawShapeElementBase {
 	public Integer getDrawEndGluePointAttribute() {
 		DrawEndGluePointAttribute attr = (DrawEndGluePointAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "end-glue-point");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -125,7 +125,7 @@ public class DrawConnectorElement extends DrawShapeElementBase {
 	public void setDrawEndGluePointAttribute(Integer drawEndGluePointValue) {
 		DrawEndGluePointAttribute attr = new DrawEndGluePointAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(drawEndGluePointValue.intValue());
+		attr.setValue(drawEndGluePointValue.toString());
 	}
 
 	/**
@@ -208,7 +208,7 @@ public class DrawConnectorElement extends DrawShapeElementBase {
 	public Integer getDrawStartGluePointAttribute() {
 		DrawStartGluePointAttribute attr = (DrawStartGluePointAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "start-glue-point");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -221,7 +221,7 @@ public class DrawConnectorElement extends DrawShapeElementBase {
 	public void setDrawStartGluePointAttribute(Integer drawStartGluePointValue) {
 		DrawStartGluePointAttribute attr = new DrawStartGluePointAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(drawStartGluePointValue.intValue());
+		attr.setValue(drawStartGluePointValue.toString());
 	}
 
 	/**
@@ -419,12 +419,12 @@ public class DrawConnectorElement extends DrawShapeElementBase {
 	/**
 	 * Create child element {@odf.element draw:glue-point}.
 	 *
-	 * @param drawIdValue  the <code>String</code> value of <code>DrawIdAttribute</code>, see {@odf.attribute  draw:id} at specification
+	 * @param drawIdValue  the <code>Integer</code> value of <code>DrawIdAttribute</code>, see {@odf.attribute  draw:id} at specification
 	 * @param svgXValue  the <code>String</code> value of <code>SvgXAttribute</code>, see {@odf.attribute  svg:x} at specification
 	 * @param svgYValue  the <code>String</code> value of <code>SvgYAttribute</code>, see {@odf.attribute  svg:y} at specification
 	 * @return the element {@odf.element draw:glue-point}
 	 */
-	 public DrawGluePointElement newDrawGluePointElement(String drawIdValue, String svgXValue, String svgYValue) {
+	 public DrawGluePointElement newDrawGluePointElement(int drawIdValue, String svgXValue, String svgYValue) {
 		DrawGluePointElement drawGluePoint = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawGluePointElement.class);
 		drawGluePoint.setDrawIdAttribute(drawIdValue);
 		drawGluePoint.setSvgXAttribute(svgXValue);

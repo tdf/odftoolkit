@@ -177,7 +177,7 @@ public class FormListboxElement extends OdfElement {
     FormDisabledAttribute attr =
         (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
   }
@@ -191,7 +191,7 @@ public class FormListboxElement extends OdfElement {
   public void setFormDisabledAttribute(Boolean formDisabledValue) {
     FormDisabledAttribute attr = new FormDisabledAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formDisabledValue.booleanValue());
+    attr.setValue(formDisabledValue.toString());
   }
 
   /**
@@ -205,7 +205,7 @@ public class FormListboxElement extends OdfElement {
     FormDropdownAttribute attr =
         (FormDropdownAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "dropdown");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormDropdownAttribute.DEFAULT_VALUE);
   }
@@ -219,7 +219,7 @@ public class FormListboxElement extends OdfElement {
   public void setFormDropdownAttribute(Boolean formDropdownValue) {
     FormDropdownAttribute attr = new FormDropdownAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formDropdownValue.booleanValue());
+    attr.setValue(formDropdownValue.toString());
   }
 
   /**
@@ -376,7 +376,7 @@ public class FormListboxElement extends OdfElement {
     FormMultipleAttribute attr =
         (FormMultipleAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "multiple");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormMultipleAttribute.DEFAULT_VALUE);
   }
@@ -390,7 +390,7 @@ public class FormListboxElement extends OdfElement {
   public void setFormMultipleAttribute(Boolean formMultipleValue) {
     FormMultipleAttribute attr = new FormMultipleAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formMultipleValue.booleanValue());
+    attr.setValue(formMultipleValue.toString());
   }
 
   /**
@@ -431,7 +431,7 @@ public class FormListboxElement extends OdfElement {
     FormPrintableAttribute attr =
         (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);
   }
@@ -445,7 +445,7 @@ public class FormListboxElement extends OdfElement {
   public void setFormPrintableAttribute(Boolean formPrintableValue) {
     FormPrintableAttribute attr = new FormPrintableAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formPrintableValue.booleanValue());
+    attr.setValue(formPrintableValue.toString());
   }
 
   /**
@@ -458,7 +458,7 @@ public class FormListboxElement extends OdfElement {
   public Integer getFormSizeAttribute() {
     FormSizeAttribute attr = (FormSizeAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "size");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -472,7 +472,7 @@ public class FormListboxElement extends OdfElement {
   public void setFormSizeAttribute(Integer formSizeValue) {
     FormSizeAttribute attr = new FormSizeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(formSizeValue.intValue());
+    attr.setValue(formSizeValue.toString());
   }
 
   /**
@@ -516,7 +516,7 @@ public class FormListboxElement extends OdfElement {
     FormTabIndexAttribute attr =
         (FormTabIndexAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-index");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return Integer.valueOf(FormTabIndexAttribute.DEFAULT_VALUE);
   }
@@ -530,7 +530,7 @@ public class FormListboxElement extends OdfElement {
   public void setFormTabIndexAttribute(Integer formTabIndexValue) {
     FormTabIndexAttribute attr = new FormTabIndexAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(formTabIndexValue.intValue());
+    attr.setValue(formTabIndexValue.toString());
   }
 
   /**
@@ -544,7 +544,7 @@ public class FormListboxElement extends OdfElement {
     FormTabStopAttribute attr =
         (FormTabStopAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-stop");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormTabStopAttribute.DEFAULT_VALUE);
   }
@@ -558,7 +558,7 @@ public class FormListboxElement extends OdfElement {
   public void setFormTabStopAttribute(Boolean formTabStopValue) {
     FormTabStopAttribute attr = new FormTabStopAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formTabStopValue.booleanValue());
+    attr.setValue(formTabStopValue.toString());
   }
 
   /**

@@ -798,7 +798,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
     FoHyphenateAttribute attr =
         (FoHyphenateAttribute) getOdfAttribute(OdfDocumentNamespace.FO, "hyphenate");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -812,7 +812,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
   public void setFoHyphenateAttribute(Boolean foHyphenateValue) {
     FoHyphenateAttribute attr = new FoHyphenateAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(foHyphenateValue.booleanValue());
+    attr.setValue(foHyphenateValue.toString());
   }
 
   /**
@@ -828,7 +828,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
         (FoHyphenationPushCharCountAttribute)
             getOdfAttribute(OdfDocumentNamespace.FO, "hyphenation-push-char-count");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -843,7 +843,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
     FoHyphenationPushCharCountAttribute attr =
         new FoHyphenationPushCharCountAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(foHyphenationPushCharCountValue.intValue());
+    attr.setValue(foHyphenationPushCharCountValue.toString());
   }
 
   /**
@@ -859,7 +859,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
         (FoHyphenationRemainCharCountAttribute)
             getOdfAttribute(OdfDocumentNamespace.FO, "hyphenation-remain-char-count");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -874,7 +874,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
     FoHyphenationRemainCharCountAttribute attr =
         new FoHyphenationRemainCharCountAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(foHyphenationRemainCharCountValue.intValue());
+    attr.setValue(foHyphenationRemainCharCountValue.toString());
   }
 
   /**
@@ -1947,7 +1947,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
     StyleLetterKerningAttribute attr =
         (StyleLetterKerningAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "letter-kerning");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -1962,7 +1962,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
     StyleLetterKerningAttribute attr =
         new StyleLetterKerningAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleLetterKerningValue.booleanValue());
+    attr.setValue(styleLetterKerningValue.toString());
   }
 
   /**
@@ -2152,7 +2152,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
     StyleTextBlinkingAttribute attr =
         (StyleTextBlinkingAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "text-blinking");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -2167,7 +2167,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
     StyleTextBlinkingAttribute attr =
         new StyleTextBlinkingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleTextBlinkingValue.booleanValue());
+    attr.setValue(styleTextBlinkingValue.toString());
   }
 
   /**
@@ -2509,7 +2509,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
     StyleTextOutlineAttribute attr =
         (StyleTextOutlineAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "text-outline");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -2523,7 +2523,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
   public void setStyleTextOutlineAttribute(Boolean styleTextOutlineValue) {
     StyleTextOutlineAttribute attr = new StyleTextOutlineAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleTextOutlineValue.booleanValue());
+    attr.setValue(styleTextOutlineValue.toString());
   }
 
   /**
@@ -2955,7 +2955,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
         (StyleUseWindowFontColorAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "use-window-font-color");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -2970,7 +2970,7 @@ public class StyleTextPropertiesElement extends OdfStylePropertiesBase {
     StyleUseWindowFontColorAttribute attr =
         new StyleUseWindowFontColorAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleUseWindowFontColorValue.booleanValue());
+    attr.setValue(styleUseWindowFontColorValue.toString());
   }
 
   /**

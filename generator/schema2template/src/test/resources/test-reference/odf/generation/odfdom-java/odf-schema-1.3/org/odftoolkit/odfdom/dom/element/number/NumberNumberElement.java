@@ -73,7 +73,7 @@ public class NumberNumberElement extends OdfElement {
 	public Integer getNumberDecimalPlacesAttribute() {
 		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "decimal-places");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -86,7 +86,7 @@ public class NumberNumberElement extends OdfElement {
 	public void setNumberDecimalPlacesAttribute(Integer numberDecimalPlacesValue) {
 		NumberDecimalPlacesAttribute attr = new NumberDecimalPlacesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(numberDecimalPlacesValue.intValue());
+		attr.setValue(numberDecimalPlacesValue.toString());
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class NumberNumberElement extends OdfElement {
 	public Double getNumberDisplayFactorAttribute() {
 		NumberDisplayFactorAttribute attr = (NumberDisplayFactorAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "display-factor");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Double.valueOf(attr.doubleValue());
+			return Double.valueOf(attr.getValue());
 		}
 		return Double.valueOf(NumberDisplayFactorAttribute.DEFAULT_VALUE);
 	}
@@ -134,7 +134,7 @@ public class NumberNumberElement extends OdfElement {
 	public void setNumberDisplayFactorAttribute(Double numberDisplayFactorValue) {
 		NumberDisplayFactorAttribute attr = new NumberDisplayFactorAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setDoubleValue(numberDisplayFactorValue.doubleValue());
+		attr.setValue(numberDisplayFactorValue.toString());
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class NumberNumberElement extends OdfElement {
 	public Boolean getNumberGroupingAttribute() {
 		NumberGroupingAttribute attr = (NumberGroupingAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "grouping");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(NumberGroupingAttribute.DEFAULT_VALUE);
 	}
@@ -158,7 +158,7 @@ public class NumberNumberElement extends OdfElement {
 	public void setNumberGroupingAttribute(Boolean numberGroupingValue) {
 		NumberGroupingAttribute attr = new NumberGroupingAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(numberGroupingValue.booleanValue());
+		attr.setValue(numberGroupingValue.toString());
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class NumberNumberElement extends OdfElement {
 	public Integer getNumberMinDecimalPlacesAttribute() {
 		NumberMinDecimalPlacesAttribute attr = (NumberMinDecimalPlacesAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-decimal-places");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -182,7 +182,7 @@ public class NumberNumberElement extends OdfElement {
 	public void setNumberMinDecimalPlacesAttribute(Integer numberMinDecimalPlacesValue) {
 		NumberMinDecimalPlacesAttribute attr = new NumberMinDecimalPlacesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(numberMinDecimalPlacesValue.intValue());
+		attr.setValue(numberMinDecimalPlacesValue.toString());
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class NumberNumberElement extends OdfElement {
 	public Integer getNumberMinIntegerDigitsAttribute() {
 		NumberMinIntegerDigitsAttribute attr = (NumberMinIntegerDigitsAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-integer-digits");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -206,7 +206,7 @@ public class NumberNumberElement extends OdfElement {
 	public void setNumberMinIntegerDigitsAttribute(Integer numberMinIntegerDigitsValue) {
 		NumberMinIntegerDigitsAttribute attr = new NumberMinIntegerDigitsAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(numberMinIntegerDigitsValue.intValue());
+		attr.setValue(numberMinIntegerDigitsValue.toString());
 	}
 
 	/**

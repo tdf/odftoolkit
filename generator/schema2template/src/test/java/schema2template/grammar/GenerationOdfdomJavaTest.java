@@ -22,13 +22,10 @@
 package schema2template.grammar;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
-import javax.xml.parsers.ParserConfigurationException;
 import org.junit.Assert;
 import org.junit.Test;
-import org.xml.sax.SAXException;
 import schema2template.GenerationParameters;
 import schema2template.SchemaToTemplate;
 

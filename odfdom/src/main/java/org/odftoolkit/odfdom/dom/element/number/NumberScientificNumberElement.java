@@ -79,7 +79,7 @@ public class NumberScientificNumberElement extends OdfElement {
         (NumberDecimalPlacesAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "decimal-places");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -94,7 +94,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberDecimalPlacesAttribute attr =
         new NumberDecimalPlacesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberDecimalPlacesValue.intValue());
+    attr.setValue(numberDecimalPlacesValue.toString());
   }
 
   /**
@@ -109,7 +109,7 @@ public class NumberScientificNumberElement extends OdfElement {
         (NumberExponentIntervalAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "exponent-interval");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -124,7 +124,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberExponentIntervalAttribute attr =
         new NumberExponentIntervalAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberExponentIntervalValue.intValue());
+    attr.setValue(numberExponentIntervalValue.toString());
   }
 
   /**
@@ -139,7 +139,7 @@ public class NumberScientificNumberElement extends OdfElement {
         (NumberForcedExponentSignAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "forced-exponent-sign");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -154,7 +154,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberForcedExponentSignAttribute attr =
         new NumberForcedExponentSignAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(numberForcedExponentSignValue.booleanValue());
+    attr.setValue(numberForcedExponentSignValue.toString());
   }
 
   /**
@@ -168,7 +168,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberGroupingAttribute attr =
         (NumberGroupingAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "grouping");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(NumberGroupingAttribute.DEFAULT_VALUE);
   }
@@ -182,7 +182,7 @@ public class NumberScientificNumberElement extends OdfElement {
   public void setNumberGroupingAttribute(Boolean numberGroupingValue) {
     NumberGroupingAttribute attr = new NumberGroupingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(numberGroupingValue.booleanValue());
+    attr.setValue(numberGroupingValue.toString());
   }
 
   /**
@@ -197,7 +197,7 @@ public class NumberScientificNumberElement extends OdfElement {
         (NumberMinDecimalPlacesAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-decimal-places");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -212,7 +212,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberMinDecimalPlacesAttribute attr =
         new NumberMinDecimalPlacesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberMinDecimalPlacesValue.intValue());
+    attr.setValue(numberMinDecimalPlacesValue.toString());
   }
 
   /**
@@ -227,7 +227,7 @@ public class NumberScientificNumberElement extends OdfElement {
         (NumberMinExponentDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-exponent-digits");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -242,7 +242,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberMinExponentDigitsAttribute attr =
         new NumberMinExponentDigitsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberMinExponentDigitsValue.intValue());
+    attr.setValue(numberMinExponentDigitsValue.toString());
   }
 
   /**
@@ -257,7 +257,7 @@ public class NumberScientificNumberElement extends OdfElement {
         (NumberMinIntegerDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-integer-digits");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -272,7 +272,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberMinIntegerDigitsAttribute attr =
         new NumberMinIntegerDigitsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberMinIntegerDigitsValue.intValue());
+    attr.setValue(numberMinIntegerDigitsValue.toString());
   }
 
   /**

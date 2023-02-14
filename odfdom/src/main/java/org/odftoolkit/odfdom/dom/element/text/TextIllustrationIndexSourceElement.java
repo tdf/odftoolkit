@@ -166,7 +166,7 @@ public class TextIllustrationIndexSourceElement extends OdfElement {
         (TextRelativeTabStopPositionAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "relative-tab-stop-position");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TextRelativeTabStopPositionAttribute.DEFAULT_VALUE);
   }
@@ -181,7 +181,7 @@ public class TextIllustrationIndexSourceElement extends OdfElement {
     TextRelativeTabStopPositionAttribute attr =
         new TextRelativeTabStopPositionAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textRelativeTabStopPositionValue.booleanValue());
+    attr.setValue(textRelativeTabStopPositionValue.toString());
   }
 
   /**
@@ -195,7 +195,7 @@ public class TextIllustrationIndexSourceElement extends OdfElement {
     TextUseCaptionAttribute attr =
         (TextUseCaptionAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-caption");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TextUseCaptionAttribute.DEFAULT_VALUE);
   }
@@ -209,7 +209,7 @@ public class TextIllustrationIndexSourceElement extends OdfElement {
   public void setTextUseCaptionAttribute(Boolean textUseCaptionValue) {
     TextUseCaptionAttribute attr = new TextUseCaptionAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textUseCaptionValue.booleanValue());
+    attr.setValue(textUseCaptionValue.toString());
   }
 
   /**

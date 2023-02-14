@@ -121,7 +121,7 @@ public class OfficeTextElement extends OdfElement {
     TextGlobalAttribute attr =
         (TextGlobalAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "global");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TextGlobalAttribute.DEFAULT_VALUE);
   }
@@ -135,7 +135,7 @@ public class OfficeTextElement extends OdfElement {
   public void setTextGlobalAttribute(Boolean textGlobalValue) {
     TextGlobalAttribute attr = new TextGlobalAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textGlobalValue.booleanValue());
+    attr.setValue(textGlobalValue.toString());
   }
 
   /**
@@ -150,7 +150,7 @@ public class OfficeTextElement extends OdfElement {
         (TextUseSoftPageBreaksAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-soft-page-breaks");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TextUseSoftPageBreaksAttribute.DEFAULT_VALUE);
   }
@@ -165,7 +165,7 @@ public class OfficeTextElement extends OdfElement {
     TextUseSoftPageBreaksAttribute attr =
         new TextUseSoftPageBreaksAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textUseSoftPageBreaksValue.booleanValue());
+    attr.setValue(textUseSoftPageBreaksValue.toString());
   }
 
   /**

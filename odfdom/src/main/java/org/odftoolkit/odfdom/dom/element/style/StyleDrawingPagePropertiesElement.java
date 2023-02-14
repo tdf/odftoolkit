@@ -422,7 +422,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
         (DrawFillHatchSolidAttribute)
             getOdfAttribute(OdfDocumentNamespace.DRAW, "fill-hatch-solid");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -437,7 +437,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     DrawFillHatchSolidAttribute attr =
         new DrawFillHatchSolidAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(drawFillHatchSolidValue.booleanValue());
+    attr.setValue(drawFillHatchSolidValue.toString());
   }
 
   /**
@@ -631,7 +631,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
         (DrawGradientStepCountAttribute)
             getOdfAttribute(OdfDocumentNamespace.DRAW, "gradient-step-count");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -646,7 +646,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     DrawGradientStepCountAttribute attr =
         new DrawGradientStepCountAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(drawGradientStepCountValue.intValue());
+    attr.setValue(drawGradientStepCountValue.toString());
   }
 
   /**
@@ -778,7 +778,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
         (PresentationBackgroundObjectsVisibleAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "background-objects-visible");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -795,7 +795,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     PresentationBackgroundObjectsVisibleAttribute attr =
         new PresentationBackgroundObjectsVisibleAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(presentationBackgroundObjectsVisibleValue.booleanValue());
+    attr.setValue(presentationBackgroundObjectsVisibleValue.toString());
   }
 
   /**
@@ -811,7 +811,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
         (PresentationBackgroundVisibleAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "background-visible");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -827,7 +827,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     PresentationBackgroundVisibleAttribute attr =
         new PresentationBackgroundVisibleAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(presentationBackgroundVisibleValue.booleanValue());
+    attr.setValue(presentationBackgroundVisibleValue.toString());
   }
 
   /**
@@ -843,7 +843,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
         (PresentationDisplayDateTimeAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "display-date-time");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -858,7 +858,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     PresentationDisplayDateTimeAttribute attr =
         new PresentationDisplayDateTimeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(presentationDisplayDateTimeValue.booleanValue());
+    attr.setValue(presentationDisplayDateTimeValue.toString());
   }
 
   /**
@@ -873,7 +873,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
         (PresentationDisplayFooterAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "display-footer");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -888,7 +888,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     PresentationDisplayFooterAttribute attr =
         new PresentationDisplayFooterAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(presentationDisplayFooterValue.booleanValue());
+    attr.setValue(presentationDisplayFooterValue.toString());
   }
 
   /**
@@ -903,7 +903,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
         (PresentationDisplayHeaderAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "display-header");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -918,7 +918,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     PresentationDisplayHeaderAttribute attr =
         new PresentationDisplayHeaderAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(presentationDisplayHeaderValue.booleanValue());
+    attr.setValue(presentationDisplayHeaderValue.toString());
   }
 
   /**
@@ -934,7 +934,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
         (PresentationDisplayPageNumberAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "display-page-number");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -950,7 +950,7 @@ public class StyleDrawingPagePropertiesElement extends OdfStylePropertiesBase {
     PresentationDisplayPageNumberAttribute attr =
         new PresentationDisplayPageNumberAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(presentationDisplayPageNumberValue.booleanValue());
+    attr.setValue(presentationDisplayPageNumberValue.toString());
   }
 
   /**

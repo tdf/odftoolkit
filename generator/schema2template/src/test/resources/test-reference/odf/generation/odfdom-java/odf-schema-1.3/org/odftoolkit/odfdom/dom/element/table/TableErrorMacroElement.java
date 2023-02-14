@@ -68,7 +68,7 @@ public class TableErrorMacroElement extends OdfElement {
 	public Boolean getTableExecuteAttribute() {
 		TableExecuteAttribute attr = (TableExecuteAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "execute");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableExecuteAttribute.DEFAULT_VALUE);
 	}
@@ -81,7 +81,7 @@ public class TableErrorMacroElement extends OdfElement {
 	public void setTableExecuteAttribute(Boolean tableExecuteValue) {
 		TableExecuteAttribute attr = new TableExecuteAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableExecuteValue.booleanValue());
+		attr.setValue(tableExecuteValue.toString());
 	}
 
   /**

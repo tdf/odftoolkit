@@ -122,7 +122,7 @@ public class TextBibliographyConfigurationElement extends OdfElement {
 	public Boolean getTextNumberedEntriesAttribute() {
 		TextNumberedEntriesAttribute attr = (TextNumberedEntriesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "numbered-entries");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextNumberedEntriesAttribute.DEFAULT_VALUE);
 	}
@@ -135,7 +135,7 @@ public class TextBibliographyConfigurationElement extends OdfElement {
 	public void setTextNumberedEntriesAttribute(Boolean textNumberedEntriesValue) {
 		TextNumberedEntriesAttribute attr = new TextNumberedEntriesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textNumberedEntriesValue.booleanValue());
+		attr.setValue(textNumberedEntriesValue.toString());
 	}
 
 	/**
@@ -194,7 +194,7 @@ public class TextBibliographyConfigurationElement extends OdfElement {
 	public Boolean getTextSortByPositionAttribute() {
 		TextSortByPositionAttribute attr = (TextSortByPositionAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "sort-by-position");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextSortByPositionAttribute.DEFAULT_VALUE);
 	}
@@ -207,7 +207,7 @@ public class TextBibliographyConfigurationElement extends OdfElement {
 	public void setTextSortByPositionAttribute(Boolean textSortByPositionValue) {
 		TextSortByPositionAttribute attr = new TextSortByPositionAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textSortByPositionValue.booleanValue());
+		attr.setValue(textSortByPositionValue.toString());
 	}
 
 	/**

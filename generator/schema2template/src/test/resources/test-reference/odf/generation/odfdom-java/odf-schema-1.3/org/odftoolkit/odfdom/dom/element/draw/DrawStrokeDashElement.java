@@ -123,7 +123,7 @@ public class DrawStrokeDashElement extends OdfElement {
 	public Integer getDrawDots1Attribute() {
 		DrawDots1Attribute attr = (DrawDots1Attribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "dots1");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -136,7 +136,7 @@ public class DrawStrokeDashElement extends OdfElement {
 	public void setDrawDots1Attribute(Integer drawDots1Value) {
 		DrawDots1Attribute attr = new DrawDots1Attribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(drawDots1Value.intValue());
+		attr.setValue(drawDots1Value.toString());
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class DrawStrokeDashElement extends OdfElement {
 	public Integer getDrawDots2Attribute() {
 		DrawDots2Attribute attr = (DrawDots2Attribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "dots2");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -184,7 +184,7 @@ public class DrawStrokeDashElement extends OdfElement {
 	public void setDrawDots2Attribute(Integer drawDots2Value) {
 		DrawDots2Attribute attr = new DrawDots2Attribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(drawDots2Value.intValue());
+		attr.setValue(drawDots2Value.toString());
 	}
 
 	/**

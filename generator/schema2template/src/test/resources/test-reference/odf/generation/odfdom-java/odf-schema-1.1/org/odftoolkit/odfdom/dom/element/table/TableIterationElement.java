@@ -70,7 +70,7 @@ public class TableIterationElement extends OdfElement {
 	public Double getTableMaximumDifferenceAttribute() {
 		TableMaximumDifferenceAttribute attr = (TableMaximumDifferenceAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "maximum-difference");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Double.valueOf(attr.doubleValue());
+			return Double.valueOf(attr.getValue());
 		}
 		return Double.valueOf(TableMaximumDifferenceAttribute.DEFAULT_VALUE);
 	}
@@ -83,7 +83,7 @@ public class TableIterationElement extends OdfElement {
 	public void setTableMaximumDifferenceAttribute(Double tableMaximumDifferenceValue) {
 		TableMaximumDifferenceAttribute attr = new TableMaximumDifferenceAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setDoubleValue(tableMaximumDifferenceValue.doubleValue());
+		attr.setValue(tableMaximumDifferenceValue.toString());
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class TableIterationElement extends OdfElement {
 	public Integer getTableStepsAttribute() {
 		TableStepsAttribute attr = (TableStepsAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "steps");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return Integer.valueOf(TableStepsAttribute.DEFAULT_VALUE);
 	}
@@ -131,7 +131,7 @@ public class TableIterationElement extends OdfElement {
 	public void setTableStepsAttribute(Integer tableStepsValue) {
 		TableStepsAttribute attr = new TableStepsAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(tableStepsValue.intValue());
+		attr.setValue(tableStepsValue.toString());
 	}
 
   /**

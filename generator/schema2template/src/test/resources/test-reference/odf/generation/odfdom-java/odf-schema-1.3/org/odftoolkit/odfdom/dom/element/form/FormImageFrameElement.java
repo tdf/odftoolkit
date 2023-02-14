@@ -127,7 +127,7 @@ public class FormImageFrameElement extends OdfElement {
 	public Boolean getFormDisabledAttribute() {
 		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
 	}
@@ -140,7 +140,7 @@ public class FormImageFrameElement extends OdfElement {
 	public void setFormDisabledAttribute(Boolean formDisabledValue) {
 		FormDisabledAttribute attr = new FormDisabledAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(formDisabledValue.booleanValue());
+		attr.setValue(formDisabledValue.toString());
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class FormImageFrameElement extends OdfElement {
 	public Boolean getFormPrintableAttribute() {
 		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);
 	}
@@ -236,7 +236,7 @@ public class FormImageFrameElement extends OdfElement {
 	public void setFormPrintableAttribute(Boolean formPrintableValue) {
 		FormPrintableAttribute attr = new FormPrintableAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(formPrintableValue.booleanValue());
+		attr.setValue(formPrintableValue.toString());
 	}
 
 	/**
@@ -247,7 +247,7 @@ public class FormImageFrameElement extends OdfElement {
 	public Boolean getFormReadonlyAttribute() {
 		FormReadonlyAttribute attr = (FormReadonlyAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "readonly");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(FormReadonlyAttribute.DEFAULT_VALUE);
 	}
@@ -260,7 +260,7 @@ public class FormImageFrameElement extends OdfElement {
 	public void setFormReadonlyAttribute(Boolean formReadonlyValue) {
 		FormReadonlyAttribute attr = new FormReadonlyAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(formReadonlyValue.booleanValue());
+		attr.setValue(formReadonlyValue.toString());
 	}
 
 	/**

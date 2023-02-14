@@ -174,7 +174,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	public Boolean getDr3dLightingModeAttribute() {
 		Dr3dLightingModeAttribute attr = (Dr3dLightingModeAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "lighting-mode");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -187,7 +187,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	public void setDr3dLightingModeAttribute(Boolean dr3dLightingModeValue) {
 		Dr3dLightingModeAttribute attr = new Dr3dLightingModeAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(dr3dLightingModeValue.booleanValue());
+		attr.setValue(dr3dLightingModeValue.toString());
 	}
 
 	/**
@@ -486,7 +486,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	public Integer getDrawZIndexAttribute() {
 		DrawZIndexAttribute attr = (DrawZIndexAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "z-index");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -499,7 +499,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	public void setDrawZIndexAttribute(Integer drawZIndexValue) {
 		DrawZIndexAttribute attr = new DrawZIndexAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(drawZIndexValue.intValue());
+		attr.setValue(drawZIndexValue.toString());
 	}
 
 	/**
@@ -726,7 +726,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	public Boolean getTableTableBackgroundAttribute() {
 		TableTableBackgroundAttribute attr = (TableTableBackgroundAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "table-background");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -739,7 +739,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	public void setTableTableBackgroundAttribute(Boolean tableTableBackgroundValue) {
 		TableTableBackgroundAttribute attr = new TableTableBackgroundAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableTableBackgroundValue.booleanValue());
+		attr.setValue(tableTableBackgroundValue.toString());
 	}
 
 	/**
@@ -750,7 +750,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	public Integer getTextAnchorPageNumberAttribute() {
 		TextAnchorPageNumberAttribute attr = (TextAnchorPageNumberAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "anchor-page-number");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -763,7 +763,7 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	public void setTextAnchorPageNumberAttribute(Integer textAnchorPageNumberValue) {
 		TextAnchorPageNumberAttribute attr = new TextAnchorPageNumberAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(textAnchorPageNumberValue.intValue());
+		attr.setValue(textAnchorPageNumberValue.toString());
 	}
 
 	/**
@@ -894,14 +894,14 @@ public class Dr3dSceneElement extends OdfStyleableShapeElement {
 	 * Create child element {@odf.element draw:glue-point}.
 	 *
 	 * @param drawEscapeDirectionValue  the <code>String</code> value of <code>DrawEscapeDirectionAttribute</code>, see {@odf.attribute  draw:escape-direction} at specification
-	 * @param drawIdValue  the <code>String</code> value of <code>DrawIdAttribute</code>, see {@odf.attribute  draw:id} at specification
+	 * @param drawIdValue  the <code>Integer</code> value of <code>DrawIdAttribute</code>, see {@odf.attribute  draw:id} at specification
 	 * @param svgXValue  the <code>String</code> value of <code>SvgXAttribute</code>, see {@odf.attribute  svg:x} at specification
 	 * @param svgYValue  the <code>String</code> value of <code>SvgYAttribute</code>, see {@odf.attribute  svg:y} at specification
 	 * Child element was added in ODF 1.2
 	 *
 	 * @return the element {@odf.element draw:glue-point}
 	 */
-	 public DrawGluePointElement newDrawGluePointElement(String drawEscapeDirectionValue, String drawIdValue, String svgXValue, String svgYValue) {
+	 public DrawGluePointElement newDrawGluePointElement(String drawEscapeDirectionValue, int drawIdValue, String svgXValue, String svgYValue) {
 		DrawGluePointElement drawGluePoint = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawGluePointElement.class);
 		drawGluePoint.setDrawEscapeDirectionAttribute(drawEscapeDirectionValue);
 		drawGluePoint.setDrawIdAttribute(drawIdValue);

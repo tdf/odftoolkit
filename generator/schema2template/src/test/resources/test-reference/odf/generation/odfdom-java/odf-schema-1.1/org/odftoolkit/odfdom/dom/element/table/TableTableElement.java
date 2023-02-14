@@ -79,7 +79,7 @@ public class TableTableElement extends OdfStylableElement {
 	public Boolean getTableIsSubTableAttribute() {
 		TableIsSubTableAttribute attr = (TableIsSubTableAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "is-sub-table");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableIsSubTableAttribute.DEFAULT_VALUE);
 	}
@@ -92,7 +92,7 @@ public class TableTableElement extends OdfStylableElement {
 	public void setTableIsSubTableAttribute(Boolean tableIsSubTableValue) {
 		TableIsSubTableAttribute attr = new TableIsSubTableAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableIsSubTableValue.booleanValue());
+		attr.setValue(tableIsSubTableValue.toString());
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class TableTableElement extends OdfStylableElement {
 	public Boolean getTablePrintAttribute() {
 		TablePrintAttribute attr = (TablePrintAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "print");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TablePrintAttribute.DEFAULT_VALUE);
 	}
@@ -140,7 +140,7 @@ public class TableTableElement extends OdfStylableElement {
 	public void setTablePrintAttribute(Boolean tablePrintValue) {
 		TablePrintAttribute attr = new TablePrintAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tablePrintValue.booleanValue());
+		attr.setValue(tablePrintValue.toString());
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class TableTableElement extends OdfStylableElement {
 	public Boolean getTableProtectedAttribute() {
 		TableProtectedAttribute attr = (TableProtectedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "protected");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableProtectedAttribute.DEFAULT_VALUE);
 	}
@@ -188,7 +188,7 @@ public class TableTableElement extends OdfStylableElement {
 	public void setTableProtectedAttribute(Boolean tableProtectedValue) {
 		TableProtectedAttribute attr = new TableProtectedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableProtectedValue.booleanValue());
+		attr.setValue(tableProtectedValue.toString());
 	}
 
 	/**

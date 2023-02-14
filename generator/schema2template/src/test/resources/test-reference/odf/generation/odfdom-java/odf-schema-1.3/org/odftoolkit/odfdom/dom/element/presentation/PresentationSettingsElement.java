@@ -105,7 +105,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public Boolean getPresentationEndlessAttribute() {
 		PresentationEndlessAttribute attr = (PresentationEndlessAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "endless");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(PresentationEndlessAttribute.DEFAULT_VALUE);
 	}
@@ -118,7 +118,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public void setPresentationEndlessAttribute(Boolean presentationEndlessValue) {
 		PresentationEndlessAttribute attr = new PresentationEndlessAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(presentationEndlessValue.booleanValue());
+		attr.setValue(presentationEndlessValue.toString());
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public Boolean getPresentationForceManualAttribute() {
 		PresentationForceManualAttribute attr = (PresentationForceManualAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "force-manual");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(PresentationForceManualAttribute.DEFAULT_VALUE);
 	}
@@ -142,7 +142,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public void setPresentationForceManualAttribute(Boolean presentationForceManualValue) {
 		PresentationForceManualAttribute attr = new PresentationForceManualAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(presentationForceManualValue.booleanValue());
+		attr.setValue(presentationForceManualValue.toString());
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public Boolean getPresentationFullScreenAttribute() {
 		PresentationFullScreenAttribute attr = (PresentationFullScreenAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "full-screen");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(PresentationFullScreenAttribute.DEFAULT_VALUE);
 	}
@@ -166,7 +166,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public void setPresentationFullScreenAttribute(Boolean presentationFullScreenValue) {
 		PresentationFullScreenAttribute attr = new PresentationFullScreenAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(presentationFullScreenValue.booleanValue());
+		attr.setValue(presentationFullScreenValue.toString());
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public Boolean getPresentationMouseAsPenAttribute() {
 		PresentationMouseAsPenAttribute attr = (PresentationMouseAsPenAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "mouse-as-pen");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(PresentationMouseAsPenAttribute.DEFAULT_VALUE);
 	}
@@ -190,7 +190,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public void setPresentationMouseAsPenAttribute(Boolean presentationMouseAsPenValue) {
 		PresentationMouseAsPenAttribute attr = new PresentationMouseAsPenAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(presentationMouseAsPenValue.booleanValue());
+		attr.setValue(presentationMouseAsPenValue.toString());
 	}
 
 	/**
@@ -201,7 +201,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public Boolean getPresentationMouseVisibleAttribute() {
 		PresentationMouseVisibleAttribute attr = (PresentationMouseVisibleAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "mouse-visible");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(PresentationMouseVisibleAttribute.DEFAULT_VALUE);
 	}
@@ -214,7 +214,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public void setPresentationMouseVisibleAttribute(Boolean presentationMouseVisibleValue) {
 		PresentationMouseVisibleAttribute attr = new PresentationMouseVisibleAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(presentationMouseVisibleValue.booleanValue());
+		attr.setValue(presentationMouseVisibleValue.toString());
 	}
 
 	/**
@@ -273,7 +273,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public Boolean getPresentationShowEndOfPresentationSlideAttribute() {
 		PresentationShowEndOfPresentationSlideAttribute attr = (PresentationShowEndOfPresentationSlideAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "show-end-of-presentation-slide");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(PresentationShowEndOfPresentationSlideAttribute.DEFAULT_VALUE);
 	}
@@ -286,7 +286,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public void setPresentationShowEndOfPresentationSlideAttribute(Boolean presentationShowEndOfPresentationSlideValue) {
 		PresentationShowEndOfPresentationSlideAttribute attr = new PresentationShowEndOfPresentationSlideAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(presentationShowEndOfPresentationSlideValue.booleanValue());
+		attr.setValue(presentationShowEndOfPresentationSlideValue.toString());
 	}
 
 	/**
@@ -297,7 +297,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public Boolean getPresentationShowLogoAttribute() {
 		PresentationShowLogoAttribute attr = (PresentationShowLogoAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "show-logo");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(PresentationShowLogoAttribute.DEFAULT_VALUE);
 	}
@@ -310,7 +310,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public void setPresentationShowLogoAttribute(Boolean presentationShowLogoValue) {
 		PresentationShowLogoAttribute attr = new PresentationShowLogoAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(presentationShowLogoValue.booleanValue());
+		attr.setValue(presentationShowLogoValue.toString());
 	}
 
 	/**
@@ -345,7 +345,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public Boolean getPresentationStartWithNavigatorAttribute() {
 		PresentationStartWithNavigatorAttribute attr = (PresentationStartWithNavigatorAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "start-with-navigator");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(PresentationStartWithNavigatorAttribute.DEFAULT_VALUE);
 	}
@@ -358,7 +358,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public void setPresentationStartWithNavigatorAttribute(Boolean presentationStartWithNavigatorValue) {
 		PresentationStartWithNavigatorAttribute attr = new PresentationStartWithNavigatorAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(presentationStartWithNavigatorValue.booleanValue());
+		attr.setValue(presentationStartWithNavigatorValue.toString());
 	}
 
 	/**
@@ -369,7 +369,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public Boolean getPresentationStayOnTopAttribute() {
 		PresentationStayOnTopAttribute attr = (PresentationStayOnTopAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "stay-on-top");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(PresentationStayOnTopAttribute.DEFAULT_VALUE);
 	}
@@ -382,7 +382,7 @@ public class PresentationSettingsElement extends OdfElement {
 	public void setPresentationStayOnTopAttribute(Boolean presentationStayOnTopValue) {
 		PresentationStayOnTopAttribute attr = new PresentationStayOnTopAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(presentationStayOnTopValue.booleanValue());
+		attr.setValue(presentationStayOnTopValue.toString());
 	}
 
 	/**

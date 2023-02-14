@@ -62,7 +62,7 @@ public abstract class TextListLevelStyleElementBase extends OdfStyleBase {
 	public Integer getTextLevelAttribute() {
 		TextLevelAttribute attr = (TextLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "level");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -75,7 +75,7 @@ public abstract class TextListLevelStyleElementBase extends OdfStyleBase {
 	public void setTextLevelAttribute(Integer textLevelValue) {
 		TextLevelAttribute attr = new TextLevelAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(textLevelValue.intValue());
+		attr.setValue(textLevelValue.toString());
 	}
 
 	/**

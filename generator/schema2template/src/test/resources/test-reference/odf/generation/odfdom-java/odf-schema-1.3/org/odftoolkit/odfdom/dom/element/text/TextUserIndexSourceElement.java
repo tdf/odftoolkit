@@ -77,7 +77,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public Boolean getTextCopyOutlineLevelsAttribute() {
 		TextCopyOutlineLevelsAttribute attr = (TextCopyOutlineLevelsAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "copy-outline-levels");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextCopyOutlineLevelsAttribute.DEFAULT_VALUE);
 	}
@@ -90,7 +90,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public void setTextCopyOutlineLevelsAttribute(Boolean textCopyOutlineLevelsValue) {
 		TextCopyOutlineLevelsAttribute attr = new TextCopyOutlineLevelsAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textCopyOutlineLevelsValue.booleanValue());
+		attr.setValue(textCopyOutlineLevelsValue.toString());
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public Boolean getTextRelativeTabStopPositionAttribute() {
 		TextRelativeTabStopPositionAttribute attr = (TextRelativeTabStopPositionAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "relative-tab-stop-position");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextRelativeTabStopPositionAttribute.DEFAULT_VALUE);
 	}
@@ -164,7 +164,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public void setTextRelativeTabStopPositionAttribute(Boolean textRelativeTabStopPositionValue) {
 		TextRelativeTabStopPositionAttribute attr = new TextRelativeTabStopPositionAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textRelativeTabStopPositionValue.booleanValue());
+		attr.setValue(textRelativeTabStopPositionValue.toString());
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public Boolean getTextUseFloatingFramesAttribute() {
 		TextUseFloatingFramesAttribute attr = (TextUseFloatingFramesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-floating-frames");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextUseFloatingFramesAttribute.DEFAULT_VALUE);
 	}
@@ -188,7 +188,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public void setTextUseFloatingFramesAttribute(Boolean textUseFloatingFramesValue) {
 		TextUseFloatingFramesAttribute attr = new TextUseFloatingFramesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textUseFloatingFramesValue.booleanValue());
+		attr.setValue(textUseFloatingFramesValue.toString());
 	}
 
 	/**
@@ -199,7 +199,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public Boolean getTextUseGraphicsAttribute() {
 		TextUseGraphicsAttribute attr = (TextUseGraphicsAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-graphics");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextUseGraphicsAttribute.DEFAULT_VALUE);
 	}
@@ -212,7 +212,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public void setTextUseGraphicsAttribute(Boolean textUseGraphicsValue) {
 		TextUseGraphicsAttribute attr = new TextUseGraphicsAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textUseGraphicsValue.booleanValue());
+		attr.setValue(textUseGraphicsValue.toString());
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public Boolean getTextUseIndexMarksAttribute() {
 		TextUseIndexMarksAttribute attr = (TextUseIndexMarksAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-index-marks");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextUseIndexMarksAttribute.DEFAULT_VALUE);
 	}
@@ -236,7 +236,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public void setTextUseIndexMarksAttribute(Boolean textUseIndexMarksValue) {
 		TextUseIndexMarksAttribute attr = new TextUseIndexMarksAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textUseIndexMarksValue.booleanValue());
+		attr.setValue(textUseIndexMarksValue.toString());
 	}
 
 	/**
@@ -247,7 +247,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public Boolean getTextUseIndexSourceStylesAttribute() {
 		TextUseIndexSourceStylesAttribute attr = (TextUseIndexSourceStylesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-index-source-styles");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextUseIndexSourceStylesAttribute.DEFAULT_VALUE);
 	}
@@ -260,7 +260,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public void setTextUseIndexSourceStylesAttribute(Boolean textUseIndexSourceStylesValue) {
 		TextUseIndexSourceStylesAttribute attr = new TextUseIndexSourceStylesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textUseIndexSourceStylesValue.booleanValue());
+		attr.setValue(textUseIndexSourceStylesValue.toString());
 	}
 
 	/**
@@ -271,7 +271,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public Boolean getTextUseObjectsAttribute() {
 		TextUseObjectsAttribute attr = (TextUseObjectsAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-objects");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextUseObjectsAttribute.DEFAULT_VALUE);
 	}
@@ -284,7 +284,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public void setTextUseObjectsAttribute(Boolean textUseObjectsValue) {
 		TextUseObjectsAttribute attr = new TextUseObjectsAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textUseObjectsValue.booleanValue());
+		attr.setValue(textUseObjectsValue.toString());
 	}
 
 	/**
@@ -295,7 +295,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public Boolean getTextUseTablesAttribute() {
 		TextUseTablesAttribute attr = (TextUseTablesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-tables");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextUseTablesAttribute.DEFAULT_VALUE);
 	}
@@ -308,7 +308,7 @@ public class TextUserIndexSourceElement extends OdfElement {
 	public void setTextUseTablesAttribute(Boolean textUseTablesValue) {
 		TextUseTablesAttribute attr = new TextUseTablesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textUseTablesValue.booleanValue());
+		attr.setValue(textUseTablesValue.toString());
 	}
 
 	/**

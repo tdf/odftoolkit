@@ -105,7 +105,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement {
 	public Boolean getStyleNumLetterSyncAttribute() {
 		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -118,7 +118,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement {
 	public void setStyleNumLetterSyncAttribute(Boolean styleNumLetterSyncValue) {
 		StyleNumLetterSyncAttribute attr = new StyleNumLetterSyncAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(styleNumLetterSyncValue.booleanValue());
+		attr.setValue(styleNumLetterSyncValue.toString());
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement {
 	public Boolean getTextCountEmptyLinesAttribute() {
 		TextCountEmptyLinesAttribute attr = (TextCountEmptyLinesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "count-empty-lines");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextCountEmptyLinesAttribute.DEFAULT_VALUE);
 	}
@@ -142,7 +142,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement {
 	public void setTextCountEmptyLinesAttribute(Boolean textCountEmptyLinesValue) {
 		TextCountEmptyLinesAttribute attr = new TextCountEmptyLinesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textCountEmptyLinesValue.booleanValue());
+		attr.setValue(textCountEmptyLinesValue.toString());
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement {
 	public Boolean getTextCountInTextBoxesAttribute() {
 		TextCountInTextBoxesAttribute attr = (TextCountInTextBoxesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "count-in-text-boxes");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextCountInTextBoxesAttribute.DEFAULT_VALUE);
 	}
@@ -166,7 +166,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement {
 	public void setTextCountInTextBoxesAttribute(Boolean textCountInTextBoxesValue) {
 		TextCountInTextBoxesAttribute attr = new TextCountInTextBoxesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textCountInTextBoxesValue.booleanValue());
+		attr.setValue(textCountInTextBoxesValue.toString());
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement {
 	public Integer getTextIncrementAttribute() {
 		TextIncrementAttribute attr = (TextIncrementAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "increment");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -190,7 +190,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement {
 	public void setTextIncrementAttribute(Integer textIncrementValue) {
 		TextIncrementAttribute attr = new TextIncrementAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(textIncrementValue.intValue());
+		attr.setValue(textIncrementValue.toString());
 	}
 
 	/**
@@ -201,7 +201,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement {
 	public Boolean getTextNumberLinesAttribute() {
 		TextNumberLinesAttribute attr = (TextNumberLinesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "number-lines");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextNumberLinesAttribute.DEFAULT_VALUE);
 	}
@@ -214,7 +214,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement {
 	public void setTextNumberLinesAttribute(Boolean textNumberLinesValue) {
 		TextNumberLinesAttribute attr = new TextNumberLinesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textNumberLinesValue.booleanValue());
+		attr.setValue(textNumberLinesValue.toString());
 	}
 
 	/**
@@ -273,7 +273,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement {
 	public Boolean getTextRestartOnPageAttribute() {
 		TextRestartOnPageAttribute attr = (TextRestartOnPageAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "restart-on-page");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextRestartOnPageAttribute.DEFAULT_VALUE);
 	}
@@ -286,7 +286,7 @@ public class TextLinenumberingConfigurationElement extends OdfStylableElement {
 	public void setTextRestartOnPageAttribute(Boolean textRestartOnPageValue) {
 		TextRestartOnPageAttribute attr = new TextRestartOnPageAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textRestartOnPageValue.booleanValue());
+		attr.setValue(textRestartOnPageValue.toString());
 	}
 
 	/**

@@ -158,7 +158,7 @@ public class DbServerDatabaseElement extends OdfElement {
   public Integer getDbPortAttribute() {
     DbPortAttribute attr = (DbPortAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "port");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -172,7 +172,7 @@ public class DbServerDatabaseElement extends OdfElement {
   public void setDbPortAttribute(Integer dbPortValue) {
     DbPortAttribute attr = new DbPortAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(dbPortValue.intValue());
+    attr.setValue(dbPortValue.toString());
   }
 
   /**

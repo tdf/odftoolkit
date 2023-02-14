@@ -139,7 +139,7 @@ public class TableCellRangeSourceElement extends OdfElement {
         (TableLastColumnSpannedAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "last-column-spanned");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -154,7 +154,7 @@ public class TableCellRangeSourceElement extends OdfElement {
     TableLastColumnSpannedAttribute attr =
         new TableLastColumnSpannedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableLastColumnSpannedValue.intValue());
+    attr.setValue(tableLastColumnSpannedValue.toString());
   }
 
   /**
@@ -171,7 +171,7 @@ public class TableCellRangeSourceElement extends OdfElement {
         (TableLastRowSpannedAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "last-row-spanned");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -186,7 +186,7 @@ public class TableCellRangeSourceElement extends OdfElement {
     TableLastRowSpannedAttribute attr =
         new TableLastRowSpannedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableLastRowSpannedValue.intValue());
+    attr.setValue(tableLastRowSpannedValue.toString());
   }
 
   /**

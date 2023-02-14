@@ -81,7 +81,7 @@ public class AnimAudioElement extends OdfElement {
 	public Double getAnimAudioLevelAttribute() {
 		AnimAudioLevelAttribute attr = (AnimAudioLevelAttribute) getOdfAttribute(OdfDocumentNamespace.ANIM, "audio-level");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Double.valueOf(attr.doubleValue());
+			return Double.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -94,7 +94,7 @@ public class AnimAudioElement extends OdfElement {
 	public void setAnimAudioLevelAttribute(Double animAudioLevelValue) {
 		AnimAudioLevelAttribute attr = new AnimAudioLevelAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setDoubleValue(animAudioLevelValue.doubleValue());
+		attr.setValue(animAudioLevelValue.toString());
 	}
 
 	/**
@@ -345,7 +345,7 @@ public class AnimAudioElement extends OdfElement {
 	public Integer getSmilRepeatCountAttribute() {
 		SmilRepeatCountAttribute attr = (SmilRepeatCountAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "repeatCount");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -358,7 +358,7 @@ public class AnimAudioElement extends OdfElement {
 	public void setSmilRepeatCountAttribute(Integer smilRepeatCountValue) {
 		SmilRepeatCountAttribute attr = new SmilRepeatCountAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(smilRepeatCountValue.intValue());
+		attr.setValue(smilRepeatCountValue.toString());
 	}
 
 	/**

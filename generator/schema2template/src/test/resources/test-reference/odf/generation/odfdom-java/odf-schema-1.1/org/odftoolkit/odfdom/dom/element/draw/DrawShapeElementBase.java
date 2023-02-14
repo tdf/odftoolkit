@@ -168,7 +168,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
 	public Integer getDrawZIndexAttribute() {
 		DrawZIndexAttribute attr = (DrawZIndexAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "z-index");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -181,7 +181,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
 	public void setDrawZIndexAttribute(Integer drawZIndexValue) {
 		DrawZIndexAttribute attr = new DrawZIndexAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(drawZIndexValue.intValue());
+		attr.setValue(drawZIndexValue.toString());
 	}
 
 	/**
@@ -312,7 +312,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
 	public Boolean getTableTableBackgroundAttribute() {
 		TableTableBackgroundAttribute attr = (TableTableBackgroundAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "table-background");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -325,7 +325,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
 	public void setTableTableBackgroundAttribute(Boolean tableTableBackgroundValue) {
 		TableTableBackgroundAttribute attr = new TableTableBackgroundAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableTableBackgroundValue.booleanValue());
+		attr.setValue(tableTableBackgroundValue.toString());
 	}
 
 	/**
@@ -336,7 +336,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
 	public Integer getTextAnchorPageNumberAttribute() {
 		TextAnchorPageNumberAttribute attr = (TextAnchorPageNumberAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "anchor-page-number");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -349,7 +349,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
 	public void setTextAnchorPageNumberAttribute(Integer textAnchorPageNumberValue) {
 		TextAnchorPageNumberAttribute attr = new TextAnchorPageNumberAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(textAnchorPageNumberValue.intValue());
+		attr.setValue(textAnchorPageNumberValue.toString());
 	}
 
 	/**

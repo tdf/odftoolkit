@@ -97,7 +97,7 @@ public class StyleDropCapElement extends OdfStylableElement {
 	public Integer getStyleLengthAttribute() {
 		StyleLengthAttribute attr = (StyleLengthAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "length");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return Integer.valueOf(StyleLengthAttribute.DEFAULT_VALUE);
 	}
@@ -110,7 +110,7 @@ public class StyleDropCapElement extends OdfStylableElement {
 	public void setStyleLengthAttribute(Integer styleLengthValue) {
 		StyleLengthAttribute attr = new StyleLengthAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(styleLengthValue.intValue());
+		attr.setValue(styleLengthValue.toString());
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class StyleDropCapElement extends OdfStylableElement {
 	public Integer getStyleLinesAttribute() {
 		StyleLinesAttribute attr = (StyleLinesAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "lines");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return Integer.valueOf(StyleLinesAttribute.DEFAULT_VALUE);
 	}
@@ -134,7 +134,7 @@ public class StyleDropCapElement extends OdfStylableElement {
 	public void setStyleLinesAttribute(Integer styleLinesValue) {
 		StyleLinesAttribute attr = new StyleLinesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(styleLinesValue.intValue());
+		attr.setValue(styleLinesValue.toString());
 	}
 
 	/**

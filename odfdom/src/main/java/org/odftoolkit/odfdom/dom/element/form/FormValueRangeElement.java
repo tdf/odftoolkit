@@ -150,7 +150,7 @@ public class FormValueRangeElement extends OdfElement {
     FormDisabledAttribute attr =
         (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
   }
@@ -164,7 +164,7 @@ public class FormValueRangeElement extends OdfElement {
   public void setFormDisabledAttribute(Boolean formDisabledValue) {
     FormDisabledAttribute attr = new FormDisabledAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formDisabledValue.booleanValue());
+    attr.setValue(formDisabledValue.toString());
   }
 
   /**
@@ -226,14 +226,14 @@ public class FormValueRangeElement extends OdfElement {
    * Receives the value of the ODFDOM attribute representation <code>FormMaxValueAttribute</code> ,
    * See {@odf.attribute form:max-value}
    *
-   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
-   *     and no default value defined.
+   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
    */
-  public String getFormMaxValueAttribute() {
+  public Integer getFormMaxValueAttribute() {
     FormMaxValueAttribute attr =
         (FormMaxValueAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "max-value");
-    if (attr != null) {
-      return String.valueOf(attr.getValue());
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -242,26 +242,26 @@ public class FormValueRangeElement extends OdfElement {
    * Sets the value of ODFDOM attribute representation <code>FormMaxValueAttribute</code> , See
    * {@odf.attribute form:max-value}
    *
-   * @param formMaxValueValue The type is <code>String</code>
+   * @param formMaxValueValue The type is <code>Integer</code>
    */
-  public void setFormMaxValueAttribute(String formMaxValueValue) {
+  public void setFormMaxValueAttribute(Integer formMaxValueValue) {
     FormMaxValueAttribute attr = new FormMaxValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setValue(formMaxValueValue);
+    attr.setValue(formMaxValueValue.toString());
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FormMinValueAttribute</code> ,
    * See {@odf.attribute form:min-value}
    *
-   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
-   *     and no default value defined.
+   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
    */
-  public String getFormMinValueAttribute() {
+  public Integer getFormMinValueAttribute() {
     FormMinValueAttribute attr =
         (FormMinValueAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "min-value");
-    if (attr != null) {
-      return String.valueOf(attr.getValue());
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -270,12 +270,12 @@ public class FormValueRangeElement extends OdfElement {
    * Sets the value of ODFDOM attribute representation <code>FormMinValueAttribute</code> , See
    * {@odf.attribute form:min-value}
    *
-   * @param formMinValueValue The type is <code>String</code>
+   * @param formMinValueValue The type is <code>Integer</code>
    */
-  public void setFormMinValueAttribute(String formMinValueValue) {
+  public void setFormMinValueAttribute(Integer formMinValueValue) {
     FormMinValueAttribute attr = new FormMinValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setValue(formMinValueValue);
+    attr.setValue(formMinValueValue.toString());
   }
 
   /**
@@ -344,7 +344,7 @@ public class FormValueRangeElement extends OdfElement {
     FormPageStepSizeAttribute attr =
         (FormPageStepSizeAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "page-step-size");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -358,7 +358,7 @@ public class FormValueRangeElement extends OdfElement {
   public void setFormPageStepSizeAttribute(Integer formPageStepSizeValue) {
     FormPageStepSizeAttribute attr = new FormPageStepSizeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(formPageStepSizeValue.intValue());
+    attr.setValue(formPageStepSizeValue.toString());
   }
 
   /**
@@ -372,7 +372,7 @@ public class FormValueRangeElement extends OdfElement {
     FormPrintableAttribute attr =
         (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);
   }
@@ -386,7 +386,7 @@ public class FormValueRangeElement extends OdfElement {
   public void setFormPrintableAttribute(Boolean formPrintableValue) {
     FormPrintableAttribute attr = new FormPrintableAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formPrintableValue.booleanValue());
+    attr.setValue(formPrintableValue.toString());
   }
 
   /**
@@ -400,7 +400,7 @@ public class FormValueRangeElement extends OdfElement {
     FormRepeatAttribute attr =
         (FormRepeatAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "repeat");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -414,7 +414,7 @@ public class FormValueRangeElement extends OdfElement {
   public void setFormRepeatAttribute(Boolean formRepeatValue) {
     FormRepeatAttribute attr = new FormRepeatAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formRepeatValue.booleanValue());
+    attr.setValue(formRepeatValue.toString());
   }
 
   /**
@@ -428,7 +428,7 @@ public class FormValueRangeElement extends OdfElement {
     FormStepSizeAttribute attr =
         (FormStepSizeAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "step-size");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return Integer.valueOf(FormStepSizeAttribute.DEFAULT_VALUE);
   }
@@ -442,7 +442,7 @@ public class FormValueRangeElement extends OdfElement {
   public void setFormStepSizeAttribute(Integer formStepSizeValue) {
     FormStepSizeAttribute attr = new FormStepSizeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(formStepSizeValue.intValue());
+    attr.setValue(formStepSizeValue.toString());
   }
 
   /**
@@ -456,7 +456,7 @@ public class FormValueRangeElement extends OdfElement {
     FormTabIndexAttribute attr =
         (FormTabIndexAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-index");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return Integer.valueOf(FormTabIndexAttribute.DEFAULT_VALUE);
   }
@@ -470,7 +470,7 @@ public class FormValueRangeElement extends OdfElement {
   public void setFormTabIndexAttribute(Integer formTabIndexValue) {
     FormTabIndexAttribute attr = new FormTabIndexAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(formTabIndexValue.intValue());
+    attr.setValue(formTabIndexValue.toString());
   }
 
   /**
@@ -484,7 +484,7 @@ public class FormValueRangeElement extends OdfElement {
     FormTabStopAttribute attr =
         (FormTabStopAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-stop");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormTabStopAttribute.DEFAULT_VALUE);
   }
@@ -498,7 +498,7 @@ public class FormValueRangeElement extends OdfElement {
   public void setFormTabStopAttribute(Boolean formTabStopValue) {
     FormTabStopAttribute attr = new FormTabStopAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formTabStopValue.booleanValue());
+    attr.setValue(formTabStopValue.toString());
   }
 
   /**

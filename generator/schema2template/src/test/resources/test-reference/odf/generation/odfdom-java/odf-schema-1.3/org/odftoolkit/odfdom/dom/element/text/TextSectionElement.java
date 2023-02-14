@@ -173,7 +173,7 @@ public class TextSectionElement extends OdfStylableElement {
 	public Boolean getTextProtectedAttribute() {
 		TextProtectedAttribute attr = (TextProtectedAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "protected");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -186,7 +186,7 @@ public class TextSectionElement extends OdfStylableElement {
 	public void setTextProtectedAttribute(Boolean textProtectedValue) {
 		TextProtectedAttribute attr = new TextProtectedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textProtectedValue.booleanValue());
+		attr.setValue(textProtectedValue.toString());
 	}
 
 	/**

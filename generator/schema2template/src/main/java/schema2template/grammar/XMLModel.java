@@ -367,30 +367,34 @@ public class XMLModel {
         System.err.println(dataTypesIter.next().toString());
       }
     } else { // @draw:concave just uses 'false' and 'true' without datatype
-        /** As there are sometimes multiple times definitions of the same attribute for an element 
-         * for an example https://docs.oasis-open.org/office/OpenDocument/v1.3/os/schemas/OpenDocument-v1.3-schema-rng.html#13591
-         * which was taken as boolean, all attributes definitions of all elements of the same name are now takin into account!
-         * BETTER FOR THE FUTURE: If the attribute definitons only for a certain element would be taken into account, e.g.
-         * https://docs.oasis-open.org/office/OpenDocument/v1.3/os/schemas/OpenDocument-v1.3-schema-rng.html#6508
-        */
-        PuzzleComponent elements = getElement(qParentName);
-        List<String> attributeValues = null;
-        if(elements != null && elements.getCollection().size() > 0){
-            attributeValues = new ArrayList<String>();
-        }
-        for(PuzzlePiece ppElement : elements.getCollection()){
-            PuzzlePieceSet attributes = ppElement.getAttributes();
-            for(PuzzlePiece ppAttribute : attributes.getCollection()){
-                if(ppAttribute.getQName().equals(qName)){
-                    for(PuzzlePiece ppValue : ppAttribute.getValues().getCollection()){
-                        // strange that the value has a localName (but the puzzlePiece abstraction should be overworked anyway)
-                        attributeValues.add(ppValue.getLocalName());
-                    }
-                }
+      /**
+       * As there are sometimes multiple times definitions of the same attribute for an element for
+       * an example
+       * https://docs.oasis-open.org/office/OpenDocument/v1.3/os/schemas/OpenDocument-v1.3-schema-rng.html#13591
+       * which was taken as boolean, all attributes definitions of all elements of the same name are
+       * now takin into account! BETTER FOR THE FUTURE: If the attribute definitons only for a
+       * certain element would be taken into account, e.g.
+       * https://docs.oasis-open.org/office/OpenDocument/v1.3/os/schemas/OpenDocument-v1.3-schema-rng.html#6508
+       */
+      PuzzleComponent elements = getElement(qParentName);
+      List<String> attributeValues = null;
+      if (elements != null && elements.getCollection().size() > 0) {
+        attributeValues = new ArrayList<String>();
+      }
+      for (PuzzlePiece ppElement : elements.getCollection()) {
+        PuzzlePieceSet attributes = ppElement.getAttributes();
+        for (PuzzlePiece ppAttribute : attributes.getCollection()) {
+          if (ppAttribute.getQName().equals(qName)) {
+            for (PuzzlePiece ppValue : ppAttribute.getValues().getCollection()) {
+              // strange that the value has a localName (but the puzzlePiece abstraction should be
+              // overworked anyway)
+              attributeValues.add(ppValue.getLocalName());
             }
-        }        
-        
-      for (String value : attributeValues) {        
+          }
+        }
+      }
+
+      for (String value : attributeValues) {
         if (value.equals("true") || value.equals("false")) {
           isBoolean = Boolean.TRUE;
         } else {

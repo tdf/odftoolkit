@@ -80,7 +80,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
     TableColumnAttribute attr =
         (TableColumnAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "column");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -94,7 +94,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public void setTableColumnAttribute(Integer tableColumnValue) {
     TableColumnAttribute attr = new TableColumnAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableColumnValue.intValue());
+    attr.setValue(tableColumnValue.toString());
   }
 
   /**
@@ -108,7 +108,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
     TableEndColumnAttribute attr =
         (TableEndColumnAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "end-column");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -122,7 +122,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public void setTableEndColumnAttribute(Integer tableEndColumnValue) {
     TableEndColumnAttribute attr = new TableEndColumnAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableEndColumnValue.intValue());
+    attr.setValue(tableEndColumnValue.toString());
   }
 
   /**
@@ -136,7 +136,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
     TableEndRowAttribute attr =
         (TableEndRowAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "end-row");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -150,7 +150,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public void setTableEndRowAttribute(Integer tableEndRowValue) {
     TableEndRowAttribute attr = new TableEndRowAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableEndRowValue.intValue());
+    attr.setValue(tableEndRowValue.toString());
   }
 
   /**
@@ -164,7 +164,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
     TableEndTableAttribute attr =
         (TableEndTableAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "end-table");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -178,7 +178,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public void setTableEndTableAttribute(Integer tableEndTableValue) {
     TableEndTableAttribute attr = new TableEndTableAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableEndTableValue.intValue());
+    attr.setValue(tableEndTableValue.toString());
   }
 
   /**
@@ -191,7 +191,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public Integer getTableRowAttribute() {
     TableRowAttribute attr = (TableRowAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "row");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -205,7 +205,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public void setTableRowAttribute(Integer tableRowValue) {
     TableRowAttribute attr = new TableRowAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableRowValue.intValue());
+    attr.setValue(tableRowValue.toString());
   }
 
   /**
@@ -219,7 +219,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
     TableStartColumnAttribute attr =
         (TableStartColumnAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "start-column");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -233,7 +233,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public void setTableStartColumnAttribute(Integer tableStartColumnValue) {
     TableStartColumnAttribute attr = new TableStartColumnAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableStartColumnValue.intValue());
+    attr.setValue(tableStartColumnValue.toString());
   }
 
   /**
@@ -247,7 +247,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
     TableStartRowAttribute attr =
         (TableStartRowAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "start-row");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -261,7 +261,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public void setTableStartRowAttribute(Integer tableStartRowValue) {
     TableStartRowAttribute attr = new TableStartRowAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableStartRowValue.intValue());
+    attr.setValue(tableStartRowValue.toString());
   }
 
   /**
@@ -275,7 +275,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
     TableStartTableAttribute attr =
         (TableStartTableAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "start-table");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -289,7 +289,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public void setTableStartTableAttribute(Integer tableStartTableValue) {
     TableStartTableAttribute attr = new TableStartTableAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableStartTableValue.intValue());
+    attr.setValue(tableStartTableValue.toString());
   }
 
   /**
@@ -303,7 +303,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
     TableTableAttribute attr =
         (TableTableAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "table");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -317,7 +317,7 @@ public class TableTargetRangeAddressElement extends OdfElement {
   public void setTableTableAttribute(Integer tableTableValue) {
     TableTableAttribute attr = new TableTableAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableTableValue.intValue());
+    attr.setValue(tableTableValue.toString());
   }
 
   /**

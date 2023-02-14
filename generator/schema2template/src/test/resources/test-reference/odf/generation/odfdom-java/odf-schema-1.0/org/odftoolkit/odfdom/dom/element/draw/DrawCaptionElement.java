@@ -318,12 +318,12 @@ public class DrawCaptionElement extends DrawShapeElementBase {
 	 * Create child element {@odf.element draw:glue-point}.
 	 *
 	 * @param drawAlignValue  the <code>String</code> value of <code>DrawAlignAttribute</code>, see {@odf.attribute  draw:align} at specification
-	 * @param drawIdValue  the <code>String</code> value of <code>DrawIdAttribute</code>, see {@odf.attribute  draw:id} at specification
+	 * @param drawIdValue  the <code>Integer</code> value of <code>DrawIdAttribute</code>, see {@odf.attribute  draw:id} at specification
 	 * @param svgXValue  the <code>String</code> value of <code>SvgXAttribute</code>, see {@odf.attribute  svg:x} at specification
 	 * @param svgYValue  the <code>String</code> value of <code>SvgYAttribute</code>, see {@odf.attribute  svg:y} at specification
 	 * @return the element {@odf.element draw:glue-point}
 	 */
-	 public DrawGluePointElement newDrawGluePointElement(String drawAlignValue, String drawIdValue, String svgXValue, String svgYValue) {
+	 public DrawGluePointElement newDrawGluePointElement(String drawAlignValue, int drawIdValue, String svgXValue, String svgYValue) {
 		DrawGluePointElement drawGluePoint = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawGluePointElement.class);
 		drawGluePoint.setDrawAlignAttribute(drawAlignValue);
 		drawGluePoint.setDrawIdAttribute(drawIdValue);

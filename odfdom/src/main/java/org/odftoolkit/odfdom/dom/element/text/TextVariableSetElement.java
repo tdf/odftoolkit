@@ -81,7 +81,7 @@ public class TextVariableSetElement extends OdfElement {
     OfficeBooleanValueAttribute attr =
         (OfficeBooleanValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "boolean-value");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -96,7 +96,7 @@ public class TextVariableSetElement extends OdfElement {
     OfficeBooleanValueAttribute attr =
         new OfficeBooleanValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(officeBooleanValueValue.booleanValue());
+    attr.setValue(officeBooleanValueValue.toString());
   }
 
   /**
@@ -225,7 +225,7 @@ public class TextVariableSetElement extends OdfElement {
     OfficeValueAttribute attr =
         (OfficeValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "value");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return Double.valueOf(attr.getValue());
     }
     return null;
   }
@@ -239,7 +239,7 @@ public class TextVariableSetElement extends OdfElement {
   public void setOfficeValueAttribute(Double officeValueValue) {
     OfficeValueAttribute attr = new OfficeValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(officeValueValue.doubleValue());
+    attr.setValue(officeValueValue.toString());
   }
 
   /**

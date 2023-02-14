@@ -116,7 +116,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	public Boolean getOfficeBooleanValueAttribute() {
 		OfficeBooleanValueAttribute attr = (OfficeBooleanValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "boolean-value");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -129,7 +129,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	public void setOfficeBooleanValueAttribute(Boolean officeBooleanValueValue) {
 		OfficeBooleanValueAttribute attr = new OfficeBooleanValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(officeBooleanValueValue.booleanValue());
+		attr.setValue(officeBooleanValueValue.toString());
 	}
 
 	/**
@@ -236,7 +236,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	public Double getOfficeValueAttribute() {
 		OfficeValueAttribute attr = (OfficeValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "value");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Double.valueOf(attr.doubleValue());
+			return Double.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -249,7 +249,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	public void setOfficeValueAttribute(Double officeValueValue) {
 		OfficeValueAttribute attr = new OfficeValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setDoubleValue(officeValueValue.doubleValue());
+		attr.setValue(officeValueValue.toString());
 	}
 
 	/**
@@ -332,7 +332,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	public Integer getTableNumberColumnsRepeatedAttribute() {
 		TableNumberColumnsRepeatedAttribute attr = (TableNumberColumnsRepeatedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "number-columns-repeated");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return Integer.valueOf(TableNumberColumnsRepeatedAttribute.DEFAULT_VALUE);
 	}
@@ -345,7 +345,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	public void setTableNumberColumnsRepeatedAttribute(Integer tableNumberColumnsRepeatedValue) {
 		TableNumberColumnsRepeatedAttribute attr = new TableNumberColumnsRepeatedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(tableNumberColumnsRepeatedValue.intValue());
+		attr.setValue(tableNumberColumnsRepeatedValue.toString());
 	}
 
 	/**
@@ -356,7 +356,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	public Boolean getTableProtectAttribute() {
 		TableProtectAttribute attr = (TableProtectAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "protect");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableProtectAttribute.DEFAULT_VALUE);
 	}
@@ -369,7 +369,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	public void setTableProtectAttribute(Boolean tableProtectValue) {
 		TableProtectAttribute attr = new TableProtectAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableProtectValue.booleanValue());
+		attr.setValue(tableProtectValue.toString());
 	}
 
 	/**
@@ -380,7 +380,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	public Boolean getTableProtectedAttribute() {
 		TableProtectedAttribute attr = (TableProtectedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "protected");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableProtectedAttribute.DEFAULT_VALUE);
 	}
@@ -393,7 +393,7 @@ public abstract class TableTableCellElementBase extends OdfStylableElement {
 	public void setTableProtectedAttribute(Boolean tableProtectedValue) {
 		TableProtectedAttribute attr = new TableProtectedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableProtectedValue.booleanValue());
+		attr.setValue(tableProtectedValue.toString());
 	}
 
 	/**

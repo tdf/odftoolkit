@@ -73,7 +73,7 @@ public class OfficeDdeSourceElement extends OdfElement {
 	public Boolean getOfficeAutomaticUpdateAttribute() {
 		OfficeAutomaticUpdateAttribute attr = (OfficeAutomaticUpdateAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "automatic-update");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(OfficeAutomaticUpdateAttribute.DEFAULT_VALUE);
 	}
@@ -86,7 +86,7 @@ public class OfficeDdeSourceElement extends OdfElement {
 	public void setOfficeAutomaticUpdateAttribute(Boolean officeAutomaticUpdateValue) {
 		OfficeAutomaticUpdateAttribute attr = new OfficeAutomaticUpdateAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(officeAutomaticUpdateValue.booleanValue());
+		attr.setValue(officeAutomaticUpdateValue.toString());
 	}
 
 	/**

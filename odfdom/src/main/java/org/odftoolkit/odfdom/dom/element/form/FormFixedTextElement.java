@@ -112,7 +112,7 @@ public class FormFixedTextElement extends OdfElement {
     FormDisabledAttribute attr =
         (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
   }
@@ -126,7 +126,7 @@ public class FormFixedTextElement extends OdfElement {
   public void setFormDisabledAttribute(Boolean formDisabledValue) {
     FormDisabledAttribute attr = new FormDisabledAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formDisabledValue.booleanValue());
+    attr.setValue(formDisabledValue.toString());
   }
 
   /**
@@ -222,7 +222,7 @@ public class FormFixedTextElement extends OdfElement {
     FormMultiLineAttribute attr =
         (FormMultiLineAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "multi-line");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormMultiLineAttribute.DEFAULT_VALUE);
   }
@@ -236,7 +236,7 @@ public class FormFixedTextElement extends OdfElement {
   public void setFormMultiLineAttribute(Boolean formMultiLineValue) {
     FormMultiLineAttribute attr = new FormMultiLineAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formMultiLineValue.booleanValue());
+    attr.setValue(formMultiLineValue.toString());
   }
 
   /**
@@ -277,7 +277,7 @@ public class FormFixedTextElement extends OdfElement {
     FormPrintableAttribute attr =
         (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);
   }
@@ -291,7 +291,7 @@ public class FormFixedTextElement extends OdfElement {
   public void setFormPrintableAttribute(Boolean formPrintableValue) {
     FormPrintableAttribute attr = new FormPrintableAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formPrintableValue.booleanValue());
+    attr.setValue(formPrintableValue.toString());
   }
 
   /**

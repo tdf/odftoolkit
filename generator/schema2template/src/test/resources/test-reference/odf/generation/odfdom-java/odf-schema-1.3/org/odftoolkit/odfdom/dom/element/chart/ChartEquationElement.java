@@ -74,7 +74,7 @@ public class ChartEquationElement extends OdfElement {
 	public Boolean getChartAutomaticContentAttribute() {
 		ChartAutomaticContentAttribute attr = (ChartAutomaticContentAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "automatic-content");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(ChartAutomaticContentAttribute.DEFAULT_VALUE);
 	}
@@ -87,7 +87,7 @@ public class ChartEquationElement extends OdfElement {
 	public void setChartAutomaticContentAttribute(Boolean chartAutomaticContentValue) {
 		ChartAutomaticContentAttribute attr = new ChartAutomaticContentAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(chartAutomaticContentValue.booleanValue());
+		attr.setValue(chartAutomaticContentValue.toString());
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class ChartEquationElement extends OdfElement {
 	public Boolean getChartDisplayEquationAttribute() {
 		ChartDisplayEquationAttribute attr = (ChartDisplayEquationAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "display-equation");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(ChartDisplayEquationAttribute.DEFAULT_VALUE);
 	}
@@ -111,7 +111,7 @@ public class ChartEquationElement extends OdfElement {
 	public void setChartDisplayEquationAttribute(Boolean chartDisplayEquationValue) {
 		ChartDisplayEquationAttribute attr = new ChartDisplayEquationAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(chartDisplayEquationValue.booleanValue());
+		attr.setValue(chartDisplayEquationValue.toString());
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class ChartEquationElement extends OdfElement {
 	public Boolean getChartDisplayRSquareAttribute() {
 		ChartDisplayRSquareAttribute attr = (ChartDisplayRSquareAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "display-r-square");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(ChartDisplayRSquareAttribute.DEFAULT_VALUE);
 	}
@@ -135,7 +135,7 @@ public class ChartEquationElement extends OdfElement {
 	public void setChartDisplayRSquareAttribute(Boolean chartDisplayRSquareValue) {
 		ChartDisplayRSquareAttribute attr = new ChartDisplayRSquareAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(chartDisplayRSquareValue.booleanValue());
+		attr.setValue(chartDisplayRSquareValue.toString());
 	}
 
 	/**

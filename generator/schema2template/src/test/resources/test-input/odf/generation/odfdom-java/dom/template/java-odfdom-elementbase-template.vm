@@ -246,11 +246,7 @@ public abstract class $className extends $superClassName {
 #else
 		if (attr != null) {
 #end
-#if ($simpleValue!="")
-			return ${valueObject}.valueOf(attr.${simpleValue}Value());
-#else
 			return ${valueObject}.valueOf(attr.getValue());
-#end
 		}
 #if ($odfModel.getDefaultAttributeValue($attr, $base))
 #set ($defaultValue = ${xmlModel.escapeLiteral($odfModel.getDefaultAttributeValue($attr, $base))})
@@ -285,7 +281,7 @@ public abstract class $className extends $superClassName {
 #if ($valueObject == "String")
 		attr.setValue($aParam);
 #else
-		attr.set${xmlModel.camelCase($simpleValue)}Value(${aParam}.${simpleValue}Value());
+		attr.setValue(${aParam}.toString());
 #end
 	}
 #end
@@ -317,8 +313,8 @@ public abstract class $className extends $superClassName {
 #set ($params="")
 #foreach ($ch_attr in $ch_attributes)
 #if (${child.isMandatory($ch_attr)})
-#set($ch_attri = ${xmlModel.getAttribute($ch_attr.getQName())})
-#set ($ch_ValueObject = "String")
+#set($ch_attri = ${xmlModel.getAttribute($ch_attr.getQName(), $ch.getQName())})
+#set($ch_ValueObject = ${xmlModel.getAttributeDataType($ch_attr.getQName(), $ch.getQName())})
 #set ($ch_SimpleValue = "")
 #set ($ch_DataTypes = ${ch_attri.getDatatypes().withoutMultiples()})
 #set ($ch_ValueTypes = ${codeModel.getValuetypes($ch_DataTypes)})

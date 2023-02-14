@@ -201,7 +201,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase {
     StyleEditableAttribute attr =
         (StyleEditableAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "editable");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -215,21 +215,21 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase {
   public void setStyleEditableAttribute(Boolean styleEditableValue) {
     StyleEditableAttribute attr = new StyleEditableAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleEditableValue.booleanValue());
+    attr.setValue(styleEditableValue.toString());
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>StyleProtectAttribute</code> ,
    * See {@odf.attribute style:protect}
    *
-   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
-   *     and no default value defined.
+   * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
    */
-  public String getStyleProtectAttribute() {
+  public Boolean getStyleProtectAttribute() {
     StyleProtectAttribute attr =
         (StyleProtectAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "protect");
-    if (attr != null) {
-      return String.valueOf(attr.getValue());
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -238,12 +238,12 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase {
    * Sets the value of ODFDOM attribute representation <code>StyleProtectAttribute</code> , See
    * {@odf.attribute style:protect}
    *
-   * @param styleProtectValue The type is <code>String</code>
+   * @param styleProtectValue The type is <code>Boolean</code>
    */
-  public void setStyleProtectAttribute(String styleProtectValue) {
+  public void setStyleProtectAttribute(Boolean styleProtectValue) {
     StyleProtectAttribute attr = new StyleProtectAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setValue(styleProtectValue);
+    attr.setValue(styleProtectValue.toString());
   }
 
   /**
@@ -287,7 +287,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase {
         (TextDontBalanceTextColumnsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "dont-balance-text-columns");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -302,7 +302,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase {
     TextDontBalanceTextColumnsAttribute attr =
         new TextDontBalanceTextColumnsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textDontBalanceTextColumnsValue.booleanValue());
+    attr.setValue(textDontBalanceTextColumnsValue.toString());
   }
 
   /**

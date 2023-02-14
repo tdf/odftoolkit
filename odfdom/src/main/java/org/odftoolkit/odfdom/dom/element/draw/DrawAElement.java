@@ -107,7 +107,7 @@ public class DrawAElement extends OdfElement {
     OfficeServerMapAttribute attr =
         (OfficeServerMapAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "server-map");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(OfficeServerMapAttribute.DEFAULT_VALUE);
   }
@@ -121,7 +121,7 @@ public class DrawAElement extends OdfElement {
   public void setOfficeServerMapAttribute(Boolean officeServerMapValue) {
     OfficeServerMapAttribute attr = new OfficeServerMapAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(officeServerMapValue.booleanValue());
+    attr.setValue(officeServerMapValue.toString());
   }
 
   /**

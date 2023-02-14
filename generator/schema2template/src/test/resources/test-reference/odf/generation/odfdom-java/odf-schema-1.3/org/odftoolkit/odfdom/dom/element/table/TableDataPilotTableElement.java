@@ -124,7 +124,7 @@ public class TableDataPilotTableElement extends OdfElement {
 	public Boolean getTableDrillDownOnDoubleClickAttribute() {
 		TableDrillDownOnDoubleClickAttribute attr = (TableDrillDownOnDoubleClickAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "drill-down-on-double-click");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableDrillDownOnDoubleClickAttribute.DEFAULT_VALUE);
 	}
@@ -137,7 +137,7 @@ public class TableDataPilotTableElement extends OdfElement {
 	public void setTableDrillDownOnDoubleClickAttribute(Boolean tableDrillDownOnDoubleClickValue) {
 		TableDrillDownOnDoubleClickAttribute attr = new TableDrillDownOnDoubleClickAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableDrillDownOnDoubleClickValue.booleanValue());
+		attr.setValue(tableDrillDownOnDoubleClickValue.toString());
 	}
 
 	/**
@@ -172,7 +172,7 @@ public class TableDataPilotTableElement extends OdfElement {
 	public Boolean getTableIdentifyCategoriesAttribute() {
 		TableIdentifyCategoriesAttribute attr = (TableIdentifyCategoriesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "identify-categories");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableIdentifyCategoriesAttribute.DEFAULT_VALUE);
 	}
@@ -185,7 +185,7 @@ public class TableDataPilotTableElement extends OdfElement {
 	public void setTableIdentifyCategoriesAttribute(Boolean tableIdentifyCategoriesValue) {
 		TableIdentifyCategoriesAttribute attr = new TableIdentifyCategoriesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableIdentifyCategoriesValue.booleanValue());
+		attr.setValue(tableIdentifyCategoriesValue.toString());
 	}
 
 	/**
@@ -196,7 +196,7 @@ public class TableDataPilotTableElement extends OdfElement {
 	public Boolean getTableIgnoreEmptyRowsAttribute() {
 		TableIgnoreEmptyRowsAttribute attr = (TableIgnoreEmptyRowsAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "ignore-empty-rows");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableIgnoreEmptyRowsAttribute.DEFAULT_VALUE);
 	}
@@ -209,7 +209,7 @@ public class TableDataPilotTableElement extends OdfElement {
 	public void setTableIgnoreEmptyRowsAttribute(Boolean tableIgnoreEmptyRowsValue) {
 		TableIgnoreEmptyRowsAttribute attr = new TableIgnoreEmptyRowsAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableIgnoreEmptyRowsValue.booleanValue());
+		attr.setValue(tableIgnoreEmptyRowsValue.toString());
 	}
 
 	/**
@@ -246,7 +246,7 @@ public class TableDataPilotTableElement extends OdfElement {
 	public Boolean getTableShowFilterButtonAttribute() {
 		TableShowFilterButtonAttribute attr = (TableShowFilterButtonAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "show-filter-button");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableShowFilterButtonAttribute.DEFAULT_VALUE);
 	}
@@ -259,7 +259,7 @@ public class TableDataPilotTableElement extends OdfElement {
 	public void setTableShowFilterButtonAttribute(Boolean tableShowFilterButtonValue) {
 		TableShowFilterButtonAttribute attr = new TableShowFilterButtonAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableShowFilterButtonValue.booleanValue());
+		attr.setValue(tableShowFilterButtonValue.toString());
 	}
 
 	/**

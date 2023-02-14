@@ -70,7 +70,7 @@ public class TableSubtotalRulesElement extends OdfElement {
 	public Boolean getTableBindStylesToContentAttribute() {
 		TableBindStylesToContentAttribute attr = (TableBindStylesToContentAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "bind-styles-to-content");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableBindStylesToContentAttribute.DEFAULT_VALUE);
 	}
@@ -83,7 +83,7 @@ public class TableSubtotalRulesElement extends OdfElement {
 	public void setTableBindStylesToContentAttribute(Boolean tableBindStylesToContentValue) {
 		TableBindStylesToContentAttribute attr = new TableBindStylesToContentAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableBindStylesToContentValue.booleanValue());
+		attr.setValue(tableBindStylesToContentValue.toString());
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class TableSubtotalRulesElement extends OdfElement {
 	public Boolean getTableCaseSensitiveAttribute() {
 		TableCaseSensitiveAttribute attr = (TableCaseSensitiveAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "case-sensitive");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableCaseSensitiveAttribute.DEFAULT_VALUE_FALSE);
 	}
@@ -107,7 +107,7 @@ public class TableSubtotalRulesElement extends OdfElement {
 	public void setTableCaseSensitiveAttribute(Boolean tableCaseSensitiveValue) {
 		TableCaseSensitiveAttribute attr = new TableCaseSensitiveAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableCaseSensitiveValue.booleanValue());
+		attr.setValue(tableCaseSensitiveValue.toString());
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class TableSubtotalRulesElement extends OdfElement {
 	public Boolean getTablePageBreaksOnGroupChangeAttribute() {
 		TablePageBreaksOnGroupChangeAttribute attr = (TablePageBreaksOnGroupChangeAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "page-breaks-on-group-change");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TablePageBreaksOnGroupChangeAttribute.DEFAULT_VALUE);
 	}
@@ -131,7 +131,7 @@ public class TableSubtotalRulesElement extends OdfElement {
 	public void setTablePageBreaksOnGroupChangeAttribute(Boolean tablePageBreaksOnGroupChangeValue) {
 		TablePageBreaksOnGroupChangeAttribute attr = new TablePageBreaksOnGroupChangeAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tablePageBreaksOnGroupChangeValue.booleanValue());
+		attr.setValue(tablePageBreaksOnGroupChangeValue.toString());
 	}
 
 	/**

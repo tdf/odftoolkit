@@ -69,7 +69,7 @@ public class TextLabelElement extends OdfElement {
 	public Boolean getTextCurrentSelectedAttribute() {
 		TextCurrentSelectedAttribute attr = (TextCurrentSelectedAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "current-selected");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -82,7 +82,7 @@ public class TextLabelElement extends OdfElement {
 	public void setTextCurrentSelectedAttribute(Boolean textCurrentSelectedValue) {
 		TextCurrentSelectedAttribute attr = new TextCurrentSelectedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textCurrentSelectedValue.booleanValue());
+		attr.setValue(textCurrentSelectedValue.toString());
 	}
 
 	/**
