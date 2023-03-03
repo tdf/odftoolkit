@@ -30,6 +30,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import schema2template.GenerationParameters;
 import schema2template.SchemaToTemplate;
+import static schema2template.grammar.ConstantsBuildEnv.GENERATION_REFERENCE_BASE_DIR;
+import static schema2template.grammar.DirectoryCompare.compareDirectories;
 
 public class GenerationOdfdomPythonTest {
 
@@ -78,8 +80,8 @@ public class GenerationOdfdomPythonTest {
       throw new RuntimeException(e);
     }
     // Changing order of multiple puzzlepieces makes file comparison unuseable
-    /*compareDirectories(
+    compareDirectories(
     GENERATION_TARGET_BASE_DIR + ODFDOM_PYTHON_DIRECTORY,
-    GENERATION_REFERENCE_BASE_DIR + ODFDOM_PYTHON_DIRECTORY);*/
+    GENERATION_REFERENCE_BASE_DIR + ODFDOM_PYTHON_DIRECTORY);
   }
 }
