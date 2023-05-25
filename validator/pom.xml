@@ -101,7 +101,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
                 <configuration>
-                    <archiveClasses>true</archiveClasses>
+                    <attachClasses>true</attachClasses>
                     <archive>
                         <index>true</index>
                         <manifest>
