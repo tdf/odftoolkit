@@ -105,7 +105,7 @@
                     <archive>
                         <index>true</index>
                         <manifest>
-                            <mainClass>org.odftoolkit.validator.Main</mainClass>
+                            <mainClass>org.odftoolkit.odfvalidator.Main</mainClass>
                         </manifest>
                         <manifestEntries>
                             <version>${project.version}</version>
@@ -295,7 +295,7 @@
     <name>ODF Validator</name>
     <description>
         ODF Validator is a tool that validates OpenDocument files and checks them for certain conformance criteria.
-    </description>
+</description>
     <url>https://odfvalidator.org/</url>
     <inceptionYear>2008</inceptionYear>
     <licenses>
