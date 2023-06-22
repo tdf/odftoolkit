@@ -128,6 +128,20 @@ public class TextStyleNavigation extends Navigation {
     return (mCurrentSelectedItem != null);
   }
 
+  /*
+   * Return the element from the current matching selection.
+   * Use hasNext() to navigate to the next element.
+   *
+   * @return OdfElement of the current item or null if not element exists.
+   */
+  @Override
+  public OdfElement next() {
+    if (getCurrentItem()!=null) {
+      return getCurrentItem().getElement();
+    }
+    return null;
+  }
+
   /**
    * check if the element has the specified style properties
    *
