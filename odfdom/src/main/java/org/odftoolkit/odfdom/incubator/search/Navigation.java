@@ -19,6 +19,7 @@
 package org.odftoolkit.odfdom.incubator.search;
 
 import org.w3c.dom.Node;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 
 /**
  * Abstract class Navigation used to navigate the document and find the matched element by the user
@@ -35,6 +36,14 @@ public abstract class Navigation {
    */
   public abstract boolean hasNext();
   // abstract public void gotoPrevious();
+
+  /*
+   * Return the element from the current matching selection.
+   * Use hasNext() to navigate to the next element.
+   *
+   * @return OdfElement of the current item or null if not element exists.
+   */
+  public abstract OdfElement next();
 
   /**
    * get the current Selection result

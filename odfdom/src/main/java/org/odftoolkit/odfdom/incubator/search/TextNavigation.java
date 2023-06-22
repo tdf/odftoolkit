@@ -162,11 +162,16 @@ public class TextNavigation extends Navigation {
     int nextIndex = -1;
     Matcher matcher = mPattern.matcher(content);
     // start from the end index of the selected item
-    if (matcher.find(index + selected.getText().length())) {
-      // here just consider \n\r\t occupy one char
-      nextIndex = matcher.start();
-      int eIndex = matcher.end();
-      mCurrentText = content.substring(nextIndex, eIndex);
+    try {
+      if (matcher.find(index + selected.getText().length())) {
+        // here just consider \n\r\t occupy one char
+        nextIndex = matcher.start();
+        int eIndex = matcher.end();
+        mCurrentText = content.substring(nextIndex, eIndex);
+      }
+    } catch (IndexOutOfBoundsException e) {
+      // can occur in case the text length is equal the pattern length
+      return -1;
     }
     return nextIndex;
   }
@@ -187,6 +192,20 @@ public class TextNavigation extends Navigation {
   public boolean hasNext() {
     mCurrentSelectedItem = findnext(mCurrentSelectedItem);
     return (mCurrentSelectedItem != null);
+  }
+
+  /*
+   * Return the element from the current matching selection.
+   * Use hasNext() to navigate to the next element.
+   *
+   * @return OdfElement of the current item or null if not element exists.
+   */
+  @Override
+  public OdfElement next() {
+    if (getCurrentItem()!=null) {
+      return getCurrentItem().getElement();
+    }
+    return null;
   }
 
   /**
