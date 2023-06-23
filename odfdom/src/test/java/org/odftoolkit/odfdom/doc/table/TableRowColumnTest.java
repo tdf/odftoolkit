@@ -203,7 +203,7 @@ public class TableRowColumnTest {
     // get the text content contains "cell"
     TextNavigation search = new TextNavigation("cell", odtdoc);
     while (search.hasNext()) {
-      TextSelection item = (TextSelection) search.getCurrentItem();
+      TextSelection item = (TextSelection) search.getSelection();
       OdfElement containerEle = item.getContainerElement();
       if (containerEle instanceof OdfTextParagraph) {
         Node ele = containerEle.getParentNode();

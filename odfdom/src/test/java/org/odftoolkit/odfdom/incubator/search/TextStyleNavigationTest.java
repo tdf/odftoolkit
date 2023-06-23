@@ -92,14 +92,14 @@ public class TextStyleNavigationTest {
 
     TextSelection itemstyle = null;
     if (search1.hasNext()) {
-      itemstyle = (TextSelection) search1.getCurrentItem();
+      itemstyle = (TextSelection) search1.getSelection();
       LOG.info(itemstyle.toString());
     }
     int i = 0;
     if (itemstyle != null) {
       while (search2.hasNext()) {
         i++;
-        TextSelection itemtext = (TextSelection) search2.getCurrentItem();
+        TextSelection itemtext = (TextSelection) search2.getSelection();
         try {
           itemstyle.pasteAtFrontOf(itemtext);
         } catch (InvalidNavigationException e) {
@@ -137,14 +137,14 @@ public class TextStyleNavigationTest {
     search3 = new TextNavigation("deleteRoman16 Romanl16", doc);
     TextSelection itemstyle = null;
     if (search1.hasNext()) {
-      itemstyle = (TextSelection) search1.getCurrentItem();
+      itemstyle = (TextSelection) search1.getSelection();
       LOG.info(itemstyle.toString());
     }
     int i = 0;
     if (itemstyle != null) {
       while (search2.hasNext()) {
         i++;
-        TextSelection itemtext = (TextSelection) search2.getCurrentItem();
+        TextSelection itemtext = (TextSelection) search2.getSelection();
         try {
           itemstyle.pasteAtEndOf(itemtext);
         } catch (InvalidNavigationException e) {
@@ -181,7 +181,7 @@ public class TextStyleNavigationTest {
     search2 = new TextNavigation("Century22", doc);
 
     while (search1.hasNext()) {
-      TextSelection item = (TextSelection) search1.getCurrentItem();
+      TextSelection item = (TextSelection) search1.getSelection();
       try {
         item.cut();
       } catch (InvalidNavigationException e) {
@@ -222,7 +222,7 @@ public class TextStyleNavigationTest {
     int i = 0;
     while (search1.hasNext()) {
       i++;
-      TextSelection item = (TextSelection) search1.getCurrentItem();
+      TextSelection item = (TextSelection) search1.getSelection();
       // LOG.info(item);
       try {
         item.applyStyle(style);
