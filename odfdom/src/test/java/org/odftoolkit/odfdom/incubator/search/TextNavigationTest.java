@@ -69,7 +69,7 @@ public class TextNavigationTest {
     search = new TextNavigation("delete", doc);
 
     while (search.hasNext()) {
-      TextSelection item = (TextSelection) search.getCurrentItem();
+      TextSelection item = (TextSelection) search.getSelection();
       LOG.info(item.toString());
     }
   }
@@ -111,4 +111,52 @@ public class TextNavigationTest {
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
+
+
+
+  /** Test methods hasNext and next of org.odftoolkit.odfdom.incubator.search.TextNavigation */
+  @Test
+  public void testHasNextNext() {
+    String phrase="";
+    try {
+      phrase="<%NAME%>";
+			search = new TextNavigation(phrase, doc);
+			while (search.hasNext()) {
+        TextSelection item = (TextSelection) search.getSelection();
+        LOG.info(item.toString());
+        OdfElement element =search.next();
+
+				String text=element.getTextContent();
+				Logger logger = Logger.getLogger(TextNavigationTest.class.getName());
+        logger.log(Level.INFO," Current Item Text="+text);
+				element.setTextContent("John Doe");
+			}
+
+
+      // test the phrase 'ODFDOM' which should occur in 4 paragraphs
+      phrase="ODFDOM";
+      int countParagraphs=0;
+			search = new TextNavigation(phrase, doc);
+			while (search.hasNext()) {
+
+        TextSelection item = (TextSelection) search.getSelection();
+        LOG.info(item.toString());
+
+				OdfElement element = search.next();
+				String text=element.getTextContent();
+				Logger logger = Logger.getLogger(TextNavigationTest.class.getName());
+        logger.log(Level.INFO," Current Item Text="+text);
+        text=text.replace(phrase, "Software Project");
+				element.setTextContent(text);
+        countParagraphs++;
+
+			}
+      Assert.assertEquals(4,countParagraphs);
+
+		} catch (Exception e) {
+      Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+		}
+  }
+
 }

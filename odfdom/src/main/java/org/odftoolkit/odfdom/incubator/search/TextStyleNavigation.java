@@ -113,7 +113,7 @@ public class TextStyleNavigation extends Navigation {
    * @see org.odftoolkit.odfdom.incubator.search.Navigation#getCurrentItem()
    */
   @Override
-  public Selection getCurrentItem() {
+  public Selection getSelection() {
     Selection.SelectionManager.registerItem(mCurrentSelectedItem);
     return mCurrentSelectedItem;
   }
@@ -136,8 +136,8 @@ public class TextStyleNavigation extends Navigation {
    */
   @Override
   public OdfElement next() {
-    if (getCurrentItem()!=null) {
-      return getCurrentItem().getElement();
+    if (getSelection()!=null) {
+      return getSelection().getElement();
     }
     return null;
   }

@@ -170,8 +170,8 @@ public class TextNavigation extends Navigation {
         mCurrentText = content.substring(nextIndex, eIndex);
       }
     } catch (IndexOutOfBoundsException e) {
-      // can occur in case the text length is equal the pattern length
-      return -1;
+       // can occur in case the text of the selection was manipulated from the client
+       return -1;
     }
     return nextIndex;
   }
@@ -180,7 +180,7 @@ public class TextNavigation extends Navigation {
    * @see org.odftoolkit.odfdom.incubator.search.Navigation#getCurrentItem()
    */
   @Override
-  public Selection getCurrentItem() {
+  public Selection getSelection() {
     Selection.SelectionManager.registerItem(mCurrentSelectedItem);
     return mCurrentSelectedItem;
   }
@@ -202,8 +202,8 @@ public class TextNavigation extends Navigation {
    */
   @Override
   public OdfElement next() {
-    if (getCurrentItem()!=null) {
-      return getCurrentItem().getElement();
+    if (getSelection()!=null) {
+      return getSelection().getElement();
     }
     return null;
   }

@@ -50,7 +50,7 @@ public abstract class Navigation {
    *
    * @return the current Selection result
    */
-  public abstract Selection getCurrentItem();
+  public abstract Selection getSelection();
 
   /**
    * check if the element match the user defined condition
