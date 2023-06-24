@@ -43,7 +43,7 @@ import org.w3c.dom.NodeList;
  * A derived Navigation class used for navigate the mText content it is used to search the document
  * and find the matched style properties and would return TextSelection instance
  */
-public class TextStyleNavigation extends Navigation {
+public class TextStyleNavigation extends Navigation<TextSelection> {
 
   private OdfTextDocument mTextDocument;
   private TextSelection mCurrentSelectedItem;
@@ -108,18 +108,22 @@ public class TextStyleNavigation extends Navigation {
     return mPhNode;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
    * get current TextSelection
+   *
    * @see org.odftoolkit.odfdom.incubator.search.Navigation#getCurrentItem()
    */
   @Override
-  public Selection getSelection() {
+  public TextSelection next() {
     Selection.SelectionManager.registerItem(mCurrentSelectedItem);
     return mCurrentSelectedItem;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
    * check if has next TextSelection with satisfied style
+   *
    * @see org.odftoolkit.odfdom.incubator.search.Navigation#hasNext()
    */
   @Override
@@ -135,9 +139,9 @@ public class TextStyleNavigation extends Navigation {
    * @return OdfElement of the current item or null if not element exists.
    */
   @Override
-  public OdfElement next() {
-    if (getSelection()!=null) {
-      return getSelection().getElement();
+  public OdfElement getElement() {
+    if (mCurrentSelectedItem != null) {
+      return mCurrentSelectedItem.getElement();
     }
     return null;
   }

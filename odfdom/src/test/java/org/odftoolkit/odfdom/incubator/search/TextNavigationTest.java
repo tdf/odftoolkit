@@ -69,7 +69,7 @@ public class TextNavigationTest {
     search = new TextNavigation("delete", doc);
 
     while (search.hasNext()) {
-      TextSelection item = (TextSelection) search.getSelection();
+      TextSelection item = search.next();
       LOG.info(item.toString());
     }
   }
@@ -122,9 +122,9 @@ public class TextNavigationTest {
       phrase="<%NAME%>";
 			search = new TextNavigation(phrase, doc);
 			while (search.hasNext()) {
-        TextSelection item = (TextSelection) search.getSelection();
+              TextSelection item = search.next();
         LOG.info(item.toString());
-        OdfElement element =search.next();
+        OdfElement element = search.getElement();
 
 				String text=element.getTextContent();
 				Logger logger = Logger.getLogger(TextNavigationTest.class.getName());
@@ -139,10 +139,10 @@ public class TextNavigationTest {
 			search = new TextNavigation(phrase, doc);
 			while (search.hasNext()) {
 
-        TextSelection item = (TextSelection) search.getSelection();
+              TextSelection item = search.next();
         LOG.info(item.toString());
 
-				OdfElement element = search.next();
+        OdfElement element = search.getElement();
 				String text=element.getTextContent();
 				Logger logger = Logger.getLogger(TextNavigationTest.class.getName());
         logger.log(Level.INFO," Current Item Text="+text);
