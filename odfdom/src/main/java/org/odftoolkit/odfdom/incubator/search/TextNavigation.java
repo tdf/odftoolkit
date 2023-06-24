@@ -34,7 +34,7 @@ import org.w3c.dom.NodeList;
  * A derived Navigation class used for navigate the text content it is used to search the document
  * and find the matched text and would return TextSelection instance
  */
-public class TextNavigation extends Navigation {
+public class TextNavigation extends Navigation<TextSelection> {
 
   private static final String mMatchedElementName = "text:p,text:h";
   private final Pattern mPattern;
@@ -76,8 +76,7 @@ public class TextNavigation extends Navigation {
     if (selected != null) {
       int nextIndex = setCurrentTextAndGetIndex(selected);
       if (nextIndex != -1) {
-        TextSelection item =
-            new TextSelection(mCurrentText, selected.getContainerElement(), nextIndex);
+        TextSelection item = new TextSelection(mCurrentText, selected.getContainerElement(), nextIndex);
         return item;
       }
     }
@@ -96,8 +95,7 @@ public class TextNavigation extends Navigation {
       if (selected == null) {
         element = (OdfElement) getNextMatchElementInTree(masterpage, masterpage);
       } else {
-        element =
-            (OdfElement) getNextMatchElementInTree(selected.getContainerElement(), masterpage);
+        element = (OdfElement) getNextMatchElementInTree(selected.getContainerElement(), masterpage);
       }
 
       if (element != null) {
@@ -180,7 +178,7 @@ public class TextNavigation extends Navigation {
    * @see org.odftoolkit.odfdom.incubator.search.Navigation#getCurrentItem()
    */
   @Override
-  public Selection getSelection() {
+  public TextSelection next() {
     Selection.SelectionManager.registerItem(mCurrentSelectedItem);
     return mCurrentSelectedItem;
   }
@@ -201,9 +199,9 @@ public class TextNavigation extends Navigation {
    * @return OdfElement of the current item or null if not element exists.
    */
   @Override
-  public OdfElement next() {
-    if (getSelection()!=null) {
-      return getSelection().getElement();
+  public OdfElement getElement() {
+    if (mCurrentSelectedItem != null) {
+      return mCurrentSelectedItem.getElement();
     }
     return null;
   }
