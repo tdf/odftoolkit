@@ -31,14 +31,13 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 public abstract class Navigation<T extends Selection> implements Iterator<T> {
 
   /**
-   * Return true if document still has more matched Selection when traversing the document(In other
-   * words return true if getNextMatchElement() would return an element instance rather than return
-   * null)
+   * Return true if document still has more matched Selection when traversing the
+   * document(In other words return true if next() would return an element
+   * instance rather than return null)
    *
    * @return true if document still has more matched Selection, and vice versa
    */
   public abstract boolean hasNext();
-  // abstract public void gotoPrevious();
 
   /*
    * Return the element from the current matching selection.

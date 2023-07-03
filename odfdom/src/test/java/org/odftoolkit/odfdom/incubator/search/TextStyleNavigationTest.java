@@ -112,6 +112,7 @@ public class TextStyleNavigationTest {
 
     int j = 0;
     while (search3.hasNext()) {
+      search3.next();
       j++;
     }
     Assert.assertTrue(i == j);
@@ -156,6 +157,7 @@ public class TextStyleNavigationTest {
 
     int j = 0;
     while (search3.hasNext()) {
+      search3.next();
       j++;
     }
 
@@ -237,6 +239,7 @@ public class TextStyleNavigationTest {
     search4 = new TextStyleNavigation(chgProps, doc);
     int j = 0;
     while (search4.hasNext()) {
+      search4.next();
       j++;
     }
     Assert.assertTrue(i == j);

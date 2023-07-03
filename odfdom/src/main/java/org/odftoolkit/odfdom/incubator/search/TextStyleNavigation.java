@@ -69,7 +69,7 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
   /*
    * Find next TextSelection which match specified style
    */
-  private TextSelection findnext(TextSelection selected) {
+  private TextSelection findNextSelection(TextSelection selected) {
     OdfElement element = null;
     if (selected == null) {
 
@@ -95,6 +95,32 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
     return null;
   }
 
+  /*
+   * Returns true if a next TextStyleSelection which match specified style exists
+   */
+  private boolean hasMoreSelections(TextSelection selected) {
+    if (selected == null) {
+
+      try {
+        mNode = getNextMatchElement((Node) mTextDocument.getContentRoot());
+      } catch (Exception ex) {
+        Logger.getLogger(TextStyleNavigation.class.getName())
+            .log(Level.SEVERE, ex.getMessage(), ex);
+      }
+    } else {
+      try {
+        mNode = getNextMatchElement(mNode);
+      } catch (Exception ex) {
+        Logger.getLogger(TextStyleNavigation.class.getName())
+            .log(Level.SEVERE, ex.getMessage(), ex);
+      }
+    }
+    if (mNode != null) {
+      return true;
+    }
+    return false;
+  }
+
   private Node getPHElement(Node node) {
 
     // get paragraph or heading element
@@ -108,29 +134,28 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
     return mPhNode;
   }
 
-  /*
-   * (non-Javadoc)
-   * get current TextSelection
-   *
-   * @see org.odftoolkit.odfdom.incubator.search.Navigation#getCurrentItem()
+  /**
+   * Fetches the next selection element.
    */
   @Override
   public TextSelection next() {
+    mCurrentSelectedItem = findNextSelection(mCurrentSelectedItem);
+    if (mCurrentSelectedItem != null) {
     Selection.SelectionManager.registerItem(mCurrentSelectedItem);
+  }
     return mCurrentSelectedItem;
   }
 
-  /*
-   * (non-Javadoc)
-   * check if has next TextSelection with satisfied style
+  /**
+   * Returns true if more selection elements exist.
    *
-   * @see org.odftoolkit.odfdom.incubator.search.Navigation#hasNext()
+   * @see next()
    */
   @Override
   public boolean hasNext() {
-    mCurrentSelectedItem = findnext(mCurrentSelectedItem);
-    return (mCurrentSelectedItem != null);
+    return (hasMoreSelections(mCurrentSelectedItem));
   }
+
 
   /*
    * Return the element from the current matching selection.
