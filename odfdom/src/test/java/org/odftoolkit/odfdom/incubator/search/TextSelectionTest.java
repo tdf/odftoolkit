@@ -18,7 +18,9 @@
  */
 package org.odftoolkit.odfdom.incubator.search;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.net.MalformedURLException;
@@ -138,9 +140,9 @@ public class TextSelectionTest {
     search = new TextNavigation("delete", doc);
     TextSelection sel = null;
 
-    TextNavigation search1 = new TextNavigation("change", doc);
-    if (search1.hasNext()) {
-      sel = (TextSelection) search1.next();
+    TextNavigation searchChangeWord = new TextNavigation("change", doc);
+    if (searchChangeWord.hasNext()) {
+      sel = (TextSelection) searchChangeWord.next();
     }
 
     int i = 0;
@@ -157,8 +159,10 @@ public class TextSelectionTest {
     int j = 0;
     search = new TextNavigation("changedelete", doc);
     while (search.hasNext()) {
+      search.next();
       j++;
     }
+    // The count of 'changedelete' should be equals as 'delete'
     assertTrue(i == j);
 
     try {
@@ -170,21 +174,25 @@ public class TextSelectionTest {
   }
 
   /**
-   * Test pasteAtEndOf method of org.odftoolkit.odfdom.incubator.search.TextSelection copy the first
-   * 'change' word at the end of all the 'delete' word
+   * Test pasteAtEndOf method of
+   * org.odftoolkit.odfdom.incubator.search.TextSelection
+   *
+   * copy the first 'change' word at the end of all the 'delete' words
    */
   @Test
   public void testPasteAtEndOf() {
-    search = null;
     search = new TextNavigation("delete", doc);
     TextSelection sel = null;
 
-    TextNavigation search1 = new TextNavigation("change", doc);
-    if (search1.hasNext()) {
-      sel = (TextSelection) search1.next();
+    TextNavigation searchChangeWord = new TextNavigation("change", doc);
+    if (searchChangeWord.hasNext()) {
+      // take the first selection..
+      sel = (TextSelection) searchChangeWord.next();
     }
+    assertNotNull(sel);
 
     int i = 0;
+
     while (search.hasNext()) {
       TextSelection item = search.next();
       i++;
@@ -197,8 +205,10 @@ public class TextSelectionTest {
     int j = 0;
     search = new TextNavigation("deletechange", doc);
     while (search.hasNext()) {
+      search.next();
       j++;
     }
+    // The count of 'deletechange' should be equals as 'delete'
     assertTrue(i == j);
 
     try {
@@ -253,12 +263,6 @@ public class TextSelectionTest {
     search = null;
     search = new TextNavigation("ODFDOM", doc);
 
-    TextSelection nextSelect = null;
-    TextNavigation nextsearch = new TextNavigation("next", doc);
-    if (nextsearch.hasNext()) {
-      nextSelect = nextsearch.next();
-    }
-
     // replace all the "ODFDOM" to "Odf Toolkit"
     // except the sentence "Task5.Change the ODFDOM to Odf Toolkit, and bold them."
     OdfStyle style = new OdfStyle(contentDOM);
@@ -266,7 +270,7 @@ public class TextSelectionTest {
     style.setStyleFamilyAttribute("text");
     int i = 0;
     while (search.hasNext()) {
-      if (i > 0) {
+      // if (i > 0) {
         TextSelection item = search.next();
         try {
           item.replaceWith("Odf Toolkit");
@@ -274,22 +278,20 @@ public class TextSelectionTest {
         } catch (InvalidNavigationException e) {
           Assert.fail(e.getMessage());
         }
-      }
+        // }
       i++;
     }
+    // we expect 6 occurrences
+    assertEquals(6, i);
 
     search = new TextNavigation("Odf Toolkit", doc);
     int j = 0;
     while (search.hasNext()) {
+      TextSelection item = search.next();
       j++;
     }
-    assertTrue(i == j);
-
-    try {
-      nextSelect.replaceWith("bbb");
-    } catch (InvalidNavigationException e1) {
-      Assert.fail(e1.getMessage());
-    }
+    // we expect 7 occurrences
+    assertEquals(7, j);
 
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_REPLACE));

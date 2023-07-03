@@ -82,10 +82,10 @@ public class TextNavigation extends Navigation<TextSelection> {
     }
     try {
       styledom = mTextDocument.getStylesDom();
-      NodeList list = styledom.getElementsByTagName("office:master-styles");
       if (styledom == null) {
         return null;
       }
+      NodeList list = styledom.getElementsByTagName("office:master-styles");
       if (list.getLength() > 0) {
         masterpage = (OdfOfficeMasterStyles) list.item(0);
       } else {
@@ -111,8 +111,10 @@ public class TextNavigation extends Navigation<TextSelection> {
     return null;
   }
 
-  // found the next selection start from the 'selected' TextSelection
-  private TextSelection findnext(TextSelection selected) {
+  /*
+   * Finds the next TextSelection which match specified style
+   */
+  private TextSelection findNextSelection(TextSelection selected) {
     if (!mbFinishFindInHeaderFooter) {
       TextSelection styleselected = findInHeaderFooter(selected);
       if (styleselected != null) {
@@ -152,6 +154,46 @@ public class TextNavigation extends Navigation<TextSelection> {
     }
   }
 
+  /*
+   * Returns true if a next TextStyleSelection which match specified text exists
+   */
+  private boolean hasMoreSelections(TextSelection selected) {
+    if (!mbFinishFindInHeaderFooter) {
+      TextSelection styleselected = findInHeaderFooter(selected);
+      if (styleselected != null) {
+        return true;
+      }
+      selected = null;
+    }
+
+    if (selected == null) {
+      OdfElement element = null;
+      try {
+        element = (OdfElement) getNextMatchElement((Node) mTextDocument.getContentRoot());
+      } catch (Exception ex) {
+        Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+      }
+      if (element != null) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    OdfElement containerElement = selected.getContainerElement();
+    int nextIndex = setCurrentTextAndGetIndex(selected);
+    if (nextIndex != -1) {
+      return true;
+    } else {
+      OdfElement element = (OdfElement) getNextMatchElement(containerElement);
+      if (element != null) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
   private int setCurrentTextAndGetIndex(TextSelection selected) {
     int index = selected.getIndex();
     OdfWhitespaceProcessor textProcessor = new OdfWhitespaceProcessor();
@@ -174,22 +216,26 @@ public class TextNavigation extends Navigation<TextSelection> {
     return nextIndex;
   }
 
-  /* (non-Javadoc)
-   * @see org.odftoolkit.odfdom.incubator.search.Navigation#getCurrentItem()
+  /**
+   * Fetches the next selection element.
    */
   @Override
   public TextSelection next() {
+    mCurrentSelectedItem = findNextSelection(mCurrentSelectedItem);
+    if (mCurrentSelectedItem != null) {
     Selection.SelectionManager.registerItem(mCurrentSelectedItem);
+  }
     return mCurrentSelectedItem;
   }
 
-  /* (non-Javadoc)
-   * @see org.odftoolkit.odfdom.incubator.search.Navigation#hasNext()
+  /**
+   * Returns true if more selection elements exist.
+   *
+   * @see next()
    */
   @Override
   public boolean hasNext() {
-    mCurrentSelectedItem = findnext(mCurrentSelectedItem);
-    return (mCurrentSelectedItem != null);
+    return (hasMoreSelections(mCurrentSelectedItem));
   }
 
   /*

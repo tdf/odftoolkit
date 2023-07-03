@@ -18,6 +18,8 @@
  */
 package org.odftoolkit.odfdom.incubator.search;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
@@ -46,9 +48,18 @@ public class MONPTest {
       int i = 0;
       while (search.hasNext()) {
         TextSelection item = search.next();
+        i++;
+      }
+      assertEquals(21, i);
+
+      i = 0;
+      search = new TextNavigation("mnop", doc);
+      while (search.hasNext()) {
+        TextSelection item = search.next();
         try {
           item.replaceWith("success");
           i++;
+          System.out.println("..count = " + i);
           // item.addHref(new URL("http://www.oracle.com"));
         } catch (InvalidNavigationException e) {
           Assert.fail(e.getMessage());
