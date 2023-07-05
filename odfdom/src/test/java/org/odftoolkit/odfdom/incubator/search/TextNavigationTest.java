@@ -18,6 +18,11 @@
  */
 package org.odftoolkit.odfdom.incubator.search;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
+
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -122,7 +127,7 @@ public class TextNavigationTest {
       phrase="<%NAME%>";
 			search = new TextNavigation(phrase, doc);
 			while (search.hasNext()) {
-              TextSelection item = search.next();
+        TextSelection item = search.next();
         LOG.info(item.toString());
         OdfElement element = search.getElement();
 
@@ -139,7 +144,7 @@ public class TextNavigationTest {
 			search = new TextNavigation(phrase, doc);
 			while (search.hasNext()) {
 
-              TextSelection item = search.next();
+        TextSelection item = search.next();
         LOG.info(item.toString());
 
         OdfElement element = search.getElement();
@@ -151,12 +156,58 @@ public class TextNavigationTest {
         countParagraphs++;
 
 			}
-      Assert.assertEquals(4,countParagraphs);
+      Assert.assertEquals(6,countParagraphs);
 
 		} catch (Exception e) {
       Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
 		}
+  }
+
+
+
+   /** Test methods hasNext and next based on the iterator interface */
+  @Test
+  public void testIteratorInterface() {
+    String phrase="";
+
+    // test single existing phrase
+    phrase="<%NAME%>";
+    search = new TextNavigation(phrase, doc);
+    if (search.hasNext()) {
+      search.next();
+    }
+
+
+    // test non existing phrase
+    phrase="<%NOT EXISTING%>";
+    search = new TextNavigation(phrase, doc);
+    assertFalse(search.hasNext());
+
+
+     // test non existing phrase without hasNext
+    phrase="<%NOT EXISTING%>";
+    search = new TextNavigation(phrase, doc);
+    try {
+      search.next(); // throws Exception
+      fail();
+    } catch (NoSuchElementException e) {
+      // expected exception
+    }
+
+
+   // test single phrase without hasNext() and calling next() twice
+    phrase="<%NAME%>";
+    search = new TextNavigation(phrase, doc);
+    try {
+        search.next();
+        search.next(); // exception expected
+        fail();
+    } catch (NoSuchElementException e) {
+      // expected exception
+    }
+
+
   }
 
 }

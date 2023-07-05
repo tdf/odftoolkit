@@ -18,6 +18,7 @@
  */
 package org.odftoolkit.odfdom.incubator.search;
 
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -40,9 +41,11 @@ public class TextNavigation extends Navigation<TextSelection> {
   private final Pattern mPattern;
   private final OdfTextDocument mTextDocument;
   private TextSelection mCurrentSelectedItem;
+  private TextSelection mNextSelectedItem;
   private String mCurrentText;
   private int mCurrentIndex;
   private boolean mbFinishFindInHeaderFooter;
+  private boolean mCompleted=false;
 
   /**
    * Construct TextNavigation with matched condition and navigation scope
@@ -156,6 +159,11 @@ public class TextNavigation extends Navigation<TextSelection> {
 
   /*
    * Returns true if a next TextStyleSelection which match specified text exists
+   *
+   * This method is called by the hasNext() method in the very beginning. The
+   * method search if there is some string to be found in the ODF. The found string is
+   * cached, as if hasNext() is being called just again this cached string should be
+   * returned.
    */
   private boolean hasMoreSelections(TextSelection selected) {
     if (!mbFinishFindInHeaderFooter) {
@@ -221,10 +229,35 @@ public class TextNavigation extends Navigation<TextSelection> {
    */
   @Override
   public TextSelection next() {
-    mCurrentSelectedItem = findNextSelection(mCurrentSelectedItem);
-    if (mCurrentSelectedItem != null) {
-    Selection.SelectionManager.registerItem(mCurrentSelectedItem);
-  }
+    if (mCompleted) {
+      // already completed
+      throw new NoSuchElementException();
+    }
+
+    if (mNextSelectedItem==null && mCurrentSelectedItem==null) {
+      // find first selection
+      mCurrentSelectedItem = findNextSelection(mCurrentSelectedItem);
+      if (mCurrentSelectedItem==null) {
+        mCompleted=true;
+        throw new NoSuchElementException();
+      }
+    } else {
+      if (mNextSelectedItem==null) {
+        // edge case: never called hasNext()
+        mNextSelectedItem = findNextSelection(mCurrentSelectedItem);
+        if (mNextSelectedItem==null) {
+          mCompleted=true;
+          throw new NoSuchElementException();
+        }
+        return mNextSelectedItem;
+      } else {
+        mCurrentSelectedItem=mNextSelectedItem;
+        mNextSelectedItem = findNextSelection(mCurrentSelectedItem);
+        if (mNextSelectedItem==null) {
+          mCompleted=true;
+        }
+      }
+    }
     return mCurrentSelectedItem;
   }
 
@@ -235,7 +268,18 @@ public class TextNavigation extends Navigation<TextSelection> {
    */
   @Override
   public boolean hasNext() {
-    return (hasMoreSelections(mCurrentSelectedItem));
+    if (mCompleted) {
+      // already completed
+      return false;
+    }
+    if (mNextSelectedItem==null && mCurrentSelectedItem==null) {
+      // find first selection
+      mNextSelectedItem = findNextSelection(null);
+      if (mNextSelectedItem==null) {
+        mCompleted=true;
+      }
+    }
+    return !(mNextSelectedItem==null);
   }
 
   /*

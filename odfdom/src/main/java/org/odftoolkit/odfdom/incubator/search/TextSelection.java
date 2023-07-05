@@ -149,7 +149,7 @@ public class TextSelection extends Selection {
     }
     OdfElement container = getContainerElement();
     delete(mIndexInContainer, mMatchedText.length(), container);
-    SelectionManager.refreshAfterCut(this);
+    //SelectionManager.refreshAfterCut(this);
     mMatchedText = "";
   }
 
@@ -320,7 +320,7 @@ public class TextSelection extends Selection {
     // optimize the parent element
     optimize(parentElement);
     int offset = newText.length() - leftLength;
-    SelectionManager.refresh(this.getContainerElement(), offset, index + getText().length());
+    //SelectionManager.refresh(this.getContainerElement(), offset, index + getText().length());
     mMatchedText = newText;
   }
 
@@ -346,7 +346,7 @@ public class TextSelection extends Selection {
     mIsInserted = false;
     insertSpan(textSpan, indexOfNew, newElement);
     adjustStyle(newElement, textSpan, null);
-    SelectionManager.refreshAfterPasteAtFrontOf(this, positionItem);
+    //SelectionManager.refreshAfterPasteAtFrontOf(this, positionItem);
   }
 
   /**
@@ -374,7 +374,7 @@ public class TextSelection extends Selection {
     mIsInserted = false;
     insertSpan(textSpan, indexOfNew, newElement);
     adjustStyle(newElement, textSpan, null);
-    SelectionManager.refreshAfterPasteAtEndOf(this, positionItem);
+    //SelectionManager.refreshAfterPasteAtEndOf(this, positionItem);
   }
 
   /**
