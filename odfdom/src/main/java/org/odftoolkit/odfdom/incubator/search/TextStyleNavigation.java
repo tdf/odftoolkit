@@ -141,7 +141,7 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
   public TextSelection next() {
     mCurrentSelectedItem = findNextSelection(mCurrentSelectedItem);
     if (mCurrentSelectedItem != null) {
-    Selection.SelectionManager.registerItem(mCurrentSelectedItem);
+   // Selection.SelectionManager.registerItem(mCurrentSelectedItem);
   }
     return mCurrentSelectedItem;
   }
