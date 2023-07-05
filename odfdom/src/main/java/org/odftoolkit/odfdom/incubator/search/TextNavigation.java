@@ -45,7 +45,7 @@ public class TextNavigation extends Navigation<TextSelection> {
   private String mCurrentText;
   private int mCurrentIndex;
   private boolean mbFinishFindInHeaderFooter;
-  private boolean mCompleted=false;
+  //private boolean mCompleted=false;
 
   /**
    * Construct TextNavigation with matched condition and navigation scope
@@ -68,6 +68,9 @@ public class TextNavigation extends Navigation<TextSelection> {
     mTextDocument = doc;
     mCurrentSelectedItem = null;
     mbFinishFindInHeaderFooter = false;
+
+    // initialize the Iterator and find the first element...
+    mNextSelectedItem = findNextSelection(null);
   }
 
   // the matched text might exist in header/footer
@@ -157,50 +160,6 @@ public class TextNavigation extends Navigation<TextSelection> {
     }
   }
 
-  /*
-   * Returns true if a next TextStyleSelection which match specified text exists
-   *
-   * This method is called by the hasNext() method in the very beginning. The
-   * method search if there is some string to be found in the ODF. The found string is
-   * cached, as if hasNext() is being called just again this cached string should be
-   * returned.
-   */
-  private boolean hasMoreSelections(TextSelection selected) {
-    if (!mbFinishFindInHeaderFooter) {
-      TextSelection styleselected = findInHeaderFooter(selected);
-      if (styleselected != null) {
-        return true;
-      }
-      selected = null;
-    }
-
-    if (selected == null) {
-      OdfElement element = null;
-      try {
-        element = (OdfElement) getNextMatchElement((Node) mTextDocument.getContentRoot());
-      } catch (Exception ex) {
-        Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-      }
-      if (element != null) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    OdfElement containerElement = selected.getContainerElement();
-    int nextIndex = setCurrentTextAndGetIndex(selected);
-    if (nextIndex != -1) {
-      return true;
-    } else {
-      OdfElement element = (OdfElement) getNextMatchElement(containerElement);
-      if (element != null) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
 
   private int setCurrentTextAndGetIndex(TextSelection selected) {
     int index = selected.getIndex();
@@ -225,66 +184,36 @@ public class TextNavigation extends Navigation<TextSelection> {
   }
 
   /**
-   * Fetches the next selection element.
+   * Returns the next matching element in the document.
+   *
+   * @return the next element
+   * @throws NoSuchElementException if the iteration has no more matching elements
    */
   @Override
   public TextSelection next() {
-    if (mCompleted) {
-      // already completed
-      throw new NoSuchElementException();
-    }
-
-    if (mNextSelectedItem==null && mCurrentSelectedItem==null) {
-      // find first selection
-      mCurrentSelectedItem = findNextSelection(mCurrentSelectedItem);
-      if (mCurrentSelectedItem==null) {
-        mCompleted=true;
-        throw new NoSuchElementException();
-      }
+      if (mNextSelectedItem!=null) {
+        mCurrentSelectedItem =mNextSelectedItem;
+        mNextSelectedItem = findNextSelection(mCurrentSelectedItem);
     } else {
-      if (mNextSelectedItem==null) {
-        // edge case: never called hasNext()
-        mNextSelectedItem = findNextSelection(mCurrentSelectedItem);
-        if (mNextSelectedItem==null) {
-          mCompleted=true;
-          throw new NoSuchElementException();
-        }
-        return mNextSelectedItem;
-      } else {
-        mCurrentSelectedItem=mNextSelectedItem;
-        mNextSelectedItem = findNextSelection(mCurrentSelectedItem);
-        if (mNextSelectedItem==null) {
-          mCompleted=true;
-        }
-      }
+       throw new NoSuchElementException();
     }
     return mCurrentSelectedItem;
   }
 
   /**
-   * Returns true if more selection elements exist.
+   * Returns {@code true} if the Document has more matching elements.
+   * (In other words, returns {@code true} if {@link #next} would
+   * return an element rather than throwing an exception.)
    *
-   * @see next()
    */
   @Override
   public boolean hasNext() {
-    if (mCompleted) {
-      // already completed
-      return false;
-    }
-    if (mNextSelectedItem==null && mCurrentSelectedItem==null) {
-      // find first selection
-      mNextSelectedItem = findNextSelection(null);
-      if (mNextSelectedItem==null) {
-        mCompleted=true;
-      }
-    }
     return !(mNextSelectedItem==null);
   }
 
   /*
    * Return the element from the current matching selection.
-   * Use hasNext() to navigate to the next element.
+   * Use next() to navigate to the next element.
    *
    * @return OdfElement of the current item or null if not element exists.
    */
