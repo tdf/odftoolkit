@@ -19,6 +19,7 @@
 package org.odftoolkit.odfdom.incubator.search;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
@@ -175,7 +176,8 @@ public class TextNavigationTest {
     phrase="<%NAME%>";
     search = new TextNavigation(phrase, doc);
     if (search.hasNext()) {
-      search.next();
+      TextSelection result = search.next();
+      assertNotNull(result);
     }
 
 
