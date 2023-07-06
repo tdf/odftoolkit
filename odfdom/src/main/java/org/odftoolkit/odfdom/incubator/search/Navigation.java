@@ -29,6 +29,12 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
  * defined conditions
  */
 public abstract class Navigation<T extends Selection> implements Iterator<T> {
+ /**
+   * get the current Selection result
+   *
+   * @return the current Selection result
+   */
+ // public abstract Selection getSelection();
 
   /**
    * Return true if document still has more matched Selection when traversing the

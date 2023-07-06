@@ -45,7 +45,6 @@ public class TextNavigation extends Navigation<TextSelection> {
   private String mCurrentText;
   private int mCurrentIndex;
   private boolean mbFinishFindInHeaderFooter;
-  //private boolean mCompleted=false;
 
   /**
    * Construct TextNavigation with matched condition and navigation scope
@@ -117,14 +116,18 @@ public class TextNavigation extends Navigation<TextSelection> {
     return null;
   }
 
+
+
   /*
    * Finds the next TextSelection which match specified style
    */
   private TextSelection findNextSelection(TextSelection selected) {
+    TextSelection result=null;
     if (!mbFinishFindInHeaderFooter) {
-      TextSelection styleselected = findInHeaderFooter(selected);
-      if (styleselected != null) {
-        return styleselected;
+      result = findInHeaderFooter(selected);
+      if (result != null) {
+        Selection.SelectionManager.registerItem(result);
+        return result;
       }
       selected = null;
       mbFinishFindInHeaderFooter = true;
@@ -138,7 +141,9 @@ public class TextNavigation extends Navigation<TextSelection> {
         Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
       }
       if (element != null) {
-        return new TextSelection(mCurrentText, element, mCurrentIndex);
+        result= new TextSelection(mCurrentText, element, mCurrentIndex);
+        Selection.SelectionManager.registerItem(result);
+        return result;
       } else {
         return null;
       }
@@ -147,13 +152,15 @@ public class TextNavigation extends Navigation<TextSelection> {
     OdfElement containerElement = selected.getContainerElement();
     int nextIndex = setCurrentTextAndGetIndex(selected);
     if (nextIndex != -1) {
-      TextSelection item = new TextSelection(mCurrentText, containerElement, nextIndex);
-      return item;
+      result = new TextSelection(mCurrentText, containerElement, nextIndex);
+      Selection.SelectionManager.registerItem(result);
+      return result;
     } else {
       OdfElement element = (OdfElement) getNextMatchElement(containerElement);
       if (element != null) {
-        TextSelection item = new TextSelection(mCurrentText, element, mCurrentIndex);
-        return item;
+        result = new TextSelection(mCurrentText, element, mCurrentIndex);
+        Selection.SelectionManager.registerItem(result);
+        return result;
       } else {
         return null;
       }

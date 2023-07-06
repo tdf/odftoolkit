@@ -59,13 +59,12 @@ public class MONPTest {
         try {
           item.replaceWith("success");
           i++;
-          System.out.println("..count = " + i);
-          // item.addHref(new URL("http://www.oracle.com"));
+          // System.out.println("..count = " + i);
         } catch (InvalidNavigationException e) {
           Assert.fail(e.getMessage());
         }
       }
-      Assert.assertTrue(18 == i);
+      Assert.assertTrue(20== i);
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE));
     } catch (Exception e) {
       Logger.getLogger(MONPTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
