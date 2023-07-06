@@ -10,17 +10,21 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
    * The SelectionManager contains a repository of all selections, and will refresh the status/mIndex of
    * selections after certain operation.
    */
-public class SelectionManagerNeu {
+public class SelectionManager {
 
-    private static Hashtable<OdfElement, Vector<Selection>> repository =
+    private  Hashtable<OdfElement, Vector<Selection>> repository =null;
+
+    public SelectionManager() {
+      repository =
         new Hashtable<OdfElement, Vector<Selection>>();
+    }
 
     /**
      * Register the selection item
      *
      * @param item the selection item
      */
-    public static void registerItem(Selection item) {
+    public  void registerItem(Selection item) {
       OdfElement element = item.getElement();
       if (repository.containsKey(element)) {
         Vector<Selection> selections = repository.get(element);
@@ -47,7 +51,7 @@ public class SelectionManagerNeu {
      *
      * @param cutItem the cut item
      */
-    public static synchronized void refreshAfterCut(Selection cutItem) {
+    public void refreshAfterCut(Selection cutItem) {
       // travase the whole sub tree
       OdfElement element = cutItem.getElement();
       if (repository.containsKey(element)) {
@@ -66,7 +70,7 @@ public class SelectionManagerNeu {
      * @param item the pasted item
      * @param positionItem the position item
      */
-    public static synchronized void refreshAfterPasteAtFrontOf(
+    public void refreshAfterPasteAtFrontOf(
         Selection item, Selection positionItem) {
       // travase the whole sub tree
       OdfElement element = positionItem.getElement();
@@ -86,7 +90,7 @@ public class SelectionManagerNeu {
      * @param item the pasted item
      * @param positionItem the position item
      */
-    public static synchronized void refreshAfterPasteAtEndOf(
+    public void refreshAfterPasteAtEndOf(
         Selection item, Selection positionItem) {
       OdfElement element = positionItem.getElement();
       int positionIndex;
@@ -112,7 +116,7 @@ public class SelectionManagerNeu {
      *
      * @param item selection item
      */
-    public static void unregisterItem(Selection item) {
+    public void unregisterItem(Selection item) {
       OdfElement element = item.getElement();
       if (repository.containsKey(element)) {
         Vector<Selection> selections = repository.get(element);
@@ -128,7 +132,7 @@ public class SelectionManagerNeu {
      * @param offset the offset
      * @param positionIndex the mIndex of a certain position
      */
-    public static synchronized void refresh(
+    public void refresh(
         OdfElement containerElement, int offset, int positionIndex) {
       if (repository.containsKey(containerElement)) {
         Vector<Selection> selections = repository.get(containerElement);
@@ -140,6 +144,6 @@ public class SelectionManagerNeu {
       }
     }
 
-    private SelectionManagerNeu() {}
+
   }
 

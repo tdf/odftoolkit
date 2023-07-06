@@ -45,6 +45,7 @@ public class TextNavigation extends Navigation<TextSelection> {
   private String mCurrentText;
   private int mCurrentIndex;
   private boolean mbFinishFindInHeaderFooter;
+  private SelectionManager mSelectionManager;
 
   /**
    * Construct TextNavigation with matched condition and navigation scope
@@ -68,8 +69,17 @@ public class TextNavigation extends Navigation<TextSelection> {
     mCurrentSelectedItem = null;
     mbFinishFindInHeaderFooter = false;
 
+    mSelectionManager=new SelectionManager();
     // initialize the Iterator and find the first element...
     mNextSelectedItem = findNextSelection(null);
+  }
+
+  /**
+   * Returns the selectionManager instance.
+   * @return
+   */
+  public SelectionManager getSelectionManager() {
+    return mSelectionManager;
   }
 
   // the matched text might exist in header/footer
@@ -81,7 +91,7 @@ public class TextNavigation extends Navigation<TextSelection> {
     if (selected != null) {
       int nextIndex = setCurrentTextAndGetIndex(selected);
       if (nextIndex != -1) {
-        TextSelection item = new TextSelection(mCurrentText, selected.getContainerElement(), nextIndex);
+        TextSelection item = new TextSelection(mCurrentText, selected.getContainerElement(), nextIndex,mSelectionManager);
         return item;
       }
     }
@@ -104,7 +114,7 @@ public class TextNavigation extends Navigation<TextSelection> {
       }
 
       if (element != null) {
-        TextSelection item = new TextSelection(mCurrentText, element, mCurrentIndex);
+        TextSelection item = new TextSelection(mCurrentText, element, mCurrentIndex,mSelectionManager);
         return item;
       } else {
         return null;
@@ -126,7 +136,7 @@ public class TextNavigation extends Navigation<TextSelection> {
     if (!mbFinishFindInHeaderFooter) {
       result = findInHeaderFooter(selected);
       if (result != null) {
-        Selection.SelectionManager.registerItem(result);
+        mSelectionManager.registerItem(result);
         return result;
       }
       selected = null;
@@ -141,8 +151,8 @@ public class TextNavigation extends Navigation<TextSelection> {
         Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
       }
       if (element != null) {
-        result= new TextSelection(mCurrentText, element, mCurrentIndex);
-        Selection.SelectionManager.registerItem(result);
+        result= new TextSelection(mCurrentText, element, mCurrentIndex,mSelectionManager);
+        mSelectionManager.registerItem(result);
         return result;
       } else {
         return null;
@@ -152,14 +162,14 @@ public class TextNavigation extends Navigation<TextSelection> {
     OdfElement containerElement = selected.getContainerElement();
     int nextIndex = setCurrentTextAndGetIndex(selected);
     if (nextIndex != -1) {
-      result = new TextSelection(mCurrentText, containerElement, nextIndex);
-      Selection.SelectionManager.registerItem(result);
+      result = new TextSelection(mCurrentText, containerElement, nextIndex,mSelectionManager);
+      mSelectionManager.registerItem(result);
       return result;
     } else {
       OdfElement element = (OdfElement) getNextMatchElement(containerElement);
       if (element != null) {
-        result = new TextSelection(mCurrentText, element, mCurrentIndex);
-        Selection.SelectionManager.registerItem(result);
+        result = new TextSelection(mCurrentText, element, mCurrentIndex,mSelectionManager);
+        mSelectionManager.registerItem(result);
         return result;
       } else {
         return null;
