@@ -149,7 +149,7 @@ public class TextSelection extends Selection {
     }
     OdfElement container = getContainerElement();
     delete(mIndexInContainer, mMatchedText.length(), container);
-    //SelectionManager.refreshAfterCut(this);
+    SelectionManager.refreshAfterCut(this);
     mMatchedText = "";
   }
 
@@ -302,7 +302,8 @@ public class TextSelection extends Selection {
    */
   public void replaceWith(String newText) throws InvalidNavigationException {
     if (validate() == false) {
-      throw new InvalidNavigationException("No matched string at this position");
+      //throw new InvalidNavigationException("No matched string at this position");
+      return ;
     }
 
     OdfElement parentElement = getContainerElement();
@@ -320,7 +321,7 @@ public class TextSelection extends Selection {
     // optimize the parent element
     optimize(parentElement);
     int offset = newText.length() - leftLength;
-    //SelectionManager.refresh(this.getContainerElement(), offset, index + getText().length());
+    SelectionManager.refresh(this.getContainerElement(), offset, index + getText().length());
     mMatchedText = newText;
   }
 
@@ -346,7 +347,7 @@ public class TextSelection extends Selection {
     mIsInserted = false;
     insertSpan(textSpan, indexOfNew, newElement);
     adjustStyle(newElement, textSpan, null);
-    //SelectionManager.refreshAfterPasteAtFrontOf(this, positionItem);
+    SelectionManager.refreshAfterPasteAtFrontOf(this, positionItem);
   }
 
   /**
@@ -374,7 +375,7 @@ public class TextSelection extends Selection {
     mIsInserted = false;
     insertSpan(textSpan, indexOfNew, newElement);
     adjustStyle(newElement, textSpan, null);
-    //SelectionManager.refreshAfterPasteAtEndOf(this, positionItem);
+    SelectionManager.refreshAfterPasteAtEndOf(this, positionItem);
   }
 
   /**
@@ -520,7 +521,6 @@ public class TextSelection extends Selection {
   /*
    * delete the pNode from the fromindex text, and delete leftLength text
    */
-
   private void delete(int fromindex, int leftLength, Node pNode) {
     if ((fromindex == 0) && (leftLength == 0)) {
       return;
