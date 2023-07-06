@@ -18,6 +18,7 @@
  */
 package org.odftoolkit.odfdom.incubator.search;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -91,10 +92,16 @@ public class TextModifyTest {
       TextSelection result = search.next();
       assertNotNull(result);
       // delete text
-      OdfElement parentElement = result.getContainerElement();
+      try {
+        result.cut();
+      } catch (InvalidNavigationException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    //  OdfElement parentElement = result.getContainerElement();
   //    delete(result.getIndex(), phrase.length(), parentElement);
 
-      replaceNeu(parentElement,phrase,"");
+    //  replaceNeu(parentElement,phrase,"");
     }
 
 
@@ -123,7 +130,6 @@ public class TextModifyTest {
   @Test
   public void testDeleteMultiElement() {
     String phrase="";
-
     // test single existing phrase
     phrase="ODFDOM";
     search = new TextNavigation(phrase, doc);
@@ -132,22 +138,20 @@ public class TextModifyTest {
       TextSelection result = search.next();
       assertNotNull(result);
       // delete text
-      OdfElement parentElement = result.getContainerElement();
-
-     parentElement= result.getElement();
-
-      replaceNeu(parentElement,phrase,"");
+      try {
+        result.cut();
+      } catch (InvalidNavigationException e) {
+        e.printStackTrace();
+        fail();
+      }
       count ++;
     }
+    assertEquals(6,count);
 
-
-
-    // test single phrase should no longer exist
+    // test phrase should no longer exist
     phrase="ODFDOM";
     search = new TextNavigation(phrase, doc);
-    //assertFalse(search.hasNext());
-
-
+    assertFalse(search.hasNext());
 
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_DELETE));

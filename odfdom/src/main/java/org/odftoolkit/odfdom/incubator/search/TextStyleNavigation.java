@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,12 +48,14 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
 
   private OdfTextDocument mTextDocument;
   private TextSelection mCurrentSelectedItem;
+  private TextSelection mNextSelectedItem;
   private int mCurrentIndex;
   private Map<OdfStyleProperty, String> mProps;
   private String mText;
   private Node mPhNode;
   private int mIndex;
   private Node mNode;
+  private SelectionManager mSelectionManager;
 
   /**
    * Construct TextStyleNavigation with style properties condition and navigation scope
@@ -64,6 +67,18 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
     mTextDocument = doc;
     mCurrentSelectedItem = null;
     this.mProps = props;
+
+    mSelectionManager=new SelectionManager();
+    // initialize the Iterator and find the first element...
+    mNextSelectedItem = findNextSelection(null);
+  }
+
+  /**
+   * Returns the selectionManager instance.
+   * @return
+   */
+  public SelectionManager getSelectionManager() {
+    return mSelectionManager;
   }
 
   /*
@@ -89,37 +104,12 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
     }
     if (mNode != null) {
       element = (OdfElement) getPHElement(mNode);
-      TextSelection item = new TextSelection(mText, element, mCurrentIndex);
+      TextSelection item = new TextSelection(mText, element, mCurrentIndex, mSelectionManager);
       return item;
     }
     return null;
   }
 
-  /*
-   * Returns true if a next TextStyleSelection which match specified style exists
-   */
-  private boolean hasMoreSelections(TextSelection selected) {
-    if (selected == null) {
-
-      try {
-        mNode = getNextMatchElement((Node) mTextDocument.getContentRoot());
-      } catch (Exception ex) {
-        Logger.getLogger(TextStyleNavigation.class.getName())
-            .log(Level.SEVERE, ex.getMessage(), ex);
-      }
-    } else {
-      try {
-        mNode = getNextMatchElement(mNode);
-      } catch (Exception ex) {
-        Logger.getLogger(TextStyleNavigation.class.getName())
-            .log(Level.SEVERE, ex.getMessage(), ex);
-      }
-    }
-    if (mNode != null) {
-      return true;
-    }
-    return false;
-  }
 
   private Node getPHElement(Node node) {
 
@@ -135,25 +125,31 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
   }
 
   /**
-   * Fetches the next selection element.
+   * Returns the next matching element in the document.
+   *
+   * @return the next element
+   * @throws NoSuchElementException if the iteration has no more matching elements
    */
   @Override
   public TextSelection next() {
-    mCurrentSelectedItem = findNextSelection(mCurrentSelectedItem);
-    if (mCurrentSelectedItem != null) {
-   // Selection.SelectionManager.registerItem(mCurrentSelectedItem);
-  }
+      if (mNextSelectedItem!=null) {
+        mCurrentSelectedItem =mNextSelectedItem;
+        mNextSelectedItem = findNextSelection(mCurrentSelectedItem);
+    } else {
+       throw new NoSuchElementException();
+    }
     return mCurrentSelectedItem;
   }
 
   /**
-   * Returns true if more selection elements exist.
+   * Returns {@code true} if the Document has more matching elements.
+   * (In other words, returns {@code true} if {@link #next} would
+   * return an element rather than throwing an exception.)
    *
-   * @see next()
    */
   @Override
   public boolean hasNext() {
-    return (hasMoreSelections(mCurrentSelectedItem));
+    return !(mNextSelectedItem==null);
   }
 
 

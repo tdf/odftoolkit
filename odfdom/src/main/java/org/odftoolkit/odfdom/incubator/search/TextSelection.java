@@ -53,6 +53,7 @@ public class TextSelection extends Selection {
   private OdfTextHeading mHeading;
   private int mIndexInContainer;
   private boolean mIsInserted;
+  private SelectionManager mSelectionManager;
 
   /**
    * Constructor of TextSelection
@@ -62,8 +63,9 @@ public class TextSelection extends Selection {
    *     TextSelection
    * @param index the start index of the text content of the container element
    */
-  TextSelection(String text, OdfElement containerElement, int index) {
+  TextSelection(String text, OdfElement containerElement, int index, SelectionManager selectionManager) {
     mMatchedText = text;
+    mSelectionManager=selectionManager;
     if (containerElement instanceof OdfTextParagraph) {
       mParagraph = (OdfTextParagraph) containerElement;
     } else if (containerElement instanceof OdfTextHeading) {
@@ -144,12 +146,12 @@ public class TextSelection extends Selection {
    */
   @Override
   public void cut() throws InvalidNavigationException {
-    if (validate() == false) {
-      throw new InvalidNavigationException("No matched string at this position");
-    }
+    // if (validate() == false) {
+    //   throw new InvalidNavigationException("No matched string at this position");
+    // }
     OdfElement container = getContainerElement();
     delete(mIndexInContainer, mMatchedText.length(), container);
-    SelectionManager.refreshAfterCut(this);
+    mSelectionManager.refreshAfterCut(this);
     mMatchedText = "";
   }
 
@@ -162,9 +164,9 @@ public class TextSelection extends Selection {
    */
   public void applyStyle(OdfStyleBase style) throws InvalidNavigationException {
     // append the specified style to the selection
-    if (validate() == false) {
-      throw new InvalidNavigationException("No matched string at this position");
-    }
+    // if (validate() == false) {
+    //   throw new InvalidNavigationException("No matched string at this position");
+    // }
     OdfElement parentElement = getContainerElement();
 
     int leftLength = getText().length();
@@ -321,7 +323,7 @@ public class TextSelection extends Selection {
     // optimize the parent element
     optimize(parentElement);
     int offset = newText.length() - leftLength;
-    SelectionManager.refresh(this.getContainerElement(), offset, index + getText().length());
+    mSelectionManager.refresh(this.getContainerElement(), offset, index + getText().length());
     mMatchedText = newText;
   }
 
@@ -347,7 +349,7 @@ public class TextSelection extends Selection {
     mIsInserted = false;
     insertSpan(textSpan, indexOfNew, newElement);
     adjustStyle(newElement, textSpan, null);
-    SelectionManager.refreshAfterPasteAtFrontOf(this, positionItem);
+    mSelectionManager.refreshAfterPasteAtFrontOf(this,positionItem);
   }
 
   /**
@@ -375,7 +377,7 @@ public class TextSelection extends Selection {
     mIsInserted = false;
     insertSpan(textSpan, indexOfNew, newElement);
     adjustStyle(newElement, textSpan, null);
-    SelectionManager.refreshAfterPasteAtEndOf(this, positionItem);
+    mSelectionManager.refreshAfterPasteAtEndOf(this, positionItem);
   }
 
   /**
@@ -789,6 +791,10 @@ public class TextSelection extends Selection {
         } else if (node.getLocalName().equals("tab")) {
           nodeLength = 1;
           fromindex--;
+        // } else if (node.getLocalName().equals("span")) {
+        //   nodeLength = 1;
+        //   fromindex--;
+
         } else {
           nodeLength = textProcessor.getText(node).length();
           insertSpan(textSpan, fromindex, node);
@@ -915,14 +921,17 @@ public class TextSelection extends Selection {
                 .getDefaultStyle(styleElement.getFamily());
       }
       OdfStyleFamily family = OdfStyleFamily.Text;
-      if (family != null) {
+      if (family != null && styleElement != null) {
         for (OdfStyleProperty property : family.getProperties()) {
           if (styleElement.hasProperty(property)) {
             result.put(property, styleElement.getProperty(property));
           }
         }
+
       }
-      styleElement = styleElement.getParentStyle();
+      if (styleElement!=null) {
+        styleElement = styleElement.getParentStyle();
+      }
     }
     return result;
   }

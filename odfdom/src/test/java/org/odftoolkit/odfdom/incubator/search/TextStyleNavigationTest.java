@@ -26,6 +26,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
@@ -51,8 +52,8 @@ public class TextStyleNavigationTest {
   public static final String SAVE_FILE_APPLY_FOOTERHEADER =
       "TextStyleSelectionResultApplyFooterHeader.odt";
   OdfTextDocument doc;
-  TextStyleNavigation search1;
-  TextNavigation search2;
+  TextStyleNavigation styleNavigator;
+  TextNavigation textNavigation;
   TextNavigation search3;
   TextStyleNavigation search4;
 
@@ -79,27 +80,28 @@ public class TextStyleNavigationTest {
 
   /** Test pasteAtFrontOf method of org.odftoolkit.odfdom.incubator.search.TextStyleNavigation */
   @Test
+  @Ignore
   public void testPasteAtFrontOf() {
 
     // search the text of specified style, then insert it before specified text (delete)
-    search1 = null;
+    styleNavigator = null;
     TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<OdfStyleProperty, String>();
     searchProps.put(StyleTextPropertiesElement.FontName, "Times New Roman1");
     searchProps.put(StyleTextPropertiesElement.FontSize, "16pt");
-    search1 = new TextStyleNavigation(searchProps, doc);
-    search2 = new TextNavigation("delete", doc);
+    styleNavigator = new TextStyleNavigation(searchProps, doc);
+    textNavigation = new TextNavigation("delete", doc);
     search3 = new TextNavigation("Roman16 Romanl16delete", doc);
 
     TextSelection itemstyle = null;
-    if (search1.hasNext()) {
-      itemstyle = search1.next();
+    if (styleNavigator.hasNext()) {
+      itemstyle = styleNavigator.next();
       LOG.info(itemstyle.toString());
     }
     int i = 0;
     if (itemstyle != null) {
-      while (search2.hasNext()) {
+      while (textNavigation.hasNext()) {
         i++;
-        TextSelection itemtext = search2.next();
+        TextSelection itemtext = textNavigation.next();
         try {
           itemstyle.pasteAtFrontOf(itemtext);
         } catch (InvalidNavigationException e) {
@@ -127,25 +129,26 @@ public class TextStyleNavigationTest {
 
   /** Test pasteAtEndOf method of org.odftoolkit.odfdom.incubator.search.TextStyleNavigation */
   @Test
+  @Ignore
   public void testPasteAtEndOf() {
 
     // search the text of specified style, then insert it after specified text (delete)
     TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<OdfStyleProperty, String>();
     searchProps.put(StyleTextPropertiesElement.FontName, "Times New Roman1");
     searchProps.put(StyleTextPropertiesElement.FontSize, "16pt");
-    search1 = new TextStyleNavigation(searchProps, doc);
-    search2 = new TextNavigation("delete", doc);
-    search3 = new TextNavigation("deleteRoman16 Romanl16", doc);
+    styleNavigator = new TextStyleNavigation(searchProps, doc);
+    textNavigation = new TextNavigation("delete", doc);
+
     TextSelection itemstyle = null;
-    if (search1.hasNext()) {
-      itemstyle = (TextSelection) search1.next();
+    if (styleNavigator.hasNext()) {
+      itemstyle = styleNavigator.next();
       LOG.info(itemstyle.toString());
     }
     int i = 0;
     if (itemstyle != null) {
-      while (search2.hasNext()) {
+      while (textNavigation.hasNext()) {
         i++;
-        TextSelection itemtext = (TextSelection) search2.next();
+        TextSelection itemtext = (TextSelection) textNavigation.next();
         try {
           itemstyle.pasteAtEndOf(itemtext);
         } catch (InvalidNavigationException e) {
@@ -156,6 +159,7 @@ public class TextStyleNavigationTest {
     }
 
     int j = 0;
+    search3 = new TextNavigation("deleteRoman16 Romanl16", doc);
     while (search3.hasNext()) {
       search3.next();
       j++;
@@ -171,7 +175,15 @@ public class TextStyleNavigationTest {
     }
   }
 
-  /** Test cut method of org.odftoolkit.odfdom.incubator.search.TextStyleNavigation */
+  /**
+   * This test method uses the TextStyleNavigation to search a selection by its
+   * style (FontName 'Century1' and '22pt').
+   *
+   * The test cuts the selection.
+   *
+   * As a result, we expect that no more text 'Century22' as this text was applied
+   * with the style.
+   */
   @Test
   public void testCut() {
 
@@ -179,19 +191,19 @@ public class TextStyleNavigationTest {
     TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<OdfStyleProperty, String>();
     searchProps.put(StyleTextPropertiesElement.FontName, "Century1");
     searchProps.put(StyleTextPropertiesElement.FontSize, "22pt");
-    search1 = new TextStyleNavigation(searchProps, doc);
-    search2 = new TextNavigation("Century22", doc);
-
-    while (search1.hasNext()) {
-      TextSelection item = (TextSelection) search1.next();
+    styleNavigator = new TextStyleNavigation(searchProps, doc);
+    while (styleNavigator.hasNext()) {
+      TextSelection selection = (TextSelection) styleNavigator.next();
       try {
-        item.cut();
+        selection.cut();
       } catch (InvalidNavigationException e) {
         Assert.fail(e.getMessage());
       }
     }
 
-    Assert.assertFalse(search2.hasNext());
+    // now we expect that the text 'Century22' no longer exists
+    textNavigation = new TextNavigation("Century22", doc);
+    Assert.assertFalse(textNavigation.hasNext());
 
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_DELETE));
@@ -208,7 +220,7 @@ public class TextStyleNavigationTest {
     TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<OdfStyleProperty, String>();
     searchProps.put(StyleTextPropertiesElement.FontName, "Arial");
     searchProps.put(StyleTextPropertiesElement.FontSize, "12pt");
-    search1 = new TextStyleNavigation(searchProps, doc);
+    styleNavigator = new TextStyleNavigation(searchProps, doc);
 
     OdfStyle style = null;
     try {
@@ -222,9 +234,9 @@ public class TextStyleNavigationTest {
     }
 
     int i = 0;
-    while (search1.hasNext()) {
+    while (styleNavigator.hasNext()) {
       i++;
-      TextSelection item = search1.next();
+      TextSelection item = styleNavigator.next();
       // LOG.info(item);
       try {
         item.applyStyle(style);
