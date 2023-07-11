@@ -176,13 +176,13 @@ public class TextStyleNavigationTest {
   }
 
   /**
-   * This test method uses the TextStyleNavigation to search a selection by its
-   * style (FontName 'Century1' and '22pt').
+   * This test method uses the TextStyleNavigation to search a selection by its style (FontName
+   * 'Century1' and '22pt').
    *
-   * The test cuts the selection.
+   * <p>The test cuts the selection.
    *
-   * As a result, we expect that no more text 'Century22' as this text was applied
-   * with the style.
+   * <p>As a result, we expect that no more text 'Century22' as this text was applied with the
+   * style.
    */
   @Test
   public void testCut() {

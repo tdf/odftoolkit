@@ -68,13 +68,14 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
     mCurrentSelectedItem = null;
     this.mProps = props;
 
-    mSelectionManager=new SelectionManager();
+    mSelectionManager = new SelectionManager();
     // initialize the Iterator and find the first element...
     mNextSelectedItem = findNextSelection(null);
   }
 
   /**
    * Returns the selectionManager instance.
+   *
    * @return
    */
   public SelectionManager getSelectionManager() {
@@ -110,7 +111,6 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
     return null;
   }
 
-
   private Node getPHElement(Node node) {
 
     // get paragraph or heading element
@@ -132,26 +132,23 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
    */
   @Override
   public TextSelection next() {
-      if (mNextSelectedItem!=null) {
-        mCurrentSelectedItem =mNextSelectedItem;
-        mNextSelectedItem = findNextSelection(mCurrentSelectedItem);
+    if (mNextSelectedItem != null) {
+      mCurrentSelectedItem = mNextSelectedItem;
+      mNextSelectedItem = findNextSelection(mCurrentSelectedItem);
     } else {
-       throw new NoSuchElementException();
+      throw new NoSuchElementException();
     }
     return mCurrentSelectedItem;
   }
 
   /**
-   * Returns {@code true} if the Document has more matching elements.
-   * (In other words, returns {@code true} if {@link #next} would
-   * return an element rather than throwing an exception.)
-   *
+   * Returns {@code true} if the Document has more matching elements. (In other words, returns
+   * {@code true} if {@link #next} would return an element rather than throwing an exception.)
    */
   @Override
   public boolean hasNext() {
-    return !(mNextSelectedItem==null);
+    return !(mNextSelectedItem == null);
   }
-
 
   /*
    * Return the element from the current matching selection.

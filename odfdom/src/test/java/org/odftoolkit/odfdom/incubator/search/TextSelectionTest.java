@@ -130,12 +130,11 @@ public class TextSelectionTest {
     }
   }
 
-
-    /**
-   * Test pasteAtFrontOf method of TextSelection copy the
-   * first 'change' word in the front of the first match of the 'delete' word
+  /**
+   * Test pasteAtFrontOf method of TextSelection copy the first 'change' word in the front of the
+   * first match of the 'delete' word
    *
-   * This test exists only for testing the core functionality
+   * <p>This test exists only for testing the core functionality
    */
   @Test
   public void testPasteAtFrontOfFirst() {
@@ -148,7 +147,7 @@ public class TextSelectionTest {
     }
 
     // now find all occurrences of 'delete' and insert 'change'
-    search =new TextNavigation("delete", doc);
+    search = new TextNavigation("delete", doc);
     if (search.hasNext()) {
       TextSelection item = search.next();
       try {
@@ -166,11 +165,9 @@ public class TextSelectionTest {
     }
   }
 
-
-
   /**
-   * Test pasteAtFrontOf method of TextSelection copy the
-   * first 'change' word in the front of all the 'delete' words
+   * Test pasteAtFrontOf method of TextSelection copy the first 'change' word in the front of all
+   * the 'delete' words
    */
   @Test
   @Ignore
@@ -185,7 +182,7 @@ public class TextSelectionTest {
 
     // now find all occurrences of 'delete' and insert 'change'
     int i = 0;
-    search =new TextNavigation("delete", doc);
+    search = new TextNavigation("delete", doc);
     while (search.hasNext()) {
       TextSelection item = search.next();
       i++;
@@ -201,7 +198,6 @@ public class TextSelectionTest {
     while (search.hasNext()) {
       search.next();
       j++;
-
     }
     // The count of 'changedelete' should be equals as 'delete'
     assertTrue(i == j);
@@ -215,10 +211,9 @@ public class TextSelectionTest {
   }
 
   /**
-   * Test pasteAtEndOf method of
-   * org.odftoolkit.odfdom.incubator.search.TextSelection
+   * Test pasteAtEndOf method of org.odftoolkit.odfdom.incubator.search.TextSelection
    *
-   * copy the first 'change' word at the end of all the 'delete' words
+   * <p>copy the first 'change' word at the end of all the 'delete' words
    */
   @Test
   @Ignore
@@ -296,10 +291,7 @@ public class TextSelectionTest {
     }
   }
 
-  /**
-   * Test replaceWith method of TextSelection. Replace all the
-   * 'ODFDOM' with 'Odf Toolkit'
-   */
+  /** Test replaceWith method of TextSelection. Replace all the 'ODFDOM' with 'Odf Toolkit' */
   @Test
   public void testReplacewith() {
 
@@ -308,12 +300,12 @@ public class TextSelectionTest {
     search = new TextNavigation("ODFDOM", doc);
     int i = 0;
     while (search.hasNext()) {
-        TextSelection item = search.next();
-        try {
-          item.replaceWith("Odf Toolkit");
-        } catch (InvalidNavigationException e) {
-          Assert.fail(e.getMessage());
-        }
+      TextSelection item = search.next();
+      try {
+        item.replaceWith("Odf Toolkit");
+      } catch (InvalidNavigationException e) {
+        Assert.fail(e.getMessage());
+      }
       i++;
     }
     // we expect 6 occurrences
@@ -341,8 +333,8 @@ public class TextSelectionTest {
   }
 
   /**
-   * Test replaceWith method of TextSelection. Replace all the
-   * 'ODFDOM' with 'Odf Toolkit' and set style 'bold'
+   * Test replaceWith method of TextSelection. Replace all the 'ODFDOM' with 'Odf Toolkit' and set
+   * style 'bold'
    */
   @Test
   public void testReplacewithAndBold() {
@@ -357,14 +349,14 @@ public class TextSelectionTest {
     int i = 0;
     while (search.hasNext()) {
       // if (i > 0) {
-        TextSelection item = search.next();
-        try {
-          item.replaceWith("Odf Toolkit");
-          item.applyStyle(style);
-        } catch (InvalidNavigationException e) {
-          Assert.fail(e.getMessage());
-        }
-        // }
+      TextSelection item = search.next();
+      try {
+        item.replaceWith("Odf Toolkit");
+        item.applyStyle(style);
+      } catch (InvalidNavigationException e) {
+        Assert.fail(e.getMessage());
+      }
+      // }
       i++;
     }
     // we expect 6 occurrences
@@ -387,7 +379,6 @@ public class TextSelectionTest {
     }
   }
 
-
   /**
    * Test replacewith method of org.odftoolkit.odfdom.incubator.search.TextSelection with multiple
    * spaces
@@ -402,9 +393,7 @@ public class TextSelectionTest {
             .collect(Collectors.toList());
     navigations.forEach(n -> assertTrue("Navigation " + n + " should have a next", n.hasNext()));
     final List<TextSelection> selections =
-        navigations.stream()
-            .map(n -> n.next())
-            .collect(Collectors.toList());
+        navigations.stream().map(n -> n.next()).collect(Collectors.toList());
     try {
       selections.get(0).replaceWith("Xmultiple___X");
       selections.get(1).replaceWith("Xcontaining_X");

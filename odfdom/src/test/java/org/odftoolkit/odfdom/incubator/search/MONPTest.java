@@ -64,7 +64,7 @@ public class MONPTest {
           Assert.fail(e.getMessage());
         }
       }
-      Assert.assertTrue(20== i);
+      Assert.assertTrue(20 == i);
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE));
     } catch (Exception e) {
       Logger.getLogger(MONPTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);

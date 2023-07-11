@@ -63,9 +63,10 @@ public class TextSelection extends Selection {
    *     TextSelection
    * @param index the start index of the text content of the container element
    */
-  TextSelection(String text, OdfElement containerElement, int index, SelectionManager selectionManager) {
+  TextSelection(
+      String text, OdfElement containerElement, int index, SelectionManager selectionManager) {
     mMatchedText = text;
-    mSelectionManager=selectionManager;
+    mSelectionManager = selectionManager;
     if (containerElement instanceof OdfTextParagraph) {
       mParagraph = (OdfTextParagraph) containerElement;
     } else if (containerElement instanceof OdfTextHeading) {
@@ -304,8 +305,8 @@ public class TextSelection extends Selection {
    */
   public void replaceWith(String newText) throws InvalidNavigationException {
     if (validate() == false) {
-      //throw new InvalidNavigationException("No matched string at this position");
-      return ;
+      // throw new InvalidNavigationException("No matched string at this position");
+      return;
     }
 
     OdfElement parentElement = getContainerElement();
@@ -349,7 +350,7 @@ public class TextSelection extends Selection {
     mIsInserted = false;
     insertSpan(textSpan, indexOfNew, newElement);
     adjustStyle(newElement, textSpan, null);
-    mSelectionManager.refreshAfterPasteAtFrontOf(this,positionItem);
+    mSelectionManager.refreshAfterPasteAtFrontOf(this, positionItem);
   }
 
   /**
@@ -791,9 +792,9 @@ public class TextSelection extends Selection {
         } else if (node.getLocalName().equals("tab")) {
           nodeLength = 1;
           fromindex--;
-        // } else if (node.getLocalName().equals("span")) {
-        //   nodeLength = 1;
-        //   fromindex--;
+          // } else if (node.getLocalName().equals("span")) {
+          //   nodeLength = 1;
+          //   fromindex--;
 
         } else {
           nodeLength = textProcessor.getText(node).length();
@@ -927,9 +928,8 @@ public class TextSelection extends Selection {
             result.put(property, styleElement.getProperty(property));
           }
         }
-
       }
-      if (styleElement!=null) {
+      if (styleElement != null) {
         styleElement = styleElement.getParentStyle();
       }
     }
