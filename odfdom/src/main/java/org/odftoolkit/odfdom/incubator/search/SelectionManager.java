@@ -87,7 +87,7 @@ public class SelectionManager {
    * @param positionItem the position item
    */
   public void refreshAfterPasteAtFrontOf(Selection item, Selection positionItem) {
-    // travase the whole sub tree
+    // traverse the whole sub tree
     OdfElement element = positionItem.getElement();
     if (repository.containsKey(element)) {
       Vector<Selection> selections = repository.get(element);
