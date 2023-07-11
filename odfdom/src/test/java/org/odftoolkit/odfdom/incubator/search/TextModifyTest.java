@@ -21,10 +21,8 @@ package org.odftoolkit.odfdom.incubator.search;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
-import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -37,10 +35,8 @@ import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.text.TextSElement;
-import org.odftoolkit.odfdom.incubator.doc.text.OdfTextSpan;
 import org.odftoolkit.odfdom.incubator.doc.text.OdfWhitespaceProcessor;
 import org.odftoolkit.odfdom.pkg.OdfElement;
-import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -76,17 +72,13 @@ public class TextModifyTest {
   @After
   public void tearDown() {}
 
-
-
-
-
-   /** Test replace a single text part */
+  /** Test replace a single text part */
   @Test
   public void testDeleteSingleElement() {
-    String phrase="";
+    String phrase = "";
 
     // test single existing phrase
-    phrase="<%NAME%>";
+    phrase = "<%NAME%>";
     search = new TextNavigation(phrase, doc);
     while (search.hasNext()) {
       TextSelection result = search.next();
@@ -98,20 +90,16 @@ public class TextModifyTest {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
-    //  OdfElement parentElement = result.getContainerElement();
-  //    delete(result.getIndex(), phrase.length(), parentElement);
+      //  OdfElement parentElement = result.getContainerElement();
+      //    delete(result.getIndex(), phrase.length(), parentElement);
 
-    //  replaceNeu(parentElement,phrase,"");
+      //  replaceNeu(parentElement,phrase,"");
     }
 
-
-
     // test single phrase should no longer exist
-    phrase="<%NAME%>";
+    phrase = "<%NAME%>";
     search = new TextNavigation(phrase, doc);
     assertFalse(search.hasNext());
-
-
 
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_DELETE));
@@ -119,21 +107,16 @@ public class TextModifyTest {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
-
-
   }
 
-
-
-
-   /** Test replace a single text part */
+  /** Test replace a single text part */
   @Test
   public void testDeleteMultiElement() {
-    String phrase="";
+    String phrase = "";
     // test single existing phrase
-    phrase="ODFDOM";
+    phrase = "ODFDOM";
     search = new TextNavigation(phrase, doc);
-    int count=0;
+    int count = 0;
     while (search.hasNext()) {
       TextSelection result = search.next();
       assertNotNull(result);
@@ -144,12 +127,12 @@ public class TextModifyTest {
         e.printStackTrace();
         fail();
       }
-      count ++;
+      count++;
     }
-    assertEquals(6,count);
+    assertEquals(6, count);
 
     // test phrase should no longer exist
-    phrase="ODFDOM";
+    phrase = "ODFDOM";
     search = new TextNavigation(phrase, doc);
     assertFalse(search.hasNext());
 
@@ -159,17 +142,15 @@ public class TextModifyTest {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
-
-
   }
 
-  public void replaceNeu( OdfElement element, String pattern, String replace ) {
-     String text=element.getTextContent();
-		 text=text.replace(pattern, replace);
-		 element.setTextContent(text);
+  public void replaceNeu(OdfElement element, String pattern, String replace) {
+    String text = element.getTextContent();
+    text = text.replace(pattern, replace);
+    element.setTextContent(text);
   }
 
-    /*
+  /*
    * delete the pNode from the fromindex text, and delete leftLength text
    */
   private void delete(int fromindex, int leftLength, Node pNode) {
@@ -257,8 +238,4 @@ public class TextModifyTest {
       node = node.getNextSibling();
     }
   }
-
-
-
-
 }

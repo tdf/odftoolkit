@@ -69,13 +69,14 @@ public class TextNavigation extends Navigation<TextSelection> {
     mCurrentSelectedItem = null;
     mbFinishFindInHeaderFooter = false;
 
-    mSelectionManager=new SelectionManager();
+    mSelectionManager = new SelectionManager();
     // initialize the Iterator and find the first element...
     mNextSelectedItem = findNextSelection(null);
   }
 
   /**
    * Returns the selectionManager instance.
+   *
    * @return
    */
   public SelectionManager getSelectionManager() {
@@ -91,7 +92,9 @@ public class TextNavigation extends Navigation<TextSelection> {
     if (selected != null) {
       int nextIndex = setCurrentTextAndGetIndex(selected);
       if (nextIndex != -1) {
-        TextSelection item = new TextSelection(mCurrentText, selected.getContainerElement(), nextIndex,mSelectionManager);
+        TextSelection item =
+            new TextSelection(
+                mCurrentText, selected.getContainerElement(), nextIndex, mSelectionManager);
         return item;
       }
     }
@@ -110,11 +113,13 @@ public class TextNavigation extends Navigation<TextSelection> {
       if (selected == null) {
         element = (OdfElement) getNextMatchElementInTree(masterpage, masterpage);
       } else {
-        element = (OdfElement) getNextMatchElementInTree(selected.getContainerElement(), masterpage);
+        element =
+            (OdfElement) getNextMatchElementInTree(selected.getContainerElement(), masterpage);
       }
 
       if (element != null) {
-        TextSelection item = new TextSelection(mCurrentText, element, mCurrentIndex,mSelectionManager);
+        TextSelection item =
+            new TextSelection(mCurrentText, element, mCurrentIndex, mSelectionManager);
         return item;
       } else {
         return null;
@@ -126,13 +131,11 @@ public class TextNavigation extends Navigation<TextSelection> {
     return null;
   }
 
-
-
   /*
    * Finds the next TextSelection which match specified style
    */
   private TextSelection findNextSelection(TextSelection selected) {
-    TextSelection result=null;
+    TextSelection result = null;
     if (!mbFinishFindInHeaderFooter) {
       result = findInHeaderFooter(selected);
       if (result != null) {
@@ -151,7 +154,7 @@ public class TextNavigation extends Navigation<TextSelection> {
         Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
       }
       if (element != null) {
-        result= new TextSelection(mCurrentText, element, mCurrentIndex,mSelectionManager);
+        result = new TextSelection(mCurrentText, element, mCurrentIndex, mSelectionManager);
         mSelectionManager.registerItem(result);
         return result;
       } else {
@@ -162,13 +165,13 @@ public class TextNavigation extends Navigation<TextSelection> {
     OdfElement containerElement = selected.getContainerElement();
     int nextIndex = setCurrentTextAndGetIndex(selected);
     if (nextIndex != -1) {
-      result = new TextSelection(mCurrentText, containerElement, nextIndex,mSelectionManager);
+      result = new TextSelection(mCurrentText, containerElement, nextIndex, mSelectionManager);
       mSelectionManager.registerItem(result);
       return result;
     } else {
       OdfElement element = (OdfElement) getNextMatchElement(containerElement);
       if (element != null) {
-        result = new TextSelection(mCurrentText, element, mCurrentIndex,mSelectionManager);
+        result = new TextSelection(mCurrentText, element, mCurrentIndex, mSelectionManager);
         mSelectionManager.registerItem(result);
         return result;
       } else {
@@ -176,7 +179,6 @@ public class TextNavigation extends Navigation<TextSelection> {
       }
     }
   }
-
 
   private int setCurrentTextAndGetIndex(TextSelection selected) {
     int index = selected.getIndex();
@@ -194,8 +196,8 @@ public class TextNavigation extends Navigation<TextSelection> {
         mCurrentText = content.substring(nextIndex, eIndex);
       }
     } catch (IndexOutOfBoundsException e) {
-       // can occur in case the text of the selection was manipulated from the client
-       return -1;
+      // can occur in case the text of the selection was manipulated from the client
+      return -1;
     }
     return nextIndex;
   }
@@ -208,24 +210,22 @@ public class TextNavigation extends Navigation<TextSelection> {
    */
   @Override
   public TextSelection next() {
-      if (mNextSelectedItem!=null) {
-        mCurrentSelectedItem =mNextSelectedItem;
-        mNextSelectedItem = findNextSelection(mCurrentSelectedItem);
+    if (mNextSelectedItem != null) {
+      mCurrentSelectedItem = mNextSelectedItem;
+      mNextSelectedItem = findNextSelection(mCurrentSelectedItem);
     } else {
-       throw new NoSuchElementException();
+      throw new NoSuchElementException();
     }
     return mCurrentSelectedItem;
   }
 
   /**
-   * Returns {@code true} if the Document has more matching elements.
-   * (In other words, returns {@code true} if {@link #next} would
-   * return an element rather than throwing an exception.)
-   *
+   * Returns {@code true} if the Document has more matching elements. (In other words, returns
+   * {@code true} if {@link #next} would return an element rather than throwing an exception.)
    */
   @Override
   public boolean hasNext() {
-    return !(mNextSelectedItem==null);
+    return !(mNextSelectedItem == null);
   }
 
   /*

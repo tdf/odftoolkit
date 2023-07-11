@@ -18,8 +18,6 @@
  */
 package org.odftoolkit.odfdom.incubator.search;
 
-import java.util.Hashtable;
-import java.util.Vector;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 /**
@@ -96,6 +94,4 @@ public abstract class Selection {
    * @param offset the offset that the mIndex should be added
    */
   protected abstract void refresh(int offset);
-
-
 }

@@ -18,28 +18,25 @@
  */
 package org.odftoolkit.odfdom.incubator.search;
 
-import org.w3c.dom.Node;
-
 import java.util.Iterator;
-
 import org.odftoolkit.odfdom.pkg.OdfElement;
+import org.w3c.dom.Node;
 
 /**
  * Abstract class Navigation used to navigate the document and find the matched element by the user
  * defined conditions
  */
 public abstract class Navigation<T extends Selection> implements Iterator<T> {
- /**
+  /**
    * get the current Selection result
    *
    * @return the current Selection result
    */
- // public abstract Selection getSelection();
+  // public abstract Selection getSelection();
 
   /**
-   * Return true if document still has more matched Selection when traversing the
-   * document(In other words return true if next() would return an element
-   * instance rather than return null)
+   * Return true if document still has more matched Selection when traversing the document(In other
+   * words return true if next() would return an element instance rather than return null)
    *
    * @return true if document still has more matched Selection, and vice versa
    */
@@ -64,8 +61,7 @@ public abstract class Navigation<T extends Selection> implements Iterator<T> {
    * check if the element match the user defined condition
    *
    * @param element navigate this element
-   * @return true if the element match the user defined condition; false if not
-   *         match
+   * @return true if the element match the user defined condition; false if not match
    */
   public abstract boolean match(Node element);
 
