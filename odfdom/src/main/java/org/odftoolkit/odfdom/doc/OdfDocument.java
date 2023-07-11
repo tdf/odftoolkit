@@ -1250,14 +1250,19 @@ public abstract class OdfDocument extends OdfSchemaDocument {
   public Boolean hasCollaboration() {
     return mHasCollaboration != null && mHasCollaboration;
   }
-  
+
   private SelectionManager mSelectionManager = null;
-  /** *  All text selections within this document are cached and have to be updated when the document is changed.The <code>SelectionManager</code> takes care of those updates across each <code>TextNavigator</code>
-     * @return the single selection manager for an OdfDocument instance */
-  public SelectionManager getSelectionManager(){
-      if(mSelectionManager == null){
-          mSelectionManager = new SelectionManager();
-      }
-      return mSelectionManager;
+  /**
+   * * All text selections within this document are cached and have to be updated when the document
+   * is changed.The <code>SelectionManager</code> takes care of those updates across each <code>
+   * TextNavigator</code>
+   *
+   * @return the single selection manager for an OdfDocument instance
+   */
+  public SelectionManager getSelectionManager() {
+    if (mSelectionManager == null) {
+      mSelectionManager = new SelectionManager();
+    }
+    return mSelectionManager;
   }
 }

@@ -18,8 +18,8 @@
  */
 package org.odftoolkit.odfdom.incubator.search;
 
-import java.util.Hashtable;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.HashMap;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 /**
@@ -29,10 +29,10 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
  */
 public class SelectionManager {
 
-  private Hashtable<OdfElement, Vector<Selection>> repository = null;
+  private HashMap<OdfElement, ArrayList<Selection>> repository = null;
 
   public SelectionManager() {
-    repository = new Hashtable<OdfElement, Vector<Selection>>();
+    repository = new HashMap<OdfElement, ArrayList<Selection>>();
   }
 
   /**
@@ -43,11 +43,11 @@ public class SelectionManager {
   public void registerItem(Selection item) {
     OdfElement element = item.getElement();
     if (repository.containsKey(element)) {
-      Vector<Selection> selections = repository.get(element);
+      ArrayList<Selection> selections = repository.get(element);
       int i = 0;
       while (i < selections.size()) {
         if (selections.get(i).getIndex() > item.getIndex()) {
-          selections.insertElementAt(item, i);
+          selections.add(i, item);
           break;
         }
         i++;
@@ -56,7 +56,7 @@ public class SelectionManager {
         selections.add(item);
       }
     } else {
-      Vector<Selection> al = new Vector<Selection>();
+      ArrayList<Selection> al = new ArrayList<Selection>();
       al.add(item);
       repository.put(element, al);
     }
@@ -71,7 +71,7 @@ public class SelectionManager {
     // travase the whole sub tree
     OdfElement element = cutItem.getElement();
     if (repository.containsKey(element)) {
-      Vector<Selection> selections = repository.get(element);
+      ArrayList<Selection> selections = repository.get(element);
       for (int i = 0; i < selections.size(); i++) {
         if (selections.get(i).getIndex() > cutItem.getIndex()) {
           selections.get(i).refreshAfterFrontalDelete(cutItem);
@@ -90,7 +90,7 @@ public class SelectionManager {
     // traverse the whole sub tree
     OdfElement element = positionItem.getElement();
     if (repository.containsKey(element)) {
-      Vector<Selection> selections = repository.get(element);
+      ArrayList<Selection> selections = repository.get(element);
       for (int i = 0; i < selections.size(); i++) {
         if (selections.get(i).getIndex() >= positionItem.getIndex()) {
           selections.get(i).refreshAfterFrontalInsert(item);
@@ -116,7 +116,7 @@ public class SelectionManager {
     }
 
     if (repository.containsKey(element)) {
-      Vector<Selection> selections = repository.get(element);
+      ArrayList<Selection> selections = repository.get(element);
       for (int i = 0; i < selections.size(); i++) {
         if (selections.get(i).getIndex() >= positionIndex) {
           selections.get(i).refreshAfterFrontalInsert(item);
@@ -133,7 +133,7 @@ public class SelectionManager {
   public void unregisterItem(Selection item) {
     OdfElement element = item.getElement();
     if (repository.containsKey(element)) {
-      Vector<Selection> selections = repository.get(element);
+      ArrayList<Selection> selections = repository.get(element);
       selections.remove(item);
     }
   }
@@ -147,7 +147,7 @@ public class SelectionManager {
    */
   public void refresh(OdfElement containerElement, int offset, int positionIndex) {
     if (repository.containsKey(containerElement)) {
-      Vector<Selection> selections = repository.get(containerElement);
+      ArrayList<Selection> selections = repository.get(containerElement);
       for (int i = 0; i < selections.size(); i++) {
         if (selections.get(i).getIndex() >= positionIndex) {
           selections.get(i).refresh(offset);
