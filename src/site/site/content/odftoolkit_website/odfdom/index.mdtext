@@ -10,7 +10,23 @@ With 0.10.0 the basics of collaboration functionality - [the change/operation co
 
 ## Quickstart
 
-Put the odfdom.jar file in your classpath. You will need [Apache Xerces-J][9] as XML parser and DOM implementation as well. Start with the following sample code to create a simple text document.
+Put the odfdom.jar file in your classpath. If you use [Maven][12] than you just need to add the following dependency to your project pom.xml:
+
+```xml
+  <dependency>
+    <groupId>org.odftoolkit</groupId>
+    <artifactId>odfdom-java</artifactId>
+    <!-- find latest versions: https://github.com/tdf/odftoolkit/releases -->
+    <version>1.0.0</version>
+  </dependency>
+```
+
+**Note:** You also need [Apache Xerces-J][9] as XML parser and DOM implementation as well.
+
+
+### Create a New Document
+
+ Start with the following sample code to create a simple text document:
 
 ```Java
     // Create a text document from a standard template
@@ -22,7 +38,20 @@ Put the odfdom.jar file in your classpath. You will need [Apache Xerces-J][9] as
     odt.save("MyFilename.odt");
 ```
 
-For information on working with the source code, please refer to [the development section][8].
+### Load an Existing Document
+
+To work on an existing document you can load it from your source:
+
+```Java
+    // Load an existing text document from local file
+    OdfDocument odt = OdfDocument.loadDocument("MyFilename.odt");
+    // Append or change text....
+```
+
+More Examples:
+
+ - [ODFDOM - How to Change the Content of a Document][13]
+
 
 ## Documentation
 
@@ -51,3 +80,5 @@ If you're a developer, just dive into [the development section][8]. Here you fin
   [9]: https://xerces.apache.org/
   [10]: ProjectOverview.html
   [11]: Layers.html
+  [12]: https://maven.apache.org/
+  [13]: change_api.html

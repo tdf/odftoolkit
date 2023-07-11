@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="en">
+  <head>
+    <title>ODF Toolkit</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../css/odf.css" type="text/css">
+  </head>
+  <body>
+    <div id="banner">
+      <div id="bannerright">
+        <a href="https://www.documentfoundation.org/" alt="The Document Foundation"><img src="../images/LibreOffice-Initial-Artwork-Logo-ColorLogoBasic-500px.png" id="tdf-logo" class="w350" alt="The Document Foundation"></a>
+      </div>
+    </div>
+    <div id="clear"></div>
+    <div id="sidenav">
+      <h1>General</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../index.html">About</a></li> 
+        <li class="list-group-item"><a href="../downloads.html">Downloads</a></li> 
+        <li class="list-group-item"><a href="../ReleaseNotes.html">ReleaseNotes</a></li> 
+      </ul> 
+      <h1>Components</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../odfdom/index.html">ODFDOM</a></li> 
+        <li class="list-group-item"><a href="../conformance/ODFValidator.html">ODF Validator</a></li> 
+        <li class="list-group-item"><a href="../generator/index.html">Schema To Template</a></li> 
+        <li class="list-group-item"><a href="../xsltrunner/ODFXSLTRunner.html">XSLT Runner</a></li> 
+        <li class="list-group-item"><a href="../simple/index.html">Simple API (deprecated)</a></li> 
+      </ul> 
+      <h1>Community</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../get-involved.html">Get Involved</a></li> 
+        <li class="list-group-item"><a href="../mailing-lists.html">Mailing Lists</a></li> 
+        <li class="list-group-item"><a href="../people.html">People</a></li> 
+        <li class="list-group-item"><a href="../developer-faqs.html">FAQs</a></li> 
+      </ul> 
+      <h1>Development</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="../source.html">Source Code</a></li> 
+        <li class="list-group-item"><a href="https://github.com/tdf/odftoolkit/issues">Bug Tracker</a></li> 
+        <li class="list-group-item"><a href="../javadoc.html">JavaDoc</a></li> 
+        <li class="list-group-item"><a href="../website-development.html">Website Development</a></li> 
+        <li class="list-group-item"><a href="../release-guide.html">Release Guide</a></li> 
+      </ul> 
+      <h1>TDF</h1> 
+      <ul class="list-group"> 
+        <li class="list-group-item"><a href="https://www.documentfoundation.org/">The Document Foundation</a></li> 
+      </ul> 
+    </div>
+    <div id="contenta">
+      <h1 id="odfdom-changing-a-document">ODFDOM - Changing a Document</h1> 
+      <p>The ODF Toolkit provides an easy to use API to modify an existing Text or a Spreadsheet document. The following sections will explain the core concepts and how to use this API.</p> 
+      <h2 id="text-document">Text Document</h2> 
+      <p>Changing the content of a Text Document you first need to identify the part of a document you want to modify. To find a specific part in a Text document you use the <code>Navigation</code> Interface which allows to navigate through a document with a java <code>Iterator</code>.</p> 
+      <h3 id="the-textnavigation">The TextNavigation</h3> 
+      <p>The class <code>TextNavigation</code> allows you to search for a text phrase and navigate through all occurrences in a document. The following example searches for all text phrases <code>Open Document Format</code></p> 
+      <div class="codehilite">
+        <pre><code class="language-Java">    // Load an existing text document from local file
+    OdfDocument odt = OdfDocument.loadDocument("MyFilename.odt");
+    TextNavigation search = new TextNavigation("Open Document Format", doc);
+    // Navigate through the document....
+    while (search.hasNext()) {
+        TextSelection selection = search.next();
+        ....
+    }
+</code></pre>
+      </div> 
+      <h3 id="regular-expressions">Regular Expressions</h3> 
+      <p>The <code>TextNavigation</code> also supports regular expressions. The following example searches for all words starting with an upper case letter:</p> 
+      <div class="codehilite">
+        <pre><code class="language-Java">    // Load an existing text document from local file
+    OdfDocument odt = OdfDocument.loadDocument("MyFilename.odt");
+    // Find all words starting with Uppercase
+    TextNavigation search = new TextNavigation("([A-Z])\\w+", doc);
+    while (search.hasNext()) {
+        TextSelection selection = search.next();
+        ....
+    }
+</code></pre>
+      </div> 
+      <h3 id="the-textselection">The TextSelection</h3> 
+      <p>The <code>TextNavigation</code> iterates through a document and returns instances of <code>TextSelection</code>. A <code>TextSelection</code> represents the selection of a document matching the search phrase. The <code>Selection</code> class provides useful methods to modify the corresponding part in the document.</p> 
+      <p>The following example replaces the text phrase <code>Open Document Format</code> with the shortcut <code>ODF</code>:</p> 
+      <div class="codehilite">
+        <pre><code class="language-Java">    // Load an existing text document from local file
+    OdfDocument odt = OdfDocument.loadDocument("MyFilename.odt");
+    TextNavigation search = new TextNavigation("Open Document Format", doc);
+    // Navigate through the document....
+    while (search.hasNext()) {
+        TextSelection selection = search.next();
+        // replace selection with 'ODF'
+        selection.replaceWith("ODF");
+    }
+</code></pre>
+      </div> 
+      <p>If you want to delete the text selection you can call the method <code>cut()</code>:</p> 
+      <div class="codehilite">
+        <pre><code class="language-Java">    while (search.hasNext()) {
+        TextSelection selection = search.next();
+        // remove the selection
+        selection.cut()
+    }
+</code></pre>
+      </div> 
+      <h3 id="apply-a-style">Apply a Style</h3> 
+      <p>Another way to modify a part of a text document is to just apply a new style to a text selection. The following example applies the font weight 'bold' to all occurrences of "Open Document Format"</p> 
+      <div class="codehilite">
+        <pre><code class="language-Java">    // create a new style....
+    OdfStyle styleBold = new OdfStyle(contentDOM);
+    styleBold.setProperty(StyleTextPropertiesElement.FontWeight, "bold");
+    styleBold.setStyleFamilyAttribute("text");
+    // bold all occurrences of "Open Document Format"
+    TextNavigation search = new TextNavigation("Open Document Format", doc);
+    while (search.hasNext()) {
+       TextSelection selection = search.next();
+       selection.applyStyle(styleBold);
+    }
+</code></pre>
+      </div> 
+      <h3 id="insert-a-textselection">Insert a TextSelection</h3> 
+      <p>The method <code>pasteAtEndOf</code> allows you to append a part of a text document at th end of a another part of this document. This can be useful if you want ot duplicate or move a text selection within the document.</p> 
+      <p>The following example first finds the text selection 'is cool' and appends this selection to all occurrences of 'ODF Toolkit':</p> 
+      <div class="codehilite">
+        <pre><code class="language-Java">    // find text selection 'is cool'
+    TextNavigation searchIsCool = new TextNavigation("is cool", doc);
+    if (searchIsCool.hasNext()) {
+        // get first selection
+        TextSelection isCoolSelection = searchToolkit.next();
+        // next paste this selection after each 'ODF Toolkit'
+        TextNavigation searchToolkit = new TextNavigation("ODF Toolkit", doc);
+        while (search.hasNext()) {
+            TextSelection selection = searchToolkit.next();
+            isCoolSelection.pasteAtEndOf(selection);
+        }
+    }
+</code></pre>
+      </div> 
+      <p>If you want to paste a selection at front of another selection use the method <code>pasteAtFrontOf</code>.</p> 
+      <h2 id="spreadsheet-document">Spreadsheet Document</h2> 
+      <p>Changing the content of a Spreadsheet Document is much easier as you can identify cells of a spreadsheet by its coordinates.</p> 
+      <p>The following example finds the cell 'A10' and replaces the content with the number 100.</p> 
+      <div class="codehilite">
+        <pre><code class="language-Java">    // Load an existing text document from local file
+    OdfDocument odt = OdfDocument.loadDocument("MyFilename.ods");
+	// get first table sheet of the current document...
+	OdfTable tbl = doc.getTableList(true).get(0);
+    // select cell..
+	OdfTableCell cell = tbl.getCellByPosition("A10");
+	// update the cell value
+    cell.setStringValue(100);
+</code></pre>
+      </div> 
+      <h3 id="recalculate-formulas">Recalculate Formulas</h3> 
+      <p>The ODF Toolkit is a lightweight Java library to create, read and update the data of ODF documents. Unlike other approaches, which rely on runtime manipulation of heavy-weight editors via an automation interface, you can only update the content of the (xml)document. But you have no access to any application interface like LibreOffice. So in case of a SpreadSheet document you can not call a method to recalculate a formula.</p> 
+      <p>In case that you update cell values that affect a formula in a SpreadSheet document, you have to recalculate the results of your changes manually and update the corresponding cells before you save the document.</p> 
+      <p><strong>Note:</strong> If you update spreadSheet cells with the ODFToolkit by recalculating its values in the backend, your original formulas will not be changed. In this way changes, made later in an editor like LibreOffice or Collabora, are automatically recalculated by your origin formulas.</p> 
+    </div>
+    <html>
+      <head></head>
+      <body>
+        <div id="footera"> 
+          <div id="copyrighta"> 
+            <p><a href="https://www.libreoffice.org/imprint" target="_blank">Impressum (Legal Info)</a> | <a href="https://www.libreoffice.org/privacy" target="_blank">Privacy Policy (Datenschutzerklärung)</a> | <a href="https://www.documentfoundation.org/statutes.pdf" target="_blank">Statutes (non-binding English translation)</a> - <a href="https://www.documentfoundation.org/satzung.pdf" target="_blank">Satzung (binding German version)</a> | Copyright information: Unless otherwise specified, all text and images on this website are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, v2.0</a>. This does not include the source code of LibreOffice, which is licensed under the <a href="https://www.libreoffice.org/download/license/" target="_blank">Mozilla Public License v2.0</a>. “LibreOffice” and “The Document Foundation” are registered trademarks of their corresponding registered owners or are in actual use as trademarks in one or more countries. Their respective logos and icons are also subject to international copyright laws. Use thereof is explained in our <a href="https://wiki.documentfoundation.org/TradeMark_Policy" target="_blank">trademark policy</a>. LibreOffice was based on OpenOffice.org.</p> 
+          </div> 
+        </div> 
+      </body>
+    </html>
+  </body>
+</html>
