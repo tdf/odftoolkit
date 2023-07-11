@@ -14,8 +14,8 @@ The current reference implementation is written in Java.
 ## Documentation
 
 In general, the project page is a great place to start when looking for online
-documentation and other information about the [odfdom project](https://tdf.github.io/odftoolkit/docs/odfdom/index.html).
+documentation and other information about the [odfdom project](https://tdf.github.io/odftoolkit/odfdom/index.html).
 
-The [latest release notes of ODFDOM are available online](https://tdf.github.io/odftoolkit/docs/odfdom/index.html).
+The [latest release notes of ODFDOM are available online](https://tdf.github.io/odftoolkit/odfdom/index.html).
 
-You may find the [JavaDoc API documentation online](https://tdf.github.io/odftoolkit/docs/api/odfdom/index.html).
+You may find the [JavaDoc API documentation online](https://tdf.github.io/odftoolkit/api/odfdom/index.html).
