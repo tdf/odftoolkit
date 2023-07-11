@@ -46,15 +46,15 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 public class TextSelectionTest {
 
   public static final String TEXT_FILE = "TestTextSelection.odt";
-  public static final String SAVE_FILE_DELETE = "TextSelectionResultDelete.odt";
-  public static final String SAVE_FILE_STYLE = "TextSelectionResultStyle.odt";
-  public static final String SAVE_FILE_HREF = "TextSelectionResultHref.odt";
-  public static final String SAVE_FILE_REPLACE = "TextSelectionResultReplace.odt";
-  public static final String SAVE_FILE_REPLACE_MULTI_SPACE =
-      "TextSelectionResultReplaceMultispace.odt";
-  public static final String SAVE_FILE_COPYTO = "TextSelectionResultCopyTo.odt";
-  public static final String SAVE_FILE_COPYTO1 = "TextSelectionResultCopyTo1.odt";
-  public static final String SAVE_FILE_DELETE_PATTERN = "TextSelectionResultPatternDelete.odt";
+  public static final String SAVE_FILE_DELETE = "TextSelectionResult_Delete.odt";
+  public static final String SAVE_FILE_STYLE = "TextSelectionResult_Style.odt";
+  public static final String SAVE_FILE_HREF = "TextSelectionResult_Href.odt";
+  public static final String SAVE_FILE_REPLACE = "TextSelectionResult_Replace.odt";
+  public static final String SAVE_FILE_REPLACE_MULTI_SPACE = "TextSelectionResult_ReplaceMultispace.odt";
+  public static final String SAVE_FILE__PASTE_AT_FRONT_OF_FIRST = "TextSelectionResult_PasteAtFrontOfFirst.odt";
+  public static final String SAVE_FILE__PASTE_AT_FRONT_OF = "TextSelectionResult_PasteAtFrontOf.odt";
+  public static final String SAVE_FILE__PASTE_AT_END_OF = "TextSelection_PasteAtEndOf.odt";  
+  public static final String SAVE_FILE_DELETE_PATTERN = "TextSelectionResult_PatternDelete.odt";
   OdfTextDocument doc;
   OdfTextDocument doc2;
   OdfFileDom contentDOM;
@@ -158,7 +158,7 @@ public class TextSelectionTest {
     }
 
     try {
-      doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_COPYTO));
+      doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE__PASTE_AT_FRONT_OF_FIRST));
     } catch (Exception e) {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -169,8 +169,7 @@ public class TextSelectionTest {
    * Test pasteAtFrontOf method of TextSelection copy the first 'change' word in the front of all
    * the 'delete' words
    */
-  @Test
-  @Ignore
+  @Test  
   public void testPasteAtFrontOf() {
 
     TextSelection copySelection = null;
@@ -203,7 +202,7 @@ public class TextSelectionTest {
     assertTrue(i == j);
 
     try {
-      doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_COPYTO));
+      doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE__PASTE_AT_FRONT_OF));
     } catch (Exception e) {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
@@ -216,7 +215,6 @@ public class TextSelectionTest {
    * <p>copy the first 'change' word at the end of all the 'delete' words
    */
   @Test
-  @Ignore
   public void testPasteAtEndOf() {
     search = new TextNavigation("delete", doc);
     TextSelection sel = null;
@@ -249,7 +247,7 @@ public class TextSelectionTest {
     assertTrue(i == j);
 
     try {
-      doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_COPYTO1));
+      doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE__PASTE_AT_END_OF));
     } catch (Exception e) {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
