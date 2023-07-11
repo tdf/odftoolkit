@@ -18,6 +18,7 @@
  */
 package org.odftoolkit.odfdom.incubator.search;
 
+import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -41,6 +42,7 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
+import org.xml.sax.SAXException;
 
 /** Test the method of class org.odftoolkit.odfdom.incubator.search.TextSelection */
 public class TextSelectionTest {
@@ -58,7 +60,6 @@ public class TextSelectionTest {
   OdfTextDocument doc;
   OdfTextDocument doc2;
   OdfFileDom contentDOM;
-  TextNavigation search;
 
   @BeforeClass
   public static void setUpClass() throws Exception {}
@@ -91,8 +92,7 @@ public class TextSelectionTest {
    */
   @Test
   public void testCut() {
-    search = null;
-    search = new TextNavigation("delete", doc);
+    TextNavigation search4delete = new TextNavigation("delete", doc);
 
     TextSelection nextSelect = null;
     TextNavigation nextsearch = new TextNavigation("next", doc);
@@ -100,8 +100,8 @@ public class TextSelectionTest {
       nextSelect = nextsearch.next();
     }
     int i = 0;
-    while (search.hasNext()) {
-      TextSelection item = search.next();
+    while (search4delete.hasNext()) {
+      TextSelection item = search4delete.next();
       i++;
       try {
         item.cut();
@@ -111,8 +111,8 @@ public class TextSelectionTest {
     }
     assertTrue(8 == i);
     // research the "delete"
-    search = new TextNavigation("delete", doc);
-    Assert.assertFalse(search.hasNext());
+    search4delete = new TextNavigation("delete", doc);
+    Assert.assertFalse(search4delete.hasNext());
 
     // this document just have one "next"
     try {
@@ -140,16 +140,16 @@ public class TextSelectionTest {
   public void testPasteAtFrontOfFirst() {
 
     TextSelection copySelection = null;
-    TextNavigation searchChangeWord = new TextNavigation("change", doc);
-    if (searchChangeWord.hasNext()) {
+    TextNavigation search4change = new TextNavigation("change", doc);
+    if (search4change.hasNext()) {
       // select the first occurrence of the word 'change' to be inserted later
-      copySelection = (TextSelection) searchChangeWord.next();
+      copySelection = (TextSelection) search4change.next();
     }
 
     // now find all occurrences of 'delete' and insert 'change'
-    search = new TextNavigation("delete", doc);
-    if (search.hasNext()) {
-      TextSelection item = search.next();
+    TextNavigation search4delete = new TextNavigation("delete", doc);
+    if (search4delete.hasNext()) {
+      TextSelection item = search4delete.next();
       try {
         copySelection.pasteAtFrontOf(item);
       } catch (InvalidNavigationException e) {
@@ -181,9 +181,9 @@ public class TextSelectionTest {
 
     // now find all occurrences of 'delete' and insert 'change'
     int i = 0;
-    search = new TextNavigation("delete", doc);
-    while (search.hasNext()) {
-      TextSelection item = search.next();
+    TextNavigation search4delete = new TextNavigation("delete", doc);
+    while (search4delete.hasNext()) {
+      TextSelection item = search4delete.next();
       i++;
       try {
         copySelection.pasteAtFrontOf(item);
@@ -193,9 +193,9 @@ public class TextSelectionTest {
     }
 
     int j = 0;
-    search = new TextNavigation("changedelete", doc);
-    while (search.hasNext()) {
-      search.next();
+    TextNavigation search4changedelete = new TextNavigation("changedelete", doc);
+    while (search4changedelete.hasNext()) {
+      search4changedelete.next();
       j++;
     }
     // The count of 'changedelete' should be equals as 'delete'
@@ -216,31 +216,31 @@ public class TextSelectionTest {
    */
   @Test
   public void testPasteAtEndOf() {
-    search = new TextNavigation("delete", doc);
-    TextSelection sel = null;
+    TextNavigation search4delete = new TextNavigation("delete", doc);
+    TextSelection selectionOf_change = null;
 
-    TextNavigation searchChangeWord = new TextNavigation("change", doc);
-    if (searchChangeWord.hasNext()) {
+    TextNavigation search4change = new TextNavigation("change", doc);
+    if (search4change.hasNext()) {
       // take the first selection..
-      sel = (TextSelection) searchChangeWord.next();
+      selectionOf_change = (TextSelection) search4change.next();
     }
-    assertNotNull(sel);
+    assertNotNull(selectionOf_change);
 
     int i = 0;
 
-    while (search.hasNext()) {
-      TextSelection item = search.next();
+    while (search4delete.hasNext()) {
+      TextSelection selectionOf_delete = search4delete.next();
       i++;
       try {
-        sel.pasteAtEndOf(item);
+        selectionOf_change.pasteAtEndOf(selectionOf_delete);
       } catch (InvalidNavigationException e) {
-        Assert.fail(e.getMessage());
-      }
+        Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+        Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
     int j = 0;
-    search = new TextNavigation("deletechange", doc);
-    while (search.hasNext()) {
-      search.next();
+    TextNavigation search4deletechange = new TextNavigation("deletechange", doc);
+    while (search4deletechange.hasNext()) {
+      search4deletechange.next();      
       j++;
     }
     // The count of 'deletechange' should be equals as 'delete'
@@ -260,20 +260,19 @@ public class TextSelectionTest {
    */
   @Test
   public void testApplyStyle() {
-    search = null;
-    search = new TextNavigation("delete", doc);
+    TextNavigation search4delete = new TextNavigation("delete", doc);
     OdfOfficeAutomaticStyles autoStyles = null;
     try {
       autoStyles = doc.getContentDom().getAutomaticStyles();
-    } catch (Exception e1) {
+    } catch (IOException | SAXException e1) {
       Assert.fail("Failed with " + e1.getClass().getName() + ": '" + e1.getMessage() + "'");
     }
     // T4 is the bold style for text
     OdfStyleBase style = autoStyles.getStyle("T4", OdfStyleFamily.Text);
     Assert.assertNotNull(style);
 
-    while (search.hasNext()) {
-      TextSelection item = search.next();
+    while (search4delete.hasNext()) {
+      TextSelection item = search4delete.next();
       try {
         item.applyStyle(style);
       } catch (InvalidNavigationException e) {
@@ -295,10 +294,10 @@ public class TextSelectionTest {
 
     // replace all the "ODFDOM" to "Odf Toolkit"
     // except the sentence "Task5.Change the ODFDOM to Odf Toolkit, and bold them."
-    search = new TextNavigation("ODFDOM", doc);
+    TextNavigation search4ODFDOM = new TextNavigation("ODFDOM", doc);
     int i = 0;
-    while (search.hasNext()) {
-      TextSelection item = search.next();
+    while (search4ODFDOM.hasNext()) {
+      TextSelection item = search4ODFDOM.next();
       try {
         item.replaceWith("Odf Toolkit");
       } catch (InvalidNavigationException e) {
@@ -309,18 +308,18 @@ public class TextSelectionTest {
     // we expect 6 occurrences
     assertEquals(6, i);
 
-    search = new TextNavigation("Odf Toolkit", doc);
+    TextNavigation search4Odf_Toolkit = new TextNavigation("Odf Toolkit", doc);
     int j = 0;
-    while (search.hasNext()) {
-      TextSelection item = search.next();
+    while (search4Odf_Toolkit.hasNext()) {
+      TextSelection item = search4Odf_Toolkit.next();
       j++;
     }
     // we expect 7 occurrences
     assertEquals(7, j);
 
     // ODFDOM should no longer occur
-    search = new TextNavigation("ODFDOM", doc);
-    assertFalse(search.hasNext());
+    search4ODFDOM = new TextNavigation("ODFDOM", doc);
+    assertFalse(search4ODFDOM.hasNext());
 
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_REPLACE));
@@ -336,8 +335,7 @@ public class TextSelectionTest {
    */
   @Test
   public void testReplacewithAndBold() {
-    search = null;
-    search = new TextNavigation("ODFDOM", doc);
+    TextNavigation search4ODFDOM = new TextNavigation("ODFDOM", doc);
 
     // replace all the "ODFDOM" to "Odf Toolkit"
     // except the sentence "Task5.Change the ODFDOM to Odf Toolkit, and bold them."
@@ -345,9 +343,9 @@ public class TextSelectionTest {
     style.setProperty(StyleTextPropertiesElement.FontWeight, "bold");
     style.setStyleFamilyAttribute("text");
     int i = 0;
-    while (search.hasNext()) {
+    while (search4ODFDOM.hasNext()) {
       // if (i > 0) {
-      TextSelection item = search.next();
+      TextSelection item = search4ODFDOM.next();
       try {
         item.replaceWith("Odf Toolkit");
         item.applyStyle(style);
@@ -360,10 +358,10 @@ public class TextSelectionTest {
     // we expect 6 occurrences
     assertEquals(6, i);
 
-    search = new TextNavigation("Odf Toolkit", doc);
+    TextNavigation search4Odf_Toolkit = new TextNavigation("Odf Toolkit", doc);
     int j = 0;
-    while (search.hasNext()) {
-      TextSelection item = search.next();
+    while (search4Odf_Toolkit.hasNext()) {
+      TextSelection item = search4Odf_Toolkit.next();
       j++;
     }
     // we expect 7 occurrences
@@ -419,10 +417,9 @@ public class TextSelectionTest {
    */
   @Test
   public void testAddHref() {
-    search = null;
-    search = new TextNavigation("^delete", doc);
-    while (search.hasNext()) {
-      TextSelection item = search.next();
+    TextNavigation search4_delete = new TextNavigation("^delete", doc);
+    while (search4_delete.hasNext()) {
+      TextSelection item = search4_delete.next();
       // LOG.info(item);
       try {
         item.addHref(new URL("http://www.ibm.com"));
@@ -448,10 +445,10 @@ public class TextSelectionTest {
    */
   @Test
   public void testCutPattern() {
-    search = new TextNavigation("<%([^>]*)%>", doc);
+    TextNavigation search4SpecialCharacters = new TextNavigation("<%([^>]*)%>", doc);
 
-    while (search.hasNext()) {
-      TextSelection item = search.next();
+    while (search4SpecialCharacters.hasNext()) {
+      TextSelection item = search4SpecialCharacters.next();
       try {
         String text = item.getText();
         text = text.substring(2, text.length() - 2);
