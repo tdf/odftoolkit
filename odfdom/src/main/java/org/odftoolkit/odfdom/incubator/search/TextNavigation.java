@@ -69,7 +69,7 @@ public class TextNavigation extends Navigation<TextSelection> {
     mCurrentSelectedItem = null;
     mbFinishFindInHeaderFooter = false;
 
-    mSelectionManager = new SelectionManager();
+    mSelectionManager = doc.getSelectionManager();
     // initialize the Iterator and find the first element...
     mNextSelectedItem = findNextSelection(null);
   }
