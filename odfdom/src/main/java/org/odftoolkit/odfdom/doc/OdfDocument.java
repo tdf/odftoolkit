@@ -65,6 +65,7 @@ import org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfDefaultStyle;
 import org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta;
+import org.odftoolkit.odfdom.incubator.search.SelectionManager;
 import org.odftoolkit.odfdom.pkg.MediaType;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfName;
@@ -1248,5 +1249,15 @@ public abstract class OdfDocument extends OdfSchemaDocument {
    */
   public Boolean hasCollaboration() {
     return mHasCollaboration != null && mHasCollaboration;
+  }
+  
+  private SelectionManager mSelectionManager = null;
+  /** *  All text selections within this document are cached and have to be updated when the document is changed.The <code>SelectionManager</code> takes care of those updates across each <code>TextNavigator</code>
+     * @return the single selection manager for an OdfDocument instance */
+  public SelectionManager getSelectionManager(){
+      if(mSelectionManager == null){
+          mSelectionManager = new SelectionManager();
+      }
+      return mSelectionManager;
   }
 }

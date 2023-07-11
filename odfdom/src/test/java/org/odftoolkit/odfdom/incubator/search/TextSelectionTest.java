@@ -236,6 +236,7 @@ public class TextSelectionTest {
       } catch (InvalidNavigationException e) {
         Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
         Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
+      }
     }
     int j = 0;
     TextNavigation search4deletechange = new TextNavigation("deletechange", doc);
@@ -252,7 +253,7 @@ public class TextSelectionTest {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
-  }
+  }  
 
   /**
    * Test applyStyle method of org.odftoolkit.odfdom.incubator.search.TextSelection append "T4"

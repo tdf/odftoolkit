@@ -68,7 +68,7 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
     mCurrentSelectedItem = null;
     this.mProps = props;
 
-    mSelectionManager = new SelectionManager();
+    mSelectionManager = doc.getSelectionManager();
     // initialize the Iterator and find the first element...
     mNextSelectedItem = findNextSelection(null);
   }
