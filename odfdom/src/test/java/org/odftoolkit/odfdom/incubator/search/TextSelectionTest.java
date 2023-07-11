@@ -18,12 +18,12 @@
  */
 package org.odftoolkit.odfdom.incubator.search;
 
-import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -52,10 +52,13 @@ public class TextSelectionTest {
   public static final String SAVE_FILE_STYLE = "TextSelectionResult_Style.odt";
   public static final String SAVE_FILE_HREF = "TextSelectionResult_Href.odt";
   public static final String SAVE_FILE_REPLACE = "TextSelectionResult_Replace.odt";
-  public static final String SAVE_FILE_REPLACE_MULTI_SPACE = "TextSelectionResult_ReplaceMultispace.odt";
-  public static final String SAVE_FILE__PASTE_AT_FRONT_OF_FIRST = "TextSelectionResult_PasteAtFrontOfFirst.odt";
-  public static final String SAVE_FILE__PASTE_AT_FRONT_OF = "TextSelectionResult_PasteAtFrontOf.odt";
-  public static final String SAVE_FILE__PASTE_AT_END_OF = "TextSelection_PasteAtEndOf.odt";  
+  public static final String SAVE_FILE_REPLACE_MULTI_SPACE =
+      "TextSelectionResult_ReplaceMultispace.odt";
+  public static final String SAVE_FILE__PASTE_AT_FRONT_OF_FIRST =
+      "TextSelectionResult_PasteAtFrontOfFirst.odt";
+  public static final String SAVE_FILE__PASTE_AT_FRONT_OF =
+      "TextSelectionResult_PasteAtFrontOf.odt";
+  public static final String SAVE_FILE__PASTE_AT_END_OF = "TextSelection_PasteAtEndOf.odt";
   public static final String SAVE_FILE_DELETE_PATTERN = "TextSelectionResult_PatternDelete.odt";
   OdfTextDocument doc;
   OdfTextDocument doc2;
@@ -169,7 +172,7 @@ public class TextSelectionTest {
    * Test pasteAtFrontOf method of TextSelection copy the first 'change' word in the front of all
    * the 'delete' words
    */
-  @Test  
+  @Test
   public void testPasteAtFrontOf() {
 
     TextSelection copySelection = null;
@@ -241,7 +244,7 @@ public class TextSelectionTest {
     int j = 0;
     TextNavigation search4deletechange = new TextNavigation("deletechange", doc);
     while (search4deletechange.hasNext()) {
-      search4deletechange.next();      
+      search4deletechange.next();
       j++;
     }
     // The count of 'deletechange' should be equals as 'delete'
@@ -253,7 +256,7 @@ public class TextSelectionTest {
       Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
-  }  
+  }
 
   /**
    * Test applyStyle method of org.odftoolkit.odfdom.incubator.search.TextSelection append "T4"
