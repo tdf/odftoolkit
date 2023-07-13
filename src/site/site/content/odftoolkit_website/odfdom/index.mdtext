@@ -45,12 +45,12 @@ To work on an existing document you can load it from your source:
 ```Java
     // Load an existing text document from local file
     OdfDocument odt = OdfDocument.loadDocument("MyFilename.odt");
-    // Append or change text....
+    // Append or modify text....
 ```
 
 More Examples:
 
- - [ODFDOM - How to Change the Content of a Document][13]
+ - [ODFDOM - Search and Replace API][13]
 
 
 ## Documentation
@@ -81,4 +81,4 @@ If you're a developer, just dive into [the development section][8]. Here you fin
   [10]: ProjectOverview.html
   [11]: Layers.html
   [12]: https://maven.apache.org/
-  [13]: change_api.html
+  [13]: search_and_replace_api.html

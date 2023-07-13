@@ -1,10 +1,10 @@
-# ODFDOM - Changing a Document
+# ODFDOM - Search and Replace API - Changing Document Content
 
 The ODF Toolkit provides an easy to use API to modify an existing Text or a Spreadsheet document. The following sections will explain the core concepts and how to use this API.
 
 ## Text Document
 
-Changing the content of a Text Document you first need to identify the part of a document you want to modify. To find a specific part in a Text document you use the `Navigation` Interface which allows to navigate through a document with a java `Iterator`.
+Changing the content of a Text Document you first need to identify the part of a document you want to modify. To search a specific part in a Text document you use the `Navigation` Interface which allows to navigate through a document with a java `Iterator`.
 
 ### The TextNavigation
 
