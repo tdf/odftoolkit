@@ -137,6 +137,13 @@ public class SelectionManager {
       selections.remove(item);
     }
   }
+  
+  /**
+   * Removes all selections from the SelectionManager.
+   */
+  public void unregisterAll() {
+    repository.clear();
+  }
 
   /**
    * A direct method to update all the selections contained in a mElement after a certain position.
