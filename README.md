@@ -79,6 +79,8 @@ Discussion about ODF Toolkit takes place on the following mailing lists:
 
 The mailing lists are open to anyone and publicly archived.
 
+* To confidentially report a **security issue**, please mail to: security@documentfoundation.org
+
 ## Issue Tracker
 
 If you encounter errors in ODF Toolkit or want to suggest an improvement or
