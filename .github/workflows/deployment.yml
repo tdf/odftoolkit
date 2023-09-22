@@ -31,7 +31,7 @@ jobs:
         release_name: odftoolkit-${{ env.release_version }}  # <--- Use environment variables that was created before
         overwrite: true
         file_glob: true
-        body: "Support of **ODF 1.2** and >=**JDK 11**\n
+        body: "Support of **ODF 1.3** and >=**JDK 11**\n
 \n
 Detailed documentation:\n
 https://tdf.github.io/odftoolkit/ReleaseNotes.html#release-${{ env.release_version }}\n

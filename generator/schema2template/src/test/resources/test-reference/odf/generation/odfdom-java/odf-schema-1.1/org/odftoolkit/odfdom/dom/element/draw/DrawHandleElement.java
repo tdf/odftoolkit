@@ -78,7 +78,7 @@ public class DrawHandleElement extends OdfElement {
 	public Boolean getDrawHandleMirrorHorizontalAttribute() {
 		DrawHandleMirrorHorizontalAttribute attr = (DrawHandleMirrorHorizontalAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "handle-mirror-horizontal");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(DrawHandleMirrorHorizontalAttribute.DEFAULT_VALUE);
 	}
@@ -91,7 +91,7 @@ public class DrawHandleElement extends OdfElement {
 	public void setDrawHandleMirrorHorizontalAttribute(Boolean drawHandleMirrorHorizontalValue) {
 		DrawHandleMirrorHorizontalAttribute attr = new DrawHandleMirrorHorizontalAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(drawHandleMirrorHorizontalValue.booleanValue());
+		attr.setValue(drawHandleMirrorHorizontalValue.toString());
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class DrawHandleElement extends OdfElement {
 	public Boolean getDrawHandleMirrorVerticalAttribute() {
 		DrawHandleMirrorVerticalAttribute attr = (DrawHandleMirrorVerticalAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "handle-mirror-vertical");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(DrawHandleMirrorVerticalAttribute.DEFAULT_VALUE);
 	}
@@ -115,7 +115,7 @@ public class DrawHandleElement extends OdfElement {
 	public void setDrawHandleMirrorVerticalAttribute(Boolean drawHandleMirrorVerticalValue) {
 		DrawHandleMirrorVerticalAttribute attr = new DrawHandleMirrorVerticalAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(drawHandleMirrorVerticalValue.booleanValue());
+		attr.setValue(drawHandleMirrorVerticalValue.toString());
 	}
 
 	/**
@@ -320,7 +320,7 @@ public class DrawHandleElement extends OdfElement {
 	public Boolean getDrawHandleSwitchedAttribute() {
 		DrawHandleSwitchedAttribute attr = (DrawHandleSwitchedAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "handle-switched");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(DrawHandleSwitchedAttribute.DEFAULT_VALUE);
 	}
@@ -333,7 +333,7 @@ public class DrawHandleElement extends OdfElement {
 	public void setDrawHandleSwitchedAttribute(Boolean drawHandleSwitchedValue) {
 		DrawHandleSwitchedAttribute attr = new DrawHandleSwitchedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(drawHandleSwitchedValue.booleanValue());
+		attr.setValue(drawHandleSwitchedValue.toString());
 	}
 
   /**

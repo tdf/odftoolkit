@@ -72,7 +72,7 @@ public class DbIndexColumnElement extends OdfElement {
     DbIsAscendingAttribute attr =
         (DbIsAscendingAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "is-ascending");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -86,7 +86,7 @@ public class DbIndexColumnElement extends OdfElement {
   public void setDbIsAscendingAttribute(Boolean dbIsAscendingValue) {
     DbIsAscendingAttribute attr = new DbIsAscendingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dbIsAscendingValue.booleanValue());
+    attr.setValue(dbIsAscendingValue.toString());
   }
 
   /**

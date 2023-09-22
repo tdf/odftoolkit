@@ -74,7 +74,7 @@ public class TableSubtotalRulesElement extends OdfElement {
         (TableBindStylesToContentAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "bind-styles-to-content");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TableBindStylesToContentAttribute.DEFAULT_VALUE);
   }
@@ -89,36 +89,36 @@ public class TableSubtotalRulesElement extends OdfElement {
     TableBindStylesToContentAttribute attr =
         new TableBindStylesToContentAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableBindStylesToContentValue.booleanValue());
+    attr.setValue(tableBindStylesToContentValue.toString());
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableCaseSensitiveAttribute
    * </code> , See {@odf.attribute table:case-sensitive}
    *
-   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
-   *     and no default value defined.
+   * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
    */
-  public String getTableCaseSensitiveAttribute() {
+  public Boolean getTableCaseSensitiveAttribute() {
     TableCaseSensitiveAttribute attr =
         (TableCaseSensitiveAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "case-sensitive");
-    if (attr != null) {
-      return String.valueOf(attr.getValue());
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Boolean.valueOf(attr.getValue());
     }
-    return TableCaseSensitiveAttribute.DEFAULT_VALUE_FALSE;
+    return Boolean.valueOf(TableCaseSensitiveAttribute.DEFAULT_VALUE_FALSE);
   }
 
   /**
    * Sets the value of ODFDOM attribute representation <code>TableCaseSensitiveAttribute</code> ,
    * See {@odf.attribute table:case-sensitive}
    *
-   * @param tableCaseSensitiveValue The type is <code>String</code>
+   * @param tableCaseSensitiveValue The type is <code>Boolean</code>
    */
-  public void setTableCaseSensitiveAttribute(String tableCaseSensitiveValue) {
+  public void setTableCaseSensitiveAttribute(Boolean tableCaseSensitiveValue) {
     TableCaseSensitiveAttribute attr =
         new TableCaseSensitiveAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setValue(tableCaseSensitiveValue);
+    attr.setValue(tableCaseSensitiveValue.toString());
   }
 
   /**
@@ -134,7 +134,7 @@ public class TableSubtotalRulesElement extends OdfElement {
         (TablePageBreaksOnGroupChangeAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "page-breaks-on-group-change");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TablePageBreaksOnGroupChangeAttribute.DEFAULT_VALUE);
   }
@@ -149,7 +149,7 @@ public class TableSubtotalRulesElement extends OdfElement {
     TablePageBreaksOnGroupChangeAttribute attr =
         new TablePageBreaksOnGroupChangeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tablePageBreaksOnGroupChangeValue.booleanValue());
+    attr.setValue(tablePageBreaksOnGroupChangeValue.toString());
   }
 
   /**

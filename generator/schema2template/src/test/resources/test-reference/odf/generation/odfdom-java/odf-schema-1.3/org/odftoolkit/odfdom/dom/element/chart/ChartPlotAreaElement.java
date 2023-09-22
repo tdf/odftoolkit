@@ -204,12 +204,12 @@ public class ChartPlotAreaElement extends OdfStylableElement {
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>Dr3dLightingModeAttribute</code> , See {@odf.attribute dr3d:lighting-mode}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getDr3dLightingModeAttribute() {
+	public Boolean getDr3dLightingModeAttribute() {
 		Dr3dLightingModeAttribute attr = (Dr3dLightingModeAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "lighting-mode");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -217,12 +217,12 @@ public class ChartPlotAreaElement extends OdfStylableElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>Dr3dLightingModeAttribute</code> , See {@odf.attribute dr3d:lighting-mode}
 	 *
-	 * @param dr3dLightingModeValue   The type is <code>String</code>
+	 * @param dr3dLightingModeValue   The type is <code>Boolean</code>
 	 */
-	public void setDr3dLightingModeAttribute(String dr3dLightingModeValue) {
+	public void setDr3dLightingModeAttribute(Boolean dr3dLightingModeValue) {
 		Dr3dLightingModeAttribute attr = new Dr3dLightingModeAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(dr3dLightingModeValue);
+		attr.setValue(dr3dLightingModeValue.toString());
 	}
 
 	/**

@@ -77,7 +77,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	public Boolean getTableContainsHeaderAttribute() {
 		TableContainsHeaderAttribute attr = (TableContainsHeaderAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "contains-header");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableContainsHeaderAttribute.DEFAULT_VALUE);
 	}
@@ -90,7 +90,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	public void setTableContainsHeaderAttribute(Boolean tableContainsHeaderValue) {
 		TableContainsHeaderAttribute attr = new TableContainsHeaderAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableContainsHeaderValue.booleanValue());
+		attr.setValue(tableContainsHeaderValue.toString());
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	public Boolean getTableDisplayFilterButtonsAttribute() {
 		TableDisplayFilterButtonsAttribute attr = (TableDisplayFilterButtonsAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "display-filter-buttons");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableDisplayFilterButtonsAttribute.DEFAULT_VALUE);
 	}
@@ -114,7 +114,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	public void setTableDisplayFilterButtonsAttribute(Boolean tableDisplayFilterButtonsValue) {
 		TableDisplayFilterButtonsAttribute attr = new TableDisplayFilterButtonsAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableDisplayFilterButtonsValue.booleanValue());
+		attr.setValue(tableDisplayFilterButtonsValue.toString());
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	public Boolean getTableHasPersistentDataAttribute() {
 		TableHasPersistentDataAttribute attr = (TableHasPersistentDataAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "has-persistent-data");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableHasPersistentDataAttribute.DEFAULT_VALUE);
 	}
@@ -138,7 +138,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	public void setTableHasPersistentDataAttribute(Boolean tableHasPersistentDataValue) {
 		TableHasPersistentDataAttribute attr = new TableHasPersistentDataAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableHasPersistentDataValue.booleanValue());
+		attr.setValue(tableHasPersistentDataValue.toString());
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	public Boolean getTableIsSelectionAttribute() {
 		TableIsSelectionAttribute attr = (TableIsSelectionAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "is-selection");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableIsSelectionAttribute.DEFAULT_VALUE);
 	}
@@ -162,7 +162,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	public void setTableIsSelectionAttribute(Boolean tableIsSelectionValue) {
 		TableIsSelectionAttribute attr = new TableIsSelectionAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableIsSelectionValue.booleanValue());
+		attr.setValue(tableIsSelectionValue.toString());
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	public Boolean getTableOnUpdateKeepSizeAttribute() {
 		TableOnUpdateKeepSizeAttribute attr = (TableOnUpdateKeepSizeAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "on-update-keep-size");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableOnUpdateKeepSizeAttribute.DEFAULT_VALUE);
 	}
@@ -210,7 +210,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	public void setTableOnUpdateKeepSizeAttribute(Boolean tableOnUpdateKeepSizeValue) {
 		TableOnUpdateKeepSizeAttribute attr = new TableOnUpdateKeepSizeAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableOnUpdateKeepSizeValue.booleanValue());
+		attr.setValue(tableOnUpdateKeepSizeValue.toString());
 	}
 
 	/**
@@ -221,7 +221,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	public Boolean getTableOnUpdateKeepStylesAttribute() {
 		TableOnUpdateKeepStylesAttribute attr = (TableOnUpdateKeepStylesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "on-update-keep-styles");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableOnUpdateKeepStylesAttribute.DEFAULT_VALUE);
 	}
@@ -234,7 +234,7 @@ public class TableDatabaseRangeElement extends OdfElement {
 	public void setTableOnUpdateKeepStylesAttribute(Boolean tableOnUpdateKeepStylesValue) {
 		TableOnUpdateKeepStylesAttribute attr = new TableOnUpdateKeepStylesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableOnUpdateKeepStylesValue.booleanValue());
+		attr.setValue(tableOnUpdateKeepStylesValue.toString());
 	}
 
 	/**
@@ -264,12 +264,12 @@ public class TableDatabaseRangeElement extends OdfElement {
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>TableRefreshDelayAttribute</code> , See {@odf.attribute table:refresh-delay}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getTableRefreshDelayAttribute() {
+	public Boolean getTableRefreshDelayAttribute() {
 		TableRefreshDelayAttribute attr = (TableRefreshDelayAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "refresh-delay");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -277,12 +277,12 @@ public class TableDatabaseRangeElement extends OdfElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>TableRefreshDelayAttribute</code> , See {@odf.attribute table:refresh-delay}
 	 *
-	 * @param tableRefreshDelayValue   The type is <code>String</code>
+	 * @param tableRefreshDelayValue   The type is <code>Boolean</code>
 	 */
-	public void setTableRefreshDelayAttribute(String tableRefreshDelayValue) {
+	public void setTableRefreshDelayAttribute(Boolean tableRefreshDelayValue) {
 		TableRefreshDelayAttribute attr = new TableRefreshDelayAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(tableRefreshDelayValue);
+		attr.setValue(tableRefreshDelayValue.toString());
 	}
 
 	/**

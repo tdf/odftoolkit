@@ -179,7 +179,7 @@ public class ChartLegendElement extends OdfStylableElement {
 	public Double getStyleLegendExpansionAspectRatioAttribute() {
 		StyleLegendExpansionAspectRatioAttribute attr = (StyleLegendExpansionAspectRatioAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "legend-expansion-aspect-ratio");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Double.valueOf(attr.doubleValue());
+			return Double.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -192,7 +192,7 @@ public class ChartLegendElement extends OdfStylableElement {
 	public void setStyleLegendExpansionAspectRatioAttribute(Double styleLegendExpansionAspectRatioValue) {
 		StyleLegendExpansionAspectRatioAttribute attr = new StyleLegendExpansionAspectRatioAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setDoubleValue(styleLegendExpansionAspectRatioValue.doubleValue());
+		attr.setValue(styleLegendExpansionAspectRatioValue.toString());
 	}
 
 	/**

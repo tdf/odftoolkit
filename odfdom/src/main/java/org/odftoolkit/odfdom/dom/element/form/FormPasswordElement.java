@@ -116,7 +116,7 @@ public class FormPasswordElement extends OdfElement {
         (FormConvertEmptyToNullAttribute)
             getOdfAttribute(OdfDocumentNamespace.FORM, "convert-empty-to-null");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormConvertEmptyToNullAttribute.DEFAULT_VALUE);
   }
@@ -131,7 +131,7 @@ public class FormPasswordElement extends OdfElement {
     FormConvertEmptyToNullAttribute attr =
         new FormConvertEmptyToNullAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formConvertEmptyToNullValue.booleanValue());
+    attr.setValue(formConvertEmptyToNullValue.toString());
   }
 
   /**
@@ -145,7 +145,7 @@ public class FormPasswordElement extends OdfElement {
     FormDisabledAttribute attr =
         (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
   }
@@ -159,7 +159,7 @@ public class FormPasswordElement extends OdfElement {
   public void setFormDisabledAttribute(Boolean formDisabledValue) {
     FormDisabledAttribute attr = new FormDisabledAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formDisabledValue.booleanValue());
+    attr.setValue(formDisabledValue.toString());
   }
 
   /**
@@ -256,7 +256,7 @@ public class FormPasswordElement extends OdfElement {
     FormMaxLengthAttribute attr =
         (FormMaxLengthAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "max-length");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -270,7 +270,7 @@ public class FormPasswordElement extends OdfElement {
   public void setFormMaxLengthAttribute(Integer formMaxLengthValue) {
     FormMaxLengthAttribute attr = new FormMaxLengthAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(formMaxLengthValue.intValue());
+    attr.setValue(formMaxLengthValue.toString());
   }
 
   /**
@@ -311,7 +311,7 @@ public class FormPasswordElement extends OdfElement {
     FormPrintableAttribute attr =
         (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);
   }
@@ -325,7 +325,7 @@ public class FormPasswordElement extends OdfElement {
   public void setFormPrintableAttribute(Boolean formPrintableValue) {
     FormPrintableAttribute attr = new FormPrintableAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formPrintableValue.booleanValue());
+    attr.setValue(formPrintableValue.toString());
   }
 
   /**
@@ -339,7 +339,7 @@ public class FormPasswordElement extends OdfElement {
     FormTabIndexAttribute attr =
         (FormTabIndexAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-index");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return Integer.valueOf(FormTabIndexAttribute.DEFAULT_VALUE);
   }
@@ -353,7 +353,7 @@ public class FormPasswordElement extends OdfElement {
   public void setFormTabIndexAttribute(Integer formTabIndexValue) {
     FormTabIndexAttribute attr = new FormTabIndexAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(formTabIndexValue.intValue());
+    attr.setValue(formTabIndexValue.toString());
   }
 
   /**
@@ -367,7 +367,7 @@ public class FormPasswordElement extends OdfElement {
     FormTabStopAttribute attr =
         (FormTabStopAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-stop");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormTabStopAttribute.DEFAULT_VALUE);
   }
@@ -381,7 +381,7 @@ public class FormPasswordElement extends OdfElement {
   public void setFormTabStopAttribute(Boolean formTabStopValue) {
     FormTabStopAttribute attr = new FormTabStopAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formTabStopValue.booleanValue());
+    attr.setValue(formTabStopValue.toString());
   }
 
   /**

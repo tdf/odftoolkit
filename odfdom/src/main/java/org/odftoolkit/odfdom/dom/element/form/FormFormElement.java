@@ -93,7 +93,7 @@ public class FormFormElement extends OdfElement {
     FormAllowDeletesAttribute attr =
         (FormAllowDeletesAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "allow-deletes");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormAllowDeletesAttribute.DEFAULT_VALUE);
   }
@@ -107,7 +107,7 @@ public class FormFormElement extends OdfElement {
   public void setFormAllowDeletesAttribute(Boolean formAllowDeletesValue) {
     FormAllowDeletesAttribute attr = new FormAllowDeletesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formAllowDeletesValue.booleanValue());
+    attr.setValue(formAllowDeletesValue.toString());
   }
 
   /**
@@ -121,7 +121,7 @@ public class FormFormElement extends OdfElement {
     FormAllowInsertsAttribute attr =
         (FormAllowInsertsAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "allow-inserts");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormAllowInsertsAttribute.DEFAULT_VALUE);
   }
@@ -135,7 +135,7 @@ public class FormFormElement extends OdfElement {
   public void setFormAllowInsertsAttribute(Boolean formAllowInsertsValue) {
     FormAllowInsertsAttribute attr = new FormAllowInsertsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formAllowInsertsValue.booleanValue());
+    attr.setValue(formAllowInsertsValue.toString());
   }
 
   /**
@@ -149,7 +149,7 @@ public class FormFormElement extends OdfElement {
     FormAllowUpdatesAttribute attr =
         (FormAllowUpdatesAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "allow-updates");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormAllowUpdatesAttribute.DEFAULT_VALUE);
   }
@@ -163,7 +163,7 @@ public class FormFormElement extends OdfElement {
   public void setFormAllowUpdatesAttribute(Boolean formAllowUpdatesValue) {
     FormAllowUpdatesAttribute attr = new FormAllowUpdatesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formAllowUpdatesValue.booleanValue());
+    attr.setValue(formAllowUpdatesValue.toString());
   }
 
   /**
@@ -177,7 +177,7 @@ public class FormFormElement extends OdfElement {
     FormApplyFilterAttribute attr =
         (FormApplyFilterAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "apply-filter");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormApplyFilterAttribute.DEFAULT_VALUE);
   }
@@ -191,7 +191,7 @@ public class FormFormElement extends OdfElement {
   public void setFormApplyFilterAttribute(Boolean formApplyFilterValue) {
     FormApplyFilterAttribute attr = new FormApplyFilterAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formApplyFilterValue.booleanValue());
+    attr.setValue(formApplyFilterValue.toString());
   }
 
   /**
@@ -376,7 +376,7 @@ public class FormFormElement extends OdfElement {
         (FormEscapeProcessingAttribute)
             getOdfAttribute(OdfDocumentNamespace.FORM, "escape-processing");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormEscapeProcessingAttribute.DEFAULT_VALUE);
   }
@@ -391,7 +391,7 @@ public class FormFormElement extends OdfElement {
     FormEscapeProcessingAttribute attr =
         new FormEscapeProcessingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formEscapeProcessingValue.booleanValue());
+    attr.setValue(formEscapeProcessingValue.toString());
   }
 
   /**
@@ -433,7 +433,7 @@ public class FormFormElement extends OdfElement {
     FormIgnoreResultAttribute attr =
         (FormIgnoreResultAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "ignore-result");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormIgnoreResultAttribute.DEFAULT_VALUE);
   }
@@ -447,7 +447,7 @@ public class FormFormElement extends OdfElement {
   public void setFormIgnoreResultAttribute(Boolean formIgnoreResultValue) {
     FormIgnoreResultAttribute attr = new FormIgnoreResultAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formIgnoreResultValue.booleanValue());
+    attr.setValue(formIgnoreResultValue.toString());
   }
 
   /**

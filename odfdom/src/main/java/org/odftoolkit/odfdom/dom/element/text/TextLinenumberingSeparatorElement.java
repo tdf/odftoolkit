@@ -72,7 +72,7 @@ public class TextLinenumberingSeparatorElement extends OdfElement {
     TextIncrementAttribute attr =
         (TextIncrementAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "increment");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -86,7 +86,7 @@ public class TextLinenumberingSeparatorElement extends OdfElement {
   public void setTextIncrementAttribute(Integer textIncrementValue) {
     TextIncrementAttribute attr = new TextIncrementAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textIncrementValue.intValue());
+    attr.setValue(textIncrementValue.toString());
   }
 
   /**

@@ -105,7 +105,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
     TextOutlineLevelAttribute attr =
         (TextOutlineLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "outline-level");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -119,7 +119,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
   public void setTextOutlineLevelAttribute(Integer textOutlineLevelValue) {
     TextOutlineLevelAttribute attr = new TextOutlineLevelAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textOutlineLevelValue.intValue());
+    attr.setValue(textOutlineLevelValue.toString());
   }
 
   /**
@@ -135,7 +135,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
         (TextRelativeTabStopPositionAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "relative-tab-stop-position");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -150,7 +150,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
     TextRelativeTabStopPositionAttribute attr =
         new TextRelativeTabStopPositionAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textRelativeTabStopPositionValue.booleanValue());
+    attr.setValue(textRelativeTabStopPositionValue.toString());
   }
 
   /**
@@ -164,7 +164,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
     TextUseIndexMarksAttribute attr =
         (TextUseIndexMarksAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "use-index-marks");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -179,7 +179,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
     TextUseIndexMarksAttribute attr =
         new TextUseIndexMarksAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textUseIndexMarksValue.booleanValue());
+    attr.setValue(textUseIndexMarksValue.toString());
   }
 
   /**
@@ -194,7 +194,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
         (TextUseIndexSourceStylesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-index-source-styles");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -209,7 +209,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
     TextUseIndexSourceStylesAttribute attr =
         new TextUseIndexSourceStylesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textUseIndexSourceStylesValue.booleanValue());
+    attr.setValue(textUseIndexSourceStylesValue.toString());
   }
 
   /**
@@ -224,7 +224,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
         (TextUseOutlineLevelAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-outline-level");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TextUseOutlineLevelAttribute.DEFAULT_VALUE);
   }
@@ -239,7 +239,7 @@ public class TextTableOfContentSourceElement extends OdfElement {
     TextUseOutlineLevelAttribute attr =
         new TextUseOutlineLevelAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textUseOutlineLevelValue.booleanValue());
+    attr.setValue(textUseOutlineLevelValue.toString());
   }
 
   /**

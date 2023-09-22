@@ -155,9 +155,6 @@ public class OdfModel {
    */
   public String getDefaultAttributeValue(String attributeName, String parentElementName) {
     String defaultValue = null;
-    if (parentElementName.equals("table:table-cell") && attributeName.equals("table:protect")) {
-      System.err.println("YEAH!");
-    }
     if (mAttributeDefaults == null || attributeName == null || attributeName.isBlank()) {
       return null;
     } else {
@@ -165,6 +162,8 @@ public class OdfModel {
       if (defaultValueByElementParents == null) {
         return null;
       }
+      // Not for ODF, but need extension if there are two attributes (same name)
+      // with different defaults in same named parent?
       defaultValue = defaultValueByElementParents.get(parentElementName);
       if (defaultValue == null) {
         defaultValue = defaultValueByElementParents.get(ALL_ELEMENTS);

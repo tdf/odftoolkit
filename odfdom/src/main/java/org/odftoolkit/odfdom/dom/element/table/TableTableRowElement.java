@@ -113,7 +113,7 @@ public class TableTableRowElement extends OdfStylableElement {
         (TableNumberRowsRepeatedAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "number-rows-repeated");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return Integer.valueOf(TableNumberRowsRepeatedAttribute.DEFAULT_VALUE);
   }
@@ -128,7 +128,7 @@ public class TableTableRowElement extends OdfStylableElement {
     TableNumberRowsRepeatedAttribute attr =
         new TableNumberRowsRepeatedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableNumberRowsRepeatedValue.intValue());
+    attr.setValue(tableNumberRowsRepeatedValue.toString());
   }
 
   /**

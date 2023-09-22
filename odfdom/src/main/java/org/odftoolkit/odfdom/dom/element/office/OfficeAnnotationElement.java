@@ -45,6 +45,7 @@ import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
 import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
 import org.odftoolkit.odfdom.dom.element.draw.DrawShapeElementBase;
+import org.odftoolkit.odfdom.dom.element.meta.MetaCreatorInitialsElement;
 import org.odftoolkit.odfdom.dom.element.meta.MetaDateStringElement;
 import org.odftoolkit.odfdom.dom.element.text.TextListElement;
 import org.odftoolkit.odfdom.dom.element.text.TextPElement;
@@ -258,7 +259,7 @@ public class OfficeAnnotationElement extends DrawShapeElementBase {
     OfficeDisplayAttribute attr =
         (OfficeDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "display");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -272,7 +273,7 @@ public class OfficeAnnotationElement extends DrawShapeElementBase {
   public void setOfficeDisplayAttribute(Boolean officeDisplayValue) {
     OfficeDisplayAttribute attr = new OfficeDisplayAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(officeDisplayValue.booleanValue());
+    attr.setValue(officeDisplayValue.toString());
   }
 
   /**
@@ -433,6 +434,20 @@ public class OfficeAnnotationElement extends DrawShapeElementBase {
     DcDateElement dcDate = ((OdfFileDom) this.ownerDocument).newOdfElement(DcDateElement.class);
     this.appendChild(dcDate);
     return dcDate;
+  }
+
+  /**
+   * Create child element {@odf.element meta:creator-initials}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element meta:creator-initials}
+   */
+  public MetaCreatorInitialsElement newMetaCreatorInitialsElement() {
+    MetaCreatorInitialsElement metaCreatorInitials =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(MetaCreatorInitialsElement.class);
+    this.appendChild(metaCreatorInitials);
+    return metaCreatorInitials;
   }
 
   /**

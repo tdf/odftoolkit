@@ -264,7 +264,7 @@ public class MSVExpressionInformation {
   /**
    * Returns all child elements which are no singletons
    *
-   * @return All child elements which can only occur one time
+   * @return All child elements which occur more than one time
    */
   public Set<Expression> getMultiples() {
     return mMultipleChildren;

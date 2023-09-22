@@ -100,7 +100,7 @@ public class TextDatabaseRowNumberElement extends OdfElement {
 	public Boolean getStyleNumLetterSyncAttribute() {
 		StyleNumLetterSyncAttribute attr = (StyleNumLetterSyncAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -113,7 +113,7 @@ public class TextDatabaseRowNumberElement extends OdfElement {
 	public void setStyleNumLetterSyncAttribute(Boolean styleNumLetterSyncValue) {
 		StyleNumLetterSyncAttribute attr = new StyleNumLetterSyncAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(styleNumLetterSyncValue.booleanValue());
+		attr.setValue(styleNumLetterSyncValue.toString());
 	}
 
 	/**
@@ -193,12 +193,12 @@ public class TextDatabaseRowNumberElement extends OdfElement {
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>TextValueAttribute</code> , See {@odf.attribute text:value}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getTextValueAttribute() {
+	public Integer getTextValueAttribute() {
 		TextValueAttribute attr = (TextValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "value");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -206,12 +206,12 @@ public class TextDatabaseRowNumberElement extends OdfElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>TextValueAttribute</code> , See {@odf.attribute text:value}
 	 *
-	 * @param textValueValue   The type is <code>String</code>
+	 * @param textValueValue   The type is <code>Integer</code>
 	 */
-	public void setTextValueAttribute(String textValueValue) {
+	public void setTextValueAttribute(Integer textValueValue) {
 		TextValueAttribute attr = new TextValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(textValueValue);
+		attr.setValue(textValueValue.toString());
 	}
 
 	/**

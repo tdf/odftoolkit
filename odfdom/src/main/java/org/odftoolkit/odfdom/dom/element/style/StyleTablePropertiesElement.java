@@ -48,6 +48,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleWritingModeAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableAlignAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableBorderModelAttribute;
 import org.odftoolkit.odfdom.dom.attribute.table.TableDisplayAttribute;
+import org.odftoolkit.odfdom.dom.attribute.table.TableTabColorAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStylePropertiesBase;
 import org.odftoolkit.odfdom.dom.style.props.OdfStylePropertiesSet;
 import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
@@ -168,6 +169,11 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
       OdfStyleProperty.get(
           OdfStylePropertiesSet.TableProperties,
           OdfName.newName(OdfDocumentNamespace.TABLE, "display"));
+
+  public static final OdfStyleProperty TabColor =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.TableProperties,
+          OdfName.newName(OdfDocumentNamespace.TABLE, "tab-color"));
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>FoBackgroundColorAttribute
@@ -433,7 +439,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
         (StyleMayBreakBetweenRowsAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "may-break-between-rows");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -448,7 +454,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
     StyleMayBreakBetweenRowsAttribute attr =
         new StyleMayBreakBetweenRowsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleMayBreakBetweenRowsValue.booleanValue());
+    attr.setValue(styleMayBreakBetweenRowsValue.toString());
   }
 
   /**
@@ -462,7 +468,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
     StylePageNumberAttribute attr =
         (StylePageNumberAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "page-number");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -476,7 +482,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
   public void setStylePageNumberAttribute(Integer stylePageNumberValue) {
     StylePageNumberAttribute attr = new StylePageNumberAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(stylePageNumberValue.intValue());
+    attr.setValue(stylePageNumberValue.toString());
   }
 
   /**
@@ -658,7 +664,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
     TableDisplayAttribute attr =
         (TableDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "display");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -672,7 +678,35 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
   public void setTableDisplayAttribute(Boolean tableDisplayValue) {
     TableDisplayAttribute attr = new TableDisplayAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableDisplayValue.booleanValue());
+    attr.setValue(tableDisplayValue.toString());
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>TableTabColorAttribute</code> ,
+   * See {@odf.attribute table:tab-color}
+   *
+   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
+   *     and no default value defined.
+   */
+  public String getTableTabColorAttribute() {
+    TableTabColorAttribute attr =
+        (TableTabColorAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "tab-color");
+    if (attr != null) {
+      return String.valueOf(attr.getValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>TableTabColorAttribute</code> , See
+   * {@odf.attribute table:tab-color}
+   *
+   * @param tableTabColorValue The type is <code>String</code>
+   */
+  public void setTableTabColorAttribute(String tableTabColorValue) {
+    TableTabColorAttribute attr = new TableTabColorAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setValue(tableTabColorValue);
   }
 
   /**

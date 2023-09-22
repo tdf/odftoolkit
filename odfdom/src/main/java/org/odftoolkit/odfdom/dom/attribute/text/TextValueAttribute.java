@@ -63,17 +63,6 @@ public class TextValueAttribute extends OdfAttribute {
     return ATTRIBUTE_NAME.getLocalName();
   }
 
-  /** @param value The <code>int</code> value of the attribute. */
-  public void setIntValue(int value) {
-    super.setValue(String.valueOf(value));
-  }
-
-  /** @return Returns the <code>int</code> value of the attribute */
-  public int intValue() {
-    String val = super.getValue();
-    return Integer.parseInt(val);
-  }
-
   /**
    * Returns the default value of {@odf.attribute text:value}.
    *

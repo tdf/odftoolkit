@@ -231,7 +231,7 @@ public class DrawFrameElement extends DrawShapeElementBase {
 	public Boolean getPresentationPlaceholderAttribute() {
 		PresentationPlaceholderAttribute attr = (PresentationPlaceholderAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "placeholder");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -244,7 +244,7 @@ public class DrawFrameElement extends DrawShapeElementBase {
 	public void setPresentationPlaceholderAttribute(Boolean presentationPlaceholderValue) {
 		PresentationPlaceholderAttribute attr = new PresentationPlaceholderAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(presentationPlaceholderValue.booleanValue());
+		attr.setValue(presentationPlaceholderValue.toString());
 	}
 
 	/**
@@ -255,7 +255,7 @@ public class DrawFrameElement extends DrawShapeElementBase {
 	public Boolean getPresentationUserTransformedAttribute() {
 		PresentationUserTransformedAttribute attr = (PresentationUserTransformedAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "user-transformed");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -268,7 +268,7 @@ public class DrawFrameElement extends DrawShapeElementBase {
 	public void setPresentationUserTransformedAttribute(Boolean presentationUserTransformedValue) {
 		PresentationUserTransformedAttribute attr = new PresentationUserTransformedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(presentationUserTransformedValue.booleanValue());
+		attr.setValue(presentationUserTransformedValue.toString());
 	}
 
 	/**
@@ -479,12 +479,12 @@ public class DrawFrameElement extends DrawShapeElementBase {
 	 * Create child element {@odf.element draw:glue-point}.
 	 *
 	 * @param drawEscapeDirectionValue  the <code>String</code> value of <code>DrawEscapeDirectionAttribute</code>, see {@odf.attribute  draw:escape-direction} at specification
-	 * @param drawIdValue  the <code>String</code> value of <code>DrawIdAttribute</code>, see {@odf.attribute  draw:id} at specification
+	 * @param drawIdValue  the <code>Integer</code> value of <code>DrawIdAttribute</code>, see {@odf.attribute  draw:id} at specification
 	 * @param svgXValue  the <code>String</code> value of <code>SvgXAttribute</code>, see {@odf.attribute  svg:x} at specification
 	 * @param svgYValue  the <code>String</code> value of <code>SvgYAttribute</code>, see {@odf.attribute  svg:y} at specification
 	 * @return the element {@odf.element draw:glue-point}
 	 */
-	 public DrawGluePointElement newDrawGluePointElement(String drawEscapeDirectionValue, String drawIdValue, String svgXValue, String svgYValue) {
+	 public DrawGluePointElement newDrawGluePointElement(String drawEscapeDirectionValue, int drawIdValue, String svgXValue, String svgYValue) {
 		DrawGluePointElement drawGluePoint = ((OdfFileDom) this.ownerDocument).newOdfElement(DrawGluePointElement.class);
 		drawGluePoint.setDrawEscapeDirectionAttribute(drawEscapeDirectionValue);
 		drawGluePoint.setDrawIdAttribute(drawIdValue);

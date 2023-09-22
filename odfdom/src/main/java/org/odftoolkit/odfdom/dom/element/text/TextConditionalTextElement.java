@@ -104,7 +104,7 @@ public class TextConditionalTextElement extends OdfElement {
     TextCurrentValueAttribute attr =
         (TextCurrentValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "current-value");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -118,7 +118,7 @@ public class TextConditionalTextElement extends OdfElement {
   public void setTextCurrentValueAttribute(Boolean textCurrentValueValue) {
     TextCurrentValueAttribute attr = new TextCurrentValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textCurrentValueValue.booleanValue());
+    attr.setValue(textCurrentValueValue.toString());
   }
 
   /**

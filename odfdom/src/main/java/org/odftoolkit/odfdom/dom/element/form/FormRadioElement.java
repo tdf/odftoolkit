@@ -120,7 +120,7 @@ public class FormRadioElement extends OdfElement {
         (FormCurrentSelectedAttribute)
             getOdfAttribute(OdfDocumentNamespace.FORM, "current-selected");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormCurrentSelectedAttribute.DEFAULT_VALUE);
   }
@@ -135,7 +135,7 @@ public class FormRadioElement extends OdfElement {
     FormCurrentSelectedAttribute attr =
         new FormCurrentSelectedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formCurrentSelectedValue.booleanValue());
+    attr.setValue(formCurrentSelectedValue.toString());
   }
 
   /**
@@ -177,7 +177,7 @@ public class FormRadioElement extends OdfElement {
     FormDisabledAttribute attr =
         (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
   }
@@ -191,7 +191,7 @@ public class FormRadioElement extends OdfElement {
   public void setFormDisabledAttribute(Boolean formDisabledValue) {
     FormDisabledAttribute attr = new FormDisabledAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formDisabledValue.booleanValue());
+    attr.setValue(formDisabledValue.toString());
   }
 
   /**
@@ -374,7 +374,7 @@ public class FormRadioElement extends OdfElement {
     FormPrintableAttribute attr =
         (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);
   }
@@ -388,7 +388,7 @@ public class FormRadioElement extends OdfElement {
   public void setFormPrintableAttribute(Boolean formPrintableValue) {
     FormPrintableAttribute attr = new FormPrintableAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formPrintableValue.booleanValue());
+    attr.setValue(formPrintableValue.toString());
   }
 
   /**
@@ -402,7 +402,7 @@ public class FormRadioElement extends OdfElement {
     FormSelectedAttribute attr =
         (FormSelectedAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "selected");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormSelectedAttribute.DEFAULT_VALUE);
   }
@@ -416,7 +416,7 @@ public class FormRadioElement extends OdfElement {
   public void setFormSelectedAttribute(Boolean formSelectedValue) {
     FormSelectedAttribute attr = new FormSelectedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formSelectedValue.booleanValue());
+    attr.setValue(formSelectedValue.toString());
   }
 
   /**
@@ -430,7 +430,7 @@ public class FormRadioElement extends OdfElement {
     FormTabIndexAttribute attr =
         (FormTabIndexAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-index");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return Integer.valueOf(FormTabIndexAttribute.DEFAULT_VALUE);
   }
@@ -444,7 +444,7 @@ public class FormRadioElement extends OdfElement {
   public void setFormTabIndexAttribute(Integer formTabIndexValue) {
     FormTabIndexAttribute attr = new FormTabIndexAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(formTabIndexValue.intValue());
+    attr.setValue(formTabIndexValue.toString());
   }
 
   /**
@@ -458,7 +458,7 @@ public class FormRadioElement extends OdfElement {
     FormTabStopAttribute attr =
         (FormTabStopAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-stop");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(FormTabStopAttribute.DEFAULT_VALUE);
   }
@@ -472,7 +472,7 @@ public class FormRadioElement extends OdfElement {
   public void setFormTabStopAttribute(Boolean formTabStopValue) {
     FormTabStopAttribute attr = new FormTabStopAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formTabStopValue.booleanValue());
+    attr.setValue(formTabStopValue.toString());
   }
 
   /**

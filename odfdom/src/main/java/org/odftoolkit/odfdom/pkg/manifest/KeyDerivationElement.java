@@ -63,8 +63,6 @@ public class KeyDerivationElement extends OdfElement {
    * Receives the value of the ODFDOM attribute representation <code>IterationCountAttribute</code>
    * , See {@odf.attribute manifest:iteration-count}
    *
-   * <p>Attribute is mandatory.
-   *
    * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
    *     set and no default value defined.
    */
@@ -150,8 +148,6 @@ public class KeyDerivationElement extends OdfElement {
   /**
    * Receives the value of the ODFDOM attribute representation <code>SaltAttribute</code> , See
    * {@odf.attribute manifest:salt}
-   *
-   * <p>Attribute is mandatory.
    *
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.

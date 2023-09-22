@@ -31,6 +31,7 @@ package org.odftoolkit.odfdom.dom.element.table;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.table.TableCellRangeAddressAttribute;
+import org.odftoolkit.odfdom.dom.attribute.table.TableNameAttribute;
 import org.odftoolkit.odfdom.pkg.ElementVisitor;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
@@ -64,8 +65,6 @@ public class TableSourceCellRangeElement extends OdfElement {
    * Receives the value of the ODFDOM attribute representation <code>TableCellRangeAddressAttribute
    * </code> , See {@odf.attribute table:cell-range-address}
    *
-   * <p>Attribute is mandatory.
-   *
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
    */
@@ -90,6 +89,34 @@ public class TableSourceCellRangeElement extends OdfElement {
         new TableCellRangeAddressAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
     attr.setValue(tableCellRangeAddressValue);
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>TableNameAttribute</code> , See
+   * {@odf.attribute table:name}
+   *
+   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
+   *     and no default value defined.
+   */
+  public String getTableNameAttribute() {
+    TableNameAttribute attr =
+        (TableNameAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "name");
+    if (attr != null) {
+      return String.valueOf(attr.getValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>TableNameAttribute</code> , See
+   * {@odf.attribute table:name}
+   *
+   * @param tableNameValue The type is <code>String</code>
+   */
+  public void setTableNameAttribute(String tableNameValue) {
+    TableNameAttribute attr = new TableNameAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setValue(tableNameValue);
   }
 
   /**

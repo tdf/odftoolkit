@@ -57,6 +57,10 @@ public interface OdfChartProperties {
       OdfStyleProperty.get(
           OdfStylePropertiesSet.ChartProperties,
           OdfName.newName(OdfDocumentNamespace.CHART, "data-label-number"));
+  public static final OdfStyleProperty DataLabelSeries =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "data-label-series"));
   public static final OdfStyleProperty DataLabelSymbol =
       OdfStyleProperty.get(
           OdfStylePropertiesSet.ChartProperties,
@@ -193,6 +197,30 @@ public interface OdfChartProperties {
       OdfStyleProperty.get(
           OdfStylePropertiesSet.ChartProperties,
           OdfName.newName(OdfDocumentNamespace.CHART, "pie-offset"));
+  public static final OdfStyleProperty RegressionForceIntercept =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "regression-force-intercept"));
+  public static final OdfStyleProperty RegressionInterceptValue =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "regression-intercept-value"));
+  public static final OdfStyleProperty RegressionMaxDegree =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "regression-max-degree"));
+  public static final OdfStyleProperty RegressionMovingType =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "regression-moving-type"));
+  public static final OdfStyleProperty RegressionName =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "regression-name"));
+  public static final OdfStyleProperty RegressionPeriod =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ChartProperties,
+          OdfName.newName(OdfDocumentNamespace.CHART, "regression-period"));
   public static final OdfStyleProperty RegressionType =
       OdfStyleProperty.get(
           OdfStylePropertiesSet.ChartProperties,

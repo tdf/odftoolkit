@@ -105,7 +105,7 @@ public class TextSequenceElement extends OdfElement {
         (StyleNumLetterSyncAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -120,7 +120,7 @@ public class TextSequenceElement extends OdfElement {
     StyleNumLetterSyncAttribute attr =
         new StyleNumLetterSyncAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleNumLetterSyncValue.booleanValue());
+    attr.setValue(styleNumLetterSyncValue.toString());
   }
 
   /**

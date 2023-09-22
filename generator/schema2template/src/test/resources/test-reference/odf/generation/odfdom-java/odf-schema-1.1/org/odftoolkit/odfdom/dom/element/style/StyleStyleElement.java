@@ -79,7 +79,7 @@ public class StyleStyleElement extends OdfStyleBase {
 	public Boolean getStyleAutoUpdateAttribute() {
 		StyleAutoUpdateAttribute attr = (StyleAutoUpdateAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "auto-update");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(StyleAutoUpdateAttribute.DEFAULT_VALUE);
 	}
@@ -92,7 +92,7 @@ public class StyleStyleElement extends OdfStyleBase {
 	public void setStyleAutoUpdateAttribute(Boolean styleAutoUpdateValue) {
 		StyleAutoUpdateAttribute attr = new StyleAutoUpdateAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(styleAutoUpdateValue.booleanValue());
+		attr.setValue(styleAutoUpdateValue.toString());
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class StyleStyleElement extends OdfStyleBase {
 	public Integer getStyleDefaultOutlineLevelAttribute() {
 		StyleDefaultOutlineLevelAttribute attr = (StyleDefaultOutlineLevelAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "default-outline-level");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -164,7 +164,7 @@ public class StyleStyleElement extends OdfStyleBase {
 	public void setStyleDefaultOutlineLevelAttribute(Integer styleDefaultOutlineLevelValue) {
 		StyleDefaultOutlineLevelAttribute attr = new StyleDefaultOutlineLevelAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(styleDefaultOutlineLevelValue.intValue());
+		attr.setValue(styleDefaultOutlineLevelValue.toString());
 	}
 
 	/**

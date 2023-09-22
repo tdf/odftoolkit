@@ -80,7 +80,7 @@ public class TextUserIndexEntryTemplateElement extends OdfStylableElement {
     TextOutlineLevelAttribute attr =
         (TextOutlineLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "outline-level");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -94,7 +94,7 @@ public class TextUserIndexEntryTemplateElement extends OdfStylableElement {
   public void setTextOutlineLevelAttribute(Integer textOutlineLevelValue) {
     TextOutlineLevelAttribute attr = new TextOutlineLevelAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textOutlineLevelValue.intValue());
+    attr.setValue(textOutlineLevelValue.toString());
   }
 
   /**
@@ -137,6 +137,34 @@ public class TextUserIndexEntryTemplateElement extends OdfStylableElement {
         ((OdfFileDom) this.ownerDocument).newOdfElement(TextIndexEntryChapterElement.class);
     this.appendChild(textIndexEntryChapter);
     return textIndexEntryChapter;
+  }
+
+  /**
+   * Create child element {@odf.element text:index-entry-link-end}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element text:index-entry-link-end}
+   */
+  public TextIndexEntryLinkEndElement newTextIndexEntryLinkEndElement() {
+    TextIndexEntryLinkEndElement textIndexEntryLinkEnd =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextIndexEntryLinkEndElement.class);
+    this.appendChild(textIndexEntryLinkEnd);
+    return textIndexEntryLinkEnd;
+  }
+
+  /**
+   * Create child element {@odf.element text:index-entry-link-start}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element text:index-entry-link-start}
+   */
+  public TextIndexEntryLinkStartElement newTextIndexEntryLinkStartElement() {
+    TextIndexEntryLinkStartElement textIndexEntryLinkStart =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextIndexEntryLinkStartElement.class);
+    this.appendChild(textIndexEntryLinkStart);
+    return textIndexEntryLinkStart;
   }
 
   /**

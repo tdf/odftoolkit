@@ -139,7 +139,7 @@ public class TableDataPilotDisplayInfoElement extends OdfElement {
     TableEnabledAttribute attr =
         (TableEnabledAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "enabled");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -153,7 +153,7 @@ public class TableDataPilotDisplayInfoElement extends OdfElement {
   public void setTableEnabledAttribute(Boolean tableEnabledValue) {
     TableEnabledAttribute attr = new TableEnabledAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableEnabledValue.booleanValue());
+    attr.setValue(tableEnabledValue.toString());
   }
 
   /**
@@ -169,7 +169,7 @@ public class TableDataPilotDisplayInfoElement extends OdfElement {
     TableMemberCountAttribute attr =
         (TableMemberCountAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "member-count");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -183,7 +183,7 @@ public class TableDataPilotDisplayInfoElement extends OdfElement {
   public void setTableMemberCountAttribute(Integer tableMemberCountValue) {
     TableMemberCountAttribute attr = new TableMemberCountAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableMemberCountValue.intValue());
+    attr.setValue(tableMemberCountValue.toString());
   }
 
   /**

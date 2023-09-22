@@ -69,7 +69,9 @@ public class ChartRegressionTypeAttribute extends OdfAttribute {
     EXPONENTIAL("exponential"),
     LINEAR("linear"),
     LOGARITHMIC("logarithmic"),
+    MOVING_AVERAGE("moving-average"),
     NONE("none"),
+    POLYNOMIAL("polynomial"),
     POWER("power");
 
     private String mValue;

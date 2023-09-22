@@ -99,7 +99,7 @@ relative to a file within an ODF package.
 
 ## Requirements
 
-**ODF XSLT Runner** requires [Java RE 5][6], or a later version of Java.
+**ODF XSLT Runner** requires [Java 11][6], or a later version of Java.
 
 It further requires ODFDOM. This former NetBeans project is pre-configured to build
 ODFDOM while building **ODF XSLT Runner**. This requires that the ODFDOM

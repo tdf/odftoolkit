@@ -132,7 +132,7 @@ public class TableDataPilotGroupsElement extends OdfElement {
   public Double getTableEndAttribute() {
     TableEndAttribute attr = (TableEndAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "end");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return Double.valueOf(attr.getValue());
     }
     return null;
   }
@@ -146,14 +146,12 @@ public class TableDataPilotGroupsElement extends OdfElement {
   public void setTableEndAttribute(Double tableEndValue) {
     TableEndAttribute attr = new TableEndAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(tableEndValue.doubleValue());
+    attr.setValue(tableEndValue.toString());
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableGroupedByAttribute</code>
    * , See {@odf.attribute table:grouped-by}
-   *
-   * <p>Attribute is mandatory.
    *
    * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
@@ -222,7 +220,7 @@ public class TableDataPilotGroupsElement extends OdfElement {
     TableStartAttribute attr =
         (TableStartAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "start");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return Double.valueOf(attr.getValue());
     }
     return null;
   }
@@ -236,14 +234,12 @@ public class TableDataPilotGroupsElement extends OdfElement {
   public void setTableStartAttribute(Double tableStartValue) {
     TableStartAttribute attr = new TableStartAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(tableStartValue.doubleValue());
+    attr.setValue(tableStartValue.toString());
   }
 
   /**
    * Receives the value of the ODFDOM attribute representation <code>TableStepAttribute</code> , See
    * {@odf.attribute table:step}
-   *
-   * <p>Attribute is mandatory.
    *
    * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set
    *     and no default value defined.
@@ -252,7 +248,7 @@ public class TableDataPilotGroupsElement extends OdfElement {
     TableStepAttribute attr =
         (TableStepAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "step");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return Double.valueOf(attr.getValue());
     }
     return null;
   }
@@ -266,7 +262,7 @@ public class TableDataPilotGroupsElement extends OdfElement {
   public void setTableStepAttribute(Double tableStepValue) {
     TableStepAttribute attr = new TableStepAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(tableStepValue.doubleValue());
+    attr.setValue(tableStepValue.toString());
   }
 
   /**

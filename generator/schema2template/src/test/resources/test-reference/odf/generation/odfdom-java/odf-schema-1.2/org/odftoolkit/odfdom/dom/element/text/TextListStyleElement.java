@@ -121,7 +121,7 @@ public class TextListStyleElement extends OdfStyleBase {
 	public Boolean getTextConsecutiveNumberingAttribute() {
 		TextConsecutiveNumberingAttribute attr = (TextConsecutiveNumberingAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "consecutive-numbering");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TextConsecutiveNumberingAttribute.DEFAULT_VALUE);
 	}
@@ -134,7 +134,7 @@ public class TextListStyleElement extends OdfStyleBase {
 	public void setTextConsecutiveNumberingAttribute(Boolean textConsecutiveNumberingValue) {
 		TextConsecutiveNumberingAttribute attr = new TextConsecutiveNumberingAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(textConsecutiveNumberingValue.booleanValue());
+		attr.setValue(textConsecutiveNumberingValue.toString());
 	}
 
 	/**

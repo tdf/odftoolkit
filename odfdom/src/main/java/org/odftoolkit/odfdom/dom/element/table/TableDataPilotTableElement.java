@@ -139,7 +139,7 @@ public class TableDataPilotTableElement extends OdfElement {
         (TableDrillDownOnDoubleClickAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "drill-down-on-double-click");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TableDrillDownOnDoubleClickAttribute.DEFAULT_VALUE);
   }
@@ -154,7 +154,7 @@ public class TableDataPilotTableElement extends OdfElement {
     TableDrillDownOnDoubleClickAttribute attr =
         new TableDrillDownOnDoubleClickAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableDrillDownOnDoubleClickValue.booleanValue());
+    attr.setValue(tableDrillDownOnDoubleClickValue.toString());
   }
 
   /**
@@ -197,7 +197,7 @@ public class TableDataPilotTableElement extends OdfElement {
         (TableIdentifyCategoriesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "identify-categories");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TableIdentifyCategoriesAttribute.DEFAULT_VALUE);
   }
@@ -212,7 +212,7 @@ public class TableDataPilotTableElement extends OdfElement {
     TableIdentifyCategoriesAttribute attr =
         new TableIdentifyCategoriesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableIdentifyCategoriesValue.booleanValue());
+    attr.setValue(tableIdentifyCategoriesValue.toString());
   }
 
   /**
@@ -227,7 +227,7 @@ public class TableDataPilotTableElement extends OdfElement {
         (TableIgnoreEmptyRowsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "ignore-empty-rows");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TableIgnoreEmptyRowsAttribute.DEFAULT_VALUE);
   }
@@ -242,7 +242,7 @@ public class TableDataPilotTableElement extends OdfElement {
     TableIgnoreEmptyRowsAttribute attr =
         new TableIgnoreEmptyRowsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableIgnoreEmptyRowsValue.booleanValue());
+    attr.setValue(tableIgnoreEmptyRowsValue.toString());
   }
 
   /**
@@ -287,7 +287,7 @@ public class TableDataPilotTableElement extends OdfElement {
         (TableShowFilterButtonAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "show-filter-button");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TableShowFilterButtonAttribute.DEFAULT_VALUE);
   }
@@ -302,7 +302,7 @@ public class TableDataPilotTableElement extends OdfElement {
     TableShowFilterButtonAttribute attr =
         new TableShowFilterButtonAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableShowFilterButtonValue.booleanValue());
+    attr.setValue(tableShowFilterButtonValue.toString());
   }
 
   /**
@@ -418,16 +418,11 @@ public class TableDataPilotTableElement extends OdfElement {
   /**
    * Create child element {@odf.element table:source-cell-range}.
    *
-   * @param tableCellRangeAddressValue the <code>String</code> value of <code>
-   *     TableCellRangeAddressAttribute</code>, see {@odf.attribute table:cell-range-address} at
-   *     specification
    * @return the element {@odf.element table:source-cell-range}
    */
-  public TableSourceCellRangeElement newTableSourceCellRangeElement(
-      String tableCellRangeAddressValue) {
+  public TableSourceCellRangeElement newTableSourceCellRangeElement() {
     TableSourceCellRangeElement tableSourceCellRange =
         ((OdfFileDom) this.ownerDocument).newOdfElement(TableSourceCellRangeElement.class);
-    tableSourceCellRange.setTableCellRangeAddressAttribute(tableCellRangeAddressValue);
     this.appendChild(tableSourceCellRange);
     return tableSourceCellRange;
   }

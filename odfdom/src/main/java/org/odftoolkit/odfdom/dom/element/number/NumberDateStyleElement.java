@@ -72,7 +72,7 @@ public abstract class NumberDateStyleElement extends NumberDataStyleElementBase 
         (NumberAutomaticOrderAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "automatic-order");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(NumberAutomaticOrderAttribute.DEFAULT_VALUE);
   }
@@ -87,7 +87,7 @@ public abstract class NumberDateStyleElement extends NumberDataStyleElementBase 
     NumberAutomaticOrderAttribute attr =
         new NumberAutomaticOrderAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(numberAutomaticOrderValue.booleanValue());
+    attr.setValue(numberAutomaticOrderValue.toString());
   }
 
   /**
@@ -165,6 +165,20 @@ public abstract class NumberDateStyleElement extends NumberDataStyleElementBase 
         ((OdfFileDom) this.ownerDocument).newOdfElement(NumberEraElement.class);
     this.appendChild(numberEra);
     return numberEra;
+  }
+
+  /**
+   * Create child element {@odf.element number:fill-character}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element number:fill-character}
+   */
+  public NumberFillCharacterElement newNumberFillCharacterElement() {
+    NumberFillCharacterElement numberFillCharacter =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(NumberFillCharacterElement.class);
+    this.appendChild(numberFillCharacter);
+    return numberFillCharacter;
   }
 
   /**

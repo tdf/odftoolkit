@@ -69,7 +69,7 @@ public class NumberSecondsElement extends OdfElement {
 	public Integer getNumberDecimalPlacesAttribute() {
 		NumberDecimalPlacesAttribute attr = (NumberDecimalPlacesAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "decimal-places");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return Integer.valueOf(NumberDecimalPlacesAttribute.DEFAULT_VALUE);
 	}
@@ -82,7 +82,7 @@ public class NumberSecondsElement extends OdfElement {
 	public void setNumberDecimalPlacesAttribute(Integer numberDecimalPlacesValue) {
 		NumberDecimalPlacesAttribute attr = new NumberDecimalPlacesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(numberDecimalPlacesValue.intValue());
+		attr.setValue(numberDecimalPlacesValue.toString());
 	}
 
 	/**

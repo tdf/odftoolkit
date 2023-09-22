@@ -71,7 +71,7 @@ public abstract class NumberCurrencyStyleElement extends NumberDataStyleElementB
         (NumberAutomaticOrderAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "automatic-order");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(NumberAutomaticOrderAttribute.DEFAULT_VALUE);
   }
@@ -86,7 +86,7 @@ public abstract class NumberCurrencyStyleElement extends NumberDataStyleElementB
     NumberAutomaticOrderAttribute attr =
         new NumberAutomaticOrderAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(numberAutomaticOrderValue.booleanValue());
+    attr.setValue(numberAutomaticOrderValue.toString());
   }
 
   /**
@@ -99,6 +99,20 @@ public abstract class NumberCurrencyStyleElement extends NumberDataStyleElementB
         ((OdfFileDom) this.ownerDocument).newOdfElement(NumberCurrencySymbolElement.class);
     this.appendChild(numberCurrencySymbol);
     return numberCurrencySymbol;
+  }
+
+  /**
+   * Create child element {@odf.element number:fill-character}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element number:fill-character}
+   */
+  public NumberFillCharacterElement newNumberFillCharacterElement() {
+    NumberFillCharacterElement numberFillCharacter =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(NumberFillCharacterElement.class);
+    this.appendChild(numberFillCharacter);
+    return numberFillCharacter;
   }
 
   /**

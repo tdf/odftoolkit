@@ -70,7 +70,7 @@ public class TableMovementCutOffElement extends OdfElement {
 	public Integer getTableEndPositionAttribute() {
 		TableEndPositionAttribute attr = (TableEndPositionAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "end-position");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -83,7 +83,7 @@ public class TableMovementCutOffElement extends OdfElement {
 	public void setTableEndPositionAttribute(Integer tableEndPositionValue) {
 		TableEndPositionAttribute attr = new TableEndPositionAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(tableEndPositionValue.intValue());
+		attr.setValue(tableEndPositionValue.toString());
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class TableMovementCutOffElement extends OdfElement {
 	public Integer getTablePositionAttribute() {
 		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "position");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -107,7 +107,7 @@ public class TableMovementCutOffElement extends OdfElement {
 	public void setTablePositionAttribute(Integer tablePositionValue) {
 		TablePositionAttribute attr = new TablePositionAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(tablePositionValue.intValue());
+		attr.setValue(tablePositionValue.toString());
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class TableMovementCutOffElement extends OdfElement {
 	public Integer getTableStartPositionAttribute() {
 		TableStartPositionAttribute attr = (TableStartPositionAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "start-position");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -131,7 +131,7 @@ public class TableMovementCutOffElement extends OdfElement {
 	public void setTableStartPositionAttribute(Integer tableStartPositionValue) {
 		TableStartPositionAttribute attr = new TableStartPositionAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(tableStartPositionValue.intValue());
+		attr.setValue(tableStartPositionValue.toString());
 	}
 
   /**

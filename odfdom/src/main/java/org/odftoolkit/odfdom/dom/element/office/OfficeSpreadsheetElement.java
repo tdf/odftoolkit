@@ -151,7 +151,7 @@ public class OfficeSpreadsheetElement extends OdfElement {
         (TableStructureProtectedAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "structure-protected");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TableStructureProtectedAttribute.DEFAULT_VALUE);
   }
@@ -166,7 +166,7 @@ public class OfficeSpreadsheetElement extends OdfElement {
     TableStructureProtectedAttribute attr =
         new TableStructureProtectedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableStructureProtectedValue.booleanValue());
+    attr.setValue(tableStructureProtectedValue.toString());
   }
 
   /**

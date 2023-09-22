@@ -71,7 +71,7 @@ public class TableDataPilotLayoutInfoElement extends OdfElement {
 	public Boolean getTableAddEmptyLinesAttribute() {
 		TableAddEmptyLinesAttribute attr = (TableAddEmptyLinesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "add-empty-lines");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -84,7 +84,7 @@ public class TableDataPilotLayoutInfoElement extends OdfElement {
 	public void setTableAddEmptyLinesAttribute(Boolean tableAddEmptyLinesValue) {
 		TableAddEmptyLinesAttribute attr = new TableAddEmptyLinesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableAddEmptyLinesValue.booleanValue());
+		attr.setValue(tableAddEmptyLinesValue.toString());
 	}
 
 	/**

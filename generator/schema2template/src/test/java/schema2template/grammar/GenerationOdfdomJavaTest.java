@@ -154,7 +154,6 @@ public class GenerationOdfdomJavaTest {
       SchemaToTemplate.run(generations);
     } catch (Exception e) {
       Assert.fail("Exception during test run: " + e.toString());
-      e.printStackTrace();
       throw new RuntimeException(e);
     }
     DirectoryCompare.compareDirectories(

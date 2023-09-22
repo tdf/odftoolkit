@@ -32,6 +32,7 @@ import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberDenominatorValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberGroupingAttribute;
+import org.odftoolkit.odfdom.dom.attribute.number.NumberMaxDenominatorValueAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberMinDenominatorDigitsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberMinIntegerDigitsAttribute;
 import org.odftoolkit.odfdom.dom.attribute.number.NumberMinNumeratorDigitsAttribute;
@@ -76,7 +77,7 @@ public class NumberFractionElement extends OdfElement {
         (NumberDenominatorValueAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "denominator-value");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -91,7 +92,7 @@ public class NumberFractionElement extends OdfElement {
     NumberDenominatorValueAttribute attr =
         new NumberDenominatorValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberDenominatorValueValue.intValue());
+    attr.setValue(numberDenominatorValueValue.toString());
   }
 
   /**
@@ -105,7 +106,7 @@ public class NumberFractionElement extends OdfElement {
     NumberGroupingAttribute attr =
         (NumberGroupingAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "grouping");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(NumberGroupingAttribute.DEFAULT_VALUE);
   }
@@ -119,7 +120,37 @@ public class NumberFractionElement extends OdfElement {
   public void setNumberGroupingAttribute(Boolean numberGroupingValue) {
     NumberGroupingAttribute attr = new NumberGroupingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(numberGroupingValue.booleanValue());
+    attr.setValue(numberGroupingValue.toString());
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>
+   * NumberMaxDenominatorValueAttribute</code> , See {@odf.attribute number:max-denominator-value}
+   *
+   * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Integer getNumberMaxDenominatorValueAttribute() {
+    NumberMaxDenominatorValueAttribute attr =
+        (NumberMaxDenominatorValueAttribute)
+            getOdfAttribute(OdfDocumentNamespace.NUMBER, "max-denominator-value");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Integer.valueOf(attr.getValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>NumberMaxDenominatorValueAttribute
+   * </code> , See {@odf.attribute number:max-denominator-value}
+   *
+   * @param numberMaxDenominatorValueValue The type is <code>Integer</code>
+   */
+  public void setNumberMaxDenominatorValueAttribute(Integer numberMaxDenominatorValueValue) {
+    NumberMaxDenominatorValueAttribute attr =
+        new NumberMaxDenominatorValueAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setValue(numberMaxDenominatorValueValue.toString());
   }
 
   /**
@@ -134,7 +165,7 @@ public class NumberFractionElement extends OdfElement {
         (NumberMinDenominatorDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-denominator-digits");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -149,7 +180,7 @@ public class NumberFractionElement extends OdfElement {
     NumberMinDenominatorDigitsAttribute attr =
         new NumberMinDenominatorDigitsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberMinDenominatorDigitsValue.intValue());
+    attr.setValue(numberMinDenominatorDigitsValue.toString());
   }
 
   /**
@@ -164,7 +195,7 @@ public class NumberFractionElement extends OdfElement {
         (NumberMinIntegerDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-integer-digits");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -179,7 +210,7 @@ public class NumberFractionElement extends OdfElement {
     NumberMinIntegerDigitsAttribute attr =
         new NumberMinIntegerDigitsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberMinIntegerDigitsValue.intValue());
+    attr.setValue(numberMinIntegerDigitsValue.toString());
   }
 
   /**
@@ -194,7 +225,7 @@ public class NumberFractionElement extends OdfElement {
         (NumberMinNumeratorDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-numerator-digits");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -209,7 +240,7 @@ public class NumberFractionElement extends OdfElement {
     NumberMinNumeratorDigitsAttribute attr =
         new NumberMinNumeratorDigitsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberMinNumeratorDigitsValue.intValue());
+    attr.setValue(numberMinNumeratorDigitsValue.toString());
   }
 
   /**

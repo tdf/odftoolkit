@@ -71,7 +71,7 @@ public class TextTrackedChangesElement extends OdfElement {
     TextTrackChangesAttribute attr =
         (TextTrackChangesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "track-changes");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TextTrackChangesAttribute.DEFAULT_VALUE);
   }
@@ -85,7 +85,7 @@ public class TextTrackedChangesElement extends OdfElement {
   public void setTextTrackChangesAttribute(Boolean textTrackChangesValue) {
     TextTrackChangesAttribute attr = new TextTrackChangesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textTrackChangesValue.booleanValue());
+    attr.setValue(textTrackChangesValue.toString());
   }
 
   /**

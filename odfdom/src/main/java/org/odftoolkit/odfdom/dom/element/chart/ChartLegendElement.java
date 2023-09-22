@@ -35,6 +35,8 @@ import org.odftoolkit.odfdom.dom.attribute.chart.ChartLegendPositionAttribute;
 import org.odftoolkit.odfdom.dom.attribute.chart.ChartStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleLegendExpansionAspectRatioAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleLegendExpansionAttribute;
+import org.odftoolkit.odfdom.dom.attribute.svg.SvgHeightAttribute;
+import org.odftoolkit.odfdom.dom.attribute.svg.SvgWidthAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgXAttribute;
 import org.odftoolkit.odfdom.dom.attribute.svg.SvgYAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStylableElement;
@@ -204,7 +206,7 @@ public class ChartLegendElement extends OdfStylableElement {
         (StyleLegendExpansionAspectRatioAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "legend-expansion-aspect-ratio");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return Double.valueOf(attr.getValue());
     }
     return null;
   }
@@ -221,7 +223,62 @@ public class ChartLegendElement extends OdfStylableElement {
     StyleLegendExpansionAspectRatioAttribute attr =
         new StyleLegendExpansionAspectRatioAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(styleLegendExpansionAspectRatioValue.doubleValue());
+    attr.setValue(styleLegendExpansionAspectRatioValue.toString());
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>SvgHeightAttribute</code> , See
+   * {@odf.attribute svg:height}
+   *
+   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
+   *     and no default value defined.
+   */
+  public String getSvgHeightAttribute() {
+    SvgHeightAttribute attr =
+        (SvgHeightAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "height");
+    if (attr != null) {
+      return String.valueOf(attr.getValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>SvgHeightAttribute</code> , See
+   * {@odf.attribute svg:height}
+   *
+   * @param svgHeightValue The type is <code>String</code>
+   */
+  public void setSvgHeightAttribute(String svgHeightValue) {
+    SvgHeightAttribute attr = new SvgHeightAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setValue(svgHeightValue);
+  }
+
+  /**
+   * Receives the value of the ODFDOM attribute representation <code>SvgWidthAttribute</code> , See
+   * {@odf.attribute svg:width}
+   *
+   * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set
+   *     and no default value defined.
+   */
+  public String getSvgWidthAttribute() {
+    SvgWidthAttribute attr = (SvgWidthAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "width");
+    if (attr != null) {
+      return String.valueOf(attr.getValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>SvgWidthAttribute</code> , See
+   * {@odf.attribute svg:width}
+   *
+   * @param svgWidthValue The type is <code>String</code>
+   */
+  public void setSvgWidthAttribute(String svgWidthValue) {
+    SvgWidthAttribute attr = new SvgWidthAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setValue(svgWidthValue);
   }
 
   /**

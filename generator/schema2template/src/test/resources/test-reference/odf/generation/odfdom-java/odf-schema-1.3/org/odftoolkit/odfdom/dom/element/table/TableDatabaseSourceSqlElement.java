@@ -96,7 +96,7 @@ public class TableDatabaseSourceSqlElement extends OdfElement {
 	public Boolean getTableParseSqlStatementAttribute() {
 		TableParseSqlStatementAttribute attr = (TableParseSqlStatementAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "parse-sql-statement");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableParseSqlStatementAttribute.DEFAULT_VALUE);
 	}
@@ -109,7 +109,7 @@ public class TableDatabaseSourceSqlElement extends OdfElement {
 	public void setTableParseSqlStatementAttribute(Boolean tableParseSqlStatementValue) {
 		TableParseSqlStatementAttribute attr = new TableParseSqlStatementAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableParseSqlStatementValue.booleanValue());
+		attr.setValue(tableParseSqlStatementValue.toString());
 	}
 
 	/**

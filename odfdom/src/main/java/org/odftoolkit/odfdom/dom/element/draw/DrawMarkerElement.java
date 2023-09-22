@@ -161,7 +161,7 @@ public class DrawMarkerElement extends OdfElement {
     SvgViewBoxAttribute attr =
         (SvgViewBoxAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "viewBox");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -175,7 +175,7 @@ public class DrawMarkerElement extends OdfElement {
   public void setSvgViewBoxAttribute(Integer svgViewBoxValue) {
     SvgViewBoxAttribute attr = new SvgViewBoxAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(svgViewBoxValue.intValue());
+    attr.setValue(svgViewBoxValue.toString());
   }
 
   /**

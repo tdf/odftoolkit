@@ -68,12 +68,12 @@ public class TextAlphabeticalIndexEntryTemplateElement extends OdfStylableElemen
 	 *
 	 * Attribute is mandatory.
 	 *
-	 * @return - the <code>Integer</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public Integer getTextOutlineLevelAttribute() {
+	public String getTextOutlineLevelAttribute() {
 		TextOutlineLevelAttribute attr = (TextOutlineLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "outline-level");
-		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+		if (attr != null) {
+			return String.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -81,12 +81,12 @@ public class TextAlphabeticalIndexEntryTemplateElement extends OdfStylableElemen
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>TextOutlineLevelAttribute</code> , See {@odf.attribute text:outline-level}
 	 *
-	 * @param textOutlineLevelValue   The type is <code>Integer</code>
+	 * @param textOutlineLevelValue   The type is <code>String</code>
 	 */
-	public void setTextOutlineLevelAttribute(Integer textOutlineLevelValue) {
+	public void setTextOutlineLevelAttribute(String textOutlineLevelValue) {
 		TextOutlineLevelAttribute attr = new TextOutlineLevelAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(textOutlineLevelValue.intValue());
+		attr.setValue(textOutlineLevelValue);
 	}
 
 	/**

@@ -77,7 +77,7 @@ public class DbComponentElement extends OdfElement {
 	public Boolean getDbAsTemplateAttribute() {
 		DbAsTemplateAttribute attr = (DbAsTemplateAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "as-template");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -90,7 +90,7 @@ public class DbComponentElement extends OdfElement {
 	public void setDbAsTemplateAttribute(Boolean dbAsTemplateValue) {
 		DbAsTemplateAttribute attr = new DbAsTemplateAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(dbAsTemplateValue.booleanValue());
+		attr.setValue(dbAsTemplateValue.toString());
 	}
 
 	/**

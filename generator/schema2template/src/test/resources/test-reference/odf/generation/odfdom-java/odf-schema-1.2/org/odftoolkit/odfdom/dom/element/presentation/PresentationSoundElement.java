@@ -73,7 +73,7 @@ public class PresentationSoundElement extends OdfElement {
 	public Boolean getPresentationPlayFullAttribute() {
 		PresentationPlayFullAttribute attr = (PresentationPlayFullAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "play-full");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -86,7 +86,7 @@ public class PresentationSoundElement extends OdfElement {
 	public void setPresentationPlayFullAttribute(Boolean presentationPlayFullValue) {
 		PresentationPlayFullAttribute attr = new PresentationPlayFullAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(presentationPlayFullValue.booleanValue());
+		attr.setValue(presentationPlayFullValue.toString());
 	}
 
 	/**

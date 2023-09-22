@@ -169,6 +169,10 @@ public interface OdfParagraphProperties {
       OdfStyleProperty.get(
           OdfStylePropertiesSet.ParagraphProperties,
           OdfName.newName(OdfDocumentNamespace.STYLE, "border-line-width-top"));
+  public static final OdfStyleProperty ContextualSpacing =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ParagraphProperties,
+          OdfName.newName(OdfDocumentNamespace.STYLE, "contextual-spacing"));
   public static final OdfStyleProperty FontIndependentLineSpacing =
       OdfStyleProperty.get(
           OdfStylePropertiesSet.ParagraphProperties,

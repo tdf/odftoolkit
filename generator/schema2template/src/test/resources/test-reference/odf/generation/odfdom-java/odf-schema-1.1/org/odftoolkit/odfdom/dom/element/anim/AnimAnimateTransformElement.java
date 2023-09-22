@@ -138,7 +138,7 @@ public class AnimAnimateTransformElement extends OdfElement {
 	public Double getSmilAccelerateAttribute() {
 		SmilAccelerateAttribute attr = (SmilAccelerateAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "accelerate");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Double.valueOf(attr.doubleValue());
+			return Double.valueOf(attr.getValue());
 		}
 		return Double.valueOf(SmilAccelerateAttribute.DEFAULT_VALUE);
 	}
@@ -151,7 +151,7 @@ public class AnimAnimateTransformElement extends OdfElement {
 	public void setSmilAccelerateAttribute(Double smilAccelerateValue) {
 		SmilAccelerateAttribute attr = new SmilAccelerateAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setDoubleValue(smilAccelerateValue.doubleValue());
+		attr.setValue(smilAccelerateValue.toString());
 	}
 
 	/**
@@ -236,7 +236,7 @@ public class AnimAnimateTransformElement extends OdfElement {
 	public Boolean getSmilAutoReverseAttribute() {
 		SmilAutoReverseAttribute attr = (SmilAutoReverseAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "autoReverse");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(SmilAutoReverseAttribute.DEFAULT_VALUE);
 	}
@@ -249,7 +249,7 @@ public class AnimAnimateTransformElement extends OdfElement {
 	public void setSmilAutoReverseAttribute(Boolean smilAutoReverseValue) {
 		SmilAutoReverseAttribute attr = new SmilAutoReverseAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(smilAutoReverseValue.booleanValue());
+		attr.setValue(smilAutoReverseValue.toString());
 	}
 
 	/**
@@ -308,7 +308,7 @@ public class AnimAnimateTransformElement extends OdfElement {
 	public Double getSmilDecelerateAttribute() {
 		SmilDecelerateAttribute attr = (SmilDecelerateAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "decelerate");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Double.valueOf(attr.doubleValue());
+			return Double.valueOf(attr.getValue());
 		}
 		return Double.valueOf(SmilDecelerateAttribute.DEFAULT_VALUE);
 	}
@@ -321,7 +321,7 @@ public class AnimAnimateTransformElement extends OdfElement {
 	public void setSmilDecelerateAttribute(Double smilDecelerateValue) {
 		SmilDecelerateAttribute attr = new SmilDecelerateAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setDoubleValue(smilDecelerateValue.doubleValue());
+		attr.setValue(smilDecelerateValue.toString());
 	}
 
 	/**
@@ -452,7 +452,7 @@ public class AnimAnimateTransformElement extends OdfElement {
 	public Integer getSmilRepeatCountAttribute() {
 		SmilRepeatCountAttribute attr = (SmilRepeatCountAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "repeatCount");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -465,7 +465,7 @@ public class AnimAnimateTransformElement extends OdfElement {
 	public void setSmilRepeatCountAttribute(Integer smilRepeatCountValue) {
 		SmilRepeatCountAttribute attr = new SmilRepeatCountAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(smilRepeatCountValue.intValue());
+		attr.setValue(smilRepeatCountValue.toString());
 	}
 
 	/**

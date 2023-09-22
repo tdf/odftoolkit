@@ -349,7 +349,7 @@ public class AnimAnimateElement extends OdfElement {
 	public Integer getSmilRepeatCountAttribute() {
 		SmilRepeatCountAttribute attr = (SmilRepeatCountAttribute) getOdfAttribute(OdfDocumentNamespace.SMIL, "repeatCount");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -362,7 +362,7 @@ public class AnimAnimateElement extends OdfElement {
 	public void setSmilRepeatCountAttribute(Integer smilRepeatCountValue) {
 		SmilRepeatCountAttribute attr = new SmilRepeatCountAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(smilRepeatCountValue.intValue());
+		attr.setValue(smilRepeatCountValue.toString());
 	}
 
 	/**

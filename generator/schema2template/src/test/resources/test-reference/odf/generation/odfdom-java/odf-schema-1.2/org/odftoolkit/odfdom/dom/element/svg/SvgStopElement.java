@@ -120,7 +120,7 @@ public class SvgStopElement extends OdfElement {
 	public Double getSvgStopOpacityAttribute() {
 		SvgStopOpacityAttribute attr = (SvgStopOpacityAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "stop-opacity");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Double.valueOf(attr.doubleValue());
+			return Double.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -133,7 +133,7 @@ public class SvgStopElement extends OdfElement {
 	public void setSvgStopOpacityAttribute(Double svgStopOpacityValue) {
 		SvgStopOpacityAttribute attr = new SvgStopOpacityAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setDoubleValue(svgStopOpacityValue.doubleValue());
+		attr.setValue(svgStopOpacityValue.toString());
 	}
 
   /**

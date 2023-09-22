@@ -100,7 +100,7 @@ public class TextSortKeyElement extends OdfElement {
     TextSortAscendingAttribute attr =
         (TextSortAscendingAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "sort-ascending");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return Boolean.valueOf(TextSortAscendingAttribute.DEFAULT_VALUE);
   }
@@ -115,7 +115,7 @@ public class TextSortKeyElement extends OdfElement {
     TextSortAscendingAttribute attr =
         new TextSortAscendingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textSortAscendingValue.booleanValue());
+    attr.setValue(textSortAscendingValue.toString());
   }
 
   /**

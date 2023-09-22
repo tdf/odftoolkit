@@ -109,7 +109,7 @@ public class FormNumberElement extends OdfElement {
 	public Boolean getFormConvertEmptyToNullAttribute() {
 		FormConvertEmptyToNullAttribute attr = (FormConvertEmptyToNullAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "convert-empty-to-null");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(FormConvertEmptyToNullAttribute.DEFAULT_VALUE);
 	}
@@ -122,18 +122,18 @@ public class FormNumberElement extends OdfElement {
 	public void setFormConvertEmptyToNullAttribute(Boolean formConvertEmptyToNullValue) {
 		FormConvertEmptyToNullAttribute attr = new FormConvertEmptyToNullAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(formConvertEmptyToNullValue.booleanValue());
+		attr.setValue(formConvertEmptyToNullValue.toString());
 	}
 
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>FormCurrentValueAttribute</code> , See {@odf.attribute form:current-value}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getFormCurrentValueAttribute() {
+	public Double getFormCurrentValueAttribute() {
 		FormCurrentValueAttribute attr = (FormCurrentValueAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "current-value");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Double.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -141,12 +141,12 @@ public class FormNumberElement extends OdfElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>FormCurrentValueAttribute</code> , See {@odf.attribute form:current-value}
 	 *
-	 * @param formCurrentValueValue   The type is <code>String</code>
+	 * @param formCurrentValueValue   The type is <code>Double</code>
 	 */
-	public void setFormCurrentValueAttribute(String formCurrentValueValue) {
+	public void setFormCurrentValueAttribute(Double formCurrentValueValue) {
 		FormCurrentValueAttribute attr = new FormCurrentValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(formCurrentValueValue);
+		attr.setValue(formCurrentValueValue.toString());
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class FormNumberElement extends OdfElement {
 	public Boolean getFormDisabledAttribute() {
 		FormDisabledAttribute attr = (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
 	}
@@ -194,7 +194,7 @@ public class FormNumberElement extends OdfElement {
 	public void setFormDisabledAttribute(Boolean formDisabledValue) {
 		FormDisabledAttribute attr = new FormDisabledAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(formDisabledValue.booleanValue());
+		attr.setValue(formDisabledValue.toString());
 	}
 
 	/**
@@ -231,7 +231,7 @@ public class FormNumberElement extends OdfElement {
 	public Integer getFormMaxLengthAttribute() {
 		FormMaxLengthAttribute attr = (FormMaxLengthAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "max-length");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -244,18 +244,18 @@ public class FormNumberElement extends OdfElement {
 	public void setFormMaxLengthAttribute(Integer formMaxLengthValue) {
 		FormMaxLengthAttribute attr = new FormMaxLengthAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(formMaxLengthValue.intValue());
+		attr.setValue(formMaxLengthValue.toString());
 	}
 
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>FormMaxValueAttribute</code> , See {@odf.attribute form:max-value}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getFormMaxValueAttribute() {
+	public Double getFormMaxValueAttribute() {
 		FormMaxValueAttribute attr = (FormMaxValueAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "max-value");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Double.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -263,23 +263,23 @@ public class FormNumberElement extends OdfElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>FormMaxValueAttribute</code> , See {@odf.attribute form:max-value}
 	 *
-	 * @param formMaxValueValue   The type is <code>String</code>
+	 * @param formMaxValueValue   The type is <code>Double</code>
 	 */
-	public void setFormMaxValueAttribute(String formMaxValueValue) {
+	public void setFormMaxValueAttribute(Double formMaxValueValue) {
 		FormMaxValueAttribute attr = new FormMaxValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(formMaxValueValue);
+		attr.setValue(formMaxValueValue.toString());
 	}
 
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>FormMinValueAttribute</code> , See {@odf.attribute form:min-value}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getFormMinValueAttribute() {
+	public Double getFormMinValueAttribute() {
 		FormMinValueAttribute attr = (FormMinValueAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "min-value");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Double.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -287,12 +287,12 @@ public class FormNumberElement extends OdfElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>FormMinValueAttribute</code> , See {@odf.attribute form:min-value}
 	 *
-	 * @param formMinValueValue   The type is <code>String</code>
+	 * @param formMinValueValue   The type is <code>Double</code>
 	 */
-	public void setFormMinValueAttribute(String formMinValueValue) {
+	public void setFormMinValueAttribute(Double formMinValueValue) {
 		FormMinValueAttribute attr = new FormMinValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(formMinValueValue);
+		attr.setValue(formMinValueValue.toString());
 	}
 
 	/**
@@ -327,7 +327,7 @@ public class FormNumberElement extends OdfElement {
 	public Boolean getFormPrintableAttribute() {
 		FormPrintableAttribute attr = (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);
 	}
@@ -340,7 +340,7 @@ public class FormNumberElement extends OdfElement {
 	public void setFormPrintableAttribute(Boolean formPrintableValue) {
 		FormPrintableAttribute attr = new FormPrintableAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(formPrintableValue.booleanValue());
+		attr.setValue(formPrintableValue.toString());
 	}
 
 	/**
@@ -351,7 +351,7 @@ public class FormNumberElement extends OdfElement {
 	public Boolean getFormReadonlyAttribute() {
 		FormReadonlyAttribute attr = (FormReadonlyAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "readonly");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(FormReadonlyAttribute.DEFAULT_VALUE);
 	}
@@ -364,7 +364,7 @@ public class FormNumberElement extends OdfElement {
 	public void setFormReadonlyAttribute(Boolean formReadonlyValue) {
 		FormReadonlyAttribute attr = new FormReadonlyAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(formReadonlyValue.booleanValue());
+		attr.setValue(formReadonlyValue.toString());
 	}
 
 	/**
@@ -375,7 +375,7 @@ public class FormNumberElement extends OdfElement {
 	public Integer getFormTabIndexAttribute() {
 		FormTabIndexAttribute attr = (FormTabIndexAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-index");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return Integer.valueOf(FormTabIndexAttribute.DEFAULT_VALUE);
 	}
@@ -388,7 +388,7 @@ public class FormNumberElement extends OdfElement {
 	public void setFormTabIndexAttribute(Integer formTabIndexValue) {
 		FormTabIndexAttribute attr = new FormTabIndexAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(formTabIndexValue.intValue());
+		attr.setValue(formTabIndexValue.toString());
 	}
 
 	/**
@@ -399,7 +399,7 @@ public class FormNumberElement extends OdfElement {
 	public Boolean getFormTabStopAttribute() {
 		FormTabStopAttribute attr = (FormTabStopAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "tab-stop");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(FormTabStopAttribute.DEFAULT_VALUE);
 	}
@@ -412,7 +412,7 @@ public class FormNumberElement extends OdfElement {
 	public void setFormTabStopAttribute(Boolean formTabStopValue) {
 		FormTabStopAttribute attr = new FormTabStopAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(formTabStopValue.booleanValue());
+		attr.setValue(formTabStopValue.toString());
 	}
 
 	/**
@@ -442,12 +442,12 @@ public class FormNumberElement extends OdfElement {
 	/**
 	 * Receives the value of the ODFDOM attribute representation <code>FormValueAttribute</code> , See {@odf.attribute form:value}
 	 *
-	 * @return - the <code>String</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
+	 * @return - the <code>Double</code> , the value or <code>null</code>, if the attribute is not set and no default value defined.
 	 */
-	public String getFormValueAttribute() {
+	public Double getFormValueAttribute() {
 		FormValueAttribute attr = (FormValueAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "value");
-		if (attr != null) {
-			return String.valueOf(attr.getValue());
+		if (attr != null && !attr.getValue().isEmpty()) {
+			return Double.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -455,12 +455,12 @@ public class FormNumberElement extends OdfElement {
 	/**
 	 * Sets the value of ODFDOM attribute representation <code>FormValueAttribute</code> , See {@odf.attribute form:value}
 	 *
-	 * @param formValueValue   The type is <code>String</code>
+	 * @param formValueValue   The type is <code>Double</code>
 	 */
-	public void setFormValueAttribute(String formValueValue) {
+	public void setFormValueAttribute(Double formValueValue) {
 		FormValueAttribute attr = new FormValueAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setValue(formValueValue);
+		attr.setValue(formValueValue.toString());
 	}
 
 	/**

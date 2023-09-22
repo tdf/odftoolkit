@@ -109,7 +109,7 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
         (StyleNumLetterSyncAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -124,7 +124,7 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
     StyleNumLetterSyncAttribute attr =
         new StyleNumLetterSyncAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleNumLetterSyncValue.booleanValue());
+    attr.setValue(styleNumLetterSyncValue.toString());
   }
 
   /**
@@ -194,7 +194,7 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
     TextDisplayLevelsAttribute attr =
         (TextDisplayLevelsAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "display-levels");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return Integer.valueOf(TextDisplayLevelsAttribute.DEFAULT_VALUE);
   }
@@ -209,7 +209,7 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
     TextDisplayLevelsAttribute attr =
         new TextDisplayLevelsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textDisplayLevelsValue.intValue());
+    attr.setValue(textDisplayLevelsValue.toString());
   }
 
   /**
@@ -223,7 +223,7 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
     TextStartValueAttribute attr =
         (TextStartValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "start-value");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return Integer.valueOf(TextStartValueAttribute.DEFAULT_VALUE);
   }
@@ -237,7 +237,7 @@ public class TextListLevelStyleNumberElement extends TextListLevelStyleElementBa
   public void setTextStartValueAttribute(Integer textStartValueValue) {
     TextStartValueAttribute attr = new TextStartValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textStartValueValue.intValue());
+    attr.setValue(textStartValueValue.toString());
   }
 
   /**

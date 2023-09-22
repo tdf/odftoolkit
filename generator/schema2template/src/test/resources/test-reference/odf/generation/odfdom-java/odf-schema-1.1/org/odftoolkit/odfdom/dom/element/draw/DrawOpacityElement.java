@@ -76,7 +76,7 @@ public class DrawOpacityElement extends OdfElement {
 	public Integer getDrawAngleAttribute() {
 		DrawAngleAttribute attr = (DrawAngleAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "angle");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -89,7 +89,7 @@ public class DrawOpacityElement extends OdfElement {
 	public void setDrawAngleAttribute(Integer drawAngleValue) {
 		DrawAngleAttribute attr = new DrawAngleAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(drawAngleValue.intValue());
+		attr.setValue(drawAngleValue.toString());
 	}
 
 	/**

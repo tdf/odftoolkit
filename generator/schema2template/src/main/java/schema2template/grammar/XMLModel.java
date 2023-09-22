@@ -23,14 +23,20 @@
  */
 package schema2template.grammar;
 
+import static schema2template.grammar.PuzzlePiece.NAME_VISITOR;
+
 import com.sun.msv.grammar.Expression;
 import com.sun.msv.grammar.Grammar;
+import com.sun.msv.grammar.NameClassAndExpression;
 import com.sun.msv.reader.trex.ng.RELAXNGReader;
 import com.sun.msv.reader.xmlschema.XMLSchemaReader;
 import com.sun.msv.writer.relaxng.RELAXNGWriter;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
@@ -294,15 +300,113 @@ public class XMLModel {
    * Get attribute by tag name. If there are multiple attributes sharing the same tag name, a
    * PuzzlePieceSet is returned. If not, a single PuzzlePiece is returned.
    *
-   * @param name
+   * @param qName
    * @return Attribute PuzzlePiece(s)
    */
-  public PuzzleComponent getAttribute(String name) {
-    PuzzlePiece attribute = mNameAttributeMap.get(name);
+  public PuzzleComponent getAttribute(String qName) {
+    PuzzlePiece attribute = mNameAttributeMap.get(qName);
     if (attribute == null) {
       return null;
     }
     return attribute.withMultiples();
+  }
+
+  /**
+   * Get attribute by tag name. If there are multiple attributes sharing the same tag name, a
+   * PuzzlePieceSet is returned. If not, a single PuzzlePiece is returned.
+   *
+   * @param qName
+   * @param qParentName
+   * @return Attribute PuzzlePiece(s)
+   */
+  public PuzzlePiece getAttribute(String qName, String qParentName) {
+    PuzzlePiece attributes = mNameAttributeMap.get(qName);
+    PuzzlePiece attribute = null;
+    if (attributes == null) {
+      return null;
+    } else {
+      for (PuzzlePiece ppAttribute : attributes.withMultiples().getCollection()) {
+        // If there is more than one name for this expression, create more than one PuzzlePiece
+        for (PuzzlePiece ppElement : ppAttribute.getParents().getCollection()) {
+          List<String> names =
+              (List<String>)
+                  ((NameClassAndExpression) ppElement.getExpression())
+                      .getNameClass()
+                      .visit(NAME_VISITOR);
+          // takes the first attribute definition with a correct parent
+          if (names != null && names.contains(qParentName)) {
+            attribute = ppAttribute;
+            break;
+          }
+        }
+      }
+    }
+    return attribute;
+  }
+
+  /**
+   * Get attribute by tag name. If there are multiple attributes sharing the same tag name, a
+   * PuzzlePieceSet is returned. If not, a single PuzzlePiece is returned.
+   *
+   * @param qName
+   * @param qParentName
+   * @return String of given Datatype
+   */
+  public String getAttributeDataType(String qName, String qParentName) {
+    String dataType = "String";
+    PuzzlePiece attr = getAttribute(qName, qParentName);
+    Collection<PuzzlePiece> d = attr.getDatatypes().getCollection();
+    Boolean isBoolean = null;
+    if (d.size() == 1) {
+      dataType = d.iterator().next().getQName();
+    } else if (!d.isEmpty()) {
+      System.err.println(
+          "\n***********\nThere are multiple datatypes for attribute '" + qName + "'\n");
+      Iterator dataTypesIter = d.iterator();
+      while (dataTypesIter.hasNext()) {
+        System.err.println(dataTypesIter.next().toString());
+      }
+    } else { // @draw:concave just uses 'false' and 'true' without datatype
+      /**
+       * As there are sometimes multiple times definitions of the same attribute for an element for
+       * an example
+       * https://docs.oasis-open.org/office/OpenDocument/v1.3/os/schemas/OpenDocument-v1.3-schema-rng.html#13591
+       * which was taken as boolean, all attributes definitions of all elements of the same name are
+       * now takin into account! BETTER FOR THE FUTURE: If the attribute definitons only for a
+       * certain element would be taken into account, e.g.
+       * https://docs.oasis-open.org/office/OpenDocument/v1.3/os/schemas/OpenDocument-v1.3-schema-rng.html#6508
+       */
+      PuzzleComponent elements = getElement(qParentName);
+      List<String> attributeValues = null;
+      if (elements != null && elements.getCollection().size() > 0) {
+        attributeValues = new ArrayList<String>();
+      }
+      for (PuzzlePiece ppElement : elements.getCollection()) {
+        PuzzlePieceSet attributes = ppElement.getAttributes();
+        for (PuzzlePiece ppAttribute : attributes.getCollection()) {
+          if (ppAttribute.getQName().equals(qName)) {
+            for (PuzzlePiece ppValue : ppAttribute.getValues().getCollection()) {
+              // strange that the value has a localName (but the puzzlePiece abstraction should be
+              // overworked anyway)
+              attributeValues.add(ppValue.getLocalName());
+            }
+          }
+        }
+      }
+
+      for (String value : attributeValues) {
+        if (value.equals("true") || value.equals("false")) {
+          isBoolean = Boolean.TRUE;
+        } else {
+          isBoolean = null;
+          break;
+        }
+      }
+      if (isBoolean != null && isBoolean) {
+        dataType = "Boolean";
+      }
+    }
+    return dataType;
   }
 
   /**

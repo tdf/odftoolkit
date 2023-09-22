@@ -97,7 +97,7 @@ public class TableInsertionCutOffElement extends OdfElement {
 	public Integer getTablePositionAttribute() {
 		TablePositionAttribute attr = (TablePositionAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "position");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -110,7 +110,7 @@ public class TableInsertionCutOffElement extends OdfElement {
 	public void setTablePositionAttribute(Integer tablePositionValue) {
 		TablePositionAttribute attr = new TablePositionAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(tablePositionValue.intValue());
+		attr.setValue(tablePositionValue.toString());
 	}
 
   /**

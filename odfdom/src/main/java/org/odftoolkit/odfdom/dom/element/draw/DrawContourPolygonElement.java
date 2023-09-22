@@ -108,7 +108,7 @@ public class DrawContourPolygonElement extends OdfElement {
         (DrawRecreateOnEditAttribute)
             getOdfAttribute(OdfDocumentNamespace.DRAW, "recreate-on-edit");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -123,7 +123,7 @@ public class DrawContourPolygonElement extends OdfElement {
     DrawRecreateOnEditAttribute attr =
         new DrawRecreateOnEditAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(drawRecreateOnEditValue.booleanValue());
+    attr.setValue(drawRecreateOnEditValue.toString());
   }
 
   /**
@@ -167,7 +167,7 @@ public class DrawContourPolygonElement extends OdfElement {
     SvgViewBoxAttribute attr =
         (SvgViewBoxAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "viewBox");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -181,7 +181,7 @@ public class DrawContourPolygonElement extends OdfElement {
   public void setSvgViewBoxAttribute(Integer svgViewBoxValue) {
     SvgViewBoxAttribute attr = new SvgViewBoxAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(svgViewBoxValue.intValue());
+    attr.setValue(svgViewBoxValue.toString());
   }
 
   /**

@@ -71,7 +71,7 @@ public class FormOptionElement extends OdfElement {
 	public Boolean getFormCurrentSelectedAttribute() {
 		FormCurrentSelectedAttribute attr = (FormCurrentSelectedAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "current-selected");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(FormCurrentSelectedAttribute.DEFAULT_VALUE);
 	}
@@ -84,7 +84,7 @@ public class FormOptionElement extends OdfElement {
 	public void setFormCurrentSelectedAttribute(Boolean formCurrentSelectedValue) {
 		FormCurrentSelectedAttribute attr = new FormCurrentSelectedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(formCurrentSelectedValue.booleanValue());
+		attr.setValue(formCurrentSelectedValue.toString());
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class FormOptionElement extends OdfElement {
 	public Boolean getFormSelectedAttribute() {
 		FormSelectedAttribute attr = (FormSelectedAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "selected");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(FormSelectedAttribute.DEFAULT_VALUE);
 	}
@@ -132,7 +132,7 @@ public class FormOptionElement extends OdfElement {
 	public void setFormSelectedAttribute(Boolean formSelectedValue) {
 		FormSelectedAttribute attr = new FormSelectedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(formSelectedValue.booleanValue());
+		attr.setValue(formSelectedValue.toString());
 	}
 
 	/**

@@ -119,7 +119,7 @@ public class TableFilterElement extends OdfElement {
 	public Boolean getTableDisplayDuplicatesAttribute() {
 		TableDisplayDuplicatesAttribute attr = (TableDisplayDuplicatesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "display-duplicates");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(TableDisplayDuplicatesAttribute.DEFAULT_VALUE);
 	}
@@ -132,7 +132,7 @@ public class TableFilterElement extends OdfElement {
 	public void setTableDisplayDuplicatesAttribute(Boolean tableDisplayDuplicatesValue) {
 		TableDisplayDuplicatesAttribute attr = new TableDisplayDuplicatesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(tableDisplayDuplicatesValue.booleanValue());
+		attr.setValue(tableDisplayDuplicatesValue.toString());
 	}
 
 	/**

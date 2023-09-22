@@ -101,7 +101,7 @@ public class DbIndexElement extends OdfElement {
     DbIsClusteredAttribute attr =
         (DbIsClusteredAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "is-clustered");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -115,7 +115,7 @@ public class DbIndexElement extends OdfElement {
   public void setDbIsClusteredAttribute(Boolean dbIsClusteredValue) {
     DbIsClusteredAttribute attr = new DbIsClusteredAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dbIsClusteredValue.booleanValue());
+    attr.setValue(dbIsClusteredValue.toString());
   }
 
   /**
@@ -129,7 +129,7 @@ public class DbIndexElement extends OdfElement {
     DbIsUniqueAttribute attr =
         (DbIsUniqueAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "is-unique");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -143,7 +143,7 @@ public class DbIndexElement extends OdfElement {
   public void setDbIsUniqueAttribute(Boolean dbIsUniqueValue) {
     DbIsUniqueAttribute attr = new DbIsUniqueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dbIsUniqueValue.booleanValue());
+    attr.setValue(dbIsUniqueValue.toString());
   }
 
   /**

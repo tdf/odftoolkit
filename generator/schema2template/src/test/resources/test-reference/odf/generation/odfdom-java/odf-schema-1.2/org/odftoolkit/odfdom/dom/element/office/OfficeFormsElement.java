@@ -71,7 +71,7 @@ public class OfficeFormsElement extends OdfElement {
 	public Boolean getFormApplyDesignModeAttribute() {
 		FormApplyDesignModeAttribute attr = (FormApplyDesignModeAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "apply-design-mode");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(FormApplyDesignModeAttribute.DEFAULT_VALUE);
 	}
@@ -84,7 +84,7 @@ public class OfficeFormsElement extends OdfElement {
 	public void setFormApplyDesignModeAttribute(Boolean formApplyDesignModeValue) {
 		FormApplyDesignModeAttribute attr = new FormApplyDesignModeAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(formApplyDesignModeValue.booleanValue());
+		attr.setValue(formApplyDesignModeValue.toString());
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class OfficeFormsElement extends OdfElement {
 	public Boolean getFormAutomaticFocusAttribute() {
 		FormAutomaticFocusAttribute attr = (FormAutomaticFocusAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "automatic-focus");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(FormAutomaticFocusAttribute.DEFAULT_VALUE);
 	}
@@ -108,7 +108,7 @@ public class OfficeFormsElement extends OdfElement {
 	public void setFormAutomaticFocusAttribute(Boolean formAutomaticFocusValue) {
 		FormAutomaticFocusAttribute attr = new FormAutomaticFocusAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(formAutomaticFocusValue.booleanValue());
+		attr.setValue(formAutomaticFocusValue.toString());
 	}
 
 	/**

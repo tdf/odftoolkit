@@ -274,7 +274,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement {
     DrawZIndexAttribute attr =
         (DrawZIndexAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "z-index");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -288,7 +288,7 @@ public class Dr3dSphereElement extends OdfStyleableShapeElement {
   public void setDrawZIndexAttribute(Integer drawZIndexValue) {
     DrawZIndexAttribute attr = new DrawZIndexAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(drawZIndexValue.intValue());
+    attr.setValue(drawZIndexValue.toString());
   }
 
   /**

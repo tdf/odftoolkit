@@ -337,7 +337,7 @@ public abstract class NumberDataStyleElementBase extends DataStyleElement {
 	public Boolean getStyleVolatileAttribute() {
 		StyleVolatileAttribute attr = (StyleVolatileAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "volatile");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -350,7 +350,7 @@ public abstract class NumberDataStyleElementBase extends DataStyleElement {
 	public void setStyleVolatileAttribute(Boolean styleVolatileValue) {
 		StyleVolatileAttribute attr = new StyleVolatileAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(styleVolatileValue.booleanValue());
+		attr.setValue(styleVolatileValue.toString());
 	}
 
 	/**

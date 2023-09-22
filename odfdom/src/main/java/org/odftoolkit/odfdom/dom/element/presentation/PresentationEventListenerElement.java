@@ -231,7 +231,7 @@ public class PresentationEventListenerElement extends OdfElement {
     PresentationVerbAttribute attr =
         (PresentationVerbAttribute) getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "verb");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -245,7 +245,7 @@ public class PresentationEventListenerElement extends OdfElement {
   public void setPresentationVerbAttribute(Integer presentationVerbValue) {
     PresentationVerbAttribute attr = new PresentationVerbAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(presentationVerbValue.intValue());
+    attr.setValue(presentationVerbValue.toString());
   }
 
   /**

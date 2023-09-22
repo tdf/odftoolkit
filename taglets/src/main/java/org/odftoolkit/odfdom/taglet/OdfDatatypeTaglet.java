@@ -40,13 +40,14 @@ import jdk.javadoc.doclet.Taglet;
  *
  * <p>For example the taglet <code>{&#64;odf.datatype countryCode}</code> would be resolved without
  * variable settings to <code>
- * JAVA_DOC_BASE/resources/OpenDocument-v1.2-part1.html#datatype-countryCode</code>.
+ * JAVA_DOC_BASE/resources/OpenDocument-v1.3-os-part3-schema.html#datatype-countryCode</code>.
  */
 public class OdfDatatypeTaglet implements Taglet {
 
   private static final Logger LOG = Logger.getLogger(OdfDatatypeTaglet.class.getName());
   private static final String NAME = "odf.datatype";
-  private static final String ODF_SPEC_PATH = "../../../../resources/OpenDocument-v1.2-part1.html";
+  private static final String ODF_SPEC_PATH =
+      "../../../../resources/OpenDocument-v1.3-os-part3-schema.html";
   private static String mOdfSpecPath = null;
 
   /* FINDING THE ABSOLUTE PATH TO THE ODF SPEC IN HTML:

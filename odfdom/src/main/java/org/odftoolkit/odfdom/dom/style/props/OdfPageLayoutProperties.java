@@ -213,6 +213,14 @@ public interface OdfPageLayoutProperties {
       OdfStyleProperty.get(
           OdfStylePropertiesSet.PageLayoutProperties,
           OdfName.newName(OdfDocumentNamespace.STYLE, "scale-to"));
+  public static final OdfStyleProperty ScaleToX =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.PageLayoutProperties,
+          OdfName.newName(OdfDocumentNamespace.STYLE, "scale-to-X"));
+  public static final OdfStyleProperty ScaleToY =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.PageLayoutProperties,
+          OdfName.newName(OdfDocumentNamespace.STYLE, "scale-to-Y"));
   public static final OdfStyleProperty ScaleToPages =
       OdfStyleProperty.get(
           OdfStylePropertiesSet.PageLayoutProperties,

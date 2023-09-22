@@ -75,7 +75,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public Boolean getDbAppendTableAliasNameAttribute() {
 		DbAppendTableAliasNameAttribute attr = (DbAppendTableAliasNameAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "append-table-alias-name");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(DbAppendTableAliasNameAttribute.DEFAULT_VALUE);
 	}
@@ -88,7 +88,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public void setDbAppendTableAliasNameAttribute(Boolean dbAppendTableAliasNameValue) {
 		DbAppendTableAliasNameAttribute attr = new DbAppendTableAliasNameAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(dbAppendTableAliasNameValue.booleanValue());
+		attr.setValue(dbAppendTableAliasNameValue.toString());
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public Boolean getDbEnableSql92CheckAttribute() {
 		DbEnableSql92CheckAttribute attr = (DbEnableSql92CheckAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "enable-sql92-check");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(DbEnableSql92CheckAttribute.DEFAULT_VALUE);
 	}
@@ -136,7 +136,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public void setDbEnableSql92CheckAttribute(Boolean dbEnableSql92CheckValue) {
 		DbEnableSql92CheckAttribute attr = new DbEnableSql92CheckAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(dbEnableSql92CheckValue.booleanValue());
+		attr.setValue(dbEnableSql92CheckValue.toString());
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public Boolean getDbIgnoreDriverPrivilegesAttribute() {
 		DbIgnoreDriverPrivilegesAttribute attr = (DbIgnoreDriverPrivilegesAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "ignore-driver-privileges");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(DbIgnoreDriverPrivilegesAttribute.DEFAULT_VALUE);
 	}
@@ -160,7 +160,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public void setDbIgnoreDriverPrivilegesAttribute(Boolean dbIgnoreDriverPrivilegesValue) {
 		DbIgnoreDriverPrivilegesAttribute attr = new DbIgnoreDriverPrivilegesAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(dbIgnoreDriverPrivilegesValue.booleanValue());
+		attr.setValue(dbIgnoreDriverPrivilegesValue.toString());
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public Boolean getDbIsTableNameLengthLimitedAttribute() {
 		DbIsTableNameLengthLimitedAttribute attr = (DbIsTableNameLengthLimitedAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "is-table-name-length-limited");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(DbIsTableNameLengthLimitedAttribute.DEFAULT_VALUE);
 	}
@@ -184,7 +184,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public void setDbIsTableNameLengthLimitedAttribute(Boolean dbIsTableNameLengthLimitedValue) {
 		DbIsTableNameLengthLimitedAttribute attr = new DbIsTableNameLengthLimitedAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(dbIsTableNameLengthLimitedValue.booleanValue());
+		attr.setValue(dbIsTableNameLengthLimitedValue.toString());
 	}
 
 	/**
@@ -195,7 +195,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public Integer getDbMaxRowCountAttribute() {
 		DbMaxRowCountAttribute attr = (DbMaxRowCountAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "max-row-count");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Integer.valueOf(attr.intValue());
+			return Integer.valueOf(attr.getValue());
 		}
 		return null;
 	}
@@ -208,7 +208,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public void setDbMaxRowCountAttribute(Integer dbMaxRowCountValue) {
 		DbMaxRowCountAttribute attr = new DbMaxRowCountAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setIntValue(dbMaxRowCountValue.intValue());
+		attr.setValue(dbMaxRowCountValue.toString());
 	}
 
 	/**
@@ -219,7 +219,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public Boolean getDbSuppressVersionColumnsAttribute() {
 		DbSuppressVersionColumnsAttribute attr = (DbSuppressVersionColumnsAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "suppress-version-columns");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(DbSuppressVersionColumnsAttribute.DEFAULT_VALUE);
 	}
@@ -232,7 +232,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public void setDbSuppressVersionColumnsAttribute(Boolean dbSuppressVersionColumnsValue) {
 		DbSuppressVersionColumnsAttribute attr = new DbSuppressVersionColumnsAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(dbSuppressVersionColumnsValue.booleanValue());
+		attr.setValue(dbSuppressVersionColumnsValue.toString());
 	}
 
 	/**
@@ -243,7 +243,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public Boolean getDbUseCatalogAttribute() {
 		DbUseCatalogAttribute attr = (DbUseCatalogAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "use-catalog");
 		if (attr != null && !attr.getValue().isEmpty()) {
-			return Boolean.valueOf(attr.booleanValue());
+			return Boolean.valueOf(attr.getValue());
 		}
 		return Boolean.valueOf(DbUseCatalogAttribute.DEFAULT_VALUE);
 	}
@@ -256,7 +256,7 @@ public class DbApplicationConnectionSettingsElement extends OdfElement {
 	public void setDbUseCatalogAttribute(Boolean dbUseCatalogValue) {
 		DbUseCatalogAttribute attr = new DbUseCatalogAttribute((OdfFileDom) this.ownerDocument);
 		setOdfAttribute(attr);
-		attr.setBooleanValue(dbUseCatalogValue.booleanValue());
+		attr.setValue(dbUseCatalogValue.toString());
 	}
 
 	/**

@@ -113,6 +113,34 @@ public class TextIllustrationIndexEntryTemplateElement extends OdfStylableElemen
   }
 
   /**
+   * Create child element {@odf.element text:index-entry-link-end}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element text:index-entry-link-end}
+   */
+  public TextIndexEntryLinkEndElement newTextIndexEntryLinkEndElement() {
+    TextIndexEntryLinkEndElement textIndexEntryLinkEnd =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextIndexEntryLinkEndElement.class);
+    this.appendChild(textIndexEntryLinkEnd);
+    return textIndexEntryLinkEnd;
+  }
+
+  /**
+   * Create child element {@odf.element text:index-entry-link-start}.
+   *
+   * <p>Child element was added in ODF 1.3
+   *
+   * @return the element {@odf.element text:index-entry-link-start}
+   */
+  public TextIndexEntryLinkStartElement newTextIndexEntryLinkStartElement() {
+    TextIndexEntryLinkStartElement textIndexEntryLinkStart =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextIndexEntryLinkStartElement.class);
+    this.appendChild(textIndexEntryLinkStart);
+    return textIndexEntryLinkStart;
+  }
+
+  /**
    * Create child element {@odf.element text:index-entry-page-number}.
    *
    * @return the element {@odf.element text:index-entry-page-number}

@@ -65,6 +65,7 @@ import org.odftoolkit.odfdom.dom.attribute.style.StyleBorderLineWidthBottomAttri
 import org.odftoolkit.odfdom.dom.attribute.style.StyleBorderLineWidthLeftAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleBorderLineWidthRightAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleBorderLineWidthTopAttribute;
+import org.odftoolkit.odfdom.dom.attribute.style.StyleContextualSpacingAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleFontIndependentLineSpacingAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleJoinBorderAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleJustifySingleWordAttribute;
@@ -289,6 +290,11 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
       OdfStyleProperty.get(
           OdfStylePropertiesSet.ParagraphProperties,
           OdfName.newName(OdfDocumentNamespace.STYLE, "border-line-width-top"));
+
+  public static final OdfStyleProperty ContextualSpacing =
+      OdfStyleProperty.get(
+          OdfStylePropertiesSet.ParagraphProperties,
+          OdfName.newName(OdfDocumentNamespace.STYLE, "contextual-spacing"));
 
   public static final OdfStyleProperty FontIndependentLineSpacing =
       OdfStyleProperty.get(
@@ -645,7 +651,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
         (FoHyphenationLadderCountAttribute)
             getOdfAttribute(OdfDocumentNamespace.FO, "hyphenation-ladder-count");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -660,7 +666,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
     FoHyphenationLadderCountAttribute attr =
         new FoHyphenationLadderCountAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(foHyphenationLadderCountValue.intValue());
+    attr.setValue(foHyphenationLadderCountValue.toString());
   }
 
   /**
@@ -897,7 +903,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
     FoOrphansAttribute attr =
         (FoOrphansAttribute) getOdfAttribute(OdfDocumentNamespace.FO, "orphans");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -911,7 +917,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
   public void setFoOrphansAttribute(Integer foOrphansValue) {
     FoOrphansAttribute attr = new FoOrphansAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(foOrphansValue.intValue());
+    attr.setValue(foOrphansValue.toString());
   }
 
   /**
@@ -1148,7 +1154,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
   public Integer getFoWidowsAttribute() {
     FoWidowsAttribute attr = (FoWidowsAttribute) getOdfAttribute(OdfDocumentNamespace.FO, "widows");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -1162,7 +1168,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
   public void setFoWidowsAttribute(Integer foWidowsValue) {
     FoWidowsAttribute attr = new FoWidowsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(foWidowsValue.intValue());
+    attr.setValue(foWidowsValue.toString());
   }
 
   /**
@@ -1177,7 +1183,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
         (StyleAutoTextIndentAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "auto-text-indent");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -1192,7 +1198,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
     StyleAutoTextIndentAttribute attr =
         new StyleAutoTextIndentAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleAutoTextIndentValue.booleanValue());
+    attr.setValue(styleAutoTextIndentValue.toString());
   }
 
   /**
@@ -1378,6 +1384,36 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
   }
 
   /**
+   * Receives the value of the ODFDOM attribute representation <code>StyleContextualSpacingAttribute
+   * </code> , See {@odf.attribute style:contextual-spacing}
+   *
+   * @return - the <code>Boolean</code> , the value or <code>null</code>, if the attribute is not
+   *     set and no default value defined.
+   */
+  public Boolean getStyleContextualSpacingAttribute() {
+    StyleContextualSpacingAttribute attr =
+        (StyleContextualSpacingAttribute)
+            getOdfAttribute(OdfDocumentNamespace.STYLE, "contextual-spacing");
+    if (attr != null && !attr.getValue().isEmpty()) {
+      return Boolean.valueOf(attr.getValue());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of ODFDOM attribute representation <code>StyleContextualSpacingAttribute</code>
+   * , See {@odf.attribute style:contextual-spacing}
+   *
+   * @param styleContextualSpacingValue The type is <code>Boolean</code>
+   */
+  public void setStyleContextualSpacingAttribute(Boolean styleContextualSpacingValue) {
+    StyleContextualSpacingAttribute attr =
+        new StyleContextualSpacingAttribute((OdfFileDom) this.ownerDocument);
+    setOdfAttribute(attr);
+    attr.setValue(styleContextualSpacingValue.toString());
+  }
+
+  /**
    * Receives the value of the ODFDOM attribute representation <code>
    * StyleFontIndependentLineSpacingAttribute</code> , See {@odf.attribute
    * style:font-independent-line-spacing}
@@ -1390,7 +1426,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
         (StyleFontIndependentLineSpacingAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "font-independent-line-spacing");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -1407,7 +1443,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
     StyleFontIndependentLineSpacingAttribute attr =
         new StyleFontIndependentLineSpacingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleFontIndependentLineSpacingValue.booleanValue());
+    attr.setValue(styleFontIndependentLineSpacingValue.toString());
   }
 
   /**
@@ -1421,7 +1457,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
     StyleJoinBorderAttribute attr =
         (StyleJoinBorderAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "join-border");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -1435,7 +1471,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
   public void setStyleJoinBorderAttribute(Boolean styleJoinBorderValue) {
     StyleJoinBorderAttribute attr = new StyleJoinBorderAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleJoinBorderValue.booleanValue());
+    attr.setValue(styleJoinBorderValue.toString());
   }
 
   /**
@@ -1450,7 +1486,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
         (StyleJustifySingleWordAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "justify-single-word");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -1465,7 +1501,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
     StyleJustifySingleWordAttribute attr =
         new StyleJustifySingleWordAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleJustifySingleWordValue.booleanValue());
+    attr.setValue(styleJustifySingleWordValue.toString());
   }
 
   /**
@@ -1565,7 +1601,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
     StylePageNumberAttribute attr =
         (StylePageNumberAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "page-number");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -1579,7 +1615,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
   public void setStylePageNumberAttribute(Integer stylePageNumberValue) {
     StylePageNumberAttribute attr = new StylePageNumberAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(stylePageNumberValue.intValue());
+    attr.setValue(stylePageNumberValue.toString());
   }
 
   /**
@@ -1623,7 +1659,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
     StyleRegisterTrueAttribute attr =
         (StyleRegisterTrueAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "register-true");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -1638,7 +1674,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
     StyleRegisterTrueAttribute attr =
         new StyleRegisterTrueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleRegisterTrueValue.booleanValue());
+    attr.setValue(styleRegisterTrueValue.toString());
   }
 
   /**
@@ -1681,7 +1717,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
         (StyleSnapToLayoutGridAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "snap-to-layout-grid");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -1696,7 +1732,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
     StyleSnapToLayoutGridAttribute attr =
         new StyleSnapToLayoutGridAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleSnapToLayoutGridValue.booleanValue());
+    attr.setValue(styleSnapToLayoutGridValue.toString());
   }
 
   /**
@@ -1827,7 +1863,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
         (StyleWritingModeAutomaticAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "writing-mode-automatic");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -1842,7 +1878,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
     StyleWritingModeAutomaticAttribute attr =
         new StyleWritingModeAutomaticAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleWritingModeAutomaticValue.booleanValue());
+    attr.setValue(styleWritingModeAutomaticValue.toString());
   }
 
   /**
@@ -1856,7 +1892,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
     TextLineNumberAttribute attr =
         (TextLineNumberAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "line-number");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -1870,7 +1906,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
   public void setTextLineNumberAttribute(Integer textLineNumberValue) {
     TextLineNumberAttribute attr = new TextLineNumberAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textLineNumberValue.intValue());
+    attr.setValue(textLineNumberValue.toString());
   }
 
   /**
@@ -1884,7 +1920,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
     TextNumberLinesAttribute attr =
         (TextNumberLinesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "number-lines");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -1898,7 +1934,7 @@ public class StyleParagraphPropertiesElement extends OdfStylePropertiesBase {
   public void setTextNumberLinesAttribute(Boolean textNumberLinesValue) {
     TextNumberLinesAttribute attr = new TextNumberLinesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textNumberLinesValue.booleanValue());
+    attr.setValue(textNumberLinesValue.toString());
   }
 
   /**

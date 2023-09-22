@@ -434,9 +434,9 @@ public class DocumentTest {
     try {
       OdfPresentationDocument doc = OdfPresentationDocument.newPresentationDocument();
 
-      Assert.assertNull(doc.getLocale(OdfDocument.UnicodeGroup.WESTERN));
-      Assert.assertNull(doc.getLocale(OdfDocument.UnicodeGroup.CJK));
-      Assert.assertNull(doc.getLocale(OdfDocument.UnicodeGroup.CTL));
+      Assert.assertNotNull(doc.getLocale(OdfDocument.UnicodeGroup.WESTERN));
+      Assert.assertNotNull(doc.getLocale(OdfDocument.UnicodeGroup.CJK));
+      Assert.assertNotNull(doc.getLocale(OdfDocument.UnicodeGroup.CTL));
 
       Locale eng_can = new Locale(Locale.ENGLISH.getLanguage(), Locale.CANADA.getCountry());
       Locale chinese_china = new Locale(Locale.CHINESE.getLanguage(), Locale.CHINA.getCountry());

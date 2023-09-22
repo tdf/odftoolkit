@@ -1120,6 +1120,21 @@ public class TextAElement extends OdfStylableElement {
   }
 
   /**
+   * Create child element {@odf.element text:drop-down}.
+   *
+   * @param textNameValue the <code>String</code> value of <code>TextNameAttribute</code>, see
+   *     {@odf.attribute text:name} at specification Child element was added in ODF 1.3
+   * @return the element {@odf.element text:drop-down}
+   */
+  public TextDropDownElement newTextDropDownElement(String textNameValue) {
+    TextDropDownElement textDropDown =
+        ((OdfFileDom) this.ownerDocument).newOdfElement(TextDropDownElement.class);
+    textDropDown.setTextNameAttribute(textNameValue);
+    this.appendChild(textDropDown);
+    return textDropDown;
+  }
+
+  /**
    * Create child element {@odf.element text:editing-cycles}.
    *
    * @return the element {@odf.element text:editing-cycles}

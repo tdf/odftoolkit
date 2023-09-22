@@ -106,7 +106,7 @@ public class TextPageNumberElement extends OdfElement {
         (StyleNumLetterSyncAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -121,7 +121,7 @@ public class TextPageNumberElement extends OdfElement {
     StyleNumLetterSyncAttribute attr =
         new StyleNumLetterSyncAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleNumLetterSyncValue.booleanValue());
+    attr.setValue(styleNumLetterSyncValue.toString());
   }
 
   /**
@@ -135,7 +135,7 @@ public class TextPageNumberElement extends OdfElement {
     TextFixedAttribute attr =
         (TextFixedAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "fixed");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return Boolean.valueOf(attr.getValue());
     }
     return null;
   }
@@ -149,7 +149,7 @@ public class TextPageNumberElement extends OdfElement {
   public void setTextFixedAttribute(Boolean textFixedValue) {
     TextFixedAttribute attr = new TextFixedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textFixedValue.booleanValue());
+    attr.setValue(textFixedValue.toString());
   }
 
   /**
@@ -163,7 +163,7 @@ public class TextPageNumberElement extends OdfElement {
     TextPageAdjustAttribute attr =
         (TextPageAdjustAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "page-adjust");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return Integer.valueOf(attr.getValue());
     }
     return null;
   }
@@ -177,7 +177,7 @@ public class TextPageNumberElement extends OdfElement {
   public void setTextPageAdjustAttribute(Integer textPageAdjustValue) {
     TextPageAdjustAttribute attr = new TextPageAdjustAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textPageAdjustValue.intValue());
+    attr.setValue(textPageAdjustValue.toString());
   }
 
   /**
