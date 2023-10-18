@@ -52,7 +52,6 @@
         <release.zip.bin>odftoolkit-${project.version}-bin.zip</release.zip.bin>
         <release.zip.doc>odftoolkit-${project.version}-doc.zip</release.zip.doc>
         <release.zip.src>odftoolkit-${project.version}-src.zip</release.zip.src>
-        <osgi.import.range>[1.0,2)</osgi.import.range>
         <supported-odf-version>1.2</supported-odf-version>
         <skipTests>false</skipTests>
         <!-- to skip even compiling the tests is honored by Surefire, Failsafe and Compiler Plugin -->
