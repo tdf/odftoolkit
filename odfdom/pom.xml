@@ -162,8 +162,8 @@
                         <configuration>
                             <instructions>
                                 <Import-Package>
-                                    org.odftoolkit.odfdom;version="${osgi.import.range}",
-                                    org.odftoolkit.odfdom.*;version="${osgi.import.range}",
+                                    !org.odftoolkit.odfdom,
+                                    !org.odftoolkit.odfdom.*,
                                     *
                                 </Import-Package>
                             </instructions>
