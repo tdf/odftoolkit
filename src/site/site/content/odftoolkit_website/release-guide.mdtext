@@ -96,10 +96,11 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
     git add .
 
     ```shell
+    git rebase -i HEAD~12  # drop the two maven release commits
     mvn clean
     mvn release:clean
-    mvn release:prepare
-
+    git tag -d <YOUR_RELEASE_TAG> # git tag -d odftoolkit-0.12.0
+    mvn release:prepare # start over
    ```
 
    This will start the interactive release preparation. You need to supply Maven with the versions of the release. "release version" should be the version of the intended release (recommended value should be fine). "SCM release tag or label" should include the RC version (e.g. odftoolkit-0.10.0). "new development version" should be the current SNAPSHOT version.
