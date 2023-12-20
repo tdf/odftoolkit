@@ -45,7 +45,8 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
     ./README.md
     ./src/site/content/odftoolkit_website/ReleaseNotes.mdtext
     ./src/site/content/odftoolkit_website/downloads.mdtext
-    ./src/site/site/content/odftoolkit_website/javadoc.mdtext # the older API only exists on odftoolkit.org
+    ./src/site/site/content/odftoolkit_website/javadoc.mdtext # the older API exists only on odftoolkit.org (but we keep API DIFF files here, too!)
+    ./docs/api/index.html # one of a very few HTML files to be edited - insertion of version#!
     ```
 
     The mdtext files are being converted to HTML doing (on Linux)

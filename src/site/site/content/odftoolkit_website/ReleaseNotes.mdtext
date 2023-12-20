@@ -21,6 +21,7 @@
 ### Major updates with this version
 
 We added a new ODF 1.3 mimetype "Text master template".
+The API for Text Selection has been refactored [#240](https://github.com/tdf/odftoolkit/issues/240) has been completely  refactored (in incompatible way as it was earlier errorneous), see all [ODFDOM API changes since 0.11.0 to 0.12.0](./api/odfdom-api-changes-0.11.0-0.12.0.html)!
 Aside of minor improvements this release was rather our yearly maintenance release - the refactoring of the generation is ongoing.
 
 #### Maven
