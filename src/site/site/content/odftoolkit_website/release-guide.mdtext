@@ -104,6 +104,7 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
    ```
 
    This will start the interactive release preparation. You need to supply Maven with the versions of the release. "release version" should be the version of the intended release (recommended value should be fine). "SCM release tag or label" should include the RC version (e.g. odftoolkit-0.10.0). "new development version" should be the current SNAPSHOT version.
+   Strangely, it already does two commits one for the release and one for the follow-up SNAPSHOT - even the release has not succeded now. 'mvn release:perform' will check out the first commit again (a bit suboptimal IMHO).
 
 1. **Perform the release**
 
@@ -111,7 +112,7 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
    mvn release:perform
    ```
 
-   This will checkout the tag to the target directory, build and package everything and upload the artifacts to the staging repository.
+   "mvn release:perform" will checkout the tag (created by mvn release:prepare) to the target directory, build and package everything and upload the artifacts to the staging repository.
    Users will download the mirrored release artifacts from machines outside TDF control. Users need to verify that the copy downloaded is identical to the original. Mirrored copies of checksums, KEYS and signature files (.asc and .md5 files) will be present on the mirrors but must never be used for verification. So, all links from the project website to signatures, sums and [KEYS](https://github.com/tdf/odftoolkit/blob/master/KEYS) need to refer to the original documents on GitHub. See release signing guide for more information (from Apache).
 
 1. **Add the Git tag manually after branch rebase**
