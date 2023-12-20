@@ -1,0 +1,1238 @@
+<html>
+    <head>
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JApiCmp-Report</title>
+        <style type="text/css">
+body {
+    font-family: Verdana;
+}
+.title {
+    font-weight: bold;
+}
+.new {
+    color: green;
+}
+.removed {
+    color: red;
+}
+.modified {
+    color: orange;
+}
+.unchanged {
+    color: black;
+}
+thead tr td {
+    font-weight: bold;
+}
+.toc {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border: 1px solid #dcdcdc;
+    padding: 5px;
+    background: #ededed;
+    display: inline-block;
+}
+table {
+    border-collapse: collapse;
+}
+table tr td {
+    border: 1px solid black;
+    padding: 5px;
+}
+table thead {
+    background-color: #dee3e9;
+}
+table tbody tr td.matrix_layout {
+    background-color: #dee3e9;
+    font-weight: bold;
+}
+.class {
+    margin-bottom: 2em;
+    border: 1px solid #dcdcdc;
+    padding: 5px;
+    background: #ededed;
+    display: inline-block;
+}
+.class_compatibilityChanges {
+	margin-top: 1em;
+}
+
+.class_fileFormatVersion {
+	margin-top: 1em;
+}
+.class_generictemplates {
+	margin-top: 1em;
+}
+.class_superclass {
+    margin-top: 1em;
+}
+.class_interfaces {
+    margin-top: 1em;
+}
+.class_fields {
+    margin-top: 1em;
+}
+.class_serialVersionUid {
+    margin-top: 1em;
+}
+.class_constructors {
+    margin-top: 1em;
+}
+.class_methods {
+    margin-top: 1em;
+}
+.class_annotations {
+    margin-top: 1em;
+}
+.label {
+    font-weight: bold;
+}
+.label_class_member {
+    background-color: #4d7a97;
+    display: inline-block;
+    padding: 5px;
+}
+.toc_link {
+    margin-left: 10px;
+    font-size: 0.5em;
+}
+.modifier {
+    font-style: italic;
+}
+.method_return_type {
+
+}
+.method_parameter {
+
+}
+ul {
+    list-style-type: none;
+    padding: 0px 0px;
+}
+.meta-information {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background: #ededed;
+    display: inline-block;
+}
+.warnings {
+    margin-top: 1em;
+    font-size: 0.75em;
+}
+.explanations {
+	margin-bottom: 2em;
+}
+.table_head_td {
+	background-color: #dee3e9;
+	font-weight: bold;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+</style>
+    </head>
+    <body>
+        <span class="title">JApiCmp-Report</span>
+        <br>
+        <div class="meta-information">
+            <table>
+                <tr>
+                    <td>Old:</td><td>odfdom-java-0.11.0.jar</td>
+                </tr>
+                <tr>
+                    <td>New:</td><td>odfdom-java-0.12.0.jar</td>
+                </tr>
+                <tr>
+                    <td>Created:</td><td>2023-12-20T14:55:12.440+0100</td>
+                </tr>
+                <tr>
+                    <td>Access modifier filter:</td><td>PROTECTED</td>
+                </tr>
+                <tr>
+                    <td>Only modifications:</td><td>true</td>
+                </tr>
+                <tr>
+                    <td>Only binary incompatible modifications:</td><td>false</td>
+                </tr>
+                <tr>
+                    <td>Ignore missing classes:</td><td>true</td>
+                </tr>
+                <tr>
+                    <td>Includes:</td><td>all</td>
+                </tr>
+                <tr>
+                    <td>Excludes:</td><td>n.a.</td>
+                </tr>
+                <tr>
+                    <td id="semver-label">Semantic Versioning:</td><td id="semver-version">1.0.0</td>
+                </tr>
+            </table>
+            <div class="warnings">
+                <span>
+								WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses and
+								interfaces that could not be found on the classpath are ignored. Hence changes
+								caused by these superclasses and interfaces are not reflected in the output.
+							</span>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <a href="#toc">Classes</a>
+            </li>
+        </ul>
+            
+        <div class="toc" id="toc">
+            <span class="label">Classes:</span>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Status</td><td>Fully Qualified Name</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="modified">MODIFIED</span></td><td><a href="#org.odftoolkit.odfdom.doc.OdfDocument">org.odftoolkit.odfdom.doc.OdfDocument</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="modified">MODIFIED</span></td><td><a href="#org.odftoolkit.odfdom.doc.OdfDocument$OdfMediaType">org.odftoolkit.odfdom.doc.OdfDocument$OdfMediaType</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="modified">MODIFIED</span></td><td><a href="#org.odftoolkit.odfdom.doc.OdfTextDocument">org.odftoolkit.odfdom.doc.OdfTextDocument</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="modified">MODIFIED</span></td><td><a href="#org.odftoolkit.odfdom.doc.OdfTextDocument$OdfMediaType">org.odftoolkit.odfdom.doc.OdfTextDocument$OdfMediaType</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="modified">MODIFIED&nbsp;(!)</span></td><td><a href="#org.odftoolkit.odfdom.incubator.search.Navigation">org.odftoolkit.odfdom.incubator.search.Navigation</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="new">NEW</span></td><td><a href="#org.odftoolkit.odfdom.incubator.search.SelectionManager">org.odftoolkit.odfdom.incubator.search.SelectionManager</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="modified">MODIFIED&nbsp;(!)</span></td><td><a href="#org.odftoolkit.odfdom.incubator.search.TextNavigation">org.odftoolkit.odfdom.incubator.search.TextNavigation</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="modified">MODIFIED&nbsp;(!)</span></td><td><a href="#org.odftoolkit.odfdom.incubator.search.TextStyleNavigation">org.odftoolkit.odfdom.incubator.search.TextStyleNavigation</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="explanations">
+            <span>Binary incompatible changes are marked with (!) while source incompatible changes are marked with (*).</span>
+        </div>
+        <div>
+            <div>
+                <div class="class" id="org.odftoolkit.odfdom.doc.OdfDocument">
+                    <div class="class_header">
+                        <span class="label"><a name="org.odftoolkit.odfdom.doc.OdfDocument"></a><span class="modified">MODIFIED</span><span class="">&nbsp;</span><span class="unchanged modifier"></span><span class="unchanged modifier"></span><span class="unchanged modifier">public&nbsp;</span><span class="unchanged modifier">abstract&nbsp;</span><span class="unchanged modifier"></span><span class="unchanged">class</span>&nbsp;org.odftoolkit.odfdom.doc.OdfDocument</span><a href="#toc" class="toc_link">top</a>
+                    </div>
+                    <div class="class_generictemplates"></div>
+                    <div class="class_superclass"></div>
+                    <div class="class_interfaces"></div>
+                    <div class="class_fields"></div>
+                    <div class="class_constructors"></div>
+                    <div class="class_methods">
+                        <span class="label_class_member">Methods:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Status</td><td>Modifier</td><td>Generic Templates</td><td>Type</td><td>Method</td><td>Exceptions</td><td>Compatibility Changes:</td><td>Line Number</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">org.odftoolkit.odfdom.incubator.search.SelectionManager</span></td><td>getSelectionManager()</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>1263</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="class" id="org.odftoolkit.odfdom.doc.OdfDocument$OdfMediaType">
+                    <div class="class_header">
+                        <span class="label"><a name="org.odftoolkit.odfdom.doc.OdfDocument$OdfMediaType"></a><span class="modified">MODIFIED</span><span class="new">&nbsp;(Serializable compatible)&nbsp;</span><span class="unchanged modifier">final&nbsp;</span><span class="unchanged modifier">static&nbsp;</span><span class="unchanged modifier">public&nbsp;</span><span class="unchanged modifier"></span><span class="unchanged modifier"></span><span class="unchanged">enum</span>&nbsp;org.odftoolkit.odfdom.doc.OdfDocument$OdfMediaType</span><a href="#toc" class="toc_link">top</a>
+                    </div>
+                    <div class="class_generictemplates"></div>
+                    <div class="class_superclass"></div>
+                    <div class="class_interfaces"></div>
+                    <div class="class_serialVersionUid">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td></td><td>Serializable</td><td>default serialVersionUID</td><td>serialVersionUID in class</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="matrix_layout">Old</td><td>true</td><td class="modified">-6779433941377455144</td><td>n.a.</td>
+                                </tr>
+                                <tr>
+                                    <td class="matrix_layout">New</td><td>true</td><td class="modified">290537191695392800</td><td>n.a.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="class_fields">
+                        <span class="label_class_member">Fields:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Status</td><td>Modifier</td><td>Type</td><td>Field</td><td>Compatibility Changes:</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier">public&nbsp;</span><span class="new modifier">static&nbsp;</span><span class="new modifier">final&nbsp;</span><span class="new modifier"></span></td><td><span class="new modifier">org.odftoolkit.odfdom.doc.OdfDocument$OdfMediaType</span></td><td>TEXT_MASTER_TEMPLATE</td><td>n.a.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="class_constructors"></div>
+                    <div class="class_methods"></div>
+                </div>
+            </div>
+            <div>
+                <div class="class" id="org.odftoolkit.odfdom.doc.OdfTextDocument">
+                    <div class="class_header">
+                        <span class="label"><a name="org.odftoolkit.odfdom.doc.OdfTextDocument"></a><span class="modified">MODIFIED</span><span class="">&nbsp;</span><span class="unchanged modifier"></span><span class="unchanged modifier"></span><span class="unchanged modifier">public&nbsp;</span><span class="unchanged modifier"></span><span class="unchanged modifier"></span><span class="unchanged">class</span>&nbsp;org.odftoolkit.odfdom.doc.OdfTextDocument</span><a href="#toc" class="toc_link">top</a>
+                    </div>
+                    <div class="class_generictemplates"></div>
+                    <div class="class_superclass"></div>
+                    <div class="class_interfaces"></div>
+                    <div class="class_fields"></div>
+                    <div class="class_constructors"></div>
+                    <div class="class_methods">
+                        <span class="label_class_member">Methods:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Status</td><td>Modifier</td><td>Generic Templates</td><td>Type</td><td>Method</td><td>Exceptions</td><td>Compatibility Changes:</td><td>Line Number</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier">static&nbsp;</span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">org.odftoolkit.odfdom.doc.OdfTextDocument</span></td><td>newTextMasterTemplateDocument()</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Status:</td><td>Name:</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><span class="new">NEW</span></td><td>java.lang.Exception</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>151</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="class" id="org.odftoolkit.odfdom.doc.OdfTextDocument$OdfMediaType">
+                    <div class="class_header">
+                        <span class="label"><a name="org.odftoolkit.odfdom.doc.OdfTextDocument$OdfMediaType"></a><span class="modified">MODIFIED</span><span class="new">&nbsp;(Serializable compatible)&nbsp;</span><span class="unchanged modifier">final&nbsp;</span><span class="unchanged modifier">static&nbsp;</span><span class="unchanged modifier">public&nbsp;</span><span class="unchanged modifier"></span><span class="unchanged modifier"></span><span class="unchanged">enum</span>&nbsp;org.odftoolkit.odfdom.doc.OdfTextDocument$OdfMediaType</span><a href="#toc" class="toc_link">top</a>
+                    </div>
+                    <div class="class_generictemplates"></div>
+                    <div class="class_superclass"></div>
+                    <div class="class_interfaces"></div>
+                    <div class="class_serialVersionUid">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td></td><td>Serializable</td><td>default serialVersionUID</td><td>serialVersionUID in class</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="matrix_layout">Old</td><td>true</td><td class="modified">9043929672318078925</td><td>n.a.</td>
+                                </tr>
+                                <tr>
+                                    <td class="matrix_layout">New</td><td>true</td><td class="modified">7174096958160632271</td><td>n.a.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="class_fields">
+                        <span class="label_class_member">Fields:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Status</td><td>Modifier</td><td>Type</td><td>Field</td><td>Compatibility Changes:</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier">public&nbsp;</span><span class="new modifier">static&nbsp;</span><span class="new modifier">final&nbsp;</span><span class="new modifier"></span></td><td><span class="new modifier">org.odftoolkit.odfdom.doc.OdfTextDocument$OdfMediaType</span></td><td>TEXT_MASTER_TEMPLATE</td><td>n.a.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="class_constructors"></div>
+                    <div class="class_methods"></div>
+                </div>
+            </div>
+            <div>
+                <div class="class" id="org.odftoolkit.odfdom.incubator.search.Navigation">
+                    <div class="class_header">
+                        <span class="label"><a name="org.odftoolkit.odfdom.incubator.search.Navigation"></a><span class="modified">MODIFIED&nbsp;(!)</span><span class="">&nbsp;</span><span class="unchanged modifier"></span><span class="unchanged modifier"></span><span class="unchanged modifier">public&nbsp;</span><span class="unchanged modifier">abstract&nbsp;</span><span class="unchanged modifier"></span><span class="unchanged">class</span>&nbsp;org.odftoolkit.odfdom.incubator.search.Navigation</span><a href="#toc" class="toc_link">top</a>
+                    </div>
+                    <div class="class_compatibilityChanges">
+                        <span class="label_class_member">Compatibility Changes:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Change</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>INTERFACE_ADDED</td>
+                                </tr>
+                                <tr>
+                                    <td>METHOD_ABSTRACT_ADDED_IN_IMPLEMENTED_INTERFACE</td>
+                                </tr>
+                                <tr>
+                                    <td>METHOD_DEFAULT_ADDED_IN_IMPLEMENTED_INTERFACE</td>
+                                </tr>
+                                <tr>
+                                    <td>CLASS_GENERIC_TEMPLATE_CHANGED</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="class_generictemplates">
+                        <span class="label_class_member">Generic Templates:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Change Status</td><td>Name</td><td>Old Type</td><td>New Type</td><td>Generics</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td>T</td><td>n.a.</td><td>org.odftoolkit.odfdom.incubator.search.Selection</td><td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="class_superclass"></div>
+                    <div class="class_interfaces">
+                        <span class="label_class_member">Interfaces:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Status</td><td>Interface</td><td>Compatibility Changes</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td>java.util.Iterator</td><td>n.a.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="class_fields"></div>
+                    <div class="class_constructors"></div>
+                    <div class="class_methods">
+                        <span class="label_class_member">Methods:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Status</td><td>Modifier</td><td>Generic Templates</td><td>Type</td><td>Method</td><td>Exceptions</td><td>Compatibility Changes:</td><td>Line Number</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="removed">REMOVED&nbsp;(!)</span></td><td><span class="removed modifier"></span><span class="removed modifier"></span><span class="removed modifier">public&nbsp;</span><span class="removed modifier">abstract&nbsp;</span><span class="removed modifier"></span><span class="removed modifier"></span></td><td>
+			n.a.
+		</td><td><span class="removed method_return_type">org.odftoolkit.odfdom.incubator.search.Selection</span></td><td>getCurrentItem()</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_REMOVED</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>n.a.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW&nbsp;(*)</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier">abstract&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">org.odftoolkit.odfdom.pkg.OdfElement</span></td><td>getElement()</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>METHOD_ABSTRACT_ADDED_TO_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>n.a.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW&nbsp;(*)</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier">abstract&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">org.odftoolkit.odfdom.incubator.search.Selection</span></td><td>next()</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>METHOD_ABSTRACT_ADDED_TO_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>n.a.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="class" id="org.odftoolkit.odfdom.incubator.search.SelectionManager">
+                    <div class="class_header">
+                        <span class="label"><a name="org.odftoolkit.odfdom.incubator.search.SelectionManager"></a><span class="new">NEW</span><span class="">&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new">class</span>&nbsp;org.odftoolkit.odfdom.incubator.search.SelectionManager</span><a href="#toc" class="toc_link">top</a>
+                    </div>
+                    <div class="class_generictemplates"></div>
+                    <div class="class_superclass"></div>
+                    <div class="class_interfaces"></div>
+                    <div class="class_fields"></div>
+                    <div class="class_constructors">
+                        <span class="label_class_member">Constructors:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Status</td><td>Modifier</td><td>Generic Templates</td><td>Constructor</td><td>Exceptions</td><td>Compatibility Changes:</td><td>Line Number</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td>SelectionManager()</td><td>n.a.</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>34</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="class_methods">
+                        <span class="label_class_member">Methods:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Status</td><td>Modifier</td><td>Generic Templates</td><td>Type</td><td>Method</td><td>Exceptions</td><td>Compatibility Changes:</td><td>Line Number</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">void</span></td><td>refresh(<span class="unchanged method_parameter">org.odftoolkit.odfdom.pkg.OdfElement</span>,
+                                        <wbr></wbr>
+                                        <span class="unchanged method_parameter">int</span>,
+                                        <wbr></wbr>
+                                        <span class="unchanged method_parameter">int</span>)</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>156</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">void</span></td><td>refreshAfterCut(<span class="unchanged method_parameter">org.odftoolkit.odfdom.incubator.search.Selection</span>)</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>72</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">void</span></td><td>refreshAfterPasteAtEndOf(<span class="unchanged method_parameter">org.odftoolkit.odfdom.incubator.search.Selection</span>,
+                                        <wbr></wbr>
+                                        <span class="unchanged method_parameter">org.odftoolkit.odfdom.incubator.search.Selection</span>)</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>109</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">void</span></td><td>refreshAfterPasteAtFrontOf(<span class="unchanged method_parameter">org.odftoolkit.odfdom.incubator.search.Selection</span>,
+                                        <wbr></wbr>
+                                        <span class="unchanged method_parameter">org.odftoolkit.odfdom.incubator.search.Selection</span>)</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>91</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">void</span></td><td>registerItem(<span class="unchanged method_parameter">org.odftoolkit.odfdom.incubator.search.Selection</span>)</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>44</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">void</span></td><td>unregisterAll()</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>145</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">void</span></td><td>unregisterItem(<span class="unchanged method_parameter">org.odftoolkit.odfdom.incubator.search.Selection</span>)</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>134</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="class" id="org.odftoolkit.odfdom.incubator.search.TextNavigation">
+                    <div class="class_header">
+                        <span class="label"><a name="org.odftoolkit.odfdom.incubator.search.TextNavigation"></a><span class="modified">MODIFIED&nbsp;(!)</span><span class="">&nbsp;</span><span class="unchanged modifier"></span><span class="unchanged modifier"></span><span class="unchanged modifier">public&nbsp;</span><span class="unchanged modifier"></span><span class="unchanged modifier"></span><span class="unchanged">class</span>&nbsp;org.odftoolkit.odfdom.incubator.search.TextNavigation</span><a href="#toc" class="toc_link">top</a>
+                    </div>
+                    <div class="class_compatibilityChanges">
+                        <span class="label_class_member">Compatibility Changes:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Change</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>METHOD_REMOVED_IN_SUPERCLASS</td>
+                                </tr>
+                                <tr>
+                                    <td>METHOD_DEFAULT_ADDED_IN_IMPLEMENTED_INTERFACE</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="class_generictemplates"></div>
+                    <div class="class_superclass"></div>
+                    <div class="class_interfaces"></div>
+                    <div class="class_fields"></div>
+                    <div class="class_constructors"></div>
+                    <div class="class_methods">
+                        <span class="label_class_member">Methods:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Status</td><td>Modifier</td><td>Generic Templates</td><td>Type</td><td>Method</td><td>Exceptions</td><td>Compatibility Changes:</td><td>Line Number</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="removed">REMOVED</span></td><td><span class="removed modifier"></span><span class="removed modifier"></span><span class="removed modifier">public&nbsp;</span><span class="removed modifier"></span><span class="removed modifier"></span><span class="removed modifier"></span></td><td>
+			n.a.
+		</td><td><span class="removed method_return_type">org.odftoolkit.odfdom.incubator.search.Selection</span></td><td>getCurrentItem()</td><td>n.a.</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>179</td><td>n.a.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">org.odftoolkit.odfdom.pkg.OdfElement</span></td><td>getElement()</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>239</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">org.odftoolkit.odfdom.incubator.search.SelectionManager</span></td><td>getSelectionManager()</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>83</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">org.odftoolkit.odfdom.incubator.search.TextSelection</span></td><td>next()</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>213</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="class" id="org.odftoolkit.odfdom.incubator.search.TextStyleNavigation">
+                    <div class="class_header">
+                        <span class="label"><a name="org.odftoolkit.odfdom.incubator.search.TextStyleNavigation"></a><span class="modified">MODIFIED&nbsp;(!)</span><span class="">&nbsp;</span><span class="unchanged modifier"></span><span class="unchanged modifier"></span><span class="unchanged modifier">public&nbsp;</span><span class="unchanged modifier"></span><span class="unchanged modifier"></span><span class="unchanged">class</span>&nbsp;org.odftoolkit.odfdom.incubator.search.TextStyleNavigation</span><a href="#toc" class="toc_link">top</a>
+                    </div>
+                    <div class="class_compatibilityChanges">
+                        <span class="label_class_member">Compatibility Changes:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Change</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>METHOD_REMOVED_IN_SUPERCLASS</td>
+                                </tr>
+                                <tr>
+                                    <td>METHOD_DEFAULT_ADDED_IN_IMPLEMENTED_INTERFACE</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="class_generictemplates"></div>
+                    <div class="class_superclass"></div>
+                    <div class="class_interfaces"></div>
+                    <div class="class_fields"></div>
+                    <div class="class_constructors"></div>
+                    <div class="class_methods">
+                        <span class="label_class_member">Methods:</span>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Status</td><td>Modifier</td><td>Generic Templates</td><td>Type</td><td>Method</td><td>Exceptions</td><td>Compatibility Changes:</td><td>Line Number</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="removed">REMOVED</span></td><td><span class="removed modifier"></span><span class="removed modifier"></span><span class="removed modifier">public&nbsp;</span><span class="removed modifier"></span><span class="removed modifier"></span><span class="removed modifier"></span></td><td>
+			n.a.
+		</td><td><span class="removed method_return_type">org.odftoolkit.odfdom.incubator.search.Selection</span></td><td>getCurrentItem()</td><td>n.a.</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>117</td><td>n.a.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">org.odftoolkit.odfdom.pkg.OdfElement</span></td><td>getElement()</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>161</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">org.odftoolkit.odfdom.incubator.search.SelectionManager</span></td><td>getSelectionManager()</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>82</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="new">NEW</span></td><td><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier">public&nbsp;</span><span class="new modifier"></span><span class="new modifier"></span><span class="new modifier"></span></td><td>
+			n.a.
+		</td><td><span class="new method_return_type">org.odftoolkit.odfdom.incubator.search.TextSelection</span></td><td>next()</td><td>n.a.</td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Change</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>METHOD_ADDED_TO_PUBLIC_CLASS</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td><td>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Old file</td><td>New file</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>n.a.</td><td>135</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>
