@@ -38,13 +38,14 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
     git checkout -b release-candidate
     ```
 
-   The following documents need currently manual adjustment:
+   The following documents need currently manual adjustment:<br/>
    **NOTE**: To gather the release notes information it is helpful to go backward through issues and pull requests in GitHub!
 
     ```shell
     ./README.md
     ./src/site/content/odftoolkit_website/ReleaseNotes.mdtext
     ./src/site/content/odftoolkit_website/downloads.mdtext
+    ./src/site/site/content/odftoolkit_website/javadoc.mdtext # the older API only exists on odftoolkit.org
     ```
 
     The mdtext files are being converted to HTML doing (on Linux)
@@ -58,29 +59,46 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
 
 1. **Prepare JavaDoc**
 
-    JavaDoc has to be generated with the upcoming release number already set. Therefore instead of doing it manually I do a
+    JavaDoc has to be generated with the upcoming release number already set, which is done and a build via, after an interactive process:
 
     ```shell
-    mvn release:prepare # should generate the javadoc - otherwise 'mvn install'
-    git stash # to remove the changed pom.xml
-    cd src/site
-    copy-javadoc.sh
-    git add ../..
-    git commit -m"New JavaDoc for the upcoming release"
+    mvn release:prepare # build with release data javadoc for release generated in target
+    git status -sb # there should be no uncommitted / changed files
     ```
 
-1. **A clean start**</br>Make sure that your working copy is clean.
-   Preferably check out a clean version from [GitHub](https://github.com/tdf/odftoolkit).
+    Now copy the JavaDoc files with our script:
+
+    ```shell
+    cd src/site
+    copy-javadoc.sh
+    git commit -am"New JavaDoc for the upcoming release"
+    ```
+
+    Creating the API diff file for ODFDOM API:
+
+    ```shell
+    git clone https://github.com/siom79/japicmp
+    cd japicmp
+    mvn install
+    cd japicmp/target
+    java -jar .\japicmp-0.18.4-SNAPSHOT-jar-with-dependencies.jar -m -n .\odfdom-java-0.12.0.jar -o .\odfdom-java-0.11.0.jar --ignore-missing-classes --html-file odfdom-api-changes-0.11.0-0.12.0.html # adjust versions numberes :-)
+    cp odfdom-api-changes-0.11.0-0.12.0.html <YOUR_ODFTOOLKIT_DIR>/docs/api
+    cd <YOUR_ODFTOOLKIT_DIR>/docs/api
+    git status -sb # there should be only one field
+    git add .
+    git commit -m"Adding ODFDOM API changes of this release - created via japicmp-0.18.4-SNAPSHOT" # version may vary
+   ```
+
+1. **JUST IN CASE: A clean start after errors**</br>Make sure that your working copy is clean.Preferably check out/a
+    cd clean.Preferably check out/a
+    git status -sb # there should be only one field
+    git add .
 
     ```shell
     mvn clean
     mvn release:clean
-    ```
+    mvn release:prepare
 
-1. **Prepare the release**
-
-   ```shell
-   mvn release:prepare
    ```
 
    This will start the interactive release preparation. You need to supply Maven with the versions of the release. "release version" should be the version of the intended release (recommended value should be fine). "SCM release tag or label" should include the RC version (e.g. odftoolkit-0.10.0). "new development version" should be the current SNAPSHOT version.
