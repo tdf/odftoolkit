@@ -2,58 +2,64 @@
 
 ## Current Version
 
-The current version is the 0.11.0 supporting ODF 1.2. The future development is based on the [master branch](https://github.com/tdf/odftoolkit).</br>
-The releases of 0.11.0 was on December 21th, 2022.
+The current version is the 0.12.0 supporting ODF 1.2. The future development is based on the [master branch](https://github.com/tdf/odftoolkit).</br>
+The releases of 0.12.0 was on December 20th, 2023.
 
 ## Releases (latest)
 
-The release 0.11.0 is using JDK 11 implementing [ODF 1.2](http://docs.oasis-open.org/office/v1.2/os/).</br>
+The release 0.12.0 is using JDK 11 implementing [ODF 1.2](http://docs.oasis-open.org/office/v1.2/os/).</br>
 For more details see the [release notes](./ReleaseNotes.html). People interested should also follow the [mail list](mailing-lists.html) to track progress.
 
 ## Project Releases for Maven (latest)
 
 ### Project Releases for Maven on ODF 1.2
 
-* **[ODFDOM](./odfdom/index.html): [0.11.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/)**
+* **[ODFDOM](./odfdom/index.html): [0.12.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.12.0/)**
 
 ```shell
 <dependency>
     <groupId>org.odftoolkit</groupId>
     <artifactId>odfdom-java</artifactId>
-    <version>0.11.0</version>
+    <version>0.12.0</version>
 </dependency>
 ```
 
-* **[ODF Validator](./conformance/ODFValidator.html): [0.11.0](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.11.0/)**
+* **[ODF Validator](./conformance/ODFValidator.html): [0.12.0](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.12.0/)**
 
 ```shell
 <dependency>
     <groupId>org.odftoolkit</groupId>
     <artifactId>odfvalidator</artifactId>
-    <version>0.11.0</version>
+    <version>0.12.0</version>
 </dependency>
 ```
 
-* **[XSLT Runner](./xsltrunner/ODFXSLTRunner.html): [0.11.0](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.11.0/)**
+* **[XSLT Runner](./xsltrunner/ODFXSLTRunner.html): [0.12.0](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.12.0/)**
 
 ```shell
 <dependency>
     <groupId>org.odftoolkit</groupId>
     <artifactId>xslt-runner</artifactId>
-    <version>0.11.0</version>
+    <version>0.12.0</version>
 </dependency>
 
 ```
 
 ## ODF Toolkit Release Bundles (latest)
 
+### ODF Toolkit 0.12.0 Release Bundle (ODF 1.2 using JDK 11)
+
+* Sources: [odftoolkit-0.12.0-src.zip](https://github.com/tdf/odftoolkit/releases/download/v0.12.0/odftoolkit-0.12.0-src.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/v0.12.0/odftoolkit-0.12.0-src.zip.sha)]
+* Binaries: [odftoolkit-0.12.0-bin.zip](https://github.com/tdf/odftoolkit/releases/download/v0.12.0/odftoolkit-0.12.0-bin.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/v0.12.0/odftoolkit-0.12.0-bin.zip.sha)]
+* Documentation: [odftoolkit-0.12.0-doc.zip](https://github.com/tdf/odftoolkit/releases/download/v0.12.0/odftoolkit-0.12.0-doc.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/v0.12.0/odftoolkit-0.12.0-doc.zip.sha)]
+
+## Former ODF Toolkit Release Bundles
+
 ### ODF Toolkit 0.11.0 Release Bundle (ODF 1.2 using JDK 11)
 
 * Sources: [odftoolkit-0.11.0-src.zip](https://github.com/tdf/odftoolkit/releases/download/v0.11.0/odftoolkit-0.11.0-src.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/v0.11.0/odftoolkit-0.11.0-src.zip.sha)]
 * Binaries: [odftoolkit-0.11.0-bin.zip](https://github.com/tdf/odftoolkit/releases/download/v0.11.0/odftoolkit-0.11.0-bin.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/v0.11.0/odftoolkit-0.11.0-bin.zip.sha)]
 * Documentation: [odftoolkit-0.11.0-doc.zip](https://github.com/tdf/odftoolkit/releases/download/v0.11.0/odftoolkit-0.11.0-doc.zip) [[sha](https://github.com/tdf/odftoolkit/releases/download/v0.11.0/odftoolkit-0.11.0-doc.zip.sha)]
-
-## Former ODF Toolkit Release Bundles
 
 ### ODF Toolkit 0.10.0 Release Bundle (ODF 1.2 using JDK 11)
 

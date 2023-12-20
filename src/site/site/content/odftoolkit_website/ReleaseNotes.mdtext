@@ -1,5 +1,32 @@
 # ODF Toolkit Release Notes
 
+## Release 0.12.0
+
+[ODFDOM 0.12.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.12.0/) is released on December 20th, 2023. Git tag: "odftoolkit-0.12.0".
+
+### GitHub issues (and feature pull requests) closed for this release 0.12.0
+
+* [#204](https://github.com/tdf/odftoolkit/issues/204) ODF 1.3 new mimetype: Text master template - by mistmist (Michael Stahl) was merged on Feb 1
+* [#215](https://github.com/tdf/odftoolkit/issues/215) Integrate ODF Validator using Maven - by Asbjoedt was closed on May 23
+* [#218](https://github.com/tdf/odftoolkit/issues/218) Cloning fails on Windows - by Asbjoedt was closed on May 24
+* [#235](https://github.com/tdf/odftoolkit/issues/235) Unable to replace paragraph in ODF Text Document - by rsoika was closed on Jun 23
+* [#236](https://github.com/tdf/odftoolkit/issues/236) Improved navigation interface, added next() method - by rsoika was merged on Jun 23
+* [#240](https://github.com/tdf/odftoolkit/issues/240) Text Selection refactoring of Ralph - continuation of PR #238 - by rsoika was merged on Jul 13
+* [#241](https://github.com/tdf/odftoolkit/issues/242) added a new doc page 'change_api" and minor changes - by rsoika was merged on Jul 13
+* [#242](https://github.com/tdf/odftoolkit/issues/242) Determine font, font size, bold/italic/underline styles - by j-dimension was closed on Jul 14
+* [#243](https://github.com/tdf/odftoolkit/issues/243) Diskussion Forum documentation (Documentation) - by rsoika was closed on Jul 19
+* [#251](https://github.com/tdf/odftoolkit/issues/251) OdfEditableTextExtractor extracts only a last part of the text - by sergeych was closed on Sep 4
+* [#254](https://github.com/tdf/odftoolkit/issues/255) Fix OSGI Implementation Details - by Boarschti42 was closed on Oct 18
+
+### Major updates with this version
+
+We added a new ODF 1.3 mimetype "Text master template".
+Aside of minor improvements this release was rather our yearly maintenance release - the refactoring of the generation is ongoing.
+
+#### Maven
+
+Updated to latest Maven dependency versions - improving overall security!
+
 ## Release 0.11.0
 
 [ODFDOM 0.11.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/) is released on December 21th, 2022. Git tag: "odftoolkit-0.11.0".

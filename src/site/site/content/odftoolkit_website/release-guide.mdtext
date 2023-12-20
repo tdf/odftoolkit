@@ -39,6 +39,7 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
     ```
 
    The following documents need currently manual adjustment:
+   **NOTE**: To gather the release notes information it is helpful to go backward through issues and pull requests in GitHub!
 
     ```shell
     ./README.md

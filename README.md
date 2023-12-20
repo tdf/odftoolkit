@@ -47,14 +47,15 @@ build system. To build ODF Toolkit, use the following command in this directory:
 
 ## Recent Releases
 
-1. We have a *release 0.11.0* using >=JDK 11 for ODF 1.2-
-   Doing a full refactoring of the ODFDOM code generation and containing updates to the [new collaboration API](https://tdf.github.io/odftoolkit/odfdom/operations/operations.html):
-    *RELEASE (0.11.0)*:
-    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/)
-    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.11.0/)
-    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.11.0/)
+1. We have a *release 0.12.0* using >=JDK 11 for ODF 1.2-
+   Mainly maintenance updating the dependenciy versions<br/>
+    **RELEASE (0.12.0)**:
+    * [ODFDOM](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.12.0/)
+    * [ODF Validator](https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.12.0/)
+    * [XSLT Runner](https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.12.0/)
 
-For more details see the [release notes](https://tdf.github.io/odftoolkit/ReleaseNotes.html).
+For more details see the [release notes](https://tdf.github.io/odftoolkit/ReleaseNotes.html).</br>
+   *NOTE*: The prior 0.11.0 release was doing a full refactoring of the ODFDOM code generation and containing updates to the [new collaboration API](https://tdf.github.io/odftoolkit/odfdom/operations/operations.html).<br/>
 
 ## Documentation
 
@@ -72,14 +73,14 @@ For more details see the [release notes](https://tdf.github.io/odftoolkit/Releas
 Discussion about ODF Toolkit takes place on the following mailing lists:
 
 * Development and Users Mailing List
-  * Subscribe: dev+subscribe@odftoolkit.org
-  * Post (after subscription): dev@odftoolkit.org
-  * Unsubscribe: dev+unsubscribe@odftoolkit.org
+  * Subscribe: <dev+subscribe@odftoolkit.org>
+  * Post (after subscription): <dev@odftoolkit.org>
+  * Unsubscribe: <dev+unsubscribe@odftoolkit.org>
   * [Mail archives](https://listarchives.odftoolkit.org/dev/)
 
 The mailing lists are open to anyone and publicly archived.
 
-* To confidentially report a **security issue**, please mail to: security@documentfoundation.org
+* To confidentially report a **security issue**, please mail to: <security@documentfoundation.org>
 
 ## Issue Tracker
 
