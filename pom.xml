@@ -29,7 +29,7 @@
     <parent>
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
-        <version>28</version>
+        <version>31</version>
         <relativePath/>
     </parent>
 
@@ -93,7 +93,7 @@
             <dependency>
                 <groupId>org.apache.ant</groupId>
                 <artifactId>ant</artifactId>
-                <version>1.10.12</version>
+                <version>1.10.14</version>
             </dependency>
             <!-- used by ODFDOM for metadata -->
             <dependency>
