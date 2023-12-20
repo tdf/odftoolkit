@@ -111,24 +111,24 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
    ```
 
    This will checkout the tag to the target directory, build and package everything and upload the artifacts to the staging repository.
-   Users will download the mirrored release artifacts from machines outside TDF control. Users need to verify that the copy downloaded is identical to the original. Mirrored copies of checksums, KEYS and signature files (.asc and .md5 files) will be present on the mirrors but must never be used for verification. So, all links from the podling website to signatures, sums and [KEYS](https://github.com/tdf/odftoolkit/blob/master/KEYS) need to refer to the original documents on GitHub. See release signing guide for more information.
+   Users will download the mirrored release artifacts from machines outside TDF control. Users need to verify that the copy downloaded is identical to the original. Mirrored copies of checksums, KEYS and signature files (.asc and .md5 files) will be present on the mirrors but must never be used for verification. So, all links from the project website to signatures, sums and [KEYS](https://github.com/tdf/odftoolkit/blob/master/KEYS) need to refer to the original documents on GitHub. See release signing guide for more information (from Apache).
 
 1. **Add the Git tag manually after branch rebase**
     Push the branch and if the branch is rebased the tag has to be added and pushed on the correct commit manually.
-    For instance for 0.11.0 release the git commands looked like:
+    For instance for 0.12.0 release the git commands looked like:
 
-    * Adding tag (signed -s, annotated -m, previous commit -a)
+    * Adding tag (signed -s, annotated (unsigned) -a, with message -m)
 
     ```shell
-    git tag -s -a v0.11.0 4baf275b33 -m"odftoolkit-0.11.0"
-    git push origin v0.11.0
+    git tag -s -a v0.12.0 2920b36c2b -m"odftoolkit-0.12.0"
+    git push origin v0.12.0
     ```
 
     * Deleting tag
 
     ```shell
-    git tag -d v0.11.0
-    git push origin --delete v0.11.0
+    git tag -d v0.12.0
+    git push origin --delete v0.12.0
     ```
 
 1. **What to Do If Something Goes Wrong**
@@ -157,21 +157,21 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
 1. **Send Announcements**</br> The release manager need to send announcements to odf-dev list. The sample looks like:
 
    ```shell
-      Subject:[ANNOUNCEMENT] "ODF Toolkit 0.11.0 Release"
+      Subject:[ANNOUNCEMENT] "ODF Toolkit 0.12.0 Release"
       To: dev@odftoolkit.org
       Hi all,
 
-      The ODF Toolkit team is pleased to announce the release of 0.11.0 (>=JDK 11) supporting ODF 1.2.
+      The ODF Toolkit team is pleased to announce the release of 0.12.0 (>=JDK 11) supporting ODF 1.2.
       The list of changes is available in the release notes[1].
 
       All new ODF Toolkit components (binary, source and JavaDoc bundles) are available as GitHub releases [2].
-      Or in the central Maven repository under group ID "org.odftoolkit" and version "0.11.0" [3,4,5].
+      Or in the central Maven repository under group ID "org.odftoolkit" and version "0.12.0" [3,4,5].
 
       [1] ./ReleaseNotes.html
-      [2] https://github.com/tdf/odftoolkit/releases/tag/v0.11.0
-      [3] https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/
-      [4] https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.11.0/
-      [5] https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.11.0/
+      [2] https://github.com/tdf/odftoolkit/releases/tag/v0.12.0
+      [3] https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.12.0/
+      [4] https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.12.0/
+      [5] https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.12.0/
    ```
 
 ## Manual GitHub Release Guide
