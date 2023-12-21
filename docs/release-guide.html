@@ -77,11 +77,13 @@
           <div class="codehilite">
             <pre><code class="language-shell">git checkout -b release-candidate
 </code></pre>
-          </div> <p>The following documents need currently manual adjustment: <strong>NOTE</strong>: To gather the release notes information it is helpful to go backward through issues and pull requests in GitHub!</p> 
+          </div> <p>The following documents need currently manual adjustment:<br> <strong>NOTE</strong>: To gather the release notes information it is helpful to go backward through issues and pull requests in GitHub!</p> 
           <div class="codehilite">
             <pre><code class="language-shell">./README.md
 ./src/site/content/odftoolkit_website/ReleaseNotes.mdtext
 ./src/site/content/odftoolkit_website/downloads.mdtext
+./src/site/site/content/odftoolkit_website/javadoc.mdtext # the older API exists only on odftoolkit.org (but we keep API DIFF files here, too!)
+./docs/api/index.html # one of a very few HTML files to be edited - insertion of version#!
 </code></pre>
           </div> <p>The mdtext files are being converted to HTML doing (on Linux)</p> 
           <div class="codehilite">
@@ -91,47 +93,60 @@ git add ../..
 git commit -m"Documentation update for the upcoming release"
 </code></pre>
           </div> </li> 
-        <li> <p><strong>Prepare JavaDoc</strong></p> <p>JavaDoc has to be generated with the upcoming release number already set. Therefore instead of doing it manually I do a</p> 
+        <li> <p><strong>Prepare JavaDoc</strong></p> <p>JavaDoc has to be generated with the upcoming release number already set, which is done and a build via, after an interactive process:</p> 
           <div class="codehilite">
-            <pre><code class="language-shell">mvn release:prepare # should generate the javadoc - otherwise 'mvn install'
-git stash # to remove the changed pom.xml
-cd src/site
+            <pre><code class="language-shell">mvn release:prepare # build with release data javadoc for release generated in target
+git status -sb # there should be no uncommitted / changed files
+</code></pre>
+          </div> <p>Now copy the JavaDoc files with our script:</p> 
+          <div class="codehilite">
+            <pre><code class="language-shell">cd src/site
 copy-javadoc.sh
-git add ../..
-git commit -m"New JavaDoc for the upcoming release"
+git commit -am"New JavaDoc for the upcoming release"
+</code></pre>
+          </div> <p>Creating the API diff file for ODFDOM API:</p> 
+          <div class="codehilite">
+            <pre><code class="language-shell">git clone https://github.com/siom79/japicmp
+cd japicmp
+mvn install
+cd japicmp/target
+java -jar .\japicmp-0.18.4-SNAPSHOT-jar-with-dependencies.jar -m -n .\odfdom-java-0.12.0.jar -o .\odfdom-java-0.11.0.jar --ignore-missing-classes --html-file odfdom-api-changes-0.11.0-0.12.0.html # adjust versions numberes :-)
+cp odfdom-api-changes-0.11.0-0.12.0.html &lt;YOUR_ODFTOOLKIT_DIR&gt;/docs/api
+cd &lt;YOUR_ODFTOOLKIT_DIR&gt;/docs/api
+git status -sb # there should be only one field
+git add .
+git commit -m"Adding ODFDOM API changes of this release - created via japicmp-0.18.4-SNAPSHOT" # version may vary
 </code></pre>
           </div> </li> 
-        <li> <p><strong>A clean start</strong><br>Make sure that your working copy is clean. Preferably check out a clean version from <a href="https://github.com/tdf/odftoolkit">GitHub</a>.</p> 
+        <li> <p><strong>JUST IN CASE: A clean start after errors</strong><br>Make sure that your working copy is clean.Preferably check out/a cd clean.Preferably check out/a git status -sb # there should be only one field git add .</p> 
           <div class="codehilite">
-            <pre><code class="language-shell">mvn clean
+            <pre><code class="language-shell">git rebase -i HEAD~12  # drop the two maven release commits
+mvn clean
 mvn release:clean
+git tag -d &lt;YOUR_RELEASE_TAG&gt; # git tag -d odftoolkit-0.12.0
+mvn release:prepare # start over
 </code></pre>
-          </div> </li> 
-        <li> <p><strong>Prepare the release</strong></p> 
-          <div class="codehilite">
-            <pre><code class="language-shell">mvn release:prepare
-</code></pre>
-          </div> <p>This will start the interactive release preparation. You need to supply Maven with the versions of the release. "release version" should be the version of the intended release (recommended value should be fine). "SCM release tag or label" should include the RC version (e.g. odftoolkit-0.10.0). "new development version" should be the current SNAPSHOT version.</p> </li> 
+          </div> <p>This will start the interactive release preparation. You need to supply Maven with the versions of the release. "release version" should be the version of the intended release (recommended value should be fine). "SCM release tag or label" should include the RC version (e.g. odftoolkit-0.10.0). "new development version" should be the current SNAPSHOT version. Strangely, it already does two commits one for the release and one for the follow-up SNAPSHOT - even the release has not succeded now. 'mvn release:perform' will check out the first commit again (a bit suboptimal IMHO).</p> </li> 
         <li> <p><strong>Perform the release</strong></p> 
           <div class="codehilite">
             <pre><code class="language-shell">mvn release:perform
 </code></pre>
-          </div> <p>This will checkout the tag to the target directory, build and package everything and upload the artifacts to the staging repository. Users will download the mirrored release artifacts from machines outside TDF control. Users need to verify that the copy downloaded is identical to the original. Mirrored copies of checksums, KEYS and signature files (.asc and .md5 files) will be present on the mirrors but must never be used for verification. So, all links from the podling website to signatures, sums and <a href="https://github.com/tdf/odftoolkit/blob/master/KEYS">KEYS</a> need to refer to the original documents on GitHub. See release signing guide for more information.</p> </li> 
-        <li> <p><strong>Add the Git tag manually after branch rebase</strong> Push the branch and if the branch is rebased the tag has to be added and pushed on the correct commit manually. For instance for 0.11.0 release the git commands looked like:</p> 
+          </div> <p>"mvn release:perform" will checkout the tag (created by mvn release:prepare) to the target directory, build and package everything and upload the artifacts to the staging repository. Users will download the mirrored release artifacts from machines outside TDF control. Users need to verify that the copy downloaded is identical to the original. Mirrored copies of checksums, KEYS and signature files (.asc and .md5 files) will be present on the mirrors but must never be used for verification. So, all links from the project website to signatures, sums and <a href="https://github.com/tdf/odftoolkit/blob/master/KEYS">KEYS</a> need to refer to the original documents on GitHub. See release signing guide for more information (from Apache).</p> </li> 
+        <li> <p><strong>Add the Git tag manually after branch rebase</strong> Push the branch and if the branch is rebased the tag has to be added and pushed on the correct commit manually. For instance for 0.12.0 release the git commands looked like:</p> 
           <ul> 
-            <li>Adding tag (signed -s, annotated -m, previous commit -a)</li> 
+            <li>Adding tag (signed -s, annotated (unsigned) -a, with message -m)</li> 
           </ul> 
           <div class="codehilite">
-            <pre><code class="language-shell">git tag -s -a v0.11.0 4baf275b33 -m"odftoolkit-0.11.0"
-git push origin v0.11.0
+            <pre><code class="language-shell">git tag -s -a v0.12.0 2920b36c2b -m"odftoolkit-0.12.0"
+git push origin v0.12.0
 </code></pre>
           </div> 
           <ul> 
             <li>Deleting tag</li> 
           </ul> 
           <div class="codehilite">
-            <pre><code class="language-shell">git tag -d v0.11.0
-git push origin --delete v0.11.0
+            <pre><code class="language-shell">git tag -d v0.12.0
+git push origin --delete v0.12.0
 </code></pre>
           </div> </li> 
         <li> <p><strong>What to Do If Something Goes Wrong</strong></p> 
@@ -159,21 +174,21 @@ git push origin :refs/tags/tagName
         <li> <p><strong>Publish Document</strong><br> Publish all of the prepared document on the website and update the download page.</p> </li> 
         <li> <p><strong>Send Announcements</strong><br> The release manager need to send announcements to odf-dev list. The sample looks like:</p> 
           <div class="codehilite">
-            <pre><code class="language-shell">   Subject:[ANNOUNCEMENT] "ODF Toolkit 0.11.0 Release"
+            <pre><code class="language-shell">   Subject:[ANNOUNCEMENT] "ODF Toolkit 0.12.0 Release"
    To: dev@odftoolkit.org
    Hi all,
 
-   The ODF Toolkit team is pleased to announce the release of 0.11.0 (&gt;=JDK 11) supporting ODF 1.2.
+   The ODF Toolkit team is pleased to announce the release of 0.12.0 (&gt;=JDK 11) supporting ODF 1.2.
    The list of changes is available in the release notes[1].
 
    All new ODF Toolkit components (binary, source and JavaDoc bundles) are available as GitHub releases [2].
-   Or in the central Maven repository under group ID "org.odftoolkit" and version "0.11.0" [3,4,5].
+   Or in the central Maven repository under group ID "org.odftoolkit" and version "0.12.0" [3,4,5].
 
    [1] ./ReleaseNotes.html
-   [2] https://github.com/tdf/odftoolkit/releases/tag/v0.11.0
-   [3] https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.11.0/
-   [4] https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.11.0/
-   [5] https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.11.0/
+   [2] https://github.com/tdf/odftoolkit/releases/tag/v0.12.0
+   [3] https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.12.0/
+   [4] https://repo1.maven.org/maven2/org/odftoolkit/odfvalidator/0.12.0/
+   [5] https://repo1.maven.org/maven2/org/odftoolkit/xslt-runner/0.12.0/
 </code></pre>
           </div> </li> 
       </ol> 
