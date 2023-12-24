@@ -27,7 +27,7 @@
         <groupId>org.apache</groupId>
         <artifactId>apache</artifactId>
         <version>31</version>
-        <relativePath />
+        <relativePath/>
     </parent>
     <properties>
         <javadoc.bottom>Copyright © {inceptionYear}–2018 Apache Software Foundation; Copyright © 2018–{currentYear} {organizationName}. All rights reserved.</javadoc.bottom>
@@ -64,7 +64,7 @@
             <dependency>
                 <groupId>commons-validator</groupId>
                 <artifactId>commons-validator</artifactId>
-                <version>1.7</version>
+                <version>1.8.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-fileupload</groupId>
@@ -611,89 +611,89 @@
                                 <configuration>
                                     <target>
                                         <!-- MAKE 3 DIRECTORIES -->
-                                        <mkdir dir="${release.dir.bin}" />
-                                        <mkdir dir="${release.dir.doc}" />
-                                        <mkdir dir="${release.dir.src}" />
-                                        <mkdir dir="${release.tmpdir.bin}" />
-                                        <mkdir dir="${release.tmpdir.doc}" />
-                                        <mkdir dir="${release.tmpdir.src}" />
+                                        <mkdir dir="${release.dir.bin}"/>
+                                        <mkdir dir="${release.dir.doc}"/>
+                                        <mkdir dir="${release.dir.src}"/>
+                                        <mkdir dir="${release.tmpdir.bin}"/>
+                                        <mkdir dir="${release.tmpdir.doc}"/>
+                                        <mkdir dir="${release.tmpdir.src}"/>
                                         <!-- COLLECT FILES OF BUNDLES -->
                                         <!-- collect binary artefacts -->
                                         <copy todir="${release.tmpdir.bin}" flatten="true">
                                             <fileset dir="${basedir}">
-                                                <include name="*.txt" />
-                                                <include name="KEYS" />
-                                                <include name="NOTICE" />
-                                                <include name="LICENSE" />
-                                                <include name="odfdom/target/*.jar" />
-                                                <include name="simple/target/*.jar" />
-                                                <include name="validator/target/*.war" />
-                                                <include name="validator/target/*.jar" />
-                                                <include name="xslt-runner/target/*.jar" />
-                                                <include name="xslt-runner-task/target/*.jar" />
-                                                <exclude name="**/target/**-javadoc.jar" />
-                                                <exclude name="**/target/**-sources.jar" />
+                                                <include name="*.txt"/>
+                                                <include name="KEYS"/>
+                                                <include name="NOTICE"/>
+                                                <include name="LICENSE"/>
+                                                <include name="odfdom/target/*.jar"/>
+                                                <include name="simple/target/*.jar"/>
+                                                <include name="validator/target/*.war"/>
+                                                <include name="validator/target/*.jar"/>
+                                                <include name="xslt-runner/target/*.jar"/>
+                                                <include name="xslt-runner-task/target/*.jar"/>
+                                                <exclude name="**/target/**-javadoc.jar"/>
+                                                <exclude name="**/target/**-sources.jar"/>
                                             </fileset>
                                         </copy>
                                         <!-- collect documentation artefacts - without directory hierarchy -->
                                         <copy todir="${release.tmpdir.doc}" flatten="true">
                                             <fileset dir="${basedir}">
-                                                <include name="*.txt" />
-                                                <include name="KEYS" />
-                                                <include name="NOTICE" />
-                                                <include name="LICENSE" />
-                                                <include name="**/target/*-javadoc.jar" />
+                                                <include name="*.txt"/>
+                                                <include name="KEYS"/>
+                                                <include name="NOTICE"/>
+                                                <include name="LICENSE"/>
+                                                <include name="**/target/*-javadoc.jar"/>
                                             </fileset>
                                         </copy>
                                         <!-- collect documentation artefacts - keeping directory hierarchy -->
                                         <copy todir="${release.tmpdir.doc}/site">
-                                            <fileset dir="${basedir}/docs" />
+                                            <fileset dir="${basedir}/docs"/>
                                         </copy>
                                         <!-- collect source code -->
                                         <copy todir="${release.tmpdir.src}">
                                             <fileset dir="${basedir}">
-                                                <include name="**" />
-                                                <exclude name="**/target/**" />
-                                                <exclude name="**/.vscode/**" />
-                                                <exclude name="**/.project" />
-                                                <exclude name="**/.classpath" />
-                                                <exclude name="**/.nb-configuration.xml" />
-                                                <exclude name="**/.settings/**" />
-                                                <exclude name="**/.classes/**" />
-                                                <exclude name="**/.idea" />
+                                                <include name="**"/>
+                                                <exclude name="**/target/**"/>
+                                                <exclude name="**/.vscode/**"/>
+                                                <exclude name="**/.project"/>
+                                                <exclude name="**/.classpath"/>
+                                                <exclude name="**/.nb-configuration.xml"/>
+                                                <exclude name="**/.settings/**"/>
+                                                <exclude name="**/.classes/**"/>
+                                                <exclude name="**/.idea"/>
                                             </fileset>
                                         </copy>
                                         <!-- ZIP FILES to 3 BUNDLES -->
-                                        <zip basedir="${release.tmpdir.bin}" destfile="${basedir}/target/${release.zip.bin}" />
-                                        <zip basedir="${release.tmpdir.doc}" destfile="${basedir}/target/${release.zip.doc}" />
-                                        <zip basedir="${release.tmpdir.src}" destfile="${basedir}/target/${release.zip.src}" />
+                                        <zip basedir="${release.tmpdir.bin}" destfile="${basedir}/target/${release.zip.bin}"/>
+                                        <zip basedir="${release.tmpdir.doc}" destfile="${basedir}/target/${release.zip.doc}"/>
+                                        <zip basedir="${release.tmpdir.src}" destfile="${basedir}/target/${release.zip.src}"/>
                                         <!-- SIGN 3 BUNDLES -->
                                         <checksum algorithm="SHA-512" fileext=".sha">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*.zip" />
-                                                <include name="*.tar.gz" />
-                                                <include name="*.tar.bz2" />
+                                                <include name="*.zip"/>
+                                                <include name="*.tar.gz"/>
+                                                <include name="*.tar.bz2"/>
                                             </fileset>
                                         </checksum>
                                         <!-- MOVE THE 3 BUNDLES -->
                                         <move todir="${release.dir.bin}">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-bin.*" />
+                                                <include name="*-bin.*"/>
                                             </fileset>
                                         </move>
                                         <move todir="${release.dir.doc}">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-doc.*" />
+                                                <include name="*-doc.*"/>
                                             </fileset>
                                         </move>
                                         <move todir="${release.dir.src}">
                                             <fileset dir="${basedir}/target">
-                                                <include name="*-src.*" />
+                                                <include name="*-src.*"/>
                                             </fileset>
                                         </move>
                                         <!-- DELETE TEMPORARY DIRECTORIES>-->
-                                        <delete quiet="true" dir="${basedir}/target/archive-tmp" />
-                                        <delete quiet="true" dir="${release.tmpdir}" />
+                                        <delete quiet="true" dir="${basedir}/target/archive-tmp"/>
+                                        <delete quiet="true" dir="${release.tmpdir}"/>
                                         <echo>*** The release has been prepared in:  ${release.dir} ***</echo>
                                     </target>
                                 </configuration>
