@@ -103,7 +103,7 @@ public class MSVRunTimeDumpTest {
    *
    * @return the MSVExpressionTree serialized into a String
    */
-  public static String dumpMSVExpressionTree(Expression rootExpression) throws Exception {
+  private static String dumpMSVExpressionTree(Expression rootExpression) throws Exception {
     MSVExpressionIterator iterator = new MSVExpressionIterator(rootExpression);
     StringBuilder builder = new StringBuilder();
     while (iterator.hasNext()) {
