@@ -92,6 +92,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
                     <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
                 </configuration>
             </plugin>

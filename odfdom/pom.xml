@@ -187,6 +187,7 @@
                     <excludeProperties>
                         <excludeProperty>git.*.user.*</excludeProperty>
                     </excludeProperties>
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
                     <prefix>git</prefix>
                     <verbose>true</verbose>
                     <skipPoms>false</skipPoms>
