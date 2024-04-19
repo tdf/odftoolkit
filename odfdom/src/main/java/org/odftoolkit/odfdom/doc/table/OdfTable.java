@@ -2276,16 +2276,27 @@ public class OdfTable {
   List<CellCoverInfo> getCellCoverInfos(int nStartCol, int nStartRow, int nEndCol, int nEndRow) {
     List<CellCoverInfo> coverList = new ArrayList<CellCoverInfo>();
     int nColSpan, nRowSpan;
-    for (int i = nStartCol; i < nEndCol + 1; i++) {
-      for (int j = nStartRow; j < nEndRow + 1; j++) {
-        OdfTableCell cell = getCellByPosition(i, j);
-        if (cell != null) {
-          nColSpan = cell.getColumnSpannedNumber();
-          nRowSpan = cell.getRowSpannedNumber();
-          if ((nColSpan > 1) || (nRowSpan > 1)) {
-            coverList.add(new CellCoverInfo(i, j, nColSpan, nRowSpan));
+    for (int i = nStartRow; i < nEndRow + 1; ) {
+      OdfTableRow row = getRowByIndex(i);
+      if (row != null) {
+        for (int j = nStartCol; j < nEndCol + 1; ) {
+          OdfTableCell cell = getCellByPosition(j, i);
+          if (cell != null) {
+            nColSpan = cell.getColumnSpannedNumber();
+            nRowSpan = cell.getRowSpannedNumber();
+            if ((nColSpan > 1) || (nRowSpan > 1)) {
+              for (int k = 0; k < row.getRowsRepeatedNumber(); k++) {
+                coverList.add(new CellCoverInfo(j, i + k, nColSpan, nRowSpan));
+              }
+            }
+            j += cell.getColumnsRepeatedNumber();
+          } else {
+            j++;
           }
         }
+        i += row.getRowsRepeatedNumber();
+      } else {
+        i++;
       }
     }
     return coverList;
