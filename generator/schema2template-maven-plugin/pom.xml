@@ -78,7 +78,7 @@
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-tools</artifactId>
-            <version>3.11.0</version>
+            <version>3.12.0</version>
             <type>pom</type>
         </dependency>
         <dependency>
