@@ -2022,7 +2022,7 @@ public class OdfTable {
    * @see #getColumnByIndex(int)
    * @see #getRowByIndex(int)
    */
-  protected void setCellStyleInheritance(boolean isEnabled) {
+  public void setCellStyleInheritance(boolean isEnabled) {
     mIsCellStyleInheritance = isEnabled;
   }
   ////////////////////////////////////////////////////////////////////////////////////////////
