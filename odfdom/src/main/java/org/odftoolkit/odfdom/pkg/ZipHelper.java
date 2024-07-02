@@ -87,7 +87,6 @@ class ZipHelper {
       }
       if (zipEntry != null) {
         firstEntryName = zipEntry.getName();
-        addZipEntry(zipEntry, zipEntries);
         while (zipEntry != null) {
           addZipEntry(zipEntry, zipEntries);
           try {
@@ -127,6 +126,15 @@ class ZipHelper {
               .error(
                   new OdfValidationException(
                       OdfPackageConstraint.PACKAGE_ENTRY_USING_INVALID_COMPRESSION,
+                      mPackage.getBaseURI(),
+                      filePath));
+        }
+        if (zipEntries.containsKey(filePath)) {
+          mPackage
+              .getErrorHandler()
+              .fatalError(
+                  new OdfValidationException(
+                      OdfPackageConstraint.PACKAGE_ENTRY_DUPLICATE,
                       mPackage.getBaseURI(),
                       filePath));
         }
