@@ -398,6 +398,112 @@ public class PackageTest {
   }
 
   @Test
+  public void validationTest5() {
+    // TESTDOC5: duplicate ZIP entries
+    Map<ValidationConstraint, Integer> expectedFatalErrors =
+        new HashMap<ValidationConstraint, Integer>();
+    expectedFatalErrors.put(OdfPackageConstraint.PACKAGE_ENTRY_DUPLICATE, 1);
+    ErrorHandlerStub handler = new ErrorHandlerStub(null, null, expectedFatalErrors);
+    handler.setTestFilePath("duplicate-files.odt");
+
+    try {
+      try {
+        OdfPackage.loadPackage(
+            new File(ResourceUtilities.getAbsoluteInputPath(handler.getTestFilePath())),
+            null,
+            handler);
+        Assert.fail();
+      } catch (Exception e) {
+        String errorMsg = OdfPackageConstraint.PACKAGE_ENTRY_DUPLICATE.getMessage();
+        if (e.getMessage().indexOf(errorMsg.substring(0, errorMsg.indexOf("%2$s"))) == -1) {
+          Assert.fail();
+        }
+      }
+    } catch (Exception ex) {
+      LOG.log(Level.SEVERE, null, ex);
+      Assert.fail(ex.toString());
+    }
+    handler.validate();
+  }
+
+  @Test
+  public void validationTest6() {
+    // TESTDOC6: Info-ZIP Unicode Path Extra Field with different name
+    Map<ValidationConstraint, Integer> expectedErrors =
+        new HashMap<ValidationConstraint, Integer>();
+    // depending on setUseUnicodeExtraFields this would be reported as
+    // MANIFEST_DOES_NOT_LIST_FILE or as PACKAGE_ENTRY_DUPLICATE
+    expectedErrors.put(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, 1);
+    ErrorHandlerStub handler = new ErrorHandlerStub(null, expectedErrors, null);
+    handler.setTestFilePath("unicode-path.odt");
+
+    try {
+      OdfPackage pkg =
+          OdfPackage.loadPackage(
+              new File(ResourceUtilities.getAbsoluteInputPath(handler.getTestFilePath())),
+              null,
+              handler);
+      Assert.assertNotNull(pkg);
+    } catch (Exception ex) {
+      LOG.log(Level.SEVERE, null, ex);
+      Assert.fail(ex.toString());
+    }
+    handler.validate();
+  }
+
+  @Test
+  public void validationTest7() {
+    // TESTDOC7: invalid file name
+    Map<ValidationConstraint, Integer> expectedFatalErrors =
+        new HashMap<ValidationConstraint, Integer>();
+    expectedFatalErrors.put(OdfPackageConstraint.PACKAGE_ENTRY_INVALID_FILE_NAME, 1);
+    ErrorHandlerStub handler = new ErrorHandlerStub(null, null, expectedFatalErrors);
+    handler.setTestFilePath("slash.odt");
+
+    try {
+      try {
+        OdfPackage.loadPackage(
+            new File(ResourceUtilities.getAbsoluteInputPath(handler.getTestFilePath())),
+            null,
+            handler);
+        Assert.fail();
+      } catch (Exception e) {
+        String errorMsg = OdfPackageConstraint.PACKAGE_ENTRY_INVALID_FILE_NAME.getMessage();
+        if (e.getMessage().indexOf(errorMsg.substring(0, errorMsg.indexOf("%2$s"))) == -1) {
+          Assert.fail();
+        }
+      }
+    } catch (Exception ex) {
+      LOG.log(Level.SEVERE, null, ex);
+      Assert.fail(ex.toString());
+    }
+    handler.validate();
+  }
+
+  @Test
+  public void validationTest8() {
+    // TESTDOC8: 2 concatenated zips
+    Map<ValidationConstraint, Integer> expectedErrors =
+        new HashMap<ValidationConstraint, Integer>();
+    expectedErrors.put(OdfPackageConstraint.MIMETYPE_NOT_FIRST_IN_PACKAGE, 1);
+    ErrorHandlerStub handler = new ErrorHandlerStub(null, expectedErrors, null);
+    handler.setTestFilePath("two-zips.odt");
+
+    try {
+      OdfPackage pkg =
+          OdfPackage.loadPackage(
+              new File(ResourceUtilities.getAbsoluteInputPath(handler.getTestFilePath())),
+              null,
+              handler);
+      Assert.assertNotNull(pkg);
+    } catch (Exception ex) {
+      LOG.log(Level.SEVERE, null, ex);
+      Assert.fail(ex.toString());
+    }
+    handler.validate();
+  }
+
+  @Test
   public void testPackagePassword() {
     File tmpFile = ResourceUtilities.getTestOutputFile("PackagePassword.ods");
     OdfDocument doc = null;
