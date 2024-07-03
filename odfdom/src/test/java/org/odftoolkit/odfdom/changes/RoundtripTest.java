@@ -88,6 +88,10 @@ public class RoundtripTest extends RoundtripTestHelper {
             && !filePath.contains("textTestTemplate.ott")
             && !filePath.contains("indentTest.odt")
             && !filePath.contains("testInvalidPkg")
+            && !filePath.contains("duplicate-files.odt")
+            && !filePath.contains("unicode-path.odt")
+            && !filePath.contains("slash.odt")
+            && !filePath.contains("two-zips.odt")
             && !filePath.contains("BigTable.odt") // too slow 4 now
             && !filePath.endsWith("PasswordProtected.odt")) {
           //						!filePath.contains("Text1.odt")
