@@ -497,7 +497,11 @@ public class OdfPackage implements Closeable {
     StreamHelper.transformStream(odfStream, tempBuf);
     byte[] mTempByteBuf = tempBuf.toByteArray();
     tempBuf.close();
-    if (mTempByteBuf.length < 3) {
+    if (mTempByteBuf.length < 4
+        || mTempByteBuf[0] != 'P'
+        || mTempByteBuf[1] != 'K'
+        || mTempByteBuf[2] != 3
+        || mTempByteBuf[3] != 4) {
       OdfValidationException ve =
           new OdfValidationException(OdfPackageConstraint.PACKAGE_IS_NO_ZIP, getBaseURI());
       if (mErrorHandler != null) {

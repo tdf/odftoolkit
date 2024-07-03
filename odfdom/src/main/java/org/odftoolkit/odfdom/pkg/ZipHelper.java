@@ -23,19 +23,15 @@
  */
 package org.odftoolkit.odfdom.pkg;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.zip.ZipException;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
-import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.compress.archivers.zip.ZipFile;
+import org.apache.commons.compress.utils.SeekableInMemoryByteChannel;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
@@ -51,14 +47,12 @@ class ZipHelper {
     mPackage = pkg;
   }
 
-  public ZipHelper(OdfPackage pkg, byte[] buffer) {
+  public ZipHelper(OdfPackage pkg, byte[] buffer) throws IOException {
     mZipBuffer = buffer;
-    mZipFile = null;
+    SeekableInMemoryByteChannel c = new SeekableInMemoryByteChannel(mZipBuffer);
+    mZipFile =
+        new ZipFile.Builder().setSeekableByteChannel(c).setUseUnicodeExtraFields(false).get();
     mPackage = pkg;
-  }
-
-  public static ZipArchiveInputStream createZipInputStream(InputStream is) {
-    return new ZipArchiveInputStream(is, StandardCharsets.UTF_8.toString(), true, true);
   }
 
   String entriesToMap(Map<String, ZipArchiveEntry> zipEntries) throws IOException, SAXException {
@@ -76,40 +70,6 @@ class ZipHelper {
           }
         }
       }
-    } else {
-      ZipArchiveInputStream inputStream =
-          createZipInputStream(new ByteArrayInputStream(mZipBuffer));
-      ZipArchiveEntry zipEntry = null;
-      try {
-        zipEntry = inputStream.getNextZipEntry();
-      } catch (ZipException e) {
-        // Unit tests expect us to return an empty map in this case.
-      }
-      if (zipEntry != null) {
-        firstEntryName = zipEntry.getName();
-        while (zipEntry != null) {
-          addZipEntry(zipEntry, zipEntries);
-          try {
-            zipEntry = inputStream.getNextZipEntry();
-          } catch (java.util.zip.ZipException e) {
-            if (e.getMessage().contains("only DEFLATED entries can have EXT descriptor")) {
-              Logger.getLogger(ZipHelper.class.getName())
-                  .finer("ZIP seems to contain encoded parts!");
-              throw e;
-            }
-            // JDK 6 -- the try/catch is workaround for a specific JDK 5 only problem
-            if (!e.getMessage().contains("missing entry name")
-                && !"1.5.0".equals(System.getProperty("Java.version"))) {
-              Logger.getLogger(ZipHelper.class.getName()).finer("ZIP ENTRY not found");
-              throw e;
-            }
-            // ToDo: Error: "only DEFLATED entries can have EXT descriptor"
-            // ZipInputStream does not expect (and does not know how to handle) an EXT descriptor
-            // when the associated data was not DEFLATED (i.e. was stored uncompressed, as-is).
-          }
-        }
-      }
-      inputStream.close();
     }
     return firstEntryName;
   }
@@ -149,37 +109,15 @@ class ZipHelper {
     if (mZipFile != null) {
       return mZipFile.getInputStream(entry);
     } else {
-      ZipArchiveInputStream inputStream =
-          createZipInputStream(new ByteArrayInputStream(mZipBuffer));
-      ZipArchiveEntry zipEntry = inputStream.getNextZipEntry();
-      while (zipEntry != null) {
-        if (zipEntry.getName().equalsIgnoreCase(entry.getName())) {
-          return readAsInputStream(inputStream);
-        }
-        zipEntry = inputStream.getNextZipEntry();
-      }
       return null;
     }
-  }
-
-  private InputStream readAsInputStream(ZipArchiveInputStream inputStream) throws IOException {
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    if (outputStream != null) {
-      byte[] buf = new byte[4096];
-      int r = 0;
-      while ((r = inputStream.read(buf, 0, 4096)) > -1) {
-        outputStream.write(buf, 0, r);
-      }
-      inputStream.close();
-    }
-    return new ByteArrayInputStream(outputStream.toByteArray());
   }
 
   void close() throws IOException {
     if (mZipFile != null) {
       mZipFile.close();
-    } else {
-      mZipBuffer = null;
+      mZipFile = null;
     }
+    mZipBuffer = null;
   }
 }
