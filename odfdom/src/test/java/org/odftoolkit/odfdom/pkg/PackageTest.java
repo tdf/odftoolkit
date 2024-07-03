@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -82,6 +83,10 @@ public class PackageTest {
 
   public PackageTest() {}
 
+  public static ZipArchiveInputStream createZipInputStream(InputStream is) {
+    return new ZipArchiveInputStream(is, StandardCharsets.UTF_8.toString(), true, true);
+  }
+
   @Test
   public void testNotCompressImages() throws Exception {
     // create test presentation
@@ -95,7 +100,7 @@ public class PackageTest {
 
     // test if the image is not compressed
     ZipArchiveInputStream zinput =
-        ZipHelper.createZipInputStream(ResourceUtilities.getTestOutputAsStream(IMAGE_PRESENTATION));
+        createZipInputStream(ResourceUtilities.getTestOutputAsStream(IMAGE_PRESENTATION));
     ZipArchiveEntry entry = zinput.getNextZipEntry();
     while (entry != null) {
       String entryName = entry.getName();
