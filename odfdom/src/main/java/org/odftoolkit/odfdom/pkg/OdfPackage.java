@@ -738,7 +738,8 @@ public class OdfPackage implements Closeable {
     if (mimetypeEntry.getExtra() != null && mimetypeEntry.getExtra().length > 0) {
       logValidationError(OdfPackageConstraint.MIMETYPE_HAS_EXTRA_FIELD, getBaseURI());
     }
-    if (!OdfFile.MEDIA_TYPE.getPath().equals(firstEntryName)) {
+    if (!OdfFile.MEDIA_TYPE.getPath().equals(firstEntryName)
+        || mimetypeEntry.getDataOffset() != 38) {
       logValidationError(OdfPackageConstraint.MIMETYPE_NOT_FIRST_IN_PACKAGE, getBaseURI());
     }
   }
