@@ -1322,7 +1322,6 @@ public class OdfPackage implements Closeable {
           logValidationError(OdfPackageConstraint.MANIFEST_WITH_EMPTY_PATH, getBaseURI());
         }
       } else {
-        path = normalizePath(path);
         OdfFileEntry currentFileEntry = entries.get(path);
         if (currentFileEntry == null) {
           currentFileEntry = new OdfFileEntry(fileEntryEle);
