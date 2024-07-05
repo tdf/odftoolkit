@@ -27,13 +27,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.apache.commons.compress.utils.SeekableInMemoryByteChannel;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 class ZipHelper {
 
@@ -74,33 +73,28 @@ class ZipHelper {
     return firstEntryName;
   }
 
-  private void addZipEntry(ZipArchiveEntry zipEntry, Map<String, ZipArchiveEntry> zipEntries) {
+  private void addZipEntry(ZipArchiveEntry zipEntry, Map<String, ZipArchiveEntry> zipEntries)
+      throws SAXException {
     String filePath = OdfPackage.normalizePath(zipEntry.getName());
     ErrorHandler errorHandler = mPackage.getErrorHandler();
-    if (errorHandler != null) {
-      try {
-        int zipMethod = zipEntry.getMethod();
-        if (zipMethod != ZipArchiveEntry.STORED && zipMethod != ZipArchiveEntry.DEFLATED) {
-          mPackage
-              .getErrorHandler()
-              .error(
-                  new OdfValidationException(
-                      OdfPackageConstraint.PACKAGE_ENTRY_USING_INVALID_COMPRESSION,
-                      mPackage.getBaseURI(),
-                      filePath));
-        }
-        if (zipEntries.containsKey(filePath)) {
-          mPackage
-              .getErrorHandler()
-              .fatalError(
-                  new OdfValidationException(
-                      OdfPackageConstraint.PACKAGE_ENTRY_DUPLICATE,
-                      mPackage.getBaseURI(),
-                      filePath));
-        }
-      } catch (SAXException ex) {
-        Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+    int zipMethod = zipEntry.getMethod();
+    if (zipMethod != ZipArchiveEntry.STORED && zipMethod != ZipArchiveEntry.DEFLATED) {
+      if (errorHandler != null) {
+        errorHandler.error(
+            new OdfValidationException(
+                OdfPackageConstraint.PACKAGE_ENTRY_USING_INVALID_COMPRESSION,
+                mPackage.getBaseURI(),
+                filePath));
       }
+    }
+    if (zipEntries.containsKey(filePath)) {
+      SAXParseException e =
+          new OdfValidationException(
+              OdfPackageConstraint.PACKAGE_ENTRY_DUPLICATE, mPackage.getBaseURI(), filePath);
+      if (errorHandler != null) {
+        errorHandler.fatalError(e);
+      }
+      throw e;
     }
     zipEntries.put(filePath, zipEntry);
   }
