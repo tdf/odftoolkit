@@ -40,6 +40,8 @@ public enum OdfPackageConstraint implements ValidationConstraint {
   PACKAGE_ENTRY_USING_INVALID_COMPRESSION(
       "The compression method of the ZIP entry '%2$s' is not allowed within the%1$s ODF package file!"),
   PACKAGE_ENTRY_DUPLICATE("Duplicate ZIP entry '%2$s'!"),
+  /** see PKWARE APPNOTE.TXT, 4.4.17 file name */
+  PACKAGE_ENTRY_INVALID_FILE_NAME("ZIP entry with invalid file name '%2$s'!"),
   /** The ODF package shall contain the \"/META-INF/manifest.xml\" file. */
   MANIFEST_NOT_IN_PACKAGE(
       "The ODF package%1$s shall contain the '" + OdfFile.MANIFEST.getPath() + "' file!"),

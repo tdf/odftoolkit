@@ -73,9 +73,43 @@ class ZipHelper {
     return firstEntryName;
   }
 
+  private boolean isValidZipEntryFileName(final String filePath) {
+    if (filePath.length() == 0) {
+      return false;
+    }
+    if (1 < filePath.length() && filePath.charAt(1) == ':') {
+      return false;
+    }
+    int dots = 0;
+    for (int i = 0; i < filePath.length(); ++i) {
+      final char c = filePath.charAt(i);
+      switch (c) {
+        case '\\':
+          return false;
+        case '.':
+          if (dots != -1) {
+            ++dots;
+          }
+          break;
+        case '/':
+          if (dots == 1 || dots == 2 || i == 0) {
+            return false;
+          }
+          dots = 0;
+          break;
+        default:
+          dots = -1;
+          if (c < 32 || (0xD800 <= c && c <= 0xDFFFF)) {
+            return false;
+          }
+      }
+    }
+    return dots != 1 && dots != 2;
+  }
+
   private void addZipEntry(ZipArchiveEntry zipEntry, Map<String, ZipArchiveEntry> zipEntries)
       throws SAXException {
-    String filePath = OdfPackage.normalizePath(zipEntry.getName());
+    String filePath = zipEntry.getName();
     ErrorHandler errorHandler = mPackage.getErrorHandler();
     int zipMethod = zipEntry.getMethod();
     if (zipMethod != ZipArchiveEntry.STORED && zipMethod != ZipArchiveEntry.DEFLATED) {
@@ -86,6 +120,17 @@ class ZipHelper {
                 mPackage.getBaseURI(),
                 filePath));
       }
+    }
+    if (!isValidZipEntryFileName(filePath)) {
+      SAXParseException e =
+          new OdfValidationException(
+              OdfPackageConstraint.PACKAGE_ENTRY_INVALID_FILE_NAME,
+              mPackage.getBaseURI(),
+              filePath);
+      if (errorHandler != null) {
+        errorHandler.fatalError(e);
+      }
+      throw e;
     }
     if (zipEntries.containsKey(filePath)) {
       SAXParseException e =

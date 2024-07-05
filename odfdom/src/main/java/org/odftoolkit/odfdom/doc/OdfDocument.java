@@ -593,7 +593,6 @@ public abstract class OdfDocument extends OdfSchemaDocument {
           if (wantedMediaString != null) {
             // test if the desired mediatype matches the current
             if (entryMediaType.equals(wantedMediaString)) {
-              path = normalizeDocumentPath(path);
               embeddedObjectsMap.put(path, (OdfDocument) mPackage.loadDocument(path));
             }
           } else {
