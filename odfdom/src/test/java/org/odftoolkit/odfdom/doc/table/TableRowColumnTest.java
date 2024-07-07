@@ -18,6 +18,9 @@
  */
 package org.odftoolkit.odfdom.doc.table;
 
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -220,6 +223,18 @@ public class TableRowColumnTest {
       }
     }
   }
+
+    @Test
+    public void testRowDeletionText() {
+        try {
+            OdfTextDocument document = (OdfTextDocument) OdfTextDocument.loadDocument(
+                    ResourceUtilities.getAbsoluteInputPath("tableRowDeletionTest.odt"));
+            OdfTable pTable = document.getTableList(true).get(0);
+            pTable.removeRowsByIndex(2, 1);
+        } catch (Throwable t) {
+            Assert.fail("No problem should occure during deletion of Row");
+        }
+    }
 
   private void saveods(String name) {
     try {
