@@ -871,7 +871,6 @@ public class OdfTableRow {
         if (coverCell != null) {
           coverCell.setRowSpannedNumber(coverCell.getRowSpannedNumber() - getRowsRepeatedNumber());
         }
-        getOdfElement().removeChild(cell.getOdfElement());
       } else {
         if (cell.getRowSpannedNumber() > 1) // cell is not a cover cell, and it span more rows
         {
