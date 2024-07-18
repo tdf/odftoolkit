@@ -364,7 +364,7 @@ class RoundtripTestHelper {
       if (initialRefOpsFile.exists()) {
         String initialRefOps = ResourceUtilities.loadFileAsString(initialRefOpsFile);
         LOG.log(Level.FINEST, "The original ops from testFile are:{0}", initialRefOps);
-        if (!initialTestOps.equals(initialRefOps)) {
+        if (!initialTestOps.equals(initialRefOps.replaceAll("\\r\\n?", "\n"))) {
           LOG.log(Level.SEVERE, "Ups! The original ops from testFile had been:{0}", initialRefOps);
           LOG.log(Level.SEVERE, "But The new ops from testFile are :{0}", initialTestOps);
           initialComparisonFailure = true;
@@ -615,7 +615,7 @@ class RoundtripTestHelper {
         // character for list bullets
         if (!JsonOperationNormalizer.asString(reloadedOps, Boolean.TRUE)
             .replace(",{\"name\"", ",\n{\"name\"")
-            .equals(referenceOpsFromFile)) {
+            .equals(referenceOpsFromFile.replaceAll("\\r\\n?", "\n"))) {
           LOG.log(Level.SEVERE, "The reference ops are:{0}", referenceOpsFromFile);
           reloadedComparisonFailure = true;
         }
