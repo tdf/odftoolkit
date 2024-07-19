@@ -57,22 +57,21 @@
       <p>The release artifacts for each project are deployed to the Maven repository. Making release artefacts should follow the following steps:</p> 
       <h3 id="only-once-your-configuration-setup">Only once your configuration Setup</h3> 
       <ol> 
-        <li><strong>Maven Repro Access</strong><br>Make sure you have access to Maven repro via our <a href="https://issues.sonatype.org/browse/OSSRH-960">Sonatype JIRA issue</a>. Add your <a href="https://oss.sonatype.org/#profile;User%20Token">user token</a> (to be found your profile of <a href="https://oss.sonatype.org">https://oss.sonatype.org</a>) to your local <a href="https://maven.apache.org/settings.html">&lt;USER_HOME&gt;/.m2/settings.xml</a> file.</li> 
+        <li><strong>Maven Repro Access</strong><br>Make sure you have access to Maven repro via our <a href="https://issues.sonatype.org/browse/OSSRH-960">Sonatype JIRA issue</a>. After this, you should be able to log in at <a href="https://oss.sonatype.org/#welcome">https://oss.sonatype.org/#welcome</a>. When logged in, will find in your profile a <a href="https://oss.sonatype.org/#profile;User%20Token">user token</a>. This token along with the according user name have to be added to your local <a href="https://maven.apache.org/settings.html">&lt;USER_HOME&gt;/.m2/settings.xml</a> file. Something equivalent to:</li> 
       </ol> 
-      <p>Something equivalent to:</p> 
       <div class="codehilite">
         <pre><code class="language-shell">    &lt;server&gt;
       &lt;id&gt;ossrh&lt;/id&gt;
-      &lt;username&gt;FOO&lt;/username&gt;
-      &lt;password&gt;BAR&lt;/password&gt;&lt;!-- being the given token --&gt;
+      &lt;username&gt;YOUR_USER_NAME&lt;/username&gt;&lt;!-- from your profile --&gt;
+      &lt;password&gt;YOUR_PASSWORD&lt;/password&gt;&lt;!-- being the given token --&gt;
     &lt;/server&gt;
 </code></pre>
       </div> 
-      <p>After this, you should be able to log in at <a href="https://oss.sonatype.org/#welcome">https://oss.sonatype.org/#welcome</a>.</p> 
       <ol start="2"> 
-        <li> <p><strong>Install GNU PG</strong><br>Install in your OS. <a href="https://dzone.com/articles/publish-your-artifacts-to-maven-central">See details in tutorial 'publish your artifacts to Maven'</a></p> </li> 
-        <li> <p><strong>Configure GNU PG</strong><br>Add your GNU and JIRA credentials to your local <a href="https://maven.apache.org/settings.html">&lt;USER_HOME&gt;/.m2/settings.xml</a>. See <a href="docs/settings-example.xml">our example settings.xml</a> and search &amp; replace the placeholders starting with 'YOUR_'.</p> </li> 
+        <li> <p><strong>Install GNU PG</strong><br> GNU PG is necessary to sign the packages of our release. <br>Install for your OS. <a href="https://dzone.com/articles/publish-your-artifacts-to-maven-central">See details in tutorial 'publish your artifacts to Maven'</a></p> </li> 
+        <li> <p><strong>Configure GNU PG</strong><br>Add your GNU credentials (and you might as well your GIT credentials) to your local <a href="https://maven.apache.org/settings.html">&lt;USER_HOME&gt;/.m2/settings.xml</a>.</p> </li> 
       </ol> 
+      <p><strong>NOTE:</strong><br> See <a href="docs/settings-example.xml">our example settings.xml</a> and search &amp; replace the placeholders starting with 'YOUR_'.</p> 
       <h3 id="recipe-for-every-release">Recipe for every release</h3> 
       <p>There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT will be exchanged by a timestamp or the final release.</p> 
       <h4 id="snapshot-release">Snapshot Release</h4> 
