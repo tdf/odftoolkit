@@ -11,7 +11,19 @@ The release artifacts for each project are deployed to the Maven repository. Mak
 
 ### Only once your configuration Setup
 
-1. **Maven Repro Access**</br>Make sure you have access to Maven repro via our [Sonatype JIRA issue](https://issues.sonatype.org/browse/OSSRH-960). Add your userID & password to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html). In the end, you should be able to log in at <https://oss.sonatype.org/#welcome>.
+1. **Maven Repro Access**</br>Make sure you have access to Maven repro via our [Sonatype JIRA issue](https://issues.sonatype.org/browse/OSSRH-960). Add your [user token](https://oss.sonatype.org/#profile;User%20Token) (to be found your profile of <https://oss.sonatype.org>) to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html) file.
+
+Something equivalent to:
+
+```shell
+    <server>
+      <id>ossrh</id>
+      <username>FOO</username>
+      <password>BAR</password><!-- being the given token -->
+    </server>
+   ```
+
+After this, you should be able to log in at <https://oss.sonatype.org/#welcome>.
 
 2. **Install GNU PG**</br>Install in your OS. [See details in tutorial 'publish your artifacts to Maven'](https://dzone.com/articles/publish-your-artifacts-to-maven-central)
 
