@@ -35,6 +35,7 @@ import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.element.office.OfficeMasterStylesElement;
+import org.odftoolkit.odfdom.dom.element.office.OfficeSpreadsheetElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleFooterElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleFooterStyleElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderElement;
@@ -1106,6 +1107,34 @@ public class TableTest {
       }
     } catch (Exception e) {
       Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail("testGetCellAt failed");
+    }
+  }
+
+  @Test
+  public void writeCellDataAndCloneSheet() {
+    try {
+		OdfSpreadsheetDocument ods = 
+          (OdfSpreadsheetDocument)
+              OdfSpreadsheetDocument.loadDocument(
+                  ResourceUtilities.getAbsoluteInputPath("template.ots"));
+		
+		ods.getSpreadsheetTables().get(0).appendRow();
+		ods.getSpreadsheetTables().get(0).getRowByIndex(5).getCellByIndex(0).setStringValue("Row3");
+		ods.getSpreadsheetTables().get(0).getRowByIndex(5).getCellByIndex(1).setDateValue(Calendar.getInstance());
+		ods.getSpreadsheetTables().get(0).getRowByIndex(5).getCellByIndex(2).setDoubleValue(21.59);
+		ods.getSpreadsheetTables().get(0).getRowByIndex(5).getCellByIndex(3).setDoubleValue(12.0);
+		ods.getSpreadsheetTables().get(0).getRowByIndex(5).getCellByIndex(4).setDoubleValue(0.000005);
+		ods.getSpreadsheetTables().get(0).getRowByIndex(5).getCellByIndex(5).setStringValue("Comment3");
+        OfficeSpreadsheetElement contentRoot = ods.getContentRoot();
+		TableTableElement table = (TableTableElement) contentRoot.getChildNodes().item(0);
+        TableTableElement clonedTable = (TableTableElement) table.cloneNode(true);
+		contentRoot.appendChild(clonedTable);
+		ods.getSpreadsheetTables().get(1).setTableName("newSheet");
+        ods.save(ResourceUtilities.getTestOutputFile("clonedSheet.ods"));
+    } catch (Exception e) {
+      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail("writeCellDataAndCloneSheet failed");
     }
   }
 
@@ -1179,6 +1208,7 @@ public class TableTest {
 
     } catch (Exception ex) {
       Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      Assert.fail("testTableInHeaderFooter failed");
     }
   }
 
