@@ -420,10 +420,7 @@ public abstract class OdfElement extends ElementNSImpl {
           cloneElement.setAttribute(qname, item.getNodeValue());
         } else {
           qname = prefix + ":" + item.getLocalName();
-          if (!qname.equals("xml:id")
-              && !qname.equals("office:value")
-              && !qname.equals("calcext:value-type")
-              && !qname.equals("office:value-type")) {
+          if (!qname.equals("xml:id")) {
             cloneElement.setAttributeNS(item.getNamespaceURI(), qname, item.getNodeValue());
           }
         }
