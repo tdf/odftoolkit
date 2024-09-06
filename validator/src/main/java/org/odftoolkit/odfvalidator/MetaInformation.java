@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLFilter;
@@ -54,11 +55,12 @@ public class MetaInformation {
 
   public void getGenerator(OdfPackage aDocFile) throws ODFValidatorException {
     try {
-      InputStream aInStream = aDocFile.getInputStream(OdfPackage.OdfFile.MANIFEST.getPath(), true);
+      InputStream aInStream =
+          aDocFile.getInputStream(OdfSchemaDocument.OdfXMLFile.META.getFileName(), true);
       Logger aLogger =
           new Logger(
               aDocFile.getBaseURI(),
-              OdfPackage.OdfFile.MANIFEST.getPath(),
+              OdfSchemaDocument.OdfXMLFile.META.getFileName(),
               m_aOut,
               Logger.LogLevel.INFO);
 
