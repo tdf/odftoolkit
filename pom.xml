@@ -119,7 +119,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
-                <version>1.27.0</version>
+                <version>1.27.1</version>
             </dependency>
             <!-- commons-compress requires at least version 2.12 but somehow an
               older version gets used for running tests in odfdom resulting in
