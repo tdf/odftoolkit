@@ -44,7 +44,7 @@ public class GenerationOdfReferenceTest {
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test
-  public void testAllExampleGenerations() {
+  public void testAllExampleGenerations() throws Exception {
     ArrayList<GenerationParameters> generations = new ArrayList<>();
 
     for (OdfSpecificationPart specPart : OdfSpecificationPart.values()) {
@@ -76,7 +76,7 @@ public class GenerationOdfReferenceTest {
       SchemaToTemplate.run(generations);
     } catch (Exception e) {
       Assert.fail("Exception during test run: " + e.toString());
-      throw new RuntimeException(e);
+      throw new Exception(e);
     }
 
     // Changing order of multiple puzzlepieces makes file comparison unuseable
