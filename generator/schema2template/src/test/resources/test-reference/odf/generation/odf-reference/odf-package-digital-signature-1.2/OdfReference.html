@@ -50,6 +50,10 @@ td { text-indent:0em;
 [any org.w3c.dom.Element]&nbsp;
 &nbsp;</td>
 </tr>
+<tr>
+	<td class="left">Child Relations</td>
+	<td class="right">&lt;ds:Signature (*:*="TEXT"  | TEXT | &lt;*:*  ... &gt;)+ &gt;&nbsp;</td>
+</tr>
 </table>
 <br />
 
@@ -72,6 +76,10 @@ td { text-indent:0em;
 	<a href="#element_ds:Signature_1" class="unbreakable mandatory">&lt;ds:Signature&gt;</a>*&nbsp;
 &nbsp;</td>
 </tr>
+<tr>
+	<td class="left">Child Relations</td>
+	<td class="right">&lt;dsig:document-signatures dsig:version="1.2" (&lt;ds:Signature  ... &gt;)+ &gt;&nbsp;</td>
+</tr>
 </table>
 <br />
 <h3><a name="attribute_dsig:version_1">dsig:version Attribute</a></h3>
@@ -90,8 +98,12 @@ td { text-indent:0em;
 <tr>
 <td class="left">Values</td>
 <td class="right">
-	<span style="unbreakable">"1.2"</a>&nbsp;
+	<span style="unbreakable">"1.2"</span>&nbsp;
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">dsig:version="1.2" &nbsp;</td>
 </tr>
 </table>
 <br />
