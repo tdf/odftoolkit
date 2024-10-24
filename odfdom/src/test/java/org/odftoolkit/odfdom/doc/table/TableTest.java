@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,8 +48,10 @@ import org.odftoolkit.odfdom.dom.element.style.StylePageLayoutPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableHeaderColumnsElement;
+import org.odftoolkit.odfdom.dom.style.props.OdfTableColumnProperties;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
+import org.odftoolkit.odfdom.type.PositiveLength;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -196,6 +199,28 @@ public class TableTest {
         }
       }
     } catch (Exception e) {
+      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
+
+  /**
+   * <a href="https://github.com/tdf/odftoolkit/issues/332">Issue #332</a>
+   */
+  @Test
+  public void testNewTableGermanLocaleColumnWidth() {
+    Locale previousDefault = Locale.getDefault();
+    try {
+      Locale.setDefault(Locale.GERMANY);
+      OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.newSpreadsheetDocument();
+      OdfTable sheet = OdfTable.newTable(spreadsheet, 3, 5);
+      Locale.setDefault(previousDefault);
+
+      Assert.assertTrue(PositiveLength.isValid(sheet.getColumnElementByIndex(0).getProperty(OdfTableColumnProperties.ColumnWidth)));
+      sheet.getColumnByIndex(0).setWidth(10L);
+      Assert.assertEquals((sheet.getColumnByIndex(0).getWidth()), 10);
+    } catch (Exception e) {
+      Locale.setDefault(previousDefault);
       Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
@@ -1114,11 +1139,11 @@ public class TableTest {
   @Test
   public void writeCellDataAndCloneSheet() {
     try {
-		OdfSpreadsheetDocument ods = 
+		OdfSpreadsheetDocument ods =
           (OdfSpreadsheetDocument)
               OdfSpreadsheetDocument.loadDocument(
                   ResourceUtilities.getAbsoluteInputPath("template.ots"));
-		
+
 		ods.getSpreadsheetTables().get(0).appendRow();
 		ods.getSpreadsheetTables().get(0).getRowByIndex(5).getCellByIndex(0).setStringValue("Row3");
 		ods.getSpreadsheetTables().get(0).getRowByIndex(5).getCellByIndex(1).setDateValue(Calendar.getInstance());
