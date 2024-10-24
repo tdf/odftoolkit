@@ -21,6 +21,7 @@ package org.odftoolkit.odfdom.doc.table;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.StringTokenizer;
