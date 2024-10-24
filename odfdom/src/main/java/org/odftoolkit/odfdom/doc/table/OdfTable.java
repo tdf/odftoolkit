@@ -19,6 +19,7 @@
 package org.odftoolkit.odfdom.doc.table;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -392,7 +393,7 @@ public class OdfTable {
     String columnStylename = columnStyle.getStyleNameAttribute();
     columnStyle.setProperty(
         StyleTableColumnPropertiesElement.ColumnWidth,
-        new DecimalFormat("000.0000").format(DEFAULT_TABLE_WIDTH / numCols) + "in");
+        new DecimalFormat("000.0000", DecimalFormatSymbols.getInstance(Locale.ENGLISH)).format(DEFAULT_TABLE_WIDTH / numCols) + "in");
     columnStyle.setProperty(
         StyleTableColumnPropertiesElement.RelColumnWidth,
         Math.round(DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
