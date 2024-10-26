@@ -108,8 +108,8 @@ class TinkerPopGraph {
       v = createVertex(g, exp);
     }
 
-    // stop building the graph after first element and attribtue children
     addGraphProperties(g, v, parentV, exp, parentExp);
+    // stop building the graph after first element and attribute children
     if (!(exp instanceof NameClassAndExpression) || parentExp == null) {
       List<Expression> children = (List<Expression>) exp.visit(CHILD_VISITOR);
       Integer newChildNo = 0;
