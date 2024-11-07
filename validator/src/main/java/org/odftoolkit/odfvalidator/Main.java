@@ -123,7 +123,8 @@ public class Main {
       } else if (aArg.equals("-1.0")
           || aArg.equals("-1.1")
           || aArg.equals("-1.2")
-          || aArg.equals("-1.3")) {
+          || aArg.equals("-1.3")
+          || aArg.equals("-1.4")) {
         aVersion = OdfVersion.valueOf(aArg.substring(1), false);
       } else if (aArg.startsWith("-")) {
         System.err.print(aArg);
@@ -245,7 +246,7 @@ public class Main {
   private static void printUsage() {
     System.out.println("usage: odfvalidator -g <odffiles>");
     System.out.println(
-        "       odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>] [-o outputfile] [-1.0|-1.1|-1.2|1.3] <odffiles>");
+        "       odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>] [-o outputfile] [-1.0|-1.1|-1.2|1.3|1.4] <odffiles>");
     System.out.println(
         "       odfvalidator [-r] [-c|-e|-s] [-d] [-v|-w] [-f <filterfile>] [-x <regexp>] [-o outputfile] -S <schemafile> <odffiles>");
     System.out.println(
