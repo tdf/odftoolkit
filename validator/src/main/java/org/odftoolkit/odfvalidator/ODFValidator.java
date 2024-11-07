@@ -270,6 +270,8 @@ public class ODFValidator implements ODFValidatorProvider {
       String aConfigName = null;
       if (aVersion == null || aVersion == OdfVersion.V1_3) {
         aConfigName = "/schema/odf1_3.properties";
+      } else if (aVersion == OdfVersion.V1_4) {
+        aConfigName = "/schema/odf1_4.properties";
       } else if (aVersion == OdfVersion.V1_2) {
         aConfigName = "/schema/odf1_2.properties";
       } else if (aVersion == OdfVersion.V1_1) {

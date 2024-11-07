@@ -160,4 +160,23 @@ public class ValidTest extends OdfValidatorTestBase {
     Assert.assertFalse(output.contains("unexpected character literal"));
     Assert.assertFalse(output.contains("Error:"));
   }
+
+  @Test
+  public void validateFormTextBox() {
+    String output = "";
+    try {
+      String name = "testFormTextBox.odt";
+      output = doValidation(name, OdfVersion.V1_4, OdfValidatorMode.EXTENDED_CONFORMANCE, true);
+    } catch (Throwable t) {
+      t.printStackTrace();
+      Assert.fail(t.toString());
+    }
+    if (output.contains("Exception")) {
+      System.out.println("OUTPUT:" + output);
+      Assert.fail("An exception occurred during validation!");
+    }
+    System.out.println("OUTPUT:" + output);
+    Assert.assertFalse(output.contains("unexpected attribute"));
+    Assert.assertFalse(output.contains("Error:"));
+  }
 }
