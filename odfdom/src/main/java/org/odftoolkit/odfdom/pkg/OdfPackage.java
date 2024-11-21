@@ -38,6 +38,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -73,6 +74,10 @@ import javax.xml.transform.URIResolver;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import org.apache.xerces.dom.DOMXSImplementationSourceImpl;
+import org.bouncycastle.crypto.PBEParametersGenerator;
+import org.bouncycastle.crypto.digests.SHA1Digest;
+import org.bouncycastle.crypto.generators.PKCS5S2ParametersGenerator;
+import org.bouncycastle.crypto.params.KeyParameter;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfDocument.OdfMediaType;
 import org.odftoolkit.odfdom.pkg.manifest.AlgorithmElement;
@@ -2025,32 +2030,44 @@ public class OdfPackage implements Closeable {
       String checksum = encryptionDataElement.getChecksumAttribute();
       byte[] salt = Base64Binary.valueOf(saltStr).getBytes();
       byte[] iv = Base64Binary.valueOf(ivStr).getBytes();
-      byte[] passBytes = mOldPwd.getBytes("UTF-8");
-      MessageDigest md = MessageDigest.getInstance("SHA-1");
-      passBytes = md.digest(passBytes);
-      /*
-       * char passChars[] = new char[passBytes.length]; for(int i = 0;
-       * i<passBytes.length; i++){ passChars[i] =
-       * (char)(passBytes[i]|0xFF); } KeySpec spec = new
-       * PBEKeySpec(passChars, salt, 1024, 128); SecretKeyFactory factory
-       * = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1"); SecretKey
-       * skey = factory.generateSecret(spec); byte[] raw =
-       * skey.getEncoded(); SecretKeySpec skeySpec = new
-       * SecretKeySpec(raw, "Blowfish");
-       */
-      byte[] dk = derivePBKDF2Key(passBytes, salt, 1024, 16);
-      SecretKeySpec key = new SecretKeySpec(dk, "Blowfish");
+      byte[] passBytes = mOldPwd.getBytes(StandardCharsets.UTF_8);
 
-      Cipher cipher = Cipher.getInstance("Blowfish/CFB/NoPadding");
+      String algorithm = algorithmElement.getAlgorithmNameAttribute();
+      boolean isAES = algorithm.contains("aes256-cbc") || algorithm.contains("AES-256-CBC");
+
+      SecretKeySpec key;
+      Cipher cipher;
+      MessageDigest md;
+
+      if (isAES) {
+        // AES-256-CBC
+        md = MessageDigest.getInstance("SHA-256");
+        passBytes = md.digest(passBytes);
+        PBEParametersGenerator generator = new PKCS5S2ParametersGenerator(new SHA1Digest());
+        generator.init(passBytes, salt, 100000);
+        KeyParameter keyParam = (KeyParameter) generator.generateDerivedParameters(256);
+        key = new SecretKeySpec(keyParam.getKey(), "AES");
+        cipher = Cipher.getInstance("AES/CBC/NoPadding");
+        md.reset();
+      } else {
+        // Blowfish
+        md = MessageDigest.getInstance("SHA-1");
+        passBytes = md.digest(passBytes);
+        byte[] dk = derivePBKDF2Key(passBytes, salt, 1024, 16);
+        key = new SecretKeySpec(dk, "Blowfish");
+        cipher = Cipher.getInstance("Blowfish/CFB/NoPadding");
+        md.reset();
+      }
+
       IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
       cipher.init(Cipher.DECRYPT_MODE, key, ivParameterSpec);
       byte[] decryptedData = cipher.doFinal(data);
 
       // valid checksum
-      md.reset();
-      md.update(decryptedData, 0, (decryptedData.length > 1024 ? 1024 : decryptedData.length));
-      byte[] checksumBytes = new byte[20];
-      md.digest(checksumBytes, 0, 20);
+      md.update(decryptedData, 0, Math.min(decryptedData.length, 1024));
+      int digestLength = md.getDigestLength();
+      byte[] checksumBytes = new byte[digestLength];
+      md.digest(checksumBytes, 0, digestLength);
       String newChecksum = new Base64Binary(checksumBytes).toString();
       if (newChecksum.equals(checksum)) {
         // decompress the bytes
