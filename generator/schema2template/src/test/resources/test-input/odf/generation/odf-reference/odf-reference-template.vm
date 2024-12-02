@@ -182,6 +182,13 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 #end
 &nbsp;</td>
 </tr>
+#set ($elementExp = $element.getExpression())
+#if ($elementExp)
+<tr>
+	<td class="left">Child Relations</td>
+	<td class="right">${xmlModel.getChildrenAsHTMLString($elementExp)}&nbsp;</td>
+</tr>
+#end
 </table>
 <br />
 #end
@@ -244,7 +251,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <td class="left">Datatypes</td>
 <td class="right">
 #foreach ($datatype in ${attribute.getDatatypes()})
-	<span style="unbreakable">${datatype}</a>&nbsp;
+	<span style="unbreakable">${datatype}</span>&nbsp;
 #end
 &nbsp;</td>
 </tr>
@@ -252,9 +259,13 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <td class="left">Values</td>
 <td class="right">
 #foreach ($value in ${attribute.getValues()})
-	<span style="unbreakable">"${value}"</a>&nbsp;
+	<span style="unbreakable">"${value}"</span>&nbsp;
 #end
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">${xmlModel.getChildrenAsHTMLString($attribute.getExpression())}&nbsp;</td>
 </tr>
 </table>
 <br />
