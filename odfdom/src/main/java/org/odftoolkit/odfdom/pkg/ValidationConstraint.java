@@ -24,8 +24,8 @@
 package org.odftoolkit.odfdom.pkg;
 
 /**
- * A <code>ValidationConstraint</code> is used to collect validation conditions and their return
- * messages in case not appliance (invalid condition).
+ * A <code>ValidationConstraint</code> is used to collect validation conditions and their error
+ * messages in case the constraint is not met.
  */
 public interface ValidationConstraint {
 

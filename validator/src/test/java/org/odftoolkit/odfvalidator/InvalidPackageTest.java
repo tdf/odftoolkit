@@ -47,13 +47,13 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
             "testInvalidPkg1.odt/mimetype:  Error: mimetype is not an ODFMediaTypes mimetype"));
     Assert.assertTrue(
         output.contains(
-            "testInvalidPkg1.odt/mimetype:  Error: The file 'mimetype' is not the first file in the ODF package"));
+            "testInvalidPkg1.odt/mimetype:  Error: The file 'mimetype' is not the first zip entry in the ODF package"));
     Assert.assertTrue(
         output.contains(
-            "testInvalidPkg1.odt/mimetype:  Error: The file 'mimetype' shall not be compressed"));
+            "testInvalidPkg1.odt/mimetype:  Error: The zip entry 'mimetype' shall not be compressed"));
     Assert.assertTrue(
         output.contains(
-            "testInvalidPkg1.odt/mimetype:  Error: There shall be no extra field for the 'mimetype' file"));
+            "testInvalidPkg1.odt/mimetype:  Error: There shall be no extra field for the 'mimetype' zip entry"));
     Assert.assertTrue(
         output.contains(
             "testInvalidPkg1.odt/META-INF/manifest.xml:  Error: The file 'Configurations2/accelerator/current.xml' shall not be listed in the 'META-INF/manifest.xml' file as it does not exist in the ODF package"));
@@ -75,13 +75,13 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
             "testInvalidPkg1.odt/mimetype:  Error: mimetype is not an ODFMediaTypes mimetype"));
     Assert.assertTrue(
         output.contains(
-            "testInvalidPkg1.odt/mimetype:  Warning: The file 'mimetype' is not the first file in the ODF package"));
+            "testInvalidPkg1.odt/mimetype:  Warning: The file 'mimetype' is not the first zip entry in the ODF package"));
     Assert.assertTrue(
         output.contains(
-            "testInvalidPkg1.odt/mimetype:  Error: The file 'mimetype' shall not be compressed"));
+            "testInvalidPkg1.odt/mimetype:  Error: The zip entry 'mimetype' shall not be compressed"));
     Assert.assertTrue(
         output.contains(
-            "testInvalidPkg1.odt/mimetype:  Error: There shall be no extra field for the 'mimetype' file"));
+            "testInvalidPkg1.odt/mimetype:  Error: There shall be no extra field for the 'mimetype' zip entry"));
     Assert.assertTrue(
         output.contains(
             "testInvalidPkg1.odt/META-INF/manifest.xml:  Error: The file 'Configurations2/accelerator/current.xml' shall not be listed in the 'META-INF/manifest.xml' file as it does not exist in the ODF package"));
