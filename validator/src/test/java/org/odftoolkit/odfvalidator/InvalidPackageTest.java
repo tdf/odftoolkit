@@ -57,7 +57,7 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
     Assert.assertTrue(
         output.contains(
             "testInvalidPkg1.odt/META-INF/manifest.xml:  Error: The file 'Configurations2/accelerator/current.xml' shall not be listed in the 'META-INF/manifest.xml' file as it does not exist in the ODF package"));
-    Assert.assertTrue(output.contains("testInvalidPkg1.odt:  Info: 8 errors, 10 warnings"));
+    Assert.assertTrue(output.contains("testInvalidPkg1.odt:  Info: 9 errors, 10 warnings"));
   }
 
   @Test
@@ -85,7 +85,7 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
     Assert.assertTrue(
         output.contains(
             "testInvalidPkg1.odt/META-INF/manifest.xml:  Error: The file 'Configurations2/accelerator/current.xml' shall not be listed in the 'META-INF/manifest.xml' file as it does not exist in the ODF package"));
-    Assert.assertTrue(output.contains("testInvalidPkg1.odt:  Info: 11 errors, 11 warnings"));
+    Assert.assertTrue(output.contains("testInvalidPkg1.odt:  Info: 12 errors, 11 warnings"));
   }
 
   @Test
@@ -107,7 +107,7 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
     Assert.assertTrue(
         output.contains(
             "testInvalidPkg2.odt/META-INF/manifest.xml:  Error: The file 'not_in_manifest' shall be listed in the 'META-INF/manifest.xml' file as it exists in the ODF package"));
-    Assert.assertTrue(output.contains("testInvalidPkg2.odt:  Info: 5 errors, 10 warnings"));
+    Assert.assertTrue(output.contains("testInvalidPkg2.odt:  Info: 6 errors, 10 warnings"));
   }
 
   @Test
@@ -129,7 +129,7 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
     Assert.assertTrue(
         output.contains(
             "testInvalidPkg2.odt/META-INF/manifest.xml:  Warning: The file 'not_in_manifest' shall be listed in the 'META-INF/manifest.xml' file as it exists in the ODF package"));
-    Assert.assertTrue(output.contains("testInvalidPkg2.odt:  Info: 7 errors, 12 warnings"));
+    Assert.assertTrue(output.contains("testInvalidPkg2.odt:  Info: 8 errors, 12 warnings"));
   }
 
   @Test
@@ -148,7 +148,7 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
             "Error: The ODF package 'testInvalidPkg3.odt' shall contain the 'META-INF/manifest.xml' file"));
     Assert.assertTrue(
         "Output of validatePackage3(): " + output,
-        output.contains("testInvalidPkg3.odt:  Info: 3 errors, no warnings"));
+        output.contains("testInvalidPkg3.odt:  Info: 4 errors, no warnings"));
   }
 
   @Test
