@@ -57,10 +57,12 @@ class ODFPackageErrorHandler implements ErrorHandler {
   boolean processErrors(
       Logger aPkgLogger, Logger aManifestLogger, Logger aMimetypeLogger, OdfVersion aVersion) {
     boolean bRet = false;
+    boolean bPackage = false;
     for (SAXParseException e : m_aExceptionList) {
       if (e instanceof OdfValidationException) {
         ValidationConstraint aConstraint = ((OdfValidationException) e).getConstraint();
         if (aConstraint instanceof OdfPackageConstraint) {
+          bPackage = true;
           switch (((OdfPackageConstraint) aConstraint)) {
             case MANIFEST_DOES_NOT_LIST_FILE:
               switch (aVersion) {
@@ -123,6 +125,37 @@ class ODFPackageErrorHandler implements ErrorHandler {
       } else {
         aPkgLogger.logError(e); // unknown aConstraint: assume error
         bRet = true;
+      }
+    }
+
+    if (bPackage) {
+      String msg = "For more information on ODF package conformance see ";
+      switch (aVersion) {
+        case V1_0:
+          // there isn't even an HTML version
+          msg += "https://docs.oasis-open.org/office/v1.0/OpenDocument-v1.0-os.pdf";
+          break;
+        case V1_1:
+          // this was actually quite useless before 1.2
+          msg += "https://docs.oasis-open.org/office/v1.1/OpenDocument-v1.1.html#Ref_Package";
+          break;
+        case V1_2:
+          msg +=
+              "https://docs.oasis-open.org/office/v1.2/OpenDocument-v1.2-part3.html#a2_2Packages";
+          break;
+        case V1_3:
+          msg +=
+              "https://docs.oasis-open.org/office/OpenDocument/v1.3/os/part2-packages/OpenDocument-v1.3-os-part2-packages.html#a_2_2_Package_Conformance";
+          break;
+        case V1_4:
+          msg +=
+              "https://docs.oasis-open.org/office/OpenDocument/v1.4/OpenDocument-v1.4-part2-packages.html#a_2_2_Package_Conformance";
+          break;
+      }
+      if (bRet) {
+        aMimetypeLogger.logError(msg);
+      } else {
+        aMimetypeLogger.logWarning(msg);
       }
     }
 
