@@ -26,7 +26,7 @@ package org.odftoolkit.odfdom.pkg;
 import org.xml.sax.SAXParseException;
 
 /**
- * This ODF specific validation excpetion faciliates the usage of a SAXParseException for none XML
+ * This ODF specific validation exception facilitates the usage of a SAXParseException for non-XML
  * validation, used by an <code>ErrorHandler</code>.
  */
 public class OdfValidationException extends SAXParseException {
@@ -42,7 +42,7 @@ public class OdfValidationException extends SAXParseException {
    * sets the public and system ID for XML and line and column number of the super class will be set
    * to be invalid.
    *
-   * @param constraint the predefined constaint message
+   * @param constraint the predefined constraint message
    */
   public OdfValidationException(ValidationConstraint constraint) {
     // The constraint convention is the first parameter to be the sourcePath of the ODF
@@ -57,7 +57,7 @@ public class OdfValidationException extends SAXParseException {
    * sets the public and system ID for XML and line and column number of the super class will be set
    * to be invalid.
    *
-   * @param constraint the predefined constaint message
+   * @param constraint the predefined constraint message
    * @param sourcePath the source path of the exception. For instance, it might be an ODF package or
    *     ODF document.
    * @param messageParameters allow the customization of a constraint message with parameters.
@@ -77,7 +77,7 @@ public class OdfValidationException extends SAXParseException {
    * to be invalid.
    *
    * @param e root exception to be embeddded
-   * @param constraint the predefined constaint message
+   * @param constraint the predefined constraint message
    * @param sourcePath the source path of the exception. For instance, it might be an ODF package or
    *     ODF document.
    * @param messageParameters allow the customization of a constraint message with parameters.
