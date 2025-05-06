@@ -51,6 +51,10 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 [any org.w3c.dom.Element]&nbsp;
 &nbsp;</td>
 </tr>
+<tr>
+	<td class="left">Child Relations</td>
+	<td class="right">&lt;manifest:algorithm manifest:algorithm-name="Blowfish CFB | <a href="https://www.w3.org/TR/xmlschema-2/#anyURI">#anyURI</a>" manifest:initialisation-vector="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">#base64Binary</a>" (&lt;*:*  ... &gt;)* &gt;&nbsp;</td>
+</tr>
 </table>
 <br />
 
@@ -77,6 +81,11 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 	<a href="#element_manifest:start-key-generation_1" class="unbreakable ">&lt;manifest:start-key-generation&gt;</a>&nbsp;
 &nbsp;</td>
 </tr>
+<tr>
+	<td class="left">Child Relations</td>
+	<td class="right">&lt;manifest:encryption-data manifest:checksum-type="SHA1/1K | <a href="https://www.w3.org/TR/xmlschema-2/#anyURI">#anyURI</a>" manifest:checksum="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">#base64Binary</a>" &lt;manifest:algorithm  ... &gt; (&lt;manifest:start-key-generation  ... &gt;)?
+	&lt;manifest:key-derivation  ... &gt;&gt;&nbsp;</td>
+</tr>
 </table>
 <br />
 
@@ -95,7 +104,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 	<a href="#attribute_manifest:media-type_1" class="unbreakable mandatory">manifest:media-type</a>&nbsp;
 	<a href="#attribute_manifest:preferred-view-mode_1" class="unbreakable ">manifest:preferred-view-mode</a>&nbsp;
 	<a href="#attribute_manifest:size_1" class="unbreakable ">manifest:size</a>&nbsp;
-	<a href="#attribute_manifest:version_1" class="unbreakable ">manifest:version[1]</a>&nbsp;
+	<a href="#attribute_manifest:version_2" class="unbreakable ">manifest:version[2]</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -103,6 +112,14 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <td class="right">
 	<a href="#element_manifest:encryption-data_1" class="unbreakable ">&lt;manifest:encryption-data&gt;</a>&nbsp;
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">Child Relations</td>
+	<td class="right">&lt;manifest:file-entry manifest:full-path="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>"  (manifest:size="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">#nonNegativeInteger</a>" )?
+	manifest:media-type="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>"  (manifest:preferred-view-mode="edit | presentation-slide-show | read-only | QName]" )?
+	 (manifest:version="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>" )?
+	 (&lt;manifest:encryption-data  ... &gt;)?
+	&gt;&nbsp;</td>
 </tr>
 </table>
 <br />
@@ -129,6 +146,11 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <td class="right">
 &nbsp;</td>
 </tr>
+<tr>
+	<td class="left">Child Relations</td>
+	<td class="right">&lt;manifest:key-derivation manifest:key-derivation-name="PBKDF2 | <a href="https://www.w3.org/TR/xmlschema-2/#anyURI">#anyURI</a>" manifest:salt="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">#base64Binary</a>" manifest:iteration-count="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">#nonNegativeInteger</a>"  (manifest:key-size="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">#nonNegativeInteger</a>" )?
+	&gt;&nbsp;</td>
+</tr>
 </table>
 <br />
 
@@ -142,7 +164,7 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Attributes</td>
 <td class="right">
-	<a href="#attribute_manifest:version_2" class="unbreakable mandatory">manifest:version[2]</a>&nbsp;
+	<a href="#attribute_manifest:version_1" class="unbreakable mandatory">manifest:version[1]</a>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
@@ -150,6 +172,10 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <td class="right">
 	<a href="#element_manifest:file-entry_1" class="unbreakable mandatory">&lt;manifest:file-entry&gt;</a>*&nbsp;
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">Child Relations</td>
+	<td class="right">&lt;manifest:manifest manifest:version="1.2" (&lt;manifest:file-entry  ... &gt;)+ &gt;&nbsp;</td>
 </tr>
 </table>
 <br />
@@ -174,6 +200,11 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <td class="right">
 &nbsp;</td>
 </tr>
+<tr>
+	<td class="left">Child Relations</td>
+	<td class="right">&lt;manifest:start-key-generation manifest:start-key-generation-name="SHA1 | <a href="https://www.w3.org/TR/xmlschema-2/#anyURI">#anyURI</a>"  (manifest:key-size="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">#nonNegativeInteger</a>" )?
+	&gt;&nbsp;</td>
+</tr>
 </table>
 <br />
 												<h3><a name="attribute_manifest:algorithm-name_1">manifest:algorithm-name Attribute</a></h3>
@@ -187,14 +218,18 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Datatypes</td>
 <td class="right">
-	<span style="unbreakable">anyURI</a>&nbsp;
+	<span style="unbreakable">anyURI</span>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Values</td>
 <td class="right">
-	<span style="unbreakable">"Blowfish CFB"</a>&nbsp;
+	<span style="unbreakable">"Blowfish CFB"</span>&nbsp;
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:algorithm-name="Blowfish CFB | <a href="https://www.w3.org/TR/xmlschema-2/#anyURI">#anyURI</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -209,13 +244,17 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Datatypes</td>
 <td class="right">
-	<span style="unbreakable">base64Binary</a>&nbsp;
+	<span style="unbreakable">base64Binary</span>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Values</td>
 <td class="right">
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:checksum="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">#base64Binary</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -230,14 +269,18 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Datatypes</td>
 <td class="right">
-	<span style="unbreakable">anyURI</a>&nbsp;
+	<span style="unbreakable">anyURI</span>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Values</td>
 <td class="right">
-	<span style="unbreakable">"SHA1/1K"</a>&nbsp;
+	<span style="unbreakable">"SHA1/1K"</span>&nbsp;
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:checksum-type="SHA1/1K | <a href="https://www.w3.org/TR/xmlschema-2/#anyURI">#anyURI</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -252,13 +295,17 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Datatypes</td>
 <td class="right">
-	<span style="unbreakable">string</a>&nbsp;
+	<span style="unbreakable">string</span>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Values</td>
 <td class="right">
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:full-path="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -273,13 +320,17 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Datatypes</td>
 <td class="right">
-	<span style="unbreakable">base64Binary</a>&nbsp;
+	<span style="unbreakable">base64Binary</span>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Values</td>
 <td class="right">
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:initialisation-vector="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">#base64Binary</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -294,13 +345,17 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Datatypes</td>
 <td class="right">
-	<span style="unbreakable">nonNegativeInteger</a>&nbsp;
+	<span style="unbreakable">nonNegativeInteger</span>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Values</td>
 <td class="right">
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:iteration-count="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">#nonNegativeInteger</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -315,14 +370,18 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Datatypes</td>
 <td class="right">
-	<span style="unbreakable">anyURI</a>&nbsp;
+	<span style="unbreakable">anyURI</span>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Values</td>
 <td class="right">
-	<span style="unbreakable">"PBKDF2"</a>&nbsp;
+	<span style="unbreakable">"PBKDF2"</span>&nbsp;
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:key-derivation-name="PBKDF2 | <a href="https://www.w3.org/TR/xmlschema-2/#anyURI">#anyURI</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -338,13 +397,17 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Datatypes</td>
 <td class="right">
-	<span style="unbreakable">nonNegativeInteger</a>&nbsp;
+	<span style="unbreakable">nonNegativeInteger</span>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Values</td>
 <td class="right">
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:key-size="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">#nonNegativeInteger</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -359,13 +422,17 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Datatypes</td>
 <td class="right">
-	<span style="unbreakable">string</a>&nbsp;
+	<span style="unbreakable">string</span>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Values</td>
 <td class="right">
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:media-type="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -380,16 +447,20 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Datatypes</td>
 <td class="right">
-	<span style="unbreakable">QName</a>&nbsp;
+	<span style="unbreakable">QName</span>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Values</td>
 <td class="right">
-	<span style="unbreakable">"edit"</a>&nbsp;
-	<span style="unbreakable">"presentation-slide-show"</a>&nbsp;
-	<span style="unbreakable">"read-only"</a>&nbsp;
+	<span style="unbreakable">"edit"</span>&nbsp;
+	<span style="unbreakable">"presentation-slide-show"</span>&nbsp;
+	<span style="unbreakable">"read-only"</span>&nbsp;
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:preferred-view-mode="edit | presentation-slide-show | read-only | QName]" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -404,13 +475,17 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Datatypes</td>
 <td class="right">
-	<span style="unbreakable">base64Binary</a>&nbsp;
+	<span style="unbreakable">base64Binary</span>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Values</td>
 <td class="right">
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:salt="<a href="https://www.w3.org/TR/xmlschema-2/#base64Binary">#base64Binary</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -425,13 +500,17 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Datatypes</td>
 <td class="right">
-	<span style="unbreakable">nonNegativeInteger</a>&nbsp;
+	<span style="unbreakable">nonNegativeInteger</span>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Values</td>
 <td class="right">
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:size="<a href="https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger">#nonNegativeInteger</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
@@ -446,40 +525,22 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Datatypes</td>
 <td class="right">
-	<span style="unbreakable">anyURI</a>&nbsp;
+	<span style="unbreakable">anyURI</span>&nbsp;
 &nbsp;</td>
 </tr>
 <tr>
 <td class="left">Values</td>
 <td class="right">
-	<span style="unbreakable">"SHA1"</a>&nbsp;
+	<span style="unbreakable">"SHA1"</span>&nbsp;
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:start-key-generation-name="SHA1 | <a href="https://www.w3.org/TR/xmlschema-2/#anyURI">#anyURI</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
 							<h3><a name="attribute_manifest:version_1">manifest:version[1] Attribute</a>&nbsp;(new in ODF 1.2) </h3>
-<p>There are more than one Definitions by this name.</p>
-<table border="1" width="100%">
-<tr>
-<td class="left">Parent Elements</td>
-<td class="right">
-	<a href="#element_manifest:file-entry_1" class="unbreakable">manifest:file-entry</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Datatypes</td>
-<td class="right">
-	<span style="unbreakable">string</a>&nbsp;
-&nbsp;</td>
-</tr>
-<tr>
-<td class="left">Values</td>
-<td class="right">
-&nbsp;</td>
-</tr>
-</table>
-<br />
-							<h3><a name="attribute_manifest:version_2">manifest:version[2] Attribute</a>&nbsp;(new in ODF 1.2) </h3>
 <p>There are more than one Definitions by this name.</p>
 <table border="1" width="100%">
 <tr>
@@ -496,8 +557,38 @@ For example, <a href="#attribute_manifest:key-derivation-name_1">manifest:key-de
 <tr>
 <td class="left">Values</td>
 <td class="right">
-	<span style="unbreakable">"1.2"</a>&nbsp;
+	<span style="unbreakable">"1.2"</span>&nbsp;
 &nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:version="1.2" &nbsp;</td>
+</tr>
+</table>
+<br />
+							<h3><a name="attribute_manifest:version_2">manifest:version[2] Attribute</a>&nbsp;(new in ODF 1.2) </h3>
+<p>There are more than one Definitions by this name.</p>
+<table border="1" width="100%">
+<tr>
+<td class="left">Parent Elements</td>
+<td class="right">
+	<a href="#element_manifest:file-entry_1" class="unbreakable">manifest:file-entry</a>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Datatypes</td>
+<td class="right">
+	<span style="unbreakable">string</span>&nbsp;
+&nbsp;</td>
+</tr>
+<tr>
+<td class="left">Values</td>
+<td class="right">
+&nbsp;</td>
+</tr>
+<tr>
+	<td class="left">RNG Relations</td>
+	<td class="right">manifest:version="<a href="https://www.w3.org/TR/xmlschema-2/#string">#string</a>" &nbsp;</td>
 </tr>
 </table>
 <br />
