@@ -69,42 +69,50 @@ if(ServletFileUpload.isMultipartContent(request)) {
 				OdfVersion aOdfVersion = null;
 				OdfValidatorMode odfValidatorMode = null;
 				switch (modeSelection) {
-					case 6:
-						aOdfVersion = OdfVersion.V1_0;
-						odfValidatorMode = OdfValidatorMode.VALIDATE;
+					case 10:
+						aOdfVersion = OdfVersion.V1_4;
+						odfValidatorMode = OdfValidatorMode.CONFORMANCE;
 						break;
-					case 4:
-						aOdfVersion = OdfVersion.V1_1;
-						odfValidatorMode = OdfValidatorMode.VALIDATE;
-						break;
-					case 5:
-						aOdfVersion = OdfVersion.V1_0;
-						odfValidatorMode = OdfValidatorMode.VALIDATE_STRICT;
-						break;
-					case 3:
-						aOdfVersion = OdfVersion.V1_1;
-						odfValidatorMode = OdfValidatorMode.VALIDATE_STRICT;
-						break;
-					case 2:
+					case 9:
+						aOdfVersion = OdfVersion.V1_4;
 						odfValidatorMode = OdfValidatorMode.EXTENDED_CONFORMANCE;
-						aOdfVersion = OdfVersion.V1_2;
 						break;
-					case 1:
-						aOdfVersion = OdfVersion.V1_2;
+					case 8:
+						aOdfVersion = OdfVersion.V1_3;
 						odfValidatorMode = OdfValidatorMode.CONFORMANCE;
 						break;
 					case 7:
 						aOdfVersion = OdfVersion.V1_3;
+						odfValidatorMode = OdfValidatorMode.EXTENDED_CONFORMANCE;
+						break;
+					case 6:
+						aOdfVersion = OdfVersion.V1_2;
 						odfValidatorMode = OdfValidatorMode.CONFORMANCE;
 						break;
-					case 8:
+					case 5:
+						aOdfVersion = OdfVersion.V1_2;
 						odfValidatorMode = OdfValidatorMode.EXTENDED_CONFORMANCE;
-						aOdfVersion = OdfVersion.V1_3;
+						break;
+					case 4:
+						aOdfVersion = OdfVersion.V1_1;
+						odfValidatorMode = OdfValidatorMode.VALIDATE_STRICT;
+						break;
+					case 3:
+						aOdfVersion = OdfVersion.V1_1;
+						odfValidatorMode = OdfValidatorMode.VALIDATE;
+						break;
+					case 2:
+						aOdfVersion = OdfVersion.V1_0;
+						odfValidatorMode = OdfValidatorMode.VALIDATE_STRICT;
+						break;                
+					case 1:
+						aOdfVersion = OdfVersion.V1_0;
+						odfValidatorMode = OdfValidatorMode.VALIDATE;
 						break;
 					default:
 						odfValidatorMode = OdfValidatorMode.CONFORMANCE;
 						break;
-				}				
+				}
 				validator = new ODFValidator(null, aLogLevel, true, aOdfVersion);
 				ByteArrayOutputStream bout = null;
 				if(validator != null) {
@@ -156,14 +164,16 @@ if(ServletFileUpload.isMultipartContent(request)) {
 	<p class="selection"><a href="info.html">ODF Version</a>:<br/>
 		<select name="modeSelection" size="1" onChange="javascript: return setconfig();">
 			<option value="0" selected="">auto-detect</option>
-			<option value="7">OASIS ODF 1.3 (conforming)</option>
-			<option value="8">OASIS ODF 1.3 (extended conforming)</option>
-			<option value="1">OASIS ODF 1.2 (conforming)</option>
-			<option value="2">OASIS ODF 1.2 (extended conforming)</option>
-			<option value="3">OASIS ODF 1.1 (strict)</option>
-			<option value="4">OASIS ODF 1.1</option>
-			<option value="5">OASIS ODF 1.0 - ISO/IEC 26300 (strict)</option>
-			<option value="6">OASIS ODF 1.0 - ISO/IEC 26300</option>
+			<option value="10">OASIS ODF 1.4 (conforming)</option>
+			<option value="9">OASIS ODF 1.4 (extended conforming)</option>
+			<option value="8">OASIS ODF 1.3 (conforming)</option>
+			<option value="7">OASIS ODF 1.3 (extended conforming)</option>
+			<option value="6">OASIS ODF 1.2 (conforming)</option>
+			<option value="5">OASIS ODF 1.2 (extended conforming)</option>
+			<option value="4">OASIS ODF 1.1 (strict)</option>
+			<option value="3">OASIS ODF 1.1</option>
+			<option value="2">OASIS ODF 1.0 - ISO/IEC 26300 (strict)</option>
+			<option value="1">OASIS ODF 1.0 - ISO/IEC 26300</option>
 		</select>
 		<br/>
 	</p>
