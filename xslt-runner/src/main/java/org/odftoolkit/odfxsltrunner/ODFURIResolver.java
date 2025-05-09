@@ -92,7 +92,7 @@ class ODFURIResolver implements URIResolver {
               URI aURI;
               aURI = new URI(aBase);
               aURI.resolve(aHRefBuffer.toString());
-              m_aLogger.logInfo("Resolving " + aHRef + " to " + aURI.toString());
+              m_aLogger.logInfo("Resolving " + aHRef + " to " + aURI);
               return new StreamSource(aURI.toString());
             } catch (URISyntaxException ex) {
               m_aLogger.logError(ex.getMessage());
@@ -102,7 +102,7 @@ class ODFURIResolver implements URIResolver {
             aFileEntryBuffer.delete(0, aFileEntryBuffer.indexOf("/" + 1));
           }
         } else {
-          aHRefBuffer.insert(0, aFileEntryBuffer.toString());
+          aHRefBuffer.insert(0, aFileEntryBuffer);
           try {
             String aFileEntryPath = aHRefBuffer.toString();
             m_aLogger.logInfo("Resolving " + aHRef + " to package file entry " + aFileEntryPath);

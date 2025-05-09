@@ -56,12 +56,12 @@ public class TextSpanSelection extends TextSelection implements Comparable {
 
   @Override
   public String toString() {
-    return mStartPosition.toString()
+    return mStartPosition
         + "-URL"
         + mUrl
         + "-"
-        + mEndPosition.toString()
-        + mSelectionElement.toString()
-        + ((TextSpanElement) mSelectionElement).getAutomaticStyle().toString();
+        + mEndPosition
+        + mSelectionElement
+        + ((TextSpanElement) mSelectionElement).getAutomaticStyle();
   }
 }

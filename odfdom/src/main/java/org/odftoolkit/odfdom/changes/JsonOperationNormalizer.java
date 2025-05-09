@@ -213,13 +213,13 @@ public class JsonOperationNormalizer {
     } else if (value instanceof Number) {
       sb.append(numberToString((Number) value));
     } else if (value instanceof Boolean) {
-      sb.append(value.toString());
+      sb.append(value);
     } else if (value == null || value == JSONObject.NULL) {
       sb.append("null");
     } else if (value instanceof String) {
       quote(((String) value), sb);
     } else {
-      sb.append(value.toString());
+      sb.append(value);
     }
   }
 

@@ -512,7 +512,7 @@ public class PackageTest {
       OdfPackage odfPackage = doc.getPackage();
       LOG.info(
           "Unencrypted content.xml"
-              + odfPackage.getRootDocument().getFileDom("content.xml").toString());
+              + odfPackage.getRootDocument().getFileDom("content.xml"));
       odfPackage.setPassword("password");
       doc.save(tmpFile);
       doc.close();
@@ -538,7 +538,7 @@ public class PackageTest {
       // due to XML parse errors null
       LOG.info(
           "Decrypted content.xml"
-              + odfPackage2.getRootDocument().getFileDom("content.xml").toString());
+              + odfPackage2.getRootDocument().getFileDom("content.xml"));
 
     } catch (Exception ex) {
       LOG.log(Level.SEVERE, "password test failed.", ex);

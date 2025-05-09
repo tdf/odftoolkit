@@ -78,7 +78,7 @@ public class DataTypeTest {
     // CellRangeAddressList
     CellRangeAddressList addressList =
         CellRangeAddressList.valueOf(
-            cellRangeAddress1.toString() + " " + cellRangeAddress2.toString());
+            cellRangeAddress1 + " " + cellRangeAddress2);
     Assert.assertEquals(
         addressList.getCellRangesAddressList().get(0).toString(), cellRangeAddress1.toString());
     CellRangeAddressList addressList2 = null;

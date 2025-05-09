@@ -99,7 +99,7 @@ public class IntegrationTest {
       } catch (IOException t) {
         StringWriter errors = new StringWriter();
         t.printStackTrace(new PrintWriter(errors));
-        Assert.fail(t.toString() + "\n" + errors.toString());
+        Assert.fail(t + "\n" + errors);
       }
 
       // that would be validating with 1.2

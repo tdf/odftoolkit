@@ -128,9 +128,9 @@ if(ServletFileUpload.isMultipartContent(request)) {
 					}
 				}				
 				if(result) {
-					out.println("<p class='valid'>The document is " + odfValidatorMode.toString()+ " ODF" + validator.getOdfVersion() + "!");
+					out.println("<p class='valid'>The document is " + odfValidatorMode + " ODF" + validator.getOdfVersion() + "!");
 				} else {
-					out.println("<p class='invalid'>The document is NOT " + odfValidatorMode.toString()+ " ODF" + validator.getOdfVersion() + "!");
+					out.println("<p class='invalid'>The document is NOT " + odfValidatorMode + " ODF" + validator.getOdfVersion() + "!");
 				}
 				String s = null;
 				try {

@@ -4531,7 +4531,7 @@ public class JsonOperationConsumer {
     // this is a feature not activated in the default build, but table limitation might assist
     // performance on weak clients
     if (!(o instanceof TableTableElement)) {
-      LOG.severe("Table exceeded the maximum Size: " + o.toString());
+      LOG.severe("Table exceeded the maximum Size: " + o);
     }
     TableTableElement tableElement = (TableTableElement) parentComponent.getRootElement();
     OdfTable table = OdfTable.getInstance(tableElement);
@@ -5202,7 +5202,7 @@ public class JsonOperationConsumer {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "font-size");
           } else {
-            propertiesElement.setFoFontSizeAttribute(value.toString() + "pt");
+            propertiesElement.setFoFontSizeAttribute(value + "pt");
           }
         } else if (key.equals("fontSizeAsian")) {
           if (value == null || value.equals(JSONObject.NULL)) {
@@ -5212,7 +5212,7 @@ public class JsonOperationConsumer {
             propertiesElement.setAttributeNS(
                 OdfDocumentNamespace.STYLE.getUri(),
                 "style:font-size-asian",
-                value.toString() + "pt");
+                value + "pt");
           }
         } else if (key.equals("fontSizeComplex")) {
           if (value == null || value.equals(JSONObject.NULL)) {
@@ -5222,7 +5222,7 @@ public class JsonOperationConsumer {
             propertiesElement.setAttributeNS(
                 OdfDocumentNamespace.STYLE.getUri(),
                 "style:font-size-complex",
-                value.toString() + "pt");
+                value + "pt");
           }
         } else if (key.equals("fontName")) {
           if (value == null || value.equals(JSONObject.NULL)) {

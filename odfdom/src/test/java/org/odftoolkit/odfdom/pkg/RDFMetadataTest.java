@@ -53,12 +53,12 @@ public class RDFMetadataTest extends ModelTestBase {
         (OdfTextDocument)
             OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SIMPLE_ODT));
     Model m1 = odt.getManifestRDFMetadata();
-    LOG.info("RDF Model - manifest:\n" + m1.toString());
+    LOG.info("RDF Model - manifest:\n" + m1);
     long size1 = m1.size();
     TestCase.assertEquals(25, size1);
 
     Model m2 = odt.getInContentMetadata();
-    LOG.info("RDF Model - rood document in-content:\n" + m1.toString());
+    LOG.info("RDF Model - rood document in-content:\n" + m1);
     long size2 = m2.size();
     TestCase.assertEquals(20, size2);
 
@@ -71,7 +71,7 @@ public class RDFMetadataTest extends ModelTestBase {
     // http://docs.oasis-open.org/ns/office/1.2/meta/pkg#Document)
     //		int duplicated = 2;
     Model m3 = m1.intersection(m2);
-    LOG.info("RDF Model - duplicated (manifest & in-content of root doc):\n" + m3.toString());
+    LOG.info("RDF Model - duplicated (manifest & in-content of root doc):\n" + m3);
     // Uncertain about the previous statement, as the duplicated RDF triple do not have an identical
     // subject..
     //		TestCase.assertEquals(duplicated, m3.size());
@@ -85,7 +85,7 @@ public class RDFMetadataTest extends ModelTestBase {
 
     m2 = subDoc.getInContentMetadata();
     size2 = m2.size();
-    LOG.info("RDF Model - embedded document in content:\n" + m2.toString());
+    LOG.info("RDF Model - embedded document in content:\n" + m2);
     TestCase.assertEquals(6, size2);
 
     m = subDoc.getRDFMetadata();
@@ -97,7 +97,7 @@ public class RDFMetadataTest extends ModelTestBase {
     m3 = m1.intersection(m2);
     LOG.info(
         "RDF Model - intersection of in-content metadata of root & embedded document:\n"
-            + m2.toString());
+            + m2);
     // TestCase.assertEquals(duplicated, m3.size());
     // TestCase.assertEquals(size1 + size2 - duplicated, m.size());
 

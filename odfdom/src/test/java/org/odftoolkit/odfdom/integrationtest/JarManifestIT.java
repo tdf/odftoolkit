@@ -95,7 +95,7 @@ public class JarManifestIT {
       } catch (IOException t) {
         StringWriter errors = new StringWriter();
         t.printStackTrace(new PrintWriter(errors));
-        Assert.fail(t.toString() + "\n" + errors.toString());
+        Assert.fail(t + "\n" + errors);
       }
 
       // EVALUATING COMMAND LINE INFORMATION

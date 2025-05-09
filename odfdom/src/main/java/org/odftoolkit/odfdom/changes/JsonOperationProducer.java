@@ -528,7 +528,7 @@ public class JsonOperationProducer {
           newOp.put(OPK_END, incrementAll(lastCharacterPos));
           if (start.get(start.size() - 1) > lastCharacterPos.get(start.size() - 1)) {
             isValidOperation = false;
-            LOG.fine("Neglecting '" + newOp.toString());
+            LOG.fine("Neglecting '" + newOp);
           }
         }
         newOp.put(OPK_ATTRS, attrs);
@@ -934,7 +934,7 @@ public class JsonOperationProducer {
       }
       if (panose1 != null && !panose1.isEmpty()) {
         if (panose1.size() != 10) {
-          LOG.fine("Panose1 is not 10 digits long: " + panose1.toString());
+          LOG.fine("Panose1 is not 10 digits long: " + panose1);
         }
         attrs.put("panose1", panose1);
       }
