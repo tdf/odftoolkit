@@ -89,7 +89,7 @@
             <dependency>
                 <groupId>org.apache.ant</groupId>
                 <artifactId>ant</artifactId>
-                <version>1.10.14</version>
+                <version>1.10.15</version>
             </dependency>
             <!-- used by ODFDOM for metadata -->
             <dependency>
@@ -162,14 +162,9 @@
             <!-- Jena 3.16 requires the following slf4j logging API (therefore our ODFDOM) -->
             <dependency>
                 <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.7.36</version>
-            </dependency>
-            <!-- Jena 3.16 requires the following slf4j logging API (therefore our ODFDOM) -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
-                <version>1.7.36</version>
+                <version>2.0.17</version>
+                <scope>test</scope>
             </dependency>
             <!-- Used by ODFDOM, i.e. org/odftoolkit/odfdom/IElementWriter.java -->
             <dependency>
