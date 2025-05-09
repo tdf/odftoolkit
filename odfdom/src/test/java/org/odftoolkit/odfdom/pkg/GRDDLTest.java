@@ -86,7 +86,7 @@ public class GRDDLTest extends ModelTestBase {
       m1.read(
           new InputStreamReader(new ByteArrayInputStream(out.toByteArray()), "utf-8"),
           odt.getPackage().getBaseURI());
-      LOG.info("RDF Model:\n" + m1.toString());
+      LOG.info("RDF Model:\n" + m1);
       TestCase.assertEquals(5, m1.size());
     } catch (Exception ex) {
       StringWriter sw = new StringWriter();

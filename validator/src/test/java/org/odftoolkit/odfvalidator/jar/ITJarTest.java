@@ -90,7 +90,7 @@ public class ITJarTest {
     } catch (IOException t) {
       StringWriter errors = new StringWriter();
       t.printStackTrace(new PrintWriter(errors));
-      Assert.fail(t.toString() + "\n" + errors.toString());
+      Assert.fail(t + "\n" + errors);
     }
     java.util.logging.Logger.getLogger(getClass().getName())
         .log(Level.INFO, "Test result:\n{0}", output);

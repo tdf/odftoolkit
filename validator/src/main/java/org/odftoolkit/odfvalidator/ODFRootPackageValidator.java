@@ -73,7 +73,7 @@ abstract class ODFRootPackageValidator extends ODFPackageValidator
       } catch (Exception e) {
         StringWriter errors = new StringWriter();
         e.printStackTrace(new PrintWriter(errors));
-        aLogger.logFatalError(e.getMessage() + "\n" + errors.toString());
+        aLogger.logFatalError(e.getMessage() + "\n" + errors);
       }
     }
     return m_aPkg;

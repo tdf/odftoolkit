@@ -161,7 +161,7 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
     } catch (Exception t) {
       StringWriter errors = new StringWriter();
       t.printStackTrace(new PrintWriter(errors));
-      Assert.fail(t.toString() + "\n" + errors.toString());
+      Assert.fail(t + "\n" + errors);
     }
     Assert.assertFalse(
         output.contains(

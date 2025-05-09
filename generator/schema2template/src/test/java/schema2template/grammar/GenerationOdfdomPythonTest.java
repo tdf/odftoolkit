@@ -74,7 +74,7 @@ public class GenerationOdfdomPythonTest {
     try {
       SchemaToTemplate.run(generations);
     } catch (Exception e) {
-      Assert.fail("Exception during test run: " + e.toString());
+      Assert.fail("Exception during test run: " + e);
       throw new RuntimeException(e);
     }
     // Changing order of multiple puzzlepieces makes file comparison unuseable

@@ -153,7 +153,7 @@ public class GenerationOdfdomJavaTest {
     try {
       SchemaToTemplate.run(generations);
     } catch (Exception e) {
-      Assert.fail("Exception during test run: " + e.toString());
+      Assert.fail("Exception during test run: " + e);
       e.printStackTrace();
       throw new RuntimeException(e);
     }

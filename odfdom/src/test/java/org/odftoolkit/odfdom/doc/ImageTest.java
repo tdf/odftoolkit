@@ -83,7 +83,7 @@ public class ImageTest {
                   String packagePath = img.newImage(mImageUri_ODFDOM);
                   if (packagePath == null || !pkg.contains(packagePath)) {
                     Assert.fail(
-                        "The following image could not be embedded:" + mImageUri_ODFDOM.toString());
+                        "The following image could not be embedded:" + mImageUri_ODFDOM);
                   } else if (!packagePath.equals(mPackageGraphicsPath + mImageName_ODFDOM)) {
                     Assert.fail(
                         "Instead of '"

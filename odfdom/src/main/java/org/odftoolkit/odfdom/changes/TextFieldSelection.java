@@ -288,11 +288,11 @@ public class TextFieldSelection extends TextSelection implements Comparable {
 
   @Override
   public String toString() {
-    return mStartPosition.toString()
+    return mStartPosition
         + "-URL"
         + mUrl
         + "-"
-        + mEndPosition.toString()
-        + mSelectionElement.toString();
+        + mEndPosition
+        + mSelectionElement;
   }
 }

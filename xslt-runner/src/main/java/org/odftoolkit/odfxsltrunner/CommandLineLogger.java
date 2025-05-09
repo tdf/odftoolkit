@@ -55,7 +55,7 @@ public class CommandLineLogger extends Logger {
       aOut.append(aPrefix);
       aOut.append(':');
       aOut.append(aMsg);
-      m_aOut.println(aOut.toString());
+      m_aOut.println(aOut);
     }
   }
 
@@ -71,6 +71,6 @@ public class CommandLineLogger extends Logger {
     aOut.append(" (");
     aOut.append(aPrefix);
     aOut.append(')');
-    m_aOut.println(aOut.toString());
+    m_aOut.println(aOut);
   }
 }

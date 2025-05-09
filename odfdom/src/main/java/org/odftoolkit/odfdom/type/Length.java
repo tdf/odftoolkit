@@ -227,7 +227,7 @@ public class Length implements OdfDataType {
             "The unit "
                 + length
                 + " could not be transformed to "
-                + destinationUnit.toString()
+                + destinationUnit
                 + "!");
       }
     } else {
@@ -321,7 +321,7 @@ public class Length implements OdfDataType {
             "The unit "
                 + length
                 + " could not be transformed to "
-                + destinationUnit.toString()
+                + destinationUnit
                 + "!");
       }
     } else {

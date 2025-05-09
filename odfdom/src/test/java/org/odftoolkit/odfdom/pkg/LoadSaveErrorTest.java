@@ -140,7 +140,7 @@ public class LoadSaveErrorTest {
     Assert.assertTrue(odfDocument.getPackage().contains("content.xml"));
     String baseURI = odfDocument.getPackage().getBaseURI();
 
-    LOG.info("SOURCE URI1:" + ResourceUtilities.getURI(SOURCE).toString());
+    LOG.info("SOURCE URI1:" + ResourceUtilities.getURI(SOURCE));
     LOG.info("SOURCE URI2:" + baseURI);
     Assert.assertTrue(
         ResourceUtilities.getURI(SOURCE).toString().compareToIgnoreCase(baseURI) == 0);

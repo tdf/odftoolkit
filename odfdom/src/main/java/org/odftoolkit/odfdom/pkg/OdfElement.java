@@ -1577,7 +1577,7 @@ public abstract class OdfElement extends ElementNSImpl {
         }
       } else {
         throw new RuntimeException(
-            "OdfElement: Algorithm not implemented: " + algorithm.toString());
+            "OdfElement: Algorithm not implemented: " + algorithm);
       }
       return currentPos;
     }

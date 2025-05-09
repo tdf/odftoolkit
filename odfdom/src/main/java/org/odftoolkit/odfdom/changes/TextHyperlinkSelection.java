@@ -80,12 +80,12 @@ public class TextHyperlinkSelection extends TextSelection implements Comparable 
 
   @Override
   public String toString() {
-    return mStartPosition.toString()
+    return mStartPosition
         + "-URL"
         + mUrl
         + "-"
-        + mEndPosition.toString()
-        + mSelectionElement.toString()
-        + ((TextAElement) mSelectionElement).getAutomaticStyle().toString();
+        + mEndPosition
+        + mSelectionElement
+        + ((TextAElement) mSelectionElement).getAutomaticStyle();
   }
 }

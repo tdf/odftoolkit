@@ -118,7 +118,7 @@ public class MSVRunTimeDumpTest {
     MSVExpressionVisitorType typeVisitor = new MSVExpressionVisitorType();
     MSVNameClassVisitorList nameVisitor = new MSVNameClassVisitorList();
     MSVExpressionType type = (MSVExpressionType) expr.visit(typeVisitor);
-    returnValue = (depth + ": " + type.toString());
+    returnValue = (depth + ": " + type);
 
     // AttributeExp, ElementExp
     if (expr instanceof NameClassAndExpression) {
@@ -132,7 +132,7 @@ public class MSVRunTimeDumpTest {
       returnValue += (" '" + ((ReferenceExp) expr).name + "',");
       if (DEBUG) System.out.println(returnValue);
     } else if (type == MSVExpressionType.VALUE) {
-      returnValue += (" '" + ((ValueExp) expr).value.toString() + "',");
+      returnValue += (" '" + ((ValueExp) expr).value + "',");
       if (DEBUG) System.out.println(returnValue);
     } else if (type == MSVExpressionType.DATA) {
       returnValue += (" '" + ((DataExp) expr).getName().localName + "',");
