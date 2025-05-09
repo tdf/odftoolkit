@@ -34,6 +34,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,15 +44,13 @@ import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument.OdfXMLFile;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 /** This collaboration document embraces an ODF document ad */
 public class CollabTextDocument implements Closeable {
 
-  private static final Logger LOG = LoggerFactory.getLogger(CollabTextDocument.class);
-  //	private static final Logger LOG = Logger.getLogger(CollabTextDocument.class.getName());
+  private static final Logger LOG = Logger.getLogger(CollabTextDocument.class.getName());
+
   // not private as used as well by tests
   static final String OPERATION_REVISON_FILE = "debug/revision.txt";
   static final String OPERATION_TEXT_FILE_PREFIX = "debug/operationUpdates_";
@@ -170,9 +171,9 @@ public class CollabTextDocument implements Closeable {
 
     JSONObject ops = mTextDocument.getOperations(this);
     if (ops != null && ops.length() > 0) {
-      LOG.debug("\n\n*** ALL OPERATIONS:\n{0}", ops.toString());
+      LOG.log(Level.FINE, "\n\n*** ALL OPERATIONS:\n{0}", ops);
     } else {
-      LOG.debug("\n\n*** ALL OPERATIONS:\nNo Operation have been extracted!");
+      LOG.log(Level.FINE, "\n\n*** ALL OPERATIONS:\nNo Operation have been extracted!");
     }
     return ops;
   }
@@ -202,7 +203,7 @@ public class CollabTextDocument implements Closeable {
    * @return the number of operations being accepted
    */
   public int applyChanges(JSONObject operations) throws Exception {
-    LOG.debug("\n*** EDIT OPERATIONS:\n{0}", operations.toString());
+    LOG.log(Level.FINE, "\n*** EDIT OPERATIONS:\n{0}", operations);
     //      System.err.println("\n*** EDIT OPERATIONS:\n" + operations.toString());
     final JSONArray ops = operations.getJSONArray(OPK_OPERATIONS);
     if (mSaveDebugOperations) {
@@ -242,13 +243,13 @@ public class CollabTextDocument implements Closeable {
     OdfPackage pkg = mTextDocument.getPackage();
     // if there is not already an orignal file being stored
     if (!pkg.contains(ORIGNAL_ODT_FILE)) {
-      LOG.debug("Adding original ODT document as debug within the zip at " + ORIGNAL_ODT_FILE);
+      LOG.log(Level.FINE, "Adding original ODT document as debug within the zip at {0}", ORIGNAL_ODT_FILE);
       try {
         // ..from the ODF ZIP
         pkg.insert(
             pkg.getInputStream(), ORIGNAL_ODT_FILE, "application/vnd.oasis.opendocument.text");
       } catch (IOException ex) {
-        LOG.error(null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
   }
@@ -275,14 +276,14 @@ public class CollabTextDocument implements Closeable {
       out.write(inputData);
       out.close();
     } catch (IOException ex) {
-      LOG.error(null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     } finally {
       try {
         if (out != null) {
           out.close();
         }
       } catch (IOException ex) {
-        LOG.error(null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
   }
@@ -314,10 +315,10 @@ public class CollabTextDocument implements Closeable {
           String firstLine = reader.readLine();
           // map it to a number
           revisionNo = Integer.parseInt(firstLine);
-          LOG.debug("Found an existing revision number:{0}", revisionNo);
+          LOG.log(Level.FINE, "Found an existing revision number:{0}", revisionNo);
         }
       } else {
-        LOG.debug("Created a new revision number: 1");
+        LOG.log(Level.FINE, "Created a new revision number: 1");
       }
       // always increment, so even a new file starts with the revision number "1"
       revisionNo++;
@@ -327,7 +328,7 @@ public class CollabTextDocument implements Closeable {
           "text/plain");
       pkg.insert(Integer.toString(revisionNo).getBytes(), OPERATION_REVISON_FILE, "text/plain");
     } catch (Exception ex) {
-      LOG.error(null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 
