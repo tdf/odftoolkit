@@ -156,7 +156,7 @@ public abstract class TextSelection {
   }
 
   /**
-   * @returns 1 if pos1 is after pos2, -1 if pos1 was before pos2 and 0 if both positions are equal
+   * @return 1 if pos1 is after pos2, -1 if pos1 was before pos2 and 0 if both positions are equal
    */
   private static int comparePosition(List<Integer> pos1, List<Integer> pos2) {
     int result = 0;

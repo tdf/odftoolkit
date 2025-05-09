@@ -110,7 +110,9 @@ public abstract class OdfElement extends ElementNSImpl {
     return null;
   }
 
-  /** @returns true if the given potentialParent is an ancestor of this element */
+  /**
+   * @return true if the given potentialParent is an ancestor of this element
+   */
   public boolean hasAncestor(Node potentialParent) {
     Node parentNode = this.getParentNode();
     boolean isParent = false;
@@ -2400,7 +2402,7 @@ public abstract class OdfElement extends ElementNSImpl {
   //		}
   //	}
   /**
-   * @returns the <text:a> element to apply the new format. If created it will be stored within the
+   /* @return the <text:a> element to apply the new format. If created it will be stored within the
    *     spanContainer
    */
   private static TextAElement getAnchorElement(
@@ -2424,7 +2426,7 @@ public abstract class OdfElement extends ElementNSImpl {
     return newAnchor;
   }
 
-  /** @returns a new Anchor element with the changes as new format */
+  /** @return a new Anchor element with the changes as new format */
   // ToDo: Should be moved as static creation function to the span element class!!
   private static TextAElement createAnchorElement(OdfFileDom ownerDoc, String url) {
     TextAElement containerElement = new TextAElement(ownerDoc);
@@ -2433,7 +2435,7 @@ public abstract class OdfElement extends ElementNSImpl {
   }
 
   /**
-   * @returns the span element to apply the new format. If created it will be stored within the
+   * @return the span element to apply the new format. If created it will be stored within the
    *     spanContainer
    */
   private static TextSpanElement getSpanElement(
@@ -2451,7 +2453,7 @@ public abstract class OdfElement extends ElementNSImpl {
     return newNode;
   }
 
-  /** @returns a new span element with the changes as new format */
+  /** @return a new span element with the changes as new format */
   // ToDo: Should be moved as static creation function to the span element class!!
   private static TextSpanElement createSpanElement(OdfFileDom ownerDoc, JSONObject formatChanges) {
     TextSpanElement spanElement = null;
@@ -2556,7 +2558,7 @@ public abstract class OdfElement extends ElementNSImpl {
     return isIgnored;
   }
 
-  /** @returns the next element sibling of the given node or null if none exists */
+  /** @return the next element sibling of the given node or null if none exists */
   public static OdfElement getNextSiblingElement(Node node) {
     OdfElement nextElement = null;
     Node _nextSibling = node.getNextSibling();
@@ -2568,7 +2570,7 @@ public abstract class OdfElement extends ElementNSImpl {
     return nextElement;
   }
 
-  /** @returns the next element sibling of the given node or null if none exists */
+  /** @return the next element sibling of the given node or null if none exists */
   public static OdfElement getPreviousSiblingElement(Node node) {
     OdfElement previousElement = null;
     Node _previousElement = node.getPreviousSibling();
@@ -2580,7 +2582,7 @@ public abstract class OdfElement extends ElementNSImpl {
     return previousElement;
   }
 
-  /** @returns the first element child of the this or null if none exists */
+  /** @return the first element child of the this or null if none exists */
   public OdfElement getFirstChildElement() {
     OdfElement firstElementChild = null;
     NodeList nodeList = this.getChildNodes();
@@ -2595,7 +2597,7 @@ public abstract class OdfElement extends ElementNSImpl {
     return firstElementChild;
   }
 
-  /** @returns the last element child of the this or null if none exists */
+  /** @return the last element child of the this or null if none exists */
   public OdfElement getLastChildElement() {
     OdfElement lastElementChild = null;
     NodeList nodeList = this.getChildNodes();
@@ -2622,7 +2624,6 @@ public abstract class OdfElement extends ElementNSImpl {
   }
 
   // ToDo: Move this to a intermediate class, e.g. ComponentRootElement
-  /** @return the component size of a heading, which is always 1 */
   public void setRepetition(int repetition) {
     // does not work for all classes
   }

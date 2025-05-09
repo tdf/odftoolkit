@@ -173,8 +173,6 @@ public class OdfFileSaxHandler extends DefaultHandler {
 
   /**
    * Expose the current node to JenaSink to for caching the parsed RDF triples.
-   *
-   * @return
    */
   protected void setContextNode(Node node) {
     if (this.sink != null) {

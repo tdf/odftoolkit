@@ -647,7 +647,7 @@ public class OdfTableCell {
 
   /**
    * Set the value and currency of the cell, and set the value type as "currency".
-   * If<code>value</value> is null, the cell value will be removed.
+   * If <code>value</code> is null, the cell value will be removed.
    *
    * @param value  the value that will be set
    * @param currency	the currency that will be set.
@@ -683,7 +683,7 @@ public class OdfTableCell {
 
   /**
    * Set the cell value as a percentage value and set the value type as percentage too.
-   * If<code>value</value> is null, the cell value will be removed.
+   * If <code>value</code> is null, the cell value will be removed.
    *
    * @param value	the value that will be set
    */
@@ -757,7 +757,7 @@ public class OdfTableCell {
   /**
    * Set the cell value as a double and set the value type to be "float".
    *
-   * @param value	the double value that will be set. If<code>value</value> is null, the cell value will be removed.
+   * @param value	the double value that will be set. If <code>value</code> is null, the cell value will be removed.
    */
   public void setDoubleValue(Double value) {
     splitRepeatedCells();
@@ -784,7 +784,7 @@ public class OdfTableCell {
   }
 
   /**
-   * Set the cell value as a boolean and set the value type to be boolean. If<code>value</value> is null, the cell value will be removed.
+   * Set the cell value as a boolean and set the value type to be boolean. If <code>value</code> is null, the cell value will be removed.
    *
    * @param value	the value of boolean type
    */

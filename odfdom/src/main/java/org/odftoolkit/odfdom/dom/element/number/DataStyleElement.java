@@ -457,7 +457,6 @@ public abstract class DataStyleElement extends OdfElement {
    * Get the format string that represents this style.
    *
    * @param format the format string
-   * @return the format string
    */
   public abstract void setFormat(String format);
 }

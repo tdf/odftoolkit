@@ -71,7 +71,7 @@ public class TextContainer<T> extends Component {
    * Removes a component from the text element container. Removes either an element representing a
    * component or text node of size 1
    *
-   * @returns the node being deleted, either the text node or element
+   * @return the node being deleted, either the text node or element
    */
   @Override
   public Node remove(int index) {

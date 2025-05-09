@@ -128,9 +128,12 @@ public class JsonOperationProducer {
 
   // -------------------------------------------------------------------------
   /**
-   * @param * @param start: An array, that contains the number of that paragraph, before which the
+   * @param componentType
+   * @param start: An array, that contains the number of that paragraph, before which the
    *     new paragraph shall be inserted. Has the last paragraph the number 2, so causes para=3,
    *     that the new paragraph will be inserted at the end. para=4 is not allowed in this case.
+   * @param formattingProperties
+   * @param context
    */
   public void add(
       String componentType,

@@ -750,7 +750,7 @@ public class OdfPackage implements Closeable {
     }
   }
 
-  /** @returns the media type of the root document from the manifest.xml */
+  /** @return the media type of the root document from the manifest.xml */
   private String getMediaTypeFromManifest() {
     OdfFileEntry rootDocumentEntry = mManifestEntries.get(SLASH);
     if (rootDocumentEntry != null) {
@@ -760,7 +760,7 @@ public class OdfPackage implements Closeable {
     }
   }
 
-  /** @returns the media type of the root document from the manifest.xml */
+  /** @return the media type of the root document from the manifest.xml */
   private String getMediaTypeFromEntry(ZipArchiveEntry mimetypeEntry)
       throws SAXException, IOException {
     String entryMediaType = null;
@@ -901,7 +901,6 @@ public class OdfPackage implements Closeable {
   /**
    * @param dom the DOM tree that has been parsed and should be added to the cache.
    * @param internalPath path relative to the package root, where the XML of the DOM is located.
-   * @return an already open OdfPackageDocument via its path, otherwise NULL.
    */
   void cacheDom(Document dom, String internalPath) {
     internalPath = normalizeFilePath(internalPath);
