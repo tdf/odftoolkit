@@ -111,7 +111,7 @@ public class SourceCodeModel {
    * Use in templates: Get base name for the element name, which shared attributes are being moved
    * into base
    *
-   * @param ´elementName baseChildName of the base
+   * @param elementName baseChildName of the base
    * @return base name
    */
   public String getBaseName(String elementName) {
@@ -126,7 +126,7 @@ public class SourceCodeModel {
    * Use in templates: Get base name for the element name, which shared attributes are being moved
    * into base
    *
-   * @param ´childName baseChildName of the base
+   * @param childName baseChildName of the base
    * @return base name
    */
   public String getBaseChild(String childName) {

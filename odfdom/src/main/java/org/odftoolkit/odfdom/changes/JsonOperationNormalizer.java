@@ -200,9 +200,6 @@ public class JsonOperationNormalizer {
    * <p>Warning: This method assumes that the data structure is acyclical.
    *
    * @param value The value to be serialized.
-   * @return a printable, displayable, transmittable representation of the object, beginning with
-   *     <code>{</code>&nbsp;<small>(left brace)</small> and ending with <code>}</code>
-   *     &nbsp;<small>(right brace)</small>.
    * @throws JSONException If the value is or contains an invalid number.
    */
   private static void appendValueAsString(Object value, StringBuilder sb) {

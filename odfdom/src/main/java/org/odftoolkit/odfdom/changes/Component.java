@@ -912,7 +912,7 @@ public class Component {
   }
 
   /**
-   * @returns the position of the child component c or given Node within the parents children list.
+   * @return the position of the child component c or given Node within the parents children list.
    *     Returns -1 if it is not a child.
    */
   public int indexOf(Object o) {

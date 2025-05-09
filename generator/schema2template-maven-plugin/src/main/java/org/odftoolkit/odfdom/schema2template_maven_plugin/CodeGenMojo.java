@@ -37,7 +37,7 @@ import schema2template.SchemaToTemplate;
  * Maven Mojo that triggers the generations of files from XML Grammar into Velocity file templates.
  *
  * @phase generate-sources
- * @description As example and its mjor use case see the ODFDOM Code Generator:
+ * @description As example and its major use case see the ODFDOM Code Generator:
  *     https://odftoolkit.org/generator/index.html
  */
 @Mojo(
