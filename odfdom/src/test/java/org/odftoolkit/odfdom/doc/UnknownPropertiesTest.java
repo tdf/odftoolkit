@@ -42,6 +42,7 @@ import org.w3c.dom.NodeList;
 
 public class UnknownPropertiesTest {
 
+  private static final Logger LOG = Logger.getLogger(UnknownPropertiesTest.class.getName());
   private static final String SOURCE = "unknown_properties.odt";
   private static final String TARGET = "unknown_properties_saved.odt";
 
@@ -80,7 +81,7 @@ public class UnknownPropertiesTest {
         }
       }
     } catch (Exception e) {
-      Logger.getLogger(UnknownPropertiesTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }

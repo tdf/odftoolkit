@@ -50,6 +50,7 @@ import org.w3c.dom.Node;
 
 public class ImageTest {
 
+  private static final Logger LOG = Logger.getLogger(ImageTest.class.getName());
   private URI mImageUri_ODFDOM = null;
   private static final String mImagePath = "src/main/javadoc/resources/";
   private static final String mImageName_ODFDOM = "ODFDOM-Layered-Model.png";
@@ -60,7 +61,7 @@ public class ImageTest {
       mImageUri_ODFDOM = new URI(mImagePath + mImageName_ODFDOM);
 
     } catch (URISyntaxException ex) {
-      Logger.getLogger(ImageTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail(ex.getMessage());
     }
   }
@@ -94,7 +95,7 @@ public class ImageTest {
                             + "'");
                   }
                 } catch (Exception ex) {
-                  Logger.getLogger(ImageTest.class.getName()).log(Level.SEVERE, null, ex);
+                  LOG.log(Level.SEVERE, null, ex);
                   Assert.fail(ex.getMessage());
                 }
               }
@@ -104,7 +105,7 @@ public class ImageTest {
       doc.save(ResourceUtilities.getTestOutputFile("add-images-by-uri_output.odt"));
 
     } catch (Exception e) {
-      Logger.getLogger(ImageTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -171,7 +172,7 @@ public class ImageTest {
       doc1.save(ResourceUtilities.getTestOutputFile("removeimages.odt"));
 
     } catch (Exception ex) {
-      Logger.getLogger(ImageTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+      LOG.log(Level.SEVERE, ex.getMessage(), ex);
       Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
     }
   }
@@ -198,7 +199,7 @@ public class ImageTest {
       Assert.assertTrue(getImageCount(doc1) == 1);
 
     } catch (Exception ex) {
-      Logger.getLogger(ImageTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+      LOG.log(Level.SEVERE, ex.getMessage(), ex);
       Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
     }
   }
@@ -229,7 +230,7 @@ public class ImageTest {
       doc.save(ResourceUtilities.getTestOutputFile("removeAllImages.odt"));
 
     } catch (Exception ex) {
-      Logger.getLogger(ImageTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+      LOG.log(Level.SEVERE, ex.getMessage(), ex);
       Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
     }
   }

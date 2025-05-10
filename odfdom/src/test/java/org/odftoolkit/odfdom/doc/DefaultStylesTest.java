@@ -40,6 +40,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
  */
 public class DefaultStylesTest {
 
+  private static final Logger LOG = Logger.getLogger(DefaultStylesTest.class.getName());
   private static String TEST_FILE = "test2.odt";
 
   public DefaultStylesTest() {}
@@ -73,7 +74,7 @@ public class DefaultStylesTest {
       Assert.assertEquals(prop5, "auto");
 
     } catch (Exception e) {
-      Logger.getLogger(DefaultStylesTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }

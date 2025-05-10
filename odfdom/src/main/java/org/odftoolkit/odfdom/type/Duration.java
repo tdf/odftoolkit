@@ -31,6 +31,7 @@ import javax.xml.datatype.DatatypeFactory;
 /** This class represents the in OpenDocument format used data type {@odf.datatype duration} */
 public class Duration implements OdfFieldDataType, OdfDataType {
 
+  private static final Logger LOG = Logger.getLogger(Duration.class.getName());
   private javax.xml.datatype.Duration mDurationType;
 
   /**
@@ -78,12 +79,10 @@ public class Duration implements OdfFieldDataType, OdfDataType {
       DatatypeFactory aFactory = DatatypeFactory.newInstance();
       return new Duration(aFactory.newDuration(stringValue));
     } catch (DatatypeConfigurationException ex1) {
-      Logger.getLogger(Duration.class.getName())
-          .log(Level.SEVERE, "DatatypeFactory can not be instanced", ex1);
+      LOG.log(Level.SEVERE, "DatatypeFactory can not be instanced", ex1);
       return null;
     } catch (IllegalArgumentException ex2) {
-      Logger.getLogger(Duration.class.getName())
-          .log(Level.SEVERE, "parameter is invalid for datatype Duration", ex2);
+      LOG.log(Level.SEVERE, "parameter is invalid for datatype Duration", ex2);
       throw new IllegalArgumentException("parameter is invalid for datatype Duration");
     }
   }

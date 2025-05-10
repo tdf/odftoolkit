@@ -55,6 +55,7 @@ import schema2template.SchemaToTemplate;
  */
 public class MSVExpressionInformation {
 
+  private static final Logger LOG = Logger.getLogger(MSVExpressionInformation.class.getName());
   /*
    * For each Named Expression (i.e. of the type "Element" or "Attribute") we build a path
    *    thisNamedExpression -> Expression subEx -> Expression subsubEx -> ... -> childNamedExpression
@@ -204,7 +205,7 @@ public class MSVExpressionInformation {
             try {
               throw new Exception("We have a CHOICE between one definition with N and one with 1");
             } catch (Exception e) {
-              Logger.getLogger(MSVExpressionInformation.class.getName()).log(Level.SEVERE, null, e);
+              LOG.log(Level.SEVERE, null, e);
             }
           } // Valid case: One has 1, the other N, they don't share a common CHOICE -> Set N as the
           // both defs are not exclusive (1 occurence + N occurences)
@@ -225,7 +226,7 @@ public class MSVExpressionInformation {
             try {
               throw new Exception("Cardinality defined as 1 but with two choices");
             } catch (Exception e) {
-              Logger.getLogger(MSVExpressionInformation.class.getName()).log(Level.SEVERE, null, e);
+              LOG.log(Level.SEVERE, null, e);
             }
           }
         }

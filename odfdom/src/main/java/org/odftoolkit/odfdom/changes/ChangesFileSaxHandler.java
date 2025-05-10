@@ -119,6 +119,7 @@ import org.xml.sax.SAXException;
 public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxHandler {
 
   private static final Logger LOG = Logger.getLogger(ChangesFileSaxHandler.class.getName());
+
   private static final String ROW_SPAN = "rowSpan";
   // ToDo: Fix API with its 'ugly' property name
   private static final String COLUMN_SPAN = "gridSpan";
@@ -688,7 +689,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                   }
                 }
               } catch (JSONException ex) {
-                Logger.getLogger(ChangesFileSaxHandler.class.getName()).log(Level.SEVERE, null, ex);
+                LOG.log(Level.SEVERE, null, ex);
               }
             }
 
@@ -890,7 +891,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
               drawingProps.put("anchorLayerOrder", anchorLayerOrder);
             }
           } catch (JSONException ex) {
-            Logger.getLogger(ChangesFileSaxHandler.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
           if (shape.hasAttributeNS(OdfDocumentNamespace.DRAW.getUri(), "transform")) {
             try {
@@ -914,9 +915,9 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                 drawingProps.put("anchorHorOffset", anchorHorOffset);
               }
             } catch (IndexOutOfBoundsException ex) {
-              Logger.getLogger(ChangesFileSaxHandler.class.getName()).log(Level.SEVERE, null, ex);
+              LOG.log(Level.SEVERE, null, ex);
             } catch (JSONException ex) {
-              Logger.getLogger(ChangesFileSaxHandler.class.getName()).log(Level.SEVERE, null, ex);
+              LOG.log(Level.SEVERE, null, ex);
             }
           }
           // <attribute name="text:anchor-type">
@@ -975,7 +976,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                 drawingProps.put("anchorHorBase", anchorHorBase);
               }
             } catch (JSONException ex) {
-              Logger.getLogger(ChangesFileSaxHandler.class.getName()).log(Level.SEVERE, null, ex);
+              LOG.log(Level.SEVERE, null, ex);
             }
           }
           hardFormatting.put("drawing", drawingProps);
@@ -1128,7 +1129,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
             try {
               rowProps.put("visible", Boolean.FALSE);
             } catch (JSONException ex) {
-              Logger.getLogger(ChangesFileSaxHandler.class.getName()).log(Level.SEVERE, null, ex);
+              LOG.log(Level.SEVERE, null, ex);
             }
           }
           cacheTableOperation(OperationConstants.ROWS, position, hardFormatting, repeatedRows);
@@ -1201,7 +1202,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                 hardFormatting.put("cell", cellProps);
               }
             } catch (JSONException ex) {
-              Logger.getLogger(ChangesFileSaxHandler.class.getName()).log(Level.SEVERE, null, ex);
+              LOG.log(Level.SEVERE, null, ex);
             }
           }
           List<Integer> position = updateComponentPosition();
@@ -1463,7 +1464,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
               }
             }
           } catch (IOException ex) {
-            Logger.getLogger(ChangesFileSaxHandler.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
         String nextMasterPageStyle = masterPage.getStyleNextStyleNameAttribute();
@@ -1520,7 +1521,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                 JsonOperationProducer.calculateCrops(image, href, imageProps);
               }
             } catch (JSONException ex) {
-              Logger.getLogger(ChangesFileSaxHandler.class.getName()).log(Level.SEVERE, null, ex);
+              LOG.log(Level.SEVERE, null, ex);
             }
           }
           if (image.hasAttributeNS(OdfDocumentNamespace.XML.getUri(), "id")) {
@@ -1528,7 +1529,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
               drawingProps.put(
                   "imageXmlId", image.getAttributeNS(OdfDocumentNamespace.XML.getUri(), "id"));
             } catch (JSONException ex) {
-              Logger.getLogger(ChangesFileSaxHandler.class.getName()).log(Level.SEVERE, null, ex);
+              LOG.log(Level.SEVERE, null, ex);
             }
           }
           // ToDo: Need test document with child element having office:binary-data with base64
@@ -1580,7 +1581,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                   (JSONObject) parentShapeProps.mShapeHardFormatations.get("shape");
               originalShapeProps.put("autoResizeHeight", "true");
             } catch (JSONException ex) {
-              Logger.getLogger(ChangesFileSaxHandler.class.getName()).log(Level.SEVERE, null, ex);
+              LOG.log(Level.SEVERE, null, ex);
             }
           }
         }
@@ -1841,8 +1842,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                       }
                     }
                   } catch (JSONException ex) {
-                    Logger.getLogger(ChangesFileSaxHandler.class.getName())
-                        .log(Level.SEVERE, null, ex);
+                    LOG.log(Level.SEVERE, null, ex);
                   }
                 }
                 if (hardFormatting != null) {
@@ -2077,7 +2077,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                       attr.getValue(),
                       attr.getPrefix() + ":" + attr.getLocalName()));
             } catch (SAXException ex) {
-              Logger.getLogger(StyleStyleElement.class.getName()).log(Level.SEVERE, null, ex);
+              LOG.log(Level.SEVERE, null, ex);
             }
           } else {
             LOG.severe(

@@ -32,6 +32,7 @@ import javax.xml.namespace.QName;
 
 public class Util {
 
+  private static final Logger LOG = Logger.getLogger(Util.class.getName());
   private static final String SLASH = "/";
   private static final String EMPTY_BASE_URI = "";
   /**
@@ -144,7 +145,7 @@ public class Util {
     try {
       ret = new URI(sb.toString()).toASCIIString();
     } catch (URISyntaxException ex) {
-      Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return ret;
   }

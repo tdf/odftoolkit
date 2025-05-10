@@ -35,6 +35,8 @@ import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
 
 public class ElementTest {
 
+  private static final Logger LOG = Logger.getLogger(ElementTest.class.getName());
+
   public ElementTest() {}
 
   @Test
@@ -56,7 +58,7 @@ public class ElementTest {
           p1clone.getProperty(StyleTextPropertiesElement.FontSize),
           p1.getProperty(StyleTextPropertiesElement.FontSize));
     } catch (Exception e) {
-      Logger.getLogger(ElementTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -85,7 +87,7 @@ public class ElementTest {
       Assert.assertFalse(p1.equals(null));
 
     } catch (Exception e) {
-      Logger.getLogger(ElementTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }

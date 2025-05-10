@@ -50,6 +50,8 @@ import org.w3c.dom.NodeList;
 /** Convenient functionality for the parent ODF OpenDocument element */
 public class OdfDrawImage extends DrawImageElement {
 
+  private static final Logger LOG = Logger.getLogger(OdfDrawImage.class.getName());
+
   private static final long serialVersionUID = 8409319888919451149L;
   private URI mImageURI;
   // OdfPackage necessary to adapt the manifest referencing the image
@@ -79,7 +81,7 @@ public class OdfDrawImage extends DrawImageElement {
         mImageURI = new URI(AnyURI.encodePath(this.getXlinkHrefAttribute().toString()));
       }
     } catch (URISyntaxException ex) {
-      Logger.getLogger(OdfDrawImage.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return mImageURI;
   }
@@ -96,7 +98,7 @@ public class OdfDrawImage extends DrawImageElement {
       this.setXlinkHrefAttribute(AnyURI.decodePath(uri.toString()));
       mImageURI = uri;
     } catch (URISyntaxException ex) {
-      Logger.getLogger(OdfDrawImage.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 
@@ -214,7 +216,7 @@ public class OdfDrawImage extends DrawImageElement {
         return imageList;
       }
     } catch (Exception ex) {
-      Logger.getLogger(OdfDrawImage.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+      LOG.log(Level.SEVERE, ex.getMessage(), ex);
     }
     return imageList;
   }
@@ -300,7 +302,7 @@ public class OdfDrawImage extends DrawImageElement {
           doc.getContentDom().getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "image");
       return imageNodes.getLength();
     } catch (Exception ex) {
-      Logger.getLogger(OdfDrawImage.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+      LOG.log(Level.SEVERE, ex.getMessage(), ex);
     }
     return 0;
   }
@@ -321,7 +323,7 @@ public class OdfDrawImage extends DrawImageElement {
         imageList.add(image);
       }
     } catch (Exception ex) {
-      Logger.getLogger(OdfDrawImage.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+      LOG.log(Level.SEVERE, ex.getMessage(), ex);
     }
     return imageList;
   }

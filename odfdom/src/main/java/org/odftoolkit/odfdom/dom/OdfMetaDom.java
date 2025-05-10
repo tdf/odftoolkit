@@ -37,6 +37,7 @@ import org.xml.sax.SAXException;
 
 /** The DOM representation of the ODF meta.xml file of an ODF document. */
 public class OdfMetaDom extends OdfFileDom {
+  private static final Logger LOG = Logger.getLogger(OdfMetaDom.class.getName());
 
   private static final long serialVersionUID = 766167617530147884L;
 
@@ -67,7 +68,7 @@ public class OdfMetaDom extends OdfFileDom {
     try {
       super.initialize();
     } catch (SAXException | IOException | ParserConfigurationException ex) {
-      Logger.getLogger(OdfMetaDom.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 

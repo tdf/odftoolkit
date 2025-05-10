@@ -51,6 +51,8 @@ import org.w3c.dom.Node;
 /** Implements shared functions for OdfAutomaticStyles and OdfStyles. */
 public abstract class OdfStylesBase extends OdfContainerElementBase {
 
+  private static final Logger LOG = Logger.getLogger(OdfOfficeStyles.class.getName());
+
   private static final long serialVersionUID = 1L;
 
   private HashMap<OdfStyleFamily, HashMap<String, OdfStyle>> mStyles;
@@ -101,7 +103,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
       }
 
     } catch (Exception ex) {
-      Logger.getLogger(OdfOfficeStyles.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return newStyle;
   }

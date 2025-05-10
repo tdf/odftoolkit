@@ -85,6 +85,7 @@ import org.xml.sax.SAXException;
  * <p>The class represents such a document, providing easier access to its XML files.
  */
 public abstract class OdfSchemaDocument extends OdfPackageDocument {
+  private static final Logger LOG = Logger.getLogger(OdfSchemaDocument.class.getName());
 
   /* OdfFileSaxHandler needs to deal with at least two XML files at the same time.
   They are here cached to not dispatch a parsing, whenever the other is received.
@@ -123,7 +124,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
               new OdfValidationException(
                   OdfSchemaConstraint.DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML, baseURI));
         } catch (SAXException ex) {
-          Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
       InputStream mimetypeStream =
@@ -134,7 +135,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
               new OdfValidationException(
                   OdfSchemaConstraint.PACKAGE_SHALL_CONTAIN_MIMETYPE, pkg.getBaseURI()));
         } catch (SAXException ex) {
-          Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
     }
@@ -196,7 +197,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
         this.getContentDom();
         queue = getJsonOperationQueue();
       } catch (SAXException ex) {
-        Logger.getLogger(OdfSchemaDocument.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
         throw ex;
       }
     }
@@ -225,7 +226,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
         // Access the DOM of the content.xml so the XML is parsed once!!
         this.getContentDom();
       } catch (Exception ex) {
-        Logger.getLogger(OdfSchemaDocument.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     return mRootComponent;
@@ -325,7 +326,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
         }
       }
     } catch (Exception ex) {
-      Logger.getLogger(OdfSchemaDocument.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return targetElement;
   }
@@ -520,7 +521,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
         documentStyles = stylesDom.getOfficeStyles();
       }
     } catch (Exception ex) {
-      Logger.getLogger(OdfSchemaDocument.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return documentStyles;
   }
@@ -538,7 +539,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
         officeMasterStyles = stylesDom.getOrCreateMasterStyles();
       }
     } catch (Exception ex) {
-      Logger.getLogger(OdfSchemaDocument.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return officeMasterStyles;
   }
@@ -558,7 +559,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
         stylesDom.getOrCreateOfficeStyles();
       }
     } catch (Exception ex) {
-      Logger.getLogger(OdfSchemaDocument.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return documentStyles;
   }
@@ -679,7 +680,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
         }
       }
     } catch (Exception ex) {
-      Logger.getLogger(OdfSchemaDocument.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return tableList;
   }

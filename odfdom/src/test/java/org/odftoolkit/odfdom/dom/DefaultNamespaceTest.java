@@ -33,6 +33,8 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class DefaultNamespaceTest {
 
+  private static final Logger LOG = Logger.getLogger(DefaultNamespaceTest.class.getName());
+
   public DefaultNamespaceTest() {}
 
   /**
@@ -54,8 +56,7 @@ public class DefaultNamespaceTest {
       Assert.assertTrue(content.getRootElement().getLocalName().equals("document-content"));
       odfDocument.save(ResourceUtilities.getAbsoluteOutputPath(TARGET_DEFAULT_NAMESPACE));
     } catch (Exception e) {
-      Logger.getLogger(DefaultNamespaceTest.class.getName())
-          .log(Level.SEVERE, e.getMessage() + ExceptionUtils.getStackTrace(e), e);
+      LOG.log(Level.SEVERE, e.getMessage() + ExceptionUtils.getStackTrace(e), e);
       Assert.fail(e.getMessage());
     }
   }

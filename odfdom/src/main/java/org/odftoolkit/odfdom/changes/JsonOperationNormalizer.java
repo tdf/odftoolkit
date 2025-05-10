@@ -72,12 +72,13 @@ import org.json.JSONString;
  */
 public class JsonOperationNormalizer {
 
+  private static final Logger LOG = Logger.getLogger(JsonOperationNormalizer.class.getName());
+
   // If in an operation a map contains one of the following keys, they will be added at the
   // beginning for better readability!
   private static final String[] SORTING_SEQUENCE_OF_KEYS = {
     OPK_NAME, OPK_START, OPK_END, OPK_TYPE, OPK_STYLE_ID
   };
-  private static final Logger LOG = Logger.getLogger(JsonOperationNormalizer.class.getName());
 
   /**
    * Make a JSON text of this JSONObject. For compactness, no whitespace is added. If this would not
@@ -107,7 +108,7 @@ public class JsonOperationNormalizer {
           JSONArray ops = jsonObject.getJSONArray(OPK_OPERATIONS);
           sb.append(normalizeOperations(ops));
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationNormalizer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
         sb.append("\n]");
       } else {
@@ -422,7 +423,7 @@ public class JsonOperationNormalizer {
             return mCollator.compare(uniqueStyleName1, uniqueStyleName2);
           }
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationNormalizer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
       return returnValue;

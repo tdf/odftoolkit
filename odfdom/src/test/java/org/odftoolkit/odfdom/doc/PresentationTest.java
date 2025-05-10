@@ -49,13 +49,14 @@ import org.w3c.dom.NodeList;
 /** @author cl93746 */
 public class PresentationTest {
 
+  private static final Logger LOG = Logger.getLogger(PresentationTest.class.getName());
   OdfDocument odfdoc;
 
   public PresentationTest() {
     try {
       odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("presentation.odp"));
     } catch (Exception e) {
-      Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -78,7 +79,7 @@ public class PresentationTest {
       Assert.assertEquals(page, odpdoc.getSlideByIndex(2));
 
     } catch (Exception e) {
-      Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -108,7 +109,7 @@ public class PresentationTest {
       // test layerset
       Assert.assertNotNull(officeMasterStyles.getLayerSet());
     } catch (Exception e) {
-      Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -142,7 +143,7 @@ public class PresentationTest {
       Assert.assertNotNull(style_iter);
       Assert.assertTrue(style_iter.hasNext());
     } catch (Exception e) {
-      Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -169,7 +170,7 @@ public class PresentationTest {
       Logger.getLogger(DocumentCreationTest.class.getName())
           .info(f.getPresentationClassAttribute());
     } catch (Exception e) {
-      Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -201,7 +202,7 @@ public class PresentationTest {
       //			Assert.assertTrue("Last part of bug51 still to be fixed..!!", styleUserCount ==
       // elementsWithStyleCount);
     } catch (Exception e) {
-      Logger.getLogger(PresentationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }

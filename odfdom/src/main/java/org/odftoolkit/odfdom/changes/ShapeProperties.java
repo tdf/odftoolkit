@@ -40,6 +40,7 @@ import org.w3c.dom.Node;
 
 /** The status of frames */
 public class ShapeProperties extends CachedComponent {
+  private static final Logger LOG = Logger.getLogger(ShapeProperties.class.getName());
 
   private static final long serialVersionUID = 1L;
   // *** FRAME PROPERTIES ***
@@ -78,7 +79,7 @@ public class ShapeProperties extends CachedComponent {
           try {
             newDrawingProps.put(key, originalDrawingProps.get(key));
           } catch (JSONException ex) {
-            Logger.getLogger(ShapeProperties.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
         mShapeHardFormatations.put("drawing", newDrawingProps);
@@ -92,7 +93,7 @@ public class ShapeProperties extends CachedComponent {
           try {
             newImageProps.put(key, originalImageProps.get(key));
           } catch (JSONException ex) {
-            Logger.getLogger(ShapeProperties.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
         mShapeHardFormatations.put("image", newImageProps);
@@ -117,7 +118,7 @@ public class ShapeProperties extends CachedComponent {
       try {
         drawingProps.put("description", desc);
       } catch (JSONException ex) {
-        Logger.getLogger(ShapeProperties.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     CachedComponent parentComponent;
@@ -137,7 +138,7 @@ public class ShapeProperties extends CachedComponent {
           }
         }
       } catch (JSONException ex) {
-        Logger.getLogger(ShapeProperties.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     if (!mComponentStack.empty()

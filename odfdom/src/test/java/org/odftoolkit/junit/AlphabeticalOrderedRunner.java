@@ -32,8 +32,6 @@ import org.junit.runners.model.InitializationError;
  */
 public class AlphabeticalOrderedRunner extends BlockJUnit4ClassRunner {
 
-  // private static final Logger LOG = Logger.getLogger(OrderedRunner.class.getName());
-
   /*
    * default initializer
    */

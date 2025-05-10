@@ -78,6 +78,8 @@ import org.w3c.dom.NodeList;
  */
 public class OdfTable {
 
+  private static final Logger LOG = Logger.getLogger(OdfTable.class.getName());
+
   TableTableElement mTableElement;
   protected OdfDocument mDocument;
   protected boolean mIsSpreadsheet;
@@ -527,9 +529,9 @@ public class OdfTable {
   //			OdfElement contentRoot = document.getContentRoot();
   //			contentRoot.appendChild(table);
   //		} catch (DOMException e) {
-  //			Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+  //			LOG.log(Level.SEVERE, e.getMessage(), e);
   //		} catch (Exception e) {
-  //			Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+  //			LOG.log(Level.SEVERE, e.getMessage(), e);
   //		}
   //	}
   /**
@@ -553,9 +555,9 @@ public class OdfTable {
       return OdfTable.getInstance(newTEle);
 
     } catch (DOMException e) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     } catch (Exception e) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
 
     return null;
@@ -578,7 +580,7 @@ public class OdfTable {
     try {
       table = newTable(document.getContentRoot());
     } catch (Exception ex) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return table;
   }
@@ -627,7 +629,7 @@ public class OdfTable {
       return OdfTable.getInstance(newTEle);
 
     } catch (Exception e) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
 
     return null;
@@ -651,7 +653,7 @@ public class OdfTable {
     try {
       table = newTable(document.getContentRoot(), numRows, numCols);
     } catch (Exception ex) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return table;
   }
@@ -686,9 +688,9 @@ public class OdfTable {
       return OdfTable.getInstance(newTEle);
 
     } catch (DOMException e) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     } catch (Exception e) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
 
     return null;
@@ -718,7 +720,7 @@ public class OdfTable {
           newTable(
               document.getContentRoot(), numRows, numCols, headerRowNumber, headerColumnNumber);
     } catch (Exception ex) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return table;
   }
@@ -797,9 +799,9 @@ public class OdfTable {
       }
       return table;
     } catch (DOMException e) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     } catch (Exception e) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
     return null;
   }
@@ -825,7 +827,7 @@ public class OdfTable {
     try {
       table = newTable(document.getContentRoot(), rowLabel, columnLabel, data);
     } catch (Exception ex) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return table;
   }
@@ -906,9 +908,9 @@ public class OdfTable {
       return table;
 
     } catch (DOMException e) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     } catch (Exception e) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
 
     return null;
@@ -936,7 +938,7 @@ public class OdfTable {
     try {
       table = newTable(document.getContentRoot(), rowLabel, columnLabel, data);
     } catch (Exception ex) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return table;
   }
@@ -2097,7 +2099,7 @@ public class OdfTable {
         }
       }
     } catch (Exception e) {
-      Logger.getLogger(OdfTable.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
     return null;
   }

@@ -64,7 +64,7 @@ public class TextModifyTest {
           (OdfTextDocument)
               OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEXT_FILE));
     } catch (Exception e) {
-      Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -104,7 +104,7 @@ public class TextModifyTest {
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_DELETE));
     } catch (Exception e) {
-      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }

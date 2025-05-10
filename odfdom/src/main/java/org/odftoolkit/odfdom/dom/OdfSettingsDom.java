@@ -34,6 +34,7 @@ import org.xml.sax.SAXException;
 
 /** The DOM representation of the ODF Settings.xml file of an ODF document. */
 public class OdfSettingsDom extends OdfFileDom {
+  private static final Logger LOG = Logger.getLogger(OdfSettingsDom.class.getName());
 
   private static final long serialVersionUID = 766167617530147885L;
 
@@ -63,7 +64,7 @@ public class OdfSettingsDom extends OdfFileDom {
     try {
       super.initialize();
     } catch (SAXException | IOException | ParserConfigurationException ex) {
-      Logger.getLogger(OdfMetaDom.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     OfficeDocumentSettingsElement rootElement = this.getRootElement();
     if (rootElement == null) {

@@ -44,6 +44,7 @@ import org.w3c.dom.NodeList;
 
 public class TableTest {
 
+  private static final Logger LOG = Logger.getLogger(TableTest.class.getName());
   private static final String TEST_FILE_SAVE_2TABLES_OUT = "TestSave2Tables_out.odt";
 
   public TableTest() {}
@@ -73,7 +74,7 @@ public class TableTest {
       }
       Assert.assertTrue(tscount > 0);
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -99,7 +100,7 @@ public class TableTest {
         Assert.assertTrue(table == OdfTableCell.getInstance(td).getTable());
       }
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }

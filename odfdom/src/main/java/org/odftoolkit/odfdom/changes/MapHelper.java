@@ -69,6 +69,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class MapHelper {
+  private static final Logger LOG = Logger.getLogger(MapHelper.class.getName());
 
   public static final String AUTO = "auto";
   public static final String NORMAL = "normal";
@@ -79,7 +80,6 @@ public class MapHelper {
   public static final String HASH = "#";
   public static final String TRANSPARENT = "transparent";
   private static final String PERCENT = "%";
-  private static final Logger LOG = Logger.getLogger(JsonOperationProducer.class.getName());
   private static Map<Integer, String> languageToLocaleMap = null;
   private static Map<String, Integer> localeToLanguageMap = null;
   // a color, which type is set to auto - adapting color to environment
@@ -118,7 +118,7 @@ public class MapHelper {
         }
       }
     } catch (JSONException ex) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return border;
   }
@@ -134,7 +134,7 @@ public class MapHelper {
       border.put("color", createColorMap(width));
 
     } catch (JSONException ex) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     isColor = true;
 
@@ -470,7 +470,7 @@ public class MapHelper {
             // fo:letter-spacing="0.0104in" fo:hyphenate="false
             //                      "vertAlign":"super"}
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       } else if (styleFamilyGroup.equals("paragraph")) {
@@ -631,7 +631,7 @@ public class MapHelper {
             }
 
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       } else if (styleFamilyGroup.equals("cell")) {
@@ -659,7 +659,7 @@ public class MapHelper {
               newProps.put("alignVert", propValue);
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       } else if (styleFamilyGroup.equals("column")) {
@@ -674,7 +674,7 @@ public class MapHelper {
               newProps.put("customWidth", !Boolean.parseBoolean(propValue));
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       } else if (styleFamilyGroup.equals("row")) {
@@ -696,7 +696,7 @@ public class MapHelper {
             }
           }
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       } else if (styleFamilyGroup.equals("list")) {
         try {
@@ -724,7 +724,7 @@ public class MapHelper {
             }
           }
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       } else if (styleFamilyGroup.equals("table")) {
         boolean marginToBeDone = true;
@@ -756,7 +756,7 @@ public class MapHelper {
               newProps.put("pageBreakAfter", propValue.equals("page"));
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       } else if (styleFamilyGroup.equals("page")) {
@@ -798,7 +798,7 @@ public class MapHelper {
               newProps.put("numberFormat", propValue);
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       } else if (styleFamilyGroup.equals("drawing")) {
@@ -1085,7 +1085,7 @@ public class MapHelper {
               }
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
         // border handling: text frames have a border attribute, shapes _can_ have stroke
@@ -1165,7 +1165,7 @@ public class MapHelper {
               newProps.put("fillColor", color);
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       }
@@ -1215,7 +1215,7 @@ public class MapHelper {
         lineHeight.put("value", MapHelper.normalizeLength(lineHeightValue));
       }
     } catch (JSONException ex) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return lineHeight;
   }
@@ -1658,7 +1658,7 @@ public class MapHelper {
         long diff = cal.getTimeInMillis() + 2209161600000l; // 30.12.1899
         ret = diff / 86400000.;
       } catch (ParseException ex) {
-        Logger.getLogger(MapHelper.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     return ret;
@@ -2148,9 +2148,9 @@ public class MapHelper {
         }
       }
     } catch (SAXException e) {
-      Logger.getLogger(MapHelper.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     } catch (IOException ex) {
-      Logger.getLogger(MapHelper.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return ret;
   }

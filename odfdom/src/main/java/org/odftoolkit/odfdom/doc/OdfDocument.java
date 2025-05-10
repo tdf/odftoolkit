@@ -79,6 +79,8 @@ import org.xml.sax.SAXException;
 
 /** This abstract class is representing one of the possible ODF documents. */
 public abstract class OdfDocument extends OdfSchemaDocument {
+  private static final Logger LOG = Logger.getLogger(OdfDocument.class.getName());
+
   // Static parts of file references
 
   private static final String SLASH = "/";
@@ -635,7 +637,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
         OdfMetaDom metaDom = getMetaDom();
         mOfficeMeta = new OdfOfficeMeta(metaDom);
       } catch (Exception ex) {
-        Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     return mOfficeMeta;
@@ -807,7 +809,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
       String imagePath = image.newImage(imageUri);
       return imagePath;
     } catch (Exception ex) {
-      Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return null;
   }
@@ -836,7 +838,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
         }
       }
     } catch (Exception e) {
-      Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
     return null;
   }
@@ -872,7 +874,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
         tableList.add(OdfTable.getInstance(tableElementList.get(i)));
       }
     } catch (Exception e) {
-      Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
     return tableList;
   }
@@ -921,8 +923,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
         DatatypeFactory aFactory = DatatypeFactory.newInstance();
         metaData.setEditingDuration(new Duration(aFactory.newDurationDayTime(editingDuration)));
       } catch (DatatypeConfigurationException e) {
-        Logger.getLogger(OdfDocument.class.getName())
-            .log(
+        LOG.log(
                 Level.SEVERE,
                 "editing duration update fail as DatatypeFactory can not be instanced",
                 e);
@@ -1057,7 +1058,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
           break;
       }
     } catch (Exception e) {
-      Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, "Failed to set locale", e);
+      LOG.log(Level.SEVERE, "Failed to set locale", e);
     }
   }
 
@@ -1085,7 +1086,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
               OdfTextProperties.CountryComplex, OdfTextProperties.LanguageComplex);
       }
     } catch (Exception e) {
-      Logger.getLogger(OdfDocument.class.getName()).log(Level.SEVERE, "Failed to get locale", e);
+      LOG.log(Level.SEVERE, "Failed to get locale", e);
     }
     return null;
   }

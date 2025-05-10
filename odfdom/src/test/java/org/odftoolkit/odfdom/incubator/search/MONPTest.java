@@ -31,6 +31,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 /** Test ReplaceWith method for class org.odftoolkit.odfdom.incubator.search.TextSelection */
 public class MONPTest {
 
+  private static final Logger LOG = Logger.getLogger(MONPTest.class.getName());
   public static final String TEXT_FILE = "navigationtest.odt";
   public static final String SAVE_FILE = "testsave1.odt";
 
@@ -67,7 +68,7 @@ public class MONPTest {
       Assert.assertTrue(20 == i);
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE));
     } catch (Exception e) {
-      Logger.getLogger(MONPTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }

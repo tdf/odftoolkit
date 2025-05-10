@@ -53,6 +53,7 @@ import org.xml.sax.InputSource;
  */
 public class OdfPackageDocument implements Closeable {
 
+  private static final Logger LOG = Logger.getLogger(OdfPackageDocument.class.getName());
   private static final String TWO_DOTS = "..";
   protected static final String SLASH = "/";
   private static final String COLON = ":";
@@ -362,8 +363,7 @@ public class OdfPackageDocument implements Closeable {
     public InputStream createInputStream() {
       InputStream in = OdfPackageDocument.class.getResourceAsStream(this.name);
       if (in == null) {
-        Logger.getLogger(OdfPackageDocument.class.getName())
-            .log(Level.SEVERE, "Could not find resource: {0}", this.name);
+        LOG.log(Level.SEVERE, "Could not find resource: {0}", this.name);
       }
       return in;
     }
@@ -403,7 +403,7 @@ public class OdfPackageDocument implements Closeable {
       ResourceUtils.renameResource(
           rdfModel.getResource(RDFBaseUri), RDFBaseUri.substring(0, RDFBaseUri.length() - 1));
     } catch (Exception ex) {
-      Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return rdfModel;
   }

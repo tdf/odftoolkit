@@ -37,6 +37,8 @@ import org.w3c.dom.NodeList;
  */
 public class TextNavigation extends Navigation<TextSelection> {
 
+  private static final Logger LOG = Logger.getLogger(TextNavigation.class.getName());
+
   private static final String mMatchedElementName = "text:p,text:h";
   private final Pattern mPattern;
   private final OdfTextDocument mTextDocument;
@@ -126,7 +128,7 @@ public class TextNavigation extends Navigation<TextSelection> {
       }
 
     } catch (Exception ex) {
-      Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+      LOG.log(Level.SEVERE, ex.getMessage(), ex);
     }
     return null;
   }
@@ -151,7 +153,7 @@ public class TextNavigation extends Navigation<TextSelection> {
       try {
         element = (OdfElement) getNextMatchElement((Node) mTextDocument.getContentRoot());
       } catch (Exception ex) {
-        Logger.getLogger(TextNavigation.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        LOG.log(Level.SEVERE, ex.getMessage(), ex);
       }
       if (element != null) {
         result = new TextSelection(mCurrentText, element, mCurrentIndex, mSelectionManager);

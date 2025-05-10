@@ -32,6 +32,8 @@ import org.junit.Ignore;
 @Ignore
 public class OdfValidatorTestBase {
 
+  public static final java.util.logging.Logger LOG = java.util.logging.Logger.getLogger(OdfValidatorTestBase.class.getName());
+
   public OdfValidatorTestBase() {}
 
   String doValidation(String aFileName, OdfVersion aVersion) throws Exception {
@@ -40,8 +42,7 @@ public class OdfValidatorTestBase {
     PrintStream aPOut = new PrintStream(aOut);
     InputStream aIn = getClass().getClassLoader().getResourceAsStream(aFileName);
     if (aIn == null) {
-      java.util.logging.Logger.getLogger(OdfValidatorTestBase.class.getName())
-          .log(Level.SEVERE, "The input document '" + aFileName + "' could not be found!");
+      LOG.log(Level.SEVERE, "The input document '" + aFileName + "' could not be found!");
     }
     aValidator.validateStream(aPOut, aIn, aFileName, OdfValidatorMode.VALIDATE, null);
     return aOut.toString();

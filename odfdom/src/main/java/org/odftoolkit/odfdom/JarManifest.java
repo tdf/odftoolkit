@@ -54,6 +54,8 @@ public class JarManifest {
   private static String ODFDOM_BUILD_DATE;
   private static String ODFDOM_SUPPORTED_ODF_VERSION;
 
+  private static final Logger LOG = Logger.getLogger(JarManifest.class.getName());
+
   static {
     try {
       Manifest manifest = new Manifest(getManifestAsStream());
@@ -64,7 +66,7 @@ public class JarManifest {
       ODFDOM_BUILD_DATE = attr.getValue("ODFDOM-Built-Date");
       ODFDOM_SUPPORTED_ODF_VERSION = attr.getValue("ODFDOM-Supported-Odf-Version");
     } catch (Exception e) {
-      Logger.getLogger(JarManifest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -83,12 +85,12 @@ public class JarManifest {
     try {
       manifestURL = new URL(manifestRef);
     } catch (MalformedURLException ex) {
-      Logger.getLogger(JarManifest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     try {
       in = manifestURL.openStream();
     } catch (IOException ex) {
-      Logger.getLogger(JarManifest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return in;
   }

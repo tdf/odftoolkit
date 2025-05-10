@@ -42,6 +42,7 @@ import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
  * <p>OdfTableCellRange provides methods to get/set/modify the properties of cell range.
  */
 public class OdfTableCellRange {
+  private static final Logger LOG = Logger.getLogger(OdfTableCellRange.class.getName());
 
   private int mnStartRow;
   private int mnStartColumn;
@@ -309,8 +310,7 @@ public class OdfTableCellRange {
                 firstCell.appendContentFrom(cellBase);
                 cellBase.removeContent();
               } catch (Exception e) {
-                Logger.getLogger(OdfTableCellRange.class.getName())
-                    .log(Level.SEVERE, e.getMessage(), e);
+                LOG.log(Level.SEVERE, e.getMessage(), e);
               }
             }
           }
@@ -430,7 +430,7 @@ public class OdfTableCellRange {
       contentRoot.appendChild(nameExpress);
       msCellRangeName = cellRangeName;
     } catch (Exception ex) {
-      Logger.getLogger(OdfTableCellRange.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 

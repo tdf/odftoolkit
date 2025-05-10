@@ -48,6 +48,7 @@ import org.xml.sax.SAXException;
 
 /** The DOM representation of the ODF styles.xml file of an ODF document. */
 public class OdfStylesDom extends OdfContentOrStylesDomBase {
+  private static final Logger LOG = Logger.getLogger(OdfStylesDom.class.getName());
 
   private static final long serialVersionUID = 766167617530147886L;
 
@@ -76,7 +77,7 @@ public class OdfStylesDom extends OdfContentOrStylesDomBase {
         super.initialize(new OdfFileSaxHandler(this), this);
       }
     } catch (IOException | ParserConfigurationException | SAXException ex) {
-      Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       OdfValidationException ve =
           new OdfValidationException(
               OdfSchemaConstraint.DOCUMENT_WITH_EXISTENT_BUT_UNREADABLE_CONTENT_OR_STYLES_XML,
@@ -88,7 +89,7 @@ public class OdfStylesDom extends OdfContentOrStylesDomBase {
         try {
           eh.error(ve);
         } catch (SAXException ex1) {
-          Logger.getLogger(OdfStylesDom.class.getName()).log(Level.SEVERE, null, ex1);
+          LOG.log(Level.SEVERE, null, ex1);
           throw ex1;
         }
       }

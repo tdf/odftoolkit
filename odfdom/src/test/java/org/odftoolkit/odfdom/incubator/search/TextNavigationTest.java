@@ -58,7 +58,7 @@ public class TextNavigationTest {
           (OdfTextDocument)
               OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEXT_FILE));
     } catch (Exception e) {
-      Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -112,7 +112,7 @@ public class TextNavigationTest {
           "Hello delete this word delete true delete  indeed", textProcessor.getText(match5));
 
     } catch (Exception e) {
-      Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -155,7 +155,7 @@ public class TextNavigationTest {
       Assert.assertEquals(6, countParagraphs);
 
     } catch (Exception e) {
-      Logger.getLogger(TextNavigationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }

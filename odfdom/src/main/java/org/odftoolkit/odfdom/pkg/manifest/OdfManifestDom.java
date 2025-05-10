@@ -42,6 +42,7 @@ import org.xml.sax.SAXException;
  */
 public class OdfManifestDom extends OdfFileDom {
 
+  private static final Logger LOG = Logger.getLogger(OdfManifestDom.class.getName());
   private static final long serialVersionUID = 8149848234988627233L;
 
   /**
@@ -72,7 +73,7 @@ public class OdfManifestDom extends OdfFileDom {
     try {
       super.initialize();
     } catch (SAXException | IOException | ParserConfigurationException ex) {
-      Logger.getLogger(OdfManifestDom.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 

@@ -44,6 +44,7 @@ import org.xml.sax.SAXException;
 /** resolve external entities */
 class Resolver implements EntityResolver, URIResolver {
 
+  private static final Logger LOG = Logger.getLogger(Resolver.class.getName());
   private final OdfPackage mPackage;
 
   /** Resolver constructor. */
@@ -98,12 +99,12 @@ class Resolver implements EntityResolver, URIResolver {
               ins.setSystemId(systemId);
               return ins;
             } catch (Exception ex) {
-              Logger.getLogger(Resolver.class.getName()).log(Level.SEVERE, null, ex);
+              LOG.log(Level.SEVERE, null, ex);
             } finally {
               try {
                 in.close();
               } catch (IOException ex) {
-                Logger.getLogger(Resolver.class.getName()).log(Level.SEVERE, null, ex);
+                LOG.log(Level.SEVERE, null, ex);
               }
             }
           }

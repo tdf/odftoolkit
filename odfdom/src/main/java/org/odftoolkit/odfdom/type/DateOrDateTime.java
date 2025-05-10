@@ -28,6 +28,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 public class DateOrDateTime implements OdfDataType {
 
+  private static final Logger LOG = Logger.getLogger(DateOrDateTime.class.getName());
   private XMLGregorianCalendar mDateOrDateTime;
 
   /**
@@ -67,8 +68,7 @@ public class DateOrDateTime implements OdfDataType {
       DatatypeFactory aFactory = new org.apache.xerces.jaxp.datatype.DatatypeFactoryImpl();
       return new DateOrDateTime(aFactory.newXMLGregorianCalendar(stringValue));
     } catch (IllegalArgumentException ex) {
-      Logger.getLogger(DateOrDateTime.class.getName())
-          .log(Level.SEVERE, "parameter is invalid for datatype DateOrDateTime", ex);
+      LOG.log(Level.SEVERE, "parameter is invalid for datatype DateOrDateTime", ex);
       throw new IllegalArgumentException("parameter is invalid for datatype DateOrDateTime");
     }
   }

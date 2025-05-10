@@ -47,6 +47,7 @@ import org.xml.sax.SAXException;
 /** Test the method of class org.odftoolkit.odfdom.incubator.search.TextSelection */
 public class TextSelectionTest {
 
+  private static final Logger LOG = Logger.getLogger(TextSelectionTest.class.getName());
   public static final String TEXT_FILE = "TestTextSelection.odt";
   public static final String SAVE_FILE_DELETE = "TextSelectionResult_Delete.odt";
   public static final String SAVE_FILE_STYLE = "TextSelectionResult_Style.odt";
@@ -81,7 +82,7 @@ public class TextSelectionTest {
               OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEXT_FILE));
       contentDOM = doc.getContentDom();
     } catch (Exception e) {
-      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -128,7 +129,7 @@ public class TextSelectionTest {
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_DELETE));
     } catch (Exception e) {
-      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -163,7 +164,7 @@ public class TextSelectionTest {
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE__PASTE_AT_FRONT_OF_FIRST));
     } catch (Exception e) {
-      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -207,7 +208,7 @@ public class TextSelectionTest {
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE__PASTE_AT_FRONT_OF));
     } catch (Exception e) {
-      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -237,7 +238,7 @@ public class TextSelectionTest {
       try {
         selectionOf_change.pasteAtEndOf(selectionOf_delete);
       } catch (InvalidNavigationException e) {
-        Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+        LOG.log(Level.SEVERE, e.getMessage(), e);
         Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
       }
     }
@@ -253,7 +254,7 @@ public class TextSelectionTest {
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE__PASTE_AT_END_OF));
     } catch (Exception e) {
-      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -287,7 +288,7 @@ public class TextSelectionTest {
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_STYLE));
     } catch (Exception e) {
-      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -328,7 +329,7 @@ public class TextSelectionTest {
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_REPLACE));
     } catch (Exception e) {
-      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -374,7 +375,7 @@ public class TextSelectionTest {
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_REPLACE));
     } catch (Exception e) {
-      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -402,7 +403,7 @@ public class TextSelectionTest {
       selections.get(3).replaceWith("Xsome_+othersX");
       selections.get(4).replaceWith("X");
     } catch (final Exception e) {
-      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
     navigations.forEach(
@@ -410,7 +411,7 @@ public class TextSelectionTest {
     try {
       doc2.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_REPLACE_MULTI_SPACE));
     } catch (final Exception e) {
-      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -438,7 +439,7 @@ public class TextSelectionTest {
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_HREF));
     } catch (Exception e) {
-      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -465,7 +466,7 @@ public class TextSelectionTest {
     try {
       doc.save(ResourceUtilities.getTestOutputFile(SAVE_FILE_DELETE_PATTERN));
     } catch (Exception e) {
-      Logger.getLogger(TextSelectionTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }

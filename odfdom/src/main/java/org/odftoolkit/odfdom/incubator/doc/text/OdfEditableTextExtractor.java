@@ -45,6 +45,8 @@ import org.w3c.dom.NodeList;
  */
 public class OdfEditableTextExtractor extends OdfTextExtractor {
 
+  private static final Logger LOG = Logger.getLogger(OdfEditableTextExtractor.class.getName());
+
   OdfDocument mDocument = null;
   OdfElement mElement = null;
   boolean mIsDocumentExtractor = false;
@@ -107,7 +109,7 @@ public class OdfEditableTextExtractor extends OdfTextExtractor {
         mTextBuilder.append(
             OdfEditableTextExtractor.newOdfEditableTextExtractor(embedDoc).getText());
       } catch (Exception e) {
-        Logger.getLogger(OdfEditableTextExtractor.class.getName()).log(Level.SEVERE, null, e);
+        LOG.log(Level.SEVERE, null, e);
       }
     }
   }
@@ -194,7 +196,7 @@ public class OdfEditableTextExtractor extends OdfTextExtractor {
 
       return builder.toString();
     } catch (Exception e) {
-      Logger.getLogger(OdfEditableTextExtractor.class.getName()).severe(e.getMessage());
+      LOG.severe(e.getMessage());
       return builder.toString();
     }
   }

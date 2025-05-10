@@ -60,6 +60,8 @@ import org.xml.sax.SAXException;
  */
 class Cell<T> extends Component {
 
+  private static final Logger LOG =  Logger.getLogger(Cell.class.getName());
+
   private static final String FORMULA_PREFIX = "of:";
 
   public Cell(OdfElement componentElement, Component parent) {
@@ -333,7 +335,7 @@ class Cell<T> extends Component {
         try {
           attrs.put("character", charProps);
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       } else {
         charProps = attrs.optJSONObject("character");
@@ -341,7 +343,7 @@ class Cell<T> extends Component {
       try {
         charProps.put("url", cellURL);
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     return attrs;
@@ -397,10 +399,8 @@ class Cell<T> extends Component {
         }
         return dataStyle;
       }
-    } catch (SAXException e) {
-      Logger.getLogger(TableTableCellElement.class.getName()).log(Level.SEVERE, null, e);
-    } catch (IOException ex) {
-      Logger.getLogger(TableTableCellElement.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SAXException | IOException e) {
+      LOG.log(Level.SEVERE, null, e);
     }
     return null;
   }

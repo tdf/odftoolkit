@@ -31,6 +31,7 @@ import org.apache.xerces.impl.validation.ValidationState;
  * already existing underlying parser functionality and encapsulates it
  */
 class W3CSchemaType {
+  private static final Logger LOG = Logger.getLogger(W3CSchemaType.class.getName());
   // validate the content by the dataType which is defined in XML schema
 
   static boolean isValid(String dataType, String content) {
@@ -46,8 +47,7 @@ class W3CSchemaType {
       }
     } catch (InvalidDatatypeValueException e) {
       isValid = false;
-      Logger.getLogger(W3CSchemaType.class.getName())
-          .log(Level.FINER, content + "is not of datatype " + dataType + "!", e);
+      LOG.log(Level.FINER, content + "is not of datatype " + dataType + "!", e);
     }
     return isValid;
   }

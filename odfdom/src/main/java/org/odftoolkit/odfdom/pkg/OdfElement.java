@@ -70,6 +70,7 @@ import org.w3c.dom.Text;
 
 public abstract class OdfElement extends ElementNSImpl {
 
+  private static final Logger LOG = Logger.getLogger(OdfElement.class.getName());
   private static final long serialVersionUID = -4939293285696678939L;
   private boolean isComponentRoot = false;
   private boolean mIsIgnoredComponent = false;
@@ -1127,8 +1128,7 @@ public abstract class OdfElement extends ElementNSImpl {
         addElementNode(precedingNode, parent, followingNode, s);
       }
     } else {
-      Logger.getLogger(OdfElement.class.getName())
-          .log(Level.SEVERE, "Node parent should not be NULL!");
+      LOG.log(Level.SEVERE, "Node parent should not be NULL!");
     }
   }
 
@@ -1243,9 +1243,7 @@ public abstract class OdfElement extends ElementNSImpl {
    */
   public Node receiveNode(int textPosStart, int textPosEnd) {
     if (textPosStart < 0) {
-      Logger.getLogger(OdfElement.class.getName())
-          .warning(
-              "A negative index " + textPosStart + " was given to insert text into the paragraph!");
+      LOG.warning("A negative index " + textPosStart + " was given to insert text into the paragraph!");
     }
     // start recrusion
     ArrayList<Node> nodeContainer = new ArrayList<Node>(1);
@@ -1274,22 +1272,20 @@ public abstract class OdfElement extends ElementNSImpl {
   public void markText(int textPosStart, int textPosEnd, JSONObject formatChanges) {
     if (formatChanges != null) {
       if (textPosStart < 0) {
-        Logger.getLogger(OdfElement.class.getName())
-            .warning(
-                "A negative index "
-                    + textPosStart
-                    + " was given to insert text into the paragraph!");
+        LOG.warning(
+          "A negative index "
+            + textPosStart
+            + " was given to insert text into the paragraph!");
       }
       if (textPosEnd < textPosStart) {
         // might be caused by invalid span around whitespace that is being eleminated by ODF
         // whitespacehandling
-        Logger.getLogger(OdfElement.class.getName())
-            .warning(
-                "The start index "
-                    + textPosStart
-                    + " shall not be higher than the end index "
-                    + textPosEnd
-                    + "!");
+        LOG.warning(
+          "The start index "
+            + textPosStart
+            + " shall not be higher than the end index "
+            + textPosEnd
+            + "!");
       }
       // incrementing textPosEnd to get in sync with string counting
       TextContentTraverser.traverseSiblings(
@@ -1385,9 +1381,8 @@ public abstract class OdfElement extends ElementNSImpl {
    */
   private void insertContent(Object content, int textPosStart) { // parameter order?
     if (textPosStart < 0) {
-      Logger.getLogger(OdfElement.class.getName())
-          .warning(
-              "A negative index " + textPosStart + " was given to insert text into the paragraph!");
+      LOG.warning(
+        "A negative index " + textPosStart + " was given to insert text into the paragraph!");
     }
     Node firstChild = this.getFirstChild();
     if (firstChild == null) {
@@ -1432,18 +1427,16 @@ public abstract class OdfElement extends ElementNSImpl {
    */
   public void delete(int textPosStart, int textPosEnd) {
     if (textPosStart < 0) {
-      Logger.getLogger(OdfElement.class.getName())
-          .warning(
-              "A negative index " + textPosStart + " was given to insert text into the paragraph!");
+      LOG.warning(
+        "A negative index " + textPosStart + " was given to insert text into the paragraph!");
     }
     if (textPosEnd < textPosStart) {
-      Logger.getLogger(OdfElement.class.getName())
-          .warning(
-              "The start index "
-                  + textPosStart
-                  + " have to be higher than the end index "
-                  + textPosEnd
-                  + "!");
+      LOG.warning(
+        "The start index "
+          + textPosStart
+          + " have to be higher than the end index "
+          + textPosEnd
+          + "!");
     }
 
     /**

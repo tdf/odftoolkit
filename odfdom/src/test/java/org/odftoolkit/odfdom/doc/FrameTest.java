@@ -36,6 +36,8 @@ import org.w3c.dom.NodeList;
 
 public class FrameTest {
 
+  private static final Logger LOG = Logger.getLogger(FrameTest.class.getName());
+
   public FrameTest() {}
 
   @Test
@@ -54,7 +56,7 @@ public class FrameTest {
 
       Assert.assertEquals(fe.getProperty(StyleGraphicPropertiesElement.VerticalPos), "top");
     } catch (Exception e) {
-      Logger.getLogger(FrameTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }

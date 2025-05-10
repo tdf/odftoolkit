@@ -117,7 +117,7 @@ public class MSVGraphMLExportTest {
       //          TARGET_BASE_DIR + GRAPHML_DIRECTORY,
       //          REFERENCE_BASE_DIR + GRAPHML_DIRECTORY);
     } catch (Exception ex) {
-      Logger.getLogger(MSVGraphMLExportTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail(ex.toString());
     }
   }

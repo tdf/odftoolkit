@@ -32,6 +32,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class LoadSaveTest {
 
+  private static final Logger LOG = Logger.getLogger(LoadSaveTest.class.getName());
   private static final String SOURCE = "not-only-odf.odt";
   private static final String TARGET = "inputOutputTest.odt";
 
@@ -82,7 +83,7 @@ public class LoadSaveTest {
       }
 
     } catch (Exception ex) {
-      Logger.getLogger(LoadSaveTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
   }

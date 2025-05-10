@@ -136,8 +136,8 @@ import org.xml.sax.SAXException;
  * @author svante.schubertATgmail.com
  */
 public class JsonOperationConsumer {
-
   private static final Logger LOG = Logger.getLogger(JsonOperationConsumer.class.getName());
+
   private static JSONObject CELL_WITH_BORDER_ATTRS = null;
   // Mode for column insertion
   private static final String INSERT_BEFORE = "before";
@@ -150,7 +150,7 @@ public class JsonOperationConsumer {
           new JSONObject(
               "{\"cell\":{\"padding\":97,\"borderLeft\":{\"width\":2,\"style\":\"solid\",\"color\":{\"value\":\"000000\",\"type\":\"rgb\"}},\"borderBottom\":{\"width\":2,\"style\":\"solid\",\"color\":{\"value\":\"000000\",\"type\":\"rgb\"}},\"borderTop\":{\"width\":2,\"style\":\"solid\",\"color\":{\"value\":\"000000\",\"type\":\"rgb\"}},\"borderRight\":{\"width\":2,\"style\":\"solid\",\"color\":{\"value\":\"000000\",\"type\":\"rgb\"}}}}");
     } catch (JSONException ex) {
-      Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 
@@ -541,7 +541,7 @@ public class JsonOperationConsumer {
         // ADDING COMPONENT
         addElementAsComponent(parentComponent, newElement, start.getInt(start.length() - 1));
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
   }
@@ -575,7 +575,7 @@ public class JsonOperationConsumer {
         // ADDING COMPONENT
         addElementAsComponent(parentComponent, newElement, start.getInt(start.length() - 1));
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
   }
@@ -826,7 +826,7 @@ public class JsonOperationConsumer {
                   styleName,
                   attributeName));
         } catch (SAXException ex) {
-          Logger.getLogger(StyleStyleElement.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
     }
@@ -846,7 +846,7 @@ public class JsonOperationConsumer {
           (OdfElement) parentSourceComponent.remove(start.getInt(start.length() - 1));
       insert(rootComponent, movedNode, to);
     } catch (JSONException ex) {
-      Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 
@@ -875,7 +875,7 @@ public class JsonOperationConsumer {
           parentTargetComponent.addChild(to.getInt(to.length() - 1), rootElement.getComponent());
         }
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
   }
@@ -979,7 +979,7 @@ public class JsonOperationConsumer {
               try {
                 parentComponent.remove(start.getInt(start.length() - 1));
               } catch (JSONException ex) {
-                Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+                LOG.log(Level.SEVERE, null, ex);
               }
             }
             deletionCount--;
@@ -987,7 +987,7 @@ public class JsonOperationConsumer {
           }
         }
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
   }
@@ -1076,7 +1076,7 @@ public class JsonOperationConsumer {
             attrs,
             newText);
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     } else {
       LOG.log(
@@ -1202,7 +1202,7 @@ public class JsonOperationConsumer {
           secondParagraph.getParentNode().removeChild(secondParagraph);
           secondComponent.getParent().remove(start.getInt(start.length() - 1) + 1);
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       } else {
         throw new IndexOutOfBoundsException("There was no sibling for " + start + " accessible.");
@@ -1344,9 +1344,9 @@ public class JsonOperationConsumer {
     try {
       styles = doc.getStylesDom().getOrCreateOfficeStyles();
     } catch (SAXException ex) {
-      Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     } catch (IOException ex) {
-      Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     if (attrs != null) {
       OdfStyleFamily styleFamily = Component.getFamily(type);
@@ -1525,8 +1525,7 @@ public class JsonOperationConsumer {
                   paraProps.put("indentFirstLine", JSONObject.NULL);
                   paraProps.put("marginLeft", JSONObject.NULL);
                 } catch (JSONException ex) {
-                  Logger.getLogger(JsonOperationConsumer.class.getName())
-                      .log(Level.SEVERE, null, ex);
+                  LOG.log(Level.SEVERE, null, ex);
                 }
                 autoStyle = addStyle(attrs, paragraphBaseElement, xmlDoc);
 
@@ -2672,7 +2671,7 @@ public class JsonOperationConsumer {
         addListDefinition(listStyle, listLevelDefinition, i);
       }
     } catch (Exception ex) {
-      Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 
@@ -2960,7 +2959,7 @@ public class JsonOperationConsumer {
               start.getInt(start.length() - 2) + 1, parentComponent, newSecondPara);
         }
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     } else {
       LOG.log(Level.SEVERE, "Could not find paragraph at position: {0}", start);
@@ -3002,7 +3001,7 @@ public class JsonOperationConsumer {
               Level.SEVERE, "The parent of the text is not a text component: {0}", parentComponent);
         }
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     } else {
       LOG.log(Level.SEVERE, "Could not find paragraph as parent for position: {0}", start);
@@ -3048,7 +3047,7 @@ public class JsonOperationConsumer {
       addtFontFace(stylesDom, newElement2);
 
     } catch (Exception ex) {
-      Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 
@@ -3128,7 +3127,7 @@ public class JsonOperationConsumer {
                 int oldIdx = Integer.parseInt(numString);
                 newStyleIdx = Math.max(newStyleIdx, oldIdx);
               } catch (NumberFormatException e) {
-                Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.INFO, null, e);
+                LOG.log(Level.INFO, null, e);
               }
             }
           }
@@ -3309,7 +3308,7 @@ public class JsonOperationConsumer {
               textUri, "text:row-number", fieldAttrs.getString("rowNumber"));
         }
       } catch (JSONException e) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, e);
+        LOG.log(Level.SEVERE, null, e);
       }
     }
   }
@@ -3342,19 +3341,19 @@ public class JsonOperationConsumer {
             newFieldElement = constructor.newInstance(xmlDoc);
           }
         } catch (InstantiationException e) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, e);
+          LOG.log(Level.SEVERE, null, e);
         } catch (IllegalAccessException e) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, e);
+          LOG.log(Level.SEVERE, null, e);
         } catch (IllegalArgumentException e) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, e);
+          LOG.log(Level.SEVERE, null, e);
         } catch (InvocationTargetException e) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, e);
+          LOG.log(Level.SEVERE, null, e);
         } catch (NoSuchMethodException e) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, e);
+          LOG.log(Level.SEVERE, null, e);
         } catch (SecurityException e) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, e);
+          LOG.log(Level.SEVERE, null, e);
         } catch (ClassNotFoundException e) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, e);
+          LOG.log(Level.SEVERE, null, e);
         }
         setFieldAttributes(newFieldElement, attrs, currentMap, contentDom);
         if (representation != null) {
@@ -3365,7 +3364,7 @@ public class JsonOperationConsumer {
           // ADDING COMPONENT
           addElementAsComponent(parentComponent, newFieldElement, start.getInt(start.length() - 1));
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
     }
@@ -3441,7 +3440,7 @@ public class JsonOperationConsumer {
             frameElement =
                 (DrawFrameElement) parentComponent.getChildNode(start.getInt(start.length() - 1));
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (type.equals("group")) {
           frameElement = new DrawGElement(xmlDoc);
@@ -3500,7 +3499,7 @@ public class JsonOperationConsumer {
           }
         }
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
 
       // INSERTING THE IMAGE TO THE ZIP
@@ -3535,8 +3534,7 @@ public class JsonOperationConsumer {
                     image.newImage(
                         fileBytes, packagePath, OdfFileEntry.getMediaTypeString(packagePath));
                   } catch (Exception ex) {
-                    Logger.getLogger(JsonOperationConsumer.class.getName())
-                        .log(Level.SEVERE, null, ex);
+                    LOG.log(Level.SEVERE, null, ex);
                   }
                 }
               }
@@ -3728,7 +3726,7 @@ public class JsonOperationConsumer {
           // ADDING TABLE COMPONENT
           addElementAsComponent(parentComponent, newTableElement, start.getInt(start.length() - 1));
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       } else {
         // No tableElement, just writing a paragraph with an error
@@ -3738,7 +3736,7 @@ public class JsonOperationConsumer {
           // ADDING COMPONENT
           addElementAsComponent(parentComponent, newTableElement, start.getInt(start.length() - 1));
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
     }
@@ -3791,7 +3789,7 @@ public class JsonOperationConsumer {
         // ADDING ANNOTATION COMPONENT
         addElementAsComponent(parentComponent, newCommentElement, start.getInt(start.length() - 1));
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
       if (!author.isEmpty()) {
         DcCreatorElement creatorElement = new DcCreatorElement(xmlDoc);
@@ -3833,7 +3831,7 @@ public class JsonOperationConsumer {
         addElementAsComponent(
             parentComponent, newCommentEndElement, start.getInt(start.length() - 1));
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     } else {
       LOG.log(Level.SEVERE, "ODF does not define a comment start range ", start);
@@ -4449,7 +4447,7 @@ public class JsonOperationConsumer {
         currentRowPosition += rowComponent.repetition();
         destinationCellPosition.put(rowComponentLevel, currentRowPosition);
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
   }
@@ -4468,7 +4466,7 @@ public class JsonOperationConsumer {
         try {
           columnLength = (Integer) tableGrid.get(i);
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
         if (previousColumnLength == columnLength) {
           repeated++;
@@ -5522,7 +5520,7 @@ public class JsonOperationConsumer {
                   getColor(color, MapHelper.TRANSPARENT));
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else /*
                The defined values for the fo:line-height attribute are:
@@ -5551,7 +5549,7 @@ public class JsonOperationConsumer {
               setLineHeight(lineHeight, propertiesElement);
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } // One of 'left', 'center', 'right', or 'justify'.
         // start, end, left, right, center or justify.
@@ -5565,7 +5563,7 @@ public class JsonOperationConsumer {
                   OdfDocumentNamespace.FO.getUri(), "fo:text-align", (String) value);
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } // <attribute name="fo:text-indent">
         //	<choice>
@@ -5584,7 +5582,7 @@ public class JsonOperationConsumer {
                   OdfDocumentNamespace.FO.getUri(), "fo:text-indent", ((indent / 100.0) + "mm"));
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } // <attribute name="fo:break-before">
         //	<choice>
@@ -5605,7 +5603,7 @@ public class JsonOperationConsumer {
             // there can not be before and after break at the same paragraph
             propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "break-after");
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } // <attribute name="fo:break-after">
         //	<choice>
@@ -5626,7 +5624,7 @@ public class JsonOperationConsumer {
             // there can not be before and after break at the same paragraph
             propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "break-before");
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("tabStops")) {
           try {
@@ -5667,7 +5665,7 @@ public class JsonOperationConsumer {
               propertiesElement.insertBefore(tabsElement, null);
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       }
@@ -5687,7 +5685,7 @@ public class JsonOperationConsumer {
           try {
             value = attrs.get(key);
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
 
           if (value == null || value.equals(JSONObject.NULL)) {
@@ -5729,7 +5727,7 @@ public class JsonOperationConsumer {
                   getColor(color, MapHelper.TRANSPARENT));
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("visible")) {
           try {
@@ -5740,7 +5738,7 @@ public class JsonOperationConsumer {
               propertiesElement.setTableDisplayAttribute((Boolean) value);
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
           // <attribute name="fo:break-before">
           //	<choice>
@@ -5784,7 +5782,7 @@ public class JsonOperationConsumer {
                   getColor(color, MapHelper.TRANSPARENT));
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       }
@@ -5808,7 +5806,7 @@ public class JsonOperationConsumer {
                   getColor(color, MapHelper.TRANSPARENT));
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("height")) {
           try {
@@ -5824,7 +5822,7 @@ public class JsonOperationConsumer {
               propertiesElement.setStyleRowHeightAttribute(((rowHeight / 100.0) + "mm"));
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("customHeight")) {
           try {
@@ -5836,7 +5834,7 @@ public class JsonOperationConsumer {
               propertiesElement.setStyleUseOptimalRowHeightAttribute(!((Boolean) value));
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       }
@@ -5863,7 +5861,7 @@ public class JsonOperationConsumer {
                   getColor(color, MapHelper.TRANSPARENT));
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("alignVert")) {
           try {
@@ -5876,7 +5874,7 @@ public class JsonOperationConsumer {
               propertiesElement.setStyleVerticalAlignAttribute(align);
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       }
@@ -5901,7 +5899,7 @@ public class JsonOperationConsumer {
                   (getSafelyInteger(value) / 100.0) + "mm");
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("customWidth")) {
           try {
@@ -5916,7 +5914,7 @@ public class JsonOperationConsumer {
                   value.toString());
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       }
@@ -5939,7 +5937,7 @@ public class JsonOperationConsumer {
               propertiesElement.setStyleFontNameAttribute(fontName);
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("fontNameAsian")) {
           try {
@@ -5954,7 +5952,7 @@ public class JsonOperationConsumer {
                   OdfDocumentNamespace.STYLE.getUri(), "style:font-name-asian", fontName);
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("fontNameComplex")) {
           try {
@@ -5969,7 +5967,7 @@ public class JsonOperationConsumer {
                   OdfDocumentNamespace.STYLE.getUri(), "style:font-name-complex", fontName);
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       }
@@ -5996,7 +5994,7 @@ public class JsonOperationConsumer {
                   getColor(color, MapHelper.TRANSPARENT));
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       }
@@ -6055,7 +6053,7 @@ public class JsonOperationConsumer {
               }
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
 
         } else if (key.equals("flipH")) {
@@ -6067,7 +6065,7 @@ public class JsonOperationConsumer {
               isMirroredHorizontal = true;
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("flipV")) {
           try {
@@ -6078,7 +6076,7 @@ public class JsonOperationConsumer {
               isMirroredVertical = true;
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("anchorHorBase")) {
           try {
@@ -6102,7 +6100,7 @@ public class JsonOperationConsumer {
               }
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("anchorVertBase")) {
           try {
@@ -6122,7 +6120,7 @@ public class JsonOperationConsumer {
               }
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else /* http://docs.oasis-open.org/office/v1.2/os/OpenDocument-v1.2-os-part1.html#property-style_wrap
                The style:wrap attribute specifies how text is displayed around a frame or graphic object.
@@ -6178,7 +6176,7 @@ public class JsonOperationConsumer {
               }
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else /* @style:horizontal-pos:
                The defined values for the style:horizontal-pos attribute are:
@@ -6227,7 +6225,7 @@ public class JsonOperationConsumer {
               }
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("anchorHorOffset")) {
           try {
@@ -6241,7 +6239,7 @@ public class JsonOperationConsumer {
               propertiesElement.setSvgXAttribute(x / 100.0 + "mm");
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("anchorVertAlign")) {
           try {
@@ -6268,7 +6266,7 @@ public class JsonOperationConsumer {
               }
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("anchorVertOffset")) {
           try {
@@ -6281,7 +6279,7 @@ public class JsonOperationConsumer {
               propertiesElement.setSvgYAttribute(y / 100.0 + "mm");
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         } else if (key.equals("anchorBehindDoc")) {
           boolean anchorBehindDoc = attrs.optBoolean(key, false);
@@ -6342,7 +6340,7 @@ public class JsonOperationConsumer {
                   getColor(color, MapHelper.TRANSPARENT));
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       }
@@ -6436,7 +6434,7 @@ public class JsonOperationConsumer {
         propertiesElement.removeAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "line-spacing");
       }
     } catch (JSONException ex) {
-      Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 
@@ -6458,7 +6456,7 @@ public class JsonOperationConsumer {
       }
     } catch (JSONException ex) {
       // {"value":"text2",OPK_TYPE:"scheme","transformations":[{"value":60000,OPK_TYPE:"tint"}]}
-      Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return colorValue;
   }
@@ -6632,7 +6630,7 @@ public class JsonOperationConsumer {
     // getBorder(border));
     //					}
     //				} catch (JSONException ex) {
-    //					Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+    //					LOG.log(Level.SEVERE, null, ex);
     //				}
     //			} else
     if (putBorders || key.equals("borderLeft")) {
@@ -6656,7 +6654,7 @@ public class JsonOperationConsumer {
           }
         }
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     if (putBorders || key.equals("borderRight")) {
@@ -6681,7 +6679,7 @@ public class JsonOperationConsumer {
           }
         }
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     if (putBorders || key.equals("borderTop")) {
@@ -6705,7 +6703,7 @@ public class JsonOperationConsumer {
           }
         }
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     if (putBorders || key.equals("borderBottom")) {
@@ -6729,7 +6727,7 @@ public class JsonOperationConsumer {
           }
         }
       } catch (JSONException ex) {
-        Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     //        }
@@ -6751,7 +6749,7 @@ public class JsonOperationConsumer {
       // 100.0) + "mm"));
       //					}
       //				} catch (JSONException ex) {
-      //					Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+      //					LOG.log(Level.SEVERE, null, ex);
       //				}
       //			} else
       if (key.equals("marginBottom")) {
@@ -6766,7 +6764,7 @@ public class JsonOperationConsumer {
                 OdfDocumentNamespace.FO.getUri(), "fo:margin-bottom", ((width / 100.0) + "mm"));
           }
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       } else if (key.equals("marginLeft") || key.equals("indentLeft")) {
 
@@ -6782,7 +6780,7 @@ public class JsonOperationConsumer {
                 OdfDocumentNamespace.FO.getUri(), "fo:margin-left", ((width / 100.0) + "mm"));
           }
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       } else if (key.equals("marginRight") || key.equals("indentRight")) {
         // FIX API   			} else if (key.equals("indentRight")) {
@@ -6797,7 +6795,7 @@ public class JsonOperationConsumer {
                 OdfDocumentNamespace.FO.getUri(), "fo:margin-right", ((width / 100.0) + "mm"));
           }
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       } else if (key.equals("marginTop")) {
         try {
@@ -6811,7 +6809,7 @@ public class JsonOperationConsumer {
                 OdfDocumentNamespace.FO.getUri(), "fo:margin-top", ((width / 100.0) + "mm"));
           }
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
     }
@@ -6831,7 +6829,7 @@ public class JsonOperationConsumer {
       // ((width / 100.0) + "mm"));
       //					}
       //				} catch (JSONException ex) {
-      //					Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+      //					LOG.log(Level.SEVERE, null, ex);
       //				}
       ////			}
       //			else if (key.equals("padding")) {
@@ -6846,7 +6844,7 @@ public class JsonOperationConsumer {
       // ((width / 100.0) + "mm"));
       //					}
       //				} catch (JSONException ex) {
-      //					Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+      //					LOG.log(Level.SEVERE, null, ex);
       //				}
       //			} else
 
@@ -6862,7 +6860,7 @@ public class JsonOperationConsumer {
                 OdfDocumentNamespace.FO.getUri(), "fo:padding-bottom", ((width / 100.0) + "mm"));
           }
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       } else if (key.equals("paddingLeft")) {
         try {
@@ -6876,7 +6874,7 @@ public class JsonOperationConsumer {
                 OdfDocumentNamespace.FO.getUri(), "fo:padding-left", ((width / 100.0) + "mm"));
           }
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       } else if (key.equals("paddingRight")) {
         try {
@@ -6889,7 +6887,7 @@ public class JsonOperationConsumer {
                 OdfDocumentNamespace.FO.getUri(), "fo:padding-right", ((width / 100.0) + "mm"));
           }
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       } else if (key.equals("paddingTop")) {
         try {
@@ -6902,7 +6900,7 @@ public class JsonOperationConsumer {
                 OdfDocumentNamespace.FO.getUri(), "fo:padding-top", ((width / 100.0) + "mm"));
           }
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationConsumer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
     }
