@@ -39,6 +39,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -273,7 +274,7 @@ public class OdfPackage implements Closeable {
    * @throws IOException if there's an I/O error while loading the package
    * @see #getErrorHandler*
    */
-  private OdfPackage(File pkgFile, String baseURI, String password, ErrorHandler errorHandler)
+  private OdfPackage(File pkgFile, String baseURI, String password, ErrorHandler errorHandler) // FIXME passwords should not be stored as strings
       throws SAXException, IOException {
     this();
     mBaseURI = getBaseURLFromFile(pkgFile);
@@ -309,7 +310,7 @@ public class OdfPackage implements Closeable {
   private OdfPackage(
       InputStream packageStream,
       String baseURI,
-      String password,
+      String password, // FIXME passwords should not be stored as strings
       ErrorHandler errorHandler,
       Map<String, Object> configuration)
       throws SAXException, IOException {
@@ -375,6 +376,21 @@ public class OdfPackage implements Closeable {
    */
   public static OdfPackage loadPackage(File pkgFile) throws SAXException, IOException {
     return new OdfPackage(pkgFile, getBaseURLFromFile(pkgFile), null, null);
+  }
+
+
+  /**
+   * Loads an OdfPackage from the OpenDocument provided by a File.
+   *
+   * @param pkgFile - the ODF Package
+   * @return the OpenDocument document represented as an OdfPackage
+   * @throws SAXException if there's an XML- or validation-related error while loading the package
+   * @throws IOException if there's an I/O error while loading the package
+   *
+   * @see #loadPackage(File)
+   */
+  public static OdfPackage loadPackage(Path pkgFile) throws SAXException, IOException {
+    return loadPackage(pkgFile.toFile());
   }
 
   /**
@@ -451,6 +467,23 @@ public class OdfPackage implements Closeable {
   }
 
   /**
+   * Loads an OdfPackage from the given File.
+   *
+   * <p>OdfPackage relies on the file being available for read access over the whole life-cycle of
+   * OdfPackage.
+   *
+   * @param pkgFile - the ODF Package. A baseURL is being generated based on its location.
+   * @param errorHandler - SAX ErrorHandler used for ODF validation.
+   * @throws SAXException if there's an XML- or validation-related error while loading the package
+   * @throws IOException if there's an I/O error while loading the package
+   * @see #getErrorHandler
+   */
+  public static OdfPackage loadPackage(Path pkgFile, ErrorHandler errorHandler)
+      throws SAXException, IOException {
+    return loadPackage(pkgFile.toFile(), errorHandler);
+  }
+
+  /**
    * Run-time configuration such as special logging or maximum table size to create operations from
    * are stored in this map.
    *
@@ -472,9 +505,26 @@ public class OdfPackage implements Closeable {
    * @throws IOException if there's an I/O error while loading the package
    * @see #getErrorHandler
    */
-  public static OdfPackage loadPackage(File pkgFile, String password)
+  public static OdfPackage loadPackage(File pkgFile, String password) // FIXME passwords should not be passed as a strings
       throws SAXException, IOException {
     return OdfPackage.loadPackage(pkgFile, password, null);
+  }
+
+  /**
+   * Loads an OdfPackage from the given Path.
+   *
+   * <p>OdfPackage relies on the file being available for read access over the whole life-cycle of
+   * OdfPackage.
+   *
+   * @param pkgFile - the ODF Package. A baseURL is being generated based on its location.
+   * @param password - the ODF Package password.
+   * @throws SAXException if there's an XML- or validation-related error while loading the package
+   * @throws IOException if there's an I/O error while loading the package
+   * @see #getErrorHandler
+   */
+  public static OdfPackage loadPackage(Path pkgFile, String password) // FIXME passwords should not be passed as a strings
+      throws SAXException, IOException {
+    return loadPackage(pkgFile.toFile(), password);
   }
 
   /**
@@ -493,6 +543,24 @@ public class OdfPackage implements Closeable {
   public static OdfPackage loadPackage(File pkgFile, String password, ErrorHandler errorHandler)
       throws SAXException, IOException {
     return new OdfPackage(pkgFile, getBaseURLFromFile(pkgFile), password, errorHandler);
+  }
+
+  /**
+   * Loads an OdfPackage from the given Path.
+   *
+   * <p>OdfPackage relies on the file being available for read access over the whole life-cycle of
+   * OdfPackage.
+   *
+   * @param pkgFile - the ODF Package. A baseURL is being generated based on its location.
+   * @param password - the ODF Package password.
+   * @param errorHandler - SAX ErrorHandler used for ODF validation.
+   * @throws SAXException if there's an XML- or validation-related error while loading the package
+   * @throws IOException if there's an I/O error while loading the package
+   * @see #getErrorHandler
+   */
+  public static OdfPackage loadPackage(Path pkgFile, String password, ErrorHandler errorHandler)
+      throws SAXException, IOException {
+    return loadPackage(pkgFile.toFile(), password, errorHandler);
   }
 
   // Initialize using memory
@@ -1093,6 +1161,17 @@ public class OdfPackage implements Closeable {
   }
 
   /**
+   * Save package to a given File. After saving it is still necessary to close the package to have
+   * again full access about the file.
+   *
+   * @param pkgFile - the File to save the ODF package to
+   * @throws java.io.IOException - if the package could not be saved
+   */
+  public void save(Path pkgFile) throws SAXException, IOException {
+    save(pkgFile.toFile());
+  }
+
+  /**
    * Saves the package to a given {@link OutputStream}. The given stream is not closed by this
    * method.
    *
@@ -1111,7 +1190,7 @@ public class OdfPackage implements Closeable {
    * @param password password
    * @since 0.8.9
    */
-  public void setPassword(String password) {
+  public void setPassword(String password) { // FIXME passwords should not be stored as strings
     mNewPwd = password;
   }
 

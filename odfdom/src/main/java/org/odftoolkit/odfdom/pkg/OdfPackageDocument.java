@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.transform.Templates;
@@ -107,6 +108,22 @@ public class OdfPackageDocument implements Closeable {
    * @throws java.lang.Exception - if the document could not be created.
    */
   public static OdfPackageDocument loadDocument(String documentPath) throws Exception {
+    OdfPackage pkg = OdfPackage.loadPackage(documentPath);
+    return pkg.loadDocument(ROOT_DOCUMENT_PATH);
+  }
+
+  /**
+   * Loads an OdfPackageDocument from the provided path.
+   *
+   * <p>OdfPackageDocument relies on the file being available for read access over the whole
+   * life-cycle of OdfDocument.
+   *
+   * @param documentPath - the path from where the document can be loaded
+   * @return the OpenDocument from the given path or NULL if the media type is not supported by
+   *     ODFDOM.
+   * @throws java.lang.Exception - if the document could not be created.
+   */
+  public static OdfPackageDocument loadDocument(Path documentPath) throws Exception {
     OdfPackage pkg = OdfPackage.loadPackage(documentPath);
     return pkg.loadDocument(ROOT_DOCUMENT_PATH);
   }
@@ -269,6 +286,18 @@ public class OdfPackageDocument implements Closeable {
    */
   public void save(File file) throws Exception {
     mPackage.save(file);
+  }
+
+  /**
+   * Save the document to a given path.
+   *
+   * @param path - the path to save the document under
+   * @throws java.lang.Exception if the document could not be saved
+   *
+   * @see #save(java.io.File)
+   */
+  public void save(Path path) throws Exception {
+    mPackage.save(path.toFile());
   }
 
   /**
