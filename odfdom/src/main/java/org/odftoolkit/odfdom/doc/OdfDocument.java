@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -314,6 +315,17 @@ public abstract class OdfDocument extends OdfSchemaDocument {
    */
   public static OdfDocument loadDocument(File file) throws Exception {
     return loadDocument(OdfPackage.loadPackage(file));
+  }
+
+  /**
+   * Loads the ODF root document from the ODF package provided as a {@link Path} instance.
+   *
+   * @param path - the path of the ODF document.
+   * @return the document created from the given File
+   * @throws java.lang.Exception - if the document could not be created.
+   */
+  public static OdfDocument loadDocument(Path path) throws Exception {
+    return loadDocument(OdfPackage.loadPackage(path.toFile()));
   }
 
   /**
@@ -729,7 +741,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
    * <p>You may prefer to use the getContentRoot methods of subclasses of OdfDocument. Their return
    * parameters are already casted to respective subclasses of OdfElement.
    *
-   * @param the type of the content root, depend on the document type
+   * @param clazz the type of the content root, depend on the document type
    * @return the child element of office:body, e.g. office:text for text docs
    * @throws Exception if the file DOM could not be created.
    */
