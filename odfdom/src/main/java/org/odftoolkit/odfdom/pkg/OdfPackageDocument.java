@@ -296,12 +296,12 @@ public class OdfPackageDocument implements Closeable {
    * @param filePath of the XML relative to the document folder
    * @return the typed DOM of the given file
    */
-  public OdfFileDom getFileDom(String internalPath) {
+  public OdfFileDom getFileDom(String filePath) {
     String normalizeDocumentPath = getDocumentPath();
     if (!isRootDocument()) {
       normalizeDocumentPath = normalizeDocumentPath(normalizeDocumentPath);
     }
-    return OdfFileDom.newFileDom(this, normalizeDocumentPath + internalPath);
+    return OdfFileDom.newFileDom(this, normalizeDocumentPath + filePath);
   }
 
   /**
