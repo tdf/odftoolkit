@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.time.Instant;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -90,7 +91,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
   private long documentOpeningTime;
   private static final Pattern CONTROL_CHAR_PATTERN = Pattern.compile("\\p{Cntrl}");
   private static final String EMPTY_STRING = "";
-  private Calendar mCreationDate;
+  private Instant mCreationDate;
   private static final String FORMER_OPEN_OFFICE_VERSION =
       "StarOffice/8$Win32 OpenOffice.org_project/680m18$Build-9161";
   protected Boolean mHasCollaboration = null;
@@ -188,7 +189,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
     }
     OdfDocument newDocument = newDocument(pkg, ROOT_DOCUMENT_PATH, odfMediaType, Boolean.FALSE);
     // add creation time, the metadata have to be explicitly set
-    newDocument.mCreationDate = Calendar.getInstance();
+    newDocument.mCreationDate = Instant.now();
     return newDocument;
   }
 
@@ -215,7 +216,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
     OdfDocument newDocument =
         newDocument(pkg, ROOT_DOCUMENT_PATH, odfMediaType, enableCollaboration);
     // add creation time, the metadata have to be explicitly set
-    newDocument.mCreationDate = Calendar.getInstance();
+    newDocument.mCreationDate = Instant.now();
     return newDocument;
   }
 
@@ -914,7 +915,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
 
       // set creation date
       if (mCreationDate != null) {
-        getOfficeMetadata().setCreationDate(mCreationDate);
+        getOfficeMetadata().setCreationInstant(mCreationDate);
       }
 
       // update late modfied date

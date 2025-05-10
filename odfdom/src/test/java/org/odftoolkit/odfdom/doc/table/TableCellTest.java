@@ -20,6 +20,9 @@ package org.odftoolkit.odfdom.doc.table;
 
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -497,6 +500,32 @@ public class TableCellTest {
   }
 
   @Test
+  public void testGetSetlocalDateValue() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
+    int rowindex = 7, columnindex = 7;
+    OdfTable table = odsdoc.getTableByName("Sheet1");
+    OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
+    boolean illegalArgumentFlag = false;
+    try {
+      fcell.setLocalDateValue(null);
+    } catch (IllegalArgumentException ie) {
+      if ("date shouldn't be null.".equals(ie.getMessage())) {
+        illegalArgumentFlag = true;
+      }
+    }
+    Assert.assertTrue(illegalArgumentFlag);
+    LocalDate expected = LocalDate.of(2010, 1, 30);
+    fcell.setLocalDateValue(expected);
+    saveOutputOds(odsdoc);
+    // reload
+    odsdoc = loadOutputOds();
+    table = odsdoc.getTableByName("Sheet1");
+    fcell = table.getCellByPosition(columnindex, rowindex);
+    Assert.assertEquals(expected, fcell.getLocalDateValue());
+  }
+
+  @Test
   public void testGetSetStringValue() throws Exception {
     OdfSpreadsheetDocument odsdoc = loadInputOds();
 
@@ -609,7 +638,6 @@ public class TableCellTest {
     int rowindex = 0, columnindex = 4;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
-    boolean illegalArgumentFlag = false;
     OdfTableCell finalFcell = fcell;
     Assert.assertThrows("time shouldn't be null.", IllegalArgumentException.class, () -> finalFcell.setTimeValue(null));
 
@@ -624,6 +652,36 @@ public class TableCellTest {
     SimpleDateFormat simpleFormat = new SimpleDateFormat("'PT'HH'H'mm'M'ss'S'");
     String expectedString = simpleFormat.format(expected.getTime());
     String targetString = simpleFormat.format(fcell.getTimeValue().getTime());
+    Assert.assertEquals(expectedString, targetString);
+  }
+
+  @Test
+  public void testGetSetLocalTimeValue() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
+    int rowindex = 0, columnindex = 4;
+    OdfTable table = odsdoc.getTableByName("Sheet1");
+    OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
+    boolean illegalArgumentFlag = false;
+    try {
+      fcell.setLocalTimeValue(null);
+    } catch (IllegalArgumentException ie) {
+      if ("time shouldn't be null.".equals(ie.getMessage())) {
+        illegalArgumentFlag = true;
+      }
+    }
+    Assert.assertTrue(illegalArgumentFlag);
+    LocalTime expected = LocalTime.now();
+    fcell.setLocalTimeValue(expected);
+    saveOutputOds(odsdoc);
+    // reload
+    odsdoc = loadOutputOds();
+    table = odsdoc.getTableByName("Sheet1");
+    fcell = table.getCellByPosition(columnindex, rowindex);
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("'PT'HH'H'mm'M'ss'S'");
+    String expectedString = formatter.format(expected);
+    String targetString = formatter.format(fcell.getLocalTimeValue());
     Assert.assertEquals(expectedString, targetString);
   }
 
