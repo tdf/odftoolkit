@@ -36,7 +36,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class NoTempFileTest {
 
-  private static final Logger LOG = Logger.getLogger(OdfPackage.class.getName());
+  private static final Logger LOG = Logger.getLogger(NoTempFileTest.class.getName());
   private static final String TEST_INPUT_FOLDER = ResourceUtilities.getTestInputFolder();
   private static final String TEST_OUTPUT_FOLDER = ResourceUtilities.getTestOutputFolder();
   private static final String Test_File = "image.odt";

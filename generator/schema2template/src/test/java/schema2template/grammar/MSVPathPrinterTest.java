@@ -42,7 +42,7 @@ import org.junit.Test;
  */
 public class MSVPathPrinterTest {
 
-  private static final Logger LOG = Logger.getLogger(PathPrinter.class.getName());
+  private static final Logger LOG = Logger.getLogger(MSVPathPrinterTest.class.getName());
   private static final String EXAMPLE_PARENT = "table:table";
   private static final String EXAMPLE_CHILD = "table:table-row";
 
