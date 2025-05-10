@@ -61,7 +61,7 @@ public class OdfNumberStyleTest {
       doc = OdfSpreadsheetDocument.newSpreadsheetDocument();
       dom = doc.getContentDom();
     } catch (Exception e) {
-      Logger.getLogger(OdfNumberStyleTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }

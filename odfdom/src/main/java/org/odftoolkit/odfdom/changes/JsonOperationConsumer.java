@@ -3885,7 +3885,7 @@ public class JsonOperationConsumer {
         }
       }
     } catch (Exception ex) {
-      Logger.getLogger(OdfSchemaDocument.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 

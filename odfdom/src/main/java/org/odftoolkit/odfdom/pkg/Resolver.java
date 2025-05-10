@@ -131,7 +131,7 @@ class Resolver implements EntityResolver, URIResolver {
           ins.setSystemId(systemId);
           return ins;
         } catch (MalformedURLException ex) {
-          Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
     }

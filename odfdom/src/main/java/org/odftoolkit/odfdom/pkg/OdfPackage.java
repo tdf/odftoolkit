@@ -877,7 +877,7 @@ public class OdfPackage implements Closeable {
         } catch (Exception ex) {
           // ToDo: catching Exception, logging it and continuing is bad style.
           // Refactor exception handling in higher layer, too. - ??
-          Logger.getLogger(OdfPackageDocument.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
     }

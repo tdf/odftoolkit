@@ -92,8 +92,7 @@ public class ITJarTest {
       t.printStackTrace(new PrintWriter(errors));
       Assert.fail(t + "\n" + errors);
     }
-    java.util.logging.Logger.getLogger(getClass().getName())
-        .log(Level.INFO, "Test result:\n{0}", output);
+    LOG.log(Level.INFO, "Test result:\n{0}", output);
     Assert.assertTrue(output.contains("contains no 'mimetype' file"));
     Assert.assertTrue(
         output.contains(

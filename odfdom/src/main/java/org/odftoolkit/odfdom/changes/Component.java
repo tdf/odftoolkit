@@ -659,7 +659,7 @@ public class Component {
           LOG.fine("Component yet missing!");
         }
       } catch (JSONException ex) {
-        Logger.getLogger(Component.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     } else {
       try {
@@ -691,7 +691,7 @@ public class Component {
           LOG.fine("Component yet missing!");
         }
       } catch (JSONException ex) {
-        Logger.getLogger(Component.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     return c;
