@@ -59,7 +59,7 @@ public class OdfDateStyleTest {
       doc = OdfSpreadsheetDocument.newSpreadsheetDocument();
       dom = doc.getContentDom();
     } catch (Exception e) {
-      Logger.getLogger(OdfDateStyleTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }

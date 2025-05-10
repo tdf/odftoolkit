@@ -67,7 +67,7 @@ public class LoadMultipleTimes {
         long f2 = Runtime.getRuntime().freeMemory();
         LOG.info("Freemem pre-gc: " + f1 + ", post-gc: " + f2 + ", delta: " + (f1 - f2) + ".");
       } catch (Exception ex) {
-        Logger.getLogger(LoadMultipleTimes.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     LOG.info("Opening " + num + " times took " + t + " milliseconds");

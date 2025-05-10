@@ -57,6 +57,7 @@ import org.w3c.dom.Node;
  * <p>OdfTableRow provides methods to get table cells that belong to this table row.
  */
 public class OdfTableRow {
+  private static final Logger LOG = Logger.getLogger(OdfTableRow.class.getName());
 
   // boolean mbVisible;
   TableTableRowElement maRowElement;
@@ -105,11 +106,10 @@ public class OdfTableRow {
 
     OdfTableRow row = table.getRowInstance(rowElement, 0);
     if (row.getRowsRepeatedNumber() > 1) {
-      Logger.getLogger(OdfTableRow.class.getName())
-          .log(
-              Level.WARNING,
-              "the row has the repeated row number, and puzzled about get which repeated index of the row,"
-                  + "here just return the first row of the repeated rows.");
+      LOG.log(
+        Level.WARNING,
+        "the row has the repeated row number, and puzzled about get which repeated index of the row,"
+          + "here just return the first row of the repeated rows.");
     }
     return row;
   }
@@ -356,7 +356,7 @@ public class OdfTableRow {
             aPrevNode = aPrevNode.getPreviousSibling();
           }
         } catch (XPathExpressionException e) {
-          Logger.getLogger(OdfTableRow.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+          LOG.log(Level.SEVERE, e.getMessage(), e);
         }
       }
     }
@@ -414,7 +414,7 @@ public class OdfTableRow {
             aNextNode = aNextNode.getNextSibling();
           }
         } catch (XPathExpressionException e) {
-          Logger.getLogger(OdfTableRow.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+          LOG.log(Level.SEVERE, e.getMessage(), e);
         }
       }
     }

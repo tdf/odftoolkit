@@ -94,7 +94,7 @@ public class MSVRunTimeDumpTest {
           ConstantsBuildEnv.TARGET_BASE_DIR + MSV_DUMP_DIRECTORY,
           ConstantsBuildEnv.REFERENCE_BASE_DIR + MSV_DUMP_DIRECTORY);
     } catch (Exception ex) {
-      Logger.getLogger(MSVRunTimeDumpTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail(ex.toString());
     }
   }

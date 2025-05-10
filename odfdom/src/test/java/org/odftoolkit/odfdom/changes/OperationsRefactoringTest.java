@@ -199,7 +199,7 @@ public class OperationsRefactoringTest {
       System.out.println("Writing: " + opsFileOutPath);
     } catch (JSONException ex) {
       System.err.println("Erroneous JSON file:\n" + opsPath);
-      Logger.getLogger(RoundtripTestHelper.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
   }

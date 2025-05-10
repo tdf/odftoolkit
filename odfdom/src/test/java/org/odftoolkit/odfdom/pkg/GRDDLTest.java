@@ -92,7 +92,7 @@ public class GRDDLTest extends ModelTestBase {
       StringWriter sw = new StringWriter();
       ex.printStackTrace(new PrintWriter(sw));
       String message = sw.toString();
-      Logger.getLogger(GRDDLTest.class.getName()).log(Level.SEVERE, message, ex);
+      LOG.log(Level.SEVERE, message, ex);
       sw.close();
       Assert.fail(message);
     }

@@ -167,8 +167,7 @@ public class PresentationTest {
       OdfDrawFrame f = new OdfDrawFrame(dom);
 
       f.setPresentationClassAttribute(PresentationClassAttribute.Value.GRAPHIC.toString());
-      Logger.getLogger(DocumentCreationTest.class.getName())
-          .info(f.getPresentationClassAttribute());
+      LOG.info(f.getPresentationClassAttribute());
     } catch (Exception e) {
       LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());

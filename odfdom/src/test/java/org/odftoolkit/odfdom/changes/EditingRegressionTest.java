@@ -668,7 +668,7 @@ public class EditingRegressionTest extends RoundtripTestHelper {
           ResourceUtilities.loadFileAsBytes(
               ResourceUtilities.getTestInputFile("Herschel-Horsehead-Nebula.jpeg"));
     } catch (IOException ex) {
-      Logger.getLogger(EditingRegressionTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail(ex.getMessage());
     }
     long uid = Long.parseLong(UID, 16);
@@ -685,8 +685,8 @@ public class EditingRegressionTest extends RoundtripTestHelper {
       // return the absolute path to the test directory
       pkg = OdfPackage.loadPackage(savedDocumentPath);
     } catch (Exception ex) {
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail("The saved document '" + savedDocumentPath + "' could not be found!");
-      Logger.getLogger(EditingRegressionTest.class.getName()).log(Level.SEVERE, null, ex);
     }
     if (pkg == null || !pkg.contains(INTERNAL_IMAGE_PATH)) {
       Assert.fail(

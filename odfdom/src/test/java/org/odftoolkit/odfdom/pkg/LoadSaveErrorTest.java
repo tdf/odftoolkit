@@ -76,12 +76,12 @@ public class LoadSaveErrorTest {
 
           public void warning(SAXParseException exception) throws SAXException {
             warnings.incrementAndGet();
-            Logger.getLogger(getClass().getName()).warning(exception.getLocalizedMessage());
+            LOG.warning(exception.getLocalizedMessage());
           }
 
           public void error(SAXParseException exception) throws SAXException {
             errors.incrementAndGet();
-            Logger.getLogger(getClass().getName()).severe(exception.getLocalizedMessage());
+            LOG.severe(exception.getLocalizedMessage());
             // Here's the difference to DefaultErrorHandler:
             // we also throw normal errors, not just fatal errors.
             throw exception;
@@ -89,7 +89,7 @@ public class LoadSaveErrorTest {
 
           public void fatalError(SAXParseException exception) throws SAXException {
             fatals.incrementAndGet();
-            Logger.getLogger(getClass().getName()).severe(exception.getLocalizedMessage());
+            LOG.severe(exception.getLocalizedMessage());
             throw exception;
           }
         };

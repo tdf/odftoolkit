@@ -622,7 +622,7 @@ class RoundtripTestHelper {
       mHasOdfValidationProblem = evaluateValidationProblems(reloadedDoc, odfDocumentToBeReloaded);
       reloadedDoc.close();
     } catch (Exception ex) {
-      Logger.getLogger(RoundtripTestHelper.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
     return reloadedComparisonFailure;

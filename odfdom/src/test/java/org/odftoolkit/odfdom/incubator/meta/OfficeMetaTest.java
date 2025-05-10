@@ -147,7 +147,7 @@ public class OfficeMetaTest {
 
       // ToDO: Add validation test afterwards..
     } catch (Exception ex) {
-      Logger.getLogger(LoadMultipleTimes.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 
