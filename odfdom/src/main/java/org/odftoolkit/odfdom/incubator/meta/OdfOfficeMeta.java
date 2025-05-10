@@ -24,6 +24,9 @@
 package org.odftoolkit.odfdom.incubator.meta;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -59,6 +62,8 @@ import org.odftoolkit.odfdom.type.Duration;
  * <p>It provides convenient method to get meta data info.
  */
 public class OdfOfficeMeta {
+
+  private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
   private OfficeMetaElement mOfficeMetaElement;
   private boolean mAutomaticUpdate = true;
@@ -579,7 +584,9 @@ public class OdfOfficeMeta {
    *
    * @return the date and time when the document was created initially;
    *     <p><code>null</code>, if element is not set
+   * @deprecated use {@link #getCreationInstant()} instead.
    */
+  @Deprecated
   public Calendar getCreationDate() {
     MetaCreationDateElement creationDateEle =
         OdfElement.findFirstChildNode(MetaCreationDateElement.class, mOfficeMetaElement);
@@ -590,13 +597,42 @@ public class OdfOfficeMeta {
   }
 
   /**
+   * Receives the value of the ODFDOM element representation <code>MetaCreationDateElement</code> ,
+   * See {@odf.element meta:creation-date}
+   *
+   * @return the date and time when the document was created initially;
+   *     <p><code>null</code>, if element is not set
+   */
+  public Instant getCreationInstant() {
+    MetaCreationDateElement creationDateEle =
+        OdfElement.findFirstChildNode(MetaCreationDateElement.class, mOfficeMetaElement);
+    if (creationDateEle != null) {
+      return Instant.from(DATE_TIME_FORMATTER.parse(creationDateEle.getTextContent()));
+    }
+    return null;
+  }
+
+  /**
    * Sets the value of the ODFDOM element representation <code>MetaCreationDateElement</code> , See
    * {@odf.element meta:creation-date}.
    *
    * @param creationDate the date and time need to set. NULL will remove the element from the
    *     meta.xml.
+   * @deprecated Use {@link #setCreationInstant(Instant)} instead.
    */
+  @Deprecated
   public void setCreationDate(Calendar creationDate) {
+    setCreationInstant(creationDate == null ? null : creationDate.toInstant());
+  }
+
+  /**
+   * Sets the value of the ODFDOM element representation <code>MetaCreationDateElement</code> , See
+   * {@odf.element meta:creation-date}.
+   *
+   * @param creationDate the date and time need to set. {@code null} will remove the element from the
+   *                     meta.xml.
+   */
+  public void setCreationInstant(Instant creationDate) {
     MetaCreationDateElement creationDateEle =
         OdfElement.findFirstChildNode(MetaCreationDateElement.class, mOfficeMetaElement);
     if (creationDate == null) {
@@ -607,7 +643,7 @@ public class OdfOfficeMeta {
       if (creationDateEle == null) {
         creationDateEle = mOfficeMetaElement.newMetaCreationDateElement();
       }
-      creationDateEle.setTextContent(calendarToString(creationDate));
+      creationDateEle.setTextContent(DATE_TIME_FORMATTER.format(creationDate.atZone(ZoneId.systemDefault())));
     }
   }
 
@@ -909,6 +945,7 @@ public class OdfOfficeMeta {
    * @return the String format(yyyy-MM-dd'T'HH:mm:ss) of Calendar.
    */
   private String calendarToString(Calendar calendar) {
+    DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
     return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(calendar.getTime());
   }
 

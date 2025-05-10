@@ -21,6 +21,10 @@ package org.odftoolkit.odfdom.doc.table;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -74,15 +78,18 @@ import org.w3c.dom.Node;
 public class OdfTableCell {
   private static final Logger LOG = Logger.getLogger(OdfTableCell.class.getName());
 
-  TableTableCellElementBase mOdfElement;
   int mnRepeatedColIndex;
   int mnRepeatedRowIndex;
   OdfTable mOwnerTable;
   String msFormatString;
   /** The default date format of table cell. */
   private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
+  /** The default date formatter of table cell. */
+  private static final DateTimeFormatter DEFAULT_DATE_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
   /** The default time format of table cell. */
   private static final String DEFAULT_TIME_FORMAT = "'PT'HH'H'mm'M'ss'S'";
+  /** The default time formatter of table cell. */
+  private static final DateTimeFormatter DEFAULT_TIME_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_TIME_FORMAT);
   /** The default cell back color of table cell. */
   private static final String DEFAULT_BACKGROUND_COLOR = "#FFFFFF";
   /** The default column spanned number. */
@@ -796,12 +803,11 @@ public class OdfTableCell {
   /**
    * Get the cell date value as Calendar.
    *
-   * <p>Throw IllegalArgumentException if the cell type is not "date".
-   *
    * @return the Calendar value of cell
-   * @throws IllegalArgumentException an IllegalArgumentException will be thrown, if the cell type
-   *     is not "date".
+   * @throws IllegalArgumentException, if the cell type is not "date".
+   * @deprecated use {@link #getLocalDateValue()} instead.
    */
+  @Deprecated
   public Calendar getDateValue() {
     if (getTypeAttr() == OfficeValueTypeAttribute.Value.DATE) {
       String dateStr = mCellElement.getOfficeDateValueAttribute();
@@ -821,7 +827,9 @@ public class OdfTableCell {
    * Set the cell value as a date, and set the value type to be "date".
    *
    * @param date the value of {@link java.util.Calendar java.util.Calendar} type.
+   * @deprecated use {@link #setLocalDateValue(java.time.LocalDate)} instead.
    */
+  @Deprecated
   public void setDateValue(Calendar date) {
     if (date == null) {
       throw new IllegalArgumentException("date shouldn't be null.");
@@ -926,7 +934,9 @@ public class OdfTableCell {
    * @return the Calendar value of cell
    * @throws IllegalArgumentException an IllegalArgumentException will be thrown if the cell type is
    *     not time.
+   * @deprecated use {@link #getLocalTimeValue()} instead.
    */
+  @Deprecated
   public Calendar getTimeValue() {
     if (getTypeAttr() == OfficeValueTypeAttribute.Value.TIME) {
       String timeStr = mCellElement.getOfficeTimeValueAttribute();
@@ -963,14 +973,90 @@ public class OdfTableCell {
 
   private Date parseString(String value, String format) {
     SimpleDateFormat simpleFormat = new SimpleDateFormat(format);
-    Date simpleDate = null;
     try {
-      simpleDate = simpleFormat.parse(value);
+      return simpleFormat.parse(value);
     } catch (ParseException e) {
       LOG.log(Level.SEVERE, e.getMessage(), e);
       return null;
     }
-    return simpleDate;
+  }
+
+  /**
+   * Get the cell date value as {@link LocalDate}.
+   *
+   * @return the date value of cell
+   * @throws IllegalArgumentException if the cell type is not "date".
+   */
+  public LocalDate getLocalDateValue() {
+    if (getTypeAttr() == OfficeValueTypeAttribute.Value.DATE) {
+      String dateStr = mCellElement.getOfficeDateValueAttribute();
+      if (dateStr == null) {
+        return null;
+      }
+      try {
+        return LocalDate.parse(dateStr, DEFAULT_DATE_FORMATTER);
+      } catch (DateTimeParseException e) {
+        LOG.log(Level.SEVERE, e.getMessage(), e);
+        return null;
+      }
+    } else {
+      throw new IllegalArgumentException();
+    }
+  }
+
+  /**
+   * Set the cell value as a date and set the value type to be "date".
+   *
+   * @param date the date as a LocalDate object.
+   */
+  public void setLocalDateValue(LocalDate date) {
+    if (date == null) {
+      throw new IllegalArgumentException("date shouldn't be null.");
+    }
+    splitRepeatedCells();
+    setTypeAttr(OfficeValueTypeAttribute.Value.DATE);
+    String svalue = DEFAULT_DATE_FORMATTER.format(date);
+    mCellElement.setOfficeDateValueAttribute(svalue);
+    setDisplayText(svalue);
+  }
+
+  /**
+   * Get the cell value as {@link java.time.LocalTime}.
+   *
+   * @return the time value of cell
+   * @throws IllegalArgumentException an IllegalArgumentException will be thrown if the cell type is
+   *     not time.
+   */
+  public LocalTime getLocalTimeValue() {
+    if (getTypeAttr() == OfficeValueTypeAttribute.Value.TIME) {
+      String timeStr = mCellElement.getOfficeTimeValueAttribute();
+      try {
+        return LocalTime.parse(timeStr, DEFAULT_TIME_FORMATTER);
+      } catch (DateTimeParseException e) {
+        LOG.log(Level.SEVERE, e.getMessage(), e);
+        return null;
+      }
+    } else {
+      throw new IllegalArgumentException();
+    }
+  }
+
+  /**
+   * Set the cell value as a time and set the value type to be "time" too.
+   *
+   * @param time the time as a {@link LocalTime} instance.
+   * @throws IllegalArgumentException If input time is null, an IllegalArgumentException exception
+   *     will be thrown.
+   */
+  public void setLocalTimeValue(LocalTime time) {
+    if (time == null) {
+      throw new IllegalArgumentException("time shouldn't be null.");
+    }
+    splitRepeatedCells();
+    setTypeAttr(OfficeValueTypeAttribute.Value.TIME);
+    String svalue = DEFAULT_TIME_FORMATTER.format(time);
+    mCellElement.setOfficeTimeValueAttribute(svalue);
+    setDisplayText(svalue);
   }
 
   /**
