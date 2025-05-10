@@ -43,7 +43,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
  */
 class RoundtripTestHelper {
 
-  protected static Logger LOG = Logger.getLogger(RoundtripTestHelper.class.getName());
+  private static final Logger LOG = Logger.getLogger(RoundtripTestHelper.class.getName());
   private static final String ENABLE_DEFAULT_ERROR_HANDLER = "true";
   private static final String EDIT_OPS_FILE_SUFFIX = "_EDIT_OPS.json";
 
