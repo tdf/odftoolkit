@@ -149,6 +149,7 @@ import java.util.logging.Logger;
  */
 class URITransformer {
 
+  private static final Logger LOG = Logger.getLogger(URITransformer.class.getName());
   /**
    * Array containing the safe characters set for encoding.
    *
@@ -219,7 +220,7 @@ class URITransformer {
       }
       path = pathc.toString();
     } catch (UnsupportedEncodingException ex) {
-      Logger.getLogger(URITransformer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return path;
   }

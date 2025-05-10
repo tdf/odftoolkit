@@ -228,7 +228,7 @@ public class PackageTest {
       StreamHelper.transformStream(bis, baos);
       fileBytes = baos.toByteArray();
     } catch (Exception e) {
-      Logger.getLogger(PackageTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
       e.getLocalizedMessage();
     }
@@ -263,7 +263,7 @@ public class PackageTest {
         Assert.fail(errorMsg);
       }
     } catch (Throwable t) {
-      Logger.getLogger(PackageTest.class.getName()).log(Level.SEVERE, t.getMessage(), t);
+      LOG.log(Level.SEVERE, t.getMessage(), t);
       Assert.fail();
     }
   }
@@ -554,7 +554,7 @@ public class PackageTest {
               ResourceUtilities.getAbsoluteInputPath(TEST_STYLE_STYLE_ATTRIBUTE_ODT));
       OdfElement contentRoot = doc.getContentRoot();
     } catch (Throwable t) {
-      Logger.getLogger(PackageTest.class.getName()).log(Level.SEVERE, t.getMessage(), t);
+      LOG.log(Level.SEVERE, t.getMessage(), t);
       Assert.fail();
     }
   }

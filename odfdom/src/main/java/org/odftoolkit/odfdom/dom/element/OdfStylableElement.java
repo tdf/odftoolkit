@@ -53,6 +53,7 @@ import org.xml.sax.SAXException;
 
 // ToDo: change modifier public to package after refactoring
 public abstract class OdfStylableElement extends OdfElement implements OdfStylePropertySet {
+  private static final Logger LOG = Logger.getLogger(OdfStylableElement.class.getName());
 
   private static final long serialVersionUID = -7828513537641758879L;
   // ToDo: Overall StyleRefactoring: DOM Layer reaches to upper layer here...
@@ -257,7 +258,7 @@ public abstract class OdfStylableElement extends OdfElement implements OdfStyleP
                   new OdfValidationException(
                       OdfSchemaConstraint.DOCUMENT_XML_INVALID_ATTRIBUTE_VALUE, value, "qname"));
             } catch (SAXException ex) {
-              Logger.getLogger(StyleStyleElement.class.getName()).log(Level.SEVERE, null, ex);
+              LOG.log(Level.SEVERE, null, ex);
             }
           }
         }

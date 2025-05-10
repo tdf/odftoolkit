@@ -35,6 +35,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class NamespaceTest {
 
+  private static final Logger LOG = Logger.getLogger(NamespaceTest.class.getName());
   private static final String TARGET = "namespacetest.odt";
 
   public NamespaceTest() {}
@@ -87,7 +88,7 @@ public class NamespaceTest {
       Assert.assertTrue(resElement2 != null);
 
     } catch (Exception ex) {
-      Logger.getLogger(NamespaceTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+      LOG.log(Level.SEVERE, ex.getMessage(), ex);
       Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
     }
   }

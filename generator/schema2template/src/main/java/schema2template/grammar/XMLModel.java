@@ -52,6 +52,7 @@ import org.xml.sax.SAXException;
  */
 public class XMLModel {
 
+  private static final Logger LOG = Logger.getLogger(XMLModel.class.getName());
   PuzzlePieceSet mElements = new PuzzlePieceSet();
   PuzzlePieceSet mAttributes = new PuzzlePieceSet();
   private Map<String, SortedSet<PuzzlePiece>> elementNameToPuzzlePieces;
@@ -212,7 +213,7 @@ public class XMLModel {
       try {
         grammar = RELAXNGReader.parse(rngFilePath, factory, ignoreController);
       } catch (Exception ex) {
-        Logger.getLogger(XMLModel.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     } else if (rngFilePath.endsWith(".xsd")) {
       grammar = XMLSchemaReader.parse(rngFilePath, factory, ignoreController);

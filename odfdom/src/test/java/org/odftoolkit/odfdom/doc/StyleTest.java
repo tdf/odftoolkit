@@ -51,6 +51,8 @@ import org.w3c.dom.NodeList;
 
 public class StyleTest {
 
+  private static final Logger LOG = Logger.getLogger(StyleTest.class.getName());
+
   public StyleTest() {}
 
   @Test
@@ -153,7 +155,7 @@ public class StyleTest {
       Assert.assertTrue(style2.compareTo(style1) < 0);
 
     } catch (Exception e) {
-      Logger.getLogger(StyleTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -215,7 +217,7 @@ public class StyleTest {
       Assert.assertTrue(style1 == style2);
       Assert.assertTrue(style1.getStyleUserCount() == 2);
     } catch (Exception e) {
-      Logger.getLogger(StyleTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -243,7 +245,7 @@ public class StyleTest {
           "#00FF00", child.getProperty(StyleTextPropertiesElement.TextUnderlineColor));
 
     } catch (Exception e) {
-      Logger.getLogger(StyleTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -306,7 +308,7 @@ public class StyleTest {
       OdfTextParagraph p = (OdfTextParagraph) lst.item(0);
       p.setProperty(StyleTextPropertiesElement.FontSize, "17pt");
     } catch (Exception ex) {
-      Logger.getLogger(StyleTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+      LOG.log(Level.SEVERE, ex.getMessage(), ex);
       Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
     }
   }

@@ -54,6 +54,7 @@ import org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerGraph;
  */
 class TinkerPopGraph {
 
+  private static final Logger LOG = Logger.getLogger(TinkerPopGraph.class.getName());
   private final Expression exp;
   private final String schemaFileName;
   private final Graph graph;
@@ -86,7 +87,7 @@ class TinkerPopGraph {
             .writeGraph(targetDirectoryName + File.separator + fileName + ".graphml");
 
       } catch (IOException ex) {
-        Logger.getLogger(TinkerPopGraph.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
   }

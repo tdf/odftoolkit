@@ -46,6 +46,7 @@ import org.odftoolkit.odfdom.pkg.rdfa.Util;
 /** Test utility class providing resources for the test in- and output */
 public final class ResourceUtilities {
 
+  private static final Logger LOG = Logger.getLogger(ResourceUtilities.class.getName());
   static final String INITIAL_OPS_SUFFIX = "-initial_ops.json";
   static final String RELOADED_OPS_SUFFIX = "-reloaded_ops.json";
   static final String HYPEN = "-";
@@ -124,7 +125,7 @@ public final class ResourceUtilities {
       }
       absPath = uri.getPath();
     } catch (URISyntaxException ex) {
-      Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return absPath;
   }
@@ -211,7 +212,7 @@ public final class ResourceUtilities {
     try {
       testFolder = ResourceUtilities.class.getClassLoader().getResource("").toURI().getPath();
     } catch (URISyntaxException ex) {
-      Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return testFolder;
   }
@@ -272,7 +273,7 @@ public final class ResourceUtilities {
           ResourceUtilities.class.getClassLoader().getResource("").toURI().getPath()
               + PATH_FROM_TEST_CLASSES_TO_REFENCE;
     } catch (URISyntaxException ex) {
-      Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return refFolder;
   }
@@ -290,7 +291,7 @@ public final class ResourceUtilities {
       String projectRootPath = testClassesPath.getParent().getParent().toString();
       refFolder = projectRootPath + File.separator + PATH_TO_SRC_TEST_REFERENCES;
     } catch (Throwable ex) {
-      Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return refFolder;
   }
@@ -308,7 +309,7 @@ public final class ResourceUtilities {
       String projectRootPath = testClassesPath.getParent().getParent().toString();
       refFolder = projectRootPath + File.separator + PATH_TO_SRC_TEST_INPUT;
     } catch (Throwable ex) {
-      Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return refFolder;
   }
@@ -341,14 +342,14 @@ public final class ResourceUtilities {
       // out = new BufferedWriter(new FileWriter(file));
       out.write(inputData);
     } catch (IOException ex) {
-      Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     } finally {
       try {
         if (out != null) {
           out.close();
         }
       } catch (IOException ex) {
-        Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
   }
@@ -368,14 +369,14 @@ public final class ResourceUtilities {
       input.close();
       result = new String(fileData, "UTF-8");
     } catch (FileNotFoundException ex) {
-      Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     } catch (IOException ex) {
-      Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     } finally {
       try {
         input.close();
       } catch (IOException ex) {
-        Logger.getLogger(ResourceUtilities.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     return result;

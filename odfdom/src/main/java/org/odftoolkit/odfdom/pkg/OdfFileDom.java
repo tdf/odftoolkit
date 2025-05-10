@@ -65,6 +65,7 @@ import org.xml.sax.helpers.DefaultHandler;
 /** The DOM representation of an XML file within the ODF document. */
 public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 
+  private static final Logger LOG = Logger.getLogger(OdfFileDom.class.getName());
   private static final long serialVersionUID = 766167617530147000L;
   protected String mPackagePath;
   protected OdfPackageDocument mPackageDocument;
@@ -101,7 +102,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
       try {
         initialize();
       } catch (SAXException | IOException | ParserConfigurationException ex) {
-        Logger.getLogger(OdfFileDom.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
       // Register every DOM to OdfPackage,
       // so a package close might save this DOM (similar as OdfDocumentPackage)
@@ -131,7 +132,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
       try {
         initialize();
       } catch (SAXException | IOException | ParserConfigurationException ex) {
-        Logger.getLogger(OdfFileDom.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
       // Register every DOM to OdfPackage,
       // so a package close might save this DOM (similar as
@@ -236,7 +237,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
         xmlReader.parse(xmlSource);
       }
     } catch (IOException | ParserConfigurationException | SAXException ex) {
-      Logger.getLogger(OdfFileDom.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       throw ex;
     } finally {
       try {
@@ -244,7 +245,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
           fileStream.close();
         }
       } catch (IOException iex) {
-        Logger.getLogger(OdfFileDom.class.getName()).log(Level.SEVERE, null, iex);
+        LOG.log(Level.SEVERE, null, iex);
       }
     }
   }

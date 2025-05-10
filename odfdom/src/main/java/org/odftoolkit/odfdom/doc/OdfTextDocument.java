@@ -41,6 +41,7 @@ import org.xml.sax.SAXException;
 
 /** This class represents an empty ODF text document. */
 public class OdfTextDocument extends OdfDocument {
+  private static final Logger LOG = Logger.getLogger(OdfTextDocument.class.getName());
 
   private static final String EMPTY_TEXT_DOCUMENT_PATH = "/OdfTextDocument.odt";
   static final Resource EMPTY_TEXT_DOCUMENT_RESOURCE = new Resource(EMPTY_TEXT_DOCUMENT_PATH);
@@ -433,7 +434,7 @@ public class OdfTextDocument extends OdfDocument {
           }
         }
       } catch (Exception ex) {
-        Logger.getLogger(OdfTextDocument.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
       // there is nothing set, use the LO/AO default behavior
       if (hasTabsRelativeToIndent == null) {

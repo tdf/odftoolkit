@@ -46,6 +46,7 @@ import org.w3c.dom.Node;
  * <p>OdfTableColumn provides methods to get table cells that belong to this table column.
  */
 public class OdfTableColumn {
+  private static final Logger LOG = Logger.getLogger(OdfTableColumn.class.getName());
 
   TableTableColumnElement maColumnElement;
   int mnRepeatedIndex;
@@ -55,7 +56,7 @@ public class OdfTableColumn {
   /**
    * Construct the <code>OdfTableColumn</code> feature.
    *
-   * @param odfElement the element that can construct this table column
+   * @param colElement the element that can construct this table column
    * @param repeatedIndex the index in the repeated columns
    */
   OdfTableColumn(TableTableColumnElement colElement, int repeatedIndex) {
@@ -93,11 +94,10 @@ public class OdfTableColumn {
 
     OdfTableColumn column = table.getColumnInstance(colElement, 0);
     if (column.getColumnsRepeatedNumber() > 1) {
-      Logger.getLogger(OdfTableColumn.class.getName())
-          .log(
-              Level.WARNING,
-              "the column has the repeated column number, and puzzled about get which repeated index of the column,"
-                  + "here just return the first column of the repeated columns.");
+      LOG.log(
+        Level.WARNING,
+        "the column has the repeated column number, and puzzled about get which repeated index of the column,"
+            + "here just return the first column of the repeated columns.");
     }
     return column;
   }
@@ -344,7 +344,7 @@ public class OdfTableColumn {
             aPrevNode = aPrevNode.getPreviousSibling();
           }
         } catch (XPathExpressionException e) {
-          Logger.getLogger(OdfTableColumn.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+          LOG.log(Level.SEVERE, e.getMessage(), e);
         }
       }
     }
@@ -398,7 +398,7 @@ public class OdfTableColumn {
             aNextNode = aNextNode.getNextSibling();
           }
         } catch (XPathExpressionException e) {
-          Logger.getLogger(OdfTableColumn.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+          LOG.log(Level.SEVERE, e.getMessage(), e);
         }
       }
     }

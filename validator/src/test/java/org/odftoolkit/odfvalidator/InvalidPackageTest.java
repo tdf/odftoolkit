@@ -31,6 +31,7 @@ import org.junit.Test;
 
 /** Test some invalid packages. */
 public class InvalidPackageTest extends OdfValidatorTestBase {
+  private static final java.util.logging.Logger LOG = java.util.logging.Logger.getLogger(InvalidPackageTest.class.getName());
 
   @Test
   public void validatePackage1() {
@@ -166,8 +167,7 @@ public class InvalidPackageTest extends OdfValidatorTestBase {
     Assert.assertFalse(
         output.contains(
             "The document is encrypted. Validation of encrypted documents is not supported."));
-    java.util.logging.Logger.getLogger(getClass().getName())
-        .log(Level.INFO, "Test result:\n{0}", output);
+    LOG.log(Level.INFO, "Test result:\n{0}", output);
   }
 
   @Test

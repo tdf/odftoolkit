@@ -55,6 +55,7 @@ import org.xml.sax.XMLReader;
 /** Class for applying style sheets to ODF documents. */
 public class ODFXSLTRunner {
 
+  public static final java.util.logging.Logger LOG = java.util.logging.Logger.getLogger(ODFXSLTRunner.class.getName());
   /** Input file is a plain XML file. */
   public static final int INPUT_MODE_FILE = 0;
 
@@ -231,7 +232,7 @@ public class ODFXSLTRunner {
               aURIResolver,
               aLogger);
     } catch (ParserConfigurationException ex) {
-      java.util.logging.Logger.getLogger(ODFXSLTRunner.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     if (bError) return true;
 
@@ -309,8 +310,7 @@ public class ODFXSLTRunner {
           | SecurityException
           | IllegalArgumentException
           | InvocationTargetException ex) {
-        java.util.logging.Logger.getLogger(ODFXSLTRunner.class.getName())
-            .log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     ErrorListener aErrorListener = new TransformerErrorListener(aLogger);

@@ -40,6 +40,7 @@ import org.w3c.dom.NodeList;
 
 public class LoadSaveTest {
 
+  private static final Logger LOG = Logger.getLogger(LoadSaveTest.class.getName());
   private static final String SOURCE = "not-only-odf.odt";
   private static final String TARGET = "loadsavetest.odt";
   private static final String FOREIGN_ATTRIBUTE_NAME = "foreignAttribute";
@@ -96,8 +97,7 @@ public class LoadSaveTest {
       Assert.assertTrue(foreignAttrValue.equals(FOREIGN_ATTRIBUTE_VALUE));
 
     } catch (Exception e) {
-      Logger.getLogger(LoadSaveTest.class.getName())
-          .log(Level.SEVERE, e.getMessage() + ExceptionUtils.getStackTrace(e), e);
+      LOG.log(Level.SEVERE, e.getMessage() + ExceptionUtils.getStackTrace(e), e);
       Assert.fail(e.getMessage());
     }
   }

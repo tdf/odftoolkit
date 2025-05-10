@@ -312,7 +312,7 @@ public class DocumentCreationTest {
       Assert.assertEquals(spanTest.getTextContent(), TEST_SPAN_TEXT);
 
     } catch (Exception ex) {
-      Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
     }
   }
@@ -370,7 +370,7 @@ public class DocumentCreationTest {
       Assert.assertEquals(spanTest.getTextContent(), TEST_SPAN_TEXT);
 
     } catch (Exception ex) {
-      Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
     }
   }
@@ -391,7 +391,7 @@ public class DocumentCreationTest {
         Assert.assertEquals(contentDom1, contentDom2);
       }
     } catch (Exception ex) {
-      Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
     }
   }
@@ -465,7 +465,7 @@ public class DocumentCreationTest {
         }
       }
     } catch (Exception ex) {
-      Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
     }
   }
@@ -491,7 +491,7 @@ public class DocumentCreationTest {
       docB.save(TEST_FILE_SAVE_QUEER_PATH);
 
     } catch (Exception ex) {
-      Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
     }
   }
@@ -508,7 +508,7 @@ public class DocumentCreationTest {
       OdfDocument chartWithCorruptedMimetype = OdfDocument.loadDocument(CORRUPTED_MIMETYPE_CHART);
       chartWithCorruptedMimetype.save(CORRUPTED_MIMETYPE_CHART_OUT);
     } catch (Exception ex) {
-      Logger.getLogger(DocumentCreationTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
     }
   }

@@ -51,6 +51,8 @@ import org.xml.sax.XMLReader;
 
 class OdfXMLHelper {
 
+  private static final Logger LOG = Logger.getLogger(OdfXMLHelper.class.getName());
+
   /**
    * create an XMLReader with a Resolver set to parse content in a ODF Package
    *
@@ -103,12 +105,12 @@ class OdfXMLHelper {
 
       reader.parse(ins);
     } catch (Exception ex) {
-      Logger.getLogger(OdfXMLHelper.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     } finally {
       try {
         is.close();
       } catch (IOException ex) {
-        Logger.getLogger(OdfXMLHelper.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
   }
@@ -329,7 +331,7 @@ class OdfXMLHelper {
 
       transformer.transform(source, result);
     } catch (Exception ex) {
-      Logger.getLogger(OdfXMLHelper.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+      LOG.log(Level.SEVERE, ex.getMessage(), ex);
     }
   }
 
@@ -373,7 +375,7 @@ class OdfXMLHelper {
       byte[] data = baos.toByteArray();
       pkg.insert(data, path, "text/xml");
     } catch (Exception ex) {
-      Logger.getLogger(OdfXMLHelper.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     //		}
 

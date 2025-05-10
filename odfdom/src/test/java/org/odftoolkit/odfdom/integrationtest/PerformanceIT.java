@@ -71,7 +71,7 @@ public class PerformanceIT {
       memory_spreadsheet = REPORT_FILE_FOLDER + "memorylog.ods";
       time_spreadsheet = REPORT_FILE_FOLDER + "timelog.ods";
     } catch (URISyntaxException ex) {
-      Logger.getLogger(PerformanceIT.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 
@@ -87,7 +87,7 @@ public class PerformanceIT {
       }
       path = outputpath.getPath();
     } catch (URISyntaxException ex) {
-      Logger.getLogger(PerformanceIT.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return path;
   }
@@ -101,7 +101,7 @@ public class PerformanceIT {
       // 2. Save to spreadsheet
       writeToLog();
     } catch (Exception e) {
-      Logger.getLogger(PerformanceIT.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 

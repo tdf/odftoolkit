@@ -35,6 +35,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class StyleManipulationTest {
 
+  private static final Logger LOG = Logger.getLogger(StyleManipulationTest.class.getName());
   private static final String SOURCE = "empty.odt";
   private static final String TARGET = "stylemanipulationtest.odt";
 
@@ -57,7 +58,7 @@ public class StyleManipulationTest {
 
       Assert.assertTrue(marginLeft != null && marginLeft.equals("4711"));
     } catch (Exception e) {
-      Logger.getLogger(StyleManipulationTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }

@@ -40,6 +40,8 @@ import org.w3c.dom.NodeList;
 
 public class CreateTableTest {
 
+  private static final Logger LOG = Logger.getLogger(CreateTableTest.class.getName());
+
   public CreateTableTest() {}
 
   @Test
@@ -92,7 +94,7 @@ public class CreateTableTest {
       doc.getDocument().save(ResourceUtilities.getTestOutputFile("tabletest.odt"));
 
     } catch (Exception e) {
-      Logger.getLogger(CreateTableTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }

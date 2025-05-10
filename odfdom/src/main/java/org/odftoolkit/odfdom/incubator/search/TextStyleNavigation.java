@@ -46,6 +46,8 @@ import org.w3c.dom.NodeList;
  */
 public class TextStyleNavigation extends Navigation<TextSelection> {
 
+  private static final Logger LOG = Logger.getLogger(TextStyleNavigation.class.getName());
+
   private OdfTextDocument mTextDocument;
   private TextSelection mCurrentSelectedItem;
   private TextSelection mNextSelectedItem;
@@ -92,15 +94,13 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
       try {
         mNode = getNextMatchElement((Node) mTextDocument.getContentRoot());
       } catch (Exception ex) {
-        Logger.getLogger(TextStyleNavigation.class.getName())
-            .log(Level.SEVERE, ex.getMessage(), ex);
+        LOG.log(Level.SEVERE, ex.getMessage(), ex);
       }
     } else {
       try {
         mNode = getNextMatchElement(mNode);
       } catch (Exception ex) {
-        Logger.getLogger(TextStyleNavigation.class.getName())
-            .log(Level.SEVERE, ex.getMessage(), ex);
+        LOG.log(Level.SEVERE, ex.getMessage(), ex);
       }
     }
     if (mNode != null) {
@@ -318,7 +318,7 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
       }
 
     } catch (Exception e1) {
-      Logger.getLogger(TextStyleNavigation.class.getName()).log(Level.SEVERE, e1.getMessage(), e1);
+      LOG.log(Level.SEVERE, e1.getMessage(), e1);
     }
     return styleNames;
   }

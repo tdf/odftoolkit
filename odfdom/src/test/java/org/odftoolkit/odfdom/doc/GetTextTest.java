@@ -27,7 +27,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class GetTextTest {
 
-  public static final Logger LOG = Logger.getLogger(GetTextTest.class.getName());
+  private static final Logger LOG = Logger.getLogger(GetTextTest.class.getName());
 
   /** This method will invoke OdfEditableTextExtractor to test text extraction function. */
   @Test

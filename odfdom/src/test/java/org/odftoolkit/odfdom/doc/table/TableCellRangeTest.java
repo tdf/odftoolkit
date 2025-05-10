@@ -33,6 +33,7 @@ import org.w3c.dom.NodeList;
 
 public class TableCellRangeTest {
 
+  private static final Logger LOG = Logger.getLogger(TableCellRangeTest.class.getName());
   final String filename = "TestSpreadsheetTable";
   final String odtfilename = "TestTextTable";
   OdfSpreadsheetDocument odsdoc;
@@ -51,7 +52,7 @@ public class TableCellRangeTest {
               OdfTextDocument.loadDocument(
                   ResourceUtilities.getAbsoluteInputPath(odtfilename + ".odt"));
     } catch (Exception e) {
-      Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -84,7 +85,7 @@ public class TableCellRangeTest {
       Assert.assertEquals(textProcessor.getText(paraList.item(2)), "0.00");
       saveddoc.save(ResourceUtilities.getTestOutputFile(odtfilename + "MergeCoveredCell.odt"));
     } catch (Exception e) {
-      Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
 
@@ -104,7 +105,7 @@ public class TableCellRangeTest {
       Assert.assertTrue(savedCell.getOdfElement() instanceof TableCoveredTableCellElement);
       saveddoc.save(ResourceUtilities.getTestOutputFile(odtfilename + "MergeCoveredCell2.odt"));
     } catch (Exception e) {
-      Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -148,7 +149,7 @@ public class TableCellRangeTest {
       Assert.assertTrue(cell1.getOwnerTableCell().equals(firstCell1));
       saveddoc.save(ResourceUtilities.getTestOutputFile(odtfilename + "MergeFirstTwoColumn.odt"));
     } catch (Exception e) {
-      Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -187,7 +188,7 @@ public class TableCellRangeTest {
       OdfTableCell cell = namedCellRange.getCellByPosition("A1");
       Assert.assertTrue(cell.getRowSpannedNumber() == 6);
     } catch (Exception e) {
-      Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -231,7 +232,7 @@ public class TableCellRangeTest {
       Assert.assertTrue(swTable.getColumnCount() == 1);
       Assert.assertTrue(swTable.getRowCount() == 1);
     } catch (Exception ex) {
-      Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+      LOG.log(Level.SEVERE, ex.getMessage(), ex);
       Assert.fail("Failed with " + ex.getClass().getName() + ": '" + ex.getMessage() + "'");
     }
   }
@@ -240,7 +241,7 @@ public class TableCellRangeTest {
     try {
       odsdoc.save(ResourceUtilities.getTestOutputFile(filename + name + ".ods"));
     } catch (Exception e) {
-      Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -249,7 +250,7 @@ public class TableCellRangeTest {
     try {
       odtdoc.save(ResourceUtilities.getTestOutputFile(odtfilename + name + ".odt"));
     } catch (Exception e) {
-      Logger.getLogger(TableCellRangeTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }

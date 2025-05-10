@@ -109,6 +109,7 @@ import org.xml.sax.XMLReader;
  */
 public class OdfPackage implements Closeable {
 
+  private static final Logger LOG = Logger.getLogger(OdfPackage.class.getName());
   // Static parts of file references
   private static final String DOUBLE_DOT = "..";
   private static final String DOT = ".";
@@ -205,26 +206,23 @@ public class OdfPackage implements Closeable {
       if (errorHandlerProperty != null) {
         if (errorHandlerProperty.equalsIgnoreCase("true")) {
           mErrorHandler = new DefaultErrorHandler();
-          Logger.getLogger(OdfPackage.class.getName())
-              .config("Activated validation with default ErrorHandler!");
+          LOG.config("Activated validation with default ErrorHandler!");
         } else if (!errorHandlerProperty.equalsIgnoreCase("false")) {
           try {
             Class<?> cl = Class.forName(errorHandlerProperty);
             Constructor<?> ctor = cl.getDeclaredConstructor(new Class[] {});
             mErrorHandler = (ErrorHandler) ctor.newInstance();
-            Logger.getLogger(OdfPackage.class.getName())
-                .log(
-                    Level.CONFIG,
-                    "Activated validation with ErrorHandler:''{0}''!",
-                    errorHandlerProperty);
+            LOG.log(
+              Level.CONFIG,
+              "Activated validation with ErrorHandler:''{0}''!",
+              errorHandlerProperty);
           } catch (Exception ex) {
-            Logger.getLogger(OdfPackage.class.getName())
-                .log(
-                    Level.SEVERE,
-                    "Could not initiate validation with the given ErrorHandler: '"
-                        + errorHandlerProperty
-                        + "'",
-                    ex);
+            LOG.log(
+              Level.SEVERE,
+              "Could not initiate validation with the given ErrorHandler: '"
+                + errorHandlerProperty
+                + "'",
+              ex);
           }
         }
       }
@@ -769,14 +767,14 @@ public class OdfPackage implements Closeable {
       StreamHelper.transformStream(mZipFile.getInputStream(mimetypeEntry), out);
       entryMediaType = new String(out.toByteArray(), 0, out.size(), "UTF-8");
     } catch (IOException ex) {
-      Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       handleIOException(ex, false);
     } finally {
       if (out != null) {
         try {
           closeStream(out);
         } catch (IOException ex) {
-          Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
         out = null;
       }
@@ -1294,7 +1292,7 @@ public class OdfPackage implements Closeable {
         mZipFile.close();
       } catch (IOException ex) {
         // log exception and continue
-        Logger.getLogger(OdfPackage.class.getName()).log(Level.INFO, null, ex);
+        LOG.log(Level.INFO, null, ex);
       }
     }
     // release all stuff - this class is impossible to use afterwards
@@ -1356,7 +1354,7 @@ public class OdfPackage implements Closeable {
       saxFactory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
       saxFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
     } catch (Exception ex) {
-      Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       throw new RuntimeException();
     }
 
@@ -1519,7 +1517,7 @@ public class OdfPackage implements Closeable {
                 entry.getMediaTypeString());
           }
         } catch (Exception ex) {
-          Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
     }
@@ -1703,7 +1701,7 @@ public class OdfPackage implements Closeable {
       factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
       factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
     } catch (Exception ex) {
-      Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       throw new RuntimeException();
     }
 
@@ -1791,8 +1789,7 @@ public class OdfPackage implements Closeable {
       try {
         setMediaTypeString(new String(fileBytes, "UTF-8"));
       } catch (UnsupportedEncodingException useEx) {
-        Logger.getLogger(OdfPackage.class.getName())
-            .log(Level.SEVERE, "ODF file could not be created as string!", useEx);
+        LOG.log(Level.SEVERE, "ODF file could not be created as string!", useEx);
       }
       return;
     }
@@ -1835,7 +1832,7 @@ public class OdfPackage implements Closeable {
         try {
           data = mMediaType.getBytes("UTF-8");
         } catch (UnsupportedEncodingException use) {
-          Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, use);
+          LOG.log(Level.SEVERE, null, use);
           return null;
         }
       }
@@ -1870,8 +1867,7 @@ public class OdfPackage implements Closeable {
                 if (newData != null) {
                   data = newData;
                 } else {
-                  Logger.getLogger(OdfPackage.class.getName())
-                      .log(Level.SEVERE, null, "Wrong password being used for decryption!");
+                  LOG.log(Level.SEVERE, null, "Wrong password being used for decryption!");
                 }
               }
             }
@@ -1881,14 +1877,14 @@ public class OdfPackage implements Closeable {
           }
         } catch (IOException ex) {
           // Catching IOException here should be fine: in-memory operations only
-          Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         } finally {
           try {
             if (inputStream != null) {
               inputStream.close();
             }
           } catch (IOException ex) {
-            Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
         }
       }
@@ -2018,7 +2014,7 @@ public class OdfPackage implements Closeable {
       // InvalidKeyException,
       // InvalidAlgorithmParameterException,
       // IllegalBlockSizeException, BadPaddingException
-      Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
     return encryptedData;
   }
@@ -2086,7 +2082,7 @@ public class OdfPackage implements Closeable {
         throw new OdfDecryptedException("The given password is wrong, please check it.");
       }
     } catch (Exception e) {
-      Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
     return decompressData;
   }
@@ -2212,7 +2208,7 @@ public class OdfPackage implements Closeable {
           stream = mZipFile.getInputStream(entry);
         } catch (IOException ex) {
           // Catching IOException here should be fine: in-memory operations only
-          Logger.getLogger(OdfPackage.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
     } else {
@@ -2400,7 +2396,7 @@ public class OdfPackage implements Closeable {
   static String normalizePath(String path) {
     if (path == null) {
       String errMsg = "The internalPath given by parameter is NULL!";
-      Logger.getLogger(OdfPackage.class.getName()).severe(errMsg);
+      LOG.severe(errMsg);
       throw new IllegalArgumentException(errMsg);
     } else if (!mightBeExternalReference(path)) {
       if (path.equals(EMPTY_STRING)) {

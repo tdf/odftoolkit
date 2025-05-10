@@ -38,6 +38,8 @@ import org.w3c.dom.Node;
 /** Convenient functionalty for the parent ODF OpenDocument element */
 public class OdfTextList extends TextListElement {
 
+  private static final Logger LOG = Logger.getLogger(OdfTextList.class.getName());
+
   /**
    * Creates a new instance of OdfList.
    *
@@ -181,7 +183,7 @@ public class OdfTextList extends TextListElement {
     if (style != null) {
       odfListLevelStyle = style.getLevel(level);
     } else {
-      Logger.getLogger(OdfTextList.class.getName()).warning("No ListLevelStyle found!");
+      LOG.warning("No ListLevelStyle found!");
     }
     return odfListLevelStyle;
   }

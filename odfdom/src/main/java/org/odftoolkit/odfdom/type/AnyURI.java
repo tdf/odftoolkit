@@ -31,6 +31,7 @@ import java.util.logging.Logger;
 /** This class represents the in OpenDocument format used data type {@odf.datatype anyURI} */
 public class AnyURI implements OdfDataType {
 
+  private static final Logger LOG = Logger.getLogger(AnyURI.class.getName());
   private URI mURI;
 
   /**
@@ -47,8 +48,7 @@ public class AnyURI implements OdfDataType {
     // validate 'anyURI' type which is defined in W3C schema
     // http://www.w3.org/TR/xmlschema-2/#anyURI
     if (!W3CSchemaType.isValid("anyURI", URITransformer.decodePath(uri.toString()))) {
-      Logger.getLogger(AnyURI.class.getName())
-          .log(Level.SEVERE, "parameter is invalid for datatype AnyURI");
+      LOG.log(Level.SEVERE, "parameter is invalid for datatype AnyURI");
       throw new IllegalArgumentException("parameter is invalid for datatype anyURI");
     }
     mURI = uri;
@@ -79,8 +79,7 @@ public class AnyURI implements OdfDataType {
       URI uri = new URI(URITransformer.encodePath(stringValue).toString());
       return new AnyURI(uri);
     } catch (URISyntaxException ex) {
-      Logger.getLogger(AnyURI.class.getName())
-          .log(Level.SEVERE, "parameter is invalid for datatype anyURI", ex);
+      LOG.log(Level.SEVERE, "parameter is invalid for datatype anyURI", ex);
       throw new IllegalArgumentException("parameter is invalid for datatype anyURI");
     }
   }

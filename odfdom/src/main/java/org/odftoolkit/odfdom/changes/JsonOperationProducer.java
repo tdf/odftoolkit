@@ -78,6 +78,7 @@ import org.xml.sax.SAXException;
 public class JsonOperationProducer {
 
   private static final Logger LOG = Logger.getLogger(JsonOperationProducer.class.getName());
+
   static final String BLACK = "#000000";
   private static final String ODFDOM_GIT_BRANCH = System.getProperty("odftoolkit.git.branch");
   private static final String ODFDOM_GIT_COMMIT_TIME =
@@ -113,7 +114,7 @@ public class JsonOperationProducer {
       mOperations.put(OPK_VERSION_TIME, ODFDOM_GIT_COMMIT_TIME);
       mOperations.put(OPK_OPERATIONS, mOperationQueue);
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -185,7 +186,7 @@ public class JsonOperationProducer {
       LOG.log(Level.FINEST, "add" + componentType + " - component:{0}", addComponentObject);
 
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -205,7 +206,7 @@ public class JsonOperationProducer {
       LOG.log(Level.FINEST, OP_NOTE + " - component:{0}", newOperation);
 
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -224,7 +225,7 @@ public class JsonOperationProducer {
       LOG.log(Level.FINEST, OP_NOTE_SELECTION + " - component:{0}", newOperation);
 
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -263,7 +264,7 @@ public class JsonOperationProducer {
         LOG.log(Level.FINEST, "changeColumns - component:{0}", newOperation);
 
       } catch (JSONException e) {
-        Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+        LOG.log(Level.SEVERE, null, e);
       }
     }
   }
@@ -303,7 +304,7 @@ public class JsonOperationProducer {
         LOG.log(Level.FINEST, "changeRows - component:{0}", newOperation);
 
       } catch (JSONException e) {
-        Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+        LOG.log(Level.SEVERE, null, e);
       }
     }
   }
@@ -326,7 +327,7 @@ public class JsonOperationProducer {
         cellNumberFormat.put(NUMBER_FORMAT_CODE, NUMBER_FORMAT_CODE_STANDARD);
       }
     } catch (JSONException ex) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     return cellNumberFormat;
   }
@@ -397,7 +398,7 @@ public class JsonOperationProducer {
       mOperationQueue.put(newOperation);
       LOG.log(Level.FINEST, "setCellContents - component:{0}", newOperation);
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -419,7 +420,7 @@ public class JsonOperationProducer {
       mOperationQueue.put(newOperation);
       LOG.log(Level.FINEST, "mergeCells - component:{0}", newOperation);
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -459,7 +460,7 @@ public class JsonOperationProducer {
         LOG.log(Level.FINEST, "fillCellRange - component:{0}", newOperation);
       }
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -484,7 +485,7 @@ public class JsonOperationProducer {
 
       LOG.log(Level.FINEST, newOperation.toString());
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -539,7 +540,7 @@ public class JsonOperationProducer {
         LOG.log(Level.FINEST, "New Operation '" + OP_FORMAT + "':" + newOp);
 
       } catch (JSONException e) {
-        Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+        LOG.log(Level.SEVERE, null, e);
       }
     }
   }
@@ -562,7 +563,7 @@ public class JsonOperationProducer {
       LOG.log(Level.FINEST, OP_DRAWING + " (image)" + " - component:{0}", newOperation);
 
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -587,7 +588,7 @@ public class JsonOperationProducer {
       LOG.log(Level.FINEST, OP_DRAWING + " (shape)" + " - component:{0}", newOperation);
 
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -632,7 +633,7 @@ public class JsonOperationProducer {
       mOperationQueue.put(newOperation);
       LOG.log(Level.FINEST, OP_TABLE + " - component:{0}", newOperation);
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -646,7 +647,7 @@ public class JsonOperationProducer {
       mOperationQueue.put(operations.get(0));
 
     } catch (JSONException ex) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 
@@ -705,7 +706,7 @@ public class JsonOperationProducer {
       LOG.log(Level.FINEST, OP_TABLE + " - component:{0}", newOperation);
 
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -743,7 +744,7 @@ public class JsonOperationProducer {
       LOG.log(Level.FINEST, OP_FIELD + " - component:{0}", newOperation);
 
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -771,7 +772,7 @@ public class JsonOperationProducer {
       LOG.log(Level.FINEST, "changeTableColumn" + " - component:{0}", newOperation);
 
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -859,7 +860,7 @@ public class JsonOperationProducer {
       LOG.log(Level.FINEST, OP_STYLE + " - component:{0}", newOperation);
 
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -888,7 +889,7 @@ public class JsonOperationProducer {
           panose1_Integers.add(Integer.parseInt(token));
 
         } catch (NumberFormatException e) {
-          Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+          LOG.log(Level.SEVERE, null, e);
         }
       }
     }
@@ -943,7 +944,7 @@ public class JsonOperationProducer {
       LOG.log(Level.FINEST, OP_FONT_DECL + " - component:{0}", newOperation);
 
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -959,7 +960,7 @@ public class JsonOperationProducer {
       LOG.log(Level.FINEST, OP_DOCUMENT_LAYOUT + " - component:{0}", mDocumentAttributes);
 
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -1074,9 +1075,9 @@ public class JsonOperationProducer {
           allHardFormatting.put("cell", jsonCellProps);
         }
       } catch (SAXException ex) {
-        Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       } catch (IOException ex) {
-        Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+        LOG.log(Level.SEVERE, null, ex);
       }
     }
     return allHardFormatting;
@@ -1134,7 +1135,7 @@ public class JsonOperationProducer {
             }
           }
         } catch (Exception ex) {
-          Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
     }
@@ -1184,7 +1185,7 @@ public class JsonOperationProducer {
               "listLevel" + listLevel, createListLevelDefinition(listLevelStyle, listLevel));
 
         } catch (JSONException ex) {
-          Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+          LOG.log(Level.SEVERE, null, ex);
         }
       }
     }
@@ -1612,7 +1613,7 @@ public class JsonOperationProducer {
       LOG.log(Level.FINEST, OP_LIST_STYLE + " - component:{0}", newOperation);
 
     } catch (JSONException e) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -1887,7 +1888,7 @@ public class JsonOperationProducer {
                * { minHeightNormalized = MapHelper.normalizeLength(minHeightHeader); }
                * pagePropsJson.put("marginHeader", MapHelper.normalizeLength(marginHeader) +
                * minHeightNormalized); } catch (JSONException ex) {
-               * Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null,
+               * LOG.log(Level.SEVERE, null,
                * ex); } } } else { String marginFooter = props.getFoMarginTopAttribute(); String
                * fixedHeightFooter = props.getSvgHeightAttribute(); String minHeightFooter =
                * props.getFoMinHeightAttribute(); if( fixedHeightFooter != null ) { minHeightFooter
@@ -1897,7 +1898,7 @@ public class JsonOperationProducer {
                * { minHeightNormalized = MapHelper.normalizeLength(minHeightFooter); }
                * pagePropsJson.put("marginFooter", MapHelper.normalizeLength(marginFooter) +
                * minHeightNormalized); } catch (JSONException ex) {
-               * Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null,
+               * LOG.log(Level.SEVERE, null,
                * ex); } } } } } } } SVANTE REQUIRED
                */
               if (pagePropsJson != null && pagePropsJson.length() != 0) {
@@ -1941,7 +1942,7 @@ public class JsonOperationProducer {
       documentPropsObject.put("document", docPropsJson);
       addDocumentData(documentPropsObject);
     } catch (Exception ex) {
-      Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
   }
 
@@ -1971,7 +1972,7 @@ public class JsonOperationProducer {
         mOperationQueue.put(newOperation);
         LOG.log(Level.FINEST, OP_HEADER_FOOTER + " component:{0}", newOperation);
       } catch (JSONException e) {
-        Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, e);
+        LOG.log(Level.SEVERE, null, e);
       }
     }
   }
@@ -2062,7 +2063,7 @@ public class JsonOperationProducer {
               }
             }
           } catch (JSONException ex) {
-            Logger.getLogger(JsonOperationProducer.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
           }
           LOG.log(Level.FINEST, "Width: {0} Height: {1}", new Object[] {width, height});
         } else {
@@ -2072,8 +2073,7 @@ public class JsonOperationProducer {
         LOG.log(Level.WARNING, "The image ''{0}'' could not be loaded!", href);
       }
     } catch (IOException ex) {
-      Logger.getLogger(JsonOperationProducer.class.getName())
-          .log(Level.SEVERE, "Image could not be found at " + href, ex);
+      LOG.log(Level.SEVERE, "Image could not be found at " + href, ex);
     }
   }
 

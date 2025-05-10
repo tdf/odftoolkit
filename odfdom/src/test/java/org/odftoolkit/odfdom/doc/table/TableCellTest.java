@@ -49,6 +49,7 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 @Ignore
 public class TableCellTest {
 
+  private static final Logger LOG = Logger.getLogger(TableCellTest.class.getName());
   static final String SAMPLE_SPREADSHEET = "TestSpreadsheetTable";
   static final String SAMPLE_STYLE_SPREADSHEET = "TestSpreadsheetStyleTable";
   static final String SAMPLE_TEXT = "TestTextTable";
@@ -69,7 +70,7 @@ public class TableCellTest {
                   ResourceUtilities.getAbsoluteInputPath(SAMPLE_TEXT + ".odt"));
 
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
   }
 
@@ -78,7 +79,7 @@ public class TableCellTest {
       odsdoc.save(ResourceUtilities.getTestOutputFile(SAMPLE_SPREADSHEET + "Output.ods"));
 
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
   }
 
@@ -86,7 +87,7 @@ public class TableCellTest {
     try {
       odtdoc.save(ResourceUtilities.getTestOutputFile(SAMPLE_TEXT + "Output.odt"));
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
   }
 
@@ -139,7 +140,7 @@ public class TableCellTest {
       String horizonAlignment = cell.getHorizontalAlignment();
       Assert.assertEquals(null, horizonAlignment);
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -169,7 +170,7 @@ public class TableCellTest {
       String verticalAlignment = cell.getVerticalAlignment();
       Assert.assertEquals(null, verticalAlignment);
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -202,7 +203,7 @@ public class TableCellTest {
       valueType = cell.getValueType();
       Assert.assertEquals(null, valueType);
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -289,7 +290,7 @@ public class TableCellTest {
       cell.setTimeValue(currenttime);
       cell.setFormatString("HH:mm:ss");
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
     saveods();
@@ -315,7 +316,7 @@ public class TableCellTest {
       cell.setFormatString("0.00");
       Assert.assertEquals("float", cell.getValueType());
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
     try {
@@ -332,7 +333,7 @@ public class TableCellTest {
       cell.setFormatString("###.0%");
       Assert.assertEquals("percentage", cell.getValueType());
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
     try {
@@ -350,7 +351,7 @@ public class TableCellTest {
       cell.setFormatString("yyyy.MM.dd");
       Assert.assertEquals("date", cell.getValueType());
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
     try {
@@ -373,7 +374,7 @@ public class TableCellTest {
       cell.setFormatString("HH:mm:ss");
       Assert.assertEquals("time", cell.getValueType());
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -385,7 +386,7 @@ public class TableCellTest {
               OdfSpreadsheetDocument.loadDocument(
                   ResourceUtilities.getAbsoluteInputPath(SAMPLE_SPREADSHEET + "Output.ods"));
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
   }
 
@@ -420,7 +421,7 @@ public class TableCellTest {
       Color actualBackColor = cell.getCellBackgroundColor();
       Assert.assertEquals("#ffffff", actualBackColor.toString());
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -1039,7 +1040,7 @@ public class TableCellTest {
       Assert.assertEquals("#0.00", bformat);
       Assert.assertEquals("end", bCell.getHorizontalAlignment());
     } catch (Exception e) {
-      Logger.getLogger(TableCellTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail();
     }
   }

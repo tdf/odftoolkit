@@ -279,7 +279,7 @@ class RoundtripTestHelper {
         doc = new CollabTextDocument(fis, configuration);
       }
     } catch (Throwable e) {
-      Logger.getLogger(LoadSaveTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
     return roundtripOperationTest(
@@ -585,8 +585,7 @@ class RoundtripTestHelper {
                 + "'");
       }
     } catch (Throwable e) {
-      Logger.getLogger(RoundtripTestHelper.class.getName())
-          .log(Level.SEVERE, "Testfile: '" + savedDocumentPath + "'\n" + e.getMessage(), e);
+      LOG.log(Level.SEVERE, "Testfile: '" + savedDocumentPath + "'\n" + e.getMessage(), e);
       Assert.fail("Problems with test document " + testFileNameTrunc + " :\n" + e.getMessage());
     }
     return savedDocumentPath;

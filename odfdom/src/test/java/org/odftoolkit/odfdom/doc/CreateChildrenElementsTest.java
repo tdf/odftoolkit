@@ -66,6 +66,8 @@ import org.w3c.dom.NodeList;
 
 public class CreateChildrenElementsTest {
 
+  private static final Logger LOG = Logger.getLogger(CreateChildrenElementsTest.class.getName());
+
   @Test
   public void testCreatChildrenForPresentation() {
     try {
@@ -90,8 +92,7 @@ public class CreateChildrenElementsTest {
       odfdoc.save(ResourceUtilities.getTestOutputFile("CreatChildrenForPresentationTest.odp"));
 
     } catch (Throwable e) {
-      Logger.getLogger(CreateChildrenElementsTest.class.getName())
-          .log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -137,8 +138,7 @@ public class CreateChildrenElementsTest {
           .save(ResourceUtilities.getTestOutputFile("CreatChildrenForChartTest.odt"));
 
     } catch (Throwable e) {
-      Logger.getLogger(CreateChildrenElementsTest.class.getName())
-          .log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -186,8 +186,7 @@ public class CreateChildrenElementsTest {
           .save(ResourceUtilities.getTestOutputFile("CreateChildrenForTableTest.odt"));
 
     } catch (Throwable e) {
-      Logger.getLogger(CreateChildrenElementsTest.class.getName())
-          .log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -243,8 +242,7 @@ public class CreateChildrenElementsTest {
           .save(ResourceUtilities.getTestOutputFile("CreateChildrenForTextTable.odt"));
 
     } catch (Throwable e) {
-      Logger.getLogger(CreateChildrenElementsTest.class.getName())
-          .log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -307,8 +305,7 @@ public class CreateChildrenElementsTest {
           .save(ResourceUtilities.getTestOutputFile("CreateChildrenForGraphic.odg"));
 
     } catch (Throwable e) {
-      Logger.getLogger(CreateChildrenElementsTest.class.getName())
-          .log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -337,8 +334,7 @@ public class CreateChildrenElementsTest {
       textDoc.save(ResourceUtilities.getTestOutputFile("CreatChildrenForStyles.odt"));
 
     } catch (Throwable e) {
-      Logger.getLogger(CreateChildrenElementsTest.class.getName())
-          .log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -394,8 +390,7 @@ public class CreateChildrenElementsTest {
 
     } catch (Throwable e) {
       // TODO Auto-generated catch block
-      Logger.getLogger(CreateChildrenElementsTest.class.getName())
-          .log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
   }
 
@@ -450,8 +445,7 @@ public class CreateChildrenElementsTest {
           .save(ResourceUtilities.getTestOutputFile("CreatChildrenForSpreadsheet.ods"));
 
     } catch (Throwable e) {
-      Logger.getLogger(CreateChildrenElementsTest.class.getName())
-          .log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -473,8 +467,7 @@ public class CreateChildrenElementsTest {
           .save(ResourceUtilities.getTestOutputFile("CreatChildrenForForm.odt"));
 
     } catch (Throwable e) {
-      Logger.getLogger(CreateChildrenElementsTest.class.getName())
-          .log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail("Failed with " + e.getClass().getName() + ": '" + e.getMessage() + "'");
     }
   }
@@ -502,8 +495,7 @@ public class CreateChildrenElementsTest {
       odfdoc.save(ResourceUtilities.getTestOutputFile("CreatChildrenForAnimateTest.odp"));
 
     } catch (Throwable e) {
-      Logger.getLogger(CreateChildrenElementsTest.class.getName())
-          .log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }

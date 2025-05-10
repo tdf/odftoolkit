@@ -138,7 +138,7 @@ public class OperationsRefactoringTest {
           // .forEach(System.out::println); // list all files being found!
           .forEach(org.odftoolkit.odfdom.changes.OperationsRefactoringTest::refactorOperationFile);
     } catch (IOException ex) {
-      Logger.getLogger(RoundtripTestHelper.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
   }

@@ -66,6 +66,7 @@ import org.xml.sax.SAXException;
 
 /** This class represents an empty ODF presentation. */
 public class OdfPresentationDocument extends OdfDocument {
+  private static final Logger LOG = Logger.getLogger(OdfPresentationDocument.class.getName());
 
   private static final String EMPTY_PRESENTATION_DOCUMENT_PATH = "/OdfPresentationDocument.odp";
   static final Resource EMPTY_PRESENTATION_DOCUMENT_RESOURCE =
@@ -247,7 +248,7 @@ public class OdfPresentationDocument extends OdfDocument {
     try {
       contentRoot = getContentRoot();
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       return null;
     }
     NodeList slideNodes =
@@ -270,7 +271,7 @@ public class OdfPresentationDocument extends OdfDocument {
     try {
       contentRoot = getContentRoot();
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       return 0;
     }
     NodeList slideNodes =
@@ -299,7 +300,7 @@ public class OdfPresentationDocument extends OdfDocument {
     try {
       contentRoot = getContentRoot();
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       return null;
     }
     NodeList slideNodes =
@@ -326,7 +327,7 @@ public class OdfPresentationDocument extends OdfDocument {
     try {
       contentRoot = getContentRoot();
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       return;
     }
     NodeList slideNodes =
@@ -354,7 +355,7 @@ public class OdfPresentationDocument extends OdfDocument {
     try {
       contentRoot = getContentRoot();
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       return null;
     }
     ArrayList<OdfSlide> slideList = new ArrayList<OdfSlide>();
@@ -382,7 +383,7 @@ public class OdfPresentationDocument extends OdfDocument {
     try {
       contentRoot = getContentRoot();
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       success = false;
       return success;
     }
@@ -468,7 +469,7 @@ public class OdfPresentationDocument extends OdfDocument {
         autoStyles.removeChild(removeStyles.get(i));
       }
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       success = false;
     }
     return success;
@@ -518,10 +519,10 @@ public class OdfPresentationDocument extends OdfDocument {
         }
       }
     } catch (XPathExpressionException e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       success = false;
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       success = false;
     }
     return success;
@@ -540,7 +541,7 @@ public class OdfPresentationDocument extends OdfDocument {
     try {
       contentRoot = getContentRoot();
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       success = false;
       return success;
     }
@@ -579,7 +580,7 @@ public class OdfPresentationDocument extends OdfDocument {
     try {
       contentRoot = getContentRoot();
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       return null;
     }
     NodeList slideList =
@@ -619,7 +620,7 @@ public class OdfPresentationDocument extends OdfDocument {
     try {
       contentRoot = getContentRoot();
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       return;
     }
     NodeList slideList =
@@ -654,7 +655,7 @@ public class OdfPresentationDocument extends OdfDocument {
       contentDom = getContentDom();
       srcContentRoot = srcDoc.getContentRoot();
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
     NodeList slideList =
         contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
@@ -700,7 +701,7 @@ public class OdfPresentationDocument extends OdfDocument {
       contentRoot = getContentRoot();
       contentDom = getContentDom();
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       return null;
     }
     NodeList slideList =
@@ -818,7 +819,7 @@ public class OdfPresentationDocument extends OdfDocument {
         }
       }
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -912,7 +913,7 @@ public class OdfPresentationDocument extends OdfDocument {
           styleQName, srcDrawStyleCloneEleList, getStylesDom(), appendDrawStyleList);
 
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -1013,7 +1014,7 @@ public class OdfPresentationDocument extends OdfDocument {
         copyForeignLinkRef(cloneStyleElement);
       }
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -1105,7 +1106,7 @@ public class OdfPresentationDocument extends OdfDocument {
         }
       }
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
   // append the cloneStyleElement to the contentDom which position is defined by styleElePath
@@ -1317,7 +1318,7 @@ public class OdfPresentationDocument extends OdfDocument {
     try {
       contentRoot = getContentRoot();
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       return null;
     }
     NodeList slideList =
@@ -1395,7 +1396,7 @@ public class OdfPresentationDocument extends OdfDocument {
         }
       }
     } catch (Exception e) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
     }
   }
 
@@ -1410,9 +1411,9 @@ public class OdfPresentationDocument extends OdfDocument {
     try {
       styles = this.getStylesDom().getOrCreateOfficeStyles();
     } catch (SAXException ex) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     } catch (IOException ex) {
-      Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
     }
     String layoutName;
 
@@ -1424,7 +1425,7 @@ public class OdfPresentationDocument extends OdfDocument {
         layout.newPresentationPlaceholderElement(
             "title", "2.058cm", "1.743cm", "23.91cm", "3.507cm");
       } catch (Exception e1) {
-        Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e1);
+        LOG.log(Level.SEVERE, null, e1);
       }
       page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
 
@@ -1457,7 +1458,7 @@ public class OdfPresentationDocument extends OdfDocument {
             "outline", "2.058cm", "1.743cm", "23.91cm", "3.507cm");
 
       } catch (Exception e1) {
-        Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e1);
+        LOG.log(Level.SEVERE, null, e1);
       }
       page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
 
@@ -1504,7 +1505,7 @@ public class OdfPresentationDocument extends OdfDocument {
             "subtitle", "2.058cm", "5.838cm", "23.91cm", "13.23cm");
 
       } catch (Exception e1) {
-        Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e1);
+        LOG.log(Level.SEVERE, null, e1);
       }
       page.setPresentationPresentationPageLayoutNameAttribute(layoutName);
 
@@ -1555,7 +1556,7 @@ public class OdfPresentationDocument extends OdfDocument {
             "outline", "4.212cm", "13.8cm", "11.857cm", "11.629cm");
 
       } catch (Exception e1) {
-        Logger.getLogger(OdfPresentationDocument.class.getName()).log(Level.SEVERE, null, e1);
+        LOG.log(Level.SEVERE, null, e1);
       }
 
       DrawFrameElement frame1 = page.newDrawFrameElement();

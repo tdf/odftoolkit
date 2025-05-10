@@ -44,6 +44,7 @@ import org.w3c.dom.Node;
 
 public class TableRowColumnTest {
 
+  private static final Logger LOG = Logger.getLogger(TableRowColumnTest.class.getName());
   final String filename = "TestSpreadsheetTable";
   final String odtfilename = "TestTextTable";
   OdfSpreadsheetDocument odsdoc;
@@ -62,7 +63,7 @@ public class TableRowColumnTest {
               OdfTextDocument.loadDocument(
                   ResourceUtilities.getAbsoluteInputPath(odtfilename + ".odt"));
     } catch (Exception e) {
-      Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
   }
 
@@ -240,7 +241,7 @@ public class TableRowColumnTest {
     try {
       odsdoc.save(ResourceUtilities.getTestOutputFile(filename + name + ".ods"));
     } catch (Exception e) {
-      Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
   }
 
@@ -248,7 +249,7 @@ public class TableRowColumnTest {
     try {
       odtdoc.save(ResourceUtilities.getTestOutputFile(odtfilename + name + ".odt"));
     } catch (Exception e) {
-      Logger.getLogger(TableRowColumnTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
     }
   }
 }

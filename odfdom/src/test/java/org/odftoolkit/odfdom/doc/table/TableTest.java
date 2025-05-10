@@ -59,6 +59,7 @@ import org.w3c.dom.NodeList;
 
 public class TableTest {
 
+  private static final Logger LOG = Logger.getLogger(TableTest.class.getName());
   static final String mOdsTestFileName = "TestSpreadsheetTable";
   static final String mOdtTestFileName = "TestTextTable";
   OdfSpreadsheetDocument mOdsDoc;
@@ -73,7 +74,7 @@ public class TableTest {
               OdfSpreadsheetDocument.loadDocument(
                   ResourceUtilities.getAbsoluteInputPath(mOdsTestFileName + ".ods"));
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
   }
@@ -94,7 +95,7 @@ public class TableTest {
 
       document.save(ResourceUtilities.getTestOutputFile("CreateTableCase.odt"));
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
   }
@@ -174,7 +175,7 @@ public class TableTest {
       Assert.assertEquals(rowCount + 1, table1.getRowCount());
       Assert.assertEquals(columnCount + 1, table1.getColumnCount());
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
   }
@@ -199,7 +200,7 @@ public class TableTest {
         }
       }
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
   }
@@ -221,7 +222,7 @@ public class TableTest {
       Assert.assertEquals((sheet.getColumnByIndex(0).getWidth()), 10);
     } catch (Exception e) {
       Locale.setDefault(previousDefault);
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
   }
@@ -339,7 +340,7 @@ public class TableTest {
       tableList = mOdtDoc.getTableList(true);
       Assert.assertEquals(count - 1, tableList.size());
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
   }
@@ -357,7 +358,7 @@ public class TableTest {
       document.save(ResourceUtilities.getTestOutputFile("TestSetGetWidth.odt"));
 
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
   }
@@ -381,10 +382,10 @@ public class TableTest {
       }
       saveodt(mOdtTestFileName + "Output.odt");
     } catch (FileNotFoundException ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     } catch (Exception ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
   }
@@ -465,10 +466,10 @@ public class TableTest {
 
       saveodt(mOdtTestFileName + "Out.odt");
     } catch (FileNotFoundException ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     } catch (Exception ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
   }
@@ -503,10 +504,10 @@ public class TableTest {
       Assert.assertEquals(clmnum - 4, table2.getColumnCount());
       saveodt(mOdtTestFileName + "Out.odt");
     } catch (FileNotFoundException ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     } catch (Exception ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
   }
@@ -538,10 +539,10 @@ public class TableTest {
 
       Assert.assertEquals(originalRowCount + 2, newTable.getRowCount());
     } catch (FileNotFoundException ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     } catch (Exception ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
   }
@@ -609,7 +610,7 @@ public class TableTest {
       Assert.assertEquals("", columns.get(0).getCellByIndex(0).getStringValue());
 
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
   }
@@ -657,7 +658,7 @@ public class TableTest {
 
       Assert.assertEquals("", rows.get(0).getCellByIndex(0).getStringValue());
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
   }
@@ -695,10 +696,10 @@ public class TableTest {
       cell.setStringValue("string86");
       Assert.assertEquals("string86", cell.getStringValue());
     } catch (FileNotFoundException ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     } catch (Exception ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
   }
@@ -736,10 +737,10 @@ public class TableTest {
       cell.setStringValue("string86");
       Assert.assertEquals("string86", cell.getStringValue());
     } catch (FileNotFoundException ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     } catch (Exception ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
   }
@@ -769,10 +770,10 @@ public class TableTest {
 
       Assert.assertEquals(originalRowCount - 2, newTable.getRowCount());
     } catch (FileNotFoundException ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     } catch (Exception ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
   }
@@ -788,10 +789,10 @@ public class TableTest {
       int headerRowCount = table.getHeaderRowCount();
       Assert.assertEquals(1, headerRowCount);
     } catch (FileNotFoundException ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     } catch (Exception ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
   }
@@ -807,10 +808,10 @@ public class TableTest {
       int headerColumnCount = table.getHeaderColumnCount();
       Assert.assertEquals(1, headerColumnCount);
     } catch (FileNotFoundException ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     } catch (Exception ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
   }
@@ -943,7 +944,7 @@ public class TableTest {
       Assert.assertEquals(6, tbl.getRowCount());
       Assert.assertEquals(6, tbl.getColumnCount());
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
   }
@@ -1020,7 +1021,7 @@ public class TableTest {
 
       saveodt(mOdtTestFileName + "Out.odt");
     } catch (Exception ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
     }
   }
@@ -1047,7 +1048,7 @@ public class TableTest {
       saveodt(mOdtTestFileName + "Out.odt");
 
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
   }
@@ -1131,7 +1132,7 @@ public class TableTest {
         Assert.assertEquals(1, value);
       }
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail("testGetCellAt failed");
     }
   }
@@ -1158,7 +1159,7 @@ public class TableTest {
 		ods.getSpreadsheetTables().get(1).setTableName("newSheet");
         ods.save(ResourceUtilities.getTestOutputFile("clonedSheet.ods"));
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail("writeCellDataAndCloneSheet failed");
     }
   }
@@ -1232,7 +1233,7 @@ public class TableTest {
       Assert.assertNotNull(footerContentRoot2);
 
     } catch (Exception ex) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, null, ex);
       Assert.fail("testTableInHeaderFooter failed");
     }
   }
@@ -1365,7 +1366,7 @@ public class TableTest {
     try {
       mOdsDoc.save(ResourceUtilities.getAbsoluteOutputPath(mOdsTestFileName + "Output.ods"));
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
   }
@@ -1374,7 +1375,7 @@ public class TableTest {
     try {
       mOdtDoc.save(ResourceUtilities.getAbsoluteOutputPath(filename));
     } catch (Exception e) {
-      Logger.getLogger(TableTest.class.getName()).log(Level.SEVERE, null, e);
+      LOG.log(Level.SEVERE, null, e);
       Assert.fail(e.getMessage());
     }
   }

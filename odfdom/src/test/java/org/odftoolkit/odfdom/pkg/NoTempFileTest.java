@@ -54,7 +54,7 @@ public class NoTempFileTest {
               + userPropTempEnable
               + "'.");
     } catch (Exception e) {
-      Logger.getLogger(NoTempFileTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -74,7 +74,7 @@ public class NoTempFileTest {
       Assert.assertEquals(5551, bytes.length);
 
     } catch (Exception e) {
-      Logger.getLogger(NoTempFileTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -120,7 +120,7 @@ public class NoTempFileTest {
       DrawImageElement imageobj = (DrawImageElement) frameobj.getFirstChild();
       Assert.assertEquals("Pictures/myHoliday.jpg", imageobj.getXlinkHrefAttribute());
     } catch (Exception e) {
-      Logger.getLogger(NoTempFileTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
@@ -135,7 +135,7 @@ public class NoTempFileTest {
               + userPropTempEnable
               + "'.");
     } catch (Exception e) {
-      Logger.getLogger(NoTempFileTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }

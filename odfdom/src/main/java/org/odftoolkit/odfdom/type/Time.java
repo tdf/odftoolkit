@@ -26,6 +26,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 /** This class represents the in OpenDocument format used data type {@odf.datatype time} */
 public class Time implements OdfDataType {
 
+  private static final Logger LOG = Logger.getLogger(Time.class.getName());
   private XMLGregorianCalendar mTime;
 
   /**
@@ -69,8 +70,7 @@ public class Time implements OdfDataType {
       DatatypeFactory aFactory = new org.apache.xerces.jaxp.datatype.DatatypeFactoryImpl();
       return new Time(aFactory.newXMLGregorianCalendar(stringValue));
     } catch (IllegalArgumentException ex) {
-      Logger.getLogger(Time.class.getName())
-          .log(Level.SEVERE, "parameter is invalid for datatype Time", ex);
+      LOG.log(Level.SEVERE, "parameter is invalid for datatype Time", ex);
       throw new IllegalArgumentException("parameter is invalid for datatype Time");
     }
   }

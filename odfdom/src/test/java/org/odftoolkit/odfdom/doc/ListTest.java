@@ -38,6 +38,8 @@ import org.w3c.dom.NodeList;
 
 public class ListTest {
 
+  private static final Logger LOG = Logger.getLogger(ListTest.class.getName());
+
   public ListTest() {}
 
   @Test
@@ -63,7 +65,7 @@ public class ListTest {
         Assert.assertEquals(lvl1, lvl2);
       }
     } catch (Exception e) {
-      Logger.getLogger(ListTest.class.getName()).log(Level.SEVERE, e.getMessage(), e);
+      LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
   }
