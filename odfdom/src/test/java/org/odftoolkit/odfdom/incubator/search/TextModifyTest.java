@@ -44,7 +44,7 @@ import org.w3c.dom.Node;
 /** Test the text modification with the help of a the TextNavigation class */
 public class TextModifyTest {
 
-  private static final Logger LOG = Logger.getLogger(TextNavigationTest.class.getName());
+  private static final Logger LOG = Logger.getLogger(TextModifyTest.class.getName());
   public static final String TEXT_FILE = "TestTextSelection.odt";
   public static final String SAVE_FILE_DELETE = "TextSelectionResultDelete.odt";
 
