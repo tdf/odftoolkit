@@ -336,21 +336,10 @@ public final class ResourceUtilities {
    * @param inputData the data to be written into the file
    */
   public static void saveStringToFile(File file, Charset charset, String inputData) {
-    BufferedWriter out = null;
-    try {
-      out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charset));
-      // out = new BufferedWriter(new FileWriter(file));
+    try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charset))) {
       out.write(inputData);
     } catch (IOException ex) {
       LOG.log(Level.SEVERE, null, ex);
-    } finally {
-      try {
-        if (out != null) {
-          out.close();
-        }
-      } catch (IOException ex) {
-        LOG.log(Level.SEVERE, null, ex);
-      }
     }
   }
 
@@ -389,8 +378,7 @@ public final class ResourceUtilities {
    */
   public static byte[] loadFileAsBytes(File file) throws IOException {
     // Open the file
-    RandomAccessFile f = new RandomAccessFile(file, "r");
-    try {
+    try (RandomAccessFile f = new RandomAccessFile(file, "r")) {
       // check length
       long longlength = f.length();
       int length = (int) longlength;
@@ -401,8 +389,6 @@ public final class ResourceUtilities {
       byte[] data = new byte[length];
       f.readFully(data);
       return data;
-    } finally {
-      f.close();
     }
   }
 

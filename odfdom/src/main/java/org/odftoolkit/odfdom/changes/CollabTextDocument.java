@@ -269,22 +269,10 @@ public class CollabTextDocument implements Closeable {
    * @param inputData the data to be written into the file
    */
   private static void saveStringToFile(File file, Charset charset, String inputData) {
-    BufferedWriter out = null;
-    try {
-      out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charset));
-      // out = new BufferedWriter(new FileWriter(file));
+    try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charset))) {
       out.write(inputData);
-      out.close();
     } catch (IOException ex) {
       LOG.log(Level.SEVERE, null, ex);
-    } finally {
-      try {
-        if (out != null) {
-          out.close();
-        }
-      } catch (IOException ex) {
-        LOG.log(Level.SEVERE, null, ex);
-      }
     }
   }
 
