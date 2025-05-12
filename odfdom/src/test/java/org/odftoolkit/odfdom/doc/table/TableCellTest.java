@@ -55,19 +55,16 @@ public class TableCellTest {
   static final String SAMPLE_TEXT = "TestTextTable";
   OdfSpreadsheetDocument odsdoc, odsstyle;
   OdfTextDocument odtdoc;
-  OdfTable odsTable, odtTable;
 
   @Before
   public void setUp() {
     try {
       odsdoc =
-          (OdfSpreadsheetDocument)
-              OdfSpreadsheetDocument.loadDocument(
-                  ResourceUtilities.getAbsoluteInputPath(SAMPLE_SPREADSHEET + ".ods"));
+        OdfSpreadsheetDocument.loadDocument(
+            ResourceUtilities.getAbsoluteInputPath(SAMPLE_SPREADSHEET + ".ods"));
       odtdoc =
-          (OdfTextDocument)
-              OdfTextDocument.loadDocument(
-                  ResourceUtilities.getAbsoluteInputPath(SAMPLE_TEXT + ".odt"));
+        OdfTextDocument.loadDocument(
+            ResourceUtilities.getAbsoluteInputPath(SAMPLE_TEXT + ".odt"));
 
     } catch (Exception e) {
       LOG.log(Level.SEVERE, e.getMessage(), e);
