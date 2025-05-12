@@ -232,7 +232,7 @@ public class TableCellTest {
     Assert.assertEquals("Aabbccddee", text);
   }
 
-  @Test @Ignore // FIXME test failure
+  @Test @Ignore // FIXME test failure: Expected: #0.0 Actual: 0.0
   public void testSetGetFormat() throws Exception {
     OdfSpreadsheetDocument odsdoc = loadInputOds();
 
@@ -830,7 +830,7 @@ public class TableCellTest {
     Assert.assertEquals(1, fcell.mCellElement.getChildNodes().getLength());
   }
 
-  @Test @Ignore // FIXME test failure
+  @Test
   public void testGetSetDisplayText() throws Exception {
     OdfSpreadsheetDocument odsdoc = loadInputOds();
 
@@ -850,7 +850,7 @@ public class TableCellTest {
     Assert.assertEquals(expected, fcell.getDisplayText());
   }
 
-  @Test @Ignore // FIXME test failure
+  @Test @Ignore // FIXME test failure: Expected: #0.0 Actual: 0.0
   public void testGetSetFormatString() throws Exception {
     OdfSpreadsheetDocument odsdoc = loadInputOds();
 
@@ -886,7 +886,7 @@ public class TableCellTest {
     Assert.assertEquals("CNY", cell2.getCurrencySymbol());
   }
 
-  @Test @Ignore // FIXME test failure
+  @Test  @Ignore // FIXME test failure: Expected: $#,##0.00 Actual: [$$]#,##0.00
   public void testGetSetCurrencyFormat() throws Exception {
     OdfSpreadsheetDocument odsdoc = loadInputOds();
 
@@ -919,7 +919,7 @@ public class TableCellTest {
     }
   }
 
-  @Test @Ignore // FIXME test failure
+  @Test @Ignore // FIXME test failure: Expected: yyyy-MM-dd Actual: YYYY-MM-DD
   public void testSetDefaultCellStyle() throws Exception {
     OdfSpreadsheetDocument outputDocument;
     OdfContentDom contentDom; // the document object model for content.xml
@@ -976,7 +976,6 @@ public class TableCellTest {
   }
 
   @Test
-  @Ignore
   public void testGetFromEmptyDateValue() throws Exception {
     OdfSpreadsheetDocument doc = OdfSpreadsheetDocument.newSpreadsheetDocument();
     OdfTable table = OdfTable.newTable(doc);
@@ -985,8 +984,7 @@ public class TableCellTest {
     Assert.assertNull(dateCell.getDateValue());
   }
 
-  @Test
-  @Ignore
+  @Test @Ignore // FIXME test failure: NPE
   public void testGetFromEmptyTimeValue() throws Exception {
     OdfSpreadsheetDocument doc = OdfSpreadsheetDocument.newSpreadsheetDocument();
     OdfTable table = OdfTable.newTable(doc);
