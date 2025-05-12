@@ -93,7 +93,7 @@ public class OdfWhitespaceProcessor {
      */
     if (spaces > 1) {
       TextSElement spaceElement = new TextSElement(owner);
-      spaceElement.setTextCAttribute(new Integer(spaces - 1));
+      spaceElement.setTextCAttribute(Integer.valueOf(spaces - 1));
       element.appendChild(spaceElement);
     }
     /*
