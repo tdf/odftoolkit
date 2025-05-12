@@ -283,11 +283,12 @@ public class OdfPackage implements Closeable {
     mNewPwd = mOldPwd;
     mBaseURI = baseURI;
 
-    InputStream packageStream = new FileInputStream(pkgFile);
-    try {
+    try (InputStream packageStream = new FileInputStream(pkgFile)) {
       initializeZip(packageStream);
-    } finally {
-      close(packageStream);
+    } catch (IOException ioe) {
+      // Warning only. This is usually just logged.
+      // Allow user to throw an exception all the same
+      handleIOException(ioe, true);
     }
   }
 
@@ -565,10 +566,11 @@ public class OdfPackage implements Closeable {
 
   // Initialize using memory
   private void initializeZip(InputStream odfStream) throws SAXException, IOException {
-    ByteArrayOutputStream tempBuf = new ByteArrayOutputStream();
-    StreamHelper.transformStream(odfStream, tempBuf);
-    byte[] mTempByteBuf = tempBuf.toByteArray();
-    tempBuf.close();
+    byte[] mTempByteBuf;
+    try (ByteArrayOutputStream tempBuf = new ByteArrayOutputStream()) {
+      odfStream.transferTo(tempBuf);
+      mTempByteBuf = tempBuf.toByteArray();
+    }
     if (mTempByteBuf.length < 4
         || mTempByteBuf[0] != 'P'
         || mTempByteBuf[1] != 'K'
@@ -829,36 +831,13 @@ public class OdfPackage implements Closeable {
   /** @return the media type of the root document from the manifest.xml */
   private String getMediaTypeFromEntry(ZipArchiveEntry mimetypeEntry)
       throws SAXException, IOException {
-    String entryMediaType = null;
-    ByteArrayOutputStream out = new ByteArrayOutputStream();
-    try {
-      StreamHelper.transformStream(mZipFile.getInputStream(mimetypeEntry), out);
-      entryMediaType = new String(out.toByteArray(), 0, out.size(), "UTF-8");
+    try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+      mZipFile.getInputStream(mimetypeEntry).transferTo(out);
+      return new String(out.toByteArray(), 0, out.size(), "UTF-8");
     } catch (IOException ex) {
       LOG.log(Level.SEVERE, null, ex);
       handleIOException(ex, false);
-    } finally {
-      if (out != null) {
-        try {
-          closeStream(out);
-        } catch (IOException ex) {
-          LOG.log(Level.SEVERE, null, ex);
-        }
-        out = null;
-      }
-    }
-    return entryMediaType;
-  }
-
-  private void closeStream(Closeable closeable) throws SAXException, IOException {
-    if (closeable != null) {
-      try {
-        closeable.close();
-      } catch (IOException ioe) {
-        // Warning only. This is usually just logged.
-        // Allow user to throw an exception all the same
-        handleIOException(ioe, true);
-      }
+      return null; // never reached
     }
   }
 
@@ -1152,11 +1131,9 @@ public class OdfPackage implements Closeable {
     // // to the original one - would be less memory footprint
     // cacheContent();
     // }
-    FileOutputStream fos = new FileOutputStream(pkgFile);
-    try {
+    ;
+    try (FileOutputStream fos = new FileOutputStream(pkgFile)) {
       save(fos, baseURL);
-    } finally {
-      fos.close();
     }
   }
 
@@ -1212,47 +1189,46 @@ public class OdfPackage implements Closeable {
     } else {
       rootEntry.setMediaTypeString(mMediaType);
     }
-    ZipArchiveOutputStream zos = new ZipArchiveOutputStream(odfStream);
-    // remove mediatype path and use it as first
-    this.mManifestEntries.remove(OdfFile.MEDIA_TYPE.getPath());
-    Set<String> keys = mManifestEntries.keySet();
-    boolean isFirstFile = true;
-    CRC32 crc = new CRC32();
-    long modTime = (new java.util.Date()).getTime();
-    byte[] data = null;
-    for (String path : keys) {
-      // ODF requires the "mimetype" file to be at first in the package
-      if (isFirstFile) {
-        isFirstFile = false;
-        // create "mimetype" from current attribute value
-        data = mMediaType.getBytes("UTF-8");
-        createZipEntry(OdfFile.MEDIA_TYPE.getPath(), data, zos, modTime, crc);
-      }
-      // create an entry, but NOT for "ODF document directory", "MANIFEST" or "mimetype"
-      if (!path.endsWith(SLASH)
+    try (ZipArchiveOutputStream zos = new ZipArchiveOutputStream(odfStream)) {
+      // remove mediatype path and use it as first
+      this.mManifestEntries.remove(OdfFile.MEDIA_TYPE.getPath());
+      Set<String> keys = mManifestEntries.keySet();
+      boolean isFirstFile = true;
+      CRC32 crc = new CRC32();
+      long modTime = (new java.util.Date()).getTime();
+      byte[] data = null;
+      for (String path : keys) {
+        // ODF requires the "mimetype" file to be at first in the package
+        if (isFirstFile) {
+          isFirstFile = false;
+          // create "mimetype" from current attribute value
+          data = mMediaType.getBytes("UTF-8");
+          createZipEntry(OdfFile.MEDIA_TYPE.getPath(), data, zos, modTime, crc);
+        }
+        // create an entry, but NOT for "ODF document directory", "MANIFEST" or "mimetype"
+        if (!path.endsWith(SLASH)
           && !path.equals(OdfPackage.OdfFile.MANIFEST.getPath())
           && !path.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
-        data = getBytes(path);
-        createZipEntry(path, data, zos, modTime, crc);
+          data = getBytes(path);
+          createZipEntry(path, data, zos, modTime, crc);
+        }
+        data = null;
       }
-      data = null;
+      // Create "META-INF/" directory
+      createZipEntry("META-INF/", null, zos, modTime, crc);
+      // Create "META-INF/manifest.xml" file after all entries with potential encryption have been
+      // added
+      data = getBytes(OdfFile.MANIFEST.getPath());
+      createZipEntry(OdfFile.MANIFEST.getPath(), data, zos, modTime, crc);
+      zos.flush();
     }
-    // Create "META-INF/" directory
-    createZipEntry("META-INF/", null, zos, modTime, crc);
-    // Create "META-INF/manifest.xml" file after all entries with potential encryption have been
-    // added
-    data = getBytes(OdfFile.MANIFEST.getPath());
-    createZipEntry(OdfFile.MANIFEST.getPath(), data, zos, modTime, crc);
-    zos.flush();
-    zos.close();
     odfStream.flush();
   }
 
   private void createZipEntry(
       String path, byte[] data, ZipArchiveOutputStream zos, long modTime, CRC32 crc)
       throws IOException {
-    ZipArchiveEntry ze = null;
-    ze = mZipEntries.get(path);
+    ZipArchiveEntry ze = mZipEntries.get(path);
     if (ze == null) {
       ze = new ZipArchiveEntry(path);
     }
@@ -1344,18 +1320,6 @@ public class OdfPackage implements Closeable {
       return fileNeedsCompression(internalPath);
     } else {
       return false;
-    }
-  }
-
-  private void close(Closeable closeable) throws SAXException, IOException {
-    if (closeable != null) {
-      try {
-        closeable.close();
-      } catch (IOException ioe) {
-        // Warning only. This is usually just logged.
-        // Allow user to throw an exception all the same
-        handleIOException(ioe, true);
-      }
     }
   }
 
@@ -1846,7 +1810,7 @@ public class OdfPackage implements Closeable {
       } else {
         bis = new BufferedInputStream(fileStream);
       }
-      StreamHelper.transformStream(bis, baos);
+      bis.transferTo(baos);
       byte[] data = baos.toByteArray();
       insert(data, internalPath, mediaType);
     }
@@ -1929,12 +1893,10 @@ public class OdfPackage implements Closeable {
     if (data == null) {
       ZipArchiveEntry entry = null;
       if ((entry = mZipEntries.get(internalPath)) != null) {
-        InputStream inputStream = null;
-        try {
-          inputStream = mZipFile.getInputStream(entry);
+        try (InputStream inputStream = mZipFile.getInputStream(entry)) {
           if (inputStream != null) {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
-            StreamHelper.transformStream(inputStream, out);
+            inputStream.transferTo(out);
             data = out.toByteArray();
             // decrypt data as needed
             if (!(internalPath.equals(OdfFile.MEDIA_TYPE.getPath())
@@ -1957,14 +1919,6 @@ public class OdfPackage implements Closeable {
         } catch (IOException ex) {
           // Catching IOException here should be fine: in-memory operations only
           LOG.log(Level.SEVERE, null, ex);
-        } finally {
-          try {
-            if (inputStream != null) {
-              inputStream.close();
-            }
-          } catch (IOException ex) {
-            LOG.log(Level.SEVERE, null, ex);
-          }
         }
       }
     }
