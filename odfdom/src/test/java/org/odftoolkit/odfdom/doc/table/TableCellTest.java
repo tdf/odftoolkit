@@ -46,22 +46,18 @@ import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
-@Ignore
 public class TableCellTest {
 
   private static final Logger LOG = Logger.getLogger(TableCellTest.class.getName());
   static final String SAMPLE_SPREADSHEET = "TestSpreadsheetTable";
   static final String SAMPLE_STYLE_SPREADSHEET = "TestSpreadsheetStyleTable";
   static final String SAMPLE_TEXT = "TestTextTable";
-  OdfSpreadsheetDocument odsdoc, odsstyle;
+  OdfSpreadsheetDocument odsstyle;
   OdfTextDocument odtdoc;
 
   @Before
   public void setUp() {
     try {
-      odsdoc =
-        OdfSpreadsheetDocument.loadDocument(
-            ResourceUtilities.getAbsoluteInputPath(SAMPLE_SPREADSHEET + ".ods"));
       odtdoc =
         OdfTextDocument.loadDocument(
             ResourceUtilities.getAbsoluteInputPath(SAMPLE_TEXT + ".odt"));
@@ -71,13 +67,25 @@ public class TableCellTest {
     }
   }
 
-  private void saveods() {
+  private OdfSpreadsheetDocument loadInputOds() throws Exception {
+    return OdfSpreadsheetDocument.loadDocument(
+      ResourceUtilities.getAbsoluteInputPath(SAMPLE_SPREADSHEET + ".ods")
+    );
+  }
+
+  private void saveOutputOds(OdfSpreadsheetDocument odsdoc) {
     try {
       odsdoc.save(ResourceUtilities.getTestOutputFile(SAMPLE_SPREADSHEET + "Output.ods"));
 
     } catch (Exception e) {
       LOG.log(Level.SEVERE, e.getMessage(), e);
     }
+  }
+
+  private OdfSpreadsheetDocument loadOutputOds() throws Exception {
+    return OdfSpreadsheetDocument.loadDocument(
+      ResourceUtilities.getTestOutputFile(SAMPLE_SPREADSHEET + "Output.ods")
+    );
   }
 
   private void saveodt() {
@@ -89,7 +97,9 @@ public class TableCellTest {
   }
 
   @Test
-  public void testGetIndexInRowColumn() {
+  public void testGetIndexInRowColumn() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 2, columnindex = 1;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell cell = table.getCellByPosition(columnindex, rowindex);
@@ -104,7 +114,9 @@ public class TableCellTest {
   }
 
   @Test
-  public void testGetSetHoriAlignment() {
+  public void testGetSetHoriAlignment() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 3, columnindex = 0;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -127,7 +139,7 @@ public class TableCellTest {
     fcell.setHorizontalAlignment("right");
     align = fcell.getHorizontalAlignment();
     Assert.assertEquals("end", align);
-    saveods();
+    saveOutputOds(odsdoc);
 
     OdfSpreadsheetDocument ods;
     try {
@@ -143,7 +155,9 @@ public class TableCellTest {
   }
 
   @Test
-  public void testGetSetVertAlignment() {
+  public void testGetSetVertAlignment() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 3, columnindex = 0;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -158,7 +172,7 @@ public class TableCellTest {
     fcell.setVerticalAlignment("bottom");
     align = fcell.getVerticalAlignment();
     Assert.assertEquals("bottom", align);
-    saveods();
+    saveOutputOds(odsdoc);
     OdfSpreadsheetDocument ods;
     try {
       ods = OdfSpreadsheetDocument.newSpreadsheetDocument();
@@ -173,7 +187,9 @@ public class TableCellTest {
   }
 
   @Test
-  public void testGetSetValueType() {
+  public void testGetSetValueType() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 3, columnindex = 0;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -190,7 +206,7 @@ public class TableCellTest {
     fcell.setValueType("date");
     String valueType = fcell.getValueType();
     Assert.assertEquals("date", valueType);
-    saveods();
+    saveOutputOds(odsdoc);
 
     OdfSpreadsheetDocument ods;
     try {
@@ -206,7 +222,9 @@ public class TableCellTest {
   }
 
   @Test
-  public void testGetSetWrapOption() {
+  public void testGetSetWrapOption() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 5, columnindex = 8;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -217,11 +235,13 @@ public class TableCellTest {
     fcell.setTextWrapped(false);
     wrap = fcell.isTextWrapped();
     Assert.assertEquals(false, wrap);
-    saveods();
+    saveOutputOds(odsdoc);
   }
 
   @Test
-  public void testGetSetTextValue() {
+  public void testGetSetTextValue() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 5, columnindex = 8;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -239,7 +259,7 @@ public class TableCellTest {
     fcell.setDisplayText(null, "automatic7777");
     text = fcell.getDisplayText();
     Assert.assertEquals("", text);
-    saveods();
+    saveOutputOds(odsdoc);
 
     OdfTable table1 = odtdoc.getTableByName("Table1");
     OdfTableCell fcell2 = table1.getCellByPosition(0, 1);
@@ -247,8 +267,10 @@ public class TableCellTest {
     Assert.assertEquals("Aabbccddee", text);
   }
 
-  @Test
-  public void testSetGetFormat() {
+  @Test @Ignore // FIXME test failure
+  public void testSetGetFormat() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 3, columnindex = 0;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -290,7 +312,7 @@ public class TableCellTest {
       LOG.log(Level.SEVERE, e.getMessage(), e);
       Assert.fail(e.getMessage());
     }
-    saveods();
+    saveOutputOds(odsdoc);
 
     // test value type adapt function.
     OdfSpreadsheetDocument ods;
@@ -376,26 +398,17 @@ public class TableCellTest {
     }
   }
 
-  private void loadOutputSpreadsheet() {
-    try {
-      odsdoc =
-          (OdfSpreadsheetDocument)
-              OdfSpreadsheetDocument.loadDocument(
-                  ResourceUtilities.getAbsoluteInputPath(SAMPLE_SPREADSHEET + "Output.ods"));
-    } catch (Exception e) {
-      LOG.log(Level.SEVERE, e.getMessage(), e);
-    }
-  }
-
   @Test
   public void testGetSetCellBackgroundColor() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 2, columnindex = 0;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
     fcell.setCellBackgroundColor("#ffffff");
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     // set color as DEFAULT_BACKGROUND_COLOR #FFFFFF
@@ -403,9 +416,9 @@ public class TableCellTest {
 
     Color expectedColor = Color.valueOf("#000000");
     fcell.setCellBackgroundColor(expectedColor);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(expectedColor.toString(), fcell.getCellBackgroundColor().toString());
@@ -425,31 +438,33 @@ public class TableCellTest {
 
   @Test
   public void testGetSetColumnSpannedNumber() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 2, columnindex = 0;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
     fcell.setColumnSpannedNumber(-2);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     // set column spanned number as DEFAULT_COLUMN_SPANNED_NUMBER 1.
     Assert.assertEquals(1, fcell.getColumnSpannedNumber());
 
     fcell.setColumnSpannedNumber(0);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     // set column spanned number as DEFAULT_COLUMN_SPANNED_NUMBER 1.
     Assert.assertEquals(1, fcell.getColumnSpannedNumber());
 
     fcell.setColumnSpannedNumber(2);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(2, fcell.getColumnSpannedNumber());
@@ -457,31 +472,33 @@ public class TableCellTest {
 
   @Test
   public void testGetSetRowSpannedNumber() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 2, columnindex = 0;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
     fcell.setRowSpannedNumber(-2);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     // set row spanned number as DEFAULT_ROW_SPANNED_NUMBER 1.
     Assert.assertEquals(1, fcell.getRowSpannedNumber());
 
     fcell.setRowSpannedNumber(0);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     // set row spanned number as DEFAULT_ROW_SPANNED_NUMBER 1.
     Assert.assertEquals(1, fcell.getRowSpannedNumber());
 
     fcell.setRowSpannedNumber(2);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(2, fcell.getRowSpannedNumber());
@@ -489,38 +506,42 @@ public class TableCellTest {
 
   @Test
   public void testGetSetColumnsRepeatedNumber() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 3, columnindex = 1;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
     fcell.setColumnsRepeatedNumber(-2);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     // set columns repeated number as DEFAULT_COLUMNS_REPEATED_NUMBER 1.
     Assert.assertEquals(1, fcell.getColumnsRepeatedNumber());
 
     fcell.setColumnsRepeatedNumber(0);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     // set columns repeated number as DEFAULT_COLUMNS_REPEATED_NUMBER 1.
     Assert.assertEquals(1, fcell.getColumnsRepeatedNumber());
 
     fcell.setColumnsRepeatedNumber(2);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(2, fcell.getColumnsRepeatedNumber());
   }
 
   @Test
-  public void testGetSetDateValue() {
+  public void testGetSetDateValue() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 7, columnindex = 7;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -535,54 +556,60 @@ public class TableCellTest {
     Assert.assertTrue(illegalArgumentFlag);
     Calendar expectedCalendar = new GregorianCalendar(2010, 1, 30);
     fcell.setDateValue(expectedCalendar);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(0, fcell.getDateValue().compareTo(expectedCalendar));
   }
 
   @Test
-  public void testGetSetStringValue() {
+  public void testGetSetStringValue() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 6, columnindex = 0;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
     fcell.setStringValue(null);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals("", fcell.getStringValue());
 
     String expectedString = "hello world";
     fcell.setStringValue(expectedString);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(expectedString, fcell.getStringValue());
   }
 
   @Test
-  public void testGetSetBooleanValue() {
+  public void testGetSetBooleanValue() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 5, columnindex = 5;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
     boolean expected = false;
     fcell.setBooleanValue(expected);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertFalse(fcell.getBooleanValue());
   }
 
   @Test
-  public void testGetSetCurrencyValue() {
+  public void testGetSetCurrencyValue() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 5, columnindex = 5;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -603,16 +630,18 @@ public class TableCellTest {
     Assert.assertTrue(illegalArgumentFlag);
 
     fcell.setCurrencyValue(expected, "USD");
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(expected, fcell.getCurrencyValue(), 0);
   }
 
   @Test
-  public void testGetSetCurrencyDesc() {
+  public void testGetSetCurrencyDesc() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 1, columnindex = 2;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -629,31 +658,35 @@ public class TableCellTest {
     fcell = table.getCellByPosition(columnindex, rowindex);
     String expected = "USD";
     fcell.setCurrencyCode(expected);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(expected, fcell.getCurrencyCode());
   }
 
   @Test
-  public void testGetSetPercentageValue() {
+  public void testGetSetPercentageValue() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 5, columnindex = 5;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
     double expected = 56.98;
     fcell.setPercentageValue(expected);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(expected, fcell.getPercentageValue(), 0);
   }
 
   @Test
-  public void testGetSetTimeValue() {
+  public void testGetSetTimeValue() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 0, columnindex = 4;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -668,9 +701,9 @@ public class TableCellTest {
     Assert.assertTrue(illegalArgumentFlag);
     Calendar expected = Calendar.getInstance();
     fcell.setTimeValue(expected);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
 
@@ -681,7 +714,9 @@ public class TableCellTest {
   }
 
   @Test
-  public void testGetSetFormula() {
+  public void testGetSetFormula() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 1, columnindex = 10;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -697,26 +732,29 @@ public class TableCellTest {
 
     String expected = "of:=[.I2]*4";
     fcell.setFormula(expected);
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(expected, fcell.getFormula());
   }
 
   /**
-   * This test case is used to check whether the new created cell uses correct style settings.</br>
+   * This test case is used to check whether the new created cell uses correct style settings.
+   * <p>
    * ODFDOM allows users to set if cell styles are inherited or not whenever a new cell is added to
    * the table. The default setting is using inheritance. In this condition, the style of new column
    * is same with the last column before the inserted position, while the style of new row is same
-   * with the last row before the inserted position.<br>
+   * with the last row before the inserted position.
+   * <p>
    * This feature setting will influence <code>appendRow()</code>, <code>appendColumn()</code>,
    * <code>appendRows()</code>, <code>appendColumns()</code>, <code>insertRowsBefore()</code> and
    * <code>insertColumnsBefore()</code>. In default setting condition, the style name of new created
-   * cells after these methods called should be "ce1" which is inherited from preceding cell. <br>
+   * cells after these methods called should be "ce1" which is inherited from preceding cell.
    * But after setting cell style inheritance false, these new created cells' style name should be
-   * "Default", which is not inherited from preceding one.<br>
+   * "Default", which is not inherited from preceding one.
+   * <p>
    * For <code>getCellByPosition()</code>, <code>getCellRangeByPosition()</code>, <code>
    * getCellRangeByName()</code>, <code>getRowByIndex()</code> and <code>getColumnByIndex()</code>,
    * if need automatically expand cells, it will return empty cell(s) without any style settings.
@@ -818,7 +856,9 @@ public class TableCellTest {
   }
 
   @Test
-  public void testGetTableColumn() {
+  public void testGetTableColumn() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 2, columnindex = 0;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -828,7 +868,9 @@ public class TableCellTest {
   }
 
   @Test
-  public void testGetTableRow() {
+  public void testGetTableRow() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 2, columnindex = 0;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -838,16 +880,18 @@ public class TableCellTest {
   }
 
   @Test
-  public void testRemoveContent() {
+  public void testRemoveContent() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 5, columnindex = 8;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
 
     Assert.assertTrue(fcell.mCellElement.getChildNodes().getLength() > 0);
     fcell.removeContent();
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(0, fcell.mCellElement.getChildNodes().getLength());
@@ -855,6 +899,8 @@ public class TableCellTest {
 
   @Test
   public void testRemoveTextContent() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 5, columnindex = 8;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -871,34 +917,38 @@ public class TableCellTest {
     Assert.assertEquals(2, fcell.mCellElement.getChildNodes().getLength());
 
     fcell.removeTextContent();
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(1, fcell.mCellElement.getChildNodes().getLength());
   }
 
-  @Test
-  public void testGetSetDisplayText() {
+  @Test @Ignore // FIXME test failure
+  public void testGetSetDisplayText() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 5, columnindex = 5;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
     String expected = "display text";
 
-    // Assert.assertEquals(expected, fcell.getDisplayText());
-
     fcell.setDisplayText(expected);
-    saveods();
+    Assert.assertEquals(expected, fcell.getDisplayText());
+
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(expected, fcell.getDisplayText());
   }
 
-  @Test
-  public void testGetSetFormatString() {
+  @Test @Ignore // FIXME test failure
+  public void testGetSetFormatString() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     int rowindex = 3, columnindex = 0;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
@@ -918,16 +968,18 @@ public class TableCellTest {
     // String expected="MMM d, yy";
     // String expected="yyyy-MM-dd";
 
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(expected, fcell.getFormatString());
   }
 
   @Test
-  public void testGetCurrencySymbol() {
+  public void testGetCurrencySymbol() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell cell1 = table.getCellByPosition("C2");
     Assert.assertEquals("$", cell1.getCurrencySymbol());
@@ -935,8 +987,10 @@ public class TableCellTest {
     Assert.assertEquals("CNY", cell2.getCurrencySymbol());
   }
 
-  @Test
-  public void testGetSetCurrencyFormat() {
+  @Test @Ignore // FIXME test failure
+  public void testGetSetCurrencyFormat() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
     OdfTable table = odsdoc.getTableByName("Sheet1");
     String[] formats = {"$#,##0.00", "#,##0.00 CNY", "$#,##0.0"};
 
@@ -971,9 +1025,9 @@ public class TableCellTest {
     cell.setCurrencyValue(-32.12, "USD");
     cell.setCurrencyFormat("$", formats[2]);
 
-    saveods();
+    saveOutputOds(odsdoc);
     // reload
-    loadOutputSpreadsheet();
+    odsdoc = loadOutputOds();
     table = odsdoc.getTableByName("Sheet1");
     for (int i = 1; i <= 3; i++) {
       OdfTableCell newcell = table.getCellByPosition("J" + i);
@@ -981,7 +1035,7 @@ public class TableCellTest {
     }
   }
 
-  @Test
+  @Test @Ignore // FIXME test failure
   public void testSetDefaultCellStyle() {
     OdfSpreadsheetDocument outputDocument;
     OdfContentDom contentDom; // the document object model for content.xml
