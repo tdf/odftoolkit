@@ -23,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -46,7 +45,6 @@ import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
 public class TableCellTest {
 
-  private static final Logger LOG = Logger.getLogger(TableCellTest.class.getName());
   static final String SAMPLE_SPREADSHEET = "TestSpreadsheetTable";
   static final String SAMPLE_STYLE_SPREADSHEET = "TestSpreadsheetStyleTable";
   static final String SAMPLE_TEXT = "TestTextTable";
