@@ -1741,11 +1741,11 @@ public class JsonOperationConsumer {
             double heightFactor = 1;
             double widthFactor = 1;
             if (newHeight > 0 && newHeight != gHeight) {
-              heightFactor = (double) newHeight / (double) gHeight;
+              heightFactor = newHeight / (double) gHeight;
               targetNode.setUserData("groupHeight", newHeight, null);
             }
             if (newWidth > 0 && newWidth != gWidth) {
-              widthFactor = (double) newWidth / (double) gWidth;
+              widthFactor = newWidth / (double) gWidth;
               targetNode.setUserData("groupWidth", newHeight, null);
             }
             Node child = targetNode.getFirstChild();
