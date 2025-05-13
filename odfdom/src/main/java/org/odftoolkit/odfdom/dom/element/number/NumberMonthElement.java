@@ -102,7 +102,7 @@ public class NumberMonthElement extends OdfElement {
         (NumberPossessiveFormAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "possessive-form");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -117,7 +117,7 @@ public class NumberMonthElement extends OdfElement {
     NumberPossessiveFormAttribute attr =
         new NumberPossessiveFormAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(numberPossessiveFormValue.booleanValue());
+    attr.setBooleanValue(numberPossessiveFormValue);
   }
 
   /**
@@ -159,7 +159,7 @@ public class NumberMonthElement extends OdfElement {
     NumberTextualAttribute attr =
         (NumberTextualAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "textual");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(NumberTextualAttribute.DEFAULT_VALUE);
   }
@@ -173,7 +173,7 @@ public class NumberMonthElement extends OdfElement {
   public void setNumberTextualAttribute(Boolean numberTextualValue) {
     NumberTextualAttribute attr = new NumberTextualAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(numberTextualValue.booleanValue());
+    attr.setBooleanValue(numberTextualValue);
   }
 
   /**

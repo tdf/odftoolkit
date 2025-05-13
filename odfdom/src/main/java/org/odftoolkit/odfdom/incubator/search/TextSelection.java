@@ -584,7 +584,7 @@ public class TextSelection extends Selection {
             // delete space
             if (0 < fromindex || leftLength < nodeLength) {
               final int deleted = Math.min(leftLength, nodeLength - fromindex);
-              ((TextSElement) node).setTextCAttribute(Integer.valueOf(nodeLength - deleted));
+              ((TextSElement) node).setTextCAttribute(nodeLength - deleted);
               leftLength = leftLength - deleted;
             } else {
               Node nodeMerker = node.getNextSibling();

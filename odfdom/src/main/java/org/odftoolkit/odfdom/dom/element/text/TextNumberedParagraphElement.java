@@ -82,7 +82,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement {
         (TextContinueNumberingAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "continue-numbering");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -97,7 +97,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement {
     TextContinueNumberingAttribute attr =
         new TextContinueNumberingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textContinueNumberingValue.booleanValue());
+    attr.setBooleanValue(textContinueNumberingValue);
   }
 
   /**
@@ -111,7 +111,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement {
     TextLevelAttribute attr =
         (TextLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "level");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return Integer.valueOf(TextLevelAttribute.DEFAULT_VALUE);
   }
@@ -125,7 +125,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement {
   public void setTextLevelAttribute(Integer textLevelValue) {
     TextLevelAttribute attr = new TextLevelAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textLevelValue.intValue());
+    attr.setIntValue(textLevelValue);
   }
 
   /**
@@ -169,7 +169,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement {
     TextStartValueAttribute attr =
         (TextStartValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "start-value");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -183,7 +183,7 @@ public class TextNumberedParagraphElement extends OdfStylableElement {
   public void setTextStartValueAttribute(Integer textStartValueValue) {
     TextStartValueAttribute attr = new TextStartValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textStartValueValue.intValue());
+    attr.setIntValue(textStartValueValue);
   }
 
   /**

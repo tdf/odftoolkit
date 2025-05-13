@@ -71,7 +71,7 @@ public abstract class NumberCurrencyStyleElement extends NumberDataStyleElementB
         (NumberAutomaticOrderAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "automatic-order");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(NumberAutomaticOrderAttribute.DEFAULT_VALUE);
   }
@@ -86,7 +86,7 @@ public abstract class NumberCurrencyStyleElement extends NumberDataStyleElementB
     NumberAutomaticOrderAttribute attr =
         new NumberAutomaticOrderAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(numberAutomaticOrderValue.booleanValue());
+    attr.setBooleanValue(numberAutomaticOrderValue);
   }
 
   /**

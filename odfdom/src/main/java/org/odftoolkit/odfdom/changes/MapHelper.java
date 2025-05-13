@@ -1646,7 +1646,7 @@ public class MapHelper {
 
   // convert xmlschema-2 date to double
   public static Double dateToDouble(Object value) {
-    Double ret = Double.valueOf(0.);
+    Double ret = 0.;
     if (value != null && value instanceof String) {
       // ISO 8601 formatter for date-time without time zone.
       FastDateFormat fdf = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT;
@@ -1666,7 +1666,7 @@ public class MapHelper {
   // convert xmlschema-2 duration to double
 
   public static Double timeToDouble(Object value) {
-    Double ret = Double.valueOf(0.);
+    Double ret = 0.;
     if (value != null && value instanceof String) {
       // PThhHmmMss.sssS
       try {
@@ -2478,7 +2478,7 @@ public class MapHelper {
     }
     Integer entry = localeToLanguageMap.get(cmpString);
     if (entry != null) {
-      return Integer.toHexString(entry.intValue());
+      return Integer.toHexString(entry);
     }
     return "";
   }

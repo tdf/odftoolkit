@@ -76,7 +76,7 @@ public class NumberScientificNumberElement extends OdfElement {
         (NumberDecimalPlacesAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "decimal-places");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -91,7 +91,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberDecimalPlacesAttribute attr =
         new NumberDecimalPlacesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberDecimalPlacesValue.intValue());
+    attr.setIntValue(numberDecimalPlacesValue);
   }
 
   /**
@@ -105,7 +105,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberGroupingAttribute attr =
         (NumberGroupingAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "grouping");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(NumberGroupingAttribute.DEFAULT_VALUE);
   }
@@ -119,7 +119,7 @@ public class NumberScientificNumberElement extends OdfElement {
   public void setNumberGroupingAttribute(Boolean numberGroupingValue) {
     NumberGroupingAttribute attr = new NumberGroupingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(numberGroupingValue.booleanValue());
+    attr.setBooleanValue(numberGroupingValue);
   }
 
   /**
@@ -134,7 +134,7 @@ public class NumberScientificNumberElement extends OdfElement {
         (NumberMinExponentDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-exponent-digits");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -149,7 +149,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberMinExponentDigitsAttribute attr =
         new NumberMinExponentDigitsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberMinExponentDigitsValue.intValue());
+    attr.setIntValue(numberMinExponentDigitsValue);
   }
 
   /**
@@ -164,7 +164,7 @@ public class NumberScientificNumberElement extends OdfElement {
         (NumberMinIntegerDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-integer-digits");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -179,7 +179,7 @@ public class NumberScientificNumberElement extends OdfElement {
     NumberMinIntegerDigitsAttribute attr =
         new NumberMinIntegerDigitsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberMinIntegerDigitsValue.intValue());
+    attr.setIntValue(numberMinIntegerDigitsValue);
   }
 
   /**

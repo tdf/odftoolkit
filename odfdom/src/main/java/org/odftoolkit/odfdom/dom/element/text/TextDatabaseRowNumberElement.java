@@ -109,7 +109,7 @@ public class TextDatabaseRowNumberElement extends OdfElement {
         (StyleNumLetterSyncAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -124,7 +124,7 @@ public class TextDatabaseRowNumberElement extends OdfElement {
     StyleNumLetterSyncAttribute attr =
         new StyleNumLetterSyncAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleNumLetterSyncValue.booleanValue());
+    attr.setBooleanValue(styleNumLetterSyncValue);
   }
 
   /**
@@ -224,7 +224,7 @@ public class TextDatabaseRowNumberElement extends OdfElement {
     TextValueAttribute attr =
         (TextValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "value");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -238,7 +238,7 @@ public class TextDatabaseRowNumberElement extends OdfElement {
   public void setTextValueAttribute(Integer textValueValue) {
     TextValueAttribute attr = new TextValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textValueValue.intValue());
+    attr.setIntValue(textValueValue);
   }
 
   /**

@@ -110,7 +110,7 @@ public class FormFrameElement extends OdfElement {
     FormDisabledAttribute attr =
         (FormDisabledAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "disabled");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(FormDisabledAttribute.DEFAULT_VALUE);
   }
@@ -124,7 +124,7 @@ public class FormFrameElement extends OdfElement {
   public void setFormDisabledAttribute(Boolean formDisabledValue) {
     FormDisabledAttribute attr = new FormDisabledAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formDisabledValue.booleanValue());
+    attr.setBooleanValue(formDisabledValue);
   }
 
   /**
@@ -247,7 +247,7 @@ public class FormFrameElement extends OdfElement {
     FormPrintableAttribute attr =
         (FormPrintableAttribute) getOdfAttribute(OdfDocumentNamespace.FORM, "printable");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(FormPrintableAttribute.DEFAULT_VALUE);
   }
@@ -261,7 +261,7 @@ public class FormFrameElement extends OdfElement {
   public void setFormPrintableAttribute(Boolean formPrintableValue) {
     FormPrintableAttribute attr = new FormPrintableAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(formPrintableValue.booleanValue());
+    attr.setBooleanValue(formPrintableValue);
   }
 
   /**

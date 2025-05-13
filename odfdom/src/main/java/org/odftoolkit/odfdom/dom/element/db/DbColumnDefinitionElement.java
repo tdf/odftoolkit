@@ -113,7 +113,7 @@ public class DbColumnDefinitionElement extends OdfElement {
     DbIsAutoincrementAttribute attr =
         (DbIsAutoincrementAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "is-autoincrement");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -128,7 +128,7 @@ public class DbColumnDefinitionElement extends OdfElement {
     DbIsAutoincrementAttribute attr =
         new DbIsAutoincrementAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dbIsAutoincrementValue.booleanValue());
+    attr.setBooleanValue(dbIsAutoincrementValue);
   }
 
   /**
@@ -142,7 +142,7 @@ public class DbColumnDefinitionElement extends OdfElement {
     DbIsEmptyAllowedAttribute attr =
         (DbIsEmptyAllowedAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "is-empty-allowed");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -156,7 +156,7 @@ public class DbColumnDefinitionElement extends OdfElement {
   public void setDbIsEmptyAllowedAttribute(Boolean dbIsEmptyAllowedValue) {
     DbIsEmptyAllowedAttribute attr = new DbIsEmptyAllowedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dbIsEmptyAllowedValue.booleanValue());
+    attr.setBooleanValue(dbIsEmptyAllowedValue);
   }
 
   /**
@@ -227,7 +227,7 @@ public class DbColumnDefinitionElement extends OdfElement {
     DbPrecisionAttribute attr =
         (DbPrecisionAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "precision");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -241,7 +241,7 @@ public class DbColumnDefinitionElement extends OdfElement {
   public void setDbPrecisionAttribute(Integer dbPrecisionValue) {
     DbPrecisionAttribute attr = new DbPrecisionAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(dbPrecisionValue.intValue());
+    attr.setIntValue(dbPrecisionValue);
   }
 
   /**
@@ -254,7 +254,7 @@ public class DbColumnDefinitionElement extends OdfElement {
   public Integer getDbScaleAttribute() {
     DbScaleAttribute attr = (DbScaleAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "scale");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -268,7 +268,7 @@ public class DbColumnDefinitionElement extends OdfElement {
   public void setDbScaleAttribute(Integer dbScaleValue) {
     DbScaleAttribute attr = new DbScaleAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(dbScaleValue.intValue());
+    attr.setIntValue(dbScaleValue);
   }
 
   /**
@@ -310,7 +310,7 @@ public class DbColumnDefinitionElement extends OdfElement {
     OfficeBooleanValueAttribute attr =
         (OfficeBooleanValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "boolean-value");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -325,7 +325,7 @@ public class DbColumnDefinitionElement extends OdfElement {
     OfficeBooleanValueAttribute attr =
         new OfficeBooleanValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(officeBooleanValueValue.booleanValue());
+    attr.setBooleanValue(officeBooleanValueValue);
   }
 
   /**
@@ -454,7 +454,7 @@ public class DbColumnDefinitionElement extends OdfElement {
     OfficeValueAttribute attr =
         (OfficeValueAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "value");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -468,7 +468,7 @@ public class DbColumnDefinitionElement extends OdfElement {
   public void setOfficeValueAttribute(Double officeValueValue) {
     OfficeValueAttribute attr = new OfficeValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(officeValueValue.doubleValue());
+    attr.setDoubleValue(officeValueValue);
   }
 
   /**

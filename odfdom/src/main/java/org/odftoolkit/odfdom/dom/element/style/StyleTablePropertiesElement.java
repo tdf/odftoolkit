@@ -433,7 +433,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
         (StyleMayBreakBetweenRowsAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "may-break-between-rows");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -448,7 +448,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
     StyleMayBreakBetweenRowsAttribute attr =
         new StyleMayBreakBetweenRowsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleMayBreakBetweenRowsValue.booleanValue());
+    attr.setBooleanValue(styleMayBreakBetweenRowsValue);
   }
 
   /**
@@ -462,7 +462,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
     StylePageNumberAttribute attr =
         (StylePageNumberAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "page-number");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -476,7 +476,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
   public void setStylePageNumberAttribute(Integer stylePageNumberValue) {
     StylePageNumberAttribute attr = new StylePageNumberAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(stylePageNumberValue.intValue());
+    attr.setIntValue(stylePageNumberValue);
   }
 
   /**
@@ -658,7 +658,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
     TableDisplayAttribute attr =
         (TableDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "display");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -672,7 +672,7 @@ public class StyleTablePropertiesElement extends OdfStylePropertiesBase {
   public void setTableDisplayAttribute(Boolean tableDisplayValue) {
     TableDisplayAttribute attr = new TableDisplayAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableDisplayValue.booleanValue());
+    attr.setBooleanValue(tableDisplayValue);
   }
 
   /**

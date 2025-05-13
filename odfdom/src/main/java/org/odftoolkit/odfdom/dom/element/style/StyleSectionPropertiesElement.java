@@ -201,7 +201,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase {
     StyleEditableAttribute attr =
         (StyleEditableAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "editable");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -215,7 +215,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase {
   public void setStyleEditableAttribute(Boolean styleEditableValue) {
     StyleEditableAttribute attr = new StyleEditableAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleEditableValue.booleanValue());
+    attr.setBooleanValue(styleEditableValue);
   }
 
   /**
@@ -287,7 +287,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase {
         (TextDontBalanceTextColumnsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "dont-balance-text-columns");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -302,7 +302,7 @@ public class StyleSectionPropertiesElement extends OdfStylePropertiesBase {
     TextDontBalanceTextColumnsAttribute attr =
         new TextDontBalanceTextColumnsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textDontBalanceTextColumnsValue.booleanValue());
+    attr.setBooleanValue(textDontBalanceTextColumnsValue);
   }
 
   /**

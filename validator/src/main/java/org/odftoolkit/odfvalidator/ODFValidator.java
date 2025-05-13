@@ -97,7 +97,7 @@ public class ODFValidator implements ODFValidatorProvider {
     List<String> aFileNames = aConfig.getListPropety(Configuration.PATH);
     String aExcludeRegExp = aConfig.getProperty(Configuration.EXCLUDE);
     String aRecursive = aConfig.getProperty(Configuration.RECURSIVE);
-    boolean bRecursive = aRecursive != null ? Boolean.valueOf(aRecursive) : false;
+    boolean bRecursive = aRecursive != null ? Boolean.parseBoolean(aRecursive) : false;
     String aFilterFileName = aConfig.getProperty(Configuration.FILTER);
 
     return validate(aOut, aFileNames, aExcludeRegExp, eMode, bRecursive, aFilterFileName);

@@ -79,7 +79,7 @@ public class TableCalculationSettingsElement extends OdfElement {
         (TableAutomaticFindLabelsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "automatic-find-labels");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TableAutomaticFindLabelsAttribute.DEFAULT_VALUE);
   }
@@ -94,7 +94,7 @@ public class TableCalculationSettingsElement extends OdfElement {
     TableAutomaticFindLabelsAttribute attr =
         new TableAutomaticFindLabelsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableAutomaticFindLabelsValue.booleanValue());
+    attr.setBooleanValue(tableAutomaticFindLabelsValue);
   }
 
   /**
@@ -137,7 +137,7 @@ public class TableCalculationSettingsElement extends OdfElement {
     TableNullYearAttribute attr =
         (TableNullYearAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "null-year");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return Integer.valueOf(TableNullYearAttribute.DEFAULT_VALUE);
   }
@@ -151,7 +151,7 @@ public class TableCalculationSettingsElement extends OdfElement {
   public void setTableNullYearAttribute(Integer tableNullYearValue) {
     TableNullYearAttribute attr = new TableNullYearAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableNullYearValue.intValue());
+    attr.setIntValue(tableNullYearValue);
   }
 
   /**
@@ -166,7 +166,7 @@ public class TableCalculationSettingsElement extends OdfElement {
         (TablePrecisionAsShownAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "precision-as-shown");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TablePrecisionAsShownAttribute.DEFAULT_VALUE);
   }
@@ -181,7 +181,7 @@ public class TableCalculationSettingsElement extends OdfElement {
     TablePrecisionAsShownAttribute attr =
         new TablePrecisionAsShownAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tablePrecisionAsShownValue.booleanValue());
+    attr.setBooleanValue(tablePrecisionAsShownValue);
   }
 
   /**
@@ -197,7 +197,7 @@ public class TableCalculationSettingsElement extends OdfElement {
         (TableSearchCriteriaMustApplyToWholeCellAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "search-criteria-must-apply-to-whole-cell");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TableSearchCriteriaMustApplyToWholeCellAttribute.DEFAULT_VALUE);
   }
@@ -214,7 +214,7 @@ public class TableCalculationSettingsElement extends OdfElement {
     TableSearchCriteriaMustApplyToWholeCellAttribute attr =
         new TableSearchCriteriaMustApplyToWholeCellAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableSearchCriteriaMustApplyToWholeCellValue.booleanValue());
+    attr.setBooleanValue(tableSearchCriteriaMustApplyToWholeCellValue);
   }
 
   /**
@@ -229,7 +229,7 @@ public class TableCalculationSettingsElement extends OdfElement {
         (TableUseRegularExpressionsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "use-regular-expressions");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TableUseRegularExpressionsAttribute.DEFAULT_VALUE);
   }
@@ -244,7 +244,7 @@ public class TableCalculationSettingsElement extends OdfElement {
     TableUseRegularExpressionsAttribute attr =
         new TableUseRegularExpressionsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableUseRegularExpressionsValue.booleanValue());
+    attr.setBooleanValue(tableUseRegularExpressionsValue);
   }
 
   /**
@@ -258,7 +258,7 @@ public class TableCalculationSettingsElement extends OdfElement {
     TableUseWildcardsAttribute attr =
         (TableUseWildcardsAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "use-wildcards");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TableUseWildcardsAttribute.DEFAULT_VALUE);
   }
@@ -273,7 +273,7 @@ public class TableCalculationSettingsElement extends OdfElement {
     TableUseWildcardsAttribute attr =
         new TableUseWildcardsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableUseWildcardsValue.booleanValue());
+    attr.setBooleanValue(tableUseWildcardsValue);
   }
 
   /**

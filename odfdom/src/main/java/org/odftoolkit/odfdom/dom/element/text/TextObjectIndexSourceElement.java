@@ -108,7 +108,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
         (TextRelativeTabStopPositionAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "relative-tab-stop-position");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextRelativeTabStopPositionAttribute.DEFAULT_VALUE);
   }
@@ -123,7 +123,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
     TextRelativeTabStopPositionAttribute attr =
         new TextRelativeTabStopPositionAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textRelativeTabStopPositionValue.booleanValue());
+    attr.setBooleanValue(textRelativeTabStopPositionValue);
   }
 
   /**
@@ -138,7 +138,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
         (TextUseChartObjectsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-chart-objects");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextUseChartObjectsAttribute.DEFAULT_VALUE);
   }
@@ -153,7 +153,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
     TextUseChartObjectsAttribute attr =
         new TextUseChartObjectsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textUseChartObjectsValue.booleanValue());
+    attr.setBooleanValue(textUseChartObjectsValue);
   }
 
   /**
@@ -168,7 +168,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
         (TextUseDrawObjectsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-draw-objects");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextUseDrawObjectsAttribute.DEFAULT_VALUE);
   }
@@ -183,7 +183,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
     TextUseDrawObjectsAttribute attr =
         new TextUseDrawObjectsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textUseDrawObjectsValue.booleanValue());
+    attr.setBooleanValue(textUseDrawObjectsValue);
   }
 
   /**
@@ -198,7 +198,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
         (TextUseMathObjectsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-math-objects");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextUseMathObjectsAttribute.DEFAULT_VALUE);
   }
@@ -213,7 +213,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
     TextUseMathObjectsAttribute attr =
         new TextUseMathObjectsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textUseMathObjectsValue.booleanValue());
+    attr.setBooleanValue(textUseMathObjectsValue);
   }
 
   /**
@@ -228,7 +228,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
         (TextUseOtherObjectsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-other-objects");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextUseOtherObjectsAttribute.DEFAULT_VALUE);
   }
@@ -243,7 +243,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
     TextUseOtherObjectsAttribute attr =
         new TextUseOtherObjectsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textUseOtherObjectsValue.booleanValue());
+    attr.setBooleanValue(textUseOtherObjectsValue);
   }
 
   /**
@@ -258,7 +258,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
         (TextUseSpreadsheetObjectsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-spreadsheet-objects");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextUseSpreadsheetObjectsAttribute.DEFAULT_VALUE);
   }
@@ -273,7 +273,7 @@ public class TextObjectIndexSourceElement extends OdfElement {
     TextUseSpreadsheetObjectsAttribute attr =
         new TextUseSpreadsheetObjectsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textUseSpreadsheetObjectsValue.booleanValue());
+    attr.setBooleanValue(textUseSpreadsheetObjectsValue);
   }
 
   /**

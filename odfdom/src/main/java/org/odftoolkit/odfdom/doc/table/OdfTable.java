@@ -1370,7 +1370,7 @@ public class OdfTable {
 
       TableTableColumnElement newColumnEle =
           (TableTableColumnElement) refColumn.getOdfElement().cloneNode(true);
-      newColumnEle.setTableNumberColumnsRepeatedAttribute(Integer.valueOf(columnCount));
+      newColumnEle.setTableNumberColumnsRepeatedAttribute(columnCount);
       mTableElement.insertBefore(newColumnEle, positionCol.getOdfElement());
 
       for (int i = 0; i < columnCount; i++) {
@@ -1410,7 +1410,7 @@ public class OdfTable {
     } else {
       TableTableColumnElement newColumnEle =
           (TableTableColumnElement) refColumn.getOdfElement().cloneNode(true);
-      newColumnEle.setTableNumberColumnsRepeatedAttribute(Integer.valueOf(columnCount));
+      newColumnEle.setTableNumberColumnsRepeatedAttribute(columnCount);
       mTableElement.insertBefore(newColumnEle, positionCol.getOdfElement());
 
       for (int i = 0; i < columnCount; i++) {
@@ -1944,7 +1944,7 @@ public class OdfTable {
    */
   public boolean isProtected() {
     if (mTableElement.getTableProtectedAttribute() != null) {
-      return mTableElement.getTableProtectedAttribute().booleanValue();
+      return mTableElement.getTableProtectedAttribute();
     } else {
       return false;
     }

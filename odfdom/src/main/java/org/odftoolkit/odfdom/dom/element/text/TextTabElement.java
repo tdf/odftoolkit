@@ -70,7 +70,7 @@ public class TextTabElement extends OdfElement {
     TextTabRefAttribute attr =
         (TextTabRefAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "tab-ref");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -84,7 +84,7 @@ public class TextTabElement extends OdfElement {
   public void setTextTabRefAttribute(Integer textTabRefValue) {
     TextTabRefAttribute attr = new TextTabRefAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textTabRefValue.intValue());
+    attr.setIntValue(textTabRefValue);
   }
 
   /**

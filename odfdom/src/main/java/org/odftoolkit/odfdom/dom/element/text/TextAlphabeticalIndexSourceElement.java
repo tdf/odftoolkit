@@ -201,7 +201,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
         (TextAlphabeticalSeparatorsAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "alphabetical-separators");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextAlphabeticalSeparatorsAttribute.DEFAULT_VALUE);
   }
@@ -216,7 +216,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextAlphabeticalSeparatorsAttribute attr =
         new TextAlphabeticalSeparatorsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textAlphabeticalSeparatorsValue.booleanValue());
+    attr.setBooleanValue(textAlphabeticalSeparatorsValue);
   }
 
   /**
@@ -231,7 +231,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
         (TextCapitalizeEntriesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "capitalize-entries");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextCapitalizeEntriesAttribute.DEFAULT_VALUE);
   }
@@ -246,7 +246,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextCapitalizeEntriesAttribute attr =
         new TextCapitalizeEntriesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textCapitalizeEntriesValue.booleanValue());
+    attr.setBooleanValue(textCapitalizeEntriesValue);
   }
 
   /**
@@ -260,7 +260,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextCombineEntriesAttribute attr =
         (TextCombineEntriesAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "combine-entries");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextCombineEntriesAttribute.DEFAULT_VALUE);
   }
@@ -275,7 +275,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextCombineEntriesAttribute attr =
         new TextCombineEntriesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textCombineEntriesValue.booleanValue());
+    attr.setBooleanValue(textCombineEntriesValue);
   }
 
   /**
@@ -291,7 +291,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
         (TextCombineEntriesWithDashAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "combine-entries-with-dash");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextCombineEntriesWithDashAttribute.DEFAULT_VALUE);
   }
@@ -306,7 +306,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextCombineEntriesWithDashAttribute attr =
         new TextCombineEntriesWithDashAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textCombineEntriesWithDashValue.booleanValue());
+    attr.setBooleanValue(textCombineEntriesWithDashValue);
   }
 
   /**
@@ -321,7 +321,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
         (TextCombineEntriesWithPpAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "combine-entries-with-pp");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextCombineEntriesWithPpAttribute.DEFAULT_VALUE);
   }
@@ -336,7 +336,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextCombineEntriesWithPpAttribute attr =
         new TextCombineEntriesWithPpAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textCombineEntriesWithPpValue.booleanValue());
+    attr.setBooleanValue(textCombineEntriesWithPpValue);
   }
 
   /**
@@ -350,7 +350,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextCommaSeparatedAttribute attr =
         (TextCommaSeparatedAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "comma-separated");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextCommaSeparatedAttribute.DEFAULT_VALUE);
   }
@@ -365,7 +365,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextCommaSeparatedAttribute attr =
         new TextCommaSeparatedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textCommaSeparatedValue.booleanValue());
+    attr.setBooleanValue(textCommaSeparatedValue);
   }
 
   /**
@@ -379,7 +379,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextIgnoreCaseAttribute attr =
         (TextIgnoreCaseAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "ignore-case");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextIgnoreCaseAttribute.DEFAULT_VALUE);
   }
@@ -393,7 +393,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
   public void setTextIgnoreCaseAttribute(Boolean textIgnoreCaseValue) {
     TextIgnoreCaseAttribute attr = new TextIgnoreCaseAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textIgnoreCaseValue.booleanValue());
+    attr.setBooleanValue(textIgnoreCaseValue);
   }
 
   /**
@@ -467,7 +467,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
         (TextRelativeTabStopPositionAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "relative-tab-stop-position");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextRelativeTabStopPositionAttribute.DEFAULT_VALUE);
   }
@@ -482,7 +482,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextRelativeTabStopPositionAttribute attr =
         new TextRelativeTabStopPositionAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textRelativeTabStopPositionValue.booleanValue());
+    attr.setBooleanValue(textRelativeTabStopPositionValue);
   }
 
   /**
@@ -526,7 +526,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
         (TextUseKeysAsEntriesAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "use-keys-as-entries");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextUseKeysAsEntriesAttribute.DEFAULT_VALUE);
   }
@@ -541,7 +541,7 @@ public class TextAlphabeticalIndexSourceElement extends OdfElement {
     TextUseKeysAsEntriesAttribute attr =
         new TextUseKeysAsEntriesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textUseKeysAsEntriesValue.booleanValue());
+    attr.setBooleanValue(textUseKeysAsEntriesValue);
   }
 
   /**

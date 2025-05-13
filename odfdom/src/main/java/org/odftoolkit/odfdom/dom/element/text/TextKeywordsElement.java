@@ -70,7 +70,7 @@ public class TextKeywordsElement extends OdfElement {
     TextFixedAttribute attr =
         (TextFixedAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "fixed");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -84,7 +84,7 @@ public class TextKeywordsElement extends OdfElement {
   public void setTextFixedAttribute(Boolean textFixedValue) {
     TextFixedAttribute attr = new TextFixedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textFixedValue.booleanValue());
+    attr.setBooleanValue(textFixedValue);
   }
 
   /**

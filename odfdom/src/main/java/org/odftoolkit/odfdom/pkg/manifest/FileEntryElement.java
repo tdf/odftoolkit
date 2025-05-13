@@ -157,7 +157,7 @@ public class FileEntryElement extends OdfElement {
   public Integer getSizeAttribute() {
     SizeAttribute attr = (SizeAttribute) getOdfAttribute(SizeAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -171,7 +171,7 @@ public class FileEntryElement extends OdfElement {
   public void setSizeAttribute(Integer sizeValue) {
     SizeAttribute attr = new SizeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(sizeValue.intValue());
+    attr.setIntValue(sizeValue);
   }
 
   /**

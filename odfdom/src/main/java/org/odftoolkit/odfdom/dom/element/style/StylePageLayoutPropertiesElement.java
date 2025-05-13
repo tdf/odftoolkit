@@ -1028,7 +1028,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
         (StyleFirstPageNumberAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "first-page-number");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -1043,7 +1043,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleFirstPageNumberAttribute attr =
         new StyleFirstPageNumberAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(styleFirstPageNumberValue.intValue());
+    attr.setIntValue(styleFirstPageNumberValue);
   }
 
   /**
@@ -1178,7 +1178,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
         (StyleLayoutGridDisplayAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-display");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1193,7 +1193,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleLayoutGridDisplayAttribute attr =
         new StyleLayoutGridDisplayAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleLayoutGridDisplayValue.booleanValue());
+    attr.setBooleanValue(styleLayoutGridDisplayValue);
   }
 
   /**
@@ -1208,7 +1208,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
         (StyleLayoutGridLinesAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-lines");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -1223,7 +1223,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleLayoutGridLinesAttribute attr =
         new StyleLayoutGridLinesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(styleLayoutGridLinesValue.intValue());
+    attr.setIntValue(styleLayoutGridLinesValue);
   }
 
   /**
@@ -1268,7 +1268,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
         (StyleLayoutGridPrintAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-print");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1283,7 +1283,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleLayoutGridPrintAttribute attr =
         new StyleLayoutGridPrintAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleLayoutGridPrintValue.booleanValue());
+    attr.setBooleanValue(styleLayoutGridPrintValue);
   }
 
   /**
@@ -1298,7 +1298,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
         (StyleLayoutGridRubyBelowAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-ruby-below");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1313,7 +1313,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleLayoutGridRubyBelowAttribute attr =
         new StyleLayoutGridRubyBelowAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleLayoutGridRubyBelowValue.booleanValue());
+    attr.setBooleanValue(styleLayoutGridRubyBelowValue);
   }
 
   /**
@@ -1358,7 +1358,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
         (StyleLayoutGridSnapToAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-snap-to");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1373,7 +1373,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleLayoutGridSnapToAttribute attr =
         new StyleLayoutGridSnapToAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleLayoutGridSnapToValue.booleanValue());
+    attr.setBooleanValue(styleLayoutGridSnapToValue);
   }
 
   /**
@@ -1389,7 +1389,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
         (StyleLayoutGridStandardModeAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "layout-grid-standard-mode");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1404,7 +1404,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleLayoutGridStandardModeAttribute attr =
         new StyleLayoutGridStandardModeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleLayoutGridStandardModeValue.booleanValue());
+    attr.setBooleanValue(styleLayoutGridStandardModeValue);
   }
 
   /**
@@ -1449,7 +1449,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
         (StyleNumLetterSyncAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1464,7 +1464,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleNumLetterSyncAttribute attr =
         new StyleNumLetterSyncAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleNumLetterSyncValue.booleanValue());
+    attr.setBooleanValue(styleNumLetterSyncValue);
   }
 
   /**
@@ -1712,7 +1712,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleScaleToPagesAttribute attr =
         (StyleScaleToPagesAttribute) getOdfAttribute(OdfDocumentNamespace.STYLE, "scale-to-pages");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -1727,7 +1727,7 @@ public class StylePageLayoutPropertiesElement extends OdfStylePropertiesBase {
     StyleScaleToPagesAttribute attr =
         new StyleScaleToPagesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(styleScaleToPagesValue.intValue());
+    attr.setIntValue(styleScaleToPagesValue);
   }
 
   /**

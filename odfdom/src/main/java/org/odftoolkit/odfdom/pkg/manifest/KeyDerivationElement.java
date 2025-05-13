@@ -72,7 +72,7 @@ public class KeyDerivationElement extends OdfElement {
     IterationCountAttribute attr =
         (IterationCountAttribute) getOdfAttribute(IterationCountAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -86,7 +86,7 @@ public class KeyDerivationElement extends OdfElement {
   public void setIterationCountAttribute(Integer iterationCountValue) {
     IterationCountAttribute attr = new IterationCountAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(iterationCountValue.intValue());
+    attr.setIntValue(iterationCountValue);
   }
 
   /**
@@ -130,7 +130,7 @@ public class KeyDerivationElement extends OdfElement {
   public Integer getKeySizeAttribute() {
     KeySizeAttribute attr = (KeySizeAttribute) getOdfAttribute(KeySizeAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -144,7 +144,7 @@ public class KeyDerivationElement extends OdfElement {
   public void setKeySizeAttribute(Integer keySizeValue) {
     KeySizeAttribute attr = new KeySizeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(keySizeValue.intValue());
+    attr.setIntValue(keySizeValue);
   }
 
   /**

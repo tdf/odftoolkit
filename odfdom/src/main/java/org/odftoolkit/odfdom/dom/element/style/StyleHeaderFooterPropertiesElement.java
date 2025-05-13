@@ -850,7 +850,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase {
         (StyleDynamicSpacingAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "dynamic-spacing");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -865,7 +865,7 @@ public class StyleHeaderFooterPropertiesElement extends OdfStylePropertiesBase {
     StyleDynamicSpacingAttribute attr =
         new StyleDynamicSpacingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleDynamicSpacingValue.booleanValue());
+    attr.setBooleanValue(styleDynamicSpacingValue);
   }
 
   /**

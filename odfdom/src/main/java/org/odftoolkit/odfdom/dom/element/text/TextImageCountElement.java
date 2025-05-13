@@ -103,7 +103,7 @@ public class TextImageCountElement extends OdfElement {
         (StyleNumLetterSyncAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -118,7 +118,7 @@ public class TextImageCountElement extends OdfElement {
     StyleNumLetterSyncAttribute attr =
         new StyleNumLetterSyncAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleNumLetterSyncValue.booleanValue());
+    attr.setBooleanValue(styleNumLetterSyncValue);
   }
 
   /**

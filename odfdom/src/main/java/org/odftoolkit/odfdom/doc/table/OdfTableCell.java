@@ -296,7 +296,7 @@ public class OdfTableCell {
         return tr;
       }
       if (m instanceof TableTableRowElement) {
-        result += ((TableTableRowElement) m).getTableNumberRowsRepeatedAttribute().intValue();
+        result += ((TableTableRowElement) m).getTableNumberRowsRepeatedAttribute();
       }
     }
     indexs[0] = result;
@@ -312,7 +312,7 @@ public class OdfTableCell {
         return tr;
       }
       if (m instanceof TableTableRowElement) {
-        result += ((TableTableRowElement) m).getTableNumberRowsRepeatedAttribute().intValue();
+        result += ((TableTableRowElement) m).getTableNumberRowsRepeatedAttribute();
       }
     }
     indexs[0] = result;
@@ -359,7 +359,7 @@ public class OdfTableCell {
           indexs[0] = result;
           return tr;
         }
-        result += ((TableTableRowElement) m).getTableNumberRowsRepeatedAttribute().intValue();
+        result += ((TableTableRowElement) m).getTableNumberRowsRepeatedAttribute();
       }
     }
     indexs[0] = result;
@@ -411,7 +411,7 @@ public class OdfTableCell {
       }
       if (n instanceof TableTableCellElementBase) {
         result +=
-            ((TableTableCellElementBase) n).getTableNumberColumnsRepeatedAttribute().intValue();
+          ((TableTableCellElementBase) n).getTableNumberColumnsRepeatedAttribute();
       }
     }
     return result;
@@ -1084,7 +1084,7 @@ public class OdfTableCell {
     }
     Integer value = ((TableTableCellElement) mCellElement).getTableNumberColumnsSpannedAttribute();
     if (value != null) {
-      return value.intValue();
+      return value;
     }
     return DEFAULT_COLUMN_SPANNED_NUMBER;
   }
@@ -1097,7 +1097,7 @@ public class OdfTableCell {
   int getColumnsRepeatedNumber() {
     Integer value = mCellElement.getTableNumberColumnsRepeatedAttribute();
     if (value != null) {
-      return value.intValue();
+      return value;
     }
     return DEFAULT_COLUMNS_REPEATED_NUMBER;
   }
@@ -1113,7 +1113,7 @@ public class OdfTableCell {
     }
     Integer value = ((TableTableCellElement) mCellElement).getTableNumberRowsSpannedAttribute();
     if (value != null) {
-      return value.intValue();
+      return value;
     }
     return DEFAULT_ROW_SPANNED_NUMBER;
   }
@@ -1131,7 +1131,7 @@ public class OdfTableCell {
     splitRepeatedCells();
     if (mCellElement instanceof TableTableCellElement) {
       ((TableTableCellElement) mCellElement)
-          .setTableNumberColumnsSpannedAttribute(Integer.valueOf(spannedNum));
+          .setTableNumberColumnsSpannedAttribute(spannedNum);
     } else {
       throw new IllegalArgumentException();
     }
@@ -1147,7 +1147,7 @@ public class OdfTableCell {
     if (repeatedNum < 1) {
       repeatedNum = DEFAULT_COLUMNS_REPEATED_NUMBER;
     }
-    mCellElement.setTableNumberColumnsRepeatedAttribute(Integer.valueOf(repeatedNum));
+    mCellElement.setTableNumberColumnsRepeatedAttribute(repeatedNum);
   }
 
   /**
@@ -1163,7 +1163,7 @@ public class OdfTableCell {
     splitRepeatedCells();
     if (mCellElement instanceof TableTableCellElement) {
       ((TableTableCellElement) mCellElement)
-          .setTableNumberRowsSpannedAttribute(Integer.valueOf(spannedNum));
+          .setTableNumberRowsSpannedAttribute(spannedNum);
     } else {
       throw new IllegalArgumentException();
     }
@@ -1278,7 +1278,7 @@ public class OdfTableCell {
 
     // set display text
     if (value != null) {
-      setDisplayText(formatCurrency(currencyStyle, value.doubleValue()));
+      setDisplayText(formatCurrency(currencyStyle, value));
     }
   }
 

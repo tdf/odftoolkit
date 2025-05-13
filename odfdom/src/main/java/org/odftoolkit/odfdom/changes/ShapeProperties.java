@@ -241,14 +241,14 @@ public class ShapeProperties extends CachedComponent {
       if (mVertOffsetMin == null) {
         mVertOffsetMin = (Integer) vertOffset;
       } else {
-        mVertOffsetMin = Math.min(mVertOffsetMin, ((Integer) vertOffset).intValue());
+        mVertOffsetMin = Math.min(mVertOffsetMin, (Integer) vertOffset);
       }
     }
     if (horiOffset != null) {
       if (mHoriOffsetMin == null) {
         mHoriOffsetMin = (Integer) horiOffset;
       } else {
-        mHoriOffsetMin = Math.min(mHoriOffsetMin, ((Integer) horiOffset).intValue());
+        mHoriOffsetMin = Math.min(mHoriOffsetMin, (Integer) horiOffset);
       }
     }
     if (width != null) {

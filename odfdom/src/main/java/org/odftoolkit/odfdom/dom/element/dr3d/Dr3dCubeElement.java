@@ -275,7 +275,7 @@ public class Dr3dCubeElement extends OdfStyleableShapeElement {
     DrawZIndexAttribute attr =
         (DrawZIndexAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "z-index");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -289,7 +289,7 @@ public class Dr3dCubeElement extends OdfStyleableShapeElement {
   public void setDrawZIndexAttribute(Integer drawZIndexValue) {
     DrawZIndexAttribute attr = new DrawZIndexAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(drawZIndexValue.intValue());
+    attr.setIntValue(drawZIndexValue);
   }
 
   /**

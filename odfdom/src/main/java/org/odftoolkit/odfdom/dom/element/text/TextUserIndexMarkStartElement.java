@@ -133,7 +133,7 @@ public class TextUserIndexMarkStartElement extends OdfElement {
     TextOutlineLevelAttribute attr =
         (TextOutlineLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "outline-level");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -147,7 +147,7 @@ public class TextUserIndexMarkStartElement extends OdfElement {
   public void setTextOutlineLevelAttribute(Integer textOutlineLevelValue) {
     TextOutlineLevelAttribute attr = new TextOutlineLevelAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textOutlineLevelValue.intValue());
+    attr.setIntValue(textOutlineLevelValue);
   }
 
   /**

@@ -88,7 +88,7 @@ public class AnimAudioElement extends OdfElement {
     AnimAudioLevelAttribute attr =
         (AnimAudioLevelAttribute) getOdfAttribute(OdfDocumentNamespace.ANIM, "audio-level");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -102,7 +102,7 @@ public class AnimAudioElement extends OdfElement {
   public void setAnimAudioLevelAttribute(Double animAudioLevelValue) {
     AnimAudioLevelAttribute attr = new AnimAudioLevelAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(animAudioLevelValue.doubleValue());
+    attr.setDoubleValue(animAudioLevelValue);
   }
 
   /**

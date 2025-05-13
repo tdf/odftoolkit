@@ -101,7 +101,7 @@ public abstract class NumberTimeStyleElement extends NumberDataStyleElementBase 
         (NumberTruncateOnOverflowAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "truncate-on-overflow");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(NumberTruncateOnOverflowAttribute.DEFAULT_VALUE);
   }
@@ -116,7 +116,7 @@ public abstract class NumberTimeStyleElement extends NumberDataStyleElementBase 
     NumberTruncateOnOverflowAttribute attr =
         new NumberTruncateOnOverflowAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(numberTruncateOnOverflowValue.booleanValue());
+    attr.setBooleanValue(numberTruncateOnOverflowValue);
   }
 
   /**

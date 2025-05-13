@@ -133,7 +133,7 @@ public class DrawAppletElement extends OdfElement {
     DrawMayScriptAttribute attr =
         (DrawMayScriptAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "may-script");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(DrawMayScriptAttribute.DEFAULT_VALUE);
   }
@@ -147,7 +147,7 @@ public class DrawAppletElement extends OdfElement {
   public void setDrawMayScriptAttribute(Boolean drawMayScriptValue) {
     DrawMayScriptAttribute attr = new DrawMayScriptAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(drawMayScriptValue.booleanValue());
+    attr.setBooleanValue(drawMayScriptValue);
   }
 
   /**

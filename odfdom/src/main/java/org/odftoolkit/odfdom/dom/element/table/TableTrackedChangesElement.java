@@ -71,7 +71,7 @@ public class TableTrackedChangesElement extends OdfElement {
     TableTrackChangesAttribute attr =
         (TableTrackChangesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "track-changes");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TableTrackChangesAttribute.DEFAULT_VALUE);
   }
@@ -86,7 +86,7 @@ public class TableTrackedChangesElement extends OdfElement {
     TableTrackChangesAttribute attr =
         new TableTrackChangesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableTrackChangesValue.booleanValue());
+    attr.setBooleanValue(tableTrackChangesValue);
   }
 
   /**
