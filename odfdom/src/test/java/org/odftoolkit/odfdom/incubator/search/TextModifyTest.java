@@ -192,7 +192,7 @@ public class TextModifyTest {
         // the start index is in this node
         if (node.getNodeType() == Node.TEXT_NODE) {
           String value = node.getNodeValue();
-          StringBuffer buffer = new StringBuffer();
+          StringBuilder buffer = new StringBuilder();
           buffer.append(value.substring(0, fromindex));
           int endLength = fromindex + leftLength;
           int nextLength = value.length() - endLength;

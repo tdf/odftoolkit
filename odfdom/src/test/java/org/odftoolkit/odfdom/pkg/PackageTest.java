@@ -415,7 +415,7 @@ public class PackageTest {
         Assert.fail();
       } catch (Exception e) {
         String errorMsg = OdfPackageConstraint.PACKAGE_ENTRY_DUPLICATE.getMessage();
-        if (e.getMessage().indexOf(errorMsg.substring(0, errorMsg.indexOf("%2$s"))) == -1) {
+        if (!e.getMessage().contains(errorMsg.substring(0, errorMsg.indexOf("%2$s")))) {
           Assert.fail();
         }
       }
@@ -469,7 +469,7 @@ public class PackageTest {
         Assert.fail();
       } catch (Exception e) {
         String errorMsg = OdfPackageConstraint.PACKAGE_ENTRY_INVALID_FILE_NAME.getMessage();
-        if (e.getMessage().indexOf(errorMsg.substring(0, errorMsg.indexOf("%2$s"))) == -1) {
+        if (!e.getMessage().contains(errorMsg.substring(0, errorMsg.indexOf("%2$s")))) {
           Assert.fail();
         }
       }

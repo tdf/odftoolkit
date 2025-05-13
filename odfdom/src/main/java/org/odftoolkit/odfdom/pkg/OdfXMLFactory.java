@@ -155,7 +155,7 @@ public class OdfXMLFactory {
     boolean contains = false;
     StringBuilder className = new StringBuilder();
 
-    if (localName.indexOf(LOCAL_NAME_DELIMITER) != -1) {
+    if (localName.contains(LOCAL_NAME_DELIMITER)) {
       StringTokenizer stok = new StringTokenizer(localName, LOCAL_NAME_DELIMITER);
       while (stok.hasMoreElements()) {
         String substr = stok.nextToken();
@@ -179,7 +179,7 @@ public class OdfXMLFactory {
 
   private static String getOdfPKGNodeClassName(String prefix, String localName, String nodeType) {
     StringBuilder className = new StringBuilder("org.odftoolkit.odfdom.pkg." + prefix + ".");
-    if (localName.indexOf(LOCAL_NAME_DELIMITER) != -1) {
+    if (localName.contains(LOCAL_NAME_DELIMITER)) {
       StringTokenizer stok = new StringTokenizer(localName, LOCAL_NAME_DELIMITER);
       while (stok.hasMoreElements()) {
         className = className.append(toUpperCaseFirstCharacter(stok.nextToken()));
@@ -195,7 +195,7 @@ public class OdfXMLFactory {
     StringBuilder className =
         new StringBuilder("org.odftoolkit.odfdom.dom." + nodeType + "." + prefix + ".");
     className = className.append(toUpperCaseFirstCharacter(prefix));
-    if (localName.indexOf(LOCAL_NAME_DELIMITER) != -1) {
+    if (localName.contains(LOCAL_NAME_DELIMITER)) {
       StringTokenizer stok = new StringTokenizer(localName, LOCAL_NAME_DELIMITER);
       while (stok.hasMoreElements()) {
         className = className.append(toUpperCaseFirstCharacter(stok.nextToken()));
@@ -230,7 +230,7 @@ public class OdfXMLFactory {
         if (oldPrefix != null
             && !oldPrefix.equals(newPrefix)
             // "_1" is the suffix added by OdfFileDom to an existing Namespace
-            && newPrefix.indexOf("__") == -1) {
+            && !newPrefix.contains("__")) {
           // look up again if there is a class registered for this prefix
           element = newOdfElement(dom, adaptedName);
         } else {
@@ -269,7 +269,7 @@ public class OdfXMLFactory {
       OdfName adaptedName = addNamespaceToDom(name, dom);
       String newPrefix = adaptedName.getPrefix();
       // in case the prefix was changed as it existed before
-      if (!prefix.equals(newPrefix) && newPrefix.indexOf("__") == -1) {
+      if (!prefix.equals(newPrefix) && !newPrefix.contains("__")) {
         // look up again if there is a class registered for this prefix
         attr = newOdfAttribute(dom, adaptedName);
       } else {

@@ -37,7 +37,7 @@ public class CURIEs implements OdfDataType {
     if ((curies == null) || (curies.size() == 0)) {
       throw new IllegalArgumentException("parameter can not be null for CURIEs");
     }
-    StringBuffer aRet = new StringBuffer();
+    StringBuilder aRet = new StringBuilder();
     Iterator<CURIE> aIter = curies.iterator();
     while (aIter.hasNext()) {
       if (aRet.length() > 0) {

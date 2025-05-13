@@ -1325,9 +1325,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
           addText(/*mCachedTableOps, */ "\u0020");
           // mCharsForOperation.append('\u0020');
         } else {
-          for (int i = 0; i < quantity; i++) {
-            mCharsForOperation.append('\u0020');
-          }
+          mCharsForOperation.append("\u0020".repeat(Math.max(0, quantity)));
           addText(/*mCachedTableOps, */ mCharsForOperation);
         }
 
