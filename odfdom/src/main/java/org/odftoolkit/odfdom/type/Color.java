@@ -19,6 +19,7 @@
 package org.odftoolkit.odfdom.type;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -365,19 +366,10 @@ public class Color implements OdfDataType {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj == null) {
+    if (obj == null || getClass() != obj.getClass()) {
       return false;
     }
-    if (getClass() != obj.getClass()) {
-      return false;
-    }
-    final Color other = (Color) obj;
-    if ((this.mColorAsSixHexRGB == null)
-        ? (other.mColorAsSixHexRGB != null)
-        : !this.mColorAsSixHexRGB.equals(other.mColorAsSixHexRGB)) {
-      return false;
-    }
-    return true;
+    return Objects.equals(this.mColorAsSixHexRGB, ((Color) obj).mColorAsSixHexRGB);
   }
 
   @Override
