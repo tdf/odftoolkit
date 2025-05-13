@@ -613,7 +613,7 @@ public class OdfTableCell {
     if (currency == null) {
       throw new IllegalArgumentException("Currency code of cell should not be null.");
     }
-    splitRepeatedCells();
+    //splitRepeatedCells();
     if (mCellElement
         .getOfficeValueTypeAttribute()
         .equals(OfficeValueTypeAttribute.Value.CURRENCY.toString())) {
@@ -1010,11 +1010,13 @@ public class OdfTableCell {
   /**
    * Get the cell value as {@link java.util.Calendar java.util.Calendar}.
    *
-   * <p>Throw exception if the cell type is not "time".
+   * <p>
+   * Throw exception if the cell type is not "time".
    *
    * @return the Calendar value of cell
-   * @throws IllegalArgumentException an IllegalArgumentException will be thrown if the cell type is
-   *     not time.
+   * @throws IllegalArgumentException an IllegalArgumentException will be thrown
+   *                                  if the cell type is
+   *                                  not time.
    * @deprecated use {@link #getLocalTimeValue()} instead.
    */
   @Deprecated
@@ -1579,7 +1581,7 @@ public class OdfTableCell {
   private void setCellFormatString(String formatStr, String type) {
     OfficeValueTypeAttribute.Value typeValue = null;
     msFormatString = formatStr;
-    splitRepeatedCells();
+    //splitRepeatedCells();
     typeValue = OfficeValueTypeAttribute.Value.enumValueOf(type);
     if (typeValue == OfficeValueTypeAttribute.Value.FLOAT) {
       OdfNumberStyle numberStyle =
