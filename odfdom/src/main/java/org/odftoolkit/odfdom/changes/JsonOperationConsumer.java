@@ -1343,9 +1343,7 @@ public class JsonOperationConsumer {
     OdfOfficeStyles styles = null;
     try {
       styles = doc.getStylesDom().getOrCreateOfficeStyles();
-    } catch (SAXException ex) {
-      LOG.log(Level.SEVERE, null, ex);
-    } catch (IOException ex) {
+    } catch (SAXException | IOException ex) {
       LOG.log(Level.SEVERE, null, ex);
     }
     if (attrs != null) {
@@ -3340,19 +3338,7 @@ public class JsonOperationConsumer {
             Constructor<OdfElement> constructor = fieldClass.getConstructor(types);
             newFieldElement = constructor.newInstance(xmlDoc);
           }
-        } catch (InstantiationException e) {
-          LOG.log(Level.SEVERE, null, e);
-        } catch (IllegalAccessException e) {
-          LOG.log(Level.SEVERE, null, e);
-        } catch (IllegalArgumentException e) {
-          LOG.log(Level.SEVERE, null, e);
-        } catch (InvocationTargetException e) {
-          LOG.log(Level.SEVERE, null, e);
-        } catch (NoSuchMethodException e) {
-          LOG.log(Level.SEVERE, null, e);
-        } catch (SecurityException e) {
-          LOG.log(Level.SEVERE, null, e);
-        } catch (ClassNotFoundException e) {
+        } catch (InstantiationException | ClassNotFoundException | SecurityException | NoSuchMethodException | InvocationTargetException | IllegalArgumentException | IllegalAccessException e) {
           LOG.log(Level.SEVERE, null, e);
         }
         setFieldAttributes(newFieldElement, attrs, currentMap, contentDom);

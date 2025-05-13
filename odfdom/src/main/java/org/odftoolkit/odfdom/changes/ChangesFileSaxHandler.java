@@ -914,9 +914,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
               if (anchorHorOffset != 0) {
                 drawingProps.put("anchorHorOffset", anchorHorOffset);
               }
-            } catch (IndexOutOfBoundsException ex) {
-              LOG.log(Level.SEVERE, null, ex);
-            } catch (JSONException ex) {
+            } catch (IndexOutOfBoundsException | JSONException ex) {
               LOG.log(Level.SEVERE, null, ex);
             }
           }

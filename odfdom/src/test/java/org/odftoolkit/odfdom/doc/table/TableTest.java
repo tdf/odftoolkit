@@ -381,9 +381,6 @@ public class TableTest {
         Assert.assertEquals(column.getCellCount(), columnOld.getCellCount());
       }
       saveodt(mOdtTestFileName + "Output.odt");
-    } catch (FileNotFoundException ex) {
-      LOG.log(Level.SEVERE, null, ex);
-      Assert.fail();
     } catch (Exception ex) {
       LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
@@ -465,9 +462,6 @@ public class TableTest {
       Assert.assertEquals(newClm2, oldClm0);
 
       saveodt(mOdtTestFileName + "Out.odt");
-    } catch (FileNotFoundException ex) {
-      LOG.log(Level.SEVERE, null, ex);
-      Assert.fail();
     } catch (Exception ex) {
       LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
@@ -503,9 +497,6 @@ public class TableTest {
       Assert.assertEquals(oldClm1, clm0);
       Assert.assertEquals(clmnum - 4, table2.getColumnCount());
       saveodt(mOdtTestFileName + "Out.odt");
-    } catch (FileNotFoundException ex) {
-      LOG.log(Level.SEVERE, null, ex);
-      Assert.fail();
     } catch (Exception ex) {
       LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
@@ -538,9 +529,6 @@ public class TableTest {
       OdfTable newTable = mOdtDoc.getTableByName("Table2");
 
       Assert.assertEquals(originalRowCount + 2, newTable.getRowCount());
-    } catch (FileNotFoundException ex) {
-      LOG.log(Level.SEVERE, null, ex);
-      Assert.fail();
     } catch (Exception ex) {
       LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
@@ -695,9 +683,6 @@ public class TableTest {
       Assert.assertNotNull(cell);
       cell.setStringValue("string86");
       Assert.assertEquals("string86", cell.getStringValue());
-    } catch (FileNotFoundException ex) {
-      LOG.log(Level.SEVERE, null, ex);
-      Assert.fail();
     } catch (Exception ex) {
       LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
@@ -736,9 +721,6 @@ public class TableTest {
       Assert.assertNotNull(cell);
       cell.setStringValue("string86");
       Assert.assertEquals("string86", cell.getStringValue());
-    } catch (FileNotFoundException ex) {
-      LOG.log(Level.SEVERE, null, ex);
-      Assert.fail();
     } catch (Exception ex) {
       LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
@@ -769,9 +751,6 @@ public class TableTest {
       OdfTable newTable = mOdtDoc.getTableByName("Table2");
 
       Assert.assertEquals(originalRowCount - 2, newTable.getRowCount());
-    } catch (FileNotFoundException ex) {
-      LOG.log(Level.SEVERE, null, ex);
-      Assert.fail();
     } catch (Exception ex) {
       LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
@@ -788,9 +767,6 @@ public class TableTest {
       OdfTable table = mOdtDoc.getTableByName("Table3");
       int headerRowCount = table.getHeaderRowCount();
       Assert.assertEquals(1, headerRowCount);
-    } catch (FileNotFoundException ex) {
-      LOG.log(Level.SEVERE, null, ex);
-      Assert.fail();
     } catch (Exception ex) {
       LOG.log(Level.SEVERE, null, ex);
       Assert.fail();
@@ -807,9 +783,6 @@ public class TableTest {
       OdfTable table = mOdtDoc.getTableByName("Table3");
       int headerColumnCount = table.getHeaderColumnCount();
       Assert.assertEquals(1, headerColumnCount);
-    } catch (FileNotFoundException ex) {
-      LOG.log(Level.SEVERE, null, ex);
-      Assert.fail();
     } catch (Exception ex) {
       LOG.log(Level.SEVERE, null, ex);
       Assert.fail();

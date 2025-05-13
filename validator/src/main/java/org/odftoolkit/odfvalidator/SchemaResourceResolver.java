@@ -146,11 +146,7 @@ class SchemaResourceResolver implements LSResourceResolver {
 
       try {
         aDOMReg = DOMImplementationRegistry.newInstance();
-      } catch (ClassNotFoundException e) {
-        m_aLogger.logFatalError(e.getMessage());
-      } catch (InstantiationException e) {
-        m_aLogger.logFatalError(e.getMessage());
-      } catch (IllegalAccessException e) {
+      } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
         m_aLogger.logFatalError(e.getMessage());
       }
       DOMImplementation aDOMImpl = aDOMReg.getDOMImplementation("LS 3.0");

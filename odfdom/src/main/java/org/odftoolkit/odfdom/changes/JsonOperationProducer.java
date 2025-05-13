@@ -1074,9 +1074,7 @@ public class JsonOperationProducer {
           jsonCellProps.put("formatCode", formatCode);
           allHardFormatting.put("cell", jsonCellProps);
         }
-      } catch (SAXException ex) {
-        LOG.log(Level.SEVERE, null, ex);
-      } catch (IOException ex) {
+      } catch (SAXException | IOException ex) {
         LOG.log(Level.SEVERE, null, ex);
       }
     }

@@ -24,9 +24,11 @@
 package org.odftoolkit.odfvalidator;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.HashSet;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
@@ -117,15 +119,13 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
       aParser = aParserFactory.newSAXParser();
 
       aParser.parse(aFilterFile, new Handler(m_aFilterEntries));
-    } catch (javax.xml.parsers.ParserConfigurationException e) {
+    } catch (ParserConfigurationException | IOException e) {
       throw new ODFValidatorException(e);
     } catch (org.xml.sax.SAXParseException e) {
       aLogger.logError(e);
       throw new ODFValidatorException(e);
     } catch (org.xml.sax.SAXException e) {
       aLogger.logError(e.getMessage());
-      throw new ODFValidatorException(e);
-    } catch (java.io.IOException e) {
       throw new ODFValidatorException(e);
     }
   }

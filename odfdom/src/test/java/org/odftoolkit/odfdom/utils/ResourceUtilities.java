@@ -357,8 +357,6 @@ public final class ResourceUtilities {
       input.read(fileData);
       input.close();
       result = new String(fileData, "UTF-8");
-    } catch (FileNotFoundException ex) {
-      LOG.log(Level.SEVERE, null, ex);
     } catch (IOException ex) {
       LOG.log(Level.SEVERE, null, ex);
     } finally {
