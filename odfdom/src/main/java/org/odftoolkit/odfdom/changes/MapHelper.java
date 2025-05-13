@@ -2147,10 +2147,8 @@ public class MapHelper {
           ret = newDataStyleName;
         }
       }
-    } catch (SAXException e) {
+    } catch (SAXException | IOException e) {
       LOG.log(Level.SEVERE, null, e);
-    } catch (IOException ex) {
-      LOG.log(Level.SEVERE, null, ex);
     }
     return ret;
   }

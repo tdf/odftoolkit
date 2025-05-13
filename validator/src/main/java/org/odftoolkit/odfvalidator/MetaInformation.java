@@ -26,11 +26,13 @@ package org.odftoolkit.odfvalidator;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xml.sax.XMLFilter;
 
 public class MetaInformation {
@@ -82,9 +84,7 @@ public class MetaInformation {
       aFilter.setParent(aParser.getXMLReader());
 
       aFilter.parse(new InputSource(aInStream));
-    } catch (javax.xml.parsers.ParserConfigurationException e) {
-      throw new ODFValidatorException(e);
-    } catch (org.xml.sax.SAXException e) {
+    } catch (ParserConfigurationException | SAXException e) {
       throw new ODFValidatorException(e);
     }
   }

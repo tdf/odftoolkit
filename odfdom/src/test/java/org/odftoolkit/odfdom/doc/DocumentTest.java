@@ -134,12 +134,7 @@ public class DocumentTest {
         // Exception is expected!
         OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(IMAGE_TEST_FILE));
         Assert.fail();
-      } catch (IllegalArgumentException e) {
-        if (!e.getMessage().contains("shall be a ZIP file")) {
-          LOG.log(Level.SEVERE, e.getMessage(), e);
-          Assert.fail();
-        }
-      } catch (OdfValidationException e) {
+      } catch (IllegalArgumentException | OdfValidationException e) {
         if (!e.getMessage().contains("shall be a ZIP file")) {
           LOG.log(Level.SEVERE, e.getMessage(), e);
           Assert.fail();

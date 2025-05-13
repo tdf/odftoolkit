@@ -232,11 +232,7 @@ public class Main {
                 aOut, aFileNames, aExcludeRegExp, eMode, bRecursive, aFilterFileName);
       }
       System.exit(bHasErrors ? 2 : 0);
-    } catch (ODFValidatorException e) {
-      System.err.println(e.getMessage());
-      System.err.println("Validation aborted.");
-      System.exit(1);
-    } catch (FileNotFoundException e) {
+    } catch (ODFValidatorException | FileNotFoundException e) {
       System.err.println(e.getMessage());
       System.err.println("Validation aborted.");
       System.exit(1);

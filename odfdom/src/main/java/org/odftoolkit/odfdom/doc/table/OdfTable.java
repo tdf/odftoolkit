@@ -554,8 +554,6 @@ public class OdfTable {
       tableParent.appendChild(newTEle);
       return OdfTable.getInstance(newTEle);
 
-    } catch (DOMException e) {
-      LOG.log(Level.SEVERE, e.getMessage(), e);
     } catch (Exception e) {
       LOG.log(Level.SEVERE, e.getMessage(), e);
     }
@@ -687,8 +685,6 @@ public class OdfTable {
 
       return OdfTable.getInstance(newTEle);
 
-    } catch (DOMException e) {
-      LOG.log(Level.SEVERE, e.getMessage(), e);
     } catch (Exception e) {
       LOG.log(Level.SEVERE, e.getMessage(), e);
     }
@@ -798,8 +794,6 @@ public class OdfTable {
         }
       }
       return table;
-    } catch (DOMException e) {
-      LOG.log(Level.SEVERE, e.getMessage(), e);
     } catch (Exception e) {
       LOG.log(Level.SEVERE, e.getMessage(), e);
     }
@@ -907,8 +901,6 @@ public class OdfTable {
 
       return table;
 
-    } catch (DOMException e) {
-      LOG.log(Level.SEVERE, e.getMessage(), e);
     } catch (Exception e) {
       LOG.log(Level.SEVERE, e.getMessage(), e);
     }

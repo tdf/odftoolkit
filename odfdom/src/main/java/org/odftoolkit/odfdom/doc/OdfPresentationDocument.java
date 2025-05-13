@@ -518,9 +518,6 @@ public class OdfPresentationDocument extends OdfDocument {
           }
         }
       }
-    } catch (XPathExpressionException e) {
-      LOG.log(Level.SEVERE, null, e);
-      success = false;
     } catch (Exception e) {
       LOG.log(Level.SEVERE, null, e);
       success = false;
@@ -1410,9 +1407,7 @@ public class OdfPresentationDocument extends OdfDocument {
     OdfOfficeStyles styles = null;
     try {
       styles = this.getStylesDom().getOrCreateOfficeStyles();
-    } catch (SAXException ex) {
-      LOG.log(Level.SEVERE, null, ex);
-    } catch (IOException ex) {
+    } catch (SAXException | IOException ex) {
       LOG.log(Level.SEVERE, null, ex);
     }
     String layoutName;

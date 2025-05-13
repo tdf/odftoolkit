@@ -31,6 +31,7 @@ import java.io.PrintStream;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.zip.ZipException;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.sax.SAXSource;
@@ -40,6 +41,7 @@ import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.odftoolkit.odfdom.pkg.manifest.EncryptionDataElement;
 import org.odftoolkit.odfdom.pkg.manifest.OdfFileEntry;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xml.sax.XMLFilter;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
@@ -143,8 +145,6 @@ abstract class ODFPackageValidator {
                 aVersion);
       }
       bHasErrors |= validatePost(aLogger, aVersion);
-    } catch (ZipException e) {
-      aLogger.logFatalError(e.getMessage());
     } catch (IOException e) {
       aLogger.logFatalError(e.getMessage());
     }
@@ -334,9 +334,7 @@ abstract class ODFPackageValidator {
       }
     } catch (org.xml.sax.SAXParseException e) {
       aErrorHandler.fatalErrorNoException(e);
-    } catch (org.xml.sax.SAXException e) {
-      aLogger.logFatalError(e.getMessage());
-    } catch (IOException e) {
+    } catch (SAXException | IOException e) {
       aLogger.logFatalError(e.getMessage());
     }
 
@@ -410,9 +408,7 @@ abstract class ODFPackageValidator {
       aReader.parse(new InputSource(aInStream));
     } catch (org.xml.sax.SAXParseException e) {
       aErrorHandler.fatalErrorNoException(e);
-    } catch (org.xml.sax.SAXException e) {
-      aLogger.logFatalError(e.getMessage());
-    } catch (IOException e) {
+    } catch (SAXException | IOException e) {
       aLogger.logFatalError(e.getMessage());
     }
 
@@ -445,9 +441,7 @@ abstract class ODFPackageValidator {
     try {
       m_aSAXParserFactory.setValidating(bValidating);
       aParser = m_aSAXParserFactory.newSAXParser();
-    } catch (javax.xml.parsers.ParserConfigurationException e) {
-      throw new ODFValidatorException(e);
-    } catch (org.xml.sax.SAXException e) {
+    } catch (ParserConfigurationException | SAXException e) {
       throw new ODFValidatorException(e);
     }
 
@@ -490,9 +484,7 @@ abstract class ODFPackageValidator {
       aParser.parse(aInStream, aHandler);
     } catch (SAXVersionException e) {
       aVersion = e.getVersion();
-    } catch (org.xml.sax.SAXException e) {
-      aLogger.logFatalError(e.getMessage());
-    } catch (IOException e) {
+    } catch (SAXException | IOException e) {
       aLogger.logFatalError(e.getMessage());
     }
 
