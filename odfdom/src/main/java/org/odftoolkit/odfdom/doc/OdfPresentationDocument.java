@@ -1002,7 +1002,7 @@ public class OdfPresentationDocument extends OdfDocument {
         Boolean isAppended = styleAppendMap.get(newStyleName);
         // if styleAppendMap contain the newStyleName,
         // means that cloneStyleElement has already been appended
-        if ((isAppended != null) && isAppended.booleanValue() == true) {
+        if ((isAppended != null) && isAppended == true) {
           continue;
         } else {
           styleAppendMap.put(newStyleName, true);

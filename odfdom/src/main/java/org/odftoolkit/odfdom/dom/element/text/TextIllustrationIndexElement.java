@@ -110,7 +110,7 @@ public class TextIllustrationIndexElement extends OdfStylableElement {
     TextProtectedAttribute attr =
         (TextProtectedAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "protected");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -124,7 +124,7 @@ public class TextIllustrationIndexElement extends OdfStylableElement {
   public void setTextProtectedAttribute(Boolean textProtectedValue) {
     TextProtectedAttribute attr = new TextProtectedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textProtectedValue.booleanValue());
+    attr.setBooleanValue(textProtectedValue);
   }
 
   /**

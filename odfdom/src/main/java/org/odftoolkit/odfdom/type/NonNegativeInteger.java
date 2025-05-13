@@ -63,7 +63,7 @@ public class NonNegativeInteger implements OdfDataType {
    */
   public static NonNegativeInteger valueOf(String stringValue) throws NumberFormatException {
     String aTmp = stringValue.trim();
-    int n = Integer.valueOf(aTmp);
+    int n = Integer.parseInt(aTmp);
     return new NonNegativeInteger(n);
   }
 
@@ -87,7 +87,7 @@ public class NonNegativeInteger implements OdfDataType {
     if (integerValue == null) {
       return false;
     }
-    if (integerValue.intValue() < 0) {
+    if (integerValue < 0) {
       return false;
     } else {
       return true;

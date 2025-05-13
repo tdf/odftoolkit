@@ -225,7 +225,7 @@ public class TableDataPilotFieldElement extends OdfElement {
     TableUsedHierarchyAttribute attr =
         (TableUsedHierarchyAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "used-hierarchy");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return Integer.valueOf(TableUsedHierarchyAttribute.DEFAULT_VALUE);
   }
@@ -240,7 +240,7 @@ public class TableDataPilotFieldElement extends OdfElement {
     TableUsedHierarchyAttribute attr =
         new TableUsedHierarchyAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableUsedHierarchyValue.intValue());
+    attr.setIntValue(tableUsedHierarchyValue);
   }
 
   /**

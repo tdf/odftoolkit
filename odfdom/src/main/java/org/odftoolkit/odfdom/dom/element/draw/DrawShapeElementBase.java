@@ -181,7 +181,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
     DrawZIndexAttribute attr =
         (DrawZIndexAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "z-index");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -195,7 +195,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
   public void setDrawZIndexAttribute(Integer drawZIndexValue) {
     DrawZIndexAttribute attr = new DrawZIndexAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(drawZIndexValue.intValue());
+    attr.setIntValue(drawZIndexValue);
   }
 
   /**
@@ -356,7 +356,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
         (TableTableBackgroundAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "table-background");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -371,7 +371,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
     TableTableBackgroundAttribute attr =
         new TableTableBackgroundAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableTableBackgroundValue.booleanValue());
+    attr.setBooleanValue(tableTableBackgroundValue);
   }
 
   /**
@@ -386,7 +386,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
         (TextAnchorPageNumberAttribute)
             getOdfAttribute(OdfDocumentNamespace.TEXT, "anchor-page-number");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -401,7 +401,7 @@ public abstract class DrawShapeElementBase extends OdfStyleableShapeElement {
     TextAnchorPageNumberAttribute attr =
         new TextAnchorPageNumberAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textAnchorPageNumberValue.intValue());
+    attr.setIntValue(textAnchorPageNumberValue);
   }
 
   /**

@@ -55,7 +55,7 @@ public class ZeroToOneDecimal implements OdfDataType {
    */
   public static ZeroToOneDecimal valueOf(String stringValue) throws IllegalArgumentException {
     String aTmp = stringValue.trim();
-    double n = Double.valueOf(aTmp);
+    double n = Double.parseDouble(aTmp);
     return new ZeroToOneDecimal(n);
   }
 
@@ -77,8 +77,8 @@ public class ZeroToOneDecimal implements OdfDataType {
    */
   public static boolean isValid(Double doubleValue) {
     if ((doubleValue != null)
-        && (doubleValue.doubleValue() <= 1)
-        && (doubleValue.doubleValue() >= 0)) {
+        && (doubleValue <= 1)
+        && (doubleValue >= 0)) {
       return true;
     } else {
       return false;

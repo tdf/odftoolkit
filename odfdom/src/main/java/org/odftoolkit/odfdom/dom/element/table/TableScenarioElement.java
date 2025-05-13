@@ -135,7 +135,7 @@ public class TableScenarioElement extends OdfElement {
     TableCopyBackAttribute attr =
         (TableCopyBackAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "copy-back");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TableCopyBackAttribute.DEFAULT_VALUE);
   }
@@ -149,7 +149,7 @@ public class TableScenarioElement extends OdfElement {
   public void setTableCopyBackAttribute(Boolean tableCopyBackValue) {
     TableCopyBackAttribute attr = new TableCopyBackAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableCopyBackValue.booleanValue());
+    attr.setBooleanValue(tableCopyBackValue);
   }
 
   /**
@@ -163,7 +163,7 @@ public class TableScenarioElement extends OdfElement {
     TableCopyFormulasAttribute attr =
         (TableCopyFormulasAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "copy-formulas");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TableCopyFormulasAttribute.DEFAULT_VALUE);
   }
@@ -178,7 +178,7 @@ public class TableScenarioElement extends OdfElement {
     TableCopyFormulasAttribute attr =
         new TableCopyFormulasAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableCopyFormulasValue.booleanValue());
+    attr.setBooleanValue(tableCopyFormulasValue);
   }
 
   /**
@@ -192,7 +192,7 @@ public class TableScenarioElement extends OdfElement {
     TableCopyStylesAttribute attr =
         (TableCopyStylesAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "copy-styles");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TableCopyStylesAttribute.DEFAULT_VALUE);
   }
@@ -206,7 +206,7 @@ public class TableScenarioElement extends OdfElement {
   public void setTableCopyStylesAttribute(Boolean tableCopyStylesValue) {
     TableCopyStylesAttribute attr = new TableCopyStylesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableCopyStylesValue.booleanValue());
+    attr.setBooleanValue(tableCopyStylesValue);
   }
 
   /**
@@ -220,7 +220,7 @@ public class TableScenarioElement extends OdfElement {
     TableDisplayBorderAttribute attr =
         (TableDisplayBorderAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "display-border");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TableDisplayBorderAttribute.DEFAULT_VALUE);
   }
@@ -235,7 +235,7 @@ public class TableScenarioElement extends OdfElement {
     TableDisplayBorderAttribute attr =
         new TableDisplayBorderAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableDisplayBorderValue.booleanValue());
+    attr.setBooleanValue(tableDisplayBorderValue);
   }
 
   /**
@@ -251,7 +251,7 @@ public class TableScenarioElement extends OdfElement {
     TableIsActiveAttribute attr =
         (TableIsActiveAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "is-active");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -265,7 +265,7 @@ public class TableScenarioElement extends OdfElement {
   public void setTableIsActiveAttribute(Boolean tableIsActiveValue) {
     TableIsActiveAttribute attr = new TableIsActiveAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableIsActiveValue.booleanValue());
+    attr.setBooleanValue(tableIsActiveValue);
   }
 
   /**
@@ -279,7 +279,7 @@ public class TableScenarioElement extends OdfElement {
     TableProtectedAttribute attr =
         (TableProtectedAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "protected");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -293,7 +293,7 @@ public class TableScenarioElement extends OdfElement {
   public void setTableProtectedAttribute(Boolean tableProtectedValue) {
     TableProtectedAttribute attr = new TableProtectedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableProtectedValue.booleanValue());
+    attr.setBooleanValue(tableProtectedValue);
   }
 
   /**

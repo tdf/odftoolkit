@@ -276,7 +276,7 @@ class Cell<T> extends Component {
               } else if (oldTimeValue != null) {
                 newValue = MapHelper.timeToDouble(oldTimeValue);
               } else if (oldBooleanValue != null) {
-                newValue = Double.valueOf(oldBooleanValue ? 1 : 0);
+                newValue = (double) (oldBooleanValue ? 1 : 0);
               }
 
               if (newValue != null) {

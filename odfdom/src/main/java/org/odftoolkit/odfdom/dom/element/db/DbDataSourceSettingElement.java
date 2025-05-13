@@ -74,7 +74,7 @@ public class DbDataSourceSettingElement extends OdfElement {
         (DbDataSourceSettingIsListAttribute)
             getOdfAttribute(OdfDocumentNamespace.DB, "data-source-setting-is-list");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -89,7 +89,7 @@ public class DbDataSourceSettingElement extends OdfElement {
     DbDataSourceSettingIsListAttribute attr =
         new DbDataSourceSettingIsListAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dbDataSourceSettingIsListValue.booleanValue());
+    attr.setBooleanValue(dbDataSourceSettingIsListValue);
   }
 
   /**

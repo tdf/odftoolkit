@@ -167,7 +167,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
     defaultValueByParentElement.put(elementName, defaultValue);
 
     String repetition = attrs.getValue("repetition");
-    if (repetition != null && repetition.length() > 0 && Boolean.valueOf(repetition)) {
+    if (repetition != null && repetition.length() > 0 && Boolean.parseBoolean(repetition)) {
       mRepetitionAttributeNames.add(attrName);
     }
   }

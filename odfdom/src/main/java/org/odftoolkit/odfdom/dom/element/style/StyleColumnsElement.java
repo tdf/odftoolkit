@@ -73,7 +73,7 @@ public class StyleColumnsElement extends OdfElement {
     FoColumnCountAttribute attr =
         (FoColumnCountAttribute) getOdfAttribute(OdfDocumentNamespace.FO, "column-count");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -87,7 +87,7 @@ public class StyleColumnsElement extends OdfElement {
   public void setFoColumnCountAttribute(Integer foColumnCountValue) {
     FoColumnCountAttribute attr = new FoColumnCountAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(foColumnCountValue.intValue());
+    attr.setIntValue(foColumnCountValue);
   }
 
   /**

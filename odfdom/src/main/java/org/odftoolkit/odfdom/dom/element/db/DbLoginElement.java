@@ -74,7 +74,7 @@ public class DbLoginElement extends OdfElement {
         (DbIsPasswordRequiredAttribute)
             getOdfAttribute(OdfDocumentNamespace.DB, "is-password-required");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(DbIsPasswordRequiredAttribute.DEFAULT_VALUE);
   }
@@ -89,7 +89,7 @@ public class DbLoginElement extends OdfElement {
     DbIsPasswordRequiredAttribute attr =
         new DbIsPasswordRequiredAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dbIsPasswordRequiredValue.booleanValue());
+    attr.setBooleanValue(dbIsPasswordRequiredValue);
   }
 
   /**
@@ -103,7 +103,7 @@ public class DbLoginElement extends OdfElement {
     DbLoginTimeoutAttribute attr =
         (DbLoginTimeoutAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "login-timeout");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -117,7 +117,7 @@ public class DbLoginElement extends OdfElement {
   public void setDbLoginTimeoutAttribute(Integer dbLoginTimeoutValue) {
     DbLoginTimeoutAttribute attr = new DbLoginTimeoutAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(dbLoginTimeoutValue.intValue());
+    attr.setIntValue(dbLoginTimeoutValue);
   }
 
   /**
@@ -131,7 +131,7 @@ public class DbLoginElement extends OdfElement {
     DbUseSystemUserAttribute attr =
         (DbUseSystemUserAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "use-system-user");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -145,7 +145,7 @@ public class DbLoginElement extends OdfElement {
   public void setDbUseSystemUserAttribute(Boolean dbUseSystemUserValue) {
     DbUseSystemUserAttribute attr = new DbUseSystemUserAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dbUseSystemUserValue.booleanValue());
+    attr.setBooleanValue(dbUseSystemUserValue);
   }
 
   /**

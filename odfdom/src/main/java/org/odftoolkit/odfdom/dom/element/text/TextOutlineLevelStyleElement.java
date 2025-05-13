@@ -112,7 +112,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
         (StyleNumLetterSyncAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "num-letter-sync");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -127,7 +127,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
     StyleNumLetterSyncAttribute attr =
         new StyleNumLetterSyncAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleNumLetterSyncValue.booleanValue());
+    attr.setBooleanValue(styleNumLetterSyncValue);
   }
 
   /**
@@ -197,7 +197,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
     TextDisplayLevelsAttribute attr =
         (TextDisplayLevelsAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "display-levels");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return Integer.valueOf(TextDisplayLevelsAttribute.DEFAULT_VALUE);
   }
@@ -212,7 +212,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
     TextDisplayLevelsAttribute attr =
         new TextDisplayLevelsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textDisplayLevelsValue.intValue());
+    attr.setIntValue(textDisplayLevelsValue);
   }
 
   /**
@@ -228,7 +228,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
     TextLevelAttribute attr =
         (TextLevelAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "level");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -242,7 +242,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
   public void setTextLevelAttribute(Integer textLevelValue) {
     TextLevelAttribute attr = new TextLevelAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textLevelValue.intValue());
+    attr.setIntValue(textLevelValue);
   }
 
   /**
@@ -256,7 +256,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
     TextStartValueAttribute attr =
         (TextStartValueAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "start-value");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return Integer.valueOf(TextStartValueAttribute.DEFAULT_VALUE);
   }
@@ -270,7 +270,7 @@ public class TextOutlineLevelStyleElement extends OdfStyleBase {
   public void setTextStartValueAttribute(Integer textStartValueValue) {
     TextStartValueAttribute attr = new TextStartValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textStartValueValue.intValue());
+    attr.setIntValue(textStartValueValue);
   }
 
   /**

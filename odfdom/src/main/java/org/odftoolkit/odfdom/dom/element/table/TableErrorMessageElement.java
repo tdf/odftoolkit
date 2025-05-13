@@ -74,7 +74,7 @@ public class TableErrorMessageElement extends OdfElement {
     TableDisplayAttribute attr =
         (TableDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "display");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TableDisplayAttribute.DEFAULT_VALUE_FALSE);
   }
@@ -88,7 +88,7 @@ public class TableErrorMessageElement extends OdfElement {
   public void setTableDisplayAttribute(Boolean tableDisplayValue) {
     TableDisplayAttribute attr = new TableDisplayAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableDisplayValue.booleanValue());
+    attr.setBooleanValue(tableDisplayValue);
   }
 
   /**

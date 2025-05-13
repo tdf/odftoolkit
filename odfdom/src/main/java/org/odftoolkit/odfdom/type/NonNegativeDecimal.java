@@ -56,7 +56,7 @@ public class NonNegativeDecimal implements OdfDataType {
    */
   public static NonNegativeDecimal valueOf(String stringValue) throws IllegalArgumentException {
     String aTmp = stringValue.trim();
-    double n = Double.valueOf(aTmp);
+    double n = Double.parseDouble(aTmp);
     return new NonNegativeDecimal(n);
   }
 
@@ -77,7 +77,7 @@ public class NonNegativeDecimal implements OdfDataType {
    *     false otherwise
    */
   public static boolean isValid(Double doubleValue) {
-    if ((doubleValue != null) && (doubleValue.doubleValue() >= 0)) {
+    if ((doubleValue != null) && (doubleValue >= 0)) {
       return true;
     } else {
       return false;

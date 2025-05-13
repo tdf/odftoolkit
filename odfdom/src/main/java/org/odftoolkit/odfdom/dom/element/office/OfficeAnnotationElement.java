@@ -258,7 +258,7 @@ public class OfficeAnnotationElement extends DrawShapeElementBase {
     OfficeDisplayAttribute attr =
         (OfficeDisplayAttribute) getOdfAttribute(OdfDocumentNamespace.OFFICE, "display");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -272,7 +272,7 @@ public class OfficeAnnotationElement extends DrawShapeElementBase {
   public void setOfficeDisplayAttribute(Boolean officeDisplayValue) {
     OfficeDisplayAttribute attr = new OfficeDisplayAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(officeDisplayValue.booleanValue());
+    attr.setBooleanValue(officeDisplayValue);
   }
 
   /**

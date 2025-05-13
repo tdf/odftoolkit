@@ -118,7 +118,7 @@ public class DrawConnectorElement extends DrawShapeElementBase {
     DrawEndGluePointAttribute attr =
         (DrawEndGluePointAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "end-glue-point");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -132,7 +132,7 @@ public class DrawConnectorElement extends DrawShapeElementBase {
   public void setDrawEndGluePointAttribute(Integer drawEndGluePointValue) {
     DrawEndGluePointAttribute attr = new DrawEndGluePointAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(drawEndGluePointValue.intValue());
+    attr.setIntValue(drawEndGluePointValue);
   }
 
   /**
@@ -231,7 +231,7 @@ public class DrawConnectorElement extends DrawShapeElementBase {
         (DrawStartGluePointAttribute)
             getOdfAttribute(OdfDocumentNamespace.DRAW, "start-glue-point");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -246,7 +246,7 @@ public class DrawConnectorElement extends DrawShapeElementBase {
     DrawStartGluePointAttribute attr =
         new DrawStartGluePointAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(drawStartGluePointValue.intValue());
+    attr.setIntValue(drawStartGluePointValue);
   }
 
   /**
@@ -401,7 +401,7 @@ public class DrawConnectorElement extends DrawShapeElementBase {
     SvgViewBoxAttribute attr =
         (SvgViewBoxAttribute) getOdfAttribute(OdfDocumentNamespace.SVG, "viewBox");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -415,7 +415,7 @@ public class DrawConnectorElement extends DrawShapeElementBase {
   public void setSvgViewBoxAttribute(Integer svgViewBoxValue) {
     SvgViewBoxAttribute attr = new SvgViewBoxAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(svgViewBoxValue.intValue());
+    attr.setIntValue(svgViewBoxValue);
   }
 
   /**

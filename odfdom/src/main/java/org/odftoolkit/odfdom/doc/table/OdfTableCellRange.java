@@ -177,7 +177,7 @@ public class OdfTableCellRange {
         firstCellElement.removeAttributeNS(
             OdfDocumentNamespace.TABLE.getUri(), "number-columns-spanned");
         firstCellElement.setTableNumberRowsSpannedAttribute(
-            Integer.valueOf(mnEndRow - mnStartRow + 1));
+          mnEndRow - mnStartRow + 1);
         firstCellElement.setOfficeValueTypeAttribute(
             OfficeValueTypeAttribute.Value.STRING.toString());
       }
@@ -210,7 +210,7 @@ public class OdfTableCellRange {
       }
       List<Long> widthList = getCellRangeWidthList();
       long nCellRangeWidth =
-          widthList.get(widthList.size() - 1).longValue() - widthList.get(0).longValue();
+        widthList.get(widthList.size() - 1) - widthList.get(0);
       maOwnerTable.removeColumnsByIndex(mnStartColumn + 1, mnEndColumn - mnStartColumn);
       OdfTableColumn firstColumn = maOwnerTable.getColumnByIndex(mnStartColumn);
       firstColumn.setWidth(nCellRangeWidth);
@@ -227,7 +227,7 @@ public class OdfTableCellRange {
         firstCellElement.removeAttributeNS(
             OdfDocumentNamespace.TABLE.getUri(), "number-rows-spanned");
         firstCellElement.setTableNumberColumnsSpannedAttribute(
-            Integer.valueOf(mnEndColumn - mnStartColumn + 1));
+          mnEndColumn - mnStartColumn + 1);
         firstCellElement.setOfficeValueTypeAttribute(
             OfficeValueTypeAttribute.Value.STRING.toString());
       }
@@ -267,9 +267,9 @@ public class OdfTableCellRange {
         TableTableCellElement firstCellElement =
             (TableTableCellElement) (firstCell.getOdfElement());
         firstCellElement.setTableNumberColumnsSpannedAttribute(
-            Integer.valueOf(mnEndColumn - mnStartColumn + 1));
+          mnEndColumn - mnStartColumn + 1);
         firstCellElement.setTableNumberRowsSpannedAttribute(
-            Integer.valueOf(mnEndRow - mnStartRow + 1));
+          mnEndRow - mnStartRow + 1);
         firstCellElement.setOfficeValueTypeAttribute(
             OfficeValueTypeAttribute.Value.STRING.toString());
       }
@@ -293,15 +293,15 @@ public class OdfTableCellRange {
               firstCell.appendContentFrom(cellBase);
               cellBase.removeContent();
               // set the table column repeated attribute
-              int repeatedNum = cell.getTableNumberColumnsRepeatedAttribute().intValue();
+              int repeatedNum = cell.getTableNumberColumnsRepeatedAttribute();
               int num = (mnEndColumn - j + 1) - repeatedNum;
               if (num >= 0) {
-                coveredCell.setTableNumberColumnsRepeatedAttribute(Integer.valueOf(repeatedNum));
+                coveredCell.setTableNumberColumnsRepeatedAttribute(repeatedNum);
                 parentRow.getOdfElement().removeChild(cell);
               } else {
                 coveredCell.setTableNumberColumnsRepeatedAttribute(
-                    Integer.valueOf(mnEndColumn - j + 1));
-                cell.setTableNumberColumnsRepeatedAttribute(Integer.valueOf(-num));
+                  mnEndColumn - j + 1);
+                cell.setTableNumberColumnsRepeatedAttribute(-num);
               }
 
             } else if (cellBase.getOdfElement() instanceof TableCoveredTableCellElement) {
@@ -324,7 +324,7 @@ public class OdfTableCellRange {
   // the returned value is all measured with "mm" unit
   private List<Long> getCellRangeWidthList() {
     List<Long> list = new ArrayList<Long>();
-    Long length = Long.valueOf(0);
+    Long length = 0L;
     for (int i = 0; i < maOwnerTable.getColumnCount() - 1; i++) {
       OdfTableColumn col = maOwnerTable.getColumnByIndex(i);
       int repeateNum = col.getColumnsRepeatedNumber();
@@ -332,12 +332,12 @@ public class OdfTableCellRange {
         if (isColumnInCellRange(i)) {
           list.add(length);
         }
-        length = Long.valueOf(length.longValue() + col.getWidth());
+        length = length + col.getWidth();
       } else {
         for (int j = 0; j < repeateNum; j++) {
           if (isColumnInCellRange(i + j)) {
             list.add(length);
-            length = Long.valueOf(length.longValue() + col.getWidth());
+            length = length + col.getWidth();
           }
         }
         i += repeateNum - 1;
@@ -378,11 +378,11 @@ public class OdfTableCellRange {
     long unitWidth;
     rtnValues.add(widthArray[0]);
     for (int i = 1; i < widthArray.length; i++) {
-      colWidth = Long.valueOf(widthArray[i].longValue() - widthArray[i - 1].longValue());
-      unitWidth = colWidth.longValue() / splitNum;
+      colWidth = widthArray[i] - widthArray[i - 1];
+      unitWidth = colWidth / splitNum;
       for (int j = 1; j < splitNum; j++) {
-        long eachWidth = unitWidth * j + widthArray[i - 1].longValue();
-        rtnValues.add(Long.valueOf(eachWidth));
+        long eachWidth = unitWidth * j + widthArray[i - 1];
+        rtnValues.add(eachWidth);
       }
       rtnValues.add(widthArray[i]);
     }

@@ -132,7 +132,7 @@ public class TableDataPilotGroupsElement extends OdfElement {
   public Double getTableEndAttribute() {
     TableEndAttribute attr = (TableEndAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "end");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -146,7 +146,7 @@ public class TableDataPilotGroupsElement extends OdfElement {
   public void setTableEndAttribute(Double tableEndValue) {
     TableEndAttribute attr = new TableEndAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(tableEndValue.doubleValue());
+    attr.setDoubleValue(tableEndValue);
   }
 
   /**
@@ -222,7 +222,7 @@ public class TableDataPilotGroupsElement extends OdfElement {
     TableStartAttribute attr =
         (TableStartAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "start");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -236,7 +236,7 @@ public class TableDataPilotGroupsElement extends OdfElement {
   public void setTableStartAttribute(Double tableStartValue) {
     TableStartAttribute attr = new TableStartAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(tableStartValue.doubleValue());
+    attr.setDoubleValue(tableStartValue);
   }
 
   /**
@@ -252,7 +252,7 @@ public class TableDataPilotGroupsElement extends OdfElement {
     TableStepAttribute attr =
         (TableStepAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "step");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -266,7 +266,7 @@ public class TableDataPilotGroupsElement extends OdfElement {
   public void setTableStepAttribute(Double tableStepValue) {
     TableStepAttribute attr = new TableStepAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(tableStepValue.doubleValue());
+    attr.setDoubleValue(tableStepValue);
   }
 
   /**

@@ -400,11 +400,11 @@ public abstract class DataStyleElement extends OdfElement {
     int decimalPos =
         (number.getNumberDecimalPlacesAttribute() == null)
             ? 0
-            : number.getNumberDecimalPlacesAttribute().intValue();
+            : number.getNumberDecimalPlacesAttribute();
     int minInt =
         (number.getNumberMinIntegerDigitsAttribute() == null)
             ? 0
-            : number.getNumberMinIntegerDigitsAttribute().intValue();
+            : number.getNumberMinIntegerDigitsAttribute();
     String decimalReplacement = number.getNumberDecimalReplacementAttribute();
     int i;
     if (minInt == 0) {

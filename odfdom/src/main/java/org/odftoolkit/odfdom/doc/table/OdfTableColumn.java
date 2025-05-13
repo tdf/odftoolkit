@@ -228,7 +228,7 @@ public class OdfTableColumn {
     if (sRelWidth != null) {
       if (sRelWidth.contains("*")) {
         Long value = Long.valueOf(sRelWidth.substring(0, sRelWidth.indexOf("*")));
-        return value.longValue();
+        return value;
       }
     }
     return 0;
@@ -296,7 +296,7 @@ public class OdfTableColumn {
   public OdfTableColumn getPreviousColumn() {
     OdfTable table = getTable();
     // the column has repeated column number > 1
-    if (maColumnElement.getTableNumberColumnsRepeatedAttribute().intValue() > 1) {
+    if (maColumnElement.getTableNumberColumnsRepeatedAttribute() > 1) {
       if (mnRepeatedIndex > 0) {
         return table.getColumnInstance(maColumnElement, mnRepeatedIndex - 1);
       }
@@ -324,9 +324,8 @@ public class OdfTableColumn {
           if (aPrevNode instanceof TableTableColumnElement) {
             return table.getColumnInstance(
                 (TableTableColumnElement) aPrevNode,
-                ((TableTableColumnElement) aPrevNode)
-                        .getTableNumberColumnsRepeatedAttribute()
-                        .intValue()
+              ((TableTableColumnElement) aPrevNode)
+                .getTableNumberColumnsRepeatedAttribute()
                     - 1);
           } else if (aPrevNode instanceof TableTableColumnsElement
               || aPrevNode instanceof TableTableHeaderColumnsElement
@@ -337,7 +336,7 @@ public class OdfTableColumn {
                     xpath.evaluate("//table:table-column[last()]", aPrevNode, XPathConstants.NODE);
             if (lastCol != null) {
               return table.getColumnInstance(
-                  lastCol, lastCol.getTableNumberColumnsRepeatedAttribute().intValue() - 1);
+                  lastCol, lastCol.getTableNumberColumnsRepeatedAttribute() - 1);
             }
           } else {
             aCurNode = aPrevNode;
@@ -490,7 +489,7 @@ public class OdfTableColumn {
   // in order to update mnRepeatedIndex of the each column
   void setColumnsRepeatedNumber(int num) {
     // update the mnRepeatedIndex for the ever repeated column
-    maColumnElement.setTableNumberColumnsRepeatedAttribute(Integer.valueOf(num));
+    maColumnElement.setTableNumberColumnsRepeatedAttribute(num);
   }
 
   int getColumnsRepeatedNumber() {
@@ -498,7 +497,7 @@ public class OdfTableColumn {
     if (count == null) {
       return 1;
     } else {
-      return count.intValue();
+      return count;
     }
   }
 }

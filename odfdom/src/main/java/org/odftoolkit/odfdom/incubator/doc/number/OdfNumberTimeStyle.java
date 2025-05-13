@@ -110,7 +110,7 @@ public class OdfNumberTimeStyle extends NumberTimeStyleElement {
           } else if (child instanceof NumberMonthElement) {
             NumberMonthElement ele = (NumberMonthElement) child;
             String numberstyle = ele.getNumberStyleAttribute();
-            if (ele.getNumberTextualAttribute().booleanValue()) {
+            if (ele.getNumberTextualAttribute()) {
               if ((numberstyle != null) && numberstyle.equals("long")) {
                 formatCode += "MMMM";
               } else {
@@ -182,9 +182,9 @@ public class OdfNumberTimeStyle extends NumberTimeStyleElement {
               formatCode += capsDateFormat ? "SS" : "s";
             }
             Integer decimals = ele.getNumberDecimalPlacesAttribute();
-            if (decimals != null && decimals.intValue() > 0) {
+            if (decimals != null && decimals > 0) {
               formatCode += '.';
-              for (int i = 0; i < decimals.intValue(); i++) {
+              for (int i = 0; i < decimals; i++) {
                 formatCode += '0';
               }
             }

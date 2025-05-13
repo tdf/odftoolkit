@@ -294,7 +294,7 @@ public class PerformanceIT {
         }
         cell = dom.newOdfElement(TableTableCellElement.class);
         cell.setOfficeValueTypeAttribute("float");
-        cell.setOfficeValueAttribute(Double.valueOf(values[j]));
+        cell.setOfficeValueAttribute(values[j]);
         p = dom.newOdfElement(OdfTextParagraph.class);
         p.setTextContent(values[j] + "");
         cell.appendChild(p);

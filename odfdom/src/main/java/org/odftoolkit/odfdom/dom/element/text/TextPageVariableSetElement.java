@@ -72,7 +72,7 @@ public class TextPageVariableSetElement extends OdfElement {
     TextActiveAttribute attr =
         (TextActiveAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "active");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -86,7 +86,7 @@ public class TextPageVariableSetElement extends OdfElement {
   public void setTextActiveAttribute(Boolean textActiveValue) {
     TextActiveAttribute attr = new TextActiveAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textActiveValue.booleanValue());
+    attr.setBooleanValue(textActiveValue);
   }
 
   /**
@@ -100,7 +100,7 @@ public class TextPageVariableSetElement extends OdfElement {
     TextPageAdjustAttribute attr =
         (TextPageAdjustAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "page-adjust");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -114,7 +114,7 @@ public class TextPageVariableSetElement extends OdfElement {
   public void setTextPageAdjustAttribute(Integer textPageAdjustValue) {
     TextPageAdjustAttribute attr = new TextPageAdjustAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(textPageAdjustValue.intValue());
+    attr.setIntValue(textPageAdjustValue);
   }
 
   /**

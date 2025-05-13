@@ -263,8 +263,7 @@ public class OdfTableRow {
           int nextIndex =
               index
                   - ((TableTableCellElementBase) n)
-                      .getTableNumberColumnsRepeatedAttribute()
-                      .intValue();
+                .getTableNumberColumnsRepeatedAttribute();
           if (nextIndex < 0) {
             OdfTableCell cell =
                 table.getCellInstance((TableTableCellElementBase) n, index, mnRepeatedIndex);
@@ -336,7 +335,7 @@ public class OdfTableRow {
           if (aPrevNode instanceof TableTableRowElement) {
             return table.getRowInstance(
                 (TableTableRowElement) aPrevNode,
-                ((TableTableRowElement) aPrevNode).getTableNumberRowsRepeatedAttribute().intValue()
+              ((TableTableRowElement) aPrevNode).getTableNumberRowsRepeatedAttribute()
                     - 1);
           } else if (aPrevNode instanceof TableTableRowsElement
               || aPrevNode instanceof TableTableHeaderRowsElement
@@ -349,7 +348,7 @@ public class OdfTableRow {
             }
             if (lastRow != null) {
               return table.getRowInstance(
-                  lastRow, lastRow.getTableNumberRowsRepeatedAttribute().intValue() - 1);
+                  lastRow, lastRow.getTableNumberRowsRepeatedAttribute() - 1);
             }
           } else {
             aCurNode = aPrevNode;
@@ -523,7 +522,7 @@ public class OdfTableRow {
   void setRowsRepeatedNumber(int num) {
     mRowsRepeatedNumber = num;
     // update the mnRepeatedIndex for the ever repeated row
-    maRowElement.setTableNumberRowsRepeatedAttribute(Integer.valueOf(num));
+    maRowElement.setTableNumberRowsRepeatedAttribute(num);
   }
 
   int getRowsRepeatedNumber() {
@@ -532,7 +531,7 @@ public class OdfTableRow {
       if (count == null) {
         mRowsRepeatedNumber = 1;
       } else {
-        mRowsRepeatedNumber = count.intValue();
+        mRowsRepeatedNumber = count;
       }
     }
     return mRowsRepeatedNumber;

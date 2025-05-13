@@ -75,7 +75,7 @@ public class NumberNumberElement extends OdfElement {
         (NumberDecimalPlacesAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "decimal-places");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -90,7 +90,7 @@ public class NumberNumberElement extends OdfElement {
     NumberDecimalPlacesAttribute attr =
         new NumberDecimalPlacesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberDecimalPlacesValue.intValue());
+    attr.setIntValue(numberDecimalPlacesValue);
   }
 
   /**
@@ -135,7 +135,7 @@ public class NumberNumberElement extends OdfElement {
         (NumberDisplayFactorAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "display-factor");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return Double.valueOf(NumberDisplayFactorAttribute.DEFAULT_VALUE);
   }
@@ -150,7 +150,7 @@ public class NumberNumberElement extends OdfElement {
     NumberDisplayFactorAttribute attr =
         new NumberDisplayFactorAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(numberDisplayFactorValue.doubleValue());
+    attr.setDoubleValue(numberDisplayFactorValue);
   }
 
   /**
@@ -164,7 +164,7 @@ public class NumberNumberElement extends OdfElement {
     NumberGroupingAttribute attr =
         (NumberGroupingAttribute) getOdfAttribute(OdfDocumentNamespace.NUMBER, "grouping");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(NumberGroupingAttribute.DEFAULT_VALUE);
   }
@@ -178,7 +178,7 @@ public class NumberNumberElement extends OdfElement {
   public void setNumberGroupingAttribute(Boolean numberGroupingValue) {
     NumberGroupingAttribute attr = new NumberGroupingAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(numberGroupingValue.booleanValue());
+    attr.setBooleanValue(numberGroupingValue);
   }
 
   /**
@@ -193,7 +193,7 @@ public class NumberNumberElement extends OdfElement {
         (NumberMinIntegerDigitsAttribute)
             getOdfAttribute(OdfDocumentNamespace.NUMBER, "min-integer-digits");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -208,7 +208,7 @@ public class NumberNumberElement extends OdfElement {
     NumberMinIntegerDigitsAttribute attr =
         new NumberMinIntegerDigitsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(numberMinIntegerDigitsValue.intValue());
+    attr.setIntValue(numberMinIntegerDigitsValue);
   }
 
   /**

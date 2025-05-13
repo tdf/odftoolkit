@@ -179,7 +179,7 @@ public class OdfListStyleTest {
 
   private void checkNumber(String message, String cssLength, double expected) {
     String cssAmount = cssLength.replaceFirst("cm", "");
-    double amount = Double.valueOf(cssAmount);
+    double amount = Double.parseDouble(cssAmount);
     Assert.assertEquals(message + " incorrect", expected, amount, 0.01);
   }
 }

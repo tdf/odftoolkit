@@ -58,7 +58,7 @@ public class OfficeMetaTest {
   private String dccreator = "Mr. fictionalTestUser";
   private String printedBy = "persia p";
   private String language = "EN_us";
-  private Integer editingCycles = Integer.valueOf(4);
+  private Integer editingCycles = 4;
   private Duration editingDuration = Duration.valueOf("P49DT11H8M9S");
   private SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 

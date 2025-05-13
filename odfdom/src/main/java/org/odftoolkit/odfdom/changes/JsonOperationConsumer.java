@@ -1740,12 +1740,12 @@ public class JsonOperationConsumer {
             }
             double heightFactor = 1;
             double widthFactor = 1;
-            if (newHeight > 0 && newHeight != gHeight.intValue()) {
-              heightFactor = (double) newHeight / (double) gHeight.intValue();
+            if (newHeight > 0 && newHeight != gHeight) {
+              heightFactor = (double) newHeight / (double) gHeight;
               targetNode.setUserData("groupHeight", newHeight, null);
             }
-            if (newWidth > 0 && newWidth != gWidth.intValue()) {
-              widthFactor = (double) newWidth / (double) gWidth.intValue();
+            if (newWidth > 0 && newWidth != gWidth) {
+              widthFactor = (double) newWidth / (double) gWidth;
               targetNode.setUserData("groupWidth", newHeight, null);
             }
             Node child = targetNode.getFirstChild();
@@ -5335,7 +5335,7 @@ public class JsonOperationConsumer {
       }
       if (noProof != null || language != null) {
         Object newLanguage = language;
-        if ((noProof instanceof Boolean && ((Boolean) noProof).booleanValue())
+        if ((noProof instanceof Boolean && (Boolean) noProof)
             || ((language instanceof String) && ((String) language).equals("none"))) {
           propertiesElement.setFoLanguageAttribute("zxx");
           propertiesElement.setStyleLanguageAsianAttribute("zxx");

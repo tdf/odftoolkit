@@ -116,20 +116,20 @@ public class OdfNumberStyle extends NumberNumberStyleElement {
         NumberScientificNumberElement s = (NumberScientificNumberElement) m;
         Boolean isGroup = s.getNumberGroupingAttribute();
         Integer digits = s.getNumberMinIntegerDigitsAttribute();
-        int digitCount = digits == null ? 0 : digits.intValue();
+        int digitCount = digits == null ? 0 : digits;
         for (int digit = 0; digit < digitCount; ++digit) {
           result += '0';
         }
         Integer places = s.getNumberDecimalPlacesAttribute();
         if (places != null) {
           result += '.';
-          int placeCount = places.intValue();
+          int placeCount = places;
           while (--placeCount >= 0) {
             result += '0';
           }
         }
         result += 'E';
-        if (isGroup != null && isGroup.booleanValue()) {
+        if (isGroup != null && isGroup) {
           // fill with #,##...
           if (digitCount < 4) {
             String fill = "#,###";
@@ -141,7 +141,7 @@ public class OdfNumberStyle extends NumberNumberStyleElement {
         Integer exp = s.getNumberMinExponentDigitsAttribute();
         if (exp != null) {
           result += '+';
-          int exponents = exp.intValue();
+          int exponents = exp;
           while (--exponents >= 0) {
             result += '0';
           }

@@ -194,7 +194,7 @@ public class OdfCurrencyStyleTest {
     nodeGrouped =
         (number.getNumberGroupingAttribute() == null)
             ? false
-            : number.getNumberGroupingAttribute().booleanValue();
+            : number.getNumberGroupingAttribute();
     Assert.assertTrue("Grouping", grouped == nodeGrouped);
   }
 

@@ -104,7 +104,7 @@ public class DbDriverSettingsElement extends OdfElement {
         (DbIsFirstRowHeaderLineAttribute)
             getOdfAttribute(OdfDocumentNamespace.DB, "is-first-row-header-line");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(DbIsFirstRowHeaderLineAttribute.DEFAULT_VALUE);
   }
@@ -119,7 +119,7 @@ public class DbDriverSettingsElement extends OdfElement {
     DbIsFirstRowHeaderLineAttribute attr =
         new DbIsFirstRowHeaderLineAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dbIsFirstRowHeaderLineValue.booleanValue());
+    attr.setBooleanValue(dbIsFirstRowHeaderLineValue);
   }
 
   /**
@@ -135,7 +135,7 @@ public class DbDriverSettingsElement extends OdfElement {
         (DbParameterNameSubstitutionAttribute)
             getOdfAttribute(OdfDocumentNamespace.DB, "parameter-name-substitution");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(DbParameterNameSubstitutionAttribute.DEFAULT_VALUE);
   }
@@ -150,7 +150,7 @@ public class DbDriverSettingsElement extends OdfElement {
     DbParameterNameSubstitutionAttribute attr =
         new DbParameterNameSubstitutionAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dbParameterNameSubstitutionValue.booleanValue());
+    attr.setBooleanValue(dbParameterNameSubstitutionValue);
   }
 
   /**
@@ -164,7 +164,7 @@ public class DbDriverSettingsElement extends OdfElement {
     DbShowDeletedAttribute attr =
         (DbShowDeletedAttribute) getOdfAttribute(OdfDocumentNamespace.DB, "show-deleted");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(DbShowDeletedAttribute.DEFAULT_VALUE);
   }
@@ -178,7 +178,7 @@ public class DbDriverSettingsElement extends OdfElement {
   public void setDbShowDeletedAttribute(Boolean dbShowDeletedValue) {
     DbShowDeletedAttribute attr = new DbShowDeletedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dbShowDeletedValue.booleanValue());
+    attr.setBooleanValue(dbShowDeletedValue);
   }
 
   /**

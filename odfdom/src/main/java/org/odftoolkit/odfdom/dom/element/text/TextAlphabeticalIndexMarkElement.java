@@ -188,7 +188,7 @@ public class TextAlphabeticalIndexMarkElement extends OdfElement {
     TextMainEntryAttribute attr =
         (TextMainEntryAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "main-entry");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TextMainEntryAttribute.DEFAULT_VALUE);
   }
@@ -202,7 +202,7 @@ public class TextAlphabeticalIndexMarkElement extends OdfElement {
   public void setTextMainEntryAttribute(Boolean textMainEntryValue) {
     TextMainEntryAttribute attr = new TextMainEntryAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textMainEntryValue.booleanValue());
+    attr.setBooleanValue(textMainEntryValue);
   }
 
   /**

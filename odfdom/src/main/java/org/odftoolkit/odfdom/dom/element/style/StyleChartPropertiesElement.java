@@ -510,7 +510,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartAutoPositionAttribute attr =
         (ChartAutoPositionAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "auto-position");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -525,7 +525,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartAutoPositionAttribute attr =
         new ChartAutoPositionAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartAutoPositionValue.booleanValue());
+    attr.setBooleanValue(chartAutoPositionValue);
   }
 
   /**
@@ -539,7 +539,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartAutoSizeAttribute attr =
         (ChartAutoSizeAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "auto-size");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -553,7 +553,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartAutoSizeAttribute(Boolean chartAutoSizeValue) {
     ChartAutoSizeAttribute attr = new ChartAutoSizeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartAutoSizeValue.booleanValue());
+    attr.setBooleanValue(chartAutoSizeValue);
   }
 
   /**
@@ -597,7 +597,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartAxisPositionAttribute attr =
         (ChartAxisPositionAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "axis-position");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -612,7 +612,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartAxisPositionAttribute attr =
         new ChartAxisPositionAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(chartAxisPositionValue.doubleValue());
+    attr.setDoubleValue(chartAxisPositionValue);
   }
 
   /**
@@ -626,7 +626,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartConnectBarsAttribute attr =
         (ChartConnectBarsAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "connect-bars");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -640,7 +640,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartConnectBarsAttribute(Boolean chartConnectBarsValue) {
     ChartConnectBarsAttribute attr = new ChartConnectBarsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartConnectBarsValue.booleanValue());
+    attr.setBooleanValue(chartConnectBarsValue);
   }
 
   /**
@@ -685,7 +685,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartDataLabelSymbolAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "data-label-symbol");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -700,7 +700,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartDataLabelSymbolAttribute attr =
         new ChartDataLabelSymbolAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartDataLabelSymbolValue.booleanValue());
+    attr.setBooleanValue(chartDataLabelSymbolValue);
   }
 
   /**
@@ -715,7 +715,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartDataLabelTextAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "data-label-text");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -730,7 +730,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartDataLabelTextAttribute attr =
         new ChartDataLabelTextAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartDataLabelTextValue.booleanValue());
+    attr.setBooleanValue(chartDataLabelTextValue);
   }
 
   /**
@@ -744,7 +744,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartDeepAttribute attr =
         (ChartDeepAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "deep");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -758,7 +758,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartDeepAttribute(Boolean chartDeepValue) {
     ChartDeepAttribute attr = new ChartDeepAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartDeepValue.booleanValue());
+    attr.setBooleanValue(chartDeepValue);
   }
 
   /**
@@ -772,7 +772,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartDisplayLabelAttribute attr =
         (ChartDisplayLabelAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "display-label");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -787,7 +787,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartDisplayLabelAttribute attr =
         new ChartDisplayLabelAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartDisplayLabelValue.booleanValue());
+    attr.setBooleanValue(chartDisplayLabelValue);
   }
 
   /**
@@ -831,7 +831,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartErrorLowerIndicatorAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "error-lower-indicator");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -846,7 +846,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartErrorLowerIndicatorAttribute attr =
         new ChartErrorLowerIndicatorAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartErrorLowerIndicatorValue.booleanValue());
+    attr.setBooleanValue(chartErrorLowerIndicatorValue);
   }
 
   /**
@@ -861,7 +861,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartErrorLowerLimitAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "error-lower-limit");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -876,7 +876,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartErrorLowerLimitAttribute attr =
         new ChartErrorLowerLimitAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(chartErrorLowerLimitValue.doubleValue());
+    attr.setDoubleValue(chartErrorLowerLimitValue);
   }
 
   /**
@@ -920,7 +920,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartErrorMarginAttribute attr =
         (ChartErrorMarginAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "error-margin");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -934,7 +934,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartErrorMarginAttribute(Double chartErrorMarginValue) {
     ChartErrorMarginAttribute attr = new ChartErrorMarginAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(chartErrorMarginValue.doubleValue());
+    attr.setDoubleValue(chartErrorMarginValue);
   }
 
   /**
@@ -949,7 +949,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartErrorPercentageAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "error-percentage");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -964,7 +964,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartErrorPercentageAttribute attr =
         new ChartErrorPercentageAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(chartErrorPercentageValue.doubleValue());
+    attr.setDoubleValue(chartErrorPercentageValue);
   }
 
   /**
@@ -979,7 +979,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartErrorUpperIndicatorAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "error-upper-indicator");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -994,7 +994,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartErrorUpperIndicatorAttribute attr =
         new ChartErrorUpperIndicatorAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartErrorUpperIndicatorValue.booleanValue());
+    attr.setBooleanValue(chartErrorUpperIndicatorValue);
   }
 
   /**
@@ -1009,7 +1009,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartErrorUpperLimitAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "error-upper-limit");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -1024,7 +1024,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartErrorUpperLimitAttribute attr =
         new ChartErrorUpperLimitAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(chartErrorUpperLimitValue.doubleValue());
+    attr.setDoubleValue(chartErrorUpperLimitValue);
   }
 
   /**
@@ -1068,7 +1068,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartGapWidthAttribute attr =
         (ChartGapWidthAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "gap-width");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -1082,7 +1082,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartGapWidthAttribute(Integer chartGapWidthValue) {
     ChartGapWidthAttribute attr = new ChartGapWidthAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(chartGapWidthValue.intValue());
+    attr.setIntValue(chartGapWidthValue);
   }
 
   /**
@@ -1097,7 +1097,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartGroupBarsPerAxisAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "group-bars-per-axis");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1112,7 +1112,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartGroupBarsPerAxisAttribute attr =
         new ChartGroupBarsPerAxisAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartGroupBarsPerAxisValue.booleanValue());
+    attr.setBooleanValue(chartGroupBarsPerAxisValue);
   }
 
   /**
@@ -1155,7 +1155,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartIncludeHiddenCellsAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "include-hidden-cells");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1170,7 +1170,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartIncludeHiddenCellsAttribute attr =
         new ChartIncludeHiddenCellsAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartIncludeHiddenCellsValue.booleanValue());
+    attr.setBooleanValue(chartIncludeHiddenCellsValue);
   }
 
   /**
@@ -1213,7 +1213,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartIntervalMajorAttribute attr =
         (ChartIntervalMajorAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "interval-major");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -1228,7 +1228,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartIntervalMajorAttribute attr =
         new ChartIntervalMajorAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(chartIntervalMajorValue.doubleValue());
+    attr.setDoubleValue(chartIntervalMajorValue);
   }
 
   /**
@@ -1243,7 +1243,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartIntervalMinorDivisorAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "interval-minor-divisor");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -1258,7 +1258,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartIntervalMinorDivisorAttribute attr =
         new ChartIntervalMinorDivisorAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(chartIntervalMinorDivisorValue.intValue());
+    attr.setIntValue(chartIntervalMinorDivisorValue);
   }
 
   /**
@@ -1273,7 +1273,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartJapaneseCandleStickAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "japanese-candle-stick");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1288,7 +1288,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartJapaneseCandleStickAttribute attr =
         new ChartJapaneseCandleStickAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartJapaneseCandleStickValue.booleanValue());
+    attr.setBooleanValue(chartJapaneseCandleStickValue);
   }
 
   /**
@@ -1391,7 +1391,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartLinesAttribute attr =
         (ChartLinesAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "lines");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1405,7 +1405,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartLinesAttribute(Boolean chartLinesValue) {
     ChartLinesAttribute attr = new ChartLinesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartLinesValue.booleanValue());
+    attr.setBooleanValue(chartLinesValue);
   }
 
   /**
@@ -1421,7 +1421,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartLinkDataStyleToSourceAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "link-data-style-to-source");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1436,7 +1436,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartLinkDataStyleToSourceAttribute attr =
         new ChartLinkDataStyleToSourceAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartLinkDataStyleToSourceValue.booleanValue());
+    attr.setBooleanValue(chartLinkDataStyleToSourceValue);
   }
 
   /**
@@ -1450,7 +1450,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartLogarithmicAttribute attr =
         (ChartLogarithmicAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "logarithmic");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1464,7 +1464,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartLogarithmicAttribute(Boolean chartLogarithmicValue) {
     ChartLogarithmicAttribute attr = new ChartLogarithmicAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartLogarithmicValue.booleanValue());
+    attr.setBooleanValue(chartLogarithmicValue);
   }
 
   /**
@@ -1478,7 +1478,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartMaximumAttribute attr =
         (ChartMaximumAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "maximum");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -1492,7 +1492,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartMaximumAttribute(Double chartMaximumValue) {
     ChartMaximumAttribute attr = new ChartMaximumAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(chartMaximumValue.doubleValue());
+    attr.setDoubleValue(chartMaximumValue);
   }
 
   /**
@@ -1506,7 +1506,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartMeanValueAttribute attr =
         (ChartMeanValueAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "mean-value");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1520,7 +1520,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartMeanValueAttribute(Boolean chartMeanValueValue) {
     ChartMeanValueAttribute attr = new ChartMeanValueAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartMeanValueValue.booleanValue());
+    attr.setBooleanValue(chartMeanValueValue);
   }
 
   /**
@@ -1534,7 +1534,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartMinimumAttribute attr =
         (ChartMinimumAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "minimum");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -1548,7 +1548,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartMinimumAttribute(Double chartMinimumValue) {
     ChartMinimumAttribute attr = new ChartMinimumAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(chartMinimumValue.doubleValue());
+    attr.setDoubleValue(chartMinimumValue);
   }
 
   /**
@@ -1562,7 +1562,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartOriginAttribute attr =
         (ChartOriginAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "origin");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Double.valueOf(attr.doubleValue());
+      return attr.doubleValue();
     }
     return null;
   }
@@ -1576,7 +1576,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartOriginAttribute(Double chartOriginValue) {
     ChartOriginAttribute attr = new ChartOriginAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setDoubleValue(chartOriginValue.doubleValue());
+    attr.setDoubleValue(chartOriginValue);
   }
 
   /**
@@ -1590,7 +1590,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartOverlapAttribute attr =
         (ChartOverlapAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "overlap");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -1604,7 +1604,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartOverlapAttribute(Integer chartOverlapValue) {
     ChartOverlapAttribute attr = new ChartOverlapAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(chartOverlapValue.intValue());
+    attr.setIntValue(chartOverlapValue);
   }
 
   /**
@@ -1618,7 +1618,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartPercentageAttribute attr =
         (ChartPercentageAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "percentage");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1632,7 +1632,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartPercentageAttribute(Boolean chartPercentageValue) {
     ChartPercentageAttribute attr = new ChartPercentageAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartPercentageValue.booleanValue());
+    attr.setBooleanValue(chartPercentageValue);
   }
 
   /**
@@ -1646,7 +1646,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartPieOffsetAttribute attr =
         (ChartPieOffsetAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "pie-offset");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -1660,7 +1660,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartPieOffsetAttribute(Integer chartPieOffsetValue) {
     ChartPieOffsetAttribute attr = new ChartPieOffsetAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(chartPieOffsetValue.intValue());
+    attr.setIntValue(chartPieOffsetValue);
   }
 
   /**
@@ -1705,7 +1705,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartReverseDirectionAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "reverse-direction");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1720,7 +1720,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartReverseDirectionAttribute attr =
         new ChartReverseDirectionAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartReverseDirectionValue.booleanValue());
+    attr.setBooleanValue(chartReverseDirectionValue);
   }
 
   /**
@@ -1735,7 +1735,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartRightAngledAxesAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "right-angled-axes");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1750,7 +1750,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartRightAngledAxesAttribute attr =
         new ChartRightAngledAxesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartRightAngledAxesValue.booleanValue());
+    attr.setBooleanValue(chartRightAngledAxesValue);
   }
 
   /**
@@ -1764,7 +1764,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartScaleTextAttribute attr =
         (ChartScaleTextAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "scale-text");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1778,7 +1778,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartScaleTextAttribute(Boolean chartScaleTextValue) {
     ChartScaleTextAttribute attr = new ChartScaleTextAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartScaleTextValue.booleanValue());
+    attr.setBooleanValue(chartScaleTextValue);
   }
 
   /**
@@ -1850,7 +1850,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartSortByXValuesAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "sort-by-x-values");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1865,7 +1865,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartSortByXValuesAttribute attr =
         new ChartSortByXValuesAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartSortByXValuesValue.booleanValue());
+    attr.setBooleanValue(chartSortByXValuesValue);
   }
 
   /**
@@ -1879,7 +1879,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartSplineOrderAttribute attr =
         (ChartSplineOrderAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "spline-order");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -1893,7 +1893,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartSplineOrderAttribute(Integer chartSplineOrderValue) {
     ChartSplineOrderAttribute attr = new ChartSplineOrderAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(chartSplineOrderValue.intValue());
+    attr.setIntValue(chartSplineOrderValue);
   }
 
   /**
@@ -1908,7 +1908,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartSplineResolutionAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "spline-resolution");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -1923,7 +1923,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartSplineResolutionAttribute attr =
         new ChartSplineResolutionAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(chartSplineResolutionValue.intValue());
+    attr.setIntValue(chartSplineResolutionValue);
   }
 
   /**
@@ -1937,7 +1937,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartStackedAttribute attr =
         (ChartStackedAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "stacked");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -1951,7 +1951,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartStackedAttribute(Boolean chartStackedValue) {
     ChartStackedAttribute attr = new ChartStackedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartStackedValue.booleanValue());
+    attr.setBooleanValue(chartStackedValue);
   }
 
   /**
@@ -2080,7 +2080,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartTextOverlapAttribute attr =
         (ChartTextOverlapAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "text-overlap");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -2094,7 +2094,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartTextOverlapAttribute(Boolean chartTextOverlapValue) {
     ChartTextOverlapAttribute attr = new ChartTextOverlapAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartTextOverlapValue.booleanValue());
+    attr.setBooleanValue(chartTextOverlapValue);
   }
 
   /**
@@ -2109,7 +2109,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartThreeDimensionalAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "three-dimensional");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -2124,7 +2124,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartThreeDimensionalAttribute attr =
         new ChartThreeDimensionalAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartThreeDimensionalValue.booleanValue());
+    attr.setBooleanValue(chartThreeDimensionalValue);
   }
 
   /**
@@ -2169,7 +2169,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartTickMarksMajorInnerAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "tick-marks-major-inner");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -2184,7 +2184,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartTickMarksMajorInnerAttribute attr =
         new ChartTickMarksMajorInnerAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartTickMarksMajorInnerValue.booleanValue());
+    attr.setBooleanValue(chartTickMarksMajorInnerValue);
   }
 
   /**
@@ -2199,7 +2199,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartTickMarksMajorOuterAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "tick-marks-major-outer");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -2214,7 +2214,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartTickMarksMajorOuterAttribute attr =
         new ChartTickMarksMajorOuterAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartTickMarksMajorOuterValue.booleanValue());
+    attr.setBooleanValue(chartTickMarksMajorOuterValue);
   }
 
   /**
@@ -2229,7 +2229,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartTickMarksMinorInnerAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "tick-marks-minor-inner");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -2244,7 +2244,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartTickMarksMinorInnerAttribute attr =
         new ChartTickMarksMinorInnerAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartTickMarksMinorInnerValue.booleanValue());
+    attr.setBooleanValue(chartTickMarksMinorInnerValue);
   }
 
   /**
@@ -2259,7 +2259,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
         (ChartTickMarksMinorOuterAttribute)
             getOdfAttribute(OdfDocumentNamespace.CHART, "tick-marks-minor-outer");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -2274,7 +2274,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartTickMarksMinorOuterAttribute attr =
         new ChartTickMarksMinorOuterAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartTickMarksMinorOuterValue.booleanValue());
+    attr.setBooleanValue(chartTickMarksMinorOuterValue);
   }
 
   /**
@@ -2318,7 +2318,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartVerticalAttribute attr =
         (ChartVerticalAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "vertical");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -2332,7 +2332,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartVerticalAttribute(Boolean chartVerticalValue) {
     ChartVerticalAttribute attr = new ChartVerticalAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartVerticalValue.booleanValue());
+    attr.setBooleanValue(chartVerticalValue);
   }
 
   /**
@@ -2346,7 +2346,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     ChartVisibleAttribute attr =
         (ChartVisibleAttribute) getOdfAttribute(OdfDocumentNamespace.CHART, "visible");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -2360,7 +2360,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setChartVisibleAttribute(Boolean chartVisibleValue) {
     ChartVisibleAttribute attr = new ChartVisibleAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(chartVisibleValue.booleanValue());
+    attr.setBooleanValue(chartVisibleValue);
   }
 
   /**
@@ -2431,7 +2431,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
     TextLineBreakAttribute attr =
         (TextLineBreakAttribute) getOdfAttribute(OdfDocumentNamespace.TEXT, "line-break");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -2445,7 +2445,7 @@ public class StyleChartPropertiesElement extends OdfStylePropertiesBase {
   public void setTextLineBreakAttribute(Boolean textLineBreakValue) {
     TextLineBreakAttribute attr = new TextLineBreakAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(textLineBreakValue.booleanValue());
+    attr.setBooleanValue(textLineBreakValue);
   }
 
   /**

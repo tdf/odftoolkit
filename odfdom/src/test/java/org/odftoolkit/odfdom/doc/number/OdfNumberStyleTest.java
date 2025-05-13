@@ -187,7 +187,7 @@ public class OdfNumberStyleTest {
     nodeGrouped =
         (number.getNumberGroupingAttribute() == null)
             ? false
-            : number.getNumberGroupingAttribute().booleanValue();
+            : number.getNumberGroupingAttribute();
     Assert.assertTrue("Grouping", grouped == nodeGrouped);
   }
 

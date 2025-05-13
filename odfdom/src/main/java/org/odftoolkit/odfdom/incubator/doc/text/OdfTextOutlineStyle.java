@@ -47,7 +47,7 @@ public class OdfTextOutlineStyle extends TextOutlineStyleElement {
     while (levelElement != null) {
       if (levelElement instanceof OdfTextOutlineLevelStyle) {
         OdfTextOutlineLevelStyle levelStyle = (OdfTextOutlineLevelStyle) levelElement;
-        if (levelStyle.getTextLevelAttribute().intValue() == level) {
+        if (levelStyle.getTextLevelAttribute() == level) {
           return levelStyle;
         }
       }

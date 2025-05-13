@@ -66,7 +66,7 @@ public class Percent implements OdfFieldDataType, OdfDataType {
 
     int n = stringValue.indexOf("%");
     if (n != -1) {
-      return new Percent(Double.valueOf(stringValue.substring(0, n)).doubleValue() / 100);
+      return new Percent(Double.parseDouble(stringValue.substring(0, n)) / 100);
     } else {
       throw new IllegalArgumentException("parameter is invalid for datatype Percent");
     }

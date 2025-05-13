@@ -74,7 +74,7 @@ public class TableSubtotalRulesElement extends OdfElement {
         (TableBindStylesToContentAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "bind-styles-to-content");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TableBindStylesToContentAttribute.DEFAULT_VALUE);
   }
@@ -89,7 +89,7 @@ public class TableSubtotalRulesElement extends OdfElement {
     TableBindStylesToContentAttribute attr =
         new TableBindStylesToContentAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableBindStylesToContentValue.booleanValue());
+    attr.setBooleanValue(tableBindStylesToContentValue);
   }
 
   /**
@@ -134,7 +134,7 @@ public class TableSubtotalRulesElement extends OdfElement {
         (TablePageBreaksOnGroupChangeAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "page-breaks-on-group-change");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TablePageBreaksOnGroupChangeAttribute.DEFAULT_VALUE);
   }
@@ -149,7 +149,7 @@ public class TableSubtotalRulesElement extends OdfElement {
     TablePageBreaksOnGroupChangeAttribute attr =
         new TablePageBreaksOnGroupChangeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tablePageBreaksOnGroupChangeValue.booleanValue());
+    attr.setBooleanValue(tablePageBreaksOnGroupChangeValue);
   }
 
   /**

@@ -257,7 +257,7 @@ public class DrawFrameElement extends DrawShapeElementBase {
         (PresentationPlaceholderAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "placeholder");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -272,7 +272,7 @@ public class DrawFrameElement extends DrawShapeElementBase {
     PresentationPlaceholderAttribute attr =
         new PresentationPlaceholderAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(presentationPlaceholderValue.booleanValue());
+    attr.setBooleanValue(presentationPlaceholderValue);
   }
 
   /**
@@ -288,7 +288,7 @@ public class DrawFrameElement extends DrawShapeElementBase {
         (PresentationUserTransformedAttribute)
             getOdfAttribute(OdfDocumentNamespace.PRESENTATION, "user-transformed");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -303,7 +303,7 @@ public class DrawFrameElement extends DrawShapeElementBase {
     PresentationUserTransformedAttribute attr =
         new PresentationUserTransformedAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(presentationUserTransformedValue.booleanValue());
+    attr.setBooleanValue(presentationUserTransformedValue);
   }
 
   /**

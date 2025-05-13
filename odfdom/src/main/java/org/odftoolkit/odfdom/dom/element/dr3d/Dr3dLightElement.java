@@ -131,7 +131,7 @@ public class Dr3dLightElement extends OdfElement {
     Dr3dEnabledAttribute attr =
         (Dr3dEnabledAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "enabled");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -145,7 +145,7 @@ public class Dr3dLightElement extends OdfElement {
   public void setDr3dEnabledAttribute(Boolean dr3dEnabledValue) {
     Dr3dEnabledAttribute attr = new Dr3dEnabledAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dr3dEnabledValue.booleanValue());
+    attr.setBooleanValue(dr3dEnabledValue);
   }
 
   /**
@@ -159,7 +159,7 @@ public class Dr3dLightElement extends OdfElement {
     Dr3dSpecularAttribute attr =
         (Dr3dSpecularAttribute) getOdfAttribute(OdfDocumentNamespace.DR3D, "specular");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -173,7 +173,7 @@ public class Dr3dLightElement extends OdfElement {
   public void setDr3dSpecularAttribute(Boolean dr3dSpecularValue) {
     Dr3dSpecularAttribute attr = new Dr3dSpecularAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(dr3dSpecularValue.booleanValue());
+    attr.setBooleanValue(dr3dSpecularValue);
   }
 
   /**

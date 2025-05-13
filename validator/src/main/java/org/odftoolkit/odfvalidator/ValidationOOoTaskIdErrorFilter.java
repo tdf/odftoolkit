@@ -88,7 +88,7 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
           m_aEntry = new Entry(aTaskId);
           String aBuildId = aAttributes.getValue(RESOLVED_IN);
           if (aBuildId != null && aBuildId.length() > 0)
-            m_aEntry.m_nBuildId = Integer.valueOf(aBuildId);
+            m_aEntry.m_nBuildId = Integer.parseInt(aBuildId);
         }
       }
     }
@@ -173,7 +173,7 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
         int nStart = nPos + 6;
         nPos = aGenerator.indexOf("$", nStart);
         nBuildId =
-            Integer.valueOf(
+            Integer.parseInt(
                 nPos > 0 ? aGenerator.substring(nStart, nPos) : aGenerator.substring(nStart));
       }
     }

@@ -70,7 +70,7 @@ public class StartKeyGenerationElement extends OdfElement {
   public Integer getKeySizeAttribute() {
     KeySizeAttribute attr = (KeySizeAttribute) getOdfAttribute(KeySizeAttribute.ATTRIBUTE_NAME);
     if (attr != null) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -84,7 +84,7 @@ public class StartKeyGenerationElement extends OdfElement {
   public void setKeySizeAttribute(Integer keySizeValue) {
     KeySizeAttribute attr = new KeySizeAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(keySizeValue.intValue());
+    attr.setIntValue(keySizeValue);
   }
 
   /**

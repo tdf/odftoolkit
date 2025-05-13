@@ -286,7 +286,7 @@ public class StyleTableRowPropertiesElement extends OdfStylePropertiesBase {
         (StyleUseOptimalRowHeightAttribute)
             getOdfAttribute(OdfDocumentNamespace.STYLE, "use-optimal-row-height");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -301,7 +301,7 @@ public class StyleTableRowPropertiesElement extends OdfStylePropertiesBase {
     StyleUseOptimalRowHeightAttribute attr =
         new StyleUseOptimalRowHeightAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(styleUseOptimalRowHeightValue.booleanValue());
+    attr.setBooleanValue(styleUseOptimalRowHeightValue);
   }
 
   /**

@@ -107,7 +107,7 @@ public class TableSortElement extends OdfElement {
         (TableBindStylesToContentAttribute)
             getOdfAttribute(OdfDocumentNamespace.TABLE, "bind-styles-to-content");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return Boolean.valueOf(TableBindStylesToContentAttribute.DEFAULT_VALUE);
   }
@@ -122,7 +122,7 @@ public class TableSortElement extends OdfElement {
     TableBindStylesToContentAttribute attr =
         new TableBindStylesToContentAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(tableBindStylesToContentValue.booleanValue());
+    attr.setBooleanValue(tableBindStylesToContentValue);
   }
 
   /**

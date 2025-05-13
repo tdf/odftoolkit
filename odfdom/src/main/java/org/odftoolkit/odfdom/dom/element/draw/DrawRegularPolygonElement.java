@@ -115,7 +115,7 @@ public class DrawRegularPolygonElement extends DrawShapeElementBase {
     DrawConcaveAttribute attr =
         (DrawConcaveAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "concave");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Boolean.valueOf(attr.booleanValue());
+      return attr.booleanValue();
     }
     return null;
   }
@@ -129,7 +129,7 @@ public class DrawRegularPolygonElement extends DrawShapeElementBase {
   public void setDrawConcaveAttribute(Boolean drawConcaveValue) {
     DrawConcaveAttribute attr = new DrawConcaveAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setBooleanValue(drawConcaveValue.booleanValue());
+    attr.setBooleanValue(drawConcaveValue);
   }
 
   /**
@@ -145,7 +145,7 @@ public class DrawRegularPolygonElement extends DrawShapeElementBase {
     DrawCornersAttribute attr =
         (DrawCornersAttribute) getOdfAttribute(OdfDocumentNamespace.DRAW, "corners");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -159,7 +159,7 @@ public class DrawRegularPolygonElement extends DrawShapeElementBase {
   public void setDrawCornersAttribute(Integer drawCornersValue) {
     DrawCornersAttribute attr = new DrawCornersAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(drawCornersValue.intValue());
+    attr.setIntValue(drawCornersValue);
   }
 
   /**

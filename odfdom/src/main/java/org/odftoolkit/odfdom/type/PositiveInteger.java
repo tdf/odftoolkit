@@ -62,7 +62,7 @@ public class PositiveInteger implements OdfDataType {
    */
   public static PositiveInteger valueOf(String stringValue) throws NumberFormatException {
     String aTmp = stringValue.trim();
-    int n = Integer.valueOf(aTmp);
+    int n = Integer.parseInt(aTmp);
     return new PositiveInteger(n);
   }
 
@@ -86,7 +86,7 @@ public class PositiveInteger implements OdfDataType {
     if (integerValue == null) {
       return false;
     }
-    if (integerValue.intValue() < 1) {
+    if (integerValue < 1) {
       return false;
     } else {
       return true;

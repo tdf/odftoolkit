@@ -102,7 +102,7 @@ public class TableSortByElement extends OdfElement {
     TableFieldNumberAttribute attr =
         (TableFieldNumberAttribute) getOdfAttribute(OdfDocumentNamespace.TABLE, "field-number");
     if (attr != null && !attr.getValue().isEmpty()) {
-      return Integer.valueOf(attr.intValue());
+      return attr.intValue();
     }
     return null;
   }
@@ -116,7 +116,7 @@ public class TableSortByElement extends OdfElement {
   public void setTableFieldNumberAttribute(Integer tableFieldNumberValue) {
     TableFieldNumberAttribute attr = new TableFieldNumberAttribute((OdfFileDom) this.ownerDocument);
     setOdfAttribute(attr);
-    attr.setIntValue(tableFieldNumberValue.intValue());
+    attr.setIntValue(tableFieldNumberValue);
   }
 
   /**
