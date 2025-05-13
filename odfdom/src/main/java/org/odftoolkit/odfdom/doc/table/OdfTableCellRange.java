@@ -300,7 +300,7 @@ public class OdfTableCellRange {
                 parentRow.getOdfElement().removeChild(cell);
               } else {
                 coveredCell.setTableNumberColumnsRepeatedAttribute(
-                    new Integer(mnEndColumn - j + 1));
+                    Integer.valueOf(mnEndColumn - j + 1));
                 cell.setTableNumberColumnsRepeatedAttribute(Integer.valueOf(-num));
               }
 

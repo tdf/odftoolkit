@@ -1131,7 +1131,7 @@ public class OdfTableCell {
     splitRepeatedCells();
     if (mCellElement instanceof TableTableCellElement) {
       ((TableTableCellElement) mCellElement)
-          .setTableNumberColumnsSpannedAttribute(new Integer(spannedNum));
+          .setTableNumberColumnsSpannedAttribute(Integer.valueOf(spannedNum));
     } else {
       throw new IllegalArgumentException();
     }
@@ -1147,7 +1147,7 @@ public class OdfTableCell {
     if (repeatedNum < 1) {
       repeatedNum = DEFAULT_COLUMNS_REPEATED_NUMBER;
     }
-    mCellElement.setTableNumberColumnsRepeatedAttribute(new Integer(repeatedNum));
+    mCellElement.setTableNumberColumnsRepeatedAttribute(Integer.valueOf(repeatedNum));
   }
 
   /**
@@ -1163,7 +1163,7 @@ public class OdfTableCell {
     splitRepeatedCells();
     if (mCellElement instanceof TableTableCellElement) {
       ((TableTableCellElement) mCellElement)
-          .setTableNumberRowsSpannedAttribute(new Integer(spannedNum));
+          .setTableNumberRowsSpannedAttribute(Integer.valueOf(spannedNum));
     } else {
       throw new IllegalArgumentException();
     }

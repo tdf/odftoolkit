@@ -279,7 +279,7 @@ public class TableCellTest {
     OdfTable tbl = ods.getTableByName("Sheet1");
     for (int i = 1; i <= 10; i++) {
       cell = tbl.getCellByPosition("A" + i);
-      cell.setDoubleValue(new Double(i));
+      cell.setDoubleValue(Double.valueOf(i));
     }
     cell = tbl.getCellByPosition("A11");
     cell.setFormula("=sum(A1:A10)");
@@ -900,7 +900,7 @@ public class TableCellTest {
     cell.setCurrencyFormat("$", formats[0]);
 
     cell = table.getCellByPosition("J2");
-    cell.setCurrencyValue(new Double(32), "CNY");
+    cell.setCurrencyValue(Double.valueOf(32), "CNY");
     cell.setCurrencyFormat("CNY", formats[1]);
 
     cell = table.getCellByPosition("J3");

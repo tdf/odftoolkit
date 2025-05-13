@@ -86,9 +86,7 @@ class OdfXMLHelper {
       throws SAXException, ParserConfigurationException, IOException, IllegalArgumentException,
           TransformerConfigurationException, TransformerException {
 
-    InputStream is = null;
-    try {
-      is = pkg.getInputStream(path);
+    try (InputStream is = pkg.getInputStream(path)) {
       XMLReader reader = newXMLReader(pkg);
 
       String uri = pkg.getBaseURI() + path;
@@ -104,14 +102,8 @@ class OdfXMLHelper {
       ins.setSystemId(uri);
 
       reader.parse(ins);
-    } catch (Exception ex) {
+    } catch (IOException ex) {
       LOG.log(Level.SEVERE, null, ex);
-    } finally {
-      try {
-        is.close();
-      } catch (IOException ex) {
-        LOG.log(Level.SEVERE, null, ex);
-      }
     }
   }
 

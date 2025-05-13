@@ -225,7 +225,7 @@ public class PackageTest {
       }
       ByteArrayOutputStream baos = new ByteArrayOutputStream();
       BufferedInputStream bis = new BufferedInputStream(fileStream);
-      StreamHelper.transformStream(bis, baos);
+      bis.transferTo(baos);
       fileBytes = baos.toByteArray();
     } catch (Exception e) {
       LOG.log(Level.SEVERE, null, e);

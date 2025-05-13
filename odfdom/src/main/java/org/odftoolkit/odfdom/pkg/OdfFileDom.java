@@ -215,9 +215,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
 
   protected void initialize(DefaultHandler handler, OdfFileDom dom)
       throws SAXException, IOException, ParserConfigurationException {
-    InputStream fileStream = null;
-    try {
-      fileStream = mPackage.getInputStream(mPackagePath);
+    try (InputStream fileStream = mPackage.getInputStream(mPackagePath)) {
       if (fileStream != null) {
         XMLReader xmlReader = mPackage.getXMLReader();
         String baseUri = Util.getRDFBaseUri(mPackage.getBaseURI(), mPackagePath);
@@ -236,17 +234,8 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
         InputSource xmlSource = new InputSource(fileStream);
         xmlReader.parse(xmlSource);
       }
-    } catch (IOException | ParserConfigurationException | SAXException ex) {
-      LOG.log(Level.SEVERE, null, ex);
-      throw ex;
-    } finally {
-      try {
-        if (fileStream != null) {
-          fileStream.close();
-        }
-      } catch (IOException iex) {
-        LOG.log(Level.SEVERE, null, iex);
-      }
+    } catch (IOException iex) {
+      LOG.log(Level.SEVERE, null, iex);
     }
   }
 
