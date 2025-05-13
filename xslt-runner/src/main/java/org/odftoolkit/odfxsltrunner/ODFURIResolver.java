@@ -72,8 +72,8 @@ class ODFURIResolver implements URIResolver {
         }
       }
 
-      StringBuffer aHRefBuffer = new StringBuffer(aHRef);
-      StringBuffer aFileEntryBuffer = new StringBuffer();
+      StringBuilder aHRefBuffer = new StringBuilder(aHRef);
+      StringBuilder aFileEntryBuffer = new StringBuilder();
       if (m_aFileEntryPath.contains("/"))
         aFileEntryBuffer.append(
             m_aFileEntryPath.substring(0, m_aFileEntryPath.lastIndexOf('/') + 1));

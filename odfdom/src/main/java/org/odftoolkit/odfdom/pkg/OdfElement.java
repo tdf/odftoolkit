@@ -2640,7 +2640,7 @@ public abstract class OdfElement extends ElementNSImpl {
           buffer.append(((TextSpanElement) node).getTextContent());
         } else if (node.getNodeName().equals("text:s")) {
           Integer count = ((TextSElement) node).getTextCAttribute();
-          for (int j = 0; j < (count != null ? count : 1); j++) buffer.append(' ');
+          buffer.append(" ".repeat(Math.max(0, (count != null ? count : 1))));
         } else if (node.getNodeName().equals("text:tab")) buffer.append('\t');
         else if (node.getNodeName().equals("text:line-break")) {
           String lineseperator = System.getProperty("line.separator");

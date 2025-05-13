@@ -2432,20 +2432,20 @@ public class OdfPackage implements Closeable {
       LOG.severe(errMsg);
       throw new IllegalArgumentException(errMsg);
     } else if (!mightBeExternalReference(path)) {
-      if (path.equals(EMPTY_STRING)) {
+      if (path.isEmpty()) {
         path = SLASH;
       } else {
         // exchange all backslash "\" with a slash "/"
-        if (path.indexOf('\\') != -1) {
+        if (path.contains("\\")) {
           path = BACK_SLASH_PATTERN.matcher(path).replaceAll(SLASH);
         }
         // exchange all double slash "//" with a slash "/"
-        while (path.indexOf("//") != -1) {
+        while (path.contains("//")) {
           path = DOUBLE_SLASH_PATTERN.matcher(path).replaceAll(SLASH);
         }
         // if directory replacements (e.g. ..) exist, resolve and remove
         // them
-        if (path.indexOf("/.") != -1 || path.indexOf("./") != -1) {
+        if (path.contains("/.") || path.contains("./")) {
           path = removeChangeDirectories(path);
         }
         if (path.startsWith(SLASH) && !path.equals(SLASH)) {

@@ -63,8 +63,8 @@ public abstract class Logger {
    * @return file name
    */
   protected String getName() {
-    StringBuffer aName = new StringBuffer(m_aFileName);
-    if (m_aEntryName != null && m_aEntryName.length() > 0) {
+    StringBuilder aName = new StringBuilder(m_aFileName);
+    if (m_aEntryName != null && !m_aEntryName.isEmpty()) {
       aName.append('/');
       aName.append(m_aEntryName);
     }
@@ -132,7 +132,7 @@ public abstract class Logger {
   }
 
   private void logMessage(String aPrefix, SAXParseException e, int nLevel) {
-    StringBuffer aLocation = new StringBuffer(e.getSystemId());
+    StringBuilder aLocation = new StringBuilder(e.getSystemId());
     aLocation.append(':');
     aLocation.append(e.getLineNumber());
     aLocation.append(": ");

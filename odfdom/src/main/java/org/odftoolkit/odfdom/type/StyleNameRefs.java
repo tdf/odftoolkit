@@ -42,7 +42,7 @@ public class StyleNameRefs implements OdfDataType {
     if (styleNames == null) {
       throw new IllegalArgumentException("parameter can not be null for StyleNameRefs");
     }
-    StringBuffer aRet = new StringBuffer();
+    StringBuilder aRet = new StringBuilder();
     Iterator<StyleName> aIter = styleNames.iterator();
     while (aIter.hasNext()) {
       if (aRet.length() > 0) {

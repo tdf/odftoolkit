@@ -126,9 +126,7 @@ public class OdfTextExtractor extends DefaultElementVisitor {
     if (count == null) {
       count = 1;
     }
-    for (int i = 0; i < count; i++) {
-      mTextBuilder.append(' ');
-    }
+    mTextBuilder.append(" ".repeat(Math.max(0, count)));
   }
 
   /* (non-Javadoc)

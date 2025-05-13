@@ -42,7 +42,7 @@ public class IDREFS implements OdfDataType {
     if ((idRefList == null) || (idRefList.size() == 0)) {
       throw new IllegalArgumentException("parameter can not be null for IDREFS");
     }
-    StringBuffer aRet = new StringBuffer();
+    StringBuilder aRet = new StringBuilder();
     Iterator<IDREF> aIter = idRefList.iterator();
     while (aIter.hasNext()) {
       if (aRet.length() > 0) {

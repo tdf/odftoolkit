@@ -47,7 +47,7 @@ public class CellRangeAddressList implements OdfDataType {
       throw new IllegalArgumentException("parameter can not be null for CellRangeAddressList");
     }
 
-    StringBuffer aRet = new StringBuffer();
+    StringBuilder aRet = new StringBuilder();
     Iterator<CellRangeAddress> aIter = cellRangeAddressList.iterator();
     while (aIter.hasNext()) {
       if (aRet.length() > 0) {
