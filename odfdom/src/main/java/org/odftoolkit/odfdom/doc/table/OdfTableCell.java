@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Calendar;
@@ -109,6 +110,87 @@ public class OdfTableCell {
     mnRepeatedRowIndex = repeatedRowIndex;
     mOwnerTable = getTable();
     mDocument = ((OdfDocument) ((OdfFileDom) mCellElement.getOwnerDocument()).getDocument());
+  }
+
+  /**
+   * Converts the given {@code LocalDate} to a {@code Calendar} instance.
+   * <p>
+   * The {@code Calendar} instance will be created with the system default time zone.
+   *
+   * @param date the {@code LocalDate} to be converted; if null, the method will return null
+   * @return a {@code Calendar} instance representing the same date as the given {@code LocalDate},
+   *         or null if the input date is null
+   */
+  private static Calendar toCalendar(LocalDate date) {
+    if (date == null) {
+      return null;
+    }
+    return GregorianCalendar.from(
+      date.atStartOfDay(ZoneId.systemDefault())
+    );
+  }
+
+  /**
+   * Converts a {@code LocalDateTime} to a {@code Calendar} instance.
+   * <p>
+   * The {@code Calendar} instance will be created with the system default time zone.
+   *
+   * @param datetime the {@code LocalDateTime} to be converted, or {@code null} if no conversion is needed
+   * @return a {@code Calendar} representing the same point in time as the given {@code LocalDateTime},
+   *         or {@code null} if the input is {@code null}
+   */
+  private static Calendar toCalendar(LocalDateTime datetime) {
+    if (datetime == null) {
+      return null;
+    }
+    return GregorianCalendar.from(
+      datetime.atZone(ZoneId.systemDefault())
+    );
+  }
+
+
+  /**
+   * Converts a given {@code LocalTime} to a {@code Calendar} instance.
+   * <p>
+   * The {@code Calendar} instance will be created with the system default time zone.
+   *
+   * @param time the {@code LocalTime} to be converted; if {@code null}, the method returns {@code null}.
+   * @return a {@code Calendar} object representing the given time on the system's current date and default time zone,
+   *         or {@code null} if the input {@code time} is {@code null}.
+   */
+  private static Calendar toCalendar(LocalTime time) {
+    if (time == null) {
+      return null;
+    }
+    return GregorianCalendar.from(
+      time.atDate(LocalDate.now()).atZone(ZoneId.systemDefault())
+    );
+  }
+
+  /**
+   * Converts a {@code Calendar} instance to a {@code LocalDateTime}.
+   *
+   * @param date the {@code Calendar} instance to convert; may be null
+   * @return the equivalent {@code LocalDateTime}, or null if the input is null
+   */
+  private static LocalDateTime toLocalDateTime(Calendar date) {
+    if (date == null) {
+      return null;
+    }
+    return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+  }
+
+  /**
+   * Converts a {@code Calendar} instance to a {@code LocalTime}.
+   *
+   * @param date the {@code Calendar} instance to convert; may be null
+   * @return the equivalent {@code LocalTime}, or null if the input is null
+   */
+  private static LocalTime toLocalTime(Calendar date) {
+    if (date == null) {
+      return null;
+    }
+    return toLocalDateTime(date).toLocalTime();
   }
 
   /**
@@ -813,31 +895,6 @@ public class OdfTableCell {
     return toCalendar(getLocalDateTimeValue());
   }
 
-  private Calendar toCalendar(LocalDate date) {
-    if (date == null) {
-      return null;
-    }
-    return GregorianCalendar.from(
-      date.atStartOfDay(ZoneId.systemDefault())
-    );
-  }
-
-  private Calendar toCalendar(LocalDateTime datetime) {
-    if (datetime == null) {
-      return null;
-    }
-    return GregorianCalendar.from(
-      datetime.atZone(ZoneId.systemDefault())
-    );
-  }
-
-  private LocalDateTime toLocalDateTime(Calendar date) {
-    if (date == null) {
-      return null;
-    }
-    return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
-  }
-
   /**
    * Set the cell value as a date, and set the value type to be "date".
    * <p>
@@ -966,18 +1023,7 @@ public class OdfTableCell {
    */
   @Deprecated
   public Calendar getTimeValue() {
-    if (getTypeAttr() == OfficeValueTypeAttribute.Value.TIME) {
-      String timeStr = mCellElement.getOfficeTimeValueAttribute();
-      Date date = parseString(timeStr, DEFAULT_TIME_FORMAT);
-      Calendar calender = Calendar.getInstance();
-      calender.setTime(date);
-      calender.clear(Calendar.YEAR);
-      calender.clear(Calendar.MONTH);
-      calender.clear(Calendar.DAY_OF_MONTH);
-      return calender;
-    } else {
-      throw new IllegalArgumentException();
-    }
+    return toCalendar(getLocalTimeValue());
   }
 
   /**
@@ -988,25 +1034,7 @@ public class OdfTableCell {
    *     will be thrown.
    */
   public void setTimeValue(Calendar time) {
-    if (time == null) {
-      throw new IllegalArgumentException("time shouldn't be null.");
-    }
-    splitRepeatedCells();
-    setTypeAttr(OfficeValueTypeAttribute.Value.TIME);
-    SimpleDateFormat simpleFormat = new SimpleDateFormat(DEFAULT_TIME_FORMAT);
-    String svalue = simpleFormat.format(time.getTime());
-    mCellElement.setOfficeTimeValueAttribute(svalue);
-    setDisplayText(svalue);
-  }
-
-  private Date parseString(String value, String format) {
-    SimpleDateFormat simpleFormat = new SimpleDateFormat(format);
-    try {
-      return simpleFormat.parse(value);
-    } catch (ParseException e) {
-      LOG.log(Level.SEVERE, e.getMessage(), e);
-      return null;
-    }
+    setLocalTimeValue(toLocalTime(time));
   }
 
   /**
