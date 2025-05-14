@@ -840,12 +840,30 @@ public class OdfTableCell {
 
   /**
    * Set the cell value as a date, and set the value type to be "date".
+   * <p>
+   * This method sets only the date part of the passed value, the time part is ignored.
+   * Use #setDateTimeValue() to set both and time values from a Calendar instance.
+   *
+   * @param date the value of {@link java.util.Calendar java.util.Calendar} type.
+   * @see #setDateTimeValue(Calendar)
+   * @deprecated use {@link #setLocalDateValue(java.time.LocalDate)} instead.
+   */
+  @Deprecated
+  public void setDateValue(Calendar date) {
+    if (date == null) {
+      throw new IllegalArgumentException("date shouldn't be null.");
+    }
+    setLocalDateValue(toLocalDateTime(date).toLocalDate());
+  }
+
+  /**
+   * Set the cell value as a datetime, and set the value type to be "date".
    *
    * @param date the value of {@link java.util.Calendar java.util.Calendar} type.
    * @deprecated use {@link #setLocalDateValue(java.time.LocalDate)} instead.
    */
   @Deprecated
-  public void setDateValue(Calendar date) {
+  public void setDateTimeValue(Calendar date) {
     if (date == null) {
       throw new IllegalArgumentException("date shouldn't be null.");
     }

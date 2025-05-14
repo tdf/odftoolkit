@@ -484,8 +484,19 @@ public class TableCellTest {
     OdfTableCell finalFcell = fcell;
     Assert.assertThrows("date shouldn't be null.", IllegalArgumentException.class, () -> finalFcell.setDateValue(null));
 
+    // 1. setting only a date value
     Calendar expectedCalendar = new GregorianCalendar(2010, 1, 30);
     fcell.setDateValue(expectedCalendar);
+    saveOutputOds(odsdoc);
+    // reload
+    odsdoc = loadOutputOds();
+    table = odsdoc.getTableByName("Sheet1");
+    fcell = table.getCellByPosition(columnindex, rowindex);
+    Assert.assertEquals(0, fcell.getDateValue().compareTo(expectedCalendar));
+
+    // 2. setting only a date and time value should ommit the time part
+    Calendar newCalendar = new GregorianCalendar(2010, 1, 30, 17, 35, 59);
+    fcell.setDateValue(newCalendar);
     saveOutputOds(odsdoc);
     // reload
     odsdoc = loadOutputOds();
@@ -495,7 +506,7 @@ public class TableCellTest {
   }
 
   @Test
-  public void testGetSetDateValueWithTime() throws Exception {
+  public void testGetSetDateTimeValue() throws Exception {
     OdfSpreadsheetDocument odsdoc = loadInputOds();
 
     int rowindex = 7, columnindex = 7;
@@ -503,7 +514,7 @@ public class TableCellTest {
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
 
     Calendar expectedCalendar = new GregorianCalendar(2010, 1, 30, 17, 35, 59);
-    fcell.setDateValue(expectedCalendar);
+    fcell.setDateTimeValue(expectedCalendar);
     saveOutputOds(odsdoc);
     // reload
     odsdoc = loadOutputOds();
