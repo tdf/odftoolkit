@@ -28,6 +28,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.odftoolkit.odfdom.doc.OdfDocument;
@@ -593,13 +594,11 @@ public class OdfTableCell {
    *     is not "currency".
    */
   public String getCurrencyCode() {
-    if (mCellElement
-        .getOfficeValueTypeAttribute()
-        .equals(OfficeValueTypeAttribute.Value.CURRENCY.toString())) {
-      return mCellElement.getOfficeCurrencyAttribute();
-    } else {
-      throw new IllegalArgumentException();
+    String t = mCellElement.getOfficeValueTypeAttribute();
+    if (!Objects.equals(t, OfficeValueTypeAttribute.Value.CURRENCY.toString())) {
+        LOG.log(Level.WARNING,"@office:value-type attribute expected to be of type CURRENCY but was {0}", t);
     }
+    return mCellElement.getOfficeCurrencyAttribute();
   }
 
   /**
@@ -1128,6 +1127,10 @@ public class OdfTableCell {
     if (getTypeAttr() == OfficeValueTypeAttribute.Value.TIME) {
       String timeStr = mCellElement.getOfficeTimeValueAttribute();
       try {
+        if (timeStr == null) {
+          LOG.log(Level.SEVERE, "@office:time-value not set!");
+          return null;
+        }
         return LocalTime.parse(timeStr, DEFAULT_TIME_FORMATTER);
       } catch (DateTimeParseException e) {
         LOG.log(Level.SEVERE, e.getMessage(), e);
