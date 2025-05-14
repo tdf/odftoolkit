@@ -24,17 +24,16 @@
 package org.odftoolkit.odfdom.changes;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.Calendar;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.commons.lang3.time.FastDateFormat;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -68,7 +67,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class MapHelper {
+public final class MapHelper {
   private static final Logger LOG = Logger.getLogger(MapHelper.class.getName());
 
   public static final String AUTO = "auto";
@@ -84,7 +83,11 @@ public class MapHelper {
   private static Map<String, Integer> localeToLanguageMap = null;
   // a color, which type is set to auto - adapting color to environment
   private static final Map<String, String> COLOR_MAP_AUTO =
-      MapHelper.createColorMap(MapHelper.AUTO);
+    MapHelper.createColorMap(MapHelper.AUTO);
+
+  private MapHelper() {
+    // utility class
+  }
 
   /** map odf border strings to JSON border object see Changes API Border */
   public static JSONObject createBorderMap(String borderValue) {
@@ -1646,18 +1649,14 @@ public class MapHelper {
 
   // convert xmlschema-2 date to double
   public static Double dateToDouble(Object value) {
-    Double ret = 0.;
-    if (value != null && value instanceof String) {
-      // ISO 8601 formatter for date-time without time zone.
-      FastDateFormat fdf = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT;
-      Date date = null;
+    Double ret = 0.0;
+    if (value instanceof String) {
       try {
-        date = fdf.parse((String) value);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        long diff = cal.getTimeInMillis() + 2209161600000l; // 30.12.1899
-        ret = diff / 86400000.;
-      } catch (ParseException ex) {
+        LocalDateTime dateTime = LocalDateTime.parse((String) value);
+        LocalDateTime referenceDate = LocalDateTime.of(1899, 12, 30, 0, 0, 0);
+        double days = ChronoUnit.SECONDS.between(referenceDate, dateTime) / 86400.0;
+        ret = days;
+      } catch (DateTimeParseException ex) {
         LOG.log(Level.SEVERE, null, ex);
       }
     }
