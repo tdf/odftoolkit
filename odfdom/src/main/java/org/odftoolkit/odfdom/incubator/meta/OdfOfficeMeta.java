@@ -67,7 +67,7 @@ import org.odftoolkit.odfdom.type.Duration;
  */
 public class OdfOfficeMeta {
 
-  private OfficeMetaElement mOfficeMetaElement;
+  private final OfficeMetaElement mOfficeMetaElement;
   private boolean mAutomaticUpdate = true;
 
   /**
@@ -250,7 +250,7 @@ public class OdfOfficeMeta {
    *     <p><code>null</code>, if the element is not set.
    */
   public List<String> getKeywords() {
-    List<String> keywords = new ArrayList<String>();
+    List<String> keywords = new ArrayList<>();
     MetaKeywordElement keywordEle =
         OdfElement.findFirstChildNode(MetaKeywordElement.class, mOfficeMetaElement);
     if (keywordEle != null) {
@@ -276,7 +276,7 @@ public class OdfOfficeMeta {
   public void setKeywords(List<String> keyList) {
     MetaKeywordElement keywordEle =
         OdfElement.findFirstChildNode(MetaKeywordElement.class, mOfficeMetaElement);
-    List<MetaKeywordElement> toBeDeleted = new ArrayList<MetaKeywordElement>();
+    List<MetaKeywordElement> toBeDeleted = new ArrayList<>();
     if (keywordEle != null) {
       MetaKeywordElement keywordTmp;
       toBeDeleted.add(keywordEle);
@@ -316,7 +316,7 @@ public class OdfOfficeMeta {
    *     <p><code>null</code>, if the element is not set.
    */
   public List<String> getUserDefinedDataNames() {
-    List<String> definedNames = new ArrayList<String>();
+    List<String> definedNames = new ArrayList<>();
     MetaUserDefinedElement definedEle =
         OdfElement.findFirstChildNode(MetaUserDefinedElement.class, mOfficeMetaElement);
     if (definedEle != null) {
