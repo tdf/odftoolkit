@@ -19,17 +19,14 @@
 package org.odftoolkit.odfdom.doc.table;
 
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
@@ -1606,8 +1603,7 @@ public class OdfTableCell {
       setDataDisplayStyleName(dateStyle.getStyleNameAttribute());
       String dateStr = mCellElement.getOfficeDateValueAttribute();
       if (dateStr != null) {
-        Calendar date = getDateValue();
-        setDisplayText((new SimpleDateFormat(formatStr)).format(date.getTime()));
+        setDisplayText(getLocalDateTimeValue().format(DateTimeFormatter.ofPattern(formatStr)));
       }
     } else if (typeValue == OfficeValueTypeAttribute.Value.TIME) {
       OdfNumberTimeStyle timeStyle =
@@ -1617,8 +1613,7 @@ public class OdfTableCell {
       setDataDisplayStyleName(timeStyle.getStyleNameAttribute());
       String timeStr = mCellElement.getOfficeTimeValueAttribute();
       if (timeStr != null) {
-        Calendar time = getTimeValue();
-        setDisplayText((new SimpleDateFormat(formatStr)).format(time.getTime()));
+        setDisplayText(getLocalTimeValue().format(DateTimeFormatter.ofPattern(formatStr)));
       }
     } else if (typeValue == OfficeValueTypeAttribute.Value.PERCENTAGE) {
       OdfNumberPercentageStyle dateStyle =
