@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -735,11 +736,7 @@ public class JsonOperationProducer {
         attrs.put("field", fieldAttrs);
         newOperation.put(OPK_ATTRS, attrs);
       }
-      if (fieldContent != null) {
-        newOperation.put("representation", fieldContent);
-      } else {
-        newOperation.put("representation", "");
-      }
+      newOperation.put("representation", Objects.requireNonNullElse(fieldContent, ""));
       mOperationQueue.put(newOperation);
       LOG.log(Level.FINEST, OP_FIELD + " - component:{0}", newOperation);
 
@@ -2077,9 +2074,7 @@ public class JsonOperationProducer {
 
   private static List<Integer> incrementAll(List<Integer> position) {
     if (position != null) {
-      for (int i = 0; i < position.size(); i++) {
-        position.set(i, position.get(i) + 1);
-      }
+      position.replaceAll(integer -> integer + 1);
     }
     return position;
   }

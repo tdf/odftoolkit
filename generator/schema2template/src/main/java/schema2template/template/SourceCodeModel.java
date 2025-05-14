@@ -72,12 +72,8 @@ public class SourceCodeModel {
         new HashMap<String, SortedSet<PuzzlePiece>>(baseNames.size());
     for (String elementName : elementNameBaseNameMap.keySet()) {
       String baseName = elementNameBaseNameMap.get(elementName);
-      SortedSet<PuzzlePiece> elements = baseNameElementsMap.get(baseName);
-      if (elements == null) {
-        elements = new TreeSet<PuzzlePiece>();
-        baseNameElementsMap.put(baseName, elements);
-      }
-      PuzzleComponent childElement = schemaModel.getElement(elementName);
+        SortedSet<PuzzlePiece> elements = baseNameElementsMap.computeIfAbsent(baseName, k -> new TreeSet<PuzzlePiece>());
+        PuzzleComponent childElement = schemaModel.getElement(elementName);
       if (childElement != null) {
         if (childElement instanceof Collection) {
           elements.addAll((Collection) childElement);

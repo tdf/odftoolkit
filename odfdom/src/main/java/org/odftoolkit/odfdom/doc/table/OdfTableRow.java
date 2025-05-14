@@ -20,6 +20,7 @@ package org.odftoolkit.odfdom.doc.table;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -528,11 +529,7 @@ public class OdfTableRow {
   int getRowsRepeatedNumber() {
     if (mRowsRepeatedNumber < 0) {
       Integer count = maRowElement.getTableNumberRowsRepeatedAttribute();
-      if (count == null) {
-        mRowsRepeatedNumber = 1;
-      } else {
-        mRowsRepeatedNumber = count;
-      }
+      mRowsRepeatedNumber = Objects.requireNonNullElse(count, 1);
     }
     return mRowsRepeatedNumber;
   }

@@ -565,11 +565,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
     Iterator<PuzzlePiece> iter = defs.iterator();
     while (iter.hasNext()) {
       PuzzlePiece def = iter.next();
-      List<PuzzlePiece> list = retval.get(def.getExpression());
-      if (list == null) {
-        list = new ArrayList<PuzzlePiece>();
-        retval.put(def.getExpression(), list);
-      }
+      List<PuzzlePiece> list = retval.computeIfAbsent(def.getExpression(), k -> new ArrayList<PuzzlePiece>());
       list.add(def);
     }
     return retval;
@@ -581,12 +577,8 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
     Iterator<PuzzlePiece> iter = defs.iterator();
     while (iter.hasNext()) {
       PuzzlePiece def = iter.next();
-      List<Expression> list = retval.get(def.getQName());
-      if (list == null) {
-        list = new ArrayList<Expression>();
-        retval.put(def.getQName(), list);
-      }
-      list.add(def.getExpression());
+        List<Expression> list = retval.computeIfAbsent(def.getQName(), k -> new ArrayList<Expression>());
+        list.add(def.getExpression());
     }
     return retval;
   }

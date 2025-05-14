@@ -167,11 +167,7 @@ class URIExtractorImpl implements URIExtractor {
   }
 
   public String getNamespaceURI(String prefix) {
-    if (xmlnsMap.containsKey(prefix)) {
-      return xmlnsMap.get(prefix);
-    } else {
-      return null;
-    }
+    return xmlnsMap.getOrDefault(prefix, null);
   }
 
   public void setNamespaceURI(String prefix, String namespaceURI) {

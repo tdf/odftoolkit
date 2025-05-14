@@ -394,7 +394,7 @@ public class TextSelectionTest {
             .collect(Collectors.toList());
     navigations.forEach(n -> assertTrue("Navigation " + n + " should have a next", n.hasNext()));
     final List<TextSelection> selections =
-        navigations.stream().map(n -> n.next()).collect(Collectors.toList());
+        navigations.stream().map(TextNavigation::next).collect(Collectors.toList());
     try {
       selections.get(0).replaceWith("Xmultiple___X");
       selections.get(1).replaceWith("Xcontaining_X");
