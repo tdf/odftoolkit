@@ -184,8 +184,8 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
     return m;
   }
 
-  private Iterator fromAttributes(Attributes attributes) {
-    List toReturn = new LinkedList();
+  private Iterator<Attribute> fromAttributes(Attributes attributes) {
+    List<Attribute> toReturn = new LinkedList<>();
 
     for (int i = 0; i < attributes.getLength(); i++) {
       String qname = attributes.getQName(i);

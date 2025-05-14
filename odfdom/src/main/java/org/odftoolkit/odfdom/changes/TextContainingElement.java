@@ -83,8 +83,8 @@ public abstract class TextContainingElement extends OdfStylableElement {
    */
   public OdfElement appendTextSelection(TextSelection outerSelection) {
     if (this.mSelections == null) {
-      Comparator c = new SelectionComparator();
-      mSelections = new TreeSet<TextSelection>(c);
+      Comparator<TextSelection> c = new SelectionComparator();
+      mSelections = new TreeSet<>(c);
     }
     OdfElement parentElement = (OdfElement) outerSelection.mSelectionElement.getParentNode();
 

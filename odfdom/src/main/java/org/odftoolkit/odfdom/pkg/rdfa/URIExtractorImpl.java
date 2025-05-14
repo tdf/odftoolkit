@@ -41,7 +41,7 @@ import org.apache.commons.validator.routines.UrlValidator;
 class URIExtractorImpl implements URIExtractor {
   private Set<Setting> settings;
   private final Resolver resolver;
-  private Map<String, String> xmlnsMap = Collections.EMPTY_MAP;
+  private Map<String, String> xmlnsMap = Collections.emptyMap();
   private boolean isForSAX;
   private UrlValidator urlValidator;
 

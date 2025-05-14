@@ -19,7 +19,7 @@ import java.util.List;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 /** @author svante.schubertATgmail.com */
-public abstract class TextSelection {
+public abstract class TextSelection implements Comparable<TextSelection> {
 
   protected List<Integer> mStartPosition;
   protected List<Integer> mEndPosition;
@@ -144,9 +144,7 @@ public abstract class TextSelection {
    * ClassCastException - if the specified object's type prevents it from being compared to this
    * object.
    */
-  public int compareTo(Object o) {
-    TextSelection s2 = (TextSelection) o;
-
+  public int compareTo(TextSelection s2) {
     int result = 0;
     result = comparePosition(this.getStartPosition(), s2.getStartPosition());
     if (result == 0) {

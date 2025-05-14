@@ -859,29 +859,7 @@ public class Component {
 
   /** @return the position as a slash separated string */
   protected String getPosition(Component c) {
-    String s;
-    List<Integer> position;
-    int childPos;
-    if (c.mParent != null) {
-      position = new LinkedList();
-      Component parent;
-      while ((parent = c.getParent()) != null) {
-        childPos = parent.indexOf(c);
-        //				if (childPos < 0) {
-        //					childPos = indexOf(c);
-        //				}
-        position.add(childPos);
-        c = parent;
-      }
-      StringBuilder sb = new StringBuilder();
-      for (int i = position.size() - 1; i >= 0; i--) {
-        sb.append("/").append(position.get(i));
-      }
-      s = sb.toString();
-    } else {
-      s = "/";
-    }
-    return s;
+    return getPositionString(c);
   }
 
   /** @return the position as a slash separated string */
@@ -890,7 +868,7 @@ public class Component {
     List<Integer> position;
     int childPos;
     if (c.mParent != null) {
-      position = new LinkedList();
+      position = new LinkedList<>();
       Component parent;
       while ((parent = c.getParent()) != null) {
         childPos = parent.indexOf(c);

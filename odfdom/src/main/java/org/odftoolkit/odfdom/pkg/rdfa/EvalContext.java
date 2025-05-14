@@ -42,8 +42,8 @@ final class EvalContext implements NamespaceContext {
   String vocab;
   List<String> forwardProperties;
   List<String> backwardProperties;
-  Map<String, String> xmlnsMap = Collections.EMPTY_MAP;
-  Map<String, String> prefixMap = Collections.EMPTY_MAP;
+  Map<String, String> xmlnsMap = Collections.emptyMap();
+  Map<String, String> prefixMap = Collections.emptyMap();
 
   protected EvalContext(String base) {
     super();
