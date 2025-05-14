@@ -480,15 +480,9 @@ public class TableCellTest {
     int rowindex = 7, columnindex = 7;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
-    boolean illegalArgumentFlag = false;
-    try {
-      fcell.setDateValue(null);
-    } catch (IllegalArgumentException ie) {
-      if ("date shouldn't be null.".equals(ie.getMessage())) {
-        illegalArgumentFlag = true;
-      }
-    }
-    Assert.assertTrue(illegalArgumentFlag);
+    OdfTableCell finalFcell = fcell;
+    Assert.assertThrows("date shouldn't be null.", IllegalArgumentException.class, () -> finalFcell.setDateValue(null));
+
     Calendar expectedCalendar = new GregorianCalendar(2010, 1, 30);
     fcell.setDateValue(expectedCalendar);
     saveOutputOds(odsdoc);
@@ -506,15 +500,9 @@ public class TableCellTest {
     int rowindex = 7, columnindex = 7;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
-    boolean illegalArgumentFlag = false;
-    try {
-      fcell.setLocalDateValue(null);
-    } catch (IllegalArgumentException ie) {
-      if ("date shouldn't be null.".equals(ie.getMessage())) {
-        illegalArgumentFlag = true;
-      }
-    }
-    Assert.assertTrue(illegalArgumentFlag);
+    OdfTableCell finalFcell = fcell;
+    Assert.assertThrows("date shouldn't be null.", IllegalArgumentException.class, () -> finalFcell.setLocalDateValue(null));
+
     LocalDate expected = LocalDate.of(2010, 1, 30);
     fcell.setLocalDateValue(expected);
     saveOutputOds(odsdoc);
@@ -662,15 +650,9 @@ public class TableCellTest {
     int rowindex = 0, columnindex = 4;
     OdfTable table = odsdoc.getTableByName("Sheet1");
     OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
-    boolean illegalArgumentFlag = false;
-    try {
-      fcell.setLocalTimeValue(null);
-    } catch (IllegalArgumentException ie) {
-      if ("time shouldn't be null.".equals(ie.getMessage())) {
-        illegalArgumentFlag = true;
-      }
-    }
-    Assert.assertTrue(illegalArgumentFlag);
+    OdfTableCell finalFcell = fcell;
+    Assert.assertThrows("date shouldn't be null.", IllegalArgumentException.class, () -> finalFcell.setLocalTimeValue(null));
+
     LocalTime expected = LocalTime.now();
     fcell.setLocalTimeValue(expected);
     saveOutputOds(odsdoc);
