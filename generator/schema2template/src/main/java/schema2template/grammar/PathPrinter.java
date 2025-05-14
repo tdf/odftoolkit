@@ -28,6 +28,7 @@ import com.sun.msv.grammar.NameClassAndExpression;
 import com.sun.msv.grammar.ReferenceExp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.SortedSet;
 import java.util.logging.Logger;
 
@@ -85,12 +86,7 @@ public class PathPrinter {
 
     MSVExpressionInformation info = new MSVExpressionInformation(parent.getExpression(), null);
 
-    List<List<Expression>> paths = null;
-    if (child != null) {
-      paths = info.getPathsContaining(child.getExpression());
-    } else {
-      paths = info.getPathsContaining(parent.getExpression());
-    }
+    List<List<Expression>> paths = info.getPathsContaining(Objects.requireNonNullElse(child, parent).getExpression());
     if (paths == null) {
       return null;
     }

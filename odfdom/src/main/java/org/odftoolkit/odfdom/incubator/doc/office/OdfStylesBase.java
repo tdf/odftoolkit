@@ -307,11 +307,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
         mStyles = new HashMap<OdfStyleFamily, HashMap<String, OdfStyle>>();
       }
 
-      HashMap<String, OdfStyle> familyMap = mStyles.get(style.getFamily());
-      if (familyMap == null) {
-        familyMap = new HashMap<String, OdfStyle>();
-        mStyles.put(style.getFamily(), familyMap);
-      }
+      HashMap<String, OdfStyle> familyMap = mStyles.computeIfAbsent(style.getFamily(), k -> new HashMap<String, OdfStyle>());
 
       familyMap.put(style.getStyleNameAttribute(), style);
     } else if (node instanceof OdfTextListStyle) {

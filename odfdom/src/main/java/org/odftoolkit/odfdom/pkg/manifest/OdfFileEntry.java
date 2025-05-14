@@ -24,6 +24,8 @@
 package org.odftoolkit.odfdom.pkg.manifest;
 
 import java.net.URLConnection;
+import java.util.Objects;
+
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 public class OdfFileEntry {
@@ -55,11 +57,7 @@ public class OdfFileEntry {
    *     to an empty string.
    */
   public void setMediaTypeString(String mediaType) {
-    if (mediaType != null) {
-      mFileEntryElement.setMediaTypeAttribute(mediaType);
-    } else {
-      mFileEntryElement.setMediaTypeAttribute(EMPTY_STRING);
-    }
+    mFileEntryElement.setMediaTypeAttribute(Objects.requireNonNullElse(mediaType, EMPTY_STRING));
   }
 
   /**

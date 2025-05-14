@@ -135,11 +135,7 @@ public class XMLModel {
       Set<PuzzlePiece> definitions) {
     Map<String, SortedSet<PuzzlePiece>> retval = new HashMap<String, SortedSet<PuzzlePiece>>();
     for (PuzzlePiece def : definitions) {
-      SortedSet<PuzzlePiece> multiples = retval.get(def.getQName());
-      if (multiples == null) {
-        multiples = new TreeSet<PuzzlePiece>();
-        retval.put(def.getQName(), multiples);
-      }
+      SortedSet<PuzzlePiece> multiples = retval.computeIfAbsent(def.getQName(), k -> new TreeSet<PuzzlePiece>());
       multiples.add(def);
     }
     return retval;
@@ -175,12 +171,8 @@ public class XMLModel {
       Collection<PuzzlePiece> definitions) {
     Map<String, SortedSet<PuzzlePiece>> retval = new HashMap<>();
     for (PuzzlePiece def : definitions) {
-      SortedSet<PuzzlePiece> multiples = retval.get(def.getQName());
-      if (multiples == null) {
-        multiples = new TreeSet<>();
-        retval.put(def.getQName(), multiples);
-      }
-      multiples.add(def);
+        SortedSet<PuzzlePiece> multiples = retval.computeIfAbsent(def.getQName(), k -> new TreeSet<>());
+        multiples.add(def);
     }
     return retval;
   }

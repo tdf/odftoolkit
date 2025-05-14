@@ -156,11 +156,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
 
     String elementName = attrs.getValue("element");
     String defaultValue = attrs.getValue("defaultValue");
-    Map<String, String> defaultValueByParentElement = mAttributeDefaults.get(attrName);
-    if (defaultValueByParentElement == null) {
-      defaultValueByParentElement = new HashMap<String, String>();
-      mAttributeDefaults.put(attrName, defaultValueByParentElement);
-    }
+    Map<String, String> defaultValueByParentElement = mAttributeDefaults.computeIfAbsent(attrName, k -> new HashMap<String, String>());
     if (elementName == null) {
       elementName = ALL_ELEMENTS;
     }

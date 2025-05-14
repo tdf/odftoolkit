@@ -20,6 +20,7 @@ package org.odftoolkit.odfdom.incubator.search;
 
 import java.net.URL;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -274,11 +275,7 @@ public class TextSelection extends Selection {
             parNode.removeChild(node);
           }
           fromindex = 0;
-          if (nextNode != null) {
-            node = nextNode;
-          } else {
-            node = textSpan;
-          }
+          node = Objects.requireNonNullElse(nextNode, textSpan);
 
         } else if (node.getNodeType() == Node.ELEMENT_NODE) {
           assert (!node.getLocalName().equals("s")); // was handled above
@@ -499,11 +496,7 @@ public class TextSelection extends Selection {
             parNode.removeChild(node);
           }
           fromindex = 0;
-          if (nextNode != null) {
-            node = nextNode;
-          } else {
-            node = textLink;
-          }
+          node = Objects.requireNonNullElse(nextNode, textLink);
 
         } else if (node.getNodeType() == Node.ELEMENT_NODE) {
           assert (!node.getLocalName().equals("s")); // was handled above
@@ -513,7 +506,7 @@ public class TextSelection extends Selection {
           } else {
             addHref(fromindex, leftLength, node, href);
             int length = (fromindex + leftLength) - nodeLength;
-            leftLength = length > 0 ? length : 0;
+            leftLength = Math.max(length, 0);
             fromindex = 0;
           }
         }

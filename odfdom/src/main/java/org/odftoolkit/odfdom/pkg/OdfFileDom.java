@@ -619,11 +619,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
       newNamespace = OdfNamespace.newNamespace(existingPrefix, uri);
 
       // Add the new prefix to the duplicate prefix map for getPrefixes(String uri)
-      Set<String> prefixes = mDuplicatePrefixesByUri.get(uri);
-      if (prefixes == null) {
-        prefixes = new HashSet<String>();
-        mDuplicatePrefixesByUri.put(uri, prefixes);
-      }
+      Set<String> prefixes = mDuplicatePrefixesByUri.computeIfAbsent(uri, k -> new HashSet<String>());
       prefixes.add(prefix);
     } else {
       // Scenario b) the prefix already exists and the URI does not exist
