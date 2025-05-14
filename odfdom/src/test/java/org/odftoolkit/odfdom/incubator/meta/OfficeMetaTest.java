@@ -35,7 +35,6 @@ import org.odftoolkit.junit.AlphabeticalOrderedRunner;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.attribute.meta.MetaValueTypeAttribute.Value;
-import org.odftoolkit.odfdom.dom.example.LoadMultipleTimes;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.type.Duration;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;

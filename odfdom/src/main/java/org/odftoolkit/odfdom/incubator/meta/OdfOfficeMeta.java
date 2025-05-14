@@ -25,12 +25,17 @@ package org.odftoolkit.odfdom.incubator.meta;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
+
 import org.odftoolkit.odfdom.dom.element.dc.DcCreatorElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDateElement;
 import org.odftoolkit.odfdom.dom.element.dc.DcDescriptionElement;
@@ -62,8 +67,6 @@ import org.odftoolkit.odfdom.type.Duration;
  * <p>It provides convenient method to get meta data info.
  */
 public class OdfOfficeMeta {
-
-  private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
   private OfficeMetaElement mOfficeMetaElement;
   private boolean mAutomaticUpdate = true;
@@ -588,10 +591,21 @@ public class OdfOfficeMeta {
    */
   @Deprecated
   public Calendar getCreationDate() {
-    MetaCreationDateElement creationDateEle =
-        OdfElement.findFirstChildNode(MetaCreationDateElement.class, mOfficeMetaElement);
-    if (creationDateEle != null) {
-      return stringToCalendar(creationDateEle.getTextContent());
+    return toCalendar(getCreationInstant());
+  }
+
+  /**
+   * Converts an {@link Instant} object to a {@link GregorianCalendar} instance.
+   *
+   * @param instant the {@link Instant} to be converted. If null, the method will return null.
+   * @return a {@link GregorianCalendar} object representing the same point in time
+   *         as the given {@link Instant}, or null if the input is null.
+   */
+  private static GregorianCalendar toCalendar(Instant instant) {
+    if (instant != null) {
+      GregorianCalendar calendar = new GregorianCalendar(TimeZone.getDefault());
+      calendar.setTimeInMillis(instant.toEpochMilli());
+      return calendar;
     }
     return null;
   }
@@ -607,9 +621,25 @@ public class OdfOfficeMeta {
     MetaCreationDateElement creationDateEle =
         OdfElement.findFirstChildNode(MetaCreationDateElement.class, mOfficeMetaElement);
     if (creationDateEle != null) {
-      return Instant.from(DATE_TIME_FORMATTER.parse(creationDateEle.getTextContent()));
+      return parseInstant(creationDateEle.getTextContent());
     }
     return null;
+  }
+
+  private static Instant parseInstant(String textContent) {
+    // use the system time zone if no time zone was stored
+    TemporalAccessor ta = DateTimeFormatter.ISO_DATE_TIME
+      .withZone(ZoneId.systemDefault())
+      .parse(textContent);
+    if (ta.isSupported(ChronoField.OFFSET_SECONDS)) {
+      // value includes time
+      return Instant.from(ta);
+    } else {
+      // value is date without time
+      return LocalDateTime.from(ta)
+        .atZone(ZoneId.systemDefault())
+        .toInstant();
+    }
   }
 
   /**
@@ -643,7 +673,8 @@ public class OdfOfficeMeta {
       if (creationDateEle == null) {
         creationDateEle = mOfficeMetaElement.newMetaCreationDateElement();
       }
-      creationDateEle.setTextContent(DATE_TIME_FORMATTER.format(creationDate.atZone(ZoneId.systemDefault())));
+      // Instant.toString() formats as ISO-8601 at UTC/Zulu time zone
+      creationDateEle.setTextContent(creationDate.toString());
     }
   }
 
@@ -655,12 +686,7 @@ public class OdfOfficeMeta {
    *     <p><code>null</code>, if the element is not set.
    */
   public Calendar getDate() {
-    DcDateElement dcDateEle =
-        OdfElement.findFirstChildNode(DcDateElement.class, mOfficeMetaElement);
-    if (dcDateEle != null) {
-      return stringToCalendar(dcDateEle.getTextContent());
-    }
-    return null;
+    return toCalendar(getInstant());
   }
 
   /**
@@ -685,19 +711,54 @@ public class OdfOfficeMeta {
   }
 
   /**
+   * Receives the value of the ODFDOM element representation <code>DcDateElement</code> , See
+   * {@odf.element dc:date}.
+   *
+   * @return the date and time when the document was last modified;
+   *     <p><code>null</code>, if the element is not set.
+   */
+  public Instant getInstant() {
+    DcDateElement dcDateEle =
+        OdfElement.findFirstChildNode(DcDateElement.class, mOfficeMetaElement);
+    if (dcDateEle != null) {
+      return parseInstant(dcDateEle.getTextContent());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of the ODFDOM element representation <code>DcDateElement</code> , See
+   * {@odf.element dc:date}.
+   *
+   * @param instant the date and time need to set. NULL will remove the element from the meta.xml.
+   */
+  public void setInstant(Instant instant) {
+    DcDateElement dcDateEle =
+        OdfElement.findFirstChildNode(DcDateElement.class, mOfficeMetaElement);
+    if (instant == null) {
+      if (dcDateEle != null) {
+        mOfficeMetaElement.removeChild(dcDateEle);
+      }
+    } else {
+      if (dcDateEle == null) {
+        dcDateEle = mOfficeMetaElement.newDcDateElement();
+      }
+      // Instant.toString() formats as ISO-8601 at UTC/Zulu time zone
+      dcDateEle.setTextContent(instant.toString());
+    }
+  }
+
+  /**
    * Receives the value of the ODFDOM element representation <code>MetaPrintDateElement</code> , See
    * {@odf.element meta:print-date}.
    *
    * @return the date and time when the document was last printed;
    *     <p><code>null</code>, if the element is not set.
+   * @deprecated use {@link #getPrintInstant()} instead
    */
+  @Deprecated
   public Calendar getPrintDate() {
-    MetaPrintDateElement printDateEle =
-        OdfElement.findFirstChildNode(MetaPrintDateElement.class, mOfficeMetaElement);
-    if (printDateEle != null) {
-      return stringToCalendar(printDateEle.getTextContent());
-    }
-    return null;
+    return toCalendar(getPrintInstant());
   }
 
   /**
@@ -705,7 +766,9 @@ public class OdfOfficeMeta {
    * {@odf.element meta:print-date}.
    *
    * @param printDate the date and time need to set. NULL will remove the element from the meta.xml.
+   * @deprecated use {@link #setPrintInstant(Instant)} instead
    */
+  @Deprecated
   public void setPrintDate(Calendar printDate) {
     MetaPrintDateElement printDateEle =
         OdfElement.findFirstChildNode(MetaPrintDateElement.class, mOfficeMetaElement);
@@ -718,6 +781,43 @@ public class OdfOfficeMeta {
         printDateEle = mOfficeMetaElement.newMetaPrintDateElement();
       }
       printDateEle.setTextContent(calendarToString(printDate));
+    }
+  }
+
+  /**
+   * Receives the value of the ODFDOM element representation <code>MetaPrintDateElement</code> , See
+   * {@odf.element meta:print-date}.
+   *
+   * @return the date and time when the document was last printed;
+   *     <p><code>null</code>, if the element is not set.
+   */
+  public Instant getPrintInstant() {
+    MetaPrintDateElement printDateEle =
+        OdfElement.findFirstChildNode(MetaPrintDateElement.class, mOfficeMetaElement);
+    if (printDateEle != null) {
+      return parseInstant(printDateEle.getTextContent());
+    }
+    return null;
+  }
+
+  /**
+   * Sets the value of the ODFDOM element representation <code>MetaPrintDateElement</code> , See
+   * {@odf.element meta:print-date}.
+   *
+   * @param printInstant the date and time need to set. NULL will remove the element from the meta.xml.
+   */
+  public void setPrintInstant(Instant printInstant) {
+    MetaPrintDateElement printDateEle =
+        OdfElement.findFirstChildNode(MetaPrintDateElement.class, mOfficeMetaElement);
+    if (printInstant == null) {
+      if (printDateEle != null) {
+        mOfficeMetaElement.removeChild(printDateEle);
+      }
+    } else {
+      if (printDateEle == null) {
+        printDateEle = mOfficeMetaElement.newMetaPrintDateElement();
+      }
+      printDateEle.setTextContent(printInstant.toString());
     }
   }
 
@@ -922,19 +1022,16 @@ public class OdfOfficeMeta {
    * @return the object of Calender
    */
   private Calendar stringToCalendar(String baseDate) {
-    // Calendar calendar=new GregorianCalendar();
-    Calendar calendar = Calendar.getInstance();
-    Date d1 = null;
+    Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
     try {
-      d1 = sdf.parse(baseDate);
+      calendar.setTimeInMillis(sdf.parse(baseDate).getTime());
     } catch (Exception e) {
       // invalid format or null value in meta.xml
       // d1=new Date();
     }
 
-    calendar.setTime(d1);
     return calendar;
   }
 

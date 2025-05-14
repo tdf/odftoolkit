@@ -30,7 +30,6 @@ import java.net.URI;
 import java.time.Instant;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -88,7 +87,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
   private static final String SLASH = "/";
   private OdfMediaType mMediaType;
   private OdfOfficeMeta mOfficeMeta;
-  private long documentOpeningTime;
+  private Instant documentOpeningInstant = Instant.now();
   private static final Pattern CONTROL_CHAR_PATTERN = Pattern.compile("\\p{Cntrl}");
   private static final String EMPTY_STRING = "";
   private Instant mCreationDate;
@@ -102,7 +101,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
     super(pkg, internalPath, mediaType.getMediaTypeString());
     mMediaType = mediaType;
     // set document opening time.
-    documentOpeningTime = System.currentTimeMillis();
+    documentOpeningInstant = Instant.now();
   }
 
   /** This enum contains all possible media types of OpenDocument documents. */
@@ -919,8 +918,8 @@ public abstract class OdfDocument extends OdfSchemaDocument {
       }
 
       // update late modfied date
-      Calendar calendar = Calendar.getInstance();
-      metaData.setDate(calendar);
+      Instant now = Instant.now();
+      metaData.setInstant(now);
 
       // update editing-cycles
       Integer cycle = metaData.getEditingCycles();
@@ -930,7 +929,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
         metaData.setEditingCycles(1);
       }
       // update editing-duration
-      long editingDuration = calendar.getTimeInMillis() - documentOpeningTime;
+      long editingDuration = java.time.Duration.between(documentOpeningInstant, Instant.now()).toMillis();
       editingDuration = (editingDuration < 1) ? 1 : editingDuration;
       try {
         DatatypeFactory aFactory = DatatypeFactory.newInstance();
