@@ -19,7 +19,6 @@
 package org.odftoolkit.odfdom.doc.table;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
