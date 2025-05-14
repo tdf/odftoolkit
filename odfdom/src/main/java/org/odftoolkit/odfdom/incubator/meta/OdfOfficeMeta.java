@@ -1016,26 +1016,6 @@ public class OdfOfficeMeta {
   }
 
   /**
-   * Change valid string of calendar to Calendar type.
-   *
-   * @param baseDate the string of a calender
-   * @return the object of Calender
-   */
-  private Calendar stringToCalendar(String baseDate) {
-    Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-
-    try {
-      calendar.setTimeInMillis(sdf.parse(baseDate).getTime());
-    } catch (Exception e) {
-      // invalid format or null value in meta.xml
-      // d1=new Date();
-    }
-
-    return calendar;
-  }
-
-  /**
    * Convert a <code>Canlender</code> object to <code>String</code> object.
    *
    * @param calendar an instanceof <code>Canlender</code>
