@@ -22,11 +22,14 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,8 +87,6 @@ public class OdfTableCell {
   String msFormatString;
   /** The default date format of table cell. */
   private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
-  /** The default date formatter of table cell. */
-  private static final DateTimeFormatter DEFAULT_DATE_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
   /** The default time format of table cell. */
   private static final String DEFAULT_TIME_FORMAT = "'PT'HH'H'mm'M'ss'S'";
   /** The default time formatter of table cell. */
@@ -809,18 +810,32 @@ public class OdfTableCell {
    */
   @Deprecated
   public Calendar getDateValue() {
-    if (getTypeAttr() == OfficeValueTypeAttribute.Value.DATE) {
-      String dateStr = mCellElement.getOfficeDateValueAttribute();
-      if (dateStr == null) {
-        return null;
-      }
-      Date date = parseString(dateStr, DEFAULT_DATE_FORMAT);
-      Calendar calender = Calendar.getInstance();
-      calender.setTime(date);
-      return calender;
-    } else {
-      throw new IllegalArgumentException();
+    return toCalendar(getLocalDateTimeValue());
+  }
+
+  private Calendar toCalendar(LocalDate date) {
+    if (date == null) {
+      return null;
     }
+    return GregorianCalendar.from(
+      date.atStartOfDay(ZoneId.systemDefault())
+    );
+  }
+
+  private Calendar toCalendar(LocalDateTime datetime) {
+    if (datetime == null) {
+      return null;
+    }
+    return GregorianCalendar.from(
+      datetime.atZone(ZoneId.systemDefault())
+    );
+  }
+
+  private LocalDateTime toLocalDateTime(Calendar date) {
+    if (date == null) {
+      return null;
+    }
+    return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
   }
 
   /**
@@ -834,12 +849,7 @@ public class OdfTableCell {
     if (date == null) {
       throw new IllegalArgumentException("date shouldn't be null.");
     }
-    splitRepeatedCells();
-    setTypeAttr(OfficeValueTypeAttribute.Value.DATE);
-    SimpleDateFormat simpleFormat = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
-    String svalue = simpleFormat.format(date.getTime());
-    mCellElement.setOfficeDateValueAttribute(svalue);
-    setDisplayText(svalue);
+    setLocalDateTimeValue(toLocalDateTime(date));
   }
 
   /**
@@ -994,7 +1004,34 @@ public class OdfTableCell {
         return null;
       }
       try {
-        return LocalDate.parse(dateStr, DEFAULT_DATE_FORMATTER);
+        return LocalDate.parse(dateStr);
+      } catch (DateTimeParseException e) {
+        LOG.log(Level.SEVERE, e.getMessage(), e);
+        return null;
+      }
+    } else {
+      throw new IllegalArgumentException();
+    }
+  }
+
+  /**
+   * Get the cell date value as {@link LocalDate}.
+   *
+   * @return the date value of cell
+   * @throws IllegalArgumentException if the cell type is not "date".
+   */
+  public LocalDateTime getLocalDateTimeValue() {
+    if (getTypeAttr() == OfficeValueTypeAttribute.Value.DATE) {
+      String dateStr = mCellElement.getOfficeDateValueAttribute();
+      if (dateStr == null) {
+        return null;
+      }
+      try {
+        if (dateStr.contains("T")) {
+          return LocalDateTime.parse(dateStr);
+        } else {
+          return LocalDateTime.of(LocalDate.parse(dateStr), LocalTime.MIN);
+        }
       } catch (DateTimeParseException e) {
         LOG.log(Level.SEVERE, e.getMessage(), e);
         return null;
@@ -1015,7 +1052,23 @@ public class OdfTableCell {
     }
     splitRepeatedCells();
     setTypeAttr(OfficeValueTypeAttribute.Value.DATE);
-    String svalue = DEFAULT_DATE_FORMATTER.format(date);
+    String svalue = date.toString();
+    mCellElement.setOfficeDateValueAttribute(svalue);
+    setDisplayText(svalue);
+  }
+
+  /**
+   * Set the cell value as a date and set the value type to be "date".
+   *
+   * @param datetime the date/time as a LocalDateTime object.
+   */
+  public void setLocalDateTimeValue(LocalDateTime datetime) {
+    if (datetime == null) {
+      throw new IllegalArgumentException("datetime shouldn't be null.");
+    }
+    splitRepeatedCells();
+    setTypeAttr(OfficeValueTypeAttribute.Value.DATE);
+    String svalue = datetime.toString();
     mCellElement.setOfficeDateValueAttribute(svalue);
     setDisplayText(svalue);
   }

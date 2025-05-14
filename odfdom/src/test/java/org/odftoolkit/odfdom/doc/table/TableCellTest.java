@@ -21,6 +21,7 @@ package org.odftoolkit.odfdom.doc.table;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -494,7 +495,25 @@ public class TableCellTest {
   }
 
   @Test
-  public void testGetSetlocalDateValue() throws Exception {
+  public void testGetSetDateValueWithTime() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
+    int rowindex = 7, columnindex = 7;
+    OdfTable table = odsdoc.getTableByName("Sheet1");
+    OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
+
+    Calendar expectedCalendar = new GregorianCalendar(2010, 1, 30, 17, 35, 59);
+    fcell.setDateValue(expectedCalendar);
+    saveOutputOds(odsdoc);
+    // reload
+    odsdoc = loadOutputOds();
+    table = odsdoc.getTableByName("Sheet1");
+    fcell = table.getCellByPosition(columnindex, rowindex);
+    Assert.assertEquals(0, fcell.getDateValue().compareTo(expectedCalendar));
+  }
+
+  @Test
+  public void testGetSetLocalDateValue() throws Exception {
     OdfSpreadsheetDocument odsdoc = loadInputOds();
 
     int rowindex = 7, columnindex = 7;
@@ -511,6 +530,26 @@ public class TableCellTest {
     table = odsdoc.getTableByName("Sheet1");
     fcell = table.getCellByPosition(columnindex, rowindex);
     Assert.assertEquals(expected, fcell.getLocalDateValue());
+  }
+
+  @Test
+  public void testGetSetLocalDateTimeValue() throws Exception {
+    OdfSpreadsheetDocument odsdoc = loadInputOds();
+
+    int rowindex = 7, columnindex = 7;
+    OdfTable table = odsdoc.getTableByName("Sheet1");
+    OdfTableCell fcell = table.getCellByPosition(columnindex, rowindex);
+    OdfTableCell finalFcell = fcell;
+    Assert.assertThrows("date shouldn't be null.", IllegalArgumentException.class, () -> finalFcell.setLocalDateTimeValue(null));
+
+    LocalDateTime expected = LocalDateTime.of(2010, 1, 30, 17, 35, 59);
+    fcell.setLocalDateTimeValue(expected);
+    saveOutputOds(odsdoc);
+    // reload
+    odsdoc = loadOutputOds();
+    table = odsdoc.getTableByName("Sheet1");
+    fcell = table.getCellByPosition(columnindex, rowindex);
+    Assert.assertEquals(expected, fcell.getLocalDateTimeValue());
   }
 
   @Test
