@@ -44,25 +44,9 @@ public class AlphabeticalOrderedRunner extends BlockJUnit4ClassRunner {
    * part is in overriding the computeTestMethods method.
    */
   @Override
-  protected List computeTestMethods() {
-    List lst = super.computeTestMethods();
-    List methodList = new ArrayList(lst);
-
-    Collections.sort(methodList, new AlphabeticalOrder());
-
+  protected List<FrameworkMethod> computeTestMethods() {
+    List<FrameworkMethod> methodList = new ArrayList<>(super.computeTestMethods());
+    methodList.sort(Comparator.comparing(FrameworkMethod::getName));
     return methodList;
-  }
-
-  /*
-   * Class for alphabetical ordering of a list
-   */
-  public class AlphabeticalOrder implements Comparator {
-
-    public int compare(Object o1, Object o2) {
-      FrameworkMethod f1 = (FrameworkMethod) o1;
-      FrameworkMethod f2 = (FrameworkMethod) o2;
-
-      return f1.getName().compareTo(f2.getName());
-    }
   }
 }
