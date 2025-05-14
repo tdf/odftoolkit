@@ -44,6 +44,7 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -1195,7 +1196,7 @@ public class OdfPackage implements Closeable {
       Set<String> keys = mManifestEntries.keySet();
       boolean isFirstFile = true;
       CRC32 crc = new CRC32();
-      long modTime = (new java.util.Date()).getTime();
+      long modTime = Instant.now().toEpochMilli();
       byte[] data = null;
       for (String path : keys) {
         // ODF requires the "mimetype" file to be at first in the package
