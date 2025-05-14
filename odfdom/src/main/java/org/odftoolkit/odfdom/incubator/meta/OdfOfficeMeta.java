@@ -23,7 +23,6 @@
  */
 package org.odftoolkit.odfdom.incubator.meta;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -696,18 +695,7 @@ public class OdfOfficeMeta {
    * @param date the date and time need to set. NULL will remove the element from the meta.xml.
    */
   public void setDate(Calendar date) {
-    DcDateElement dcDateEle =
-        OdfElement.findFirstChildNode(DcDateElement.class, mOfficeMetaElement);
-    if (date == null) {
-      if (dcDateEle != null) {
-        mOfficeMetaElement.removeChild(dcDateEle);
-      }
-    } else {
-      if (dcDateEle == null) {
-        dcDateEle = mOfficeMetaElement.newDcDateElement();
-      }
-      dcDateEle.setTextContent(calendarToString(date));
-    }
+    setInstant(date == null ? null : date.toInstant());
   }
 
   /**
@@ -770,18 +758,7 @@ public class OdfOfficeMeta {
    */
   @Deprecated
   public void setPrintDate(Calendar printDate) {
-    MetaPrintDateElement printDateEle =
-        OdfElement.findFirstChildNode(MetaPrintDateElement.class, mOfficeMetaElement);
-    if (printDate == null) {
-      if (printDateEle != null) {
-        mOfficeMetaElement.removeChild(printDateEle);
-      }
-    } else {
-      if (printDateEle == null) {
-        printDateEle = mOfficeMetaElement.newMetaPrintDateElement();
-      }
-      printDateEle.setTextContent(calendarToString(printDate));
-    }
+    setPrintInstant(printDate == null ? null : printDate.toInstant());
   }
 
   /**
@@ -1013,17 +990,6 @@ public class OdfOfficeMeta {
 
   private MetaTemplateElement getTemplateElement() {
     return OdfElement.findFirstChildNode(MetaTemplateElement.class, mOfficeMetaElement);
-  }
-
-  /**
-   * Convert a <code>Canlender</code> object to <code>String</code> object.
-   *
-   * @param calendar an instanceof <code>Canlender</code>
-   * @return the String format(yyyy-MM-dd'T'HH:mm:ss) of Calendar.
-   */
-  private String calendarToString(Calendar calendar) {
-    DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-    return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(calendar.getTime());
   }
 
   /**
