@@ -21,7 +21,7 @@ import java.util.TreeSet;
 import org.odftoolkit.odfdom.dom.element.text.TextAElement;
 
 /** @author svante.schubertATgmail.com */
-public class TextHyperlinkSelection extends TextSelection implements Comparable {
+public class TextHyperlinkSelection extends TextSelection {
 
   /**
    * Constructor.

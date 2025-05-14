@@ -92,7 +92,7 @@ public class Table<T> extends Component {
 
   @Override
   // TABLE ONLY -- Svante REMOVE THIS LATER AS THIS IT IS ONLY USED BY TABLES
-  public List getChildren() {
+  public List<Component> getChildren() {
     return list(this);
   }
 

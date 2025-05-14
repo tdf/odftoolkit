@@ -19,7 +19,7 @@ import java.util.List;
 import org.odftoolkit.odfdom.dom.element.text.TextSpanElement;
 
 /** @author svante.schubertATgmail.com */
-public class TextSpanSelection extends TextSelection implements Comparable {
+public class TextSpanSelection extends TextSelection {
 
   /**
    * Constructor.

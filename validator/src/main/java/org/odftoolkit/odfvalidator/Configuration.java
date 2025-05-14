@@ -69,13 +69,13 @@ public class Configuration extends Properties {
 
   public List<String> getListPropety(String aPropNamePrefix) {
     TreeSet<String> aSortedPropNames = new TreeSet<String>();
-    Enumeration aPropNames = propertyNames();
+    Enumeration<?> aPropNames = propertyNames();
     while (aPropNames.hasMoreElements()) {
       String aPropName = (String) aPropNames.nextElement();
       if (aPropName.startsWith(aPropNamePrefix)) aSortedPropNames.add(aPropName);
     }
 
-    List<String> aValues = new Vector<String>(aSortedPropNames.size());
+    List<String> aValues = new Vector<>(aSortedPropNames.size());
     Iterator<String> aIter = aSortedPropNames.iterator();
     while (aIter.hasNext()) aValues.add(getProperty(aIter.next()));
 

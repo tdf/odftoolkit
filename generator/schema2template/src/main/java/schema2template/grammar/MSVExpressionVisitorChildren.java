@@ -53,7 +53,7 @@ import java.util.List;
  */
 public class MSVExpressionVisitorChildren implements ExpressionVisitor {
 
-  private static final List<Expression> empty = Collections.EMPTY_LIST;
+  private static final List<Expression> empty = Collections.emptyList();
 
   public List<Expression> onAnyString() {
     return empty;

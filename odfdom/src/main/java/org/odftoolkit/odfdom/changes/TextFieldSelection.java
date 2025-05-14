@@ -27,7 +27,7 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 /** @author svante.schubertATgmail.com */
-public class TextFieldSelection extends TextSelection implements Comparable {
+public class TextFieldSelection extends TextSelection {
 
   private String mReplacementText;
   private final Map<String, Object> mAttrs = new HashMap<String, Object>();
