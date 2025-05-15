@@ -17,7 +17,6 @@ package org.odftoolkit.odfdom.changes;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import org.json.JSONArray;

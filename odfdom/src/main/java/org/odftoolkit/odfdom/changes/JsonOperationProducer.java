@@ -21,7 +21,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ArrayList;
@@ -1102,7 +1101,7 @@ public class JsonOperationProducer {
    */
   public void addListStyle(
       OdfSchemaDocument doc, Map<String, TextListStyleElement> autoListStyles, String styleId) {
-    if (styleId != null & !styleId.isEmpty()) {
+    if (styleId != null && !styleId.isEmpty()) {
       if (!knownListStyles.containsKey(styleId)) {
         try {
           // Three locations to check for the list style

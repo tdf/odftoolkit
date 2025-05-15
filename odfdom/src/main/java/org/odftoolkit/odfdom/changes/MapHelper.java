@@ -1591,7 +1591,7 @@ public final class MapHelper {
     String tabLeaderText =
         tabStopElement.getAttributeNS(OdfDocumentNamespace.STYLE.getUri(), "leader-text");
 
-    if (tabLeaderText != null & !tabLeaderText.isEmpty()) {
+    if (tabLeaderText != null && !tabLeaderText.isEmpty()) {
       if (tabLeaderText.equals(Constants.DOT_CHAR)) {
         odfProps.put("tab_LeaderText" + tabNumber, Constants.DOT);
       } else if (tabLeaderText.equals(Constants.HYPHEN_CHAR)) {

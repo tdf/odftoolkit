@@ -248,7 +248,7 @@ public class SourceCodeModel {
     String superClassName = null;
     if (mElementSuperClassNameMap != null && childName != null) {
       superClassName = mElementSuperClassNameMap.get(childName);
-      if (superClassName != null & superClassName.contains(".")) {
+      if (superClassName != null && superClassName.contains(".")) {
         superClassName =
             superClassName.substring(superClassName.lastIndexOf(".") + 1, superClassName.length());
       }
@@ -265,7 +265,7 @@ public class SourceCodeModel {
     String superClassName = null;
     if (mElementSuperClassNameMap != null && childName != null) {
       superClassName = mElementSuperClassNameMap.get(childName);
-      if (superClassName != null & superClassName.contains(".")) {
+      if (superClassName != null && superClassName.contains(".")) {
         superClassName = superClassName.substring(0, superClassName.lastIndexOf("."));
       }
     }
