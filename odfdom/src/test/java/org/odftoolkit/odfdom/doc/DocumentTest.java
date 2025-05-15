@@ -172,7 +172,7 @@ public class DocumentTest {
 
   @Test
   @Ignore
-  public void testDumpDom() {
+  public void testDumpDom() throws Exception {
     Assert.assertTrue(testXSLT("content"));
     Assert.assertTrue(testXSLT("styles"));
   }
