@@ -25,7 +25,7 @@ package org.odftoolkit.odfdom.pkg.rdfa;
 
 import java.util.EnumSet;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import javax.xml.namespace.QName;
@@ -146,8 +146,8 @@ class RDFaParser extends net.rootdev.javardfa.Parser {
     boolean skipElement = false;
     String newSubject = null;
     String currentObject = null;
-    List<String> forwardProperties = new LinkedList();
-    List<String> backwardProperties = new LinkedList();
+    List<String> forwardProperties = new ArrayList();
+    List<String> backwardProperties = new ArrayList();
     String currentLanguage = context.language;
 
     if (settings.contains(Setting.OnePointOne)) {
@@ -340,7 +340,7 @@ class RDFaParser extends net.rootdev.javardfa.Parser {
   }
 
   private Iterator fromAttributes(Attributes attributes) {
-    List toReturn = new LinkedList();
+    List toReturn = new ArrayList();
 
     for (int i = 0; i < attributes.getLength(); i++) {
       String qname = attributes.getQName(i);

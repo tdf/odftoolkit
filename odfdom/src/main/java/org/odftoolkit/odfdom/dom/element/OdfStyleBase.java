@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -73,7 +74,7 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
   private static final long serialVersionUID = 8271282184913774000L;
 
   private Map<OdfStylePropertiesSet, OdfStylePropertiesBase> mPropertySetElementMap;
-  private ArrayList<OdfStylableElement> mStyleUser;
+  private List<OdfStylableElement> mStyleUser;
   static HashMap<OdfName, OdfStylePropertiesSet> mStylePropertiesElementToSetMap;
 
   static {

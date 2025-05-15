@@ -25,7 +25,7 @@ package org.odftoolkit.odfdom.dom.rdfa;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -185,7 +185,7 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
   }
 
   private Iterator<Attribute> fromAttributes(Attributes attributes) {
-    List<Attribute> toReturn = new LinkedList<>();
+    List<Attribute> toReturn = new ArrayList<>();
 
     for (int i = 0; i < attributes.getLength(); i++) {
       String qname = attributes.getQName(i);

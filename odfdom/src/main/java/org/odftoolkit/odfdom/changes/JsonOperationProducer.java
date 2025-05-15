@@ -24,7 +24,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -346,7 +346,7 @@ public class JsonOperationProducer {
 
     // the row start/end number 0 based, therefore - 1
     int rowStartNo = firstRow + repeatedRowOffset;
-    List rangeStart = new LinkedList<Integer>();
+    List rangeStart = new ArrayList<Integer>();
 
     // if there is a repeated row, there will be repeated cells (at least vertical)
     if (hasHorizontalRepetition || lastRow != null && !firstRow.equals(lastRow)) {
@@ -355,7 +355,7 @@ public class JsonOperationProducer {
       // second the start row position
       rangeStart.add(rowStartNo);
 
-      List rangeEnd = new LinkedList<Integer>();
+      List rangeEnd = new ArrayList<Integer>();
 
       // first the end column position: StartPos of content plus any repetiton (including itself,
       // therefore - 1)
@@ -406,10 +406,10 @@ public class JsonOperationProducer {
   /** */
   public void mergeCells(List<Integer> position, int columns, int rows) {
     final JSONObject newOperation = new JSONObject();
-    LinkedList<Integer> rangeStart = new LinkedList<Integer>();
+    List<Integer> rangeStart = new ArrayList<Integer>();
     rangeStart.add(position.get(2));
     rangeStart.add(position.get(1));
-    LinkedList<Integer> rangeEnd = new LinkedList<Integer>();
+    List<Integer> rangeEnd = new ArrayList<Integer>();
     rangeEnd.add(position.get(2) + columns - 1);
     rangeEnd.add(position.get(1) + rows - 1);
     try {
@@ -504,7 +504,7 @@ public class JsonOperationProducer {
     if (attrs != null && attrs.size() > 0) {
       // Not the next position, but the last character to be marked will be referenced
       final JSONObject newOp = new JSONObject();
-      List<Integer> lastCharacterPos = new LinkedList<Integer>();
+      List<Integer> lastCharacterPos = new ArrayList<Integer>();
       // text position is usually -1 as we take the first and the last character to be styled
       if (end != null) {
         for (int i = 0; i < end.size(); i++) {
@@ -880,7 +880,7 @@ public class JsonOperationProducer {
       } else {
         result = panose1.split("\\s");
       }
-      panose1_Integers = new LinkedList<Integer>();
+      panose1_Integers = new ArrayList<Integer>();
       for (String token : result) {
         try {
           panose1_Integers.add(Integer.parseInt(token));
@@ -1022,7 +1022,7 @@ public class JsonOperationProducer {
 
         // all ODF properties
         allOdfProps = new HashMap<String, Map<String, String>>();
-        List<OdfStyleBase> parents = new LinkedList<OdfStyleBase>();
+        List<OdfStyleBase> parents = new ArrayList<OdfStyleBase>();
         parents.add(style);
         OdfStyleBase parent = style.getParentStyle();
         // if automatic style inheritance is possible
@@ -1620,7 +1620,7 @@ public class JsonOperationProducer {
       if (!(style instanceof OdfDefaultStyle)) {
 
         if (!knownStyles.containsKey(((OdfStyle) style).getStyleNameAttribute())) {
-          List<OdfStyleBase> parents = new LinkedList<OdfStyleBase>();
+          List<OdfStyleBase> parents = new ArrayList<OdfStyleBase>();
           OdfStyleBase parent = style;
 
           // Collecting hierachy, to go back through the style hierarchy from the end, to be able to

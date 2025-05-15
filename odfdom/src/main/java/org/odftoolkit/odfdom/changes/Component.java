@@ -15,8 +15,9 @@
  */
 package org.odftoolkit.odfdom.changes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -818,7 +819,7 @@ public class Component {
   public void addChild(int index, Component c) {
     if (mChildren == null) {
       if (mChildren == null) {
-        mChildren = new LinkedList<Component>();
+        mChildren = new ArrayList<Component>();
       }
     }
     if (index >= 0) {
@@ -868,7 +869,7 @@ public class Component {
     List<Integer> position;
     int childPos;
     if (c.mParent != null) {
-      position = new LinkedList<>();
+      position = new ArrayList<>();
       Component parent;
       while ((parent = c.getParent()) != null) {
         childPos = parent.indexOf(c);

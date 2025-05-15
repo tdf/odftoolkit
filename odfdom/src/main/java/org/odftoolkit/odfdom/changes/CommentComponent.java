@@ -23,7 +23,8 @@
  */
 package org.odftoolkit.odfdom.changes;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
 /** The comment component. */
@@ -33,7 +34,7 @@ class CommentComponent extends CachedComponent {
   private String mCommentName;
   private String mAuthor;
   private String mDate;
-  private LinkedList<Integer> mCommentPosition;
+  private List<Integer> mCommentPosition;
   private boolean isInHeaderFooter = false;
 
   public boolean isInHeaderFooter() {
@@ -45,11 +46,11 @@ class CommentComponent extends CachedComponent {
   }
 
   public CommentComponent(List<Integer> start, String commentName) {
-    mCommentPosition = new LinkedList<Integer>(start);
+    mCommentPosition = new ArrayList<>(start);
     mCommentName = commentName;
   }
 
-  public LinkedList<Integer> getComponentPosition() {
+  public List<Integer> getComponentPosition() {
     return mCommentPosition;
   }
 

@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -155,7 +155,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
   // the actual component. Linking each other building the tree view of the document
   private Component mCurrentComponent;
   // the position of the component, being updated for the operations being generated
-  private final LinkedList<Integer> mLastComponentPositions = new LinkedList<Integer>();
+  private final List<Integer> mLastComponentPositions = new ArrayList<Integer>();
   /** DOM is created by default, but is in general not needed */
   private final boolean domCreationEnabled = true;
   //    private final ArrayDeque<ShapeProperties> mShapePropertiesStack;
@@ -257,7 +257,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
           mListId = currentListId;
         }
       }
-      mSortedIds = new LinkedList<String>();
+      mSortedIds = new ArrayList<>();
     }
 
     public void add(String listId) {
@@ -1049,7 +1049,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
             mTableHardFormatting = new HashMap<>();
           }
           mTableName = mTableElement.getAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "name");
-          mColumnRelWidths = new LinkedList<>();
+          mColumnRelWidths = new ArrayList<>();
           element.markAsComponentRoot(true);
         } else if (element instanceof TableTableRowElement) {
           mComponentDepth++;
@@ -1065,7 +1065,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
             }
 
             // The grid is known after columns had been parsed, updating later to row positino
-            List<Integer> tablePosition = new LinkedList<Integer>(mLastComponentPositions);
+            List<Integer> tablePosition = new ArrayList<Integer>(mLastComponentPositions);
             cacheTableOperation(
                 OperationConstants.TABLE,
                 tablePosition,
@@ -2418,14 +2418,14 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
       // added
     } else if (mComponentDepth < mLastComponentPositions.size() - 1) {
       // remove the last position and addChild a new one
-      mLastComponentPositions.removeLast();
+      mLastComponentPositions.remove(mLastComponentPositions.size() - 1);
       updatePosition(isComponent);
     } else {
       LOG.warning("Houston, we have a problem..");
     }
     // ToDo: Do I need a new LIST for every component? Or may I addChild a position to the
     // component?
-    return new LinkedList<Integer>(mLastComponentPositions);
+    return new ArrayList<>(mLastComponentPositions);
     // ToDo: Below a bad idea?
     // return Collections.unmodifiableList(mLastComponentPositions);
   }
@@ -2442,7 +2442,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
   // CachedTable mCachedTableOps = null;
   // based on document position the tables and subtables are being flushed after each end
   //    HashMap<List<Integer>, CachedTable> mAllTables = null;
-  //    private ArrayList<CachedTable> mTableStack;
+  //    private List<CachedTable> mTableStack;
   //    boolean mWithinTable = false; //TODO: Detect via type of top element of mComponentStack
   // private int mNumberOfNestedTables = 0;
   Stack<CachedComponent> mComponentStack = new Stack<CachedComponent>();
@@ -2542,9 +2542,9 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
         cacheTableOperation(componentType, start, hardFormattingProperties, componentProperties);
       } else {
         // collect the operations at the CachedComponent
-        LinkedList<Integer> position = null;
+        List<Integer> position = null;
         if (start != null) {
-          position = new LinkedList<>(start);
+          position = new ArrayList<>(start);
         }
 
         topComponent.add(
@@ -2565,7 +2565,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
       List<Integer> start,
       Map<String, Object> hardFormattingProperties,
       Object... componentProperties) {
-    LinkedList<Integer> position = null;
+    List<Integer> position = null;
     CachedTable currentTable =
         mComponentStack.empty()
             ? null
@@ -2573,7 +2573,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                 ? (CachedTable) mComponentStack.peek()
                 : null;
     if (start != null) {
-      position = new LinkedList<Integer>(start);
+      position = new ArrayList<>(start);
     }
     if (componentType.equals(OperationConstants.CELLS)) { // does not effect a spreadsheet
       currentTable.mCellCount++;

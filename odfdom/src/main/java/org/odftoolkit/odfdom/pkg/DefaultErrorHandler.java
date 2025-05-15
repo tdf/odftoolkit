@@ -55,9 +55,9 @@ public class DefaultErrorHandler implements ErrorHandler {
     return sw.getBuffer().toString();
   }
 
-  private ArrayList<SAXParseException> mWarnings = null;
-  private ArrayList<SAXParseException> mErrors = null;
-  private ArrayList<SAXParseException> mFatalErrors = null;
+  private List<SAXParseException> mWarnings = null;
+  private List<SAXParseException> mErrors = null;
+  private List<SAXParseException> mFatalErrors = null;
   private final StringBuilder mValidationMessages;
 
   public DefaultErrorHandler() {

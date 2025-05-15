@@ -33,7 +33,7 @@ import org.json.JSONObject;
 @SuppressWarnings("serial")
 class CachedTable extends CachedComponent {
 
-  private ArrayList<CachedTable> mTableStack = new ArrayList<>();
+  private List<CachedTable> mTableStack = new ArrayList<>();
   private Map<List<Integer>, CachedTable> mAllTables = new HashMap<>();
   // START *** SPREADSHEET PROPERTIES
   // required to track repeatedColumns rows for spreadsheets..
@@ -59,7 +59,7 @@ class CachedTable extends CachedComponent {
   public Integer mSheetNo;
   public Integer mFirstRow = 0;
   public Integer mLastRow = 0;
-  public ArrayList<CachedInnerTableOperation> mCachedTableContentOps = null;
+  public List<CachedInnerTableOperation> mCachedTableContentOps = null;
   // 1) Mapping the column's default cell style to empty cells for none max size OR
   // adding column's default cell style to column style
   // 2) Mapping the largest range of rows/columns to the table in case of MAX sheet
