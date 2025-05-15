@@ -31,14 +31,16 @@ import java.util.HashMap;
  */
 public class OdfName implements Comparable<OdfName> {
 
-  private OdfNamespace mNS;
-  private String mLocalName;
-  private String mExpandedName; // i.e. {nsURI}localName
+  private final OdfNamespace mNS;
+  private final String mLocalName;
+  private final String mQName;
+  private final String mExpandedName; // i.e. {nsURI}localName
   private static HashMap<String, OdfName> mOdfNames = new HashMap<String, OdfName>();
 
   private OdfName(OdfNamespace ns, String localname, String expandedName) {
     mNS = ns;
     mLocalName = localname;
+    mQName = mNS != null ? ((mNS.getPrefix() + ":" + mLocalName).intern()) : mLocalName;
     mExpandedName = expandedName;
   }
 
@@ -153,11 +155,7 @@ public class OdfName implements Comparable<OdfName> {
 
   /** @return the XML QName, the qualified name e.g. for <text:p> it is text:p. */
   public String getQName() {
-    if (mNS != null) {
-      return ((mNS.getPrefix() + ":" + mLocalName).intern());
-    } else {
-      return mLocalName;
-    }
+    return mQName;
   }
 
   /**
