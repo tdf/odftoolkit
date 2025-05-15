@@ -43,8 +43,8 @@ public class ODFValidationResult
   private String m_aGenerator = null;
   private String m_aMediaType = "";
 
-  private HashMap<String, Long> m_aForeignElementMap = null;
-  private HashMap<String, Long> m_aForeignAttributeMap = null;
+  private Map<String, Long> m_aForeignElementMap = null;
+  private Map<String, Long> m_aForeignAttributeMap = null;
 
   private Status m_aStrictValid = Status.UNKNOWN;
   private Status m_aValid = Status.UNKNOWN;

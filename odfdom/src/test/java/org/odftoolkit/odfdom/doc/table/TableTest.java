@@ -1239,7 +1239,7 @@ public class TableTest {
   // ODFDOM ToDo: http://odftoolkit.org/bugzilla/show_bug.cgi?id=293
   // 293 - Adding optional Maps to generated ODF sources for indexed ODF elements
   // Method To be moved on StyleMasterPageElement
-  private HashMap<String, String> getPageStyleProps(
+  private Map<String, String> getPageStyleProps(
       OdfDocument odfDoc, StyleMasterPageElement masterPage) throws Exception {
     StylePageLayoutElement pageLayout = getMasterPageLayout(odfDoc, masterPage);
 
@@ -1262,7 +1262,7 @@ public class TableTest {
   // ODFDOM ToDo: http://odftoolkit.org/bugzilla/show_bug.cgi?id=293
   // 293 - Adding optional Maps to generated ODF sources for indexed ODF elements
   // Method To be moved on StyleMasterPageElement
-  private HashMap<String, String> getHeaderStyleProps(
+  private Map<String, String> getHeaderStyleProps(
       OdfDocument odfDoc, StyleMasterPageElement masterPage) throws Exception {
     StylePageLayoutElement pageLayout = getMasterPageLayout(odfDoc, masterPage);
     // ToDo: Combine a GETTER for header Properties in one method
@@ -1286,7 +1286,7 @@ public class TableTest {
   // ODFDOM ToDo: http://odftoolkit.org/bugzilla/show_bug.cgi?id=293
   // 293 - Adding optional Maps to generated ODF sources for indexed ODF elements
   // Method To be moved on StyleMasterPageElement
-  private HashMap<String, String> getFooterStyleProps(
+  private Map<String, String> getFooterStyleProps(
       OdfDocument odfDoc, StyleMasterPageElement masterPage) throws Exception {
     StylePageLayoutElement pageLayout = getMasterPageLayout(odfDoc, masterPage);
     // ODFDOM ToDo: Combine a GETTER for footer Properties in one method

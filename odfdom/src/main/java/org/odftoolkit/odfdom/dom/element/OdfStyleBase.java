@@ -24,6 +24,7 @@
 package org.odftoolkit.odfdom.dom.element;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -71,7 +72,7 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
   /** */
   private static final long serialVersionUID = 8271282184913774000L;
 
-  private HashMap<OdfStylePropertiesSet, OdfStylePropertiesBase> mPropertySetElementMap;
+  private Map<OdfStylePropertiesSet, OdfStylePropertiesBase> mPropertySetElementMap;
   private ArrayList<OdfStylableElement> mStyleUser;
   static HashMap<OdfName, OdfStylePropertiesSet> mStylePropertiesElementToSetMap;
 
@@ -306,7 +307,7 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
       OdfStylePropertiesSet set = mStylePropertiesElementToSetMap.get(node.getOdfName());
       if (set != null) {
         if (mPropertySetElementMap == null) {
-          mPropertySetElementMap = new HashMap<>();
+          mPropertySetElementMap = new EnumMap<>(OdfStylePropertiesSet.class);
         }
         mPropertySetElementMap.put(set, (OdfStylePropertiesBase) node);
       }

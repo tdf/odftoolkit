@@ -33,8 +33,8 @@ import org.json.JSONObject;
 @SuppressWarnings("serial")
 class CachedTable extends CachedComponent {
 
-  private ArrayList<CachedTable> mTableStack = new ArrayList<CachedTable>();
-  public HashMap<List<Integer>, CachedTable> mAllTables = new HashMap<List<Integer>, CachedTable>();
+  private ArrayList<CachedTable> mTableStack = new ArrayList<>();
+  private Map<List<Integer>, CachedTable> mAllTables = new HashMap<>();
   // START *** SPREADSHEET PROPERTIES
   // required to track repeatedColumns rows for spreadsheets..
   public int mPreviousRepeatedRows = 0;

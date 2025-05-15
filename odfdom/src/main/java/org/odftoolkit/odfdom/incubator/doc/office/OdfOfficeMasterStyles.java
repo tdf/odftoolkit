@@ -47,7 +47,7 @@ public abstract class OdfOfficeMasterStyles extends OdfStylesBase
   private static final long serialVersionUID = 6598785919980862801L;
   private DrawLayerSetElement mLayerSet;
   private StyleHandoutMasterElement mHandoutMaster;
-  private HashMap<String, StyleMasterPageElement> mMasterPages;
+  private Map<String, StyleMasterPageElement> mMasterPages;
 
   public OdfOfficeMasterStyles(OdfFileDom ownerDoc) {
     super(ownerDoc, ELEMENT_NAME);

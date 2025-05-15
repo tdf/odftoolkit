@@ -20,6 +20,8 @@ package org.odftoolkit.odfdom.incubator.search;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
 import org.odftoolkit.odfdom.pkg.OdfElement;
 
 /**
@@ -29,7 +31,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
  */
 public class SelectionManager {
 
-  private HashMap<OdfElement, ArrayList<Selection>> repository = null;
+  private Map<OdfElement, ArrayList<Selection>> repository = null;
 
   public SelectionManager() {
     repository = new HashMap<OdfElement, ArrayList<Selection>>();
@@ -137,7 +139,7 @@ public class SelectionManager {
       selections.remove(item);
     }
   }
-  
+
   /**
    * Removes all selections from the SelectionManager.
    */
