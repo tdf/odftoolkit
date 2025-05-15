@@ -28,7 +28,6 @@ import static org.odftoolkit.odfdom.changes.PageArea.HEADER_FIRST;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ArrayList;

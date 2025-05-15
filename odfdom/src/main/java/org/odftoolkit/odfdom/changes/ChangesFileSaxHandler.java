@@ -33,7 +33,6 @@ import static org.odftoolkit.odfdom.changes.PageArea.HEADER_FIRST;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -42,6 +41,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.Stack;
 import java.util.logging.Level;
@@ -491,8 +491,8 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
           || ((isMasterPage
                   || Component.isHeaderRoot(uri, localName)
                   || Component.isFooterRoot(uri, localName))
-              && OdfDocument.OdfMediaType.TEXT.getMediaTypeString() != mMediaType
-              && OdfDocument.OdfMediaType.SPREADSHEET.getMediaTypeString() != mMediaType)) {
+              && !Objects.equals(OdfDocument.OdfMediaType.TEXT.getMediaTypeString(), mMediaType)
+              && !Objects.equals(OdfDocument.OdfMediaType.SPREADSHEET.getMediaTypeString(), mMediaType))) {
         isBlocked = true;
         mNoOperationsAllowed = true;
         mIsIgnoredElement = true;
@@ -509,8 +509,8 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
               || ((isMasterPage
                       || Component.isHeaderRoot(uri, localName)
                       || Component.isFooterRoot(uri, localName))
-                  && OdfDocument.OdfMediaType.TEXT.getMediaTypeString() != mMediaType
-                  && OdfDocument.OdfMediaType.SPREADSHEET.getMediaTypeString() != mMediaType)) {
+                  && !Objects.equals(OdfDocument.OdfMediaType.TEXT.getMediaTypeString(), mMediaType)
+                  && !Objects.equals(OdfDocument.OdfMediaType.SPREADSHEET.getMediaTypeString(), mMediaType))) {
             mIsIgnoredElement = false;
             mBlockingElementDepth = -1;
             mNoOperationsAllowed = false;
@@ -554,7 +554,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
         element = mFileDom.createElement(localName);
       } else {
         // == correct: if localName is the same object as qName, there is a default namespace set
-        if (localName == qName) {
+        if (Objects.equals(localName, qName)) {
           element =
               mFileDom.createElementNS(
                   OdfName.getOdfName(OdfNamespace.newNamespace(null, uri), localName));

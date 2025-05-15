@@ -24,7 +24,6 @@
 package org.odftoolkit.odfdom.changes;
 
 import java.util.ArrayList;
-import java.util.ArrayList;
 import java.util.List;
 
 /** The comment component. */

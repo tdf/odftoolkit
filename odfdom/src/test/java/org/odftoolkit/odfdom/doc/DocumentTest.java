@@ -173,12 +173,8 @@ public class DocumentTest {
   @Test
   @Ignore
   public void testDumpDom() {
-    try {
-      Assert.assertTrue(testXSLT("content") & testXSLT("styles"));
-    } catch (Exception e) {
-      LOG.log(Level.SEVERE, e.getMessage(), e);
-      Assert.fail(e.getMessage());
-    }
+    Assert.assertTrue(testXSLT("content"));
+    Assert.assertTrue(testXSLT("styles"));
   }
 
   private static boolean testXSLT(String odfFileNamePrefix) throws Exception {

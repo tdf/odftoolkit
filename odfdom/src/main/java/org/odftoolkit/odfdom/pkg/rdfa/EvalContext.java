@@ -29,6 +29,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import javax.xml.namespace.NamespaceContext;
 
 /** EvalContext modified from net.rootdev.javardfa.EvalContext */
@@ -70,8 +71,8 @@ final class EvalContext implements NamespaceContext {
     // from their typical values (base).
     // Base changing happens very late in the day when we're streaming, and
     // it is very fiddly to handle
-    boolean setPS = parentSubject == base;
-    boolean setPO = parentObject == base;
+    boolean setPS = Objects.equals(parentSubject, base);
+    boolean setPO = Objects.equals(parentObject, base);
 
     if (abase.contains("#")) {
       this.base = abase.substring(0, abase.indexOf("#"));

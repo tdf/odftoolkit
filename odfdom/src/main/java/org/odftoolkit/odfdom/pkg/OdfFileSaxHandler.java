@@ -24,6 +24,7 @@
 package org.odftoolkit.odfdom.pkg;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Stack;
 import org.odftoolkit.odfdom.pkg.rdfa.JenaSink;
 import org.w3c.dom.Element;
@@ -80,7 +81,7 @@ public class OdfFileSaxHandler extends DefaultHandler {
       element = mFileDom.createElement(localName);
     } else {
       // if localName is the same object as qName, there is a default namespace set
-      if (localName == qName) {
+      if (Objects.equals(localName, qName)) {
         element =
             mFileDom.createElementNS(
                 OdfName.getOdfName(OdfNamespace.newNamespace(null, uri), localName));
