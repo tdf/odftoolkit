@@ -306,7 +306,7 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
       OdfStylePropertiesSet set = mStylePropertiesElementToSetMap.get(node.getOdfName());
       if (set != null) {
         if (mPropertySetElementMap == null) {
-          mPropertySetElementMap = new HashMap<OdfStylePropertiesSet, OdfStylePropertiesBase>();
+          mPropertySetElementMap = new HashMap<>();
         }
         mPropertySetElementMap.put(set, (OdfStylePropertiesBase) node);
       }

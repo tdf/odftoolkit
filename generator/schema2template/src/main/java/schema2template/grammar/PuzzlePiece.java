@@ -693,17 +693,17 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
       puzzlePiece.mCanHaveText = elementInfo.canHaveText();
 
       Map<String, List<Expression>> atnameToDefs = buildNameExpressionsMap(puzzlePiece.mAttributes);
-      for (String name : atnameToDefs.keySet()) {
-        if (elementInfo.isMandatory(atnameToDefs.get(name))) {
-          puzzlePiece.mMandatoryChildAttributeNames.add(name);
+      for (Map.Entry<String, List<Expression>> entry : atnameToDefs.entrySet()) {
+        if (elementInfo.isMandatory(entry.getValue())) {
+          puzzlePiece.mMandatoryChildAttributeNames.add(entry.getKey());
         }
       }
 
       Map<String, List<Expression>> elnameToDefs =
           buildNameExpressionsMap(puzzlePiece.mChildElements);
-      for (String name : elnameToDefs.keySet()) {
-        if (elementInfo.isMandatory(elnameToDefs.get(name))) {
-          puzzlePiece.mMandatoryChildElementNames.add(name);
+      for (Map.Entry<String, List<Expression>> entry : elnameToDefs.entrySet()) {
+        if (elementInfo.isMandatory(entry.getValue())) {
+          puzzlePiece.mMandatoryChildElementNames.add(entry.getKey());
         }
       }
 

@@ -18,7 +18,6 @@
  */
 package org.odftoolkit.odfdom.doc.table;
 
-import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;

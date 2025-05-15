@@ -93,8 +93,7 @@ public class EmbeddedDocumentTest {
       OdfDocument saveDoc = OdfTextDocument.newTextDocument();
       Map<String, OdfDocument> subDocs = doc.loadSubDocuments();
       List<String> subDocNames = new ArrayList<String>();
-      for (String childDocPath : subDocs.keySet()) {
-        OdfDocument childDoc = subDocs.get(childDocPath);
+      for (OdfDocument childDoc : subDocs.values()) {
         String embeddedDocPath = childDoc.getDocumentPath();
         saveDoc.insertDocument(childDoc, embeddedDocPath);
         subDocNames.add(embeddedDocPath);
@@ -110,10 +109,10 @@ public class EmbeddedDocumentTest {
       saveDoc = OdfDocument.loadDocument(TEST_OUTPUT_FOLDER + TEST_FILE_EMBEDDED_SAVE_OUT);
       Map<String, OdfDocument> reloadedSubDocs = saveDoc.loadSubDocuments();
       Assert.assertTrue(subDocs.size() == reloadedSubDocs.size());
-      for (String childDocPath : subDocs.keySet()) {
+      for (Map.Entry<String, OdfDocument> entry : subDocs.entrySet()) {
         Assert.assertEquals(
-            subDocs.get(childDocPath).getMediaTypeString(),
-            reloadedSubDocs.get(childDocPath).getMediaTypeString());
+          entry.getValue().getMediaTypeString(),
+            reloadedSubDocs.get(entry.getKey()).getMediaTypeString());
       }
     } catch (Exception ex) {
       LOG.log(Level.SEVERE, null, ex);
@@ -159,8 +158,7 @@ public class EmbeddedDocumentTest {
       Assert.assertNotNull(imageEntry);
       Map<String, OdfDocument> embDocs =
           testLoad.loadSubDocuments(OdfDocument.OdfMediaType.SPREADSHEET);
-      for (String embedDocPath : embDocs.keySet()) {
-        OdfDocument doc1 = embDocs.get(embedDocPath);
+      for (OdfDocument doc1 : embDocs.values()) {
         imageEntry =
             doc1.getPackage()
                 .getFileEntry(
@@ -213,8 +211,7 @@ public class EmbeddedDocumentTest {
       Assert.assertNotNull(imageEntry);
       Map<String, OdfDocument> embDocs =
           testLoad.loadSubDocuments(OdfDocument.OdfMediaType.SPREADSHEET);
-      for (String childDocPath : embDocs.keySet()) {
-        OdfDocument doc1 = embDocs.get(childDocPath);
+      for (OdfDocument doc1 : embDocs.values()) {
         imageEntry =
             doc1.getPackage()
                 .getFileEntry(
@@ -240,8 +237,7 @@ public class EmbeddedDocumentTest {
       OdfDocument doc =
           OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE_EMBEDDED));
       Map<String, OdfDocument> embeddedDocs = doc.loadSubDocuments();
-      for (String childDocPath : embeddedDocs.keySet()) {
-        OdfDocument childDoc = embeddedDocs.get(childDocPath);
+      for (OdfDocument childDoc : embeddedDocs.values()) {
         String embedFileName = childDoc.getDocumentPath();
         OdfMediaType embedMediaType = OdfMediaType.getOdfMediaType(childDoc.getMediaTypeString());
         // use '_' replace '/', because '/' is not the valid char in file path
@@ -338,8 +334,7 @@ public class EmbeddedDocumentTest {
           OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE_EMBEDDED));
       Map<String, OdfDocument> embeddedDocs = doc.loadSubDocuments();
       List<String> subDocNames = new ArrayList<String>();
-      for (String childDocPath : embeddedDocs.keySet()) {
-        OdfDocument childDoc = embeddedDocs.get(childDocPath);
+      for (OdfDocument childDoc : embeddedDocs.values()) {
         Assert.assertNotNull(childDoc);
         String embedFileName = childDoc.getDocumentPath();
         subDocNames.add(embedFileName);

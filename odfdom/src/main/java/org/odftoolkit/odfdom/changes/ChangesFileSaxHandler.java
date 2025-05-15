@@ -73,7 +73,6 @@ import org.odftoolkit.odfdom.dom.element.style.StyleFooterStyleElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderFooterPropertiesElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleHeaderStyleElement;
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
-import org.odftoolkit.odfdom.dom.element.style.StyleStyleElement;
 import org.odftoolkit.odfdom.dom.element.svg.SvgDescElement;
 import org.odftoolkit.odfdom.dom.element.table.TableCoveredTableCellElement;
 import org.odftoolkit.odfdom.dom.element.table.TableTableCellElement;

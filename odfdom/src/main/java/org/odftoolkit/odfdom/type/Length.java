@@ -204,7 +204,7 @@ public class Length implements OdfDataType {
 
       for (Unit unit : Unit.values()) {
         if (length.contains(unit.abbr())) {
-          Double value = Double.valueOf(length.substring(0, length.indexOf(unit.abbr())));
+          double value = Double.parseDouble(length.substring(0, length.indexOf(unit.abbr())));
           // if no destination unit was given the unit remains the same
           if (destinationUnit != null) {
             // using roundfactor proved to be more precise when used with Java XSLT processor
@@ -298,7 +298,7 @@ public class Length implements OdfDataType {
 
       for (Unit unit : Unit.values()) {
         if (length.contains(unit.abbr())) {
-          Double value = Double.valueOf(length.substring(0, length.indexOf(unit.abbr())));
+          double value = Double.parseDouble(length.substring(0, length.indexOf(unit.abbr())));
           // if no destination unit was given the unit remains the same
           if (destinationUnit != null) {
             // using roundfactor proved to be more precise when used with Java XSLT processor

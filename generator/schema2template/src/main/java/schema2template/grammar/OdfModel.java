@@ -123,9 +123,7 @@ public class OdfModel {
   public List<String> getStyleFamilies(PuzzleComponent element) {
     List<String> retval = new ArrayList<String>();
     if (mNameToFamiliesMap.containsKey(element.getQName())) {
-      for (String family : mNameToFamiliesMap.get(element.getQName())) {
-        retval.add(family);
-      }
+      retval.addAll(mNameToFamiliesMap.get(element.getQName()));
     }
     return retval;
   }
@@ -139,9 +137,7 @@ public class OdfModel {
     Iterator<List<String>> iter = mNameToFamiliesMap.values().iterator();
     List<String> families = new ArrayList<String>();
     while (iter.hasNext()) {
-      for (String family : iter.next()) {
-        families.add(family);
-      }
+      families.addAll(iter.next());
     }
     return new TreeSet<String>(families);
   }

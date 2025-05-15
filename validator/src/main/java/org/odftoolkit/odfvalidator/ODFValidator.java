@@ -262,7 +262,7 @@ public class ODFValidator implements ODFValidatorProvider {
 
   private Configuration getConfiguration(OdfVersion aVersion) throws ODFValidatorException {
     if (m_aConfigurationMap == null) {
-      m_aConfigurationMap = new HashMap<OdfVersion, Configuration>();
+      m_aConfigurationMap = new HashMap<>();
     }
 
     Configuration aConfig = m_aConfigurationMap.get(aVersion);

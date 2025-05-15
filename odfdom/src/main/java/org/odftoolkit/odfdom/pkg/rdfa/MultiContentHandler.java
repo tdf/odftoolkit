@@ -24,6 +24,8 @@
 package org.odftoolkit.odfdom.pkg.rdfa;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
@@ -34,10 +36,7 @@ public class MultiContentHandler implements ContentHandler {
   ArrayList<ContentHandler> subContentHandlers;
 
   public MultiContentHandler(ContentHandler... subs) {
-    subContentHandlers = new ArrayList<ContentHandler>();
-    for (ContentHandler sub : subs) {
-      subContentHandlers.add(sub);
-    }
+    subContentHandlers = new ArrayList<>(Arrays.asList(subs));
   }
 
   public void setDocumentLocator(Locator locator) {

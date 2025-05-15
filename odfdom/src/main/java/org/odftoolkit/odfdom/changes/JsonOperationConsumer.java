@@ -47,7 +47,6 @@ import org.odftoolkit.odfdom.doc.table.OdfTableRow;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.OdfSchemaConstraint;
-import org.odftoolkit.odfdom.dom.OdfSchemaDocument;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.attribute.draw.DrawStyleNameAttribute;
 import org.odftoolkit.odfdom.dom.attribute.style.StyleRunThroughAttribute;
@@ -657,7 +656,7 @@ public class JsonOperationConsumer {
               if (attrs.has("cell") || attrs.has("paragraph") || attrs.has("text")) {
                 autoStyle =
                     newElement.getOrCreateUnqiueAutomaticStyle(
-                        Boolean.FALSE, OdfStyleFamily.TableCell);
+                        false, OdfStyleFamily.TableCell);
                 // APPLY HARD FORMATTING PROPERTIES OF ODF FAMILY
                 mapProperties(OdfStyleFamily.TableCell, attrs, autoStyle, doc);
                 // default-cell-style-name
@@ -926,7 +925,7 @@ public class JsonOperationConsumer {
               // Returns all TableTableColumn descendants that exist within the tableElement, even
               // within groups, columns and header elements
               OdfTable table = OdfTable.getInstance(tableElement);
-              table.removeColumnsByIndex(endPos, deletionCount - 1 + endPos, Boolean.TRUE);
+              table.removeColumnsByIndex(endPos, deletionCount - 1 + endPos, true);
               ((Table) tableElement.getComponent()).hasChangedWidth();
             }
           }
@@ -1262,7 +1261,7 @@ public class JsonOperationConsumer {
             tableElement.getComponent(),
             ((Table) tableElement.getComponent()).getPosition(),
             ((Table) tableElement.getComponent()).popTableGrid(),
-            Boolean.TRUE);
+            true);
       }
     }
   }
@@ -1407,7 +1406,7 @@ public class JsonOperationConsumer {
         // Heading Level
         if (props.has("outlineLevel")) {
           if (!props.get("outlineLevel").equals(JSONObject.NULL)) {
-            Integer outlineLevel = props.optInt("outlineLevel");
+            int outlineLevel = props.optInt("outlineLevel");
             if (outlineLevel >= 1) {
               style.setStyleDefaultOutlineLevelAttribute(outlineLevel);
             } else {
@@ -1455,7 +1454,7 @@ public class JsonOperationConsumer {
           }
           targetNode = parentComponent.getChildNode(startPos, targetPos);
         }
-        format(parentComponent.mRootElement, targetNode, start, end, attrs, Boolean.FALSE);
+        format(parentComponent.mRootElement, targetNode, start, end, attrs, false);
       } else {
         LOG.log(
             Level.SEVERE,
@@ -1650,8 +1649,8 @@ public class JsonOperationConsumer {
 
           JSONObject columnProps = attrs.optJSONObject("column");
           if (columnProps != null) {
-            Boolean changeToVisible = columnProps.optBoolean("visible", Boolean.TRUE);
-            boolean isVisible = Boolean.TRUE;
+            boolean changeToVisible = columnProps.optBoolean("visible", true);
+            boolean isVisible = true;
             if (columnElement.hasAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "visibility")) {
               isVisible =
                   Constants.VISIBLE.equals(
@@ -1675,8 +1674,8 @@ public class JsonOperationConsumer {
           autoStyle = addStyle(attrs, (OdfStylableElement) targetNode, xmlDoc);
           JSONObject rowProps = attrs.optJSONObject("row");
           if (rowProps != null) {
-            Boolean changeToVisible = rowProps.optBoolean("visible", Boolean.TRUE);
-            boolean isVisible = Boolean.TRUE;
+            boolean changeToVisible = rowProps.optBoolean("visible", true);
+            boolean isVisible = true;
             if (rowElement.hasAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "visibility")) {
               isVisible =
                   Constants.VISIBLE.equals(
@@ -1886,7 +1885,7 @@ public class JsonOperationConsumer {
               == null) { // if not within automatic style, its a template style
             autoStyle =
                 lineElement.getOrCreateUnqiueAutomaticStyle(
-                    Boolean.FALSE, OdfStyleFamily.TableCell);
+                    false, OdfStyleFamily.TableCell);
             defaultCellTemplateStyleName = defaultCellStyleName;
           } else {
             autoStyle = existingDefaultCellStyle;
@@ -1895,7 +1894,7 @@ public class JsonOperationConsumer {
           }
         } else {
           autoStyle =
-              lineElement.getOrCreateUnqiueAutomaticStyle(Boolean.FALSE, OdfStyleFamily.TableCell);
+              lineElement.getOrCreateUnqiueAutomaticStyle(false, OdfStyleFamily.TableCell);
         }
 
         if (defaultCellTemplateStyleName != null && !defaultCellTemplateStyleName.isEmpty()) {
@@ -2183,7 +2182,7 @@ public class JsonOperationConsumer {
         boolean listLabelHidden = false;
         // if there is no previous sibling and hidden, we need a list-header
         if (paraProps != null && paraProps.has("listLabelHidden")) {
-          listLabelHidden = paraProps.optBoolean("listLabelHidden", Boolean.FALSE);
+          listLabelHidden = paraProps.optBoolean("listLabelHidden", false);
         }
         if (listLabelHidden) {
           OdfElement elementForInsertion;
@@ -2583,7 +2582,7 @@ public class JsonOperationConsumer {
         if (paraProps != null && paraProps.has("listLabelHidden")
             || paragraphBaseElement.hasAttribute("hiddenParagraph")) {
           if (paraProps != null) {
-            listLabelHidden = paraProps.optBoolean("listLabelHidden", Boolean.FALSE);
+            listLabelHidden = paraProps.optBoolean("listLabelHidden", false);
           } else {
             listLabelHidden = true;
           }
@@ -2653,7 +2652,7 @@ public class JsonOperationConsumer {
         }
       }
       // Similar to MSO 15 ODF output & behavior, set by default the continue numbering to true
-      rootListElement.setTextContinueNumberingAttribute(Boolean.TRUE);
+      rootListElement.setTextContinueNumberingAttribute(true);
     }
   }
 
@@ -3960,7 +3959,7 @@ public class JsonOperationConsumer {
             -1,
             isTextTable,
             existingColumnList,
-            Boolean.TRUE);
+            true);
       }
     } else {
       LOG.log(
@@ -4053,7 +4052,7 @@ public class JsonOperationConsumer {
             -1,
             true,
             existingColumnList,
-            Boolean.FALSE);
+            false);
         // WORK AROUND for "UNDO COLUMN WIDTH" problem (see JsonOperationConsumer for further
         // changes)
         if (((Table) tableElement.getComponent()).isWidthChangeRequired()) {
@@ -4061,7 +4060,7 @@ public class JsonOperationConsumer {
               tableElement.getComponent(),
               ((Table) tableElement.getComponent()).getPosition(),
               ((Table) tableElement.getComponent()).popTableGrid(),
-              Boolean.TRUE);
+              true);
         }
       } else {
         LOG.log(
@@ -4655,7 +4654,7 @@ public class JsonOperationConsumer {
             -1,
             true,
             existingColumnList,
-            Boolean.TRUE);
+            true);
         ((Table) tableElement.getComponent()).hasChangedWidth();
       }
 
@@ -5563,7 +5562,7 @@ public class JsonOperationConsumer {
             if (value == null || value.equals(JSONObject.NULL)) {
               propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "text-indent");
             } else {
-              Integer indent = getSafelyInteger(value);
+              int indent = getSafelyInteger(value);
               propertiesElement.setAttributeNS(
                   OdfDocumentNamespace.FO.getUri(), "fo:text-indent", ((indent / 100.0) + "mm"));
             }
@@ -5804,7 +5803,7 @@ public class JsonOperationConsumer {
               propertiesElement.removeAttributeNS(
                   OdfDocumentNamespace.STYLE.getUri(), "min-row-height");
             } else {
-              Integer rowHeight = getSafelyInteger(value);
+              int rowHeight = getSafelyInteger(value);
               propertiesElement.setStyleRowHeightAttribute(((rowHeight / 100.0) + "mm"));
             }
           } catch (JSONException ex) {
@@ -6139,7 +6138,7 @@ public class JsonOperationConsumer {
               String textWrapMode = (String) value;
               if (textWrapMode.equals("topAndBottom")) {
                 propertiesElement.setStyleWrapAttribute("none");
-                propertiesElement.setStyleWrapContourAttribute(Boolean.FALSE);
+                propertiesElement.setStyleWrapContourAttribute(false);
               } else {
                 String textWrapSide = attrs.optString("textWrapSide");
                 if (textWrapSide != null) {
@@ -6153,10 +6152,10 @@ public class JsonOperationConsumer {
                     } else if (textWrapSide.equals("right")) {
                       propertiesElement.setStyleWrapAttribute("right");
                     }
-                    propertiesElement.setStyleWrapContourAttribute(Boolean.FALSE);
+                    propertiesElement.setStyleWrapContourAttribute(false);
                   } else if (textWrapMode.equals("through")) {
                     propertiesElement.setStyleWrapAttribute("run-through");
-                    propertiesElement.setStyleWrapContourAttribute(Boolean.FALSE);
+                    propertiesElement.setStyleWrapContourAttribute(false);
                   }
                 }
               }
@@ -6219,7 +6218,7 @@ public class JsonOperationConsumer {
             if (value == null || value.equals(JSONObject.NULL)) {
               propertiesElement.removeAttributeNS(OdfDocumentNamespace.SVG.getUri(), "x");
             } else {
-              Integer x = getSafelyInteger(value);
+              int x = getSafelyInteger(value);
 
               // This is the default in our constellation
               propertiesElement.setSvgXAttribute(x / 100.0 + "mm");
@@ -6260,7 +6259,7 @@ public class JsonOperationConsumer {
             if (value == null || value.equals(JSONObject.NULL)) {
               propertiesElement.removeAttributeNS(OdfDocumentNamespace.SVG.getUri(), "y");
             } else {
-              Integer y = getSafelyInteger(value);
+              int y = getSafelyInteger(value);
               // This is the default in our constellation
               propertiesElement.setSvgYAttribute(y / 100.0 + "mm");
             }
@@ -6745,7 +6744,7 @@ public class JsonOperationConsumer {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "margin-bottom");
           } else {
-            Integer width = getSafelyInteger(value);
+            int width = getSafelyInteger(value);
             propertiesElement.setAttributeNS(
                 OdfDocumentNamespace.FO.getUri(), "fo:margin-bottom", ((width / 100.0) + "mm"));
           }
@@ -6761,7 +6760,7 @@ public class JsonOperationConsumer {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "margin-left");
           } else {
-            Integer width = getSafelyInteger(value);
+            int width = getSafelyInteger(value);
             propertiesElement.setAttributeNS(
                 OdfDocumentNamespace.FO.getUri(), "fo:margin-left", ((width / 100.0) + "mm"));
           }
@@ -6776,7 +6775,7 @@ public class JsonOperationConsumer {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "margin-right");
           } else {
-            Integer width = getSafelyInteger(value);
+            int width = getSafelyInteger(value);
             propertiesElement.setAttributeNS(
                 OdfDocumentNamespace.FO.getUri(), "fo:margin-right", ((width / 100.0) + "mm"));
           }
@@ -6790,7 +6789,7 @@ public class JsonOperationConsumer {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "margin-top");
           } else {
-            Integer width = getSafelyInteger(value);
+            int width = getSafelyInteger(value);
             propertiesElement.setAttributeNS(
                 OdfDocumentNamespace.FO.getUri(), "fo:margin-top", ((width / 100.0) + "mm"));
           }
@@ -6841,7 +6840,7 @@ public class JsonOperationConsumer {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "padding-bottom");
           } else {
-            Integer width = getSafelyInteger(value);
+            int width = getSafelyInteger(value);
             propertiesElement.setAttributeNS(
                 OdfDocumentNamespace.FO.getUri(), "fo:padding-bottom", ((width / 100.0) + "mm"));
           }
@@ -6855,7 +6854,7 @@ public class JsonOperationConsumer {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "padding-left");
           } else {
-            Integer width = getSafelyInteger(value);
+            int width = getSafelyInteger(value);
             propertiesElement.setAttributeNS(
                 OdfDocumentNamespace.FO.getUri(), "fo:padding-left", ((width / 100.0) + "mm"));
           }
@@ -6868,7 +6867,7 @@ public class JsonOperationConsumer {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "padding-right");
           } else {
-            Integer width = getSafelyInteger(value);
+            int width = getSafelyInteger(value);
             propertiesElement.setAttributeNS(
                 OdfDocumentNamespace.FO.getUri(), "fo:padding-right", ((width / 100.0) + "mm"));
           }
@@ -6881,7 +6880,7 @@ public class JsonOperationConsumer {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "padding-top");
           } else {
-            Integer width = getSafelyInteger(value);
+            int width = getSafelyInteger(value);
             propertiesElement.setAttributeNS(
                 OdfDocumentNamespace.FO.getUri(), "fo:padding-top", ((width / 100.0) + "mm"));
           }

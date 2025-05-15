@@ -38,7 +38,6 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles;
 import org.odftoolkit.odfdom.pkg.NamespaceName;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileSaxHandler;
-import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.pkg.OdfValidationException;
 import org.w3c.dom.Node;
 import org.xml.sax.ErrorHandler;

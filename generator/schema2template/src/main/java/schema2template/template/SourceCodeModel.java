@@ -70,8 +70,9 @@ public class SourceCodeModel {
     // Intermediate Step -> get all childOfBaseElement Definitions for each baseName
     Map<String, SortedSet<PuzzlePiece>> baseNameElementsMap =
         new HashMap<String, SortedSet<PuzzlePiece>>(baseNames.size());
-    for (String elementName : elementNameBaseNameMap.keySet()) {
-      String baseName = elementNameBaseNameMap.get(elementName);
+    for (Map.Entry<String, String> entry : elementNameBaseNameMap.entrySet()) {
+      String elementName = entry.getKey();
+      String baseName = entry.getValue();
         SortedSet<PuzzlePiece> elements = baseNameElementsMap.computeIfAbsent(baseName, k -> new TreeSet<PuzzlePiece>());
         PuzzleComponent childElement = schemaModel.getElement(elementName);
       if (childElement != null) {
@@ -97,10 +98,10 @@ public class SourceCodeModel {
 
     // Generate a map from element tag name to base classes
     mElementBaseMap = new HashMap<String, SourceCodeBaseClass>(elementNameBaseNameMap.size());
-    for (String elementName : elementNameBaseNameMap.keySet()) {
-      String baseName = elementNameBaseNameMap.get(elementName);
+    for (Map.Entry<String, String> entry : elementNameBaseNameMap.entrySet()) {
+      String baseName = entry.getValue();
       SourceCodeBaseClass baseclass = mBaseNameToBaseClass.get(baseName);
-      mElementBaseMap.put(elementName, baseclass);
+      mElementBaseMap.put(entry.getKey(), baseclass);
     }
   }
   /**

@@ -252,7 +252,7 @@ public class ShapeProperties extends CachedComponent {
       }
     }
     if (width != null) {
-      Integer maxHori = (Integer) width;
+      int maxHori = (Integer) width;
       if (horiOffset != null) {
         maxHori += (Integer) horiOffset;
       }
@@ -263,7 +263,7 @@ public class ShapeProperties extends CachedComponent {
       }
     }
     if (height != null) {
-      Integer maxVert = (Integer) height;
+      int maxVert = (Integer) height;
       if (vertOffset != null) {
         maxVert += (Integer) vertOffset;
       }

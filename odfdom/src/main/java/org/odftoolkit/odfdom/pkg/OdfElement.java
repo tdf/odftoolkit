@@ -1862,7 +1862,7 @@ public abstract class OdfElement extends ElementNSImpl {
           JSONObject formatChanges,
           Map<OdfName, OdfElement> formatElementHolder) {
         if (currentNode != null) {
-          Integer nextSplitPos;
+          int nextSplitPos;
           // if the start is equal to the first position avoid the first split
           if (currentPos >= posStart) {
             // we are about to gather content in our span
@@ -1873,7 +1873,7 @@ public abstract class OdfElement extends ElementNSImpl {
           }
 
           // ** GET NODE SIZE
-          Integer contentLength = getNodeWidth(currentNode);
+          int contentLength = getNodeWidth(currentNode);
 
           // addChild the full currentNode ==> if the end of the span is equal to the end of the
           // currentNode
@@ -1943,7 +1943,7 @@ public abstract class OdfElement extends ElementNSImpl {
           // // ** GET NODE SIZE
           // Integer contentLength = getNodeWidth(currentNode);
           // ** GET NODE SIZE
-          Integer contentLength = 1; // component default is 1
+          int contentLength = 1; // component default is 1
           if (currentNode instanceof Text) {
             contentLength = ((Text) currentNode).getLength();
           } else {
@@ -2037,7 +2037,7 @@ public abstract class OdfElement extends ElementNSImpl {
       int delete(Node currentNode, int currentPos, int posStart, int posEnd, List deleteStatus) {
 
         if (currentNode != null) {
-          Integer nextSplitPos;
+          int nextSplitPos;
           // if the start is equal to the first position avoid the first split
           if (currentPos >= posStart) {
             // we are about to gather content in our span
@@ -2047,7 +2047,7 @@ public abstract class OdfElement extends ElementNSImpl {
             nextSplitPos = posStart;
           }
           // ** GET NODE SIZE
-          Integer contentLength = getNodeWidth(currentNode);
+          int contentLength = getNodeWidth(currentNode);
 
           // addChild the middle part of the currentNode ==> if the currentNode already starts
           // within the span, but the end is not within the span
@@ -2228,7 +2228,7 @@ public abstract class OdfElement extends ElementNSImpl {
         if (currentNode != null) {
 
           // ** GET NODE SIZE
-          Integer contentLength = 1; // component default is 1
+          int contentLength = 1; // component default is 1
           if (currentNode instanceof Text) {
             contentLength = ((Text) currentNode).getLength();
           } else {
@@ -2282,7 +2282,7 @@ public abstract class OdfElement extends ElementNSImpl {
         if (currentNode != null) {
 
           // ** GET NODE SIZE
-          Integer contentLength = 1; // component default is 1
+          int contentLength = 1; // component default is 1
           if (!(currentNode instanceof Text)) {
             // get size from component
             contentLength = ((OdfElement) currentNode).getRepetition();

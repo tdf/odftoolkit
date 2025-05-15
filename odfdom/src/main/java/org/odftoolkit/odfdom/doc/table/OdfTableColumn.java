@@ -227,7 +227,7 @@ public class OdfTableColumn {
     String sRelWidth = maColumnElement.getProperty(OdfTableColumnProperties.RelColumnWidth);
     if (sRelWidth != null) {
       if (sRelWidth.contains("*")) {
-        Long value = Long.valueOf(sRelWidth.substring(0, sRelWidth.indexOf("*")));
+        long value = Long.parseLong(sRelWidth.substring(0, sRelWidth.indexOf("*")));
         return value;
       }
     }
