@@ -26,7 +26,7 @@ package org.odftoolkit.odfdom.pkg.rdfa;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.xml.namespace.NamespaceContext;
@@ -49,8 +49,8 @@ final class EvalContext implements NamespaceContext {
     super();
     this.base = base;
     this.parentSubject = base;
-    this.forwardProperties = new LinkedList<String>();
-    this.backwardProperties = new LinkedList<String>();
+    this.forwardProperties = new ArrayList<String>();
+    this.backwardProperties = new ArrayList<String>();
   }
 
   public EvalContext(EvalContext toCopy) {
@@ -59,8 +59,8 @@ final class EvalContext implements NamespaceContext {
     this.parentSubject = toCopy.parentSubject;
     this.parentObject = toCopy.parentObject;
     this.language = toCopy.language;
-    this.forwardProperties = new LinkedList<String>(toCopy.forwardProperties);
-    this.backwardProperties = new LinkedList<String>(toCopy.backwardProperties);
+    this.forwardProperties = new ArrayList<String>(toCopy.forwardProperties);
+    this.backwardProperties = new ArrayList<String>(toCopy.backwardProperties);
     this.parent = toCopy;
     this.vocab = toCopy.vocab;
   }

@@ -17,7 +17,7 @@ package org.odftoolkit.odfdom.changes;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import org.json.JSONArray;
@@ -295,7 +295,7 @@ public class Table<T> extends Component {
 
   static void stashColumnWidths(TableTableElement tableElement) {
     List<TableTableColumnElement> existingColumnList =
-        Table.getTableColumnElements(tableElement, new LinkedList<TableTableColumnElement>());
+        Table.getTableColumnElements(tableElement, new ArrayList<TableTableColumnElement>());
     List<Integer> tableColumWidths = collectColumnWidths(tableElement, existingColumnList);
     ((Table) tableElement.getComponent()).pushTableGrid(tableColumWidths);
   }

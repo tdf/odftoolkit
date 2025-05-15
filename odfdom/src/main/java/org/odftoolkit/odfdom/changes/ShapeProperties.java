@@ -26,7 +26,7 @@ package org.odftoolkit.odfdom.changes;
 import static org.odftoolkit.odfdom.changes.OperationConstants.*;
 
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -66,7 +66,7 @@ public class ShapeProperties extends CachedComponent {
   //        }
   public ShapeProperties(List<Integer> start, Map<String, Object> hardFormatations) {
     // Maps are being reused, for upcoming components, therefore the collections have to be cloned
-    mShapePosition = new LinkedList<Integer>(start);
+    mShapePosition = new ArrayList<Integer>(start);
     if (hardFormatations != null) {
       mShapeHardFormatations = new HashMap<String, Object>();
       mShapeHardFormatations.putAll(hardFormatations);

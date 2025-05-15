@@ -31,7 +31,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -3940,7 +3940,7 @@ public class JsonOperationConsumer {
       TableTableElement tableElement = (TableTableElement) tableComponent.getRootElement();
       // WORK AROUND for "UNDO COLUMN WIDTH" problem (see TableTableElement for further changes)
       List<TableTableColumnElement> existingColumnList =
-          Table.getTableColumnElements(tableElement, new LinkedList<TableTableColumnElement>());
+          Table.getTableColumnElements(tableElement, new ArrayList<TableTableColumnElement>());
       int columnCount = 0;
       for (TableTableColumnElement column : existingColumnList) {
         columnCount += column.getRepetition();
@@ -4042,7 +4042,7 @@ public class JsonOperationConsumer {
         // groups, columns and header elements
         List<TableTableColumnElement> existingColumnList =
             Table.getTableColumnElements(
-                parentComponent.getRootElement(), new LinkedList<TableTableColumnElement>());
+                parentComponent.getRootElement(), new ArrayList<TableTableColumnElement>());
         addColumnAndCellElements(
             parentComponent,
             start,
@@ -4643,7 +4643,7 @@ public class JsonOperationConsumer {
         // Returns all TableTableColumn descendants that exist within the tableElement, even within
         // groups, columns and header elements
         List<TableTableColumnElement> existingColumnList =
-            Table.getTableColumnElements(tableElement, new LinkedList<TableTableColumnElement>());
+            Table.getTableColumnElements(tableElement, new ArrayList<TableTableColumnElement>());
         // Column creation only required
         addColumnAndCellElements(
             tableElement.getComponent(),

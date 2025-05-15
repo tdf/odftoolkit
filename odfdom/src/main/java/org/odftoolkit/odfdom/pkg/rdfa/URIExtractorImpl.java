@@ -25,7 +25,7 @@ package org.odftoolkit.odfdom.pkg.rdfa;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -78,7 +78,7 @@ class URIExtractorImpl implements URIExtractor {
 
   public List<String> getURIs(StartElement element, Attribute attr, EvalContext context) {
 
-    List<String> uris = new LinkedList<String>();
+    List<String> uris = new ArrayList<String>();
 
     String[] curies = attr.getValue().split("\\s+");
     boolean permitReserved =

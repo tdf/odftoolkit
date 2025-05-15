@@ -28,6 +28,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.zip.ZipException;
 import javax.xml.validation.Validator;
 import org.odftoolkit.odfdom.doc.OdfDocument;
@@ -38,7 +39,7 @@ abstract class ODFRootPackageValidator extends ODFPackageValidator
     implements ManifestEntryListener {
 
   private OdfPackage m_aPkg = null;
-  private ArrayList<ManifestEntry> m_aSubDocs = null;
+  private List<ManifestEntry> m_aSubDocs = null;
   private ODFPackageErrorHandler m_ErrorHandler = null;
 
   protected ODFRootPackageValidator(
