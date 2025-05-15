@@ -437,12 +437,11 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
     nsURI = mUriByPrefix.get(prefix);
     if (nsURI == null) {
       // look in Duplicate URI prefixes
-      Set<String> urisWithDuplicatePrefixes = this.mDuplicatePrefixesByUri.keySet();
-      for (String aURI : urisWithDuplicatePrefixes) {
-        Set<String> prefixes = this.mDuplicatePrefixesByUri.get(aURI);
+      for (Map.Entry<String, Set<String>> entry : this.mDuplicatePrefixesByUri.entrySet()) {
+        Set<String> prefixes = entry.getValue();
         // check if requested prefix exists in hashset
         if (prefixes.contains(prefix)) {
-          nsURI = aURI;
+          nsURI = entry.getKey();
           break;
         }
       }

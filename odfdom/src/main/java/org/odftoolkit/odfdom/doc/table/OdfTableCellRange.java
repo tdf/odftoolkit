@@ -324,7 +324,7 @@ public class OdfTableCellRange {
   // the returned value is all measured with "mm" unit
   private List<Long> getCellRangeWidthList() {
     List<Long> list = new ArrayList<Long>();
-    Long length = 0L;
+    long length = 0L;
     for (int i = 0; i < maOwnerTable.getColumnCount() - 1; i++) {
       OdfTableColumn col = maOwnerTable.getColumnByIndex(i);
       int repeateNum = col.getColumnsRepeatedNumber();
@@ -374,7 +374,7 @@ public class OdfTableCellRange {
     Long[] widthArray = (Long[]) tmpList.toArray();
     Arrays.sort(widthArray);
     List<Long> rtnValues = new ArrayList<Long>();
-    Long colWidth;
+    long colWidth;
     long unitWidth;
     rtnValues.add(widthArray[0]);
     for (int i = 1; i < widthArray.length; i++) {

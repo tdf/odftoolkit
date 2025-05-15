@@ -161,8 +161,8 @@ public class JsonOperationProducer {
       //			}
       if (formattingProperties != null && !formattingProperties.isEmpty()) {
         JSONObject attrs = new JSONObject();
-        for (String arg : formattingProperties.keySet()) {
-          attrs.put(arg, formattingProperties.get(arg));
+        for (Map.Entry<String, Object> entry : formattingProperties.entrySet()) {
+          attrs.put(entry.getKey(), entry.getValue());
         }
         addComponentObject.put(OPK_ATTRS, attrs);
       }
@@ -256,8 +256,8 @@ public class JsonOperationProducer {
         }
         if (formattingProperties != null && !formattingProperties.isEmpty()) {
           JSONObject attrs = new JSONObject();
-          for (String arg : formattingProperties.keySet()) {
-            attrs.put(arg, formattingProperties.get(arg));
+          for (Map.Entry<String, Object> entry : formattingProperties.entrySet()) {
+            attrs.put(entry.getKey(), entry.getValue());
           }
           newOperation.put(OPK_ATTRS, attrs);
         }
@@ -296,8 +296,8 @@ public class JsonOperationProducer {
           newOperation.put(OPK_END, lastRow + previousRowRepeated);
         }
         JSONObject attrs = new JSONObject();
-        for (String arg : formattingProperties.keySet()) {
-          attrs.put(arg, formattingProperties.get(arg));
+        for (Map.Entry<String, Object> entry : formattingProperties.entrySet()) {
+          attrs.put(entry.getKey(), entry.getValue());
         }
         newOperation.put(OPK_ATTRS, attrs);
 
@@ -1947,8 +1947,8 @@ public class JsonOperationProducer {
   // umsonst mappen..
   private Map<String, String> transformMap(Map<OdfStyleProperty, String> props) {
     Map<String, String> odfProps = new HashMap<String, String>();
-    for (OdfStyleProperty styleProp : props.keySet()) {
-      odfProps.put(styleProp.getName().getQName(), props.get(styleProp));
+    for (Map.Entry<OdfStyleProperty, String> entry : props.entrySet()) {
+      odfProps.put(entry.getKey().getName().getQName(), entry.getValue());
     }
     return odfProps;
   }

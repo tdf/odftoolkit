@@ -72,7 +72,7 @@ class DirectoryCompare {
   private static boolean compareDirectories(Path dir1, Path dir2) throws IOException {
     boolean dir1Exists = Files.exists(dir1) && Files.isDirectory(dir1);
     boolean dir2Exists = Files.exists(dir2) && Files.isDirectory(dir2);
-    Boolean areEqual = Boolean.TRUE;
+    boolean areEqual = true;
 
     if (dir1Exists && dir2Exists) {
       HashMap<Path, Path> dir1Paths = new HashMap<>();
@@ -93,7 +93,7 @@ class DirectoryCompare {
             Level.SEVERE,
             "\nThe file size differ:\n{0} files exist in \n{1}\n{2} files exist in\n{3}\n\n",
             new Object[] {dir1Paths.size(), dir1, dir2Paths.size(), dir2});
-        areEqual = Boolean.FALSE;
+        areEqual = false;
       }
 
       // For each file in dir1, check if also dir2 contains this file and if
@@ -102,7 +102,7 @@ class DirectoryCompare {
         Path relativePath = pathEntry.getKey();
         Path absolutePath = pathEntry.getValue();
         if (!dir2Paths.containsKey(relativePath)) {
-          areEqual = Boolean.FALSE;
+          areEqual = false;
           LOG.log(
               Level.SEVERE,
               "\nThe file\n{0}\ndoes not exist in\n{1}\n\n",
@@ -112,7 +112,7 @@ class DirectoryCompare {
             // error msg within textFilesEquals with line difference
             // LOG.log(Level.SEVERE, "There is a difference between:\n{0}\n and \n{1}\n\n", new
             // Object[]{absolutePath.toString(), relativePath.toAbsolutePath().toString()});
-            areEqual = Boolean.FALSE;
+            areEqual = false;
           }
           // remove it to be able to show the superset of dir2Paths in the end
           dir2Paths.remove(relativePath);
@@ -120,7 +120,7 @@ class DirectoryCompare {
       }
       // if there is a superset of dir2Paths
       if (!dir2Paths.isEmpty()) {
-        areEqual = Boolean.FALSE;
+        areEqual = false;
         for (Entry<Path, Path> pathEntry2 : dir2Paths.entrySet()) {
           Path relativePath2 = pathEntry2.getKey();
           LOG.log(
@@ -131,7 +131,7 @@ class DirectoryCompare {
       }
       return areEqual;
     } else {
-      areEqual = Boolean.FALSE;
+      areEqual = false;
       if (!dir1Exists) {
         LOG.log(
             Level.SEVERE,
@@ -205,21 +205,21 @@ class DirectoryCompare {
   }
 
   private static boolean textFilesEquals(Path p1, Path p2) throws IOException {
-    boolean areEqual = Boolean.TRUE;
+    boolean areEqual = true;
     if (Files.isDirectory(p1) || Files.isDirectory(p2)) {
       if (!Files.isDirectory(p1)) {
         LOG.log(
             Level.SEVERE,
             "\nOne file is a directory:\n{0}\nwhile the other is a file:\n{1}\n\n",
             new Object[] {p2.toString(), p1.toString()});
-        areEqual = Boolean.FALSE;
+        areEqual = false;
       }
       if (!Files.isDirectory(p2)) {
         LOG.log(
             Level.SEVERE,
             "\nOne file is a directory:\n{0}\nwhile the other is a file:\n{1}\n\n",
             new Object[] {p1.toString(), p2.toString()});
-        areEqual = Boolean.FALSE;
+        areEqual = false;
       }
     } else {
       try (BufferedReader reader1 = Files.newBufferedReader(p1)) {
@@ -229,10 +229,10 @@ class DirectoryCompare {
           int lineNum = 1;
           while (line1 != null || line2 != null) {
             if (line1 == null || line2 == null) {
-              areEqual = Boolean.FALSE;
+              areEqual = false;
               break;
             } else if (!line1.equals(line2)) {
-              areEqual = Boolean.FALSE;
+              areEqual = false;
               break;
             }
             line1 = reader1.readLine();

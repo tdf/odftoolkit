@@ -66,7 +66,6 @@ import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
 import org.odftoolkit.odfdom.pkg.OdfXMLFactory;
 import org.odftoolkit.odfdom.type.Length.Unit;
 import org.odftoolkit.odfdom.type.PositiveLength;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -1545,9 +1544,7 @@ public class OdfTable {
       reviseStyleFromTopRowToMediumRow(refRow);
       list.add(newFirstRow);
       List<OdfTableRow> rowList = insertMultipleRowBefore(refRow, refRow, rowCount - 1);
-      for (int i = 0; i < rowList.size(); i++) {
-        list.add(rowList.get(i));
-      }
+      list.addAll(rowList);
       return list;
     }
 
@@ -1574,9 +1571,7 @@ public class OdfTable {
         // correct styles
         reviseStyleFromTopRowToMediumRow(newRowList.get(0));
       }
-      for (int i = 0; i < newRowList.size(); i++) {
-        list.add(newRowList.get(i));
-      }
+      list.addAll(newRowList);
     }
 
     return list;

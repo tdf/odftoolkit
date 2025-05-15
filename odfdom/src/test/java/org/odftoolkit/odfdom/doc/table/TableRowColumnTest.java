@@ -18,9 +18,6 @@
  */
 package org.odftoolkit.odfdom.doc.table;
 
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

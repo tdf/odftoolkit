@@ -30,7 +30,6 @@ import java.util.logging.Logger;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.odftoolkit.odfdom.doc.LoadSaveTest;
 import org.odftoolkit.odfdom.pkg.DefaultErrorHandler;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 

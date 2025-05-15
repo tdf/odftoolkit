@@ -113,7 +113,7 @@ class TinkerPopGraph {
     addGraphProperties(g, v, parentV, exp, parentExp);
     if (!(exp instanceof NameClassAndExpression) || parentExp == null) {
       List<Expression> children = (List<Expression>) exp.visit(CHILD_VISITOR);
-      Integer newChildNo = 0;
+      int newChildNo = 0;
       for (Expression newChildExp : children) {
         Vertex newChildV = createVertex(g, newChildExp);
         // only for sequences the order of children is important
@@ -123,7 +123,7 @@ class TinkerPopGraph {
               "has",
               newChildV,
               "order",
-              newChildNo.toString(),
+            Integer.toString(newChildNo),
               "color",
               "#00ee00"); // sequence edges using color green2 see
           // http://www.farb-tabelle.de/de/rgb2hex.htm?q=green2

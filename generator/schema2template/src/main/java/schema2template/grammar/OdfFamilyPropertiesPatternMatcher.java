@@ -214,11 +214,10 @@ class OdfFamilyPropertiesPatternMatcher {
   @Override
   public String toString() {
     Map<String, List<String>> results = getFamilyProperties();
-    Set<String> families = results.keySet();
     StringBuilder sb = new StringBuilder();
-    for (String family : families) {
-      sb.append("@style:family = '").append(family).append("' =");
-      List<String> propNames = results.get(family);
+    for (Map.Entry<String, List<String>> entry : results.entrySet()) {
+      sb.append("@style:family = '").append(entry.getKey()).append("' =");
+      List<String> propNames = entry.getValue();
       for (String propName : propNames) {
         sb.append(" style:").append(propName);
       }

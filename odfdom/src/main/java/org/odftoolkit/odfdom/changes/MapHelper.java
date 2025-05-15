@@ -812,7 +812,8 @@ public final class MapHelper {
         imageProps = new JSONObject();
         lineProps = new JSONObject();
         fillProps = new JSONObject();
-        for (String propName : odfProps.keySet()) {
+        for (Entry<String, String> entry : odfProps.entrySet()) {
+          String propName = entry.getKey();
           try {
             if (propName.contains("margin")) {
               if (marginToBeDone) {
@@ -1082,7 +1083,7 @@ public final class MapHelper {
             } else if (propName.equals("svg:stroke-width")) {
               lineProps.put("width", MapHelper.normalizeLength(odfProps.get("svg:stroke-width")));
             } else if (propName.equals("style:run-through")) {
-              String runThrough = odfProps.get(propName);
+              String runThrough = entry.getValue();
               if ("background".equals(runThrough)) {
                 newProps.put("anchorBehindDoc", true);
               }
@@ -1504,10 +1505,10 @@ public final class MapHelper {
       Map<String, OdfStylePropertiesSet> familyPropertyGroups,
       Map<String, Map<String, String>> allOdfProps) {
     if (style != null) {
-      for (String styleFamilyKey : familyPropertyGroups.keySet()) {
+      for (Entry<String, OdfStylePropertiesSet> entry : familyPropertyGroups.entrySet()) {
         // the ODF properties of one family group
         Map<String, String> odfProps = new HashMap<String, String>();
-        OdfStylePropertiesSet key = familyPropertyGroups.get(styleFamilyKey);
+        OdfStylePropertiesSet key = entry.getValue();
         OdfStylePropertiesBase propsElement = style.getPropertiesElement(key);
         if (propsElement != null) {
           NamedNodeMap attrs = propsElement.getAttributes();
@@ -1557,7 +1558,7 @@ public final class MapHelper {
           }
         }
         if (!odfProps.isEmpty()) {
-          allOdfProps.put(styleFamilyKey, odfProps);
+          allOdfProps.put(entry.getKey(), odfProps);
         }
       }
     }
@@ -1649,7 +1650,7 @@ public final class MapHelper {
 
   // convert xmlschema-2 date to double
   public static Double dateToDouble(Object value) {
-    Double ret = 0.0;
+    double ret = 0.0;
     if (value instanceof String) {
       try {
         LocalDateTime dateTime = LocalDateTime.parse((String) value);
@@ -1665,7 +1666,7 @@ public final class MapHelper {
   // convert xmlschema-2 duration to double
 
   public static Double timeToDouble(Object value) {
-    Double ret = 0.;
+    double ret = 0.;
     if (value != null && value instanceof String) {
       // PThhHmmMss.sssS
       try {

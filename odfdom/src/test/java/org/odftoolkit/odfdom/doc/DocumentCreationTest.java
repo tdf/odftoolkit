@@ -251,8 +251,7 @@ public class DocumentCreationTest {
       OdfDocument docWithEmbeddedObjects = OdfDocument.loadDocument(TEST_FILE_EMBEDDED);
       Map<String, OdfDocument> embDocs = docWithEmbeddedObjects.loadSubDocuments();
       String pathToEmbeddedObject = "";
-      for (String embDocPath : embDocs.keySet()) {
-        OdfPackageDocument embDoc = embDocs.get(embDocPath);
+      for (OdfDocument embDoc : embDocs.values()) {
         LOG.log(
             Level.INFO,
             "Embedded file of {0} internal package path: {1} mediaType: {2}",
@@ -381,8 +380,7 @@ public class DocumentCreationTest {
     try {
       docWithEmbeddedObjects = OdfDocument.loadDocument(TEST_FILE_EMBEDDED);
       Map<String, OdfDocument> embDocs = docWithEmbeddedObjects.loadSubDocuments();
-      for (String embDocPath : embDocs.keySet()) {
-        OdfDocument doc1 = embDocs.get(embDocPath);
+      for (OdfDocument doc1 : embDocs.values()) {
         doc1.getDocumentPath();
         OdfContentDom contentDom1 = doc1.getContentDom();
         OdfDocument doc2 = doc1.loadSubDocument(".");
@@ -404,8 +402,7 @@ public class DocumentCreationTest {
       Map<String, OdfDocument> embDocs =
           docWithEmbeddedObjects.loadSubDocuments(OdfDocument.OdfMediaType.GRAPHICS);
       // Graphics Doc
-      for (String eDocPath : embDocs.keySet()) {
-        OdfDocument doc1 = embDocs.get(eDocPath);
+      for (OdfDocument doc1 : embDocs.values()) {
         Assert.assertNotNull(doc1);
         OdfContentDom contentDom = doc1.getContentDom();
         XPath xpath = contentDom.getXPath();
@@ -424,9 +421,8 @@ public class DocumentCreationTest {
         Assert.assertEquals(span.getTextContent(), TEST_SPAN_TEXT);
         Map<String, OdfDocument> embDocs3 =
             docWithEmbeddedObjects.loadSubDocuments(OdfDocument.OdfMediaType.TEXT);
-        for (String eDocPath3 : embDocs3.keySet()) {
+        for (OdfDocument doc3 : embDocs3.values()) {
           // Writer Doc
-          OdfDocument doc3 = embDocs3.get(eDocPath3);
           Assert.assertNotNull(doc3);
           OdfContentDom contentDom3 = doc3.getContentDom();
           TextPElement para2 =

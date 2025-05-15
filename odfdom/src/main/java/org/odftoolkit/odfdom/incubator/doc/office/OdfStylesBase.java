@@ -130,8 +130,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
   public Iterable<OdfStyle> getAllStyles() {
     ArrayList<OdfStyle> allStyles = new ArrayList<OdfStyle>();
     if (mStyles != null) {
-      for (OdfStyleFamily family : mStyles.keySet()) {
-        HashMap<String, OdfStyle> familySet = mStyles.get(family);
+      for (HashMap<String, OdfStyle> familySet : mStyles.values()) {
         Collection<OdfStyle> familyStyles = familySet.values();
         allStyles.addAll(familyStyles);
       }
