@@ -2110,8 +2110,8 @@ public final class MapHelper {
       if (!code.isEmpty() && type != OfficeValueTypeAttribute.Value.VOID) {
         String foundStyleName = null;
         boolean foundInAutoStyles = false;
-        HashMap<String, DataStyleElement> officeDataStyles = officeStyles.getAllDataStyles();
-        HashMap<String, DataStyleElement> autoDataStyles = autoStyles.getAllDataStyles();
+        Map<String, DataStyleElement> officeDataStyles = officeStyles.getAllDataStyles();
+        Map<String, DataStyleElement> autoDataStyles = autoStyles.getAllDataStyles();
         for (Entry<String, DataStyleElement> autoNumberStyle : autoDataStyles.entrySet()) {
           if (autoNumberStyle.getValue().getFormat(true).equals(code)) {
             foundStyleName = autoNumberStyle.getKey();

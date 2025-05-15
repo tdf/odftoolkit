@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -228,12 +229,12 @@ public class OdfPresentationDocument extends OdfDocument {
   // while if the style elements really have the same style name but with different content
   // such as that these style elements are from different document
   // so the value for each key should be a list
-  private HashMap<String, List<String>> styleRenameMap = new HashMap<String, List<String>>();
+  private Map<String, List<String>> styleRenameMap = new HashMap<String, List<String>>();
   // the map is used to record if the renamed style name is appended to the current dom
-  private HashMap<String, Boolean> styleAppendMap = new HashMap<String, Boolean>();
+  private Map<String, Boolean> styleAppendMap = new HashMap<String, Boolean>();
   // the object rename map for image.
   // can not easily recognize if the embedded document are the same.
-  //	private HashMap<String, String> objectRenameMap = new HashMap<String, String>();
+  //	private Map<String, String> objectRenameMap = new HashMap<String, String>();
 
   /**
    * Return the slide at a specified position in this presentation. Return null if the index is out

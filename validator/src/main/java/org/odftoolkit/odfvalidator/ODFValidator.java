@@ -28,9 +28,11 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -51,8 +53,8 @@ public class ODFValidator implements ODFValidatorProvider {
   protected OdfVersion m_aVersion = null;
   protected OdfVersion mOdfPackageVersion = null;
   // Validator and configuration cache
-  private HashMap<String, Schema> m_aSchemaMap = null;
-  private HashMap<OdfVersion, Configuration> m_aConfigurationMap = null;
+  private Map<String, Schema> m_aSchemaMap = null;
+  private Map<OdfVersion, Configuration> m_aConfigurationMap = null;
   // Generator from last validateFile or validateStream call
   private String m_aGenerator = "";
   private static final String MISSING_ODF_VERSION = " 'Missing ODF version'";
@@ -262,7 +264,7 @@ public class ODFValidator implements ODFValidatorProvider {
 
   private Configuration getConfiguration(OdfVersion aVersion) throws ODFValidatorException {
     if (m_aConfigurationMap == null) {
-      m_aConfigurationMap = new HashMap<>();
+      m_aConfigurationMap = new EnumMap<>(OdfVersion.class);
     }
 
     Configuration aConfig = m_aConfigurationMap.get(aVersion);

@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -55,7 +56,7 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
     }
   }
 
-  private HashMap<String, FilterEntry> m_aFilterEntries;
+  private Map<String, FilterEntry> m_aFilterEntries;
   private HashSet<String> m_aTaskIdsReported;
 
   class Handler extends DefaultHandler {
@@ -69,10 +70,10 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
       }
     }
 
-    HashMap<String, FilterEntry> m_aFilterEntries;
+    Map<String, FilterEntry> m_aFilterEntries;
     Entry m_aEntry = null;
 
-    Handler(HashMap<String, FilterEntry> aFilterEntries) {
+    Handler(Map<String, FilterEntry> aFilterEntries) {
       m_aFilterEntries = aFilterEntries;
     }
 

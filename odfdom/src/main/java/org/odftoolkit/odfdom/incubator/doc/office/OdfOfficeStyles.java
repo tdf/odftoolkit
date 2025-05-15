@@ -25,6 +25,8 @@ package org.odftoolkit.odfdom.incubator.doc.office;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.draw.DrawFillImageElement;
@@ -71,11 +73,11 @@ public abstract class OdfOfficeStyles extends OdfStylesBase {
   private static final long serialVersionUID = 700763983193326060L;
 
   // styles that are only in OdfOfficeStyles
-  private HashMap<OdfStyleFamily, OdfDefaultStyle> mDefaultStyles;
-  private HashMap<String, DrawMarkerElement> mMarker;
-  private HashMap<String, DrawGradientElement> mGradients;
-  private HashMap<String, DrawHatchElement> mHatches;
-  private HashMap<String, DrawFillImageElement> mFillImages;
+  private Map<OdfStyleFamily, OdfDefaultStyle> mDefaultStyles;
+  private Map<String, DrawMarkerElement> mMarker;
+  private Map<String, DrawGradientElement> mGradients;
+  private Map<String, DrawHatchElement> mHatches;
+  private Map<String, DrawFillImageElement> mFillImages;
   private OdfTextOutlineStyle mOutlineStyle;
 
   public OdfOfficeStyles(OdfFileDom ownerDoc) {

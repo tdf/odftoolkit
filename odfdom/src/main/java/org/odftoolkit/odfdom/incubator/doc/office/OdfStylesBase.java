@@ -26,6 +26,7 @@ package org.odftoolkit.odfdom.incubator.doc.office;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
@@ -55,17 +56,17 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
 
   private static final long serialVersionUID = 1L;
 
-  private HashMap<OdfStyleFamily, HashMap<String, OdfStyle>> mStyles;
-  private HashMap<String, OdfTextListStyle> mListStyles;
-  private HashMap<String, OdfNumberStyle> mNumberStyles;
-  private HashMap<String, OdfNumberDateStyle> mDateStyles;
-  private HashMap<String, OdfNumberPercentageStyle> mPercentageStyles;
-  private HashMap<String, OdfNumberCurrencyStyle> mCurrencyStyles;
-  private HashMap<String, OdfNumberTimeStyle> mTimeStyles;
-  private HashMap<String, NumberBooleanStyleElement> mBooleanStyles;
-  private HashMap<String, NumberTextStyleElement> mTextStyles;
+  private Map<OdfStyleFamily, HashMap<String, OdfStyle>> mStyles;
+  private Map<String, OdfTextListStyle> mListStyles;
+  private Map<String, OdfNumberStyle> mNumberStyles;
+  private Map<String, OdfNumberDateStyle> mDateStyles;
+  private Map<String, OdfNumberPercentageStyle> mPercentageStyles;
+  private Map<String, OdfNumberCurrencyStyle> mCurrencyStyles;
+  private Map<String, OdfNumberTimeStyle> mTimeStyles;
+  private Map<String, NumberBooleanStyleElement> mBooleanStyles;
+  private Map<String, NumberTextStyleElement> mTextStyles;
 
-  private HashMap<String, DataStyleElement> mAllDataStyles =
+  private Map<String, DataStyleElement> mAllDataStyles =
       new HashMap<String, DataStyleElement>();
 
   public OdfStylesBase(OdfFileDom ownerDoc, OdfName odfName) {
@@ -73,7 +74,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
   }
 
   /** @return a set of all names of the contained 'number' styles (text, date, time, ...) */
-  public HashMap<String, DataStyleElement> getAllDataStyles() {
+  public Map<String, DataStyleElement> getAllDataStyles() {
     return mAllDataStyles;
   }
 

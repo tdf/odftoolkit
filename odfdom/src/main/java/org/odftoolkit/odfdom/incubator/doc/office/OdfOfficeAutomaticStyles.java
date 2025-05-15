@@ -26,6 +26,7 @@ package org.odftoolkit.odfdom.incubator.doc.office;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import org.odftoolkit.odfdom.changes.MapHelper;
@@ -66,7 +67,7 @@ public abstract class OdfOfficeAutomaticStyles extends OdfStylesBase {
 
   private static final long serialVersionUID = -2925910664631016175L;
   // styles that are only in OdfAutomaticStyles
-  private HashMap<String, OdfStylePageLayout> mPageLayouts;
+  private Map<String, OdfStylePageLayout> mPageLayouts;
   // styles that are common for OdfStyles and OdfAutomaticStyles
 
   public OdfOfficeAutomaticStyles(OdfFileDom ownerDoc) {

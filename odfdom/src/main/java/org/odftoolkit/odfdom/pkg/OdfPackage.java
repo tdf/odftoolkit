@@ -141,7 +141,7 @@ public class OdfPackage implements Closeable {
   private ZipHelper mZipFile;
   private Resolver mResolver;
   private Map<String, ZipArchiveEntry> mZipEntries;
-  private HashMap<String, ZipArchiveEntry> mOriginalZipEntries;
+  private Map<String, ZipArchiveEntry> mOriginalZipEntries;
   private Map<String, OdfFileEntry> mManifestEntries;
   // All opened documents from the same package are cached (including the root document)
   private Map<String, OdfPackageDocument> mPkgDocuments;
@@ -150,8 +150,8 @@ public class OdfPackage implements Closeable {
   private int mTransientMarkupId = 0;
   // Three different incarnations of a package file/data
   // save() will check 1) mPkgDoms, 2) if not check mMemoryFileCache
-  private HashMap<String, Document> mPkgDoms;
-  private HashMap<String, byte[]> mMemoryFileCache;
+  private Map<String, Document> mPkgDoms;
+  private Map<String, byte[]> mMemoryFileCache;
   private Map<String, Object> mConfiguration = new HashMap<String, Object>();
 
   private ErrorHandler mErrorHandler;
