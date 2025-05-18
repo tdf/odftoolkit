@@ -15,8 +15,6 @@
  */
 package org.odftoolkit.odfdom.changes;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 class FieldMap {
