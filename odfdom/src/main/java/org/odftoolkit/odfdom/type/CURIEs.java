@@ -19,8 +19,8 @@
 package org.odftoolkit.odfdom.type;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** This class represents the in OpenDocument format used data type {@odf.datatype CURIEs} */
 public class CURIEs implements OdfDataType {
@@ -37,16 +37,7 @@ public class CURIEs implements OdfDataType {
     if ((curies == null) || (curies.size() == 0)) {
       throw new IllegalArgumentException("parameter can not be null for CURIEs");
     }
-    StringBuilder aRet = new StringBuilder();
-    Iterator<CURIE> aIter = curies.iterator();
-    while (aIter.hasNext()) {
-      if (aRet.length() > 0) {
-        aRet.append(' ');
-      }
-      String aCurie = aIter.next().toString();
-      aRet.append(aCurie);
-    }
-    mCURIEs = aRet.toString();
+    mCURIEs = curies.stream().map(CURIE::toString).collect(Collectors.joining(" "));
   }
 
   /**
@@ -73,8 +64,8 @@ public class CURIEs implements OdfDataType {
 
     List<CURIE> aRet = new ArrayList<>();
     String[] names = stringValue.split(" ");
-    for (int i = 0; i < names.length; i++) {
-      aRet.add(new CURIE(names[i]));
+    for (String name : names) {
+      aRet.add(new CURIE(name));
     }
     return new CURIEs(aRet);
   }
@@ -87,8 +78,8 @@ public class CURIEs implements OdfDataType {
   public List<CURIE> getCURIEList() {
     List<CURIE> aRet = new ArrayList<>();
     String[] names = mCURIEs.split(" ");
-    for (int i = 0; i < names.length; i++) {
-      aRet.add(new CURIE(names[i]));
+    for (String name : names) {
+      aRet.add(new CURIE(name));
     }
     return aRet;
   }
@@ -109,8 +100,8 @@ public class CURIEs implements OdfDataType {
     }
 
     String[] names = stringValue.split(" ");
-    for (int i = 0; i < names.length; i++) {
-      if (!CURIE.isValid(names[i])) {
+    for (String name : names) {
+      if (!CURIE.isValid(name)) {
         return false;
       }
     }

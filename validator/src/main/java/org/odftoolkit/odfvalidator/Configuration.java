@@ -29,7 +29,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.TreeSet;
@@ -76,8 +75,9 @@ public class Configuration extends Properties {
     }
 
     List<String> aValues = new Vector<>(aSortedPropNames.size());
-    Iterator<String> aIter = aSortedPropNames.iterator();
-    while (aIter.hasNext()) aValues.add(getProperty(aIter.next()));
+    for (String aSortedPropName : aSortedPropNames) {
+      aValues.add(getProperty(aSortedPropName));
+    }
 
     return aValues;
   }

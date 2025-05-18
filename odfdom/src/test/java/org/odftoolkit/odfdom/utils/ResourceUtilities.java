@@ -398,8 +398,7 @@ public final class ResourceUtilities {
     StringBuilder output = new StringBuilder(encodedString.length());
     char[] charArray = encodedString.toCharArray();
 
-    for (int i = 0; i < charArray.length; i++) {
-      char c = charArray[i];
+    for (char c : charArray) {
       if ((int) c > 127) {
         encodedString = "000" + Integer.toHexString((int) c).toUpperCase();
         output.append("\\u").append(encodedString.substring(encodedString.length() - 4));

@@ -630,15 +630,13 @@ public class OdfPackage implements Closeable {
       if (mErrorHandler != null) {
         validateManifest();
       }
-      Iterator<String> zipPaths = mZipEntries.keySet().iterator();
-      while (zipPaths.hasNext()) {
-        String internalPath = zipPaths.next();
+      for (String internalPath : mZipEntries.keySet()) {
         // every resource aside the /META-INF/manifest.xml (and
         // META-INF/ directory)
         // and "mimetype" will be added as fileEntry
-        if (!internalPath.equals(OdfPackage.OdfFile.MANIFEST.getPath())
-            && !internalPath.equals("META-INF/")
-            && !internalPath.equals(OdfPackage.OdfFile.MEDIA_TYPE.getPath())) {
+        if (!internalPath.equals(OdfFile.MANIFEST.getPath())
+          && !internalPath.equals("META-INF/")
+          && !internalPath.equals(OdfFile.MEDIA_TYPE.getPath())) {
           // aside "mediatype" and "META-INF/manifest"
           // add manifest entry as to be described by a
           // <manifest:file-entry>
@@ -687,16 +685,14 @@ public class OdfPackage implements Closeable {
 
       // No directory are listed in a ZIP removing all directory with
       // content
-      Iterator<String> manifestOnlyPaths = zipPathSubset.iterator();
-      while (manifestOnlyPaths.hasNext()) {
-        String manifestOnlyPath = manifestOnlyPaths.next();
+      for (String manifestOnlyPath : zipPathSubset) {
         // assumption: all directories end with slash
         if (manifestOnlyPath.endsWith(SLASH)) {
           removeDirectory(manifestOnlyPath);
         } else {
           // if it is a nonexistent file
           logValidationError(
-              OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, getBaseURI(), manifestOnlyPath);
+            OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, getBaseURI(), manifestOnlyPath);
           // remove from the manifest Map
           OdfFileEntry manifestEntry = mManifestEntries.remove(manifestOnlyPath);
           // remove from the manifest DOM
@@ -706,9 +702,7 @@ public class OdfPackage implements Closeable {
       }
     }
     // remove none document directories
-    Iterator<String> sharedPathsIter = sharedPaths.iterator();
-    while (sharedPathsIter.hasNext()) {
-      String sharedPath = sharedPathsIter.next();
+    for (String sharedPath : sharedPaths) {
       // assumption: all directories end with slash
       if (sharedPath.endsWith(SLASH)) {
         removeDirectory(sharedPath);

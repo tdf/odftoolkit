@@ -292,9 +292,9 @@ public class OdfOfficeMeta {
       mOfficeMetaElement.removeChild(keyele);
     }
     // add new
-    for (int i = 0; i < keyList.size(); i++) {
+    for (String s : keyList) {
       MetaKeywordElement keywordElement = mOfficeMetaElement.newMetaKeywordElement();
-      keywordElement.setTextContent(keyList.get(i));
+      keywordElement.setTextContent(s);
     }
   }
 

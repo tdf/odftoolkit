@@ -74,9 +74,9 @@ public class SelectionManager {
     OdfElement element = cutItem.getElement();
     if (repository.containsKey(element)) {
       ArrayList<Selection> selections = repository.get(element);
-      for (int i = 0; i < selections.size(); i++) {
-        if (selections.get(i).getIndex() > cutItem.getIndex()) {
-          selections.get(i).refreshAfterFrontalDelete(cutItem);
+      for (Selection selection : selections) {
+        if (selection.getIndex() > cutItem.getIndex()) {
+          selection.refreshAfterFrontalDelete(cutItem);
         }
       }
     }
@@ -93,9 +93,9 @@ public class SelectionManager {
     OdfElement element = positionItem.getElement();
     if (repository.containsKey(element)) {
       ArrayList<Selection> selections = repository.get(element);
-      for (int i = 0; i < selections.size(); i++) {
-        if (selections.get(i).getIndex() >= positionItem.getIndex()) {
-          selections.get(i).refreshAfterFrontalInsert(item);
+      for (Selection selection : selections) {
+        if (selection.getIndex() >= positionItem.getIndex()) {
+          selection.refreshAfterFrontalInsert(item);
         }
       }
     }
@@ -119,9 +119,9 @@ public class SelectionManager {
 
     if (repository.containsKey(element)) {
       ArrayList<Selection> selections = repository.get(element);
-      for (int i = 0; i < selections.size(); i++) {
-        if (selections.get(i).getIndex() >= positionIndex) {
-          selections.get(i).refreshAfterFrontalInsert(item);
+      for (Selection selection : selections) {
+        if (selection.getIndex() >= positionIndex) {
+          selection.refreshAfterFrontalInsert(item);
         }
       }
     }
@@ -157,9 +157,9 @@ public class SelectionManager {
   public void refresh(OdfElement containerElement, int offset, int positionIndex) {
     if (repository.containsKey(containerElement)) {
       ArrayList<Selection> selections = repository.get(containerElement);
-      for (int i = 0; i < selections.size(); i++) {
-        if (selections.get(i).getIndex() >= positionIndex) {
-          selections.get(i).refresh(offset);
+      for (Selection selection : selections) {
+        if (selection.getIndex() >= positionIndex) {
+          selection.refresh(offset);
         }
       }
     }

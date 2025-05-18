@@ -685,10 +685,9 @@ public abstract class OdfElement extends ElementNSImpl {
       return false;
     }
 
-    for (int i = 0; i < attr1.size(); i++) {
-      Node n1 = attr1.get(i);
+    for (Node n1 : attr1) {
       if (n1.getLocalName().equals("name")
-          && n1.getNamespaceURI().equals(OdfDocumentNamespace.STYLE.getUri())) {
+        && n1.getNamespaceURI().equals(OdfDocumentNamespace.STYLE.getUri())) {
         continue; // do not compare style names
       }
       Node n2 = null;

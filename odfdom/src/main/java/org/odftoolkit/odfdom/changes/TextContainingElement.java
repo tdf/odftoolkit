@@ -125,9 +125,8 @@ public abstract class TextContainingElement extends OdfStylableElement {
               mSelections.subSet(outerSelection, true, outerSelection, true);
           if (equalSet.size() < 2) {
             TextSelection innerSelection;
-            Iterator<TextSelection> it = equalSet.iterator();
-            while (it.hasNext()) {
-              innerSelection = it.next();
+            for (TextSelection textSelection : equalSet) {
+              innerSelection = textSelection;
               if (innerSelection.mSelectionElement instanceof TextSpanElement) {
                 if (innerSelection.getURL() == null) {
                   innerSelection.setURL(url);

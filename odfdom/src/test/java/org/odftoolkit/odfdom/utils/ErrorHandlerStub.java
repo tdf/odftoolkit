@@ -24,7 +24,6 @@
 package org.odftoolkit.odfdom.utils;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -103,10 +102,9 @@ public class ErrorHandlerStub implements ErrorHandler {
   }
 
   private void validateProblem(Map<ValidationConstraint, Integer> expectedProblems, String level) {
-    Iterator<ValidationConstraint> constraints = expectedProblems.keySet().iterator();
-    while (constraints.hasNext()) {
-      ValidationConstraint constraint = constraints.next();
-      Integer problemOccurance = expectedProblems.get(constraint);
+    for (Map.Entry<ValidationConstraint, Integer> entry : expectedProblems.entrySet()) {
+      ValidationConstraint constraint = entry.getKey();
+      int problemOccurance = entry.getValue();
       if (problemOccurance > 0) {
         logMissingConstraint(constraint, level, problemOccurance);
       } else if (problemOccurance < 0) {

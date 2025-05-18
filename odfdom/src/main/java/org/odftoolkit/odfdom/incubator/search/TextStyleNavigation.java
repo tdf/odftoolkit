@@ -278,10 +278,7 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
         }
       }
       // get all automatic styles
-      Iterator<OdfStyle> cStyles =
-          mTextDocument.getContentDom().getAutomaticStyles().getAllStyles().iterator();
-      while (cStyles.hasNext()) {
-        OdfStyle cStyle = cStyles.next();
+      for (OdfStyle cStyle : mTextDocument.getContentDom().getAutomaticStyles().getAllStyles()) {
         // get default properties and style properties
         Map<OdfStyleProperty, String> map = cStyle.getStylePropertiesDeep();
 

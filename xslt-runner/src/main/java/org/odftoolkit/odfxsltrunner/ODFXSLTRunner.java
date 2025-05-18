@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -321,9 +320,7 @@ public class ODFXSLTRunner {
       Transformer aTransformer = aFactory.newTransformer(aStyleSheetSource);
 
       if (aParams != null) {
-        Iterator<XSLTParameter> aIter = aParams.iterator();
-        while (aIter.hasNext()) {
-          XSLTParameter aParam = aIter.next();
+        for (XSLTParameter aParam : aParams) {
           aTransformer.setParameter(aParam.getName(), aParam.getValue());
           aLogger.logInfo("Using parameter: " + aParam.getName() + "=" + aParam.getValue());
         }
@@ -343,25 +340,20 @@ public class ODFXSLTRunner {
       OdfPackage aInputPkg, File aTargetDir, List<String> aExtractFileNames, Logger aLogger) {
     Set<String> aInputPkgEntries = aInputPkg.getFilePaths();
 
-    Iterator<String> aInputPkgEntryIter = aInputPkgEntries.iterator();
-    while (aInputPkgEntryIter.hasNext()) {
-      String aInputFileName = aInputPkgEntryIter.next();
-
-      Iterator<String> aExtractFileNameIter = aExtractFileNames.iterator();
-      while (aExtractFileNameIter.hasNext()) {
-        String aExtractFileName = aExtractFileNameIter.next();
+    for (String aInputFileName : aInputPkgEntries) {
+      for (String aExtractFileName : aExtractFileNames) {
         if (!aInputFileName.endsWith("/")
-            && (aInputFileName.equals(aExtractFileName)
-                || (aExtractFileName.endsWith("/")
-                    ? aInputFileName.startsWith(aExtractFileName)
-                    : aInputFileName.startsWith(aExtractFileName + "/")))) {
+          && (aInputFileName.equals(aExtractFileName)
+          || (aExtractFileName.endsWith("/")
+          ? aInputFileName.startsWith(aExtractFileName)
+          : aInputFileName.startsWith(aExtractFileName + "/")))) {
           try {
             File aTargetFile = new File(aTargetDir, aInputFileName);
             File aTargetFileDir = aTargetFile.getParentFile();
             if (aTargetFileDir != null) aTargetFileDir.mkdirs();
 
             aLogger.logInfo(
-                "Extracting file " + aInputFileName + " to " + aTargetFile.getAbsolutePath());
+              "Extracting file " + aInputFileName + " to " + aTargetFile.getAbsolutePath());
             InputStream aInputStream = aInputPkg.getInputStream(aInputFileName);
             OutputStream aTargetStream = new FileOutputStream(aTargetFile);
             byte[] aBuffer = new byte[FILE_COPY_BUFFER_SIZE];
@@ -371,7 +363,7 @@ public class ODFXSLTRunner {
             }
             aTargetStream.close();
             aInputStream.close();
-          } catch (java.lang.Exception e) {
+          } catch (Exception e) {
             aLogger.logError(e.getMessage());
           }
           break;

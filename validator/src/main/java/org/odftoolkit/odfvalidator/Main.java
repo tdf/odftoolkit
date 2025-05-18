@@ -162,8 +162,7 @@ public class Main {
       // Print generator (does not require config file)
       if (bPrintGenerator) {
         MetaInformation aMetaInformation = new MetaInformation(System.out);
-        Iterator<String> aIter = aFileNames.iterator();
-        while (aIter.hasNext()) aMetaInformation.getInformation(aIter.next());
+        for (String aFileName : aFileNames) aMetaInformation.getInformation(aFileName);
         System.exit(0);
       }
 

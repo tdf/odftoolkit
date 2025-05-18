@@ -29,7 +29,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -230,9 +229,7 @@ public class OdfDrawImage extends DrawImageElement {
   public static void deleteImageByPath(OdfSchemaDocument doc, String imagePath) {
     List<OdfDrawImage> imageList = getImageByPath(doc, imagePath);
     if (imageList != null) {
-      Iterator<OdfDrawImage> it = imageList.iterator();
-      while (it.hasNext()) {
-        OdfDrawImage image = it.next();
+      for (OdfDrawImage image : imageList) {
         // remove the inserted picture
         String ref = image.getXlinkHrefAttribute().toString();
         doc.getPackage().remove(ref);
@@ -337,9 +334,7 @@ public class OdfDrawImage extends DrawImageElement {
   public static Set<String> getImagePathSet(OdfSchemaDocument doc) {
     Set<String> paths = new HashSet<>();
     List<OdfDrawImage> imageList = getImages(doc);
-    Iterator<OdfDrawImage> it = imageList.iterator();
-    while (it.hasNext()) {
-      OdfDrawImage image = it.next();
+    for (OdfDrawImage image : imageList) {
       paths.add(image.getXlinkHrefAttribute().toString());
     }
     return paths;

@@ -32,7 +32,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -882,8 +881,8 @@ public abstract class OdfDocument extends OdfSchemaDocument {
     try {
       List<TableTableElement> tableElementList = getTables(doRecursiveSearch);
       tableList = new ArrayList<>(tableElementList.size());
-      for (int i = 0; i < tableElementList.size(); i++) {
-        tableList.add(OdfTable.getInstance(tableElementList.get(i)));
+      for (TableTableElement tableTableElement : tableElementList) {
+        tableList.add(OdfTable.getInstance(tableTableElement));
       }
     } catch (Exception e) {
       LOG.log(Level.SEVERE, null, e);
@@ -1122,10 +1121,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
     }
     // if no default style setting for paragraph
     // get language and country setting from other default style settings
-    Iterable<OdfDefaultStyle> defaultStyles = styles.getDefaultStyles();
-    Iterator<OdfDefaultStyle> itera = defaultStyles.iterator();
-    while (itera.hasNext()) {
-      OdfDefaultStyle style = itera.next();
+    for (OdfDefaultStyle style : styles.getDefaultStyles()) {
       if (style.hasProperty(countryProp) && style.hasProperty(languageProp)) {
         ctry = style.getProperty(countryProp);
         lang = style.getProperty(languageProp);
@@ -1146,9 +1142,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
     OdfOfficeStyles styles = getStylesDom().getOfficeStyles();
     Iterable<OdfDefaultStyle> defaultStyles = styles.getDefaultStyles();
     if (defaultStyles != null) {
-      Iterator<OdfDefaultStyle> itera = defaultStyles.iterator();
-      while (itera.hasNext()) {
-        OdfDefaultStyle style = itera.next();
+      for (OdfDefaultStyle style : defaultStyles) {
         if (style.getFamily().getProperties().contains(OdfTextProperties.Language)) {
           style.setProperty(OdfTextProperties.Language, locale.getLanguage());
           style.setProperty(OdfTextProperties.Country, locale.getCountry());
@@ -1170,9 +1164,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
     OdfOfficeStyles styles = getStylesDom().getOfficeStyles();
     Iterable<OdfDefaultStyle> defaultStyles = styles.getDefaultStyles();
     if (defaultStyles != null) {
-      Iterator<OdfDefaultStyle> itera = defaultStyles.iterator();
-      while (itera.hasNext()) {
-        OdfDefaultStyle style = itera.next();
+      for (OdfDefaultStyle style : defaultStyles) {
         if (style.getFamily().getProperties().contains(OdfTextProperties.LanguageAsian)) {
           style.setProperty(OdfTextProperties.LanguageAsian, locale.getLanguage());
           style.setProperty(OdfTextProperties.CountryAsian, locale.getCountry());
@@ -1193,9 +1185,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
     OdfOfficeStyles styles = getStylesDom().getOfficeStyles();
     Iterable<OdfDefaultStyle> defaultStyles = styles.getDefaultStyles();
     if (defaultStyles != null) {
-      Iterator<OdfDefaultStyle> itera = defaultStyles.iterator();
-      while (itera.hasNext()) {
-        OdfDefaultStyle style = itera.next();
+      for (OdfDefaultStyle style : defaultStyles) {
         if (style.getFamily().getProperties().contains(OdfTextProperties.LanguageComplex)) {
           style.setProperty(OdfTextProperties.LanguageComplex, locale.getLanguage());
           style.setProperty(OdfTextProperties.CountryComplex, locale.getCountry());

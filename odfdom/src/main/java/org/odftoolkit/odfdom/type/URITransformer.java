@@ -206,8 +206,8 @@ class URITransformer {
       StringBuilder pathc = new StringBuilder();
       byte[] bytes = null;
       bytes = path.getBytes("UTF-8");
-      for (int i = 0; i < bytes.length; i++) {
-        int v = bytes[i];
+      for (int aByte : bytes) {
+        int v = aByte;
         if (v < 0) {
           v += 256;
         }
