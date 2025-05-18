@@ -37,7 +37,7 @@ import java.util.logging.Logger;
  * A URI is a uniform resource <i>identifier</i> while a URL is a uniform resource <i>locator</i>.
  * Hence every URL is a URI, abstractly speaking, but not every URI is a URL. This is because there
  * is another subcategory of URIs, uniform resource <i>names</i> (URNs), which name resources but do
- * not specify how to locate them. The <tt>mailto</tt>, <tt>news</tt>, and <tt>isbn</tt> URIs shown
+ * not specify how to locate them. The <code>mailto</code>, <code>news</code>, and <code>isbn</code> URIs shown
  * above are examples of URNs.
  *
  * <h4>URI syntax and components</h4>
@@ -46,27 +46,27 @@ import java.util.logging.Logger;
  *
  * <blockquote>
  *
- * [<i>scheme</i><tt><b>:</b></tt><i></i>]<i>scheme-specific-part</i>[<tt><b>#</b></tt><i>fragment</i>]
+ * [<i>scheme</i><code><b>:</b></code><i></i>]<i>scheme-specific-part</i>[<code><b>#</b></code><i>fragment</i>]
  *
  * </blockquote>
  *
- * where square brackets [...] delineate optional components and the characters <tt><b>:</b></tt>
- * and <tt><b>#</b></tt> stand for themselves.
+ * where square brackets [...] delineate optional components and the characters <code><b>:</b></code>
+ * and <code><b>#</b></code> stand for themselves.
  *
  * <p>An <i>absolute</i> URI specifies a scheme; a URI that is not absolute is said to be
  * <i>relative</i>. URIs are also classified according to whether they are <i>opaque</i> or
  * <i>hierarchical</i>.
  *
  * <p>An <i>opaque</i> URI is an absolute URI whose scheme-specific part does not begin with a slash
- * character (<tt>'/'</tt>). Opaque URIs are not subject to further parsing. Some examples of opaque
+ * character (<code>'/'</code>). Opaque URIs are not subject to further parsing. Some examples of opaque
  * URIs are:
  *
  * <blockquote>
  *
  * <table cellpadding=0 cellspacing=0>
- * <tr><td><tt>mailto:java-net@java.sun.com</tt><td></tr>
- * <tr><td><tt>news:comp.lang.java</tt><td></tr>
- * <tr><td><tt>urn:isbn:096139210x</td></tr>
+ * <tr><td><code>mailto:java-net@java.sun.com</code><td></tr>
+ * <tr><td><code>news:comp.lang.java</code><td></tr>
+ * <tr><td><code>urn:isbn:096139210x</code></td></tr>
  * </table>
  *
  * </blockquote>
@@ -77,9 +77,10 @@ import java.util.logging.Logger;
  *
  * <blockquote>
  *
- * <tt>http://java.sun.com/j2se/1.3/</tt><br>
- * <tt>docs/guide/collections/designfaq.html#28</tt></br>
- * <tt>../../../demo/jfc/SwingSet2/src/SwingSet2.java</tt></br> <tt>file:///~/calendar</tt>
+ * <code>http://java.sun.com/j2se/1.3/</code><br>
+ * <code>docs/guide/collections/designfaq.html#28</code><br>
+ * <code>../../../demo/jfc/SwingSet2/src/SwingSet2.java</code><br>
+ * <code>file:///~/calendar</code>
  *
  * </blockquote>
  *
@@ -87,12 +88,12 @@ import java.util.logging.Logger;
  *
  * <blockquote>
  *
- * [<i>scheme</i><tt><b>:</b></tt>][<tt><b>//</b></tt><i>authority</i>][<i>path</i>][<tt><b>?</b></tt><i>query</i>][<tt><b>#</b></tt><i>fragment</i>]
+ * [<i>scheme</i><code><b>:</b></code>][<code><b>//</b></code><i>authority</i>][<i>path</i>][<code><b>?</b></code><i>query</i>][<code><b>#</b></code><i>fragment</i>]
  *
  * </blockquote>
  *
- * where the characters <tt><b>:</b></tt>, <tt><b>/</b></tt>, <tt><b>?</b></tt>, and
- * <tt><b>#</b></tt> stand for themselves. The scheme-specific part of a hierarchical URI consists
+ * where the characters <code><b>:</b></code>, <code><b>/</b></code>, <code><b>?</b></code>, and
+ * <code><b>#</b></code> stand for themselves. The scheme-specific part of a hierarchical URI consists
  * of the characters between the scheme and fragment components.
  *
  * <p>The authority component of a hierarchical URI is, if specified, either <i>server-based</i> or
@@ -100,16 +101,16 @@ import java.util.logging.Logger;
  *
  * <blockquote>
  *
- * [<i>user-info</i><tt><b>@</b></tt>]<i>host</i>[<tt><b>:</b></tt><i>port</i>]
+ * [<i>user-info</i><code><b>@</b></code>]<i>host</i>[<code><b>:</b></code><i>port</i>]
  *
  * </blockquote>
  *
- * where the characters <tt><b>@</b></tt> and <tt><b>:</b></tt> stand for themselves. Nearly all URI
+ * where the characters <code><b>@</b></code> and <code><b>:</b></code> stand for themselves. Nearly all URI
  * schemes currently in use are server-based. An authority component that does not parse in this way
  * is considered to be registry-based.
  *
  * <p>The path component of a hierarchical URI is itself said to be absolute if it begins with a
- * slash character (<tt>'/'</tt>); otherwise it is relative. The path of a hierarchical URI that is
+ * slash character (<code>'/'</code>); otherwise it is relative. The path of a hierarchical URI that is
  * either absolute or specifies an authority is always absolute.
  *
  * <p>All told, then, a URI instance has the following nine components:
@@ -118,22 +119,22 @@ import java.util.logging.Logger;
  *
  * <table>
  * <tr><td><i>Component</i></td><td><i>Type</i></td></tr>
- * <tr><td>scheme</td><td><tt>String</tt></td></tr>
- * <tr><td>scheme-specific-part&nbsp;&nbsp;&nbsp;&nbsp;</td><td><tt>String</tt></td></tr>
- * <tr><td>authority</td><td><tt>String</tt></td></tr>
- * <tr><td>user-info</td><td><tt>String</tt></td></tr>
- * <tr><td>host</td><td><tt>String</tt></td></tr>
- * <tr><td>port</td><td><tt>int</tt></td></tr>
- * <tr><td>path</td><td><tt>String</tt></td></tr>
- * <tr><td>query</td><td><tt>String</tt></td></tr>
- * <tr><td>fragment</td><td><tt>String</tt></td></tr>
+ * <tr><td>scheme</td><td><code>String</code></td></tr>
+ * <tr><td>scheme-specific-part&nbsp;&nbsp;&nbsp;&nbsp;</td><td><code>String</code></td></tr>
+ * <tr><td>authority</td><td><code>String</code></td></tr>
+ * <tr><td>user-info</td><td><code>String</code></td></tr>
+ * <tr><td>host</td><td><code>String</code></td></tr>
+ * <tr><td>port</td><td><code>int</code></td></tr>
+ * <tr><td>path</td><td><code>String</code></td></tr>
+ * <tr><td>query</td><td><code>String</code></td></tr>
+ * <tr><td>fragment</td><td><code>String</code></td></tr>
  * </table>
  *
  * </blockquote>
  *
  * In a given instance any particular component is either <i>undefined</i> or <i>defined</i> with a
- * distinct value. Undefined string components are represented by <tt>null</tt>, while undefined
- * integer components are represented by <tt>-1</tt>. A string component may be defined to have the
+ * distinct value. Undefined string components are represented by <code>null</code>, while undefined
+ * integer components are represented by <code>-1</code>. A string component may be defined to have the
  * empty string as its value; this is not equivalent to that component being undefined.
  *
  * <p>Whether a particular component is or is not defined in an instance depends upon the type of
@@ -144,7 +145,7 @@ import java.util.logging.Logger;
  * server-based then the host component will be defined and the user-information and port components
  * may be defined.
  *
- * <p>See <a href="http://www.isi.edu/in-notes/rfc2396.txt""><i>RFC&nbsp;2396: Uniform Resource
+ * <p>See <a href="http://www.isi.edu/in-notes/rfc2396.txt"><i>RFC&nbsp;2396: Uniform Resource
  * Identifiers (URI): Generic Syntax</i></a>
  */
 class URITransformer {
