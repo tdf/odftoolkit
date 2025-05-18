@@ -129,11 +129,11 @@ public class OdfTable {
     if (mCellRepository.containsKey(cell)) {
       Vector<OdfTableCell> list = mCellRepository.get(cell);
       OdfTableCell fCell = null;
-      for (int i = 0; i < list.size(); i++) {
-        if (list.get(i).getOdfElement() == cell
-            && list.get(i).mnRepeatedColIndex == repeatedColIndex
-            && list.get(i).mnRepeatedRowIndex == repeatedRowIndex) {
-          fCell = list.get(i);
+      for (OdfTableCell odfTableCell : list) {
+        if (odfTableCell.getOdfElement() == cell
+          && odfTableCell.mnRepeatedColIndex == repeatedColIndex
+          && odfTableCell.mnRepeatedRowIndex == repeatedRowIndex) {
+          fCell = odfTableCell;
           break;
         }
       }
@@ -591,8 +591,8 @@ public class OdfTable {
 
     while (notUnique) {
       notUnique = false;
-      for (int i = 0; i < tableList.size(); i++) {
-        if (tableList.get(i).getTableNameAttribute().equalsIgnoreCase(tablename)) {
+      for (TableTableElement tableTableElement : tableList) {
+        if (tableTableElement.getTableNameAttribute().equalsIgnoreCase(tablename)) {
           notUnique = true;
           break;
         }
@@ -1912,12 +1912,11 @@ public class OdfTable {
     // check if the table name is already exist
     boolean isSpreadsheet = mDocument instanceof OdfSpreadsheetDocument;
     List<OdfTable> tableList = mDocument.getTableList(!isSpreadsheet);
-    for (int i = 0; i < tableList.size(); i++) {
-      OdfTable table = tableList.get(i);
+    for (OdfTable table : tableList) {
       if (tableName.equals(table.getTableName())) {
         if (table != this) {
           throw new IllegalArgumentException(
-              "The table name is duplicate with one of tables in the current document.");
+            "The table name is duplicate with one of tables in the current document.");
         }
       }
     }
@@ -2218,20 +2217,20 @@ public class OdfTable {
       OdfTableCell cell = getCellByPosition(nCol, nRow);
       return cell;
     } else {
-      for (int m = 0; m < coverList.size(); m++) {
-        info = coverList.get(m);
+      for (CellCoverInfo cellCoverInfo : coverList) {
+        info = cellCoverInfo;
         if (((nCol > info.nStartCol)
-                && (nCol <= info.nEndCol)
-                && (nRow == info.nStartRow)
-                && (nRow == info.nEndRow))
-            || ((nCol == info.nStartCol)
-                && (nCol == info.nEndCol)
-                && (nRow > info.nStartRow)
-                && (nRow <= info.nEndRow))
-            || ((nCol > info.nStartCol)
-                && (nCol <= info.nEndCol)
-                && (nRow > info.nStartRow)
-                && (nRow <= info.nEndRow))) {
+          && (nCol <= info.nEndCol)
+          && (nRow == info.nStartRow)
+          && (nRow == info.nEndRow))
+          || ((nCol == info.nStartCol)
+          && (nCol == info.nEndCol)
+          && (nRow > info.nStartRow)
+          && (nRow <= info.nEndRow))
+          || ((nCol > info.nStartCol)
+          && (nCol <= info.nEndCol)
+          && (nRow > info.nStartRow)
+          && (nRow <= info.nEndRow))) {
           OdfTableCell cell = getCellByPosition(info.nStartCol, info.nStartRow);
           return cell;
         }
@@ -2243,20 +2242,20 @@ public class OdfTable {
   // the parameter is the column/row index in the ownerTable,rather than in the cell range
   boolean isCoveredCellInOwnerTable(List<CellCoverInfo> coverList, int nCol, int nRow) {
     CellCoverInfo info;
-    for (int m = 0; m < coverList.size(); m++) {
-      info = coverList.get(m);
+    for (CellCoverInfo cellCoverInfo : coverList) {
+      info = cellCoverInfo;
       if (((nCol > info.nStartCol)
-              && (nCol <= info.nEndCol)
-              && (nRow == info.nStartRow)
-              && (nRow == info.nEndRow))
-          || ((nCol == info.nStartCol)
-              && (nCol == info.nEndCol)
-              && (nRow > info.nStartRow)
-              && (nRow <= info.nEndRow))
-          || ((nCol > info.nStartCol)
-              && (nCol <= info.nEndCol)
-              && (nRow > info.nStartRow)
-              && (nRow <= info.nEndRow))) // covered cell
+        && (nCol <= info.nEndCol)
+        && (nRow == info.nStartRow)
+        && (nRow == info.nEndRow))
+        || ((nCol == info.nStartCol)
+        && (nCol == info.nEndCol)
+        && (nRow > info.nStartRow)
+        && (nRow <= info.nEndRow))
+        || ((nCol > info.nStartCol)
+        && (nCol <= info.nEndCol)
+        && (nRow > info.nStartRow)
+        && (nRow <= info.nEndRow))) // covered cell
       {
         return true;
       }
@@ -2405,8 +2404,7 @@ public class OdfTable {
               }
 
               // update the mnRepeatedRowIndex of the cell which locate after the removed row
-              for (int j = 0; j < updateCellList.size(); j++) {
-                OdfTableCell cell = updateCellList.get(j);
+              for (OdfTableCell cell : updateCellList) {
                 if (cell.mnRepeatedRowIndex > oldRepeatIndex) {
                   cell.mnRepeatedRowIndex--;
                 }
@@ -2445,11 +2443,11 @@ public class OdfTable {
     if (mCellRepository.containsKey(oldElement)) {
       OdfTableCell oldCell = null;
       Vector<OdfTableCell> oldList = mCellRepository.get(oldElement);
-      for (int i = 0; i < oldList.size(); i++) {
-        if (oldList.get(i).getOdfElement() == oldElement
-            && oldList.get(i).mnRepeatedColIndex == oldRepeatColIndex
-            && oldList.get(i).mnRepeatedRowIndex == oldRepeatRowIndex) {
-          oldCell = oldList.get(i);
+      for (OdfTableCell odfTableCell : oldList) {
+        if (odfTableCell.getOdfElement() == oldElement
+          && odfTableCell.mnRepeatedColIndex == oldRepeatColIndex
+          && odfTableCell.mnRepeatedRowIndex == oldRepeatRowIndex) {
+          oldCell = odfTableCell;
           break;
         }
       }
@@ -2458,11 +2456,10 @@ public class OdfTable {
         if (oldCell != null) {
           // update the mnRepeateRowIndex &  mnRepeateColIndex of the cell which locate after the
           // removed cell
-          for (int i = 0; i < oldList.size(); i++) {
-            OdfTableCell cell = oldList.get(i);
+          for (OdfTableCell cell : oldList) {
             if (cell != null && (cell.getOdfElement() == oldElement)) {
               if ((cell.mnRepeatedRowIndex == oldRepeatRowIndex)
-                  && (cell.mnRepeatedColIndex > oldRepeatColIndex)) {
+                && (cell.mnRepeatedColIndex > oldRepeatColIndex)) {
                 cell.mnRepeatedColIndex--;
               }
             }

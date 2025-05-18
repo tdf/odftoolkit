@@ -25,8 +25,8 @@ package org.odftoolkit.odfdom.type;
 
 /** This class represents the in OpenDocument format used data type {@odf.datatype styleNameRefs} */
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StyleNameRefs implements OdfDataType {
 
@@ -42,16 +42,7 @@ public class StyleNameRefs implements OdfDataType {
     if (styleNames == null) {
       throw new IllegalArgumentException("parameter can not be null for StyleNameRefs");
     }
-    StringBuilder aRet = new StringBuilder();
-    Iterator<StyleName> aIter = styleNames.iterator();
-    while (aIter.hasNext()) {
-      if (aRet.length() > 0) {
-        aRet.append(' ');
-      }
-      String aStyleName = aIter.next().toString();
-      aRet.append(aStyleName);
-    }
-    mStyleNames = aRet.toString();
+    mStyleNames = styleNames.stream().map(StyleName::toString).collect(Collectors.joining(" "));
   }
 
   /**
@@ -79,8 +70,8 @@ public class StyleNameRefs implements OdfDataType {
     List<StyleName> aRet = new ArrayList<>();
     if (stringValue.length() > 0) {
       String[] names = stringValue.split(" ");
-      for (int i = 0; i < names.length; i++) {
-        aRet.add(new StyleName(names[i]));
+      for (String name : names) {
+        aRet.add(new StyleName(name));
       }
     }
     return new StyleNameRefs(aRet);
@@ -95,8 +86,8 @@ public class StyleNameRefs implements OdfDataType {
     List<StyleName> aRet = new ArrayList<>();
     if (mStyleNames.length() > 0) {
       String[] names = mStyleNames.split(" ");
-      for (int i = 0; i < names.length; i++) {
-        aRet.add(new StyleName(names[i]));
+      for (String name : names) {
+        aRet.add(new StyleName(name));
       }
     }
     return aRet;
@@ -118,8 +109,8 @@ public class StyleNameRefs implements OdfDataType {
     }
 
     String[] names = stringValue.split(" ");
-    for (int i = 0; i < names.length; i++) {
-      if (!StyleNameRef.isValid(names[i])) {
+    for (String name : names) {
+      if (!StyleNameRef.isValid(name)) {
         return false;
       }
     }

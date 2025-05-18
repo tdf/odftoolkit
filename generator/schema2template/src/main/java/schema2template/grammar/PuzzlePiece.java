@@ -36,7 +36,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -335,9 +334,8 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
    */
   public int getMultipleNumber() {
     int retval = 0;
-    Iterator<PuzzlePiece> iter = mMultiples.iterator();
-    while (iter.hasNext()) {
-      if (iter.next().equals(this)) {
+    for (PuzzlePiece mMultiple : mMultiples) {
+      if (mMultiple.equals(this)) {
         return retval;
       }
       retval++;
@@ -552,9 +550,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
     }
 
     // Fills multiple information
-    Iterator<PuzzlePiece> defIter = setToBeFilled.iterator();
-    while (defIter.hasNext()) {
-      PuzzlePiece def = defIter.next();
+    for (PuzzlePiece def : setToBeFilled) {
       def.mMultiples = new PuzzlePieceSet(multipleMap.get(def.getQName()));
     }
   }
@@ -562,9 +558,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
   // Builds Map Expression->List<PuzzlePiece>
   private static Map<Expression, List<PuzzlePiece>> buildReverseMap(PuzzlePieceSet defs) {
     Map<Expression, List<PuzzlePiece>> retval = new HashMap<>();
-    Iterator<PuzzlePiece> iter = defs.iterator();
-    while (iter.hasNext()) {
-      PuzzlePiece def = iter.next();
+    for (PuzzlePiece def : defs) {
       List<PuzzlePiece> list = retval.computeIfAbsent(def.getExpression(), k -> new ArrayList<>());
       list.add(def);
     }
@@ -574,11 +568,9 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
   // Builds Map Name->List<Expression>
   private static Map<String, List<Expression>> buildNameExpressionsMap(PuzzlePieceSet defs) {
     Map<String, List<Expression>> retval = new HashMap<>();
-    Iterator<PuzzlePiece> iter = defs.iterator();
-    while (iter.hasNext()) {
-      PuzzlePiece def = iter.next();
-        List<Expression> list = retval.computeIfAbsent(def.getQName(), k -> new ArrayList<>());
-        list.add(def.getExpression());
+    for (PuzzlePiece def : defs) {
+      List<Expression> list = retval.computeIfAbsent(def.getQName(), k -> new ArrayList<>());
+      list.add(def.getExpression());
     }
     return retval;
   }
@@ -654,14 +646,12 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
     Map<Expression, List<PuzzlePiece>> reverseAttributeMap = buildReverseMap(attributes);
 
     // Handle Element Definitions
-    Iterator<PuzzlePiece> iter = elements.iterator();
-    while (iter.hasNext()) {
-      PuzzlePiece puzzlePiece = iter.next();
+    for (PuzzlePiece puzzlePiece : elements) {
       MSVExpressionIterator childFinder =
-          new MSVExpressionIterator(
-              puzzlePiece.getExpression(),
-              NameClassAndExpression.class,
-              MSVExpressionIterator.DIRECT_CHILDREN_ONLY);
+        new MSVExpressionIterator(
+          puzzlePiece.getExpression(),
+          NameClassAndExpression.class,
+          MSVExpressionIterator.DIRECT_CHILDREN_ONLY);
       while (childFinder.hasNext()) {
         Expression child_exp = childFinder.next();
         List<PuzzlePiece> child_defs = null;
@@ -683,13 +673,13 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
 
       if (graphMLTargetDir != null) {
         TinkerPopGraph tinkerPopGraph =
-            new TinkerPopGraph(puzzlePiece.getExpression(), schemaFileName);
+          new TinkerPopGraph(puzzlePiece.getExpression(), schemaFileName);
         File f = new File(graphMLTargetDir);
         f.mkdirs();
         tinkerPopGraph.exportAsGraphML(f.getAbsolutePath());
       }
       MSVExpressionInformation elementInfo =
-          new MSVExpressionInformation(puzzlePiece.getExpression(), schemaFileName);
+        new MSVExpressionInformation(puzzlePiece.getExpression(), schemaFileName);
       puzzlePiece.mCanHaveText = elementInfo.canHaveText();
 
       Map<String, List<Expression>> atnameToDefs = buildNameExpressionsMap(puzzlePiece.mAttributes);
@@ -700,7 +690,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
       }
 
       Map<String, List<Expression>> elnameToDefs =
-          buildNameExpressionsMap(puzzlePiece.mChildElements);
+        buildNameExpressionsMap(puzzlePiece.mChildElements);
       for (Map.Entry<String, List<Expression>> entry : elnameToDefs.entrySet()) {
         if (elementInfo.isMandatory(entry.getValue())) {
           puzzlePiece.mMandatoryChildElementNames.add(entry.getKey());
@@ -712,21 +702,18 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
     }
 
     // Handle Attribute Definitions
-    Iterator<PuzzlePiece> aiter = attributes.iterator();
-    while (aiter.hasNext()) {
-      PuzzlePiece def = aiter.next();
-
+    for (PuzzlePiece def : attributes) {
       MSVExpressionIterator datatypeFinder =
-          new MSVExpressionIterator(
-              def.getExpression(), DataExp.class, MSVExpressionIterator.DIRECT_CHILDREN_ONLY);
+        new MSVExpressionIterator(
+          def.getExpression(), DataExp.class, MSVExpressionIterator.DIRECT_CHILDREN_ONLY);
       while (datatypeFinder.hasNext()) {
         DataExp data_exp = (DataExp) datatypeFinder.next();
         def.mDatatypes.add(new PuzzlePiece(data_exp));
       }
 
       MSVExpressionIterator valueFinder =
-          new MSVExpressionIterator(
-              def.getExpression(), ValueExp.class, MSVExpressionIterator.DIRECT_CHILDREN_ONLY);
+        new MSVExpressionIterator(
+          def.getExpression(), ValueExp.class, MSVExpressionIterator.DIRECT_CHILDREN_ONLY);
       while (valueFinder.hasNext()) {
         ValueExp value_exp = (ValueExp) valueFinder.next();
         if (value_exp.getName().localName.equals("token")) {

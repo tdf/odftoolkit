@@ -38,7 +38,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -98,7 +97,6 @@ import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles;
 import org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStyle;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
-import org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle;
 import org.odftoolkit.odfdom.pkg.OdfAttribute;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
@@ -570,9 +568,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
         && (localName.equals("p") || localName.equals("h") || localName.equals("table"))) {
       // move nodes
       Node bodyNode = mCurrentNode.getParentNode();
-      Iterator<ShapeProperties> it = m_cachedPageShapes.iterator();
-      while (it.hasNext()) {
-        ShapeProperties component = it.next();
+      for (ShapeProperties component : m_cachedPageShapes) {
         bodyNode.insertBefore(component.mOwnNode, bodyNode.getFirstChild());
       }
       mLastComponentPositions.clear();
@@ -716,9 +712,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                     hardFormatting,
                     mContextName);
                 paragraphOpCreated = true;
-                Iterator<ShapeProperties> it = m_cachedPageShapes.iterator();
-                while (it.hasNext()) {
-                  ShapeProperties component = it.next();
+                for (ShapeProperties component : m_cachedPageShapes) {
                   Component frameComponent = component.getDrawFrameElement().getComponent();
                   Component frameComponentParent = frameComponent.getParent();
                   int framePosition = frameComponentParent.indexOf(frameComponent);
@@ -726,16 +720,14 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                   element.appendChild(component.mOwnNode);
                   component.mShapePosition.addAll(0, position);
                   component.createShapeOperation(
-                      this,
-                      mComponentStack,
-                      component.mDescription,
-                      component.hasImageSibling()
-                          ? ShapeType.ImageShape
-                          : component.isGroupShape() ? ShapeType.GroupShape : ShapeType.NormalShape,
-                      component.mContext);
-                  Iterator<CachedOperation> opIter = component.iterator();
-                  while (opIter.hasNext()) {
-                    CachedOperation op = opIter.next();
+                    this,
+                    mComponentStack,
+                    component.mDescription,
+                    component.hasImageSibling()
+                      ? ShapeType.ImageShape
+                      : component.isGroupShape() ? ShapeType.GroupShape : ShapeType.NormalShape,
+                    component.mContext);
+                  for (CachedOperation op : component) {
                     List<Integer> start = op.mStart;
                     if (!op.mAbsolutePosition) {
                       if (op.mComponentType.equals(OperationConstants.ATTRIBUTES)) {
@@ -749,12 +741,12 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                       start.addAll(0, position);
                     }
                     cacheOperation(
-                        false,
-                        op.mComponentType,
-                        start,
-                        false,
-                        op.mHardFormattingProperties,
-                        op.mComponentProperties);
+                      false,
+                      op.mComponentType,
+                      start,
+                      false,
+                      op.mHardFormattingProperties,
+                      op.mComponentProperties);
                   }
                 }
                 m_cachedPageShapes.clear();
@@ -1645,17 +1637,13 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
               defaultTabStopWidth = _defaultTabStopWidth;
             }
           }
-          final Iterator<OdfStyle> textStyleIter =
-              officeStyles.getStylesForFamily(OdfStyleFamily.Text).iterator();
-          while (textStyleIter.hasNext()) {
+          for (OdfStyle odfStyle : officeStyles.getStylesForFamily(OdfStyleFamily.Text)) {
             mJsonOperationProducer.triggerStyleHierarchyOps(
-                officeStyles, OdfStyleFamily.Text, textStyleIter.next());
+              officeStyles, OdfStyleFamily.Text, odfStyle);
           }
-          final Iterator<OdfStyle> graphicStyleIter =
-              officeStyles.getStylesForFamily(OdfStyleFamily.Graphic).iterator();
-          while (graphicStyleIter.hasNext()) {
+          for (OdfStyle odfStyle : officeStyles.getStylesForFamily(OdfStyleFamily.Graphic)) {
             mJsonOperationProducer.triggerStyleHierarchyOps(
-                officeStyles, OdfStyleFamily.Graphic, graphicStyleIter.next());
+              officeStyles, OdfStyleFamily.Graphic, odfStyle);
           }
           // always generate graphic default style
           mJsonOperationProducer.triggerDefaultStyleOp(
@@ -1689,11 +1677,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
           //    				mJsonOperationProducer.triggerStyleHierarchyOps(officeStyles,
           // OdfStyleFamily.List, style);
           //    			}
-          final Iterator<OdfTextListStyle> textListStyleIter =
-              officeStyles.getListStyles().iterator();
-          while (textListStyleIter.hasNext()) {
-            mJsonOperationProducer.addListStyle(textListStyleIter.next());
-          }
+          officeStyles.getListStyles().forEach(mJsonOperationProducer::addListStyle);
 
           // maps page properties, but returns the default page properties
           defaultPageStyles = mJsonOperationProducer.addPageProperties(stylesDom);
@@ -1755,16 +1739,14 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                 null);
           }
           // flush the inner operations of the shape
-          Iterator<CachedOperation> opIter = shapeProps.iterator();
-          while (opIter.hasNext()) {
-            CachedOperation op = opIter.next();
+          for (CachedOperation op : shapeProps) {
             cacheOperation(
-                true,
-                op.mComponentType,
-                op.mStart,
-                false,
-                op.mHardFormattingProperties,
-                op.mComponentProperties);
+              true,
+              op.mComponentType,
+              op.mStart,
+              false,
+              op.mHardFormattingProperties,
+              op.mComponentProperties);
           }
           mCurrentComponent = mCurrentComponent.getParent();
         }
@@ -2685,16 +2667,31 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
 
     boolean putPageBreak = false;
     boolean isBreakBefore = true;
-    ListIterator<CachedOperation> cachedOperationIterator = currentTable.listIterator();
-    while (cachedOperationIterator.hasNext()) {
-      CachedOperation operation = cachedOperationIterator.next();
+    for (CachedOperation operation : currentTable) {
       if (operation instanceof CachedInnerTableOperation
-          && operation.mComponentType.equals(OperationConstants.TABLE)) {
+        && operation.mComponentType.equals(OperationConstants.TABLE)) {
         if (isStartOfTable) {
           isStartOfTable = false;
           if (currentTable.mIsTooLarge) {
             // replacement table
             cacheOperation(
+              false,
+              OperationConstants.EXCEEDEDTABLE,
+              operation.mStart,
+              false,
+              null,
+              ((List) operation.mComponentProperties[0]).size(),
+              currentTable.mRowCount,
+              operation.mComponentProperties[0],
+              mContextName);
+            break;
+          } else {
+            if ((mMaxAllowedRowCount != 0 && currentTable.mRowCount > mMaxAllowedRowCount)
+              || (mMaxAllowedColumnCount != 0
+              && currentTable.mColumnCount > mMaxAllowedColumnCount)
+              || (mMaxAllowedCellCount != 0 && currentTable.mCellCount > mMaxAllowedCellCount)) {
+              // TODO: Exceeded table operation name
+              cacheOperation(
                 false,
                 OperationConstants.EXCEEDEDTABLE,
                 operation.mStart,
@@ -2704,31 +2701,14 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                 currentTable.mRowCount,
                 operation.mComponentProperties[0],
                 mContextName);
-            break;
-          } else {
-            if ((mMaxAllowedRowCount != 0 && currentTable.mRowCount > mMaxAllowedRowCount)
-                || (mMaxAllowedColumnCount != 0
-                    && currentTable.mColumnCount > mMaxAllowedColumnCount)
-                || (mMaxAllowedCellCount != 0 && currentTable.mCellCount > mMaxAllowedCellCount)) {
-              // TODO: Exceeded table operation name
-              cacheOperation(
-                  false,
-                  OperationConstants.EXCEEDEDTABLE,
-                  operation.mStart,
-                  false,
-                  null,
-                  ((List) operation.mComponentProperties[0]).size(),
-                  currentTable.mRowCount,
-                  operation.mComponentProperties[0],
-                  mContextName);
               break;
             } else {
               // the last parameter are: mColumnRelWidths, mTableName, mIsTableVisible);
               JSONObject tableAttr = null;
               if (operation.mHardFormattingProperties.containsKey("table")
-                  && (((tableAttr = (JSONObject) operation.mHardFormattingProperties.get("table"))
-                          .has("pageBreakBefore"))
-                      || tableAttr.has("pageBreakAfter"))) {
+                && (((tableAttr = (JSONObject) operation.mHardFormattingProperties.get("table"))
+                .has("pageBreakBefore"))
+                || tableAttr.has("pageBreakAfter"))) {
                 isBreakBefore = tableAttr.has("pageBreakBefore");
                 String breakString = isBreakBefore ? "pageBreakBefore" : "pageBreakAfter";
                 boolean breakAttr = tableAttr.getBoolean(breakString);
@@ -2738,14 +2718,14 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                 tableAttr.remove(breakString);
               }
               cacheOperation(
-                  false,
-                  OperationConstants.TABLE,
-                  operation.mStart,
-                  false,
-                  operation.mHardFormattingProperties,
-                  operation.mComponentProperties[0],
-                  operation.mComponentProperties[1],
-                  mContextName);
+                false,
+                OperationConstants.TABLE,
+                operation.mStart,
+                false,
+                operation.mHardFormattingProperties,
+                operation.mComponentProperties[0],
+                operation.mComponentProperties[1],
+                mContextName);
             }
           }
         } else {
@@ -2754,77 +2734,77 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
       } else if (operation.mComponentType.equals(OperationConstants.TEXT)) {
         String context = mContextName;
         if (operation.mComponentProperties.length > 1
-            && operation.mComponentProperties[1] != null) {
+          && operation.mComponentProperties[1] != null) {
           context = (String) operation.mComponentProperties[1];
         }
         cacheOperation(
-            false,
-            operation.mComponentType,
-            operation.mStart,
-            false,
-            null,
-            operation.mComponentProperties[0],
-            context);
+          false,
+          operation.mComponentType,
+          operation.mStart,
+          false,
+          null,
+          operation.mComponentProperties[0],
+          context);
       } else if (operation.mComponentType.equals(OperationConstants.ATTRIBUTES)) {
         String context = mContextName;
         if (operation.mComponentProperties.length > 1
-            && operation.mComponentProperties[1] != null) {
+          && operation.mComponentProperties[1] != null) {
           context = (String) operation.mComponentProperties[1];
         }
         cacheOperation(
-            false,
-            OperationConstants.ATTRIBUTES,
-            operation.mStart,
-            false,
-            operation.mHardFormattingProperties,
-            operation.mComponentProperties[0],
-            context);
+          false,
+          OperationConstants.ATTRIBUTES,
+          operation.mStart,
+          false,
+          operation.mHardFormattingProperties,
+          operation.mComponentProperties[0],
+          context);
       } else if (operation.mComponentType.equals(OperationConstants.SHAPE)
-          || operation.mComponentType.equals(OperationConstants.IMAGE)
-          || operation.mComponentType.equals(OperationConstants.SHAPE_GROUP)) {
+        || operation.mComponentType.equals(OperationConstants.IMAGE)
+        || operation.mComponentType.equals(OperationConstants.SHAPE_GROUP)) {
         cacheOperation(
-            false,
-            operation.mComponentType,
-            operation.mStart,
-            false,
-            operation.mHardFormattingProperties,
-            mContextName);
+          false,
+          operation.mComponentType,
+          operation.mStart,
+          false,
+          operation.mHardFormattingProperties,
+          mContextName);
       } else if (operation.mComponentType.equals(OperationConstants.FIELD)) {
         // TODO: Why do I have to check for map<> casts but not with String casts?
         @SuppressWarnings("unchecked")
         Map<String, Object> attrMap = (Map<String, Object>) operation.mComponentProperties[2];
         cacheOperation(
-            false,
-            operation.mComponentType,
-            operation.mStart,
-            false,
-            null,
-            operation.mComponentProperties[0],
-            operation.mComponentProperties[1],
-            attrMap,
-            mContextName);
+          false,
+          operation.mComponentType,
+          operation.mStart,
+          false,
+          null,
+          operation.mComponentProperties[0],
+          operation.mComponentProperties[1],
+          attrMap,
+          mContextName);
       } else if (operation.mComponentType.equals(OperationConstants.TABLE)
-          || operation.mComponentType.equals(OperationConstants.COMMENT)
-          || operation.mComponentType.equals(OperationConstants.COMMENTRANGE)) {
+        || operation.mComponentType.equals(OperationConstants.COMMENT)
+        || operation.mComponentType.equals(OperationConstants.COMMENTRANGE)) {
         cacheOperation(
-            false,
-            operation.mComponentType,
-            operation.mStart,
-            false,
-            operation.mHardFormattingProperties,
-            operation.mComponentProperties);
+          false,
+          operation.mComponentType,
+          operation.mStart,
+          false,
+          operation.mHardFormattingProperties,
+          operation.mComponentProperties);
       } else if (operation.mComponentType.equals(OperationConstants.COMMENT)
-          || operation.mComponentType.equals(OperationConstants.COMMENTRANGE)) {
+        || operation.mComponentType.equals(OperationConstants.COMMENTRANGE)) {
         cacheOperation(
-            false,
-            operation.mComponentType,
-            operation.mStart,
-            false,
-            operation.mHardFormattingProperties,
-            operation.mComponentProperties);
+          false,
+          operation.mComponentType,
+          operation.mStart,
+          false,
+          operation.mHardFormattingProperties,
+          operation.mComponentProperties);
       } else {
         boolean isParagraphOperation =
-            operation.mComponentType.equals(OperationConstants.PARAGRAPH);
+          operation.mComponentType.equals(OperationConstants.PARAGRAPH);
         if (putPageBreak && isParagraphOperation) {
           JSONObject paraProps = null;
           if (operation.mHardFormattingProperties == null) {
@@ -2844,12 +2824,12 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
           context = (String) operation.mComponentProperties[0];
         }
         cacheOperation(
-            false,
-            operation.mComponentType,
-            operation.mStart,
-            false,
-            operation.mHardFormattingProperties,
-            context);
+          false,
+          operation.mComponentType,
+          operation.mStart,
+          false,
+          operation.mHardFormattingProperties,
+          context);
       }
     }
   }

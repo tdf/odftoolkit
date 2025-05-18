@@ -100,8 +100,7 @@ public final class MapHelper {
         boolean checkedColor = false;
         boolean checkedStyle = false;
         boolean checkedWidth = false;
-        for (int i = 0; i < tokens.length; i++) {
-          String token = tokens[i];
+        for (String token : tokens) {
           if (!token.isEmpty()) {
             boolean isTokenTaken = false;
             if (!checkedColor) {

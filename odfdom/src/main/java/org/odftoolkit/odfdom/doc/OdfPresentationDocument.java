@@ -466,8 +466,8 @@ public class OdfPresentationDocument extends OdfDocument {
           }
         }
       }
-      for (int i = 0; i < removeStyles.size(); i++) {
-        autoStyles.removeChild(removeStyles.get(i));
+      for (OdfElement removeStyle : removeStyles) {
+        autoStyles.removeChild(removeStyle);
       }
     } catch (Exception e) {
       LOG.log(Level.SEVERE, null, e);
@@ -957,15 +957,14 @@ public class OdfPresentationDocument extends OdfDocument {
             newStyleNameList.add(newStyleName);
             styleRenameMap.put(styleName, newStyleNameList);
           } else {
-            for (int i = 0; i < newStyleNameList.size(); i++) {
-              String styleNameIter = newStyleNameList.get(i);
+            for (String styleNameIter : newStyleNameList) {
               OdfElement destStyleElementWithNewName =
-                  isStyleNameExist(destStyleNodeList, styleNameIter);
+                isStyleNameExist(destStyleNodeList, styleNameIter);
               // check if the two style elements have the same content
               // if not, the cloneStyleElement should rename, rather than reuse the new style name
               cloneStyleElement.setAttributeNS(styleURI, styleQName, styleNameIter);
               if ((destStyleElementWithNewName != null)
-                  && destStyleElementWithNewName.equals(cloneStyleElement)) {
+                && destStyleElementWithNewName.equals(cloneStyleElement)) {
                 newStyleName = styleNameIter;
                 break;
               }
@@ -1178,8 +1177,7 @@ public class OdfPresentationDocument extends OdfDocument {
   private boolean changeStyleRefName(
       List<OdfElement> list, String oldStyleName, String newStyleName) {
     boolean rtn = false;
-    for (int index = 0; index < list.size(); index++) {
-      OdfElement element = list.get(index);
+    for (OdfElement element : list) {
       NamedNodeMap attributes = element.getAttributes();
 
       if (attributes != null) {

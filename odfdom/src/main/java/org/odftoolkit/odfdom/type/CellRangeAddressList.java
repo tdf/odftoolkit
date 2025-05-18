@@ -24,8 +24,8 @@
 package org.odftoolkit.odfdom.type;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This class represents the in OpenDocument format used data type {@odf.datatype
@@ -47,16 +47,9 @@ public class CellRangeAddressList implements OdfDataType {
       throw new IllegalArgumentException("parameter can not be null for CellRangeAddressList");
     }
 
-    StringBuilder aRet = new StringBuilder();
-    Iterator<CellRangeAddress> aIter = cellRangeAddressList.iterator();
-    while (aIter.hasNext()) {
-      if (aRet.length() > 0) {
-        aRet.append(' ');
-      }
-      String aAddress = aIter.next().toString();
-      aRet.append(aAddress);
-    }
-    mCellRangeAddressList = aRet.toString();
+    mCellRangeAddressList = cellRangeAddressList.stream()
+      .map(CellRangeAddress::toString)
+      .collect(Collectors.joining(" "));
   }
 
   // TODO: Should a cell address stay a string?
@@ -84,8 +77,8 @@ public class CellRangeAddressList implements OdfDataType {
 
     List<CellRangeAddress> aRet = new ArrayList<>();
     String[] names = stringValue.split(" ");
-    for (int i = 0; i < names.length; i++) {
-      aRet.add(new CellRangeAddress(names[i]));
+    for (String name : names) {
+      aRet.add(new CellRangeAddress(name));
     }
     return new CellRangeAddressList(aRet);
   }
@@ -98,8 +91,8 @@ public class CellRangeAddressList implements OdfDataType {
   public List<CellRangeAddress> getCellRangesAddressList() {
     List<CellRangeAddress> aRet = new ArrayList<>();
     String[] names = mCellRangeAddressList.split(" ");
-    for (int i = 0; i < names.length; i++) {
-      aRet.add(new CellRangeAddress(names[i]));
+    for (String name : names) {
+      aRet.add(new CellRangeAddress(name));
     }
     return aRet;
   }
@@ -120,8 +113,8 @@ public class CellRangeAddressList implements OdfDataType {
     }
 
     String[] names = stringValue.split(" ");
-    for (int i = 0; i < names.length; i++) {
-      if (!CellRangeAddress.isValid(names[i])) {
+    for (String name : names) {
+      if (!CellRangeAddress.isValid(name)) {
         return false;
       }
     }

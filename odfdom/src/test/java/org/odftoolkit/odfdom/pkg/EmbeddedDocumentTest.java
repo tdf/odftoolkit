@@ -350,13 +350,8 @@ public class EmbeddedDocumentTest {
       Assert.assertTrue(0 == reloadedSubDocs.size());
       Set<String> entries = doc.getPackage().getFilePaths();
       Iterator<String> entryIter = null;
-      for (int i = 0; i < subDocNames.size(); i++) {
-        entryIter = entries.iterator();
-        String embeddedDocPath = subDocNames.get(i);
-        while (entryIter.hasNext()) {
-          String entry = entryIter.next();
-          Assert.assertFalse(entry.startsWith(embeddedDocPath));
-        }
+      for (String subDocName : subDocNames) {
+        entries.forEach(entry -> Assert.assertFalse(entry.startsWith(subDocName)));
       }
       doc.close();
     } catch (Exception ex) {
