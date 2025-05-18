@@ -125,8 +125,8 @@ public class StyleExamplesTest {
       LOG.info("Parsed document.");
 
       OdfElement e = (OdfElement) odfdoc.getContentDom().getDocumentElement();
-      NodeAction dumpStyles =
-          new NodeAction() {
+      NodeAction<?> dumpStyles =
+          new NodeAction<>() {
 
             @Override
             protected void apply(Node node, Object arg, int depth) {

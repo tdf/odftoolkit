@@ -91,7 +91,7 @@ class OdfFamilyPropertiesPatternMatcher {
               // Whenever visiting elements and RefExps, they are memorized
               // to identify head of islands.
               int depth = 1;
-              List resultList = null;
+              List<String> resultList = null;
 
               @Override
               public void onElement(ElementExp exp) {
@@ -116,7 +116,7 @@ class OdfFamilyPropertiesPatternMatcher {
                   // System.out.println("NEW FAMILY" + asString(propertiesByFamily));
                   collectingState = Boolean.TRUE;
                   depthCollecting = depth;
-                  resultList = new ArrayList();
+                  resultList = new ArrayList<>();
                   if (exp.exp instanceof ValueExp) {
                     // System.out.println("style:family-1" + ((ValueExp) exp.exp).value.toString());
                     propertiesByFamily.put(((ValueExp) exp.exp).value.toString(), resultList);

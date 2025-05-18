@@ -300,7 +300,7 @@ public class MSVExpressionInformation {
     }
   }
 
-  private static List<List<Expression>> getPathsToClass(List<List<Expression>> paths, Class clazz) {
+  private static List<List<Expression>> getPathsToClass(List<List<Expression>> paths, Class<?> clazz) {
     List<List<Expression>> remainingPaths = new ArrayList<>();
     for (List<Expression> path : paths) {
       if (clazz.isInstance(path.get(path.size() - 1))) {

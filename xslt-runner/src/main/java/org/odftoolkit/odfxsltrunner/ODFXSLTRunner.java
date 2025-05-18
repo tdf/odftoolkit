@@ -301,7 +301,7 @@ public class ODFXSLTRunner {
       try {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
         if (cl == null) cl = ClassLoader.getSystemClassLoader();
-        Class classInstance = cl.loadClass(aTransformerFactoryClassName);
+        Class<?> classInstance = cl.loadClass(aTransformerFactoryClassName);
         aFactory = (TransformerFactory) classInstance.getDeclaredConstructor().newInstance();
       } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ce) {
         aLogger.logFatalError(ce.getMessage());

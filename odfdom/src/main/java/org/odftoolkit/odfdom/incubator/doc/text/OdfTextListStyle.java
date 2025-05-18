@@ -30,6 +30,7 @@ import org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleElementBase;
 import org.odftoolkit.odfdom.dom.element.text.TextListStyleElement;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.odftoolkit.odfdom.dom.style.props.OdfListLevelProperties;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.w3c.dom.Node;
 
@@ -128,7 +129,7 @@ public class OdfTextListStyle extends TextListStyleElement {
    * @return a list level style with the given level and class
    */
   @SuppressWarnings("unchecked")
-  public TextListLevelStyleElementBase getOrCreateListLevel(int level, Class clazz) {
+  public TextListLevelStyleElementBase getOrCreateListLevel(int level, Class<? extends OdfElement> clazz) {
     TextListLevelStyleElementBase levelStyle = getLevel(level);
     if ((levelStyle != null) && clazz.isInstance(levelStyle)) {
       return levelStyle;

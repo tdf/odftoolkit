@@ -94,10 +94,10 @@ public class JsonOperationProducer {
   private final JSONObject mDocumentAttributes = new JSONObject();
   /** The maximum empty cell number before starting a new operation */
   /** Every knonwStyle does not have to be read */
-  Map knownStyles = new HashMap<String, Boolean>();
+  Map<String, Boolean> knownStyles = new HashMap<>();
   // Added an own map for list styles as it is not 100% certain that the names between styles and
   // list style might be overlapping.
-  Map knownListStyles = new HashMap<String, Boolean>();
+  Map<String, Boolean> knownListStyles = new HashMap<>();
   /**
    * There is a special style for the replacement table of too large tables, which have to be added
    * only once to a document
@@ -345,7 +345,7 @@ public class JsonOperationProducer {
 
     // the row start/end number 0 based, therefore - 1
     int rowStartNo = firstRow + repeatedRowOffset;
-    List rangeStart = new ArrayList<Integer>();
+    List<Integer> rangeStart = new ArrayList<>();
 
     // if there is a repeated row, there will be repeated cells (at least vertical)
     if (hasHorizontalRepetition || lastRow != null && !firstRow.equals(lastRow)) {
@@ -354,7 +354,7 @@ public class JsonOperationProducer {
       // second the start row position
       rangeStart.add(rowStartNo);
 
-      List rangeEnd = new ArrayList<Integer>();
+      List<Integer> rangeEnd = new ArrayList<>();
 
       // first the end column position: StartPos of content plus any repetiton (including itself,
       // therefore - 1)
@@ -386,7 +386,7 @@ public class JsonOperationProducer {
    *     cell contents for each single row. The lengths of the inner arrays may be different. Cells
    *     not covered by a row array will not be modified.
    */
-  private void setCellContents(Integer sheet, List rangeStart, JSONArray spreadsheetRange) {
+  private void setCellContents(Integer sheet, List<Integer> rangeStart, JSONArray spreadsheetRange) {
     final JSONObject newOperation = new JSONObject();
 
     try {
@@ -694,7 +694,7 @@ public class JsonOperationProducer {
       tableAttrs.put("tableGrid", tableGrid);
       tableAttrs.put("style", "LightShading-Accent1");
       tableAttrs.put("width", "auto");
-      List exclude = new ArrayList(3);
+      List<String> exclude = new ArrayList<>(3);
       exclude.add("lastRow");
       exclude.add("lastCol");
       exclude.add("bandsVert");

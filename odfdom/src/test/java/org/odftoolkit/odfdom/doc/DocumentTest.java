@@ -474,47 +474,53 @@ public class DocumentTest {
   @Test
   public void validationTest() {
     // TESTDOC2: Expected ODF Warnings
-    Map expectedWarning2 = new HashMap();
-    expectedWarning2.put(OdfPackageConstraint.MIMETYPE_NOT_IN_PACKAGE, 1);
-    expectedWarning2.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10);
+    Map<ValidationConstraint, Integer> expectedWarning2 = new HashMap<>(Map.of(
+      OdfPackageConstraint.MIMETYPE_NOT_IN_PACKAGE, 1,
+      OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10
+    ));
 
     // TESTDOC2: Expected ODF Errors
-    Map expectedErrors2 = new HashMap();
-    expectedErrors2.put(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, 1);
-    expectedErrors2.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 3);
-    expectedErrors2.put(OdfSchemaConstraint.DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML, 1);
-    expectedErrors2.put(OdfSchemaConstraint.PACKAGE_SHALL_CONTAIN_MIMETYPE, 1);
+    Map<ValidationConstraint, Integer> expectedErrors2 = new HashMap<>(Map.of(
+      OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, 1,
+      OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 3,
+      OdfSchemaConstraint.DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML, 1,
+      OdfSchemaConstraint.PACKAGE_SHALL_CONTAIN_MIMETYPE, 1
+    ));
     ErrorHandlerStub handler2 = new ErrorHandlerStub(expectedWarning2, expectedErrors2, null);
     handler2.setTestFilePath("testInvalidPkg2.odt");
 
     // TESTDOC3: Expected ODF Warnings
-    Map expectedWarning3 = new HashMap();
-    expectedWarning3.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 21);
+    Map<ValidationConstraint, Integer> expectedWarning3 = new HashMap<>(Map.of(
+      OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 21
+    ));
 
     // TESTDOC3: Expected ODF Errors
-    Map expectedErrors3 = new HashMap();
-    expectedErrors3.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 2);
-    expectedErrors3.put(OdfSchemaConstraint.DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML, 1);
-    expectedErrors3.put(OdfPackageConstraint.MANIFEST_WITH_EMPTY_PATH, 1);
+    Map<ValidationConstraint, Integer> expectedErrors3 = new HashMap<>(Map.of(
+      OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 2,
+      OdfSchemaConstraint.DOCUMENT_WITHOUT_CONTENT_NOR_STYLES_XML, 1,
+      OdfPackageConstraint.MANIFEST_WITH_EMPTY_PATH, 1
+    ));
     ErrorHandlerStub handler3 = new ErrorHandlerStub(expectedWarning3, expectedErrors3, null);
     handler3.setTestFilePath("performance/Presentation1_INVALID.odp");
 
     // TESTDOC1: Expected ODF Warnings
-    Map expectedWarning1 = new HashMap();
-    expectedWarning1.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10);
+    Map<ValidationConstraint, Integer> expectedWarning1 = new HashMap<>(Map.of(
+      OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10
+    ));
 
     // TESTDOC1: Expected ODF Errors
-    Map expectedErrors1 = new HashMap();
-    expectedErrors1.put(OdfPackageConstraint.MIMETYPE_NOT_FIRST_IN_PACKAGE, 1);
-    expectedErrors1.put(OdfPackageConstraint.MIMETYPE_IS_COMPRESSED, 1);
-    expectedErrors1.put(OdfPackageConstraint.MIMETYPE_HAS_EXTRA_FIELD, 1);
-    expectedErrors1.put(OdfPackageConstraint.MIMETYPE_DIFFERS_FROM_PACKAGE, 1);
-    expectedErrors1.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 1);
+    Map<ValidationConstraint, Integer> expectedErrors1 = new HashMap<>(Map.of(
+      OdfPackageConstraint.MIMETYPE_NOT_FIRST_IN_PACKAGE, 1,
+      OdfPackageConstraint.MIMETYPE_IS_COMPRESSED, 1,
+      OdfPackageConstraint.MIMETYPE_HAS_EXTRA_FIELD, 1,
+      OdfPackageConstraint.MIMETYPE_DIFFERS_FROM_PACKAGE, 1,
+      OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 1
+    ));
 
     // TESTDOC1: Expected ODF FatalErrors
-    Map<ValidationConstraint, Integer> expectedFatalErrors1 =
-      new HashMap<>();
-    expectedFatalErrors1.put(OdfSchemaConstraint.DOCUMENT_WITHOUT_ODF_MIMETYPE, 1);
+    Map<ValidationConstraint, Integer> expectedFatalErrors1 = new HashMap<>(Map.of(
+      OdfSchemaConstraint.DOCUMENT_WITHOUT_ODF_MIMETYPE, 1
+    ));
 
     ErrorHandlerStub handler1 =
         new ErrorHandlerStub(expectedWarning1, expectedErrors1, expectedFatalErrors1);
@@ -537,7 +543,7 @@ public class DocumentTest {
               handler3);
       OdfDocument doc3 = OdfDocument.loadDocument(pkg3);
       Assert.assertNotNull(doc3);
-      Map subDocs = doc3.loadSubDocuments();
+      Map<String, OdfDocument> subDocs = doc3.loadSubDocuments();
       Assert.assertNotNull(subDocs);
       Assert.assertEquals(PRESENTATION1_DOC_COUNT, subDocs.size());
 

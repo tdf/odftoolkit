@@ -73,8 +73,8 @@ public class ImageTest {
       OdfDocument doc =
           OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("image.odt"));
       final OdfPackage pkg = doc.getPackage();
-      NodeAction addImages =
-          new NodeAction() {
+      NodeAction<?> addImages =
+          new NodeAction<>() {
 
             @Override
             protected void apply(Node node, Object arg, int depth) {

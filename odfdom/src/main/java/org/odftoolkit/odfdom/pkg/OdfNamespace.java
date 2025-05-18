@@ -104,7 +104,7 @@ public class OdfNamespace implements Comparable<OdfNamespace>, NamespaceName {
    * loader
    */
   public static void initializeUrl2DefaultPrefixMap() {
-    mUrlToPrefix = new HashMap(32);
+    mUrlToPrefix = new HashMap<>(32);
     // add all namespaces from the ODF package specification
     for (OdfPackageNamespace packageNamespace : OdfPackageNamespace.values()) {
       mUrlToPrefix.put(packageNamespace.getUri(), packageNamespace.getPrefix());

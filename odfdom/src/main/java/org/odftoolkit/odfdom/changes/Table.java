@@ -97,7 +97,7 @@ public class Table<T> extends Component {
 
   // Svante ToDo: After all the refactoring this looks like something to change after the release as
   // well.
-  private List<Component> list(final Table tableComponent) {
+  private List<Component> list(final Table<?> tableComponent) {
     return new AbstractList<>() {
       @Override
       public int size() {
@@ -218,7 +218,7 @@ public class Table<T> extends Component {
     boolean hasRelColumnWidth = false;
     boolean hasAbsColumnWidth = false;
     boolean hasColumnWithoutWidth = false;
-    List<Integer> columnRelWidths = new ArrayList();
+    List<Integer> columnRelWidths = new ArrayList<>();
     for (TableTableColumnElement column : columns) {
       if (column.hasAttributeNS(OdfDocumentNamespace.TABLE.getUri(), "style-name")) {
         Length tableWidth = getPropertyLength(StyleTablePropertiesElement.Width, tableElement);
@@ -296,20 +296,20 @@ public class Table<T> extends Component {
     List<TableTableColumnElement> existingColumnList =
         Table.getTableColumnElements(tableElement, new ArrayList<TableTableColumnElement>());
     List<Integer> tableColumWidths = collectColumnWidths(tableElement, existingColumnList);
-    ((Table) tableElement.getComponent()).pushTableGrid(tableColumWidths);
+    ((Table<?>) tableElement.getComponent()).pushTableGrid(tableColumWidths);
   }
 
   /**
    * Returns all TableTableColumn descendants that exist within the tableElement, even within
    * groups, columns and header elements
    */
-  public static List<TableTableColumnElement> getTableColumnElements(Element parent, List columns) {
+  public static List<TableTableColumnElement> getTableColumnElements(Element parent, List<TableTableColumnElement> columns) {
     NodeList children = parent.getChildNodes();
     for (int i = 0; i < children.getLength(); i++) {
       Node child = children.item(i);
       if (child instanceof Element) {
         if (child instanceof TableTableColumnElement) {
-          columns.add(child);
+          columns.add((TableTableColumnElement) child);
         } else if (child instanceof TableTableColumnGroupElement
             || child instanceof TableTableHeaderColumnsElement
             || child instanceof TableTableColumnsElement) {
