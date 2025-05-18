@@ -25,13 +25,19 @@ package schema2template.grammar;
 
 import static schema2template.SchemaToTemplate.DEBUG;
 
-import com.sun.msv.grammar.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.sun.msv.grammar.DataExp;
+import com.sun.msv.grammar.Expression;
+import com.sun.msv.grammar.NameClassAndExpression;
+import com.sun.msv.grammar.ReferenceExp;
+import com.sun.msv.grammar.ValueExp;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,51 +65,54 @@ public class MSVRunTimeDumpTest {
   public void testMSVExpressionTree() {
     try {
       for (ConstantsOdf.OdfSpecificationPart specPart :
-          ConstantsOdf.OdfSpecificationPart.values()) {
+        ConstantsOdf.OdfSpecificationPart.values()) {
         LOG.info(
-            "\n\nNew ODF grammar runtime serialization (MSV dump) for regression test:"
-                + "\n\tgrammarVersion "
-                + specPart.grammarVersion
-                + "\n\tgrammarID: "
-                + specPart.grammarID
-                + "\n\tgrammarPath: "
-                + specPart.grammarPath
-                + "\n\ttargetDirPath: "
-                + ConstantsBuildEnv.TARGET_BASE_DIR
-                + MSV_DUMP_DIRECTORY);
+          "\n\nNew ODF grammar runtime serialization (MSV dump) for regression test:"
+            + "\n\tgrammarVersion "
+            + specPart.grammarVersion
+            + "\n\tgrammarID: "
+            + specPart.grammarID
+            + "\n\tgrammarPath: "
+            + specPart.grammarPath
+            + "\n\ttargetDirPath: "
+            + ConstantsBuildEnv.TARGET_BASE_DIR
+            + MSV_DUMP_DIRECTORY);
         Expression odfRoot = XMLModel.loadSchema(specPart.grammarPath).getTopLevel();
         String odfDump = dumpMSVExpressionTree(odfRoot);
 
         String grammarLabel = specPart.grammarID + "-" + specPart.grammarVersion;
 
         String targetMSVDumpFile =
-            ConstantsBuildEnv.TARGET_BASE_DIR
-                + MSV_DUMP_DIRECTORY
-                + File.separator
-                + grammarLabel
-                + "-msvtree.txt";
+          ConstantsBuildEnv.TARGET_BASE_DIR
+            + MSV_DUMP_DIRECTORY
+            + File.separator
+            + grammarLabel
+            + "-msvtree.txt";
         LOG.log(
-            Level.INFO,
-            "Writing MSV RelaxNG tree for " + grammarLabel + " + into file: {0}",
-            targetMSVDumpFile);
-        try (PrintWriter out = new PrintWriter(new FileWriter(targetMSVDumpFile))) {
+          Level.INFO,
+          "Writing MSV RelaxNG tree for " + grammarLabel + " + into file: {0}",
+          targetMSVDumpFile);
+        try (PrintWriter out = new PrintWriter(new FileWriter(targetMSVDumpFile, StandardCharsets.UTF_8))) {
           out.print(odfDump);
         }
       }
-      DirectoryCompare.compareDirectories(
-          ConstantsBuildEnv.TARGET_BASE_DIR + MSV_DUMP_DIRECTORY,
-          ConstantsBuildEnv.REFERENCE_BASE_DIR + MSV_DUMP_DIRECTORY);
+      DirectoryCompare.assertDirectoriesEqual(
+        ConstantsBuildEnv.REFERENCE_BASE_DIR + MSV_DUMP_DIRECTORY,
+        ConstantsBuildEnv.TARGET_BASE_DIR + MSV_DUMP_DIRECTORY
+      );
     } catch (Exception ex) {
       LOG.log(Level.SEVERE, null, ex);
       Assert.fail(ex.toString());
     }
   }
+
   /**
    * Iterates the MSVExpressionTree and dumps it into a string
    *
+   * @param rootExpression the root of the MSVExpressionTree to be dumped
    * @return the MSVExpressionTree serialized into a String
    */
-  public static String dumpMSVExpressionTree(Expression rootExpression) throws Exception {
+  public static String dumpMSVExpressionTree(Expression rootExpression) {
     MSVExpressionIterator iterator = new MSVExpressionIterator(rootExpression);
     StringBuilder builder = new StringBuilder();
     while (iterator.hasNext()) {
@@ -114,32 +123,31 @@ public class MSVRunTimeDumpTest {
   }
 
   private static String dumpMSVExpression(Expression expr, int depth) {
-    String returnValue = null;
     MSVExpressionVisitorType typeVisitor = new MSVExpressionVisitorType();
     MSVNameClassVisitorList nameVisitor = new MSVNameClassVisitorList();
     MSVExpressionType type = (MSVExpressionType) expr.visit(typeVisitor);
-    returnValue = (depth + ": " + type);
 
     // AttributeExp, ElementExp
+    StringBuilder sb = new StringBuilder(depth + ": " + type);
     if (expr instanceof NameClassAndExpression) {
       List<String> names =
           (List<String>) ((NameClassAndExpression) expr).getNameClass().visit(nameVisitor);
       for (String name : names) {
-        returnValue += (" \"" + name + "\",");
-        if (DEBUG) System.out.println(returnValue);
+        sb.append(" \"").append(name).append("\",");
+        if (DEBUG) System.out.println(sb);
       }
     } else if (expr instanceof ReferenceExp) {
-      returnValue += (" '" + ((ReferenceExp) expr).name + "',");
-      if (DEBUG) System.out.println(returnValue);
+      sb.append(" '").append(((ReferenceExp) expr).name).append("',");
+      if (DEBUG) System.out.println(sb);
     } else if (type == MSVExpressionType.VALUE) {
-      returnValue += (" '" + ((ValueExp) expr).value + "',");
-      if (DEBUG) System.out.println(returnValue);
+      sb.append(" '").append(((ValueExp) expr).value).append("',");
+      if (DEBUG) System.out.println(sb);
     } else if (type == MSVExpressionType.DATA) {
-      returnValue += (" '" + ((DataExp) expr).getName().localName + "',");
-      if (DEBUG) System.out.println(returnValue);
+      sb.append(" '").append(((DataExp) expr).getName().localName).append("',");
+      if (DEBUG) System.out.println(sb);
     } else {
-      if (DEBUG) System.out.println(returnValue);
+      if (DEBUG) System.out.println(sb);
     }
-    return returnValue;
+    return sb.toString();
   }
 }
