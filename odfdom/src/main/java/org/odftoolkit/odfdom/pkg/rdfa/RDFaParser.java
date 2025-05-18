@@ -146,8 +146,8 @@ class RDFaParser extends net.rootdev.javardfa.Parser {
     boolean skipElement = false;
     String newSubject = null;
     String currentObject = null;
-    List<String> forwardProperties = new ArrayList();
-    List<String> backwardProperties = new ArrayList();
+    List<String> forwardProperties = new ArrayList<>();
+    List<String> backwardProperties = new ArrayList<>();
     String currentLanguage = context.language;
 
     if (settings.contains(Setting.OnePointOne)) {
@@ -339,8 +339,8 @@ class RDFaParser extends net.rootdev.javardfa.Parser {
     return qname.substring(prefix.length() + 1);
   }
 
-  private Iterator fromAttributes(Attributes attributes) {
-    List toReturn = new ArrayList();
+  private Iterator<Attribute> fromAttributes(Attributes attributes) {
+    List<Attribute> toReturn = new ArrayList<>();
 
     for (int i = 0; i < attributes.getLength(); i++) {
       String qname = attributes.getQName(i);
@@ -381,9 +381,9 @@ class RDFaParser extends net.rootdev.javardfa.Parser {
     if (name == null || element == null) {
       return null;
     }
-    Iterator it = element.getAttributes();
+    Iterator<Attribute> it = element.getAttributes();
     while (it.hasNext()) {
-      Attribute at = (Attribute) it.next();
+      Attribute at = it.next();
       if (Util.qNameEquals(at.getName(), name)) {
         return at;
       }

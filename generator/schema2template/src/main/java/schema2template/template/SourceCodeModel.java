@@ -23,13 +23,13 @@
  */
 package schema2template.template;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import schema2template.grammar.PuzzleComponent;
 import schema2template.grammar.PuzzlePiece;
+import schema2template.grammar.PuzzlePieceSet;
 import schema2template.grammar.XMLModel;
 
 /**
@@ -76,8 +76,8 @@ public class SourceCodeModel {
         SortedSet<PuzzlePiece> elements = baseNameElementsMap.computeIfAbsent(baseName, k -> new TreeSet<>());
         PuzzleComponent childElement = schemaModel.getElement(elementName);
       if (childElement != null) {
-        if (childElement instanceof Collection) {
-          elements.addAll((Collection) childElement);
+        if (childElement instanceof PuzzlePieceSet) {
+          elements.addAll((PuzzlePieceSet) childElement);
         } else {
           elements.add((PuzzlePiece) childElement);
         }

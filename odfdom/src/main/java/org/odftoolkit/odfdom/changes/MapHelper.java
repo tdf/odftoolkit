@@ -182,7 +182,7 @@ public final class MapHelper {
 
   /** see Changes API Color */
   public static Map<String, String> createColorMap(String rgbValue) {
-    Map color = new HashMap<String, String>();
+    Map<String, String> color = new HashMap<>();
     if (rgbValue.contains(HASH)) {
       color.put("type", "rgb");
       rgbValue = rgbValue.subSequence(rgbValue.indexOf('#') + 1, rgbValue.length()).toString();

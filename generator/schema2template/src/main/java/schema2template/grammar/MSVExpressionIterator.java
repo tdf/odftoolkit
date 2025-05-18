@@ -75,7 +75,7 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
     private int mSiblingIndex;
   }
   // limit browsing to subclasses of Expression
-  private Class mDesiredExpression;
+  private Class<?> mDesiredExpression;
   // if false, only return direct children of root. Don't return root as first element or grand
   // children
   private boolean mOnlyChildren;
@@ -102,7 +102,7 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
    * @param root Expression root
    * @param desiredExpression Limit returned expressions to subclasses of desiredExpression
    */
-  public MSVExpressionIterator(Expression root, Class desiredExpression) {
+  public MSVExpressionIterator(Expression root, Class<?> desiredExpression) {
     this(root, desiredExpression, false);
   }
 
@@ -118,7 +118,7 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
    * @param desiredExpression Limit returned expressions to subclasses of desiredExpression
    * @param onlyChildren if only children should be returned
    */
-  public MSVExpressionIterator(Expression root, Class desiredExpression, boolean onlyChildren) {
+  public MSVExpressionIterator(Expression root, Class<?> desiredExpression, boolean onlyChildren) {
     // initialize members
     mCurrentExpression = root;
     mDesiredExpression = desiredExpression;

@@ -24,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;
@@ -140,7 +141,7 @@ public class PerformanceIT {
       return;
     }
     File[] files = myFolder.listFiles();
-    ArrayList myList = new ArrayList();
+    List<String> myList = new ArrayList<>();
 
     for (int i = 0; i < files.length; i++) {
       filename = files[i].getName();
