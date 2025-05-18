@@ -156,8 +156,8 @@ public enum OdfPackageConstraint implements ValidationConstraint {
   /**
    * Returns the detail message string of this Constraint.
    *
-   * @return the detail message string of this <tt>Constraint</tt> instance (which may be
-   *     <tt>null</tt>).
+   * @return the detail message string of this <code>Constraint</code> instance (which may be
+   *     <code>null</code>).
    */
   public String getMessage() {
     return mMessage;
