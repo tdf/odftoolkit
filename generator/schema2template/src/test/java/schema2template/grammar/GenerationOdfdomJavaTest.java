@@ -23,8 +23,9 @@ package schema2template.grammar;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
-import org.junit.Assert;
+
 import org.junit.Test;
 import schema2template.GenerationParameters;
 import schema2template.SchemaToTemplate;
@@ -101,8 +102,8 @@ public class GenerationOdfdomJavaTest {
 
   /** Test: It should be able to generate all examples without a failure. */
   @Test
-  public void testAllExampleGenerations() {
-    ArrayList<GenerationParameters> generations = new ArrayList<>();
+  public void testAllExampleGenerations() throws Exception {
+    List<GenerationParameters> generations = new ArrayList<>();
 
     String grammarAdditionsPath = null;
     String mainTemplatePath = null;
@@ -150,15 +151,11 @@ public class GenerationOdfdomJavaTest {
     }
     // }
 
-    try {
-      SchemaToTemplate.run(generations);
-    } catch (Exception e) {
-      Assert.fail("Exception during test run: " + e);
-      e.printStackTrace();
-      throw new RuntimeException(e);
-    }
-    DirectoryCompare.compareDirectories(
-        ConstantsBuildEnv.GENERATION_TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY,
-        ConstantsBuildEnv.GENERATION_REFERENCE_BASE_DIR + ODFDOM_JAVA_DIRECTORY);
+    SchemaToTemplate.run(generations);
+
+    DirectoryCompare.assertDirectoriesEqual(
+        ConstantsBuildEnv.GENERATION_REFERENCE_BASE_DIR + ODFDOM_JAVA_DIRECTORY,
+        ConstantsBuildEnv.GENERATION_TARGET_BASE_DIR + ODFDOM_JAVA_DIRECTORY
+    );
   }
 }
