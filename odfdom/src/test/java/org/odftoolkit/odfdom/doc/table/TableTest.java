@@ -369,8 +369,7 @@ public class TableTest {
           OdfTextDocument.loadDocument(
               ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
       List<OdfTable> tableList = mOdtDoc.getTableList(true);
-      for (int i = 0; i < tableList.size(); i++) {
-        OdfTable table = tableList.get(i);
+      for (OdfTable table : tableList) {
         int clmnum = table.getColumnCount();
         table.appendColumn();
         Assert.assertEquals(clmnum + 1, table.getColumnCount());

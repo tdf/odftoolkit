@@ -24,8 +24,8 @@
 package org.odftoolkit.odfdom.type;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** This class represents the in OpenDocument format used data type {@odf.datatype IDREFS} */
 public class IDREFS implements OdfDataType {
@@ -42,16 +42,7 @@ public class IDREFS implements OdfDataType {
     if ((idRefList == null) || (idRefList.size() == 0)) {
       throw new IllegalArgumentException("parameter can not be null for IDREFS");
     }
-    StringBuilder aRet = new StringBuilder();
-    Iterator<IDREF> aIter = idRefList.iterator();
-    while (aIter.hasNext()) {
-      if (aRet.length() > 0) {
-        aRet.append(' ');
-      }
-      String styleName = aIter.next().toString();
-      aRet.append(styleName);
-    }
-    mIdRefs = aRet.toString();
+    mIdRefs = idRefList.stream().map(IDREF::toString).collect(Collectors.joining(" "));
   }
 
   /**
@@ -78,8 +69,8 @@ public class IDREFS implements OdfDataType {
 
     List<IDREF> aRet = new ArrayList<>();
     String[] names = stringValue.split(" ");
-    for (int i = 0; i < names.length; i++) {
-      aRet.add(new IDREF(names[i]));
+    for (String name : names) {
+      aRet.add(new IDREF(name));
     }
     return new IDREFS(aRet);
   }
@@ -92,8 +83,8 @@ public class IDREFS implements OdfDataType {
   public List<IDREF> getIDREFList() {
     List<IDREF> aRet = new ArrayList<>();
     String[] names = mIdRefs.split(" ");
-    for (int i = 0; i < names.length; i++) {
-      aRet.add(new IDREF(names[i]));
+    for (String name : names) {
+      aRet.add(new IDREF(name));
     }
     return aRet;
   }
@@ -114,8 +105,8 @@ public class IDREFS implements OdfDataType {
     }
 
     String[] names = stringValue.split(" ");
-    for (int i = 0; i < names.length; i++) {
-      if (!IDREF.isValid(names[i])) {
+    for (String name : names) {
+      if (!IDREF.isValid(name)) {
         return false;
       }
     }

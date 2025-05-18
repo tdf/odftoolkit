@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.zip.ZipException;
 import javax.xml.validation.Validator;
@@ -110,21 +109,19 @@ abstract class ODFRootPackageValidator extends ODFPackageValidator
       throws ODFValidatorException, IOException {
     boolean bHasErrors = false;
     if (m_aSubDocs != null) {
-      Iterator<ManifestEntry> aIter = m_aSubDocs.iterator();
-      while (aIter.hasNext()) {
-        ManifestEntry aEntry = aIter.next();
+      for (ManifestEntry aEntry : m_aSubDocs) {
         ODFPackageValidator aPackageValidator =
-            new ODFSubPackageValidator(
-                getPackage(aLogger),
-                getLoggerName(),
-                aEntry.getFullPath(),
-                aEntry.getMediaType(),
-                m_nLogLevel,
-                m_eMode,
-                m_aConfigVersion,
-                m_aFilter,
-                m_aResult.getGenerator(),
-                m_aValidatorProvider);
+          new ODFSubPackageValidator(
+            getPackage(aLogger),
+            getLoggerName(),
+            aEntry.getFullPath(),
+            aEntry.getMediaType(),
+            m_nLogLevel,
+            m_eMode,
+            m_aConfigVersion,
+            m_aFilter,
+            m_aResult.getGenerator(),
+            m_aValidatorProvider);
         bHasErrors |= aPackageValidator.validate(aLogger);
       }
     }

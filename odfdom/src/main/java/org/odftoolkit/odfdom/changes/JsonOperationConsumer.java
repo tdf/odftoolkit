@@ -3831,40 +3831,38 @@ public class JsonOperationConsumer {
 
         OdfOfficeMasterStyles masterStyles = stylesDom.getOrCreateMasterStyles();
         OdfOfficeAutomaticStyles autoStyles = stylesDom.getOrCreateAutomaticStyles();
-        Iterator<StyleMasterPageElement> masterIt = masterStyles.iterator();
-        while (masterIt.hasNext()) {
-          StyleMasterPageElement masterPage = masterIt.next();
+        for (StyleMasterPageElement masterPage : masterStyles) {
           String pageLayoutName = masterPage.getStylePageLayoutNameAttribute();
           OdfStylePageLayout pageLayout = autoStyles.getPageLayout(pageLayoutName);
           if (pageAttrs.has("marginLeft")) {
             double value = pageAttrs.getDouble("marginLeft");
             pageLayout.setProperty(
-                StylePageLayoutPropertiesElement.MarginLeft, Double.toString(value / 100) + "mm");
+              StylePageLayoutPropertiesElement.MarginLeft, Double.toString(value / 100) + "mm");
           }
           if (pageAttrs.has("marginRight")) {
             double value = pageAttrs.getDouble("marginRight");
             pageLayout.setProperty(
-                StylePageLayoutPropertiesElement.MarginRight, Double.toString(value / 100) + "mm");
+              StylePageLayoutPropertiesElement.MarginRight, Double.toString(value / 100) + "mm");
           }
           if (pageAttrs.has("marginTop")) {
             double value = pageAttrs.getDouble("marginTop");
             pageLayout.setProperty(
-                StylePageLayoutPropertiesElement.MarginTop, Double.toString(value / 100) + "mm");
+              StylePageLayoutPropertiesElement.MarginTop, Double.toString(value / 100) + "mm");
           }
           if (pageAttrs.has("marginBottom")) {
             double value = pageAttrs.getDouble("marginBottom");
             pageLayout.setProperty(
-                StylePageLayoutPropertiesElement.MarginBottom, Double.toString(value / 100) + "mm");
+              StylePageLayoutPropertiesElement.MarginBottom, Double.toString(value / 100) + "mm");
           }
           if (pageAttrs.has("width")) {
             double value = pageAttrs.getInt("width");
             pageLayout.setProperty(
-                StylePageLayoutPropertiesElement.PageWidth, Double.toString(value / 100) + "mm");
+              StylePageLayoutPropertiesElement.PageWidth, Double.toString(value / 100) + "mm");
           }
           if (pageAttrs.has("height")) {
             double value = pageAttrs.getInt("height");
             pageLayout.setProperty(
-                StylePageLayoutPropertiesElement.PageHeight, Double.toString(value / 100) + "mm");
+              StylePageLayoutPropertiesElement.PageHeight, Double.toString(value / 100) + "mm");
           }
         }
       }
@@ -3939,7 +3937,7 @@ public class JsonOperationConsumer {
       TableTableElement tableElement = (TableTableElement) tableComponent.getRootElement();
       // WORK AROUND for "UNDO COLUMN WIDTH" problem (see TableTableElement for further changes)
       List<TableTableColumnElement> existingColumnList =
-          Table.getTableColumnElements(tableElement, new ArrayList<TableTableColumnElement>());
+          Table.getTableColumnElements(tableElement, new ArrayList<>());
       int columnCount = 0;
       for (TableTableColumnElement column : existingColumnList) {
         columnCount += column.getRepetition();
@@ -4041,7 +4039,7 @@ public class JsonOperationConsumer {
         // groups, columns and header elements
         List<TableTableColumnElement> existingColumnList =
             Table.getTableColumnElements(
-                parentComponent.getRootElement(), new ArrayList<TableTableColumnElement>());
+                parentComponent.getRootElement(), new ArrayList<>());
         addColumnAndCellElements(
             parentComponent,
             start,
@@ -4642,7 +4640,7 @@ public class JsonOperationConsumer {
         // Returns all TableTableColumn descendants that exist within the tableElement, even within
         // groups, columns and header elements
         List<TableTableColumnElement> existingColumnList =
-            Table.getTableColumnElements(tableElement, new ArrayList<TableTableColumnElement>());
+            Table.getTableColumnElements(tableElement, new ArrayList<>());
         // Column creation only required
         addColumnAndCellElements(
             tableElement.getComponent(),
@@ -5014,9 +5012,7 @@ public class JsonOperationConsumer {
       Object language = null;
       Object noProof = null;
 
-      final Iterator<String> keySetIter = attrs.keySet().iterator();
-      while (keySetIter.hasNext()) {
-        final String key = (String) keySetIter.next();
+      for (String key : attrs.keySet()) {
         final Object value = attrs.get(key);
         // TODO -- !!!!!!!!!!!!!!!!ROUNDTRIP WITH THESE VALUES!!!!!!!!!!!
         //	<define name="fontWeight">
@@ -5049,29 +5045,29 @@ public class JsonOperationConsumer {
         } else if (key.equals("boldAsian")) {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.FO.getUri(), "font-weight-asian");
+              OdfDocumentNamespace.FO.getUri(), "font-weight-asian");
           } else {
             Boolean isBold = (Boolean) value;
             if (isBold) {
               propertiesElement.setAttributeNS(
-                  OdfDocumentNamespace.STYLE.getUri(), "style:font-weight-asian", "bold");
+                OdfDocumentNamespace.STYLE.getUri(), "style:font-weight-asian", "bold");
             } else {
               propertiesElement.setAttributeNS(
-                  OdfDocumentNamespace.STYLE.getUri(), "style:font-weight-asian", "normal");
+                OdfDocumentNamespace.STYLE.getUri(), "style:font-weight-asian", "normal");
             }
           }
         } else if (key.equals("boldComplex")) {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.FO.getUri(), "font-weight-complex");
+              OdfDocumentNamespace.FO.getUri(), "font-weight-complex");
           } else {
             Boolean isBold = (Boolean) value;
             if (isBold) {
               propertiesElement.setAttributeNS(
-                  OdfDocumentNamespace.STYLE.getUri(), "style:font-weight-complex", "bold");
+                OdfDocumentNamespace.STYLE.getUri(), "style:font-weight-complex", "bold");
             } else {
               propertiesElement.setAttributeNS(
-                  OdfDocumentNamespace.STYLE.getUri(), "style:font-weight-complex", "normal");
+                OdfDocumentNamespace.STYLE.getUri(), "style:font-weight-complex", "normal");
             }
           }
         } //	<define name="lineStyle">
@@ -5089,13 +5085,13 @@ public class JsonOperationConsumer {
         else if (key.equals("underline")) {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "text-underline-style");
+              OdfDocumentNamespace.STYLE.getUri(), "text-underline-style");
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "text-underline-width");
+              OdfDocumentNamespace.STYLE.getUri(), "text-underline-width");
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "text-underline-color");
+              OdfDocumentNamespace.STYLE.getUri(), "text-underline-color");
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "text-underline-type");
+              OdfDocumentNamespace.STYLE.getUri(), "text-underline-type");
           } else {
             Boolean isUnderline = (Boolean) value;
             if (isUnderline) {
@@ -5126,30 +5122,30 @@ public class JsonOperationConsumer {
         } else if (key.equals("italicAsian")) {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.FO.getUri(), "font-style-asian");
+              OdfDocumentNamespace.FO.getUri(), "font-style-asian");
           } else {
             Boolean isItalic = (Boolean) value;
             if (isItalic) {
               propertiesElement.setAttributeNS(
-                  OdfDocumentNamespace.STYLE.getUri(), "style:font-style-asian", "italic");
+                OdfDocumentNamespace.STYLE.getUri(), "style:font-style-asian", "italic");
 
             } else {
               propertiesElement.setAttributeNS(
-                  OdfDocumentNamespace.STYLE.getUri(), "style:font-style-asian", "normal");
+                OdfDocumentNamespace.STYLE.getUri(), "style:font-style-asian", "normal");
             }
           }
         } else if (key.equals("italicComplex")) {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.FO.getUri(), "font-style-complex");
+              OdfDocumentNamespace.FO.getUri(), "font-style-complex");
           } else {
             Boolean isItalic = (Boolean) value;
             if (isItalic) {
               propertiesElement.setAttributeNS(
-                  OdfDocumentNamespace.STYLE.getUri(), "style:font-style-complex", "italic");
+                OdfDocumentNamespace.STYLE.getUri(), "style:font-style-complex", "italic");
             } else {
               propertiesElement.setAttributeNS(
-                  OdfDocumentNamespace.STYLE.getUri(), "style:font-style-complex", "normal");
+                OdfDocumentNamespace.STYLE.getUri(), "style:font-style-complex", "normal");
             }
           }
         } else if (key.equals("color")) {
@@ -5162,20 +5158,20 @@ public class JsonOperationConsumer {
               if (!type.equals(MapHelper.AUTO)) {
                 propertiesElement.setFoColorAttribute(getColor(color, null));
                 propertiesElement.removeAttributeNS(
-                    OdfDocumentNamespace.STYLE.getUri(), "use-window-font-color");
+                  OdfDocumentNamespace.STYLE.getUri(), "use-window-font-color");
               } else {
                 propertiesElement.setAttributeNS(
-                    OdfDocumentNamespace.STYLE.getUri(), "style:use-window-font-color", "true");
+                  OdfDocumentNamespace.STYLE.getUri(), "style:use-window-font-color", "true");
               }
             } else { // DEFAULT IS AUTO
               propertiesElement.setAttributeNS(
-                  OdfDocumentNamespace.STYLE.getUri(), "style:use-window-font-color", "true");
+                OdfDocumentNamespace.STYLE.getUri(), "style:use-window-font-color", "true");
             }
           }
         } else if (key.equals("fillColor")) {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.FO.getUri(), "background-color");
+              OdfDocumentNamespace.FO.getUri(), "background-color");
           } else {
             JSONObject color = (JSONObject) value;
             propertiesElement.setFoBackgroundColorAttribute(getColor(color, MapHelper.TRANSPARENT));
@@ -5189,22 +5185,22 @@ public class JsonOperationConsumer {
         } else if (key.equals("fontSizeAsian")) {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "font-size-asian");
+              OdfDocumentNamespace.STYLE.getUri(), "font-size-asian");
           } else {
             propertiesElement.setAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(),
-                "style:font-size-asian",
-                value + "pt");
+              OdfDocumentNamespace.STYLE.getUri(),
+              "style:font-size-asian",
+              value + "pt");
           }
         } else if (key.equals("fontSizeComplex")) {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "font-size-complex");
+              OdfDocumentNamespace.STYLE.getUri(), "font-size-complex");
           } else {
             propertiesElement.setAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(),
-                "style:font-size-complex",
-                value + "pt");
+              OdfDocumentNamespace.STYLE.getUri(),
+              "style:font-size-complex",
+              value + "pt");
           }
         } else if (key.equals("fontName")) {
           if (value == null || value.equals(JSONObject.NULL)) {
@@ -5217,25 +5213,25 @@ public class JsonOperationConsumer {
         } else if (key.equals("fontNameAsian")) {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "font-name-asian");
+              OdfDocumentNamespace.STYLE.getUri(), "font-name-asian");
           } else {
             String fontName = (String) value;
             propertiesElement.setAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "style:font-name-asian", fontName);
+              OdfDocumentNamespace.STYLE.getUri(), "style:font-name-asian", fontName);
           }
         } else if (key.equals("fontNameComplex")) {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "font-name-complex");
+              OdfDocumentNamespace.STYLE.getUri(), "font-name-complex");
           } else {
             String fontName = (String) value;
             propertiesElement.setAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "style:font-name-complex", fontName);
+              OdfDocumentNamespace.STYLE.getUri(), "style:font-name-complex", fontName);
           }
         } else if (key.equals("vertAlign")) {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "text-position");
+              OdfDocumentNamespace.STYLE.getUri(), "text-position");
           } else {
             String alignment = (String) value;
             if (alignment.equals("sub")) {
@@ -5249,21 +5245,21 @@ public class JsonOperationConsumer {
         } else if (key.equals("strike")) {
           if (value == null || value.equals(JSONObject.NULL)) {
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "text-position");
+              OdfDocumentNamespace.STYLE.getUri(), "text-position");
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "text-line-through-color");
+              OdfDocumentNamespace.STYLE.getUri(), "text-line-through-color");
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "text-line-through-mode");
+              OdfDocumentNamespace.STYLE.getUri(), "text-line-through-mode");
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "text-line-through-style");
+              OdfDocumentNamespace.STYLE.getUri(), "text-line-through-style");
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "text-line-through-text");
+              OdfDocumentNamespace.STYLE.getUri(), "text-line-through-text");
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "text-line-through-text-style");
+              OdfDocumentNamespace.STYLE.getUri(), "text-line-through-text-style");
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "text-line-through-type");
+              OdfDocumentNamespace.STYLE.getUri(), "text-line-through-type");
             propertiesElement.removeAttributeNS(
-                OdfDocumentNamespace.STYLE.getUri(), "text-line-through-width");
+              OdfDocumentNamespace.STYLE.getUri(), "text-line-through-width");
           } else {
             String strikeType = (String) value;
             if (strikeType.equals("single")) {
@@ -5289,33 +5285,33 @@ public class JsonOperationConsumer {
                * a value of type nonNegativeLength
                * normal: disables the effects of style:line-height-at-least and style:line-spacing.
                * a value of type percent  */
-        //				<attribute name="fo:line-height">
-        //					<choice>
-        //						<value>normal</value>
-        //						<ref name="nonNegativeLength"/>
-        //						<ref name="percent"/>
-        //					</choice>
-        //				</attribute>
-        // { type: 'percent', value: 100 }
-        if (key.equals("letterSpacing")) {
-          if (value == null || value.equals(JSONObject.NULL)) {
-            propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "letter-spacing");
-          } else {
-            if (value.equals("normal")) {
-              propertiesElement.setFoLetterSpacingAttribute("normal");
+          //				<attribute name="fo:line-height">
+          //					<choice>
+          //						<value>normal</value>
+          //						<ref name="nonNegativeLength"/>
+          //						<ref name="percent"/>
+          //					</choice>
+          //				</attribute>
+          // { type: 'percent', value: 100 }
+          if (key.equals("letterSpacing")) {
+            if (value == null || value.equals(JSONObject.NULL)) {
+              propertiesElement.removeAttributeNS(OdfDocumentNamespace.FO.getUri(), "letter-spacing");
             } else {
-              propertiesElement.setFoLetterSpacingAttribute(
+              if (value.equals("normal")) {
+                propertiesElement.setFoLetterSpacingAttribute("normal");
+              } else {
+                propertiesElement.setFoLetterSpacingAttribute(
                   (getSafelyInteger(value)) / 100.0 + "mm");
+              }
+            }
+          } else if (key.equals("url")) {
+            if (value == null || value.equals(JSONObject.NULL)) {
+              propertiesElement.removeAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
+            } else {
+              propertiesElement.setAttributeNS(
+                OdfDocumentNamespace.XLINK.getUri(), "xlink:href", (String) value);
             }
           }
-        } else if (key.equals("url")) {
-          if (value == null || value.equals(JSONObject.NULL)) {
-            propertiesElement.removeAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
-          } else {
-            propertiesElement.setAttributeNS(
-                OdfDocumentNamespace.XLINK.getUri(), "xlink:href", (String) value);
-          }
-        }
       }
       if (noProof != null || language != null) {
         Object newLanguage = language;

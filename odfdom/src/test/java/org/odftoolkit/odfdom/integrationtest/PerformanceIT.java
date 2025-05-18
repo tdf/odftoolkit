@@ -143,8 +143,8 @@ public class PerformanceIT {
     File[] files = myFolder.listFiles();
     List<String> myList = new ArrayList<>();
 
-    for (int i = 0; i < files.length; i++) {
-      filename = files[i].getName();
+    for (File file : files) {
+      filename = file.getName();
       if (filename.endsWith("ods") || filename.endsWith("odp") || filename.endsWith("odt")) {
         myList.add(filename);
       }
@@ -312,8 +312,8 @@ public class PerformanceIT {
     OdfFileDom dom = null;
     String filename = null;
 
-    for (int j = 0; j < TEST_FILE_NAME.length; j++) {
-      filename = TEST_FILE_FOLDER + TEST_FILE_NAME[j];
+    for (String s : TEST_FILE_NAME) {
+      filename = TEST_FILE_FOLDER + s;
       LOG.log(Level.INFO, "filename:{0}", filename);
       doc = OdfDocument.loadDocument(filename);
       dom = doc.getContentDom();

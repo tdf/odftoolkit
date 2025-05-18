@@ -139,8 +139,7 @@ public class OdfEditableTextExtractor extends OdfTextExtractor {
   public void visit(TableTableElement ele) {
     OdfTable table = OdfTable.getInstance(ele);
     List<OdfTableRow> rowlist = table.getRowList();
-    for (int i = 0; i < rowlist.size(); i++) {
-      OdfTableRow row = rowlist.get(i);
+    for (OdfTableRow row : rowlist) {
       for (int j = 0; j < row.getCellCount(); j++) {
         mTextBuilder.append(row.getCellByIndex(j).getDisplayText()).append(TabChar);
       }

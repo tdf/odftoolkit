@@ -30,7 +30,6 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.EnumMap;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.xml.XMLConstants;
@@ -122,13 +121,12 @@ public class ODFValidator implements ODFValidatorProvider {
 
     FileFilter aFileFilter = new ODFFileFilter(aExcludeRegExp, bRecursive);
 
-    Iterator<String> aIter = aFileNames.iterator();
-    while (aIter.hasNext()) {
-      File aFile = new File(aIter.next());
+    for (String aFileName : aFileNames) {
+      File aFile = new File(aFileName);
       bRet |=
-          aFile.isDirectory()
-              ? validateDir(aOut, aFile, aFileFilter, eMode, aFilter)
-              : validateFile(aOut, aFile, eMode, aFilter);
+        aFile.isDirectory()
+          ? validateDir(aOut, aFile, aFileFilter, eMode, aFilter)
+          : validateFile(aOut, aFile, eMode, aFilter);
     }
 
     return bRet;
@@ -155,8 +153,7 @@ public class ODFValidator implements ODFValidatorProvider {
     File[] aFiles = aDir.listFiles(aFileFilter);
 
     if (aFiles != null) {
-      for (int i = 0; i < aFiles.length; ++i) {
-        File aFile = aFiles[i];
+      for (File aFile : aFiles) {
         if (aFile.isDirectory()) {
           bRet |= validateDir(aOut, aFile, aFileFilter, eMode, aFilter);
         } else {

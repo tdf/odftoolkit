@@ -294,7 +294,7 @@ public class Table<T> extends Component {
 
   static void stashColumnWidths(TableTableElement tableElement) {
     List<TableTableColumnElement> existingColumnList =
-        Table.getTableColumnElements(tableElement, new ArrayList<TableTableColumnElement>());
+        Table.getTableColumnElements(tableElement, new ArrayList<>());
     List<Integer> tableColumWidths = collectColumnWidths(tableElement, existingColumnList);
     ((Table<?>) tableElement.getComponent()).pushTableGrid(tableColumWidths);
   }

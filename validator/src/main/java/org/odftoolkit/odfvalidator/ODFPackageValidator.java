@@ -342,9 +342,7 @@ abstract class ODFPackageValidator {
     if (m_aResult.hasForeignElements()) {
       Set<String> aForeignElementURISet = m_aResult.getForeignElements().keySet();
       StringBuilder aBuffer = new StringBuilder();
-      Iterator<String> aIter = aForeignElementURISet.iterator();
-      while (aIter.hasNext()) {
-        String aURI = aIter.next();
+      for (String aURI : aForeignElementURISet) {
         aBuffer.setLength(0);
         aBuffer.append(m_aResult.getForeignElements().get(aURI));
         aBuffer.append(" extension elements from the following namespace were found: ");

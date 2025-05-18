@@ -64,15 +64,13 @@ public class OdfTextList extends TextListElement {
     OdfTextList[] listArray = new OdfTextList[10];
     TextListItemElement listItem;
     OdfTextParagraph para;
-    String item;
     int level = 0;
     int lastLevel = 0;
     int lev; // loop counter
 
     listArray[0] = this;
-    for (int i = 0; i < itemList.length; i++) {
+    for (String item : itemList) {
       level = 0;
-      item = itemList[i];
 
       // determine level of indenting by counting delimiters,
       // then get rid of the delimiters
