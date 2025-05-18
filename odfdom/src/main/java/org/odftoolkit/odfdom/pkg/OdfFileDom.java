@@ -95,10 +95,10 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
       mPackageDocument = packageDocument;
       mPackage = packageDocument.getPackage();
       mPackagePath = packagePath;
-      mUriByPrefix = new HashMap<String, String>();
-      mPrefixByUri = new HashMap<String, String>();
-      mDuplicatePrefixesByUri = new HashMap<String, Set<String>>();
-      inCententMetadataCache = new IdentityHashMap<Node, Model>();
+      mUriByPrefix = new HashMap<>();
+      mPrefixByUri = new HashMap<>();
+      mDuplicatePrefixesByUri = new HashMap<>();
+      inCententMetadataCache = new IdentityHashMap<>();
       try {
         initialize();
       } catch (SAXException | IOException | ParserConfigurationException ex) {
@@ -125,10 +125,10 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
       mPackageDocument = null;
       mPackage = pkg;
       mPackagePath = packagePath;
-      mUriByPrefix = new HashMap<String, String>();
-      mPrefixByUri = new HashMap<String, String>();
-      mDuplicatePrefixesByUri = new HashMap<String, Set<String>>();
-      inCententMetadataCache = new HashMap<Node, Model>();
+      mUriByPrefix = new HashMap<>();
+      mPrefixByUri = new HashMap<>();
+      mDuplicatePrefixesByUri = new HashMap<>();
+      inCententMetadataCache = new HashMap<>();
       try {
         initialize();
       } catch (SAXException | IOException | ParserConfigurationException ex) {
@@ -580,7 +580,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
   public Iterator<String> getPrefixes(String namespaceURI) {
     Set<String> prefixes = mDuplicatePrefixesByUri.get(namespaceURI);
     if (prefixes == null) {
-      prefixes = new HashSet<String>();
+      prefixes = new HashSet<>();
     }
     String givenPrefix = mPrefixByUri.get(namespaceURI);
     if (givenPrefix != null) {
@@ -618,7 +618,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
       newNamespace = OdfNamespace.newNamespace(existingPrefix, uri);
 
       // Add the new prefix to the duplicate prefix map for getPrefixes(String uri)
-      Set<String> prefixes = mDuplicatePrefixesByUri.computeIfAbsent(uri, k -> new HashSet<String>());
+      Set<String> prefixes = mDuplicatePrefixesByUri.computeIfAbsent(uri, k -> new HashSet<>());
       prefixes.add(prefix);
     } else {
       // Scenario b) the prefix already exists and the URI does not exist

@@ -237,9 +237,9 @@ public class TextStyleNavigation extends Navigation<TextSelection> {
   }
 
   private Set<String> getMatchStyleNames() {
-    Set<String> styleNames = new HashSet<String>();
+    Set<String> styleNames = new HashSet<>();
     String sname;
-    HashMap<String, OdfDefaultStyle> defaultStyles = new HashMap<String, OdfDefaultStyle>();
+    HashMap<String, OdfDefaultStyle> defaultStyles = new HashMap<>();
     try {
 
       NodeList defStyleList =

@@ -166,19 +166,19 @@ public class JsonOperationNormalizer {
 
   private static Iterator<String> getSortedIterator(JSONObject jsonObject) {
     // have to duplicate set, as the original set is read-only
-    Set<String> keySet = new HashSet<String>(jsonObject.keySet());
+    Set<String> keySet = new HashSet<>(jsonObject.keySet());
     List<String> firstListedKeys = null;
     for (String SORTING_SEQUENCE_OF_KEYS1 : SORTING_SEQUENCE_OF_KEYS) {
       // do not sort 'name' property
       if (keySet.contains(SORTING_SEQUENCE_OF_KEYS1)) {
         if (firstListedKeys == null) {
-          firstListedKeys = new ArrayList<String>(3);
+          firstListedKeys = new ArrayList<>(3);
         }
         firstListedKeys.add(SORTING_SEQUENCE_OF_KEYS1);
         keySet.remove(SORTING_SEQUENCE_OF_KEYS1);
       }
     }
-    List<String> list = new ArrayList<String>(keySet);
+    List<String> list = new ArrayList<>(keySet);
     // sort the remaining keys
     Collections.sort(list);
 

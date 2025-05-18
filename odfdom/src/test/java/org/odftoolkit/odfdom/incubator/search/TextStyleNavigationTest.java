@@ -85,7 +85,7 @@ public class TextStyleNavigationTest {
 
     // search the text of specified style, then insert it before specified text (delete)
     styleNavigator = null;
-    TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<OdfStyleProperty, String>();
+    TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<>();
     searchProps.put(StyleTextPropertiesElement.FontName, "Times New Roman1");
     searchProps.put(StyleTextPropertiesElement.FontSize, "16pt");
     styleNavigator = new TextStyleNavigation(searchProps, doc);
@@ -133,7 +133,7 @@ public class TextStyleNavigationTest {
   public void testPasteAtEndOf() {
 
     // search the text of specified style, then insert it after specified text (delete)
-    TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<OdfStyleProperty, String>();
+    TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<>();
     searchProps.put(StyleTextPropertiesElement.FontName, "Times New Roman1");
     searchProps.put(StyleTextPropertiesElement.FontSize, "16pt");
     styleNavigator = new TextStyleNavigation(searchProps, doc);
@@ -188,7 +188,7 @@ public class TextStyleNavigationTest {
   public void testCut() {
 
     // delete all text with specified style
-    TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<OdfStyleProperty, String>();
+    TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<>();
     searchProps.put(StyleTextPropertiesElement.FontName, "Century1");
     searchProps.put(StyleTextPropertiesElement.FontSize, "22pt");
     styleNavigator = new TextStyleNavigation(searchProps, doc);
@@ -217,7 +217,7 @@ public class TextStyleNavigationTest {
   @Test
   public void testApplyStyle() {
     // select the text specified style and apply the text with new style.
-    TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<OdfStyleProperty, String>();
+    TreeMap<OdfStyleProperty, String> searchProps = new TreeMap<>();
     searchProps.put(StyleTextPropertiesElement.FontName, "Arial");
     searchProps.put(StyleTextPropertiesElement.FontSize, "12pt");
     styleNavigator = new TextStyleNavigation(searchProps, doc);
@@ -245,7 +245,7 @@ public class TextStyleNavigationTest {
       }
     }
 
-    TreeMap<OdfStyleProperty, String> chgProps = new TreeMap<OdfStyleProperty, String>();
+    TreeMap<OdfStyleProperty, String> chgProps = new TreeMap<>();
     chgProps.put(StyleTextPropertiesElement.FontSize, "23pt");
     chgProps.put(StyleTextPropertiesElement.FontWeight, "bold");
     search4 = new TextStyleNavigation(chgProps, doc);

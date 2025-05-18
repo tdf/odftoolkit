@@ -249,283 +249,81 @@ class FieldMap {
   }
 
   private static Map<String, FieldMap> createMap() {
-    Map<String, FieldMap> map = new HashMap<String, FieldMap>();
-    map.put(
-        "author-initials", new FieldMap("authorinitials", "TextAuthorInitialsElement", PROP_FIXED));
-    map.put("author-name", new FieldMap("author-name", "TextAuthorNameElement", PROP_FIXED));
-    map.put(
-        "bookmark-ref",
-        new FieldMap("bookmark-ref", "TextBookmarkRefElement", PROP_REFFORMAT | PROP_REFNAME));
-    map.put(
-        "chapter", new FieldMap("chapter", "TextChapterElement", PROP_DISPLAY | PROP_OUTLINELEVEL));
-    map.put(
-        "character-count",
-        new FieldMap(
-            "character-count",
-            "TextCharacterCountElement",
-            PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC));
-    map.put(
-        "conditional-text",
-        new FieldMap(
-            "conditional-text",
-            "TextConditionalTextElement",
-            PROP_CONDITION | PROP_CURRENTVALUE | PROP_FALSEVALUE | PROP_TRUEVALUE));
-    map.put(
-        "creation-date",
-        new FieldMap(
-            "creation-date",
-            "TextCreationDateElement",
-            PROP_FIXED | PROP_DATEVALUE | PROP_DATEFORMAT));
-    map.put(
-        "creation-time",
-        new FieldMap(
-            "creation-time",
-            "TextCreationTimeElement",
-            PROP_FIXED | PROP_DATEVALUE | PROP_DATEFORMAT | PROP_TIMESTYLE));
-    map.put("creator", new FieldMap("creator", "TextCreatorElement", PROP_FIXED));
-    map.put(
-        "database-display",
-        new FieldMap(
-            "database-display",
-            "TextDatabaseDisplayElement",
-            PROP_DBTABLE | PROP_DBNAME | PROP_DBCOLUMN));
-    map.put(
-        "database-name",
-        new FieldMap("database-name", "TextDatabaseNameElement", PROP_DBTABLE | PROP_DBNAME));
-    map.put(
-        "database-row-number",
-        new FieldMap(
-            "database-row-number",
-            "TextDatabaseRowNumberElement",
-            PROP_T_VALUE | PROP_DBTABLE | PROP_DBNAME));
-    map.put(
-        "database-row-select",
-        new FieldMap(
-            "database-row-select",
-            "TextDatabaseRowSelectElement",
-            PROP_CONDITION | PROP_DBTABLE | PROP_DBNAME | PROP_ROWNUMBER | PROP_TABLETYPE));
-    map.put(
-        "date",
-        new FieldMap("date", "TextDateElement", PROP_FIXED | PROP_DATEVALUE | PROP_DATEFORMAT));
-    map.put(
-        "dde-connection",
-        new FieldMap("dde-connection", "TextDdeConnectionElement", PROP_CONNECTIONNAME));
-    map.put("description", new FieldMap("description", "TextDescriptionElement", PROP_FIXED));
-    map.put(
-        "editing-cycles", new FieldMap("editing-cycles", "TextEditingCyclesElement", PROP_FIXED));
-    map.put(
-        "editing-duration",
-        new FieldMap(
-            "editing-duration",
-            "TextEditingDurationElement",
-            PROP_FIXED | PROP_DURATION | PROP_DATEFORMAT));
-    map.put("execute-macro", new FieldMap("execute-macro", "TextExecuteMacroElement", PROP_NAME));
-    map.put(
-        "expression",
-        new FieldMap(
-            "expression",
-            "TextExpressionElement",
-            PROP_BOOLVALUE
-                | PROP_CURRENCY
-                | PROP_DATEVALUE
-                | PROP_STRINGVALUE
-                | PROP_TIMEVALUE
-                | PROP_O_VALUE
-                | PROP_VALUETYPE
-                | PROP_DATEFORMAT
-                | PROP_DISPLAY
-                | PROP_FORMULA));
-    map.put(
-        "file-name", new FieldMap("file-name", "TextFileNameElement", PROP_DISPLAY | PROP_FIXED));
-    map.put(
-        "hidden-paragraph",
-        new FieldMap(
-            "hidden-paragraph", "TextHiddenParagraphElement", PROP_CONDITION | PROP_ISHIDDEN));
-    map.put(
-        "hidden-text",
-        new FieldMap(
-            "hidden-text",
-            "TextHiddenTextElement",
-            PROP_CONDITION | PROP_ISHIDDEN | PROP_STRINGVALUE));
-    map.put(
-        "image-count",
-        new FieldMap(
-            "image-count", "TextImageCountElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC));
-    map.put(
-        "initial-creator",
-        new FieldMap("initial-creator", "TextInitialCreatorElement", PROP_FIXED));
-    map.put("keywords", new FieldMap("keywords", "TextKeywordsElement", 0));
-    map.put("measure", new FieldMap("measure", "TextMeasureElement", PROP_KIND));
-    map.put(
-        "meta-field",
-        new FieldMap("meta-field", "TextMetaFieldElement", PROP_DATEFORMAT | PROP_ID));
-    map.put(
-        "modification-date",
-        new FieldMap(
-            "modification-date",
-            "TextModificationDateElement",
-            PROP_FIXED | PROP_DATEVALUE | PROP_DATEFORMAT));
-    map.put(
-        "modification-time",
-        new FieldMap(
-            "modification-time",
-            "TextModificationTimeElement",
-            PROP_FIXED | PROP_DATEVALUE | PROP_DATEFORMAT));
-    map.put(
-        "note-ref", new FieldMap("note-ref", "TextNoteRefElement", PROP_REFFORMAT | PROP_REFNAME));
-    map.put(
-        "object-count",
-        new FieldMap(
-            "object-count", "TextObjectCountElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC));
-    map.put(
-        "page-continuation", new FieldMap("page-continuation", "TextPageContinuationElement", 0));
-    map.put(
-        "page-count",
-        new FieldMap(
-            "page-count", "TextPageCountElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC));
-    map.put(
-        "page-number",
-        new FieldMap(
-            "page-number", "TextPageNumberElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC));
-    map.put(
-        "page-variable-get",
-        new FieldMap(
-            "page-variable-get",
-            "TextPageVariableGetElement",
-            PROP_NUMFORMAT | PROP_NUMLETTERSYNC));
-    map.put(
-        "page-variable-set",
-        new FieldMap(
-            "page-variable-set", "TextPageVariableSetElement", PROP_PAGEADJUST | PROP_ACTIVE));
-    map.put(
-        "paragraph-count",
-        new FieldMap(
-            "paragraph-count",
-            "TextParagraphCountElement",
-            PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC));
-    map.put(
-        "placeholder",
-        new FieldMap(
-            "placeholder", "TextPlaceholderElement", PROP_DESCRIPTION | PROP_PLACEHOLDERTYPE));
-    map.put(
-        "print-date",
-        new FieldMap(
-            "print-date", "TextPrintDateElement", PROP_FIXED | PROP_DATEVALUE | PROP_DATEFORMAT));
-    map.put(
-        "print-time",
-        new FieldMap(
-            "print-time",
-            "TextPrintTimeElement",
-            PROP_FIXED | PROP_TIMESTYLE | PROP_DATEVALUE | PROP_DATEFORMAT));
-    map.put("printed-by", new FieldMap("printed-by", "TextPrintedByElement", PROP_FIXED));
-    map.put(
-        "reference-ref",
-        new FieldMap("reference-ref", "TextReferenceRefElement", PROP_REFFORMAT | PROP_REFNAME));
-    map.put(
-        "script",
-        new FieldMap("script", "TextScriptElement", PROP_LANGUAGE | PROP_HREF | PROP_LINKTYPE));
-    map.put("sender-city", new FieldMap("sender-city", "TextSenderCityElement", 0));
-    map.put("sender-company", new FieldMap("sender-company", "TextSenderCompanyElement", 0));
-    map.put("sender-country", new FieldMap("sender-country", "TextSenderCountryElement", 0));
-    map.put("sender-email", new FieldMap("sender-email", "TextSenderEmailElement", 0));
-    map.put("sender-fax", new FieldMap("sender-fax", "TextSenderFaxElement", 0));
-    map.put("sender-firstname", new FieldMap("sender-firstname", "TextSenderFirstnameElement", 0));
-    map.put("sender-initials", new FieldMap("sender-initials", "TextSenderInitialsElement", 0));
-    map.put("sender-lastname", new FieldMap("sender-lastname", "TextSenderLastnameElement", 0));
-    map.put(
-        "sender-phone-private",
-        new FieldMap("sender-phone-private", "TextSenderPhonePrivateElement", 0));
-    map.put(
-        "sender-phone-work", new FieldMap("sender-phone-work", "TextSenderPhoneWorkElement", 0));
-    map.put("sender-position", new FieldMap("sender-position", "TextSenderPositionElement", 0));
-    map.put(
-        "sender-postal-code", new FieldMap("sender-postal-code", "TextSenderPostalCodeElement", 0));
-    map.put(
-        "sender-state-or-province",
-        new FieldMap("sender-state-or-province", "TextSenderStateOrProvinceElement", 0));
-    map.put("sender-street", new FieldMap("sender-street", "TextSenderStreetElement", 0));
-    map.put("sender-title", new FieldMap("sender-title", "TextSenderTitleElement", 0));
-    map.put(
-        "sequence-ref",
-        new FieldMap("sequence-ref", "TextSequenceRefElement", PROP_REFFORMAT | PROP_REFNAME));
-    map.put(
-        "sequence",
-        new FieldMap(
-            "sequence",
-            "TextSequenceElement",
-            PROP_DATEFORMAT | PROP_NUMLETTERSYNC | PROP_FORMULA | PROP_NAME | PROP_REFNAME));
-    map.put("sheet-name", new FieldMap("sheet-name", "TextSheetNameElement", 0));
-    map.put("subject", new FieldMap("subject", "TextSubjectElement", PROP_FIXED));
-    map.put(
-        "table-count",
-        new FieldMap(
-            "table-count", "TextTableCountElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC));
-    map.put(
-        "template-name", new FieldMap("template-name", "TextTemplateNameElement", PROP_DISPLAY));
-    map.put("text-input", new FieldMap("text-input", "TextTextInputElement", PROP_DESCRIPTION));
-    map.put(
-        "time",
-        new FieldMap(
-            "time",
-            "TextTimeElement",
-            PROP_FIXED | PROP_DATEVALUE | PROP_TIMESTYLE | PROP_DATEFORMAT));
-    map.put("title", new FieldMap("title", "TextTitleElement", PROP_FIXED));
-    map.put(
-        "user-defined",
-        new FieldMap(
-            "user-defined",
-            "TextUserDefinedElement",
-            PROP_BOOLVALUE
-                | PROP_CURRENCY
-                | PROP_DATEVALUE
-                | PROP_STRINGVALUE
-                | PROP_TIMEVALUE
-                | PROP_O_VALUE
-                | PROP_DATEFORMAT
-                | PROP_FIXED
-                | PROP_NAME));
-    map.put(
-        "user-field-get",
-        new FieldMap(
-            "user-field-get",
-            "TextUserFieldGetElement",
-            PROP_DATEFORMAT | PROP_DISPLAY | PROP_NAME | PROP_VALUETYPE));
-    map.put(
-        "user-field-input",
-        new FieldMap(
-            "user-field-input",
-            "TextUserFieldInputElement",
-            PROP_DATEFORMAT | PROP_DESCRIPTION | PROP_NAME));
-    map.put(
-        "variable-get",
-        new FieldMap("variable-get", "TextVariableGetElement", PROP_DATEFORMAT | PROP_DISPLAY));
-    map.put(
-        "variable-input",
-        new FieldMap(
-            "variable-input",
-            "TextVariableInputElement",
-            PROP_BOOLVALUE | PROP_DATEFORMAT | PROP_DISPLAY | PROP_DESCRIPTION | PROP_NAME));
-    map.put(
-        "variable-set",
-        new FieldMap(
-            "variable-set",
-            "TextVariableSetElement",
-            PROP_BOOLVALUE
-                | PROP_CURRENCY
-                | PROP_DATEVALUE
-                | PROP_STRINGVALUE
-                | PROP_TIMEVALUE
-                | PROP_O_VALUE
-                | PROP_VALUETYPE
-                | PROP_DATEFORMAT
-                | PROP_DISPLAY
-                | PROP_FORMULA
-                | PROP_NAME));
-    map.put(
-        "word-count",
-        new FieldMap(
-            "word-count", "TextWordCountElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC));
-
-    return Collections.unmodifiableMap(map);
+    return Map.<String, FieldMap>ofEntries(
+      Map.entry("author-initials", new FieldMap("authorinitials", "TextAuthorInitialsElement", PROP_FIXED)),
+      Map.entry("author-name", new FieldMap("author-name", "TextAuthorNameElement", PROP_FIXED)),
+      Map.entry("bookmark-ref", new FieldMap("bookmark-ref", "TextBookmarkRefElement", PROP_REFFORMAT | PROP_REFNAME)),
+      Map.entry("chapter", new FieldMap("chapter", "TextChapterElement", PROP_DISPLAY | PROP_OUTLINELEVEL)),
+      Map.entry("character-count", new FieldMap("character-count", "TextCharacterCountElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC)),
+      Map.entry("conditional-text", new FieldMap("conditional-text", "TextConditionalTextElement", PROP_CONDITION | PROP_CURRENTVALUE | PROP_FALSEVALUE | PROP_TRUEVALUE)),
+      Map.entry("creation-date", new FieldMap("creation-date", "TextCreationDateElement", PROP_FIXED | PROP_DATEVALUE | PROP_DATEFORMAT)),
+      Map.entry("creation-time", new FieldMap("creation-time", "TextCreationTimeElement", PROP_FIXED | PROP_DATEVALUE | PROP_DATEFORMAT | PROP_TIMESTYLE)),
+      Map.entry("creator", new FieldMap("creator", "TextCreatorElement", PROP_FIXED)),
+      Map.entry("database-display", new FieldMap("database-display", "TextDatabaseDisplayElement", PROP_DBTABLE | PROP_DBNAME | PROP_DBCOLUMN)),
+      Map.entry("database-name", new FieldMap("database-name", "TextDatabaseNameElement", PROP_DBTABLE | PROP_DBNAME)),
+      Map.entry("database-row-number", new FieldMap("database-row-number", "TextDatabaseRowNumberElement", PROP_T_VALUE | PROP_DBTABLE | PROP_DBNAME)),
+      Map.entry("database-row-select", new FieldMap("database-row-select", "TextDatabaseRowSelectElement", PROP_CONDITION | PROP_DBTABLE | PROP_DBNAME | PROP_ROWNUMBER | PROP_TABLETYPE)),
+      Map.entry("date", new FieldMap("date", "TextDateElement", PROP_FIXED | PROP_DATEVALUE | PROP_DATEFORMAT)),
+      Map.entry("dde-connection", new FieldMap("dde-connection", "TextDdeConnectionElement", PROP_CONNECTIONNAME)),
+      Map.entry("description", new FieldMap("description", "TextDescriptionElement", PROP_FIXED)),
+      Map.entry("editing-cycles", new FieldMap("editing-cycles", "TextEditingCyclesElement", PROP_FIXED)),
+      Map.entry("editing-duration", new FieldMap("editing-duration", "TextEditingDurationElement", PROP_FIXED | PROP_DURATION | PROP_DATEFORMAT)),
+      Map.entry("execute-macro", new FieldMap("execute-macro", "TextExecuteMacroElement", PROP_NAME)),
+      Map.entry("expression", new FieldMap("expression", "TextExpressionElement", PROP_BOOLVALUE | PROP_CURRENCY | PROP_DATEVALUE | PROP_STRINGVALUE | PROP_TIMEVALUE | PROP_O_VALUE | PROP_VALUETYPE | PROP_DATEFORMAT | PROP_DISPLAY | PROP_FORMULA)),
+      Map.entry("file-name", new FieldMap("file-name", "TextFileNameElement", PROP_DISPLAY | PROP_FIXED)),
+      Map.entry("hidden-paragraph", new FieldMap("hidden-paragraph", "TextHiddenParagraphElement", PROP_CONDITION | PROP_ISHIDDEN)),
+      Map.entry("hidden-text", new FieldMap("hidden-text", "TextHiddenTextElement", PROP_CONDITION | PROP_ISHIDDEN | PROP_STRINGVALUE)),
+      Map.entry("image-count", new FieldMap("image-count", "TextImageCountElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC)),
+      Map.entry("initial-creator", new FieldMap("initial-creator", "TextInitialCreatorElement", PROP_FIXED)),
+      Map.entry("keywords", new FieldMap("keywords", "TextKeywordsElement", 0)),
+      Map.entry("measure", new FieldMap("measure", "TextMeasureElement", PROP_KIND)),
+      Map.entry("meta-field", new FieldMap("meta-field", "TextMetaFieldElement", PROP_DATEFORMAT | PROP_ID)),
+      Map.entry("modification-date", new FieldMap("modification-date", "TextModificationDateElement", PROP_FIXED | PROP_DATEVALUE | PROP_DATEFORMAT)),
+      Map.entry("modification-time", new FieldMap("modification-time", "TextModificationTimeElement", PROP_FIXED | PROP_DATEVALUE | PROP_DATEFORMAT)),
+      Map.entry("note-ref", new FieldMap("note-ref", "TextNoteRefElement", PROP_REFFORMAT | PROP_REFNAME)),
+      Map.entry("object-count", new FieldMap("object-count", "TextObjectCountElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC)),
+      Map.entry("page-continuation", new FieldMap("page-continuation", "TextPageContinuationElement", 0)),
+      Map.entry("page-count", new FieldMap("page-count", "TextPageCountElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC)),
+      Map.entry("page-number", new FieldMap("page-number", "TextPageNumberElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC)),
+      Map.entry("page-variable-get", new FieldMap("page-variable-get", "TextPageVariableGetElement", PROP_NUMFORMAT | PROP_NUMLETTERSYNC)),
+      Map.entry("page-variable-set", new FieldMap("page-variable-set", "TextPageVariableSetElement", PROP_PAGEADJUST | PROP_ACTIVE)),
+      Map.entry("paragraph-count", new FieldMap("paragraph-count", "TextParagraphCountElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC)),
+      Map.entry("placeholder", new FieldMap("placeholder", "TextPlaceholderElement", PROP_DESCRIPTION | PROP_PLACEHOLDERTYPE)),
+      Map.entry("print-date", new FieldMap("print-date", "TextPrintDateElement", PROP_FIXED | PROP_DATEVALUE | PROP_DATEFORMAT)),
+      Map.entry("print-time", new FieldMap("print-time", "TextPrintTimeElement", PROP_FIXED | PROP_TIMESTYLE | PROP_DATEVALUE | PROP_DATEFORMAT)),
+      Map.entry("printed-by", new FieldMap("printed-by", "TextPrintedByElement", PROP_FIXED)),
+      Map.entry("reference-ref", new FieldMap("reference-ref", "TextReferenceRefElement", PROP_REFFORMAT | PROP_REFNAME)),
+      Map.entry("script", new FieldMap("script", "TextScriptElement", PROP_LANGUAGE | PROP_HREF | PROP_LINKTYPE)),
+      Map.entry("sender-city", new FieldMap("sender-city", "TextSenderCityElement", 0)),
+      Map.entry("sender-company", new FieldMap("sender-company", "TextSenderCompanyElement", 0)),
+      Map.entry("sender-country", new FieldMap("sender-country", "TextSenderCountryElement", 0)),
+      Map.entry("sender-email", new FieldMap("sender-email", "TextSenderEmailElement", 0)),
+      Map.entry("sender-fax", new FieldMap("sender-fax", "TextSenderFaxElement", 0)),
+      Map.entry("sender-firstname", new FieldMap("sender-firstname", "TextSenderFirstnameElement", 0)),
+      Map.entry("sender-initials", new FieldMap("sender-initials", "TextSenderInitialsElement", 0)),
+      Map.entry("sender-lastname", new FieldMap("sender-lastname", "TextSenderLastnameElement", 0)),
+      Map.entry("sender-phone-private", new FieldMap("sender-phone-private", "TextSenderPhonePrivateElement", 0)),
+      Map.entry("sender-phone-work", new FieldMap("sender-phone-work", "TextSenderPhoneWorkElement", 0)),
+      Map.entry("sender-position", new FieldMap("sender-position", "TextSenderPositionElement", 0)),
+      Map.entry("sender-postal-code", new FieldMap("sender-postal-code", "TextSenderPostalCodeElement", 0)),
+      Map.entry("sender-state-or-province", new FieldMap("sender-state-or-province", "TextSenderStateOrProvinceElement", 0)),
+      Map.entry("sender-street", new FieldMap("sender-street", "TextSenderStreetElement", 0)),
+      Map.entry("sender-title", new FieldMap("sender-title", "TextSenderTitleElement", 0)),
+      Map.entry("sequence-ref", new FieldMap("sequence-ref", "TextSequenceRefElement", PROP_REFFORMAT | PROP_REFNAME)),
+      Map.entry("sequence", new FieldMap("sequence", "TextSequenceElement", PROP_DATEFORMAT | PROP_NUMLETTERSYNC | PROP_FORMULA | PROP_NAME | PROP_REFNAME)),
+      Map.entry("sheet-name", new FieldMap("sheet-name", "TextSheetNameElement", 0)),
+      Map.entry("subject", new FieldMap("subject", "TextSubjectElement", PROP_FIXED)),
+      Map.entry("table-count", new FieldMap("table-count", "TextTableCountElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC)),
+      Map.entry("template-name", new FieldMap("template-name", "TextTemplateNameElement", PROP_DISPLAY)),
+      Map.entry("text-input", new FieldMap("text-input", "TextTextInputElement", PROP_DESCRIPTION)),
+      Map.entry("time", new FieldMap("time", "TextTimeElement", PROP_FIXED | PROP_DATEVALUE | PROP_TIMESTYLE | PROP_DATEFORMAT)),
+      Map.entry("title", new FieldMap("title", "TextTitleElement", PROP_FIXED)),
+      Map.entry("user-defined", new FieldMap("user-defined", "TextUserDefinedElement", PROP_BOOLVALUE | PROP_CURRENCY | PROP_DATEVALUE | PROP_STRINGVALUE | PROP_TIMEVALUE | PROP_O_VALUE | PROP_DATEFORMAT | PROP_FIXED | PROP_NAME)),
+      Map.entry("user-field-get", new FieldMap("user-field-get", "TextUserFieldGetElement", PROP_DATEFORMAT | PROP_DISPLAY | PROP_NAME | PROP_VALUETYPE)),
+      Map.entry("user-field-input", new FieldMap("user-field-input", "TextUserFieldInputElement", PROP_DATEFORMAT | PROP_DESCRIPTION | PROP_NAME)),
+      Map.entry("variable-get", new FieldMap("variable-get", "TextVariableGetElement", PROP_DATEFORMAT | PROP_DISPLAY)),
+      Map.entry("variable-input", new FieldMap("variable-input", "TextVariableInputElement", PROP_BOOLVALUE | PROP_DATEFORMAT | PROP_DISPLAY | PROP_DESCRIPTION | PROP_NAME)),
+      Map.entry("variable-set", new FieldMap("variable-set", "TextVariableSetElement", PROP_BOOLVALUE | PROP_CURRENCY | PROP_DATEVALUE | PROP_STRINGVALUE | PROP_TIMEVALUE | PROP_O_VALUE | PROP_VALUETYPE | PROP_DATEFORMAT | PROP_DISPLAY | PROP_FORMULA | PROP_NAME)),
+      Map.entry("word-count", new FieldMap("word-count", "TextWordCountElement", PROP_PAGENUMFORMAT | PROP_NUMLETTERSYNC)));
   }
 }

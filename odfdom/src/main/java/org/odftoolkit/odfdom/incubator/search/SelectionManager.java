@@ -34,7 +34,7 @@ public class SelectionManager {
   private Map<OdfElement, ArrayList<Selection>> repository = null;
 
   public SelectionManager() {
-    repository = new HashMap<OdfElement, ArrayList<Selection>>();
+    repository = new HashMap<>();
   }
 
   /**
@@ -58,7 +58,7 @@ public class SelectionManager {
         selections.add(item);
       }
     } else {
-      ArrayList<Selection> al = new ArrayList<Selection>();
+      ArrayList<Selection> al = new ArrayList<>();
       al.add(item);
       repository.put(element, al);
     }

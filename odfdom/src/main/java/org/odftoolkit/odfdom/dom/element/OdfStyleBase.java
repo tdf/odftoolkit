@@ -78,7 +78,7 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
   static HashMap<OdfName, OdfStylePropertiesSet> mStylePropertiesElementToSetMap;
 
   static {
-    mStylePropertiesElementToSetMap = new HashMap<OdfName, OdfStylePropertiesSet>();
+    mStylePropertiesElementToSetMap = new HashMap<>();
     mStylePropertiesElementToSetMap.put(
         StyleChartPropertiesElement.ELEMENT_NAME, OdfStylePropertiesSet.ChartProperties);
     mStylePropertiesElementToSetMap.put(
@@ -125,7 +125,7 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
 
   public void addStyleUser(OdfStylableElement user) {
     if (mStyleUser == null) {
-      mStyleUser = new ArrayList<OdfStylableElement>();
+      mStyleUser = new ArrayList<>();
     }
     mStyleUser.add(user);
   }
@@ -137,7 +137,7 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
    *     multiple times and would be overwritten (e.g. background color exist 3times in cells).
    */
   public Map<OdfStyleProperty, String> getStyleProperties() {
-    TreeMap<OdfStyleProperty, String> result = new TreeMap<OdfStyleProperty, String>();
+    TreeMap<OdfStyleProperty, String> result = new TreeMap<>();
     OdfStyleFamily family = getFamily();
     if (family != null) {
       for (OdfStyleProperty property : family.getProperties()) {
@@ -158,7 +158,7 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
    *     cells).
    */
   public Map<OdfStyleProperty, String> getStylePropertiesDeep() {
-    TreeMap<OdfStyleProperty, String> result = new TreeMap<OdfStyleProperty, String>();
+    TreeMap<OdfStyleProperty, String> result = new TreeMap<>();
     OdfStyleBase style = this;
     while (style != null) {
       OdfStyleFamily family = style.getFamily();
@@ -194,7 +194,7 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
     if (mStyleUser != null) {
       return mStyleUser;
     }
-    return new ArrayList<OdfStylableElement>();
+    return new ArrayList<>();
   }
 
   public String getFamilyName() {
@@ -328,7 +328,7 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
   }
 
   public Map<OdfStyleProperty, String> getProperties(Set<OdfStyleProperty> properties) {
-    HashMap<OdfStyleProperty, String> map = new HashMap<OdfStyleProperty, String>();
+    HashMap<OdfStyleProperty, String> map = new HashMap<>();
     for (OdfStyleProperty property : properties) {
       map.put(property, getProperty(property));
     }
@@ -492,7 +492,7 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
   // helper function for compareTo.
   // sorts attributes by namespace:localname
   private static SortedMap<String, String> getSortedAttributes(Node node) {
-    SortedMap<String, String> ret = new TreeMap<String, String>();
+    SortedMap<String, String> ret = new TreeMap<>();
     NamedNodeMap attrs = node.getAttributes();
     for (int i = 0; i < attrs.getLength(); i++) {
       Node cur = attrs.item(i);
@@ -510,7 +510,7 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
   // helper function for compareTo.
   // all except "empty" text nodes will be returned
   private static ArrayList<Node> getNonEmptyChildNodes(Node node) {
-    ArrayList<Node> ret = new ArrayList<Node>();
+    ArrayList<Node> ret = new ArrayList<>();
     NodeList childs = node.getChildNodes();
     for (int i = 0; i < childs.getLength(); i++) {
       Node cur = childs.item(i);

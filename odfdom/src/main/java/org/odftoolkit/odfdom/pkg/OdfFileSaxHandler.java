@@ -45,7 +45,7 @@ public class OdfFileSaxHandler extends DefaultHandler {
   protected Node
       mCurrentNode; // a stack of sub handlers. handlers will be pushed on the stack whenever
   // they are required and must pop themselves from the stack when done
-  private Stack<ContentHandler> mHandlerStack = new Stack<ContentHandler>();
+  private Stack<ContentHandler> mHandlerStack = new Stack<>();
   private StringBuilder mCharsForTextNode = new StringBuilder();
   private JenaSink sink;
 

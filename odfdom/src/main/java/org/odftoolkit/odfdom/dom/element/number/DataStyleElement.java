@@ -171,7 +171,7 @@ public abstract class DataStyleElement extends OdfElement {
    *     <p>TODO: at first only detecting currencies -
    */
   protected static List<StringToken> tokenize(String format, NumberFormatType type) {
-    ArrayList<StringToken> tokens = new ArrayList<StringToken>();
+    ArrayList<StringToken> tokens = new ArrayList<>();
     boolean hasNumber =
         false; // only one number token can be created, next one will be part of a text token
     String currentTextToken = "";

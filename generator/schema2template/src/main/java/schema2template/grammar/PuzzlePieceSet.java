@@ -50,11 +50,11 @@ public class PuzzlePieceSet implements PuzzleComponent, Collection<PuzzlePiece> 
   private SortedSet<PuzzlePiece> mDefinitions;
 
   public PuzzlePieceSet() {
-    mDefinitions = new TreeSet<PuzzlePiece>();
+    mDefinitions = new TreeSet<>();
   }
 
   public PuzzlePieceSet(Collection<PuzzlePiece> c) {
-    mDefinitions = new TreeSet<PuzzlePiece>(c);
+    mDefinitions = new TreeSet<>(c);
   }
 
   private void assertNotImmutable() {
@@ -109,8 +109,8 @@ public class PuzzlePieceSet implements PuzzleComponent, Collection<PuzzlePiece> 
    */
   Map<PuzzlePiece, PuzzlePiece> uniteDefinitionsWithEqualContent() {
     //    System.out.println("this.mDefinitions: " + this.mDefinitions.size());
-    Map<PuzzlePiece, PuzzlePiece> retval = new HashMap<PuzzlePiece, PuzzlePiece>();
-    SortedSet<PuzzlePiece> immutableSet = new TreeSet<PuzzlePiece>(this.mDefinitions);
+    Map<PuzzlePiece, PuzzlePiece> retval = new HashMap<>();
+    SortedSet<PuzzlePiece> immutableSet = new TreeSet<>(this.mDefinitions);
     for (PuzzlePiece def1 : immutableSet) {
       if (!this.mDefinitions.contains(def1)) {
         // if def1 is already removed, we shouldn't process it
@@ -174,7 +174,7 @@ public class PuzzlePieceSet implements PuzzleComponent, Collection<PuzzlePiece> 
    * @return new PuzzlePieceSet
    */
   public PuzzlePieceSet withoutMultiples() {
-    Map<String, PuzzlePiece> uniqueMap = new HashMap<String, PuzzlePiece>();
+    Map<String, PuzzlePiece> uniqueMap = new HashMap<>();
     for (PuzzlePiece def : this) {
       uniqueMap.put(def.getQName(), def);
     }

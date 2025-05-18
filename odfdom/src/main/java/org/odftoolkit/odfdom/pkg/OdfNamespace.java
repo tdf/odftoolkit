@@ -34,7 +34,7 @@ import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
  */
 public class OdfNamespace implements Comparable<OdfNamespace>, NamespaceName {
 
-  private static Map<String, OdfNamespace> mNamespacesByURI = new HashMap<String, OdfNamespace>();
+  private static Map<String, OdfNamespace> mNamespacesByURI = new HashMap<>();
   private String mUri;
   private String mPrefix;
   /**

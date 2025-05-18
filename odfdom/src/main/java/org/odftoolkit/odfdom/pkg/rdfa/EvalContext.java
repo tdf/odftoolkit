@@ -50,8 +50,8 @@ final class EvalContext implements NamespaceContext {
     super();
     this.base = base;
     this.parentSubject = base;
-    this.forwardProperties = new ArrayList<String>();
-    this.backwardProperties = new ArrayList<String>();
+    this.forwardProperties = new ArrayList<>();
+    this.backwardProperties = new ArrayList<>();
   }
 
   public EvalContext(EvalContext toCopy) {
@@ -60,8 +60,8 @@ final class EvalContext implements NamespaceContext {
     this.parentSubject = toCopy.parentSubject;
     this.parentObject = toCopy.parentObject;
     this.language = toCopy.language;
-    this.forwardProperties = new ArrayList<String>(toCopy.forwardProperties);
-    this.backwardProperties = new ArrayList<String>(toCopy.backwardProperties);
+    this.forwardProperties = new ArrayList<>(toCopy.forwardProperties);
+    this.backwardProperties = new ArrayList<>(toCopy.backwardProperties);
     this.parent = toCopy;
     this.vocab = toCopy.vocab;
   }
@@ -110,7 +110,7 @@ final class EvalContext implements NamespaceContext {
     if (uri.length() == 0) {
       uri = base;
     }
-    if (prefixMap == Collections.EMPTY_MAP) prefixMap = new HashMap<String, String>();
+    if (prefixMap == Collections.EMPTY_MAP) prefixMap = new HashMap<>();
     prefixMap.put(prefix, uri);
   }
 
@@ -137,7 +137,7 @@ final class EvalContext implements NamespaceContext {
     if (uri.length() == 0) {
       uri = base;
     }
-    if (xmlnsMap == Collections.EMPTY_MAP) xmlnsMap = new HashMap<String, String>();
+    if (xmlnsMap == Collections.EMPTY_MAP) xmlnsMap = new HashMap<>();
     xmlnsMap.put(prefix, uri);
   }
 

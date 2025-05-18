@@ -47,7 +47,7 @@ class CachedOperation {
   public CachedOperation clone() {
     return new CachedOperation(
         mComponentType,
-        new ArrayList<Integer>(mStart),
+      new ArrayList<>(mStart),
         mAbsolutePosition,
         mHardFormattingProperties,
         mComponentProperties);

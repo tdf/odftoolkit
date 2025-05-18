@@ -77,9 +77,9 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
 
   /* Properties for PuzzlePiece of Type.ELEMENT */
   private PuzzlePieceSet mChildElements = new PuzzlePieceSet();
-  private HashSet<String> mMandatoryChildElementNames = new HashSet<String>();
+  private HashSet<String> mMandatoryChildElementNames = new HashSet<>();
   private PuzzlePieceSet mAttributes = new PuzzlePieceSet();
-  private HashSet<String> mMandatoryChildAttributeNames = new HashSet<String>();
+  private HashSet<String> mMandatoryChildAttributeNames = new HashSet<>();
   private boolean mCanHaveText = false;
   private Set<Expression> mSingletonChildExpressions;
   private Set<Expression> mMultipleChildExpressions;
@@ -522,7 +522,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
       Grammar grammar, PuzzlePieceSet setToBeFilled, Class<T> superclass) {
     Expression root = grammar.getTopLevel();
     MSVExpressionIterator iter = new MSVExpressionIterator(root, superclass);
-    HashMap<String, List<PuzzlePiece>> multipleMap = new HashMap<String, List<PuzzlePiece>>();
+    HashMap<String, List<PuzzlePiece>> multipleMap = new HashMap<>();
 
     while (iter.hasNext()) {
       Expression exp = iter.next();
@@ -544,7 +544,7 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
         if (multiples != null) {
           multiples.add(newDefinition);
         } else {
-          multiples = new ArrayList<PuzzlePiece>(1);
+          multiples = new ArrayList<>(1);
           multiples.add(newDefinition);
           multipleMap.put(name, multiples);
         }
@@ -561,11 +561,11 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
 
   // Builds Map Expression->List<PuzzlePiece>
   private static Map<Expression, List<PuzzlePiece>> buildReverseMap(PuzzlePieceSet defs) {
-    Map<Expression, List<PuzzlePiece>> retval = new HashMap<Expression, List<PuzzlePiece>>();
+    Map<Expression, List<PuzzlePiece>> retval = new HashMap<>();
     Iterator<PuzzlePiece> iter = defs.iterator();
     while (iter.hasNext()) {
       PuzzlePiece def = iter.next();
-      List<PuzzlePiece> list = retval.computeIfAbsent(def.getExpression(), k -> new ArrayList<PuzzlePiece>());
+      List<PuzzlePiece> list = retval.computeIfAbsent(def.getExpression(), k -> new ArrayList<>());
       list.add(def);
     }
     return retval;
@@ -573,11 +573,11 @@ public class PuzzlePiece implements Comparable<PuzzlePiece>, PuzzleComponent {
 
   // Builds Map Name->List<Expression>
   private static Map<String, List<Expression>> buildNameExpressionsMap(PuzzlePieceSet defs) {
-    Map<String, List<Expression>> retval = new HashMap<String, List<Expression>>();
+    Map<String, List<Expression>> retval = new HashMap<>();
     Iterator<PuzzlePiece> iter = defs.iterator();
     while (iter.hasNext()) {
       PuzzlePiece def = iter.next();
-        List<Expression> list = retval.computeIfAbsent(def.getQName(), k -> new ArrayList<Expression>());
+        List<Expression> list = retval.computeIfAbsent(def.getQName(), k -> new ArrayList<>());
         list.add(def.getExpression());
     }
     return retval;

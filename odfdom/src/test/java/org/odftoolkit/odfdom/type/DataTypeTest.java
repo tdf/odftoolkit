@@ -158,7 +158,7 @@ public class DataTypeTest {
     Assert.assertFalse(StyleName.isValid("t:1"));
     StyleNameRef styleNameRef1 = StyleNameRef.valueOf("ce1");
     Assert.assertTrue(StyleNameRef.isValid(""));
-    List<StyleName> styleList = new ArrayList<StyleName>();
+    List<StyleName> styleList = new ArrayList<>();
     styleList.add(StyleName.valueOf(styleNameRef1.toString()));
     styleList.add(styleName1);
     styleList.add(styleName2);

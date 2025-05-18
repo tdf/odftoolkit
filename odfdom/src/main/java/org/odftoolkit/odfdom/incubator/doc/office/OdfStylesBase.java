@@ -67,7 +67,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
   private Map<String, NumberTextStyleElement> mTextStyles;
 
   private Map<String, DataStyleElement> mAllDataStyles =
-      new HashMap<String, DataStyleElement>();
+    new HashMap<>();
 
   public OdfStylesBase(OdfFileDom ownerDoc, OdfName odfName) {
     super(ownerDoc, odfName);
@@ -129,7 +129,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
    * @return iterator for all <code>OdfStyle</code> elements
    */
   public Iterable<OdfStyle> getAllStyles() {
-    ArrayList<OdfStyle> allStyles = new ArrayList<OdfStyle>();
+    ArrayList<OdfStyle> allStyles = new ArrayList<>();
     if (mStyles != null) {
       for (HashMap<String, OdfStyle> familySet : mStyles.values()) {
         Collection<OdfStyle> familyStyles = familySet.values();
@@ -147,7 +147,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
         return familyMap.values();
       }
     }
-    return new ArrayList<OdfStyle>();
+    return new ArrayList<>();
   }
 
   // For documentation see OdfAutomaticStyles or OdfStyles.
@@ -164,7 +164,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
     if (mListStyles != null) {
       return mListStyles.values();
     } else {
-      return new ArrayList<OdfTextListStyle>();
+      return new ArrayList<>();
     }
   }
 
@@ -182,7 +182,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
     if (mNumberStyles != null) {
       return mNumberStyles.values();
     } else {
-      return new ArrayList<OdfNumberStyle>();
+      return new ArrayList<>();
     }
   }
 
@@ -200,7 +200,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
     if (mDateStyles != null) {
       return mDateStyles.values();
     } else {
-      return new ArrayList<OdfNumberDateStyle>();
+      return new ArrayList<>();
     }
   }
 
@@ -218,7 +218,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
     if (mPercentageStyles != null) {
       return mPercentageStyles.values();
     } else {
-      return new ArrayList<OdfNumberPercentageStyle>();
+      return new ArrayList<>();
     }
   }
 
@@ -236,7 +236,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
     if (mCurrencyStyles != null) {
       return mCurrencyStyles.values();
     } else {
-      return new ArrayList<OdfNumberCurrencyStyle>();
+      return new ArrayList<>();
     }
   }
 
@@ -254,7 +254,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
     if (mTimeStyles != null) {
       return mTimeStyles.values();
     } else {
-      return new ArrayList<OdfNumberTimeStyle>();
+      return new ArrayList<>();
     }
   }
 
@@ -272,7 +272,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
     if (mBooleanStyles != null) {
       return mBooleanStyles.values();
     } else {
-      return new ArrayList<NumberBooleanStyleElement>();
+      return new ArrayList<>();
     }
   }
 
@@ -290,7 +290,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
     if (mTextStyles != null) {
       return mTextStyles.values();
     } else {
-      return new ArrayList<NumberTextStyleElement>();
+      return new ArrayList<>();
     }
   }
 
@@ -304,16 +304,16 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
     if (node instanceof OdfStyle) {
       OdfStyle style = (OdfStyle) node;
       if (mStyles == null) {
-        mStyles = new HashMap<OdfStyleFamily, HashMap<String, OdfStyle>>();
+        mStyles = new HashMap<>();
       }
 
-      HashMap<String, OdfStyle> familyMap = mStyles.computeIfAbsent(style.getFamily(), k -> new HashMap<String, OdfStyle>());
+      HashMap<String, OdfStyle> familyMap = mStyles.computeIfAbsent(style.getFamily(), k -> new HashMap<>());
 
       familyMap.put(style.getStyleNameAttribute(), style);
     } else if (node instanceof OdfTextListStyle) {
       OdfTextListStyle listStyle = (OdfTextListStyle) node;
       if (mListStyles == null) {
-        mListStyles = new HashMap<String, OdfTextListStyle>();
+        mListStyles = new HashMap<>();
       }
 
       mListStyles.put(listStyle.getStyleNameAttribute(), listStyle);
@@ -321,7 +321,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
       OdfNumberStyle numberStyle = (OdfNumberStyle) node;
 
       if (mNumberStyles == null) {
-        mNumberStyles = new HashMap<String, OdfNumberStyle>();
+        mNumberStyles = new HashMap<>();
       }
 
       mNumberStyles.put(numberStyle.getStyleNameAttribute(), numberStyle);
@@ -329,7 +329,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
       OdfNumberDateStyle dateStyle = (OdfNumberDateStyle) node;
 
       if (mDateStyles == null) {
-        mDateStyles = new HashMap<String, OdfNumberDateStyle>();
+        mDateStyles = new HashMap<>();
       }
 
       mDateStyles.put(dateStyle.getStyleNameAttribute(), dateStyle);
@@ -337,7 +337,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
       OdfNumberPercentageStyle percentageStyle = (OdfNumberPercentageStyle) node;
 
       if (mPercentageStyles == null) {
-        mPercentageStyles = new HashMap<String, OdfNumberPercentageStyle>();
+        mPercentageStyles = new HashMap<>();
       }
 
       mPercentageStyles.put(percentageStyle.getStyleNameAttribute(), percentageStyle);
@@ -345,7 +345,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
       OdfNumberCurrencyStyle currencyStyle = (OdfNumberCurrencyStyle) node;
 
       if (mCurrencyStyles == null) {
-        mCurrencyStyles = new HashMap<String, OdfNumberCurrencyStyle>();
+        mCurrencyStyles = new HashMap<>();
       }
 
       mCurrencyStyles.put(currencyStyle.getStyleNameAttribute(), currencyStyle);
@@ -353,7 +353,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
       OdfNumberTimeStyle timeStyle = (OdfNumberTimeStyle) node;
 
       if (mTimeStyles == null) {
-        mTimeStyles = new HashMap<String, OdfNumberTimeStyle>();
+        mTimeStyles = new HashMap<>();
       }
 
       mTimeStyles.put(timeStyle.getStyleNameAttribute(), timeStyle);
@@ -361,7 +361,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
       NumberBooleanStyleElement booleanStyle = (NumberBooleanStyleElement) node;
 
       if (mBooleanStyles == null) {
-        mBooleanStyles = new HashMap<String, NumberBooleanStyleElement>();
+        mBooleanStyles = new HashMap<>();
       }
 
       mBooleanStyles.put(booleanStyle.getStyleNameAttribute(), booleanStyle);
@@ -369,7 +369,7 @@ public abstract class OdfStylesBase extends OdfContainerElementBase {
       NumberTextStyleElement textStyle = (NumberTextStyleElement) node;
 
       if (mTextStyles == null) {
-        mTextStyles = new HashMap<String, NumberTextStyleElement>();
+        mTextStyles = new HashMap<>();
       }
 
       mTextStyles.put(textStyle.getStyleNameAttribute(), textStyle);

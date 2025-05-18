@@ -90,11 +90,11 @@ public class OdfTable {
   private static final String DEFAULT_TABLE_ALIGN = "margins";
 
   IdentityHashMap<TableTableCellElementBase, Vector<OdfTableCell>> mCellRepository =
-      new IdentityHashMap<TableTableCellElementBase, Vector<OdfTableCell>>();
+    new IdentityHashMap<>();
   IdentityHashMap<TableTableRowElement, Vector<OdfTableRow>> mRowRepository =
-      new IdentityHashMap<TableTableRowElement, Vector<OdfTableRow>>();
+    new IdentityHashMap<>();
   IdentityHashMap<TableTableColumnElement, Vector<OdfTableColumn>> mColumnRepository =
-      new IdentityHashMap<TableTableColumnElement, Vector<OdfTableColumn>>();
+    new IdentityHashMap<>();
 
   private OdfTable(TableTableElement table) {
     mTableElement = table;
@@ -144,7 +144,7 @@ public class OdfTable {
       return fCell;
     } else {
       OdfTableCell newCell = new OdfTableCell(cell, repeatedColIndex, repeatedRowIndex);
-      Vector<OdfTableCell> list = new Vector<OdfTableCell>();
+      Vector<OdfTableCell> list = new Vector<>();
       list.add(newCell);
       mCellRepository.put(cell, list);
       return newCell;
@@ -166,7 +166,7 @@ public class OdfTable {
     } else {
       OdfTableRow newCell = new OdfTableRow(row, repeatedRowIndex);
       int size = (repeatedRowIndex > 7) ? (repeatedRowIndex + 1) : 8;
-      Vector<OdfTableRow> list = new Vector<OdfTableRow>(size);
+      Vector<OdfTableRow> list = new Vector<>(size);
       list.setSize(repeatedRowIndex + 1);
       list.set(repeatedRowIndex, newCell);
       mRowRepository.put(row, list);
@@ -189,7 +189,7 @@ public class OdfTable {
     } else {
       OdfTableColumn newCell = new OdfTableColumn(col, repeatedColIndex);
       int size = (repeatedColIndex > 7) ? (repeatedColIndex + 1) : 8;
-      Vector<OdfTableColumn> list = new Vector<OdfTableColumn>(size);
+      Vector<OdfTableColumn> list = new Vector<>(size);
       list.setSize(repeatedColIndex + 1);
       list.set(repeatedColIndex, newCell);
       mColumnRepository.put(col, list);
@@ -1070,7 +1070,7 @@ public class OdfTable {
   }
 
   List<OdfTableRow> appendRows(int rowCount, boolean isCleanStyle) {
-    List<OdfTableRow> resultList = new ArrayList<OdfTableRow>();
+    List<OdfTableRow> resultList = new ArrayList<>();
     if (rowCount <= 0) {
       return resultList;
     }
@@ -1177,7 +1177,7 @@ public class OdfTable {
   }
 
   List<OdfTableColumn> appendColumns(int columnCount, boolean isCleanStyle) {
-    List<OdfTableColumn> resultList = new ArrayList<OdfTableColumn>();
+    List<OdfTableColumn> resultList = new ArrayList<>();
     if (columnCount <= 0) {
       return resultList;
     }
@@ -1204,7 +1204,7 @@ public class OdfTable {
   /** This method is to insert a numbers of row */
   private List<OdfTableRow> insertMultipleRowBefore(
       OdfTableRow refRow, OdfTableRow positionRow, int count) {
-    List<OdfTableRow> resultList = new ArrayList<OdfTableRow>();
+    List<OdfTableRow> resultList = new ArrayList<>();
     int j = 1;
 
     if (count <= 0) {
@@ -1342,7 +1342,7 @@ public class OdfTable {
    */
   public List<OdfTableColumn> insertColumnsBefore(int index, int columnCount) {
     OdfTableColumn refColumn, positionCol;
-    ArrayList<OdfTableColumn> list = new ArrayList<OdfTableColumn>();
+    ArrayList<OdfTableColumn> list = new ArrayList<>();
     int columncount = getColumnCount();
 
     if (index >= columncount) {
@@ -1534,7 +1534,7 @@ public class OdfTable {
       throw new IndexOutOfBoundsException();
     }
 
-    ArrayList<OdfTableRow> list = new ArrayList<OdfTableRow>();
+    ArrayList<OdfTableRow> list = new ArrayList<>();
 
     if (index == 0) {
       OdfTableRow refRow = getRowByIndex(index);
@@ -1583,7 +1583,7 @@ public class OdfTable {
    * @return a list of table columns
    */
   public List<OdfTableColumn> getColumnList() {
-    ArrayList<OdfTableColumn> list = new ArrayList<OdfTableColumn>();
+    ArrayList<OdfTableColumn> list = new ArrayList<>();
     TableTableColumnElement colEle = null;
     for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
       if (n instanceof TableTableHeaderColumnsElement) {
@@ -1613,7 +1613,7 @@ public class OdfTable {
    * @return a list of table rows
    */
   public List<OdfTableRow> getRowList() {
-    ArrayList<OdfTableRow> list = new ArrayList<OdfTableRow>();
+    ArrayList<OdfTableRow> list = new ArrayList<>();
     TableTableRowElement rowEle = null;
     for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
       if (n instanceof TableTableHeaderRowsElement) {
@@ -1643,7 +1643,7 @@ public class OdfTable {
    * @return a list of table rows
    */
   public List<TableTableRowElement> getRowElementList() {
-    ArrayList<TableTableRowElement> list = new ArrayList<TableTableRowElement>();
+    ArrayList<TableTableRowElement> list = new ArrayList<>();
     TableTableRowElement rowEle = null;
     for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
       if (n instanceof TableTableHeaderRowsElement) {
@@ -2265,7 +2265,7 @@ public class OdfTable {
   }
 
   List<CellCoverInfo> getCellCoverInfos(int nStartCol, int nStartRow, int nEndCol, int nEndRow) {
-    List<CellCoverInfo> coverList = new ArrayList<CellCoverInfo>();
+    List<CellCoverInfo> coverList = new ArrayList<>();
     int nColSpan, nRowSpan;
     for (int i = nStartRow; i < nEndRow + 1; ) {
       OdfTableRow row = getRowByIndex(i);
@@ -2319,7 +2319,7 @@ public class OdfTable {
               oldColumn.maColumnElement = newElement;
               oldColumn.mnRepeatedIndex = newRepeatIndex;
               int size = (newRepeatIndex > 7) ? (newRepeatIndex + 1) : 8;
-              Vector<OdfTableColumn> list = new Vector<OdfTableColumn>(size);
+              Vector<OdfTableColumn> list = new Vector<>(size);
               list.setSize(newRepeatIndex + 1);
               list.set(newRepeatIndex, oldColumn);
               mColumnRepository.put(newElement, list);
@@ -2358,7 +2358,7 @@ public class OdfTable {
         if (oldElement != newElement) {
           // the new row replace the old row
           OdfTableRow oldRow = oldList.get(oldRepeatIndex);
-          Vector<OdfTableCell> updateCellList = new Vector<OdfTableCell>();
+          Vector<OdfTableCell> updateCellList = new Vector<>();
           if (oldRow != null) {
             // update the mnRepeateIndex of the row which locate after the removed row
             for (int i = oldRepeatIndex + 1; i < oldList.size(); i++) {
@@ -2385,7 +2385,7 @@ public class OdfTable {
               oldRow.maRowElement = newElement;
               oldRow.mnRepeatedIndex = newRepeatIndex;
               int size = (newRepeatIndex > 7) ? (newRepeatIndex + 1) : 8;
-              Vector<OdfTableRow> list = new Vector<OdfTableRow>(size);
+              Vector<OdfTableRow> list = new Vector<>(size);
               list.setSize(newRepeatIndex + 1);
               list.set(newRepeatIndex, oldRow);
               mRowRepository.put(newElement, list);
@@ -2495,7 +2495,7 @@ public class OdfTable {
                 list.add(oldCell);
               }
             } else {
-              list = new Vector<OdfTableCell>();
+              list = new Vector<>();
               list.add(oldCell);
               mCellRepository.put(newElement, list);
             }

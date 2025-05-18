@@ -307,7 +307,7 @@ public class ODFValidator implements ODFValidatorProvider {
   private Validator getValidatorForSchema(PrintStream aOut, String aSchemaFileName)
       throws ODFValidatorException {
     if (m_aSchemaMap == null) {
-      m_aSchemaMap = new HashMap<String, Schema>();
+      m_aSchemaMap = new HashMap<>();
     }
 
     Schema aSchema = m_aSchemaMap.get(aSchemaFileName);

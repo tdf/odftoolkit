@@ -70,10 +70,10 @@ class ForeignContentFilter extends XMLFilterImpl {
     m_aVersion = aVersion;
     m_aForeignContentListener = aForeignContentListener;
 
-    m_aAlienElementProcessContents = new Vector<Boolean>();
-    m_aParagraphAncestorElements = new Vector<Boolean>();
+    m_aAlienElementProcessContents = new Vector<>();
+    m_aParagraphAncestorElements = new Vector<>();
 
-    m_aODFNamespaceSet = new HashSet<String>();
+    m_aODFNamespaceSet = new HashSet<>();
     m_aODFNamespaceSet.add(OdfDocumentNamespace.OFFICE.getUri());
     m_aODFNamespaceSet.add(OdfDocumentNamespace.STYLE.getUri());
     m_aODFNamespaceSet.add(OdfDocumentNamespace.TEXT.getUri());

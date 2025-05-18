@@ -1437,7 +1437,7 @@ public final class MapHelper {
       Map<String, OdfStylePropertiesSet> familyPropertyGroups,
       Map<String, Map<String, String>> allOdfProps) {
 
-    Map<String, Object> allProps = new HashMap<String, Object>();
+    Map<String, Object> allProps = new HashMap<>();
     for (String styleFamilyKey : familyPropertyGroups.keySet()) {
       // NOTE: Perhaps we should first inherit everything from the parents and map afterwards
       // the ODF properties of one family group
@@ -1477,7 +1477,7 @@ public final class MapHelper {
     Map<String, Object> mappedFormatting = null;
     if (style != null) {
       // Intermediate ODF properties
-      Map<String, Map<String, String>> allOdfProps = new HashMap<String, Map<String, String>>();
+      Map<String, Map<String, String>> allOdfProps = new HashMap<>();
       // The property groups for this component, e.g. cell, paragraph, text for a cell with
       // properties
       Map<String, OdfStylePropertiesSet> familyPropertyGroups =
@@ -1507,7 +1507,7 @@ public final class MapHelper {
     if (style != null) {
       for (Entry<String, OdfStylePropertiesSet> entry : familyPropertyGroups.entrySet()) {
         // the ODF properties of one family group
-        Map<String, String> odfProps = new HashMap<String, String>();
+        Map<String, String> odfProps = new HashMap<>();
         OdfStylePropertiesSet key = entry.getValue();
         OdfStylePropertiesBase propsElement = style.getPropertiesElement(key);
         if (propsElement != null) {
@@ -1734,7 +1734,7 @@ public final class MapHelper {
           }
           jsonStyleProperties.put("cell", jsonCellProps);
         } else {
-          Map<String, String> stringCellProps = new HashMap<String, String>();
+          Map<String, String> stringCellProps = new HashMap<>();
           if (stringProperties.containsKey("cell")) {
             stringCellProps = stringProperties.get("cell");
           }
@@ -2155,8 +2155,8 @@ public final class MapHelper {
 
   private static void fillLocaleMaps() {
     if (localeToLanguageMap == null) {
-      localeToLanguageMap = new HashMap<String, Integer>();
-      languageToLocaleMap = new HashMap<Integer, String>();
+      localeToLanguageMap = new HashMap<>();
+      languageToLocaleMap = new HashMap<>();
 
       class StringAndInt {
 

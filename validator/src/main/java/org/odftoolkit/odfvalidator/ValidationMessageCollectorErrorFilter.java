@@ -34,7 +34,7 @@ public class ValidationMessageCollectorErrorFilter implements SAXParseExceptionF
 
   /** Creates a new instance of ValidationErrorFilter */
   public ValidationMessageCollectorErrorFilter() throws ODFValidatorException {
-    m_aMsgsReported = new HashSet<String>();
+    m_aMsgsReported = new HashSet<>();
   }
 
   public SAXParseException filterException(SAXParseException aExc) {

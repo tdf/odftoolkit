@@ -110,8 +110,8 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
   /** Creates a new instance of ValidationErrorFilter */
   public ValidationOOoTaskIdErrorFilter(File aFilterFile, PrintStream aOut)
       throws ODFValidatorException {
-    m_aFilterEntries = new HashMap<String, FilterEntry>();
-    m_aTaskIdsReported = new HashSet<String>();
+    m_aFilterEntries = new HashMap<>();
+    m_aTaskIdsReported = new HashSet<>();
     SAXParser aParser = null;
     Logger aLogger = new Logger(aFilterFile.getAbsolutePath(), "", aOut, Logger.LogLevel.ERROR);
     try {
@@ -157,7 +157,7 @@ public class ValidationOOoTaskIdErrorFilter implements SAXParseExceptionFilter {
   }
 
   public void startSubFile() {
-    m_aTaskIdsReported = new HashSet<String>();
+    m_aTaskIdsReported = new HashSet<>();
     // the build id is kept
   }
 

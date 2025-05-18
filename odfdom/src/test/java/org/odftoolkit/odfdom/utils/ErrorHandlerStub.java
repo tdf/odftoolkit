@@ -71,21 +71,21 @@ public class ErrorHandlerStub implements ErrorHandler {
 
   public void warning(SAXParseException exception) throws SAXException {
     if (mExpectedWarning == null) {
-      mExpectedWarning = new HashMap<ValidationConstraint, Integer>();
+      mExpectedWarning = new HashMap<>();
     }
     registerProblem(exception, mExpectedWarning);
   }
 
   public void error(SAXParseException exception) throws SAXException {
     if (mExpectedError == null) {
-      mExpectedError = new HashMap<ValidationConstraint, Integer>();
+      mExpectedError = new HashMap<>();
     }
     registerProblem(exception, mExpectedError);
   }
 
   public void fatalError(SAXParseException exception) throws SAXException {
     if (mExpectedFatalError == null) {
-      mExpectedFatalError = new HashMap<ValidationConstraint, Integer>();
+      mExpectedFatalError = new HashMap<>();
     }
     registerProblem(exception, mExpectedFatalError);
   }

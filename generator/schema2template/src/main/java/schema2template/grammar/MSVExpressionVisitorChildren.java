@@ -123,7 +123,7 @@ public class MSVExpressionVisitorChildren implements ExpressionVisitor {
   }
 
   private List<Expression> children(Iterator<Expression> i) {
-    ArrayList<Expression> list = new ArrayList<Expression>();
+    ArrayList<Expression> list = new ArrayList<>();
     while (i.hasNext()) {
       list.add(i.next());
     }

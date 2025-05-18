@@ -82,7 +82,7 @@ public class CellRangeAddressList implements OdfDataType {
       throw new IllegalArgumentException("parameter is invalid for datatype CellRangeAddressList");
     }
 
-    List<CellRangeAddress> aRet = new ArrayList<CellRangeAddress>();
+    List<CellRangeAddress> aRet = new ArrayList<>();
     String[] names = stringValue.split(" ");
     for (int i = 0; i < names.length; i++) {
       aRet.add(new CellRangeAddress(names[i]));
@@ -96,7 +96,7 @@ public class CellRangeAddressList implements OdfDataType {
    * @return a list of CellRangeAddress
    */
   public List<CellRangeAddress> getCellRangesAddressList() {
-    List<CellRangeAddress> aRet = new ArrayList<CellRangeAddress>();
+    List<CellRangeAddress> aRet = new ArrayList<>();
     String[] names = mCellRangeAddressList.split(" ");
     for (int i = 0; i < names.length; i++) {
       aRet.add(new CellRangeAddress(names[i]));
