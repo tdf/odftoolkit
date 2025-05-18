@@ -152,7 +152,7 @@ public class OdfPackage implements Closeable {
   // save() will check 1) mPkgDoms, 2) if not check mMemoryFileCache
   private Map<String, Document> mPkgDoms;
   private Map<String, byte[]> mMemoryFileCache;
-  private Map<String, Object> mConfiguration = new HashMap<String, Object>();
+  private Map<String, Object> mConfiguration = new HashMap<>();
 
   private ErrorHandler mErrorHandler;
   private String mManifestVersion;
@@ -196,11 +196,11 @@ public class OdfPackage implements Closeable {
   private OdfPackage() {
     mMediaType = null;
     mResolver = null;
-    mPkgDocuments = new HashMap<String, OdfPackageDocument>();
-    mPkgDoms = new HashMap<String, Document>();
+    mPkgDocuments = new HashMap<>();
+    mPkgDoms = new HashMap<>();
     mTransientMarkupId = 0;
-    mMemoryFileCache = new HashMap<String, byte[]>();
-    mManifestEntries = new HashMap<String, OdfFileEntry>();
+    mMemoryFileCache = new HashMap<>();
+    mManifestEntries = new HashMap<>();
     // specify whether validation should be enabled and what SAX
     // ErrorHandler should be used.
     if (mErrorHandler == null) {
@@ -604,7 +604,7 @@ public class OdfPackage implements Closeable {
   // readZip();
   // }
   private void readZip() throws SAXException, IOException {
-    mZipEntries = new HashMap<String, ZipArchiveEntry>();
+    mZipEntries = new HashMap<>();
     String firstEntryName = mZipFile.entriesToMap(mZipEntries);
     if (mZipEntries.isEmpty()) {
       OdfValidationException ve =
@@ -622,7 +622,7 @@ public class OdfPackage implements Closeable {
 
       // ToDo: Remove all META-INF/* files from the fileEntries of
       // Manifest
-      mOriginalZipEntries = new HashMap<String, ZipArchiveEntry>();
+      mOriginalZipEntries = new HashMap<>();
       mOriginalZipEntries.putAll(mZipEntries);
       mZipEntries.remove(OdfPackage.OdfFile.MEDIA_TYPE.getPath());
       mZipEntries.remove(OdfPackage.OdfFile.MANIFEST.getPath());
@@ -656,13 +656,13 @@ public class OdfPackage implements Closeable {
   private void validateManifest() throws SAXException {
     Set<String> zipPaths = mZipEntries.keySet();
     Set<String> manifestPaths = mManifestEntries.keySet();
-    Set<String> sharedPaths = new HashSet<String>(zipPaths);
+    Set<String> sharedPaths = new HashSet<>(zipPaths);
     sharedPaths.retainAll(manifestPaths);
 
     if (sharedPaths.size() < zipPaths.size()) {
-      Set<String> zipPathSuperset = new HashSet<String>(mZipEntries.keySet());
+      Set<String> zipPathSuperset = new HashSet<>(mZipEntries.keySet());
       zipPathSuperset.removeAll(sharedPaths);
-      Set<String> sortedSet = new TreeSet<String>(zipPathSuperset);
+      Set<String> sortedSet = new TreeSet<>(zipPathSuperset);
       Iterator<String> iter = sortedSet.iterator();
       String documentURL = getBaseURI();
       String internalPath;
@@ -680,7 +680,7 @@ public class OdfPackage implements Closeable {
       }
     }
     if (sharedPaths.size() < manifestPaths.size()) {
-      Set<String> zipPathSubset = new HashSet<String>(mManifestEntries.keySet());
+      Set<String> zipPathSubset = new HashSet<>(mManifestEntries.keySet());
       zipPathSubset.removeAll(sharedPaths);
       // removing root directory
       zipPathSubset.remove(SLASH);
@@ -990,7 +990,7 @@ public class OdfPackage implements Closeable {
       remove(SLASH);
     } else {
       // remove all the stream of the directory, such as pictures
-      List<String> directoryEntryNames = new ArrayList<String>();
+      List<String> directoryEntryNames = new ArrayList<>();
       for (String entryName : allPackageFileNames) {
         if (entryName.startsWith(internalPath)) {
           directoryEntryNames.add(entryName);
@@ -1600,7 +1600,7 @@ public class OdfPackage implements Closeable {
   /** Get all the file entries from a sub directory */
   private Map<String, OdfFileEntry> getSubDirectoryEntries(String directory) {
     directory = normalizeDirectoryPath(directory);
-    Map<String, OdfFileEntry> subEntries = new HashMap<String, OdfFileEntry>();
+    Map<String, OdfFileEntry> subEntries = new HashMap<>();
     Map<String, OdfFileEntry> allEntries = getManifestEntries();
     Set<String> rootEntryNameSet = getFilePaths();
     for (String entryName : rootEntryNameSet) {
@@ -1643,7 +1643,7 @@ public class OdfPackage implements Closeable {
    *     the given parameter.
    */
   Set<String> getDocumentPaths(String mediaTypeString, String subDirectory) {
-    Set<String> innerDocuments = new HashSet<String>();
+    Set<String> innerDocuments = new HashSet<>();
     Set<String> packageFilePaths = getFilePaths();
     // check manifest for current embedded OdfPackageDocuments
     for (String filePath : packageFilePaths) {
@@ -1678,7 +1678,7 @@ public class OdfPackage implements Closeable {
     OdfFileEntry fileEntry = null;
     if (!OdfFile.MANIFEST.internalPath.equals(internalPath) && !internalPath.equals(EMPTY_STRING)) {
       if (mManifestEntries == null) {
-        mManifestEntries = new HashMap<String, OdfFileEntry>();
+        mManifestEntries = new HashMap<>();
       }
       fileEntry = mManifestEntries.get(internalPath);
       // for every new file entry
@@ -2479,7 +2479,7 @@ public class OdfPackage implements Closeable {
     boolean isDirectory = path.endsWith(SLASH);
     StringTokenizer tokenizer = new StringTokenizer(path, SLASH);
     int tokenCount = tokenizer.countTokens();
-    List<String> tokenList = new ArrayList<String>(tokenCount);
+    List<String> tokenList = new ArrayList<>(tokenCount);
     // add all paths to a list
     while (tokenizer.hasMoreTokens()) {
       String token = tokenizer.nextToken();

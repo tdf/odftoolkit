@@ -876,7 +876,7 @@ public class TextSelection extends Selection {
                 .getDocumentStyles()
                 .getDefaultStyle(styleElement.getFamily());
       }
-      TreeMap<OdfStyleProperty, String> result = new TreeMap<OdfStyleProperty, String>();
+      TreeMap<OdfStyleProperty, String> result = new TreeMap<>();
       OdfStyleFamily family = OdfStyleFamily.Text;
       if (family != null) {
         for (OdfStyleProperty property : family.getProperties()) {
@@ -904,7 +904,7 @@ public class TextSelection extends Selection {
     if (styleElement == null) {
       styleElement = element.getDocumentStyle();
     }
-    TreeMap<OdfStyleProperty, String> result = new TreeMap<OdfStyleProperty, String>();
+    TreeMap<OdfStyleProperty, String> result = new TreeMap<>();
     while (styleElement != null) {
       // check if it is the style:defaut-style
       if ((styleElement.getPropertiesElement(OdfStylePropertiesSet.ParagraphProperties) == null)

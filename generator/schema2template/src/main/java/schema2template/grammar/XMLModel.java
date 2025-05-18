@@ -108,7 +108,7 @@ public class XMLModel {
       // create a map from the qName to the PuzzlePiece(s) - multiple if there are multiple
       // definitions for the qName in the grammar
       this.elementNameToPuzzlePieces =
-          createMapQNameToPuzzlePiece(new TreeSet<PuzzlePiece>(this.getElements()));
+          createMapQNameToPuzzlePiece(new TreeSet<>(this.getElements()));
     }
     return this.elementNameToPuzzlePieces.get(qName);
   }
@@ -119,7 +119,7 @@ public class XMLModel {
       // create a map from the qName to the PuzzlePiece(s) - multiple if there are multiple
       // definitions for the qName in the grammar
       this.attributeNameToPuzzlePieces =
-          createMapQNameToPuzzlePiece(new TreeSet<PuzzlePiece>(this.getElements()));
+          createMapQNameToPuzzlePiece(new TreeSet<>(this.getElements()));
     }
     return this.attributeNameToPuzzlePieces.get(qName);
   }
@@ -133,9 +133,9 @@ public class XMLModel {
    */
   private static Map<String, SortedSet<PuzzlePiece>> createMapQNameToPuzzlePiece(
       Set<PuzzlePiece> definitions) {
-    Map<String, SortedSet<PuzzlePiece>> retval = new HashMap<String, SortedSet<PuzzlePiece>>();
+    Map<String, SortedSet<PuzzlePiece>> retval = new HashMap<>();
     for (PuzzlePiece def : definitions) {
-      SortedSet<PuzzlePiece> multiples = retval.computeIfAbsent(def.getQName(), k -> new TreeSet<PuzzlePiece>());
+      SortedSet<PuzzlePiece> multiples = retval.computeIfAbsent(def.getQName(), k -> new TreeSet<>());
       multiples.add(def);
     }
     return retval;

@@ -61,7 +61,7 @@ public class MSVNameClassVisitorList implements NameClassVisitor {
   }
 
   public List<String> onChoice(ChoiceNameClass arg0) {
-    List<String> retval = new ArrayList<String>();
+    List<String> retval = new ArrayList<>();
     retval.addAll((List<String>) arg0.nc1.visit(this));
     retval.addAll((List<String>) arg0.nc2.visit(this));
     return retval;
@@ -71,7 +71,7 @@ public class MSVNameClassVisitorList implements NameClassVisitor {
   // W3C Schema restriction on name have to be given out as more adequate for us!
   public List<String> onDifference(DifferenceNameClass arg0) {
     if (arg0 != null) {
-      List<String> l = new ArrayList<String>(2);
+      List<String> l = new ArrayList<>(2);
       l.add(arg0.nc1.toString());
       l.add(arg0.nc2.toString());
       return l;

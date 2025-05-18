@@ -92,8 +92,8 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
     mAttributeDefaults = attributeDefaultMap;
     mDatatypeValueConversion = datatypeValueConversion;
     mElementStyleFamilies = elementNameToFamilyMap;
-    mProcessedElements = new HashSet<String>();
-    mProcessedDatatypes = new HashSet<String>();
+    mProcessedElements = new HashSet<>();
+    mProcessedDatatypes = new HashSet<>();
   }
 
   private void readElementSettings(Attributes attrs) throws SAXException {
@@ -116,7 +116,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
     String commaSeparatedStyleFamilies = attrs.getValue("family");
     if (commaSeparatedStyleFamilies != null) {
       StringTokenizer tok = new StringTokenizer(commaSeparatedStyleFamilies, ",");
-      List<String> families = new ArrayList<String>();
+      List<String> families = new ArrayList<>();
       while (tok.hasMoreElements()) {
         String family = tok.nextToken();
         if (family.length() > 0) {
@@ -156,7 +156,7 @@ public class GrammarAdditionsFileHandler extends DefaultHandler {
 
     String elementName = attrs.getValue("element");
     String defaultValue = attrs.getValue("defaultValue");
-    Map<String, String> defaultValueByParentElement = mAttributeDefaults.computeIfAbsent(attrName, k -> new HashMap<String, String>());
+    Map<String, String> defaultValueByParentElement = mAttributeDefaults.computeIfAbsent(attrName, k -> new HashMap<>());
     if (elementName == null) {
       elementName = ALL_ELEMENTS;
     }

@@ -1775,7 +1775,7 @@ public class JsonOperationConsumer {
             if (base.getAttributes().getLength() > 0) {
 
               Map<String, Map<String, String>> allOdfProps =
-                  new HashMap<String, Map<String, String>>();
+                new HashMap<>();
               Map<String, OdfStylePropertiesSet> familyPropertyGroups =
                   Component.getAllStyleGroupingIdProperties(OdfStyleFamily.Text);
               MapHelper.getStyleProperties(paraAutoStyle, familyPropertyGroups, allOdfProps);
@@ -6067,7 +6067,7 @@ public class JsonOperationConsumer {
             Object value = attrs.get(key);
             if (value != null && !value.equals(JSONObject.NULL)) {
               String horBase = (String) value;
-              Map<String, String> relMap = new HashMap<String, String>();
+              Map<String, String> relMap = new HashMap<>();
               relMap.put("margin", "page-start-margin");
               relMap.put("page", "page");
               relMap.put("column", "paragraph");
@@ -6091,7 +6091,7 @@ public class JsonOperationConsumer {
             Object value = attrs.get(key);
             if (value != null && !value.equals(JSONObject.NULL)) {
               String horBase = (String) value;
-              Map<String, String> relMap = new HashMap<String, String>();
+              Map<String, String> relMap = new HashMap<>();
               relMap.put("margin", "page-content");
               relMap.put("page", "page");
               relMap.put("paragraph", "paragraph");

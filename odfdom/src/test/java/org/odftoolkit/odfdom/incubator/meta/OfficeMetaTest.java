@@ -52,7 +52,7 @@ public class OfficeMetaTest {
   private String dctitle = "dctitle";
   private String dcdescription = "dcdescription";
   private String subject = "dcsubject";
-  private List<String> keywords = new ArrayList<String>();
+  private List<String> keywords = new ArrayList<>();
   private String initialCreator = "creator";
   private String dccreator = "Mr. fictionalTestUser";
   private String printedBy = "persia p";
@@ -279,7 +279,7 @@ public class OfficeMetaTest {
 
   @Test
   public void testEmptyKeyword() throws Exception {
-    List<String> emptyKeyword = new ArrayList<String>();
+    List<String> emptyKeyword = new ArrayList<>();
     fMetadata.setKeywords(emptyKeyword);
     tearDown();
     setUp();
@@ -301,7 +301,7 @@ public class OfficeMetaTest {
     List<String> names;
     names = fMetadata.getUserDefinedDataNames();
     if (names == null) {
-      names = new ArrayList<String>();
+      names = new ArrayList<>();
     } else {
       for (String name : names) {
         fMetadata.removeUserDefinedDataByName(name);

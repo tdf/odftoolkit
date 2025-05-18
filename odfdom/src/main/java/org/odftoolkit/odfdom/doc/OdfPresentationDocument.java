@@ -229,9 +229,9 @@ public class OdfPresentationDocument extends OdfDocument {
   // while if the style elements really have the same style name but with different content
   // such as that these style elements are from different document
   // so the value for each key should be a list
-  private Map<String, List<String>> styleRenameMap = new HashMap<String, List<String>>();
+  private Map<String, List<String>> styleRenameMap = new HashMap<>();
   // the map is used to record if the renamed style name is appended to the current dom
-  private Map<String, Boolean> styleAppendMap = new HashMap<String, Boolean>();
+  private Map<String, Boolean> styleAppendMap = new HashMap<>();
   // the object rename map for image.
   // can not easily recognize if the embedded document are the same.
   //	private Map<String, String> objectRenameMap = new HashMap<String, String>();
@@ -323,7 +323,7 @@ public class OdfPresentationDocument extends OdfDocument {
     if (hasCheckSlideName) {
       return;
     }
-    List<String> slideNameList = new ArrayList<String>();
+    List<String> slideNameList = new ArrayList<>();
     OfficePresentationElement contentRoot = null;
     try {
       contentRoot = getContentRoot();
@@ -359,7 +359,7 @@ public class OdfPresentationDocument extends OdfDocument {
       LOG.log(Level.SEVERE, null, e);
       return null;
     }
-    ArrayList<OdfSlide> slideList = new ArrayList<OdfSlide>();
+    ArrayList<OdfSlide> slideList = new ArrayList<>();
     NodeList slideNodes =
         contentRoot.getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "page");
     for (int i = 0; i < slideNodes.getLength(); i++) {
@@ -416,7 +416,7 @@ public class OdfPresentationDocument extends OdfDocument {
       ////////////////
       // method 2:
       // 2.1. get the list of the style definition
-      ArrayList<OdfElement> removeStyles = new ArrayList<OdfElement>();
+      ArrayList<OdfElement> removeStyles = new ArrayList<>();
       OdfOfficeAutomaticStyles autoStyles = getContentDom().getAutomaticStyles();
 
       NodeList stylesList = autoStyles.getChildNodes();
@@ -751,7 +751,7 @@ public class OdfPresentationDocument extends OdfDocument {
       OdfPackageDocument srcDoc = fileDom.getDocument();
       // new a map to put the original name and the rename string, in case that the same name might
       // be referred by the slide several times.
-      HashMap<String, String> objectRenameMap = new HashMap<String, String>();
+      HashMap<String, String> objectRenameMap = new HashMap<>();
       NodeList linkNodes =
           (NodeList) xpath.evaluate(".//*[@xlink:href]", sourceCloneEle, XPathConstants.NODESET);
       for (int i = 0; i <= linkNodes.getLength(); i++) {
@@ -831,9 +831,9 @@ public class OdfPresentationDocument extends OdfDocument {
       NodeList srcStyleDefNodeList =
           (NodeList) xpath.evaluate("//*[@" + styleQName + "]", contentDom, XPathConstants.NODESET);
       HashMap<OdfElement, List<OdfElement>> srcContentStyleCloneEleList =
-          new HashMap<OdfElement, List<OdfElement>>();
+        new HashMap<>();
       HashMap<OdfElement, OdfElement> appendContentStyleList =
-          new HashMap<OdfElement, OdfElement>();
+        new HashMap<>();
       getCopyStyleList(
           null,
           sourceCloneEle,
@@ -848,8 +848,8 @@ public class OdfPresentationDocument extends OdfDocument {
               xpath.evaluate(
                   "//*[@" + styleQName + "]", doc.getStylesDom(), XPathConstants.NODESET);
       HashMap<OdfElement, List<OdfElement>> srcStylesStyleCloneEleList =
-          new HashMap<OdfElement, List<OdfElement>>();
-      HashMap<OdfElement, OdfElement> appendStylesStyleList = new HashMap<OdfElement, OdfElement>();
+        new HashMap<>();
+      HashMap<OdfElement, OdfElement> appendStylesStyleList = new HashMap<>();
       getCopyStyleList(
           null,
           sourceCloneEle,
@@ -877,8 +877,8 @@ public class OdfPresentationDocument extends OdfDocument {
               xpath.evaluate(
                   "//*[@" + styleQName + "]", doc.getStylesDom(), XPathConstants.NODESET);
       HashMap<OdfElement, List<OdfElement>> srcDrawStyleCloneEleList =
-          new HashMap<OdfElement, List<OdfElement>>();
-      HashMap<OdfElement, OdfElement> appendDrawStyleList = new HashMap<OdfElement, OdfElement>();
+        new HashMap<>();
+      HashMap<OdfElement, OdfElement> appendDrawStyleList = new HashMap<>();
       Iterator<OdfElement> iter = appendContentStyleList.keySet().iterator();
       while (iter.hasNext()) {
         OdfElement styleElement = iter.next();
@@ -952,7 +952,7 @@ public class OdfPresentationDocument extends OdfDocument {
             || (isStyleNameExist(destStyleNodeList, styleName) != null)) {
           String newStyleName = null;
           if (newStyleNameList == null) {
-            newStyleNameList = new ArrayList<String>();
+            newStyleNameList = new ArrayList<>();
             newStyleName = styleName + "-" + makeUniqueName();
             newStyleNameList.add(newStyleName);
             styleRenameMap.put(styleName, newStyleNameList);
@@ -1077,7 +1077,7 @@ public class OdfPresentationDocument extends OdfDocument {
               }
               boolean hasLoopStyleDef = true;
               if (copyStyleEleList.get(styleElement) == null) {
-                List<OdfElement> styleRefEleList = new ArrayList<OdfElement>();
+                List<OdfElement> styleRefEleList = new ArrayList<>();
                 copyStyleEleList.put(styleElement, styleRefEleList);
                 hasLoopStyleDef = false;
               }

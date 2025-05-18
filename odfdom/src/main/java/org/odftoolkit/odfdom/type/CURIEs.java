@@ -71,7 +71,7 @@ public class CURIEs implements OdfDataType {
       throw new IllegalArgumentException("parameter is invalid for datatype CURIEs");
     }
 
-    List<CURIE> aRet = new ArrayList<CURIE>();
+    List<CURIE> aRet = new ArrayList<>();
     String[] names = stringValue.split(" ");
     for (int i = 0; i < names.length; i++) {
       aRet.add(new CURIE(names[i]));
@@ -85,7 +85,7 @@ public class CURIEs implements OdfDataType {
    * @return a list of CURIE
    */
   public List<CURIE> getCURIEList() {
-    List<CURIE> aRet = new ArrayList<CURIE>();
+    List<CURIE> aRet = new ArrayList<>();
     String[] names = mCURIEs.split(" ");
     for (int i = 0; i < names.length; i++) {
       aRet.add(new CURIE(names[i]));

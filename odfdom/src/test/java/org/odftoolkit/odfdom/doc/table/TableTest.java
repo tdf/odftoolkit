@@ -1220,7 +1220,7 @@ public class TableTest {
       NodeList lstMasterPages =
           stylesDoc.getElementsByTagNameNS(OdfDocumentNamespace.STYLE.getUri(), "master-page");
       if (lstMasterPages != null && lstMasterPages.getLength() > 0) {
-        masterPages = new HashMap<String, StyleMasterPageElement>();
+        masterPages = new HashMap<>();
         for (int i = 0; i < lstMasterPages.getLength(); i++) {
           StyleMasterPageElement masterPage =
               (StyleMasterPageElement) lstMasterPages.item(i); // Take the node from the list
@@ -1249,7 +1249,7 @@ public class TableTest {
     Assert.assertNotNull(pagePropsElement);
 
     // fill map with header attributes name/values
-    HashMap<String, String> pageProps = new HashMap<String, String>();
+    HashMap<String, String> pageProps = new HashMap<>();
     NamedNodeMap pageAttrs = pagePropsElement.getAttributes();
     for (int i = 0; i < pageAttrs.getLength(); i++) {
       pageProps.put(
@@ -1273,7 +1273,7 @@ public class TableTest {
         OdfElement.findFirstChildNode(StyleHeaderFooterPropertiesElement.class, headerStyle);
     Assert.assertNotNull(headerStyleProps);
     // fill map with header attributes name/values
-    HashMap<String, String> headerProps = new HashMap<String, String>();
+    HashMap<String, String> headerProps = new HashMap<>();
     NamedNodeMap headerAttrs = headerStyleProps.getAttributes();
     for (int i = 0; i < headerAttrs.getLength(); i++) {
       headerProps.put(
@@ -1298,7 +1298,7 @@ public class TableTest {
     Assert.assertNotNull(footerStyleProps);
 
     // fill map with header attributes name/values
-    HashMap<String, String> footerProps = new HashMap<String, String>();
+    HashMap<String, String> footerProps = new HashMap<>();
     NamedNodeMap footerAttrs = footerStyleProps.getAttributes();
     for (int i = 0; i < footerAttrs.getLength(); i++) {
       footerProps.put(

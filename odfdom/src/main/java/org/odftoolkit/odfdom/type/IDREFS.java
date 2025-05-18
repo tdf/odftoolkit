@@ -76,7 +76,7 @@ public class IDREFS implements OdfDataType {
       throw new IllegalArgumentException("parameter is invalid for datatype IDREFS");
     }
 
-    List<IDREF> aRet = new ArrayList<IDREF>();
+    List<IDREF> aRet = new ArrayList<>();
     String[] names = stringValue.split(" ");
     for (int i = 0; i < names.length; i++) {
       aRet.add(new IDREF(names[i]));
@@ -90,7 +90,7 @@ public class IDREFS implements OdfDataType {
    * @return a list of IDREF
    */
   public List<IDREF> getIDREFList() {
-    List<IDREF> aRet = new ArrayList<IDREF>();
+    List<IDREF> aRet = new ArrayList<>();
     String[] names = mIdRefs.split(" ");
     for (int i = 0; i < names.length; i++) {
       aRet.add(new IDREF(names[i]));

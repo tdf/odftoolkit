@@ -76,7 +76,7 @@ public class StyleNameRefs implements OdfDataType {
       throw new IllegalArgumentException("parameter is invalid for datatype StyleNameRefs");
     }
 
-    List<StyleName> aRet = new ArrayList<StyleName>();
+    List<StyleName> aRet = new ArrayList<>();
     if (stringValue.length() > 0) {
       String[] names = stringValue.split(" ");
       for (int i = 0; i < names.length; i++) {
@@ -92,7 +92,7 @@ public class StyleNameRefs implements OdfDataType {
    * @return a list of StyleNameRef
    */
   public List<StyleName> getStyleNameRefList() {
-    List<StyleName> aRet = new ArrayList<StyleName>();
+    List<StyleName> aRet = new ArrayList<>();
     if (mStyleNames.length() > 0) {
       String[] names = mStyleNames.split(" ");
       for (int i = 0; i < names.length; i++) {

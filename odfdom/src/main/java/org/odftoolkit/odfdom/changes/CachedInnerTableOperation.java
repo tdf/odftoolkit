@@ -44,7 +44,7 @@ class CachedInnerTableOperation extends CachedOperation {
   public CachedOperation clone() {
     return new CachedInnerTableOperation(
         mComponentType,
-        new ArrayList<Integer>(mStart),
+            new ArrayList<>(mStart),
         mAbsolutePosition,
         mHardFormattingProperties,
         mComponentProperties);

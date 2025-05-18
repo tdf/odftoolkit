@@ -96,7 +96,7 @@ public class StyleExamplesTest {
 
     OdfElement documentRoot = (OdfElement) odfDocument.getContentDom().getDocumentElement();
 
-    ArrayList<String> fontAndText = new ArrayList<String>();
+    ArrayList<String> fontAndText = new ArrayList<>();
 
     DumpPropertyAndText dumpFontAndText =
         new DumpPropertyAndText(StyleTextPropertiesElement.FontName);

@@ -92,7 +92,7 @@ public class EmbeddedDocumentTest {
           OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE_EMBEDDED));
       OdfDocument saveDoc = OdfTextDocument.newTextDocument();
       Map<String, OdfDocument> subDocs = doc.loadSubDocuments();
-      List<String> subDocNames = new ArrayList<String>();
+      List<String> subDocNames = new ArrayList<>();
       for (OdfDocument childDoc : subDocs.values()) {
         String embeddedDocPath = childDoc.getDocumentPath();
         saveDoc.insertDocument(childDoc, embeddedDocPath);
@@ -333,7 +333,7 @@ public class EmbeddedDocumentTest {
       OdfDocument doc =
           OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(TEST_FILE_EMBEDDED));
       Map<String, OdfDocument> embeddedDocs = doc.loadSubDocuments();
-      List<String> subDocNames = new ArrayList<String>();
+      List<String> subDocNames = new ArrayList<>();
       for (OdfDocument childDoc : embeddedDocs.values()) {
         Assert.assertNotNull(childDoc);
         String embedFileName = childDoc.getDocumentPath();

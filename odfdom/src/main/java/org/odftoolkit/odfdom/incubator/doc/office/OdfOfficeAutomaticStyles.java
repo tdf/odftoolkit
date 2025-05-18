@@ -241,7 +241,7 @@ public abstract class OdfOfficeAutomaticStyles extends OdfStylesBase {
     if (node instanceof OdfStylePageLayout) {
       OdfStylePageLayout pageLayout = (OdfStylePageLayout) node;
       if (mPageLayouts == null) {
-        mPageLayouts = new HashMap<String, OdfStylePageLayout>();
+        mPageLayouts = new HashMap<>();
       }
 
       mPageLayouts.put(pageLayout.getStyleNameAttribute(), pageLayout);
@@ -268,7 +268,7 @@ public abstract class OdfOfficeAutomaticStyles extends OdfStylesBase {
    */
   public void optimize() {
     Iterator<OdfStyle> iter = getAllStyles().iterator();
-    SortedSet<OdfStyle> stylesSet = new TreeSet<OdfStyle>();
+    SortedSet<OdfStyle> stylesSet = new TreeSet<>();
     while (iter.hasNext()) {
       OdfStyle cur = iter.next();
 
@@ -282,7 +282,7 @@ public abstract class OdfOfficeAutomaticStyles extends OdfStylesBase {
       if (found != null && found.equals(cur)) {
         // cur already in set. Replace all usages of cur by found:
         Iterator<OdfStylableElement> styleUsersIter = cur.getStyleUsers().iterator();
-        ArrayList<OdfStylableElement> styleUsers = new ArrayList<OdfStylableElement>();
+        ArrayList<OdfStylableElement> styleUsers = new ArrayList<>();
         while (styleUsersIter.hasNext()) {
           styleUsers.add(styleUsersIter.next());
         }
@@ -397,7 +397,7 @@ public abstract class OdfOfficeAutomaticStyles extends OdfStylesBase {
         three parts: "value()>0";"value()<0";value()==0
         The last one is in general
     */
-    ArrayList<String> partArray = new ArrayList<String>();
+    ArrayList<String> partArray = new ArrayList<>();
     // TODO: skip quoted parts - check fails if semicolon is in quotes
     while (numberFormatCode.contains(";")) {
       int partStart = numberFormatCode.lastIndexOf(";", numberFormatCode.length());

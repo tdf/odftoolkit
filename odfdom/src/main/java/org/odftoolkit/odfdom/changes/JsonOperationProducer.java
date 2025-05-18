@@ -405,10 +405,10 @@ public class JsonOperationProducer {
   /** */
   public void mergeCells(List<Integer> position, int columns, int rows) {
     final JSONObject newOperation = new JSONObject();
-    List<Integer> rangeStart = new ArrayList<Integer>();
+    List<Integer> rangeStart = new ArrayList<>();
     rangeStart.add(position.get(2));
     rangeStart.add(position.get(1));
-    List<Integer> rangeEnd = new ArrayList<Integer>();
+    List<Integer> rangeEnd = new ArrayList<>();
     rangeEnd.add(position.get(2) + columns - 1);
     rangeEnd.add(position.get(1) + rows - 1);
     try {
@@ -503,7 +503,7 @@ public class JsonOperationProducer {
     if (attrs != null && attrs.size() > 0) {
       // Not the next position, but the last character to be marked will be referenced
       final JSONObject newOp = new JSONObject();
-      List<Integer> lastCharacterPos = new ArrayList<Integer>();
+      List<Integer> lastCharacterPos = new ArrayList<>();
       // text position is usually -1 as we take the first and the last character to be styled
       if (end != null) {
         for (int i = 0; i < end.size(); i++) {
@@ -619,7 +619,7 @@ public class JsonOperationProducer {
         tableAttrs = (JSONObject) hardFormatations.get("table");
       } else {
         if (hardFormatations == null) {
-          hardFormatations = new HashMap<String, Object>();
+          hardFormatations = new HashMap<>();
         }
       }
       if (tableAttrs == null) {
@@ -671,11 +671,11 @@ public class JsonOperationProducer {
       if (context != null) {
         newOperation.put(OPK_CONTEXT, context);
       }
-      Map<String, Integer> sizeExceeded = new HashMap<String, Integer>();
+      Map<String, Integer> sizeExceeded = new HashMap<>();
       sizeExceeded.put("columns", columns);
       sizeExceeded.put("rows", rows);
       newOperation.put("sizeExceeded", sizeExceeded);
-      Map<String, Object> hardFormatations = new HashMap<String, Object>();
+      Map<String, Object> hardFormatations = new HashMap<>();
       JSONObject tableAttrs = new JSONObject();
       //			JSONObject tableAttrs = null;
       //			if (hardFormatations != null && !hardFormatations.isEmpty()) {
@@ -879,7 +879,7 @@ public class JsonOperationProducer {
       } else {
         result = panose1.split("\\s");
       }
-      panose1_Integers = new ArrayList<Integer>();
+      panose1_Integers = new ArrayList<>();
       for (String token : result) {
         try {
           panose1_Integers.add(Integer.parseInt(token));
@@ -1020,8 +1020,8 @@ public class JsonOperationProducer {
         OdfStyleBase style = styleElement.getAutomaticStyle();
 
         // all ODF properties
-        allOdfProps = new HashMap<String, Map<String, String>>();
-        List<OdfStyleBase> parents = new ArrayList<OdfStyleBase>();
+        allOdfProps = new HashMap<>();
+        List<OdfStyleBase> parents = new ArrayList<>();
         parents.add(style);
         OdfStyleBase parent = style.getParentStyle();
         // if automatic style inheritance is possible
@@ -1619,7 +1619,7 @@ public class JsonOperationProducer {
       if (!(style instanceof OdfDefaultStyle)) {
 
         if (!knownStyles.containsKey(((OdfStyle) style).getStyleNameAttribute())) {
-          List<OdfStyleBase> parents = new ArrayList<OdfStyleBase>();
+          List<OdfStyleBase> parents = new ArrayList<>();
           OdfStyleBase parent = style;
 
           // Collecting hierachy, to go back through the style hierarchy from the end, to be able to
@@ -1668,7 +1668,7 @@ public class JsonOperationProducer {
           String lastWrittenStyleName = null; // Only write out parents with mapped styles
           boolean skippedEmptyParent = false;
           // Intermediate ODF properties
-          Map<String, Map<String, String>> allOdfProps = new HashMap<String, Map<String, String>>();
+          Map<String, Map<String, String>> allOdfProps = new HashMap<>();
           // The property groups for this component, e.g. cell, paragraph, text for a cell with
           // properties
           Map<String, OdfStylePropertiesSet> familyPropertyGroups =
@@ -1769,7 +1769,7 @@ public class JsonOperationProducer {
   public Integer triggerDefaultStyleOp(OdfStyleFamily styleFamily, OdfStyleBase style) {
     Integer defaultTabStopWidth = null;
     // Intermediate ODF properties
-    Map<String, Map<String, String>> allOdfProps = new HashMap<String, Map<String, String>>();
+    Map<String, Map<String, String>> allOdfProps = new HashMap<>();
     // The property groups for this component, e.g. cell, paragraph, text for a cell with properties
     Map<String, OdfStylePropertiesSet> familyPropertyGroups =
         Component.getAllStyleGroupingIdProperties(styleFamily);
@@ -1945,7 +1945,7 @@ public class JsonOperationProducer {
   // \u00dcberschreiben kann aber auch die gemappten werte, dann w\u00fcrde man ggf. mehrmals
   // umsonst mappen..
   private Map<String, String> transformMap(Map<OdfStyleProperty, String> props) {
-    Map<String, String> odfProps = new HashMap<String, String>();
+    Map<String, String> odfProps = new HashMap<>();
     for (Map.Entry<OdfStyleProperty, String> entry : props.entrySet()) {
       odfProps.put(entry.getKey().getName().getQName(), entry.getValue());
     }

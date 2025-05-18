@@ -200,7 +200,7 @@ public class OdfDrawImage extends DrawImageElement {
    *     path, return an empty list.
    */
   public static List<OdfDrawImage> getImageByPath(OdfSchemaDocument doc, String imagePath) {
-    ArrayList<OdfDrawImage> imageList = new ArrayList<OdfDrawImage>();
+    ArrayList<OdfDrawImage> imageList = new ArrayList<>();
 
     try {
       NodeList imageNodes =
@@ -314,7 +314,7 @@ public class OdfDrawImage extends DrawImageElement {
    * @return an image list in this document if no images is found, return an empty list.
    */
   public static List<OdfDrawImage> getImages(OdfSchemaDocument doc) {
-    ArrayList<OdfDrawImage> imageList = new ArrayList<OdfDrawImage>();
+    ArrayList<OdfDrawImage> imageList = new ArrayList<>();
     try {
       NodeList imageNodes =
           doc.getContentDom().getElementsByTagNameNS(OdfDocumentNamespace.DRAW.getUri(), "image");
@@ -335,7 +335,7 @@ public class OdfDrawImage extends DrawImageElement {
    * @return an image path set in this document
    */
   public static Set<String> getImagePathSet(OdfSchemaDocument doc) {
-    Set<String> paths = new HashSet<String>();
+    Set<String> paths = new HashSet<>();
     List<OdfDrawImage> imageList = getImages(doc);
     Iterator<OdfDrawImage> it = imageList.iterator();
     while (it.hasNext()) {

@@ -127,7 +127,7 @@ public abstract class OdfOfficeMasterStyles extends OdfStylesBase
       StyleMasterPageElement masterPage = (StyleMasterPageElement) node;
 
       if (mMasterPages == null) {
-        mMasterPages = new HashMap<String, StyleMasterPageElement>();
+        mMasterPages = new HashMap<>();
       }
       mMasterPages.put(masterPage.getStyleNameAttribute(), masterPage);
     }

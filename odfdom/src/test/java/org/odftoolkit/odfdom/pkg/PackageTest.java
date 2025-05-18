@@ -101,7 +101,7 @@ public class PackageTest {
     // test if the image is not compressed
     ZipArchiveInputStream zinput =
         createZipInputStream(ResourceUtilities.getTestOutputAsStream(IMAGE_PRESENTATION));
-    ZipArchiveEntry entry = zinput.getNextZipEntry();
+    ZipArchiveEntry entry = zinput.getNextEntry();
     while (entry != null) {
       String entryName = entry.getName();
       if (entryName.endsWith(".jpg")) {
@@ -109,7 +109,7 @@ public class PackageTest {
         Assert.assertEquals(ZipArchiveEntry.STORED, entry.getMethod());
         Assert.assertEquals(f.length(), entry.getSize());
       }
-      entry = zinput.getNextZipEntry();
+      entry = zinput.getNextEntry();
     }
   }
 
@@ -353,7 +353,7 @@ public class PackageTest {
 
     // TESTDOC4: Expected ODF FatalErrors
     Map<ValidationConstraint, Integer> expectedFatalErrors4 =
-        new HashMap<ValidationConstraint, Integer>();
+      new HashMap<>();
     // loading a graphic instead an ODF document
     expectedFatalErrors4.put(OdfPackageConstraint.PACKAGE_IS_NO_ZIP, 1);
     ErrorHandlerStub handler4 = new ErrorHandlerStub(null, null, expectedFatalErrors4);
@@ -401,7 +401,7 @@ public class PackageTest {
   public void validationTest5() {
     // TESTDOC5: duplicate ZIP entries
     Map<ValidationConstraint, Integer> expectedFatalErrors =
-        new HashMap<ValidationConstraint, Integer>();
+      new HashMap<>();
     expectedFatalErrors.put(OdfPackageConstraint.PACKAGE_ENTRY_DUPLICATE, 1);
     ErrorHandlerStub handler = new ErrorHandlerStub(null, null, expectedFatalErrors);
     handler.setTestFilePath("duplicate-files.odt");
@@ -430,7 +430,7 @@ public class PackageTest {
   public void validationTest6() {
     // TESTDOC6: Info-ZIP Unicode Path Extra Field with different name
     Map<ValidationConstraint, Integer> expectedErrors =
-        new HashMap<ValidationConstraint, Integer>();
+      new HashMap<>();
     // depending on setUseUnicodeExtraFields this would be reported as
     // MANIFEST_DOES_NOT_LIST_FILE or as PACKAGE_ENTRY_DUPLICATE
     expectedErrors.put(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, 1);
@@ -455,7 +455,7 @@ public class PackageTest {
   public void validationTest7() {
     // TESTDOC7: invalid file name
     Map<ValidationConstraint, Integer> expectedFatalErrors =
-        new HashMap<ValidationConstraint, Integer>();
+      new HashMap<>();
     expectedFatalErrors.put(OdfPackageConstraint.PACKAGE_ENTRY_INVALID_FILE_NAME, 1);
     ErrorHandlerStub handler = new ErrorHandlerStub(null, null, expectedFatalErrors);
     handler.setTestFilePath("slash.odt");
@@ -484,7 +484,7 @@ public class PackageTest {
   public void validationTest8() {
     // TESTDOC8: 2 concatenated zips
     Map<ValidationConstraint, Integer> expectedErrors =
-        new HashMap<ValidationConstraint, Integer>();
+      new HashMap<>();
     expectedErrors.put(OdfPackageConstraint.MIMETYPE_NOT_FIRST_IN_PACKAGE, 1);
     ErrorHandlerStub handler = new ErrorHandlerStub(null, expectedErrors, null);
     handler.setTestFilePath("two-zips.odt");

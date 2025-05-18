@@ -323,7 +323,7 @@ public class OdfTableCellRange {
   // table
   // the returned value is all measured with "mm" unit
   private List<Long> getCellRangeWidthList() {
-    List<Long> list = new ArrayList<Long>();
+    List<Long> list = new ArrayList<>();
     long length = 0L;
     for (int i = 0; i < maOwnerTable.getColumnCount() - 1; i++) {
       OdfTableColumn col = maOwnerTable.getColumnByIndex(i);
@@ -354,7 +354,7 @@ public class OdfTableCellRange {
     List<CellCoverInfo> coverList =
         maOwnerTable.getCellCoverInfos(mnStartColumn, mnStartRow, mnEndColumn, mnEndRow);
     // then get the real(uncovered) cell x coordinate
-    List<Long> tmpList = new ArrayList<Long>();
+    List<Long> tmpList = new ArrayList<>();
     List<Long> widthList = getCellRangeWidthList();
     for (int i = mnStartColumn; i < mnEndColumn + 1; i++) {
       for (int j = mnStartRow; j < mnEndRow + 1; j++) {
@@ -373,7 +373,7 @@ public class OdfTableCellRange {
     // last, reorder the tmpVector and split it to splitNum between each item
     Long[] widthArray = (Long[]) tmpList.toArray();
     Arrays.sort(widthArray);
-    List<Long> rtnValues = new ArrayList<Long>();
+    List<Long> rtnValues = new ArrayList<>();
     long colWidth;
     long unitWidth;
     rtnValues.add(widthArray[0]);

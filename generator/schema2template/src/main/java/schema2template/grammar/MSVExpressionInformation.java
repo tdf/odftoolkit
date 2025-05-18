@@ -69,15 +69,15 @@ public class MSVExpressionInformation {
   private Map<Expression, List<List<Expression>>> mContainedInPaths;
   private boolean mCanHaveText = false;
   // map child to its isSingleton property
-  private Set<Expression> mSingletonChildren = new HashSet<Expression>();
-  private Set<Expression> mMultipleChildren = new HashSet<Expression>();
+  private Set<Expression> mSingletonChildren = new HashSet<>();
+  private Set<Expression> mMultipleChildren = new HashSet<>();
 
   public MSVExpressionInformation(Expression exp, String schemaFileName) {
-    mContainedInPaths = new HashMap<Expression, List<List<Expression>>>();
+    mContainedInPaths = new HashMap<>();
 
     // Builds paths to child elements and child attributes
-    List<List<Expression>> paths = new ArrayList<List<Expression>>();
-    List<Expression> start = new ArrayList<Expression>(1);
+    List<List<Expression>> paths = new ArrayList<>();
+    List<Expression> start = new ArrayList<>(1);
     start.add(exp);
     paths.add(start);
     buildPaths(paths);
@@ -111,7 +111,7 @@ public class MSVExpressionInformation {
       for (Expression step : path) {
         List<List<Expression>> pathsToStep = mContainedInPaths.get(step);
         if (pathsToStep == null) {
-          pathsToStep = new ArrayList<List<Expression>>(1);
+          pathsToStep = new ArrayList<>(1);
           pathsToStep.add(path);
           mContainedInPaths.put(step, pathsToStep);
         } else {
@@ -132,9 +132,8 @@ public class MSVExpressionInformation {
    */
   private void registerChildrenMaxCardinalities(List<List<Expression>> waysToChildren) {
     Map<Expression, Boolean> multiples =
-        new HashMap<
-            Expression, Boolean>(); // Cardinality (the opposite of isSingleton): true=N, false=1
-    Map<Expression, List<Expression>> paths = new HashMap<Expression, List<Expression>>();
+      new HashMap<>(); // Cardinality (the opposite of isSingleton): true=N, false=1
+    Map<Expression, List<Expression>> paths = new HashMap<>();
 
     for (List<Expression> way : waysToChildren) {
       Expression childexp = way.get(way.size() - 1);
@@ -169,7 +168,7 @@ public class MSVExpressionInformation {
         // MSV detects that this is two times the same choice and creates just one ChoiceExpression.
         // But this is not what we understand as a common CHOICE -> It's a common element definition
         // <OPTIONAL>X</OPTIONAL> == <CHOICE>empty, X</CHOICE>
-        Set<ChoiceExp> choices = new HashSet<ChoiceExp>();
+        Set<ChoiceExp> choices = new HashSet<>();
         for (Expression oldStep : paths.get(childexp)) {
           if (oldStep instanceof ChoiceExp) {
             choices.add((ChoiceExp) oldStep);
@@ -290,7 +289,7 @@ public class MSVExpressionInformation {
     } else if (children.size() > 1) {
       paths.remove(paths.size() - 1);
       for (Expression child : children) {
-        List<Expression> newway = new ArrayList<Expression>();
+        List<Expression> newway = new ArrayList<>();
         newway.addAll(waytoresearch);
         newway.add(child);
         paths.add(newway);
@@ -302,7 +301,7 @@ public class MSVExpressionInformation {
   }
 
   private static List<List<Expression>> getPathsToClass(List<List<Expression>> paths, Class clazz) {
-    List<List<Expression>> remainingPaths = new ArrayList<List<Expression>>();
+    List<List<Expression>> remainingPaths = new ArrayList<>();
     for (List<Expression> path : paths) {
       if (clazz.isInstance(path.get(path.size() - 1))) {
         remainingPaths.add(path);
@@ -350,7 +349,7 @@ public class MSVExpressionInformation {
           "ExpressionInformation: Cannot determine isMandatory for a null or empty children list.");
     }
 
-    Set<List<Expression>> twins = new HashSet<List<Expression>>();
+    Set<List<Expression>> twins = new HashSet<>();
 
     for (Expression exp : equallyNamedChildren) {
       if (!(exp instanceof NameClassAndExpression)) {
@@ -378,7 +377,7 @@ public class MSVExpressionInformation {
      * So both twins do not really share such a CHOICE. You have to look for another path which _really_ shares this choice or - if you find none -
      * set CHILD to optional.
      */
-    HashSet<Expression> visitedChoices = new HashSet<Expression>();
+    HashSet<Expression> visitedChoices = new HashSet<>();
 
     for (List<Expression> path : twins) {
       for (int s = 0; s < path.size(); s++) {
@@ -388,7 +387,7 @@ public class MSVExpressionInformation {
 
           // If other twin paths share the same choice...
           List<List<Expression>> choiceInPaths =
-              new ArrayList<List<Expression>>(mContainedInPaths.get(step));
+            new ArrayList<>(mContainedInPaths.get(step));
           choiceInPaths.retainAll(twins);
 
           // small Performance gain: A CHOICE contained only in one path makes CHILD always optional

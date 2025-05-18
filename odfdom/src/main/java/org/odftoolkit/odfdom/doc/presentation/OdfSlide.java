@@ -39,7 +39,7 @@ public class OdfSlide {
 
   DrawPageElement maSlideElement;
   private static Hashtable<DrawPageElement, OdfSlide> maSlideRepository =
-      new Hashtable<DrawPageElement, OdfSlide>();
+    new Hashtable<>();
 
   private OdfSlide(DrawPageElement pageElement) {
     maSlideElement = pageElement;

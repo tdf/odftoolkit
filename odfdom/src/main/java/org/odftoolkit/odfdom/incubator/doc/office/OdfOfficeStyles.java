@@ -170,7 +170,7 @@ public abstract class OdfOfficeStyles extends OdfStylesBase {
     if (mDefaultStyles != null) {
       return mDefaultStyles.values();
     } else {
-      return new ArrayList<OdfDefaultStyle>();
+      return new ArrayList<>();
     }
   }
 
@@ -197,7 +197,7 @@ public abstract class OdfOfficeStyles extends OdfStylesBase {
     if (mMarker != null) {
       return mMarker.values();
     } else {
-      return new ArrayList<DrawMarkerElement>();
+      return new ArrayList<>();
     }
   }
 
@@ -224,7 +224,7 @@ public abstract class OdfOfficeStyles extends OdfStylesBase {
     if (mGradients != null) {
       return mGradients.values();
     } else {
-      return new ArrayList<DrawGradientElement>();
+      return new ArrayList<>();
     }
   }
 
@@ -251,7 +251,7 @@ public abstract class OdfOfficeStyles extends OdfStylesBase {
     if (mHatches != null) {
       return mHatches.values();
     } else {
-      return new ArrayList<DrawHatchElement>();
+      return new ArrayList<>();
     }
   }
 
@@ -278,7 +278,7 @@ public abstract class OdfOfficeStyles extends OdfStylesBase {
     if (mFillImages != null) {
       return mFillImages.values();
     } else {
-      return new ArrayList<DrawFillImageElement>();
+      return new ArrayList<>();
     }
   }
 
@@ -287,28 +287,28 @@ public abstract class OdfOfficeStyles extends OdfStylesBase {
     if (node instanceof OdfDefaultStyle) {
       OdfDefaultStyle defaultStyle = (OdfDefaultStyle) node;
       if (mDefaultStyles == null) {
-        mDefaultStyles = new HashMap<OdfStyleFamily, OdfDefaultStyle>();
+        mDefaultStyles = new HashMap<>();
       }
 
       mDefaultStyles.put(defaultStyle.getFamily(), defaultStyle);
     } else if (node instanceof DrawMarkerElement) {
       DrawMarkerElement marker = (DrawMarkerElement) node;
       if (mMarker == null) {
-        mMarker = new HashMap<String, DrawMarkerElement>();
+        mMarker = new HashMap<>();
       }
 
       mMarker.put(marker.getDrawNameAttribute(), marker);
     } else if (node instanceof DrawGradientElement) {
       DrawGradientElement gradient = (DrawGradientElement) node;
       if (mGradients == null) {
-        mGradients = new HashMap<String, DrawGradientElement>();
+        mGradients = new HashMap<>();
       }
 
       mGradients.put(gradient.getDrawNameAttribute(), gradient);
     } else if (node instanceof DrawHatchElement) {
       DrawHatchElement hatch = (DrawHatchElement) node;
       if (mHatches == null) {
-        mHatches = new HashMap<String, DrawHatchElement>();
+        mHatches = new HashMap<>();
       }
 
       mHatches.put(hatch.getDrawNameAttribute(), hatch);
@@ -316,7 +316,7 @@ public abstract class OdfOfficeStyles extends OdfStylesBase {
       DrawFillImageElement fillImage = (DrawFillImageElement) node;
 
       if (mFillImages == null) {
-        mFillImages = new HashMap<String, DrawFillImageElement>();
+        mFillImages = new HashMap<>();
       }
 
       mFillImages.put(fillImage.getDrawNameAttribute(), fillImage);

@@ -155,7 +155,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
   // the actual component. Linking each other building the tree view of the document
   private Component mCurrentComponent;
   // the position of the component, being updated for the operations being generated
-  private final List<Integer> mLastComponentPositions = new ArrayList<Integer>();
+  private final List<Integer> mLastComponentPositions = new ArrayList<>();
   /** DOM is created by default, but is in general not needed */
   private final boolean domCreationEnabled = true;
   //    private final ArrayDeque<ShapeProperties> mShapePropertiesStack;
@@ -184,7 +184,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
    * Quick cache to get the correct linked list. Key is the xml:id of the first list. The sequence
    * of all continued lists and usability functions are provided by ContinuedList
    */
-  private final Map<String, ContinuedList> mLinkedLists = new HashMap<String, ContinuedList>();
+  private final Map<String, ContinuedList> mLinkedLists = new HashMap<>();
   // *** FOR BLOCKING OPERATIONS
   // the number of elements above the current element during parsing.
   // Required to find out if the correct blocking element for the UI was found
@@ -421,15 +421,15 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
       mSchemaDoc.setJsonOperationQueue(mJsonOperationProducer);
     }
 
-    mAutoListStyles = new HashMap<String, TextListStyleElement>();
-    mUserFieldDecls = new HashMap<String, TextUserFieldDeclElement>();
+    mAutoListStyles = new HashMap<>();
+    mUserFieldDecls = new HashMap<>();
 
     // Stack to remember/track the nested delimiters not being components (spans) open-up by SAX
     // events
-    mTextSelectionStack = new ArrayDeque<TextSelection>();
-    mListStyleStack = new ArrayDeque<ParagraphListProperties>();
+    mTextSelectionStack = new ArrayDeque<>();
+    mListStyleStack = new ArrayDeque<>();
     //        mShapePropertiesStack = new ArrayDeque<ShapeProperties>();
-    mWhitespaceStatusStack = new ArrayDeque<WhitespaceStatus>();
+    mWhitespaceStatusStack = new ArrayDeque<>();
   }
 
   @Override
@@ -622,7 +622,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
             TextParagraphElementBase p = (TextParagraphElementBase) element;
             Map<String, Object> hardFormatting = mJsonOperationProducer.getHardStyles(p);
             if (hardFormatting == null) {
-              hardFormatting = new HashMap<String, Object>();
+              hardFormatting = new HashMap<>();
             }
             if (element instanceof TextHElement || !mListStyleStack.isEmpty()) {
               if (!hardFormatting.containsKey("paragraph")) {
@@ -797,7 +797,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
             // if there are absolute styles, but not the main property set, where the
             // templateStyleId should be placed in
             if (hardFormatting == null) {
-              hardFormatting = new HashMap<String, Object>();
+              hardFormatting = new HashMap<>();
             }
             hardFormatting.put("drawing", new JSONObject());
           }
@@ -806,7 +806,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
             // if there are absolute styles, but not the main property set, where the
             // templateStyleId should be placed in
             if (hardFormatting == null) {
-              hardFormatting = new HashMap<String, Object>();
+              hardFormatting = new HashMap<>();
             }
             hardFormatting.put("image", new JSONObject());
           }
@@ -1065,7 +1065,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
             }
 
             // The grid is known after columns had been parsed, updating later to row positino
-            List<Integer> tablePosition = new ArrayList<Integer>(mLastComponentPositions);
+            List<Integer> tablePosition = new ArrayList<>(mLastComponentPositions);
             cacheTableOperation(
                 OperationConstants.TABLE,
                 tablePosition,
@@ -1111,7 +1111,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
               // if there are absolute styles, but not the main property set, where the
               // templateStyleId should be placed in
               if (hardFormatting == null) {
-                hardFormatting = new HashMap<String, Object>();
+                hardFormatting = new HashMap<>();
               }
             }
             if (!hardFormatting.containsKey("row")) {
@@ -1173,7 +1173,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
               // templateStyleId should be placed in
               if (hardFormatting == null || !hardFormatting.containsKey("cell")) {
                 if (hardFormatting == null) {
-                  hardFormatting = new HashMap<String, Object>();
+                  hardFormatting = new HashMap<>();
                 }
               }
               JSONObject cellProps = (JSONObject) hardFormatting.get("cell");
@@ -1345,7 +1345,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
           }
         }
         if (mColumns == null) {
-          mColumns = new ArrayList<TableTableColumnElement>();
+          mColumns = new ArrayList<>();
         }
         mColumns.add(column);
       } else if (element instanceof TextListElement) {
@@ -1501,7 +1501,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
         int childNo = frameProps.incrementChildNumber();
         if (childNo == 1) {
 
-          Map<String, Object> hardFormatting = new HashMap<String, Object>();
+          Map<String, Object> hardFormatting = new HashMap<>();
           hardFormatting.putAll(frameProps.getShapeHardFormatting());
           JSONObject drawingProps = (JSONObject) hardFormatting.get("drawing");
           JSONObject imageProps = (JSONObject) hardFormatting.get("image");
@@ -1816,7 +1816,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                       // if there are absolute styles, but not the main property set, where the
                       // templateStyleId should be placed in
                       if (hardFormatting == null) {
-                        hardFormatting = new HashMap<String, Object>();
+                        hardFormatting = new HashMap<>();
                       }
                     }
                     if (s.hasUrl()) {
@@ -1904,7 +1904,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
                   newOp.mStart.remove(0);
                 }
 
-                ArrayList<Object> componentProperties = new ArrayList<Object>();
+                ArrayList<Object> componentProperties = new ArrayList<>();
                 int propIndex = 0;
                 while (newOp.mComponentProperties.length > propIndex
                     && newOp.mComponentProperties[propIndex] != null) {
@@ -2445,12 +2445,12 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
   //    private List<CachedTable> mTableStack;
   //    boolean mWithinTable = false; //TODO: Detect via type of top element of mComponentStack
   // private int mNumberOfNestedTables = 0;
-  Stack<CachedComponent> mComponentStack = new Stack<CachedComponent>();
+  Stack<CachedComponent> mComponentStack = new Stack<>();
   // cache objects bound to page that are on top level of the document
-  ArrayDeque<ShapeProperties> m_cachedPageShapes = new ArrayDeque<ShapeProperties>();
+  ArrayDeque<ShapeProperties> m_cachedPageShapes = new ArrayDeque<>();
   boolean mPageBoundObjectsRelocated = false;
   HashMap<String, Integer> mTopLevelTables =
-      new HashMap<String, Integer>(); // mapping of spreadsheet index to their names
+    new HashMap<>(); // mapping of spreadsheet index to their names
 
   @SuppressWarnings("unchecked")
   public void cacheOperation(
@@ -2828,7 +2828,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
         if (putPageBreak && isParagraphOperation) {
           JSONObject paraProps = null;
           if (operation.mHardFormattingProperties == null) {
-            operation.mHardFormattingProperties = new HashMap<String, Object>();
+            operation.mHardFormattingProperties = new HashMap<>();
           }
           if (!operation.mHardFormattingProperties.containsKey("paragraph")) {
             paraProps = new JSONObject();

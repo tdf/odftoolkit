@@ -59,7 +59,7 @@ public class RoundtripTest extends RoundtripTestHelper {
 
   @Parameters(name = "Test# {index}: {0}")
   public static Collection<Object[]> data() {
-    Collection<Object[]> testSuiteData = new ArrayList<Object[]>();
+    Collection<Object[]> testSuiteData = new ArrayList<>();
     addFilesFromFolder(new File(TEST_INPUT_DIR), testSuiteData);
     return testSuiteData;
   }

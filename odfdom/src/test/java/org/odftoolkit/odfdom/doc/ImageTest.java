@@ -115,18 +115,18 @@ public class ImageTest {
     OdfDocument doc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("image.odt"));
     final OdfPackage pkg = doc.getPackage();
     NodeAction<?> removeImages =
-        new NodeAction<Object>() {
+      new NodeAction<>() {
 
-          @Override
-          protected void apply(Node node, Object arg, int depth) {
-            if (node instanceof OdfDrawImage) {
-              OdfDrawImage img = (OdfDrawImage) node;
-              String ref = img.getAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
-              pkg.remove(ref);
-              img.getParentNode().removeChild(img);
-            }
+        @Override
+        protected void apply(Node node, Object arg, int depth) {
+          if (node instanceof OdfDrawImage) {
+            OdfDrawImage img = (OdfDrawImage) node;
+            String ref = img.getAttributeNS(OdfDocumentNamespace.XLINK.getUri(), "href");
+            pkg.remove(ref);
+            img.getParentNode().removeChild(img);
           }
-        };
+        }
+      };
     removeImages.performAction(doc.getContentDom().getDocumentElement(), null);
     pkg.save(ResourceUtilities.getTestOutputFile("remove-images_output.odt"));
   }

@@ -594,7 +594,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
     if (desiredMediaType != null) {
       wantedMediaString = desiredMediaType.getMediaTypeString();
     }
-    Map<String, OdfDocument> embeddedObjectsMap = new HashMap<String, OdfDocument>();
+    Map<String, OdfDocument> embeddedObjectsMap = new HashMap<>();
     // check manifest for current embedded OdfPackageDocuments
     Set<String> manifestEntries = mPackage.getFilePaths();
     for (String path : manifestEntries) {
@@ -881,7 +881,7 @@ public abstract class OdfDocument extends OdfSchemaDocument {
     List<OdfTable> tableList = null;
     try {
       List<TableTableElement> tableElementList = getTables(doRecursiveSearch);
-      tableList = new ArrayList<OdfTable>(tableElementList.size());
+      tableList = new ArrayList<>(tableElementList.size());
       for (int i = 0; i < tableElementList.size(); i++) {
         tableList.add(OdfTable.getInstance(tableElementList.get(i)));
       }
@@ -1213,14 +1213,14 @@ public abstract class OdfDocument extends OdfSchemaDocument {
    */
   public Set<String> getFontNames() {
     if (mFontNames == null) {
-      mFontNames = new HashSet<String>();
+      mFontNames = new HashSet<>();
     }
     return mFontNames;
   }
 
   public void addAnnotation(String name, OfficeAnnotationElement element) {
     if (annotations == null) {
-      annotations = new HashMap<String, OfficeAnnotationElement>();
+      annotations = new HashMap<>();
     }
     annotations.put(name, element);
   }

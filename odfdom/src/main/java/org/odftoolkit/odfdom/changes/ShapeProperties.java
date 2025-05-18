@@ -66,9 +66,9 @@ public class ShapeProperties extends CachedComponent {
   //        }
   public ShapeProperties(List<Integer> start, Map<String, Object> hardFormatations) {
     // Maps are being reused, for upcoming components, therefore the collections have to be cloned
-    mShapePosition = new ArrayList<Integer>(start);
+    mShapePosition = new ArrayList<>(start);
     if (hardFormatations != null) {
-      mShapeHardFormatations = new HashMap<String, Object>();
+      mShapeHardFormatations = new HashMap<>();
       mShapeHardFormatations.putAll(hardFormatations);
       JSONObject originalDrawingProps = (JSONObject) hardFormatations.get("drawing");
       // Unfortunately the JSON lib being used, does not support deep cloning

@@ -661,7 +661,7 @@ public class EditingRegressionTest extends RoundtripTestHelper {
     final String SOURCE_FILE_NAME_TRUNC = "image-attributes";
     final String UID = "d03f7d7218eb";
     final String INTERNAL_IMAGE_PATH = "Pictures/uid" + UID + ".jpg";
-    Map<Long, byte[]> resourceMap = new HashMap<Long, byte[]>();
+    Map<Long, byte[]> resourceMap = new HashMap<>();
     byte[] imageBytes = null;
     try {
       imageBytes =

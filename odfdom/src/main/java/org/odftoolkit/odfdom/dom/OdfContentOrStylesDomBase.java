@@ -39,7 +39,7 @@ public class OdfContentOrStylesDomBase extends OdfFileDom {
   private static final long serialVersionUID = 6823264460360047745L;
 
   IdentityHashMap<TableTableElement, OdfTable> mTableRepository =
-      new IdentityHashMap<TableTableElement, OdfTable>();
+          new IdentityHashMap<>();
 
   public OdfContentOrStylesDomBase(OdfPackageDocument packageDocument, String packagePath) {
     super(packageDocument, packagePath);

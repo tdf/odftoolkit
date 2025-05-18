@@ -69,7 +69,7 @@ public class ODFValidationResult
 
   public void foreignElementDetected(
       String aUri, String aLocalName, String aQName, Attributes aAtts) {
-    if (m_aForeignElementMap == null) m_aForeignElementMap = new HashMap<String, Long>();
+    if (m_aForeignElementMap == null) m_aForeignElementMap = new HashMap<>();
 
     Long aCount = m_aForeignElementMap.get(aUri);
     if (aCount == null) aCount = 0L;
@@ -78,7 +78,7 @@ public class ODFValidationResult
 
   public void foreignAttributeDetected(
       String aUri, String aLocalName, String aQName, String aValue) {
-    if (m_aForeignAttributeMap == null) m_aForeignAttributeMap = new HashMap<String, Long>();
+    if (m_aForeignAttributeMap == null) m_aForeignAttributeMap = new HashMap<>();
 
     Long aCount = m_aForeignAttributeMap.get(aUri);
     if (aCount == null) aCount = 0L;

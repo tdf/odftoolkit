@@ -88,7 +88,7 @@ public class Main {
         nLogLevel = CommandLineLogger.INFO;
       } else if (aArg.equals("-x")) {
         if (aArgIter.hasNext()) {
-          if (aExtractFileNames == null) aExtractFileNames = new Vector<String>();
+          if (aExtractFileNames == null) aExtractFileNames = new Vector<>();
           aExtractFileNames.add(aArgIter.next());
         } else bCommandLineValid = false;
       } else if (aArg.startsWith("-")) {
@@ -104,7 +104,7 @@ public class Main {
           && aOutputName == null) {
         aOutputName = aArg;
       } else if (aArg.indexOf('=') != -1) {
-        if (aParams == null) aParams = new Vector<XSLTParameter>();
+        if (aParams == null) aParams = new Vector<>();
         aParams.add(new XSLTCommandLineParameter(aArg));
       } else {
         bCommandLineValid = false;
