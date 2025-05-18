@@ -142,7 +142,7 @@ import java.util.logging.Logger;
  * scheme-specific part, and possibly a fragment, but has no other components. A hierarchical URI
  * always has a path (though it may be empty) and a scheme-specific-part (which at least contains
  * the path), and may have any of the other components. If the authority component is present and is
- * server-based then the host component will be defined and the user-information and port components
+ * server-based, then the host component will be defined and the user-information and port components
  * may be defined.
  *
  * <p>See <a href="http://www.isi.edu/in-notes/rfc2396.txt"><i>RFC&nbsp;2396: Uniform Resource
