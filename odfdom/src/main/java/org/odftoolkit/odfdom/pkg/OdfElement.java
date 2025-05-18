@@ -663,7 +663,7 @@ public abstract class OdfElement extends ElementNSImpl {
     int attr_count1 = attributes.getLength();
     int attr_count2 = compare.attributes.getLength();
 
-    List<Node> attr1 = new ArrayList<Node>();
+    List<Node> attr1 = new ArrayList<>();
     for (int i = 0; i < attr_count1; i++) {
       Node node = attributes.item(i);
       if (node.getNodeValue().length() == 0) {
@@ -672,7 +672,7 @@ public abstract class OdfElement extends ElementNSImpl {
       attr1.add(node);
     }
 
-    List<Node> attr2 = new ArrayList<Node>();
+    List<Node> attr2 = new ArrayList<>();
     for (int i = 0; i < attr_count2; i++) {
       Node node = compare.attributes.item(i);
       if (node.getNodeValue().length() == 0) {
@@ -722,7 +722,7 @@ public abstract class OdfElement extends ElementNSImpl {
       return true;
     }
 
-    List<Node> nodes1 = new ArrayList<Node>();
+    List<Node> nodes1 = new ArrayList<>();
     for (int i = 0; i < child_count1; i++) {
       Node node = childs1.item(i);
       if (node.getNodeType() == Node.TEXT_NODE) {
@@ -733,7 +733,7 @@ public abstract class OdfElement extends ElementNSImpl {
       nodes1.add(node);
     }
 
-    List<Node> nodes2 = new ArrayList<Node>();
+    List<Node> nodes2 = new ArrayList<>();
     for (int i = 0; i < child_count2; i++) {
       Node node = childs2.item(i);
       if (node.getNodeType() == Node.TEXT_NODE) {
@@ -1246,7 +1246,7 @@ public abstract class OdfElement extends ElementNSImpl {
       LOG.warning("A negative index " + textPosStart + " was given to insert text into the paragraph!");
     }
     // start recrusion
-    ArrayList<Node> nodeContainer = new ArrayList<Node>(1);
+    ArrayList<Node> nodeContainer = new ArrayList<>(1);
     boolean withinTextContainer = this instanceof TextPElement || this instanceof TextHElement;
     TextContentTraverser.traverseSiblings(
         this.getFirstChild(),
@@ -1393,7 +1393,7 @@ public abstract class OdfElement extends ElementNSImpl {
         this.appendChild((Element) content);
       }
     } else {
-      List<Object> newData = new ArrayList<Object>(2);
+      List<Object> newData = new ArrayList<>(2);
       newData.add(content);
       int currentPos =
           TextContentTraverser.traverseSiblings(

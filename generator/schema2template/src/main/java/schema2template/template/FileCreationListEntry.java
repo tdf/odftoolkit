@@ -55,7 +55,7 @@ public class FileCreationListEntry {
    */
   public FileCreationListEntry(EntryType type, int lineNumber) {
     mType = type;
-    mAttributes = new HashMap<String, String>();
+    mAttributes = new HashMap<>();
     mLineNumber = lineNumber;
   }
 

@@ -34,8 +34,8 @@ public class NamespaceDictionary {
 
   /** Construct a new empty dictionary */
   public NamespaceDictionary() {
-    uri2local = new HashMap<String, String>();
-    local2uri = new HashMap<String, String>();
+    uri2local = new HashMap<>();
+    local2uri = new HashMap<>();
   }
 
   /**

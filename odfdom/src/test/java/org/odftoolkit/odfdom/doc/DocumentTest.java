@@ -513,7 +513,7 @@ public class DocumentTest {
 
     // TESTDOC1: Expected ODF FatalErrors
     Map<ValidationConstraint, Integer> expectedFatalErrors1 =
-        new HashMap<ValidationConstraint, Integer>();
+      new HashMap<>();
     expectedFatalErrors1.put(OdfSchemaConstraint.DOCUMENT_WITHOUT_ODF_MIMETYPE, 1);
 
     ErrorHandlerStub handler1 =

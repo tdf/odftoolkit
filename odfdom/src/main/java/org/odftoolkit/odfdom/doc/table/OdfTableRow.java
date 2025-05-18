@@ -288,7 +288,7 @@ public class OdfTableRow {
    */
   public int getCellCount() {
     OdfTable table = getTable();
-    Set<OdfTableCell> realCells = new HashSet<OdfTableCell>();
+    Set<OdfTableCell> realCells = new HashSet<>();
     List<CellCoverInfo> coverList =
         table.getCellCoverInfos(0, 0, table.getColumnCount() - 1, table.getRowCount() - 1);
     int rowIndex = getRowIndex();

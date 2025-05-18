@@ -98,7 +98,7 @@ public class Table<T> extends Component {
   // Svante ToDo: After all the refactoring this looks like something to change after the release as
   // well.
   private List<Component> list(final Table tableComponent) {
-    return new AbstractList<Component>() {
+    return new AbstractList<>() {
       @Override
       public int size() {
         return tableComponent.size();
@@ -333,7 +333,7 @@ public class Table<T> extends Component {
   /** OH PLEASE DELETE ME AFTER THE API WAS FIXED */
   public void pushTableGrid(JSONArray tableGrid) {
     if (mColumnWidthCache == null) {
-      mColumnWidthCache = new ArrayList<JSONArray>();
+      mColumnWidthCache = new ArrayList<>();
     }
     mColumnWidthCache.add(tableGrid);
   }
@@ -373,7 +373,7 @@ public class Table<T> extends Component {
 
   public void replaceLastTableGrid(JSONArray tableGrid) {
     if (mColumnWidthCache == null) {
-      mColumnWidthCache = new ArrayList<JSONArray>();
+      mColumnWidthCache = new ArrayList<>();
       mColumnWidthCache.add(tableGrid);
     } else if (mColumnWidthCache.size() > 0) {
       mColumnWidthCache.remove(mColumnWidthCache.size() - 1);

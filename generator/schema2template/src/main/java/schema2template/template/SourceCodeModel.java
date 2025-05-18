@@ -65,15 +65,15 @@ public class SourceCodeModel {
     mElementNameBaseNameMap = elementNameBaseNameMap;
     mBaseNameElementNameMap = invertMap(elementNameBaseNameMap);
     // Intermediate Step -> get all baseNames
-    SortedSet<String> baseNames = new TreeSet<String>(elementNameBaseNameMap.values());
+    SortedSet<String> baseNames = new TreeSet<>(elementNameBaseNameMap.values());
 
     // Intermediate Step -> get all childOfBaseElement Definitions for each baseName
     Map<String, SortedSet<PuzzlePiece>> baseNameElementsMap =
-        new HashMap<String, SortedSet<PuzzlePiece>>(baseNames.size());
+      new HashMap<>(baseNames.size());
     for (Map.Entry<String, String> entry : elementNameBaseNameMap.entrySet()) {
       String elementName = entry.getKey();
       String baseName = entry.getValue();
-        SortedSet<PuzzlePiece> elements = baseNameElementsMap.computeIfAbsent(baseName, k -> new TreeSet<PuzzlePiece>());
+        SortedSet<PuzzlePiece> elements = baseNameElementsMap.computeIfAbsent(baseName, k -> new TreeSet<>());
         PuzzleComponent childElement = schemaModel.getElement(elementName);
       if (childElement != null) {
         if (childElement instanceof Collection) {
@@ -87,8 +87,8 @@ public class SourceCodeModel {
     }
 
     // Generate all base classes (additional intermediate step: register them)
-    mBaseNameToBaseClass = new HashMap<String, SourceCodeBaseClass>(baseNames.size());
-    mBaseClasses = new TreeSet<SourceCodeBaseClass>();
+    mBaseNameToBaseClass = new HashMap<>(baseNames.size());
+    mBaseClasses = new TreeSet<>();
     for (String baseName : baseNames) {
       SourceCodeBaseClass javabaseclass =
           new SourceCodeBaseClass(baseName, baseNameElementsMap.get(baseName));
@@ -97,7 +97,7 @@ public class SourceCodeModel {
     }
 
     // Generate a map from element tag name to base classes
-    mElementBaseMap = new HashMap<String, SourceCodeBaseClass>(elementNameBaseNameMap.size());
+    mElementBaseMap = new HashMap<>(elementNameBaseNameMap.size());
     for (Map.Entry<String, String> entry : elementNameBaseNameMap.entrySet()) {
       String baseName = entry.getValue();
       SourceCodeBaseClass baseclass = mBaseNameToBaseClass.get(baseName);
@@ -137,7 +137,7 @@ public class SourceCodeModel {
   private static <V, K> Map<V, K> invertMap(Map<K, V> map) {
     Map<V, K> inversedMap = null;
     if (map != null && !map.isEmpty()) {
-      inversedMap = new HashMap<V, K>();
+      inversedMap = new HashMap<>();
       for (Map.Entry<K, V> entry : map.entrySet()) {
         if (!inversedMap.containsKey(entry.getKey())) {
           inversedMap.put(entry.getValue(), entry.getKey());
@@ -281,7 +281,7 @@ public class SourceCodeModel {
   public SortedSet<String> getValuetypes(PuzzleComponent datatypes) {
     SortedSet<String> retval = null;
     if (datatypes != null) {
-      retval = new TreeSet<String>();
+      retval = new TreeSet<>();
       for (PuzzlePiece datatype : datatypes.getCollection()) {
         String datatypename = datatype.getQName();
         String[] tuple = mDataTypeValueAndConversionMap.get(datatypename);

@@ -35,7 +35,7 @@ import org.w3c.dom.NodeList;
 public class OdfPresentationNotes {
   PresentationNotesElement maNoteElement;
   private static Hashtable<PresentationNotesElement, OdfPresentationNotes> maNotesRepository =
-      new Hashtable<PresentationNotesElement, OdfPresentationNotes>();
+          new Hashtable<>();
 
   private OdfPresentationNotes(PresentationNotesElement noteElement) {
     maNoteElement = noteElement;

@@ -465,7 +465,7 @@ public abstract class OdfStylableElement extends OdfElement implements OdfStyleP
    */
   @Override
   public Map<OdfStyleProperty, String> getProperties(Set<OdfStyleProperty> properties) {
-    HashMap<OdfStyleProperty, String> map = new HashMap<OdfStyleProperty, String>();
+    HashMap<OdfStyleProperty, String> map = new HashMap<>();
     for (OdfStyleProperty property : properties) {
       map.put(property, getProperty(property));
     }

@@ -30,7 +30,7 @@ import org.odftoolkit.odfdom.pkg.OdfElement;
 public class TextFieldSelection extends TextSelection {
 
   private String mReplacementText;
-  private final Map<String, Object> mAttrs = new HashMap<String, Object>();
+  private final Map<String, Object> mAttrs = new HashMap<>();
 
   /**
    * Constructor.

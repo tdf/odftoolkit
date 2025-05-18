@@ -35,7 +35,7 @@ public class OdfName implements Comparable<OdfName> {
   private final String mLocalName;
   private final String mQName;
   private final String mExpandedName; // i.e. {nsURI}localName
-  private static HashMap<String, OdfName> mOdfNames = new HashMap<String, OdfName>();
+  private static HashMap<String, OdfName> mOdfNames = new HashMap<>();
 
   private OdfName(OdfNamespace ns, String localname, String expandedName) {
     mNS = ns;

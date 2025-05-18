@@ -53,7 +53,7 @@ public class OdfAttributeTaglet implements Taglet {
       "../../../../../resources/OpenDocument-v1.2-part3.html";
   private static String mOdfSpecPart1Path = null;
   private static String mOdfSpecPart3Path = null;
-  private static Set<String> mNS_IN_PART3 = new HashSet<String>();
+  private static Set<String> mNS_IN_PART3 = new HashSet<>();
 
   // initial attribute set which should be search in part3.
   static {

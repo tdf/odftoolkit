@@ -818,7 +818,7 @@ public class Component {
   public void addChild(int index, Component c) {
     if (mChildren == null) {
       if (mChildren == null) {
-        mChildren = new ArrayList<Component>();
+        mChildren = new ArrayList<>();
       }
     }
     if (index >= 0) {
@@ -977,7 +977,7 @@ public class Component {
   public static Map<String, OdfStylePropertiesSet> getAllStyleGroupingIdProperties(
       OdfStyleFamily styleFamily) {
     Map<String, OdfStylePropertiesSet> familyProperties =
-        new HashMap<String, OdfStylePropertiesSet>();
+      new HashMap<>();
     if (styleFamily.equals(OdfStyleFamily.Paragraph)) {
       familyProperties.put("paragraph", OdfStylePropertiesSet.ParagraphProperties);
       familyProperties.put("character", OdfStylePropertiesSet.TextProperties);

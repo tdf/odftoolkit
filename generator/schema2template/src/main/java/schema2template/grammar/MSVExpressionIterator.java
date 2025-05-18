@@ -126,10 +126,10 @@ public final class MSVExpressionIterator implements Iterator<Expression> {
 
     // create helpers
     mVisitor = new MSVExpressionVisitorChildren();
-    mKnownElementExpressions = new HashSet<Expression>();
+    mKnownElementExpressions = new HashSet<>();
 
     // Initialize status
-    mAncestorsAndCurrent = new Stack<UniqueAncestor>();
+    mAncestorsAndCurrent = new Stack<>();
     mAncestorsAndCurrent.push(new UniqueAncestor(root, 0));
 
     // make sure that there is at least one desired expression - for hasNext()

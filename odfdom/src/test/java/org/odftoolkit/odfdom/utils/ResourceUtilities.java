@@ -51,7 +51,7 @@ public final class ResourceUtilities {
   static final String RELOADED_OPS_SUFFIX = "-reloaded_ops.json";
   static final String HYPEN = "-";
   static final String ODT_SUFFIX = ".odt";
-  static final List<String> NO_OPERATIONS = new ArrayList<String>(0);
+  static final List<String> NO_OPERATIONS = new ArrayList<>(0);
   static final String NO_METHOD_NAME = "";
   // the smallest possible test document of this ODF type. Edited manually and proofed valid by
   // Apache ODF Validator.

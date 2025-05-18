@@ -265,7 +265,7 @@ class RoundtripTestHelper {
         testFile = ResourceUtilities.getTestInputFile(testFileNameTrunc + testfileNameSuffix);
       }
       FileInputStream fis = new FileInputStream(testFile);
-      Map<String, Object> configuration = new HashMap<String, Object>();
+      Map<String, Object> configuration = new HashMap<>();
       configuration.put(CONFIG_MAX_TABLE_COLUMNS, 0);
       configuration.put(CONFIG_MAX_TABLE_CELLS, 0);
       configuration.put(CONFIG_MAX_TABLE_ROWS, 0);
@@ -402,7 +402,7 @@ class RoundtripTestHelper {
         FileInputStream emptyDocFis = null;
         emptyDocFis =
             new FileInputStream(ResourceUtilities.getTestInputFile(EMPTY_AS_CAN_BE + ODT_SUFFIX));
-        Map<String, Object> configuration = new HashMap<String, Object>();
+        Map<String, Object> configuration = new HashMap<>();
         configuration.put("debugoperations", operationDebugMode);
         if (resourceMap != null) {
           emptyDoc = new CollabTextDocument(emptyDocFis, resourceMap, configuration);

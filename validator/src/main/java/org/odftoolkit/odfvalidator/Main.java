@@ -65,7 +65,7 @@ public class Main {
     boolean bRecursive = false;
     Logger.LogLevel nLogLevel = Logger.LogLevel.ERROR;
     OdfValidatorMode eMode = OdfValidatorMode.VALIDATE;
-    List<String> aFileNames = new Vector<String>();
+    List<String> aFileNames = new Vector<>();
     OdfVersion aVersion = null;
 
     boolean bCommandLineValid = true;

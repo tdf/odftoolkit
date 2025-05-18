@@ -78,7 +78,7 @@ class URIExtractorImpl implements URIExtractor {
 
   public List<String> getURIs(StartElement element, Attribute attr, EvalContext context) {
 
-    List<String> uris = new ArrayList<String>();
+    List<String> uris = new ArrayList<>();
 
     String[] curies = attr.getValue().split("\\s+");
     boolean permitReserved =
@@ -124,7 +124,7 @@ class URIExtractorImpl implements URIExtractor {
       namespaceURI = element.getNamespaceURI(prefix);
       if (isForSAX) {
         if (namespaceURI != null) {
-          if (xmlnsMap == Collections.EMPTY_MAP) xmlnsMap = new HashMap<String, String>();
+          if (xmlnsMap == Collections.EMPTY_MAP) xmlnsMap = new HashMap<>();
           xmlnsMap.put(prefix, namespaceURI);
         }
       } else {
@@ -171,7 +171,7 @@ class URIExtractorImpl implements URIExtractor {
   }
 
   public void setNamespaceURI(String prefix, String namespaceURI) {
-    if (xmlnsMap == Collections.EMPTY_MAP) xmlnsMap = new HashMap<String, String>();
+    if (xmlnsMap == Collections.EMPTY_MAP) xmlnsMap = new HashMap<>();
     xmlnsMap.put(prefix, namespaceURI);
   }
 }

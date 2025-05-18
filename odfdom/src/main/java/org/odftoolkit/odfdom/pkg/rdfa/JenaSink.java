@@ -46,12 +46,12 @@ public class JenaSink implements StatementSink {
 
   public JenaSink(OdfFileDom mFileDom) {
     this.mFileDom = mFileDom;
-    this.bnodeLookup = new HashMap<String, Resource>();
+    this.bnodeLookup = new HashMap<>();
   }
 
   // @Override
   public void start() {
-    bnodeLookup = new HashMap<String, Resource>();
+    bnodeLookup = new HashMap<>();
   }
 
   // @Override

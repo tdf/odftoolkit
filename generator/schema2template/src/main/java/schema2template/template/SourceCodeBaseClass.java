@@ -101,7 +101,7 @@ public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass> {
    */
   public PuzzlePieceSet getBaseAttributes() {
     SortedSet<PuzzlePiece> attributes =
-        new TreeSet<PuzzlePiece>(mChildElementsOfBaseClass.last().getAttributes());
+      new TreeSet<>(mChildElementsOfBaseClass.last().getAttributes());
     for (PuzzlePiece childElement :
         mChildElementsOfBaseClass.headSet(mChildElementsOfBaseClass.last())) {
       attributes.retainAll(childElement.getAttributes());
@@ -116,7 +116,7 @@ public class SourceCodeBaseClass implements Comparable<SourceCodeBaseClass> {
    */
   public PuzzlePieceSet getBaseElements() {
     SortedSet<PuzzlePiece> elements =
-        new TreeSet<PuzzlePiece>(mChildElementsOfBaseClass.last().getChildElements());
+            new TreeSet<>(mChildElementsOfBaseClass.last().getChildElements());
     for (PuzzlePiece childElement :
         mChildElementsOfBaseClass.headSet(mChildElementsOfBaseClass.last())) {
       elements.retainAll(childElement.getChildElements());

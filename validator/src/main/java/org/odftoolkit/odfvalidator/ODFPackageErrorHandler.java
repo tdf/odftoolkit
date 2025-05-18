@@ -35,7 +35,7 @@ import org.xml.sax.SAXParseException;
 
 class ODFPackageErrorHandler implements ErrorHandler {
 
-  List<SAXParseException> m_aExceptionList = new ArrayList<SAXParseException>();
+  List<SAXParseException> m_aExceptionList = new ArrayList<>();
 
   ODFPackageErrorHandler() {}
 

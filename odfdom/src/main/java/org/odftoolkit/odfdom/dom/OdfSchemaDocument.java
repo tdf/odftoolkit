@@ -658,7 +658,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
   // ToDo: Instead of a method to receive all possible feature/components on the document, there
   // might be a generic or one each element?
   public List<TableTableElement> getTables(boolean deepSearch) {
-    List<TableTableElement> tableList = new ArrayList<TableTableElement>();
+    List<TableTableElement> tableList = new ArrayList<>();
     try {
       // find tables from content.xml
       OfficeBodyElement officeBody =

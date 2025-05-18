@@ -68,7 +68,7 @@ public class Configuration extends Properties {
   }
 
   public List<String> getListPropety(String aPropNamePrefix) {
-    TreeSet<String> aSortedPropNames = new TreeSet<String>();
+    TreeSet<String> aSortedPropNames = new TreeSet<>();
     Enumeration<?> aPropNames = propertyNames();
     while (aPropNames.hasMoreElements()) {
       String aPropName = (String) aPropNames.nextElement();

@@ -41,7 +41,7 @@ public class OdfStyleProperty implements Comparable<OdfStyleProperty> {
     m_name = name;
   }
 
-  private static TreeSet<OdfStyleProperty> m_styleProperties = new TreeSet<OdfStyleProperty>();
+  private static TreeSet<OdfStyleProperty> m_styleProperties = new TreeSet<>();
 
   /**
    * Looks if an OdfStyleProperty is already listed in the static sytleProperties set, otherwise

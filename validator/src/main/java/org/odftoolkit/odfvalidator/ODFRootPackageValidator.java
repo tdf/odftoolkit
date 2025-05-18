@@ -148,7 +148,7 @@ abstract class ODFRootPackageValidator extends ODFPackageValidator
   public void foundManifestEntry(ManifestEntry aManifestEntry) {
     if (aManifestEntry.isOpenDocumentMediaType()) {
       if (m_aSubDocs == null) {
-        m_aSubDocs = new ArrayList<ManifestEntry>();
+        m_aSubDocs = new ArrayList<>();
       }
       m_aSubDocs.add(aManifestEntry);
     }

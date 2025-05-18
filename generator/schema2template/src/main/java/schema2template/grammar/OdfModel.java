@@ -121,7 +121,7 @@ public class OdfModel {
    * @return list of style family names
    */
   public List<String> getStyleFamilies(PuzzleComponent element) {
-    List<String> retval = new ArrayList<String>();
+    List<String> retval = new ArrayList<>();
     if (mNameToFamiliesMap.containsKey(element.getQName())) {
       retval.addAll(mNameToFamiliesMap.get(element.getQName()));
     }
@@ -135,11 +135,11 @@ public class OdfModel {
    */
   public SortedSet<String> getStyleFamilies() {
     Iterator<List<String>> iter = mNameToFamiliesMap.values().iterator();
-    List<String> families = new ArrayList<String>();
+    List<String> families = new ArrayList<>();
     while (iter.hasNext()) {
       families.addAll(iter.next());
     }
-    return new TreeSet<String>(families);
+    return new TreeSet<>(families);
   }
 
   /**

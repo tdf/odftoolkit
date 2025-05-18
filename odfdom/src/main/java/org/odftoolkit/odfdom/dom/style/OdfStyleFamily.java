@@ -40,8 +40,8 @@ import org.odftoolkit.odfdom.dom.style.props.OdfStyleProperty;
 public class OdfStyleFamily implements Comparable<OdfStyleFamily> {
 
   private String m_name;
-  private Set<OdfStyleProperty> m_properties = new TreeSet<OdfStyleProperty>();
-  private static Map<String, OdfStyleFamily> m_familyByName = new HashMap<String, OdfStyleFamily>();
+  private Set<OdfStyleProperty> m_properties = new TreeSet<>();
+  private static Map<String, OdfStyleFamily> m_familyByName = new HashMap<>();
 
   public static OdfStyleFamily getByName(String name) {
     return m_familyByName.get(name);

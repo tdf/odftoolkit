@@ -206,8 +206,8 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
    * @param element the ODF element whose text would be extracted.
    */
   private BookmarkRDFMetadataExtractor() {
-    builderMap = new HashMap<TextBookmarkStartElement, ExtractorStringBuilder>();
-    stringMap = new HashMap<TextBookmarkStartElement, String>();
+    builderMap = new HashMap<>();
+    stringMap = new HashMap<>();
   }
 
   /**
