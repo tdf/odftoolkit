@@ -51,8 +51,8 @@ import org.w3c.dom.DOMException;
 public class OdfXMLFactory {
 
   private static final Logger LOG = Logger.getLogger(OdfXMLFactory.class.getName());
-  private static ConcurrentMap<OdfName, Class> mElementTypes = new ConcurrentHashMap<>();
-  private static ConcurrentMap<OdfName, Class> mAttributeTypes = new ConcurrentHashMap<>();
+  private static ConcurrentMap<OdfName, Class<?>> mElementTypes = new ConcurrentHashMap<>();
+  private static ConcurrentMap<OdfName, Class<?>> mAttributeTypes = new ConcurrentHashMap<>();
   private static final Map<String, String> mElementRenames =
       Map.of(
           "text:h", "text:heading",
@@ -96,7 +96,7 @@ public class OdfXMLFactory {
    * @param odfName the name of the ODF attribute the desired DOM class should represent.
    * @return the Java DOM attribute class to be mapped to a certain ODF attribute.
    */
-  private static Class getOdfAttributeClass(OdfName odfName) {
+  private static Class<?> getOdfAttributeClass(OdfName odfName) {
     return getOdfNodeClass(odfName, ATTRIBUTE_PACKAGE_NAME, mAttributeTypes);
   }
 
@@ -104,13 +104,13 @@ public class OdfXMLFactory {
    * @param odfName the name of the ODF element the desired DOM class should represent.
    * @return the Java DOM element class to be mapped to a certain ODF element.
    */
-  private static Class getOdfElementClass(OdfName odfName) {
+  private static Class<?> getOdfElementClass(OdfName odfName) {
     return getOdfNodeClass(odfName, ELEMENT_PACKAGE_NAME, mElementTypes);
   }
 
-  private static Class getOdfNodeClass(
-      OdfName odfName, String nodeType, ConcurrentMap<OdfName, Class> classCache) {
-    Class c = null;
+  private static Class<?> getOdfNodeClass(
+      OdfName odfName, String nodeType, ConcurrentMap<OdfName, Class<?>> classCache) {
+    Class<?> c = null;
     String className = "";
 
     c = classCache.get(odfName);
@@ -215,7 +215,7 @@ public class OdfXMLFactory {
     OdfElement element = null;
 
     // lookup registered element class for qname
-    Class elementClass = getOdfElementClass(name);
+    Class<?> elementClass = getOdfElementClass(name);
 
     // if a class was registered create an instance of that class
     if (elementClass != null) {
@@ -253,7 +253,7 @@ public class OdfXMLFactory {
     // SJ: but there exists elements & attributes having the same qName ("style:style")
     // so it is not ensured to get a OdfAttribute ... in case of "style:style" you get a
     // OdfStyle which is not a OdfAttribute :-(
-    Class attributeClass = getOdfAttributeClass(name);
+    Class<?> attributeClass = getOdfAttributeClass(name);
 
     // if a class was registered create an instance of that class
     if (attributeClass != null) {
@@ -294,10 +294,10 @@ public class OdfXMLFactory {
    * @return an object instance of the XML node class being provided (usually an attribute or
    *     element).
    */
-  static Object getNodeFromClass(OdfFileDom dom, Class nodeClass) {
+  static Object getNodeFromClass(OdfFileDom dom, Class<?> nodeClass) {
     Object o = null;
     try {
-      Constructor ctor = nodeClass.getConstructor(new Class[] {OdfFileDom.class});
+      Constructor<?> ctor = nodeClass.getConstructor(new Class[] {OdfFileDom.class});
       o = ctor.newInstance(new Object[] {dom});
     } catch (Exception cause) {
       // an exception at this point is a bug. Throw an Error

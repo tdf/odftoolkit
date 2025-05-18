@@ -893,7 +893,7 @@ public class JsonOperationConsumer {
     // DELETING TEXT
     if (parentComponent instanceof TextContainer) {
       int pos = start.optInt(start.length() - 1);
-      ((TextContainer) parentComponent).removeText(pos, pos + 1);
+      ((TextContainer<?>) parentComponent).removeText(pos, pos + 1);
     } else {
       // DELETING COMPONENT
       try {
@@ -919,13 +919,13 @@ public class JsonOperationConsumer {
             TableTableElement tableElement = (TableTableElement) tableComponent.mRootElement;
 
             // WORK AROUND for "UNDO COLUMN WIDTH" problem
-            if (((Table) tableElement.getComponent()).isWidthChangeRequired()) {
+            if (((Table<?>) tableElement.getComponent()).isWidthChangeRequired()) {
               // INSERT COLUMN
               // Returns all TableTableColumn descendants that exist within the tableElement, even
               // within groups, columns and header elements
               OdfTable table = OdfTable.getInstance(tableElement);
               table.removeColumnsByIndex(endPos, deletionCount - 1 + endPos, true);
-              ((Table) tableElement.getComponent()).hasChangedWidth();
+              ((Table<?>) tableElement.getComponent()).hasChangedWidth();
             }
           }
           if (repetition > 1) {
@@ -1249,17 +1249,17 @@ public class JsonOperationConsumer {
       OdfTable table = OdfTable.getInstance(tableElement);
 
       // WORK AROUND for "UNDO COLUMN WIDTH" problem
-      if (!((Table) tableElement.getComponent()).isWidthChangeRequired()) {
+      if (!((Table<?>) tableElement.getComponent()).isWidthChangeRequired()) {
         Table.stashColumnWidths(tableElement);
       }
       table.removeColumnsByIndex(startGrid, endGrid - startGrid + 1);
 
       // WORK AROUND for "UNDO COLUMN WIDTH" problem (see JsonOperationConsumer for further changes)
-      if (((Table) tableElement.getComponent()).isWidthChangeRequired()) {
+      if (((Table<?>) tableElement.getComponent()).isWidthChangeRequired()) {
         JsonOperationConsumer.setColumnsWidth(
             tableElement.getComponent(),
-            ((Table) tableElement.getComponent()).getPosition(),
-            ((Table) tableElement.getComponent()).popTableGrid(),
+            ((Table<?>) tableElement.getComponent()).getPosition(),
+            ((Table<?>) tableElement.getComponent()).popTableGrid(),
             true);
       }
     }
@@ -2983,7 +2983,7 @@ public class JsonOperationConsumer {
           } else {
             endPos = startPos;
           }
-          ((TextContainer) parentComponent).removeText(startPos, endPos);
+          ((TextContainer<?>) parentComponent).removeText(startPos, endPos);
           // LO let the value attribute overrule the content, therefore this value have to vanish!
           OdfElement grandParentElement = (OdfElement) parentComponent.mRootElement.getParentNode();
           if (grandParentElement instanceof TableTableCellElement) {
@@ -3096,7 +3096,7 @@ public class JsonOperationConsumer {
           boolean isTime = currentMap.hasTimeStyle();
           String dateFormat = fieldAttrs.getString("dateFormat");
           OdfOfficeAutomaticStyles autoStyles = contentDom.getOrCreateAutomaticStyles();
-          Iterator styleIter = null;
+          Iterator<? extends OdfElement> styleIter;
           if (isTime) {
             styleIter = autoStyles.getTimeStyles().iterator();
           } else {
@@ -3332,7 +3332,7 @@ public class JsonOperationConsumer {
         try {
           fieldClass = (Class<OdfElement>) Class.forName(currentMap.getClassName());
           if (fieldClass != null) {
-            Class[] types = {OdfFileDom.class};
+            Class<?>[] types = {OdfFileDom.class};
             Constructor<OdfElement> constructor = fieldClass.getConstructor(types);
             newFieldElement = constructor.newInstance(xmlDoc);
           }
@@ -3946,8 +3946,8 @@ public class JsonOperationConsumer {
       }
       if (tableGrid.length() != columnCount) {
         // reuse the width from later caching
-        ((Table) tableElement.getComponent()).pushTableGrid(tableGrid);
-        ((Table) tableElement.getComponent()).requireLaterWidthChange(start);
+        ((Table<?>) tableElement.getComponent()).pushTableGrid(tableGrid);
+        ((Table<?>) tableElement.getComponent()).requireLaterWidthChange(start);
       } else {
         addColumnAndCellElements(
             tableComponent,
@@ -3981,7 +3981,7 @@ public class JsonOperationConsumer {
       int absTableWidth = MapHelper.normalizeLength(tableWidth);
       double relTableWidth = 0.0;
       int columnCount = tableGrid.length();
-      absColumnWidths = new ArrayList(columnCount);
+      absColumnWidths = new ArrayList<>(columnCount);
       for (int i = 0; columnCount > i; i++) {
         relTableWidth += tableGrid.optLong(i);
       }
@@ -4033,7 +4033,7 @@ public class JsonOperationConsumer {
         TableTableElement tableElement = (TableTableElement) parentComponent.mRootElement;
 
         // WORK AROUND for "UNDO COLUMN WIDTH" problem
-        if (!((Table) tableElement.getComponent()).isWidthChangeRequired()) {
+        if (!((Table<?>) tableElement.getComponent()).isWidthChangeRequired()) {
           Table.stashColumnWidths(tableElement);
         }
         // INSERT COLUMN
@@ -4054,11 +4054,11 @@ public class JsonOperationConsumer {
             false);
         // WORK AROUND for "UNDO COLUMN WIDTH" problem (see JsonOperationConsumer for further
         // changes)
-        if (((Table) tableElement.getComponent()).isWidthChangeRequired()) {
+        if (((Table<?>) tableElement.getComponent()).isWidthChangeRequired()) {
           JsonOperationConsumer.setColumnsWidth(
               tableElement.getComponent(),
-              ((Table) tableElement.getComponent()).getPosition(),
-              ((Table) tableElement.getComponent()).popTableGrid(),
+              ((Table<?>) tableElement.getComponent()).getPosition(),
+              ((Table<?>) tableElement.getComponent()).popTableGrid(),
               true);
         }
       } else {
@@ -4391,7 +4391,7 @@ public class JsonOperationConsumer {
     TableTableElement tableElement = (TableTableElement) tableComponent.mRootElement;
     OdfTable table = OdfTable.getInstance(tableElement);
     for (TableTableRowElement rowElement : table.getRowElementList()) {
-      Row rowComponent = (Row) rowElement.getComponent();
+      Row<?> rowComponent = (Row<?>) rowElement.getComponent();
       // if there is no cell at this position, skip this row
       if (cellReferencePosition == null || cellReferencePosition == -1) {
         clonedCellElement =
@@ -4637,7 +4637,7 @@ public class JsonOperationConsumer {
       TableTableElement tableElement = (TableTableElement) tableComponent.mRootElement;
 
       // WORK AROUND for "UNDO COLUMN WIDTH" problem
-      if (((Table) tableElement.getComponent()).isWidthChangeRequired()) {
+      if (((Table<?>) tableElement.getComponent()).isWidthChangeRequired()) {
         // INSERT COLUMN
         // Returns all TableTableColumn descendants that exist within the tableElement, even within
         // groups, columns and header elements
@@ -4647,14 +4647,14 @@ public class JsonOperationConsumer {
         addColumnAndCellElements(
             tableElement.getComponent(),
             start,
-            ((Table) tableElement.getComponent()).popTableGrid(),
+            ((Table<?>) tableElement.getComponent()).popTableGrid(),
             cellPosition,
             INSERT_AFTER,
             -1,
             true,
             existingColumnList,
             true);
-        ((Table) tableElement.getComponent()).hasChangedWidth();
+        ((Table<?>) tableElement.getComponent()).hasChangedWidth();
       }
 
     } else {
@@ -4754,7 +4754,7 @@ public class JsonOperationConsumer {
       } else {
         // IF IT IS A TEXT COMPONENT
         if (parentComponent instanceof TextContainer
-            && ((TextContainer) parentComponent).getChildNode(newPosition) != null) {
+            && ((TextContainer<?>) parentComponent).getChildNode(newPosition) != null) {
           Element parentElement = parentComponent.getRootElement();
           if (parentElement instanceof OdfElement) {
             ((OdfElement) parentElement).insert(newElement, newPosition);
@@ -5014,7 +5014,7 @@ public class JsonOperationConsumer {
       Object language = null;
       Object noProof = null;
 
-      final Iterator keySetIter = attrs.keySet().iterator();
+      final Iterator<String> keySetIter = attrs.keySet().iterator();
       while (keySetIter.hasNext()) {
         final String key = (String) keySetIter.next();
         final Object value = attrs.get(key);
@@ -5403,7 +5403,7 @@ public class JsonOperationConsumer {
   private static void addFontToDocument(String fontName, OdfDocument doc) {
     if (doc != null) {
 
-      Set fontNames = doc.getFontNames();
+      Set<String> fontNames = doc.getFontNames();
       if (fontName != null && !fontName.isEmpty()) {
         if (!fontNames.contains(fontName)) {
           fontNames.add(fontName);

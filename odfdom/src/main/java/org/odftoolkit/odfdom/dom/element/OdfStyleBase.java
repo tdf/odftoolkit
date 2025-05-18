@@ -68,7 +68,7 @@ import org.w3c.dom.NodeList;
  * automatic or the template styles parent, e.g. StyleStyleElement is inheriting from it
  */
 public abstract class OdfStyleBase extends OdfContainerElementBase
-    implements OdfStylePropertySet, Comparable {
+    implements OdfStylePropertySet, Comparable<OdfStyleBase> {
 
   /** */
   private static final long serialVersionUID = 8271282184913774000L;
@@ -373,18 +373,15 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
    * @return 0 if this object is the same as the obj argument; -1 if this object is less than the
    *     obj argument; 1 if this object is greater than the obj argument
    */
-  public int compareTo(Object obj) {
+  public int compareTo(OdfStyleBase obj) {
     if (this == obj) {
       return 0;
     }
 
-    if (!(obj instanceof OdfStyleBase)) {
-      if (obj == null) {
-        throw new ClassCastException("The object to be compared is null!");
-      } else {
-        throw new ClassCastException("The object to be compared is not a style!");
-      }
+    if (obj == null) {
+      throw new ClassCastException("The object to be compared is null!");
     }
+
     OdfStyleBase compare = (OdfStyleBase) obj;
 
     int c = compareNodes(this, compare);
@@ -533,7 +530,7 @@ public abstract class OdfStyleBase extends OdfContainerElementBase
    */
   @Override
   public boolean equals(Object obj) {
-    return obj != null ? compareTo(obj) == 0 : false;
+    return obj instanceof OdfStyleBase && compareTo((OdfStyleBase) obj) == 0;
   }
 
   @Override

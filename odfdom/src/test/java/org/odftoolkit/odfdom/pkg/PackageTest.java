@@ -318,44 +318,49 @@ public class PackageTest {
   public void validationTest() {
 
     // TESTDOC1: Expected ODF Warnings
-    Map expectedWarning1 = new HashMap();
-    expectedWarning1.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10);
+    Map<ValidationConstraint, Integer> expectedWarning1 = new HashMap<>(Map.of(
+      OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10
+    ));
 
     // TESTDOC1: Expected ODF Errors
-    Map expectedErrors1 = new HashMap();
-    expectedErrors1.put(OdfPackageConstraint.MIMETYPE_NOT_FIRST_IN_PACKAGE, 1);
-    expectedErrors1.put(OdfPackageConstraint.MIMETYPE_IS_COMPRESSED, 1);
-    expectedErrors1.put(OdfPackageConstraint.MIMETYPE_HAS_EXTRA_FIELD, 1);
-    expectedErrors1.put(OdfPackageConstraint.MIMETYPE_DIFFERS_FROM_PACKAGE, 1);
-    expectedErrors1.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 1);
+    Map<ValidationConstraint, Integer> expectedErrors1 = new HashMap<>(Map.of(
+      OdfPackageConstraint.MIMETYPE_NOT_FIRST_IN_PACKAGE, 1,
+      OdfPackageConstraint.MIMETYPE_IS_COMPRESSED, 1,
+      OdfPackageConstraint.MIMETYPE_HAS_EXTRA_FIELD, 1,
+      OdfPackageConstraint.MIMETYPE_DIFFERS_FROM_PACKAGE, 1,
+      OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 1
+    ));
     ErrorHandlerStub handler1 = new ErrorHandlerStub(expectedWarning1, expectedErrors1, null);
     handler1.setTestFilePath("testInvalidPkg1.odt");
 
     // TESTDOC2: Expected ODF Warnings
-    Map expectedWarning2 = new HashMap();
-    expectedWarning2.put(OdfPackageConstraint.MIMETYPE_NOT_IN_PACKAGE, 1);
-    expectedWarning2.put(OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10);
+    Map<ValidationConstraint, Integer> expectedWarning2 = new HashMap<>(Map.of(
+      OdfPackageConstraint.MIMETYPE_NOT_IN_PACKAGE, 1,
+      OdfPackageConstraint.MANIFEST_LISTS_DIRECTORY, 10
+    ));
 
     // TESTDOC2: Expected ODF Errors
-    Map expectedErrors2 = new HashMap();
-    expectedErrors2.put(OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, 1);
-    expectedErrors2.put(OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 3);
+    Map<ValidationConstraint, Integer> expectedErrors2 = new HashMap<>(Map.of(
+      OdfPackageConstraint.MANIFEST_DOES_NOT_LIST_FILE, 1,
+      OdfPackageConstraint.MANIFEST_LISTS_NONEXISTENT_FILE, 3
+    ));
     ErrorHandlerStub handler2 = new ErrorHandlerStub(expectedWarning2, expectedErrors2, null);
     handler2.setTestFilePath("testInvalidPkg2.odt");
 
     // TESTDOC3 DESCRIPTION - only mimetype file in package
     // TESTDOC3: Expected ODF Errors
-    Map expectedErrors3 = new HashMap();
-    expectedErrors3.put(OdfPackageConstraint.MANIFEST_NOT_IN_PACKAGE, 1);
-    expectedErrors3.put(OdfPackageConstraint.MIMETYPE_WITHOUT_MANIFEST_MEDIATYPE, 1);
+    Map<ValidationConstraint, Integer> expectedErrors3 = new HashMap<>(Map.of(
+      OdfPackageConstraint.MANIFEST_NOT_IN_PACKAGE, 1,
+      OdfPackageConstraint.MIMETYPE_WITHOUT_MANIFEST_MEDIATYPE, 1
+    ));
     ErrorHandlerStub handler3 = new ErrorHandlerStub(null, expectedErrors3, null);
     handler3.setTestFilePath("testInvalidPkg3.odt");
 
     // TESTDOC4: Expected ODF FatalErrors
-    Map<ValidationConstraint, Integer> expectedFatalErrors4 =
-      new HashMap<>();
-    // loading a graphic instead an ODF document
-    expectedFatalErrors4.put(OdfPackageConstraint.PACKAGE_IS_NO_ZIP, 1);
+    Map<ValidationConstraint, Integer> expectedFatalErrors4 = new HashMap<>(Map.of(
+      // loading a graphic instead an ODF document
+      OdfPackageConstraint.PACKAGE_IS_NO_ZIP, 1
+    ));
     ErrorHandlerStub handler4 = new ErrorHandlerStub(null, null, expectedFatalErrors4);
 
     try {

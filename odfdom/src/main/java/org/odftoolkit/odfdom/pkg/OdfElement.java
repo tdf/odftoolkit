@@ -1444,7 +1444,7 @@ public abstract class OdfElement extends ElementNSImpl {
      * Afterwards all following-sibling, text and nodes will be deleted, until the end text position
      * is found 3) Split the text take the returned and remove it from parent
      */
-    List deleteStatus = new ArrayList(1);
+    List<Boolean> deleteStatus = new ArrayList<>(1);
 
     // start recrusion
     TextContentTraverser.traverseSiblings(
@@ -1814,10 +1814,10 @@ public abstract class OdfElement extends ElementNSImpl {
       int execute(Node currentNode, int currentPos, int posStart, int posEnd, Object... content) {
         switch (mId) {
           case 1:
-            currentPos = insert(currentNode, currentPos, posStart, posEnd, (List) content[0]);
+            currentPos = insert(currentNode, currentPos, posStart, posEnd, (List<Object>) content[0]);
             break;
           case 2:
-            currentPos = delete(currentNode, currentPos, posStart, posEnd, (List) content[0]);
+            currentPos = delete(currentNode, currentPos, posStart, posEnd, (List<Boolean>) content[0]);
             break;
           case 3:
             currentPos =
@@ -1830,7 +1830,7 @@ public abstract class OdfElement extends ElementNSImpl {
                     (Map<OdfName, OdfElement>) content[1]);
             break;
           case 4:
-            currentPos = receive(currentNode, currentPos, posStart, posEnd, (ArrayList) content[0]);
+            currentPos = receive(currentNode, currentPos, posStart, posEnd, (ArrayList<Node>) content[0]);
             break;
           case 5:
             moveChildrenTo(currentNode, currentPos, posStart, posEnd, (Element) content[0]);
@@ -1938,7 +1938,7 @@ public abstract class OdfElement extends ElementNSImpl {
         return currentPos;
       }
 
-      int insert(Node currentNode, int currentPos, int posStart, int posEnd, List content) {
+      int insert(Node currentNode, int currentPos, int posStart, int posEnd, List<Object> content) {
         if (currentNode != null) {
           // // ** GET NODE SIZE
           // Integer contentLength = getNodeWidth(currentNode);
@@ -2034,7 +2034,7 @@ public abstract class OdfElement extends ElementNSImpl {
 
       // Within the text node, either the first or the last part have to be deleted (best
       // selectable)
-      int delete(Node currentNode, int currentPos, int posStart, int posEnd, List deleteStatus) {
+      int delete(Node currentNode, int currentPos, int posStart, int posEnd, List<Boolean> deleteStatus) {
 
         if (currentNode != null) {
           int nextSplitPos;
@@ -2224,7 +2224,7 @@ public abstract class OdfElement extends ElementNSImpl {
       }
 
       private int receive(
-          Node currentNode, int currentPos, int posStart, int posEnd, ArrayList newNodeContainer) {
+          Node currentNode, int currentPos, int posStart, int posEnd, ArrayList<Node> newNodeContainer) {
         if (currentNode != null) {
 
           // ** GET NODE SIZE

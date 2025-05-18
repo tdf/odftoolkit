@@ -26,6 +26,7 @@ package org.odftoolkit.odfdom.utils;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
@@ -43,7 +44,6 @@ public class ErrorHandlerStub implements ErrorHandler {
   private static final Logger LOG = Logger.getLogger(ErrorHandlerStub.class.getName());
   /** Map which returns the number of defects for each given ValidationConstraint */
   private Map<ValidationConstraint, Integer> mExpectedWarning;
-
   private Map<ValidationConstraint, Integer> mExpectedError;
   private Map<ValidationConstraint, Integer> mExpectedFatalError;
   private String mTestFilePath = null;
@@ -70,35 +70,24 @@ public class ErrorHandlerStub implements ErrorHandler {
   }
 
   public void warning(SAXParseException exception) throws SAXException {
-    if (mExpectedWarning == null) {
-      mExpectedWarning = new HashMap<>();
-    }
-    registerProblem(exception, mExpectedWarning);
+    registerProblem(exception, Objects.requireNonNullElseGet(mExpectedWarning, HashMap::new));
   }
 
   public void error(SAXParseException exception) throws SAXException {
-    if (mExpectedError == null) {
-      mExpectedError = new HashMap<>();
-    }
-    registerProblem(exception, mExpectedError);
+    registerProblem(exception, Objects.requireNonNullElseGet(mExpectedError, HashMap::new));
   }
 
   public void fatalError(SAXParseException exception) throws SAXException {
-    if (mExpectedFatalError == null) {
-      mExpectedFatalError = new HashMap<>();
-    }
-    registerProblem(exception, mExpectedFatalError);
+    registerProblem(exception, Objects.requireNonNullElseGet(mExpectedFatalError, HashMap::new));
   }
 
   private void registerProblem(
       SAXParseException exception, Map<ValidationConstraint, Integer> problemOccurances) {
     ValidationConstraint constraint = ((OdfValidationException) exception).getConstraint();
-    Integer problemOccurance = problemOccurances.get(constraint);
-    if (problemOccurance == null) {
-      problemOccurance = 0;
-    }
-    LOG.log(Level.INFO, "EXPECTED VALIDATION MESSAGE:\"{0}\"", exception.getMessage());
-    problemOccurances.put(constraint, --problemOccurance);
+    problemOccurances.compute(constraint, (key, value) -> {
+      LOG.log(Level.INFO, "EXPECTED VALIDATION MESSAGE:\"{0}\"", exception.getMessage());
+      return (value == null ? 0 : value) - 1;
+    });
   }
 
   public void validate() {

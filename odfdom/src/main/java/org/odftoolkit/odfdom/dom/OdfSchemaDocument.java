@@ -733,7 +733,7 @@ public abstract class OdfSchemaDocument extends OdfPackageDocument {
       NodeList lstMasterPages =
           stylesDoc.getElementsByTagNameNS(OdfDocumentNamespace.STYLE.getUri(), "master-page");
       if (lstMasterPages != null && lstMasterPages.getLength() > 0) {
-        masterPages = new HashMap();
+        masterPages = new HashMap<>();
         for (int i = 0; i < lstMasterPages.getLength(); i++) {
           StyleMasterPageElement masterPage =
               (StyleMasterPageElement) lstMasterPages.item(i); // Take the node from the list
