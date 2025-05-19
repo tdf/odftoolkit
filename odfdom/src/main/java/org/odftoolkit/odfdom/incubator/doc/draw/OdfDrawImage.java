@@ -108,7 +108,7 @@ public class OdfDrawImage extends DrawImageElement {
       imageRef = imageRef.substring(imageRef.lastIndexOf(SLASH) + 1, imageRef.length());
     }
     String packagePath = OdfPackage.OdfFile.IMAGE_DIRECTORY.getPath() + SLASH + imageRef;
-    return packagePath = mOdfSchemaDocument.getDocumentPath() + packagePath;
+    return mOdfSchemaDocument.getDocumentPath() + packagePath;
   }
 
   /* Helper method */
