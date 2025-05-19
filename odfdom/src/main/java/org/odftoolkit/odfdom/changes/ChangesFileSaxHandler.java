@@ -950,7 +950,7 @@ public class ChangesFileSaxHandler extends org.odftoolkit.odfdom.pkg.OdfFileSaxH
               } else if (anchorType.equals("frame")) {
                 // Changes API: true: image as character, false: floating mode
                 drawingProps.put("inline", Boolean.FALSE);
-                anchorVertBase = "column";
+                anchorHorBase = "column";
                 anchorVertBase = "margin";
               } else if (anchorType.equals("paragraph")) {
                 // Changes API: true: image as character, false: floating mode
