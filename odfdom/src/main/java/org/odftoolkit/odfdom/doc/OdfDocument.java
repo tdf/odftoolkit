@@ -443,7 +443,6 @@ public abstract class OdfDocument extends OdfSchemaDocument {
         break;
 
       default:
-        documentTemplate = null;
         throw new IllegalArgumentException(
             "Given mediaType '" + odfMediaType.mMediaType + "' is not yet supported!");
     }
@@ -550,7 +549,6 @@ public abstract class OdfDocument extends OdfSchemaDocument {
         break;
 
       default:
-        newDoc = null;
         throw new IllegalArgumentException(
             "Given mediaType '" + odfMediaType.mMediaType + "' is not yet supported!");
     }
