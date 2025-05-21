@@ -28,6 +28,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.odftoolkit.odfdom.doc.OdfDocument;
@@ -593,13 +594,11 @@ public class OdfTableCell {
    *     is not "currency".
    */
   public String getCurrencyCode() {
-    if (mCellElement
-        .getOfficeValueTypeAttribute()
-        .equals(OfficeValueTypeAttribute.Value.CURRENCY.toString())) {
-      return mCellElement.getOfficeCurrencyAttribute();
-    } else {
-      throw new IllegalArgumentException();
+    String t = mCellElement.getOfficeValueTypeAttribute();
+    if (!Objects.equals(t, OfficeValueTypeAttribute.Value.CURRENCY.toString())) {
+        LOG.log(Level.WARNING,"@office:value-type attribute expected to be of type CURRENCY but was {0}", t);
     }
+    return mCellElement.getOfficeCurrencyAttribute();
   }
 
   /**
@@ -613,7 +612,7 @@ public class OdfTableCell {
     if (currency == null) {
       throw new IllegalArgumentException("Currency code of cell should not be null.");
     }
-    splitRepeatedCells();
+    //splitRepeatedCells();
     if (mCellElement
         .getOfficeValueTypeAttribute()
         .equals(OfficeValueTypeAttribute.Value.CURRENCY.toString())) {
@@ -1010,11 +1009,13 @@ public class OdfTableCell {
   /**
    * Get the cell value as {@link java.util.Calendar java.util.Calendar}.
    *
-   * <p>Throw exception if the cell type is not "time".
+   * <p>
+   * Throw exception if the cell type is not "time".
    *
    * @return the Calendar value of cell
-   * @throws IllegalArgumentException an IllegalArgumentException will be thrown if the cell type is
-   *     not time.
+   * @throws IllegalArgumentException an IllegalArgumentException will be thrown
+   *                                  if the cell type is
+   *                                  not time.
    * @deprecated use {@link #getLocalTimeValue()} instead.
    */
   @Deprecated
@@ -1126,6 +1127,10 @@ public class OdfTableCell {
     if (getTypeAttr() == OfficeValueTypeAttribute.Value.TIME) {
       String timeStr = mCellElement.getOfficeTimeValueAttribute();
       try {
+        if (timeStr == null) {
+          LOG.log(Level.SEVERE, "@office:time-value not set!");
+          return null;
+        }
         return LocalTime.parse(timeStr, DEFAULT_TIME_FORMATTER);
       } catch (DateTimeParseException e) {
         LOG.log(Level.SEVERE, e.getMessage(), e);
@@ -1579,7 +1584,7 @@ public class OdfTableCell {
   private void setCellFormatString(String formatStr, String type) {
     OfficeValueTypeAttribute.Value typeValue = null;
     msFormatString = formatStr;
-    splitRepeatedCells();
+    //splitRepeatedCells();
     typeValue = OfficeValueTypeAttribute.Value.enumValueOf(type);
     if (typeValue == OfficeValueTypeAttribute.Value.FLOAT) {
       OdfNumberStyle numberStyle =
