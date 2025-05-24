@@ -2322,9 +2322,9 @@ public abstract class OdfElement extends ElementNSImpl {
             isIgnored = true;
             break;
           } else {
-            Node parent = element.getParentAs(OdfElement.class);
-            if (parent instanceof OdfElement) {
-              isIgnored = isIgnoredElement((OdfElement) parent);
+            OdfElement parent = element.getParentAs(OdfElement.class);
+            if (parent != null) {
+              isIgnored = isIgnoredElement(parent);
             }
             break;
           }
