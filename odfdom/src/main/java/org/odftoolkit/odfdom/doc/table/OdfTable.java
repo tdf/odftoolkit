@@ -398,7 +398,7 @@ public class OdfTable {
         new DecimalFormat("000.0000", DecimalFormatSymbols.getInstance(Locale.ENGLISH)).format(DEFAULT_TABLE_WIDTH / numCols) + "in");
     columnStyle.setProperty(
         StyleTableColumnPropertiesElement.RelColumnWidth,
-        Math.round(DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
+        Math.round((double) DEFAULT_REL_TABLE_WIDTH / numCols) + "*");
     // 2.1 create header column elements
     if (headerColumnNumber > 0) {
       TableTableHeaderColumnsElement headercolumns =
