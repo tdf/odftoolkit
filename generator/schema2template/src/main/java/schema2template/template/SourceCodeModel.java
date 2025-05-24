@@ -279,23 +279,22 @@ public class SourceCodeModel {
    * @return the corresponding source code datatypes
    */
   public SortedSet<String> getValuetypes(PuzzleComponent datatypes) {
-    SortedSet<String> retval = null;
-    if (datatypes != null) {
-      retval = new TreeSet<>();
-      for (PuzzlePiece datatype : datatypes.getCollection()) {
-        String datatypename = datatype.getQName();
-        String[] tuple = mDataTypeValueAndConversionMap.get(datatypename);
-        if (tuple != null) {
-          String valuetype = tuple[0];
-          if (valuetype != null) {
-            retval.add(valuetype);
-          }
+    if (datatypes == null) {
+      return null;
+    }
+
+    SortedSet<String> retval = new TreeSet<>();
+    for (PuzzlePiece datatype : datatypes.getCollection()) {
+      String datatypename = datatype.getQName();
+      String[] tuple = mDataTypeValueAndConversionMap.get(datatypename);
+      if (tuple != null) {
+        String valuetype = tuple[0];
+        if (valuetype != null) {
+          retval.add(valuetype);
         }
       }
-      return retval;
-    } else {
-      return retval;
     }
+    return retval;
   }
 
   /**
