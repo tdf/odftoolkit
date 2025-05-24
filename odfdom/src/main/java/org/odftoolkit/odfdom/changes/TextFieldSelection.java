@@ -46,7 +46,7 @@ public class TextFieldSelection extends TextSelection {
     mSelectionElement = fieldElement;
     mStartPosition = startPosition;
 
-    FieldMap currentMap = FieldMap.fieldMap.get(fieldElement.getLocalName());
+    FieldMap currentMap = FieldMap.getFieldMap(fieldElement.getLocalName());
     if (currentMap != null) {
       String attributeValue = null;
       if (currentMap.hasFixed()
