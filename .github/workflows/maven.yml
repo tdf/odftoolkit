@@ -20,3 +20,15 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package -Ppedantic --file pom.xml
+
+  qodana:
+    name: Qodana Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Qodana Scan
+        uses: JetBrains/qodana-action@v2025.1
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
