@@ -589,11 +589,11 @@ public class Component {
   }
 
   public Component getLastChild() {
-    Component lastChild = null;
-    if (mChildren != null) {
-      lastChild = mChildren.get(mChildren.size());
+    if (mChildren == null || mChildren.isEmpty()) {
+      return null;
     }
-    return lastChild;
+
+    return mChildren.get(mChildren.size() - 1);
   }
 
   public Document getOwnerDocument() {

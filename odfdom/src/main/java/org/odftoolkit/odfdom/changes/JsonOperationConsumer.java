@@ -4551,29 +4551,14 @@ public class JsonOperationConsumer {
       Component newRowComponent =
           addElementAsComponent(parentComponent, rowElement, start.optInt(start.length() - 1));
       if (addDefaultCells) {
-        if (isTextTable) {
-          addCells(
-              rootComponent,
-              start,
-              CELL_WITH_BORDER_ATTRS,
-              table.getColumnCount(),
-              newRowComponent,
-              null,
-              isTextTable);
-        } else {
-          // if there is no reference row, no cells has been cloned from an existing row and basic
-          // cells have to be added
-          if (referenceRow <= -1) {
-            addCells(
-                rootComponent,
-                start,
-                null,
-                table.getColumnCount(),
-                newRowComponent,
-                null,
-                isTextTable);
-          }
-        }
+        addCells(
+          rootComponent,
+          start,
+          isTextTable ? CELL_WITH_BORDER_ATTRS : null,
+          table.getColumnCount(),
+          newRowComponent,
+          null,
+          isTextTable);
       }
       if (count > 1) {
         if (isTextTable) {
