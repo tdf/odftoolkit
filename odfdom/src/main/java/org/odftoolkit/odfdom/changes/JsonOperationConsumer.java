@@ -3326,7 +3326,7 @@ public class JsonOperationConsumer {
       // CREATING NEW ROOT ELEMENT
       OdfFileDom xmlDoc = (OdfFileDom) parentComponent.getOwnerDocument();
       OdfElement newFieldElement = null;
-      FieldMap currentMap = FieldMap.fieldMap.get(type);
+      FieldMap currentMap = FieldMap.getFieldMap(type);
       if (currentMap != null) {
         Class<OdfElement> fieldClass;
         try {
@@ -3377,7 +3377,7 @@ public class JsonOperationConsumer {
         }
         if (type != null) {
           OdfElement element = (OdfElement) targetNode;
-          FieldMap currentMap = FieldMap.fieldMap.get(type);
+          FieldMap currentMap = FieldMap.getFieldMap(type);
           setFieldAttributes(element, attrs, currentMap, contentDom);
           if (Component.isField(targetNode.getNamespaceURI(), targetNode.getLocalName())) {
             LOG.log(Level.SEVERE, "field found");
