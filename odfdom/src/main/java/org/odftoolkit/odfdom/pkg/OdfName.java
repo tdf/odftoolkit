@@ -23,19 +23,21 @@
  */
 package org.odftoolkit.odfdom.pkg;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The class provides a simplified interface for XML names. The class defines a name for an XML
  * node. It embraces XML NamespaceURI, XML prefix and XML localname.
  */
-public class OdfName implements Comparable<OdfName> {
+public final class OdfName implements Comparable<OdfName> {
+
+  private static final Map<String, OdfName> mOdfNames = new ConcurrentHashMap<>();
 
   private final OdfNamespace mNS;
   private final String mLocalName;
   private final String mQName;
   private final String mExpandedName; // i.e. {nsURI}localName
-  private static HashMap<String, OdfName> mOdfNames = new HashMap<>();
 
   private OdfName(OdfNamespace ns, String localname, String expandedName) {
     mNS = ns;
@@ -104,18 +106,8 @@ public class OdfName implements Comparable<OdfName> {
     } else {
       expandedName = localName;
     }
-    synchronized (mOdfNames) {
-      // return a similar OdfName if one was already created before..
-      OdfName odfName = mOdfNames.get(expandedName);
-      if (odfName != null) {
-        return odfName;
-      } else {
-        // otherwise create a new OdfName, store it in the map and return it..
-        odfName = new OdfName(odfNamespace, localName, expandedName);
-        mOdfNames.put(expandedName, odfName);
-        return odfName;
-      }
-    }
+    // return a similar OdfName if one was already created before.
+    return mOdfNames.computeIfAbsent(expandedName, k -> new OdfName(odfNamespace, localName, k));
   }
 
   private static String createExpandedName(String nsUri, String localName) {
@@ -169,13 +161,8 @@ public class OdfName implements Comparable<OdfName> {
   }
 
   @Override
-  @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
   public boolean equals(Object obj) {
-    if (obj != null) {
-      return toString().equals(obj.toString());
-    } else {
-      return false;
-    }
+    return obj instanceof OdfName && toString().equals(obj.toString());
   }
 
   /**
