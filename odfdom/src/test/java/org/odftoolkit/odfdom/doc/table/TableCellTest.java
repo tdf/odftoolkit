@@ -564,6 +564,30 @@ public class TableCellTest {
   }
 
   @Test
+  public void testGetSetDurationValue() throws Exception {
+    var odsdoc = loadInputOds();
+    var table = odsdoc.getTableByName("Sheet1");
+    var rowIndex = 0; var columnIndex = 9;
+    var fcell = table.getCellByPosition(columnIndex, rowIndex);
+    Assert.assertEquals("Duration", fcell.getDisplayText());
+    rowIndex = 1;
+    fcell = table.getCellByPosition(columnIndex, rowIndex);
+    var duration = fcell.getDurationValue();
+    var expectedDuration = java.time.Duration.ofHours(26).plusMinutes(33).plusSeconds(12).plusMillis(130);
+    Assert.assertEquals(expectedDuration, duration);
+
+    rowIndex = 5;
+    fcell = table.getCellByPosition(columnIndex, rowIndex);
+    fcell.setDurationValue(expectedDuration);
+    saveOutputOds(odsdoc);
+
+    odsdoc = loadOutputOds();
+    table = odsdoc.getTableByName("Sheet1");
+    fcell = table.getCellByPosition(columnIndex, rowIndex);
+    Assert.assertEquals(expectedDuration, fcell.getDurationValue());
+  }
+
+  @Test
   public void testGetSetStringValue() throws Exception {
     OdfSpreadsheetDocument odsdoc = loadInputOds();
 
