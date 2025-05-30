@@ -19,6 +19,7 @@
 package org.odftoolkit.odfdom.doc.table;
 
 import java.text.DecimalFormat;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -1116,9 +1117,25 @@ public class OdfTableCell {
   }
 
   /**
-   * Get the cell value as {@link java.time.LocalTime}.
+   * Get the cell value as {@link java.time.Duration}.
    *
    * @return the time value of cell
+   * @throws IllegalArgumentException an IllegalArgumentException will be thrown if the cell type is
+   *     not time.
+   */
+  public Duration getDurationValue() {
+    if (getTypeAttr() == OfficeValueTypeAttribute.Value.TIME) {
+      String timeStr = mCellElement.getOfficeTimeValueAttribute();
+      return Duration.parse(timeStr);
+    }
+    throw new IllegalArgumentException();
+  }
+
+  /**
+   * Get the cell value as {@link java.time.LocalTime}.
+   *
+   * @return the time value of cell; null will be returned when the value is not a time-of-day
+   *     (ie over 24 hours)
    * @throws IllegalArgumentException an IllegalArgumentException will be thrown if the cell type is
    *     not time.
    */
@@ -1134,6 +1151,26 @@ public class OdfTableCell {
     } else {
       throw new IllegalArgumentException();
     }
+  }
+
+  /**
+   * Set the cell value as a time and set the value type to be "time" too.
+   * Unlike {@link #setLocalTimeValue} this method allows you to set the
+   * cell value to something over 24 hours
+   *
+   * @param duration the time as a {@link Duration} instance.
+   * @throws IllegalArgumentException If input time is null, an IllegalArgumentException exception
+   *     will be thrown.
+   */
+  public void setDurationValue(Duration duration) {
+    if (duration == null) {
+      throw new IllegalArgumentException("duration shouldn't be null.");
+    }
+    splitRepeatedCells();
+    setTypeAttr(OfficeValueTypeAttribute.Value.TIME);
+    String svalue = duration.toString();
+    mCellElement.setOfficeTimeValueAttribute(svalue);
+    setDisplayText(svalue);
   }
 
   /**
