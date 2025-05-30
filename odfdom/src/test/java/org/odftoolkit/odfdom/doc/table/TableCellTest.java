@@ -703,8 +703,19 @@ public class TableCellTest {
     OdfTableCell finalFcell = fcell;
     Assert.assertThrows("time shouldn't be null.", IllegalArgumentException.class, () -> finalFcell.setTimeValue(null));
 
+    rowindex = 2;
+    fcell = table.getCellByPosition(columnindex, rowindex);
+    var expectedMillis = 84600000; // 23:30
+    Assert.assertEquals(expectedMillis, fcell.getTimeValue().getTimeInMillis());
+
+    rowindex = 1; columnindex = 9; // the "Duration" column
+    fcell = table.getCellByPosition(columnindex, rowindex);
+    expectedMillis = 95592130; // 26:33:12.130
+    Assert.assertEquals(expectedMillis, fcell.getTimeValue().getTimeInMillis());
+
     Calendar expected = Calendar.getInstance();
     fcell.setTimeValue(expected);
+    Assert.assertEquals(expected, fcell.getTimeValue());
     saveOutputOds(odsdoc);
     // reload
     odsdoc = loadOutputOds();
