@@ -110,24 +110,6 @@ public class OdfTableCell {
   }
 
   /**
-   * Converts the given {@code LocalDate} to a {@code Calendar} instance.
-   * <p>
-   * The {@code Calendar} instance will be created with the system default time zone.
-   *
-   * @param date the {@code LocalDate} to be converted; if null, the method will return null
-   * @return a {@code Calendar} instance representing the same date as the given {@code LocalDate},
-   *         or null if the input date is null
-   */
-  private static Calendar toCalendar(LocalDate date) {
-    if (date == null) {
-      return null;
-    }
-    return GregorianCalendar.from(
-      date.atStartOfDay(ZoneId.systemDefault())
-    );
-  }
-
-  /**
    * Converts a {@code LocalDateTime} to a {@code Calendar} instance.
    * <p>
    * The {@code Calendar} instance will be created with the system default time zone.
@@ -152,16 +134,16 @@ public class OdfTableCell {
    * The {@code Calendar} instance will be created with the system default time zone.
    *
    * @param time the {@code LocalTime} to be converted; if {@code null}, the method returns {@code null}.
-   * @return a {@code Calendar} object representing the given time on the system's current date and default time zone,
+   * @return a {@code Calendar} object representing the given time on UTC time zone at epoch,
    *         or {@code null} if the input {@code time} is {@code null}.
    */
-  private static Calendar toCalendar(LocalTime time) {
-    if (time == null) {
+  private static Calendar toCalendar(Duration duration) {
+    if (duration == null) {
       return null;
     }
-    return GregorianCalendar.from(
-      time.atDate(LocalDate.now()).atZone(ZoneId.systemDefault())
-    );
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTimeInMillis(duration.toMillis());
+    return calendar;
   }
 
   /**
@@ -174,7 +156,7 @@ public class OdfTableCell {
     if (date == null) {
       return null;
     }
-    return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    return LocalDateTime.ofInstant(date.toInstant(), date.getTimeZone().toZoneId());
   }
 
   /**
@@ -183,11 +165,11 @@ public class OdfTableCell {
    * @param date the {@code Calendar} instance to convert; may be null
    * @return the equivalent {@code LocalTime}, or null if the input is null
    */
-  private static LocalTime toLocalTime(Calendar date) {
+  private static Duration toDuration(Calendar date) {
     if (date == null) {
       return null;
     }
-    return toLocalDateTime(date).toLocalTime();
+    return Duration.ofMillis(date.getTimeInMillis());
   }
 
   /**
@@ -1020,7 +1002,7 @@ public class OdfTableCell {
    */
   @Deprecated
   public Calendar getTimeValue() {
-    return toCalendar(getLocalTimeValue());
+    return toCalendar(getDurationValue());
   }
 
   /**
@@ -1031,7 +1013,7 @@ public class OdfTableCell {
    *     will be thrown.
    */
   public void setTimeValue(Calendar time) {
-    setLocalTimeValue(toLocalTime(time));
+    setDurationValue(toDuration(time));
   }
 
   /**
