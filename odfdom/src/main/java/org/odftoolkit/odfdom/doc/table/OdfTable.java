@@ -299,8 +299,9 @@ public class OdfTable {
    * @param width the width that need to set (in Millimeter).
    *     <p>An UnsupportedOperationException will be thrown if the table is in the spreadsheet
    *     document.
+   * @return this {@code OdfTable} instance
    */
-  public void setWidth(long width) {
+  public OdfTable setWidth(long width) {
     if (!mIsSpreadsheet) {
       String sWidthMM = String.valueOf(width) + Unit.MILLIMETER.abbr();
       String sWidthIN = PositiveLength.mapToUnit(sWidthMM, Unit.INCH);
@@ -316,6 +317,8 @@ public class OdfTable {
     } else {
       throw new UnsupportedOperationException();
     }
+
+    return this;
   }
 
   static void setLeftTopBorderStyleProperties(OdfStyle style) {
@@ -1905,10 +1908,11 @@ public class OdfTable {
    * Set the table name.
    *
    * @param tableName the table name
+   * @return this {@code OdfTable} instance
    * @throws IllegalArgumentException if the tableName is duplicate with one of tables in the
    *     current document
    */
-  public void setTableName(String tableName) {
+  public OdfTable setTableName(String tableName) {
     // check if the table name is already exist
     boolean isSpreadsheet = mDocument instanceof OdfSpreadsheetDocument;
     List<OdfTable> tableList = mDocument.getTableList(!isSpreadsheet);
@@ -1921,6 +1925,8 @@ public class OdfTable {
       }
     }
     mTableElement.setTableNameAttribute(tableName);
+
+    return this;
   }
 
   /**
@@ -1940,9 +1946,11 @@ public class OdfTable {
    * Set if the table is protected.
    *
    * @param isProtected the protected attribute of the table to be set
+   * @return this {@code OdfTable} instance
    */
-  public void setProtected(boolean isProtected) {
+  public OdfTable setProtected(boolean isProtected) {
     mTableElement.setTableProtectedAttribute(isProtected);
+    return this;
   }
 
   /**
@@ -1997,6 +2005,7 @@ public class OdfTable {
    * inheritance setting have no effect on them.
    *
    * @param isEnabled if<code>isEnabled</code> is true, cell style will be inherited by new cell.
+   * @return this {@code OdfTable} instance
    * @see #isCellStyleInheritance()
    * @see #appendColumn()
    * @see #appendColumns(int)
@@ -2012,8 +2021,9 @@ public class OdfTable {
    * @see #getColumnByIndex(int)
    * @see #getRowByIndex(int)
    */
-  public void setCellStyleInheritance(boolean isEnabled) {
+  public OdfTable setCellStyleInheritance(boolean isEnabled) {
     mIsCellStyleInheritance = isEnabled;
+    return this;
   }
   ////////////////////////////////////////////////////////////////////////////////////////////
 

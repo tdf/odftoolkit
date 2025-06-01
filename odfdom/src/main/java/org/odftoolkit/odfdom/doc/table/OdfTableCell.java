@@ -248,8 +248,9 @@ public class OdfTableCell {
    * is null, the explicit horizontal alignment setting is removed.
    *
    * @param horizontalAlignment the horizontal alignment setting.
+   * @return this {@code OdfTableCell} instance
    */
-  public void setHorizontalAlignment(String horizontalAlignment) {
+  public OdfTableCell setHorizontalAlignment(String horizontalAlignment) {
     if (FoTextAlignAttribute.Value.LEFT.toString().equalsIgnoreCase(horizontalAlignment)) {
       horizontalAlignment = FoTextAlignAttribute.Value.START.toString();
     }
@@ -269,6 +270,8 @@ public class OdfTableCell {
         styleElement.removeProperty(property);
       }
     }
+
+    return this;
   }
 
   /**
@@ -297,8 +300,9 @@ public class OdfTableCell {
    * argument is null, the explicit vertical alignment setting is removed.
    *
    * @param verticalAlignment the vertical alignment setting.
+   * @return this {@code OdfTableCell} instance
    */
-  public void setVerticalAlignment(String verticalAlignment) {
+  public OdfTableCell setVerticalAlignment(String verticalAlignment) {
     splitRepeatedCells();
     OdfStyleBase styleElement = getCellStyleElementForWrite();
     if (styleElement != null) {
@@ -312,6 +316,8 @@ public class OdfTableCell {
         styleElement.removeProperty(property);
       }
     }
+
+    return this;
   }
 
   /**
@@ -339,8 +345,9 @@ public class OdfTableCell {
    * Set the wrap option of this cell.
    *
    * @param isTextWrapped whether the cell content can be wrapped or not
+   * @return this {@code OdfTableCell} instance
    */
-  public void setTextWrapped(boolean isTextWrapped) {
+  public OdfTableCell setTextWrapped(boolean isTextWrapped) {
     splitRepeatedCells();
     OdfStyleBase styleElement = getCellStyleElementForWrite();
     if (styleElement != null) {
@@ -354,6 +361,8 @@ public class OdfTableCell {
         styleElement.setProperty(property, FoWrapOptionAttribute.Value.NO_WRAP.toString());
       }
     }
+
+    return this;
   }
 
   private TableTableRowElement findRowInTableHeaderRows(
@@ -589,10 +598,11 @@ public class OdfTableCell {
    * Set the currency code of this cell, for example, "USD", "EUR", "CNY", and etc.
    *
    * @param currency the currency code that need to be set.
+   * @return this {@code OdfTableCell} instance
    * @throws IllegalArgumentException If input <code>currency</code> is null, an
    *     IllegalArgumentException will be thrown.
    */
-  public void setCurrencyCode(String currency) {
+  public OdfTableCell setCurrencyCode(String currency) {
     if (currency == null) {
       throw new IllegalArgumentException("Currency code of cell should not be null.");
     }
@@ -604,6 +614,8 @@ public class OdfTableCell {
     } else {
       throw new IllegalArgumentException();
     }
+
+    return this;
   }
 
   private void setTypeAttr(OfficeValueTypeAttribute.Value type) {
@@ -619,8 +631,9 @@ public class OdfTableCell {
    *
    * @param type the type that need to be set If input type is null, an IllegalArgumentException
    *     will be thrown.
+   * @return this {@code OdfTableCell} instance
    */
-  public void setValueType(String type) {
+  public OdfTableCell setValueType(String type) {
     if (type == null) {
       throw new IllegalArgumentException("type shouldn't be null.");
     }
@@ -631,6 +644,8 @@ public class OdfTableCell {
     }
 
     mCellElement.setOfficeValueTypeAttribute(sType);
+
+    return this;
   }
 
   /**
@@ -718,9 +733,10 @@ public class OdfTableCell {
    *
    * @param value  the value that will be set
    * @param currency	the currency that will be set.
+   * @return this {@code OdfTableCell} instance
    * @throws IllegalArgumentException  If input currency is null, an IllegalArgumentException will be thrown.
    */
-  public void setCurrencyValue(Double value, String currency) {
+  public OdfTableCell setCurrencyValue(Double value, String currency) {
     if (currency == null) {
       throw new IllegalArgumentException("currency shouldn't be null.");
     }
@@ -728,6 +744,8 @@ public class OdfTableCell {
     setTypeAttr(OfficeValueTypeAttribute.Value.CURRENCY);
     mCellElement.setOfficeValueAttribute(value);
     mCellElement.setOfficeCurrencyAttribute(currency);
+
+    return this;
   }
 
   /**
@@ -753,11 +771,14 @@ public class OdfTableCell {
    * If <code>value</code> is null, the cell value will be removed.
    *
    * @param value	the value that will be set
+   * @return this {@code OdfTableCell} instance
    */
-  public void setPercentageValue(Double value) {
+  public OdfTableCell setPercentageValue(Double value) {
     splitRepeatedCells();
     setTypeAttr(OfficeValueTypeAttribute.Value.PERCENTAGE);
     mCellElement.setOfficeValueAttribute(value);
+
+    return this;
   }
 
   /**
@@ -780,8 +801,9 @@ public class OdfTableCell {
    *
    * @param content the displayed text. If content is null, it will display the empty string
    *     instead.
+   * @return this {@code OdfTableCell} instance
    */
-  public void setDisplayText(String content) {
+  public OdfTableCell setDisplayText(String content) {
     if (content == null) {
       content = "";
     }
@@ -792,6 +814,8 @@ public class OdfTableCell {
     textProcessor.append(para, content);
 
     mCellElement.appendChild(para);
+
+    return this;
   }
 
   /**
@@ -804,8 +828,9 @@ public class OdfTableCell {
    *     instead.
    * @param stylename the style name. If stylename is null, the content will use the default
    *     paragraph style.
+   * @return this {@code OdfTableCell} instance
    */
-  public void setDisplayText(String content, String stylename) {
+  public OdfTableCell setDisplayText(String content, String stylename) {
     if (content == null) {
       content = "";
     }
@@ -819,18 +844,23 @@ public class OdfTableCell {
     textProcessor.append(para, content);
 
     mCellElement.appendChild(para);
+
+    return this;
   }
 
   /**
    * Set the cell value as a double and set the value type to be "float".
    *
    * @param value	the double value that will be set. If <code>value</code> is null, the cell value will be removed.
+   * @return this {@code OdfTableCell} instance
    */
-  public void setDoubleValue(Double value) {
+  public OdfTableCell setDoubleValue(Double value) {
     splitRepeatedCells();
     setTypeAttr(OfficeValueTypeAttribute.Value.FLOAT);
     mCellElement.setOfficeValueAttribute(value);
     setDisplayText(value + "");
+
+    return this;
   }
 
   /**
@@ -854,12 +884,15 @@ public class OdfTableCell {
    * Set the cell value as a boolean and set the value type to be boolean. If <code>value</code> is null, the cell value will be removed.
    *
    * @param value	the value of boolean type
+   * @return this {@code OdfTableCell} instance
    */
-  public void setBooleanValue(Boolean value) {
+  public OdfTableCell setBooleanValue(Boolean value) {
     splitRepeatedCells();
     setTypeAttr(OfficeValueTypeAttribute.Value.BOOLEAN);
     mCellElement.setOfficeBooleanValueAttribute(value);
     setDisplayText(value + "");
+
+    return this;
   }
 
   /**
@@ -881,37 +914,44 @@ public class OdfTableCell {
    * Use #setDateTimeValue() to set both and time values from a Calendar instance.
    *
    * @param date the value of {@link java.util.Calendar java.util.Calendar} type.
+   * @return this {@code OdfTableCell} instance
    * @see #setDateTimeValue(Calendar)
    * @deprecated use {@link #setLocalDateValue(java.time.LocalDate)} instead.
    */
   @Deprecated
-  public void setDateValue(Calendar date) {
+  public OdfTableCell setDateValue(Calendar date) {
     if (date == null) {
       throw new IllegalArgumentException("date shouldn't be null.");
     }
     setLocalDateValue(toLocalDateTime(date).toLocalDate());
+
+    return this;
   }
 
   /**
    * Set the cell value as a datetime, and set the value type to be "date".
    *
    * @param date the value of {@link java.util.Calendar java.util.Calendar} type.
+   * @return this {@code OdfTableCell} instance
    * @deprecated use {@link #setLocalDateValue(java.time.LocalDate)} instead.
    */
   @Deprecated
-  public void setDateTimeValue(Calendar date) {
+  public OdfTableCell setDateTimeValue(Calendar date) {
     if (date == null) {
       throw new IllegalArgumentException("date shouldn't be null.");
     }
     setLocalDateTimeValue(toLocalDateTime(date));
+
+    return this;
   }
 
   /**
    * Set the cell value as a string, and set the value type to be string.
    *
    * @param str the value of string type. If input string is null, an empty string will be set.
+   * @return this {@code OdfTableCell} instance
    */
-  public void setStringValue(String str) {
+  public OdfTableCell setStringValue(String str) {
     if (str == null) {
       str = "";
     }
@@ -919,6 +959,8 @@ public class OdfTableCell {
     setTypeAttr(OfficeValueTypeAttribute.Value.STRING);
     mCellElement.setOfficeStringValueAttribute(str);
     setDisplayText(str);
+
+    return this;
   }
 
   // Note: if you want to change the cell
@@ -1009,11 +1051,14 @@ public class OdfTableCell {
    * Set the cell value as a time and set the value type to be "time" too.
    *
    * @param time the value of {@link java.util.Calendar java.util.Calendar} type.
+   * @return this {@code OdfTableCell} instance
    * @throws IllegalArgumentException If input time is null, an IllegalArgumentException exception
    *     will be thrown.
    */
-  public void setTimeValue(Calendar time) {
+  public OdfTableCell setTimeValue(Calendar time) {
     setDurationValue(toDuration(time));
+
+    return this;
   }
 
   /**
@@ -1070,8 +1115,9 @@ public class OdfTableCell {
    * Set the cell value as a date and set the value type to be "date".
    *
    * @param date the date as a LocalDate object.
+   * @return this {@code OdfTableCell} instance
    */
-  public void setLocalDateValue(LocalDate date) {
+  public OdfTableCell setLocalDateValue(LocalDate date) {
     if (date == null) {
       throw new IllegalArgumentException("date shouldn't be null.");
     }
@@ -1080,14 +1126,17 @@ public class OdfTableCell {
     String svalue = date.toString();
     mCellElement.setOfficeDateValueAttribute(svalue);
     setDisplayText(svalue);
+
+    return this;
   }
 
   /**
    * Set the cell value as a date and set the value type to be "date".
    *
    * @param datetime the date/time as a LocalDateTime object.
+   * @return this {@code OdfTableCell} instance
    */
-  public void setLocalDateTimeValue(LocalDateTime datetime) {
+  public OdfTableCell setLocalDateTimeValue(LocalDateTime datetime) {
     if (datetime == null) {
       throw new IllegalArgumentException("datetime shouldn't be null.");
     }
@@ -1096,6 +1145,8 @@ public class OdfTableCell {
     String svalue = datetime.toString();
     mCellElement.setOfficeDateValueAttribute(svalue);
     setDisplayText(svalue);
+
+    return this;
   }
 
   /**
@@ -1141,10 +1192,11 @@ public class OdfTableCell {
    * cell value to something over 24 hours
    *
    * @param duration the time as a {@link Duration} instance.
+   * @return this {@code OdfTableCell} instance
    * @throws IllegalArgumentException If input time is null, an IllegalArgumentException exception
    *     will be thrown.
    */
-  public void setDurationValue(Duration duration) {
+  public OdfTableCell setDurationValue(Duration duration) {
     if (duration == null) {
       throw new IllegalArgumentException("duration shouldn't be null.");
     }
@@ -1153,16 +1205,19 @@ public class OdfTableCell {
     String svalue = duration.toString();
     mCellElement.setOfficeTimeValueAttribute(svalue);
     setDisplayText(svalue);
+
+    return this;
   }
 
   /**
    * Set the cell value as a time and set the value type to be "time" too.
    *
    * @param time the time as a {@link LocalTime} instance.
+   * @return this {@code OdfTableCell} instance
    * @throws IllegalArgumentException If input time is null, an IllegalArgumentException exception
    *     will be thrown.
    */
-  public void setLocalTimeValue(LocalTime time) {
+  public OdfTableCell setLocalTimeValue(LocalTime time) {
     if (time == null) {
       throw new IllegalArgumentException("time shouldn't be null.");
     }
@@ -1171,6 +1226,8 @@ public class OdfTableCell {
     String svalue = DEFAULT_TIME_FORMATTER.format(time);
     mCellElement.setOfficeTimeValueAttribute(svalue);
     setDisplayText(svalue);
+
+    return this;
   }
 
   /**
@@ -1230,8 +1287,9 @@ public class OdfTableCell {
    *
    * @param cellBackgroundColor the background color that need to set. If <code>cellBackgroundColor
    *     </code> is null, default background color <code>Color.WHITE</code> will be set.
+   * @return this {@code OdfTableCell} instance
    */
-  public void setCellBackgroundColor(Color cellBackgroundColor) {
+  public OdfTableCell setCellBackgroundColor(Color cellBackgroundColor) {
     if (cellBackgroundColor == null) {
       cellBackgroundColor = Color.WHITE;
     }
@@ -1244,6 +1302,8 @@ public class OdfTableCell {
               OdfName.newName(OdfDocumentNamespace.FO, "background-color"));
       styleElement.setProperty(bkColorProperty, cellBackgroundColor.toString());
     }
+
+    return this;
   }
 
   /**
@@ -1253,9 +1313,10 @@ public class OdfTableCell {
    *
    * @param cellBackgroundColor the background color that need to set. If cellBackgroundColor is
    *     null, default background color #FFFFFF will be set.
+   * @return this {@code OdfTableCell} instance
    * @see org.odftoolkit.odfdom.type.Color
    */
-  public void setCellBackgroundColor(String cellBackgroundColor) {
+  public OdfTableCell setCellBackgroundColor(String cellBackgroundColor) {
     if (!Color.isValid(cellBackgroundColor)) {
       LOG.log(
         Level.WARNING,
@@ -1271,6 +1332,8 @@ public class OdfTableCell {
               OdfName.newName(OdfDocumentNamespace.FO, "background-color"));
       styleElement.setProperty(bkColorProperty, cellBackgroundColor);
     }
+
+    return this;
   }
 
   /**
@@ -1402,15 +1465,18 @@ public class OdfTableCell {
    * {@odf.attribute table:formula}
    *
    * @param formula the formula that need to be set.
+   * @return this {@code OdfTableCell} instance
    * @throws IllegalArgumentException if formula is null, an IllegalArgumentException will be
    *     thrown.
    */
-  public void setFormula(String formula) {
+  public OdfTableCell setFormula(String formula) {
     if (formula == null) {
       throw new IllegalArgumentException("formula shouldn't be null.");
     }
     splitRepeatedCells();
     mCellElement.setTableFormulaAttribute(formula);
+
+    return this;
   }
 
   /**
@@ -1444,10 +1510,11 @@ public class OdfTableCell {
    *
    * @param currencySymbol the currency symbol
    * @param format overall format
+   * @return this {@code OdfTableCell} instance
    * @throws IllegalArgumentException if input currencySymbol or format is null, an
    *     IllegalArgumentException will be thrown.
    */
-  public void setCurrencyFormat(String currencySymbol, String format) {
+  public OdfTableCell setCurrencyFormat(String currencySymbol, String format) {
     if (currencySymbol == null) {
       throw new IllegalArgumentException("currencySymbol shouldn't be null.");
     }
@@ -1480,6 +1547,8 @@ public class OdfTableCell {
     if (value != null) {
       setDisplayText(formatCurrency(currencyStyle, value));
     }
+
+    return this;
   }
 
   // This method doesn't handle style:map element.
@@ -1553,13 +1622,14 @@ public class OdfTableCell {
    * <p>
    *
    * @param formatStr the cell need be formatted as this specified format string.
+   * @return this {@code OdfTableCell} instance
    * @throws IllegalArgumentException if <code>formatStr</code> is null or the cell value type is
    *     supported.
    * @throws UnsupportedOperationException if the adaptive failed, when cell value type is not set.
    * @see java.text.SimpleDateFormat
    * @see java.text.DecimalFormat
    */
-  public void setFormatString(String formatStr) {
+  public OdfTableCell setFormatString(String formatStr) {
     if (formatStr == null) {
       throw new IllegalArgumentException("formatStr shouldn't be null.");
     }
@@ -1593,6 +1663,8 @@ public class OdfTableCell {
       type = getValueType();
     }
     setCellFormatString(formatStr, type);
+
+    return this;
   }
 
   private void setCellFormatString(String formatStr, String type) {
