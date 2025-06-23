@@ -200,10 +200,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <argLine>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${project.build.directory}/coverage-reports/jacoco-ut.exec</argLine>
                     <systemPropertyVariables>
                         <org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
                     </systemPropertyVariables>
-                    <exclude>**/integrationtest/PerformanceIT.java</exclude>
+                    <excludes>
+                        <exclude>**/integrationtest/PerformanceIT.java</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -326,6 +329,22 @@
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <configuration>
+                    <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+                    <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-report</id>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -574,6 +593,7 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
+                            <argLine>${surefireArgLine}</argLine>
                             <systemPropertyVariables>
                                 <org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
                             </systemPropertyVariables>
