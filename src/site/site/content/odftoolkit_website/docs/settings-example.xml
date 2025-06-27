@@ -128,7 +128,7 @@ under the License.
     </server>
     -->
         <server>
-            <id>ossrh</id>
+            <id>central</id>
             <directoryPermissions>775</directoryPermissions>
             <filePermissions>644</filePermissions>
             <username>YOUR_USER_NAME</username>
@@ -261,12 +261,13 @@ under the License.
         </profile>
 
         <profile>
-            <id>ossrh</id>
+            <id>central</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <gpg.keyname>YOUR_GPG_SIGNATURE_KEY_ID</gpg.keyname>
+                <!-- note: better omit pass, maven uses gpg-agent by default -->
                 <gpg.passphraseServerId>YOUR_PASSPHRASE</gpg.passphraseServerId>
             </properties>
         </profile>

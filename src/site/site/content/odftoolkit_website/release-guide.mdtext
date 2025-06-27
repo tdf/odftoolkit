@@ -11,15 +11,15 @@ The release artifacts for each project are deployed to the Maven repository. Mak
 
 ### Only once your configuration Setup
 
-1. **Maven Repro Access**</br>Make sure you have access to Maven repro via our [Sonatype JIRA issue](https://issues.sonatype.org/browse/OSSRH-960). After this, you should be able to log in at <https://oss.sonatype.org/#welcome>.
-When logged in, will find in your profile a [user token](https://oss.sonatype.org/#profile;User%20Token). This token along with the according user name have to be added to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html) file.
+1. **Maven Repro Access**</br>Make sure you have access to Maven repro via our [Sonatype JIRA issue](https://issues.sonatype.org/browse/OSSRH-960). After this, you should be able to log in at <https://central.sonatype.com/>.
+When logged in, [generate a token](https://central.sonatype.org/publish/generate-portal-token/). This token consists of a generated user name and password; add it to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html) file.
 Something equivalent to:
 
-```shell
+```xml
     <server>
-      <id>ossrh</id>
-      <username>YOUR_USER_NAME</username><!-- from your profile -->
-      <password>YOUR_PASSWORD</password><!-- being the given token -->
+      <id>central</id>
+      <username>YOUR_USER_NAME</username><!-- as generated -->
+      <password>YOUR_PASSWORD</password><!-- as generated -->
     </server>
    ```
 
@@ -164,7 +164,7 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
 
 1. **Review and approve the Maven Nexus Deliverables**
 
-    Log into <https://oss.sonatype.org/#welcome> and review the artefacts of the release, if it is erroneous drop it.
+    Log into <https://central.sonatype.com/> and review the artefacts of the release, if it is erroneous drop it.
     1. If the release artefacts are correct, [close the repository](https://help.sonatype.com/repomanager2/staging-releases/managing-staging-repositories).
     2. After the closing process is done, you may release the repository.
     3. You may find the artefacts of the release among on Maven, e.g.: <https://repo1.maven.org/maven2/org/odftoolkit/odftoolkit/>
