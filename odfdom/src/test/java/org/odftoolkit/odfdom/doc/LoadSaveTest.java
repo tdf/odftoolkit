@@ -42,7 +42,9 @@ public class LoadSaveTest {
 
   private static final Logger LOG = Logger.getLogger(LoadSaveTest.class.getName());
   private static final String SOURCE = "not-only-odf.odt";
+  private static final String SOURCE2 = "svgTitleTest.odt";
   private static final String TARGET = "loadsavetest.odt";
+  private static final String TARGET2 = "loadsavetest2.odt";
   private static final String FOREIGN_ATTRIBUTE_NAME = "foreignAttribute";
   private static final String FOREIGN_ATTRIBUTE_VALUE = "foreignAttributeValue";
   private static final String FOREIGN_ELEMENT_TEXT = "foreignText";
@@ -98,6 +100,48 @@ public class LoadSaveTest {
 
     } catch (Exception e) {
       LOG.log(Level.SEVERE, e.getMessage() + ExceptionUtils.getStackTrace(e), e);
+      Assert.fail(e.getMessage());
+    }
+  }
+
+  @Test
+  public void testLoadSave2() {
+    try {
+      System.out.println("\n\nStarting SVG Title Test (testLoadSave2)");
+      OdfDocument odfDocument =
+          OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SOURCE2));
+      Assert.assertTrue(odfDocument.getPackage().contains("content.xml"));
+      String baseURI1 = odfDocument.getBaseURI();
+      System.out.println("SOURCE URI: " + baseURI1);
+
+      OdfFileDom odfContent = odfDocument.getContentDom();
+      OfficeDocumentContentElement content =
+          (OfficeDocumentContentElement) odfContent.getDocumentElement();
+      NodeList svgTitleList =
+          odfContent.getElementsByTagNameNS(OdfDocumentNamespace.SVG.getUri(), "title");
+      Assert.assertTrue(
+          "There should be a single <svg:title> within the document",
+          svgTitleList.getLength() == 1);
+      NodeList svgDescList =
+          odfContent.getElementsByTagNameNS(OdfDocumentNamespace.SVG.getUri(), "desc");
+      Assert.assertTrue(
+          "There should be no <svg:desc> within the document", svgDescList.getLength() == 0);
+
+      odfDocument.save(ResourceUtilities.getTestOutputFile(TARGET2));
+      odfDocument = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteOutputPath(TARGET2));
+      System.out.println("TARGET: " + ResourceUtilities.getAbsoluteOutputPath(TARGET2));
+
+      odfContent = odfDocument.getContentDom();
+      svgTitleList = odfContent.getElementsByTagNameNS(OdfDocumentNamespace.SVG.getUri(), "title");
+      Assert.assertTrue(
+          "There should be a single <svg:title> within the document",
+          svgTitleList.getLength() == 1);
+      svgDescList = odfContent.getElementsByTagNameNS(OdfDocumentNamespace.SVG.getUri(), "desc");
+      Assert.assertTrue(
+          "There should be no <svg:desc> within the document", svgDescList.getLength() == 0);
+    } catch (Exception e) {
+      Logger.getLogger(LoadSaveTest.class.getName())
+          .log(Level.SEVERE, e.getMessage() + ExceptionUtils.getStackTrace(e), e);
       Assert.fail(e.getMessage());
     }
   }
