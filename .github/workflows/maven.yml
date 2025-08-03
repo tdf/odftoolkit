@@ -27,7 +27,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     # Only run SonarCloud on the main branch
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.base_ref == 'master'
     steps:
       - uses: actions/checkout@v4
         with:
