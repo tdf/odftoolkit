@@ -1709,8 +1709,8 @@ public class OdfTable {
     return null;
   }
 
-  private OdfTableRow getHeaderRowByIndex(TableTableHeaderRowsElement headers, int nIndex) {
-    int result = 0;
+  private OdfTableRow getHeaderRowByIndex(TableTableHeaderRowsElement headers, int nIndex, int beginIndex) {
+    int result = beginIndex;
     OdfTableRow row = null;
     for (Node n : new DomNodeList(headers.getChildNodes())) {
       if (n instanceof TableTableRowElement) {
@@ -1760,7 +1760,7 @@ public class OdfTable {
     OdfTableRow row = null;
     for (Node n : new DomNodeList(mTableElement.getChildNodes())) {
       if (n instanceof TableTableHeaderRowsElement) {
-        row = getHeaderRowByIndex((TableTableHeaderRowsElement) n, index);
+        row = getHeaderRowByIndex((TableTableHeaderRowsElement) n, index, result);
         if (row != null) {
           return row;
         }
