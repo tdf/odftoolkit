@@ -149,4 +149,11 @@ public class TableTest {
 
     mysheet.save(ResourceUtilities.getTestOutputFile(TEST_FILE_SAVE_2TABLES_OUT));
   }
+
+  @Test
+  public void testTableWithHeaderRowBetweenTableRows() throws Exception {
+    OdfDocument odfdoc = OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath("HeaderRowBetweenTableRows.ods"));
+    OdfTable table = odfdoc.getTableByName("Table1");
+    table.getRowByIndex(1);
+  }
 }
