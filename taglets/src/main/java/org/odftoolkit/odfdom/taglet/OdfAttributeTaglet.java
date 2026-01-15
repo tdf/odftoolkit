@@ -32,25 +32,31 @@ import javax.lang.model.element.Element;
 import jdk.javadoc.doclet.Taglet;
 
 /**
- * This class implements a custom taglet to the map the ODF attribute to the declaration of the ODF
+ * This class implements a custom taglet to the map the ODF attribute to the
+ * declaration of the ODF
  * attribute in the OpenDocument specification.
  *
- * <p>The position of the OpenDocument specification in HTML can be provided using an environment
- * variable or java system property, while the system property overrides the environment variable.
- * In case nothing is been a default path within the JavaDoc resources directory is being used.
+ * <p>
+ * The position of the OpenDocument specification in HTML can be provided using
+ * an environment
+ * variable or java system property, while the system property overrides the
+ * environment variable.
+ * In case nothing is been a default path within the JavaDoc resources directory
+ * is being used.
  *
- * <p>For example the taglet <code>{&#64;odf.attribute xml:id}</code> would be resolved without
- * variable settings to <code>JAVA_DOC_BASE/resources/OpenDocument-v1.2-part1.html#attribute-xml_id
+ * <p>
+ * For example the taglet <code>{&#64;odf.attribute xml:id}</code> would be
+ * resolved without
+ * variable settings to
+ * <code>JAVA_DOC_BASE/resources/OpenDocument-v1.2-part1.html#attribute-xml_id
  * </code> .
  */
 public class OdfAttributeTaglet implements Taglet {
 
   private static final Logger LOG = Logger.getLogger(OdfAttributeTaglet.class.getName());
   private static final String NAME = "odf.attribute";
-  private static final String ODF_SPEC_PART1_PATH =
-      "../../../../../../resources/OpenDocument-v1.2-part1.html";
-  private static final String ODF_SPEC_PART3_PATH =
-      "../../../../../resources/OpenDocument-v1.2-part3.html";
+  private static final String ODF_SPEC_PART1_PATH = "../../../../../../resources/OpenDocument-v1.2-part1.html";
+  private static final String ODF_SPEC_PART3_PATH = "../../../../../resources/OpenDocument-v1.2-part3.html";
   private static String mOdfSpecPart1Path = null;
   private static String mOdfSpecPart3Path = null;
   private static Set<String> mNS_IN_PART3 = new HashSet<>();
@@ -108,37 +114,67 @@ public class OdfAttributeTaglet implements Taglet {
     }
   }
 
+  /**
+   * Creates a new OdfAttributeTaglet.
+   */
+  public OdfAttributeTaglet() {
+  }
+
   /** @return the name of this custom tag. */
   public String getName() {
     return NAME;
   }
 
-  /** @return true since this tag can be used in a field doc comment */
+  /**
+   * Check if this tag can be used in a field doc comment.
+   *
+   * @return true since this tag can be used in a field doc comment
+   */
   public boolean inField() {
     return true;
   }
 
-  /** @return true since this tag can be used in a constructor doc comment */
+  /**
+   * Check if this tag can be used in a constructor doc comment.
+   *
+   * @return true since this tag can be used in a constructor doc comment
+   */
   public boolean inConstructor() {
     return true;
   }
 
-  /** @return true since this tag can be used in a method doc comment */
+  /**
+   * Check if this tag can be used in a method doc comment.
+   *
+   * @return true since this tag can be used in a method doc comment
+   */
   public boolean inMethod() {
     return true;
   }
 
-  /** @return true since this tag can be used in an overview doc comment */
+  /**
+   * Check if this tag can be used in an overview doc comment.
+   *
+   * @return true since this tag can be used in an overview doc comment
+   */
   public boolean inOverview() {
     return true;
   }
 
-  /** @return true since this tag can be used in a package doc comment */
+  /**
+   * Check if this tag can be used in a package doc comment.
+   *
+   * @return true since this tag can be used in a package doc comment
+   */
   public boolean inPackage() {
     return true;
   }
 
-  /** @return true since this */
+  /**
+   * Check if this tag can be used in a type doc comment.
+   *
+   * @return true since this tag can be used in a type doc comment
+   */
   public boolean inType() {
     return true;
   }
@@ -167,7 +203,8 @@ public class OdfAttributeTaglet implements Taglet {
   }
 
   /**
-   * Given the <code>Tag</code> representation of this custom tag, return its string representation.
+   * Given the <code>Tag</code> representation of this custom tag, return its
+   * string representation.
    *
    * @return the string representation of the custom tag
    */
@@ -199,7 +236,12 @@ public class OdfAttributeTaglet implements Taglet {
 
   @Override
   public Set<Location> getAllowedLocations() {
-    throw new UnsupportedOperationException(
-        "Not supported yet."); // To change body of generated methods, choose Tools | Templates.
+    return java.util.EnumSet.of(
+        Location.FIELD,
+        Location.METHOD,
+        Location.TYPE,
+        Location.PACKAGE,
+        Location.CONSTRUCTOR,
+        Location.OVERVIEW);
   }
 }

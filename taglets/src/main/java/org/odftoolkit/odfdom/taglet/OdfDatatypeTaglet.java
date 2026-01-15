@@ -31,14 +31,21 @@ import javax.lang.model.element.Element;
 import jdk.javadoc.doclet.Taglet;
 
 /**
- * This class implements a custom taglet to the map the ODF datatype to the declaration of the ODF
+ * This class implements a custom taglet to the map the ODF datatype to the
+ * declaration of the ODF
  * datatype in the OpenDocument specification.
  *
- * <p>The position of the OpenDocument specification in HTML can be provided using an environment
- * variable or java system property, while the system property overrides the environment variable.
- * In case nothing is been a default path within the JavaDoc resources directory is being used.
+ * <p>
+ * The position of the OpenDocument specification in HTML can be provided using
+ * an environment
+ * variable or java system property, while the system property overrides the
+ * environment variable.
+ * In case nothing is been a default path within the JavaDoc resources directory
+ * is being used.
  *
- * <p>For example the taglet <code>{&#64;odf.datatype countryCode}</code> would be resolved without
+ * <p>
+ * For example the taglet <code>{&#64;odf.datatype countryCode}</code> would be
+ * resolved without
  * variable settings to <code>
  * JAVA_DOC_BASE/resources/OpenDocument-v1.2-part1.html#datatype-countryCode</code>.
  */
@@ -49,7 +56,8 @@ public class OdfDatatypeTaglet implements Taglet {
   private static final String ODF_SPEC_PATH = "../../../../resources/OpenDocument-v1.2-part1.html";
   private static String mOdfSpecPath = null;
 
-  /* FINDING THE ABSOLUTE PATH TO THE ODF SPEC IN HTML:
+  /*
+   * FINDING THE ABSOLUTE PATH TO THE ODF SPEC IN HTML:
    * 1) Try to get the odfSpecPath from the Java System variable (ODF_SPEC_PATH)
    * 2) Try to get the odfSpecPath from the environemnt variable (ODF_SPEC_PATH)
    * 3) If both not worked, use the default path
@@ -71,37 +79,67 @@ public class OdfDatatypeTaglet implements Taglet {
     }
   }
 
+  /**
+   * Creates a new OdfDatatypeTaglet.
+   */
+  public OdfDatatypeTaglet() {
+  }
+
   /** @return the name of this custom tag. */
   public String getName() {
     return NAME;
   }
 
-  /** @return true since this tag can be used in a field doc comment */
+  /**
+   * Check if this tag can be used in a field doc comment.
+   *
+   * @return true since this tag can be used in a field doc comment
+   */
   public boolean inField() {
     return true;
   }
 
-  /** @return true since this tag can be used in a constructor doc comment */
+  /**
+   * Check if this tag can be used in a constructor doc comment.
+   *
+   * @return true since this tag can be used in a constructor doc comment
+   */
   public boolean inConstructor() {
     return true;
   }
 
-  /** @return true since this tag can be used in a method doc comment */
+  /**
+   * Check if this tag can be used in a method doc comment.
+   *
+   * @return true since this tag can be used in a method doc comment
+   */
   public boolean inMethod() {
     return true;
   }
 
-  /** @return true since this tag can be used in an overview doc comment */
+  /**
+   * Check if this tag can be used in an overview doc comment.
+   *
+   * @return true since this tag can be used in an overview doc comment
+   */
   public boolean inOverview() {
     return true;
   }
 
-  /** @return true since this tag can be used in a package doc comment */
+  /**
+   * Check if this tag can be used in a package doc comment.
+   *
+   * @return true since this tag can be used in a package doc comment
+   */
   public boolean inPackage() {
     return true;
   }
 
-  /** @return true since this */
+  /**
+   * Check if this tag can be used in a datatype doc comment.
+   *
+   * @return true since this
+   */
   public boolean inDatatype() {
     return true;
   }
@@ -130,7 +168,8 @@ public class OdfDatatypeTaglet implements Taglet {
   }
 
   /**
-   * Given the <code>Tag</code> representation of this custom tag, return its string representation.
+   * Given the <code>Tag</code> representation of this custom tag, return its
+   * string representation.
    *
    * @return the string representation of the custom tag
    */
@@ -143,13 +182,23 @@ public class OdfDatatypeTaglet implements Taglet {
     return "<a href=\"" + mOdfSpecPath + "#" + fragmentIdentifier + "\">" + name + "</a>";
   }
 
+  /**
+   * Check if this tag can be used in a type doc comment.
+   *
+   * @return true since this tag can be used in a type doc comment
+   */
   public boolean inType() {
-    throw new UnsupportedOperationException("Not supported yet.");
+    return true;
   }
 
   @Override
   public Set<Location> getAllowedLocations() {
-    throw new UnsupportedOperationException(
-        "Not supported yet."); // To change body of generated methods, choose Tools | Templates.
+    return java.util.EnumSet.of(
+        Location.FIELD,
+        Location.METHOD,
+        Location.TYPE,
+        Location.PACKAGE,
+        Location.CONSTRUCTOR,
+        Location.OVERVIEW);
   }
 }
