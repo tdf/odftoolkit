@@ -277,6 +277,17 @@
             </roles>
             <timezone>+1</timezone>
         </developer>
+        <developer>
+            <id>axh</id>
+            <name>Axel</name>
+            <email>axh AT dua3.com</email>
+            <organization>Freelancer</organization>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+7</timezone>
+        </developer>
     </developers>
     <mailingLists>
         <mailingList>
