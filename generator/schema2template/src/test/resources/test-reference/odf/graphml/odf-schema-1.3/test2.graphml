@@ -9,8 +9,9 @@
 	<key id="order" for="edge" attr.name="order" attr.type="string"></key>
 	<graph id="G" edgedefault="directed">
 		<node id="0">
+			<!--
 			<data key="labelV">ELEMENT</data>
-			<data key="colorV">#6495ed</data>
+			<data key="colorV">#6495ed</data>-->
 			<data key="label"> | text:page-count | text:paragraph-count | text:word-count | text:character-count | text:table-count | text:image-count | text:object-count</data>
 		</node>
 		<node id="3">

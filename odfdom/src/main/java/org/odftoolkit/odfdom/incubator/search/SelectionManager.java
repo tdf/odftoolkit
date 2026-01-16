@@ -137,10 +137,8 @@ public class SelectionManager {
       selections.remove(item);
     }
   }
-  
-  /**
-   * Removes all selections from the SelectionManager.
-   */
+
+  /** Removes all selections from the SelectionManager. */
   public void unregisterAll() {
     repository.clear();
   }

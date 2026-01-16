@@ -52,7 +52,8 @@ public final class ResourceUtilities {
   static final String ODT_SUFFIX = ".odt";
   static final List<String> NO_OPERATIONS = new ArrayList<String>(0);
   static final String NO_METHOD_NAME = "";
-  // the smallest possible test document of this ODF type. Edited manually and proofed valid by
+  // the smallest possible test document of this ODF type. Edited manually and
+  // proofed valid by
   // Apache ODF Validator.
   static final String EMPTY_AS_CAN_BE = "empty_as_can_be";
   private static final String PATH_FROM_TEST_CLASSES_TO_REFENCE = "test-reference" + File.separator;
@@ -321,7 +322,9 @@ public final class ResourceUtilities {
   }
 
   /*
-   * @param file the file to be saved, when creating a test file, you might use <code>newTestOutputFile(String relativeFilePath)</code>.
+   * @param file the file to be saved, when creating a test file, you might use
+   * <code>newTestOutputFile(String relativeFilePath)</code>.
+   *
    * @param inputData the data to be written into the file
    */
   public static void saveStringToFile(File file, String data) {
