@@ -23,11 +23,11 @@ Something equivalent to:
     </server>
    ```
 
-2. **Install GNU PG**</br>
+1. **Install GNU PG**</br>
 GNU PG is necessary to sign the packages of our release.
 </br>Install for your OS. [See details in tutorial 'publish your artifacts to Maven'](https://dzone.com/articles/publish-your-artifacts-to-maven-central)
 
-3. **Configure GNU PG**</br>Add your GNU credentials (and you might as well your GIT credentials) to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html).
+2. **Configure GNU PG**</br>Add your GNU credentials (and you might as well your GIT credentials) to your local [&lt;USER_HOME&gt;/.m2/settings.xml](https://maven.apache.org/settings.html).
 
 **NOTE:**</br>
 See [our example settings.xml](docs/settings-example.xml) and search & replace the placeholders starting with 'YOUR_'.
@@ -57,8 +57,9 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
 
     ```shell
     ./README.md
-    ./src/site/content/odftoolkit_website/ReleaseNotes.mdtext
-    ./src/site/content/odftoolkit_website/downloads.mdtext
+    ./src/site/content/odftoolkit_website/index.mdtext # add a release date (I added always a week later to allow review on the fork GitHub server, were the release-branch is main branch for Doc feature)
+    ./src/site/content/odftoolkit_website/ReleaseNotes.mdtext # the script ./src/site/show-milestone-issues.sh lists the issues of the release milestone as markdown
+    ./src/site/content/odftoolkit_website/downloads.mdtext # beware not only search/replace the version#, but copy the latest version into the previous section
     ./src/site/site/content/odftoolkit_website/javadoc.mdtext # the older API exists only on odftoolkit.org (but we keep API DIFF files here, too!)
     ./docs/api/index.html # one of a very few HTML files to be edited - insertion of version#!
     ```
@@ -77,7 +78,7 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
     JavaDoc has to be generated with the upcoming release number already set, which is done and a build via, after an interactive process:
 
     ```shell
-    mvn release:prepare # build with release data javadoc for release generated in target
+    mvn release:prepare # build with release data javadoc for release generated in target - but had problems as it already prepared the next release version which was not useful
     git status -sb # there should be no uncommitted / changed files
     ```
 
@@ -96,12 +97,12 @@ There are two kinds of releases a quick SNAPSHOT release, where the SNAPSHOT wil
     cd japicmp
     mvn install
     cd japicmp/target
-    java -jar .\japicmp-0.18.4-SNAPSHOT-jar-with-dependencies.jar -m -n .\odfdom-java-0.12.0.jar -o .\odfdom-java-0.11.0.jar --ignore-missing-classes --html-file odfdom-api-changes-0.11.0-0.12.0.html # adjust versions numberes :-)
-    cp odfdom-api-changes-0.11.0-0.12.0.html <YOUR_ODFTOOLKIT_DIR>/docs/api
-    cd <YOUR_ODFTOOLKIT_DIR>/docs/api
+    java -jar ./japicmp-0.25.5-SNAPSHOT-jar-with-dependencies.jar -m -n ../../../odftoolkit-svante/odfdom/target/odfdom-java-0.13.0.jar -o ~/Downloads/odfdom-java-0.12.0.jar # adjust versions numberes :-)
+    cp odfdom-api-changes-0.12.0-0.13.0.html <YOUR_ODFTOOLKIT_DIR>/docs/api
+    cd <YOUR_ODFTOOLKIT_DIR>/docs/api # you might want to remove the paths for the JARs!
     git status -sb # there should be only one field
     git add .
-    git commit -m"Adding ODFDOM API changes of this release - created via japicmp-0.18.4-SNAPSHOT" # version may vary
+    git commit -m"Adding ODFDOM API changes of this release - created via japicmp-0.25.5-SNAPSHOT" # version may vary
    ```
 
 1. **JUST IN CASE: A clean start after errors**</br>Make sure that your working copy is clean.Preferably check out/a

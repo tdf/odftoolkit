@@ -1,5 +1,41 @@
 # ODF Toolkit Release Notes
 
+## Release 0.13.0
+
+[ODFDOM 0.13.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.13.0/) is released on January 23rd, 2026. Git tag: "odftoolkit-0.13.0".
+
+### GitHub issues (and feature pull requests) closed for this release 0.13.0
+
+* [#162](https://github.com/tdf/odftoolkit/issues/162) encryption code is obsolete and supports only Blowfish/SHA1 - by mistmist was merged on Nov 28, 2024
+* [#274](https://github.com/tdf/odftoolkit/issues/274) Bad link in README - by jdeisenberg was closed on Jan 19, 2024
+* [#275](https://github.com/tdf/odftoolkit/issues/275) Bad links in JavaDoc - by jdeisenberg was closed on Jan 19, 2024
+* [#276](https://github.com/tdf/odftoolkit/issues/276) Release file can't be built due to lack of .git - by fweng322 was closed on Jan 24, 2024
+* [#285](https://github.com/tdf/odftoolkit/issues/285) OdfTableCellRange() is unusably slow for spreadsheets with whole-sheet formatting - by Nnnes was closed on Apr 19, 2024
+* [#294](https://github.com/tdf/odftoolkit/issues/294) OdfDrawFrame childnode SvgTitleElement is serialized as SvgDescElement - by django9876 was merged on May 10, 2025
+* [#298](https://github.com/tdf/odftoolkit/issues/298) Error in line deletion in table from odf text document - by Boarschti42 was merged on Jul 8, 2024
+* [#313](https://github.com/tdf/odftoolkit/issues/313) Create a full copy of a spreadsheet in an ODF Spreadsheet document using the ODF Toolkit. - by pe1999 was merged on Jul 30, 2024
+* [#319](https://github.com/tdf/odftoolkit/issues/319) Validator error when using "-g" option - by s8321414 was closed on Sep 6, 2024
+* [#332](https://github.com/tdf/odftoolkit/issues/332) Localisation Based NumberFormatException on getWidth - by AndreasTAK was merged on Oct 25, 2024
+* [#348](https://github.com/tdf/odftoolkit/issues/348) Unclear message when the mimetype has extra fields - by DavidBruant was closed on Apr 28, 2025
+* [#351](https://github.com/tdf/odftoolkit/issues/351) Many Javadoc errors on fresh checkout - by xzel23 was merged on May 9, 2025
+* [#353](https://github.com/tdf/odftoolkit/issues/353) logging should be consistent and no logging implementations should be added as a transient dependency - by xzel23 was closed on May 18, 2025
+* [#355](https://github.com/tdf/odftoolkit/issues/355) lots of unnecessary calls to toString() - by xzel23 was closed on May 10, 2025
+* [#361](https://github.com/tdf/odftoolkit/issues/361) support java.nio.Path - by xzel23 was merged on May 10, 2025
+* [#365](https://github.com/tdf/odftoolkit/issues/365) Primitive constructors are deprecated for removal and should be replaced - by xzel23 was closed on May 18, 2025
+* [#367](https://github.com/tdf/odftoolkit/issues/367) cleanup the code - by xzel23 was closed on May 18, 2025
+* [#393](https://github.com/tdf/odftoolkit/issues/393) issues with time values over 24 hours - by PeterFokkinga was merged on May 30, 2025
+* [#395](https://github.com/tdf/odftoolkit/issues/395) Allow methods to be chained - by blakemcbride was merged on Jun 1, 2025
+
+### Major updates with 0.13.0
+
+This release contains a set of incremental but important improvements to both the public API and internal implementation. Handling of spreadsheet time values has been corrected and extended by adding support for Java 8 `Duration`, allowing durations beyond 24 hours and fixing issues in existing `getTimeValue()` / `setTimeValue()` logic. The table and cell APIs were adjusted to support fluent method chaining, reducing boilerplate in client code. Several long-standing bugs and edge cases were fixed, including incorrect bitwise constants, index errors, null-handling issues, and invalid string comparisons, resulting in more predictable runtime behavior.
+
+On the maintenance side, the codebase was updated to use more modern Java language features, and concurrency handling was simplified in critical classes. The build and release process was migrated to Maven Central, and CI was extended with coverage reporting and static analysis to make regressions easier to detect. Dependencies were updated to current versions as part of regular maintenance, improving compatibility and reducing known issues without introducing API-level changes.
+
+#### Maven
+
+Updated to latest Maven dependency versions - improving overall security!
+
 ## Release 0.12.0
 
 [ODFDOM 0.12.0](https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/0.12.0/) is released on December 20th, 2023. Git tag: "odftoolkit-0.12.0".
@@ -14,17 +50,17 @@
 * [#240](https://github.com/tdf/odftoolkit/issues/240) Text Selection refactoring of Ralph - continuation of PR #238 - by rsoika was merged on Jul 13
 * [#241](https://github.com/tdf/odftoolkit/issues/242) added a new doc page 'change_api" and minor changes - by rsoika was merged on Jul 13
 * [#242](https://github.com/tdf/odftoolkit/issues/242) Determine font, font size, bold/italic/underline styles - by j-dimension was closed on Jul 14
-* [#243](https://github.com/tdf/odftoolkit/issues/243) Diskussion Forum documentation (Documentation) - by rsoika was closed on Jul 19
+* [#243](https://github.com/tdf/odftoolkit/issues/243) Discussion Forum documentation (Documentation) - by rsoika was closed on Jul 19
 * [#251](https://github.com/tdf/odftoolkit/issues/251) OdfEditableTextExtractor extracts only a last part of the text - by sergeych was closed on Sep 4
 * [#254](https://github.com/tdf/odftoolkit/issues/255) Fix OSGI Implementation Details - by Boarschti42 was closed on Oct 18
 
-### Major updates with this version
+### Major updates with 0.12.0
 
 We added a new ODF 1.3 mimetype "Text master template".
 The API for Text Selection has been refactored [#240](https://github.com/tdf/odftoolkit/issues/240) has been completely  refactored (in incompatible way as it was earlier errorneous), see all [ODFDOM API changes since 0.11.0 to 0.12.0](./api/odfdom-api-changes-0.11.0-0.12.0.html)!
 Aside of minor improvements this release was rather our yearly maintenance release - the refactoring of the generation is ongoing.
 
-#### Maven
+#### Maven 0.12.0 update
 
 Updated to latest Maven dependency versions - improving overall security!
 
@@ -63,7 +99,7 @@ Updated to latest Maven dependency versions - improving overall security!
 * Prior manual added functionality to the generated source has been moved into a [Velocity Macro file](https://github.com/tdf/odftoolkit/blob/master/generator/schema2template/src/test/resources/test-input/odf/generation/odfdom-java/dom/template/velocity-macros.vm) (to ease reading the template - likely best done with [VSCode extension for Velocity](https://marketplace.visualstudio.com/items?itemName=Quidgest.vscode-velocity)) and is triggered by certain attributes (e.g. [elements with xhtml:content](https://tdf.github.io/odftoolkit/odf1.2/OpenDocument-v1.2-reference.html#attribute_xhtml:content_0) require special handling for RDF metadata) or by configuration (e.g. some elements are being duplicated by a repetition attribute, which is now being explicitly named) to allow to add the functionality for repetition and split to the XML classes.
 ODF JSON Chang
 
-#### Maven
+#### Maven update 0.11.0
 
 * For Maven the dependencyManagement and pluginManagement functionality is being used more strictly to define version numbers for Maven dependencies and plugins only once in the root project.
 * The signing of artifacts is no longer required for every build only for releases.
