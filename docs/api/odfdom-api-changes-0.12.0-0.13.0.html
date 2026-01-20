@@ -1,0 +1,6305 @@
+<html>
+<head>
+<title>japicmp-Report</title>
+<style>
+body {
+    font-family: Verdana;
+}
+.title {
+    font-weight: bold;
+}
+.new {
+    color: green;
+}
+.removed {
+    color: red;
+}
+.modified {
+    color: orange;
+}
+.unchanged {
+    color: black;
+}
+thead tr td {
+    font-weight: bold;
+}
+.toc {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border: 1px solid #dcdcdc;
+    padding: 5px;
+    background: #ededed;
+    display: inline-block;
+}
+table {
+    border-collapse: collapse;
+}
+table tr td {
+    border: 1px solid black;
+    padding: 5px;
+}
+table thead {
+    background-color: #dee3e9;
+}
+table tbody tr td.matrix_layout {
+    background-color: #dee3e9;
+    font-weight: bold;
+}
+.class {
+    margin-bottom: 2em;
+    border: 1px solid #dcdcdc;
+    padding: 5px;
+    background: #ededed;
+    display: inline-block;
+}
+.class_compatibilityChanges {
+	margin-top: 1em;
+}
+
+.class_fileFormatVersion {
+	margin-top: 1em;
+}
+.class_generictemplates {
+	margin-top: 1em;
+}
+.class_superclass {
+    margin-top: 1em;
+}
+.class_interfaces {
+    margin-top: 1em;
+}
+.class_fields {
+    margin-top: 1em;
+}
+.class_serialVersionUid {
+    margin-top: 1em;
+}
+.class_constructors {
+    margin-top: 1em;
+}
+.class_methods {
+    margin-top: 1em;
+}
+.class_annotations {
+    margin-top: 1em;
+}
+.label {
+    font-weight: bold;
+}
+.label_class_member {
+    background-color: #4d7a97;
+    display: inline-block;
+    padding: 5px;
+}
+.toc_link {
+    margin-left: 10px;
+    font-size: 0.5em;
+}
+.modifier {
+    font-style: italic;
+}
+.method_return_type {
+
+}
+.method_parameter {
+
+}
+ul {
+    list-style-type: none;
+    padding: 0px 0px;
+}
+.meta-information {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background: #ededed;
+    display: inline-block;
+}
+.warnings {
+    margin-top: 1em;
+    font-size: 0.75em;
+}
+.explanations {
+	margin-bottom: 2em;
+}
+.table_head_td {
+	background-color: #dee3e9;
+	font-weight: bold;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+</style>
+</head>
+<body>
+<span class="title">japicmp-Report</span>
+<br/>
+<div class="meta-information">
+	<table>
+		<tr>
+			<td>Old:</td>
+			<td>
+				odfdom-java-0.12.0.jar
+			</td>
+		</tr>
+		<tr>
+			<td>New:</td>
+			<td>
+				odfdom-java-0.13.0.jar
+			</td>
+		</tr>
+		<tr>
+			<td>Created:</td>
+			<td>
+				2026-01-15T20:27:59.311+0100
+			</td>
+		</tr>
+		<tr>
+			<td>Access modifier filter:</td>
+			<td id="meta-accessmodifier-value">
+				PROTECTED
+			</td>
+		</tr>
+		<tr>
+			<td>Only modifications:</td>
+			<td>
+				true
+			</td>
+		</tr>
+		<tr>
+			<td>Only binary incompatible modifications:</td>
+			<td>
+				false
+			</td>
+		</tr>
+		<tr>
+			<td>Ignore missing classes:</td>
+			<td>
+				true
+			</td>
+		</tr>
+		<tr>
+			<td>Includes:</td>
+			<td>
+				all
+			</td>
+		</tr>
+		<tr>
+			<td>Excludes:</td>
+			<td>
+				n.a.
+			</td>
+		</tr>
+		<tr>
+			<td id="semver-label">Semantic Versioning:</td>
+			<td id="semver-version">
+				1.0.0
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div class="warnings">
+<span id="warning-missingclasses">
+WARNING: You are using the option '--ignore-missing-classes', i.e. superclasses and
+interfaces that could not be found on the classpath are ignored. Hence changes
+caused by these superclasses and interfaces are not reflected in the output.
+</span>
+</div><ul>
+<li>
+<a href="#toc">Classes</a>
+</li>
+</ul>
+<div class="toc" id="toc">
+	<span class="label">Classes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Status</td>
+			<td>Fully Qualified Name</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.changes.ChangesFileSaxHandler">
+			org.odftoolkit.odfdom.changes.ChangesFileSaxHandler
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.changes.CollabTextDocument">
+			org.odftoolkit.odfdom.changes.CollabTextDocument
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED&#160;(!)</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.changes.MapHelper">
+			org.odftoolkit.odfdom.changes.MapHelper
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.changes.ShapeProperties">
+			org.odftoolkit.odfdom.changes.ShapeProperties
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="unchanged">UNCHANGED&#160;(*)</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.changes.Table">
+			org.odftoolkit.odfdom.changes.Table
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.changes.TextSelection">
+			org.odftoolkit.odfdom.changes.TextSelection
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.doc.OdfDocument">
+			org.odftoolkit.odfdom.doc.OdfDocument
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.doc.OdfPresentationDocument">
+			org.odftoolkit.odfdom.doc.OdfPresentationDocument
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.doc.OdfTextDocument">
+			org.odftoolkit.odfdom.doc.OdfTextDocument
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED&#160;(!)</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.doc.table.OdfTable">
+			org.odftoolkit.odfdom.doc.table.OdfTable
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED&#160;(!)</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.doc.table.OdfTableCell">
+			org.odftoolkit.odfdom.doc.table.OdfTableCell
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.doc.table.OdfTableCellRange">
+			org.odftoolkit.odfdom.doc.table.OdfTableCellRange
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.doc.table.OdfTableColumn">
+			org.odftoolkit.odfdom.doc.table.OdfTableColumn
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.doc.table.OdfTableRow">
+			org.odftoolkit.odfdom.doc.table.OdfTableRow
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.dom.element.OdfStylableElement">
+			org.odftoolkit.odfdom.dom.element.OdfStylableElement
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.dom.element.OdfStyleBase">
+			org.odftoolkit.odfdom.dom.element.OdfStyleBase
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.dom.OdfContentDom">
+			org.odftoolkit.odfdom.dom.OdfContentDom
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.dom.OdfMetaDom">
+			org.odftoolkit.odfdom.dom.OdfMetaDom
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.dom.OdfSchemaDocument">
+			org.odftoolkit.odfdom.dom.OdfSchemaDocument
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.dom.OdfSettingsDom">
+			org.odftoolkit.odfdom.dom.OdfSettingsDom
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.dom.OdfStylesDom">
+			org.odftoolkit.odfdom.dom.OdfStylesDom
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage">
+			org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles">
+			org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles">
+			org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles">
+			org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED&#160;(!)</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.incubator.doc.office.OdfStylesBase">
+			org.odftoolkit.odfdom.incubator.doc.office.OdfStylesBase
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.incubator.doc.text.OdfEditableTextExtractor">
+			org.odftoolkit.odfdom.incubator.doc.text.OdfEditableTextExtractor
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.incubator.doc.text.OdfTextList">
+			org.odftoolkit.odfdom.incubator.doc.text.OdfTextList
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="unchanged">UNCHANGED&#160;(*)</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle">
+			org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta">
+			org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.incubator.search.SelectionManager">
+			org.odftoolkit.odfdom.incubator.search.SelectionManager
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.incubator.search.TextNavigation">
+			org.odftoolkit.odfdom.incubator.search.TextNavigation
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.incubator.search.TextStyleNavigation">
+			org.odftoolkit.odfdom.incubator.search.TextStyleNavigation
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.JarManifest">
+			org.odftoolkit.odfdom.JarManifest
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.pkg.DefaultErrorHandler">
+			org.odftoolkit.odfdom.pkg.DefaultErrorHandler
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.pkg.manifest.OdfManifestDom">
+			org.odftoolkit.odfdom.pkg.manifest.OdfManifestDom
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.pkg.OdfElement">
+			org.odftoolkit.odfdom.pkg.OdfElement
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.pkg.OdfFileDom">
+			org.odftoolkit.odfdom.pkg.OdfFileDom
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.pkg.OdfName">
+			org.odftoolkit.odfdom.pkg.OdfName
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.pkg.OdfPackage">
+			org.odftoolkit.odfdom.pkg.OdfPackage
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.pkg.OdfPackageConstraint">
+			org.odftoolkit.odfdom.pkg.OdfPackageConstraint
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.pkg.OdfPackageDocument">
+			org.odftoolkit.odfdom.pkg.OdfPackageDocument
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.pkg.OdfXMLFactory">
+			org.odftoolkit.odfdom.pkg.OdfXMLFactory
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.pkg.rdfa.Util">
+			org.odftoolkit.odfdom.pkg.rdfa.Util
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.type.AnyURI">
+			org.odftoolkit.odfdom.type.AnyURI
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.type.DateOrDateTime">
+			org.odftoolkit.odfdom.type.DateOrDateTime
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.type.DateTime">
+			org.odftoolkit.odfdom.type.DateTime
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.type.Duration">
+			org.odftoolkit.odfdom.type.Duration
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.type.Time">
+			org.odftoolkit.odfdom.type.Time
+		</a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<span class="modified">MODIFIED</span>
+	</td>
+	<td>
+		<a href="#org.odftoolkit.odfdom.type.TimeOrDateTime">
+			org.odftoolkit.odfdom.type.TimeOrDateTime
+		</a>
+	</td>
+</tr>
+
+		</tbody>
+	</table>
+</div>
+<div class="explanations">
+<span>Binary incompatible changes are marked with (!) while source incompatible changes are marked with (*).</span>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.changes.ChangesFileSaxHandler">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.changes.ChangesFileSaxHandler"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.changes.ChangesFileSaxHandler
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.pkg.OdfFileSaxHandler</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.changes.CollabTextDocument">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.changes.CollabTextDocument"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.changes.CollabTextDocument
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.changes.MapHelper">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.changes.MapHelper"></a>
+				<span class="modified">MODIFIED&#160;(!)</span>
+
+				<span class="modifier modified">FINAL&#160;(&lt;-&#160;NON_FINAL)&#160;</span>
+<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.changes.MapHelper
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+		<div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>CLASS_NOW_NOT_EXTENDABLE</td></tr>
+
+		</tbody>
+	</table>
+</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+			<span class="label_class_member">Constructors:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Modifier</td>
+		<td>Generic Templates</td>
+		<td>Constructor</td>
+		<td>Exceptions</td>
+		<td>Compatibility Changes:</td>
+		<td>Line Number</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier modified">PRIVATE&#160;(&lt;-&#160;PUBLIC)&#160;</span>
+</td>
+<td>n.a.</td>
+<td>MapHelper()</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>CONSTRUCTOR_LESS_ACCESSIBLE</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			71
+		</td>
+		<td>
+			88
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.changes.ShapeProperties">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.changes.ShapeProperties"></a>
+				<span class="modified">MODIFIED</span>
+				<span class="new">&#160;(Serializable compatible)&#160;</span>
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.changes.ShapeProperties
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.changes.CachedComponent</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+		<div class="class_serialVersionUid">
+	<table>
+		<thead>
+		<tr>
+			<td></td>
+			<td>Serializable</td>
+			<td>default serialVersionUID</td>
+			<td>serialVersionUID in class</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+<td class="matrix_layout">Old</td><td class="">true</td>
+<td class="modified">7179937478469900008</td>
+<td class="">1</td>
+</tr>
+<tr>
+<td class="matrix_layout">New</td><td class="">true</td>
+<td class="modified">1386293202593575707</td>
+<td class="">1</td>
+</tr>
+
+		</tbody>
+	</table>
+</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.changes.Table">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.changes.Table"></a>
+				<span class="unchanged">UNCHANGED&#160;(*)</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.changes.Table
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+			<span class="label_class_member">Generic Templates:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Change Status</td>
+		<td>Name</td>
+		<td>Old Type</td>
+		<td>New Type</td>
+		<td>Generics</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>T</td>
+<td>java.lang.Object</td>
+<td>java.lang.Object</td>
+<td></td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.changes.Component</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+			<span class="label_class_member">Methods:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Modifier</td>
+		<td>Generic Templates</td>
+		<td>Type</td>
+		<td>Method</td>
+		<td>Exceptions</td>
+		<td>Compatibility Changes:</td>
+		<td>Line Number</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED&#160;(*)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type unchanged">java.util.List<div class="tooltip"><span class="modified method_parameter">&#60;..&#62;</span><div class="tooltiptext"><table><tr><td class="table_head_td">New:</td><td>org.odftoolkit.odfdom.changes.Component</td></tr></table></div></div></span></td>
+<td>getChildren()</td>
+<td></td>
+<td>n.a.</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			96
+		</td>
+		<td>
+			95
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="unchanged">UNCHANGED&#160;(*)</span></td>
+<td><span class="modifier unchanged">static</span>
+<span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type unchanged">java.util.List<div class="tooltip"><span class="unchanged method_parameter">&#60;..&#62;</span><div class="tooltiptext"><table><tr><td class="table_head_td">New:</td><td>org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement</td></tr><tr><td class="table_head_td">Old:</td><td>org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement</td></tr></table></div></div></span></td>
+<td>getTableColumnElements(<span class="method_parameter unchanged">org.w3c.dom.Element</span>, <span class="method_parameter unchanged">java.util.List<div class="tooltip"><span class="modified method_parameter">&#60;..&#62;</span><div class="tooltiptext"><table><tr><td class="table_head_td">New:</td><td>org.odftoolkit.odfdom.dom.element.table.TableTableColumnElement</td></tr></table></div></div>&#160;(*)</span>)</td>
+<td></td>
+<td>n.a.</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			308
+		</td>
+		<td>
+			307
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.changes.TextSelection">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.changes.TextSelection"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+<span class="modifier unchanged">abstract</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.changes.TextSelection
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+		<div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>INTERFACE_ADDED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+			<span class="label_class_member">Interfaces:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Interface</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td>java.lang.Comparable</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+			<span class="label_class_member">Methods:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Modifier</td>
+		<td>Generic Templates</td>
+		<td>Type</td>
+		<td>Method</td>
+		<td>Exceptions</td>
+		<td>Compatibility Changes:</td>
+		<td>Line Number</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">int</span></td>
+<td>compareTo(<span class="method_parameter unchanged">org.odftoolkit.odfdom.changes.TextSelection</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			148
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.doc.OdfDocument">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.doc.OdfDocument"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+<span class="modifier unchanged">abstract</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.doc.OdfDocument
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.dom.OdfSchemaDocument</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+			<span class="label_class_member">Methods:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Modifier</td>
+		<td>Generic Templates</td>
+		<td>Type</td>
+		<td>Method</td>
+		<td>Exceptions</td>
+		<td>Compatibility Changes:</td>
+		<td>Line Number</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">static</span>
+<span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">org.odftoolkit.odfdom.doc.OdfDocument</span></td>
+<td>loadDocument(<span class="method_parameter unchanged">java.nio.file.Path</span>)</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Status:</td>
+		<td>Name:</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td>java.lang.Exception</td>
+</tr>
+
+	</tbody>
+</table>
+</td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			327
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.doc.OdfPresentationDocument">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.doc.OdfPresentationDocument"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.doc.OdfPresentationDocument
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.doc.OdfDocument</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.doc.OdfTextDocument">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.doc.OdfTextDocument"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.doc.OdfTextDocument
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.doc.OdfDocument</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.doc.table.OdfTable">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.doc.table.OdfTable"></a>
+				<span class="modified">MODIFIED&#160;(!)</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.doc.table.OdfTable
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+			<span class="label_class_member">Methods:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Modifier</td>
+		<td>Generic Templates</td>
+		<td>Type</td>
+		<td>Method</td>
+		<td>Exceptions</td>
+		<td>Compatibility Changes:</td>
+		<td>Line Number</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="modified">MODIFIED</span></td>
+<td><span class="modifier modified">PUBLIC&#160;(&lt;-&#160;PROTECTED)&#160;</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTable&#160;(&lt;-&#160;void</span></td>
+<td>setCellStyleInheritance(<span class="method_parameter unchanged">boolean</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			2026
+		</td>
+		<td>
+			2025
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTable&#160;(&lt;-&#160;void</span></td>
+<td>setProtected(<span class="method_parameter unchanged">boolean</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			1955
+		</td>
+		<td>
+			1952
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTable&#160;(&lt;-&#160;void</span></td>
+<td>setTableName(<span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			1922
+		</td>
+		<td>
+			1917
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTable&#160;(&lt;-&#160;void</span></td>
+<td>setWidth(<span class="method_parameter unchanged">long</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			301
+		</td>
+		<td>
+			305
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.doc.table.OdfTableCell">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.doc.table.OdfTableCell"></a>
+				<span class="modified">MODIFIED&#160;(!)</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.doc.table.OdfTableCell
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+			<span class="label_class_member">Methods:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Modifier</td>
+		<td>Generic Templates</td>
+		<td>Type</td>
+		<td>Method</td>
+		<td>Exceptions</td>
+		<td>Compatibility Changes:</td>
+		<td>Line Number</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type unchanged">java.util.Calendar</span></td>
+<td>getDateValue()<div class="class_annotations">
+	<span class="label_class_member">Annotations:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Status:</td>
+			<td>Fully Qualified Name:</td>
+			<td>Elements:</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+<td><span class="new">NEW</span></td>
+<td>java.lang.Deprecated</td>
+<td>n.a.</td>
+</tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>ANNOTATION_DEPRECATED_ADDED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			808
+		</td>
+		<td>
+			907
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">java.time.Duration</span></td>
+<td>getDurationValue()</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			1160
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">java.time.LocalDateTime</span></td>
+<td>getLocalDateTimeValue()</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			1094
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">java.time.LocalDate</span></td>
+<td>getLocalDateValue()</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			1071
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">java.time.LocalTime</span></td>
+<td>getLocalTimeValue()</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			1176
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type unchanged">java.util.Calendar</span></td>
+<td>getTimeValue()<div class="class_annotations">
+	<span class="label_class_member">Annotations:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Status:</td>
+			<td>Fully Qualified Name:</td>
+			<td>Elements:</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+<td><span class="new">NEW</span></td>
+<td>java.lang.Deprecated</td>
+<td>n.a.</td>
+</tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>ANNOTATION_DEPRECATED_ADDED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			933
+		</td>
+		<td>
+			1047
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setBooleanValue(<span class="method_parameter unchanged">java.lang.Boolean</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			792
+		</td>
+		<td>
+			890
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setCellBackgroundColor(<span class="method_parameter unchanged">org.odftoolkit.odfdom.type.Color</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			1037
+		</td>
+		<td>
+			1293
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setCellBackgroundColor(<span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			1061
+		</td>
+		<td>
+			1320
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setCurrencyCode(<span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			529
+		</td>
+		<td>
+			606
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setCurrencyFormat(<span class="method_parameter unchanged">java.lang.String</span>, <span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			1254
+		</td>
+		<td>
+			1518
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setCurrencyValue(<span class="method_parameter unchanged">java.lang.Double</span>, <span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			657
+		</td>
+		<td>
+			740
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">org.odftoolkit.odfdom.doc.table.OdfTableCell</span></td>
+<td>setDateTimeValue(<span class="method_parameter unchanged">java.util.Calendar</span>)<div class="class_annotations">
+	<span class="label_class_member">Annotations:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Status:</td>
+			<td>Fully Qualified Name:</td>
+			<td>Elements:</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+<td><span class="new">NEW</span></td>
+<td>java.lang.Deprecated</td>
+<td>n.a.</td>
+</tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+<tr><td>ANNOTATION_DEPRECATED_ADDED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			940
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setDateValue(<span class="method_parameter unchanged">java.util.Calendar</span>)<div class="class_annotations">
+	<span class="label_class_member">Annotations:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Status:</td>
+			<td>Fully Qualified Name:</td>
+			<td>Elements:</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+<td><span class="new">NEW</span></td>
+<td>java.lang.Deprecated</td>
+<td>n.a.</td>
+</tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+<tr><td>ANNOTATION_DEPRECATED_ADDED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			828
+		</td>
+		<td>
+			923
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setDisplayText(<span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			718
+		</td>
+		<td>
+			807
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setDisplayText(<span class="method_parameter unchanged">java.lang.String</span>, <span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			742
+		</td>
+		<td>
+			834
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setDoubleValue(<span class="method_parameter unchanged">java.lang.Double</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			763
+		</td>
+		<td>
+			858
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">org.odftoolkit.odfdom.doc.table.OdfTableCell</span></td>
+<td>setDurationValue(<span class="method_parameter unchanged">java.time.Duration</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			1200
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setFormatString(<span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			1366
+		</td>
+		<td>
+			1633
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setFormula(<span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			1212
+		</td>
+		<td>
+			1473
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setHorizontalAlignment(<span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			186
+		</td>
+		<td>
+			254
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">org.odftoolkit.odfdom.doc.table.OdfTableCell</span></td>
+<td>setLocalDateTimeValue(<span class="method_parameter unchanged">java.time.LocalDateTime</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			1140
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">org.odftoolkit.odfdom.doc.table.OdfTableCell</span></td>
+<td>setLocalDateValue(<span class="method_parameter unchanged">java.time.LocalDate</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			1121
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">org.odftoolkit.odfdom.doc.table.OdfTableCell</span></td>
+<td>setLocalTimeValue(<span class="method_parameter unchanged">java.time.LocalTime</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			1221
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setPercentageValue(<span class="method_parameter unchanged">java.lang.Double</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			691
+		</td>
+		<td>
+			777
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setStringValue(<span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			845
+		</td>
+		<td>
+			955
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setTextWrapped(<span class="method_parameter unchanged">boolean</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			277
+		</td>
+		<td>
+			351
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setTimeValue(<span class="method_parameter unchanged">java.util.Calendar</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			955
+		</td>
+		<td>
+			1059
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setValueType(<span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			557
+		</td>
+		<td>
+			637
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">org.odftoolkit.odfdom.doc.table.OdfTableCell&#160;(&lt;-&#160;void</span></td>
+<td>setVerticalAlignment(<span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			235
+		</td>
+		<td>
+			306
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.doc.table.OdfTableCellRange">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.doc.table.OdfTableCellRange"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.doc.table.OdfTableCellRange
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.doc.table.OdfTableColumn">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.doc.table.OdfTableColumn"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.doc.table.OdfTableColumn
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.doc.table.OdfTableRow">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.doc.table.OdfTableRow"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.doc.table.OdfTableRow
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.dom.element.OdfStylableElement">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.dom.element.OdfStylableElement"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+<span class="modifier unchanged">abstract</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.dom.element.OdfStylableElement
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.pkg.OdfElement</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.dom.element.OdfStyleBase">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.dom.element.OdfStyleBase"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+<span class="modifier unchanged">abstract</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.dom.element.OdfStyleBase
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.pkg.OdfContainerElementBase</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+			<span class="label_class_member">Methods:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Modifier</td>
+		<td>Generic Templates</td>
+		<td>Type</td>
+		<td>Method</td>
+		<td>Exceptions</td>
+		<td>Compatibility Changes:</td>
+		<td>Line Number</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">int</span></td>
+<td>compareTo(<span class="method_parameter unchanged">org.odftoolkit.odfdom.dom.element.OdfStyleBase</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			377
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.dom.OdfContentDom">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.dom.OdfContentDom"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.dom.OdfContentDom
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.dom.OdfContentOrStylesDomBase</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.dom.OdfMetaDom">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.dom.OdfMetaDom"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.dom.OdfMetaDom
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.pkg.OdfFileDom</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.dom.OdfSchemaDocument">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.dom.OdfSchemaDocument"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+<span class="modifier unchanged">abstract</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.dom.OdfSchemaDocument
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.pkg.OdfPackageDocument</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.dom.OdfSettingsDom">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.dom.OdfSettingsDom"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.dom.OdfSettingsDom
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.pkg.OdfFileDom</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.dom.OdfStylesDom">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.dom.OdfStylesDom"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.dom.OdfStylesDom
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.dom.OdfContentOrStylesDomBase</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.incubator.doc.draw.OdfDrawImage
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.dom.element.draw.DrawImageElement</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+<span class="modifier unchanged">abstract</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeAutomaticStyles
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.incubator.doc.office.OdfStylesBase</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+<span class="modifier unchanged">abstract</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeMasterStyles
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.incubator.doc.office.OdfStylesBase</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+<span class="modifier unchanged">abstract</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.incubator.doc.office.OdfOfficeStyles
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.incubator.doc.office.OdfStylesBase</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.incubator.doc.office.OdfStylesBase">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.incubator.doc.office.OdfStylesBase"></a>
+				<span class="modified">MODIFIED&#160;(!)</span>
+
+				<span class="modifier unchanged">public</span>
+<span class="modifier unchanged">abstract</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.incubator.doc.office.OdfStylesBase
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.pkg.OdfContainerElementBase</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+			<span class="label_class_member">Methods:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Modifier</td>
+		<td>Generic Templates</td>
+		<td>Type</td>
+		<td>Method</td>
+		<td>Exceptions</td>
+		<td>Compatibility Changes:</td>
+		<td>Line Number</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="modified">MODIFIED&#160;(!)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type modified">java.util.Map&#160;(&lt;-&#160;java.util.HashMap<div class="tooltip"><span class="unchanged method_parameter">&#60;..&#62;</span><div class="tooltiptext"><table><tr><td class="table_head_td">New:</td><td>java.lang.String</td><td>org.odftoolkit.odfdom.dom.element.number.DataStyleElement</td></tr><tr><td class="table_head_td">Old:</td><td>java.lang.String</td><td>org.odftoolkit.odfdom.dom.element.number.DataStyleElement</td></tr></table></div></div></span></td>
+<td>getAllDataStyles()</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_RETURN_TYPE_CHANGED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			75
+		</td>
+		<td>
+			78
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.incubator.doc.text.OdfEditableTextExtractor">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.incubator.doc.text.OdfEditableTextExtractor"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.incubator.doc.text.OdfEditableTextExtractor
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.incubator.doc.text.OdfTextExtractor</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.incubator.doc.text.OdfTextList">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.incubator.doc.text.OdfTextList"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.incubator.doc.text.OdfTextList
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.dom.element.text.TextListElement</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle"></a>
+				<span class="unchanged">UNCHANGED&#160;(*)</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.incubator.doc.text.OdfTextListStyle
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.dom.element.text.TextListStyleElement</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+			<span class="label_class_member">Methods:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Modifier</td>
+		<td>Generic Templates</td>
+		<td>Type</td>
+		<td>Method</td>
+		<td>Exceptions</td>
+		<td>Compatibility Changes:</td>
+		<td>Line Number</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED&#160;(*)</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type unchanged">org.odftoolkit.odfdom.dom.element.text.TextListLevelStyleElementBase</span></td>
+<td>getOrCreateListLevel(<span class="method_parameter unchanged">int</span>, <span class="method_parameter unchanged">java.lang.Class<div class="tooltip"><span class="modified method_parameter">&#60;..&#62;</span><div class="tooltiptext"><table><tr><td class="table_head_td">New:</td><td>? extends org.odftoolkit.odfdom.pkg.OdfElement</td></tr></table></div></div>&#160;(*)</span>)</td>
+<td></td>
+<td>n.a.</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			132
+		</td>
+		<td>
+			133
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.incubator.meta.OdfOfficeMeta
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+			<span class="label_class_member">Methods:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Modifier</td>
+		<td>Generic Templates</td>
+		<td>Type</td>
+		<td>Method</td>
+		<td>Exceptions</td>
+		<td>Compatibility Changes:</td>
+		<td>Line Number</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type unchanged">java.util.Calendar</span></td>
+<td>getCreationDate()<div class="class_annotations">
+	<span class="label_class_member">Annotations:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Status:</td>
+			<td>Fully Qualified Name:</td>
+			<td>Elements:</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+<td><span class="new">NEW</span></td>
+<td>java.lang.Deprecated</td>
+<td>n.a.</td>
+</tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>ANNOTATION_DEPRECATED_ADDED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			584
+		</td>
+		<td>
+			593
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">java.time.Instant</span></td>
+<td>getCreationInstant()</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			620
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">java.time.Instant</span></td>
+<td>getInstant()</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			709
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type unchanged">java.util.Calendar</span></td>
+<td>getPrintDate()<div class="class_annotations">
+	<span class="label_class_member">Annotations:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Status:</td>
+			<td>Fully Qualified Name:</td>
+			<td>Elements:</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+<td><span class="new">NEW</span></td>
+<td>java.lang.Deprecated</td>
+<td>n.a.</td>
+</tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>ANNOTATION_DEPRECATED_ADDED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			659
+		</td>
+		<td>
+			749
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">java.time.Instant</span></td>
+<td>getPrintInstant()</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			772
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type unchanged">void</span></td>
+<td>setCreationDate(<span class="method_parameter unchanged">java.util.Calendar</span>)<div class="class_annotations">
+	<span class="label_class_member">Annotations:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Status:</td>
+			<td>Fully Qualified Name:</td>
+			<td>Elements:</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+<td><span class="new">NEW</span></td>
+<td>java.lang.Deprecated</td>
+<td>n.a.</td>
+</tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>ANNOTATION_DEPRECATED_ADDED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			600
+		</td>
+		<td>
+			654
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">void</span></td>
+<td>setCreationInstant(<span class="method_parameter unchanged">java.time.Instant</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			665
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">void</span></td>
+<td>setInstant(<span class="method_parameter unchanged">java.time.Instant</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			724
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td><span class="modifier unchanged">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type unchanged">void</span></td>
+<td>setPrintDate(<span class="method_parameter unchanged">java.util.Calendar</span>)<div class="class_annotations">
+	<span class="label_class_member">Annotations:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Status:</td>
+			<td>Fully Qualified Name:</td>
+			<td>Elements:</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+<td><span class="new">NEW</span></td>
+<td>java.lang.Deprecated</td>
+<td>n.a.</td>
+</tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>ANNOTATION_DEPRECATED_ADDED</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			674
+		</td>
+		<td>
+			761
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">void</span></td>
+<td>setPrintInstant(<span class="method_parameter unchanged">java.time.Instant</span>)</td>
+<td></td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			787
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.incubator.search.SelectionManager">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.incubator.search.SelectionManager"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.incubator.search.SelectionManager
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.incubator.search.TextNavigation">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.incubator.search.TextNavigation"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.incubator.search.TextNavigation
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.incubator.search.Navigation</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.incubator.search.TextStyleNavigation">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.incubator.search.TextStyleNavigation"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.incubator.search.TextStyleNavigation
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.incubator.search.Navigation</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.JarManifest">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.JarManifest"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.JarManifest
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.pkg.DefaultErrorHandler">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.pkg.DefaultErrorHandler"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.pkg.DefaultErrorHandler
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.pkg.manifest.OdfManifestDom">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.pkg.manifest.OdfManifestDom"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.pkg.manifest.OdfManifestDom
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>org.odftoolkit.odfdom.pkg.OdfFileDom</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.pkg.OdfElement">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.pkg.OdfElement"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+<span class="modifier unchanged">abstract</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.pkg.OdfElement
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.pkg.OdfFileDom">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.pkg.OdfFileDom"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.pkg.OdfFileDom
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.pkg.OdfName">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.pkg.OdfName"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier modified">FINAL&#160;(&lt;-&#160;NON_FINAL)&#160;</span>
+<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.pkg.OdfName
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.pkg.OdfPackage">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.pkg.OdfPackage"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.pkg.OdfPackage
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+			<span class="label_class_member">Methods:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Modifier</td>
+		<td>Generic Templates</td>
+		<td>Type</td>
+		<td>Method</td>
+		<td>Exceptions</td>
+		<td>Compatibility Changes:</td>
+		<td>Line Number</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">static</span>
+<span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">org.odftoolkit.odfdom.pkg.OdfPackage</span></td>
+<td>loadPackage(<span class="method_parameter unchanged">java.nio.file.Path</span>)</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Status:</td>
+		<td>Name:</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td>org.xml.sax.SAXException</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td>java.io.IOException</td>
+</tr>
+
+	</tbody>
+</table>
+</td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			395
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">static</span>
+<span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">org.odftoolkit.odfdom.pkg.OdfPackage</span></td>
+<td>loadPackage(<span class="method_parameter unchanged">java.nio.file.Path</span>, <span class="method_parameter unchanged">org.xml.sax.ErrorHandler</span>)</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Status:</td>
+		<td>Name:</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td>org.xml.sax.SAXException</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td>java.io.IOException</td>
+</tr>
+
+	</tbody>
+</table>
+</td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			485
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">static</span>
+<span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">org.odftoolkit.odfdom.pkg.OdfPackage</span></td>
+<td>loadPackage(<span class="method_parameter unchanged">java.nio.file.Path</span>, <span class="method_parameter unchanged">java.lang.String</span>)</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Status:</td>
+		<td>Name:</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td>org.xml.sax.SAXException</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td>java.io.IOException</td>
+</tr>
+
+	</tbody>
+</table>
+</td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			529
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">static</span>
+<span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">org.odftoolkit.odfdom.pkg.OdfPackage</span></td>
+<td>loadPackage(<span class="method_parameter unchanged">java.nio.file.Path</span>, <span class="method_parameter unchanged">java.lang.String</span>, <span class="method_parameter unchanged">org.xml.sax.ErrorHandler</span>)</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Status:</td>
+		<td>Name:</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td>org.xml.sax.SAXException</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td>java.io.IOException</td>
+</tr>
+
+	</tbody>
+</table>
+</td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			565
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">void</span></td>
+<td>save(<span class="method_parameter unchanged">java.nio.file.Path</span>)</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Status:</td>
+		<td>Name:</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td>org.xml.sax.SAXException</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td>java.io.IOException</td>
+</tr>
+
+	</tbody>
+</table>
+</td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			1143
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.pkg.OdfPackageConstraint">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.pkg.OdfPackageConstraint"></a>
+				<span class="modified">MODIFIED</span>
+				<span class="new">&#160;(Serializable compatible)&#160;</span>
+				<span class="modifier unchanged">final</span>
+<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">enum</span>
+&#160;org.odftoolkit.odfdom.pkg.OdfPackageConstraint
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+			<span class="label_class_member">Superclass:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Superclass</td>
+		<td>Compatibility Changes</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="unchanged">UNCHANGED</span></td>
+<td>java.lang.Enum</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+		<div class="class_serialVersionUid">
+	<table>
+		<thead>
+		<tr>
+			<td></td>
+			<td>Serializable</td>
+			<td>default serialVersionUID</td>
+			<td>serialVersionUID in class</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+<td class="matrix_layout">Old</td><td class="">true</td>
+<td class="modified">5928910501597532967</td>
+<td class="">n.a.</td>
+</tr>
+<tr>
+<td class="matrix_layout">New</td><td class="">true</td>
+<td class="modified">-4512564404013076249</td>
+<td class="">n.a.</td>
+</tr>
+
+		</tbody>
+	</table>
+</div>
+
+		<div class="class_fields">
+			<span class="label_class_member">Fields:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Modifier</td>
+		<td>Type</td>
+		<td>Field</td>
+		<td>Compatibility Changes:</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+<span class="modifier new">static</span>
+<span class="modifier new">final</span>
+</td>
+<td><span class="modifier new">org.odftoolkit.odfdom.pkg.OdfPackageConstraint</span></td>
+<td>PACKAGE_ENTRY_DUPLICATE</td>
+<td>n.a.</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+<span class="modifier new">static</span>
+<span class="modifier new">final</span>
+</td>
+<td><span class="modifier new">org.odftoolkit.odfdom.pkg.OdfPackageConstraint</span></td>
+<td>PACKAGE_ENTRY_INVALID_FILE_NAME</td>
+<td>n.a.</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.pkg.OdfPackageDocument">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.pkg.OdfPackageDocument"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.pkg.OdfPackageDocument
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+			<span class="label_class_member">Methods:</span>
+<table>
+	<thead>
+	<tr>
+		<td>Status</td>
+		<td>Modifier</td>
+		<td>Generic Templates</td>
+		<td>Type</td>
+		<td>Method</td>
+		<td>Exceptions</td>
+		<td>Compatibility Changes:</td>
+		<td>Line Number</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">static</span>
+<span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">org.odftoolkit.odfdom.pkg.OdfPackageDocument</span></td>
+<td>loadDocument(<span class="method_parameter unchanged">java.nio.file.Path</span>)</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Status:</td>
+		<td>Name:</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td>java.lang.Exception</td>
+</tr>
+
+	</tbody>
+</table>
+</td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			127
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td><span class="new">NEW</span></td>
+<td><span class="modifier new">public</span>
+</td>
+<td>n.a.</td>
+<td><span class="method_return_type new">void</span></td>
+<td>save(<span class="method_parameter unchanged">java.nio.file.Path</span>)</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Status:</td>
+		<td>Name:</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td><span class="new">NEW</span></td>
+<td>java.lang.Exception</td>
+</tr>
+
+	</tbody>
+</table>
+</td>
+<td><div class="class_compatibilityChanges">
+	<span class="label_class_member">Compatibility Changes:</span>
+	<table>
+		<thead>
+		<tr>
+			<td>Change</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr><td>METHOD_ADDED_TO_PUBLIC_CLASS</td></tr>
+
+		</tbody>
+	</table>
+</div>
+</td>
+<td><table>
+	<thead>
+	<tr>
+		<td>Old file</td>
+		<td>New file</td>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+			n.a.
+		</td>
+		<td>
+			300
+		</td>
+	</tr>
+	</tbody>
+</table>
+</td>
+</tr>
+
+	</tbody>
+</table>
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.pkg.OdfXMLFactory">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.pkg.OdfXMLFactory"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.pkg.OdfXMLFactory
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.pkg.rdfa.Util">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.pkg.rdfa.Util"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.pkg.rdfa.Util
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.type.AnyURI">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.type.AnyURI"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.type.AnyURI
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.type.DateOrDateTime">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.type.DateOrDateTime"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.type.DateOrDateTime
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.type.DateTime">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.type.DateTime"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.type.DateTime
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.type.Duration">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.type.Duration"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.type.Duration
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.type.Time">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.type.Time"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.type.Time
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+<div>
+	<div class="class" id="org.odftoolkit.odfdom.type.TimeOrDateTime">
+		<div class="class_header">
+			<span class="label">
+				<a name="org.odftoolkit.odfdom.type.TimeOrDateTime"></a>
+				<span class="modified">MODIFIED</span>
+
+				<span class="modifier unchanged">public</span>
+
+				<span class="unchanged">class</span>
+&#160;org.odftoolkit.odfdom.type.TimeOrDateTime
+			</span>
+			<a href="#toc" class="toc_link">top</a>
+		</div>
+
+
+		<div class="class_generictemplates">
+
+		</div>
+		<div class="class_superclass">
+
+		</div>
+		<div class="class_interfaces">
+
+		</div>
+
+		<div class="class_fields">
+
+		</div>
+		<div class="class_constructors">
+
+		</div>
+		<div class="class_methods">
+
+		</div>
+
+	</div>
+</div>
+</body>
+</html>
