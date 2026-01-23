@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.odftoolkit</groupId>
     <artifactId>odftoolkit</artifactId>
-    <version>0.13.0</version>
+    <version>0.14.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.apache</groupId>
@@ -34,10 +34,10 @@
         <javadoc.bottom>Copyright © {inceptionYear}–2018 Apache Software Foundation; Copyright © 2018–${currentYear} {organizationName}. All rights reserved.</javadoc.bottom>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- explicitly setting JDK version for compiler source & target -->
-        <jdk.version>11</jdk.version>
+        <jdk.version>17</jdk.version>
         <!-- all three JDK versions should not differ -->
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <!-- ANT driven release bundle creation: 3 ZIPs for the complete Toolkit for binaries, documentation and sources -->
         <release.dir>${basedir}/target/release</release.dir>
         <release.dir.bin>${release.dir}/${project.version}/binaries</release.dir.bin>
@@ -102,14 +102,14 @@
             <dependency>
                 <groupId>org.apache.jena</groupId>
                 <artifactId>jena-core</artifactId>
-                <version>4.10.0</version>
+                <version>5.6.0</version>
             </dependency>
             <!-- used by ODFDOM for metadata -->
             <dependency>
                 <groupId>org.apache.jena</groupId>
                 <artifactId>jena-core</artifactId>
                 <classifier>tests</classifier>
-                <version>4.10.0</version>
+                <version>5.6.0</version>
             </dependency>
             <!-- used by schema2template for XML grammar to graph functionality -->
             <dependency>
@@ -217,7 +217,7 @@
         <connection>scm:git:git://github.com/tdf/odftoolkit.git</connection>
         <developerConnection>scm:git:git@github.com:tdf/odftoolkit.git</developerConnection>
         <url>https://github.com/tdf/odftoolkit.git</url>
-        <tag>odftoolkit-0.13.0</tag>
+        <tag>odftoolkit-0.14.0-SNAPSHOT</tag>
     </scm>
     <issueManagement>
         <system>GitHub Issues</system>
