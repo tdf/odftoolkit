@@ -111,6 +111,9 @@
                     <excludes>
                         <exclude>${project.basedir}/target/odf/generation/**/*.java</exclude>
                     </excludes>
+                    <!-- Note: Warning about jena-core-tests.jar module conflict is harmless.
+                         Maven automatically handles this by keeping only the main jena-core on module path.
+                         Test classes are still available on the classpath. -->
                 </configuration>
             </plugin>
             <plugin>
@@ -207,6 +210,10 @@
                     <excludes>
                         <exclude>**/integrationtest/PerformanceIT.java</exclude>
                     </excludes>
+                    <!-- Disable module path for tests to avoid conflict with jena-core-tests.jar -->
+                    <!-- The jena-core-tests JAR defines the same module as jena-core, causing conflicts -->
+                    <!-- Test classes are available on the classpath, so module path is not required for tests -->
+                    <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
             <plugin>
@@ -322,6 +329,10 @@
                         <odfdom.version>${project.version}</odfdom.version>
                         <org.odftoolkit.odfdom.validation>org.odftoolkit.odfdom.pkg.DefaultErrorHandler</org.odftoolkit.odfdom.validation>
                     </systemPropertyVariables>
+                    <!-- Disable module path for integration tests to avoid conflict with jena-core-tests.jar -->
+                    <!-- The jena-core-tests JAR defines the same module as jena-core, causing conflicts -->
+                    <!-- Test classes are available on the classpath, so module path is not required for tests -->
+                    <useModulePath>false</useModulePath>
                 </configuration>
                 <executions>
                     <execution>
@@ -577,6 +588,10 @@
                                 <executetimes>1</executetimes>
                                 <testflag>test</testflag>
                             </systemPropertyVariables>
+                            <!-- Disable module path for integration tests to avoid conflict with jena-core-tests.jar -->
+                            <!-- The jena-core-tests JAR defines the same module as jena-core, causing conflicts -->
+                            <!-- Test classes are available on the classpath, so module path is not required for tests -->
+                            <useModulePath>false</useModulePath>
                         </configuration>
                         <executions>
                             <execution>

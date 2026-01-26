@@ -38,6 +38,9 @@
         <!-- all three JDK versions should not differ -->
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <!-- Skip git-code-format-maven-plugin if there are Java version compatibility issues -->
+        <!-- Set to true to skip: mvn clean install -Dgcf.skip=true -->
+        <gcf.skip>false</gcf.skip>
         <!-- ANT driven release bundle creation: 3 ZIPs for the complete Toolkit for binaries, documentation and sources -->
         <release.dir>${basedir}/target/release</release.dir>
         <release.dir.bin>${release.dir}/${project.version}/binaries</release.dir.bin>
@@ -384,11 +387,36 @@
                             <artifactId>google-java-format</artifactId>
                             <version>5.1</version>
                         </dependency>
+                        <!-- Override with newer google-java-format for Java 25 compatibility -->
+                        <!-- Using com.google.googlejavaformat instead of com.cosium.code version -->
+                        <!-- Latest version 1.33.0 should have better Java 25 support -->
+                        <dependency>
+                            <groupId>com.google.googlejavaformat</groupId>
+                            <artifactId>google-java-format</artifactId>
+                            <version>1.33.0</version>
+                            <exclusions>
+                                <exclusion>
+                                    <groupId>com.cosium.code</groupId>
+                                    <artifactId>google-java-format</artifactId>
+                                </exclusion>
+                            </exclusions>
+                        </dependency>
                     </dependencies>
-                    <!-- BUG WORKAROUND: unformatted/uncommitted new files break the build
-                         run from command-line to format:
+                    <!-- Format code manually with:
                          mvn git-code-format:format-code -D"gcf.globPattern=**/*"
+                         
+                         Or format specific files:
+                         mvn git-code-format:format-code -D"gcf.globPattern=**/module-info.java"
+                         
+                         Skip formatting validation if needed:
+                         mvn clean install -Dgcf.skip
                     -->
+                    <configuration>
+                        <!-- Skip plugin if there are compatibility issues with newer Java versions -->
+                        <!-- The plugin uses internal Java compiler APIs that may not work with Java 25+ -->
+                        <!-- Manual formatting with 'mvn git-code-format:format-code' should still work -->
+                        <skip>${gcf.skip}</skip>
+                    </configuration>
                     <executions>
                         <!-- On commit, format the modified java files -->
                         <execution>
@@ -648,6 +676,7 @@
                                 <exclude>.travis.yml</exclude>
                                 <exclude>CHANGES.txt</exclude>
                                 <exclude>CODE_OF_CONDUCT.md</exclude>
+                                <exclude>MODULE_SYSTEM.md</exclude>
                                 <exclude>**/README.md</exclude>
                                 <exclude>DEPENDENCIES</exclude>
                                 <exclude>docs/**/*</exclude>

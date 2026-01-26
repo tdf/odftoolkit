@@ -28,7 +28,6 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import junit.framework.TestCase;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.test.ModelTestBase;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
@@ -37,14 +36,13 @@ import org.odftoolkit.odfdom.dom.element.text.TextBookmarkStartElement;
 import org.odftoolkit.odfdom.dom.rdfa.BookmarkRDFMetadataExtractor;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 
-public class RDFMetadataTest extends ModelTestBase {
+public class RDFMetadataTest extends TestCase {
 
   private static final Logger LOG = Logger.getLogger(RDFMetadataTest.class.getName());
   private static final String SIMPLE_ODT = "test_rdfmeta.odt";
 
   public RDFMetadataTest(String name) {
     super(name);
-    // TODO Auto-generated constructor stub
   }
 
   @Test
@@ -95,9 +93,7 @@ public class RDFMetadataTest extends ModelTestBase {
     // http://docs.oasis-open.org/ns/office/1.2/meta/pkg#Document)
     //		duplicated = 1;
     m3 = m1.intersection(m2);
-    LOG.info(
-        "RDF Model - intersection of in-content metadata of root & embedded document:\n"
-            + m2);
+    LOG.info("RDF Model - intersection of in-content metadata of root & embedded document:\n" + m2);
     // TestCase.assertEquals(duplicated, m3.size());
     // TestCase.assertEquals(size1 + size2 - duplicated, m.size());
 

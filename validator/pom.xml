@@ -64,6 +64,13 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Servlet API for tests (required by commons-fileupload on module path) -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -140,6 +147,10 @@
                         <exclude>**/IntegrationTest.java</exclude>
                         <exclude>**/ITJarTest.java</exclude>
                     </excludes>
+                    <!-- Disable module path for tests to avoid servlet.api module requirement -->
+                    <!-- commons-fileupload requires servlet.api module, which is not available on module path -->
+                    <!-- Test classes are available on the classpath, so module path is not required for tests -->
+                    <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
             <plugin>
@@ -226,7 +237,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.2.5</version>
                 <configuration>
                     <argLine>${failsafeArgLine}</argLine>
                     <includes>
@@ -239,6 +250,10 @@
                         <odfvalidator.version>${project.version}</odfvalidator.version>
                         <org.odftoolkit.odfdom.validation>org.odftoolkit.odfdom.pkg.DefaultErrorHandler</org.odftoolkit.odfdom.validation>
                     </systemPropertyVariables>
+                    <!-- Disable module path for integration tests to avoid servlet.api module requirement -->
+                    <!-- commons-fileupload requires servlet.api module, which is not available on module path -->
+                    <!-- Test classes are available on the classpath, so module path is not required for tests -->
+                    <useModulePath>false</useModulePath>
                 </configuration>
                 <executions>
                     <execution>
@@ -282,7 +297,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.2.5</version>
                 <reportSets>
                     <reportSet>
                         <id>integration-tests</id>

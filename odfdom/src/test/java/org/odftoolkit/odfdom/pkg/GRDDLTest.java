@@ -39,7 +39,7 @@ import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import junit.framework.TestCase;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.test.ModelTestBase;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
@@ -47,14 +47,18 @@ import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.xml.sax.InputSource;
 
-public class GRDDLTest extends ModelTestBase {
+public class GRDDLTest extends TestCase {
 
   private static final Logger LOG = Logger.getLogger(GRDDLTest.class.getName());
   private static final String SIMPLE_ODT = "test_rdfmeta.odt";
 
   public GRDDLTest(String name) {
     super(name);
-    // TODO: Auto-generated constructor stub
+  }
+
+  /** Creates an in-memory RDF model. Replaces the ModelTestBase.createMemModel() method. */
+  protected Model createMemModel() {
+    return ModelFactory.createDefaultModel();
   }
 
   /**
