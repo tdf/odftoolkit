@@ -54,5 +54,6 @@ Detailed documentation:\n
 https://tdf.github.io/odftoolkit/ReleaseNotes.html#release-${{ env.release_version }}\n
 \n
 Available via Maven repository:\n
-https://oss.sonatype.org/content/groups/public/org/odftoolkit/\n
+https://central.sonatype.com/artifact/org.odftoolkit/odfdom-java/${{ env.release_version }}/overview\n
+https://repo1.maven.org/maven2/org/odftoolkit/odfdom-java/${{ env.release_version }}/\n
 \n"
