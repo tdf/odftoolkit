@@ -1209,6 +1209,53 @@ public class TableTest {
     }
   }
 
+  @Test
+  public void testNewTableWithPartialColumnWidth() {
+    try {
+      OdfTextDocument document =
+          OdfTextDocument.loadDocument(
+              ResourceUtilities.getAbsoluteInputPath(mOdtTestFileName + ".odt"));
+
+      // Create a new table with 1 row, 3 columns, 1 header row, 3 header columns
+      OdfTable myTable = OdfTable.newTable(document, 1, 3, 1, 3);
+      Assert.assertNotNull(myTable);
+      Assert.assertEquals(1, myTable.getRowCount());
+      Assert.assertEquals(3, myTable.getColumnCount());
+      Assert.assertEquals(1, myTable.getHeaderRowCount());
+      Assert.assertEquals(3, myTable.getHeaderColumnCount());
+
+      // Only set the width for the first 2 columns
+      for (int column = 0; column < 2; column++) {
+        myTable.getColumnByIndex(column).setWidth(20);
+      }
+
+      // Verify the widths were set correctly
+      Assert.assertEquals(20, myTable.getColumnByIndex(0).getWidth());
+      Assert.assertEquals(20, myTable.getColumnByIndex(1).getWidth());
+
+      // Save and reload to verify persistence
+      String outputFileName = "TestNewTableWithPartialColumnWidth.odt";
+      document.save(ResourceUtilities.getTestOutputFile(outputFileName));
+      document.close();
+
+      // Reload and verify the table and column widths survived the round-trip
+      document =
+          OdfTextDocument.loadDocument(
+              ResourceUtilities.getAbsoluteOutputPath(outputFileName));
+      List<OdfTable> tableList = document.getTableList(true);
+      OdfTable reloadedTable = tableList.get(tableList.size() - 1);
+      Assert.assertNotNull(reloadedTable);
+      Assert.assertEquals(1, reloadedTable.getRowCount());
+      Assert.assertEquals(3, reloadedTable.getColumnCount());
+      Assert.assertEquals(20, reloadedTable.getColumnByIndex(0).getWidth());
+      Assert.assertEquals(20, reloadedTable.getColumnByIndex(1).getWidth());
+      document.close();
+    } catch (Exception e) {
+      LOG.log(Level.SEVERE, null, e);
+      Assert.fail(e.getMessage());
+    }
+  }
+
   private Map<String, StyleMasterPageElement> getMasterPages(OdfDocument doc) throws Exception {
 
     OdfStylesDom stylesDoc = doc.getStylesDom();

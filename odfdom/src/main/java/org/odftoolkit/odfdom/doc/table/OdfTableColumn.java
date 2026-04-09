@@ -182,9 +182,11 @@ public class OdfTableColumn {
   // column
   void splitRepeatedColumns() {
     OdfTable table = getTable();
-    TableTableElement tableEle = table.getOdfElement();
     int repeateNum = getColumnsRepeatedNumber();
     if (repeateNum > 1) {
+      // Use the actual parent node of the column element, which may be
+      // a <table:table-header-columns> element rather than the table itself
+      Node columnParent = maColumnElement.getParentNode();
       // change this repeated column to several single columns
       TableTableColumnElement ownerColumnElement = null;
       int repeatedColumnIndex = mnRepeatedIndex;
@@ -206,7 +208,7 @@ public class OdfTableColumn {
         if (originalRelWidth != null && originalRelWidth.length() > 0) {
           newColumn.setProperty(OdfTableColumnProperties.RelColumnWidth, originalRelWidth);
         }
-        tableEle.insertBefore(newColumn, refElement);
+        columnParent.insertBefore(newColumn, refElement);
         refElement = newColumn;
         if (repeatedColumnIndex == i) {
           ownerColumnElement = newColumn;
@@ -215,7 +217,7 @@ public class OdfTableColumn {
         }
       }
       // remove this column element
-      tableEle.removeChild(maColumnElement);
+      columnParent.removeChild(maColumnElement);
 
       if (ownerColumnElement != null) {
         table.updateColumnRepository(maColumnElement, mnRepeatedIndex, ownerColumnElement, 0);
