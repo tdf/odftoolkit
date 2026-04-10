@@ -194,6 +194,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <useModulePath>false</useModulePath>
                     <argLine>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${project.build.directory}/coverage-reports/jacoco-ut.exec</argLine>
                     <systemPropertyVariables>
                         <org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
@@ -309,6 +310,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
+                    <useModulePath>false</useModulePath>
                     <excludes>
                         <exclude>**/PerformanceIT.java</exclude>
                     </excludes>
@@ -566,6 +568,7 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>3.1.1</version>
                         <configuration>
+                            <useModulePath>false</useModulePath>
                             <systemPropertyVariables>
                                 <testresourcefolder>performance</testresourcefolder>
                                 <executetimes>1</executetimes>
@@ -587,6 +590,7 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
+                            <useModulePath>false</useModulePath>
                             <argLine>${surefireArgLine}</argLine>
                             <systemPropertyVariables>
                                 <org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
