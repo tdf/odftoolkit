@@ -65,12 +65,6 @@
             <artifactId>jena-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.jena</groupId>
-            <artifactId>jena-core</artifactId>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>net.rootdev</groupId>
             <artifactId>java-rdfa</artifactId>
         </dependency>
