@@ -104,13 +104,6 @@
                 <artifactId>jena-core</artifactId>
                 <version>5.6.0</version>
             </dependency>
-            <!-- used by ODFDOM for metadata -->
-            <dependency>
-                <groupId>org.apache.jena</groupId>
-                <artifactId>jena-core</artifactId>
-                <classifier>tests</classifier>
-                <version>5.6.0</version>
-            </dependency>
             <!-- used by schema2template for XML grammar to graph functionality -->
             <dependency>
                 <groupId>org.apache.tinkerpop</groupId>

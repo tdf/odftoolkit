@@ -39,7 +39,7 @@ import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import junit.framework.TestCase;
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.test.ModelTestBase;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
@@ -47,15 +47,10 @@ import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
 import org.xml.sax.InputSource;
 
-public class GRDDLTest extends ModelTestBase {
+public class GRDDLTest {
 
   private static final Logger LOG = Logger.getLogger(GRDDLTest.class.getName());
   private static final String SIMPLE_ODT = "test_rdfmeta.odt";
-
-  public GRDDLTest(String name) {
-    super(name);
-    // TODO: Auto-generated constructor stub
-  }
 
   /**
    * Need help: GRDDLTest.testGRDDL:72 org.xml.sax.SAXParseException; systemId:
@@ -77,7 +72,7 @@ public class GRDDLTest extends ModelTestBase {
       ByteArrayOutputStream out = new ByteArrayOutputStream();
       helper.transform(
           odt.getPackage(), "content.xml", multiFileAccessTemplate, new StreamResult(out));
-      Model m1 = createMemModel();
+      Model m1 = ModelFactory.createDefaultModel();
       // Dumping the DOM to XML file
       //    byte[] bytes = out.toByteArray();
       //    Path path = Paths.get("c:\\test.xml");
