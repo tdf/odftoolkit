@@ -377,12 +377,12 @@
                 <plugin>
                     <groupId>com.cosium.code</groupId>
                     <artifactId>git-code-format-maven-plugin</artifactId>
-                    <version>5.1</version>
+                    <version>6.0</version>
                     <dependencies>
                         <dependency>
                             <groupId>com.cosium.code</groupId>
                             <artifactId>google-java-format</artifactId>
-                            <version>5.1</version>
+                            <version>6.0</version>
                         </dependency>
                     </dependencies>
                     <!-- BUG WORKAROUND: unformatted/uncommitted new files break the build
