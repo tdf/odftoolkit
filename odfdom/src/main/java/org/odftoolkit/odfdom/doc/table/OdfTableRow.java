@@ -287,16 +287,18 @@ public class OdfTableRow {
    * @return the cell count
    */
   public int getCellCount() {
-    OdfTable table = getTable();
-    Set<OdfTableCell> realCells = new HashSet<>();
-    List<CellCoverInfo> coverList =
-        table.getCellCoverInfos(0, 0, table.getColumnCount() - 1, table.getRowCount() - 1);
-    int rowIndex = getRowIndex();
-    for (int i = 0; i < table.getColumnCount(); i++) {
-      OdfTableCell cell = table.getOwnerCellByPosition(coverList, i, rowIndex);
-      realCells.add(cell);
+    // count cells by skipping covered-table-cell and taking into account number-columns-repeated attribute
+    int cellCount = 0;
+    for (Node node : new DomNodeList(maRowElement.getChildNodes())) {
+      if (node instanceof TableTableCellElement tableCell) {
+        if (tableCell.getTableNumberColumnsRepeatedAttribute() == null) {
+          cellCount++;
+        } else {
+          cellCount += tableCell.getTableNumberColumnsRepeatedAttribute();
+        }
+      }
     }
-    return realCells.size();
+    return cellCount;
   }
 
   /**
