@@ -58,7 +58,10 @@
         <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss</maven.build.timestamp.format>
         <!-- JaCoCo Properties -->
-        <jacoco.version>0.8.14</jacoco.version>
+        <jacoco.version>0.8.15</jacoco.version>
+        <!-- JDK classes are never instrumented by the JaCoCo agent, as newer JDKs might use class file
+             versions unknown to JaCoCo resulting into exceptions in the build log -->
+        <jacoco.agent.excludes>java.*:javax.*:jdk.*:sun.*:com.sun.*</jacoco.agent.excludes>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
@@ -494,6 +497,9 @@
                             <configuration>
                                 <!-- Sets the path to the file which contains the execution data. -->
                                 <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+                                <excludes>
+                                    <exclude>${jacoco.agent.excludes}</exclude>
+                                </excludes>
                                 <!--
                                     Sets the name of the property containing the settings
                                     for JaCoCo runtime agent.
@@ -535,6 +541,9 @@
                             <configuration>
                                 <!-- Sets the path to the file which contains the execution data. -->
                                 <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
+                                <excludes>
+                                    <exclude>${jacoco.agent.excludes}</exclude>
+                                </excludes>
                                 <!--
                                     Sets the name of the property containing the settings
                                     for JaCoCo runtime agent.
