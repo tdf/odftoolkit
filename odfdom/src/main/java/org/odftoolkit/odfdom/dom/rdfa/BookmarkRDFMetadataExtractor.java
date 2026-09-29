@@ -24,28 +24,18 @@
 package org.odftoolkit.odfdom.dom.rdfa;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import javax.xml.stream.XMLEventFactory;
-import javax.xml.stream.events.Attribute;
-import javax.xml.stream.events.StartElement;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
 import org.odftoolkit.odfdom.dom.DefaultElementVisitor;
 import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
 import org.odftoolkit.odfdom.dom.element.text.TextBookmarkEndElement;
 import org.odftoolkit.odfdom.dom.element.text.TextBookmarkStartElement;
 import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.odftoolkit.odfdom.pkg.OdfFileDom;
-import org.odftoolkit.odfdom.pkg.rdfa.DOMAttributes;
-import org.odftoolkit.odfdom.pkg.rdfa.JenaSink;
+import org.odftoolkit.odfdom.pkg.rdfa.InContentMetadata;
 import org.w3c.dom.Node;
-import org.xml.sax.Attributes;
 
 /**
  * This is a sub class of <code>DefaultElementVisitor</code>, which is used to extract metadata from
@@ -59,10 +49,6 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
   private boolean found;
   protected final Map<TextBookmarkStartElement, ExtractorStringBuilder> builderMap;
   protected final Map<TextBookmarkStartElement, String> stringMap;
-
-  private XMLEventFactory eventFactory = XMLEventFactory.newInstance();
-
-  private JenaSink sink;
 
   /**
    * This class is used to provide the string builder functions to extractor. It will automatically
@@ -136,7 +122,6 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
   public Model getBookmarkRDFMetadata(OdfFileDom dom) {
     this.bookmarkstart = null;
     this.found = false;
-    this.sink = dom.getSink();
     visit(dom.getRootElement());
     return getModel();
   }
@@ -144,60 +129,21 @@ public class BookmarkRDFMetadataExtractor extends DefaultElementVisitor {
   public Model getBookmarkRDFMetadata(TextBookmarkStartElement bookmarkstart) {
     this.bookmarkstart = bookmarkstart;
     this.found = false;
-    this.sink = ((OdfFileDom) bookmarkstart.getOwnerDocument()).getSink();
     visit(((OdfFileDom) bookmarkstart.getOwnerDocument()).getRootElement());
     return getModel();
   }
 
+  /**
+   * Creates the statements of all collected bookmarks, using the text between each <code>
+   * &lt;text:bookmark-start&gt;</code> and its <code>&lt;text:bookmark-end&gt;</code> as literal
+   * content, see {@link InContentMetadata}.
+   */
   private Model getModel() {
     Model m = ModelFactory.createDefaultModel();
     for (Entry<TextBookmarkStartElement, String> entry : stringMap.entrySet()) {
-      String xhtmlAbout = entry.getKey().getXhtmlAboutAttribute();
-      String xhtmlProperty = entry.getKey().getXhtmlPropertyAttribute();
-      String xhtmlContent = entry.getKey().getXhtmlContentAttribute();
-      if (xhtmlAbout != null && xhtmlProperty != null) {
-        String qname = entry.getKey().getNodeName();
-        String namespaceURI = entry.getKey().getNamespaceURI();
-        String localname = entry.getKey().getLocalName();
-        String prefix = (qname.indexOf(':') == -1) ? "" : qname.substring(0, qname.indexOf(':'));
-
-        StartElement e =
-            eventFactory.createStartElement(
-                prefix,
-                namespaceURI,
-                localname,
-                fromAttributes(new DOMAttributes(entry.getKey().getAttributes())),
-                null,
-                sink.getContext());
-
-        xhtmlAbout = sink.getExtractor().expandSafeCURIE(e, xhtmlAbout, sink.getContext());
-        xhtmlProperty = sink.getExtractor().expandCURIE(e, xhtmlProperty, sink.getContext());
-        Resource s = m.createResource(xhtmlAbout);
-        Property p = m.createProperty(xhtmlProperty);
-        if (xhtmlContent != null) {
-          s.addLiteral(p, xhtmlContent);
-        } else {
-          s.addLiteral(p, entry.getValue());
-        }
-      }
+      InContentMetadata.addStatements(m, entry.getKey(), entry.getValue());
     }
     return m;
-  }
-
-  private Iterator<Attribute> fromAttributes(Attributes attributes) {
-    List<Attribute> toReturn = new ArrayList<>();
-
-    for (int i = 0; i < attributes.getLength(); i++) {
-      String qname = attributes.getQName(i);
-      String prefix = qname.contains(":") ? qname.substring(0, qname.indexOf(":")) : "";
-      Attribute attr =
-          eventFactory.createAttribute(
-              prefix, attributes.getURI(i), attributes.getLocalName(i), attributes.getValue(i));
-
-      if (!qname.equals("xmlns") && !qname.startsWith("xmlns:")) toReturn.add(attr);
-    }
-
-    return toReturn.iterator();
   }
 
   /**

@@ -82,12 +82,11 @@ module org.odftoolkit.odfdom {
 
   requires java.desktop;
   requires java.logging;
-  requires java.rdfa;
   requires java.xml;
-  requires org.apache.commons.validator;
   requires org.apache.commons.compress;
   requires org.apache.commons.lang3;
   requires org.apache.jena.core;
+  requires org.apache.jena.arq;
   requires org.bouncycastle.provider;
   requires org.json;
   requires org.slf4j;

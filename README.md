@@ -40,7 +40,8 @@ People interested should follow the [mail list](https://tdf.github.io/odftoolkit
 
 ## Getting Started
 
-The ODF Toolkit is based on Java (tested with JDK 11) and uses the Maven 3 <http://maven.apache.org/>
+The current ODF Toolkit development version (0.14.0-SNAPSHOT) requires JDK 21 or later
+to build and run, and uses Apache Jena 6.2.0. It uses the Maven 3 <http://maven.apache.org/>
 build system. To build ODF Toolkit, use the following command in this directory:
 
     mvn clean install

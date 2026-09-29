@@ -48,10 +48,7 @@ import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 import org.odftoolkit.odfdom.dom.OdfStylesDom;
 import org.odftoolkit.odfdom.dom.rdfa.BookmarkRDFMetadataExtractor;
 import org.odftoolkit.odfdom.pkg.manifest.OdfManifestDom;
-import org.odftoolkit.odfdom.pkg.rdfa.DOMRDFaParser;
-import org.odftoolkit.odfdom.pkg.rdfa.JenaSink;
-import org.odftoolkit.odfdom.pkg.rdfa.MultiContentHandler;
-import org.odftoolkit.odfdom.pkg.rdfa.SAXRDFaParser;
+import org.odftoolkit.odfdom.pkg.rdfa.InContentMetadata;
 import org.odftoolkit.odfdom.pkg.rdfa.Util;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -76,12 +73,11 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
   /** Contains only the duplicate prefix. The primary hold by mPrefixByUri still have to be added */
   protected Map<String, Set<String>> mDuplicatePrefixesByUri;
   /**
-   * The cache of in content metadata: key: a Node in the dom ; value: the Jena RDF model of triples
-   * of the Node
+   * The cache of in content metadata: key: an element of this DOM carrying RDFa attributes; value:
+   * the Jena RDF model of its triples. It remains <code>null</code> until first requested by {@link
+   * #getInContentMetadataCache()}, see {@link org.odftoolkit.odfdom.pkg.rdfa}.
    */
   protected Map<Node, Model> inCententMetadataCache;
-
-  protected JenaSink sink;
 
   /**
    * Creates the DOM representation of an XML file of an ODF document.
@@ -98,7 +94,6 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
       mUriByPrefix = new HashMap<>();
       mPrefixByUri = new HashMap<>();
       mDuplicatePrefixesByUri = new HashMap<>();
-      inCententMetadataCache = new IdentityHashMap<>();
       try {
         initialize();
       } catch (SAXException | IOException | ParserConfigurationException ex) {
@@ -128,7 +123,6 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
       mUriByPrefix = new HashMap<>();
       mPrefixByUri = new HashMap<>();
       mDuplicatePrefixesByUri = new HashMap<>();
-      inCententMetadataCache = new HashMap<>();
       try {
         initialize();
       } catch (SAXException | IOException | ParserConfigurationException ex) {
@@ -218,19 +212,7 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
     try (InputStream fileStream = mPackage.getInputStream(mPackagePath)) {
       if (fileStream != null) {
         XMLReader xmlReader = mPackage.getXMLReader();
-        String baseUri = Util.getRDFBaseUri(mPackage.getBaseURI(), mPackagePath);
-        if (handler instanceof OdfFileSaxHandler) {
-          OdfFileSaxHandler odfSaxHandler = ((OdfFileSaxHandler) handler);
-          sink = new JenaSink(this);
-          odfSaxHandler.setSink(sink);
-          SAXRDFaParser rdfa = SAXRDFaParser.createInstance(sink);
-          rdfa.setBase(baseUri);
-          // the file is parsed by ODF ContentHandler, and then RDFa ContentHandler
-          MultiContentHandler multi = new MultiContentHandler(odfSaxHandler, rdfa);
-          xmlReader.setContentHandler(multi);
-        } else {
-          xmlReader.setContentHandler(handler);
-        }
+        xmlReader.setContentHandler(handler);
         InputSource xmlSource = new InputSource(fileStream);
         xmlReader.parse(xmlSource);
       }
@@ -665,26 +647,36 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
   }
 
   /**
-   * Get in-content metadata cache model
+   * Get the in-content metadata cache, mapping each element carrying RDFa attributes to the RDF
+   * triples it states.
+   *
+   * <p>The cache is built from the DOM on the first call, see {@link
+   * org.odftoolkit.odfdom.pkg.rdfa}. Afterwards it is kept up to date by {@link
+   * #updateInContentMetadataCache(Node)}.
    *
    * @return in-content metadata cache model
    */
   public Map<Node, Model> getInContentMetadataCache() {
-    return this.inCententMetadataCache;
+    if (inCententMetadataCache == null) {
+      inCententMetadataCache = new IdentityHashMap<>();
+      InContentMetadata.collect(getRootElement(), inCententMetadataCache);
+    }
+    return inCententMetadataCache;
   }
 
   /**
-   * Update the in content metadata of the node. It should be called whenever the xhtml:xxx
-   * attributes values of the node are changed.
+   * Update the in content metadata of the node and all its descendants. It should be called
+   * whenever the xhtml:xxx attributes values or the text content of the node are changed.
    *
-   * @param the node, whose in content metadata will be updated
+   * <p>Before the cache has been built, there is nothing to update, as the cache will be created
+   * from the current DOM when first requested.
+   *
+   * @param node the node, whose in content metadata will be updated
    */
   public void updateInContentMetadataCache(Node node) {
-    this.getInContentMetadataCache().remove(node);
-    DOMRDFaParser parser = DOMRDFaParser.createInstance(this.sink);
-    String baseUri = Util.getRDFBaseUri(mPackage.getBaseURI(), mPackagePath);
-    parser.setBase(baseUri);
-    parser.parse(node);
+    if (inCententMetadataCache != null) {
+      InContentMetadata.collect(node, inCententMetadataCache);
+    }
   }
 
   /** @return the RDF metadata of all the bookmarks within the dom */
@@ -693,12 +685,14 @@ public class OdfFileDom extends DocumentImpl implements NamespaceContext {
   }
 
   /**
-   * The end users needn't to care of this method, which is used by BookmarkRDFMetadataExtractor
+   * Get the base IRI for the RDF metadata of this XML file: the IRI of the directory containing the
+   * file within the package, always ending with a slash, e.g. <code>file:///docs/test.odt/</code>.
+   * An empty <code>xhtml:about</code> attribute refers to this IRI.
    *
-   * @return the JenaSink
+   * @return the base IRI for RDF metadata of this XML file
    */
-  public JenaSink getSink() {
-    return sink;
+  public String getRDFBaseUri() {
+    return Util.getRDFBaseUri(mPackage.getBaseURI(), mPackagePath);
   }
 
   /**
