@@ -23,8 +23,8 @@
  */
 package org.odftoolkit.odfdom.dom.style.props;
 
-import java.util.Iterator;
-import java.util.TreeSet;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.odftoolkit.odfdom.pkg.OdfName;
 
 /**
@@ -33,15 +33,18 @@ import org.odftoolkit.odfdom.pkg.OdfName;
  */
 public class OdfStyleProperty implements Comparable<OdfStyleProperty> {
 
-  private OdfStylePropertiesSet m_propSet;
-  private OdfName m_name;
+  private final OdfStylePropertiesSet m_propSet;
+  private final OdfName m_name;
 
   private OdfStyleProperty(OdfStylePropertiesSet propSet, OdfName name) {
     m_propSet = propSet;
     m_name = name;
   }
 
-  private static TreeSet<OdfStyleProperty> m_styleProperties = new TreeSet<>();
+  // Concurrent map, as the static initializers of the generated Style*PropertiesElement classes
+  // might register their properties from different threads at the same time (see issue #442)
+  private static final Map<OdfStyleProperty, OdfStyleProperty> m_styleProperties =
+      new ConcurrentHashMap<>();
 
   /**
    * Looks if an OdfStyleProperty is already listed in the static sytleProperties set, otherwise
@@ -53,26 +56,8 @@ public class OdfStyleProperty implements Comparable<OdfStyleProperty> {
    */
   public static OdfStyleProperty get(OdfStylePropertiesSet propSet, OdfName name) {
     OdfStyleProperty temp = new OdfStyleProperty(propSet, name);
-    // Replacement for (JDK1.6)
-    // OdfStyleProperty result = m_styleProperties.floor(temp);
-
-    Iterator<OdfStyleProperty> iter = m_styleProperties.iterator();
-    OdfStyleProperty result = null;
-
-    // check if key exists
-    if (!m_styleProperties.contains(temp)) {
-      m_styleProperties.add(temp);
-      return temp;
-    }
-    while (iter.hasNext()) {
-      result = iter.next();
-      if (result.equals(temp)) {
-        return result;
-      }
-    }
-
-    m_styleProperties.add(temp);
-    return temp;
+    OdfStyleProperty existing = m_styleProperties.putIfAbsent(temp, temp);
+    return existing != null ? existing : temp;
   }
 
   /** @return an OdfStylePropertiesSet member */

@@ -195,7 +195,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <useModulePath>false</useModulePath>
-                    <argLine>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${project.build.directory}/coverage-reports/jacoco-ut.exec</argLine>
+                    <argLine>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${project.build.directory}/coverage-reports/jacoco-ut.exec,excludes=${jacoco.agent.excludes}</argLine>
                     <systemPropertyVariables>
                         <org.odftoolkit.odfdom.validation>true</org.odftoolkit.odfdom.validation>
                     </systemPropertyVariables>
