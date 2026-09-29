@@ -34,10 +34,11 @@
         <javadoc.bottom>Copyright © {inceptionYear}–2018 Apache Software Foundation; Copyright © 2018–${currentYear} {organizationName}. All rights reserved.</javadoc.bottom>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- explicitly setting JDK version for compiler source & target -->
-        <jdk.version>17</jdk.version>
+        <jdk.version>21</jdk.version>
         <!-- all three JDK versions should not differ -->
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <jena.version>6.2.0</jena.version>
         <!-- ANT driven release bundle creation: 3 ZIPs for the complete Toolkit for binaries, documentation and sources -->
         <release.dir>${basedir}/target/release</release.dir>
         <release.dir.bin>${release.dir}/${project.version}/binaries</release.dir.bin>
@@ -74,11 +75,6 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>commons-validator</groupId>
-                <artifactId>commons-validator</artifactId>
-                <version>1.10.1</version>
-            </dependency>
-            <dependency>
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
                 <version>1.6.0</version>
@@ -94,11 +90,6 @@
                 <version>2022.7</version>
             </dependency>
             <dependency>
-                <groupId>net.rootdev</groupId>
-                <artifactId>java-rdfa</artifactId>
-                <version>1.0.0-BETA1</version>
-            </dependency>
-            <dependency>
                 <groupId>org.apache.ant</groupId>
                 <artifactId>ant</artifactId>
                 <version>1.10.15</version>
@@ -107,7 +98,13 @@
             <dependency>
                 <groupId>org.apache.jena</groupId>
                 <artifactId>jena-core</artifactId>
-                <version>5.6.0</version>
+                <version>${jena.version}</version>
+            </dependency>
+            <!-- Jena 6 RDF/XML metadata parsing and serialization require ARQ (Refs #445). -->
+            <dependency>
+                <groupId>org.apache.jena</groupId>
+                <artifactId>jena-arq</artifactId>
+                <version>${jena.version}</version>
             </dependency>
             <!-- used by schema2template for XML grammar to graph functionality -->
             <dependency>

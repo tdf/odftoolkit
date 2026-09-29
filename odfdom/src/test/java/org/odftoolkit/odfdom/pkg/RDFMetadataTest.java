@@ -23,15 +23,23 @@
  */
 package org.odftoolkit.odfdom.pkg;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.logging.Logger;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import junit.framework.TestCase;
+import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Resource;
 import org.junit.Test;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
+import org.odftoolkit.odfdom.dom.element.text.TextHElement;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 import org.odftoolkit.odfdom.dom.element.text.TextBookmarkStartElement;
 import org.odftoolkit.odfdom.dom.rdfa.BookmarkRDFMetadataExtractor;
 import org.odftoolkit.odfdom.utils.ResourceUtilities;
@@ -40,6 +48,43 @@ public class RDFMetadataTest {
 
   private static final Logger LOG = Logger.getLogger(RDFMetadataTest.class.getName());
   private static final String SIMPLE_ODT = "test_rdfmeta.odt";
+
+  // Refs #445: Jena 6 needs ARQ to preserve RDF/XML metadata support.
+  @Test
+  public void testRdfXmlRoundTrip() {
+    Model original = ModelFactory.createDefaultModel();
+    Model restored = ModelFactory.createDefaultModel();
+    try {
+      Resource document = original.createResource("https://example.org/document.odt");
+      Resource creator = original.createResource();
+      original.add(
+          document,
+          original.createProperty("http://purl.org/dc/elements/1.1/title"),
+          original.createLiteral("Grüße aus Berlin – 東京", "de"));
+      original.add(
+          document, original.createProperty("http://purl.org/dc/elements/1.1/creator"), creator);
+      original.add(
+          creator,
+          original.createProperty("http://xmlns.com/foaf/0.1/name"),
+          original.createLiteral("Zoë"));
+
+      ByteArrayOutputStream output = new ByteArrayOutputStream();
+      original.write(output, "RDF/XML");
+      restored.read(new ByteArrayInputStream(output.toByteArray()), null, "RDF/XML");
+
+      TestCase.assertTrue(
+          "RDF/XML round-trip must preserve the RDF graph", original.isIsomorphicWith(restored));
+      TestCase.assertEquals(
+          "de",
+          restored.getRequiredProperty(
+              restored.getResource(document.getURI()),
+              restored.createProperty("http://purl.org/dc/elements/1.1/title"))
+              .getLanguage());
+    } finally {
+      restored.close();
+      original.close();
+    }
+  }
 
   @Test
   public void testGetRDFMetaFromGRDDLXSLT() throws Exception {
@@ -272,5 +317,65 @@ public class RDFMetadataTest {
         BookmarkRDFMetadataExtractor.newBookmarkTextExtractor();
     m = extractor.getBookmarkRDFMetadata(tm);
     TestCase.assertEquals(1, m.size());
+  }
+
+  /**
+   * The DOM cache of in-content metadata is built on demand and follows insertions, text changes
+   * and removals of elements carrying RDFa attributes.
+   */
+  @Test
+  public void testGetInContentMetadataFromCache() throws Exception {
+    OdfTextDocument odt =
+        (OdfTextDocument)
+            OdfDocument.loadDocument(ResourceUtilities.getAbsoluteInputPath(SIMPLE_ODT));
+    Model m = odt.getInContentMetadataFromCache();
+    // the <text:meta> of the document; its nested bookmarks are covered by getBookmarkRDFMetadata()
+    TestCase.assertEquals(1, m.size());
+    TestCase.assertEquals(
+        "John Ronald Reuel Tolkien",
+        m.getRequiredProperty(
+                m.getResource("http://dbpedia.org/page/J._R._R._Tolkien"),
+                m.getProperty("http://www.w3.org/2006/vcard/ns#fn"))
+            .getString());
+
+    // safe CURIE subject, two predicates, a typed literal and xhtml:content overriding the text
+    OdfContentDom contentDom = odt.getContentDom();
+    OfficeTextElement text = odt.getContentRoot();
+    TextPElement p = contentDom.newOdfElement(TextPElement.class);
+    p.setXhtmlAboutAttribute("[dbpedia:J._K._Rowling]");
+    p.setXhtmlPropertyAttribute("dbpprop:birthDate  dbpprop:dateOfBirth");
+    p.setXhtmlDatatypeAttribute("xsd:date");
+    p.setXhtmlContentAttribute("1965-07-31");
+    p.setTextContent("July 31st, 1965");
+    text.appendChild(p);
+    Model pModel = contentDom.getInContentMetadataCache().get(p);
+    TestCase.assertEquals(2, pModel.size());
+    Resource rowling = pModel.getResource("http://dbpedia.org/page/J._K._Rowling");
+    for (String property : new String[] {"birthDate", "dateOfBirth"}) {
+      String predicate = "http://dbpedia.org/property/" + property;
+      Literal date =
+          pModel.getRequiredProperty(rowling, pModel.getProperty(predicate)).getLiteral();
+      TestCase.assertEquals("1965-07-31", date.getLexicalForm());
+      TestCase.assertEquals("http://www.w3.org/2001/XMLSchema#date", date.getDatatypeURI());
+    }
+    TestCase.assertEquals(3, odt.getInContentMetadataFromCache().size());
+
+    // the element text is the literal, replacing the text updates the cache
+    TextHElement h = contentDom.newOdfElement(TextHElement.class);
+    h.setXhtmlAboutAttribute("http://dbpedia.org/page/J._K._Rowling");
+    h.setXhtmlPropertyAttribute("dbpprop:children");
+    h.setXhtmlDatatypeAttribute("xsd:integer");
+    h.setTextContent("2");
+    text.appendChild(h);
+    h.setTextContent(" 3 ");
+    Model hModel = contentDom.getInContentMetadataCache().get(h);
+    TestCase.assertEquals(1, hModel.size());
+    TestCase.assertEquals(
+        "3", hModel.listStatements().nextStatement().getLiteral().getLexicalForm());
+
+    // removed elements take their statements with them
+    text.removeChild(p);
+    text.removeChild(h);
+    TestCase.assertEquals(1, odt.getInContentMetadataFromCache().size());
   }
 }
